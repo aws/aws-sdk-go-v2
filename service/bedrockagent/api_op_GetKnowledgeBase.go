@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a knoweldge base.
+// Gets information about a knowledge base.
 func (c *Client) GetKnowledgeBase(ctx context.Context, params *GetKnowledgeBaseInput, optFns ...func(*Options)) (*GetKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &GetKnowledgeBaseInput{}

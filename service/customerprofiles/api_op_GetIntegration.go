@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -87,6 +88,11 @@ type GetIntegrationOutput struct {
 	// The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role
 	// to make Customer Profiles requests on your behalf.
 	RoleArn *string
+
+	// Specifies whether the integration applies to profile level data (associated
+	// with profiles) or domain level data (not associated with any specific profile).
+	// The default value is PROFILE.
+	Scope types.Scope
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

@@ -852,6 +852,31 @@ type APISchemaMemberS3 struct {
 
 func (*APISchemaMemberS3) isAPISchema() {}
 
+// Configuration settings for processing audio content in multimodal knowledge
+// bases.
+type AudioConfiguration struct {
+
+	// Configuration for segmenting audio content during processing.
+	//
+	// This member is required.
+	SegmentationConfiguration *AudioSegmentationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for segmenting audio content during multimodal knowledge base
+// ingestion. Determines how audio files are divided into chunks for processing.
+type AudioSegmentationConfiguration struct {
+
+	// The duration in seconds for each audio segment. Audio files will be divided
+	// into chunks of this length for processing.
+	//
+	// This member is required.
+	FixedLengthDuration *int32
+
+	noSmithyDocumentSerde
+}
+
 // Defines tools. The model automatically decides whether to call a tool or to
 // generate text instead. For more information, see [Use a tool to complete an Amazon Bedrock model response].
 //
@@ -874,6 +899,10 @@ type BedrockDataAutomationConfiguration struct {
 // The vector configuration details for the Bedrock embeddings model.
 type BedrockEmbeddingModelConfiguration struct {
 
+	// Configuration settings for processing audio content in multimodal knowledge
+	// bases.
+	Audio []AudioConfiguration
+
 	// The dimensions details for the vector configuration used on the Bedrock
 	// embeddings model.
 	Dimensions *int32
@@ -886,6 +915,10 @@ type BedrockEmbeddingModelConfiguration struct {
 	//
 	// [Supported embeddings models]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html
 	EmbeddingDataType EmbeddingDataType
+
+	// Configuration settings for processing video content in multimodal knowledge
+	// bases.
+	Video []VideoConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -3134,7 +3167,7 @@ type KnowledgeBaseDocumentDetail struct {
 
 	// The ingestion status of the document. The following statuses are possible:
 	//
-	//   - STARTED – You submitted the ingestion job containing the document.
+	//   - STARTING – You submitted the ingestion job containing the document.
 	//
 	//   - PENDING – The document is waiting to be ingested.
 	//
@@ -5859,6 +5892,31 @@ type VectorSearchRerankingConfiguration struct {
 	// Specifies the configuration for using an Amazon Bedrock reranker model to
 	// rerank retrieved results.
 	BedrockRerankingConfiguration *VectorSearchBedrockRerankingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for processing video content in multimodal knowledge
+// bases.
+type VideoConfiguration struct {
+
+	// Configuration for segmenting video content during processing.
+	//
+	// This member is required.
+	SegmentationConfiguration *VideoSegmentationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for segmenting video content during multimodal knowledge base
+// ingestion. Determines how video files are divided into chunks for processing.
+type VideoSegmentationConfiguration struct {
+
+	// The duration in seconds for each video segment. Video files will be divided
+	// into chunks of this length for processing.
+	//
+	// This member is required.
+	FixedLengthDuration *int32
 
 	noSmithyDocumentSerde
 }

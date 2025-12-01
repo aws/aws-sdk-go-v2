@@ -102,6 +102,11 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		}
 	}
 
+	if len(v.ApplicationType) > 0 {
+		ok := object.Key("ApplicationType")
+		ok.String(string(v.ApplicationType))
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -1098,6 +1103,10 @@ func awsRestjson1_serializeOpHttpBindingsListApplicationsInput(v *ListApplicatio
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.ApplicationType) > 0 {
+		encoder.SetQuery("applicationType").String(string(v.ApplicationType))
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
@@ -1749,6 +1758,11 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		if err := awsRestjson1_serializeDocumentApplicationSourceConfig(v.ApplicationSourceConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ApplicationType) > 0 {
+		ok := object.Key("ApplicationType")
+		ok.String(string(v.ApplicationType))
 	}
 
 	if v.Description != nil {

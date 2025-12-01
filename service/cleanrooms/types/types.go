@@ -564,6 +564,9 @@ type AnalysisTemplate struct {
 	//  The source metadata for the analysis template.
 	SourceMetadata AnalysisSourceMetadata
 
+	// The parameters used to generate synthetic data for this analysis template.
+	SyntheticDataParameters SyntheticDataParameters
+
 	// Information about the validations performed on the analysis template.
 	Validations []AnalysisTemplateValidationStatusDetail
 
@@ -665,6 +668,9 @@ type AnalysisTemplateSummary struct {
 
 	// The description of the analysis template.
 	Description *string
+
+	// Indicates if this analysis template summary generated synthetic data.
+	IsSyntheticData *bool
 
 	noSmithyDocumentSerde
 }
@@ -1080,6 +1086,10 @@ type CollaborationAnalysisTemplate struct {
 	//  The source metadata for the collaboration analysis template.
 	SourceMetadata AnalysisSourceMetadata
 
+	// The synthetic data generation parameters configured for this collaboration
+	// analysis template.
+	SyntheticDataParameters SyntheticDataParameters
+
 	// The validations that were performed.
 	Validations []AnalysisTemplateValidationStatusDetail
 
@@ -1135,6 +1145,10 @@ type CollaborationAnalysisTemplateSummary struct {
 
 	// The description of the analysis template.
 	Description *string
+
+	// Indicates if this collaboration analysis template uses synthetic data
+	// generation.
+	IsSyntheticData *bool
 
 	noSmithyDocumentSerde
 }
@@ -1714,6 +1728,21 @@ type Column struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains classification information for data columns, including mappings that
+// specify how columns should be handled during synthetic data generation and
+// privacy analysis.
+type ColumnClassificationDetails struct {
+
+	// A mapping that defines the classification of data columns for synthetic data
+	// generation and specifies how each column should be handled during the
+	// privacy-preserving data synthesis process.
+	//
+	// This member is required.
+	ColumnMapping []SyntheticDataColumnProperties
 
 	noSmithyDocumentSerde
 }
@@ -3417,6 +3446,10 @@ type MembershipMLPaymentConfig struct {
 	// The payment responsibilities accepted by the member for model training.
 	ModelTraining *MembershipModelTrainingPaymentConfig
 
+	// The payment configuration for synthetic data generation for this machine
+	// learning membership.
+	SyntheticDataGeneration *MembershipSyntheticDataGenerationPaymentConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -3657,6 +3690,18 @@ type MembershipSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for payment for synthetic data generation in a membership.
+type MembershipSyntheticDataGenerationPaymentConfig struct {
+
+	// Indicates if this membership is responsible for paying for synthetic data
+	// generation.
+	//
+	// This member is required.
+	IsResponsible *bool
+
+	noSmithyDocumentSerde
+}
+
 // Basic metadata used to construct a new member.
 type MemberSpecification struct {
 
@@ -3761,6 +3806,35 @@ type MLPaymentConfig struct {
 
 	// The payment responsibilities accepted by the member for model training.
 	ModelTraining *ModelTrainingPaymentConfig
+
+	// The payment configuration for machine learning synthetic data generation.
+	SyntheticDataGeneration *SyntheticDataGenerationPaymentConfig
+
+	noSmithyDocumentSerde
+}
+
+// Parameters that control the generation of synthetic data for machine learning,
+// including privacy settings and column classification details.
+type MLSyntheticDataParameters struct {
+
+	// Classification details for data columns that specify how each column should be
+	// treated during synthetic data generation.
+	//
+	// This member is required.
+	ColumnClassification *ColumnClassificationDetails
+
+	// The epsilon value for differential privacy when generating synthetic data.
+	// Lower values provide stronger privacy guarantees but may reduce data utility.
+	//
+	// This member is required.
+	Epsilon *float64
+
+	// The maximum acceptable score for membership inference attack vulnerability.
+	// Synthetic data generation fails if the score for the resulting data exceeds this
+	// threshold.
+	//
+	// This member is required.
+	MaxMembershipInferenceAttackScore *float64
 
 	noSmithyDocumentSerde
 }
@@ -4396,6 +4470,8 @@ func (*ProtectedJobOutputConfigurationOutputMemberS3) isProtectedJobOutputConfig
 type ProtectedJobParameters struct {
 
 	//  The ARN of the analysis template.
+	//
+	// This member is required.
 	AnalysisTemplateArn *string
 
 	noSmithyDocumentSerde
@@ -5322,6 +5398,63 @@ type SnowflakeTableSchemaV1 struct {
 	noSmithyDocumentSerde
 }
 
+// Properties that define how a specific data column should be handled during
+// synthetic data generation, including its name, type, and role in predictive
+// modeling.
+type SyntheticDataColumnProperties struct {
+
+	// The name of the data column as it appears in the dataset.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The data type of the column, which determines how the synthetic data generation
+	// algorithm processes and synthesizes values for this column.
+	//
+	// This member is required.
+	ColumnType SyntheticDataColumnType
+
+	// Indicates if this column contains predictive values that should be treated as
+	// target variables in machine learning models. This affects how the synthetic data
+	// generation preserves statistical relationships.
+	//
+	// This member is required.
+	IsPredictiveValue *bool
+
+	noSmithyDocumentSerde
+}
+
+// Payment configuration for synthetic data generation.
+type SyntheticDataGenerationPaymentConfig struct {
+
+	// Indicates who is responsible for paying for synthetic data generation.
+	//
+	// This member is required.
+	IsResponsible *bool
+
+	noSmithyDocumentSerde
+}
+
+// The parameters that control how synthetic data is generated, including privacy
+// settings, column classifications, and other configuration options that affect
+// the data synthesis process.
+//
+// The following types satisfy this interface:
+//
+//	SyntheticDataParametersMemberMlSyntheticDataParameters
+type SyntheticDataParameters interface {
+	isSyntheticDataParameters()
+}
+
+// The machine learning-specific parameters for synthetic data generation.
+type SyntheticDataParametersMemberMlSyntheticDataParameters struct {
+	Value MLSyntheticDataParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*SyntheticDataParametersMemberMlSyntheticDataParameters) isSyntheticDataParameters() {}
+
 // A pointer to the dataset that underlies this table.
 //
 // The following types satisfy this interface:
@@ -5471,5 +5604,6 @@ func (*UnknownUnionMember) isProtectedQueryOutputConfiguration()                
 func (*UnknownUnionMember) isQueryConstraint()                                     {}
 func (*UnknownUnionMember) isSchemaTypeProperties()                                {}
 func (*UnknownUnionMember) isSnowflakeTableSchema()                                {}
+func (*UnknownUnionMember) isSyntheticDataParameters()                             {}
 func (*UnknownUnionMember) isTableReference()                                      {}
 func (*UnknownUnionMember) isWorkerComputeConfigurationProperties()                {}

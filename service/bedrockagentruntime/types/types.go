@@ -407,6 +407,29 @@ type Attribution struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an audio segment retrieved from a knowledge base,
+// including its location and transcription.
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve response]
+//   - – in the audio field
+//
+// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+type AudioSegment struct {
+
+	// The S3 URI where this specific audio segment is stored in the multimodal
+	// storage destination.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The text transcription of the audio segment content.
+	Transcription *string
+
+	noSmithyDocumentSerde
+}
+
 // Settings for a model called with InvokeAgent.
 type BedrockModelConfigurations struct {
 
@@ -2611,6 +2634,31 @@ type InputFile struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the image data for multimodal knowledge base queries, including format
+// and content.
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve request]
+//   - – in the image field
+//
+// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+type InputImage struct {
+
+	// The format of the input image. Supported formats include png, gif, jpeg, and
+	// webp.
+	//
+	// This member is required.
+	Format InputImageFormat
+
+	// The base64-encoded image data for inline image content. Maximum size is 5MB.
+	//
+	// This member is required.
+	InlineContent []byte
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the prompt to optimize.
 //
 // The following types satisfy this interface:
@@ -2912,10 +2960,14 @@ type KnowledgeBaseLookupOutput struct {
 // [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
 type KnowledgeBaseQuery struct {
 
+	// An image to include in the knowledge base query for multimodal retrieval.
+	Image *InputImage
+
 	// The text of the query made to the knowledge base.
-	//
-	// This member is required.
 	Text *string
+
+	// The type of query being performed.
+	Type KnowledgeBaseQueryType
 
 	noSmithyDocumentSerde
 }
@@ -4137,7 +4189,7 @@ type PromptTemplate struct {
 	//
 	// [Use XML tags with Anthropic Claude models]
 	//
-	// [Use XML tags with Anthropic Claude models]: https://docs.anthropic.com/claude/docs/use-xml-tags
+	// [Use XML tags with Anthropic Claude models]: https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags
 	// [Knowledge base prompt templates]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt
 	TextPromptTemplate *string
 
@@ -4365,8 +4417,7 @@ type RerankQuery struct {
 // Contains information about a document that was reranked.
 type RerankResult struct {
 
-	// The ranking of the document. The lower a number, the higher the document is
-	// ranked.
+	// The original index of the document from the input sources array.
 	//
 	// This member is required.
 	Index *int32
@@ -4734,6 +4785,9 @@ type RetrievalResultConfluenceLocation struct {
 // [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievalResultContent struct {
 
+	// Audio segment information when the retrieval result contains audio content.
+	Audio *AudioSegment
+
 	// A data URI with base64-encoded content from the data source. The URI is in the
 	// following format: returned in the following format:
 	// data:image/jpeg;base64,${base64-encoded string} .
@@ -4747,6 +4801,9 @@ type RetrievalResultContent struct {
 
 	// The type of content in the retrieval result.
 	Type RetrievalResultContentType
+
+	// Video segment information when the retrieval result contains video content.
+	Video *VideoSegment
 
 	noSmithyDocumentSerde
 }
@@ -4934,7 +4991,7 @@ type RetrieveAndGenerateConfiguration struct {
 // [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
 type RetrieveAndGenerateInput struct {
 
-	// The query made to the knowledge base.
+	// The query made to the knowledge base, in characters.
 	//
 	// This member is required.
 	Text *string
@@ -5674,6 +5731,29 @@ type VectorSearchRerankingConfiguration struct {
 
 	// Contains configurations for an Amazon Bedrock reranker model.
 	BedrockRerankingConfiguration *VectorSearchBedrockRerankingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a video segment retrieved from a knowledge base,
+// including its location and summary.
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve response]
+//   - – in the video field
+//
+// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+type VideoSegment struct {
+
+	// The S3 URI where this specific video segment is stored in the multimodal
+	// storage destination.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// A text summary describing the content of the video segment.
+	Summary *string
 
 	noSmithyDocumentSerde
 }

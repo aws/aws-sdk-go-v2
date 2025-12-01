@@ -8934,6 +8934,11 @@ func awsAwsjson11_deserializeDocumentBatchInferenceJobConfig(v **types.BatchInfe
 				return err
 			}
 
+		case "rankingInfluence":
+			if err := awsAwsjson11_deserializeDocumentRankingInfluence(&sv.RankingInfluence, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9693,6 +9698,11 @@ func awsAwsjson11_deserializeDocumentCampaignConfig(v **types.CampaignConfig, va
 
 		case "itemExplorationConfig":
 			if err := awsAwsjson11_deserializeDocumentHyperParameters(&sv.ItemExplorationConfig, value); err != nil {
+				return err
+			}
+
+		case "rankingInfluence":
+			if err := awsAwsjson11_deserializeDocumentRankingInfluence(&sv.RankingInfluence, value); err != nil {
 				return err
 			}
 
@@ -13506,6 +13516,40 @@ func awsAwsjson11_deserializeDocumentHyperParameters(v *map[string]string, value
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIncludedDatasetColumns(v *map[string][]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string][]string
+	if *v == nil {
+		mv = map[string][]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal []string
+		mapVar := parsedVal
+		if err := awsAwsjson11_deserializeDocumentColumnNamesList(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentIntegerHyperParameterRange(v **types.IntegerHyperParameterRange, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14216,6 +14260,67 @@ func awsAwsjson11_deserializeDocumentOptimizationObjective(v **types.Optimizatio
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRankingInfluence(v *map[string]float64, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]float64
+	if *v == nil {
+		mv = map[string]float64{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal float64
+		if value != nil {
+			switch jtv := value.(type) {
+			case json.Number:
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				parsedVal = f64
+
+			case string:
+				var f64 float64
+				switch {
+				case strings.EqualFold(jtv, "NaN"):
+					f64 = math.NaN()
+
+				case strings.EqualFold(jtv, "Infinity"):
+					f64 = math.Inf(1)
+
+				case strings.EqualFold(jtv, "-Infinity"):
+					f64 = math.Inf(-1)
+
+				default:
+					return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+				}
+				parsedVal = f64
+
+			default:
+				return fmt.Errorf("expected RankingInfluenceWeight to be a JSON Number, got %T instead", value)
+
+			}
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -15268,6 +15373,15 @@ func awsAwsjson11_deserializeDocumentSolution(v **types.Solution, value interfac
 				sv.PerformHPO = jtv
 			}
 
+		case "performIncrementalUpdate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PerformIncrementalUpdate to be of type *bool, got %T instead", value)
+				}
+				sv.PerformIncrementalUpdate = ptr.Bool(jtv)
+			}
+
 		case "recipeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15635,6 +15749,15 @@ func awsAwsjson11_deserializeDocumentSolutionUpdateSummary(v **types.SolutionUpd
 				sv.PerformAutoTraining = ptr.Bool(jtv)
 			}
 
+		case "performIncrementalUpdate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PerformIncrementalUpdate to be of type *bool, got %T instead", value)
+				}
+				sv.PerformIncrementalUpdate = ptr.Bool(jtv)
+			}
+
 		case "solutionUpdateConfig":
 			if err := awsAwsjson11_deserializeDocumentSolutionUpdateConfig(&sv.SolutionUpdateConfig, value); err != nil {
 				return err
@@ -15764,6 +15887,15 @@ func awsAwsjson11_deserializeDocumentSolutionVersion(v **types.SolutionVersion, 
 					return fmt.Errorf("expected PerformHPO to be of type *bool, got %T instead", value)
 				}
 				sv.PerformHPO = jtv
+			}
+
+		case "performIncrementalUpdate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PerformIncrementalUpdate to be of type *bool, got %T instead", value)
+				}
+				sv.PerformIncrementalUpdate = ptr.Bool(jtv)
 			}
 
 		case "recipeArn":
@@ -16238,6 +16370,11 @@ func awsAwsjson11_deserializeDocumentTrainingDataConfig(v **types.TrainingDataCo
 		switch key {
 		case "excludedDatasetColumns":
 			if err := awsAwsjson11_deserializeDocumentExcludedDatasetColumns(&sv.ExcludedDatasetColumns, value); err != nil {
+				return err
+			}
+
+		case "includedDatasetColumns":
+			if err := awsAwsjson11_deserializeDocumentIncludedDatasetColumns(&sv.IncludedDatasetColumns, value); err != nil {
 				return err
 			}
 

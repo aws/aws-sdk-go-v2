@@ -902,6 +902,11 @@ func validateChannelSubtypeConfig(v *types.ChannelSubtypeConfig) error {
 			invalidParams.AddNested("Email", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.WhatsApp != nil {
+		if err := validateWhatsAppChannelSubtypeConfig(v.WhatsApp); err != nil {
+			invalidParams.AddNested("WhatsApp", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -928,6 +933,11 @@ func validateChannelSubtypeParameters(v types.ChannelSubtypeParameters) error {
 	case *types.ChannelSubtypeParametersMemberTelephony:
 		if err := validateTelephonyChannelSubtypeParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[telephony]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ChannelSubtypeParametersMemberWhatsApp:
+		if err := validateWhatsAppChannelSubtypeParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[whatsApp]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1033,6 +1043,11 @@ func validateCommunicationTimeConfig(v *types.CommunicationTimeConfig) error {
 	if v.Email != nil {
 		if err := validateTimeWindow(v.Email); err != nil {
 			invalidParams.AddNested("Email", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WhatsApp != nil {
+		if err := validateTimeWindow(v.WhatsApp); err != nil {
+			invalidParams.AddNested("WhatsApp", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1208,6 +1223,11 @@ func validateIntegrationConfig(v types.IntegrationConfig) error {
 			invalidParams.AddNested("[customerProfiles]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.IntegrationConfigMemberLambda:
+		if err := validateLambdaIntegrationConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[lambda]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.IntegrationConfigMemberQConnect:
 		if err := validateQConnectIntegrationConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[qConnect]", err.(smithy.InvalidParamsError))
@@ -1232,11 +1252,46 @@ func validateIntegrationIdentifier(v types.IntegrationIdentifier) error {
 			invalidParams.AddNested("[customerProfiles]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.IntegrationIdentifierMemberLambda:
+		if err := validateLambdaIntegrationIdentifier(&uv.Value); err != nil {
+			invalidParams.AddNested("[lambda]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.IntegrationIdentifierMemberQConnect:
 		if err := validateQConnectIntegrationIdentifier(&uv.Value); err != nil {
 			invalidParams.AddNested("[qConnect]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaIntegrationConfig(v *types.LambdaIntegrationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaIntegrationConfig"}
+	if v.FunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaIntegrationIdentifier(v *types.LambdaIntegrationIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaIntegrationIdentifier"}
+	if v.FunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1725,6 +1780,64 @@ func validateTimeWindow(v *types.TimeWindow) error {
 	}
 }
 
+func validateWhatsAppChannelSubtypeConfig(v *types.WhatsAppChannelSubtypeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppChannelSubtypeConfig"}
+	if v.OutboundMode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutboundMode"))
+	}
+	if v.DefaultOutboundConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultOutboundConfig"))
+	} else if v.DefaultOutboundConfig != nil {
+		if err := validateWhatsAppOutboundConfig(v.DefaultOutboundConfig); err != nil {
+			invalidParams.AddNested("DefaultOutboundConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWhatsAppChannelSubtypeParameters(v *types.WhatsAppChannelSubtypeParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppChannelSubtypeParameters"}
+	if v.DestinationPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
+	}
+	if v.TemplateParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateParameters"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWhatsAppOutboundConfig(v *types.WhatsAppOutboundConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppOutboundConfig"}
+	if v.ConnectSourcePhoneNumberArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectSourcePhoneNumberArn"))
+	}
+	if v.WisdomTemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WisdomTemplateArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCampaignInput(v *CreateCampaignInput) error {
 	if v == nil {
 		return nil
@@ -1736,9 +1849,7 @@ func validateOpCreateCampaignInput(v *CreateCampaignInput) error {
 	if v.ConnectInstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectInstanceId"))
 	}
-	if v.ChannelSubtypeConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelSubtypeConfig"))
-	} else if v.ChannelSubtypeConfig != nil {
+	if v.ChannelSubtypeConfig != nil {
 		if err := validateChannelSubtypeConfig(v.ChannelSubtypeConfig); err != nil {
 			invalidParams.AddNested("ChannelSubtypeConfig", err.(smithy.InvalidParamsError))
 		}

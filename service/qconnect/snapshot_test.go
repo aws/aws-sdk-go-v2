@@ -830,6 +830,18 @@ func TestCheckSnapshot_ListQuickResponses(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListSpans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSpans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSpans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -907,6 +919,18 @@ func TestCheckSnapshot_RenderMessageTemplate(t *testing.T) {
 	_, err := svc.RenderMessageTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RenderMessageTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_Retrieve(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Retrieve(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "Retrieve")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1921,6 +1945,18 @@ func TestUpdateSnapshot_ListQuickResponses(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListSpans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSpans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSpans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1998,6 +2034,18 @@ func TestUpdateSnapshot_RenderMessageTemplate(t *testing.T) {
 	_, err := svc.RenderMessageTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RenderMessageTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_Retrieve(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Retrieve(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "Retrieve")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

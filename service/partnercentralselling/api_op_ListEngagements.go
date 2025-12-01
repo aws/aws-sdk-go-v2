@@ -36,6 +36,11 @@ type ListEngagementsInput struct {
 	// This member is required.
 	Catalog *string
 
+	// Filters engagements to include only those containing the specified context
+	// types, such as "CustomerProject" or "Lead". Use this to find engagements that
+	// have specific types of contextual information associated with them.
+	ContextTypes []types.EngagementContextType
+
 	//  A list of AWS account IDs. When specified, the response includes engagements
 	// created by these accounts. This filter is useful for finding engagements created
 	// by specific team members.
@@ -43,6 +48,11 @@ type ListEngagementsInput struct {
 
 	// An array of strings representing engagement identifiers to retrieve.
 	EngagementIdentifier []string
+
+	// Filters engagements to exclude those containing the specified context types.
+	// Use this to find engagements that do not have certain types of contextual
+	// information, helping to narrow results based on context exclusion criteria.
+	ExcludeContextTypes []types.EngagementContextType
 
 	// An array of strings representing AWS Account IDs. Use this to exclude
 	// engagements created by specific users.

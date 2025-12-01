@@ -30,6 +30,9 @@ const (
 	AIAgentTypeEmailResponse         AIAgentType = "EMAIL_RESPONSE"
 	AIAgentTypeEmailOverview         AIAgentType = "EMAIL_OVERVIEW"
 	AIAgentTypeEmailGenerativeAnswer AIAgentType = "EMAIL_GENERATIVE_ANSWER"
+	AIAgentTypeOrchestration         AIAgentType = "ORCHESTRATION"
+	AIAgentTypeNoteTaking            AIAgentType = "NOTE_TAKING"
+	AIAgentTypeCaseSummarization     AIAgentType = "CASE_SUMMARIZATION"
 )
 
 // Values returns all known values for AIAgentType. Note that this can be expanded
@@ -44,6 +47,9 @@ func (AIAgentType) Values() []AIAgentType {
 		"EMAIL_RESPONSE",
 		"EMAIL_OVERVIEW",
 		"EMAIL_GENERATIVE_ANSWER",
+		"ORCHESTRATION",
+		"NOTE_TAKING",
+		"CASE_SUMMARIZATION",
 	}
 }
 
@@ -100,6 +106,9 @@ const (
 	AIPromptTypeEmailOverview               AIPromptType = "EMAIL_OVERVIEW"
 	AIPromptTypeEmailGenerativeAnswer       AIPromptType = "EMAIL_GENERATIVE_ANSWER"
 	AIPromptTypeEmailQueryReformulation     AIPromptType = "EMAIL_QUERY_REFORMULATION"
+	AIPromptTypeOrchestration               AIPromptType = "ORCHESTRATION"
+	AIPromptTypeNoteTaking                  AIPromptType = "NOTE_TAKING"
+	AIPromptTypeCaseSummarization           AIPromptType = "CASE_SUMMARIZATION"
 )
 
 // Values returns all known values for AIPromptType. Note that this can be
@@ -117,6 +126,9 @@ func (AIPromptType) Values() []AIPromptType {
 		"EMAIL_OVERVIEW",
 		"EMAIL_GENERATIVE_ANSWER",
 		"EMAIL_QUERY_REFORMULATION",
+		"ORCHESTRATION",
+		"NOTE_TAKING",
+		"CASE_SUMMARIZATION",
 	}
 }
 
@@ -187,7 +199,8 @@ type AssociationType string
 
 // Enum values for AssociationType
 const (
-	AssociationTypeKnowledgeBase AssociationType = "KNOWLEDGE_BASE"
+	AssociationTypeKnowledgeBase                AssociationType = "KNOWLEDGE_BASE"
+	AssociationTypeExternalBedrockKnowledgeBase AssociationType = "EXTERNAL_BEDROCK_KNOWLEDGE_BASE"
 )
 
 // Values returns all known values for AssociationType. Note that this can be
@@ -197,6 +210,7 @@ const (
 func (AssociationType) Values() []AssociationType {
 	return []AssociationType{
 		"KNOWLEDGE_BASE",
+		"EXTERNAL_BEDROCK_KNOWLEDGE_BASE",
 	}
 }
 
@@ -718,6 +732,25 @@ func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 	}
 }
 
+type MessageFilterType string
+
+// Enum values for MessageFilterType
+const (
+	MessageFilterTypeAll      MessageFilterType = "ALL"
+	MessageFilterTypeTextOnly MessageFilterType = "TEXT_ONLY"
+)
+
+// Values returns all known values for MessageFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MessageFilterType) Values() []MessageFilterType {
+	return []MessageFilterType{
+		"ALL",
+		"TEXT_ONLY",
+	}
+}
+
 type MessageTemplateAttributeType string
 
 // Enum values for MessageTemplateAttributeType
@@ -956,16 +989,21 @@ type QueryResultType string
 
 // Enum values for QueryResultType
 const (
-	QueryResultTypeKnowledgeContent             QueryResultType = "KNOWLEDGE_CONTENT"
-	QueryResultTypeIntentAnswer                 QueryResultType = "INTENT_ANSWER"
-	QueryResultTypeGenerativeAnswer             QueryResultType = "GENERATIVE_ANSWER"
-	QueryResultTypeGenerativeAnswerChunk        QueryResultType = "GENERATIVE_ANSWER_CHUNK"
-	QueryResultTypeBlockedGenerativeAnswerChunk QueryResultType = "BLOCKED_GENERATIVE_ANSWER_CHUNK"
-	QueryResultTypeIntentAnswerChunk            QueryResultType = "INTENT_ANSWER_CHUNK"
-	QueryResultTypeBlockedIntentAnswerChunk     QueryResultType = "BLOCKED_INTENT_ANSWER_CHUNK"
-	QueryResultTypeEmailResponseChunk           QueryResultType = "EMAIL_RESPONSE_CHUNK"
-	QueryResultTypeEmailOverviewChunk           QueryResultType = "EMAIL_OVERVIEW_CHUNK"
-	QueryResultTypeEmailGenerativeAnswerChunk   QueryResultType = "EMAIL_GENERATIVE_ANSWER_CHUNK"
+	QueryResultTypeKnowledgeContent              QueryResultType = "KNOWLEDGE_CONTENT"
+	QueryResultTypeIntentAnswer                  QueryResultType = "INTENT_ANSWER"
+	QueryResultTypeGenerativeAnswer              QueryResultType = "GENERATIVE_ANSWER"
+	QueryResultTypeGenerativeAnswerChunk         QueryResultType = "GENERATIVE_ANSWER_CHUNK"
+	QueryResultTypeBlockedGenerativeAnswerChunk  QueryResultType = "BLOCKED_GENERATIVE_ANSWER_CHUNK"
+	QueryResultTypeIntentAnswerChunk             QueryResultType = "INTENT_ANSWER_CHUNK"
+	QueryResultTypeBlockedIntentAnswerChunk      QueryResultType = "BLOCKED_INTENT_ANSWER_CHUNK"
+	QueryResultTypeEmailResponseChunk            QueryResultType = "EMAIL_RESPONSE_CHUNK"
+	QueryResultTypeEmailOverviewChunk            QueryResultType = "EMAIL_OVERVIEW_CHUNK"
+	QueryResultTypeEmailGenerativeAnswerChunk    QueryResultType = "EMAIL_GENERATIVE_ANSWER_CHUNK"
+	QueryResultTypeCaseSummarizationChunk        QueryResultType = "CASE_SUMMARIZATION_CHUNK"
+	QueryResultTypeBlockedCaseSummarizationChunk QueryResultType = "BLOCKED_CASE_SUMMARIZATION_CHUNK"
+	QueryResultTypeNotes                         QueryResultType = "NOTES"
+	QueryResultTypeNotesChunk                    QueryResultType = "NOTES_CHUNK"
+	QueryResultTypeBlockedNotesChunk             QueryResultType = "BLOCKED_NOTES_CHUNK"
 )
 
 // Values returns all known values for QueryResultType. Note that this can be
@@ -984,6 +1022,11 @@ func (QueryResultType) Values() []QueryResultType {
 		"EMAIL_RESPONSE_CHUNK",
 		"EMAIL_OVERVIEW_CHUNK",
 		"EMAIL_GENERATIVE_ANSWER_CHUNK",
+		"CASE_SUMMARIZATION_CHUNK",
+		"BLOCKED_CASE_SUMMARIZATION_CHUNK",
+		"NOTES",
+		"NOTES_CHUNK",
+		"BLOCKED_NOTES_CHUNK",
 	}
 }
 
@@ -1100,17 +1143,22 @@ type RecommendationType string
 
 // Enum values for RecommendationType
 const (
-	RecommendationTypeKnowledgeContent             RecommendationType = "KNOWLEDGE_CONTENT"
-	RecommendationTypeGenerativeResponse           RecommendationType = "GENERATIVE_RESPONSE"
-	RecommendationTypeGenerativeAnswer             RecommendationType = "GENERATIVE_ANSWER"
-	RecommendationTypeDetectedIntent               RecommendationType = "DETECTED_INTENT"
-	RecommendationTypeGenerativeAnswerChunk        RecommendationType = "GENERATIVE_ANSWER_CHUNK"
-	RecommendationTypeBlockedGenerativeAnswerChunk RecommendationType = "BLOCKED_GENERATIVE_ANSWER_CHUNK"
-	RecommendationTypeIntentAnswerChunk            RecommendationType = "INTENT_ANSWER_CHUNK"
-	RecommendationTypeBlockedIntentAnswerChunk     RecommendationType = "BLOCKED_INTENT_ANSWER_CHUNK"
-	RecommendationTypeEmailResponseChunk           RecommendationType = "EMAIL_RESPONSE_CHUNK"
-	RecommendationTypeEmailOverviewChunk           RecommendationType = "EMAIL_OVERVIEW_CHUNK"
-	RecommendationTypeEmailGenerativeAnswerChunk   RecommendationType = "EMAIL_GENERATIVE_ANSWER_CHUNK"
+	RecommendationTypeKnowledgeContent              RecommendationType = "KNOWLEDGE_CONTENT"
+	RecommendationTypeGenerativeResponse            RecommendationType = "GENERATIVE_RESPONSE"
+	RecommendationTypeGenerativeAnswer              RecommendationType = "GENERATIVE_ANSWER"
+	RecommendationTypeDetectedIntent                RecommendationType = "DETECTED_INTENT"
+	RecommendationTypeGenerativeAnswerChunk         RecommendationType = "GENERATIVE_ANSWER_CHUNK"
+	RecommendationTypeBlockedGenerativeAnswerChunk  RecommendationType = "BLOCKED_GENERATIVE_ANSWER_CHUNK"
+	RecommendationTypeIntentAnswerChunk             RecommendationType = "INTENT_ANSWER_CHUNK"
+	RecommendationTypeBlockedIntentAnswerChunk      RecommendationType = "BLOCKED_INTENT_ANSWER_CHUNK"
+	RecommendationTypeEmailResponseChunk            RecommendationType = "EMAIL_RESPONSE_CHUNK"
+	RecommendationTypeEmailOverviewChunk            RecommendationType = "EMAIL_OVERVIEW_CHUNK"
+	RecommendationTypeEmailGenerativeAnswerChunk    RecommendationType = "EMAIL_GENERATIVE_ANSWER_CHUNK"
+	RecommendationTypeCaseSummarizationChunk        RecommendationType = "CASE_SUMMARIZATION_CHUNK"
+	RecommendationTypeBlockedCaseSummarizationChunk RecommendationType = "BLOCKED_CASE_SUMMARIZATION_CHUNK"
+	RecommendationTypeSuggestedMessage              RecommendationType = "SUGGESTED_MESSAGE"
+	RecommendationTypeNotesChunk                    RecommendationType = "NOTES_CHUNK"
+	RecommendationTypeBlockedNotesChunk             RecommendationType = "BLOCKED_NOTES_CHUNK"
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
@@ -1130,6 +1178,11 @@ func (RecommendationType) Values() []RecommendationType {
 		"EMAIL_RESPONSE_CHUNK",
 		"EMAIL_OVERVIEW_CHUNK",
 		"EMAIL_GENERATIVE_ANSWER_CHUNK",
+		"CASE_SUMMARIZATION_CHUNK",
+		"BLOCKED_CASE_SUMMARIZATION_CHUNK",
+		"SUGGESTED_MESSAGE",
+		"NOTES_CHUNK",
+		"BLOCKED_NOTES_CHUNK",
 	}
 }
 
@@ -1137,8 +1190,16 @@ type ReferenceType string
 
 // Enum values for ReferenceType
 const (
-	ReferenceTypeWebCrawler    ReferenceType = "WEB_CRAWLER"
-	ReferenceTypeKnowledgeBase ReferenceType = "KNOWLEDGE_BASE"
+	ReferenceTypeWebCrawler              ReferenceType = "WEB_CRAWLER"
+	ReferenceTypeKnowledgeBase           ReferenceType = "KNOWLEDGE_BASE"
+	ReferenceTypeBedrockKbS3             ReferenceType = "BEDROCK_KB_S3"
+	ReferenceTypeBedrockKbWeb            ReferenceType = "BEDROCK_KB_WEB"
+	ReferenceTypeBedrockKbConfluence     ReferenceType = "BEDROCK_KB_CONFLUENCE"
+	ReferenceTypeBedrockKbSalesforce     ReferenceType = "BEDROCK_KB_SALESFORCE"
+	ReferenceTypeBedrockKbSharepoint     ReferenceType = "BEDROCK_KB_SHAREPOINT"
+	ReferenceTypeBedrockKbKendra         ReferenceType = "BEDROCK_KB_KENDRA"
+	ReferenceTypeBedrockKbCustomDocument ReferenceType = "BEDROCK_KB_CUSTOM_DOCUMENT"
+	ReferenceTypeBedrockKbSql            ReferenceType = "BEDROCK_KB_SQL"
 )
 
 // Values returns all known values for ReferenceType. Note that this can be
@@ -1149,6 +1210,14 @@ func (ReferenceType) Values() []ReferenceType {
 	return []ReferenceType{
 		"WEB_CRAWLER",
 		"KNOWLEDGE_BASE",
+		"BEDROCK_KB_S3",
+		"BEDROCK_KB_WEB",
+		"BEDROCK_KB_CONFLUENCE",
+		"BEDROCK_KB_SALESFORCE",
+		"BEDROCK_KB_SHAREPOINT",
+		"BEDROCK_KB_KENDRA",
+		"BEDROCK_KB_CUSTOM_DOCUMENT",
+		"BEDROCK_KB_SQL",
 	}
 }
 
@@ -1226,6 +1295,48 @@ func (SourceContentType) Values() []SourceContentType {
 	}
 }
 
+type SpanStatus string
+
+// Enum values for SpanStatus
+const (
+	SpanStatusOk      SpanStatus = "OK"
+	SpanStatusError   SpanStatus = "ERROR"
+	SpanStatusTimeout SpanStatus = "TIMEOUT"
+)
+
+// Values returns all known values for SpanStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpanStatus) Values() []SpanStatus {
+	return []SpanStatus{
+		"OK",
+		"ERROR",
+		"TIMEOUT",
+	}
+}
+
+type SpanType string
+
+// Enum values for SpanType
+const (
+	SpanTypeClient   SpanType = "CLIENT"
+	SpanTypeServer   SpanType = "SERVER"
+	SpanTypeInternal SpanType = "INTERNAL"
+)
+
+// Values returns all known values for SpanType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpanType) Values() []SpanType {
+	return []SpanType{
+		"CLIENT",
+		"SERVER",
+		"INTERNAL",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -1292,6 +1403,48 @@ func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"RECOMMENDATION",
 		"RESULT",
+	}
+}
+
+type ToolOverrideInputValueType string
+
+// Enum values for ToolOverrideInputValueType
+const (
+	ToolOverrideInputValueTypeString     ToolOverrideInputValueType = "STRING"
+	ToolOverrideInputValueTypeNumber     ToolOverrideInputValueType = "NUMBER"
+	ToolOverrideInputValueTypeJsonString ToolOverrideInputValueType = "JSON_STRING"
+)
+
+// Values returns all known values for ToolOverrideInputValueType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ToolOverrideInputValueType) Values() []ToolOverrideInputValueType {
+	return []ToolOverrideInputValueType{
+		"STRING",
+		"NUMBER",
+		"JSON_STRING",
+	}
+}
+
+type ToolType string
+
+// Enum values for ToolType
+const (
+	ToolTypeModelContextProtocol ToolType = "MODEL_CONTEXT_PROTOCOL"
+	ToolTypeReturnToControl      ToolType = "RETURN_TO_CONTROL"
+	ToolTypeConstant             ToolType = "CONSTANT"
+)
+
+// Values returns all known values for ToolType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ToolType) Values() []ToolType {
+	return []ToolType{
+		"MODEL_CONTEXT_PROTOCOL",
+		"RETURN_TO_CONTROL",
+		"CONSTANT",
 	}
 }
 

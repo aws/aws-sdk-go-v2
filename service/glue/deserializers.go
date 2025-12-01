@@ -65954,6 +65954,15 @@ func awsAwsjson11_deserializeDocumentTable(v **types.Table, value interface{}) e
 				return err
 			}
 
+		case "IsMaterializedView":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsMaterializedView = ptr.Bool(jtv)
+			}
+
 		case "IsMultiDialectView":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -68697,6 +68706,28 @@ func awsAwsjson11_deserializeDocumentViewDefinition(v **types.ViewDefinition, va
 				sv.IsProtected = ptr.Bool(jtv)
 			}
 
+		case "LastRefreshType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastRefreshType to be of type string, got %T instead", value)
+				}
+				sv.LastRefreshType = types.LastRefreshType(jtv)
+			}
+
+		case "RefreshSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RefreshSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RefreshSeconds = ptr.Int64(i64)
+			}
+
 		case "Representations":
 			if err := awsAwsjson11_deserializeDocumentViewRepresentationList(&sv.Representations, value); err != nil {
 				return err
@@ -68705,6 +68736,33 @@ func awsAwsjson11_deserializeDocumentViewDefinition(v **types.ViewDefinition, va
 		case "SubObjects":
 			if err := awsAwsjson11_deserializeDocumentViewSubObjectsList(&sv.SubObjects, value); err != nil {
 				return err
+			}
+
+		case "SubObjectVersionIds":
+			if err := awsAwsjson11_deserializeDocumentViewSubObjectVersionIdsList(&sv.SubObjectVersionIds, value); err != nil {
+				return err
+			}
+
+		case "ViewVersionId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TableVersionId to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ViewVersionId = i64
+			}
+
+		case "ViewVersionToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HashString to be of type string, got %T instead", value)
+				}
+				sv.ViewVersionToken = ptr.String(jtv)
 			}
 
 		default:
@@ -68863,6 +68921,46 @@ func awsAwsjson11_deserializeDocumentViewSubObjectsList(v *[]string, value inter
 				return fmt.Errorf("expected ArnString to be of type string, got %T instead", value)
 			}
 			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentViewSubObjectVersionIdsList(v *[]int64, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int64
+	if *v == nil {
+		cv = []int64{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int64
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected TableVersionId to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = i64
 		}
 		cv = append(cv, col)
 
@@ -77679,6 +77777,15 @@ func awsAwsjson11_deserializeOpDocumentGetUnfilteredTableMetadataOutput(v **GetU
 		case "CellFilters":
 			if err := awsAwsjson11_deserializeDocumentColumnRowFilterList(&sv.CellFilters, value); err != nil {
 				return err
+			}
+
+		case "IsMaterializedView":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsMaterializedView = jtv
 			}
 
 		case "IsMultiDialectView":

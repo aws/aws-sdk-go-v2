@@ -181,6 +181,13 @@ type BatchInferenceJobConfig struct {
 	// [User-Personalization]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
 	ItemExplorationConfig map[string]string
 
+	// A map of ranking influence values for POPULARITY and FRESHNESS. For each key,
+	// specify a numerical value between 0.0 and 1.0 that determines how much influence
+	// that ranking factor has on the final recommendations. A value closer to 1.0
+	// gives more weight to the factor, while a value closer to 0.0 reduces its
+	// influence.
+	RankingInfluence map[string]float64
+
 	noSmithyDocumentSerde
 }
 
@@ -392,6 +399,9 @@ type Campaign struct {
 	// Provides a summary of the properties of a campaign update. For a complete
 	// listing, call the [DescribeCampaign]API.
 	//
+	// The latestCampaignUpdate field is only returned when the campaign has had at
+	// least one UpdateCampaign call.
+	//
 	// [DescribeCampaign]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
 	LatestCampaignUpdate *CampaignUpdateSummary
 
@@ -442,6 +452,13 @@ type CampaignConfig struct {
 	//
 	// [User-Personalization]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
 	ItemExplorationConfig map[string]string
+
+	// A map of ranking influence values for POPULARITY and FRESHNESS. For each key,
+	// specify a numerical value between 0.0 and 1.0 that determines how much influence
+	// that ranking factor has on the final recommendations. A value closer to 1.0
+	// gives more weight to the factor, while a value closer to 0.0 reduces its
+	// influence.
+	RankingInfluence map[string]float64
 
 	// Whether the campaign automatically updates to use the latest solution version
 	// (trained model) of a solution. If you specify True , you must specify the ARN of
@@ -1895,6 +1912,13 @@ type Solution struct {
 	// default is false .
 	PerformHPO bool
 
+	// A Boolean value that indicates whether incremental training updates are
+	// performed on the model. When enabled, this allows the model to learn from new
+	// data more frequently without requiring full retraining, which enables near
+	// real-time personalization. This parameter is supported only for solutions that
+	// use the semantic-similarity recipe
+	PerformIncrementalUpdate *bool
+
 	// The ARN of the recipe used to create the solution. This is required when
 	// performAutoML is false.
 	RecipeArn *string
@@ -2024,6 +2048,13 @@ type SolutionUpdateSummary struct {
 	// Whether the solution automatically creates solution versions.
 	PerformAutoTraining *bool
 
+	// A Boolean value that indicates whether incremental training updates are
+	// performed on the model. When enabled, this allows the model to learn from new
+	// data more frequently without requiring full retraining, which enables near
+	// real-time personalization. This parameter is supported only for solutions that
+	// use the semantic-similarity recipe.
+	PerformIncrementalUpdate *bool
+
 	// The configuration details of the solution.
 	SolutionUpdateConfig *SolutionUpdateConfig
 
@@ -2069,6 +2100,12 @@ type SolutionVersion struct {
 	// Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The
 	// default is false .
 	PerformHPO bool
+
+	// Whether the solution version should perform an incremental update. When set to
+	// true, the training will process only the data that has changed since the latest
+	// training, similar to when trainingMode is set to UPDATE. This can only be used
+	// with solution versions that use the User-Personalization recipe.
+	PerformIncrementalUpdate *bool
 
 	// The ARN of the recipe used in the solution.
 	RecipeArn *string
@@ -2202,6 +2239,14 @@ type TrainingDataConfig struct {
 	// recommendations. You can exclude this column from training and Amazon
 	// Personalize considers it only when filtering.
 	ExcludedDatasetColumns map[string][]string
+
+	// A map that specifies which columns to include from each dataset during
+	// training. The map can contain up to 3 entries, where each key is a dataset name
+	// (maximum length of 256 characters, must contain only letters and underscores)
+	// and each value is an array of up to 50 column names. Column names can be up to
+	// 150 characters long, must start with a letter or underscore, and can contain
+	// only letters, numbers, and underscores.
+	IncludedDatasetColumns map[string][]string
 
 	noSmithyDocumentSerde
 }

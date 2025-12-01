@@ -113,6 +113,12 @@ type DescribeBotLocaleOutput struct {
 	// locale.
 	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
 
+	// The speech-to-text settings configured for the bot locale.
+	SpeechRecognitionSettings *types.SpeechRecognitionSettings
+
+	// The unified speech settings configured for the bot locale.
+	UnifiedSpeechSettings *types.UnifiedSpeechSettings
+
 	// The Amazon Polly voice Amazon Lex uses for voice interaction with the user.
 	VoiceSettings *types.VoiceSettings
 

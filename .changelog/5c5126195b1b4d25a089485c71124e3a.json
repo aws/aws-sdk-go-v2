@@ -1,0 +1,8 @@
+{
+    "id": "5c512619-5b1b-4d25-a089-485c71124e3a",
+    "type": "feature",
+    "description": "This release supports 1/multi-product transactions via offer sets. DescribeAgreement and SearchAgreements APIs now return offer set IDs. SearchAgreements also supports filtering by offer set ID and 2/variable payment pricing terms will be returned through GetAgreementTerms.",
+    "modules": [
+        "service/marketplaceagreement"
+    ]
+}

@@ -183,8 +183,8 @@ type AgentQualityMetrics struct {
 }
 
 // Can be used to define a list of preferred agents to target the contact to
-// within the queue.  Note that agents must have the queue in their routing profile
-// in order to be offered the  contact.
+// within the queue. Note that agents must have the queue in their routing profile
+// in order to be offered the contact.
 type AgentsCriteria struct {
 
 	// An object to specify a list of agents, by user ID.
@@ -262,8 +262,8 @@ type AgentStatusSearchCriteria struct {
 
 	// A leaf node condition which can be used to specify a string condition.
 	//
-	// The currently supported values for FieldName are name ,   description , state ,
-	// type , displayOrder ,  and resourceID .
+	// The currently supported values for FieldName are name , description , state ,
+	// type , displayOrder , and resourceID .
 	AndConditions []AgentStatusSearchCriteria
 
 	// A list of conditions which would be applied together with an OR condition.
@@ -271,8 +271,8 @@ type AgentStatusSearchCriteria struct {
 
 	// A leaf node condition which can be used to specify a string condition.
 	//
-	// The currently supported values for FieldName are name ,   description , state ,
-	// type , displayOrder ,  and resourceID .
+	// The currently supported values for FieldName are name , description , state ,
+	// type , displayOrder , and resourceID .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -314,6 +314,23 @@ type AgentStatusSummary struct {
 
 	// The type of the agent status.
 	Type AgentStatusType
+
+	noSmithyDocumentSerde
+}
+
+// Information of the AI agent involved in the contact.
+type AiAgentInfo struct {
+
+	//  A boolean flag indicating whether the contact initially handled by this AI
+	// agent was escalated to a human agent.
+	AiAgentEscalated bool
+
+	//  The unique identifier that specifies both the AI agent ID and its version
+	// number that was involved in the contact
+	AiAgentVersionId *string
+
+	//  The use case or scenario for which the AI agent is involved in the contact
+	AiUseCase AiUseCase
 
 	noSmithyDocumentSerde
 }
@@ -396,12 +413,16 @@ type AnswerMachineDetectionConfig struct {
 // A third-party application's metadata.
 type Application struct {
 
-	// The permissions that the agent is granted on the application. Only the ACCESS
-	// permission is supported.
+	// The permissions that the agent is granted on the application. For third-party
+	// applications, only the ACCESS permission is supported. For MCP Servers, the
+	// permissions are tool Identifiers accepted by MCP Server.
 	ApplicationPermissions []string
 
 	// Namespace of the application that you want to give access to.
 	Namespace *string
+
+	//  Type of Application.
+	Type ApplicationType
 
 	noSmithyDocumentSerde
 }
@@ -804,6 +825,198 @@ type AvailableNumberSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A batch create data table value failure result.
+type BatchCreateDataTableValueFailureResult struct {
+
+	// The result's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The result's message.
+	//
+	// This member is required.
+	Message *string
+
+	// The result's primary values.
+	//
+	// This member is required.
+	PrimaryValues []PrimaryValue
+
+	noSmithyDocumentSerde
+}
+
+// A batch create data table value success result.
+type BatchCreateDataTableValueSuccessResult struct {
+
+	// The result's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The result's lock version.
+	//
+	// This member is required.
+	LockVersion *DataTableLockVersion
+
+	// The result's primary values.
+	//
+	// This member is required.
+	PrimaryValues []PrimaryValue
+
+	// The result's record ID.
+	//
+	// This member is required.
+	RecordId *string
+
+	noSmithyDocumentSerde
+}
+
+// A batch delete data table value failure result.
+type BatchDeleteDataTableValueFailureResult struct {
+
+	// The result's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The result's message.
+	//
+	// This member is required.
+	Message *string
+
+	// The result's primary values.
+	//
+	// This member is required.
+	PrimaryValues []PrimaryValue
+
+	noSmithyDocumentSerde
+}
+
+// A batch delete data table value success result.
+type BatchDeleteDataTableValueSuccessResult struct {
+
+	// The result's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The result's lock version.
+	//
+	// This member is required.
+	LockVersion *DataTableLockVersion
+
+	// The result's primary values.
+	//
+	// This member is required.
+	PrimaryValues []PrimaryValue
+
+	noSmithyDocumentSerde
+}
+
+// A batch describe data table value failure result.
+type BatchDescribeDataTableValueFailureResult struct {
+
+	// The result's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The result's message.
+	//
+	// This member is required.
+	Message *string
+
+	// The result's primary values.
+	//
+	// This member is required.
+	PrimaryValues []PrimaryValue
+
+	noSmithyDocumentSerde
+}
+
+// A batch describe data table value success result.
+type BatchDescribeDataTableValueSuccessResult struct {
+
+	// The result's attribute ID.
+	//
+	// This member is required.
+	AttributeId *string
+
+	// The result's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The result's lock version.
+	//
+	// This member is required.
+	LockVersion *DataTableLockVersion
+
+	// The result's primary values.
+	//
+	// This member is required.
+	PrimaryValues []PrimaryValueResponse
+
+	// The result's record ID.
+	//
+	// This member is required.
+	RecordId *string
+
+	// The result's last modified region.
+	LastModifiedRegion *string
+
+	// The result's last modified time.
+	LastModifiedTime *time.Time
+
+	// The result's value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A batch update data table value failure result.
+type BatchUpdateDataTableValueFailureResult struct {
+
+	// The result's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The result's message.
+	//
+	// This member is required.
+	Message *string
+
+	// The result's primary values.
+	//
+	// This member is required.
+	PrimaryValues []PrimaryValue
+
+	noSmithyDocumentSerde
+}
+
+// A batch update data table value success result.
+type BatchUpdateDataTableValueSuccessResult struct {
+
+	// The result's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The result's lock version.
+	//
+	// This member is required.
+	LockVersion *DataTableLockVersion
+
+	// The result's primary values.
+	//
+	// This member is required.
+	PrimaryValues []PrimaryValue
+
+	noSmithyDocumentSerde
+}
+
 // A boolean search condition for Search APIs.
 type BooleanCondition struct {
 
@@ -1086,7 +1299,7 @@ type Condition struct {
 
 	// A leaf node condition which can be used to specify a string condition.
 	//
-	// The currently supported values for FieldName are name and  value .
+	// The currently supported values for FieldName are name and value .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -1213,6 +1426,9 @@ type Contact struct {
 
 	// The name of the contact.
 	Name *string
+
+	//  List of next contact entries for the contact.
+	NextContacts []NextContactEntry
 
 	// Information about the outbound strategy.
 	OutboundStrategy *OutboundStrategy
@@ -1462,6 +1678,37 @@ type ContactFlow struct {
 	noSmithyDocumentSerde
 }
 
+// A list of conditions which would be applied together with an AND condition.
+type ContactFlowAttributeAndCondition struct {
+
+	//  Contact flow type condition.
+	ContactFlowTypeCondition *ContactFlowTypeCondition
+
+	//  Tag-based conditions for contact flow filtering.
+	TagConditions []TagCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filter for contact flow attributes with multiple condition types.
+type ContactFlowAttributeFilter struct {
+
+	//  A list of conditions which would be applied together with a AND condition.
+	AndCondition *ContactFlowAttributeAndCondition
+
+	//  Contact flow type condition within attribute filter.
+	ContactFlowTypeCondition *ContactFlowTypeCondition
+
+	//  A list of conditions which would be applied together with an OR condition.
+	OrConditions []ContactFlowAttributeAndCondition
+
+	// A leaf node condition which can be used to specify a tag condition, for
+	// example, HAVE BPO = 123 .
+	TagCondition *TagCondition
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a flow module.
 type ContactFlowModule struct {
 
@@ -1659,6 +1906,9 @@ type ContactFlowSearchCriteria struct {
 // Filters to be applied to search results.
 type ContactFlowSearchFilter struct {
 
+	//  Flow attribute filter for contact flow search operations.
+	FlowAttributeFilter *ContactFlowAttributeFilter
+
 	// An object that can be used to specify Tag conditions inside the SearchFilter .
 	// This accepts an OR of AND (List of List) input where:
 	//
@@ -1694,6 +1944,15 @@ type ContactFlowSummary struct {
 
 	// The name of the flow.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The contact flow type condition.
+type ContactFlowTypeCondition struct {
+
+	//  Contact flow type of the contact flow type condition.
+	ContactFlowType ContactFlowType
 
 	noSmithyDocumentSerde
 }
@@ -2096,6 +2355,381 @@ type CustomerVoiceActivity struct {
 	// Timestamp that measures the beginning of the customer greeting from an outbound
 	// voice call.
 	GreetingStartTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a data table in Amazon Connect. A data table is a JSON-like data
+// structure where attributes and values are dynamically set by customers.
+// Customers can reference table values within call flows, applications, views, and
+// workspaces to pinpoint dynamic configuration that changes their contact center's
+// behavior in a predetermined and safe way.
+type DataTable struct {
+
+	// The Amazon Resource Name (ARN) for the data table. Does not include version
+	// aliases.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier for the data table. Does not include version aliases.
+	//
+	// This member is required.
+	Id *string
+
+	// The timestamp when the data table or any of its properties were last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The human-readable name of the data table. Must be unique within the instance
+	// and conform to Connect naming standards.
+	//
+	// This member is required.
+	Name *string
+
+	// The IANA timezone identifier used when resolving time based dynamic values.
+	// Required even if no time slices are specified.
+	//
+	// This member is required.
+	TimeZone *string
+
+	// The timestamp when the data table was created.
+	CreatedTime *time.Time
+
+	// An optional description of the data table's purpose and contents.
+	Description *string
+
+	// The AWS region where the data table was last modified, used for region
+	// replication.
+	LastModifiedRegion *string
+
+	// The lock version information used for optimistic locking and table versioning.
+	// Changes with each update to prevent concurrent modification conflicts.
+	LockVersion *DataTableLockVersion
+
+	// The current status of the data table. One of PUBLISHED or SAVED.
+	Status DataTableStatus
+
+	// Key-value pairs for attribute based access control (TBAC or ABAC) and
+	// organization.
+	Tags map[string]string
+
+	// The data level that concurrent value edits are locked on. One of DATA_TABLE,
+	// PRIMARY_VALUE, ATTRIBUTE, VALUE, and NONE. Determines how concurrent edits are
+	// handled when multiple users attempt to modify values simultaneously.
+	ValueLockLevel DataTableLockLevel
+
+	// A unique identifier and alias for customer managed versions (not $LATEST or
+	// $SAVED).
+	Version *string
+
+	// A description of the customer managed version.
+	VersionDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// A data table access control configuration.
+type DataTableAccessControlConfiguration struct {
+
+	// The configuration's primary attribute access control configuration.
+	PrimaryAttributeAccessControlConfiguration *PrimaryAttributeAccessControlConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+// Represents an attribute (column) in a data table. Attributes define the schema
+// and validation rules for values that can be stored in the table. They specify
+// the data type, constraints, and whether the attribute is used as a primary key
+// for record identification.
+type DataTableAttribute struct {
+
+	// The human-readable name of the attribute. Must be unique within the data table
+	// and conform to Connect naming standards.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of value allowed for this attribute. Must be one of TEXT, TEXT_LIST,
+	// NUMBER, NUMBER_LIST, or BOOLEAN. Determines how values are validated and
+	// processed.
+	//
+	// This member is required.
+	ValueType DataTableAttributeValueType
+
+	// The unique identifier for the attribute within the data table.
+	AttributeId *string
+
+	// The Amazon Resource Name (ARN) of the data table that contains this attribute.
+	DataTableArn *string
+
+	// The unique identifier of the data table that contains this attribute.
+	DataTableId *string
+
+	// An optional description explaining the purpose and usage of this attribute.
+	Description *string
+
+	// The AWS region where this attribute was last modified, used for region
+	// replication.
+	LastModifiedRegion *string
+
+	// The timestamp when this attribute was last modified.
+	LastModifiedTime *time.Time
+
+	// The lock version for this attribute, used for optimistic locking to prevent
+	// concurrent modification conflicts.
+	LockVersion *DataTableLockVersion
+
+	// Boolean indicating whether this attribute is used as a primary key for record
+	// identification. Primary attributes must have unique value combinations and
+	// cannot contain expressions.
+	Primary bool
+
+	// The validation rules applied to values of this attribute. Based on JSON Schema
+	// Draft 2020-12 with additional Connect-specific validations for data integrity.
+	Validation *Validation
+
+	// The version identifier for this attribute, used for versioning and change
+	// tracking.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// A data table delete value identifier.
+type DataTableDeleteValueIdentifier struct {
+
+	// The identifier's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The identifier's lock version.
+	//
+	// This member is required.
+	LockVersion *DataTableLockVersion
+
+	// The identifier's primary values.
+	PrimaryValues []PrimaryValue
+
+	noSmithyDocumentSerde
+}
+
+// A data table evaluated value.
+type DataTableEvaluatedValue struct {
+
+	// The value's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The value's error.
+	//
+	// This member is required.
+	Error bool
+
+	// The value's evaluated value.
+	//
+	// This member is required.
+	EvaluatedValue *string
+
+	// The value's found.
+	//
+	// This member is required.
+	Found bool
+
+	// The value's primary values.
+	//
+	// This member is required.
+	PrimaryValues []PrimaryValue
+
+	// The value's record ID.
+	//
+	// This member is required.
+	RecordId *string
+
+	// The value's value type.
+	//
+	// This member is required.
+	ValueType DataTableAttributeValueType
+
+	noSmithyDocumentSerde
+}
+
+// Contains lock version information for different levels of a data table
+// hierarchy. Used for optimistic locking to prevent concurrent modification
+// conflicts. Each component has its own lock version that changes when that
+// component is modified.
+type DataTableLockVersion struct {
+
+	// The lock version for a specific attribute. When the ValueLockLevel is
+	// ATTRIBUTE, this version changes when any value for the attribute changes. For
+	// other lock levels, it only changes when the attribute's properties are directly
+	// updated.
+	Attribute *string
+
+	// The lock version for the data table itself. Used for optimistic locking and
+	// table versioning. Changes with each update to the table's metadata or structure.
+	DataTable *string
+
+	// The lock version for a specific set of primary values (record). This includes
+	// the default record even if the table does not have any primary attributes. Used
+	// for record-level locking.
+	PrimaryValues *string
+
+	// The lock version for a specific value. Changes each time the individual value
+	// is modified. Used for the finest-grained locking control.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A data table search criteria.
+type DataTableSearchCriteria struct {
+
+	// The criteria's and conditions.
+	AndConditions []DataTableSearchCriteria
+
+	// The criteria's or conditions.
+	OrConditions []DataTableSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// A data table search filter.
+type DataTableSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR or AND (List of List) input where:
+	//
+	//   - The top level list specifies conditions that need to be applied with OR
+	//   operator.
+	//
+	//   - The inner list specifies conditions that need to be applied with AND
+	//   operator.
+	AttributeFilter *ControlPlaneAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+// A data table summary.
+type DataTableSummary struct {
+
+	// The summary's ARN.
+	Arn *string
+
+	// The summary's ID.
+	Id *string
+
+	// The summary's last modified region.
+	LastModifiedRegion *string
+
+	// The summary's last modified time.
+	LastModifiedTime *time.Time
+
+	// The summary's name.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A data table value.
+type DataTableValue struct {
+
+	// The value's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The value's value.
+	//
+	// This member is required.
+	Value *string
+
+	// The value's last modified region.
+	LastModifiedRegion *string
+
+	// The value's last modified time.
+	LastModifiedTime *time.Time
+
+	// The value's lock version.
+	LockVersion *DataTableLockVersion
+
+	// The value's primary values.
+	PrimaryValues []PrimaryValue
+
+	noSmithyDocumentSerde
+}
+
+// A data table value evaluation set.
+type DataTableValueEvaluationSet struct {
+
+	// The set's attribute names.
+	//
+	// This member is required.
+	AttributeNames []string
+
+	// The set's primary values.
+	PrimaryValues []PrimaryValue
+
+	noSmithyDocumentSerde
+}
+
+// A data table value identifier.
+type DataTableValueIdentifier struct {
+
+	// The identifier's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The identifier's primary values.
+	PrimaryValues []PrimaryValue
+
+	noSmithyDocumentSerde
+}
+
+// A data table value summary.
+type DataTableValueSummary struct {
+
+	// The summary's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The summary's primary values.
+	//
+	// This member is required.
+	PrimaryValues []PrimaryValueResponse
+
+	// The summary's value.
+	//
+	// This member is required.
+	Value *string
+
+	// The summary's value type.
+	//
+	// This member is required.
+	ValueType DataTableAttributeValueType
+
+	// The summary's attribute ID.
+	AttributeId *string
+
+	// The summary's last modified region.
+	LastModifiedRegion *string
+
+	// The summary's last modified time.
+	LastModifiedTime *time.Time
+
+	// The summary's lock version.
+	LockVersion *DataTableLockVersion
+
+	// The summary's record ID.
+	RecordId *string
 
 	noSmithyDocumentSerde
 }
@@ -2584,12 +3218,23 @@ type EvaluationAcknowledgementSummary struct {
 //
 // The following types satisfy this interface:
 //
+//	EvaluationAnswerDataMemberDateTimeValue
 //	EvaluationAnswerDataMemberNotApplicable
 //	EvaluationAnswerDataMemberNumericValue
 //	EvaluationAnswerDataMemberStringValue
+//	EvaluationAnswerDataMemberStringValues
 type EvaluationAnswerData interface {
 	isEvaluationAnswerData()
 }
+
+// Date and time value provided as an answer to an evaluation question.
+type EvaluationAnswerDataMemberDateTimeValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationAnswerDataMemberDateTimeValue) isEvaluationAnswerData() {}
 
 // The flag to mark the question as not applicable.
 type EvaluationAnswerDataMemberNotApplicable struct {
@@ -2617,6 +3262,15 @@ type EvaluationAnswerDataMemberStringValue struct {
 }
 
 func (*EvaluationAnswerDataMemberStringValue) isEvaluationAnswerData() {}
+
+// String values provided as answers to evaluation questions.
+type EvaluationAnswerDataMemberStringValues struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationAnswerDataMemberStringValues) isEvaluationAnswerData() {}
 
 // Information about input answers for a contact evaluation.
 type EvaluationAnswerInput struct {
@@ -2666,6 +3320,18 @@ type EvaluationContactLensAnswerAnalysisDetails struct {
 
 	// A list of match rule categories.
 	MatchedRuleCategories []EvaluationAutomationRuleCategory
+
+	noSmithyDocumentSerde
+}
+
+// Information about a contact participant in the evaluation.
+type EvaluationContactParticipant struct {
+
+	// The identifier for the contact participant.
+	ContactParticipantId *string
+
+	// The role of the contact participant.
+	ContactParticipantRole ContactParticipantRole
 
 	noSmithyDocumentSerde
 }
@@ -2735,12 +3401,18 @@ type EvaluationForm struct {
 	// The description of the evaluation form.
 	Description *string
 
+	// Configuration for language settings of this evaluation form.
+	LanguageConfiguration *EvaluationFormLanguageConfiguration
+
 	// A scoring strategy of the evaluation form.
 	ScoringStrategy *EvaluationFormScoringStrategy
 
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	// Configuration that specifies the target for this evaluation form.
+	TargetConfiguration *EvaluationFormTargetConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2791,8 +3463,14 @@ type EvaluationFormContent struct {
 	// The description of the evaluation form.
 	Description *string
 
+	// Configuration for language settings of this evaluation form content.
+	LanguageConfiguration *EvaluationFormLanguageConfiguration
+
 	// A scoring strategy of the evaluation form.
 	ScoringStrategy *EvaluationFormScoringStrategy
+
+	// Configuration that specifies the target for this evaluation form content.
+	TargetConfiguration *EvaluationFormTargetConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2938,6 +3616,82 @@ type EvaluationFormItemEnablementSourceValue struct {
 	noSmithyDocumentSerde
 }
 
+// Language configuration for an evaluation form.
+type EvaluationFormLanguageConfiguration struct {
+
+	// The language for the evaluation form.
+	FormLanguage EvaluationFormLanguageCode
+
+	noSmithyDocumentSerde
+}
+
+// Automation configuration for multi-select questions.
+type EvaluationFormMultiSelectQuestionAutomation struct {
+
+	// A question automation answer.
+	AnswerSource *EvaluationFormQuestionAutomationAnswerSource
+
+	// Reference IDs of default options.
+	DefaultOptionRefIds []string
+
+	// Automation options for the multi-select question.
+	Options []EvaluationFormMultiSelectQuestionAutomationOption
+
+	noSmithyDocumentSerde
+}
+
+// An automation option for a multi-select question.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationFormMultiSelectQuestionAutomationOptionMemberRuleCategory
+type EvaluationFormMultiSelectQuestionAutomationOption interface {
+	isEvaluationFormMultiSelectQuestionAutomationOption()
+}
+
+// Rule category configuration for this automation option.
+type EvaluationFormMultiSelectQuestionAutomationOptionMemberRuleCategory struct {
+	Value MultiSelectQuestionRuleCategoryAutomation
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormMultiSelectQuestionAutomationOptionMemberRuleCategory) isEvaluationFormMultiSelectQuestionAutomationOption() {
+}
+
+// An option for a multi-select question in an evaluation form.
+type EvaluationFormMultiSelectQuestionOption struct {
+
+	// Reference identifier for this option.
+	//
+	// This member is required.
+	RefId *string
+
+	// Display text for this option.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Properties for a multi-select question in an evaluation form.
+type EvaluationFormMultiSelectQuestionProperties struct {
+
+	// Options available for this multi-select question.
+	//
+	// This member is required.
+	Options []EvaluationFormMultiSelectQuestionOption
+
+	// Automation configuration for this multi-select question.
+	Automation *EvaluationFormMultiSelectQuestionAutomation
+
+	// Display format for the multi-select question.
+	DisplayAs EvaluationFormMultiSelectQuestionDisplayMode
+
+	noSmithyDocumentSerde
+}
+
 // Information about the automation configuration in numeric questions.
 //
 // The following types satisfy this interface:
@@ -3071,11 +3825,22 @@ type EvaluationFormQuestionAutomationAnswerSource struct {
 //
 // The following types satisfy this interface:
 //
+//	EvaluationFormQuestionTypePropertiesMemberMultiSelect
 //	EvaluationFormQuestionTypePropertiesMemberNumeric
 //	EvaluationFormQuestionTypePropertiesMemberSingleSelect
 //	EvaluationFormQuestionTypePropertiesMemberText
 type EvaluationFormQuestionTypeProperties interface {
 	isEvaluationFormQuestionTypeProperties()
+}
+
+// Properties for multi-select question types.
+type EvaluationFormQuestionTypePropertiesMemberMultiSelect struct {
+	Value EvaluationFormMultiSelectQuestionProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormQuestionTypePropertiesMemberMultiSelect) isEvaluationFormQuestionTypeProperties() {
 }
 
 // The properties of the numeric question.
@@ -3218,8 +3983,14 @@ type EvaluationFormSearchSummary struct {
 	// Whether automated evaluation is enabled.
 	AutoEvaluationEnabled bool
 
+	// The contact interaction type for this evaluation form.
+	ContactInteractionType ContactInteractionType
+
 	// The description of the evaluation form.
 	Description *string
+
+	// The language of the evaluation form.
+	EvaluationFormLanguage EvaluationFormLanguageCode
 
 	// The ID of user who last activated evaluation form.
 	LastActivatedBy *string
@@ -3402,6 +4173,17 @@ type EvaluationFormSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration that specifies the target for an evaluation form.
+type EvaluationFormTargetConfiguration struct {
+
+	// The contact interaction type for this evaluation form.
+	//
+	// This member is required.
+	ContactInteractionType ContactInteractionType
+
+	noSmithyDocumentSerde
+}
+
 // Information about the automation configuration in text questions.
 type EvaluationFormTextQuestionAutomation struct {
 
@@ -3508,6 +4290,12 @@ type EvaluationMetadata struct {
 	// The identifier of the agent who performed the contact.
 	ContactAgentId *string
 
+	// Information about a contact participant in this evaluation.
+	ContactParticipant *EvaluationContactParticipant
+
+	// Identifier of the sampling job.
+	SamplingJobId *string
+
 	// The overall score of the contact evaluation.
 	Score *EvaluationScore
 
@@ -3569,6 +4357,9 @@ type EvaluationQuestionInputDetails struct {
 
 // Information about scores of a contact evaluation item (section or question).
 type EvaluationScore struct {
+
+	// Weight applied to this evaluation score.
+	AppliedWeight *float64
 
 	// The flag that marks the item as automatic fail. If the item or a child item
 	// gets an automatic fail answer, this flag will be true.
@@ -3662,6 +4453,18 @@ type EvaluationSearchMetadata struct {
 	// The unique ID of the agent who handled the contact.
 	ContactAgentId *string
 
+	// Identifier for a contact participant in the evaluation.
+	ContactParticipantId *string
+
+	// Role of a contact participant in the evaluation.
+	ContactParticipantRole ContactParticipantRole
+
+	// Identifier for the review.
+	ReviewId *string
+
+	// Identifier of the sampling job.
+	SamplingJobId *string
+
 	// The flag that marks the item as automatic fail. If the item or a child item
 	// gets an automatic fail answer, this flag is true.
 	ScoreAutomaticFail bool
@@ -3715,6 +4518,9 @@ type EvaluationSearchSummary struct {
 
 	// The unique identifier for the evaluation form.
 	EvaluationFormId *string
+
+	// Title of the evaluation form.
+	EvaluationFormTitle *string
 
 	// Type of the evaluation.
 	EvaluationType EvaluationType
@@ -3818,6 +4624,9 @@ type EvaluationSummary struct {
 	// The calibration session ID that this evaluation belongs to.
 	CalibrationSessionId *string
 
+	// Information about a contact participant in the evaluation.
+	ContactParticipant *EvaluationContactParticipant
+
 	// Type of the evaluation.
 	EvaluationType EvaluationType
 
@@ -3903,6 +4712,22 @@ type ExternalInvocationConfiguration struct {
 
 	// Enable external invocation.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a resource that failed to be associated with a
+// workspace in a batch operation.
+type FailedBatchAssociationSummary struct {
+
+	// The error code indicating why the association failed.
+	ErrorCode *string
+
+	// An error message describing why the association failed.
+	ErrorMessage *string
+
+	// The Amazon Resource Name (ARN) of the resource that failed to be associated.
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -3996,6 +4821,29 @@ type FilterV2 struct {
 	// key of QUEUE , you would add queue IDs or ARNs in FilterValues .
 	FilterValues []string
 
+	//  System defined filtering condition. For example, the NOT_EXISTS
+	// StringCondition returns documents where the field specified by FilterKey does
+	// not exist in the document.
+	//
+	// When the NOT_EXISTS StringCondition is added to a FilterV2 object, FilterValues
+	// must be null or empty.
+	StringCondition *FilterV2StringCondition
+
+	noSmithyDocumentSerde
+}
+
+//	System defined filtering condition. For example, the NOT_EXISTS
+//
+// StringCondition returns documents where the field specified by FilterKey does
+// not exist in the document.
+//
+// When the NOT_EXISTS StringCondition is added to a FilterV2 object, FilterValues
+// must be null or empty.
+type FilterV2StringCondition struct {
+
+	//  The string condition.
+	Comparison FilterV2StringConditionComparisonOperator
+
 	noSmithyDocumentSerde
 }
 
@@ -4010,6 +4858,48 @@ type FlowAssociationSummary struct {
 
 	// The type of resource association.
 	ResourceType ListFlowAssociationResourceType
+
+	noSmithyDocumentSerde
+}
+
+// A list of Flow Modules an AI Agent can invoke as a tool
+type FlowModule struct {
+
+	//  If of Flow Modules invocable as tool
+	FlowModuleId *string
+
+	//  Only Type we support is MCP.
+	Type FlowModuleType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for quick connect.
+type FlowQuickConnectConfig struct {
+
+	//  The contact flow ID for the quick connect configuration.
+	//
+	// This member is required.
+	ContactFlowId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains font family configuration for workspace themes.
+type FontFamily struct {
+
+	// The default font family to use in the workspace theme.
+	Default WorkspaceFontFamily
+
+	noSmithyDocumentSerde
+}
+
+// Contains granular access control configuration for security profiles, including
+// data table access permissions.
+type GranularAccessControlConfiguration struct {
+
+	// The access control configuration for data tables.
+	DataTableAccessControlConfiguration *DataTableAccessControlConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -4641,6 +5531,18 @@ type HoursOfOperationTimeSlice struct {
 	noSmithyDocumentSerde
 }
 
+// Contains logo image configuration for workspace themes.
+type ImagesLogo struct {
+
+	// The default logo image displayed in the workspace.
+	Default *string
+
+	// The favicon image displayed in the browser tab.
+	Favicon *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the additional TO and CC recipients of an inbound email
 // contact.
 //
@@ -5111,6 +6013,19 @@ type MediaConcurrency struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a media asset used in a workspace.
+type MediaItem struct {
+
+	// The source URL or data for the media asset.
+	Source *string
+
+	// The type of media. Valid values are: IMAGE_LOGO_FAVICON and
+	// IMAGE_LOGO_HORIZONTAL .
+	Type MediaType
+
+	noSmithyDocumentSerde
+}
+
 // A set of endpoints used by clients to connect to the media service group for an
 // Amazon Chime SDK meeting.
 type MediaPlacement struct {
@@ -5163,7 +6078,8 @@ type MeetingFeaturesConfiguration struct {
 // Contains the name, thresholds, and metric filters.
 type MetricDataV2 struct {
 
-	// The metric name, thresholds, and metric filters of the returned metric.
+	// The metric name or metricId, thresholds, and metric filters of the returned
+	// metric.
 	Metric *MetricV2
 
 	// The corresponding value of the metric returned in the response.
@@ -5264,18 +6180,43 @@ type MetricResultV2 struct {
 }
 
 // Contains information about the metric.
+//
+// Only one of either the Name or MetricId is required.
 type MetricV2 struct {
 
 	// Contains the filters to be used when returning data.
 	MetricFilters []MetricFilterV2
 
+	// Historical metrics or custom metrics can be referenced via this field. This
+	// field is a valid Amazon Connect Arn or a UUID
+	MetricId *string
+
 	// The name of the metric.
-	//
-	// This parameter is required. The following Required = No is incorrect.
 	Name *string
 
 	// Contains information about the threshold for service level metrics.
 	Threshold []ThresholdV2
+
+	noSmithyDocumentSerde
+}
+
+// Automation rule for multi-select questions based on rule categories.
+type MultiSelectQuestionRuleCategoryAutomation struct {
+
+	// The category name for this automation rule.
+	//
+	// This member is required.
+	Category *string
+
+	// The condition for this automation rule.
+	//
+	// This member is required.
+	Condition MultiSelectQuestionRuleCategoryAutomationCondition
+
+	// Reference IDs of options for this automation rule.
+	//
+	// This member is required.
+	OptionRefIds []string
 
 	noSmithyDocumentSerde
 }
@@ -5328,6 +6269,36 @@ type NewSessionDetails struct {
 
 	noSmithyDocumentSerde
 }
+
+// Entry representing the next contact in a sequence.
+type NextContactEntry struct {
+
+	//  Metadata for the next contact entry.
+	NextContactMetadata NextContactMetadata
+
+	//  The type of the next contact entry.
+	Type NextContactType
+
+	noSmithyDocumentSerde
+}
+
+//	Metadata information for next contact.
+//
+// The following types satisfy this interface:
+//
+//	NextContactMetadataMemberQuickConnectContactData
+type NextContactMetadata interface {
+	isNextContactMetadata()
+}
+
+// Quick connect contact data for the next contact metadata.
+type NextContactMetadataMemberQuickConnectContactData struct {
+	Value QuickConnectContactData
+
+	noSmithyDocumentSerde
+}
+
+func (*NextContactMetadataMemberQuickConnectContactData) isNextContactMetadata() {}
 
 // The type of notification recipient.
 type NotificationRecipientType struct {
@@ -5526,6 +6497,81 @@ type OverrideTimeSlice struct {
 	noSmithyDocumentSerde
 }
 
+// Contains color configuration for canvas elements in a workspace theme.
+type PaletteCanvas struct {
+
+	// The background color for active elements.
+	ActiveBackground *string
+
+	// The background color for container elements.
+	ContainerBackground *string
+
+	// The background color for page elements.
+	PageBackground *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains color configuration for header elements in a workspace theme.
+type PaletteHeader struct {
+
+	// The background color of the header.
+	Background *string
+
+	// Whether to invert the colors of action buttons in the header.
+	InvertActionsColors bool
+
+	// The text color in the header.
+	Text *string
+
+	// The text color when hovering over header elements.
+	TextHover *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains color configuration for navigation elements in a workspace theme.
+type PaletteNavigation struct {
+
+	// The background color of the navigation area.
+	Background *string
+
+	// Whether to invert the colors of action buttons in the navigation area.
+	InvertActionsColors bool
+
+	// The text color in the navigation area.
+	Text *string
+
+	// The text color for active navigation items.
+	TextActive *string
+
+	// The background color for active navigation items.
+	TextBackgroundActive *string
+
+	// The background color when hovering over navigation text.
+	TextBackgroundHover *string
+
+	// The text color when hovering over navigation items.
+	TextHover *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains primary color configuration for a workspace theme.
+type PalettePrimary struct {
+
+	// The primary color used for active states.
+	Active *string
+
+	// The text color that contrasts with the primary color for readability.
+	ContrastText *string
+
+	// The default primary color used throughout the workspace.
+	Default *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for the allowed video and screen sharing capabilities for
 // participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Amazon
 // Connect Administrator Guide.
@@ -5540,6 +6586,15 @@ type ParticipantCapabilities struct {
 	// The configuration having the video and screen sharing capabilities for
 	// participants over the call.
 	Video VideoCapability
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the participant.
+type ParticipantConfiguration struct {
+
+	//  The mode in which responses should be sent to the participant.
+	ResponseMode ResponseMode
 
 	noSmithyDocumentSerde
 }
@@ -5902,6 +6957,81 @@ type Preview struct {
 	noSmithyDocumentSerde
 }
 
+// A primary attribute access control configuration item.
+type PrimaryAttributeAccessControlConfigurationItem struct {
+
+	// The item's primary attribute values.
+	PrimaryAttributeValues []PrimaryAttributeValue
+
+	noSmithyDocumentSerde
+}
+
+// A primary attribute value.
+type PrimaryAttributeValue struct {
+
+	// The value's access type.
+	AccessType AccessType
+
+	// The value's attribute name.
+	AttributeName *string
+
+	// The value's values.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// A primary attribute value filter.
+type PrimaryAttributeValueFilter struct {
+
+	// The filter's attribute name.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The filter's values.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a primary key value used to identify a specific record in a data
+// table. Primary values are used in combination to create unique record
+// identifiers when a table has multiple primary attributes.
+type PrimaryValue struct {
+
+	// The name of the primary attribute that this value belongs to.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The actual value for the primary attribute. Must be provided as a string
+	// regardless of the attribute's value type. Primary values cannot be expressions
+	// and must be explicitly specified.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A primary value response.
+type PrimaryValueResponse struct {
+
+	// The value's attribute ID.
+	AttributeId *string
+
+	// The value's attribute name.
+	AttributeName *string
+
+	// The value's value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a problem detail.
 type ProblemDetail struct {
 
@@ -6223,6 +7353,9 @@ type QuickConnectConfig struct {
 	// This member is required.
 	QuickConnectType QuickConnectType
 
+	//  Flow configuration for quick connect setup.
+	FlowConfig *FlowQuickConnectConfig
+
 	// The phone configuration. This is required only if QuickConnectType is
 	// PHONE_NUMBER.
 	PhoneConfig *PhoneNumberQuickConnectConfig
@@ -6232,6 +7365,27 @@ type QuickConnectConfig struct {
 
 	// The user configuration. This is required only if QuickConnectType is USER.
 	UserConfig *UserQuickConnectConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contact data associated with quick connect operations.
+type QuickConnectContactData struct {
+
+	//  The contact ID for quick connect contact data.
+	ContactId *string
+
+	//  Timestamp when the quick connect contact was initiated.
+	InitiationTimestamp *time.Time
+
+	//  The quick connect ID.
+	QuickConnectId *string
+
+	//  The name of the quick connect.
+	QuickConnectName *string
+
+	//  The type of the quick connect.
+	QuickConnectType QuickConnectType
 
 	noSmithyDocumentSerde
 }
@@ -6745,6 +7899,28 @@ type RecordingInfo struct {
 	// Where the recording/transcript is stored.
 	StorageType StorageType
 
+	//  The location, in Amazon S3, for the unprocessed transcript if any media
+	// processing was performed.
+	UnprocessedTranscriptLocation *string
+
+	noSmithyDocumentSerde
+}
+
+// A record primary value.
+type RecordPrimaryValue struct {
+
+	// The value's last modified region.
+	LastModifiedRegion *string
+
+	// The value's last modified time.
+	LastModifiedTime *time.Time
+
+	// The value's primary values.
+	PrimaryValues []PrimaryValueResponse
+
+	// The value's record ID.
+	RecordId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -6782,6 +7958,7 @@ type Reference struct {
 //	ReferenceSummaryMemberDate
 //	ReferenceSummaryMemberEmail
 //	ReferenceSummaryMemberEmailMessage
+//	ReferenceSummaryMemberEmailMessagePlainText
 //	ReferenceSummaryMemberNumber
 //	ReferenceSummaryMemberString
 //	ReferenceSummaryMemberUrl
@@ -6826,6 +8003,16 @@ type ReferenceSummaryMemberEmailMessage struct {
 }
 
 func (*ReferenceSummaryMemberEmailMessage) isReferenceSummary() {}
+
+// Information about the reference when the referenceType is EMAIL_MESSAGE .
+// Otherwise, null.
+type ReferenceSummaryMemberEmailMessagePlainText struct {
+	Value EmailMessageReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberEmailMessagePlainText) isReferenceSummary() {}
 
 // Information about a reference when the referenceType is NUMBER . Otherwise, null.
 type ReferenceSummaryMemberNumber struct {
@@ -6953,8 +8140,8 @@ type RoutingCriteria struct {
 type RoutingCriteriaInput struct {
 
 	// When Amazon Connect does not find an available agent meeting the requirements
-	// in a step for  a given step duration, the routing criteria will move on to the
-	// next step sequentially until a  join is completed with an agent. When all steps
+	// in a step for a given step duration, the routing criteria will move on to the
+	// next step sequentially until a join is completed with an agent. When all steps
 	// are exhausted, the contact will be offered to any agent in the queue.
 	Steps []RoutingCriteriaInputStep
 
@@ -6975,11 +8162,11 @@ type RoutingCriteriaInputStep struct {
 }
 
 // Specify whether this routing criteria step should apply for only a limited
-// amount of time,  or if it should never expire.
+// amount of time, or if it should never expire.
 type RoutingCriteriaInputStepExpiry struct {
 
 	// The number of seconds that the contact will be routed only to agents matching
-	// this routing  step, if expiry was configured for this routing step.
+	// this routing step, if expiry was configured for this routing step.
 	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -7695,6 +8882,10 @@ type SecurityProfile struct {
 	// The description of the security profile.
 	Description *string
 
+	// The granular access control configuration for the security profile, including
+	// data table permissions.
+	GranularAccessControlConfiguration *GranularAccessControlConfiguration
+
 	// The list of resources that a security profile applies hierarchy restrictions to
 	// in Amazon Connect. Following are acceptable ResourceNames: User .
 	HierarchyRestrictedResources []string
@@ -7721,6 +8912,15 @@ type SecurityProfile struct {
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Security profile items.
+type SecurityProfileItem struct {
+
+	//  Id of a security profile item.
+	Id *string
 
 	noSmithyDocumentSerde
 }
@@ -8030,6 +9230,16 @@ type SubmitAutoEvaluationActionDefinition struct {
 	//
 	// This member is required.
 	EvaluationFormId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a resource that was successfully associated with a
+// workspace in a batch operation.
+type SuccessfulBatchAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the resource that was successfully associated.
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -8652,8 +9862,8 @@ type UserHierarchyGroupSearchCriteria struct {
 
 	// A leaf node condition which can be used to specify a string condition.
 	//
-	// The currently supported values for FieldName are name ,   parentId , levelId ,
-	// and resourceID .
+	// The currently supported values for FieldName are name , parentId , levelId , and
+	// resourceID .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -8953,6 +10163,85 @@ type UserSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Defines validation rules for data table attribute values. Based on JSON Schema
+// Draft 2020-12 with additional Connect-specific validations. Validation rules
+// ensure data integrity and consistency across the data table.
+type Validation struct {
+
+	// Defines enumeration constraints for attribute values. Can specify a list of
+	// allowed values and whether custom values are permitted beyond the enumerated
+	// list.
+	Enum *ValidationEnum
+
+	// The largest exclusive numeric value for NUMBER value type. Can be provided
+	// alongside Maximum where both operate independently. Must be greater than
+	// ExclusiveMinimum and Minimum. Applies to NUMBER and values within NUMBER_LIST.
+	ExclusiveMaximum float64
+
+	// The smallest exclusive numeric value for NUMBER value type. Can be provided
+	// alongside Minimum where both operate independently. Must be less than
+	// ExclusiveMaximum and Maximum. Applies to NUMBER and values within NUMBER_LIST.
+	ExclusiveMinimum float64
+
+	// Boolean that defaults to false. Applies to text lists and text primary
+	// attributes. When true, enforces case-insensitive uniqueness for primary
+	// attributes and allows case-insensitive lookups.
+	IgnoreCase bool
+
+	// The maximum number of characters a text value can contain. Applies to TEXT
+	// value type and values within a TEXT_LIST. Must be greater than or equal to
+	// MinLength.
+	MaxLength int32
+
+	// The maximum number of values in a list. Must be an integer greater than or
+	// equal to 0 and greater than or equal to MinValues. Applies to all list types.
+	MaxValues int32
+
+	// The largest inclusive numeric value for NUMBER value type. Can be provided
+	// alongside ExclusiveMaximum where both operate independently. Must be greater
+	// than or equal to Minimum and greater than ExclusiveMinimum. Applies to NUMBER
+	// and values within NUMBER_LIST.
+	Maximum float64
+
+	// The minimum number of characters a text value can contain. Applies to TEXT
+	// value type and values within a TEXT_LIST. Must be less than or equal to
+	// MaxLength.
+	MinLength int32
+
+	// The minimum number of values in a list. Must be an integer greater than or
+	// equal to 0 and less than or equal to MaxValues. Applies to all list types.
+	MinValues int32
+
+	// The smallest inclusive numeric value for NUMBER value type. Cannot be provided
+	// when ExclusiveMinimum is also provided. Must be less than or equal to Maximum
+	// and less than ExclusiveMaximum. Applies to NUMBER and values within NUMBER_LIST.
+	Minimum float64
+
+	// Specifies that numeric values must be multiples of this number. Must be greater
+	// than 0. The result of dividing a value by this multiple must result in an
+	// integer. Applies to NUMBER and values within NUMBER_LIST.
+	MultipleOf float64
+
+	noSmithyDocumentSerde
+}
+
+// Defines enumeration validation for attribute values. Allows specifying a list
+// of permitted values and whether custom values beyond the enumerated list are
+// allowed.
+type ValidationEnum struct {
+
+	// Boolean that defaults to false. When true, only values specified in the enum
+	// list are allowed. When false, custom values beyond the enumerated list are
+	// permitted.
+	Strict bool
+
+	// A list of predefined values that are allowed for this attribute. These values
+	// are always permitted regardless of the Strict setting.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // A view resource object. Contains metadata and content necessary to render the
 // view.
 type View struct {
@@ -9027,6 +10316,43 @@ type ViewInputContent struct {
 
 	// The view template representing the structure of the view.
 	Template *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the search criteria for filtering views.
+type ViewSearchCriteria struct {
+
+	// A list of conditions that must all be satisfied.
+	AndConditions []ViewSearchCriteria
+
+	// A list of conditions to be met, where at least one condition must be satisfied.
+	OrConditions []ViewSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	// A condition that filters views by their status.
+	ViewStatusCondition ViewStatus
+
+	// A condition that filters views by their type.
+	ViewTypeCondition ViewType
+
+	noSmithyDocumentSerde
+}
+
+// Defines filters to apply when searching for views, such as tag-based filters.
+type ViewSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR or AND (List of List) input where:
+	//
+	//   - The top level list specifies conditions that need to be applied with OR
+	//   operator.
+	//
+	//   - The inner list specifies conditions that need to be applied with AND
+	//   operator.
+	AttributeFilter *ControlPlaneAttributeFilter
 
 	noSmithyDocumentSerde
 }
@@ -9196,8 +10522,283 @@ type VoiceRecordingConfiguration struct {
 // Information about Amazon Connect Wisdom.
 type WisdomInfo struct {
 
+	// The array of AI agents involved in the contact.
+	AiAgents []AiAgentInfo
+
 	// The Amazon Resource Name (ARN) of the Wisdom session.
 	SessionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a workspace, which defines the user experience by
+// mapping views to pages.
+type Workspace struct {
+
+	// The Amazon Resource Name (ARN) of the workspace.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier of the workspace.
+	//
+	// This member is required.
+	Id *string
+
+	// The timestamp when the workspace was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the workspace.
+	//
+	// This member is required.
+	Name *string
+
+	// The description of the workspace.
+	Description *string
+
+	// The AWS Region where the workspace was last modified.
+	LastModifiedRegion *string
+
+	// The tags used to organize, track, or control access for the workspace.
+	Tags map[string]string
+
+	// The theme configuration for the workspace, including colors and styling.
+	Theme *WorkspaceTheme
+
+	// The title displayed for the workspace.
+	Title *string
+
+	// Controls who can access the workspace. Valid values are: ALL (all users),
+	// ASSIGNED (only assigned users and routing profiles), and NONE (not visible).
+	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// Defines the search criteria for filtering workspace associations.
+type WorkspaceAssociationSearchCriteria struct {
+
+	// A list of conditions that must all be satisfied.
+	AndConditions []WorkspaceAssociationSearchCriteria
+
+	// A list of conditions to be met, where at least one condition must be satisfied.
+	OrConditions []WorkspaceAssociationSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Defines filters to apply when searching for workspace associations, such as
+// tag-based filters.
+type WorkspaceAssociationSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR or AND (List of List) input where:
+	//
+	//   - The top level list specifies conditions that need to be applied with OR
+	//   operator.
+	//
+	//   - The inner list specifies conditions that need to be applied with AND
+	//   operator.
+	AttributeFilter *ControlPlaneAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a workspace association with a user or
+// routing profile.
+type WorkspaceAssociationSearchSummary struct {
+
+	// The Amazon Resource Name (ARN) of the associated resource.
+	ResourceArn *string
+
+	// The identifier of the associated resource (user or routing profile).
+	ResourceId *string
+
+	// The name of the associated resource.
+	ResourceName *string
+
+	// The type of resource associated with the workspace. Valid values are: USER and
+	// ROUTING_PROFILE .
+	ResourceType *string
+
+	// The Amazon Resource Name (ARN) of the workspace.
+	WorkspaceArn *string
+
+	// The identifier of the workspace.
+	WorkspaceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a page configuration in a workspace, including the
+// view assigned to the page.
+type WorkspacePage struct {
+
+	// A JSON string containing input parameters passed to the view when the page is
+	// rendered.
+	InputData *string
+
+	// The page identifier. System pages include HOME and AGENT_EXPERIENCE .
+	Page *string
+
+	// The Amazon Resource Name (ARN) of the view associated with this page.
+	ResourceArn *string
+
+	// The URL-friendly identifier for the page.
+	Slug *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the search criteria for filtering workspaces.
+type WorkspaceSearchCriteria struct {
+
+	// A list of conditions that must all be satisfied.
+	AndConditions []WorkspaceSearchCriteria
+
+	// A list of conditions to be met, where at least one condition must be satisfied.
+	OrConditions []WorkspaceSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Defines filters to apply when searching for workspaces, such as tag-based
+// filters.
+type WorkspaceSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR or AND (List of List) input where:
+	//
+	//   - The top level list specifies conditions that need to be applied with OR
+	//   operator.
+	//
+	//   - The inner list specifies conditions that need to be applied with AND
+	//   operator.
+	AttributeFilter *ControlPlaneAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a workspace returned from a search operation.
+type WorkspaceSearchSummary struct {
+
+	// The Amazon Resource Name (ARN) of the workspace.
+	Arn *string
+
+	// The timestamp when the workspace was created.
+	CreatedAt *time.Time
+
+	// The description of the workspace.
+	Description *string
+
+	// The unique identifier of the workspace.
+	Id *string
+
+	// The name of the workspace.
+	Name *string
+
+	// The tags associated with the workspace.
+	Tags map[string]string
+
+	// The title displayed for the workspace.
+	Title *string
+
+	// The visibility setting of the workspace.
+	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a workspace.
+type WorkspaceSummary struct {
+
+	// The Amazon Resource Name (ARN) of the workspace.
+	Arn *string
+
+	// The unique identifier of the workspace.
+	Id *string
+
+	// The AWS Region where the workspace was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the workspace was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the workspace.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains theme configuration for a workspace, supporting both light and dark
+// modes.
+type WorkspaceTheme struct {
+
+	// The theme configuration for dark mode.
+	Dark *WorkspaceThemeConfig
+
+	// The theme configuration for light mode.
+	Light *WorkspaceThemeConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed theme configuration for a workspace, including colors,
+// images, and typography.
+type WorkspaceThemeConfig struct {
+
+	// The image assets used in the workspace theme.
+	Images *WorkspaceThemeImages
+
+	// The color palette configuration for the workspace theme.
+	Palette *WorkspaceThemePalette
+
+	// The typography configuration for the workspace theme.
+	Typography *WorkspaceThemeTypography
+
+	noSmithyDocumentSerde
+}
+
+// Contains image configuration for a workspace theme.
+type WorkspaceThemeImages struct {
+
+	// The logo images used in the workspace.
+	Logo *ImagesLogo
+
+	noSmithyDocumentSerde
+}
+
+// Contains color palette configuration for different areas of a workspace.
+type WorkspaceThemePalette struct {
+
+	// The color configuration for the canvas area.
+	Canvas *PaletteCanvas
+
+	// The color configuration for the header area.
+	Header *PaletteHeader
+
+	// The color configuration for the navigation area.
+	Navigation *PaletteNavigation
+
+	// The primary color configuration used throughout the workspace.
+	Primary *PalettePrimary
+
+	noSmithyDocumentSerde
+}
+
+// Contains typography configuration for a workspace theme.
+type WorkspaceThemeTypography struct {
+
+	// The font family configuration for text in the workspace.
+	FontFamily *FontFamily
 
 	noSmithyDocumentSerde
 }
@@ -9218,12 +10819,14 @@ func (*UnknownUnionMember) isCreatedByInfo()                                    
 func (*UnknownUnionMember) isEvaluationAnswerData()                               {}
 func (*UnknownUnionMember) isEvaluationFormItem()                                 {}
 func (*UnknownUnionMember) isEvaluationFormItemEnablementConditionOperand()       {}
+func (*UnknownUnionMember) isEvaluationFormMultiSelectQuestionAutomationOption()  {}
 func (*UnknownUnionMember) isEvaluationFormNumericQuestionAutomation()            {}
 func (*UnknownUnionMember) isEvaluationFormQuestionTypeProperties()               {}
 func (*UnknownUnionMember) isEvaluationFormSingleSelectQuestionAutomationOption() {}
 func (*UnknownUnionMember) isEvaluationQuestionAnswerAnalysisDetails()            {}
 func (*UnknownUnionMember) isEvaluatorUserUnion()                                 {}
 func (*UnknownUnionMember) isInvalidRequestExceptionReason()                      {}
+func (*UnknownUnionMember) isNextContactMetadata()                                {}
 func (*UnknownUnionMember) isParticipantTimerValue()                              {}
 func (*UnknownUnionMember) isPredefinedAttributeValues()                          {}
 func (*UnknownUnionMember) isRealtimeContactAnalysisSegment()                     {}

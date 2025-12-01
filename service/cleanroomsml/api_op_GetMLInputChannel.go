@@ -124,6 +124,11 @@ type GetMLInputChannelOutput struct {
 	// Details about the status of a resource.
 	StatusDetails *types.StatusDetails
 
+	// The synthetic data configuration for this ML input channel, including
+	// parameters for generating privacy-preserving synthetic data and evaluation
+	// scores for measuring the privacy of the generated data.
+	SyntheticDataConfiguration *types.SyntheticDataConfiguration
+
 	// The optional metadata that you applied to the resource to help you categorize
 	// and organize them. Each tag consists of a key and an optional value, both of
 	// which you define.

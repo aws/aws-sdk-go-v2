@@ -103,21 +103,24 @@ type GetMetricDataV2Input struct {
 	// Note the following limits:
 	//
 	//   - Filter keys: A maximum of 5 filter keys are supported in a single request.
-	//   Valid filter keys: AGENT | AGENT_HIERARCHY_LEVEL_ONE |
-	//   AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
-	//   AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
-	//   ANSWERING_MACHINE_DETECTION_STATUS | BOT_ID | BOT_ALIAS | BOT_VERSION |
-	//   BOT_LOCALE | BOT_INTENT_NAME | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
-	//   CAMPAIGN_EXCLUDED_EVENT_TYPE | CASE_TEMPLATE_ARN | CASE_STATUS | CHANNEL |
-	//   contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON |
-	//   EVALUATION_FORM | EVALUATION_SECTION | EVALUATION_QUESTION | EVALUATION_SOURCE
+	//   Valid filter keys: AGENT | AGENT_HIERARCHY_LEVEL_FIVE |
+	//   AGENT_HIERARCHY_LEVEL_FOUR | AGENT_ HIERARCHY_LEVEL_ONE |
+	//   AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_TWO |
+	//   ANSWERING_MACHINE_DETECTION_STATUS | BOT_ALIAS | BOT_ID | BOT_INTENT_NAME |
+	//   BOT_LOCALE | BOT_VERSION | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
+	//   CAMPAIGN_EXCLUDED_EVENT_TYPE | CASE_STATUS | CASE_TEMPLATE_ARN | CHANNEL |
+	//   contact/segmentAttributes/connect:Subtype |
+	//   contact/segmentAttributes/connect:ValidationTestType | DISCONNECT_REASON |
+	//   EVALUATION_FORM | EVALUATION_QUESTION | EVALUATION_SECTION | EVALUATION_SOURCE
 	//   | EVALUATOR_ID | FEATURE | FLOW_ACTION_ID | FLOW_TYPE |
 	//   FLOWS_MODULE_RESOURCE_ID | FLOWS_NEXT_RESOURCE_ID |
 	//   FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE | FLOWS_RESOURCE_ID |
-	//   FORM_VERSION | INITIATION_METHOD | INVOKING_RESOURCE_PUBLISHED_TIMESTAMP |
-	//   INVOKING_RESOURCE_TYPE | PARENT_FLOWS_RESOURCE_ID |
-	//   RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
-	//   QUEUE | Q_CONNECT_ENABLED |
+	//   FORM_VERSION | INITIATING_FLOW | INITIATION_METHOD |
+	//   INVOKING_RESOURCE_PUBLISHED_TIMESTAMP | INVOKING_RESOURCE_TYPE |
+	//   PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE | RESOURCE_PUBLISHED_
+	//   TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION | TEST_CASE | TEST_
+	//   CASE_EXECUTION_FAILURE_REASON | TEST_CASE_EXECUTION_RESULT |
+	//   TEST_CASE_EXECUTION_STATE
 	//
 	//   - Filter values: A maximum of 100 filter values are supported in a single
 	//   request. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter
@@ -140,11 +143,14 @@ type GetMetricDataV2Input struct {
 	// Q_CONNECT_ENABLED . TRUE and FALSE are the only valid filterValues for the
 	//   Q_CONNECT_ENABLED filter key.
 	//
-	//   - TRUE includes all contacts that had Amazon Q in Connect enabled as part of
+	//   - TRUE includes all contacts that had Connect AI Agents enabled as part of
 	//   the flow.
 	//
-	//   - FALSE includes all contacts that did not have Amazon Q in Connect enabled
-	//   as part of the flow
+	//   - FALSE includes all contacts that did not have Connect AI Agents enabled as
+	//   part of the flow
+	//
+	//   - EXPERIENCE_VALIDATION and FLOW_VALIDATION are the only valid filterValues
+	//   for the contact/segmentAttributes/connect:ValidationTestType filter key
 	//
 	// This filter is available only for contact record-driven metrics.
 	//
@@ -156,9 +162,12 @@ type GetMetricDataV2Input struct {
 	// This member is required.
 	Filters []types.FilterV2
 
-	// The metrics to retrieve. Specify the name, groupings, and filters for each
-	// metric. The following historical metrics are available. For a description of
-	// each metric, see [Metrics definition]in the Amazon Connect Administrator Guide.
+	// The metrics to retrieve. Specify the name or metricId, groupings, and filters
+	// for each metric. The following historical metrics are available. For a
+	// description of each metric, see [Metrics definition]in the Amazon Connect Administrator Guide.
+	//
+	// MetricId should be used to reference custom metrics or out of the box metrics
+	// as Arn. If using MetricId, the limit is 20 MetricId per request.
 	//
 	// ABANDONMENT_RATE Unit: Percent
 	//
@@ -407,6 +416,178 @@ type GetMetricDataV2Input struct {
 	// UI name: [Average handle time]
 	//
 	// Feature is a valid filter but not a valid grouping.
+	//
+	// ACTIVE_AI_AGENTS Unit: Count
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
+	//
+	// UI name: Active AI Agents
+	//
+	// AI_HANDOFF_RATE Unit: Percent
+	//
+	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: Handoff Rate
+	//
+	// AI_HANDOFFS Unit: Count
+	//
+	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: AI Handoff Count
+	//
+	// AI_AGENT_INVOCATION_SUCCESS Unit: Count
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: AI Agent Invocation Success Count
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AI_AGENT_INVOCATION_SUCCESS_RATE Unit: Percent
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: AI Agent Invocation Success Rate
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AI_AGENT_INVOCATIONS Unit: Count
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI Agent
+	// Name Version, AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: AI Agent Invocation Count
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AI_RESPONSE_COMPLETION_RATE Unit: Percent
+	//
+	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: AI Response Completion Rate
+	//
+	// AI_INVOLVED_CONTACTS Unit: Count
+	//
+	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: AI Contacts
+	//
+	// AI_PROMPT_INVOCATION_SUCCESS Unit: Count
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt Type, AI Use
+	// Case, Channel, Queue, Routing Profile
+	//
+	// UI name: AI Prompt Invocation Success Count
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AI_PROMPT_INVOCATION_SUCCESS_RATE Unit: Percent
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt Type, AI Use
+	// Case, Channel, Queue, Routing Profile
+	//
+	// UI name: AI Prompt Invocation Success Rate
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AI_TOOL_INVOCATIONS Unit: Count
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use Case, Channel, Queue,
+	// Routing Profile
+	//
+	// UI name: AI Tool Invocation Count
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AVG_AI_AGENT_CONVERSATION_TURNS Unit: Count
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: Average AI Agent Conversation Turns
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AVG_AI_CONVERSATION_TURNS Unit: Count
+	//
+	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: AI Conversation Turns
+	//
+	// AVG_AI_PROMPT_INVOCATION_LATENCY Unit: Milliseconds
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt Type, AI Use
+	// Case, Channel, Queue, Routing Profile
+	//
+	// UI name: Average AI Prompt Invocation Latency
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AVG_AI_TOOL_INVOCATION_LATENCY Unit: Milliseconds
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
+	// Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use Case, Channel, Queue,
+	// Routing Profile
+	//
+	// UI name: Average AI Tool Invocation Latency
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// KNOWLEDGE_CONTENT_REFERENCES Unit: Count
+	//
+	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Knowledge Base Name, Queue, Routing Profile
+	//
+	// UI name: KnowledgeBase Reference Count
+	//
+	// PROACTIVE_INTENT_ENGAGEMENT_RATE Unit: Percent
+	//
+	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: Proactive Intent Engagement Rate
+	//
+	// PROACTIVE_INTENT_RESPONSE_RATE Unit: Percent
+	//
+	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: Proactive Intent Response Rate
+	//
+	// PROACTIVE_INTENTS_ANSWERED Unit: Count
+	//
+	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: Proactive Intents Answered
+	//
+	// PROACTIVE_INTENTS_DETECTED Unit: Count
+	//
+	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: Proactive Intents Detected
+	//
+	// Unit:
+	//
+	// Valid groupings and filters:
+	//
+	// UI name:
+	//
+	// Unit:
+	//
+	// Valid groupings and filters:
+	//
+	// UI name:
+	//
+	// PROACTIVE_INTENTS_ENGAGED Unit: Count
+	//
+	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: UI name:
 	//
 	// AVG_HOLD_TIME Unit: Seconds
 	//
@@ -1433,7 +1614,14 @@ type GetMetricDataV2Input struct {
 	// FLOWS_MODULE_RESOURCE_ID | FLOW_ACTION_ID | FLOW_TYPE | FLOWS_OUTCOME_TYPE |
 	// FORM_VERSION | INITIATION_METHOD | INVOKING_RESOURCE_PUBLISHED_TIMESTAMP |
 	// INVOKING_RESOURCE_TYPE | PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
-	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION
+	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
+	// TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON | TEST_CASE_INVOCATION_METHOD
+	//
+	// API, SCHEDULE, and EVENT are the only valid filterValues for
+	// TEST_CASE_INVOCATION_METHOD.
+	//
+	// OBSERVE_EVENT, SEND_INSTRUCTION, ASSERT_DATA, and OVERRIDE_SYSTEM_BEHAVIOR are
+	// the only valid filterValues for TEST_CASE_EXECUTION_FAILURE_REASON
 	//
 	// Type: Array of strings
 	//

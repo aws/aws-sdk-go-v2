@@ -1,0 +1,8 @@
+{
+    "id": "dfb48f8e-d549-40fb-a3ef-3a22017d8700",
+    "type": "feature",
+    "description": "Amazon Connect now supports message processing that intercepts and processes chat messages before they reach any participant.",
+    "modules": [
+        "service/connectparticipant"
+    ]
+}

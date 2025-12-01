@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateEngagement(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateEngagementContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEngagementContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateEngagementContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEngagementInvitation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEngagementInvitation(context.Background(), nil, func(o *Options) {
@@ -350,6 +362,18 @@ func TestCheckSnapshot_ListOpportunities(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListOpportunityFromEngagementTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOpportunityFromEngagementTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOpportunityFromEngagementTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListResourceSnapshotJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListResourceSnapshotJobs(context.Background(), nil, func(o *Options) {
@@ -446,6 +470,18 @@ func TestCheckSnapshot_StartEngagementFromOpportunityTask(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartOpportunityFromEngagementTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOpportunityFromEngagementTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartOpportunityFromEngagementTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartResourceSnapshotJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartResourceSnapshotJob(context.Background(), nil, func(o *Options) {
@@ -506,6 +542,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateEngagementContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEngagementContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateEngagementContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateOpportunity(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateOpportunity(context.Background(), nil, func(o *Options) {
@@ -558,6 +606,18 @@ func TestUpdateSnapshot_CreateEngagement(t *testing.T) {
 	_, err := svc.CreateEngagement(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateEngagement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateEngagementContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEngagementContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateEngagementContext")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -805,6 +865,18 @@ func TestUpdateSnapshot_ListOpportunities(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListOpportunityFromEngagementTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOpportunityFromEngagementTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOpportunityFromEngagementTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListResourceSnapshotJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListResourceSnapshotJobs(context.Background(), nil, func(o *Options) {
@@ -901,6 +973,18 @@ func TestUpdateSnapshot_StartEngagementFromOpportunityTask(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartOpportunityFromEngagementTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOpportunityFromEngagementTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartOpportunityFromEngagementTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartResourceSnapshotJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartResourceSnapshotJob(context.Background(), nil, func(o *Options) {
@@ -954,6 +1038,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateEngagementContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEngagementContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateEngagementContext")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

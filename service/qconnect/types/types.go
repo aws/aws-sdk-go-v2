@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,10 +25,13 @@ type AgentAttributes struct {
 // The following types satisfy this interface:
 //
 //	AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration
+//	AIAgentConfigurationMemberCaseSummarizationAIAgentConfiguration
 //	AIAgentConfigurationMemberEmailGenerativeAnswerAIAgentConfiguration
 //	AIAgentConfigurationMemberEmailOverviewAIAgentConfiguration
 //	AIAgentConfigurationMemberEmailResponseAIAgentConfiguration
 //	AIAgentConfigurationMemberManualSearchAIAgentConfiguration
+//	AIAgentConfigurationMemberNoteTakingAIAgentConfiguration
+//	AIAgentConfigurationMemberOrchestrationAIAgentConfiguration
 //	AIAgentConfigurationMemberSelfServiceAIAgentConfiguration
 type AIAgentConfiguration interface {
 	isAIAgentConfiguration()
@@ -41,6 +45,15 @@ type AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration struct {
 }
 
 func (*AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration) isAIAgentConfiguration() {}
+
+// The configuration for AI Agents of type CASE_SUMMARIZATION .
+type AIAgentConfigurationMemberCaseSummarizationAIAgentConfiguration struct {
+	Value CaseSummarizationAIAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAgentConfigurationMemberCaseSummarizationAIAgentConfiguration) isAIAgentConfiguration() {}
 
 // Configuration for the EMAIL_GENERATIVE_ANSWER AI agent that provides
 // comprehensive knowledge-based answers for customer queries.
@@ -81,6 +94,24 @@ type AIAgentConfigurationMemberManualSearchAIAgentConfiguration struct {
 }
 
 func (*AIAgentConfigurationMemberManualSearchAIAgentConfiguration) isAIAgentConfiguration() {}
+
+// The configuration for AI Agents of type NOTE_TAKING .
+type AIAgentConfigurationMemberNoteTakingAIAgentConfiguration struct {
+	Value NoteTakingAIAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAgentConfigurationMemberNoteTakingAIAgentConfiguration) isAIAgentConfiguration() {}
+
+// The configuration for AI Agents of type ORCHESTRATION .
+type AIAgentConfigurationMemberOrchestrationAIAgentConfiguration struct {
+	Value OrchestrationAIAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAgentConfigurationMemberOrchestrationAIAgentConfiguration) isAIAgentConfiguration() {}
 
 // The configuration for AI Agents of type SELF_SERVICE.
 type AIAgentConfigurationMemberSelfServiceAIAgentConfiguration struct {
@@ -236,6 +267,17 @@ type AIAgentVersionSummary struct {
 
 	// The version number for this AI Agent version.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
+}
+
+// The assessment information from the AI Guardrail.
+type AIGuardrailAssessment struct {
+
+	// Indicates whether the AI Guardrail blocked the content.
+	//
+	// This member is required.
+	Blocked *bool
 
 	noSmithyDocumentSerde
 }
@@ -535,6 +577,9 @@ type AIPromptData struct {
 	// The description of the AI Prompt.
 	Description *string
 
+	// The configuration for inference parameters when using the AI Prompt.
+	InferenceConfiguration AIPromptInferenceConfiguration
+
 	// The time the AI Prompt was last modified.
 	ModifiedTime *time.Time
 
@@ -550,6 +595,25 @@ type AIPromptData struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+// The configuration for inference parameters when using AI Prompts.
+//
+// The following types satisfy this interface:
+//
+//	AIPromptInferenceConfigurationMemberTextAIPromptInferenceConfiguration
+type AIPromptInferenceConfiguration interface {
+	isAIPromptInferenceConfiguration()
+}
+
+// The inference configuration for text-based AI Prompts.
+type AIPromptInferenceConfigurationMemberTextAIPromptInferenceConfiguration struct {
+	Value TextAIPromptInferenceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIPromptInferenceConfigurationMemberTextAIPromptInferenceConfiguration) isAIPromptInferenceConfiguration() {
 }
 
 // The summary of the AI Prompt.
@@ -672,6 +736,18 @@ type AmazonConnectGuideAssociationData struct {
 	noSmithyDocumentSerde
 }
 
+// An annotation that provides additional context or metadata.
+type Annotation struct {
+
+	// A hint indicating that the annotation contains potentially destructive content.
+	DestructiveHint *bool
+
+	// The title of the annotation.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for the ANSWER_RECOMMENDATION AI Agent type.
 type AnswerRecommendationAIAgentConfiguration struct {
 
@@ -702,6 +778,9 @@ type AnswerRecommendationAIAgentConfiguration struct {
 	// The AI Prompt identifier for the Query Reformulation prompt used by the
 	// ANSWER_RECOMMENDATION AI Agent.
 	QueryReformulationAIPromptId *string
+
+	// The suggested messages configuration for the Answer Recommendation AI Agent.
+	SuggestedMessages []string
 
 	noSmithyDocumentSerde
 }
@@ -813,9 +892,20 @@ type AssistantAssociationData struct {
 //
 // The following types satisfy this interface:
 //
+//	AssistantAssociationInputDataMemberExternalBedrockKnowledgeBaseConfig
 //	AssistantAssociationInputDataMemberKnowledgeBaseId
 type AssistantAssociationInputData interface {
 	isAssistantAssociationInputData()
+}
+
+// The configuration for an external Bedrock knowledge base association.
+type AssistantAssociationInputDataMemberExternalBedrockKnowledgeBaseConfig struct {
+	Value ExternalBedrockKnowledgeBaseConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AssistantAssociationInputDataMemberExternalBedrockKnowledgeBaseConfig) isAssistantAssociationInputData() {
 }
 
 // The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
@@ -832,9 +922,21 @@ func (*AssistantAssociationInputDataMemberKnowledgeBaseId) isAssistantAssociatio
 //
 // The following types satisfy this interface:
 //
+//	AssistantAssociationOutputDataMemberExternalBedrockKnowledgeBaseConfig
 //	AssistantAssociationOutputDataMemberKnowledgeBaseAssociation
 type AssistantAssociationOutputData interface {
 	isAssistantAssociationOutputData()
+}
+
+// The configuration for an external Bedrock knowledge base association in the
+// output data.
+type AssistantAssociationOutputDataMemberExternalBedrockKnowledgeBaseConfig struct {
+	Value ExternalBedrockKnowledgeBaseConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AssistantAssociationOutputDataMemberExternalBedrockKnowledgeBaseConfig) isAssistantAssociationOutputData() {
 }
 
 // The knowledge base where output data is sent.
@@ -936,6 +1038,9 @@ type AssistantData struct {
 	// The configuration information for the Amazon Q in Connect assistant integration.
 	IntegrationConfiguration *AssistantIntegrationConfiguration
 
+	// The list of orchestrator configurations for the assistant.
+	OrchestratorConfigurationList []OrchestratorConfigurationEntry
+
 	// The configuration information for the customer managed key used for encryption.
 	//
 	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
@@ -1007,6 +1112,9 @@ type AssistantSummary struct {
 	// The configuration information for the Amazon Q in Connect assistant integration.
 	IntegrationConfiguration *AssistantIntegrationConfiguration
 
+	// The list of orchestrator configurations for the assistant.
+	OrchestratorConfigurationList []OrchestratorConfigurationEntry
+
 	// The configuration information for the customer managed key used for encryption.
 	//
 	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
@@ -1077,6 +1185,45 @@ type BedrockFoundationModelConfigurationForParsing struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for AI Agents of type CASE_SUMMARIZATION .
+type CaseSummarizationAIAgentConfiguration struct {
+
+	// The AI Guardrail identifier used by the Case Summarization AI Agent.
+	CaseSummarizationAIGuardrailId *string
+
+	// The AI Prompt identifier used by the Case Summarization AI Agent.
+	CaseSummarizationAIPromptId *string
+
+	// The locale setting for the Case Summarization AI Agent.
+	Locale *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about case summarization chunk data.
+type CaseSummarizationChunkDataDetails struct {
+
+	// A chunk of the case summarization completion.
+	Completion *string
+
+	// Token for retrieving the next chunk of streaming summarization data, if
+	// available.
+	NextChunkToken *string
+
+	noSmithyDocumentSerde
+}
+
+// Input data for case summarization.
+type CaseSummarizationInputData struct {
+
+	// The Amazon Resource Name (ARN) of the case for summarization.
+	//
+	// This member is required.
+	CaseArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about how to chunk the documents in the data source. A chunk refers to
 // an excerpt from a data source that is returned when the knowledge base that it
 // belongs to is queried.
@@ -1105,6 +1252,35 @@ type ChunkingConfiguration struct {
 	// splits a document into smaller documents based on groups of similar content
 	// derived from the text with natural language processing.
 	SemanticChunkingConfiguration *SemanticChunkingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A citation that references source content.
+type Citation struct {
+
+	// Contains information about where the text with a citation begins and ends in
+	// the generated output.
+	//
+	// This member is required.
+	CitationSpan *CitationSpan
+
+	// A type to define the KB origin of a cited content
+	//
+	// This member is required.
+	ReferenceType ReferenceType
+
+	// The identifier of the content being cited.
+	ContentId *string
+
+	// The identifier of the knowledge base containing the cited content.
+	KnowledgeBaseId *string
+
+	// The source URL for the citation.
+	SourceURL *string
+
+	// The title of the cited content.
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -1677,6 +1853,7 @@ type CustomerProfileAttributes struct {
 //
 // The following types satisfy this interface:
 //
+//	DataDetailsMemberCaseSummarizationChunkData
 //	DataDetailsMemberContentData
 //	DataDetailsMemberEmailGenerativeAnswerChunkData
 //	DataDetailsMemberEmailOverviewChunkData
@@ -1684,10 +1861,22 @@ type CustomerProfileAttributes struct {
 //	DataDetailsMemberGenerativeChunkData
 //	DataDetailsMemberGenerativeData
 //	DataDetailsMemberIntentDetectedData
+//	DataDetailsMemberNotesChunkData
+//	DataDetailsMemberNotesData
 //	DataDetailsMemberSourceContentData
+//	DataDetailsMemberSuggestedMessageData
 type DataDetails interface {
 	isDataDetails()
 }
+
+// Details about case summarization chunk data.
+type DataDetailsMemberCaseSummarizationChunkData struct {
+	Value CaseSummarizationChunkDataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDetailsMemberCaseSummarizationChunkData) isDataDetails() {}
 
 // Details about the content data.
 type DataDetailsMemberContentData struct {
@@ -1754,6 +1943,24 @@ type DataDetailsMemberIntentDetectedData struct {
 
 func (*DataDetailsMemberIntentDetectedData) isDataDetails() {}
 
+// Details about notes chunk data.
+type DataDetailsMemberNotesChunkData struct {
+	Value NotesChunkDataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDetailsMemberNotesChunkData) isDataDetails() {}
+
+// Details about notes data.
+type DataDetailsMemberNotesData struct {
+	Value NotesDataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDetailsMemberNotesData) isDataDetails() {}
+
 // Details about the content data.
 type DataDetailsMemberSourceContentData struct {
 	Value SourceContentDataDetails
@@ -1763,12 +1970,22 @@ type DataDetailsMemberSourceContentData struct {
 
 func (*DataDetailsMemberSourceContentData) isDataDetails() {}
 
+// Details about suggested message data.
+type DataDetailsMemberSuggestedMessageData struct {
+	Value SuggestedMessageDataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDetailsMemberSuggestedMessageData) isDataDetails() {}
+
 // Reference data.
 //
 // The following types satisfy this interface:
 //
 //	DataReferenceMemberContentReference
 //	DataReferenceMemberGenerativeReference
+//	DataReferenceMemberSuggestedMessageReference
 type DataReference interface {
 	isDataReference()
 }
@@ -1790,6 +2007,15 @@ type DataReferenceMemberGenerativeReference struct {
 }
 
 func (*DataReferenceMemberGenerativeReference) isDataReference() {}
+
+// Reference information for suggested messages.
+type DataReferenceMemberSuggestedMessageReference struct {
+	Value SuggestedMessageReference
+
+	noSmithyDocumentSerde
+}
+
+func (*DataReferenceMemberSuggestedMessageReference) isDataReference() {}
 
 // Summary of the data.
 type DataSummary struct {
@@ -2088,6 +2314,23 @@ type ExtendedMessageTemplateData struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for an external Bedrock knowledge base.
+type ExternalBedrockKnowledgeBaseConfig struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role used to access the external
+	// Bedrock knowledge base.
+	//
+	// This member is required.
+	AccessRoleArn *string
+
+	// The Amazon Resource Name (ARN) of the external Bedrock knowledge base.
+	//
+	// This member is required.
+	BedrockKnowledgeBaseArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration information of the external data source.
 type ExternalSourceConfiguration struct {
 
@@ -2121,6 +2364,22 @@ type Filter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// An attribute used for filtering.
+type FilterAttribute struct {
+
+	// The key of the filter attribute.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the filter attribute.
+	//
+	// This member is required.
+	Value document.Interface
 
 	noSmithyDocumentSerde
 }
@@ -2765,6 +3024,9 @@ type IntentDetectedDataDetails struct {
 	// This member is required.
 	IntentId *string
 
+	// The relevance level of the detected intent.
+	RelevanceLevel RelevanceLevel
+
 	noSmithyDocumentSerde
 }
 
@@ -2935,6 +3197,24 @@ type KnowledgeBaseSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A knowledge source that provides content for recommendations.
+//
+// The following types satisfy this interface:
+//
+//	KnowledgeSourceMemberAssistantAssociationIds
+type KnowledgeSource interface {
+	isKnowledgeSource()
+}
+
+// The list of assistant association identifiers for the knowledge source.
+type KnowledgeSourceMemberAssistantAssociationIds struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*KnowledgeSourceMemberAssistantAssociationIds) isKnowledgeSource() {}
+
 // Source configuration for managed resources.
 //
 // The following types satisfy this interface:
@@ -2984,6 +3264,9 @@ type ManualSearchAIAgentConfiguration struct {
 // [SendMessage]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_SendMessage.html
 type MessageConfiguration struct {
 
+	// Configuration for generating chunked messages.
+	GenerateChunkedMessage *bool
+
 	// Generates a filler response when tool selection is QUESTION .
 	GenerateFillerMessage *bool
 
@@ -2995,6 +3278,7 @@ type MessageConfiguration struct {
 // The following types satisfy this interface:
 //
 //	MessageDataMemberText
+//	MessageDataMemberToolUseResult
 type MessageData interface {
 	isMessageData()
 }
@@ -3007,6 +3291,15 @@ type MessageDataMemberText struct {
 }
 
 func (*MessageDataMemberText) isMessageData() {}
+
+// The result of tool usage in the message.
+type MessageDataMemberToolUseResult struct {
+	Value ToolUseResultData
+
+	noSmithyDocumentSerde
+}
+
+func (*MessageDataMemberToolUseResult) isMessageData() {}
 
 // The message input.
 type MessageInput struct {
@@ -3624,6 +3917,43 @@ type MessageTemplateVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Details about notes chunk data.
+type NotesChunkDataDetails struct {
+
+	// A chunk of the notes completion.
+	Completion *string
+
+	// The token for the next chunk of notes data.
+	NextChunkToken *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about notes data.
+type NotesDataDetails struct {
+
+	// The completion data for notes.
+	Completion *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for AI Agents of type NOTE_TAKING .
+type NoteTakingAIAgentConfiguration struct {
+
+	// The locale setting for language-specific case summarization generation (for
+	// example, en_US, es_ES).
+	Locale *string
+
+	// The AI Guardrail identifier used by the Note Taking AI Agent.
+	NoteTakingAIGuardrailId *string
+
+	// The AI Prompt identifier used by the Note Taking AI Agent.
+	NoteTakingAIPromptId *string
+
+	noSmithyDocumentSerde
+}
+
 // An error occurred when creating a recommendation.
 type NotifyRecommendationsReceivedError struct {
 
@@ -3632,6 +3962,45 @@ type NotifyRecommendationsReceivedError struct {
 
 	// The identifier of the recommendation that is in error.
 	RecommendationId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for AI Agents of type ORCHESTRATION .
+type OrchestrationAIAgentConfiguration struct {
+
+	// The AI Prompt identifier used by the Orchestration AI Agent.
+	//
+	// This member is required.
+	OrchestrationAIPromptId *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Connect instance used by the
+	// Orchestration AI Agent.
+	ConnectInstanceArn *string
+
+	// The locale setting for the Orchestration AI Agent.
+	Locale *string
+
+	// The AI Guardrail identifier used by the Orchestration AI Agent.
+	OrchestrationAIGuardrailId *string
+
+	// The tool configurations used by the Orchestration AI Agent.
+	ToolConfigurations []ToolConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// An entry in the orchestrator configuration list.
+type OrchestratorConfigurationEntry struct {
+
+	// The use case for the orchestrator configuration. (for example
+	// Connect.SelfService, Connect.AgentAssistance)
+	//
+	// This member is required.
+	OrchestratorUseCase *string
+
+	// The identifier of the AI Agent in the orchestrator configuration.
+	AiAgentId *string
 
 	noSmithyDocumentSerde
 }
@@ -3971,11 +4340,21 @@ type QueryConditionItem struct {
 //
 // The following types satisfy this interface:
 //
+//	QueryInputDataMemberCaseSummarizationInputData
 //	QueryInputDataMemberIntentInputData
 //	QueryInputDataMemberQueryTextInputData
 type QueryInputData interface {
 	isQueryInputData()
 }
+
+// Input data for case summarization queries.
+type QueryInputDataMemberCaseSummarizationInputData struct {
+	Value CaseSummarizationInputData
+
+	noSmithyDocumentSerde
+}
+
+func (*QueryInputDataMemberCaseSummarizationInputData) isQueryInputData() {}
 
 // Input information for the intent.
 type QueryInputDataMemberIntentInputData struct {
@@ -4614,6 +4993,191 @@ type ResultData struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for content retrieval operations.
+type RetrievalConfiguration struct {
+
+	// The knowledge source configuration for content retrieval.
+	//
+	// This member is required.
+	KnowledgeSource KnowledgeSource
+
+	// The filter configuration for content retrieval.
+	Filter RetrievalFilterConfiguration
+
+	// The number of results to retrieve.
+	NumberOfResults *int32
+
+	// Override setting for the knowledge base search type during retrieval.
+	OverrideKnowledgeBaseSearchType KnowledgeBaseSearchType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for filtering content during retrieval operations.
+//
+// The following types satisfy this interface:
+//
+//	RetrievalFilterConfigurationMemberAndAll
+//	RetrievalFilterConfigurationMemberEquals
+//	RetrievalFilterConfigurationMemberGreaterThan
+//	RetrievalFilterConfigurationMemberGreaterThanOrEquals
+//	RetrievalFilterConfigurationMemberIn
+//	RetrievalFilterConfigurationMemberLessThan
+//	RetrievalFilterConfigurationMemberLessThanOrEquals
+//	RetrievalFilterConfigurationMemberListContains
+//	RetrievalFilterConfigurationMemberNotEquals
+//	RetrievalFilterConfigurationMemberNotIn
+//	RetrievalFilterConfigurationMemberOrAll
+//	RetrievalFilterConfigurationMemberStartsWith
+//	RetrievalFilterConfigurationMemberStringContains
+type RetrievalFilterConfiguration interface {
+	isRetrievalFilterConfiguration()
+}
+
+// Filter configuration that requires all conditions to be met.
+type RetrievalFilterConfigurationMemberAndAll struct {
+	Value []RetrievalFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberAndAll) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for exact equality matching.
+type RetrievalFilterConfigurationMemberEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberEquals) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for greater than comparison.
+type RetrievalFilterConfigurationMemberGreaterThan struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberGreaterThan) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for greater than or equal comparison.
+type RetrievalFilterConfigurationMemberGreaterThanOrEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberGreaterThanOrEquals) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for membership in a set of values.
+type RetrievalFilterConfigurationMemberIn struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberIn) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for less than comparison.
+type RetrievalFilterConfigurationMemberLessThan struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberLessThan) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for less than or equal comparison.
+type RetrievalFilterConfigurationMemberLessThanOrEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberLessThanOrEquals) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for checking if a list contains a value.
+type RetrievalFilterConfigurationMemberListContains struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberListContains) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for inequality matching.
+type RetrievalFilterConfigurationMemberNotEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberNotEquals) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for exclusion from a set of values.
+type RetrievalFilterConfigurationMemberNotIn struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberNotIn) isRetrievalFilterConfiguration() {}
+
+// Filter configuration where any condition can be met.
+type RetrievalFilterConfigurationMemberOrAll struct {
+	Value []RetrievalFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberOrAll) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for prefix matching.
+type RetrievalFilterConfigurationMemberStartsWith struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberStartsWith) isRetrievalFilterConfiguration() {}
+
+// Filter configuration for substring matching.
+type RetrievalFilterConfigurationMemberStringContains struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterConfigurationMemberStringContains) isRetrievalFilterConfiguration() {}
+
+// A single result from a content retrieval operation.
+type RetrieveResult struct {
+
+	// The identifier of the assistant association for the retrieved result.
+	//
+	// This member is required.
+	AssociationId *string
+
+	// The text content of the retrieved result.
+	//
+	// This member is required.
+	ContentText *string
+
+	// A type to define the KB origin of a retrieved content.
+	//
+	// This member is required.
+	ReferenceType ReferenceType
+
+	// The URL, URI, or ID of the retrieved content when available, or a UUID when
+	// unavailable.
+	//
+	// This member is required.
+	SourceId *string
+
+	noSmithyDocumentSerde
+}
+
 // The list of key-value pairs that are stored on the session.
 type RuntimeSessionData struct {
 
@@ -4692,16 +5256,17 @@ type SelfServiceAIAgentConfiguration struct {
 // the Amazon Q in Connect session.
 type SelfServiceConversationHistory struct {
 
-	// The number of turn of the conversation history data.
-	//
-	// This member is required.
-	TurnNumber *int32
-
 	// The bot response of the conversation history data.
 	BotResponse *string
 
 	// The input transcript of the conversation history data.
 	InputTranscript *string
+
+	// The timestamp of the conversation history entry.
+	Timestamp *time.Time
+
+	// The number of turn of the conversation history data.
+	TurnNumber *int32
 
 	noSmithyDocumentSerde
 }
@@ -4770,6 +5335,9 @@ type SessionData struct {
 
 	// The configuration information for the session integration.
 	IntegrationConfiguration *SessionIntegrationConfiguration
+
+	// The list of orchestrator configurations for the session.
+	OrchestratorConfigurationList []OrchestratorConfigurationEntry
 
 	// The origin of the Session to be listed. SYSTEM for a default Session created by
 	// Amazon Q in Connect or CUSTOMER for a Session created by calling [CreateSession] API.
@@ -4899,6 +5467,343 @@ type SourceContentDataDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A span represents a unit of work during AI agent execution, capturing timing,
+// status, and contextual attributes.
+type Span struct {
+
+	// UUID of the Connect AI Assistant resource
+	//
+	// This member is required.
+	AssistantId *string
+
+	// Span-specific contextual attributes
+	//
+	// This member is required.
+	Attributes *SpanAttributes
+
+	// Operation end time in milliseconds since epoch
+	//
+	// This member is required.
+	EndTimestamp *time.Time
+
+	// The service request ID that initiated the operation
+	//
+	// This member is required.
+	RequestId *string
+
+	// UUID of the Connect AI Session resource
+	//
+	// This member is required.
+	SessionId *string
+
+	// Unique span identifier
+	//
+	// This member is required.
+	SpanId *string
+
+	// Service-defined operation name
+	//
+	// This member is required.
+	SpanName *string
+
+	// Operation relationship type
+	//
+	// This member is required.
+	SpanType SpanType
+
+	// Operation start time in milliseconds since epoch
+	//
+	// This member is required.
+	StartTimestamp *time.Time
+
+	// Span completion status
+	//
+	// This member is required.
+	Status SpanStatus
+
+	// Parent span identifier for hierarchy. Null for root spans.
+	ParentSpanId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contextual attributes capturing operation details, LLM configuration, usage
+// metrics, and conversation data
+type SpanAttributes struct {
+
+	// Amazon Connect agent ID
+	AgentId *string
+
+	// AI agent ARN
+	AiAgentArn *string
+
+	// AI agent identifier
+	AiAgentId *string
+
+	// Entity that invoked the AI agent
+	AiAgentInvoker *string
+
+	// AI agent name
+	AiAgentName *string
+
+	// AI agent orchestrator use case
+	AiAgentOrchestratorUseCase *string
+
+	// AI agent type
+	AiAgentType AIAgentType
+
+	// AI agent version number
+	AiAgentVersion *int32
+
+	// Number of input tokens that were retrieved from cache
+	CacheReadInputTokens *int32
+
+	// Number of input tokens that were written to cache in this request
+	CacheWriteInputTokens *int32
+
+	// Amazon Connect contact identifier
+	ContactId *string
+
+	// Error classification if span failed (e.g., throttle, timeout)
+	ErrorType *string
+
+	// Amazon Connect contact identifier
+	InitialContactId *string
+
+	// Input message collection sent to LLM
+	InputMessages []SpanMessage
+
+	// Amazon Connect instance ARN
+	InstanceArn *string
+
+	// Action being performed
+	OperationName *string
+
+	// Output message collection received from LLM
+	OutputMessages []SpanMessage
+
+	// AI prompt ARN
+	PromptArn *string
+
+	// AI prompt identifier
+	PromptId *string
+
+	// AI prompt name
+	PromptName *string
+
+	// AI prompt type
+	PromptType AIPromptType
+
+	// AI prompt version number
+	PromptVersion *int32
+
+	// Model provider identifier (e.g., aws.bedrock)
+	ProviderName *string
+
+	// Maximum tokens configured for generation
+	RequestMaxTokens *int32
+
+	// LLM model ID for request (e.g., anthropic.claude-3-sonnet)
+	RequestModel *string
+
+	// Generation termination reasons (e.g., stop, max_tokens)
+	ResponseFinishReasons []string
+
+	// Actual model used for response (usually matches requestModel)
+	ResponseModel *string
+
+	// Session name
+	SessionName *string
+
+	// System prompt instructions
+	SystemInstructions []SpanMessageValue
+
+	// Sampling temperature for generation
+	Temperature *float32
+
+	// Top-p sampling parameter for generation
+	TopP *float32
+
+	// Number of input tokens in prompt
+	UsageInputTokens *int32
+
+	// Number of output tokens in response
+	UsageOutputTokens *int32
+
+	// Total tokens consumed (input + output)
+	UsageTotalTokens *int32
+
+	noSmithyDocumentSerde
+}
+
+// A citation that spans a specific range of text.
+type SpanCitation struct {
+
+	// The identifier of the content being cited in the span.
+	ContentId *string
+
+	// The Amazon Resource Name (ARN) of the knowledge base containing the cited
+	// content.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base containing the cited content.
+	KnowledgeBaseId *string
+
+	// The title of the content being cited in the span.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// A message in the conversation history with participant role and content values
+type SpanMessage struct {
+
+	// Unique message identifier
+	//
+	// This member is required.
+	MessageId *string
+
+	// Message source role
+	//
+	// This member is required.
+	Participant Participant
+
+	// Message timestamp
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// Message content values (text, tool use, tool result)
+	//
+	// This member is required.
+	Values []SpanMessageValue
+
+	noSmithyDocumentSerde
+}
+
+// Message content value - can be text, tool invocation, or tool result
+//
+// The following types satisfy this interface:
+//
+//	SpanMessageValueMemberText
+//	SpanMessageValueMemberToolResult
+//	SpanMessageValueMemberToolUse
+type SpanMessageValue interface {
+	isSpanMessageValue()
+}
+
+// Text message content
+type SpanMessageValueMemberText struct {
+	Value SpanTextValue
+
+	noSmithyDocumentSerde
+}
+
+func (*SpanMessageValueMemberText) isSpanMessageValue() {}
+
+// Tool result message content
+type SpanMessageValueMemberToolResult struct {
+	Value SpanToolResultValue
+
+	noSmithyDocumentSerde
+}
+
+func (*SpanMessageValueMemberToolResult) isSpanMessageValue() {}
+
+// Tool invocation message content
+type SpanMessageValueMemberToolUse struct {
+	Value SpanToolUseValue
+
+	noSmithyDocumentSerde
+}
+
+func (*SpanMessageValueMemberToolUse) isSpanMessageValue() {}
+
+// Text message content
+type SpanTextValue struct {
+
+	// String content of the message text
+	//
+	// This member is required.
+	Value *string
+
+	// The AI Guardrail assessment for the span text.
+	AiGuardrailAssessment *AIGuardrailAssessment
+
+	// The citations associated with the span text.
+	Citations []SpanCitation
+
+	noSmithyDocumentSerde
+}
+
+// Tool result message content
+type SpanToolResultValue struct {
+
+	// Relates this result back to the tool invocation
+	//
+	// This member is required.
+	ToolUseId *string
+
+	// The tool results
+	//
+	// This member is required.
+	Values []SpanMessageValue
+
+	// The tool invocation error if failed
+	Error *string
+
+	noSmithyDocumentSerde
+}
+
+// Tool invocation message content
+type SpanToolUseValue struct {
+
+	// The tool input arguments
+	//
+	// This member is required.
+	Arguments document.Interface
+
+	// The tool name
+	//
+	// This member is required.
+	Name *string
+
+	// Unique ID for this tool invocation
+	//
+	// This member is required.
+	ToolUseId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about suggested message data.
+type SuggestedMessageDataDetails struct {
+
+	// The text content of the suggested message.
+	//
+	// This member is required.
+	MessageText *string
+
+	noSmithyDocumentSerde
+}
+
+// Reference information for a suggested message.
+type SuggestedMessageReference struct {
+
+	// The Amazon Resource Name (ARN) of the AI Agent that generated the suggested
+	// message.
+	//
+	// This member is required.
+	AiAgentArn *string
+
+	// The identifier of the AI Agent that generated the suggested message.
+	//
+	// This member is required.
+	AiAgentId *string
+
+	noSmithyDocumentSerde
+}
+
 // The system attributes that are used with the message template.
 type SystemAttributes struct {
 
@@ -4976,6 +5881,24 @@ type TagFilterMemberTagCondition struct {
 
 func (*TagFilterMemberTagCondition) isTagFilter() {}
 
+// Inference configuration for text-based AI Prompts.
+type TextAIPromptInferenceConfiguration struct {
+
+	// The maximum number of tokens to generate in the response.
+	MaxTokensToSample int32
+
+	// The temperature setting for controlling randomness in the generated response.
+	Temperature float32
+
+	// The top-K sampling parameter for token selection.
+	TopK int32
+
+	// The top-P sampling parameter for nucleus sampling.
+	TopP float32
+
+	noSmithyDocumentSerde
+}
+
 // Details about the source content text data.
 type TextData struct {
 
@@ -5003,8 +5926,173 @@ type TextFullAIPromptEditTemplateConfiguration struct {
 // The message data in text type.
 type TextMessage struct {
 
+	// The AI Guardrail assessment for the text message.
+	AiGuardrailAssessment *AIGuardrailAssessment
+
+	// The citations associated with the text message.
+	Citations []Citation
+
 	// The value of the message data in text type.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for a tool used by AI Agents.
+type ToolConfiguration struct {
+
+	// The name of the tool.
+	//
+	// This member is required.
+	ToolName *string
+
+	// The type of the tool.
+	//
+	// This member is required.
+	ToolType ToolType
+
+	// Annotations for the tool configuration.
+	Annotations *Annotation
+
+	// The description of the tool configuration.
+	Description *string
+
+	// The input schema for the tool configuration.
+	InputSchema document.Interface
+
+	// Instructions for using the tool.
+	Instruction *ToolInstruction
+
+	// Output filters applies to the tool result.
+	OutputFilters []ToolOutputFilter
+
+	// The output schema for the tool configuration.
+	OutputSchema document.Interface
+
+	// Override input values for the tool configuration.
+	OverrideInputValues []ToolOverrideInputValue
+
+	// The title of the tool configuration.
+	Title *string
+
+	// The identifier of the tool, for example toolName from Model Context Provider
+	// server.
+	ToolId *string
+
+	// Configuration for user interaction with the tool.
+	UserInteractionConfiguration *UserInteractionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Instructions for using a tool.
+type ToolInstruction struct {
+
+	// Examples for using the tool.
+	Examples []string
+
+	// The instruction text for the tool.
+	Instruction *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for tool output handling.
+type ToolOutputConfiguration struct {
+
+	// Override the tool output results to different variable name.
+	OutputVariableNameOverride *string
+
+	// The session data namespace for tool output.
+	SessionDataNamespace *string
+
+	noSmithyDocumentSerde
+}
+
+// Filter configuration for tool output.
+type ToolOutputFilter struct {
+
+	// The JSON path for filtering tool output.
+	//
+	// This member is required.
+	JsonPath *string
+
+	// The output configuration for the filter.
+	OutputConfiguration *ToolOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A constant input value for tool override.
+type ToolOverrideConstantInputValue struct {
+
+	// Override tool input value with constant values
+	//
+	// This member is required.
+	Type ToolOverrideInputValueType
+
+	// The constant input override value.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// An input value override for tools.
+type ToolOverrideInputValue struct {
+
+	// The JSON path for the input value override.
+	//
+	// This member is required.
+	JsonPath *string
+
+	// The override input value.
+	//
+	// This member is required.
+	Value ToolOverrideInputValueConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for overriding tool input values.
+//
+// The following types satisfy this interface:
+//
+//	ToolOverrideInputValueConfigurationMemberConstant
+type ToolOverrideInputValueConfiguration interface {
+	isToolOverrideInputValueConfiguration()
+}
+
+// Constant input value configuration for tool override.
+type ToolOverrideInputValueConfigurationMemberConstant struct {
+	Value ToolOverrideConstantInputValue
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolOverrideInputValueConfigurationMemberConstant) isToolOverrideInputValueConfiguration() {}
+
+// Data about the result of tool usage.
+type ToolUseResultData struct {
+
+	// The name of the tool that was used.
+	//
+	// This member is required.
+	ToolName *string
+
+	// The result of the tool usage.
+	//
+	// This member is required.
+	ToolResult document.Interface
+
+	// The identifier of the tool use instance.
+	//
+	// This member is required.
+	ToolUseId *string
+
+	// The input schema for the tool use result.
+	InputSchema document.Interface
 
 	noSmithyDocumentSerde
 }
@@ -5015,6 +6103,15 @@ type UrlConfiguration struct {
 
 	// List of URLs for crawling.
 	SeedUrls []SeedUrl
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for user interaction settings.
+type UserInteractionConfiguration struct {
+
+	// Indicates whether user confirmation is required for the interaction.
+	IsUserConfirmationRequired *bool
 
 	noSmithyDocumentSerde
 }
@@ -5154,6 +6251,7 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAIAgentConfiguration()                      {}
+func (*UnknownUnionMember) isAIPromptInferenceConfiguration()            {}
 func (*UnknownUnionMember) isAIPromptTemplateConfiguration()             {}
 func (*UnknownUnionMember) isAssistantAssociationInputData()             {}
 func (*UnknownUnionMember) isAssistantAssociationOutputData()            {}
@@ -5163,6 +6261,7 @@ func (*UnknownUnionMember) isContentAssociationContents()                {}
 func (*UnknownUnionMember) isContentFeedbackData()                       {}
 func (*UnknownUnionMember) isDataDetails()                               {}
 func (*UnknownUnionMember) isDataReference()                             {}
+func (*UnknownUnionMember) isKnowledgeSource()                           {}
 func (*UnknownUnionMember) isManagedSourceConfiguration()                {}
 func (*UnknownUnionMember) isMessageData()                               {}
 func (*UnknownUnionMember) isMessageTemplateBodyContentProvider()        {}
@@ -5175,6 +6274,9 @@ func (*UnknownUnionMember) isQueryInputData()                            {}
 func (*UnknownUnionMember) isQuickResponseContentProvider()              {}
 func (*UnknownUnionMember) isQuickResponseDataProvider()                 {}
 func (*UnknownUnionMember) isRecommendationTriggerData()                 {}
+func (*UnknownUnionMember) isRetrievalFilterConfiguration()              {}
 func (*UnknownUnionMember) isRuntimeSessionDataValue()                   {}
 func (*UnknownUnionMember) isSourceConfiguration()                       {}
+func (*UnknownUnionMember) isSpanMessageValue()                          {}
 func (*UnknownUnionMember) isTagFilter()                                 {}
+func (*UnknownUnionMember) isToolOverrideInputValueConfiguration()       {}

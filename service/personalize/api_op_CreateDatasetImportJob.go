@@ -82,12 +82,6 @@ type CreateDatasetImportJobInput struct {
 	// This member is required.
 	JobName *string
 
-	// The ARN of the IAM role that has permissions to read from the Amazon S3 data
-	// source.
-	//
-	// This member is required.
-	RoleArn *string
-
 	// Specify how to add the new records to an existing dataset. The default import
 	// mode is FULL . If you haven't imported bulk records into the dataset previously,
 	// you can only specify FULL .
@@ -103,6 +97,10 @@ type CreateDatasetImportJobInput struct {
 	// If you created a metric attribution, specify whether to publish metrics for
 	// this import job to Amazon S3
 	PublishAttributionMetricsToS3 *bool
+
+	// The ARN of the IAM role that has permissions to read from the Amazon S3 data
+	// source.
+	RoleArn *string
 
 	// A list of [tags] to apply to the dataset import job.
 	//

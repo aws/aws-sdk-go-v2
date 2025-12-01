@@ -31,11 +31,6 @@ func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput
 // The request for CreateCampaign API.
 type CreateCampaignInput struct {
 
-	// Campaign Channel Subtype config
-	//
-	// This member is required.
-	ChannelSubtypeConfig *types.ChannelSubtypeConfig
-
 	// Amazon Connect Instance Id
 	//
 	// This member is required.
@@ -45,6 +40,9 @@ type CreateCampaignInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// Campaign Channel Subtype config
+	ChannelSubtypeConfig *types.ChannelSubtypeConfig
 
 	// Communication limits config
 	CommunicationLimitsOverride *types.CommunicationLimitsConfig
@@ -63,6 +61,9 @@ type CreateCampaignInput struct {
 
 	// Tag map with key and value.
 	Tags map[string]string
+
+	// The type of campaign externally exposed in APIs.
+	Type types.ExternalCampaignType
 
 	noSmithyDocumentSerde
 }

@@ -90,6 +90,9 @@ type CreateAIPromptInput struct {
 	// The description of the AI Prompt.
 	Description *string
 
+	// The inference configuration for the AI Prompt being created.
+	InferenceConfiguration types.AIPromptInferenceConfiguration
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 

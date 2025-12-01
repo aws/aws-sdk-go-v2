@@ -7262,6 +7262,45 @@ func awsRestjson1_serializeDocumentAPISchema(v types.APISchema, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioConfiguration(v *types.AudioConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SegmentationConfiguration != nil {
+		ok := object.Key("segmentationConfiguration")
+		if err := awsRestjson1_serializeDocumentAudioSegmentationConfiguration(v.SegmentationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudioConfigurations(v []types.AudioConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAudioConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudioSegmentationConfiguration(v *types.AudioSegmentationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FixedLengthDuration != nil {
+		ok := object.Key("fixedLengthDuration")
+		ok.Integer(*v.FixedLengthDuration)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAutoToolChoice(v *types.AutoToolChoice, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7296,6 +7335,13 @@ func awsRestjson1_serializeDocumentBedrockEmbeddingModelConfiguration(v *types.B
 	object := value.Object()
 	defer object.Close()
 
+	if v.Audio != nil {
+		ok := object.Key("audio")
+		if err := awsRestjson1_serializeDocumentAudioConfigurations(v.Audio, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Dimensions != nil {
 		ok := object.Key("dimensions")
 		ok.Integer(*v.Dimensions)
@@ -7304,6 +7350,13 @@ func awsRestjson1_serializeDocumentBedrockEmbeddingModelConfiguration(v *types.B
 	if len(v.EmbeddingDataType) > 0 {
 		ok := object.Key("embeddingDataType")
 		ok.String(string(v.EmbeddingDataType))
+	}
+
+	if v.Video != nil {
+		ok := object.Key("video")
+		if err := awsRestjson1_serializeDocumentVideoConfigurations(v.Video, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -11386,6 +11439,45 @@ func awsRestjson1_serializeDocumentVectorSearchRerankingConfiguration(v *types.V
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoConfiguration(v *types.VideoConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SegmentationConfiguration != nil {
+		ok := object.Key("segmentationConfiguration")
+		if err := awsRestjson1_serializeDocumentVideoSegmentationConfiguration(v.SegmentationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoConfigurations(v []types.VideoConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentVideoConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoSegmentationConfiguration(v *types.VideoSegmentationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FixedLengthDuration != nil {
+		ok := object.Key("fixedLengthDuration")
+		ok.Integer(*v.FixedLengthDuration)
 	}
 
 	return nil

@@ -20676,6 +20676,35 @@ func awsAwsjson11_serializeDocumentIcebergDocument(v document.Interface, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIcebergEncryptedKey(v *types.IcebergEncryptedKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptedById != nil {
+		ok := object.Key("EncryptedById")
+		ok.String(*v.EncryptedById)
+	}
+
+	if v.EncryptedKeyMetadata != nil {
+		ok := object.Key("EncryptedKeyMetadata")
+		ok.String(*v.EncryptedKeyMetadata)
+	}
+
+	if v.KeyId != nil {
+		ok := object.Key("KeyId")
+		ok.String(*v.KeyId)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsAwsjson11_serializeDocumentStringToStringMap(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIcebergInput(v *types.IcebergInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20945,6 +20974,13 @@ func awsAwsjson11_serializeDocumentIcebergStructField(v *types.IcebergStructFiel
 		ok.Integer(v.Id)
 	}
 
+	if v.InitialDefault != nil {
+		ok := object.Key("InitialDefault")
+		if err := awsAwsjson11_serializeDocumentIcebergDocument(v.InitialDefault, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -20958,6 +20994,13 @@ func awsAwsjson11_serializeDocumentIcebergStructField(v *types.IcebergStructFiel
 	if v.Type != nil {
 		ok := object.Key("Type")
 		if err := awsAwsjson11_serializeDocumentIcebergDocument(v.Type, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WriteDefault != nil {
+		ok := object.Key("WriteDefault")
+		if err := awsAwsjson11_serializeDocumentIcebergDocument(v.WriteDefault, ok); err != nil {
 			return err
 		}
 	}
@@ -20981,6 +21024,23 @@ func awsAwsjson11_serializeDocumentIcebergStructFieldList(v []types.IcebergStruc
 func awsAwsjson11_serializeDocumentIcebergTableUpdate(v *types.IcebergTableUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("Action")
+		ok.String(string(v.Action))
+	}
+
+	if v.EncryptionKey != nil {
+		ok := object.Key("EncryptionKey")
+		if err := awsAwsjson11_serializeDocumentIcebergEncryptedKey(v.EncryptionKey, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KeyId != nil {
+		ok := object.Key("KeyId")
+		ok.String(*v.KeyId)
+	}
 
 	if v.Location != nil {
 		ok := object.Key("Location")
@@ -26906,6 +26966,16 @@ func awsAwsjson11_serializeDocumentViewDefinitionInput(v *types.ViewDefinitionIn
 		ok.Boolean(*v.IsProtected)
 	}
 
+	if len(v.LastRefreshType) > 0 {
+		ok := object.Key("LastRefreshType")
+		ok.String(string(v.LastRefreshType))
+	}
+
+	if v.RefreshSeconds != nil {
+		ok := object.Key("RefreshSeconds")
+		ok.Long(*v.RefreshSeconds)
+	}
+
 	if v.Representations != nil {
 		ok := object.Key("Representations")
 		if err := awsAwsjson11_serializeDocumentViewRepresentationInputList(v.Representations, ok); err != nil {
@@ -26918,6 +26988,23 @@ func awsAwsjson11_serializeDocumentViewDefinitionInput(v *types.ViewDefinitionIn
 		if err := awsAwsjson11_serializeDocumentViewSubObjectsList(v.SubObjects, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SubObjectVersionIds != nil {
+		ok := object.Key("SubObjectVersionIds")
+		if err := awsAwsjson11_serializeDocumentViewSubObjectVersionIdsList(v.SubObjectVersionIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ViewVersionId != 0 {
+		ok := object.Key("ViewVersionId")
+		ok.Long(v.ViewVersionId)
+	}
+
+	if v.ViewVersionToken != nil {
+		ok := object.Key("ViewVersionToken")
+		ok.String(*v.ViewVersionToken)
 	}
 
 	return nil
@@ -26975,6 +27062,17 @@ func awsAwsjson11_serializeDocumentViewSubObjectsList(v []string, value smithyjs
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentViewSubObjectVersionIdsList(v []int64, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Long(v[i])
 	}
 	return nil
 }

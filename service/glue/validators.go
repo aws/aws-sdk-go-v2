@@ -7411,6 +7411,24 @@ func validateGroupFiltersList(v []types.GroupFilters) error {
 	}
 }
 
+func validateIcebergEncryptedKey(v *types.IcebergEncryptedKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergEncryptedKey"}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if v.EncryptedKeyMetadata == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptedKeyMetadata"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIcebergInput(v *types.IcebergInput) error {
 	if v == nil {
 		return nil
@@ -7620,6 +7638,11 @@ func validateIcebergTableUpdate(v *types.IcebergTableUpdate) error {
 	}
 	if v.Location == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if v.EncryptionKey != nil {
+		if err := validateIcebergEncryptedKey(v.EncryptionKey); err != nil {
+			invalidParams.AddNested("EncryptionKey", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -96,11 +96,8 @@ type AddPermissionInput struct {
 	// [Control access to Lambda function URLs]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
 	FunctionUrlAuthType types.FunctionUrlAuthType
 
-	// Restricts the lambda:InvokeFunction action to function URL calls. When
-	// specified, this option prevents the principal from invoking the function by any
-	// means other than the function URL. For more information, see [Control access to Lambda function URLs].
-	//
-	// [Control access to Lambda function URLs]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+	// Indicates whether the permission applies when the function is invoked through a
+	// function URL.
 	InvokedViaFunctionUrl *bool
 
 	// The identifier for your organization in Organizations. Use this to grant

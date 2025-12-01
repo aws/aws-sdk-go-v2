@@ -44,6 +44,9 @@ type ApplicationSourceConfig struct {
 // Summary information about the Application.
 type ApplicationSummary struct {
 
+	// The type of application.
+	ApplicationType ApplicationType
+
 	// The Amazon Resource Name (ARN) of the Application.
 	Arn *string
 
@@ -54,6 +57,8 @@ type ApplicationSummary struct {
 	Id *string
 
 	// Indicates whether the application is a service.
+	//
+	// Deprecated: IsService has been deprecated in favor of ApplicationType
 	IsService bool
 
 	// The time when the application was last modified.

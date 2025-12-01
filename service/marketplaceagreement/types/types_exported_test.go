@@ -44,6 +44,9 @@ func ExampleAcceptedTerm_outputUsage() {
 	case *types.AcceptedTermMemberValidityTerm:
 		_ = v.Value // Value is types.ValidityTerm
 
+	case *types.AcceptedTermMemberVariablePaymentTerm:
+		_ = v.Value // Value is types.VariablePaymentTerm
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -59,6 +62,7 @@ var _ *types.ValidityTerm
 var _ *types.RecurringPaymentTerm
 var _ *types.UsageBasedPricingTerm
 var _ *types.RenewalTerm
+var _ *types.VariablePaymentTerm
 var _ *types.FreeTrialPricingTerm
 var _ *types.LegalTerm
 var _ *types.ConfigurableUpfrontPricingTerm

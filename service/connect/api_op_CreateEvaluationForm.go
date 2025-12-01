@@ -51,6 +51,9 @@ type CreateEvaluationFormInput struct {
 	// This member is required.
 	Title *string
 
+	// A boolean flag indicating whether to create evaluation form in draft state.
+	AsDraft bool
+
 	// Configuration information about automated evaluations.
 	AutoEvaluationConfiguration *types.EvaluationFormAutoEvaluationConfiguration
 
@@ -64,12 +67,18 @@ type CreateEvaluationFormInput struct {
 	// The description of the evaluation form.
 	Description *string
 
+	// Configuration for language settings of the evaluation form.
+	LanguageConfiguration *types.EvaluationFormLanguageConfiguration
+
 	// A scoring strategy of the evaluation form.
 	ScoringStrategy *types.EvaluationFormScoringStrategy
 
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	// Configuration that specifies the target for the evaluation form.
+	TargetConfiguration *types.EvaluationFormTargetConfiguration
 
 	noSmithyDocumentSerde
 }

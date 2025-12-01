@@ -111,6 +111,11 @@ type GetCollaborationMLInputChannelOutput struct {
 	// Details about the status of a resource.
 	StatusDetails *types.StatusDetails
 
+	// The synthetic data configuration for this ML input channel, including
+	// parameters for generating privacy-preserving synthetic data and evaluation
+	// scores for measuring the privacy of the generated data.
+	SyntheticDataConfiguration *types.SyntheticDataConfiguration
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

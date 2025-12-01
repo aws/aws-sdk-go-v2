@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Returns a list of third-party applications in a specific security profile.
+// Returns a list of third-party applications or MCP Servers in a specific
+// security profile.
 func (c *Client) ListSecurityProfileApplications(ctx context.Context, params *ListSecurityProfileApplicationsInput, optFns ...func(*Options)) (*ListSecurityProfileApplicationsOutput, error) {
 	if params == nil {
 		params = &ListSecurityProfileApplicationsInput{}

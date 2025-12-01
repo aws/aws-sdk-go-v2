@@ -50,6 +50,9 @@ type DescribeUpdateInput struct {
 	// [ListAddons]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
 	AddonName *string
 
+	// The name of the capability for which you want to describe updates.
+	CapabilityName *string
+
 	// The name of the Amazon EKS node group associated with the update. This
 	// parameter is required if the update is a node group update.
 	NodegroupName *string

@@ -2,6 +2,27 @@
 
 package types
 
+type ApplicationType string
+
+// Enum values for ApplicationType
+const (
+	ApplicationTypeStandard  ApplicationType = "STANDARD"
+	ApplicationTypeService   ApplicationType = "SERVICE"
+	ApplicationTypeMcpServer ApplicationType = "MCP_SERVER"
+)
+
+// Values returns all known values for ApplicationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationType) Values() []ApplicationType {
+	return []ApplicationType{
+		"STANDARD",
+		"SERVICE",
+		"MCP_SERVER",
+	}
+}
+
 type ContactHandlingScope string
 
 // Enum values for ContactHandlingScope

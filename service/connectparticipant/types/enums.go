@@ -102,6 +102,27 @@ func (MeetingFeatureStatus) Values() []MeetingFeatureStatus {
 	}
 }
 
+type MessageProcessingStatus string
+
+// Enum values for MessageProcessingStatus
+const (
+	MessageProcessingStatusProcessing MessageProcessingStatus = "PROCESSING"
+	MessageProcessingStatusFailed     MessageProcessingStatus = "FAILED"
+	MessageProcessingStatusRejected   MessageProcessingStatus = "REJECTED"
+)
+
+// Values returns all known values for MessageProcessingStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MessageProcessingStatus) Values() []MessageProcessingStatus {
+	return []MessageProcessingStatus{
+		"PROCESSING",
+		"FAILED",
+		"REJECTED",
+	}
+}
+
 type ParticipantRole string
 
 // Enum values for ParticipantRole

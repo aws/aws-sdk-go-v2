@@ -747,6 +747,24 @@ func (LogType) Values() []LogType {
 	}
 }
 
+type MembershipInferenceAttackVersion string
+
+// Enum values for MembershipInferenceAttackVersion
+const (
+	MembershipInferenceAttackVersionDistanceToClosestRecordV1 MembershipInferenceAttackVersion = "DISTANCE_TO_CLOSEST_RECORD_V1"
+)
+
+// Values returns all known values for MembershipInferenceAttackVersion. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MembershipInferenceAttackVersion) Values() []MembershipInferenceAttackVersion {
+	return []MembershipInferenceAttackVersion{
+		"DISTANCE_TO_CLOSEST_RECORD_V1",
+	}
+}
+
 type MetricsStatus string
 
 // Enum values for MetricsStatus
@@ -893,6 +911,25 @@ func (SharedAudienceMetrics) Values() []SharedAudienceMetrics {
 	return []SharedAudienceMetrics{
 		"ALL",
 		"NONE",
+	}
+}
+
+type SyntheticDataColumnType string
+
+// Enum values for SyntheticDataColumnType
+const (
+	SyntheticDataColumnTypeCategorical SyntheticDataColumnType = "CATEGORICAL"
+	SyntheticDataColumnTypeNumerical   SyntheticDataColumnType = "NUMERICAL"
+)
+
+// Values returns all known values for SyntheticDataColumnType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SyntheticDataColumnType) Values() []SyntheticDataColumnType {
+	return []SyntheticDataColumnType{
+		"CATEGORICAL",
+		"NUMERICAL",
 	}
 }
 

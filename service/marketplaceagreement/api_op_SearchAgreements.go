@@ -11,42 +11,85 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches across all agreements that a proposer or an acceptor has in AWS
-// Marketplace. The search returns a list of agreements with basic agreement
-// information.
+// Searches across all agreements that a proposer has in AWS Marketplace. The
+// search returns a list of agreements with basic agreement information.
 //
-// The following filter combinations are supported:
+// The following filter combinations are supported when the PartyType is Proposer :
 //
-//   - PartyType as Proposer + AgreementType + ResourceIdentifier
+//   - AgreementType
 //
-//   - PartyType as Proposer + AgreementType + OfferId
+//   - AgreementType + EndTime
 //
-//   - PartyType as Proposer + AgreementType + AcceptorAccountId
+//   - AgreementType + ResourceType
 //
-//   - PartyType as Proposer + AgreementType + Status
+//   - AgreementType + ResourceType + EndTime
 //
-//   - PartyType as Proposer + AgreementType + ResourceIdentifier + Status
+//   - AgreementType + ResourceType + Status
 //
-//   - PartyType as Proposer + AgreementType + OfferId + Status
+//   - AgreementType + ResourceType + Status + EndTime
 //
-//   - PartyType as Proposer + AgreementType + AcceptorAccountId + Status
+//   - AgreementType + ResourceId
 //
-//   - PartyType as Proposer + AgreementType + ResourceType + Status
+//   - AgreementType + ResourceId + EndTime
 //
-//   - PartyType as Proposer + AgreementType + AcceptorAccountId + ResourceType +
-//     Status
+//   - AgreementType + ResourceId + Status
 //
-//   - PartyType as Proposer + AgreementType + AcceptorAccountId + OfferId
+//   - AgreementType + ResourceId + Status + EndTime
 //
-//   - PartyType as Proposer + AgreementType + AcceptorAccountId + OfferId + Status
+//   - AgreementType + AcceptorAccountId
 //
-//   - PartyType as Proposer + AgreementType + AcceptorAccountId +
-//     ResourceIdentifier
+//   - AgreementType + AcceptorAccountId + EndTime
 //
-//   - PartyType as Proposer + AgreementType + AcceptorAccountId +
-//     ResourceIdentifier + Status
+//   - AgreementType + AcceptorAccountId + Status
 //
-//   - PartyType as Proposer + AgreementType + AcceptorAccountId + ResourceType
+//   - AgreementType + AcceptorAccountId + Status + EndTime
+//
+//   - AgreementType + AcceptorAccountId + OfferId
+//
+//   - AgreementType + AcceptorAccountId + OfferId + Status
+//
+//   - AgreementType + AcceptorAccountId + OfferId + EndTime
+//
+//   - AgreementType + AcceptorAccountId + OfferId + Status + EndTime
+//
+//   - AgreementType + AcceptorAccountId + ResourceId
+//
+//   - AgreementType + AcceptorAccountId + ResourceId + Status
+//
+//   - AgreementType + AcceptorAccountId + ResourceId + EndTime
+//
+//   - AgreementType + AcceptorAccountId + ResourceId + Status + EndTime
+//
+//   - AgreementType + AcceptorAccountId + ResourceType
+//
+//   - AgreementType + AcceptorAccountId + ResourceType + EndTime
+//
+//   - AgreementType + AcceptorAccountId + ResourceType + Status
+//
+//   - AgreementType + AcceptorAccountId + ResourceType + Status + EndTime
+//
+//   - AgreementType + Status
+//
+//   - AgreementType + Status + EndTime
+//
+//   - AgreementType + OfferId
+//
+//   - AgreementType + OfferId + EndTime
+//
+//   - AgreementType + OfferId + Status
+//
+//   - AgreementType + OfferId + Status + EndTime
+//
+//   - AgreementType + OfferSetId
+//
+//   - AgreementType + OfferSetId + EndTime
+//
+//   - AgreementType + OfferSetId + Status
+//
+//   - AgreementType + OfferSetId + Status + EndTime
+//
+// To filter by EndTime , you can use either BeforeEndTime or AfterEndTime . Only
+// EndTime is supported for sorting.
 func (c *Client) SearchAgreements(ctx context.Context, params *SearchAgreementsInput, optFns ...func(*Options)) (*SearchAgreementsOutput, error) {
 	if params == nil {
 		params = &SearchAgreementsInput{}
@@ -74,11 +117,11 @@ type SearchAgreementsInput struct {
 	//   - ResourceIdentifier – The unique identifier of the resource.
 	//
 	//   - ResourceType – Type of the resource, which is the product ( AmiProduct ,
-	//   ContainerProduct , or SaaSProduct ).
+	//   ContainerProduct , SaaSProduct , ProfessionalServicesProduct , or
+	//   MachineLearningProduct ).
 	//
-	//   - PartyType – The party type (either Acceptor or Proposer ) of the caller. For
-	//   agreements where the caller is the proposer, use the Proposer filter. For
-	//   agreements where the caller is the acceptor, use the Acceptor filter.
+	//   - PartyType – The party type of the caller. For agreements where the caller is
+	//   the proposer, use the Proposer filter.
 	//
 	//   - AcceptorAccountId – The AWS account ID of the party accepting the agreement
 	//   terms.
@@ -95,8 +138,12 @@ type SearchAgreementsInput struct {
 	//   - AfterEndTime – A date used to filter agreements with a date after the
 	//   endTime of an agreement.
 	//
-	//   - AgreementType – The type of agreement. Values include PurchaseAgreement or
-	//   VendorInsightsAgreement .
+	//   - AgreementType – The type of agreement. Supported value includes
+	//   PurchaseAgreement .
+	//
+	//   - OfferSetId – A unique identifier for the offer set containing this offer.
+	//   All agreements created from offers in this set include this identifier as
+	//   context.
 	Filters []types.Filter
 
 	// The maximum number of agreements to return in the response.
@@ -105,7 +152,8 @@ type SearchAgreementsInput struct {
 	// A token to specify where to start pagination.
 	NextToken *string
 
-	// An object that contains the SortBy and SortOrder attributes.
+	// An object that contains the SortBy and SortOrder attributes. Only EndTime is
+	// supported for SearchAgreements . The default sort is EndTime descending.
 	Sort *types.Sort
 
 	noSmithyDocumentSerde
@@ -114,7 +162,7 @@ type SearchAgreementsInput struct {
 type SearchAgreementsOutput struct {
 
 	// A summary of the agreement, including top-level attributes (for example, the
-	// agreement ID, version, proposer, and acceptor).
+	// agreement ID, proposer, and acceptor).
 	AgreementViewSummaries []types.AgreementViewSummary
 
 	// The token used for pagination. The field is null if there are no more results.

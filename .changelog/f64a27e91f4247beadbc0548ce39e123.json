@@ -1,0 +1,8 @@
+{
+    "id": "f64a27e9-1f42-47be-adbc-0548ce39e123",
+    "type": "feature",
+    "description": "This release adds support for includedDatasetColumns and performIncrementalUpdate in solution APIs, and rankingInfluence in campaign and batch inference APIs.",
+    "modules": [
+        "service/personalize"
+    ]
+}

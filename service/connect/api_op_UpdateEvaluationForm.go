@@ -63,6 +63,9 @@ type UpdateEvaluationFormInput struct {
 	// This member is required.
 	Title *string
 
+	// A boolean flag indicating whether to update evaluation form to draft state.
+	AsDraft bool
+
 	// Whether automated evaluations are enabled.
 	AutoEvaluationConfiguration *types.EvaluationFormAutoEvaluationConfiguration
 
@@ -79,8 +82,14 @@ type UpdateEvaluationFormInput struct {
 	// The description of the evaluation form.
 	Description *string
 
+	// Configuration for language settings of the evaluation form.
+	LanguageConfiguration *types.EvaluationFormLanguageConfiguration
+
 	// A scoring strategy of the evaluation form.
 	ScoringStrategy *types.EvaluationFormScoringStrategy
+
+	// Configuration that specifies the target for the evaluation form.
+	TargetConfiguration *types.EvaluationFormTargetConfiguration
 
 	noSmithyDocumentSerde
 }

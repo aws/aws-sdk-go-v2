@@ -47,6 +47,9 @@ type CreateApplicationInput struct {
 	// The configuration settings for the application.
 	ApplicationConfig *types.ApplicationConfig
 
+	// The type of application.
+	ApplicationType types.ApplicationType
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
@@ -65,6 +68,8 @@ type CreateApplicationInput struct {
 	InitializationTimeout *int32
 
 	// Indicates whether the application is a service.
+	//
+	// Deprecated: IsService has been deprecated in favor of ApplicationType
 	IsService bool
 
 	// The configuration of events or requests that the application has access to.

@@ -1259,6 +1259,15 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 				return err
 			}
 
+		case "ApplicationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationType to be of type string, got %T instead", value)
+				}
+				sv.ApplicationType = types.ApplicationType(jtv)
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4201,6 +4210,15 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 
 	for key, value := range shape {
 		switch key {
+		case "ApplicationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationType to be of type string, got %T instead", value)
+				}
+				sv.ApplicationType = types.ApplicationType(jtv)
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)

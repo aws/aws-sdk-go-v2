@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpBatchGetCollaborationAnalysisTemplate struct {
@@ -428,6 +429,13 @@ func awsRestjson1_serializeOpDocumentCreateAnalysisTemplateInput(v *CreateAnalys
 	if v.Source != nil {
 		ok := object.Key("source")
 		if err := awsRestjson1_serializeDocumentAnalysisSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SyntheticDataParameters != nil {
+		ok := object.Key("syntheticDataParameters")
+		if err := awsRestjson1_serializeDocumentSyntheticDataParameters(v.SyntheticDataParameters, ok); err != nil {
 			return err
 		}
 	}
@@ -8533,6 +8541,33 @@ func awsRestjson1_serializeDocumentChangeSpecification(v types.ChangeSpecificati
 	return nil
 }
 
+func awsRestjson1_serializeDocumentColumnClassificationDetails(v *types.ColumnClassificationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnMapping != nil {
+		ok := object.Key("columnMapping")
+		if err := awsRestjson1_serializeDocumentColumnMappingList(v.ColumnMapping, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentColumnMappingList(v []types.SyntheticDataColumnProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSyntheticDataColumnProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComputeConfiguration(v types.ComputeConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9019,6 +9054,13 @@ func awsRestjson1_serializeDocumentMembershipMLPaymentConfig(v *types.Membership
 		}
 	}
 
+	if v.SyntheticDataGeneration != nil {
+		ok := object.Key("syntheticDataGeneration")
+		if err := awsRestjson1_serializeDocumentMembershipSyntheticDataGenerationPaymentConfig(v.SyntheticDataGeneration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -9160,6 +9202,18 @@ func awsRestjson1_serializeDocumentMembershipQueryComputePaymentConfig(v *types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMembershipSyntheticDataGenerationPaymentConfig(v *types.MembershipSyntheticDataGenerationPaymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsResponsible != nil {
+		ok := object.Key("isResponsible")
+		ok.Boolean(*v.IsResponsible)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMemberSpecification(v *types.MemberSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9227,6 +9281,63 @@ func awsRestjson1_serializeDocumentMLPaymentConfig(v *types.MLPaymentConfig, val
 		ok := object.Key("modelTraining")
 		if err := awsRestjson1_serializeDocumentModelTrainingPaymentConfig(v.ModelTraining, ok); err != nil {
 			return err
+		}
+	}
+
+	if v.SyntheticDataGeneration != nil {
+		ok := object.Key("syntheticDataGeneration")
+		if err := awsRestjson1_serializeDocumentSyntheticDataGenerationPaymentConfig(v.SyntheticDataGeneration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMLSyntheticDataParameters(v *types.MLSyntheticDataParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnClassification != nil {
+		ok := object.Key("columnClassification")
+		if err := awsRestjson1_serializeDocumentColumnClassificationDetails(v.ColumnClassification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Epsilon != nil {
+		ok := object.Key("epsilon")
+		switch {
+		case math.IsNaN(*v.Epsilon):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Epsilon, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Epsilon, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Epsilon)
+
+		}
+	}
+
+	if v.MaxMembershipInferenceAttackScore != nil {
+		ok := object.Key("maxMembershipInferenceAttackScore")
+		switch {
+		case math.IsNaN(*v.MaxMembershipInferenceAttackScore):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxMembershipInferenceAttackScore, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxMembershipInferenceAttackScore, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxMembershipInferenceAttackScore)
+
 		}
 	}
 
@@ -9817,6 +9928,58 @@ func awsRestjson1_serializeDocumentSparkProperties(v map[string]string, value sm
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSyntheticDataColumnProperties(v *types.SyntheticDataColumnProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnName != nil {
+		ok := object.Key("columnName")
+		ok.String(*v.ColumnName)
+	}
+
+	if len(v.ColumnType) > 0 {
+		ok := object.Key("columnType")
+		ok.String(string(v.ColumnType))
+	}
+
+	if v.IsPredictiveValue != nil {
+		ok := object.Key("isPredictiveValue")
+		ok.Boolean(*v.IsPredictiveValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSyntheticDataGenerationPaymentConfig(v *types.SyntheticDataGenerationPaymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsResponsible != nil {
+		ok := object.Key("isResponsible")
+		ok.Boolean(*v.IsResponsible)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSyntheticDataParameters(v types.SyntheticDataParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SyntheticDataParametersMemberMlSyntheticDataParameters:
+		av := object.Key("mlSyntheticDataParameters")
+		if err := awsRestjson1_serializeDocumentMLSyntheticDataParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

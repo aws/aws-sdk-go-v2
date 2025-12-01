@@ -68,7 +68,7 @@ type UpdateContactRoutingDataInput struct {
 	QueueTimeAdjustmentSeconds *int32
 
 	// Updates the routing criteria on the contact. These properties can be used to
-	// change how a  contact is routed within the queue.
+	// change how a contact is routed within the queue.
 	RoutingCriteria *types.RoutingCriteriaInput
 
 	noSmithyDocumentSerde

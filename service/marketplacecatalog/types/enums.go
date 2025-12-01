@@ -256,6 +256,52 @@ func (MachineLearningProductVisibilityString) Values() []MachineLearningProductV
 	}
 }
 
+type OfferSetSortBy string
+
+// Enum values for OfferSetSortBy
+const (
+	OfferSetSortByName             OfferSetSortBy = "Name"
+	OfferSetSortByState            OfferSetSortBy = "State"
+	OfferSetSortByReleaseDate      OfferSetSortBy = "ReleaseDate"
+	OfferSetSortBySolutionId       OfferSetSortBy = "SolutionId"
+	OfferSetSortByEntityId         OfferSetSortBy = "EntityId"
+	OfferSetSortByLastModifiedDate OfferSetSortBy = "LastModifiedDate"
+)
+
+// Values returns all known values for OfferSetSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OfferSetSortBy) Values() []OfferSetSortBy {
+	return []OfferSetSortBy{
+		"Name",
+		"State",
+		"ReleaseDate",
+		"SolutionId",
+		"EntityId",
+		"LastModifiedDate",
+	}
+}
+
+type OfferSetStateString string
+
+// Enum values for OfferSetStateString
+const (
+	OfferSetStateStringDraft    OfferSetStateString = "Draft"
+	OfferSetStateStringReleased OfferSetStateString = "Released"
+)
+
+// Values returns all known values for OfferSetStateString. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OfferSetStateString) Values() []OfferSetStateString {
+	return []OfferSetStateString{
+		"Draft",
+		"Released",
+	}
+}
+
 type OfferSortBy string
 
 // Enum values for OfferSortBy
@@ -270,6 +316,7 @@ const (
 	OfferSortByState                 OfferSortBy = "State"
 	OfferSortByTargeting             OfferSortBy = "Targeting"
 	OfferSortByLastModifiedDate      OfferSortBy = "LastModifiedDate"
+	OfferSortByOfferSetId            OfferSortBy = "OfferSetId"
 )
 
 // Values returns all known values for OfferSortBy. Note that this can be expanded
@@ -288,6 +335,7 @@ func (OfferSortBy) Values() []OfferSortBy {
 		"State",
 		"Targeting",
 		"LastModifiedDate",
+		"OfferSetId",
 	}
 }
 

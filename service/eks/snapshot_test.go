@@ -122,6 +122,18 @@ func TestCheckSnapshot_CreateAddon(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCluster(context.Background(), nil, func(o *Options) {
@@ -199,6 +211,18 @@ func TestCheckSnapshot_DeleteAddon(t *testing.T) {
 	_, err := svc.DeleteAddon(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAddon")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -319,6 +343,18 @@ func TestCheckSnapshot_DescribeAddonVersions(t *testing.T) {
 	_, err := svc.DescribeAddonVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAddonVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -518,6 +554,18 @@ func TestCheckSnapshot_ListAssociatedAccessPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCapabilities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCapabilities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCapabilities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListClusters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListClusters(context.Background(), nil, func(o *Options) {
@@ -698,6 +746,18 @@ func TestCheckSnapshot_UpdateAddon(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateClusterConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateClusterConfig(context.Background(), nil, func(o *Options) {
@@ -829,6 +889,18 @@ func TestUpdateSnapshot_CreateAddon(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCluster(context.Background(), nil, func(o *Options) {
@@ -906,6 +978,18 @@ func TestUpdateSnapshot_DeleteAddon(t *testing.T) {
 	_, err := svc.DeleteAddon(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAddon")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1026,6 +1110,18 @@ func TestUpdateSnapshot_DescribeAddonVersions(t *testing.T) {
 	_, err := svc.DescribeAddonVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAddonVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1225,6 +1321,18 @@ func TestUpdateSnapshot_ListAssociatedAccessPolicies(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListCapabilities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCapabilities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCapabilities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListClusters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListClusters(context.Background(), nil, func(o *Options) {
@@ -1398,6 +1506,18 @@ func TestUpdateSnapshot_UpdateAddon(t *testing.T) {
 	_, err := svc.UpdateAddon(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAddon")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "fb8c0274-25b6-494f-899b-4266ca195a32",
+    "type": "feature",
+    "description": "AWS Clean Rooms ML now supports privacy-enhancing synthetic dataset generation for custom ML training.",
+    "modules": [
+        "service/cleanroomsml"
+    ]
+}

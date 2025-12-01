@@ -1,0 +1,8 @@
+{
+    "id": "51f946b5-682a-4838-a99c-2956d5bce77c",
+    "type": "feature",
+    "description": "This is a combined re:Invent release for Amazon Connect.",
+    "modules": [
+        "service/connect"
+    ]
+}

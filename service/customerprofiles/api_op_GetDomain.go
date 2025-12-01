@@ -55,6 +55,9 @@ type GetDomainOutput struct {
 	// This member is required.
 	LastUpdatedAt *time.Time
 
+	//  True if data store is enabled for this domain.
+	DataStore *types.DataStoreResponse
+
 	// The URL of the SQS dead letter queue, which is used for reporting errors
 	// associated with ingesting data from third party applications.
 	DeadLetterQueueUrl *string

@@ -76,6 +76,15 @@ type GetEngagementOutput struct {
 	// within the Engagement.
 	MemberCount *int32
 
+	// The timestamp indicating when the engagement was last modified, in ISO 8601
+	// format (UTC). Example: "2023-05-01T20:37:46Z". This helps track the most recent
+	// changes to the engagement.
+	ModifiedAt *time.Time
+
+	// The AWS account ID of the user who last modified the engagement. This field
+	// helps track who made the most recent changes to the engagement.
+	ModifiedBy *string
+
 	// The title of the engagement. It provides a brief, descriptive name for the
 	// engagement that is meaningful and easily recognizable.
 	Title *string

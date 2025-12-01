@@ -87,6 +87,12 @@ type CreateBotLocaleInput struct {
 	// system responds to background noise during voice interactions.
 	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
 
+	// Speech-to-text settings to configure for the new bot locale.
+	SpeechRecognitionSettings *types.SpeechRecognitionSettings
+
+	// Unified speech settings to configure for the new bot locale.
+	UnifiedSpeechSettings *types.UnifiedSpeechSettings
+
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
 	// user.
 	VoiceSettings *types.VoiceSettings
@@ -138,6 +144,12 @@ type CreateBotLocaleOutput struct {
 	// The sensitivity level for voice activity detection (VAD) that was specified for
 	// the bot locale.
 	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
+
+	// The speech-to-text settings configured for the created bot locale.
+	SpeechRecognitionSettings *types.SpeechRecognitionSettings
+
+	// The unified speech settings configured for the created bot locale.
+	UnifiedSpeechSettings *types.UnifiedSpeechSettings
 
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
 	// user.

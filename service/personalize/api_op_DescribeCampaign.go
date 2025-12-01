@@ -52,7 +52,13 @@ type DescribeCampaignInput struct {
 
 type DescribeCampaignOutput struct {
 
+	// The latestCampaignUpdate field is only returned when the campaign has had at
+	// least one UpdateCampaign call.
+	//
 	// The properties of the campaign.
+	//
+	// The latestCampaignUpdate field is only returned when the campaign has had at
+	// least one UpdateCampaign call.
 	Campaign *types.Campaign
 
 	// Metadata pertaining to the operation's result.

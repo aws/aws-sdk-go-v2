@@ -4400,6 +4400,13 @@ func awsAwsjson11_serializeDocumentBatchInferenceJobConfig(v *types.BatchInferen
 		}
 	}
 
+	if v.RankingInfluence != nil {
+		ok := object.Key("rankingInfluence")
+		if err := awsAwsjson11_serializeDocumentRankingInfluence(v.RankingInfluence, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4471,6 +4478,13 @@ func awsAwsjson11_serializeDocumentCampaignConfig(v *types.CampaignConfig, value
 	if v.ItemExplorationConfig != nil {
 		ok := object.Key("itemExplorationConfig")
 		if err := awsAwsjson11_serializeDocumentHyperParameters(v.ItemExplorationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RankingInfluence != nil {
+		ok := object.Key("rankingInfluence")
+		if err := awsAwsjson11_serializeDocumentRankingInfluence(v.RankingInfluence, ok); err != nil {
 			return err
 		}
 	}
@@ -4844,6 +4858,22 @@ func awsAwsjson11_serializeDocumentHyperParameters(v map[string]string, value sm
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIncludedDatasetColumns(v map[string][]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentColumnNamesList(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIntegerHyperParameterRange(v *types.IntegerHyperParameterRange, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4958,6 +4988,30 @@ func awsAwsjson11_serializeDocumentOptimizationObjective(v *types.OptimizationOb
 		ok.String(string(v.ObjectiveSensitivity))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRankingInfluence(v map[string]float64, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		switch {
+		case math.IsNaN(v[key]):
+			om.String("NaN")
+
+		case math.IsInf(v[key], 1):
+			om.String("Infinity")
+
+		case math.IsInf(v[key], -1):
+			om.String("-Infinity")
+
+		default:
+			om.Double(v[key])
+
+		}
+	}
 	return nil
 }
 
@@ -5160,6 +5214,13 @@ func awsAwsjson11_serializeDocumentTrainingDataConfig(v *types.TrainingDataConfi
 	if v.ExcludedDatasetColumns != nil {
 		ok := object.Key("excludedDatasetColumns")
 		if err := awsAwsjson11_serializeDocumentExcludedDatasetColumns(v.ExcludedDatasetColumns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludedDatasetColumns != nil {
+		ok := object.Key("includedDatasetColumns")
+		if err := awsAwsjson11_serializeDocumentIncludedDatasetColumns(v.IncludedDatasetColumns, ok); err != nil {
 			return err
 		}
 	}
@@ -5693,6 +5754,11 @@ func awsAwsjson11_serializeOpDocumentCreateSolutionInput(v *CreateSolutionInput,
 	if v.PerformHPO != nil {
 		ok := object.Key("performHPO")
 		ok.Boolean(*v.PerformHPO)
+	}
+
+	if v.PerformIncrementalUpdate != nil {
+		ok := object.Key("performIncrementalUpdate")
+		ok.Boolean(*v.PerformIncrementalUpdate)
 	}
 
 	if v.RecipeArn != nil {
@@ -6642,6 +6708,11 @@ func awsAwsjson11_serializeOpDocumentUpdateSolutionInput(v *UpdateSolutionInput,
 	if v.PerformAutoTraining != nil {
 		ok := object.Key("performAutoTraining")
 		ok.Boolean(*v.PerformAutoTraining)
+	}
+
+	if v.PerformIncrementalUpdate != nil {
+		ok := object.Key("performIncrementalUpdate")
+		ok.Boolean(*v.PerformIncrementalUpdate)
 	}
 
 	if v.SolutionArn != nil {

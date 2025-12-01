@@ -65,6 +65,16 @@ type GetSegmentDefinitionOutput struct {
 	// The segment criteria associated with this definition.
 	SegmentGroups *types.SegmentGroup
 
+	// The segment SQL query.
+	SegmentSqlQuery *string
+
+	// The segment type.
+	//
+	// Classic : Segments created using traditional SegmentGroup structure
+	//
+	// Enhanced : Segments created using SQL queries
+	SegmentType types.SegmentType
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 

@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // The CreateEngagement action allows you to create an Engagement , which serves as
@@ -81,6 +82,11 @@ type CreateEngagementOutput struct {
 
 	// Unique identifier assigned to the newly created engagement.
 	Id *string
+
+	// The timestamp indicating when the engagement was last modified, in ISO 8601
+	// format (UTC). For newly created engagements, this value matches the creation
+	// timestamp. Example: "2023-05-01T20:37:46Z".
+	ModifiedAt *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

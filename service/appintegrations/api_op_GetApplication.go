@@ -46,6 +46,9 @@ type GetApplicationOutput struct {
 	// The configuration for where the application should be loaded from.
 	ApplicationSourceConfig *types.ApplicationSourceConfig
 
+	// The type of application.
+	ApplicationType types.ApplicationType
+
 	// The Amazon Resource Name (ARN) of the Application.
 	Arn *string
 
@@ -66,6 +69,8 @@ type GetApplicationOutput struct {
 	InitializationTimeout *int32
 
 	// Indicates whether the application is a service.
+	//
+	// Deprecated: IsService has been deprecated in favor of ApplicationType
 	IsService bool
 
 	// The last modified time of the Application.

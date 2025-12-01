@@ -318,6 +318,157 @@ type AddonVersionInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for integrating Argo CD with IAM Identity CenterIAM; Identity
+// Center. This allows you to use your organization's identity provider for
+// authentication to Argo CD.
+type ArgoCdAwsIdcConfigRequest struct {
+
+	// The Amazon Resource Name (ARN) of the IAM Identity CenterIAM; Identity Center
+	// instance to use for authentication.
+	//
+	// This member is required.
+	IdcInstanceArn *string
+
+	// The Region where your IAM Identity CenterIAM; Identity Center instance is
+	// located.
+	IdcRegion *string
+
+	noSmithyDocumentSerde
+}
+
+// The response object containing IAM Identity CenterIAM; Identity Center
+// configuration details for an Argo CD capability.
+type ArgoCdAwsIdcConfigResponse struct {
+
+	// The Amazon Resource Name (ARN) of the IAM Identity CenterIAM; Identity Center
+	// instance used for authentication.
+	IdcInstanceArn *string
+
+	// The Amazon Resource Name (ARN) of the managed application created in IAM
+	// Identity CenterIAM; Identity Center for this Argo CD capability. This
+	// application is automatically created and managed by Amazon EKS.
+	IdcManagedApplicationArn *string
+
+	// The Region where the IAM Identity CenterIAM; Identity Center instance is
+	// located.
+	IdcRegion *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for an Argo CD capability. This includes the Kubernetes
+// namespace, IAM Identity CenterIAM; Identity Center integration, RBAC role
+// mappings, and network access configuration.
+type ArgoCdConfigRequest struct {
+
+	// Configuration for IAM Identity CenterIAM; Identity Center integration. When
+	// configured, users can authenticate to Argo CD using their IAM Identity
+	// CenterIAM; Identity Center credentials.
+	//
+	// This member is required.
+	AwsIdc *ArgoCdAwsIdcConfigRequest
+
+	// The Kubernetes namespace where Argo CD resources will be created. If not
+	// specified, the default namespace is used.
+	Namespace *string
+
+	// Configuration for network access to the Argo CD capability's managed API server
+	// endpoint. By default, the Argo CD server is accessible via a public endpoint.
+	// You can optionally specify one or more VPC endpoint IDs to enable private
+	// connectivity from your VPCs. When VPC endpoints are configured, public access is
+	// blocked and the Argo CD server is only accessible through the specified VPC
+	// endpoints.
+	NetworkAccess *ArgoCdNetworkAccessConfigRequest
+
+	// A list of role mappings that define which IAM Identity CenterIAM; Identity
+	// Center users or groups have which Argo CD roles. Each mapping associates an Argo
+	// CD role ( ADMIN , EDITOR , or VIEWER ) with one or more IAM Identity CenterIAM;
+	// Identity Center identities.
+	RbacRoleMappings []ArgoCdRoleMapping
+
+	noSmithyDocumentSerde
+}
+
+// The response object containing Argo CD configuration details, including the
+// server URL that you use to access the Argo CD web interface and API.
+type ArgoCdConfigResponse struct {
+
+	// The IAM Identity CenterIAM; Identity Center integration configuration.
+	AwsIdc *ArgoCdAwsIdcConfigResponse
+
+	// The Kubernetes namespace where Argo CD resources are monitored by your Argo CD
+	// Capability.
+	Namespace *string
+
+	// The network access configuration for the Argo CD capability's managed API
+	// server endpoint. If VPC endpoint IDs are specified, public access is blocked and
+	// the Argo CD server is only accessible through the specified VPC endpoints.
+	NetworkAccess *ArgoCdNetworkAccessConfigResponse
+
+	// The list of role mappings that define which IAM Identity CenterIAM; Identity
+	// Center users or groups have which Argo CD roles.
+	RbacRoleMappings []ArgoCdRoleMapping
+
+	// The URL of the Argo CD server. Use this URL to access the Argo CD web interface
+	// and API.
+	ServerUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for network access to the Argo CD capability's managed API server
+// endpoint. When VPC endpoint IDs are specified, public access is blocked and the
+// Argo CD server is only accessible through the specified VPC endpoints.
+type ArgoCdNetworkAccessConfigRequest struct {
+
+	// A list of VPC endpoint IDs to associate with the managed Argo CD API server
+	// endpoint. Each VPC endpoint provides private connectivity from a specific VPC to
+	// the Argo CD server. You can specify multiple VPC endpoint IDs to enable access
+	// from multiple VPCs.
+	VpceIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The response object containing network access configuration for the Argo CD
+// capability's managed API server endpoint. If VPC endpoint IDs are present,
+// public access is blocked and the Argo CD server is only accessible through the
+// specified VPC endpoints.
+type ArgoCdNetworkAccessConfigResponse struct {
+
+	// The list of VPC endpoint IDs associated with the managed Argo CD API server
+	// endpoint. Each VPC endpoint provides private connectivity from a specific VPC to
+	// the Argo CD server.
+	VpceIds []string
+
+	noSmithyDocumentSerde
+}
+
+// A mapping between an Argo CD role and IAM Identity CenterIAM; Identity Center
+// identities. This defines which users or groups have specific permissions in Argo
+// CD.
+type ArgoCdRoleMapping struct {
+
+	// A list of IAM Identity CenterIAM; Identity Center identities (users or groups)
+	// that should be assigned this Argo CD role.
+	//
+	// This member is required.
+	Identities []SsoIdentity
+
+	// The Argo CD role to assign. Valid values are:
+	//
+	//   - ADMIN – Full administrative access to Argo CD.
+	//
+	//   - EDITOR – Edit access to Argo CD resources.
+	//
+	//   - VIEWER – Read-only access to Argo CD resources.
+	//
+	// This member is required.
+	Role ArgoCdRole
+
+	noSmithyDocumentSerde
+}
+
 // An access policy association.
 type AssociatedAccessPolicy struct {
 
@@ -358,6 +509,168 @@ type BlockStorage struct {
 	// cluster. If the block storage capability is enabled, EKS Auto Mode will create
 	// and delete EBS volumes in your Amazon Web Services account.
 	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// An object representing a managed capability in an Amazon EKS cluster. This
+// includes all configuration, status, and health information for the capability.
+type Capability struct {
+
+	// The Amazon Resource Name (ARN) of the capability.
+	Arn *string
+
+	// The unique name of the capability within the cluster.
+	CapabilityName *string
+
+	// The name of the Amazon EKS cluster that contains this capability.
+	ClusterName *string
+
+	// The configuration settings for the capability. The structure varies depending
+	// on the capability type.
+	Configuration *CapabilityConfigurationResponse
+
+	// The Unix epoch timestamp in seconds for when the capability was created.
+	CreatedAt *time.Time
+
+	// The delete propagation policy for the capability. Currently, the only supported
+	// value is RETAIN , which keeps all resources managed by the capability when the
+	// capability is deleted.
+	DeletePropagationPolicy CapabilityDeletePropagationPolicy
+
+	// Health information for the capability, including any issues that may be
+	// affecting its operation.
+	Health *CapabilityHealth
+
+	// The Unix epoch timestamp in seconds for when the capability was last modified.
+	ModifiedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role that the capability uses to
+	// interact with Amazon Web Services services.
+	RoleArn *string
+
+	// The current status of the capability. Valid values include:
+	//
+	//   - CREATING – The capability is being created.
+	//
+	//   - ACTIVE – The capability is running and available.
+	//
+	//   - UPDATING – The capability is being updated.
+	//
+	//   - DELETING – The capability is being deleted.
+	//
+	//   - CREATE_FAILED – The capability creation failed.
+	//
+	//   - UPDATE_FAILED – The capability update failed.
+	//
+	//   - DELETE_FAILED – The capability deletion failed.
+	Status CapabilityStatus
+
+	// The metadata that you apply to a resource to help you categorize and organize
+	// them. Each tag consists of a key and an optional value. You define them.
+	//
+	// The following basic restrictions apply to tags:
+	//
+	//   - Maximum number of tags per resource – 50
+	//
+	//   - For each resource, each tag key must be unique, and each tag key can have
+	//   only one value.
+	//
+	//   - Maximum key length – 128 Unicode characters in UTF-8
+	//
+	//   - Maximum value length – 256 Unicode characters in UTF-8
+	//
+	//   - If your tagging schema is used across multiple services and resources,
+	//   remember that other services may have restrictions on allowed characters.
+	//   Generally allowed characters are: letters, numbers, and spaces representable in
+	//   UTF-8, and the following characters: + - = . _ : / @.
+	//
+	//   - Tag keys and values are case-sensitive.
+	//
+	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
+	//   prefix for either keys or values as it is reserved for Amazon Web Services use.
+	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
+	//   prefix do not count against your tags per resource limit.
+	Tags map[string]string
+
+	// The type of capability. Valid values are ACK , ARGOCD , or KRO .
+	Type CapabilityType
+
+	// The version of the capability software that is currently running.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for a capability. The structure of this object varies
+// depending on the capability type.
+type CapabilityConfigurationRequest struct {
+
+	// Configuration settings specific to Argo CD capabilities. This field is only
+	// used when creating or updating an Argo CD capability.
+	ArgoCd *ArgoCdConfigRequest
+
+	noSmithyDocumentSerde
+}
+
+// The response object containing capability configuration details.
+type CapabilityConfigurationResponse struct {
+
+	// Configuration settings for an Argo CD capability, including the server URL and
+	// other Argo CD-specific settings.
+	ArgoCd *ArgoCdConfigResponse
+
+	noSmithyDocumentSerde
+}
+
+// Health information for a capability, including any issues that may be affecting
+// its operation.
+type CapabilityHealth struct {
+
+	// A list of issues affecting the capability. If this list is empty, the
+	// capability is healthy.
+	Issues []CapabilityIssue
+
+	noSmithyDocumentSerde
+}
+
+// An issue affecting a capability's health or operation.
+type CapabilityIssue struct {
+
+	// A code identifying the type of issue. This can be used to programmatically
+	// handle specific issue types.
+	Code CapabilityIssueCode
+
+	// A human-readable message describing the issue and potential remediation steps.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a capability, containing basic information without the full
+// configuration details. This is returned by the ListCapabilities operation.
+type CapabilitySummary struct {
+
+	// The Amazon Resource Name (ARN) of the capability.
+	Arn *string
+
+	// The unique name of the capability within the cluster.
+	CapabilityName *string
+
+	// The Unix epoch timestamp in seconds for when the capability was created.
+	CreatedAt *time.Time
+
+	// The Unix epoch timestamp in seconds for when the capability was last modified.
+	ModifiedAt *time.Time
+
+	// The current status of the capability.
+	Status CapabilityStatus
+
+	// The type of capability. Valid values are ACK , ARGOCD , or KRO .
+	Type CapabilityType
+
+	// The version of the capability software that is currently running.
+	Version *string
 
 	noSmithyDocumentSerde
 }
@@ -2222,6 +2535,24 @@ type RemotePodNetwork struct {
 	noSmithyDocumentSerde
 }
 
+// An IAM Identity CenterIAM; Identity Center identity (user or group) that can be
+// assigned permissions in a capability.
+type SsoIdentity struct {
+
+	// The unique identifier of the IAM Identity CenterIAM; Identity Center user or
+	// group.
+	//
+	// This member is required.
+	Id *string
+
+	// The type of identity. Valid values are SSO_USER or SSO_GROUP .
+	//
+	// This member is required.
+	Type SsoIdentityType
+
+	noSmithyDocumentSerde
+}
+
 // Request to update the configuration of the storage capability of your EKS Auto
 // Mode cluster. For example, enable the capability. For more information, see EKS
 // Auto Mode block storage capability in the Amazon EKS User Guide.
@@ -2295,6 +2626,32 @@ type UpdateAccessConfigRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration updates for an Argo CD capability. You only need to specify the
+// fields you want to update.
+type UpdateArgoCdConfig struct {
+
+	// Updated network access configuration for the Argo CD capability's managed API
+	// server endpoint. You can add or remove VPC endpoint associations to control
+	// which VPCs have private access to the Argo CD server.
+	NetworkAccess *ArgoCdNetworkAccessConfigRequest
+
+	// Updated RBAC role mappings for the Argo CD capability. You can add, update, or
+	// remove role mappings.
+	RbacRoleMappings *UpdateRoleMappings
+
+	noSmithyDocumentSerde
+}
+
+// Configuration updates for a capability. The structure varies depending on the
+// capability type.
+type UpdateCapabilityConfiguration struct {
+
+	// Configuration updates specific to Argo CD capabilities.
+	ArgoCd *UpdateArgoCdConfig
+
+	noSmithyDocumentSerde
+}
+
 // An object representing a Kubernetes label change for a managed node group.
 type UpdateLabelsPayload struct {
 
@@ -2315,6 +2672,23 @@ type UpdateParam struct {
 
 	// The value of the keys submitted as part of an update request.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Updates to RBAC role mappings for an Argo CD capability. You can add, update,
+// or remove role mappings in a single operation.
+type UpdateRoleMappings struct {
+
+	// A list of role mappings to add or update. If a mapping for the specified role
+	// already exists, it will be updated with the new identities. If it doesn't exist,
+	// a new mapping will be created.
+	AddOrUpdateRoleMappings []ArgoCdRoleMapping
+
+	// A list of role mappings to remove from the RBAC configuration. Each mapping
+	// specifies an Argo CD role ( ADMIN , EDITOR , or VIEWER ) and the identities to
+	// remove from that role.
+	RemoveRoleMappings []ArgoCdRoleMapping
 
 	noSmithyDocumentSerde
 }

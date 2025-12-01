@@ -37,6 +37,9 @@ type ListUpdatesInput struct {
 	// The names of the installed add-ons that have available updates.
 	AddonName *string
 
+	// The name of the capability for which you want to list updates.
+	CapabilityName *string
+
 	// The maximum number of results, returned in paginated output. You receive
 	// maxResults in a single page, along with a nextToken response element. You can
 	// see the remaining results of the initial request by sending another request with

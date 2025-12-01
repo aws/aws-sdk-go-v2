@@ -118,6 +118,10 @@ type CreateFunctionInput struct {
 	// x86_64 .
 	Architectures []types.Architecture
 
+	// Configuration for the capacity provider that manages compute resources for
+	// Lambda functions.
+	CapacityProviderConfig *types.CapacityProviderConfig
+
 	// To enable code signing for this function, specify the ARN of a code-signing
 	// configuration. A code-signing configuration includes a set of signing profiles,
 	// which define the trusted publishers for this function.
@@ -206,6 +210,9 @@ type CreateFunctionInput struct {
 	// Set to true to publish the first version of the function during creation.
 	Publish bool
 
+	// Specifies where to publish the function version or configuration.
+	PublishTo types.FunctionVersionLatestPublished
+
 	// The identifier of the function's [runtime]. Runtime is required if the deployment
 	// package is a .zip file archive. Specifying a runtime results in an error if
 	// you're deploying a function using a container image.
@@ -267,11 +274,18 @@ type CreateFunctionOutput struct {
 	// x86_64 .
 	Architectures []types.Architecture
 
+	// Configuration for the capacity provider that manages compute resources for
+	// Lambda functions.
+	CapacityProviderConfig *types.CapacityProviderConfig
+
 	// The SHA256 hash of the function's deployment package.
 	CodeSha256 *string
 
 	// The size of the function's deployment package, in bytes.
 	CodeSize int64
+
+	// The SHA256 hash of the function configuration.
+	ConfigSha256 *string
 
 	// The function's dead letter queue.
 	DeadLetterConfig *types.DeadLetterConfig

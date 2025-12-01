@@ -78,6 +78,7 @@ const (
 	ChannelSubtypeTelephony ChannelSubtype = "TELEPHONY"
 	ChannelSubtypeSms       ChannelSubtype = "SMS"
 	ChannelSubtypeEmail     ChannelSubtype = "EMAIL"
+	ChannelSubtypeWhatsapp  ChannelSubtype = "WHATSAPP"
 )
 
 // Values returns all known values for ChannelSubtype. Note that this can be
@@ -89,6 +90,7 @@ func (ChannelSubtype) Values() []ChannelSubtype {
 		"TELEPHONY",
 		"SMS",
 		"EMAIL",
+		"WHATSAPP",
 	}
 }
 
@@ -134,6 +136,7 @@ const (
 	CommunicationTimeConfigTypeTelephony CommunicationTimeConfigType = "TELEPHONY"
 	CommunicationTimeConfigTypeSms       CommunicationTimeConfigType = "SMS"
 	CommunicationTimeConfigTypeEmail     CommunicationTimeConfigType = "EMAIL"
+	CommunicationTimeConfigTypeWhatsapp  CommunicationTimeConfigType = "WHATSAPP"
 )
 
 // Values returns all known values for CommunicationTimeConfigType. Note that this
@@ -145,6 +148,7 @@ func (CommunicationTimeConfigType) Values() []CommunicationTimeConfigType {
 		"TELEPHONY",
 		"SMS",
 		"EMAIL",
+		"WHATSAPP",
 	}
 }
 
@@ -214,6 +218,25 @@ func (EventType) Values() []EventType {
 		"Campaign-SMS",
 		"Campaign-Telephony",
 		"Campaign-Orchestration",
+	}
+}
+
+type ExternalCampaignType string
+
+// Enum values for ExternalCampaignType
+const (
+	ExternalCampaignTypeManaged ExternalCampaignType = "MANAGED"
+	ExternalCampaignTypeJourney ExternalCampaignType = "JOURNEY"
+)
+
+// Values returns all known values for ExternalCampaignType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExternalCampaignType) Values() []ExternalCampaignType {
+	return []ExternalCampaignType{
+		"MANAGED",
+		"JOURNEY",
 	}
 }
 

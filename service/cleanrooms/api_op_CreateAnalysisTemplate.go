@@ -65,6 +65,9 @@ type CreateAnalysisTemplateInput struct {
 	// A relation within an analysis.
 	Schema *types.AnalysisSchema
 
+	// The parameters for generating synthetic data when running the analysis template.
+	SyntheticDataParameters types.SyntheticDataParameters
+
 	// An optional label that you can assign to a resource when you create it. Each
 	// tag consists of a key and an optional value, both of which you define. When you
 	// use tagging, you can also use tag-based access control in IAM policies to

@@ -36,6 +36,10 @@ type UpdateInstanceAttributeInput struct {
 	// Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this
 	// feature, contact Amazon Web Services Support for allowlisting.
 	//
+	// If you set the attribute type as MESSAGE_STREAMING , you need to update the Lex
+	// bot alias resource based policy to include the lex:RecognizeMessageAsync action
+	// for the connect instance ARN resource.
+	//
 	// This member is required.
 	AttributeType types.InstanceAttributeType
 

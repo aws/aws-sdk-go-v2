@@ -35,9 +35,10 @@ type CreateSegmentEstimateInput struct {
 	DomainName *string
 
 	// The segment query for calculating a segment estimate.
-	//
-	// This member is required.
 	SegmentQuery *types.SegmentGroupStructure
+
+	// The segment SQL query.
+	SegmentSqlQuery *string
 
 	noSmithyDocumentSerde
 }

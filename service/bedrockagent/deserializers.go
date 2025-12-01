@@ -15521,6 +15521,120 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioConfiguration(v **types.AudioConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioConfiguration
+	if *v == nil {
+		sv = &types.AudioConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "segmentationConfiguration":
+			if err := awsRestjson1_deserializeDocumentAudioSegmentationConfiguration(&sv.SegmentationConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioConfigurations(v *[]types.AudioConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AudioConfiguration
+	if *v == nil {
+		cv = []types.AudioConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AudioConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAudioConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioSegmentationConfiguration(v **types.AudioSegmentationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioSegmentationConfiguration
+	if *v == nil {
+		sv = &types.AudioSegmentationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fixedLengthDuration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FixedLengthDuration = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAutoToolChoice(v **types.AutoToolChoice, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15650,6 +15764,11 @@ func awsRestjson1_deserializeDocumentBedrockEmbeddingModelConfiguration(v **type
 
 	for key, value := range shape {
 		switch key {
+		case "audio":
+			if err := awsRestjson1_deserializeDocumentAudioConfigurations(&sv.Audio, value); err != nil {
+				return err
+			}
+
 		case "dimensions":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15670,6 +15789,11 @@ func awsRestjson1_deserializeDocumentBedrockEmbeddingModelConfiguration(v **type
 					return fmt.Errorf("expected EmbeddingDataType to be of type string, got %T instead", value)
 				}
 				sv.EmbeddingDataType = types.EmbeddingDataType(jtv)
+			}
+
+		case "video":
+			if err := awsRestjson1_deserializeDocumentVideoConfigurations(&sv.Video, value); err != nil {
+				return err
 			}
 
 		default:
@@ -28177,6 +28301,120 @@ func awsRestjson1_deserializeDocumentVectorSearchRerankingConfiguration(v **type
 					return fmt.Errorf("expected VectorSearchRerankingConfigurationType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.VectorSearchRerankingConfigurationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoConfiguration(v **types.VideoConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoConfiguration
+	if *v == nil {
+		sv = &types.VideoConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "segmentationConfiguration":
+			if err := awsRestjson1_deserializeDocumentVideoSegmentationConfiguration(&sv.SegmentationConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoConfigurations(v *[]types.VideoConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VideoConfiguration
+	if *v == nil {
+		cv = []types.VideoConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VideoConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVideoConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoSegmentationConfiguration(v **types.VideoSegmentationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoSegmentationConfiguration
+	if *v == nil {
+		sv = &types.VideoSegmentationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fixedLengthDuration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FixedLengthDuration = ptr.Int32(int32(i64))
 			}
 
 		default:

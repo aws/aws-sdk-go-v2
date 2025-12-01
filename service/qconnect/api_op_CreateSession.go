@@ -61,6 +61,12 @@ type CreateSessionInput struct {
 	// The description.
 	Description *string
 
+	// The list of orchestrator configurations for the session being created.
+	OrchestratorConfigurationList []types.OrchestratorConfigurationEntry
+
+	// The list of orchestrator configurations to remove from the session.
+	RemoveOrchestratorConfigurationList *bool
+
 	// An object that can be used to specify Tag conditions.
 	TagFilter types.TagFilter
 

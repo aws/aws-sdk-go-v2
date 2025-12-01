@@ -1524,6 +1524,11 @@ func awsRestjson1_deserializeOpDocumentSendMessageOutput(v **SendMessageOutput, 
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "MessageMetadata":
+			if err := awsRestjson1_deserializeDocumentMessageProcessingMetadata(&sv.MessageMetadata, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -2515,9 +2520,58 @@ func awsRestjson1_deserializeDocumentMessageMetadata(v **types.MessageMetadata, 
 				sv.MessageId = ptr.String(jtv)
 			}
 
+		case "MessageProcessingStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageProcessingStatus to be of type string, got %T instead", value)
+				}
+				sv.MessageProcessingStatus = types.MessageProcessingStatus(jtv)
+			}
+
 		case "Receipts":
 			if err := awsRestjson1_deserializeDocumentReceipts(&sv.Receipts, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMessageProcessingMetadata(v **types.MessageProcessingMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MessageProcessingMetadata
+	if *v == nil {
+		sv = &types.MessageProcessingMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MessageProcessingStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageProcessingStatus to be of type string, got %T instead", value)
+				}
+				sv.MessageProcessingStatus = types.MessageProcessingStatus(jtv)
 			}
 
 		default:

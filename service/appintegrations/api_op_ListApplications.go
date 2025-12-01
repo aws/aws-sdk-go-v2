@@ -29,6 +29,9 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 
 type ListApplicationsInput struct {
 
+	// The type of application.
+	ApplicationType types.ApplicationType
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
 

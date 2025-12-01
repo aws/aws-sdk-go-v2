@@ -3521,6 +3521,11 @@ func awsRestjson1_deserializeOpDocumentGetCollaborationMLInputChannelOutput(v **
 				return err
 			}
 
+		case "syntheticDataConfiguration":
+			if err := awsRestjson1_deserializeDocumentSyntheticDataConfiguration(&sv.SyntheticDataConfiguration, value); err != nil {
+				return err
+			}
+
 		case "updateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5350,6 +5355,11 @@ func awsRestjson1_deserializeOpDocumentGetMLInputChannelOutput(v **GetMLInputCha
 
 		case "statusDetails":
 			if err := awsRestjson1_deserializeDocumentStatusDetails(&sv.StatusDetails, value); err != nil {
+				return err
+			}
+
+		case "syntheticDataConfiguration":
+			if err := awsRestjson1_deserializeDocumentSyntheticDataConfiguration(&sv.SyntheticDataConfiguration, value); err != nil {
 				return err
 			}
 
@@ -12482,6 +12492,76 @@ func awsRestjson1_deserializeDocumentCollaborationTrainedModelSummary(v **types.
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentColumnClassificationDetails(v **types.ColumnClassificationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ColumnClassificationDetails
+	if *v == nil {
+		sv = &types.ColumnClassificationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "columnMapping":
+			if err := awsRestjson1_deserializeDocumentColumnMappingList(&sv.ColumnMapping, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentColumnMappingList(v *[]types.SyntheticDataColumnProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SyntheticDataColumnProperties
+	if *v == nil {
+		cv = []types.SyntheticDataColumnProperties{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SyntheticDataColumnProperties
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSyntheticDataColumnProperties(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentColumnSchema(v **types.ColumnSchema, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13315,6 +13395,42 @@ func awsRestjson1_deserializeDocumentCustomEntityConfig(v **types.CustomEntityCo
 		switch key {
 		case "customDataIdentifiers":
 			if err := awsRestjson1_deserializeDocumentCustomDataIdentifierList(&sv.CustomDataIdentifiers, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataPrivacyScores(v **types.DataPrivacyScores, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataPrivacyScores
+	if *v == nil {
+		sv = &types.DataPrivacyScores{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "membershipInferenceAttackScores":
+			if err := awsRestjson1_deserializeDocumentMembershipInferenceAttackScoreList(&sv.MembershipInferenceAttackScores, value); err != nil {
 				return err
 			}
 
@@ -14362,6 +14478,114 @@ func awsRestjson1_deserializeDocumentLogsConfigurationPolicyList(v *[]types.Logs
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMembershipInferenceAttackScore(v **types.MembershipInferenceAttackScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MembershipInferenceAttackScore
+	if *v == nil {
+		sv = &types.MembershipInferenceAttackScore{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "attackVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MembershipInferenceAttackVersion to be of type string, got %T instead", value)
+				}
+				sv.AttackVersion = types.MembershipInferenceAttackVersion(jtv)
+			}
+
+		case "score":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Score = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Score = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMembershipInferenceAttackScoreList(v *[]types.MembershipInferenceAttackScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MembershipInferenceAttackScore
+	if *v == nil {
+		cv = []types.MembershipInferenceAttackScore{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MembershipInferenceAttackScore
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMembershipInferenceAttackScore(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMetricDefinition(v **types.MetricDefinition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14714,6 +14938,110 @@ func awsRestjson1_deserializeDocumentMLOutputConfiguration(v **types.MLOutputCon
 					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMLSyntheticDataParameters(v **types.MLSyntheticDataParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MLSyntheticDataParameters
+	if *v == nil {
+		sv = &types.MLSyntheticDataParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "columnClassification":
+			if err := awsRestjson1_deserializeDocumentColumnClassificationDetails(&sv.ColumnClassification, value); err != nil {
+				return err
+			}
+
+		case "epsilon":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Epsilon = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Epsilon = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "maxMembershipInferenceAttackScore":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaxMembershipInferenceAttackScore = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaxMembershipInferenceAttackScore = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -15532,6 +15860,141 @@ func awsRestjson1_deserializeDocumentStoppingCondition(v **types.StoppingConditi
 					return err
 				}
 				sv.MaxRuntimeInSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSyntheticDataColumnProperties(v **types.SyntheticDataColumnProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SyntheticDataColumnProperties
+	if *v == nil {
+		sv = &types.SyntheticDataColumnProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "columnName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SyntheticDataColumnName to be of type string, got %T instead", value)
+				}
+				sv.ColumnName = ptr.String(jtv)
+			}
+
+		case "columnType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SyntheticDataColumnType to be of type string, got %T instead", value)
+				}
+				sv.ColumnType = types.SyntheticDataColumnType(jtv)
+			}
+
+		case "isPredictiveValue":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsPredictiveValue = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSyntheticDataConfiguration(v **types.SyntheticDataConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SyntheticDataConfiguration
+	if *v == nil {
+		sv = &types.SyntheticDataConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "syntheticDataEvaluationScores":
+			if err := awsRestjson1_deserializeDocumentSyntheticDataEvaluationScores(&sv.SyntheticDataEvaluationScores, value); err != nil {
+				return err
+			}
+
+		case "syntheticDataParameters":
+			if err := awsRestjson1_deserializeDocumentMLSyntheticDataParameters(&sv.SyntheticDataParameters, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSyntheticDataEvaluationScores(v **types.SyntheticDataEvaluationScores, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SyntheticDataEvaluationScores
+	if *v == nil {
+		sv = &types.SyntheticDataEvaluationScores{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dataPrivacyScores":
+			if err := awsRestjson1_deserializeDocumentDataPrivacyScores(&sv.DataPrivacyScores, value); err != nil {
+				return err
 			}
 
 		default:

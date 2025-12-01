@@ -2,6 +2,24 @@
 
 package types
 
+type AccessDeniedExceptionErrorCode string
+
+// Enum values for AccessDeniedExceptionErrorCode
+const (
+	AccessDeniedExceptionErrorCodeIncompatibleBenefitAwsPartnerState AccessDeniedExceptionErrorCode = "INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE"
+)
+
+// Values returns all known values for AccessDeniedExceptionErrorCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessDeniedExceptionErrorCode) Values() []AccessDeniedExceptionErrorCode {
+	return []AccessDeniedExceptionErrorCode{
+		"INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE",
+	}
+}
+
 type AwsClosedLostReason string
 
 // Enum values for AwsClosedLostReason
@@ -1249,6 +1267,7 @@ type EngagementContextType string
 // Enum values for EngagementContextType
 const (
 	EngagementContextTypeCustomerProject EngagementContextType = "CustomerProject"
+	EngagementContextTypeLead            EngagementContextType = "Lead"
 )
 
 // Values returns all known values for EngagementContextType. Note that this can
@@ -1258,6 +1277,7 @@ const (
 func (EngagementContextType) Values() []EngagementContextType {
 	return []EngagementContextType{
 		"CustomerProject",
+		"Lead",
 	}
 }
 
@@ -1266,6 +1286,7 @@ type EngagementInvitationPayloadType string
 // Enum values for EngagementInvitationPayloadType
 const (
 	EngagementInvitationPayloadTypeOpportunityInvitation EngagementInvitationPayloadType = "OpportunityInvitation"
+	EngagementInvitationPayloadTypeLeadInvitation        EngagementInvitationPayloadType = "LeadInvitation"
 )
 
 // Values returns all known values for EngagementInvitationPayloadType. Note that
@@ -1276,6 +1297,7 @@ const (
 func (EngagementInvitationPayloadType) Values() []EngagementInvitationPayloadType {
 	return []EngagementInvitationPayloadType{
 		"OpportunityInvitation",
+		"LeadInvitation",
 	}
 }
 
@@ -1472,6 +1494,31 @@ func (MarketingSource) Values() []MarketingSource {
 	}
 }
 
+type MarketSegment string
+
+// Enum values for MarketSegment
+const (
+	MarketSegmentEnterprise MarketSegment = "Enterprise"
+	MarketSegmentLarge      MarketSegment = "Large"
+	MarketSegmentMedium     MarketSegment = "Medium"
+	MarketSegmentSmall      MarketSegment = "Small"
+	MarketSegmentMicro      MarketSegment = "Micro"
+)
+
+// Values returns all known values for MarketSegment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MarketSegment) Values() []MarketSegment {
+	return []MarketSegment{
+		"Enterprise",
+		"Large",
+		"Medium",
+		"Small",
+		"Micro",
+	}
+}
+
 type NationalSecurity string
 
 // Enum values for NationalSecurity
@@ -1660,6 +1707,9 @@ const (
 	ReasonCodeResourceSnapshotConflict            ReasonCode = "ResourceSnapshotConflict"
 	ReasonCodeServiceQuotaExceeded                ReasonCode = "ServiceQuotaExceeded"
 	ReasonCodeRequestThrottled                    ReasonCode = "RequestThrottled"
+	ReasonCodeContextNotFound                     ReasonCode = "ContextNotFound"
+	ReasonCodeCustomerProjectContextNotPermitted  ReasonCode = "CustomerProjectContextNotPermitted"
+	ReasonCodeDisqualifiedLeadNotPermitted        ReasonCode = "DisqualifiedLeadNotPermitted"
 )
 
 // Values returns all known values for ReasonCode. Note that this can be expanded
@@ -1687,6 +1737,9 @@ func (ReasonCode) Values() []ReasonCode {
 		"ResourceSnapshotConflict",
 		"ServiceQuotaExceeded",
 		"RequestThrottled",
+		"ContextNotFound",
+		"CustomerProjectContextNotPermitted",
+		"DisqualifiedLeadNotPermitted",
 	}
 }
 
@@ -1727,9 +1780,10 @@ type RelatedEntityType string
 
 // Enum values for RelatedEntityType
 const (
-	RelatedEntityTypeSolutions            RelatedEntityType = "Solutions"
-	RelatedEntityTypeAwsProducts          RelatedEntityType = "AwsProducts"
-	RelatedEntityTypeAwsMarketplaceOffers RelatedEntityType = "AwsMarketplaceOffers"
+	RelatedEntityTypeSolutions               RelatedEntityType = "Solutions"
+	RelatedEntityTypeAwsProducts             RelatedEntityType = "AwsProducts"
+	RelatedEntityTypeAwsMarketplaceOffers    RelatedEntityType = "AwsMarketplaceOffers"
+	RelatedEntityTypeAwsMarketplaceOfferSets RelatedEntityType = "AwsMarketplaceOfferSets"
 )
 
 // Values returns all known values for RelatedEntityType. Note that this can be
@@ -1741,6 +1795,7 @@ func (RelatedEntityType) Values() []RelatedEntityType {
 		"Solutions",
 		"AwsProducts",
 		"AwsMarketplaceOffers",
+		"AwsMarketplaceOfferSets",
 	}
 }
 
@@ -2018,6 +2073,7 @@ const (
 	ValidationExceptionErrorCodeInvalidEnumValue     ValidationExceptionErrorCode = "INVALID_ENUM_VALUE"
 	ValidationExceptionErrorCodeInvalidStringFormat  ValidationExceptionErrorCode = "INVALID_STRING_FORMAT"
 	ValidationExceptionErrorCodeInvalidValue         ValidationExceptionErrorCode = "INVALID_VALUE"
+	ValidationExceptionErrorCodeNotEnoughValues      ValidationExceptionErrorCode = "NOT_ENOUGH_VALUES"
 	ValidationExceptionErrorCodeTooManyValues        ValidationExceptionErrorCode = "TOO_MANY_VALUES"
 	ValidationExceptionErrorCodeInvalidResourceState ValidationExceptionErrorCode = "INVALID_RESOURCE_STATE"
 	ValidationExceptionErrorCodeDuplicateKeyValue    ValidationExceptionErrorCode = "DUPLICATE_KEY_VALUE"
@@ -2036,6 +2092,7 @@ func (ValidationExceptionErrorCode) Values() []ValidationExceptionErrorCode {
 		"INVALID_ENUM_VALUE",
 		"INVALID_STRING_FORMAT",
 		"INVALID_VALUE",
+		"NOT_ENOUGH_VALUES",
 		"TOO_MANY_VALUES",
 		"INVALID_RESOURCE_STATE",
 		"DUPLICATE_KEY_VALUE",

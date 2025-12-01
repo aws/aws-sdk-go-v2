@@ -68,11 +68,18 @@ type GetFunctionConfigurationOutput struct {
 	// x86_64 .
 	Architectures []types.Architecture
 
+	// Configuration for the capacity provider that manages compute resources for
+	// Lambda functions.
+	CapacityProviderConfig *types.CapacityProviderConfig
+
 	// The SHA256 hash of the function's deployment package.
 	CodeSha256 *string
 
 	// The size of the function's deployment package, in bytes.
 	CodeSize int64
+
+	// The SHA256 hash of the function configuration.
+	ConfigSha256 *string
 
 	// The function's dead letter queue.
 	DeadLetterConfig *types.DeadLetterConfig

@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Determines if the given profiles are within a segment.
@@ -52,6 +53,10 @@ type GetSegmentMembershipOutput struct {
 	// An array of maps where each contains a response per profile failed for the
 	// request.
 	Failures []types.ProfileQueryFailures
+
+	// The timestamp indicating when the segment membership was last computed or
+	// updated.
+	LastComputedAt *time.Time
 
 	// An array of maps where each contains a response per profile requested.
 	Profiles []types.ProfileQueryResult

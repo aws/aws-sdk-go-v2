@@ -115,6 +115,107 @@ type AmazonManagedKafkaEventSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A capacity provider manages compute resources for Lambda functions.
+type CapacityProvider struct {
+
+	// The Amazon Resource Name (ARN) of the capacity provider.
+	//
+	// This member is required.
+	CapacityProviderArn *string
+
+	// The permissions configuration for the capacity provider.
+	//
+	// This member is required.
+	PermissionsConfig *CapacityProviderPermissionsConfig
+
+	// The current state of the capacity provider.
+	//
+	// This member is required.
+	State CapacityProviderState
+
+	// The VPC configuration for the capacity provider.
+	//
+	// This member is required.
+	VpcConfig *CapacityProviderVpcConfig
+
+	// The scaling configuration for the capacity provider.
+	CapacityProviderScalingConfig *CapacityProviderScalingConfig
+
+	// The instance requirements for compute resources managed by the capacity
+	// provider.
+	InstanceRequirements *InstanceRequirements
+
+	// The ARN of the KMS key used to encrypt the capacity provider's resources.
+	KmsKeyArn *string
+
+	// The date and time when the capacity provider was last modified.
+	LastModified *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for the capacity provider that manages compute resources for
+// Lambda functions.
+type CapacityProviderConfig struct {
+
+	// Configuration for Lambda-managed instances used by the capacity provider.
+	//
+	// This member is required.
+	LambdaManagedInstancesCapacityProviderConfig *LambdaManagedInstancesCapacityProviderConfig
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that specifies the permissions required for the capacity provider
+// to manage compute resources.
+type CapacityProviderPermissionsConfig struct {
+
+	// The ARN of the IAM role that the capacity provider uses to manage compute
+	// instances and other Amazon Web Services resources.
+	//
+	// This member is required.
+	CapacityProviderOperatorRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that defines how the capacity provider scales compute instances
+// based on demand and policies.
+type CapacityProviderScalingConfig struct {
+
+	// The maximum number of vCPUs that the capacity provider can provision across all
+	// compute instances.
+	MaxVCpuCount *int32
+
+	// The scaling mode that determines how the capacity provider responds to changes
+	// in demand.
+	ScalingMode CapacityProviderScalingMode
+
+	// A list of scaling policies that define how the capacity provider scales compute
+	// instances based on metrics and thresholds.
+	ScalingPolicies []TargetTrackingScalingPolicy
+
+	noSmithyDocumentSerde
+}
+
+// VPC configuration that specifies the network settings for compute instances
+// managed by the capacity provider.
+type CapacityProviderVpcConfig struct {
+
+	// A list of security group IDs that control network access for compute instances
+	// managed by the capacity provider.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// A list of subnet IDs where the capacity provider launches compute instances.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
 // Details about a [Code signing configuration].
 //
 // [Code signing configuration]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
@@ -631,11 +732,18 @@ type FunctionConfiguration struct {
 	// x86_64 .
 	Architectures []Architecture
 
+	// Configuration for the capacity provider that manages compute resources for
+	// Lambda functions.
+	CapacityProviderConfig *CapacityProviderConfig
+
 	// The SHA256 hash of the function's deployment package.
 	CodeSha256 *string
 
 	// The size of the function's deployment package, in bytes.
 	CodeSize int64
+
+	// The SHA256 hash of the function configuration.
+	ConfigSha256 *string
 
 	// The function's dead letter queue.
 	DeadLetterConfig *DeadLetterConfig
@@ -833,6 +941,21 @@ type FunctionEventInvokeConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration that defines the scaling behavior for a Lambda Managed Instances
+// function, including the minimum and maximum number of execution environments
+// that can be provisioned.
+type FunctionScalingConfig struct {
+
+	// The maximum number of execution environments that can be provisioned for the
+	// function.
+	MaxExecutionEnvironments *int32
+
+	// The minimum number of execution environments to maintain for the function.
+	MinExecutionEnvironments *int32
+
+	noSmithyDocumentSerde
+}
+
 // Details about a Lambda function URL.
 type FunctionUrlConfig struct {
 
@@ -890,6 +1013,23 @@ type FunctionUrlConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a function version that uses a specific capacity provider,
+// including its ARN and current state.
+type FunctionVersionsByCapacityProviderListItem struct {
+
+	// The Amazon Resource Name (ARN) of the function version.
+	//
+	// This member is required.
+	FunctionArn *string
+
+	// The current state of the function version.
+	//
+	// This member is required.
+	State State
+
+	noSmithyDocumentSerde
+}
+
 // Configuration values that override the container image Dockerfile settings. For
 // more information, see [Container image settings].
 //
@@ -929,6 +1069,25 @@ type ImageConfigResponse struct {
 
 	// Configuration values that override the container image Dockerfile.
 	ImageConfig *ImageConfig
+
+	noSmithyDocumentSerde
+}
+
+// Specifications that define the characteristics and constraints for compute
+// instances used by the capacity provider.
+type InstanceRequirements struct {
+
+	// A list of EC2 instance types that the capacity provider is allowed to use. If
+	// not specified, all compatible instance types are allowed.
+	AllowedInstanceTypes []string
+
+	// A list of supported CPU architectures for compute instances. Valid values
+	// include x86_64 and arm64 .
+	Architectures []Architecture
+
+	// A list of EC2 instance types that the capacity provider should not use, even if
+	// they meet other requirements.
+	ExcludedInstanceTypes []string
 
 	noSmithyDocumentSerde
 }
@@ -1051,6 +1210,24 @@ type KafkaSchemaValidationConfig struct {
 	// you selected JSON as the EventRecordFormat , Lambda also deserializes the
 	// selected message attributes.
 	Attribute KafkaSchemaValidationAttribute
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for Lambda-managed instances used by the capacity provider.
+type LambdaManagedInstancesCapacityProviderConfig struct {
+
+	// The Amazon Resource Name (ARN) of the capacity provider.
+	//
+	// This member is required.
+	CapacityProviderArn *string
+
+	// The amount of memory in GiB allocated per vCPU for execution environments.
+	ExecutionEnvironmentMemoryGiBPerVCpu *float64
+
+	// The maximum number of concurrent execution environments that can run on each
+	// compute instance.
+	PerExecutionEnvironmentMaxConcurrency *int32
 
 	noSmithyDocumentSerde
 }
@@ -1307,10 +1484,11 @@ type ProvisionedPollerConfig struct {
 	MinimumPollers *int32
 
 	// (Amazon MSK and self-managed Apache Kafka) The name of the provisioned poller
-	// group. Use this option to group multiple ESMs within the VPC to share Event
-	// Poller Unit (EPU) capacity. This option is used to optimize Provisioned mode
-	// costs for your ESMs. You can group up to 100 ESMs per poller group and aggregate
-	// maximum pollers across all ESMs in a group cannot exceed 2000.
+	// group. Use this option to group multiple ESMs within the event source's VPC to
+	// share Event Poller Unit (EPU) capacity. You can use this option to optimize
+	// Provisioned mode costs for your ESMs. You can group up to 100 ESMs per poller
+	// group and aggregate maximum pollers across all ESMs in a group cannot exceed
+	// 2000.
 	PollerGroupName *string
 
 	noSmithyDocumentSerde
@@ -1472,6 +1650,24 @@ type TagsError struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A scaling policy for the capacity provider that automatically adjusts capacity
+// to maintain a target value for a specific metric.
+type TargetTrackingScalingPolicy struct {
+
+	// The predefined metric type to track for scaling decisions.
+	//
+	// This member is required.
+	PredefinedMetricType CapacityProviderPredefinedMetricType
+
+	// The target value for the metric that the scaling policy attempts to maintain
+	// through scaling actions.
+	//
+	// This member is required.
+	TargetValue *float64
 
 	noSmithyDocumentSerde
 }

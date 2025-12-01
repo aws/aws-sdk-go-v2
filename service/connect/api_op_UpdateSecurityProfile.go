@@ -57,11 +57,18 @@ type UpdateSecurityProfileInput struct {
 	// in Amazon Connect.
 	AllowedAccessControlTags map[string]string
 
+	//  A list of Flow Modules an AI Agent can invoke as a tool
+	AllowedFlowModules []types.FlowModule
+
 	// A list of the third-party application's metadata.
 	Applications []types.Application
 
 	// The description of the security profile.
 	Description *string
+
+	// The granular access control configuration for the security profile, including
+	// data table permissions.
+	GranularAccessControlConfiguration *types.GranularAccessControlConfiguration
 
 	// The list of resources that a security profile applies hierarchy restrictions to
 	// in Amazon Connect. Following are acceptable ResourceNames: User .

@@ -31,7 +31,7 @@ func (c *Client) GetFunctionRecursionConfig(ctx context.Context, params *GetFunc
 
 type GetFunctionRecursionConfigInput struct {
 
-	//
+	// The name of the function.
 	//
 	// This member is required.
 	FunctionName *string

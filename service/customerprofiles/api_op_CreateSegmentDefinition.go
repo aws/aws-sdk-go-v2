@@ -45,14 +45,15 @@ type CreateSegmentDefinitionInput struct {
 	// This member is required.
 	SegmentDefinitionName *string
 
-	// Specifies the base segments and dimensions for a segment definition along with
-	// their respective relationship.
-	//
-	// This member is required.
-	SegmentGroups *types.SegmentGroup
-
 	// The description of the segment definition.
 	Description *string
+
+	// Specifies the base segments and dimensions for a segment definition along with
+	// their respective relationship.
+	SegmentGroups *types.SegmentGroup
+
+	// The segment SQL query.
+	SegmentSqlQuery *string
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

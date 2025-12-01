@@ -119,6 +119,9 @@ type GetUnfilteredTableMetadataOutput struct {
 	// A list of column row filters.
 	CellFilters []types.ColumnRowFilter
 
+	// Indicates if a table is a materialized view.
+	IsMaterializedView bool
+
 	// Specifies whether the view supports the SQL dialects of one or more different
 	// query engines and can therefore be read by those engines.
 	IsMultiDialectView bool

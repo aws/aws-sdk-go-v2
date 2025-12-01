@@ -743,6 +743,29 @@ func (ImageInputFormat) Values() []ImageInputFormat {
 	}
 }
 
+type InputImageFormat string
+
+// Enum values for InputImageFormat
+const (
+	InputImageFormatPng  InputImageFormat = "png"
+	InputImageFormatJpeg InputImageFormat = "jpeg"
+	InputImageFormatGif  InputImageFormat = "gif"
+	InputImageFormatWebp InputImageFormat = "webp"
+)
+
+// Values returns all known values for InputImageFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InputImageFormat) Values() []InputImageFormat {
+	return []InputImageFormat{
+		"png",
+		"jpeg",
+		"gif",
+		"webp",
+	}
+}
+
 type InputQueryType string
 
 // Enum values for InputQueryType
@@ -782,6 +805,25 @@ func (InvocationType) Values() []InvocationType {
 		"FINISH",
 		"ACTION_GROUP_CODE_INTERPRETER",
 		"AGENT_COLLABORATOR",
+	}
+}
+
+type KnowledgeBaseQueryType string
+
+// Enum values for KnowledgeBaseQueryType
+const (
+	KnowledgeBaseQueryTypeText  KnowledgeBaseQueryType = "TEXT"
+	KnowledgeBaseQueryTypeImage KnowledgeBaseQueryType = "IMAGE"
+)
+
+// Values returns all known values for KnowledgeBaseQueryType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KnowledgeBaseQueryType) Values() []KnowledgeBaseQueryType {
+	return []KnowledgeBaseQueryType{
+		"TEXT",
+		"IMAGE",
 	}
 }
 
@@ -1196,6 +1238,8 @@ const (
 	RetrievalResultContentTypeText  RetrievalResultContentType = "TEXT"
 	RetrievalResultContentTypeImage RetrievalResultContentType = "IMAGE"
 	RetrievalResultContentTypeRow   RetrievalResultContentType = "ROW"
+	RetrievalResultContentTypeAudio RetrievalResultContentType = "AUDIO"
+	RetrievalResultContentTypeVideo RetrievalResultContentType = "VIDEO"
 )
 
 // Values returns all known values for RetrievalResultContentType. Note that this
@@ -1207,6 +1251,8 @@ func (RetrievalResultContentType) Values() []RetrievalResultContentType {
 		"TEXT",
 		"IMAGE",
 		"ROW",
+		"AUDIO",
+		"VIDEO",
 	}
 }
 

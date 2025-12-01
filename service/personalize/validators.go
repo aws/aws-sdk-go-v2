@@ -1747,9 +1747,6 @@ func validateOpCreateDatasetImportJobInput(v *CreateDatasetImportJobInput) error
 	if v.DataSource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
 	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))

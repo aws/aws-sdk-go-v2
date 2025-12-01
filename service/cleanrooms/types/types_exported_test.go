@@ -667,6 +667,24 @@ func ExampleSnowflakeTableSchema_outputUsage() {
 
 var _ []types.SnowflakeTableSchemaV1
 
+func ExampleSyntheticDataParameters_outputUsage() {
+	var union types.SyntheticDataParameters
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SyntheticDataParametersMemberMlSyntheticDataParameters:
+		_ = v.Value // Value is types.MLSyntheticDataParameters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MLSyntheticDataParameters
+
 func ExampleTableReference_outputUsage() {
 	var union types.TableReference
 	// type switches can be used to check the union value

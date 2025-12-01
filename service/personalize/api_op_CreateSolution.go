@@ -159,6 +159,12 @@ type CreateSolutionInput struct {
 	// to false .
 	PerformHPO *bool
 
+	// Whether to perform incremental training updates on your model. When enabled,
+	// this allows the model to learn from new data more frequently without requiring
+	// full retraining, which enables near real-time personalization. This parameter is
+	// supported only for solutions that use the semantic-similarity recipe.
+	PerformIncrementalUpdate *bool
+
 	// The Amazon Resource Name (ARN) of the recipe to use for model training. This is
 	// required when performAutoML is false. For information about different Amazon
 	// Personalize recipes and their ARNs, see [Choosing a recipe].

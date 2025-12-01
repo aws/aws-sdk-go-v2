@@ -1319,6 +1319,25 @@ func (SupportedS3Region) Values() []SupportedS3Region {
 	}
 }
 
+type SyntheticDataColumnType string
+
+// Enum values for SyntheticDataColumnType
+const (
+	SyntheticDataColumnTypeCategorical SyntheticDataColumnType = "CATEGORICAL"
+	SyntheticDataColumnTypeNumerical   SyntheticDataColumnType = "NUMERICAL"
+)
+
+// Values returns all known values for SyntheticDataColumnType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SyntheticDataColumnType) Values() []SyntheticDataColumnType {
+	return []SyntheticDataColumnType{
+		"CATEGORICAL",
+		"NUMERICAL",
+	}
+}
+
 type TargetProtectedJobStatus string
 
 // Enum values for TargetProtectedJobStatus

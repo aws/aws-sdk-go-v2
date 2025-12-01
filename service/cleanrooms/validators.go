@@ -2444,6 +2444,42 @@ func validateChangeSpecification(v types.ChangeSpecification) error {
 	}
 }
 
+func validateColumnClassificationDetails(v *types.ColumnClassificationDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ColumnClassificationDetails"}
+	if v.ColumnMapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnMapping"))
+	} else if v.ColumnMapping != nil {
+		if err := validateColumnMappingList(v.ColumnMapping); err != nil {
+			invalidParams.AddNested("ColumnMapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateColumnMappingList(v []types.SyntheticDataColumnProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ColumnMappingList"}
+	for i := range v {
+		if err := validateSyntheticDataColumnProperties(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConfiguredTableAnalysisRulePolicy(v types.ConfiguredTableAnalysisRulePolicy) error {
 	if v == nil {
 		return nil
@@ -2764,6 +2800,11 @@ func validateMembershipMLPaymentConfig(v *types.MembershipMLPaymentConfig) error
 			invalidParams.AddNested("ModelInference", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SyntheticDataGeneration != nil {
+		if err := validateMembershipSyntheticDataGenerationPaymentConfig(v.SyntheticDataGeneration); err != nil {
+			invalidParams.AddNested("SyntheticDataGeneration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2924,6 +2965,21 @@ func validateMembershipQueryComputePaymentConfig(v *types.MembershipQueryCompute
 	}
 }
 
+func validateMembershipSyntheticDataGenerationPaymentConfig(v *types.MembershipSyntheticDataGenerationPaymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MembershipSyntheticDataGenerationPaymentConfig"}
+	if v.IsResponsible == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsResponsible"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMemberSpecification(v *types.MemberSpecification) error {
 	if v == nil {
 		return nil
@@ -2983,6 +3039,36 @@ func validateMLPaymentConfig(v *types.MLPaymentConfig) error {
 	if v.ModelInference != nil {
 		if err := validateModelInferencePaymentConfig(v.ModelInference); err != nil {
 			invalidParams.AddNested("ModelInference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SyntheticDataGeneration != nil {
+		if err := validateSyntheticDataGenerationPaymentConfig(v.SyntheticDataGeneration); err != nil {
+			invalidParams.AddNested("SyntheticDataGeneration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMLSyntheticDataParameters(v *types.MLSyntheticDataParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MLSyntheticDataParameters"}
+	if v.Epsilon == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Epsilon"))
+	}
+	if v.MaxMembershipInferenceAttackScore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxMembershipInferenceAttackScore"))
+	}
+	if v.ColumnClassification == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnClassification"))
+	} else if v.ColumnClassification != nil {
+		if err := validateColumnClassificationDetails(v.ColumnClassification); err != nil {
+			invalidParams.AddNested("ColumnClassification", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3158,6 +3244,21 @@ func validateProtectedJobOutputConfigurationInput(v types.ProtectedJobOutputConf
 			invalidParams.AddNested("[member]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProtectedJobParameters(v *types.ProtectedJobParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectedJobParameters"}
+	if v.AnalysisTemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisTemplateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3515,6 +3616,61 @@ func validateSnowflakeTableSchemaV1(v *types.SnowflakeTableSchemaV1) error {
 	}
 }
 
+func validateSyntheticDataColumnProperties(v *types.SyntheticDataColumnProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SyntheticDataColumnProperties"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if len(v.ColumnType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnType"))
+	}
+	if v.IsPredictiveValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsPredictiveValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSyntheticDataGenerationPaymentConfig(v *types.SyntheticDataGenerationPaymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SyntheticDataGenerationPaymentConfig"}
+	if v.IsResponsible == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsResponsible"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSyntheticDataParameters(v types.SyntheticDataParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SyntheticDataParameters"}
+	switch uv := v.(type) {
+	case *types.SyntheticDataParametersMemberMlSyntheticDataParameters:
+		if err := validateMLSyntheticDataParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[mlSyntheticDataParameters]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTableReference(v types.TableReference) error {
 	if v == nil {
 		return nil
@@ -3631,6 +3787,11 @@ func validateOpCreateAnalysisTemplateInput(v *CreateAnalysisTemplateInput) error
 	if v.ErrorMessageConfiguration != nil {
 		if err := validateErrorMessageConfiguration(v.ErrorMessageConfiguration); err != nil {
 			invalidParams.AddNested("ErrorMessageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SyntheticDataParameters != nil {
+		if err := validateSyntheticDataParameters(v.SyntheticDataParameters); err != nil {
+			invalidParams.AddNested("SyntheticDataParameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4845,6 +5006,10 @@ func validateOpStartProtectedJobInput(v *StartProtectedJobInput) error {
 	}
 	if v.JobParameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobParameters"))
+	} else if v.JobParameters != nil {
+		if err := validateProtectedJobParameters(v.JobParameters); err != nil {
+			invalidParams.AddNested("JobParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ResultConfiguration != nil {
 		if err := validateProtectedJobResultConfigurationInput(v.ResultConfiguration); err != nil {

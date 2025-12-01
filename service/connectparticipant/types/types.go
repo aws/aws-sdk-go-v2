@@ -130,8 +130,20 @@ type MessageMetadata struct {
 	// The identifier of the message that contains the metadata information.
 	MessageId *string
 
+	// The status of Message Processing for the message.
+	MessageProcessingStatus MessageProcessingStatus
+
 	// The list of receipt information for a message for different recipients.
 	Receipts []Receipt
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata for chat messages.
+type MessageProcessingMetadata struct {
+
+	// The status of Message Processing for the message.
+	MessageProcessingStatus MessageProcessingStatus
 
 	noSmithyDocumentSerde
 }

@@ -23,6 +23,7 @@ import (
 //	AcceptedTermMemberSupportTerm
 //	AcceptedTermMemberUsageBasedPricingTerm
 //	AcceptedTermMemberValidityTerm
+//	AcceptedTermMemberVariablePaymentTerm
 type AcceptedTerm interface {
 	isAcceptedTerm()
 }
@@ -144,6 +145,17 @@ type AcceptedTermMemberValidityTerm struct {
 
 func (*AcceptedTermMemberValidityTerm) isAcceptedTerm() {}
 
+// Defines a payment model where sellers can submit variable payment requests up
+// to a maximum charge amount, with configurable approval strategies and expiration
+// timelines.
+type AcceptedTermMemberVariablePaymentTerm struct {
+	Value VariablePaymentTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AcceptedTermMemberVariablePaymentTerm) isAcceptedTerm() {}
+
 // The details of the party accepting the agreement terms. This is commonly the
 // buyer for PurchaseAgreement .
 type Acceptor struct {
@@ -155,7 +167,7 @@ type Acceptor struct {
 }
 
 // A summary of the agreement, including top-level attributes (for example, the
-// agreement ID, version, proposer, and acceptor).
+// agreement ID, proposer, and acceptor).
 type AgreementViewSummary struct {
 
 	// The date and time that the agreement was accepted.
@@ -168,7 +180,7 @@ type AgreementViewSummary struct {
 	// The unique identifier of the agreement.
 	AgreementId *string
 
-	// The type of agreement. Values are PurchaseAgreement or VendorInsightsAgreement .
+	// The type of agreement. Value is PurchaseAgreement .
 	AgreementType *string
 
 	// The date and time when the agreement ends. The field is null for pay-as-you-go
@@ -470,6 +482,10 @@ type ProposalSummary struct {
 	// The unique identifier of the offer in AWS Marketplace.
 	OfferId *string
 
+	// A unique identifier for the offer set containing this offer. All agreements
+	// created from offers in this set include this identifier as context.
+	OfferSetId *string
+
 	// The list of resources involved in the agreement.
 	Resources []Resource
 
@@ -684,6 +700,46 @@ type ValidityTerm struct {
 
 	// Category of the term being updated.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines a payment model where sellers can submit variable payment requests up
+// to a maximum charge amount, with configurable approval strategies and expiration
+// timelines.
+type VariablePaymentTerm struct {
+
+	// Additional parameters specified by the acceptor while accepting the term.
+	Configuration *VariablePaymentTermConfiguration
+
+	// Defines the currency for the prices mentioned in the term.
+	CurrencyCode *string
+
+	// The maximum total amount that can be charged to the customer through variable
+	// payment requests under this term.
+	MaxTotalChargeAmount *string
+
+	// Type of the term.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Additional parameters specified by the acceptor while accepting the variable
+// payment term.
+type VariablePaymentTermConfiguration struct {
+
+	// Defines the strategy for approving payment requests. Values include
+	// AUTO_APPROVE_ON_EXPIRATION and WAIT_FOR_APPROVAL
+	//
+	// This member is required.
+	PaymentRequestApprovalStrategy PaymentRequestApprovalStrategy
+
+	// Defines the duration after which a payment request is automatically approved if
+	// no further action is taken. This only applies when the payment request approval
+	// strategy is set to AUTO_APPROVE_ON_EXPIRATION . The duration is represented in
+	// the ISO_8601 format (e.g., P10D for 10 days).
+	ExpirationDuration *string
 
 	noSmithyDocumentSerde
 }

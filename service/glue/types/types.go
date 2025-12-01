@@ -2292,51 +2292,6 @@ type ConnectionInput struct {
 	//   - CUSTOM - Uses configuration settings contained in a custom connector to read
 	//   from and write to data stores that are not natively supported by Glue.
 	//
-	// Additionally, a ConnectionType for the following SaaS connectors is supported:
-	//
-	//   - FACEBOOKADS - Designates a connection to Facebook Ads.
-	//
-	//   - GOOGLEADS - Designates a connection to Google Ads.
-	//
-	//   - GOOGLESHEETS - Designates a connection to Google Sheets.
-	//
-	//   - GOOGLEANALYTICS4 - Designates a connection to Google Analytics 4.
-	//
-	//   - HUBSPOT - Designates a connection to HubSpot.
-	//
-	//   - INSTAGRAMADS - Designates a connection to Instagram Ads.
-	//
-	//   - INTERCOM - Designates a connection to Intercom.
-	//
-	//   - JIRACLOUD - Designates a connection to Jira Cloud.
-	//
-	//   - MARKETO - Designates a connection to Adobe Marketo Engage.
-	//
-	//   - NETSUITEERP - Designates a connection to Oracle NetSuite.
-	//
-	//   - SALESFORCE - Designates a connection to Salesforce using OAuth
-	//   authentication.
-	//
-	//   - SALESFORCEMARKETINGCLOUD - Designates a connection to Salesforce Marketing
-	//   Cloud.
-	//
-	//   - SALESFORCEPARDOT - Designates a connection to Salesforce Marketing Cloud
-	//   Account Engagement (MCAE).
-	//
-	//   - SAPODATA - Designates a connection to SAP OData.
-	//
-	//   - SERVICENOW - Designates a connection to ServiceNow.
-	//
-	//   - SLACK - Designates a connection to Slack.
-	//
-	//   - SNAPCHATADS - Designates a connection to Snapchat Ads.
-	//
-	//   - STRIPE - Designates a connection to Stripe.
-	//
-	//   - ZENDESK - Designates a connection to Zendesk.
-	//
-	//   - ZOHOCRM - Designates a connection to Zoho CRM.
-	//
 	// For more information on the connection parameters needed for a particular
 	// connector, see the documentation for the connector in [Adding an Glue connection]in the Glue User Guide.
 	//
@@ -5235,6 +5190,38 @@ type IcebergCompactionMetrics struct {
 	noSmithyDocumentSerde
 }
 
+// Encryption key structure used for Iceberg table encryption. Contains the key
+// ID, encrypted key metadata, optional reference to the encrypting key, and
+// additional properties for the table's encryption scheme.
+type IcebergEncryptedKey struct {
+
+	// Encrypted key and metadata, base64 encoded. The format of encrypted key
+	// metadata is determined by the table's encryption scheme and can be a wrapped
+	// format specific to the table's KMS provider.
+	//
+	// This member is required.
+	EncryptedKeyMetadata *string
+
+	// Unique identifier of the encryption key used for Iceberg table encryption. This
+	// ID is used to reference the key in table metadata and track which key was used
+	// to encrypt specific data.
+	//
+	// This member is required.
+	KeyId *string
+
+	// Optional ID of the key used to encrypt or wrap the key metadata in Iceberg
+	// table encryption. This field references another encryption key that was used to
+	// encrypt the current key's metadata.
+	EncryptedById *string
+
+	// A string to string map of additional metadata used by the table's encryption
+	// scheme. These properties provide additional context and configuration for the
+	// encryption key implementation.
+	Properties map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // A structure that defines an Apache Iceberg metadata table to create in the
 // catalog.
 type IcebergInput struct {
@@ -5551,6 +5538,16 @@ type IcebergStructField struct {
 	// about the purpose and usage of this field.
 	Doc *string
 
+	// Default value used to populate the field's value for all records that were
+	// written before the field was added to the schema. This enables backward
+	// compatibility when adding new fields to existing Iceberg tables.
+	InitialDefault document.Interface
+
+	// Default value used to populate the field's value for any records written after
+	// the field was added to the schema, if the writer does not supply the field's
+	// value. This can be changed through schema evolution.
+	WriteDefault document.Interface
+
 	noSmithyDocumentSerde
 }
 
@@ -5569,6 +5566,21 @@ type IcebergTableUpdate struct {
 	//
 	// This member is required.
 	Schema *IcebergSchema
+
+	// The type of update action to be performed on the Iceberg table. Defines the
+	// specific operation such as adding schema, setting current schema, adding
+	// partition spec, or managing encryption keys.
+	Action IcebergUpdateAction
+
+	// Encryption key information associated with an Iceberg table update operation.
+	// Used when adding or removing encryption keys from the table metadata during
+	// table evolution.
+	EncryptionKey *IcebergEncryptedKey
+
+	// Identifier of the encryption key involved in an Iceberg table update operation.
+	// References the specific key being added to or removed from the table's
+	// encryption configuration.
+	KeyId *string
 
 	// The updated partitioning specification that defines how the table data should
 	// be reorganized and partitioned.
@@ -10597,6 +10609,9 @@ type Table struct {
 	// Catalog.
 	FederatedTable *FederatedTable
 
+	// Indicates a table is a MaterializedView .
+	IsMaterializedView *bool
+
 	// Specifies whether the view supports the SQL dialects of one or more different
 	// query engines and can therefore be read by those engines.
 	IsMultiDialectView *bool
@@ -10630,8 +10645,7 @@ type Table struct {
 	// The retention time for this table.
 	Retention int32
 
-	// A structure containing information about the state of an asynchronous change to
-	// a table.
+	// Indicates the the state of an asynchronous change to a table.
 	Status *TableStatus
 
 	// A storage descriptor containing information about the physical storage of this
@@ -11699,11 +11713,28 @@ type ViewDefinition struct {
 	// engine's documentation to understand the guarantees provided, if any.
 	IsProtected *bool
 
+	// Sets the method used for the most recent refresh.
+	LastRefreshType LastRefreshType
+
+	// Auto refresh interval in seconds for the materialized view. If not specified,
+	// the view will not automatically refresh.
+	RefreshSeconds *int64
+
 	// A list of representations.
 	Representations []ViewRepresentation
 
+	// List of the Apache Iceberg table versions referenced by the materialized view.
+	SubObjectVersionIds []int64
+
 	// A list of table Amazon Resource Names (ARNs).
 	SubObjects []string
+
+	// The ID value that identifies this view's version. For materialized views, the
+	// version ID is the Apache Iceberg table's snapshot ID.
+	ViewVersionId int64
+
+	// The version ID of the Apache Iceberg table.
+	ViewVersionToken *string
 
 	noSmithyDocumentSerde
 }
@@ -11720,12 +11751,30 @@ type ViewDefinitionInput struct {
 	// engine's documentation to understand the guarantees provided, if any.
 	IsProtected *bool
 
+	// The type of the materialized view's last refresh. Valid values: Full ,
+	// Incremental .
+	LastRefreshType LastRefreshType
+
+	// Auto refresh interval in seconds for the materialized view. If not specified,
+	// the view will not automatically refresh.
+	RefreshSeconds *int64
+
 	// A list of structures that contains the dialect of the view, and the query that
 	// defines the view.
 	Representations []ViewRepresentationInput
 
+	// List of the Apache Iceberg table versions referenced by the materialized view.
+	SubObjectVersionIds []int64
+
 	// A list of base table ARNs that make up the view.
 	SubObjects []string
+
+	// The ID value that identifies this view's version. For materialized views, the
+	// version ID is the Apache Iceberg table's snapshot ID.
+	ViewVersionId int64
+
+	// The version ID of the Apache Iceberg table.
+	ViewVersionToken *string
 
 	noSmithyDocumentSerde
 }

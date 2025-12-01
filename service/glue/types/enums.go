@@ -1620,6 +1620,43 @@ func (IcebergTargetCompressionType) Values() []IcebergTargetCompressionType {
 	}
 }
 
+type IcebergUpdateAction string
+
+// Enum values for IcebergUpdateAction
+const (
+	IcebergUpdateActionAddSchema           IcebergUpdateAction = "add-schema"
+	IcebergUpdateActionSetCurrentSchema    IcebergUpdateAction = "set-current-schema"
+	IcebergUpdateActionAddSpec             IcebergUpdateAction = "add-spec"
+	IcebergUpdateActionSetDefaultSpec      IcebergUpdateAction = "set-default-spec"
+	IcebergUpdateActionAddSortOrder        IcebergUpdateAction = "add-sort-order"
+	IcebergUpdateActionSetDefaultSortOrder IcebergUpdateAction = "set-default-sort-order"
+	IcebergUpdateActionSetLocation         IcebergUpdateAction = "set-location"
+	IcebergUpdateActionSetProperties       IcebergUpdateAction = "set-properties"
+	IcebergUpdateActionRemoveProperties    IcebergUpdateAction = "remove-properties"
+	IcebergUpdateActionAddEncryptionKey    IcebergUpdateAction = "add-encryption-key"
+	IcebergUpdateActionRemoveEncryptionKey IcebergUpdateAction = "remove-encryption-key"
+)
+
+// Values returns all known values for IcebergUpdateAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IcebergUpdateAction) Values() []IcebergUpdateAction {
+	return []IcebergUpdateAction{
+		"add-schema",
+		"set-current-schema",
+		"add-spec",
+		"set-default-spec",
+		"add-sort-order",
+		"set-default-sort-order",
+		"set-location",
+		"set-properties",
+		"remove-properties",
+		"add-encryption-key",
+		"remove-encryption-key",
+	}
+}
+
 type InclusionAnnotationValue string
 
 // Enum values for InclusionAnnotationValue
@@ -1944,6 +1981,25 @@ func (LastCrawlStatus) Values() []LastCrawlStatus {
 		"SUCCEEDED",
 		"CANCELLED",
 		"FAILED",
+	}
+}
+
+type LastRefreshType string
+
+// Enum values for LastRefreshType
+const (
+	LastRefreshTypeFull        LastRefreshType = "FULL"
+	LastRefreshTypeIncremental LastRefreshType = "INCREMENTAL"
+)
+
+// Values returns all known values for LastRefreshType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LastRefreshType) Values() []LastRefreshType {
+	return []LastRefreshType{
+		"FULL",
+		"INCREMENTAL",
 	}
 }
 

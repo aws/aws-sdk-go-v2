@@ -1883,6 +1883,27 @@ func (SpeechDetectionSensitivity) Values() []SpeechDetectionSensitivity {
 	}
 }
 
+type SpeechModelPreference string
+
+// Enum values for SpeechModelPreference
+const (
+	SpeechModelPreferenceStandard SpeechModelPreference = "Standard"
+	SpeechModelPreferenceNeural   SpeechModelPreference = "Neural"
+	SpeechModelPreferenceDeepgram SpeechModelPreference = "Deepgram"
+)
+
+// Values returns all known values for SpeechModelPreference. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpeechModelPreference) Values() []SpeechModelPreference {
+	return []SpeechModelPreference{
+		"Standard",
+		"Neural",
+		"Deepgram",
+	}
+}
+
 type TestExecutionApiMode string
 
 // Enum values for TestExecutionApiMode

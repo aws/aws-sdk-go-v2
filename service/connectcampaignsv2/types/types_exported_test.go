@@ -20,6 +20,9 @@ func ExampleChannelSubtypeParameters_outputUsage() {
 	case *types.ChannelSubtypeParametersMemberTelephony:
 		_ = v.Value // Value is types.TelephonyChannelSubtypeParameters
 
+	case *types.ChannelSubtypeParametersMemberWhatsApp:
+		_ = v.Value // Value is types.WhatsAppChannelSubtypeParameters
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -31,6 +34,7 @@ func ExampleChannelSubtypeParameters_outputUsage() {
 
 var _ *types.TelephonyChannelSubtypeParameters
 var _ *types.EmailChannelSubtypeParameters
+var _ *types.WhatsAppChannelSubtypeParameters
 var _ *types.SmsChannelSubtypeParameters
 
 func ExampleCommunicationLimits_outputUsage() {
@@ -76,6 +80,9 @@ func ExampleIntegrationConfig_outputUsage() {
 	case *types.IntegrationConfigMemberCustomerProfiles:
 		_ = v.Value // Value is types.CustomerProfilesIntegrationConfig
 
+	case *types.IntegrationConfigMemberLambda:
+		_ = v.Value // Value is types.LambdaIntegrationConfig
+
 	case *types.IntegrationConfigMemberQConnect:
 		_ = v.Value // Value is types.QConnectIntegrationConfig
 
@@ -88,6 +95,7 @@ func ExampleIntegrationConfig_outputUsage() {
 	}
 }
 
+var _ *types.LambdaIntegrationConfig
 var _ *types.CustomerProfilesIntegrationConfig
 var _ *types.QConnectIntegrationConfig
 
@@ -97,6 +105,9 @@ func ExampleIntegrationIdentifier_outputUsage() {
 	switch v := union.(type) {
 	case *types.IntegrationIdentifierMemberCustomerProfiles:
 		_ = v.Value // Value is types.CustomerProfilesIntegrationIdentifier
+
+	case *types.IntegrationIdentifierMemberLambda:
+		_ = v.Value // Value is types.LambdaIntegrationIdentifier
 
 	case *types.IntegrationIdentifierMemberQConnect:
 		_ = v.Value // Value is types.QConnectIntegrationIdentifier
@@ -110,6 +121,7 @@ func ExampleIntegrationIdentifier_outputUsage() {
 	}
 }
 
+var _ *types.LambdaIntegrationIdentifier
 var _ *types.CustomerProfilesIntegrationIdentifier
 var _ *types.QConnectIntegrationIdentifier
 
@@ -119,6 +131,9 @@ func ExampleIntegrationSummary_outputUsage() {
 	switch v := union.(type) {
 	case *types.IntegrationSummaryMemberCustomerProfiles:
 		_ = v.Value // Value is types.CustomerProfilesIntegrationSummary
+
+	case *types.IntegrationSummaryMemberLambda:
+		_ = v.Value // Value is types.LambdaIntegrationSummary
 
 	case *types.IntegrationSummaryMemberQConnect:
 		_ = v.Value // Value is types.QConnectIntegrationSummary
@@ -133,6 +148,7 @@ func ExampleIntegrationSummary_outputUsage() {
 }
 
 var _ *types.CustomerProfilesIntegrationSummary
+var _ *types.LambdaIntegrationSummary
 var _ *types.QConnectIntegrationSummary
 
 func ExampleOpenHours_outputUsage() {
@@ -240,3 +256,21 @@ var _ *types.PredictiveConfig
 var _ *types.PreviewConfig
 var _ *types.AgentlessConfig
 var _ *types.ProgressiveConfig
+
+func ExampleWhatsAppOutboundMode_outputUsage() {
+	var union types.WhatsAppOutboundMode
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.WhatsAppOutboundModeMemberAgentless:
+		_ = v.Value // Value is types.AgentlessConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AgentlessConfig

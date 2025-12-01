@@ -39,6 +39,9 @@ type ListMessagesInput struct {
 	// This member is required.
 	SessionId *string
 
+	// The filter criteria for listing messages.
+	Filter types.MessageFilterType
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
 

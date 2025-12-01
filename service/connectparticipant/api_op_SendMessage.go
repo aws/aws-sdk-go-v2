@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -92,6 +93,9 @@ type SendMessageOutput struct {
 
 	// The ID of the message.
 	Id *string
+
+	// Contains metadata for the message.
+	MessageMetadata *types.MessageProcessingMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

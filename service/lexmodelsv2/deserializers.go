@@ -1618,6 +1618,16 @@ func awsRestjson1_deserializeOpDocumentCreateBotLocaleOutput(v **CreateBotLocale
 				sv.SpeechDetectionSensitivity = types.SpeechDetectionSensitivity(jtv)
 			}
 
+		case "speechRecognitionSettings":
+			if err := awsRestjson1_deserializeDocumentSpeechRecognitionSettings(&sv.SpeechRecognitionSettings, value); err != nil {
+				return err
+			}
+
+		case "unifiedSpeechSettings":
+			if err := awsRestjson1_deserializeDocumentUnifiedSpeechSettings(&sv.UnifiedSpeechSettings, value); err != nil {
+				return err
+			}
+
 		case "voiceSettings":
 			if err := awsRestjson1_deserializeDocumentVoiceSettings(&sv.VoiceSettings, value); err != nil {
 				return err
@@ -7114,6 +7124,16 @@ func awsRestjson1_deserializeOpDocumentDescribeBotLocaleOutput(v **DescribeBotLo
 					return fmt.Errorf("expected SpeechDetectionSensitivity to be of type string, got %T instead", value)
 				}
 				sv.SpeechDetectionSensitivity = types.SpeechDetectionSensitivity(jtv)
+			}
+
+		case "speechRecognitionSettings":
+			if err := awsRestjson1_deserializeDocumentSpeechRecognitionSettings(&sv.SpeechRecognitionSettings, value); err != nil {
+				return err
+			}
+
+		case "unifiedSpeechSettings":
+			if err := awsRestjson1_deserializeDocumentUnifiedSpeechSettings(&sv.UnifiedSpeechSettings, value); err != nil {
+				return err
 			}
 
 		case "voiceSettings":
@@ -19703,6 +19723,16 @@ func awsRestjson1_deserializeOpDocumentUpdateBotLocaleOutput(v **UpdateBotLocale
 				sv.SpeechDetectionSensitivity = types.SpeechDetectionSensitivity(jtv)
 			}
 
+		case "speechRecognitionSettings":
+			if err := awsRestjson1_deserializeDocumentSpeechRecognitionSettings(&sv.SpeechRecognitionSettings, value); err != nil {
+				return err
+			}
+
+		case "unifiedSpeechSettings":
+			if err := awsRestjson1_deserializeDocumentUnifiedSpeechSettings(&sv.UnifiedSpeechSettings, value); err != nil {
+				return err
+			}
+
 		case "voiceSettings":
 			if err := awsRestjson1_deserializeDocumentVoiceSettings(&sv.VoiceSettings, value); err != nil {
 				return err
@@ -25023,6 +25053,16 @@ func awsRestjson1_deserializeDocumentBotLocaleImportSpecification(v **types.BotL
 				sv.SpeechDetectionSensitivity = types.SpeechDetectionSensitivity(jtv)
 			}
 
+		case "speechRecognitionSettings":
+			if err := awsRestjson1_deserializeDocumentSpeechRecognitionSettings(&sv.SpeechRecognitionSettings, value); err != nil {
+				return err
+			}
+
+		case "unifiedSpeechSettings":
+			if err := awsRestjson1_deserializeDocumentUnifiedSpeechSettings(&sv.UnifiedSpeechSettings, value); err != nil {
+				return err
+			}
+
 		case "voiceSettings":
 			if err := awsRestjson1_deserializeDocumentVoiceSettings(&sv.VoiceSettings, value); err != nil {
 				return err
@@ -27592,6 +27632,55 @@ func awsRestjson1_deserializeDocumentDateRangeFilter(v **types.DateRangeFilter, 
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDeepgramSpeechModelConfig(v **types.DeepgramSpeechModelConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeepgramSpeechModelConfig
+	if *v == nil {
+		sv = &types.DeepgramSpeechModelConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "apiTokenSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretsManagerSecretArn to be of type string, got %T instead", value)
+				}
+				sv.ApiTokenSecretArn = ptr.String(jtv)
+			}
+
+		case "modelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeepgramModelId to be of type string, got %T instead", value)
+				}
+				sv.ModelId = ptr.String(jtv)
 			}
 
 		default:
@@ -34171,6 +34260,136 @@ func awsRestjson1_deserializeDocumentSpecifications(v **types.Specifications, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSpeechFoundationModel(v **types.SpeechFoundationModel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpeechFoundationModel
+	if *v == nil {
+		sv = &types.SpeechFoundationModel{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "modelArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BedrockModelArn to be of type string, got %T instead", value)
+				}
+				sv.ModelArn = ptr.String(jtv)
+			}
+
+		case "voiceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VoiceId to be of type string, got %T instead", value)
+				}
+				sv.VoiceId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSpeechModelConfig(v **types.SpeechModelConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpeechModelConfig
+	if *v == nil {
+		sv = &types.SpeechModelConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deepgramConfig":
+			if err := awsRestjson1_deserializeDocumentDeepgramSpeechModelConfig(&sv.DeepgramConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSpeechRecognitionSettings(v **types.SpeechRecognitionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpeechRecognitionSettings
+	if *v == nil {
+		sv = &types.SpeechRecognitionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "speechModelConfig":
+			if err := awsRestjson1_deserializeDocumentSpeechModelConfig(&sv.SpeechModelConfig, value); err != nil {
+				return err
+			}
+
+		case "speechModelPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SpeechModelPreference to be of type string, got %T instead", value)
+				}
+				sv.SpeechModelPreference = types.SpeechModelPreference(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSSMLMessage(v **types.SSMLMessage, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -36102,6 +36321,42 @@ func awsRestjson1_deserializeDocumentTurnSpecification(v **types.TurnSpecificati
 
 		case "userTurn":
 			if err := awsRestjson1_deserializeDocumentUserTurnSpecification(&sv.UserTurn, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUnifiedSpeechSettings(v **types.UnifiedSpeechSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnifiedSpeechSettings
+	if *v == nil {
+		sv = &types.UnifiedSpeechSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "speechFoundationModel":
+			if err := awsRestjson1_deserializeDocumentSpeechFoundationModel(&sv.SpeechFoundationModel, value); err != nil {
 				return err
 			}
 

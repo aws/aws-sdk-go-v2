@@ -35,6 +35,26 @@ func (AgreementStatus) Values() []AgreementStatus {
 	}
 }
 
+type PaymentRequestApprovalStrategy string
+
+// Enum values for PaymentRequestApprovalStrategy
+const (
+	PaymentRequestApprovalStrategyAutoApproveOnExpiration PaymentRequestApprovalStrategy = "AUTO_APPROVE_ON_EXPIRATION"
+	PaymentRequestApprovalStrategyWaitForApproval         PaymentRequestApprovalStrategy = "WAIT_FOR_APPROVAL"
+)
+
+// Values returns all known values for PaymentRequestApprovalStrategy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentRequestApprovalStrategy) Values() []PaymentRequestApprovalStrategy {
+	return []PaymentRequestApprovalStrategy{
+		"AUTO_APPROVE_ON_EXPIRATION",
+		"WAIT_FOR_APPROVAL",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType

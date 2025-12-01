@@ -3439,6 +3439,16 @@ func validateBotLocaleImportSpecification(v *types.BotLocaleImportSpecification)
 			invalidParams.AddNested("VoiceSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SpeechRecognitionSettings != nil {
+		if err := validateSpeechRecognitionSettings(v.SpeechRecognitionSettings); err != nil {
+			invalidParams.AddNested("SpeechRecognitionSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UnifiedSpeechSettings != nil {
+		if err := validateUnifiedSpeechSettings(v.UnifiedSpeechSettings); err != nil {
+			invalidParams.AddNested("UnifiedSpeechSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4064,6 +4074,21 @@ func validateDateRangeFilter(v *types.DateRangeFilter) error {
 	}
 	if v.EndDateTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndDateTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeepgramSpeechModelConfig(v *types.DeepgramSpeechModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeepgramSpeechModelConfig"}
+	if v.ApiTokenSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiTokenSecretArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6018,6 +6043,55 @@ func validateSpecifications(v *types.Specifications) error {
 	}
 }
 
+func validateSpeechFoundationModel(v *types.SpeechFoundationModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpeechFoundationModel"}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSpeechModelConfig(v *types.SpeechModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpeechModelConfig"}
+	if v.DeepgramConfig != nil {
+		if err := validateDeepgramSpeechModelConfig(v.DeepgramConfig); err != nil {
+			invalidParams.AddNested("DeepgramConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSpeechRecognitionSettings(v *types.SpeechRecognitionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpeechRecognitionSettings"}
+	if v.SpeechModelConfig != nil {
+		if err := validateSpeechModelConfig(v.SpeechModelConfig); err != nil {
+			invalidParams.AddNested("SpeechModelConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSSMLMessage(v *types.SSMLMessage) error {
 	if v == nil {
 		return nil
@@ -6492,6 +6566,25 @@ func validateTranscriptSourceSetting(v *types.TranscriptSourceSetting) error {
 	}
 }
 
+func validateUnifiedSpeechSettings(v *types.UnifiedSpeechSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UnifiedSpeechSettings"}
+	if v.SpeechFoundationModel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpeechFoundationModel"))
+	} else if v.SpeechFoundationModel != nil {
+		if err := validateSpeechFoundationModel(v.SpeechFoundationModel); err != nil {
+			invalidParams.AddNested("SpeechFoundationModel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateCustomVocabularyItemsList(v []types.CustomVocabularyItem) error {
 	if v == nil {
 		return nil
@@ -6788,6 +6881,16 @@ func validateOpCreateBotLocaleInput(v *CreateBotLocaleInput) error {
 	if v.VoiceSettings != nil {
 		if err := validateVoiceSettings(v.VoiceSettings); err != nil {
 			invalidParams.AddNested("VoiceSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UnifiedSpeechSettings != nil {
+		if err := validateUnifiedSpeechSettings(v.UnifiedSpeechSettings); err != nil {
+			invalidParams.AddNested("UnifiedSpeechSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpeechRecognitionSettings != nil {
+		if err := validateSpeechRecognitionSettings(v.SpeechRecognitionSettings); err != nil {
+			invalidParams.AddNested("SpeechRecognitionSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.GenerativeAISettings != nil {
@@ -8879,6 +8982,16 @@ func validateOpUpdateBotLocaleInput(v *UpdateBotLocaleInput) error {
 	if v.VoiceSettings != nil {
 		if err := validateVoiceSettings(v.VoiceSettings); err != nil {
 			invalidParams.AddNested("VoiceSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UnifiedSpeechSettings != nil {
+		if err := validateUnifiedSpeechSettings(v.UnifiedSpeechSettings); err != nil {
+			invalidParams.AddNested("UnifiedSpeechSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpeechRecognitionSettings != nil {
+		if err := validateSpeechRecognitionSettings(v.SpeechRecognitionSettings); err != nil {
+			invalidParams.AddNested("SpeechRecognitionSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.GenerativeAISettings != nil {

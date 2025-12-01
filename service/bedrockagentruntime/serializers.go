@@ -4316,6 +4316,23 @@ func awsRestjson1_serializeDocumentInputFiles(v []types.InputFile, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInputImage(v *types.InputImage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Format) > 0 {
+		ok := object.Key("format")
+		ok.String(string(v.Format))
+	}
+
+	if v.InlineContent != nil {
+		ok := object.Key("inlineContent")
+		ok.Base64EncodeBytes(v.InlineContent)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInputPrompt(v types.InputPrompt, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4436,9 +4453,21 @@ func awsRestjson1_serializeDocumentKnowledgeBaseQuery(v *types.KnowledgeBaseQuer
 	object := value.Object()
 	defer object.Close()
 
+	if v.Image != nil {
+		ok := object.Key("image")
+		if err := awsRestjson1_serializeDocumentInputImage(v.Image, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Text != nil {
 		ok := object.Key("text")
 		ok.String(*v.Text)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

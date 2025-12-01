@@ -36,7 +36,8 @@ type ListEntitiesInput struct {
 
 	// The type of entities to retrieve. Valid values are: AmiProduct ,
 	// ContainerProduct , DataProduct , SaaSProduct , ProcurementPolicy , Experience ,
-	// Audience , BrandingSettings , Offer , Seller , ResaleAuthorization .
+	// Audience , BrandingSettings , Offer , OfferSet , Seller , ResaleAuthorization ,
+	// Solution .
 	//
 	// This member is required.
 	EntityType *string

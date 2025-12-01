@@ -62,8 +62,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occurred while calling a dependency. For example, calling
-// connect:DecribeContact as part of CreateSession with a contactArn.
+// The request failed because it depends on another request that failed.
 type DependencyFailedException struct {
 	Message *string
 
@@ -281,6 +280,32 @@ func (e *UnauthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The server has a failure of processing the message
+type UnprocessableContentException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnprocessableContentException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnprocessableContentException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnprocessableContentException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnprocessableContentException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnprocessableContentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The input fails to satisfy the constraints specified by a service.
 type ValidationException struct {

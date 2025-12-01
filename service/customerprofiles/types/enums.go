@@ -192,6 +192,25 @@ func (ContactType) Values() []ContactType {
 	}
 }
 
+type ContentType string
+
+// Enum values for ContentType
+const (
+	ContentTypeString ContentType = "STRING"
+	ContentTypeNumber ContentType = "NUMBER"
+)
+
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentType) Values() []ContentType {
+	return []ContentType{
+		"STRING",
+		"NUMBER",
+	}
+}
+
 type DataFormat string
 
 // Enum values for DataFormat
@@ -335,6 +354,25 @@ func (EventTriggerLogicalOperator) Values() []EventTriggerLogicalOperator {
 		"ANY",
 		"ALL",
 		"NONE",
+	}
+}
+
+type FeatureType string
+
+// Enum values for FeatureType
+const (
+	FeatureTypeTextual     FeatureType = "TEXTUAL"
+	FeatureTypeCategorical FeatureType = "CATEGORICAL"
+)
+
+// Values returns all known values for FeatureType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureType) Values() []FeatureType {
+	return []FeatureType{
+		"TEXTUAL",
+		"CATEGORICAL",
 	}
 }
 
@@ -838,6 +876,62 @@ func (ReadinessStatus) Values() []ReadinessStatus {
 	}
 }
 
+type RecommenderRecipeName string
+
+// Enum values for RecommenderRecipeName
+const (
+	RecommenderRecipeNameRecommendedForYou     RecommenderRecipeName = "recommended-for-you"
+	RecommenderRecipeNameSimilarItems          RecommenderRecipeName = "similar-items"
+	RecommenderRecipeNameFrequentlyPairedItems RecommenderRecipeName = "frequently-paired-items"
+	RecommenderRecipeNamePopularItems          RecommenderRecipeName = "popular-items"
+	RecommenderRecipeNameTrendingNow           RecommenderRecipeName = "trending-now"
+)
+
+// Values returns all known values for RecommenderRecipeName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommenderRecipeName) Values() []RecommenderRecipeName {
+	return []RecommenderRecipeName{
+		"recommended-for-you",
+		"similar-items",
+		"frequently-paired-items",
+		"popular-items",
+		"trending-now",
+	}
+}
+
+type RecommenderStatus string
+
+// Enum values for RecommenderStatus
+const (
+	RecommenderStatusPending    RecommenderStatus = "PENDING"
+	RecommenderStatusInProgress RecommenderStatus = "IN_PROGRESS"
+	RecommenderStatusActive     RecommenderStatus = "ACTIVE"
+	RecommenderStatusFailed     RecommenderStatus = "FAILED"
+	RecommenderStatusStopping   RecommenderStatus = "STOPPING"
+	RecommenderStatusInactive   RecommenderStatus = "INACTIVE"
+	RecommenderStatusStarting   RecommenderStatus = "STARTING"
+	RecommenderStatusDeleting   RecommenderStatus = "DELETING"
+)
+
+// Values returns all known values for RecommenderStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommenderStatus) Values() []RecommenderStatus {
+	return []RecommenderStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"ACTIVE",
+		"FAILED",
+		"STOPPING",
+		"INACTIVE",
+		"STARTING",
+		"DELETING",
+	}
+}
+
 type RuleBasedMatchingStatus string
 
 // Enum values for RuleBasedMatchingStatus
@@ -971,6 +1065,25 @@ func (SalesforceConnectorOperator) Values() []SalesforceConnectorOperator {
 	}
 }
 
+type Scope string
+
+// Enum values for Scope
+const (
+	ScopeProfile Scope = "PROFILE"
+	ScopeDomain  Scope = "DOMAIN"
+)
+
+// Values returns all known values for Scope. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Scope) Values() []Scope {
+	return []Scope{
+		"PROFILE",
+		"DOMAIN",
+	}
+}
+
 type SegmentSnapshotStatus string
 
 // Enum values for SegmentSnapshotStatus
@@ -989,6 +1102,25 @@ func (SegmentSnapshotStatus) Values() []SegmentSnapshotStatus {
 		"COMPLETED",
 		"IN_PROGRESS",
 		"FAILED",
+	}
+}
+
+type SegmentType string
+
+// Enum values for SegmentType
+const (
+	SegmentTypeClassic  SegmentType = "CLASSIC"
+	SegmentTypeEnhanced SegmentType = "ENHANCED"
+)
+
+// Values returns all known values for SegmentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SegmentType) Values() []SegmentType {
+	return []SegmentType{
+		"CLASSIC",
+		"ENHANCED",
 	}
 }
 
@@ -1255,6 +1387,33 @@ func (TaskType) Values() []TaskType {
 		"Merge",
 		"Truncate",
 		"Validate",
+	}
+}
+
+type TrainingMetricName string
+
+// Enum values for TrainingMetricName
+const (
+	TrainingMetricNameHit        TrainingMetricName = "hit"
+	TrainingMetricNameCoverage   TrainingMetricName = "coverage"
+	TrainingMetricNameRecall     TrainingMetricName = "recall"
+	TrainingMetricNamePopularity TrainingMetricName = "popularity"
+	TrainingMetricNameFreshness  TrainingMetricName = "freshness"
+	TrainingMetricNameSimilarity TrainingMetricName = "similarity"
+)
+
+// Values returns all known values for TrainingMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingMetricName) Values() []TrainingMetricName {
+	return []TrainingMetricName{
+		"hit",
+		"coverage",
+		"recall",
+		"popularity",
+		"freshness",
+		"similarity",
 	}
 }
 

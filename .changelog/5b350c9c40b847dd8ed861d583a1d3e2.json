@@ -1,0 +1,8 @@
+{
+    "id": "5b350c9c-40b8-47dd-8ed8-61d583a1d3e2",
+    "type": "feature",
+    "description": "Support audio and video ingestion on Bedrock Knowledge Bases.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

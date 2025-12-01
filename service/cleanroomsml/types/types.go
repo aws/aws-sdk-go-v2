@@ -619,6 +619,21 @@ type CollaborationTrainedModelSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains classification information for data columns, including mappings that
+// specify how columns should be handled during synthetic data generation and
+// privacy analysis.
+type ColumnClassificationDetails struct {
+
+	// A mapping that defines the classification of data columns for synthetic data
+	// generation and specifies how each column should be handled during the
+	// privacy-preserving data synthesis process.
+	//
+	// This member is required.
+	ColumnMapping []SyntheticDataColumnProperties
+
+	noSmithyDocumentSerde
+}
+
 // Metadata for a column.
 type ColumnSchema struct {
 
@@ -840,6 +855,21 @@ type CustomEntityConfig struct {
 	//
 	// This member is required.
 	CustomDataIdentifiers []string
+
+	noSmithyDocumentSerde
+}
+
+// Privacy evaluation scores that measure the privacy characteristics of the
+// generated synthetic data, including assessments of potential privacy risks such
+// as membership inference attacks.
+type DataPrivacyScores struct {
+
+	// Scores that evaluate the vulnerability of the synthetic data to membership
+	// inference attacks, which attempt to determine whether a specific individual was
+	// a member of the original dataset.
+	//
+	// This member is required.
+	MembershipInferenceAttackScores []MembershipInferenceAttackScore
 
 	noSmithyDocumentSerde
 }
@@ -1110,6 +1140,26 @@ type LogsConfigurationPolicy struct {
 	noSmithyDocumentSerde
 }
 
+// A score that measures the vulnerability of synthetic data to membership
+// inference attacks and provides both the numerical score and the version of the
+// attack methodology used for evaluation.
+type MembershipInferenceAttackScore struct {
+
+	// The version of the membership inference attack, which consists of the attack
+	// type and its version number, used to generate this privacy score.
+	//
+	// This member is required.
+	AttackVersion MembershipInferenceAttackVersion
+
+	// The numerical score representing the vulnerability to membership inference
+	// attacks.
+	//
+	// This member is required.
+	Score *float64
+
+	noSmithyDocumentSerde
+}
+
 // Information about the model metric that is reported for a trained model.
 type MetricDefinition struct {
 
@@ -1200,6 +1250,33 @@ type MLOutputConfiguration struct {
 
 	// The Amazon S3 location where exported model artifacts are stored.
 	Destination *Destination
+
+	noSmithyDocumentSerde
+}
+
+// Parameters that control the generation of synthetic data for custom model
+// training, including privacy settings and column classification details.
+type MLSyntheticDataParameters struct {
+
+	// Classification details for data columns that specify how each column should be
+	// treated during synthetic data generation.
+	//
+	// This member is required.
+	ColumnClassification *ColumnClassificationDetails
+
+	// The epsilon value for differential privacy, which controls the privacy-utility
+	// tradeoff in synthetic data generation. Lower values provide stronger privacy
+	// guarantees but may reduce data utility.
+	//
+	// This member is required.
+	Epsilon *float64
+
+	// The maximum acceptable score for membership inference attack vulnerability.
+	// Synthetic data generation fails if the score for the resulting data exceeds this
+	// threshold.
+	//
+	// This member is required.
+	MaxMembershipInferenceAttackScore *float64
 
 	noSmithyDocumentSerde
 }
@@ -1397,6 +1474,67 @@ type StoppingCondition struct {
 	// The maximum amount of time, in seconds, that model training can run before it
 	// is terminated.
 	MaxRuntimeInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Properties that define how a specific data column should be handled during
+// synthetic data generation, including its name, type, and role in predictive
+// modeling.
+type SyntheticDataColumnProperties struct {
+
+	// The name of the data column as it appears in the dataset.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The data type of the column, which determines how the synthetic data generation
+	// algorithm processes and synthesizes values for this column.
+	//
+	// This member is required.
+	ColumnType SyntheticDataColumnType
+
+	// Indicates if this column contains predictive values that should be treated as
+	// target variables in machine learning models. This affects how the synthetic data
+	// generation preserves statistical relationships.
+	//
+	// This member is required.
+	IsPredictiveValue *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for synthetic data generation, including the parameters
+// that control data synthesis and the evaluation scores that measure the quality
+// and privacy characteristics of the generated synthetic data.
+type SyntheticDataConfiguration struct {
+
+	// The parameters that control how synthetic data is generated, including privacy
+	// settings, column classifications, and other configuration options that affect
+	// the data synthesis process.
+	//
+	// This member is required.
+	SyntheticDataParameters *MLSyntheticDataParameters
+
+	// Evaluation scores that assess the quality and privacy characteristics of the
+	// generated synthetic data, providing metrics on data utility and privacy
+	// preservation.
+	SyntheticDataEvaluationScores *SyntheticDataEvaluationScores
+
+	noSmithyDocumentSerde
+}
+
+// Comprehensive evaluation metrics for synthetic data that assess both the
+// utility of the generated data for machine learning tasks and its privacy
+// preservation characteristics.
+type SyntheticDataEvaluationScores struct {
+
+	// Privacy-specific evaluation scores that measure how well the synthetic data
+	// protects individual privacy, including assessments of potential privacy risks
+	// such as membership inference attacks.
+	//
+	// This member is required.
+	DataPrivacyScores *DataPrivacyScores
 
 	noSmithyDocumentSerde
 }

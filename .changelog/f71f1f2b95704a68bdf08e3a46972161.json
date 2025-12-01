@@ -1,0 +1,8 @@
+{
+    "id": "f71f1f2b-9570-4a68-bdf0-8e3a46972161",
+    "type": "feature",
+    "description": "Support audio and video content retrieval on Bedrock Knowledge Bases.",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

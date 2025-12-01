@@ -65,6 +65,9 @@ type GetRecommendationsInput struct {
 	// response in the next request to retrieve the next set of chunks.
 	NextChunkToken *string
 
+	// The type of recommendation being requested.
+	RecommendationType types.RecommendationType
+
 	// The duration (in seconds) for which the call waits for a recommendation to be
 	// made available before returning. If a recommendation is available, the call
 	// returns sooner than WaitTimeSeconds . If no messages are available and the wait

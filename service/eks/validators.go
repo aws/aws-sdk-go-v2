@@ -110,6 +110,26 @@ func (m *validateOpCreateAddon) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCapability struct {
+}
+
+func (*validateOpCreateCapability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCapability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCapabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCapabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCluster struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpDeleteAddon) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAddonInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCapability struct {
+}
+
+func (*validateOpDeleteCapability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCapability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCapabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCapabilityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -425,6 +465,26 @@ func (m *validateOpDescribeAddon) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAddonInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCapability struct {
+}
+
+func (*validateOpDescribeCapability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCapability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCapabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCapabilityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +770,26 @@ func (m *validateOpListAssociatedAccessPolicies) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCapabilities struct {
+}
+
+func (*validateOpListCapabilities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCapabilities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCapabilitiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCapabilitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListFargateProfiles struct {
 }
 
@@ -970,6 +1050,26 @@ func (m *validateOpUpdateAddon) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCapability struct {
+}
+
+func (*validateOpUpdateCapability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCapability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCapabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCapabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateClusterConfig struct {
 }
 
@@ -1110,6 +1210,10 @@ func addOpCreateAddonValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAddon{}, middleware.After)
 }
 
+func addOpCreateCapabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCapability{}, middleware.After)
+}
+
 func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
 }
@@ -1136,6 +1240,10 @@ func addOpDeleteAccessEntryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteAddonValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAddon{}, middleware.After)
+}
+
+func addOpDeleteCapabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCapability{}, middleware.After)
 }
 
 func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -1172,6 +1280,10 @@ func addOpDescribeAddonConfigurationValidationMiddleware(stack *middleware.Stack
 
 func addOpDescribeAddonValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAddon{}, middleware.After)
+}
+
+func addOpDescribeCapabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCapability{}, middleware.After)
 }
 
 func addOpDescribeClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -1230,6 +1342,10 @@ func addOpListAssociatedAccessPoliciesValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpListAssociatedAccessPolicies{}, middleware.After)
 }
 
+func addOpListCapabilitiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCapabilities{}, middleware.After)
+}
+
 func addOpListFargateProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFargateProfiles{}, middleware.After)
 }
@@ -1282,6 +1398,10 @@ func addOpUpdateAddonValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAddon{}, middleware.After)
 }
 
+func addOpUpdateCapabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCapability{}, middleware.After)
+}
+
 func addOpUpdateClusterConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateClusterConfig{}, middleware.After)
 }
@@ -1332,6 +1452,101 @@ func validateAddonPodIdentityAssociationsList(v []types.AddonPodIdentityAssociat
 	for i := range v {
 		if err := validateAddonPodIdentityAssociations(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateArgoCdAwsIdcConfigRequest(v *types.ArgoCdAwsIdcConfigRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArgoCdAwsIdcConfigRequest"}
+	if v.IdcInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdcInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateArgoCdConfigRequest(v *types.ArgoCdConfigRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArgoCdConfigRequest"}
+	if v.AwsIdc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsIdc"))
+	} else if v.AwsIdc != nil {
+		if err := validateArgoCdAwsIdcConfigRequest(v.AwsIdc); err != nil {
+			invalidParams.AddNested("AwsIdc", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RbacRoleMappings != nil {
+		if err := validateArgoCdRoleMappingList(v.RbacRoleMappings); err != nil {
+			invalidParams.AddNested("RbacRoleMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateArgoCdRoleMapping(v *types.ArgoCdRoleMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArgoCdRoleMapping"}
+	if len(v.Role) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.Identities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identities"))
+	} else if v.Identities != nil {
+		if err := validateSsoIdentityList(v.Identities); err != nil {
+			invalidParams.AddNested("Identities", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateArgoCdRoleMappingList(v []types.ArgoCdRoleMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArgoCdRoleMappingList"}
+	for i := range v {
+		if err := validateArgoCdRoleMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCapabilityConfigurationRequest(v *types.CapabilityConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CapabilityConfigurationRequest"}
+	if v.ArgoCd != nil {
+		if err := validateArgoCdConfigRequest(v.ArgoCd); err != nil {
+			invalidParams.AddNested("ArgoCd", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1408,6 +1623,97 @@ func validateOutpostConfigRequest(v *types.OutpostConfigRequest) error {
 	}
 	if v.ControlPlaneInstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ControlPlaneInstanceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSsoIdentity(v *types.SsoIdentity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SsoIdentity"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSsoIdentityList(v []types.SsoIdentity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SsoIdentityList"}
+	for i := range v {
+		if err := validateSsoIdentity(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateArgoCdConfig(v *types.UpdateArgoCdConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateArgoCdConfig"}
+	if v.RbacRoleMappings != nil {
+		if err := validateUpdateRoleMappings(v.RbacRoleMappings); err != nil {
+			invalidParams.AddNested("RbacRoleMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateCapabilityConfiguration(v *types.UpdateCapabilityConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCapabilityConfiguration"}
+	if v.ArgoCd != nil {
+		if err := validateUpdateArgoCdConfig(v.ArgoCd); err != nil {
+			invalidParams.AddNested("ArgoCd", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateRoleMappings(v *types.UpdateRoleMappings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRoleMappings"}
+	if v.AddOrUpdateRoleMappings != nil {
+		if err := validateArgoCdRoleMappingList(v.AddOrUpdateRoleMappings); err != nil {
+			invalidParams.AddNested("AddOrUpdateRoleMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RemoveRoleMappings != nil {
+		if err := validateArgoCdRoleMappingList(v.RemoveRoleMappings); err != nil {
+			invalidParams.AddNested("RemoveRoleMappings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1513,6 +1819,38 @@ func validateOpCreateAddonInput(v *CreateAddonInput) error {
 		if err := validateAddonPodIdentityAssociationsList(v.PodIdentityAssociations); err != nil {
 			invalidParams.AddNested("PodIdentityAssociations", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCapabilityInput(v *CreateCapabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCapabilityInput"}
+	if v.CapabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
+	}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Configuration != nil {
+		if err := validateCapabilityConfigurationRequest(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.DeletePropagationPolicy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeletePropagationPolicy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1670,6 +2008,24 @@ func validateOpDeleteAddonInput(v *DeleteAddonInput) error {
 	}
 }
 
+func validateOpDeleteCapabilityInput(v *DeleteCapabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCapabilityInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.CapabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	if v == nil {
 		return nil
@@ -1815,6 +2171,24 @@ func validateOpDescribeAddonInput(v *DescribeAddonInput) error {
 	}
 	if v.AddonName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AddonName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCapabilityInput(v *DescribeCapabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCapabilityInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.CapabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2071,6 +2445,21 @@ func validateOpListAssociatedAccessPoliciesInput(v *ListAssociatedAccessPolicies
 	}
 }
 
+func validateOpListCapabilitiesInput(v *ListCapabilitiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCapabilitiesInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListFargateProfilesInput(v *ListFargateProfilesInput) error {
 	if v == nil {
 		return nil
@@ -2281,6 +2670,29 @@ func validateOpUpdateAddonInput(v *UpdateAddonInput) error {
 	if v.PodIdentityAssociations != nil {
 		if err := validateAddonPodIdentityAssociationsList(v.PodIdentityAssociations); err != nil {
 			invalidParams.AddNested("PodIdentityAssociations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCapabilityInput(v *UpdateCapabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCapabilityInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.CapabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
+	}
+	if v.Configuration != nil {
+		if err := validateUpdateCapabilityConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

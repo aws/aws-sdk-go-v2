@@ -109,6 +109,9 @@ type StartChatContactInput struct {
 	// The initial message to be sent to the newly created chat.
 	InitialMessage *types.ChatMessage
 
+	//  The configuration of the participant.
+	ParticipantConfiguration *types.ParticipantConfiguration
+
 	// Enable persistent chats. For more information about enabling persistent chat,
 	// and for example use cases and how to configure for them, see [Enable persistent chat].
 	//

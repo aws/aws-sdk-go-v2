@@ -1,0 +1,8 @@
+{
+    "id": "bae3b86f-c050-4696-8374-53ac436e9f68",
+    "type": "feature",
+    "description": "feature: Glue: Add support for Iceberg materialized view in Glue Data Catalog, including updated CreateTable API to support materialized views and new APIs for managing data refresh for materialized views.\nfeature: Glue: Add support for Iceberg table encryption keys and struct field defaults.",
+    "modules": [
+        "service/glue"
+    ]
+}

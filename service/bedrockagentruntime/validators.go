@@ -1493,6 +1493,24 @@ func validateInputFiles(v []types.InputFile) error {
 	}
 }
 
+func validateInputImage(v *types.InputImage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputImage"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.InlineContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InlineContent"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInputPrompt(v types.InputPrompt) error {
 	if v == nil {
 		return nil
@@ -1622,8 +1640,10 @@ func validateKnowledgeBaseQuery(v *types.KnowledgeBaseQuery) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseQuery"}
-	if v.Text == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	if v.Image != nil {
+		if err := validateInputImage(v.Image); err != nil {
+			invalidParams.AddNested("Image", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

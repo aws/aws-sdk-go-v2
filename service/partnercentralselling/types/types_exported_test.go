@@ -14,6 +14,9 @@ func ExampleEngagementContextPayload_outputUsage() {
 	case *types.EngagementContextPayloadMemberCustomerProject:
 		_ = v.Value // Value is types.CustomerProjectsContext
 
+	case *types.EngagementContextPayloadMemberLead:
+		_ = v.Value // Value is types.LeadContext
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -24,11 +27,15 @@ func ExampleEngagementContextPayload_outputUsage() {
 }
 
 var _ *types.CustomerProjectsContext
+var _ *types.LeadContext
 
 func ExamplePayload_outputUsage() {
 	var union types.Payload
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.PayloadMemberLeadInvitation:
+		_ = v.Value // Value is types.LeadInvitationPayload
+
 	case *types.PayloadMemberOpportunityInvitation:
 		_ = v.Value // Value is types.OpportunityInvitationPayload
 
@@ -42,6 +49,7 @@ func ExamplePayload_outputUsage() {
 }
 
 var _ *types.OpportunityInvitationPayload
+var _ *types.LeadInvitationPayload
 
 func ExampleReceiver_outputUsage() {
 	var union types.Receiver
@@ -78,3 +86,25 @@ func ExampleResourceSnapshotPayload_outputUsage() {
 }
 
 var _ *types.OpportunitySummaryView
+
+func ExampleUpdateEngagementContextPayload_outputUsage() {
+	var union types.UpdateEngagementContextPayload
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UpdateEngagementContextPayloadMemberCustomerProject:
+		_ = v.Value // Value is types.CustomerProjectsContext
+
+	case *types.UpdateEngagementContextPayloadMemberLead:
+		_ = v.Value // Value is types.UpdateLeadContext
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UpdateLeadContext
+var _ *types.CustomerProjectsContext

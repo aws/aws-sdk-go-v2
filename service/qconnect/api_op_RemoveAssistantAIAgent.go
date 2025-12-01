@@ -42,6 +42,9 @@ type RemoveAssistantAIAgentInput struct {
 	// This member is required.
 	AssistantId *string
 
+	// The orchestrator use case for the AI Agent being removed.
+	OrchestratorUseCase *string
+
 	noSmithyDocumentSerde
 }
 

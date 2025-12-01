@@ -147,6 +147,11 @@ func awsRestjson1_serializeOpDocumentCreateCampaignInput(v *CreateCampaignInput,
 		}
 	}
 
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -3070,6 +3075,13 @@ func awsRestjson1_serializeDocumentChannelSubtypeConfig(v *types.ChannelSubtypeC
 		}
 	}
 
+	if v.WhatsApp != nil {
+		ok := object.Key("whatsApp")
+		if err := awsRestjson1_serializeDocumentWhatsAppChannelSubtypeConfig(v.WhatsApp, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3093,6 +3105,12 @@ func awsRestjson1_serializeDocumentChannelSubtypeParameters(v types.ChannelSubty
 	case *types.ChannelSubtypeParametersMemberTelephony:
 		av := object.Key("telephony")
 		if err := awsRestjson1_serializeDocumentTelephonyChannelSubtypeParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ChannelSubtypeParametersMemberWhatsApp:
+		av := object.Key("whatsApp")
+		if err := awsRestjson1_serializeDocumentWhatsAppChannelSubtypeParameters(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -3203,6 +3221,13 @@ func awsRestjson1_serializeDocumentCommunicationTimeConfig(v *types.Communicatio
 	if v.Telephony != nil {
 		ok := object.Key("telephony")
 		if err := awsRestjson1_serializeDocumentTimeWindow(v.Telephony, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WhatsApp != nil {
+		ok := object.Key("whatsApp")
+		if err := awsRestjson1_serializeDocumentTimeWindow(v.WhatsApp, ok); err != nil {
 			return err
 		}
 	}
@@ -3441,6 +3466,12 @@ func awsRestjson1_serializeDocumentIntegrationConfig(v types.IntegrationConfig, 
 			return err
 		}
 
+	case *types.IntegrationConfigMemberLambda:
+		av := object.Key("lambda")
+		if err := awsRestjson1_serializeDocumentLambdaIntegrationConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.IntegrationConfigMemberQConnect:
 		av := object.Key("qConnect")
 		if err := awsRestjson1_serializeDocumentQConnectIntegrationConfig(&uv.Value, av); err != nil {
@@ -3465,6 +3496,12 @@ func awsRestjson1_serializeDocumentIntegrationIdentifier(v types.IntegrationIden
 			return err
 		}
 
+	case *types.IntegrationIdentifierMemberLambda:
+		av := object.Key("lambda")
+		if err := awsRestjson1_serializeDocumentLambdaIntegrationIdentifier(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.IntegrationIdentifierMemberQConnect:
 		av := object.Key("qConnect")
 		if err := awsRestjson1_serializeDocumentQConnectIntegrationIdentifier(&uv.Value, av); err != nil {
@@ -3475,6 +3512,30 @@ func awsRestjson1_serializeDocumentIntegrationIdentifier(v types.IntegrationIden
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLambdaIntegrationConfig(v *types.LambdaIntegrationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FunctionArn != nil {
+		ok := object.Key("functionArn")
+		ok.String(*v.FunctionArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLambdaIntegrationIdentifier(v *types.LambdaIntegrationIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FunctionArn != nil {
+		ok := object.Key("functionArn")
+		ok.String(*v.FunctionArn)
+	}
+
 	return nil
 }
 
@@ -4138,5 +4199,108 @@ func awsRestjson1_serializeDocumentTimeWindow(v *types.TimeWindow, value smithyj
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWhatsAppChannelSubtypeConfig(v *types.WhatsAppChannelSubtypeConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Capacity != nil {
+		ok := object.Key("capacity")
+		switch {
+		case math.IsNaN(*v.Capacity):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Capacity, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Capacity, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Capacity)
+
+		}
+	}
+
+	if v.DefaultOutboundConfig != nil {
+		ok := object.Key("defaultOutboundConfig")
+		if err := awsRestjson1_serializeDocumentWhatsAppOutboundConfig(v.DefaultOutboundConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OutboundMode != nil {
+		ok := object.Key("outboundMode")
+		if err := awsRestjson1_serializeDocumentWhatsAppOutboundMode(v.OutboundMode, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWhatsAppChannelSubtypeParameters(v *types.WhatsAppChannelSubtypeParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectSourcePhoneNumberArn != nil {
+		ok := object.Key("connectSourcePhoneNumberArn")
+		ok.String(*v.ConnectSourcePhoneNumberArn)
+	}
+
+	if v.DestinationPhoneNumber != nil {
+		ok := object.Key("destinationPhoneNumber")
+		ok.String(*v.DestinationPhoneNumber)
+	}
+
+	if v.TemplateArn != nil {
+		ok := object.Key("templateArn")
+		ok.String(*v.TemplateArn)
+	}
+
+	if v.TemplateParameters != nil {
+		ok := object.Key("templateParameters")
+		if err := awsRestjson1_serializeDocumentAttributes(v.TemplateParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWhatsAppOutboundConfig(v *types.WhatsAppOutboundConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectSourcePhoneNumberArn != nil {
+		ok := object.Key("connectSourcePhoneNumberArn")
+		ok.String(*v.ConnectSourcePhoneNumberArn)
+	}
+
+	if v.WisdomTemplateArn != nil {
+		ok := object.Key("wisdomTemplateArn")
+		ok.String(*v.WisdomTemplateArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWhatsAppOutboundMode(v types.WhatsAppOutboundMode, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.WhatsAppOutboundModeMemberAgentless:
+		av := object.Key("agentless")
+		if err := awsRestjson1_serializeDocumentAgentlessConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }

@@ -140,6 +140,27 @@ func (AMITypes) Values() []AMITypes {
 	}
 }
 
+type ArgoCdRole string
+
+// Enum values for ArgoCdRole
+const (
+	ArgoCdRoleAdmin  ArgoCdRole = "ADMIN"
+	ArgoCdRoleEditor ArgoCdRole = "EDITOR"
+	ArgoCdRoleViewer ArgoCdRole = "VIEWER"
+)
+
+// Values returns all known values for ArgoCdRole. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ArgoCdRole) Values() []ArgoCdRole {
+	return []ArgoCdRole{
+		"ADMIN",
+		"EDITOR",
+		"VIEWER",
+	}
+}
+
 type AuthenticationMode string
 
 // Enum values for AuthenticationMode
@@ -158,6 +179,93 @@ func (AuthenticationMode) Values() []AuthenticationMode {
 		"API",
 		"API_AND_CONFIG_MAP",
 		"CONFIG_MAP",
+	}
+}
+
+type CapabilityDeletePropagationPolicy string
+
+// Enum values for CapabilityDeletePropagationPolicy
+const (
+	CapabilityDeletePropagationPolicyRetain CapabilityDeletePropagationPolicy = "RETAIN"
+)
+
+// Values returns all known values for CapabilityDeletePropagationPolicy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityDeletePropagationPolicy) Values() []CapabilityDeletePropagationPolicy {
+	return []CapabilityDeletePropagationPolicy{
+		"RETAIN",
+	}
+}
+
+type CapabilityIssueCode string
+
+// Enum values for CapabilityIssueCode
+const (
+	CapabilityIssueCodeAccessDenied       CapabilityIssueCode = "AccessDenied"
+	CapabilityIssueCodeClusterUnreachable CapabilityIssueCode = "ClusterUnreachable"
+)
+
+// Values returns all known values for CapabilityIssueCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityIssueCode) Values() []CapabilityIssueCode {
+	return []CapabilityIssueCode{
+		"AccessDenied",
+		"ClusterUnreachable",
+	}
+}
+
+type CapabilityStatus string
+
+// Enum values for CapabilityStatus
+const (
+	CapabilityStatusCreating     CapabilityStatus = "CREATING"
+	CapabilityStatusCreateFailed CapabilityStatus = "CREATE_FAILED"
+	CapabilityStatusUpdating     CapabilityStatus = "UPDATING"
+	CapabilityStatusDeleting     CapabilityStatus = "DELETING"
+	CapabilityStatusDeleteFailed CapabilityStatus = "DELETE_FAILED"
+	CapabilityStatusActive       CapabilityStatus = "ACTIVE"
+	CapabilityStatusDegraded     CapabilityStatus = "DEGRADED"
+)
+
+// Values returns all known values for CapabilityStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityStatus) Values() []CapabilityStatus {
+	return []CapabilityStatus{
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"DELETING",
+		"DELETE_FAILED",
+		"ACTIVE",
+		"DEGRADED",
+	}
+}
+
+type CapabilityType string
+
+// Enum values for CapabilityType
+const (
+	CapabilityTypeAck    CapabilityType = "ACK"
+	CapabilityTypeKro    CapabilityType = "KRO"
+	CapabilityTypeArgocd CapabilityType = "ARGOCD"
+)
+
+// Values returns all known values for CapabilityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityType) Values() []CapabilityType {
+	return []CapabilityType{
+		"ACK",
+		"KRO",
+		"ARGOCD",
 	}
 }
 
@@ -802,6 +910,25 @@ func (ResolveConflicts) Values() []ResolveConflicts {
 		"OVERWRITE",
 		"NONE",
 		"PRESERVE",
+	}
+}
+
+type SsoIdentityType string
+
+// Enum values for SsoIdentityType
+const (
+	SsoIdentityTypeSsoUser  SsoIdentityType = "SSO_USER"
+	SsoIdentityTypeSsoGroup SsoIdentityType = "SSO_GROUP"
+)
+
+// Values returns all known values for SsoIdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SsoIdentityType) Values() []SsoIdentityType {
+	return []SsoIdentityType{
+		"SSO_USER",
+		"SSO_GROUP",
 	}
 }
 

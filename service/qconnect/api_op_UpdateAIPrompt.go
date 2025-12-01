@@ -55,6 +55,9 @@ type UpdateAIPromptInput struct {
 	// The description of the Amazon Q in Connect AI Prompt.
 	Description *string
 
+	// The updated inference configuration for the AI Prompt.
+	InferenceConfiguration types.AIPromptInferenceConfiguration
+
 	// The identifier of the model used for this AI Prompt.
 	//
 	// For information about which models are supported in each Amazon Web Services

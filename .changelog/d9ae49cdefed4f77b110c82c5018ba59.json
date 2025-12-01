@@ -1,0 +1,8 @@
+{
+    "id": "d9ae49cd-efed-4f77-b110-c82c5018ba59",
+    "type": "feature",
+    "description": "Add SDK for Amazon Route 53 Global Resolver, a fully managed DNS resolver service that offers broad DNS-filtering security controls.",
+    "modules": [
+        "service/route53globalresolver"
+    ]
+}

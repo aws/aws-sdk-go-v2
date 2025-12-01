@@ -450,6 +450,53 @@ type CalculatedAttributeValue struct {
 	noSmithyDocumentSerde
 }
 
+// Represents an item in the catalog with its complete set of attributes and
+// metadata.
+type CatalogItem struct {
+
+	// Supplementary information about the catalog item beyond the basic description.
+	AdditionalInformation *string
+
+	// Additional attributes or properties associated with the catalog item stored as
+	// key-value pairs.
+	Attributes map[string]string
+
+	// The category to which the catalog item belongs.
+	Category *string
+
+	// The product code or SKU of the catalog item.
+	Code *string
+
+	// The timestamp when the catalog item was created.
+	CreatedAt *time.Time
+
+	// A detailed description of the catalog item.
+	Description *string
+
+	// The unique identifier for the catalog item.
+	Id *string
+
+	// The URL link to the item's image.
+	ImageLink *string
+
+	// The URL link to the item's detailed page or external resource.
+	Link *string
+
+	// The display name of the catalog item.
+	Name *string
+
+	// The price of the catalog item.
+	Price *string
+
+	// The type classification of the catalog item.
+	Type *string
+
+	// The timestamp when the catalog item was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // An object to override the original condition block of a calculated attribute.
 type ConditionOverrides struct {
 
@@ -551,6 +598,28 @@ type ContactPreference struct {
 	noSmithyDocumentSerde
 }
 
+// The data store request.
+type DataStoreRequest struct {
+
+	// Enabled: Set to true to enabled data store for this domain.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The data store response.
+type DataStoreResponse struct {
+
+	// True if data store is enabled for this domain
+	Enabled *bool
+
+	// Information indicating if the Calculated Attribute is ready for use by
+	// confirming all historical data has been processed and reflected.
+	Readiness *Readiness
+
+	noSmithyDocumentSerde
+}
+
 // Object that segments on various Customer Profile's date fields.
 type DateDimension struct {
 
@@ -630,6 +699,54 @@ type DimensionMemberProfileAttributes struct {
 
 func (*DimensionMemberProfileAttributes) isDimension() {}
 
+// The standard domain object type.
+type DomainObjectTypeField struct {
+
+	// The expression that defines how to extract the field value from the source
+	// object.>
+	//
+	// This member is required.
+	Source *string
+
+	// The expression that defines where the field value should be placed in the
+	// standard domain object.
+	//
+	// This member is required.
+	Target *string
+
+	// The content type of the field.
+	ContentType ContentType
+
+	// The semantic meaning of the field.
+	FeatureType FeatureType
+
+	noSmithyDocumentSerde
+}
+
+// Represents an item in the list of domain object types, containing basic
+// information about a specific object type within a domain.
+type DomainObjectTypesListItem struct {
+
+	// The name that identifies the object type within the domain.
+	//
+	// This member is required.
+	ObjectTypeName *string
+
+	// The timestamp of when the domain object type was created.
+	CreatedAt *time.Time
+
+	// A description explaining the purpose and characteristics of this object type.
+	Description *string
+
+	// The timestamp of when the domain object type was most recently edited.
+	LastUpdatedAt *time.Time
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Usage-specific statistics about the domain.
 type DomainStats struct {
 
@@ -659,6 +776,32 @@ type EngagementPreferences struct {
 
 	// A list of phone-related contact preferences
 	Phone []ContactPreference
+
+	noSmithyDocumentSerde
+}
+
+// Configuration parameters for events in the personalization system.
+type EventParameters struct {
+
+	// The type of event being tracked (e.g., 'click', 'purchase', 'view').
+	//
+	// This member is required.
+	EventType *string
+
+	// The minimum value threshold that an event must meet to be considered valid.
+	EventValueThreshold *float64
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings that define how events are processed and tracked.
+type EventsConfig struct {
+
+	// A list of event parameters configurations that specify how different event
+	// types should be handled.
+	//
+	// This member is required.
+	EventParametersList []EventParameters
 
 	noSmithyDocumentSerde
 }
@@ -1023,6 +1166,70 @@ type FoundByKeyValue struct {
 	noSmithyDocumentSerde
 }
 
+// Contains percentile statistics for object type attributes.
+type GetObjectTypeAttributeStatisticsPercentiles struct {
+
+	// The 25th percentile value of the attribute.
+	//
+	// This member is required.
+	P25 *float64
+
+	// The 5th percentile value of the attribute.
+	//
+	// This member is required.
+	P5 *float64
+
+	// The 50th percentile (median) value of the attribute.
+	//
+	// This member is required.
+	P50 *float64
+
+	// The 75th percentile value of the attribute.
+	//
+	// This member is required.
+	P75 *float64
+
+	// The 95th percentile value of the attribute.
+	//
+	// This member is required.
+	P95 *float64
+
+	noSmithyDocumentSerde
+}
+
+// Statistical measurements for object type attributes including basic statistics
+// and percentiles.
+type GetObjectTypeAttributeStatisticsStats struct {
+
+	// The arithmetic mean of the attribute values.
+	//
+	// This member is required.
+	Average *float64
+
+	// The maximum value found in the attribute dataset.
+	//
+	// This member is required.
+	Maximum *float64
+
+	// The minimum value found in the attribute dataset.
+	//
+	// This member is required.
+	Minimum *float64
+
+	// Percentile distribution statistics for the attribute values.
+	//
+	// This member is required.
+	Percentiles *GetObjectTypeAttributeStatisticsPercentiles
+
+	// The standard deviation of the attribute values, measuring their spread around
+	// the mean.
+	//
+	// This member is required.
+	StandardDeviation *float64
+
+	noSmithyDocumentSerde
+}
+
 // Contains dimensions that determine what to segment on.
 type Group struct {
 
@@ -1281,7 +1488,7 @@ type ListIntegrationItem struct {
 	// This member is required.
 	DomainName *string
 
-	// The timestamp of when the domain was most recently edited.
+	// The timestamp of when the integration was most recently edited.
 	//
 	// This member is required.
 	LastUpdatedAt *time.Time
@@ -1314,6 +1521,9 @@ type ListIntegrationItem struct {
 	// to make Customer Profiles requests on your behalf.
 	RoleArn *string
 
+	// The scope or boundary of the integration item's applicability.
+	Scope Scope
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -1335,6 +1545,23 @@ type ListObjectTypeAttributeItem struct {
 	//
 	// This member is required.
 	LastUpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents an item in the list of object type attribute values with its
+// associated metadata.
+type ListObjectTypeAttributeValuesItem struct {
+
+	// The timestamp of when the object type attribute value was most recently updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The actual value of the object type attribute.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1371,7 +1598,7 @@ type ListProfileObjectTypeItem struct {
 	// The timestamp of when the domain was created.
 	CreatedAt *time.Time
 
-	// The timestamp of when the domain was most recently edited.
+	// The timestamp of when the profile object type was most recently edited.
 	LastUpdatedAt *time.Time
 
 	// The amount of provisioned profile object max count available.
@@ -2022,6 +2249,104 @@ type Readiness struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a single recommendation generated by the recommender system.
+type Recommendation struct {
+
+	// The catalog item being recommended, including its complete details and
+	// attributes.
+	CatalogItem *CatalogItem
+
+	// Recommendation Score between 0 and 1.
+	Score *float64
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings that define the behavior and parameters of a recommender.
+type RecommenderConfig struct {
+
+	// Configuration settings for how the recommender processes and uses events.
+	//
+	// This member is required.
+	EventsConfig *EventsConfig
+
+	// How often the recommender should retrain its model with new data.
+	TrainingFrequency *int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines the algorithm and approach used to generate recommendations.
+type RecommenderRecipe struct {
+
+	// A description of the recommender recipe's purpose and functionality.
+	Description *string
+
+	// The name of the recommender recipe.
+	Name RecommenderRecipeName
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of a recommender's configuration and current state.
+type RecommenderSummary struct {
+
+	// The timestamp when the recommender was created.
+	CreatedAt *time.Time
+
+	// A description of the recommender's purpose and characteristics.
+	Description *string
+
+	// If the recommender is in a failed state, provides the reason for the failure.
+	FailureReason *string
+
+	// The timestamp of when the recommender was edited.
+	LastUpdatedAt *time.Time
+
+	// Information about the most recent update performed on the recommender,
+	// including its status and timing.
+	LatestRecommenderUpdate *RecommenderUpdate
+
+	// The name of the recipe used by this recommender.
+	RecipeName RecommenderRecipeName
+
+	// The configuration settings applied to this recommender.
+	RecommenderConfig *RecommenderConfig
+
+	// The name of the recommender.
+	RecommenderName *string
+
+	// The current operational status of the recommender.
+	Status RecommenderStatus
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an update operation performed on a recommender.
+type RecommenderUpdate struct {
+
+	// The timestamp when this recommender update was initiated.
+	CreatedAt *time.Time
+
+	// If the update operation failed, provides the reason for the failure.
+	FailureReason *string
+
+	// The timestamp of when the recommender was edited.
+	LastUpdatedAt *time.Time
+
+	// The updated configuration settings applied to the recommender during this
+	// update.
+	RecommenderConfig *RecommenderConfig
+
+	// The current status of the recommender update operation.
+	Status RecommenderStatus
+
+	noSmithyDocumentSerde
+}
+
 // The summary of results for an upload job, including the number of updated,
 // created, and failed records.
 type ResultsSummary struct {
@@ -2252,6 +2577,13 @@ type SegmentDefinitionItem struct {
 	// Name of the segment definition.
 	SegmentDefinitionName *string
 
+	// The segment type.
+	//
+	// Classic : Segments created using traditional SegmentGroup structure
+	//
+	// Enhanced : Segments created using SQL queries
+	SegmentType SegmentType
+
 	// The tags belonging to the segment definition.
 	Tags map[string]string
 
@@ -2393,6 +2725,19 @@ type Threshold struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains metrics and performance indicators from the training of a recommender
+// model.
+type TrainingMetrics struct {
+
+	// A collection of performance metrics and statistics from the training process.
+	Metrics map[string]float64
+
+	// The timestamp when these training metrics were recorded.
+	Time *time.Time
 
 	noSmithyDocumentSerde
 }

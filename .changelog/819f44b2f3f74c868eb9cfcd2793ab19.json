@@ -1,0 +1,8 @@
+{
+    "id": "819f44b2-f3f7-4c86-8eb9-cfcd2793ab19",
+    "type": "feature",
+    "description": "Initial GA launch of Partner Central Account",
+    "modules": [
+        "service/partnercentralaccount"
+    ]
+}

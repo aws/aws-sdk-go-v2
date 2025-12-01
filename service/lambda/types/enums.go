@@ -48,6 +48,66 @@ func (Architecture) Values() []Architecture {
 	}
 }
 
+type CapacityProviderPredefinedMetricType string
+
+// Enum values for CapacityProviderPredefinedMetricType
+const (
+	CapacityProviderPredefinedMetricTypeLambdaCapacityProviderAverageCPUUtilization CapacityProviderPredefinedMetricType = "LambdaCapacityProviderAverageCPUUtilization"
+)
+
+// Values returns all known values for CapacityProviderPredefinedMetricType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityProviderPredefinedMetricType) Values() []CapacityProviderPredefinedMetricType {
+	return []CapacityProviderPredefinedMetricType{
+		"LambdaCapacityProviderAverageCPUUtilization",
+	}
+}
+
+type CapacityProviderScalingMode string
+
+// Enum values for CapacityProviderScalingMode
+const (
+	CapacityProviderScalingModeAuto   CapacityProviderScalingMode = "Auto"
+	CapacityProviderScalingModeManual CapacityProviderScalingMode = "Manual"
+)
+
+// Values returns all known values for CapacityProviderScalingMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityProviderScalingMode) Values() []CapacityProviderScalingMode {
+	return []CapacityProviderScalingMode{
+		"Auto",
+		"Manual",
+	}
+}
+
+type CapacityProviderState string
+
+// Enum values for CapacityProviderState
+const (
+	CapacityProviderStatePending  CapacityProviderState = "Pending"
+	CapacityProviderStateActive   CapacityProviderState = "Active"
+	CapacityProviderStateFailed   CapacityProviderState = "Failed"
+	CapacityProviderStateDeleting CapacityProviderState = "Deleting"
+)
+
+// Values returns all known values for CapacityProviderState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityProviderState) Values() []CapacityProviderState {
+	return []CapacityProviderState{
+		"Pending",
+		"Active",
+		"Failed",
+		"Deleting",
+	}
+}
+
 type CodeSigningPolicy string
 
 // Enum values for CodeSigningPolicy
@@ -194,6 +254,24 @@ func (FunctionVersion) Values() []FunctionVersion {
 	}
 }
 
+type FunctionVersionLatestPublished string
+
+// Enum values for FunctionVersionLatestPublished
+const (
+	FunctionVersionLatestPublishedLatestPublished FunctionVersionLatestPublished = "LATEST_PUBLISHED"
+)
+
+// Values returns all known values for FunctionVersionLatestPublished. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionVersionLatestPublished) Values() []FunctionVersionLatestPublished {
+	return []FunctionVersionLatestPublished{
+		"LATEST_PUBLISHED",
+	}
+}
+
 type InvocationType string
 
 // Enum values for InvocationType
@@ -300,27 +378,39 @@ type LastUpdateStatusReasonCode string
 
 // Enum values for LastUpdateStatusReasonCode
 const (
-	LastUpdateStatusReasonCodeEniLimitExceeded            LastUpdateStatusReasonCode = "EniLimitExceeded"
-	LastUpdateStatusReasonCodeInsufficientRolePermissions LastUpdateStatusReasonCode = "InsufficientRolePermissions"
-	LastUpdateStatusReasonCodeInvalidConfiguration        LastUpdateStatusReasonCode = "InvalidConfiguration"
-	LastUpdateStatusReasonCodeInternalError               LastUpdateStatusReasonCode = "InternalError"
-	LastUpdateStatusReasonCodeSubnetOutOfIPAddresses      LastUpdateStatusReasonCode = "SubnetOutOfIPAddresses"
-	LastUpdateStatusReasonCodeInvalidSubnet               LastUpdateStatusReasonCode = "InvalidSubnet"
-	LastUpdateStatusReasonCodeInvalidSecurityGroup        LastUpdateStatusReasonCode = "InvalidSecurityGroup"
-	LastUpdateStatusReasonCodeImageDeleted                LastUpdateStatusReasonCode = "ImageDeleted"
-	LastUpdateStatusReasonCodeImageAccessDenied           LastUpdateStatusReasonCode = "ImageAccessDenied"
-	LastUpdateStatusReasonCodeInvalidImage                LastUpdateStatusReasonCode = "InvalidImage"
-	LastUpdateStatusReasonCodeKMSKeyAccessDenied          LastUpdateStatusReasonCode = "KMSKeyAccessDenied"
-	LastUpdateStatusReasonCodeKMSKeyNotFound              LastUpdateStatusReasonCode = "KMSKeyNotFound"
-	LastUpdateStatusReasonCodeInvalidStateKMSKey          LastUpdateStatusReasonCode = "InvalidStateKMSKey"
-	LastUpdateStatusReasonCodeDisabledKMSKey              LastUpdateStatusReasonCode = "DisabledKMSKey"
-	LastUpdateStatusReasonCodeEFSIOError                  LastUpdateStatusReasonCode = "EFSIOError"
-	LastUpdateStatusReasonCodeEFSMountConnectivityError   LastUpdateStatusReasonCode = "EFSMountConnectivityError"
-	LastUpdateStatusReasonCodeEFSMountFailure             LastUpdateStatusReasonCode = "EFSMountFailure"
-	LastUpdateStatusReasonCodeEFSMountTimeout             LastUpdateStatusReasonCode = "EFSMountTimeout"
-	LastUpdateStatusReasonCodeInvalidRuntime              LastUpdateStatusReasonCode = "InvalidRuntime"
-	LastUpdateStatusReasonCodeInvalidZipFileException     LastUpdateStatusReasonCode = "InvalidZipFileException"
-	LastUpdateStatusReasonCodeFunctionError               LastUpdateStatusReasonCode = "FunctionError"
+	LastUpdateStatusReasonCodeEniLimitExceeded                     LastUpdateStatusReasonCode = "EniLimitExceeded"
+	LastUpdateStatusReasonCodeInsufficientRolePermissions          LastUpdateStatusReasonCode = "InsufficientRolePermissions"
+	LastUpdateStatusReasonCodeInvalidConfiguration                 LastUpdateStatusReasonCode = "InvalidConfiguration"
+	LastUpdateStatusReasonCodeInternalError                        LastUpdateStatusReasonCode = "InternalError"
+	LastUpdateStatusReasonCodeSubnetOutOfIPAddresses               LastUpdateStatusReasonCode = "SubnetOutOfIPAddresses"
+	LastUpdateStatusReasonCodeInvalidSubnet                        LastUpdateStatusReasonCode = "InvalidSubnet"
+	LastUpdateStatusReasonCodeInvalidSecurityGroup                 LastUpdateStatusReasonCode = "InvalidSecurityGroup"
+	LastUpdateStatusReasonCodeImageDeleted                         LastUpdateStatusReasonCode = "ImageDeleted"
+	LastUpdateStatusReasonCodeImageAccessDenied                    LastUpdateStatusReasonCode = "ImageAccessDenied"
+	LastUpdateStatusReasonCodeInvalidImage                         LastUpdateStatusReasonCode = "InvalidImage"
+	LastUpdateStatusReasonCodeKMSKeyAccessDenied                   LastUpdateStatusReasonCode = "KMSKeyAccessDenied"
+	LastUpdateStatusReasonCodeKMSKeyNotFound                       LastUpdateStatusReasonCode = "KMSKeyNotFound"
+	LastUpdateStatusReasonCodeInvalidStateKMSKey                   LastUpdateStatusReasonCode = "InvalidStateKMSKey"
+	LastUpdateStatusReasonCodeDisabledKMSKey                       LastUpdateStatusReasonCode = "DisabledKMSKey"
+	LastUpdateStatusReasonCodeEFSIOError                           LastUpdateStatusReasonCode = "EFSIOError"
+	LastUpdateStatusReasonCodeEFSMountConnectivityError            LastUpdateStatusReasonCode = "EFSMountConnectivityError"
+	LastUpdateStatusReasonCodeEFSMountFailure                      LastUpdateStatusReasonCode = "EFSMountFailure"
+	LastUpdateStatusReasonCodeEFSMountTimeout                      LastUpdateStatusReasonCode = "EFSMountTimeout"
+	LastUpdateStatusReasonCodeInvalidRuntime                       LastUpdateStatusReasonCode = "InvalidRuntime"
+	LastUpdateStatusReasonCodeInvalidZipFileException              LastUpdateStatusReasonCode = "InvalidZipFileException"
+	LastUpdateStatusReasonCodeFunctionError                        LastUpdateStatusReasonCode = "FunctionError"
+	LastUpdateStatusReasonCodeVcpuLimitExceeded                    LastUpdateStatusReasonCode = "VcpuLimitExceeded"
+	LastUpdateStatusReasonCodeCapacityProviderScalingLimitExceeded LastUpdateStatusReasonCode = "CapacityProviderScalingLimitExceeded"
+	LastUpdateStatusReasonCodeInsufficientCapacity                 LastUpdateStatusReasonCode = "InsufficientCapacity"
+	LastUpdateStatusReasonCodeEC2RequestLimitExceeded              LastUpdateStatusReasonCode = "EC2RequestLimitExceeded"
+	LastUpdateStatusReasonCodeFunctionErrorInitTimeout             LastUpdateStatusReasonCode = "FunctionError.InitTimeout"
+	LastUpdateStatusReasonCodeFunctionErrorRuntimeInitError        LastUpdateStatusReasonCode = "FunctionError.RuntimeInitError"
+	LastUpdateStatusReasonCodeFunctionErrorExtensionInitError      LastUpdateStatusReasonCode = "FunctionError.ExtensionInitError"
+	LastUpdateStatusReasonCodeFunctionErrorInvalidEntryPoint       LastUpdateStatusReasonCode = "FunctionError.InvalidEntryPoint"
+	LastUpdateStatusReasonCodeFunctionErrorInvalidWorkingDirectory LastUpdateStatusReasonCode = "FunctionError.InvalidWorkingDirectory"
+	LastUpdateStatusReasonCodeFunctionErrorPermissionDenied        LastUpdateStatusReasonCode = "FunctionError.PermissionDenied"
+	LastUpdateStatusReasonCodeFunctionErrorTooManyExtensions       LastUpdateStatusReasonCode = "FunctionError.TooManyExtensions"
+	LastUpdateStatusReasonCodeFunctionErrorInitResourceExhausted   LastUpdateStatusReasonCode = "FunctionError.InitResourceExhausted"
 )
 
 // Values returns all known values for LastUpdateStatusReasonCode. Note that this
@@ -350,6 +440,18 @@ func (LastUpdateStatusReasonCode) Values() []LastUpdateStatusReasonCode {
 		"InvalidRuntime",
 		"InvalidZipFileException",
 		"FunctionError",
+		"VcpuLimitExceeded",
+		"CapacityProviderScalingLimitExceeded",
+		"InsufficientCapacity",
+		"EC2RequestLimitExceeded",
+		"FunctionError.InitTimeout",
+		"FunctionError.RuntimeInitError",
+		"FunctionError.ExtensionInitError",
+		"FunctionError.InvalidEntryPoint",
+		"FunctionError.InvalidWorkingDirectory",
+		"FunctionError.PermissionDenied",
+		"FunctionError.TooManyExtensions",
+		"FunctionError.InitResourceExhausted",
 	}
 }
 
@@ -667,10 +769,14 @@ type State string
 
 // Enum values for State
 const (
-	StatePending  State = "Pending"
-	StateActive   State = "Active"
-	StateInactive State = "Inactive"
-	StateFailed   State = "Failed"
+	StatePending            State = "Pending"
+	StateActive             State = "Active"
+	StateInactive           State = "Inactive"
+	StateFailed             State = "Failed"
+	StateDeactivating       State = "Deactivating"
+	StateDeactivated        State = "Deactivated"
+	StateActiveNonInvocable State = "ActiveNonInvocable"
+	StateDeleting           State = "Deleting"
 )
 
 // Values returns all known values for State. Note that this can be expanded in
@@ -683,6 +789,10 @@ func (State) Values() []State {
 		"Active",
 		"Inactive",
 		"Failed",
+		"Deactivating",
+		"Deactivated",
+		"ActiveNonInvocable",
+		"Deleting",
 	}
 }
 
@@ -690,30 +800,42 @@ type StateReasonCode string
 
 // Enum values for StateReasonCode
 const (
-	StateReasonCodeIdle                        StateReasonCode = "Idle"
-	StateReasonCodeCreating                    StateReasonCode = "Creating"
-	StateReasonCodeRestoring                   StateReasonCode = "Restoring"
-	StateReasonCodeEniLimitExceeded            StateReasonCode = "EniLimitExceeded"
-	StateReasonCodeInsufficientRolePermissions StateReasonCode = "InsufficientRolePermissions"
-	StateReasonCodeInvalidConfiguration        StateReasonCode = "InvalidConfiguration"
-	StateReasonCodeInternalError               StateReasonCode = "InternalError"
-	StateReasonCodeSubnetOutOfIPAddresses      StateReasonCode = "SubnetOutOfIPAddresses"
-	StateReasonCodeInvalidSubnet               StateReasonCode = "InvalidSubnet"
-	StateReasonCodeInvalidSecurityGroup        StateReasonCode = "InvalidSecurityGroup"
-	StateReasonCodeImageDeleted                StateReasonCode = "ImageDeleted"
-	StateReasonCodeImageAccessDenied           StateReasonCode = "ImageAccessDenied"
-	StateReasonCodeInvalidImage                StateReasonCode = "InvalidImage"
-	StateReasonCodeKMSKeyAccessDenied          StateReasonCode = "KMSKeyAccessDenied"
-	StateReasonCodeKMSKeyNotFound              StateReasonCode = "KMSKeyNotFound"
-	StateReasonCodeInvalidStateKMSKey          StateReasonCode = "InvalidStateKMSKey"
-	StateReasonCodeDisabledKMSKey              StateReasonCode = "DisabledKMSKey"
-	StateReasonCodeEFSIOError                  StateReasonCode = "EFSIOError"
-	StateReasonCodeEFSMountConnectivityError   StateReasonCode = "EFSMountConnectivityError"
-	StateReasonCodeEFSMountFailure             StateReasonCode = "EFSMountFailure"
-	StateReasonCodeEFSMountTimeout             StateReasonCode = "EFSMountTimeout"
-	StateReasonCodeInvalidRuntime              StateReasonCode = "InvalidRuntime"
-	StateReasonCodeInvalidZipFileException     StateReasonCode = "InvalidZipFileException"
-	StateReasonCodeFunctionError               StateReasonCode = "FunctionError"
+	StateReasonCodeIdle                                 StateReasonCode = "Idle"
+	StateReasonCodeCreating                             StateReasonCode = "Creating"
+	StateReasonCodeRestoring                            StateReasonCode = "Restoring"
+	StateReasonCodeEniLimitExceeded                     StateReasonCode = "EniLimitExceeded"
+	StateReasonCodeInsufficientRolePermissions          StateReasonCode = "InsufficientRolePermissions"
+	StateReasonCodeInvalidConfiguration                 StateReasonCode = "InvalidConfiguration"
+	StateReasonCodeInternalError                        StateReasonCode = "InternalError"
+	StateReasonCodeSubnetOutOfIPAddresses               StateReasonCode = "SubnetOutOfIPAddresses"
+	StateReasonCodeInvalidSubnet                        StateReasonCode = "InvalidSubnet"
+	StateReasonCodeInvalidSecurityGroup                 StateReasonCode = "InvalidSecurityGroup"
+	StateReasonCodeImageDeleted                         StateReasonCode = "ImageDeleted"
+	StateReasonCodeImageAccessDenied                    StateReasonCode = "ImageAccessDenied"
+	StateReasonCodeInvalidImage                         StateReasonCode = "InvalidImage"
+	StateReasonCodeKMSKeyAccessDenied                   StateReasonCode = "KMSKeyAccessDenied"
+	StateReasonCodeKMSKeyNotFound                       StateReasonCode = "KMSKeyNotFound"
+	StateReasonCodeInvalidStateKMSKey                   StateReasonCode = "InvalidStateKMSKey"
+	StateReasonCodeDisabledKMSKey                       StateReasonCode = "DisabledKMSKey"
+	StateReasonCodeEFSIOError                           StateReasonCode = "EFSIOError"
+	StateReasonCodeEFSMountConnectivityError            StateReasonCode = "EFSMountConnectivityError"
+	StateReasonCodeEFSMountFailure                      StateReasonCode = "EFSMountFailure"
+	StateReasonCodeEFSMountTimeout                      StateReasonCode = "EFSMountTimeout"
+	StateReasonCodeInvalidRuntime                       StateReasonCode = "InvalidRuntime"
+	StateReasonCodeInvalidZipFileException              StateReasonCode = "InvalidZipFileException"
+	StateReasonCodeFunctionError                        StateReasonCode = "FunctionError"
+	StateReasonCodeVcpuLimitExceeded                    StateReasonCode = "VcpuLimitExceeded"
+	StateReasonCodeCapacityProviderScalingLimitExceeded StateReasonCode = "CapacityProviderScalingLimitExceeded"
+	StateReasonCodeInsufficientCapacity                 StateReasonCode = "InsufficientCapacity"
+	StateReasonCodeEC2RequestLimitExceeded              StateReasonCode = "EC2RequestLimitExceeded"
+	StateReasonCodeFunctionErrorInitTimeout             StateReasonCode = "FunctionError.InitTimeout"
+	StateReasonCodeFunctionErrorRuntimeInitError        StateReasonCode = "FunctionError.RuntimeInitError"
+	StateReasonCodeFunctionErrorExtensionInitError      StateReasonCode = "FunctionError.ExtensionInitError"
+	StateReasonCodeFunctionErrorInvalidEntryPoint       StateReasonCode = "FunctionError.InvalidEntryPoint"
+	StateReasonCodeFunctionErrorInvalidWorkingDirectory StateReasonCode = "FunctionError.InvalidWorkingDirectory"
+	StateReasonCodeFunctionErrorPermissionDenied        StateReasonCode = "FunctionError.PermissionDenied"
+	StateReasonCodeFunctionErrorTooManyExtensions       StateReasonCode = "FunctionError.TooManyExtensions"
+	StateReasonCodeFunctionErrorInitResourceExhausted   StateReasonCode = "FunctionError.InitResourceExhausted"
 )
 
 // Values returns all known values for StateReasonCode. Note that this can be
@@ -746,6 +868,18 @@ func (StateReasonCode) Values() []StateReasonCode {
 		"InvalidRuntime",
 		"InvalidZipFileException",
 		"FunctionError",
+		"VcpuLimitExceeded",
+		"CapacityProviderScalingLimitExceeded",
+		"InsufficientCapacity",
+		"EC2RequestLimitExceeded",
+		"FunctionError.InitTimeout",
+		"FunctionError.RuntimeInitError",
+		"FunctionError.ExtensionInitError",
+		"FunctionError.InvalidEntryPoint",
+		"FunctionError.InvalidWorkingDirectory",
+		"FunctionError.PermissionDenied",
+		"FunctionError.TooManyExtensions",
+		"FunctionError.InitResourceExhausted",
 	}
 }
 

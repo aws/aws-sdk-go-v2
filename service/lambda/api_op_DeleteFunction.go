@@ -62,6 +62,10 @@ type DeleteFunctionInput struct {
 }
 
 type DeleteFunctionOutput struct {
+
+	// The HTTP status code returned by the operation.
+	StatusCode int32
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

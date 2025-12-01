@@ -2,4 +2,7 @@
 
 // Package lexmodelsv2 provides the API client, operations, and parameter types
 // for Amazon Lex Model Building V2.
+//
+// Amazon Lex Model Building Service provides APIs for creating, managing, and
+// deploying conversational bots and their components.
 package lexmodelsv2

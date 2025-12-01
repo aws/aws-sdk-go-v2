@@ -103,6 +103,25 @@ func (ObjectiveSensitivity) Values() []ObjectiveSensitivity {
 	}
 }
 
+type RankingInfluenceType string
+
+// Enum values for RankingInfluenceType
+const (
+	RankingInfluenceTypePopularity RankingInfluenceType = "POPULARITY"
+	RankingInfluenceTypeFreshness  RankingInfluenceType = "FRESHNESS"
+)
+
+// Values returns all known values for RankingInfluenceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RankingInfluenceType) Values() []RankingInfluenceType {
+	return []RankingInfluenceType{
+		"POPULARITY",
+		"FRESHNESS",
+	}
+}
+
 type RecipeProvider string
 
 // Enum values for RecipeProvider

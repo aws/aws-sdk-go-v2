@@ -5319,6 +5319,15 @@ func awsRestjson1_deserializeDocumentCampaign(v **types.Campaign, value interfac
 				return err
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExternalCampaignType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ExternalCampaignType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5405,6 +5414,15 @@ func awsRestjson1_deserializeDocumentCampaignSummary(v **types.CampaignSummary, 
 				return err
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExternalCampaignType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ExternalCampaignType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5482,6 +5500,11 @@ func awsRestjson1_deserializeDocumentChannelSubtypeConfig(v **types.ChannelSubty
 
 		case "telephony":
 			if err := awsRestjson1_deserializeDocumentTelephonyChannelSubtypeConfig(&sv.Telephony, value); err != nil {
+				return err
+			}
+
+		case "whatsApp":
+			if err := awsRestjson1_deserializeDocumentWhatsAppChannelSubtypeConfig(&sv.WhatsApp, value); err != nil {
 				return err
 			}
 
@@ -5752,6 +5775,11 @@ func awsRestjson1_deserializeDocumentCommunicationTimeConfig(v **types.Communica
 
 		case "telephony":
 			if err := awsRestjson1_deserializeDocumentTimeWindow(&sv.Telephony, value); err != nil {
+				return err
+			}
+
+		case "whatsApp":
+			if err := awsRestjson1_deserializeDocumentTimeWindow(&sv.WhatsApp, value); err != nil {
 				return err
 			}
 
@@ -6608,6 +6636,16 @@ loop:
 			uv = &types.IntegrationSummaryMemberCustomerProfiles{Value: mv}
 			break loop
 
+		case "lambda":
+			var mv types.LambdaIntegrationSummary
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentLambdaIntegrationSummary(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.IntegrationSummaryMemberLambda{Value: mv}
+			break loop
+
 		case "qConnect":
 			var mv types.QConnectIntegrationSummary
 			destAddr := &mv
@@ -6805,6 +6843,46 @@ func awsRestjson1_deserializeDocumentInvalidStateException(v **types.InvalidStat
 					return fmt.Errorf("expected XAmazonErrorType to be of type string, got %T instead", value)
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLambdaIntegrationSummary(v **types.LambdaIntegrationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaIntegrationSummary
+	if *v == nil {
+		sv = &types.LambdaIntegrationSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "functionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaArn to be of type string, got %T instead", value)
+				}
+				sv.FunctionArn = ptr.String(jtv)
 			}
 
 		default:
@@ -8495,5 +8573,169 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppChannelSubtypeConfig(v **types.WhatsAppChannelSubtypeConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppChannelSubtypeConfig
+	if *v == nil {
+		sv = &types.WhatsAppChannelSubtypeConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Capacity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Capacity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Capacity to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "defaultOutboundConfig":
+			if err := awsRestjson1_deserializeDocumentWhatsAppOutboundConfig(&sv.DefaultOutboundConfig, value); err != nil {
+				return err
+			}
+
+		case "outboundMode":
+			if err := awsRestjson1_deserializeDocumentWhatsAppOutboundMode(&sv.OutboundMode, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppOutboundConfig(v **types.WhatsAppOutboundConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppOutboundConfig
+	if *v == nil {
+		sv = &types.WhatsAppOutboundConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectSourcePhoneNumberArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.ConnectSourcePhoneNumberArn = ptr.String(jtv)
+			}
+
+		case "wisdomTemplateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.WisdomTemplateArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppOutboundMode(v *types.WhatsAppOutboundMode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.WhatsAppOutboundMode
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "agentless":
+			var mv types.AgentlessConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAgentlessConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.WhatsAppOutboundModeMemberAgentless{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }

@@ -69,6 +69,12 @@ type UpdateBotLocaleInput struct {
 	// system responds to background noise during voice interactions.
 	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
 
+	// Updated speech-to-text settings to apply to the bot locale.
+	SpeechRecognitionSettings *types.SpeechRecognitionSettings
+
+	// Updated unified speech settings to apply to the bot locale.
+	UnifiedSpeechSettings *types.UnifiedSpeechSettings
+
 	// The new Amazon Polly voice Amazon Lex should use for voice interaction with the
 	// user.
 	VoiceSettings *types.VoiceSettings
@@ -122,6 +128,12 @@ type UpdateBotLocaleOutput struct {
 	// The updated sensitivity level for voice activity detection (VAD) in the bot
 	// locale.
 	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
+
+	// The updated speech-to-text settings for the bot locale.
+	SpeechRecognitionSettings *types.SpeechRecognitionSettings
+
+	// The updated unified speech settings for the bot locale.
+	UnifiedSpeechSettings *types.UnifiedSpeechSettings
 
 	// The updated Amazon Polly voice to use for voice interaction with the user.
 	VoiceSettings *types.VoiceSettings

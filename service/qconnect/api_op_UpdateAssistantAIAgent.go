@@ -48,6 +48,9 @@ type UpdateAssistantAIAgentInput struct {
 	// This member is required.
 	Configuration *types.AIAgentConfigurationData
 
+	// The updated list of orchestrator configurations for the assistant AI Agent.
+	OrchestratorConfigurationList []types.OrchestratorConfigurationEntry
+
 	noSmithyDocumentSerde
 }
 

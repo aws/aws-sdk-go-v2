@@ -1675,6 +1675,12 @@ type BotLocaleImportSpecification struct {
 	// system responds to background noise during voice interactions.
 	SpeechDetectionSensitivity SpeechDetectionSensitivity
 
+	// Speech-to-text settings to apply when importing the bot locale configuration.
+	SpeechRecognitionSettings *SpeechRecognitionSettings
+
+	// Unified speech settings to apply when importing the bot locale configuration.
+	UnifiedSpeechSettings *UnifiedSpeechSettings
+
 	// Defines settings for using an Amazon Polly voice to communicate with a user.
 	//
 	// Valid values include:
@@ -2510,6 +2516,23 @@ type DateRangeFilter struct {
 	//
 	// This member is required.
 	StartDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for integrating Deepgram speech-to-text models with
+// Amazon Lex.
+type DeepgramSpeechModelConfig struct {
+
+	// The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the
+	// Deepgram API token.
+	//
+	// This member is required.
+	ApiTokenSecretArn *string
+
+	// The identifier of the Deepgram speech-to-text model to use for processing
+	// speech input.
+	ModelId *string
 
 	noSmithyDocumentSerde
 }
@@ -4806,6 +4829,46 @@ type Specifications struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a foundation model used for speech synthesis and recognition
+// capabilities.
+type SpeechFoundationModel struct {
+
+	// The Amazon Resource Name (ARN) of the foundation model used for speech
+	// processing.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// The identifier of the voice to use for speech synthesis with the foundation
+	// model.
+	VoiceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings that define which speech-to-text model to use for
+// processing speech input.
+type SpeechModelConfig struct {
+
+	// Configuration settings for using Deepgram as the speech-to-text provider.
+	DeepgramConfig *DeepgramSpeechModelConfig
+
+	noSmithyDocumentSerde
+}
+
+// Settings that control how Amazon Lex processes and recognizes speech input from
+// users.
+type SpeechRecognitionSettings struct {
+
+	// Configuration settings for the selected speech-to-text model.
+	SpeechModelConfig *SpeechModelConfig
+
+	// The speech-to-text model to use.
+	SpeechModelPreference SpeechModelPreference
+
+	noSmithyDocumentSerde
+}
+
 // Defines a Speech Synthesis Markup Language (SSML) prompt.
 type SSMLMessage struct {
 
@@ -5374,6 +5437,19 @@ type TurnSpecification struct {
 
 	// Contains information about the user messages in the turn.
 	UserTurn *UserTurnSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Unified configuration settings that combine speech recognition and synthesis
+// capabilities.
+type UnifiedSpeechSettings struct {
+
+	// The foundation model configuration to use for unified speech processing
+	// capabilities.
+	//
+	// This member is required.
+	SpeechFoundationModel *SpeechFoundationModel
 
 	noSmithyDocumentSerde
 }

@@ -70,6 +70,9 @@ type GetNextMessageOutput struct {
 	// This member is required.
 	Type types.MessageType
 
+	// Indicates whether the chunked response has been terminated.
+	ChunkedResponseTerminated *bool
+
 	// The conversation data stored on an Amazon Q in Connect Session.
 	ConversationSessionData []types.RuntimeSessionData
 

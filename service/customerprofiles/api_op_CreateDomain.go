@@ -64,6 +64,9 @@ type CreateDomainInput struct {
 	// This member is required.
 	DomainName *string
 
+	// Set to true to enabled data store for this domain.
+	DataStore *types.DataStoreRequest
+
 	// The URL of the SQS dead letter queue, which is used for reporting errors
 	// associated with ingesting data from third party applications. You must set up a
 	// policy on the DeadLetterQueue for the SendMessage operation to enable Amazon
@@ -124,6 +127,9 @@ type CreateDomainOutput struct {
 	//
 	// This member is required.
 	LastUpdatedAt *time.Time
+
+	// The data store.
+	DataStore *types.DataStoreResponse
 
 	// The URL of the SQS dead letter queue, which is used for reporting errors
 	// associated with ingesting data from third party applications.

@@ -1,0 +1,8 @@
+{
+    "id": "dfe23d8c-11f1-4c39-9dbd-2b0d55e58db4",
+    "type": "feature",
+    "description": "This release added support for new WhatsApp channel and Journey type outbound campaign",
+    "modules": [
+        "service/connectcampaignsv2"
+    ]
+}
