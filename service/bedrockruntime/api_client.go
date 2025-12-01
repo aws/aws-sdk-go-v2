@@ -310,33 +310,41 @@ func (c *Client) invokeOperation(
 		o.Meter = options.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/service/bedrockruntime")
 	})
 	decorated := middleware.DecorateHandler(handler, stack)
-	result, metadata, err = decorated.Handle(ctx, params)
-	if err != nil {
-		span.SetProperty("exception.type", fmt.Sprintf("%T", err))
-		span.SetProperty("exception.message", err.Error())
+	// set this on an if
+	// set a channel for early return
+	results := make(chan PartialResult[*InvokeModelWithBidirectionalStreamOutput], 1)
+	ctx = context.WithValue(ctx, "asyncChan", results)
 
-		var aerr smithy.APIError
-		if errors.As(err, &aerr) {
-			span.SetProperty("api.error_code", aerr.ErrorCode())
-			span.SetProperty("api.error_message", aerr.ErrorMessage())
-			span.SetProperty("api.error_fault", aerr.ErrorFault().String())
+	// do
+	go func() {
+		result, metadata, err = decorated.Handle(ctx, params)
+		if err != nil {
+			span.SetProperty("exception.type", fmt.Sprintf("%T", err))
+			span.SetProperty("exception.message", err.Error())
+
+			var aerr smithy.APIError
+			if errors.As(err, &aerr) {
+				span.SetProperty("api.error_code", aerr.ErrorCode())
+				span.SetProperty("api.error_message", aerr.ErrorMessage())
+				span.SetProperty("api.error_fault", aerr.ErrorFault().String())
+			}
+
+			err = &smithy.OperationError{
+				ServiceID:     ServiceID,
+				OperationName: opID,
+				Err:           err,
+			}
 		}
 
-		err = &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: opID,
-			Err:           err,
+		span.SetProperty("error", err != nil)
+		if err == nil {
+			span.SetStatus(tracing.SpanStatusOK)
+		} else {
+			span.SetStatus(tracing.SpanStatusError)
 		}
-	}
-
-	span.SetProperty("error", err != nil)
-	if err == nil {
-		span.SetStatus(tracing.SpanStatusOK)
-	} else {
-		span.SetStatus(tracing.SpanStatusError)
-	}
-
-	return result, metadata, err
+	}()
+	res := <-results
+	return res.Output, res.Metadata, res.Error
 }
 
 type operationInputKey struct{}
