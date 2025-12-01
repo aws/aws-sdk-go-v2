@@ -1,3 +1,7 @@
+# v1.52.0 (2025-12-01)
+
+* **Feature**: Support audio and video ingestion on Bedrock Knowledge Bases.
+
 # v1.51.5 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

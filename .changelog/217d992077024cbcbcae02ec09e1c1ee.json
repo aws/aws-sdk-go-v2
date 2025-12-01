@@ -1,8 +1,0 @@
-{
-    "id": "217d9920-7702-4cbc-bcae-02ec09e1c1ee",
-    "type": "feature",
-    "description": "Initial GA launch of Partner Central Benefits",
-    "modules": [
-        "service/partnercentralbenefits"
-    ]
-}

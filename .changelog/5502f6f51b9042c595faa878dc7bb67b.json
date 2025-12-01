@@ -1,8 +1,0 @@
-{
-    "id": "5502f6f5-1b90-42c5-95fa-a878dc7bb67b",
-    "type": "feature",
-    "description": "This release introduces offer set entity in AWS Marketplace Catalog API to enable multi-product transaction. Offer set enables sellers to group multiple private offers into a single-click purchase experience, simplifying procurement for customers purchasing multi-product solutions.",
-    "modules": [
-        "service/marketplacecatalog"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.36.0 (2025-12-01)
+
+* **Feature**: Amazon Connect now supports message processing that intercepts and processes chat messages before they reach any participant.
+
 # v1.35.14 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

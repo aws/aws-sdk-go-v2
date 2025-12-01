@@ -1,3 +1,7 @@
+# v1.37.0 (2025-12-01)
+
+* **Feature**: This release adds support for MCP servers via the ApplicationType field, allowing customers to register their Bedrock AgentCore gateways as third party applications.
+
 # v1.36.14 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

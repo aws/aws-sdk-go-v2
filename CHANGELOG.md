@@ -1,3 +1,57 @@
+# Release (2025-12-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.37.0](service/appintegrations/CHANGELOG.md#v1370-2025-12-01)
+  * **Feature**: This release adds support for MCP servers via the ApplicationType field, allowing customers to register their Bedrock AgentCore gateways as third party applications.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.52.0](service/bedrockagent/CHANGELOG.md#v1520-2025-12-01)
+  * **Feature**: Support audio and video ingestion on Bedrock Knowledge Bases.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.51.0](service/bedrockagentruntime/CHANGELOG.md#v1510-2025-12-01)
+  * **Feature**: Support audio and video content retrieval on Bedrock Knowledge Bases.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.38.0](service/cleanrooms/CHANGELOG.md#v1380-2025-12-01)
+  * **Feature**: AWS Clean Rooms now supports privacy-enhancing synthetic dataset generation for custom ML training.
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.21.0](service/cleanroomsml/CHANGELOG.md#v1210-2025-12-01)
+  * **Feature**: AWS Clean Rooms ML now supports privacy-enhancing synthetic dataset generation for custom ML training.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.149.0](service/connect/CHANGELOG.md#v11490-2025-12-01)
+  * **Feature**: This is a combined re:Invent release for Amazon Connect.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.10.0](service/connectcampaignsv2/CHANGELOG.md#v1100-2025-12-01)
+  * **Feature**: This release added support for new WhatsApp channel and Journey type outbound campaign
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.36.0](service/connectparticipant/CHANGELOG.md#v1360-2025-12-01)
+  * **Feature**: Amazon Connect now supports message processing that intercepts and processes chat messages before they reach any participant.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.55.0](service/customerprofiles/CHANGELOG.md#v1550-2025-12-01)
+  * **Feature**: This release introduces, CRUD APIs for the DomainObjectType and Recommender resources, APIs to offer statistical insights on Object Type Attributes, Changes to SegmentDefinition APIs to support SQL queries to create Segments, and Changes to Domain APIs to support Data Store.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.76.0](service/eks/CHANGELOG.md#v1760-2025-12-01)
+  * **Feature**: This release adds support for EKS Capabilities
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.135.0](service/glue/CHANGELOG.md#v11350-2025-12-01)
+  * **Feature**: feature: Glue: Add support for Iceberg materialized view in Glue Data Catalog, including updated CreateTable API to support materialized views and new APIs for managing data refresh for materialized views.
+feature: Glue: Add support for Iceberg table encryption keys and struct field defaults.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.84.0](service/lambda/CHANGELOG.md#v1840-2025-12-01)
+  * **Feature**: Launching Lambda Managed Instances - a new feature to run Lambda on EC2.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.59.0](service/lexmodelsv2/CHANGELOG.md#v1590-2025-12-01)
+  * **Feature**: Adds support for speech-to-speech models for human-like, adaptive, and expressive voice interactions. Also adds support for speech model preference, allowing customers to select which speech model they want to use for speech-to-text requests.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.12.0](service/marketplaceagreement/CHANGELOG.md#v1120-2025-12-01)
+  * **Feature**: This release supports 1/multi-product transactions via offer sets. DescribeAgreement and SearchAgreements APIs now return offer set IDs. SearchAgreements also supports filtering by offer set ID and 2/variable payment pricing terms will be returned through GetAgreementTerms.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.38.0](service/marketplacecatalog/CHANGELOG.md#v1380-2025-12-01)
+  * **Feature**: This release introduces offer set entity in AWS Marketplace Catalog API to enable multi-product transaction. Offer set enables sellers to group multiple private offers into a single-click purchase experience, simplifying procurement for customers purchasing multi-product solutions.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.0.0](service/partnercentralaccount/CHANGELOG.md#v100-2025-12-01)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial GA launch of Partner Central Account
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits`: [v1.0.0](service/partnercentralbenefits/CHANGELOG.md#v100-2025-12-01)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial GA launch of Partner Central Benefits
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.11.0](service/partnercentralselling/CHANGELOG.md#v1110-2025-12-01)
+  * **Feature**: New Features:
+Lead Management APIs for capturing and nurturing leads
+Lead invitation support for partner collaboration
+Lead-to-opportunity conversion operations
+AWS Marketplace OfferSets support for opportunities
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.47.0](service/personalize/CHANGELOG.md#v1470-2025-12-01)
+  * **Feature**: This release adds support for includedDatasetColumns and performIncrementalUpdate in solution APIs, and rankingInfluence in campaign and batch inference APIs.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.25.0](service/qconnect/CHANGELOG.md#v1250-2025-12-01)
+  * **Feature**: New AIAgent types: Orchestration for ModelContextProtocol tool integration, CaseSummary for Amazon Connect Case summaries, NoteTaker for Agent Assistance notes. Added ListSpans and Retrieve APIs. Enhanced Q in Connect AssistantAssociationType to support Bring Your Own Bedrock Knowledge Bases.
+* `github.com/aws/aws-sdk-go-v2/service/route53globalresolver`: [v1.0.0](service/route53globalresolver/CHANGELOG.md#v100-2025-12-01)
+  * **Release**: New AWS service client module
+  * **Feature**: Add SDK for Amazon Route 53 Global Resolver, a fully managed DNS resolver service that offers broad DNS-filtering security controls.
+
 # Release (2025-11-26)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.21.0 (2025-12-01)
+
+* **Feature**: AWS Clean Rooms ML now supports privacy-enhancing synthetic dataset generation for custom ML training.
+
 # v1.20.8 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

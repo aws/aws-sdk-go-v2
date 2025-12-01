@@ -1,3 +1,7 @@
+# v1.47.0 (2025-12-01)
+
+* **Feature**: This release adds support for includedDatasetColumns and performIncrementalUpdate in solution APIs, and rankingInfluence in campaign and batch inference APIs.
+
 # v1.46.7 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

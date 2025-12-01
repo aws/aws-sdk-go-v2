@@ -1,8 +1,0 @@
-{
-    "id": "bf432f81-9569-4d4d-9a74-0d478643e29b",
-    "type": "feature",
-    "description": "Adds support for speech-to-speech models for human-like, adaptive, and expressive voice interactions. Also adds support for speech model preference, allowing customers to select which speech model they want to use for speech-to-text requests.",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

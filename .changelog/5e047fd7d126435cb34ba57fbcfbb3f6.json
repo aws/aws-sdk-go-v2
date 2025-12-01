@@ -1,8 +1,0 @@
-{
-    "id": "5e047fd7-d126-435c-b34b-a57fbcfbb3f6",
-    "type": "feature",
-    "description": "This release adds support for MCP servers via the ApplicationType field, allowing customers to register their Bedrock AgentCore gateways as third party applications.",
-    "modules": [
-        "service/appintegrations"
-    ]
-}

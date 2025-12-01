@@ -3,4 +3,4 @@
 package bedrockagent
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.51.5"
+const goModuleVersion = "1.52.0"

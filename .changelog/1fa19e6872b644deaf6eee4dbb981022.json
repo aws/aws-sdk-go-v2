@@ -1,8 +1,0 @@
-{
-    "id": "1fa19e68-72b6-44de-af6e-ee4dbb981022",
-    "type": "feature",
-    "description": "New Features:\nLead Management APIs for capturing and nurturing leads\nLead invitation support for partner collaboration\nLead-to-opportunity conversion operations\nAWS Marketplace OfferSets support for opportunities",
-    "modules": [
-        "service/partnercentralselling"
-    ]
-}

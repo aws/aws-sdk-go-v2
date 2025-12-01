@@ -1,8 +1,0 @@
-{
-    "id": "6b64da04-485f-4fb1-bb0b-97d70d327d52",
-    "type": "feature",
-    "description": "This release adds support for EKS Capabilities",
-    "modules": [
-        "service/eks"
-    ]
-}

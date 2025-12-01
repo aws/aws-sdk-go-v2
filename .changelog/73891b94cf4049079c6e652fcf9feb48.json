@@ -1,8 +1,0 @@
-{
-    "id": "73891b94-cf40-4907-9c6e-652fcf9feb48",
-    "type": "feature",
-    "description": "Launching Lambda Managed Instances - a new feature to run Lambda on EC2.",
-    "modules": [
-        "service/lambda"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.10.0 (2025-12-01)
+
+* **Feature**: This release added support for new WhatsApp channel and Journey type outbound campaign
+
 # v1.9.2 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234
