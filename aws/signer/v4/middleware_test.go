@@ -277,7 +277,7 @@ func TestSwapComputePayloadSHA256ForUnsignedPayloadMiddleware(t *testing.T) {
 				return nil
 			},
 			Mutator:   SwapComputePayloadSHA256ForUnsignedPayloadMiddleware,
-			ExpectErr: "not found, " + computePayloadHashMiddlewareID,
+			ExpectErr: "not found: " + computePayloadHashMiddlewareID,
 		},
 	}
 
