@@ -168,6 +168,9 @@
                     "target": "com.amazonaws.eks#CreateAddon"
                 },
                 {
+                    "target": "com.amazonaws.eks#CreateCapability"
+                },
+                {
                     "target": "com.amazonaws.eks#CreateCluster"
                 },
                 {
@@ -187,6 +190,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#DeleteAddon"
+                },
+                {
+                    "target": "com.amazonaws.eks#DeleteCapability"
                 },
                 {
                     "target": "com.amazonaws.eks#DeleteCluster"
@@ -217,6 +223,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#DescribeAddonVersions"
+                },
+                {
+                    "target": "com.amazonaws.eks#DescribeCapability"
                 },
                 {
                     "target": "com.amazonaws.eks#DescribeCluster"
@@ -267,6 +276,9 @@
                     "target": "com.amazonaws.eks#ListAssociatedAccessPolicies"
                 },
                 {
+                    "target": "com.amazonaws.eks#ListCapabilities"
+                },
+                {
                     "target": "com.amazonaws.eks#ListClusters"
                 },
                 {
@@ -310,6 +322,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#UpdateAddon"
+                },
+                {
+                    "target": "com.amazonaws.eks#UpdateCapability"
                 },
                 {
                     "target": "com.amazonaws.eks#UpdateClusterConfig"
@@ -1985,6 +2000,203 @@
                 "target": "com.amazonaws.eks#AddonInfo"
             }
         },
+        "com.amazonaws.eks#ArgoCdAwsIdcConfigRequest": {
+            "type": "structure",
+            "members": {
+                "idcInstanceArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity CenterIAM; Identity Center instance to use for authentication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "idcRegion": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region where your IAM Identity CenterIAM; Identity Center instance is located.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for integrating Argo CD with IAM Identity CenterIAM; Identity Center. This allows you to use your organization's identity provider for authentication to Argo CD.</p>"
+            }
+        },
+        "com.amazonaws.eks#ArgoCdAwsIdcConfigResponse": {
+            "type": "structure",
+            "members": {
+                "idcInstanceArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity CenterIAM; Identity Center instance used for authentication.</p>"
+                    }
+                },
+                "idcRegion": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region where the IAM Identity CenterIAM; Identity Center instance is located.</p>"
+                    }
+                },
+                "idcManagedApplicationArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the managed application created in IAM Identity CenterIAM; Identity Center for this Argo CD capability. This application is automatically created and managed by Amazon EKS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response object containing IAM Identity CenterIAM; Identity Center configuration details for an Argo CD capability.</p>"
+            }
+        },
+        "com.amazonaws.eks#ArgoCdConfigRequest": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kubernetes namespace where Argo CD resources will be created. If not specified, the default namespace is used.</p>"
+                    }
+                },
+                "awsIdc": {
+                    "target": "com.amazonaws.eks#ArgoCdAwsIdcConfigRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for IAM Identity CenterIAM; Identity Center integration. When configured, users can authenticate to Argo CD using their IAM Identity CenterIAM; Identity Center credentials.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "rbacRoleMappings": {
+                    "target": "com.amazonaws.eks#ArgoCdRoleMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of role mappings that define which IAM Identity CenterIAM; Identity Center users or groups have which Argo CD roles. Each mapping associates an Argo CD role (<code>ADMIN</code>, <code>EDITOR</code>, or <code>VIEWER</code>) with one or more IAM Identity CenterIAM; Identity Center identities.</p>"
+                    }
+                },
+                "networkAccess": {
+                    "target": "com.amazonaws.eks#ArgoCdNetworkAccessConfigRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for network access to the Argo CD capability's managed API server endpoint. By default, the Argo CD server is accessible via a public endpoint. You can optionally specify one or more VPC endpoint IDs to enable private connectivity from your VPCs. When VPC endpoints are configured, public access is blocked and the Argo CD server is only accessible through the specified VPC endpoints.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for an Argo CD capability. This includes the Kubernetes namespace, IAM Identity CenterIAM; Identity Center integration, RBAC role mappings, and network access configuration.</p>"
+            }
+        },
+        "com.amazonaws.eks#ArgoCdConfigResponse": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kubernetes namespace where Argo CD resources are monitored by your Argo CD Capability.</p>"
+                    }
+                },
+                "awsIdc": {
+                    "target": "com.amazonaws.eks#ArgoCdAwsIdcConfigResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity CenterIAM; Identity Center integration configuration.</p>"
+                    }
+                },
+                "rbacRoleMappings": {
+                    "target": "com.amazonaws.eks#ArgoCdRoleMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of role mappings that define which IAM Identity CenterIAM; Identity Center users or groups have which Argo CD roles.</p>"
+                    }
+                },
+                "networkAccess": {
+                    "target": "com.amazonaws.eks#ArgoCdNetworkAccessConfigResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network access configuration for the Argo CD capability's managed API server endpoint. If VPC endpoint IDs are specified, public access is blocked and the Argo CD server is only accessible through the specified VPC endpoints.</p>"
+                    }
+                },
+                "serverUrl": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the Argo CD server. Use this URL to access the Argo CD web interface and API.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response object containing Argo CD configuration details, including the server URL that you use to access the Argo CD web interface and API.</p>"
+            }
+        },
+        "com.amazonaws.eks#ArgoCdNetworkAccessConfigRequest": {
+            "type": "structure",
+            "members": {
+                "vpceIds": {
+                    "target": "com.amazonaws.eks#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC endpoint IDs to associate with the managed Argo CD API server endpoint. Each VPC endpoint provides private connectivity from a specific VPC to the Argo CD server. You can specify multiple VPC endpoint IDs to enable access from multiple VPCs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for network access to the Argo CD capability's managed API server endpoint. When VPC endpoint IDs are specified, public access is blocked and the Argo CD server is only accessible through the specified VPC endpoints.</p>"
+            }
+        },
+        "com.amazonaws.eks#ArgoCdNetworkAccessConfigResponse": {
+            "type": "structure",
+            "members": {
+                "vpceIds": {
+                    "target": "com.amazonaws.eks#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of VPC endpoint IDs associated with the managed Argo CD API server endpoint. Each VPC endpoint provides private connectivity from a specific VPC to the Argo CD server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response object containing network access configuration for the Argo CD capability's managed API server endpoint. If VPC endpoint IDs are present, public access is blocked and the Argo CD server is only accessible through the specified VPC endpoints.</p>"
+            }
+        },
+        "com.amazonaws.eks#ArgoCdRole": {
+            "type": "enum",
+            "members": {
+                "ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMIN"
+                    }
+                },
+                "EDITOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDITOR"
+                    }
+                },
+                "VIEWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIEWER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#ArgoCdRoleMapping": {
+            "type": "structure",
+            "members": {
+                "role": {
+                    "target": "com.amazonaws.eks#ArgoCdRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Argo CD role to assign. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADMIN</code> – Full administrative access to Argo CD.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EDITOR</code> – Edit access to Argo CD resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VIEWER</code> – Read-only access to Argo CD resources.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "identities": {
+                    "target": "com.amazonaws.eks#SsoIdentityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IAM Identity CenterIAM; Identity Center identities (users or groups) that should be assigned this Argo CD role.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A mapping between an Argo CD role and IAM Identity CenterIAM; Identity Center identities. This defines which users or groups have specific permissions in Argo CD.</p>"
+            }
+        },
+        "com.amazonaws.eks#ArgoCdRoleMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#ArgoCdRoleMapping"
+            }
+        },
         "com.amazonaws.eks#AssociateAccessPolicy": {
             "type": "operation",
             "input": {
@@ -2376,6 +2588,311 @@
         },
         "com.amazonaws.eks#BoxedInteger": {
             "type": "integer"
+        },
+        "com.amazonaws.eks#Capability": {
+            "type": "structure",
+            "members": {
+                "capabilityName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the capability within the cluster.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capability.</p>"
+                    }
+                },
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that contains this capability.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.eks#CapabilityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of capability. Valid values are <code>ACK</code>, <code>ARGOCD</code>, or <code>KRO</code>.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the capability uses to interact with Amazon Web Services services.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.eks#CapabilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the capability. Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The capability is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> – The capability is running and available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> – The capability is being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> – The capability is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> – The capability creation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> – The capability update failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> – The capability deletion failed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the capability software that is currently running.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.eks#CapabilityConfigurationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the capability. The structure varies depending on the capability type.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.eks#TagMap"
+                },
+                "health": {
+                    "target": "com.amazonaws.eks#CapabilityHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Health information for the capability, including any issues that may be affecting its operation.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the capability was created.</p>"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the capability was last modified.</p>"
+                    }
+                },
+                "deletePropagationPolicy": {
+                    "target": "com.amazonaws.eks#CapabilityDeletePropagationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delete propagation policy for the capability. Currently, the only supported value is <code>RETAIN</code>, which keeps all resources managed by the capability when the capability is deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a managed capability in an Amazon EKS cluster. This includes all configuration, status, and health information for the capability.</p>"
+            }
+        },
+        "com.amazonaws.eks#CapabilityConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "argoCd": {
+                    "target": "com.amazonaws.eks#ArgoCdConfigRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings specific to Argo CD capabilities. This field is only used when creating or updating an Argo CD capability.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for a capability. The structure of this object varies depending on the capability type.</p>"
+            }
+        },
+        "com.amazonaws.eks#CapabilityConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "argoCd": {
+                    "target": "com.amazonaws.eks#ArgoCdConfigResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for an Argo CD capability, including the server URL and other Argo CD-specific settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response object containing capability configuration details.</p>"
+            }
+        },
+        "com.amazonaws.eks#CapabilityDeletePropagationPolicy": {
+            "type": "enum",
+            "members": {
+                "RETAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETAIN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#CapabilityHealth": {
+            "type": "structure",
+            "members": {
+                "issues": {
+                    "target": "com.amazonaws.eks#CapabilityIssueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of issues affecting the capability. If this list is empty, the capability is healthy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Health information for a capability, including any issues that may be affecting its operation.</p>"
+            }
+        },
+        "com.amazonaws.eks#CapabilityIssue": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.eks#CapabilityIssueCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code identifying the type of issue. This can be used to programmatically handle specific issue types.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable message describing the issue and potential remediation steps.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An issue affecting a capability's health or operation.</p>"
+            }
+        },
+        "com.amazonaws.eks#CapabilityIssueCode": {
+            "type": "enum",
+            "members": {
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDenied"
+                    }
+                },
+                "CLUSTER_UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClusterUnreachable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#CapabilityIssueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#CapabilityIssue"
+            }
+        },
+        "com.amazonaws.eks#CapabilityStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DEGRADED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEGRADED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#CapabilitySummary": {
+            "type": "structure",
+            "members": {
+                "capabilityName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the capability within the cluster.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capability.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.eks#CapabilityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of capability. Valid values are <code>ACK</code>, <code>ARGOCD</code>, or <code>KRO</code>.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.eks#CapabilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the capability.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the capability software that is currently running.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the capability was created.</p>"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the capability was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a capability, containing basic information without the full configuration details. This is returned by the <code>ListCapabilities</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.eks#CapabilitySummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#CapabilitySummary"
+            }
+        },
+        "com.amazonaws.eks#CapabilityType": {
+            "type": "enum",
+            "members": {
+                "ACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACK"
+                    }
+                },
+                "KRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KRO"
+                    }
+                },
+                "ARGOCD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARGOCD"
+                    }
+                }
+            }
         },
         "com.amazonaws.eks#Capacity": {
             "type": "integer",
@@ -3496,6 +4013,120 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#CreateCapability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#CreateCapabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#CreateCapabilityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a managed capability resource for an Amazon EKS cluster.</p>\n         <p>Capabilities provide fully managed capabilities to build and scale with Kubernetes. When you create a capability, Amazon EKSprovisions and manages the infrastructure required to run the capability outside of your cluster. This approach reduces operational overhead and preserves cluster resources.</p>\n         <p>You can only create one Capability of each type on a given Amazon EKS cluster. Valid types are Argo CD for declarative GitOps deployment, Amazon Web Services Controllers for Kubernetes (ACK) for resource management, and Kube Resource Orchestrator (KRO) for Kubernetes custom resource orchestration.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/capabilities.html\">EKS Capabilities</a> in the <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/clusters/{clusterName}/capabilities",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#CreateCapabilityRequest": {
+            "type": "structure",
+            "members": {
+                "capabilityName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the capability. The name must be unique within your cluster and can contain alphanumeric characters, hyphens, and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS cluster where you want to create the capability.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This token is valid for 24 hours after creation. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.eks#CapabilityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of capability to create. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACK</code> – Amazon Web Services Controllers for Kubernetes (ACK), which lets you manage resources directly from Kubernetes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ARGOCD</code> – Argo CD for GitOps-based continuous delivery.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KRO</code> – Kube Resource Orchestrator (KRO) for composing and managing custom Kubernetes resources.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the capability uses to interact with Amazon Web Services services. This role must have a trust policy that allows the EKS service principal to assume it, and it must have the necessary permissions for the capability type you're creating.</p>\n         <p>For ACK capabilities, the role needs permissions to manage the resources you want to control through Kubernetes. For Argo CD capabilities, the role needs permissions to access Git repositories and Secrets Manager. For KRO capabilities, the role needs permissions based on the resources you'll be orchestrating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.eks#CapabilityConfigurationRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the capability. The structure of this object varies depending on the capability type. For Argo CD capabilities, you can configure IAM Identity CenterIAM; Identity Center integration, RBAC role mappings, and network access settings.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.eks#TagMap"
+                },
+                "deletePropagationPolicy": {
+                    "target": "com.amazonaws.eks#CapabilityDeletePropagationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how Kubernetes resources managed by the capability should be handled when the capability is deleted. Currently, the only supported value is <code>RETAIN</code> which retains all Kubernetes resources managed by the capability when the capability is deleted.</p>\n         <p>Because resources are retained, all Kubernetes resources created by the capability should be deleted from the cluster before deleting the capability itself. After the capability is deleted, these resources become difficult to manage because the controller is no longer available.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#CreateCapabilityResponse": {
+            "type": "structure",
+            "members": {
+                "capability": {
+                    "target": "com.amazonaws.eks#Capability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing information about the newly created capability, including its name, ARN, status, and configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#CreateCluster": {
             "type": "operation",
             "input": {
@@ -4332,6 +4963,78 @@
             "members": {
                 "addon": {
                     "target": "com.amazonaws.eks#Addon"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#DeleteCapability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DeleteCapabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DeleteCapabilityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a managed capability from your Amazon EKS cluster. When you delete a capability, Amazon EKS removes the capability infrastructure but retains all resources that were managed by the capability.</p>\n         <p>Before deleting a capability, you should delete all Kubernetes resources that were created by the capability. After the capability is deleted, these resources become difficult to manage because the controller that managed them is no longer available. To delete resources before removing the capability, use <code>kubectl delete</code> or remove them through your GitOps workflow.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/clusters/{clusterName}/capabilities/{capabilityName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#DeleteCapabilityRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that contains the capability you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "capabilityName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capability to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DeleteCapabilityResponse": {
+            "type": "structure",
+            "members": {
+                "capability": {
+                    "target": "com.amazonaws.eks#Capability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing information about the deleted capability, including its final status and configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5187,6 +5890,75 @@
                     "target": "com.amazonaws.eks#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>DescribeAddonVersions</code> request. When the results of a\n                <code>DescribeAddonVersions</code> request exceed <code>maxResults</code>, you can\n            use this value to retrieve the next page of results. This value is <code>null</code>\n            when there are no more results to return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#DescribeCapability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DescribeCapabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DescribeCapabilityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns detailed information about a specific managed capability in your Amazon EKS cluster, including its current status, configuration, health information, and any issues that may be affecting its operation.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/clusters/{clusterName}/capabilities/{capabilityName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#DescribeCapabilityRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that contains the capability you want to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "capabilityName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capability to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DescribeCapabilityResponse": {
+            "type": "structure",
+            "members": {
+                "capability": {
+                    "target": "com.amazonaws.eks#Capability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing detailed information about the capability, including its name, ARN, type, status, version, configuration, health status, and timestamps for when it was created and last modified.</p>"
                     }
                 }
             },
@@ -6145,6 +6917,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the add-on. The name must match one of the names returned by <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html\">\n               <code>ListAddons</code>\n            </a>. This parameter is required if the update is an add-on update.</p>",
                         "smithy.api#httpQuery": "addonName"
+                    }
+                },
+                "capabilityName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capability for which you want to describe updates.</p>",
+                        "smithy.api#httpQuery": "capabilityName"
                     }
                 }
             },
@@ -7940,6 +8719,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#ListCapabilities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#ListCapabilitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#ListCapabilitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all managed capabilities in your Amazon EKS cluster. You can use this operation to get an overview of all capabilities and their current status.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/clusters/{clusterName}/capabilities",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "capabilities",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.eks#ListCapabilitiesRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS cluster for which you want to list capabilities.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated request, where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is null when there are no more results to return.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.eks#ListCapabilitiesRequestMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value. If you don't specify a value, the default is 100 results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#ListCapabilitiesRequestMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.eks#ListCapabilitiesResponse": {
+            "type": "structure",
+            "members": {
+                "capabilities": {
+                    "target": "com.amazonaws.eks#CapabilitySummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of capability summary objects, each containing basic information about a capability including its name, ARN, type, status, version, and timestamps.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListCapabilities</code> request. When the results of a <code>ListCapabilities</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#ListClusters": {
             "type": "operation",
             "input": {
@@ -8766,6 +9635,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The names of the installed add-ons that have available updates.</p>",
                         "smithy.api#httpQuery": "addonName"
+                    }
+                },
+                "capabilityName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capability for which you want to list updates.</p>",
+                        "smithy.api#httpQuery": "capabilityName"
                     }
                 },
                 "nextToken": {
@@ -10385,6 +11261,51 @@
                 "smithy.api#httpError": 503
             }
         },
+        "com.amazonaws.eks#SsoIdentity": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the IAM Identity CenterIAM; Identity Center user or group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.eks#SsoIdentityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of identity. Valid values are <code>SSO_USER</code> or <code>SSO_GROUP</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An IAM Identity CenterIAM; Identity Center identity (user or group) that can be assigned permissions in a capability.</p>"
+            }
+        },
+        "com.amazonaws.eks#SsoIdentityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#SsoIdentity"
+            }
+        },
+        "com.amazonaws.eks#SsoIdentityType": {
+            "type": "enum",
+            "members": {
+                "SSO_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSO_USER"
+                    }
+                },
+                "SSO_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSO_GROUP"
+                    }
+                }
+            }
+        },
         "com.amazonaws.eks#StartInsightsRefresh": {
             "type": "operation",
             "input": {
@@ -11015,6 +11936,134 @@
             }
         },
         "com.amazonaws.eks#UpdateAddonResponse": {
+            "type": "structure",
+            "members": {
+                "update": {
+                    "target": "com.amazonaws.eks#Update"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#UpdateArgoCdConfig": {
+            "type": "structure",
+            "members": {
+                "rbacRoleMappings": {
+                    "target": "com.amazonaws.eks#UpdateRoleMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated RBAC role mappings for the Argo CD capability. You can add, update, or remove role mappings.</p>"
+                    }
+                },
+                "networkAccess": {
+                    "target": "com.amazonaws.eks#ArgoCdNetworkAccessConfigRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated network access configuration for the Argo CD capability's managed API server endpoint. You can add or remove VPC endpoint associations to control which VPCs have private access to the Argo CD server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration updates for an Argo CD capability. You only need to specify the fields you want to update.</p>"
+            }
+        },
+        "com.amazonaws.eks#UpdateCapability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#UpdateCapabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#UpdateCapabilityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration of a managed capability in your Amazon EKS cluster. You can update the IAM role, configuration settings, and delete propagation policy for a capability.</p>\n         <p>When you update a capability, Amazon EKS applies the changes and may restart capability components as needed. The capability remains available during the update process, but some operations may be temporarily unavailable.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/clusters/{clusterName}/capabilities/{capabilityName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#UpdateCapabilityConfiguration": {
+            "type": "structure",
+            "members": {
+                "argoCd": {
+                    "target": "com.amazonaws.eks#UpdateArgoCdConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration updates specific to Argo CD capabilities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration updates for a capability. The structure varies depending on the capability type.</p>"
+            }
+        },
+        "com.amazonaws.eks#UpdateCapabilityRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that contains the capability you want to update configuration for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "capabilityName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capability to update configuration for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the capability uses to interact with Amazon Web Services services. If you specify a new role ARN, the capability will start using the new role for all subsequent operations.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.eks#UpdateCapabilityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated configuration settings for the capability. You only need to specify the configuration parameters you want to change. For Argo CD capabilities, you can update RBAC role mappings and network access settings.</p>"
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This token is valid for 24 hours after creation.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "deletePropagationPolicy": {
+                    "target": "com.amazonaws.eks#CapabilityDeletePropagationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated delete propagation policy for the capability. Currently, the only supported value is <code>RETAIN</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#UpdateCapabilityResponse": {
             "type": "structure",
             "members": {
                 "update": {
@@ -11925,6 +12974,26 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#UpdateRoleMappings": {
+            "type": "structure",
+            "members": {
+                "addOrUpdateRoleMappings": {
+                    "target": "com.amazonaws.eks#ArgoCdRoleMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of role mappings to add or update. If a mapping for the specified role already exists, it will be updated with the new identities. If it doesn't exist, a new mapping will be created.</p>"
+                    }
+                },
+                "removeRoleMappings": {
+                    "target": "com.amazonaws.eks#ArgoCdRoleMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of role mappings to remove from the RBAC configuration. Each mapping specifies an Argo CD role (<code>ADMIN</code>, <code>EDITOR</code>, or <code>VIEWER</code>) and the identities to remove from that role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates to RBAC role mappings for an Argo CD capability. You can add, update, or remove role mappings in a single operation.</p>"
             }
         },
         "com.amazonaws.eks#UpdateStatus": {

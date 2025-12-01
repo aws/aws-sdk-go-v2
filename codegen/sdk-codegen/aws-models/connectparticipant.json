@@ -1906,10 +1906,53 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of receipt information for a message for different recipients.</p>"
                     }
+                },
+                "MessageProcessingStatus": {
+                    "target": "com.amazonaws.connectparticipant#MessageProcessingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Message Processing for the message.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains metadata related to a message.</p>"
+            }
+        },
+        "com.amazonaws.connectparticipant#MessageProcessingMetadata": {
+            "type": "structure",
+            "members": {
+                "MessageProcessingStatus": {
+                    "target": "com.amazonaws.connectparticipant#MessageProcessingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Message Processing for the message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata for chat messages.</p>"
+            }
+        },
+        "com.amazonaws.connectparticipant#MessageProcessingStatus": {
+            "type": "enum",
+            "members": {
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                }
             }
         },
         "com.amazonaws.connectparticipant#MostRecent": {
@@ -2330,6 +2373,12 @@
                     "target": "com.amazonaws.connectparticipant#Instant",
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the message was sent.</p>\n         <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,\n            2019-11-08T02:41:28.172Z.</p>"
+                    }
+                },
+                "MessageMetadata": {
+                    "target": "com.amazonaws.connectparticipant#MessageProcessingMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains metadata for the message.</p>"
                     }
                 }
             },

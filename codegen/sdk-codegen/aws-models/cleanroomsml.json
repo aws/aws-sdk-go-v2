@@ -2157,6 +2157,32 @@
                 "smithy.api#documentation": "<p>Provides summary information about a trained model in a collaboration.</p>"
             }
         },
+        "com.amazonaws.cleanroomsml#ColumnClassificationDetails": {
+            "type": "structure",
+            "members": {
+                "columnMapping": {
+                    "target": "com.amazonaws.cleanroomsml#ColumnMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping that defines the classification of data columns for synthetic data generation and specifies how each column should be handled during the privacy-preserving data synthesis process.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains classification information for data columns, including mappings that specify how columns should be handled during synthetic data generation and privacy analysis.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#ColumnMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanroomsml#SyntheticDataColumnProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5
+                }
+            }
+        },
         "com.amazonaws.cleanroomsml#ColumnName": {
             "type": "string",
             "traits": {
@@ -3550,6 +3576,21 @@
                 "smithy.api#documentation": "<p>The configuration for defining custom patterns to be redacted from logs and error messages. This is for the CUSTOM config under entitiesToRedact. Both CustomEntityConfig and entitiesToRedact need to be present or not present.</p>"
             }
         },
+        "com.amazonaws.cleanroomsml#DataPrivacyScores": {
+            "type": "structure",
+            "members": {
+                "membershipInferenceAttackScores": {
+                    "target": "com.amazonaws.cleanroomsml#MembershipInferenceAttackScoreList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scores that evaluate the vulnerability of the synthetic data to membership inference attacks, which attempt to determine whether a specific individual was a member of the original dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Privacy evaluation scores that measure the privacy characteristics of the generated synthetic data, including assessments of potential privacy risks such as membership inference attacks.</p>"
+            }
+        },
         "com.amazonaws.cleanroomsml#DataSource": {
             "type": "structure",
             "members": {
@@ -4788,6 +4829,12 @@
                         "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
                     }
                 },
+                "syntheticDataConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#SyntheticDataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The synthetic data configuration for this ML input channel, including parameters for generating privacy-preserving synthetic data and evaluation scores for measuring the privacy of the generated data.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -5714,6 +5761,12 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
+                    }
+                },
+                "syntheticDataConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#SyntheticDataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The synthetic data configuration for this ML input channel, including parameters for generating privacy-preserving synthetic data and evaluation scores for measuring the privacy of the generated data.</p>"
                     }
                 },
                 "createTime": {
@@ -9907,12 +9960,98 @@
                 "smithy.api#documentation": "<p>Configuration information about how the exported model artifacts are stored.</p>"
             }
         },
+        "com.amazonaws.cleanroomsml#MLSyntheticDataParameters": {
+            "type": "structure",
+            "members": {
+                "epsilon": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The epsilon value for differential privacy, which controls the privacy-utility tradeoff in synthetic data generation. Lower values provide stronger privacy guarantees but may reduce data utility.</p>",
+                        "smithy.api#range": {
+                            "min": 1.0E-4,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxMembershipInferenceAttackScore": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum acceptable score for membership inference attack vulnerability. Synthetic data generation fails if the score for the resulting data exceeds this threshold.</p>",
+                        "smithy.api#range": {
+                            "min": 0.5,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "columnClassification": {
+                    "target": "com.amazonaws.cleanroomsml#ColumnClassificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Classification details for data columns that specify how each column should be treated during synthetic data generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameters that control the generation of synthetic data for custom model training, including privacy settings and column classification details.</p>"
+            }
+        },
         "com.amazonaws.cleanroomsml#MaxResults": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#MembershipInferenceAttackScore": {
+            "type": "structure",
+            "members": {
+                "attackVersion": {
+                    "target": "com.amazonaws.cleanroomsml#MembershipInferenceAttackVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the membership inference attack, which consists of the attack type and its version number, used to generate this privacy score.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "score": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numerical score representing the vulnerability to membership inference attacks.</p>",
+                        "smithy.api#range": {
+                            "min": 0.0,
+                            "max": 1.0
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A score that measures the vulnerability of synthetic data to membership inference attacks and provides both the numerical score and the version of the attack methodology used for evaluation.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#MembershipInferenceAttackScoreList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanroomsml#MembershipInferenceAttackScore"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#MembershipInferenceAttackVersion": {
+            "type": "enum",
+            "members": {
+                "DISTANCE_TO_CLOSEST_RECORD_V1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISTANCE_TO_CLOSEST_RECORD_V1"
+                    }
                 }
             }
         },
@@ -11089,6 +11228,97 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The criteria used to stop model training.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#SyntheticDataColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-z0-9_](([a-z0-9_]+-)*([a-z0-9_]+))?$"
+            }
+        },
+        "com.amazonaws.cleanroomsml#SyntheticDataColumnProperties": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "com.amazonaws.cleanroomsml#SyntheticDataColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data column as it appears in the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "columnType": {
+                    "target": "com.amazonaws.cleanroomsml#SyntheticDataColumnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the column, which determines how the synthetic data generation algorithm processes and synthesizes values for this column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isPredictiveValue": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this column contains predictive values that should be treated as target variables in machine learning models. This affects how the synthetic data generation preserves statistical relationships.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties that define how a specific data column should be handled during synthetic data generation, including its name, type, and role in predictive modeling.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#SyntheticDataColumnType": {
+            "type": "enum",
+            "members": {
+                "CATEGORICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CATEGORICAL"
+                    }
+                },
+                "NUMERICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMERICAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#SyntheticDataConfiguration": {
+            "type": "structure",
+            "members": {
+                "syntheticDataParameters": {
+                    "target": "com.amazonaws.cleanroomsml#MLSyntheticDataParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters that control how synthetic data is generated, including privacy settings, column classifications, and other configuration options that affect the data synthesis process.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "syntheticDataEvaluationScores": {
+                    "target": "com.amazonaws.cleanroomsml#SyntheticDataEvaluationScores",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Evaluation scores that assess the quality and privacy characteristics of the generated synthetic data, providing metrics on data utility and privacy preservation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for synthetic data generation, including the parameters that control data synthesis and the evaluation scores that measure the quality and privacy characteristics of the generated synthetic data.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#SyntheticDataEvaluationScores": {
+            "type": "structure",
+            "members": {
+                "dataPrivacyScores": {
+                    "target": "com.amazonaws.cleanroomsml#DataPrivacyScores",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Privacy-specific evaluation scores that measure how well the synthetic data protects individual privacy, including assessments of potential privacy risks such as membership inference attacks.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Comprehensive evaluation metrics for synthetic data that assess both the utility of the generated data for machine learning tasks and its privacy preservation characteristics.</p>"
             }
         },
         "com.amazonaws.cleanroomsml#TagKey": {

@@ -7873,7 +7873,7 @@
                 "ConnectionType": {
                     "target": "com.amazonaws.glue#ConnectionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the connection. Currently, these types are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p>\n               <p>\n                  <code>JDBC</code> Connections use the following ConnectionParameters.</p>\n               <ul>\n                  <li>\n                     <p>Required: All of (<code>HOST</code>, <code>PORT</code>, <code>JDBC_ENGINE</code>) or <code>JDBC_CONNECTION_URL</code>.</p>\n                  </li>\n                  <li>\n                     <p>Required: All of (<code>USERNAME</code>, <code>PASSWORD</code>) or <code>SECRET_ID</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>JDBC_ENFORCE_SSL</code>, <code>CUSTOM_JDBC_CERT</code>, <code>CUSTOM_JDBC_CERT_STRING</code>, <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code>.  These parameters are used to configure SSL with JDBC.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p>\n               <p>\n                  <code>KAFKA</code> Connections use the following ConnectionParameters.</p>\n               <ul>\n                  <li>\n                     <p>Required: <code>KAFKA_BOOTSTRAP_SERVERS</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>KAFKA_SSL_ENABLED</code>, <code>KAFKA_CUSTOM_CERT</code>, <code>KAFKA_SKIP_CUSTOM_CERT_VALIDATION</code>. These parameters are used to configure SSL with <code>KAFKA</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>KAFKA_CLIENT_KEYSTORE</code>, <code>KAFKA_CLIENT_KEYSTORE_PASSWORD</code>, <code>KAFKA_CLIENT_KEY_PASSWORD</code>, <code>ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD</code>, <code>ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD</code>. These parameters are used to configure TLS client configuration with SSL in <code>KAFKA</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>KAFKA_SASL_MECHANISM</code>. Can be specified as <code>SCRAM-SHA-512</code>, <code>GSSAPI</code>, or <code>AWS_MSK_IAM</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>KAFKA_SASL_SCRAM_USERNAME</code>, <code>KAFKA_SASL_SCRAM_PASSWORD</code>, <code>ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD</code>. These parameters are used to configure SASL/SCRAM-SHA-512 authentication with <code>KAFKA</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>KAFKA_SASL_GSSAPI_KEYTAB</code>, <code>KAFKA_SASL_GSSAPI_KRB5_CONF</code>, <code>KAFKA_SASL_GSSAPI_SERVICE</code>, <code>KAFKA_SASL_GSSAPI_PRINCIPAL</code>. These parameters are used to configure SASL/GSSAPI authentication with <code>KAFKA</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p>\n               <p>\n                  <code>MONGODB</code> Connections use the following ConnectionParameters.</p>\n               <ul>\n                  <li>\n                     <p>Required: <code>CONNECTION_URL</code>.</p>\n                  </li>\n                  <li>\n                     <p>Required: All of (<code>USERNAME</code>, <code>PASSWORD</code>) or <code>SECRET_ID</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>VIEW_VALIDATION_REDSHIFT</code> - Designates a connection used for view validation by Amazon Redshift.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VIEW_VALIDATION_ATHENA</code> - Designates a connection used for view validation by Amazon Athena.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p>\n               <p>\n                  <code>NETWORK</code> Connections do not require ConnectionParameters. Instead, provide a PhysicalConnectionRequirements.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE</code> - Uses configuration settings contained in a connector purchased from Amazon Web Services Marketplace to read from and write to data stores that are not natively supported by Glue.</p>\n               <p>\n                  <code>MARKETPLACE</code> Connections use the following ConnectionParameters.</p>\n               <ul>\n                  <li>\n                     <p>Required: <code>CONNECTOR_TYPE</code>, <code>CONNECTOR_URL</code>, <code>CONNECTOR_CLASS_NAME</code>, <code>CONNECTION_URL</code>.</p>\n                  </li>\n                  <li>\n                     <p>Required for <code>JDBC</code>\n                        <code>CONNECTOR_TYPE</code> connections: All of (<code>USERNAME</code>, <code>PASSWORD</code>) or <code>SECRET_ID</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.</p>\n            </li>\n         </ul>\n         <p>Additionally, a <code>ConnectionType</code> for the following SaaS connectors is supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FACEBOOKADS</code> - Designates a connection to Facebook Ads.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GOOGLEADS</code> - Designates a connection to Google Ads.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GOOGLESHEETS</code> - Designates a connection to Google Sheets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GOOGLEANALYTICS4</code> - Designates a connection to Google Analytics 4.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HUBSPOT</code> - Designates a connection to HubSpot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTAGRAMADS</code> - Designates a connection to Instagram Ads.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERCOM</code> - Designates a connection to Intercom.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JIRACLOUD</code> - Designates a connection to Jira Cloud.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETO</code> - Designates a connection to Adobe Marketo Engage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETSUITEERP</code> - Designates a connection to Oracle NetSuite.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SALESFORCE</code> - Designates a connection to Salesforce using OAuth authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SALESFORCEMARKETINGCLOUD</code> - Designates a connection to Salesforce Marketing Cloud.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SALESFORCEPARDOT</code> - Designates a connection to Salesforce Marketing Cloud Account Engagement (MCAE).</p>\n            </li>\n            <li>\n               <p>\n                  <code>SAPODATA</code> - Designates a connection to SAP OData.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICENOW</code> - Designates a connection to ServiceNow.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SLACK</code> - Designates a connection to Slack.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SNAPCHATADS</code> - Designates a connection to Snapchat Ads.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRIPE</code> - Designates a connection to Stripe.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ZENDESK</code> - Designates a connection to Zendesk.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ZOHOCRM</code> - Designates a connection to Zoho CRM.</p>\n            </li>\n         </ul>\n         <p>For more information on the connection parameters needed for a particular connector, see the documentation for the connector in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/console-connections.html\">Adding an Glue connection</a>in the Glue User Guide.</p>\n         <p>\n            <code>SFTP</code> is not supported.</p>\n         <p>For more information about how optional ConnectionProperties are used to configure features in Glue, consult <a href=\"https://docs.aws.amazon.com/glue/latest/dg/connection-defining.html\">Glue connection properties</a>.</p>\n         <p>For more information about how optional ConnectionProperties are used to configure features in Glue Studio, consult <a href=\"https://docs.aws.amazon.com/glue/latest/ug/connectors-chapter.html\">Using connectors and connections</a>.</p>",
+                        "smithy.api#documentation": "<p>The type of the connection. Currently, these types are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p>\n               <p>\n                  <code>JDBC</code> Connections use the following ConnectionParameters.</p>\n               <ul>\n                  <li>\n                     <p>Required: All of (<code>HOST</code>, <code>PORT</code>, <code>JDBC_ENGINE</code>) or <code>JDBC_CONNECTION_URL</code>.</p>\n                  </li>\n                  <li>\n                     <p>Required: All of (<code>USERNAME</code>, <code>PASSWORD</code>) or <code>SECRET_ID</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>JDBC_ENFORCE_SSL</code>, <code>CUSTOM_JDBC_CERT</code>, <code>CUSTOM_JDBC_CERT_STRING</code>, <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code>.  These parameters are used to configure SSL with JDBC.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p>\n               <p>\n                  <code>KAFKA</code> Connections use the following ConnectionParameters.</p>\n               <ul>\n                  <li>\n                     <p>Required: <code>KAFKA_BOOTSTRAP_SERVERS</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>KAFKA_SSL_ENABLED</code>, <code>KAFKA_CUSTOM_CERT</code>, <code>KAFKA_SKIP_CUSTOM_CERT_VALIDATION</code>. These parameters are used to configure SSL with <code>KAFKA</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>KAFKA_CLIENT_KEYSTORE</code>, <code>KAFKA_CLIENT_KEYSTORE_PASSWORD</code>, <code>KAFKA_CLIENT_KEY_PASSWORD</code>, <code>ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD</code>, <code>ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD</code>. These parameters are used to configure TLS client configuration with SSL in <code>KAFKA</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>KAFKA_SASL_MECHANISM</code>. Can be specified as <code>SCRAM-SHA-512</code>, <code>GSSAPI</code>, or <code>AWS_MSK_IAM</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>KAFKA_SASL_SCRAM_USERNAME</code>, <code>KAFKA_SASL_SCRAM_PASSWORD</code>, <code>ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD</code>. These parameters are used to configure SASL/SCRAM-SHA-512 authentication with <code>KAFKA</code>.</p>\n                  </li>\n                  <li>\n                     <p>Optional: <code>KAFKA_SASL_GSSAPI_KEYTAB</code>, <code>KAFKA_SASL_GSSAPI_KRB5_CONF</code>, <code>KAFKA_SASL_GSSAPI_SERVICE</code>, <code>KAFKA_SASL_GSSAPI_PRINCIPAL</code>. These parameters are used to configure SASL/GSSAPI authentication with <code>KAFKA</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p>\n               <p>\n                  <code>MONGODB</code> Connections use the following ConnectionParameters.</p>\n               <ul>\n                  <li>\n                     <p>Required: <code>CONNECTION_URL</code>.</p>\n                  </li>\n                  <li>\n                     <p>Required: All of (<code>USERNAME</code>, <code>PASSWORD</code>) or <code>SECRET_ID</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>VIEW_VALIDATION_REDSHIFT</code> - Designates a connection used for view validation by Amazon Redshift.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VIEW_VALIDATION_ATHENA</code> - Designates a connection used for view validation by Amazon Athena.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p>\n               <p>\n                  <code>NETWORK</code> Connections do not require ConnectionParameters. Instead, provide a PhysicalConnectionRequirements.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE</code> - Uses configuration settings contained in a connector purchased from Amazon Web Services Marketplace to read from and write to data stores that are not natively supported by Glue.</p>\n               <p>\n                  <code>MARKETPLACE</code> Connections use the following ConnectionParameters.</p>\n               <ul>\n                  <li>\n                     <p>Required: <code>CONNECTOR_TYPE</code>, <code>CONNECTOR_URL</code>, <code>CONNECTOR_CLASS_NAME</code>, <code>CONNECTION_URL</code>.</p>\n                  </li>\n                  <li>\n                     <p>Required for <code>JDBC</code>\n                        <code>CONNECTOR_TYPE</code> connections: All of (<code>USERNAME</code>, <code>PASSWORD</code>) or <code>SECRET_ID</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.</p>\n            </li>\n         </ul>\n         <p>For more information on the connection parameters needed for a particular connector, see the documentation for the connector in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/console-connections.html\">Adding an Glue connection</a>in the Glue User Guide.</p>\n         <p>\n            <code>SFTP</code> is not supported.</p>\n         <p>For more information about how optional ConnectionProperties are used to configure features in Glue, consult <a href=\"https://docs.aws.amazon.com/glue/latest/dg/connection-defining.html\">Glue connection properties</a>.</p>\n         <p>For more information about how optional ConnectionProperties are used to configure features in Glue Studio, consult <a href=\"https://docs.aws.amazon.com/glue/latest/ug/connectors-chapter.html\">Using connectors and connections</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18343,6 +18343,16 @@
                 "smithy.api#pattern": "^([\\u0009\\u000B\\u000C\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF])*$"
             }
         },
+        "com.amazonaws.glue#EncryptedKeyMetadataString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2056
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
         "com.amazonaws.glue#EncryptionAtRest": {
             "type": "structure",
             "members": {
@@ -18400,6 +18410,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies an encryption configuration.</p>"
+            }
+        },
+        "com.amazonaws.glue#EncryptionKeyIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2056
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.glue#Entity": {
@@ -25885,6 +25905,13 @@
                         "smithy.api#documentation": "<p>Specifies whether the view supports the SQL dialects of one or more different query engines and can therefore be read by those engines.</p>"
                     }
                 },
+                "IsMaterializedView": {
+                    "target": "com.amazonaws.glue#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates if a table is a materialized view.</p>"
+                    }
+                },
                 "ResourceArn": {
                     "target": "com.amazonaws.glue#ArnString",
                     "traits": {
@@ -27065,6 +27092,40 @@
         "com.amazonaws.glue#IcebergDocument": {
             "type": "document"
         },
+        "com.amazonaws.glue#IcebergEncryptedKey": {
+            "type": "structure",
+            "members": {
+                "KeyId": {
+                    "target": "com.amazonaws.glue#EncryptionKeyIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of the encryption key used for Iceberg table encryption. This ID is used to reference the key in table metadata and track which key was used to encrypt specific data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptedKeyMetadata": {
+                    "target": "com.amazonaws.glue#EncryptedKeyMetadataString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encrypted key and metadata, base64 encoded. The format of encrypted key metadata is determined by the table's encryption scheme and can be a wrapped format specific to the table's KMS provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptedById": {
+                    "target": "com.amazonaws.glue#EncryptionKeyIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional ID of the key used to encrypt or wrap the key metadata in Iceberg table encryption. This field references another encryption key that was used to encrypt the current key's metadata.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.glue#StringToStringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string to string map of additional metadata used by the table's encryption scheme. These properties provide additional context and configuration for the encryption key implementation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Encryption key structure used for Iceberg table encryption. Contains the key ID, encrypted key metadata, optional reference to the encrypting key, and additional properties for the table's encryption scheme.</p>"
+            }
+        },
         "com.amazonaws.glue#IcebergInput": {
             "type": "structure",
             "members": {
@@ -27543,6 +27604,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Optional documentation or description text that provides additional context about the purpose and usage of this field.</p>"
                     }
+                },
+                "InitialDefault": {
+                    "target": "com.amazonaws.glue#IcebergDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Default value used to populate the field's value for all records that were written before the field was added to the schema. This enables backward compatibility when adding new fields to existing Iceberg tables.</p>"
+                    }
+                },
+                "WriteDefault": {
+                    "target": "com.amazonaws.glue#IcebergDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Default value used to populate the field's value for any records written after the field was added to the schema, if the writer does not supply the field's value. This can be changed through schema evolution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -27599,6 +27672,24 @@
                     "target": "com.amazonaws.glue#StringToStringMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Updated key-value pairs of table properties and configuration settings for the Iceberg table.</p>"
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.glue#IcebergUpdateAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of update action to be performed on the Iceberg table. Defines the specific operation such as adding schema, setting current schema, adding partition spec, or managing encryption keys.</p>"
+                    }
+                },
+                "EncryptionKey": {
+                    "target": "com.amazonaws.glue#IcebergEncryptedKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption key information associated with an Iceberg table update operation. Used when adding or removing encryption keys from the table metadata during table evolution.</p>"
+                    }
+                },
+                "KeyId": {
+                    "target": "com.amazonaws.glue#EncryptionKeyIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the encryption key involved in an Iceberg table update operation. References the specific key being added to or removed from the table's encryption configuration.</p>"
                     }
                 }
             },
@@ -27681,6 +27772,77 @@
         },
         "com.amazonaws.glue#IcebergTransformString": {
             "type": "string"
+        },
+        "com.amazonaws.glue#IcebergUpdateAction": {
+            "type": "enum",
+            "members": {
+                "ADD_SCHEMA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "add-schema"
+                    }
+                },
+                "SET_CURRENT_SCHEMA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "set-current-schema"
+                    }
+                },
+                "ADD_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "add-spec"
+                    }
+                },
+                "SET_DEFAULT_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "set-default-spec"
+                    }
+                },
+                "ADD_SORT_ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "add-sort-order"
+                    }
+                },
+                "SET_DEFAULT_SORT_ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "set-default-sort-order"
+                    }
+                },
+                "SET_LOCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "set-location"
+                    }
+                },
+                "SET_PROPERTIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "set-properties"
+                    }
+                },
+                "REMOVE_PROPERTIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "remove-properties"
+                    }
+                },
+                "ADD_ENCRYPTION_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "add-encryption-key"
+                    }
+                },
+                "REMOVE_ENCRYPTION_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "remove-encryption-key"
+                    }
+                }
+            }
         },
         "com.amazonaws.glue#IdString": {
             "type": "string",
@@ -30268,7 +30430,7 @@
         "com.amazonaws.glue#KmsKeyArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws:kms:"
+                "smithy.api#pattern": "^$|arn:aws[a-z0-9-]*:kms:"
             }
         },
         "com.amazonaws.glue#LabelCount": {
@@ -30438,6 +30600,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#LastRefreshType": {
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
+                    }
+                },
+                "INCREMENTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREMENTAL"
                     }
                 }
             }
@@ -36411,6 +36590,9 @@
             "member": {
                 "target": "com.amazonaws.glue#NameString"
             }
+        },
+        "com.amazonaws.glue#RefreshSeconds": {
+            "type": "long"
         },
         "com.amazonaws.glue#RefreshToken": {
             "type": "string",
@@ -42734,8 +42916,17 @@
                         "smithy.api#documentation": "<p>Specifies whether the view supports the SQL dialects of one or more different query engines and can therefore be read by those engines.</p>"
                     }
                 },
+                "IsMaterializedView": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates a table is a <code>MaterializedView</code>.</p>"
+                    }
+                },
                 "Status": {
-                    "target": "com.amazonaws.glue#TableStatus"
+                    "target": "com.amazonaws.glue#TableStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the the state of an asynchronous change to a table.</p>"
+                    }
                 }
             },
             "traits": {
@@ -43266,6 +43457,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#TableVersionError"
+            }
+        },
+        "com.amazonaws.glue#TableVersionId": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": -1
+                }
             }
         },
         "com.amazonaws.glue#Tag": {
@@ -47644,10 +47844,41 @@
                         "smithy.api#documentation": "<p>The definer of a view in SQL.</p>"
                     }
                 },
+                "ViewVersionId": {
+                    "target": "com.amazonaws.glue#TableVersionId",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The ID value that identifies this view's version. For materialized views, the version ID is the Apache Iceberg table's snapshot ID. </p>"
+                    }
+                },
+                "ViewVersionToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the Apache Iceberg table.</p>"
+                    }
+                },
+                "RefreshSeconds": {
+                    "target": "com.amazonaws.glue#RefreshSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Auto refresh interval in seconds for the materialized view. If not specified, the view will \n      not automatically refresh.</p>"
+                    }
+                },
+                "LastRefreshType": {
+                    "target": "com.amazonaws.glue#LastRefreshType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the method used for the most recent refresh.</p>"
+                    }
+                },
                 "SubObjects": {
                     "target": "com.amazonaws.glue#ViewSubObjectsList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of table Amazon Resource Names (ARNs).</p>"
+                    }
+                },
+                "SubObjectVersionIds": {
+                    "target": "com.amazonaws.glue#ViewSubObjectVersionIdsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the Apache Iceberg table versions referenced by the materialized view.</p>"
                     }
                 },
                 "Representations": {
@@ -47682,10 +47913,41 @@
                         "smithy.api#documentation": "<p>A list of structures that contains the dialect of the view, and the query that defines the view.</p>"
                     }
                 },
+                "ViewVersionId": {
+                    "target": "com.amazonaws.glue#TableVersionId",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The ID value that identifies this view's version. For materialized views, the version ID is the Apache Iceberg table's snapshot ID. </p>"
+                    }
+                },
+                "ViewVersionToken": {
+                    "target": "com.amazonaws.glue#VersionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the Apache Iceberg table.</p>"
+                    }
+                },
+                "RefreshSeconds": {
+                    "target": "com.amazonaws.glue#RefreshSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Auto refresh interval in seconds for the materialized view. If not specified, the view will \n      not automatically refresh.</p>"
+                    }
+                },
+                "LastRefreshType": {
+                    "target": "com.amazonaws.glue#LastRefreshType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the materialized view's last refresh. Valid values: <code>Full</code>, \n      <code>Incremental</code>.</p>"
+                    }
+                },
                 "SubObjects": {
                     "target": "com.amazonaws.glue#ViewSubObjectsList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of base table ARNs that make up the view.</p>"
+                    }
+                },
+                "SubObjectVersionIds": {
+                    "target": "com.amazonaws.glue#ViewSubObjectVersionIdsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the Apache Iceberg table versions referenced by the materialized view.</p>"
                     }
                 }
             },
@@ -47828,6 +48090,18 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.glue#ViewSubObjectVersionIdsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#TableVersionId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
                 }
             }
         },

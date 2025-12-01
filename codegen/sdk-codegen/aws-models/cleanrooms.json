@@ -1703,6 +1703,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>"
                     }
+                },
+                "syntheticDataParameters": {
+                    "target": "com.amazonaws.cleanrooms#SyntheticDataParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters used to generate synthetic data for this analysis template.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1932,6 +1938,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the analysis template.</p>"
                     }
+                },
+                "isSyntheticData": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this analysis template summary generated synthetic data.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1949,7 +1961,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 90000
+                    "max": 500000
                 },
                 "smithy.api#sensitive": {}
             }
@@ -3040,6 +3052,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>"
                     }
+                },
+                "syntheticDataParameters": {
+                    "target": "com.amazonaws.cleanrooms#SyntheticDataParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The synthetic data generation parameters configured for this collaboration analysis template.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3120,6 +3138,12 @@
                     "target": "com.amazonaws.cleanrooms#ResourceDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the analysis template.</p>"
+                    }
+                },
+                "isSyntheticData": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this collaboration analysis template uses synthetic data generation.</p>"
                     }
                 }
             },
@@ -4108,10 +4132,37 @@
                 "smithy.api#documentation": "<p>A column within a schema relation, derived from the underlying table.</p>"
             }
         },
+        "com.amazonaws.cleanrooms#ColumnClassificationDetails": {
+            "type": "structure",
+            "members": {
+                "columnMapping": {
+                    "target": "com.amazonaws.cleanrooms#ColumnMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping that defines the classification of data columns for synthetic data generation and specifies how each column should be handled during the privacy-preserving data synthesis process.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains classification information for data columns, including mappings that specify how columns should be handled during synthetic data generation and privacy analysis.</p>"
+            }
+        },
         "com.amazonaws.cleanrooms#ColumnList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cleanrooms#Column"
+            }
+        },
+        "com.amazonaws.cleanrooms#ColumnMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#SyntheticDataColumnProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.cleanrooms#ColumnName": {
@@ -5758,6 +5809,12 @@
                     "target": "com.amazonaws.cleanrooms#ErrorMessageConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>"
+                    }
+                },
+                "syntheticDataParameters": {
+                    "target": "com.amazonaws.cleanrooms#SyntheticDataParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for generating synthetic data when running the analysis template.</p>"
                     }
                 }
             }
@@ -12430,10 +12487,58 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The payment responsibilities accepted by the member for model inference.</p>"
                     }
+                },
+                "syntheticDataGeneration": {
+                    "target": "com.amazonaws.cleanrooms#SyntheticDataGenerationPaymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment configuration for machine learning synthetic data generation.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object representing the collaboration member's machine learning payment responsibilities set by the collaboration creator.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#MLSyntheticDataParameters": {
+            "type": "structure",
+            "members": {
+                "epsilon": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The epsilon value for differential privacy when generating synthetic data. Lower values provide stronger privacy guarantees but may reduce data utility.</p>",
+                        "smithy.api#range": {
+                            "min": 1.0E-4,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxMembershipInferenceAttackScore": {
+                    "target": "com.amazonaws.cleanrooms#MaxMembershipInferenceAttackScore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum acceptable score for membership inference attack vulnerability. Synthetic data generation fails if the score for the resulting data exceeds this threshold.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "columnClassification": {
+                    "target": "com.amazonaws.cleanrooms#ColumnClassificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Classification details for data columns that specify how each column should be treated during synthetic data generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameters that control the generation of synthetic data for machine learning, including privacy settings and column classification details.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#MaxMembershipInferenceAttackScore": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.5,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.cleanrooms#MaxResults": {
@@ -12512,8 +12617,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
-                    "max": 9
+                    "min": 0
                 }
             }
         },
@@ -12851,6 +12955,12 @@
                     "target": "com.amazonaws.cleanrooms#MembershipModelInferencePaymentConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The payment responsibilities accepted by the member for model inference.</p>"
+                    }
+                },
+                "syntheticDataGeneration": {
+                    "target": "com.amazonaws.cleanrooms#MembershipSyntheticDataGenerationPaymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment configuration for synthetic data generation for this machine learning membership.</p>"
                     }
                 }
             },
@@ -13202,6 +13312,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cleanrooms#MembershipSummary"
+            }
+        },
+        "com.amazonaws.cleanrooms#MembershipSyntheticDataGenerationPaymentConfig": {
+            "type": "structure",
+            "members": {
+                "isResponsible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this membership is responsible for paying for synthetic data generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for payment for synthetic data generation in a membership.</p>"
             }
         },
         "com.amazonaws.cleanrooms#ModelInferencePaymentConfig": {
@@ -14343,7 +14468,8 @@
                 "analysisTemplateArn": {
                     "target": "com.amazonaws.cleanrooms#AnalysisTemplateArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN of the analysis template.</p>"
+                        "smithy.api#documentation": "<p> The ARN of the analysis template.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -16625,6 +16751,90 @@
                         "smithy.api#enumValue": "mx-central-1"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cleanrooms#SyntheticDataColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-z0-9_](([a-z0-9_]+-)*([a-z0-9_]+))?$"
+            }
+        },
+        "com.amazonaws.cleanrooms#SyntheticDataColumnProperties": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "com.amazonaws.cleanrooms#SyntheticDataColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data column as it appears in the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "columnType": {
+                    "target": "com.amazonaws.cleanrooms#SyntheticDataColumnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the column, which determines how the synthetic data generation algorithm processes and synthesizes values for this column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isPredictiveValue": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this column contains predictive values that should be treated as target variables in machine learning models. This affects how the synthetic data generation preserves statistical relationships.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties that define how a specific data column should be handled during synthetic data generation, including its name, type, and role in predictive modeling.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#SyntheticDataColumnType": {
+            "type": "enum",
+            "members": {
+                "CATEGORICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CATEGORICAL"
+                    }
+                },
+                "NUMERICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMERICAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#SyntheticDataGenerationPaymentConfig": {
+            "type": "structure",
+            "members": {
+                "isResponsible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates who is responsible for paying for synthetic data generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Payment configuration for synthetic data generation.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#SyntheticDataParameters": {
+            "type": "union",
+            "members": {
+                "mlSyntheticDataParameters": {
+                    "target": "com.amazonaws.cleanrooms#MLSyntheticDataParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning-specific parameters for synthetic data generation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters that control how synthetic data is generated, including privacy settings, column classifications, and other configuration options that affect the data synthesis process.</p>"
             }
         },
         "com.amazonaws.cleanrooms#TableAlias": {

@@ -3417,10 +3417,22 @@
                 "voiceSettings": {
                     "target": "com.amazonaws.lexmodelsv2#VoiceSettings"
                 },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Speech-to-text settings to apply when importing the bot locale configuration.</p>"
+                    }
+                },
                 "speechDetectionSensitivity": {
                     "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
                     "traits": {
                         "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
+                    }
+                },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unified speech settings to apply when importing the bot locale configuration.</p>"
                     }
                 }
             },
@@ -5377,6 +5389,18 @@
                         "smithy.api#documentation": "<p>The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the\n         user.</p>"
                     }
                 },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unified speech settings to configure for the new bot locale.</p>"
+                    }
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Speech-to-text settings to configure for the new bot locale.</p>"
+                    }
+                },
                 "generativeAISettings": {
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings"
                 },
@@ -5434,6 +5458,18 @@
                     "target": "com.amazonaws.lexmodelsv2#VoiceSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the\n         user.</p>"
+                    }
+                },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unified speech settings configured for the created bot locale.</p>"
+                    }
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speech-to-text settings configured for the created bot locale.</p>"
                     }
                 },
                 "botLocaleStatus": {
@@ -7267,6 +7303,37 @@
                 "smithy.api#documentation": "<p>The object used for specifying the data range that the customer\n            wants Amazon Lex to read through in the input transcripts.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#DeepgramModelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeepgramSpeechModelConfig": {
+            "type": "structure",
+            "members": {
+                "apiTokenSecretArn": {
+                    "target": "com.amazonaws.lexmodelsv2#SecretsManagerSecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the Deepgram API token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelId": {
+                    "target": "com.amazonaws.lexmodelsv2#DeepgramModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Deepgram speech-to-text model to use for processing speech input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for integrating Deepgram speech-to-text models with Amazon Lex.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#DefaultConditionalBranch": {
             "type": "structure",
             "members": {
@@ -9048,6 +9115,18 @@
                     "target": "com.amazonaws.lexmodelsv2#VoiceSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Polly voice Amazon Lex uses for voice interaction with the\n         user.</p>"
+                    }
+                },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unified speech settings configured for the bot locale.</p>"
+                    }
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speech-to-text settings configured for the bot locale.</p>"
                     }
                 },
                 "intentsCount": {
@@ -13848,7 +13927,7 @@
                     "name": "lex"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Amazon Lex Model Building Service provides APIs for creating, managing, and deploying conversational bots and their components.</p>",
                 "smithy.api#title": "Amazon Lex Model Building V2",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -19632,6 +19711,16 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#SecretsManagerSecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[A-Za-z-]*:secretsmanager:[a-z0-9-]{1,20}:[0-9]{12}:secret:[A-Za-z0-9/_+=.@-]{1,512}-[A-Za-z0-9]{6}$"
+            }
+        },
         "com.amazonaws.lexmodelsv2#SentimentAnalysisSettings": {
             "type": "structure",
             "members": {
@@ -20738,6 +20827,84 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Determines the sensitivity level for voice activity detection (VAD) in noisy environments. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Default</code> - Standard sensitivity level suitable for most environments</p>\n            </li>\n            <li>\n               <p>\n                  <code>HighNoiseTolerance</code> - Increased tolerance for moderate background noise</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumNoiseTolerance</code> - Maximum tolerance for high levels of background noise</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SpeechFoundationModel": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.lexmodelsv2#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the foundation model used for speech processing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "voiceId": {
+                    "target": "com.amazonaws.lexmodelsv2#VoiceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the voice to use for speech synthesis with the foundation model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a foundation model used for speech synthesis and recognition capabilities.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SpeechModelConfig": {
+            "type": "structure",
+            "members": {
+                "deepgramConfig": {
+                    "target": "com.amazonaws.lexmodelsv2#DeepgramSpeechModelConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for using Deepgram as the speech-to-text provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings that define which speech-to-text model to use for processing speech input.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SpeechModelPreference": {
+            "type": "enum",
+            "members": {
+                "Standard": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Standard"
+                    }
+                },
+                "Neural": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Neural"
+                    }
+                },
+                "Deepgram": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deepgram"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings": {
+            "type": "structure",
+            "members": {
+                "speechModelPreference": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechModelPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speech-to-text model to use.</p>"
+                    }
+                },
+                "speechModelConfig": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechModelConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for the selected speech-to-text model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings that control how Amazon Lex processes and recognizes speech input from users.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#StartBotRecommendation": {
@@ -22906,6 +23073,21 @@
                 "smithy.api#documentation": "<p>Contains information about the messages in the turn.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings": {
+            "type": "structure",
+            "members": {
+                "speechFoundationModel": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechFoundationModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The foundation model configuration to use for unified speech processing capabilities.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unified configuration settings that combine speech recognition and synthesis capabilities.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#UntagResource": {
             "type": "operation",
             "input": {
@@ -23254,6 +23436,18 @@
                         "smithy.api#documentation": "<p>The new Amazon Polly voice Amazon Lex should use for voice interaction with the\n         user.</p>"
                     }
                 },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated unified speech settings to apply to the bot locale.</p>"
+                    }
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated speech-to-text settings to apply to the bot locale.</p>"
+                    }
+                },
                 "generativeAISettings": {
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings",
                     "traits": {
@@ -23314,6 +23508,18 @@
                     "target": "com.amazonaws.lexmodelsv2#VoiceSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated Amazon Polly voice to use for voice interaction with the\n         user.</p>"
+                    }
+                },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated unified speech settings for the bot locale.</p>"
+                    }
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated speech-to-text settings for the bot locale.</p>"
                     }
                 },
                 "botLocaleStatus": {
@@ -25323,17 +25529,17 @@
         "com.amazonaws.lexmodelsv2#VoiceSettings": {
             "type": "structure",
             "members": {
+                "engine": {
+                    "target": "com.amazonaws.lexmodelsv2#VoiceEngine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine\">\n               <code>engine</code> parameter of the <code>SynthesizeSpeech</code> operation</a> in the <i>Amazon Polly developer guide</i>.</p>\n         <p>If you do not specify a value, the default is <code>standard</code>.</p>"
+                    }
+                },
                 "voiceId": {
                     "target": "com.amazonaws.lexmodelsv2#VoiceId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the Amazon Polly voice to use.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "engine": {
-                    "target": "com.amazonaws.lexmodelsv2#VoiceEngine",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine\">\n               <code>engine</code> parameter of the <code>SynthesizeSpeech</code> operation</a> in the <i>Amazon Polly developer guide</i>.</p>\n         <p>If you do not specify a value, the default is <code>standard</code>.</p>"
                     }
                 }
             },

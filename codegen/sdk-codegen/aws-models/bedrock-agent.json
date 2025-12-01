@@ -2424,6 +2424,55 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagent#AudioConfiguration": {
+            "type": "structure",
+            "members": {
+                "segmentationConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#AudioSegmentationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for segmenting audio content during processing.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for processing audio content in multimodal knowledge bases.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#AudioConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#AudioConfiguration",
+                "traits": {
+                    "smithy.api#documentation": "Audio configuration for multi modal ingestion."
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#AudioSegmentationConfiguration": {
+            "type": "structure",
+            "members": {
+                "fixedLengthDuration": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration in seconds for each audio segment. Audio files will be divided into chunks of this length for processing.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 30
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for segmenting audio content during multimodal knowledge base ingestion. Determines how audio files are divided into chunks for processing.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#AutoToolChoice": {
             "type": "structure",
             "members": {},
@@ -2500,6 +2549,18 @@
                     "target": "com.amazonaws.bedrockagent#EmbeddingDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings. Floating-point (float32) is the default data type, and is supported by most models for vector embeddings. See <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html\">Supported embeddings models</a> for information on the available models and their vector data types.</p>"
+                    }
+                },
+                "audio": {
+                    "target": "com.amazonaws.bedrockagent#AudioConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for processing audio content in multimodal knowledge bases.</p>"
+                    }
+                },
+                "video": {
+                    "target": "com.amazonaws.bedrockagent#VideoConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for processing video content in multimodal knowledge bases.</p>"
                     }
                 }
             },
@@ -9361,7 +9422,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a knoweldge base.</p>",
+                "smithy.api#documentation": "<p>Gets information about a knowledge base.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -10691,7 +10752,7 @@
                 "status": {
                     "target": "com.amazonaws.bedrockagent#DocumentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ingestion status of the document. The following statuses are possible:</p> <ul> <li> <p>STARTED – You submitted the ingestion job containing the document.</p> </li> <li> <p>PENDING – The document is waiting to be ingested.</p> </li> <li> <p>IN_PROGRESS – The document is being ingested.</p> </li> <li> <p>INDEXED – The document was successfully indexed.</p> </li> <li> <p>PARTIALLY_INDEXED – The document was partially indexed.</p> </li> <li> <p>METADATA_PARTIALLY_INDEXED – You submitted metadata for an existing document and it was partially indexed.</p> </li> <li> <p>METADATA_UPDATE_FAILED – You submitted a metadata update for an existing document but it failed.</p> </li> <li> <p>FAILED – The document failed to be ingested.</p> </li> <li> <p>NOT_FOUND – The document wasn't found.</p> </li> <li> <p>IGNORED – The document was ignored during ingestion.</p> </li> <li> <p>DELETING – You submitted the delete job containing the document.</p> </li> <li> <p>DELETE_IN_PROGRESS – The document is being deleted.</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The ingestion status of the document. The following statuses are possible:</p> <ul> <li> <p>STARTING – You submitted the ingestion job containing the document.</p> </li> <li> <p>PENDING – The document is waiting to be ingested.</p> </li> <li> <p>IN_PROGRESS – The document is being ingested.</p> </li> <li> <p>INDEXED – The document was successfully indexed.</p> </li> <li> <p>PARTIALLY_INDEXED – The document was partially indexed.</p> </li> <li> <p>METADATA_PARTIALLY_INDEXED – You submitted metadata for an existing document and it was partially indexed.</p> </li> <li> <p>METADATA_UPDATE_FAILED – You submitted a metadata update for an existing document but it failed.</p> </li> <li> <p>FAILED – The document failed to be ingested.</p> </li> <li> <p>NOT_FOUND – The document wasn't found.</p> </li> <li> <p>IGNORED – The document was ignored during ingestion.</p> </li> <li> <p>DELETING – You submitted the delete job containing the document.</p> </li> <li> <p>DELETE_IN_PROGRESS – The document is being deleted.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18954,6 +19015,55 @@
                     "target": "com.amazonaws.bedrockagent#ListAgentVersions"
                 }
             ]
+        },
+        "com.amazonaws.bedrockagent#VideoConfiguration": {
+            "type": "structure",
+            "members": {
+                "segmentationConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#VideoSegmentationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for segmenting video content during processing.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for processing video content in multimodal knowledge bases.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#VideoConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#VideoConfiguration",
+                "traits": {
+                    "smithy.api#documentation": "Video configuration for multi modal ingestion."
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#VideoSegmentationConfiguration": {
+            "type": "structure",
+            "members": {
+                "fixedLengthDuration": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration in seconds for each video segment. Video files will be divided into chunks of this length for processing.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 30
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for segmenting video content during multimodal knowledge base ingestion. Determines how video files are divided into chunks for processing.</p>"
+            }
         },
         "com.amazonaws.bedrockagent#WebCrawlerConfiguration": {
             "type": "structure",

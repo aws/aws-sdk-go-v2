@@ -912,7 +912,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 32
+                    "max": 211
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+$"
             }
@@ -974,7 +974,17 @@
                     "target": "com.amazonaws.appintegrations#Boolean",
                     "traits": {
                         "smithy.api#default": false,
+                        "smithy.api#deprecated": {
+                            "since": "2025-12-01",
+                            "message": "IsService has been deprecated in favor of ApplicationType"
+                        },
                         "smithy.api#documentation": "<p>Indicates whether the application is a service.</p>"
+                    }
+                },
+                "ApplicationType": {
+                    "target": "com.amazonaws.appintegrations#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of application.</p>"
                     }
                 }
             },
@@ -990,6 +1000,32 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^\\w+\\:\\/\\/.*$"
+            }
+        },
+        "com.amazonaws.appintegrations#ApplicationType": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                },
+                "MCP_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MCP_SERVER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<value>The type of application</value>"
             }
         },
         "com.amazonaws.appintegrations#ApplicationsList": {
@@ -1211,6 +1247,10 @@
                     "target": "com.amazonaws.appintegrations#Boolean",
                     "traits": {
                         "smithy.api#default": false,
+                        "smithy.api#deprecated": {
+                            "since": "2025-12-01",
+                            "message": "IsService has been deprecated in favor of ApplicationType"
+                        },
                         "smithy.api#documentation": "<p>Indicates whether the application is a service.</p>"
                     }
                 },
@@ -1230,6 +1270,12 @@
                     "target": "com.amazonaws.appintegrations#IframeConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The iframe configuration for the application.</p>"
+                    }
+                },
+                "ApplicationType": {
+                    "target": "com.amazonaws.appintegrations#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of application.</p>"
                     }
                 }
             },
@@ -2411,6 +2457,10 @@
                     "target": "com.amazonaws.appintegrations#Boolean",
                     "traits": {
                         "smithy.api#default": false,
+                        "smithy.api#deprecated": {
+                            "since": "2025-12-01",
+                            "message": "IsService has been deprecated in favor of ApplicationType"
+                        },
                         "smithy.api#documentation": "<p>Indicates whether the application is a service.</p>"
                     }
                 },
@@ -2430,6 +2480,12 @@
                     "target": "com.amazonaws.appintegrations#IframeConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The iframe configuration for the application.</p>"
+                    }
+                },
+                "ApplicationType": {
+                    "target": "com.amazonaws.appintegrations#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of application.</p>"
                     }
                 }
             },
@@ -2949,6 +3005,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "ApplicationType": {
+                    "target": "com.amazonaws.appintegrations#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of application.</p>",
+                        "smithy.api#httpQuery": "applicationType"
                     }
                 }
             },
@@ -3958,6 +4021,10 @@
                     "target": "com.amazonaws.appintegrations#Boolean",
                     "traits": {
                         "smithy.api#default": null,
+                        "smithy.api#deprecated": {
+                            "since": "2025-12-01",
+                            "message": "IsService has been deprecated in favor of ApplicationType"
+                        },
                         "smithy.api#documentation": "<p>Indicates whether the application is a service.</p>"
                     }
                 },
@@ -3977,6 +4044,12 @@
                     "target": "com.amazonaws.appintegrations#IframeConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The iframe configuration for the application.</p>"
+                    }
+                },
+                "ApplicationType": {
+                    "target": "com.amazonaws.appintegrations#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of application.</p>"
                     }
                 }
             },

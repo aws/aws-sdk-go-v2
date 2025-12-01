@@ -1400,6 +1400,30 @@
                 "smithy.api#documentation": "<p>Contains citations for a part of an agent response.</p>"
             }
         },
+        "com.amazonaws.bedrockagentruntime#AudioSegment": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI where this specific audio segment is stored in the multimodal storage destination.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "transcription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text transcription of the audio segment content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an audio segment retrieved from a knowledge base, including its location and transcription.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>audio</code> field</p> </li> </ul>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#BadGatewayException": {
             "type": "structure",
             "members": {
@@ -6569,6 +6593,61 @@
                 "target": "com.amazonaws.bedrockagentruntime#InputFile"
             }
         },
+        "com.amazonaws.bedrockagentruntime#InputImage": {
+            "type": "structure",
+            "members": {
+                "format": {
+                    "target": "com.amazonaws.bedrockagentruntime#InputImageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the input image. Supported formats include png, gif, jpeg, and webp.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inlineContent": {
+                    "target": "com.amazonaws.bedrockagentruntime#ByteContentBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base64-encoded image data for inline image content. Maximum size is 5MB.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5242880
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the image data for multimodal knowledge base queries, including format and content.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a> – in the <code>image</code> field</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InputImageFormat": {
+            "type": "enum",
+            "members": {
+                "png": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "png"
+                    }
+                },
+                "jpeg": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jpeg"
+                    }
+                },
+                "gif": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gif"
+                    }
+                },
+                "webp": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "webp"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentruntime#InputPrompt": {
             "type": "union",
             "members": {
@@ -7605,20 +7684,51 @@
         "com.amazonaws.bedrockagentruntime#KnowledgeBaseQuery": {
             "type": "structure",
             "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseQueryType",
+                    "traits": {
+                        "smithy.api#default": "TEXT",
+                        "smithy.api#documentation": "<p>The type of query being performed.</p>"
+                    }
+                },
                 "text": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The text of the query made to the knowledge base.</p>",
                         "smithy.api#length": {
-                            "max": 1000
-                        },
-                        "smithy.api#required": {}
+                            "max": 20000
+                        }
+                    }
+                },
+                "image": {
+                    "target": "com.amazonaws.bedrockagentruntime#InputImage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An image to include in the knowledge base query for multimodal retrieval.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the query made to the knowledge base.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a> – in the <code>retrievalQuery</code> field</p> </li> </ul>",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseQueryType": {
+            "type": "enum",
+            "members": {
+                "TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT"
+                    }
+                },
+                "IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalConfiguration": {
@@ -10152,7 +10262,7 @@
                 "textPromptTemplate": {
                     "target": "com.amazonaws.bedrockagentruntime#TextPromptTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The template for the prompt that's sent to the model for response generation. You can include prompt placeholders, which become replaced before the prompt is sent to the model to provide instructions and context to the model. In addition, you can include XML tags to delineate meaningful sections of the prompt template.</p> <p>For more information, see the following resources:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt\">Knowledge base prompt templates</a> </p> </li> <li> <p> <a href=\"https://docs.anthropic.com/claude/docs/use-xml-tags\">Use XML tags with Anthropic Claude models</a> </p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The template for the prompt that's sent to the model for response generation. You can include prompt placeholders, which become replaced before the prompt is sent to the model to provide instructions and context to the model. In addition, you can include XML tags to delineate meaningful sections of the prompt template.</p> <p>For more information, see the following resources:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt\">Knowledge base prompt templates</a> </p> </li> <li> <p> <a href=\"https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags\">Use XML tags with Anthropic Claude models</a> </p> </li> </ul>"
                     }
                 }
             },
@@ -10763,7 +10873,7 @@
                 "index": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ranking of the document. The lower a number, the higher the document is ranked.</p>",
+                        "smithy.api#documentation": "<p>The original index of the document from the input sources array.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 1000
@@ -11216,6 +11326,18 @@
                         "smithy.api#documentation": "<p>A data URI with base64-encoded content from the data source. The URI is in the following format: returned in the following format: <code>data:image/jpeg;base64,${base64-encoded string}</code>.</p>"
                     }
                 },
+                "video": {
+                    "target": "com.amazonaws.bedrockagentruntime#VideoSegment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Video segment information when the retrieval result contains video content.</p>"
+                    }
+                },
+                "audio": {
+                    "target": "com.amazonaws.bedrockagentruntime#AudioSegment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Audio segment information when the retrieval result contains audio content.</p>"
+                    }
+                },
                 "row": {
                     "target": "com.amazonaws.bedrockagentruntime#RetrievalResultContentRow",
                     "traits": {
@@ -11324,6 +11446,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ROW"
+                    }
+                },
+                "AUDIO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIO"
+                    }
+                },
+                "VIDEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO"
                     }
                 }
             }
@@ -11701,7 +11835,7 @@
                 "text": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query made to the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The query made to the knowledge base, in characters.</p>",
                         "smithy.api#length": {
                             "max": 1000
                         },
@@ -13767,6 +13901,30 @@
                     "max": 5
                 },
                 "smithy.api#pattern": "^(DRAFT|[0-9]{0,4}[1-9][0-9]{0,4})$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#VideoSegment": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI where this specific video segment is stored in the multimodal storage destination.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "summary": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A text summary describing the content of the video segment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a video segment retrieved from a knowledge base, including its location and summary.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>video</code> field</p> </li> </ul>"
             }
         }
     }
