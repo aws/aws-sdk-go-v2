@@ -1430,6 +1430,26 @@ func (m *validateOpGetConnection) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataExportConfiguration struct {
+}
+
+func (*validateOpGetDataExportConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataExportConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataExportConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataExportConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDataProduct struct {
 }
 
@@ -2710,6 +2730,26 @@ func (m *validateOpPostTimeSeriesDataPoints) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutDataExportConfiguration struct {
+}
+
+func (*validateOpPutDataExportConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDataExportConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDataExportConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDataExportConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutEnvironmentBlueprintConfiguration struct {
 }
 
@@ -3714,6 +3754,10 @@ func addOpGetConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConnection{}, middleware.After)
 }
 
+func addOpGetDataExportConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataExportConfiguration{}, middleware.After)
+}
+
 func addOpGetDataProductValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataProduct{}, middleware.After)
 }
@@ -3968,6 +4012,10 @@ func addOpPostLineageEventValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPostTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPostTimeSeriesDataPoints{}, middleware.After)
+}
+
+func addOpPutDataExportConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDataExportConfiguration{}, middleware.After)
 }
 
 func addOpPutEnvironmentBlueprintConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -7812,6 +7860,21 @@ func validateOpGetConnectionInput(v *GetConnectionInput) error {
 	}
 }
 
+func validateOpGetDataExportConfigurationInput(v *GetDataExportConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataExportConfigurationInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDataProductInput(v *GetDataProductInput) error {
 	if v == nil {
 		return nil
@@ -8962,6 +9025,24 @@ func validateOpPostTimeSeriesDataPointsInput(v *PostTimeSeriesDataPointsInput) e
 	}
 }
 
+func validateOpPutDataExportConfigurationInput(v *PutDataExportConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDataExportConfigurationInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EnableExport == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnableExport"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutEnvironmentBlueprintConfigurationInput(v *PutEnvironmentBlueprintConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -9266,9 +9347,6 @@ func validateOpStartMetadataGenerationRunInput(v *StartMetadataGenerationRunInpu
 	invalidParams := smithy.InvalidParamsError{Context: "StartMetadataGenerationRunInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
-	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if v.Target == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Target"))

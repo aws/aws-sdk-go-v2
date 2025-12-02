@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about log groups. You can return all your log groups or
-// filter the results by prefix. The results are ASCII-sorted by log group name.
+// Returns information about log groups, including data sources that ingest into
+// each log group. You can return all your log groups or filter the results by
+// prefix. The results are ASCII-sorted by log group name.
 //
 // CloudWatch Logs doesn't support IAM policies that control access to the
 // DescribeLogGroups action by using the aws:ResourceTag/key-name  condition key.

@@ -42,6 +42,11 @@ type ModifyDBInstanceInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
+	// A list of additional storage volumes to modify or delete for the DB instance.
+	// You can create up to 3 additional storage volumes. Additional storage volumes
+	// are supported for RDS for Oracle and RDS for SQL Server DB instances only.
+	AdditionalStorageVolumes []types.ModifyAdditionalStorageVolume
+
 	// The new amount of storage in gibibytes (GiB) to allocate for the DB instance.
 	//
 	// For RDS for Db2, MariaDB, RDS for MySQL, RDS for Oracle, and RDS for

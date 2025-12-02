@@ -7289,6 +7289,13 @@ func awsRestjson1_serializeDocumentAIMLOptionsInput(v *types.AIMLOptionsInput, v
 		}
 	}
 
+	if v.ServerlessVectorAcceleration != nil {
+		ok := object.Key("ServerlessVectorAcceleration")
+		if err := awsRestjson1_serializeDocumentServerlessVectorAcceleration(v.ServerlessVectorAcceleration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8409,6 +8416,18 @@ func awsRestjson1_serializeDocumentSecurityLakeDirectQueryDataSource(v *types.Se
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServerlessVectorAcceleration(v *types.ServerlessVectorAcceleration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil

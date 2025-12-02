@@ -22,10 +22,6 @@ import (
 // this operation.
 //
 // Additional Permissions You must also have the following permission: iam:PassRole
-//
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
 func (c *Client) UpdateAccessGrantsLocation(ctx context.Context, params *UpdateAccessGrantsLocationInput, optFns ...func(*Options)) (*UpdateAccessGrantsLocationOutput, error) {
 	if params == nil {
 		params = &UpdateAccessGrantsLocationInput{}

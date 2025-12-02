@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of automation rules and metadata for the calling account. This
-// API is in public preview and subject to change.
+// Returns a list of automation rules and metadata for the calling account.
 func (c *Client) ListAutomationRulesV2(ctx context.Context, params *ListAutomationRulesV2Input, optFns ...func(*Options)) (*ListAutomationRulesV2Output, error) {
 	if params == nil {
 		params = &ListAutomationRulesV2Input{}

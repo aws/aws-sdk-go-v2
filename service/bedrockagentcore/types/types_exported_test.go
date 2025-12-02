@@ -44,6 +44,64 @@ func ExampleContent_outputUsage() {
 
 var _ *string
 
+func ExampleContext_outputUsage() {
+	var union types.Context
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContextMemberSpanContext:
+		_ = v.Value // Value is types.SpanContext
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SpanContext
+
+func ExampleEvaluationInput_outputUsage() {
+	var union types.EvaluationInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluationInputMemberSessionSpans:
+		_ = v.Value // Value is []document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []document.Interface
+
+func ExampleEvaluationTarget_outputUsage() {
+	var union types.EvaluationTarget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluationTargetMemberSpanIds:
+		_ = v.Value // Value is []string
+
+	case *types.EvaluationTargetMemberTraceIds:
+		_ = v.Value // Value is []string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []string
+var _ []string
+
 func ExampleExtractionJobMessages_outputUsage() {
 	var union types.ExtractionJobMessages
 	// type switches can be used to check the union value

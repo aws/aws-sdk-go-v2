@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all tags attached to the specified telemetry rule resource.
+//	Lists all tags attached to the specified resource. Supports telemetry rule
+//
+// resources and telemetry pipeline resources.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

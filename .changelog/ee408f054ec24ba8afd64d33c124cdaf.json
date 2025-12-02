@@ -1,0 +1,8 @@
+{
+    "id": "ee408f05-4ec2-4ba8-afd6-4d33c124cdaf",
+    "type": "feature",
+    "description": "New S3 Storage Class FSX_ONTAP",
+    "modules": [
+        "service/s3"
+    ]
+}

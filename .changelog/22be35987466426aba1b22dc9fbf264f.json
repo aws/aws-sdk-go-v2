@@ -1,0 +1,8 @@
+{
+    "id": "22be3598-7466-426a-ba1b-22dc9fbf264f",
+    "type": "feature",
+    "description": "Initial release of Nova Act SDK. The Nova Act service enables customers to build and manage fleets of agents for automating production UI workflows with high reliability, fastest time-to-value, and ease of implementation at scale.",
+    "modules": [
+        "service/novaact"
+    ]
+}

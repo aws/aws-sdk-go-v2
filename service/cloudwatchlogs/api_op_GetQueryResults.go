@@ -24,6 +24,11 @@ import (
 // returns only partial results. If you see a value of Scheduled or Running for
 // the status, you can retry the operation later to see the final results.
 //
+// This operation is used both for retrieving results from interactive queries and
+// from automated scheduled query executions. Scheduled queries use GetQueryResults
+// internally to retrieve query results for processing and delivery to configured
+// destinations.
+//
 // If you are using CloudWatch cross-account observability, you can use this
 // operation in a monitoring account to start queries in linked source accounts.
 // For more information, see [CloudWatch cross-account observability].

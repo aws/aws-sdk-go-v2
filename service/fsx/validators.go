@@ -928,6 +928,28 @@ func validateCompletionReport(v *types.CompletionReport) error {
 	}
 }
 
+func validateCreateAndAttachS3AccessPointOntapConfiguration(v *types.CreateAndAttachS3AccessPointOntapConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAndAttachS3AccessPointOntapConfiguration"}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if v.FileSystemIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemIdentity"))
+	} else if v.FileSystemIdentity != nil {
+		if err := validateOntapFileSystemIdentity(v.FileSystemIdentity); err != nil {
+			invalidParams.AddNested("FileSystemIdentity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateAndAttachS3AccessPointOpenZFSConfiguration(v *types.CreateAndAttachS3AccessPointOpenZFSConfiguration) error {
 	if v == nil {
 		return nil
@@ -1338,6 +1360,61 @@ func validateLustreLogCreateConfiguration(v *types.LustreLogCreateConfiguration)
 	invalidParams := smithy.InvalidParamsError{Context: "LustreLogCreateConfiguration"}
 	if len(v.Level) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Level"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOntapFileSystemIdentity(v *types.OntapFileSystemIdentity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OntapFileSystemIdentity"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.UnixUser != nil {
+		if err := validateOntapUnixFileSystemUser(v.UnixUser); err != nil {
+			invalidParams.AddNested("UnixUser", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WindowsUser != nil {
+		if err := validateOntapWindowsFileSystemUser(v.WindowsUser); err != nil {
+			invalidParams.AddNested("WindowsUser", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOntapUnixFileSystemUser(v *types.OntapUnixFileSystemUser) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OntapUnixFileSystemUser"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOntapWindowsFileSystemUser(v *types.OntapWindowsFileSystemUser) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OntapWindowsFileSystemUser"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1834,6 +1911,11 @@ func validateOpCreateAndAttachS3AccessPointInput(v *CreateAndAttachS3AccessPoint
 	if v.OpenZFSConfiguration != nil {
 		if err := validateCreateAndAttachS3AccessPointOpenZFSConfiguration(v.OpenZFSConfiguration); err != nil {
 			invalidParams.AddNested("OpenZFSConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OntapConfiguration != nil {
+		if err := validateCreateAndAttachS3AccessPointOntapConfiguration(v.OntapConfiguration); err != nil {
+			invalidParams.AddNested("OntapConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

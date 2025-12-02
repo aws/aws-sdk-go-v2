@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -132,6 +133,91 @@ type AgentRuntimeEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for an Amazon API Gateway target.
+type ApiGatewayTargetConfiguration struct {
+
+	// The configuration for defining REST API tool filters and overrides for the
+	// gateway target.
+	//
+	// This member is required.
+	ApiGatewayToolConfiguration *ApiGatewayToolConfiguration
+
+	// The ID of the API Gateway REST API.
+	//
+	// This member is required.
+	RestApiId *string
+
+	// The ID of the stage of the REST API to add as a target.
+	//
+	// This member is required.
+	Stage *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for defining REST API tool filters and overrides for the
+// gateway target.
+type ApiGatewayToolConfiguration struct {
+
+	// A list of path and method patterns to expose as tools using metadata from the
+	// REST API's OpenAPI specification.
+	//
+	// This member is required.
+	ToolFilters []ApiGatewayToolFilter
+
+	// A list of explicit tool definitions with optional custom names and descriptions.
+	ToolOverrides []ApiGatewayToolOverride
+
+	noSmithyDocumentSerde
+}
+
+// Specifies which operations from an API Gateway REST API are exposed as tools.
+// Tool names and descriptions are derived from the operationId and description
+// fields in the API's exported OpenAPI specification.
+type ApiGatewayToolFilter struct {
+
+	// Resource path to match in the REST API. Supports exact paths (for example, /pets
+	// ) or wildcard paths (for example, /pets/* to match all paths under /pets ). Must
+	// match existing paths in the REST API.
+	//
+	// This member is required.
+	FilterPath *string
+
+	// The methods to filter for.
+	//
+	// This member is required.
+	Methods []RestApiMethod
+
+	noSmithyDocumentSerde
+}
+
+// Settings to override configurations for a tool.
+type ApiGatewayToolOverride struct {
+
+	// The HTTP method to expose for the specified path.
+	//
+	// This member is required.
+	Method RestApiMethod
+
+	// The name of tool. Identifies the tool in the Model Context Protocol.
+	//
+	// This member is required.
+	Name *string
+
+	// Resource path in the REST API (e.g., /pets ). Must explicitly match an existing
+	// path in the REST API.
+	//
+	// This member is required.
+	Path *string
+
+	// The description of the tool. Provides information about the purpose and usage
+	// of the tool. If not provided, uses the description from the API's OpenAPI
+	// specification.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an API key credential provider.
 type ApiKeyCredentialProviderItem struct {
 
@@ -242,6 +328,45 @@ type AuthorizerConfigurationMemberCustomJWTAuthorizer struct {
 
 func (*AuthorizerConfigurationMemberCustomJWTAuthorizer) isAuthorizerConfiguration() {}
 
+// Defines the value or values to match for and the relationship of the match.
+type AuthorizingClaimMatchValueType struct {
+
+	// Defines the relationship between the claim field value and the value or values
+	// you're matching for.
+	//
+	// This member is required.
+	ClaimMatchOperator ClaimMatchOperatorType
+
+	// The value or values to match for.
+	//
+	// This member is required.
+	ClaimMatchValue ClaimMatchValueType
+
+	noSmithyDocumentSerde
+}
+
+//	The configuration for using Amazon Bedrock models in evaluator assessments,
+//
+// including model selection and inference parameters.
+type BedrockEvaluatorModelConfig struct {
+
+	//  The identifier of the Amazon Bedrock model to use for evaluation. Must be a
+	// supported foundation model available in your region.
+	//
+	// This member is required.
+	ModelId *string
+
+	//  Additional model-specific request fields to customize model behavior beyond
+	// the standard inference configuration.
+	AdditionalModelRequestFields document.Interface
+
+	//  The inference configuration parameters that control model behavior during
+	// evaluation, including temperature, token limits, and sampling settings.
+	InferenceConfig *InferenceConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The network configuration for a browser. This structure defines how the browser
 // connects to the network.
 type BrowserNetworkConfiguration struct {
@@ -317,6 +442,113 @@ type BrowserSummary struct {
 
 	// The name of the browser.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+//	The definition of a categorical rating scale option that provides a named
+//
+// category with its description for evaluation scoring.
+type CategoricalScaleDefinition struct {
+
+	//  The description that explains what this categorical rating represents and when
+	// it should be used.
+	//
+	// This member is required.
+	Definition *string
+
+	//  The label or name of this categorical rating option.
+	//
+	// This member is required.
+	Label *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a Cedar policy statement within the AgentCore Policy system. Cedar
+// is a policy language designed for authorization that provides human-readable,
+// analyzable, and high-performance policy evaluation for controlling agent
+// behavior and access decisions.
+type CedarPolicy struct {
+
+	// The Cedar policy statement that defines the authorization logic. This statement
+	// follows Cedar syntax and specifies principals, actions, resources, and
+	// conditions that determine when access should be allowed or denied.
+	//
+	// This member is required.
+	Statement *string
+
+	noSmithyDocumentSerde
+}
+
+// The value or values to match for.
+//
+//   - Include a matchValueString with the EQUALS operator to specify a string that
+//     matches the claim field value.
+//
+//   - Include a matchValueArray to specify an array of string values. You can use
+//     the following operators:
+//
+//   - Use CONTAINS to yield a match if the claim field value is in the array.
+//
+//   - Use CONTAINS_ANY to yield a match if the claim field value contains any of
+//     the strings in the array.
+//
+// The following types satisfy this interface:
+//
+//	ClaimMatchValueTypeMemberMatchValueString
+//	ClaimMatchValueTypeMemberMatchValueStringList
+type ClaimMatchValueType interface {
+	isClaimMatchValueType()
+}
+
+// The string value to match for.
+type ClaimMatchValueTypeMemberMatchValueString struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ClaimMatchValueTypeMemberMatchValueString) isClaimMatchValueType() {}
+
+// An array of strings to check for a match.
+type ClaimMatchValueTypeMemberMatchValueStringList struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*ClaimMatchValueTypeMemberMatchValueStringList) isClaimMatchValueType() {}
+
+//	The configuration for reading agent traces from CloudWatch logs as input for
+//
+// online evaluation.
+type CloudWatchLogsInputConfig struct {
+
+	//  The list of CloudWatch log group names to monitor for agent traces.
+	//
+	// This member is required.
+	LogGroupNames []string
+
+	//  The list of service names to filter traces within the specified log groups.
+	// Used to identify relevant agent sessions.
+	//
+	// This member is required.
+	ServiceNames []string
+
+	noSmithyDocumentSerde
+}
+
+//	The configuration for writing evaluation results to CloudWatch logs with
+//
+// embedded metric format (EMF) for monitoring.
+type CloudWatchOutputConfig struct {
+
+	//  The name of the CloudWatch log group where evaluation results will be written.
+	// The log group will be created if it doesn't exist.
+	//
+	// This member is required.
+	LogGroupName *string
 
 	noSmithyDocumentSerde
 }
@@ -447,6 +679,28 @@ type ContainerConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Represents content input for policy generation operations. This structure
+// encapsulates the natural language descriptions or other content formats that are
+// used as input for AI-powered policy generation.
+//
+// The following types satisfy this interface:
+//
+//	ContentMemberRawText
+type Content interface {
+	isContent()
+}
+
+// The raw text content containing natural language descriptions of desired policy
+// behavior. This text is processed by AI to generate corresponding Cedar policy
+// statements that match the described intent.
+type ContentMemberRawText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentMemberRawText) isContent() {}
+
 // A credential provider for gateway authentication. This structure contains the
 // configuration for authenticating with the target endpoint.
 //
@@ -495,10 +749,38 @@ type CredentialProviderConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the name of a custom claim field and rules for finding matches to
+// authenticate its value.
+type CustomClaimValidationType struct {
+
+	// Defines the value or values to match for and the relationship of the match.
+	//
+	// This member is required.
+	AuthorizingClaimMatchValue *AuthorizingClaimMatchValueType
+
+	// The name of the custom claim field to check.
+	//
+	// This member is required.
+	InboundTokenClaimName *string
+
+	// The data type of the claim value to check for.
+	//
+	//   - Use STRING if you want to find an exact match to a string you define.
+	//
+	//   - Use STRING_ARRAY if you want to fnd a match to at least one value in an
+	//   array you define.
+	//
+	// This member is required.
+	InboundTokenClaimValueType InboundTokenClaimValueType
+
+	noSmithyDocumentSerde
+}
+
 // Input for custom configuration of a memory strategy.
 //
 // The following types satisfy this interface:
 //
+//	CustomConfigurationInputMemberEpisodicOverride
 //	CustomConfigurationInputMemberSelfManagedConfiguration
 //	CustomConfigurationInputMemberSemanticOverride
 //	CustomConfigurationInputMemberSummaryOverride
@@ -506,6 +788,16 @@ type CredentialProviderConfiguration struct {
 type CustomConfigurationInput interface {
 	isCustomConfigurationInput()
 }
+
+// The episodic memory strategy override configuration for a custom memory
+// strategy.
+type CustomConfigurationInputMemberEpisodicOverride struct {
+	Value EpisodicOverrideConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomConfigurationInputMemberEpisodicOverride) isCustomConfigurationInput() {}
 
 // The self managed configuration for a custom memory strategy.
 type CustomConfigurationInputMemberSelfManagedConfiguration struct {
@@ -547,11 +839,23 @@ func (*CustomConfigurationInputMemberUserPreferenceOverride) isCustomConfigurati
 //
 // The following types satisfy this interface:
 //
+//	CustomConsolidationConfigurationMemberEpisodicConsolidationOverride
 //	CustomConsolidationConfigurationMemberSemanticConsolidationOverride
 //	CustomConsolidationConfigurationMemberSummaryConsolidationOverride
 //	CustomConsolidationConfigurationMemberUserPreferenceConsolidationOverride
 type CustomConsolidationConfiguration interface {
 	isCustomConsolidationConfiguration()
+}
+
+// The configurations to override the default consolidation step for the episodic
+// memory strategy.
+type CustomConsolidationConfigurationMemberEpisodicConsolidationOverride struct {
+	Value EpisodicConsolidationOverride
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomConsolidationConfigurationMemberEpisodicConsolidationOverride) isCustomConsolidationConfiguration() {
 }
 
 // The semantic consolidation override configuration.
@@ -588,11 +892,22 @@ func (*CustomConsolidationConfigurationMemberUserPreferenceConsolidationOverride
 //
 // The following types satisfy this interface:
 //
+//	CustomConsolidationConfigurationInputMemberEpisodicConsolidationOverride
 //	CustomConsolidationConfigurationInputMemberSemanticConsolidationOverride
 //	CustomConsolidationConfigurationInputMemberSummaryConsolidationOverride
 //	CustomConsolidationConfigurationInputMemberUserPreferenceConsolidationOverride
 type CustomConsolidationConfigurationInput interface {
 	isCustomConsolidationConfigurationInput()
+}
+
+// Configurations to override the consolidation step of the episodic strategy.
+type CustomConsolidationConfigurationInputMemberEpisodicConsolidationOverride struct {
+	Value EpisodicOverrideConsolidationConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomConsolidationConfigurationInputMemberEpisodicConsolidationOverride) isCustomConsolidationConfigurationInput() {
 }
 
 // The semantic consolidation override configuration input.
@@ -629,10 +944,22 @@ func (*CustomConsolidationConfigurationInputMemberUserPreferenceConsolidationOve
 //
 // The following types satisfy this interface:
 //
+//	CustomExtractionConfigurationMemberEpisodicExtractionOverride
 //	CustomExtractionConfigurationMemberSemanticExtractionOverride
 //	CustomExtractionConfigurationMemberUserPreferenceExtractionOverride
 type CustomExtractionConfiguration interface {
 	isCustomExtractionConfiguration()
+}
+
+// The configurations to override the default extraction step for the episodic
+// memory strategy.
+type CustomExtractionConfigurationMemberEpisodicExtractionOverride struct {
+	Value EpisodicExtractionOverride
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomExtractionConfigurationMemberEpisodicExtractionOverride) isCustomExtractionConfiguration() {
 }
 
 // The semantic extraction override configuration.
@@ -659,10 +986,21 @@ func (*CustomExtractionConfigurationMemberUserPreferenceExtractionOverride) isCu
 //
 // The following types satisfy this interface:
 //
+//	CustomExtractionConfigurationInputMemberEpisodicExtractionOverride
 //	CustomExtractionConfigurationInputMemberSemanticExtractionOverride
 //	CustomExtractionConfigurationInputMemberUserPreferenceExtractionOverride
 type CustomExtractionConfigurationInput interface {
 	isCustomExtractionConfigurationInput()
+}
+
+// Configurations to override the extraction step of the episodic strategy.
+type CustomExtractionConfigurationInputMemberEpisodicExtractionOverride struct {
+	Value EpisodicOverrideExtractionConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomExtractionConfigurationInputMemberEpisodicExtractionOverride) isCustomExtractionConfigurationInput() {
 }
 
 // The semantic extraction override configuration input.
@@ -702,6 +1040,13 @@ type CustomJWTAuthorizerConfiguration struct {
 	// Represents individual client IDs that are validated in the incoming JWT token
 	// validation process.
 	AllowedClients []string
+
+	// An array of scopes that are allowed to access the token.
+	AllowedScopes []string
+
+	// An array of objects that define a custom claim validation name, value, and
+	// operation
+	CustomClaims []CustomClaimValidationType
 
 	noSmithyDocumentSerde
 }
@@ -761,6 +1106,64 @@ type CustomOauth2ProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for a custom reflection strategy.
+//
+// The following types satisfy this interface:
+//
+//	CustomReflectionConfigurationMemberEpisodicReflectionOverride
+type CustomReflectionConfiguration interface {
+	isCustomReflectionConfiguration()
+}
+
+// The configuration for a reflection strategy to override the default one.
+type CustomReflectionConfigurationMemberEpisodicReflectionOverride struct {
+	Value EpisodicReflectionOverride
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomReflectionConfigurationMemberEpisodicReflectionOverride) isCustomReflectionConfiguration() {
+}
+
+// Input for a custom reflection configuration.
+//
+// The following types satisfy this interface:
+//
+//	CustomReflectionConfigurationInputMemberEpisodicReflectionOverride
+type CustomReflectionConfigurationInput interface {
+	isCustomReflectionConfigurationInput()
+}
+
+// The reflection override configuration input.
+type CustomReflectionConfigurationInputMemberEpisodicReflectionOverride struct {
+	Value EpisodicOverrideReflectionConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomReflectionConfigurationInputMemberEpisodicReflectionOverride) isCustomReflectionConfigurationInput() {
+}
+
+//	The configuration that specifies where to read agent traces for online
+//
+// evaluation.
+//
+// The following types satisfy this interface:
+//
+//	DataSourceConfigMemberCloudWatchLogs
+type DataSourceConfig interface {
+	isDataSourceConfig()
+}
+
+// The CloudWatch logs configuration for reading agent traces from log groups.
+type DataSourceConfigMemberCloudWatchLogs struct {
+	Value CloudWatchLogsInputConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceConfigMemberCloudWatchLogs) isDataSourceConfig() {}
+
 // Input for deleting a memory strategy.
 type DeleteMemoryStrategyInput struct {
 
@@ -768,6 +1171,303 @@ type DeleteMemoryStrategyInput struct {
 	//
 	// This member is required.
 	MemoryStrategyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations to override the default consolidation step for the
+// episodic memory strategy.
+type EpisodicConsolidationOverride struct {
+
+	// The text appended to the prompt for the consolidation step of the episodic
+	// memory strategy.
+	//
+	// This member is required.
+	AppendToPrompt *string
+
+	// The model ID used for the consolidation step of the episodic memory strategy.
+	//
+	// This member is required.
+	ModelId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations to override the default extraction step for the
+// episodic memory strategy.
+type EpisodicExtractionOverride struct {
+
+	// The text appended to the prompt for the extraction step of the episodic memory
+	// strategy.
+	//
+	// This member is required.
+	AppendToPrompt *string
+
+	// The model ID used for the extraction step of the episodic memory strategy.
+	//
+	// This member is required.
+	ModelId *string
+
+	noSmithyDocumentSerde
+}
+
+// Input for creating an episodic memory strategy.
+type EpisodicMemoryStrategyInput struct {
+
+	// The name of the episodic memory strategy.
+	//
+	// This member is required.
+	Name *string
+
+	// The description of the episodic memory strategy.
+	Description *string
+
+	// The namespaces for which to create episodes.
+	Namespaces []string
+
+	// The configuration for the reflections created with the episodic memory strategy.
+	ReflectionConfiguration *EpisodicReflectionConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+// Input for the configuration to override the episodic memory strategy.
+type EpisodicOverrideConfigurationInput struct {
+
+	// Contains configurations for overriding the consolidation step of the episodic
+	// memory strategy.
+	Consolidation *EpisodicOverrideConsolidationConfigurationInput
+
+	// Contains configurations for overriding the extraction step of the episodic
+	// memory strategy.
+	Extraction *EpisodicOverrideExtractionConfigurationInput
+
+	// Contains configurations for overriding the reflection step of the episodic
+	// memory strategy.
+	Reflection *EpisodicOverrideReflectionConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+// Configurations for overriding the consolidation step of the episodic memory
+// strategy.
+type EpisodicOverrideConsolidationConfigurationInput struct {
+
+	// The text to append to the prompt for the consolidation step of the episodic
+	// memory strategy.
+	//
+	// This member is required.
+	AppendToPrompt *string
+
+	// The model ID to use for the consolidation step of the episodic memory strategy.
+	//
+	// This member is required.
+	ModelId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configurations for overriding the extraction step of the episodic memory
+// strategy.
+type EpisodicOverrideExtractionConfigurationInput struct {
+
+	// The text to append to the prompt for the extraction step of the episodic memory
+	// strategy.
+	//
+	// This member is required.
+	AppendToPrompt *string
+
+	// The model ID to use for the extraction step of the episodic memory strategy.
+	//
+	// This member is required.
+	ModelId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configurations for overriding the reflection step of the episodic memory
+// strategy.
+type EpisodicOverrideReflectionConfigurationInput struct {
+
+	// The text to append to the prompt for reflection step of the episodic memory
+	// strategy.
+	//
+	// This member is required.
+	AppendToPrompt *string
+
+	// The model ID to use for the reflection step of the episodic memory strategy.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The namespaces to use for episodic reflection. Can be less nested than the
+	// episodic namespaces.
+	Namespaces []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the reflections created with the episodic memory strategy.
+type EpisodicReflectionConfiguration struct {
+
+	// The namespaces for which to create reflections. Can be less nested than the
+	// episodic namespaces.
+	//
+	// This member is required.
+	Namespaces []string
+
+	noSmithyDocumentSerde
+}
+
+// An episodic reflection configuration input.
+type EpisodicReflectionConfigurationInput struct {
+
+	// The namespaces over which to create reflections. Can be less nested than
+	// episode namespaces.
+	//
+	// This member is required.
+	Namespaces []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations to override the default reflection step for the
+// episodic memory strategy.
+type EpisodicReflectionOverride struct {
+
+	// The text appended to the prompt for the reflection step of the episodic memory
+	// strategy.
+	//
+	// This member is required.
+	AppendToPrompt *string
+
+	// The model ID used for the reflection step of the episodic memory strategy.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The namespaces over which reflections were created. Can be less nested than the
+	// episodic namespaces.
+	Namespaces []string
+
+	noSmithyDocumentSerde
+}
+
+//	The configuration that defines how an evaluator assesses agent performance,
+//
+// including the evaluation method and parameters.
+//
+// The following types satisfy this interface:
+//
+//	EvaluatorConfigMemberLlmAsAJudge
+type EvaluatorConfig interface {
+	isEvaluatorConfig()
+}
+
+//	The LLM-as-a-Judge configuration that uses a language model to evaluate agent
+//
+// performance based on custom instructions and rating scales.
+type EvaluatorConfigMemberLlmAsAJudge struct {
+	Value LlmAsAJudgeEvaluatorConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluatorConfigMemberLlmAsAJudge) isEvaluatorConfig() {}
+
+//	The model configuration that specifies which foundation model to use for
+//
+// evaluation and how to configure it.
+//
+// The following types satisfy this interface:
+//
+//	EvaluatorModelConfigMemberBedrockEvaluatorModelConfig
+type EvaluatorModelConfig interface {
+	isEvaluatorModelConfig()
+}
+
+// The Amazon Bedrock model configuration for evaluation.
+type EvaluatorModelConfigMemberBedrockEvaluatorModelConfig struct {
+	Value BedrockEvaluatorModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluatorModelConfigMemberBedrockEvaluatorModelConfig) isEvaluatorModelConfig() {}
+
+//	The reference to an evaluator used in online evaluation configurations,
+//
+// containing the evaluator identifier.
+//
+// The following types satisfy this interface:
+//
+//	EvaluatorReferenceMemberEvaluatorId
+type EvaluatorReference interface {
+	isEvaluatorReference()
+}
+
+//	The unique identifier of the evaluator. Can reference builtin evaluators
+//
+// (e.g., Builtin.Helpfulness) or custom evaluators.
+type EvaluatorReferenceMemberEvaluatorId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluatorReferenceMemberEvaluatorId) isEvaluatorReference() {}
+
+//	The summary information about an evaluator, including basic metadata and
+//
+// status information.
+type EvaluatorSummary struct {
+
+	//  The timestamp when the evaluator was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	//  The Amazon Resource Name (ARN) of the evaluator.
+	//
+	// This member is required.
+	EvaluatorArn *string
+
+	//  The unique identifier of the evaluator.
+	//
+	// This member is required.
+	EvaluatorId *string
+
+	//  The name of the evaluator.
+	//
+	// This member is required.
+	EvaluatorName *string
+
+	//  The type of evaluator, indicating whether it is a built-in evaluator provided
+	// by the service or a custom evaluator created by the user.
+	//
+	// This member is required.
+	EvaluatorType EvaluatorType
+
+	//  The current status of the evaluator.
+	//
+	// This member is required.
+	Status EvaluatorStatus
+
+	//  The timestamp when the evaluator was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	//  The description of the evaluator.
+	Description *string
+
+	//  The evaluation level ( TOOL_CALL , TRACE , or SESSION ) that determines the
+	// scope of evaluation.
+	Level EvaluatorLevel
+
+	//  Whether the evaluator is locked for modification due to being referenced by
+	// active online evaluation configurations.
+	LockedForModification *bool
 
 	noSmithyDocumentSerde
 }
@@ -789,6 +1489,94 @@ type ExtractionConfigurationMemberCustomExtractionConfiguration struct {
 }
 
 func (*ExtractionConfigurationMemberCustomExtractionConfiguration) isExtractionConfiguration() {}
+
+//	The filter that applies conditions to agent traces during online evaluation to
+//
+// determine which traces should be evaluated.
+type Filter struct {
+
+	//  The key or field name to filter on within the agent trace data.
+	//
+	// This member is required.
+	Key *string
+
+	//  The comparison operator to use for filtering.
+	//
+	// This member is required.
+	Operator FilterOperator
+
+	//  The value to compare against using the specified operator.
+	//
+	// This member is required.
+	Value FilterValue
+
+	noSmithyDocumentSerde
+}
+
+//	The value used in filter comparisons, supporting different data types for
+//
+// flexible filtering criteria.
+//
+// The following types satisfy this interface:
+//
+//	FilterValueMemberBooleanValue
+//	FilterValueMemberDoubleValue
+//	FilterValueMemberStringValue
+type FilterValue interface {
+	isFilterValue()
+}
+
+// The boolean value for true/false filtering conditions.
+type FilterValueMemberBooleanValue struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*FilterValueMemberBooleanValue) isFilterValue() {}
+
+// The numeric value for numerical filtering and comparisons.
+type FilterValueMemberDoubleValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*FilterValueMemberDoubleValue) isFilterValue() {}
+
+// The string value for text-based filtering.
+type FilterValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FilterValueMemberStringValue) isFilterValue() {}
+
+// Represents a finding or issue discovered during policy generation or
+// validation. Findings provide insights about potential problems, recommendations,
+// or validation results from policy analysis operations. Finding types include:
+// VALID (policy is ready to use), INVALID (policy has validation errors that must
+// be fixed), NOT_TRANSLATABLE (input couldn't be converted to policy), ALLOW_ALL
+// (policy would allow all actions, potential security risk), ALLOW_NONE (policy
+// would allow no actions, unusable), DENY_ALL (policy would deny all actions, may
+// be too restrictive), and DENY_NONE (policy would deny no actions, ineffective).
+// Review all findings before creating policies from generated assets to ensure
+// they match your security requirements.
+type Finding struct {
+
+	// A human-readable description of the finding. This provides detailed information
+	// about the issue, recommendation, or validation result to help users understand
+	// and address the finding.
+	Description *string
+
+	// The type or category of the finding. This classifies the finding as an error,
+	// warning, recommendation, or informational message to help users understand the
+	// severity and nature of the issue.
+	Type FindingType
+
+	noSmithyDocumentSerde
+}
 
 // An API key credential provider for gateway authentication. This structure
 // contains the configuration for authenticating with the target endpoint using an
@@ -836,6 +1624,38 @@ type GatewayInterceptorConfiguration struct {
 	// The configuration for the input of the interceptor. This field specifies how
 	// the input to the interceptor is constructed
 	InputConfiguration *InterceptorInputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a policy engine associated with a gateway. A policy
+// engine is a collection of policies that evaluates and authorizes agent tool
+// calls. When associated with a gateway, the policy engine intercepts all agent
+// requests and determines whether to allow or deny each action based on the
+// defined policies.
+type GatewayPolicyEngineConfiguration struct {
+
+	// The ARN of the policy engine. The policy engine contains Cedar policies that
+	// define fine-grained authorization rules specifying who can perform what actions
+	// on which resources as agents interact through the gateway.
+	//
+	// This member is required.
+	Arn *string
+
+	// The enforcement mode for the policy engine. Valid values include:
+	//
+	//   - LOG_ONLY - The policy engine evaluates each action against your policies and
+	//   adds traces on whether tool calls would be allowed or denied, but does not
+	//   enforce the decision. Use this mode to test and validate policies before
+	//   enabling enforcement.
+	//
+	//   - ENFORCE - The policy engine evaluates actions against your policies and
+	//   enforces decisions by allowing or denying agent operations. Test and validate
+	//   policies in LOG_ONLY mode before enabling enforcement to avoid unintended
+	//   denials or adversely affecting production traffic.
+	//
+	// This member is required.
+	Mode GatewayPolicyEngineMode
 
 	noSmithyDocumentSerde
 }
@@ -1069,6 +1889,30 @@ type IncludedOauth2ProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+//	The configuration parameters that control how the foundation model behaves
+//
+// during evaluation, including response generation settings.
+type InferenceConfiguration struct {
+
+	//  The maximum number of tokens to generate in the model response during
+	// evaluation.
+	MaxTokens *int32
+
+	//  The list of sequences that will cause the model to stop generating tokens when
+	// encountered.
+	StopSequences []string
+
+	//  The temperature value that controls randomness in the model's responses. Lower
+	// values produce more deterministic outputs.
+	Temperature *float32
+
+	//  The top-p sampling parameter that controls the diversity of the model's
+	// responses by limiting the cumulative probability of token choices.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
 // The interceptor configuration.
 //
 // The following types satisfy this interface:
@@ -1209,6 +2053,32 @@ type LinkedinOauth2ProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+//	The configuration for LLM-as-a-Judge evaluation that uses a language model to
+//
+// assess agent performance based on custom instructions and rating scales.
+type LlmAsAJudgeEvaluatorConfig struct {
+
+	//  The evaluation instructions that guide the language model in assessing agent
+	// performance, including criteria and evaluation guidelines.
+	//
+	// This member is required.
+	Instructions *string
+
+	//  The model configuration that specifies which foundation model to use and how
+	// to configure it for evaluation.
+	//
+	// This member is required.
+	ModelConfig EvaluatorModelConfig
+
+	//  The rating scale that defines how the evaluator should score agent
+	// performance, either numerical or categorical.
+	//
+	// This member is required.
+	RatingScale RatingScale
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a Model Context Protocol (MCP) gateway. This structure
 // defines how the gateway implements the MCP protocol.
 type MCPGatewayConfiguration struct {
@@ -1263,6 +2133,7 @@ type McpServerTargetConfiguration struct {
 //
 // The following types satisfy this interface:
 //
+//	McpTargetConfigurationMemberApiGateway
 //	McpTargetConfigurationMemberLambda
 //	McpTargetConfigurationMemberMcpServer
 //	McpTargetConfigurationMemberOpenApiSchema
@@ -1270,6 +2141,15 @@ type McpServerTargetConfiguration struct {
 type McpTargetConfiguration interface {
 	isMcpTargetConfiguration()
 }
+
+// The configuration for an Amazon API Gateway target.
+type McpTargetConfigurationMemberApiGateway struct {
+	Value ApiGatewayTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*McpTargetConfigurationMemberApiGateway) isMcpTargetConfiguration() {}
 
 // The Lambda configuration for the Model Context Protocol target. This
 // configuration defines how the gateway uses a Lambda function to communicate with
@@ -1413,6 +2293,7 @@ type MemoryStrategy struct {
 // The following types satisfy this interface:
 //
 //	MemoryStrategyInputMemberCustomMemoryStrategy
+//	MemoryStrategyInputMemberEpisodicMemoryStrategy
 //	MemoryStrategyInputMemberSemanticMemoryStrategy
 //	MemoryStrategyInputMemberSummaryMemoryStrategy
 //	MemoryStrategyInputMemberUserPreferenceMemoryStrategy
@@ -1428,6 +2309,15 @@ type MemoryStrategyInputMemberCustomMemoryStrategy struct {
 }
 
 func (*MemoryStrategyInputMemberCustomMemoryStrategy) isMemoryStrategyInput() {}
+
+// Input for creating an episodic memory strategy
+type MemoryStrategyInputMemberEpisodicMemoryStrategy struct {
+	Value EpisodicMemoryStrategyInput
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryStrategyInputMemberEpisodicMemoryStrategy) isMemoryStrategyInput() {}
 
 // Input for creating a semantic memory strategy.
 type MemoryStrategyInputMemberSemanticMemoryStrategy struct {
@@ -1619,6 +2509,36 @@ type ModifyMemoryStrategyInput struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information for modifying a reflection configuration.
+//
+// The following types satisfy this interface:
+//
+//	ModifyReflectionConfigurationMemberCustomReflectionConfiguration
+//	ModifyReflectionConfigurationMemberEpisodicReflectionConfiguration
+type ModifyReflectionConfiguration interface {
+	isModifyReflectionConfiguration()
+}
+
+// The updated custom reflection configuration.
+type ModifyReflectionConfigurationMemberCustomReflectionConfiguration struct {
+	Value CustomReflectionConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ModifyReflectionConfigurationMemberCustomReflectionConfiguration) isModifyReflectionConfiguration() {
+}
+
+// The updated episodic reflection configuration.
+type ModifyReflectionConfigurationMemberEpisodicReflectionConfiguration struct {
+	Value EpisodicReflectionConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ModifyReflectionConfigurationMemberEpisodicReflectionConfiguration) isModifyReflectionConfiguration() {
+}
+
 // The configuration for updating the self-managed memory strategy.
 type ModifySelfManagedConfiguration struct {
 
@@ -1643,6 +2563,9 @@ type ModifyStrategyConfiguration struct {
 	// The updated extraction configuration.
 	Extraction ModifyExtractionConfiguration
 
+	// The updated reflection configuration.
+	Reflection ModifyReflectionConfiguration
+
 	// The updated self-managed configuration.
 	SelfManagedConfiguration *ModifySelfManagedConfiguration
 
@@ -1659,6 +2582,30 @@ type NetworkConfiguration struct {
 
 	// The network mode configuration for the AgentCore Runtime.
 	NetworkModeConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+//	The definition of a numerical rating scale option that provides a numeric
+//
+// value with its description for evaluation scoring.
+type NumericalScaleDefinition struct {
+
+	//  The description that explains what this numerical rating represents and when
+	// it should be used.
+	//
+	// This member is required.
+	Definition *string
+
+	//  The label or name that describes this numerical rating option.
+	//
+	// This member is required.
+	Label *string
+
+	//  The numerical value for this rating scale option.
+	//
+	// This member is required.
+	Value *float64
 
 	noSmithyDocumentSerde
 }
@@ -1973,6 +2920,354 @@ type OAuthCredentialProvider struct {
 	// provide additional configuration for the OAuth authentication process.
 	CustomParameters map[string]string
 
+	// The URL where the end user's browser is redirected after obtaining the
+	// authorization code. Generally points to the customer's application.
+	DefaultReturnUrl *string
+
+	// Specifies the kind of credentials to use for authorization:
+	//
+	//   - CLIENT_CREDENTIALS - Authorization with a client ID and secret.
+	//
+	//   - AUTHORIZATION_CODE - Authorization with a token that is specific to an
+	//   individual end user.
+	GrantType OAuthGrantType
+
+	noSmithyDocumentSerde
+}
+
+//	The summary information about an online evaluation configuration, including
+//
+// basic metadata and execution status.
+type OnlineEvaluationConfigSummary struct {
+
+	//  The timestamp when the online evaluation configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	//  The execution status indicating whether the online evaluation is currently
+	// running.
+	//
+	// This member is required.
+	ExecutionStatus OnlineEvaluationExecutionStatus
+
+	//  The Amazon Resource Name (ARN) of the online evaluation configuration.
+	//
+	// This member is required.
+	OnlineEvaluationConfigArn *string
+
+	//  The unique identifier of the online evaluation configuration.
+	//
+	// This member is required.
+	OnlineEvaluationConfigId *string
+
+	//  The name of the online evaluation configuration.
+	//
+	// This member is required.
+	OnlineEvaluationConfigName *string
+
+	//  The status of the online evaluation configuration.
+	//
+	// This member is required.
+	Status OnlineEvaluationConfigStatus
+
+	//  The timestamp when the online evaluation configuration was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	//  The description of the online evaluation configuration.
+	Description *string
+
+	//  The reason for failure if the online evaluation configuration execution
+	// failed.
+	FailureReason *string
+
+	noSmithyDocumentSerde
+}
+
+//	The configuration that specifies where evaluation results should be written
+//
+// for monitoring and analysis.
+type OutputConfig struct {
+
+	//  The CloudWatch configuration for writing evaluation results to CloudWatch logs
+	// with embedded metric format.
+	//
+	// This member is required.
+	CloudWatchConfig *CloudWatchOutputConfig
+
+	noSmithyDocumentSerde
+}
+
+// Represents a complete policy resource within the AgentCore Policy system.
+// Policies are ARN-able resources that contain Cedar policy statements and
+// associated metadata for controlling agent behavior and access decisions. Each
+// policy belongs to a policy engine and defines fine-grained authorization rules
+// that are evaluated in real-time as agents interact with tools through Gateway.
+// Policies use the Cedar policy language to specify who (principals based on OAuth
+// claims like username, role, or scope) can perform what actions (tool calls) on
+// which resources (Gateways), with optional conditions for attribute-based access
+// control. Multiple policies can apply to a single request, with Cedar's
+// forbid-wins semantics ensuring that security restrictions are never accidentally
+// overridden.
+type Policy struct {
+
+	// The timestamp when the policy was originally created. This is automatically set
+	// by the service and used for auditing and lifecycle management.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Cedar policy statement that defines the access control rules. This contains
+	// the actual policy logic used for agent behavior control and access decisions.
+	//
+	// This member is required.
+	Definition PolicyDefinition
+
+	// The customer-assigned immutable name for the policy. This human-readable
+	// identifier must be unique within the account and cannot exceed 48 characters.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the policy. This globally unique identifier
+	// can be used for cross-service references and IAM policy statements.
+	//
+	// This member is required.
+	PolicyArn *string
+
+	// The identifier of the policy engine that manages this policy. This establishes
+	// the policy engine context for policy evaluation and management.
+	//
+	// This member is required.
+	PolicyEngineId *string
+
+	// The unique identifier for the policy. This system-generated identifier consists
+	// of the user name plus a 10-character generated suffix and serves as the primary
+	// key for policy operations.
+	//
+	// This member is required.
+	PolicyId *string
+
+	// The current status of the policy.
+	//
+	// This member is required.
+	Status PolicyStatus
+
+	// Additional information about the policy status. This provides details about any
+	// failures or the current state of the policy lifecycle.
+	//
+	// This member is required.
+	StatusReasons []string
+
+	// The timestamp when the policy was last modified. This tracks the most recent
+	// changes to the policy configuration or metadata.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A human-readable description of the policy's purpose and functionality. Limited
+	// to 4,096 characters, this helps administrators understand and manage the policy.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the definition structure for policies within the AgentCore Policy
+// system. This structure encapsulates different policy formats and languages that
+// can be used to define access control rules.
+//
+// The following types satisfy this interface:
+//
+//	PolicyDefinitionMemberCedar
+type PolicyDefinition interface {
+	isPolicyDefinition()
+}
+
+// The Cedar policy definition within the policy definition structure. This
+// contains the Cedar policy statement that defines the authorization logic using
+// Cedar's human-readable, analyzable policy language. Cedar policies specify
+// principals (who can access), actions (what operations are allowed), resources
+// (what can be accessed), and optional conditions for fine-grained control. Cedar
+// provides a formal policy language designed for authorization with deterministic
+// evaluation, making policies testable, reviewable, and auditable. All Cedar
+// policies follow a default-deny model where actions are denied unless explicitly
+// permitted, and forbid policies always override permit policies.
+type PolicyDefinitionMemberCedar struct {
+	Value CedarPolicy
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyDefinitionMemberCedar) isPolicyDefinition() {}
+
+// Represents a policy engine resource within the AgentCore Policy system. Policy
+// engines serve as containers for grouping related policies and provide the
+// execution context for policy evaluation and management. Each policy engine can
+// be associated with one Gateway (one engine per Gateway), where it intercepts all
+// agent tool calls and evaluates them against the contained policies before
+// allowing tools to execute. The policy engine maintains the Cedar schema
+// generated from the Gateway's tool manifest, ensuring that policies are validated
+// against the actual tools and parameters available. Policy engines support two
+// enforcement modes that can be configured when associating with a Gateway:
+// log-only mode for testing (evaluates decisions without blocking) and enforce
+// mode for production (actively allows or denies based on policy evaluation).
+type PolicyEngine struct {
+
+	// The timestamp when the policy engine was originally created. This is
+	// automatically set by the service and used for auditing and lifecycle management.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The customer-assigned immutable name for the policy engine. This human-readable
+	// identifier must be unique within the account and cannot exceed 48 characters.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the policy engine. This globally unique
+	// identifier can be used for cross-service references and IAM policy statements.
+	//
+	// This member is required.
+	PolicyEngineArn *string
+
+	// The unique identifier for the policy engine. This system-generated identifier
+	// consists of the user name plus a 10-character generated suffix and serves as the
+	// primary key for policy engine operations.
+	//
+	// This member is required.
+	PolicyEngineId *string
+
+	// The current status of the policy engine.
+	//
+	// This member is required.
+	Status PolicyEngineStatus
+
+	// Additional information about the policy engine status. This provides details
+	// about any failures or the current state of the policy engine lifecycle.
+	//
+	// This member is required.
+	StatusReasons []string
+
+	// The timestamp when the policy engine was last modified. This tracks the most
+	// recent changes to the policy engine configuration or metadata.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A human-readable description of the policy engine's purpose and scope. Limited
+	// to 4,096 characters, this helps administrators understand the policy engine's
+	// role in the overall governance strategy.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a policy generation request within the AgentCore Policy system.
+// Tracks the AI-powered conversion of natural language descriptions into Cedar
+// policy statements, enabling users to author policies by describing authorization
+// requirements in plain English. The generation process analyzes the natural
+// language input along with the Gateway's tool context and Cedar schema to produce
+// one or more validated policy options. Each generation request tracks the status
+// of the conversion process and maintains findings about the generated policies,
+// including validation results and potential issues. Generated policy assets
+// remain available for one week after successful generation, allowing time to
+// review and create policies from the generated options.
+type PolicyGeneration struct {
+
+	// The timestamp when this policy generation request was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The customer-assigned name for this policy generation request.
+	//
+	// This member is required.
+	Name *string
+
+	// The identifier of the policy engine associated with this generation request.
+	//
+	// This member is required.
+	PolicyEngineId *string
+
+	// The ARN of this policy generation request.
+	//
+	// This member is required.
+	PolicyGenerationArn *string
+
+	// The unique identifier for this policy generation request.
+	//
+	// This member is required.
+	PolicyGenerationId *string
+
+	// The resource information associated with this policy generation.
+	//
+	// This member is required.
+	Resource Resource
+
+	// The current status of this policy generation request.
+	//
+	// This member is required.
+	Status PolicyGenerationStatus
+
+	// Additional information about the generation status.
+	//
+	// This member is required.
+	StatusReasons []string
+
+	// The timestamp when this policy generation was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// Findings and insights from this policy generation process.
+	Findings *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a generated policy asset from the AI-powered policy generation
+// process within the AgentCore Policy system. Each asset contains a Cedar policy
+// statement generated from natural language input, along with associated metadata
+// and analysis findings to help users evaluate and select the most appropriate
+// policy option.
+type PolicyGenerationAsset struct {
+
+	// Analysis findings and insights related to this specific generated policy asset.
+	// These findings may include validation results, potential issues, or
+	// recommendations for improvement to help users evaluate the quality and
+	// appropriateness of the generated policy.
+	//
+	// This member is required.
+	Findings []Finding
+
+	// The unique identifier for this generated policy asset within the policy
+	// generation request. This ID can be used to reference specific generated policy
+	// options when creating actual policies from the generation results.
+	//
+	// This member is required.
+	PolicyGenerationAssetId *string
+
+	// The portion of the original natural language input that this generated policy
+	// asset addresses. This helps users understand which part of their policy
+	// description was translated into this specific Cedar policy statement, enabling
+	// better policy selection and refinement. When a single natural language input
+	// describes multiple authorization requirements, the generation process creates
+	// separate policy assets for each requirement, with each asset's rawTextFragment
+	// showing which requirement it addresses. Use this mapping to verify that all
+	// parts of your natural language input were correctly translated into Cedar
+	// policies.
+	//
+	// This member is required.
+	RawTextFragment *string
+
+	// Represents the definition structure for policies within the AgentCore Policy
+	// system. This structure encapsulates different policy formats and languages that
+	// can be used to define access control rules.
+	Definition PolicyDefinition
+
 	noSmithyDocumentSerde
 }
 
@@ -1989,6 +3284,40 @@ type ProtocolConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+//	The rating scale that defines how evaluators should score agent performance,
+//
+// supporting both numerical and categorical scales.
+//
+// The following types satisfy this interface:
+//
+//	RatingScaleMemberCategorical
+//	RatingScaleMemberNumerical
+type RatingScale interface {
+	isRatingScale()
+}
+
+//	The categorical rating scale with named categories and definitions for
+//
+// qualitative evaluation.
+type RatingScaleMemberCategorical struct {
+	Value []CategoricalScaleDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*RatingScaleMemberCategorical) isRatingScale() {}
+
+//	The numerical rating scale with defined score values and descriptions for
+//
+// quantitative evaluation.
+type RatingScaleMemberNumerical struct {
+	Value []NumericalScaleDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*RatingScaleMemberNumerical) isRatingScale() {}
+
 // The recording configuration for a browser. This structure defines how browser
 // sessions are recorded.
 type RecordingConfig struct {
@@ -2003,6 +3332,34 @@ type RecordingConfig struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains reflection configuration information for a memory strategy.
+//
+// The following types satisfy this interface:
+//
+//	ReflectionConfigurationMemberCustomReflectionConfiguration
+//	ReflectionConfigurationMemberEpisodicReflectionConfiguration
+type ReflectionConfiguration interface {
+	isReflectionConfiguration()
+}
+
+// The configuration for a custom reflection strategy.
+type ReflectionConfigurationMemberCustomReflectionConfiguration struct {
+	Value CustomReflectionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ReflectionConfigurationMemberCustomReflectionConfiguration) isReflectionConfiguration() {}
+
+// The configuration for the episodic reflection strategy.
+type ReflectionConfigurationMemberEpisodicReflectionConfiguration struct {
+	Value EpisodicReflectionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ReflectionConfigurationMemberEpisodicReflectionConfiguration) isReflectionConfiguration() {}
 
 // Configuration for HTTP request headers that will be passed through to the
 // runtime.
@@ -2023,6 +3380,50 @@ type RequestHeaderConfigurationMemberRequestHeaderAllowlist struct {
 }
 
 func (*RequestHeaderConfigurationMemberRequestHeaderAllowlist) isRequestHeaderConfiguration() {}
+
+// Represents a resource within the AgentCore Policy system. Resources are the
+// targets of policy evaluation. Currently, only AgentCore Gateways are supported
+// as resources for policy enforcement.
+//
+// The following types satisfy this interface:
+//
+//	ResourceMemberArn
+type Resource interface {
+	isResource()
+}
+
+// The Amazon Resource Name (ARN) of the resource. This globally unique identifier
+// specifies the exact resource that policies will be evaluated against for access
+// control decisions.
+type ResourceMemberArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceMemberArn) isResource() {}
+
+//	The evaluation rule that defines sampling configuration, filtering criteria,
+//
+// and session detection settings for online evaluation.
+type Rule struct {
+
+	//  The sampling configuration that determines what percentage of agent traces to
+	// evaluate.
+	//
+	// This member is required.
+	SamplingConfig *SamplingConfig
+
+	//  The list of filters that determine which agent traces should be included in
+	// the evaluation based on trace properties.
+	Filters []Filter
+
+	//  The session configuration that defines timeout settings for detecting when
+	// agent sessions are complete and ready for evaluation.
+	SessionConfig *SessionConfig
+
+	noSmithyDocumentSerde
+}
 
 // The Amazon S3 configuration for a gateway. This structure defines how the
 // gateway accesses files in Amazon S3.
@@ -2087,6 +3488,20 @@ type SalesforceOauth2ProviderConfigOutput struct {
 
 	// The client ID for the Salesforce OAuth2 provider.
 	ClientId *string
+
+	noSmithyDocumentSerde
+}
+
+//	The configuration that controls what percentage of agent traces are sampled
+//
+// for evaluation to manage evaluation volume and costs.
+type SamplingConfig struct {
+
+	//  The percentage of agent traces to sample for evaluation, ranging from 0.01% to
+	// 100%.
+	//
+	// This member is required.
+	SamplingPercentage *float64
 
 	noSmithyDocumentSerde
 }
@@ -2262,6 +3677,20 @@ type SemanticOverrideExtractionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+//	The configuration that defines how agent sessions are detected and when they
+//
+// are considered complete for evaluation.
+type SessionConfig struct {
+
+	//  The number of minutes of inactivity after which an agent session is considered
+	// complete and ready for evaluation. Default is 15 minutes.
+	//
+	// This member is required.
+	SessionTimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // Input configuration for a Slack OAuth2 provider.
 type SlackOauth2ProviderConfigInput struct {
 
@@ -2300,6 +3729,9 @@ type StrategyConfiguration struct {
 
 	// The extraction configuration for the memory strategy.
 	Extraction ExtractionConfiguration
+
+	// The reflection configuration for the memory strategy.
+	Reflection ReflectionConfiguration
 
 	// Self-managed configuration settings.
 	SelfManagedConfiguration *SelfManagedConfiguration
@@ -2764,25 +4196,39 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAgentRuntimeArtifact()                  {}
 func (*UnknownUnionMember) isApiSchemaConfiguration()                {}
 func (*UnknownUnionMember) isAuthorizerConfiguration()               {}
+func (*UnknownUnionMember) isClaimMatchValueType()                   {}
 func (*UnknownUnionMember) isCode()                                  {}
 func (*UnknownUnionMember) isConsolidationConfiguration()            {}
+func (*UnknownUnionMember) isContent()                               {}
 func (*UnknownUnionMember) isCredentialProvider()                    {}
 func (*UnknownUnionMember) isCustomConfigurationInput()              {}
 func (*UnknownUnionMember) isCustomConsolidationConfiguration()      {}
 func (*UnknownUnionMember) isCustomConsolidationConfigurationInput() {}
 func (*UnknownUnionMember) isCustomExtractionConfiguration()         {}
 func (*UnknownUnionMember) isCustomExtractionConfigurationInput()    {}
+func (*UnknownUnionMember) isCustomReflectionConfiguration()         {}
+func (*UnknownUnionMember) isCustomReflectionConfigurationInput()    {}
+func (*UnknownUnionMember) isDataSourceConfig()                      {}
+func (*UnknownUnionMember) isEvaluatorConfig()                       {}
+func (*UnknownUnionMember) isEvaluatorModelConfig()                  {}
+func (*UnknownUnionMember) isEvaluatorReference()                    {}
 func (*UnknownUnionMember) isExtractionConfiguration()               {}
+func (*UnknownUnionMember) isFilterValue()                           {}
 func (*UnknownUnionMember) isGatewayProtocolConfiguration()          {}
 func (*UnknownUnionMember) isInterceptorConfiguration()              {}
 func (*UnknownUnionMember) isMcpTargetConfiguration()                {}
 func (*UnknownUnionMember) isMemoryStrategyInput()                   {}
 func (*UnknownUnionMember) isModifyConsolidationConfiguration()      {}
 func (*UnknownUnionMember) isModifyExtractionConfiguration()         {}
+func (*UnknownUnionMember) isModifyReflectionConfiguration()         {}
 func (*UnknownUnionMember) isOauth2Discovery()                       {}
 func (*UnknownUnionMember) isOauth2ProviderConfigInput()             {}
 func (*UnknownUnionMember) isOauth2ProviderConfigOutput()            {}
+func (*UnknownUnionMember) isPolicyDefinition()                      {}
+func (*UnknownUnionMember) isRatingScale()                           {}
+func (*UnknownUnionMember) isReflectionConfiguration()               {}
 func (*UnknownUnionMember) isRequestHeaderConfiguration()            {}
+func (*UnknownUnionMember) isResource()                              {}
 func (*UnknownUnionMember) isTargetConfiguration()                   {}
 func (*UnknownUnionMember) isToolSchema()                            {}
 func (*UnknownUnionMember) isTriggerCondition()                      {}

@@ -74,6 +74,18 @@ func TestCheckSnapshot_AssociateKmsKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateSourceToS3TableIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSourceToS3TableIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateSourceToS3TableIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelExportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelExportTask(context.Background(), nil, func(o *Options) {
@@ -590,6 +602,18 @@ func TestCheckSnapshot_DisassociateKmsKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateSourceFromS3TableIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSourceFromS3TableIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateSourceFromS3TableIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_FilterLogEvents(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.FilterLogEvents(context.Background(), nil, func(o *Options) {
@@ -698,6 +722,18 @@ func TestCheckSnapshot_GetLogEvents(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetLogFields(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLogFields(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLogFields")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetLogGroupFields(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLogGroupFields(context.Background(), nil, func(o *Options) {
@@ -782,6 +818,18 @@ func TestCheckSnapshot_GetTransformer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAggregateLogGroupSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAggregateLogGroupSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAggregateLogGroupSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAnomalies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAnomalies(context.Background(), nil, func(o *Options) {
@@ -847,6 +895,18 @@ func TestCheckSnapshot_ListScheduledQueries(t *testing.T) {
 	_, err := svc.ListScheduledQueries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListScheduledQueries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSourcesForS3TableIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSourcesForS3TableIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSourcesForS3TableIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1242,6 +1302,18 @@ func TestUpdateSnapshot_AssociateKmsKey(t *testing.T) {
 	_, err := svc.AssociateKmsKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateKmsKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateSourceToS3TableIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSourceToS3TableIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateSourceToS3TableIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1765,6 +1837,18 @@ func TestUpdateSnapshot_DisassociateKmsKey(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateSourceFromS3TableIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSourceFromS3TableIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateSourceFromS3TableIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_FilterLogEvents(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.FilterLogEvents(context.Background(), nil, func(o *Options) {
@@ -1873,6 +1957,18 @@ func TestUpdateSnapshot_GetLogEvents(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetLogFields(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLogFields(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLogFields")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetLogGroupFields(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLogGroupFields(context.Background(), nil, func(o *Options) {
@@ -1957,6 +2053,18 @@ func TestUpdateSnapshot_GetTransformer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAggregateLogGroupSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAggregateLogGroupSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAggregateLogGroupSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAnomalies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAnomalies(context.Background(), nil, func(o *Options) {
@@ -2022,6 +2130,18 @@ func TestUpdateSnapshot_ListScheduledQueries(t *testing.T) {
 	_, err := svc.ListScheduledQueries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListScheduledQueries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSourcesForS3TableIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSourcesForS3TableIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSourcesForS3TableIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

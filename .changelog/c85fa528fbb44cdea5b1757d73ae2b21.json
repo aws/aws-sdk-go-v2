@@ -1,0 +1,8 @@
+{
+    "id": "c85fa528-fbb4-4cde-a5b1-757d73ae2b21",
+    "type": "feature",
+    "description": "Adds support for Audio Blocks and Streaming Image Output plus new Stop Reasons of malformed_model_output and malformed_tool_use.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

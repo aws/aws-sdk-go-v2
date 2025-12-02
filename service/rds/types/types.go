@@ -104,6 +104,78 @@ type AccountQuota struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about an additional storage volume for a DB instance. RDS
+// support additional storage volumes for RDS for Oracle and RDS for SQL Server.
+type AdditionalStorageVolume struct {
+
+	// The name of the additional storage volume.
+	//
+	// Valid Values: RDSDBDATA2 | RDSDBDATA3 | RDSDBDATA4
+	//
+	// This member is required.
+	VolumeName *string
+
+	// The amount of storage allocated for the additional storage volume, in gibibytes
+	// (GiB). The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).
+	AllocatedStorage *int32
+
+	// The number of I/O operations per second (IOPS) provisioned for the additional
+	// storage volume.
+	IOPS *int32
+
+	// The upper limit in gibibytes (GiB) to which RDS can automatically scale the
+	// storage of the additional storage volume.
+	MaxAllocatedStorage *int32
+
+	// The storage throughput value for the additional storage volume, in mebibytes
+	// per second (MiBps). This setting applies only to the General Purpose SSD ( gp3 )
+	// storage type.
+	StorageThroughput *int32
+
+	// The storage type for the additional storage volume.
+	//
+	// Valid Values: GP3 | IO2
+	StorageType *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an additional storage volume for a DB instance.
+type AdditionalStorageVolumeOutput struct {
+
+	// The amount of storage allocated for the additional storage volume, in gibibytes
+	// (GiB). The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).
+	AllocatedStorage *int32
+
+	// The number of I/O operations per second (IOPS) provisioned for the additional
+	// storage volume.
+	IOPS *int32
+
+	// The upper limit in gibibytes (GiB) to which RDS can automatically scale the
+	// storage of the additional storage volume.
+	MaxAllocatedStorage *int32
+
+	// The storage throughput value for the additional storage volume, in mebibytes
+	// per second (MiBps).
+	StorageThroughput *int32
+
+	// The storage type for the additional storage volume.
+	//
+	// Valid Values: GP3 | IO2
+	StorageType *string
+
+	// The status of the additional storage volume.
+	//
+	// Valid Values: ACTIVE | CREATING | DELETING | MODIFYING | NOT-IN-USE |
+	// STORAGE-OPTIMIZATION | VOLUME-FULL
+	StorageVolumeStatus *string
+
+	// The name of the additional storage volume.
+	VolumeName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains Availability Zone information.
 //
 // This data type is used as an element in the OrderableDBInstanceOption data type.
@@ -111,6 +183,60 @@ type AvailabilityZone struct {
 
 	// The name of the Availability Zone.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the available options for additional storage volumes for a DB instance
+// class.
+type AvailableAdditionalStorageVolumesOption struct {
+
+	// The maximum number of I/O operations per second (IOPS) that the additional
+	// storage volume supports.
+	MaxIops *int32
+
+	// The maximum ratio of I/O operations per second (IOPS) to gibibytes (GiB) of
+	// storage for the additional storage volume.
+	MaxIopsPerGib *float64
+
+	// The maximum amount of storage that you can allocate for the additional storage
+	// volume, in gibibytes (GiB).
+	MaxStorageSize *int32
+
+	// The maximum storage throughput that the additional storage volume supports, in
+	// mebibytes per second (MiBps).
+	MaxStorageThroughput *int32
+
+	// The minimum number of I/O operations per second (IOPS) that the additional
+	// storage volume supports.
+	MinIops *int32
+
+	// The minimum ratio of I/O operations per second (IOPS) to gibibytes (GiB) of
+	// storage for the additional storage volume.
+	MinIopsPerGib *float64
+
+	// The minimum amount of storage that you can allocate for the additional storage
+	// volume, in gibibytes (GiB).
+	MinStorageSize *int32
+
+	// The minimum storage throughput that the additional storage volume supports, in
+	// mebibytes per second (MiBps).
+	MinStorageThroughput *int32
+
+	// The storage type for the additional storage volume.
+	//
+	// Valid Values: GP3 | IO2
+	StorageType *string
+
+	// Indicates whether the additional storage volume supports provisioned IOPS.
+	SupportsIops *bool
+
+	// Indicates whether the additional storage volume supports storage autoscaling.
+	SupportsStorageAutoscaling *bool
+
+	// Indicates whether the additional storage volume supports configurable storage
+	// throughput.
+	SupportsStorageThroughput *bool
 
 	noSmithyDocumentSerde
 }
@@ -1530,6 +1656,10 @@ type DBEngineVersion struct {
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string
 
+	// The database installation files (ISO and EXE) uploaded to Amazon S3 for your
+	// database engine version to import to Amazon RDS. Required for sqlserver-dev-ee .
+	DatabaseInstallationFiles []string
+
 	// The name of the Amazon S3 bucket that contains your database installation files.
 	DatabaseInstallationFilesS3BucketName *string
 
@@ -1550,6 +1680,10 @@ type DBEngineVersion struct {
 	// The types of logs that the database engine has available for export to
 	// CloudWatch Logs.
 	ExportableLogTypes []string
+
+	// The reason that the custom engine version creation for sqlserver-dev-ee failed
+	// with an incompatible-installation-media status.
+	FailureReason *string
 
 	// The EC2 image
 	Image *CustomDBEngineVersionAMI
@@ -1696,6 +1830,10 @@ type DBInstance struct {
 
 	// The status of the database activity stream.
 	ActivityStreamStatus ActivityStreamStatus
+
+	// The additional storage volumes associated with the DB instance. RDS supports
+	// additional storage volumes for RDS for Oracle and RDS for SQL Server.
+	AdditionalStorageVolumes []AdditionalStorageVolumeOutput
 
 	// The amount of storage in gibibytes (GiB) allocated for the DB instance.
 	AllocatedStorage *int32
@@ -2106,6 +2244,11 @@ type DBInstance struct {
 	// The storage type associated with the DB instance.
 	StorageType *string
 
+	// The detailed status information for storage volumes associated with the DB
+	// instance. This information helps identify which specific volume is causing the
+	// instance to be in a storage-full state.
+	StorageVolumeStatus *string
+
 	// A list of tags.
 	//
 	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
@@ -2144,7 +2287,12 @@ type DBInstance struct {
 // you deleted the source instance.
 type DBInstanceAutomatedBackup struct {
 
-	// The allocated storage size for the the automated backup in gibibytes (GiB).
+	// The additional storage volumes associated with the automated backup.
+	//
+	// Valid Values: GP3 | IO2
+	AdditionalStorageVolumes []AdditionalStorageVolume
+
+	// The allocated storage size for the automated backup in gibibytes (GiB).
 	AllocatedStorage *int32
 
 	// The Availability Zone that the automated backup was created in. For information
@@ -2898,6 +3046,10 @@ type DBShardGroup struct {
 //
 // This data type is used as a response element in the DescribeDBSnapshots action.
 type DBSnapshot struct {
+
+	// The additional storage volumes associated with the DB snapshot. RDS supports
+	// additional storage volumes for RDS for Oracle and RDS for SQL Server.
+	AdditionalStorageVolumes []AdditionalStorageVolume
 
 	// Specifies the allocated storage size in gibibytes (GiB).
 	AllocatedStorage *int32
@@ -3876,6 +4028,48 @@ type MinimumEngineVersionPerAllowedValue struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the modification of an additional storage volume.
+type ModifyAdditionalStorageVolume struct {
+
+	// The name of the additional storage volume that you want to modify.
+	//
+	// Valid Values: RDSDBDATA2 | RDSDBDATA3 | RDSDBDATA4
+	//
+	// This member is required.
+	VolumeName *string
+
+	// The amount of storage allocated for the additional storage volume, in gibibytes
+	// (GiB). The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).
+	AllocatedStorage *int32
+
+	// The number of I/O operations per second (IOPS) provisioned for the additional
+	// storage volume. This setting is only supported for Provisioned IOPS SSD ( io1
+	// and io2 ) storage types.
+	IOPS *int32
+
+	// The upper limit in gibibytes (GiB) to which RDS can automatically scale the
+	// storage of the additional storage volume. You must provide a value greater than
+	// or equal to AllocatedStorage .
+	MaxAllocatedStorage *int32
+
+	// Indicates whether to delete the additional storage volume. The value true
+	// schedules the volume for deletion. You can delete an additional storage volume
+	// only when it doesn't contain database files or other data.
+	SetForDelete *bool
+
+	// The storage throughput value for the additional storage volume, in mebibytes
+	// per second (MiBps). This setting applies only to the General Purpose SSD ( gp3 )
+	// storage type.
+	StorageThroughput *int32
+
+	// The new storage type for the additional storage volume.
+	//
+	// Valid Values: GP3 | IO2
+	StorageType *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of an option.
 type Option struct {
 
@@ -4157,6 +4351,9 @@ type OrderableDBInstanceOption struct {
 	// A list of Availability Zones for a DB instance.
 	AvailabilityZones []AvailabilityZone
 
+	// The available options for additional storage volumes for the DB instance class.
+	AvailableAdditionalStorageVolumesOptions []AvailableAdditionalStorageVolumesOption
+
 	// A list of the available processor features for the DB instance class of a DB
 	// instance.
 	AvailableProcessorFeatures []AvailableProcessorFeature
@@ -4237,6 +4434,9 @@ type OrderableDBInstanceOption struct {
 	//
 	// [Working with a DB instance in a VPC]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
 	SupportedNetworkTypes []string
+
+	// Indicates whether the DB instance class supports additional storage volumes.
+	SupportsAdditionalStorageVolumes *bool
 
 	// Indicates whether DB instances can be configured as a Multi-AZ DB cluster.
 	//
@@ -4419,6 +4619,10 @@ type PendingMaintenanceAction struct {
 // This data type is used as a response element in the ModifyDBInstance operation
 // and contains changes that will be applied during the next maintenance window.
 type PendingModifiedValues struct {
+
+	// The additional storage volume modifications that are pending for the DB
+	// instance.
+	AdditionalStorageVolumes []AdditionalStorageVolume
 
 	// The allocated storage size for the DB instance specified in gibibytes (GiB).
 	AllocatedStorage *int32
@@ -4636,15 +4840,17 @@ type PerformanceIssueDetails struct {
 // If you call DescribeDBInstances , ProcessorFeature returns non-null values only
 // if the following conditions are met:
 //
-//   - You are accessing an Oracle DB instance.
+//   - You are accessing an Oracle or SQL Server DB instance.
 //
-//   - Your Oracle DB instance class supports configuring the number of CPU cores
-//     and threads per core.
+//   - Your Oracle or SQL Server DB instance class supports configuring the number
+//     of CPU cores and threads per core.
 //
 //   - The current number CPU cores and threads is set to a non-default value.
 //
-// For more information, see [Configuring the processor for a DB instance class in RDS for Oracle] in the Amazon RDS User Guide.
+// For more information, see [Configuring the processor for a DB instance class in RDS for Oracle], [Optimizing your RDS for SQL Server CPU], and [DB instance classes] in the Amazon RDS User Guide.
 //
+// [Optimizing your RDS for SQL Server CPU]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Concepts.General.OptimizeCPU.html
+// [DB instance classes]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
 // [Configuring the processor for a DB instance class in RDS for Oracle]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor
 type ProcessorFeature struct {
 
@@ -5513,11 +5719,26 @@ type UserAuthConfigInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the valid options for additional storage volumes for a DB instance.
+type ValidAdditionalStorageOptions struct {
+
+	// Indicates whether the DB instance supports additional storage volumes.
+	SupportsAdditionalStorageVolumes *bool
+
+	// The valid additional storage volume options for the DB instance.
+	Volumes []ValidVolumeOptions
+
+	noSmithyDocumentSerde
+}
+
 // Information about valid modifications that you can make to your DB instance.
 // Contains the result of a successful call to the
 // DescribeValidDBInstanceModifications action. You can use this information when
 // you call ModifyDBInstance .
 type ValidDBInstanceModificationsMessage struct {
+
+	// The valid additional storage options for the DB instance.
+	AdditionalStorage *ValidAdditionalStorageOptions
 
 	// Valid storage options for your DB instance.
 	Storage []ValidStorageOptions
@@ -5561,6 +5782,18 @@ type ValidStorageOptions struct {
 	// Indicates whether or not Amazon RDS can automatically scale storage for DB
 	// instances that use the new instance class.
 	SupportsStorageAutoscaling *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains the valid options for an additional storage volume.
+type ValidVolumeOptions struct {
+
+	// The valid storage options for the additional storage volume.
+	Storage []ValidStorageOptions
+
+	// The name of the additional storage volume.
+	VolumeName *string
 
 	noSmithyDocumentSerde
 }

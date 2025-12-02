@@ -25,10 +25,6 @@ import (
 // Permissions You must have the s3:DeleteAccessGrantsInstance permission to use
 // this operation.
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [DeleteAccessGrant]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html
 // [AssociateAccessGrantsIdentityCenter]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_AssociateAccessGrantsIdentityCenter.html
 // [DeleteAccessGrantsLocation]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrantsLocation.html

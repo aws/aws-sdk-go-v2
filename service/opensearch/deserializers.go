@@ -14911,6 +14911,11 @@ func awsRestjson1_deserializeDocumentAIMLOptionsOutput(v **types.AIMLOptionsOutp
 				return err
 			}
 
+		case "ServerlessVectorAcceleration":
+			if err := awsRestjson1_deserializeDocumentServerlessVectorAcceleration(&sv.ServerlessVectorAcceleration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -22944,6 +22949,46 @@ func awsRestjson1_deserializeDocumentSecurityLakeDirectQueryDataSource(v **types
 					return fmt.Errorf("expected DirectQueryDataSourceRoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServerlessVectorAcceleration(v **types.ServerlessVectorAcceleration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServerlessVectorAcceleration
+	if *v == nil {
+		sv = &types.ServerlessVectorAcceleration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:

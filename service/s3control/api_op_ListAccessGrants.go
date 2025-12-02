@@ -20,10 +20,6 @@ import (
 //
 // Permissions You must have the s3:ListAccessGrants permission to use this
 // operation.
-//
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
 func (c *Client) ListAccessGrants(ctx context.Context, params *ListAccessGrantsInput, optFns ...func(*Options)) (*ListAccessGrantsOutput, error) {
 	if params == nil {
 		params = &ListAccessGrantsInput{}

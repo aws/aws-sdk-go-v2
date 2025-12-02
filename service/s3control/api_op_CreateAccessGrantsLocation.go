@@ -39,10 +39,6 @@ import (
 // Additional Permissions You must also have the following permission for the
 // specified IAM role: iam:PassRole
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [using a policy]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-location.html
 func (c *Client) CreateAccessGrantsLocation(ctx context.Context, params *CreateAccessGrantsLocationInput, optFns ...func(*Options)) (*CreateAccessGrantsLocationOutput, error) {
 	if params == nil {

@@ -24,6 +24,12 @@ import (
 // events. Common examples of indexes include request ID, session ID, userID, and
 // instance IDs. For more information, see [Create field indexes to improve query performance and reduce costs].
 //
+// You can configure indexed fields as facets to enable interactive exploration
+// and filtering of your logs in the CloudWatch Logs Insights console. Facets allow
+// you to view value distributions and counts for indexed fields without running
+// queries. When you create a field index, you can optionally set it as a facet to
+// enable this interactive analysis capability. For more information, see [Use facets to group and explore logs].
+//
 // To find the fields that are in your log group events, use the [GetLogGroupFields] operation.
 //
 // For example, suppose you have created a field index for requestId . Then, any
@@ -60,15 +66,17 @@ import (
 // .
 //
 // Log group-level field index policies created with PutIndexPolicy override
-// account-level field index policies created with [PutAccountPolicy]. If you use PutIndexPolicy to
-// create a field index policy for a log group, that log group uses only that
-// policy. The log group ignores any account-wide field index policy that you might
-// have created.
+// account-level field index policies created with [PutAccountPolicy]that apply to log groups. If
+// you use PutIndexPolicy to create a field index policy for a log group, that log
+// group uses only that policy for log group-level indexing, including any facet
+// configurations. The log group ignores any account-wide field index policy that
+// applies to log groups, but data source-based account policies may still apply.
 //
 // [Log classes]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
 // [GetLogGroupFields]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html
 // [PutAccountPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
 // [Create field indexes to improve query performance and reduce costs]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html
+// [Use facets to group and explore logs]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Facets.html
 func (c *Client) PutIndexPolicy(ctx context.Context, params *PutIndexPolicyInput, optFns ...func(*Options)) (*PutIndexPolicyOutput, error) {
 	if params == nil {
 		params = &PutIndexPolicyInput{}

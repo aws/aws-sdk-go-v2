@@ -757,6 +757,25 @@ func (OntapDeploymentType) Values() []OntapDeploymentType {
 	}
 }
 
+type OntapFileSystemUserType string
+
+// Enum values for OntapFileSystemUserType
+const (
+	OntapFileSystemUserTypeUnix    OntapFileSystemUserType = "UNIX"
+	OntapFileSystemUserTypeWindows OntapFileSystemUserType = "WINDOWS"
+)
+
+// Values returns all known values for OntapFileSystemUserType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OntapFileSystemUserType) Values() []OntapFileSystemUserType {
+	return []OntapFileSystemUserType{
+		"UNIX",
+		"WINDOWS",
+	}
+}
+
 type OntapVolumeType string
 
 // Enum values for OntapVolumeType
@@ -1030,11 +1049,12 @@ type S3AccessPointAttachmentLifecycle string
 
 // Enum values for S3AccessPointAttachmentLifecycle
 const (
-	S3AccessPointAttachmentLifecycleAvailable S3AccessPointAttachmentLifecycle = "AVAILABLE"
-	S3AccessPointAttachmentLifecycleCreating  S3AccessPointAttachmentLifecycle = "CREATING"
-	S3AccessPointAttachmentLifecycleDeleting  S3AccessPointAttachmentLifecycle = "DELETING"
-	S3AccessPointAttachmentLifecycleUpdating  S3AccessPointAttachmentLifecycle = "UPDATING"
-	S3AccessPointAttachmentLifecycleFailed    S3AccessPointAttachmentLifecycle = "FAILED"
+	S3AccessPointAttachmentLifecycleAvailable     S3AccessPointAttachmentLifecycle = "AVAILABLE"
+	S3AccessPointAttachmentLifecycleCreating      S3AccessPointAttachmentLifecycle = "CREATING"
+	S3AccessPointAttachmentLifecycleDeleting      S3AccessPointAttachmentLifecycle = "DELETING"
+	S3AccessPointAttachmentLifecycleUpdating      S3AccessPointAttachmentLifecycle = "UPDATING"
+	S3AccessPointAttachmentLifecycleFailed        S3AccessPointAttachmentLifecycle = "FAILED"
+	S3AccessPointAttachmentLifecycleMisconfigured S3AccessPointAttachmentLifecycle = "MISCONFIGURED"
 )
 
 // Values returns all known values for S3AccessPointAttachmentLifecycle. Note that
@@ -1049,6 +1069,7 @@ func (S3AccessPointAttachmentLifecycle) Values() []S3AccessPointAttachmentLifecy
 		"DELETING",
 		"UPDATING",
 		"FAILED",
+		"MISCONFIGURED",
 	}
 }
 
@@ -1079,6 +1100,7 @@ type S3AccessPointAttachmentType string
 // Enum values for S3AccessPointAttachmentType
 const (
 	S3AccessPointAttachmentTypeOpenzfs S3AccessPointAttachmentType = "OPENZFS"
+	S3AccessPointAttachmentTypeOntap   S3AccessPointAttachmentType = "ONTAP"
 )
 
 // Values returns all known values for S3AccessPointAttachmentType. Note that this
@@ -1088,6 +1110,7 @@ const (
 func (S3AccessPointAttachmentType) Values() []S3AccessPointAttachmentType {
 	return []S3AccessPointAttachmentType{
 		"OPENZFS",
+		"ONTAP",
 	}
 }
 

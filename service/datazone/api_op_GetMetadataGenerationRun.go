@@ -49,6 +49,9 @@ type GetMetadataGenerationRunInput struct {
 	// This member is required.
 	Identifier *string
 
+	// The type of the metadata generation run.
+	Type types.MetadataGenerationRunType
+
 	noSmithyDocumentSerde
 }
 
@@ -84,7 +87,16 @@ type GetMetadataGenerationRunOutput struct {
 	Target *types.MetadataGenerationRunTarget
 
 	// The type of metadata generation run.
+	//
+	// Deprecated: This field is going to be deprecated, please use the 'types' field
+	// to provide the MetadataGenerationRun types
 	Type types.MetadataGenerationRunType
+
+	// The type stats included in the metadata generation run output details.
+	TypeStats []types.MetadataGenerationRunTypeStat
+
+	// The types of the metadata generation run.
+	Types []types.MetadataGenerationRunType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

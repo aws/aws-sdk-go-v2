@@ -2,6 +2,25 @@
 
 package types
 
+type AccountDefaultStatus string
+
+// Enum values for AccountDefaultStatus
+const (
+	AccountDefaultStatusEnabled  AccountDefaultStatus = "ENABLED"
+	AccountDefaultStatusDisabled AccountDefaultStatus = "DISABLED"
+)
+
+// Values returns all known values for AccountDefaultStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountDefaultStatus) Values() []AccountDefaultStatus {
+	return []AccountDefaultStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ActionStatus string
 
 // Enum values for ActionStatus
@@ -1864,6 +1883,7 @@ const (
 	ClusterInstanceTypeMlP4d24xlarge      ClusterInstanceType = "ml.p4d.24xlarge"
 	ClusterInstanceTypeMlP4de24xlarge     ClusterInstanceType = "ml.p4de.24xlarge"
 	ClusterInstanceTypeMlP548xlarge       ClusterInstanceType = "ml.p5.48xlarge"
+	ClusterInstanceTypeMlP54xlarge        ClusterInstanceType = "ml.p5.4xlarge"
 	ClusterInstanceTypeMlP6eGb20036xlarge ClusterInstanceType = "ml.p6e-gb200.36xlarge"
 	ClusterInstanceTypeMlTrn132xlarge     ClusterInstanceType = "ml.trn1.32xlarge"
 	ClusterInstanceTypeMlTrn1n32xlarge    ClusterInstanceType = "ml.trn1n.32xlarge"
@@ -1986,6 +2006,7 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.p4d.24xlarge",
 		"ml.p4de.24xlarge",
 		"ml.p5.48xlarge",
+		"ml.p5.4xlarge",
 		"ml.p6e-gb200.36xlarge",
 		"ml.trn1.32xlarge",
 		"ml.trn1n.32xlarge",
@@ -3162,11 +3183,13 @@ type HubContentStatus string
 
 // Enum values for HubContentStatus
 const (
-	HubContentStatusAvailable    HubContentStatus = "Available"
-	HubContentStatusImporting    HubContentStatus = "Importing"
-	HubContentStatusDeleting     HubContentStatus = "Deleting"
-	HubContentStatusImportFailed HubContentStatus = "ImportFailed"
-	HubContentStatusDeleteFailed HubContentStatus = "DeleteFailed"
+	HubContentStatusAvailable     HubContentStatus = "Available"
+	HubContentStatusImporting     HubContentStatus = "Importing"
+	HubContentStatusDeleting      HubContentStatus = "Deleting"
+	HubContentStatusImportFailed  HubContentStatus = "ImportFailed"
+	HubContentStatusDeleteFailed  HubContentStatus = "DeleteFailed"
+	HubContentStatusPendingImport HubContentStatus = "PendingImport"
+	HubContentStatusPendingDelete HubContentStatus = "PendingDelete"
 )
 
 // Values returns all known values for HubContentStatus. Note that this can be
@@ -3180,6 +3203,8 @@ func (HubContentStatus) Values() []HubContentStatus {
 		"Deleting",
 		"ImportFailed",
 		"DeleteFailed",
+		"PendingImport",
+		"PendingDelete",
 	}
 }
 
@@ -3211,6 +3236,8 @@ const (
 	HubContentTypeModel          HubContentType = "Model"
 	HubContentTypeNotebook       HubContentType = "Notebook"
 	HubContentTypeModelReference HubContentType = "ModelReference"
+	HubContentTypeDataSet        HubContentType = "DataSet"
+	HubContentTypeJsonDoc        HubContentType = "JsonDoc"
 )
 
 // Values returns all known values for HubContentType. Note that this can be
@@ -3222,6 +3249,8 @@ func (HubContentType) Values() []HubContentType {
 		"Model",
 		"Notebook",
 		"ModelReference",
+		"DataSet",
+		"JsonDoc",
 	}
 }
 
@@ -4507,6 +4536,27 @@ func (ListWorkteamsSortByOptions) Values() []ListWorkteamsSortByOptions {
 	}
 }
 
+type MaintenanceStatus string
+
+// Enum values for MaintenanceStatus
+const (
+	MaintenanceStatusMaintenanceInProgress MaintenanceStatus = "MaintenanceInProgress"
+	MaintenanceStatusMaintenanceComplete   MaintenanceStatus = "MaintenanceComplete"
+	MaintenanceStatusMaintenanceFailed     MaintenanceStatus = "MaintenanceFailed"
+)
+
+// Values returns all known values for MaintenanceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaintenanceStatus) Values() []MaintenanceStatus {
+	return []MaintenanceStatus{
+		"MaintenanceInProgress",
+		"MaintenanceComplete",
+		"MaintenanceFailed",
+	}
+}
+
 type ManagedInstanceScalingStatus string
 
 // Enum values for ManagedInstanceScalingStatus
@@ -4639,6 +4689,39 @@ func (MIGProfileType) Values() []MIGProfileType {
 	}
 }
 
+type MlflowAppStatus string
+
+// Enum values for MlflowAppStatus
+const (
+	MlflowAppStatusCreating     MlflowAppStatus = "Creating"
+	MlflowAppStatusCreated      MlflowAppStatus = "Created"
+	MlflowAppStatusCreateFailed MlflowAppStatus = "CreateFailed"
+	MlflowAppStatusUpdating     MlflowAppStatus = "Updating"
+	MlflowAppStatusUpdated      MlflowAppStatus = "Updated"
+	MlflowAppStatusUpdateFailed MlflowAppStatus = "UpdateFailed"
+	MlflowAppStatusDeleting     MlflowAppStatus = "Deleting"
+	MlflowAppStatusDeleteFailed MlflowAppStatus = "DeleteFailed"
+	MlflowAppStatusDeleted      MlflowAppStatus = "Deleted"
+)
+
+// Values returns all known values for MlflowAppStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MlflowAppStatus) Values() []MlflowAppStatus {
+	return []MlflowAppStatus{
+		"Creating",
+		"Created",
+		"CreateFailed",
+		"Updating",
+		"Updated",
+		"UpdateFailed",
+		"Deleting",
+		"DeleteFailed",
+		"Deleted",
+	}
+}
+
 type MlTools string
 
 // Enum values for MlTools
@@ -4663,6 +4746,9 @@ const (
 	MlToolsDeepchecksLlmEvaluation MlTools = "DeepchecksLLMEvaluation"
 	MlToolsFiddler                 MlTools = "Fiddler"
 	MlToolsHyperPodClusters        MlTools = "HyperPodClusters"
+	MlToolsRunningInstances        MlTools = "RunningInstances"
+	MlToolsDatasets                MlTools = "Datasets"
+	MlToolsEvaluators              MlTools = "Evaluators"
 )
 
 // Values returns all known values for MlTools. Note that this can be expanded in
@@ -4691,6 +4777,9 @@ func (MlTools) Values() []MlTools {
 		"DeepchecksLLMEvaluation",
 		"Fiddler",
 		"HyperPodClusters",
+		"RunningInstances",
+		"Datasets",
+		"Evaluators",
 	}
 }
 
@@ -5067,6 +5156,25 @@ func (ModelPackageType) Values() []ModelPackageType {
 		"Versioned",
 		"Unversioned",
 		"Both",
+	}
+}
+
+type ModelRegistrationMode string
+
+// Enum values for ModelRegistrationMode
+const (
+	ModelRegistrationModeAutoModelRegistrationEnabled  ModelRegistrationMode = "AutoModelRegistrationEnabled"
+	ModelRegistrationModeAutoModelRegistrationDisabled ModelRegistrationMode = "AutoModelRegistrationDisabled"
+)
+
+// Values returns all known values for ModelRegistrationMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelRegistrationMode) Values() []ModelRegistrationMode {
+	return []ModelRegistrationMode{
+		"AutoModelRegistrationEnabled",
+		"AutoModelRegistrationDisabled",
 	}
 }
 
@@ -8002,6 +8110,27 @@ func (SortLineageGroupsBy) Values() []SortLineageGroupsBy {
 	return []SortLineageGroupsBy{
 		"Name",
 		"CreationTime",
+	}
+}
+
+type SortMlflowAppBy string
+
+// Enum values for SortMlflowAppBy
+const (
+	SortMlflowAppByName         SortMlflowAppBy = "Name"
+	SortMlflowAppByCreationTime SortMlflowAppBy = "CreationTime"
+	SortMlflowAppByStatus       SortMlflowAppBy = "Status"
+)
+
+// Values returns all known values for SortMlflowAppBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortMlflowAppBy) Values() []SortMlflowAppBy {
+	return []SortMlflowAppBy{
+		"Name",
+		"CreationTime",
+		"Status",
 	}
 }
 

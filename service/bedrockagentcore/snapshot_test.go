@@ -146,6 +146,18 @@ func TestCheckSnapshot_DeleteMemoryRecord(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_Evaluate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Evaluate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "Evaluate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAgentCard(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgentCard(context.Background(), nil, func(o *Options) {
@@ -546,6 +558,18 @@ func TestUpdateSnapshot_DeleteMemoryRecord(t *testing.T) {
 	_, err := svc.DeleteMemoryRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteMemoryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_Evaluate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Evaluate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "Evaluate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

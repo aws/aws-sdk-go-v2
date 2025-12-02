@@ -86,6 +86,18 @@ func TestCheckSnapshot_AddPermission(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CheckpointDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckpointDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CheckpointDurableExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAlias(context.Background(), nil, func(o *Options) {
@@ -338,6 +350,42 @@ func TestCheckSnapshot_GetCodeSigningConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDurableExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDurableExecutionHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDurableExecutionHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDurableExecutionHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDurableExecutionState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDurableExecutionState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDurableExecutionState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetEventSourceMapping(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEventSourceMapping(context.Background(), nil, func(o *Options) {
@@ -583,6 +631,18 @@ func TestCheckSnapshot_ListCodeSigningConfigs(t *testing.T) {
 	_, err := svc.ListCodeSigningConfigs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCodeSigningConfigs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDurableExecutionsByFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDurableExecutionsByFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDurableExecutionsByFunction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -854,6 +914,54 @@ func TestCheckSnapshot_RemovePermission(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SendDurableExecutionCallbackFailure(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendDurableExecutionCallbackFailure(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendDurableExecutionCallbackFailure")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SendDurableExecutionCallbackHeartbeat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendDurableExecutionCallbackHeartbeat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendDurableExecutionCallbackHeartbeat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SendDurableExecutionCallbackSuccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendDurableExecutionCallbackSuccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendDurableExecutionCallbackSuccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopDurableExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -990,6 +1098,18 @@ func TestUpdateSnapshot_AddPermission(t *testing.T) {
 	_, err := svc.AddPermission(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AddPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CheckpointDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckpointDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CheckpointDurableExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1249,6 +1369,42 @@ func TestUpdateSnapshot_GetCodeSigningConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDurableExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDurableExecutionHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDurableExecutionHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDurableExecutionHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDurableExecutionState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDurableExecutionState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDurableExecutionState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetEventSourceMapping(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEventSourceMapping(context.Background(), nil, func(o *Options) {
@@ -1494,6 +1650,18 @@ func TestUpdateSnapshot_ListCodeSigningConfigs(t *testing.T) {
 	_, err := svc.ListCodeSigningConfigs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCodeSigningConfigs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDurableExecutionsByFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDurableExecutionsByFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDurableExecutionsByFunction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1758,6 +1926,54 @@ func TestUpdateSnapshot_RemovePermission(t *testing.T) {
 	_, err := svc.RemovePermission(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RemovePermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendDurableExecutionCallbackFailure(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendDurableExecutionCallbackFailure(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendDurableExecutionCallbackFailure")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendDurableExecutionCallbackHeartbeat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendDurableExecutionCallbackHeartbeat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendDurableExecutionCallbackHeartbeat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendDurableExecutionCallbackSuccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendDurableExecutionCallbackSuccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendDurableExecutionCallbackSuccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopDurableExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

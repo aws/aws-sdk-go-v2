@@ -10993,6 +10993,11 @@ func awsRestjson1_serializeDocumentLoggingConfig(v *types.LoggingConfig, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.AudioDataDeliveryEnabled != nil {
+		ok := object.Key("audioDataDeliveryEnabled")
+		ok.Boolean(*v.AudioDataDeliveryEnabled)
+	}
+
 	if v.CloudWatchConfig != nil {
 		ok := object.Key("cloudWatchConfig")
 		if err := awsRestjson1_serializeDocumentCloudWatchConfig(v.CloudWatchConfig, ok); err != nil {

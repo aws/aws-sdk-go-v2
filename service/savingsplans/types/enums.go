@@ -8,6 +8,7 @@ type CurrencyCode string
 const (
 	CurrencyCodeCny CurrencyCode = "CNY"
 	CurrencyCodeUsd CurrencyCode = "USD"
+	CurrencyCodeEur CurrencyCode = "EUR"
 )
 
 // Values returns all known values for CurrencyCode. Note that this can be
@@ -18,6 +19,7 @@ func (CurrencyCode) Values() []CurrencyCode {
 	return []CurrencyCode{
 		"CNY",
 		"USD",
+		"EUR",
 	}
 }
 
@@ -86,10 +88,19 @@ type SavingsPlanProductType string
 
 // Enum values for SavingsPlanProductType
 const (
-	SavingsPlanProductTypeEc2       SavingsPlanProductType = "EC2"
-	SavingsPlanProductTypeFargate   SavingsPlanProductType = "Fargate"
-	SavingsPlanProductTypeLambda    SavingsPlanProductType = "Lambda"
-	SavingsPlanProductTypeSagemaker SavingsPlanProductType = "SageMaker"
+	SavingsPlanProductTypeEc2         SavingsPlanProductType = "EC2"
+	SavingsPlanProductTypeFargate     SavingsPlanProductType = "Fargate"
+	SavingsPlanProductTypeLambda      SavingsPlanProductType = "Lambda"
+	SavingsPlanProductTypeSagemaker   SavingsPlanProductType = "SageMaker"
+	SavingsPlanProductTypeRds         SavingsPlanProductType = "RDS"
+	SavingsPlanProductTypeDsql        SavingsPlanProductType = "DSQL"
+	SavingsPlanProductTypeDynamodb    SavingsPlanProductType = "DynamoDB"
+	SavingsPlanProductTypeElasticache SavingsPlanProductType = "ElastiCache"
+	SavingsPlanProductTypeDocdb       SavingsPlanProductType = "DocDB"
+	SavingsPlanProductTypeNeptune     SavingsPlanProductType = "Neptune"
+	SavingsPlanProductTypeTimestream  SavingsPlanProductType = "Timestream"
+	SavingsPlanProductTypeKeyspaces   SavingsPlanProductType = "Keyspaces"
+	SavingsPlanProductTypeDms         SavingsPlanProductType = "DMS"
 )
 
 // Values returns all known values for SavingsPlanProductType. Note that this can
@@ -102,6 +113,15 @@ func (SavingsPlanProductType) Values() []SavingsPlanProductType {
 		"Fargate",
 		"Lambda",
 		"SageMaker",
+		"RDS",
+		"DSQL",
+		"DynamoDB",
+		"ElastiCache",
+		"DocDB",
+		"Neptune",
+		"Timestream",
+		"Keyspaces",
+		"DMS",
 	}
 }
 
@@ -193,11 +213,20 @@ type SavingsPlanRateServiceCode string
 
 // Enum values for SavingsPlanRateServiceCode
 const (
-	SavingsPlanRateServiceCodeEc2        SavingsPlanRateServiceCode = "AmazonEC2"
-	SavingsPlanRateServiceCodeFargate    SavingsPlanRateServiceCode = "AmazonECS"
-	SavingsPlanRateServiceCodeFargateEks SavingsPlanRateServiceCode = "AmazonEKS"
-	SavingsPlanRateServiceCodeLambda     SavingsPlanRateServiceCode = "AWSLambda"
-	SavingsPlanRateServiceCodeSagemaker  SavingsPlanRateServiceCode = "AmazonSageMaker"
+	SavingsPlanRateServiceCodeEc2         SavingsPlanRateServiceCode = "AmazonEC2"
+	SavingsPlanRateServiceCodeFargate     SavingsPlanRateServiceCode = "AmazonECS"
+	SavingsPlanRateServiceCodeFargateEks  SavingsPlanRateServiceCode = "AmazonEKS"
+	SavingsPlanRateServiceCodeLambda      SavingsPlanRateServiceCode = "AWSLambda"
+	SavingsPlanRateServiceCodeSagemaker   SavingsPlanRateServiceCode = "AmazonSageMaker"
+	SavingsPlanRateServiceCodeRds         SavingsPlanRateServiceCode = "AmazonRDS"
+	SavingsPlanRateServiceCodeAurora      SavingsPlanRateServiceCode = "AuroraDSQL"
+	SavingsPlanRateServiceCodeDynamodb    SavingsPlanRateServiceCode = "AmazonDynamoDB"
+	SavingsPlanRateServiceCodeElasticache SavingsPlanRateServiceCode = "AmazonElastiCache"
+	SavingsPlanRateServiceCodeDocdb       SavingsPlanRateServiceCode = "AmazonDocDB"
+	SavingsPlanRateServiceCodeNeptune     SavingsPlanRateServiceCode = "AmazonNeptune"
+	SavingsPlanRateServiceCodeTimestream  SavingsPlanRateServiceCode = "AmazonTimestream"
+	SavingsPlanRateServiceCodeMcs         SavingsPlanRateServiceCode = "AmazonMCS"
+	SavingsPlanRateServiceCodeDms         SavingsPlanRateServiceCode = "AWSDatabaseMigrationSvc"
 )
 
 // Values returns all known values for SavingsPlanRateServiceCode. Note that this
@@ -211,6 +240,15 @@ func (SavingsPlanRateServiceCode) Values() []SavingsPlanRateServiceCode {
 		"AmazonEKS",
 		"AWSLambda",
 		"AmazonSageMaker",
+		"AmazonRDS",
+		"AuroraDSQL",
+		"AmazonDynamoDB",
+		"AmazonElastiCache",
+		"AmazonDocDB",
+		"AmazonNeptune",
+		"AmazonTimestream",
+		"AmazonMCS",
+		"AWSDatabaseMigrationSvc",
 	}
 }
 
@@ -218,9 +256,21 @@ type SavingsPlanRateUnit string
 
 // Enum values for SavingsPlanRateUnit
 const (
-	SavingsPlanRateUnitHours          SavingsPlanRateUnit = "Hrs"
-	SavingsPlanRateUnitLambdaGbSecond SavingsPlanRateUnit = "Lambda-GB-Second"
-	SavingsPlanRateUnitRequest        SavingsPlanRateUnit = "Request"
+	SavingsPlanRateUnitHours                          SavingsPlanRateUnit = "Hrs"
+	SavingsPlanRateUnitLambdaGbSecond                 SavingsPlanRateUnit = "Lambda-GB-Second"
+	SavingsPlanRateUnitRequest                        SavingsPlanRateUnit = "Request"
+	SavingsPlanRateUnitAcuHr                          SavingsPlanRateUnit = "ACU-Hr"
+	SavingsPlanRateUnitReadRequestUnits               SavingsPlanRateUnit = "ReadRequestUnits"
+	SavingsPlanRateUnitWriteRequestUnits              SavingsPlanRateUnit = "WriteRequestUnits"
+	SavingsPlanRateUnitReadCapacityUnitHrs            SavingsPlanRateUnit = "ReadCapacityUnit-Hrs"
+	SavingsPlanRateUnitWriteCapacityUnitHrs           SavingsPlanRateUnit = "WriteCapacityUnit-Hrs"
+	SavingsPlanRateUnitReplicatedWriteRequestUnits    SavingsPlanRateUnit = "ReplicatedWriteRequestUnits"
+	SavingsPlanRateUnitReplicatedWriteCapacityUnitHrs SavingsPlanRateUnit = "ReplicatedWriteCapacityUnit-Hrs"
+	SavingsPlanRateUnitGbHours                        SavingsPlanRateUnit = "GB-Hours"
+	SavingsPlanRateUnitDpu                            SavingsPlanRateUnit = "DPU"
+	SavingsPlanRateUnitElastiCacheProcessingUnit      SavingsPlanRateUnit = "ElastiCacheProcessingUnit"
+	SavingsPlanRateUnitDcuHr                          SavingsPlanRateUnit = "DCU-Hr"
+	SavingsPlanRateUnitNcuHr                          SavingsPlanRateUnit = "NCU-hr"
 )
 
 // Values returns all known values for SavingsPlanRateUnit. Note that this can be
@@ -232,6 +282,18 @@ func (SavingsPlanRateUnit) Values() []SavingsPlanRateUnit {
 		"Hrs",
 		"Lambda-GB-Second",
 		"Request",
+		"ACU-Hr",
+		"ReadRequestUnits",
+		"WriteRequestUnits",
+		"ReadCapacityUnit-Hrs",
+		"WriteCapacityUnit-Hrs",
+		"ReplicatedWriteRequestUnits",
+		"ReplicatedWriteCapacityUnit-Hrs",
+		"GB-Hours",
+		"DPU",
+		"ElastiCacheProcessingUnit",
+		"DCU-Hr",
+		"NCU-hr",
 	}
 }
 
@@ -248,6 +310,7 @@ const (
 	SavingsPlansFilterNamePaymentOption     SavingsPlansFilterName = "payment-option"
 	SavingsPlansFilterNameStart             SavingsPlansFilterName = "start"
 	SavingsPlansFilterNameEnd               SavingsPlansFilterName = "end"
+	SavingsPlansFilterNameInstanceFamily    SavingsPlansFilterName = "instance-family"
 )
 
 // Values returns all known values for SavingsPlansFilterName. Note that this can
@@ -265,6 +328,7 @@ func (SavingsPlansFilterName) Values() []SavingsPlansFilterName {
 		"payment-option",
 		"start",
 		"end",
+		"instance-family",
 	}
 }
 
@@ -306,6 +370,7 @@ const (
 	SavingsPlanTypeCompute     SavingsPlanType = "Compute"
 	SavingsPlanTypeEc2Instance SavingsPlanType = "EC2Instance"
 	SavingsPlanTypeSagemaker   SavingsPlanType = "SageMaker"
+	SavingsPlanTypeDatabase    SavingsPlanType = "Database"
 )
 
 // Values returns all known values for SavingsPlanType. Note that this can be
@@ -317,5 +382,6 @@ func (SavingsPlanType) Values() []SavingsPlanType {
 		"Compute",
 		"EC2Instance",
 		"SageMaker",
+		"Database",
 	}
 }

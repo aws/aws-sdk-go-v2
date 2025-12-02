@@ -3963,6 +3963,14 @@ type ClusterInstanceGroupDetails struct {
 	ScheduledUpdateConfig *ScheduledUpdateConfig
 
 	// Status of the last software udpate request.
+	//
+	// Status transitions follow these possible sequences:
+	//
+	//   - Pending -> InProgress -> Succeeded
+	//
+	//   - Pending -> InProgress -> RollbackInProgress -> RollbackComplete
+	//
+	//   - Pending -> InProgress -> RollbackInProgress -> Failed
 	SoftwareUpdateStatus SoftwareUpdateStatus
 
 	// The current status of the cluster instance group.
@@ -3985,8 +3993,19 @@ type ClusterInstanceGroupDetails struct {
 	// SageMaker HyperPod cluster.
 	TargetCount *int32
 
-	// The number of nodes running a specific image ID since the last software update
-	// request.
+	// Represents the number of running nodes using the desired Image ID.
+	//
+	//   - During software update operations: This count shows the number of nodes
+	//   running on the desired Image ID. If a rollback occurs, the current image ID and
+	//   desired image ID (both included in the describe cluster response) swap values.
+	//   The TargetStateCount then shows the number of nodes running on the newly
+	//   designated desired image ID (which was previously the current image ID).
+	//
+	//   - During simultaneous scaling and software update operations: This count
+	//   shows the number of instances running on the desired image ID, including any new
+	//   instances created as part of the scaling request. New nodes are always created
+	//   using the desired image ID, so TargetStateCount reflects the total count of
+	//   nodes running on the desired image ID, even during rollback scenarios.
 	TargetStateCount *int32
 
 	// The number you specified to TreadsPerCore in CreateCluster for enabling or
@@ -4456,8 +4475,6 @@ type ClusterOrchestrator struct {
 
 	// The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod
 	// cluster.
-	//
-	// This member is required.
 	Eks *ClusterOrchestratorEksConfig
 
 	noSmithyDocumentSerde
@@ -12209,6 +12226,30 @@ type MetricsSource struct {
 
 	// The hash key used for the metrics source.
 	ContentDigest *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the Mlflow App to list.
+type MlflowAppSummary struct {
+
+	// The ARN of a listed MLflow App.
+	Arn *string
+
+	// The creation time of a listed MLflow App.
+	CreationTime *time.Time
+
+	// The last modified time of a listed MLflow App.
+	LastModifiedTime *time.Time
+
+	// The version of a listed MLflow App.
+	MlflowVersion *string
+
+	// The name of the MLflow App.
+	Name *string
+
+	// The status of the MLflow App.
+	Status MlflowAppStatus
 
 	noSmithyDocumentSerde
 }

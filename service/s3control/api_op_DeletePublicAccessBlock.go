@@ -18,17 +18,17 @@ import (
 // This operation is not supported by directory buckets.
 //
 // Removes the PublicAccessBlock configuration for an Amazon Web Services account.
-// For more information, see [Using Amazon S3 block public access].
+// This operation might be restricted when the account is managed by
+// organization-level Block Public Access policies. You’ll get an Access Denied
+// (403) error when the account is managed by organization-level Block Public
+// Access policies. Organization-level policies override account-level settings,
+// preventing direct account-level modifications. For more information, see [Using Amazon S3 block public access].
 //
 // Related actions include:
 //
 // [GetPublicAccessBlock]
 //
 // [PutPublicAccessBlock]
-//
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
 //
 // [GetPublicAccessBlock]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html
 // [PutPublicAccessBlock]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html

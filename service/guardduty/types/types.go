@@ -348,6 +348,17 @@ type AutonomousSystem struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the Auto Scaling Group involved in a GuardDuty
+// finding, including unique identifiers of the Amazon EC2 instances.
+type AutoscalingAutoScalingGroup struct {
+
+	// A list of unique identifiers for the compromised Amazon EC2 instances that are
+	// part of the same Auto Scaling Group.
+	Ec2InstanceUids []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the API action.
 type AwsApiCallAction struct {
 
@@ -444,6 +455,17 @@ type City struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the CloudFormation stack involved in a GuardDuty
+// finding, including unique identifiers of the Amazon EC2 instances.
+type CloudformationStack struct {
+
+	// A list of unique identifiers for the compromised Amazon EC2 instances that were
+	// created as part of the same CloudFormation stack.
+	Ec2InstanceUids []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on the status of CloudTrail as a data source for the
 // detector.
 type CloudTrailConfigurationResult struct {
@@ -509,6 +531,13 @@ type Condition struct {
 	// Deprecated: This member has been deprecated.
 	Lte *int32
 
+	// Represents the match condition to be applied to a single field when querying
+	// for findings.
+	//
+	// The matches condition is available only for create-filter and update-filter
+	// APIs.
+	Matches []string
+
 	// Represents the not equal condition to be applied to a single field when
 	// querying for findings.
 	//
@@ -518,6 +547,13 @@ type Condition struct {
 	// Represents a not equal condition to be applied to a single field when querying
 	// for findings.
 	NotEquals []string
+
+	// Represents the not match condition to be applied to a single field when
+	// querying for findings.
+	//
+	// The not-matches condition is available only for create-filter and update-filter
+	// APIs.
+	NotMatches []string
 
 	noSmithyDocumentSerde
 }
@@ -1176,6 +1212,17 @@ type EbsVolumesResult struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the Amazon EC2 Image involved in a GuardDuty
+// finding, including unique identifiers of the Amazon EC2 instances.
+type Ec2Image struct {
+
+	// A list of unique identifiers for the compromised Amazon EC2 instances that were
+	// launched with the same Amazon Machine Image (AMI).
+	Ec2InstanceUids []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the EC2 AMI that was scanned.
 type Ec2ImageDetails struct {
 
@@ -1225,6 +1272,20 @@ type Ec2Instance struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the Amazon EC2 launch template involved in a
+// GuardDuty finding, including unique identifiers of the Amazon EC2 instances.
+type Ec2LaunchTemplate struct {
+
+	// A list of unique identifiers for the compromised Amazon EC2 instances that
+	// share the same Amazon EC2 launch template.
+	Ec2InstanceUids []string
+
+	// Version of the EC2 launch template.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the elastic network interface of the Amazon EC2
 // instance.
 type Ec2NetworkInterface struct {
@@ -1246,6 +1307,31 @@ type Ec2NetworkInterface struct {
 
 	// The VPC ID of the Amazon EC2 instance.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the Amazon EC2 VPC involved in a GuardDuty finding,
+// including unique identifiers of the Amazon EC2 instances.
+type Ec2Vpc struct {
+
+	// A list of unique identifiers for the compromised Amazon EC2 instances that were
+	// launched within the same Virtual Private Cloud (VPC).
+	Ec2InstanceUids []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the Amazon ECS cluster involved in a GuardDuty
+// finding, including cluster identification and status.
+type EcsCluster struct {
+
+	// A list of unique identifiers for the Amazon EC2 instances that serve as
+	// container instances in the Amazon ECS cluster.
+	Ec2InstanceUids []string
+
+	// The current status of the Amazon ECS cluster.
+	Status EcsClusterStatus
 
 	noSmithyDocumentSerde
 }
@@ -1276,6 +1362,27 @@ type EcsClusterDetails struct {
 
 	// Contains information about the details of the ECS Task.
 	TaskDetails *EcsTaskDetails
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about Amazon ECS task involved in a GuardDuty finding,
+// including task definition and container identifiers.
+type EcsTask struct {
+
+	// A list of unique identifiers for the containers associated with the Amazon ECS
+	// task.
+	ContainerUids []string
+
+	// The timestamp indicating when the Amazon ECS task was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The infrastructure type on which the Amazon ECS task runs.
+	LaunchType EcsLaunchType
+
+	// The ARN of task definition which describes the container and volume definitions
+	// of the Amazon ECS task.
+	TaskDefinitionArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1689,6 +1796,17 @@ type IamInstanceProfile struct {
 
 	// The profile ID of the EC2 instance.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the IAM instance profile involved in a GuardDuty
+// finding, including unique identifiers of the Amazon EC2 instances.
+type IamInstanceProfileV2 struct {
+
+	// A list of unique identifiers for the compromised Amazon EC2 instances that
+	// share the same IAM instance profile.
+	Ec2InstanceUids []string
 
 	noSmithyDocumentSerde
 }
@@ -3442,20 +3560,52 @@ type ResourceData struct {
 	// in the GuardDuty finding.
 	AccessKey *AccessKey
 
+	// Contains detailed information about the Auto Scaling Group associated with the
+	// activity that prompted GuardDuty to generate a finding.
+	AutoscalingAutoScalingGroup *AutoscalingAutoScalingGroup
+
+	// Contains detailed information about the CloudFormation stack associated with
+	// the activity that prompted GuardDuty to generate a finding.
+	CloudformationStack *CloudformationStack
+
 	// Contains detailed information about the container associated with the activity
 	// that prompted GuardDuty to generate a finding.
 	Container *ContainerFindingResource
 
+	// Contains detailed information about the EC2 Image associated with the activity
+	// that prompted GuardDuty to generate a finding.
+	Ec2Image *Ec2Image
+
 	// Contains information about the Amazon EC2 instance.
 	Ec2Instance *Ec2Instance
+
+	// Contains detailed information about the EC2 launch template associated with the
+	// activity that prompted GuardDuty to generate a finding.
+	Ec2LaunchTemplate *Ec2LaunchTemplate
 
 	// Contains information about the elastic network interface of the Amazon EC2
 	// instance.
 	Ec2NetworkInterface *Ec2NetworkInterface
 
+	// Contains detailed information about the EC2 VPC associated with the activity
+	// that prompted GuardDuty to generate a finding.
+	Ec2Vpc *Ec2Vpc
+
+	// Contains detailed information about the Amazon ECS cluster associated with the
+	// activity that prompted GuardDuty to generate a finding.
+	EcsCluster *EcsCluster
+
+	// Contains detailed information about the Amazon ECS task associated with the
+	// activity that prompted GuardDuty to generate a finding.
+	EcsTask *EcsTask
+
 	// Contains detailed information about the Amazon EKS cluster associated with the
 	// activity that prompted GuardDuty to generate a finding.
 	EksCluster *EksCluster
+
+	// Contains detailed information about the IAM instance profile associated with
+	// the activity that prompted GuardDuty to generate a finding.
+	IamInstanceProfile *IamInstanceProfileV2
 
 	// Contains detailed information about the Kubernetes workload associated with the
 	// activity that prompted GuardDuty to generate a finding.

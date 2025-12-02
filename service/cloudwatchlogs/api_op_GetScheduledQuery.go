@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns detailed information about a specified scheduled query, including its
-// configuration, current state, and execution history.
+// Retrieves details about a specific scheduled query, including its
+// configuration, execution status, and metadata.
 func (c *Client) GetScheduledQuery(ctx context.Context, params *GetScheduledQueryInput, optFns ...func(*Options)) (*GetScheduledQueryOutput, error) {
 	if params == nil {
 		params = &GetScheduledQueryInput{}
@@ -30,7 +30,7 @@ func (c *Client) GetScheduledQuery(ctx context.Context, params *GetScheduledQuer
 
 type GetScheduledQueryInput struct {
 
-	// The name or ARN of the scheduled query to retrieve.
+	// The ARN or name of the scheduled query to retrieve.
 	//
 	// This member is required.
 	Identifier *string
@@ -40,60 +40,58 @@ type GetScheduledQueryInput struct {
 
 type GetScheduledQueryOutput struct {
 
-	// The time when the scheduled query was created, in Unix epoch time.
+	// The timestamp when the scheduled query was created.
 	CreationTime *int64
 
 	// The description of the scheduled query.
 	Description *string
 
-	// Configuration for destinations where the query results are delivered.
+	// Configuration for where query results are delivered.
 	DestinationConfiguration *types.DestinationConfiguration
 
-	// The ARN of the IAM role used to execute the scheduled query.
+	// The ARN of the IAM role used to execute the query and deliver results.
 	ExecutionRoleArn *string
 
-	// The status of the last executed query (Running, Complete, Failed, Timeout, or
-	// InvalidQuery).
+	// The status of the most recent execution of the scheduled query.
 	LastExecutionStatus types.ExecutionStatus
 
-	// The time when the scheduled query was last executed, in Unix epoch time.
+	// The timestamp when the scheduled query was last executed.
 	LastTriggeredTime *int64
 
-	// The time when the scheduled query was last updated, in Unix epoch time.
+	// The timestamp when the scheduled query was last updated.
 	LastUpdatedTime *int64
 
-	// The log group identifiers being queried by the scheduled query.
+	// The log groups queried by the scheduled query.
 	LogGroupIdentifiers []string
 
 	// The name of the scheduled query.
 	Name *string
 
-	// The query language used by the scheduled query (LogsQL, PPL, or SQL).
+	// The query language used by the scheduled query.
 	QueryLanguage types.QueryLanguage
 
-	// The CloudWatch Logs Insights query string being executed.
+	// The query string executed by the scheduled query.
 	QueryString *string
 
-	// The end time for the query schedule in Unix epoch time.
+	// The end time for the scheduled query in Unix epoch format.
 	ScheduleEndTime *int64
 
 	// The cron expression that defines when the scheduled query runs.
 	ScheduleExpression *string
 
-	// The start time for the query schedule in Unix epoch time.
+	// The start time for the scheduled query in Unix epoch format.
 	ScheduleStartTime *int64
 
-	// The Amazon Resource Name (ARN) of the scheduled query.
+	// The ARN of the scheduled query.
 	ScheduledQueryArn *string
 
-	// Time offset in seconds from the execution time for the start of the query time
-	// range.
+	// The time offset in seconds that defines the lookback period for the query.
 	StartTimeOffset *int64
 
-	// The current state of the scheduled query (ENABLED or DISABLED).
+	// The current state of the scheduled query.
 	State types.ScheduledQueryState
 
-	// The timezone in which the schedule expression is evaluated.
+	// The timezone used for evaluating the schedule expression.
 	Timezone *string
 
 	// Metadata pertaining to the operation's result.

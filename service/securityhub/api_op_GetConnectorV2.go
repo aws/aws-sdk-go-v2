@@ -13,7 +13,6 @@ import (
 )
 
 // Grants permission to retrieve details for a connectorV2 based on connector id.
-// This API is in public preview and subject to change.
 func (c *Client) GetConnectorV2(ctx context.Context, params *GetConnectorV2Input, optFns ...func(*Options)) (*GetConnectorV2Output, error) {
 	if params == nil {
 		params = &GetConnectorV2Input{}

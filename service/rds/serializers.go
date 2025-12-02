@@ -11424,6 +11424,55 @@ func (m *awsAwsquery_serializeOpSwitchoverReadReplica) HandleSerialize(ctx conte
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsquery_serializeDocumentAdditionalStorageVolume(v *types.AdditionalStorageVolume, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AllocatedStorage != nil {
+		objectKey := object.Key("AllocatedStorage")
+		objectKey.Integer(*v.AllocatedStorage)
+	}
+
+	if v.IOPS != nil {
+		objectKey := object.Key("IOPS")
+		objectKey.Integer(*v.IOPS)
+	}
+
+	if v.MaxAllocatedStorage != nil {
+		objectKey := object.Key("MaxAllocatedStorage")
+		objectKey.Integer(*v.MaxAllocatedStorage)
+	}
+
+	if v.StorageThroughput != nil {
+		objectKey := object.Key("StorageThroughput")
+		objectKey.Integer(*v.StorageThroughput)
+	}
+
+	if v.StorageType != nil {
+		objectKey := object.Key("StorageType")
+		objectKey.String(*v.StorageType)
+	}
+
+	if v.VolumeName != nil {
+		objectKey := object.Key("VolumeName")
+		objectKey.String(*v.VolumeName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentAdditionalStorageVolumesList(v []types.AdditionalStorageVolume, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentAdditionalStorageVolume(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentAttributeValueList(v []string, value query.Value) error {
 	array := value.Array("AttributeValue")
 
@@ -11605,6 +11654,60 @@ func awsAwsquery_serializeDocumentLogTypeList(v []string, value query.Value) err
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentModifyAdditionalStorageVolume(v *types.ModifyAdditionalStorageVolume, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AllocatedStorage != nil {
+		objectKey := object.Key("AllocatedStorage")
+		objectKey.Integer(*v.AllocatedStorage)
+	}
+
+	if v.IOPS != nil {
+		objectKey := object.Key("IOPS")
+		objectKey.Integer(*v.IOPS)
+	}
+
+	if v.MaxAllocatedStorage != nil {
+		objectKey := object.Key("MaxAllocatedStorage")
+		objectKey.Integer(*v.MaxAllocatedStorage)
+	}
+
+	if v.SetForDelete != nil {
+		objectKey := object.Key("SetForDelete")
+		objectKey.Boolean(*v.SetForDelete)
+	}
+
+	if v.StorageThroughput != nil {
+		objectKey := object.Key("StorageThroughput")
+		objectKey.Integer(*v.StorageThroughput)
+	}
+
+	if v.StorageType != nil {
+		objectKey := object.Key("StorageType")
+		objectKey.String(*v.StorageType)
+	}
+
+	if v.VolumeName != nil {
+		objectKey := object.Key("VolumeName")
+		objectKey.String(*v.VolumeName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentModifyAdditionalStorageVolumesList(v []types.ModifyAdditionalStorageVolume, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentModifyAdditionalStorageVolume(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -12543,6 +12646,13 @@ func awsAwsquery_serializeOpDocumentCreateCustomDBEngineVersionInput(v *CreateCu
 	object := value.Object()
 	_ = object
 
+	if v.DatabaseInstallationFiles != nil {
+		objectKey := object.Key("DatabaseInstallationFiles")
+		if err := awsAwsquery_serializeDocumentStringList(v.DatabaseInstallationFiles, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.DatabaseInstallationFilesS3BucketName != nil {
 		objectKey := object.Key("DatabaseInstallationFilesS3BucketName")
 		objectKey.String(*v.DatabaseInstallationFilesS3BucketName)
@@ -13014,6 +13124,13 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 	object := value.Object()
 	_ = object
 
+	if v.AdditionalStorageVolumes != nil {
+		objectKey := object.Key("AdditionalStorageVolumes")
+		if err := awsAwsquery_serializeDocumentAdditionalStorageVolumesList(v.AdditionalStorageVolumes, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.AllocatedStorage != nil {
 		objectKey := object.Key("AllocatedStorage")
 		objectKey.Integer(*v.AllocatedStorage)
@@ -13357,6 +13474,13 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDBInstanceReadReplicaInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.AdditionalStorageVolumes != nil {
+		objectKey := object.Key("AdditionalStorageVolumes")
+		if err := awsAwsquery_serializeDocumentAdditionalStorageVolumesList(v.AdditionalStorageVolumes, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.AllocatedStorage != nil {
 		objectKey := object.Key("AllocatedStorage")
@@ -16604,6 +16728,13 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 	object := value.Object()
 	_ = object
 
+	if v.AdditionalStorageVolumes != nil {
+		objectKey := object.Key("AdditionalStorageVolumes")
+		if err := awsAwsquery_serializeDocumentModifyAdditionalStorageVolumesList(v.AdditionalStorageVolumes, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.AllocatedStorage != nil {
 		objectKey := object.Key("AllocatedStorage")
 		objectKey.Integer(*v.AllocatedStorage)
@@ -18256,6 +18387,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 	object := value.Object()
 	_ = object
 
+	if v.AdditionalStorageVolumes != nil {
+		objectKey := object.Key("AdditionalStorageVolumes")
+		if err := awsAwsquery_serializeDocumentAdditionalStorageVolumesList(v.AdditionalStorageVolumes, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.AllocatedStorage != nil {
 		objectKey := object.Key("AllocatedStorage")
 		objectKey.Integer(*v.AllocatedStorage)
@@ -18492,6 +18630,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBInstanceFromS3Input, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.AdditionalStorageVolumes != nil {
+		objectKey := object.Key("AdditionalStorageVolumes")
+		if err := awsAwsquery_serializeDocumentAdditionalStorageVolumesList(v.AdditionalStorageVolumes, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.AllocatedStorage != nil {
 		objectKey := object.Key("AllocatedStorage")
@@ -18769,6 +18914,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *RestoreDBInstanceToPointInTimeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.AdditionalStorageVolumes != nil {
+		objectKey := object.Key("AdditionalStorageVolumes")
+		if err := awsAwsquery_serializeDocumentAdditionalStorageVolumesList(v.AdditionalStorageVolumes, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.AllocatedStorage != nil {
 		objectKey := object.Key("AllocatedStorage")

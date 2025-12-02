@@ -49,6 +49,9 @@ type ConflictException struct {
 
 	ErrorCodeOverride *string
 
+	ResourceId   *string
+	ResourceType *string
+
 	noSmithyDocumentSerde
 }
 
@@ -77,7 +80,8 @@ type InternalServerException struct {
 
 	ErrorCodeOverride *string
 
-	AmznErrorType *string
+	AmznErrorType     *string
+	RetryAfterSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -99,11 +103,42 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+//	The requested operation cannot be completed on the specified resource in the
+//
+// current state.
+type InvalidStateException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidStateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidStateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidStateException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidStateException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified resource (such as a telemetry rule) could not be found.
 type ResourceNotFoundException struct {
 	Message *string
 
 	ErrorCodeOverride *string
+
+	ResourceId   *string
+	ResourceType *string
 
 	noSmithyDocumentSerde
 }
@@ -133,6 +168,10 @@ type ServiceQuotaExceededException struct {
 
 	ErrorCodeOverride *string
 
+	ResourceId    *string
+	ResourceType  *string
+	ServiceCode   *string
+	QuotaCode     *string
 	AmznErrorType *string
 
 	noSmithyDocumentSerde
@@ -188,6 +227,8 @@ type ValidationException struct {
 	Message *string
 
 	ErrorCodeOverride *string
+
+	Errors []ValidationError
 
 	noSmithyDocumentSerde
 }

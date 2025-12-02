@@ -20,10 +20,6 @@ import (
 //
 // Permissions You must have the s3:GetAccessGrantsInstanceResourcePolicy
 // permission to use this operation.
-//
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
 func (c *Client) GetAccessGrantsInstanceResourcePolicy(ctx context.Context, params *GetAccessGrantsInstanceResourcePolicyInput, optFns ...func(*Options)) (*GetAccessGrantsInstanceResourcePolicyOutput, error) {
 	if params == nil {
 		params = &GetAccessGrantsInstanceResourcePolicyInput{}

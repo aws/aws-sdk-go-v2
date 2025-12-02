@@ -29,9 +29,9 @@ import (
 //
 // [StopBrowserSession]
 //
-// [UpdateBrowserStream]: https://docs.aws.amazon.com/API_UpdateBrowserStream.html
-// [GetBrowserSession]: https://docs.aws.amazon.com/API_GetBrowserSession.html
-// [StopBrowserSession]: https://docs.aws.amazon.com/API_StopBrowserSession.html
+// [UpdateBrowserStream]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_UpdateBrowserStream.html
+// [GetBrowserSession]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
+// [StopBrowserSession]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html
 func (c *Client) StartBrowserSession(ctx context.Context, params *StartBrowserSessionInput, optFns ...func(*Options)) (*StartBrowserSessionOutput, error) {
 	if params == nil {
 		params = &StartBrowserSessionInput{}

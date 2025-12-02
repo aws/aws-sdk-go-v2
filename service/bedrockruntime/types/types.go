@@ -118,6 +118,60 @@ type AsyncInvokeSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An audio content block that contains audio data in various supported formats.
+type AudioBlock struct {
+
+	// The format of the audio data, such as MP3, WAV, FLAC, or other supported audio
+	// formats.
+	//
+	// This member is required.
+	Format AudioFormat
+
+	// The source of the audio data, which can be provided as raw bytes or an S3
+	// location.
+	//
+	// This member is required.
+	Source AudioSource
+
+	// Error information if the audio block could not be processed or contains invalid
+	// data.
+	Error *ErrorBlock
+
+	noSmithyDocumentSerde
+}
+
+// The source of audio data, which can be provided either as raw bytes or a
+// reference to an S3 location.
+//
+// The following types satisfy this interface:
+//
+//	AudioSourceMemberBytes
+//	AudioSourceMemberS3Location
+type AudioSource interface {
+	isAudioSource()
+}
+
+// Audio data encoded in base64.
+type AudioSourceMemberBytes struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*AudioSourceMemberBytes) isAudioSource() {}
+
+// A reference to audio data stored in an Amazon S3 bucket. To see which models
+// support S3 uploads, see [Supported models and features for Converse].
+//
+// [Supported models and features for Converse]: https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html
+type AudioSourceMemberS3Location struct {
+	Value S3Location
+
+	noSmithyDocumentSerde
+}
+
+func (*AudioSourceMemberS3Location) isAudioSource() {}
+
 // The Model automatically decides if a tool should be called or whether to
 // generate text instead. For example, {"auto" : {}} . For more information, see [Call a tool with the Converse API]
 // in the Amazon Bedrock User Guide
@@ -332,6 +386,7 @@ type CitationSourceContentDelta struct {
 //
 // The following types satisfy this interface:
 //
+//	ContentBlockMemberAudio
 //	ContentBlockMemberCachePoint
 //	ContentBlockMemberCitationsContent
 //	ContentBlockMemberDocument
@@ -349,6 +404,15 @@ type CitationSourceContentDelta struct {
 type ContentBlock interface {
 	isContentBlock()
 }
+
+// An audio content block containing audio data in the conversation.
+type ContentBlockMemberAudio struct {
+	Value AudioBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberAudio) isContentBlock() {}
 
 // CachePoint to include in the message.
 type ContentBlockMemberCachePoint struct {
@@ -464,6 +528,7 @@ func (*ContentBlockMemberVideo) isContentBlock() {}
 // The following types satisfy this interface:
 //
 //	ContentBlockDeltaMemberCitation
+//	ContentBlockDeltaMemberImage
 //	ContentBlockDeltaMemberReasoningContent
 //	ContentBlockDeltaMemberText
 //	ContentBlockDeltaMemberToolResult
@@ -481,6 +546,15 @@ type ContentBlockDeltaMemberCitation struct {
 }
 
 func (*ContentBlockDeltaMemberCitation) isContentBlockDelta() {}
+
+// A streaming delta event containing incremental image data.
+type ContentBlockDeltaMemberImage struct {
+	Value ImageBlockDelta
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockDeltaMemberImage) isContentBlockDelta() {}
 
 // Contains content regarding the reasoning that is carried out by the model.
 // Reasoning refers to a Chain of Thought (CoT) that the model generates to enhance
@@ -540,11 +614,21 @@ type ContentBlockDeltaEvent struct {
 //
 // The following types satisfy this interface:
 //
+//	ContentBlockStartMemberImage
 //	ContentBlockStartMemberToolResult
 //	ContentBlockStartMemberToolUse
 type ContentBlockStart interface {
 	isContentBlockStart()
 }
+
+// The initial event indicating the start of a streaming image block.
+type ContentBlockStartMemberImage struct {
+	Value ImageBlockStart
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockStartMemberImage) isContentBlockStart() {}
 
 // The
 type ContentBlockStartMemberToolResult struct {
@@ -978,6 +1062,16 @@ type DocumentSourceMemberText struct {
 }
 
 func (*DocumentSourceMemberText) isDocumentSource() {}
+
+// A block containing error information when content processing fails.
+type ErrorBlock struct {
+
+	// A human-readable error message describing what went wrong during content
+	// processing.
+	Message *string
+
+	noSmithyDocumentSerde
+}
 
 // A behavior assessment of the guardrail policies used in a call to the Converse
 // API.
@@ -1905,6 +1999,35 @@ type ImageBlock struct {
 	// This member is required.
 	Source ImageSource
 
+	// Error information if the image block could not be processed or contains invalid
+	// data.
+	Error *ErrorBlock
+
+	noSmithyDocumentSerde
+}
+
+// A streaming delta event that contains incremental image data during streaming
+// responses.
+type ImageBlockDelta struct {
+
+	// Error information if this image delta could not be processed.
+	Error *ErrorBlock
+
+	// The incremental image source data for this delta event.
+	Source ImageSource
+
+	noSmithyDocumentSerde
+}
+
+// The initial event in a streaming image block that indicates the start of image
+// content.
+type ImageBlockStart struct {
+
+	// The format of the image data that will be streamed in subsequent delta events.
+	//
+	// This member is required.
+	Format ImageFormat
+
 	noSmithyDocumentSerde
 }
 
@@ -2576,10 +2699,22 @@ type ToolResultBlock struct {
 //
 // The following types satisfy this interface:
 //
+//	ToolResultBlockDeltaMemberJson
 //	ToolResultBlockDeltaMemberText
 type ToolResultBlockDelta interface {
 	isToolResultBlockDelta()
 }
+
+// The JSON schema for the tool result content block. see [JSON Schema Reference].
+//
+// [JSON Schema Reference]: https://json-schema.org/understanding-json-schema/reference
+type ToolResultBlockDeltaMemberJson struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolResultBlockDeltaMemberJson) isToolResultBlockDelta() {}
 
 // The reasoning the model used to return the output.
 type ToolResultBlockDeltaMemberText struct {
@@ -2840,6 +2975,7 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAsyncInvokeOutputDataConfig()        {}
+func (*UnknownUnionMember) isAudioSource()                        {}
 func (*UnknownUnionMember) isCitationGeneratedContent()           {}
 func (*UnknownUnionMember) isCitationLocation()                   {}
 func (*UnknownUnionMember) isCitationSourceContent()              {}

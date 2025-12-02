@@ -2944,6 +2944,16 @@ loop:
 			uv = &types.ContentBlockDeltaMemberCitation{Value: mv}
 			break loop
 
+		case "image":
+			var mv types.ImageBlockDelta
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentImageBlockDelta(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ContentBlockDeltaMemberImage{Value: mv}
+			break loop
+
 		case "reasoningContent":
 			var mv types.ReasoningContentBlockDelta
 			if err := awsRestjson1_deserializeDocumentReasoningContentBlockDelta(&mv, value); err != nil {
@@ -3061,6 +3071,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "image":
+			var mv types.ImageBlockStart
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentImageBlockStart(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ContentBlockStartMemberImage{Value: mv}
+			break loop
+
 		case "toolResult":
 			var mv types.ToolResultBlockStart
 			destAddr := &mv
@@ -3524,6 +3544,46 @@ func awsRestjson1_deserializeDocumentDocumentPageLocation(v **types.DocumentPage
 					return err
 				}
 				sv.Start = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentErrorBlock(v **types.ErrorBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ErrorBlock
+	if *v == nil {
+		sv = &types.ErrorBlock{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -6136,6 +6196,143 @@ func awsRestjson1_deserializeDocumentGuardrailWordPolicyAssessment(v **types.Gua
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentImageBlockDelta(v **types.ImageBlockDelta, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageBlockDelta
+	if *v == nil {
+		sv = &types.ImageBlockDelta{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "error":
+			if err := awsRestjson1_deserializeDocumentErrorBlock(&sv.Error, value); err != nil {
+				return err
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentImageSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageBlockStart(v **types.ImageBlockStart, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageBlockStart
+	if *v == nil {
+		sv = &types.ImageBlockStart{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.ImageFormat(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageSource(v *types.ImageSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ImageSource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "bytes":
+			var mv []byte
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Blob to be []byte, got %T instead", value)
+				}
+				dv, err := base64.StdEncoding.DecodeString(jtv)
+				if err != nil {
+					return fmt.Errorf("failed to base64 decode Blob, %w", err)
+				}
+				mv = dv
+			}
+			uv = &types.ImageSourceMemberBytes{Value: mv}
+			break loop
+
+		case "s3Location":
+			var mv types.S3Location
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3Location(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ImageSourceMemberS3Location{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMessageStartEvent(v **types.MessageStartEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6407,6 +6604,55 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3Location
+	if *v == nil {
+		sv = &types.S3Location{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.BucketOwner = ptr.String(jtv)
+			}
+
+		case "uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSearchResultLocation(v **types.SearchResultLocation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6633,6 +6879,14 @@ loop:
 			continue
 		}
 		switch key {
+		case "json":
+			var mv document.Interface
+			if err := awsRestjson1_deserializeDocumentDocument(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.ToolResultBlockDeltaMemberJson{Value: mv}
+			break loop
+
 		case "text":
 			var mv string
 			if value != nil {
@@ -7624,6 +7878,112 @@ func awsRestjson1_deserializeDocumentAsyncInvokeSummary(v **types.AsyncInvokeSum
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioBlock(v **types.AudioBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioBlock
+	if *v == nil {
+		sv = &types.AudioBlock{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "error":
+			if err := awsRestjson1_deserializeDocumentErrorBlock(&sv.Error, value); err != nil {
+				return err
+			}
+
+		case "format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AudioFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.AudioFormat(jtv)
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentAudioSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioSource(v *types.AudioSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.AudioSource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "bytes":
+			var mv []byte
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Blob to be []byte, got %T instead", value)
+				}
+				dv, err := base64.StdEncoding.DecodeString(jtv)
+				if err != nil {
+					return fmt.Errorf("failed to base64 decode Blob, %w", err)
+				}
+				mv = dv
+			}
+			uv = &types.AudioSourceMemberBytes{Value: mv}
+			break loop
+
+		case "s3Location":
+			var mv types.S3Location
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3Location(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AudioSourceMemberS3Location{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCachePointBlock(v **types.CachePointBlock, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8046,6 +8406,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "audio":
+			var mv types.AudioBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAudioBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ContentBlockMemberAudio{Value: mv}
+			break loop
+
 		case "cachePoint":
 			var mv types.CachePointBlock
 			destAddr := &mv
@@ -8857,6 +9227,11 @@ func awsRestjson1_deserializeDocumentImageBlock(v **types.ImageBlock, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "error":
+			if err := awsRestjson1_deserializeDocumentErrorBlock(&sv.Error, value); err != nil {
+				return err
+			}
+
 		case "format":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8877,62 +9252,6 @@ func awsRestjson1_deserializeDocumentImageBlock(v **types.ImageBlock, value inte
 		}
 	}
 	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentImageSource(v *types.ImageSource, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var uv types.ImageSource
-loop:
-	for key, value := range shape {
-		if value == nil {
-			continue
-		}
-		switch key {
-		case "bytes":
-			var mv []byte
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected Blob to be []byte, got %T instead", value)
-				}
-				dv, err := base64.StdEncoding.DecodeString(jtv)
-				if err != nil {
-					return fmt.Errorf("failed to base64 decode Blob, %w", err)
-				}
-				mv = dv
-			}
-			uv = &types.ImageSourceMemberBytes{Value: mv}
-			break loop
-
-		case "s3Location":
-			var mv types.S3Location
-			destAddr := &mv
-			if err := awsRestjson1_deserializeDocumentS3Location(&destAddr, value); err != nil {
-				return err
-			}
-			mv = *destAddr
-			uv = &types.ImageSourceMemberS3Location{Value: mv}
-			break loop
-
-		default:
-			uv = &types.UnknownUnionMember{Tag: key}
-			break loop
-
-		}
-	}
-	*v = uv
 	return nil
 }
 
@@ -9217,55 +9536,6 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 					return fmt.Errorf("expected NonBlankString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.S3Location
-	if *v == nil {
-		sv = &types.S3Location{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "bucketOwner":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
-				}
-				sv.BucketOwner = ptr.String(jtv)
-			}
-
-		case "uri":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
-				}
-				sv.Uri = ptr.String(jtv)
 			}
 
 		default:

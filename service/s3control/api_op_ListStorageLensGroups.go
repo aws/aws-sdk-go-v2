@@ -24,10 +24,6 @@ import (
 //
 // For information about Storage Lens groups errors, see [List of Amazon S3 Storage Lens error codes].
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [Setting account permissions to use S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
 // [List of Amazon S3 Storage Lens error codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
 func (c *Client) ListStorageLensGroups(ctx context.Context, params *ListStorageLensGroupsInput, optFns ...func(*Options)) (*ListStorageLensGroupsOutput, error) {

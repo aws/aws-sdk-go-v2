@@ -14144,6 +14144,42 @@ func awsRestjson1_deserializeDocumentAutonomousSystem(v **types.AutonomousSystem
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutoscalingAutoScalingGroup(v **types.AutoscalingAutoScalingGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoscalingAutoScalingGroup
+	if *v == nil {
+		sv = &types.AutoscalingAutoScalingGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ec2InstanceUids":
+			if err := awsRestjson1_deserializeDocumentEc2InstanceUids(&sv.Ec2InstanceUids, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsApiCallAction(v **types.AwsApiCallAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14525,6 +14561,42 @@ func awsRestjson1_deserializeDocumentCity(v **types.City, value interface{}) err
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCloudformationStack(v **types.CloudformationStack, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CloudformationStack
+	if *v == nil {
+		sv = &types.CloudformationStack{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ec2InstanceUids":
+			if err := awsRestjson1_deserializeDocumentEc2InstanceUids(&sv.Ec2InstanceUids, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCloudTrailConfigurationResult(v **types.CloudTrailConfigurationResult, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14701,6 +14773,11 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 				sv.Lte = ptr.Int32(int32(i64))
 			}
 
+		case "matches":
+			if err := awsRestjson1_deserializeDocumentMatches(&sv.Matches, value); err != nil {
+				return err
+			}
+
 		case "neq":
 			if err := awsRestjson1_deserializeDocumentNeq(&sv.Neq, value); err != nil {
 				return err
@@ -14708,6 +14785,11 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 
 		case "notEquals":
 			if err := awsRestjson1_deserializeDocumentNotEquals(&sv.NotEquals, value); err != nil {
+				return err
+			}
+
+		case "notMatches":
+			if err := awsRestjson1_deserializeDocumentNotMatches(&sv.NotMatches, value); err != nil {
 				return err
 			}
 
@@ -16917,6 +16999,42 @@ func awsRestjson1_deserializeDocumentEbsVolumesResult(v **types.EbsVolumesResult
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEc2Image(v **types.Ec2Image, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Ec2Image
+	if *v == nil {
+		sv = &types.Ec2Image{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ec2InstanceUids":
+			if err := awsRestjson1_deserializeDocumentEc2InstanceUids(&sv.Ec2InstanceUids, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEc2ImageDetails(v **types.Ec2ImageDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17093,6 +17211,51 @@ func awsRestjson1_deserializeDocumentEc2InstanceUids(v *[]string, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEc2LaunchTemplate(v **types.Ec2LaunchTemplate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Ec2LaunchTemplate
+	if *v == nil {
+		sv = &types.Ec2LaunchTemplate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ec2InstanceUids":
+			if err := awsRestjson1_deserializeDocumentEc2InstanceUids(&sv.Ec2InstanceUids, value); err != nil {
+				return err
+			}
+
+		case "Version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LaunchTemplateVersion to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEc2NetworkInterface(v **types.Ec2NetworkInterface, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17202,6 +17365,87 @@ func awsRestjson1_deserializeDocumentEc2NetworkInterfaceUids(v *[]string, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEc2Vpc(v **types.Ec2Vpc, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Ec2Vpc
+	if *v == nil {
+		sv = &types.Ec2Vpc{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ec2InstanceUids":
+			if err := awsRestjson1_deserializeDocumentEc2InstanceUids(&sv.Ec2InstanceUids, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEcsCluster(v **types.EcsCluster, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EcsCluster
+	if *v == nil {
+		sv = &types.EcsCluster{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ec2InstanceUids":
+			if err := awsRestjson1_deserializeDocumentEc2InstanceUids(&sv.Ec2InstanceUids, value); err != nil {
+				return err
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EcsClusterStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.EcsClusterStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEcsClusterDetails(v **types.EcsClusterDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17298,6 +17542,76 @@ func awsRestjson1_deserializeDocumentEcsClusterDetails(v **types.EcsClusterDetai
 		case "taskDetails":
 			if err := awsRestjson1_deserializeDocumentEcsTaskDetails(&sv.TaskDetails, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEcsTask(v **types.EcsTask, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EcsTask
+	if *v == nil {
+		sv = &types.EcsTask{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "containerUids":
+			if err := awsRestjson1_deserializeDocumentContainerUids(&sv.ContainerUids, value); err != nil {
+				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "launchType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EcsLaunchType to be of type string, got %T instead", value)
+				}
+				sv.LaunchType = types.EcsLaunchType(jtv)
+			}
+
+		case "taskDefinitionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TaskDefinitionArn = ptr.String(jtv)
 			}
 
 		default:
@@ -19051,6 +19365,42 @@ func awsRestjson1_deserializeDocumentIamInstanceProfile(v **types.IamInstancePro
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIamInstanceProfileV2(v **types.IamInstanceProfileV2, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IamInstanceProfileV2
+	if *v == nil {
+		sv = &types.IamInstanceProfileV2{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ec2InstanceUids":
+			if err := awsRestjson1_deserializeDocumentEc2InstanceUids(&sv.Ec2InstanceUids, value); err != nil {
+				return err
 			}
 
 		default:
@@ -21771,6 +22121,42 @@ func awsRestjson1_deserializeDocumentMaster(v **types.Master, value interface{})
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMatches(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Match to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMember(v **types.Member, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22800,6 +23186,42 @@ func awsRestjson1_deserializeDocumentNotEquals(v *[]string, value interface{}) e
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNotMatches(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NotMatch to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -25014,8 +25436,23 @@ func awsRestjson1_deserializeDocumentResourceData(v **types.ResourceData, value 
 				return err
 			}
 
+		case "autoscalingAutoScalingGroup":
+			if err := awsRestjson1_deserializeDocumentAutoscalingAutoScalingGroup(&sv.AutoscalingAutoScalingGroup, value); err != nil {
+				return err
+			}
+
+		case "cloudformationStack":
+			if err := awsRestjson1_deserializeDocumentCloudformationStack(&sv.CloudformationStack, value); err != nil {
+				return err
+			}
+
 		case "container":
 			if err := awsRestjson1_deserializeDocumentContainerFindingResource(&sv.Container, value); err != nil {
+				return err
+			}
+
+		case "ec2Image":
+			if err := awsRestjson1_deserializeDocumentEc2Image(&sv.Ec2Image, value); err != nil {
 				return err
 			}
 
@@ -25024,13 +25461,38 @@ func awsRestjson1_deserializeDocumentResourceData(v **types.ResourceData, value 
 				return err
 			}
 
+		case "ec2LaunchTemplate":
+			if err := awsRestjson1_deserializeDocumentEc2LaunchTemplate(&sv.Ec2LaunchTemplate, value); err != nil {
+				return err
+			}
+
 		case "ec2NetworkInterface":
 			if err := awsRestjson1_deserializeDocumentEc2NetworkInterface(&sv.Ec2NetworkInterface, value); err != nil {
 				return err
 			}
 
+		case "ec2Vpc":
+			if err := awsRestjson1_deserializeDocumentEc2Vpc(&sv.Ec2Vpc, value); err != nil {
+				return err
+			}
+
+		case "ecsCluster":
+			if err := awsRestjson1_deserializeDocumentEcsCluster(&sv.EcsCluster, value); err != nil {
+				return err
+			}
+
+		case "ecsTask":
+			if err := awsRestjson1_deserializeDocumentEcsTask(&sv.EcsTask, value); err != nil {
+				return err
+			}
+
 		case "eksCluster":
 			if err := awsRestjson1_deserializeDocumentEksCluster(&sv.EksCluster, value); err != nil {
+				return err
+			}
+
+		case "iamInstanceProfile":
+			if err := awsRestjson1_deserializeDocumentIamInstanceProfileV2(&sv.IamInstanceProfile, value); err != nil {
 				return err
 			}
 

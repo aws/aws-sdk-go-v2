@@ -103,6 +103,9 @@ type AccessPoint struct {
 
 // A container element for the account-level Amazon S3 Storage Lens configuration.
 //
+// You must enable Storage Lens metrics consistently at both the account level and
+// bucket level, or your request will fail.
+//
 // For more information about S3 Storage Lens, see [Assessing your storage activity and usage with S3 Storage Lens] in the Amazon S3 User Guide.
 // For a complete list of S3 Storage Lens metrics, see [S3 Storage Lens metrics glossary]in the Amazon S3 User Guide.
 //
@@ -123,6 +126,9 @@ type AccountLevel struct {
 
 	// A container element for S3 Storage Lens advanced data-protection metrics.
 	AdvancedDataProtectionMetrics *AdvancedDataProtectionMetrics
+
+	// A container element for S3 Storage Lens advanced performance metrics.
+	AdvancedPerformanceMetrics *AdvancedPerformanceMetrics
 
 	// A container element for detailed status code metrics.
 	DetailedStatusCodesMetrics *DetailedStatusCodesMetrics
@@ -183,6 +189,26 @@ type AdvancedCostOptimizationMetrics struct {
 type AdvancedDataProtectionMetrics struct {
 
 	// A container that indicates whether advanced data-protection metrics are enabled.
+	IsEnabled bool
+
+	noSmithyDocumentSerde
+}
+
+// The container element for S3 Storage Lens advanced performance metrics.
+// Advanced performance metrics provide insights into application performance, such
+// as request efficiency and access patterns. These metrics help you optimize your
+// S3 storage for both cost and performance by providing detailed analytics on how
+// your applications interact with S3 resources.
+//
+// For more information about S3 Storage Lens, see [Assessing your storage activity and usage with S3 Storage Lens] in the Amazon S3 User Guide.
+// For a complete list of S3 Storage Lens metrics, see [S3 Storage Lens metrics glossary]in the Amazon S3 User Guide.
+//
+// [Assessing your storage activity and usage with S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+// [S3 Storage Lens metrics glossary]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
+type AdvancedPerformanceMetrics struct {
+
+	// A container that indicates whether S3 Storage Lens advanced performance metrics
+	// are enabled.
 	IsEnabled bool
 
 	noSmithyDocumentSerde
@@ -296,6 +322,9 @@ type BucketLevel struct {
 	// A container for bucket-level advanced data-protection metrics for S3 Storage
 	// Lens.
 	AdvancedDataProtectionMetrics *AdvancedDataProtectionMetrics
+
+	// A container for bucket-level advanced performance metrics for S3 Storage Lens.
+	AdvancedPerformanceMetrics *AdvancedPerformanceMetrics
 
 	// A container for bucket-level detailed status code metrics for S3 Storage Lens.
 	DetailedStatusCodesMetrics *DetailedStatusCodesMetrics
@@ -494,21 +523,12 @@ type DetailedStatusCodesMetrics struct {
 // A filter that returns objects that are encrypted by dual-layer server-side
 // encryption with Amazon Web Services Key Management Service (KMS) keys
 // (DSSE-KMS). You can further refine your filtering by optionally providing a KMS
-// Key ARN to create an object list of DSSE-KMS objects with that specific KMS Key
-// ARN.
+// Key ARN to filter objects encrypted by a specific key.
 type DSSEKMSFilter struct {
 
 	// The Amazon Resource Name (ARN) of the customer managed KMS key to use for the
 	// filter to return objects that are encrypted by the specified key. For best
-	// performance, we recommend using the KMSKeyArn filter in conjunction with other
-	// object metadata filters, like MatchAnyPrefix , CreatedAfter , or
-	// MatchAnyStorageClass .
-	//
-	// You must provide the full KMS Key ARN. You can't use an alias name or alias
-	// ARN. For more information, see [KMS keys]in the Amazon Web Services Key Management
-	// Service Developer Guide.
-	//
-	// [KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+	// performance, use keys in the same Region as the S3 Batch Operations job.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -817,9 +837,7 @@ type JobManifestGeneratorFilter struct {
 
 	// If provided, the generated object list includes only source bucket objects with
 	// the indicated server-side encryption type (SSE-S3, SSE-KMS, DSSE-KMS, SSE-C, or
-	// NOT-SSE). If you select SSE-KMS or DSSE-KMS, you can optionally further filter
-	// your results by specifying a specific KMS Key ARN. If you select SSE-KMS, you
-	// can also optionally further filter your results by Bucket Key enabled status.
+	// NOT-SSE).
 	MatchAnyObjectEncryption []ObjectEncryptionFilter
 
 	// If provided, the generated manifest includes only source bucket objects that
@@ -1138,7 +1156,7 @@ type LifecycleRule struct {
 	NoncurrentVersionExpiration *NoncurrentVersionExpiration
 
 	//  Specifies the transition rule for the lifecycle rule that describes when
-	// non-current objects transition to a specific storage class. If your bucket is
+	// noncurrent objects transition to a specific storage class. If your bucket is
 	// versioning-enabled (or versioning is suspended), you can set this action to
 	// request that Amazon S3 transition noncurrent object versions to a specific
 	// storage class at a set period in the object's lifetime.
@@ -1432,11 +1450,11 @@ type MatchObjectAge struct {
 type MatchObjectSize struct {
 
 	//  Specifies the minimum object size in Bytes. The value must be a positive
-	// number, greater than 0 and less than 5 TB.
+	// number, greater than 0 and less than 50 TB.
 	BytesGreaterThan int64
 
 	//  Specifies the maximum object size in Bytes. The value must be a positive
-	// number, greater than the minimum object size and less than 5 TB.
+	// number, greater than the minimum object size and less than 50 TB.
 	BytesLessThan int64
 
 	noSmithyDocumentSerde
@@ -1629,9 +1647,7 @@ type NotSSEFilter struct {
 }
 
 // An optional filter for the S3JobManifestGenerator that identifies the subset of
-// objects by encryption type. This filter is used to create an object list for S3
-// Batch Operations jobs. If provided, this filter will generate an object list
-// that only includes objects with the specified encryption type.
+// objects by encryption type.
 //
 // The following types satisfy this interface:
 //
@@ -2261,7 +2277,7 @@ type S3ComputeObjectChecksumOperation struct {
 	ChecksumAlgorithm ComputeObjectChecksumAlgorithm
 
 	// Indicates the checksum type that you want Amazon S3 to use to calculate the
-	// object’s checksum value. For more information, see [Checking object integrity]in the Amazon S3 User Guide.
+	// object's checksum value. For more information, see [Checking object integrity]in the Amazon S3 User Guide.
 	//
 	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
 	ChecksumType ComputeObjectChecksumType
@@ -2858,23 +2874,12 @@ type SSEKMSFilter struct {
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
 	// with server-side encryption using Amazon Web Services Key Management Service
 	// (Amazon Web Services KMS) keys (SSE-KMS). If specified, will filter SSE-KMS
-	// encrypted objects by S3 Bucket Key status. For more information, see [Reducing the cost of SSE-KMS with Amazon S3 Bucket Keys]in the
-	// Amazon S3 User Guide.
-	//
-	// [Reducing the cost of SSE-KMS with Amazon S3 Bucket Keys]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
+	// encrypted objects by S3 Bucket Key status.
 	BucketKeyEnabled *bool
 
 	// The Amazon Resource Name (ARN) of the customer managed KMS key to use for the
 	// filter to return objects that are encrypted by the specified key. For best
-	// performance, we recommend using the KMSKeyArn filter in conjunction with other
-	// object metadata filters, like MatchAnyPrefix , CreatedAfter , or
-	// MatchAnyStorageClass .
-	//
-	// You must provide the full KMS Key ARN. You can't use an alias name or alias
-	// ARN. For more information, see [KMS keys]in the Amazon Web Services Key Management
-	// Service Developer Guide.
-	//
-	// [KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+	// performance, use keys in the same Region as the S3 Batch Operations job.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -2939,9 +2944,28 @@ type StorageLensConfiguration struct {
 	// be valid if there is no Include container submitted, and it's not empty.
 	Exclude *Exclude
 
+	// A container that configures your S3 Storage Lens expanded prefixes metrics
+	// report.
+	ExpandedPrefixesDataExport *StorageLensExpandedPrefixesDataExport
+
 	// A container for what is included in this configuration. This container can only
 	// be valid if there is no Exclude container submitted, and it's not empty.
 	Include *Include
+
+	// A container for all prefix delimiters that are used for object keys in this S3
+	// Storage Lens configuration. The prefix delimiters determine how S3 Storage Lens
+	// counts prefix depth, by separating the hierarchical levels in object keys.
+	//
+	//   - If either a prefix delimiter or existing delimiter is undefined, Amazon S3
+	//   uses the delimiter that’s defined.
+	//
+	//   - If both the prefix delimiter and existing delimiter are undefined, S3 uses /
+	//   as the default delimiter.
+	//
+	//   - When custom delimiters are used, both the prefix delimiter and existing
+	//   delimiter must specify the same special character. Otherwise, your request
+	//   results in an error.
+	PrefixDelimiter *string
 
 	// The Amazon Resource Name (ARN) of the S3 Storage Lens configuration. This
 	// property is read-only and follows the following format:
@@ -2966,6 +2990,10 @@ type StorageLensDataExport struct {
 	// configuration.
 	S3BucketDestination *S3BucketDestination
 
+	// A container for configuring S3 Storage Lens data exports to read-only S3 table
+	// buckets.
+	StorageLensTableDestination *StorageLensTableDestination
+
 	noSmithyDocumentSerde
 }
 
@@ -2977,6 +3005,23 @@ type StorageLensDataExportEncryption struct {
 
 	//
 	SSES3 *SSES3
+
+	noSmithyDocumentSerde
+}
+
+// A container for your S3 Storage Lens expanded prefix metrics report
+// configuration. Unlike the default Storage Lens metrics report, the enhanced
+// prefix metrics report includes all S3 Storage Lens storage and activity data
+// related to the full list of prefixes in your Storage Lens configuration.
+type StorageLensExpandedPrefixesDataExport struct {
+
+	// A container for the bucket where the Amazon S3 Storage Lens metrics export
+	// files are located.
+	S3BucketDestination *S3BucketDestination
+
+	// A container for the bucket where the S3 Storage Lens metric export files are
+	// located. At least one export destination must be specified.
+	StorageLensTableDestination *StorageLensTableDestination
 
 	noSmithyDocumentSerde
 }
@@ -3123,6 +3168,29 @@ type StorageLensGroupOrOperator struct {
 
 	//  Filters objects that match the specified object size range.
 	MatchObjectSize *MatchObjectSize
+
+	noSmithyDocumentSerde
+}
+
+// A container for configuring your S3 Storage Lens reports to export to read-only
+// S3 table buckets. This parameter enables you to store your Storage Lens metrics
+// in a structured, queryable table format in Apache Iceberg.
+//
+// For more information about S3 Storage Lens, see [Assessing your storage activity and usage with S3 Storage Lens] in the Amazon S3 User Guide.
+//
+// [Assessing your storage activity and usage with S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+type StorageLensTableDestination struct {
+
+	// A container that indicates whether the export to read-only S3 table buckets is
+	// enabled for your S3 Storage Lens configuration. When set to true, Storage Lens
+	// reports are automatically exported to tables in addition to other configured
+	// destinations.
+	//
+	// This member is required.
+	IsEnabled bool
+
+	// A container for the encryption of the S3 Storage Lens metrics exports.
+	Encryption *StorageLensDataExportEncryption
 
 	noSmithyDocumentSerde
 }

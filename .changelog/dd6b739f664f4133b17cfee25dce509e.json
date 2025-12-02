@@ -1,0 +1,8 @@
+{
+    "id": "dd6b739f-664f-4133-b17c-fee25dce509e",
+    "type": "feature",
+    "description": "Launching Lambda durable functions - a new feature to build reliable multi-step applications and AI workflows natively within the Lambda developer experience.",
+    "modules": [
+        "service/lambda"
+    ]
+}

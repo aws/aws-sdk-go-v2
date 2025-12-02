@@ -52,6 +52,9 @@ type CreateCollectionInput struct {
 	// The type of collection.
 	Type types.CollectionType
 
+	// Configuration options for vector search capabilities in the collection.
+	VectorOptions *types.VectorOptions
+
 	noSmithyDocumentSerde
 }
 

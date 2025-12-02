@@ -3067,6 +3067,25 @@ func awsAwsjson11_serializeDocumentCreateAggregateConfiguration(v *types.CreateA
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCreateAndAttachS3AccessPointOntapConfiguration(v *types.CreateAndAttachS3AccessPointOntapConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileSystemIdentity != nil {
+		ok := object.Key("FileSystemIdentity")
+		if err := awsAwsjson11_serializeDocumentOntapFileSystemIdentity(v.FileSystemIdentity, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeId != nil {
+		ok := object.Key("VolumeId")
+		ok.String(*v.VolumeId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCreateAndAttachS3AccessPointOpenZFSConfiguration(v *types.CreateAndAttachS3AccessPointOpenZFSConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4172,6 +4191,56 @@ func awsAwsjson11_serializeDocumentLustreRootSquashConfiguration(v *types.Lustre
 	if v.RootSquash != nil {
 		ok := object.Key("RootSquash")
 		ok.String(*v.RootSquash)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOntapFileSystemIdentity(v *types.OntapFileSystemIdentity, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.UnixUser != nil {
+		ok := object.Key("UnixUser")
+		if err := awsAwsjson11_serializeDocumentOntapUnixFileSystemUser(v.UnixUser, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WindowsUser != nil {
+		ok := object.Key("WindowsUser")
+		if err := awsAwsjson11_serializeDocumentOntapWindowsFileSystemUser(v.WindowsUser, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOntapUnixFileSystemUser(v *types.OntapUnixFileSystemUser, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOntapWindowsFileSystemUser(v *types.OntapWindowsFileSystemUser, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
 	}
 
 	return nil
@@ -5534,6 +5603,13 @@ func awsAwsjson11_serializeOpDocumentCreateAndAttachS3AccessPointInput(v *Create
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.OntapConfiguration != nil {
+		ok := object.Key("OntapConfiguration")
+		if err := awsAwsjson11_serializeDocumentCreateAndAttachS3AccessPointOntapConfiguration(v.OntapConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.OpenZFSConfiguration != nil {

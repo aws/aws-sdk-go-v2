@@ -890,6 +890,26 @@ func (m *validateOpCreateLabelingJob) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMlflowApp struct {
+}
+
+func (*validateOpCreateMlflowApp) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMlflowApp) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMlflowAppInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMlflowAppInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMlflowTrackingServer struct {
 }
 
@@ -1225,6 +1245,26 @@ func (m *validateOpCreatePresignedDomainUrl) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreatePresignedDomainUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePresignedMlflowAppUrl struct {
+}
+
+func (*validateOpCreatePresignedMlflowAppUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePresignedMlflowAppUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePresignedMlflowAppUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePresignedMlflowAppUrlInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2125,6 +2165,26 @@ func (m *validateOpDeleteInferenceExperiment) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteInferenceExperimentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMlflowApp struct {
+}
+
+func (*validateOpDeleteMlflowApp) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMlflowApp) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMlflowAppInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMlflowAppInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3425,6 +3485,26 @@ func (m *validateOpDescribeLineageGroup) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeLineageGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeMlflowApp struct {
+}
+
+func (*validateOpDescribeMlflowApp) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMlflowApp) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMlflowAppInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMlflowAppInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5750,6 +5830,26 @@ func (m *validateOpUpdateInferenceExperiment) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMlflowApp struct {
+}
+
+func (*validateOpUpdateMlflowApp) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMlflowApp) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMlflowAppInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMlflowAppInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMlflowTrackingServer struct {
 }
 
@@ -6306,6 +6406,10 @@ func addOpCreateLabelingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLabelingJob{}, middleware.After)
 }
 
+func addOpCreateMlflowAppValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMlflowApp{}, middleware.After)
+}
+
 func addOpCreateMlflowTrackingServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMlflowTrackingServer{}, middleware.After)
 }
@@ -6372,6 +6476,10 @@ func addOpCreatePipelineValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreatePresignedDomainUrlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePresignedDomainUrl{}, middleware.After)
+}
+
+func addOpCreatePresignedMlflowAppUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePresignedMlflowAppUrl{}, middleware.After)
 }
 
 func addOpCreatePresignedMlflowTrackingServerUrlValidationMiddleware(stack *middleware.Stack) error {
@@ -6552,6 +6660,10 @@ func addOpDeleteInferenceComponentValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDeleteInferenceExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInferenceExperiment{}, middleware.After)
+}
+
+func addOpDeleteMlflowAppValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMlflowApp{}, middleware.After)
 }
 
 func addOpDeleteMlflowTrackingServerValidationMiddleware(stack *middleware.Stack) error {
@@ -6812,6 +6924,10 @@ func addOpDescribeLabelingJobValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDescribeLineageGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeLineageGroup{}, middleware.After)
+}
+
+func addOpDescribeMlflowAppValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMlflowApp{}, middleware.After)
 }
 
 func addOpDescribeMlflowTrackingServerValidationMiddleware(stack *middleware.Stack) error {
@@ -7276,6 +7392,10 @@ func addOpUpdateInferenceComponentRuntimeConfigValidationMiddleware(stack *middl
 
 func addOpUpdateInferenceExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInferenceExperiment{}, middleware.After)
+}
+
+func addOpUpdateMlflowAppValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMlflowApp{}, middleware.After)
 }
 
 func addOpUpdateMlflowTrackingServerValidationMiddleware(stack *middleware.Stack) error {
@@ -8747,9 +8867,7 @@ func validateClusterOrchestrator(v *types.ClusterOrchestrator) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ClusterOrchestrator"}
-	if v.Eks == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Eks"))
-	} else if v.Eks != nil {
+	if v.Eks != nil {
 		if err := validateClusterOrchestratorEksConfig(v.Eks); err != nil {
 			invalidParams.AddNested("Eks", err.(smithy.InvalidParamsError))
 		}
@@ -16188,6 +16306,32 @@ func validateOpCreateLabelingJobInput(v *CreateLabelingJobInput) error {
 	}
 }
 
+func validateOpCreateMlflowAppInput(v *CreateMlflowAppInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMlflowAppInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ArtifactStoreUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArtifactStoreUri"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMlflowTrackingServerInput(v *CreateMlflowTrackingServerInput) error {
 	if v == nil {
 		return nil
@@ -16796,6 +16940,21 @@ func validateOpCreatePresignedDomainUrlInput(v *CreatePresignedDomainUrlInput) e
 	}
 	if v.UserProfileName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserProfileName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePresignedMlflowAppUrlInput(v *CreatePresignedMlflowAppUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePresignedMlflowAppUrlInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17769,6 +17928,21 @@ func validateOpDeleteInferenceExperimentInput(v *DeleteInferenceExperimentInput)
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteInferenceExperimentInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMlflowAppInput(v *DeleteMlflowAppInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMlflowAppInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -18780,6 +18954,21 @@ func validateOpDescribeLineageGroupInput(v *DescribeLineageGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeLineageGroupInput"}
 	if v.LineageGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LineageGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeMlflowAppInput(v *DescribeMlflowAppInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMlflowAppInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20821,6 +21010,21 @@ func validateOpUpdateInferenceExperimentInput(v *UpdateInferenceExperimentInput)
 		if err := validateShadowModeConfig(v.ShadowModeConfig); err != nil {
 			invalidParams.AddNested("ShadowModeConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMlflowAppInput(v *UpdateMlflowAppInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMlflowAppInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

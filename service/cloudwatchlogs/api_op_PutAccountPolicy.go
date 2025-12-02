@@ -15,6 +15,11 @@ import (
 // field index policy, transformer policy, or metric extraction policy that applies
 // to all log groups or a subset of log groups in the account.
 //
+// For field index policies, you can configure indexed fields as facets to enable
+// interactive exploration of your logs. Facets provide value distributions and
+// counts for indexed fields in the CloudWatch Logs Insights console without
+// requiring query execution. For more information, see [Use facets to group and explore logs].
+//
 // To use this operation, you must be signed on with the correct permissions
 // depending on the type of policy that you are creating.
 //
@@ -29,6 +34,9 @@ import (
 //
 //   - To create a field index policy, you must have the logs:PutIndexPolicy and
 //     logs:PutAccountPolicy permissions.
+//
+//   - To configure facets for field index policies, you must have the
+//     logs:PutIndexPolicy and logs:PutAccountPolicy permissions.
 //
 //   - To create a metric extraction policy, you must have the
 //     logs:PutMetricExtractionPolicy and logs:PutAccountPolicy permissions.
@@ -184,13 +192,16 @@ import (
 // requestId .
 //
 // You can have one account-level field index policy that applies to all log
-// groups in the account. Or you can create as many as 20 account-level field index
-// policies that are each scoped to a subset of log groups with the
-// selectionCriteria parameter. If you have multiple account-level index policies
-// with selection criteria, no two of them can use the same or overlapping log
-// group name prefixes. For example, if you have one policy filtered to log groups
-// that start with my-log , you can't have another field index policy filtered to
-// my-logpprod or my-logging .
+// groups in the account. Or you can create as many as 40 account-level field index
+// policies (20 for log group prefix selection, 20 for data source selection) that
+// are each scoped to a subset of log groups or data sources with the
+// selectionCriteria parameter. Field index policies can now be created for
+// specific data source name and type combinations using DataSourceName and
+// DataSourceType selection criteria. If you have multiple account-level index
+// policies with selection criteria, no two of them can use the same or overlapping
+// log group name prefixes. For example, if you have one policy filtered to log
+// groups that start with my-log , you can't have another field index policy
+// filtered to my-logpprod or my-logging .
 //
 // If you create an account-level field index policy in a monitoring account in
 // cross-account observability, the policy is applied only to the monitoring
@@ -264,6 +275,7 @@ import (
 // [GetLogGroupFields]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html
 // [Processors that you can use]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Processors
 // [PutAccountPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
+// [Use facets to group and explore logs]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Facets.html
 // [Create field indexes to improve query performance and reduce costs]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html
 // [GetLogEvents]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html
 func (c *Client) PutAccountPolicy(ctx context.Context, params *PutAccountPolicyInput, optFns ...func(*Options)) (*PutAccountPolicyOutput, error) {

@@ -199,6 +199,31 @@ func (SecurityPolicyType) Values() []SecurityPolicyType {
 	}
 }
 
+type ServerlessVectorAccelerationStatus string
+
+// Enum values for ServerlessVectorAccelerationStatus
+const (
+	// Serverless vector acceleration is enabled by default
+	ServerlessVectorAccelerationStatusEnabled ServerlessVectorAccelerationStatus = "ENABLED"
+	// Serverless vector acceleration is disabled
+	ServerlessVectorAccelerationStatusDisabled ServerlessVectorAccelerationStatus = "DISABLED"
+	// Serverless vector acceleration is allowed but not enabled by default
+	ServerlessVectorAccelerationStatusAllowed ServerlessVectorAccelerationStatus = "ALLOWED"
+)
+
+// Values returns all known values for ServerlessVectorAccelerationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServerlessVectorAccelerationStatus) Values() []ServerlessVectorAccelerationStatus {
+	return []ServerlessVectorAccelerationStatus{
+		"ENABLED",
+		"DISABLED",
+		"ALLOWED",
+	}
+}
+
 type StandbyReplicas string
 
 // Enum values for StandbyReplicas

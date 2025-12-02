@@ -84,6 +84,27 @@ func (OpenTableFormat) Values() []OpenTableFormat {
 	}
 }
 
+type ReplicationStatus string
+
+// Enum values for ReplicationStatus
+const (
+	ReplicationStatusPending   ReplicationStatus = "pending"
+	ReplicationStatusCompleted ReplicationStatus = "completed"
+	ReplicationStatusFailed    ReplicationStatus = "failed"
+)
+
+// Values returns all known values for ReplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationStatus) Values() []ReplicationStatus {
+	return []ReplicationStatus{
+		"pending",
+		"completed",
+		"failed",
+	}
+}
+
 type SSEAlgorithm string
 
 // Enum values for SSEAlgorithm
@@ -100,6 +121,25 @@ func (SSEAlgorithm) Values() []SSEAlgorithm {
 	return []SSEAlgorithm{
 		"AES256",
 		"aws:kms",
+	}
+}
+
+type StorageClass string
+
+// Enum values for StorageClass
+const (
+	StorageClassStandard           StorageClass = "STANDARD"
+	StorageClassIntelligentTiering StorageClass = "INTELLIGENT_TIERING"
+)
+
+// Values returns all known values for StorageClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageClass) Values() []StorageClass {
+	return []StorageClass{
+		"STANDARD",
+		"INTELLIGENT_TIERING",
 	}
 }
 
@@ -176,6 +216,49 @@ func (TableMaintenanceType) Values() []TableMaintenanceType {
 	return []TableMaintenanceType{
 		"icebergCompaction",
 		"icebergSnapshotManagement",
+	}
+}
+
+type TableRecordExpirationJobStatus string
+
+// Enum values for TableRecordExpirationJobStatus
+const (
+	TableRecordExpirationJobStatusNotYetRun  TableRecordExpirationJobStatus = "NotYetRun"
+	TableRecordExpirationJobStatusSuccessful TableRecordExpirationJobStatus = "Successful"
+	TableRecordExpirationJobStatusFailed     TableRecordExpirationJobStatus = "Failed"
+	TableRecordExpirationJobStatusDisabled   TableRecordExpirationJobStatus = "Disabled"
+)
+
+// Values returns all known values for TableRecordExpirationJobStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TableRecordExpirationJobStatus) Values() []TableRecordExpirationJobStatus {
+	return []TableRecordExpirationJobStatus{
+		"NotYetRun",
+		"Successful",
+		"Failed",
+		"Disabled",
+	}
+}
+
+type TableRecordExpirationStatus string
+
+// Enum values for TableRecordExpirationStatus
+const (
+	TableRecordExpirationStatusEnabled  TableRecordExpirationStatus = "enabled"
+	TableRecordExpirationStatusDisabled TableRecordExpirationStatus = "disabled"
+)
+
+// Values returns all known values for TableRecordExpirationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TableRecordExpirationStatus) Values() []TableRecordExpirationStatus {
+	return []TableRecordExpirationStatus{
+		"enabled",
+		"disabled",
 	}
 }
 

@@ -287,6 +287,30 @@ type ContentBlock struct {
 	noSmithyDocumentSerde
 }
 
+//	The contextual information associated with an evaluation, including span
+//
+// context details that identify the specific traces and sessions being evaluated
+// within the agent's execution flow.
+//
+// The following types satisfy this interface:
+//
+//	ContextMemberSpanContext
+type Context interface {
+	isContext()
+}
+
+//	The span context information that uniquely identifies the trace and span being
+//
+// evaluated, including session ID, trace ID, and span ID for precise targeting
+// within the agent's execution flow.
+type ContextMemberSpanContext struct {
+	Value SpanContext
+
+	noSmithyDocumentSerde
+}
+
+func (*ContextMemberSpanContext) isContext() {}
+
 // Contains conversational content for an event payload.
 type Conversational struct {
 
@@ -303,6 +327,136 @@ type Conversational struct {
 
 	noSmithyDocumentSerde
 }
+
+//	The input data structure containing agent session spans in OpenTelemetry
+//
+// format. Supports traces from frameworks like Strands (AgentCore Runtime) and
+// LangGraph with OpenInference instrumentation for comprehensive evaluation.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationInputMemberSessionSpans
+type EvaluationInput interface {
+	isEvaluationInput()
+}
+
+//	The collection of spans representing agent execution traces within a session.
+//
+// Each span contains detailed information about tool calls, model interactions,
+// and other agent activities that can be evaluated for quality and performance.
+type EvaluationInputMemberSessionSpans struct {
+	Value []document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationInputMemberSessionSpans) isEvaluationInput() {}
+
+//	The comprehensive result of an evaluation containing the score, explanation,
+//
+// evaluator metadata, and execution details. Provides both quantitative ratings
+// and qualitative insights about agent performance.
+type EvaluationResultContent struct {
+
+	//  The contextual information associated with this evaluation result, including
+	// span context details that identify the specific traces and sessions that were
+	// evaluated.
+	//
+	// This member is required.
+	Context Context
+
+	//  The Amazon Resource Name (ARN) of the evaluator used to generate this result.
+	// For custom evaluators, this is the full ARN; for built-in evaluators, this
+	// follows the pattern Builtin.{EvaluatorName} .
+	//
+	// This member is required.
+	EvaluatorArn *string
+
+	//  The unique identifier of the evaluator that produced this result. This matches
+	// the evaluatorId provided in the evaluation request and can be used to identify
+	// which evaluator generated specific results.
+	//
+	// This member is required.
+	EvaluatorId *string
+
+	//  The human-readable name of the evaluator used for this evaluation. For
+	// built-in evaluators, this is the descriptive name (e.g., "Helpfulness",
+	// "Correctness"); for custom evaluators, this is the user-defined name.
+	//
+	// This member is required.
+	EvaluatorName *string
+
+	//  The error code indicating the type of failure that occurred during evaluation.
+	// Used to programmatically identify and handle different categories of evaluation
+	// errors.
+	ErrorCode *string
+
+	//  The error message describing what went wrong if the evaluation failed.
+	// Provides detailed information about evaluation failures to help diagnose and
+	// resolve issues with evaluator configuration or input data.
+	ErrorMessage *string
+
+	//  The detailed explanation provided by the evaluator describing the reasoning
+	// behind the assigned score. This qualitative feedback helps understand why
+	// specific ratings were given and provides actionable insights for improvement.
+	Explanation *string
+
+	//  The categorical label assigned by the evaluator when using a categorical
+	// rating scale. This provides a human-readable description of the evaluation
+	// result (e.g., "Excellent", "Good", "Poor") corresponding to the numerical value.
+	// For numerical scales, this field is optional and provides a natural language
+	// explanation of what the value means (e.g., value 0.5 = "Somewhat Helpful").
+	Label *string
+
+	//  The token consumption statistics for this evaluation, including input tokens,
+	// output tokens, and total tokens used by the underlying language model during the
+	// evaluation process.
+	TokenUsage *TokenUsage
+
+	//  The numerical score assigned by the evaluator according to its configured
+	// rating scale. For numerical scales, this is a decimal value within the defined
+	// range. This field is not allowed for categorical scales.
+	Value *float64
+
+	noSmithyDocumentSerde
+}
+
+//	The specification of which trace or span IDs to evaluate within the provided
+//
+// input data. Allows precise targeting of evaluation at different levels: tool
+// calls, traces, or sessions.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationTargetMemberSpanIds
+//	EvaluationTargetMemberTraceIds
+type EvaluationTarget interface {
+	isEvaluationTarget()
+}
+
+//	The list of specific span IDs to evaluate within the provided traces. Used to
+//
+// target evaluation at individual tool calls or specific operations within the
+// agent's execution flow.
+type EvaluationTargetMemberSpanIds struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationTargetMemberSpanIds) isEvaluationTarget() {}
+
+//	The list of trace IDs to evaluate, representing complete request-response
+//
+// interactions. Used to evaluate entire conversation turns or specific agent
+// interactions within a session.
+type EvaluationTargetMemberTraceIds struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationTargetMemberTraceIds) isEvaluationTarget() {}
 
 // Contains information about an event in an AgentCore Memory resource.
 type Event struct {
@@ -527,6 +681,28 @@ type MemoryContentMemberText struct {
 
 func (*MemoryContentMemberText) isMemoryContent() {}
 
+// Filters to apply to metadata associated with a memory. Specify the metadata key
+// and value in the left and right fields and use the operator field to define the
+// relationship to match.
+type MemoryMetadataFilterExpression struct {
+
+	// Left expression of the event metadata filter.
+	//
+	// This member is required.
+	Left LeftExpression
+
+	// The relationship between the metadata key and value to match when applying the
+	// metadata filter.
+	//
+	// This member is required.
+	Operator OperatorType
+
+	// Right expression of the eventMetadata filter.
+	Right RightExpression
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a memory record in an AgentCore Memory resource.
 type MemoryRecord struct {
 
@@ -555,6 +731,9 @@ type MemoryRecord struct {
 	//
 	// This member is required.
 	Namespaces []string
+
+	// A map of metadata key-value pairs associated with a memory record.
+	Metadata map[string]MetadataValue
 
 	noSmithyDocumentSerde
 }
@@ -652,6 +831,9 @@ type MemoryRecordSummary struct {
 	//
 	// This member is required.
 	Namespaces []string
+
+	// A map of metadata key-value pairs associated with a memory record.
+	Metadata map[string]MetadataValue
 
 	// The relevance score of the memory record when returned as part of a search
 	// result. Higher values indicate greater relevance to the search query.
@@ -800,6 +982,9 @@ type SearchCriteria struct {
 	// The memory strategy identifier to filter memory records by.
 	MemoryStrategyId *string
 
+	// Filters to apply to metadata associated with a memory.
+	MetadataFilters []MemoryMetadataFilterExpression
+
 	// The maximum number of top-scoring memory records to return. This value is used
 	// for semantic search ranking.
 	TopK *int32
@@ -828,6 +1013,32 @@ type SessionSummary struct {
 	noSmithyDocumentSerde
 }
 
+//	The contextual information that uniquely identifies a span within the
+//
+// distributed tracing system. Contains session, trace, and span identifiers used
+// to correlate evaluation results with specific agent execution points.
+type SpanContext struct {
+
+	//  The unique identifier of the session containing this span. Sessions represent
+	// complete conversation flows and are detected using configurable
+	// SessionTimeoutMinutes (default 15 minutes).
+	//
+	// This member is required.
+	SessionId *string
+
+	//  The unique identifier of the specific span being referenced. Spans represent
+	// individual operations like tool calls, model invocations, or other discrete
+	// actions within the agent's execution.
+	SpanId *string
+
+	//  The unique identifier of the trace containing this span. Traces represent
+	// individual request-response interactions within a session and group related
+	// spans together.
+	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an update to a stream.
 //
 // The following types satisfy this interface:
@@ -845,6 +1056,30 @@ type StreamUpdateMemberAutomationStreamUpdate struct {
 }
 
 func (*StreamUpdateMemberAutomationStreamUpdate) isStreamUpdate() {}
+
+//	The token consumption statistics for language model operations during
+//
+// evaluation. Provides detailed breakdown of input, output, and total tokens used
+// for cost tracking and performance monitoring.
+type TokenUsage struct {
+
+	//  The number of tokens consumed for input processing during the evaluation.
+	// Includes tokens from the evaluation prompt, agent traces, and any additional
+	// context provided to the evaluator model.
+	InputTokens *int32
+
+	//  The number of tokens generated by the evaluator model in its response.
+	// Includes tokens for the score, explanation, and any additional output produced
+	// during the evaluation process.
+	OutputTokens *int32
+
+	//  The total number of tokens consumed during the evaluation, calculated as the
+	// sum of input and output tokens. Used for cost calculation and rate limiting
+	// within the service limits.
+	TotalTokens *int32
+
+	noSmithyDocumentSerde
+}
 
 // The collection of arguments that specify the operation to perform and its
 // parameters when invoking a tool in Amazon Bedrock. Different tools require
@@ -991,6 +1226,9 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isCodeInterpreterStreamOutput() {}
 func (*UnknownUnionMember) isContent()                     {}
+func (*UnknownUnionMember) isContext()                     {}
+func (*UnknownUnionMember) isEvaluationInput()             {}
+func (*UnknownUnionMember) isEvaluationTarget()            {}
 func (*UnknownUnionMember) isExtractionJobMessages()       {}
 func (*UnknownUnionMember) isLeftExpression()              {}
 func (*UnknownUnionMember) isMemoryContent()               {}

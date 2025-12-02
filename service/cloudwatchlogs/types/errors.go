@@ -91,8 +91,9 @@ func (e *DataAlreadyAcceptedException) ErrorCode() string {
 }
 func (e *DataAlreadyAcceptedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An internal server error occurred while processing the request. This is
-// typically a temporary issue and the request can be retried.
+// An internal server error occurred while processing the request. This exception
+// is returned when the service encounters an unexpected condition that prevents it
+// from fulfilling the request.
 type InternalServerException struct {
 	Message *string
 

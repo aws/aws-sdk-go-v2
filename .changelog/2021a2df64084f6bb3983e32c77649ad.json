@@ -1,0 +1,8 @@
+{
+    "id": "2021a2df-6408-4f6b-b398-3e32c77649ad",
+    "type": "feature",
+    "description": "Added support for Amazon Database Savings Plans",
+    "modules": [
+        "service/savingsplans"
+    ]
+}

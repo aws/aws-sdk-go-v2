@@ -290,26 +290,6 @@ func (m *validateOpBatchUpdateStandardsControlAssociations) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpConnectorRegistrationsV2 struct {
-}
-
-func (*validateOpConnectorRegistrationsV2) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpConnectorRegistrationsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ConnectorRegistrationsV2Input)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpConnectorRegistrationsV2Input(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpCreateActionTarget struct {
 }
 
@@ -1170,6 +1150,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterConnectorV2 struct {
+}
+
+func (*validateOpRegisterConnectorV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterConnectorV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterConnectorV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterConnectorV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartConfigurationPolicyAssociation struct {
 }
 
@@ -1526,10 +1526,6 @@ func addOpBatchUpdateStandardsControlAssociationsValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpBatchUpdateStandardsControlAssociations{}, middleware.After)
 }
 
-func addOpConnectorRegistrationsV2ValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpConnectorRegistrationsV2{}, middleware.After)
-}
-
 func addOpCreateActionTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateActionTarget{}, middleware.After)
 }
@@ -1700,6 +1696,10 @@ func addOpListStandardsControlAssociationsValidationMiddleware(stack *middleware
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpRegisterConnectorV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterConnectorV2{}, middleware.After)
 }
 
 func addOpStartConfigurationPolicyAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -2081,21 +2081,6 @@ func validateGroupByRules(v []types.GroupByRule) error {
 	}
 }
 
-func validateJiraCloudUpdateConfiguration(v *types.JiraCloudUpdateConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "JiraCloudUpdateConfiguration"}
-	if v.ProjectKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectKey"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateMalware(v *types.Malware) error {
 	if v == nil {
 		return nil
@@ -2291,25 +2276,6 @@ func validateProviderConfiguration(v types.ProviderConfiguration) error {
 	}
 }
 
-func validateProviderUpdateConfiguration(v types.ProviderUpdateConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ProviderUpdateConfiguration"}
-	switch uv := v.(type) {
-	case *types.ProviderUpdateConfigurationMemberJiraCloud:
-		if err := validateJiraCloudUpdateConfiguration(&uv.Value); err != nil {
-			invalidParams.AddNested("[JiraCloud]", err.(smithy.InvalidParamsError))
-		}
-
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateRelatedFinding(v *types.RelatedFinding) error {
 	if v == nil {
 		return nil
@@ -2488,11 +2454,8 @@ func validateServiceNowProviderConfiguration(v *types.ServiceNowProviderConfigur
 	if v.InstanceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
 	}
-	if v.ClientId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
-	}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2971,24 +2934,6 @@ func validateOpBatchUpdateStandardsControlAssociationsInput(v *BatchUpdateStanda
 		if err := validateStandardsControlAssociationUpdates(v.StandardsControlAssociationUpdates); err != nil {
 			invalidParams.AddNested("StandardsControlAssociationUpdates", err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpConnectorRegistrationsV2Input(v *ConnectorRegistrationsV2Input) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ConnectorRegistrationsV2Input"}
-	if v.AuthCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthCode"))
-	}
-	if v.AuthState == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthState"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3725,6 +3670,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpRegisterConnectorV2Input(v *RegisterConnectorV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterConnectorV2Input"}
+	if v.AuthCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthCode"))
+	}
+	if v.AuthState == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthState"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartConfigurationPolicyAssociationInput(v *StartConfigurationPolicyAssociationInput) error {
 	if v == nil {
 		return nil
@@ -3874,11 +3837,6 @@ func validateOpUpdateConnectorV2Input(v *UpdateConnectorV2Input) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorV2Input"}
 	if v.ConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
-	}
-	if v.Provider != nil {
-		if err := validateProviderUpdateConfiguration(v.Provider); err != nil {
-			invalidParams.AddNested("Provider", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

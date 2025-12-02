@@ -64,6 +64,34 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+//	An exception thrown when attempting to create a resource with an identifier
+//
+// that already exists.
+type DuplicateIdException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DuplicateIdException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DuplicateIdException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DuplicateIdException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DuplicateIdException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DuplicateIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The exception that occurs when the service encounters an unexpected internal
 // error. This is a temporary condition that will resolve itself with retries. We
 // recommend implementing exponential backoff retry logic in your application.

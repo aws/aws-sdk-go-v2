@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables aggregation across Amazon Web Services Regions. This API is in public
-// preview and subject to change.
+// Enables aggregation across Amazon Web Services Regions.
 func (c *Client) CreateAggregatorV2(ctx context.Context, params *CreateAggregatorV2Input, optFns ...func(*Options)) (*CreateAggregatorV2Output, error) {
 	if params == nil {
 		params = &CreateAggregatorV2Input{}

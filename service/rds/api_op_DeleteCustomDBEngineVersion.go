@@ -50,7 +50,9 @@ func (c *Client) DeleteCustomDBEngineVersion(ctx context.Context, params *Delete
 
 type DeleteCustomDBEngineVersionInput struct {
 
-	// The database engine. RDS Custom for Oracle supports the following values:
+	// The database engine.
+	//
+	// RDS Custom for Oracle supports the following values:
 	//
 	//   - custom-oracle-ee
 	//
@@ -59,6 +61,18 @@ type DeleteCustomDBEngineVersionInput struct {
 	//   - custom-oracle-se2
 	//
 	//   - custom-oracle-se2-cdb
+	//
+	// RDS Custom for SQL Server supports the following values:
+	//
+	//   - custom-sqlserver-ee
+	//
+	//   - custom-sqlserver-se
+	//
+	//   - ccustom-sqlserver-web
+	//
+	//   - custom-sqlserver-dev
+	//
+	// RDS for SQL Server supports only sqlserver-dev-ee .
 	//
 	// This member is required.
 	Engine *string
@@ -105,6 +119,10 @@ type DeleteCustomDBEngineVersionOutput struct {
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string
 
+	// The database installation files (ISO and EXE) uploaded to Amazon S3 for your
+	// database engine version to import to Amazon RDS. Required for sqlserver-dev-ee .
+	DatabaseInstallationFiles []string
+
 	// The name of the Amazon S3 bucket that contains your database installation files.
 	DatabaseInstallationFilesS3BucketName *string
 
@@ -125,6 +143,10 @@ type DeleteCustomDBEngineVersionOutput struct {
 	// The types of logs that the database engine has available for export to
 	// CloudWatch Logs.
 	ExportableLogTypes []string
+
+	// The reason that the custom engine version creation for sqlserver-dev-ee failed
+	// with an incompatible-installation-media status.
+	FailureReason *string
 
 	// The EC2 image
 	Image *types.CustomDBEngineVersionAMI

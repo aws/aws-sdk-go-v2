@@ -985,6 +985,21 @@ func validateTags(v []types.Tag) error {
 	}
 }
 
+func validateVectorOptions(v *types.VectorOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VectorOptions"}
+	if len(v.ServerlessVectorAcceleration) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerlessVectorAcceleration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetEffectiveLifecyclePolicyInput(v *BatchGetEffectiveLifecyclePolicyInput) error {
 	if v == nil {
 		return nil
@@ -1070,6 +1085,11 @@ func validateOpCreateCollectionInput(v *CreateCollectionInput) error {
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VectorOptions != nil {
+		if err := validateVectorOptions(v.VectorOptions); err != nil {
+			invalidParams.AddNested("VectorOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

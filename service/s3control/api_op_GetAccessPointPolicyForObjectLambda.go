@@ -25,10 +25,6 @@ import (
 //
 // [PutAccessPointPolicyForObjectLambda]
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [PutAccessPointPolicyForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html
 // [DeleteAccessPointPolicyForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html
 func (c *Client) GetAccessPointPolicyForObjectLambda(ctx context.Context, params *GetAccessPointPolicyForObjectLambdaInput, optFns ...func(*Options)) (*GetAccessPointPolicyForObjectLambdaOutput, error) {

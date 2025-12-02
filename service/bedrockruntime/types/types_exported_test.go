@@ -26,6 +26,28 @@ func ExampleAsyncInvokeOutputDataConfig_outputUsage() {
 
 var _ *types.AsyncInvokeS3OutputDataConfig
 
+func ExampleAudioSource_outputUsage() {
+	var union types.AudioSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AudioSourceMemberBytes:
+		_ = v.Value // Value is []byte
+
+	case *types.AudioSourceMemberS3Location:
+		_ = v.Value // Value is types.S3Location
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3Location
+var _ []byte
+
 func ExampleCitationGeneratedContent_outputUsage() {
 	var union types.CitationGeneratedContent
 	// type switches can be used to check the union value
@@ -100,6 +122,9 @@ func ExampleContentBlock_outputUsage() {
 	var union types.ContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ContentBlockMemberAudio:
+		_ = v.Value // Value is types.AudioBlock
+
 	case *types.ContentBlockMemberCachePoint:
 		_ = v.Value // Value is types.CachePointBlock
 
@@ -147,6 +172,7 @@ var _ *types.SearchResultBlock
 var _ *types.DocumentBlock
 var _ *string
 var _ types.ReasoningContentBlock
+var _ *types.AudioBlock
 var _ *types.CachePointBlock
 var _ types.GuardrailConverseContentBlock
 var _ *types.ImageBlock
@@ -160,6 +186,9 @@ func ExampleContentBlockDelta_outputUsage() {
 	switch v := union.(type) {
 	case *types.ContentBlockDeltaMemberCitation:
 		_ = v.Value // Value is types.CitationsDelta
+
+	case *types.ContentBlockDeltaMemberImage:
+		_ = v.Value // Value is types.ImageBlockDelta
 
 	case *types.ContentBlockDeltaMemberReasoningContent:
 		_ = v.Value // Value is types.ReasoningContentBlockDelta
@@ -182,6 +211,7 @@ func ExampleContentBlockDelta_outputUsage() {
 	}
 }
 
+var _ *types.ImageBlockDelta
 var _ types.ReasoningContentBlockDelta
 var _ *types.ToolUseBlockDelta
 var _ *string
@@ -192,6 +222,9 @@ func ExampleContentBlockStart_outputUsage() {
 	var union types.ContentBlockStart
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ContentBlockStartMemberImage:
+		_ = v.Value // Value is types.ImageBlockStart
+
 	case *types.ContentBlockStartMemberToolResult:
 		_ = v.Value // Value is types.ToolResultBlockStart
 
@@ -207,6 +240,7 @@ func ExampleContentBlockStart_outputUsage() {
 	}
 }
 
+var _ *types.ImageBlockStart
 var _ *types.ToolUseBlockStart
 var _ *types.ToolResultBlockStart
 
@@ -663,6 +697,9 @@ func ExampleToolResultBlockDelta_outputUsage() {
 	var union types.ToolResultBlockDelta
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ToolResultBlockDeltaMemberJson:
+		_ = v.Value // Value is document.Interface
+
 	case *types.ToolResultBlockDeltaMemberText:
 		_ = v.Value // Value is string
 
@@ -676,6 +713,7 @@ func ExampleToolResultBlockDelta_outputUsage() {
 }
 
 var _ *string
+var _ document.Interface
 
 func ExampleToolResultContentBlock_outputUsage() {
 	var union types.ToolResultContentBlock

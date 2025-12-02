@@ -49,10 +49,6 @@ import (
 //
 // [GetBucketReplication]
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [Replicating objects for S3 on Outposts]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html
 // [GetBucketReplication]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html
 // [Setting up IAM with S3 on Outposts]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsIAM.html

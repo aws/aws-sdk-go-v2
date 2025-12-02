@@ -184,6 +184,9 @@ func ExampleProviderUpdateConfiguration_outputUsage() {
 	case *types.ProviderUpdateConfigurationMemberJiraCloud:
 		_ = v.Value // Value is types.JiraCloudUpdateConfiguration
 
+	case *types.ProviderUpdateConfigurationMemberServiceNow:
+		_ = v.Value // Value is types.ServiceNowUpdateConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -193,6 +196,7 @@ func ExampleProviderUpdateConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.ServiceNowUpdateConfiguration
 var _ *types.JiraCloudUpdateConfiguration
 
 func ExampleTarget_outputUsage() {

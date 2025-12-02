@@ -67,6 +67,9 @@ type ListMetadataGenerationRunsInput struct {
 	// The status of the metadata generation runs.
 	Status types.MetadataGenerationRunStatus
 
+	// The target ID for which you want to list metadata generation runs.
+	TargetIdentifier *string
+
 	// The type of the metadata generation runs.
 	Type types.MetadataGenerationRunType
 

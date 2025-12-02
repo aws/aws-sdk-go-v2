@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing telemetry rule in your account.
+//	Updates an existing telemetry rule in your account. If multiple users attempt
+//
+// to modify the same telemetry rule simultaneously, a ConflictException is
+// returned to provide specific error information for concurrent modification
+// scenarios.
 func (c *Client) UpdateTelemetryRule(ctx context.Context, params *UpdateTelemetryRuleInput, optFns ...func(*Options)) (*UpdateTelemetryRuleOutput, error) {
 	if params == nil {
 		params = &UpdateTelemetryRuleInput{}

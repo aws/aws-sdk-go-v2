@@ -104,6 +104,9 @@ type GetGatewayOutput struct {
 	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the gateway.
 	KmsKeyArn *string
 
+	// The policy engine configuration for the gateway.
+	PolicyEngineConfiguration *types.GatewayPolicyEngineConfiguration
+
 	// The configuration for a gateway protocol. This structure defines how the
 	// gateway communicates with external services.
 	ProtocolConfiguration types.GatewayProtocolConfiguration

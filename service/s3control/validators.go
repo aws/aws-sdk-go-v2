@@ -3456,6 +3456,11 @@ func validateStorageLensConfiguration(v *types.StorageLensConfiguration) error {
 			invalidParams.AddNested("DataExport", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ExpandedPrefixesDataExport != nil {
+		if err := validateStorageLensExpandedPrefixesDataExport(v.ExpandedPrefixesDataExport); err != nil {
+			invalidParams.AddNested("ExpandedPrefixesDataExport", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AwsOrg != nil {
 		if err := validateStorageLensAwsOrg(v.AwsOrg); err != nil {
 			invalidParams.AddNested("AwsOrg", err.(smithy.InvalidParamsError))
@@ -3483,6 +3488,11 @@ func validateStorageLensDataExport(v *types.StorageLensDataExport) error {
 			invalidParams.AddNested("CloudWatchMetrics", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.StorageLensTableDestination != nil {
+		if err := validateStorageLensTableDestination(v.StorageLensTableDestination); err != nil {
+			invalidParams.AddNested("StorageLensTableDestination", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3498,6 +3508,28 @@ func validateStorageLensDataExportEncryption(v *types.StorageLensDataExportEncry
 	if v.SSEKMS != nil {
 		if err := validateSSEKMS(v.SSEKMS); err != nil {
 			invalidParams.AddNested("SSEKMS", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensExpandedPrefixesDataExport(v *types.StorageLensExpandedPrefixesDataExport) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensExpandedPrefixesDataExport"}
+	if v.S3BucketDestination != nil {
+		if err := validateS3BucketDestination(v.S3BucketDestination); err != nil {
+			invalidParams.AddNested("S3BucketDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StorageLensTableDestination != nil {
+		if err := validateStorageLensTableDestination(v.StorageLensTableDestination); err != nil {
+			invalidParams.AddNested("StorageLensTableDestination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3581,6 +3613,23 @@ func validateStorageLensGroupOrOperator(v *types.StorageLensGroupOrOperator) err
 	if v.MatchAnyTag != nil {
 		if err := validateMatchAnyTag(v.MatchAnyTag); err != nil {
 			invalidParams.AddNested("MatchAnyTag", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensTableDestination(v *types.StorageLensTableDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensTableDestination"}
+	if v.Encryption != nil {
+		if err := validateStorageLensDataExportEncryption(v.Encryption); err != nil {
+			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

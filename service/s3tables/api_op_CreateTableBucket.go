@@ -22,8 +22,11 @@ import (
 //   - If you use this operation with the optional encryptionConfiguration
 //     parameter you must have the s3tables:PutTableBucketEncryption permission.
 //
-//   - You must have the s3tables:TagResource permission in addition to
-//     s3tables:CreateTableBucket permission to create a table bucket with tags.
+//   - If you use this operation with the storageClassConfiguration request
+//     parameter, you must have the s3tables:PutTableBucketStorageClass permission.
+//
+//   - To create a table bucket with tags, you must have the s3tables:TagResource
+//     permission in addition to s3tables:CreateTableBucket permission.
 //
 // [Creating a table bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html
 func (c *Client) CreateTableBucket(ctx context.Context, params *CreateTableBucketInput, optFns ...func(*Options)) (*CreateTableBucketOutput, error) {
@@ -53,6 +56,12 @@ type CreateTableBucketInput struct {
 	// created in this bucket unless overridden at the table level. The configuration
 	// includes the encryption algorithm and, if using SSE-KMS, the KMS key to use.
 	EncryptionConfiguration *types.EncryptionConfiguration
+
+	// The default storage class configuration for the table bucket. This
+	// configuration will be applied to all new tables created in this bucket unless
+	// overridden at the table level. If not specified, the service default storage
+	// class will be used.
+	StorageClassConfiguration *types.StorageClassConfiguration
 
 	// A map of user-defined tags that you would like to apply to the table bucket
 	// that you are creating. A tag is a key-value pair that you apply to your

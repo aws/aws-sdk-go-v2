@@ -74,6 +74,12 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
+	// A list of additional storage volumes to create for the DB instance. You can
+	// create up to three additional storage volumes using the names rdsdbdata2 ,
+	// rdsdbdata3 , and rdsdbdata4 . Additional storage volumes are supported for RDS
+	// for Oracle and RDS for SQL Server DB instances only.
+	AdditionalStorageVolumes []types.AdditionalStorageVolume
+
 	// The amount of storage (in gibibytes) to allocate initially for the DB instance.
 	// Follow the allocation rules specified in CreateDBInstance.
 	//

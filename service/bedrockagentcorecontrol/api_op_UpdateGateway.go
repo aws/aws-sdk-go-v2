@@ -77,6 +77,12 @@ type UpdateGatewayInput struct {
 	// The updated ARN of the KMS key used to encrypt the gateway.
 	KmsKeyArn *string
 
+	// The updated policy engine configuration for the gateway. A policy engine is a
+	// collection of policies that evaluates and authorizes agent tool calls. When
+	// associated with a gateway, the policy engine intercepts all agent requests and
+	// determines whether to allow or deny each action based on the defined policies.
+	PolicyEngineConfiguration *types.GatewayPolicyEngineConfiguration
+
 	// The configuration for a gateway protocol. This structure defines how the
 	// gateway communicates with external services.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
@@ -149,6 +155,9 @@ type UpdateGatewayOutput struct {
 
 	// The updated ARN of the KMS key used to encrypt the gateway.
 	KmsKeyArn *string
+
+	// The updated policy engine configuration for the gateway.
+	PolicyEngineConfiguration *types.GatewayPolicyEngineConfiguration
 
 	// The configuration for a gateway protocol. This structure defines how the
 	// gateway communicates with external services.

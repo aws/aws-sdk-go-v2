@@ -50,6 +50,9 @@ type IcebergMetadata struct {
 	// This member is required.
 	Schema *IcebergSchema
 
+	// Contains configuration properties for an Iceberg table.
+	Properties map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -93,6 +96,34 @@ type IcebergUnreferencedFileRemovalSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the most recent successful replication update to a
+// destination.
+type LastSuccessfulReplicatedUpdate struct {
+
+	// The S3 location of the metadata that was successfully replicated.
+	//
+	// This member is required.
+	MetadataLocation *string
+
+	// The timestamp when the replication update completed successfully.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about tables that are managed by S3 Tables, including
+// replication information for replica tables.
+type ManagedTableInformation struct {
+
+	// If this table is a replica, contains information about the source table from
+	// which it is replicated.
+	ReplicationInformation *ReplicationInformation
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a namespace.
 type NamespaceSummary struct {
 
@@ -126,6 +157,58 @@ type NamespaceSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a destination table bucket for replication.
+type ReplicationDestination struct {
+
+	// The Amazon Resource Name (ARN) of the destination table bucket where tables
+	// will be replicated.
+	//
+	// This member is required.
+	DestinationTableBucketARN *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains status information for a replication destination, including the
+// current replication state, last successful update, and any error messages.
+type ReplicationDestinationStatusModel struct {
+
+	// The Amazon Resource Name (ARN) of the destination table bucket.
+	//
+	// This member is required.
+	DestinationTableBucketArn *string
+
+	// The current status of replication to this destination.
+	//
+	// This member is required.
+	ReplicationStatus ReplicationStatus
+
+	// The Amazon Resource Name (ARN) of the destination table.
+	DestinationTableArn *string
+
+	// If replication has failed, this field contains an error message describing the
+	// failure reason.
+	FailureMessage *string
+
+	// Information about the most recent successful replication update to this
+	// destination.
+	LastSuccessfulReplicatedUpdate *LastSuccessfulReplicatedUpdate
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the source of a replicated table.
+type ReplicationInformation struct {
+
+	// The Amazon Resource Name (ARN) of the source table from which this table is
+	// replicated.
+	//
+	// This member is required.
+	SourceTableARN *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a schema field.
 type SchemaField struct {
 
@@ -146,6 +229,20 @@ type SchemaField struct {
 	// field. By default, this is false and null values are allowed in the field. If
 	// this is true the field does not allow null values.
 	Required bool
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for the storage class of tables or table buckets.
+// This allows you to optimize storage costs by selecting the appropriate storage
+// class based on your access patterns and performance requirements.
+type StorageClassConfiguration struct {
+
+	// The storage class for the table or table bucket. Valid values include storage
+	// classes optimized for different access patterns and cost profiles.
+	//
+	// This member is required.
+	StorageClass StorageClass
 
 	noSmithyDocumentSerde
 }
@@ -182,6 +279,38 @@ type TableBucketMaintenanceSettingsMemberIcebergUnreferencedFileRemoval struct {
 func (*TableBucketMaintenanceSettingsMemberIcebergUnreferencedFileRemoval) isTableBucketMaintenanceSettings() {
 }
 
+// The replication configuration for a table bucket. This configuration defines
+// how tables in the source bucket are replicated to destination table buckets,
+// including the IAM role used for replication.
+type TableBucketReplicationConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role that S3 Tables assumes to
+	// replicate tables on your behalf.
+	//
+	// This member is required.
+	Role *string
+
+	// An array of replication rules that define which tables to replicate and where
+	// to replicate them.
+	//
+	// This member is required.
+	Rules []TableBucketReplicationRule
+
+	noSmithyDocumentSerde
+}
+
+// Defines a rule for replicating tables from a source table bucket to one or more
+// destination table buckets.
+type TableBucketReplicationRule struct {
+
+	// An array of destination table buckets where tables should be replicated.
+	//
+	// This member is required.
+	Destinations []ReplicationDestination
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a table bucket.
 type TableBucketSummary struct {
 
@@ -214,7 +343,7 @@ type TableBucketSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the values that define a maintenance configuration for a table.
+// The values that define a maintenance configuration for a table.
 type TableMaintenanceConfigurationValue struct {
 
 	// Contains details about the settings for the maintenance configuration.
@@ -289,6 +418,79 @@ type TableMetadataMemberIceberg struct {
 
 func (*TableMetadataMemberIceberg) isTableMetadata() {}
 
+// The expiration configuration settings for records in a table, and the status of
+// the configuration. If the status of the configuration is enabled, records expire
+// and are automatically removed after the number of days specified in the record
+// expiration settings for the table.
+type TableRecordExpirationConfigurationValue struct {
+
+	// The expiration settings for records in the table.
+	Settings *TableRecordExpirationSettings
+
+	// The status of the expiration settings for records in the table.
+	Status TableRecordExpirationStatus
+
+	noSmithyDocumentSerde
+}
+
+// Provides metrics for the record expiration job that most recently ran for a
+// table. The metrics provide insight into the amount of data that was removed when
+// the job ran.
+type TableRecordExpirationJobMetrics struct {
+
+	// The total number of data files that were removed when the job ran.
+	DeletedDataFiles *int64
+
+	// The total number of records that were removed when the job ran.
+	DeletedRecords *int64
+
+	// The total size (in bytes) of the data files that were removed when the job ran.
+	RemovedFilesSize *int64
+
+	noSmithyDocumentSerde
+}
+
+// The record expiration setting that specifies when records expire and are
+// automatically removed from a table.
+type TableRecordExpirationSettings struct {
+
+	// If you enable record expiration for a table, you can specify the number of days
+	// to retain your table records. For example, to retain your table records for one
+	// year, set this value to 365 .
+	Days *int32
+
+	noSmithyDocumentSerde
+}
+
+// The replication configuration for an individual table. This configuration
+// defines how the table is replicated to destination tables.
+type TableReplicationConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role that S3 Tables assumes to
+	// replicate the table on your behalf.
+	//
+	// This member is required.
+	Role *string
+
+	// An array of replication rules that define where this table should be replicated.
+	//
+	// This member is required.
+	Rules []TableReplicationRule
+
+	noSmithyDocumentSerde
+}
+
+// Defines a rule for replicating a table to one or more destination tables.
+type TableReplicationRule struct {
+
+	// An array of destination table buckets where this table should be replicated.
+	//
+	// This member is required.
+	Destinations []ReplicationDestination
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a table.
 type TableSummary struct {
 
@@ -321,6 +523,10 @@ type TableSummary struct {
 	//
 	// This member is required.
 	Type TableType
+
+	// The Amazon Web Services service managing this table, if applicable. For
+	// example, a replicated table is managed by the S3 Tables replication service.
+	ManagedByService *string
 
 	// The unique identifier for the namespace that contains this table.
 	NamespaceId *string

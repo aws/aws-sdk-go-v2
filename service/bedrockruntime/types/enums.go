@@ -23,6 +23,51 @@ func (AsyncInvokeStatus) Values() []AsyncInvokeStatus {
 	}
 }
 
+type AudioFormat string
+
+// Enum values for AudioFormat
+const (
+	AudioFormatMp3  AudioFormat = "mp3"
+	AudioFormatOpus AudioFormat = "opus"
+	AudioFormatWav  AudioFormat = "wav"
+	AudioFormatAac  AudioFormat = "aac"
+	AudioFormatFlac AudioFormat = "flac"
+	AudioFormatMp4  AudioFormat = "mp4"
+	AudioFormatOgg  AudioFormat = "ogg"
+	AudioFormatMkv  AudioFormat = "mkv"
+	AudioFormatMka  AudioFormat = "mka"
+	AudioFormatXAac AudioFormat = "x-aac"
+	AudioFormatM4a  AudioFormat = "m4a"
+	AudioFormatMpeg AudioFormat = "mpeg"
+	AudioFormatMpga AudioFormat = "mpga"
+	AudioFormatPcm  AudioFormat = "pcm"
+	AudioFormatWebm AudioFormat = "webm"
+)
+
+// Values returns all known values for AudioFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioFormat) Values() []AudioFormat {
+	return []AudioFormat{
+		"mp3",
+		"opus",
+		"wav",
+		"aac",
+		"flac",
+		"mp4",
+		"ogg",
+		"mkv",
+		"mka",
+		"x-aac",
+		"m4a",
+		"mpeg",
+		"mpga",
+		"pcm",
+		"webm",
+	}
+}
+
 type CachePointType string
 
 // Enum values for CachePointType
@@ -749,6 +794,8 @@ const (
 	StopReasonStopSequence               StopReason = "stop_sequence"
 	StopReasonGuardrailIntervened        StopReason = "guardrail_intervened"
 	StopReasonContentFiltered            StopReason = "content_filtered"
+	StopReasonMalformedModelOutput       StopReason = "malformed_model_output"
+	StopReasonMalformedToolUse           StopReason = "malformed_tool_use"
 	StopReasonModelContextWindowExceeded StopReason = "model_context_window_exceeded"
 )
 
@@ -764,6 +811,8 @@ func (StopReason) Values() []StopReason {
 		"stop_sequence",
 		"guardrail_intervened",
 		"content_filtered",
+		"malformed_model_output",
+		"malformed_tool_use",
 		"model_context_window_exceeded",
 	}
 }

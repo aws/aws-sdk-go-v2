@@ -16,6 +16,7 @@
         "api_op_CreateEvent.go",
         "api_op_DeleteEvent.go",
         "api_op_DeleteMemoryRecord.go",
+        "api_op_Evaluate.go",
         "api_op_GetAgentCard.go",
         "api_op_GetBrowserSession.go",
         "api_op_GetCodeInterpreterSession.go",

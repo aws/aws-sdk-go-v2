@@ -20,10 +20,6 @@ import (
 //
 // Returns the status of the resource policy associated with an Object Lambda
 // Access Point.
-//
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
 func (c *Client) GetAccessPointPolicyStatusForObjectLambda(ctx context.Context, params *GetAccessPointPolicyStatusForObjectLambdaInput, optFns ...func(*Options)) (*GetAccessPointPolicyStatusForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &GetAccessPointPolicyStatusForObjectLambdaInput{}

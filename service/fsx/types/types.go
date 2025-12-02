@@ -515,6 +515,25 @@ type CreateAggregateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the FSx for ONTAP volume that the S3 access point will be attached
+// to, and the file system user identity.
+type CreateAndAttachS3AccessPointOntapConfiguration struct {
+
+	// Specifies the file system user identity to use for authorizing file read and
+	// write requests that are made using this S3 access point.
+	//
+	// This member is required.
+	FileSystemIdentity *OntapFileSystemIdentity
+
+	// The ID of the FSx for ONTAP volume to which you want the S3 access point
+	// attached.
+	//
+	// This member is required.
+	VolumeId *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the FSx for OpenZFS volume that the S3 access point will be attached
 // to, and the file system user identity.
 type CreateAndAttachS3AccessPointOpenZFSConfiguration struct {
@@ -3226,6 +3245,38 @@ type OntapFileSystemConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the file system user identity that will be used for authorizing all
+// file access requests that are made using the S3 access point. The identity can
+// be either a UNIX user or a Windows user.
+type OntapFileSystemIdentity struct {
+
+	// Specifies the FSx for ONTAP user identity type. Valid values are UNIX and
+	// WINDOWS .
+	//
+	// This member is required.
+	Type OntapFileSystemUserType
+
+	// Specifies the UNIX user identity for file system operations.
+	UnixUser *OntapUnixFileSystemUser
+
+	// Specifies the Windows user identity for file system operations.
+	WindowsUser *OntapWindowsFileSystemUser
+
+	noSmithyDocumentSerde
+}
+
+// The FSx for ONTAP UNIX file system user that is used for authorizing all file
+// access requests that are made using the S3 access point.
+type OntapUnixFileSystemUser struct {
+
+	// The name of the UNIX user. The name can be up to 256 characters long.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of an Amazon FSx for NetApp ONTAP volume.
 type OntapVolumeConfiguration struct {
 
@@ -3335,6 +3386,19 @@ type OntapVolumeConfiguration struct {
 	//
 	// [Volume types]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types.html
 	VolumeStyle VolumeStyle
+
+	noSmithyDocumentSerde
+}
+
+// The FSx for ONTAP Windows file system user that is used for authorizing all
+// file access requests that are made using the S3 access point.
+type OntapWindowsFileSystemUser struct {
+
+	// The name of the Windows user. The name can be up to 256 characters long and
+	// supports Active Directory users.
+	//
+	// This member is required.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -3859,6 +3923,9 @@ type S3AccessPointAttachment struct {
 	// access point.
 	Name *string
 
+	// The ONTAP configuration of the S3 access point attachment.
+	OntapConfiguration *S3AccessPointOntapConfiguration
+
 	// The OpenZFSConfiguration of the S3 access point attachment.
 	OpenZFSConfiguration *S3AccessPointOpenZFSConfiguration
 
@@ -3880,6 +3947,20 @@ type S3AccessPointAttachmentsFilter struct {
 
 	// The values of the filter.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the FSx for ONTAP attachment configuration of an S3 access point
+// attachment.
+type S3AccessPointOntapConfiguration struct {
+
+	// The file system identity used to authorize file access requests made using the
+	// S3 access point.
+	FileSystemIdentity *OntapFileSystemIdentity
+
+	// The ID of the FSx for ONTAP volume that the S3 access point is attached to.
+	VolumeId *string
 
 	noSmithyDocumentSerde
 }

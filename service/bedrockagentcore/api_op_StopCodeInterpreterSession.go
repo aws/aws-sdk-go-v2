@@ -25,8 +25,8 @@ import (
 //
 // [GetCodeInterpreterSession]
 //
-// [StartCodeInterpreterSession]: https://docs.aws.amazon.com/API_StartCodeInterpreterSession.html
-// [GetCodeInterpreterSession]: https://docs.aws.amazon.com/API_GetCodeInterpreterSession.html
+// [StartCodeInterpreterSession]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartCodeInterpreterSession.html
+// [GetCodeInterpreterSession]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html
 func (c *Client) StopCodeInterpreterSession(ctx context.Context, params *StopCodeInterpreterSessionInput, optFns ...func(*Options)) (*StopCodeInterpreterSessionOutput, error) {
 	if params == nil {
 		params = &StopCodeInterpreterSessionInput{}

@@ -25,10 +25,6 @@ import (
 // s3:PutStorageLensConfigurationTagging action. For more information, see [Setting permissions to use Amazon S3 Storage Lens] in the
 // Amazon S3 User Guide.
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [Setting permissions to use Amazon S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
 // [Assessing your storage activity and usage with Amazon S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
 func (c *Client) PutStorageLensConfigurationTagging(ctx context.Context, params *PutStorageLensConfigurationTaggingInput, optFns ...func(*Options)) (*PutStorageLensConfigurationTaggingOutput, error) {

@@ -288,6 +288,25 @@ func (IndexSource) Values() []IndexSource {
 	}
 }
 
+type IndexType string
+
+// Enum values for IndexType
+const (
+	IndexTypeFacet      IndexType = "FACET"
+	IndexTypeFieldIndex IndexType = "FIELD_INDEX"
+)
+
+// Values returns all known values for IndexType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IndexType) Values() []IndexType {
+	return []IndexType{
+		"FACET",
+		"FIELD_INDEX",
+	}
+}
+
 type InheritedProperty string
 
 // Enum values for InheritedProperty
@@ -340,6 +359,26 @@ const (
 func (IntegrationType) Values() []IntegrationType {
 	return []IntegrationType{
 		"OPENSEARCH",
+	}
+}
+
+type ListAggregateLogGroupSummariesGroupBy string
+
+// Enum values for ListAggregateLogGroupSummariesGroupBy
+const (
+	ListAggregateLogGroupSummariesGroupByDataSourceNameTypeAndFormat ListAggregateLogGroupSummariesGroupBy = "DATA_SOURCE_NAME_TYPE_AND_FORMAT"
+	ListAggregateLogGroupSummariesGroupByDataSourceNameAndType       ListAggregateLogGroupSummariesGroupBy = "DATA_SOURCE_NAME_AND_TYPE"
+)
+
+// Values returns all known values for ListAggregateLogGroupSummariesGroupBy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListAggregateLogGroupSummariesGroupBy) Values() []ListAggregateLogGroupSummariesGroupBy {
+	return []ListAggregateLogGroupSummariesGroupBy{
+		"DATA_SOURCE_NAME_TYPE_AND_FORMAT",
+		"DATA_SOURCE_NAME_AND_TYPE",
 	}
 }
 
@@ -540,6 +579,30 @@ func (QueryStatus) Values() []QueryStatus {
 		"Cancelled",
 		"Timeout",
 		"Unknown",
+	}
+}
+
+type S3TableIntegrationSourceStatus string
+
+// Enum values for S3TableIntegrationSourceStatus
+const (
+	S3TableIntegrationSourceStatusActive                     S3TableIntegrationSourceStatus = "ACTIVE"
+	S3TableIntegrationSourceStatusUnhealthy                  S3TableIntegrationSourceStatus = "UNHEALTHY"
+	S3TableIntegrationSourceStatusFailed                     S3TableIntegrationSourceStatus = "FAILED"
+	S3TableIntegrationSourceStatusDataSourceDeleteInProgress S3TableIntegrationSourceStatus = "DATA_SOURCE_DELETE_IN_PROGRESS"
+)
+
+// Values returns all known values for S3TableIntegrationSourceStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3TableIntegrationSourceStatus) Values() []S3TableIntegrationSourceStatus {
+	return []S3TableIntegrationSourceStatus{
+		"ACTIVE",
+		"UNHEALTHY",
+		"FAILED",
+		"DATA_SOURCE_DELETE_IN_PROGRESS",
 	}
 }
 

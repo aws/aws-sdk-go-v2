@@ -11,8 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // Returns a list of all the vector buckets that are owned by the authenticated
 // sender of the request.
 //

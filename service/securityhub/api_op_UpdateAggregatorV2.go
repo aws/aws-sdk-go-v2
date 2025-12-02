@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Udpates the configuration for the Aggregator V2. This API is in public preview
-// and subject to change.
+// Udpates the configuration for the Aggregator V2.
 func (c *Client) UpdateAggregatorV2(ctx context.Context, params *UpdateAggregatorV2Input, optFns ...func(*Options)) (*UpdateAggregatorV2Output, error) {
 	if params == nil {
 		params = &UpdateAggregatorV2Input{}

@@ -2043,7 +2043,8 @@ type AwsAutoScalingLaunchConfigurationDetails struct {
 	// The identifier of the RAM disk associated with the AMI.
 	RamdiskId *string
 
-	// The security groups to assign to the instances in the Auto Scaling group.
+	// The security groups to assign to the instances in the Amazon EC2 Auto Scaling
+	// group.
 	SecurityGroups []string
 
 	// The maximum hourly price to be paid for any Spot Instance that is launched to
@@ -2965,8 +2966,7 @@ type AwsCloudFrontDistributionOriginGroups struct {
 }
 
 // A complex type that describes the Amazon S3 bucket, HTTP server (for example, a
-// web server), Elemental MediaStore, or other server from which CloudFront gets
-// your files.
+// web server), or other server from which CloudFront gets your files.
 type AwsCloudFrontDistributionOriginItem struct {
 
 	// An origin that is not an Amazon S3 bucket, with one exception. If the Amazon S3
@@ -6371,7 +6371,7 @@ type AwsEcsServiceDetails struct {
 	EnableExecuteCommand *bool
 
 	// After a task starts, the amount of time in seconds that the Amazon ECS service
-	// scheduler ignores unhealthy Elastic Load Balancing target health checks.
+	// scheduler ignores unhealthy ELB target health checks.
 	HealthCheckGracePeriodSeconds *int32
 
 	// The launch type that the service uses.
@@ -6408,8 +6408,8 @@ type AwsEcsServiceDetails struct {
 	PropagateTags *string
 
 	// The ARN of the IAM role that is associated with the service. The role allows
-	// the Amazon ECS container agent to register container instances with an Elastic
-	// Load Balancing load balancer.
+	// the Amazon ECS container agent to register container instances with an ELB load
+	// balancer.
 	Role *string
 
 	// The scheduling strategy to use for the service.
@@ -6465,8 +6465,7 @@ type AwsEcsServiceLoadBalancersDetails struct {
 	// Balancer or a Network Load Balancer, the load balancer name is omitted.
 	LoadBalancerName *string
 
-	// The ARN of the Elastic Load Balancing target group or groups associated with a
-	// service or task set.
+	// The ARN of the ELB target group or groups associated with a service or task set.
 	//
 	// Only specified when using an Application Load Balancer or a Network Load
 	// Balancer. For a Classic Load Balancer, the target group ARN is omitted.
@@ -15641,8 +15640,6 @@ type JiraCloudProviderConfiguration struct {
 type JiraCloudUpdateConfiguration struct {
 
 	// The project key for a JiraCloud instance.
-	//
-	// This member is required.
 	ProjectKey *string
 
 	noSmithyDocumentSerde
@@ -16805,6 +16802,7 @@ type ProviderSummary struct {
 // The following types satisfy this interface:
 //
 //	ProviderUpdateConfigurationMemberJiraCloud
+//	ProviderUpdateConfigurationMemberServiceNow
 type ProviderUpdateConfiguration interface {
 	isProviderUpdateConfiguration()
 }
@@ -16818,6 +16816,16 @@ type ProviderUpdateConfigurationMemberJiraCloud struct {
 }
 
 func (*ProviderUpdateConfigurationMemberJiraCloud) isProviderUpdateConfiguration() {}
+
+// The parameters required to update the configuration for a ServiceNow
+// integration.
+type ProviderUpdateConfigurationMemberServiceNow struct {
+	Value ServiceNowUpdateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderUpdateConfigurationMemberServiceNow) isProviderUpdateConfiguration() {}
 
 // Identifies where the sensitive data begins and ends.
 type Range struct {
@@ -18262,13 +18270,16 @@ type Sequence struct {
 // Information about a ServiceNow ITSM integration.
 type ServiceNowDetail struct {
 
-	// The status of the authorization between Jira Cloud and the service.
+	// The status of the authorization between ServiceNow and the service.
 	//
 	// This member is required.
 	AuthStatus ConnectorAuthStatus
 
-	// The clientId of ServiceNow ITSM.
-	ClientId *string
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that contains the ServiceNow credentials.
+	//
+	// This member is required.
+	SecretArn *string
 
 	// The instanceName of ServiceNow ITSM.
 	InstanceName *string
@@ -18280,20 +18291,26 @@ type ServiceNowDetail struct {
 // Security Hub and ServiceNow ITSM.
 type ServiceNowProviderConfiguration struct {
 
-	// The client ID of ServiceNow ITSM.
-	//
-	// This member is required.
-	ClientId *string
-
-	// The client secret of ServiceNow ITSM.
-	//
-	// This member is required.
-	ClientSecret *string
-
 	// The instance name of ServiceNow ITSM.
 	//
 	// This member is required.
 	InstanceName *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that contains the ServiceNow credentials.
+	//
+	// This member is required.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The parameters used to modify an existing ServiceNow integration.
+type ServiceNowUpdateConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that contains the ServiceNow credentials.
+	SecretArn *string
 
 	noSmithyDocumentSerde
 }

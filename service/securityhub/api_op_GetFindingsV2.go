@@ -15,8 +15,7 @@ import (
 // Return a list of findings that match the specified criteria. GetFindings and
 // GetFindingsV2 both use securityhub:GetFindings in the Action element of an IAM
 // policy statement. You must have permission to perform the
-// securityhub:GetFindings action. This API is in public preview and subject to
-// change.
+// securityhub:GetFindings action.
 func (c *Client) GetFindingsV2(ctx context.Context, params *GetFindingsV2Input, optFns ...func(*Options)) (*GetFindingsV2Output, error) {
 	if params == nil {
 		params = &GetFindingsV2Input{}

@@ -2822,6 +2822,18 @@ func awsAwsjson10_serializeDocumentUpdateIamIdentityCenterConfigOptions(v *types
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentVectorOptions(v *types.VectorOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ServerlessVectorAcceleration) > 0 {
+		ok := object.Key("ServerlessVectorAcceleration")
+		ok.String(string(v.ServerlessVectorAcceleration))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentVpcEndpointFilters(v *types.VpcEndpointFilters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2974,6 +2986,13 @@ func awsAwsjson10_serializeOpDocumentCreateCollectionInput(v *CreateCollectionIn
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	if v.VectorOptions != nil {
+		ok := object.Key("vectorOptions")
+		if err := awsAwsjson10_serializeDocumentVectorOptions(v.VectorOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

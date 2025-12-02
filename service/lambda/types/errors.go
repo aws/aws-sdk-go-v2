@@ -7,6 +7,35 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The callback ID token has either expired or the callback associated with the
+// token has already been closed.
+type CallbackTimeoutException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CallbackTimeoutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CallbackTimeoutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CallbackTimeoutException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CallbackTimeoutException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CallbackTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The maximum number of capacity providers for your account has been exceeded.
 // For more information, see [Lambda quotas]
 //
@@ -130,6 +159,38 @@ func (e *CodeVerificationFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CodeVerificationFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The durable execution with the specified name has already been started. Each
+// durable execution name must be unique within the function. Use a different name
+// or check the status of the existing execution.
+type DurableExecutionAlreadyStartedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DurableExecutionAlreadyStartedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DurableExecutionAlreadyStartedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DurableExecutionAlreadyStartedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DurableExecutionAlreadyStartedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DurableExecutionAlreadyStartedException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // Need additional permissions to configure VPC settings.
 type EC2AccessDeniedException struct {

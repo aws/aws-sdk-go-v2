@@ -69,6 +69,28 @@ func ExampleAuthorizerConfiguration_outputUsage() {
 
 var _ *types.CustomJWTAuthorizerConfiguration
 
+func ExampleClaimMatchValueType_outputUsage() {
+	var union types.ClaimMatchValueType
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ClaimMatchValueTypeMemberMatchValueString:
+		_ = v.Value // Value is string
+
+	case *types.ClaimMatchValueTypeMemberMatchValueStringList:
+		_ = v.Value // Value is []string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ []string
+
 func ExampleCode_outputUsage() {
 	var union types.Code
 	// type switches can be used to check the union value
@@ -105,6 +127,24 @@ func ExampleConsolidationConfiguration_outputUsage() {
 
 var _ types.CustomConsolidationConfiguration
 
+func ExampleContent_outputUsage() {
+	var union types.Content
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentMemberRawText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleCredentialProvider_outputUsage() {
 	var union types.CredentialProvider
 	// type switches can be used to check the union value
@@ -131,6 +171,9 @@ func ExampleCustomConfigurationInput_outputUsage() {
 	var union types.CustomConfigurationInput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.CustomConfigurationInputMemberEpisodicOverride:
+		_ = v.Value // Value is types.EpisodicOverrideConfigurationInput
+
 	case *types.CustomConfigurationInputMemberSelfManagedConfiguration:
 		_ = v.Value // Value is types.SelfManagedConfigurationInput
 
@@ -156,11 +199,15 @@ var _ *types.UserPreferenceOverrideConfigurationInput
 var _ *types.SummaryOverrideConfigurationInput
 var _ *types.SelfManagedConfigurationInput
 var _ *types.SemanticOverrideConfigurationInput
+var _ *types.EpisodicOverrideConfigurationInput
 
 func ExampleCustomConsolidationConfiguration_outputUsage() {
 	var union types.CustomConsolidationConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.CustomConsolidationConfigurationMemberEpisodicConsolidationOverride:
+		_ = v.Value // Value is types.EpisodicConsolidationOverride
+
 	case *types.CustomConsolidationConfigurationMemberSemanticConsolidationOverride:
 		_ = v.Value // Value is types.SemanticConsolidationOverride
 
@@ -181,12 +228,16 @@ func ExampleCustomConsolidationConfiguration_outputUsage() {
 
 var _ *types.UserPreferenceConsolidationOverride
 var _ *types.SemanticConsolidationOverride
+var _ *types.EpisodicConsolidationOverride
 var _ *types.SummaryConsolidationOverride
 
 func ExampleCustomConsolidationConfigurationInput_outputUsage() {
 	var union types.CustomConsolidationConfigurationInput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.CustomConsolidationConfigurationInputMemberEpisodicConsolidationOverride:
+		_ = v.Value // Value is types.EpisodicOverrideConsolidationConfigurationInput
+
 	case *types.CustomConsolidationConfigurationInputMemberSemanticConsolidationOverride:
 		_ = v.Value // Value is types.SemanticOverrideConsolidationConfigurationInput
 
@@ -208,11 +259,15 @@ func ExampleCustomConsolidationConfigurationInput_outputUsage() {
 var _ *types.SummaryOverrideConsolidationConfigurationInput
 var _ *types.UserPreferenceOverrideConsolidationConfigurationInput
 var _ *types.SemanticOverrideConsolidationConfigurationInput
+var _ *types.EpisodicOverrideConsolidationConfigurationInput
 
 func ExampleCustomExtractionConfiguration_outputUsage() {
 	var union types.CustomExtractionConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.CustomExtractionConfigurationMemberEpisodicExtractionOverride:
+		_ = v.Value // Value is types.EpisodicExtractionOverride
+
 	case *types.CustomExtractionConfigurationMemberSemanticExtractionOverride:
 		_ = v.Value // Value is types.SemanticExtractionOverride
 
@@ -230,11 +285,15 @@ func ExampleCustomExtractionConfiguration_outputUsage() {
 
 var _ *types.SemanticExtractionOverride
 var _ *types.UserPreferenceExtractionOverride
+var _ *types.EpisodicExtractionOverride
 
 func ExampleCustomExtractionConfigurationInput_outputUsage() {
 	var union types.CustomExtractionConfigurationInput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.CustomExtractionConfigurationInputMemberEpisodicExtractionOverride:
+		_ = v.Value // Value is types.EpisodicOverrideExtractionConfigurationInput
+
 	case *types.CustomExtractionConfigurationInputMemberSemanticExtractionOverride:
 		_ = v.Value // Value is types.SemanticOverrideExtractionConfigurationInput
 
@@ -252,6 +311,115 @@ func ExampleCustomExtractionConfigurationInput_outputUsage() {
 
 var _ *types.SemanticOverrideExtractionConfigurationInput
 var _ *types.UserPreferenceOverrideExtractionConfigurationInput
+var _ *types.EpisodicOverrideExtractionConfigurationInput
+
+func ExampleCustomReflectionConfiguration_outputUsage() {
+	var union types.CustomReflectionConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomReflectionConfigurationMemberEpisodicReflectionOverride:
+		_ = v.Value // Value is types.EpisodicReflectionOverride
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EpisodicReflectionOverride
+
+func ExampleCustomReflectionConfigurationInput_outputUsage() {
+	var union types.CustomReflectionConfigurationInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomReflectionConfigurationInputMemberEpisodicReflectionOverride:
+		_ = v.Value // Value is types.EpisodicOverrideReflectionConfigurationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EpisodicOverrideReflectionConfigurationInput
+
+func ExampleDataSourceConfig_outputUsage() {
+	var union types.DataSourceConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DataSourceConfigMemberCloudWatchLogs:
+		_ = v.Value // Value is types.CloudWatchLogsInputConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CloudWatchLogsInputConfig
+
+func ExampleEvaluatorConfig_outputUsage() {
+	var union types.EvaluatorConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluatorConfigMemberLlmAsAJudge:
+		_ = v.Value // Value is types.LlmAsAJudgeEvaluatorConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LlmAsAJudgeEvaluatorConfig
+
+func ExampleEvaluatorModelConfig_outputUsage() {
+	var union types.EvaluatorModelConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluatorModelConfigMemberBedrockEvaluatorModelConfig:
+		_ = v.Value // Value is types.BedrockEvaluatorModelConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.BedrockEvaluatorModelConfig
+
+func ExampleEvaluatorReference_outputUsage() {
+	var union types.EvaluatorReference
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluatorReferenceMemberEvaluatorId:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleExtractionConfiguration_outputUsage() {
 	var union types.ExtractionConfiguration
@@ -270,6 +438,32 @@ func ExampleExtractionConfiguration_outputUsage() {
 }
 
 var _ types.CustomExtractionConfiguration
+
+func ExampleFilterValue_outputUsage() {
+	var union types.FilterValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FilterValueMemberBooleanValue:
+		_ = v.Value // Value is bool
+
+	case *types.FilterValueMemberDoubleValue:
+		_ = v.Value // Value is float64
+
+	case *types.FilterValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *bool
+var _ *float64
 
 func ExampleGatewayProtocolConfiguration_outputUsage() {
 	var union types.GatewayProtocolConfiguration
@@ -311,6 +505,9 @@ func ExampleMcpTargetConfiguration_outputUsage() {
 	var union types.McpTargetConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.McpTargetConfigurationMemberApiGateway:
+		_ = v.Value // Value is types.ApiGatewayTargetConfiguration
+
 	case *types.McpTargetConfigurationMemberLambda:
 		_ = v.Value // Value is types.McpLambdaTargetConfiguration
 
@@ -333,6 +530,7 @@ func ExampleMcpTargetConfiguration_outputUsage() {
 }
 
 var _ *types.McpLambdaTargetConfiguration
+var _ *types.ApiGatewayTargetConfiguration
 var _ types.ApiSchemaConfiguration
 var _ *types.McpServerTargetConfiguration
 
@@ -342,6 +540,9 @@ func ExampleMemoryStrategyInput_outputUsage() {
 	switch v := union.(type) {
 	case *types.MemoryStrategyInputMemberCustomMemoryStrategy:
 		_ = v.Value // Value is types.CustomMemoryStrategyInput
+
+	case *types.MemoryStrategyInputMemberEpisodicMemoryStrategy:
+		_ = v.Value // Value is types.EpisodicMemoryStrategyInput
 
 	case *types.MemoryStrategyInputMemberSemanticMemoryStrategy:
 		_ = v.Value // Value is types.SemanticMemoryStrategyInput
@@ -361,6 +562,7 @@ func ExampleMemoryStrategyInput_outputUsage() {
 	}
 }
 
+var _ *types.EpisodicMemoryStrategyInput
 var _ *types.UserPreferenceMemoryStrategyInput
 var _ *types.CustomMemoryStrategyInput
 var _ *types.SemanticMemoryStrategyInput
@@ -401,6 +603,28 @@ func ExampleModifyExtractionConfiguration_outputUsage() {
 }
 
 var _ types.CustomExtractionConfigurationInput
+
+func ExampleModifyReflectionConfiguration_outputUsage() {
+	var union types.ModifyReflectionConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ModifyReflectionConfigurationMemberCustomReflectionConfiguration:
+		_ = v.Value // Value is types.CustomReflectionConfigurationInput
+
+	case *types.ModifyReflectionConfigurationMemberEpisodicReflectionConfiguration:
+		_ = v.Value // Value is types.EpisodicReflectionConfigurationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.CustomReflectionConfigurationInput
+var _ *types.EpisodicReflectionConfigurationInput
 
 func ExampleOauth2Discovery_outputUsage() {
 	var union types.Oauth2Discovery
@@ -524,6 +748,68 @@ var _ *types.SalesforceOauth2ProviderConfigOutput
 var _ *types.GoogleOauth2ProviderConfigOutput
 var _ *types.LinkedinOauth2ProviderConfigOutput
 
+func ExamplePolicyDefinition_outputUsage() {
+	var union types.PolicyDefinition
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PolicyDefinitionMemberCedar:
+		_ = v.Value // Value is types.CedarPolicy
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CedarPolicy
+
+func ExampleRatingScale_outputUsage() {
+	var union types.RatingScale
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RatingScaleMemberCategorical:
+		_ = v.Value // Value is []types.CategoricalScaleDefinition
+
+	case *types.RatingScaleMemberNumerical:
+		_ = v.Value // Value is []types.NumericalScaleDefinition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.CategoricalScaleDefinition
+var _ []types.NumericalScaleDefinition
+
+func ExampleReflectionConfiguration_outputUsage() {
+	var union types.ReflectionConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ReflectionConfigurationMemberCustomReflectionConfiguration:
+		_ = v.Value // Value is types.CustomReflectionConfiguration
+
+	case *types.ReflectionConfigurationMemberEpisodicReflectionConfiguration:
+		_ = v.Value // Value is types.EpisodicReflectionConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EpisodicReflectionConfiguration
+var _ types.CustomReflectionConfiguration
+
 func ExampleRequestHeaderConfiguration_outputUsage() {
 	var union types.RequestHeaderConfiguration
 	// type switches can be used to check the union value
@@ -541,6 +827,24 @@ func ExampleRequestHeaderConfiguration_outputUsage() {
 }
 
 var _ []string
+
+func ExampleResource_outputUsage() {
+	var union types.Resource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ResourceMemberArn:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleTargetConfiguration_outputUsage() {
 	var union types.TargetConfiguration

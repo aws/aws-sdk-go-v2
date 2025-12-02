@@ -122,6 +122,18 @@ func TestCheckSnapshot_CreateCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateEvaluator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEvaluator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateEvaluator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
@@ -163,6 +175,42 @@ func TestCheckSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 	_, err := svc.CreateOauth2CredentialProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateOauth2CredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePolicyEngine(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePolicyEngine(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePolicyEngine")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -242,6 +290,18 @@ func TestCheckSnapshot_DeleteCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteEvaluator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEvaluator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteEvaluator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
@@ -283,6 +343,54 @@ func TestCheckSnapshot_DeleteOauth2CredentialProvider(t *testing.T) {
 	_, err := svc.DeleteOauth2CredentialProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteOauth2CredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteOnlineEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePolicyEngine(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePolicyEngine(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePolicyEngine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -362,6 +470,18 @@ func TestCheckSnapshot_GetCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetEvaluator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEvaluator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEvaluator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetGateway(context.Background(), nil, func(o *Options) {
@@ -403,6 +523,66 @@ func TestCheckSnapshot_GetOauth2CredentialProvider(t *testing.T) {
 	_, err := svc.GetOauth2CredentialProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetOauth2CredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetOnlineEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPolicyEngine(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyEngine(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicyEngine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPolicyGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicyGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -506,6 +686,18 @@ func TestCheckSnapshot_ListCodeInterpreters(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListEvaluators(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEvaluators(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEvaluators")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListGateways(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListGateways(context.Background(), nil, func(o *Options) {
@@ -554,6 +746,66 @@ func TestCheckSnapshot_ListOauth2CredentialProviders(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListOnlineEvaluationConfigs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOnlineEvaluationConfigs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOnlineEvaluationConfigs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicyEngines(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyEngines(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicyEngines")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicyGenerationAssets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyGenerationAssets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicyGenerationAssets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicyGenerations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyGenerations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicyGenerations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -578,11 +830,35 @@ func TestCheckSnapshot_ListWorkloadIdentities(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SetTokenVaultCMK(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SetTokenVaultCMK(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SetTokenVaultCMK")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartPolicyGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartPolicyGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartPolicyGeneration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -662,6 +938,18 @@ func TestCheckSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateEvaluator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEvaluator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateEvaluator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateGateway(context.Background(), nil, func(o *Options) {
@@ -703,6 +991,42 @@ func TestCheckSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 	_, err := svc.UpdateOauth2CredentialProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateOauth2CredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePolicyEngine(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePolicyEngine(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePolicyEngine")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -781,6 +1105,18 @@ func TestUpdateSnapshot_CreateCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateEvaluator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEvaluator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateEvaluator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
@@ -822,6 +1158,42 @@ func TestUpdateSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 	_, err := svc.CreateOauth2CredentialProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateOauth2CredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePolicyEngine(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePolicyEngine(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePolicyEngine")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -901,6 +1273,18 @@ func TestUpdateSnapshot_DeleteCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteEvaluator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEvaluator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteEvaluator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
@@ -942,6 +1326,54 @@ func TestUpdateSnapshot_DeleteOauth2CredentialProvider(t *testing.T) {
 	_, err := svc.DeleteOauth2CredentialProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteOauth2CredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteOnlineEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePolicyEngine(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePolicyEngine(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePolicyEngine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1021,6 +1453,18 @@ func TestUpdateSnapshot_GetCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetEvaluator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEvaluator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEvaluator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetGateway(context.Background(), nil, func(o *Options) {
@@ -1062,6 +1506,66 @@ func TestUpdateSnapshot_GetOauth2CredentialProvider(t *testing.T) {
 	_, err := svc.GetOauth2CredentialProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetOauth2CredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetOnlineEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPolicyEngine(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyEngine(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicyEngine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPolicyGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicyGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1165,6 +1669,18 @@ func TestUpdateSnapshot_ListCodeInterpreters(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListEvaluators(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEvaluators(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEvaluators")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListGateways(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListGateways(context.Background(), nil, func(o *Options) {
@@ -1213,6 +1729,66 @@ func TestUpdateSnapshot_ListOauth2CredentialProviders(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListOnlineEvaluationConfigs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOnlineEvaluationConfigs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOnlineEvaluationConfigs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicyEngines(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyEngines(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicyEngines")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicyGenerationAssets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyGenerationAssets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicyGenerationAssets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicyGenerations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyGenerations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicyGenerations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1237,11 +1813,35 @@ func TestUpdateSnapshot_ListWorkloadIdentities(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SetTokenVaultCMK(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SetTokenVaultCMK(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SetTokenVaultCMK")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartPolicyGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartPolicyGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartPolicyGeneration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1321,6 +1921,18 @@ func TestUpdateSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateEvaluator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEvaluator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateEvaluator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateGateway(context.Background(), nil, func(o *Options) {
@@ -1362,6 +1974,42 @@ func TestUpdateSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 	_, err := svc.UpdateOauth2CredentialProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateOauth2CredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePolicyEngine(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePolicyEngine(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePolicyEngine")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

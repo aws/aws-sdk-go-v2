@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a V2 automation rule. This API is in public preview and subject to
-// change.
+// Deletes a V2 automation rule.
 func (c *Client) DeleteAutomationRuleV2(ctx context.Context, params *DeleteAutomationRuleV2Input, optFns ...func(*Options)) (*DeleteAutomationRuleV2Output, error) {
 	if params == nil {
 		params = &DeleteAutomationRuleV2Input{}

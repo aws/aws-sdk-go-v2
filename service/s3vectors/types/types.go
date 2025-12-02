@@ -8,11 +8,11 @@ import (
 	"time"
 )
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
-// The encryption configuration for a vector bucket. By default, if you don't
-// specify, all new vectors in Amazon S3 vector buckets use server-side encryption
-// with Amazon S3 managed keys (SSE-S3), specifically AES256 .
+// The encryption configuration for a vector bucket or index. By default, if you
+// don't specify, all new vectors in Amazon S3 vector buckets use server-side
+// encryption with Amazon S3 managed keys (SSE-S3), specifically AES256 . You can
+// optionally override bucket level encryption settings, and set a specific
+// encryption configuration for a vector index at the time of index creation.
 type EncryptionConfiguration struct {
 
 	// Amazon Web Services Key Management Service (KMS) customer managed key ID to use
@@ -35,8 +35,6 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // The attributes of a vector returned by the GetVectors operation.
 type GetOutputVector struct {
 
@@ -54,8 +52,6 @@ type GetOutputVector struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // The attributes of a vector index.
 type Index struct {
 
@@ -94,14 +90,17 @@ type Index struct {
 	// This member is required.
 	VectorBucketName *string
 
+	// The encryption configuration for a vector index. By default, if you don't
+	// specify, all new vectors in the vector index will use the encryption
+	// configuration of the vector bucket.
+	EncryptionConfiguration *EncryptionConfiguration
+
 	// The metadata configuration for the vector index.
 	MetadataConfiguration *MetadataConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // Summary information about a vector index.
 type IndexSummary struct {
 
@@ -128,8 +127,6 @@ type IndexSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // The attributes of a vector returned by the ListVectors operation.
 type ListOutputVector struct {
 
@@ -147,8 +144,6 @@ type ListOutputVector struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // The metadata configuration for a vector index.
 type MetadataConfiguration struct {
 
@@ -168,8 +163,6 @@ type MetadataConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // The attributes of a vector to add to a vector index.
 type PutInputVector struct {
 
@@ -201,8 +194,6 @@ type PutInputVector struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // The attributes of a vector in the approximate nearest neighbor search.
 type QueryOutputVector struct {
 
@@ -210,9 +201,6 @@ type QueryOutputVector struct {
 	//
 	// This member is required.
 	Key *string
-
-	// The vector data associated with the vector, if requested.
-	Data VectorData
 
 	// The measure of similarity between the vector in the response and the query
 	// vector.
@@ -240,8 +228,6 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // The attributes of a vector bucket.
 type VectorBucket struct {
 
@@ -266,8 +252,6 @@ type VectorBucket struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // Summary information about a vector bucket.
 type VectorBucketSummary struct {
 
@@ -289,8 +273,6 @@ type VectorBucketSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // The vector data in different formats.
 //
 // The following types satisfy this interface:

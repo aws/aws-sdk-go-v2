@@ -165,6 +165,27 @@ func (BrowserStatus) Values() []BrowserStatus {
 	}
 }
 
+type ClaimMatchOperatorType string
+
+// Enum values for ClaimMatchOperatorType
+const (
+	ClaimMatchOperatorTypeEquals      ClaimMatchOperatorType = "EQUALS"
+	ClaimMatchOperatorTypeContains    ClaimMatchOperatorType = "CONTAINS"
+	ClaimMatchOperatorTypeContainsAny ClaimMatchOperatorType = "CONTAINS_ANY"
+)
+
+// Values returns all known values for ClaimMatchOperatorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClaimMatchOperatorType) Values() []ClaimMatchOperatorType {
+	return []ClaimMatchOperatorType{
+		"EQUALS",
+		"CONTAINS",
+		"CONTAINS_ANY",
+	}
+}
+
 type CodeInterpreterNetworkMode string
 
 // Enum values for CodeInterpreterNetworkMode
@@ -300,6 +321,73 @@ func (CredentialProviderVendorType) Values() []CredentialProviderVendorType {
 	}
 }
 
+type EvaluatorLevel string
+
+// Enum values for EvaluatorLevel
+const (
+	EvaluatorLevelToolCall EvaluatorLevel = "TOOL_CALL"
+	EvaluatorLevelTrace    EvaluatorLevel = "TRACE"
+	EvaluatorLevelSession  EvaluatorLevel = "SESSION"
+)
+
+// Values returns all known values for EvaluatorLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluatorLevel) Values() []EvaluatorLevel {
+	return []EvaluatorLevel{
+		"TOOL_CALL",
+		"TRACE",
+		"SESSION",
+	}
+}
+
+type EvaluatorStatus string
+
+// Enum values for EvaluatorStatus
+const (
+	EvaluatorStatusActive       EvaluatorStatus = "ACTIVE"
+	EvaluatorStatusCreating     EvaluatorStatus = "CREATING"
+	EvaluatorStatusCreateFailed EvaluatorStatus = "CREATE_FAILED"
+	EvaluatorStatusUpdating     EvaluatorStatus = "UPDATING"
+	EvaluatorStatusUpdateFailed EvaluatorStatus = "UPDATE_FAILED"
+	EvaluatorStatusDeleting     EvaluatorStatus = "DELETING"
+)
+
+// Values returns all known values for EvaluatorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluatorStatus) Values() []EvaluatorStatus {
+	return []EvaluatorStatus{
+		"ACTIVE",
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+	}
+}
+
+type EvaluatorType string
+
+// Enum values for EvaluatorType
+const (
+	EvaluatorTypeBuiltin EvaluatorType = "Builtin"
+	EvaluatorTypeCustom  EvaluatorType = "Custom"
+)
+
+// Values returns all known values for EvaluatorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluatorType) Values() []EvaluatorType {
+	return []EvaluatorType{
+		"Builtin",
+		"Custom",
+	}
+}
+
 type ExceptionLevel string
 
 // Enum values for ExceptionLevel
@@ -314,6 +402,66 @@ const (
 func (ExceptionLevel) Values() []ExceptionLevel {
 	return []ExceptionLevel{
 		"DEBUG",
+	}
+}
+
+type FilterOperator string
+
+// Enum values for FilterOperator
+const (
+	FilterOperatorEquals             FilterOperator = "Equals"
+	FilterOperatorNotEquals          FilterOperator = "NotEquals"
+	FilterOperatorGreaterThan        FilterOperator = "GreaterThan"
+	FilterOperatorLessThan           FilterOperator = "LessThan"
+	FilterOperatorGreaterThanOrEqual FilterOperator = "GreaterThanOrEqual"
+	FilterOperatorLessThanOrEqual    FilterOperator = "LessThanOrEqual"
+	FilterOperatorContains           FilterOperator = "Contains"
+	FilterOperatorNotContains        FilterOperator = "NotContains"
+)
+
+// Values returns all known values for FilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterOperator) Values() []FilterOperator {
+	return []FilterOperator{
+		"Equals",
+		"NotEquals",
+		"GreaterThan",
+		"LessThan",
+		"GreaterThanOrEqual",
+		"LessThanOrEqual",
+		"Contains",
+		"NotContains",
+	}
+}
+
+type FindingType string
+
+// Enum values for FindingType
+const (
+	FindingTypeValid           FindingType = "VALID"
+	FindingTypeInvalid         FindingType = "INVALID"
+	FindingTypeNotTranslatable FindingType = "NOT_TRANSLATABLE"
+	FindingTypeAllowAll        FindingType = "ALLOW_ALL"
+	FindingTypeAllowNone       FindingType = "ALLOW_NONE"
+	FindingTypeDenyAll         FindingType = "DENY_ALL"
+	FindingTypeDenyNone        FindingType = "DENY_NONE"
+)
+
+// Values returns all known values for FindingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingType) Values() []FindingType {
+	return []FindingType{
+		"VALID",
+		"INVALID",
+		"NOT_TRANSLATABLE",
+		"ALLOW_ALL",
+		"ALLOW_NONE",
+		"DENY_ALL",
+		"DENY_NONE",
 	}
 }
 
@@ -333,6 +481,25 @@ func (GatewayInterceptionPoint) Values() []GatewayInterceptionPoint {
 	return []GatewayInterceptionPoint{
 		"REQUEST",
 		"RESPONSE",
+	}
+}
+
+type GatewayPolicyEngineMode string
+
+// Enum values for GatewayPolicyEngineMode
+const (
+	GatewayPolicyEngineModeLogOnly GatewayPolicyEngineMode = "LOG_ONLY"
+	GatewayPolicyEngineModeEnforce GatewayPolicyEngineMode = "ENFORCE"
+)
+
+// Values returns all known values for GatewayPolicyEngineMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayPolicyEngineMode) Values() []GatewayPolicyEngineMode {
+	return []GatewayPolicyEngineMode{
+		"LOG_ONLY",
+		"ENFORCE",
 	}
 }
 
@@ -377,6 +544,25 @@ func (GatewayStatus) Values() []GatewayStatus {
 		"DELETING",
 		"READY",
 		"FAILED",
+	}
+}
+
+type InboundTokenClaimValueType string
+
+// Enum values for InboundTokenClaimValueType
+const (
+	InboundTokenClaimValueTypeString      InboundTokenClaimValueType = "STRING"
+	InboundTokenClaimValueTypeStringArray InboundTokenClaimValueType = "STRING_ARRAY"
+)
+
+// Values returns all known values for InboundTokenClaimValueType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InboundTokenClaimValueType) Values() []InboundTokenClaimValueType {
+	return []InboundTokenClaimValueType{
+		"STRING",
+		"STRING_ARRAY",
 	}
 }
 
@@ -453,6 +639,7 @@ const (
 	MemoryStrategyTypeSummarization  MemoryStrategyType = "SUMMARIZATION"
 	MemoryStrategyTypeUserPreference MemoryStrategyType = "USER_PREFERENCE"
 	MemoryStrategyTypeCustom         MemoryStrategyType = "CUSTOM"
+	MemoryStrategyTypeEpisodic       MemoryStrategyType = "EPISODIC"
 )
 
 // Values returns all known values for MemoryStrategyType. Note that this can be
@@ -465,6 +652,7 @@ func (MemoryStrategyType) Values() []MemoryStrategyType {
 		"SUMMARIZATION",
 		"USER_PREFERENCE",
 		"CUSTOM",
+		"EPISODIC",
 	}
 }
 
@@ -487,6 +675,73 @@ func (NetworkMode) Values() []NetworkMode {
 	}
 }
 
+type OAuthGrantType string
+
+// Enum values for OAuthGrantType
+const (
+	OAuthGrantTypeClientCredentials OAuthGrantType = "CLIENT_CREDENTIALS"
+	OAuthGrantTypeAuthorizationCode OAuthGrantType = "AUTHORIZATION_CODE"
+)
+
+// Values returns all known values for OAuthGrantType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OAuthGrantType) Values() []OAuthGrantType {
+	return []OAuthGrantType{
+		"CLIENT_CREDENTIALS",
+		"AUTHORIZATION_CODE",
+	}
+}
+
+type OnlineEvaluationConfigStatus string
+
+// Enum values for OnlineEvaluationConfigStatus
+const (
+	OnlineEvaluationConfigStatusActive       OnlineEvaluationConfigStatus = "ACTIVE"
+	OnlineEvaluationConfigStatusCreating     OnlineEvaluationConfigStatus = "CREATING"
+	OnlineEvaluationConfigStatusCreateFailed OnlineEvaluationConfigStatus = "CREATE_FAILED"
+	OnlineEvaluationConfigStatusUpdating     OnlineEvaluationConfigStatus = "UPDATING"
+	OnlineEvaluationConfigStatusUpdateFailed OnlineEvaluationConfigStatus = "UPDATE_FAILED"
+	OnlineEvaluationConfigStatusDeleting     OnlineEvaluationConfigStatus = "DELETING"
+)
+
+// Values returns all known values for OnlineEvaluationConfigStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnlineEvaluationConfigStatus) Values() []OnlineEvaluationConfigStatus {
+	return []OnlineEvaluationConfigStatus{
+		"ACTIVE",
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+	}
+}
+
+type OnlineEvaluationExecutionStatus string
+
+// Enum values for OnlineEvaluationExecutionStatus
+const (
+	OnlineEvaluationExecutionStatusEnabled  OnlineEvaluationExecutionStatus = "ENABLED"
+	OnlineEvaluationExecutionStatusDisabled OnlineEvaluationExecutionStatus = "DISABLED"
+)
+
+// Values returns all known values for OnlineEvaluationExecutionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnlineEvaluationExecutionStatus) Values() []OnlineEvaluationExecutionStatus {
+	return []OnlineEvaluationExecutionStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type OverrideType string
 
 // Enum values for OverrideType
@@ -495,6 +750,7 @@ const (
 	OverrideTypeSummaryOverride        OverrideType = "SUMMARY_OVERRIDE"
 	OverrideTypeUserPreferenceOverride OverrideType = "USER_PREFERENCE_OVERRIDE"
 	OverrideTypeSelfManaged            OverrideType = "SELF_MANAGED"
+	OverrideTypeEpisodicOverride       OverrideType = "EPISODIC_OVERRIDE"
 )
 
 // Values returns all known values for OverrideType. Note that this can be
@@ -507,6 +763,107 @@ func (OverrideType) Values() []OverrideType {
 		"SUMMARY_OVERRIDE",
 		"USER_PREFERENCE_OVERRIDE",
 		"SELF_MANAGED",
+		"EPISODIC_OVERRIDE",
+	}
+}
+
+type PolicyEngineStatus string
+
+// Enum values for PolicyEngineStatus
+const (
+	PolicyEngineStatusCreating     PolicyEngineStatus = "CREATING"
+	PolicyEngineStatusActive       PolicyEngineStatus = "ACTIVE"
+	PolicyEngineStatusUpdating     PolicyEngineStatus = "UPDATING"
+	PolicyEngineStatusDeleting     PolicyEngineStatus = "DELETING"
+	PolicyEngineStatusCreateFailed PolicyEngineStatus = "CREATE_FAILED"
+	PolicyEngineStatusUpdateFailed PolicyEngineStatus = "UPDATE_FAILED"
+	PolicyEngineStatusDeleteFailed PolicyEngineStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for PolicyEngineStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyEngineStatus) Values() []PolicyEngineStatus {
+	return []PolicyEngineStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type PolicyGenerationStatus string
+
+// Enum values for PolicyGenerationStatus
+const (
+	PolicyGenerationStatusGenerating     PolicyGenerationStatus = "GENERATING"
+	PolicyGenerationStatusGenerated      PolicyGenerationStatus = "GENERATED"
+	PolicyGenerationStatusGenerateFailed PolicyGenerationStatus = "GENERATE_FAILED"
+	PolicyGenerationStatusDeleteFailed   PolicyGenerationStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for PolicyGenerationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyGenerationStatus) Values() []PolicyGenerationStatus {
+	return []PolicyGenerationStatus{
+		"GENERATING",
+		"GENERATED",
+		"GENERATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type PolicyStatus string
+
+// Enum values for PolicyStatus
+const (
+	PolicyStatusCreating     PolicyStatus = "CREATING"
+	PolicyStatusActive       PolicyStatus = "ACTIVE"
+	PolicyStatusUpdating     PolicyStatus = "UPDATING"
+	PolicyStatusDeleting     PolicyStatus = "DELETING"
+	PolicyStatusCreateFailed PolicyStatus = "CREATE_FAILED"
+	PolicyStatusUpdateFailed PolicyStatus = "UPDATE_FAILED"
+	PolicyStatusDeleteFailed PolicyStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for PolicyStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyStatus) Values() []PolicyStatus {
+	return []PolicyStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type PolicyValidationMode string
+
+// Enum values for PolicyValidationMode
+const (
+	PolicyValidationModeFailOnAnyFindings PolicyValidationMode = "FAIL_ON_ANY_FINDINGS"
+	PolicyValidationModeIgnoreAllFindings PolicyValidationMode = "IGNORE_ALL_FINDINGS"
+)
+
+// Values returns all known values for PolicyValidationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyValidationMode) Values() []PolicyValidationMode {
+	return []PolicyValidationMode{
+		"FAIL_ON_ANY_FINDINGS",
+		"IGNORE_ALL_FINDINGS",
 	}
 }
 
@@ -526,6 +883,35 @@ func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"SYSTEM",
 		"CUSTOM",
+	}
+}
+
+type RestApiMethod string
+
+// Enum values for RestApiMethod
+const (
+	RestApiMethodGet     RestApiMethod = "GET"
+	RestApiMethodDelete  RestApiMethod = "DELETE"
+	RestApiMethodHead    RestApiMethod = "HEAD"
+	RestApiMethodOptions RestApiMethod = "OPTIONS"
+	RestApiMethodPatch   RestApiMethod = "PATCH"
+	RestApiMethodPut     RestApiMethod = "PUT"
+	RestApiMethodPost    RestApiMethod = "POST"
+)
+
+// Values returns all known values for RestApiMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RestApiMethod) Values() []RestApiMethod {
+	return []RestApiMethod{
+		"GET",
+		"DELETE",
+		"HEAD",
+		"OPTIONS",
+		"PATCH",
+		"PUT",
+		"POST",
 	}
 }
 

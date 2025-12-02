@@ -8761,6 +8761,19 @@ func awsRestxml_serializeDocumentAccountLevel(v *types.AccountLevel, value smith
 			return err
 		}
 	}
+	if v.AdvancedPerformanceMetrics != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AdvancedPerformanceMetrics",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentAdvancedPerformanceMetrics(v.AdvancedPerformanceMetrics, el); err != nil {
+			return err
+		}
+	}
 	if v.BucketLevel != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -8851,6 +8864,22 @@ func awsRestxml_serializeDocumentAdvancedDataProtectionMetrics(v *types.Advanced
 	return nil
 }
 
+func awsRestxml_serializeDocumentAdvancedPerformanceMetrics(v *types.AdvancedPerformanceMetrics, value smithyxml.Value) error {
+	defer value.Close()
+	if v.IsEnabled {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IsEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.IsEnabled)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentAwsLambdaTransformation(v *types.AwsLambdaTransformation, value smithyxml.Value) error {
 	defer value.Close()
 	if v.FunctionArn != nil {
@@ -8916,6 +8945,19 @@ func awsRestxml_serializeDocumentBucketLevel(v *types.BucketLevel, value smithyx
 		}
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentAdvancedDataProtectionMetrics(v.AdvancedDataProtectionMetrics, el); err != nil {
+			return err
+		}
+	}
+	if v.AdvancedPerformanceMetrics != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AdvancedPerformanceMetrics",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentAdvancedPerformanceMetrics(v.AdvancedPerformanceMetrics, el); err != nil {
 			return err
 		}
 	}
@@ -12561,6 +12603,19 @@ func awsRestxml_serializeDocumentStorageLensConfiguration(v *types.StorageLensCo
 			return err
 		}
 	}
+	if v.ExpandedPrefixesDataExport != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ExpandedPrefixesDataExport",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStorageLensExpandedPrefixesDataExport(v.ExpandedPrefixesDataExport, el); err != nil {
+			return err
+		}
+	}
 	if v.Id != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -12595,6 +12650,17 @@ func awsRestxml_serializeDocumentStorageLensConfiguration(v *types.StorageLensCo
 		}
 		el := value.MemberElement(root)
 		el.Boolean(v.IsEnabled)
+	}
+	if v.PrefixDelimiter != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "PrefixDelimiter",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.PrefixDelimiter)
 	}
 	if v.StorageLensArn != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -12638,6 +12704,19 @@ func awsRestxml_serializeDocumentStorageLensDataExport(v *types.StorageLensDataE
 			return err
 		}
 	}
+	if v.StorageLensTableDestination != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "StorageLensTableDestination",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStorageLensTableDestination(v.StorageLensTableDestination, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -12666,6 +12745,37 @@ func awsRestxml_serializeDocumentStorageLensDataExportEncryption(v *types.Storag
 		}
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentSSES3(v.SSES3, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentStorageLensExpandedPrefixesDataExport(v *types.StorageLensExpandedPrefixesDataExport, value smithyxml.Value) error {
+	defer value.Close()
+	if v.S3BucketDestination != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "S3BucketDestination",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentS3BucketDestination(v.S3BucketDestination, el); err != nil {
+			return err
+		}
+	}
+	if v.StorageLensTableDestination != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "StorageLensTableDestination",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStorageLensTableDestination(v.StorageLensTableDestination, el); err != nil {
 			return err
 		}
 	}
@@ -13033,6 +13143,35 @@ func awsRestxml_serializeDocumentStorageLensGroupOrOperator(v *types.StorageLens
 		if err := awsRestxml_serializeDocumentMatchObjectSize(v.MatchObjectSize, el); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentStorageLensTableDestination(v *types.StorageLensTableDestination, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Encryption != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Encryption",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStorageLensDataExportEncryption(v.Encryption, el); err != nil {
+			return err
+		}
+	}
+	{
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IsEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.IsEnabled)
 	}
 	return nil
 }

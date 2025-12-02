@@ -23,10 +23,6 @@ import (
 //
 // GetAccessGrantsInstance is not supported for cross-account access. You can only
 // call the API from the account that owns the S3 Access Grants instance.
-//
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
 func (c *Client) GetAccessGrantsInstance(ctx context.Context, params *GetAccessGrantsInstanceInput, optFns ...func(*Options)) (*GetAccessGrantsInstanceOutput, error) {
 	if params == nil {
 		params = &GetAccessGrantsInstanceInput{}

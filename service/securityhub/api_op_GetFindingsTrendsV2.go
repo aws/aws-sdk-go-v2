@@ -13,8 +13,7 @@ import (
 )
 
 // Returns findings trend data based on the specified criteria. This operation
-// helps you analyze patterns and changes in findings over time. This API is in
-// public preview and subject to change.
+// helps you analyze patterns and changes in findings over time.
 func (c *Client) GetFindingsTrendsV2(ctx context.Context, params *GetFindingsTrendsV2Input, optFns ...func(*Options)) (*GetFindingsTrendsV2Output, error) {
 	if params == nil {
 		params = &GetFindingsTrendsV2Input{}

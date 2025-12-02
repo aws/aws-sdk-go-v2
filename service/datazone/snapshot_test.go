@@ -914,6 +914,18 @@ func TestCheckSnapshot_GetConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDataExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataExportConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataProduct(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataProduct(context.Background(), nil, func(o *Options) {
@@ -1687,6 +1699,18 @@ func TestCheckSnapshot_PostTimeSeriesDataPoints(t *testing.T) {
 	_, err := svc.PostTimeSeriesDataPoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PostTimeSeriesDataPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutDataExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutDataExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutDataExportConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2977,6 +3001,18 @@ func TestUpdateSnapshot_GetConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDataExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataExportConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDataProduct(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataProduct(context.Background(), nil, func(o *Options) {
@@ -3750,6 +3786,18 @@ func TestUpdateSnapshot_PostTimeSeriesDataPoints(t *testing.T) {
 	_, err := svc.PostTimeSeriesDataPoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PostTimeSeriesDataPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutDataExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutDataExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutDataExportConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

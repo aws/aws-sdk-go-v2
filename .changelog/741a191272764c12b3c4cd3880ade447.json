@@ -1,0 +1,8 @@
+{
+    "id": "741a1912-7276-4c12-b3c4-cd3880ade447",
+    "type": "feature",
+    "description": "ITSM enhancements: DRYRUN mode for testing ticket creation, ServiceNow now uses AWS Secrets Manager for credentials, ConnectorRegistrationsV2 renamed to RegisterConnectorV2, added ServiceQuotaExceededException error, and ConnectorStatus visibility in CreateConnectorV2.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

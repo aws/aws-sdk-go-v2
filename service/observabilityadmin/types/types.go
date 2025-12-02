@@ -6,6 +6,61 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Condition that matches based on the specific WAF action taken on the request.
+type ActionCondition struct {
+
+	//  The WAF action to match against (ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE,
+	// EXCLUDED_AS_COUNT).
+	Action Action
+
+	noSmithyDocumentSerde
+}
+
+// Advanced event selectors let you create fine-grained selectors for management,
+// data, and network activity events.
+type AdvancedEventSelector struct {
+
+	// Contains all selector statements in an advanced event selector.
+	//
+	// This member is required.
+	FieldSelectors []AdvancedFieldSelector
+
+	// An optional, descriptive name for an advanced event selector, such as "Log data
+	// events for only two S3 buckets".
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines criteria for selecting resources based on field values.
+type AdvancedFieldSelector struct {
+
+	//  The name of the field to use for selection.
+	//
+	// This member is required.
+	Field *string
+
+	//  Matches if the field value ends with the specified value.
+	EndsWith []string
+
+	//  Matches if the field value equals the specified value.
+	Equals []string
+
+	//  Matches if the field value does not end with the specified value.
+	NotEndsWith []string
+
+	//  Matches if the field value does not equal the specified value.
+	NotEquals []string
+
+	//  Matches if the field value does not start with the specified value.
+	NotStartsWith []string
+
+	//  Matches if the field value starts with the specified value.
+	StartsWith []string
+
+	noSmithyDocumentSerde
+}
+
 // Defines how telemetry data should be centralized across an Amazon Web Services
 // Organization, including source and destination configurations.
 type CentralizationRule struct {
@@ -99,6 +154,73 @@ type CentralizationRuleSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Parameters specific to Amazon Web Services CloudTrail telemetry configuration.
+type CloudtrailParameters struct {
+
+	//  The advanced event selectors to use for filtering Amazon Web Services
+	// CloudTrail events.
+	//
+	// This member is required.
+	AdvancedEventSelectors []AdvancedEventSelector
+
+	noSmithyDocumentSerde
+}
+
+// A single condition that can match based on WAF rule action or label name.
+type Condition struct {
+
+	//  Matches log records based on the WAF rule action taken (ALLOW, BLOCK, COUNT,
+	// etc.).
+	ActionCondition *ActionCondition
+
+	//  Matches log records based on WAF rule labels applied to the request.
+	LabelNameCondition *LabelNameCondition
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of pipeline configuration components including sources,
+// processors, and destinations.
+type ConfigurationSummary struct {
+
+	// The list of data sources that provide telemetry data to the pipeline.
+	DataSources []DataSource
+
+	// The total number of processors configured in the pipeline.
+	ProcessorCount *int32
+
+	// The list of processors configured in the pipeline for data transformation.
+	Processors []string
+
+	// The list of destinations where processed data is sent.
+	Sinks []string
+
+	// The list of data sources configured in the pipeline.
+	Sources []Source
+
+	noSmithyDocumentSerde
+}
+
+// Information about a data source associated with the telemetry pipeline. For
+// CloudWatch Logs sources, this includes both a name and type extracted from the
+// log event metadata. For third-party sources (such as S3), this includes only a
+// name, with the type field left empty.
+type DataSource struct {
+
+	// The name of the data source. For CloudWatch Logs sources, this corresponds to
+	// the data_source_name from the log event metadata. For third-party sources, this
+	// is either the configured data_source_name or defaults to the plugin name if not
+	// specified.
+	Name *string
+
+	// The type of the data source. For CloudWatch Logs sources, this corresponds to
+	// the data_source_type from the log event metadata. For third-party sources, this
+	// field is empty.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for centralization destination log groups, including encryption
 // and backup settings.
 type DestinationLogsConfiguration struct {
@@ -113,6 +235,126 @@ type DestinationLogsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+//	Configuration parameters for ELB load balancer logging, including output
+//
+// format and field delimiter settings.
+type ELBLoadBalancerLoggingParameters struct {
+
+	//  The delimiter character used to separate fields in ELB access log entries when
+	// using plain text format.
+	FieldDelimiter *string
+
+	//  The format for ELB access log entries (plain text or JSON format).
+	OutputFormat OutputFormat
+
+	noSmithyDocumentSerde
+}
+
+// Defines the encryption configuration for S3 Table integrations, including the
+// encryption algorithm and KMS key settings.
+type Encryption struct {
+
+	// The server-side encryption algorithm used for encrypting data in the S3 Table
+	// integration.
+	//
+	// This member is required.
+	SseAlgorithm SSEAlgorithm
+
+	// The Amazon Resource Name (ARN) of the KMS key used for encryption when using
+	// customer-managed keys.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+//	Specifies a field in the request to redact from WAF logs, such as headers,
+//
+// query parameters, or body content.
+type FieldToMatch struct {
+
+	//  Redacts the HTTP method from WAF logs.
+	Method *string
+
+	//  Redacts the entire query string from WAF logs.
+	QueryString *string
+
+	//  Redacts a specific header field by name from WAF logs.
+	SingleHeader *SingleHeader
+
+	//  Redacts the URI path from WAF logs.
+	UriPath *string
+
+	noSmithyDocumentSerde
+}
+
+//	A single filter condition that specifies behavior, requirement, and matching
+//
+// conditions for WAF log records.
+type Filter struct {
+
+	//  The action to take for log records matching this filter (KEEP or DROP).
+	Behavior FilterBehavior
+
+	//  The list of conditions that determine if a log record matches this filter.
+	Conditions []Condition
+
+	//  Whether the log record must meet all conditions (MEETS_ALL) or any condition
+	// (MEETS_ANY) to match this filter.
+	Requirement FilterRequirement
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about an S3 Table integration for listing
+// operations.
+type IntegrationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the S3 Table integration.
+	Arn *string
+
+	// The current status of the S3 Table integration.
+	Status IntegrationStatus
+
+	noSmithyDocumentSerde
+}
+
+//	Condition that matches based on WAF rule labels, with label names limited to
+//
+// 1024 characters.
+type LabelNameCondition struct {
+
+	//  The label name to match, supporting alphanumeric characters, underscores,
+	// hyphens, and colons.
+	LabelName *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration parameters for Amazon Bedrock AgentCore logging, including logType
+// settings.
+type LogDeliveryParameters struct {
+
+	// The type of log that the source is sending.
+	LogTypes []LogType
+
+	noSmithyDocumentSerde
+}
+
+//	Configuration that determines which WAF log records to keep or drop based on
+//
+// specified conditions.
+type LoggingFilter struct {
+
+	//  The default action (KEEP or DROP) for log records that don't match any filter
+	// conditions.
+	DefaultBehavior FilterBehavior
+
+	//  A list of filter conditions that determine log record handling behavior.
+	Filters []Filter
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for backing up centralized log data to a secondary region.
 type LogsBackupConfiguration struct {
 
@@ -122,7 +364,7 @@ type LogsBackupConfiguration struct {
 	// This member is required.
 	Region *string
 
-	// KMS Key arn belonging to the primary destination account and backup region, to
+	// KMS Key ARN belonging to the primary destination account and backup region, to
 	// encrypt newly created central log groups in the backup destination.
 	KmsKeyArn *string
 
@@ -147,9 +389,69 @@ type LogsEncryptionConfiguration struct {
 	// centralization into the destination log group.
 	EncryptionConflictResolutionStrategy EncryptionConflictResolutionStrategy
 
-	// KMS Key arn belonging to the primary destination account and region, to encrypt
+	// KMS Key ARN belonging to the primary destination account and region, to encrypt
 	// newly created central log groups in the primary destination.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the output from pipeline test operations, including processed records
+// and any errors encountered.
+type PipelineOutput struct {
+
+	// Any error that occurred during the pipeline test operation for this record.
+	Error *PipelineOutputError
+
+	// The processed record output from the pipeline test operation.
+	Record *Record
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed error information from pipeline test operations, providing
+// structured error responses for better debugging and troubleshooting
+// capabilities.
+type PipelineOutputError struct {
+
+	// The detailed error message describing what went wrong during the pipeline test
+	// operation for this record.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a test record structure used for pipeline testing operations to
+// validate data processing.
+type Record struct {
+
+	// The data content of the test record used for pipeline validation.
+	Data *string
+
+	// The type of the test record, indicating the format or category of the data.
+	Type RecordFormat
+
+	noSmithyDocumentSerde
+}
+
+//	Structure containing a name field limited to 64 characters for header or query
+//
+// parameter identification.
+type SingleHeader struct {
+
+	//  The name value, limited to 64 characters.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of source plugin types used in the pipeline configuration (such as
+// cloudwatch_logs or s3 ). Currently supports a single source per pipeline, but is
+// structured as a list to accommodate multiple pipelines in the configuration.
+type Source struct {
+
+	// The plugin name of the source, such as cloudwatch_logs or s3 .
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -187,14 +489,16 @@ type TelemetryConfiguration struct {
 	// resource. For example, 1728679196318 .
 	LastUpdateTimeStamp *int64
 
-	//  The identifier of the resource, for example i-0b22a22eec53b9321 .
+	//  The identifier of the resource, for example for Amazon VPC, it would be
+	// vpc-1a2b3c4d5e6f1a2b3 .
 	ResourceIdentifier *string
 
 	//  Tags associated with the resource, for example { Name: "ExampleInstance",
 	// Environment: "Development" } .
 	ResourceTags map[string]string
 
-	//  The type of resource, for example Amazon Web Services::EC2::Instance .
+	//  The type of resource, for example Amazon Web Services::EC2::Instance , or
+	// Amazon Web Services::EKS::Cluster , etc.
 	ResourceType ResourceType
 
 	//  The configuration state for the resource, for example { Logs: NotApplicable;
@@ -209,6 +513,10 @@ type TelemetryConfiguration struct {
 // Amazon Web Services resources.
 type TelemetryDestinationConfiguration struct {
 
+	//  Configuration parameters specific to Amazon Web Services CloudTrail when
+	// CloudTrail is the source type.
+	CloudtrailParameters *CloudtrailParameters
+
 	//  The pattern used to generate the destination path or name, supporting macros
 	// like <resourceId> and <accountId>.
 	DestinationPattern *string
@@ -217,12 +525,107 @@ type TelemetryDestinationConfiguration struct {
 	// Logs", "S3").
 	DestinationType DestinationType
 
+	//  Configuration parameters specific to ELB load balancer logging when ELB is the
+	// resource type.
+	ELBLoadBalancerLoggingParameters *ELBLoadBalancerLoggingParameters
+
+	// Configuration parameters specific to Amazon Bedrock AgentCore logging when
+	// Amazon Bedrock AgentCore is the resource type.
+	LogDeliveryParameters *LogDeliveryParameters
+
 	//  The number of days to retain the telemetry data in the destination.
 	RetentionInDays *int32
 
 	//  Configuration parameters specific to VPC Flow Logs when VPC is the resource
 	// type.
 	VPCFlowLogParameters *VPCFlowLogParameters
+
+	//  Configuration parameters specific to WAF logging when WAF is the resource
+	// type.
+	WAFLoggingParameters *WAFLoggingParameters
+
+	noSmithyDocumentSerde
+}
+
+// Represents a complete telemetry pipeline resource with configuration, status,
+// and metadata for data processing and transformation.
+type TelemetryPipeline struct {
+
+	// The Amazon Resource Name (ARN) of the telemetry pipeline.
+	Arn *string
+
+	// The configuration that defines how the telemetry pipeline processes data.
+	Configuration *TelemetryPipelineConfiguration
+
+	// The timestamp when the telemetry pipeline was created.
+	CreatedTimeStamp *int64
+
+	// The timestamp when the telemetry pipeline was last updated.
+	LastUpdateTimeStamp *int64
+
+	// The name of the telemetry pipeline.
+	Name *string
+
+	// The current status of the telemetry pipeline.
+	Status TelemetryPipelineStatus
+
+	// Additional information about the pipeline status, including reasons for failure
+	// states.
+	StatusReason *TelemetryPipelineStatusReason
+
+	// The key-value pairs associated with the telemetry pipeline resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the configuration for a telemetry pipeline, including how data flows
+// from sources through processors to destinations.
+type TelemetryPipelineConfiguration struct {
+
+	// The pipeline configuration body that defines the data processing rules and
+	// transformations.
+	//
+	// This member is required.
+	Body *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides detailed information about the status of a telemetry pipeline,
+// including reasons for specific states.
+type TelemetryPipelineStatusReason struct {
+
+	// A description of the pipeline status reason, providing additional context about
+	// the current state.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a telemetry pipeline for listing operations.
+type TelemetryPipelineSummary struct {
+
+	// The Amazon Resource Name (ARN) of the telemetry pipeline.
+	Arn *string
+
+	// A summary of the pipeline configuration components.
+	ConfigurationSummary *ConfigurationSummary
+
+	// The timestamp when the telemetry pipeline was created.
+	CreatedTimeStamp *int64
+
+	// The timestamp when the telemetry pipeline was last updated.
+	LastUpdateTimeStamp *int64
+
+	// The name of the telemetry pipeline.
+	Name *string
+
+	// The current status of the telemetry pipeline.
+	Status TelemetryPipelineStatus
+
+	// The key-value pairs associated with the telemetry pipeline resource.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -241,7 +644,7 @@ type TelemetryRule struct {
 	DestinationConfiguration *TelemetryDestinationConfiguration
 
 	//  The type of Amazon Web Services resource to configure telemetry for (e.g.,
-	// "AWS::EC2::VPC").
+	// "AWS::EC2::VPC", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL").
 	ResourceType ResourceType
 
 	//  The organizational scope to which the rule applies, specified using accounts
@@ -251,6 +654,11 @@ type TelemetryRule struct {
 	//  Criteria for selecting which resources the rule applies to, such as resource
 	// tags.
 	SelectionCriteria *string
+
+	//  The specific telemetry source types to configure for the resource, such as
+	// VPC_FLOW_LOGS or EKS_AUDIT_LOGS. TelemetrySourceTypes must be correlated with
+	// the specific resource type.
+	TelemetrySourceTypes []TelemetrySourceType
 
 	noSmithyDocumentSerde
 }
@@ -273,8 +681,29 @@ type TelemetryRuleSummary struct {
 	//  The name of the telemetry rule.
 	RuleName *string
 
+	//  The types of telemetry sources configured for this rule, such as VPC Flow Logs
+	// or EKS audit logs. TelemetrySourceTypes must be correlated with the specific
+	// resource type.
+	TelemetrySourceTypes []TelemetrySourceType
+
 	//  The type of telemetry (Logs, Metrics, or Traces) the rule configures.
 	TelemetryType TelemetryType
+
+	noSmithyDocumentSerde
+}
+
+// Represents a detailed validation error with message, reason, and field mapping
+// for comprehensive error reporting.
+type ValidationError struct {
+
+	// A mapping of field names to specific validation issues within the configuration.
+	FieldMap map[string]string
+
+	// The error message describing the validation issue.
+	Message *string
+
+	// The reason code or category for the validation error.
+	Reason *string
 
 	noSmithyDocumentSerde
 }
@@ -290,6 +719,24 @@ type VPCFlowLogParameters struct {
 
 	//  The type of traffic to log (ACCEPT, REJECT, or ALL).
 	TrafficType *string
+
+	noSmithyDocumentSerde
+}
+
+//	Configuration parameters for WAF logging, including redacted fields and
+//
+// logging filters.
+type WAFLoggingParameters struct {
+
+	//  The type of WAF logs to collect (currently supports WAF_LOGS).
+	LogType WAFLogType
+
+	//  A filter configuration that determines which WAF log records to include or
+	// exclude.
+	LoggingFilter *LoggingFilter
+
+	//  The fields to redact from WAF logs to protect sensitive information.
+	RedactedFields []FieldToMatch
 
 	noSmithyDocumentSerde
 }

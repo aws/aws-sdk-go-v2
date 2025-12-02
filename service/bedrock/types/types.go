@@ -4491,6 +4491,9 @@ type LegalTerm struct {
 // Configuration fields for invocation logging.
 type LoggingConfig struct {
 
+	// Set to include audio data in the log delivery.
+	AudioDataDeliveryEnabled *bool
+
 	// CloudWatch logging configuration.
 	CloudWatchConfig *CloudWatchConfig
 

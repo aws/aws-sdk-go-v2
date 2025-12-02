@@ -1,0 +1,8 @@
+{
+    "id": "bc1def11-4574-4983-bba1-0f8d2a43ce83",
+    "type": "feature",
+    "description": "This release updates existing Savings Plans Purchase Analyzer and Recommendations APIs to support Database Savings Plans.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of V2 aggregators. This API is in public preview and subject
-// to change.
+// Retrieves a list of V2 aggregators.
 func (c *Client) ListAggregatorsV2(ctx context.Context, params *ListAggregatorsV2Input, optFns ...func(*Options)) (*ListAggregatorsV2Output, error) {
 	if params == nil {
 		params = &ListAggregatorsV2Input{}

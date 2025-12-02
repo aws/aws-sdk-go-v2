@@ -3802,6 +3802,38 @@ func addOpSwitchoverReadReplicaValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpSwitchoverReadReplica{}, middleware.After)
 }
 
+func validateAdditionalStorageVolume(v *types.AdditionalStorageVolume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalStorageVolume"}
+	if v.VolumeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdditionalStorageVolumesList(v []types.AdditionalStorageVolume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalStorageVolumesList"}
+	for i := range v {
+		if err := validateAdditionalStorageVolume(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilter(v *types.Filter) error {
 	if v == nil {
 		return nil
@@ -3827,6 +3859,38 @@ func validateFilterList(v []types.Filter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FilterList"}
 	for i := range v {
 		if err := validateFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModifyAdditionalStorageVolume(v *types.ModifyAdditionalStorageVolume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyAdditionalStorageVolume"}
+	if v.VolumeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModifyAdditionalStorageVolumesList(v []types.ModifyAdditionalStorageVolume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyAdditionalStorageVolumesList"}
+	for i := range v {
+		if err := validateModifyAdditionalStorageVolume(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4275,6 +4339,11 @@ func validateOpCreateDBInstanceInput(v *CreateDBInstanceInput) error {
 	if v.Engine == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
 	}
+	if v.AdditionalStorageVolumes != nil {
+		if err := validateAdditionalStorageVolumesList(v.AdditionalStorageVolumes); err != nil {
+			invalidParams.AddNested("AdditionalStorageVolumes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4289,6 +4358,11 @@ func validateOpCreateDBInstanceReadReplicaInput(v *CreateDBInstanceReadReplicaIn
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDBInstanceReadReplicaInput"}
 	if v.DBInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
+	}
+	if v.AdditionalStorageVolumes != nil {
+		if err := validateAdditionalStorageVolumesList(v.AdditionalStorageVolumes); err != nil {
+			invalidParams.AddNested("AdditionalStorageVolumes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5841,6 +5915,11 @@ func validateOpModifyDBInstanceInput(v *ModifyDBInstanceInput) error {
 	if v.DBInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
 	}
+	if v.AdditionalStorageVolumes != nil {
+		if err := validateModifyAdditionalStorageVolumesList(v.AdditionalStorageVolumes); err != nil {
+			invalidParams.AddNested("AdditionalStorageVolumes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6388,6 +6467,11 @@ func validateOpRestoreDBInstanceFromDBSnapshotInput(v *RestoreDBInstanceFromDBSn
 	if v.DBInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
 	}
+	if v.AdditionalStorageVolumes != nil {
+		if err := validateAdditionalStorageVolumesList(v.AdditionalStorageVolumes); err != nil {
+			invalidParams.AddNested("AdditionalStorageVolumes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6421,6 +6505,11 @@ func validateOpRestoreDBInstanceFromS3Input(v *RestoreDBInstanceFromS3Input) err
 	if v.S3IngestionRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3IngestionRoleArn"))
 	}
+	if v.AdditionalStorageVolumes != nil {
+		if err := validateAdditionalStorageVolumesList(v.AdditionalStorageVolumes); err != nil {
+			invalidParams.AddNested("AdditionalStorageVolumes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6435,6 +6524,11 @@ func validateOpRestoreDBInstanceToPointInTimeInput(v *RestoreDBInstanceToPointIn
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreDBInstanceToPointInTimeInput"}
 	if v.TargetDBInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetDBInstanceIdentifier"))
+	}
+	if v.AdditionalStorageVolumes != nil {
+		if err := validateAdditionalStorageVolumesList(v.AdditionalStorageVolumes); err != nil {
+			invalidParams.AddNested("AdditionalStorageVolumes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

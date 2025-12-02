@@ -20,8 +20,7 @@ import (
 // statement. You must have permission to perform the
 // securityhub:BatchUpdateFindings action. Updates from BatchUpdateFindingsV2
 // don't affect the value of f inding_info.modified_time ,
-// finding_info.modified_time_dt , time , time_dt for a finding . This API is in
-// public preview and subject to change.
+// finding_info.modified_time_dt , time , time_dt for a finding .
 func (c *Client) BatchUpdateFindingsV2(ctx context.Context, params *BatchUpdateFindingsV2Input, optFns ...func(*Options)) (*BatchUpdateFindingsV2Output, error) {
 	if params == nil {
 		params = &BatchUpdateFindingsV2Input{}

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration of an existing scheduled query. This operation
-// follows PUT semantics, replacing the existing configuration with the provided
-// values.
+// Updates an existing scheduled query with new configuration. This operation uses
+// PUT semantics, allowing modification of query parameters, schedule, and
+// destinations.
 func (c *Client) UpdateScheduledQuery(ctx context.Context, params *UpdateScheduledQueryInput, optFns ...func(*Options)) (*UpdateScheduledQueryOutput, error) {
 	if params == nil {
 		params = &UpdateScheduledQueryInput{}
@@ -31,56 +31,55 @@ func (c *Client) UpdateScheduledQuery(ctx context.Context, params *UpdateSchedul
 
 type UpdateScheduledQueryInput struct {
 
-	// Updated ARN of the IAM role that CloudWatch Logs will assume to execute the
-	// scheduled query.
+	// The updated ARN of the IAM role that grants permissions to execute the query
+	// and deliver results.
 	//
 	// This member is required.
 	ExecutionRoleArn *string
 
-	// The name or ARN of the scheduled query to update.
+	// The ARN or name of the scheduled query to update.
 	//
 	// This member is required.
 	Identifier *string
 
-	// Updated query language to use (LogsQL, PPL, or SQL).
+	// The updated query language for the scheduled query.
 	//
 	// This member is required.
 	QueryLanguage types.QueryLanguage
 
-	// Updated CloudWatch Logs Insights query string to execute.
+	// The updated query string to execute.
 	//
 	// This member is required.
 	QueryString *string
 
-	// Updated cron expression that defines when the scheduled query runs.
+	// The updated cron expression that defines when the scheduled query runs.
 	//
 	// This member is required.
 	ScheduleExpression *string
 
-	// Updated description for the scheduled query.
+	// An updated description for the scheduled query.
 	Description *string
 
-	// Updated configuration for destinations where the query results will be
-	// delivered.
+	// The updated configuration for where to deliver query results.
 	DestinationConfiguration *types.DestinationConfiguration
 
-	// Updated log group identifiers to query.
+	// The updated array of log group names or ARNs to query.
 	LogGroupIdentifiers []string
 
-	// Updated end time for the query schedule in Unix epoch time.
+	// The updated end time for the scheduled query in Unix epoch format.
 	ScheduleEndTime *int64
 
-	// Updated start time for the query schedule in Unix epoch time.
+	// The updated start time for the scheduled query in Unix epoch format.
 	ScheduleStartTime *int64
 
-	// Updated time offset in seconds from the execution time for the start of the
-	// query time range.
+	// The updated time offset in seconds that defines the lookback period for the
+	// query.
 	StartTimeOffset *int64
 
-	// Updated state of the scheduled query (ENABLED or DISABLED).
+	// The updated state of the scheduled query.
 	State types.ScheduledQueryState
 
-	// Updated timezone in which the schedule expression is evaluated.
+	// The updated timezone for evaluating the schedule expression.
 	Timezone *string
 
 	noSmithyDocumentSerde
@@ -88,7 +87,7 @@ type UpdateScheduledQueryInput struct {
 
 type UpdateScheduledQueryOutput struct {
 
-	// The creation time of the updated scheduled query.
+	// The timestamp when the scheduled query was originally created.
 	CreationTime *int64
 
 	// The description of the updated scheduled query.
@@ -100,41 +99,40 @@ type UpdateScheduledQueryOutput struct {
 	// The execution role ARN of the updated scheduled query.
 	ExecutionRoleArn *string
 
-	// The status of the last execution of the updated scheduled query (Running,
-	// Complete, Failed, Timeout, or InvalidQuery).
+	// The status of the most recent execution of the updated scheduled query.
 	LastExecutionStatus types.ExecutionStatus
 
-	// The time when the updated scheduled query was last executed.
+	// The timestamp when the updated scheduled query was last executed.
 	LastTriggeredTime *int64
 
-	// The last updated time of the scheduled query.
+	// The timestamp when the scheduled query was last updated.
 	LastUpdatedTime *int64
 
-	// The log group identifiers of the updated scheduled query.
+	// The log groups queried by the updated scheduled query.
 	LogGroupIdentifiers []string
 
 	// The name of the updated scheduled query.
 	Name *string
 
-	// The query language used by the updated scheduled query.
+	// The query language of the updated scheduled query.
 	QueryLanguage types.QueryLanguage
 
 	// The query string of the updated scheduled query.
 	QueryString *string
 
-	// The schedule end time of the updated scheduled query.
+	// The end time of the updated scheduled query.
 	ScheduleEndTime *int64
 
-	// The schedule expression of the updated scheduled query.
+	// The cron expression of the updated scheduled query.
 	ScheduleExpression *string
 
-	// The schedule start time of the updated scheduled query.
+	// The start time of the updated scheduled query.
 	ScheduleStartTime *int64
 
 	// The ARN of the updated scheduled query.
 	ScheduledQueryArn *string
 
-	// The start time offset of the updated scheduled query.
+	// The time offset of the updated scheduled query.
 	StartTimeOffset *int64
 
 	// The state of the updated scheduled query.

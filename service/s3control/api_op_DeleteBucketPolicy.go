@@ -49,10 +49,6 @@ import (
 //
 // [PutBucketPolicy]
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [PutBucketPolicy]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html
 // [DeleteBucketPolicy]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html
 // [Using Bucket Policies and User Policies]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html

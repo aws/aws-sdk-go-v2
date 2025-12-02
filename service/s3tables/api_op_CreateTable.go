@@ -24,8 +24,11 @@ import (
 //   - If you use this operation with the optional encryptionConfiguration request
 //     parameter you must have the s3tables:PutTableEncryption permission.
 //
-//   - You must have the s3tables:TagResource permission in addition to
-//     s3tables:CreateTable permission to create a table with tags.
+//   - If you use this operation with the storageClassConfiguration request
+//     parameter, you must have the s3tables:PutTableStorageClass permission.
+//
+//   - To create a table with tags, you must have the s3tables:TagResource
+//     permission in addition to s3tables:CreateTable permission.
 //
 // Additionally, If you choose SSE-KMS encryption you must grant the S3 Tables
 // maintenance principal access to your KMS key. For more information, see [Permissions requirements for S3 Tables SSE-KMS encryption].
@@ -81,6 +84,11 @@ type CreateTableInput struct {
 
 	// The metadata for the table.
 	Metadata types.TableMetadata
+
+	// The storage class configuration for the table. If not specified, the table
+	// inherits the storage class configuration from its table bucket. Specify this
+	// parameter to override the bucket's default storage class for this table.
+	StorageClassConfiguration *types.StorageClassConfiguration
 
 	// A map of user-defined tags that you would like to apply to the table that you
 	// are creating. A tag is a key-value pair that you apply to your resources. Tags

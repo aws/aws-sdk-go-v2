@@ -182,6 +182,94 @@ func (EventSourcePosition) Values() []EventSourcePosition {
 	}
 }
 
+type EventType string
+
+// Enum values for EventType
+const (
+	EventTypeExecutionStarted       EventType = "ExecutionStarted"
+	EventTypeExecutionSucceeded     EventType = "ExecutionSucceeded"
+	EventTypeExecutionFailed        EventType = "ExecutionFailed"
+	EventTypeExecutionTimedOut      EventType = "ExecutionTimedOut"
+	EventTypeExecutionStopped       EventType = "ExecutionStopped"
+	EventTypeContextStarted         EventType = "ContextStarted"
+	EventTypeContextSucceeded       EventType = "ContextSucceeded"
+	EventTypeContextFailed          EventType = "ContextFailed"
+	EventTypeWaitStarted            EventType = "WaitStarted"
+	EventTypeWaitSucceeded          EventType = "WaitSucceeded"
+	EventTypeWaitCancelled          EventType = "WaitCancelled"
+	EventTypeStepStarted            EventType = "StepStarted"
+	EventTypeStepSucceeded          EventType = "StepSucceeded"
+	EventTypeStepFailed             EventType = "StepFailed"
+	EventTypeChainedInvokeStarted   EventType = "ChainedInvokeStarted"
+	EventTypeChainedInvokeSucceeded EventType = "ChainedInvokeSucceeded"
+	EventTypeChainedInvokeFailed    EventType = "ChainedInvokeFailed"
+	EventTypeChainedInvokeTimedOut  EventType = "ChainedInvokeTimedOut"
+	EventTypeChainedInvokeStopped   EventType = "ChainedInvokeStopped"
+	EventTypeCallbackStarted        EventType = "CallbackStarted"
+	EventTypeCallbackSucceeded      EventType = "CallbackSucceeded"
+	EventTypeCallbackFailed         EventType = "CallbackFailed"
+	EventTypeCallbackTimedOut       EventType = "CallbackTimedOut"
+	EventTypeInvocationCompleted    EventType = "InvocationCompleted"
+)
+
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"ExecutionStarted",
+		"ExecutionSucceeded",
+		"ExecutionFailed",
+		"ExecutionTimedOut",
+		"ExecutionStopped",
+		"ContextStarted",
+		"ContextSucceeded",
+		"ContextFailed",
+		"WaitStarted",
+		"WaitSucceeded",
+		"WaitCancelled",
+		"StepStarted",
+		"StepSucceeded",
+		"StepFailed",
+		"ChainedInvokeStarted",
+		"ChainedInvokeSucceeded",
+		"ChainedInvokeFailed",
+		"ChainedInvokeTimedOut",
+		"ChainedInvokeStopped",
+		"CallbackStarted",
+		"CallbackSucceeded",
+		"CallbackFailed",
+		"CallbackTimedOut",
+		"InvocationCompleted",
+	}
+}
+
+type ExecutionStatus string
+
+// Enum values for ExecutionStatus
+const (
+	ExecutionStatusRunning   ExecutionStatus = "RUNNING"
+	ExecutionStatusSucceeded ExecutionStatus = "SUCCEEDED"
+	ExecutionStatusFailed    ExecutionStatus = "FAILED"
+	ExecutionStatusTimedOut  ExecutionStatus = "TIMED_OUT"
+	ExecutionStatusStopped   ExecutionStatus = "STOPPED"
+)
+
+// Values returns all known values for ExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStatus) Values() []ExecutionStatus {
+	return []ExecutionStatus{
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"TIMED_OUT",
+		"STOPPED",
+	}
+}
+
 type FullDocument string
 
 // Enum values for FullDocument
@@ -490,6 +578,89 @@ func (LogType) Values() []LogType {
 	return []LogType{
 		"None",
 		"Tail",
+	}
+}
+
+type OperationAction string
+
+// Enum values for OperationAction
+const (
+	OperationActionStart   OperationAction = "START"
+	OperationActionSucceed OperationAction = "SUCCEED"
+	OperationActionFail    OperationAction = "FAIL"
+	OperationActionRetry   OperationAction = "RETRY"
+	OperationActionCancel  OperationAction = "CANCEL"
+)
+
+// Values returns all known values for OperationAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationAction) Values() []OperationAction {
+	return []OperationAction{
+		"START",
+		"SUCCEED",
+		"FAIL",
+		"RETRY",
+		"CANCEL",
+	}
+}
+
+type OperationStatus string
+
+// Enum values for OperationStatus
+const (
+	OperationStatusStarted   OperationStatus = "STARTED"
+	OperationStatusPending   OperationStatus = "PENDING"
+	OperationStatusReady     OperationStatus = "READY"
+	OperationStatusSucceeded OperationStatus = "SUCCEEDED"
+	OperationStatusFailed    OperationStatus = "FAILED"
+	OperationStatusCancelled OperationStatus = "CANCELLED"
+	OperationStatusTimedOut  OperationStatus = "TIMED_OUT"
+	OperationStatusStopped   OperationStatus = "STOPPED"
+)
+
+// Values returns all known values for OperationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationStatus) Values() []OperationStatus {
+	return []OperationStatus{
+		"STARTED",
+		"PENDING",
+		"READY",
+		"SUCCEEDED",
+		"FAILED",
+		"CANCELLED",
+		"TIMED_OUT",
+		"STOPPED",
+	}
+}
+
+type OperationType string
+
+// Enum values for OperationType
+const (
+	OperationTypeExecution     OperationType = "EXECUTION"
+	OperationTypeContext       OperationType = "CONTEXT"
+	OperationTypeStep          OperationType = "STEP"
+	OperationTypeWait          OperationType = "WAIT"
+	OperationTypeCallback      OperationType = "CALLBACK"
+	OperationTypeChainedInvoke OperationType = "CHAINED_INVOKE"
+)
+
+// Values returns all known values for OperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationType) Values() []OperationType {
+	return []OperationType{
+		"EXECUTION",
+		"CONTEXT",
+		"STEP",
+		"WAIT",
+		"CALLBACK",
+		"CHAINED_INVOKE",
 	}
 }
 
@@ -824,6 +995,7 @@ const (
 	StateReasonCodeInvalidRuntime                       StateReasonCode = "InvalidRuntime"
 	StateReasonCodeInvalidZipFileException              StateReasonCode = "InvalidZipFileException"
 	StateReasonCodeFunctionError                        StateReasonCode = "FunctionError"
+	StateReasonCodeDrainingDurableExecutions            StateReasonCode = "DrainingDurableExecutions"
 	StateReasonCodeVcpuLimitExceeded                    StateReasonCode = "VcpuLimitExceeded"
 	StateReasonCodeCapacityProviderScalingLimitExceeded StateReasonCode = "CapacityProviderScalingLimitExceeded"
 	StateReasonCodeInsufficientCapacity                 StateReasonCode = "InsufficientCapacity"
@@ -868,6 +1040,7 @@ func (StateReasonCode) Values() []StateReasonCode {
 		"InvalidRuntime",
 		"InvalidZipFileException",
 		"FunctionError",
+		"DrainingDurableExecutions",
 		"VcpuLimitExceeded",
 		"CapacityProviderScalingLimitExceeded",
 		"InsufficientCapacity",

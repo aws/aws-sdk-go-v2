@@ -140,6 +140,25 @@ func (ConfigurableActionTypeAuthorization) Values() []ConfigurableActionTypeAuth
 	}
 }
 
+type ConfigurationStatus string
+
+// Enum values for ConfigurationStatus
+const (
+	ConfigurationStatusCompleted ConfigurationStatus = "COMPLETED"
+	ConfigurationStatusFailed    ConfigurationStatus = "FAILED"
+)
+
+// Values returns all known values for ConfigurationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationStatus) Values() []ConfigurationStatus {
+	return []ConfigurationStatus{
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type ConnectionScope string
 
 // Enum values for ConnectionScope
@@ -1114,11 +1133,12 @@ type MetadataGenerationRunStatus string
 
 // Enum values for MetadataGenerationRunStatus
 const (
-	MetadataGenerationRunStatusSubmitted  MetadataGenerationRunStatus = "SUBMITTED"
-	MetadataGenerationRunStatusInProgress MetadataGenerationRunStatus = "IN_PROGRESS"
-	MetadataGenerationRunStatusCanceled   MetadataGenerationRunStatus = "CANCELED"
-	MetadataGenerationRunStatusSucceeded  MetadataGenerationRunStatus = "SUCCEEDED"
-	MetadataGenerationRunStatusFailed     MetadataGenerationRunStatus = "FAILED"
+	MetadataGenerationRunStatusSubmitted          MetadataGenerationRunStatus = "SUBMITTED"
+	MetadataGenerationRunStatusInProgress         MetadataGenerationRunStatus = "IN_PROGRESS"
+	MetadataGenerationRunStatusCanceled           MetadataGenerationRunStatus = "CANCELED"
+	MetadataGenerationRunStatusSucceeded          MetadataGenerationRunStatus = "SUCCEEDED"
+	MetadataGenerationRunStatusFailed             MetadataGenerationRunStatus = "FAILED"
+	MetadataGenerationRunStatusPartiallySucceeded MetadataGenerationRunStatus = "PARTIALLY_SUCCEEDED"
 )
 
 // Values returns all known values for MetadataGenerationRunStatus. Note that this
@@ -1132,6 +1152,7 @@ func (MetadataGenerationRunStatus) Values() []MetadataGenerationRunStatus {
 		"CANCELED",
 		"SUCCEEDED",
 		"FAILED",
+		"PARTIALLY_SUCCEEDED",
 	}
 }
 
@@ -1139,7 +1160,9 @@ type MetadataGenerationRunType string
 
 // Enum values for MetadataGenerationRunType
 const (
-	MetadataGenerationRunTypeBusinessDescriptions MetadataGenerationRunType = "BUSINESS_DESCRIPTIONS"
+	MetadataGenerationRunTypeBusinessDescriptions         MetadataGenerationRunType = "BUSINESS_DESCRIPTIONS"
+	MetadataGenerationRunTypeBusinessNames                MetadataGenerationRunType = "BUSINESS_NAMES"
+	MetadataGenerationRunTypeBusinessGlossaryAssociations MetadataGenerationRunType = "BUSINESS_GLOSSARY_ASSOCIATIONS"
 )
 
 // Values returns all known values for MetadataGenerationRunType. Note that this
@@ -1149,6 +1172,8 @@ const (
 func (MetadataGenerationRunType) Values() []MetadataGenerationRunType {
 	return []MetadataGenerationRunType{
 		"BUSINESS_DESCRIPTIONS",
+		"BUSINESS_NAMES",
+		"BUSINESS_GLOSSARY_ASSOCIATIONS",
 	}
 }
 

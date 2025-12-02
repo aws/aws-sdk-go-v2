@@ -26,10 +26,6 @@ import (
 // on Outposts endpoint hostname prefix and x-amz-outpost-id in your request, see
 // the [Examples]section.
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [Using Amazon S3 on Outposts]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
 // [Examples]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples
 func (c *Client) ListRegionalBuckets(ctx context.Context, params *ListRegionalBucketsInput, optFns ...func(*Options)) (*ListRegionalBucketsOutput, error) {

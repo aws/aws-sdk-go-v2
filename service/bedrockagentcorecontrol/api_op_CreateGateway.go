@@ -93,6 +93,12 @@ type CreateGatewayInput struct {
 	// with the gateway.
 	KmsKeyArn *string
 
+	// The policy engine configuration for the gateway. A policy engine is a
+	// collection of policies that evaluates and authorizes agent tool calls. When
+	// associated with a gateway, the policy engine intercepts all agent requests and
+	// determines whether to allow or deny each action based on the defined policies.
+	PolicyEngineConfiguration *types.GatewayPolicyEngineConfiguration
+
 	// The configuration settings for the protocol specified in the protocolType
 	// parameter.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
@@ -169,6 +175,9 @@ type CreateGatewayOutput struct {
 	// The Amazon Resource Name (ARN) of the KMS key used to encrypt data associated
 	// with the gateway.
 	KmsKeyArn *string
+
+	// The policy engine configuration for the created gateway.
+	PolicyEngineConfiguration *types.GatewayPolicyEngineConfiguration
 
 	// The configuration settings for the protocol used by the gateway.
 	ProtocolConfiguration types.GatewayProtocolConfiguration

@@ -384,6 +384,9 @@ func awsRestjson1_deserializeOpErrorDescribeSavingsPlanRates(response *smithyhtt
 	}
 
 	switch {
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 

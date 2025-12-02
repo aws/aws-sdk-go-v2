@@ -67,6 +67,10 @@ type CreateAndAttachS3AccessPointInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
+	// Specifies the FSx for ONTAP volume that the S3 access point will be attached
+	// to, and the file system user identity.
+	OntapConfiguration *types.CreateAndAttachS3AccessPointOntapConfiguration
+
 	// Specifies the configuration to use when creating and attaching an S3 access
 	// point to an FSx for OpenZFS volume.
 	OpenZFSConfiguration *types.CreateAndAttachS3AccessPointOpenZFSConfiguration

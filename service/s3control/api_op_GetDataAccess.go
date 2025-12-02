@@ -28,10 +28,6 @@ import (
 // location: sts:AssumeRole , for directory users or groups sts:SetContext , and
 // for IAM users or roles sts:SetSourceIdentity .
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [temporary credential]: https://docs.aws.amazon.com/STS/latest/APIReference/API_Credentials.html
 func (c *Client) GetDataAccess(ctx context.Context, params *GetDataAccessInput, optFns ...func(*Options)) (*GetDataAccessOutput, error) {
 	if params == nil {

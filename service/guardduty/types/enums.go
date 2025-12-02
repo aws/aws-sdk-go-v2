@@ -390,6 +390,50 @@ func (EbsSnapshotPreservation) Values() []EbsSnapshotPreservation {
 	}
 }
 
+type EcsClusterStatus string
+
+// Enum values for EcsClusterStatus
+const (
+	EcsClusterStatusActive         EcsClusterStatus = "ACTIVE"
+	EcsClusterStatusProvisioning   EcsClusterStatus = "PROVISIONING"
+	EcsClusterStatusDeprovisioning EcsClusterStatus = "DEPROVISIONING"
+	EcsClusterStatusFailed         EcsClusterStatus = "FAILED"
+	EcsClusterStatusInactive       EcsClusterStatus = "INACTIVE"
+)
+
+// Values returns all known values for EcsClusterStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EcsClusterStatus) Values() []EcsClusterStatus {
+	return []EcsClusterStatus{
+		"ACTIVE",
+		"PROVISIONING",
+		"DEPROVISIONING",
+		"FAILED",
+		"INACTIVE",
+	}
+}
+
+type EcsLaunchType string
+
+// Enum values for EcsLaunchType
+const (
+	EcsLaunchTypeFargate EcsLaunchType = "FARGATE"
+	EcsLaunchTypeEc2     EcsLaunchType = "EC2"
+)
+
+// Values returns all known values for EcsLaunchType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EcsLaunchType) Values() []EcsLaunchType {
+	return []EcsLaunchType{
+		"FARGATE",
+		"EC2",
+	}
+}
+
 type FeatureAdditionalConfiguration string
 
 // Enum values for FeatureAdditionalConfiguration
@@ -494,14 +538,22 @@ type FindingResourceType string
 
 // Enum values for FindingResourceType
 const (
-	FindingResourceTypeEc2Instance         FindingResourceType = "EC2_INSTANCE"
-	FindingResourceTypeEc2NetworkInterface FindingResourceType = "EC2_NETWORK_INTERFACE"
-	FindingResourceTypeS3Bucket            FindingResourceType = "S3_BUCKET"
-	FindingResourceTypeS3Object            FindingResourceType = "S3_OBJECT"
-	FindingResourceTypeAccessKey           FindingResourceType = "ACCESS_KEY"
-	FindingResourceTypeEksCluster          FindingResourceType = "EKS_CLUSTER"
-	FindingResourceTypeKubernetesWorkload  FindingResourceType = "KUBERNETES_WORKLOAD"
-	FindingResourceTypeContainer           FindingResourceType = "CONTAINER"
+	FindingResourceTypeEc2Instance                 FindingResourceType = "EC2_INSTANCE"
+	FindingResourceTypeEc2NetworkInterface         FindingResourceType = "EC2_NETWORK_INTERFACE"
+	FindingResourceTypeS3Bucket                    FindingResourceType = "S3_BUCKET"
+	FindingResourceTypeS3Object                    FindingResourceType = "S3_OBJECT"
+	FindingResourceTypeAccessKey                   FindingResourceType = "ACCESS_KEY"
+	FindingResourceTypeEksCluster                  FindingResourceType = "EKS_CLUSTER"
+	FindingResourceTypeKubernetesWorkload          FindingResourceType = "KUBERNETES_WORKLOAD"
+	FindingResourceTypeContainer                   FindingResourceType = "CONTAINER"
+	FindingResourceTypeEcsCluster                  FindingResourceType = "ECS_CLUSTER"
+	FindingResourceTypeEcsTask                     FindingResourceType = "ECS_TASK"
+	FindingResourceTypeAutoscalingAutoScalingGroup FindingResourceType = "AUTOSCALING_AUTO_SCALING_GROUP"
+	FindingResourceTypeIamInstanceProfile          FindingResourceType = "IAM_INSTANCE_PROFILE"
+	FindingResourceTypeCloudformationStack         FindingResourceType = "CLOUDFORMATION_STACK"
+	FindingResourceTypeEc2LaunchTemplate           FindingResourceType = "EC2_LAUNCH_TEMPLATE"
+	FindingResourceTypeEc2Vpc                      FindingResourceType = "EC2_VPC"
+	FindingResourceTypeEc2Image                    FindingResourceType = "EC2_IMAGE"
 )
 
 // Values returns all known values for FindingResourceType. Note that this can be
@@ -518,6 +570,14 @@ func (FindingResourceType) Values() []FindingResourceType {
 		"EKS_CLUSTER",
 		"KUBERNETES_WORKLOAD",
 		"CONTAINER",
+		"ECS_CLUSTER",
+		"ECS_TASK",
+		"AUTOSCALING_AUTO_SCALING_GROUP",
+		"IAM_INSTANCE_PROFILE",
+		"CLOUDFORMATION_STACK",
+		"EC2_LAUNCH_TEMPLATE",
+		"EC2_VPC",
+		"EC2_IMAGE",
 	}
 }
 

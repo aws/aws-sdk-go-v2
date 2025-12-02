@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Grants permission to create a ticket in the chosen ITSM based on finding
-// information for the provided finding metadata UID. This API is in public preview
-// and subject to change.
+// information for the provided finding metadata UID.
 func (c *Client) CreateTicketV2(ctx context.Context, params *CreateTicketV2Input, optFns ...func(*Options)) (*CreateTicketV2Output, error) {
 	if params == nil {
 		params = &CreateTicketV2Input{}
@@ -42,6 +42,11 @@ type CreateTicketV2Input struct {
 
 	// The client idempotency token.
 	ClientToken *string
+
+	// The mode for ticket creation. When set to DRYRUN, the ticket is created using a
+	// Security Hub owned template test finding to verify the integration is working
+	// correctly.
+	Mode types.TicketCreationMode
 
 	noSmithyDocumentSerde
 }

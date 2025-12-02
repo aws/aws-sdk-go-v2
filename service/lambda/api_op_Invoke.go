@@ -99,6 +99,11 @@ type InvokeInput struct {
 	// your function for synchronous invocations only.
 	ClientContext *string
 
+	// Optional unique name for the durable execution. When you start your special
+	// function, you can give it a unique name to identify this specific execution.
+	// It's like giving a nickname to a task.
+	DurableExecutionName *string
+
 	// Choose from the following options.
 	//
 	//   - RequestResponse (default) – Invoke the function synchronously. Keep the
@@ -135,6 +140,11 @@ type InvokeInput struct {
 }
 
 type InvokeOutput struct {
+
+	// The ARN of the durable execution that was started. This is returned when
+	// invoking a durable function and provides a unique identifier for tracking the
+	// execution.
+	DurableExecutionArn *string
 
 	// The version of the function that executed. When you invoke a function with an
 	// alias, this indicates which version the alias resolved to.

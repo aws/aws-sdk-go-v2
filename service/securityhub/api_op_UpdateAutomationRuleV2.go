@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a V2 automation rule. This API is in public preview and subject to
-// change.
+// Updates a V2 automation rule.
 func (c *Client) UpdateAutomationRuleV2(ctx context.Context, params *UpdateAutomationRuleV2Input, optFns ...func(*Options)) (*UpdateAutomationRuleV2Output, error) {
 	if params == nil {
 		params = &UpdateAutomationRuleV2Input{}

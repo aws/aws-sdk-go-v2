@@ -105,6 +105,9 @@ type GetAgentRuntimeOutput struct {
 	// Environment variables set in the AgentCore Runtime environment.
 	EnvironmentVariables map[string]string
 
+	// The reason for failure if the AgentCore Runtime is in a failed state.
+	FailureReason *string
+
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
 	ProtocolConfiguration *types.ProtocolConfiguration

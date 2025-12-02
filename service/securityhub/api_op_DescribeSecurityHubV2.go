@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns details about the service resource in your account. This API is in
-// public preview and subject to change.
+// Returns details about the service resource in your account.
 func (c *Client) DescribeSecurityHubV2(ctx context.Context, params *DescribeSecurityHubV2Input, optFns ...func(*Options)) (*DescribeSecurityHubV2Output, error) {
 	if params == nil {
 		params = &DescribeSecurityHubV2Input{}

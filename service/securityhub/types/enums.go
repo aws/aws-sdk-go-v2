@@ -475,27 +475,29 @@ type GroupByField string
 
 // Enum values for GroupByField
 const (
-	GroupByFieldActivityName                        GroupByField = "activity_name"
-	GroupByFieldCloudAccountUid                     GroupByField = "cloud.account.uid"
-	GroupByFieldCloudProvider                       GroupByField = "cloud.provider"
-	GroupByFieldCloudRegion                         GroupByField = "cloud.region"
-	GroupByFieldComplianceAssessmentsName           GroupByField = "compliance.assessments.name"
-	GroupByFieldComplianceStatus                    GroupByField = "compliance.status"
-	GroupByFieldComplianceControl                   GroupByField = "compliance.control"
-	GroupByFieldFindingInfoTitle                    GroupByField = "finding_info.title"
-	GroupByFieldFindingInfoTypes                    GroupByField = "finding_info.types"
-	GroupByFieldMetadataProductName                 GroupByField = "metadata.product.name"
-	GroupByFieldMetadataProductUid                  GroupByField = "metadata.product.uid"
-	GroupByFieldResourcesType                       GroupByField = "resources.type"
-	GroupByFieldResourcesUid                        GroupByField = "resources.uid"
-	GroupByFieldSeverity                            GroupByField = "severity"
-	GroupByFieldStatus                              GroupByField = "status"
-	GroupByFieldVulnerabilitiesFixCoverage          GroupByField = "vulnerabilities.fix_coverage"
-	GroupByFieldClassName                           GroupByField = "class_name"
-	GroupByFieldVulnerabilitiesAffectedPackagesName GroupByField = "vulnerabilities.affected_packages.name"
-	GroupByFieldFindingInfoAnalyticName             GroupByField = "finding_info.analytic.name"
-	GroupByFieldComplianceStandards                 GroupByField = "compliance.standards"
-	GroupByFieldCloudAccountName                    GroupByField = "cloud.account.name"
+	GroupByFieldActivityName                           GroupByField = "activity_name"
+	GroupByFieldCloudAccountUid                        GroupByField = "cloud.account.uid"
+	GroupByFieldCloudProvider                          GroupByField = "cloud.provider"
+	GroupByFieldCloudRegion                            GroupByField = "cloud.region"
+	GroupByFieldComplianceAssessmentsName              GroupByField = "compliance.assessments.name"
+	GroupByFieldComplianceStatus                       GroupByField = "compliance.status"
+	GroupByFieldComplianceControl                      GroupByField = "compliance.control"
+	GroupByFieldFindingInfoTitle                       GroupByField = "finding_info.title"
+	GroupByFieldFindingInfoRelatedEventsTraitsCategory GroupByField = "finding_info.related_events.traits.category"
+	GroupByFieldFindingInfoTypes                       GroupByField = "finding_info.types"
+	GroupByFieldMetadataProductName                    GroupByField = "metadata.product.name"
+	GroupByFieldMetadataProductUid                     GroupByField = "metadata.product.uid"
+	GroupByFieldResourcesType                          GroupByField = "resources.type"
+	GroupByFieldResourcesUid                           GroupByField = "resources.uid"
+	GroupByFieldSeverity                               GroupByField = "severity"
+	GroupByFieldStatus                                 GroupByField = "status"
+	GroupByFieldVulnerabilitiesFixCoverage             GroupByField = "vulnerabilities.fix_coverage"
+	GroupByFieldClassName                              GroupByField = "class_name"
+	GroupByFieldVulnerabilitiesAffectedPackagesName    GroupByField = "vulnerabilities.affected_packages.name"
+	GroupByFieldFindingInfoAnalyticName                GroupByField = "finding_info.analytic.name"
+	GroupByFieldComplianceStandards                    GroupByField = "compliance.standards"
+	GroupByFieldCloudAccountName                       GroupByField = "cloud.account.name"
+	GroupByFieldVendorAttributesSeverity               GroupByField = "vendor_attributes.severity"
 )
 
 // Values returns all known values for GroupByField. Note that this can be
@@ -512,6 +514,7 @@ func (GroupByField) Values() []GroupByField {
 		"compliance.status",
 		"compliance.control",
 		"finding_info.title",
+		"finding_info.related_events.traits.category",
 		"finding_info.types",
 		"metadata.product.name",
 		"metadata.product.uid",
@@ -525,6 +528,7 @@ func (GroupByField) Values() []GroupByField {
 		"finding_info.analytic.name",
 		"compliance.standards",
 		"cloud.account.name",
+		"vendor_attributes.severity",
 	}
 }
 
@@ -786,6 +790,8 @@ const (
 	OcsfNumberFieldEvidencesSrcEndpointAutonomousSystemNumber OcsfNumberField = "evidences.src_endpoint.autonomous_system.number"
 	OcsfNumberFieldEvidencesSrcEndpointPort                   OcsfNumberField = "evidences.src_endpoint.port"
 	OcsfNumberFieldResourcesImageInUseCount                   OcsfNumberField = "resources.image.in_use_count"
+	OcsfNumberFieldVulnerabilitiesCveCvssBaseScore            OcsfNumberField = "vulnerabilities.cve.cvss.base_score"
+	OcsfNumberFieldVendorAttributesSeverityId                 OcsfNumberField = "vendor_attributes.severity_id"
 )
 
 // Values returns all known values for OcsfNumberField. Note that this can be
@@ -806,6 +812,8 @@ func (OcsfNumberField) Values() []OcsfNumberField {
 		"evidences.src_endpoint.autonomous_system.number",
 		"evidences.src_endpoint.port",
 		"resources.image.in_use_count",
+		"vulnerabilities.cve.cvss.base_score",
+		"vendor_attributes.severity_id",
 	}
 }
 
@@ -828,6 +836,7 @@ const (
 	OcsfStringFieldFindingInfoTitle                                       OcsfStringField = "finding_info.title"
 	OcsfStringFieldFindingInfoTypes                                       OcsfStringField = "finding_info.types"
 	OcsfStringFieldFindingInfoUid                                         OcsfStringField = "finding_info.uid"
+	OcsfStringFieldFindingInfoRelatedEventsTraitsCategory                 OcsfStringField = "finding_info.related_events.traits.category"
 	OcsfStringFieldFindingInfoRelatedEventsUid                            OcsfStringField = "finding_info.related_events.uid"
 	OcsfStringFieldFindingInfoRelatedEventsProductUid                     OcsfStringField = "finding_info.related_events.product.uid"
 	OcsfStringFieldFindingInfoRelatedEventsTitle                          OcsfStringField = "finding_info.related_events.title"
@@ -882,6 +891,7 @@ const (
 	OcsfStringFieldVulnerabilitiesCveUid                                  OcsfStringField = "vulnerabilities.cve.uid"
 	OcsfStringFieldVulnerabilitiesRelatedVulnerabilities                  OcsfStringField = "vulnerabilities.related_vulnerabilities"
 	OcsfStringFieldCloudAccountName                                       OcsfStringField = "cloud.account.name"
+	OcsfStringFieldVendorAttributesSeverity                               OcsfStringField = "vendor_attributes.severity"
 )
 
 // Values returns all known values for OcsfStringField. Note that this can be
@@ -905,6 +915,7 @@ func (OcsfStringField) Values() []OcsfStringField {
 		"finding_info.title",
 		"finding_info.types",
 		"finding_info.uid",
+		"finding_info.related_events.traits.category",
 		"finding_info.related_events.uid",
 		"finding_info.related_events.product.uid",
 		"finding_info.related_events.title",
@@ -959,6 +970,7 @@ func (OcsfStringField) Values() []OcsfStringField {
 		"vulnerabilities.cve.uid",
 		"vulnerabilities.related_vulnerabilities",
 		"cloud.account.name",
+		"vendor_attributes.severity",
 	}
 }
 
@@ -1583,6 +1595,23 @@ func (ThreatIntelIndicatorType) Values() []ThreatIntelIndicatorType {
 		"MUTEX",
 		"PROCESS",
 		"URL",
+	}
+}
+
+type TicketCreationMode string
+
+// Enum values for TicketCreationMode
+const (
+	TicketCreationModeDryrun TicketCreationMode = "DRYRUN"
+)
+
+// Values returns all known values for TicketCreationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TicketCreationMode) Values() []TicketCreationMode {
+	return []TicketCreationMode{
+		"DRYRUN",
 	}
 }
 

@@ -10,8 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // Deletes a vector index. To specify the vector index, you can either use both
 // the vector bucket name and vector index name, or use the vector index Amazon
 // Resource Name (ARN).

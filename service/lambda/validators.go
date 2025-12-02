@@ -50,6 +50,26 @@ func (m *validateOpAddPermission) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCheckpointDurableExecution struct {
+}
+
+func (*validateOpCheckpointDurableExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCheckpointDurableExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CheckpointDurableExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCheckpointDurableExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAlias struct {
 }
 
@@ -450,6 +470,66 @@ func (m *validateOpGetCodeSigningConfig) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDurableExecutionHistory struct {
+}
+
+func (*validateOpGetDurableExecutionHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDurableExecutionHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDurableExecutionHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDurableExecutionHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDurableExecution struct {
+}
+
+func (*validateOpGetDurableExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDurableExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDurableExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDurableExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDurableExecutionState struct {
+}
+
+func (*validateOpGetDurableExecutionState) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDurableExecutionState) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDurableExecutionStateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDurableExecutionStateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEventSourceMapping struct {
 }
 
@@ -825,6 +905,26 @@ func (m *validateOpListAliases) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDurableExecutionsByFunction struct {
+}
+
+func (*validateOpListDurableExecutionsByFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDurableExecutionsByFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDurableExecutionsByFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDurableExecutionsByFunctionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1210,6 +1310,86 @@ func (m *validateOpRemovePermission) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendDurableExecutionCallbackFailure struct {
+}
+
+func (*validateOpSendDurableExecutionCallbackFailure) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendDurableExecutionCallbackFailure) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendDurableExecutionCallbackFailureInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendDurableExecutionCallbackFailureInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendDurableExecutionCallbackHeartbeat struct {
+}
+
+func (*validateOpSendDurableExecutionCallbackHeartbeat) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendDurableExecutionCallbackHeartbeat) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendDurableExecutionCallbackHeartbeatInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendDurableExecutionCallbackHeartbeatInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendDurableExecutionCallbackSuccess struct {
+}
+
+func (*validateOpSendDurableExecutionCallbackSuccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendDurableExecutionCallbackSuccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendDurableExecutionCallbackSuccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendDurableExecutionCallbackSuccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopDurableExecution struct {
+}
+
+func (*validateOpStopDurableExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopDurableExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopDurableExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopDurableExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1418,6 +1598,10 @@ func addOpAddPermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddPermission{}, middleware.After)
 }
 
+func addOpCheckpointDurableExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCheckpointDurableExecution{}, middleware.After)
+}
+
 func addOpCreateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAlias{}, middleware.After)
 }
@@ -1498,6 +1682,18 @@ func addOpGetCodeSigningConfigValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetCodeSigningConfig{}, middleware.After)
 }
 
+func addOpGetDurableExecutionHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDurableExecutionHistory{}, middleware.After)
+}
+
+func addOpGetDurableExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDurableExecution{}, middleware.After)
+}
+
+func addOpGetDurableExecutionStateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDurableExecutionState{}, middleware.After)
+}
+
 func addOpGetEventSourceMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEventSourceMapping{}, middleware.After)
 }
@@ -1574,6 +1770,10 @@ func addOpListAliasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAliases{}, middleware.After)
 }
 
+func addOpListDurableExecutionsByFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDurableExecutionsByFunction{}, middleware.After)
+}
+
 func addOpListFunctionEventInvokeConfigsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFunctionEventInvokeConfigs{}, middleware.After)
 }
@@ -1648,6 +1848,22 @@ func addOpRemoveLayerVersionPermissionValidationMiddleware(stack *middleware.Sta
 
 func addOpRemovePermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemovePermission{}, middleware.After)
+}
+
+func addOpSendDurableExecutionCallbackFailureValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendDurableExecutionCallbackFailure{}, middleware.After)
+}
+
+func addOpSendDurableExecutionCallbackHeartbeatValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendDurableExecutionCallbackHeartbeat{}, middleware.After)
+}
+
+func addOpSendDurableExecutionCallbackSuccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendDurableExecutionCallbackSuccess{}, middleware.After)
+}
+
+func addOpStopDurableExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopDurableExecution{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1791,6 +2007,21 @@ func validateCapacityProviderVpcConfig(v *types.CapacityProviderVpcConfig) error
 	}
 }
 
+func validateChainedInvokeOptions(v *types.ChainedInvokeOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChainedInvokeOptions"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEphemeralStorage(v *types.EphemeralStorage) error {
 	if v == nil {
 		return nil
@@ -1848,6 +2079,49 @@ func validateLambdaManagedInstancesCapacityProviderConfig(v *types.LambdaManaged
 	invalidParams := smithy.InvalidParamsError{Context: "LambdaManagedInstancesCapacityProviderConfig"}
 	if v.CapacityProviderArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CapacityProviderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOperationUpdate(v *types.OperationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OperationUpdate"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.ChainedInvokeOptions != nil {
+		if err := validateChainedInvokeOptions(v.ChainedInvokeOptions); err != nil {
+			invalidParams.AddNested("ChainedInvokeOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOperationUpdates(v []types.OperationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OperationUpdates"}
+	for i := range v {
+		if err := validateOperationUpdate(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1932,6 +2206,29 @@ func validateOpAddPermissionInput(v *AddPermissionInput) error {
 	}
 	if v.Principal == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCheckpointDurableExecutionInput(v *CheckpointDurableExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CheckpointDurableExecutionInput"}
+	if v.DurableExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurableExecutionArn"))
+	}
+	if v.CheckpointToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CheckpointToken"))
+	}
+	if v.Updates != nil {
+		if err := validateOperationUpdates(v.Updates); err != nil {
+			invalidParams.AddNested("Updates", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2310,6 +2607,54 @@ func validateOpGetCodeSigningConfigInput(v *GetCodeSigningConfigInput) error {
 	}
 }
 
+func validateOpGetDurableExecutionHistoryInput(v *GetDurableExecutionHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDurableExecutionHistoryInput"}
+	if v.DurableExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurableExecutionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDurableExecutionInput(v *GetDurableExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDurableExecutionInput"}
+	if v.DurableExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurableExecutionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDurableExecutionStateInput(v *GetDurableExecutionStateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDurableExecutionStateInput"}
+	if v.DurableExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurableExecutionArn"))
+	}
+	if v.CheckpointToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CheckpointToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEventSourceMappingInput(v *GetEventSourceMappingInput) error {
 	if v == nil {
 		return nil
@@ -2600,6 +2945,21 @@ func validateOpListAliasesInput(v *ListAliasesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAliasesInput"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDurableExecutionsByFunctionInput(v *ListDurableExecutionsByFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDurableExecutionsByFunctionInput"}
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
@@ -2920,6 +3280,66 @@ func validateOpRemovePermissionInput(v *RemovePermissionInput) error {
 	}
 	if v.StatementId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendDurableExecutionCallbackFailureInput(v *SendDurableExecutionCallbackFailureInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendDurableExecutionCallbackFailureInput"}
+	if v.CallbackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallbackId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendDurableExecutionCallbackHeartbeatInput(v *SendDurableExecutionCallbackHeartbeatInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendDurableExecutionCallbackHeartbeatInput"}
+	if v.CallbackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallbackId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendDurableExecutionCallbackSuccessInput(v *SendDurableExecutionCallbackSuccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendDurableExecutionCallbackSuccessInput"}
+	if v.CallbackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallbackId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopDurableExecutionInput(v *StopDurableExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopDurableExecutionInput"}
+	if v.DurableExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurableExecutionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "09edb2f9-a1be-4181-a0c1-89214799aae8",
+    "type": "feature",
+    "description": "Support for AgentCore Evaluations and Episodic memory strategy for AgentCore Memory.",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

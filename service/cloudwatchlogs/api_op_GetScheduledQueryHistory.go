@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves the execution history of a scheduled query within a specified time
-// range, including execution status and destination processing metadata.
+// range, including query results and destination processing status.
 func (c *Client) GetScheduledQueryHistory(ctx context.Context, params *GetScheduledQueryHistoryInput, optFns ...func(*Options)) (*GetScheduledQueryHistoryOutput, error) {
 	if params == nil {
 		params = &GetScheduledQueryHistoryInput{}
@@ -30,26 +30,26 @@ func (c *Client) GetScheduledQueryHistory(ctx context.Context, params *GetSchedu
 
 type GetScheduledQueryHistoryInput struct {
 
-	// The end time for the history retrieval window in Unix epoch time.
+	// The end time for the history query in Unix epoch format.
 	//
 	// This member is required.
 	EndTime *int64
 
-	// The name or ARN of the scheduled query to retrieve history for.
+	// The ARN or name of the scheduled query to retrieve history for.
 	//
 	// This member is required.
 	Identifier *string
 
-	// The start time for the history retrieval window in Unix epoch time.
+	// The start time for the history query in Unix epoch format.
 	//
 	// This member is required.
 	StartTime *int64
 
-	// Filter results by execution status (Running, Complete, Failed, Timeout, or
-	// InvalidQuery).
+	// An array of execution statuses to filter the history results. Only executions
+	// with the specified statuses are returned.
 	ExecutionStatuses []types.ExecutionStatus
 
-	// The maximum number of history records to return in a single call.
+	// The maximum number of history records to return. Valid range is 1 to 1000.
 	MaxResults *int32
 
 	// The token for the next set of items to return. The token expires after 24 hours.
@@ -69,7 +69,7 @@ type GetScheduledQueryHistoryOutput struct {
 	// The ARN of the scheduled query.
 	ScheduledQueryArn *string
 
-	// The list of execution history records for the scheduled query.
+	// An array of execution history records for the scheduled query.
 	TriggerHistory []types.TriggerHistoryRecord
 
 	// Metadata pertaining to the operation's result.
@@ -181,7 +181,7 @@ func (c *Client) addOperationGetScheduledQueryHistoryMiddlewares(stack *middlewa
 // GetScheduledQueryHistoryPaginatorOptions is the paginator options for
 // GetScheduledQueryHistory
 type GetScheduledQueryHistoryPaginatorOptions struct {
-	// The maximum number of history records to return in a single call.
+	// The maximum number of history records to return. Valid range is 1 to 1000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

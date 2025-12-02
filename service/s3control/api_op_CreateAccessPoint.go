@@ -43,10 +43,6 @@ import (
 //
 // [ListAccessPointsForDirectoryBuckets]
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [ListAccessPointsForDirectoryBuckets]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForDirectoryBuckets.html
 // [ListAccessPoints]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
 // [CreateAndAttachS3AccessPoint]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateAndAttachS3AccessPoint.html
@@ -132,12 +128,6 @@ type CreateAccessPointInput struct {
 	// An array of tags that you can apply to an access point. Tags are key-value
 	// pairs of metadata used to control access to your access points. For more
 	// information about tags, see [Using tags with Amazon S3]. For information about tagging access points, see [Using tags for attribute-based access control (ABAC)].
-	//
-	//   - You must have the s3:TagResource permission to create an access point with
-	//   tags for a general purpose bucket.
-	//
-	//   - You must have the s3express:TagResource permission to create an access point
-	//   with tags for a directory bucket.
 	//
 	// [Using tags with Amazon S3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
 	// [Using tags for attribute-based access control (ABAC)]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#using-tags-for-abac

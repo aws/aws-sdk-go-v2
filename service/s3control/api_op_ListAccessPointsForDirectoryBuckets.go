@@ -25,10 +25,6 @@ import (
 //
 // For information about REST API errors, see [REST error responses].
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [REST error responses]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses
 // [ListAccesspoints]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
 func (c *Client) ListAccessPointsForDirectoryBuckets(ctx context.Context, params *ListAccessPointsForDirectoryBucketsInput, optFns ...func(*Options)) (*ListAccessPointsForDirectoryBucketsOutput, error) {

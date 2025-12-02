@@ -150,6 +150,26 @@ func (m *validateOpDeleteMemoryRecord) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpEvaluate struct {
+}
+
+func (*validateOpEvaluate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEvaluate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EvaluateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEvaluateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAgentCard struct {
 }
 
@@ -718,6 +738,10 @@ func addOpDeleteMemoryRecordValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteMemoryRecord{}, middleware.After)
 }
 
+func addOpEvaluateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEvaluate{}, middleware.After)
+}
+
 func addOpGetAgentCardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgentCard{}, middleware.After)
 }
@@ -978,6 +1002,41 @@ func validateInputContentBlockList(v []types.InputContentBlock) error {
 	}
 }
 
+func validateMemoryMetadataFilterExpression(v *types.MemoryMetadataFilterExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryMetadataFilterExpression"}
+	if v.Left == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Left"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemoryMetadataFilterList(v []types.MemoryMetadataFilterExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryMetadataFilterList"}
+	for i := range v {
+		if err := validateMemoryMetadataFilterExpression(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMemoryRecordCreateInput(v *types.MemoryRecordCreateInput) error {
 	if v == nil {
 		return nil
@@ -1129,6 +1188,11 @@ func validateSearchCriteria(v *types.SearchCriteria) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SearchCriteria"}
 	if v.SearchQuery == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SearchQuery"))
+	}
+	if v.MetadataFilters != nil {
+		if err := validateMemoryMetadataFilterList(v.MetadataFilters); err != nil {
+			invalidParams.AddNested("MetadataFilters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1323,6 +1387,24 @@ func validateOpDeleteMemoryRecordInput(v *DeleteMemoryRecordInput) error {
 	}
 	if v.MemoryRecordId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemoryRecordId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEvaluateInput(v *EvaluateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluateInput"}
+	if v.EvaluatorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluatorId"))
+	}
+	if v.EvaluationInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationInput"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -116,6 +116,10 @@ type GetTableOutput struct {
 	// The service that manages the table.
 	ManagedByService *string
 
+	// If this table is managed by S3 Tables, contains additional information such as
+	// replication details.
+	ManagedTableInformation *types.ManagedTableInformation
+
 	// The metadata location of the table.
 	MetadataLocation *string
 

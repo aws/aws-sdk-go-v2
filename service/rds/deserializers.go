@@ -26197,6 +26197,415 @@ func awsAwsquery_deserializeDocumentActivityStreamModeListUnwrapped(v *[]string,
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentAdditionalStorageVolume(v **types.AdditionalStorageVolume, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.AdditionalStorageVolume
+	if *v == nil {
+		sv = &types.AdditionalStorageVolume{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("AllocatedStorage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("IOPS", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.IOPS = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MaxAllocatedStorage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxAllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("StorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageThroughput = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("StorageType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageType = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("VolumeName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VolumeName = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentAdditionalStorageVolumeOutput(v **types.AdditionalStorageVolumeOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.AdditionalStorageVolumeOutput
+	if *v == nil {
+		sv = &types.AdditionalStorageVolumeOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("AllocatedStorage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("IOPS", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.IOPS = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MaxAllocatedStorage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxAllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("StorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageThroughput = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("StorageType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageType = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("StorageVolumeStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageVolumeStatus = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("VolumeName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VolumeName = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentAdditionalStorageVolumesList(v *[]types.AdditionalStorageVolume, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.AdditionalStorageVolume
+	if *v == nil {
+		sv = make([]types.AdditionalStorageVolume, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.AdditionalStorageVolume
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentAdditionalStorageVolume(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentAdditionalStorageVolumesListUnwrapped(v *[]types.AdditionalStorageVolume, decoder smithyxml.NodeDecoder) error {
+	var sv []types.AdditionalStorageVolume
+	if *v == nil {
+		sv = make([]types.AdditionalStorageVolume, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.AdditionalStorageVolume
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentAdditionalStorageVolume(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentAdditionalStorageVolumesOutputList(v *[]types.AdditionalStorageVolumeOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.AdditionalStorageVolumeOutput
+	if *v == nil {
+		sv = make([]types.AdditionalStorageVolumeOutput, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.AdditionalStorageVolumeOutput
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentAdditionalStorageVolumeOutput(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentAdditionalStorageVolumesOutputListUnwrapped(v *[]types.AdditionalStorageVolumeOutput, decoder smithyxml.NodeDecoder) error {
+	var sv []types.AdditionalStorageVolumeOutput
+	if *v == nil {
+		sv = make([]types.AdditionalStorageVolumeOutput, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.AdditionalStorageVolumeOutput
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentAdditionalStorageVolumeOutput(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentAttributeValueList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26616,6 +27025,307 @@ func awsAwsquery_deserializeDocumentAvailabilityZonesUnwrapped(v *[]string, deco
 			xtv := string(val)
 			mv = xtv
 		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentAvailableAdditionalStorageVolumesOption(v **types.AvailableAdditionalStorageVolumesOption, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.AvailableAdditionalStorageVolumesOption
+	if *v == nil {
+		sv = &types.AvailableAdditionalStorageVolumesOption{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("MaxIops", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxIops = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MaxIopsPerGib", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxIopsPerGib = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("MaxStorageSize", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxStorageSize = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MaxStorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxStorageThroughput = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MinIops", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinIops = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MinIopsPerGib", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinIopsPerGib = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("MinStorageSize", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinStorageSize = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MinStorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinStorageThroughput = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("StorageType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageType = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("SupportsIops", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsIops = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("SupportsStorageAutoscaling", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsStorageAutoscaling = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("SupportsStorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsStorageThroughput = ptr.Bool(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentAvailableAdditionalStorageVolumesOptionList(v *[]types.AvailableAdditionalStorageVolumesOption, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.AvailableAdditionalStorageVolumesOption
+	if *v == nil {
+		sv = make([]types.AvailableAdditionalStorageVolumesOption, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("AvailableAdditionalStorageVolumesOption", t.Name.Local):
+			var col types.AvailableAdditionalStorageVolumesOption
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentAvailableAdditionalStorageVolumesOption(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentAvailableAdditionalStorageVolumesOptionListUnwrapped(v *[]types.AvailableAdditionalStorageVolumesOption, decoder smithyxml.NodeDecoder) error {
+	var sv []types.AvailableAdditionalStorageVolumesOption
+	if *v == nil {
+		sv = make([]types.AvailableAdditionalStorageVolumesOption, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.AvailableAdditionalStorageVolumesOption
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentAvailableAdditionalStorageVolumesOption(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -32684,6 +33394,12 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 				sv.CustomDBEngineVersionManifest = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DatabaseInstallationFiles", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.DatabaseInstallationFiles, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("DatabaseInstallationFilesS3BucketName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -32811,6 +33527,19 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.ExportableLogTypes, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("FailureReason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FailureReason = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Image", t.Name.Local):
@@ -33239,6 +33968,12 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 			{
 				xtv := string(val)
 				sv.ActivityStreamStatus = types.ActivityStreamStatus(xtv)
+			}
+
+		case strings.EqualFold("AdditionalStorageVolumes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentAdditionalStorageVolumesOutputList(&sv.AdditionalStorageVolumes, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("AllocatedStorage", t.Name.Local):
@@ -34211,6 +34946,19 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				sv.StorageType = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("StorageVolumeStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageVolumeStatus = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("TagList", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentTagList(&sv.TagList, nodeDecoder); err != nil {
@@ -34347,6 +35095,12 @@ func awsAwsquery_deserializeDocumentDBInstanceAutomatedBackup(v **types.DBInstan
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AdditionalStorageVolumes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentAdditionalStorageVolumesList(&sv.AdditionalStorageVolumes, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("AllocatedStorage", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -38845,6 +39599,12 @@ func awsAwsquery_deserializeDocumentDBSnapshot(v **types.DBSnapshot, decoder smi
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AdditionalStorageVolumes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentAdditionalStorageVolumesList(&sv.AdditionalStorageVolumes, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("AllocatedStorage", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -48761,6 +49521,12 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				return err
 			}
 
+		case strings.EqualFold("AvailableAdditionalStorageVolumesOptions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentAvailableAdditionalStorageVolumesOptionList(&sv.AvailableAdditionalStorageVolumesOptions, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("AvailableProcessorFeatures", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentAvailableProcessorFeatureList(&sv.AvailableProcessorFeatures, nodeDecoder); err != nil {
@@ -49066,6 +49832,22 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentStringList(&sv.SupportedNetworkTypes, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("SupportsAdditionalStorageVolumes", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsAdditionalStorageVolumes = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsClusters", t.Name.Local):
@@ -49982,6 +50764,12 @@ func awsAwsquery_deserializeDocumentPendingModifiedValues(v **types.PendingModif
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AdditionalStorageVolumes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentAdditionalStorageVolumesList(&sv.AdditionalStorageVolumes, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("AllocatedStorage", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -56017,6 +56805,64 @@ func awsAwsquery_deserializeDocumentUserAuthConfigInfoListUnwrapped(v *[]types.U
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentValidAdditionalStorageOptions(v **types.ValidAdditionalStorageOptions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ValidAdditionalStorageOptions
+	if *v == nil {
+		sv = &types.ValidAdditionalStorageOptions{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("SupportsAdditionalStorageVolumes", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsAdditionalStorageVolumes = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Volumes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentValidVolumeOptionsList(&sv.Volumes, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentValidDBInstanceModificationsMessage(v **types.ValidDBInstanceModificationsMessage, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -56039,6 +56885,12 @@ func awsAwsquery_deserializeDocumentValidDBInstanceModificationsMessage(v **type
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AdditionalStorage", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentValidAdditionalStorageOptions(&sv.AdditionalStorage, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("Storage", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentValidStorageOptionsList(&sv.Storage, nodeDecoder); err != nil {
@@ -56304,6 +57156,129 @@ func awsAwsquery_deserializeDocumentValidUpgradeTargetListUnwrapped(v *[]types.U
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		destAddr := &mv
 		if err := awsAwsquery_deserializeDocumentUpgradeTarget(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentValidVolumeOptions(v **types.ValidVolumeOptions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ValidVolumeOptions
+	if *v == nil {
+		sv = &types.ValidVolumeOptions{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Storage", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentValidStorageOptionsList(&sv.Storage, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("VolumeName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VolumeName = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentValidVolumeOptionsList(v *[]types.ValidVolumeOptions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ValidVolumeOptions
+	if *v == nil {
+		sv = make([]types.ValidVolumeOptions, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ValidVolumeOptions
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentValidVolumeOptions(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentValidVolumeOptionsListUnwrapped(v *[]types.ValidVolumeOptions, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ValidVolumeOptions
+	if *v == nil {
+		sv = make([]types.ValidVolumeOptions, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ValidVolumeOptions
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentValidVolumeOptions(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
 		mv = *destAddr
@@ -57304,6 +58279,12 @@ func awsAwsquery_deserializeOpDocumentCreateCustomDBEngineVersionOutput(v **Crea
 				sv.CustomDBEngineVersionManifest = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DatabaseInstallationFiles", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.DatabaseInstallationFiles, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("DatabaseInstallationFilesS3BucketName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -57431,6 +58412,19 @@ func awsAwsquery_deserializeOpDocumentCreateCustomDBEngineVersionOutput(v **Crea
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.ExportableLogTypes, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("FailureReason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FailureReason = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Image", t.Name.Local):
@@ -58928,6 +59922,12 @@ func awsAwsquery_deserializeOpDocumentDeleteCustomDBEngineVersionOutput(v **Dele
 				sv.CustomDBEngineVersionManifest = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DatabaseInstallationFiles", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.DatabaseInstallationFiles, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("DatabaseInstallationFilesS3BucketName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -59055,6 +60055,19 @@ func awsAwsquery_deserializeOpDocumentDeleteCustomDBEngineVersionOutput(v **Dele
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.ExportableLogTypes, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("FailureReason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FailureReason = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Image", t.Name.Local):
@@ -63436,6 +64449,12 @@ func awsAwsquery_deserializeOpDocumentModifyCustomDBEngineVersionOutput(v **Modi
 				sv.CustomDBEngineVersionManifest = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DatabaseInstallationFiles", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.DatabaseInstallationFiles, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("DatabaseInstallationFilesS3BucketName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -63563,6 +64582,19 @@ func awsAwsquery_deserializeOpDocumentModifyCustomDBEngineVersionOutput(v **Modi
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.ExportableLogTypes, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("FailureReason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FailureReason = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Image", t.Name.Local):

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permission to create a connectorV2 based on input parameters. This API
-// is in public preview and subject to change.
+// Grants permission to create a connectorV2 based on input parameters.
 func (c *Client) CreateConnectorV2(ctx context.Context, params *CreateConnectorV2Input, optFns ...func(*Options)) (*CreateConnectorV2Output, error) {
 	if params == nil {
 		params = &CreateConnectorV2Input{}
@@ -58,6 +57,11 @@ type CreateConnectorV2Input struct {
 
 type CreateConnectorV2Output struct {
 
+	// The Amazon Resource Name (ARN) of the connectorV2.
+	//
+	// This member is required.
+	ConnectorArn *string
+
 	// The UUID of the connectorV2 to identify connectorV2 resource.
 	//
 	// This member is required.
@@ -66,8 +70,8 @@ type CreateConnectorV2Output struct {
 	// The Url provide to customers for OAuth auth code flow.
 	AuthUrl *string
 
-	// The Amazon Resource Name (ARN) of the connectorV2.
-	ConnectorArn *string
+	// The current status of the connectorV2.
+	ConnectorStatus types.ConnectorStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

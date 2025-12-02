@@ -194,6 +194,18 @@ func TestCheckSnapshot_ListIndexes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListVectorBuckets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListVectorBuckets(context.Background(), nil, func(o *Options) {
@@ -247,6 +259,30 @@ func TestCheckSnapshot_QueryVectors(t *testing.T) {
 	_, err := svc.QueryVectors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "QueryVectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UntagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UntagResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -385,6 +421,18 @@ func TestUpdateSnapshot_ListIndexes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListVectorBuckets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListVectorBuckets(context.Background(), nil, func(o *Options) {
@@ -438,6 +486,30 @@ func TestUpdateSnapshot_QueryVectors(t *testing.T) {
 	_, err := svc.QueryVectors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "QueryVectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UntagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UntagResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

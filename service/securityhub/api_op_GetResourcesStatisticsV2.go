@@ -12,8 +12,7 @@ import (
 )
 
 // Retrieves statistical information about Amazon Web Services resources and their
-// associated security findings. This API is in public preview and subject to
-// change.
+// associated security findings.
 func (c *Client) GetResourcesStatisticsV2(ctx context.Context, params *GetResourcesStatisticsV2Input, optFns ...func(*Options)) (*GetResourcesStatisticsV2Output, error) {
 	if params == nil {
 		params = &GetResourcesStatisticsV2Input{}

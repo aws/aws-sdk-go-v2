@@ -8113,6 +8113,13 @@ func awsRestjson1_serializeDocumentCondition(v *types.Condition, value smithyjso
 		ok.Integer(*v.Lte)
 	}
 
+	if v.Matches != nil {
+		ok := object.Key("matches")
+		if err := awsRestjson1_serializeDocumentMatches(v.Matches, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Neq != nil {
 		ok := object.Key("neq")
 		if err := awsRestjson1_serializeDocumentNeq(v.Neq, ok); err != nil {
@@ -8123,6 +8130,13 @@ func awsRestjson1_serializeDocumentCondition(v *types.Condition, value smithyjso
 	if v.NotEquals != nil {
 		ok := object.Key("notEquals")
 		if err := awsRestjson1_serializeDocumentNotEquals(v.NotEquals, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotMatches != nil {
+		ok := object.Key("notMatches")
+		if err := awsRestjson1_serializeDocumentNotMatches(v.NotMatches, ok); err != nil {
 			return err
 		}
 	}
@@ -8680,6 +8694,17 @@ func awsRestjson1_serializeDocumentMapEquals(v []types.ScanConditionPair, value 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMatches(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMemberAdditionalConfiguration(v *types.MemberAdditionalConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8759,6 +8784,17 @@ func awsRestjson1_serializeDocumentNeq(v []string, value smithyjson.Value) error
 }
 
 func awsRestjson1_serializeDocumentNotEquals(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNotMatches(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

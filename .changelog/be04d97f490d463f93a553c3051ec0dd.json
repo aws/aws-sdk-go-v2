@@ -1,0 +1,8 @@
+{
+    "id": "be04d97f-490d-463f-93a5-53c3051ec0dd",
+    "type": "feature",
+    "description": "Adds the audioDataDeliveryEnabled boolean field to the Model Invocation Logging Configuration.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

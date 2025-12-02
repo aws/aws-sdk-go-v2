@@ -1,0 +1,8 @@
+{
+    "id": "83f4e49a-7e99-4366-93c9-d6b9342afb73",
+    "type": "feature",
+    "description": "Supports AgentCore Evaluations, Policy, Episodic Memory Strategy, Resource Based Policy for Runtime and Gateway APIs, API Gateway Rest API Targets and enhances JWT authorizer.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

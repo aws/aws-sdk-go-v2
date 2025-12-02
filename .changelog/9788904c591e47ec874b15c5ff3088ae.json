@@ -1,0 +1,8 @@
+{
+    "id": "9788904c-591e-47ec-874b-15c5ff3088ae",
+    "type": "feature",
+    "description": "Add support for S3 Storage Lens Advanced Performance Metrics, Expanded Prefixes metrics report, and export to S3 Tables.",
+    "modules": [
+        "service/s3control"
+    ]
+}

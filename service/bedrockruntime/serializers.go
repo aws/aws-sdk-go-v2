@@ -1124,6 +1124,54 @@ func awsRestjson1_serializeDocumentAsyncInvokeS3OutputDataConfig(v *types.AsyncI
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioBlock(v *types.AudioBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Error != nil {
+		ok := object.Key("error")
+		if err := awsRestjson1_serializeDocumentErrorBlock(v.Error, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Format) > 0 {
+		ok := object.Key("format")
+		ok.String(string(v.Format))
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsRestjson1_serializeDocumentAudioSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudioSource(v types.AudioSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.AudioSourceMemberBytes:
+		av := object.Key("bytes")
+		av.Base64EncodeBytes(uv.Value)
+
+	case *types.AudioSourceMemberS3Location:
+		av := object.Key("s3Location")
+		if err := awsRestjson1_serializeDocumentS3Location(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAutoToolChoice(v *types.AutoToolChoice, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1331,6 +1379,12 @@ func awsRestjson1_serializeDocumentContentBlock(v types.ContentBlock, value smit
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ContentBlockMemberAudio:
+		av := object.Key("audio")
+		if err := awsRestjson1_serializeDocumentAudioBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ContentBlockMemberCachePoint:
 		av := object.Key("cachePoint")
 		if err := awsRestjson1_serializeDocumentCachePointBlock(&uv.Value, av); err != nil {
@@ -1643,6 +1697,18 @@ func awsRestjson1_serializeDocumentDocumentSource(v types.DocumentSource, value 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentErrorBlock(v *types.ErrorBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Message != nil {
+		ok := object.Key("message")
+		ok.String(*v.Message)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGuardrailConfiguration(v *types.GuardrailConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1889,6 +1955,13 @@ func awsRestjson1_serializeDocumentGuardrailTextBlock(v *types.GuardrailTextBloc
 func awsRestjson1_serializeDocumentImageBlock(v *types.ImageBlock, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Error != nil {
+		ok := object.Key("error")
+		if err := awsRestjson1_serializeDocumentErrorBlock(v.Error, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.Format) > 0 {
 		ok := object.Key("format")

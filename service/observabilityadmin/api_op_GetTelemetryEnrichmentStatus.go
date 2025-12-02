@@ -13,8 +13,8 @@ import (
 
 //	Returns the current status of the resource tags for telemetry feature, which
 //
-// enhances telemetry data with additional resource metadata from Amazon Web
-// Services Resource Explorer.
+// enhances telemetry data with additional resource metadata from Resource
+// Explorer.
 func (c *Client) GetTelemetryEnrichmentStatus(ctx context.Context, params *GetTelemetryEnrichmentStatusInput, optFns ...func(*Options)) (*GetTelemetryEnrichmentStatusOutput, error) {
 	if params == nil {
 		params = &GetTelemetryEnrichmentStatusInput{}
@@ -36,8 +36,8 @@ type GetTelemetryEnrichmentStatusInput struct {
 
 type GetTelemetryEnrichmentStatusOutput struct {
 
-	//  The Amazon Resource Name (ARN) of the Amazon Web Services Resource Explorer
-	// managed view used for resource tags for telemetry, if the feature is enabled.
+	//  The Amazon Resource Name (ARN) of the Resource Explorer managed view used for
+	// resource tags for telemetry, if the feature is enabled.
 	AwsResourceExplorerManagedViewArn *string
 
 	//  The current status of the resource tags for telemetry feature ( Running ,

@@ -902,6 +902,7 @@ const (
 	SupportedSavingsPlansTypeComputeSp     SupportedSavingsPlansType = "COMPUTE_SP"
 	SupportedSavingsPlansTypeEc2InstanceSp SupportedSavingsPlansType = "EC2_INSTANCE_SP"
 	SupportedSavingsPlansTypeSagemakerSp   SupportedSavingsPlansType = "SAGEMAKER_SP"
+	SupportedSavingsPlansTypeDatabaseSp    SupportedSavingsPlansType = "DATABASE_SP"
 )
 
 // Values returns all known values for SupportedSavingsPlansType. Note that this
@@ -913,6 +914,7 @@ func (SupportedSavingsPlansType) Values() []SupportedSavingsPlansType {
 		"COMPUTE_SP",
 		"EC2_INSTANCE_SP",
 		"SAGEMAKER_SP",
+		"DATABASE_SP",
 	}
 }
 

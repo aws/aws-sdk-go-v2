@@ -2154,6 +2154,24 @@ type DomainUnitUserProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The encryption configuration details.
+type EncryptionConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the KMS key to use for encryption. This field
+	// is required only when sseAlgorithm is set to aws:kms .
+	KmsKeyArn *string
+
+	// The server-side encryption algorithm to use. Valid values are AES256 for
+	// S3-managed encryption keys, or aws:kms for Amazon Web Services KMS-managed
+	// encryption keys. If you choose SSE-KMS encryption you must grant the S3 Tables
+	// maintenance principal access to your KMS key. For more information, see [Permissions requirements for S3 Tables SSE-KMS encryption].
+	//
+	// [Permissions requirements for S3 Tables SSE-KMS encryption]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
+	SseAlgorithm *string
+
+	noSmithyDocumentSerde
+}
+
 // The details about the specified action configured for an environment. For
 // example, the details of the specified console links for an analytics tool that
 // is available in this environment.
@@ -3962,7 +3980,13 @@ type MetadataGenerationRunItem struct {
 	Target *MetadataGenerationRunTarget
 
 	// The type of the metadata generation run.
+	//
+	// Deprecated: This field is going to be deprecated, please use the 'types' field
+	// to provide the MetadataGenerationRun types
 	Type MetadataGenerationRunType
+
+	// The types of the metadata generation run.
+	Types []MetadataGenerationRunType
 
 	noSmithyDocumentSerde
 }
@@ -3982,6 +4006,25 @@ type MetadataGenerationRunTarget struct {
 
 	// The revision of the asset for which metadata was generated.
 	Revision *string
+
+	noSmithyDocumentSerde
+}
+
+// The statistics of the metadata generation run type.
+type MetadataGenerationRunTypeStat struct {
+
+	// The status of the metadata generation run type statistics.
+	//
+	// This member is required.
+	Status MetadataGenerationRunStatus
+
+	// The type of the metadata generation run type statistics.
+	//
+	// This member is required.
+	Type MetadataGenerationRunType
+
+	// The error message displayed if the action fails to run.
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }

@@ -13,9 +13,8 @@ import (
 
 //	Enables the resource tags for telemetry feature for your account, which
 //
-// enhances telemetry data with additional resource metadata from Amazon Web
-// Services Resource Explorer to provide richer context for monitoring and
-// observability.
+// enhances telemetry data with additional resource metadata from Resource Explorer
+// to provide richer context for monitoring and observability.
 func (c *Client) StartTelemetryEnrichment(ctx context.Context, params *StartTelemetryEnrichmentInput, optFns ...func(*Options)) (*StartTelemetryEnrichmentOutput, error) {
 	if params == nil {
 		params = &StartTelemetryEnrichmentInput{}
@@ -37,8 +36,8 @@ type StartTelemetryEnrichmentInput struct {
 
 type StartTelemetryEnrichmentOutput struct {
 
-	//  The Amazon Resource Name (ARN) of the Amazon Web Services Resource Explorer
-	// managed view created for resource tags for telemetry.
+	//  The Amazon Resource Name (ARN) of the Resource Explorer managed view created
+	// for resource tags for telemetry.
 	AwsResourceExplorerManagedViewArn *string
 
 	//  The status of the resource tags for telemetry feature after the start

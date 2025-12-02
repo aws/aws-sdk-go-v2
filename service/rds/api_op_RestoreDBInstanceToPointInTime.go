@@ -57,6 +57,12 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// This member is required.
 	TargetDBInstanceIdentifier *string
 
+	// A list of additional storage volumes to restore to the DB instance. You can
+	// restore up to three additional storage volumes using the names rdsdbdata2 ,
+	// rdsdbdata3 , and rdsdbdata4 . Additional storage volumes are supported for RDS
+	// for Oracle and RDS for SQL Server DB instances only.
+	AdditionalStorageVolumes []types.AdditionalStorageVolume
+
 	// The amount of storage (in gibibytes) to allocate initially for the DB instance.
 	// Follow the allocation rules specified in CreateDBInstance .
 	//

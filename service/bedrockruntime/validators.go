@@ -236,6 +236,47 @@ func validateAsyncInvokeS3OutputDataConfig(v *types.AsyncInvokeS3OutputDataConfi
 	}
 }
 
+func validateAudioBlock(v *types.AudioBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioBlock"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateAudioSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioSource(v types.AudioSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioSource"}
+	switch uv := v.(type) {
+	case *types.AudioSourceMemberS3Location:
+		if err := validateS3Location(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Location]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCachePointBlock(v *types.CachePointBlock) error {
 	if v == nil {
 		return nil
@@ -272,6 +313,11 @@ func validateContentBlock(v types.ContentBlock) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContentBlock"}
 	switch uv := v.(type) {
+	case *types.ContentBlockMemberAudio:
+		if err := validateAudioBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[audio]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ContentBlockMemberCachePoint:
 		if err := validateCachePointBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[cachePoint]", err.(smithy.InvalidParamsError))

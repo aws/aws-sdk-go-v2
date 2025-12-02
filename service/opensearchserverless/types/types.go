@@ -149,6 +149,9 @@ type CollectionDetail struct {
 	// The type of collection.
 	Type CollectionType
 
+	// Configuration options for vector search capabilities in the collection.
+	VectorOptions *VectorOptions
+
 	noSmithyDocumentSerde
 }
 
@@ -236,6 +239,9 @@ type CreateCollectionDetail struct {
 
 	// The type of collection.
 	Type CollectionType
+
+	// Configuration options for vector search capabilities in the collection.
+	VectorOptions *VectorOptions
 
 	noSmithyDocumentSerde
 }
@@ -768,6 +774,18 @@ type UpdateVpcEndpointDetail struct {
 
 	// The ID of the subnets from which you access OpenSearch Serverless.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration options for vector search capabilities in an OpenSearch
+// Serverless collection.
+type VectorOptions struct {
+
+	// Specifies whether serverless vector acceleration is enabled for the collection.
+	//
+	// This member is required.
+	ServerlessVectorAcceleration ServerlessVectorAccelerationStatus
 
 	noSmithyDocumentSerde
 }

@@ -2,6 +2,33 @@
 
 package types
 
+type Action string
+
+// Enum values for Action
+const (
+	ActionAllow           Action = "ALLOW"
+	ActionBlock           Action = "BLOCK"
+	ActionCount           Action = "COUNT"
+	ActionCaptcha         Action = "CAPTCHA"
+	ActionChallenge       Action = "CHALLENGE"
+	ActionExcludedAsCount Action = "EXCLUDED_AS_COUNT"
+)
+
+// Values returns all known values for Action. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Action) Values() []Action {
+	return []Action{
+		"ALLOW",
+		"BLOCK",
+		"COUNT",
+		"CAPTCHA",
+		"CHALLENGE",
+		"EXCLUDED_AS_COUNT",
+	}
+}
+
 type CentralizationFailureReason string
 
 // Enum values for CentralizationFailureReason
@@ -98,13 +125,135 @@ func (EncryptionStrategy) Values() []EncryptionStrategy {
 	}
 }
 
+type FilterBehavior string
+
+// Enum values for FilterBehavior
+const (
+	FilterBehaviorKeep FilterBehavior = "KEEP"
+	FilterBehaviorDrop FilterBehavior = "DROP"
+)
+
+// Values returns all known values for FilterBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterBehavior) Values() []FilterBehavior {
+	return []FilterBehavior{
+		"KEEP",
+		"DROP",
+	}
+}
+
+type FilterRequirement string
+
+// Enum values for FilterRequirement
+const (
+	FilterRequirementMeetsAll FilterRequirement = "MEETS_ALL"
+	FilterRequirementMeetsAny FilterRequirement = "MEETS_ANY"
+)
+
+// Values returns all known values for FilterRequirement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterRequirement) Values() []FilterRequirement {
+	return []FilterRequirement{
+		"MEETS_ALL",
+		"MEETS_ANY",
+	}
+}
+
+type IntegrationStatus string
+
+// Enum values for IntegrationStatus
+const (
+	IntegrationStatusActive   IntegrationStatus = "ACTIVE"
+	IntegrationStatusDeleting IntegrationStatus = "DELETING"
+)
+
+// Values returns all known values for IntegrationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationStatus) Values() []IntegrationStatus {
+	return []IntegrationStatus{
+		"ACTIVE",
+		"DELETING",
+	}
+}
+
+type LogType string
+
+// Enum values for LogType
+const (
+	LogTypeApplication LogType = "APPLICATION_LOGS"
+	LogTypeUsage       LogType = "USAGE_LOGS"
+)
+
+// Values returns all known values for LogType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogType) Values() []LogType {
+	return []LogType{
+		"APPLICATION_LOGS",
+		"USAGE_LOGS",
+	}
+}
+
+type OutputFormat string
+
+// Enum values for OutputFormat
+const (
+	OutputFormatPlain OutputFormat = "plain"
+	OutputFormatJson  OutputFormat = "json"
+)
+
+// Values returns all known values for OutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutputFormat) Values() []OutputFormat {
+	return []OutputFormat{
+		"plain",
+		"json",
+	}
+}
+
+type RecordFormat string
+
+// Enum values for RecordFormat
+const (
+	RecordFormatString RecordFormat = "STRING"
+	RecordFormatJson   RecordFormat = "JSON"
+)
+
+// Values returns all known values for RecordFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordFormat) Values() []RecordFormat {
+	return []RecordFormat{
+		"STRING",
+		"JSON",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeAwsEc2Instance    ResourceType = "AWS::EC2::Instance"
-	ResourceTypeAwsEc2Vpc         ResourceType = "AWS::EC2::VPC"
-	ResourceTypeAwsLamdbaFunction ResourceType = "AWS::Lambda::Function"
+	ResourceTypeAwsEc2Instance                     ResourceType = "AWS::EC2::Instance"
+	ResourceTypeAwsEc2Vpc                          ResourceType = "AWS::EC2::VPC"
+	ResourceTypeAwsLamdbaFunction                  ResourceType = "AWS::Lambda::Function"
+	ResourceTypeAwsCloudtrail                      ResourceType = "AWS::CloudTrail"
+	ResourceTypeAwsEksCluster                      ResourceType = "AWS::EKS::Cluster"
+	ResourceTypeAwsWafV2WebAcl                     ResourceType = "AWS::WAFv2::WebACL"
+	ResourceTypeAwsElbLoadbalancer                 ResourceType = "AWS::ElasticLoadBalancingV2::LoadBalancer"
+	ResourceTypeAwsRoute53ResolverResolverEndpoint ResourceType = "AWS::Route53Resolver::ResolverEndpoint"
+	ResourceTypeAwsBedrockAgentcoreRuntime         ResourceType = "AWS::BedrockAgentCore::Runtime"
+	ResourceTypeAwsBedrockAgentcoreBrowser         ResourceType = "AWS::BedrockAgentCore::Browser"
+	ResourceTypeAwsBedrockAgentcoreCodeInterpreter ResourceType = "AWS::BedrockAgentCore::CodeInterpreter"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -116,6 +265,14 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::EC2::Instance",
 		"AWS::EC2::VPC",
 		"AWS::Lambda::Function",
+		"AWS::CloudTrail",
+		"AWS::EKS::Cluster",
+		"AWS::WAFv2::WebACL",
+		"AWS::ElasticLoadBalancingV2::LoadBalancer",
+		"AWS::Route53Resolver::ResolverEndpoint",
+		"AWS::BedrockAgentCore::Runtime",
+		"AWS::BedrockAgentCore::Browser",
+		"AWS::BedrockAgentCore::CodeInterpreter",
 	}
 }
 
@@ -137,6 +294,25 @@ func (RuleHealth) Values() []RuleHealth {
 		"Healthy",
 		"Unhealthy",
 		"Provisioning",
+	}
+}
+
+type SSEAlgorithm string
+
+// Enum values for SSEAlgorithm
+const (
+	SSEAlgorithmSseKms SSEAlgorithm = "aws:kms"
+	SSEAlgorithmSseS3  SSEAlgorithm = "AES256"
+)
+
+// Values returns all known values for SSEAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SSEAlgorithm) Values() []SSEAlgorithm {
+	return []SSEAlgorithm{
+		"aws:kms",
+		"AES256",
 	}
 }
 
@@ -190,6 +366,62 @@ func (TelemetryEnrichmentStatus) Values() []TelemetryEnrichmentStatus {
 	}
 }
 
+type TelemetryPipelineStatus string
+
+// Enum values for TelemetryPipelineStatus
+const (
+	TelemetryPipelineStatusCreating     TelemetryPipelineStatus = "CREATING"
+	TelemetryPipelineStatusActive       TelemetryPipelineStatus = "ACTIVE"
+	TelemetryPipelineStatusUpdating     TelemetryPipelineStatus = "UPDATING"
+	TelemetryPipelineStatusDeleting     TelemetryPipelineStatus = "DELETING"
+	TelemetryPipelineStatusCreateFailed TelemetryPipelineStatus = "CREATE_FAILED"
+	TelemetryPipelineStatusUpdateFailed TelemetryPipelineStatus = "UPDATE_FAILED"
+)
+
+// Values returns all known values for TelemetryPipelineStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TelemetryPipelineStatus) Values() []TelemetryPipelineStatus {
+	return []TelemetryPipelineStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+	}
+}
+
+type TelemetrySourceType string
+
+// Enum values for TelemetrySourceType
+const (
+	TelemetrySourceTypeVpcFlowLogs              TelemetrySourceType = "VPC_FLOW_LOGS"
+	TelemetrySourceTypeRoute53ResolverQueryLogs TelemetrySourceType = "ROUTE53_RESOLVER_QUERY_LOGS"
+	TelemetrySourceTypeEksAuditLogs             TelemetrySourceType = "EKS_AUDIT_LOGS"
+	TelemetrySourceTypeEksAuthenticatorLogs     TelemetrySourceType = "EKS_AUTHENTICATOR_LOGS"
+	TelemetrySourceTypeEksControllerManagerLogs TelemetrySourceType = "EKS_CONTROLLER_MANAGER_LOGS"
+	TelemetrySourceTypeEksSchedulerLogs         TelemetrySourceType = "EKS_SCHEDULER_LOGS"
+	TelemetrySourceTypeEksApiLogs               TelemetrySourceType = "EKS_API_LOGS"
+)
+
+// Values returns all known values for TelemetrySourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TelemetrySourceType) Values() []TelemetrySourceType {
+	return []TelemetrySourceType{
+		"VPC_FLOW_LOGS",
+		"ROUTE53_RESOLVER_QUERY_LOGS",
+		"EKS_AUDIT_LOGS",
+		"EKS_AUTHENTICATOR_LOGS",
+		"EKS_CONTROLLER_MANAGER_LOGS",
+		"EKS_SCHEDULER_LOGS",
+		"EKS_API_LOGS",
+	}
+}
+
 type TelemetryState string
 
 // Enum values for TelemetryState
@@ -229,5 +461,22 @@ func (TelemetryType) Values() []TelemetryType {
 		"Logs",
 		"Metrics",
 		"Traces",
+	}
+}
+
+type WAFLogType string
+
+// Enum values for WAFLogType
+const (
+	WAFLogTypeWafLogs WAFLogType = "WAF_LOGS"
+)
+
+// Values returns all known values for WAFLogType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WAFLogType) Values() []WAFLogType {
+	return []WAFLogType{
+		"WAF_LOGS",
 	}
 }

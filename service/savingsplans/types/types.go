@@ -64,7 +64,7 @@ type SavingsPlan struct {
 	Region *string
 
 	// The time until when a return for the Savings Plan can be requested. If the
-	// Savings Plan is not returnable, the field reflects the Savings Plan start time.
+	// Savings Plan is not returnable, the field reflects the Savings Plans start time.
 	ReturnableUntil *string
 
 	// The Amazon Resource Name (ARN) of the Savings Plan.

@@ -11,13 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // Creates a vector bucket in the Amazon Web Services Region that you want your
 // bucket to be in.
 //
 // Permissions You must have the s3vectors:CreateVectorBucket permission to use
 // this operation.
+//
+// You must have the s3vectors:TagResource permission in addition to
+// s3vectors:CreateVectorBucket permission to create a vector bucket with tags.
 func (c *Client) CreateVectorBucket(ctx context.Context, params *CreateVectorBucketInput, optFns ...func(*Options)) (*CreateVectorBucketOutput, error) {
 	if params == nil {
 		params = &CreateVectorBucketInput{}
@@ -44,6 +45,17 @@ type CreateVectorBucketInput struct {
 	// specify, all new vectors in Amazon S3 vector buckets use server-side encryption
 	// with Amazon S3 managed keys (SSE-S3), specifically AES256 .
 	EncryptionConfiguration *types.EncryptionConfiguration
+
+	// An array of user-defined tags that you would like to apply to the vector bucket
+	// that you are creating. A tag is a key-value pair that you apply to your
+	// resources. Tags can help you organize and control access to resources. For more
+	// information, see [Tagging for cost allocation or attribute-based access control (ABAC)].
+	//
+	// You must have the s3vectors:TagResource permission in addition to
+	// s3vectors:CreateVectorBucket permission to create a vector bucket with tags.
+	//
+	// [Tagging for cost allocation or attribute-based access control (ABAC)]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

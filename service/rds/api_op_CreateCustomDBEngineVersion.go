@@ -30,7 +30,9 @@ func (c *Client) CreateCustomDBEngineVersion(ctx context.Context, params *Create
 
 type CreateCustomDBEngineVersionInput struct {
 
-	// The database engine. RDS Custom for Oracle supports the following values:
+	// The database engine.
+	//
+	// RDS Custom for Oracle supports the following values:
 	//
 	//   - custom-oracle-ee
 	//
@@ -40,16 +42,38 @@ type CreateCustomDBEngineVersionInput struct {
 	//
 	//   - custom-oracle-se2-cdb
 	//
+	// RDS Custom for SQL Server supports the following values:
+	//
+	//   - custom-sqlserver-ee
+	//
+	//   - custom-sqlserver-se
+	//
+	//   - ccustom-sqlserver-web
+	//
+	//   - custom-sqlserver-dev
+	//
+	// RDS for SQL Server supports only sqlserver-dev-ee .
+	//
 	// This member is required.
 	Engine *string
 
-	// The name of your CEV. The name format is 19.customized_string. For example, a
-	// valid CEV name is 19.my_cev1 . This setting is required for RDS Custom for
-	// Oracle, but optional for Amazon RDS. The combination of Engine and EngineVersion
-	// is unique per customer per Region.
+	// The name of your custom engine version (CEV).
+	//
+	// For RDS Custom for Oracle, the name format is 19.*customized_string* . For
+	// example, a valid CEV name is 19.my_cev1 .
+	//
+	// For RDS for SQL Server and RDS Custom for SQL Server, the name format is major
+	// engine_version*.*minor_engine_version*.*customized_string* . For example, a
+	// valid CEV name is 16.00.4215.2.my_cev1 .
+	//
+	// The CEV name is unique per customer per Amazon Web Services Regions.
 	//
 	// This member is required.
 	EngineVersion *string
+
+	// The database installation files (ISO and EXE) uploaded to Amazon S3 for your
+	// database engine version to import to Amazon RDS.
+	DatabaseInstallationFiles []string
 
 	// The name of an Amazon S3 bucket that contains database installation files for
 	// your CEV. For example, a valid bucket name is my-custom-installation-files .
@@ -163,6 +187,10 @@ type CreateCustomDBEngineVersionOutput struct {
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string
 
+	// The database installation files (ISO and EXE) uploaded to Amazon S3 for your
+	// database engine version to import to Amazon RDS. Required for sqlserver-dev-ee .
+	DatabaseInstallationFiles []string
+
 	// The name of the Amazon S3 bucket that contains your database installation files.
 	DatabaseInstallationFilesS3BucketName *string
 
@@ -183,6 +211,10 @@ type CreateCustomDBEngineVersionOutput struct {
 	// The types of logs that the database engine has available for export to
 	// CloudWatch Logs.
 	ExportableLogTypes []string
+
+	// The reason that the custom engine version creation for sqlserver-dev-ee failed
+	// with an incompatible-installation-media status.
+	FailureReason *string
 
 	// The EC2 image
 	Image *types.CustomDBEngineVersionAMI

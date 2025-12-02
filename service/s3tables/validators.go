@@ -170,6 +170,26 @@ func (m *validateOpDeleteTableBucketPolicy) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteTableBucketReplication struct {
+}
+
+func (*validateOpDeleteTableBucketReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTableBucketReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTableBucketReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTableBucketReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTable struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpDeleteTablePolicy) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTablePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTableReplication struct {
+}
+
+func (*validateOpDeleteTableReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTableReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTableReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTableReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +370,46 @@ func (m *validateOpGetTableBucketPolicy) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTableBucketReplication struct {
+}
+
+func (*validateOpGetTableBucketReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableBucketReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableBucketReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableBucketReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTableBucketStorageClass struct {
+}
+
+func (*validateOpGetTableBucketStorageClass) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableBucketStorageClass) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableBucketStorageClassInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableBucketStorageClassInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTableEncryption struct {
 }
 
@@ -425,6 +505,106 @@ func (m *validateOpGetTablePolicy) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTablePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTableRecordExpirationConfiguration struct {
+}
+
+func (*validateOpGetTableRecordExpirationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableRecordExpirationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableRecordExpirationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableRecordExpirationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTableRecordExpirationJobStatus struct {
+}
+
+func (*validateOpGetTableRecordExpirationJobStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableRecordExpirationJobStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableRecordExpirationJobStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableRecordExpirationJobStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTableReplication struct {
+}
+
+func (*validateOpGetTableReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTableReplicationStatus struct {
+}
+
+func (*validateOpGetTableReplicationStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableReplicationStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableReplicationStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableReplicationStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTableStorageClass struct {
+}
+
+func (*validateOpGetTableStorageClass) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableStorageClass) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableStorageClassInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableStorageClassInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +750,46 @@ func (m *validateOpPutTableBucketPolicy) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutTableBucketReplication struct {
+}
+
+func (*validateOpPutTableBucketReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTableBucketReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTableBucketReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTableBucketReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutTableBucketStorageClass struct {
+}
+
+func (*validateOpPutTableBucketStorageClass) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTableBucketStorageClass) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTableBucketStorageClassInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTableBucketStorageClassInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutTableMaintenanceConfiguration struct {
 }
 
@@ -605,6 +825,46 @@ func (m *validateOpPutTablePolicy) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutTablePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutTableRecordExpirationConfiguration struct {
+}
+
+func (*validateOpPutTableRecordExpirationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTableRecordExpirationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTableRecordExpirationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTableRecordExpirationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutTableReplication struct {
+}
+
+func (*validateOpPutTableReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTableReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTableReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTableReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -722,12 +982,20 @@ func addOpDeleteTableBucketPolicyValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDeleteTableBucketPolicy{}, middleware.After)
 }
 
+func addOpDeleteTableBucketReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTableBucketReplication{}, middleware.After)
+}
+
 func addOpDeleteTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTable{}, middleware.After)
 }
 
 func addOpDeleteTablePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTablePolicy{}, middleware.After)
+}
+
+func addOpDeleteTableReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTableReplication{}, middleware.After)
 }
 
 func addOpGetNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -754,6 +1022,14 @@ func addOpGetTableBucketPolicyValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetTableBucketPolicy{}, middleware.After)
 }
 
+func addOpGetTableBucketReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableBucketReplication{}, middleware.After)
+}
+
+func addOpGetTableBucketStorageClassValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableBucketStorageClass{}, middleware.After)
+}
+
 func addOpGetTableEncryptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableEncryption{}, middleware.After)
 }
@@ -772,6 +1048,26 @@ func addOpGetTableMetadataLocationValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetTablePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTablePolicy{}, middleware.After)
+}
+
+func addOpGetTableRecordExpirationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableRecordExpirationConfiguration{}, middleware.After)
+}
+
+func addOpGetTableRecordExpirationJobStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableRecordExpirationJobStatus{}, middleware.After)
+}
+
+func addOpGetTableReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableReplication{}, middleware.After)
+}
+
+func addOpGetTableReplicationStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableReplicationStatus{}, middleware.After)
+}
+
+func addOpGetTableStorageClassValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableStorageClass{}, middleware.After)
 }
 
 func addOpListNamespacesValidationMiddleware(stack *middleware.Stack) error {
@@ -802,12 +1098,28 @@ func addOpPutTableBucketPolicyValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpPutTableBucketPolicy{}, middleware.After)
 }
 
+func addOpPutTableBucketReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTableBucketReplication{}, middleware.After)
+}
+
+func addOpPutTableBucketStorageClassValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTableBucketStorageClass{}, middleware.After)
+}
+
 func addOpPutTableMaintenanceConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutTableMaintenanceConfiguration{}, middleware.After)
 }
 
 func addOpPutTablePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutTablePolicy{}, middleware.After)
+}
+
+func addOpPutTableRecordExpirationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTableRecordExpirationConfiguration{}, middleware.After)
+}
+
+func addOpPutTableReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTableReplication{}, middleware.After)
 }
 
 func addOpRenameTableValidationMiddleware(stack *middleware.Stack) error {
@@ -879,6 +1191,38 @@ func validateIcebergSchema(v *types.IcebergSchema) error {
 	}
 }
 
+func validateReplicationDestination(v *types.ReplicationDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationDestination"}
+	if v.DestinationTableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationTableBucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReplicationDestinations(v []types.ReplicationDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationDestinations"}
+	for i := range v {
+		if err := validateReplicationDestination(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSchemaField(v *types.SchemaField) error {
 	if v == nil {
 		return nil
@@ -914,6 +1258,79 @@ func validateSchemaFieldList(v []types.SchemaField) error {
 	}
 }
 
+func validateStorageClassConfiguration(v *types.StorageClassConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageClassConfiguration"}
+	if len(v.StorageClass) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageClass"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableBucketReplicationConfiguration(v *types.TableBucketReplicationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableBucketReplicationConfiguration"}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateTableBucketReplicationRules(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableBucketReplicationRule(v *types.TableBucketReplicationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableBucketReplicationRule"}
+	if v.Destinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destinations"))
+	} else if v.Destinations != nil {
+		if err := validateReplicationDestinations(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableBucketReplicationRules(v []types.TableBucketReplicationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableBucketReplicationRules"}
+	for i := range v {
+		if err := validateTableBucketReplicationRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTableMetadata(v types.TableMetadata) error {
 	if v == nil {
 		return nil
@@ -925,6 +1342,64 @@ func validateTableMetadata(v types.TableMetadata) error {
 			invalidParams.AddNested("[iceberg]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableReplicationConfiguration(v *types.TableReplicationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableReplicationConfiguration"}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateTableReplicationRules(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableReplicationRule(v *types.TableReplicationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableReplicationRule"}
+	if v.Destinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destinations"))
+	} else if v.Destinations != nil {
+		if err := validateReplicationDestinations(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableReplicationRules(v []types.TableReplicationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableReplicationRules"}
+	for i := range v {
+		if err := validateTableReplicationRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -964,6 +1439,11 @@ func validateOpCreateTableBucketInput(v *CreateTableBucketInput) error {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.StorageClassConfiguration != nil {
+		if err := validateStorageClassConfiguration(v.StorageClassConfiguration); err != nil {
+			invalidParams.AddNested("StorageClassConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -996,6 +1476,11 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 	if v.EncryptionConfiguration != nil {
 		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StorageClassConfiguration != nil {
+		if err := validateStorageClassConfiguration(v.StorageClassConfiguration); err != nil {
+			invalidParams.AddNested("StorageClassConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1083,6 +1568,21 @@ func validateOpDeleteTableBucketPolicyInput(v *DeleteTableBucketPolicyInput) err
 	}
 }
 
+func validateOpDeleteTableBucketReplicationInput(v *DeleteTableBucketReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTableBucketReplicationInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteTableInput(v *DeleteTableInput) error {
 	if v == nil {
 		return nil
@@ -1117,6 +1617,24 @@ func validateOpDeleteTablePolicyInput(v *DeleteTablePolicyInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTableReplicationInput(v *DeleteTableReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTableReplicationInput"}
+	if v.TableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
+	}
+	if v.VersionToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1218,6 +1736,36 @@ func validateOpGetTableBucketPolicyInput(v *GetTableBucketPolicyInput) error {
 	}
 }
 
+func validateOpGetTableBucketReplicationInput(v *GetTableBucketReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableBucketReplicationInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTableBucketStorageClassInput(v *GetTableBucketStorageClassInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableBucketStorageClassInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTableEncryptionInput(v *GetTableEncryptionInput) error {
 	if v == nil {
 		return nil
@@ -1307,6 +1855,87 @@ func validateOpGetTablePolicyInput(v *GetTablePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTablePolicyInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTableRecordExpirationConfigurationInput(v *GetTableRecordExpirationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableRecordExpirationConfigurationInput"}
+	if v.TableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTableRecordExpirationJobStatusInput(v *GetTableRecordExpirationJobStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableRecordExpirationJobStatusInput"}
+	if v.TableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTableReplicationInput(v *GetTableReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableReplicationInput"}
+	if v.TableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTableReplicationStatusInput(v *GetTableReplicationStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableReplicationStatusInput"}
+	if v.TableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTableStorageClassInput(v *GetTableStorageClassInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableStorageClassInput"}
 	if v.TableBucketARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
 	}
@@ -1444,6 +2073,50 @@ func validateOpPutTableBucketPolicyInput(v *PutTableBucketPolicyInput) error {
 	}
 }
 
+func validateOpPutTableBucketReplicationInput(v *PutTableBucketReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTableBucketReplicationInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateTableBucketReplicationConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTableBucketStorageClassInput(v *PutTableBucketStorageClassInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTableBucketStorageClassInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if v.StorageClassConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageClassConfiguration"))
+	} else if v.StorageClassConfiguration != nil {
+		if err := validateStorageClassConfiguration(v.StorageClassConfiguration); err != nil {
+			invalidParams.AddNested("StorageClassConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutTableMaintenanceConfigurationInput(v *PutTableMaintenanceConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1487,6 +2160,46 @@ func validateOpPutTablePolicyInput(v *PutTablePolicyInput) error {
 	}
 	if v.ResourcePolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourcePolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTableRecordExpirationConfigurationInput(v *PutTableRecordExpirationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTableRecordExpirationConfigurationInput"}
+	if v.TableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTableReplicationInput(v *PutTableReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTableReplicationInput"}
+	if v.TableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateTableReplicationConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

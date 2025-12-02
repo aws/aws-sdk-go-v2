@@ -11,8 +11,7 @@ import (
 )
 
 // Enables the service in account for the current Amazon Web Services Region or
-// specified Amazon Web Services Region. This API is in public preview and subject
-// to change.
+// specified Amazon Web Services Region.
 func (c *Client) EnableSecurityHubV2(ctx context.Context, params *EnableSecurityHubV2Input, optFns ...func(*Options)) (*EnableSecurityHubV2Output, error) {
 	if params == nil {
 		params = &EnableSecurityHubV2Input{}

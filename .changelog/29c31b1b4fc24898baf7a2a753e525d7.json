@@ -1,0 +1,8 @@
+{
+    "id": "29c31b1b-4fc2-4898-baf7-a2a753e525d7",
+    "type": "feature",
+    "description": "Amazon DataZone now supports exporting Catalog datasets as Amazon S3 tables, and provides automatic business glossary term suggestions for data assets.",
+    "modules": [
+        "service/datazone"
+    ]
+}

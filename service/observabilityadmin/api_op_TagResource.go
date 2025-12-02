@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates tags for a telemetry rule resource.
+//	Adds or updates tags for a resource. Supports telemetry rule resources and
+//
+// telemetry pipeline resources.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

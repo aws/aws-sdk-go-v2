@@ -11,14 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // Creates a vector index within a vector bucket. To specify the vector bucket,
 // you must use either the vector bucket name or the vector bucket Amazon Resource
 // Name (ARN).
 //
 // Permissions You must have the s3vectors:CreateIndex permission to use this
 // operation.
+//
+// You must have the s3vectors:TagResource permission in addition to
+// s3vectors:CreateIndex permission to create a vector index with tags.
 func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optFns ...func(*Options)) (*CreateIndexOutput, error) {
 	if params == nil {
 		params = &CreateIndexInput{}
@@ -56,8 +57,24 @@ type CreateIndexInput struct {
 	// This member is required.
 	IndexName *string
 
+	// The encryption configuration for a vector index. By default, if you don't
+	// specify, all new vectors in the vector index will use the encryption
+	// configuration of the vector bucket.
+	EncryptionConfiguration *types.EncryptionConfiguration
+
 	// The metadata configuration for the vector index.
 	MetadataConfiguration *types.MetadataConfiguration
+
+	// An array of user-defined tags that you would like to apply to the vector index
+	// that you are creating. A tag is a key-value pair that you apply to your
+	// resources. Tags can help you organize, track costs, and control access to
+	// resources. For more information, see [Tagging for cost allocation or attribute-based access control (ABAC)].
+	//
+	// You must have the s3vectors:TagResource permission in addition to
+	// s3vectors:CreateIndex permission to create a vector index with tags.
+	//
+	// [Tagging for cost allocation or attribute-based access control (ABAC)]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+	Tags map[string]string
 
 	// The Amazon Resource Name (ARN) of the vector bucket to create the vector index
 	// in.

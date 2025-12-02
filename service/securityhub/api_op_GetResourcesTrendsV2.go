@@ -13,8 +13,7 @@ import (
 )
 
 // Returns resource trend data based on the specified criteria. This operation
-// helps you analyze patterns and changes in resource compliance over time. This
-// API is in public preview and subject to change.
+// helps you analyze patterns and changes in resource compliance over time.
 func (c *Client) GetResourcesTrendsV2(ctx context.Context, params *GetResourcesTrendsV2Input, optFns ...func(*Options)) (*GetResourcesTrendsV2Output, error) {
 	if params == nil {
 		params = &GetResourcesTrendsV2Input{}

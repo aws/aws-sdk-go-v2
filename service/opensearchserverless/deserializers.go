@@ -4115,6 +4115,9 @@ func awsAwsjson10_deserializeOpErrorUpdateAccountSettings(response *smithyhttp.R
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsAwsjson10_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -5578,6 +5581,11 @@ func awsAwsjson10_deserializeDocumentCollectionDetail(v **types.CollectionDetail
 				sv.Type = types.CollectionType(jtv)
 			}
 
+		case "vectorOptions":
+			if err := awsAwsjson10_deserializeDocumentVectorOptions(&sv.VectorOptions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5981,6 +5989,11 @@ func awsAwsjson10_deserializeDocumentCreateCollectionDetail(v **types.CreateColl
 					return fmt.Errorf("expected CollectionType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.CollectionType(jtv)
+			}
+
+		case "vectorOptions":
+			if err := awsAwsjson10_deserializeDocumentVectorOptions(&sv.VectorOptions, value); err != nil {
+				return err
 			}
 
 		default:
@@ -8194,6 +8207,46 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentVectorOptions(v **types.VectorOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VectorOptions
+	if *v == nil {
+		sv = &types.VectorOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ServerlessVectorAcceleration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerlessVectorAccelerationStatus to be of type string, got %T instead", value)
+				}
+				sv.ServerlessVectorAcceleration = types.ServerlessVectorAccelerationStatus(jtv)
 			}
 
 		default:

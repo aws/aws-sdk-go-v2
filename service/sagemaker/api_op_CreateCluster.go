@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a SageMaker HyperPod cluster. SageMaker HyperPod is a capability of
-// SageMaker for creating and managing persistent clusters for developing large
-// machine learning models, such as large language models (LLMs) and diffusion
-// models. To learn more, see [Amazon SageMaker HyperPod]in the Amazon SageMaker Developer Guide.
+// Creates an Amazon SageMaker HyperPod cluster. SageMaker HyperPod is a
+// capability of SageMaker for creating and managing persistent clusters for
+// developing large machine learning models, such as large language models (LLMs)
+// and diffusion models. To learn more, see [Amazon SageMaker HyperPod]in the Amazon SageMaker Developer
+// Guide.
 //
 // [Amazon SageMaker HyperPod]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {

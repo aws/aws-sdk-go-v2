@@ -12,7 +12,7 @@ import (
 )
 
 // Grants permission to retrieve a list of connectorsV2 and their metadata for the
-// calling account. This API is in public preview and subject to change.
+// calling account.
 func (c *Client) ListConnectorsV2(ctx context.Context, params *ListConnectorsV2Input, optFns ...func(*Options)) (*ListConnectorsV2Output, error) {
 	if params == nil {
 		params = &ListConnectorsV2Input{}

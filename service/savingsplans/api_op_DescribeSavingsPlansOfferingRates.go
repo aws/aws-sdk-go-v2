@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the offering rates for the specified Savings Plans.
+// Describes the offering rates for Savings Plans you might want to purchase.
 func (c *Client) DescribeSavingsPlansOfferingRates(ctx context.Context, params *DescribeSavingsPlansOfferingRatesInput, optFns ...func(*Options)) (*DescribeSavingsPlansOfferingRatesOutput, error) {
 	if params == nil {
 		params = &DescribeSavingsPlansOfferingRatesInput{}

@@ -24,10 +24,6 @@ import (
 // Permissions You must have the s3:DeleteAccessGrantsLocation permission to use
 // this operation.
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [Delete a grant]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html
 func (c *Client) DeleteAccessGrantsLocation(ctx context.Context, params *DeleteAccessGrantsLocationInput, optFns ...func(*Options)) (*DeleteAccessGrantsLocationOutput, error) {
 	if params == nil {

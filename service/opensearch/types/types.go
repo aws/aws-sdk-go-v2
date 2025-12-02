@@ -183,6 +183,13 @@ type AIMLOptionsInput struct {
 	// specified domain.
 	S3VectorsEngine *S3VectorsEngine
 
+	// Specifies whether to enable serverless vector acceleration for the domain. When
+	// enabled, provides [GPU-accelerated]vector search capabilities for improved performance on vector
+	// workloads.
+	//
+	// [GPU-accelerated]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gpu-acceleration-vector-index.html
+	ServerlessVectorAcceleration *ServerlessVectorAcceleration
+
 	noSmithyDocumentSerde
 }
 
@@ -197,6 +204,9 @@ type AIMLOptionsOutput struct {
 	// Container for parameters representing the state of S3 vectors engine features
 	// on the specified domain.
 	S3VectorsEngine *S3VectorsEngine
+
+	// The current serverless vector acceleration configuration for the domain.
+	ServerlessVectorAcceleration *ServerlessVectorAcceleration
 
 	noSmithyDocumentSerde
 }
@@ -2548,6 +2558,18 @@ type SecurityLakeDirectQueryDataSource struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for serverless vector acceleration, which provides [GPU-accelerated] vector search
+// capabilities for improved performance on vector workloads.
+//
+// [GPU-accelerated]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gpu-acceleration-vector-index.html
+type ServerlessVectorAcceleration struct {
+
+	// Specifies whether serverless vector acceleration is enabled for the domain.
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }

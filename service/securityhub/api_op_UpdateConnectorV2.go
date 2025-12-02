@@ -12,7 +12,6 @@ import (
 )
 
 // Grants permission to update a connectorV2 based on its id and input parameters.
-// This API is in public preview and subject to change.
 func (c *Client) UpdateConnectorV2(ctx context.Context, params *UpdateConnectorV2Input, optFns ...func(*Options)) (*UpdateConnectorV2Output, error) {
 	if params == nil {
 		params = &UpdateConnectorV2Input{}
@@ -34,9 +33,6 @@ type UpdateConnectorV2Input struct {
 	//
 	// This member is required.
 	ConnectorId *string
-
-	// The clientSecret of ServiceNow.
-	ClientSecret *string
 
 	// The description of the connectorV2.
 	Description *string

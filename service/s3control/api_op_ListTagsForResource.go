@@ -22,44 +22,41 @@ import (
 //
 // This operation is only supported for the following Amazon S3 resources:
 //
+// [General purpose buckets]
+//
 // [Access Points for directory buckets]
 //
 // [Access Points for general purpose buckets]
 //
 // [Directory buckets]
 //
-// [Storage Lens groups]
+// [S3 Storage Lens groups]
 //
 // [S3 Access Grants instances, registered locations, and grants]
 //   - .
 //
-// Permissions For Storage Lens groups and S3 Access Grants, you must have the
+// Permissions For general purpose buckets, access points for general purpose
+// buckets, Storage Lens groups, and S3 Access Grants, you must have the
 // s3:ListTagsForResource permission to use this operation.
 //
-// For more information about the required Storage Lens Groups permissions, see [Setting account permissions to use S3 Storage Lens groups].
-//
-// Directory bucket permissions For directory buckets and access points for
-// directory buckets, you must have the s3express:ListTagsForResource permission
-// to use this operation. For more information about directory buckets policies and
-// permissions, see [Identity and Access Management (IAM) for S3 Express One Zone]in the Amazon S3 User Guide.
+// Directory bucket permissions For directory buckets, you must have the
+// s3express:ListTagsForResource permission to use this operation. For more
+// information about directory buckets policies and permissions, see [Identity and Access Management (IAM) for S3 Express One Zone]in the Amazon
+// S3 User Guide.
 //
 // HTTP Host header syntax  Directory buckets - The HTTP Host header syntax is
 // s3express-control.region.amazonaws.com .
 //
 // For information about S3 Tagging errors, see [List of Amazon S3 Tagging error codes].
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
-// [Setting account permissions to use S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
 // [Access Points for directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-db-tagging.html
+// [General purpose buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html
 // [S3 Access Grants instances, registered locations, and grants]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
 // [List of Amazon S3 Tagging error codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
 // [Directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
 // [Identity and Access Management (IAM) for S3 Express One Zone]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html
 // [Access Points for general purpose buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-tagging.html
-// [Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+// [S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

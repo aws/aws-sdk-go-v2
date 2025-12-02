@@ -24,10 +24,6 @@ import (
 //
 // For information about REST API errors, see [REST error responses].
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [REST error responses]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses
 func (c *Client) DeleteAccessPointScope(ctx context.Context, params *DeleteAccessPointScopeInput, optFns ...func(*Options)) (*DeleteAccessPointScopeOutput, error) {
 	if params == nil {

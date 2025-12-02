@@ -138,6 +138,34 @@ func (e *InternalServerErrorException) ErrorCode() string {
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The requested operation is not allowed on this resource. This may occur when
+// attempting to modify a resource that is managed by a service or has restrictions
+// that prevent the operation.
+type MethodNotAllowedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MethodNotAllowedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MethodNotAllowedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MethodNotAllowedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MethodNotAllowedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MethodNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request was rejected because the specified resource could not be found.
 type NotFoundException struct {
 	Message *string

@@ -12354,6 +12354,96 @@ func awsAwsjson11_deserializeDocumentOntapFileSystemConfiguration(v **types.Onta
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOntapFileSystemIdentity(v **types.OntapFileSystemIdentity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OntapFileSystemIdentity
+	if *v == nil {
+		sv = &types.OntapFileSystemIdentity{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OntapFileSystemUserType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.OntapFileSystemUserType(jtv)
+			}
+
+		case "UnixUser":
+			if err := awsAwsjson11_deserializeDocumentOntapUnixFileSystemUser(&sv.UnixUser, value); err != nil {
+				return err
+			}
+
+		case "WindowsUser":
+			if err := awsAwsjson11_deserializeDocumentOntapWindowsFileSystemUser(&sv.WindowsUser, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOntapUnixFileSystemUser(v **types.OntapUnixFileSystemUser, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OntapUnixFileSystemUser
+	if *v == nil {
+		sv = &types.OntapUnixFileSystemUser{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OntapFileSystemUserName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOntapVolumeConfiguration(v **types.OntapVolumeConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12514,6 +12604,46 @@ func awsAwsjson11_deserializeDocumentOntapVolumeConfiguration(v **types.OntapVol
 					return fmt.Errorf("expected VolumeStyle to be of type string, got %T instead", value)
 				}
 				sv.VolumeStyle = types.VolumeStyle(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOntapWindowsFileSystemUser(v **types.OntapWindowsFileSystemUser, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OntapWindowsFileSystemUser
+	if *v == nil {
+		sv = &types.OntapWindowsFileSystemUser{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OntapFileSystemUserName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
 			}
 
 		default:
@@ -13757,6 +13887,11 @@ func awsAwsjson11_deserializeDocumentS3AccessPointAttachment(v **types.S3AccessP
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "OntapConfiguration":
+			if err := awsAwsjson11_deserializeDocumentS3AccessPointOntapConfiguration(&sv.OntapConfiguration, value); err != nil {
+				return err
+			}
+
 		case "OpenZFSConfiguration":
 			if err := awsAwsjson11_deserializeDocumentS3AccessPointOpenZFSConfiguration(&sv.OpenZFSConfiguration, value); err != nil {
 				return err
@@ -13856,6 +13991,51 @@ func awsAwsjson11_deserializeDocumentS3AccessPointAttachments(v *[]types.S3Acces
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3AccessPointOntapConfiguration(v **types.S3AccessPointOntapConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3AccessPointOntapConfiguration
+	if *v == nil {
+		sv = &types.S3AccessPointOntapConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FileSystemIdentity":
+			if err := awsAwsjson11_deserializeDocumentOntapFileSystemIdentity(&sv.FileSystemIdentity, value); err != nil {
+				return err
+			}
+
+		case "VolumeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VolumeId to be of type string, got %T instead", value)
+				}
+				sv.VolumeId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

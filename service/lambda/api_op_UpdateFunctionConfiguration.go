@@ -76,6 +76,10 @@ type UpdateFunctionConfigurationInput struct {
 	// A description of the function.
 	Description *string
 
+	// Configuration settings for durable functions. Allows updating execution timeout
+	// and retention period for functions with durability enabled.
+	DurableConfig *types.DurableConfig
+
 	// Environment variables that are accessible from function code during execution.
 	Environment *types.Environment
 
@@ -219,6 +223,10 @@ type UpdateFunctionConfigurationOutput struct {
 
 	// The function's description.
 	Description *string
+
+	// The function's durable execution configuration settings, if the function is
+	// configured for durability.
+	DurableConfig *types.DurableConfig
 
 	// The function's [environment variables]. Omitted from CloudTrail logs.
 	//

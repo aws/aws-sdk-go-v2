@@ -27867,6 +27867,15 @@ func awsRestjson1_deserializeDocumentLoggingConfig(v **types.LoggingConfig, valu
 
 	for key, value := range shape {
 		switch key {
+		case "audioDataDeliveryEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AudioDataDeliveryEnabled = ptr.Bool(jtv)
+			}
+
 		case "cloudWatchConfig":
 			if err := awsRestjson1_deserializeDocumentCloudWatchConfig(&sv.CloudWatchConfig, value); err != nil {
 				return err

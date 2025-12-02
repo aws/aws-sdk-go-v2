@@ -2251,186 +2251,6 @@ func awsRestjson1_deserializeOpDocumentBatchUpdateStandardsControlAssociationsOu
 	return nil
 }
 
-type awsRestjson1_deserializeOpConnectorRegistrationsV2 struct {
-}
-
-func (*awsRestjson1_deserializeOpConnectorRegistrationsV2) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestjson1_deserializeOpConnectorRegistrationsV2) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorConnectorRegistrationsV2(response, &metadata)
-	}
-	output := &ConnectorRegistrationsV2Output{}
-	out.Result = output
-
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-
-	body := io.TeeReader(response.Body, ringBuffer)
-
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-	var shape interface{}
-	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	err = awsRestjson1_deserializeOpDocumentConnectorRegistrationsV2Output(&output, shape)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	span.End()
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeOpErrorConnectorRegistrationsV2(response *smithyhttp.Response, metadata *middleware.Metadata) error {
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
-
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-
-	body := io.TeeReader(errorBody, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
-	}
-	if len(message) != 0 {
-		errorMessage = message
-	}
-
-	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
-
-	case strings.EqualFold("ConflictException", errorCode):
-		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
-
-	case strings.EqualFold("InternalServerException", errorCode):
-		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
-
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
-		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
-
-	case strings.EqualFold("ThrottlingException", errorCode):
-		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
-
-	case strings.EqualFold("ValidationException", errorCode):
-		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
-
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-func awsRestjson1_deserializeOpDocumentConnectorRegistrationsV2Output(v **ConnectorRegistrationsV2Output, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *ConnectorRegistrationsV2Output
-	if *v == nil {
-		sv = &ConnectorRegistrationsV2Output{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "ConnectorArn":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
-				}
-				sv.ConnectorArn = ptr.String(jtv)
-			}
-
-		case "ConnectorId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
-				}
-				sv.ConnectorId = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
 type awsRestjson1_deserializeOpCreateActionTarget struct {
 }
 
@@ -2713,6 +2533,9 @@ func awsRestjson1_deserializeOpErrorCreateAggregatorV2(response *smithyhttp.Resp
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -3072,6 +2895,9 @@ func awsRestjson1_deserializeOpErrorCreateAutomationRuleV2(response *smithyhttp.
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -3482,6 +3308,9 @@ func awsRestjson1_deserializeOpErrorCreateConnectorV2(response *smithyhttp.Respo
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -3545,6 +3374,15 @@ func awsRestjson1_deserializeOpDocumentCreateConnectorV2Output(v **CreateConnect
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.ConnectorId = ptr.String(jtv)
+			}
+
+		case "ConnectorStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorStatus to be of type string, got %T instead", value)
+				}
+				sv.ConnectorStatus = types.ConnectorStatus(jtv)
 			}
 
 		default:
@@ -14965,6 +14803,186 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 	return nil
 }
 
+type awsRestjson1_deserializeOpRegisterConnectorV2 struct {
+}
+
+func (*awsRestjson1_deserializeOpRegisterConnectorV2) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpRegisterConnectorV2) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorRegisterConnectorV2(response, &metadata)
+	}
+	output := &RegisterConnectorV2Output{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentRegisterConnectorV2Output(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorRegisterConnectorV2(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentRegisterConnectorV2Output(v **RegisterConnectorV2Output, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *RegisterConnectorV2Output
+	if *v == nil {
+		sv = &RegisterConnectorV2Output{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConnectorArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ConnectorArn = ptr.String(jtv)
+			}
+
+		case "ConnectorId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ConnectorId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpStartConfigurationPolicyAssociation struct {
 }
 
@@ -17367,6 +17385,42 @@ func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp
 	}
 
 	err := awsRestjson1_deserializeDocumentResourceNotFoundException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorServiceQuotaExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ServiceQuotaExceededException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentServiceQuotaExceededException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -73980,15 +74034,6 @@ func awsRestjson1_deserializeDocumentServiceNowDetail(v **types.ServiceNowDetail
 				sv.AuthStatus = types.ConnectorAuthStatus(jtv)
 			}
 
-		case "ClientId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
-				}
-				sv.ClientId = ptr.String(jtv)
-			}
-
 		case "InstanceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -73996,6 +74041,64 @@ func awsRestjson1_deserializeDocumentServiceNowDetail(v **types.ServiceNowDetail
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.InstanceName = ptr.String(jtv)
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceQuotaExceededException
+	if *v == nil {
+		sv = &types.ServiceQuotaExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

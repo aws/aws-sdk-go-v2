@@ -22,10 +22,6 @@ import (
 // public access. For more information about public access through access points,
 // see [Managing Data Access with Amazon S3 access points]in the Amazon S3 User Guide.
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [Managing Data Access with Amazon S3 access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
 func (c *Client) GetAccessPointPolicyStatus(ctx context.Context, params *GetAccessPointPolicyStatusInput, optFns ...func(*Options)) (*GetAccessPointPolicyStatusOutput, error) {
 	if params == nil {

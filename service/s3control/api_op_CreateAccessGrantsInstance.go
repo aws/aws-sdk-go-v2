@@ -28,10 +28,6 @@ import (
 // S3 Access Grants instance, you must also have the sso:DescribeInstance ,
 // sso:CreateApplication , sso:PutApplicationGrant , and
 // sso:PutApplicationAuthenticationMethod permissions.
-//
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
 func (c *Client) CreateAccessGrantsInstance(ctx context.Context, params *CreateAccessGrantsInstanceInput, optFns ...func(*Options)) (*CreateAccessGrantsInstanceOutput, error) {
 	if params == nil {
 		params = &CreateAccessGrantsInstanceInput{}

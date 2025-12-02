@@ -32,10 +32,6 @@ import (
 //
 // [UpdateJobStatus]
 //
-// You must URL encode any signed header values that contain spaces. For example,
-// if your header value is my file.txt , containing two spaces after my , you must
-// URL encode this value to my%20%20file.txt .
-//
 // [S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
 // [UpdateJobPriority]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
 // [CreateJob]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html

@@ -15,6 +15,9 @@ import (
 // log group. Includes the percentage of log events that contain each field. The
 // search is limited to a time period that you specify.
 //
+// This operation is used for discovering fields within log group events. For
+// discovering fields across data sources, use the GetLogFields operation.
+//
 // You can specify the log group to search by using either logGroupIdentifier or
 // logGroupName . You must specify one of these parameters, but you can't specify
 // both.

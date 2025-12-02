@@ -12,8 +12,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-//
 // Performs an approximate nearest neighbor search query in a vector index using a
 // query vector. By default, it returns the keys of approximate nearest neighbors.
 // You can optionally include the computed distance (between the query vector and

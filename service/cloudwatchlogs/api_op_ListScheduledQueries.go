@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all scheduled queries in the current AWS account and region with optional
-// filtering by state.
+// Lists all scheduled queries in your account and region. You can filter results
+// by state to show only enabled or disabled queries.
 func (c *Client) ListScheduledQueries(ctx context.Context, params *ListScheduledQueriesInput, optFns ...func(*Options)) (*ListScheduledQueriesOutput, error) {
 	if params == nil {
 		params = &ListScheduledQueriesInput{}
@@ -30,13 +30,14 @@ func (c *Client) ListScheduledQueries(ctx context.Context, params *ListScheduled
 
 type ListScheduledQueriesInput struct {
 
-	// The maximum number of scheduled queries to return in a single call.
+	// The maximum number of scheduled queries to return. Valid range is 1 to 1000.
 	MaxResults *int32
 
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 
-	// Filter results by the state of scheduled queries (ENABLED or DISABLED).
+	// Filter scheduled queries by state. Valid values are ENABLED and DISABLED . If
+	// not specified, all scheduled queries are returned.
 	State types.ScheduledQueryState
 
 	noSmithyDocumentSerde
@@ -47,7 +48,7 @@ type ListScheduledQueriesOutput struct {
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 
-	// The list of scheduled queries with summary information.
+	// An array of scheduled query summary information.
 	ScheduledQueries []types.ScheduledQuerySummary
 
 	// Metadata pertaining to the operation's result.
@@ -156,7 +157,7 @@ func (c *Client) addOperationListScheduledQueriesMiddlewares(stack *middleware.S
 // ListScheduledQueriesPaginatorOptions is the paginator options for
 // ListScheduledQueries
 type ListScheduledQueriesPaginatorOptions struct {
-	// The maximum number of scheduled queries to return in a single call.
+	// The maximum number of scheduled queries to return. Valid range is 1 to 1000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

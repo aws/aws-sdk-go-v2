@@ -23,7 +23,8 @@ import (
 //
 //   - Asset must have a structured schema with valid rows and columns.
 //
-//   - Valid values for --type: BUSINESS_DESCRIPTIONS, BUSINESS_NAMES.
+//   - Valid values for --type: BUSINESS_DESCRIPTIONS, BUSINESS_NAMES,
+//     BUSINESS_GLOSSARY_ASSOCIATIONS.
 //
 //   - The user must have permission to run metadata generation in the
 //     domain/project.
@@ -61,14 +62,18 @@ type StartMetadataGenerationRunInput struct {
 	// This member is required.
 	Target *types.MetadataGenerationRunTarget
 
-	// The type of the metadata generation run.
-	//
-	// This member is required.
-	Type types.MetadataGenerationRunType
-
 	// A unique, case-sensitive identifier to ensure idempotency of the request. This
 	// field is automatically populated if not provided.
 	ClientToken *string
+
+	// The type of the metadata generation run.
+	//
+	// Deprecated: This field is going to be deprecated, please use the 'types' field
+	// to provide the MetadataGenerationRun types
+	Type types.MetadataGenerationRunType
+
+	// The types of the metadata generation run.
+	Types []types.MetadataGenerationRunType
 
 	noSmithyDocumentSerde
 }
@@ -100,7 +105,13 @@ type StartMetadataGenerationRunOutput struct {
 	Status types.MetadataGenerationRunStatus
 
 	// The type of the metadata generation run.
+	//
+	// Deprecated: This field is going to be deprecated, please use the 'types' field
+	// to provide the MetadataGenerationRun types
 	Type types.MetadataGenerationRunType
+
+	// The types of the metadata generation run.
+	Types []types.MetadataGenerationRunType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
