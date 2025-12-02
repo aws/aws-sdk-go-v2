@@ -165,7 +165,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html\">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>metadata</code> request parameter you must have the <code>s3tables:PutTableData</code> permission. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> request parameter you must have the <code>s3tables:PutTableEncryption</code> permission. </p> </li> <li> <p>You must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTable</code> permission to create a table with tags.</p> </li> </ul> <note> <p>Additionally, If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>. </p> </note> </dd> </dl>",
+                "smithy.api#documentation": "<p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html\">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>metadata</code> request parameter you must have the <code>s3tables:PutTableData</code> permission. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> request parameter you must have the <code>s3tables:PutTableEncryption</code> permission. </p> </li> <li> <p>If you use this operation with the <code>storageClassConfiguration</code> request parameter, you must have the <code>s3tables:PutTableStorageClass</code> permission.</p> </li> <li> <p>To create a table with tags, you must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTable</code> permission.</p> </li> </ul> <note> <p>Additionally, If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>. </p> </note> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}",
                     "method": "PUT",
@@ -202,7 +202,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html\">Creating a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTableBucket</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> parameter you must have the <code>s3tables:PutTableBucketEncryption</code> permission.</p> </li> <li> <p>You must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTableBucket</code> permission to create a table bucket with tags.</p> </li> </ul> </dd> </dl>",
+                "smithy.api#documentation": "<p>Creates a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html\">Creating a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTableBucket</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> parameter you must have the <code>s3tables:PutTableBucketEncryption</code> permission.</p> </li> <li> <p>If you use this operation with the <code>storageClassConfiguration</code> request parameter, you must have the <code>s3tables:PutTableBucketStorageClass</code> permission.</p> </li> <li> <p>To create a table bucket with tags, you must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTableBucket</code> permission.</p> </li> </ul> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets",
                     "method": "PUT",
@@ -224,6 +224,12 @@
                     "target": "com.amazonaws.s3tables#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption configuration to use for the table bucket. This configuration specifies the default encryption settings that will be applied to all tables created in this bucket unless overridden at the table level. The configuration includes the encryption algorithm and, if using SSE-KMS, the KMS key to use.</p>"
+                    }
+                },
+                "storageClassConfiguration": {
+                    "target": "com.amazonaws.s3tables#StorageClassConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default storage class configuration for the table bucket. This configuration will be applied to all new tables created in this bucket unless overridden at the table level. If not specified, the service default storage class will be used.</p>"
                     }
                 },
                 "tags": {
@@ -295,6 +301,12 @@
                     "target": "com.amazonaws.s3tables#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption configuration to use for the table. This configuration specifies the encryption algorithm and, if using SSE-KMS, the KMS key to use for encrypting the table. </p> <note> <p>If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>.</p> </note>"
+                    }
+                },
+                "storageClassConfiguration": {
+                    "target": "com.amazonaws.s3tables#StorageClassConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage class configuration for the table. If not specified, the table inherits the storage class configuration from its table bucket. Specify this parameter to override the bucket's default storage class for this table.</p>"
                     }
                 },
                 "tags": {
@@ -630,6 +642,70 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.s3tables#DeleteTableBucketReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#DeleteTableBucketReplicationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the replication configuration for a table bucket. After deletion, new table updates will no longer be replicated to destination buckets, though existing replicated tables will remain in destination buckets.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:DeleteTableBucketReplication</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/table-bucket-replication",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#DeleteTableBucketReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpQuery": "tableBucketARN",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionToken": {
+                    "target": "com.amazonaws.s3tables#VersionToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A version token from a previous GetTableBucketReplication call. Use this token to ensure you're deleting the expected version of the configuration.</p>",
+                        "smithy.api#httpQuery": "versionToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.s3tables#DeleteTableBucketRequest": {
             "type": "structure",
             "members": {
@@ -708,6 +784,71 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The table name.</p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#DeleteTableReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#DeleteTableReplicationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the replication configuration for a specific table. After deletion, new updates to this table will no longer be replicated to destination tables, though existing replicated copies will remain in destination buckets.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:DeleteTableReplication</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/table-replication",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#DeleteTableReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "tableArn": {
+                    "target": "com.amazonaws.s3tables#TableARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
+                        "smithy.api#httpQuery": "tableArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A version token from a previous GetTableReplication call. Use this token to ensure you're deleting the expected version of the configuration.</p>",
+                        "smithy.api#httpQuery": "versionToken",
                         "smithy.api#required": {}
                     }
                 }
@@ -1344,6 +1485,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3tables#GetTableBucketReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableBucketReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableBucketReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the replication configuration for a table bucket.This operation returns the IAM role, <code>versionToken</code>, and replication rules that define how tables in this bucket are replicated to other buckets.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableBucketReplication</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/table-bucket-replication",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpQuery": "tableBucketARN",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "versionToken": {
+                    "target": "com.amazonaws.s3tables#VersionToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A version token that represents the current state of the replication configuration. Use this token when updating the configuration to ensure consistency.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.s3tables#TableBucketReplicationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication configuration for the table bucket, including the IAM role and replication rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3tables#GetTableBucketRequest": {
             "type": "structure",
             "members": {
@@ -1402,6 +1622,74 @@
                     "target": "com.amazonaws.s3tables#TableBucketType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of the table bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketStorageClass": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableBucketStorageClassRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableBucketStorageClassResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the storage class configuration for a specific table. This allows you to view the storage class settings that apply to an individual table, which may differ from the table bucket's default configuration.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableBucketStorageClass</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/buckets/{tableBucketARN}/storage-class",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketStorageClassRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketStorageClassResponse": {
+            "type": "structure",
+            "members": {
+                "storageClassConfiguration": {
+                    "target": "com.amazonaws.s3tables#StorageClassConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage class configuration for the table bucket.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1856,6 +2144,317 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3tables#GetTableRecordExpirationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableRecordExpirationConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableRecordExpirationConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the expiration configuration settings for records in a table, and the status of the configuration. If the status of the configuration is <code>enabled</code>, records expire and are automatically removed from the table after the specified number of days.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableRecordExpirationConfiguration</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/table-record-expiration",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableRecordExpirationConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "tableArn": {
+                    "target": "com.amazonaws.s3tables#TableARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
+                        "smithy.api#httpQuery": "tableArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableRecordExpirationConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.s3tables#TableRecordExpirationConfigurationValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record expiration configuration for the table, including the status and retention settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableRecordExpirationJobStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableRecordExpirationJobStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableRecordExpirationJobStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the status, metrics, and details of the latest record expiration job for a table. This includes when the job ran, and whether it succeeded or failed. If the job ran successfully, this also includes statistics about the records that were removed.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableRecordExpirationJobStatus</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/table-record-expiration-job-status",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableRecordExpirationJobStatusRequest": {
+            "type": "structure",
+            "members": {
+                "tableArn": {
+                    "target": "com.amazonaws.s3tables#TableARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
+                        "smithy.api#httpQuery": "tableArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableRecordExpirationJobStatusResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.s3tables#TableRecordExpirationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the most recent expiration job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastRunTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the expiration job was last executed.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "failureMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the job failed, this field contains an error message describing the failure reason.</p>"
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.s3tables#TableRecordExpirationJobMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metrics about the most recent expiration job execution, including the number of records and files deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the replication configuration for a specific table.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableReplication</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/table-replication",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "tableArn": {
+                    "target": "com.amazonaws.s3tables#TableARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
+                        "smithy.api#httpQuery": "tableArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "versionToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A version token that represents the current state of the table's replication configuration. Use this token when updating the configuration to ensure consistency.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.s3tables#TableReplicationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication configuration for the table, including the IAM role and replication rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableReplicationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableReplicationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableReplicationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the replication status for a table, including the status of replication to each destination. This operation provides visibility into replication health and progress.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableReplicationStatus</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/replication-status",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableReplicationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "tableArn": {
+                    "target": "com.amazonaws.s3tables#TableARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
+                        "smithy.api#httpQuery": "tableArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableReplicationStatusResponse": {
+            "type": "structure",
+            "members": {
+                "sourceTableArn": {
+                    "target": "com.amazonaws.s3tables#TableARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source table being replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinations": {
+                    "target": "com.amazonaws.s3tables#ReplicationDestinationStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of status information for each replication destination, including the current state, last successful update, and any error messages.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3tables#GetTableRequest": {
             "type": "structure",
             "members": {
@@ -2005,10 +2604,110 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the table bucket containing this table.</p>"
                     }
+                },
+                "managedTableInformation": {
+                    "target": "com.amazonaws.s3tables#ManagedTableInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this table is managed by S3 Tables, contains additional information such as replication details.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableStorageClass": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableStorageClassRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableStorageClassResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the storage class configuration for a specific table. This allows you to view the storage class settings that apply to an individual table, which may differ from the table bucket's default configuration.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableStorageClass</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/tables/{tableBucketARN}/{namespace}/{name}/storage-class",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableStorageClassRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket that contains the table.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.s3tables#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace associated with the table.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.s3tables#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableStorageClassResponse": {
+            "type": "structure",
+            "members": {
+                "storageClassConfiguration": {
+                    "target": "com.amazonaws.s3tables#StorageClassConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage class configuration for the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3tables#IAMRole": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.+:iam::[0-9]{12}:role/.+$"
             }
         },
         "com.amazonaws.s3tables#IcebergCompactionSettings": {
@@ -2068,6 +2767,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The schema for an Iceberg table.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.s3tables#TableProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration properties for an Iceberg table.</p>"
                     }
                 }
             },
@@ -2170,6 +2875,29 @@
                         "smithy.api#enumValue": "Disabled"
                     }
                 }
+            }
+        },
+        "com.amazonaws.s3tables#LastSuccessfulReplicatedUpdate": {
+            "type": "structure",
+            "members": {
+                "metadataLocation": {
+                    "target": "com.amazonaws.s3tables#MetadataLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location of the metadata that was successfully replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the replication update completed successfully.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the most recent successful replication update to a destination.</p>"
             }
         },
         "com.amazonaws.s3tables#ListNamespaces": {
@@ -2608,7 +3336,7 @@
                     "method": "GET",
                     "code": 200
                 },
-                "smithy.api#idempotent": {}
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.s3tables#ListTagsForResourceRequest": {
@@ -2658,6 +3386,20 @@
                 }
             }
         },
+        "com.amazonaws.s3tables#ManagedTableInformation": {
+            "type": "structure",
+            "members": {
+                "replicationInformation": {
+                    "target": "com.amazonaws.s3tables#ReplicationInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this table is a replica, contains information about the source table from which it is replicated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about tables that are managed by S3 Tables, including replication information for replica tables.</p>"
+            }
+        },
         "com.amazonaws.s3tables#MetadataLocation": {
             "type": "string",
             "traits": {
@@ -2665,6 +3407,19 @@
                     "min": 1,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.s3tables#MethodNotAllowedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3tables#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested operation is not allowed on this resource. This may occur when attempting to modify a resource that is managed by a service or has restrictions that prevent the operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 405
             }
         },
         "com.amazonaws.s3tables#NamespaceId": {
@@ -3044,6 +3799,160 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.s3tables#PutTableBucketReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#PutTableBucketReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#PutTableBucketReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the replication configuration for a table bucket. This operation defines how tables in the source bucket are replicated to destination buckets. Replication helps ensure data availability and disaster recovery across regions or accounts.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:PutTableBucketReplication</code> permission to use this operation. The IAM role specified in the configuration must have permissions to read from the source bucket and write permissions to all destination buckets.</p> </li> <li> <p>You must also have the following permissions:</p> <ul> <li> <p> <code>s3tables:GetTable</code> permission on the source table.</p> </li> <li> <p> <code>s3tables:ListTables</code> permission on the bucket containing the table.</p> </li> <li> <p> <code>s3tables:CreateTable</code> permission for the destination.</p> </li> <li> <p> <code>s3tables:CreateNamespace</code> permission for the destination.</p> </li> <li> <p> <code>s3tables:GetTableMaintenanceConfig</code> permission for the source bucket.</p> </li> <li> <p> <code>s3tables:PutTableMaintenanceConfig</code> permission for the destination bucket.</p> </li> </ul> </li> <li> <p>You must have <code>iam:PassRole</code> permission with condition allowing roles to be passed to <code>replication.s3tables.amazonaws.com</code>.</p> </li> </ul> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/table-bucket-replication",
+                    "method": "PUT",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableBucketReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source table bucket.</p>",
+                        "smithy.api#httpQuery": "tableBucketARN",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionToken": {
+                    "target": "com.amazonaws.s3tables#VersionToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A version token from a previous GetTableBucketReplication call. Use this token to ensure you're updating the expected version of the configuration.</p>",
+                        "smithy.api#httpQuery": "versionToken"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.s3tables#TableBucketReplicationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication configuration to apply, including the IAM role and replication rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableBucketReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "versionToken": {
+                    "target": "com.amazonaws.s3tables#VersionToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new version token representing the updated replication configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the replication configuration operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableBucketStorageClass": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#PutTableBucketStorageClassRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets or updates the storage class configuration for a table bucket. This configuration serves as the default storage class for all new tables created in the bucket, allowing you to optimize storage costs at the bucket level.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketStorageClass</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/buckets/{tableBucketARN}/storage-class",
+                    "method": "PUT",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableBucketStorageClassRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageClassConfiguration": {
+                    "target": "com.amazonaws.s3tables#StorageClassConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage class configuration to apply to the table bucket. This configuration will serve as the default for new tables created in this bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.s3tables#PutTableMaintenanceConfiguration": {
             "type": "operation",
             "input": {
@@ -3205,6 +4114,160 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.s3tables#PutTableRecordExpirationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#PutTableRecordExpirationConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the expiration configuration settings for records in a table, including the status of the configuration. If you enable record expiration for a table, records expire and are automatically removed from the table after the number of days that you specify.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableRecordExpirationConfiguration</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/table-record-expiration",
+                    "method": "PUT",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableRecordExpirationConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "tableArn": {
+                    "target": "com.amazonaws.s3tables#TableARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
+                        "smithy.api#httpQuery": "tableArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.s3tables#TableRecordExpirationConfigurationValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record expiration configuration to apply to the table, including the status (<code>enabled</code> or <code>disabled</code>) and retention period in days.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#PutTableReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#PutTableReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the replication configuration for a specific table. This operation allows you to define table-level replication independently of bucket-level replication, providing granular control over which tables are replicated and where.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:PutTableReplication</code> permission to use this operation. The IAM role specified in the configuration must have permissions to read from the source table and write to all destination tables.</p> </li> <li> <p>You must also have the following permissions:</p> <ul> <li> <p> <code>s3tables:GetTable</code> permission on the source table being replicated.</p> </li> <li> <p> <code>s3tables:CreateTable</code> permission for the destination.</p> </li> <li> <p> <code>s3tables:CreateNamespace</code> permission for the destination.</p> </li> <li> <p> <code>s3tables:GetTableMaintenanceConfig</code> permission for the source table.</p> </li> <li> <p> <code>s3tables:PutTableMaintenanceConfig</code> permission for the destination table.</p> </li> </ul> </li> <li> <p>You must have <code>iam:PassRole</code> permission with condition allowing roles to be passed to <code>replication.s3tables.amazonaws.com</code>.</p> </li> </ul> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/table-replication",
+                    "method": "PUT",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "tableArn": {
+                    "target": "com.amazonaws.s3tables#TableARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source table.</p>",
+                        "smithy.api#httpQuery": "tableArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A version token from a previous GetTableReplication call. Use this token to ensure you're updating the expected version of the configuration.</p>",
+                        "smithy.api#httpQuery": "versionToken"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.s3tables#TableReplicationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication configuration to apply to the table, including the IAM role and replication rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "versionToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new version token representing the updated replication configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the replication configuration operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3tables#RenameTable": {
             "type": "operation",
             "input": {
@@ -3292,6 +4355,123 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.s3tables#ReplicationDestination": {
+            "type": "structure",
+            "members": {
+                "destinationTableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination table bucket where tables will be replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a destination table bucket for replication.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#ReplicationDestinationStatusModel": {
+            "type": "structure",
+            "members": {
+                "replicationStatus": {
+                    "target": "com.amazonaws.s3tables#ReplicationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of replication to this destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationTableBucketArn": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination table bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationTableArn": {
+                    "target": "com.amazonaws.s3tables#TableARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination table.</p>"
+                    }
+                },
+                "lastSuccessfulReplicatedUpdate": {
+                    "target": "com.amazonaws.s3tables#LastSuccessfulReplicatedUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the most recent successful replication update to this destination.</p>"
+                    }
+                },
+                "failureMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If replication has failed, this field contains an error message describing the failure reason.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains status information for a replication destination, including the current replication state, last successful update, and any error messages.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#ReplicationDestinationStatuses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3tables#ReplicationDestinationStatusModel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.s3tables#ReplicationDestinations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3tables#ReplicationDestination"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.s3tables#ReplicationInformation": {
+            "type": "structure",
+            "members": {
+                "sourceTableARN": {
+                    "target": "com.amazonaws.s3tables#TableARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source table from which this table is replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the source of a replicated table.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#ReplicationStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "completed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3tables#ResourceArn": {
             "type": "string",
             "traits": {
@@ -3336,6 +4516,9 @@
                     "target": "com.amazonaws.s3tables#TableBucketPolicyResource"
                 },
                 {
+                    "target": "com.amazonaws.s3tables#TableBucketReplicationResource"
+                },
+                {
                     "target": "com.amazonaws.s3tables#TableBucketResource"
                 },
                 {
@@ -3343,6 +4526,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3tables#TablePolicyResource"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TableReplicationResource"
                 },
                 {
                     "target": "com.amazonaws.s3tables#TableResource"
@@ -4035,6 +5221,38 @@
                 "target": "com.amazonaws.s3tables#SchemaField"
             }
         },
+        "com.amazonaws.s3tables#StorageClass": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "INTELLIGENT_TIERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTELLIGENT_TIERING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3tables#StorageClassConfiguration": {
+            "type": "structure",
+            "members": {
+                "storageClass": {
+                    "target": "com.amazonaws.s3tables#StorageClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage class for the table or table bucket. Valid values include storage classes optimized for different access patterns and cost profiles.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for the storage class of tables or table buckets. This allows you to optimize storage costs by selecting the appropriate storage class based on your access patterns and performance requirements.</p>"
+            }
+        },
         "com.amazonaws.s3tables#TableARN": {
             "type": "string",
             "traits": {
@@ -4158,6 +5376,75 @@
                 }
             ]
         },
+        "com.amazonaws.s3tables#TableBucketReplicationConfiguration": {
+            "type": "structure",
+            "members": {
+                "role": {
+                    "target": "com.amazonaws.s3tables#IAMRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that S3 Tables assumes to replicate tables on your behalf.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "rules": {
+                    "target": "com.amazonaws.s3tables#TableBucketReplicationRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of replication rules that define which tables to replicate and where to replicate them.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The replication configuration for a table bucket. This configuration defines how tables in the source bucket are replicated to destination table buckets, including the IAM role used for replication.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#TableBucketReplicationResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.s3tables#DeleteTableBucketReplication"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#GetTableBucketReplication"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#PutTableBucketReplication"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "absolute": true,
+                    "template": "com.amazonaws.s3tables#TableBucketARN"
+                }
+            }
+        },
+        "com.amazonaws.s3tables#TableBucketReplicationRule": {
+            "type": "structure",
+            "members": {
+                "destinations": {
+                    "target": "com.amazonaws.s3tables#ReplicationDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of destination table buckets where tables should be replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a rule for replicating tables from a source table bucket to one or more destination table buckets.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#TableBucketReplicationRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3tables#TableBucketReplicationRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.s3tables#TableBucketResource": {
             "type": "resource",
             "operations": [
@@ -4180,6 +5467,9 @@
                     "target": "com.amazonaws.s3tables#GetTableBucketMetricsConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.s3tables#GetTableBucketStorageClass"
+                },
+                {
                     "target": "com.amazonaws.s3tables#ListTableBuckets"
                 },
                 {
@@ -4187,6 +5477,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3tables#PutTableBucketMetricsConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#PutTableBucketStorageClass"
                 }
             ],
             "traits": {
@@ -4308,7 +5601,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the values that define a maintenance configuration for a table.</p>"
+                "smithy.api#documentation": "<p>The values that define a maintenance configuration for a table.</p>"
             }
         },
         "com.amazonaws.s3tables#TableMaintenanceJobStatus": {
@@ -4446,6 +5739,193 @@
                 }
             ]
         },
+        "com.amazonaws.s3tables#TableProperties": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.s3tables#TableRecordExpirationConfigurationValue": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.s3tables#TableRecordExpirationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the expiration settings for records in the table.</p>"
+                    }
+                },
+                "settings": {
+                    "target": "com.amazonaws.s3tables#TableRecordExpirationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration settings for records in the table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The expiration configuration settings for records in a table, and the status of the configuration. If the status of the configuration is enabled, records expire and are automatically removed after the number of days specified in the record expiration settings for the table.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#TableRecordExpirationJobMetrics": {
+            "type": "structure",
+            "members": {
+                "deletedDataFiles": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of data files that were removed when the job ran.</p>"
+                    }
+                },
+                "deletedRecords": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of records that were removed when the job ran.</p>"
+                    }
+                },
+                "removedFilesSize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size (in bytes) of the data files that were removed when the job ran.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides metrics for the record expiration job that most recently ran for a table. The metrics provide insight into the amount of data that was removed when the job ran.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#TableRecordExpirationJobStatus": {
+            "type": "enum",
+            "members": {
+                "NOT_YET_RUN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotYetRun"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Successful"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabled"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3tables#TableRecordExpirationSettings": {
+            "type": "structure",
+            "members": {
+                "days": {
+                    "target": "com.amazonaws.s3tables#PositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you enable record expiration for a table, you can specify the number of days to retain your table records. For example, to retain your table records for one year, set this value to <code>365</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The record expiration setting that specifies when records expire and are automatically removed from a table.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#TableRecordExpirationStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3tables#TableReplicationConfiguration": {
+            "type": "structure",
+            "members": {
+                "role": {
+                    "target": "com.amazonaws.s3tables#IAMRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that S3 Tables assumes to replicate the table on your behalf.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "rules": {
+                    "target": "com.amazonaws.s3tables#TableReplicationRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of replication rules that define where this table should be replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The replication configuration for an individual table. This configuration defines how the table is replicated to destination tables.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#TableReplicationResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.s3tables#DeleteTableReplication"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#GetTableReplication"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#GetTableReplicationStatus"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#PutTableReplication"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "absolute": true,
+                    "template": "com.amazonaws.s3tables#TableARN"
+                }
+            }
+        },
+        "com.amazonaws.s3tables#TableReplicationRule": {
+            "type": "structure",
+            "members": {
+                "destinations": {
+                    "target": "com.amazonaws.s3tables#ReplicationDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of destination table buckets where this table should be replicated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a rule for replicating a table to one or more destination tables.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#TableReplicationRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3tables#TableReplicationRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.s3tables#TableResource": {
             "type": "resource",
             "operations": [
@@ -4468,10 +5948,22 @@
                     "target": "com.amazonaws.s3tables#GetTableMetadataLocation"
                 },
                 {
+                    "target": "com.amazonaws.s3tables#GetTableRecordExpirationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#GetTableRecordExpirationJobStatus"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#GetTableStorageClass"
+                },
+                {
                     "target": "com.amazonaws.s3tables#ListTables"
                 },
                 {
                     "target": "com.amazonaws.s3tables#PutTableMaintenanceConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#PutTableRecordExpirationConfiguration"
                 },
                 {
                     "target": "com.amazonaws.s3tables#RenameTable"
@@ -4532,6 +6024,12 @@
                         "smithy.api#documentation": "<p>The date and time the table was last modified at.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "managedByService": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service managing this table, if applicable. For example, a replicated table is managed by the S3 Tables replication service.</p>"
                     }
                 },
                 "namespaceId": {

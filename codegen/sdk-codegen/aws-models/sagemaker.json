@@ -51,6 +51,23 @@
         "com.amazonaws.sagemaker#AcceptEula": {
             "type": "boolean"
         },
+        "com.amazonaws.sagemaker#AccountDefaultStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#AccountId": {
             "type": "string",
             "traits": {
@@ -8674,13 +8691,13 @@
                 "TargetStateCount": {
                     "target": "com.amazonaws.sagemaker#ClusterInstanceCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of nodes running a specific image ID since the last software update request.</p>"
+                        "smithy.api#documentation": "<p>Represents the number of running nodes using the desired Image ID.</p> <ol> <li> <p> <b>During software update operations:</b> This count shows the number of nodes running on the desired Image ID. If a rollback occurs, the current image ID and desired image ID (both included in the describe cluster response) swap values. The TargetStateCount then shows the number of nodes running on the newly designated desired image ID (which was previously the current image ID).</p> </li> <li> <p> <b>During simultaneous scaling and software update operations:</b> This count shows the number of instances running on the desired image ID, including any new instances created as part of the scaling request. New nodes are always created using the desired image ID, so TargetStateCount reflects the total count of nodes running on the desired image ID, even during rollback scenarios.</p> </li> </ol>"
                     }
                 },
                 "SoftwareUpdateStatus": {
                     "target": "com.amazonaws.sagemaker#SoftwareUpdateStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of the last software udpate request.</p>"
+                        "smithy.api#documentation": "<p>Status of the last software udpate request.</p> <p>Status transitions follow these possible sequences:</p> <ul> <li> <p>Pending -&gt; InProgress -&gt; Succeeded</p> </li> <li> <p>Pending -&gt; InProgress -&gt; RollbackInProgress -&gt; RollbackComplete</p> </li> <li> <p>Pending -&gt; InProgress -&gt; RollbackInProgress -&gt; Failed</p> </li> </ul>"
                     }
                 },
                 "ActiveSoftwareUpdateConfig": {
@@ -8982,6 +8999,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.p5.48xlarge"
+                    }
+                },
+                "ML_P5_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5.4xlarge"
                     }
                 },
                 "ML_P6E_GB200_36XLARGE": {
@@ -10238,8 +10261,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterOrchestratorEksConfig",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod cluster.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod cluster.</p>"
                     }
                 }
             },
@@ -12710,7 +12732,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a SageMaker HyperPod cluster. SageMaker HyperPod is a capability of SageMaker for creating and managing persistent clusters for developing large machine learning models, such as large language models (LLMs) and diffusion models. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html\">Amazon SageMaker HyperPod</a> in the <i>Amazon SageMaker Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates an Amazon SageMaker HyperPod cluster. SageMaker HyperPod is a capability of SageMaker for creating and managing persistent clusters for developing large machine learning models, such as large language models (LLMs) and diffusion models. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html\">Amazon SageMaker HyperPod</a> in the <i>Amazon SageMaker Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateClusterRequest": {
@@ -15242,6 +15264,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#CreateMlflowApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#CreateMlflowAppRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#CreateMlflowAppResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an MLflow Tracking Server using a general purpose Amazon S3 bucket as the artifact store.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CreateMlflowAppRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A string identifying the MLflow app name. This string is not part of the tracking server ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ArtifactStoreUri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The S3 URI for a general purpose bucket to use as the MLflow App artifact store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for an IAM role in your account that the MLflow App uses to access the artifact store in Amazon S3. The role should have the <code>AmazonS3FullAccess</code> permission.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelRegistrationMode": {
+                    "target": "com.amazonaws.sagemaker#ModelRegistrationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. To enable automatic model registration, set this value to <code>AutoModelRegistrationEnabled</code>. To disable automatic model registration, set this value to <code>AutoModelRegistrationDisabled</code>. If not specified, <code>AutomaticModelRegistration</code> defaults to <code>AutoModelRegistrationDisabled</code>.</p>"
+                    }
+                },
+                "WeeklyMaintenanceWindowStart": {
+                    "target": "com.amazonaws.sagemaker#WeeklyMaintenanceWindowStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. For example: TUE:03:30.</p>"
+                    }
+                },
+                "AccountDefaultStatus": {
+                    "target": "com.amazonaws.sagemaker#AccountDefaultStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this MLflow app is the default for the entire account.</p>"
+                    }
+                },
+                "DefaultDomainIdList": {
+                    "target": "com.amazonaws.sagemaker#DefaultDomainIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of SageMaker domain IDs for which this MLflow App is used as the default.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags consisting of key-value pairs used to manage metadata for the MLflow App.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreateMlflowAppResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the MLflow App.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#CreateMlflowTrackingServer": {
             "type": "operation",
             "input": {
@@ -16920,6 +17035,65 @@
                     "target": "com.amazonaws.sagemaker#PresignedDomainUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The presigned URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreatePresignedMlflowAppUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#CreatePresignedMlflowAppUrlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#CreatePresignedMlflowAppUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a presigned URL that you can use to connect to the MLflow UI attached to your MLflow App. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-launch-ui.html\">Launch the MLflow UI using a presigned URL</a>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CreatePresignedMlflowAppUrlRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the MLflow App to connect to your MLflow UI.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiresInSeconds": {
+                    "target": "com.amazonaws.sagemaker#ExpiresInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration in seconds that your presigned URL is valid. The presigned URL can be used only once.</p>"
+                    }
+                },
+                "SessionExpirationDurationInSeconds": {
+                    "target": "com.amazonaws.sagemaker#SessionExpirationDurationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration in seconds that your presigned URL is valid. The presigned URL can be used only once.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreatePresignedMlflowAppUrlResponse": {
+            "type": "structure",
+            "members": {
+                "AuthorizedUrl": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A presigned URL with an authorization token.</p>"
                     }
                 }
             },
@@ -19065,6 +19239,12 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#DefaultDomainIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#DomainId"
+            }
+        },
         "com.amazonaws.sagemaker#DefaultEbsStorageSettings": {
             "type": "structure",
             "members": {
@@ -20422,6 +20602,53 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the deleted inference experiment.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteMlflowApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DeleteMlflowAppRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DeleteMlflowAppResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an MLflow App.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteMlflowAppRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the MLflow App to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteMlflowAppResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the deleted MLflow App.</p>"
                     }
                 }
             },
@@ -26697,6 +26924,131 @@
                 },
                 "LastModifiedBy": {
                     "target": "com.amazonaws.sagemaker#UserContext"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeMlflowApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeMlflowAppRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeMlflowAppResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an MLflow App.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeMlflowAppRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the MLflow App for which to get information.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeMlflowAppResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the MLflow App.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MLflow App.</p>"
+                    }
+                },
+                "ArtifactStoreUri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI of the general purpose bucket used as the MLflow App artifact store.</p>"
+                    }
+                },
+                "MlflowVersion": {
+                    "target": "com.amazonaws.sagemaker#MlflowVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MLflow version used.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for an IAM role in your account that the MLflow App uses to access the artifact store in Amazon S3.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current creation status of the described MLflow App.</p>"
+                    }
+                },
+                "ModelRegistrationMode": {
+                    "target": "com.amazonaws.sagemaker#ModelRegistrationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether automatic registration of new MLflow models to the SageMaker Model Registry is enabled.</p>"
+                    }
+                },
+                "AccountDefaultStatus": {
+                    "target": "com.amazonaws.sagemaker#AccountDefaultStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this MLflow app is the default for the entire account.</p>"
+                    }
+                },
+                "DefaultDomainIdList": {
+                    "target": "com.amazonaws.sagemaker#DefaultDomainIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of SageMaker Domain IDs for which this MLflow App is the default.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the MLflow App was created.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext"
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the MLflow App was last modified.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext"
+                },
+                "WeeklyMaintenanceWindowStart": {
+                    "target": "com.amazonaws.sagemaker#WeeklyMaintenanceWindowStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day and time of the week when weekly maintenance occurs.</p>"
+                    }
+                },
+                "MaintenanceStatus": {
+                    "target": "com.amazonaws.sagemaker#MaintenanceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current maintenance status of the MLflow App.</p>"
+                    }
                 }
             },
             "traits": {
@@ -36186,7 +36538,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 65535
+                    "max": 170391
                 },
                 "smithy.api#pattern": ".*"
             }
@@ -36302,7 +36654,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 65535
+                    "max": 170391
                 }
             }
         },
@@ -36316,10 +36668,20 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
+        "com.amazonaws.sagemaker#HubContentSearchKeyword": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
         "com.amazonaws.sagemaker#HubContentSearchKeywordList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.sagemaker#HubSearchKeyword"
+                "target": "com.amazonaws.sagemaker#HubContentSearchKeyword"
             },
             "traits": {
                 "smithy.api#length": {
@@ -36383,6 +36745,18 @@
                     "traits": {
                         "smithy.api#enumValue": "DeleteFailed"
                     }
+                },
+                "PENDING_IMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PendingImport"
+                    }
+                },
+                "PENDING_DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PendingDelete"
+                    }
                 }
             }
         },
@@ -36428,6 +36802,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ModelReference"
+                    }
+                },
+                "DATA_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DataSet"
+                    }
+                },
+                "JSON_DOC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JsonDoc"
                     }
                 }
             }
@@ -46911,6 +47297,112 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ListMlflowApps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListMlflowAppsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListMlflowAppsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all MLflow Apps</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Summaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListMlflowAppsRequest": {
+            "type": "structure",
+            "members": {
+                "CreatedAfter": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the <code>CreatedAfter</code> filter to only list MLflow Apps created after a specific date and time. Listed MLflow Apps are shown with a date and time such as <code>\"2024-03-16T01:46:56+00:00\"</code>. The <code>CreatedAfter</code> parameter takes in a Unix timestamp.</p>"
+                    }
+                },
+                "CreatedBefore": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the <code>CreatedBefore</code> filter to only list MLflow Apps created before a specific date and time. Listed MLflow Apps are shown with a date and time such as <code>\"2024-03-16T01:46:56+00:00\"</code>. The <code>CreatedAfter</code> parameter takes in a Unix timestamp.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for Mlflow apps with a specific creation status.</p>"
+                    }
+                },
+                "MlflowVersion": {
+                    "target": "com.amazonaws.sagemaker#MlflowVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for Mlflow Apps with the specified version.</p>"
+                    }
+                },
+                "DefaultForDomainId": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for MLflow Apps with the specified default SageMaker Domain ID.</p>"
+                    }
+                },
+                "AccountDefaultStatus": {
+                    "target": "com.amazonaws.sagemaker#AccountDefaultStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for MLflow Apps with the specified <code>AccountDefaultStatus</code>.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.sagemaker#SortMlflowAppBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for MLflow Apps sorting by name, creation time, or creation status.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.sagemaker#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Change the order of the listed MLflow Apps. By default, MLflow Apps are listed in <code>Descending</code> order by creation time. To change the list order, specify <code>SortOrder</code> to be <code>Ascending</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, use this token in your next request to receive the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of MLflow Apps to list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListMlflowAppsResponse": {
+            "type": "structure",
+            "members": {
+                "Summaries": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of MLflow Apps according to chosen filters.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#ListMlflowTrackingServers": {
             "type": "operation",
             "input": {
@@ -51109,6 +51601,29 @@
                 "smithy.api#pattern": "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$"
             }
         },
+        "com.amazonaws.sagemaker#MaintenanceStatus": {
+            "type": "enum",
+            "members": {
+                "MAINTENANCE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaintenanceInProgress"
+                    }
+                },
+                "MAINTENANCE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaintenanceComplete"
+                    }
+                },
+                "MAINTENANCE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaintenanceFailed"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#MajorMinorVersion": {
             "type": "string",
             "traits": {
@@ -51848,6 +52363,168 @@
                     "traits": {
                         "smithy.api#enumValue": "HyperPodClusters"
                     }
+                },
+                "RUNNING_INSTANCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RunningInstances"
+                    }
+                },
+                "DATASETS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Datasets"
+                    }
+                },
+                "EVALUATORS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Evaluators"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MlflowAppArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-app/"
+            }
+        },
+        "com.amazonaws.sagemaker#MlflowAppName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$"
+            }
+        },
+        "com.amazonaws.sagemaker#MlflowAppStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
+                    }
+                },
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Created"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreateFailed"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Updating"
+                    }
+                },
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Updated"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateFailed"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeleteFailed"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleted"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MlflowAppSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#MlflowAppSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MlflowAppSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a listed MLflow App.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MLflow App.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the MLflow App.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of a listed MLflow App.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of a listed MLflow App.</p>"
+                    }
+                },
+                "MlflowVersion": {
+                    "target": "com.amazonaws.sagemaker#MlflowVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of a listed MLflow App.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the Mlflow App to list.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#MlflowAppUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
                 }
             }
         },
@@ -54369,6 +55046,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The model registry settings for the SageMaker Canvas application.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelRegistrationMode": {
+            "type": "enum",
+            "members": {
+                "AUTO_MODEL_REGISTRATION_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoModelRegistrationEnabled"
+                    }
+                },
+                "AUTO_MODEL_REGISTRATION_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoModelRegistrationDisabled"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#ModelSetupTime": {
@@ -67013,6 +67707,9 @@
                     "target": "com.amazonaws.sagemaker#CreateLabelingJob"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#CreateMlflowApp"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#CreateMlflowTrackingServer"
                 },
                 {
@@ -67062,6 +67759,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#CreatePresignedDomainUrl"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#CreatePresignedMlflowAppUrl"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#CreatePresignedMlflowTrackingServerUrl"
@@ -67197,6 +67897,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteInferenceExperiment"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DeleteMlflowApp"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteMlflowTrackingServer"
@@ -67392,6 +68095,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DescribeLineageGroup"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DescribeMlflowApp"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DescribeMlflowTrackingServer"
@@ -67644,6 +68350,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListLineageGroups"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ListMlflowApps"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListMlflowTrackingServers"
@@ -67941,6 +68650,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateInferenceExperiment"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#UpdateMlflowApp"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateMlflowTrackingServer"
@@ -70599,6 +71311,29 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CreationTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#SortMlflowAppBy": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "CREATION_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreationTime"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
                     }
                 }
             }
@@ -80605,6 +81340,92 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the updated inference experiment.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateMlflowApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#UpdateMlflowAppRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#UpdateMlflowAppResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an MLflow App.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateMlflowAppRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the MLflow App to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MLflow App to update.</p>"
+                    }
+                },
+                "ArtifactStoreUri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new S3 URI for the general purpose bucket to use as the artifact store for the MLflow App.</p>"
+                    }
+                },
+                "ModelRegistrationMode": {
+                    "target": "com.amazonaws.sagemaker#ModelRegistrationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. To enable automatic model registration, set this value to <code>AutoModelRegistrationEnabled</code>. To disable automatic model registration, set this value to <code>AutoModelRegistrationDisabled</code>. If not specified, <code>AutomaticModelRegistration</code> defaults to <code>AutoModelRegistrationEnabled</code> </p>"
+                    }
+                },
+                "WeeklyMaintenanceWindowStart": {
+                    "target": "com.amazonaws.sagemaker#WeeklyMaintenanceWindowStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new weekly maintenance window start day and time to update. The maintenance window day and time should be in Coordinated Universal Time (UTC) 24-hour standard time. For example: TUE:03:30.</p>"
+                    }
+                },
+                "DefaultDomainIdList": {
+                    "target": "com.amazonaws.sagemaker#DefaultDomainIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of SageMaker Domain IDs for which this MLflow App is the default.</p>"
+                    }
+                },
+                "AccountDefaultStatus": {
+                    "target": "com.amazonaws.sagemaker#AccountDefaultStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this this MLflow App is the default for the account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateMlflowAppResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#MlflowAppArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the updated MLflow App.</p>"
                     }
                 }
             },

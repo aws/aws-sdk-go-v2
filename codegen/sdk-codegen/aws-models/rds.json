@@ -477,6 +477,114 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.rds#AdditionalStorageVolume": {
+            "type": "structure",
+            "members": {
+                "VolumeName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the additional storage volume.</p>\n         <p>Valid Values: <code>RDSDBDATA2 | RDSDBDATA3 | RDSDBDATA4</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllocatedStorage": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage allocated for the additional storage volume, in gibibytes (GiB).\n            The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).</p>"
+                    }
+                },
+                "IOPS": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of I/O operations per second (IOPS) provisioned for the additional storage\n            volume.</p>"
+                    }
+                },
+                "MaxAllocatedStorage": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upper limit in gibibytes (GiB) to which RDS can automatically scale the storage of\n            the additional storage volume.</p>"
+                    }
+                },
+                "StorageThroughput": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD (<code>gp3</code>) storage type.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type for the additional storage volume.</p>\n         <p>Valid Values: <code>GP3 | IO2</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an additional storage volume for a DB instance. RDS support\n            additional storage volumes for RDS for Oracle and RDS for SQL Server.</p>"
+            }
+        },
+        "com.amazonaws.rds#AdditionalStorageVolumeOutput": {
+            "type": "structure",
+            "members": {
+                "VolumeName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the additional storage volume.</p>"
+                    }
+                },
+                "StorageVolumeStatus": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the additional storage volume.</p>\n         <p>Valid Values: <code>ACTIVE | CREATING | DELETING | MODIFYING | NOT-IN-USE |\n                STORAGE-OPTIMIZATION | VOLUME-FULL</code>\n         </p>"
+                    }
+                },
+                "AllocatedStorage": {
+                    "target": "com.amazonaws.rds#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage allocated for the additional storage volume, in gibibytes (GiB).\n            The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).</p>"
+                    }
+                },
+                "IOPS": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of I/O operations per second (IOPS) provisioned for the additional storage volume.</p>"
+                    }
+                },
+                "MaxAllocatedStorage": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upper limit in gibibytes (GiB) to which RDS can automatically scale the storage of the additional storage volume.</p>"
+                    }
+                },
+                "StorageThroughput": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage throughput value for the additional storage volume, in mebibytes per second (MiBps).</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type for the additional storage volume.</p>\n         <p>Valid Values: <code>GP3 | IO2</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an additional storage volume for a DB instance.</p>"
+            }
+        },
+        "com.amazonaws.rds#AdditionalStorageVolumesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#AdditionalStorageVolume"
+            }
+        },
+        "com.amazonaws.rds#AdditionalStorageVolumesOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#AdditionalStorageVolumeOutput"
+            }
+        },
         "com.amazonaws.rds#AmazonRDSv19": {
             "type": "service",
             "version": "2014-10-31",
@@ -2330,6 +2438,95 @@
                 }
             }
         },
+        "com.amazonaws.rds#AvailableAdditionalStorageVolumesOption": {
+            "type": "structure",
+            "members": {
+                "SupportsStorageAutoscaling": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the additional storage volume supports storage autoscaling.</p>"
+                    }
+                },
+                "SupportsStorageThroughput": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the additional storage volume supports configurable storage throughput.</p>"
+                    }
+                },
+                "SupportsIops": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the additional storage volume supports provisioned IOPS.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type for the additional storage volume.</p>\n         <p>Valid Values: <code>GP3 | IO2</code>\n         </p>"
+                    }
+                },
+                "MinStorageSize": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum amount of storage that you can allocate for the additional storage volume, in gibibytes (GiB).</p>"
+                    }
+                },
+                "MaxStorageSize": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount of storage that you can allocate for the additional storage volume, in gibibytes (GiB).</p>"
+                    }
+                },
+                "MinIops": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of I/O operations per second (IOPS) that the additional storage volume supports.</p>"
+                    }
+                },
+                "MaxIops": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of I/O operations per second (IOPS) that the additional storage volume supports.</p>"
+                    }
+                },
+                "MinIopsPerGib": {
+                    "target": "com.amazonaws.rds#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum ratio of I/O operations per second (IOPS) to gibibytes (GiB) of storage for the additional storage volume.</p>"
+                    }
+                },
+                "MaxIopsPerGib": {
+                    "target": "com.amazonaws.rds#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum ratio of I/O operations per second (IOPS) to gibibytes (GiB) of storage for the additional storage volume.</p>"
+                    }
+                },
+                "MinStorageThroughput": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum storage throughput that the additional storage volume supports, in mebibytes per second (MiBps).</p>"
+                    }
+                },
+                "MaxStorageThroughput": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum storage throughput that the additional storage volume supports, in mebibytes per second (MiBps).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the available options for additional storage volumes for a DB instance class.</p>"
+            }
+        },
+        "com.amazonaws.rds#AvailableAdditionalStorageVolumesOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#AvailableAdditionalStorageVolumesOption",
+                "traits": {
+                    "smithy.api#xmlName": "AvailableAdditionalStorageVolumesOption"
+                }
+            }
+        },
         "com.amazonaws.rds#AvailableProcessorFeature": {
             "type": "structure",
             "members": {
@@ -3848,7 +4045,7 @@
                     "target": "com.amazonaws.rds#CustomEngineName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The database engine. RDS Custom for Oracle supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The database engine.</p>\n         <p>RDS Custom for Oracle supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n         </ul>\n         <p>RDS Custom for SQL Server supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ccustom-sqlserver-web</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-dev</code>\n               </p>\n            </li>\n         </ul>\n         <p>RDS for SQL Server supports only <code>sqlserver-dev-ee</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3856,7 +4053,7 @@
                     "target": "com.amazonaws.rds#CustomEngineVersion",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of your CEV. The name format is 19.<i>customized_string</i>.\n            For example, a valid CEV name is <code>19.my_cev1</code>. This setting is required for RDS\n            Custom for Oracle, but optional for Amazon RDS. The combination of <code>Engine</code>\n            and <code>EngineVersion</code> is unique per customer per Region.</p>",
+                        "smithy.api#documentation": "<p>The name of your custom engine version (CEV).</p>\n         <p>For RDS Custom for Oracle, the name format is <code>19.*customized_string*</code>. For example, a valid CEV name is <code>19.my_cev1</code>.</p>\n         <p>For RDS for SQL Server and RDS Custom for SQL Server, the name format is <code>major engine_version*.*minor_engine_version*.*customized_string*</code>. For example, a valid CEV name is <code>16.00.4215.2.my_cev1</code>.</p>\n         <p>The CEV name is unique per customer per Amazon Web Services Regions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3910,6 +4107,12 @@
                 },
                 "Tags": {
                     "target": "com.amazonaws.rds#TagList"
+                },
+                "DatabaseInstallationFiles": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database installation files (ISO and EXE) uploaded to Amazon S3 for your database engine version to import to Amazon RDS.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5013,7 +5216,7 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The database engine to use for this DB instance.</p>\n         <p>Not every database engine is available in every Amazon Web Services Region.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for Aurora MySQL DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code> (for Aurora PostgreSQL DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code> (for RDS Custom for Oracle DB\n                    instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-ee</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-se</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-web</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-dev</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-ae</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The database engine to use for this DB instance.</p>\n         <p>Not every database engine is available in every Amazon Web Services Region.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for Aurora MySQL DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code> (for Aurora PostgreSQL DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code> (for RDS Custom for Oracle DB\n                    instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-ee</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-se</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-web</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-dev</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-ae</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-dev-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5375,6 +5578,12 @@
                     "target": "com.amazonaws.rds#MasterUserAuthenticationType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB instance.</p>\n         <p>You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>password</code> - Use standard database authentication with a password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>\n            </li>\n         </ul>\n         <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
+                    }
+                },
+                "AdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#AdditionalStorageVolumesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of additional storage volumes to create for the DB instance. You can create up\n            to three additional storage volumes using the names <code>rdsdbdata2</code>,\n                <code>rdsdbdata3</code>, and <code>rdsdbdata4</code>. Additional storage volumes are\n            supported for RDS for Oracle and RDS for SQL Server DB instances only.</p>"
                     }
                 }
             },
@@ -5773,6 +5982,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The CA certificate identifier to use for the read replica's server certificate.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n                instance</a> in the <i>Amazon RDS User Guide</i> and \n                <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n                    Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n                        User Guide</i>.</p>"
+                    }
+                },
+                "AdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#AdditionalStorageVolumesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of additional storage volumes to create for the DB instance. You can create up\n            to three additional storage volumes using the names <code>rdsdbdata2</code>,\n                <code>rdsdbdata3</code>, and <code>rdsdbdata4</code>. Additional storage volumes are\n            supported for RDS for Oracle and RDS for SQL Server DB instances only.</p>"
                     }
                 }
             },
@@ -9112,6 +9327,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies any Aurora Serverless v2 properties or limits that differ between Aurora engine versions.\n        You can test the values of this attribute when deciding which Aurora version to use in a new or upgraded\n        DB cluster. You can also retrieve the version of an existing DB cluster and check whether that version\n        supports certain Aurora Serverless v2 features before you attempt to use those features.\n      </p>"
                     }
+                },
+                "DatabaseInstallationFiles": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database installation files (ISO and EXE) uploaded to Amazon S3 for your database engine version to import to Amazon RDS. Required for <code>sqlserver-dev-ee</code>.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the custom engine version creation for <code>sqlserver-dev-ee</code> failed with an <code>incompatible-installation-media</code> status.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9675,6 +9902,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The lifecycle type for the DB instance.</p>\n         <p>For more information, see CreateDBInstance.</p>"
                     }
+                },
+                "AdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#AdditionalStorageVolumesOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional storage volumes associated with the DB instance. RDS supports\n            additional storage volumes for RDS for Oracle and RDS for SQL Server.</p>"
+                    }
+                },
+                "StorageVolumeStatus": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed status information for storage volumes associated with the DB instance. \n            This information helps identify which specific volume is causing the instance to be in a storage-full state.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9734,7 +9973,7 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The allocated storage size for the the automated backup in gibibytes (GiB).</p>"
+                        "smithy.api#documentation": "<p>The allocated storage size for the automated backup in gibibytes (GiB).</p>"
                     }
                 },
                 "Status": {
@@ -9885,6 +10124,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
+                    }
+                },
+                "AdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#AdditionalStorageVolumesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional storage volumes associated with the automated backup.</p>\n         <p>Valid Values: <code>GP3 | IO2</code>\n         </p>"
                     }
                 }
             },
@@ -11714,6 +11959,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the name of the Availability Zone where RDS stores the DB snapshot. This value is valid only for snapshots that RDS stores on a Dedicated Local Zone.</p>"
                     }
+                },
+                "AdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#AdditionalStorageVolumesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional storage volumes associated with the DB snapshot. RDS supports\n            additional storage volumes for RDS for Oracle and RDS for SQL Server.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12295,7 +12546,7 @@
                     "target": "com.amazonaws.rds#CustomEngineName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The database engine. RDS Custom for Oracle supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The database engine.</p>\n         <p>RDS Custom for Oracle supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n         </ul>\n         <p>RDS Custom for SQL Server supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ccustom-sqlserver-web</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-dev</code>\n               </p>\n            </li>\n         </ul>\n         <p>RDS for SQL Server supports only <code>sqlserver-dev-ee</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21635,6 +21886,64 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.rds#ModifyAdditionalStorageVolume": {
+            "type": "structure",
+            "members": {
+                "VolumeName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the additional storage volume that you want to modify.</p>\n         <p>Valid Values: <code>RDSDBDATA2 | RDSDBDATA3 | RDSDBDATA4</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllocatedStorage": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage allocated for the additional storage volume, in gibibytes (GiB).\n            The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).</p>"
+                    }
+                },
+                "IOPS": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of I/O operations per second (IOPS) provisioned for the additional storage\n            volume. This setting is only supported for Provisioned IOPS SSD (<code>io1</code> and\n            <code>io2</code>) storage types.</p>"
+                    }
+                },
+                "MaxAllocatedStorage": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upper limit in gibibytes (GiB) to which RDS can automatically scale the storage of\n            the additional storage volume. You must provide a value greater than or equal to\n            <code>AllocatedStorage</code>.</p>"
+                    }
+                },
+                "StorageThroughput": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage throughput value for the additional storage volume, in mebibytes per\n            second (MiBps). This setting applies only to the General Purpose SSD (<code>gp3</code>)\n            storage type.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new storage type for the additional storage volume.</p>\n         <p>Valid Values: <code>GP3 | IO2</code>\n         </p>"
+                    }
+                },
+                "SetForDelete": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to delete the additional storage volume. The value\n            <code>true</code> schedules the volume for deletion. You can delete an\n            additional storage volume only when it doesn't contain database files or other data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the modification of an additional storage volume.</p>"
+            }
+        },
+        "com.amazonaws.rds#ModifyAdditionalStorageVolumesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#ModifyAdditionalStorageVolume"
+            }
+        },
         "com.amazonaws.rds#ModifyCertificates": {
             "type": "operation",
             "input": {
@@ -21805,7 +22114,7 @@
                     "target": "com.amazonaws.rds#CustomEngineName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The database engine. RDS Custom for Oracle supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The database engine.</p>\n         <p>RDS Custom for Oracle supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n         </ul>\n         <p>RDS Custom for SQL Server supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ccustom-sqlserver-web</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-dev</code>\n               </p>\n            </li>\n         </ul>\n         <p>RDS for SQL Server supports only <code>sqlserver-dev-ee</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -23039,6 +23348,12 @@
                     "target": "com.amazonaws.rds#MasterUserAuthenticationType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can change the master DB user to use IAM database authentication.</p>\n         <p>You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>password</code> - Use standard database authentication with a password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>\n            </li>\n         </ul>\n         <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
+                    }
+                },
+                "AdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#ModifyAdditionalStorageVolumesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of additional storage volumes to modify or delete for the DB instance. You can\n            create up to 3 additional storage volumes. Additional storage volumes are supported for\n            RDS for Oracle and RDS for SQL Server DB instances only.</p>"
                     }
                 }
             },
@@ -25177,6 +25492,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports HTTP endpoints.</p>"
                     }
+                },
+                "SupportsAdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance class supports additional storage volumes.</p>"
+                    }
+                },
+                "AvailableAdditionalStorageVolumesOptions": {
+                    "target": "com.amazonaws.rds#AvailableAdditionalStorageVolumesOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The available options for additional storage volumes for the DB instance class.</p>"
+                    }
                 }
             },
             "traits": {
@@ -25544,6 +25871,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The database engine of the DB instance.</p>"
                     }
+                },
+                "AdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#AdditionalStorageVolumesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional storage volume modifications that are pending for the DB instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -25671,7 +26004,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the processor features of a DB instance class.</p>\n         <p>To specify the number of CPU cores, use the <code>coreCount</code> feature name \n            for the <code>Name</code> parameter. To specify the number of threads per core, use the\n            <code>threadsPerCore</code> feature name for the <code>Name</code> parameter.</p>\n         <p>You can set the processor features of the DB instance class for a DB instance when you\n            call one of the following actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDBInstance</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ModifyDBInstance</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RestoreDBInstanceFromDBSnapshot</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RestoreDBInstanceFromS3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RestoreDBInstanceToPointInTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can view the valid processor values for a particular instance class by calling the\n                <code>DescribeOrderableDBInstanceOptions</code> action and specifying the\n            instance class for the <code>DBInstanceClass</code> parameter.</p>\n         <p>In addition, you can use the following actions for DB instance class processor information:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DescribeDBInstances</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBSnapshots</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeValidDBInstanceModifications</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you call <code>DescribeDBInstances</code>, <code>ProcessorFeature</code> returns\n            non-null values only if the following conditions are met:</p>\n         <ul>\n            <li>\n               <p>You are accessing an Oracle DB instance.</p>\n            </li>\n            <li>\n               <p>Your Oracle DB instance class supports configuring the number of CPU cores and threads per core.</p>\n            </li>\n            <li>\n               <p>The current number CPU cores and threads is set to a non-default value.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor\">\n            Configuring the processor for a DB instance class in RDS for Oracle</a> in the <i>Amazon RDS User Guide.\n            </i>\n         </p>"
+                "smithy.api#documentation": "<p>Contains the processor features of a DB instance class.</p>\n         <p>To specify the number of CPU cores, use the <code>coreCount</code> feature name \n            for the <code>Name</code> parameter. To specify the number of threads per core, use the\n            <code>threadsPerCore</code> feature name for the <code>Name</code> parameter.</p>\n         <p>You can set the processor features of the DB instance class for a DB instance when you\n            call one of the following actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDBInstance</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ModifyDBInstance</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RestoreDBInstanceFromDBSnapshot</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RestoreDBInstanceFromS3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RestoreDBInstanceToPointInTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can view the valid processor values for a particular instance class by calling the\n                <code>DescribeOrderableDBInstanceOptions</code> action and specifying the\n            instance class for the <code>DBInstanceClass</code> parameter.</p>\n         <p>In addition, you can use the following actions for DB instance class processor information:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DescribeDBInstances</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBSnapshots</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeValidDBInstanceModifications</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you call <code>DescribeDBInstances</code>, <code>ProcessorFeature</code> returns\n            non-null values only if the following conditions are met:</p>\n         <ul>\n            <li>\n               <p>You are accessing an Oracle or SQL Server DB instance.</p>\n            </li>\n            <li>\n               <p>Your Oracle or SQL Server DB instance class supports configuring the number of CPU cores and threads per core.</p>\n            </li>\n            <li>\n               <p>The current number CPU cores and threads is set to a non-default value.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor\">\n            Configuring the processor for a DB instance class in RDS for Oracle</a>, <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Concepts.General.OptimizeCPU.html\">\n                Optimizing your RDS for SQL Server CPU</a>, and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB instance classes</a> \n            in the <i>Amazon RDS User Guide.\n            </i>\n         </p>"
             }
         },
         "com.amazonaws.rds#ProcessorFeatureList": {
@@ -28815,6 +29148,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
                     }
+                },
+                "AdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#AdditionalStorageVolumesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of additional storage volumes to create for the DB instance. You can create up\n            to three additional storage volumes using the names <code>rdsdbdata2</code>,\n                <code>rdsdbdata3</code>, and <code>rdsdbdata4</code>. Additional storage volumes are\n            supported for RDS for Oracle and RDS for SQL Server DB instances only.</p>"
+                    }
                 }
             },
             "traits": {
@@ -29234,6 +29573,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case,  \n              RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
+                },
+                "AdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#AdditionalStorageVolumesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of additional storage volumes to modify or delete for the DB instance. You can\n            modify or delete up to three additional storage volumes using the names\n                <code>rdsdbdata2</code>, <code>rdsdbdata3</code>, and <code>rdsdbdata4</code>.\n            Additional storage volumes are supported for RDS for Oracle and RDS for SQL Server DB\n            instances only.</p>"
                     }
                 }
             },
@@ -29722,6 +30067,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
+                    }
+                },
+                "AdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#AdditionalStorageVolumesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of additional storage volumes to restore to the DB instance. You can restore up\n            to three additional storage volumes using the names <code>rdsdbdata2</code>,\n                <code>rdsdbdata3</code>, and <code>rdsdbdata4</code>. Additional storage volumes are\n            supported for RDS for Oracle and RDS for SQL Server DB instances only.</p>"
                     }
                 }
             },
@@ -32329,6 +32680,26 @@
                 }
             }
         },
+        "com.amazonaws.rds#ValidAdditionalStorageOptions": {
+            "type": "structure",
+            "members": {
+                "SupportsAdditionalStorageVolumes": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance supports additional storage volumes.</p>"
+                    }
+                },
+                "Volumes": {
+                    "target": "com.amazonaws.rds#ValidVolumeOptionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The valid additional storage volume options for the DB instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the valid options for additional storage volumes for a DB instance. </p>"
+            }
+        },
         "com.amazonaws.rds#ValidDBInstanceModificationsMessage": {
             "type": "structure",
             "members": {
@@ -32348,6 +32719,12 @@
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports using a dedicated log volume (DLV).</p>"
+                    }
+                },
+                "AdditionalStorage": {
+                    "target": "com.amazonaws.rds#ValidAdditionalStorageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The valid additional storage options for the DB instance.</p>"
                     }
                 }
             },
@@ -32421,6 +32798,32 @@
                 "traits": {
                     "smithy.api#xmlName": "UpgradeTarget"
                 }
+            }
+        },
+        "com.amazonaws.rds#ValidVolumeOptions": {
+            "type": "structure",
+            "members": {
+                "VolumeName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the additional storage volume.</p>"
+                    }
+                },
+                "Storage": {
+                    "target": "com.amazonaws.rds#ValidStorageOptionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The valid storage options for the additional storage volume.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the valid options for an additional storage volume.</p>"
+            }
+        },
+        "com.amazonaws.rds#ValidVolumeOptionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#ValidVolumeOptions"
             }
         },
         "com.amazonaws.rds#VpcEncryptionControlViolationException": {

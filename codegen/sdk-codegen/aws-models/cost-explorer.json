@@ -5588,7 +5588,7 @@
                 "Granularity": {
                     "target": "com.amazonaws.costexplorer#Granularity",
                     "traits": {
-                        "smithy.api#documentation": "<p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code>\n      forecasts or 12 months of <code>MONTHLY</code> forecasts.</p>\n         <p>The <code>GetCostForecast</code> operation supports only <code>DAILY</code> and\n        <code>MONTHLY</code> granularities.</p>",
+                        "smithy.api#documentation": "<p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code>\n      forecasts or 18 months of <code>MONTHLY</code> forecasts.</p>\n         <p>The <code>GetCostForecast</code> operation supports only <code>DAILY</code> and\n        <code>MONTHLY</code> granularities.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6807,7 +6807,7 @@
                 "Granularity": {
                     "target": "com.amazonaws.costexplorer#Granularity",
                     "traits": {
-                        "smithy.api#documentation": "<p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code>\n      forecasts or 12 months of <code>MONTHLY</code> forecasts.</p>\n         <p>The <code>GetUsageForecast</code> operation supports only <code>DAILY</code> and\n        <code>MONTHLY</code> granularities.</p>",
+                        "smithy.api#documentation": "<p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code>\n      forecasts or 18 months of <code>MONTHLY</code> forecasts.</p>\n         <p>The <code>GetUsageForecast</code> operation supports only <code>DAILY</code> and\n        <code>MONTHLY</code> granularities.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10526,6 +10526,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SAGEMAKER_SP"
+                    }
+                },
+                "DATABASE_SP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATABASE_SP"
                     }
                 }
             }

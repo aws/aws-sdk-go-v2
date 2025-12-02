@@ -503,6 +503,12 @@
                         "smithy.api#documentation": "<p>Details about an OpenSearch Serverless collection.</p>"
                     }
                 },
+                "vectorOptions": {
+                    "target": "com.amazonaws.opensearchserverless#VectorOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for vector search capabilities in the collection.</p>"
+                    }
+                },
                 "createdDate": {
                     "target": "smithy.api#Long",
                     "traits": {
@@ -936,6 +942,12 @@
                         "smithy.api#documentation": "<p>Creates details about an OpenSearch Serverless collection.</p>"
                     }
                 },
+                "vectorOptions": {
+                    "target": "com.amazonaws.opensearchserverless#VectorOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for vector search capabilities in the collection.</p>"
+                    }
+                },
                 "createdDate": {
                     "target": "smithy.api#Long",
                     "traits": {
@@ -988,6 +1000,12 @@
                     "target": "com.amazonaws.opensearchserverless#StandbyReplicas",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether standby replicas should be used for a collection.</p>"
+                    }
+                },
+                "vectorOptions": {
+                    "target": "com.amazonaws.opensearchserverless#VectorOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for vector search capabilities in the collection.</p>"
                     }
                 },
                 "clientToken": {
@@ -4498,6 +4516,29 @@
                 ]
             }
         },
+        "com.amazonaws.opensearchserverless#ServerlessVectorAccelerationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether serverless vector acceleration is enabled for the collection.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLED",
+                        "value": "ENABLED",
+                        "documentation": "Serverless vector acceleration is enabled by default"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "DISABLED",
+                        "documentation": "Serverless vector acceleration is disabled"
+                    },
+                    {
+                        "name": "ALLOWED",
+                        "value": "ALLOWED",
+                        "documentation": "Serverless vector acceleration is allowed but not enabled by default"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.opensearchserverless#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -4838,6 +4879,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#ValidationException"
@@ -5468,6 +5512,21 @@
                 "smithy.api#documentation": "<p>Thrown when the HTTP request contains invalid input or is missing required input.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.opensearchserverless#VectorOptions": {
+            "type": "structure",
+            "members": {
+                "ServerlessVectorAcceleration": {
+                    "target": "com.amazonaws.opensearchserverless#ServerlessVectorAccelerationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether serverless vector acceleration is enabled for the collection.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration options for vector search capabilities in an OpenSearch Serverless collection.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#VpcEndpoint": {

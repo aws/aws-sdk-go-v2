@@ -1074,6 +1074,12 @@
                     "traits": {
                         "smithy.api#enumValue": "USD"
                     }
+                },
+                "EUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EUR"
+                    }
                 }
             }
         },
@@ -1149,6 +1155,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.savingsplans#InternalServerException"
+                },
+                {
                     "target": "com.amazonaws.savingsplans#ResourceNotFoundException"
                 },
                 {
@@ -1156,7 +1165,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the rates for the specified Savings Plan.</p>",
+                "smithy.api#documentation": "<p>Describes the rates for a specific, existing Savings Plan.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DescribeSavingsPlanRates",
@@ -1265,7 +1274,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the offering rates for the specified Savings Plans.</p>",
+                "smithy.api#documentation": "<p>Describes the offering rates for Savings Plans you might want to purchase.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DescribeSavingsPlansOfferingRates",
@@ -1941,7 +1950,7 @@
                 "returnableUntil": {
                     "target": "com.amazonaws.savingsplans#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time until when a return for the Savings Plan can be requested. If the\n            Savings Plan is not returnable, the field reflects the Savings Plan start time.</p>"
+                        "smithy.api#documentation": "<p>The time until when a return for the Savings Plan can be requested. If the\n            Savings Plan is not returnable, the field reflects the Savings Plans start time.</p>"
                     }
                 }
             },
@@ -2375,6 +2384,60 @@
                     "traits": {
                         "smithy.api#enumValue": "SageMaker"
                     }
+                },
+                "RDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDS"
+                    }
+                },
+                "DSQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DSQL"
+                    }
+                },
+                "DYNAMODB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DynamoDB"
+                    }
+                },
+                "ELASTICACHE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElastiCache"
+                    }
+                },
+                "DOCDB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DocDB"
+                    }
+                },
+                "NEPTUNE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Neptune"
+                    }
+                },
+                "TIMESTREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Timestream"
+                    }
+                },
+                "KEYSPACES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Keyspaces"
+                    }
+                },
+                "DMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DMS"
+                    }
                 }
             }
         },
@@ -2678,6 +2741,60 @@
                     "traits": {
                         "smithy.api#enumValue": "AmazonSageMaker"
                     }
+                },
+                "RDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonRDS"
+                    }
+                },
+                "AURORA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraDSQL"
+                    }
+                },
+                "DYNAMODB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonDynamoDB"
+                    }
+                },
+                "ELASTICACHE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonElastiCache"
+                    }
+                },
+                "DOCDB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonDocDB"
+                    }
+                },
+                "NEPTUNE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonNeptune"
+                    }
+                },
+                "TIMESTREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonTimestream"
+                    }
+                },
+                "MCS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonMCS"
+                    }
+                },
+                "DMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSDatabaseMigrationSvc"
+                    }
                 }
             }
         },
@@ -2706,6 +2823,78 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Request"
+                    }
+                },
+                "ACU_HR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACU-Hr"
+                    }
+                },
+                "READ_REQUEST_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReadRequestUnits"
+                    }
+                },
+                "WRITE_REQUEST_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WriteRequestUnits"
+                    }
+                },
+                "READ_CAPACITY_UNIT_HRS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReadCapacityUnit-Hrs"
+                    }
+                },
+                "WRITE_CAPACITY_UNIT_HRS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WriteCapacityUnit-Hrs"
+                    }
+                },
+                "REPLICATED_WRITE_REQUEST_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReplicatedWriteRequestUnits"
+                    }
+                },
+                "REPLICATED_WRITE_CAPACITY_UNIT_HRS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReplicatedWriteCapacityUnit-Hrs"
+                    }
+                },
+                "GB_HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GB-Hours"
+                    }
+                },
+                "DPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DPU"
+                    }
+                },
+                "ELASTI_CACHE_PROCESSING_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElastiCacheProcessingUnit"
+                    }
+                },
+                "DCU_HR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DCU-Hr"
+                    }
+                },
+                "NCU_HR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NCU-hr"
                     }
                 }
             }
@@ -2821,6 +3010,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SageMaker"
                     }
+                },
+                "DATABASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Database"
+                    }
                 }
             }
         },
@@ -2910,6 +3105,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "end"
+                    }
+                },
+                "INSTANCE_FAMILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "instance-family"
                     }
                 }
             }

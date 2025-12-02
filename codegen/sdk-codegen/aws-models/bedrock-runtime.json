@@ -1068,6 +1068,153 @@
                 "smithy.api#documentation": "<p>A summary of an asynchronous invocation.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#AudioBlock": {
+            "type": "structure",
+            "members": {
+                "format": {
+                    "target": "com.amazonaws.bedrockruntime#AudioFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the audio data, such as MP3, WAV, FLAC, or other supported audio formats.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockruntime#AudioSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the audio data, which can be provided as raw bytes or an S3 location.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.bedrockruntime#ErrorBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error information if the audio block could not be processed or contains invalid data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An audio content block that contains audio data in various supported formats.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#AudioFormat": {
+            "type": "enum",
+            "members": {
+                "MP3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mp3"
+                    }
+                },
+                "OPUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "opus"
+                    }
+                },
+                "WAV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "wav"
+                    }
+                },
+                "AAC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aac"
+                    }
+                },
+                "FLAC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "flac"
+                    }
+                },
+                "MP4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mp4"
+                    }
+                },
+                "OGG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ogg"
+                    }
+                },
+                "MKV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mkv"
+                    }
+                },
+                "MKA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mka"
+                    }
+                },
+                "X_AAC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "x-aac"
+                    }
+                },
+                "M4A": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m4a"
+                    }
+                },
+                "MPEG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mpeg"
+                    }
+                },
+                "MPGA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mpga"
+                    }
+                },
+                "PCM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pcm"
+                    }
+                },
+                "WEBM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "webm"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#AudioSource": {
+            "type": "union",
+            "members": {
+                "bytes": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Audio data encoded in base64.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        }
+                    }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.bedrockruntime#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A reference to audio data stored in an Amazon S3 bucket. To see which models support S3 uploads, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html\">Supported models and features for Converse</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of audio data, which can be provided either as raw bytes or a reference to an S3 location.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockruntime#AutoToolChoice": {
             "type": "structure",
             "members": {},
@@ -1392,6 +1539,12 @@
                         "smithy.api#documentation": "<p>Video to include in the message. </p>"
                     }
                 },
+                "audio": {
+                    "target": "com.amazonaws.bedrockruntime#AudioBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An audio content block containing audio data in the conversation.</p>"
+                    }
+                },
                 "toolUse": {
                     "target": "com.amazonaws.bedrockruntime#ToolUseBlock",
                     "traits": {
@@ -1471,6 +1624,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Incremental citation information that is streamed as part of the response generation process.</p>"
                     }
+                },
+                "image": {
+                    "target": "com.amazonaws.bedrockruntime#ImageBlockDelta",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A streaming delta event containing incremental image data.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1512,6 +1671,12 @@
                     "target": "com.amazonaws.bedrockruntime#ToolResultBlockStart",
                     "traits": {
                         "smithy.api#documentation": "<p>The </p>"
+                    }
+                },
+                "image": {
+                    "target": "com.amazonaws.bedrockruntime#ImageBlockStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The initial event indicating the start of a streaming image block.</p>"
                     }
                 }
             },
@@ -2516,6 +2681,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the content of a document.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#ErrorBlock": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable error message describing what went wrong during content processing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A block containing error information when content processing fails.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockruntime#FoundationModelVersionIdentifier": {
@@ -4763,10 +4943,51 @@
                         "smithy.api#documentation": "<p>The source for the image.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "error": {
+                    "target": "com.amazonaws.bedrockruntime#ErrorBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error information if the image block could not be processed or contains invalid data.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Image content for a message.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#ImageBlockDelta": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.bedrockruntime#ImageSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The incremental image source data for this delta event.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.bedrockruntime#ErrorBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error information if this image delta could not be processed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A streaming delta event that contains incremental image data during streaming responses.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#ImageBlockStart": {
+            "type": "structure",
+            "members": {
+                "format": {
+                    "target": "com.amazonaws.bedrockruntime#ImageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the image data that will be streamed in subsequent delta events.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The initial event in a streaming image block that indicates the start of image content.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#ImageFormat": {
@@ -4818,7 +5039,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The source for an image.</p>"
+                "smithy.api#documentation": "<p>The source for an image.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockruntime#ImagesGuarded": {
@@ -6402,6 +6624,18 @@
                         "smithy.api#enumValue": "content_filtered"
                     }
                 },
+                "MALFORMED_MODEL_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "malformed_model_output"
+                    }
+                },
+                "MALFORMED_TOOL_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "malformed_tool_use"
+                    }
+                },
                 "MODEL_CONTEXT_WINDOW_EXCEEDED": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -6741,6 +6975,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The reasoning the model used to return the output.</p>"
+                    }
+                },
+                "json": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON schema for the tool result content block. see <a href=\"https://json-schema.org/understanding-json-schema/reference\">JSON Schema Reference</a>.</p>"
                     }
                 }
             },

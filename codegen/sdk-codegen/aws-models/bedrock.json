@@ -17042,6 +17042,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Set to include video data in the log delivery.</p>"
                     }
+                },
+                "audioDataDeliveryEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to include audio data in the log delivery.</p>"
+                    }
                 }
             },
             "traits": {

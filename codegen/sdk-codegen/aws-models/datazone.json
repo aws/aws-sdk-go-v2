@@ -3254,6 +3254,23 @@
                 "smithy.api#documentation": "<p>The configurable action of a Amazon DataZone environment.</p>"
             }
         },
+        "com.amazonaws.datazone#ConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datazone#ConflictException": {
             "type": "structure",
             "members": {
@@ -10453,6 +10470,9 @@
                     "target": "com.amazonaws.datazone#GetConnection"
                 },
                 {
+                    "target": "com.amazonaws.datazone#GetDataExportConfiguration"
+                },
+                {
                     "target": "com.amazonaws.datazone#GetEnvironment"
                 },
                 {
@@ -10589,6 +10609,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#PostTimeSeriesDataPoints"
+                },
+                {
+                    "target": "com.amazonaws.datazone#PutDataExportConfiguration"
                 },
                 {
                     "target": "com.amazonaws.datazone#RejectPredictions"
@@ -14141,6 +14164,26 @@
                 }
             }
         },
+        "com.amazonaws.datazone#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "kmsKeyArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key to use for encryption. This field is required only when <code>sseAlgorithm</code> is set to <code>aws:kms</code>.</p>"
+                    }
+                },
+                "sseAlgorithm": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server-side encryption algorithm to use. Valid values are AES256 for S3-managed encryption keys, or aws:kms for Amazon Web Services KMS-managed encryption keys. If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The encryption configuration details.</p>"
+            }
+        },
         "com.amazonaws.datazone#EntityId": {
             "type": "string",
             "traits": {
@@ -16454,6 +16497,100 @@
                     "target": "com.amazonaws.datazone#ConnectionScope",
                     "traits": {
                         "smithy.api#documentation": "<p>The scope of the connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDataExportConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#GetDataExportConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#GetDataExportConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets data export configuration details.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/data-export-configuration"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDataExportConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to get the data export configuration details.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDataExportConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "isExportEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the export is enabled.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#ConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data export configuration.</p>"
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.datazone#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration as part of the data export configuration details.</p>"
+                    }
+                },
+                "s3TableBucketArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 table bucket ARN as part of the data export configuration details.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data export configuration report was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.datazone#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data export configuration report was updated.</p>"
                     }
                 }
             },
@@ -19350,6 +19487,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.datazone#MetadataGenerationRunType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the metadata generation run.</p>",
+                        "smithy.api#httpQuery": "type"
+                    }
                 }
             },
             "traits": {
@@ -19388,7 +19532,17 @@
                 "type": {
                     "target": "com.amazonaws.datazone#MetadataGenerationRunType",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types",
+                            "since": "2025-11-21"
+                        },
                         "smithy.api#documentation": "<p>The type of metadata generation run.</p>"
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.datazone#MetadataGenerationRunTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of the metadata generation run.</p>"
                     }
                 },
                 "createdAt": {
@@ -19408,6 +19562,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the project that owns the assets for which you're running metadata generation.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "typeStats": {
+                    "target": "com.amazonaws.datazone#MetadataGenerationRunTypeStats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type stats included in the metadata generation run output details.</p>",
+                        "smithy.api#notProperty": {}
                     }
                 }
             },
@@ -25357,6 +25518,13 @@
                         "smithy.api#documentation": "<p>The maximum number of metadata generation runs to return in a single call to ListMetadataGenerationRuns. When the number of metadata generation runs to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "targetIdentifier": {
+                    "target": "com.amazonaws.datazone#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target ID for which you want to list metadata generation runs.</p>",
+                        "smithy.api#httpQuery": "targetIdentifier"
+                    }
                 }
             },
             "traits": {
@@ -27447,6 +27615,9 @@
                 "type": {
                     "target": "com.amazonaws.datazone#MetadataGenerationRunType"
                 },
+                "types": {
+                    "target": "com.amazonaws.datazone#MetadataGenerationRunTypes"
+                },
                 "target": {
                     "target": "com.amazonaws.datazone#MetadataGenerationRunTarget"
                 },
@@ -27517,7 +27688,17 @@
                 "type": {
                     "target": "com.amazonaws.datazone#MetadataGenerationRunType",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types",
+                            "since": "2025-11-21"
+                        },
                         "smithy.api#documentation": "<p>The type of the metadata generation run.</p>"
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.datazone#MetadataGenerationRunTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of the metadata generation run.</p>"
                     }
                 },
                 "createdAt": {
@@ -27550,6 +27731,10 @@
                 "SUBMITTED": {
                     "target": "smithy.api#Unit",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This metadata generation run status is going to be deprecated",
+                            "since": "2025-11-21"
+                        },
                         "smithy.api#enumValue": "SUBMITTED"
                     }
                 },
@@ -27575,6 +27760,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "PARTIALLY_SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTIALLY_SUCCEEDED"
                     }
                 }
             }
@@ -27615,6 +27806,64 @@
                     "traits": {
                         "smithy.api#enumValue": "BUSINESS_DESCRIPTIONS"
                     }
+                },
+                "BUSINESS_NAMES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUSINESS_NAMES"
+                    }
+                },
+                "BUSINESS_GLOSSARY_ASSOCIATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUSINESS_GLOSSARY_ASSOCIATIONS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#MetadataGenerationRunTypeStat": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.datazone#MetadataGenerationRunType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the metadata generation run type statistics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#MetadataGenerationRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the metadata generation run type statistics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message displayed if the action fails to run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The statistics of the metadata generation run type.</p>"
+            }
+        },
+        "com.amazonaws.datazone#MetadataGenerationRunTypeStats": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#MetadataGenerationRunTypeStat"
+            }
+        },
+        "com.amazonaws.datazone#MetadataGenerationRunTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#MetadataGenerationRunType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
                 }
             }
         },
@@ -29355,6 +29604,89 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The provisioning properties of an environment blueprint.</p>"
+            }
+        },
+        "com.amazonaws.datazone#PutDataExportConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#PutDataExportConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#PutDataExportConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates data export configuration details.</p> <p>In the current release, you can enable exporting asset metadata only for one domain per Amazon Web Services account per region. If you disable exporting asset metadata feature for a domain where it's already enabled, you cannot enable this feature for another domain in the same Amazon Web Services account and region.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/domains/{domainIdentifier}/data-export-configuration"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#PutDataExportConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain ID where you want to create data export configuration details.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "enableExport": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the export is to be enabled as part of creating data export configuration details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.datazone#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration as part of creating data export configuration details.</p> <p>The KMS key provided here as part of encryptionConfiguration must have the required permissions as described in <a href=\"https://docs.aws.amazon.com/sagemaker-unified-studio/latest/adminguide/sagemaker-unified-studio-export-asset-metadata-kms-permissions.html\">KMS permissions for exporting asset metadata in Amazon SageMaker Unified Studio</a>.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#PutDataExportConfigurationOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.datazone#PutEnvironmentBlueprintConfiguration": {
@@ -33347,7 +33679,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the metadata generation run.</p> <p>Prerequisites:</p> <ul> <li> <p>Asset must be created and belong to the specified domain and project. </p> </li> <li> <p>Asset type must be supported for metadata generation (e.g., Amazon Web Services Glue table).</p> </li> <li> <p>Asset must have a structured schema with valid rows and columns.</p> </li> <li> <p>Valid values for --type: BUSINESS_DESCRIPTIONS, BUSINESS_NAMES.</p> </li> <li> <p>The user must have permission to run metadata generation in the domain/project.</p> </li> </ul>",
+                "smithy.api#documentation": "<p>Starts the metadata generation run.</p> <p>Prerequisites:</p> <ul> <li> <p>Asset must be created and belong to the specified domain and project. </p> </li> <li> <p>Asset type must be supported for metadata generation (e.g., Amazon Web Services Glue table).</p> </li> <li> <p>Asset must have a structured schema with valid rows and columns.</p> </li> <li> <p>Valid values for --type: BUSINESS_DESCRIPTIONS, BUSINESS_NAMES, BUSINESS_GLOSSARY_ASSOCIATIONS.</p> </li> <li> <p>The user must have permission to run metadata generation in the domain/project.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -33370,8 +33702,17 @@
                 "type": {
                     "target": "com.amazonaws.datazone#MetadataGenerationRunType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the metadata generation run.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types",
+                            "since": "2025-11-21"
+                        },
+                        "smithy.api#documentation": "<p>The type of the metadata generation run.</p>"
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.datazone#MetadataGenerationRunTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of the metadata generation run.</p>"
                     }
                 },
                 "target": {
@@ -33426,7 +33767,17 @@
                 "type": {
                     "target": "com.amazonaws.datazone#MetadataGenerationRunType",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types",
+                            "since": "2025-11-21"
+                        },
                         "smithy.api#documentation": "<p>The type of the metadata generation run.</p>"
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.datazone#MetadataGenerationRunTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of the metadata generation run.</p>"
                     }
                 },
                 "createdAt": {

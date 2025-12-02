@@ -56,12 +56,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Creates a vector index within a vector bucket. To specify the vector bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:CreateIndex</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Creates a vector index within a vector bucket. To specify the vector bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:CreateIndex</code> permission to use this operation.</p> <p>You must have the <code>s3vectors:TagResource</code> permission in addition to <code>s3vectors:CreateIndex</code> permission to create a vector index with tags.</p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/CreateIndex",
                     "method": "POST"
-                },
-                "smithy.api#idempotent": {}
+                }
             }
         },
         "com.amazonaws.s3vectors#CreateIndexInput": {
@@ -112,6 +111,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata configuration for the vector index. </p>"
                     }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.s3vectors#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for a vector index. By default, if you don't specify, all new vectors in the vector index will use the encryption configuration of the vector bucket.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.s3vectors#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of user-defined tags that you would like to apply to the vector index that you are creating. A tag is a key-value pair that you apply to your resources. Tags can help you organize, track costs, and control access to resources. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p> <note> <p>You must have the <code>s3vectors:TagResource</code> permission in addition to <code>s3vectors:CreateIndex</code> permission to create a vector index with tags.</p> </note>"
+                    }
                 }
             },
             "traits": {
@@ -154,12 +165,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Creates a vector bucket in the Amazon Web Services Region that you want your bucket to be in. </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:CreateVectorBucket</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Creates a vector bucket in the Amazon Web Services Region that you want your bucket to be in. </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:CreateVectorBucket</code> permission to use this operation. </p> <p>You must have the <code>s3vectors:TagResource</code> permission in addition to <code>s3vectors:CreateVectorBucket</code> permission to create a vector bucket with tags.</p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/CreateVectorBucket",
                     "method": "POST"
-                },
-                "smithy.api#idempotent": {}
+                }
             }
         },
         "com.amazonaws.s3vectors#CreateVectorBucketInput": {
@@ -176,6 +186,12 @@
                     "target": "com.amazonaws.s3vectors#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption configuration for the vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>. </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.s3vectors#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of user-defined tags that you would like to apply to the vector bucket that you are creating. A tag is a key-value pair that you apply to your resources. Tags can help you organize and control access to resources. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p> <note> <p>You must have the <code>s3vectors:TagResource</code> permission in addition to <code>s3vectors:CreateVectorBucket</code> permission to create a vector bucket with tags.</p> </note>"
                     }
                 }
             },
@@ -220,16 +236,18 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
                     "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes a vector index. To specify the vector index, you can either use both the vector bucket name and vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteIndex</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Deletes a vector index. To specify the vector index, you can either use both the vector bucket name and vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteIndex</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/DeleteIndex",
                     "method": "POST"
-                },
-                "smithy.api#idempotent": {}
+                }
             }
         },
         "com.amazonaws.s3vectors#DeleteIndexInput": {
@@ -278,16 +296,18 @@
                     "target": "com.amazonaws.s3vectors#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
                     "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes a vector bucket. All vector indexes in the vector bucket must be deleted before the vector bucket can be deleted. To perform this operation, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectorBucket</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Deletes a vector bucket. All vector indexes in the vector bucket must be deleted before the vector bucket can be deleted. To perform this operation, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectorBucket</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/DeleteVectorBucket",
                     "method": "POST"
-                },
-                "smithy.api#idempotent": {}
+                }
             }
         },
         "com.amazonaws.s3vectors#DeleteVectorBucketInput": {
@@ -334,7 +354,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes a vector bucket policy. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Deletes a vector bucket policy. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/DeleteVectorBucketPolicy",
                     "method": "POST"
@@ -401,7 +421,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes one or more vectors in a vector index. To specify the vector index, you can either use both the vector bucket name and vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectors</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Deletes one or more vectors in a vector index. To specify the vector index, you can either use both the vector bucket name and vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectors</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/DeleteVectors",
                     "method": "POST"
@@ -505,7 +525,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The encryption configuration for a vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>.</p>"
+                "smithy.api#documentation": "<p>The encryption configuration for a vector bucket or index. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>. You can optionally override bucket level encryption settings, and set a specific encryption configuration for a vector index at the time of index creation.</p>"
             }
         },
         "com.amazonaws.s3vectors#ExceptionMessage": {
@@ -534,7 +554,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns vector index attributes. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetIndex</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Returns vector index attributes. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetIndex</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/GetIndex",
                     "method": "POST"
@@ -607,7 +627,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector returned by the <code>GetVectors</code> operation.</p>"
+                "smithy.api#documentation": "<p>The attributes of a vector returned by the <code>GetVectors</code> operation.</p>"
             }
         },
         "com.amazonaws.s3vectors#GetVectorBucket": {
@@ -627,7 +647,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns vector bucket attributes. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectorBucket</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Returns vector bucket attributes. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectorBucket</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/GetVectorBucket",
                     "method": "POST"
@@ -687,7 +707,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Gets details about a vector bucket policy. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Gets details about a vector bucket policy. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/GetVectorBucketPolicy",
                     "method": "POST"
@@ -758,7 +778,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns vector attributes. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectors</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Returns vector attributes. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectors</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/GetVectors",
                     "method": "POST"
@@ -903,16 +923,23 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata configuration for the vector index. </p>"
                     }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.s3vectors#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for a vector index. By default, if you don't specify, all new vectors in the vector index will use the encryption configuration of the vector bucket.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector index.</p>"
+                "smithy.api#documentation": "<p>The attributes of a vector index.</p>"
             }
         },
         "com.amazonaws.s3vectors#IndexArn": {
             "type": "string",
             "traits": {
-                "aws.api#arnReference": {}
+                "aws.api#arnReference": {},
+                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:s3vectors:[a-z0-9-]+:[0-9]{12}:bucket/[a-z0-9][a-z0-9-.]{1,61}[a-z0-9]/index/[a-z0-9][a-z0-9-.]{1,61}[a-z0-9]$"
             }
         },
         "com.amazonaws.s3vectors#IndexName": {
@@ -979,7 +1006,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Summary information about a vector index.</p>"
+                "smithy.api#documentation": "<p>Summary information about a vector index.</p>"
             }
         },
         "com.amazonaws.s3vectors#InternalServerException": {
@@ -1090,7 +1117,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns a list of all the vector indexes within the specified vector bucket. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListIndexes</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Returns a list of all the vector indexes within the specified vector bucket. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListIndexes</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/ListIndexes",
                     "method": "POST"
@@ -1220,7 +1247,63 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector returned by the <code>ListVectors</code> operation.</p>"
+                "smithy.api#documentation": "<p>The attributes of a vector returned by the <code>ListVectors</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the tags applied to a specified Amazon S3 Vectors resource. Each tag is a label consisting of a key and value pair. Tags can help you organize, track costs for, and control access to resources. </p> <note> <p>For a list of S3 resources that support tagging, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags\">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For vector buckets and vector indexes, you must have the <code>s3vectors:ListTagsForResource</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.s3vectors#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource that you want to list tags for. The tagged resource can be a vector bucket or a vector index. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.s3vectors#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-defined tags that are applied to the S3 Vectors resource. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.s3vectors#ListVectorBuckets": {
@@ -1237,7 +1320,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns a list of all the vector buckets that are owned by the authenticated sender of the request.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListVectorBuckets</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Returns a list of all the vector buckets that are owned by the authenticated sender of the request.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListVectorBuckets</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/ListVectorBuckets",
                     "method": "POST"
@@ -1351,7 +1434,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>List vectors in the specified vector index. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <p> <code>ListVectors</code> operations proceed sequentially; however, for faster performance on a large number of vectors in a vector index, applications can request a parallel <code>ListVectors</code> operation by providing the <code>segmentCount</code> and <code>segmentIndex</code> parameters.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListVectors</code> permission to use this operation. Additional permissions are required based on the request parameters you specify:</p> <ul> <li> <p>With only <code>s3vectors:ListVectors</code> permission, you can list vector keys when <code>returnData</code> and <code>returnMetadata</code> are both set to false or not specified..</p> </li> <li> <p>If you set <code>returnData</code> or <code>returnMetadata</code> to true, you must have both <code>s3vectors:ListVectors</code> and <code>s3vectors:GetVectors</code> permissions. The request fails with a <code>403 Forbidden</code> error if you request vector data or metadata without the <code>s3vectors:GetVectors</code> permission.</p> </li> </ul> </dd> </dl>",
+                "smithy.api#documentation": "<p>List vectors in the specified vector index. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <p> <code>ListVectors</code> operations proceed sequentially; however, for faster performance on a large number of vectors in a vector index, applications can request a parallel <code>ListVectors</code> operation by providing the <code>segmentCount</code> and <code>segmentIndex</code> parameters.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListVectors</code> permission to use this operation. Additional permissions are required based on the request parameters you specify:</p> <ul> <li> <p>With only <code>s3vectors:ListVectors</code> permission, you can list vector keys when <code>returnData</code> and <code>returnMetadata</code> are both set to false or not specified..</p> </li> <li> <p>If you set <code>returnData</code> or <code>returnMetadata</code> to true, you must have both <code>s3vectors:ListVectors</code> and <code>s3vectors:GetVectors</code> permissions. The request fails with a <code>403 Forbidden</code> error if you request vector data or metadata without the <code>s3vectors:GetVectors</code> permission.</p> </li> </ul> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/ListVectors",
                     "method": "POST"
@@ -1507,7 +1590,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The metadata configuration for a vector index.</p>"
+                "smithy.api#documentation": "<p>The metadata configuration for a vector index.</p>"
             }
         },
         "com.amazonaws.s3vectors#MetadataKey": {
@@ -1573,7 +1656,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector to add to a vector index.</p>"
+                "smithy.api#documentation": "<p>The attributes of a vector to add to a vector index.</p>"
             }
         },
         "com.amazonaws.s3vectors#PutVectorBucketPolicy": {
@@ -1593,7 +1676,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Creates a bucket policy for a vector bucket. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Creates a bucket policy for a vector bucket. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/PutVectorBucketPolicy",
                     "method": "POST"
@@ -1670,7 +1753,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Adds one or more vectors to a vector index. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <p>For more information about limits, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html\">Limitations and restrictions</a> in the <i>Amazon S3 User Guide</i>.</p> <note> <p>When inserting vector data into your vector index, you must provide the vector data as <code>float32</code> (32-bit floating point) values. If you pass higher-precision values to an Amazon Web Services SDK, S3 Vectors converts the values to 32-bit floating point before storing them, and <code>GetVectors</code>, <code>ListVectors</code>, and <code>QueryVectors</code> operations return the float32 values. Different Amazon Web Services SDKs may have different default numeric types, so ensure your vectors are properly formatted as <code>float32</code> values regardless of which SDK you're using. For example, in Python, use <code>numpy.float32</code> or explicitly cast your values.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectors</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Adds one or more vectors to a vector index. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <p>For more information about limits, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html\">Limitations and restrictions</a> in the <i>Amazon S3 User Guide</i>.</p> <note> <p>When inserting vector data into your vector index, you must provide the vector data as <code>float32</code> (32-bit floating point) values. If you pass higher-precision values to an Amazon Web Services SDK, S3 Vectors converts the values to 32-bit floating point before storing them, and <code>GetVectors</code>, <code>ListVectors</code>, and <code>QueryVectors</code> operations return the float32 values. Different Amazon Web Services SDKs may have different default numeric types, so ensure your vectors are properly formatted as <code>float32</code> values regardless of which SDK you're using. For example, in Python, use <code>numpy.float32</code> or explicitly cast your values.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectors</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/PutVectors",
                     "method": "POST"
@@ -1733,6 +1816,12 @@
         "com.amazonaws.s3vectors#QueryOutputVector": {
             "type": "structure",
             "members": {
+                "distance": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The measure of similarity between the vector in the response and the query vector.</p>"
+                    }
+                },
                 "key": {
                     "target": "com.amazonaws.s3vectors#VectorKey",
                     "traits": {
@@ -1740,27 +1829,15 @@
                         "smithy.api#required": {}
                     }
                 },
-                "data": {
-                    "target": "com.amazonaws.s3vectors#VectorData",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The vector data associated with the vector, if requested. </p>"
-                    }
-                },
                 "metadata": {
                     "target": "com.amazonaws.s3vectors#VectorMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata associated with the vector, if requested.</p>"
                     }
-                },
-                "distance": {
-                    "target": "smithy.api#Float",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The measure of similarity between the vector in the response and the query vector.</p>"
-                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector in the approximate nearest neighbor search.</p>"
+                "smithy.api#documentation": "<p>The attributes of a vector in the approximate nearest neighbor search.</p>"
             }
         },
         "com.amazonaws.s3vectors#QueryVectors": {
@@ -1792,7 +1869,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Performs an approximate nearest neighbor search query in a vector index using a query vector. By default, it returns the keys of approximate nearest neighbors. You can optionally include the computed distance (between the query vector and each vector in the response), the vector data, and metadata of each vector in the response. </p> <p>To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:QueryVectors</code> permission to use this operation. Additional permissions are required based on the request parameters you specify:</p> <ul> <li> <p>With only <code>s3vectors:QueryVectors</code> permission, you can retrieve vector keys of approximate nearest neighbors and computed distances between these vectors. This permission is sufficient only when you don't set any metadata filters and don't request vector data or metadata (by keeping the <code>returnMetadata</code> parameter set to <code>false</code> or not specified).</p> </li> <li> <p>If you specify a metadata filter or set <code>returnMetadata</code> to true, you must have both <code>s3vectors:QueryVectors</code> and <code>s3vectors:GetVectors</code> permissions. The request fails with a <code>403 Forbidden error</code> if you request metadata filtering, vector data, or metadata without the <code>s3vectors:GetVectors</code> permission.</p> </li> </ul> </dd> </dl>",
+                "smithy.api#documentation": "<p>Performs an approximate nearest neighbor search query in a vector index using a query vector. By default, it returns the keys of approximate nearest neighbors. You can optionally include the computed distance (between the query vector and each vector in the response), the vector data, and metadata of each vector in the response. </p> <p>To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:QueryVectors</code> permission to use this operation. Additional permissions are required based on the request parameters you specify:</p> <ul> <li> <p>With only <code>s3vectors:QueryVectors</code> permission, you can retrieve vector keys of approximate nearest neighbors and computed distances between these vectors. This permission is sufficient only when you don't set any metadata filters and don't request vector data or metadata (by keeping the <code>returnMetadata</code> parameter set to <code>false</code> or not specified).</p> </li> <li> <p>If you specify a metadata filter or set <code>returnMetadata</code> to true, you must have both <code>s3vectors:QueryVectors</code> and <code>s3vectors:GetVectors</code> permissions. The request fails with a <code>403 Forbidden error</code> if you request metadata filtering, vector data, or metadata without the <code>s3vectors:GetVectors</code> permission.</p> </li> </ul> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/QueryVectors",
                     "method": "POST"
@@ -1906,9 +1983,29 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.s3vectors#ResourceARN": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {},
+                "smithy.api#length": {
+                    "max": 1011
+                }
+            }
+        },
         "com.amazonaws.s3vectors#S3Vectors": {
             "type": "service",
             "version": "2025-07-15",
+            "operations": [
+                {
+                    "target": "com.amazonaws.s3vectors#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#UntagResource"
+                }
+            ],
             "resources": [
                 {
                     "target": "com.amazonaws.s3vectors#VectorBucketResource"
@@ -2239,6 +2336,99 @@
                 }
             }
         },
+        "com.amazonaws.s3vectors#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.s3vectors#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#TagKey"
+            }
+        },
+        "com.amazonaws.s3vectors#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Applies one or more user-defined tags to an Amazon S3 Vectors resource or updates existing tags. Each tag is a label consisting of a key and value pair. Tags can help you organize, track costs for, and control access to your resources. You can add up to 50 tags for each resource.</p> <note> <p>For a list of S3 resources that support tagging, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags\">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For vector buckets and vector indexes, you must have the <code>s3vectors:TagResource</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.s3vectors#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource that you're applying tags to. The tagged resource can be a vector bucket or a vector index. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.s3vectors#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-defined tag that you want to add to the specified S3 Vectors resource. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#TagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.s3vectors#TagsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.s3vectors#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.s3vectors#TagValue"
+            }
+        },
         "com.amazonaws.s3vectors#TooManyRequestsException": {
             "type": "structure",
             "members": {
@@ -2264,6 +2454,65 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.s3vectors#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified user-defined tags from an Amazon S3 Vectors resource. You can pass one or more tag keys. </p> <note> <p>For a list of S3 resources that support tagging, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags\">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For vector buckets and vector indexes, you must have the <code>s3vectors:UntagResource</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.s3vectors#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource that you're removing tags from. The tagged resource can be a vector bucket or a vector index. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.s3vectors#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of tag keys that you're removing from the S3 Vectors resource. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#UntagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.s3vectors#ValidationException": {
@@ -2347,13 +2596,14 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector bucket. </p>"
+                "smithy.api#documentation": "<p>The attributes of a vector bucket. </p>"
             }
         },
         "com.amazonaws.s3vectors#VectorBucketArn": {
             "type": "string",
             "traits": {
-                "aws.api#arnReference": {}
+                "aws.api#arnReference": {},
+                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:s3vectors:[a-z0-9-]+:[0-9]{12}:bucket/[a-z0-9][a-z0-9-.]{1,61}[a-z0-9]$"
             }
         },
         "com.amazonaws.s3vectors#VectorBucketName": {
@@ -2425,7 +2675,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Summary information about a vector bucket.</p>"
+                "smithy.api#documentation": "<p>Summary information about a vector bucket.</p>"
             }
         },
         "com.amazonaws.s3vectors#VectorData": {
@@ -2439,7 +2689,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The vector data in different formats.</p>"
+                "smithy.api#documentation": "<p>The vector data in different formats.</p>"
             }
         },
         "com.amazonaws.s3vectors#VectorKey": {

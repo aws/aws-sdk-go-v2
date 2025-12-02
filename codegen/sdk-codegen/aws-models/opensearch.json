@@ -43,6 +43,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Container for parameters required to enable S3 vectors engine features on the\n            specified domain.</p>"
                     }
+                },
+                "ServerlessVectorAcceleration": {
+                    "target": "com.amazonaws.opensearch#ServerlessVectorAcceleration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable serverless vector acceleration for the domain. When enabled,\n         provides <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gpu-acceleration-vector-index.html\">GPU-accelerated</a> vector search capabilities for improved performance on vector\n         workloads.</p>"
+                    }
                 }
             },
             "traits": {
@@ -62,6 +68,12 @@
                     "target": "com.amazonaws.opensearch#S3VectorsEngine",
                     "traits": {
                         "smithy.api#documentation": "<p>Container for parameters representing the state of S3 vectors engine features on the\n            specified domain.</p>"
+                    }
+                },
+                "ServerlessVectorAcceleration": {
+                    "target": "com.amazonaws.opensearch#ServerlessVectorAcceleration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current serverless vector acceleration configuration for the domain.</p>"
                     }
                 }
             },
@@ -13880,6 +13892,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Configuration details for a Security Lake data source that can be used for direct\n            queries. </p>"
+            }
+        },
+        "com.amazonaws.opensearch#ServerlessVectorAcceleration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether serverless vector acceleration is enabled for the domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for serverless vector acceleration, which provides <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gpu-acceleration-vector-index.html\">GPU-accelerated</a> vector\n         search capabilities for improved performance on vector workloads.</p>"
             }
         },
         "com.amazonaws.opensearch#ServiceSoftwareOptions": {

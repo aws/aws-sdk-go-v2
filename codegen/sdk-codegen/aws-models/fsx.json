@@ -2553,6 +2553,30 @@
                 "smithy.api#documentation": "<p>Creates an S3 access point and attaches it to an Amazon FSx volume. For FSx for OpenZFS file systems, the \n         volume must be hosted on a high-availability file system, either Single-AZ or Multi-AZ. For more information,\n         see <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/s3accesspoints-for-FSx.html\">Accessing your data using Amazon S3 access points</a>.\n         in the Amazon FSx for OpenZFS User Guide.\n      </p>\n         <p>The requester requires the following permissions to perform these actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>fsx:CreateAndAttachS3AccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:CreateAccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:GetAccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:PutAccessPointPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:DeleteAccessPoint</code>\n               </p>\n            </li>\n         </ul>\n         <p>The following actions are related to <code>CreateAndAttachS3AccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeS3AccessPointAttachments</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DetachAndDeleteS3AccessPoint</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
+        "com.amazonaws.fsx#CreateAndAttachS3AccessPointOntapConfiguration": {
+            "type": "structure",
+            "members": {
+                "VolumeId": {
+                    "target": "com.amazonaws.fsx#VolumeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the FSx for ONTAP volume to which you want the S3 access point attached.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileSystemIdentity": {
+                    "target": "com.amazonaws.fsx#OntapFileSystemIdentity",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the file system user identity to use for authorizing file read and write requests that are made using this S3 access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the FSx for ONTAP volume that the S3 access point will be attached to, and the file system user identity.</p>"
+            }
+        },
         "com.amazonaws.fsx#CreateAndAttachS3AccessPointOpenZFSConfiguration": {
             "type": "structure",
             "members": {
@@ -2607,6 +2631,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the configuration to use when creating and attaching an S3 access point to an FSx for OpenZFS volume.</p>"
                     }
+                },
+                "OntapConfiguration": {
+                    "target": "com.amazonaws.fsx#CreateAndAttachS3AccessPointOntapConfiguration"
                 },
                 "S3AccessPoint": {
                     "target": "com.amazonaws.fsx#CreateAndAttachS3AccessPointS3Configuration",
@@ -9064,6 +9091,77 @@
                 "smithy.api#documentation": "<p>Configuration for the FSx for NetApp ONTAP file system.</p>"
             }
         },
+        "com.amazonaws.fsx#OntapFileSystemIdentity": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.fsx#OntapFileSystemUserType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the FSx for ONTAP user identity type. Valid values are <code>UNIX</code> and <code>WINDOWS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnixUser": {
+                    "target": "com.amazonaws.fsx#OntapUnixFileSystemUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the UNIX user identity for file system operations.</p>"
+                    }
+                },
+                "WindowsUser": {
+                    "target": "com.amazonaws.fsx#OntapWindowsFileSystemUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Windows user identity for file system operations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the file system user identity that will be used for authorizing all file access requests that are made using the S3 access point. The identity can be either a UNIX user or a Windows user.</p>"
+            }
+        },
+        "com.amazonaws.fsx#OntapFileSystemUserName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,256}$"
+            }
+        },
+        "com.amazonaws.fsx#OntapFileSystemUserType": {
+            "type": "enum",
+            "members": {
+                "UNIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNIX"
+                    }
+                },
+                "WINDOWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fsx#OntapUnixFileSystemUser": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.fsx#OntapFileSystemUserName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the UNIX user. The name can be up to 256 characters long.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The FSx for ONTAP UNIX file system user that is used for authorizing all file access requests that are made using the S3 access point.</p>"
+            }
+        },
         "com.amazonaws.fsx#OntapVolumeConfiguration": {
             "type": "structure",
             "members": {
@@ -9189,6 +9287,22 @@
                         "smithy.api#enumValue": "LS"
                     }
                 }
+            }
+        },
+        "com.amazonaws.fsx#OntapWindowsFileSystemUser": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.fsx#OntapFileSystemUserName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the Windows user. The name can be up to 256 characters long and supports Active Directory users.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The FSx for ONTAP Windows file system user that is used for authorizing all file access requests that are made using the S3 access point.</p>"
             }
         },
         "com.amazonaws.fsx#OpenZFSClientConfiguration": {
@@ -10357,6 +10471,12 @@
                         "smithy.api#documentation": "<p>The OpenZFSConfiguration of the S3 access point attachment.</p>"
                     }
                 },
+                "OntapConfiguration": {
+                    "target": "com.amazonaws.fsx#S3AccessPointOntapConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ONTAP configuration of the S3 access point attachment.</p>"
+                    }
+                },
                 "S3AccessPoint": {
                     "target": "com.amazonaws.fsx#S3AccessPoint",
                     "traits": {
@@ -10399,6 +10519,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "MISCONFIGURED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISCONFIGURED"
                     }
                 }
             }
@@ -10444,6 +10570,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OPENZFS"
+                    }
+                },
+                "ONTAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONTAP"
                     }
                 }
             }
@@ -10535,6 +10667,26 @@
                     "min": 0,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointOntapConfiguration": {
+            "type": "structure",
+            "members": {
+                "VolumeId": {
+                    "target": "com.amazonaws.fsx#VolumeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the FSx for ONTAP volume that the S3 access point is attached to.</p>"
+                    }
+                },
+                "FileSystemIdentity": {
+                    "target": "com.amazonaws.fsx#OntapFileSystemIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file system identity used to authorize file access requests made using the S3 access point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the FSx for ONTAP attachment configuration of an S3 access point attachment.</p>"
             }
         },
         "com.amazonaws.fsx#S3AccessPointOpenZFSConfiguration": {

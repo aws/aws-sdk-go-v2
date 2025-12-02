@@ -994,6 +994,21 @@
                 "smithy.api#documentation": "<p>Contains information about the Autonomous System (AS) associated with the network \n       endpoints involved in an attack sequence.</p>"
             }
         },
+        "com.amazonaws.guardduty#AutoscalingAutoScalingGroup": {
+            "type": "structure",
+            "members": {
+                "Ec2InstanceUids": {
+                    "target": "com.amazonaws.guardduty#Ec2InstanceUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the compromised Amazon EC2 instances that are part of the\n          same Auto Scaling Group.</p>",
+                        "smithy.api#jsonName": "ec2InstanceUids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Auto Scaling Group involved in a GuardDuty finding,\n          including unique identifiers of the Amazon EC2 instances.</p>"
+            }
+        },
         "com.amazonaws.guardduty#AwsApiCallAction": {
             "type": "structure",
             "members": {
@@ -1229,6 +1244,21 @@
                 "smithy.api#documentation": "<p>Contains information on the status of CloudTrail as a data source for the detector.</p>"
             }
         },
+        "com.amazonaws.guardduty#CloudformationStack": {
+            "type": "structure",
+            "members": {
+                "Ec2InstanceUids": {
+                    "target": "com.amazonaws.guardduty#Ec2InstanceUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the compromised Amazon EC2 instances that were created as part of the\n          same CloudFormation stack.</p>",
+                        "smithy.api#jsonName": "ec2InstanceUids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the CloudFormation stack involved in a GuardDuty finding,\n          including unique identifiers of the Amazon EC2 instances.</p>"
+            }
+        },
         "com.amazonaws.guardduty#ClusterStatus": {
             "type": "enum",
             "members": {
@@ -1361,6 +1391,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents a <i>less than or equal</i> condition to be applied to a single\n      field when querying for findings.</p>",
                         "smithy.api#jsonName": "lessThanOrEqual"
+                    }
+                },
+                "Matches": {
+                    "target": "com.amazonaws.guardduty#Matches",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the <i>match</i> condition to be applied to a single field when querying for findings.\n    </p>\n         <note>\n            <p>\n          The <i>matches</i> condition is available only for create-filter and update-filter APIs.\n        </p>\n         </note>",
+                        "smithy.api#jsonName": "matches"
+                    }
+                },
+                "NotMatches": {
+                    "target": "com.amazonaws.guardduty#NotMatches",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the <i>not match</i> condition to be applied to a single field when querying for findings.\n    </p>\n         <note>\n            <p>\n        The <i>not-matches</i> condition is available only for create-filter and update-filter APIs.\n      </p>\n         </note>",
+                        "smithy.api#jsonName": "notMatches"
                     }
                 }
             },
@@ -5274,6 +5318,21 @@
                 "smithy.api#documentation": "<p>Describes the configuration of scanning EBS volumes as a data source.</p>"
             }
         },
+        "com.amazonaws.guardduty#Ec2Image": {
+            "type": "structure",
+            "members": {
+                "Ec2InstanceUids": {
+                    "target": "com.amazonaws.guardduty#Ec2InstanceUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the compromised Amazon EC2 instances that were launched with the\n          same Amazon Machine Image (AMI).</p>",
+                        "smithy.api#jsonName": "ec2InstanceUids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon EC2 Image involved in a GuardDuty finding,\n          including unique identifiers of the Amazon EC2 instances.</p>"
+            }
+        },
         "com.amazonaws.guardduty#Ec2ImageDetails": {
             "type": "structure",
             "members": {
@@ -5377,6 +5436,27 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#Ec2LaunchTemplate": {
+            "type": "structure",
+            "members": {
+                "Ec2InstanceUids": {
+                    "target": "com.amazonaws.guardduty#Ec2InstanceUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the compromised Amazon EC2 instances that share the\n          same Amazon EC2 launch template.</p>",
+                        "smithy.api#jsonName": "ec2InstanceUids"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.guardduty#LaunchTemplateVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Version of the EC2 launch template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon EC2 launch template involved in a GuardDuty finding,\n          including unique identifiers of the Amazon EC2 instances.</p>"
+            }
+        },
         "com.amazonaws.guardduty#Ec2NetworkInterface": {
             "type": "structure",
             "members": {
@@ -5431,6 +5511,43 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#String"
+            }
+        },
+        "com.amazonaws.guardduty#Ec2Vpc": {
+            "type": "structure",
+            "members": {
+                "Ec2InstanceUids": {
+                    "target": "com.amazonaws.guardduty#Ec2InstanceUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the compromised Amazon EC2 instances that were launched within the\n          same Virtual Private Cloud (VPC).</p>",
+                        "smithy.api#jsonName": "ec2InstanceUids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon EC2 VPC involved in a GuardDuty finding,\n          including unique identifiers of the Amazon EC2 instances.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#EcsCluster": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.guardduty#EcsClusterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Amazon ECS cluster.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "Ec2InstanceUids": {
+                    "target": "com.amazonaws.guardduty#Ec2InstanceUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the Amazon EC2 instances that serve as container instances in\n          the Amazon ECS cluster.</p>",
+                        "smithy.api#jsonName": "ec2InstanceUids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon ECS cluster involved in a GuardDuty finding,\n          including cluster identification and status.</p>"
             }
         },
         "com.amazonaws.guardduty#EcsClusterDetails": {
@@ -5495,6 +5612,94 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the details of the ECS Cluster.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#EcsClusterStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISIONING"
+                    }
+                },
+                "DEPROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPROVISIONING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#EcsLaunchType": {
+            "type": "enum",
+            "members": {
+                "FARGATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FARGATE"
+                    }
+                },
+                "EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#EcsTask": {
+            "type": "structure",
+            "members": {
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the Amazon ECS task was created, in UTC format.</p>",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                },
+                "TaskDefinitionArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of task definition which describes the container and volume definitions of the Amazon ECS task.</p>",
+                        "smithy.api#jsonName": "taskDefinitionArn"
+                    }
+                },
+                "LaunchType": {
+                    "target": "com.amazonaws.guardduty#EcsLaunchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The infrastructure type on which the Amazon ECS task runs.</p>",
+                        "smithy.api#jsonName": "launchType"
+                    }
+                },
+                "ContainerUids": {
+                    "target": "com.amazonaws.guardduty#ContainerUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the containers associated with the Amazon ECS task.</p>",
+                        "smithy.api#jsonName": "containerUids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about Amazon ECS task involved in a GuardDuty finding,\n          including task definition and container identifiers.</p>"
             }
         },
         "com.amazonaws.guardduty#EcsTaskDetails": {
@@ -6254,6 +6459,54 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CONTAINER"
+                    }
+                },
+                "ECS_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS_CLUSTER"
+                    }
+                },
+                "ECS_TASK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS_TASK"
+                    }
+                },
+                "AUTOSCALING_AUTO_SCALING_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOSCALING_AUTO_SCALING_GROUP"
+                    }
+                },
+                "IAM_INSTANCE_PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_INSTANCE_PROFILE"
+                    }
+                },
+                "CLOUDFORMATION_STACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDFORMATION_STACK"
+                    }
+                },
+                "EC2_LAUNCH_TEMPLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_LAUNCH_TEMPLATE"
+                    }
+                },
+                "EC2_VPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_VPC"
+                    }
+                },
+                "EC2_IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_IMAGE"
                     }
                 }
             }
@@ -9834,6 +10087,21 @@
                 "smithy.api#documentation": "<p>Contains information about the EC2 instance profile.</p>"
             }
         },
+        "com.amazonaws.guardduty#IamInstanceProfileV2": {
+            "type": "structure",
+            "members": {
+                "Ec2InstanceUids": {
+                    "target": "com.amazonaws.guardduty#Ec2InstanceUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the compromised Amazon EC2 instances that share the\n          same IAM instance profile.</p>",
+                        "smithy.api#jsonName": "ec2InstanceUids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the IAM instance profile involved in a GuardDuty finding,\n          including unique identifiers of the Amazon EC2 instances.</p>"
+            }
+        },
         "com.amazonaws.guardduty#ImpersonatedUser": {
             "type": "structure",
             "members": {
@@ -11087,6 +11355,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the Lambda function involved in the finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#LaunchTemplateVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.guardduty#Lineage": {
@@ -13148,6 +13425,27 @@
                 "smithy.api#documentation": "<p>Contains information about the administrator account and invitation.</p>"
             }
         },
+        "com.amazonaws.guardduty#Match": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.guardduty#Matches": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Match"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.guardduty#MaxResults": {
             "type": "integer",
             "traits": {
@@ -13794,6 +14092,27 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#String"
+            }
+        },
+        "com.amazonaws.guardduty#NotMatch": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.guardduty#NotMatches": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#NotMatch"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.guardduty#ObservationTexts": {
@@ -15422,6 +15741,62 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains detailed information about the container associated with the activity that\n      prompted GuardDuty to generate a finding.</p>",
                         "smithy.api#jsonName": "container"
+                    }
+                },
+                "EcsCluster": {
+                    "target": "com.amazonaws.guardduty#EcsCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the Amazon ECS cluster associated with the activity that\n          prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "ecsCluster"
+                    }
+                },
+                "EcsTask": {
+                    "target": "com.amazonaws.guardduty#EcsTask",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the Amazon ECS task associated with the activity that\n            prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "ecsTask"
+                    }
+                },
+                "IamInstanceProfile": {
+                    "target": "com.amazonaws.guardduty#IamInstanceProfileV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the IAM instance profile associated with the activity that\n            prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "iamInstanceProfile"
+                    }
+                },
+                "AutoscalingAutoScalingGroup": {
+                    "target": "com.amazonaws.guardduty#AutoscalingAutoScalingGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the Auto Scaling Group associated with the activity that\n            prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "autoscalingAutoScalingGroup"
+                    }
+                },
+                "Ec2LaunchTemplate": {
+                    "target": "com.amazonaws.guardduty#Ec2LaunchTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the EC2 launch template associated with the activity that\n            prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "ec2LaunchTemplate"
+                    }
+                },
+                "Ec2Vpc": {
+                    "target": "com.amazonaws.guardduty#Ec2Vpc",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the EC2 VPC associated with the activity that\n            prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "ec2Vpc"
+                    }
+                },
+                "Ec2Image": {
+                    "target": "com.amazonaws.guardduty#Ec2Image",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the EC2 Image associated with the activity that\n            prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "ec2Image"
+                    }
+                },
+                "CloudformationStack": {
+                    "target": "com.amazonaws.guardduty#CloudformationStack",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the CloudFormation stack associated with the activity that\n            prompted GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "cloudformationStack"
                     }
                 }
             },
