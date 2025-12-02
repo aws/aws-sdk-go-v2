@@ -3,4 +3,4 @@
 package ivs
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.48.7"
+const goModuleVersion = "1.48.8"

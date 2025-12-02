@@ -1,3 +1,9 @@
+# v1.69.0 (2025-12-02)
+
+* **Feature**: Adding support for extended threat detection for Amazon EC2 and Amazon ECS. Adding support for wild card suppression rules.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.24.0. Notably this version of the library reduces the allocation footprint of the middleware system. We observe a ~10% reduction in allocations per SDK call with this change.
+
 # v1.68.2 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

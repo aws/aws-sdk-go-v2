@@ -3,4 +3,4 @@
 package ivschat
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.21.13"
+const goModuleVersion = "1.21.14"

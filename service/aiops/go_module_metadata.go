@@ -3,4 +3,4 @@
 package aiops
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.6.14"
+const goModuleVersion = "1.6.15"

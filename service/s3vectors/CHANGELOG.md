@@ -1,3 +1,9 @@
+# v1.6.0 (2025-12-02)
+
+* **Feature**: Amazon S3 Vectors provides cost-effective, elastic, and durable vector storage for queries based on semantic meaning and similarity.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.24.0. Notably this version of the library reduces the allocation footprint of the middleware system. We observe a ~10% reduction in allocations per SDK call with this change.
+
 # v1.5.4 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

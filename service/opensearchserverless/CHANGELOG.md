@@ -1,3 +1,9 @@
+# v1.28.0 (2025-12-02)
+
+* **Feature**: GPU-acceleration helps you build large-scale vector databases faster and more efficiently. You can enable this feature on new OpenSearch domains and OpenSearch Serverless collections. This feature uses GPU-acceleration to reduce the time needed to index data into vector indexes.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.24.0. Notably this version of the library reduces the allocation footprint of the middleware system. We observe a ~10% reduction in allocations per SDK call with this change.
+
 # v1.27.6 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

@@ -1,3 +1,58 @@
+# Release (2025-12-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.24.0. Notably this version of the library reduces the allocation footprint of the middleware system. We observe a ~10% reduction in allocations per SDK call with this change.
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.51.0](service/bedrock/CHANGELOG.md#v1510-2025-12-02)
+  * **Feature**: Adds the audioDataDeliveryEnabled boolean field to the Model Invocation Logging Configuration.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.10.0](service/bedrockagentcore/CHANGELOG.md#v1100-2025-12-02)
+  * **Feature**: Support for AgentCore Evaluations and Episodic memory strategy for AgentCore Memory.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.15.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1150-2025-12-02)
+  * **Feature**: Supports AgentCore Evaluations, Policy, Episodic Memory Strategy, Resource Based Policy for Runtime and Gateway APIs, API Gateway Rest API Targets and enhances JWT authorizer.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.47.0](service/bedrockruntime/CHANGELOG.md#v1470-2025-12-02)
+  * **Feature**: Adds support for Audio Blocks and Streaming Image Output plus new Stop Reasons of malformed_model_output and malformed_tool_use.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.62.0](service/cloudwatchlogs/CHANGELOG.md#v1620-2025-12-02)
+  * **Feature**: CloudWatch Logs adds managed S3 Tables integration to access logs using other analytical tools, as well as facets and field indexing to simplify log analytics in CloudWatch Logs Insights.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.61.0](service/costexplorer/CHANGELOG.md#v1610-2025-12-02)
+  * **Feature**: This release updates existing Savings Plans Purchase Analyzer and Recommendations APIs to support Database Savings Plans.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.49.0](service/datazone/CHANGELOG.md#v1490-2025-12-02)
+  * **Feature**: Amazon DataZone now supports exporting Catalog datasets as Amazon S3 tables, and provides automatic business glossary term suggestions for data assets.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.65.0](service/fsx/CHANGELOG.md#v1650-2025-12-02)
+  * **Feature**: S3 Access Points support for FSx for NetApp ONTAP
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.69.0](service/guardduty/CHANGELOG.md#v1690-2025-12-02)
+  * **Feature**: Adding support for extended threat detection for Amazon EC2 and Amazon ECS. Adding support for wild card suppression rules.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.85.0](service/lambda/CHANGELOG.md#v1850-2025-12-02)
+  * **Feature**: Launching Lambda durable functions - a new feature to build reliable multi-step applications and AI workflows natively within the Lambda developer experience.
+* `github.com/aws/aws-sdk-go-v2/service/novaact`: [v1.0.0](service/novaact/CHANGELOG.md#v100-2025-12-02)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of Nova Act SDK. The Nova Act service enables customers to build and manage fleets of agents for automating production UI workflows with high reliability, fastest time-to-value, and ease of implementation at scale.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.9.0](service/observabilityadmin/CHANGELOG.md#v190-2025-12-02)
+  * **Feature**: CloudWatch Observability Admin adds pipelines configuration for third party log ingestion and transformation of all logs ingested, integration of CloudWatch logs with S3 Tables, and AWS account or organization level enablement for 7 AWS services.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.55.0](service/opensearch/CHANGELOG.md#v1550-2025-12-02)
+  * **Feature**: GPU-acceleration helps you build large-scale vector databases faster and more efficiently. You can enable this feature on new OpenSearch domains and OpenSearch Serverless collections. This feature uses GPU-acceleration to reduce the time needed to index data into vector indexes.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.28.0](service/opensearchserverless/CHANGELOG.md#v1280-2025-12-02)
+  * **Feature**: GPU-acceleration helps you build large-scale vector databases faster and more efficiently. You can enable this feature on new OpenSearch domains and OpenSearch Serverless collections. This feature uses GPU-acceleration to reduce the time needed to index data into vector indexes.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.112.0](service/rds/CHANGELOG.md#v11120-2025-12-02)
+  * **Feature**: RDS Oracle and SQL Server: Add support for adding, modifying, and removing additional storage volumes, offering up to 256TiB storage; RDS SQL Server: Support Developer Edition via custom engine versions for development and testing purposes; M7i/R7i instances with Optimize CPU for cost savings.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.93.0](service/s3/CHANGELOG.md#v1930-2025-12-02)
+  * **Feature**: New S3 Storage Class FSX_ONTAP
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.67.0](service/s3control/CHANGELOG.md#v1670-2025-12-02)
+  * **Feature**: Add support for S3 Storage Lens Advanced Performance Metrics, Expanded Prefixes metrics report, and export to S3 Tables.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.13.0](service/s3tables/CHANGELOG.md#v1130-2025-12-02)
+  * **Feature**: Add storage class, replication, and table record expiration features to S3 Tables.
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.6.0](service/s3vectors/CHANGELOG.md#v160-2025-12-02)
+  * **Feature**: Amazon S3 Vectors provides cost-effective, elastic, and durable vector storage for queries based on semantic meaning and similarity.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.227.0](service/sagemaker/CHANGELOG.md#v12270-2025-12-02)
+  * **Feature**: Added support for serverless MLflow Apps.
+
+Added support for new HubContentTypes (DataSet and JsonDoc) in Private Hub for AI model customization assets, enabling tracking and management of training datasets and evaluators (reward functions/prompts) throughout the ML lifecycle.
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.31.0](service/savingsplans/CHANGELOG.md#v1310-2025-12-02)
+  * **Feature**: Added support for Amazon Database Savings Plans
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.67.0](service/securityhub/CHANGELOG.md#v1670-2025-12-02)
+  * **Feature**: ITSM enhancements: DRYRUN mode for testing ticket creation, ServiceNow now uses AWS Secrets Manager for credentials, ConnectorRegistrationsV2 renamed to RegisterConnectorV2, added ServiceQuotaExceededException error, and ConnectorStatus visibility in CreateConnectorV2.
+
 # Release (2025-12-01)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "a9ca7a93-794d-4896-870d-1d85e0f27530",
-    "type": "feature",
-    "description": "S3 Access Points support for FSx for NetApp ONTAP",
-    "modules": [
-        "service/fsx"
-    ]
-}

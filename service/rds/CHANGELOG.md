@@ -1,3 +1,9 @@
+# v1.112.0 (2025-12-02)
+
+* **Feature**: RDS Oracle and SQL Server: Add support for adding, modifying, and removing additional storage volumes, offering up to 256TiB storage; RDS SQL Server: Support Developer Edition via custom engine versions for development and testing purposes; M7i/R7i instances with Optimize CPU for cost savings.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.24.0. Notably this version of the library reduces the allocation footprint of the middleware system. We observe a ~10% reduction in allocations per SDK call with this change.
+
 # v1.111.1 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

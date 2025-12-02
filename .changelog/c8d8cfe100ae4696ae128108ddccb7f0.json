@@ -1,8 +1,0 @@
-{
-    "id": "c8d8cfe1-00ae-4696-ae12-8108ddccb7f0",
-    "type": "feature",
-    "description": "Added support for serverless MLflow Apps.\n\nAdded support for new HubContentTypes (DataSet and JsonDoc) in Private Hub for AI model customization assets, enabling tracking and management of training datasets and evaluators (reward functions/prompts) throughout the ML lifecycle.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
