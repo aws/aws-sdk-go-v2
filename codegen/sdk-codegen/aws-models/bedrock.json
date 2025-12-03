@@ -6481,6 +6481,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrock#ListCustomModelDeployments"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#UpdateCustomModelDeployment"
                 }
             ]
         },
@@ -6566,6 +6569,51 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrock#CustomModelDeploymentSummary"
+            }
+        },
+        "com.amazonaws.bedrock#CustomModelDeploymentUpdateDetails": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.bedrock#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> ARN of the new custom model being deployed as part of the update. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateStatus": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentUpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Current status of the deployment update. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Details about an update to a custom model deployment, including the new custom model resource ARN and current update status. </p>"
+            }
+        },
+        "com.amazonaws.bedrock#CustomModelDeploymentUpdateStatus": {
+            "type": "enum",
+            "members": {
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Updating"
+                    }
+                },
+                "UPDATE_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateCompleted"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateFailed"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrock#CustomModelName": {
@@ -6696,6 +6744,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Distillation configuration for the custom model.</p>"
                     }
+                },
+                "rftConfig": {
+                    "target": "com.amazonaws.bedrock#RFTConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Configuration settings for reinforcement fine-tuning (RFT) model customization, including grader configuration and hyperparameters. </p>"
+                    }
                 }
             },
             "traits": {
@@ -6721,6 +6775,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DISTILLATION"
+                    }
+                },
+                "REINFORCEMENT_FINE_TUNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REINFORCEMENT_FINE_TUNING"
                     }
                 },
                 "IMPORTED": {
@@ -7801,6 +7861,15 @@
                     "traits": {
                         "smithy.api#enumValue": "NOT_AVAILABLE"
                     }
+                }
+            }
+        },
+        "com.amazonaws.bedrock#EpochCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
                 }
             }
         },
@@ -9974,6 +10043,12 @@
                         "smithy.api#documentation": "<p>The description of the custom model deployment.</p>"
                     }
                 },
+                "updateDetails": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentUpdateDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Details about any pending or completed updates to the custom model deployment, including the new model ARN and update status. </p>"
+                    }
+                },
                 "failureMessage": {
                     "target": "com.amazonaws.bedrock#ErrorMessage",
                     "traits": {
@@ -11943,6 +12018,20 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#GraderConfig": {
+            "type": "union",
+            "members": {
+                "lambdaGrader": {
+                    "target": "com.amazonaws.bedrock#LambdaGraderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Configuration for using an AWS Lambda function as the grader for evaluating model responses and provide reward signals in reinforcement fine-tuning. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Configuration for the grader used in reinforcement fine-tuning to evaluate model responses and provide reward signals. </p>"
             }
         },
         "com.amazonaws.bedrock#GuardrailArn": {
@@ -14783,6 +14872,31 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration details for returning the results from the knowledge base vector search.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#LambdaArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+            }
+        },
+        "com.amazonaws.bedrock#LambdaGraderConfig": {
+            "type": "structure",
+            "members": {
+                "lambdaArn": {
+                    "target": "com.amazonaws.bedrock#LambdaArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> ARN of the AWS Lambda function that will evaluate model responses and return reward scores for RFT training. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Configuration for using an AWS Lambda function to grade model responses during reinforcement fine-tuning training. </p>"
             }
         },
         "com.amazonaws.bedrock#LegalTerm": {
@@ -19000,6 +19114,124 @@
                 }
             }
         },
+        "com.amazonaws.bedrock#RFTBatchSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 16,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.bedrock#RFTConfig": {
+            "type": "structure",
+            "members": {
+                "graderConfig": {
+                    "target": "com.amazonaws.bedrock#GraderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Configuration for the grader that evaluates model responses and provides reward signals during RFT training. </p>"
+                    }
+                },
+                "hyperParameters": {
+                    "target": "com.amazonaws.bedrock#RFTHyperParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Hyperparameters that control the reinforcement fine-tuning training process, including learning rate, batch size, and epoch count. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Configuration settings for reinforcement fine-tuning (RFT), including grader configuration and training hyperparameters. </p>"
+            }
+        },
+        "com.amazonaws.bedrock#RFTEvalInterval": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrock#RFTHyperParameters": {
+            "type": "structure",
+            "members": {
+                "epochCount": {
+                    "target": "com.amazonaws.bedrock#EpochCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Number of training epochs to run during reinforcement fine-tuning. Higher values may improve performance but increase training time. </p>"
+                    }
+                },
+                "batchSize": {
+                    "target": "com.amazonaws.bedrock#RFTBatchSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Number of training samples processed in each batch during reinforcement fine-tuning (RFT) training. Larger batches may improve training stability. </p>"
+                    }
+                },
+                "learningRate": {
+                    "target": "com.amazonaws.bedrock#RFTLearningRate",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Learning rate for the reinforcement fine-tuning. Controls how quickly the model adapts to reward signals. </p>"
+                    }
+                },
+                "maxPromptLength": {
+                    "target": "com.amazonaws.bedrock#RFTMaxPromptLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Maximum length of input prompts during RFT training, measured in tokens. Longer prompts allow more context but increase memory usage and training-time. </p>"
+                    }
+                },
+                "trainingSamplePerPrompt": {
+                    "target": "com.amazonaws.bedrock#RFTTrainingSamplePerPrompt",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Number of response samples generated per prompt during RFT training. More samples provide better reward signal estimation. </p>"
+                    }
+                },
+                "inferenceMaxTokens": {
+                    "target": "com.amazonaws.bedrock#RFTInferenceMaxTokens",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Maximum number of tokens the model can generate in response to each prompt during RFT training. </p>"
+                    }
+                },
+                "reasoningEffort": {
+                    "target": "com.amazonaws.bedrock#ReasoningEffort",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Level of reasoning effort applied during RFT training. Higher values may improve response quality but increase training time. </p>"
+                    }
+                },
+                "evalInterval": {
+                    "target": "com.amazonaws.bedrock#RFTEvalInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Interval between evaluation runs during RFT training, measured in training steps. More frequent evaluation provides better monitoring. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Hyperparameters for controlling the reinforcement fine-tuning training process, including learning settings and evaluation intervals. </p>"
+            }
+        },
+        "com.amazonaws.bedrock#RFTInferenceMaxTokens": {
+            "type": "integer"
+        },
+        "com.amazonaws.bedrock#RFTLearningRate": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1.0E-7,
+                    "max": 0.001
+                }
+            }
+        },
+        "com.amazonaws.bedrock#RFTMaxPromptLength": {
+            "type": "integer"
+        },
+        "com.amazonaws.bedrock#RFTTrainingSamplePerPrompt": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2,
+                    "max": 16
+                }
+            }
+        },
         "com.amazonaws.bedrock#RagConfigs": {
             "type": "list",
             "member": {
@@ -19083,6 +19315,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Defines the value for one rating in a custom metric rating scale.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ReasoningEffort": {
+            "type": "enum",
+            "members": {
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "low"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "medium"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "high"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrock#RegionAvailability": {
@@ -21049,6 +21304,79 @@
                     "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyTestCaseId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the updated test.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#UpdateCustomModelDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#UpdateCustomModelDeploymentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#UpdateCustomModelDeploymentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Updates a custom model deployment with a new custom model. This allows you to deploy updated models without creating new deployment endpoints. </p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "PATCH",
+                    "uri": "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#UpdateCustomModelDeploymentRequest": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.bedrock#CustomModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> ARN of the new custom model to deploy. This replaces the currently deployed model. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customModelDeploymentIdentifier": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Identifier of the custom model deployment to update with the new custom model. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#UpdateCustomModelDeploymentResponse": {
+            "type": "structure",
+            "members": {
+                "customModelDeploymentArn": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> ARN of the custom model deployment being updated. </p>",
                         "smithy.api#required": {}
                     }
                 }
