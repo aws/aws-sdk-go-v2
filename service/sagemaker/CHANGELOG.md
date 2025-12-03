@@ -1,3 +1,9 @@
+# v1.228.0 (2025-12-03)
+
+* **Feature**: Introduces Serverless training: A fully managed compute infrastructure that abstracts away all infrastructure complexity, allowing you to focus purely on model development.
+
+Added AI model customization assets used to train, refine, and evaluate custom models during the model customization process.
+
 # v1.227.0 (2025-12-02)
 
 * **Feature**: Added support for serverless MLflow Apps.

@@ -1,3 +1,13 @@
+# Release (2025-12-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.52.0](service/bedrock/CHANGELOG.md#v1520-2025-12-03)
+  * **Feature**: Adding support in Amazon Bedrock to customize models with reinforcement fine-tuning (RFT) and support for updating the existing Custom Model Deployments.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.228.0](service/sagemaker/CHANGELOG.md#v12280-2025-12-03)
+  * **Feature**: Introduces Serverless training: A fully managed compute infrastructure that abstracts away all infrastructure complexity, allowing you to focus purely on model development.
+
+Added AI model customization assets used to train, refine, and evaluate custom models during the model customization process.
+
 # Release (2025-12-02)
 
 ## General Highlights
