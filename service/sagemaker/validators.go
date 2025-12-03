@@ -8867,7 +8867,9 @@ func validateClusterOrchestrator(v *types.ClusterOrchestrator) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ClusterOrchestrator"}
-	if v.Eks != nil {
+	if v.Eks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Eks"))
+	} else if v.Eks != nil {
 		if err := validateClusterOrchestratorEksConfig(v.Eks); err != nil {
 			invalidParams.AddNested("Eks", err.(smithy.InvalidParamsError))
 		}
@@ -9547,6 +9549,21 @@ func validateDatasetDefinition(v *types.DatasetDefinition) error {
 	}
 }
 
+func validateDatasetSource(v *types.DatasetSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatasetSource"}
+	if v.DatasetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataSource(v *types.DataSource) error {
 	if v == nil {
 		return nil
@@ -9560,6 +9577,11 @@ func validateDataSource(v *types.DataSource) error {
 	if v.FileSystemDataSource != nil {
 		if err := validateFileSystemDataSource(v.FileSystemDataSource); err != nil {
 			invalidParams.AddNested("FileSystemDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DatasetSource != nil {
+		if err := validateDatasetSource(v.DatasetSource); err != nil {
+			invalidParams.AddNested("DatasetSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11596,6 +11618,21 @@ func validateMetricsSource(v *types.MetricsSource) error {
 	}
 }
 
+func validateMlflowConfig(v *types.MlflowConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MlflowConfig"}
+	if v.MlflowResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MlflowResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateModelAccessConfig(v *types.ModelAccessConfig) error {
 	if v == nil {
 		return nil
@@ -11879,6 +11916,21 @@ func validateModelMetrics(v *types.ModelMetrics) error {
 		if err := validateExplainability(v.Explainability); err != nil {
 			invalidParams.AddNested("Explainability", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelPackageConfig(v *types.ModelPackageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelPackageConfig"}
+	if v.ModelPackageGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageGroupArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13904,6 +13956,24 @@ func validateSelectiveExecutionConfig(v *types.SelectiveExecutionConfig) error {
 		if err := validateSelectedStepList(v.SelectedSteps); err != nil {
 			invalidParams.AddNested("SelectedSteps", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServerlessJobConfig(v *types.ServerlessJobConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerlessJobConfig"}
+	if v.BaseModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseModelArn"))
+	}
+	if len(v.JobType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17215,6 +17285,21 @@ func validateOpCreateTrainingJobInput(v *CreateTrainingJobInput) error {
 	if v.RetryStrategy != nil {
 		if err := validateRetryStrategy(v.RetryStrategy); err != nil {
 			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServerlessJobConfig != nil {
+		if err := validateServerlessJobConfig(v.ServerlessJobConfig); err != nil {
+			invalidParams.AddNested("ServerlessJobConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MlflowConfig != nil {
+		if err := validateMlflowConfig(v.MlflowConfig); err != nil {
+			invalidParams.AddNested("MlflowConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelPackageConfig != nil {
+		if err := validateModelPackageConfig(v.ModelPackageConfig); err != nil {
+			invalidParams.AddNested("ModelPackageConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

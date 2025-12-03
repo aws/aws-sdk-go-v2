@@ -1,0 +1,8 @@
+{
+    "id": "a150de8d-7172-4879-bdc2-a115c84a7a20",
+    "type": "feature",
+    "description": "Adding support in Amazon Bedrock to customize models with reinforcement fine-tuning (RFT) and support for updating the existing Custom Model Deployments.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

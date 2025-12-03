@@ -1,0 +1,8 @@
+{
+    "id": "bc5d5675-86e1-42e0-b4ba-3fc53783b150",
+    "type": "feature",
+    "description": "Introduces Serverless training: A fully managed compute infrastructure that abstracts away all infrastructure complexity, allowing you to focus purely on model development.\n\nAdded AI model customization assets used to train, refine, and evaluate custom models during the model customization process.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

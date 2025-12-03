@@ -316,6 +316,9 @@ func ExampleCustomizationConfig_outputUsage() {
 	case *types.CustomizationConfigMemberDistillationConfig:
 		_ = v.Value // Value is types.DistillationConfig
 
+	case *types.CustomizationConfigMemberRftConfig:
+		_ = v.Value // Value is types.RFTConfig
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -326,6 +329,7 @@ func ExampleCustomizationConfig_outputUsage() {
 }
 
 var _ *types.DistillationConfig
+var _ *types.RFTConfig
 
 func ExampleEndpointConfig_outputUsage() {
 	var union types.EndpointConfig
@@ -468,6 +472,24 @@ func ExampleEvaluatorModelConfig_outputUsage() {
 }
 
 var _ []types.BedrockEvaluatorModel
+
+func ExampleGraderConfig_outputUsage() {
+	var union types.GraderConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GraderConfigMemberLambdaGrader:
+		_ = v.Value // Value is types.LambdaGraderConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LambdaGraderConfig
 
 func ExampleInferenceProfileModelSource_outputUsage() {
 	var union types.InferenceProfileModelSource

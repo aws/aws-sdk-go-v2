@@ -24265,6 +24265,28 @@ func awsAwsjson11_serializeDocumentAutotune(v *types.Autotune, value smithyjson.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentBaseModel(v *types.BaseModel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HubContentName != nil {
+		ok := object.Key("HubContentName")
+		ok.String(*v.HubContentName)
+	}
+
+	if v.HubContentVersion != nil {
+		ok := object.Key("HubContentVersion")
+		ok.String(*v.HubContentVersion)
+	}
+
+	if v.RecipeName != nil {
+		ok := object.Key("RecipeName")
+		ok.String(*v.RecipeName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBatchDataCaptureConfig(v *types.BatchDataCaptureConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26600,9 +26622,28 @@ func awsAwsjson11_serializeDocumentDatasetDefinition(v *types.DatasetDefinition,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDatasetSource(v *types.DatasetSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatasetArn != nil {
+		ok := object.Key("DatasetArn")
+		ok.String(*v.DatasetArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDataSource(v *types.DataSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DatasetSource != nil {
+		ok := object.Key("DatasetSource")
+		if err := awsAwsjson11_serializeDocumentDatasetSource(v.DatasetSource, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.FileSystemDataSource != nil {
 		ok := object.Key("FileSystemDataSource")
@@ -30099,6 +30140,28 @@ func awsAwsjson11_serializeDocumentMetricsSource(v *types.MetricsSource, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMlflowConfig(v *types.MlflowConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MlflowExperimentName != nil {
+		ok := object.Key("MlflowExperimentName")
+		ok.String(*v.MlflowExperimentName)
+	}
+
+	if v.MlflowResourceArn != nil {
+		ok := object.Key("MlflowResourceArn")
+		ok.String(*v.MlflowResourceArn)
+	}
+
+	if v.MlflowRunName != nil {
+		ok := object.Key("MlflowRunName")
+		ok.String(*v.MlflowRunName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentModelAccessConfig(v *types.ModelAccessConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -30531,6 +30594,23 @@ func awsAwsjson11_serializeDocumentModelPackageArnList(v []string, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentModelPackageConfig(v *types.ModelPackageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelPackageGroupArn != nil {
+		ok := object.Key("ModelPackageGroupArn")
+		ok.String(*v.ModelPackageGroupArn)
+	}
+
+	if v.SourceModelPackageArn != nil {
+		ok := object.Key("SourceModelPackageArn")
+		ok.String(*v.SourceModelPackageArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentModelPackageContainerDefinition(v *types.ModelPackageContainerDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -30538,6 +30618,13 @@ func awsAwsjson11_serializeDocumentModelPackageContainerDefinition(v *types.Mode
 	if v.AdditionalS3DataSource != nil {
 		ok := object.Key("AdditionalS3DataSource")
 		if err := awsAwsjson11_serializeDocumentAdditionalS3DataSource(v.AdditionalS3DataSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BaseModel != nil {
+		ok := object.Key("BaseModel")
+		if err := awsAwsjson11_serializeDocumentBaseModel(v.BaseModel, ok); err != nil {
 			return err
 		}
 	}
@@ -30572,6 +30659,11 @@ func awsAwsjson11_serializeDocumentModelPackageContainerDefinition(v *types.Mode
 	if v.ImageDigest != nil {
 		ok := object.Key("ImageDigest")
 		ok.String(*v.ImageDigest)
+	}
+
+	if v.IsCheckpoint != nil {
+		ok := object.Key("IsCheckpoint")
+		ok.Boolean(*v.IsCheckpoint)
 	}
 
 	if v.ModelDataETag != nil {
@@ -34277,6 +34369,48 @@ func awsAwsjson11_serializeDocumentSelectiveExecutionConfig(v *types.SelectiveEx
 	if v.SourcePipelineExecutionArn != nil {
 		ok := object.Key("SourcePipelineExecutionArn")
 		ok.String(*v.SourcePipelineExecutionArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServerlessJobConfig(v *types.ServerlessJobConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AcceptEula != nil {
+		ok := object.Key("AcceptEula")
+		ok.Boolean(*v.AcceptEula)
+	}
+
+	if v.BaseModelArn != nil {
+		ok := object.Key("BaseModelArn")
+		ok.String(*v.BaseModelArn)
+	}
+
+	if len(v.CustomizationTechnique) > 0 {
+		ok := object.Key("CustomizationTechnique")
+		ok.String(string(v.CustomizationTechnique))
+	}
+
+	if len(v.EvaluationType) > 0 {
+		ok := object.Key("EvaluationType")
+		ok.String(string(v.EvaluationType))
+	}
+
+	if v.EvaluatorArn != nil {
+		ok := object.Key("EvaluatorArn")
+		ok.String(*v.EvaluatorArn)
+	}
+
+	if len(v.JobType) > 0 {
+		ok := object.Key("JobType")
+		ok.String(string(v.JobType))
+	}
+
+	if len(v.Peft) > 0 {
+		ok := object.Key("Peft")
+		ok.String(string(v.Peft))
 	}
 
 	return nil
@@ -38725,6 +38859,11 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 		ok.String(*v.ModelPackageName)
 	}
 
+	if len(v.ModelPackageRegistrationType) > 0 {
+		ok := object.Key("ModelPackageRegistrationType")
+		ok.String(string(v.ModelPackageRegistrationType))
+	}
+
 	if v.SamplePayloadUrl != nil {
 		ok := object.Key("SamplePayloadUrl")
 		ok.String(*v.SamplePayloadUrl)
@@ -39616,6 +39755,20 @@ func awsAwsjson11_serializeOpDocumentCreateTrainingJobInput(v *CreateTrainingJob
 		}
 	}
 
+	if v.MlflowConfig != nil {
+		ok := object.Key("MlflowConfig")
+		if err := awsAwsjson11_serializeDocumentMlflowConfig(v.MlflowConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelPackageConfig != nil {
+		ok := object.Key("ModelPackageConfig")
+		if err := awsAwsjson11_serializeDocumentModelPackageConfig(v.ModelPackageConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OutputDataConfig != nil {
 		ok := object.Key("OutputDataConfig")
 		if err := awsAwsjson11_serializeDocumentOutputDataConfig(v.OutputDataConfig, ok); err != nil {
@@ -39661,6 +39814,13 @@ func awsAwsjson11_serializeOpDocumentCreateTrainingJobInput(v *CreateTrainingJob
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	if v.ServerlessJobConfig != nil {
+		ok := object.Key("ServerlessJobConfig")
+		if err := awsAwsjson11_serializeDocumentServerlessJobConfig(v.ServerlessJobConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SessionChainingConfig != nil {
@@ -46412,6 +46572,11 @@ func awsAwsjson11_serializeOpDocumentStartPipelineExecutionInput(v *StartPipelin
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.MlflowExperimentName != nil {
+		ok := object.Key("MlflowExperimentName")
+		ok.String(*v.MlflowExperimentName)
+	}
+
 	if v.ParallelismConfiguration != nil {
 		ok := object.Key("ParallelismConfiguration")
 		if err := awsAwsjson11_serializeDocumentParallelismConfiguration(v.ParallelismConfiguration, ok); err != nil {
@@ -47745,6 +47910,11 @@ func awsAwsjson11_serializeOpDocumentUpdateModelPackageInput(v *UpdateModelPacka
 	if v.ModelPackageArn != nil {
 		ok := object.Key("ModelPackageArn")
 		ok.String(*v.ModelPackageArn)
+	}
+
+	if len(v.ModelPackageRegistrationType) > 0 {
+		ok := object.Key("ModelPackageRegistrationType")
+		ok.String(string(v.ModelPackageRegistrationType))
 	}
 
 	if v.SourceUri != nil {

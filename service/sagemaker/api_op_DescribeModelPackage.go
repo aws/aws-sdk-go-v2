@@ -148,6 +148,9 @@ type DescribeModelPackageOutput struct {
 	// versioned model belongs to.
 	ModelPackageGroupName *string
 
+	//  The package registration type of the model package output.
+	ModelPackageRegistrationType types.ModelPackageRegistrationType
+
 	// The version of the model package.
 	ModelPackageVersion *int32
 

@@ -1438,6 +1438,22 @@ type ArtifactSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The data type used to describe the relationship between different sources.
+type AssociationInfo struct {
+
+	//  The Amazon Resource Name (ARN) of the AssociationInfo destination.
+	//
+	// This member is required.
+	DestinationArn *string
+
+	//  The Amazon Resource Name (ARN) of the AssociationInfo source.
+	//
+	// This member is required.
+	SourceArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Lists a summary of the properties of an association. An association is an
 // entity that links other lineage or experiment entities. An example would be an
 // association between a training job and a model.
@@ -2502,6 +2518,22 @@ type AvailableUpgrade struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies the foundation model that was used as the starting point for model
+// customization.
+type BaseModel struct {
+
+	//  The hub content name of the base model.
+	HubContentName *string
+
+	//  The hub content version of the base model.
+	HubContentVersion *string
+
+	//  The recipe name of the base model.
+	RecipeName *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an error that occurred during the node addition operation.
 type BatchAddClusterNodesError struct {
 
@@ -2656,6 +2688,9 @@ type BatchDescribeModelPackageSummary struct {
 
 	// The description of the model package.
 	ModelPackageDescription *string
+
+	//  The package registration type of the model package summary.
+	ModelPackageRegistrationType ModelPackageRegistrationType
 
 	// The version number of a versioned model.
 	ModelPackageVersion *int32
@@ -2863,6 +2898,44 @@ type BatchTransformInput struct {
 	//
 	// [Schedule Model Quality Monitoring Jobs]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html
 	StartTimeOffset *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of the Amazon Bedrock custom model deployment.
+type BedrockCustomModelDeploymentMetadata struct {
+
+	//  The Amazon Resource Name (ARN) of the metadata for the Amazon Bedrock custom
+	// model deployment.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of the Amazon Bedrock custom model.
+type BedrockCustomModelMetadata struct {
+
+	//  The Amazon Resource Name (ARN) of the Amazon Bedrock custom model metadata.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of the Amazon Bedrock model import.
+type BedrockModelImportMetadata struct {
+
+	//  The Amazon Resource Name (ARN) of the Amazon Bedrock model import metadata.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of the Amazon Bedrock provisioned model throughput.
+type BedrockProvisionedModelThroughputMetadata struct {
+
+	//  The Amazon Resource Name (ARN) of the Amazon Bedrock provisioned model
+	// throughput metadata.
+	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -4475,6 +4548,8 @@ type ClusterOrchestrator struct {
 
 	// The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod
 	// cluster.
+	//
+	// This member is required.
 	Eks *ClusterOrchestratorEksConfig
 
 	noSmithyDocumentSerde
@@ -5743,8 +5818,22 @@ type DatasetDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a dataset source for a channel.
+type DatasetSource struct {
+
+	//  The Amazon Resource Name (ARN) of the dataset resource.
+	//
+	// This member is required.
+	DatasetArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the location of the channel data.
 type DataSource struct {
+
+	//  The dataset resource that's associated with a channel.
+	DatasetSource *DatasetSource
 
 	// The file system that is associated with a channel.
 	FileSystemDataSource *FileSystemDataSource
@@ -10640,6 +10729,15 @@ type InferenceComponentDeploymentConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The metadata of the inference component.
+type InferenceComponentMetadata struct {
+
+	//  The Amazon Resource Name (ARN) of the inference component metadata.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a rolling deployment strategy for updating a SageMaker AI inference
 // component.
 type InferenceComponentRollingUpdatePolicy struct {
@@ -12068,6 +12166,26 @@ type LineageGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+//	The metadata that tracks relationships between ML artifacts, actions, and
+//
+// contexts.
+type LineageMetadata struct {
+
+	//  The Amazon Resource Name (ARN) of the lineage metadata action.
+	ActionArns map[string]string
+
+	//  The Amazon Resource Name (ARN) of the lineage metadata artifact.
+	ArtifactArns map[string]string
+
+	//  The lineage metadata associations.
+	Associations []AssociationInfo
+
+	//  The Amazon Resource Name (ARN) of the lineage metadata context.
+	ContextArns map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Defines an Amazon Cognito or your own OIDC IdP user group that is part of a
 // work team.
 type MemberDefinition struct {
@@ -12250,6 +12368,47 @@ type MlflowAppSummary struct {
 
 	// The status of the MLflow App.
 	Status MlflowAppStatus
+
+	noSmithyDocumentSerde
+}
+
+// The MLflow configuration using SageMaker managed MLflow.
+type MlflowConfig struct {
+
+	//  The Amazon Resource Name (ARN) of the MLflow resource.
+	//
+	// This member is required.
+	MlflowResourceArn *string
+
+	//  The MLflow experiment name used for this job.
+	MlflowExperimentName *string
+
+	//  The MLflow run name used for this job.
+	MlflowRunName *string
+
+	noSmithyDocumentSerde
+}
+
+// The MLflow configuration.
+type MLflowConfiguration struct {
+
+	//  The name of the MLflow configuration.
+	MlflowExperimentName *string
+
+	//  The Amazon Resource Name (ARN) of MLflow configuration resource.
+	MlflowResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The MLflow details of this job.
+type MlflowDetails struct {
+
+	//  The MLflow experiment ID used for this job.
+	MlflowExperimentId *string
+
+	//  The MLflow run ID used for this job.
+	MlflowRunId *string
 
 	noSmithyDocumentSerde
 }
@@ -13170,6 +13329,9 @@ type ModelPackage struct {
 	//   - For an unversioned model, you must provide the name.
 	ModelPackageName *string
 
+	//  The package registration type of the model package.
+	ModelPackageRegistrationType ModelPackageRegistrationType
+
 	// The status of the model package. This can be one of the following values.
 	//
 	//   - PENDING - The model package is pending being created.
@@ -13223,12 +13385,31 @@ type ModelPackage struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the Model package.
+type ModelPackageConfig struct {
+
+	//  The Amazon Resource Name (ARN) of the model package group of output model
+	// package.
+	//
+	// This member is required.
+	ModelPackageGroupArn *string
+
+	//  The Amazon Resource Name (ARN) of the source model package used for continued
+	// fine-tuning and custom model evaluation.
+	SourceModelPackageArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the Docker container for the model package.
 type ModelPackageContainerDefinition struct {
 
 	// The additional data source that is used during inference in the Docker
 	// container for your model package.
 	AdditionalS3DataSource *AdditionalS3DataSource
+
+	//  The base model of the package.
+	BaseModel *BaseModel
 
 	// The DNS host name for the Docker container.
 	ContainerHostname *string
@@ -13258,6 +13439,9 @@ type ModelPackageContainerDefinition struct {
 	// An MD5 hash of the training algorithm that identifies the Docker image used for
 	// training.
 	ImageDigest *string
+
+	//  The checkpoint of the model package.
+	IsCheckpoint *bool
 
 	// The ETag associated with Model Data URL.
 	ModelDataETag *string
@@ -13476,6 +13660,9 @@ type ModelPackageSummary struct {
 
 	// The name of the model package.
 	ModelPackageName *string
+
+	//  The package registration type of the model package summary.
+	ModelPackageRegistrationType ModelPackageRegistrationType
 
 	// If the model package is a versioned model, the version of the model.
 	ModelPackageVersion *int32
@@ -15747,6 +15934,21 @@ type PipelineExecutionStepMetadata struct {
 	// The Amazon Resource Name (ARN) of the AutoML job that was run by this step.
 	AutoMLJob *AutoMLJobStepMetadata
 
+	//  The metadata of the Amazon Bedrock custom model used in the pipeline execution
+	// step.
+	BedrockCustomModel *BedrockCustomModelMetadata
+
+	//  The metadata of the Amazon Bedrock custom model deployment used in pipeline
+	// execution step.
+	BedrockCustomModelDeployment *BedrockCustomModelDeploymentMetadata
+
+	//  The metadata of Amazon Bedrock model import used in pipeline execution step.
+	BedrockModelImport *BedrockModelImportMetadata
+
+	//  The metadata of the Amazon Bedrock provisioned model throughput used in the
+	// pipeline execution step.
+	BedrockProvisionedModelThroughput *BedrockProvisionedModelThroughputMetadata
+
 	// The URL of the Amazon SQS queue used by this step execution, the pipeline
 	// generated token, and a list of output parameters.
 	Callback *CallbackStepMetadata
@@ -15790,9 +15992,15 @@ type PipelineExecutionStepMetadata struct {
 	// The configurations and outcomes of a Fail step execution.
 	Fail *FailStepMetadata
 
+	//  The metadata of the inference component used in pipeline execution step.
+	InferenceComponent *InferenceComponentMetadata
+
 	// The Amazon Resource Name (ARN) of the Lambda function that was run by this step
 	// execution and a list of output parameters.
 	Lambda *LambdaStepMetadata
+
+	//  The metadata of the lineage used in pipeline execution step.
+	Lineage *LineageMetadata
 
 	// The Amazon Resource Name (ARN) of the model that was created by this step
 	// execution.
@@ -18029,6 +18237,9 @@ type ResourceConfig struct {
 
 	// The size of the ML storage volume that you want to provision.
 	//
+	// SageMaker automatically selects the volume size for serverless training jobs.
+	// You cannot customize this setting.
+	//
 	// ML storage volumes store model artifacts and incremental states. Training
 	// algorithms might also use the ML storage volume for scratch space. If you want
 	// to store the training data in the ML storage volume, choose File as the
@@ -19049,6 +19260,48 @@ type SelectiveExecutionResult struct {
 
 	// The ARN from an execution of the current pipeline.
 	SourcePipelineExecutionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the serverless training job.
+type ServerlessJobConfig struct {
+
+	//  The base model Amazon Resource Name (ARN) in [SageMaker Public Hub]. SageMaker always selects the
+	// latest version of the provided model.
+	//
+	// [SageMaker Public Hub]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-use.html
+	//
+	// This member is required.
+	BaseModelArn *string
+
+	//  The serverless training job type.
+	//
+	// This member is required.
+	JobType ServerlessJobType
+
+	//  Specifies agreement to the model end-user license agreement (EULA). The
+	// AcceptEula value must be explicitly defined as True in order to accept the EULA
+	// that this model requires. You are responsible for reviewing and complying with
+	// any applicable license terms and making sure they are acceptable for your use
+	// case before downloading or using a model. For more information, see [End-user license agreements]section for
+	// more details on accepting the EULA.
+	//
+	// [End-user license agreements]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula
+	AcceptEula *bool
+
+	//  The model customization technique.
+	CustomizationTechnique CustomizationTechnique
+
+	//  The evaluation job type. Required when serverless job type is Evaluation .
+	EvaluationType EvaluationType
+
+	//  The evaluator Amazon Resource Name (ARN) used as reward function or reward
+	// prompt.
+	EvaluatorArn *string
+
+	//  The parameter-efficient fine-tuning configuration.
+	Peft Peft
 
 	noSmithyDocumentSerde
 }
@@ -20478,9 +20731,16 @@ type TrainingJob struct {
 	// artifacts.
 	ModelArtifacts *ModelArtifacts
 
+	//  The model package configuration.
+	ModelPackageConfig *ModelPackageConfig
+
 	// The S3 path where model artifacts that you configured when creating the job are
 	// stored. SageMaker creates subfolders for model artifacts.
 	OutputDataConfig *OutputDataConfig
+
+	//  The output model package Amazon Resource Name (ARN) that contains model
+	// weights or checkpoint.
+	OutputModelPackageArn *string
 
 	// Configuration information for Amazon SageMaker Debugger system monitoring,
 	// framework profiling, and storage paths.
@@ -20949,6 +21209,24 @@ type TrainingPlanSummary struct {
 
 	// The upfront fee for the training plan.
 	UpfrontFee *string
+
+	noSmithyDocumentSerde
+}
+
+// The serverless training job progress information.
+type TrainingProgressInfo struct {
+
+	//  The current epoch number.
+	CurrentEpoch *int64
+
+	//  The current step number.
+	CurrentStep *int64
+
+	//  The maximum number of epochs for this job.
+	MaxEpoch *int64
+
+	//  The total step count per epoch.
+	TotalStepCountPerEpoch *int64
 
 	noSmithyDocumentSerde
 }

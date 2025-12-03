@@ -71,6 +71,9 @@ type DescribeTrainingJobOutput struct {
 	// InProgress
 	//   - Starting - Starting the training job.
 	//
+	//   - Pending - The training job is waiting for compute capacity or compute
+	//   resource provision.
+	//
 	//   - Downloading - An optional stage for algorithms that support File training
 	//   input mode. It indicates that data is being downloaded to the ML storage
 	//   volumes.
@@ -179,6 +182,9 @@ type DescribeTrainingJobOutput struct {
 	// is 80%.
 	BillableTimeInSeconds *int32
 
+	//  The billable token count for eligible serverless training jobs.
+	BillableTokenCount *int64
+
 	// Contains information about the output location for managed spot training
 	// checkpoint data.
 	CheckpointConfig *types.CheckpointConfig
@@ -265,9 +271,22 @@ type DescribeTrainingJobOutput struct {
 	// modified.
 	LastModifiedTime *time.Time
 
+	//  The MLflow configuration using SageMaker managed MLflow.
+	MlflowConfig *types.MlflowConfig
+
+	//  The MLflow details of this job.
+	MlflowDetails *types.MlflowDetails
+
+	//  The configuration for the model package.
+	ModelPackageConfig *types.ModelPackageConfig
+
 	// The S3 path where model artifacts that you configured when creating the job are
 	// stored. SageMaker creates subfolders for model artifacts.
 	OutputDataConfig *types.OutputDataConfig
+
+	//  The Amazon Resource Name (ARN) of the output model package containing model
+	// weights or checkpoints.
+	OutputModelPackageArn *string
 
 	// Configuration information for Amazon SageMaker Debugger system monitoring,
 	// framework profiling, and storage paths.
@@ -283,6 +302,9 @@ type DescribeTrainingJobOutput struct {
 
 	// Profiling status of a training job.
 	ProfilingStatus types.ProfilingStatus
+
+	//  The Serverless training job progress information.
+	ProgressInfo *types.TrainingProgressInfo
 
 	// Configuration for remote debugging. To learn more about the remote debugging
 	// functionality of SageMaker, see [Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging].
@@ -305,6 +327,9 @@ type DescribeTrainingJobOutput struct {
 	// A history of all of the secondary statuses that the training job has
 	// transitioned through.
 	SecondaryStatusTransitions []types.SecondaryStatusTransition
+
+	//  The configuration for serverless training jobs.
+	ServerlessJobConfig *types.ServerlessJobConfig
 
 	// Configuration of storage locations for the Amazon SageMaker Debugger
 	// TensorBoard output data.

@@ -363,10 +363,11 @@ type CustomizationType string
 
 // Enum values for CustomizationType
 const (
-	CustomizationTypeFineTuning           CustomizationType = "FINE_TUNING"
-	CustomizationTypeContinuedPreTraining CustomizationType = "CONTINUED_PRE_TRAINING"
-	CustomizationTypeDistillation         CustomizationType = "DISTILLATION"
-	CustomizationTypeImported             CustomizationType = "IMPORTED"
+	CustomizationTypeFineTuning              CustomizationType = "FINE_TUNING"
+	CustomizationTypeContinuedPreTraining    CustomizationType = "CONTINUED_PRE_TRAINING"
+	CustomizationTypeDistillation            CustomizationType = "DISTILLATION"
+	CustomizationTypeReinforcementFineTuning CustomizationType = "REINFORCEMENT_FINE_TUNING"
+	CustomizationTypeImported                CustomizationType = "IMPORTED"
 )
 
 // Values returns all known values for CustomizationType. Note that this can be
@@ -378,6 +379,7 @@ func (CustomizationType) Values() []CustomizationType {
 		"FINE_TUNING",
 		"CONTINUED_PRE_TRAINING",
 		"DISTILLATION",
+		"REINFORCEMENT_FINE_TUNING",
 		"IMPORTED",
 	}
 }
@@ -400,6 +402,28 @@ func (CustomModelDeploymentStatus) Values() []CustomModelDeploymentStatus {
 		"Creating",
 		"Active",
 		"Failed",
+	}
+}
+
+type CustomModelDeploymentUpdateStatus string
+
+// Enum values for CustomModelDeploymentUpdateStatus
+const (
+	CustomModelDeploymentUpdateStatusUpdating        CustomModelDeploymentUpdateStatus = "Updating"
+	CustomModelDeploymentUpdateStatusUpdateCompleted CustomModelDeploymentUpdateStatus = "UpdateCompleted"
+	CustomModelDeploymentUpdateStatusUpdateFailed    CustomModelDeploymentUpdateStatus = "UpdateFailed"
+)
+
+// Values returns all known values for CustomModelDeploymentUpdateStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomModelDeploymentUpdateStatus) Values() []CustomModelDeploymentUpdateStatus {
+	return []CustomModelDeploymentUpdateStatus{
+		"Updating",
+		"UpdateCompleted",
+		"UpdateFailed",
 	}
 }
 
@@ -1300,6 +1324,27 @@ const (
 func (QueryTransformationType) Values() []QueryTransformationType {
 	return []QueryTransformationType{
 		"QUERY_DECOMPOSITION",
+	}
+}
+
+type ReasoningEffort string
+
+// Enum values for ReasoningEffort
+const (
+	ReasoningEffortLow    ReasoningEffort = "low"
+	ReasoningEffortMedium ReasoningEffort = "medium"
+	ReasoningEffortHigh   ReasoningEffort = "high"
+)
+
+// Values returns all known values for ReasoningEffort. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReasoningEffort) Values() []ReasoningEffort {
+	return []ReasoningEffort{
+		"low",
+		"medium",
+		"high",
 	}
 }
 

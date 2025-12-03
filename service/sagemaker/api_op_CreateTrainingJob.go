@@ -242,6 +242,12 @@ type CreateTrainingJobInput struct {
 	// Your input must be in the same Amazon Web Services region as your training job.
 	InputDataConfig []types.Channel
 
+	//  The MLflow configuration using SageMaker managed MLflow.
+	MlflowConfig *types.MlflowConfig
+
+	//  The configuration for the model package.
+	ModelPackageConfig *types.ModelPackageConfig
+
 	// Configuration information for Amazon SageMaker Debugger system monitoring,
 	// framework profiling, and storage paths.
 	ProfilerConfig *types.ProfilerConfig
@@ -269,6 +275,9 @@ type CreateTrainingJobInput struct {
 	// The number of times to retry the job when the job fails due to an
 	// InternalServerError .
 	RetryStrategy *types.RetryStrategy
+
+	//  The configuration for serverless training jobs.
+	ServerlessJobConfig *types.ServerlessJobConfig
 
 	// Contains information about attribute-based access control (ABAC) for the
 	// training job.

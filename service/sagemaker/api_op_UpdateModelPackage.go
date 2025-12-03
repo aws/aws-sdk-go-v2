@@ -85,6 +85,9 @@ type UpdateModelPackageInput struct {
 	//  A structure describing the current state of the model in its life cycle.
 	ModelLifeCycle *types.ModelLifeCycle
 
+	//  The package registration type of the model package input.
+	ModelPackageRegistrationType types.ModelPackageRegistrationType
+
 	// The URI of the source for the model package.
 	SourceUri *string
 

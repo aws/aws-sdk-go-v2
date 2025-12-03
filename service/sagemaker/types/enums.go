@@ -2429,6 +2429,29 @@ func (CrossAccountFilterOption) Values() []CrossAccountFilterOption {
 	}
 }
 
+type CustomizationTechnique string
+
+// Enum values for CustomizationTechnique
+const (
+	CustomizationTechniqueSft   CustomizationTechnique = "SFT"
+	CustomizationTechniqueDpo   CustomizationTechnique = "DPO"
+	CustomizationTechniqueRlvr  CustomizationTechnique = "RLVR"
+	CustomizationTechniqueRlaif CustomizationTechnique = "RLAIF"
+)
+
+// Values returns all known values for CustomizationTechnique. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomizationTechnique) Values() []CustomizationTechnique {
+	return []CustomizationTechnique{
+		"SFT",
+		"DPO",
+		"RLVR",
+		"RLAIF",
+	}
+}
+
 type DataDistributionType string
 
 // Enum values for DataDistributionType
@@ -2801,6 +2824,27 @@ func (EndpointStatus) Values() []EndpointStatus {
 		"Deleting",
 		"Failed",
 		"UpdateRollbackFailed",
+	}
+}
+
+type EvaluationType string
+
+// Enum values for EvaluationType
+const (
+	EvaluationTypeLlmajEvaluation        EvaluationType = "LLMAJEvaluation"
+	EvaluationTypeCustomScorerEvaluation EvaluationType = "CustomScorerEvaluation"
+	EvaluationTypeBenchmarkEvaluation    EvaluationType = "BenchmarkEvaluation"
+)
+
+// Values returns all known values for EvaluationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationType) Values() []EvaluationType {
+	return []EvaluationType{
+		"LLMAJEvaluation",
+		"CustomScorerEvaluation",
+		"BenchmarkEvaluation",
 	}
 }
 
@@ -5094,6 +5138,26 @@ func (ModelPackageGroupStatus) Values() []ModelPackageGroupStatus {
 	}
 }
 
+type ModelPackageRegistrationType string
+
+// Enum values for ModelPackageRegistrationType
+const (
+	ModelPackageRegistrationTypeLogged     ModelPackageRegistrationType = "Logged"
+	ModelPackageRegistrationTypeRegistered ModelPackageRegistrationType = "Registered"
+)
+
+// Values returns all known values for ModelPackageRegistrationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelPackageRegistrationType) Values() []ModelPackageRegistrationType {
+	return []ModelPackageRegistrationType{
+		"Logged",
+		"Registered",
+	}
+}
+
 type ModelPackageSortBy string
 
 // Enum values for ModelPackageSortBy
@@ -5922,6 +5986,23 @@ func (PartnerAppType) Values() []PartnerAppType {
 		"comet",
 		"deepchecks-llm-evaluation",
 		"fiddler",
+	}
+}
+
+type Peft string
+
+// Enum values for Peft
+const (
+	PeftLora Peft = "LORA"
+)
+
+// Values returns all known values for Peft. Note that this can be expanded in the
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Peft) Values() []Peft {
+	return []Peft{
+		"LORA",
 	}
 }
 
@@ -7863,6 +7944,25 @@ func (SecondaryStatus) Values() []SecondaryStatus {
 		"Updating",
 		"Restarting",
 		"Pending",
+	}
+}
+
+type ServerlessJobType string
+
+// Enum values for ServerlessJobType
+const (
+	ServerlessJobTypeFineTuning ServerlessJobType = "FineTuning"
+	ServerlessJobTypeEvaluation ServerlessJobType = "Evaluation"
+)
+
+// Values returns all known values for ServerlessJobType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServerlessJobType) Values() []ServerlessJobType {
+	return []ServerlessJobType{
+		"FineTuning",
+		"Evaluation",
 	}
 }
 

@@ -135,6 +135,9 @@ type CreateModelPackageInput struct {
 	// versioned models.
 	ModelPackageName *string
 
+	//  The package registration type of the model package input.
+	ModelPackageRegistrationType types.ModelPackageRegistrationType
+
 	// The Amazon Simple Storage Service (Amazon S3) path where the sample payload is
 	// stored. This path must point to a single gzip compressed tar archive (.tar.gz
 	// suffix). This archive can hold multiple files that are all equally used in the

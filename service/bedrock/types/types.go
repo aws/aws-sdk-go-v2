@@ -1971,6 +1971,7 @@ type CloudWatchConfig struct {
 // The following types satisfy this interface:
 //
 //	CustomizationConfigMemberDistillationConfig
+//	CustomizationConfigMemberRftConfig
 type CustomizationConfig interface {
 	isCustomizationConfig()
 }
@@ -1983,6 +1984,17 @@ type CustomizationConfigMemberDistillationConfig struct {
 }
 
 func (*CustomizationConfigMemberDistillationConfig) isCustomizationConfig() {}
+
+//	Configuration settings for reinforcement fine-tuning (RFT) model
+//
+// customization, including grader configuration and hyperparameters.
+type CustomizationConfigMemberRftConfig struct {
+	Value RFTConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomizationConfigMemberRftConfig) isCustomizationConfig() {}
 
 // Defines the model you want to evaluate custom metrics in an Amazon Bedrock
 // evaluation job.
@@ -2087,6 +2099,24 @@ type CustomModelDeploymentSummary struct {
 
 	// The date and time when the custom model deployment was last modified.
 	LastUpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+//	Details about an update to a custom model deployment, including the new custom
+//
+// model resource ARN and current update status.
+type CustomModelDeploymentUpdateDetails struct {
+
+	//  ARN of the new custom model being deployed as part of the update.
+	//
+	// This member is required.
+	ModelArn *string
+
+	//  Current status of the deployment update.
+	//
+	// This member is required.
+	UpdateStatus CustomModelDeploymentUpdateStatus
 
 	noSmithyDocumentSerde
 }
@@ -2858,6 +2888,28 @@ type GenerationConfiguration struct {
 
 	noSmithyDocumentSerde
 }
+
+//	Configuration for the grader used in reinforcement fine-tuning to evaluate
+//
+// model responses and provide reward signals.
+//
+// The following types satisfy this interface:
+//
+//	GraderConfigMemberLambdaGrader
+type GraderConfig interface {
+	isGraderConfig()
+}
+
+//	Configuration for using an AWS Lambda function as the grader for evaluating
+//
+// model responses and provide reward signals in reinforcement fine-tuning.
+type GraderConfigMemberLambdaGrader struct {
+	Value LambdaGraderConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*GraderConfigMemberLambdaGrader) isGraderConfig() {}
 
 // Represents the configuration of Automated Reasoning policies within a Amazon
 // Bedrock Guardrail, including the policies to apply and confidence thresholds.
@@ -4479,6 +4531,20 @@ type KnowledgeBaseVectorSearchConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+//	Configuration for using an AWS Lambda function to grade model responses during
+//
+// reinforcement fine-tuning training.
+type LambdaGraderConfig struct {
+
+	//  ARN of the AWS Lambda function that will evaluate model responses and return
+	// reward scores for RFT training.
+	//
+	// This member is required.
+	LambdaArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The legal term of the agreement.
 type LegalTerm struct {
 
@@ -5654,6 +5720,62 @@ type RetrieveConfig struct {
 	noSmithyDocumentSerde
 }
 
+//	Configuration settings for reinforcement fine-tuning (RFT), including grader
+//
+// configuration and training hyperparameters.
+type RFTConfig struct {
+
+	//  Configuration for the grader that evaluates model responses and provides
+	// reward signals during RFT training.
+	GraderConfig GraderConfig
+
+	//  Hyperparameters that control the reinforcement fine-tuning training process,
+	// including learning rate, batch size, and epoch count.
+	HyperParameters *RFTHyperParameters
+
+	noSmithyDocumentSerde
+}
+
+//	Hyperparameters for controlling the reinforcement fine-tuning training
+//
+// process, including learning settings and evaluation intervals.
+type RFTHyperParameters struct {
+
+	//  Number of training samples processed in each batch during reinforcement
+	// fine-tuning (RFT) training. Larger batches may improve training stability.
+	BatchSize *int32
+
+	//  Number of training epochs to run during reinforcement fine-tuning. Higher
+	// values may improve performance but increase training time.
+	EpochCount *int32
+
+	//  Interval between evaluation runs during RFT training, measured in training
+	// steps. More frequent evaluation provides better monitoring.
+	EvalInterval *int32
+
+	//  Maximum number of tokens the model can generate in response to each prompt
+	// during RFT training.
+	InferenceMaxTokens *int32
+
+	//  Learning rate for the reinforcement fine-tuning. Controls how quickly the
+	// model adapts to reward signals.
+	LearningRate *float32
+
+	//  Maximum length of input prompts during RFT training, measured in tokens.
+	// Longer prompts allow more context but increase memory usage and training-time.
+	MaxPromptLength *int32
+
+	//  Level of reasoning effort applied during RFT training. Higher values may
+	// improve response quality but increase training time.
+	ReasoningEffort ReasoningEffort
+
+	//  Number of response samples generated per prompt during RFT training. More
+	// samples provide better reward signal estimation.
+	TrainingSamplePerPrompt *int32
+
+	noSmithyDocumentSerde
+}
+
 // Routing criteria for a prompt router.
 type RoutingCriteria struct {
 
@@ -6057,6 +6179,7 @@ func (*UnknownUnionMember) isEvaluationInferenceConfig()                   {}
 func (*UnknownUnionMember) isEvaluationModelConfig()                       {}
 func (*UnknownUnionMember) isEvaluationPrecomputedRagSourceConfig()        {}
 func (*UnknownUnionMember) isEvaluatorModelConfig()                        {}
+func (*UnknownUnionMember) isGraderConfig()                                {}
 func (*UnknownUnionMember) isInferenceProfileModelSource()                 {}
 func (*UnknownUnionMember) isInvocationLogSource()                         {}
 func (*UnknownUnionMember) isKnowledgeBaseConfig()                         {}

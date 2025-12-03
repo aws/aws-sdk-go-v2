@@ -97,6 +97,10 @@ type GetCustomModelDeploymentOutput struct {
 	// The date and time when the custom model deployment was last updated.
 	LastUpdatedAt *time.Time
 
+	//  Details about any pending or completed updates to the custom model deployment,
+	// including the new model ARN and update status.
+	UpdateDetails *types.CustomModelDeploymentUpdateDetails
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

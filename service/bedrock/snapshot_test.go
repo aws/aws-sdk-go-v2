@@ -1190,6 +1190,18 @@ func TestCheckSnapshot_UpdateAutomatedReasoningPolicyTestCase(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCustomModelDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomModelDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCustomModelDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateGuardrail(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateGuardrail(context.Background(), nil, func(o *Options) {
@@ -2346,6 +2358,18 @@ func TestUpdateSnapshot_UpdateAutomatedReasoningPolicyTestCase(t *testing.T) {
 	_, err := svc.UpdateAutomatedReasoningPolicyTestCase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAutomatedReasoningPolicyTestCase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCustomModelDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomModelDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCustomModelDeployment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

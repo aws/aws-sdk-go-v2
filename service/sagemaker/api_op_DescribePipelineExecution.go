@@ -55,6 +55,9 @@ type DescribePipelineExecutionOutput struct {
 	// The time when the pipeline execution was modified last.
 	LastModifiedTime *time.Time
 
+	//  The MLflow configuration of the pipeline execution.
+	MLflowConfig *types.MLflowConfiguration
+
 	// The parallelism configuration applied to the pipeline.
 	ParallelismConfiguration *types.ParallelismConfiguration
 

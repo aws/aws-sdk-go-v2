@@ -7050,6 +7050,11 @@ func awsRestjson1_deserializeOpDocumentGetCustomModelDeploymentOutput(v **GetCus
 				sv.Status = types.CustomModelDeploymentStatus(jtv)
 			}
 
+		case "updateDetails":
+			if err := awsRestjson1_deserializeDocumentCustomModelDeploymentUpdateDetails(&sv.UpdateDetails, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16312,6 +16317,174 @@ func awsRestjson1_deserializeOpDocumentUpdateAutomatedReasoningPolicyTestCaseOut
 	return nil
 }
 
+type awsRestjson1_deserializeOpUpdateCustomModelDeployment struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateCustomModelDeployment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateCustomModelDeployment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateCustomModelDeployment(response, &metadata)
+	}
+	output := &UpdateCustomModelDeploymentOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentUpdateCustomModelDeploymentOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateCustomModelDeployment(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentUpdateCustomModelDeploymentOutput(v **UpdateCustomModelDeploymentOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateCustomModelDeploymentOutput
+	if *v == nil {
+		sv = &UpdateCustomModelDeploymentOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customModelDeploymentArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomModelDeploymentArn to be of type string, got %T instead", value)
+				}
+				sv.CustomModelDeploymentArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpUpdateGuardrail struct {
 }
 
@@ -22631,6 +22804,16 @@ loop:
 			uv = &types.CustomizationConfigMemberDistillationConfig{Value: mv}
 			break loop
 
+		case "rftConfig":
+			var mv types.RFTConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRFTConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CustomizationConfigMemberRftConfig{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -22938,6 +23121,55 @@ func awsRestjson1_deserializeDocumentCustomModelDeploymentSummaryList(v *[]types
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomModelDeploymentUpdateDetails(v **types.CustomModelDeploymentUpdateDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomModelDeploymentUpdateDetails
+	if *v == nil {
+		sv = &types.CustomModelDeploymentUpdateDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "modelArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelArn to be of type string, got %T instead", value)
+				}
+				sv.ModelArn = ptr.String(jtv)
+			}
+
+		case "updateStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomModelDeploymentUpdateStatus to be of type string, got %T instead", value)
+				}
+				sv.UpdateStatus = types.CustomModelDeploymentUpdateStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -25195,6 +25427,46 @@ func awsRestjson1_deserializeDocumentGenerationConfiguration(v **types.Generatio
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGraderConfig(v *types.GraderConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.GraderConfig
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "lambdaGrader":
+			var mv types.LambdaGraderConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentLambdaGraderConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.GraderConfigMemberLambdaGrader{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -27794,6 +28066,46 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseVectorSearchConfiguration(v **
 		case "rerankingConfiguration":
 			if err := awsRestjson1_deserializeDocumentVectorSearchRerankingConfiguration(&sv.RerankingConfiguration, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLambdaGraderConfig(v **types.LambdaGraderConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaGraderConfig
+	if *v == nil {
+		sv = &types.LambdaGraderConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lambdaArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaArn to be of type string, got %T instead", value)
+				}
+				sv.LambdaArn = ptr.String(jtv)
 			}
 
 		default:
@@ -30963,6 +31275,199 @@ func awsRestjson1_deserializeDocumentRetrieveConfig(v **types.RetrieveConfig, va
 		case "knowledgeBaseRetrievalConfiguration":
 			if err := awsRestjson1_deserializeDocumentKnowledgeBaseRetrievalConfiguration(&sv.KnowledgeBaseRetrievalConfiguration, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRFTConfig(v **types.RFTConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RFTConfig
+	if *v == nil {
+		sv = &types.RFTConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "graderConfig":
+			if err := awsRestjson1_deserializeDocumentGraderConfig(&sv.GraderConfig, value); err != nil {
+				return err
+			}
+
+		case "hyperParameters":
+			if err := awsRestjson1_deserializeDocumentRFTHyperParameters(&sv.HyperParameters, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRFTHyperParameters(v **types.RFTHyperParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RFTHyperParameters
+	if *v == nil {
+		sv = &types.RFTHyperParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "batchSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RFTBatchSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BatchSize = ptr.Int32(int32(i64))
+			}
+
+		case "epochCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected EpochCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EpochCount = ptr.Int32(int32(i64))
+			}
+
+		case "evalInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RFTEvalInterval to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EvalInterval = ptr.Int32(int32(i64))
+			}
+
+		case "inferenceMaxTokens":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RFTInferenceMaxTokens to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InferenceMaxTokens = ptr.Int32(int32(i64))
+			}
+
+		case "learningRate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LearningRate = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.LearningRate = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected RFTLearningRate to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "maxPromptLength":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RFTMaxPromptLength to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxPromptLength = ptr.Int32(int32(i64))
+			}
+
+		case "reasoningEffort":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReasoningEffort to be of type string, got %T instead", value)
+				}
+				sv.ReasoningEffort = types.ReasoningEffort(jtv)
+			}
+
+		case "trainingSamplePerPrompt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RFTTrainingSamplePerPrompt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TrainingSamplePerPrompt = ptr.Int32(int32(i64))
 			}
 
 		default:

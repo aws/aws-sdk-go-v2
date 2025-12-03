@@ -1510,6 +1510,26 @@ func (m *validateOpUpdateAutomatedReasoningPolicyTestCase) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCustomModelDeployment struct {
+}
+
+func (*validateOpUpdateCustomModelDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomModelDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomModelDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomModelDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateGuardrail struct {
 }
 
@@ -1868,6 +1888,10 @@ func addOpUpdateAutomatedReasoningPolicyValidationMiddleware(stack *middleware.S
 
 func addOpUpdateAutomatedReasoningPolicyTestCaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAutomatedReasoningPolicyTestCase{}, middleware.After)
+}
+
+func addOpUpdateCustomModelDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomModelDeployment{}, middleware.After)
 }
 
 func addOpUpdateGuardrailValidationMiddleware(stack *middleware.Stack) error {
@@ -2763,6 +2787,11 @@ func validateCustomizationConfig(v types.CustomizationConfig) error {
 			invalidParams.AddNested("[distillationConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.CustomizationConfigMemberRftConfig:
+		if err := validateRFTConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[rftConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3292,6 +3321,25 @@ func validateGenerationConfiguration(v *types.GenerationConfiguration) error {
 		if err := validateGuardrailConfiguration(v.GuardrailConfiguration); err != nil {
 			invalidParams.AddNested("GuardrailConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGraderConfig(v types.GraderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GraderConfig"}
+	switch uv := v.(type) {
+	case *types.GraderConfigMemberLambdaGrader:
+		if err := validateLambdaGraderConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[lambdaGrader]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3956,6 +4004,21 @@ func validateKnowledgeBaseVectorSearchConfiguration(v *types.KnowledgeBaseVector
 	}
 }
 
+func validateLambdaGraderConfig(v *types.LambdaGraderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaGraderConfig"}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLoggingConfig(v *types.LoggingConfig) error {
 	if v == nil {
 		return nil
@@ -4438,6 +4501,23 @@ func validateRetrieveConfig(v *types.RetrieveConfig) error {
 	} else if v.KnowledgeBaseRetrievalConfiguration != nil {
 		if err := validateKnowledgeBaseRetrievalConfiguration(v.KnowledgeBaseRetrievalConfiguration); err != nil {
 			invalidParams.AddNested("KnowledgeBaseRetrievalConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRFTConfig(v *types.RFTConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RFTConfig"}
+	if v.GraderConfig != nil {
+		if err := validateGraderConfig(v.GraderConfig); err != nil {
+			invalidParams.AddNested("GraderConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6249,6 +6329,24 @@ func validateOpUpdateAutomatedReasoningPolicyTestCaseInput(v *UpdateAutomatedRea
 	}
 	if len(v.ExpectedAggregatedFindingsResult) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ExpectedAggregatedFindingsResult"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomModelDeploymentInput(v *UpdateCustomModelDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomModelDeploymentInput"}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
+	}
+	if v.CustomModelDeploymentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomModelDeploymentIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

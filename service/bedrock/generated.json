@@ -102,6 +102,7 @@
         "api_op_UpdateAutomatedReasoningPolicy.go",
         "api_op_UpdateAutomatedReasoningPolicyAnnotations.go",
         "api_op_UpdateAutomatedReasoningPolicyTestCase.go",
+        "api_op_UpdateCustomModelDeployment.go",
         "api_op_UpdateGuardrail.go",
         "api_op_UpdateMarketplaceModelEndpoint.go",
         "api_op_UpdateProvisionedModelThroughput.go",

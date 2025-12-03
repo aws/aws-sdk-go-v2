@@ -40,6 +40,9 @@ type StartPipelineExecutionInput struct {
 	// This member is required.
 	PipelineName *string
 
+	//  The MLflow experiment name of the start execution.
+	MlflowExperimentName *string
+
 	// This configuration, if specified, overrides the parallelism configuration of
 	// the parent pipeline for this specific run.
 	ParallelismConfiguration *types.ParallelismConfiguration
