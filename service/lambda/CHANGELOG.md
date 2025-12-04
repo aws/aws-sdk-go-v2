@@ -1,3 +1,7 @@
+# v1.86.0 (2025-12-04)
+
+* **Feature**: Add DisallowedByVpcEncryptionControl to the LastUpdateStatusReasonCode and StateReasonCode enums to represent failures caused by VPC Encryption Controls.
+
 # v1.85.0 (2025-12-02)
 
 * **Feature**: Launching Lambda durable functions - a new feature to build reliable multi-step applications and AI workflows natively within the Lambda developer experience.

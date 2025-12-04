@@ -1,8 +1,0 @@
-{
-    "id": "2ee999af-d9fe-40d6-b2f2-2030304ace5e",
-    "type": "feature",
-    "description": "Add DisallowedByVpcEncryptionControl to the LastUpdateStatusReasonCode and StateReasonCode enums to represent failures caused by VPC Encryption Controls.",
-    "modules": [
-        "service/lambda"
-    ]
-}

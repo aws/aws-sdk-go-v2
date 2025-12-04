@@ -1,3 +1,9 @@
+# Release (2025-12-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.86.0](service/lambda/CHANGELOG.md#v1860-2025-12-04)
+  * **Feature**: Add DisallowedByVpcEncryptionControl to the LastUpdateStatusReasonCode and StateReasonCode enums to represent failures caused by VPC Encryption Controls.
+
 # Release (2025-12-03)
 
 ## Module Highlights
