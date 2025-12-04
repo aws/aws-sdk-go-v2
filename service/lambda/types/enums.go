@@ -499,6 +499,7 @@ const (
 	LastUpdateStatusReasonCodeFunctionErrorPermissionDenied        LastUpdateStatusReasonCode = "FunctionError.PermissionDenied"
 	LastUpdateStatusReasonCodeFunctionErrorTooManyExtensions       LastUpdateStatusReasonCode = "FunctionError.TooManyExtensions"
 	LastUpdateStatusReasonCodeFunctionErrorInitResourceExhausted   LastUpdateStatusReasonCode = "FunctionError.InitResourceExhausted"
+	LastUpdateStatusReasonCodeDisallowedByVpcEncryptionControl     LastUpdateStatusReasonCode = "DisallowedByVpcEncryptionControl"
 )
 
 // Values returns all known values for LastUpdateStatusReasonCode. Note that this
@@ -540,6 +541,7 @@ func (LastUpdateStatusReasonCode) Values() []LastUpdateStatusReasonCode {
 		"FunctionError.PermissionDenied",
 		"FunctionError.TooManyExtensions",
 		"FunctionError.InitResourceExhausted",
+		"DisallowedByVpcEncryptionControl",
 	}
 }
 
@@ -1008,6 +1010,7 @@ const (
 	StateReasonCodeFunctionErrorPermissionDenied        StateReasonCode = "FunctionError.PermissionDenied"
 	StateReasonCodeFunctionErrorTooManyExtensions       StateReasonCode = "FunctionError.TooManyExtensions"
 	StateReasonCodeFunctionErrorInitResourceExhausted   StateReasonCode = "FunctionError.InitResourceExhausted"
+	StateReasonCodeDisallowedByVpcEncryptionControl     StateReasonCode = "DisallowedByVpcEncryptionControl"
 )
 
 // Values returns all known values for StateReasonCode. Note that this can be
@@ -1053,6 +1056,7 @@ func (StateReasonCode) Values() []StateReasonCode {
 		"FunctionError.PermissionDenied",
 		"FunctionError.TooManyExtensions",
 		"FunctionError.InitResourceExhausted",
+		"DisallowedByVpcEncryptionControl",
 	}
 }
 
