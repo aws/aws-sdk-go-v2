@@ -350,6 +350,56 @@
                 "smithy.api#documentation": "<p>Contains information about a business rule validation error that occurred during an operation.</p>"
             }
         },
+        "com.amazonaws.partnercentralaccount#BusinessVerificationDetails": {
+            "type": "structure",
+            "members": {
+                "LegalName": {
+                    "target": "com.amazonaws.partnercentralaccount#LegalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The official legal name of the business as registered with the appropriate government authorities.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegistrationId": {
+                    "target": "com.amazonaws.partnercentralaccount#RegistrationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique business registration identifier assigned by the government or regulatory authority, such as a company registration number or tax identification number.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CountryCode": {
+                    "target": "com.amazonaws.partnercentralaccount#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO 3166-1 alpha-2 country code where the business is legally registered and operates.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JurisdictionOfIncorporation": {
+                    "target": "com.amazonaws.partnercentralaccount#JurisdictionCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific legal jurisdiction or state where the business was incorporated or registered, providing additional location context beyond the country code.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the business information required for verifying a company's legal status and registration details within AWS Partner Central.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralaccount#BusinessVerificationResponse": {
+            "type": "structure",
+            "members": {
+                "BusinessVerificationDetails": {
+                    "target": "com.amazonaws.partnercentralaccount#BusinessVerificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The business verification details that were processed and verified, potentially including additional information discovered during the verification process.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the response information and results from a business verification process, including any verification-specific data returned by the verification service.</p>"
+            }
+        },
         "com.amazonaws.partnercentralaccount#CancelConnection": {
             "type": "operation",
             "input": {
@@ -806,6 +856,9 @@
                 "smithy.api#pattern": "^[A-Za-z0-9-_]+$"
             }
         },
+        "com.amazonaws.partnercentralaccount#CompletionUrl": {
+            "type": "string"
+        },
         "com.amazonaws.partnercentralaccount#ConflictException": {
             "type": "structure",
             "members": {
@@ -890,6 +943,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION"
+                    }
+                },
+                "ACCOUNT_ALREADY_VERIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_ALREADY_VERIFIED"
+                    }
+                },
+                "VERIFICATION_ALREADY_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERIFICATION_ALREADY_IN_PROGRESS"
                     }
                 }
             }
@@ -1337,6 +1402,16 @@
             },
             "value": {
                 "target": "com.amazonaws.partnercentralaccount#ConnectionTypeSummary"
+            }
+        },
+        "com.amazonaws.partnercentralaccount#CountryCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "smithy.api#pattern": "^[A-Z]{2}$"
             }
         },
         "com.amazonaws.partnercentralaccount#CreateConnectionInvitation": {
@@ -2698,6 +2773,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.partnercentralaccount#GetVerification": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.partnercentralaccount#GetVerificationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.partnercentralaccount#GetVerificationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.partnercentralaccount#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current status and details of a verification process for a partner account. This operation allows partners to check the progress and results of business or registrant verification processes.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.partnercentralaccount#GetVerificationRequest": {
+            "type": "structure",
+            "members": {
+                "VerificationType": {
+                    "target": "com.amazonaws.partnercentralaccount#VerificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of verification to retrieve information for. Valid values include business verification for company registration details and registrant verification for individual identity confirmation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.partnercentralaccount#GetVerificationResponse": {
+            "type": "structure",
+            "members": {
+                "VerificationType": {
+                    "target": "com.amazonaws.partnercentralaccount#VerificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of verification that was requested and processed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VerificationStatus": {
+                    "target": "com.amazonaws.partnercentralaccount#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the verification process. Possible values include pending, in-progress, completed, failed, or expired.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VerificationStatusReason": {
+                    "target": "com.amazonaws.partnercentralaccount#VerificationStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information explaining the current verification status, particularly useful when the status indicates a failure or requires additional action.</p>"
+                    }
+                },
+                "VerificationResponseDetails": {
+                    "target": "com.amazonaws.partnercentralaccount#VerificationResponseDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed response information specific to the type of verification performed, including any verification-specific data or results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartedAt": {
+                    "target": "com.amazonaws.partnercentralaccount#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the verification process was initiated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompletedAt": {
+                    "target": "com.amazonaws.partnercentralaccount#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the verification process was completed. This field is null if the verification is still in progress.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.partnercentralaccount#IndustrySegment": {
             "type": "enum",
             "members": {
@@ -2987,6 +3155,27 @@
                         "smithy.api#enumValue": "EXPIRED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.partnercentralaccount#JurisdictionCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "smithy.api#pattern": "^[A-Z0-9]{2}$"
+            }
+        },
+        "com.amazonaws.partnercentralaccount#LegalName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "smithy.api#pattern": "^[\\u0020-\\u007E\\u00A0-\\uD7FF\\uE000-\\uFFFD]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.partnercentralaccount#ListConnectionInvitations": {
@@ -3553,10 +3742,16 @@
             "version": "2025-04-04",
             "operations": [
                 {
+                    "target": "com.amazonaws.partnercentralaccount#GetVerification"
+                },
+                {
                     "target": "com.amazonaws.partnercentralaccount#ListTagsForResource"
                 },
                 {
                     "target": "com.amazonaws.partnercentralaccount#SendEmailVerificationCode"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#StartVerification"
                 },
                 {
                     "target": "com.amazonaws.partnercentralaccount#TagResource"
@@ -4403,6 +4598,46 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.partnercentralaccount#RegistrantVerificationDetails": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the personal information required for verifying an individual's identity as part of the partner registration process in AWS Partner Central.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralaccount#RegistrantVerificationResponse": {
+            "type": "structure",
+            "members": {
+                "CompletionUrl": {
+                    "target": "com.amazonaws.partnercentralaccount#CompletionUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A secure URL where the registrant can complete additional verification steps, such as document upload or identity confirmation through a third-party verification service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompletionUrlExpiresAt": {
+                    "target": "com.amazonaws.partnercentralaccount#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the completion URL expires and is no longer valid for accessing the verification workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the response information from a registrant verification process, including any verification-specific data and next steps for the individual verification workflow.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralaccount#RegistrationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "smithy.api#pattern": "^[\\u0020-\\u007E\\u00A0-\\uD7FF\\uE000-\\uFFFD]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.partnercentralaccount#RejectConnectionInvitation": {
             "type": "operation",
             "input": {
@@ -4654,6 +4889,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CONNECTION_NOT_FOUND"
+                    }
+                },
+                "VERIFICATION_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERIFICATION_NOT_FOUND"
                     }
                 }
             }
@@ -4933,6 +5174,108 @@
                     "target": "com.amazonaws.partnercentralaccount#ErrorDetailList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of error details if any errors occurred during the profile update task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.partnercentralaccount#StartVerification": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.partnercentralaccount#StartVerificationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.partnercentralaccount#StartVerificationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.partnercentralaccount#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates a new verification process for a partner account. This operation begins the verification workflow for either business registration or individual registrant identity verification as required by AWS Partner Central.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.partnercentralaccount#StartVerificationRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.partnercentralaccount#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This prevents duplicate verification processes from being started accidentally.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "VerificationDetails": {
+                    "target": "com.amazonaws.partnercentralaccount#VerificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific details required for the verification process, including business information for business verification or personal information for registrant verification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.partnercentralaccount#StartVerificationResponse": {
+            "type": "structure",
+            "members": {
+                "VerificationType": {
+                    "target": "com.amazonaws.partnercentralaccount#VerificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of verification that was started based on the provided verification details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VerificationStatus": {
+                    "target": "com.amazonaws.partnercentralaccount#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The initial status of the verification process after it has been started. Typically this will be pending or in-progress.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VerificationStatusReason": {
+                    "target": "com.amazonaws.partnercentralaccount#VerificationStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the initial verification status, including any immediate feedback about the submitted verification details.</p>"
+                    }
+                },
+                "VerificationResponseDetails": {
+                    "target": "com.amazonaws.partnercentralaccount#VerificationResponseDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Initial response details specific to the type of verification started, which may include next steps or additional requirements.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartedAt": {
+                    "target": "com.amazonaws.partnercentralaccount#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the verification process was successfully initiated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompletedAt": {
+                    "target": "com.amazonaws.partnercentralaccount#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the verification process was completed. This field is typically null for newly started verifications unless they complete immediately.</p>"
                     }
                 }
             },
@@ -5475,6 +5818,108 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BUSINESS_VALIDATION_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.partnercentralaccount#VerificationDetails": {
+            "type": "union",
+            "members": {
+                "BusinessVerificationDetails": {
+                    "target": "com.amazonaws.partnercentralaccount#BusinessVerificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The business verification details to be used when starting a business verification process.</p>"
+                    }
+                },
+                "RegistrantVerificationDetails": {
+                    "target": "com.amazonaws.partnercentralaccount#RegistrantVerificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registrant verification details to be used when starting an individual identity verification process.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union structure containing the specific details required for different types of verification processes supported by AWS Partner Central.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralaccount#VerificationResponseDetails": {
+            "type": "union",
+            "members": {
+                "BusinessVerificationResponse": {
+                    "target": "com.amazonaws.partnercentralaccount#BusinessVerificationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response details from a business verification process, including verification results and any additional business information discovered.</p>"
+                    }
+                },
+                "RegistrantVerificationResponse": {
+                    "target": "com.amazonaws.partnercentralaccount#RegistrantVerificationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response details from a registrant verification process, including verification results and any additional steps required for identity confirmation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union structure containing the response details specific to different types of verification processes, providing type-specific information and results.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralaccount#VerificationStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING_CUSTOMER_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_CUSTOMER_ACTION"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.partnercentralaccount#VerificationStatusReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[\\u0020-\\u007E\\u00A0-\\uD7FF\\uE000-\\uFFFD]+$"
+            }
+        },
+        "com.amazonaws.partnercentralaccount#VerificationType": {
+            "type": "enum",
+            "members": {
+                "BUSINESS_VERIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUSINESS_VERIFICATION"
+                    }
+                },
+                "REGISTRANT_VERIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTRANT_VERIFICATION"
                     }
                 }
             }

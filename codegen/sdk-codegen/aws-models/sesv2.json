@@ -10807,7 +10807,7 @@
                 "smithy.api#documentation": "<p>Used to configure or change the DKIM authentication settings for an email domain\n            identity. You can use this operation to do any of the following:</p>\n         <ul>\n            <li>\n               <p>Update the signing attributes for an identity that uses Bring Your Own DKIM\n                    (BYODKIM).</p>\n            </li>\n            <li>\n               <p>Update the key length that should be used for Easy DKIM.</p>\n            </li>\n            <li>\n               <p>Change from using no DKIM authentication to using Easy DKIM.</p>\n            </li>\n            <li>\n               <p>Change from using no DKIM authentication to using BYODKIM.</p>\n            </li>\n            <li>\n               <p>Change from using Easy DKIM to using BYODKIM.</p>\n            </li>\n            <li>\n               <p>Change from using BYODKIM to using Easy DKIM.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
-                    "uri": "/v1/email/identities/{EmailIdentity}/dkim/signing",
+                    "uri": "/v2/email/identities/{EmailIdentity}/dkim/signing",
                     "code": 200
                 }
             }

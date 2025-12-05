@@ -4616,7 +4616,13 @@
                 "State": {
                     "target": "com.amazonaws.iam#stateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of this delegation request.</p>\n         <p>See the <a href=\"IAM/latest/UserGuide/temporary-delegation-building-integration.html\">Understanding the Request Lifecycle</a> for an explanation of how these\n      states are transitioned.</p>"
+                        "smithy.api#documentation": "<p>The state of this delegation request.</p>\n         <p>See the <a href=\"IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle\">Understanding the Request Lifecycle</a> for an explanation of how these\n      states are transitioned.</p>"
+                    }
+                },
+                "ExpirationTime": {
+                    "target": "com.amazonaws.iam#dateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry time of this delegation request</p>\n         <p>See the <a href=\"IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle\">Understanding the Request Lifecycle</a> for\n               details on the life time of a delegation request at each state.</p>"
                     }
                 },
                 "RequestorId": {
