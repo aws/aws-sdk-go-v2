@@ -1,0 +1,8 @@
+{
+    "id": "f6642298-11b4-4059-aec8-cf0888cf8d7c",
+    "type": "feature",
+    "description": "Adding Verification API's to Partner Central Account SDK.",
+    "modules": [
+        "service/partnercentralaccount"
+    ]
+}

@@ -85,6 +85,8 @@ const (
 	ConflictExceptionReasonDuplicateConnection                       ConflictExceptionReason = "DUPLICATE_CONNECTION"
 	ConflictExceptionReasonIncompatibleConnectionState               ConflictExceptionReason = "INCOMPATIBLE_CONNECTION_STATE"
 	ConflictExceptionReasonIncompatibleConnectionPreferencesRevision ConflictExceptionReason = "INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION"
+	ConflictExceptionReasonAccountAlreadyVerified                    ConflictExceptionReason = "ACCOUNT_ALREADY_VERIFIED"
+	ConflictExceptionReasonVerificationAlreadyInProgress             ConflictExceptionReason = "VERIFICATION_ALREADY_IN_PROGRESS"
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
@@ -103,6 +105,8 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 		"DUPLICATE_CONNECTION",
 		"INCOMPATIBLE_CONNECTION_STATE",
 		"INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION",
+		"ACCOUNT_ALREADY_VERIFIED",
+		"VERIFICATION_ALREADY_IN_PROGRESS",
 	}
 }
 
@@ -421,6 +425,7 @@ const (
 	ResourceNotFoundExceptionReasonReceiverProfileNotFound      ResourceNotFoundExceptionReason = "RECEIVER_PROFILE_NOT_FOUND"
 	ResourceNotFoundExceptionReasonConnectionInvitationNotFound ResourceNotFoundExceptionReason = "CONNECTION_INVITATION_NOT_FOUND"
 	ResourceNotFoundExceptionReasonConnectionNotFound           ResourceNotFoundExceptionReason = "CONNECTION_NOT_FOUND"
+	ResourceNotFoundExceptionReasonVerificationNotFound         ResourceNotFoundExceptionReason = "VERIFICATION_NOT_FOUND"
 )
 
 // Values returns all known values for ResourceNotFoundExceptionReason. Note that
@@ -438,6 +443,7 @@ func (ResourceNotFoundExceptionReason) Values() []ResourceNotFoundExceptionReaso
 		"RECEIVER_PROFILE_NOT_FOUND",
 		"CONNECTION_INVITATION_NOT_FOUND",
 		"CONNECTION_NOT_FOUND",
+		"VERIFICATION_NOT_FOUND",
 	}
 }
 
@@ -477,5 +483,49 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
 		"REQUEST_VALIDATION_FAILED",
 		"BUSINESS_VALIDATION_FAILED",
+	}
+}
+
+type VerificationStatus string
+
+// Enum values for VerificationStatus
+const (
+	VerificationStatusPendingCustomerAction VerificationStatus = "PENDING_CUSTOMER_ACTION"
+	VerificationStatusInProgress            VerificationStatus = "IN_PROGRESS"
+	VerificationStatusFailed                VerificationStatus = "FAILED"
+	VerificationStatusSucceeded             VerificationStatus = "SUCCEEDED"
+	VerificationStatusRejected              VerificationStatus = "REJECTED"
+)
+
+// Values returns all known values for VerificationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationStatus) Values() []VerificationStatus {
+	return []VerificationStatus{
+		"PENDING_CUSTOMER_ACTION",
+		"IN_PROGRESS",
+		"FAILED",
+		"SUCCEEDED",
+		"REJECTED",
+	}
+}
+
+type VerificationType string
+
+// Enum values for VerificationType
+const (
+	VerificationTypeBusinessVerification   VerificationType = "BUSINESS_VERIFICATION"
+	VerificationTypeRegistrantVerification VerificationType = "REGISTRANT_VERIFICATION"
+)
+
+// Values returns all known values for VerificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationType) Values() []VerificationType {
+	return []VerificationType{
+		"BUSINESS_VERIFICATION",
+		"REGISTRANT_VERIFICATION",
 	}
 }

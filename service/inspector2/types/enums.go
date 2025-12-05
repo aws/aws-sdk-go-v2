@@ -2087,6 +2087,7 @@ const (
 	ScanStatusReasonNoScanConfigurationAssociated                ScanStatusReason = "NO_SCAN_CONFIGURATION_ASSOCIATED"
 	ScanStatusReasonScanInProgress                               ScanStatusReason = "SCAN_IN_PROGRESS"
 	ScanStatusReasonImageArchived                                ScanStatusReason = "IMAGE_ARCHIVED"
+	ScanStatusReasonUnsupportedCodeArtifacts                     ScanStatusReason = "UNSUPPORTED_CODE_ARTIFACTS"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -2128,6 +2129,7 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"NO_SCAN_CONFIGURATION_ASSOCIATED",
 		"SCAN_IN_PROGRESS",
 		"IMAGE_ARCHIVED",
+		"UNSUPPORTED_CODE_ARTIFACTS",
 	}
 }
 

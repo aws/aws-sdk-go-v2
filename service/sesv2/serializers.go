@@ -7594,7 +7594,7 @@ func (m *awsRestjson1_serializeOpPutEmailIdentityDkimSigningAttributes) HandleSe
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/email/identities/{EmailIdentity}/dkim/signing")
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/identities/{EmailIdentity}/dkim/signing")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"

@@ -62,6 +62,50 @@ type BusinessValidationError struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the business information required for verifying a company's legal
+// status and registration details within AWS Partner Central.
+type BusinessVerificationDetails struct {
+
+	// The ISO 3166-1 alpha-2 country code where the business is legally registered
+	// and operates.
+	//
+	// This member is required.
+	CountryCode *string
+
+	// The official legal name of the business as registered with the appropriate
+	// government authorities.
+	//
+	// This member is required.
+	LegalName *string
+
+	// The unique business registration identifier assigned by the government or
+	// regulatory authority, such as a company registration number or tax
+	// identification number.
+	//
+	// This member is required.
+	RegistrationId *string
+
+	// The specific legal jurisdiction or state where the business was incorporated or
+	// registered, providing additional location context beyond the country code.
+	JurisdictionOfIncorporation *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the response information and results from a business verification
+// process, including any verification-specific data returned by the verification
+// service.
+type BusinessVerificationResponse struct {
+
+	// The business verification details that were processed and verified, potentially
+	// including additional information discovered during the verification process.
+	//
+	// This member is required.
+	BusinessVerificationDetails *BusinessVerificationDetails
+
+	noSmithyDocumentSerde
+}
+
 // Base structure containing common connection properties.
 type Connection struct {
 
@@ -473,6 +517,33 @@ type PartnerSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the personal information required for verifying an individual's
+// identity as part of the partner registration process in AWS Partner Central.
+type RegistrantVerificationDetails struct {
+	noSmithyDocumentSerde
+}
+
+// Contains the response information from a registrant verification process,
+// including any verification-specific data and next steps for the individual
+// verification workflow.
+type RegistrantVerificationResponse struct {
+
+	// A secure URL where the registrant can complete additional verification steps,
+	// such as document upload or identity confirmation through a third-party
+	// verification service.
+	//
+	// This member is required.
+	CompletionUrl *string
+
+	// The timestamp when the completion URL expires and is no longer valid for
+	// accessing the verification workflow.
+	//
+	// This member is required.
+	CompletionUrlExpiresAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A summary view of a seller profile containing basic identifying information.
 type SellerProfileSummary struct {
 
@@ -580,6 +651,71 @@ type ValidationErrorMemberFieldValidationError struct {
 
 func (*ValidationErrorMemberFieldValidationError) isValidationError() {}
 
+// A union structure containing the specific details required for different types
+// of verification processes supported by AWS Partner Central.
+//
+// The following types satisfy this interface:
+//
+//	VerificationDetailsMemberBusinessVerificationDetails
+//	VerificationDetailsMemberRegistrantVerificationDetails
+type VerificationDetails interface {
+	isVerificationDetails()
+}
+
+// The business verification details to be used when starting a business
+// verification process.
+type VerificationDetailsMemberBusinessVerificationDetails struct {
+	Value BusinessVerificationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*VerificationDetailsMemberBusinessVerificationDetails) isVerificationDetails() {}
+
+// The registrant verification details to be used when starting an individual
+// identity verification process.
+type VerificationDetailsMemberRegistrantVerificationDetails struct {
+	Value RegistrantVerificationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*VerificationDetailsMemberRegistrantVerificationDetails) isVerificationDetails() {}
+
+// A union structure containing the response details specific to different types
+// of verification processes, providing type-specific information and results.
+//
+// The following types satisfy this interface:
+//
+//	VerificationResponseDetailsMemberBusinessVerificationResponse
+//	VerificationResponseDetailsMemberRegistrantVerificationResponse
+type VerificationResponseDetails interface {
+	isVerificationResponseDetails()
+}
+
+// The response details from a business verification process, including
+// verification results and any additional business information discovered.
+type VerificationResponseDetailsMemberBusinessVerificationResponse struct {
+	Value BusinessVerificationResponse
+
+	noSmithyDocumentSerde
+}
+
+func (*VerificationResponseDetailsMemberBusinessVerificationResponse) isVerificationResponseDetails() {
+}
+
+// The response details from a registrant verification process, including
+// verification results and any additional steps required for identity
+// confirmation.
+type VerificationResponseDetailsMemberRegistrantVerificationResponse struct {
+	Value RegistrantVerificationResponse
+
+	noSmithyDocumentSerde
+}
+
+func (*VerificationResponseDetailsMemberRegistrantVerificationResponse) isVerificationResponseDetails() {
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -591,5 +727,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isParticipant()     {}
-func (*UnknownUnionMember) isValidationError() {}
+func (*UnknownUnionMember) isParticipant()                 {}
+func (*UnknownUnionMember) isValidationError()             {}
+func (*UnknownUnionMember) isVerificationDetails()         {}
+func (*UnknownUnionMember) isVerificationResponseDetails() {}

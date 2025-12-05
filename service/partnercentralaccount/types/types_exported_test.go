@@ -54,3 +54,47 @@ func ExampleValidationError_outputUsage() {
 
 var _ *types.BusinessValidationError
 var _ *types.FieldValidationError
+
+func ExampleVerificationDetails_outputUsage() {
+	var union types.VerificationDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.VerificationDetailsMemberBusinessVerificationDetails:
+		_ = v.Value // Value is types.BusinessVerificationDetails
+
+	case *types.VerificationDetailsMemberRegistrantVerificationDetails:
+		_ = v.Value // Value is types.RegistrantVerificationDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RegistrantVerificationDetails
+var _ *types.BusinessVerificationDetails
+
+func ExampleVerificationResponseDetails_outputUsage() {
+	var union types.VerificationResponseDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.VerificationResponseDetailsMemberBusinessVerificationResponse:
+		_ = v.Value // Value is types.BusinessVerificationResponse
+
+	case *types.VerificationResponseDetailsMemberRegistrantVerificationResponse:
+		_ = v.Value // Value is types.RegistrantVerificationResponse
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RegistrantVerificationResponse
+var _ *types.BusinessVerificationResponse

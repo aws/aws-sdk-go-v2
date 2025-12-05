@@ -1,0 +1,8 @@
+{
+    "id": "c17315bf-a85b-4f92-8267-9a998686576d",
+    "type": "documentation",
+    "description": "Updating stop-task API to encapsulate containers with custom stop signal",
+    "modules": [
+        "service/ecs"
+    ]
+}

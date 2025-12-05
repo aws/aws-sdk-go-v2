@@ -931,6 +931,67 @@ func (m *awsAwsjson10_serializeOpGetProfileVisibility) HandleSerialize(ctx conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpGetVerification struct {
+}
+
+func (*awsAwsjson10_serializeOpGetVerification) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetVerification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetVerificationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PartnerCentralAccount.GetVerification")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetVerificationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListConnectionInvitations struct {
 }
 
@@ -1480,6 +1541,67 @@ func (m *awsAwsjson10_serializeOpStartProfileUpdateTask) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpStartVerification struct {
+}
+
+func (*awsAwsjson10_serializeOpStartVerification) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpStartVerification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartVerificationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PartnerCentralAccount.StartVerification")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentStartVerificationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpTagResource struct {
 }
 
@@ -1689,6 +1811,33 @@ func awsAwsjson10_serializeDocumentAllianceLeadContact(v *types.AllianceLeadCont
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentBusinessVerificationDetails(v *types.BusinessVerificationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CountryCode != nil {
+		ok := object.Key("CountryCode")
+		ok.String(*v.CountryCode)
+	}
+
+	if v.JurisdictionOfIncorporation != nil {
+		ok := object.Key("JurisdictionOfIncorporation")
+		ok.String(*v.JurisdictionOfIncorporation)
+	}
+
+	if v.LegalName != nil {
+		ok := object.Key("LegalName")
+		ok.String(*v.LegalName)
+	}
+
+	if v.RegistrationId != nil {
+		ok := object.Key("RegistrationId")
+		ok.String(*v.RegistrationId)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentIndustrySegmentList(v []types.IndustrySegment, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1753,6 +1902,13 @@ func awsAwsjson10_serializeDocumentParticipantIdentifierList(v []string, value s
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRegistrantVerificationDetails(v *types.RegistrantVerificationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	return nil
 }
 
@@ -1845,6 +2001,30 @@ func awsAwsjson10_serializeDocumentTaskDetails(v *types.TaskDetails, value smith
 		ok.String(*v.WebsiteUrl)
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentVerificationDetails(v types.VerificationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.VerificationDetailsMemberBusinessVerificationDetails:
+		av := object.Key("BusinessVerificationDetails")
+		if err := awsAwsjson10_serializeDocumentBusinessVerificationDetails(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.VerificationDetailsMemberRegistrantVerificationDetails:
+		av := object.Key("RegistrantVerificationDetails")
+		if err := awsAwsjson10_serializeDocumentRegistrantVerificationDetails(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -2212,6 +2392,18 @@ func awsAwsjson10_serializeOpDocumentGetProfileVisibilityInput(v *GetProfileVisi
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentGetVerificationInput(v *GetVerificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.VerificationType) > 0 {
+		ok := object.Key("VerificationType")
+		ok.String(string(v.VerificationType))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentListConnectionInvitationsInput(v *ListConnectionInvitationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2436,6 +2628,25 @@ func awsAwsjson10_serializeOpDocumentStartProfileUpdateTaskInput(v *StartProfile
 	if v.TaskDetails != nil {
 		ok := object.Key("TaskDetails")
 		if err := awsAwsjson10_serializeDocumentTaskDetails(v.TaskDetails, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentStartVerificationInput(v *StartVerificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.VerificationDetails != nil {
+		ok := object.Key("VerificationDetails")
+		if err := awsAwsjson10_serializeDocumentVerificationDetails(v.VerificationDetails, ok); err != nil {
 			return err
 		}
 	}

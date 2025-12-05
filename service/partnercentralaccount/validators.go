@@ -310,6 +310,26 @@ func (m *validateOpGetProfileVisibility) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetVerification struct {
+}
+
+func (*validateOpGetVerification) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVerification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVerificationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVerificationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListConnectionInvitations struct {
 }
 
@@ -490,6 +510,26 @@ func (m *validateOpStartProfileUpdateTask) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartVerification struct {
+}
+
+func (*validateOpStartVerification) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartVerification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartVerificationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartVerificationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -610,6 +650,10 @@ func addOpGetProfileVisibilityValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetProfileVisibility{}, middleware.After)
 }
 
+func addOpGetVerificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVerification{}, middleware.After)
+}
+
 func addOpListConnectionInvitationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListConnectionInvitations{}, middleware.After)
 }
@@ -646,6 +690,10 @@ func addOpStartProfileUpdateTaskValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpStartProfileUpdateTask{}, middleware.After)
 }
 
+func addOpStartVerificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartVerification{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -674,6 +722,27 @@ func validateAllianceLeadContact(v *types.AllianceLeadContact) error {
 	}
 	if v.BusinessTitle == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BusinessTitle"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBusinessVerificationDetails(v *types.BusinessVerificationDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BusinessVerificationDetails"}
+	if v.LegalName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LegalName"))
+	}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if v.CountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -791,6 +860,25 @@ func validateTaskDetails(v *types.TaskDetails) error {
 		if err := validateLocalizedContentList(v.LocalizedContents); err != nil {
 			invalidParams.AddNested("LocalizedContents", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVerificationDetails(v types.VerificationDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerificationDetails"}
+	switch uv := v.(type) {
+	case *types.VerificationDetailsMemberBusinessVerificationDetails:
+		if err := validateBusinessVerificationDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[BusinessVerificationDetails]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1126,6 +1214,21 @@ func validateOpGetProfileVisibilityInput(v *GetProfileVisibilityInput) error {
 	}
 }
 
+func validateOpGetVerificationInput(v *GetVerificationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVerificationInput"}
+	if len(v.VerificationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VerificationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListConnectionInvitationsInput(v *ListConnectionInvitationsInput) error {
 	if v == nil {
 		return nil
@@ -1287,6 +1390,23 @@ func validateOpStartProfileUpdateTaskInput(v *StartProfileUpdateTaskInput) error
 	} else if v.TaskDetails != nil {
 		if err := validateTaskDetails(v.TaskDetails); err != nil {
 			invalidParams.AddNested("TaskDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartVerificationInput(v *StartVerificationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartVerificationInput"}
+	if v.VerificationDetails != nil {
+		if err := validateVerificationDetails(v.VerificationDetails); err != nil {
+			invalidParams.AddNested("VerificationDetails", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

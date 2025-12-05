@@ -242,6 +242,18 @@ func TestCheckSnapshot_GetProfileVisibility(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetVerification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListConnectionInvitations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConnectionInvitations(context.Background(), nil, func(o *Options) {
@@ -343,6 +355,18 @@ func TestCheckSnapshot_StartProfileUpdateTask(t *testing.T) {
 	_, err := svc.StartProfileUpdateTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartProfileUpdateTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartVerification")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -565,6 +589,18 @@ func TestUpdateSnapshot_GetProfileVisibility(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetVerification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListConnectionInvitations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConnectionInvitations(context.Background(), nil, func(o *Options) {
@@ -666,6 +702,18 @@ func TestUpdateSnapshot_StartProfileUpdateTask(t *testing.T) {
 	_, err := svc.StartProfileUpdateTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartProfileUpdateTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartVerification")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
