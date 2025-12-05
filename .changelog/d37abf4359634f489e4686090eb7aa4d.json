@@ -1,8 +1,0 @@
-{
-    "id": "d37abf43-5963-4f48-9e46-86090eb7aa4d",
-    "type": "feature",
-    "description": "Updating the desired url for `PutEmailIdentityDkimSigningAttributes` from v1 to v2",
-    "modules": [
-        "service/sesv2"
-    ]
-}

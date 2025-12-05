@@ -1,3 +1,17 @@
+# Release (2025-12-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.69.3](service/ecs/CHANGELOG.md#v1693-2025-12-05)
+  * **Documentation**: Updating stop-task API to encapsulate containers with custom stop signal
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.53.0](service/iam/CHANGELOG.md#v1530-2025-12-05)
+  * **Feature**: Adding the ExpirationTime attribute to the delegation request resource.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.46.0](service/inspector2/CHANGELOG.md#v1460-2025-12-05)
+  * **Feature**: This release adds a new ScanStatus called "Unsupported Code Artifacts". This ScanStatus will be returned when a Lambda function was not code scanned because it has unsupported code artifacts.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.1.0](service/partnercentralaccount/CHANGELOG.md#v110-2025-12-05)
+  * **Feature**: Adding Verification API's to Partner Central Account SDK.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.56.0](service/sesv2/CHANGELOG.md#v1560-2025-12-05)
+  * **Feature**: Updating the desired url for `PutEmailIdentityDkimSigningAttributes` from v1 to v2
+
 # Release (2025-12-04)
 
 ## Module Highlights

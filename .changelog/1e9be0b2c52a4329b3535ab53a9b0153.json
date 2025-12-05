@@ -1,8 +1,0 @@
-{
-    "id": "1e9be0b2-c52a-4329-b353-5ab53a9b0153",
-    "type": "feature",
-    "description": "This release adds a new ScanStatus called \"Unsupported Code Artifacts\". This ScanStatus will be returned when a Lambda function was not code scanned because it has unsupported code artifacts.",
-    "modules": [
-        "service/inspector2"
-    ]
-}

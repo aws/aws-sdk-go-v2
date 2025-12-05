@@ -3,4 +3,4 @@
 package sesv2
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.55.2"
+const goModuleVersion = "1.56.0"

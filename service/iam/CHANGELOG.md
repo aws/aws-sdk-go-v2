@@ -1,3 +1,7 @@
+# v1.53.0 (2025-12-05)
+
+* **Feature**: Adding the ExpirationTime attribute to the delegation request resource.
+
 # v1.52.3 (2025-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.56.0 (2025-12-05)
+
+* **Feature**: Updating the desired url for `PutEmailIdentityDkimSigningAttributes` from v1 to v2
+
 # v1.55.2 (2025-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

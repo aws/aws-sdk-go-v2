@@ -1,8 +1,0 @@
-{
-    "id": "1648b7d5-4ae7-46e1-bc08-e0f98d6cc3cb",
-    "type": "feature",
-    "description": "Adding the ExpirationTime attribute to the delegation request resource.",
-    "modules": [
-        "service/iam"
-    ]
-}

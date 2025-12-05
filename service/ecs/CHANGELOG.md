@@ -1,3 +1,7 @@
+# v1.69.3 (2025-12-05)
+
+* **Documentation**: Updating stop-task API to encapsulate containers with custom stop signal
+
 # v1.69.2 (2025-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions
