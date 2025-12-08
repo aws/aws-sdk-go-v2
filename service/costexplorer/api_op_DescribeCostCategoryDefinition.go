@@ -12,11 +12,11 @@ import (
 )
 
 // Returns the name, Amazon Resource Name (ARN), rules, definition, and effective
-// dates of a Cost Category that's defined in the account.
+// dates of a cost category that's defined in the account.
 //
-// You have the option to use EffectiveOn to return a Cost Category that's active
+// You have the option to use EffectiveOn to return a cost category that's active
 // on a specific date. If there's no EffectiveOn specified, you see a Cost
-// Category that's effective on the current date. If Cost Category is still
+// Category that's effective on the current date. If cost category is still
 // effective, EffectiveEnd is omitted in the response.
 func (c *Client) DescribeCostCategoryDefinition(ctx context.Context, params *DescribeCostCategoryDefinitionInput, optFns ...func(*Options)) (*DescribeCostCategoryDefinitionOutput, error) {
 	if params == nil {
@@ -35,12 +35,12 @@ func (c *Client) DescribeCostCategoryDefinition(ctx context.Context, params *Des
 
 type DescribeCostCategoryDefinitionInput struct {
 
-	// The unique identifier for your Cost Category.
+	// The unique identifier for your cost category.
 	//
 	// This member is required.
 	CostCategoryArn *string
 
-	// The date when the Cost Category was effective.
+	// The date when the cost category was effective.
 	EffectiveOn *string
 
 	noSmithyDocumentSerde

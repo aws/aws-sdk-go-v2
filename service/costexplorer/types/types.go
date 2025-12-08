@@ -495,28 +495,28 @@ type CostAndUsageComparison struct {
 // of rules for the CostCategory object.
 type CostCategory struct {
 
-	// The unique identifier for your Cost Category.
+	// The unique identifier for your cost category.
 	//
 	// This member is required.
 	CostCategoryArn *string
 
-	// The effective start date of your Cost Category.
+	// The effective start date of your cost category.
 	//
 	// This member is required.
 	EffectiveStart *string
 
-	// The unique name of the Cost Category.
+	// The unique name of the cost category.
 	//
 	// This member is required.
 	Name *string
 
-	// The rule schema version in this particular Cost Category.
+	// The rule schema version in this particular cost category.
 	//
 	// This member is required.
 	RuleVersion CostCategoryRuleVersion
 
 	// The rules are processed in order. If there are multiple rules that match the
-	// line item, then the first rule to match is used to determine that Cost Category
+	// line item, then the first rule to match is used to determine that cost category
 	// value.
 	//
 	// This member is required.
@@ -525,7 +525,7 @@ type CostCategory struct {
 	// The default value for the cost category.
 	DefaultValue *string
 
-	// The effective end date of your Cost Category.
+	// The effective end date of your cost category.
 	EffectiveEnd *string
 
 	// The list of processing statuses for Cost Management products for a specific
@@ -533,7 +533,7 @@ type CostCategory struct {
 	ProcessingStatus []CostCategoryProcessingStatus
 
 	//  The split charge rules that are used to allocate your charges between your
-	// Cost Category values.
+	// cost category values.
 	SplitChargeRules []CostCategorySplitChargeRule
 
 	noSmithyDocumentSerde
@@ -574,34 +574,37 @@ type CostCategoryProcessingStatus struct {
 	noSmithyDocumentSerde
 }
 
-// A reference to a Cost Category containing only enough information to identify
+// A reference to a cost category containing only enough information to identify
 // the Cost Category.
 //
-// You can use this information to retrieve the full Cost Category information
+// You can use this information to retrieve the full cost category information
 // using DescribeCostCategory .
 type CostCategoryReference struct {
 
-	// The unique identifier for your Cost Category.
+	// The unique identifier for your cost category.
 	CostCategoryArn *string
 
 	// The default value for the cost category.
 	DefaultValue *string
 
-	// The Cost Category's effective end date.
+	// The cost category's effective end date.
 	EffectiveEnd *string
 
-	// The Cost Category's effective start date.
+	// The cost category's effective start date.
 	EffectiveStart *string
 
-	// The unique name of the Cost Category.
+	// The unique name of the cost category.
 	Name *string
 
-	// The number of rules that are associated with a specific Cost Category.
+	// The number of rules that are associated with a specific cost category.
 	NumberOfRules int32
 
 	// The list of processing statuses for Cost Management products for a specific
 	// cost category.
 	ProcessingStatus []CostCategoryProcessingStatus
+
+	//  The resource types supported by a specific cost category.
+	SupportedResourceTypes []string
 
 	// A list of unique cost category values in a specific cost category.
 	Values []string
@@ -609,8 +612,24 @@ type CostCategoryReference struct {
 	noSmithyDocumentSerde
 }
 
+// A reference to a cost category association that contains information on an
+// associated resource.
+type CostCategoryResourceAssociation struct {
+
+	// The unique identifier for your cost category.
+	CostCategoryArn *string
+
+	// The unique name of the cost category.
+	CostCategoryName *string
+
+	//  The unique identifier for an associated resource.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Rules are processed in order. If there are multiple rules that match the line
-// item, then the first rule to match is used to determine that Cost Category
+// item, then the first rule to match is used to determine that cost category
 // value.
 type CostCategoryRule struct {
 
@@ -624,7 +643,7 @@ type CostCategoryRule struct {
 	// SERVICE_CODE , RECORD_TYPE , LINKED_ACCOUNT_NAME , REGION , and USAGE_TYPE .
 	//
 	// RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported
-	// for Cost Category expressions. This dimension uses different terms, depending on
+	// for cost category expressions. This dimension uses different terms, depending on
 	// whether you're using the console or API/JSON editor. For a detailed comparison,
 	// see [Term Comparisons]in the Billing and Cost Management User Guide.
 	//
@@ -647,7 +666,7 @@ type CostCategoryRule struct {
 	noSmithyDocumentSerde
 }
 
-// Use the split charge rule to split the cost of one Cost Category value across
+// Use the split charge rule to split the cost of one cost category value across
 // several other target values.
 type CostCategorySplitChargeRule struct {
 
@@ -665,14 +684,14 @@ type CostCategorySplitChargeRule struct {
 	// This member is required.
 	Method CostCategorySplitChargeMethod
 
-	// The Cost Category value that you want to split. That value can't be used as a
+	// The cost category value that you want to split. That value can't be used as a
 	// source or a target in other split charge rules. To indicate uncategorized costs,
 	// you can use an empty string as the source.
 	//
 	// This member is required.
 	Source *string
 
-	// The Cost Category values that you want to split costs across. These values
+	// The cost category values that you want to split costs across. These values
 	// can't be used as a source in other split charge rules.
 	//
 	// This member is required.
@@ -712,7 +731,7 @@ type CostCategorySplitChargeRuleParameter struct {
 // without the given Cost Categories key.
 type CostCategoryValues struct {
 
-	// The unique name of the Cost Category.
+	// The unique name of the cost category.
 	Key *string
 
 	// The match options that you can use to filter your results. MatchOptions is only
@@ -720,7 +739,7 @@ type CostCategoryValues struct {
 	// MatchOptions is EQUALS and CASE_SENSITIVE .
 	MatchOptions []MatchOption
 
-	// The specific value of the Cost Category.
+	// The specific value of the cost category.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -1013,7 +1032,7 @@ type DimensionValues struct {
 
 	// The match options that you can use to filter your results.
 	//
-	// MatchOptions is only applicable for actions related to Cost Category and
+	// MatchOptions is only applicable for actions related to cost category and
 	// Anomaly Subscriptions. Refer to the documentation for each specific API to see
 	// what is supported.
 	//
@@ -2742,7 +2761,7 @@ type TagValues struct {
 	Key *string
 
 	// The match options that you can use to filter your results. MatchOptions is only
-	// applicable for actions related to Cost Category. The default values for
+	// applicable for actions related to cost category. The default values for
 	// MatchOptions are EQUALS and CASE_SENSITIVE .
 	MatchOptions []MatchOption
 

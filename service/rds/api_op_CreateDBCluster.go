@@ -847,6 +847,13 @@ type CreateDBClusterInput struct {
 	// [Settings for creating Multi-AZ DB clusters]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings
 	StorageType *string
 
+	// Tags to assign to resources associated with the DB cluster.
+	//
+	// Valid Values:
+	//
+	//   - cluster-auto-backup - The DB cluster's automated backup.
+	TagSpecifications []types.TagSpecification
+
 	// Tags to assign to the DB cluster.
 	//
 	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters

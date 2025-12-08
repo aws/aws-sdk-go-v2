@@ -216,6 +216,10 @@ type AwsOpportunityCustomer struct {
 // and analysis that can help the partner optimize their engagement and strategy.
 type AwsOpportunityInsights struct {
 
+	// Source-separated spend insights that provide independent analysis for AWS
+	// predictions and partner estimates
+	AwsProductsSpendInsightsBySource *AwsProductsSpendInsightsBySource
+
 	// Represents a score assigned by AWS to indicate the level of engagement and
 	// potential success for the opportunity. This score helps partners prioritize
 	// their efforts.
@@ -289,6 +293,111 @@ type AwsOpportunityRelatedEntities struct {
 	// represent the partner's offerings that are being positioned as part of the
 	// overall AWS opportunity.
 	Solutions []string
+
+	noSmithyDocumentSerde
+}
+
+// AWS services with program eligibility indicators (MAP, modernization pathways),
+// cost estimates, and optimization recommendations.
+type AwsProductDetails struct {
+
+	// List of program and pathway categories this product is eligible for
+	//
+	// This member is required.
+	Categories []string
+
+	// List of specific optimization recommendations for this product
+	//
+	// This member is required.
+	Optimizations []AwsProductOptimization
+
+	// AWS Partner Central product identifier used for opportunity association
+	//
+	// This member is required.
+	ProductCode *string
+
+	// Baseline service cost before optimizations (may be null for AWS-sourced
+	// predictions)
+	Amount *string
+
+	// Service cost after applying optimizations (may be null for AWS-sourced
+	// predictions)
+	OptimizedAmount *string
+
+	// Service-specific cost reduction through optimizations (may be null for
+	// AWS-sourced predictions)
+	PotentialSavingsAmount *string
+
+	// Pricing Calculator service code (links to original calculator URL)
+	ServiceCode *string
+
+	noSmithyDocumentSerde
+}
+
+// Comprehensive spend analysis for a single source (AWS or Partner) including
+// total amounts, optimization savings, program category breakdowns, and detailed
+// product-level insights.
+type AwsProductInsights struct {
+
+	// Product-level details including costs and optimization recommendations
+	//
+	// This member is required.
+	AwsProducts []AwsProductDetails
+
+	// ISO 4217 currency code (e.g., "USD") ensuring consistent representation across
+	// calculations
+	//
+	// This member is required.
+	CurrencyCode CurrencyCode
+
+	// Time period for spend amounts: "Monthly" or "Annually"
+	//
+	// This member is required.
+	Frequency PaymentFrequency
+
+	// Spend amounts mapped to AWS programs and modernization pathways
+	//
+	// This member is required.
+	TotalAmountByCategory map[string]string
+
+	// Total estimated spend for this source before optimizations
+	TotalAmount *string
+
+	// Total estimated spend after applying recommended optimizations
+	TotalOptimizedAmount *string
+
+	// Quantified savings achievable through implementing optimizations
+	TotalPotentialSavingsAmount *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for a specific optimization recommendation
+type AwsProductOptimization struct {
+
+	// Human-readable explanation of the optimization strategy
+	//
+	// This member is required.
+	Description *string
+
+	// Quantified cost savings achievable by implementing this optimization
+	//
+	// This member is required.
+	SavingsAmount *string
+
+	noSmithyDocumentSerde
+}
+
+// Source-separated spend insights that provide independent analysis for AWS
+// predictions and partner estimates
+type AwsProductsSpendInsightsBySource struct {
+
+	// AI-generated insights including recommended products from AWS
+	AWS *AwsProductInsights
+
+	// Partner-sourced insights derived from Pricing Calculator URLs including
+	// detailed service costs and optimizations
+	Partner *AwsProductInsights
 
 	noSmithyDocumentSerde
 }
@@ -719,12 +828,6 @@ type EngagementSummary struct {
 // of the project.
 type ExpectedCustomerSpend struct {
 
-	// Represents the estimated monthly revenue that the partner expects to earn from
-	// the opportunity. This helps in forecasting financial returns.
-	//
-	// This member is required.
-	Amount *string
-
 	// Indicates the currency in which the revenue estimate is provided. This helps in
 	// understanding the financial impact across different markets.
 	//
@@ -745,6 +848,10 @@ type ExpectedCustomerSpend struct {
 	//
 	// This member is required.
 	TargetCompany *string
+
+	// Represents the estimated monthly revenue that the partner expects to earn from
+	// the opportunity. This helps in forecasting financial returns.
+	Amount *string
 
 	// A URL providing additional information or context about the spend estimation.
 	EstimationUrl *string

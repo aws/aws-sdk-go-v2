@@ -470,6 +470,18 @@ func TestCheckSnapshot_ListCostCategoryDefinitions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCostCategoryResourceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCostCategoryResourceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCostCategoryResourceAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListSavingsPlansPurchaseRecommendationGeneration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListSavingsPlansPurchaseRecommendationGeneration(context.Background(), nil, func(o *Options) {
@@ -1014,6 +1026,18 @@ func TestUpdateSnapshot_ListCostCategoryDefinitions(t *testing.T) {
 	_, err := svc.ListCostCategoryDefinitions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCostCategoryDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCostCategoryResourceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCostCategoryResourceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCostCategoryResourceAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "ff97face-6fdd-41b8-a441-bdf77772683e",
+    "type": "feature",
+    "description": "Update Mail Manager Archive ARN validation",
+    "modules": [
+        "service/sesv2"
+    ]
+}

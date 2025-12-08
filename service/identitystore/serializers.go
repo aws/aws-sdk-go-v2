@@ -1342,6 +1342,33 @@ func awsAwsjson11_serializeDocumentEmails(v []types.Email, value smithyjson.Valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentExtensionNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExtensions(v map[string]document.Interface, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentAttributeValue(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentExternalId(v *types.ExternalId, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1621,6 +1648,13 @@ func awsAwsjson11_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 		}
 	}
 
+	if v.Extensions != nil {
+		ok := object.Key("Extensions")
+		if err := awsAwsjson11_serializeDocumentExtensions(v.Extensions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdentityStoreId != nil {
 		ok := object.Key("IdentityStoreId")
 		ok.String(*v.IdentityStoreId)
@@ -1783,6 +1817,13 @@ func awsAwsjson11_serializeOpDocumentDescribeGroupMembershipInput(v *DescribeGro
 func awsAwsjson11_serializeOpDocumentDescribeUserInput(v *DescribeUserInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Extensions != nil {
+		ok := object.Key("Extensions")
+		if err := awsAwsjson11_serializeDocumentExtensionNames(v.Extensions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.IdentityStoreId != nil {
 		ok := object.Key("IdentityStoreId")
@@ -1973,6 +2014,13 @@ func awsAwsjson11_serializeOpDocumentListGroupsInput(v *ListGroupsInput, value s
 func awsAwsjson11_serializeOpDocumentListUsersInput(v *ListUsersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Extensions != nil {
+		ok := object.Key("Extensions")
+		if err := awsAwsjson11_serializeDocumentExtensionNames(v.Extensions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Filters != nil {
 		ok := object.Key("Filters")

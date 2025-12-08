@@ -1,0 +1,8 @@
+{
+    "id": "9285990e-91b5-4c64-a35d-2aad2691dab6",
+    "type": "feature",
+    "description": "Add support for Cost Category resource associations including filtering by resource type on ListCostCategoryDefinitions and new ListCostCategoryResourceAssociations API.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

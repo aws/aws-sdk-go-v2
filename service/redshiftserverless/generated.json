@@ -30,6 +30,7 @@
         "api_op_GetCredentials.go",
         "api_op_GetCustomDomainAssociation.go",
         "api_op_GetEndpointAccess.go",
+        "api_op_GetIdentityCenterAuthToken.go",
         "api_op_GetNamespace.go",
         "api_op_GetRecoveryPoint.go",
         "api_op_GetReservation.go",

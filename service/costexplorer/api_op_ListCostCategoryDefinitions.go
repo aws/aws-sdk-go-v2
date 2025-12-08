@@ -12,12 +12,13 @@ import (
 )
 
 // Returns the name, Amazon Resource Name (ARN), NumberOfRules and effective dates
-// of all Cost Categories defined in the account. You have the option to use
-// EffectiveOn to return a list of Cost Categories that were active on a specific
-// date. If there is no EffectiveOn specified, you’ll see Cost Categories that are
-// effective on the current date. If Cost Category is still effective, EffectiveEnd
-// is omitted in the response. ListCostCategoryDefinitions supports pagination.
-// The request can have a MaxResults range up to 100.
+// of all cost categories defined in the account. You have the option to use
+// EffectiveOn and SupportedResourceTypes to return a list of cost categories that
+// were active on a specific date. If there is no EffectiveOn specified, you’ll
+// see cost categories that are effective on the current date. If cost category is
+// still effective, EffectiveEnd is omitted in the response.
+// ListCostCategoryDefinitions supports pagination. The request can have a
+// MaxResults range up to 100.
 func (c *Client) ListCostCategoryDefinitions(ctx context.Context, params *ListCostCategoryDefinitionsInput, optFns ...func(*Options)) (*ListCostCategoryDefinitionsOutput, error) {
 	if params == nil {
 		params = &ListCostCategoryDefinitionsInput{}
@@ -35,7 +36,7 @@ func (c *Client) ListCostCategoryDefinitions(ctx context.Context, params *ListCo
 
 type ListCostCategoryDefinitionsInput struct {
 
-	// The date when the Cost Category was effective.
+	// The date when the cost category was effective.
 	EffectiveOn *string
 
 	// The number of entries a paginated response contains.
@@ -46,12 +47,18 @@ type ListCostCategoryDefinitionsInput struct {
 	// page size.
 	NextToken *string
 
+	//  Filter cost category definitions that are supported by given resource types
+	// based on the latest version. If the filter is present, the result only includes
+	// Cost Categories that supports input resource type. If the filter isn't provided,
+	// no filtering is applied. The valid values are billing:rispgroupsharing .
+	SupportedResourceTypes []string
+
 	noSmithyDocumentSerde
 }
 
 type ListCostCategoryDefinitionsOutput struct {
 
-	// A reference to a Cost Category that contains enough information to identify the
+	// A reference to a cost category that contains enough information to identify the
 	// Cost Category.
 	CostCategoryReferences []types.CostCategoryReference
 

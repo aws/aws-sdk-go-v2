@@ -42,6 +42,7 @@
         "api_op_ListCostAllocationTagBackfillHistory.go",
         "api_op_ListCostAllocationTags.go",
         "api_op_ListCostCategoryDefinitions.go",
+        "api_op_ListCostCategoryResourceAssociations.go",
         "api_op_ListSavingsPlansPurchaseRecommendationGeneration.go",
         "api_op_ListTagsForResource.go",
         "api_op_ProvideAnomalyFeedback.go",

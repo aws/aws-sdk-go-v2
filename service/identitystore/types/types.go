@@ -373,6 +373,10 @@ type User struct {
 	// A list of Email objects containing email addresses associated with the user.
 	Emails []Email
 
+	// A map of explicitly requested attribute extensions associated with the user.
+	// Not populated if the user has no requested extensions.
+	Extensions map[string]document.Interface
+
 	// A list of ExternalId objects that contains the identifiers issued to this
 	// resource by an external identity provider.
 	ExternalIds []ExternalId

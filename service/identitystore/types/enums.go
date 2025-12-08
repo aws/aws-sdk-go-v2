@@ -64,6 +64,7 @@ const (
 	ResourceTypeUser            ResourceType = "USER"
 	ResourceTypeIdentityStore   ResourceType = "IDENTITY_STORE"
 	ResourceTypeGroupMembership ResourceType = "GROUP_MEMBERSHIP"
+	ResourceTypeResourcePolicy  ResourceType = "RESOURCE_POLICY"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -76,6 +77,7 @@ func (ResourceType) Values() []ResourceType {
 		"USER",
 		"IDENTITY_STORE",
 		"GROUP_MEMBERSHIP",
+		"RESOURCE_POLICY",
 	}
 }
 

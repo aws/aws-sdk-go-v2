@@ -12141,6 +12141,37 @@ func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) erro
 	return nil
 }
 
+func awsAwsquery_serializeDocumentTagSpecification(v *types.TagSpecification, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ResourceType != nil {
+		objectKey := object.Key("ResourceType")
+		objectKey.String(*v.ResourceType)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentTagSpecificationList(v []types.TagSpecification, value query.Value) error {
+	array := value.Array("item")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentTagSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentUserAuthConfig(v *types.UserAuthConfig, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -13057,6 +13088,13 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		}
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.VpcSecurityGroupIds != nil {
 		objectKey := object.Key("VpcSecurityGroupIds")
 		if err := awsAwsquery_serializeDocumentVpcSecurityGroupIdList(v.VpcSecurityGroupIds, objectKey); err != nil {
@@ -13446,6 +13484,13 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		}
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.TdeCredentialArn != nil {
 		objectKey := object.Key("TdeCredentialArn")
 		objectKey.String(*v.TdeCredentialArn)
@@ -13711,6 +13756,13 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.Tags != nil {
 		objectKey := object.Key("Tags")
 		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
 			return err
 		}
 	}
@@ -17033,6 +17085,13 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.String(*v.StorageType)
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.TdeCredentialArn != nil {
 		objectKey := object.Key("TdeCredentialArn")
 		objectKey.String(*v.TdeCredentialArn)
@@ -17542,6 +17601,13 @@ func awsAwsquery_serializeOpDocumentPromoteReadReplicaInput(v *PromoteReadReplic
 		objectKey.String(*v.PreferredBackupWindow)
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -17983,6 +18049,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromS3Input(v *RestoreDBClus
 		}
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.VpcSecurityGroupIds != nil {
 		objectKey := object.Key("VpcSecurityGroupIds")
 		if err := awsAwsquery_serializeDocumentVpcSecurityGroupIdList(v.VpcSecurityGroupIds, objectKey); err != nil {
@@ -18179,6 +18252,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		}
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.VpcSecurityGroupIds != nil {
 		objectKey := object.Key("VpcSecurityGroupIds")
 		if err := awsAwsquery_serializeDocumentVpcSecurityGroupIdList(v.VpcSecurityGroupIds, objectKey); err != nil {
@@ -18364,6 +18444,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.Tags != nil {
 		objectKey := object.Key("Tags")
 		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
 			return err
 		}
 	}
@@ -18598,6 +18685,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 	if v.Tags != nil {
 		objectKey := object.Key("Tags")
 		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
 			return err
 		}
 	}
@@ -18896,6 +18990,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 		}
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.UseDefaultProcessorFeatures != nil {
 		objectKey := object.Key("UseDefaultProcessorFeatures")
 		objectKey.Boolean(*v.UseDefaultProcessorFeatures)
@@ -19140,6 +19241,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 		}
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetDBInstanceIdentifier != nil {
 		objectKey := object.Key("TargetDBInstanceIdentifier")
 		objectKey.String(*v.TargetDBInstanceIdentifier)
@@ -19273,6 +19381,13 @@ func awsAwsquery_serializeOpDocumentStartDBInstanceAutomatedBackupsReplicationIn
 	if v.SourceDBInstanceArn != nil {
 		objectKey := object.Key("SourceDBInstanceArn")
 		objectKey.String(*v.SourceDBInstanceArn)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

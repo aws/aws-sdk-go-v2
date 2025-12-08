@@ -522,6 +522,13 @@ type RestoreDBInstanceFromS3Input struct {
 	// Default: io1 if the Iops parameter is specified; otherwise gp2
 	StorageType *string
 
+	// Tags to assign to resources associated with the DB instance.
+	//
+	// Valid Values:
+	//
+	//   - auto-backup - The DB instance's automated backup.
+	TagSpecifications []types.TagSpecification
+
 	// A list of tags to associate with this DB instance. For more information, see [Tagging Amazon RDS Resources]
 	// in the Amazon RDS User Guide.
 	//

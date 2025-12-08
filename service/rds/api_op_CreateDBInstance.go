@@ -1136,6 +1136,13 @@ type CreateDBInstanceInput struct {
 	// Default: io1 , if the Iops parameter is specified. Otherwise, gp3 .
 	StorageType *string
 
+	// Tags to assign to resources associated with the DB instance.
+	//
+	// Valid Values:
+	//
+	//   - auto-backup - The DB instance's automated backup.
+	TagSpecifications []types.TagSpecification
+
 	// Tags to assign to the DB instance.
 	Tags []types.Tag
 

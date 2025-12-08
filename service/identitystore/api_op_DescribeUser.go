@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/document"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -48,6 +49,11 @@ type DescribeUserInput struct {
 	// This member is required.
 	UserId *string
 
+	// A collection of extension names indicating what extensions the service should
+	// retrieve alongside other user attributes. aws:identitystore:enterprise is the
+	// only supported extension name.
+	Extensions []string
+
 	noSmithyDocumentSerde
 }
 
@@ -81,6 +87,10 @@ type DescribeUserOutput struct {
 
 	// The email address of the user.
 	Emails []types.Email
+
+	// A map of explicitly requested attribute extensions associated with the user.
+	// Not populated if the user has no requested extensions.
+	Extensions map[string]document.Interface
 
 	// A list of ExternalId objects that contains the identifiers issued to this
 	// resource by an external identity provider.

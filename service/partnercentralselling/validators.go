@@ -1255,9 +1255,6 @@ func validateExpectedCustomerSpend(v *types.ExpectedCustomerSpend) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExpectedCustomerSpend"}
-	if v.Amount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Amount"))
-	}
 	if len(v.CurrencyCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrencyCode"))
 	}

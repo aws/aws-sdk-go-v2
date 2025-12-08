@@ -5712,6 +5712,42 @@ func awsAwsjson10_deserializeDocumentAddressSummary(v **types.AddressSummary, va
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAmountMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected MonetaryAmount to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentApnPrograms(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5878,6 +5914,11 @@ func awsAwsjson10_deserializeDocumentAwsOpportunityInsights(v **types.AwsOpportu
 
 	for key, value := range shape {
 		switch key {
+		case "AwsProductsSpendInsightsBySource":
+			if err := awsAwsjson10_deserializeDocumentAwsProductsSpendInsightsBySource(&sv.AwsProductsSpendInsightsBySource, value); err != nil {
+				return err
+			}
+
 		case "EngagementScore":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6088,6 +6129,92 @@ func awsAwsjson10_deserializeDocumentAwsOpportunityTeamMembersList(v *[]types.Aw
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAwsProductDetails(v **types.AwsProductDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsProductDetails
+	if *v == nil {
+		sv = &types.AwsProductDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Amount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MonetaryAmount to be of type string, got %T instead", value)
+				}
+				sv.Amount = ptr.String(jtv)
+			}
+
+		case "Categories":
+			if err := awsAwsjson10_deserializeDocumentStringList(&sv.Categories, value); err != nil {
+				return err
+			}
+
+		case "Optimizations":
+			if err := awsAwsjson10_deserializeDocumentAwsProductOptimizationsList(&sv.Optimizations, value); err != nil {
+				return err
+			}
+
+		case "OptimizedAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MonetaryAmount to be of type string, got %T instead", value)
+				}
+				sv.OptimizedAmount = ptr.String(jtv)
+			}
+
+		case "PotentialSavingsAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MonetaryAmount to be of type string, got %T instead", value)
+				}
+				sv.PotentialSavingsAmount = ptr.String(jtv)
+			}
+
+		case "ProductCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProductCode = ptr.String(jtv)
+			}
+
+		case "ServiceCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentAwsProductIdentifiers(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6121,6 +6248,250 @@ func awsAwsjson10_deserializeDocumentAwsProductIdentifiers(v *[]string, value in
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAwsProductInsights(v **types.AwsProductInsights, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsProductInsights
+	if *v == nil {
+		sv = &types.AwsProductInsights{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AwsProducts":
+			if err := awsAwsjson10_deserializeDocumentAwsProductsList(&sv.AwsProducts, value); err != nil {
+				return err
+			}
+
+		case "CurrencyCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CurrencyCode to be of type string, got %T instead", value)
+				}
+				sv.CurrencyCode = types.CurrencyCode(jtv)
+			}
+
+		case "Frequency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaymentFrequency to be of type string, got %T instead", value)
+				}
+				sv.Frequency = types.PaymentFrequency(jtv)
+			}
+
+		case "TotalAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MonetaryAmount to be of type string, got %T instead", value)
+				}
+				sv.TotalAmount = ptr.String(jtv)
+			}
+
+		case "TotalAmountByCategory":
+			if err := awsAwsjson10_deserializeDocumentAmountMap(&sv.TotalAmountByCategory, value); err != nil {
+				return err
+			}
+
+		case "TotalOptimizedAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MonetaryAmount to be of type string, got %T instead", value)
+				}
+				sv.TotalOptimizedAmount = ptr.String(jtv)
+			}
+
+		case "TotalPotentialSavingsAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MonetaryAmount to be of type string, got %T instead", value)
+				}
+				sv.TotalPotentialSavingsAmount = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAwsProductOptimization(v **types.AwsProductOptimization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsProductOptimization
+	if *v == nil {
+		sv = &types.AwsProductOptimization{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "SavingsAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MonetaryAmount to be of type string, got %T instead", value)
+				}
+				sv.SavingsAmount = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAwsProductOptimizationsList(v *[]types.AwsProductOptimization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AwsProductOptimization
+	if *v == nil {
+		cv = []types.AwsProductOptimization{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AwsProductOptimization
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentAwsProductOptimization(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAwsProductsList(v *[]types.AwsProductDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AwsProductDetails
+	if *v == nil {
+		cv = []types.AwsProductDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AwsProductDetails
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentAwsProductDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAwsProductsSpendInsightsBySource(v **types.AwsProductsSpendInsightsBySource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsProductsSpendInsightsBySource
+	if *v == nil {
+		sv = &types.AwsProductsSpendInsightsBySource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AWS":
+			if err := awsAwsjson10_deserializeDocumentAwsProductInsights(&sv.AWS, value); err != nil {
+				return err
+			}
+
+		case "Partner":
+			if err := awsAwsjson10_deserializeDocumentAwsProductInsights(&sv.Partner, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -7499,7 +7870,7 @@ func awsAwsjson10_deserializeDocumentExpectedCustomerSpend(v **types.ExpectedCus
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected WebsiteUrl to be of type string, got %T instead", value)
+					return fmt.Errorf("expected EstimationUrl to be of type string, got %T instead", value)
 				}
 				sv.EstimationUrl = ptr.String(jtv)
 			}
@@ -10694,6 +11065,42 @@ func awsAwsjson10_deserializeDocumentSolutionList(v *[]types.SolutionBase, value
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentStringList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

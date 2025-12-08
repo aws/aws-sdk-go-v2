@@ -1,0 +1,8 @@
+{
+    "id": "5152b100-1a4a-405e-bbae-bd7765dbcfde",
+    "type": "feature",
+    "description": "Deal Sizing Service for AI-based deal size estimation with AWS service-level breakdown, supporting Expansion and Migration deals across Technology, and Reseller partner cohorts, including Pricing Calculator AddOn for MAP deals and funding incentives.",
+    "modules": [
+        "service/partnercentralselling"
+    ]
+}

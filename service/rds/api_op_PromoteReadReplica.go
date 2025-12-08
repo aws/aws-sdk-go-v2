@@ -84,6 +84,13 @@ type PromoteReadReplicaInput struct {
 	// [Adjusting the Preferred Maintenance Window]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
 	PreferredBackupWindow *string
 
+	// Tags to assign to resources associated with the DB instance.
+	//
+	// Valid Values:
+	//
+	//   - auto-backup - The DB instance's automated backup.
+	TagSpecifications []types.TagSpecification
+
 	noSmithyDocumentSerde
 }
 

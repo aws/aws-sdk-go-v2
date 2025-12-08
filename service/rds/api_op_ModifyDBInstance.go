@@ -1012,6 +1012,13 @@ type ModifyDBInstanceInput struct {
 	// Default: io1 , if the Iops parameter is specified. Otherwise, gp2 .
 	StorageType *string
 
+	// Tags to assign to resources associated with the DB instance.
+	//
+	// Valid Values:
+	//
+	//   - auto-backup - The DB instance's automated backup.
+	TagSpecifications []types.TagSpecification
+
 	// The ARN from the key store with which to associate the instance for TDE
 	// encryption.
 	//

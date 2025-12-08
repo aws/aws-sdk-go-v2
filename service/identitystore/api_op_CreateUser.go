@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/document"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -48,6 +49,12 @@ type CreateUserInput struct {
 
 	// A list of Email objects containing email addresses associated with the user.
 	Emails []types.Email
+
+	// A map with additional attribute extensions for the user. Each map key
+	// corresponds to an extension name, while map values represent extension data in
+	// Document type (not supported by Java V1, Go V1 and older versions of the CLI).
+	// aws:identitystore:enterprise is the only supported extension name.
+	Extensions map[string]document.Interface
 
 	// A string containing the geographical region or location of the user.
 	Locale *string

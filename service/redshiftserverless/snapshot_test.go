@@ -326,6 +326,18 @@ func TestCheckSnapshot_GetEndpointAccess(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetIdentityCenterAuthToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdentityCenterAuthToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIdentityCenterAuthToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNamespace(context.Background(), nil, func(o *Options) {
@@ -1086,6 +1098,18 @@ func TestUpdateSnapshot_GetEndpointAccess(t *testing.T) {
 	_, err := svc.GetEndpointAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetEndpointAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIdentityCenterAuthToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdentityCenterAuthToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIdentityCenterAuthToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

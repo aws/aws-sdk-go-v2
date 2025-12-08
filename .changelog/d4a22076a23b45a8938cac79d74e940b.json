@@ -1,0 +1,8 @@
+{
+    "id": "d4a22076-a23b-45a8-938c-ac79d74e940b",
+    "type": "feature",
+    "description": "Updating AWS Identity Store APIs to support Attribute Extensions capability, with the first release adding Enterprise Attributes. This launch aligns Identity Store APIs with SCIM for enterprise attributes, reducing cases when customers are forced to use SCIM due to lack of SigV4 API support.",
+    "modules": [
+        "service/identitystore"
+    ]
+}

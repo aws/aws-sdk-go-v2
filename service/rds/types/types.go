@@ -1261,6 +1261,15 @@ type DBClusterAutomatedBackup struct {
 	// This setting is only for non-Aurora Multi-AZ DB clusters.
 	StorageType *string
 
+	// A list of tags.
+	//
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+	TagList []Tag
+
 	// The VPC ID associated with the DB cluster.
 	VpcId *string
 
@@ -2400,6 +2409,15 @@ type DBInstanceAutomatedBackup struct {
 
 	// The storage type associated with the automated backup.
 	StorageType *string
+
+	// A list of tags.
+	//
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+	TagList []Tag
 
 	// The ARN from the key store with which the automated backup is associated for
 	// TDE encryption.
@@ -5486,6 +5504,32 @@ type Tag struct {
 	// '_', '.', ':', '/', '=', '+', '-', '@' (Java regex:
 	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The tags to apply to resources when creating or modifying a DB instance or DB
+// cluster. When you specify a tag, you must specify the resource type to tag,
+// otherwise the request will fail.
+type TagSpecification struct {
+
+	// The type of resource to tag on creation.
+	//
+	// Valid Values:
+	//
+	//   - auto-backup - The DB instance's automated backup.
+	//
+	//   - cluster-auto-backup - The DB cluster's automated backup.
+	ResourceType *string
+
+	// A list of tags.
+	//
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }

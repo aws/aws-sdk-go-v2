@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Cost Category with the requested name and rules.
+// Creates a new cost category with the requested name and rules.
 func (c *Client) CreateCostCategoryDefinition(ctx context.Context, params *CreateCostCategoryDefinitionInput, optFns ...func(*Options)) (*CreateCostCategoryDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateCostCategoryDefinitionInput{}
@@ -29,17 +29,17 @@ func (c *Client) CreateCostCategoryDefinition(ctx context.Context, params *Creat
 
 type CreateCostCategoryDefinitionInput struct {
 
-	// The unique name of the Cost Category.
+	// The unique name of the cost category.
 	//
 	// This member is required.
 	Name *string
 
-	// The rule schema version in this particular Cost Category.
+	// The rule schema version in this particular cost category.
 	//
 	// This member is required.
 	RuleVersion types.CostCategoryRuleVersion
 
-	// The Cost Category rules used to categorize costs. For more information, see [CostCategoryRule].
+	// The cost category rules used to categorize costs. For more information, see [CostCategoryRule].
 	//
 	// [CostCategoryRule]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
 	//
@@ -49,7 +49,7 @@ type CreateCostCategoryDefinitionInput struct {
 	// The default value for the cost category.
 	DefaultValue *string
 
-	// The Cost Category's effective start date. It can only be a billing start date
+	// The cost category's effective start date. It can only be a billing start date
 	// (first day of the month). If the date isn't provided, it's the first day of the
 	// current month. Dates can't be before the previous twelve months, or in the
 	// future.
@@ -82,8 +82,8 @@ type CreateCostCategoryDefinitionInput struct {
 	// [CostCategory]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html
 	ResourceTags []types.ResourceTag
 
-	//  The split charge rules used to allocate your charges between your Cost
-	// Category values.
+	//  The split charge rules used to allocate your charges between your cost
+	// category values.
 	SplitChargeRules []types.CostCategorySplitChargeRule
 
 	noSmithyDocumentSerde
@@ -91,10 +91,10 @@ type CreateCostCategoryDefinitionInput struct {
 
 type CreateCostCategoryDefinitionOutput struct {
 
-	// The unique identifier for your newly created Cost Category.
+	// The unique identifier for your newly created cost category.
 	CostCategoryArn *string
 
-	// The Cost Category's effective start date. It can only be a billing start date
+	// The cost category's effective start date. It can only be a billing start date
 	// (first day of the month).
 	EffectiveStart *string
 

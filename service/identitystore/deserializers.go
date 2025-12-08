@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/identitystore/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"
@@ -2836,6 +2838,14 @@ func awsAwsjson11_deserializeDocumentAddresses(v *[]types.Address, value interfa
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAttributeValue(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2983,6 +2993,40 @@ func awsAwsjson11_deserializeDocumentEmails(v *[]types.Email, value interface{})
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentExtensions(v *map[string]document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]document.Interface
+	if *v == nil {
+		mv = map[string]document.Interface{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal document.Interface
+		mapVar := parsedVal
+		if err := awsAwsjson11_deserializeDocumentAttributeValue(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -4113,6 +4157,11 @@ func awsAwsjson11_deserializeDocumentUser(v **types.User, value interface{}) err
 				return err
 			}
 
+		case "Extensions":
+			if err := awsAwsjson11_deserializeDocumentExtensions(&sv.Extensions, value); err != nil {
+				return err
+			}
+
 		case "ExternalIds":
 			if err := awsAwsjson11_deserializeDocumentExternalIds(&sv.ExternalIds, value); err != nil {
 				return err
@@ -4914,6 +4963,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 
 		case "Emails":
 			if err := awsAwsjson11_deserializeDocumentEmails(&sv.Emails, value); err != nil {
+				return err
+			}
+
+		case "Extensions":
+			if err := awsAwsjson11_deserializeDocumentExtensions(&sv.Extensions, value); err != nil {
 				return err
 			}
 

@@ -44,6 +44,11 @@ type ListUsersInput struct {
 	// This member is required.
 	IdentityStoreId *string
 
+	// A collection of extension names indicating what extensions the service should
+	// retrieve alongside other user attributes. aws:identitystore:enterprise is the
+	// only supported extension name.
+	Extensions []string
+
 	// A list of Filter objects, which is used in the ListUsers and  ListGroups
 	// requests.
 	//

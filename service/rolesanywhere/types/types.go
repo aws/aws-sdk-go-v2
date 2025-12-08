@@ -225,8 +225,8 @@ type ProfileDetail struct {
 	// The unique identifier of the profile.
 	ProfileId *string
 
-	// Specifies whether instance properties are required in temporary credential
-	// requests with this profile.
+	// Unused, saved for future use. Will likely specify whether instance properties
+	// are required in temporary credential requests with this profile.
 	RequireInstanceProperties *bool
 
 	// A list of IAM roles that this profile can assume in a temporary credential

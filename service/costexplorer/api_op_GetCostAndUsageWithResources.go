@@ -51,6 +51,10 @@ type GetCostAndUsageWithResourcesInput struct {
 	// that account's usage of that service. You can nest Expression objects to define
 	// any combination of dimension filters. For more information, see [Expression].
 	//
+	// The GetCostAndUsageWithResources operation requires that you either group by or
+	// filter by a ResourceId . It requires the [Expression]"SERVICE = Amazon Elastic Compute
+	// Cloud - Compute" in the filter.
+	//
 	// Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE .
 	//
 	// Valid values for MatchOptions for CostCategories and Tags are EQUALS , ABSENT ,

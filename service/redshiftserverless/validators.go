@@ -430,6 +430,26 @@ func (m *validateOpGetEndpointAccess) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetIdentityCenterAuthToken struct {
+}
+
+func (*validateOpGetIdentityCenterAuthToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIdentityCenterAuthToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIdentityCenterAuthTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIdentityCenterAuthTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetNamespace struct {
 }
 
@@ -1054,6 +1074,10 @@ func addOpGetEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEndpointAccess{}, middleware.After)
 }
 
+func addOpGetIdentityCenterAuthTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIdentityCenterAuthToken{}, middleware.After)
+}
+
 func addOpGetNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetNamespace{}, middleware.After)
 }
@@ -1618,6 +1642,21 @@ func validateOpGetEndpointAccessInput(v *GetEndpointAccessInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetEndpointAccessInput"}
 	if v.EndpointName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIdentityCenterAuthTokenInput(v *GetIdentityCenterAuthTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIdentityCenterAuthTokenInput"}
+	if v.WorkgroupNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkgroupNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
