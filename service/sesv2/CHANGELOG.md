@@ -1,3 +1,8 @@
+# v1.57.0 (2025-12-08)
+
+* **Feature**: Update Mail Manager Archive ARN validation
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2025-12-05)
 
 * **Feature**: Updating the desired url for `PutEmailIdentityDkimSigningAttributes` from v1 to v2

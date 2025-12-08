@@ -1,3 +1,7 @@
+# v1.9.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2025-12-02)
 
 * **Feature**: CloudWatch Observability Admin adds pipelines configuration for third party log ingestion and transformation of all logs ingested, integration of CloudWatch logs with S3 Tables, and AWS account or organization level enablement for 7 AWS services.

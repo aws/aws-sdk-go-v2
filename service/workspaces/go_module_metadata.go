@@ -3,4 +3,4 @@
 package workspaces
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.64.7"
+const goModuleVersion = "1.64.8"

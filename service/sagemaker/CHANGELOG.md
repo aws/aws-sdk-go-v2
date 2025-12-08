@@ -1,3 +1,7 @@
+# v1.228.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.228.0 (2025-12-03)
 
 * **Feature**: Introduces Serverless training: A fully managed compute infrastructure that abstracts away all infrastructure complexity, allowing you to focus purely on model development.

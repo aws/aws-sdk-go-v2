@@ -1,3 +1,7 @@
+# v1.15.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2025-12-02)
 
 * **Feature**: Supports AgentCore Evaluations, Policy, Episodic Memory Strategy, Resource Based Policy for Runtime and Gateway APIs, API Gateway Rest API Targets and enhances JWT authorizer.

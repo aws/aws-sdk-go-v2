@@ -1,3 +1,8 @@
+# v1.22.0 (2025-12-08)
+
+* **Feature**: Increases certificate string length for trust anchor source data to support ML-DSA certificates.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.15 (2025-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

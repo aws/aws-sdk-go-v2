@@ -1,3 +1,7 @@
+# v1.67.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2025-12-02)
 
 * **Feature**: Add support for S3 Storage Lens Advanced Performance Metrics, Expanded Prefixes metrics report, and export to S3 Tables.

@@ -1,3 +1,7 @@
+# v1.6.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2025-12-02)
 
 * **Feature**: Amazon S3 Vectors provides cost-effective, elastic, and durable vector storage for queries based on semantic meaning and similarity.

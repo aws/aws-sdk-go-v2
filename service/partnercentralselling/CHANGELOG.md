@@ -1,3 +1,8 @@
+# v1.12.0 (2025-12-08)
+
+* **Feature**: Deal Sizing Service for AI-based deal size estimation with AWS service-level breakdown, supporting Expansion and Migration deals across Technology, and Reseller partner cohorts, including Pricing Calculator AddOn for MAP deals and funding incentives.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.1 (2025-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

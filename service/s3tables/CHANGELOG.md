@@ -1,3 +1,7 @@
+# v1.13.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2025-12-02)
 
 * **Feature**: Add storage class, replication, and table record expiration features to S3 Tables.

@@ -1,3 +1,8 @@
+# v1.62.0 (2025-12-08)
+
+* **Feature**: Add support for Cost Category resource associations including filtering by resource type on ListCostCategoryDefinitions and new ListCostCategoryResourceAssociations API.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2025-12-02)
 
 * **Feature**: This release updates existing Savings Plans Purchase Analyzer and Recommendations APIs to support Database Savings Plans.

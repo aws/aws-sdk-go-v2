@@ -1,3 +1,7 @@
+# v1.1.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2025-12-05)
 
 * **Feature**: Adding Verification API's to Partner Central Account SDK.

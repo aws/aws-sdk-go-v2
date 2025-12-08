@@ -1,3 +1,7 @@
+# v1.52.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2025-12-03)
 
 * **Feature**: Adding support in Amazon Bedrock to customize models with reinforcement fine-tuning (RFT) and support for updating the existing Custom Model Deployments.

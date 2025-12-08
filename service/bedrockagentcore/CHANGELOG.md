@@ -1,3 +1,7 @@
+# v1.10.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2025-12-02)
 
 * **Feature**: Support for AgentCore Evaluations and Episodic memory strategy for AgentCore Memory.

@@ -1,3 +1,7 @@
+# v1.69.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.69.0 (2025-12-02)
 
 * **Feature**: Adding support for extended threat detection for Amazon EC2 and Amazon ECS. Adding support for wild card suppression rules.

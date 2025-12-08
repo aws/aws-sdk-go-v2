@@ -1,3 +1,7 @@
+# v1.47.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.0 (2025-12-02)
 
 * **Feature**: Adds support for Audio Blocks and Streaming Image Output plus new Stop Reasons of malformed_model_output and malformed_tool_use.

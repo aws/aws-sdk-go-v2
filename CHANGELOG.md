@@ -1,3 +1,28 @@
+# Release (2025-12-08)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.41.0
+  * **Feature**: The default value of MaxConnsPerHost in HTTP clients created by the SDK is now 2048, down from unlimited. See #3243.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.62.0](service/costexplorer/CHANGELOG.md#v1620-2025-12-08)
+  * **Feature**: Add support for Cost Category resource associations including filtering by resource type on ListCostCategoryDefinitions and new ListCostCategoryResourceAssociations API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.276.0](service/ec2/CHANGELOG.md#v12760-2025-12-08)
+  * **Feature**: Amazon EC2 P6-B300 instances provide 8x NVIDIA Blackwell Ultra GPUs with 2.1 TB high bandwidth GPU memory, 6.4 Tbps EFA networking, 300 Gbps dedicated ENA throughput, and 4 TB of system memory. Amazon EC2 C8a instances are powered by 5th Gen AMD EPYC processors with a maximum frequency of 4.5 GHz.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.35.0](service/identitystore/CHANGELOG.md#v1350-2025-12-08)
+  * **Feature**: Updating AWS Identity Store APIs to support Attribute Extensions capability, with the first release adding Enterprise Attributes. This launch aligns Identity Store APIs with SCIM for enterprise attributes, reducing cases when customers are forced to use SCIM due to lack of SigV4 API support.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.12.0](service/partnercentralselling/CHANGELOG.md#v1120-2025-12-08)
+  * **Feature**: Deal Sizing Service for AI-based deal size estimation with AWS service-level breakdown, supporting Expansion and Migration deals across Technology, and Reseller partner cohorts, including Pricing Calculator AddOn for MAP deals and funding incentives.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.113.0](service/rds/CHANGELOG.md#v11130-2025-12-08)
+  * **Feature**: Adding support for tagging RDS Instance/Cluster Automated Backups
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.33.0](service/redshiftserverless/CHANGELOG.md#v1330-2025-12-08)
+  * **Feature**: Added GetIdentityCenterAuthToken API to retrieve encrypted authentication tokens for Identity Center integrated serverless workgroups. This API enables programmatic access to secure Identity Center tokens with proper error handling and parameter validation across supported SDK languages.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.22.0](service/rolesanywhere/CHANGELOG.md#v1220-2025-12-08)
+  * **Feature**: Increases certificate string length for trust anchor source data to support ML-DSA certificates.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.57.0](service/sesv2/CHANGELOG.md#v1570-2025-12-08)
+  * **Feature**: Update Mail Manager Archive ARN validation
+
 # Release (2025-12-05)
 
 ## Module Highlights

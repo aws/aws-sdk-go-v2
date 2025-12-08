@@ -3,4 +3,4 @@
 package databasemigrationservice
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.61.2"
+const goModuleVersion = "1.61.3"

@@ -3,4 +3,4 @@
 package inspector
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.30.14"
+const goModuleVersion = "1.30.15"

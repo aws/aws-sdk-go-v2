@@ -1,3 +1,8 @@
+# v1.33.0 (2025-12-08)
+
+* **Feature**: Added GetIdentityCenterAuthToken API to retrieve encrypted authentication tokens for Identity Center integrated serverless workgroups. This API enables programmatic access to secure Identity Center tokens with proper error handling and parameter validation across supported SDK languages.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.2 (2025-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

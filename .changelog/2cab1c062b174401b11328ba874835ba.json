@@ -1,8 +1,0 @@
-{
-    "id": "2cab1c06-2b17-4401-b113-28ba874835ba",
-    "type": "feature",
-    "description": "Increases certificate string length for trust anchor source data to support ML-DSA certificates.",
-    "modules": [
-        "service/rolesanywhere"
-    ]
-}

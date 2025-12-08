@@ -1,3 +1,8 @@
+# v1.113.0 (2025-12-08)
+
+* **Feature**: Adding support for tagging RDS Instance/Cluster Automated Backups
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.112.0 (2025-12-02)
 
 * **Feature**: RDS Oracle and SQL Server: Add support for adding, modifying, and removing additional storage volumes, offering up to 256TiB storage; RDS SQL Server: Support Developer Edition via custom engine versions for development and testing purposes; M7i/R7i instances with Optimize CPU for cost savings.

@@ -1,3 +1,7 @@
+# v1.49.1 (2025-12-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2025-12-02)
 
 * **Feature**: Amazon DataZone now supports exporting Catalog datasets as Amazon S3 tables, and provides automatic business glossary term suggestions for data assets.
