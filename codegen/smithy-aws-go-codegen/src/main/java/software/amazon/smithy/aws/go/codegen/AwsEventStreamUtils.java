@@ -1254,7 +1254,10 @@ public final class AwsEventStreamUtils {
                                  """, errof)
                             .write("")
                             .openBlock("switch vv := v.(type) {", "}", () -> {
-                                for (MemberShape member : eventUnion.members()) {
+                                var members = eventUnion.members().stream()
+                                        .filter(it -> it.getMemberTrait(model, ErrorTrait.class).isEmpty())
+                                        .toList();
+                                for (MemberShape member : members) {
                                     Symbol memberSymbol = SymbolUtils.createPointableSymbolBuilder(
                                                     symbolProvider.toMemberName(member),
                                                     eventUnionSymbol.getNamespace())
@@ -1336,7 +1339,7 @@ public final class AwsEventStreamUtils {
                                             memberShape, "v", operand -> {
                                                 writer.write("msg.Headers.Set($T, $T(\"text/plain\"))",
                                                         contentTypeHeader, stringValue);
-                                                writer.write("msg.Payload = []byte($L)", operand);
+                                                writer.write("msg.Payload = []byte(*$L)", operand);
                                             });
                                     writer.write("return nil");
                                     break;
