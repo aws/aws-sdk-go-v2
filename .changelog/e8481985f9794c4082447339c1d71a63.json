@@ -1,0 +1,8 @@
+{
+    "id": "e8481985-f979-4c40-8244-7339c1d71a63",
+    "type": "feature",
+    "description": "The default value of MaxConnsPerHost in HTTP clients created by the SDK is now 2048, down from unlimited. See #3243.",
+    "modules": [
+        "."
+    ]
+}
