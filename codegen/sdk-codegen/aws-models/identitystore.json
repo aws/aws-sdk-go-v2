@@ -1039,7 +1039,7 @@
                 "Reason": {
                     "target": "com.amazonaws.identitystore#ConflictExceptionReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>This request cannot be completed for one of the following reasons:</p> <ul> <li> <p>Performing the requested operation would violate an existing uniqueness claim in the identity store. Resolve the conflict before retrying this request.</p> </li> <li> <p>The requested resource was being concurrently modified by another request.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Indicates the reason for a conflict error when the service is unable to access a Customer Managed KMS key. For non-KMS permission errors, this field is not included.</p>"
                     }
                 }
             },
@@ -1336,6 +1336,12 @@
                     "target": "com.amazonaws.identitystore#SensitiveStringType",
                     "traits": {
                         "smithy.api#documentation": "<p>The user's birthdate in YYYY-MM-DD format. This field supports standard date format for storing personal information.</p>"
+                    }
+                },
+                "Extensions": {
+                    "target": "com.amazonaws.identitystore#Extensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map with additional attribute extensions for the user. Each map key corresponds to an extension name, while map values represent extension data in <code>Document</code> type (not supported by Java V1, Go V1 and older versions of the CLI). <code>aws:identitystore:enterprise</code> is the only supported extension name.</p>"
                     }
                 }
             }
@@ -1737,6 +1743,12 @@
                         "smithy.api#documentation": "<p>The identifier for a user in the identity store.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Extensions": {
+                    "target": "com.amazonaws.identitystore#ExtensionNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of extension names indicating what extensions the service should retrieve alongside other user attributes. <code>aws:identitystore:enterprise</code> is the only supported extension name.</p>"
+                    }
                 }
             }
         },
@@ -1888,6 +1900,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the user or system that last updated the user.</p>"
                     }
+                },
+                "Extensions": {
+                    "target": "com.amazonaws.identitystore#Extensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of explicitly requested attribute extensions associated with the user. Not populated if the user has no requested extensions.</p>"
+                    }
                 }
             }
         },
@@ -1932,6 +1950,44 @@
         },
         "com.amazonaws.identitystore#ExceptionMessage": {
             "type": "string"
+        },
+        "com.amazonaws.identitystore#ExtensionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^aws:identitystore:[a-z]{1,20}$"
+            }
+        },
+        "com.amazonaws.identitystore#ExtensionNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystore#ExtensionName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.identitystore#Extensions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.identitystore#ExtensionName"
+            },
+            "value": {
+                "target": "com.amazonaws.identitystore#AttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
         },
         "com.amazonaws.identitystore#ExternalId": {
             "type": "structure",
@@ -2824,6 +2880,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Extensions": {
+                    "target": "com.amazonaws.identitystore#ExtensionNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of extension names indicating what extensions the service should retrieve alongside other user attributes. <code>aws:identitystore:enterprise</code> is the only supported extension name.</p>"
+                    }
+                },
                 "MaxResults": {
                     "target": "com.amazonaws.identitystore#MaxResults",
                     "traits": {
@@ -3123,6 +3185,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GROUP_MEMBERSHIP"
+                    }
+                },
+                "RESOURCE_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_POLICY"
                     }
                 }
             }
@@ -3501,6 +3569,12 @@
                     "target": "com.amazonaws.identitystore#StringType",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the user or system that last updated the user.</p>"
+                    }
+                },
+                "Extensions": {
+                    "target": "com.amazonaws.identitystore#Extensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of explicitly requested attribute extensions associated with the user. Not populated if the user has no requested extensions.</p>"
                     }
                 }
             },

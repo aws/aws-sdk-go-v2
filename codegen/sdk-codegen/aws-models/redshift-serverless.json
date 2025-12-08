@@ -2060,6 +2060,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#GetIdentityCenterAuthToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetIdentityCenterAuthTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetIdentityCenterAuthTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#DryRunException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an Identity Center authentication token for accessing Amazon Redshift Serverless workgroups.</p> <p>The token provides secure access to data within the specified workgroups using Identity Center identity propagation. The token expires after a specified duration and must be refreshed for continued access.</p> <p>The Identity and Access Management (IAM) user or role that runs GetIdentityCenterAuthToken must have appropriate permissions to access the specified workgroups and Identity Center integration must be configured for the workgroups.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetIdentityCenterAuthTokenRequest": {
+            "type": "structure",
+            "members": {
+                "workgroupNames": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of workgroup names for which to generate the Identity Center authentication token.</p> <p>Constraints:</p> <ul> <li> <p>Must contain between 1 and 20 workgroup names.</p> </li> <li> <p>Each workgroup name must be a valid Amazon Redshift Serverless workgroup identifier.</p> </li> <li> <p>All specified workgroups must have Identity Center integration enabled.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetIdentityCenterAuthTokenResponse": {
+            "type": "structure",
+            "members": {
+                "token": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Identity Center authentication token that can be used to access data in the specified workgroups.</p> <p>This token contains the Identity Center identity information and is encrypted for secure transmission.</p>",
+                        "smithy.api#jsonName": "Token"
+                    }
+                },
+                "expirationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Identity Center authentication token expires.</p> <p>After this time, a new token must be requested for continued access.</p>",
+                        "smithy.api#jsonName": "ExpirationTime",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.redshiftserverless#GetNamespace": {
             "type": "operation",
             "input": {
@@ -2526,6 +2600,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#DryRunException"
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#InternalServerException"
@@ -4684,6 +4761,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#GetCustomDomainAssociation"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#GetIdentityCenterAuthToken"
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#GetResourcePolicy"
@@ -8156,6 +8236,18 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.redshiftserverless#WorkgroupNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#WorkgroupName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.redshiftserverless#WorkgroupResource": {

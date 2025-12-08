@@ -4774,6 +4774,12 @@
                         "smithy.api#documentation": "<p>The life cycle type for this DB cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n             creating the DB cluster will fail if the DB major version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon Aurora</a> in the <i>Amazon Aurora User Guide</i>\n               </p>\n            </li>\n            <li>\n               <p>Amazon RDS - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
                     }
                 },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB cluster.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>cluster-auto-backup</code> - The DB cluster's automated backup.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "MasterUserAuthenticationType": {
                     "target": "com.amazonaws.rds#MasterUserAuthenticationType",
                     "traits": {
@@ -5574,6 +5580,12 @@
                         "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              creating the DB instance will fail if the DB major version is past its end of standard support date.</p>\n         </note>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
                     }
                 },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB instance.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-backup</code> - The DB instance's automated backup.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "MasterUserAuthenticationType": {
                     "target": "com.amazonaws.rds#MasterUserAuthenticationType",
                     "traits": {
@@ -5982,6 +5994,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The CA certificate identifier to use for the read replica's server certificate.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n                instance</a> in the <i>Amazon RDS User Guide</i> and \n                <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n                    Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n                        User Guide</i>.</p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB instance.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-backup</code> - The DB instance's automated backup.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AdditionalStorageVolumes": {
@@ -8117,6 +8135,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.</p>"
                     }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.rds#TagList"
                 }
             },
             "traits": {
@@ -10119,6 +10140,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.</p>"
                     }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.rds#TagList"
                 },
                 "DedicatedLogVolume": {
                     "target": "com.amazonaws.rds#BooleanOptional",
@@ -23344,6 +23368,12 @@
                         "smithy.api#documentation": "<p>The target Oracle DB engine when you convert a non-CDB to a CDB. This intermediate step is necessary to upgrade an Oracle Database 19c non-CDB\n           to an Oracle Database 21c CDB.</p>\n         <p>Note the following requirements:</p>\n         <ul>\n            <li>\n               <p>Make sure that you specify <code>oracle-ee-cdb</code> or <code>oracle-se2-cdb</code>.</p>\n            </li>\n            <li>\n               <p>Make sure that your DB engine runs Oracle Database 19c with an April 2021 or later RU.</p>\n            </li>\n         </ul>\n         <p>Note the following limitations:</p>\n         <ul>\n            <li>\n               <p>You can't convert a CDB to a non-CDB.</p>\n            </li>\n            <li>\n               <p>You can't convert a replica database.</p>\n            </li>\n            <li>\n               <p>You can't convert a non-CDB to a CDB and upgrade the engine version in the\n                   same command.</p>\n            </li>\n            <li>\n               <p>You can't convert the existing custom parameter or option group when it has\n                   options or parameters that are permanent or persistent. In this situation, the\n                   DB instance reverts to the default option and parameter group. To avoid\n                   reverting to the default, specify a new parameter group with\n                       <code>--db-parameter-group-name</code> and a new option group with\n                       <code>--option-group-name</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB instance.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-backup</code> - The DB instance's automated backup.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "MasterUserAuthenticationType": {
                     "target": "com.amazonaws.rds#MasterUserAuthenticationType",
                     "traits": {
@@ -26123,6 +26153,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The daily time range during which automated backups are created\n        if automated backups are enabled,\n        using the <code>BackupRetentionPeriod</code> parameter.</p>\n         <p>The default is a 30-minute window selected at random from an\n            8-hour block of time for each Amazon Web Services Region. \n            To see the time blocks available, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html\">\n            Adjusting the Preferred Maintenance Window</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p>\n            </li>\n            <li>\n               <p>Must be in Universal Coordinated Time (UTC).</p>\n            </li>\n            <li>\n               <p>Must not conflict with the preferred maintenance window.</p>\n            </li>\n            <li>\n               <p>Must be at least 30 minutes.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB instance.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-backup</code> - The DB instance's automated backup.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -28003,6 +28039,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              RDS automatically upgrades your restored DB cluster to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon Aurora</a> in the <i>Amazon Aurora User Guide</i>\n               </p>\n            </li>\n            <li>\n               <p>Amazon RDS - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
                     }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB cluster.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>cluster-auto-backup</code> - The DB cluster's automated backup.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -28377,6 +28419,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              RDS automatically upgrades your restored DB cluster to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon Aurora</a> in the <i>Amazon Aurora User Guide</i>\n               </p>\n            </li>\n            <li>\n               <p>Amazon RDS - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
                     }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB cluster.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>cluster-auto-backup</code> - The DB cluster's automated backup.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -28744,6 +28792,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              RDS automatically upgrades your restored DB cluster to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon Aurora</a> in the <i>Amazon Aurora User Guide</i>\n               </p>\n            </li>\n            <li>\n               <p>Amazon RDS - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB cluster.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>cluster-auto-backup</code> - The DB cluster's automated backup.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -29135,6 +29189,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case,  \n              RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB instance.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-backup</code> - The DB instance's automated backup.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ManageMasterUserPassword": {
@@ -29573,6 +29633,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case,  \n              RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB instance.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-backup</code> - The DB instance's automated backup.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AdditionalStorageVolumes": {
@@ -30055,6 +30121,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.rds#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB instance.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-backup</code> - The DB instance's automated backup.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ManageMasterUserPassword": {
@@ -31044,6 +31116,12 @@
                     "target": "com.amazonaws.rds#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>In an Amazon Web Services GovCloud (US) Region, an URL that contains a Signature Version 4 signed request \n            for the <code>StartDBInstanceAutomatedBackupsReplication</code> operation to call \n            in the Amazon Web Services Region of the source DB instance. The presigned URL must be a valid request for the\n            <code>StartDBInstanceAutomatedBackupsReplication</code> API operation that can run in \n            the Amazon Web Services Region that contains the source DB instance.</p>\n         <p>This setting applies only to Amazon Web Services GovCloud (US) Regions. It's ignored in other\n            Amazon Web Services Regions.</p>\n         <p>To learn how to generate a Signature Version 4 signed request, see \n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\">\n                Authenticating Requests: Using Query Parameters (Amazon Web Services Signature Version 4)</a> and\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">\n                Signature Version 4 Signing Process</a>.</p>\n         <note>\n            <p>If you are using an Amazon Web Services SDK tool or the CLI, you can specify\n                    <code>SourceRegion</code> (or <code>--source-region</code> for the CLI)\n                instead of specifying <code>PreSignedUrl</code> manually. Specifying\n                    <code>SourceRegion</code> autogenerates a presigned URL that is a valid request\n                for the operation that can run in the source Amazon Web Services Region.</p>\n         </note>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.rds#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to associate with the replicated automated backups.</p>"
                     }
                 }
             },
@@ -32038,6 +32116,32 @@
             "traits": {
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rds#TagSpecification": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource to tag on creation.</p>\n         <p>Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-backup</code> - The DB instance's automated backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>cluster-auto-backup</code> - The DB cluster's automated backup.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.rds#TagList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tags to apply to resources when creating or modifying a DB instance or DB cluster. When you specify a tag, you must specify the resource type to tag, otherwise the request will fail.</p>"
+            }
+        },
+        "com.amazonaws.rds#TagSpecificationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#TagSpecification",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
             }
         },
         "com.amazonaws.rds#TargetConnectionNetworkType": {

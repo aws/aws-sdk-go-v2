@@ -136,6 +136,9 @@
                     "target": "com.amazonaws.costexplorer#ListCostCategoryDefinitions"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#ListCostCategoryResourceAssociations"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#ListSavingsPlansPurchaseRecommendationGeneration"
                 },
                 {
@@ -2377,21 +2380,21 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effective start date of your Cost Category.</p>",
+                        "smithy.api#documentation": "<p>The effective start date of your cost category.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EffectiveEnd": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effective end date of your Cost Category.</p>"
+                        "smithy.api#documentation": "<p>The effective end date of your cost category.</p>"
                     }
                 },
                 "Name": {
@@ -2409,14 +2412,14 @@
                 "Rules": {
                     "target": "com.amazonaws.costexplorer#CostCategoryRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The rules are processed in order. If there are multiple rules that match the line\n            item, then the first rule to match is used to determine that Cost Category value.\n        </p>",
+                        "smithy.api#documentation": "<p>The rules are processed in order. If there are multiple rules that match the line\n            item, then the first rule to match is used to determine that cost category value.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SplitChargeRules": {
                     "target": "com.amazonaws.costexplorer#CostCategorySplitChargeRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The split charge rules that are used to allocate your charges between your Cost\n            Category values. </p>"
+                        "smithy.api#documentation": "<p> The split charge rules that are used to allocate your charges between your cost category values. </p>"
                     }
                 },
                 "ProcessingStatus": {
@@ -2482,7 +2485,7 @@
         "com.amazonaws.costexplorer#CostCategoryName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The unique name of the Cost Category.</p>",
+                "smithy.api#documentation": "<p>The unique name of the cost category.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
@@ -2528,7 +2531,7 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>"
                     }
                 },
                 "Name": {
@@ -2537,20 +2540,20 @@
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date.</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective start date.</p>"
                     }
                 },
                 "EffectiveEnd": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective end date.</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective end date.</p>"
                     }
                 },
                 "NumberOfRules": {
                     "target": "com.amazonaws.costexplorer#NonNegativeInteger",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of rules that are associated with a specific Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The number of rules that are associated with a specific cost category. </p>"
                     }
                 },
                 "ProcessingStatus": {
@@ -2567,16 +2570,51 @@
                 },
                 "DefaultValue": {
                     "target": "com.amazonaws.costexplorer#CostCategoryValue"
+                },
+                "SupportedResourceTypes": {
+                    "target": "com.amazonaws.costexplorer#ResourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The resource types supported by a specific cost category.\n        </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A reference to a Cost Category containing only enough information to identify the Cost\n            Category.</p>\n         <p>You can use this information to retrieve the full Cost Category information using\n                <code>DescribeCostCategory</code>.</p>"
+                "smithy.api#documentation": "<p>A reference to a cost category containing only enough information to identify the Cost\n            Category.</p>\n         <p>You can use this information to retrieve the full cost category information using\n                <code>DescribeCostCategory</code>.</p>"
             }
         },
         "com.amazonaws.costexplorer#CostCategoryReferencesList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.costexplorer#CostCategoryReference"
+            }
+        },
+        "com.amazonaws.costexplorer#CostCategoryResourceAssociation": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.costexplorer#GenericArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The unique identifier for an associated resource.\n        </p>"
+                    }
+                },
+                "CostCategoryName": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryName"
+                },
+                "CostCategoryArn": {
+                    "target": "com.amazonaws.costexplorer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a cost category association that contains information on an associated resource.\n        </p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostCategoryResourceAssociations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#CostCategoryResourceAssociation"
             }
         },
         "com.amazonaws.costexplorer#CostCategoryRule": {
@@ -2588,7 +2626,7 @@
                 "Rule": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n\n            <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, and <code>USAGE_TYPE</code>.</p>\n         <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for Cost Category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n\n            <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, and <code>USAGE_TYPE</code>.</p>\n         <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for cost category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User\n                Guide</i>.</p>"
                     }
                 },
                 "InheritedValue": {
@@ -2605,7 +2643,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Rules are processed in order. If there are multiple rules that match the line item,\n            then the first rule to match is used to determine that Cost Category value.</p>"
+                "smithy.api#documentation": "<p>Rules are processed in order. If there are multiple rules that match the line item,\n            then the first rule to match is used to determine that cost category value.</p>"
             }
         },
         "com.amazonaws.costexplorer#CostCategoryRuleType": {
@@ -2636,7 +2674,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The rule schema version in this particular Cost Category.</p>"
+                "smithy.api#documentation": "<p>The rule schema version in this particular cost category.</p>"
             }
         },
         "com.amazonaws.costexplorer#CostCategoryRulesList": {
@@ -2680,14 +2718,14 @@
                 "Source": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category value that you want to split. That value can't be used as a source\n            or a target in other split charge rules. To indicate uncategorized costs, you can use an\n            empty string as the source.</p>",
+                        "smithy.api#documentation": "<p>The cost category value that you want to split. That value can't be used as a source\n            or a target in other split charge rules. To indicate uncategorized costs, you can use an\n            empty string as the source.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Targets": {
                     "target": "com.amazonaws.costexplorer#CostCategorySplitChargeRuleTargetsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category values that you want to split costs across. These values can't be\n            used as a source in other split charge rules. </p>",
+                        "smithy.api#documentation": "<p>The cost category values that you want to split costs across. These values can't be\n            used as a source in other split charge rules. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2706,7 +2744,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use the split charge rule to split the cost of one Cost Category value across several\n            other target values. </p>"
+                "smithy.api#documentation": "<p>Use the split charge rule to split the cost of one cost category value across several\n            other target values. </p>"
             }
         },
         "com.amazonaws.costexplorer#CostCategorySplitChargeRuleParameter": {
@@ -2838,7 +2876,7 @@
                 "Values": {
                     "target": "com.amazonaws.costexplorer#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific value of the Cost Category.</p>"
+                        "smithy.api#documentation": "<p>The specific value of the cost category.</p>"
                     }
                 },
                 "MatchOptions": {
@@ -3196,7 +3234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Cost Category with the requested name and rules.</p>"
+                "smithy.api#documentation": "<p>Creates a new cost category with the requested name and rules.</p>"
             }
         },
         "com.amazonaws.costexplorer#CreateCostCategoryDefinitionRequest": {
@@ -3211,7 +3249,7 @@
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>"
                     }
                 },
                 "RuleVersion": {
@@ -3223,7 +3261,7 @@
                 "Rules": {
                     "target": "com.amazonaws.costexplorer#CostCategoryRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category rules used to categorize costs. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule</a>.</p>",
+                        "smithy.api#documentation": "<p>The cost category rules used to categorize costs. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3233,7 +3271,7 @@
                 "SplitChargeRules": {
                     "target": "com.amazonaws.costexplorer#CostCategorySplitChargeRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The split charge rules used to allocate your charges between your Cost Category values.\n    </p>"
+                        "smithy.api#documentation": "<p> The split charge rules used to allocate your charges between your cost category values.\n    </p>"
                     }
                 },
                 "ResourceTags": {
@@ -3253,13 +3291,13 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your newly created Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The unique identifier for your newly created cost category. </p>"
                     }
                 },
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month).</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective start date. It can only be a billing start date (first day of the month).</p>"
                     }
                 }
             },
@@ -3476,7 +3514,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Cost Category. Expenses from this month going forward will no longer be\n      categorized with this Cost Category.</p>"
+                "smithy.api#documentation": "<p>Deletes a cost category. Expenses from this month going forward will no longer be\n      categorized with this cost category.</p>"
             }
         },
         "com.amazonaws.costexplorer#DeleteCostCategoryDefinitionRequest": {
@@ -3485,7 +3523,7 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3500,13 +3538,13 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>"
                     }
                 },
                 "EffectiveEnd": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effective end date of the Cost Category as a result of deleting it. No costs after\n      this date is categorized by the deleted Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The effective end date of the cost category as a result of deleting it. No costs after\n      this date is categorized by the deleted cost category. </p>"
                     }
                 }
             },
@@ -3531,7 +3569,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the name, Amazon Resource Name (ARN), rules, definition, and effective dates of a\n      Cost Category that's defined in the account.</p>\n         <p>You have the option to use <code>EffectiveOn</code> to return a Cost Category that's\n      active on a specific date. If there's no <code>EffectiveOn</code> specified, you see a Cost\n      Category that's effective on the current date. If Cost Category is still effective,\n        <code>EffectiveEnd</code> is omitted in the response. </p>"
+                "smithy.api#documentation": "<p>Returns the name, Amazon Resource Name (ARN), rules, definition, and effective dates of a\n      cost category that's defined in the account.</p>\n         <p>You have the option to use <code>EffectiveOn</code> to return a cost category that's\n      active on a specific date. If there's no <code>EffectiveOn</code> specified, you see a Cost\n      Category that's effective on the current date. If cost category is still effective,\n        <code>EffectiveEnd</code> is omitted in the response. </p>"
             }
         },
         "com.amazonaws.costexplorer#DescribeCostCategoryDefinitionRequest": {
@@ -3540,14 +3578,14 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EffectiveOn": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the Cost Category was effective. </p>"
+                        "smithy.api#documentation": "<p>The date when the cost category was effective. </p>"
                     }
                 }
             },
@@ -3799,7 +3837,7 @@
                 "MatchOptions": {
                     "target": "com.amazonaws.costexplorer#MatchOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The match options that you can use to filter your results.</p>\n         <p>\n            <code>MatchOptions</code> is only applicable for actions related to Cost Category and\n            Anomaly Subscriptions. Refer to the documentation for each specific API to see what is\n            supported.</p>\n         <p>The default values for <code>MatchOptions</code> are <code>EQUALS</code> and\n                <code>CASE_SENSITIVE</code>.</p>"
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results.</p>\n         <p>\n            <code>MatchOptions</code> is only applicable for actions related to cost category and\n            Anomaly Subscriptions. Refer to the documentation for each specific API to see what is\n            supported.</p>\n         <p>The default values for <code>MatchOptions</code> are <code>EQUALS</code> and\n                <code>CASE_SENSITIVE</code>.</p>"
                     }
                 }
             },
@@ -4501,6 +4539,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.costexplorer#GenerationSummary"
+            }
+        },
+        "com.amazonaws.costexplorer#GenericArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
             }
         },
         "com.amazonaws.costexplorer#GenericBoolean": {
@@ -5241,7 +5289,7 @@
                 "Filter": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify\n        <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated\n      with that account's usage of that service. You can nest <code>Expression</code> objects to\n      define any combination of dimension filters. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. </p>\n         <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are\n        <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>\n         <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code> and\n        <code>Tags</code> are <code>EQUALS</code>, <code>ABSENT</code>, and\n        <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code> and\n        <code>CASE_SENSITIVE</code>.</p>",
+                        "smithy.api#documentation": "<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify\n        <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated\n      with that account's usage of that service. You can nest <code>Expression</code> objects to\n      define any combination of dimension filters. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. </p>\n         <p>The <code>GetCostAndUsageWithResources</code> operation requires that you either group\n      by or filter by a <code>ResourceId</code>. It requires the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            <code>\"SERVICE = Amazon Elastic Compute Cloud - Compute\"</code> in the filter.</p>\n         <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are\n        <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>\n         <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code> and\n        <code>Tags</code> are <code>EQUALS</code>, <code>ABSENT</code>, and\n        <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code> and\n        <code>CASE_SENSITIVE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5338,7 +5386,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves an array of Cost Category names and values incurred cost.</p>\n         <note>\n            <p>If some Cost Category names and values are not associated with any cost, they will not\n        be returned by this API.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves an array of cost category names and values incurred cost.</p>\n         <note>\n            <p>If some cost category names and values are not associated with any cost, they will not\n        be returned by this API.</p>\n         </note>"
             }
         },
         "com.amazonaws.costexplorer#GetCostCategoriesRequest": {
@@ -5347,7 +5395,7 @@
                 "SearchString": {
                     "target": "com.amazonaws.costexplorer#SearchString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that you want to search the filter values for.</p>\n         <p>If you don't specify a <code>CostCategoryName</code>, <code>SearchString</code> is used to\n      filter Cost Category names that match the <code>SearchString</code> pattern. If you specify a\n        <code>CostCategoryName</code>, <code>SearchString</code> is used to filter Cost Category\n      values that match the <code>SearchString</code> pattern.</p>"
+                        "smithy.api#documentation": "<p>The value that you want to search the filter values for.</p>\n         <p>If you don't specify a <code>CostCategoryName</code>, <code>SearchString</code> is used to\n      filter cost category names that match the <code>SearchString</code> pattern. If you specify a\n        <code>CostCategoryName</code>, <code>SearchString</code> is used to filter cost category\n      values that match the <code>SearchString</code> pattern.</p>"
                     }
                 },
                 "TimePeriod": {
@@ -5403,13 +5451,13 @@
                 "CostCategoryNames": {
                     "target": "com.amazonaws.costexplorer#CostCategoryNamesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the Cost Categories.</p>"
+                        "smithy.api#documentation": "<p>The names of the cost categories.</p>"
                     }
                 },
                 "CostCategoryValues": {
                     "target": "com.amazonaws.costexplorer#CostCategoryValuesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category values.</p>\n         <p>If the <code>CostCategoryName</code> key isn't specified in the request, the\n        <code>CostCategoryValues</code> fields aren't returned. </p>"
+                        "smithy.api#documentation": "<p>The cost category values.</p>\n         <p>If the <code>CostCategoryName</code> key isn't specified in the request, the\n        <code>CostCategoryValues</code> fields aren't returned. </p>"
                     }
                 },
                 "ReturnSize": {
@@ -5786,7 +5834,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the reservation coverage for your account, which you can use to see how much\n      of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service,\n      or Amazon Redshift usage is covered by a reservation. An organization's management account can\n      see the coverage of the associated member accounts. This supports dimensions, Cost Categories,\n      and nested expressions. For any time period, you can filter data about reservation usage by\n      the following dimensions:</p>\n         <ul>\n            <li>\n               <p>AZ</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM</p>\n            </li>\n            <li>\n               <p>PLATFORM</p>\n            </li>\n            <li>\n               <p>REGION</p>\n            </li>\n            <li>\n               <p>SERVICE</p>\n            </li>\n            <li>\n               <p>TAG</p>\n            </li>\n            <li>\n               <p>TENANCY</p>\n            </li>\n         </ul>\n         <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code>\n      operation. </p>"
+                "smithy.api#documentation": "<p>Retrieves the reservation coverage for your account, which you can use to see how much\n      of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service,\n      or Amazon Redshift usage is covered by a reservation. An organization's management account can\n      see the coverage of the associated member accounts. This supports dimensions, cost categories,\n      and nested expressions. For any time period, you can filter data about reservation usage by\n      the following dimensions:</p>\n         <ul>\n            <li>\n               <p>AZ</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM</p>\n            </li>\n            <li>\n               <p>PLATFORM</p>\n            </li>\n            <li>\n               <p>REGION</p>\n            </li>\n            <li>\n               <p>SERVICE</p>\n            </li>\n            <li>\n               <p>TAG</p>\n            </li>\n            <li>\n               <p>TENANCY</p>\n            </li>\n         </ul>\n         <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code>\n      operation. </p>"
             }
         },
         "com.amazonaws.costexplorer#GetReservationCoverageRequest": {
@@ -6261,7 +6309,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the Savings Plans covered for your account. This enables you to see how much of\n      your cost is covered by a Savings Plan. An organization’s management account can see the\n      coverage of the associated member accounts. This supports dimensions, Cost Categories, and\n      nested expressions. For any time period, you can filter data for Savings Plans usage with the\n      following dimensions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>REGION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_FAMILY</code>\n               </p>\n            </li>\n         </ul>\n         <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code>\n      operation.</p>",
+                "smithy.api#documentation": "<p>Retrieves the Savings Plans covered for your account. This enables you to see how much of\n      your cost is covered by a Savings Plan. An organization’s management account can see the\n      coverage of the associated member accounts. This supports dimensions, cost categories, and\n      nested expressions. For any time period, you can filter data for Savings Plans usage with the\n      following dimensions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>REGION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_FAMILY</code>\n               </p>\n            </li>\n         </ul>\n         <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code>\n      operation.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7177,6 +7225,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "BackfillRequests",
                     "pageSize": "MaxResults"
                 }
             }
@@ -7242,6 +7291,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CostAllocationTags",
                     "pageSize": "MaxResults"
                 }
             }
@@ -7318,10 +7368,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the name, Amazon Resource Name (ARN), <code>NumberOfRules</code> and effective\n      dates of all Cost Categories defined in the account. You have the option to use\n        <code>EffectiveOn</code> to return a list of Cost Categories that were active on a specific\n      date. If there is no <code>EffectiveOn</code> specified, you’ll see Cost Categories that are\n      effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code>\n      is omitted in the response. <code>ListCostCategoryDefinitions</code> supports pagination. The\n      request can have a <code>MaxResults</code> range up to 100.</p>",
+                "smithy.api#documentation": "<p>Returns the name, Amazon Resource Name (ARN), <code>NumberOfRules</code> and effective\n      dates of all cost categories defined in the account. You have the option to use\n      <code>EffectiveOn</code> and <code>SupportedResourceTypes</code> to return a list of cost categories that were active on a specific\n      date. If there is no <code>EffectiveOn</code> specified, you’ll see cost categories that are\n      effective on the current date. If cost category is still effective, <code>EffectiveEnd</code>\n      is omitted in the response. <code>ListCostCategoryDefinitions</code> supports pagination. The\n      request can have a <code>MaxResults</code> range up to 100.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CostCategoryReferences",
                     "pageSize": "MaxResults"
                 }
             }
@@ -7332,7 +7383,7 @@
                 "EffectiveOn": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the Cost Category was effective. </p>"
+                        "smithy.api#documentation": "<p>The date when the cost category was effective. </p>"
                     }
                 },
                 "NextToken": {
@@ -7346,6 +7397,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of entries a paginated response contains. </p>"
                     }
+                },
+                "SupportedResourceTypes": {
+                    "target": "com.amazonaws.costexplorer#ResourceTypesFilterInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Filter cost category definitions that are supported by given resource types based on the latest version. If the filter is present, the result only includes Cost Categories that supports input resource type. If the filter isn't provided, no filtering is applied. The valid values are <code>billing:rispgroupsharing</code>.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -7358,13 +7415,85 @@
                 "CostCategoryReferences": {
                     "target": "com.amazonaws.costexplorer#CostCategoryReferencesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to a Cost Category that contains enough information to identify the Cost\n      Category. </p>"
+                        "smithy.api#documentation": "<p>A reference to a cost category that contains enough information to identify the Cost\n      Category. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.costexplorer#NextPageToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when\n      the response from a previous call has more results than the maximum page size. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.costexplorer#ListCostCategoryResourceAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#ListCostCategoryResourceAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#ListCostCategoryResourceAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns resource associations of all cost categories defined in the account. You have the option to use <code>CostCategoryArn</code> to get the association for a specific cost category. <code>ListCostCategoryResourceAssociations</code> supports pagination. The request can have a <code>MaxResults</code> range up to 100.\n    </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CostCategoryResourceAssociations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#ListCostCategoryResourceAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "CostCategoryArn": {
+                    "target": "com.amazonaws.costexplorer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.\n    </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The number of entries a paginated response contains.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#ListCostCategoryResourceAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "CostCategoryResourceAssociations": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryResourceAssociations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A reference to a cost category association that contains information on an associated resource.\n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token to retrieve the next set of results.  Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.\n    </p>"
                     }
                 }
             },
@@ -9030,6 +9159,30 @@
                 "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
             }
         },
+        "com.amazonaws.costexplorer#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[-a-zA-Z0-9/_]+:[-a-zA-Z0-9/_]+$"
+            }
+        },
+        "com.amazonaws.costexplorer#ResourceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#ResourceType"
+            }
+        },
+        "com.amazonaws.costexplorer#ResourceTypesFilterInput": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#ResourceType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.costexplorer#ResourceUtilization": {
             "type": "structure",
             "members": {
@@ -10622,7 +10775,7 @@
                 "MatchOptions": {
                     "target": "com.amazonaws.costexplorer#MatchOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. <code>MatchOptions</code>\n            is only applicable for actions related to Cost Category. The default values for\n                <code>MatchOptions</code> are <code>EQUALS</code> and\n            <code>CASE_SENSITIVE</code>.</p>"
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. <code>MatchOptions</code>\n            is only applicable for actions related to cost category. The default values for\n                <code>MatchOptions</code> are <code>EQUALS</code> and\n            <code>CASE_SENSITIVE</code>.</p>"
                     }
                 }
             },
@@ -11142,7 +11295,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing Cost Category. Changes made to the Cost Category rules will be used to\n      categorize the current month’s expenses and future expenses. This won’t change categorization\n      for the previous months.</p>"
+                "smithy.api#documentation": "<p>Updates an existing cost category. Changes made to the cost category rules will be used to\n      categorize the current month’s expenses and future expenses. This won’t change categorization\n      for the previous months.</p>"
             }
         },
         "com.amazonaws.costexplorer#UpdateCostCategoryDefinitionRequest": {
@@ -11151,14 +11304,14 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>"
                     }
                 },
                 "RuleVersion": {
@@ -11180,7 +11333,7 @@
                 "SplitChargeRules": {
                     "target": "com.amazonaws.costexplorer#CostCategorySplitChargeRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The split charge rules used to allocate your charges between your Cost Category values.\n    </p>"
+                        "smithy.api#documentation": "<p> The split charge rules used to allocate your charges between your cost category values.\n    </p>"
                     }
                 }
             },
@@ -11194,13 +11347,13 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>"
                     }
                 },
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month).</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective start date. It can only be a billing start date (first day of the month).</p>"
                     }
                 }
             },

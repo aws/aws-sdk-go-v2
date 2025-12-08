@@ -649,8 +649,20 @@
         "com.amazonaws.partnercentralselling#Amount": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(0|([1-9][0-9]{0,30}))(\\.[0-9]{0,2})?$",
+                "smithy.api#pattern": "^((0|([1-9][0-9]{0,30}))(\\.[0-9]{0,2})?)?$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#AmountMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.partnercentralselling#MonetaryAmount"
+            },
+            "traits": {
+                "smithy.api#documentation": "Maps spend amounts to AWS programs and strategic initiatives"
             }
         },
         "com.amazonaws.partnercentralselling#ApnPrograms": {
@@ -1292,6 +1304,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents a score assigned by AWS to indicate the level of engagement and potential success for the opportunity. This score helps partners prioritize their efforts.</p>"
                     }
+                },
+                "AwsProductsSpendInsightsBySource": {
+                    "target": "com.amazonaws.partnercentralselling#AwsProductsSpendInsightsBySource"
                 }
             },
             "traits": {
@@ -1529,6 +1544,63 @@
                 "target": "com.amazonaws.partnercentralselling#AwsTeamMember"
             }
         },
+        "com.amazonaws.partnercentralselling#AwsProductDetails": {
+            "type": "structure",
+            "members": {
+                "ProductCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "AWS Partner Central product identifier used for opportunity association",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Pricing Calculator service code (links to original calculator URL)"
+                    }
+                },
+                "Categories": {
+                    "target": "com.amazonaws.partnercentralselling#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "List of program and pathway categories this product is eligible for",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 20
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Amount": {
+                    "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
+                    "traits": {
+                        "smithy.api#documentation": "Baseline service cost before optimizations (may be null for AWS-sourced predictions)"
+                    }
+                },
+                "OptimizedAmount": {
+                    "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
+                    "traits": {
+                        "smithy.api#documentation": "Service cost after applying optimizations (may be null for AWS-sourced predictions)"
+                    }
+                },
+                "PotentialSavingsAmount": {
+                    "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
+                    "traits": {
+                        "smithy.api#documentation": "Service-specific cost reduction through optimizations (may be null for AWS-sourced predictions)"
+                    }
+                },
+                "Optimizations": {
+                    "target": "com.amazonaws.partnercentralselling#AwsProductOptimizationsList",
+                    "traits": {
+                        "smithy.api#documentation": "List of specific optimization recommendations for this product",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "AWS services with program eligibility indicators (MAP, modernization pathways), cost estimates, and optimization recommendations."
+            }
+        },
         "com.amazonaws.partnercentralselling#AwsProductIdentifier": {
             "type": "string"
         },
@@ -1536,6 +1608,129 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.partnercentralselling#AwsProductIdentifier"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsProductInsights": {
+            "type": "structure",
+            "members": {
+                "CurrencyCode": {
+                    "target": "com.amazonaws.partnercentralselling#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "ISO 4217 currency code (e.g., \"USD\") ensuring consistent representation across calculations",
+                        "smithy.api#pattern": "^USD$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Frequency": {
+                    "target": "com.amazonaws.partnercentralselling#PaymentFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "Time period for spend amounts: \"Monthly\" or \"Annually\"",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalAmount": {
+                    "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
+                    "traits": {
+                        "smithy.api#documentation": "Total estimated spend for this source before optimizations"
+                    }
+                },
+                "TotalOptimizedAmount": {
+                    "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
+                    "traits": {
+                        "smithy.api#documentation": "Total estimated spend after applying recommended optimizations"
+                    }
+                },
+                "TotalPotentialSavingsAmount": {
+                    "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
+                    "traits": {
+                        "smithy.api#documentation": "Quantified savings achievable through implementing optimizations"
+                    }
+                },
+                "TotalAmountByCategory": {
+                    "target": "com.amazonaws.partnercentralselling#AmountMap",
+                    "traits": {
+                        "smithy.api#documentation": "Spend amounts mapped to AWS programs and modernization pathways",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsProducts": {
+                    "target": "com.amazonaws.partnercentralselling#AwsProductsList",
+                    "traits": {
+                        "smithy.api#documentation": "Product-level details including costs and optimization recommendations",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Comprehensive spend analysis for a single source (AWS or Partner) including total amounts, optimization savings, program category breakdowns, and detailed product-level insights."
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsProductOptimization": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Human-readable explanation of the optimization strategy",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SavingsAmount": {
+                    "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
+                    "traits": {
+                        "smithy.api#documentation": "Quantified cost savings achievable by implementing this optimization",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Details for a specific optimization recommendation"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsProductOptimizationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#AwsProductOptimization"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of optimization recommendations",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsProductsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#AwsProductDetails"
+            },
+            "traits": {
+                "smithy.api#documentation": "AwsProductDetailsList of AWS services with program eligibility indicators (MAP, modernization pathways), cost estimates, and optimization recommendations.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsProductsSpendInsightsBySource": {
+            "type": "structure",
+            "members": {
+                "Partner": {
+                    "target": "com.amazonaws.partnercentralselling#AwsProductInsights",
+                    "traits": {
+                        "smithy.api#documentation": "Partner-sourced insights derived from Pricing Calculator URLs including detailed service costs and optimizations"
+                    }
+                },
+                "AWS": {
+                    "target": "com.amazonaws.partnercentralselling#AwsProductInsights",
+                    "traits": {
+                        "smithy.api#documentation": "AI-generated insights including recommended products from AWS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Source-separated spend insights that provide independent analysis for AWS predictions and partner estimates"
             }
         },
         "com.amazonaws.partnercentralselling#AwsSubmission": {
@@ -6273,14 +6468,21 @@
                 "smithy.api#pattern": "^(?s).{1,255}$"
             }
         },
+        "com.amazonaws.partnercentralselling#EstimationUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^https://calculator\\.aws/#/estimate\\?id=[a-f0-9]{32,64}$"
+            }
+        },
         "com.amazonaws.partnercentralselling#ExpectedCustomerSpend": {
             "type": "structure",
             "members": {
                 "Amount": {
                     "target": "com.amazonaws.partnercentralselling#Amount",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the estimated monthly revenue that the partner expects to earn from the opportunity. This helps in forecasting financial returns.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Represents the estimated monthly revenue that the partner expects to earn from the opportunity. This helps in forecasting financial returns.</p>"
                     }
                 },
                 "CurrencyCode": {
@@ -6307,7 +6509,7 @@
                     }
                 },
                 "EstimationUrl": {
-                    "target": "com.amazonaws.partnercentralselling#WebsiteUrl",
+                    "target": "com.amazonaws.partnercentralselling#EstimationUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>A URL providing additional information or context about the spend estimation.</p>"
                     }
@@ -9988,6 +10190,13 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.partnercentralselling#MonetaryAmount": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(0|([1-9][0-9]{0,30}))(\\.[0-9]{0,2})?$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.partnercentralselling#MonetaryValue": {

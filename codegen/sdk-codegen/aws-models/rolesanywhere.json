@@ -85,7 +85,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <i>profile</i>, a list of the roles that Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:CreateProfile</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Creates a <i>profile</i>, a list of the roles that Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateProfile</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/profiles",
                     "method": "POST",
@@ -106,7 +106,7 @@
                 "requireInstanceProperties": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether instance properties are required in temporary credential requests with this profile. </p>"
+                        "smithy.api#documentation": "<p>Unused, saved for future use. Will likely specify whether instance properties are required in temporary credential requests with this profile. </p>"
                     }
                 },
                 "sessionPolicy": {
@@ -131,7 +131,7 @@
                 "durationSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the \n<a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object\">CreateSession API documentation</a>\npage for more details. In requests, if this value is not provided, the default value will be 3600. </p>",
+                        "smithy.api#documentation": "<p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object\">CreateSession API documentation</a> page for more details. In requests, if this value is not provided, the default value will be 3600. </p>",
                         "smithy.api#range": {
                             "min": 900,
                             "max": 43200
@@ -175,7 +175,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a trust anchor to establish trust between IAM Roles Anywhere and\n         your certificate authority (CA). You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by\n         the CA in exchange for temporary Amazon Web Services credentials.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:CreateTrustAnchor</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Creates a trust anchor to establish trust between IAM Roles Anywhere and your certificate authority (CA). You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateTrustAnchor</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/trustanchors",
                     "method": "POST",
@@ -510,7 +510,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a certificate revocation list (CRL).</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:DeleteCrl</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Deletes a certificate revocation list (CRL).</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteCrl</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/crl/{crlId}",
                     "method": "DELETE"
@@ -535,7 +535,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a profile.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:DeleteProfile</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Deletes a profile.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteProfile</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/profile/{profileId}",
                     "method": "DELETE"
@@ -560,7 +560,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a trust anchor.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:DeleteTrustAnchor</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Deletes a trust anchor.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteTrustAnchor</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/trustanchor/{trustAnchorId}",
                     "method": "DELETE"
@@ -585,7 +585,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables a certificate revocation list (CRL).</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:DisableCrl</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Disables a certificate revocation list (CRL).</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableCrl</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/crl/{crlId}/disable",
                     "method": "POST"
@@ -609,7 +609,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables a profile. When disabled, temporary credential requests with this profile fail.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:DisableProfile</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Disables a profile. When disabled, temporary credential requests with this profile fail.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableProfile</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/profile/{profileId}/disable",
                     "method": "POST"
@@ -633,7 +633,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables a trust anchor. When disabled, temporary credential requests specifying this trust anchor are unauthorized.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:DisableTrustAnchor</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Disables a trust anchor. When disabled, temporary credential requests specifying this trust anchor are unauthorized.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableTrustAnchor</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/trustanchor/{trustAnchorId}/disable",
                     "method": "POST"
@@ -657,7 +657,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables a certificate revocation list (CRL). When enabled, certificates stored in the CRL are unauthorized to receive session credentials.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:EnableCrl</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Enables a certificate revocation list (CRL). When enabled, certificates stored in the CRL are unauthorized to receive session credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableCrl</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/crl/{crlId}/enable",
                     "method": "POST"
@@ -681,7 +681,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables temporary credential requests for a profile. </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:EnableProfile</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Enables temporary credential requests for a profile. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableProfile</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/profile/{profileId}/enable",
                     "method": "POST"
@@ -705,7 +705,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables a trust anchor. When enabled, certificates in the trust anchor chain are authorized for trust validation. </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:EnableTrustAnchor</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Enables a trust anchor. When enabled, certificates in the trust anchor chain are authorized for trust validation. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableTrustAnchor</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/trustanchor/{trustAnchorId}/enable",
                     "method": "POST"
@@ -726,7 +726,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a certificate revocation list (CRL).</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:GetCrl</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Gets a certificate revocation list (CRL).</p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetCrl</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/crl/{crlId}",
                     "method": "GET"
@@ -751,7 +751,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a profile.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:GetProfile</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Gets a profile.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetProfile</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/profile/{profileId}",
                     "method": "GET"
@@ -776,7 +776,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a <i>subject</i>, which associates a certificate identity with\n         authentication attempts. The subject stores auditing information such as the status\n         of the last authentication attempt, the certificate data used in the attempt, and the\n         last time the associated identity attempted authentication. </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:GetSubject</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Gets a <i>subject</i>, which associates a certificate identity with authentication attempts. The subject stores auditing information such as the status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetSubject</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/subject/{subjectId}",
                     "method": "GET"
@@ -804,7 +804,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a trust anchor.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:GetTrustAnchor</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Gets a trust anchor.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetTrustAnchor</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/trustanchor/{trustAnchorId}",
                     "method": "GET"
@@ -829,7 +829,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports the certificate revocation list (CRL). A CRL is a list of certificates that have\n         been revoked by the issuing certificate Authority (CA).In order to be properly imported, a CRL must be in PEM \n         format. IAM Roles Anywhere\n         validates against the CRL before issuing credentials. </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ImportCrl</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Imports the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate Authority (CA).In order to be properly imported, a CRL must be in PEM format. IAM Roles Anywhere validates against the CRL before issuing credentials. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:ImportCrl</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/crls",
                     "method": "POST",
@@ -956,7 +956,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all certificate revocation lists (CRL) in the authenticated account and Amazon Web Services Region.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ListCrls</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Lists all certificate revocation lists (CRL) in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListCrls</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/crls",
                     "method": "GET"
@@ -1003,7 +1003,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all profiles in the authenticated account and Amazon Web Services Region.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ListProfiles</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Lists all profiles in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListProfiles</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/profiles",
                     "method": "GET"
@@ -1073,7 +1073,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the subjects in the authenticated account and Amazon Web Services Region.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ListSubjects</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Lists the subjects in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListSubjects</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/subjects",
                     "method": "GET"
@@ -1123,7 +1123,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags attached to the resource.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ListTagsForResource</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Lists the tags attached to the resource.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListTagsForResource</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/ListTagsForResource",
                     "method": "GET"
@@ -1172,7 +1172,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the trust anchors in the authenticated account and Amazon Web Services Region.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ListTrustAnchors</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Lists the trust anchors in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListTrustAnchors</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/trustanchors",
                     "method": "GET"
@@ -1300,12 +1300,12 @@
                 "channel": {
                     "target": "com.amazonaws.rolesanywhere#NotificationChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specified channel of notification.\n      IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p>\n         <note>\n            <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The specified channel of notification. IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p> <note> <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels.</p> </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Customizable notification settings that will be applied to notification events.\n         IAM Roles Anywhere consumes these settings while notifying across multiple channels - CloudWatch metrics, EventBridge, and Health Dashboard.\n      </p>"
+                "smithy.api#documentation": "<p> Customizable notification settings that will be applied to notification events. IAM Roles Anywhere consumes these settings while notifying across multiple channels - CloudWatch metrics, EventBridge, and Health Dashboard. </p>"
             }
         },
         "com.amazonaws.rolesanywhere#NotificationSettingDetail": {
@@ -1338,13 +1338,13 @@
                 "channel": {
                     "target": "com.amazonaws.rolesanywhere#NotificationChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specified channel of notification.\n      IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p>\n         <note>\n            <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The specified channel of notification. IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p> <note> <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels.</p> </note>"
                     }
                 },
                 "configuredBy": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principal that configured the notification setting.\n      For default settings configured by IAM Roles Anywhere,\n      the value is <code>rolesanywhere.amazonaws.com</code>, and\n      for customized notifications settings, it is the respective account ID.\n      </p>",
+                        "smithy.api#documentation": "<p>The principal that configured the notification setting. For default settings configured by IAM Roles Anywhere, the value is <code>rolesanywhere.amazonaws.com</code>, and for customized notifications settings, it is the respective account ID. </p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 200
@@ -1353,7 +1353,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The state of a notification setting.</p>\n         <p>A notification setting includes information such as event name, threshold, status of\n         the notification setting, and the channel to notify.</p>"
+                "smithy.api#documentation": "<p>The state of a notification setting.</p> <p>A notification setting includes information such as event name, threshold, status of the notification setting, and the channel to notify.</p>"
             }
         },
         "com.amazonaws.rolesanywhere#NotificationSettingDetails": {
@@ -1386,7 +1386,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A notification setting key to reset.\n         A notification setting key includes the event and the channel.\n      </p>"
+                "smithy.api#documentation": "<p>A notification setting key to reset. A notification setting key includes the event and the channel. </p>"
             }
         },
         "com.amazonaws.rolesanywhere#NotificationSettingKeys": {
@@ -1487,7 +1487,7 @@
                 "requireInstanceProperties": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether instance properties are required in temporary credential requests with this profile. </p>"
+                        "smithy.api#documentation": "<p>Unused, saved for future use. Will likely specify whether instance properties are required in temporary credential requests with this profile. </p>"
                     }
                 },
                 "enabled": {
@@ -1537,7 +1537,7 @@
                 "durationSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the \n<a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object\">CreateSession API documentation</a>\npage for more details. In requests, if this value is not provided, the default value will be 3600. </p>"
+                        "smithy.api#documentation": "<p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object\">CreateSession API documentation</a> page for more details. In requests, if this value is not provided, the default value will be 3600. </p>"
                     }
                 },
                 "acceptRoleSessionName": {
@@ -1594,7 +1594,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Put an entry in the attribute mapping rules that will be enforced by a given profile. \n      A mapping specifies a certificate field and one or more specifiers that have contextual meanings.</p>",
+                "smithy.api#documentation": "<p>Put an entry in the attribute mapping rules that will be enforced by a given profile. A mapping specifies a certificate field and one or more specifiers that have contextual meanings.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "PutAttributeMapping - Adds a custom attribute mapping rule",
@@ -1710,7 +1710,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches a list of <i>notification settings</i> to a trust anchor.</p>\n         <p>A notification setting includes information such as event name, threshold, status of\n         the notification setting, and the channel to notify.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:PutNotificationSettings</code>.\n         </p>",
+                "smithy.api#documentation": "<p>Attaches a list of <i>notification settings</i> to a trust anchor.</p> <p>A notification setting includes information such as event name, threshold, status of the notification setting, and the channel to notify.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:PutNotificationSettings</code>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "PutNotificationSettings - Adds custom notification settings",
@@ -1820,7 +1820,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Resets the <i>custom notification setting</i> to IAM Roles Anywhere default setting.\n      </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ResetNotificationSettings</code>.\n         </p>",
+                "smithy.api#documentation": "<p>Resets the <i>custom notification setting</i> to IAM Roles Anywhere default setting. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:ResetNotificationSettings</code>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "ResetNotificationSettings - Resets to IAM Roles Anywhere defined default notification settings",
@@ -1885,7 +1885,7 @@
                 "notificationSettingKeys": {
                     "target": "com.amazonaws.rolesanywhere#NotificationSettingKeys",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of notification setting keys to reset.\n         A notification setting key includes the event and the channel.\n      </p>",
+                        "smithy.api#documentation": "<p>A list of notification setting keys to reset. A notification setting key includes the event and the channel. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1997,7 +1997,7 @@
                     "name": "rolesanywhere"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Identity and Access Management Roles Anywhere provides a secure way for your workloads such as\n         servers, containers, and applications that run outside of Amazon Web Services to obtain\n         temporary Amazon Web Services credentials. Your workloads can use the same IAM policies and roles you have for native Amazon Web Services applications to access Amazon Web Services resources. Using IAM Roles Anywhere eliminates the need to\n         manage long-term credentials for workloads running outside of Amazon Web Services.</p>\n         <p>\n         To use IAM Roles Anywhere, your workloads must use X.509 certificates\n         issued by their certificate authority (CA). You register the CA with IAM\n         Roles Anywhere as a trust anchor to establish trust between your public key infrastructure\n         (PKI) and IAM Roles Anywhere. If you don't manage your own PKI system, you\n         can use Private Certificate Authority to create a CA and then use that to establish trust with\n         IAM Roles Anywhere.\n      </p>\n         <p>This guide describes the IAM Roles Anywhere operations that you can call\n         programmatically. For more information about IAM Roles Anywhere, see the\n            <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/introduction.html\">IAM Roles Anywhere User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Identity and Access Management Roles Anywhere provides a secure way for your workloads such as servers, containers, and applications that run outside of Amazon Web Services to obtain temporary Amazon Web Services credentials. Your workloads can use the same IAM policies and roles you have for native Amazon Web Services applications to access Amazon Web Services resources. Using IAM Roles Anywhere eliminates the need to manage long-term credentials for workloads running outside of Amazon Web Services.</p> <p> To use IAM Roles Anywhere, your workloads must use X.509 certificates issued by their certificate authority (CA). You register the CA with IAM Roles Anywhere as a trust anchor to establish trust between your public key infrastructure (PKI) and IAM Roles Anywhere. If you don't manage your own PKI system, you can use Private Certificate Authority to create a CA and then use that to establish trust with IAM Roles Anywhere. </p> <p>This guide describes the IAM Roles Anywhere operations that you can call programmatically. For more information about IAM Roles Anywhere, see the <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/introduction.html\">IAM Roles Anywhere User Guide</a>.</p>",
                 "smithy.api#title": "IAM Roles Anywhere",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2900,14 +2900,14 @@
                         "smithy.api#documentation": "<p>The PEM-encoded data for the certificate anchor. Included for trust anchors of type <code>CERTIFICATE_BUNDLE</code>. </p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 8000
+                            "max": 16000
                         }
                     }
                 },
                 "acmPcaArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The root certificate of the Private Certificate Authority specified by this ARN is used in trust\n         validation for temporary credential requests. Included for trust anchors of type <code>AWS_ACM_PCA</code>.\n      </p>"
+                        "smithy.api#documentation": "<p> The root certificate of the Private Certificate Authority specified by this ARN is used in trust validation for temporary credential requests. Included for trust anchors of type <code>AWS_ACM_PCA</code>. </p>"
                     }
                 }
             },
@@ -3153,7 +3153,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches tags to a resource.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:TagResource</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Attaches tags to a resource.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:TagResource</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/TagResource",
                     "method": "POST",
@@ -3367,7 +3367,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes tags from the resource.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:UntagResource</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Removes tags from the resource.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UntagResource</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/UntagResource",
                     "method": "POST",
@@ -3418,7 +3418,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the certificate revocation list (CRL). A CRL is a list of certificates that have\n         been revoked by the issuing certificate authority (CA). IAM Roles Anywhere\n         validates against the CRL before issuing credentials.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:UpdateCrl</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Updates the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate authority (CA). IAM Roles Anywhere validates against the CRL before issuing credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateCrl</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/crl/{crlId}",
                     "method": "PATCH"
@@ -3474,7 +3474,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a <i>profile</i>, a list of the roles that IAM\n         Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with\n            IAM managed policies.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:UpdateProfile</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Updates a <i>profile</i>, a list of the roles that IAM Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateProfile</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/profile/{profileId}",
                     "method": "PATCH"
@@ -3524,7 +3524,7 @@
                 "durationSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the \n<a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object\">CreateSession API documentation</a>\npage for more details. In requests, if this value is not provided, the default value will be 3600. </p>",
+                        "smithy.api#documentation": "<p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object\">CreateSession API documentation</a> page for more details. In requests, if this value is not provided, the default value will be 3600. </p>",
                         "smithy.api#range": {
                             "min": 900,
                             "max": 43200
@@ -3559,7 +3559,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a trust anchor. You establish trust between IAM Roles Anywhere\n         and your certificate authority (CA) by configuring a trust anchor. You can define a trust\n         anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a\n         CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor\n         using certificates issued by the CA in exchange for temporary Amazon Web Services\n         credentials.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:UpdateTrustAnchor</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Updates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateTrustAnchor</code>. </p>",
                 "smithy.api#http": {
                     "uri": "/trustanchor/{trustAnchorId}",
                     "method": "PATCH"
