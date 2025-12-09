@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/signin v1.0.4
 	github.com/aws/aws-sdk-go-v2/service/sso v1.30.7
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.12
-	github.com/aws/aws-sdk-go-v2/service/sts v1.41.4
+	github.com/aws/aws-sdk-go-v2/service/sts v1.41.5
 	github.com/aws/smithy-go v1.24.0
 )
 

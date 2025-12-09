@@ -1,3 +1,7 @@
+# v1.113.1 (2025-12-09)
+
+* No change notes available for this release.
+
 # v1.113.0 (2025-12-08)
 
 * **Feature**: Adding support for tagging RDS Instance/Cluster Automated Backups

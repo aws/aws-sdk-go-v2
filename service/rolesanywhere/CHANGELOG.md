@@ -1,3 +1,7 @@
+# v1.22.1 (2025-12-09)
+
+* No change notes available for this release.
+
 # v1.22.0 (2025-12-08)
 
 * **Feature**: Increases certificate string length for trust anchor source data to support ML-DSA certificates.

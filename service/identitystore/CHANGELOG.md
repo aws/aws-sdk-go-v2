@@ -1,3 +1,7 @@
+# v1.35.1 (2025-12-09)
+
+* No change notes available for this release.
+
 # v1.35.0 (2025-12-08)
 
 * **Feature**: Updating AWS Identity Store APIs to support Attribute Extensions capability, with the first release adding Enterprise Attributes. This launch aligns Identity Store APIs with SCIM for enterprise attributes, reducing cases when customers are forced to use SCIM due to lack of SigV4 API support.

@@ -1,8 +1,0 @@
-{
-    "id": "f6d376ef-c519-4026-8f9d-3abf618c39fc",
-    "type": "feature",
-    "description": "Amazon Route 53 now supports the EU (Germany) Region (eusc-de-east-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region",
-    "modules": [
-        "service/route53"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.32.0 (2025-12-09)
+
+* **Feature**: Token Exchange introduces seamless token exchange capabilities for IVS RTX, enabling customers to upgrade or downgrade token capabilities and update token attributes within the IVS client SDK without forcing clients to disconnect and reconnect.
+
 # v1.31.9 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

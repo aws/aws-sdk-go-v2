@@ -1,3 +1,7 @@
+# v1.70.0 (2025-12-09)
+
+* **Feature**: Adding support for Ec2LaunchTemplate Version field
+
 # v1.69.1 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

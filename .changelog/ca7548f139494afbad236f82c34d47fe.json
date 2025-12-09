@@ -1,8 +1,0 @@
-{
-    "id": "ca7548f1-3949-4afb-ad23-6f82c34d47fe",
-    "type": "feature",
-    "description": "Adding support for Ec2LaunchTemplate Version field",
-    "modules": [
-        "service/guardduty"
-    ]
-}

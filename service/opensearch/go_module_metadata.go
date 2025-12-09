@@ -3,4 +3,4 @@
 package opensearch
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.55.1"
+const goModuleVersion = "1.55.2"

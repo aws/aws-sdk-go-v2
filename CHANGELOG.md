@@ -1,3 +1,22 @@
+# Release (2025-12-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.30.0](service/account/CHANGELOG.md#v1300-2025-12-09)
+  * **Feature**: This release adds a new API (GetGovCloudAccountInformation) used to retrieve information about a linked GovCloud account from the standard AWS partition.
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.53.0](service/appsync/CHANGELOG.md#v1530-2025-12-09)
+  * **Feature**: Update Event API to require EventConfig parameter in creation and update requests.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.70.0](service/guardduty/CHANGELOG.md#v1700-2025-12-09)
+  * **Feature**: Adding support for Ec2LaunchTemplate Version field
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.32.0](service/ivsrealtime/CHANGELOG.md#v1320-2025-12-09)
+  * **Feature**: Token Exchange introduces seamless token exchange capabilities for IVS RTX, enabling customers to upgrade or downgrade token capabilities and update token attributes within the IVS client SDK without forcing clients to disconnect and reconnect.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.39.0](service/mgn/CHANGELOG.md#v1390-2025-12-09)
+  * **Feature**: Added parameters encryption, IPv4/IPv6 protocol configuration, and enhanced tagging support for replication operations.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.62.0](service/route53/CHANGELOG.md#v1620-2025-12-09)
+  * **Feature**: Amazon Route 53 now supports the EU (Germany) Region (eusc-de-east-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region
+
 # Release (2025-12-08)
 
 ## General Highlights

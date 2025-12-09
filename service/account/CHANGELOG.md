@@ -1,3 +1,7 @@
+# v1.30.0 (2025-12-09)
+
+* **Feature**: This release adds a new API (GetGovCloudAccountInformation) used to retrieve information about a linked GovCloud account from the standard AWS partition.
+
 # v1.29.8 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
