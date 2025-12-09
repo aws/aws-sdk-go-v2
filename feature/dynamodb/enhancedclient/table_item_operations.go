@@ -3,6 +3,7 @@ package enhancedclient
 import (
 	"context"
 	"fmt"
+	"iter"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression"
@@ -15,7 +16,6 @@ func (t *Table[T]) GetItem(ctx context.Context, m Map, optFns ...func(*dynamodb.
 		TableName: t.options.Schema.TableName(),
 		Key:       m,
 	}, optFns...)
-
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,6 @@ func (t *Table[T]) GetItemWithProjection(ctx context.Context, m Map, proj expres
 		ExpressionAttributeNames: b.Names(),
 		ProjectionExpression:     b.Projection(),
 	}, optFns...)
-
 	if err != nil {
 		return nil, err
 	}
@@ -133,7 +132,6 @@ func (t *Table[T]) UpdateItem(ctx context.Context, item *T, optFns ...func(*dyna
 		ReturnValues:                        types.ReturnValueAllNew,
 		ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailureAllOld,
 	}, optFns...)
-
 	if err != nil {
 		return nil, err
 	}
@@ -176,49 +174,113 @@ func (t *Table[T]) DeleteItemByKey(ctx context.Context, m Map, optFns ...func(*d
 	return err
 }
 
-func (t *Table[T]) Scan(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) ([]*T, error) {
-	var exclusiveStartKey map[string]types.AttributeValue
+func (t *Table[T]) Scan(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+	return func(yield func(ItemResult[T]) bool) {
+		var lastEvaluatedKey map[string]types.AttributeValue
 
-	out := make([]*T, 0)
-	done := false
-
-	for !done {
-		res, err := t.client.Scan(ctx, &dynamodb.ScanInput{
-			TableName:                 t.options.Schema.TableName(),
-			ConsistentRead:            aws.Bool(true),
-			ExclusiveStartKey:         exclusiveStartKey,
-			ExpressionAttributeNames:  expr.Names(),
-			ExpressionAttributeValues: expr.Values(),
-			FilterExpression:          expr.Filter(),
-			ProjectionExpression:      expr.Projection(),
-			Select:                    types.SelectAllAttributes,
-			//ReturnConsumedCapacity:    "",
-			//TotalSegments:          nil,
-			//Segment:                   nil,
-			//Limit:                     aws.Int32(5),
-		}, optFns...)
-
-		if err != nil {
-			return nil, err
-		}
-
-		exclusiveStartKey = res.LastEvaluatedKey
-		done = len(exclusiveStartKey) == 0
-
-		for idx := range res.Items {
-			item, err := t.options.Schema.Decode(res.Items[idx])
-			if err != nil {
-				return nil, err
+		for {
+			scanInput := &dynamodb.ScanInput{
+				TableName:                 t.options.Schema.TableName(),
+				ConsistentRead:            aws.Bool(true),
+				ExclusiveStartKey:         lastEvaluatedKey,
+				Select:                    types.SelectAllAttributes,
+				FilterExpression:          expr.Filter(),
+				ProjectionExpression:      expr.Projection(),
+				ExpressionAttributeNames:  expr.Names(),
+				ExpressionAttributeValues: expr.Values(),
 			}
 
-			err = t.applyAfterReadExtensions(item)
+			res, err := t.client.Scan(ctx, scanInput, optFns...)
 			if err != nil {
-				return nil, err
+				if !yield(ItemResult[T]{err: err}) {
+					return
+				}
+
+				return
 			}
 
-			out = append(out, item)
+			for _, item := range res.Items {
+				i, err := t.options.Schema.Decode(item)
+				if err != nil {
+					if !yield(ItemResult[T]{err: err}) {
+						return
+					}
+
+					continue
+				}
+
+				if err := t.applyAfterReadExtensions(i); err != nil {
+					if !yield(ItemResult[T]{err: err}) {
+						return
+					}
+
+					continue
+				}
+
+				if !yield(ItemResult[T]{item: *i}) {
+					return
+				}
+			}
+
+			lastEvaluatedKey = res.LastEvaluatedKey
+			if lastEvaluatedKey == nil {
+				return
+			}
 		}
 	}
+}
 
-	return out, nil
+func (t *Table[T]) Query(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+	return func(yield func(ItemResult[T]) bool) {
+		var lastEvaluatedKey map[string]types.AttributeValue
+
+		for {
+			res, err := t.client.Query(ctx, &dynamodb.QueryInput{
+				TableName:                 t.options.Schema.TableName(),
+				ConsistentRead:            aws.Bool(true),
+				ExclusiveStartKey:         lastEvaluatedKey,
+				KeyConditionExpression:    expr.KeyCondition(),
+				ExpressionAttributeNames:  expr.Names(),
+				ExpressionAttributeValues: expr.Values(),
+				FilterExpression:          expr.Filter(),
+				ProjectionExpression:      expr.Projection(),
+				Select:                    types.SelectAllAttributes,
+			}, optFns...)
+			if err != nil {
+				if !yield(ItemResult[T]{err: err}) {
+					return
+				}
+
+				return
+			}
+
+			for _, item := range res.Items {
+				i, err := t.options.Schema.Decode(item)
+				if err != nil {
+					if !yield(ItemResult[T]{err: err}) {
+						return
+					}
+
+					continue
+				}
+
+				if err := t.applyAfterReadExtensions(i); err != nil {
+					if !yield(ItemResult[T]{err: err}) {
+						return
+					}
+
+					continue
+				}
+
+				if !yield(ItemResult[T]{item: *i}) {
+					return
+				}
+			}
+
+			lastEvaluatedKey = res.LastEvaluatedKey
+			if lastEvaluatedKey == nil {
+				return
+			}
+		}
+	}
 }
