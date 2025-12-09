@@ -29,12 +29,12 @@ func NewTable[T any](client Client, fns ...func(options *TableOptions[T])) (*Tab
 		fn(&opts)
 	}
 
-	defaultResovers := []resolverFn[T]{
+	defaultResolvers := []resolverFn[T]{
 		resolveDefaultSchema[T],
 		resolveDefaultExtensionRegistry[T],
 	}
 
-	for _, fn := range defaultResovers {
+	for _, fn := range defaultResolvers {
 		if err := fn(&opts); err != nil {
 			return nil, err
 		}

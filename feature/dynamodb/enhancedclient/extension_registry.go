@@ -20,13 +20,6 @@ type ExtensionRegistry[T any] struct {
 	// PutItem | UpdateItem
 	beforeWriters []BeforeWriter[T]
 	afterWriters  []AfterWriter[T]
-	// @TODO: implement when Scan() and Query() are supported
-	// Scan
-	// beforeScanners []BeforeScanner
-	// afterScanners  []AfterScanner[T]
-	// Query
-	// beforeQueriers []BeforeQuerier
-	// afterQueriers  []AfterQuerier[T]
 }
 
 // AddBeforeReader registers a BeforeReader extension to be invoked before
@@ -60,30 +53,6 @@ func (er *ExtensionRegistry[T]) AddAfterWriter(aw AfterWriter[T]) *ExtensionRegi
 
 	return er
 }
-
-//func (er *ExtensionRegistry[T]) AddBeforeScanner(bs BeforeScanner) *ExtensionRegistry[T] {
-//	er.beforeScanners = append(er.beforeScanners, bs)
-//
-//	return er
-//}
-//
-//func (er *ExtensionRegistry[T]) AddAfterScanner(as AfterScanner[T]) *ExtensionRegistry[T] {
-//	er.afterScanners = append(er.afterScanners, as)
-//
-//	return er
-//}
-//
-//func (er *ExtensionRegistry[T]) AddBeforeQuerier(bq BeforeQuerier) *ExtensionRegistry[T] {
-//	er.beforeQueriers = append(er.beforeQueriers, bq)
-//
-//	return er
-//}
-//
-//func (er *ExtensionRegistry[T]) AddAfterQuerier(aq AfterQuerier[T]) *ExtensionRegistry[T] {
-//	er.afterQueriers = append(er.afterQueriers, aq)
-//
-//	return er
-//}
 
 // Clone creates a new ExtensionRegistry containing copies of all registered
 // extensions for type T. The returned registry has independent extension slices,

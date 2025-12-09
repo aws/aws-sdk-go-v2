@@ -67,12 +67,12 @@ func (s *Schema[T]) resolveKeySchema() error {
 
 	cp := len(primary)
 	if cp != 1 {
-		return fmt.Errorf("exactly 1 primary Field is expected, %d given, fields: %s", len(primary), strings.Join(primary, ", "))
+		return fmt.Errorf("exactly 1 partition field is expected, %d given, fields: %s", len(primary), strings.Join(primary, ", "))
 	}
 
 	cs := len(sort)
 	if cs > 1 {
-		return fmt.Errorf("exactly 0 or 1 sort Field is expected, %d given, fields: %s", len(sort), strings.Join(sort, ", "))
+		return fmt.Errorf("exactly 0 or 1 sort field is expected, %d given, fields: %s", len(sort), strings.Join(sort, ", "))
 	}
 
 	s.keySchema = make([]types.KeySchemaElement, cp+cs)

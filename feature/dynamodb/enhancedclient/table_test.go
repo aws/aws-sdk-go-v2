@@ -3,10 +3,10 @@ package enhancedclient
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression"
-	"strconv"
 	"testing"
 	"time"
+
+	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression"
 
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
@@ -17,13 +17,6 @@ func TestTableE2E(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode.")
 	}
-
-	cfg, err := config.LoadDefaultConfig(context.Background())
-	if err != nil {
-		t.Fatalf("Error loading config: %v", err)
-	}
-
-	c := dynamodb.NewFromConfig(cfg)
 
 	tableName := fmt.Sprintf("test_e2e_%s", time.Now().Format("2006_01_02_15_04_05"))
 
@@ -45,6 +38,11 @@ func TestTableE2E(t *testing.T) {
 		sch.WithTags(tags)
 	}
 
+	cfg, err := config.LoadDefaultConfig(context.Background())
+	if err != nil {
+		t.Fatalf("Error loading config: %v", err)
+	}
+	c := dynamodb.NewFromConfig(cfg)
 	tbl, err := NewTable[order](c, func(options *TableOptions[order]) {
 		options.Schema = sch
 	})
@@ -60,16 +58,6 @@ func TestTableE2E(t *testing.T) {
 	}
 	t.Logf("Table %s ready", tableName)
 
-	// defer table delete
-	defer func() {
-		t.Logf("Table %s will be deleted", tableName)
-		err = tbl.DeleteWithWait(context.Background(), time.Minute)
-		if err != nil {
-			t.Fatalf("DeleteWithWait() error: %v", err)
-		}
-		t.Logf("Table %s deleted", tableName)
-	}()
-
 	// exists
 	t.Logf("Table %s will be checked if it exists", tableName)
 	exists, err := tbl.Exists(context.Background())
@@ -81,16 +69,20 @@ func TestTableE2E(t *testing.T) {
 	}
 	t.Logf("Table %s exists", tableName)
 
-	<-time.After(time.Second * 5)
+	// defer table delete
+	defer func() {
+		t.Logf("Table %s will be deleted", tableName)
+		err = tbl.DeleteWithWait(context.Background(), time.Minute)
+		if err != nil {
+			t.Fatalf("DeleteWithWait() error: %v", err)
+		}
+		t.Logf("Table %s deleted", tableName)
+	}()
 
-	_, err = tbl.Describe(context.Background())
-	if err != nil {
-		t.Fatalf("Error describing table: %v", err)
-	}
-
-	// populate table
-	itemsToManage := 10
-	t.Logf("Will now write %d items", itemsToManage)
+	itemsToManage := 128
+	orderIds := make([]string, itemsToManage)
+	createdAts := make([]int64, itemsToManage)
+	// Put()
 	for i := range itemsToManage {
 		o := &order{
 			CustomerID:    fmt.Sprintf("CustomerID%d", i),
@@ -116,100 +108,93 @@ func TestTableE2E(t *testing.T) {
 
 		item, err := tbl.PutItem(context.Background(), o)
 		if err != nil {
-			t.Logf("Unable to PutItem() [%d]: %v", i, err)
+			t.Errorf("Unable to PutItem() [%d]: %v", i, err)
 			continue
 		}
+
+		orderIds[i] = item.OrderID
+		createdAts[i] = item.CreatedAt
+
 		t.Logf("PutItem: %s - %d", item.OrderID, item.CreatedAt)
 		t.Logf("\tVersion: %d - %s", item.Version, item.VersionString)
 		t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
 	}
 
-	// fetch all from table
-	items, err := tbl.Scan(context.Background(), expression.Expression{})
-	if err != nil {
-		t.Errorf("Scan() error: %v", err)
-		return
+	// Get() + Update()
+	for i := range itemsToManage {
+		m := Map{}.
+			With("order_id", orderIds[i]).
+			With("created_at", createdAts[i])
+		item, err := tbl.GetItem(context.Background(), m)
+		if err != nil {
+			t.Errorf("Unable to GetItem() [%s]: %v", m, err)
+			continue
+		}
+		t.Logf("GetItem: %s - %d", item.OrderID, item.CreatedAt)
+		t.Logf("\tVersion: %d - %s", item.Version, item.VersionString)
+		t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
+
+		item.TotalAmount *= 2
+
+		item, err = tbl.UpdateItem(context.Background(), item)
+		if err != nil {
+			t.Errorf("Unable to UpdateItem() [%s]: %v", m, err)
+			continue
+		}
+		t.Logf("UpdateItem: %s - %d", item.OrderID, item.CreatedAt)
+		t.Logf("\tVersion: %d - %s", item.Version, item.VersionString)
+		t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
 	}
 
-	//sk := time.Now().Unix()
-	if len(items) != itemsToManage {
-		t.Errorf("Expected %d item(s), got %d", itemsToManage, len(items))
+	// Scan()
+	scanExpr := expression.Expression{}
+	items := tbl.Scan(context.Background(), scanExpr)
+	scannedItems := 0
+	for res := range items {
+		if res.Error() != nil {
+			t.Errorf("Error during Scan(): %v", res.Error())
+		}
+		item := res.Item()
+		t.Logf("Scan: %s - %d", item.OrderID, item.CreatedAt)
+		t.Logf("\tVersion: %d - %s", item.Version, item.VersionString)
+		t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
+
+		scannedItems++
+	}
+	if scannedItems != itemsToManage {
+		t.Errorf("Scanned %d item(s), expected %d", scannedItems, itemsToManage)
 	}
 
-	// updates
-	for i := range 5 {
-		items, _ = tbl.Scan(context.Background(), expression.Expression{})
-		for idx := range items {
-			item := items[idx]
-			item.TotalAmount *= 2
+	// Query()
+	queriedItems := 0
+	for i := range itemsToManage {
+		queryExprBuilder := expression.NewBuilder()
+		queryExprBuilder = queryExprBuilder.WithKeyCondition(
+			expression.Key("order_id").Equal(expression.Value(orderIds[i])).And(
+				expression.Key("created_at").Equal(expression.Value(createdAts[i])),
+			),
+		)
+		queryExpr, err := queryExprBuilder.Build()
+		if err != nil {
+			t.Errorf("Unable to build query: %v", err)
 
-			fmt.Printf(
-				"\t[%s, %d] before update %d / %s / %d / %d\n",
-				item.OrderID,
-				item.CreatedAt,
-				item.Version,
-				item.VersionString,
-				item.CounterUp,
-				item.CounterDown,
-			)
-			item, err = tbl.UpdateItem(context.Background(), item)
-			fmt.Printf(
-				"\t[%s, %d] after update %d / %s / %d / %d\n",
-				item.OrderID,
-				item.CreatedAt,
-				item.Version,
-				item.VersionString,
-				item.CounterUp,
-				item.CounterDown,
-			)
+			return
+		}
 
-			if err != nil {
-				t.Errorf("UpdateItem() error: %v", err)
+		items = tbl.Query(context.Background(), queryExpr)
+		for res := range items {
+			if res.Error() != nil {
+				t.Errorf("Error during Scan(): %v", res.Error())
 			}
+			item := res.Item()
+			t.Logf("Query: %s - %d", item.OrderID, item.CreatedAt)
+			t.Logf("\tVersion: %d - %s", item.Version, item.VersionString)
+			t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
 
-			if item.Version != int64(i+1) {
-				t.Errorf("Item %s - %d, Version Error: %d (expected %d)", item.OrderID, item.CreatedAt, item.Version, int64(i+1))
-			}
-			if item.VersionString != strconv.Itoa(i+1) {
-				t.Errorf("Item %s - %d, Version String Error: %s (expected %s)", item.OrderID, item.CreatedAt, item.VersionString, strconv.Itoa(i+1))
-			}
-			if item.CounterUp != int64((i+1)*5) {
-				t.Errorf("Item %s - %d, Counter Up Error: %d (expected %d)", item.OrderID, item.CreatedAt, item.CounterUp, int64((i+1)*5))
-			}
-			if item.CounterDown != int64((i+1)*-5) {
-				t.Errorf("Item %s - %d, Counter Down Error: %d (expected %d)", item.OrderID, item.CreatedAt, item.CounterDown, int64((i+1)*-5))
-			}
-
-			items[idx] = item
+			queriedItems++
 		}
 	}
-
-	//t.Logf("Will now fetch %d items", itemsToManage)
-	//for i := range itemsToManage {
-	//	m := Map{}.
-	//		With("order_id", fmt.Sprintf("%d", i)).
-	//		With("created_at", sk)
-	//	item, err := tbl.GetItem(context.Background(), m)
-	//	if err != nil {
-	//		t.Logf("Unable to GetItem() [%d]: %v", i, err)
-	//	}
-	//	t.Logf("Item: %s - %d", item.OrderID, item.CreatedAt)
-	//}
-	//t.Logf("Will now delete %d items", itemsToManage)
-	//for i := range itemsToManage {
-	//	if i&1 == 0 {
-	//		m := Map{}.
-	//			With("order_id", fmt.Sprintf("%d", i)).
-	//			With("created_at", sk)
-	//		err = tbl.DeleteItemByKey(context.Background(), m)
-	//	} else {
-	//		err = tbl.DeleteItem(context.Background(), &order{
-	//			OrderID:   fmt.Sprintf("%d", i),
-	//			CreatedAt: sk,
-	//		})
-	//	}
-	//	if err != nil {
-	//		t.Logf("Unable to GetItem() [%d]: %v", i, err)
-	//	}
-	//}
+	if queriedItems != itemsToManage {
+		t.Errorf("Queried %d item(s), expected %d", queriedItems, itemsToManage)
+	}
 }

@@ -1,0 +1,1935 @@
+=== RUN   TestTableE2E
+    table_test.go:54: Table test_e2e_2025_11_13_15_56_15 will be created
+    table_test.go:59: Table test_e2e_2025_11_13_15_56_15 ready
+    table_test.go:62: Table test_e2e_2025_11_13_15_56_15 will be checked if it exists
+    table_test.go:70: Table test_e2e_2025_11_13_15_56_15 exists
+    table_test.go:118: PutItem: 3a3ccb9a-2f27-4e28-a7d3-f8b4c10a471a - 1763049396533201000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: fa5ff64e-6f3f-40ad-9957-6fb2d411ec81 - 1763049396612605000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 35e26c57-a848-46e5-ae2a-0766babb5fbf - 1763049396690126000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 8d160f5a-24ab-43e9-a265-97ccce671ee7 - 1763049396764916000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: d6260fd7-192e-4840-b70b-5a57cec37fc8 - 1763049396838797000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: bd741365-a95b-41f7-9919-f4fd74d62e9f - 1763049396911629000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: c3bea587-fecb-4e12-bd9a-6e177b5bfa5e - 1763049396983805000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: e9d5d537-2bc7-46ac-bdf3-daebee8820e9 - 1763049397056012000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: e15f672e-75e5-48d7-85dd-070179f4c818 - 1763049397128904000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: b160190e-1bd7-4052-928a-ff9dfe257765 - 1763049397201437000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 5b9f1dca-349a-473c-93cf-00af52118dc9 - 1763049397273635000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 5d52f08c-b664-4b32-8de7-417d06d07c9f - 1763049397346525000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 5fbce100-f515-402f-9ca6-10d3f3d33d87 - 1763049397421245000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 41a8d896-14a4-4eac-9d50-d6277e81adf9 - 1763049397494127000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: e770d1cf-ae69-4b8a-9910-d0da38bcbe2d - 1763049397566291000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 2c30b76d-6977-4cb8-b4db-e6eb1c3b4a15 - 1763049397638160000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: cac23232-0464-473d-811f-1c58dd9c003d - 1763049397709833000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 5264abb8-19cf-4a18-86c9-5cda6f16b4ff - 1763049397784436000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: f9236875-8cfc-4809-89de-fa3a421d3e42 - 1763049397857593000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 2b693368-f74d-441c-98ce-f824ebd43c74 - 1763049397931924000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: fc479b94-01a0-49fc-bf7f-c4ae5a9db7bd - 1763049398005802000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 57c8518d-7048-45ff-9f77-2484d206bba8 - 1763049398079770000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: e15b08ad-3aa5-4243-bdb9-6b6f5e53ff8c - 1763049398152845000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 975bc36b-ff15-49cc-886b-95c14d9af189 - 1763049398225614000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 207e0dbc-b2d0-4263-8099-0a596caa3a92 - 1763049398299536000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 7b0de3fa-72f0-41b2-b1c4-5ac85b3df2f0 - 1763049398371680000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: d1149660-8912-4665-8e85-01da1a3e1042 - 1763049398444244000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 01c2d73b-652b-4fe5-b388-5a33b31474fc - 1763049398518544000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 6781a602-549d-4daf-aba0-699cdf0c76e8 - 1763049398593001000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: caaba63c-4770-4c4a-a339-03e05f93d093 - 1763049398667069000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 8fccad13-8d03-4df9-ae94-3603d14bfa71 - 1763049398741696000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 11557e36-67b8-4d6c-8125-847fdb986def - 1763049398815509000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 1a5b470d-ec93-4771-aeaf-5086af3533af - 1763049398890519000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 56f4359b-6953-47c2-a341-014b7f24f90a - 1763049398964119000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: d2e2b16a-87bd-47c1-b552-4713da06f94e - 1763049399037096000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 823367db-7229-48c7-9607-b37c287a9a36 - 1763049399111260000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 467f0c26-f619-4c78-bb00-8cc38f08238d - 1763049399184648000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: f2f887fd-dd9b-42df-bf5f-4011e20c4c4e - 1763049399258638000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 8000ace9-8793-43e6-a1ff-ee0b1eca54d9 - 1763049399332017000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 39e414d8-273f-4f7e-be90-78f33d3c0220 - 1763049399406790000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 0ae69919-8a50-4e77-b7aa-625ba10c104a - 1763049399480552000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 0adb413b-a98b-4a09-bde6-5269b7a4fbbe - 1763049399554736000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 64ad09d9-ce6c-4343-a07c-f56132f121ba - 1763049399629615000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 4124dee7-9f6c-40ae-be1f-1b33063b8990 - 1763049399703785000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 435e413c-d4a8-434c-8895-3786b37cdb3f - 1763049399777495000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 50fb1228-4b13-4268-a63e-89394e7a5a0b - 1763049399850888000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: d906d976-5945-4ce2-bc6c-aac3c50f81d2 - 1763049399946988000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 30497b47-fc38-4895-ba9d-969b95db3ffc - 1763049400025965000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 8e914c50-0d5b-4ab9-b6d0-b5918c0904f4 - 1763049400099098000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 8e946ba6-489f-4f34-b17e-67109bd4b40d - 1763049400172708000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: fc0010de-a8c0-4fdb-84e3-edcb790f9f76 - 1763049400247024000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 40d4ba78-d594-472f-a05b-064535282f5a - 1763049400325553000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 49bb47c3-f45d-41f8-b8e7-741ca1723b7b - 1763049400400083000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 4d8aa9df-16df-45e1-8953-0e54069135b3 - 1763049400471895000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 1f064f20-f5c7-484e-b9b1-97ef9d531004 - 1763049400545582000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: efa398d4-8aed-4e59-8417-8b325bdc22de - 1763049400617932000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: f0099840-40ca-4397-b2aa-9d637c3da5e5 - 1763049400689891000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: f9bb87ad-1392-4b1c-b90e-574ed2c526f8 - 1763049400762145000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 73a3aa1f-106f-4527-80f8-011d96290f53 - 1763049400837206000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 7bceabb8-4bd2-4592-ad16-d3358f8273f9 - 1763049400910995000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: a2d8cf27-9022-439d-9edc-451179a5ed79 - 1763049400986146000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: fb8d02b9-e0d1-4e26-a223-dbc4ea523afd - 1763049401059482000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: b8b34d98-b356-4db8-b1d6-5feba9a778e8 - 1763049401135426000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 788c2dd9-01e6-4291-a000-fa87ca87caf8 - 1763049401211846000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: d4af8cd7-6523-4812-b36d-837ba27ddf98 - 1763049401288400000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 0cc615fc-9061-453c-b2ce-a356b40a202e - 1763049401362926000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 4f955983-ead8-45bb-9304-43ccf867c1d6 - 1763049401437149000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 89cc4ffb-31cb-46b6-91e2-57209447f49f - 1763049401511836000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: c1a70889-250e-4a95-b5fe-fdc6bfab0ada - 1763049401586153000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: f9a73d96-4097-443a-9fd6-8d3621b11f85 - 1763049401660118000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: d9a46c32-0a1c-4077-938c-1c533c7f7e0f - 1763049401735832000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: a14a4fcb-17f5-4a25-b7bf-e3608e39e2db - 1763049401810659000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 0f88b68b-4989-41ef-b1e3-f3f0f0c40116 - 1763049401884578000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: a5ee2983-7163-4846-837f-f643d76df56e - 1763049401962213000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 7d8ce2e2-51cd-4a22-bdec-f904500fb035 - 1763049402043688000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: b0def13f-ad2b-4b4d-a796-62e549d4ea1b - 1763049402119023000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 6cb8dd83-fe8c-4ed2-acaa-5ada6e0ce30d - 1763049402192269000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 72b82c9c-8ba5-4814-a3e2-7e44d3b6ddf0 - 1763049402270915000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: f5215ebd-2017-4e3e-a148-169b65b93a17 - 1763049402345798000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 4d406f3c-6af6-43b3-8e7e-98da4b05e2fd - 1763049402419851000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: b9ddebc4-2605-42c0-8d44-cb38d0b56371 - 1763049402493082000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 481acb1e-a3f0-4070-8e51-96932e4ce94f - 1763049402571551000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 11a61043-f3d3-4292-b4b2-9405208f2e4a - 1763049402646050000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 68ca5eaf-a630-4fbe-abeb-d9652a2b8334 - 1763049402721178000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: f8548f27-08f7-4729-ab54-158fe5052e8d - 1763049402794315000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 858dcf95-9970-49cb-bc6f-88194f148bfa - 1763049402867976000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: b41df975-da35-498e-99c2-25c85ecb275c - 1763049402941829000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: ca804f74-4aa8-485c-ac72-014201271cfc - 1763049403017297000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 93d38cf0-a97d-4ccf-a23a-5b9412d74453 - 1763049403099351000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 4441313b-5128-4225-9901-64a11481ec62 - 1763049403172591000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 77ea5b6a-3fc6-4b23-90ee-c64991c40f6b - 1763049403247359000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 55003f07-80c2-4571-9af3-9c194e05c562 - 1763049403320874000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 9f1224dd-0cf2-4036-aae7-b5f7d9c152ae - 1763049403396810000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 4fa60dbc-7cc0-41ca-a8ab-c9519c931477 - 1763049403473295000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 251327c7-9fa2-403c-b8bf-f812ba493a3d - 1763049403547975000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 9add18be-73af-4b99-a3aa-946b1c9483fc - 1763049403629137000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 81f4d690-1148-413a-9cfb-757fc533ff11 - 1763049403715234000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: d3c7e292-4177-4a07-8a93-6ec1830e56e0 - 1763049403788011000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: cae63222-976c-4b13-8992-13b80f19f857 - 1763049403863927000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 08102f04-1df0-4bcd-b3c1-81876af749e3 - 1763049403943605000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 3855976a-e5fc-49b4-a1da-bb081f341595 - 1763049404020719000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 5e96adb8-7ef2-44ad-aef3-6ea8a1517320 - 1763049404094198000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 24f0bf47-75e6-4d43-80d2-86c568b38fa5 - 1763049404170547000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 876ac044-33ae-4a6b-899f-989cf07304fa - 1763049404246135000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 6026fcc9-2291-46ec-8415-b8f354cae8ff - 1763049404323843000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 3e3dde2e-590e-4346-920e-05e35723886c - 1763049404397647000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 8c8db0d6-6367-47db-9e44-6e45ebcb28d5 - 1763049404472004000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 15d670d3-b0e9-4ba2-aa37-ecd138a633d3 - 1763049404544573000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: b83e1663-135a-484b-8226-811af1e509bb - 1763049404619911000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 61923ff4-c0a4-4796-9a9e-7fc08a1a89d8 - 1763049404694206000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: e31a2aa1-15b4-4c54-b80b-9e33cc7b0c8a - 1763049404769498000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 360914be-6a81-4e01-9fe8-feded145231e - 1763049404844281000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 5a98a57f-45c6-44d7-a8c4-e3c2e1f8613c - 1763049404921568000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: e236f24e-64e0-451f-b037-17d2c05f37d6 - 1763049404996879000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 581766ef-d999-4cfd-8b5f-fc8ca4c11c3c - 1763049405070745000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 46fead33-b597-4972-9291-33e22ec14673 - 1763049405144479000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 7e2894a3-a678-4222-ae13-137197252e16 - 1763049405217675000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 010bbfd3-c632-4112-a8f9-af7a56dd9791 - 1763049405293693000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 1e99dfe4-b8b9-4e65-8e50-3fe1c9aa294a - 1763049405368705000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: b3aae7ae-6f80-4d06-b159-3931424ac4f7 - 1763049405445997000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 442ff526-3780-4889-8667-4dd364b672c3 - 1763049405522894000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 7fe9b9be-1da1-4b54-8477-fa6d2298a9e5 - 1763049405597185000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 687a1c0f-c36c-4146-8965-d51b913420ed - 1763049405670047000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 42e97ca5-b5d3-4777-b2ab-eaa14ff29380 - 1763049405743925000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 6359c855-3bbc-4199-bec4-78d2350904a2 - 1763049405817163000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 82bf0800-a23f-4111-b46b-2851e3891955 - 1763049405892963000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: d0039fb4-50f7-4e8d-8ab5-67f5b367a5f6 - 1763049405971538000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:118: PutItem: 4034f2d0-34a9-48ae-be5c-10ea69d336f7 - 1763049406047737000
+    table_test.go:119: 	Version: 0 - 0
+    table_test.go:120: 	Counter (Up/Down): 0/0
+    table_test.go:133: GetItem: 3a3ccb9a-2f27-4e28-a7d3-f8b4c10a471a - 1763049396533201000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 3a3ccb9a-2f27-4e28-a7d3-f8b4c10a471a - 1763049396533201000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: fa5ff64e-6f3f-40ad-9957-6fb2d411ec81 - 1763049396612605000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: fa5ff64e-6f3f-40ad-9957-6fb2d411ec81 - 1763049396612605000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 35e26c57-a848-46e5-ae2a-0766babb5fbf - 1763049396690126000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 35e26c57-a848-46e5-ae2a-0766babb5fbf - 1763049396690126000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 8d160f5a-24ab-43e9-a265-97ccce671ee7 - 1763049396764916000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 8d160f5a-24ab-43e9-a265-97ccce671ee7 - 1763049396764916000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: d6260fd7-192e-4840-b70b-5a57cec37fc8 - 1763049396838797000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: d6260fd7-192e-4840-b70b-5a57cec37fc8 - 1763049396838797000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: bd741365-a95b-41f7-9919-f4fd74d62e9f - 1763049396911629000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: bd741365-a95b-41f7-9919-f4fd74d62e9f - 1763049396911629000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: c3bea587-fecb-4e12-bd9a-6e177b5bfa5e - 1763049396983805000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: c3bea587-fecb-4e12-bd9a-6e177b5bfa5e - 1763049396983805000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: e9d5d537-2bc7-46ac-bdf3-daebee8820e9 - 1763049397056012000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: e9d5d537-2bc7-46ac-bdf3-daebee8820e9 - 1763049397056012000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: e15f672e-75e5-48d7-85dd-070179f4c818 - 1763049397128904000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: e15f672e-75e5-48d7-85dd-070179f4c818 - 1763049397128904000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: b160190e-1bd7-4052-928a-ff9dfe257765 - 1763049397201437000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: b160190e-1bd7-4052-928a-ff9dfe257765 - 1763049397201437000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 5b9f1dca-349a-473c-93cf-00af52118dc9 - 1763049397273635000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 5b9f1dca-349a-473c-93cf-00af52118dc9 - 1763049397273635000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 5d52f08c-b664-4b32-8de7-417d06d07c9f - 1763049397346525000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 5d52f08c-b664-4b32-8de7-417d06d07c9f - 1763049397346525000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 5fbce100-f515-402f-9ca6-10d3f3d33d87 - 1763049397421245000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 5fbce100-f515-402f-9ca6-10d3f3d33d87 - 1763049397421245000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 41a8d896-14a4-4eac-9d50-d6277e81adf9 - 1763049397494127000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 41a8d896-14a4-4eac-9d50-d6277e81adf9 - 1763049397494127000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: e770d1cf-ae69-4b8a-9910-d0da38bcbe2d - 1763049397566291000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: e770d1cf-ae69-4b8a-9910-d0da38bcbe2d - 1763049397566291000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 2c30b76d-6977-4cb8-b4db-e6eb1c3b4a15 - 1763049397638160000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 2c30b76d-6977-4cb8-b4db-e6eb1c3b4a15 - 1763049397638160000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: cac23232-0464-473d-811f-1c58dd9c003d - 1763049397709833000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: cac23232-0464-473d-811f-1c58dd9c003d - 1763049397709833000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 5264abb8-19cf-4a18-86c9-5cda6f16b4ff - 1763049397784436000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 5264abb8-19cf-4a18-86c9-5cda6f16b4ff - 1763049397784436000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: f9236875-8cfc-4809-89de-fa3a421d3e42 - 1763049397857593000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: f9236875-8cfc-4809-89de-fa3a421d3e42 - 1763049397857593000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 2b693368-f74d-441c-98ce-f824ebd43c74 - 1763049397931924000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 2b693368-f74d-441c-98ce-f824ebd43c74 - 1763049397931924000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: fc479b94-01a0-49fc-bf7f-c4ae5a9db7bd - 1763049398005802000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: fc479b94-01a0-49fc-bf7f-c4ae5a9db7bd - 1763049398005802000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 57c8518d-7048-45ff-9f77-2484d206bba8 - 1763049398079770000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 57c8518d-7048-45ff-9f77-2484d206bba8 - 1763049398079770000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: e15b08ad-3aa5-4243-bdb9-6b6f5e53ff8c - 1763049398152845000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: e15b08ad-3aa5-4243-bdb9-6b6f5e53ff8c - 1763049398152845000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 975bc36b-ff15-49cc-886b-95c14d9af189 - 1763049398225614000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 975bc36b-ff15-49cc-886b-95c14d9af189 - 1763049398225614000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 207e0dbc-b2d0-4263-8099-0a596caa3a92 - 1763049398299536000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 207e0dbc-b2d0-4263-8099-0a596caa3a92 - 1763049398299536000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 7b0de3fa-72f0-41b2-b1c4-5ac85b3df2f0 - 1763049398371680000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 7b0de3fa-72f0-41b2-b1c4-5ac85b3df2f0 - 1763049398371680000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: d1149660-8912-4665-8e85-01da1a3e1042 - 1763049398444244000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: d1149660-8912-4665-8e85-01da1a3e1042 - 1763049398444244000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 01c2d73b-652b-4fe5-b388-5a33b31474fc - 1763049398518544000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 01c2d73b-652b-4fe5-b388-5a33b31474fc - 1763049398518544000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 6781a602-549d-4daf-aba0-699cdf0c76e8 - 1763049398593001000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 6781a602-549d-4daf-aba0-699cdf0c76e8 - 1763049398593001000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: caaba63c-4770-4c4a-a339-03e05f93d093 - 1763049398667069000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: caaba63c-4770-4c4a-a339-03e05f93d093 - 1763049398667069000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 8fccad13-8d03-4df9-ae94-3603d14bfa71 - 1763049398741696000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 8fccad13-8d03-4df9-ae94-3603d14bfa71 - 1763049398741696000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 11557e36-67b8-4d6c-8125-847fdb986def - 1763049398815509000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 11557e36-67b8-4d6c-8125-847fdb986def - 1763049398815509000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 1a5b470d-ec93-4771-aeaf-5086af3533af - 1763049398890519000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 1a5b470d-ec93-4771-aeaf-5086af3533af - 1763049398890519000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 56f4359b-6953-47c2-a341-014b7f24f90a - 1763049398964119000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 56f4359b-6953-47c2-a341-014b7f24f90a - 1763049398964119000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: d2e2b16a-87bd-47c1-b552-4713da06f94e - 1763049399037096000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: d2e2b16a-87bd-47c1-b552-4713da06f94e - 1763049399037096000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 823367db-7229-48c7-9607-b37c287a9a36 - 1763049399111260000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 823367db-7229-48c7-9607-b37c287a9a36 - 1763049399111260000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 467f0c26-f619-4c78-bb00-8cc38f08238d - 1763049399184648000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 467f0c26-f619-4c78-bb00-8cc38f08238d - 1763049399184648000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: f2f887fd-dd9b-42df-bf5f-4011e20c4c4e - 1763049399258638000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: f2f887fd-dd9b-42df-bf5f-4011e20c4c4e - 1763049399258638000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 8000ace9-8793-43e6-a1ff-ee0b1eca54d9 - 1763049399332017000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 8000ace9-8793-43e6-a1ff-ee0b1eca54d9 - 1763049399332017000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 39e414d8-273f-4f7e-be90-78f33d3c0220 - 1763049399406790000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 39e414d8-273f-4f7e-be90-78f33d3c0220 - 1763049399406790000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 0ae69919-8a50-4e77-b7aa-625ba10c104a - 1763049399480552000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 0ae69919-8a50-4e77-b7aa-625ba10c104a - 1763049399480552000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 0adb413b-a98b-4a09-bde6-5269b7a4fbbe - 1763049399554736000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 0adb413b-a98b-4a09-bde6-5269b7a4fbbe - 1763049399554736000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 64ad09d9-ce6c-4343-a07c-f56132f121ba - 1763049399629615000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 64ad09d9-ce6c-4343-a07c-f56132f121ba - 1763049399629615000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 4124dee7-9f6c-40ae-be1f-1b33063b8990 - 1763049399703785000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 4124dee7-9f6c-40ae-be1f-1b33063b8990 - 1763049399703785000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 435e413c-d4a8-434c-8895-3786b37cdb3f - 1763049399777495000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 435e413c-d4a8-434c-8895-3786b37cdb3f - 1763049399777495000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 50fb1228-4b13-4268-a63e-89394e7a5a0b - 1763049399850888000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 50fb1228-4b13-4268-a63e-89394e7a5a0b - 1763049399850888000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: d906d976-5945-4ce2-bc6c-aac3c50f81d2 - 1763049399946988000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: d906d976-5945-4ce2-bc6c-aac3c50f81d2 - 1763049399946988000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 30497b47-fc38-4895-ba9d-969b95db3ffc - 1763049400025965000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 30497b47-fc38-4895-ba9d-969b95db3ffc - 1763049400025965000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 8e914c50-0d5b-4ab9-b6d0-b5918c0904f4 - 1763049400099098000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 8e914c50-0d5b-4ab9-b6d0-b5918c0904f4 - 1763049400099098000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 8e946ba6-489f-4f34-b17e-67109bd4b40d - 1763049400172708000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 8e946ba6-489f-4f34-b17e-67109bd4b40d - 1763049400172708000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: fc0010de-a8c0-4fdb-84e3-edcb790f9f76 - 1763049400247024000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: fc0010de-a8c0-4fdb-84e3-edcb790f9f76 - 1763049400247024000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 40d4ba78-d594-472f-a05b-064535282f5a - 1763049400325553000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 40d4ba78-d594-472f-a05b-064535282f5a - 1763049400325553000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 49bb47c3-f45d-41f8-b8e7-741ca1723b7b - 1763049400400083000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 49bb47c3-f45d-41f8-b8e7-741ca1723b7b - 1763049400400083000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 4d8aa9df-16df-45e1-8953-0e54069135b3 - 1763049400471895000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 4d8aa9df-16df-45e1-8953-0e54069135b3 - 1763049400471895000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 1f064f20-f5c7-484e-b9b1-97ef9d531004 - 1763049400545582000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 1f064f20-f5c7-484e-b9b1-97ef9d531004 - 1763049400545582000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: efa398d4-8aed-4e59-8417-8b325bdc22de - 1763049400617932000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: efa398d4-8aed-4e59-8417-8b325bdc22de - 1763049400617932000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: f0099840-40ca-4397-b2aa-9d637c3da5e5 - 1763049400689891000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: f0099840-40ca-4397-b2aa-9d637c3da5e5 - 1763049400689891000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: f9bb87ad-1392-4b1c-b90e-574ed2c526f8 - 1763049400762145000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: f9bb87ad-1392-4b1c-b90e-574ed2c526f8 - 1763049400762145000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 73a3aa1f-106f-4527-80f8-011d96290f53 - 1763049400837206000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 73a3aa1f-106f-4527-80f8-011d96290f53 - 1763049400837206000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 7bceabb8-4bd2-4592-ad16-d3358f8273f9 - 1763049400910995000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 7bceabb8-4bd2-4592-ad16-d3358f8273f9 - 1763049400910995000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: a2d8cf27-9022-439d-9edc-451179a5ed79 - 1763049400986146000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: a2d8cf27-9022-439d-9edc-451179a5ed79 - 1763049400986146000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: fb8d02b9-e0d1-4e26-a223-dbc4ea523afd - 1763049401059482000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: fb8d02b9-e0d1-4e26-a223-dbc4ea523afd - 1763049401059482000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: b8b34d98-b356-4db8-b1d6-5feba9a778e8 - 1763049401135426000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: b8b34d98-b356-4db8-b1d6-5feba9a778e8 - 1763049401135426000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 788c2dd9-01e6-4291-a000-fa87ca87caf8 - 1763049401211846000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 788c2dd9-01e6-4291-a000-fa87ca87caf8 - 1763049401211846000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: d4af8cd7-6523-4812-b36d-837ba27ddf98 - 1763049401288400000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: d4af8cd7-6523-4812-b36d-837ba27ddf98 - 1763049401288400000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 0cc615fc-9061-453c-b2ce-a356b40a202e - 1763049401362926000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 0cc615fc-9061-453c-b2ce-a356b40a202e - 1763049401362926000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 4f955983-ead8-45bb-9304-43ccf867c1d6 - 1763049401437149000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 4f955983-ead8-45bb-9304-43ccf867c1d6 - 1763049401437149000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 89cc4ffb-31cb-46b6-91e2-57209447f49f - 1763049401511836000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 89cc4ffb-31cb-46b6-91e2-57209447f49f - 1763049401511836000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: c1a70889-250e-4a95-b5fe-fdc6bfab0ada - 1763049401586153000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: c1a70889-250e-4a95-b5fe-fdc6bfab0ada - 1763049401586153000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: f9a73d96-4097-443a-9fd6-8d3621b11f85 - 1763049401660118000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: f9a73d96-4097-443a-9fd6-8d3621b11f85 - 1763049401660118000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: d9a46c32-0a1c-4077-938c-1c533c7f7e0f - 1763049401735832000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: d9a46c32-0a1c-4077-938c-1c533c7f7e0f - 1763049401735832000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: a14a4fcb-17f5-4a25-b7bf-e3608e39e2db - 1763049401810659000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: a14a4fcb-17f5-4a25-b7bf-e3608e39e2db - 1763049401810659000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 0f88b68b-4989-41ef-b1e3-f3f0f0c40116 - 1763049401884578000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 0f88b68b-4989-41ef-b1e3-f3f0f0c40116 - 1763049401884578000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: a5ee2983-7163-4846-837f-f643d76df56e - 1763049401962213000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: a5ee2983-7163-4846-837f-f643d76df56e - 1763049401962213000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 7d8ce2e2-51cd-4a22-bdec-f904500fb035 - 1763049402043688000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 7d8ce2e2-51cd-4a22-bdec-f904500fb035 - 1763049402043688000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: b0def13f-ad2b-4b4d-a796-62e549d4ea1b - 1763049402119023000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: b0def13f-ad2b-4b4d-a796-62e549d4ea1b - 1763049402119023000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 6cb8dd83-fe8c-4ed2-acaa-5ada6e0ce30d - 1763049402192269000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 6cb8dd83-fe8c-4ed2-acaa-5ada6e0ce30d - 1763049402192269000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 72b82c9c-8ba5-4814-a3e2-7e44d3b6ddf0 - 1763049402270915000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 72b82c9c-8ba5-4814-a3e2-7e44d3b6ddf0 - 1763049402270915000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: f5215ebd-2017-4e3e-a148-169b65b93a17 - 1763049402345798000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: f5215ebd-2017-4e3e-a148-169b65b93a17 - 1763049402345798000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 4d406f3c-6af6-43b3-8e7e-98da4b05e2fd - 1763049402419851000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 4d406f3c-6af6-43b3-8e7e-98da4b05e2fd - 1763049402419851000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: b9ddebc4-2605-42c0-8d44-cb38d0b56371 - 1763049402493082000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: b9ddebc4-2605-42c0-8d44-cb38d0b56371 - 1763049402493082000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 481acb1e-a3f0-4070-8e51-96932e4ce94f - 1763049402571551000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 481acb1e-a3f0-4070-8e51-96932e4ce94f - 1763049402571551000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 11a61043-f3d3-4292-b4b2-9405208f2e4a - 1763049402646050000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 11a61043-f3d3-4292-b4b2-9405208f2e4a - 1763049402646050000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 68ca5eaf-a630-4fbe-abeb-d9652a2b8334 - 1763049402721178000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 68ca5eaf-a630-4fbe-abeb-d9652a2b8334 - 1763049402721178000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: f8548f27-08f7-4729-ab54-158fe5052e8d - 1763049402794315000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: f8548f27-08f7-4729-ab54-158fe5052e8d - 1763049402794315000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 858dcf95-9970-49cb-bc6f-88194f148bfa - 1763049402867976000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 858dcf95-9970-49cb-bc6f-88194f148bfa - 1763049402867976000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: b41df975-da35-498e-99c2-25c85ecb275c - 1763049402941829000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: b41df975-da35-498e-99c2-25c85ecb275c - 1763049402941829000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: ca804f74-4aa8-485c-ac72-014201271cfc - 1763049403017297000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: ca804f74-4aa8-485c-ac72-014201271cfc - 1763049403017297000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 93d38cf0-a97d-4ccf-a23a-5b9412d74453 - 1763049403099351000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 93d38cf0-a97d-4ccf-a23a-5b9412d74453 - 1763049403099351000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 4441313b-5128-4225-9901-64a11481ec62 - 1763049403172591000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 4441313b-5128-4225-9901-64a11481ec62 - 1763049403172591000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 77ea5b6a-3fc6-4b23-90ee-c64991c40f6b - 1763049403247359000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 77ea5b6a-3fc6-4b23-90ee-c64991c40f6b - 1763049403247359000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 55003f07-80c2-4571-9af3-9c194e05c562 - 1763049403320874000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 55003f07-80c2-4571-9af3-9c194e05c562 - 1763049403320874000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 9f1224dd-0cf2-4036-aae7-b5f7d9c152ae - 1763049403396810000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 9f1224dd-0cf2-4036-aae7-b5f7d9c152ae - 1763049403396810000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 4fa60dbc-7cc0-41ca-a8ab-c9519c931477 - 1763049403473295000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 4fa60dbc-7cc0-41ca-a8ab-c9519c931477 - 1763049403473295000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 251327c7-9fa2-403c-b8bf-f812ba493a3d - 1763049403547975000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 251327c7-9fa2-403c-b8bf-f812ba493a3d - 1763049403547975000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 9add18be-73af-4b99-a3aa-946b1c9483fc - 1763049403629137000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 9add18be-73af-4b99-a3aa-946b1c9483fc - 1763049403629137000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 81f4d690-1148-413a-9cfb-757fc533ff11 - 1763049403715234000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 81f4d690-1148-413a-9cfb-757fc533ff11 - 1763049403715234000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: d3c7e292-4177-4a07-8a93-6ec1830e56e0 - 1763049403788011000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: d3c7e292-4177-4a07-8a93-6ec1830e56e0 - 1763049403788011000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: cae63222-976c-4b13-8992-13b80f19f857 - 1763049403863927000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: cae63222-976c-4b13-8992-13b80f19f857 - 1763049403863927000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 08102f04-1df0-4bcd-b3c1-81876af749e3 - 1763049403943605000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 08102f04-1df0-4bcd-b3c1-81876af749e3 - 1763049403943605000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 3855976a-e5fc-49b4-a1da-bb081f341595 - 1763049404020719000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 3855976a-e5fc-49b4-a1da-bb081f341595 - 1763049404020719000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 5e96adb8-7ef2-44ad-aef3-6ea8a1517320 - 1763049404094198000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 5e96adb8-7ef2-44ad-aef3-6ea8a1517320 - 1763049404094198000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 24f0bf47-75e6-4d43-80d2-86c568b38fa5 - 1763049404170547000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 24f0bf47-75e6-4d43-80d2-86c568b38fa5 - 1763049404170547000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 876ac044-33ae-4a6b-899f-989cf07304fa - 1763049404246135000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 876ac044-33ae-4a6b-899f-989cf07304fa - 1763049404246135000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 6026fcc9-2291-46ec-8415-b8f354cae8ff - 1763049404323843000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 6026fcc9-2291-46ec-8415-b8f354cae8ff - 1763049404323843000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 3e3dde2e-590e-4346-920e-05e35723886c - 1763049404397647000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 3e3dde2e-590e-4346-920e-05e35723886c - 1763049404397647000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 8c8db0d6-6367-47db-9e44-6e45ebcb28d5 - 1763049404472004000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 8c8db0d6-6367-47db-9e44-6e45ebcb28d5 - 1763049404472004000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 15d670d3-b0e9-4ba2-aa37-ecd138a633d3 - 1763049404544573000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 15d670d3-b0e9-4ba2-aa37-ecd138a633d3 - 1763049404544573000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: b83e1663-135a-484b-8226-811af1e509bb - 1763049404619911000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: b83e1663-135a-484b-8226-811af1e509bb - 1763049404619911000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 61923ff4-c0a4-4796-9a9e-7fc08a1a89d8 - 1763049404694206000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 61923ff4-c0a4-4796-9a9e-7fc08a1a89d8 - 1763049404694206000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: e31a2aa1-15b4-4c54-b80b-9e33cc7b0c8a - 1763049404769498000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: e31a2aa1-15b4-4c54-b80b-9e33cc7b0c8a - 1763049404769498000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 360914be-6a81-4e01-9fe8-feded145231e - 1763049404844281000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 360914be-6a81-4e01-9fe8-feded145231e - 1763049404844281000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 5a98a57f-45c6-44d7-a8c4-e3c2e1f8613c - 1763049404921568000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 5a98a57f-45c6-44d7-a8c4-e3c2e1f8613c - 1763049404921568000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: e236f24e-64e0-451f-b037-17d2c05f37d6 - 1763049404996879000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: e236f24e-64e0-451f-b037-17d2c05f37d6 - 1763049404996879000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 581766ef-d999-4cfd-8b5f-fc8ca4c11c3c - 1763049405070745000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 581766ef-d999-4cfd-8b5f-fc8ca4c11c3c - 1763049405070745000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 46fead33-b597-4972-9291-33e22ec14673 - 1763049405144479000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 46fead33-b597-4972-9291-33e22ec14673 - 1763049405144479000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 7e2894a3-a678-4222-ae13-137197252e16 - 1763049405217675000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 7e2894a3-a678-4222-ae13-137197252e16 - 1763049405217675000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 010bbfd3-c632-4112-a8f9-af7a56dd9791 - 1763049405293693000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 010bbfd3-c632-4112-a8f9-af7a56dd9791 - 1763049405293693000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 1e99dfe4-b8b9-4e65-8e50-3fe1c9aa294a - 1763049405368705000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 1e99dfe4-b8b9-4e65-8e50-3fe1c9aa294a - 1763049405368705000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: b3aae7ae-6f80-4d06-b159-3931424ac4f7 - 1763049405445997000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: b3aae7ae-6f80-4d06-b159-3931424ac4f7 - 1763049405445997000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 442ff526-3780-4889-8667-4dd364b672c3 - 1763049405522894000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 442ff526-3780-4889-8667-4dd364b672c3 - 1763049405522894000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 7fe9b9be-1da1-4b54-8477-fa6d2298a9e5 - 1763049405597185000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 7fe9b9be-1da1-4b54-8477-fa6d2298a9e5 - 1763049405597185000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 687a1c0f-c36c-4146-8965-d51b913420ed - 1763049405670047000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 687a1c0f-c36c-4146-8965-d51b913420ed - 1763049405670047000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 42e97ca5-b5d3-4777-b2ab-eaa14ff29380 - 1763049405743925000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 42e97ca5-b5d3-4777-b2ab-eaa14ff29380 - 1763049405743925000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 6359c855-3bbc-4199-bec4-78d2350904a2 - 1763049405817163000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 6359c855-3bbc-4199-bec4-78d2350904a2 - 1763049405817163000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 82bf0800-a23f-4111-b46b-2851e3891955 - 1763049405892963000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 82bf0800-a23f-4111-b46b-2851e3891955 - 1763049405892963000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: d0039fb4-50f7-4e8d-8ab5-67f5b367a5f6 - 1763049405971538000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: d0039fb4-50f7-4e8d-8ab5-67f5b367a5f6 - 1763049405971538000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:133: GetItem: 4034f2d0-34a9-48ae-be5c-10ea69d336f7 - 1763049406047737000
+    table_test.go:134: 	Version: 0 - 0
+    table_test.go:135: 	Counter (Up/Down): 0/0
+    table_test.go:144: UpdateItem: 4034f2d0-34a9-48ae-be5c-10ea69d336f7 - 1763049406047737000
+    table_test.go:145: 	Version: 1 - 1
+    table_test.go:146: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 5264abb8-19cf-4a18-86c9-5cda6f16b4ff - 1763049397784436000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 39e414d8-273f-4f7e-be90-78f33d3c0220 - 1763049399406790000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: ca804f74-4aa8-485c-ac72-014201271cfc - 1763049403017297000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 61923ff4-c0a4-4796-9a9e-7fc08a1a89d8 - 1763049404694206000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: e15f672e-75e5-48d7-85dd-070179f4c818 - 1763049397128904000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: e15b08ad-3aa5-4243-bdb9-6b6f5e53ff8c - 1763049398152845000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: b9ddebc4-2605-42c0-8d44-cb38d0b56371 - 1763049402493082000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 435e413c-d4a8-434c-8895-3786b37cdb3f - 1763049399777495000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 7b0de3fa-72f0-41b2-b1c4-5ac85b3df2f0 - 1763049398371680000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 35e26c57-a848-46e5-ae2a-0766babb5fbf - 1763049396690126000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 15d670d3-b0e9-4ba2-aa37-ecd138a633d3 - 1763049404544573000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 6cb8dd83-fe8c-4ed2-acaa-5ada6e0ce30d - 1763049402192269000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 5e96adb8-7ef2-44ad-aef3-6ea8a1517320 - 1763049404094198000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 40d4ba78-d594-472f-a05b-064535282f5a - 1763049400325553000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 56f4359b-6953-47c2-a341-014b7f24f90a - 1763049398964119000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 89cc4ffb-31cb-46b6-91e2-57209447f49f - 1763049401511836000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 4d406f3c-6af6-43b3-8e7e-98da4b05e2fd - 1763049402419851000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: d906d976-5945-4ce2-bc6c-aac3c50f81d2 - 1763049399946988000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 5b9f1dca-349a-473c-93cf-00af52118dc9 - 1763049397273635000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 41a8d896-14a4-4eac-9d50-d6277e81adf9 - 1763049397494127000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: cac23232-0464-473d-811f-1c58dd9c003d - 1763049397709833000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 2c30b76d-6977-4cb8-b4db-e6eb1c3b4a15 - 1763049397638160000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: c3bea587-fecb-4e12-bd9a-6e177b5bfa5e - 1763049396983805000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: fb8d02b9-e0d1-4e26-a223-dbc4ea523afd - 1763049401059482000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: e236f24e-64e0-451f-b037-17d2c05f37d6 - 1763049404996879000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 207e0dbc-b2d0-4263-8099-0a596caa3a92 - 1763049398299536000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 1f064f20-f5c7-484e-b9b1-97ef9d531004 - 1763049400545582000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 7bceabb8-4bd2-4592-ad16-d3358f8273f9 - 1763049400910995000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: caaba63c-4770-4c4a-a339-03e05f93d093 - 1763049398667069000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: d0039fb4-50f7-4e8d-8ab5-67f5b367a5f6 - 1763049405971538000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 4d8aa9df-16df-45e1-8953-0e54069135b3 - 1763049400471895000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 251327c7-9fa2-403c-b8bf-f812ba493a3d - 1763049403547975000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: a14a4fcb-17f5-4a25-b7bf-e3608e39e2db - 1763049401810659000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 687a1c0f-c36c-4146-8965-d51b913420ed - 1763049405670047000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 0cc615fc-9061-453c-b2ce-a356b40a202e - 1763049401362926000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: d4af8cd7-6523-4812-b36d-837ba27ddf98 - 1763049401288400000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: f2f887fd-dd9b-42df-bf5f-4011e20c4c4e - 1763049399258638000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 24f0bf47-75e6-4d43-80d2-86c568b38fa5 - 1763049404170547000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 8d160f5a-24ab-43e9-a265-97ccce671ee7 - 1763049396764916000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 4124dee7-9f6c-40ae-be1f-1b33063b8990 - 1763049399703785000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: e31a2aa1-15b4-4c54-b80b-9e33cc7b0c8a - 1763049404769498000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 64ad09d9-ce6c-4343-a07c-f56132f121ba - 1763049399629615000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 823367db-7229-48c7-9607-b37c287a9a36 - 1763049399111260000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 858dcf95-9970-49cb-bc6f-88194f148bfa - 1763049402867976000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 788c2dd9-01e6-4291-a000-fa87ca87caf8 - 1763049401211846000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: fc0010de-a8c0-4fdb-84e3-edcb790f9f76 - 1763049400247024000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: d1149660-8912-4665-8e85-01da1a3e1042 - 1763049398444244000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 975bc36b-ff15-49cc-886b-95c14d9af189 - 1763049398225614000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 93d38cf0-a97d-4ccf-a23a-5b9412d74453 - 1763049403099351000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 9add18be-73af-4b99-a3aa-946b1c9483fc - 1763049403629137000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 72b82c9c-8ba5-4814-a3e2-7e44d3b6ddf0 - 1763049402270915000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 5d52f08c-b664-4b32-8de7-417d06d07c9f - 1763049397346525000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 7e2894a3-a678-4222-ae13-137197252e16 - 1763049405217675000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 11a61043-f3d3-4292-b4b2-9405208f2e4a - 1763049402646050000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 30497b47-fc38-4895-ba9d-969b95db3ffc - 1763049400025965000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: d3c7e292-4177-4a07-8a93-6ec1830e56e0 - 1763049403788011000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 8000ace9-8793-43e6-a1ff-ee0b1eca54d9 - 1763049399332017000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 6781a602-549d-4daf-aba0-699cdf0c76e8 - 1763049398593001000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: f9236875-8cfc-4809-89de-fa3a421d3e42 - 1763049397857593000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 3a3ccb9a-2f27-4e28-a7d3-f8b4c10a471a - 1763049396533201000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 1e99dfe4-b8b9-4e65-8e50-3fe1c9aa294a - 1763049405368705000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 3855976a-e5fc-49b4-a1da-bb081f341595 - 1763049404020719000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 1a5b470d-ec93-4771-aeaf-5086af3533af - 1763049398890519000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 4034f2d0-34a9-48ae-be5c-10ea69d336f7 - 1763049406047737000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 010bbfd3-c632-4112-a8f9-af7a56dd9791 - 1763049405293693000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: cae63222-976c-4b13-8992-13b80f19f857 - 1763049403863927000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: b3aae7ae-6f80-4d06-b159-3931424ac4f7 - 1763049405445997000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 6026fcc9-2291-46ec-8415-b8f354cae8ff - 1763049404323843000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 481acb1e-a3f0-4070-8e51-96932e4ce94f - 1763049402571551000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 7fe9b9be-1da1-4b54-8477-fa6d2298a9e5 - 1763049405597185000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 01c2d73b-652b-4fe5-b388-5a33b31474fc - 1763049398518544000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: efa398d4-8aed-4e59-8417-8b325bdc22de - 1763049400617932000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: f9bb87ad-1392-4b1c-b90e-574ed2c526f8 - 1763049400762145000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 0adb413b-a98b-4a09-bde6-5269b7a4fbbe - 1763049399554736000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: a2d8cf27-9022-439d-9edc-451179a5ed79 - 1763049400986146000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 11557e36-67b8-4d6c-8125-847fdb986def - 1763049398815509000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: b83e1663-135a-484b-8226-811af1e509bb - 1763049404619911000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: d9a46c32-0a1c-4077-938c-1c533c7f7e0f - 1763049401735832000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 82bf0800-a23f-4111-b46b-2851e3891955 - 1763049405892963000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 4441313b-5128-4225-9901-64a11481ec62 - 1763049403172591000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: e770d1cf-ae69-4b8a-9910-d0da38bcbe2d - 1763049397566291000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 360914be-6a81-4e01-9fe8-feded145231e - 1763049404844281000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 8e946ba6-489f-4f34-b17e-67109bd4b40d - 1763049400172708000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 5fbce100-f515-402f-9ca6-10d3f3d33d87 - 1763049397421245000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 50fb1228-4b13-4268-a63e-89394e7a5a0b - 1763049399850888000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 442ff526-3780-4889-8667-4dd364b672c3 - 1763049405522894000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: d2e2b16a-87bd-47c1-b552-4713da06f94e - 1763049399037096000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: c1a70889-250e-4a95-b5fe-fdc6bfab0ada - 1763049401586153000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: f8548f27-08f7-4729-ab54-158fe5052e8d - 1763049402794315000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 81f4d690-1148-413a-9cfb-757fc533ff11 - 1763049403715234000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 0ae69919-8a50-4e77-b7aa-625ba10c104a - 1763049399480552000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 8c8db0d6-6367-47db-9e44-6e45ebcb28d5 - 1763049404472004000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 3e3dde2e-590e-4346-920e-05e35723886c - 1763049404397647000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: fc479b94-01a0-49fc-bf7f-c4ae5a9db7bd - 1763049398005802000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: b8b34d98-b356-4db8-b1d6-5feba9a778e8 - 1763049401135426000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 4f955983-ead8-45bb-9304-43ccf867c1d6 - 1763049401437149000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 6359c855-3bbc-4199-bec4-78d2350904a2 - 1763049405817163000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: d6260fd7-192e-4840-b70b-5a57cec37fc8 - 1763049396838797000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: a5ee2983-7163-4846-837f-f643d76df56e - 1763049401962213000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 73a3aa1f-106f-4527-80f8-011d96290f53 - 1763049400837206000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 57c8518d-7048-45ff-9f77-2484d206bba8 - 1763049398079770000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 8fccad13-8d03-4df9-ae94-3603d14bfa71 - 1763049398741696000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 581766ef-d999-4cfd-8b5f-fc8ca4c11c3c - 1763049405070745000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: b41df975-da35-498e-99c2-25c85ecb275c - 1763049402941829000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: e9d5d537-2bc7-46ac-bdf3-daebee8820e9 - 1763049397056012000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 8e914c50-0d5b-4ab9-b6d0-b5918c0904f4 - 1763049400099098000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 77ea5b6a-3fc6-4b23-90ee-c64991c40f6b - 1763049403247359000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 4fa60dbc-7cc0-41ca-a8ab-c9519c931477 - 1763049403473295000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 467f0c26-f619-4c78-bb00-8cc38f08238d - 1763049399184648000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: bd741365-a95b-41f7-9919-f4fd74d62e9f - 1763049396911629000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 55003f07-80c2-4571-9af3-9c194e05c562 - 1763049403320874000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: f9a73d96-4097-443a-9fd6-8d3621b11f85 - 1763049401660118000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: b160190e-1bd7-4052-928a-ff9dfe257765 - 1763049397201437000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 7d8ce2e2-51cd-4a22-bdec-f904500fb035 - 1763049402043688000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 46fead33-b597-4972-9291-33e22ec14673 - 1763049405144479000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 08102f04-1df0-4bcd-b3c1-81876af749e3 - 1763049403943605000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 68ca5eaf-a630-4fbe-abeb-d9652a2b8334 - 1763049402721178000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 9f1224dd-0cf2-4036-aae7-b5f7d9c152ae - 1763049403396810000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: b0def13f-ad2b-4b4d-a796-62e549d4ea1b - 1763049402119023000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 49bb47c3-f45d-41f8-b8e7-741ca1723b7b - 1763049400400083000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 2b693368-f74d-441c-98ce-f824ebd43c74 - 1763049397931924000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: f0099840-40ca-4397-b2aa-9d637c3da5e5 - 1763049400689891000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 5a98a57f-45c6-44d7-a8c4-e3c2e1f8613c - 1763049404921568000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: f5215ebd-2017-4e3e-a148-169b65b93a17 - 1763049402345798000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 0f88b68b-4989-41ef-b1e3-f3f0f0c40116 - 1763049401884578000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: fa5ff64e-6f3f-40ad-9957-6fb2d411ec81 - 1763049396612605000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 42e97ca5-b5d3-4777-b2ab-eaa14ff29380 - 1763049405743925000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:158: Scan: 876ac044-33ae-4a6b-899f-989cf07304fa - 1763049404246135000
+    table_test.go:159: 	Version: 1 - 1
+    table_test.go:160: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 3a3ccb9a-2f27-4e28-a7d3-f8b4c10a471a - 1763049396533201000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: fa5ff64e-6f3f-40ad-9957-6fb2d411ec81 - 1763049396612605000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 35e26c57-a848-46e5-ae2a-0766babb5fbf - 1763049396690126000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 8d160f5a-24ab-43e9-a265-97ccce671ee7 - 1763049396764916000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: d6260fd7-192e-4840-b70b-5a57cec37fc8 - 1763049396838797000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: bd741365-a95b-41f7-9919-f4fd74d62e9f - 1763049396911629000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: c3bea587-fecb-4e12-bd9a-6e177b5bfa5e - 1763049396983805000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: e9d5d537-2bc7-46ac-bdf3-daebee8820e9 - 1763049397056012000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: e15f672e-75e5-48d7-85dd-070179f4c818 - 1763049397128904000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: b160190e-1bd7-4052-928a-ff9dfe257765 - 1763049397201437000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 5b9f1dca-349a-473c-93cf-00af52118dc9 - 1763049397273635000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 5d52f08c-b664-4b32-8de7-417d06d07c9f - 1763049397346525000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 5fbce100-f515-402f-9ca6-10d3f3d33d87 - 1763049397421245000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 41a8d896-14a4-4eac-9d50-d6277e81adf9 - 1763049397494127000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: e770d1cf-ae69-4b8a-9910-d0da38bcbe2d - 1763049397566291000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 2c30b76d-6977-4cb8-b4db-e6eb1c3b4a15 - 1763049397638160000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: cac23232-0464-473d-811f-1c58dd9c003d - 1763049397709833000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 5264abb8-19cf-4a18-86c9-5cda6f16b4ff - 1763049397784436000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: f9236875-8cfc-4809-89de-fa3a421d3e42 - 1763049397857593000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 2b693368-f74d-441c-98ce-f824ebd43c74 - 1763049397931924000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: fc479b94-01a0-49fc-bf7f-c4ae5a9db7bd - 1763049398005802000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 57c8518d-7048-45ff-9f77-2484d206bba8 - 1763049398079770000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: e15b08ad-3aa5-4243-bdb9-6b6f5e53ff8c - 1763049398152845000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 975bc36b-ff15-49cc-886b-95c14d9af189 - 1763049398225614000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 207e0dbc-b2d0-4263-8099-0a596caa3a92 - 1763049398299536000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 7b0de3fa-72f0-41b2-b1c4-5ac85b3df2f0 - 1763049398371680000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: d1149660-8912-4665-8e85-01da1a3e1042 - 1763049398444244000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 01c2d73b-652b-4fe5-b388-5a33b31474fc - 1763049398518544000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 6781a602-549d-4daf-aba0-699cdf0c76e8 - 1763049398593001000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: caaba63c-4770-4c4a-a339-03e05f93d093 - 1763049398667069000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 8fccad13-8d03-4df9-ae94-3603d14bfa71 - 1763049398741696000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 11557e36-67b8-4d6c-8125-847fdb986def - 1763049398815509000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 1a5b470d-ec93-4771-aeaf-5086af3533af - 1763049398890519000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 56f4359b-6953-47c2-a341-014b7f24f90a - 1763049398964119000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: d2e2b16a-87bd-47c1-b552-4713da06f94e - 1763049399037096000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 823367db-7229-48c7-9607-b37c287a9a36 - 1763049399111260000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 467f0c26-f619-4c78-bb00-8cc38f08238d - 1763049399184648000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: f2f887fd-dd9b-42df-bf5f-4011e20c4c4e - 1763049399258638000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 8000ace9-8793-43e6-a1ff-ee0b1eca54d9 - 1763049399332017000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 39e414d8-273f-4f7e-be90-78f33d3c0220 - 1763049399406790000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 0ae69919-8a50-4e77-b7aa-625ba10c104a - 1763049399480552000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 0adb413b-a98b-4a09-bde6-5269b7a4fbbe - 1763049399554736000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 64ad09d9-ce6c-4343-a07c-f56132f121ba - 1763049399629615000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 4124dee7-9f6c-40ae-be1f-1b33063b8990 - 1763049399703785000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 435e413c-d4a8-434c-8895-3786b37cdb3f - 1763049399777495000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 50fb1228-4b13-4268-a63e-89394e7a5a0b - 1763049399850888000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: d906d976-5945-4ce2-bc6c-aac3c50f81d2 - 1763049399946988000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 30497b47-fc38-4895-ba9d-969b95db3ffc - 1763049400025965000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 8e914c50-0d5b-4ab9-b6d0-b5918c0904f4 - 1763049400099098000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 8e946ba6-489f-4f34-b17e-67109bd4b40d - 1763049400172708000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: fc0010de-a8c0-4fdb-84e3-edcb790f9f76 - 1763049400247024000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 40d4ba78-d594-472f-a05b-064535282f5a - 1763049400325553000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 49bb47c3-f45d-41f8-b8e7-741ca1723b7b - 1763049400400083000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 4d8aa9df-16df-45e1-8953-0e54069135b3 - 1763049400471895000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 1f064f20-f5c7-484e-b9b1-97ef9d531004 - 1763049400545582000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: efa398d4-8aed-4e59-8417-8b325bdc22de - 1763049400617932000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: f0099840-40ca-4397-b2aa-9d637c3da5e5 - 1763049400689891000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: f9bb87ad-1392-4b1c-b90e-574ed2c526f8 - 1763049400762145000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 73a3aa1f-106f-4527-80f8-011d96290f53 - 1763049400837206000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 7bceabb8-4bd2-4592-ad16-d3358f8273f9 - 1763049400910995000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: a2d8cf27-9022-439d-9edc-451179a5ed79 - 1763049400986146000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: fb8d02b9-e0d1-4e26-a223-dbc4ea523afd - 1763049401059482000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: b8b34d98-b356-4db8-b1d6-5feba9a778e8 - 1763049401135426000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 788c2dd9-01e6-4291-a000-fa87ca87caf8 - 1763049401211846000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: d4af8cd7-6523-4812-b36d-837ba27ddf98 - 1763049401288400000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 0cc615fc-9061-453c-b2ce-a356b40a202e - 1763049401362926000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 4f955983-ead8-45bb-9304-43ccf867c1d6 - 1763049401437149000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 89cc4ffb-31cb-46b6-91e2-57209447f49f - 1763049401511836000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: c1a70889-250e-4a95-b5fe-fdc6bfab0ada - 1763049401586153000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: f9a73d96-4097-443a-9fd6-8d3621b11f85 - 1763049401660118000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: d9a46c32-0a1c-4077-938c-1c533c7f7e0f - 1763049401735832000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: a14a4fcb-17f5-4a25-b7bf-e3608e39e2db - 1763049401810659000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 0f88b68b-4989-41ef-b1e3-f3f0f0c40116 - 1763049401884578000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: a5ee2983-7163-4846-837f-f643d76df56e - 1763049401962213000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 7d8ce2e2-51cd-4a22-bdec-f904500fb035 - 1763049402043688000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: b0def13f-ad2b-4b4d-a796-62e549d4ea1b - 1763049402119023000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 6cb8dd83-fe8c-4ed2-acaa-5ada6e0ce30d - 1763049402192269000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 72b82c9c-8ba5-4814-a3e2-7e44d3b6ddf0 - 1763049402270915000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: f5215ebd-2017-4e3e-a148-169b65b93a17 - 1763049402345798000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 4d406f3c-6af6-43b3-8e7e-98da4b05e2fd - 1763049402419851000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: b9ddebc4-2605-42c0-8d44-cb38d0b56371 - 1763049402493082000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 481acb1e-a3f0-4070-8e51-96932e4ce94f - 1763049402571551000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 11a61043-f3d3-4292-b4b2-9405208f2e4a - 1763049402646050000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 68ca5eaf-a630-4fbe-abeb-d9652a2b8334 - 1763049402721178000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: f8548f27-08f7-4729-ab54-158fe5052e8d - 1763049402794315000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 858dcf95-9970-49cb-bc6f-88194f148bfa - 1763049402867976000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: b41df975-da35-498e-99c2-25c85ecb275c - 1763049402941829000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: ca804f74-4aa8-485c-ac72-014201271cfc - 1763049403017297000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 93d38cf0-a97d-4ccf-a23a-5b9412d74453 - 1763049403099351000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 4441313b-5128-4225-9901-64a11481ec62 - 1763049403172591000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 77ea5b6a-3fc6-4b23-90ee-c64991c40f6b - 1763049403247359000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 55003f07-80c2-4571-9af3-9c194e05c562 - 1763049403320874000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 9f1224dd-0cf2-4036-aae7-b5f7d9c152ae - 1763049403396810000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 4fa60dbc-7cc0-41ca-a8ab-c9519c931477 - 1763049403473295000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 251327c7-9fa2-403c-b8bf-f812ba493a3d - 1763049403547975000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 9add18be-73af-4b99-a3aa-946b1c9483fc - 1763049403629137000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 81f4d690-1148-413a-9cfb-757fc533ff11 - 1763049403715234000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: d3c7e292-4177-4a07-8a93-6ec1830e56e0 - 1763049403788011000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: cae63222-976c-4b13-8992-13b80f19f857 - 1763049403863927000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 08102f04-1df0-4bcd-b3c1-81876af749e3 - 1763049403943605000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 3855976a-e5fc-49b4-a1da-bb081f341595 - 1763049404020719000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 5e96adb8-7ef2-44ad-aef3-6ea8a1517320 - 1763049404094198000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 24f0bf47-75e6-4d43-80d2-86c568b38fa5 - 1763049404170547000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 876ac044-33ae-4a6b-899f-989cf07304fa - 1763049404246135000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 6026fcc9-2291-46ec-8415-b8f354cae8ff - 1763049404323843000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 3e3dde2e-590e-4346-920e-05e35723886c - 1763049404397647000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 8c8db0d6-6367-47db-9e44-6e45ebcb28d5 - 1763049404472004000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 15d670d3-b0e9-4ba2-aa37-ecd138a633d3 - 1763049404544573000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: b83e1663-135a-484b-8226-811af1e509bb - 1763049404619911000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 61923ff4-c0a4-4796-9a9e-7fc08a1a89d8 - 1763049404694206000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: e31a2aa1-15b4-4c54-b80b-9e33cc7b0c8a - 1763049404769498000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 360914be-6a81-4e01-9fe8-feded145231e - 1763049404844281000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 5a98a57f-45c6-44d7-a8c4-e3c2e1f8613c - 1763049404921568000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: e236f24e-64e0-451f-b037-17d2c05f37d6 - 1763049404996879000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 581766ef-d999-4cfd-8b5f-fc8ca4c11c3c - 1763049405070745000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 46fead33-b597-4972-9291-33e22ec14673 - 1763049405144479000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 7e2894a3-a678-4222-ae13-137197252e16 - 1763049405217675000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 010bbfd3-c632-4112-a8f9-af7a56dd9791 - 1763049405293693000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 1e99dfe4-b8b9-4e65-8e50-3fe1c9aa294a - 1763049405368705000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: b3aae7ae-6f80-4d06-b159-3931424ac4f7 - 1763049405445997000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 442ff526-3780-4889-8667-4dd364b672c3 - 1763049405522894000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 7fe9b9be-1da1-4b54-8477-fa6d2298a9e5 - 1763049405597185000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 687a1c0f-c36c-4146-8965-d51b913420ed - 1763049405670047000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 42e97ca5-b5d3-4777-b2ab-eaa14ff29380 - 1763049405743925000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 6359c855-3bbc-4199-bec4-78d2350904a2 - 1763049405817163000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 82bf0800-a23f-4111-b46b-2851e3891955 - 1763049405892963000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: d0039fb4-50f7-4e8d-8ab5-67f5b367a5f6 - 1763049405971538000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:190: Query: 4034f2d0-34a9-48ae-be5c-10ea69d336f7 - 1763049406047737000
+    table_test.go:191: 	Version: 1 - 1
+    table_test.go:192: 	Counter (Up/Down): 5/-5
+    table_test.go:74: Table test_e2e_2025_11_13_15_56_15 will be deleted
+    table_test.go:79: Table test_e2e_2025_11_13_15_56_15 deleted
+--- PASS: TestTableE2E (80.14s)
+PASS
+coverage: 50.6% of statements
+ok  	github.com/aws/aws-sdk-go-v2/feature/dynamodb/enhancedclient	81.212s	coverage: 50.6% of statements
+testing: warning: no tests to run
+PASS
+coverage: 0.0% of statements
+ok  	github.com/aws/aws-sdk-go-v2/feature/dynamodb/enhancedclient/converters	1.061s	coverage: 0.0% of statements [no tests to run]

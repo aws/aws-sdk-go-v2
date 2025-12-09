@@ -50,22 +50,6 @@ type AfterWriter[T any] interface {
 	AfterWrite(context.Context, *T) error
 }
 
-//type BeforeQuerier interface {
-//	BeforeQuery(context.Context, *dynamodb.QueryInput) error
-//}
-//
-//type AfterQuerier[T any] interface {
-//	AfterQuery(context.Context, []T) error
-//}
-//
-//type BeforeScanner interface {
-//	BeforeScan(context.Context, *dynamodb.ScanInput) error
-//}
-//
-//type AfterScanner[T any] interface {
-//	AfterScan(context.Context, []T) error
-//}
-
 // ConditionExpressionBuilder allows a type to inject custom logic for building
 // a DynamoDB condition expression during a write operation (UpdateItem).
 // The interface embeds BeforeWriter[T] for pre-write hooks, and provides
@@ -497,10 +481,6 @@ func (v *VersionExtension[T]) BuildCondition(ctx context.Context, item *T, cb **
 
 		if condition.IsSet() {
 			condition = condition.And(
-				//expression.Equal(
-				//	expression.Name(f.Name),
-				//	expression.Value(cv.Interface()),
-				//),
 				expression.Or(
 					expression.AttributeNotExists(expression.Name(f.Name)),
 					expression.Equal(
@@ -510,7 +490,6 @@ func (v *VersionExtension[T]) BuildCondition(ctx context.Context, item *T, cb **
 				),
 			)
 		} else {
-			// condition = expression.Equal(expression.Name(f.Name), expression.Value(cv.Interface()))
 			condition = expression.Or(
 				expression.AttributeNotExists(expression.Name(f.Name)),
 				expression.Equal(
