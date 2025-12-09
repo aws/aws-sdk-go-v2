@@ -59,6 +59,9 @@ type UpdateReplicationConfigurationInput struct {
 	// Update replication configuration EBS encryption key ARN request.
 	EbsEncryptionKeyArn *string
 
+	// Update replication configuration internet protocol.
+	InternetProtocol types.InternetProtocol
+
 	// Update replication configuration name request.
 	Name *string
 
@@ -109,6 +112,9 @@ type UpdateReplicationConfigurationOutput struct {
 
 	// Replication Configuration EBS encryption key ARN.
 	EbsEncryptionKeyArn *string
+
+	// Replication Configuration internet protocol.
+	InternetProtocol types.InternetProtocol
 
 	// Replication Configuration name.
 	Name *string

@@ -64,6 +64,9 @@ type GetReplicationConfigurationOutput struct {
 	// Replication Configuration EBS encryption key ARN.
 	EbsEncryptionKeyArn *string
 
+	// Replication Configuration internet protocol.
+	InternetProtocol types.InternetProtocol
+
 	// Replication Configuration name.
 	Name *string
 

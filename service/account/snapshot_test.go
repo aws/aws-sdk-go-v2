@@ -146,6 +146,18 @@ func TestCheckSnapshot_GetContactInformation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetGovCloudAccountInformation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGovCloudAccountInformation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetGovCloudAccountInformation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetPrimaryEmail(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPrimaryEmail(context.Background(), nil, func(o *Options) {
@@ -306,6 +318,18 @@ func TestUpdateSnapshot_GetContactInformation(t *testing.T) {
 	_, err := svc.GetContactInformation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetContactInformation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetGovCloudAccountInformation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGovCloudAccountInformation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetGovCloudAccountInformation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

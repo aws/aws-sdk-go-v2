@@ -1,0 +1,8 @@
+{
+    "id": "f592aff7-7ec0-4334-ac12-d5d2f0c7393a",
+    "type": "feature",
+    "description": "Added parameters encryption, IPv4/IPv6 protocol configuration, and enhanced tagging support for replication operations.",
+    "modules": [
+        "service/mgn"
+    ]
+}

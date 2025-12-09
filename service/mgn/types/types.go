@@ -163,6 +163,9 @@ type DataReplicationInfo struct {
 	// Request to query disks replicated.
 	ReplicatedDisks []DataReplicationInfoReplicatedDisk
 
+	// Replication server instance ID.
+	ReplicatorId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -292,6 +295,9 @@ type ExportErrorData struct {
 // Export task.
 type ExportTask struct {
 
+	// ExportTask arn.
+	Arn *string
+
 	// Export task creation datetime.
 	CreationDateTime *string
 
@@ -318,6 +324,9 @@ type ExportTask struct {
 
 	// Export task summary.
 	Summary *ExportTaskSummary
+
+	// Export task tags.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -400,6 +409,9 @@ type ImportErrorData struct {
 // Import task.
 type ImportTask struct {
 
+	// ImportTask arn.
+	Arn *string
+
 	// Import task creation datetime.
 	CreationDateTime *string
 
@@ -420,6 +432,9 @@ type ImportTask struct {
 
 	// Import task summary.
 	Summary *ImportTaskSummary
+
+	// Import task tags.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -543,8 +558,14 @@ type JobLog struct {
 // Job log data
 type JobLogEventData struct {
 
+	// Retries for this operation.
+	AttemptCount *int32
+
 	// Job Event conversion Server ID.
 	ConversionServerID *string
+
+	// The maximum number of retries that will be attempted if this operation failed.
+	MaxAttemptsCount *int32
 
 	// Job error.
 	RawError *string
@@ -608,6 +629,9 @@ type LaunchConfigurationTemplate struct {
 	// Enable map auto tagging.
 	EnableMapAutoTagging *bool
 
+	// Enable parameters encryption.
+	EnableParametersEncryption *bool
+
 	// Large volume config.
 	LargeVolumeConf *LaunchTemplateDiskConf
 
@@ -619,6 +643,9 @@ type LaunchConfigurationTemplate struct {
 
 	// Launch configuration template map auto tagging MPE ID.
 	MapAutoTaggingMpeID *string
+
+	// Parameters encryption key.
+	ParametersEncryptionKey *string
 
 	// Post Launch Actions of the Launch Configuration Template.
 	PostLaunchActions *PostLaunchActions
@@ -987,6 +1014,9 @@ type ReplicationConfigurationTemplate struct {
 
 	// Replication Configuration template EBS encryption key ARN.
 	EbsEncryptionKeyArn *string
+
+	// Replication Configuration template internet protocol.
+	InternetProtocol InternetProtocol
 
 	// Replication Configuration template server instance type.
 	ReplicationServerInstanceType *string

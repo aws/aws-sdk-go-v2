@@ -762,6 +762,11 @@ func awsRestjson1_serializeOpDocumentCreateLaunchConfigurationTemplateInput(v *C
 		ok.Boolean(*v.EnableMapAutoTagging)
 	}
 
+	if v.EnableParametersEncryption != nil {
+		ok := object.Key("enableParametersEncryption")
+		ok.Boolean(*v.EnableParametersEncryption)
+	}
+
 	if v.LargeVolumeConf != nil {
 		ok := object.Key("largeVolumeConf")
 		if err := awsRestjson1_serializeDocumentLaunchTemplateDiskConf(v.LargeVolumeConf, ok); err != nil {
@@ -784,6 +789,11 @@ func awsRestjson1_serializeOpDocumentCreateLaunchConfigurationTemplateInput(v *C
 	if v.MapAutoTaggingMpeID != nil {
 		ok := object.Key("mapAutoTaggingMpeID")
 		ok.String(*v.MapAutoTaggingMpeID)
+	}
+
+	if v.ParametersEncryptionKey != nil {
+		ok := object.Key("parametersEncryptionKey")
+		ok.String(*v.ParametersEncryptionKey)
 	}
 
 	if v.PostLaunchActions != nil {
@@ -926,6 +936,11 @@ func awsRestjson1_serializeOpDocumentCreateReplicationConfigurationTemplateInput
 	if v.EbsEncryptionKeyArn != nil {
 		ok := object.Key("ebsEncryptionKeyArn")
 		ok.String(*v.EbsEncryptionKeyArn)
+	}
+
+	if len(v.InternetProtocol) > 0 {
+		ok := object.Key("internetProtocol")
+		ok.String(string(v.InternetProtocol))
 	}
 
 	if v.ReplicationServerInstanceType != nil {
@@ -4893,6 +4908,13 @@ func awsRestjson1_serializeOpDocumentStartExportInput(v *StartExportInput, value
 		ok.String(*v.S3Key)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4977,6 +4999,13 @@ func awsRestjson1_serializeOpDocumentStartImportInput(v *StartImportInput, value
 	if v.S3BucketSource != nil {
 		ok := object.Key("s3BucketSource")
 		if err := awsRestjson1_serializeDocumentS3BucketSource(v.S3BucketSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
 			return err
 		}
 	}
@@ -6118,6 +6147,11 @@ func awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationTemplateInput(v *U
 		ok.Boolean(*v.EnableMapAutoTagging)
 	}
 
+	if v.EnableParametersEncryption != nil {
+		ok := object.Key("enableParametersEncryption")
+		ok.Boolean(*v.EnableParametersEncryption)
+	}
+
 	if v.LargeVolumeConf != nil {
 		ok := object.Key("largeVolumeConf")
 		if err := awsRestjson1_serializeDocumentLaunchTemplateDiskConf(v.LargeVolumeConf, ok); err != nil {
@@ -6145,6 +6179,11 @@ func awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationTemplateInput(v *U
 	if v.MapAutoTaggingMpeID != nil {
 		ok := object.Key("mapAutoTaggingMpeID")
 		ok.String(*v.MapAutoTaggingMpeID)
+	}
+
+	if v.ParametersEncryptionKey != nil {
+		ok := object.Key("parametersEncryptionKey")
+		ok.String(*v.ParametersEncryptionKey)
 	}
 
 	if v.PostLaunchActions != nil {
@@ -6285,6 +6324,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationInput(v *Upda
 	if v.EbsEncryptionKeyArn != nil {
 		ok := object.Key("ebsEncryptionKeyArn")
 		ok.String(*v.EbsEncryptionKeyArn)
+	}
+
+	if len(v.InternetProtocol) > 0 {
+		ok := object.Key("internetProtocol")
+		ok.String(string(v.InternetProtocol))
 	}
 
 	if v.Name != nil {
@@ -6452,6 +6496,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationTemplateInput
 	if v.EbsEncryptionKeyArn != nil {
 		ok := object.Key("ebsEncryptionKeyArn")
 		ok.String(*v.EbsEncryptionKeyArn)
+	}
+
+	if len(v.InternetProtocol) > 0 {
+		ok := object.Key("internetProtocol")
+		ok.String(string(v.InternetProtocol))
 	}
 
 	if v.ReplicationConfigurationTemplateID != nil {

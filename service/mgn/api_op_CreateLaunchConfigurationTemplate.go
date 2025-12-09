@@ -44,6 +44,9 @@ type CreateLaunchConfigurationTemplateInput struct {
 	// Enable map auto tagging.
 	EnableMapAutoTagging *bool
 
+	// Enable parameters encryption.
+	EnableParametersEncryption *bool
+
 	// Large volume config.
 	LargeVolumeConf *types.LaunchTemplateDiskConf
 
@@ -55,6 +58,9 @@ type CreateLaunchConfigurationTemplateInput struct {
 
 	// Launch configuration template map auto tagging MPE ID.
 	MapAutoTaggingMpeID *string
+
+	// Parameters encryption key.
+	ParametersEncryptionKey *string
 
 	// Launch configuration template post launch actions.
 	PostLaunchActions *types.PostLaunchActions
@@ -102,6 +108,9 @@ type CreateLaunchConfigurationTemplateOutput struct {
 	// Enable map auto tagging.
 	EnableMapAutoTagging *bool
 
+	// Enable parameters encryption.
+	EnableParametersEncryption *bool
+
 	// Large volume config.
 	LargeVolumeConf *types.LaunchTemplateDiskConf
 
@@ -113,6 +122,9 @@ type CreateLaunchConfigurationTemplateOutput struct {
 
 	// Launch configuration template map auto tagging MPE ID.
 	MapAutoTaggingMpeID *string
+
+	// Parameters encryption key.
+	ParametersEncryptionKey *string
 
 	// Post Launch Actions of the Launch Configuration Template.
 	PostLaunchActions *types.PostLaunchActions

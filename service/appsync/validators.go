@@ -2335,7 +2335,9 @@ func validateOpCreateApiInput(v *CreateApiInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.EventConfig != nil {
+	if v.EventConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventConfig"))
+	} else if v.EventConfig != nil {
 		if err := validateEventConfig(v.EventConfig); err != nil {
 			invalidParams.AddNested("EventConfig", err.(smithy.InvalidParamsError))
 		}
@@ -3426,7 +3428,9 @@ func validateOpUpdateApiInput(v *UpdateApiInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.EventConfig != nil {
+	if v.EventConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventConfig"))
+	} else if v.EventConfig != nil {
 		if err := validateEventConfig(v.EventConfig); err != nil {
 			invalidParams.AddNested("EventConfig", err.(smithy.InvalidParamsError))
 		}

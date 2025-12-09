@@ -7710,6 +7710,11 @@ func awsRestjson1_deserializeDocumentEvent(v **types.Event, value interface{}) e
 				sv.Name = types.EventName(jtv)
 			}
 
+		case "newToken":
+			if err := awsRestjson1_deserializeDocumentExchangedParticipantToken(&sv.NewToken, value); err != nil {
+				return err
+			}
+
 		case "participantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7717,6 +7722,11 @@ func awsRestjson1_deserializeDocumentEvent(v **types.Event, value interface{}) e
 					return fmt.Errorf("expected ParticipantId to be of type string, got %T instead", value)
 				}
 				sv.ParticipantId = ptr.String(jtv)
+			}
+
+		case "previousToken":
+			if err := awsRestjson1_deserializeDocumentExchangedParticipantToken(&sv.PreviousToken, value); err != nil {
+				return err
 			}
 
 		case "remoteParticipantId":
@@ -7777,6 +7787,69 @@ func awsRestjson1_deserializeDocumentEventList(v *[]types.Event, value interface
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExchangedParticipantToken(v **types.ExchangedParticipantToken, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExchangedParticipantToken
+	if *v == nil {
+		sv = &types.ExchangedParticipantToken{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "attributes":
+			if err := awsRestjson1_deserializeDocumentParticipantTokenAttributes(&sv.Attributes, value); err != nil {
+				return err
+			}
+
+		case "capabilities":
+			if err := awsRestjson1_deserializeDocumentParticipantTokenCapabilities(&sv.Capabilities, value); err != nil {
+				return err
+			}
+
+		case "expirationTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantTokenExpirationTime to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.ExpirationTime = ptr.Time(t)
+			}
+
+		case "userId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantTokenUserId to be of type string, got %T instead", value)
+				}
+				sv.UserId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

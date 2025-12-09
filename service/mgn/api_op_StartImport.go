@@ -38,6 +38,9 @@ type StartImportInput struct {
 	// Start import request client token.
 	ClientToken *string
 
+	// Start import request tags.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

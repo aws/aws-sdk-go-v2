@@ -196,6 +196,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "elasticbeanstalk.ap-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-south-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -223,7 +226,13 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "elasticbeanstalk.ap-southeast-3.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-4",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-5",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-6",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-7",
@@ -238,6 +247,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "elasticbeanstalk.ca-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -246,6 +258,9 @@ var defaultPartitions = endpoints.Partitions{
 			}: {
 				Hostname: "elasticbeanstalk.eu-central-1.api.aws",
 			},
+			endpoints.EndpointKey{
+				Region: "eu-central-2",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{},

@@ -124,6 +124,35 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The operation failed because it specified a resource that is not currently
+// available.
+type ResourceUnavailableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ErrorType *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceUnavailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceUnavailableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The operation failed because it was called too frequently and exceeded a
 // throttle limit.
 type TooManyRequestsException struct {

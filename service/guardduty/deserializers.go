@@ -17238,7 +17238,7 @@ func awsRestjson1_deserializeDocumentEc2LaunchTemplate(v **types.Ec2LaunchTempla
 				return err
 			}
 
-		case "Version":
+		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

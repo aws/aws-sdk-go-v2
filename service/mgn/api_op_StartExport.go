@@ -43,6 +43,9 @@ type StartExportInput struct {
 	// Start export request s3 bucket owner.
 	S3BucketOwner *string
 
+	// Start import request tags.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

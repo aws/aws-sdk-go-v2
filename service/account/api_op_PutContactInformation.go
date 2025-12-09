@@ -13,9 +13,9 @@ import (
 
 // Updates the primary contact information of an Amazon Web Services account.
 //
-// For complete details about how to use the primary contact operations, see [Update the primary and alternate contact information].
+// For complete details about how to use the primary contact operations, see [Update the primary contact for your Amazon Web Services account].
 //
-// [Update the primary and alternate contact information]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+// [Update the primary contact for your Amazon Web Services account]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html
 func (c *Client) PutContactInformation(ctx context.Context, params *PutContactInformationInput, optFns ...func(*Options)) (*PutContactInformationOutput, error) {
 	if params == nil {
 		params = &PutContactInformationInput{}
@@ -46,7 +46,7 @@ type PutContactInformationInput struct {
 	// the [organization's management account]or a delegated administrator account. The specified account ID must be a
 	// member account in the same organization. The organization must have [all features enabled], and the
 	// organization must have [trusted access]enabled for the Account Management service, and
-	// optionally a [delegated admin]account assigned.
+	// optionally a [delegated administrator]account assigned.
 	//
 	// The management account can't specify its own AccountId . It must call the
 	// operation in standalone context by not including the AccountId parameter.
@@ -56,9 +56,9 @@ type PutContactInformationInput struct {
 	// belonging to the account whose contacts you wish to retrieve or modify.
 	//
 	// [organization's management account]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+	// [delegated administrator]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
 	// [all features enabled]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-	// [delegated admin]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
-	// [trusted access]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+	// [trusted access]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
 	AccountId *string
 
 	noSmithyDocumentSerde

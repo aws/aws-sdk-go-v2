@@ -384,9 +384,15 @@ type Event struct {
 	// The name of the event.
 	Name EventName
 
+	// Participant token created during TOKEN_EXCHANGED event.
+	NewToken *ExchangedParticipantToken
+
 	// Unique identifier for the participant who triggered the event. This is assigned
 	// by IVS.
 	ParticipantId *string
+
+	// Source participant token for TOKEN_EXCHANGED event.
+	PreviousToken *ExchangedParticipantToken
 
 	// Unique identifier for the remote participant. For a subscribe event, this is
 	// the publisher. For a publish or join event, this is null. This is assigned by
@@ -397,6 +403,34 @@ type Event struct {
 	// is a subscribe event, then this flag refers to remoteParticipantId . Default:
 	// false .
 	Replica bool
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying an exchanged participant token in a stage, created when an
+// original participant token is updated.
+//
+// Important: Treat tokens as opaque; i.e., do not build functionality based on
+// token contents. The format of tokens could change in the future.
+type ExchangedParticipantToken struct {
+
+	// Application-provided attributes to encode into the token and attach to a stage.
+	// Map keys and values can contain UTF-8 encoded text. The maximum length of this
+	// field is 1 KB total. This field is exposed to all stage participants and should
+	// not be used for personally identifying, confidential, or sensitive information.
+	Attributes map[string]string
+
+	// Set of capabilities that the user is allowed to perform in the stage.
+	Capabilities []ParticipantTokenCapability
+
+	// ISO 8601 timestamp (returned as a string) for when this token expires.
+	ExpirationTime *time.Time
+
+	// Customer-assigned name to help identify the token; this can be used to link a
+	// participant to a user in the customer’s own systems. This can be any UTF-8
+	// encoded text. This field is exposed to all stage participants and should not be
+	// used for personally identifying, confidential, or sensitive information.
+	UserId *string
 
 	noSmithyDocumentSerde
 }
@@ -756,8 +790,9 @@ type ParticipantThumbnailConfiguration struct {
 type ParticipantToken struct {
 
 	// Application-provided attributes to encode into the token and attach to a stage.
-	// This field is exposed to all stage participants and should not be used for
-	// personally identifying, confidential, or sensitive information.
+	// Map keys and values can contain UTF-8 encoded text. The maximum length of this
+	// field is 1 KB total. This field is exposed to all stage participants and should
+	// not be used for personally identifying, confidential, or sensitive information.
 	Attributes map[string]string
 
 	// Set of capabilities that the user is allowed to perform in the stage.

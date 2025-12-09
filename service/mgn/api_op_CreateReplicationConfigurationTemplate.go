@@ -98,6 +98,9 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// creation.
 	EbsEncryptionKeyArn *string
 
+	// Request to configure the internet protocol to IPv4 or IPv6.
+	InternetProtocol types.InternetProtocol
+
 	// Request to configure tags during Replication Settings template creation.
 	Tags map[string]string
 
@@ -138,6 +141,9 @@ type CreateReplicationConfigurationTemplateOutput struct {
 
 	// Replication Configuration template EBS encryption key ARN.
 	EbsEncryptionKeyArn *string
+
+	// Replication Configuration template internet protocol.
+	InternetProtocol types.InternetProtocol
 
 	// Replication Configuration template server instance type.
 	ReplicationServerInstanceType *string

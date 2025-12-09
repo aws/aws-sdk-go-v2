@@ -112,6 +112,7 @@ const (
 	EventNameJoinError          EventName = "JOIN_ERROR"
 	EventNameReplicationStarted EventName = "REPLICATION_STARTED"
 	EventNameReplicationStopped EventName = "REPLICATION_STOPPED"
+	EventNameTokenExchanged     EventName = "TOKEN_EXCHANGED"
 )
 
 // Values returns all known values for EventName. Note that this can be expanded
@@ -131,6 +132,7 @@ func (EventName) Values() []EventName {
 		"JOIN_ERROR",
 		"REPLICATION_STARTED",
 		"REPLICATION_STOPPED",
+		"TOKEN_EXCHANGED",
 	}
 }
 

@@ -31,14 +31,16 @@ func (c *Client) CreateApi(ctx context.Context, params *CreateApiInput, optFns .
 
 type CreateApiInput struct {
 
+	// The Event API configuration. This includes the default authorization
+	// configuration for connecting, publishing, and subscribing to an Event API.
+	//
+	// This member is required.
+	EventConfig *types.EventConfig
+
 	// The name for the Api .
 	//
 	// This member is required.
 	Name *string
-
-	// The Event API configuration. This includes the default authorization
-	// configuration for connecting, publishing, and subscribing to an Event API.
-	EventConfig *types.EventConfig
 
 	// The owner contact information for the Api .
 	OwnerContact *string

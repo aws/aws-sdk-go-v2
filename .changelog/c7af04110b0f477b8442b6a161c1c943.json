@@ -1,0 +1,8 @@
+{
+    "id": "c7af0411-0b0f-477b-8442-b6a161c1c943",
+    "type": "feature",
+    "description": "Update Event API to require EventConfig parameter in creation and update requests.",
+    "modules": [
+        "service/appsync"
+    ]
+}

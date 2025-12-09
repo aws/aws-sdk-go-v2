@@ -34,14 +34,16 @@ type UpdateApiInput struct {
 	// This member is required.
 	ApiId *string
 
+	// The new event configuration. This includes the default authorization
+	// configuration for connecting, publishing, and subscribing to an Event API.
+	//
+	// This member is required.
+	EventConfig *types.EventConfig
+
 	// The name of the Api.
 	//
 	// This member is required.
 	Name *string
-
-	// The new event configuration. This includes the default authorization
-	// configuration for connecting, publishing, and subscribing to an Event API.
-	EventConfig *types.EventConfig
 
 	// The owner contact information for the Api .
 	OwnerContact *string
