@@ -3886,6 +3886,12 @@
                     "traits": {
                         "smithy.api#enumValue": "us-isob-west-1"
                     }
+                },
+                "eusc_de_east_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eusc-de-east-1"
+                    }
                 }
             },
             "traits": {
@@ -11400,6 +11406,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ap-southeast-6"
                     }
+                },
+                "eusc_de_east_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eusc-de-east-1"
+                    }
                 }
             },
             "traits": {
@@ -13141,6 +13153,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "us-isob-west-1"
+                    }
+                },
+                "eusc_de_east_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eusc-de-east-1"
                     }
                 }
             },

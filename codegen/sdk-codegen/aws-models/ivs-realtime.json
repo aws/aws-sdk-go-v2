@@ -2371,6 +2371,18 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If true, this indicates the <code>participantId</code> is a replicated participant. \n\t  If this is a subscribe event, then this flag refers to <code>remoteParticipantId</code>. Default: <code>false</code>.</p>"
                     }
+                },
+                "previousToken": {
+                    "target": "com.amazonaws.ivsrealtime#ExchangedParticipantToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source participant token for <code>TOKEN_EXCHANGED</code> event.</p>"
+                    }
+                },
+                "newToken": {
+                    "target": "com.amazonaws.ivsrealtime#ExchangedParticipantToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participant token created during <code>TOKEN_EXCHANGED</code> event.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2519,8 +2531,44 @@
                     {
                         "value": "REPLICATION_STOPPED",
                         "name": "REPLICATION_STOPPED"
+                    },
+                    {
+                        "value": "TOKEN_EXCHANGED",
+                        "name": "TOKEN_EXCHANGED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.ivsrealtime#ExchangedParticipantToken": {
+            "type": "structure",
+            "members": {
+                "capabilities": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set of capabilities that the user is allowed to perform in the stage.</p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-provided attributes to encode into the token and attach to a\n         stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field\n         is 1 KB total. <i>This field is exposed to all stage participants and should not be\n            used for personally identifying, confidential, or sensitive\n         information.</i>\n         </p>"
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenUserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customer-assigned name to help identify the token; this can be used to link a\n         participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.\n            <i>This field is exposed to all stage participants and should not be used for\n            personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "expirationTime": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenExpirationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ISO 8601 timestamp (returned as a string) for when this token expires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object specifying an exchanged participant token in a stage, created when an original participant token is updated.</p>\n         <p>\n            <b>Important</b>: Treat tokens as opaque; i.e., do not build\n         functionality based on token contents. The format of tokens could change in the\n         future.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#Framerate": {
@@ -4995,7 +5043,7 @@
                 "attributes": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantTokenAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Application-provided attributes to encode into the token and attach to a stage.\n            <i>This field is exposed to all stage participants and should not be used for\n            personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>Application-provided attributes to encode into the token and attach to a\n         stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field\n         is 1 KB total. <i>This field is exposed to all stage participants and should not be\n            used for personally identifying, confidential, or sensitive\n         information.</i>\n         </p>"
                     }
                 },
                 "duration": {

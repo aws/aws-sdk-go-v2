@@ -5449,7 +5449,8 @@
                 "Version": {
                     "target": "com.amazonaws.guardduty#LaunchTemplateVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Version of the EC2 launch template.</p>"
+                        "smithy.api#documentation": "<p>Version of the EC2 launch template.</p>",
+                        "smithy.api#jsonName": "version"
                     }
                 }
             },

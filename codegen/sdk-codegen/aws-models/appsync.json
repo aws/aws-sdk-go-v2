@@ -2661,7 +2661,8 @@
                 "eventConfig": {
                     "target": "com.amazonaws.appsync#EventConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Event API configuration. This includes the default authorization configuration for\n         connecting, publishing, and subscribing to an Event API.</p>"
+                        "smithy.api#documentation": "<p>The Event API configuration. This includes the default authorization configuration for\n         connecting, publishing, and subscribing to an Event API.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -9831,7 +9832,8 @@
                 "eventConfig": {
                     "target": "com.amazonaws.appsync#EventConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new event configuration. This includes the default authorization configuration for\n         connecting, publishing, and subscribing to an Event API.</p>"
+                        "smithy.api#documentation": "<p>The new event configuration. This includes the default authorization configuration for\n         connecting, publishing, and subscribing to an Event API.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },

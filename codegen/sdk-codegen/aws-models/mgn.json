@@ -2172,6 +2172,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Large volume config.</p>"
                     }
+                },
+                "enableParametersEncryption": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable parameters encryption.</p>"
+                    }
+                },
+                "parametersEncryptionKey": {
+                    "target": "com.amazonaws.mgn#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters encryption key.</p>"
+                    }
                 }
             }
         },
@@ -2272,7 +2284,7 @@
                 "dataPlaneRouting": {
                     "target": "com.amazonaws.mgn#ReplicationConfigurationDataPlaneRouting",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request to configure  data plane routing during Replication Settings template creation.</p>",
+                        "smithy.api#documentation": "<p>Request to configure data plane routing during Replication Settings template creation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2300,6 +2312,12 @@
                     "target": "com.amazonaws.mgn#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Request to configure tags during Replication Settings template creation.</p>"
+                    }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.mgn#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to configure the internet protocol to IPv4 or IPv6.</p>"
                     }
                 }
             }
@@ -2497,6 +2515,12 @@
                     "target": "com.amazonaws.mgn#ISO8601DatetimeString",
                     "traits": {
                         "smithy.api#documentation": "<p>Request to query data replication last snapshot time.</p>"
+                    }
+                },
+                "replicatorId": {
+                    "target": "com.amazonaws.mgn#ReplicatorID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replication server instance ID.</p>"
                     }
                 }
             },
@@ -4038,6 +4062,12 @@
                         "smithy.api#documentation": "<p>Export task id.</p>"
                     }
                 },
+                "arn": {
+                    "target": "com.amazonaws.mgn#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ExportTask arn.</p>"
+                    }
+                },
                 "s3Bucket": {
                     "target": "com.amazonaws.mgn#S3BucketName",
                     "traits": {
@@ -4084,6 +4114,12 @@
                     "target": "com.amazonaws.mgn#ExportTaskSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Export task summary.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Export task tags.</p>"
                     }
                 }
             },
@@ -4525,6 +4561,12 @@
                         "smithy.api#documentation": "<p>Import task id.</p>"
                     }
                 },
+                "arn": {
+                    "target": "com.amazonaws.mgn#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ImportTask arn.</p>"
+                    }
+                },
                 "s3BucketSource": {
                     "target": "com.amazonaws.mgn#S3BucketSource",
                     "traits": {
@@ -4559,6 +4601,12 @@
                     "target": "com.amazonaws.mgn#ImportTaskSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Import task summary.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Import task tags.</p>"
                     }
                 }
             },
@@ -4762,6 +4810,21 @@
                 "smithy.api#documentation": "<p>The server encountered an unexpected condition that prevented it from fulfilling the request.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.mgn#InternetProtocol": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IPV4",
+                        "name": "IPV4"
+                    },
+                    {
+                        "value": "IPV6",
+                        "name": "IPV6"
+                    }
+                ]
             }
         },
         "com.amazonaws.mgn#Iops": {
@@ -4979,6 +5042,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Job error.</p>"
                     }
+                },
+                "attemptCount": {
+                    "target": "com.amazonaws.mgn#StrictlyPositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retries for this operation.</p>"
+                    }
+                },
+                "maxAttemptsCount": {
+                    "target": "com.amazonaws.mgn#StrictlyPositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of retries that will be attempted if this operation failed.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5091,6 +5166,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mgn#Job"
+            }
+        },
+        "com.amazonaws.mgn#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 276
+                },
+                "smithy.api#pattern": "^((arn:[\\w-]+:kms:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:((alias|key)/[a-zA-Z0-9:/_-]{1,256}))|())$"
             }
         },
         "com.amazonaws.mgn#LargeBoundedString": {
@@ -5278,6 +5363,18 @@
                     "target": "com.amazonaws.mgn#LaunchTemplateDiskConf",
                     "traits": {
                         "smithy.api#documentation": "<p>Large volume config.</p>"
+                    }
+                },
+                "enableParametersEncryption": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable parameters encryption.</p>"
+                    }
+                },
+                "parametersEncryptionKey": {
+                    "target": "com.amazonaws.mgn#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters encryption key.</p>"
                     }
                 }
             }
@@ -7469,6 +7566,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Replication Configuration use Fips Endpoint.</p>"
                     }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.mgn#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replication Configuration internet protocol.</p>"
+                    }
                 }
             }
         },
@@ -7712,6 +7815,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Replication Configuration template Tags.</p>"
                     }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.mgn#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replication Configuration template internet protocol.</p>"
+                    }
                 }
             }
         },
@@ -7805,6 +7914,16 @@
                     "min": 0,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.mgn#ReplicatorID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 19,
+                    "max": 19
+                },
+                "smithy.api#pattern": "^i-[0-9a-zA-Z]{17}$"
             }
         },
         "com.amazonaws.mgn#ResourceNotFoundException": {
@@ -8187,7 +8306,7 @@
                     }
                 },
                 "userProvidedID": {
-                    "target": "com.amazonaws.mgn#BoundedString",
+                    "target": "com.amazonaws.mgn#UserProvidedId",
                     "traits": {
                         "smithy.api#documentation": "<p>Source server user provided ID.</p>"
                     }
@@ -8624,6 +8743,10 @@
                     {
                         "name": "STRING",
                         "value": "STRING"
+                    },
+                    {
+                        "name": "SECURE_STRING",
+                        "value": "SECURE_STRING"
                     }
                 ]
             }
@@ -8765,6 +8888,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Start export request s3 bucket owner.</p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Start import request tags.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8835,6 +8964,12 @@
                         "smithy.api#documentation": "<p>Start import request s3 bucket source.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Start import request tags.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8881,7 +9016,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts replication for SNAPSHOT_SHIPPING agents.</p>",
+                "smithy.api#documentation": "<p>Start replication for source server irrespective of its replication type.</p>",
                 "smithy.api#http": {
                     "uri": "/StartReplication",
                     "method": "POST",
@@ -9696,7 +9831,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates multiple LaunchConfigurations by Source Server ID.</p>\n        <note>\n            <p>bootMode valid values are <code>LEGACY_BIOS | UEFI</code>\n            </p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates multiple LaunchConfigurations by Source Server ID.</p> <note> <p>bootMode valid values are <code>LEGACY_BIOS | UEFI</code> </p> </note>",
                 "smithy.api#http": {
                     "uri": "/UpdateLaunchConfiguration",
                     "method": "POST",
@@ -9896,6 +10031,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Large volume config.</p>"
                     }
+                },
+                "enableParametersEncryption": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable parameters encryption.</p>"
+                    }
+                },
+                "parametersEncryptionKey": {
+                    "target": "com.amazonaws.mgn#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters encryption key.</p>"
+                    }
                 }
             }
         },
@@ -10040,6 +10187,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Update replication configuration Account ID request.</p>"
                     }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.mgn#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update replication configuration internet protocol.</p>"
+                    }
                 }
             }
         },
@@ -10168,6 +10321,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Update replication configuration template use Fips Endpoint request.</p>"
                     }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.mgn#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update replication configuration template internet protocol request.</p>"
+                    }
                 }
             }
         },
@@ -10223,7 +10382,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type.</p>",
+                "smithy.api#documentation": "<p>Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type. </p> <p>SNAPSHOT_SHIPPING should be used for agentless replication.</p>",
                 "smithy.api#http": {
                     "uri": "/UpdateSourceServerReplicationType",
                     "method": "POST",
@@ -10340,6 +10499,16 @@
                         "smithy.api#documentation": "<p>Account ID.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mgn#UserProvidedId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\s\\x00]( *[^\\s\\x00])*$"
             }
         },
         "com.amazonaws.mgn#ValidationException": {
