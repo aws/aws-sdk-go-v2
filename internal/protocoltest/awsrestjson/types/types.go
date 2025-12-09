@@ -8,6 +8,12 @@ import (
 	"time"
 )
 
+type BlobPayloadEvent struct {
+	Payload []byte
+
+	noSmithyDocumentSerde
+}
+
 type ClientOptionalDefaults struct {
 	Member *int32
 
@@ -90,8 +96,113 @@ type Dialog struct {
 	noSmithyDocumentSerde
 }
 
+// The following types satisfy this interface:
+//
+//	EventStreamMemberBlobPayload
+//	EventStreamMemberHeaders
+//	EventStreamMemberHeadersAndExplicitPayload
+//	EventStreamMemberHeadersAndImplicitPayload
+//	EventStreamMemberStringPayload
+//	EventStreamMemberStructurePayload
+//	EventStreamMemberUnionPayload
+type EventStream interface {
+	isEventStream()
+}
+
+type EventStreamMemberBlobPayload struct {
+	Value BlobPayloadEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*EventStreamMemberBlobPayload) isEventStream() {}
+
+type EventStreamMemberHeaders struct {
+	Value HeadersEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*EventStreamMemberHeaders) isEventStream() {}
+
+type EventStreamMemberHeadersAndExplicitPayload struct {
+	Value HeadersAndExplicitPayloadEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*EventStreamMemberHeadersAndExplicitPayload) isEventStream() {}
+
+type EventStreamMemberHeadersAndImplicitPayload struct {
+	Value HeadersAndImplicitPayloadEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*EventStreamMemberHeadersAndImplicitPayload) isEventStream() {}
+
+type EventStreamMemberStringPayload struct {
+	Value StringPayloadEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*EventStreamMemberStringPayload) isEventStream() {}
+
+type EventStreamMemberStructurePayload struct {
+	Value StructurePayloadEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*EventStreamMemberStructurePayload) isEventStream() {}
+
+type EventStreamMemberUnionPayload struct {
+	Value UnionPayloadEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*EventStreamMemberUnionPayload) isEventStream() {}
+
 type Farewell struct {
 	Phrase *string
+
+	noSmithyDocumentSerde
+}
+
+type HeadersAndExplicitPayloadEvent struct {
+	Header *string
+
+	Payload *PayloadStructure
+
+	noSmithyDocumentSerde
+}
+
+type HeadersAndImplicitPayloadEvent struct {
+	Header *string
+
+	Payload *string
+
+	noSmithyDocumentSerde
+}
+
+type HeadersEvent struct {
+	BlobHeader []byte
+
+	BooleanHeader *bool
+
+	ByteHeader *int8
+
+	IntHeader *int32
+
+	LongHeader *int64
+
+	ShortHeader *int16
+
+	StringHeader *string
+
+	TimestampHeader *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -208,6 +319,27 @@ type PayloadConfig struct {
 	noSmithyDocumentSerde
 }
 
+type PayloadStructure struct {
+	StructureMember *string
+
+	noSmithyDocumentSerde
+}
+
+// The following types satisfy this interface:
+//
+//	PayloadUnionMemberUnionMember
+type PayloadUnion interface {
+	isPayloadUnion()
+}
+
+type PayloadUnionMemberUnionMember struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*PayloadUnionMemberUnionMember) isPayloadUnion() {}
+
 // The following types satisfy this interface:
 //
 //	PlayerActionMemberQuit
@@ -264,10 +396,43 @@ type SimpleUnionMemberString struct {
 
 func (*SimpleUnionMemberString) isSimpleUnion() {}
 
+type SingletonEvent struct {
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The following types satisfy this interface:
+//
+//	SingletonEventStreamMemberSingleton
+type SingletonEventStream interface {
+	isSingletonEventStream()
+}
+
+type SingletonEventStreamMemberSingleton struct {
+	Value SingletonEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*SingletonEventStreamMemberSingleton) isSingletonEventStream() {}
+
+type StringPayloadEvent struct {
+	Payload *string
+
+	noSmithyDocumentSerde
+}
+
 type StructureListMember struct {
 	A *string
 
 	B *string
+
+	noSmithyDocumentSerde
+}
+
+type StructurePayloadEvent struct {
+	Payload *PayloadStructure
 
 	noSmithyDocumentSerde
 }
@@ -304,6 +469,12 @@ type UnionPayloadMemberGreeting struct {
 }
 
 func (*UnionPayloadMemberGreeting) isUnionPayload() {}
+
+type UnionPayloadEvent struct {
+	Payload PayloadUnion
+
+	noSmithyDocumentSerde
+}
 
 // The following types satisfy this interface:
 //
@@ -365,8 +536,11 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isMyUnion()           {}
-func (*UnknownUnionMember) isPlayerAction()      {}
-func (*UnknownUnionMember) isSimpleUnion()       {}
-func (*UnknownUnionMember) isUnionPayload()      {}
-func (*UnknownUnionMember) isUnionWithJsonName() {}
+func (*UnknownUnionMember) isEventStream()          {}
+func (*UnknownUnionMember) isMyUnion()              {}
+func (*UnknownUnionMember) isPayloadUnion()         {}
+func (*UnknownUnionMember) isPlayerAction()         {}
+func (*UnknownUnionMember) isSimpleUnion()          {}
+func (*UnknownUnionMember) isSingletonEventStream() {}
+func (*UnknownUnionMember) isUnionPayload()         {}
+func (*UnknownUnionMember) isUnionWithJsonName()    {}

@@ -8,6 +8,48 @@ import (
 	"time"
 )
 
+func ExampleEventStream_outputUsage() {
+	var union types.EventStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EventStreamMemberBlobPayload:
+		_ = v.Value // Value is types.BlobPayloadEvent
+
+	case *types.EventStreamMemberHeaders:
+		_ = v.Value // Value is types.HeadersEvent
+
+	case *types.EventStreamMemberHeadersAndExplicitPayload:
+		_ = v.Value // Value is types.HeadersAndExplicitPayloadEvent
+
+	case *types.EventStreamMemberHeadersAndImplicitPayload:
+		_ = v.Value // Value is types.HeadersAndImplicitPayloadEvent
+
+	case *types.EventStreamMemberStringPayload:
+		_ = v.Value // Value is types.StringPayloadEvent
+
+	case *types.EventStreamMemberStructurePayload:
+		_ = v.Value // Value is types.StructurePayloadEvent
+
+	case *types.EventStreamMemberUnionPayload:
+		_ = v.Value // Value is types.UnionPayloadEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HeadersEvent
+var _ *types.HeadersAndExplicitPayloadEvent
+var _ *types.StructurePayloadEvent
+var _ *types.UnionPayloadEvent
+var _ *types.HeadersAndImplicitPayloadEvent
+var _ *types.StringPayloadEvent
+var _ *types.BlobPayloadEvent
+
 func ExampleMyUnion_outputUsage() {
 	var union types.MyUnion
 	// type switches can be used to check the union value
@@ -62,6 +104,24 @@ var _ *types.GreetingStruct
 var _ *time.Time
 var _ []byte
 
+func ExamplePayloadUnion_outputUsage() {
+	var union types.PayloadUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PayloadUnionMemberUnionMember:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExamplePlayerAction_outputUsage() {
 	var union types.PlayerAction
 	// type switches can be used to check the union value
@@ -101,6 +161,24 @@ func ExampleSimpleUnion_outputUsage() {
 
 var _ *string
 var _ *int32
+
+func ExampleSingletonEventStream_outputUsage() {
+	var union types.SingletonEventStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SingletonEventStreamMemberSingleton:
+		_ = v.Value // Value is types.SingletonEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SingletonEvent
 
 func ExampleUnionPayload_outputUsage() {
 	var union types.UnionPayload

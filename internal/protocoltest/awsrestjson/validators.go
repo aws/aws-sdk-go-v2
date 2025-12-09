@@ -30,6 +30,26 @@ func (m *validateOpConstantQueryString) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDuplexStreamWithInitialMessages struct {
+}
+
+func (*validateOpDuplexStreamWithInitialMessages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDuplexStreamWithInitialMessages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DuplexStreamWithInitialMessagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDuplexStreamWithInitialMessagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEndpointWithHostLabelOperation struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpHttpRequestWithRegexLiteral) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpHttpRequestWithRegexLiteralInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpInputStreamWithInitialRequest struct {
+}
+
+func (*validateOpInputStreamWithInitialRequest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInputStreamWithInitialRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InputStreamWithInitialRequestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInputStreamWithInitialRequestInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -554,6 +594,10 @@ func addOpConstantQueryStringValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpConstantQueryString{}, middleware.After)
 }
 
+func addOpDuplexStreamWithInitialMessagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDuplexStreamWithInitialMessages{}, middleware.After)
+}
+
 func addOpEndpointWithHostLabelOperationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEndpointWithHostLabelOperation{}, middleware.After)
 }
@@ -576,6 +620,10 @@ func addOpHttpRequestWithLabelsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpHttpRequestWithRegexLiteralValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpHttpRequestWithRegexLiteral{}, middleware.After)
+}
+
+func addOpInputStreamWithInitialRequestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInputStreamWithInitialRequest{}, middleware.After)
 }
 
 func addOpMalformedBooleanValidationMiddleware(stack *middleware.Stack) error {
@@ -680,6 +728,21 @@ func validateOpConstantQueryStringInput(v *ConstantQueryStringInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ConstantQueryStringInput"}
 	if v.Hello == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Hello"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDuplexStreamWithInitialMessagesInput(v *DuplexStreamWithInitialMessagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DuplexStreamWithInitialMessagesInput"}
+	if v.InitialRequestMember == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialRequestMember"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -815,6 +878,21 @@ func validateOpHttpRequestWithRegexLiteralInput(v *HttpRequestWithRegexLiteralIn
 	invalidParams := smithy.InvalidParamsError{Context: "HttpRequestWithRegexLiteralInput"}
 	if v.Str == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Str"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInputStreamWithInitialRequestInput(v *InputStreamWithInitialRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputStreamWithInitialRequestInput"}
+	if v.InitialRequestMember == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialRequestMember"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

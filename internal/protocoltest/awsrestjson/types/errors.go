@@ -37,6 +37,31 @@ func (e *ComplexError) ErrorCode() string {
 }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+type ErrorEvent struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ErrorEvent) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ErrorEvent) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ErrorEvent) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ErrorEvent"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ErrorEvent) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This error has test cases that test some of the dark corners of Amazon service
 // framework history. It should only be implemented by clients.
 type FooError struct {
@@ -89,3 +114,28 @@ func (e *InvalidGreeting) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+type ServiceUnavailableError struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceUnavailableError) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceUnavailableError) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceUnavailableError) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableError"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
