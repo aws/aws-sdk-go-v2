@@ -1,3 +1,7 @@
+# v1.53.0 (2025-12-10)
+
+* **Feature**: This release introduces two additional protocols AWS JSON 1.1 and Smithy RPC v2 CBOR, replacing the currently utilized one, AWSQuery. AWS SDKs will prioritize the protocol that is the most performant for each language.
+
 # v1.52.8 (2025-12-09)
 
 * No change notes available for this release.

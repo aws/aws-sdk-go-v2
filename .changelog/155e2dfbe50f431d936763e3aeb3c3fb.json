@@ -1,8 +1,0 @@
-{
-    "id": "155e2dfb-e50f-431d-9367-63e3aeb3c3fb",
-    "type": "feature",
-    "description": "Launch itemized custom line item and service line item filter",
-    "modules": [
-        "service/billingconductor"
-    ]
-}

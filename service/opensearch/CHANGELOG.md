@@ -1,3 +1,7 @@
+# v1.56.0 (2025-12-10)
+
+* **Feature**: The CreateApplication API now supports an optional kms key arn parameter to allow customers to specify a CMK for application encryption.
+
 # v1.55.2 (2025-12-09)
 
 * No change notes available for this release.

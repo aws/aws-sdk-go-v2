@@ -1,3 +1,7 @@
+# v1.32.0 (2025-12-10)
+
+* **Feature**: Adds support for Signer GetRevocationStatus with updated endpoints
+
 # v1.31.17 (2025-12-09)
 
 * No change notes available for this release.

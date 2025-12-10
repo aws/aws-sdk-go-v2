@@ -1,8 +1,0 @@
-{
-    "id": "b78d494a-9591-4098-9820-1eb24f2504a5",
-    "type": "feature",
-    "description": "Adds support for Signer GetRevocationStatus with updated endpoints",
-    "modules": [
-        "service/signer"
-    ]
-}

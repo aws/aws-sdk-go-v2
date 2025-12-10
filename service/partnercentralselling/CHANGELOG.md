@@ -1,3 +1,7 @@
+# v1.13.0 (2025-12-10)
+
+* **Feature**: Adds support for the new Project.AwsPartition field on Opportunity and AWS Opportunity Summary. Use this field to specify the AWS partition where the opportunity will be deployed.
+
 # v1.12.0 (2025-12-08)
 
 * **Feature**: Deal Sizing Service for AI-based deal size estimation with AWS service-level breakdown, supporting Expansion and Migration deals across Technology, and Reseller partner cohorts, including Pricing Calculator AddOn for MAP deals and funding incentives.

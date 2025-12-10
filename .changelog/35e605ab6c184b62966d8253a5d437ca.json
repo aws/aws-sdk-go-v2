@@ -1,8 +1,0 @@
-{
-    "id": "35e605ab-6c18-4b62-966d-8253a5d437ca",
-    "type": "feature",
-    "description": "The CreateApplication API now supports an optional kms key arn parameter to allow customers to specify a CMK for application encryption.",
-    "modules": [
-        "service/opensearch"
-    ]
-}

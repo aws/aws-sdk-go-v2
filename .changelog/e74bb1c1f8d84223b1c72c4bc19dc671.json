@@ -1,8 +1,0 @@
-{
-    "id": "e74bb1c1-f8d8-4223-b1c7-2c4bc19dc671",
-    "type": "feature",
-    "description": "This release introduces two additional protocols AWS JSON 1.1 and Smithy RPC v2 CBOR, replacing the currently utilized one, AWSQuery. AWS SDKs will prioritize the protocol that is the most performant for each language.",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}
