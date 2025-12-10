@@ -2904,12 +2904,15 @@
                 "aws.auth#sigv4": {
                     "name": "monitoring"
                 },
+                "aws.protocols#awsJson1_0": {},
                 "aws.protocols#awsQuery": {},
+                "aws.protocols#awsQueryCompatible": {},
                 "smithy.api#documentation": "<p>Amazon CloudWatch monitors your Amazon Web Services (Amazon Web Services)\n            resources and the applications you run on Amazon Web Services in real time. You can use\n                CloudWatch to collect and track metrics, which are the variables you want to\n            measure for your resources and applications.</p>\n         <p>CloudWatch alarms send notifications or automatically change the resources you are\n            monitoring based on rules that you define. For example, you can monitor the CPU usage\n            and disk reads and writes of your Amazon EC2 instances. Then, use this data to determine\n            whether you should launch additional instances to handle increased load. You can also\n            use this data to stop under-used instances to save money.</p>\n         <p>In addition to monitoring the built-in metrics that come with Amazon Web Services,\n            you can monitor your own custom metrics. With CloudWatch, you gain system-wide\n            visibility into resource utilization, application performance, and operational\n            health.</p>",
                 "smithy.api#title": "Amazon CloudWatch",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://monitoring.amazonaws.com/doc/2010-08-01/"
                 },
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

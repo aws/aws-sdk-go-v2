@@ -133,21 +133,21 @@
                 "iamRoleArn": {
                     "target": "com.amazonaws.odb#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role to associate with the resource.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) service role to associate with the resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "awsIntegration": {
                     "target": "com.amazonaws.odb#SupportedAwsIntegration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services integration configuration settings for the IAM service role association.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services integration configuration settings for the Amazon Web Services Identity and Access Management (IAM) service role association.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceArn": {
                     "target": "com.amazonaws.odb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource to associate with the IAM service role.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource to associate with the Amazon Web Services Identity and Access Management (IAM) service role.</p>",
                         "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-[a-z]?|aws-iso):odb:[a-z0-9-]+:\\d{12}:cloud-vm-cluster/[a-z0-9-_]+$",
                         "smithy.api#required": {}
                     }
@@ -286,6 +286,12 @@
                         "smithy.api#documentation": "<p>The unique identifier of the ODB network associated with this Autonomous VM cluster.</p>"
                     }
                 },
+                "odbNetworkArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ODB network associated with this Autonomous VM cluster.</p>"
+                    }
+                },
                 "ociResourceAnchorName": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -320,6 +326,12 @@
                     "target": "com.amazonaws.odb#ResourceIdOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the Cloud Exadata Infrastructure containing this Autonomous VM cluster.</p>"
+                    }
+                },
+                "cloudExadataInfrastructureArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Cloud Exadata Infrastructure containing this Autonomous VM cluster.</p>"
                     }
                 },
                 "autonomousDataStoragePercentage": {
@@ -657,6 +669,12 @@
                         "smithy.api#documentation": "<p>The unique identifier of the ODB network associated with this Autonomous VM cluster.</p>"
                     }
                 },
+                "odbNetworkArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ODB network associated with this Autonomous VM cluster.</p>"
+                    }
+                },
                 "ociResourceAnchorName": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -691,6 +709,12 @@
                     "target": "com.amazonaws.odb#ResourceIdOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the Exadata infrastructure containing this Autonomous VM cluster.</p>"
+                    }
+                },
+                "cloudExadataInfrastructureArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exadata infrastructure containing this Autonomous VM cluster.</p>"
                     }
                 },
                 "autonomousDataStoragePercentage": {
@@ -1555,6 +1579,12 @@
                         "smithy.api#documentation": "<p>The unique identifier of the Exadata infrastructure that this VM cluster belongs to.</p>"
                     }
                 },
+                "cloudExadataInfrastructureArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exadata infrastructure that this VM cluster belongs to.</p>"
+                    }
+                },
                 "clusterName": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -1748,6 +1778,12 @@
                         "smithy.api#documentation": "<p>The unique identifier of the ODB network for the VM cluster.</p>"
                     }
                 },
+                "odbNetworkArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ODB network associated with this VM cluster.</p>"
+                    }
+                },
                 "percentProgress": {
                     "target": "smithy.api#Float",
                     "traits": {
@@ -1843,6 +1879,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the Exadata infrastructure that this VM cluster belongs to.</p>"
+                    }
+                },
+                "cloudExadataInfrastructureArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exadata infrastructure that this VM cluster belongs to.</p>"
                     }
                 },
                 "clusterName": {
@@ -2030,6 +2072,12 @@
                     "target": "com.amazonaws.odb#ResourceIdOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the ODB network for the VM cluster.</p>"
+                    }
+                },
+                "odbNetworkArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ODB network associated with this VM cluster.</p>"
                     }
                 },
                 "percentProgress": {
@@ -2924,13 +2972,13 @@
                 "stsPolicyDocument": {
                     "target": "com.amazonaws.odb#PolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The STS policy document that defines permissions for token service usage within the ODB network.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Security Token Service (STS) policy document that defines permissions for token service usage within the ODB network.</p>"
                     }
                 },
                 "kmsPolicyDocument": {
                     "target": "com.amazonaws.odb#PolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS policy document that defines permissions for key usage within the ODB network.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network.</p>"
                     }
                 },
                 "crossRegionS3RestoreSourcesToEnable": {
@@ -3115,19 +3163,19 @@
                 "region": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Region for cross-Region S3 restore access.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region for cross-Region Amazon S3 restore access.</p>"
                     }
                 },
                 "ipv4Addresses": {
                     "target": "com.amazonaws.odb#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 addresses allowed for cross-Region S3 restore access.</p>"
+                        "smithy.api#documentation": "<p>The IPv4 addresses allowed for cross-Region Amazon S3 restore access.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.odb#ManagedResourceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the cross-Region S3 restore access configuration.</p>"
+                        "smithy.api#documentation": "<p>The current status of the cross-Region Amazon S3 restore access configuration.</p>"
                     }
                 }
             },
@@ -4534,21 +4582,21 @@
                 "iamRoleArn": {
                     "target": "com.amazonaws.odb#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role to disassociate from the resource.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) service role to disassociate from the resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "awsIntegration": {
                     "target": "com.amazonaws.odb#SupportedAwsIntegration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services integration configuration settings for the IAM service role disassociation.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services integration configuration settings for the Amazon Web Services Identity and Access Management (IAM) service role disassociation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceArn": {
                     "target": "com.amazonaws.odb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource to disassociate from the IAM service role.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource to disassociate from the Amazon Web Services Identity and Access Management (IAM) service role.</p>",
                         "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-[a-z]?|aws-iso):odb:[a-z0-9-]+:\\d{12}:cloud-vm-cluster/[a-z0-9-_]+$",
                         "smithy.api#required": {}
                     }
@@ -5246,25 +5294,25 @@
                 "iamRoleArn": {
                     "target": "com.amazonaws.odb#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) service role.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.odb#IamRoleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the IAM service role.</p>"
+                        "smithy.api#documentation": "<p>The current status of the Amazon Web Services Identity and Access Management (IAM) service role.</p>"
                     }
                 },
                 "statusReason": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional information about the current status of the IAM service role, if applicable.</p>"
+                        "smithy.api#documentation": "<p>Additional information about the current status of the Amazon Web Services Identity and Access Management (IAM) service role, if applicable.</p>"
                     }
                 },
                 "awsIntegration": {
                     "target": "com.amazonaws.odb#SupportedAwsIntegration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services integration configuration settings for the IAM service role.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services integration configuration settings for the Amazon Web Services Identity and Access Management (IAM) service role.</p>"
                     }
                 }
             },
@@ -5439,25 +5487,25 @@
                 "status": {
                     "target": "com.amazonaws.odb#ManagedResourceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the KMS access configuration.</p>"
+                        "smithy.api#documentation": "<p>The current status of the Amazon Web Services Key Management Service (KMS) access configuration.</p>"
                     }
                 },
                 "ipv4Addresses": {
                     "target": "com.amazonaws.odb#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 addresses allowed for KMS access.</p>"
+                        "smithy.api#documentation": "<p>The IPv4 addresses allowed for Amazon Web Services Key Management Service (KMS) access.</p>"
                     }
                 },
                 "domainName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name for KMS access configuration.</p>"
+                        "smithy.api#documentation": "<p>The domain name for Amazon Web Services Key Management Service (KMS) access configuration.</p>"
                     }
                 },
                 "kmsPolicyDocument": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS policy document that defines permissions for key usage.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) policy document that defines permissions for key usage.</p>"
                     }
                 }
             },
@@ -6812,13 +6860,13 @@
                 "stsAccess": {
                     "target": "com.amazonaws.odb#StsAccess",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Security Token Service (STS) access configuration for managed services.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Security Token Service (STS) access configuration.</p>"
                     }
                 },
                 "kmsAccess": {
                     "target": "com.amazonaws.odb#KmsAccess",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) access configuration for managed services.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) access configuration.</p>"
                     }
                 },
                 "crossRegionS3RestoreSourcesAccess": {
@@ -9007,25 +9055,25 @@
                 "status": {
                     "target": "com.amazonaws.odb#ManagedResourceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the STS access configuration.</p>"
+                        "smithy.api#documentation": "<p>The current status of the Amazon Web Services Security Token Service (STS) access configuration.</p>"
                     }
                 },
                 "ipv4Addresses": {
                     "target": "com.amazonaws.odb#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 addresses allowed for STS access.</p>"
+                        "smithy.api#documentation": "<p>The IPv4 addresses allowed for Amazon Web Services Security Token Service (STS) access.</p>"
                     }
                 },
                 "domainName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name for STS access configuration.</p>"
+                        "smithy.api#documentation": "<p>The domain name for Amazon Web Services Security Token Service (STS) access configuration.</p>"
                     }
                 },
                 "stsPolicyDocument": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The STS policy document that defines permissions for token service usage.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Security Token Service (STS) policy document that defines permissions for token service usage.</p>"
                     }
                 }
             },
@@ -9491,13 +9539,13 @@
                 "stsPolicyDocument": {
                     "target": "com.amazonaws.odb#PolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The STS policy document that defines permissions for token service usage within the ODB network.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Security Token Service (STS) policy document that defines permissions for token service usage within the ODB network.</p>"
                     }
                 },
                 "kmsPolicyDocument": {
                     "target": "com.amazonaws.odb#PolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS policy document that defines permissions for key usage within the ODB network.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network.</p>"
                     }
                 },
                 "crossRegionS3RestoreSourcesToEnable": {

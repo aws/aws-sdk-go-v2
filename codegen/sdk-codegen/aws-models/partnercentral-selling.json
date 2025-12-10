@@ -1363,6 +1363,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the expected spending by the customer over the course of the project. This value helps partners and AWS estimate the financial impact of the opportunity. Use the <a href=\"https://calculator.aws/#/\">AWS Pricing Calculator</a> to create an estimate of the customer’s total spend. If only annual recurring revenue (ARR) is available, distribute it across 12 months to provide an average monthly value.</p>"
                     }
+                },
+                "AwsPartition": {
+                    "target": "com.amazonaws.partnercentralselling#AwsPartition",
+                    "traits": {
+                        "smithy.api#documentation": "AWS partition where the opportunity will be deployed. Possible values: 'aws-eusc' for AWS European Sovereign Cloud, `null` for all other partitions"
+                    }
                 }
             },
             "traits": {
@@ -1542,6 +1548,17 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.partnercentralselling#AwsTeamMember"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsPartition": {
+            "type": "enum",
+            "members": {
+                "AWS_EUSC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws-eusc"
+                    }
+                }
             }
         },
         "com.amazonaws.partnercentralselling#AwsProductDetails": {
@@ -10898,6 +10915,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Captures additional comments or information for the <code>Opportunity</code> that weren't captured in other fields.</p>",
                         "smithy.api#pattern": "^(?s).{1,255}$"
+                    }
+                },
+                "AwsPartition": {
+                    "target": "com.amazonaws.partnercentralselling#AwsPartition",
+                    "traits": {
+                        "smithy.api#documentation": "AWS partition where the opportunity will be deployed. Possible values: 'aws-eusc' for AWS European Sovereign Cloud, `null` for all other partitions"
                     }
                 }
             },

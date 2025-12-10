@@ -1125,6 +1125,28 @@
                 "smithy.api#documentation": "<p>The key-value pair that represents the attribute by which the <code>BillingGroupCostReportResults</code> are grouped. For example, if you want a service-level breakdown for Amazon Simple Storage Service (Amazon S3) of the billing group, the attribute will be a key-value pair of <code>\"PRODUCT_NAME\"</code> and <code>\"S3\"</code>.</p>"
             }
         },
+        "com.amazonaws.billingconductor#AttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.billingconductor#AttributeValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#AttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.billingconductor#AttributesList": {
             "type": "list",
             "member": {
@@ -1691,6 +1713,12 @@
         "com.amazonaws.billingconductor#ComputationRuleEnum": {
             "type": "enum",
             "members": {
+                "ITEMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITEMIZED"
+                    }
+                },
                 "CONSOLIDATED": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -3364,8 +3392,15 @@
                 "Values": {
                     "target": "com.amazonaws.billingconductor#LineItemFilterValuesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values of the line item filter. This specifies the values to filter on. Currently, you can only exclude Savings Plans discounts.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>The values of the line item filter. This specifies the values to filter on. Currently, you can only exclude Savings Plans discounts.</p>"
+                    }
+                },
+                "AttributeValues": {
+                    "target": "com.amazonaws.billingconductor#AttributeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values of the line item filter. This specifies the values to filter on.</p>"
                     }
                 }
             },
@@ -3380,6 +3415,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "LINE_ITEM_TYPE"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
                     }
                 }
             }
@@ -4747,6 +4788,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NOT_EQUAL"
+                    }
+                },
+                "EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL"
                     }
                 }
             }
@@ -6723,6 +6770,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ILLEGAL_BILLING_GROUP_TYPE"
+                    }
+                },
+                "ILLEGAL_BILLING_GROUP_PRICING_PLAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ILLEGAL_BILLING_GROUP_PRICING_PLAN"
                     }
                 },
                 "ILLEGAL_ENDED_BILLINGGROUP": {

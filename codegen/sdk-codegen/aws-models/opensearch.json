@@ -3701,6 +3701,12 @@
                 },
                 "tagList": {
                     "target": "com.amazonaws.opensearch#TagList"
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.opensearch#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the application's data at rest.\n              If provided, the application uses your customer-managed key for encryption. If omitted, the application\n              uses an AWS-managed key. The KMS key must be in the same region as the application.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3750,6 +3756,12 @@
                     "target": "com.amazonaws.opensearch#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp indicating when the OpenSearch application was created.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.opensearch#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the application's data at rest.</p>"
                     }
                 }
             },
@@ -8009,6 +8021,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of the last update to the OpenSearch application.</p>"
                     }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.opensearch#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the application's data at rest.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9514,6 +9532,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration parameters to enable access to the key store required by the\n            package.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.opensearch#KmsKeyId": {
