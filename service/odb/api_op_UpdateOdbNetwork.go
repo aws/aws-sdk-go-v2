@@ -47,8 +47,8 @@ type UpdateOdbNetworkInput struct {
 	// the ODB network.
 	KmsAccess types.Access
 
-	// The KMS policy document that defines permissions for key usage within the ODB
-	// network.
+	// The Amazon Web Services Key Management Service (KMS) policy document that
+	// defines permissions for key usage within the ODB network.
 	KmsPolicyDocument *string
 
 	// The list of CIDR ranges from the peered VPC that allow access to the ODB
@@ -68,8 +68,8 @@ type UpdateOdbNetworkInput struct {
 	// the ODB network.
 	StsAccess types.Access
 
-	// The STS policy document that defines permissions for token service usage within
-	// the ODB network.
+	// The Amazon Web Services Security Token Service (STS) policy document that
+	// defines permissions for token service usage within the ODB network.
 	StsPolicyDocument *string
 
 	// Specifies the updated configuration for Zero-ETL access from the ODB network.

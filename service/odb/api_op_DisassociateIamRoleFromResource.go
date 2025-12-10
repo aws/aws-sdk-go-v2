@@ -31,20 +31,20 @@ func (c *Client) DisassociateIamRoleFromResource(ctx context.Context, params *Di
 
 type DisassociateIamRoleFromResourceInput struct {
 
-	// The Amazon Web Services integration configuration settings for the IAM service
-	// role disassociation.
+	// The Amazon Web Services integration configuration settings for the Amazon Web
+	// Services Identity and Access Management (IAM) service role disassociation.
 	//
 	// This member is required.
 	AwsIntegration types.SupportedAwsIntegration
 
-	// The Amazon Resource Name (ARN) of the IAM service role to disassociate from the
-	// resource.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) service role to disassociate from the resource.
 	//
 	// This member is required.
 	IamRoleArn *string
 
 	// The Amazon Resource Name (ARN) of the target resource to disassociate from the
-	// IAM service role.
+	// Amazon Web Services Identity and Access Management (IAM) service role.
 	//
 	// This member is required.
 	ResourceArn *string

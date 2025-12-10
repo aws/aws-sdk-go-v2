@@ -45,7 +45,7 @@ type AddProfilePermissionInput struct {
 	//
 	//   - signer:RevokeSignature . For details, see RevokeSignature.
 	//
-	// [Using cross-account signing with signing profiles]: https://docs.aws.amazon.com/signer/latest/developerguide/signing-profile-cross-account.html
+	// [Using cross-account signing with signing profiles]: http://docs.aws.amazon.com/signer/latest/developerguide/signing-profile-cross-account.html
 	//
 	// This member is required.
 	Action *string

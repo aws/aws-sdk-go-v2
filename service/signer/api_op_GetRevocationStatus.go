@@ -211,7 +211,7 @@ func (m *endpointPrefix_opGetRevocationStatusMiddleware) HandleFinalize(ctx cont
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "verification." + req.URL.Host
+	req.URL.Host = "data-" + req.URL.Host
 
 	return next.HandleFinalize(ctx, in)
 }

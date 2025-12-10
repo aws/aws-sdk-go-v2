@@ -86,6 +86,10 @@ type CloudAutonomousVmCluster struct {
 	// The Amazon Resource Name (ARN) for the Autonomous VM cluster.
 	CloudAutonomousVmClusterArn *string
 
+	// The Amazon Resource Name (ARN) of the Cloud Exadata Infrastructure containing
+	// this Autonomous VM cluster.
+	CloudExadataInfrastructureArn *string
+
 	// The unique identifier of the Cloud Exadata Infrastructure containing this
 	// Autonomous VM cluster.
 	CloudExadataInfrastructureId *string
@@ -170,6 +174,10 @@ type CloudAutonomousVmCluster struct {
 
 	// The Oracle Cloud Identifier (OCID) of the Autonomous VM cluster.
 	Ocid *string
+
+	// The Amazon Resource Name (ARN) of the ODB network associated with this
+	// Autonomous VM cluster.
+	OdbNetworkArn *string
 
 	// The unique identifier of the ODB network associated with this Autonomous VM
 	// cluster.
@@ -273,6 +281,10 @@ type CloudAutonomousVmClusterSummary struct {
 	// The Amazon Resource Name (ARN) for the Autonomous VM cluster.
 	CloudAutonomousVmClusterArn *string
 
+	// The Amazon Resource Name (ARN) of the Exadata infrastructure containing this
+	// Autonomous VM cluster.
+	CloudExadataInfrastructureArn *string
+
 	// The unique identifier of the Exadata infrastructure containing this Autonomous
 	// VM cluster.
 	CloudExadataInfrastructureId *string
@@ -355,6 +367,10 @@ type CloudAutonomousVmClusterSummary struct {
 
 	// The Oracle Cloud Identifier (OCID) of the Autonomous VM cluster.
 	Ocid *string
+
+	// The Amazon Resource Name (ARN) of the ODB network associated with this
+	// Autonomous VM cluster.
+	OdbNetworkArn *string
 
 	// The unique identifier of the ODB network associated with this Autonomous VM
 	// cluster.
@@ -734,6 +750,10 @@ type CloudVmCluster struct {
 	// This member is required.
 	CloudVmClusterId *string
 
+	// The Amazon Resource Name (ARN) of the Exadata infrastructure that this VM
+	// cluster belongs to.
+	CloudExadataInfrastructureArn *string
+
 	// The unique identifier of the Exadata infrastructure that this VM cluster
 	// belongs to.
 	CloudExadataInfrastructureId *string
@@ -825,6 +845,10 @@ type CloudVmCluster struct {
 	// The OCID of the VM cluster.
 	Ocid *string
 
+	// The Amazon Resource Name (ARN) of the ODB network associated with this VM
+	// cluster.
+	OdbNetworkArn *string
+
 	// The unique identifier of the ODB network for the VM cluster.
 	OdbNetworkId *string
 
@@ -883,6 +907,10 @@ type CloudVmClusterSummary struct {
 	//
 	// This member is required.
 	CloudVmClusterId *string
+
+	// The Amazon Resource Name (ARN) of the Exadata infrastructure that this VM
+	// cluster belongs to.
+	CloudExadataInfrastructureArn *string
 
 	// The unique identifier of the Exadata infrastructure that this VM cluster
 	// belongs to.
@@ -975,6 +1003,10 @@ type CloudVmClusterSummary struct {
 	// The OCID of the VM cluster.
 	Ocid *string
 
+	// The Amazon Resource Name (ARN) of the ODB network associated with this VM
+	// cluster.
+	OdbNetworkArn *string
+
 	// The unique identifier of the ODB network for the VM cluster.
 	OdbNetworkId *string
 
@@ -1030,13 +1062,13 @@ type CloudVmClusterSummary struct {
 // for the ODB network.
 type CrossRegionS3RestoreSourcesAccess struct {
 
-	// The IPv4 addresses allowed for cross-Region S3 restore access.
+	// The IPv4 addresses allowed for cross-Region Amazon S3 restore access.
 	Ipv4Addresses []string
 
-	// The Amazon Web Services Region for cross-Region S3 restore access.
+	// The Amazon Web Services Region for cross-Region Amazon S3 restore access.
 	Region *string
 
-	// The current status of the cross-Region S3 restore access configuration.
+	// The current status of the cross-Region Amazon S3 restore access configuration.
 	Status ManagedResourceStatus
 
 	noSmithyDocumentSerde
@@ -1568,18 +1600,20 @@ type GiVersionSummary struct {
 // service role associated with a resource.
 type IamRole struct {
 
-	// The Amazon Web Services integration configuration settings for the IAM service
-	// role.
+	// The Amazon Web Services integration configuration settings for the Amazon Web
+	// Services Identity and Access Management (IAM) service role.
 	AwsIntegration SupportedAwsIntegration
 
-	// The Amazon Resource Name (ARN) of the IAM service role.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) service role.
 	IamRoleArn *string
 
-	// The current status of the IAM service role.
+	// The current status of the Amazon Web Services Identity and Access Management
+	// (IAM) service role.
 	Status IamRoleStatus
 
-	// Additional information about the current status of the IAM service role, if
-	// applicable.
+	// Additional information about the current status of the Amazon Web Services
+	// Identity and Access Management (IAM) service role, if applicable.
 	StatusReason *string
 
 	noSmithyDocumentSerde
@@ -1589,16 +1623,20 @@ type IamRole struct {
 // the ODB network.
 type KmsAccess struct {
 
-	// The domain name for KMS access configuration.
+	// The domain name for Amazon Web Services Key Management Service (KMS) access
+	// configuration.
 	DomainName *string
 
-	// The IPv4 addresses allowed for KMS access.
+	// The IPv4 addresses allowed for Amazon Web Services Key Management Service (KMS)
+	// access.
 	Ipv4Addresses []string
 
-	// The KMS policy document that defines permissions for key usage.
+	// The Amazon Web Services Key Management Service (KMS) policy document that
+	// defines permissions for key usage.
 	KmsPolicyDocument *string
 
-	// The current status of the KMS access configuration.
+	// The current status of the Amazon Web Services Key Management Service (KMS)
+	// access configuration.
 	Status ManagedResourceStatus
 
 	noSmithyDocumentSerde
@@ -1659,8 +1697,7 @@ type ManagedServices struct {
 	// The access configuration for the cross-Region Amazon S3 database restore source.
 	CrossRegionS3RestoreSourcesAccess []CrossRegionS3RestoreSourcesAccess
 
-	// The Amazon Web Services Key Management Service (KMS) access configuration for
-	// managed services.
+	// The Amazon Web Services Key Management Service (KMS) access configuration.
 	KmsAccess *KmsAccess
 
 	// The managed Amazon S3 backup access configuration.
@@ -1681,8 +1718,7 @@ type ManagedServices struct {
 	// The service network endpoint configuration.
 	ServiceNetworkEndpoint *ServiceNetworkEndpoint
 
-	// The Amazon Web Services Security Token Service (STS) access configuration for
-	// managed services.
+	// The Amazon Web Services Security Token Service (STS) access configuration.
 	StsAccess *StsAccess
 
 	// The Zero-ETL access configuration.
@@ -2023,16 +2059,20 @@ type ServiceNetworkEndpoint struct {
 // the ODB network.
 type StsAccess struct {
 
-	// The domain name for STS access configuration.
+	// The domain name for Amazon Web Services Security Token Service (STS) access
+	// configuration.
 	DomainName *string
 
-	// The IPv4 addresses allowed for STS access.
+	// The IPv4 addresses allowed for Amazon Web Services Security Token Service (STS)
+	// access.
 	Ipv4Addresses []string
 
-	// The current status of the STS access configuration.
+	// The current status of the Amazon Web Services Security Token Service (STS)
+	// access configuration.
 	Status ManagedResourceStatus
 
-	// The STS policy document that defines permissions for token service usage.
+	// The Amazon Web Services Security Token Service (STS) policy document that
+	// defines permissions for token service usage.
 	StsPolicyDocument *string
 
 	noSmithyDocumentSerde

@@ -12,8 +12,7 @@ import (
 )
 
 // Initiates a signing job to be performed on the code provided. Signing jobs are
-// viewable by the ListSigningJobs operation for two years after they are
-// performed. Note the following requirements:
+// viewable by the ListSigningJobs operation. Note the following requirements:
 //
 //   - You must create an Amazon S3 source bucket. For more information, see [Creating a Bucket]in
 //     the Amazon S3 Getting Started Guide.

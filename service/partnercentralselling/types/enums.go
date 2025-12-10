@@ -240,6 +240,23 @@ func (AwsOpportunityStage) Values() []AwsOpportunityStage {
 	}
 }
 
+type AwsPartition string
+
+// Enum values for AwsPartition
+const (
+	AwsPartitionAwsEusc AwsPartition = "aws-eusc"
+)
+
+// Values returns all known values for AwsPartition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AwsPartition) Values() []AwsPartition {
+	return []AwsPartition{
+		"aws-eusc",
+	}
+}
+
 type Channel string
 
 // Enum values for Channel

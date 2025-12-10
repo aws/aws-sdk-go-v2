@@ -27,7 +27,7 @@
 //
 // [AWS Lambda]: http://docs.aws.amazon.com/lambda/latest/dg/
 // [AWS IoT Device Management]: http://docs.aws.amazon.com/iot/latest/developerguide/
-// [AWS Signer Developer Guide]: https://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html
+// [AWS Signer Developer Guide]: http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html
 // [Amazon S3]: http://docs.aws.amazon.com/AmazonS3/latest/gsg/
 // [AWS CloudTrail]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/
 // [AWS Certificate Manager (ACM)]: http://docs.aws.amazon.com/acm/latest/userguide/

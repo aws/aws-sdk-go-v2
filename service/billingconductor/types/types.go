@@ -467,9 +467,10 @@ type LineItemFilter struct {
 	MatchOption MatchOption
 
 	// The values of the line item filter. This specifies the values to filter on.
+	AttributeValues []string
+
+	// The values of the line item filter. This specifies the values to filter on.
 	// Currently, you can only exclude Savings Plans discounts.
-	//
-	// This member is required.
 	Values []LineItemFilterValue
 
 	noSmithyDocumentSerde

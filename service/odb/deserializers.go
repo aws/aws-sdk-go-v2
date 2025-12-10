@@ -5966,6 +5966,15 @@ func awsAwsjson10_deserializeDocumentCloudAutonomousVmCluster(v **types.CloudAut
 				sv.CloudAutonomousVmClusterId = ptr.String(jtv)
 			}
 
+		case "cloudExadataInfrastructureArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.CloudExadataInfrastructureArn = ptr.String(jtv)
+			}
+
 		case "cloudExadataInfrastructureId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6326,6 +6335,15 @@ func awsAwsjson10_deserializeDocumentCloudAutonomousVmCluster(v **types.CloudAut
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.OciUrl = ptr.String(jtv)
+			}
+
+		case "odbNetworkArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.OdbNetworkArn = ptr.String(jtv)
 			}
 
 		case "odbNetworkId":
@@ -6940,6 +6958,15 @@ func awsAwsjson10_deserializeDocumentCloudAutonomousVmClusterSummary(v **types.C
 				sv.CloudAutonomousVmClusterId = ptr.String(jtv)
 			}
 
+		case "cloudExadataInfrastructureArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.CloudExadataInfrastructureArn = ptr.String(jtv)
+			}
+
 		case "cloudExadataInfrastructureId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7300,6 +7327,15 @@ func awsAwsjson10_deserializeDocumentCloudAutonomousVmClusterSummary(v **types.C
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.OciUrl = ptr.String(jtv)
+			}
+
+		case "odbNetworkArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.OdbNetworkArn = ptr.String(jtv)
 			}
 
 		case "odbNetworkId":
@@ -8750,6 +8786,15 @@ func awsAwsjson10_deserializeDocumentCloudVmCluster(v **types.CloudVmCluster, va
 
 	for key, value := range shape {
 		switch key {
+		case "cloudExadataInfrastructureArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.CloudExadataInfrastructureArn = ptr.String(jtv)
+			}
+
 		case "cloudExadataInfrastructureId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9033,6 +9078,15 @@ func awsAwsjson10_deserializeDocumentCloudVmCluster(v **types.CloudVmCluster, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.OciUrl = ptr.String(jtv)
+			}
+
+		case "odbNetworkArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.OdbNetworkArn = ptr.String(jtv)
 			}
 
 		case "odbNetworkId":
@@ -9234,6 +9288,15 @@ func awsAwsjson10_deserializeDocumentCloudVmClusterSummary(v **types.CloudVmClus
 
 	for key, value := range shape {
 		switch key {
+		case "cloudExadataInfrastructureArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.CloudExadataInfrastructureArn = ptr.String(jtv)
+			}
+
 		case "cloudExadataInfrastructureId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9517,6 +9580,15 @@ func awsAwsjson10_deserializeDocumentCloudVmClusterSummary(v **types.CloudVmClus
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.OciUrl = ptr.String(jtv)
+			}
+
+		case "odbNetworkArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.OdbNetworkArn = ptr.String(jtv)
 			}
 
 		case "odbNetworkId":

@@ -3756,6 +3756,11 @@ func awsAwsjson10_serializeDocumentProject(v *types.Project, value smithyjson.Va
 		}
 	}
 
+	if len(v.AwsPartition) > 0 {
+		ok := object.Key("AwsPartition")
+		ok.String(string(v.AwsPartition))
+	}
+
 	if len(v.CompetitorName) > 0 {
 		ok := object.Key("CompetitorName")
 		ok.String(string(v.CompetitorName))

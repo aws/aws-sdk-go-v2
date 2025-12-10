@@ -206,6 +206,7 @@ const (
 	AutomatedReasoningPolicyBuildResultAssetTypeQualityReport      AutomatedReasoningPolicyBuildResultAssetType = "QUALITY_REPORT"
 	AutomatedReasoningPolicyBuildResultAssetTypePolicyDefinition   AutomatedReasoningPolicyBuildResultAssetType = "POLICY_DEFINITION"
 	AutomatedReasoningPolicyBuildResultAssetTypeGeneratedTestCases AutomatedReasoningPolicyBuildResultAssetType = "GENERATED_TEST_CASES"
+	AutomatedReasoningPolicyBuildResultAssetTypePolicyScenarios    AutomatedReasoningPolicyBuildResultAssetType = "POLICY_SCENARIOS"
 )
 
 // Values returns all known values for
@@ -219,6 +220,7 @@ func (AutomatedReasoningPolicyBuildResultAssetType) Values() []AutomatedReasonin
 		"QUALITY_REPORT",
 		"POLICY_DEFINITION",
 		"GENERATED_TEST_CASES",
+		"POLICY_SCENARIOS",
 	}
 }
 

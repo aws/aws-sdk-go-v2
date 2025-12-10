@@ -72,6 +72,7 @@ type ComputationRuleEnum string
 
 // Enum values for ComputationRuleEnum
 const (
+	ComputationRuleEnumItemized     ComputationRuleEnum = "ITEMIZED"
 	ComputationRuleEnumConsolidated ComputationRuleEnum = "CONSOLIDATED"
 )
 
@@ -81,6 +82,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ComputationRuleEnum) Values() []ComputationRuleEnum {
 	return []ComputationRuleEnum{
+		"ITEMIZED",
 		"CONSOLIDATED",
 	}
 }
@@ -191,6 +193,7 @@ type LineItemFilterAttributeName string
 // Enum values for LineItemFilterAttributeName
 const (
 	LineItemFilterAttributeNameLineItemType LineItemFilterAttributeName = "LINE_ITEM_TYPE"
+	LineItemFilterAttributeNameService      LineItemFilterAttributeName = "SERVICE"
 )
 
 // Values returns all known values for LineItemFilterAttributeName. Note that this
@@ -200,6 +203,7 @@ const (
 func (LineItemFilterAttributeName) Values() []LineItemFilterAttributeName {
 	return []LineItemFilterAttributeName{
 		"LINE_ITEM_TYPE",
+		"SERVICE",
 	}
 }
 
@@ -225,6 +229,7 @@ type MatchOption string
 // Enum values for MatchOption
 const (
 	MatchOptionNotEqual MatchOption = "NOT_EQUAL"
+	MatchOptionEqual    MatchOption = "EQUAL"
 )
 
 // Values returns all known values for MatchOption. Note that this can be expanded
@@ -234,6 +239,7 @@ const (
 func (MatchOption) Values() []MatchOption {
 	return []MatchOption{
 		"NOT_EQUAL",
+		"EQUAL",
 	}
 }
 
@@ -355,6 +361,7 @@ const (
 	ValidationExceptionReasonIllegalModifierPercentage                      ValidationExceptionReason = "ILLEGAL_MODIFIER_PERCENTAGE"
 	ValidationExceptionReasonIllegalType                                    ValidationExceptionReason = "ILLEGAL_TYPE"
 	ValidationExceptionReasonIllegalBillingGroupType                        ValidationExceptionReason = "ILLEGAL_BILLING_GROUP_TYPE"
+	ValidationExceptionReasonIllegalBillingGroupPricingPlan                 ValidationExceptionReason = "ILLEGAL_BILLING_GROUP_PRICING_PLAN"
 	ValidationExceptionReasonIllegalEndedBillinggroup                       ValidationExceptionReason = "ILLEGAL_ENDED_BILLINGGROUP"
 	ValidationExceptionReasonIllegalTieringInput                            ValidationExceptionReason = "ILLEGAL_TIERING_INPUT"
 	ValidationExceptionReasonIllegalOperation                               ValidationExceptionReason = "ILLEGAL_OPERATION"
@@ -428,6 +435,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"ILLEGAL_MODIFIER_PERCENTAGE",
 		"ILLEGAL_TYPE",
 		"ILLEGAL_BILLING_GROUP_TYPE",
+		"ILLEGAL_BILLING_GROUP_PRICING_PLAN",
 		"ILLEGAL_ENDED_BILLINGGROUP",
 		"ILLEGAL_TIERING_INPUT",
 		"ILLEGAL_OPERATION",

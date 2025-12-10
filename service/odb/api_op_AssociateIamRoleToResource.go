@@ -31,20 +31,20 @@ func (c *Client) AssociateIamRoleToResource(ctx context.Context, params *Associa
 
 type AssociateIamRoleToResourceInput struct {
 
-	// The Amazon Web Services integration configuration settings for the IAM service
-	// role association.
+	// The Amazon Web Services integration configuration settings for the Amazon Web
+	// Services Identity and Access Management (IAM) service role association.
 	//
 	// This member is required.
 	AwsIntegration types.SupportedAwsIntegration
 
-	// The Amazon Resource Name (ARN) of the IAM service role to associate with the
-	// resource.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) service role to associate with the resource.
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// The Amazon Resource Name (ARN) of the target resource to associate with the IAM
-	// service role.
+	// The Amazon Resource Name (ARN) of the target resource to associate with the
+	// Amazon Web Services Identity and Access Management (IAM) service role.
 	//
 	// This member is required.
 	ResourceArn *string

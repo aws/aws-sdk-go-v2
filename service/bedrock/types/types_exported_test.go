@@ -146,6 +146,9 @@ func ExampleAutomatedReasoningPolicyBuildResultAssets_outputUsage() {
 	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyDefinition
 
+	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberPolicyScenarios:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyScenarios
+
 	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberQualityReport:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyDefinitionQualityReport
 
@@ -158,6 +161,7 @@ func ExampleAutomatedReasoningPolicyBuildResultAssets_outputUsage() {
 	}
 }
 
+var _ *types.AutomatedReasoningPolicyScenarios
 var _ *types.AutomatedReasoningPolicyBuildLog
 var _ *types.AutomatedReasoningPolicyDefinitionQualityReport
 var _ *types.AutomatedReasoningPolicyDefinition

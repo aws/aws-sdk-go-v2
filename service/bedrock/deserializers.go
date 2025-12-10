@@ -19498,6 +19498,16 @@ loop:
 			uv = &types.AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition{Value: mv}
 			break loop
 
+		case "policyScenarios":
+			var mv types.AutomatedReasoningPolicyScenarios
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyScenarios(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutomatedReasoningPolicyBuildResultAssetsMemberPolicyScenarios{Value: mv}
+			break loop
+
 		case "qualityReport":
 			var mv types.AutomatedReasoningPolicyDefinitionQualityReport
 			destAddr := &mv
@@ -21409,6 +21419,76 @@ func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyScenario(v **types.
 
 		case "ruleIds":
 			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyDefinitionRuleIdList(&sv.RuleIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyScenarioList(v *[]types.AutomatedReasoningPolicyScenario, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutomatedReasoningPolicyScenario
+	if *v == nil {
+		cv = []types.AutomatedReasoningPolicyScenario{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutomatedReasoningPolicyScenario
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyScenario(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyScenarios(v **types.AutomatedReasoningPolicyScenarios, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyScenarios
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyScenarios{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "policyScenarios":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyScenarioList(&sv.PolicyScenarios, value); err != nil {
 				return err
 			}
 

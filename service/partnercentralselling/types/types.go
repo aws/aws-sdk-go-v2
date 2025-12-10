@@ -268,6 +268,10 @@ type AwsOpportunityLifeCycle struct {
 // objectives, scope, and customer requirements.
 type AwsOpportunityProject struct {
 
+	// AWS partition where the opportunity will be deployed. Possible values:
+	// 'aws-eusc' for AWS European Sovereign Cloud, null for all other partitions
+	AwsPartition AwsPartition
+
 	// Indicates the expected spending by the customer over the course of the project.
 	// This value helps partners and AWS estimate the financial impact of the
 	// opportunity. Use the [AWS Pricing Calculator]to create an estimate of the customer’s total spend. If
@@ -1927,6 +1931,10 @@ type Project struct {
 	// Cloud on AWS | Well-Architected | Windows | Workspaces/AppStream Accelerator
 	// Program | WWPS NDPP
 	ApnPrograms []string
+
+	// AWS partition where the opportunity will be deployed. Possible values:
+	// 'aws-eusc' for AWS European Sovereign Cloud, null for all other partitions
+	AwsPartition AwsPartition
 
 	// Name of the Opportunity 's competitor (if any). Use Other to submit a value not
 	// in the picklist.

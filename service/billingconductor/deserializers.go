@@ -6384,6 +6384,42 @@ func awsRestjson1_deserializeDocumentAttributesList(v *[]types.Attribute, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAttributeValueList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AttributeValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBillingGroupCostReportElement(v **types.BillingGroupCostReportElement, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7515,6 +7551,11 @@ func awsRestjson1_deserializeDocumentLineItemFilter(v **types.LineItemFilter, va
 					return fmt.Errorf("expected LineItemFilterAttributeName to be of type string, got %T instead", value)
 				}
 				sv.Attribute = types.LineItemFilterAttributeName(jtv)
+			}
+
+		case "AttributeValues":
+			if err := awsRestjson1_deserializeDocumentAttributeValueList(&sv.AttributeValues, value); err != nil {
+				return err
 			}
 
 		case "MatchOption":

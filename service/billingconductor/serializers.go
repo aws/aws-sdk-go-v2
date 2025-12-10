@@ -3212,6 +3212,17 @@ func awsRestjson1_serializeDocumentAccountIdList(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAttributeValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBillingGroupArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3480,6 +3491,13 @@ func awsRestjson1_serializeDocumentLineItemFilter(v *types.LineItemFilter, value
 	if len(v.Attribute) > 0 {
 		ok := object.Key("Attribute")
 		ok.String(string(v.Attribute))
+	}
+
+	if v.AttributeValues != nil {
+		ok := object.Key("AttributeValues")
+		if err := awsRestjson1_serializeDocumentAttributeValueList(v.AttributeValues, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.MatchOption) > 0 {

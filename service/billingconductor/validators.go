@@ -811,9 +811,6 @@ func validateLineItemFilter(v *types.LineItemFilter) error {
 	if len(v.MatchOption) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MatchOption"))
 	}
-	if v.Values == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Values"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

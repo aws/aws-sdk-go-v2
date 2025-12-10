@@ -64,6 +64,10 @@ type GetApplicationOutput struct {
 	// The unique identifier of the OpenSearch application.
 	Id *string
 
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the application's
+	// data at rest.
+	KmsKeyArn *string
+
 	// The timestamp of the last update to the OpenSearch application.
 	LastUpdatedAt *time.Time
 

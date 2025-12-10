@@ -1,0 +1,8 @@
+{
+    "id": "ffd07f88-f083-4815-af14-b710cac1bad7",
+    "type": "feature",
+    "description": "The following APIs now return CloudExadataInfrastructureArn and OdbNetworkArn fields for improved resource identification and AWS service integration - GetCloudVmCluster, ListCloudVmClusters, GetCloudAutonomousVmCluster, and ListCloudAutonomousVmClusters.",
+    "modules": [
+        "service/odb"
+    ]
+}

@@ -6040,6 +6040,15 @@ func awsAwsjson10_deserializeDocumentAwsOpportunityProject(v **types.AwsOpportun
 
 	for key, value := range shape {
 		switch key {
+		case "AwsPartition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsPartition to be of type string, got %T instead", value)
+				}
+				sv.AwsPartition = types.AwsPartition(jtv)
+			}
+
 		case "ExpectedCustomerSpend":
 			if err := awsAwsjson10_deserializeDocumentExpectedCustomerSpendList(&sv.ExpectedCustomerSpend, value); err != nil {
 				return err
@@ -9967,6 +9976,15 @@ func awsAwsjson10_deserializeDocumentProject(v **types.Project, value interface{
 		case "ApnPrograms":
 			if err := awsAwsjson10_deserializeDocumentApnPrograms(&sv.ApnPrograms, value); err != nil {
 				return err
+			}
+
+		case "AwsPartition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsPartition to be of type string, got %T instead", value)
+				}
+				sv.AwsPartition = types.AwsPartition(jtv)
 			}
 
 		case "CompetitorName":

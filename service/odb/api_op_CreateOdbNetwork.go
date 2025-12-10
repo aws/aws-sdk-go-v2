@@ -108,8 +108,8 @@ type CreateOdbNetworkInput struct {
 	// the ODB network.
 	KmsAccess types.Access
 
-	// The KMS policy document that defines permissions for key usage within the ODB
-	// network.
+	// The Amazon Web Services Key Management Service (KMS) policy document that
+	// defines permissions for key usage within the ODB network.
 	KmsPolicyDocument *string
 
 	// Specifies the configuration for Amazon S3 access from the ODB network.
@@ -122,8 +122,8 @@ type CreateOdbNetworkInput struct {
 	// the ODB network.
 	StsAccess types.Access
 
-	// The STS policy document that defines permissions for token service usage within
-	// the ODB network.
+	// The Amazon Web Services Security Token Service (STS) policy document that
+	// defines permissions for token service usage within the ODB network.
 	StsPolicyDocument *string
 
 	// The list of resource tags to apply to the ODB network.
