@@ -1,0 +1,8 @@
+{
+    "id": "6acaa1dc-27bb-4400-94ea-60bd21ca82f2",
+    "type": "feature",
+    "description": "Add SortBy parameter to ListSecrets",
+    "modules": [
+        "service/secretsmanager"
+    ]
+}

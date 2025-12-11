@@ -1514,6 +1514,18 @@ func TestCheckSnapshot_GetFlowPermissions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetIdentityContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdentityContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIdentityContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSessionEmbedUrl(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSessionEmbedUrl(context.Background(), nil, func(o *Options) {
@@ -4206,6 +4218,18 @@ func TestUpdateSnapshot_GetFlowPermissions(t *testing.T) {
 	_, err := svc.GetFlowPermissions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFlowPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIdentityContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdentityContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIdentityContext")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

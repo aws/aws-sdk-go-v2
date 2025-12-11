@@ -223,6 +223,28 @@ var _ *types.ConfluenceParameters
 var _ *types.AthenaParameters
 var _ *types.SparkParameters
 
+func ExampleGeocodePreferenceValue_outputUsage() {
+	var union types.GeocodePreferenceValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GeocodePreferenceValueMemberCoordinate:
+		_ = v.Value // Value is types.Coordinate
+
+	case *types.GeocodePreferenceValueMemberGeocoderHierarchy:
+		_ = v.Value // Value is types.GeocoderHierarchy
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GeocoderHierarchy
+var _ *types.Coordinate
+
 func ExampleImageSource_outputUsage() {
 	var union types.ImageSource
 	// type switches can be used to check the union value
@@ -393,3 +415,28 @@ var _ *types.CastColumnTypeOperation
 var _ *types.TagColumnOperation
 var _ *types.RenameColumnOperation
 var _ *types.UntagColumnOperation
+
+func ExampleUserIdentifier_outputUsage() {
+	var union types.UserIdentifier
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UserIdentifierMemberEmail:
+		_ = v.Value // Value is string
+
+	case *types.UserIdentifierMemberUserArn:
+		_ = v.Value // Value is string
+
+	case *types.UserIdentifierMemberUserName:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *string

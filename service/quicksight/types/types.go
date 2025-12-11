@@ -2359,6 +2359,10 @@ type BarChartConfiguration struct {
 	// The options that determine if visual data labels are displayed.
 	DataLabels *DataLabelOptions
 
+	// The options that determine the default presentation of all bar series in
+	// BarChartVisual .
+	DefaultSeriesSettings *BarChartDefaultSeriesSettings
+
 	// The field wells of the visual.
 	FieldWells *BarChartFieldWells
 
@@ -2383,6 +2387,9 @@ type BarChartConfiguration struct {
 	// The reference line setup of the visual.
 	ReferenceLines []ReferenceLine
 
+	// The series item configuration of a BarChartVisual .
+	Series []BarSeriesItem
+
 	// The small multiples setup for the visual.
 	SmallMultiplesOptions *SmallMultiplesOptions
 
@@ -2406,6 +2413,19 @@ type BarChartConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The options that determine the default presentation of all bar series in
+// BarChartVisual .
+type BarChartDefaultSeriesSettings struct {
+
+	// Border settings for all bar series in the visual.
+	BorderSettings *BorderSettings
+
+	// Decal settings for all bar series in the visual.
+	DecalSettings *DecalSettings
+
+	noSmithyDocumentSerde
+}
+
 // The field wells of a BarChartVisual .
 //
 // This is a union type structure. For this structure to be valid, only one of the
@@ -2414,6 +2434,18 @@ type BarChartFieldWells struct {
 
 	// The aggregated field wells of a bar chart.
 	BarChartAggregatedFieldWells *BarChartAggregatedFieldWells
+
+	noSmithyDocumentSerde
+}
+
+// Options that determine the presentation of a bar series in the visual.
+type BarChartSeriesSettings struct {
+
+	// Border settings for the bar series.
+	BorderSettings *BorderSettings
+
+	// Decal settings for the bar series.
+	DecalSettings *DecalSettings
 
 	noSmithyDocumentSerde
 }
@@ -2488,6 +2520,21 @@ type BarChartVisual struct {
 
 	// The alt text for the visual.
 	VisualContentAltText *string
+
+	noSmithyDocumentSerde
+}
+
+// The series item configuration of a BarChartVisual .
+//
+// This is a union type structure. For this structure to be valid, only one of the
+// attributes can be defined.
+type BarSeriesItem struct {
+
+	// The data field series item configuration of a BarChartVisual .
+	DataFieldBarSeriesItem *DataFieldBarSeriesItem
+
+	// The field series item configuration of a BarChartVisual .
+	FieldBarSeriesItem *FieldBarSeriesItem
 
 	noSmithyDocumentSerde
 }
@@ -2672,6 +2719,22 @@ type BookmarksConfigurations struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Border settings configuration for visual elements, including visibility, width,
+// and color properties.
+type BorderSettings struct {
+
+	// Color of the border.
+	BorderColor *string
+
+	// Visibility setting for the border.
+	BorderVisibility Visibility
+
+	// Width of the border. Valid range is from 1px to 8px.
+	BorderWidth *string
 
 	noSmithyDocumentSerde
 }
@@ -3514,6 +3577,9 @@ type ColumnConfiguration struct {
 	// The color configurations of the column.
 	ColorsConfiguration *ColorsConfiguration
 
+	// Decal configuration of the column.
+	DecalSettingsConfiguration *DecalSettingsConfiguration
+
 	// The format configuration of a column.
 	FormatConfiguration *FormatConfiguration
 
@@ -3748,6 +3814,10 @@ type ComboChartConfiguration struct {
 	// combo chart's color field well.
 	ColorLabelOptions *ChartAxisLabelOptions
 
+	// The options that determine the default presentation of all series in
+	// ComboChartVisual .
+	DefaultSeriesSettings *ComboChartDefaultSeriesSettings
+
 	// The field wells of the visual.
 	FieldWells *ComboChartFieldWells
 
@@ -3781,6 +3851,9 @@ type ComboChartConfiguration struct {
 	// combo chart's secondary y-axis(line) field well.
 	SecondaryYAxisLabelOptions *ChartAxisLabelOptions
 
+	// The series item configuration of a ComboChartVisual .
+	Series []ComboSeriesItem
+
 	// The settings of a chart's single axis configuration.
 	SingleAxisOptions *SingleAxisOptions
 
@@ -3796,6 +3869,25 @@ type ComboChartConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The options that determine the default presentation of all series in
+// ComboChartVisual .
+type ComboChartDefaultSeriesSettings struct {
+
+	// Border settings for all bar series in the visual.
+	BorderSettings *BorderSettings
+
+	// Decal settings for all series in the visual.
+	DecalSettings *DecalSettings
+
+	// Line styles options for all line series in the visual.
+	LineStyleSettings *LineChartLineStyleSettings
+
+	// Marker styles options for all line series in the visual.
+	MarkerStyleSettings *LineChartMarkerStyleSettings
+
+	noSmithyDocumentSerde
+}
+
 // The field wells of the visual.
 //
 // This is a union type structure. For this structure to be valid, only one of the
@@ -3805,6 +3897,24 @@ type ComboChartFieldWells struct {
 	// The aggregated field wells of a combo chart. Combo charts only have aggregated
 	// field wells. Columns in a combo chart are aggregated by category.
 	ComboChartAggregatedFieldWells *ComboChartAggregatedFieldWells
+
+	noSmithyDocumentSerde
+}
+
+// Options that determine the presentation of a series in the visual.
+type ComboChartSeriesSettings struct {
+
+	// Border settings for the bar series in the visual.
+	BorderSettings *BorderSettings
+
+	// Decal settings for the series in the visual.
+	DecalSettings *DecalSettings
+
+	// Line styles options for the line series in the visual.
+	LineStyleSettings *LineChartLineStyleSettings
+
+	// Marker styles options for the line series in the visual.
+	MarkerStyleSettings *LineChartMarkerStyleSettings
 
 	noSmithyDocumentSerde
 }
@@ -3861,6 +3971,21 @@ type ComboChartVisual struct {
 
 	// The alt text for the visual.
 	VisualContentAltText *string
+
+	noSmithyDocumentSerde
+}
+
+// The series item configuration of a ComboChartVisual .
+//
+// This is a union type structure. For this structure to be valid, only one of the
+// attributes can be defined.
+type ComboSeriesItem struct {
+
+	// The data field series item configuration of a ComboChartVisual .
+	DataFieldComboSeriesItem *DataFieldComboSeriesItem
+
+	// The field series item configuration of a ComboChartVisual .
+	FieldComboSeriesItem *FieldComboSeriesItem
 
 	noSmithyDocumentSerde
 }
@@ -4139,6 +4264,22 @@ type ContributionAnalysisTimeRanges struct {
 
 	// The start range for the ContributionAnalysisTimeRanges .
 	StartRange *TopicIRFilterOption
+
+	noSmithyDocumentSerde
+}
+
+// The preference coordinate for the geocode preference.
+type Coordinate struct {
+
+	// The latitude coordinate value for the geocode preference.
+	//
+	// This member is required.
+	Latitude *float64
+
+	// The longitude coordinate value for the geocode preference.
+	//
+	// This member is required.
+	Longitude *float64
 
 	noSmithyDocumentSerde
 }
@@ -4599,6 +4740,17 @@ type Dashboard struct {
 	noSmithyDocumentSerde
 }
 
+// The options that define customizations available to dashboard readers for a
+// specific visual
+type DashboardCustomizationVisualOptions struct {
+
+	// The configuration that controls field customization options available to
+	// dashboard readers for a visual.
+	FieldsConfiguration *VisualCustomizationFieldsConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Dashboard error.
 type DashboardError struct {
 
@@ -5045,6 +5197,40 @@ type DataColorPalette struct {
 
 	// The minimum and maximum hexadecimal codes that describe a color gradient.
 	MinMaxGradient []string
+
+	noSmithyDocumentSerde
+}
+
+// The data field series item configuration of a BarChartVisual .
+type DataFieldBarSeriesItem struct {
+
+	// Field ID of the field that you are setting the series configuration for.
+	//
+	// This member is required.
+	FieldId *string
+
+	// Field value of the field that you are setting the series configuration for.
+	FieldValue *string
+
+	// Options that determine the presentation of bar series associated to the field.
+	Settings *BarChartSeriesSettings
+
+	noSmithyDocumentSerde
+}
+
+// The data field series item configuration of a ComboChartVisual .
+type DataFieldComboSeriesItem struct {
+
+	// Field ID of the field that you are setting the series configuration for.
+	//
+	// This member is required.
+	FieldId *string
+
+	// Field value of the field that you are setting the series configuration for.
+	FieldValue *string
+
+	// Options that determine the presentation of series associated to the field.
+	Settings *ComboChartSeriesSettings
 
 	noSmithyDocumentSerde
 }
@@ -5936,6 +6122,9 @@ type DataSourceCredentials struct {
 	// [CredentialPair]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CredentialPair.html
 	CredentialPair *CredentialPair
 
+	// The credentials for connecting using key-pair.
+	KeyPairCredentials *KeyPairCredentials
+
 	// The Amazon Resource Name (ARN) of the secret associated with the data source in
 	// Amazon Secrets Manager.
 	SecretArn *string
@@ -6622,6 +6811,88 @@ type DateTimeValueWhenUnsetConfiguration struct {
 	//
 	//   - NULL : The NULL value.
 	ValueWhenUnsetOption ValueWhenUnsetOption
+
+	noSmithyDocumentSerde
+}
+
+// Decal settings for accessibility features that define visual patterns and
+// styling for data elements.
+type DecalSettings struct {
+
+	// Color configuration for the decal pattern.
+	DecalColor *string
+
+	// Type of pattern used for the decal, such as solid, diagonal, or circular
+	// patterns in various sizes.
+	//
+	//   - SOLID : Solid fill pattern.
+	//
+	//   - DIAGONAL_SMALL : Small diagonal stripes pattern.
+	//
+	//   - DIAGONAL_MEDIUM : Medium diagonal stripes pattern.
+	//
+	//   - DIAGONAL_LARGE : Large diagonal stripes pattern.
+	//
+	//   - DIAGONAL_OPPOSITE_SMALL : Small cross-diagonal stripes pattern.
+	//
+	//   - DIAGONAL_OPPOSITE_MEDIUM : Medium cross-diagonal stripes pattern.
+	//
+	//   - DIAGONAL_OPPOSITE_LARGE : Large cross-diagonal stripes pattern.
+	//
+	//   - CIRCLE_SMALL : Small circle pattern.
+	//
+	//   - CIRCLE_MEDIUM : Medium circle pattern.
+	//
+	//   - CIRCLE_LARGE : Large circle pattern.
+	//
+	//   - DIAMOND_SMALL : Small diamonds pattern.
+	//
+	//   - DIAMOND_MEDIUM : Medium diamonds pattern.
+	//
+	//   - DIAMOND_LARGE : Large diamonds pattern.
+	//
+	//   - DIAMOND_GRID_SMALL : Small diamond grid pattern.
+	//
+	//   - DIAMOND_GRID_MEDIUM : Medium diamond grid pattern.
+	//
+	//   - DIAMOND_GRID_LARGE : Large diamond grid pattern.
+	//
+	//   - CHECKERBOARD_SMALL : Small checkerboard pattern.
+	//
+	//   - CHECKERBOARD_MEDIUM : Medium checkerboard pattern.
+	//
+	//   - CHECKERBOARD_LARGE : Large checkerboard pattern.
+	//
+	//   - TRIANGLE_SMALL : Small triangles pattern.
+	//
+	//   - TRIANGLE_MEDIUM : Medium triangles pattern.
+	//
+	//   - TRIANGLE_LARGE : Large triangles pattern.
+	DecalPatternType DecalPatternType
+
+	// Style type for the decal, which can be either manual or automatic. This field
+	// is only applicable for line series.
+	//
+	//   - Manual : Apply manual line and marker configuration for line series.
+	//
+	//   - Auto : Apply automatic line and marker configuration for line series.
+	DecalStyleType DecalStyleType
+
+	// Visibility setting for the decal pattern.
+	DecalVisibility Visibility
+
+	// Field value of the field that you are setting the decal pattern to. Applicable
+	// only for field level settings.
+	ElementValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Decal settings configuration for a column
+type DecalSettingsConfiguration struct {
+
+	// A list of up to 50 decal settings.
+	CustomDecalSettings []DecalSettings
 
 	noSmithyDocumentSerde
 }
@@ -7390,6 +7661,20 @@ type FailedKeyRegistrationEntry struct {
 	noSmithyDocumentSerde
 }
 
+// The field series item configuration of a BarChartVisual .
+type FieldBarSeriesItem struct {
+
+	// Field ID of the field for which you are setting the series configuration.
+	//
+	// This member is required.
+	FieldId *string
+
+	// Options that determine the presentation of bar series associated to the field.
+	Settings *BarChartSeriesSettings
+
+	noSmithyDocumentSerde
+}
+
 // The setup for the detailed tooltip.
 type FieldBasedTooltip struct {
 
@@ -7405,6 +7690,20 @@ type FieldBasedTooltip struct {
 	//
 	//   - PRIMARY_VALUE : Uses primary value as the title.
 	TooltipTitleType TooltipTitleType
+
+	noSmithyDocumentSerde
+}
+
+// The field series item configuration of a ComboChartVisual .
+type FieldComboSeriesItem struct {
+
+	// Field ID of the field for which you are setting the series configuration.
+	//
+	// This member is required.
+	FieldId *string
+
+	// Options that determine the presentation of series associated to the field.
+	Settings *ComboChartSeriesSettings
 
 	noSmithyDocumentSerde
 }
@@ -7629,6 +7928,9 @@ type FilledMapVisual struct {
 
 	// The conditional formatting of a FilledMapVisual .
 	ConditionalFormatting *FilledMapConditionalFormatting
+
+	// The geocoding prefences for filled map visual.
+	GeocodingPreferences []GeocodePreference
 
 	// The subtitle that is displayed on the visual.
 	Subtitle *VisualSubtitleLabelOptions
@@ -8950,6 +9252,71 @@ type GenerativeAuthoringConfigurations struct {
 	noSmithyDocumentSerde
 }
 
+// The geocode preference.
+type GeocodePreference struct {
+
+	// The preference definition for the geocode preference.
+	//
+	// This member is required.
+	Preference GeocodePreferenceValue
+
+	// The unique request key for the geocode preference.
+	//
+	// This member is required.
+	RequestKey *GeocoderHierarchy
+
+	noSmithyDocumentSerde
+}
+
+// The preference value for the geocode preference.
+//
+// The following types satisfy this interface:
+//
+//	GeocodePreferenceValueMemberCoordinate
+//	GeocodePreferenceValueMemberGeocoderHierarchy
+type GeocodePreferenceValue interface {
+	isGeocodePreferenceValue()
+}
+
+// The preference coordinate for the geocode preference.
+type GeocodePreferenceValueMemberCoordinate struct {
+	Value Coordinate
+
+	noSmithyDocumentSerde
+}
+
+func (*GeocodePreferenceValueMemberCoordinate) isGeocodePreferenceValue() {}
+
+// The preference hierarchy for the geocode preference.
+type GeocodePreferenceValueMemberGeocoderHierarchy struct {
+	Value GeocoderHierarchy
+
+	noSmithyDocumentSerde
+}
+
+func (*GeocodePreferenceValueMemberGeocoderHierarchy) isGeocodePreferenceValue() {}
+
+// The preference hierarchy for the geocode preference.
+type GeocoderHierarchy struct {
+
+	// The city value for the preference hierarchy.
+	City *string
+
+	// The country value for the preference hierarchy.
+	Country *string
+
+	// The county/district value for the preference hierarchy.
+	County *string
+
+	// The postcode value for the preference hierarchy.
+	PostCode *string
+
+	// The state/region value for the preference hierarchy.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
 // The definition for a categorical color.
 type GeospatialCategoricalColor struct {
 
@@ -9403,6 +9770,9 @@ type GeospatialMapVisual struct {
 
 	// The column hierarchy that is used during drill-downs and drill-ups.
 	ColumnHierarchies []ColumnHierarchy
+
+	// The geocoding prefences for geospatial map.
+	GeocodingPreferences []GeocodePreference
 
 	// The subtitle that is displayed on the visual.
 	Subtitle *VisualSubtitleLabelOptions
@@ -10724,6 +11094,26 @@ type JoinOperation struct {
 	noSmithyDocumentSerde
 }
 
+// The combination of username, private key and passphrase that are used as
+// credentials.
+type KeyPairCredentials struct {
+
+	// Username
+	//
+	// This member is required.
+	KeyPairUsername *string
+
+	// PrivateKey
+	//
+	// This member is required.
+	PrivateKey *string
+
+	// PrivateKeyPassphrase
+	PrivateKeyPassphrase *string
+
+	noSmithyDocumentSerde
+}
+
 // The conditional formatting for the actual value of a KPI visual.
 type KPIActualValueConditionalFormatting struct {
 
@@ -11235,6 +11625,9 @@ type LineChartDefaultSeriesSettings struct {
 	// The axis to which you are binding all line series to.
 	AxisBinding AxisBinding
 
+	// Decal settings options for all line series in the visual.
+	DecalSettings *DecalSettings
+
 	// Line styles options for all line series in the visual.
 	LineStyleSettings *LineChartLineStyleSettings
 
@@ -11313,6 +11706,9 @@ type LineChartMarkerStyleSettings struct {
 
 // The options that determine the presentation of a line series in the visual
 type LineChartSeriesSettings struct {
+
+	// Decal settings for a line series in LineChartVisual .
+	DecalSettings *DecalSettings
 
 	// Line styles options for a line series in LineChartVisual .
 	LineStyleSettings *LineChartLineStyleSettings
@@ -13275,6 +13671,10 @@ type PivotTableConditionalFormattingScope struct {
 // The configuration for a PivotTableVisual .
 type PivotTableConfiguration struct {
 
+	// The options that define customizations available to dashboard readers for a
+	// specific visual
+	DashboardCustomizationVisualOptions *DashboardCustomizationVisualOptions
+
 	// The field options for a pivot table visual.
 	FieldOptions *PivotTableFieldOptions
 
@@ -14919,6 +15319,20 @@ type RegisteredUserQuickSightConsoleEmbeddingConfiguration struct {
 	//   - /analyses/AnalysisId . AnalysisId is the actual ID key from the Amazon Quick
 	//   Sight console URL of the analysis.
 	InitialPath *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about files that are requested for
+// registered user during a StartDashboardSnapshotJob API call.
+type RegisteredUserSnapshotJobResult struct {
+
+	// A list of SnapshotJobResultFileGroup objects that contain information on the
+	// files that are requested for registered user during a StartDashboardSnapshotJob
+	// API call. If the job succeeds, these objects contain the location where the
+	// snapshot artifacts are stored. If the job fails, the objects contain information
+	// about the error that caused the job to fail.
+	FileGroups []SnapshotJobResultFileGroup
 
 	noSmithyDocumentSerde
 }
@@ -16576,6 +16990,10 @@ type SnapshotFileSheetSelection struct {
 
 // An object that contains information on the error that caused the snapshot job
 // to fail.
+//
+// For more information, see [DescribeDashboardSnapshotJobResult API].
+//
+// [DescribeDashboardSnapshotJobResult API]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJobResult.html
 type SnapshotJobErrorInfo struct {
 
 	// The error message.
@@ -16596,6 +17014,11 @@ type SnapshotJobResult struct {
 	// anonymous users and their user configurations. This data provided by you when
 	// you make a StartDashboardSnapshotJob API call.
 	AnonymousUsers []AnonymousUserSnapshotJobResult
+
+	// A list of RegisteredUserSnapshotJobResult objects that contain information
+	// about files that are requested for registered user during a
+	// StartDashboardSnapshotJob API call.
+	RegisteredUsers []RegisteredUserSnapshotJobResult
 
 	noSmithyDocumentSerde
 }
@@ -16658,6 +17081,9 @@ type SnapshotS3DestinationConfiguration struct {
 
 // A structure that contains information about the users that the dashboard
 // snapshot is generated for.
+//
+// When using identity-enhanced session credentials, set the UserConfiguration
+// request attribute to null. Otherwise, the request will be invalid.
 type SnapshotUserConfiguration struct {
 
 	// An array of records that describe the anonymous users that the dashboard
@@ -17191,6 +17617,10 @@ type TableConditionalFormattingOption struct {
 
 // The configuration for a TableVisual .
 type TableConfiguration struct {
+
+	// The options that define customizations available to dashboard readers for a
+	// specific visual
+	DashboardCustomizationVisualOptions *DashboardCustomizationVisualOptions
 
 	// The field options for a table visual.
 	FieldOptions *TableFieldOptions
@@ -19892,6 +20322,45 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains information to identify a user.
+//
+// The following types satisfy this interface:
+//
+//	UserIdentifierMemberEmail
+//	UserIdentifierMemberUserArn
+//	UserIdentifierMemberUserName
+type UserIdentifier interface {
+	isUserIdentifier()
+}
+
+// The email address of the user that you want to get identity context for.
+type UserIdentifierMemberEmail struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UserIdentifierMemberEmail) isUserIdentifier() {}
+
+// The Amazon Resource Name (ARN) of the user that you want to get identity
+// context for.
+type UserIdentifierMemberUserArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UserIdentifierMemberUserArn) isUserIdentifier() {}
+
+// The name of the user that you want to get identity context for.
+type UserIdentifierMemberUserName struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UserIdentifierMemberUserName) isUserIdentifier() {}
+
 // The option to relax the validation that is required to create and update
 // analyses, dashboards, and templates with definition objects. When you set this
 // value to LENIENT , validation is skipped for specific errors.
@@ -20176,6 +20645,21 @@ type VisualCustomActionOperation struct {
 
 	// The URL operation that opens a link to another webpage.
 	URLOperation *CustomActionURLOperation
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that controls field customization options available to
+// dashboard readers for a visual.
+type VisualCustomizationFieldsConfiguration struct {
+
+	// The additional dataset fields available for dashboard readers to customize the
+	// visual with, beyond the fields already configured on the visual.
+	AdditionalFields []ColumnIdentifier
+
+	// Specifies whether dashboard readers can customize fields for this visual. This
+	// option is ENABLED by default.
+	Status DashboardCustomizationStatus
 
 	noSmithyDocumentSerde
 }
@@ -20778,9 +21262,11 @@ func (*UnknownUnionMember) isAuthenticationMetadata()                       {}
 func (*UnknownUnionMember) isAuthorizationCodeGrantCredentialsDetails()     {}
 func (*UnknownUnionMember) isClientCredentialsDetails()                     {}
 func (*UnknownUnionMember) isDataSourceParameters()                         {}
+func (*UnknownUnionMember) isGeocodePreferenceValue()                       {}
 func (*UnknownUnionMember) isImageSource()                                  {}
 func (*UnknownUnionMember) isPhysicalTable()                                {}
 func (*UnknownUnionMember) isReadAuthenticationMetadata()                   {}
 func (*UnknownUnionMember) isReadAuthorizationCodeGrantCredentialsDetails() {}
 func (*UnknownUnionMember) isReadClientCredentialsDetails()                 {}
 func (*UnknownUnionMember) isTransformOperation()                           {}
+func (*UnknownUnionMember) isUserIdentifier()                               {}

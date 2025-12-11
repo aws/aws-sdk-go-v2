@@ -1481,6 +1481,26 @@ func (DashboardBehavior) Values() []DashboardBehavior {
 	}
 }
 
+type DashboardCustomizationStatus string
+
+// Enum values for DashboardCustomizationStatus
+const (
+	DashboardCustomizationStatusEnabled  DashboardCustomizationStatus = "ENABLED"
+	DashboardCustomizationStatusDisabled DashboardCustomizationStatus = "DISABLED"
+)
+
+// Values returns all known values for DashboardCustomizationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashboardCustomizationStatus) Values() []DashboardCustomizationStatus {
+	return []DashboardCustomizationStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type DashboardErrorType string
 
 // Enum values for DashboardErrorType
@@ -2081,6 +2101,84 @@ func (DayOfWeek) Values() []DayOfWeek {
 		"THURSDAY",
 		"FRIDAY",
 		"SATURDAY",
+	}
+}
+
+type DecalPatternType string
+
+// Enum values for DecalPatternType
+const (
+	DecalPatternTypeSolid                  DecalPatternType = "SOLID"
+	DecalPatternTypeDiagonalMedium         DecalPatternType = "DIAGONAL_MEDIUM"
+	DecalPatternTypeCircleMedium           DecalPatternType = "CIRCLE_MEDIUM"
+	DecalPatternTypeDiamondGridMedium      DecalPatternType = "DIAMOND_GRID_MEDIUM"
+	DecalPatternTypeCheckerboardMedium     DecalPatternType = "CHECKERBOARD_MEDIUM"
+	DecalPatternTypeTriangleMedium         DecalPatternType = "TRIANGLE_MEDIUM"
+	DecalPatternTypeDiagonalOppositeMedium DecalPatternType = "DIAGONAL_OPPOSITE_MEDIUM"
+	DecalPatternTypeDiamondMedium          DecalPatternType = "DIAMOND_MEDIUM"
+	DecalPatternTypeDiagonalLarge          DecalPatternType = "DIAGONAL_LARGE"
+	DecalPatternTypeCircleLarge            DecalPatternType = "CIRCLE_LARGE"
+	DecalPatternTypeDiamondGridLarge       DecalPatternType = "DIAMOND_GRID_LARGE"
+	DecalPatternTypeCheckerboardLarge      DecalPatternType = "CHECKERBOARD_LARGE"
+	DecalPatternTypeTriangleLarge          DecalPatternType = "TRIANGLE_LARGE"
+	DecalPatternTypeDiagonalOppositeLarge  DecalPatternType = "DIAGONAL_OPPOSITE_LARGE"
+	DecalPatternTypeDiamondLarge           DecalPatternType = "DIAMOND_LARGE"
+	DecalPatternTypeDiagonalSmall          DecalPatternType = "DIAGONAL_SMALL"
+	DecalPatternTypeCircleSmall            DecalPatternType = "CIRCLE_SMALL"
+	DecalPatternTypeDiamondGridSmall       DecalPatternType = "DIAMOND_GRID_SMALL"
+	DecalPatternTypeCheckerboardSmall      DecalPatternType = "CHECKERBOARD_SMALL"
+	DecalPatternTypeTriangleSmall          DecalPatternType = "TRIANGLE_SMALL"
+	DecalPatternTypeDiagonalOppositeSmall  DecalPatternType = "DIAGONAL_OPPOSITE_SMALL"
+	DecalPatternTypeDiamondSmall           DecalPatternType = "DIAMOND_SMALL"
+)
+
+// Values returns all known values for DecalPatternType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DecalPatternType) Values() []DecalPatternType {
+	return []DecalPatternType{
+		"SOLID",
+		"DIAGONAL_MEDIUM",
+		"CIRCLE_MEDIUM",
+		"DIAMOND_GRID_MEDIUM",
+		"CHECKERBOARD_MEDIUM",
+		"TRIANGLE_MEDIUM",
+		"DIAGONAL_OPPOSITE_MEDIUM",
+		"DIAMOND_MEDIUM",
+		"DIAGONAL_LARGE",
+		"CIRCLE_LARGE",
+		"DIAMOND_GRID_LARGE",
+		"CHECKERBOARD_LARGE",
+		"TRIANGLE_LARGE",
+		"DIAGONAL_OPPOSITE_LARGE",
+		"DIAMOND_LARGE",
+		"DIAGONAL_SMALL",
+		"CIRCLE_SMALL",
+		"DIAMOND_GRID_SMALL",
+		"CHECKERBOARD_SMALL",
+		"TRIANGLE_SMALL",
+		"DIAGONAL_OPPOSITE_SMALL",
+		"DIAMOND_SMALL",
+	}
+}
+
+type DecalStyleType string
+
+// Enum values for DecalStyleType
+const (
+	DecalStyleTypeManual DecalStyleType = "Manual"
+	DecalStyleTypeAuto   DecalStyleType = "Auto"
+)
+
+// Values returns all known values for DecalStyleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DecalStyleType) Values() []DecalStyleType {
+	return []DecalStyleType{
+		"Manual",
+		"Auto",
 	}
 }
 

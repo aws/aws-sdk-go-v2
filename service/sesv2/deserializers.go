@@ -13007,6 +13007,15 @@ func awsRestjson1_deserializeOpDocumentPutEmailIdentityDkimSigningAttributesOutp
 				return err
 			}
 
+		case "SigningHostedZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HostedZone to be of type string, got %T instead", value)
+				}
+				sv.SigningHostedZone = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -17125,6 +17134,15 @@ func awsRestjson1_deserializeDocumentDkimAttributes(v **types.DkimAttributes, va
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", value)
 				}
 				sv.SigningEnabled = jtv
+			}
+
+		case "SigningHostedZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HostedZone to be of type string, got %T instead", value)
+				}
+				sv.SigningHostedZone = ptr.String(jtv)
 			}
 
 		case "Status":

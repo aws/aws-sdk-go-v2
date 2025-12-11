@@ -129,6 +129,7 @@
         "api_op_GetDashboardEmbedUrl.go",
         "api_op_GetFlowMetadata.go",
         "api_op_GetFlowPermissions.go",
+        "api_op_GetIdentityContext.go",
         "api_op_GetSessionEmbedUrl.go",
         "api_op_ListActionConnectors.go",
         "api_op_ListAnalyses.go",
