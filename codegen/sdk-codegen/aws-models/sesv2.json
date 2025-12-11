@@ -3535,6 +3535,12 @@
                         "smithy.api#documentation": "<p>If you used <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a> to configure DKIM authentication for the domain, then this object\n            contains a set of unique strings that you use to create a set of CNAME records that you\n            add to the DNS configuration for your domain. When Amazon SES detects these records in the\n            DNS configuration for your domain, the DKIM authentication process is complete.</p>\n         <p>If you configured DKIM authentication for the domain by providing your own\n            public-private key pair, then this object contains the selector for the public\n            key.</p>\n         <p>Regardless of the DKIM authentication method you use, Amazon SES searches for the\n            appropriate records in the DNS configuration of the domain for up to 72 hours.</p>"
                     }
                 },
+                "SigningHostedZone": {
+                    "target": "com.amazonaws.sesv2#HostedZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hosted zone where Amazon SES publishes the DKIM public key TXT records for this email identity. \n        This value indicates the DNS zone that customers must reference when configuring their CNAME records for DKIM authentication.</p>\n         <p>When configuring DKIM for your domain, create CNAME records in your DNS that point to the selectors in this hosted zone. \n        For example:</p>\n         <p>\n            <code>\n            selector1._domainkey.yourdomain.com CNAME selector1.<SigningHostedZone>\n        </code>\n         </p>\n         <p>\n            <code>\n            selector2._domainkey.yourdomain.com CNAME selector2.<SigningHostedZone>\n        </code>\n         </p>\n         <p>\n            <code>\n            selector3._domainkey.yourdomain.com CNAME selector3.<SigningHostedZone>\n        </code>\n         </p>"
+                    }
+                },
                 "SigningAttributesOrigin": {
                     "target": "com.amazonaws.sesv2#DkimSigningAttributesOrigin",
                     "traits": {
@@ -6708,6 +6714,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>An object containing additional settings for your VDM configuration as applicable to\n            the Guardian.</p>"
             }
+        },
+        "com.amazonaws.sesv2#HostedZone": {
+            "type": "string"
         },
         "com.amazonaws.sesv2#HttpsPolicy": {
             "type": "enum",
@@ -10855,6 +10864,12 @@
                     "target": "com.amazonaws.sesv2#DnsTokenList",
                     "traits": {
                         "smithy.api#documentation": "<p>If you used <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a> to configure DKIM authentication for the domain, then this object\n            contains a set of unique strings that you use to create a set of CNAME records that you\n            add to the DNS configuration for your domain. When Amazon SES detects these records in the\n            DNS configuration for your domain, the DKIM authentication process is complete.</p>\n         <p>If you configured DKIM authentication for the domain by providing your own\n            public-private key pair, then this object contains the selector that's associated with\n            your public key.</p>\n         <p>Regardless of the DKIM authentication method you use, Amazon SES searches for the\n            appropriate records in the DNS configuration of the domain for up to 72 hours.</p>"
+                    }
+                },
+                "SigningHostedZone": {
+                    "target": "com.amazonaws.sesv2#HostedZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hosted zone where Amazon SES publishes the DKIM public key TXT records for this email identity. \n        This value indicates the DNS zone that customers must reference when configuring their CNAME records for DKIM authentication.</p>\n         <p>When configuring DKIM for your domain, create CNAME records in your DNS that point to the selectors in this hosted zone. \n        For example:</p>\n         <p>\n            <code>\n            selector1._domainkey.yourdomain.com CNAME selector1.<SigningHostedZone>\n        </code>\n         </p>\n         <p>\n            <code>\n            selector2._domainkey.yourdomain.com CNAME selector2.<SigningHostedZone>\n        </code>\n         </p>\n         <p>\n            <code>\n            selector3._domainkey.yourdomain.com CNAME selector3.<SigningHostedZone>\n        </code>\n         </p>"
                     }
                 }
             },

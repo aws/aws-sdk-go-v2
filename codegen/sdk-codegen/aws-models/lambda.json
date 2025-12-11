@@ -16182,6 +16182,12 @@
                     "traits": {
                         "smithy.api#enumValue": "java25"
                     }
+                },
+                "dotnet10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dotnet10"
+                    }
                 }
             }
         },
