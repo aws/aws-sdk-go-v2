@@ -1,8 +1,0 @@
-{
-    "id": "6f49159b-8904-4778-b39d-3105164e5200",
-    "type": "feature",
-    "description": "Add support for policy operations on the NETWORK SECURITY DIRECTOR POLICY policy type.",
-    "modules": [
-        "service/organizations"
-    ]
-}

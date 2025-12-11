@@ -1,8 +1,0 @@
-{
-    "id": "f2fd7309-be44-44bb-8d33-b9d8566b0974",
-    "type": "feature",
-    "description": "Add Dotnet 10 (dotnet10) support to AWS Lambda.",
-    "modules": [
-        "service/lambda"
-    ]
-}

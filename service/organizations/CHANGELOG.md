@@ -1,3 +1,7 @@
+# v1.50.0 (2025-12-11)
+
+* **Feature**: Add support for policy operations on the NETWORK SECURITY DIRECTOR POLICY policy type.
+
 # v1.49.2 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "440058d2-4fe9-4524-a9ce-cb90fc517234",
-    "type": "feature",
-    "description": "Update GetEmailIdentity and CreateEmailIdentity response to include SigningHostedZone in DkimAttributes. Updated PutEmailIdentityDkimSigningAttributes Response to include SigningHostedZone.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

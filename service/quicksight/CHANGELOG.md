@@ -1,3 +1,7 @@
+# v1.99.0 (2025-12-11)
+
+* **Feature**: This release adds new GetIdentityContext API, Dashboard customization options for tables and pivot tables, Visual styling options- borders and decals, map GeocodingPreferences, KeyPairCredentials for DataSourceCredentials. Snapshot APIs now support registered users. Parameters limit increased to 400
+
 # v1.98.3 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

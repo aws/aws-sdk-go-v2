@@ -1,3 +1,17 @@
+# Release (2025-12-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.87.0](service/lambda/CHANGELOG.md#v1870-2025-12-11)
+  * **Feature**: Add Dotnet 10 (dotnet10) support to AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.50.0](service/organizations/CHANGELOG.md#v1500-2025-12-11)
+  * **Feature**: Add support for policy operations on the NETWORK SECURITY DIRECTOR POLICY policy type.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.99.0](service/quicksight/CHANGELOG.md#v1990-2025-12-11)
+  * **Feature**: This release adds new GetIdentityContext API, Dashboard customization options for tables and pivot tables, Visual styling options- borders and decals, map GeocodingPreferences, KeyPairCredentials for DataSourceCredentials. Snapshot APIs now support registered users. Parameters limit increased to 400
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.41.0](service/secretsmanager/CHANGELOG.md#v1410-2025-12-11)
+  * **Feature**: Add SortBy parameter to ListSecrets
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.58.0](service/sesv2/CHANGELOG.md#v1580-2025-12-11)
+  * **Feature**: Update GetEmailIdentity and CreateEmailIdentity response to include SigningHostedZone in DkimAttributes. Updated PutEmailIdentityDkimSigningAttributes Response to include SigningHostedZone.
+
 # Release (2025-12-10)
 
 ## Module Highlights

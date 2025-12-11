@@ -1,3 +1,7 @@
+# v1.41.0 (2025-12-11)
+
+* **Feature**: Add SortBy parameter to ListSecrets
+
 # v1.40.5 (2025-12-09)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.58.0 (2025-12-11)
+
+* **Feature**: Update GetEmailIdentity and CreateEmailIdentity response to include SigningHostedZone in DkimAttributes. Updated PutEmailIdentityDkimSigningAttributes Response to include SigningHostedZone.
+
 # v1.57.1 (2025-12-09)
 
 * No change notes available for this release.

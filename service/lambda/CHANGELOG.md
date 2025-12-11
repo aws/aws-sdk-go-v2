@@ -1,3 +1,7 @@
+# v1.87.0 (2025-12-11)
+
+* **Feature**: Add Dotnet 10 (dotnet10) support to AWS Lambda.
+
 # v1.86.2 (2025-12-09)
 
 * No change notes available for this release.
