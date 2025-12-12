@@ -1,3 +1,7 @@
+# v1.150.0 (2025-12-12)
+
+* **Feature**: Amazon Connect now offers automated post-chat surveys triggered when customers end conversations. This captures timely feedback while experience is fresh, using either a no-code form builder or Amazon Lex-powered interactive surveys.
+
 # v1.149.2 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

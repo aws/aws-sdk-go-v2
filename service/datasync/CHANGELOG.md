@@ -1,3 +1,7 @@
+# v1.57.0 (2025-12-12)
+
+* **Feature**: Adds Enhanced mode support for NFS and SMB locations. SMB credentials are now managed via Secrets Manager, and may be encrypted with service or customer managed keys. Increases AgentArns maximum count to 8 (max 4 per TaskMode). Adds folder counters to DescribeTaskExecution for Enhanced mode tasks.
+
 # v1.56.4 (2025-12-09)
 
 * No change notes available for this release.

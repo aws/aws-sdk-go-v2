@@ -1,3 +1,15 @@
+# Release (2025-12-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bcmrecommendedactions`: [v1.1.0](service/bcmrecommendedactions/CHANGELOG.md#v110-2025-12-12)
+  * **Feature**: Added new freetier action types to RecommendedAction.type.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.150.0](service/connect/CHANGELOG.md#v11500-2025-12-12)
+  * **Feature**: Amazon Connect now offers automated post-chat surveys triggered when customers end conversations. This captures timely feedback while experience is fresh, using either a no-code form builder or Amazon Lex-powered interactive surveys.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.57.0](service/datasync/CHANGELOG.md#v1570-2025-12-12)
+  * **Feature**: Adds Enhanced mode support for NFS and SMB locations. SMB credentials are now managed via Secrets Manager, and may be encrypted with service or customer managed keys. Increases AgentArns maximum count to 8 (max 4 per TaskMode). Adds folder counters to DescribeTaskExecution for Enhanced mode tasks.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.35.0](service/workspacesweb/CHANGELOG.md#v1350-2025-12-12)
+  * **Feature**: Adds support for portal branding customization, enabling administrators to personalize end-user portals with custom assets.
+
 # Release (2025-12-11)
 
 ## Module Highlights

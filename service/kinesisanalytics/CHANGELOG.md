@@ -1,3 +1,7 @@
+# v1.30.18 (2025-12-12)
+
+* No change notes available for this release.
+
 # v1.30.17 (2025-12-09)
 
 * No change notes available for this release.

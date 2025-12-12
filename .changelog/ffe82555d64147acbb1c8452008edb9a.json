@@ -1,8 +1,0 @@
-{
-    "id": "ffe82555-d641-47ac-bb1c-8452008edb9a",
-    "type": "feature",
-    "description": "Adds Enhanced mode support for NFS and SMB locations. SMB credentials are now managed via Secrets Manager, and may be encrypted with service or customer managed keys. Increases AgentArns maximum count to 8 (max 4 per TaskMode). Adds folder counters to DescribeTaskExecution for Enhanced mode tasks.",
-    "modules": [
-        "service/datasync"
-    ]
-}

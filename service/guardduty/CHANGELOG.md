@@ -1,3 +1,7 @@
+# v1.70.1 (2025-12-12)
+
+* No change notes available for this release.
+
 # v1.70.0 (2025-12-09)
 
 * **Feature**: Adding support for Ec2LaunchTemplate Version field

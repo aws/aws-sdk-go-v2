@@ -1,3 +1,7 @@
+# v1.35.0 (2025-12-12)
+
+* **Feature**: Adds support for portal branding customization, enabling administrators to personalize end-user portals with custom assets.
+
 # v1.34.4 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

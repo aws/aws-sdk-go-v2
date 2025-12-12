@@ -1,8 +1,0 @@
-{
-    "id": "28fae55c-2407-4ce8-875f-ecd088bd844d",
-    "type": "feature",
-    "description": "Amazon Connect now offers automated post-chat surveys triggered when customers end conversations. This captures timely feedback while experience is fresh, using either a no-code form builder or Amazon Lex-powered interactive surveys.",
-    "modules": [
-        "service/connect"
-    ]
-}
