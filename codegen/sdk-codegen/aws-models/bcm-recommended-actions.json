@@ -478,6 +478,18 @@
                         "smithy.api#enumValue": "REVIEW_FREETIER_USAGE_ALERTS"
                     }
                 },
+                "REVIEW_FREETIER_CREDITS_REMAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEW_FREETIER_CREDITS_REMAINING"
+                    }
+                },
+                "REVIEW_FREETIER_DAYS_REMAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEW_FREETIER_DAYS_REMAINING"
+                    }
+                },
                 "REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -682,10 +694,10 @@
                     {
                         "id": "ListRecommendedActionsSuccess",
                         "params": {
-                            "maxResults": 10
+                            "maxResults": 5
                         },
                         "expect": {
-                            "failure": {}
+                            "success": {}
                         },
                         "vendorParamsShape": "aws.test#AwsVendorParams"
                     }

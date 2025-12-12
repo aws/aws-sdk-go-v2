@@ -4527,7 +4527,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a workspace with one or more users or routing profiles, allowing them to access the workspace's configured views and pages.</p>",
+                "smithy.api#documentation": "<p>Associates a workspace with one or more users or routing profiles, allowing them to access the workspace's\n   configured views and pages.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workspaces/{InstanceId}/{WorkspaceId}/associate",
@@ -4541,7 +4541,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4557,7 +4557,7 @@
                 "ResourceArns": {
                     "target": "com.amazonaws.connect#WorkspaceResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources to associate with the workspace. Valid resource types are users and routing profiles.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources to associate with the workspace. Valid resource types are\n   users and routing profiles.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5516,7 +5516,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates values for attributes in a data table. The value may be a default or it may be associated with a primary value. The value must pass all customer defined validation as well as the default validation for the value type. The operation must conform to Batch Operation API Standards. Although the standard specifies that successful and failed entities are listed separately in the response, authorization fails if any primary values or attributes are unauthorized. The combination of primary values and the attribute name serve as the identifier for the individual item request.</p>",
+                "smithy.api#documentation": "<p>Creates values for attributes in a data table. The value may be a default or it may be associated with a primary\n   value. The value must pass all customer defined validation as well as the default validation for the value type. The\n   operation must conform to Batch Operation API Standards. Although the standard specifies that successful and failed\n   entities are listed separately in the response, authorization fails if any primary values or attributes are\n   unauthorized. The combination of primary values and the attribute name serve as the identifier for the individual\n   item request.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/values/create",
@@ -5573,7 +5573,7 @@
                 "DataTableId": {
                     "target": "com.amazonaws.connect#DataTableId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If no alias is provided, the default behavior is identical to providing the $LATEST alias.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If no\n   alias is provided, the default behavior is identical to providing the $LATEST alias.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5581,7 +5581,7 @@
                 "Values": {
                     "target": "com.amazonaws.connect#DataTableValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of values to create. Each value must specify the attribute name and optionally primary values if the table has primary attributes.</p>",
+                        "smithy.api#documentation": "<p>A list of values to create. Each value must specify the attribute name and optionally primary values if the\n   table has primary attributes.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5686,7 +5686,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes multiple values from a data table. API users may delete values at any time. When deletion is requested from the admin website, a warning is shown alerting the user of the most recent time the attribute and its values were accessed. System managed values are not deletable by customers.</p>",
+                "smithy.api#documentation": "<p>Deletes multiple values from a data table. API users may delete values at any time. When deletion is requested\n   from the admin website, a warning is shown alerting the user of the most recent time the attribute and its values\n   were accessed. System managed values are not deletable by customers.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/values/delete",
@@ -5751,7 +5751,7 @@
                 "Values": {
                     "target": "com.amazonaws.connect#DataTableDeleteValueIdentifierList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of value identifiers to delete, each specifying primary values, attribute name, and lock version information.</p>",
+                        "smithy.api#documentation": "<p>A list of value identifiers to delete, each specifying primary values, attribute name, and lock version\n   information.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5846,7 +5846,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves multiple values from a data table without evaluating expressions. Returns the raw stored values along with metadata such as lock versions and modification timestamps. \"Describe\" is a deprecated term but is allowed to maintain consistency with existing operations.</p>",
+                "smithy.api#documentation": "<p>Retrieves multiple values from a data table without evaluating expressions. Returns the raw stored values along\n   with metadata such as lock versions and modification timestamps. \"Describe\" is a deprecated term but is allowed to\n   maintain consistency with existing operations.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/values/describe",
@@ -6377,7 +6377,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates multiple data table values using all properties from BatchCreateDataTableValue. System managed values are not modifiable by customers. The operation requires proper lock versions to prevent concurrent modification conflicts.</p>",
+                "smithy.api#documentation": "<p>Updates multiple data table values using all properties from BatchCreateDataTableValue. System managed values\n   are not modifiable by customers. The operation requires proper lock versions to prevent concurrent modification\n   conflicts.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/values/update",
@@ -7945,18 +7945,18 @@
                 "TagConditions": {
                     "target": "com.amazonaws.connect#TagAndConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p> Tag-based conditions for contact flow filtering. </p>"
+                        "smithy.api#documentation": "<p> Tag-based conditions for contact flow filtering.</p>"
                     }
                 },
                 "ContactFlowTypeCondition": {
                     "target": "com.amazonaws.connect#ContactFlowTypeCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contact flow type condition. </p>"
+                        "smithy.api#documentation": "<p> Contact flow type condition.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A list of conditions which would be applied together with an AND condition. </p>"
+                "smithy.api#documentation": "<p> A list of conditions which would be applied together with an AND condition.</p>"
             }
         },
         "com.amazonaws.connect#ContactFlowAttributeFilter": {
@@ -7965,13 +7965,13 @@
                 "OrConditions": {
                     "target": "com.amazonaws.connect#ContactFlowAttributeOrConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of conditions which would be applied together with an OR condition. </p>"
+                        "smithy.api#documentation": "<p> A list of conditions which would be applied together with an OR condition.</p>"
                     }
                 },
                 "AndCondition": {
                     "target": "com.amazonaws.connect#ContactFlowAttributeAndCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of conditions which would be applied together with a AND condition. </p>"
+                        "smithy.api#documentation": "<p> A list of conditions which would be applied together with a AND condition.</p>"
                     }
                 },
                 "TagCondition": {
@@ -7980,12 +7980,12 @@
                 "ContactFlowTypeCondition": {
                     "target": "com.amazonaws.connect#ContactFlowTypeCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contact flow type condition within attribute filter. </p>"
+                        "smithy.api#documentation": "<p> Contact flow type condition within attribute filter.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Filter for contact flow attributes with multiple condition types. </p>"
+                "smithy.api#documentation": "<p> Filter for contact flow attributes with multiple condition types.</p>"
             }
         },
         "com.amazonaws.connect#ContactFlowAttributeOrConditionList": {
@@ -8657,12 +8657,12 @@
                 "ContactFlowType": {
                     "target": "com.amazonaws.connect#ContactFlowType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contact flow type of the contact flow type condition. </p>"
+                        "smithy.api#documentation": "<p> Contact flow type of the contact flow type condition.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The contact flow type condition. </p>"
+                "smithy.api#documentation": "<p> The contact flow type condition.</p>"
             }
         },
         "com.amazonaws.connect#ContactFlowTypes": {
@@ -9305,7 +9305,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>. This accepts an\n    <code>OR</code> or <code>AND</code> (List of List) input where: </p>\n         <ul>\n            <li>\n               <p>The top level list specifies conditions that need to be applied with <code>OR</code> operator.</p>\n            </li>\n            <li>\n               <p>The inner list specifies conditions that need to be applied with <code>AND</code> operator.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>. This accepts an\n    <code>OR</code> or <code>AND</code> (List of List) input where:</p>\n         <ul>\n            <li>\n               <p>The top level list specifies conditions that need to be applied with <code>OR</code> operator.</p>\n            </li>\n            <li>\n               <p>The inner list specifies conditions that need to be applied with <code>AND</code> operator.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.connect#ControlPlaneTagFilter": {
@@ -9314,7 +9314,7 @@
                 "OrConditions": {
                     "target": "com.amazonaws.connect#TagOrConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition. </p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition.</p>"
                     }
                 },
                 "AndConditions": {
@@ -9326,12 +9326,12 @@
                 "TagCondition": {
                     "target": "com.amazonaws.connect#TagCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition. </p>"
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>. This accepts an\n    <code>OR</code> of <code>AND</code> (List of List) input where: </p>\n         <ul>\n            <li>\n               <p>Top level list specifies conditions that need to be applied with <code>OR</code> operator</p>\n            </li>\n            <li>\n               <p>Inner list specifies conditions that need to be applied with <code>AND</code> operator.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>. This accepts an\n    <code>OR</code> of <code>AND</code> (List of List) input where:</p>\n         <ul>\n            <li>\n               <p>Top level list specifies conditions that need to be applied with <code>OR</code> operator</p>\n            </li>\n            <li>\n               <p>Inner list specifies conditions that need to be applied with <code>AND</code> operator.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.connect#ControlPlaneUserAttributeFilter": {
@@ -9357,7 +9357,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions or Hierarchy Group conditions inside the\n    <code>SearchFilter</code>.</p>\n         <p>This accepts an <code>OR</code> of <code>AND</code> (List of List) input where:</p>\n         <ul>\n            <li>\n               <p>The top level list specifies conditions that need to be applied with <code>OR</code> operator</p>\n            </li>\n            <li>\n               <p>The inner list specifies conditions that need to be applied with <code>AND</code> operator.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Only one field can be populated. Maximum number of allowed Tag conditions is 25. Maximum number of allowed\n    Hierarchy Group conditions is 20. </p>\n         </note>"
+                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions or Hierarchy Group conditions inside the\n    <code>SearchFilter</code>.</p>\n         <p>This accepts an <code>OR</code> of <code>AND</code> (List of List) input where:</p>\n         <ul>\n            <li>\n               <p>The top level list specifies conditions that need to be applied with <code>OR</code> operator</p>\n            </li>\n            <li>\n               <p>The inner list specifies conditions that need to be applied with <code>AND</code> operator.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Only one field can be populated. Maximum number of allowed Tag conditions is 25. Maximum number of allowed\n    Hierarchy Group conditions is 20.</p>\n         </note>"
             }
         },
         "com.amazonaws.connect#Count": {
@@ -10264,7 +10264,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new data table with the specified properties. Supports the creation of all table properties except for attributes and values. A table with no attributes and values is a valid state for a table. The number of tables per instance is limited to 100 per instance. Customers can request an increase by using AWS Service Quotas.</p>",
+                "smithy.api#documentation": "<p>Creates a new data table with the specified properties. Supports the creation of all table properties except for\n   attributes and values. A table with no attributes and values is a valid state for a table. The number of tables per\n   instance is limited to 100 per instance. Customers can request an increase by using AWS Service Quotas.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/data-tables/{InstanceId}",
@@ -10310,7 +10310,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an attribute to an existing data table. Creating a new primary attribute uses the empty value for the specified value type for all existing records. This should not affect uniqueness of published data tables since the existing primary values will already be unique. Creating attributes does not create any values. System managed tables may not allow customers to create new attributes.</p>",
+                "smithy.api#documentation": "<p>Adds an attribute to an existing data table. Creating a new primary attribute uses the empty value for the\n   specified value type for all existing records. This should not affect uniqueness of published data tables since the\n   existing primary values will already be unique. Creating attributes does not create any values. System managed tables\n   may not allow customers to create new attributes.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/attributes",
@@ -10332,7 +10332,7 @@
                 "DataTableId": {
                     "target": "com.amazonaws.connect#DataTableId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If the version is provided as part of the identifier or ARN, the version must be one of the two available system managed aliases, $SAVED or $LATEST.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If the\n   version is provided as part of the identifier or ARN, the version must be one of the two available system managed\n   aliases, $SAVED or $LATEST.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10340,34 +10340,34 @@
                 "Name": {
                     "target": "com.amazonaws.connect#DataTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the attribute. Must conform to Connect human readable string specification and have 1-127 characters. Must not start with the reserved case insensitive values 'connect:' and 'aws:'. Whitespace trimmed before persisting. Must be unique for the data table using case-insensitive comparison.</p>",
+                        "smithy.api#documentation": "<p>The name for the attribute. Must conform to Connect human readable string specification and have 1-127\n   characters. Must not start with the reserved case insensitive values 'connect:' and 'aws:'. Whitespace trimmed before\n   persisting. Must be unique for the data table using case-insensitive comparison.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ValueType": {
                     "target": "com.amazonaws.connect#DataTableAttributeValueType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of value allowed or the resultant type after the value's expression is evaluated. Must be one of TEXT, TEXT_LIST, NUMBER, NUMBER_LIST, and BOOLEAN.</p>",
+                        "smithy.api#documentation": "<p>The type of value allowed or the resultant type after the value's expression is evaluated. Must be one of TEXT,\n   TEXT_LIST, NUMBER, NUMBER_LIST, and BOOLEAN.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.connect#DataTableDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional description for the attribute. Must conform to Connect human readable string specification and have 0-250 characters. Whitespace trimmed before persisting.</p>"
+                        "smithy.api#documentation": "<p>An optional description for the attribute. Must conform to Connect human readable string specification and have\n   0-250 characters. Whitespace trimmed before persisting.</p>"
                     }
                 },
                 "Primary": {
                     "target": "com.amazonaws.connect#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Optional boolean that defaults to false. Determines if the value is used to identify a record in the table. Values for primary attributes must not be expressions.</p>"
+                        "smithy.api#documentation": "<p>Optional boolean that defaults to false. Determines if the value is used to identify a record in the table.\n   Values for primary attributes must not be expressions.</p>"
                     }
                 },
                 "Validation": {
                     "target": "com.amazonaws.connect#Validation",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional validation rules for the attribute. Borrows heavily from JSON Schema - Draft 2020-12. The maximum length of arrays within validations and depth of validations is 5. There are default limits that apply to all types. Customer specified limits in excess of the default limits are not permitted.</p>"
+                        "smithy.api#documentation": "<p>Optional validation rules for the attribute. Borrows heavily from JSON Schema - Draft 2020-12. The maximum\n   length of arrays within validations and depth of validations is 5. There are default limits that apply to all types.\n   Customer specified limits in excess of the default limits are not permitted.</p>"
                     }
                 }
             },
@@ -10381,7 +10381,7 @@
                 "Name": {
                     "target": "com.amazonaws.connect#DataTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the created attribute since it also serves as the identifier. This could be different than the parameter passed in since it will be trimmed for whitespace.</p>",
+                        "smithy.api#documentation": "<p>The name of the created attribute since it also serves as the identifier. This could be different than the\n   parameter passed in since it will be trimmed for whitespace.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10394,7 +10394,7 @@
                 "LockVersion": {
                     "target": "com.amazonaws.connect#DataTableLockVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock version information for the data table and attribute, used for optimistic locking and versioning.</p>",
+                        "smithy.api#documentation": "<p>The lock version information for the data table and attribute, used for optimistic locking and\n   versioning.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10417,41 +10417,41 @@
                 "Name": {
                     "target": "com.amazonaws.connect#DataTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the data table. Must conform to Connect human readable string specification and have 1-127 characters. Whitespace must be trimmed first. Must not start with the reserved case insensitive values 'connect:' and 'aws:'. Must be unique for the instance using case-insensitive comparison.</p>",
+                        "smithy.api#documentation": "<p>The name for the data table. Must conform to Connect human readable string specification and have 1-127\n   characters. Whitespace must be trimmed first. Must not start with the reserved case insensitive values 'connect:' and\n   'aws:'. Must be unique for the instance using case-insensitive comparison.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.connect#DataTableDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional description for the data table. Must conform to Connect human readable string specification and have 0-250 characters. Whitespace must be trimmed first.</p>"
+                        "smithy.api#documentation": "<p>An optional description for the data table. Must conform to Connect human readable string specification and have\n   0-250 characters. Whitespace must be trimmed first.</p>"
                     }
                 },
                 "TimeZone": {
                     "target": "com.amazonaws.connect#TimeZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IANA timezone identifier to use when resolving time based dynamic values. Required even if no time slices are specified.</p>",
+                        "smithy.api#documentation": "<p>The IANA timezone identifier to use when resolving time based dynamic values. Required even if no time slices\n   are specified.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ValueLockLevel": {
                     "target": "com.amazonaws.connect#DataTableLockLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data level that concurrent value edits are locked on. One of DATA_TABLE, PRIMARY_VALUE, ATTRIBUTE, VALUE, and NONE. NONE is the default if unspecified. This determines how concurrent edits are handled when multiple users attempt to modify values simultaneously.</p>",
+                        "smithy.api#documentation": "<p>The data level that concurrent value edits are locked on. One of DATA_TABLE, PRIMARY_VALUE, ATTRIBUTE, VALUE,\n   and NONE. NONE is the default if unspecified. This determines how concurrent edits are handled when multiple users\n   attempt to modify values simultaneously.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.connect#DataTableStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the data table. One of PUBLISHED or SAVED. Required parameter that determines the initial state of the table.</p>",
+                        "smithy.api#documentation": "<p>The status of the data table. One of PUBLISHED or SAVED. Required parameter that determines the initial state of\n   the table.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Key value pairs for attribute based access control (TBAC or ABAC). Optional tags to apply to the data table for organization and access control purposes.</p>"
+                        "smithy.api#documentation": "<p>Key value pairs for attribute based access control (TBAC or ABAC). Optional tags to apply to the data table for\n   organization and access control purposes.</p>"
                     }
                 }
             },
@@ -10479,7 +10479,7 @@
                 "LockVersion": {
                     "target": "com.amazonaws.connect#DataTableLockVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock version information for the created data table, used for optimistic locking and table versioning.</p>",
+                        "smithy.api#documentation": "<p>The lock version information for the created data table, used for optimistic locking and table\n   versioning.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -13205,7 +13205,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a workspace that defines the user experience by mapping views to pages. Workspaces can be assigned to users or routing profiles.</p>",
+                "smithy.api#documentation": "<p>Creates a workspace that defines the user experience by mapping views to pages. Workspaces can be assigned to\n   users or routing profiles.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/workspaces/{InstanceId}",
@@ -13268,7 +13268,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -13291,7 +13291,7 @@
                 "Page": {
                     "target": "com.amazonaws.connect#Page",
                     "traits": {
-                        "smithy.api#documentation": "<p>The page identifier. Valid system pages include <code>HOME</code> and <code>AGENT_EXPERIENCE</code>. Custom pages cannot use the <code>aws:</code> or <code>connect:</code> prefixes.</p>",
+                        "smithy.api#documentation": "<p>The page identifier. Valid system pages include <code>HOME</code> and <code>AGENT_EXPERIENCE</code>. Custom\n   pages cannot use the <code>aws:</code> or <code>connect:</code> prefixes.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13325,7 +13325,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -13358,7 +13358,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, <code>{ \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }</code>.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, <code>{ \"Tags\":\n    {\"key1\":\"value1\", \"key2\":\"value2\"} }</code>.</p>"
                     }
                 }
             },
@@ -13743,7 +13743,7 @@
                 "Name": {
                     "target": "com.amazonaws.connect#DataTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The human-readable name of the data table. Must be unique within the instance and conform to Connect naming standards.</p>",
+                        "smithy.api#documentation": "<p>The human-readable name of the data table. Must be unique within the instance and conform to Connect naming\n   standards.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13764,7 +13764,7 @@
                 "TimeZone": {
                     "target": "com.amazonaws.connect#TimeZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IANA timezone identifier used when resolving time based dynamic values. Required even if no time slices are specified.</p>",
+                        "smithy.api#documentation": "<p>The IANA timezone identifier used when resolving time based dynamic values. Required even if no time slices are\n   specified.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13777,13 +13777,13 @@
                 "ValueLockLevel": {
                     "target": "com.amazonaws.connect#DataTableLockLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data level that concurrent value edits are locked on. One of DATA_TABLE, PRIMARY_VALUE, ATTRIBUTE, VALUE, and NONE. Determines how concurrent edits are handled when multiple users attempt to modify values simultaneously.</p>"
+                        "smithy.api#documentation": "<p>The data level that concurrent value edits are locked on. One of DATA_TABLE, PRIMARY_VALUE, ATTRIBUTE, VALUE,\n   and NONE. Determines how concurrent edits are handled when multiple users attempt to modify values\n   simultaneously.</p>"
                     }
                 },
                 "LockVersion": {
                     "target": "com.amazonaws.connect#DataTableLockVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock version information used for optimistic locking and table versioning. Changes with each update to prevent concurrent modification conflicts.</p>"
+                        "smithy.api#documentation": "<p>The lock version information used for optimistic locking and table versioning. Changes with each update to\n   prevent concurrent modification conflicts.</p>"
                     }
                 },
                 "Version": {
@@ -13831,7 +13831,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a data table in Amazon Connect. A data table is a JSON-like data structure where attributes and values are dynamically set by customers. Customers can reference table values within call flows, applications, views, and workspaces to pinpoint dynamic configuration that changes their contact center's behavior in a predetermined and safe way.</p>"
+                "smithy.api#documentation": "<p>Represents a data table in Amazon Connect. A data table is a JSON-like data structure where attributes and\n   values are dynamically set by customers. Customers can reference table values within call flows, applications, views,\n   and workspaces to pinpoint dynamic configuration that changes their contact center's behavior in a predetermined and\n   safe way.</p>"
             }
         },
         "com.amazonaws.connect#DataTableAccessControlConfiguration": {
@@ -13860,14 +13860,14 @@
                 "Name": {
                     "target": "com.amazonaws.connect#DataTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The human-readable name of the attribute. Must be unique within the data table and conform to Connect naming standards.</p>",
+                        "smithy.api#documentation": "<p>The human-readable name of the attribute. Must be unique within the data table and conform to Connect naming\n   standards.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ValueType": {
                     "target": "com.amazonaws.connect#DataTableAttributeValueType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of value allowed for this attribute. Must be one of TEXT, TEXT_LIST, NUMBER, NUMBER_LIST, or BOOLEAN. Determines how values are validated and processed.</p>",
+                        "smithy.api#documentation": "<p>The type of value allowed for this attribute. Must be one of TEXT, TEXT_LIST, NUMBER, NUMBER_LIST, or BOOLEAN.\n   Determines how values are validated and processed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13893,7 +13893,7 @@
                     "target": "com.amazonaws.connect#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Boolean indicating whether this attribute is used as a primary key for record identification. Primary attributes must have unique value combinations and cannot contain expressions.</p>"
+                        "smithy.api#documentation": "<p>Boolean indicating whether this attribute is used as a primary key for record identification. Primary attributes\n   must have unique value combinations and cannot contain expressions.</p>"
                     }
                 },
                 "Version": {
@@ -13905,7 +13905,7 @@
                 "LockVersion": {
                     "target": "com.amazonaws.connect#DataTableLockVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock version for this attribute, used for optimistic locking to prevent concurrent modification conflicts.</p>"
+                        "smithy.api#documentation": "<p>The lock version for this attribute, used for optimistic locking to prevent concurrent modification\n   conflicts.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -13923,12 +13923,12 @@
                 "Validation": {
                     "target": "com.amazonaws.connect#Validation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The validation rules applied to values of this attribute. Based on JSON Schema Draft 2020-12 with additional Connect-specific validations for data integrity.</p>"
+                        "smithy.api#documentation": "<p>The validation rules applied to values of this attribute. Based on JSON Schema Draft 2020-12 with additional\n   Connect-specific validations for data integrity.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an attribute (column) in a data table. Attributes define the schema and validation rules for values that can be stored in the table. They specify the data type, constraints, and whether the attribute is used as a primary key for record identification.</p>"
+                "smithy.api#documentation": "<p>Represents an attribute (column) in a data table. Attributes define the schema and validation rules for values\n   that can be stored in the table. They specify the data type, constraints, and whether the attribute is used as a\n   primary key for record identification.</p>"
             }
         },
         "com.amazonaws.connect#DataTableAttributeValueType": {
@@ -14131,30 +14131,30 @@
                 "DataTable": {
                     "target": "com.amazonaws.connect#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock version for the data table itself. Used for optimistic locking and table versioning. Changes with each update to the table's metadata or structure.</p>"
+                        "smithy.api#documentation": "<p>The lock version for the data table itself. Used for optimistic locking and table versioning. Changes with each\n   update to the table's metadata or structure.</p>"
                     }
                 },
                 "Attribute": {
                     "target": "com.amazonaws.connect#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock version for a specific attribute. When the ValueLockLevel is ATTRIBUTE, this version changes when any value for the attribute changes. For other lock levels, it only changes when the attribute's properties are directly updated.</p>"
+                        "smithy.api#documentation": "<p>The lock version for a specific attribute. When the ValueLockLevel is ATTRIBUTE, this version changes when any\n   value for the attribute changes. For other lock levels, it only changes when the attribute's properties are directly\n   updated.</p>"
                     }
                 },
                 "PrimaryValues": {
                     "target": "com.amazonaws.connect#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock version for a specific set of primary values (record). This includes the default record even if the table does not have any primary attributes. Used for record-level locking.</p>"
+                        "smithy.api#documentation": "<p>The lock version for a specific set of primary values (record). This includes the default record even if the\n   table does not have any primary attributes. Used for record-level locking.</p>"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.connect#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock version for a specific value. Changes each time the individual value is modified. Used for the finest-grained locking control.</p>"
+                        "smithy.api#documentation": "<p>The lock version for a specific value. Changes each time the individual value is modified. Used for the\n   finest-grained locking control.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains lock version information for different levels of a data table hierarchy. Used for optimistic locking to prevent concurrent modification conflicts. Each component has its own lock version that changes when that component is modified.</p>"
+                "smithy.api#documentation": "<p>Contains lock version information for different levels of a data table hierarchy. Used for optimistic locking to\n   prevent concurrent modification conflicts. Each component has its own lock version that changes when that component\n   is modified.</p>"
             }
         },
         "com.amazonaws.connect#DataTableName": {
@@ -14588,19 +14588,19 @@
                 "MinValue": {
                     "target": "com.amazonaws.connect#DateTimeFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>A minimum value of the property. </p>"
+                        "smithy.api#documentation": "<p>A minimum value of the property.</p>"
                     }
                 },
                 "MaxValue": {
                     "target": "com.amazonaws.connect#DateTimeFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>A maximum value of the property. </p>"
+                        "smithy.api#documentation": "<p>A maximum value of the property.</p>"
                     }
                 },
                 "ComparisonType": {
                     "target": "com.amazonaws.connect#DateTimeComparisonType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Datetime property comparison type. </p>"
+                        "smithy.api#documentation": "<p>Datetime property comparison type.</p>"
                     }
                 }
             },
@@ -14787,7 +14787,7 @@
                 "ComparisonType": {
                     "target": "com.amazonaws.connect#DecimalComparisonType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of comparison to be made when evaluating the decimal condition. </p>"
+                        "smithy.api#documentation": "<p>The type of comparison to be made when evaluating the decimal condition.</p>"
                     }
                 }
             },
@@ -15377,7 +15377,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a data table and all associated attributes, versions, audits, and values. Does not update any references to the data table, even from other data tables. This includes dynamic values and conditional validations. System managed data tables are not deletable by customers. API users may delete the table at any time. When deletion is requested from the admin website, a warning is shown alerting the user of the most recent time the table and its values were accessed.</p>",
+                "smithy.api#documentation": "<p>Deletes a data table and all associated attributes, versions, audits, and values. Does not update any references\n   to the data table, even from other data tables. This includes dynamic values and conditional validations. System\n   managed data tables are not deletable by customers. API users may delete the table at any time. When deletion is\n   requested from the admin website, a warning is shown alerting the user of the most recent time the table and its\n   values were accessed.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}",
@@ -15486,7 +15486,7 @@
                 "DataTableId": {
                     "target": "com.amazonaws.connect#DataTableId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the data table to delete. Must also accept the table ARN. Fails with an error if the version is provided and is not $LATEST.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the data table to delete. Must also accept the table ARN. Fails with an error if the\n   version is provided and is not $LATEST.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -16989,7 +16989,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17005,7 +17005,7 @@
                 "MediaType": {
                     "target": "com.amazonaws.connect#MediaType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of media to delete. Valid values are: <code>IMAGE_LOGO_FAVICON</code> and <code>IMAGE_LOGO_HORIZONTAL</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of media to delete. Valid values are: <code>IMAGE_LOGO_FAVICON</code> and\n    <code>IMAGE_LOGO_HORIZONTAL</code>.</p>",
                         "smithy.api#httpQuery": "mediaType",
                         "smithy.api#required": {}
                     }
@@ -17054,7 +17054,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the association between a view and a page in a workspace. The page will display the default view after deletion.</p>",
+                "smithy.api#documentation": "<p>Removes the association between a view and a page in a workspace. The page will display the default view after\n   deletion.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/workspaces/{InstanceId}/{WorkspaceId}/pages/{Page}",
@@ -17068,7 +17068,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17107,7 +17107,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17687,7 +17687,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all properties for a data table except for attributes and values. All properties from CreateDataTable are returned as well as properties for region replication, versioning, and system tables. \"Describe\" is a deprecated term but is allowed to maintain consistency with existing operations.</p>",
+                "smithy.api#documentation": "<p>Returns all properties for a data table except for attributes and values. All properties from CreateDataTable\n   are returned as well as properties for region replication, versioning, and system tables. \"Describe\" is a deprecated\n   term but is allowed to maintain consistency with existing operations.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}",
@@ -17724,7 +17724,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed information for a specific data table attribute including its configuration, validation rules, and metadata. \"Describe\" is a deprecated term but is allowed to maintain consistency with existing operations.</p>",
+                "smithy.api#documentation": "<p>Returns detailed information for a specific data table attribute including its configuration, validation rules,\n   and metadata. \"Describe\" is a deprecated term but is allowed to maintain consistency with existing operations.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/attributes/{AttributeName}",
@@ -17793,7 +17793,7 @@
                 "DataTableId": {
                     "target": "com.amazonaws.connect#DataTableId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If no alias is provided, the default behavior is identical to providing the $LATEST alias.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If no\n   alias is provided, the default behavior is identical to providing the $LATEST alias.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -19419,7 +19419,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -20744,7 +20744,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -20801,6 +20801,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the call disconnect experience.</p>"
+            }
+        },
+        "com.amazonaws.connect#DisconnectOnCustomerExit": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#DisconnectOnCustomerExitParticipantType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#DisconnectOnCustomerExitParticipantType": {
+            "type": "enum",
+            "members": {
+                "AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT"
+                    }
+                }
             }
         },
         "com.amazonaws.connect#DisconnectReason": {
@@ -21583,7 +21606,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Evaluates values at the time of the request and returns them. It considers the request's timezone or the table's timezone, in that order, when accessing time based tables. When a value is accessed, the accessor's identity and the time of access are saved alongside the value to help identify values that are actively in use. The term \"Batch\" is not included in the operation name since it does not meet all the criteria for a batch operation as specified in Batch Operations: AWS API Standards.</p>",
+                "smithy.api#documentation": "<p>Evaluates values at the time of the request and returns them. It considers the request's timezone or the table's\n   timezone, in that order, when accessing time based tables. When a value is accessed, the accessor's identity and the\n   time of access are saved alongside the value to help identify values that are actively in use. The term \"Batch\" is\n   not included in the operation name since it does not meet all the criteria for a batch operation as specified in\n   Batch Operations: AWS API Standards.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/values/evaluate",
@@ -21625,7 +21648,7 @@
                 "TimeZone": {
                     "target": "com.amazonaws.connect#TimeZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional IANA timezone identifier to use when resolving time based dynamic values. Defaults to the data table time zone if not provided.</p>"
+                        "smithy.api#documentation": "<p>Optional IANA timezone identifier to use when resolving time based dynamic values. Defaults to the data table\n   time zone if not provided.</p>"
                     }
                 },
                 "NextToken": {
@@ -26617,7 +26640,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains granular access control configuration for security profiles, including data table access permissions.</p>"
+                "smithy.api#documentation": "<p>Contains granular access control configuration for security profiles, including data table access\n   permissions.</p>"
             }
         },
         "com.amazonaws.connect#Grouping": {
@@ -28001,7 +28024,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -28017,7 +28040,7 @@
                 "MediaType": {
                     "target": "com.amazonaws.connect#MediaType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of media. Valid values are: <code>IMAGE_LOGO_FAVICON</code> and <code>IMAGE_LOGO_HORIZONTAL</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of media. Valid values are: <code>IMAGE_LOGO_FAVICON</code> and\n   <code>IMAGE_LOGO_HORIZONTAL</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -30664,7 +30687,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all attributes for a specified data table. A maximum of 100 attributes per data table is allowed. Customers can request an increase by using AWS Service Quotas. The response can be filtered by specific attribute IDs for CloudFormation integration.</p>",
+                "smithy.api#documentation": "<p>Returns all attributes for a specified data table. A maximum of 100 attributes per data table is allowed.\n   Customers can request an increase by using AWS Service Quotas. The response can be filtered by specific attribute IDs\n   for CloudFormation integration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/attributes",
@@ -30700,7 +30723,7 @@
                 "AttributeIds": {
                     "target": "com.amazonaws.connect#AttributeIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional list of specific attribute IDs to retrieve. Used for CloudFormation to effectively describe attributes by ID. If NextToken is provided, this parameter is ignored.</p>"
+                        "smithy.api#documentation": "<p>Optional list of specific attribute IDs to retrieve. Used for CloudFormation to effectively describe attributes\n   by ID. If NextToken is provided, this parameter is ignored.</p>"
                     }
                 },
                 "NextToken": {
@@ -30772,7 +30795,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all primary value combinations for a given data table. Returns the unique combinations of primary attribute values that identify records in the table. Up to 100 records are returned per request.</p>",
+                "smithy.api#documentation": "<p>Lists all primary value combinations for a given data table. Returns the unique combinations of primary\n   attribute values that identify records in the table. Up to 100 records are returned per request.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/values/list-primary",
@@ -30808,7 +30831,7 @@
                 "RecordIds": {
                     "target": "com.amazonaws.connect#RecordIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional list of specific record IDs to retrieve. Used for CloudFormation to effectively describe records by ID. If NextToken is provided, this parameter is ignored.</p>"
+                        "smithy.api#documentation": "<p>Optional list of specific record IDs to retrieve. Used for CloudFormation to effectively describe records by ID.\n   If NextToken is provided, this parameter is ignored.</p>"
                     }
                 },
                 "PrimaryAttributeValues": {
@@ -30886,7 +30909,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists values stored in a data table with optional filtering by record IDs or primary attribute values. Returns the raw stored values along with metadata such as lock versions and modification timestamps.</p>",
+                "smithy.api#documentation": "<p>Lists values stored in a data table with optional filtering by record IDs or primary attribute values. Returns\n   the raw stored values along with metadata such as lock versions and modification timestamps.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/values/list",
@@ -31000,7 +31023,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all data tables for the specified Amazon Connect instance. Returns summary information for each table including basic metadata and modification details.</p>",
+                "smithy.api#documentation": "<p>Lists all data tables for the specified Amazon Connect instance. Returns summary information for each table\n   including basic metadata and modification details.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/data-tables/{InstanceId}",
@@ -31056,7 +31079,7 @@
                 "DataTableSummaryList": {
                     "target": "com.amazonaws.connect#DataTableSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of data table summaries containing basic information about each table including ID, ARN, name, and modification details.</p>",
+                        "smithy.api#documentation": "<p>A list of data table summaries containing basic information about each table including ID, ARN, name, and\n   modification details.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -35102,7 +35125,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -35183,7 +35206,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -35199,7 +35222,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to\n   retrieve the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -35285,7 +35308,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -35293,7 +35316,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to\n   retrieve the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -35482,7 +35505,7 @@
                 "Type": {
                     "target": "com.amazonaws.connect#MediaType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of media. Valid values are: <code>IMAGE_LOGO_FAVICON</code> and <code>IMAGE_LOGO_HORIZONTAL</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of media. Valid values are: <code>IMAGE_LOGO_FAVICON</code> and\n   <code>IMAGE_LOGO_HORIZONTAL</code>.</p>"
                     }
                 },
                 "Source": {
@@ -39573,13 +39596,13 @@
                 "Value": {
                     "target": "com.amazonaws.connect#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The actual value for the primary attribute. Must be provided as a string regardless of the attribute's value type. Primary values cannot be expressions and must be explicitly specified.</p>",
+                        "smithy.api#documentation": "<p>The actual value for the primary attribute. Must be provided as a string regardless of the attribute's value\n   type. Primary values cannot be expressions and must be explicitly specified.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a primary key value used to identify a specific record in a data table. Primary values are used in combination to create unique record identifiers when a table has multiple primary attributes.</p>"
+                "smithy.api#documentation": "<p>Represents a primary key value used to identify a specific record in a data table. Primary values are used in\n   combination to create unique record identifiers when a table has multiple primary attributes.</p>"
             }
         },
         "com.amazonaws.connect#PrimaryValueList": {
@@ -44441,7 +44464,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for data tables based on the table's ID, name, and description. In the future, this operation can support searching on attribute names and possibly primary values. Follows other search operations closely and supports both search criteria and filters.</p>",
+                "smithy.api#documentation": "<p>Searches for data tables based on the table's ID, name, and description. In the future, this operation can\n   support searching on attribute names and possibly primary values. Follows other search operations closely and\n   supports both search criteria and filters.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/search-data-tables",
@@ -44480,13 +44503,13 @@
                 "SearchFilter": {
                     "target": "com.amazonaws.connect#DataTableSearchFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional filters to apply to the search results, such as tag-based filtering for attribute-based access control.</p>"
+                        "smithy.api#documentation": "<p>Optional filters to apply to the search results, such as tag-based filtering for attribute-based access\n   control.</p>"
                     }
                 },
                 "SearchCriteria": {
                     "target": "com.amazonaws.connect#DataTableSearchCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>Search criteria including string conditions for matching table names, descriptions, or resource IDs. Supports STARTS_WITH, CONTAINS, and EXACT comparison types.</p>"
+                        "smithy.api#documentation": "<p>Search criteria including string conditions for matching table names, descriptions, or resource IDs. Supports\n   STARTS_WITH, CONTAINS, and EXACT comparison types.</p>"
                     }
                 }
             },
@@ -44500,7 +44523,7 @@
                 "DataTables": {
                     "target": "com.amazonaws.connect#DataTableList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of data tables matching the search criteria with the same structure as DescribeTable except Version, VersionDescription, and LockVersion are omitted.</p>"
+                        "smithy.api#documentation": "<p>An array of data tables matching the search criteria with the same structure as DescribeTable except Version,\n   VersionDescription, and LockVersion are omitted.</p>"
                     }
                 },
                 "NextToken": {
@@ -45932,14 +45955,14 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken2500",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to\n   retrieve the next set of results.</p>"
                     }
                 },
                 "MaxResults": {
@@ -46143,14 +46166,14 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken2500",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to\n   retrieve the next set of results.</p>"
                     }
                 },
                 "MaxResults": {
@@ -46251,14 +46274,14 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken2500",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to\n   retrieve the next set of results.</p>"
                     }
                 },
                 "MaxResults": {
@@ -47839,6 +47862,12 @@
                     "target": "com.amazonaws.connect#CustomerIdNonEmpty",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer's identification number. For example, the <code>CustomerId</code> may be a customer number from\n   your CRM.</p>"
+                    }
+                },
+                "DisconnectOnCustomerExit": {
+                    "target": "com.amazonaws.connect#DisconnectOnCustomerExit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of participant types to automatically disconnect when the end customer ends the chat session, allowing them to continue through disconnect flows such as surveys or feedback forms.</p>\n         <p>Valid value: <code>AGENT</code>.</p>\n         <p>With the <code>DisconnectOnCustomerExit</code> parameter, you can configure automatic agent disconnection when end customers end the chat, ensuring that disconnect flows are triggered consistently regardless of which participant disconnects first.</p>"
                     }
                 }
             },
@@ -49756,7 +49785,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a resource that was successfully associated with a workspace in a batch operation.</p>"
+                "smithy.api#documentation": "<p>Contains information about a resource that was successfully associated with a workspace in a batch\n   operation.</p>"
             }
         },
         "com.amazonaws.connect#SuccessfulBatchAssociationSummaryList": {
@@ -52628,7 +52657,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates all properties for an attribute using all properties from CreateDataTableAttribute. There are no other granular update endpoints. It does not act as a patch operation - all properties must be provided. System managed attributes are not mutable by customers. Changing an attribute's validation does not invalidate existing values since validation only runs when values are created or updated.</p>",
+                "smithy.api#documentation": "<p>Updates all properties for an attribute using all properties from CreateDataTableAttribute. There are no other\n   granular update endpoints. It does not act as a patch operation - all properties must be provided. System managed\n   attributes are not mutable by customers. Changing an attribute's validation does not invalidate existing values since\n   validation only runs when values are created or updated.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/attributes/{AttributeName}",
@@ -52666,14 +52695,14 @@
                 "Name": {
                     "target": "com.amazonaws.connect#DataTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new name for the attribute. Must conform to Connect human readable string specification and be unique within the data table.</p>",
+                        "smithy.api#documentation": "<p>The new name for the attribute. Must conform to Connect human readable string specification and be unique within\n   the data table.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ValueType": {
                     "target": "com.amazonaws.connect#DataTableAttributeValueType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated value type for the attribute. When changing value types, existing values are not deleted but may return default values if incompatible.</p>",
+                        "smithy.api#documentation": "<p>The updated value type for the attribute. When changing value types, existing values are not deleted but may\n   return default values if incompatible.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -52687,13 +52716,13 @@
                     "target": "com.amazonaws.connect#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Whether the attribute should be treated as a primary key. Converting to primary attribute requires existing values to maintain uniqueness.</p>"
+                        "smithy.api#documentation": "<p>Whether the attribute should be treated as a primary key. Converting to primary attribute requires existing\n   values to maintain uniqueness.</p>"
                     }
                 },
                 "Validation": {
                     "target": "com.amazonaws.connect#Validation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated validation rules for the attribute. Changes do not affect existing values until they are modified.</p>"
+                        "smithy.api#documentation": "<p>The updated validation rules for the attribute. Changes do not affect existing values until they are\n   modified.</p>"
                     }
                 }
             },
@@ -52758,7 +52787,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the metadata properties of a data table. Accepts all fields similar to CreateDataTable, except for fields and tags. There are no other granular update endpoints. It does not act as a patch operation - all properties must be provided or defaults will be used. Fields follow the same requirements as CreateDataTable.</p>",
+                "smithy.api#documentation": "<p>Updates the metadata properties of a data table. Accepts all fields similar to CreateDataTable, except for\n   fields and tags. There are no other granular update endpoints. It does not act as a patch operation - all properties\n   must be provided or defaults will be used. Fields follow the same requirements as CreateDataTable.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}",
@@ -52780,7 +52809,7 @@
                 "DataTableId": {
                     "target": "com.amazonaws.connect#DataTableId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If the version is provided as part of the identifier or ARN, the version must be $LATEST. Providing any other alias fails with an error.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If the\n   version is provided as part of the identifier or ARN, the version must be $LATEST. Providing any other alias fails\n   with an error.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -52788,20 +52817,20 @@
                 "Name": {
                     "target": "com.amazonaws.connect#DataTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated name for the data table. Must conform to Connect human readable string specification and have 1-127 characters. Must be unique for the instance using case-insensitive comparison.</p>",
+                        "smithy.api#documentation": "<p>The updated name for the data table. Must conform to Connect human readable string specification and have 1-127\n   characters. Must be unique for the instance using case-insensitive comparison.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.connect#DataTableDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated description for the data table. Must conform to Connect human readable string specification and have 0-250 characters.</p>"
+                        "smithy.api#documentation": "<p>The updated description for the data table. Must conform to Connect human readable string specification and have\n   0-250 characters.</p>"
                     }
                 },
                 "ValueLockLevel": {
                     "target": "com.amazonaws.connect#DataTableLockLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated value lock level for the data table. One of DATA_TABLE, PRIMARY_VALUE, ATTRIBUTE, VALUE, and NONE.</p>",
+                        "smithy.api#documentation": "<p>The updated value lock level for the data table. One of DATA_TABLE, PRIMARY_VALUE, ATTRIBUTE, VALUE, and\n   NONE.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -52864,7 +52893,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the primary values for a record. This operation affects all existing values that are currently associated to the record and its primary values. Users that have restrictions on attributes and/or primary values are not authorized to use this endpoint. The combination of new primary values must be unique within the table.</p>",
+                "smithy.api#documentation": "<p>Updates the primary values for a record. This operation affects all existing values that are currently\n   associated to the record and its primary values. Users that have restrictions on attributes and/or primary values are\n   not authorized to use this endpoint. The combination of new primary values must be unique within the table.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/data-tables/{InstanceId}/{DataTableId}/values/update-primary",
@@ -52886,7 +52915,7 @@
                 "DataTableId": {
                     "target": "com.amazonaws.connect#DataTableId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If the version is provided as part of the identifier or ARN, the version must be one of the two available system managed aliases, $SAVED or $LATEST.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If the\n   version is provided as part of the identifier or ARN, the version must be one of the two available system managed\n   aliases, $SAVED or $LATEST.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -52894,14 +52923,14 @@
                 "PrimaryValues": {
                     "target": "com.amazonaws.connect#PrimaryValuesSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current primary values for the record. Required and must include values for all primary attributes. Fails if the table has primary attributes and some primary values are omitted.</p>",
+                        "smithy.api#documentation": "<p>The current primary values for the record. Required and must include values for all primary attributes. Fails if\n   the table has primary attributes and some primary values are omitted.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NewPrimaryValues": {
                     "target": "com.amazonaws.connect#PrimaryValuesSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new primary values for the record. Required and must include values for all primary attributes. The combination must be unique within the table.</p>",
+                        "smithy.api#documentation": "<p>The new primary values for the record. Required and must include values for all primary attributes. The\n   combination must be unique within the table.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -52923,7 +52952,7 @@
                 "LockVersion": {
                     "target": "com.amazonaws.connect#DataTableLockVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated lock version information for the data table and affected components after the primary values change.</p>",
+                        "smithy.api#documentation": "<p>The updated lock version information for the data table and affected components after the primary values\n   change.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -56154,7 +56183,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -56246,7 +56275,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -56346,7 +56375,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -56406,7 +56435,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the visibility setting of a workspace, controlling whether it is available to all users, assigned users only, or none.</p>",
+                "smithy.api#documentation": "<p>Updates the visibility setting of a workspace, controlling whether it is available to all users, assigned users\n   only, or none.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workspaces/{InstanceId}/{WorkspaceId}/visibility",
@@ -56420,7 +56449,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in\n   the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -56436,7 +56465,7 @@
                 "Visibility": {
                     "target": "com.amazonaws.connect#Visibility",
                     "traits": {
-                        "smithy.api#documentation": "<p>The visibility setting for the workspace. Valid values are: <code>ALL</code> (available to all users), <code>ASSIGNED</code> (available only to assigned users and routing profiles), and <code>NONE</code> (not visible to any users).</p>",
+                        "smithy.api#documentation": "<p>The visibility setting for the workspace. Valid values are: <code>ALL</code> (available to all users),\n    <code>ASSIGNED</code> (available only to assigned users and routing profiles), and <code>NONE</code> (not visible to\n   any users).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -57096,7 +57125,7 @@
                 "AndConditions": {
                     "target": "com.amazonaws.connect#UserSearchConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition. </p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition.</p>"
                     }
                 },
                 "StringCondition": {
@@ -57270,81 +57299,81 @@
                     "target": "com.amazonaws.connect#LengthBoundary",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The minimum number of characters a text value can contain. Applies to TEXT value type and values within a TEXT_LIST. Must be less than or equal to MaxLength.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of characters a text value can contain. Applies to TEXT value type and values within a\n   TEXT_LIST. Must be less than or equal to MaxLength.</p>"
                     }
                 },
                 "MaxLength": {
                     "target": "com.amazonaws.connect#LengthBoundary",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of characters a text value can contain. Applies to TEXT value type and values within a TEXT_LIST. Must be greater than or equal to MinLength.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of characters a text value can contain. Applies to TEXT value type and values within a\n   TEXT_LIST. Must be greater than or equal to MinLength.</p>"
                     }
                 },
                 "MinValues": {
                     "target": "com.amazonaws.connect#ValueBoundary",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The minimum number of values in a list. Must be an integer greater than or equal to 0 and less than or equal to MaxValues. Applies to all list types.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of values in a list. Must be an integer greater than or equal to 0 and less than or equal to\n   MaxValues. Applies to all list types.</p>"
                     }
                 },
                 "MaxValues": {
                     "target": "com.amazonaws.connect#ValueBoundary",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of values in a list. Must be an integer greater than or equal to 0 and greater than or equal to MinValues. Applies to all list types.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of values in a list. Must be an integer greater than or equal to 0 and greater than or equal\n   to MinValues. Applies to all list types.</p>"
                     }
                 },
                 "IgnoreCase": {
                     "target": "com.amazonaws.connect#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Boolean that defaults to false. Applies to text lists and text primary attributes. When true, enforces case-insensitive uniqueness for primary attributes and allows case-insensitive lookups.</p>"
+                        "smithy.api#documentation": "<p>Boolean that defaults to false. Applies to text lists and text primary attributes. When true, enforces\n   case-insensitive uniqueness for primary attributes and allows case-insensitive lookups.</p>"
                     }
                 },
                 "Minimum": {
                     "target": "com.amazonaws.connect#PositiveAndNegativeDouble",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The smallest inclusive numeric value for NUMBER value type. Cannot be provided when ExclusiveMinimum is also provided. Must be less than or equal to Maximum and less than ExclusiveMaximum. Applies to NUMBER and values within NUMBER_LIST.</p>"
+                        "smithy.api#documentation": "<p>The smallest inclusive numeric value for NUMBER value type. Cannot be provided when ExclusiveMinimum is also\n   provided. Must be less than or equal to Maximum and less than ExclusiveMaximum. Applies to NUMBER and values within\n   NUMBER_LIST.</p>"
                     }
                 },
                 "Maximum": {
                     "target": "com.amazonaws.connect#PositiveAndNegativeDouble",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The largest inclusive numeric value for NUMBER value type. Can be provided alongside ExclusiveMaximum where both operate independently. Must be greater than or equal to Minimum and greater than ExclusiveMinimum. Applies to NUMBER and values within NUMBER_LIST.</p>"
+                        "smithy.api#documentation": "<p>The largest inclusive numeric value for NUMBER value type. Can be provided alongside ExclusiveMaximum where both\n   operate independently. Must be greater than or equal to Minimum and greater than ExclusiveMinimum. Applies to NUMBER\n   and values within NUMBER_LIST.</p>"
                     }
                 },
                 "ExclusiveMinimum": {
                     "target": "com.amazonaws.connect#PositiveAndNegativeDouble",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The smallest exclusive numeric value for NUMBER value type. Can be provided alongside Minimum where both operate independently. Must be less than ExclusiveMaximum and Maximum. Applies to NUMBER and values within NUMBER_LIST.</p>"
+                        "smithy.api#documentation": "<p>The smallest exclusive numeric value for NUMBER value type. Can be provided alongside Minimum where both operate\n   independently. Must be less than ExclusiveMaximum and Maximum. Applies to NUMBER and values within\n   NUMBER_LIST.</p>"
                     }
                 },
                 "ExclusiveMaximum": {
                     "target": "com.amazonaws.connect#PositiveAndNegativeDouble",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The largest exclusive numeric value for NUMBER value type. Can be provided alongside Maximum where both operate independently. Must be greater than ExclusiveMinimum and Minimum. Applies to NUMBER and values within NUMBER_LIST.</p>"
+                        "smithy.api#documentation": "<p>The largest exclusive numeric value for NUMBER value type. Can be provided alongside Maximum where both operate\n   independently. Must be greater than ExclusiveMinimum and Minimum. Applies to NUMBER and values within\n   NUMBER_LIST.</p>"
                     }
                 },
                 "MultipleOf": {
                     "target": "com.amazonaws.connect#PositiveDouble",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Specifies that numeric values must be multiples of this number. Must be greater than 0. The result of dividing a value by this multiple must result in an integer. Applies to NUMBER and values within NUMBER_LIST.</p>"
+                        "smithy.api#documentation": "<p>Specifies that numeric values must be multiples of this number. Must be greater than 0. The result of dividing a\n   value by this multiple must result in an integer. Applies to NUMBER and values within NUMBER_LIST.</p>"
                     }
                 },
                 "Enum": {
                     "target": "com.amazonaws.connect#ValidationEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines enumeration constraints for attribute values. Can specify a list of allowed values and whether custom values are permitted beyond the enumerated list.</p>"
+                        "smithy.api#documentation": "<p>Defines enumeration constraints for attribute values. Can specify a list of allowed values and whether custom\n   values are permitted beyond the enumerated list.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines validation rules for data table attribute values. Based on JSON Schema Draft 2020-12 with additional Connect-specific validations. Validation rules ensure data integrity and consistency across the data table.</p>"
+                "smithy.api#documentation": "<p>Defines validation rules for data table attribute values. Based on JSON Schema Draft 2020-12 with additional\n   Connect-specific validations. Validation rules ensure data integrity and consistency across the data table.</p>"
             }
         },
         "com.amazonaws.connect#ValidationEnum": {
@@ -57354,18 +57383,18 @@
                     "target": "com.amazonaws.connect#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Boolean that defaults to false. When true, only values specified in the enum list are allowed. When false, custom values beyond the enumerated list are permitted.</p>"
+                        "smithy.api#documentation": "<p>Boolean that defaults to false. When true, only values specified in the enum list are allowed. When false,\n   custom values beyond the enumerated list are permitted.</p>"
                     }
                 },
                 "Values": {
                     "target": "com.amazonaws.connect#ValidationEnumValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of predefined values that are allowed for this attribute. These values are always permitted regardless of the Strict setting.</p>"
+                        "smithy.api#documentation": "<p>A list of predefined values that are allowed for this attribute. These values are always permitted regardless of\n   the Strict setting.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines enumeration validation for attribute values. Allows specifying a list of permitted values and whether custom values beyond the enumerated list are allowed.</p>"
+                "smithy.api#documentation": "<p>Defines enumeration validation for attribute values. Allows specifying a list of permitted values and whether\n   custom values beyond the enumerated list are allowed.</p>"
             }
         },
         "com.amazonaws.connect#ValidationEnumValues": {
@@ -58343,7 +58372,7 @@
                 "Visibility": {
                     "target": "com.amazonaws.connect#Visibility",
                     "traits": {
-                        "smithy.api#documentation": "<p>Controls who can access the workspace. Valid values are: <code>ALL</code> (all users), <code>ASSIGNED</code> (only assigned users and routing profiles), and <code>NONE</code> (not visible).</p>"
+                        "smithy.api#documentation": "<p>Controls who can access the workspace. Valid values are: <code>ALL</code> (all users), <code>ASSIGNED</code>\n   (only assigned users and routing profiles), and <code>NONE</code> (not visible).</p>"
                     }
                 },
                 "Id": {
@@ -58507,7 +58536,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.connect#WorkspaceAssociatedResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource associated with the workspace. Valid values are: <code>USER</code> and <code>ROUTING_PROFILE</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of resource associated with the workspace. Valid values are: <code>USER</code> and\n    <code>ROUTING_PROFILE</code>.</p>"
                     }
                 },
                 "ResourceName": {

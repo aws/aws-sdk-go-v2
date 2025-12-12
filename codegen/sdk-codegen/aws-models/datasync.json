@@ -57,7 +57,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 4
+                    "max": 8
                 }
             }
         },
@@ -308,7 +308,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, such as an\n      authentication token or secret key that DataSync uses to access a specific storage\n      location, with a customer-managed KMS key.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> or <code>CustomSecretConfig</code> to\n        provide credentials for a <code>CreateLocation</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, such as an\n      authentication token, secret key, password, or Kerberos keytab that DataSync uses\n      to access a specific storage location, with a customer-managed KMS key.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> or <code>CustomSecretConfig</code> to\n        provide credentials for a <code>CreateLocation</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#CreateAgent": {
@@ -468,13 +468,13 @@
                 "CmkSecretConfig": {
                     "target": "com.amazonaws.datasync#CmkSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the authentication token that DataSync uses to access a specific AzureBlob\n      storage location, with a customer-managed KMS key.</p>\n         <p>When you include this paramater as part of a <code>CreateLocationAzureBlob</code> request,\n      you provide only the KMS key ARN. DataSync uses this KMS key together with the authentication token you specify for\n        <code>SasConfiguration</code> to create a DataSync-managed secret to store the\n      location access credentials.</p>\n         <p>Make sure the DataSync has permission to access the KMS key that\n      you specify.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n          <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationAzureBlob</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the authentication token that DataSync uses to access a specific AzureBlob\n      storage location, with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationAzureBlob</code> request,\n      you provide only the KMS key ARN. DataSync uses this KMS key together with the authentication token you specify for\n        <code>SasConfiguration</code> to create a DataSync-managed secret to store the\n      location access credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n          <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationAzureBlob</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
                     }
                 },
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the authentication token for an AzureBlob storage location is stored in plain text. This\n      configuration includes the secret ARN, and the ARN for an IAM role that\n      provides access to the secret.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n          <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationAzureBlob</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the authentication token for an AzureBlob storage location is stored in plain text, in Secrets\n      Manager. This configuration includes the secret ARN, and the ARN for an IAM role\n      that provides access to the secret.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n          <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationAzureBlob</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
                     }
                 }
             },
@@ -1177,13 +1177,13 @@
                 "CmkSecretConfig": {
                     "target": "com.amazonaws.datasync#CmkSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the <code>SecretKey</code> that DataSync uses to access a specific object\n      storage location, with a customer-managed KMS key.</p>\n         <p>When you include this paramater as part of a <code>CreateLocationObjectStorage</code>\n      request, you provide only the KMS key ARN. DataSync uses this KMS key together with the value you specify for the <code>SecretKey</code> parameter\n      to create a DataSync-managed secret to store the location access credentials.</p>\n         <p>Make sure the DataSync has permission to access the KMS key that\n      you specify.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SecretKey</code>) or\n          <code>CustomSecretConfig</code> (without <code>SecretKey</code>) to provide credentials\n        for a <code>CreateLocationObjectStorage</code> request. Do not provide both parameters for\n        the same request.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the <code>SecretKey</code> that DataSync uses to access a specific object\n      storage location, with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationObjectStorage</code>\n      request, you provide only the KMS key ARN. DataSync uses this KMS key together with the value you specify for the <code>SecretKey</code> parameter\n      to create a DataSync-managed secret to store the location access credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SecretKey</code>) or\n          <code>CustomSecretConfig</code> (without <code>SecretKey</code>) to provide credentials\n        for a <code>CreateLocationObjectStorage</code> request. Do not provide both parameters for\n        the same request.</p>\n         </note>"
                     }
                 },
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the secret key for a specific object storage location is stored in plain text. This\n      configuration includes the secret ARN, and the ARN for an IAM role that\n      provides access to the secret.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SecretKey</code>) or\n          <code>CustomSecretConfig</code> (without <code>SecretKey</code>) to provide credentials\n        for a <code>CreateLocationObjectStorage</code> request. Do not provide both parameters for\n        the same request.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the secret key for a specific object storage location is stored in plain text, in Secrets Manager.\n      This configuration includes the secret ARN, and the ARN for an IAM role that\n      provides access to the secret.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SecretKey</code>) or\n          <code>CustomSecretConfig</code> (without <code>SecretKey</code>) to provide credentials\n        for a <code>CreateLocationObjectStorage</code> request. Do not provide both parameters for\n        the same request.</p>\n         </note>"
                     }
                 }
             },
@@ -1341,6 +1341,18 @@
                     "target": "com.amazonaws.datasync#SmbPassword",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the password of the user who can mount your SMB file server and has permission\n      to access the files and folders involved in your transfer. This parameter applies only if\n        <code>AuthenticationType</code> is set to <code>NTLM</code>.</p>"
+                    }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, either a\n      <code>Password</code> or <code>KerberosKeytab</code> (for <code>NTLM</code> (default) and\n      <code>KERBEROS</code> authentication types, respectively) that DataSync uses to\n      access a specific SMB storage location, with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationSmbRequest</code> request,\n      you provide only the KMS key ARN. DataSync uses this KMS key together with either the <code>Password</code> or <code>KerberosKeytab</code>\n      you specify to create a DataSync-managed secret to store the location access\n      credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with either <code>Password</code> or\n        <code>KerberosKeytab</code>) or <code>CustomSecretConfig</code> (without any <code>Password</code>\n        and <code>KerberosKeytab</code>) to provide credentials for a <code>CreateLocationSmbRequest</code>\n        request. Do not provide both <code>CmkSecretConfig</code> and <code>CustomSecretConfig</code>\n        parameters for the same request.</p>\n         </note>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the SMB storage location credentials is stored in Secrets Manager as plain text (for\n      <code>Password</code>) or binary (for <code>KerberosKeytab</code>). This configuration includes\n      the secret ARN, and the ARN for an IAM role that provides access to the secret.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n        <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationSmbRequest</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
                     }
                 },
                 "AgentArns": {
@@ -1548,7 +1560,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      a storage location authentication token or secret key is stored in plain text. This\n      configuration includes the secret ARN, and the ARN for an IAM role that\n      provides access to the secret.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> or <code>CustomSecretConfig</code> to\n        provide credentials for a <code>CreateLocation</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      a storage location credentials is stored in Secrets Manager as plain text (for authentication\n      token, secret key, or password) or as binary (for Kerberos keytab). This configuration includes\n      the secret ARN, and the ARN for an IAM role that provides access to the secret.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> or <code>CustomSecretConfig</code> to\n        provide credentials for a <code>CreateLocation</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#DeleteAgent": {
@@ -2735,6 +2747,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The authentication protocol that DataSync uses to connect to your SMB file\n      server.</p>"
                     }
+                },
+                "ManagedSecretConfig": {
+                    "target": "com.amazonaws.datasync#ManagedSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes configuration information for a DataSync-managed secret, such as a\n      <code>Password</code> or <code>KerberosKeytab</code> that DataSync uses to access\n      a specific storage location. DataSync uses the default Amazon Web Services-managed\n      KMS key to encrypt this secret in Secrets Manager.</p>"
+                    }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes configuration information for a DataSync-managed secret, such as a\n      <code>Password</code> or <code>KerberosKeytab</code> that DataSync uses to access\n      a specific storage location, with a customer-managed KMS key.</p>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes configuration information for a customer-managed secret, such as a\n      <code>Password</code> or <code>KerberosKeytab</code> that DataSync uses to access\n      a specific storage location, with a customer-managed KMS key.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2844,7 +2874,7 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync expects to\n      transfer over the network. This value is calculated while DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses\">prepares</a> the transfer.</p>\n         <p>How this gets calculated depends primarily on your task’s <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-TransferMode\">transfer\n        mode</a> configuration:</p>\n         <ul>\n            <li>\n               <p>If <code>TranserMode</code> is set to <code>CHANGED</code> - The calculation is based\n          on comparing the content of the source and destination locations and determining the\n          difference that needs to be transferred. The difference can include:</p>\n               <ul>\n                  <li>\n                     <p>Anything that's added or modified at the source location.</p>\n                  </li>\n                  <li>\n                     <p>Anything that's in both locations and modified at the destination after an initial\n              transfer (unless <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode\">OverwriteMode</a> is set to <code>NEVER</code>).</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>(Basic task mode only)</b> The number of items that\n                DataSync expects to delete (if <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-PreserveDeletedFiles\">PreserveDeletedFiles</a> is set to\n              <code>REMOVE</code>).</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If <code>TranserMode</code> is set to <code>ALL</code> - The calculation is based only\n          on the items that DataSync finds at the source location.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync expects to\n      transfer over the network. This value is calculated while DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses\">prepares</a> the transfer.</p>\n         <p>How this gets calculated depends primarily on your task’s <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-TransferMode\">transfer\n        mode</a> configuration:</p>\n         <ul>\n            <li>\n               <p>If <code>TranserMode</code> is set to <code>CHANGED</code> - The calculation is based\n          on comparing the content of the source and destination locations and determining the\n          difference that needs to be transferred. The difference can include:</p>\n               <ul>\n                  <li>\n                     <p>Anything that's added or modified at the source location.</p>\n                  </li>\n                  <li>\n                     <p>Anything that's in both locations and modified at the destination after an initial\n              transfer (unless <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode\">OverwriteMode</a> is set to <code>NEVER</code>).</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>(Basic task mode only)</b> The number of items that\n                DataSync expects to delete (if <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-PreserveDeletedFiles\">PreserveDeletedFiles</a> is set to\n              <code>REMOVE</code>).</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If <code>TranserMode</code> is set to <code>ALL</code> - The calculation is based only\n          on the items that DataSync finds at the source location.</p>\n            </li>\n         </ul>\n         <note>\n            <p>For <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>, this counter only includes files or objects. Directories are counted in\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-EstimatedFoldersToTransfer\">EstimatedFoldersToTransfer</a>.\n      </p>\n         </note>"
                     }
                 },
                 "EstimatedBytesToTransfer": {
@@ -2858,7 +2888,7 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync actually\n      transfers over the network. This value is updated periodically during your task execution when\n      something is read from the source and sent over the network.</p>\n         <p>If DataSync fails to transfer something, this value can be less than\n        <code>EstimatedFilesToTransfer</code>. In some cases, this value can also be greater than\n        <code>EstimatedFilesToTransfer</code>. This element is implementation-specific for some\n      location types, so don't use it as an exact indication of what's transferring or to monitor\n      your task execution.</p>"
+                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync actually\n      transfers over the network. This value is updated periodically during your task execution when\n      something is read from the source and sent over the network.</p>\n         <p>If DataSync fails to transfer something, this value can be less than\n        <code>EstimatedFilesToTransfer</code>. In some cases, this value can also be greater than\n        <code>EstimatedFilesToTransfer</code>. This element is implementation-specific for some\n      location types, so don't use it as an exact indication of what's transferring or to monitor\n      your task execution.</p>\n         <note>\n            <p>For <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>, this counter only includes files or objects. Directories are counted in\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersTransferred\">FoldersTransferred</a>.\n      </p>\n         </note>"
                     }
                 },
                 "BytesWritten": {
@@ -2898,21 +2928,21 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync actually deletes in\n      your destination location. If you don't configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html\">delete data in the destination that\n        isn't in the source</a>, the value is always <code>0</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync actually deletes in\n      your destination location. If you don't configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html\">delete data in the destination that\n        isn't in the source</a>, the value is always <code>0</code>.</p>\n         <note>\n            <p>For <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>, this counter only includes files or objects. Directories are counted in\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersDeleted\">FoldersDeleted</a>.\n      </p>\n         </note>"
                     }
                 },
                 "FilesSkipped": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync skips during your\n      transfer.</p>"
+                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync skips during your\n      transfer.</p>\n         <note>\n            <p>For <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>, this counter only includes files or objects. Directories are counted in\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersSkipped\">FoldersSkipped</a>.\n      </p>\n         </note>"
                     }
                 },
                 "FilesVerified": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync verifies during your\n      transfer.</p>\n         <note>\n            <p>When you configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html\">verify only the\n          data that's transferred</a>, DataSync doesn't verify directories in some\n        situations or files that fail to transfer.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync verifies during your\n      transfer.</p>\n         <note>\n            <p>When you configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html\">verify only the\n          data that's transferred</a>, DataSync doesn't verify directories in some\n        situations or files that fail to transfer.</p>\n            <p>For <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>, this counter only includes files or objects. Directories are counted in\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersVerified\">FoldersVerified</a>.\n      </p>\n         </note>"
                     }
                 },
                 "ReportResult": {
@@ -2925,7 +2955,7 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync expects to delete in\n      your destination location. If you don't configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html\">delete data in the destination that\n        isn't in the source</a>, the value is always <code>0</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync expects to delete in\n      your destination location. If you don't configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html\">delete data in the destination that\n        isn't in the source</a>, the value is always <code>0</code>.</p>\n         <note>\n            <p>For <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>, this counter only includes files or objects. Directories are counted in\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-EstimatedFoldersToDelete\">EstimatedFoldersToDelete</a>.\n      </p>\n         </note>"
                     }
                 },
                 "TaskMode": {
@@ -2938,19 +2968,73 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of objects that DataSync will attempt to transfer after comparing\n      your source and destination locations.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>\n         <p>This counter isn't applicable if you configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-transfer-mode\">transfer\n        all data</a>. In that scenario, DataSync copies everything from the source to\n      the destination without comparing differences between the locations.</p>"
+                        "smithy.api#documentation": "<p>The number of files or objects that DataSync will attempt to transfer after comparing\n      your source and destination locations.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>\n         <p>This counter isn't applicable if you configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-transfer-mode\">transfer\n        all data</a>. In that scenario, DataSync copies everything from the source to\n      the destination without comparing differences between the locations.</p>"
                     }
                 },
                 "FilesListed": {
                     "target": "com.amazonaws.datasync#TaskExecutionFilesListedDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of\n      objects\n      that DataSync\n      finds\n      at your locations.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The number of files or objects that DataSync finds at your locations.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
                     }
                 },
                 "FilesFailed": {
                     "target": "com.amazonaws.datasync#TaskExecutionFilesFailedDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of objects that DataSync fails to prepare, transfer, verify, and\n      delete during your task execution.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The number of files or objects that DataSync fails to prepare, transfer, verify, and\n      delete during your task execution.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                    }
+                },
+                "EstimatedFoldersToDelete": {
+                    "target": "com.amazonaws.datasync#ItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of directories that DataSync expects to delete in\n      your destination location. If you don't configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html\">delete data in the destination that\n        isn't in the source</a>, the value is always <code>0</code>.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n          tasks</a>.</p>\n         </note>"
+                    }
+                },
+                "EstimatedFoldersToTransfer": {
+                    "target": "com.amazonaws.datasync#ItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of directories that DataSync expects to\n      transfer over the network. This value is calculated as DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses\">prepares</a> directories to transfer.</p>\n         <p>How this gets calculated depends primarily on your task’s <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-TransferMode\">transfer\n        mode</a> configuration:</p>\n         <ul>\n            <li>\n               <p>If <code>TranserMode</code> is set to <code>CHANGED</code> - The calculation is based\n          on comparing the content of the source and destination locations and determining the\n          difference that needs to be transferred. The difference can include:</p>\n               <ul>\n                  <li>\n                     <p>Anything that's added or modified at the source location.</p>\n                  </li>\n                  <li>\n                     <p>Anything that's in both locations and modified at the destination after an initial\n              transfer (unless <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode\">OverwriteMode</a> is set to <code>NEVER</code>).</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If <code>TranserMode</code> is set to <code>ALL</code> - The calculation is based only\n          on the items that DataSync finds at the source location.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                    }
+                },
+                "FoldersSkipped": {
+                    "target": "com.amazonaws.datasync#ItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of directories that DataSync skips during your\n        transfer.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                    }
+                },
+                "FoldersPrepared": {
+                    "target": "com.amazonaws.datasync#ItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of directories that DataSync will attempt to transfer after comparing\n      your source and destination locations.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>\n         <p>This counter isn't applicable if you configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-transfer-mode\">transfer\n        all data</a>. In that scenario, DataSync copies everything from the source to\n      the destination without comparing differences between the locations.</p>"
+                    }
+                },
+                "FoldersTransferred": {
+                    "target": "com.amazonaws.datasync#ItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of directories that DataSync actually\n      transfers over the network. This value is updated periodically during your task execution when\n      something is read from the source and sent over the network.</p>\n         <p>If DataSync fails to transfer something, this value can be less than\n        <code>EstimatedFoldersToTransfer</code>. In some cases, this value can also be greater than\n        <code>EstimatedFoldersToTransfer</code>. \n    </p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                    }
+                },
+                "FoldersVerified": {
+                    "target": "com.amazonaws.datasync#ItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of directories that DataSync verifies during your transfer.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                    }
+                },
+                "FoldersDeleted": {
+                    "target": "com.amazonaws.datasync#ItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of directories that DataSync actually deletes in\n      your destination location. If you don't configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html\">delete data in the destination that\n        isn't in the source</a>, the value is always <code>0</code>.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                    }
+                },
+                "FoldersListed": {
+                    "target": "com.amazonaws.datasync#TaskExecutionFoldersListedDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of directories that DataSync finds at your locations.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                    }
+                },
+                "FoldersFailed": {
+                    "target": "com.amazonaws.datasync#TaskExecutionFoldersFailedDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of directories that DataSync fails to list, prepare, transfer, verify, and\n      delete during your task execution.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
                     }
                 },
                 "LaunchTime": {
@@ -4890,6 +4974,9 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.datasync#ItemCount": {
+            "type": "long"
+        },
         "com.amazonaws.datasync#KerberosKeytabFile": {
             "type": "blob",
             "traits": {
@@ -5841,7 +5928,7 @@
                 "BytesPerSecond": {
                     "target": "com.amazonaws.datasync#BytesPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Limits the bandwidth used by a DataSync task. For example, if you want\n        DataSync to use a maximum of 1 MB, set this value to <code>1048576</code>\n        (<code>=1024*1024</code>).</p>\n         <note>\n            <p>Not applicable to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Limits the bandwidth used by a DataSync task. For example, if you want\n        DataSync to use a maximum of 1 MB, set this value to <code>1048576</code>\n        (<code>=1024*1024</code>).</p>"
                     }
                 },
                 "TaskQueueing": {
@@ -6822,33 +6909,33 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of objects that DataSync fails to prepare during your task\n      execution.</p>"
+                        "smithy.api#documentation": "<p>The number of files or objects that DataSync fails to prepare during your task\n      execution.</p>"
                     }
                 },
                 "Transfer": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of objects that DataSync fails to transfer during your task\n      execution.</p>"
+                        "smithy.api#documentation": "<p>The number of files or objects that DataSync fails to transfer during your task\n      execution.</p>"
                     }
                 },
                 "Verify": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of objects that DataSync fails to verify during your task\n      execution.</p>"
+                        "smithy.api#documentation": "<p>The number of files or objects that DataSync fails to verify during your task\n      execution.</p>"
                     }
                 },
                 "Delete": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of objects that DataSync fails to delete during your task\n      execution.</p>"
+                        "smithy.api#documentation": "<p>The number of files or objects that DataSync fails to delete during your task\n      execution.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The number of objects that DataSync fails to prepare, transfer, verify, and\n      delete during your task execution.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The number of files or objects that DataSync fails to prepare, transfer, verify, and\n      delete during your task execution.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#TaskExecutionFilesListedDetail": {
@@ -6858,19 +6945,84 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of objects that DataSync finds at your source location.</p>\n         <ul>\n            <li>\n               <p>With a <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html\">manifest</a>, DataSync\n          lists only what's in your manifest (and not everything at your source location).</p>\n            </li>\n            <li>\n               <p>With an include <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">filter</a>, DataSync lists only what\n          matches the filter at your source location.</p>\n            </li>\n            <li>\n               <p>With an exclude filter, DataSync lists everything at your source location before applying\n          the filter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of files or objects that DataSync finds at your source location.</p>\n         <ul>\n            <li>\n               <p>With a <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html\">manifest</a>, DataSync\n          lists only what's in your manifest (and not everything at your source location).</p>\n            </li>\n            <li>\n               <p>With an include <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">filter</a>, DataSync lists only what\n          matches the filter at your source location.</p>\n            </li>\n            <li>\n               <p>With an exclude filter, DataSync lists everything at your source location before applying\n          the filter.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AtDestinationForDelete": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of objects that DataSync finds at your destination location. This\n      counter is only applicable if you <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling\">configure your task</a> to delete data in the destination that isn't in the\n      source.</p>"
+                        "smithy.api#documentation": "<p>The number of files or objects that DataSync finds at your destination location. This\n      counter is only applicable if you <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling\">configure your task</a> to delete data in the destination that isn't in the\n      source.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The number of objects that DataSync finds at your locations.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The number of files or objects that DataSync finds at your locations.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.datasync#TaskExecutionFoldersFailedDetail": {
+            "type": "structure",
+            "members": {
+                "List": {
+                    "target": "com.amazonaws.datasync#long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of directories that DataSync fails to list during your task\n      execution.</p>"
+                    }
+                },
+                "Prepare": {
+                    "target": "com.amazonaws.datasync#long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of directories that DataSync fails to prepare during your task\n      execution.</p>"
+                    }
+                },
+                "Transfer": {
+                    "target": "com.amazonaws.datasync#long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of directories that DataSync fails to transfer during your task\n      execution.</p>"
+                    }
+                },
+                "Verify": {
+                    "target": "com.amazonaws.datasync#long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of directories that DataSync fails to verify during your task\n      execution.</p>"
+                    }
+                },
+                "Delete": {
+                    "target": "com.amazonaws.datasync#long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of directories that DataSync fails to delete during your task\n      execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of directories that DataSync fails to list, prepare, transfer, verify, and\n      delete during your task execution.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.datasync#TaskExecutionFoldersListedDetail": {
+            "type": "structure",
+            "members": {
+                "AtSource": {
+                    "target": "com.amazonaws.datasync#long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of directories that DataSync finds at your source location.</p>\n         <ul>\n            <li>\n               <p>With a <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html\">manifest</a>, DataSync\n          lists only what's in your manifest (and not everything at your source location).</p>\n            </li>\n            <li>\n               <p>With an include <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">filter</a>, DataSync lists only what\n          matches the filter at your source location.</p>\n            </li>\n            <li>\n               <p>With an exclude filter, DataSync lists everything at your source location before applying\n          the filter.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "AtDestinationForDelete": {
+                    "target": "com.amazonaws.datasync#long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of directories that DataSync finds at your destination location. This\n      counter is only applicable if you <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling\">configure your task</a> to delete data in the destination that isn't in the\n      source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of directories that DataSync finds at your locations.</p>\n         <note>\n            <p>Applies only to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html\">Enhanced mode\n        tasks</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#TaskExecutionList": {
@@ -8178,6 +8330,18 @@
                     "target": "com.amazonaws.datasync#SmbPassword",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the password of the user who can mount your SMB file server and has permission\n      to access the files and folders involved in your transfer. This parameter applies only if\n        <code>AuthenticationType</code> is set to <code>NTLM</code>.</p>"
+                    }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, such as a\n      <code>Password</code> or <code>KerberosKeytab</code> or set of credentials that DataSync uses to access a specific transfer location, and a\n      customer-managed KMS key.</p>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed secret, such as a\n      <code>Password</code> or <code>KerberosKeytab</code> or set of credentials that DataSync uses to access a specific transfer location, and a\n      customer-managed KMS key.</p>"
                     }
                 },
                 "AgentArns": {
