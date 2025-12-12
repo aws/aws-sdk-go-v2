@@ -19,6 +19,8 @@ const (
 	ActionTypeReviewExpiringRi                        ActionType = "REVIEW_EXPIRING_RI"
 	ActionTypeReviewExpiringSp                        ActionType = "REVIEW_EXPIRING_SP"
 	ActionTypeReviewFreetierUsageAlerts               ActionType = "REVIEW_FREETIER_USAGE_ALERTS"
+	ActionTypeReviewFreetierCreditsRemaining          ActionType = "REVIEW_FREETIER_CREDITS_REMAINING"
+	ActionTypeReviewFreetierDaysRemaining             ActionType = "REVIEW_FREETIER_DAYS_REMAINING"
 	ActionTypeReviewSavingsOpportunityRecommendations ActionType = "REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS"
 	ActionTypeUpdateExpiredPaymentMethod              ActionType = "UPDATE_EXPIRED_PAYMENT_METHOD"
 	ActionTypeUpdateInvalidPaymentMethod              ActionType = "UPDATE_INVALID_PAYMENT_METHOD"
@@ -45,6 +47,8 @@ func (ActionType) Values() []ActionType {
 		"REVIEW_EXPIRING_RI",
 		"REVIEW_EXPIRING_SP",
 		"REVIEW_FREETIER_USAGE_ALERTS",
+		"REVIEW_FREETIER_CREDITS_REMAINING",
+		"REVIEW_FREETIER_DAYS_REMAINING",
 		"REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS",
 		"UPDATE_EXPIRED_PAYMENT_METHOD",
 		"UPDATE_INVALID_PAYMENT_METHOD",

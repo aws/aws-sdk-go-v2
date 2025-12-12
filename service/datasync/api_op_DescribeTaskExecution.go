@@ -80,7 +80,11 @@ type DescribeTaskExecutionOutput struct {
 	// in your destination location. If you don't configure your task to [delete data in the destination that isn't in the source], the value
 	// is always 0 .
 	//
+	// For [Enhanced mode tasks], this counter only includes files or objects. Directories are counted in [EstimatedFoldersToDelete].
+	//
+	// [EstimatedFoldersToDelete]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-EstimatedFoldersToDelete
 	// [delete data in the destination that isn't in the source]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 	EstimatedFilesToDelete int64
 
 	// The number of files, objects, and directories that DataSync expects to transfer
@@ -103,11 +107,49 @@ type DescribeTaskExecutionOutput struct {
 	//   - If TranserMode is set to ALL - The calculation is based only on the items
 	//   that DataSync finds at the source location.
 	//
+	// For [Enhanced mode tasks], this counter only includes files or objects. Directories are counted in [EstimatedFoldersToTransfer].
+	//
+	// [transfer mode]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-TransferMode
+	// [OverwriteMode]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode
+	// [EstimatedFoldersToTransfer]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-EstimatedFoldersToTransfer
+	// [prepares]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	// [PreserveDeletedFiles]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-PreserveDeletedFiles
+	EstimatedFilesToTransfer int64
+
+	// The number of directories that DataSync expects to delete in your destination
+	// location. If you don't configure your task to [delete data in the destination that isn't in the source], the value is always 0 .
+	//
+	// Applies only to [Enhanced mode tasks].
+	//
+	// [delete data in the destination that isn't in the source]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	EstimatedFoldersToDelete *int64
+
+	// The number of directories that DataSync expects to transfer over the network.
+	// This value is calculated as DataSync [prepares]directories to transfer.
+	//
+	// How this gets calculated depends primarily on your task’s [transfer mode] configuration:
+	//
+	//   - If TranserMode is set to CHANGED - The calculation is based on comparing the
+	//   content of the source and destination locations and determining the difference
+	//   that needs to be transferred. The difference can include:
+	//
+	//   - Anything that's added or modified at the source location.
+	//
+	//   - Anything that's in both locations and modified at the destination after an
+	//   initial transfer (unless [OverwriteMode]is set to NEVER ).
+	//
+	//   - If TranserMode is set to ALL - The calculation is based only on the items
+	//   that DataSync finds at the source location.
+	//
+	// Applies only to [Enhanced mode tasks].
+	//
 	// [transfer mode]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-TransferMode
 	// [OverwriteMode]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode
 	// [prepares]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
-	// [PreserveDeletedFiles]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-PreserveDeletedFiles
-	EstimatedFilesToTransfer int64
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	EstimatedFoldersToTransfer *int64
 
 	// A list of filter rules that exclude specific data during your transfer. For
 	// more information and examples, see [Filtering data transferred by DataSync].
@@ -119,26 +161,30 @@ type DescribeTaskExecutionOutput struct {
 	// your destination location. If you don't configure your task to [delete data in the destination that isn't in the source], the value is
 	// always 0 .
 	//
+	// For [Enhanced mode tasks], this counter only includes files or objects. Directories are counted in [FoldersDeleted].
+	//
 	// [delete data in the destination that isn't in the source]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	// [FoldersDeleted]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersDeleted
 	FilesDeleted int64
 
-	// The number of objects that DataSync fails to prepare, transfer, verify, and
-	// delete during your task execution.
+	// The number of files or objects that DataSync fails to prepare, transfer,
+	// verify, and delete during your task execution.
 	//
 	// Applies only to [Enhanced mode tasks].
 	//
 	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 	FilesFailed *types.TaskExecutionFilesFailedDetail
 
-	// The number of objects that DataSync finds at your locations.
+	// The number of files or objects that DataSync finds at your locations.
 	//
 	// Applies only to [Enhanced mode tasks].
 	//
 	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 	FilesListed *types.TaskExecutionFilesListedDetail
 
-	// The number of objects that DataSync will attempt to transfer after comparing
-	// your source and destination locations.
+	// The number of files or objects that DataSync will attempt to transfer after
+	// comparing your source and destination locations.
 	//
 	// Applies only to [Enhanced mode tasks].
 	//
@@ -152,6 +198,11 @@ type DescribeTaskExecutionOutput struct {
 
 	// The number of files, objects, and directories that DataSync skips during your
 	// transfer.
+	//
+	// For [Enhanced mode tasks], this counter only includes files or objects. Directories are counted in [FoldersSkipped].
+	//
+	// [FoldersSkipped]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersSkipped
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 	FilesSkipped int64
 
 	// The number of files, objects, and directories that DataSync actually transfers
@@ -163,6 +214,11 @@ type DescribeTaskExecutionOutput struct {
 	// EstimatedFilesToTransfer . This element is implementation-specific for some
 	// location types, so don't use it as an exact indication of what's transferring or
 	// to monitor your task execution.
+	//
+	// For [Enhanced mode tasks], this counter only includes files or objects. Directories are counted in [FoldersTransferred].
+	//
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	// [FoldersTransferred]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersTransferred
 	FilesTransferred int64
 
 	// The number of files, objects, and directories that DataSync verifies during
@@ -171,8 +227,76 @@ type DescribeTaskExecutionOutput struct {
 	// When you configure your task to [verify only the data that's transferred], DataSync doesn't verify directories in some
 	// situations or files that fail to transfer.
 	//
+	// For [Enhanced mode tasks], this counter only includes files or objects. Directories are counted in [FoldersVerified].
+	//
+	// [FoldersVerified]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersVerified
 	// [verify only the data that's transferred]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 	FilesVerified int64
+
+	// The number of directories that DataSync actually deletes in your destination
+	// location. If you don't configure your task to [delete data in the destination that isn't in the source], the value is always 0 .
+	//
+	// Applies only to [Enhanced mode tasks].
+	//
+	// [delete data in the destination that isn't in the source]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	FoldersDeleted *int64
+
+	// The number of directories that DataSync fails to list, prepare, transfer,
+	// verify, and delete during your task execution.
+	//
+	// Applies only to [Enhanced mode tasks].
+	//
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	FoldersFailed *types.TaskExecutionFoldersFailedDetail
+
+	// The number of directories that DataSync finds at your locations.
+	//
+	// Applies only to [Enhanced mode tasks].
+	//
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	FoldersListed *types.TaskExecutionFoldersListedDetail
+
+	// The number of directories that DataSync will attempt to transfer after
+	// comparing your source and destination locations.
+	//
+	// Applies only to [Enhanced mode tasks].
+	//
+	// This counter isn't applicable if you configure your task to [transfer all data]. In that scenario,
+	// DataSync copies everything from the source to the destination without comparing
+	// differences between the locations.
+	//
+	// [transfer all data]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-transfer-mode
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	FoldersPrepared *int64
+
+	// The number of directories that DataSync skips during your transfer.
+	//
+	// Applies only to [Enhanced mode tasks].
+	//
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	FoldersSkipped *int64
+
+	// The number of directories that DataSync actually transfers over the network.
+	// This value is updated periodically during your task execution when something is
+	// read from the source and sent over the network.
+	//
+	// If DataSync fails to transfer something, this value can be less than
+	// EstimatedFoldersToTransfer . In some cases, this value can also be greater than
+	// EstimatedFoldersToTransfer .
+	//
+	// Applies only to [Enhanced mode tasks].
+	//
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	FoldersTransferred *int64
+
+	// The number of directories that DataSync verifies during your transfer.
+	//
+	// Applies only to [Enhanced mode tasks].
+	//
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	FoldersVerified *int64
 
 	// A list of filter rules that include specific data during your transfer. For
 	// more information and examples, see [Filtering data transferred by DataSync].

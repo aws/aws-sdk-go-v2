@@ -1685,6 +1685,13 @@ func awsRestjson1_serializeOpDocumentCreateUserSettingsInput(v *CreateUserSettin
 		}
 	}
 
+	if v.BrandingConfigurationInput != nil {
+		ok := object.Key("brandingConfigurationInput")
+		if err := awsRestjson1_serializeDocumentBrandingConfigurationCreateInput(v.BrandingConfigurationInput, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -6247,6 +6254,13 @@ func awsRestjson1_serializeOpDocumentUpdateUserSettingsInput(v *UpdateUserSettin
 	object := value.Object()
 	defer object.Close()
 
+	if v.BrandingConfigurationInput != nil {
+		ok := object.Key("brandingConfigurationInput")
+		if err := awsRestjson1_serializeDocumentBrandingConfigurationUpdateInput(v.BrandingConfigurationInput, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -6317,6 +6331,96 @@ func awsRestjson1_serializeDocumentBlockedCategories(v []types.Category, value s
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBrandingConfigurationCreateInput(v *types.BrandingConfigurationCreateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ColorTheme) > 0 {
+		ok := object.Key("colorTheme")
+		ok.String(string(v.ColorTheme))
+	}
+
+	if v.Favicon != nil {
+		ok := object.Key("favicon")
+		if err := awsRestjson1_serializeDocumentIconImageInput(v.Favicon, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LocalizedStrings != nil {
+		ok := object.Key("localizedStrings")
+		if err := awsRestjson1_serializeDocumentLocalizedBrandingStringMap(v.LocalizedStrings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Logo != nil {
+		ok := object.Key("logo")
+		if err := awsRestjson1_serializeDocumentIconImageInput(v.Logo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TermsOfService != nil {
+		ok := object.Key("termsOfService")
+		ok.String(*v.TermsOfService)
+	}
+
+	if v.Wallpaper != nil {
+		ok := object.Key("wallpaper")
+		if err := awsRestjson1_serializeDocumentWallpaperImageInput(v.Wallpaper, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBrandingConfigurationUpdateInput(v *types.BrandingConfigurationUpdateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ColorTheme) > 0 {
+		ok := object.Key("colorTheme")
+		ok.String(string(v.ColorTheme))
+	}
+
+	if v.Favicon != nil {
+		ok := object.Key("favicon")
+		if err := awsRestjson1_serializeDocumentIconImageInput(v.Favicon, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LocalizedStrings != nil {
+		ok := object.Key("localizedStrings")
+		if err := awsRestjson1_serializeDocumentLocalizedBrandingStringMap(v.LocalizedStrings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Logo != nil {
+		ok := object.Key("logo")
+		if err := awsRestjson1_serializeDocumentIconImageInput(v.Logo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TermsOfService != nil {
+		ok := object.Key("termsOfService")
+		ok.String(*v.TermsOfService)
+	}
+
+	if v.Wallpaper != nil {
+		ok := object.Key("wallpaper")
+		if err := awsRestjson1_serializeDocumentWallpaperImageInput(v.Wallpaper, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6496,6 +6600,26 @@ func awsRestjson1_serializeDocumentHiddenToolbarItemList(v []types.ToolbarItem, 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIconImageInput(v types.IconImageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.IconImageInputMemberBlob:
+		av := object.Key("blob")
+		av.Base64EncodeBytes(uv.Value)
+
+	case *types.IconImageInputMemberS3Uri:
+		av := object.Key("s3Uri")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIdentityProviderDetails(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6636,6 +6760,67 @@ func awsRestjson1_serializeDocumentIpRuleList(v []types.IpRule, value smithyjson
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLocalizedBrandingStringMap(v map[string]types.LocalizedBrandingStrings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentLocalizedBrandingStrings(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLocalizedBrandingStrings(v *types.LocalizedBrandingStrings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BrowserTabTitle != nil {
+		ok := object.Key("browserTabTitle")
+		ok.String(*v.BrowserTabTitle)
+	}
+
+	if v.ContactButtonText != nil {
+		ok := object.Key("contactButtonText")
+		ok.String(*v.ContactButtonText)
+	}
+
+	if v.ContactLink != nil {
+		ok := object.Key("contactLink")
+		ok.String(*v.ContactLink)
+	}
+
+	if v.LoadingText != nil {
+		ok := object.Key("loadingText")
+		ok.String(*v.LoadingText)
+	}
+
+	if v.LoginButtonText != nil {
+		ok := object.Key("loginButtonText")
+		ok.String(*v.LoginButtonText)
+	}
+
+	if v.LoginDescription != nil {
+		ok := object.Key("loginDescription")
+		ok.String(*v.LoginDescription)
+	}
+
+	if v.LoginTitle != nil {
+		ok := object.Key("loginTitle")
+		ok.String(*v.LoginTitle)
+	}
+
+	if v.WelcomeText != nil {
+		ok := object.Key("welcomeText")
+		ok.String(*v.WelcomeText)
+	}
+
 	return nil
 }
 
@@ -6790,6 +6975,26 @@ func awsRestjson1_serializeDocumentUrlPatternList(v []string, value smithyjson.V
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWallpaperImageInput(v types.WallpaperImageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.WallpaperImageInputMemberBlob:
+		av := object.Key("blob")
+		av.Base64EncodeBytes(uv.Value)
+
+	case *types.WallpaperImageInputMemberS3Uri:
+		av := object.Key("s3Uri")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

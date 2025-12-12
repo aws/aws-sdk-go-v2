@@ -3134,6 +3134,9 @@ func awsRestjson1_deserializeOpErrorCreateUserSettings(response *smithyhttp.Resp
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
@@ -11783,6 +11786,75 @@ func awsRestjson1_deserializeDocumentBlockedCategories(v *[]types.Category, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBrandingConfiguration(v **types.BrandingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BrandingConfiguration
+	if *v == nil {
+		sv = &types.BrandingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "colorTheme":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColorTheme to be of type string, got %T instead", value)
+				}
+				sv.ColorTheme = types.ColorTheme(jtv)
+			}
+
+		case "favicon":
+			if err := awsRestjson1_deserializeDocumentImageMetadata(&sv.Favicon, value); err != nil {
+				return err
+			}
+
+		case "localizedStrings":
+			if err := awsRestjson1_deserializeDocumentLocalizedBrandingStringMap(&sv.LocalizedStrings, value); err != nil {
+				return err
+			}
+
+		case "logo":
+			if err := awsRestjson1_deserializeDocumentImageMetadata(&sv.Logo, value); err != nil {
+				return err
+			}
+
+		case "termsOfService":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Markdown to be of type string, got %T instead", value)
+				}
+				sv.TermsOfService = ptr.String(jtv)
+			}
+
+		case "wallpaper":
+			if err := awsRestjson1_deserializeDocumentImageMetadata(&sv.Wallpaper, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBrowserSettings(v **types.BrowserSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13004,6 +13076,71 @@ func awsRestjson1_deserializeDocumentIdentityProviderSummary(v **types.IdentityP
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentImageMetadata(v **types.ImageMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageMetadata
+	if *v == nil {
+		sv = &types.ImageMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fileExtension":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringType to be of type string, got %T instead", value)
+				}
+				sv.FileExtension = ptr.String(jtv)
+			}
+
+		case "lastUploadTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUploadTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "mimeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MimeType to be of type string, got %T instead", value)
+				}
+				sv.MimeType = types.MimeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInlineRedactionConfiguration(v **types.InlineRedactionConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13581,6 +13718,144 @@ func awsRestjson1_deserializeDocumentIpRuleList(v *[]types.IpRule, value interfa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLocalizedBrandingStringMap(v *map[string]types.LocalizedBrandingStrings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.LocalizedBrandingStrings
+	if *v == nil {
+		mv = map[string]types.LocalizedBrandingStrings{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.LocalizedBrandingStrings
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentLocalizedBrandingStrings(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLocalizedBrandingStrings(v **types.LocalizedBrandingStrings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LocalizedBrandingStrings
+	if *v == nil {
+		sv = &types.LocalizedBrandingStrings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "browserTabTitle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrandingSafeStringType to be of type string, got %T instead", value)
+				}
+				sv.BrowserTabTitle = ptr.String(jtv)
+			}
+
+		case "contactButtonText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrandingSafeStringType to be of type string, got %T instead", value)
+				}
+				sv.ContactButtonText = ptr.String(jtv)
+			}
+
+		case "contactLink":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContactLinkUrl to be of type string, got %T instead", value)
+				}
+				sv.ContactLink = ptr.String(jtv)
+			}
+
+		case "loadingText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrandingSafeStringType to be of type string, got %T instead", value)
+				}
+				sv.LoadingText = ptr.String(jtv)
+			}
+
+		case "loginButtonText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrandingSafeStringType to be of type string, got %T instead", value)
+				}
+				sv.LoginButtonText = ptr.String(jtv)
+			}
+
+		case "loginDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrandingSafeStringType to be of type string, got %T instead", value)
+				}
+				sv.LoginDescription = ptr.String(jtv)
+			}
+
+		case "loginTitle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrandingSafeStringType to be of type string, got %T instead", value)
+				}
+				sv.LoginTitle = ptr.String(jtv)
+			}
+
+		case "welcomeText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrandingSafeStringType to be of type string, got %T instead", value)
+				}
+				sv.WelcomeText = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -15588,6 +15863,11 @@ func awsRestjson1_deserializeDocumentUserSettings(v **types.UserSettings, value 
 				return err
 			}
 
+		case "brandingConfiguration":
+			if err := awsRestjson1_deserializeDocumentBrandingConfiguration(&sv.BrandingConfiguration, value); err != nil {
+				return err
+			}
+
 		case "cookieSynchronizationConfiguration":
 			if err := awsRestjson1_deserializeDocumentCookieSynchronizationConfiguration(&sv.CookieSynchronizationConfiguration, value); err != nil {
 				return err
@@ -15761,6 +16041,11 @@ func awsRestjson1_deserializeDocumentUserSettingsSummary(v **types.UserSettingsS
 
 	for key, value := range shape {
 		switch key {
+		case "brandingConfiguration":
+			if err := awsRestjson1_deserializeDocumentBrandingConfiguration(&sv.BrandingConfiguration, value); err != nil {
+				return err
+			}
+
 		case "cookieSynchronizationConfiguration":
 			if err := awsRestjson1_deserializeDocumentCookieSynchronizationConfiguration(&sv.CookieSynchronizationConfiguration, value); err != nil {
 				return err

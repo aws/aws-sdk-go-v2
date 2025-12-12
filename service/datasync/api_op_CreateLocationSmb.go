@@ -71,6 +71,36 @@ type CreateLocationSmbInput struct {
 	// [Providing DataSync access to SMB file servers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
 	AuthenticationType types.SmbAuthenticationType
 
+	// Specifies configuration information for a DataSync-managed secret, either a
+	// Password or KerberosKeytab (for NTLM (default) and KERBEROS authentication
+	// types, respectively) that DataSync uses to access a specific SMB storage
+	// location, with a customer-managed KMS key.
+	//
+	// When you include this parameter as part of a CreateLocationSmbRequest request,
+	// you provide only the KMS key ARN. DataSync uses this KMS key together with
+	// either the Password or KerberosKeytab you specify to create a DataSync-managed
+	// secret to store the location access credentials.
+	//
+	// Make sure that DataSync has permission to access the KMS key that you specify.
+	//
+	// You can use either CmkSecretConfig (with either Password or KerberosKeytab ) or
+	// CustomSecretConfig (without any Password and KerberosKeytab ) to provide
+	// credentials for a CreateLocationSmbRequest request. Do not provide both
+	// CmkSecretConfig and CustomSecretConfig parameters for the same request.
+	CmkSecretConfig *types.CmkSecretConfig
+
+	// Specifies configuration information for a customer-managed Secrets Manager
+	// secret where the SMB storage location credentials is stored in Secrets Manager
+	// as plain text (for Password ) or binary (for KerberosKeytab ). This
+	// configuration includes the secret ARN, and the ARN for an IAM role that provides
+	// access to the secret.
+	//
+	// You can use either CmkSecretConfig (with SasConfiguration ) or
+	// CustomSecretConfig (without SasConfiguration ) to provide credentials for a
+	// CreateLocationSmbRequest request. Do not provide both parameters for the same
+	// request.
+	CustomSecretConfig *types.CustomSecretConfig
+
 	// Specifies the IPv4 or IPv6 addresses for the DNS servers that your SMB file
 	// server belongs to. This parameter applies only if AuthenticationType is set to
 	// KERBEROS .

@@ -63,6 +63,11 @@ type CreateUserSettingsInput struct {
 	// The additional encryption context of the user settings.
 	AdditionalEncryptionContext map[string]string
 
+	// The branding configuration input that customizes the appearance of the web
+	// portal for end users. This includes a custom logo, favicon, wallpaper, localized
+	// strings, color theme, and an optional terms of service.
+	BrandingConfigurationInput *types.BrandingConfigurationCreateInput
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. Idempotency ensures that an API request completes only once.
 	// With an idempotent request, if the original request completes successfully,

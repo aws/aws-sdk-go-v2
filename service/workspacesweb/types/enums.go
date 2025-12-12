@@ -107,6 +107,25 @@ func (Category) Values() []Category {
 	}
 }
 
+type ColorTheme string
+
+// Enum values for ColorTheme
+const (
+	ColorThemeLight ColorTheme = "Light"
+	ColorThemeDark  ColorTheme = "Dark"
+)
+
+// Values returns all known values for ColorTheme. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ColorTheme) Values() []ColorTheme {
+	return []ColorTheme{
+		"Light",
+		"Dark",
+	}
+}
+
 type EnabledType string
 
 // Enum values for EnabledType
@@ -242,6 +261,43 @@ func (InstanceType) Values() []InstanceType {
 	}
 }
 
+type Locale string
+
+// Enum values for Locale
+const (
+	LocaleDe Locale = "de-DE"
+	LocaleEn Locale = "en-US"
+	LocaleEs Locale = "es-ES"
+	LocaleFr Locale = "fr-FR"
+	LocaleId Locale = "id-ID"
+	LocaleIt Locale = "it-IT"
+	LocaleJp Locale = "ja-JP"
+	LocaleKr Locale = "ko-KR"
+	LocaleBr Locale = "pt-BR"
+	LocaleCn Locale = "zh-CN"
+	LocaleTw Locale = "zh-TW"
+)
+
+// Values returns all known values for Locale. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Locale) Values() []Locale {
+	return []Locale{
+		"de-DE",
+		"en-US",
+		"es-ES",
+		"fr-FR",
+		"id-ID",
+		"it-IT",
+		"ja-JP",
+		"ko-KR",
+		"pt-BR",
+		"zh-CN",
+		"zh-TW",
+	}
+}
+
 type LogFileFormat string
 
 // Enum values for LogFileFormat
@@ -289,6 +345,27 @@ func (MaxDisplayResolution) Values() []MaxDisplayResolution {
 		"size1280X720",
 		"size1024X768",
 		"size800X600",
+	}
+}
+
+type MimeType string
+
+// Enum values for MimeType
+const (
+	MimeTypePng  MimeType = "image/png"
+	MimeTypeJpeg MimeType = "image/jpeg"
+	MimeTypeIco  MimeType = "image/x-icon"
+)
+
+// Values returns all known values for MimeType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MimeType) Values() []MimeType {
+	return []MimeType{
+		"image/png",
+		"image/jpeg",
+		"image/x-icon",
 	}
 }
 

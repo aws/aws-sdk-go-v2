@@ -1594,6 +1594,54 @@ func addOpUpdateUserSettingsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUpdateUserSettings{}, middleware.After)
 }
 
+func validateBrandingConfigurationCreateInput(v *types.BrandingConfigurationCreateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrandingConfigurationCreateInput"}
+	if v.Logo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Logo"))
+	}
+	if v.Wallpaper == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Wallpaper"))
+	}
+	if v.Favicon == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Favicon"))
+	}
+	if v.LocalizedStrings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocalizedStrings"))
+	} else if v.LocalizedStrings != nil {
+		if err := validateLocalizedBrandingStringMap(v.LocalizedStrings); err != nil {
+			invalidParams.AddNested("LocalizedStrings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ColorTheme) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ColorTheme"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBrandingConfigurationUpdateInput(v *types.BrandingConfigurationUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrandingConfigurationUpdateInput"}
+	if v.LocalizedStrings != nil {
+		if err := validateLocalizedBrandingStringMap(v.LocalizedStrings); err != nil {
+			invalidParams.AddNested("LocalizedStrings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCookieSpecification(v *types.CookieSpecification) error {
 	if v == nil {
 		return nil
@@ -1752,6 +1800,42 @@ func validateIpRuleList(v []types.IpRule) error {
 		if err := validateIpRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLocalizedBrandingStringMap(v map[string]types.LocalizedBrandingStrings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LocalizedBrandingStringMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateLocalizedBrandingStrings(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLocalizedBrandingStrings(v *types.LocalizedBrandingStrings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LocalizedBrandingStrings"}
+	if v.BrowserTabTitle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrowserTabTitle"))
+	}
+	if v.WelcomeText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WelcomeText"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2222,6 +2306,11 @@ func validateOpCreateUserSettingsInput(v *CreateUserSettingsInput) error {
 	if v.CookieSynchronizationConfiguration != nil {
 		if err := validateCookieSynchronizationConfiguration(v.CookieSynchronizationConfiguration); err != nil {
 			invalidParams.AddNested("CookieSynchronizationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BrandingConfigurationInput != nil {
+		if err := validateBrandingConfigurationCreateInput(v.BrandingConfigurationInput); err != nil {
+			invalidParams.AddNested("BrandingConfigurationInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2981,6 +3070,11 @@ func validateOpUpdateUserSettingsInput(v *UpdateUserSettingsInput) error {
 	if v.CookieSynchronizationConfiguration != nil {
 		if err := validateCookieSynchronizationConfiguration(v.CookieSynchronizationConfiguration); err != nil {
 			invalidParams.AddNested("CookieSynchronizationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BrandingConfigurationInput != nil {
+		if err := validateBrandingConfigurationUpdateInput(v.BrandingConfigurationInput); err != nil {
+			invalidParams.AddNested("BrandingConfigurationInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

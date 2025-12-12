@@ -1,0 +1,8 @@
+{
+    "id": "b3db5a24-f1f4-4691-99d3-71620d728726",
+    "type": "feature",
+    "description": "Adds support for portal branding customization, enabling administrators to personalize end-user portals with custom assets.",
+    "modules": [
+        "service/workspacesweb"
+    ]
+}

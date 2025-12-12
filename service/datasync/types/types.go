@@ -59,8 +59,8 @@ type AzureBlobSasConfiguration struct {
 }
 
 // Specifies configuration information for a DataSync-managed secret, such as an
-// authentication token or secret key that DataSync uses to access a specific
-// storage location, with a customer-managed KMS key.
+// authentication token, secret key, password, or Kerberos keytab that DataSync
+// uses to access a specific storage location, with a customer-managed KMS key.
 //
 // You can use either CmkSecretConfig or CustomSecretConfig to provide credentials
 // for a CreateLocation request. Do not provide both parameters for the same
@@ -82,9 +82,10 @@ type CmkSecretConfig struct {
 }
 
 // Specifies configuration information for a customer-managed Secrets Manager
-// secret where a storage location authentication token or secret key is stored in
-// plain text. This configuration includes the secret ARN, and the ARN for an IAM
-// role that provides access to the secret.
+// secret where a storage location credentials is stored in Secrets Manager as
+// plain text (for authentication token, secret key, or password) or as binary (for
+// Kerberos keytab). This configuration includes the secret ARN, and the ARN for an
+// IAM role that provides access to the secret.
 //
 // You can use either CmkSecretConfig or CustomSecretConfig to provide credentials
 // for a CreateLocation request. Do not provide both parameters for the same
@@ -471,10 +472,6 @@ type Options struct {
 
 	// Limits the bandwidth used by a DataSync task. For example, if you want DataSync
 	// to use a maximum of 1 MB, set this value to 1048576 ( =1024*1024 ).
-	//
-	// Not applicable to [Enhanced mode tasks].
-	//
-	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 	BytesPerSecond *int64
 
 	// Specifies the POSIX group ID (GID) of the file's owners.
@@ -957,45 +954,111 @@ type TagListEntry struct {
 	noSmithyDocumentSerde
 }
 
-// The number of objects that DataSync fails to prepare, transfer, verify, and
-// delete during your task execution.
+// The number of files or objects that DataSync fails to prepare, transfer,
+// verify, and delete during your task execution.
 //
 // Applies only to [Enhanced mode tasks].
 //
 // [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 type TaskExecutionFilesFailedDetail struct {
 
-	// The number of objects that DataSync fails to delete during your task execution.
+	// The number of files or objects that DataSync fails to delete during your task
+	// execution.
 	Delete int64
 
-	// The number of objects that DataSync fails to prepare during your task execution.
+	// The number of files or objects that DataSync fails to prepare during your task
+	// execution.
 	Prepare int64
 
-	// The number of objects that DataSync fails to transfer during your task
+	// The number of files or objects that DataSync fails to transfer during your task
 	// execution.
 	Transfer int64
 
-	// The number of objects that DataSync fails to verify during your task execution.
+	// The number of files or objects that DataSync fails to verify during your task
+	// execution.
 	Verify int64
 
 	noSmithyDocumentSerde
 }
 
-// The number of objects that DataSync finds at your locations.
+// The number of files or objects that DataSync finds at your locations.
 //
 // Applies only to [Enhanced mode tasks].
 //
 // [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 type TaskExecutionFilesListedDetail struct {
 
-	// The number of objects that DataSync finds at your destination location. This
-	// counter is only applicable if you [configure your task]to delete data in the destination that isn't
-	// in the source.
+	// The number of files or objects that DataSync finds at your destination
+	// location. This counter is only applicable if you [configure your task]to delete data in the
+	// destination that isn't in the source.
 	//
 	// [configure your task]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling
 	AtDestinationForDelete int64
 
-	// The number of objects that DataSync finds at your source location.
+	// The number of files or objects that DataSync finds at your source location.
+	//
+	//   - With a [manifest], DataSync lists only what's in your manifest (and not everything at
+	//   your source location).
+	//
+	//   - With an include [filter], DataSync lists only what matches the filter at your
+	//   source location.
+	//
+	//   - With an exclude filter, DataSync lists everything at your source location
+	//   before applying the filter.
+	//
+	// [filter]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
+	// [manifest]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+	AtSource int64
+
+	noSmithyDocumentSerde
+}
+
+// The number of directories that DataSync fails to list, prepare, transfer,
+// verify, and delete during your task execution.
+//
+// Applies only to [Enhanced mode tasks].
+//
+// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+type TaskExecutionFoldersFailedDetail struct {
+
+	// The number of directories that DataSync fails to delete during your task
+	// execution.
+	Delete int64
+
+	// The number of directories that DataSync fails to list during your task
+	// execution.
+	List int64
+
+	// The number of directories that DataSync fails to prepare during your task
+	// execution.
+	Prepare int64
+
+	// The number of directories that DataSync fails to transfer during your task
+	// execution.
+	Transfer int64
+
+	// The number of directories that DataSync fails to verify during your task
+	// execution.
+	Verify int64
+
+	noSmithyDocumentSerde
+}
+
+// The number of directories that DataSync finds at your locations.
+//
+// Applies only to [Enhanced mode tasks].
+//
+// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+type TaskExecutionFoldersListedDetail struct {
+
+	// The number of directories that DataSync finds at your destination location.
+	// This counter is only applicable if you [configure your task]to delete data in the destination that
+	// isn't in the source.
+	//
+	// [configure your task]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling
+	AtDestinationForDelete int64
+
+	// The number of directories that DataSync finds at your source location.
 	//
 	//   - With a [manifest], DataSync lists only what's in your manifest (and not everything at
 	//   your source location).

@@ -907,6 +907,24 @@ func (DirectoryType) Values() []DirectoryType {
 	}
 }
 
+type DisconnectOnCustomerExitParticipantType string
+
+// Enum values for DisconnectOnCustomerExitParticipantType
+const (
+	DisconnectOnCustomerExitParticipantTypeAgent DisconnectOnCustomerExitParticipantType = "AGENT"
+)
+
+// Values returns all known values for DisconnectOnCustomerExitParticipantType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DisconnectOnCustomerExitParticipantType) Values() []DisconnectOnCustomerExitParticipantType {
+	return []DisconnectOnCustomerExitParticipantType{
+		"AGENT",
+	}
+}
+
 type EmailHeaderType string
 
 // Enum values for EmailHeaderType

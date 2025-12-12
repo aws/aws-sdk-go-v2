@@ -82,12 +82,12 @@ type CreateLocationAzureBlobInput struct {
 	// includes the authentication token that DataSync uses to access a specific
 	// AzureBlob storage location, with a customer-managed KMS key.
 	//
-	// When you include this paramater as part of a CreateLocationAzureBlob request,
+	// When you include this parameter as part of a CreateLocationAzureBlob request,
 	// you provide only the KMS key ARN. DataSync uses this KMS key together with the
 	// authentication token you specify for SasConfiguration to create a
 	// DataSync-managed secret to store the location access credentials.
 	//
-	// Make sure the DataSync has permission to access the KMS key that you specify.
+	// Make sure that DataSync has permission to access the KMS key that you specify.
 	//
 	// You can use either CmkSecretConfig (with SasConfiguration ) or
 	// CustomSecretConfig (without SasConfiguration ) to provide credentials for a
@@ -97,8 +97,8 @@ type CreateLocationAzureBlobInput struct {
 
 	// Specifies configuration information for a customer-managed Secrets Manager
 	// secret where the authentication token for an AzureBlob storage location is
-	// stored in plain text. This configuration includes the secret ARN, and the ARN
-	// for an IAM role that provides access to the secret.
+	// stored in plain text, in Secrets Manager. This configuration includes the secret
+	// ARN, and the ARN for an IAM role that provides access to the secret.
 	//
 	// You can use either CmkSecretConfig (with SasConfiguration ) or
 	// CustomSecretConfig (without SasConfiguration ) to provide credentials for a

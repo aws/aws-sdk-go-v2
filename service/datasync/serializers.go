@@ -4591,6 +4591,20 @@ func awsAwsjson11_serializeOpDocumentCreateLocationSmbInput(v *CreateLocationSmb
 		ok.String(string(v.AuthenticationType))
 	}
 
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DnsIpAddresses != nil {
 		ok := object.Key("DnsIpAddresses")
 		if err := awsAwsjson11_serializeDocumentDnsIpList(v.DnsIpAddresses, ok); err != nil {
@@ -5572,6 +5586,20 @@ func awsAwsjson11_serializeOpDocumentUpdateLocationSmbInput(v *UpdateLocationSmb
 	if len(v.AuthenticationType) > 0 {
 		ok := object.Key("AuthenticationType")
 		ok.String(string(v.AuthenticationType))
+	}
+
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.DnsIpAddresses != nil {

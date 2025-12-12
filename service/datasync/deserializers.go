@@ -8262,6 +8262,159 @@ func awsAwsjson11_deserializeDocumentTaskExecutionFilesListedDetail(v **types.Ta
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTaskExecutionFoldersFailedDetail(v **types.TaskExecutionFoldersFailedDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TaskExecutionFoldersFailedDetail
+	if *v == nil {
+		sv = &types.TaskExecutionFoldersFailedDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Delete":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Delete = i64
+			}
+
+		case "List":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.List = i64
+			}
+
+		case "Prepare":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Prepare = i64
+			}
+
+		case "Transfer":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Transfer = i64
+			}
+
+		case "Verify":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Verify = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTaskExecutionFoldersListedDetail(v **types.TaskExecutionFoldersListedDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TaskExecutionFoldersListedDetail
+	if *v == nil {
+		sv = &types.TaskExecutionFoldersListedDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AtDestinationForDelete":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AtDestinationForDelete = i64
+			}
+
+		case "AtSource":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AtSource = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTaskExecutionList(v *[]types.TaskExecutionListEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10519,6 +10672,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationSmbOutput(v **DescribeLoc
 				sv.AuthenticationType = types.SmbAuthenticationType(jtv)
 			}
 
+		case "CmkSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCmkSecretConfig(&sv.CmkSecretConfig, value); err != nil {
+				return err
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10533,6 +10691,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationSmbOutput(v **DescribeLoc
 					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "CustomSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCustomSecretConfig(&sv.CustomSecretConfig, value); err != nil {
+				return err
 			}
 
 		case "DnsIpAddresses":
@@ -10574,6 +10737,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationSmbOutput(v **DescribeLoc
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
 				sv.LocationUri = ptr.String(jtv)
+			}
+
+		case "ManagedSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentManagedSecretConfig(&sv.ManagedSecretConfig, value); err != nil {
+				return err
 			}
 
 		case "MountOptions":
@@ -10715,6 +10883,32 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 				sv.EstimatedFilesToTransfer = i64
 			}
 
+		case "EstimatedFoldersToDelete":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ItemCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EstimatedFoldersToDelete = ptr.Int64(i64)
+			}
+
+		case "EstimatedFoldersToTransfer":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ItemCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EstimatedFoldersToTransfer = ptr.Int64(i64)
+			}
+
 		case "Excludes":
 			if err := awsAwsjson11_deserializeDocumentFilterList(&sv.Excludes, value); err != nil {
 				return err
@@ -10793,6 +10987,81 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 					return err
 				}
 				sv.FilesVerified = i64
+			}
+
+		case "FoldersDeleted":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ItemCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FoldersDeleted = ptr.Int64(i64)
+			}
+
+		case "FoldersFailed":
+			if err := awsAwsjson11_deserializeDocumentTaskExecutionFoldersFailedDetail(&sv.FoldersFailed, value); err != nil {
+				return err
+			}
+
+		case "FoldersListed":
+			if err := awsAwsjson11_deserializeDocumentTaskExecutionFoldersListedDetail(&sv.FoldersListed, value); err != nil {
+				return err
+			}
+
+		case "FoldersPrepared":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ItemCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FoldersPrepared = ptr.Int64(i64)
+			}
+
+		case "FoldersSkipped":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ItemCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FoldersSkipped = ptr.Int64(i64)
+			}
+
+		case "FoldersTransferred":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ItemCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FoldersTransferred = ptr.Int64(i64)
+			}
+
+		case "FoldersVerified":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ItemCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FoldersVerified = ptr.Int64(i64)
 			}
 
 		case "Includes":

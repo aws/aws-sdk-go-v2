@@ -1,0 +1,8 @@
+{
+    "id": "58d72e89-d7ac-428b-87ff-5fa14a1e2d80",
+    "type": "feature",
+    "description": "Added new freetier action types to RecommendedAction.type.",
+    "modules": [
+        "service/bcmrecommendedactions"
+    ]
+}

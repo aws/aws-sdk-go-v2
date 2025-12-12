@@ -24857,6 +24857,13 @@ func awsRestjson1_serializeOpDocumentStartChatContactInput(v *StartChatContactIn
 		ok.String(*v.CustomerId)
 	}
 
+	if v.DisconnectOnCustomerExit != nil {
+		ok := object.Key("DisconnectOnCustomerExit")
+		if err := awsRestjson1_serializeDocumentDisconnectOnCustomerExit(v.DisconnectOnCustomerExit, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InitialMessage != nil {
 		ok := object.Key("InitialMessage")
 		if err := awsRestjson1_serializeDocumentChatMessage(v.InitialMessage, ok); err != nil {
@@ -35641,6 +35648,17 @@ func awsRestjson1_serializeDocumentDecimalCondition(v *types.DecimalCondition, v
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDisconnectOnCustomerExit(v []types.DisconnectOnCustomerExitParticipantType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

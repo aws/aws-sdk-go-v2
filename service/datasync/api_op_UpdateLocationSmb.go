@@ -51,6 +51,16 @@ type UpdateLocationSmbInput struct {
 	// [Providing DataSync access to SMB file servers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
 	AuthenticationType types.SmbAuthenticationType
 
+	// Specifies configuration information for a DataSync-managed secret, such as a
+	// Password or KerberosKeytab or set of credentials that DataSync uses to access a
+	// specific transfer location, and a customer-managed KMS key.
+	CmkSecretConfig *types.CmkSecretConfig
+
+	// Specifies configuration information for a customer-managed secret, such as a
+	// Password or KerberosKeytab or set of credentials that DataSync uses to access a
+	// specific transfer location, and a customer-managed KMS key.
+	CustomSecretConfig *types.CustomSecretConfig
+
 	// Specifies the IP addresses (IPv4 or IPv6) for the DNS servers that your SMB
 	// file server belongs to. This parameter applies only if AuthenticationType is
 	// set to KERBEROS .

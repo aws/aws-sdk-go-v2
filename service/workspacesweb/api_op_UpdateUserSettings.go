@@ -34,6 +34,13 @@ type UpdateUserSettingsInput struct {
 	// This member is required.
 	UserSettingsArn *string
 
+	// The branding configuration that customizes the appearance of the web portal for
+	// end users. When updating user settings without an existing branding
+	// configuration, all fields (logo, favicon, wallpaper, localized strings, and
+	// color theme) are required except for terms of service. When updating user
+	// settings with an existing branding configuration, all fields are optional.
+	BrandingConfigurationInput *types.BrandingConfigurationUpdateInput
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. Idempotency ensures that an API request completes only once.
 	// With an idempotent request, if the original request completes successfully,

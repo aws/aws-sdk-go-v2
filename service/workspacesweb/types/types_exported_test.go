@@ -28,3 +28,47 @@ func ExampleEventFilter_outputUsage() {
 
 var _ []types.Event
 var _ *types.Unit
+
+func ExampleIconImageInput_outputUsage() {
+	var union types.IconImageInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IconImageInputMemberBlob:
+		_ = v.Value // Value is []byte
+
+	case *types.IconImageInputMemberS3Uri:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ []byte
+
+func ExampleWallpaperImageInput_outputUsage() {
+	var union types.WallpaperImageInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.WallpaperImageInputMemberBlob:
+		_ = v.Value // Value is []byte
+
+	case *types.WallpaperImageInputMemberS3Uri:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ []byte
