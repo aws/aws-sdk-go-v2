@@ -1,0 +1,8 @@
+{
+    "id": "695b5be7-2848-467a-b735-7a7f57255f19",
+    "type": "feature",
+    "description": "Reshape s3 transfer manager v2 request/response, remove unwanted partnum/range fields in downloader input and add support for directory transfer failure policy.",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
