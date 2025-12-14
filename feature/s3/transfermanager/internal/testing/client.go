@@ -399,7 +399,7 @@ var ReaderPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.Get
 	}, nil
 }
 
-// CompositeChecksumGetObjectFn mocks getobject behavior of s3 client to return object with composite checksum type and checksum value
+// CompositePartGetObjectFn mocks getobject behavior of s3 client to return object with composite checksum type and checksum value
 var CompositePartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	return &s3.GetObjectOutput{
 		Body:              ioutil.NopCloser(bytes.NewReader(c.Data)),
