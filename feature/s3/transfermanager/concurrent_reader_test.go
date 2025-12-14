@@ -3,6 +3,7 @@ package transfermanager
 import (
 	"bytes"
 	"context"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -173,8 +174,8 @@ func TestConcurrentReader(t *testing.T) {
 				sectionParts: c.sectionParts,
 				options:      c.options,
 				in: &GetObjectInput{
-					Bucket: "bucket",
-					Key:    "key",
+					Bucket: aws.String("bucket"),
+					Key:    aws.String("key"),
 				},
 				capacity: int32(math.Min(float64(c.sectionParts), float64(c.partsCount))),
 				buf:      make(map[int32]*outChunk),

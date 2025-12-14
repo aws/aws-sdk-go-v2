@@ -27,15 +27,14 @@ func TestDownloadObject(t *testing.T) {
 		errReaders           []s3testing.TestErrReader
 		getObjectFn          func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 		options              Options
-		downloadRange        string
 		expectInvocations    int
 		expectRanges         []string
-		partNumber           int32
 		versionID            string
 		partsCount           int32
 		expectParts          []int32
 		expectVersions       []string
 		expectETags          []string
+		expectComposite      bool
 		expectErr            string
 		dataValidationFn     func(*testing.T, *types.WriteAtBuffer)
 		listenerValidationFn func(*testing.T, *mockListener, any, any, error)
@@ -104,7 +103,7 @@ func TestDownloadObject(t *testing.T) {
 				l.expectFailed(t, in, err)
 			},
 		},
-		"range download with mismatch error": {
+		"range download with content mismatch error": {
 			data:        buf20MB,
 			getObjectFn: s3testing.MismatchRangeGetObjectFn,
 			options: Options{
@@ -113,6 +112,20 @@ func TestDownloadObject(t *testing.T) {
 			},
 			expectInvocations: 2,
 			expectErr:         "PreconditionFailed",
+			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
+				l.expectStartTotalBytes(t, 20*megabyte)
+				l.expectFailed(t, in, err)
+			},
+		},
+		"range download with resp range mismatch error": {
+			data:        buf20MB,
+			getObjectFn: s3testing.WrongRangeGetObjectFn,
+			options: Options{
+				Concurrency:   1,
+				GetObjectType: types.GetObjectRanges,
+			},
+			expectInvocations: 2,
+			expectErr:         "range mismatch between request",
 			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
 				l.expectStartTotalBytes(t, 20*megabyte)
 				l.expectFailed(t, in, err)
@@ -229,38 +242,6 @@ func TestDownloadObject(t *testing.T) {
 				l.expectFailed(t, in, err)
 			},
 		},
-		"range download a range of object": {
-			data:        buf20MB,
-			getObjectFn: s3testing.RangeGetObjectFn,
-			options: Options{
-				Concurrency:   1,
-				GetObjectType: types.GetObjectRanges,
-			},
-			downloadRange:     "bytes=1-10485759",
-			expectInvocations: 2,
-			expectRanges:      []string{"bytes=1-8388608", "bytes=8388609-10485759"},
-			expectETags:       []string{"", etag},
-			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
-				l.expectComplete(t, in, out)
-				l.expectByteTransfers(t, 8*megabyte, 10*megabyte-1)
-			},
-		},
-		"range download a range of object with version ID": {
-			data:        buf20MB,
-			getObjectFn: s3testing.RangeGetObjectFn,
-			options: Options{
-				Concurrency:   1,
-				GetObjectType: types.GetObjectRanges,
-			},
-			downloadRange:     "bytes=0-10485759",
-			versionID:         vID,
-			expectInvocations: 2,
-			expectVersions:    []string{vID, vID},
-			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
-				l.expectComplete(t, in, out)
-				l.expectByteTransfers(t, 8*megabyte, 10*megabyte)
-			},
-		},
 		"parts download in order": {
 			data:        buf2MB,
 			getObjectFn: s3testing.PartGetObjectFn,
@@ -272,6 +253,23 @@ func TestDownloadObject(t *testing.T) {
 			expectInvocations: 3,
 			expectVersions:    []string{vID, vID, vID},
 			expectParts:       []int32{1, 2, 3},
+			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
+				l.expectComplete(t, in, out)
+				l.expectByteTransfers(t, 2*megabyte, 4*megabyte, 6*megabyte)
+			},
+		},
+		"parts download in order with composite checksum type": {
+			data:        buf2MB,
+			getObjectFn: s3testing.CompositePartGetObjectFn,
+			options: Options{
+				Concurrency: 1,
+			},
+			partsCount:        3,
+			versionID:         vID,
+			expectInvocations: 3,
+			expectVersions:    []string{vID, vID, vID},
+			expectParts:       []int32{1, 2, 3},
+			expectComposite:   true,
 			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
 				l.expectComplete(t, in, out)
 				l.expectByteTransfers(t, 2*megabyte, 4*megabyte, 6*megabyte)
@@ -397,40 +395,6 @@ func TestDownloadObject(t *testing.T) {
 				l.expectFailed(t, in, err)
 			},
 		},
-		"parts download with range input": {
-			data:              []byte("123"),
-			getObjectFn:       s3testing.PartGetObjectFn,
-			options:           Options{},
-			downloadRange:     "bytes=0-100",
-			partsCount:        3,
-			expectInvocations: 1,
-			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
-				if e, a := "123", string(w.Bytes()); e != a {
-					t.Errorf("expect %q response, got %q", e, a)
-				}
-			},
-			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
-				l.expectComplete(t, in, out)
-				l.expectByteTransfers(t, 3)
-			},
-		},
-		"parts download with part number input": {
-			data:              []byte("ab"),
-			getObjectFn:       s3testing.PartGetObjectFn,
-			options:           Options{},
-			partsCount:        3,
-			partNumber:        5,
-			expectInvocations: 1,
-			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
-				if e, a := "ab", string(w.Bytes()); e != a {
-					t.Errorf("expect %q response, got %q", e, a)
-				}
-			},
-			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
-				l.expectComplete(t, in, out)
-				l.expectByteTransfers(t, 2)
-			},
-		},
 	}
 
 	for name, c := range cases {
@@ -444,12 +408,10 @@ func TestDownloadObject(t *testing.T) {
 			w := types.NewWriteAtBuffer(make([]byte, 0))
 
 			input := &DownloadObjectInput{
-				Bucket:     "bucket",
-				Key:        "key",
-				WriterAt:   w,
-				Range:      c.downloadRange,
-				PartNumber: c.partNumber,
-				VersionID:  c.versionID,
+				Bucket:    aws.String("bucket"),
+				Key:       aws.String("key"),
+				WriterAt:  w,
+				VersionID: nzstring(c.versionID),
 			}
 
 			listener := &mockListener{}
@@ -503,6 +465,15 @@ func TestDownloadObject(t *testing.T) {
 				}
 			}
 
+			if c.expectComposite {
+				if output.ChecksumCRC32 != nil || output.ChecksumCRC32C != nil || output.ChecksumCRC64NVME != nil ||
+					output.ChecksumSHA1 != nil || output.ChecksumSHA256 != nil {
+					t.Errorf("expect all composite checksum value to be empty in output, got non-empty value: %s, %s, %s, %s, %s",
+						aws.ToString(output.ChecksumCRC32), aws.ToString(output.ChecksumCRC32C), aws.ToString(output.ChecksumCRC64NVME),
+						aws.ToString(output.ChecksumSHA1), aws.ToString(output.ChecksumSHA256))
+				}
+			}
+
 			if c.dataValidationFn != nil {
 				c.dataValidationFn(t, w)
 			}
@@ -522,7 +493,6 @@ func TestDownloadAsyncWithFailure(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			startingByte := 0
 			reqCount := int64(0)
 
 			s3Client := &s3testing.TransferManagerLoggingClient{}
@@ -533,15 +503,20 @@ func TestDownloadAsyncWithFailure(t *testing.T) {
 					time.Sleep(1 * time.Second)
 					err = fmt.Errorf("some connection error")
 				default:
+					var start, end int64
+					if params.Range != nil {
+						start, end, err = getReqRange(aws.ToString(params.Range))
+						if err != nil {
+							return
+						}
+					}
 					body := bytes.NewReader(make([]byte, minPartSizeBytes))
 					out = &s3.GetObjectOutput{
 						Body:          ioutil.NopCloser(body),
 						ContentLength: aws.Int64(int64(body.Len())),
-						ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", startingByte, body.Len()-1, body.Len()*10)),
+						ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, end, body.Len()*10)),
 						PartsCount:    aws.Int32(10),
 					}
-
-					startingByte += body.Len()
 					if reqCount > 0 {
 						// sleep here to ensure context switching between goroutines
 						time.Sleep(25 * time.Millisecond)
@@ -560,8 +535,8 @@ func TestDownloadAsyncWithFailure(t *testing.T) {
 
 			// Expect this request to exit quickly after failure
 			_, err := d.DownloadObject(context.Background(), &DownloadObjectInput{
-				Bucket:   "Bucket",
-				Key:      "Key",
+				Bucket:   aws.String("Bucket"),
+				Key:      aws.String("Key"),
 				WriterAt: w,
 			})
 			if err == nil {
@@ -602,8 +577,8 @@ func TestDownloadObjectWithContextCanceled(t *testing.T) {
 			w := types.NewWriteAtBuffer(make([]byte, 0))
 
 			_, err := d.DownloadObject(ctx, &DownloadObjectInput{
-				Bucket:   "bucket",
-				Key:      "Key",
+				Bucket:   aws.String("bucket"),
+				Key:      aws.String("Key"),
 				WriterAt: w,
 			})
 			if err == nil {

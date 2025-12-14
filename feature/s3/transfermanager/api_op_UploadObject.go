@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log"
 	"sort"
 	"sync"
 	"time"
@@ -163,6 +164,46 @@ type UploadObjectInput struct {
 	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
+	// This header can be used as a data integrity check to verify that the data
+	// received is the same data that was originally sent. This header specifies the
+	// Base64 encoded, 32-bit CRC32 checksum of the object. For more information, see [Checking object integrity]
+	// in the Amazon S3 User Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumCRC32 *string
+
+	// This header can be used as a data integrity check to verify that the data
+	// received is the same data that was originally sent. This header specifies the
+	// Base64 encoded, 32-bit CRC32C checksum of the object. For more information, see [Checking object integrity]
+	// in the Amazon S3 User Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumCRC32C *string
+
+	// This header can be used as a data integrity check to verify that the data
+	// received is the same data that was originally sent. This header specifies the
+	// Base64 encoded, 64-bit CRC64NVME checksum of the object. The CRC64NVME checksum
+	// is always a full object checksum. For more information, see [Checking object integrity in the Amazon S3 User Guide].
+	//
+	// [Checking object integrity in the Amazon S3 User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumCRC64NVME *string
+
+	// This header can be used as a data integrity check to verify that the data
+	// received is the same data that was originally sent. This header specifies the
+	// Base64 encoded, 160-bit SHA1 digest of the object. For more information, see [Checking object integrity]
+	// in the Amazon S3 User Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumSHA1 *string
+
+	// This header can be used as a data integrity check to verify that the data
+	// received is the same data that was originally sent. This header specifies the
+	// Base64 encoded, 256-bit SHA256 digest of the object. For more information, see [Checking object integrity]
+	// in the Amazon S3 User Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumSHA256 *string
+
 	// Size of the body in bytes. This parameter is useful when the size of the body
 	// cannot be determined automatically. For more information, see [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length].
 	//
@@ -229,6 +270,39 @@ type UploadObjectInput struct {
 	//   - This functionality is not supported for Amazon S3 on Outposts.
 	GrantWriteACP *string
 
+	// Uploads the object only if the ETag (entity tag) value provided during the
+	// WRITE operation matches the ETag of the object in S3. If the ETag values do not
+	// match, the operation returns a 412 Precondition Failed error.
+	//
+	// If a conflicting operation occurs during the upload S3 returns a 409
+	// ConditionalRequestConflict response. On a 409 failure you should fetch the
+	// object's ETag and retry the upload.
+	//
+	// Expects the ETag value as a string.
+	//
+	// For more information about conditional requests, see [RFC 7232], or [Conditional requests] in the Amazon S3
+	// User Guide.
+	//
+	// [Conditional requests]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html
+	// [RFC 7232]: https://tools.ietf.org/html/rfc7232
+	IfMatch *string
+
+	// Uploads the object only if the object key name does not already exist in the
+	// bucket specified. Otherwise, Amazon S3 returns a 412 Precondition Failed error.
+	//
+	// If a conflicting operation occurs during the upload S3 returns a 409
+	// ConditionalRequestConflict response. On a 409 failure you should retry the
+	// upload.
+	//
+	// Expects the '*' (asterisk) character.
+	//
+	// For more information about conditional requests, see [RFC 7232], or [Conditional requests] in the Amazon S3
+	// User Guide.
+	//
+	// [Conditional requests]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html
+	// [RFC 7232]: https://tools.ietf.org/html/rfc7232
+	IfNoneMatch *string
+
 	// A map of metadata to store with the object in S3.
 	Metadata map[string]string
 
@@ -276,6 +350,13 @@ type UploadObjectInput struct {
 	//
 	// This functionality is not supported for directory buckets.
 	SSECustomerKey *string
+
+	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
+	// Amazon S3 uses this header for a message integrity check to ensure that the
+	// encryption key was transmitted without error.
+	//
+	// This functionality is not supported for directory buckets.
+	SSECustomerKeyMD5 *string
 
 	// Specifies the Amazon Web Services KMS Encryption Context to use for object
 	// encryption. The value of this header is a base64-encoded UTF-8 string holding
@@ -382,119 +463,111 @@ func nztime(t time.Time) *time.Time {
 
 func (i UploadObjectInput) mapSingleUploadInput(body io.Reader, checksumAlgorithm types.ChecksumAlgorithm) *s3.PutObjectInput {
 	input := &s3.PutObjectInput{
-		Bucket: i.Bucket,
-		Key:    aws.String(i.Key),
-		Body:   body,
-	}
-	if i.ACL != "" {
-		input.ACL = s3types.ObjectCannedACL(i.ACL)
+		Bucket:                    i.Bucket,
+		Key:                       i.Key,
+		Body:                      body,
+		ACL:                       s3types.ObjectCannedACL(i.ACL),
+		BucketKeyEnabled:          i.BucketKeyEnabled,
+		CacheControl:              i.CacheControl,
+		ChecksumCRC32:             i.ChecksumCRC32,
+		ChecksumCRC32C:            i.ChecksumCRC32C,
+		ChecksumCRC64NVME:         i.ChecksumCRC64NVME,
+		ChecksumSHA1:              i.ChecksumSHA1,
+		ChecksumSHA256:            i.ChecksumSHA256,
+		ContentDisposition:        i.ContentDisposition,
+		ContentEncoding:           i.ContentEncoding,
+		ContentLanguage:           i.ContentLanguage,
+		ContentType:               i.ContentType,
+		ExpectedBucketOwner:       i.ExpectedBucketOwner,
+		Expires:                   i.Expires,
+		GrantFullControl:          i.GrantFullControl,
+		GrantRead:                 i.GrantRead,
+		GrantReadACP:              i.GrantReadACP,
+		GrantWriteACP:             i.GrantWriteACP,
+		IfMatch:                   i.IfMatch,
+		IfNoneMatch:               i.IfNoneMatch,
+		Metadata:                  i.Metadata,
+		ObjectLockLegalHoldStatus: s3types.ObjectLockLegalHoldStatus(i.ObjectLockLegalHoldStatus),
+		ObjectLockMode:            s3types.ObjectLockMode(i.ObjectLockMode),
+		ObjectLockRetainUntilDate: i.ObjectLockRetainUntilDate,
+		RequestPayer:              s3types.RequestPayer(i.RequestPayer),
+		SSECustomerAlgorithm:      i.SSECustomerAlgorithm,
+		SSECustomerKey:            i.SSECustomerKey,
+		SSECustomerKeyMD5:         i.SSECustomerKeyMD5,
+		SSEKMSEncryptionContext:   i.SSEKMSEncryptionContext,
+		SSEKMSKeyId:               i.SSEKMSKeyID,
+		ServerSideEncryption:      s3types.ServerSideEncryption(i.ServerSideEncryption),
+		StorageClass:              s3types.StorageClass(i.StorageClass),
+		Tagging:                   i.Tagging,
+		WebsiteRedirectLocation:   i.WebsiteRedirectLocation,
 	}
 	if i.ChecksumAlgorithm != "" {
 		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(i.ChecksumAlgorithm)
 	} else {
 		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(checksumAlgorithm)
 	}
-	if i.ObjectLockLegalHoldStatus != "" {
-		input.ObjectLockLegalHoldStatus = s3types.ObjectLockLegalHoldStatus(i.ObjectLockLegalHoldStatus)
-	}
-	if i.ObjectLockMode != "" {
-		input.ObjectLockMode = s3types.ObjectLockMode(i.ObjectLockMode)
-	}
-	if i.RequestPayer != "" {
-		input.RequestPayer = s3types.RequestPayer(i.RequestPayer)
-	}
-	if i.ServerSideEncryption != "" {
-		input.ServerSideEncryption = s3types.ServerSideEncryption(i.ServerSideEncryption)
-	}
-	if i.StorageClass != "" {
-		input.StorageClass = s3types.StorageClass(i.StorageClass)
-	}
-	input.BucketKeyEnabled = aws.Bool(i.BucketKeyEnabled)
-	input.CacheControl = nzstring(i.CacheControl)
-	input.ContentDisposition = nzstring(i.ContentDisposition)
-	input.ContentEncoding = nzstring(i.ContentEncoding)
-	input.ContentLanguage = nzstring(i.ContentLanguage)
-	input.ContentType = nzstring(i.ContentType)
-	input.ExpectedBucketOwner = nzstring(i.ExpectedBucketOwner)
-	input.GrantFullControl = nzstring(i.GrantFullControl)
-	input.GrantRead = nzstring(i.GrantRead)
-	input.GrantReadACP = nzstring(i.GrantReadACP)
-	input.GrantWriteACP = nzstring(i.GrantWriteACP)
-	input.Metadata = i.Metadata
-	input.SSECustomerAlgorithm = nzstring(i.SSECustomerAlgorithm)
-	input.SSECustomerKey = nzstring(i.SSECustomerKey)
-	input.SSEKMSEncryptionContext = nzstring(i.SSEKMSEncryptionContext)
-	input.SSEKMSKeyId = nzstring(i.SSEKMSKeyID)
-	input.Tagging = nzstring(i.Tagging)
-	input.WebsiteRedirectLocation = nzstring(i.WebsiteRedirectLocation)
-	input.Expires = nztime(i.Expires)
-	input.ObjectLockRetainUntilDate = nztime(i.ObjectLockRetainUntilDate)
+
 	return input
 }
 
 func (i UploadObjectInput) mapCreateMultipartUploadInput(checksumAlgorithm types.ChecksumAlgorithm) *s3.CreateMultipartUploadInput {
 	input := &s3.CreateMultipartUploadInput{
-		Bucket: aws.String(i.Bucket),
-		Key:    aws.String(i.Key),
-	}
-	if i.ACL != "" {
-		input.ACL = s3types.ObjectCannedACL(i.ACL)
+		Bucket:                    i.Bucket,
+		Key:                       i.Key,
+		ACL:                       s3types.ObjectCannedACL(i.ACL),
+		BucketKeyEnabled:          i.BucketKeyEnabled,
+		CacheControl:              i.CacheControl,
+		ContentDisposition:        i.ContentDisposition,
+		ContentEncoding:           i.ContentEncoding,
+		ContentLanguage:           i.ContentLanguage,
+		ContentType:               i.ContentType,
+		ExpectedBucketOwner:       i.ExpectedBucketOwner,
+		Expires:                   i.Expires,
+		GrantFullControl:          i.GrantFullControl,
+		GrantRead:                 i.GrantRead,
+		GrantReadACP:              i.GrantReadACP,
+		GrantWriteACP:             i.GrantWriteACP,
+		Metadata:                  i.Metadata,
+		ObjectLockLegalHoldStatus: s3types.ObjectLockLegalHoldStatus(i.ObjectLockLegalHoldStatus),
+		ObjectLockMode:            s3types.ObjectLockMode(i.ObjectLockMode),
+		ObjectLockRetainUntilDate: i.ObjectLockRetainUntilDate,
+		RequestPayer:              s3types.RequestPayer(i.RequestPayer),
+		SSECustomerAlgorithm:      i.SSECustomerAlgorithm,
+		SSECustomerKey:            i.SSECustomerKey,
+		SSECustomerKeyMD5:         i.SSECustomerKeyMD5,
+		SSEKMSEncryptionContext:   i.SSEKMSEncryptionContext,
+		SSEKMSKeyId:               i.SSEKMSKeyID,
+		ServerSideEncryption:      s3types.ServerSideEncryption(i.ServerSideEncryption),
+		StorageClass:              s3types.StorageClass(i.StorageClass),
+		Tagging:                   i.Tagging,
+		WebsiteRedirectLocation:   i.WebsiteRedirectLocation,
 	}
 	if i.ChecksumAlgorithm != "" {
 		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(i.ChecksumAlgorithm)
 	} else {
 		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(checksumAlgorithm)
 	}
-	if i.ObjectLockLegalHoldStatus != "" {
-		input.ObjectLockLegalHoldStatus = s3types.ObjectLockLegalHoldStatus(i.ObjectLockLegalHoldStatus)
-	}
-	if i.ObjectLockMode != "" {
-		input.ObjectLockMode = s3types.ObjectLockMode(i.ObjectLockMode)
-	}
-	if i.RequestPayer != "" {
-		input.RequestPayer = s3types.RequestPayer(i.RequestPayer)
-	}
-	if i.ServerSideEncryption != "" {
-		input.ServerSideEncryption = s3types.ServerSideEncryption(i.ServerSideEncryption)
-	}
-	if i.StorageClass != "" {
-		input.StorageClass = s3types.StorageClass(i.StorageClass)
-	}
-	input.BucketKeyEnabled = aws.Bool(i.BucketKeyEnabled)
-	input.CacheControl = nzstring(i.CacheControl)
-	input.ContentDisposition = nzstring(i.ContentDisposition)
-	input.ContentEncoding = nzstring(i.ContentEncoding)
-	input.ContentLanguage = nzstring(i.ContentLanguage)
-	input.ContentType = nzstring(i.ContentType)
-	input.ExpectedBucketOwner = nzstring(i.ExpectedBucketOwner)
-	input.GrantFullControl = nzstring(i.GrantFullControl)
-	input.GrantRead = nzstring(i.GrantRead)
-	input.GrantReadACP = nzstring(i.GrantReadACP)
-	input.GrantWriteACP = nzstring(i.GrantWriteACP)
-	input.Metadata = i.Metadata
-	input.SSECustomerAlgorithm = nzstring(i.SSECustomerAlgorithm)
-	input.SSECustomerKey = nzstring(i.SSECustomerKey)
-	input.SSEKMSEncryptionContext = nzstring(i.SSEKMSEncryptionContext)
-	input.SSEKMSKeyId = nzstring(i.SSEKMSKeyID)
-	input.Tagging = nzstring(i.Tagging)
-	input.WebsiteRedirectLocation = nzstring(i.WebsiteRedirectLocation)
-	input.Expires = nztime(i.Expires)
-	input.ObjectLockRetainUntilDate = nztime(i.ObjectLockRetainUntilDate)
 	return input
 }
 
 func (i UploadObjectInput) mapCompleteMultipartUploadInput(uploadID *string, completedParts completedParts) *s3.CompleteMultipartUploadInput {
 	input := &s3.CompleteMultipartUploadInput{
-		Bucket:   aws.String(i.Bucket),
-		Key:      aws.String(i.Key),
-		UploadId: uploadID,
+		Bucket:               i.Bucket,
+		Key:                  i.Key,
+		UploadId:             uploadID,
+		ChecksumCRC32:        i.ChecksumCRC32,
+		ChecksumCRC32C:       i.ChecksumCRC32C,
+		ChecksumCRC64NVME:    i.ChecksumCRC64NVME,
+		ChecksumSHA1:         i.ChecksumSHA1,
+		ChecksumSHA256:       i.ChecksumSHA256,
+		ExpectedBucketOwner:  i.ExpectedBucketOwner,
+		IfMatch:              i.IfMatch,
+		IfNoneMatch:          i.IfNoneMatch,
+		RequestPayer:         s3types.RequestPayer(i.RequestPayer),
+		SSECustomerAlgorithm: i.SSECustomerAlgorithm,
+		SSECustomerKey:       i.SSECustomerKey,
+		SSECustomerKeyMD5:    i.SSECustomerKeyMD5,
 	}
-	if i.RequestPayer != "" {
-		input.RequestPayer = s3types.RequestPayer(i.RequestPayer)
-	}
-	input.ExpectedBucketOwner = nzstring(i.ExpectedBucketOwner)
-	input.SSECustomerAlgorithm = nzstring(i.SSECustomerAlgorithm)
-	input.SSECustomerKey = nzstring(i.SSECustomerKey)
 	var parts []s3types.CompletedPart
 	for _, part := range completedParts {
 		parts = append(parts, part.MapCompletedPart())
@@ -507,11 +580,16 @@ func (i UploadObjectInput) mapCompleteMultipartUploadInput(uploadID *string, com
 
 func (i UploadObjectInput) mapUploadPartInput(body io.Reader, partNum *int32, uploadID *string, checksumAlgorithm types.ChecksumAlgorithm) *s3.UploadPartInput {
 	input := &s3.UploadPartInput{
-		Bucket:     aws.String(i.Bucket),
-		Key:        aws.String(i.Key),
-		Body:       body,
-		PartNumber: partNum,
-		UploadId:   uploadID,
+		Bucket:               i.Bucket,
+		Key:                  i.Key,
+		Body:                 body,
+		PartNumber:           partNum,
+		UploadId:             uploadID,
+		ExpectedBucketOwner:  i.ExpectedBucketOwner,
+		RequestPayer:         s3types.RequestPayer(i.RequestPayer),
+		SSECustomerAlgorithm: i.SSECustomerAlgorithm,
+		SSECustomerKey:       i.SSECustomerKey,
+		SSECustomerKeyMD5:    i.SSECustomerKeyMD5,
 	}
 	if i.ChecksumAlgorithm != "" {
 		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(i.ChecksumAlgorithm)
@@ -519,20 +597,16 @@ func (i UploadObjectInput) mapUploadPartInput(body io.Reader, partNum *int32, up
 		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(checksumAlgorithm)
 	}
 
-	if i.RequestPayer != "" {
-		input.RequestPayer = s3types.RequestPayer(i.RequestPayer)
-	}
-	input.ExpectedBucketOwner = nzstring(i.ExpectedBucketOwner)
-	input.SSECustomerAlgorithm = nzstring(i.SSECustomerAlgorithm)
-	input.SSECustomerKey = nzstring(i.SSECustomerKey)
 	return input
 }
 
 func (i *UploadObjectInput) mapAbortMultipartUploadInput(uploadID *string) *s3.AbortMultipartUploadInput {
 	input := &s3.AbortMultipartUploadInput{
-		Bucket:   aws.String(i.Bucket),
-		Key:      aws.String(i.Key),
-		UploadId: uploadID,
+		Bucket:              i.Bucket,
+		Key:                 i.Key,
+		UploadId:            uploadID,
+		ExpectedBucketOwner: i.ExpectedBucketOwner,
+		RequestPayer:        s3types.RequestPayer(i.RequestPayer),
 	}
 	return input
 }
@@ -540,16 +614,11 @@ func (i *UploadObjectInput) mapAbortMultipartUploadInput(uploadID *string) *s3.A
 // UploadObjectOutput represents a response from the PutObject() call. It contains common fields
 // of s3 PutObject and CompleteMultipartUpload output
 type UploadObjectOutput struct {
-	// The ID for a multipart upload to S3. In the case of an error the error
-	// can be cast to the MultiUploadFailure interface to extract the upload ID.
-	// Will be empty string if multipart upload was not used, and the object
-	// was uploaded as a single PutObject call.
-	UploadID *string
+	// The bucket where the newly created object is put
+	Bucket *string
 
-	// The list of parts that were uploaded and their checksums. Will be empty
-	// if multipart upload was not used, and the object was uploaded as a
-	// single PutObject call.
-	CompletedParts []types.CompletedPart
+	// The object key of the newly created object.
+	Key *string
 
 	// Indicates whether the uploaded object uses an S3 Bucket Key for server-side
 	// encryption with Amazon Web Services KMS (SSE-KMS).
@@ -561,14 +630,24 @@ type UploadObjectOutput struct {
 	// The base64-encoded, 32-bit CRC32C checksum of the object.
 	ChecksumCRC32C *string
 
+	// The Base64 encoded, 64-bit CRC64NVME checksum of the object.
+	ChecksumCRC64NVME *string
+
 	// The base64-encoded, 160-bit SHA-1 digest of the object.
 	ChecksumSHA1 *string
 
 	// The base64-encoded, 256-bit SHA-256 digest of the object.
 	ChecksumSHA256 *string
 
-	// Total length of the object
-	ContentLength *int64
+	// This header specifies the checksum type of the object, which determines how
+	// part-level checksums are combined to create an object-level checksum for
+	// multipart objects. For PutObject uploads, the checksum type is always
+	// FULL_OBJECT . You can use this header as a data integrity check to verify that
+	// the checksum type that is received is the same checksum that was specified. For
+	// more information, see [Checking object integrity]in the Amazon S3 User Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumType types.ChecksumType
 
 	// Entity tag for the uploaded object.
 	ETag *string
@@ -577,15 +656,47 @@ type UploadObjectOutput struct {
 	// (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
 	Expiration *string
 
-	// The bucket where the newly created object is put
-	Bucket *string
+	// The URI that identifies the newly created object.
+	Location *string
 
-	// The object key of the newly created object.
-	Key *string
+	// The ID for a multipart upload to S3. In the case of an error the error
+	// can be cast to the MultiUploadFailure interface to extract the upload ID.
+	// Will be empty string if multipart upload was not used, and the object
+	// was uploaded as a single PutObject call.
+	UploadID *string
+
+	// The list of parts that were uploaded and their checksums. Will be empty
+	// if multipart upload was not used, and the object was uploaded as a
+	// single PutObject call.
+	CompletedParts []types.CompletedPart
+
+	// Total length of the object
+	ContentLength *int64
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged
+
+	// If server-side encryption with a customer-provided encryption key was
+	// requested, the response will include this header to confirm the encryption
+	// algorithm that's used.
+	//
+	// This functionality is not supported for directory buckets.
+	SSECustomerAlgorithm *string
+
+	// If server-side encryption with a customer-provided encryption key was
+	// requested, the response will include this header to provide the round-trip
+	// message integrity verification of the customer-provided encryption key.
+	//
+	// This functionality is not supported for directory buckets.
+	SSECustomerKeyMD5 *string
+
+	// If present, indicates the Amazon Web Services KMS Encryption Context to use for
+	// object encryption. The value of this header is a Base64 encoded string of a
+	// UTF-8 encoded JSON, which contains the encryption context as key-value pairs.
+	// This value is stored as object metadata and automatically gets passed on to
+	// Amazon Web Services KMS for future GetObject operations on this object.
+	SSEKMSEncryptionContext *string
 
 	// If present, specifies the ID of the Amazon Web Services Key Management Service
 	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
@@ -607,42 +718,50 @@ type UploadObjectOutput struct {
 	ResultMetadata smithymiddleware.Metadata
 }
 
-func (o *UploadObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, bucket, key string, contentLength int64) {
-	o.BucketKeyEnabled = aws.ToBool(out.BucketKeyEnabled)
-	o.ChecksumCRC32 = aws.ToString(out.ChecksumCRC32)
-	o.ChecksumCRC32C = aws.ToString(out.ChecksumCRC32C)
-	o.ChecksumSHA1 = aws.ToString(out.ChecksumSHA1)
-	o.ChecksumSHA256 = aws.ToString(out.ChecksumSHA256)
-	o.ContentLength = contentLength
-	o.ETag = aws.ToString(out.ETag)
-	o.Expiration = aws.ToString(out.Expiration)
+func (o *UploadObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, bucket, key *string, contentLength int64) {
 	o.Bucket = bucket
 	o.Key = key
+	o.BucketKeyEnabled = out.BucketKeyEnabled
+	o.ChecksumCRC32 = out.ChecksumCRC32
+	o.ChecksumCRC32C = out.ChecksumCRC32C
+	o.ChecksumCRC64NVME = out.ChecksumCRC64NVME
+	o.ChecksumSHA1 = out.ChecksumSHA1
+	o.ChecksumSHA256 = out.ChecksumSHA256
+	o.ChecksumType = types.ChecksumType(out.ChecksumType)
+	o.ContentLength = aws.Int64(contentLength)
+	o.ETag = out.ETag
+	o.Expiration = out.Expiration
 	o.RequestCharged = types.RequestCharged(out.RequestCharged)
-	o.SSEKMSKeyID = aws.ToString(out.SSEKMSKeyId)
+	o.SSECustomerAlgorithm = out.SSECustomerAlgorithm
+	o.SSECustomerKeyMD5 = out.SSECustomerKeyMD5
+	o.SSEKMSEncryptionContext = out.SSEKMSEncryptionContext
+	o.SSEKMSKeyID = out.SSEKMSKeyId
 	o.ServerSideEncryption = types.ServerSideEncryption(out.ServerSideEncryption)
-	o.VersionID = aws.ToString(out.VersionId)
+	o.VersionID = out.VersionId
 	o.ResultMetadata = out.ResultMetadata.Clone()
 }
 
-func (o *UploadObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.CompleteMultipartUploadOutput, bucket, uploadID string, contentLength int64, completedParts completedParts) {
+func (o *UploadObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.CompleteMultipartUploadOutput, bucket, uploadID *string, contentLength int64, completedParts completedParts) {
+	o.Bucket = bucket
+	o.Key = out.Key
 	o.UploadID = uploadID
 	o.CompletedParts = completedParts
-	o.BucketKeyEnabled = aws.ToBool(out.BucketKeyEnabled)
-	o.ChecksumCRC32 = aws.ToString(out.ChecksumCRC32)
-	o.ChecksumCRC32C = aws.ToString(out.ChecksumCRC32C)
-	o.ChecksumSHA1 = aws.ToString(out.ChecksumSHA1)
-	o.ChecksumSHA256 = aws.ToString(out.ChecksumSHA256)
-	o.ContentLength = contentLength
-	o.ETag = aws.ToString(out.ETag)
-	o.Expiration = aws.ToString(out.Expiration)
-	o.Bucket = bucket
-	o.Key = aws.ToString(out.Key)
+	o.BucketKeyEnabled = out.BucketKeyEnabled
+	o.ChecksumCRC32 = out.ChecksumCRC32
+	o.ChecksumCRC32C = out.ChecksumCRC32C
+	o.ChecksumCRC64NVME = out.ChecksumCRC64NVME
+	o.ChecksumSHA1 = out.ChecksumSHA1
+	o.ChecksumSHA256 = out.ChecksumSHA256
+	o.ChecksumType = types.ChecksumType(out.ChecksumType)
+	o.ContentLength = aws.Int64(contentLength)
+	o.ETag = out.ETag
+	o.Expiration = out.Expiration
+	o.Location = out.Location
 	o.RequestCharged = types.RequestCharged(out.RequestCharged)
-	o.SSEKMSKeyID = aws.ToString(out.SSEKMSKeyId)
+	o.SSEKMSKeyID = out.SSEKMSKeyId
 	o.ServerSideEncryption = types.ServerSideEncryption(out.ServerSideEncryption)
-	o.VersionID = aws.ToString(out.VersionId)
-	o.ResultMetadata = out.ResultMetadata
+	o.VersionID = out.VersionId
+	o.ResultMetadata = out.ResultMetadata.Clone()
 }
 
 // UploadObject uploads an object to S3, intelligently buffering large
@@ -729,7 +848,7 @@ func (u *uploader) initSize() error {
 		}
 		u.objectSize = n
 	default:
-		if l := u.in.ContentLength; l > 0 {
+		if l := aws.ToInt64(u.in.ContentLength); l > 0 {
 			u.objectSize = l
 		}
 	}
@@ -887,7 +1006,7 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuf
 	}
 
 	var out UploadObjectOutput
-	out.mapFromCompleteMultipartUploadOutput(completeOut, aws.ToString(params.Bucket), aws.ToString(u.uploadID), u.progressEmitter.bytesTransferred.Load(), u.parts)
+	out.mapFromCompleteMultipartUploadOutput(completeOut, params.Bucket, u.uploadID, u.progressEmitter.bytesTransferred.Load(), u.parts)
 
 	u.progressEmitter.Complete(ctx, &out)
 	return &out, nil
@@ -994,6 +1113,7 @@ func (u *multiUploader) complete(ctx context.Context, clientOptions ...func(*s3.
 	resp, err := u.options.S3.CompleteMultipartUpload(ctx, params, clientOptions...)
 	if err != nil {
 		u.seterr(err)
+		log.Printf("failed to complete multipart upload for upload ID %v: %v", u.uploadID, err)
 		u.fail(ctx)
 	}
 

@@ -5,29 +5,30 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 	"sync"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 // UploadDirectoryInput represents a request to the UploadDirectory() call
 type UploadDirectoryInput struct {
 	// Bucket where objects are uploaded to
-	Bucket string
+	Bucket *string
 
 	// The source directory to upload
-	Source string
+	Source *string
 
 	// Whether to follow symbolic links when traversing the file tree.
-	FollowSymbolicLinks bool
+	FollowSymbolicLinks *bool
 
 	// Whether to recursively upload directories. If set to false by
 	// default, only top level files under source folder will be uplaoded;
 	// otherwise all files under subfolders will be uploaded
-	Recursive bool
+	Recursive *bool
 
 	// The S3 key prefix to use for each object. If not provided, files
 	// will be uploaded to the root of the bucket
-	KeyPrefix string
+	KeyPrefix *string
 
 	// A callback func to allow users to filter out unwanted files
 	// according to bool returned from the function
@@ -37,10 +38,11 @@ type UploadDirectoryInput struct {
 	// PutObjectInput that the S3 Transfer Manager generates.
 	Callback PutRequestCallback
 
-	// The s3 delimeter contatenating each object key based on local file separator
-	// and file's relative path. If a non-defualt delimiter is used, it can not be
-	// included in any subfolders or files, which will cause error otherwise
-	S3Delimiter string
+	// A callback function to allow users to control the upload behavior
+	// when there are failed objects. The directory upload will be terminated
+	// if its function returns non-nil error and will continue skipping current
+	// failed object if the function returns nil
+	FailurePolicy UploadDirectoryFailurePolicy
 }
 
 // FileFilter is the callback to allow users to filter out unwanted files.
@@ -58,10 +60,41 @@ type PutRequestCallback interface {
 	UpdateRequest(*UploadObjectInput)
 }
 
+// UploadDirectoryFailurePolicy is a callback to allow users to control the
+// upload behavior when there are failed objects. It is invoked for every failed object
+type UploadDirectoryFailurePolicy interface {
+	OnUploadFailed(*UploadDirectoryInput, *UploadObjectInput, error) error
+}
+
+// TerminateUploadPolicy implements UploadDirectoryFailurePolicy to cancel all other ongoing
+// objects upload and terminate the upload directory call
+type TerminateUploadPolicy struct{}
+
+// OnUploadFailed returns the initial err
+func (TerminateUploadPolicy) OnUploadFailed(directoryInput *UploadDirectoryInput, objectInput *UploadObjectInput, err error) error {
+	return err
+}
+
+// IgnoreUploadFailurePolicy implements the UploadDirectoryFailurePolicy to ignore single object upload error
+// and continue uploading other objects
+type IgnoreUploadFailurePolicy struct{}
+
+// OnUploadFailed ignores input error and return nil
+func (IgnoreUploadFailurePolicy) OnUploadFailed(*UploadDirectoryInput, *UploadObjectInput, error) error {
+	return nil
+}
+
 // UploadDirectoryOutput represents a response from the UploadDirectory() call
 type UploadDirectoryOutput struct {
 	// Total number of objects successfully uploaded
+	// this value might not be the real number of success if user passed a customized
+	// failure policy in input
 	ObjectsUploaded int
+
+	// Total number of objects failed to upload
+	// this value might not be the real number of failure is user passed a customized
+	// failure policy in input
+	ObjectsFailed int
 }
 
 // UploadDirectory traverses a local directory recursively/non-recursively and intelligently
@@ -72,12 +105,12 @@ type UploadDirectoryOutput struct {
 // upload. These options are copies of the original Options instance, the client of which UploadDirectory is called from.
 // Modifying the options will not impact the original Client and Options instance.
 func (c *Client) UploadDirectory(ctx context.Context, input *UploadDirectoryInput, opts ...func(*Options)) (*UploadDirectoryOutput, error) {
-	fileInfo, err := os.Stat(input.Source)
+	fileInfo, err := os.Stat(aws.ToString(input.Source))
 	if err != nil {
 		return nil, fmt.Errorf("error when getting source info: %v", err)
 	}
 	if !fileInfo.IsDir() {
-		return nil, fmt.Errorf("the source path %s doesn't point to a valid directory", input.Source)
+		return nil, fmt.Errorf("the source path %s doesn't point to a valid directory", aws.ToString(input.Source))
 	}
 
 	i := directoryUploader{c: c, in: input, options: c.options.Copy()}
@@ -89,11 +122,13 @@ func (c *Client) UploadDirectory(ctx context.Context, input *UploadDirectoryInpu
 }
 
 type directoryUploader struct {
-	c       *Client
-	options Options
-	in      *UploadDirectoryInput
+	c             *Client
+	options       Options
+	in            *UploadDirectoryInput
+	failurePolicy UploadDirectoryFailurePolicy
 
 	filesUploaded int
+	filesFailed   int
 	traversed     map[string]interface{}
 
 	err error
@@ -114,10 +149,10 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 		go u.uploadFile(ctx, ch)
 	}
 
-	if u.in.Recursive {
-		u.traverse(u.in.Source, u.in.KeyPrefix, ch)
+	if aws.ToBool(u.in.Recursive) {
+		u.traverse(aws.ToString(u.in.Source), aws.ToString(u.in.KeyPrefix), ch)
 	} else {
-		files, err := u.traverseFolder(u.in.Source)
+		files, err := u.traverseFolder(aws.ToString(u.in.Source))
 		if err != nil {
 			return nil, err
 		}
@@ -127,7 +162,7 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 				break
 			}
 
-			path := filepath.Join(u.in.Source, f)
+			path := filepath.Join(aws.ToString(u.in.Source), f)
 			absPath, err := u.getAbsPath(path)
 			if err != nil {
 				u.setErr(fmt.Errorf("error when getting abs path of file %s: %v", path, err))
@@ -148,14 +183,10 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 			if u.in.Filter != nil && !u.in.Filter.FilterFile(path) {
 				continue
 			}
-			if u.in.S3Delimiter != "/" && strings.Contains(f, u.in.S3Delimiter) {
-				u.setErr(fmt.Errorf("file %s contains delimiter %s", f, u.in.S3Delimiter))
-				break
-			}
-			if u.in.KeyPrefix == "" {
+			if kp := aws.ToString(u.in.KeyPrefix); kp == "" {
 				ch <- fileEntry{f, absPath}
 			} else {
-				ch <- fileEntry{u.in.KeyPrefix + u.in.S3Delimiter + f, absPath}
+				ch <- fileEntry{kp + "/" + f, absPath}
 			}
 		}
 	}
@@ -169,17 +200,19 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 
 	out := &UploadDirectoryOutput{
 		ObjectsUploaded: u.filesUploaded,
+		ObjectsFailed:   u.filesFailed,
 	}
 	u.emitter.Complete(ctx, out)
 	return out, nil
 }
 
 func (u *directoryUploader) init() {
-	if u.in.S3Delimiter == "" {
-		u.in.S3Delimiter = "/"
-	}
-
 	u.traversed = make(map[string]interface{})
+
+	u.failurePolicy = TerminateUploadPolicy{}
+	if u.in.FailurePolicy != nil {
+		u.failurePolicy = u.in.FailurePolicy
+	}
 
 	u.emitter = &directoryObjectsProgressEmitter{
 		Listeners: u.options.DirectoryProgressListeners,
@@ -207,12 +240,12 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileEntry) 
 	}
 
 	var key string
-	if path == u.in.Source {
+	if path == aws.ToString(u.in.Source) {
 		key = keyPrefix
 	} else if keyPrefix == "" {
 		key = filepath.Base(path)
 	} else {
-		key = keyPrefix + u.in.S3Delimiter + filepath.Base(path)
+		key = keyPrefix + "/" + filepath.Base(path)
 	}
 	fileInfo, err := os.Lstat(absPath)
 	if err != nil {
@@ -226,21 +259,11 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileEntry) 
 			return
 		}
 		for _, f := range subFiles {
-			if d := u.in.S3Delimiter; d != "/" && strings.Contains(f, d) {
-				u.setErr(fmt.Errorf("file %s contains delimiter %s", f, d))
-				return
-			}
 			u.traverse(filepath.Join(path, f), key, ch)
 		}
 	} else {
 		if u.in.Filter != nil && !u.in.Filter.FilterFile(path) {
 			return
-		}
-		if u.in.S3Delimiter != "/" {
-			if n, d := filepath.Base(path), u.in.S3Delimiter; strings.Contains(n, d) {
-				u.setErr(fmt.Errorf("file %s contains delimiter %s", n, d))
-				return
-			}
 		}
 		ch <- fileEntry{key, absPath}
 	}
@@ -255,7 +278,7 @@ func (u *directoryUploader) getAbsPath(path string) (string, error) {
 	}
 
 	if fileInfo.Mode()&os.ModeSymlink == os.ModeSymlink {
-		if !u.in.FollowSymbolicLinks {
+		if !aws.ToBool(u.in.FollowSymbolicLinks) {
 			return "", nil
 		}
 		path, err = u.traverseSymlink(path)
@@ -342,7 +365,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		}
 		input := &UploadObjectInput{
 			Bucket: u.in.Bucket,
-			Key:    data.key,
+			Key:    aws.String(data.key),
 			Body:   f,
 		}
 		if u.in.Callback != nil {
@@ -350,7 +373,13 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		}
 		out, err := u.c.UploadObject(ctx, input)
 		if err != nil {
-			u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
+			err = u.failurePolicy.OnUploadFailed(u.in, input, err)
+			if err != nil {
+				u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
+			} else {
+				// this failed object is ignored, just increase the failure count
+				u.incrFilesFailed(1)
+			}
 			continue
 		}
 
@@ -358,7 +387,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 			u.emitter.Start(ctx, u.in)
 		})
 		u.incrFilesUploaded(1)
-		u.emitter.ObjectsTransferred(ctx, out.ContentLength)
+		u.emitter.ObjectsTransferred(ctx, aws.ToInt64(out.ContentLength))
 	}
 }
 
@@ -367,6 +396,13 @@ func (u *directoryUploader) incrFilesUploaded(n int) {
 	defer u.mu.Unlock()
 
 	u.filesUploaded += n
+}
+
+func (u *directoryUploader) incrFilesFailed(n int) {
+	u.mu.Lock()
+	defer u.mu.Unlock()
+
+	u.filesFailed += n
 }
 
 func (u *directoryUploader) setErr(err error) {

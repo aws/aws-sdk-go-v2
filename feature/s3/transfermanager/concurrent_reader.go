@@ -35,7 +35,7 @@ type concurrentReader struct {
 	written      int64
 	partSize     int64
 	invocations  int32
-	etag         string
+	etag         *string
 
 	ctx context.Context
 	m   sync.Mutex
@@ -136,12 +136,27 @@ func (r *concurrentReader) downloadChunk(ctx context.Context, chunk getChunk, cl
 		params.Range = aws.String(chunk.withRange)
 	}
 	if params.VersionId == nil {
-		params.IfMatch = aws.String(r.etag)
+		params.IfMatch = r.etag
 	}
 
 	out, err := r.options.S3.GetObject(ctx, params, clientOptions...)
 	if err != nil {
 		return nil, err
+	}
+
+	if params.Range != nil && out.ContentRange != nil {
+		reqStart, reqEnd, err := getReqRange(aws.ToString(params.Range))
+		if err != nil {
+			return nil, err
+		}
+		respStart, respEnd, err := getRespRange(aws.ToString(out.ContentRange))
+		if err != nil {
+			return nil, err
+		}
+		// don't validate first chunk since object size is unknown when getting that
+		if reqStart != 0 && (reqStart != respStart || reqEnd != respEnd) {
+			return nil, fmt.Errorf("range mismatch between request %d-%d and response %d-%d", reqStart, reqEnd, respStart, respEnd)
+		}
 	}
 
 	defer out.Body.Close()

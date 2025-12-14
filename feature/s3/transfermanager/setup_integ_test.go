@@ -251,8 +251,8 @@ func testPutObject(t *testing.T, bucket string, testData putObjectTestData, opts
 
 	_, err := s3TransferManagerClient.UploadObject(context.Background(),
 		&UploadObjectInput{
-			Bucket: bucket,
-			Key:    key,
+			Bucket: aws.String(bucket),
+			Key:    aws.String(key),
 			Body:   testData.Body,
 		}, opts...)
 	if err != nil {
@@ -302,8 +302,8 @@ func testGetObject(t *testing.T, bucket string, testData getObjectTestData) {
 
 	out, err := s3TransferManagerClient.GetObject(context.Background(),
 		&GetObjectInput{
-			Bucket: bucket,
-			Key:    key,
+			Bucket: aws.String(bucket),
+			Key:    aws.String(key),
 		}, testData.OptFns...)
 
 	if err != nil {
@@ -359,8 +359,8 @@ func testDownloadObject(t *testing.T, bucket string, testData downloadObjectTest
 	w := types.NewWriteAtBuffer(make([]byte, 0))
 	_, err = s3TransferManagerClient.DownloadObject(context.Background(),
 		&DownloadObjectInput{
-			Bucket:   bucket,
-			Key:      key,
+			Bucket:   aws.String(bucket),
+			Key:      aws.String(key),
 			WriterAt: w,
 		}, testData.OptFns...)
 	if err != nil {
@@ -388,7 +388,6 @@ type uploadDirectoryTestData struct {
 	FilesSize           map[string]int64
 	Source              string
 	Recursive           bool
-	Delimiter           string
 	KeyPrefix           string
 	ExpectFilesUploaded int
 	ExpectKeys          []string
@@ -399,9 +398,6 @@ func testUploadDirectory(t *testing.T, bucket string, testData uploadDirectoryTe
 	_, filename, _, _ := runtime.Caller(0)
 	root := filepath.Join(filepath.Dir(filename), "testdata")
 	delimiter := "/"
-	if testData.Delimiter != "" {
-		delimiter = testData.Delimiter
-	}
 	expectObjects := map[string][]byte{}
 	source := filepath.Join(root, testData.Source)
 	if err := os.MkdirAll(source, os.ModePerm); err != nil {
@@ -434,11 +430,10 @@ func testUploadDirectory(t *testing.T, bucket string, testData uploadDirectoryTe
 	}
 
 	out, err := s3TransferManagerClient.UploadDirectory(context.Background(), &UploadDirectoryInput{
-		Bucket:      bucket,
-		Source:      source,
-		Recursive:   testData.Recursive,
-		S3Delimiter: testData.Delimiter,
-		KeyPrefix:   testData.KeyPrefix,
+		Bucket:    aws.String(bucket),
+		Source:    aws.String(source),
+		Recursive: aws.Bool(testData.Recursive),
+		KeyPrefix: aws.String(testData.KeyPrefix),
 	})
 	if err != nil {
 		if len(testData.ExpectError) == 0 {
@@ -482,7 +477,6 @@ func testUploadDirectory(t *testing.T, bucket string, testData uploadDirectoryTe
 
 type downloadDirectoryTestData struct {
 	ObjectsSize             map[string]int64
-	Delimiter               string
 	KeyPrefix               string
 	ExpectObjectsDownloaded int
 	ExpectFiles             []string
@@ -494,10 +488,7 @@ func testDownloadDirectory(t *testing.T, bucket string, testData downloadDirecto
 	dst := filepath.Join(filepath.Dir(filename), "testdata", "integ")
 	defer os.RemoveAll(dst)
 
-	delimiter := testData.Delimiter
-	if delimiter == "" {
-		delimiter = "/"
-	}
+	delimiter := "/"
 	keyprefix := testData.KeyPrefix
 	if keyprefix != "" && !strings.HasSuffix(keyprefix, delimiter) {
 		keyprefix = keyprefix + delimiter
@@ -518,15 +509,14 @@ func testDownloadDirectory(t *testing.T, bucket string, testData downloadDirecto
 		if err != nil {
 			t.Fatalf("error when putting object %s", key)
 		}
-		file := filepath.Join(strings.ReplaceAll(strings.TrimPrefix(key, keyprefix), delimiter, string(os.PathSeparator)))
+		file := strings.ReplaceAll(strings.TrimPrefix(key, keyprefix), delimiter, string(os.PathSeparator))
 		expectFiles[file] = fileBuf
 	}
 
 	out, err := s3TransferManagerClient.DownloadDirectory(context.Background(), &DownloadDirectoryInput{
-		Bucket:      bucket,
-		Destination: dst,
-		KeyPrefix:   testData.KeyPrefix,
-		S3Delimiter: testData.Delimiter,
+		Bucket:      aws.String(bucket),
+		Destination: aws.String(dst),
+		KeyPrefix:   aws.String(testData.KeyPrefix),
 	})
 	if err != nil {
 		if len(testData.ExpectError) == 0 {
@@ -548,7 +538,7 @@ func testDownloadDirectory(t *testing.T, bucket string, testData downloadDirecto
 		t.Errorf("expect %d objects downloaded, got %d", e, a)
 	}
 	for _, file := range testData.ExpectFiles {
-		f := strings.ReplaceAll(file, "/", string(os.PathSeparator))
+		f := strings.ReplaceAll(file, delimiter, string(os.PathSeparator))
 		path := filepath.Join(dst, f)
 		b, err := os.ReadFile(path)
 		if err != nil {

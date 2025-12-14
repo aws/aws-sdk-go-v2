@@ -425,3 +425,12 @@ func (b *WriteAtBuffer) Bytes() []byte {
 	defer b.m.Unlock()
 	return b.buf
 }
+
+// ChecksumType represents the transfer checksum type
+type ChecksumType string
+
+// Enum values for ChecksumType
+const (
+	ChecksumTypeComposite  ChecksumType = "COMPOSITE"
+	ChecksumTypeFullObject ChecksumType = "FULL_OBJECT"
+)

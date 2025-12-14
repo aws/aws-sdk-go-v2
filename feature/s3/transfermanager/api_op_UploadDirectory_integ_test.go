@@ -40,20 +40,6 @@ func TestInteg_UploadDirectory(t *testing.T) {
 			ExpectFilesUploaded: 3,
 			ExpectKeys:          []string{"bla/foo", "bla/to/bar", "bla/to/the/baz"},
 		},
-		"multi file recursive with prefix and custom delimiter": {
-			FilesSize: map[string]int64{
-				"foo":         2 * 1024 * 1024,
-				"to/bar":      10 * 1024 * 1024,
-				"to/the/baz":  20 * 1024 * 1024,
-				"too/the/zoo": 5 * 1024 * 1024,
-			},
-			Source:              "integ-dir",
-			Recursive:           true,
-			KeyPrefix:           "bla",
-			Delimiter:           "#",
-			ExpectFilesUploaded: 4,
-			ExpectKeys:          []string{"bla#foo", "bla#to#bar", "bla#to#the#baz", "bla#too#the#zoo"},
-		},
 	}
 
 	for name, c := range cases {
