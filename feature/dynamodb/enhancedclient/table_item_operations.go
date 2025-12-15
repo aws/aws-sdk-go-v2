@@ -217,7 +217,7 @@ func (t *Table[T]) Scan(ctx context.Context, expr expression.Expression, optFns 
 					continue
 				}
 
-				if !yield(ItemResult[T]{item: *i}) {
+				if !yield(ItemResult[T]{item: i}) {
 					return
 				}
 			}
@@ -272,7 +272,7 @@ func (t *Table[T]) Query(ctx context.Context, expr expression.Expression, optFns
 					continue
 				}
 
-				if !yield(ItemResult[T]{item: *i}) {
+				if !yield(ItemResult[T]{item: i}) {
 					return
 				}
 			}
@@ -283,4 +283,12 @@ func (t *Table[T]) Query(ctx context.Context, expr expression.Expression, optFns
 			}
 		}
 	}
+}
+
+func (t *Table[T]) CreateBatchWriteOperation() *BatchWriteOperation[T] {
+	return NewBatchWriteOperation[T](t)
+}
+
+func (t *Table[T]) CreateBatchGetOperation() *BatchGetOperation[T] {
+	return NewBatchGetOperation[T](t)
 }

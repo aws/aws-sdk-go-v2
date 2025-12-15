@@ -1,11 +1,11 @@
 package enhancedclient
 
 type ItemResult[T any] struct {
-	item T
+	item *T
 	err  error
 }
 
-func (it *ItemResult[T]) Item() T {
+func (it *ItemResult[T]) Item() *T {
 	return it.item
 }
 

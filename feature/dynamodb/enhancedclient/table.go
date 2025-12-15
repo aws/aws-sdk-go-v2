@@ -46,6 +46,18 @@ func NewTable[T any](client Client, fns ...func(options *TableOptions[T])) (*Tab
 	}, nil
 }
 
+func WithSchema[T any](schema *Schema[T]) func(options *TableOptions[T]) {
+	return func(options *TableOptions[T]) {
+		options.Schema = schema
+	}
+}
+
+func WithExtensionRegistry[T any](registry *ExtensionRegistry[T]) func(options *TableOptions[T]) {
+	return func(options *TableOptions[T]) {
+		options.ExtensionRegistry = registry
+	}
+}
+
 type resolverFn[T any] func(opts *TableOptions[T]) error
 
 func resolveDefaultSchema[T any](opts *TableOptions[T]) error {
