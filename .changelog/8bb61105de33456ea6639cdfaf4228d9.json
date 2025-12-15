@@ -1,8 +1,0 @@
-{
-    "id": "8bb61105-de33-456e-a663-9cdfaf4228d9",
-    "type": "feature",
-    "description": "Add support for SQ Dashboard Api",
-    "modules": [
-        "service/servicequotas"
-    ]
-}

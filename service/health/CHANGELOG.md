@@ -1,3 +1,7 @@
+# v1.36.0 (2025-12-15)
+
+* **Feature**: Updating Health API endpoint generation for dualstack only regions
+
 # v1.35.5 (2025-12-09)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "e3e32dd4-84be-4f19-8160-af7b48d5c2b3",
-    "type": "feature",
-    "description": "Support Customer Profiles Integration for AWS Entity Resolution",
-    "modules": [
-        "service/entityresolution"
-    ]
-}

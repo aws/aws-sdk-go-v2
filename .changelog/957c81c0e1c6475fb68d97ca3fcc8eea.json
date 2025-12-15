@@ -1,8 +1,0 @@
-{
-    "id": "957c81c0-e1c6-475f-b68d-97ca3fcc8eea",
-    "type": "feature",
-    "description": "Adds support for enabling detailed metrics on Route 53 Resolver endpoints using RniEnhancedMetricsEnabled and TargetNameServerMetricsEnabled in the CreateResolverEndpoint and UpdateResolverEndpoint APIs, providing enhanced visibility into Resolver endpoint and target name server performance.",
-    "modules": [
-        "service/route53resolver"
-    ]
-}

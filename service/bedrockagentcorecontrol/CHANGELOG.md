@@ -1,3 +1,7 @@
+# v1.15.2 (2025-12-15)
+
+* **Documentation**: This release updates broken links for AgentCore Policy APIs in the AWS CLI and SDK resources.
+
 # v1.15.1 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

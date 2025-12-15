@@ -1,8 +1,0 @@
-{
-    "id": "f6c5232e-6eb1-4db6-9eb0-c15420ccbb87",
-    "type": "feature",
-    "description": "Added support for Ad Decision Server Configuration enabling HTTP POST requests with custom bodies, headers, GZIP compression, and dynamic variables. No changes required for existing GET request configurations.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

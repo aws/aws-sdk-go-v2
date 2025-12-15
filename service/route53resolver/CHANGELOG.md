@@ -1,3 +1,7 @@
+# v1.42.0 (2025-12-15)
+
+* **Feature**: Adds support for enabling detailed metrics on Route 53 Resolver endpoints using RniEnhancedMetricsEnabled and TargetNameServerMetricsEnabled in the CreateResolverEndpoint and UpdateResolverEndpoint APIs, providing enhanced visibility into Resolver endpoint and target name server performance.
+
 # v1.41.5 (2025-12-09)
 
 * No change notes available for this release.

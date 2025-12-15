@@ -1,3 +1,7 @@
+# v1.34.0 (2025-12-15)
+
+* **Feature**: Add support for SQ Dashboard Api
+
 # v1.33.12 (2025-12-09)
 
 * No change notes available for this release.

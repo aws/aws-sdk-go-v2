@@ -1,8 +1,0 @@
-{
-    "id": "b4951817-cc7d-4c38-86c5-3bbc7a2889a9",
-    "type": "feature",
-    "description": "Updating Health API endpoint generation for dualstack only regions",
-    "modules": [
-        "service/health"
-    ]
-}

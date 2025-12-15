@@ -1,8 +1,0 @@
-{
-    "id": "db0da86c-59e8-42a6-8db1-4fbc2209bbe8",
-    "type": "documentation",
-    "description": "This release updates broken links for AgentCore Policy APIs in the AWS CLI and SDK resources.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

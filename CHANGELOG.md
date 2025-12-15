@@ -1,3 +1,32 @@
+# Release (2025-12-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.15.2](service/bedrockagentcorecontrol/CHANGELOG.md#v1152-2025-12-15)
+  * **Documentation**: This release updates broken links for AgentCore Policy APIs in the AWS CLI and SDK resources.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.63.0](service/cloudwatchlogs/CHANGELOG.md#v1630-2025-12-15)
+  * **Feature**: This release allows you to import your historical CloudTrail Lake data into CloudWatch with a few steps, enabling you to easily consolidate operational, security, and compliance data in one place.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.151.0](service/connect/CHANGELOG.md#v11510-2025-12-15)
+  * **Feature**: Amazon Connect now supports outbound WhatsApp contacts via the Send message block or StartOutboundChatContact API. Send proactive messages for surveys, reminders, and updates. Offer customers the option to switch to WhatsApp while in queue, eliminating hold time.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.277.0](service/ec2/CHANGELOG.md#v12770-2025-12-15)
+  * **Feature**: EC2 Capacity Manager now supports SpotTotalCount, SpotTotalInterruptions and SpotInterruptionRate metrics for both vCPU and instance units.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.26.0](service/entityresolution/CHANGELOG.md#v1260-2025-12-15)
+  * **Feature**: Support Customer Profiles Integration for AWS Entity Resolution
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.32.0](service/glacier/CHANGELOG.md#v1320-2025-12-15)
+  * **Feature**: Documentation updates for Amazon Glacier's maintenance mode
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.36.0](service/health/CHANGELOG.md#v1360-2025-12-15)
+  * **Feature**: Updating Health API endpoint generation for dualstack only regions
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.55.0](service/mediatailor/CHANGELOG.md#v1550-2025-12-15)
+  * **Feature**: Added support for Ad Decision Server Configuration enabling HTTP POST requests with custom bodies, headers, GZIP compression, and dynamic variables. No changes required for existing GET request configurations.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.42.0](service/route53resolver/CHANGELOG.md#v1420-2025-12-15)
+  * **Feature**: Adds support for enabling detailed metrics on Route 53 Resolver endpoints using RniEnhancedMetricsEnabled and TargetNameServerMetricsEnabled in the CreateResolverEndpoint and UpdateResolverEndpoint APIs, providing enhanced visibility into Resolver endpoint and target name server performance.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.94.0](service/s3/CHANGELOG.md#v1940-2025-12-15)
+  * **Feature**: This release adds support for the new optional field 'LifecycleExpirationDate' in S3 Inventory configurations.
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.34.0](service/servicequotas/CHANGELOG.md#v1340-2025-12-15)
+  * **Feature**: Add support for SQ Dashboard Api
+
 # Release (2025-12-12)
 
 ## Module Highlights

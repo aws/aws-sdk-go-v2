@@ -1,3 +1,7 @@
+# v1.63.0 (2025-12-15)
+
+* **Feature**: This release allows you to import your historical CloudTrail Lake data into CloudWatch with a few steps, enabling you to easily consolidate operational, security, and compliance data in one place.
+
 # v1.62.2 (2025-12-09)
 
 * No change notes available for this release.

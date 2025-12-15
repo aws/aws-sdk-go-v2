@@ -1,3 +1,7 @@
+# v1.26.0 (2025-12-15)
+
+* **Feature**: Support Customer Profiles Integration for AWS Entity Resolution
+
 # v1.25.11 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
