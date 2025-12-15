@@ -691,6 +691,15 @@
         "com.amazonaws.cloudwatchlogs#Baseline": {
             "type": "boolean"
         },
+        "com.amazonaws.cloudwatchlogs#BatchId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#Boolean": {
             "type": "boolean"
         },
@@ -765,6 +774,88 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#CancelImportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#CancelImportTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#CancelImportTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels an active import task and stops importing data from the CloudTrail Lake Event Data Store.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#CancelImportTaskRequest": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the import task to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#CancelImportTaskResponse": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the cancelled import task.</p>"
+                    }
+                },
+                "importStatistics": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Statistics about the import progress at the time of cancellation.</p>"
+                    }
+                },
+                "importStatus": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The final status of the import task. This will be set to CANCELLED.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the import task was created, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the import task was cancelled, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#ClientToken": {
@@ -1176,6 +1267,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatchlogs#CreateImportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#CreateImportTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#CreateImportTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an import from a data source to CloudWatch Log and creates a managed log group as the destination for the imported data.\n      Currently, <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store.html\">CloudTrail Event Data Store</a> is the only supported data source. </p>\n         <p>The import task must satisfy the following constraints:</p>\n         <ul>\n            <li>\n               <p>The specified source must be in an ACTIVE state.</p>\n            </li>\n            <li>\n               <p>The API caller must have permissions to access the data in the provided source and to perform iam:PassRole on the\n          provided import role which has the same permissions, as described below.</p>\n            </li>\n            <li>\n               <p>The provided IAM role must trust the \"cloudtrail.amazonaws.com\" principal and have the following permissions:</p>\n               <ul>\n                  <li>\n                     <p>cloudtrail:GetEventDataStoreData</p>\n                  </li>\n                  <li>\n                     <p>logs:CreateLogGroup</p>\n                  </li>\n                  <li>\n                     <p>logs:CreateLogStream</p>\n                  </li>\n                  <li>\n                     <p>logs:PutResourcePolicy</p>\n                  </li>\n                  <li>\n                     <p>(If source has an associated AWS KMS Key) kms:Decrypt</p>\n                  </li>\n                  <li>\n                     <p>(If source has an associated AWS KMS Key) kms:GenerateDataKey</p>\n                  </li>\n               </ul>\n               <p>Example IAM policy for provided import role:</p>\n               <p>\n                  <code>[ { \"Effect\": \"Allow\", \"Action\": \"iam:PassRole\", \"Resource\": \"arn:aws:iam::123456789012:role/apiCallerCredentials\", \"Condition\": { \"StringLike\": { \"iam:AssociatedResourceARN\": \"arn:aws:logs:us-east-1:123456789012:log-group:aws/cloudtrail/f1d45bff-d0e3-4868-b5d9-2eb678aa32fb:*\" } } }, { \"Effect\": \"Allow\", \"Action\": [ \"cloudtrail:GetEventDataStoreData\" ], \"Resource\": [ \"arn:aws:cloudtrail:us-east-1:123456789012:eventdatastore/f1d45bff-d0e3-4868-b5d9-2eb678aa32fb\" ] }, { \"Effect\": \"Allow\", \"Action\": [ \"logs:CreateImportTask\", \"logs:CreateLogGroup\", \"logs:CreateLogStream\", \"logs:PutResourcePolicy\" ], \"Resource\": [ \"arn:aws:logs:us-east-1:123456789012:log-group:/aws/cloudtrail/*\" ] }, { \"Effect\": \"Allow\", \"Action\": [ \"kms:Decrypt\", \"kms:GenerateDataKey\" ], \"Resource\": [ \"arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012\" ] } ]</code>\n               </p>\n            </li>\n            <li>\n               <p>If the import source has a customer managed key, the \"cloudtrail.amazonaws.com\" principal needs permissions to perform kms:Decrypt and kms:GenerateDataKey.</p>\n            </li>\n            <li>\n               <p>There can be no more than 3 active imports per account at a given time.</p>\n            </li>\n            <li>\n               <p>The startEventTime must be less than or equal to endEventTime.</p>\n            </li>\n            <li>\n               <p>The data being imported must be within the specified source's retention period.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#CreateImportTaskRequest": {
+            "type": "structure",
+            "members": {
+                "importSourceArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source to import from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "importRoleArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that grants CloudWatch Logs permission to import from the CloudTrail Lake Event Data Store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "importFilter": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filters to constrain the import by CloudTrail event time. Times are specified in Unix timestamp milliseconds.\n      The range of data being imported must be within the specified source's retention period.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#CreateImportTaskResponse": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the import task.</p>"
+                    }
+                },
+                "importDestinationArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudWatch Logs log group created as the destination for the imported events.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the import task was created, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatchlogs#CreateLogAnomalyDetector": {
             "type": "operation",
             "input": {
@@ -1330,7 +1510,7 @@
                 "deletionProtectionEnabled": {
                     "target": "com.amazonaws.cloudwatchlogs#DeletionProtectionEnabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to enable deletion protection for the new log group. When enabled on a log group, deletion protection blocks all\n      deletion operations until it is explicitly disabled. By default log groups are created without deletion protection enabled.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to enable deletion protection for the new log group. When enabled on\n      a log group, deletion protection blocks all deletion operations until it is explicitly\n      disabled. By default log groups are created without deletion protection enabled.</p>"
                     }
                 }
             },
@@ -1418,7 +1598,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a scheduled query that runs CloudWatch Logs Insights queries at regular intervals. Scheduled queries enable proactive monitoring by automatically executing queries to detect patterns and anomalies in your log data. Query results can be delivered to Amazon S3 for analysis or further processing.</p>"
+                "smithy.api#documentation": "<p>Creates a scheduled query that runs CloudWatch Logs Insights queries at regular intervals.\n      Scheduled queries enable proactive monitoring by automatically executing queries to detect\n      patterns and anomalies in your log data. Query results can be delivered to Amazon S3 for analysis\n      or further processing.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateScheduledQueryRequest": {
@@ -1427,90 +1607,90 @@
                 "name": {
                     "target": "com.amazonaws.cloudwatchlogs#ScheduledQueryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the scheduled query. The name must be unique within your account and region. Valid characters are alphanumeric characters, hyphens, underscores, and periods. Length must be between 1 and 255 characters.</p>",
+                        "smithy.api#documentation": "<p>The name of the scheduled query. The name must be unique within your account and region.\n      Valid characters are alphanumeric characters, hyphens, underscores, and periods. Length must\n      be between 1 and 255 characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.cloudwatchlogs#ScheduledQueryDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional description for the scheduled query to help identify its purpose and functionality.</p>"
+                        "smithy.api#documentation": "<p>An optional description for the scheduled query to help identify its purpose and\n      functionality.</p>"
                     }
                 },
                 "queryLanguage": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query language to use for the scheduled query. Valid values are <code>LogsQL</code>, <code>PPL</code>, and <code>SQL</code>.</p>",
+                        "smithy.api#documentation": "<p>The query language to use for the scheduled query. Valid values are <code>LogsQL</code>,\n        <code>PPL</code>, and <code>SQL</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "queryString": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query string to execute. This is the same query syntax used in CloudWatch Logs Insights. Maximum length is 10,000 characters.</p>",
+                        "smithy.api#documentation": "<p>The query string to execute. This is the same query syntax used in CloudWatch Logs\n      Insights. Maximum length is 10,000 characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "logGroupIdentifiers": {
                     "target": "com.amazonaws.cloudwatchlogs#ScheduledQueryLogGroupIdentifiers",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of log group names or ARNs to query. You can specify between 1 and 50 log groups. Log groups can be identified by name or full ARN.</p>"
+                        "smithy.api#documentation": "<p>An array of log group names or ARNs to query. You can specify between 1 and 50 log groups.\n      Log groups can be identified by name or full ARN.</p>"
                     }
                 },
                 "scheduleExpression": {
                     "target": "com.amazonaws.cloudwatchlogs#ScheduleExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A cron expression that defines when the scheduled query runs. The expression uses standard cron syntax and supports minute-level precision. Maximum length is 256 characters.</p>",
+                        "smithy.api#documentation": "<p>A cron expression that defines when the scheduled query runs. The expression uses standard\n      cron syntax and supports minute-level precision. Maximum length is 256 characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "timezone": {
                     "target": "com.amazonaws.cloudwatchlogs#ScheduleTimezone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timezone for evaluating the schedule expression. This determines when the scheduled query executes relative to the specified timezone.</p>"
+                        "smithy.api#documentation": "<p>The timezone for evaluating the schedule expression. This determines when the scheduled\n      query executes relative to the specified timezone.</p>"
                     }
                 },
                 "startTimeOffset": {
                     "target": "com.amazonaws.cloudwatchlogs#StartTimeOffset",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time offset in seconds that defines the lookback period for the query. This determines how far back in time the query searches from the execution time.</p>"
+                        "smithy.api#documentation": "<p>The time offset in seconds that defines the lookback period for the query. This determines\n      how far back in time the query searches from the execution time.</p>"
                     }
                 },
                 "destinationConfiguration": {
                     "target": "com.amazonaws.cloudwatchlogs#DestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for where to deliver query results. Currently supports Amazon S3 destinations for storing query output.</p>"
+                        "smithy.api#documentation": "<p>Configuration for where to deliver query results. Currently supports Amazon S3 destinations for\n      storing query output.</p>"
                     }
                 },
                 "scheduleStartTime": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start time for the scheduled query in Unix epoch format. The query will not execute before this time.</p>"
+                        "smithy.api#documentation": "<p>The start time for the scheduled query in Unix epoch format. The query will not execute\n      before this time.</p>"
                     }
                 },
                 "scheduleEndTime": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time for the scheduled query in Unix epoch format. The query will stop executing after this time.</p>"
+                        "smithy.api#documentation": "<p>The end time for the scheduled query in Unix epoch format. The query will stop executing\n      after this time.</p>"
                     }
                 },
                 "executionRoleArn": {
                     "target": "com.amazonaws.cloudwatchlogs#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that grants permissions to execute the query and deliver results to the specified destination. The role must have permissions to read from the specified log groups and write to the destination.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that grants permissions to execute the query and deliver results\n      to the specified destination. The role must have permissions to read from the specified log\n      groups and write to the destination.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "state": {
                     "target": "com.amazonaws.cloudwatchlogs#ScheduledQueryState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The initial state of the scheduled query. Valid values are <code>ENABLED</code> and <code>DISABLED</code>. Default is <code>ENABLED</code>.</p>"
+                        "smithy.api#documentation": "<p>The initial state of the scheduled query. Valid values are <code>ENABLED</code> and\n        <code>DISABLED</code>. Default is <code>ENABLED</code>.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.cloudwatchlogs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Key-value pairs to associate with the scheduled query for resource management and cost allocation.</p>"
+                        "smithy.api#documentation": "<p>Key-value pairs to associate with the scheduled query for resource management and cost\n      allocation.</p>"
                     }
                 }
             },
@@ -1742,7 +1922,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a CloudWatch Logs account policy. This stops the\n      account-wide policy from applying to log groups or data sources in the account. If you delete\n      a data protection policy or subscription filter policy, any log-group level policies of those\n      types remain in effect. This operation supports deletion of data source-based field index\n      policies, including facet configurations, in addition to log group-based policies.</p>\n         <p>To use this operation, you must be signed on with the correct permissions depending on the\n      type of policy that you are deleting.</p>\n         <ul>\n            <li>\n               <p>To delete a data protection policy, you must have the\n            <code>logs:DeleteDataProtectionPolicy</code> and <code>logs:DeleteAccountPolicy</code>\n          permissions.</p>\n            </li>\n            <li>\n               <p>To delete a subscription filter policy, you must have the\n            <code>logs:DeleteSubscriptionFilter</code> and <code>logs:DeleteAccountPolicy</code>\n          permissions.</p>\n            </li>\n            <li>\n               <p>To delete a transformer policy, you must have the <code>logs:DeleteTransformer</code>\n          and <code>logs:DeleteAccountPolicy</code> permissions.</p>\n            </li>\n            <li>\n               <p>To delete a field index policy, you must have the <code>logs:DeleteIndexPolicy</code>\n          and <code>logs:DeleteAccountPolicy</code> permissions.</p>\n               <p>If you delete a field index policy that included facet configurations, those\n          facets will no longer be available for interactive exploration in the CloudWatch Logs\n          Insights console. However, facet data is retained for up to 30 days.</p>\n            </li>\n         </ul>\n         <p>If you delete a field index policy, the indexing of the log events that happened before\n      you deleted the policy will still be used for up to 30 days to improve CloudWatch Logs\n      Insights queries.</p>"
+                "smithy.api#documentation": "<p>Deletes a CloudWatch Logs account policy. This stops the account-wide policy from\n      applying to log groups or data sources in the account. If you delete a data protection policy\n      or subscription filter policy, any log-group level policies of those types remain in effect.\n      This operation supports deletion of data source-based field index policies, including facet\n      configurations, in addition to log group-based policies.</p>\n         <p>To use this operation, you must be signed on with the correct permissions depending on the\n      type of policy that you are deleting.</p>\n         <ul>\n            <li>\n               <p>To delete a data protection policy, you must have the\n            <code>logs:DeleteDataProtectionPolicy</code> and <code>logs:DeleteAccountPolicy</code>\n          permissions.</p>\n            </li>\n            <li>\n               <p>To delete a subscription filter policy, you must have the\n            <code>logs:DeleteSubscriptionFilter</code> and <code>logs:DeleteAccountPolicy</code>\n          permissions.</p>\n            </li>\n            <li>\n               <p>To delete a transformer policy, you must have the <code>logs:DeleteTransformer</code>\n          and <code>logs:DeleteAccountPolicy</code> permissions.</p>\n            </li>\n            <li>\n               <p>To delete a field index policy, you must have the <code>logs:DeleteIndexPolicy</code>\n          and <code>logs:DeleteAccountPolicy</code> permissions.</p>\n               <p>If you delete a field index policy that included facet configurations, those facets\n          will no longer be available for interactive exploration in the CloudWatch Logs Insights\n          console. However, facet data is retained for up to 30 days.</p>\n            </li>\n         </ul>\n         <p>If you delete a field index policy, the indexing of the log events that happened before\n      you deleted the policy will still be used for up to 30 days to improve CloudWatch Logs\n      Insights queries.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteAccountPolicyRequest": {
@@ -2057,7 +2237,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a log-group level field index policy that was applied to a single log group. The\n      indexing of the log events that happened before you delete the policy will still be used for\n      as many as 30 days to improve CloudWatch Logs Insights queries.</p>\n         <p>If the deleted policy included facet configurations, those facets will no longer be\n      available for interactive exploration in the CloudWatch Logs Insights console for this log\n      group. However, facet data is retained for up to 30 days.</p>\n         <p>You can't use this operation to delete an account-level index policy. Instead, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteAccountPolicy.html\">DeletAccountPolicy</a>.</p>\n         <p>If you delete a log-group level field index policy and there is an\n      account-level field index policy, in a few minutes the log group begins using that\n      account-wide policy to index new incoming log events. This operation only affects log\n      group-level policies, including any facet configurations, and preserves any data source-based\n      account policies that may apply to the log group.</p>"
+                "smithy.api#documentation": "<p>Deletes a log-group level field index policy that was applied to a single log group. The\n      indexing of the log events that happened before you delete the policy will still be used for\n      as many as 30 days to improve CloudWatch Logs Insights queries.</p>\n         <p>If the deleted policy included facet configurations, those facets will no longer be\n      available for interactive exploration in the CloudWatch Logs Insights console for this log\n      group. However, facet data is retained for up to 30 days.</p>\n         <p>You can't use this operation to delete an account-level index policy. Instead, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteAccountPolicy.html\">DeleteAccountPolicy</a>.</p>\n         <p>If you delete a log-group level field index policy and there is an account-level field\n      index policy, in a few minutes the log group begins using that account-wide policy to index\n      new incoming log events. This operation only affects log group-level policies, including any\n      facet configurations, and preserves any data source-based account policies that may apply to\n      the log group.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteIndexPolicyRequest": {
@@ -2508,7 +2688,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a scheduled query and stops all future executions. This operation also removes any configured actions and associated resources.</p>"
+                "smithy.api#documentation": "<p>Deletes a scheduled query and stops all future executions. This operation also removes any\n      configured actions and associated resources.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteScheduledQueryRequest": {
@@ -3505,6 +3685,187 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatchlogs#DescribeImportTaskBatches": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeImportTaskBatchesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeImportTaskBatchesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets detailed information about the individual batches within an import task, including their status and any error messages.\n      For CloudTrail Event Data Store sources, a batch refers to a subset of stored events grouped by their eventTime. </p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeImportTaskBatchesRequest": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the import task to get batch information for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "batchImportStatus": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filter to list import batches by their status. Accepts multiple status values: IN_PROGRESS, CANCELLED, COMPLETED and FAILED.</p>"
+                    }
+                },
+                "limit": {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of import batches to return in the response. Default: 10</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeImportTaskBatchesResponse": {
+            "type": "structure",
+            "members": {
+                "importSourceArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source being imported from.</p>"
+                    }
+                },
+                "importId": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the import task.</p>"
+                    }
+                },
+                "importBatches": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportBatchList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of import batches that match the request filters.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. Not present if there are no additional results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeImportTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeImportTasksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeImportTasksResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists and describes import tasks, with optional filtering by import status and source ARN.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeImportTasksRequest": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filter to describe a specific import task by its ID.</p>"
+                    }
+                },
+                "importStatus": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filter to list imports by their status. Valid values are IN_PROGRESS, CANCELLED, COMPLETED and FAILED.</p>"
+                    }
+                },
+                "importSourceArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filter to list imports from a specific source</p>"
+                    }
+                },
+                "limit": {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of import tasks to return in the response. Default: 50</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeImportTasksResponse": {
+            "type": "structure",
+            "members": {
+                "imports": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of import tasks that match the request filters.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. Not present if there are no additional results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatchlogs#DescribeIndexPolicies": {
             "type": "operation",
             "input": {
@@ -3920,7 +4281,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of CloudWatch Logs Insights queries that are scheduled, running, or have\n      been run recently in this account. You can request all queries or limit it to queries of a\n      specific log group or queries with a certain status.</p>\n         <p>This operation includes both interactive queries started directly by users and automated\n      queries executed by scheduled query configurations. Scheduled query executions appear in the\n      results alongside manually initiated queries, providing visibility into all query activity\n      in your account.</p>"
+                "smithy.api#documentation": "<p>Returns a list of CloudWatch Logs Insights queries that are scheduled, running, or have\n      been run recently in this account. You can request all queries or limit it to queries of a\n      specific log group or queries with a certain status.</p>\n         <p>This operation includes both interactive queries started directly by users and automated\n      queries executed by scheduled query configurations. Scheduled query executions appear in the\n      results alongside manually initiated queries, providing visibility into all query activity in\n      your account.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeQueriesMaxResults": {
@@ -4267,7 +4628,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration for where to deliver scheduled query results. Specifies the destination type and associated settings for result delivery.</p>"
+                "smithy.api#documentation": "<p>Configuration for where to deliver scheduled query results. Specifies the destination type\n      and associated settings for result delivery.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DestinationField": {
@@ -4635,6 +4996,9 @@
                     "min": 0
                 }
             }
+        },
+        "com.amazonaws.cloudwatchlogs#ErrorMessage": {
+            "type": "string"
         },
         "com.amazonaws.cloudwatchlogs#EvaluationFrequency": {
             "type": "enum",
@@ -6232,7 +6596,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the results from the specified query.</p>\n         <p>Only the fields requested in the query are returned, along with a <code>@ptr</code> field,\n      which is the identifier for the log record. You can use the value of <code>@ptr</code> in a\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html\">GetLogRecord</a>\n      operation to get the full log record.</p>\n         <p>\n            <code>GetQueryResults</code> does not start running a query. To run a query, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a>. For more information about how long results of previous queries are\n      available, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html\">CloudWatch Logs\n        quotas</a>.</p>\n         <p>If the value of the <code>Status</code> field in the output is <code>Running</code>, this\n      operation returns only partial results. If you see a value of <code>Scheduled</code> or\n        <code>Running</code> for the status, you can retry the operation later to see the final\n      results. </p>\n         <p>This operation is used both for retrieving results from interactive queries and from\n      automated scheduled query executions. Scheduled queries use <code>GetQueryResults</code>\n      internally to retrieve query results for processing and delivery to configured destinations.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation\n      in a monitoring account to start queries in linked source accounts. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>"
+                "smithy.api#documentation": "<p>Returns the results from the specified query.</p>\n         <p>Only the fields requested in the query are returned, along with a <code>@ptr</code> field,\n      which is the identifier for the log record. You can use the value of <code>@ptr</code> in a\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html\">GetLogRecord</a>\n      operation to get the full log record.</p>\n         <p>\n            <code>GetQueryResults</code> does not start running a query. To run a query, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a>. For more information about how long results of previous queries are\n      available, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html\">CloudWatch Logs\n        quotas</a>.</p>\n         <p>If the value of the <code>Status</code> field in the output is <code>Running</code>, this\n      operation returns only partial results. If you see a value of <code>Scheduled</code> or\n        <code>Running</code> for the status, you can retry the operation later to see the final\n      results. </p>\n         <p>This operation is used both for retrieving results from interactive queries and from\n      automated scheduled query executions. Scheduled queries use <code>GetQueryResults</code>\n      internally to retrieve query results for processing and delivery to configured\n      destinations.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation\n      in a monitoring account to start queries in linked source accounts. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#GetQueryResultsRequest": {
@@ -6314,7 +6678,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details about a specific scheduled query, including its configuration, execution status, and metadata.</p>"
+                "smithy.api#documentation": "<p>Retrieves details about a specific scheduled query, including its configuration, execution\n      status, and metadata.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#GetScheduledQueryHistory": {
@@ -6343,7 +6707,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the execution history of a scheduled query within a specified time range, including query results and destination processing status.</p>",
+                "smithy.api#documentation": "<p>Retrieves the execution history of a scheduled query within a specified time range,\n      including query results and destination processing status.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6388,7 +6752,7 @@
                 "executionStatuses": {
                     "target": "com.amazonaws.cloudwatchlogs#ExecutionStatusList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of execution statuses to filter the history results. Only executions with the specified statuses are returned.</p>"
+                        "smithy.api#documentation": "<p>An array of execution statuses to filter the history results. Only executions with the\n      specified statuses are returned.</p>"
                     }
                 },
                 "maxResults": {
@@ -6707,6 +7071,187 @@
             },
             "value": {
                 "target": "com.amazonaws.cloudwatchlogs#Count"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#Import": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the import task.</p>"
+                    }
+                },
+                "importSourceArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudTrail Lake Event Data Store being imported from.</p>"
+                    }
+                },
+                "importStatus": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the import task. Valid values are IN_PROGRESS, CANCELLED, COMPLETED and FAILED.</p>"
+                    }
+                },
+                "importDestinationArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the managed CloudWatch Logs log group where the events are being imported to.</p>"
+                    }
+                },
+                "importStatistics": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Statistics about the import progress</p>"
+                    }
+                },
+                "importFilter": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter criteria used for this import task.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the import task was created, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the import task was last updated, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.cloudwatchlogs#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error message related to any failed imports</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An import job to move data from CloudTrail Event Data Store to CloudWatch.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ImportBatch": {
+            "type": "structure",
+            "members": {
+                "batchId": {
+                    "target": "com.amazonaws.cloudwatchlogs#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the import batch.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cloudwatchlogs#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the import batch. Valid values are IN_PROGRESS, CANCELLED, COMPLETED and FAILED.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.cloudwatchlogs#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message if the batch failed to import. Only present when status is FAILED.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of events being imported to CloudWatch</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ImportBatchList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#ImportBatch"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ImportFilter": {
+            "type": "structure",
+            "members": {
+                "startEventTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time range for events to import, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>"
+                    }
+                },
+                "endEventTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time range for events to import, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter criteria used for import tasks</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ImportId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\-a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ImportList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#Import"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ImportStatistics": {
+            "type": "structure",
+            "members": {
+                "bytesImported": {
+                    "target": "com.amazonaws.cloudwatchlogs#StoredBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of bytes that have been imported to the managed log group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Statistics about the import progress</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ImportStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ImportStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#ImportStatus"
             }
         },
         "com.amazonaws.cloudwatchlogs#IncludeLinkedAccounts": {
@@ -7116,7 +7661,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an aggregate summary of all log groups in the Region grouped by specified data\n      source characteristics. Supports optional filtering by log group class, name patterns, and\n      data sources. If you perform this action in a monitoring account, you can also return\n      aggregated summaries of log groups from source accounts that are linked to the monitoring\n      account. For more information about using cross-account observability to set up monitoring\n      accounts and source accounts, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch\n        cross-account observability</a>.</p>\n         <p>The operation aggregates log groups by data source name and type and optionally format,\n      providing counts of log groups that share these characteristics. The operation paginates\n      results. By default, it returns up to 50 results and includes a token to retrieve more\n      results.</p>"
+                "smithy.api#documentation": "<p>Returns an aggregate summary of all log groups in the Region grouped by specified data\n      source characteristics. Supports optional filtering by log group class, name patterns, and\n      data sources. If you perform this action in a monitoring account, you can also return\n      aggregated summaries of log groups from source accounts that are linked to the monitoring\n      account. For more information about using cross-account observability to set up monitoring\n      accounts and source accounts, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch\n        cross-account observability</a>.</p>\n         <p>The operation aggregates log groups by data source name and type and optionally format,\n      providing counts of log groups that share these characteristics. The operation paginates\n      results. By default, it returns up to 50 results and includes a token to retrieve more\n      results.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "aggregateLogGroupSummaries",
+                    "pageSize": "limit"
+                }
             }
         },
         "com.amazonaws.cloudwatchlogs#ListAggregateLogGroupSummariesGroupBy": {
@@ -7648,7 +8199,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all scheduled queries in your account and region. You can filter results by state to show only enabled or disabled queries.</p>",
+                "smithy.api#documentation": "<p>Lists all scheduled queries in your account and region. You can filter results by state to\n      show only enabled or disabled queries.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -7681,7 +8232,7 @@
                 "state": {
                     "target": "com.amazonaws.cloudwatchlogs#ScheduledQueryState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter scheduled queries by state. Valid values are <code>ENABLED</code> and <code>DISABLED</code>. If not specified, all scheduled queries are returned.</p>"
+                        "smithy.api#documentation": "<p>Filter scheduled queries by state. Valid values are <code>ENABLED</code> and\n        <code>DISABLED</code>. If not specified, all scheduled queries are returned.</p>"
                     }
                 }
             },
@@ -8232,7 +8783,7 @@
                 "deletionProtectionEnabled": {
                     "target": "com.amazonaws.cloudwatchlogs#DeletionProtectionEnabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether deletion protection is enabled for this log group. When enabled, deletion protection blocks all\n      deletion operations until it is explicitly disabled.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether deletion protection is enabled for this log group. When enabled,\n      deletion protection blocks all deletion operations until it is explicitly disabled.</p>"
                     }
                 }
             },
@@ -8540,10 +9091,16 @@
                     "target": "com.amazonaws.cloudwatchlogs#CancelExportTask"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchlogs#CancelImportTask"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchlogs#CreateDelivery"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#CreateExportTask"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#CreateImportTask"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#CreateLogAnomalyDetector"
@@ -8637,6 +9194,12 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DescribeFieldIndexes"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeImportTaskBatches"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeImportTasks"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DescribeIndexPolicies"
@@ -11212,7 +11775,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an account-level data protection policy, subscription filter policy, field index\n      policy, transformer policy, or metric extraction policy that applies to all log groups or a\n      subset of log groups in the account.</p>\n         <p>For field index policies, you can configure indexed fields as\n        <i>facets</i> to enable interactive exploration of your logs. Facets provide\n      value distributions and counts for indexed fields in the CloudWatch Logs Insights console\n      without requiring query execution. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Facets.html\">Use facets to group and\n        explore logs</a>.</p>\n         <p>To use this operation, you must be signed on with the correct permissions depending on the\n      type of policy that you are creating.</p>\n         <ul>\n            <li>\n               <p>To create a data protection policy, you must have the\n            <code>logs:PutDataProtectionPolicy</code> and <code>logs:PutAccountPolicy</code>\n          permissions.</p>\n            </li>\n            <li>\n               <p>To create a subscription filter policy, you must have the\n            <code>logs:PutSubscriptionFilter</code> and <code>logs:PutAccountPolicy</code>\n          permissions.</p>\n            </li>\n            <li>\n               <p>To create a transformer policy, you must have the <code>logs:PutTransformer</code> and\n            <code>logs:PutAccountPolicy</code> permissions.</p>\n            </li>\n            <li>\n               <p>To create a field index policy, you must have the <code>logs:PutIndexPolicy</code> and\n            <code>logs:PutAccountPolicy</code> permissions.</p>\n            </li>\n            <li>\n               <p>To configure facets for field index policies, you must have the\n            <code>logs:PutIndexPolicy</code> and <code>logs:PutAccountPolicy</code>\n          permissions.</p>\n            </li>\n            <li>\n               <p>To create a metric extraction policy, you must have the\n            <code>logs:PutMetricExtractionPolicy</code> and <code>logs:PutAccountPolicy</code>\n          permissions.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Data protection policy</b>\n         </p>\n         <p>A data protection policy can help safeguard sensitive data that's ingested by your log\n      groups by auditing and masking the sensitive log data. Each account can have only one\n      account-level data protection policy.</p>\n         <important>\n            <p>Sensitive data is detected and masked when it is ingested into a log group. When you set\n        a data protection policy, log events ingested into the log groups before that time are not\n        masked.</p>\n         </important>\n         <p>If you use <code>PutAccountPolicy</code> to create a data protection policy for your whole\n      account, it applies to both existing log groups and all log groups that are created later in\n      this account. The account-level policy is applied to existing log groups with eventual\n      consistency. It might take up to 5 minutes before sensitive data in existing log groups begins\n      to be masked.</p>\n         <p>By default, when a user views a log event that includes masked data, the sensitive data is\n      replaced by asterisks. A user who has the <code>logs:Unmask</code> permission can use a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html\">GetLogEvents</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_FilterLogEvents.html\">FilterLogEvents</a> operation with the <code>unmask</code> parameter set to\n        <code>true</code> to view the unmasked log events. Users with the <code>logs:Unmask</code>\n      can also view unmasked data in the CloudWatch Logs console by running a CloudWatch Logs\n      Insights query with the <code>unmask</code> query command.</p>\n         <p>For more information, including a list of types of data that can be audited and masked,\n      see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html\">Protect sensitive log data\n        with masking</a>.</p>\n         <p>To use the <code>PutAccountPolicy</code> operation for a data protection policy, you must\n      be signed on with the <code>logs:PutDataProtectionPolicy</code> and\n        <code>logs:PutAccountPolicy</code> permissions.</p>\n         <p>The <code>PutAccountPolicy</code> operation applies to all log groups in the account. You\n      can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html\">PutDataProtectionPolicy</a> to create a data protection policy that applies to just one\n      log group. If a log group has its own data protection policy and the account also has an\n      account-level data protection policy, then the two policies are cumulative. Any sensitive term\n      specified in either policy is masked.</p>\n         <p>\n            <b>Subscription filter policy</b>\n         </p>\n         <p>A subscription filter policy sets up a real-time feed of log events from CloudWatch Logs to other Amazon Web Services services. Account-level subscription filter policies apply to\n      both existing log groups and log groups that are created later in this account. Supported\n      destinations are Kinesis Data Streams, Firehose, and Lambda. When log\n      events are sent to the receiving service, they are Base64 encoded and compressed with the GZIP\n      format.</p>\n         <p>The following destinations are supported for subscription filters:</p>\n         <ul>\n            <li>\n               <p>An Kinesis Data Streams data stream in the same account as the subscription policy, for\n          same-account delivery.</p>\n            </li>\n            <li>\n               <p>An Firehose data stream in the same account as the subscription policy, for\n          same-account delivery.</p>\n            </li>\n            <li>\n               <p>A Lambda function in the same account as the subscription policy, for\n          same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination in a different account created with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html\">PutDestination</a>, for cross-account delivery. Kinesis Data Streams and Firehose are supported as logical destinations.</p>\n            </li>\n         </ul>\n         <p>Each account can have one account-level subscription filter policy per Region. If you are\n      updating an existing filter, you must specify the correct name in <code>PolicyName</code>. To\n      perform a <code>PutAccountPolicy</code> subscription filter operation for any destination\n      except a Lambda function, you must also have the <code>iam:PassRole</code>\n      permission.</p>\n         <p>\n            <b>Transformer policy</b>\n         </p>\n         <p>Creates or updates a <i>log transformer policy</i> for your account. You use\n      log transformers to transform log events into a different format, making them easier for you\n      to process and analyze. You can also transform logs from different sources into standardized\n      formats that contain relevant, source-specific information. After you have created a\n      transformer, CloudWatch Logs performs this transformation at the time of log ingestion. You\n      can then refer to the transformed versions of the logs during operations such as querying with\n        CloudWatch Logs Insights or creating metric filters or subscription filters.</p>\n         <p>You can also use a transformer to copy metadata from metadata keys into the log events\n      themselves. This metadata can include log group name, log stream name, account ID and\n      Region.</p>\n         <p>A transformer for a log group is a series of processors, where each processor applies one\n      type of transformation to the log events ingested into this log group. For more information\n      about the available processors to use in a transformer, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Processors\"> Processors that you can use</a>.</p>\n         <p>Having log events in standardized format enables visibility across your applications for\n      your log analysis, reporting, and alarming needs. CloudWatch Logs provides transformation\n      for common log types with out-of-the-box transformation templates for major Amazon Web Services\n      log sources such as VPC flow logs, Lambda, and Amazon RDS. You can use\n      pre-built transformation templates or create custom transformation policies.</p>\n         <p>You can create transformers only for the log groups in the Standard log class.</p>\n         <p>You can have one account-level transformer policy that applies to all log groups in the\n      account. Or you can create as many as 20 account-level transformer policies that are each\n      scoped to a subset of log groups with the <code>selectionCriteria</code> parameter. If you\n      have multiple account-level transformer policies with selection criteria, no two of them can\n      use the same or overlapping log group name prefixes. For example, if you have one policy\n      filtered to log groups that start with <code>my-log</code>, you can't have another field index\n      policy filtered to <code>my-logpprod</code> or <code>my-logging</code>.</p>\n         <p>CloudWatch Logs provides default field indexes for all log groups in the Standard log\n      class. Default field indexes are automatically available for the following fields: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>@logStream</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@aws.region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@aws.account</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@source.log</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>traceId</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default field indexes are in addition to any custom field indexes you define within your\n      policy. Default field indexes are not counted towards your field index quota. </p>\n         <p>You can also set up a transformer at the log-group level. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html\">PutTransformer</a>. If there is both a log-group level transformer created with\n        <code>PutTransformer</code> and an account-level transformer that could apply to the same\n      log group, the log group uses only the log-group level transformer. It ignores the\n      account-level transformer.</p>\n         <p>\n            <b>Field index policy</b>\n         </p>\n         <p>You can use field index policies to create indexes on fields found in log events in the\n      log group. Creating field indexes can help lower the scan volume for CloudWatch Logs\n      Insights queries that reference those fields, because these queries attempt to skip the\n      processing of log events that are known to not match the indexed field. Good fields to index\n      are fields that you often need to query for and fields or values that match only a small\n      fraction of the total log events. Common examples of indexes include request ID, session ID,\n      user IDs, or instance IDs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html\">Create field indexes\n        to improve query performance and reduce costs</a>\n         </p>\n         <p>To find the fields that are in your log group events, use the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html\">GetLogGroupFields</a> operation.</p>\n         <p>For example, suppose you have created a field index for <code>requestId</code>. Then, any\n        CloudWatch Logs Insights query on that log group that includes <code>requestId =\n          <i>value</i>\n            </code> or <code>requestId in [<i>value</i>,\n          <i>value</i>, ...]</code> will attempt to process only the log events where\n      the indexed field matches the specified value.</p>\n         <p>Matches of log events to the names of indexed fields are case-sensitive. For example, an\n      indexed field of <code>RequestId</code> won't match a log event containing\n        <code>requestId</code>.</p>\n         <p>You can have one account-level field index policy that applies to all log groups in the\n      account. Or you can create as many as 40 account-level field index policies (20 for log group\n      prefix selection, 20 for data source selection) that are each scoped to a subset of log groups\n      or data sources with the <code>selectionCriteria</code> parameter. Field index policies can\n      now be created for specific data source name and type combinations using DataSourceName and\n      DataSourceType selection criteria. If you have multiple account-level index policies with\n      selection criteria, no two of them can use the same or overlapping log group name prefixes.\n      For example, if you have one policy filtered to log groups that start with\n      <code>my-log</code>, you can't have another field index policy filtered to\n        <code>my-logpprod</code> or <code>my-logging</code>.</p>\n         <p>If you create an account-level field index policy in a monitoring account in cross-account\n      observability, the policy is applied only to the monitoring account and not to any source\n      accounts.</p>\n         <p>If you want to create a field index policy for a single log group, you can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html\">PutIndexPolicy</a> instead of <code>PutAccountPolicy</code>. If you do so, that log\n      group will use only that log-group level policy, and will ignore the account-level policy that\n      you create with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html\">PutAccountPolicy</a>.</p>\n         <p>\n            <b>Metric extraction policy</b>\n         </p>\n         <p>A metric extraction policy controls whether CloudWatch Metrics can be created through the\n      Embedded Metrics Format (EMF) for log groups in your account. By default, EMF metric creation\n      is enabled for all log groups. You can use metric extraction policies to disable EMF metric\n      creation for your entire account or specific log groups.</p>\n         <p>When a policy disables EMF metric creation for a log group, log events in the EMF format\n      are still ingested, but no CloudWatch Metrics are created from them.</p>\n         <important>\n            <p>Creating a policy disables metrics for AWS features that use EMF to create metrics, such\n        as CloudWatch Container Insights and CloudWatch Application Signals. To prevent turning off\n        those features by accident, we recommend that you exclude the underlying log-groups through\n        a selection-criteria such as <code>LogGroupNamePrefix NOT IN [\"/aws/containerinsights\",\n          \"/aws/ecs/containerinsights\", \"/aws/application-signals/data\"]</code>.</p>\n         </important>\n         <p>Each account can have either one account-level metric extraction policy that applies to\n      all log groups, or up to 5 policies that are each scoped to a subset of log groups with the\n        <code>selectionCriteria</code> parameter. The selection criteria supports filtering by\n        <code>LogGroupName</code> and <code>LogGroupNamePrefix</code> using the operators\n        <code>IN</code> and <code>NOT IN</code>. You can specify up to 50 values in each\n        <code>IN</code> or <code>NOT IN</code> list.</p>\n         <p>The selection criteria can be specified in these formats:</p>\n         <p>\n            <code>LogGroupName IN [\"log-group-1\", \"log-group-2\"]</code>\n         </p>\n         <p>\n            <code>LogGroupNamePrefix NOT IN [\"/aws/prefix1\", \"/aws/prefix2\"]</code>\n         </p>\n         <p>If you have multiple account-level metric extraction policies with selection criteria, no\n      two of them can have overlapping criteria. For example, if you have one policy with selection\n      criteria <code>LogGroupNamePrefix IN [\"my-log\"]</code>, you can't have another metric\n      extraction policy with selection criteria <code>LogGroupNamePrefix IN [\"/my-log-prod\"]</code>\n      or <code>LogGroupNamePrefix IN [\"/my-logging\"]</code>, as the set of log groups matching these\n      prefixes would be a subset of the log groups matching the first policy's prefix, creating an\n      overlap.</p>\n         <p>When using <code>NOT IN</code>, only one policy with this operator is allowed per\n      account.</p>\n         <p>When combining policies with <code>IN</code> and <code>NOT IN</code> operators, the\n      overlap check ensures that policies don't have conflicting effects. Two policies with\n        <code>IN</code> and <code>NOT IN</code> operators do not overlap if and only if every value\n      in the <code>IN </code>policy is completely contained within some value in the <code>NOT\n        IN</code> policy. For example:</p>\n         <ul>\n            <li>\n               <p>If you have a <code>NOT IN</code> policy for prefix <code>\"/aws/lambda\"</code>, you\n          can create an <code>IN</code> policy for the exact log group name\n            <code>\"/aws/lambda/function1\"</code> because the set of log groups matching\n            <code>\"/aws/lambda/function1\"</code> is a subset of the log groups matching\n            <code>\"/aws/lambda\"</code>.</p>\n            </li>\n            <li>\n               <p>If you have a <code>NOT IN</code> policy for prefix <code>\"/aws/lambda\"</code>, you\n          cannot create an <code>IN</code> policy for prefix <code>\"/aws\"</code> because the set of\n          log groups matching <code>\"/aws\"</code> is not a subset of the log groups matching\n            <code>\"/aws/lambda\"</code>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates an account-level data protection policy, subscription filter policy, field index\n      policy, transformer policy, or metric extraction policy that applies to all log groups, a\n      subset of log groups, or a data source name and type combination in the account.</p>\n         <p>For field index policies, you can configure indexed fields as <i>facets</i>\n      to enable interactive exploration of your logs. Facets provide value distributions and counts\n      for indexed fields in the CloudWatch Logs Insights console without requiring query\n      execution. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Facets.html\">Use facets to group and\n        explore logs</a>.</p>\n         <p>To use this operation, you must be signed on with the correct permissions depending on the\n      type of policy that you are creating.</p>\n         <ul>\n            <li>\n               <p>To create a data protection policy, you must have the\n            <code>logs:PutDataProtectionPolicy</code> and <code>logs:PutAccountPolicy</code>\n          permissions.</p>\n            </li>\n            <li>\n               <p>To create a subscription filter policy, you must have the\n            <code>logs:PutSubscriptionFilter</code> and <code>logs:PutAccountPolicy</code>\n          permissions.</p>\n            </li>\n            <li>\n               <p>To create a transformer policy, you must have the <code>logs:PutTransformer</code> and\n            <code>logs:PutAccountPolicy</code> permissions.</p>\n            </li>\n            <li>\n               <p>To create a field index policy, you must have the <code>logs:PutIndexPolicy</code> and\n            <code>logs:PutAccountPolicy</code> permissions.</p>\n            </li>\n            <li>\n               <p>To configure facets for field index policies, you must have the\n            <code>logs:PutIndexPolicy</code> and <code>logs:PutAccountPolicy</code>\n          permissions.</p>\n            </li>\n            <li>\n               <p>To create a metric extraction policy, you must have the\n            <code>logs:PutMetricExtractionPolicy</code> and <code>logs:PutAccountPolicy</code>\n          permissions.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Data protection policy</b>\n         </p>\n         <p>A data protection policy can help safeguard sensitive data that's ingested by your log\n      groups by auditing and masking the sensitive log data. Each account can have only one\n      account-level data protection policy.</p>\n         <important>\n            <p>Sensitive data is detected and masked when it is ingested into a log group. When you set\n        a data protection policy, log events ingested into the log groups before that time are not\n        masked.</p>\n         </important>\n         <p>If you use <code>PutAccountPolicy</code> to create a data protection policy for your whole\n      account, it applies to both existing log groups and all log groups that are created later in\n      this account. The account-level policy is applied to existing log groups with eventual\n      consistency. It might take up to 5 minutes before sensitive data in existing log groups begins\n      to be masked.</p>\n         <p>By default, when a user views a log event that includes masked data, the sensitive data is\n      replaced by asterisks. A user who has the <code>logs:Unmask</code> permission can use a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html\">GetLogEvents</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_FilterLogEvents.html\">FilterLogEvents</a> operation with the <code>unmask</code> parameter set to\n        <code>true</code> to view the unmasked log events. Users with the <code>logs:Unmask</code>\n      can also view unmasked data in the CloudWatch Logs console by running a CloudWatch Logs\n      Insights query with the <code>unmask</code> query command.</p>\n         <p>For more information, including a list of types of data that can be audited and masked,\n      see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html\">Protect sensitive log data\n        with masking</a>.</p>\n         <p>To use the <code>PutAccountPolicy</code> operation for a data protection policy, you must\n      be signed on with the <code>logs:PutDataProtectionPolicy</code> and\n        <code>logs:PutAccountPolicy</code> permissions.</p>\n         <p>The <code>PutAccountPolicy</code> operation applies to all log groups in the account. You\n      can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html\">PutDataProtectionPolicy</a> to create a data protection policy that applies to just one\n      log group. If a log group has its own data protection policy and the account also has an\n      account-level data protection policy, then the two policies are cumulative. Any sensitive term\n      specified in either policy is masked.</p>\n         <p>\n            <b>Subscription filter policy</b>\n         </p>\n         <p>A subscription filter policy sets up a real-time feed of log events from CloudWatch Logs to other Amazon Web Services services. Account-level subscription filter policies apply to\n      both existing log groups and log groups that are created later in this account. Supported\n      destinations are Kinesis Data Streams, Firehose, and Lambda. When log\n      events are sent to the receiving service, they are Base64 encoded and compressed with the GZIP\n      format.</p>\n         <p>The following destinations are supported for subscription filters:</p>\n         <ul>\n            <li>\n               <p>An Kinesis Data Streams data stream in the same account as the subscription policy, for\n          same-account delivery.</p>\n            </li>\n            <li>\n               <p>An Firehose data stream in the same account as the subscription policy, for\n          same-account delivery.</p>\n            </li>\n            <li>\n               <p>A Lambda function in the same account as the subscription policy, for\n          same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination in a different account created with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html\">PutDestination</a>, for cross-account delivery. Kinesis Data Streams and Firehose are supported as logical destinations.</p>\n            </li>\n         </ul>\n         <p>Each account can have one account-level subscription filter policy per Region. If you are\n      updating an existing filter, you must specify the correct name in <code>PolicyName</code>. To\n      perform a <code>PutAccountPolicy</code> subscription filter operation for any destination\n      except a Lambda function, you must also have the <code>iam:PassRole</code>\n      permission.</p>\n         <p>\n            <b>Transformer policy</b>\n         </p>\n         <p>Creates or updates a <i>log transformer policy</i> for your account. You use\n      log transformers to transform log events into a different format, making them easier for you\n      to process and analyze. You can also transform logs from different sources into standardized\n      formats that contain relevant, source-specific information. After you have created a\n      transformer, CloudWatch Logs performs this transformation at the time of log ingestion. You\n      can then refer to the transformed versions of the logs during operations such as querying with\n        CloudWatch Logs Insights or creating metric filters or subscription filters.</p>\n         <p>You can also use a transformer to copy metadata from metadata keys into the log events\n      themselves. This metadata can include log group name, log stream name, account ID and\n      Region.</p>\n         <p>A transformer for a log group is a series of processors, where each processor applies one\n      type of transformation to the log events ingested into this log group. For more information\n      about the available processors to use in a transformer, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Processors\"> Processors that you can use</a>.</p>\n         <p>Having log events in standardized format enables visibility across your applications for\n      your log analysis, reporting, and alarming needs. CloudWatch Logs provides transformation\n      for common log types with out-of-the-box transformation templates for major Amazon Web Services\n      log sources such as VPC flow logs, Lambda, and Amazon RDS. You can use\n      pre-built transformation templates or create custom transformation policies.</p>\n         <p>You can create transformers only for the log groups in the Standard log class.</p>\n         <p>You can have one account-level transformer policy that applies to all log groups in the\n      account. Or you can create as many as 20 account-level transformer policies that are each\n      scoped to a subset of log groups with the <code>selectionCriteria</code> parameter. If you\n      have multiple account-level transformer policies with selection criteria, no two of them can\n      use the same or overlapping log group name prefixes. For example, if you have one policy\n      filtered to log groups that start with <code>my-log</code>, you can't have another transformer\n      policy filtered to <code>my-logpprod</code> or <code>my-logging</code>.</p>\n         <p>You can also set up a transformer at the log-group level. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html\">PutTransformer</a>. If there is both a log-group level transformer created with\n        <code>PutTransformer</code> and an account-level transformer that could apply to the same\n      log group, the log group uses only the log-group level transformer. It ignores the\n      account-level transformer.</p>\n         <p>\n            <b>Field index policy</b>\n         </p>\n         <p>You can use field index policies to create indexes on fields found in log events for a log\n      group or data source name and type combination. Creating field indexes can help lower the scan\n      volume for CloudWatch Logs Insights queries that reference those fields, because these\n      queries attempt to skip the processing of log events that are known to not match the indexed\n      field. Good fields to index are fields that you often need to query for and fields or values\n      that match only a small fraction of the total log events. Common examples of indexes include\n      request ID, session ID, user IDs, or instance IDs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html\">Create field indexes to improve query performance and reduce costs</a>\n         </p>\n         <p>To find the fields that are in your log group events, use the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html\">GetLogGroupFields</a> operation. To find the fields for a data source use the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogFields.html\">GetLogFields</a> operation.</p>\n         <p>For example, suppose you have created a field index for <code>requestId</code>. Then, any\n        CloudWatch Logs Insights query on that log group that includes <code>requestId =\n          <i>value</i>\n            </code> or <code>requestId in [<i>value</i>,\n          <i>value</i>, ...]</code> will attempt to process only the log events where\n      the indexed field matches the specified value.</p>\n         <p>Matches of log events to the names of indexed fields are case-sensitive. For example, an\n      indexed field of <code>RequestId</code> won't match a log event containing\n        <code>requestId</code>.</p>\n         <p>You can have one account-level field index policy that applies to all log groups in the\n      account. Or you can create as many as 20 account-level field index policies that are each\n      scoped to a subset of log groups using <code>LogGroupNamePrefix</code> with the\n        <code>selectionCriteria</code> parameter. You can have another 20 account-level field index\n      policies using <code>DataSourceName</code> and <code>DataSourceType</code> for the\n        <code>selectionCriteria</code> parameter. If you have multiple account-level index policies\n      with <code>LogGroupNamePrefix</code> selection criteria, no two of them can use the same or\n      overlapping log group name prefixes. For example, if you have one policy filtered to log\n      groups that start with <i>my-log</i>, you can't have another field index policy\n      filtered to <i>my-logpprod</i> or <i>my-logging</i>. Similarly, if\n      you have multiple account-level index policies with <code>DataSourceName</code> and\n        <code>DataSourceType</code> selection criteria, no two of them can use the same data source\n      name and type combination. For example, if you have one policy filtered to the data source\n      name <code>amazon_vpc</code> and data source type <code>flow</code> you cannot create another\n      policy with this combination.</p>\n         <p>If you create an account-level field index policy in a monitoring account in cross-account\n      observability, the policy is applied only to the monitoring account and not to any source\n      accounts.</p>\n         <p>CloudWatch Logs provides default field indexes for all log groups in the Standard log\n      class. Default field indexes are automatically available for the following fields: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>@logStream</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@aws.region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@aws.account</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@source.log</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@data_source_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@data_source_type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@data_format</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>traceId</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>severityText</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>attributes.session.id</code>\n               </p>\n            </li>\n         </ul>\n         <p>CloudWatch Logs provides default field indexes for certain data source name and type\n      combinations as well. Default field indexes are automatically available for the following data\n      source name and type combinations as identified in the following list:</p>\n         <p>\n            <code>amazon_vpc.flow</code>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>action</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>logStatus</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>flowDirection</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <code>amazon_route53.resolver_query</code>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>transport</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>rcode</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <code>aws_waf.access</code>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>action</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>httpRequest.country</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <code>aws_cloudtrail.data</code>, <code>aws_cloudtrail.management</code>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>eventSource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>awsRegion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>userAgent</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>errorCode</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>managementEvent</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>readOnly</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventCategory</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>requestId</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default field indexes are in addition to any custom field indexes you define within your\n      policy. Default field indexes are not counted towards your <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Syntax\">field index\n        quota</a>. </p>\n         <p>If you want to create a field index policy for a single log group, you can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html\">PutIndexPolicy</a> instead of <code>PutAccountPolicy</code>. If you do so, that log\n      group will use that log-group level policy and any account-level policies that match at the\n      data source level; any account-level policy that matches at the log group level (for example,\n      no selection criteria or log group name prefix selection criteria) will be ignored.</p>\n         <p>\n            <b>Metric extraction policy</b>\n         </p>\n         <p>A metric extraction policy controls whether CloudWatch Metrics can be created through the\n      Embedded Metrics Format (EMF) for log groups in your account. By default, EMF metric creation\n      is enabled for all log groups. You can use metric extraction policies to disable EMF metric\n      creation for your entire account or specific log groups.</p>\n         <p>When a policy disables EMF metric creation for a log group, log events in the EMF format\n      are still ingested, but no CloudWatch Metrics are created from them.</p>\n         <important>\n            <p>Creating a policy disables metrics for AWS features that use EMF to create metrics, such\n        as CloudWatch Container Insights and CloudWatch Application Signals. To prevent turning off\n        those features by accident, we recommend that you exclude the underlying log-groups through\n        a selection-criteria such as <code>LogGroupNamePrefix NOT IN [\"/aws/containerinsights\",\n          \"/aws/ecs/containerinsights\", \"/aws/application-signals/data\"]</code>.</p>\n         </important>\n         <p>Each account can have either one account-level metric extraction policy that applies to\n      all log groups, or up to 5 policies that are each scoped to a subset of log groups with the\n        <code>selectionCriteria</code> parameter. The selection criteria supports filtering by\n        <code>LogGroupName</code> and <code>LogGroupNamePrefix</code> using the operators\n        <code>IN</code> and <code>NOT IN</code>. You can specify up to 50 values in each\n        <code>IN</code> or <code>NOT IN</code> list.</p>\n         <p>The selection criteria can be specified in these formats:</p>\n         <p>\n            <code>LogGroupName IN [\"log-group-1\", \"log-group-2\"]</code>\n         </p>\n         <p>\n            <code>LogGroupNamePrefix NOT IN [\"/aws/prefix1\", \"/aws/prefix2\"]</code>\n         </p>\n         <p>If you have multiple account-level metric extraction policies with selection criteria, no\n      two of them can have overlapping criteria. For example, if you have one policy with selection\n      criteria <code>LogGroupNamePrefix IN [\"my-log\"]</code>, you can't have another metric\n      extraction policy with selection criteria <code>LogGroupNamePrefix IN [\"/my-log-prod\"]</code>\n      or <code>LogGroupNamePrefix IN [\"/my-logging\"]</code>, as the set of log groups matching these\n      prefixes would be a subset of the log groups matching the first policy's prefix, creating an\n      overlap.</p>\n         <p>When using <code>NOT IN</code>, only one policy with this operator is allowed per\n      account.</p>\n         <p>When combining policies with <code>IN</code> and <code>NOT IN</code> operators, the\n      overlap check ensures that policies don't have conflicting effects. Two policies with\n        <code>IN</code> and <code>NOT IN</code> operators do not overlap if and only if every value\n      in the <code>IN </code>policy is completely contained within some value in the <code>NOT\n        IN</code> policy. For example:</p>\n         <ul>\n            <li>\n               <p>If you have a <code>NOT IN</code> policy for prefix <code>\"/aws/lambda\"</code>, you\n          can create an <code>IN</code> policy for the exact log group name\n            <code>\"/aws/lambda/function1\"</code> because the set of log groups matching\n            <code>\"/aws/lambda/function1\"</code> is a subset of the log groups matching\n            <code>\"/aws/lambda\"</code>.</p>\n            </li>\n            <li>\n               <p>If you have a <code>NOT IN</code> policy for prefix <code>\"/aws/lambda\"</code>, you\n          cannot create an <code>IN</code> policy for prefix <code>\"/aws\"</code> because the set of\n          log groups matching <code>\"/aws\"</code> is not a subset of the log groups matching\n            <code>\"/aws/lambda\"</code>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutAccountPolicyRequest": {
@@ -11221,14 +11784,14 @@
                 "policyName": {
                     "target": "com.amazonaws.cloudwatchlogs#PolicyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the policy. This must be unique within the account.</p>",
+                        "smithy.api#documentation": "<p>A name for the policy. This must be unique within the account and cannot start with\n        <code>aws/</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "policyDocument": {
                     "target": "com.amazonaws.cloudwatchlogs#AccountPolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the policy, in JSON.</p>\n         <p>\n            <b>Data protection policy</b>\n         </p>\n         <p>A data protection policy must include two JSON blocks:</p>\n         <ul>\n            <li>\n               <p>The first block must include both a <code>DataIdentifer</code> array and an\n            <code>Operation</code> property with an <code>Audit</code> action. The\n            <code>DataIdentifer</code> array lists the types of sensitive data that you want to\n          mask. For more information about the available options, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html\">Types of data that\n            you can mask</a>.</p>\n               <p>The <code>Operation</code> property with an <code>Audit</code> action is required to\n          find the sensitive data terms. This <code>Audit</code> action must contain a\n            <code>FindingsDestination</code> object. You can optionally use that\n            <code>FindingsDestination</code> object to list one or more destinations to send audit\n          findings to. If you specify destinations such as log groups, Firehose streams,\n          and S3 buckets, they must already exist.</p>\n            </li>\n            <li>\n               <p>The second block must include both a <code>DataIdentifer</code> array and an\n            <code>Operation</code> property with an <code>Deidentify</code> action. The\n            <code>DataIdentifer</code> array must exactly match the <code>DataIdentifer</code> array\n          in the first block of the policy.</p>\n               <p>The <code>Operation</code> property with the <code>Deidentify</code> action is what\n          actually masks the data, and it must contain the <code> \"MaskConfig\": {}</code> object.\n          The <code> \"MaskConfig\": {}</code> object must be empty.</p>\n            </li>\n         </ul>\n         <p>For an example data protection policy, see the <b>Examples</b>\n      section on this page.</p>\n         <important>\n            <p>The contents of the two <code>DataIdentifer</code> arrays must match exactly.</p>\n         </important>\n         <p>In addition to the two JSON blocks, the <code>policyDocument</code> can also include\n        <code>Name</code>, <code>Description</code>, and <code>Version</code> fields. The\n        <code>Name</code> is different than the operation's <code>policyName</code> parameter, and\n      is used as a dimension when CloudWatch Logs reports audit findings metrics to CloudWatch.</p>\n         <p>The JSON specified in <code>policyDocument</code> can be up to 30,720 characters\n      long.</p>\n         <p>\n            <b>Subscription filter policy</b>\n         </p>\n         <p>A subscription filter policy can include the following attributes in a JSON block:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>DestinationArn</b> The ARN of the destination to deliver\n          log events to. Supported destinations are:</p>\n               <ul>\n                  <li>\n                     <p>An Kinesis Data Streams data stream in the same account as the subscription policy,\n              for same-account delivery.</p>\n                  </li>\n                  <li>\n                     <p>An Firehose data stream in the same account as the subscription policy,\n              for same-account delivery.</p>\n                  </li>\n                  <li>\n                     <p>A Lambda function in the same account as the subscription policy, for\n              same-account delivery.</p>\n                  </li>\n                  <li>\n                     <p>A logical destination in a different account created with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html\">PutDestination</a>, for cross-account delivery. Kinesis Data Streams and Firehose are supported as logical destinations.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>RoleArn</b> The ARN of an IAM role that grants CloudWatch\n          Logs permissions to deliver ingested log events to the destination stream. You don't need\n          to provide the ARN when you are working with a logical destination for cross-account\n          delivery.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FilterPattern</b> A filter pattern for subscribing to\n          a filtered stream of log events.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Distribution</b> The method used to distribute log data\n          to the destination. By default, log data is grouped by log stream, but the grouping can be\n          set to <code>Random</code> for a more even distribution. This property is only applicable\n          when the destination is an Kinesis Data Streams data stream.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Transformer policy</b>\n         </p>\n         <p>A transformer policy must include one JSON block with the array of processors and their\n      configurations. For more information about available processors, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Processors\"> Processors that you can use</a>. </p>\n         <p>\n            <b>Field index policy</b>\n         </p>\n         <p>A field index filter policy can include the following attribute in a JSON block:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Fields</b> The array of field indexes to create.</p>\n            </li>\n         </ul>\n         <p>It must contain at least one field index.</p>\n         <p>The following is an example of an index policy document that creates two indexes,\n        <code>RequestId</code> and <code>TransactionId</code>.</p>\n         <p>\n            <code>\"policyDocument\": \"{ \\\"Fields\\\": [ \\\"RequestId\\\", \\\"TransactionId\\\" ]\n      }\"</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specify the policy, in JSON.</p>\n         <p>\n            <b>Data protection policy</b>\n         </p>\n         <p>A data protection policy must include two JSON blocks:</p>\n         <ul>\n            <li>\n               <p>The first block must include both a <code>DataIdentifer</code> array and an\n            <code>Operation</code> property with an <code>Audit</code> action. The\n            <code>DataIdentifer</code> array lists the types of sensitive data that you want to\n          mask. For more information about the available options, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html\">Types of data that\n            you can mask</a>.</p>\n               <p>The <code>Operation</code> property with an <code>Audit</code> action is required to\n          find the sensitive data terms. This <code>Audit</code> action must contain a\n            <code>FindingsDestination</code> object. You can optionally use that\n            <code>FindingsDestination</code> object to list one or more destinations to send audit\n          findings to. If you specify destinations such as log groups, Firehose streams,\n          and S3 buckets, they must already exist.</p>\n            </li>\n            <li>\n               <p>The second block must include both a <code>DataIdentifer</code> array and an\n            <code>Operation</code> property with an <code>Deidentify</code> action. The\n            <code>DataIdentifer</code> array must exactly match the <code>DataIdentifer</code> array\n          in the first block of the policy.</p>\n               <p>The <code>Operation</code> property with the <code>Deidentify</code> action is what\n          actually masks the data, and it must contain the <code> \"MaskConfig\": {}</code> object.\n          The <code> \"MaskConfig\": {}</code> object must be empty.</p>\n            </li>\n         </ul>\n         <p>For an example data protection policy, see the <b>Examples</b>\n      section on this page.</p>\n         <important>\n            <p>The contents of the two <code>DataIdentifer</code> arrays must match exactly.</p>\n         </important>\n         <p>In addition to the two JSON blocks, the <code>policyDocument</code> can also include\n        <code>Name</code>, <code>Description</code>, and <code>Version</code> fields. The\n        <code>Name</code> is different than the operation's <code>policyName</code> parameter, and\n      is used as a dimension when CloudWatch Logs reports audit findings metrics to CloudWatch.</p>\n         <p>The JSON specified in <code>policyDocument</code> can be up to 30,720 characters\n      long.</p>\n         <p>\n            <b>Subscription filter policy</b>\n         </p>\n         <p>A subscription filter policy can include the following attributes in a JSON block:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>DestinationArn</b> The ARN of the destination to deliver\n          log events to. Supported destinations are:</p>\n               <ul>\n                  <li>\n                     <p>An Kinesis Data Streams data stream in the same account as the subscription policy,\n              for same-account delivery.</p>\n                  </li>\n                  <li>\n                     <p>An Firehose data stream in the same account as the subscription policy,\n              for same-account delivery.</p>\n                  </li>\n                  <li>\n                     <p>A Lambda function in the same account as the subscription policy, for\n              same-account delivery.</p>\n                  </li>\n                  <li>\n                     <p>A logical destination in a different account created with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html\">PutDestination</a>, for cross-account delivery. Kinesis Data Streams and Firehose are supported as logical destinations.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>RoleArn</b> The ARN of an IAM role that grants CloudWatch\n          Logs permissions to deliver ingested log events to the destination stream. You don't need\n          to provide the ARN when you are working with a logical destination for cross-account\n          delivery.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FilterPattern</b> A filter pattern for subscribing to\n          a filtered stream of log events.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Distribution</b> The method used to distribute log data\n          to the destination. By default, log data is grouped by log stream, but the grouping can be\n          set to <code>Random</code> for a more even distribution. This property is only applicable\n          when the destination is an Kinesis Data Streams data stream.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Transformer policy</b>\n         </p>\n         <p>A transformer policy must include one JSON block with the array of processors and their\n      configurations. For more information about available processors, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Processors\"> Processors that you can use</a>. </p>\n         <p>\n            <b>Field index policy</b>\n         </p>\n         <p>A field index filter policy can include the following attribute in a JSON block:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Fields</b> The array of field indexes to create.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FieldsV2</b> The object of field indexes to create along\n          with it's type.</p>\n            </li>\n         </ul>\n         <p>It must contain at least one field index.</p>\n         <p>The following is an example of an index policy document that creates indexes with\n      different types.</p>\n         <p>\n            <code>\"policyDocument\": \"{ \\\"Fields\\\": [ \\\"TransactionId\\\" ], \\\"FieldsV2\\\":\n        {\\\"RequestId\\\": {\\\"type\\\": \\\"FIELD_INDEX\\\"}, \\\"APIName\\\": {\\\"type\\\": \\\"FACET\\\"},\n        \\\"StatusCode\\\": {\\\"type\\\": \\\"FACET\\\"}}}\"</code>\n         </p>\n         <p>You can use <code>FieldsV2</code> to specify the type for each field. Supported types are\n        <code>FIELD_INDEX</code> and <code>FACET</code>. Field names within <code>Fields</code> and\n        <code>FieldsV2</code> must be mutually exclusive.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11248,7 +11811,7 @@
                 "selectionCriteria": {
                     "target": "com.amazonaws.cloudwatchlogs#SelectionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to apply the new policy to a subset of log groups in the\n      account.</p>\n         <p>Specifying <code>selectionCriteria</code> is valid only when you specify\n        <code>SUBSCRIPTION_FILTER_POLICY</code>, <code>FIELD_INDEX_POLICY</code> or\n        <code>TRANSFORMER_POLICY</code>for <code>policyType</code>.</p>\n         <p>If <code>policyType</code> is <code>SUBSCRIPTION_FILTER_POLICY</code>, the only supported\n        <code>selectionCriteria</code> filter is <code>LogGroupName NOT IN []</code>\n         </p>\n         <p>If <code>policyType</code> is <code>FIELD_INDEX_POLICY</code> or\n        <code>TRANSFORMER_POLICY</code>, the only supported <code>selectionCriteria</code> filter is\n        <code>LogGroupNamePrefix</code>\n         </p>\n         <p>The <code>selectionCriteria</code> string can be up to 25KB in length. The length is\n      determined by using its UTF-8 bytes.</p>\n         <p>Using the <code>selectionCriteria</code> parameter with\n        <code>SUBSCRIPTION_FILTER_POLICY</code> is useful to help prevent infinite loops. For more\n      information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions-recursion-prevention.html\">Log recursion\n        prevention</a>.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to apply the new policy to a subset of log groups in the account or a\n      data source name and type combination.  </p>\n         <p>Specifying <code>selectionCriteria</code> is valid only when you specify\n        <code>SUBSCRIPTION_FILTER_POLICY</code>, <code>FIELD_INDEX_POLICY</code> or\n        <code>TRANSFORMER_POLICY</code>for <code>policyType</code>.</p>\n         <ul>\n            <li>\n               <p>If <code>policyType</code> is <code>SUBSCRIPTION_FILTER_POLICY</code>, the only\n          supported <code>selectionCriteria</code> filter is <code>LogGroupName NOT IN\n          []</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>policyType</code> is <code>TRANSFORMER_POLICY</code>, the only supported\n            <code>selectionCriteria</code> filter is <code>LogGroupNamePrefix</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>policyType</code> is <code>FIELD_INDEX_POLICY</code>, the supported\n            <code>selectionCriteria</code> filters are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>LogGroupNamePrefix</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DataSourceName</code> AND <code>DataSourceType</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When you specify <code>selectionCriteria</code> for a field index policy you can\n        use either <code>LogGroupNamePrefix</code> by itself or <code>DataSourceName</code> and\n          <code>DataSourceType</code> together.</p>\n            </li>\n         </ul>\n         <p>The <code>selectionCriteria</code> string can be up to 25KB in length. The length is\n      determined by using its UTF-8 bytes.</p>\n         <p>Using the <code>selectionCriteria</code> parameter with\n        <code>SUBSCRIPTION_FILTER_POLICY</code> is useful to help prevent infinite loops. For more\n      information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions-recursion-prevention.html\">Log recursion\n        prevention</a>.</p>"
                     }
                 }
             },
@@ -11546,7 +12109,7 @@
                 "logType": {
                     "target": "com.amazonaws.cloudwatchlogs#LogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and\n            <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Knowledge Bases, the valid value is\n            <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Runtime, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Tools, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Identity, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Gateway, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and\n            <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are <code>AD_DECISION_SERVER_LOGS</code>,\n            <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is\n          <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Load Balancer, the valid value is <code>NLB_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code> and\n            <code>PCS_JOBCOMP_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services RTB Fabric, the valid values is\n          <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and\n            <code>SYNC_JOB_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,\n            <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,\n            <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and\n            <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon VPC Route Server, the valid value is\n          <code>EVENT_LOGS</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and\n            <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Knowledge Bases, the valid value is\n            <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Runtime, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Tools, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Identity, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Gateway, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and\n            <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are <code>AD_DECISION_SERVER_LOGS</code>,\n            <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is\n          <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Firewall Proxy, the valid values are <code>ALERT_LOGS</code>,\n            <code>ALLOW_LOGS</code>, and <code>DENY_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Load Balancer, the valid value is <code>NLB_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code> and\n            <code>PCS_JOBCOMP_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Quick Suite, the valid values are <code>CHAT_LOGS</code> and\n            <code>FEEDBACK_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services RTB Fabric, the valid values is\n          <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and\n            <code>SYNC_JOB_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,\n            <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,\n            <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and\n            <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon VPC Route Server, the valid value is\n          <code>EVENT_LOGS</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11724,7 +12287,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a <i>field index policy</i> for the specified log group.\n      Only log groups in the Standard log class support field index policies. For more information\n      about log classes, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html\">Log\n      classes</a>.</p>\n         <p>You can use field index policies to create <i>field indexes</i> on fields\n      found in log events in the log group. Creating field indexes speeds up and lowers the costs\n      for CloudWatch Logs Insights queries that reference those field indexes, because these\n      queries attempt to skip the processing of log events that are known to not match the indexed\n      field. Good fields to index are fields that you often need to query for and fields or values\n      that match only a small fraction of the total log events. Common examples of indexes include\n      request ID, session ID, userID, and instance IDs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html\">Create field indexes to improve query performance and reduce costs</a>.</p>\n         <p>You can configure indexed fields as <i>facets</i> to enable\n      interactive exploration and filtering of your logs in the CloudWatch Logs Insights console. Facets\n      allow you to view value distributions and counts for indexed fields without running queries.\n      When you create a field index, you can optionally set it as a facet to enable this interactive\n      analysis capability. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Facets.html\">Use facets to group and\n        explore logs</a>.</p>\n         <p>To find the fields that are in your log group events, use the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html\">GetLogGroupFields</a> operation.</p>\n         <p>For example, suppose you have created a field index for <code>requestId</code>. Then, any\n        CloudWatch Logs Insights query on that log group that includes <code>requestId =\n          <i>value</i>\n            </code> or <code>requestId IN [<i>value</i>,\n          <i>value</i>, ...]</code> will process fewer log events to reduce costs, and\n      have improved performance.</p>\n         <p>CloudWatch Logs provides default field indexes for all log groups in the Standard log\n      class. Default field indexes are automatically available for the following fields: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>@logStream</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@aws.region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@aws.account</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@source.log</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>traceId</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default field indexes are in addition to any custom field indexes you define within your\n      policy. Default field indexes are not counted towards your field index quota. </p>\n         <p>Each index policy has the following quotas and restrictions:</p>\n         <ul>\n            <li>\n               <p>As many as 20 fields can be included in the policy.</p>\n            </li>\n            <li>\n               <p>Each field name can include as many as 100 characters.</p>\n            </li>\n         </ul>\n         <p>Matches of log events to the names of indexed fields are case-sensitive. For example, a\n      field index of <code>RequestId</code> won't match a log event containing\n        <code>requestId</code>.</p>\n         <p>Log group-level field index policies created with\n        <code>PutIndexPolicy</code> override account-level field index policies created with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html\">PutAccountPolicy</a> that apply to log groups. If you use <code>PutIndexPolicy</code>\n      to create a field index policy for a log group, that log group uses only that policy for log\n      group-level indexing, including any facet configurations. The log group ignores any\n      account-wide field index policy that applies to log groups, but data source-based account\n      policies may still apply.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a <i>field index policy</i> for the specified log group.\n      Only log groups in the Standard log class support field index policies. For more information\n      about log classes, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html\">Log\n      classes</a>.</p>\n         <p>You can use field index policies to create <i>field indexes</i> on fields\n      found in log events in the log group. Creating field indexes speeds up and lowers the costs\n      for CloudWatch Logs Insights queries that reference those field indexes, because these\n      queries attempt to skip the processing of log events that are known to not match the indexed\n      field. Good fields to index are fields that you often need to query for and fields or values\n      that match only a small fraction of the total log events. Common examples of indexes include\n      request ID, session ID, userID, and instance IDs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html\">Create field indexes to improve query performance and reduce costs</a>.</p>\n         <p>You can configure indexed fields as <i>facets</i> to enable interactive\n      exploration and filtering of your logs in the CloudWatch Logs Insights console. Facets\n      allow you to view value distributions and counts for indexed fields without running queries.\n      When you create a field index, you can optionally set it as a facet to enable this interactive\n      analysis capability. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Facets.html\">Use facets to group and\n        explore logs</a>.</p>\n         <p>To find the fields that are in your log group events, use the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html\">GetLogGroupFields</a> operation.</p>\n         <p>For example, suppose you have created a field index for <code>requestId</code>. Then, any\n        CloudWatch Logs Insights query on that log group that includes <code>requestId =\n          <i>value</i>\n            </code> or <code>requestId IN [<i>value</i>,\n          <i>value</i>, ...]</code> will process fewer log events to reduce costs, and\n      have improved performance.</p>\n         <p>CloudWatch Logs provides default field indexes for all log groups in the Standard log\n      class. Default field indexes are automatically available for the following fields: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>@logStream</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@aws.region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@aws.account</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>@source.log</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>traceId</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default field indexes are in addition to any custom field indexes you define within your\n      policy. Default field indexes are not counted towards your field index quota. </p>\n         <p>Each index policy has the following quotas and restrictions:</p>\n         <ul>\n            <li>\n               <p>As many as 20 fields can be included in the policy.</p>\n            </li>\n            <li>\n               <p>Each field name can include as many as 100 characters.</p>\n            </li>\n         </ul>\n         <p>Matches of log events to the names of indexed fields are case-sensitive. For example, a\n      field index of <code>RequestId</code> won't match a log event containing\n        <code>requestId</code>.</p>\n         <p>Log group-level field index policies created with <code>PutIndexPolicy</code> override\n      account-level field index policies created with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html\">PutAccountPolicy</a> that apply to log groups. If you use <code>PutIndexPolicy</code>\n      to create a field index policy for a log group, that log group uses only that policy for log\n      group-level indexing, including any facet configurations. The log group ignores any\n      account-wide field index policy that applies to log groups, but data source-based account\n      policies may still apply.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutIndexPolicyRequest": {
@@ -11740,7 +12303,7 @@
                 "policyDocument": {
                     "target": "com.amazonaws.cloudwatchlogs#PolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The index policy document, in JSON format. The following is an example of an index policy\n      document that creates two indexes, <code>RequestId</code> and\n      <code>TransactionId</code>.</p>\n         <p>\n            <code>\"policyDocument\": \"{ \"Fields\": [ \"RequestId\", \"TransactionId\" ] }\"</code>\n         </p>\n         <p>The policy document must include at least one field index. For more information about the\n      fields that can be included and other restrictions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Syntax.html\">Field index\n        syntax and quotas</a>.</p>",
+                        "smithy.api#documentation": "<p>The index policy document, in JSON format. The following is an example of an index policy\n      document that creates indexes with different types.</p>\n         <p>\n            <code>\"policyDocument\": \"{\"Fields\": [ \"TransactionId\" ], \"FieldsV2\": {\"RequestId\":\n        {\"type\": \"FIELD_INDEX\"}, \"APIName\": {\"type\": \"FACET\"}, \"StatusCode\": {\"type\":\n        \"FACET\"}}}\"</code>\n         </p>\n         <p>You can use <code>FieldsV2</code> to specify the type for each field. Supported types are\n        <code>FIELD_INDEX</code> and <code>FACET</code>. Field names within <code>Fields</code> and\n        <code>FieldsV2</code> must be mutually exclusive.</p>\n         <p>The policy document must include at least one field index. For more information about the\n      fields that can be included and other restrictions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Syntax.html\">Field index\n        syntax and quotas</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11966,7 +12529,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables or disables deletion protection for the specified log group. When enabled on a log group, deletion protection blocks all\n      deletion operations until it is explicitly disabled.</p>\n         <p>For information about the parameters that are common to all actions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/CommonParameters.html\">Common Parameters</a>.</p>"
+                "smithy.api#documentation": "<p>Enables or disables deletion protection for the specified log group. When enabled on a\n      log group, deletion protection blocks all deletion operations until it is explicitly\n      disabled.</p>\n         <p>For information about the parameters that are common to all actions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/CommonParameters.html\">Common Parameters</a>.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutLogGroupDeletionProtectionRequest": {
@@ -13089,7 +13652,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.cloudwatchlogs#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that grants permissions to write query results to the specified Amazon S3 destination.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that grants permissions to write query results to the specified\n      Amazon S3 destination.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -13279,7 +13842,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a destination where scheduled query results are processed, including processing status and any error messages.</p>"
+                "smithy.api#documentation": "<p>Information about a destination where scheduled query results are processed, including\n      processing status and any error messages.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#ScheduledQueryDestinationList": {
@@ -13409,7 +13972,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about a scheduled query, including basic configuration and execution status.</p>"
+                "smithy.api#documentation": "<p>Summary information about a scheduled query, including basic configuration and execution\n      status.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#ScheduledQuerySummaryList": {
@@ -14775,7 +15338,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A record of a scheduled query execution, including execution status, timestamp, and destination processing results.</p>"
+                "smithy.api#documentation": "<p>A record of a scheduled query execution, including execution status, timestamp, and\n      destination processing results.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#TriggerHistoryRecordList": {
@@ -15229,7 +15792,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing scheduled query with new configuration. This operation uses PUT semantics, allowing modification of query parameters, schedule, and destinations.</p>"
+                "smithy.api#documentation": "<p>Updates an existing scheduled query with new configuration. This operation uses PUT\n      semantics, allowing modification of query parameters, schedule, and destinations.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#UpdateScheduledQueryRequest": {
@@ -15308,7 +15871,7 @@
                 "executionRoleArn": {
                     "target": "com.amazonaws.cloudwatchlogs#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated ARN of the IAM role that grants permissions to execute the query and deliver results.</p>",
+                        "smithy.api#documentation": "<p>The updated ARN of the IAM role that grants permissions to execute the query and deliver\n      results.</p>",
                         "smithy.api#required": {}
                     }
                 },

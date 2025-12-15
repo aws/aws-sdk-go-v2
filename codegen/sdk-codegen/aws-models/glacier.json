@@ -45,6 +45,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -52,7 +55,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation aborts a multipart upload identified by the upload ID.</p>\n\n\n         <p>After the Abort Multipart Upload request succeeds, you cannot upload any more parts\n         to the multipart upload or complete the multipart upload. Aborting a completed upload\n         fails. However, aborting an already-aborted upload will succeed, for a short time. For more\n         information about uploading a part and completing a multipart upload, see <a>UploadMultipartPart</a> and <a>CompleteMultipartUpload</a>.</p>\n\n         <p>This operation is idempotent.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in\n            Amazon S3 Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html\">Abort Multipart\n            Upload</a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>This operation aborts a multipart upload identified by the upload ID.</p>\n\n\n         <p>After the Abort Multipart Upload request succeeds, you cannot upload any more parts\n         to the multipart upload or complete the multipart upload. Aborting a completed upload\n         fails. However, aborting an already-aborted upload will succeed, for a short time. For more\n         information about uploading a part and completing a multipart upload, see <a>UploadMultipartPart</a> and <a>CompleteMultipartUpload</a>.</p>\n\n         <p>This operation is idempotent.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in\n            Amazon Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html\">Abort Multipart\n            Upload</a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To abort a multipart upload identified by the upload ID",
@@ -77,7 +80,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -100,7 +103,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides options to abort a multipart upload identified by the upload ID.</p>\n\n         <p>For information about the underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html\">Abort Multipart\n            Upload</a>. For conceptual information, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in\n            Amazon S3 Glacier</a>.</p>",
+                "smithy.api#documentation": "<p>Provides options to abort a multipart upload identified by the upload ID.</p>\n\n         <p>For information about the underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html\">Abort Multipart\n            Upload</a>. For conceptual information, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in\n            Amazon Glacier</a>.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -118,6 +121,9 @@
                 },
                 {
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
                 },
                 {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
@@ -218,6 +224,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -225,7 +234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation adds the specified tags to a vault. Each tag is composed of a key and\n         a value. Each vault can have up to 10 tags. If your request would cause the tag limit for\n         the vault to be exceeded, the operation throws the <code>LimitExceededException</code>\n         error. If a tag already exists on the vault under a specified key, the existing key value\n         will be overwritten. For more information about tags, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html\">Tagging Amazon S3 Glacier Resources</a>.\n      </p>",
+                "smithy.api#documentation": "<p>This operation adds the specified tags to a vault. Each tag is composed of a key and\n         a value. Each vault can have up to 10 tags. If your request would cause the tag limit for\n         the vault to be exceeded, the operation throws the <code>LimitExceededException</code>\n         error. If a tag already exists on the vault under a specified key, the existing key value\n         will be overwritten. For more information about tags, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html\">Tagging Amazon Glacier Resources</a>.\n      </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To add tags to a vault",
@@ -253,7 +262,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -291,7 +300,7 @@
                 "checksum": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The checksum of the archive computed by Amazon S3 Glacier.</p>",
+                        "smithy.api#documentation": "<p>The checksum of the archive computed by Amazon Glacier.</p>",
                         "smithy.api#httpHeader": "x-amz-sha256-tree-hash"
                     }
                 },
@@ -304,7 +313,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>\n         <p>For information about the underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html\">Upload Archive</a>. For\n         conceptual information, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in\n            Amazon S3 Glacier</a>.</p>"
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>\n         <p>For information about the underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html\">Upload Archive</a>. For\n         conceptual information, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in\n            Amazon Glacier</a>.</p>"
             }
         },
         "com.amazonaws.glacier#CSVInput": {
@@ -452,6 +461,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -459,7 +471,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>You call this operation to inform Amazon S3 Glacier (Glacier) that all the archive parts have been\n         uploaded and that Glacier can now assemble the archive from the uploaded parts.\n         After assembling and saving the archive to the vault, Glacier returns the URI path\n         of the newly created archive resource. Using the URI path, you can then access the archive.\n         After you upload an archive, you should save the archive ID returned to retrieve the\n         archive at a later point. You can also get the vault inventory to obtain a list of archive\n         IDs in a vault. For more information, see <a>InitiateJob</a>.</p>\n\n         <p>In the request, you must include the computed SHA256 tree hash of the entire archive\n         you have uploaded. For information about computing a SHA256 tree hash, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html\">Computing\n            Checksums</a>. On the server side, Glacier also constructs the SHA256 tree\n         hash of the assembled archive. If the values match, Glacier saves the archive to the\n         vault; otherwise, it returns an error, and the operation fails. The <a>ListParts</a> operation returns a list of parts uploaded for a specific\n         multipart upload. It includes checksum information for each uploaded part that can be used\n         to debug a bad checksum issue.</p>\n\n         <p>Additionally, Glacier also checks for any missing content ranges when\n         assembling the archive, if missing content ranges are found, Glacier returns an\n         error and the operation fails.</p>\n\n         <p>Complete Multipart Upload is an idempotent operation. After your first successful\n         complete multipart upload, if you call the operation again within a short period, the\n         operation will succeed and return the same archive ID. This is useful in the event you\n         experience a network issue that causes an aborted connection or receive a 500 server error,\n         in which case you can repeat your Complete Multipart Upload request and get the same\n         archive ID without creating duplicate archives. Note, however, that after the multipart\n         upload completes, you cannot call the List Parts operation and the multipart upload will\n         not appear in List Multipart Uploads response, even if idempotent complete is\n         possible.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in\n            Parts (Multipart Upload)</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-complete-upload.html\">Complete Multipart\n            Upload</a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>You call this operation to inform Amazon Glacier (Glacier) that all the archive parts have been\n         uploaded and that Glacier can now assemble the archive from the uploaded parts.\n         After assembling and saving the archive to the vault, Glacier returns the URI path\n         of the newly created archive resource. Using the URI path, you can then access the archive.\n         After you upload an archive, you should save the archive ID returned to retrieve the\n         archive at a later point. You can also get the vault inventory to obtain a list of archive\n         IDs in a vault. For more information, see <a>InitiateJob</a>.</p>\n\n         <p>In the request, you must include the computed SHA256 tree hash of the entire archive\n         you have uploaded. For information about computing a SHA256 tree hash, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html\">Computing\n            Checksums</a>. On the server side, Glacier also constructs the SHA256 tree\n         hash of the assembled archive. If the values match, Glacier saves the archive to the\n         vault; otherwise, it returns an error, and the operation fails. The <a>ListParts</a> operation returns a list of parts uploaded for a specific\n         multipart upload. It includes checksum information for each uploaded part that can be used\n         to debug a bad checksum issue.</p>\n\n         <p>Additionally, Glacier also checks for any missing content ranges when\n         assembling the archive, if missing content ranges are found, Glacier returns an\n         error and the operation fails.</p>\n\n         <p>Complete Multipart Upload is an idempotent operation. After your first successful\n         complete multipart upload, if you call the operation again within a short period, the\n         operation will succeed and return the same archive ID. This is useful in the event you\n         experience a network issue that causes an aborted connection or receive a 500 server error,\n         in which case you can repeat your Complete Multipart Upload request and get the same\n         archive ID without creating duplicate archives. Note, however, that after the multipart\n         upload completes, you cannot call the List Parts operation and the multipart upload will\n         not appear in List Multipart Uploads response, even if idempotent complete is\n         possible.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in\n            Parts (Multipart Upload)</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-complete-upload.html\">Complete Multipart\n            Upload</a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To complete a multipart upload",
@@ -491,7 +503,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -522,13 +534,13 @@
                 "checksum": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SHA256 tree hash of the entire archive. It is the tree hash of SHA256 tree hash\n         of the individual parts. If the value you specify in the request does not match the SHA256\n         tree hash of the final assembled archive as computed by Amazon S3 Glacier (Glacier), \n         Glacier returns an error and the request fails.</p>",
+                        "smithy.api#documentation": "<p>The SHA256 tree hash of the entire archive. It is the tree hash of SHA256 tree hash\n         of the individual parts. If the value you specify in the request does not match the SHA256\n         tree hash of the final assembled archive as computed by Amazon Glacier (Glacier), \n         Glacier returns an error and the request fails.</p>",
                         "smithy.api#httpHeader": "x-amz-sha256-tree-hash"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides options to complete a multipart upload operation. This informs Amazon\n         Glacier that all the archive parts have been uploaded and Amazon S3 Glacier (Glacier) can now assemble\n         the archive from the uploaded parts. After assembling and saving the archive to the vault,\n         Glacier returns the URI path of the newly created archive resource.</p>",
+                "smithy.api#documentation": "<p>Provides options to complete a multipart upload operation. This informs Amazon\n         Glacier that all the archive parts have been uploaded and Amazon Glacier (Glacier) can now assemble\n         the archive from the uploaded parts. After assembling and saving the archive to the vault,\n         Glacier returns the URI path of the newly created archive resource.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -546,6 +558,9 @@
                 },
                 {
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
                 },
                 {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
@@ -626,11 +641,14 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ServiceUnavailableException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation creates a new vault with the specified name. The name of the vault\n         must be unique within a region for an AWS account. You can create up to 1,000 vaults per\n         account. If you need to create more vaults, contact Amazon S3 Glacier.</p>\n         <p>You must use the following guidelines when naming a vault.</p>\n         <ul>\n            <li>\n               <p>Names can be between 1 and 255 characters long.</p>\n            </li>\n            <li>\n               <p>Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), and '.'\n               (period).</p>\n            </li>\n         </ul>\n\n         <p>This operation is idempotent.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/creating-vaults.html\">Creating a Vault in Amazon\n            Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html\">Create Vault </a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>This operation creates a new vault with the specified name. The name of the vault\n         must be unique within a region for an AWS account. You can create up to 1,000 vaults per\n         account. If you need to create more vaults, contact Amazon Glacier.</p>\n         <p>You must use the following guidelines when naming a vault.</p>\n         <ul>\n            <li>\n               <p>Names can be between 1 and 255 characters long.</p>\n            </li>\n            <li>\n               <p>Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), and '.'\n               (period).</p>\n            </li>\n         </ul>\n\n         <p>This operation is idempotent.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/creating-vaults.html\">Creating a Vault in Amazon\n            Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html\">Create Vault </a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a new vault",
@@ -688,7 +706,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -751,6 +769,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -758,7 +779,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation deletes an archive from a vault. Subsequent requests to initiate a\n         retrieval of this archive will fail. Archive retrievals that are in progress for this\n         archive ID may or may not succeed according to the following scenarios:</p>\n         <ul>\n            <li>\n               <p>If the archive retrieval job is actively preparing the data for download when\n               Amazon S3 Glacier receives the delete archive request, the archival retrieval operation\n               might fail.</p>\n            </li>\n            <li>\n               <p>If the archive retrieval job has successfully prepared the archive for download\n               when Amazon S3 Glacier receives the delete archive request, you will be able to download\n               the output.</p>\n            </li>\n         </ul>\n\n         <p>This operation is idempotent. Attempting to delete an already-deleted archive does\n         not result in an error.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-an-archive.html\">Deleting an Archive in Amazon\n            Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html\">Delete Archive</a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>This operation deletes an archive from a vault. Subsequent requests to initiate a\n         retrieval of this archive will fail. Archive retrievals that are in progress for this\n         archive ID may or may not succeed according to the following scenarios:</p>\n         <ul>\n            <li>\n               <p>If the archive retrieval job is actively preparing the data for download when\n               Amazon Glacier receives the delete archive request, the archival retrieval operation\n               might fail.</p>\n            </li>\n            <li>\n               <p>If the archive retrieval job has successfully prepared the archive for download\n               when Amazon Glacier receives the delete archive request, you will be able to download\n               the output.</p>\n            </li>\n         </ul>\n\n         <p>This operation is idempotent. Attempting to delete an already-deleted archive does\n         not result in an error.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-an-archive.html\">Deleting an Archive in Amazon\n            Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html\">Delete Archive</a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete an archive",
@@ -783,7 +804,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -806,7 +827,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides options for deleting an archive from an Amazon S3 Glacier vault.</p>",
+                "smithy.api#documentation": "<p>Provides options for deleting an archive from an Amazon Glacier vault.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -826,6 +847,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -833,7 +857,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation deletes a vault. Amazon S3 Glacier will delete a vault only if there are\n         no archives in the vault as of the last inventory and there have been no writes to the\n         vault since the last inventory. If either of these conditions is not satisfied, the vault\n         deletion fails (that is, the vault is not removed) and Amazon S3 Glacier returns an error. You\n         can use <a>DescribeVault</a> to return the number of archives in a vault, and\n         you can use <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html\">Initiate a Job (POST\n            jobs)</a> to initiate a new inventory retrieval for a vault. The inventory contains\n         the archive IDs you use to delete archives using <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html\">Delete Archive (DELETE\n            archive)</a>.</p>\n\n         <p>This operation is idempotent.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-vaults.html\">Deleting a Vault in Amazon\n            Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-delete.html\">Delete Vault </a> in the\n            <i>Amazon S3 Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>This operation deletes a vault. Amazon Glacier will delete a vault only if there are\n         no archives in the vault as of the last inventory and there have been no writes to the\n         vault since the last inventory. If either of these conditions is not satisfied, the vault\n         deletion fails (that is, the vault is not removed) and Amazon Glacier returns an error. You\n         can use <a>DescribeVault</a> to return the number of archives in a vault, and\n         you can use <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html\">Initiate a Job (POST\n            jobs)</a> to initiate a new inventory retrieval for a vault. The inventory contains\n         the archive IDs you use to delete archives using <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html\">Delete Archive (DELETE\n            archive)</a>.</p>\n\n         <p>This operation is idempotent.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-vaults.html\">Deleting a Vault in Amazon\n            Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-delete.html\">Delete Vault </a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete a vault",
@@ -867,6 +891,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -874,7 +901,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation deletes the access policy associated with the specified vault. The\n         operation is eventually consistent; that is, it might take some time for Amazon S3 Glacier to\n         completely remove the access policy, and you might still see the effect of the policy for a\n         short time after you send the delete request.</p>\n         <p>This operation is idempotent. You can invoke delete multiple times, even if there is\n         no policy associated with the vault. For more information about vault access policies, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html\">Amazon Glacier Access Control with Vault Access Policies</a>. </p>",
+                "smithy.api#documentation": "<p>This operation deletes the access policy associated with the specified vault. The\n         operation is eventually consistent; that is, it might take some time for Amazon Glacier to\n         completely remove the access policy, and you might still see the effect of the policy for a\n         short time after you send the delete request.</p>\n         <p>This operation is idempotent. You can invoke delete multiple times, even if there is\n         no policy associated with the vault. For more information about vault access policies, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html\">Amazon Glacier Access Control with Vault Access Policies</a>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete the vault access policy",
@@ -898,7 +925,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -923,7 +950,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -938,7 +965,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides options for deleting a vault from Amazon S3 Glacier.</p>",
+                "smithy.api#documentation": "<p>Provides options for deleting a vault from Amazon Glacier.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -958,6 +985,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -965,7 +995,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation deletes the notification configuration set for a vault. The operation\n         is eventually consistent; that is, it might take some time for Amazon S3 Glacier to completely\n         disable the notifications and you might still receive some notifications for a short time\n         after you send the delete request.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n         <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access\n            Control Using AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault\n            Notifications in Amazon S3 Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html\">Delete Vault\n            Notification Configuration </a> in the Amazon S3 Glacier Developer Guide. </p>",
+                "smithy.api#documentation": "<p>This operation deletes the notification configuration set for a vault. The operation\n         is eventually consistent; that is, it might take some time for Amazon Glacier to completely\n         disable the notifications and you might still receive some notifications for a short time\n         after you send the delete request.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n         <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access\n            Control Using AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault\n            Notifications in Amazon Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html\">Delete Vault\n            Notification Configuration </a> in the Amazon Glacier Developer Guide. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete the notification configuration set for a vault",
@@ -989,7 +1019,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1024,6 +1054,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -1031,7 +1064,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation returns information about a job you previously initiated, including\n         the job initiation date, the user who initiated the job, the job status code/message and\n         the Amazon SNS topic to notify after Amazon S3 Glacier (Glacier) completes the job. For more information\n         about initiating a job, see <a>InitiateJob</a>. </p>\n\n         <note>\n            <p>This operation enables you to check the status of your job. However, it is\n            strongly recommended that you set up an Amazon SNS topic and specify it in your initiate\n            job request so that Glacier can notify the topic after it completes the\n            job.</p>\n         </note>\n\n         <p>A job ID will not expire for at least 24 hours after Glacier completes the\n         job.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n\n         <p> For more information about using this operation, \n         see the documentation for the underlying REST API <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-describe-job-get.html\">Describe Job</a> \n         in the <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>This operation returns information about a job you previously initiated, including\n         the job initiation date, the user who initiated the job, the job status code/message and\n         the Amazon SNS topic to notify after Amazon Glacier (Glacier) completes the job. For more information\n         about initiating a job, see <a>InitiateJob</a>. </p>\n\n         <note>\n            <p>This operation enables you to check the status of your job. However, it is\n            strongly recommended that you set up an Amazon SNS topic and specify it in your initiate\n            job request so that Glacier can notify the topic after it completes the\n            job.</p>\n         </note>\n\n         <p>A job ID will not expire for at least 24 hours after Glacier completes the\n         job.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n\n         <p> For more information about using this operation, \n         see the documentation for the underlying REST API <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-describe-job-get.html\">Describe Job</a> \n         in the <i>Amazon Glacier Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To get information about a previously initiated job",
@@ -1067,7 +1100,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1110,6 +1143,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -1117,7 +1153,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation returns information about a vault, including the vault's Amazon\n         Resource Name (ARN), the date the vault was created, the number of archives it contains,\n         and the total size of all the archives in the vault. The number of archives and their total\n         size are as of the last inventory generation. This means that if you add or remove an\n         archive from a vault, and then immediately use Describe Vault, the change in contents will\n         not be immediately reflected. If you want to retrieve the latest inventory of the vault,\n         use <a>InitiateJob</a>. Amazon S3 Glacier generates vault inventories approximately\n         daily. For more information, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html\">Downloading a Vault Inventory in\n            Amazon S3 Glacier</a>. </p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html\">Retrieving Vault Metadata in\n            Amazon S3 Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html\">Describe Vault </a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>This operation returns information about a vault, including the vault's Amazon\n         Resource Name (ARN), the date the vault was created, the number of archives it contains,\n         and the total size of all the archives in the vault. The number of archives and their total\n         size are as of the last inventory generation. This means that if you add or remove an\n         archive from a vault, and then immediately use Describe Vault, the change in contents will\n         not be immediately reflected. If you want to retrieve the latest inventory of the vault,\n         use <a>InitiateJob</a>. Amazon Glacier generates vault inventories approximately\n         daily. For more information, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html\">Downloading a Vault Inventory in\n            Amazon Glacier</a>. </p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html\">Retrieving Vault Metadata in\n            Amazon Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html\">Describe Vault </a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To retrieve information about a vault",
@@ -1184,7 +1220,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1227,7 +1263,7 @@
                 "LastInventoryDate": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Universal Coordinated Time (UTC) date when Amazon S3 Glacier completed the last\n         vault inventory.  This value should be a string in the ISO 8601 date format, for example\n            <code>2012-03-20T17:03:43.221Z</code>.</p>"
+                        "smithy.api#documentation": "<p>The Universal Coordinated Time (UTC) date when Amazon Glacier completed the last\n         vault inventory.  This value should be a string in the ISO 8601 date format, for example\n            <code>2012-03-20T17:03:43.221Z</code>.</p>"
                     }
                 },
                 "NumberOfArchives": {
@@ -1246,7 +1282,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>"
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>"
             }
         },
         "com.amazonaws.glacier#Encryption": {
@@ -1342,6 +1378,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ServiceUnavailableException"
                 }
             ],
@@ -1401,7 +1440,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to the <code>GetDataRetrievalPolicy</code>\n         request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to the <code>GetDataRetrievalPolicy</code>\n         request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -1421,6 +1460,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -1428,7 +1470,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation downloads the output of the job you initiated using <a>InitiateJob</a>. Depending on the job type you specified when you initiated the\n         job, the output will be either the content of an archive or a vault inventory.</p>\n\n         <p>You can download all the job output or download a portion of the output by specifying\n         a byte range. In the case of an archive retrieval job, depending on the byte range you\n         specify, Amazon S3 Glacier (Glacier) returns the checksum for the portion of the data. You can compute the\n         checksum on the client and verify that the values match to ensure the portion you downloaded\n         is the correct data.</p>\n         <p>A job ID will not expire for at least 24 hours after Glacier completes the job. That\n         a byte range. For both archive and inventory retrieval jobs, you should verify the downloaded \n         size against the size returned in the headers from the \n         <b>Get Job Output</b> response.</p>\n         <p>For archive retrieval jobs, you should also verify that the size is what you expected. If\n         you download a portion of the output, the expected size is based on the range of bytes\n         you specified. For example, if you specify a range of <code>bytes=0-1048575</code>, you should\n         verify your download size is 1,048,576 bytes. If you download an entire archive, the\n         expected size is the size of the archive when you uploaded it to Amazon S3 Glacier\n         The expected size is also returned in the headers from the \n         <b>Get Job Output</b> response.</p>\n         <p>In the case of an archive retrieval job, depending on the byte range you\n         specify, Glacier returns the checksum for the portion of the data. To ensure the portion you downloaded \n         is the correct data, compute the checksum on the client, verify that the values match, \n         and verify that the size is what you expected.</p>\n      \n         <p>A job ID does not expire for at least 24 hours after Glacier completes the\n         job. That is, you can download the job output within the 24 hours period after Amazon\n         Glacier completes the job.</p>    \n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and the underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html\">Downloading a\n            Vault Inventory</a>, <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive.html\">Downloading an\n            Archive</a>, and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html\">Get Job Output </a>\n         </p>",
+                "smithy.api#documentation": "<p>This operation downloads the output of the job you initiated using <a>InitiateJob</a>. Depending on the job type you specified when you initiated the\n         job, the output will be either the content of an archive or a vault inventory.</p>\n\n         <p>You can download all the job output or download a portion of the output by specifying\n         a byte range. In the case of an archive retrieval job, depending on the byte range you\n         specify, Amazon Glacier (Glacier) returns the checksum for the portion of the data. You can compute the\n         checksum on the client and verify that the values match to ensure the portion you downloaded\n         is the correct data.</p>\n         <p>A job ID will not expire for at least 24 hours after Glacier completes the job. That\n         a byte range. For both archive and inventory retrieval jobs, you should verify the downloaded \n         size against the size returned in the headers from the \n         <b>Get Job Output</b> response.</p>\n         <p>For archive retrieval jobs, you should also verify that the size is what you expected. If\n         you download a portion of the output, the expected size is based on the range of bytes\n         you specified. For example, if you specify a range of <code>bytes=0-1048575</code>, you should\n         verify your download size is 1,048,576 bytes. If you download an entire archive, the\n         expected size is the size of the archive when you uploaded it to Amazon Glacier\n         The expected size is also returned in the headers from the \n         <b>Get Job Output</b> response.</p>\n         <p>In the case of an archive retrieval job, depending on the byte range you\n         specify, Glacier returns the checksum for the portion of the data. To ensure the portion you downloaded \n         is the correct data, compute the checksum on the client, verify that the values match, \n         and verify that the size is what you expected.</p>\n      \n         <p>A job ID does not expire for at least 24 hours after Glacier completes the\n         job. That is, you can download the job output within the 24 hours period after Amazon\n         Glacier completes the job.</p>    \n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and the underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html\">Downloading a\n            Vault Inventory</a>, <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive.html\">Downloading an\n            Archive</a>, and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html\">Get Job Output </a>\n         </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To get the output of a previously initiated job",
@@ -1460,7 +1502,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1484,13 +1526,13 @@
                 "range": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The range of bytes to retrieve from the output. For example, if you want to download\n         the first 1,048,576 bytes, specify the range as <code>bytes=0-1048575</code>. By default, this operation\n         downloads the entire output.</p>\n      \n         <p>If the job output is large, then you can use a range to\n         retrieve a portion of the output. This allows you to download the entire output in smaller\n         chunks of bytes. For example, suppose you have 1 GB of job output you want to download and\n         you decide to download 128 MB chunks of data at a time, which is a total of eight Get Job\n         Output requests. You use the following process to download the job output:</p>\n     \n         <ol>\n            <li>\n               <p>Download a 128 MB chunk of output by specifying the appropriate byte range.\n                  Verify that all 128 MB of data was received.</p>\n            </li>\n            <li>\n               <p>Along with the data, the response includes a SHA256 tree hash of the payload.\n                  You compute the checksum of the payload on the client and compare it with the\n                  checksum you received in the response to ensure you received all the expected\n                  data.</p>\n            </li>\n            <li>\n               <p>Repeat steps 1 and 2 for all the eight 128 MB chunks of output data, each time\n                  specifying the appropriate byte range.</p>\n            </li>\n            <li>\n               <p>After downloading all the parts of the job output, you have a list of eight\n                  checksum values. Compute the tree hash of these values to find the checksum of the\n                  entire output. Using the <a>DescribeJob</a> API, obtain job information of\n                  the job that provided you the output. The response includes the checksum of the\n                  entire archive stored in Amazon S3 Glacier. You compare this value with the checksum you\n                  computed to ensure you have downloaded the entire archive content with no\n                  errors.</p>\n               <p></p>\n            </li>\n         </ol>",
+                        "smithy.api#documentation": "<p>The range of bytes to retrieve from the output. For example, if you want to download\n         the first 1,048,576 bytes, specify the range as <code>bytes=0-1048575</code>. By default, this operation\n         downloads the entire output.</p>\n      \n         <p>If the job output is large, then you can use a range to\n         retrieve a portion of the output. This allows you to download the entire output in smaller\n         chunks of bytes. For example, suppose you have 1 GB of job output you want to download and\n         you decide to download 128 MB chunks of data at a time, which is a total of eight Get Job\n         Output requests. You use the following process to download the job output:</p>\n     \n         <ol>\n            <li>\n               <p>Download a 128 MB chunk of output by specifying the appropriate byte range.\n                  Verify that all 128 MB of data was received.</p>\n            </li>\n            <li>\n               <p>Along with the data, the response includes a SHA256 tree hash of the payload.\n                  You compute the checksum of the payload on the client and compare it with the\n                  checksum you received in the response to ensure you received all the expected\n                  data.</p>\n            </li>\n            <li>\n               <p>Repeat steps 1 and 2 for all the eight 128 MB chunks of output data, each time\n                  specifying the appropriate byte range.</p>\n            </li>\n            <li>\n               <p>After downloading all the parts of the job output, you have a list of eight\n                  checksum values. Compute the tree hash of these values to find the checksum of the\n                  entire output. Using the <a>DescribeJob</a> API, obtain job information of\n                  the job that provided you the output. The response includes the checksum of the\n                  entire archive stored in Amazon Glacier. You compare this value with the checksum you\n                  computed to ensure you have downloaded the entire archive content with no\n                  errors.</p>\n               <p></p>\n            </li>\n         </ol>",
                         "smithy.api#httpHeader": "Range"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides options for downloading output of an Amazon S3 Glacier job.</p>",
+                "smithy.api#documentation": "<p>Provides options for downloading output of an Amazon Glacier job.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -1523,7 +1565,7 @@
                 "contentRange": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The range of bytes returned by Amazon S3 Glacier. If only partial output is downloaded,\n         the response provides the range of bytes Amazon S3 Glacier returned. For example, bytes\n         0-1048575/8388608 returns the first 1 MB from 8 MB.</p>",
+                        "smithy.api#documentation": "<p>The range of bytes returned by Amazon Glacier. If only partial output is downloaded,\n         the response provides the range of bytes Amazon Glacier returned. For example, bytes\n         0-1048575/8388608 returns the first 1 MB from 8 MB.</p>",
                         "smithy.api#httpHeader": "Content-Range"
                     }
                 },
@@ -1550,7 +1592,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -1568,6 +1610,9 @@
                 },
                 {
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
                 },
                 {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
@@ -1606,7 +1651,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1657,6 +1702,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -1694,7 +1742,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1742,7 +1790,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -1762,6 +1810,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -1769,7 +1820,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation retrieves the <code>notification-configuration</code> subresource of\n         the specified vault.</p>\n\n         <p>For information about setting a notification configuration on a vault, see <a>SetVaultNotifications</a>. If a notification configuration for a vault is not\n         set, the operation returns a <code>404 Not Found</code> error. For more information about\n         vault notifications, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault\n            Notifications in Amazon S3 Glacier</a>. </p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault\n            Notifications in Amazon S3 Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html\">Get Vault Notification\n            Configuration </a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>This operation retrieves the <code>notification-configuration</code> subresource of\n         the specified vault.</p>\n\n         <p>For information about setting a notification configuration on a vault, see <a>SetVaultNotifications</a>. If a notification configuration for a vault is not\n         set, the operation returns a <code>404 Not Found</code> error. For more information about\n         vault notifications, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault\n            Notifications in Amazon Glacier</a>. </p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault\n            Notifications in Amazon Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html\">Get Vault Notification\n            Configuration </a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To get the notification-configuration for the specified vault",
@@ -1802,7 +1853,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1833,7 +1884,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -1953,7 +2004,7 @@
                     "name": "glacier"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p> Amazon S3 Glacier (Glacier) is a storage solution for \"cold data.\"</p>\n\n         <p>Glacier is an extremely low-cost storage service that provides secure,\n         durable, and easy-to-use storage for data backup and archival. With Glacier,\n         customers can store their data cost effectively for months, years, or decades. \n         Glacier also enables customers to offload the administrative burdens of operating and\n         scaling storage to AWS, so they don't have to worry about capacity planning, hardware\n         provisioning, data replication, hardware failure and recovery, or time-consuming hardware\n         migrations.</p>\n\n         <p>Glacier is a great storage choice when low storage cost is paramount and your\n         data is rarely retrieved. If your\n         application requires fast or frequent access to your data, consider using Amazon S3. For\n         more information, see <a href=\"http://aws.amazon.com/s3/\">Amazon Simple Storage Service\n            (Amazon S3)</a>.</p>\n\n         <p>You can store any kind of data in any format. There is no maximum limit on the total\n         amount of data you can store in Glacier.</p>\n\n         <p>If you are a first-time user of Glacier, we recommend that you begin by\n         reading the following sections in the <i>Amazon S3 Glacier Developer\n         Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/introduction.html\">What is\n                  Amazon S3 Glacier</a> - This section of the Developer Guide describes the\n               underlying data model, the operations it supports, and the AWS SDKs that you can use\n               to interact with the service.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html\">Getting Started\n                  with Amazon S3 Glacier</a> - The Getting Started section walks you through the\n               process of creating a vault, uploading archives, creating jobs to download archives,\n               retrieving the job output, and deleting archives.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p> Amazon Glacier (Glacier) is a storage solution for \"cold data.\"</p>\n\n         <p>Glacier is an extremely low-cost storage service that provides secure,\n         durable, and easy-to-use storage for data backup and archival. With Glacier,\n         customers can store their data cost effectively for months, years, or decades. \n         Glacier also enables customers to offload the administrative burdens of operating and\n         scaling storage to AWS, so they don't have to worry about capacity planning, hardware\n         provisioning, data replication, hardware failure and recovery, or time-consuming hardware\n         migrations.</p>\n\n         <p>Glacier is a great storage choice when low storage cost is paramount and your\n         data is rarely retrieved. If your\n         application requires fast or frequent access to your data, consider using Amazon S3. For\n         more information, see <a href=\"http://aws.amazon.com/s3/\">Amazon Simple Storage Service\n            (Amazon S3)</a>.</p>\n\n         <p>You can store any kind of data in any format. There is no maximum limit on the total\n         amount of data you can store in Glacier.</p>\n\n         <p>If you are a first-time user of Glacier, we recommend that you begin by\n         reading the following sections in the <i>Amazon Glacier Developer\n         Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/introduction.html\">What is\n                  Amazon Glacier</a> - This section of the Developer Guide describes the\n               underlying data model, the operations it supports, and the AWS SDKs that you can use\n               to interact with the service.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html\">Getting Started\n                  with Amazon Glacier</a> - The Getting Started section walks you through the\n               process of creating a vault, uploading archives, creating jobs to download archives,\n               retrieving the job output, and deleting archives.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Glacier",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://glacier.amazonaws.com/doc/2012-06-01/"
@@ -3159,6 +3210,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#PolicyEnforcedException"
                 },
                 {
@@ -3203,7 +3257,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3225,7 +3279,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides options for initiating an Amazon S3 Glacier job.</p>",
+                "smithy.api#documentation": "<p>Provides options for initiating an Amazon Glacier job.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -3255,7 +3309,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3275,6 +3329,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -3282,7 +3339,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation initiates a multipart upload. Amazon S3 Glacier creates a multipart\n         upload resource and returns its ID in the response. The multipart upload ID is used in\n         subsequent requests to upload parts of an archive (see <a>UploadMultipartPart</a>).</p>\n\n         <p>When you initiate a multipart upload, you specify the part size in number of bytes.\n         The part size must be a megabyte (1024 KB) multiplied by a power of 2-for example, 1048576\n         (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable\n         part size is 1 MB, and the maximum is 4 GB.</p>\n\n         <p>Every part you upload to this resource (see <a>UploadMultipartPart</a>),\n         except the last one, must have the same size. The last one can be the same size or smaller.\n         For example, suppose you want to upload a 16.2 MB file. If you initiate the multipart\n         upload with a part size of 4 MB, you will upload four parts of 4 MB each and one part of\n         0.2 MB. </p>\n\n         <note>\n            <p>You don't need to know the size of the archive when you start a multipart upload\n            because Amazon S3 Glacier does not require you to specify the overall archive\n            size.</p>\n         </note>\n\n         <p>After you complete the multipart upload, Amazon S3 Glacier (Glacier) removes the multipart upload\n         resource referenced by the ID. Glacier also removes the multipart upload resource if\n         you cancel the multipart upload or it may be removed if there is no activity for a period\n         of 24 hours.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in\n            Parts (Multipart Upload)</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html\">Initiate Multipart\n            Upload</a> in the <i>Amazon Glacier Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>This operation initiates a multipart upload. Amazon Glacier creates a multipart\n         upload resource and returns its ID in the response. The multipart upload ID is used in\n         subsequent requests to upload parts of an archive (see <a>UploadMultipartPart</a>).</p>\n\n         <p>When you initiate a multipart upload, you specify the part size in number of bytes.\n         The part size must be a megabyte (1024 KB) multiplied by a power of 2-for example, 1048576\n         (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable\n         part size is 1 MB, and the maximum is 4 GB.</p>\n\n         <p>Every part you upload to this resource (see <a>UploadMultipartPart</a>),\n         except the last one, must have the same size. The last one can be the same size or smaller.\n         For example, suppose you want to upload a 16.2 MB file. If you initiate the multipart\n         upload with a part size of 4 MB, you will upload four parts of 4 MB each and one part of\n         0.2 MB. </p>\n\n         <note>\n            <p>You don't need to know the size of the archive when you start a multipart upload\n            because Amazon Glacier does not require you to specify the overall archive\n            size.</p>\n         </note>\n\n         <p>After you complete the multipart upload, Amazon Glacier (Glacier) removes the multipart upload\n         resource referenced by the ID. Glacier also removes the multipart upload resource if\n         you cancel the multipart upload or it may be removed if there is no activity for a period\n         of 24 hours.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in\n            Parts (Multipart Upload)</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html\">Initiate Multipart\n            Upload</a> in the <i>Amazon Glacier Developer Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To initiate a multipart upload",
@@ -3311,7 +3368,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3340,7 +3397,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides options for initiating a multipart upload to an Amazon S3 Glacier\n         vault.</p>",
+                "smithy.api#documentation": "<p>Provides options for initiating a multipart upload to an Amazon Glacier\n         vault.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -3350,7 +3407,7 @@
                 "location": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative URI path of the multipart upload ID Amazon S3 Glacier created.</p>",
+                        "smithy.api#documentation": "<p>The relative URI path of the multipart upload ID Amazon Glacier created.</p>",
                         "smithy.api#httpHeader": "Location"
                     }
                 },
@@ -3363,7 +3420,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>The Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3381,6 +3438,9 @@
                 },
                 {
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
                 },
                 {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
@@ -3458,7 +3518,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3629,7 +3689,7 @@
                 "SNSTopic": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS topic ARN to which Amazon S3 Glacier sends a notification when the job is\n         completed and the output is ready for you to download. The specified topic publishes the\n         notification to its subscribers. The SNS topic must exist.</p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS topic ARN to which Amazon Glacier sends a notification when the job is\n         completed and the output is ready for you to download. The specified topic publishes the\n         notification to its subscribers. The SNS topic must exist.</p>"
                     }
                 },
                 "RetrievalByteRange": {
@@ -3711,6 +3771,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -3778,7 +3841,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3821,7 +3884,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides options for retrieving a job list for an Amazon S3 Glacier vault.</p>",
+                "smithy.api#documentation": "<p>Provides options for retrieving a job list for an Amazon Glacier vault.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -3842,7 +3905,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3862,6 +3925,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -3869,7 +3935,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation lists in-progress multipart uploads for the specified vault. An\n         in-progress multipart upload is a multipart upload that has been initiated by an <a>InitiateMultipartUpload</a> request, but has not yet been completed or aborted.\n         The list returned in the List Multipart Upload response has no guaranteed order. </p>\n\n         <p>The List Multipart Uploads operation supports pagination. By default, this operation\n         returns up to 50 multipart uploads in the response. You should always check the response\n         for a <code>marker</code> at which to continue the list; if there are no more items the\n            <code>marker</code> is <code>null</code>. To return a list of multipart uploads that\n         begins at a specific upload, set the <code>marker</code> request parameter to the value you\n         obtained from a previous List Multipart Upload request. You can also limit the number of\n         uploads returned in the response by specifying the <code>limit</code> parameter in the\n         request.</p>\n\n         <p>Note the difference between this operation and listing parts (<a>ListParts</a>). The List Multipart Uploads operation lists all multipart uploads\n         for a vault and does not require a multipart upload ID. The List Parts operation requires a\n         multipart upload ID since parts are associated with a single upload.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n\n         <p>For conceptual information and the underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working\n            with Archives in Amazon S3 Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-uploads.html\">List Multipart Uploads\n         </a> in the <i>Amazon Glacier Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>This operation lists in-progress multipart uploads for the specified vault. An\n         in-progress multipart upload is a multipart upload that has been initiated by an <a>InitiateMultipartUpload</a> request, but has not yet been completed or aborted.\n         The list returned in the List Multipart Upload response has no guaranteed order. </p>\n\n         <p>The List Multipart Uploads operation supports pagination. By default, this operation\n         returns up to 50 multipart uploads in the response. You should always check the response\n         for a <code>marker</code> at which to continue the list; if there are no more items the\n            <code>marker</code> is <code>null</code>. To return a list of multipart uploads that\n         begins at a specific upload, set the <code>marker</code> request parameter to the value you\n         obtained from a previous List Multipart Upload request. You can also limit the number of\n         uploads returned in the response by specifying the <code>limit</code> parameter in the\n         request.</p>\n\n         <p>Note the difference between this operation and listing parts (<a>ListParts</a>). The List Multipart Uploads operation lists all multipart uploads\n         for a vault and does not require a multipart upload ID. The List Parts operation requires a\n         multipart upload ID since parts are associated with a single upload.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n\n         <p>For conceptual information and the underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working\n            with Archives in Amazon Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-uploads.html\">List Multipart Uploads\n         </a> in the <i>Amazon Glacier Developer Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list all the in-progress multipart uploads for a vault",
@@ -3925,7 +3991,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3975,7 +4041,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3995,6 +4061,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -4002,7 +4071,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation lists the parts of an archive that have been uploaded in a specific\n         multipart upload. You can make this request at any time during an in-progress multipart\n         upload before you complete the upload (see <a>CompleteMultipartUpload</a>. List\n         Parts returns an error for completed uploads. The list returned in the List Parts response\n         is sorted by part range. </p>\n\n         <p>The List Parts operation supports pagination. By default, this operation returns up\n         to 50 uploaded parts in the response. You should always check the response for a\n            <code>marker</code> at which to continue the list; if there are no more items the\n            <code>marker</code> is <code>null</code>. To return a list of parts that begins at a\n         specific part, set the <code>marker</code> request parameter to the value you obtained from\n         a previous List Parts request. You can also limit the number of parts returned in the\n         response by specifying the <code>limit</code> parameter in the request. </p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and the underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working\n            with Archives in Amazon S3 Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-parts.html\">List Parts</a> in the\n            <i>Amazon Glacier Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>This operation lists the parts of an archive that have been uploaded in a specific\n         multipart upload. You can make this request at any time during an in-progress multipart\n         upload before you complete the upload (see <a>CompleteMultipartUpload</a>. List\n         Parts returns an error for completed uploads. The list returned in the List Parts response\n         is sorted by part range. </p>\n\n         <p>The List Parts operation supports pagination. By default, this operation returns up\n         to 50 uploaded parts in the response. You should always check the response for a\n            <code>marker</code> at which to continue the list; if there are no more items the\n            <code>marker</code> is <code>null</code>. To return a list of parts that begins at a\n         specific part, set the <code>marker</code> request parameter to the value you obtained from\n         a previous List Parts request. You can also limit the number of parts returned in the\n         response by specifying the <code>limit</code> parameter in the request. </p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and the underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working\n            with Archives in Amazon Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-parts.html\">List Parts</a> in the\n            <i>Amazon Glacier Developer Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list the parts of an archive that have been uploaded in a multipart upload",
@@ -4051,7 +4120,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4140,7 +4209,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -4158,6 +4227,9 @@
                 },
                 {
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
                 },
                 {
                     "target": "com.amazonaws.glacier#ServiceUnavailableException"
@@ -4201,7 +4273,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID of the account that owns the vault. You can either specify an AWS\n         account ID or optionally a single '-' (hyphen), in which case Amazon S3 Glacier uses the AWS\n         account ID associated with the credentials used to sign the request. If you use an account\n         ID, don't include any hyphens ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The AWS account ID of the account that owns the vault. You can either specify an AWS\n         account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS\n         account ID associated with the credentials used to sign the request. If you use an account\n         ID, don't include any hyphens ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4241,6 +4313,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -4248,7 +4323,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation lists all the tags attached to a vault. The operation returns an empty\n         map if there are no tags. For more information about tags, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html\">Tagging Amazon S3 Glacier\n         Resources</a>.</p>",
+                "smithy.api#documentation": "<p>This operation lists all the tags attached to a vault. The operation returns an empty\n         map if there are no tags. For more information about tags, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html\">Tagging Amazon Glacier\n         Resources</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list the tags for a vault",
@@ -4278,7 +4353,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4308,7 +4383,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -4328,6 +4403,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -4335,7 +4413,29 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation lists all vaults owned by the calling user's account. The list\n         returned in the response is ASCII-sorted by vault name.</p>\n\n         <p>By default, this operation returns up to 10 items. If there are more vaults to\n         list, the response <code>marker</code> field contains the vault Amazon Resource Name (ARN)\n         at which to continue the list with a new List Vaults request; otherwise, the\n            <code>marker</code> field is <code>null</code>. To return a list of vaults that begins\n         at a specific vault, set the <code>marker</code> request parameter to the vault ARN you\n         obtained from a previous List Vaults request. You can also limit the number of vaults\n         returned in the response by specifying the <code>limit</code> parameter in the request. </p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html\">Retrieving Vault Metadata in\n            Amazon S3 Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html\">List Vaults </a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>This operation lists all vaults owned by the calling user's account. The list\n         returned in the response is ASCII-sorted by vault name.</p>\n\n         <p>By default, this operation returns up to 10 items. If there are more vaults to\n         list, the response <code>marker</code> field contains the vault Amazon Resource Name (ARN)\n         at which to continue the list with a new List Vaults request; otherwise, the\n            <code>marker</code> field is <code>null</code>. To return a list of vaults that begins\n         at a specific vault, set the <code>marker</code> request parameter to the vault ARN you\n         obtained from a previous List Vaults request. You can also limit the number of vaults\n         returned in the response by specifying the <code>limit</code> parameter in the request. </p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html\">Retrieving Vault Metadata in\n            Amazon Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html\">List Vaults </a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list all vaults owned by the calling user's account",
+                        "documentation": "The example lists all vaults owned by the specified AWS account.",
+                        "input": {
+                            "accountId": "-",
+                            "marker": ""
+                        },
+                        "output": {
+                            "VaultList": [
+                                {
+                                    "SizeInBytes": 3178496,
+                                    "VaultARN": "arn:aws:glacier:us-west-2:0123456789012:vaults/my-vault",
+                                    "LastInventoryDate": "2015-04-07T00:26:19.028Z",
+                                    "VaultName": "my-vault",
+                                    "NumberOfArchives": 1,
+                                    "CreationDate": "2015-04-06T21:23:45.708Z"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/{accountId}/vaults",
@@ -4397,7 +4497,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -4425,6 +4525,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.glacier#NoLongerSupportedException": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.glacier#string"
+                },
+                "code": {
+                    "target": "com.amazonaws.glacier#string"
+                },
+                "message": {
+                    "target": "com.amazonaws.glacier#string"
+                }
+            },
+            "traits": {
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4484,7 +4602,7 @@
                 "SHA256TreeHash": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SHA256 tree hash value that Amazon S3 Glacier calculated for the part. This field is\n         never <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The SHA256 tree hash value that Amazon Glacier calculated for the part. This field is\n         never <code>null</code>.</p>"
                     }
                 }
             },
@@ -4606,6 +4724,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ServiceUnavailableException"
                 }
             ],
@@ -4636,7 +4757,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID of the account that owns the vault. You can either specify an AWS\n         account ID or optionally a single '-' (hyphen), in which case Amazon S3 Glacier uses the AWS\n         account ID associated with the credentials used to sign the request. If you use an account\n         ID, don't include any hyphens ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The AWS account ID of the account that owns the vault. You can either specify an AWS\n         account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS\n         account ID associated with the credentials used to sign the request. If you use an account\n         ID, don't include any hyphens ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4694,6 +4815,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -4701,7 +4825,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation removes one or more tags from the set of tags attached to a vault. For\n         more information about tags, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html\">Tagging Amazon S3 Glacier Resources</a>.\n         This operation is idempotent. The operation will be successful, even if there are no tags\n         attached to the vault. </p>",
+                "smithy.api#documentation": "<p>This operation removes one or more tags from the set of tags attached to a vault. For\n         more information about tags, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html\">Tagging Amazon Glacier Resources</a>.\n         This operation is idempotent. The operation will be successful, even if there are no tags\n         attached to the vault. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To remove tags from a vault",
@@ -4729,7 +4853,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4772,12 +4896,12 @@
                 "message": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returned if, when uploading an archive, Amazon S3 Glacier times out while receiving the\n         upload.</p>"
+                        "smithy.api#documentation": "<p>Returned if, when uploading an archive, Amazon Glacier times out while receiving the\n         upload.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if, when uploading an archive, Amazon S3 Glacier times out while receiving the\n         upload.</p>",
+                "smithy.api#documentation": "<p>Returned if, when uploading an archive, Amazon Glacier times out while receiving the\n         upload.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 408
             }
@@ -4942,6 +5066,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ServiceUnavailableException"
                 }
             ],
@@ -5010,6 +5137,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -5044,7 +5174,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5086,6 +5216,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#ResourceNotFoundException"
                 },
                 {
@@ -5093,7 +5226,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation configures notifications that will be sent when specific events happen\n         to a vault. By default, you don't get any notifications.</p>\n\n         <p>To configure vault notifications, send a PUT request to the\n            <code>notification-configuration</code> subresource of the vault. The request should\n         include a JSON document that provides an Amazon SNS topic and specific events for which you\n         want Amazon S3 Glacier to send notifications to the topic.</p>\n\n         <p>Amazon SNS topics must grant permission to the vault to be allowed to publish\n         notifications to the topic. You can configure a vault to publish a notification for the\n         following vault events:</p>\n\n         <ul>\n            <li>\n                <p>\n                  <b>ArchiveRetrievalCompleted</b> This event occurs when a\n               job that was initiated for an archive retrieval is completed (<a>InitiateJob</a>). The status of the completed job can be \"Succeeded\" or\n               \"Failed\". The notification sent to the SNS topic is the same output as returned from\n                  <a>DescribeJob</a>. </p>\n            </li>\n            <li>\n\n               <p>\n                  <b>InventoryRetrievalCompleted</b> This event occurs when a\n               job that was initiated for an inventory retrieval is completed (<a>InitiateJob</a>). The status of the completed job can be \"Succeeded\" or\n               \"Failed\". The notification sent to the SNS topic is the same output as returned from\n                  <a>DescribeJob</a>. </p>\n            </li>\n         </ul>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault\n            Notifications in Amazon S3 Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html\">Set Vault Notification\n            Configuration </a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>This operation configures notifications that will be sent when specific events happen\n         to a vault. By default, you don't get any notifications.</p>\n\n         <p>To configure vault notifications, send a PUT request to the\n            <code>notification-configuration</code> subresource of the vault. The request should\n         include a JSON document that provides an Amazon SNS topic and specific events for which you\n         want Amazon Glacier to send notifications to the topic.</p>\n\n         <p>Amazon SNS topics must grant permission to the vault to be allowed to publish\n         notifications to the topic. You can configure a vault to publish a notification for the\n         following vault events:</p>\n\n         <ul>\n            <li>\n                <p>\n                  <b>ArchiveRetrievalCompleted</b> This event occurs when a\n               job that was initiated for an archive retrieval is completed (<a>InitiateJob</a>). The status of the completed job can be \"Succeeded\" or\n               \"Failed\". The notification sent to the SNS topic is the same output as returned from\n                  <a>DescribeJob</a>. </p>\n            </li>\n            <li>\n\n               <p>\n                  <b>InventoryRetrievalCompleted</b> This event occurs when a\n               job that was initiated for an inventory retrieval is completed (<a>InitiateJob</a>). The status of the completed job can be \"Succeeded\" or\n               \"Failed\". The notification sent to the SNS topic is the same output as returned from\n                  <a>DescribeJob</a>. </p>\n            </li>\n         </ul>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p>For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault\n            Notifications in Amazon Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html\">Set Vault Notification\n            Configuration </a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To configure a vault to post a message to an Amazon SNS topic when jobs complete",
@@ -5124,7 +5257,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5265,6 +5398,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#RequestTimeoutException"
                 },
                 {
@@ -5275,7 +5411,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation adds an archive to a vault. This is a synchronous operation, and for a\n         successful upload, your data is durably persisted. Amazon S3 Glacier returns the archive ID in\n         the <code>x-amz-archive-id</code> header of the response. </p>\n\n         <p>You must use the archive ID to access your data in Amazon S3 Glacier. After you upload\n         an archive, you should save the archive ID returned so that you can retrieve or delete the\n         archive later. Besides saving the archive ID, you can also index it and give it a friendly\n         name to allow for better searching. You can also use the optional archive description field\n         to specify how the archive is referred to in an external index of archives, such as you\n         might create in Amazon DynamoDB. You can also get the vault inventory to obtain a list of\n         archive IDs in a vault. For more information, see <a>InitiateJob</a>. </p>\n\n         <p>You must provide a SHA256 tree hash of the data you are uploading. For information\n         about computing a SHA256 tree hash, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html\">Computing Checksums</a>. </p>\n\n         <p>You can optionally specify an archive description of up to 1,024 printable ASCII\n         characters. You can get the archive description when you either retrieve the archive or get\n         the vault inventory. For more information, see <a>InitiateJob</a>. Amazon\n         Glacier does not interpret the description in any way. An archive description does not need\n         to be unique. You cannot use the description to retrieve or sort the archive list. </p>\n\n         <p>Archives are immutable. After you upload an archive, you cannot edit the archive or\n         its description.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-an-archive.html\">Uploading an Archive in Amazon\n            Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html\">Upload Archive</a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p>This operation adds an archive to a vault. This is a synchronous operation, and for a\n         successful upload, your data is durably persisted. Amazon Glacier returns the archive ID in\n         the <code>x-amz-archive-id</code> header of the response. </p>\n\n         <p>You must use the archive ID to access your data in Amazon Glacier. After you upload\n         an archive, you should save the archive ID returned so that you can retrieve or delete the\n         archive later. Besides saving the archive ID, you can also index it and give it a friendly\n         name to allow for better searching. You can also use the optional archive description field\n         to specify how the archive is referred to in an external index of archives, such as you\n         might create in Amazon DynamoDB. You can also get the vault inventory to obtain a list of\n         archive IDs in a vault. For more information, see <a>InitiateJob</a>. </p>\n\n         <p>You must provide a SHA256 tree hash of the data you are uploading. For information\n         about computing a SHA256 tree hash, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html\">Computing Checksums</a>. </p>\n\n         <p>You can optionally specify an archive description of up to 1,024 printable ASCII\n         characters. You can get the archive description when you either retrieve the archive or get\n         the vault inventory. For more information, see <a>InitiateJob</a>. Amazon\n         Glacier does not interpret the description in any way. An archive description does not need\n         to be unique. You cannot use the description to retrieve or sort the archive list. </p>\n\n         <p>Archives are immutable. After you upload an archive, you cannot edit the archive or\n         its description.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-an-archive.html\">Uploading an Archive in Amazon\n            Glacier</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html\">Upload Archive</a> in the\n            <i>Amazon Glacier Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To upload an archive",
@@ -5315,7 +5451,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5403,6 +5539,9 @@
                     "target": "com.amazonaws.glacier#MissingParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.glacier#NoLongerSupportedException"
+                },
+                {
                     "target": "com.amazonaws.glacier#RequestTimeoutException"
                 },
                 {
@@ -5413,7 +5552,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation uploads a part of an archive. You can upload archive parts in any\n         order. You can also upload them in parallel. You can upload up to 10,000 parts for a\n         multipart upload.</p>\n\n         <p>Amazon Glacier rejects your upload part request if any of the following conditions is\n         true:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <b>SHA256 tree hash does not match</b>To ensure that part\n               data is not corrupted in transmission, you compute a SHA256 tree hash of the part and\n               include it in your request. Upon receiving the part data, Amazon S3 Glacier also\n               computes a SHA256 tree hash. If these hash values don't match, the operation fails.\n               For information about computing a SHA256 tree hash, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html\">Computing\n                  Checksums</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Part size does not match</b>The size of each part except\n               the last must match the size specified in the corresponding <a>InitiateMultipartUpload</a> request. The size of the last part must be the\n               same size as, or smaller than, the specified size.</p>\n               <note>\n                  <p>If you upload a part whose size is smaller than the part size you specified\n                  in your initiate multipart upload request and that part is not the last part, then\n                  the upload part request will succeed. However, the subsequent Complete Multipart\n                  Upload request will fail.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>Range does not align</b>The byte range value in the\n               request does not align with the part size specified in the corresponding initiate\n               request. For example, if you specify a part size of 4194304 bytes (4 MB), then 0 to\n               4194303 bytes (4 MB - 1) and 4194304 (4 MB) to 8388607 (8 MB - 1) are valid part\n               ranges. However, if you set a range value of 2 MB to 6 MB, the range does not align\n               with the part size and the upload will fail. </p>\n            </li>\n         </ul>\n\n         <p>This operation is idempotent. If you upload the same part multiple times, the data\n         included in the most recent request overwrites the previously uploaded data.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in\n            Parts (Multipart Upload)</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html\">Upload Part </a> in the\n            <i>Amazon Glacier Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>This operation uploads a part of an archive. You can upload archive parts in any\n         order. You can also upload them in parallel. You can upload up to 10,000 parts for a\n         multipart upload.</p>\n\n         <p>Amazon Glacier rejects your upload part request if any of the following conditions is\n         true:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <b>SHA256 tree hash does not match</b>To ensure that part\n               data is not corrupted in transmission, you compute a SHA256 tree hash of the part and\n               include it in your request. Upon receiving the part data, Amazon Glacier also\n               computes a SHA256 tree hash. If these hash values don't match, the operation fails.\n               For information about computing a SHA256 tree hash, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html\">Computing\n                  Checksums</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Part size does not match</b>The size of each part except\n               the last must match the size specified in the corresponding <a>InitiateMultipartUpload</a> request. The size of the last part must be the\n               same size as, or smaller than, the specified size.</p>\n               <note>\n                  <p>If you upload a part whose size is smaller than the part size you specified\n                  in your initiate multipart upload request and that part is not the last part, then\n                  the upload part request will succeed. However, the subsequent Complete Multipart\n                  Upload request will fail.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>Range does not align</b>The byte range value in the\n               request does not align with the part size specified in the corresponding initiate\n               request. For example, if you specify a part size of 4194304 bytes (4 MB), then 0 to\n               4194303 bytes (4 MB - 1) and 4194304 (4 MB) to 8388607 (8 MB - 1) are valid part\n               ranges. However, if you set a range value of 2 MB to 6 MB, the range does not align\n               with the part size and the upload will fail. </p>\n            </li>\n         </ul>\n\n         <p>This operation is idempotent. If you upload the same part multiple times, the data\n         included in the most recent request overwrites the previously uploaded data.</p>\n\n         <p>An AWS account has full permission to perform all operations (actions). However, AWS\n         Identity and Access Management (IAM) users don't have any permissions by default. You must\n         grant them explicit permission to perform specific actions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using\n            AWS Identity and Access Management (IAM)</a>.</p>\n         <p> For conceptual information and underlying REST API, see <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in\n            Parts (Multipart Upload)</a> and <a href=\"https://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html\">Upload Part </a> in the\n            <i>Amazon Glacier Developer Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To upload the first part of an archive",
@@ -5444,7 +5583,7 @@
                 "accountId": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+                        "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5475,7 +5614,7 @@
                 "range": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the range of bytes in the assembled archive that will be uploaded in this\n         part. Amazon S3 Glacier uses this information to assemble the archive in the proper sequence.\n         The format of this header follows RFC 2616. An example header is Content-Range:bytes\n         0-4194303/*.</p>",
+                        "smithy.api#documentation": "<p>Identifies the range of bytes in the assembled archive that will be uploaded in this\n         part. Amazon Glacier uses this information to assemble the archive in the proper sequence.\n         The format of this header follows RFC 2616. An example header is Content-Range:bytes\n         0-4194303/*.</p>",
                         "smithy.api#httpHeader": "Content-Range"
                     }
                 },
@@ -5499,13 +5638,13 @@
                 "checksum": {
                     "target": "com.amazonaws.glacier#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SHA256 tree hash that Amazon S3 Glacier computed for the uploaded part.</p>",
+                        "smithy.api#documentation": "<p>The SHA256 tree hash that Amazon Glacier computed for the uploaded part.</p>",
                         "smithy.api#httpHeader": "x-amz-sha256-tree-hash"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 Glacier response to your request.</p>",
+                "smithy.api#documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -5561,7 +5700,7 @@
                 "Events": {
                     "target": "com.amazonaws.glacier#NotificationEventList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of one or more events for which Amazon S3 Glacier will send a notification to the\n         specified Amazon SNS topic.</p>"
+                        "smithy.api#documentation": "<p>A list of one or more events for which Amazon Glacier will send a notification to the\n         specified Amazon SNS topic.</p>"
                     }
                 }
             },

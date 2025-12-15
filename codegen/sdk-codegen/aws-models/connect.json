@@ -48500,6 +48500,9 @@
                 "InitialSystemMessage": {
                     "target": "com.amazonaws.connect#ChatMessage"
                 },
+                "InitialTemplatedSystemMessage": {
+                    "target": "com.amazonaws.connect#TemplatedMessageConfig"
+                },
                 "RelatedContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {

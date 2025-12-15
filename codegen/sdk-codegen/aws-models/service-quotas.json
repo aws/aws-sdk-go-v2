@@ -88,6 +88,15 @@
                 }
             }
         },
+        "com.amazonaws.servicequotas#AppliedValue": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000000000
+                }
+            }
+        },
         "com.amazonaws.servicequotas#AssociateServiceQuotaTemplate": {
             "type": "operation",
             "input": {
@@ -215,6 +224,15 @@
         },
         "com.amazonaws.servicequotas#DateTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.servicequotas#DefaultValue": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000000000
+                }
+            }
         },
         "com.amazonaws.servicequotas#DeleteServiceQuotaIncreaseRequestFromTemplate": {
             "type": "operation",
@@ -648,6 +666,118 @@
                     "target": "com.amazonaws.servicequotas#ExclusionQuotaList",
                     "traits": {
                         "smithy.api#documentation": "<p>List of Amazon Web Services services excluded from Automatic Management.\n            You won't be notified of Service Quotas utilization for Amazon Web Services services added to the\n                Automatic Management exclusion list.\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.servicequotas#GetQuotaUtilizationReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicequotas#GetQuotaUtilizationReportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicequotas#GetQuotaUtilizationReportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicequotas#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#NoSuchResourceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the quota utilization report for your Amazon Web Services account. This operation returns \n            paginated results showing your quota usage across all Amazon Web Services services, sorted by utilization \n            percentage in descending order (highest utilization first).</p>\n         <p>You must first initiate a report using the <code>StartQuotaUtilizationReport</code> \n            operation. The report generation process is asynchronous and may take several seconds to \n            complete. Poll this operation periodically to check the status and retrieve results when \n            the report is ready.</p>\n         <p>Each report contains up to 1,000 quota records per page. Use the <code>NextToken</code> \n            parameter to retrieve additional pages of results. Reports are automatically deleted after \n            15 minutes.</p>"
+            }
+        },
+        "com.amazonaws.servicequotas#GetQuotaUtilizationReportRequest": {
+            "type": "structure",
+            "members": {
+                "ReportId": {
+                    "target": "com.amazonaws.servicequotas#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the quota utilization report. This identifier is returned by \n            the <code>StartQuotaUtilizationReport</code> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.servicequotas#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates the next page of results to retrieve. This token is returned in \n            the response when there are more results available. Omit this parameter for the first request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.servicequotas#MaxResultsUtilization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. The default value is 1,000 and the \n            maximum allowed value is 1,000.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicequotas#GetQuotaUtilizationReportResponse": {
+            "type": "structure",
+            "members": {
+                "ReportId": {
+                    "target": "com.amazonaws.servicequotas#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the quota utilization report.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.servicequotas#ReportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the report generation. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - The report generation is in progress. Retry this operation \n                    after a few seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - The report is being processed. Continue polling until \n                    the status changes to <code>COMPLETED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - The report is ready and quota utilization data is available \n                    in the response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The report generation failed. Check the <code>ErrorCode</code> \n                    and <code>ErrorMessage</code> fields for details.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "GeneratedAt": {
+                    "target": "com.amazonaws.servicequotas#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the report was generated, in ISO 8601 format.</p>"
+                    }
+                },
+                "TotalCount": {
+                    "target": "com.amazonaws.servicequotas#TotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of quotas included in the report across all pages.</p>"
+                    }
+                },
+                "Quotas": {
+                    "target": "com.amazonaws.servicequotas#QuotaUtilizationInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of quota utilization records, sorted by utilization percentage in descending order. \n            Each record includes the quota code, service code, service name, quota name, namespace, \n            utilization percentage, default value, applied value, and whether the quota is adjustable. \n            Up to 1,000 records are returned per page.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.servicequotas#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates more results are available. Include this token in the next request \n            to retrieve the next page of results. If this field is not present, you have retrieved all \n            available results.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.servicequotas#ReportErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error code indicating the reason for failure when the report status is <code>FAILED</code>. \n            This field is only present when the status is <code>FAILED</code>.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.servicequotas#ReportErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed error message describing the failure when the report status is <code>FAILED</code>. \n            This field is only present when the status is <code>FAILED</code>.</p>"
                     }
                 }
             },
@@ -1550,6 +1680,15 @@
                 }
             }
         },
+        "com.amazonaws.servicequotas#MaxResultsUtilization": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.servicequotas#MetricDimensionName": {
             "type": "string"
         },
@@ -2002,12 +2141,156 @@
         "com.amazonaws.servicequotas#QuotaUnit": {
             "type": "string"
         },
+        "com.amazonaws.servicequotas#QuotaUtilizationInfo": {
+            "type": "structure",
+            "members": {
+                "QuotaCode": {
+                    "target": "com.amazonaws.servicequotas#QuotaCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota identifier.</p>"
+                    }
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.servicequotas#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service identifier.</p>"
+                    }
+                },
+                "QuotaName": {
+                    "target": "com.amazonaws.servicequotas#QuotaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota name.</p>"
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.servicequotas#QuotaMetricNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the metric used to track quota usage.</p>"
+                    }
+                },
+                "Utilization": {
+                    "target": "com.amazonaws.servicequotas#UtilizationPct",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The utilization percentage of the quota, calculated as (current usage / applied value) × 100. \n            Values range from 0.0 to 100.0 or higher if usage exceeds the quota limit.</p>"
+                    }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.servicequotas#DefaultValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value of the quota.</p>"
+                    }
+                },
+                "AppliedValue": {
+                    "target": "com.amazonaws.servicequotas#AppliedValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The applied value of the quota, which may be higher than the default value if a quota \n            increase has been requested and approved.</p>"
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.servicequotas#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service name.</p>"
+                    }
+                },
+                "Adjustable": {
+                    "target": "com.amazonaws.servicequotas#QuotaAdjustable",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the quota value can be increased.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a quota's utilization, including the quota code, service information, \n            current usage, and applied limits.</p>"
+            }
+        },
+        "com.amazonaws.servicequotas#QuotaUtilizationInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.servicequotas#QuotaUtilizationInfo"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.servicequotas#QuotaValue": {
             "type": "double",
             "traits": {
                 "smithy.api#range": {
                     "min": 0,
                     "max": 10000000000
+                }
+            }
+        },
+        "com.amazonaws.servicequotas#ReportErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.servicequotas#ReportErrorMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.servicequotas#ReportId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]{1,128}$"
+            }
+        },
+        "com.amazonaws.servicequotas#ReportMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 350
+                },
+                "smithy.api#pattern": "^.{0,350}$"
+            }
+        },
+        "com.amazonaws.servicequotas#ReportStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
                 }
             }
         },
@@ -2164,6 +2447,17 @@
                 }
             }
         },
+        "com.amazonaws.servicequotas#RequestType": {
+            "type": "enum",
+            "members": {
+                "AutomaticManagement": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutomaticManagement"
+                    }
+                }
+            }
+        },
         "com.amazonaws.servicequotas#RequestedServiceQuotaChange": {
             "type": "structure",
             "members": {
@@ -2171,6 +2465,12 @@
                     "target": "com.amazonaws.servicequotas#RequestId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier.</p>"
+                    }
+                },
+                "RequestType": {
+                    "target": "com.amazonaws.servicequotas#RequestType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of quota increase request. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutomaticManagement</code> - The request was automatically created by \n                    Service Quotas Automatic Management when quota utilization approached the limit.</p>\n            </li>\n         </ul>\n         <p>If this field is not present, the request was manually created by a user.</p>"
                     }
                 },
                 "CaseId": {
@@ -2568,6 +2868,9 @@
                     "target": "com.amazonaws.servicequotas#GetAWSDefaultServiceQuota"
                 },
                 {
+                    "target": "com.amazonaws.servicequotas#GetQuotaUtilizationReport"
+                },
+                {
                     "target": "com.amazonaws.servicequotas#GetRequestedServiceQuotaChange"
                 },
                 {
@@ -2605,6 +2908,9 @@
                 },
                 {
                     "target": "com.amazonaws.servicequotas#StartAutoManagement"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#StartQuotaUtilizationReport"
                 },
                 {
                     "target": "com.amazonaws.servicequotas#StopAutoManagement"
@@ -3613,6 +3919,71 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.servicequotas#StartQuotaUtilizationReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicequotas#StartQuotaUtilizationReportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicequotas#StartQuotaUtilizationReportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicequotas#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#NoSuchResourceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates the generation of a quota utilization report for your Amazon Web Services account. This \n            asynchronous operation analyzes your quota usage across all Amazon Web Services services and returns \n            a unique report identifier that you can use to retrieve the results.</p>\n         <p>The report generation process may take several seconds to complete, depending on the \n            number of quotas in your account. Use the <code>GetQuotaUtilizationReport</code> operation \n            to check the status and retrieve the results when the report is ready.</p>"
+            }
+        },
+        "com.amazonaws.servicequotas#StartQuotaUtilizationReportRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicequotas#StartQuotaUtilizationReportResponse": {
+            "type": "structure",
+            "members": {
+                "ReportId": {
+                    "target": "com.amazonaws.servicequotas#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the quota utilization report. Use this identifier with the \n            <code>GetQuotaUtilizationReport</code> operation to retrieve the report results.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.servicequotas#ReportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the report generation. The status will be <code>PENDING</code> \n            when the report is first initiated.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.servicequotas#ReportMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional message providing additional information about the report generation status. \n            This field may contain details about the report initiation or indicate if an existing recent \n            report is being reused.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.servicequotas#Statistic": {
             "type": "string",
             "traits": {
@@ -3827,6 +4198,15 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.servicequotas#TotalCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2147483647
+                }
+            }
+        },
         "com.amazonaws.servicequotas#UntagResource": {
             "type": "operation",
             "input": {
@@ -3946,6 +4326,9 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.servicequotas#UtilizationPct": {
+            "type": "double"
         }
     }
 }

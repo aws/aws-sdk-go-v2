@@ -136,6 +136,20 @@
                 "smithy.api#documentation": "<p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns.</p>"
             }
         },
+        "com.amazonaws.mediatailor#AdDecisionServerConfiguration": {
+            "type": "structure",
+            "members": {
+                "HttpRequest": {
+                    "target": "com.amazonaws.mediatailor#HttpRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP request configuration parameters for the ad decision server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration parameters for customizing HTTP requests sent to the ad decision server (ADS). This allows you to specify the HTTP method, headers, request body, and compression settings for ADS requests.</p>"
+            }
+        },
         "com.amazonaws.mediatailor#AdMarkerPassthrough": {
             "type": "structure",
             "members": {
@@ -910,6 +924,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Clip range configuration for the VOD source associated with the program.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#CompressionMethod": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "GZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GZIP"
+                    }
+                }
             }
         },
         "com.amazonaws.mediatailor#ConfigurationAliasesRequest": {
@@ -3073,6 +3104,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns, and what priority MediaTailor uses when inserting ads. </p>"
                     }
+                },
+                "AdDecisionServerConfiguration": {
+                    "target": "com.amazonaws.mediatailor#AdDecisionServerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for customizing HTTP requests to the ad decision server (ADS). This includes settings for request method, headers, body content, and compression options.</p>"
+                    }
                 }
             }
         },
@@ -3253,6 +3290,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The VOD source's HTTP package configuration settings.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#HttpRequest": {
+            "type": "structure",
+            "members": {
+                "Method": {
+                    "target": "com.amazonaws.mediatailor#Method",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP method to use when making requests to the ad decision server. Supported values are <code>GET</code> and <code>POST</code>.</p>"
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request body content to send with HTTP requests to the ad decision server. This value is only eligible for <code>POST</code> requests.</p>"
+                    }
+                },
+                "Headers": {
+                    "target": "com.amazonaws.mediatailor#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom HTTP headers to include in requests to the ad decision server. Specify headers as key-value pairs. This value is only eligible for <code>POST</code> requests.</p>"
+                    }
+                },
+                "CompressRequest": {
+                    "target": "com.amazonaws.mediatailor#CompressionMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compression method to apply to requests sent to the ad decision server. Supported values are <code>NONE</code> and <code>GZIP</code>. This value is only eligible for <code>POST</code> requests.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>HTTP request configuration parameters that define how MediaTailor communicates with the ad decision server.</p>"
             }
         },
         "com.amazonaws.mediatailor#InsertionMode": {
@@ -5025,6 +5094,23 @@
                 }
             }
         },
+        "com.amazonaws.mediatailor#Method": {
+            "type": "enum",
+            "members": {
+                "GET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GET"
+                    }
+                },
+                "POST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediatailor#Mode": {
             "type": "enum",
             "members": {
@@ -5206,6 +5292,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns, and what priority MediaTailor uses when inserting ads.</p>"
                     }
+                },
+                "AdDecisionServerConfiguration": {
+                    "target": "com.amazonaws.mediatailor#AdDecisionServerConfiguration"
                 }
             },
             "traits": {
@@ -5311,19 +5400,19 @@
                 "TrafficShapingType": {
                     "target": "com.amazonaws.mediatailor#TrafficShapingType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of traffic shaping used for prefetch traffic shaping and limiting the number of requests to the ADS at one time.</p>"
+                        "smithy.api#documentation": "<p>Indicates the type of traffic shaping used to limit the number of requests to the ADS at one time.</p>"
                     }
                 },
                 "TrafficShapingRetrievalWindow": {
                     "target": "com.amazonaws.mediatailor#TrafficShapingRetrievalWindow",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for spreading ADS traffic across a set window instead of sending ADS requests for all sessions at the same time.</p>"
+                        "smithy.api#documentation": "<p>The configuration that tells Elemental MediaTailor how many seconds to spread out requests to the ad decision server (ADS). Instead of sending ADS requests for all sessions at the same time, MediaTailor spreads the requests across the amount of time specified in the retrieval window.</p>"
                     }
                 },
                 "TrafficShapingTpsConfiguration": {
                     "target": "com.amazonaws.mediatailor#TrafficShapingTpsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for TPS-based traffic shaping that limits the number of requests to the ad decision server (ADS) based on transactions per second instead of time windows.</p>"
+                        "smithy.api#documentation": "<p>The configuration for TPS-based traffic shaping. This approach limits requests to the ad decision server (ADS) based on transactions per second and concurrent users.</p>"
                     }
                 }
             },
@@ -5631,6 +5720,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns, and what priority MediaTailor uses when inserting ads. </p>"
                     }
+                },
+                "AdDecisionServerConfiguration": {
+                    "target": "com.amazonaws.mediatailor#AdDecisionServerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for customizing HTTP requests to the ad decision server (ADS). This includes settings for request method, headers, body content, and compression options.</p>"
+                    }
                 }
             }
         },
@@ -5764,6 +5859,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns, and what priority MediaTailor uses when inserting ads. </p>"
                     }
+                },
+                "AdDecisionServerConfiguration": {
+                    "target": "com.amazonaws.mediatailor#AdDecisionServerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for customizing HTTP requests to the ad decision server (ADS). This includes settings for request method, headers, body content, and compression options.</p>"
+                    }
                 }
             }
         },
@@ -5840,19 +5941,19 @@
                 "TrafficShapingType": {
                     "target": "com.amazonaws.mediatailor#TrafficShapingType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of traffic shaping used for traffic shaping and limiting the number of requests to the ADS at one time.</p>"
+                        "smithy.api#documentation": "<p>Indicates the type of traffic shaping used to limit the number of requests to the ADS at one time.</p>"
                     }
                 },
                 "TrafficShapingRetrievalWindow": {
                     "target": "com.amazonaws.mediatailor#TrafficShapingRetrievalWindow",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for spreading ADS traffic across a set window instead of sending ADS requests for all sessions at the same time.</p>"
+                        "smithy.api#documentation": "<p>The configuration that tells Elemental MediaTailor how many seconds to spread out requests to the ad decision server (ADS). Instead of sending ADS requests for all sessions at the same time, MediaTailor spreads the requests across the amount of time specified in the retrieval window.</p>"
                     }
                 },
                 "TrafficShapingTpsConfiguration": {
                     "target": "com.amazonaws.mediatailor#TrafficShapingTpsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for TPS-based traffic shaping that limits the number of requests to the ad decision server (ADS) based on transactions per second instead of time windows.</p>"
+                        "smithy.api#documentation": "<p>The configuration for TPS-based traffic shaping. This approach limits requests to the ad decision server (ADS) based on transactions per second and concurrent users.</p>"
                     }
                 }
             },
@@ -6472,6 +6573,15 @@
                 }
             }
         },
+        "com.amazonaws.mediatailor#StringMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.mediatailor#__string"
+            },
+            "value": {
+                "target": "com.amazonaws.mediatailor#__string"
+            }
+        },
         "com.amazonaws.mediatailor#TagResource": {
             "type": "operation",
             "input": {
@@ -6572,7 +6682,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that tells Elemental MediaTailor how to spread out requests to the ad decision server (ADS). Instead of sending ADS requests for all sessions at the same time, MediaTailor spreads the requests across the amount of time specified in the retrieval window.</p>"
+                "smithy.api#documentation": "<p>The configuration that tells Elemental MediaTailor how many seconds to spread out requests to the ad decision server (ADS). Instead of sending ADS requests for all sessions at the same time, MediaTailor spreads the requests across the amount of time specified in the retrieval window.</p>"
             }
         },
         "com.amazonaws.mediatailor#TrafficShapingTpsConfiguration": {
@@ -6592,7 +6702,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for TPS-based traffic shaping. This approach limits requests to the ad decision server (ADS) based on transactions per second and concurrent users, providing more intuitive capacity management compared to time-window based traffic shaping.</p>"
+                "smithy.api#documentation": "<p>The configuration for TPS-based traffic shaping. This approach limits requests to the ad decision server (ADS) based on transactions per second and concurrent users.</p>"
             }
         },
         "com.amazonaws.mediatailor#TrafficShapingType": {

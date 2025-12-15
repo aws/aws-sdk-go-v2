@@ -1636,6 +1636,40 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.entityresolution#CustomerProfilesDomainArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255})$"
+            }
+        },
+        "com.amazonaws.entityresolution#CustomerProfilesIntegrationConfig": {
+            "type": "structure",
+            "members": {
+                "domainArn": {
+                    "target": "com.amazonaws.entityresolution#CustomerProfilesDomainArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Customer Profiles domain where the matched output will be sent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "objectTypeArn": {
+                    "target": "com.amazonaws.entityresolution#CustomerProfilesObjectTypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Customer Profiles object type that defines the structure for the matched customer data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for integrating with Customer Profiles. This configuration enables Entity Resolution to send matched output directly to Customer Profiles instead of Amazon S3, creating a unified customer view by automatically updating customer profiles based on match clusters.</p>"
+            }
+        },
+        "com.amazonaws.entityresolution#CustomerProfilesObjectTypeArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255}/object-types/[a-zA-Z_0-9-]{1,255})$"
+            }
+        },
         "com.amazonaws.entityresolution#DeleteIdMappingWorkflow": {
             "type": "operation",
             "input": {
@@ -3645,17 +3679,17 @@
         "com.amazonaws.entityresolution#IdMappingWorkflowOutputSource": {
             "type": "structure",
             "members": {
+                "KMSArn": {
+                    "target": "com.amazonaws.entityresolution#KMSArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.</p>"
+                    }
+                },
                 "outputS3Path": {
                     "target": "com.amazonaws.entityresolution#S3Path",
                     "traits": {
                         "smithy.api#documentation": "<p>The S3 path to which Entity Resolution will write the output table.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "KMSArn": {
-                    "target": "com.amazonaws.entityresolution#KMSArn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.</p>"
                     }
                 }
             },
@@ -5080,6 +5114,16 @@
                 "smithy.api#pattern": "^[a-zA-Z_0-9-=+/]*$"
             }
         },
+        "com.amazonaws.entityresolution#OptionalS3Path": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^$|^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+            }
+        },
         "com.amazonaws.entityresolution#OutputAttribute": {
             "type": "structure",
             "members": {
@@ -5110,17 +5154,18 @@
         "com.amazonaws.entityresolution#OutputSource": {
             "type": "structure",
             "members": {
-                "outputS3Path": {
-                    "target": "com.amazonaws.entityresolution#S3Path",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The S3 path to which Entity Resolution will write the output table.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "KMSArn": {
                     "target": "com.amazonaws.entityresolution#KMSArn",
                     "traits": {
                         "smithy.api#documentation": "<p>Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.</p>"
+                    }
+                },
+                "outputS3Path": {
+                    "target": "com.amazonaws.entityresolution#OptionalS3Path",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The S3 path to which Entity Resolution will write the output table.</p>"
                     }
                 },
                 "output": {
@@ -5137,6 +5182,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Normalizes the attributes defined in the schema in the input data. For example, if an attribute has an <code>AttributeType</code> of <code>PHONE_NUMBER</code>, and the data in the input table is in a format of 1234567890, Entity Resolution will normalize this field in the output to (123)-456-7890.</p>"
+                    }
+                },
+                "customerProfilesIntegrationConfig": {
+                    "target": "com.amazonaws.entityresolution#CustomerProfilesIntegrationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Customer Profiles integration configuration for sending matched output directly to Customer Profiles. When configured, Entity Resolution automatically creates and updates customer profiles based on match clusters, eliminating the need for manual Amazon S3 integration setup.</p>"
                     }
                 }
             },
