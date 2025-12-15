@@ -856,6 +856,12 @@ type ResolverEndpoint struct {
 	//  The Resolver endpoint IP address type.
 	ResolverEndpointType ResolverEndpointType
 
+	// Indicates whether RNI enhanced metrics are enabled for the Resolver endpoint.
+	// When enabled, one-minute granular metrics are published in CloudWatch for each
+	// RNI associated with this endpoint. When disabled, these metrics are not
+	// published.
+	RniEnhancedMetricsEnabled *bool
+
 	// The ID of one or more security groups that control access to this VPC. The
 	// security group must include one or more inbound rules (for inbound endpoints) or
 	// outbound rules (for outbound endpoints). Inbound and outbound rules must allow
@@ -903,6 +909,13 @@ type ResolverEndpoint struct {
 
 	// A detailed description of the status of the Resolver endpoint.
 	StatusMessage *string
+
+	// Indicates whether target name server metrics are enabled for the outbound
+	// Resolver endpoint. When enabled, one-minute granular metrics are published in
+	// CloudWatch for each target name server associated with this endpoint. When
+	// disabled, these metrics are not published. This feature is not supported for
+	// inbound Resolver endpoint.
+	TargetNameServerMetricsEnabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1071,6 +1084,10 @@ type ResolverRule struct {
 
 	// The name for the Resolver rule, which you specified when you created the
 	// Resolver rule.
+	//
+	// The name can be up to 64 characters long and can contain letters (a-z, A-Z),
+	// numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist
+	// of only numbers.
 	Name *string
 
 	// When a rule is shared with another Amazon Web Services account, the account ID
@@ -1133,6 +1150,10 @@ type ResolverRuleAssociation struct {
 	Id *string
 
 	// The name of an association between a Resolver rule and a VPC.
+	//
+	// The name can be up to 64 characters long and can contain letters (a-z, A-Z),
+	// numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist
+	// of only numbers.
 	Name *string
 
 	// The ID of the Resolver rule that you associated with the VPC that is specified
@@ -1160,6 +1181,10 @@ type ResolverRuleConfig struct {
 
 	// The new name for the Resolver rule. The name that you specify appears in the
 	// Resolver dashboard in the Route 53 console.
+	//
+	// The name can be up to 64 characters long and can contain letters (a-z, A-Z),
+	// numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist
+	// of only numbers.
 	Name *string
 
 	// The ID of the new outbound Resolver endpoint that you want to use to route DNS

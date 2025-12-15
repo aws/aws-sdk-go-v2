@@ -25598,6 +25598,13 @@ func awsRestjson1_serializeOpDocumentStartOutboundChatContactInput(v *StartOutbo
 		}
 	}
 
+	if v.InitialTemplatedSystemMessage != nil {
+		ok := object.Key("InitialTemplatedSystemMessage")
+		if err := awsRestjson1_serializeDocumentTemplatedMessageConfig(v.InitialTemplatedSystemMessage, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InstanceId != nil {
 		ok := object.Key("InstanceId")
 		ok.String(*v.InstanceId)

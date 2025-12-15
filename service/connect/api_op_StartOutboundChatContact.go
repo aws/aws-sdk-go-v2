@@ -110,6 +110,9 @@ type StartOutboundChatContactInput struct {
 	// A chat message.
 	InitialSystemMessage *types.ChatMessage
 
+	// Information about template message configuration.
+	InitialTemplatedSystemMessage *types.TemplatedMessageConfig
+
 	// The customer's details.
 	ParticipantDetails *types.ParticipantDetails
 

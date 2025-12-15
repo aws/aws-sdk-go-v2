@@ -44,7 +44,7 @@ type ListPolicyGenerationAssetsInput struct {
 	// retrieved. This must be a valid generation ID from a previous [StartPolicyGeneration]call that has
 	// completed processing.
 	//
-	// [StartPolicyGeneration]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_StartPolicyGeneration.html
+	// [StartPolicyGeneration]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_StartPolicyGeneration.html
 	//
 	// This member is required.
 	PolicyGenerationId *string
@@ -59,7 +59,7 @@ type ListPolicyGenerationAssetsInput struct {
 	// the next page of assets when the response is paginated due to large numbers of
 	// generated policy options.
 	//
-	// [ListPolicyGenerationAssets]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyGenerationAssets.html
+	// [ListPolicyGenerationAssets]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationAssets.html
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -71,7 +71,7 @@ type ListPolicyGenerationAssetsOutput struct {
 	// assets. This token is only present when there are more generated policy assets
 	// available beyond the current response.
 	//
-	// [ListPolicyGenerationAssets]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyGenerationAssets.html
+	// [ListPolicyGenerationAssets]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationAssets.html
 	NextToken *string
 
 	// An array of generated policy assets including Cedar policies and related

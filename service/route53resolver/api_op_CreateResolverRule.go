@@ -68,6 +68,10 @@ type CreateResolverRuleInput struct {
 
 	// A friendly name that lets you easily find a rule in the Resolver dashboard in
 	// the Route 53 console.
+	//
+	// The name can be up to 64 characters long and can contain letters (a-z, A-Z),
+	// numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist
+	// of only numbers.
 	Name *string
 
 	// The ID of the outbound Resolver endpoint that you want to use to route DNS
@@ -81,7 +85,13 @@ type CreateResolverRuleInput struct {
 	// either Ipv4 or Ipv6 addresses but not both in the same rule. Separate IP
 	// addresses with a space.
 	//
-	// TargetIps is available only when the value of Rule type is FORWARD .
+	// TargetIps is available only when the value of Rule type is FORWARD . You should
+	// not provide TargetIps when the Rule type is DELEGATE .
+	//
+	// when creating a DELEGATE rule, you must not provide the TargetIps parameter. If
+	// you provide the TargetIps , you may receive an ERROR message similar to
+	// "Delegate resolver rules need to specify a nameserver name". This error means
+	// you should not provide TargetIps .
 	TargetIps []types.TargetAddress
 
 	noSmithyDocumentSerde

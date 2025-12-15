@@ -146,6 +146,18 @@ func TestCheckSnapshot_GetAWSDefaultServiceQuota(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetQuotaUtilizationReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQuotaUtilizationReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetQuotaUtilizationReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRequestedServiceQuotaChange(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRequestedServiceQuotaChange(context.Background(), nil, func(o *Options) {
@@ -302,6 +314,18 @@ func TestCheckSnapshot_StartAutoManagement(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartQuotaUtilizationReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartQuotaUtilizationReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartQuotaUtilizationReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopAutoManagement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopAutoManagement(context.Background(), nil, func(o *Options) {
@@ -426,6 +450,18 @@ func TestUpdateSnapshot_GetAWSDefaultServiceQuota(t *testing.T) {
 	_, err := svc.GetAWSDefaultServiceQuota(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAWSDefaultServiceQuota")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetQuotaUtilizationReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQuotaUtilizationReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetQuotaUtilizationReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -582,6 +618,18 @@ func TestUpdateSnapshot_StartAutoManagement(t *testing.T) {
 	_, err := svc.StartAutoManagement(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartAutoManagement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartQuotaUtilizationReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartQuotaUtilizationReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartQuotaUtilizationReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

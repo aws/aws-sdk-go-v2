@@ -21,7 +21,7 @@ import (
 //
 //   - SHA256 tree hash does not matchTo ensure that part data is not corrupted in
 //     transmission, you compute a SHA256 tree hash of the part and include it in your
-//     request. Upon receiving the part data, Amazon S3 Glacier also computes a SHA256
+//     request. Upon receiving the part data, Amazon Glacier also computes a SHA256
 //     tree hash. If these hash values don't match, the operation fails. For
 //     information about computing a SHA256 tree hash, see [Computing Checksums].
 //
@@ -78,7 +78,7 @@ type UploadMultipartPartInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// in which case Amazon Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -102,18 +102,18 @@ type UploadMultipartPartInput struct {
 	Checksum *string
 
 	// Identifies the range of bytes in the assembled archive that will be uploaded in
-	// this part. Amazon S3 Glacier uses this information to assemble the archive in
-	// the proper sequence. The format of this header follows RFC 2616. An example
-	// header is Content-Range:bytes 0-4194303/*.
+	// this part. Amazon Glacier uses this information to assemble the archive in the
+	// proper sequence. The format of this header follows RFC 2616. An example header
+	// is Content-Range:bytes 0-4194303/*.
 	Range *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to your request.
+// Contains the Amazon Glacier response to your request.
 type UploadMultipartPartOutput struct {
 
-	// The SHA256 tree hash that Amazon S3 Glacier computed for the uploaded part.
+	// The SHA256 tree hash that Amazon Glacier computed for the uploaded part.
 	Checksum *string
 
 	// Metadata pertaining to the operation's result.

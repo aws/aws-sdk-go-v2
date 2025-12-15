@@ -1,0 +1,8 @@
+{
+    "id": "9500b811-2800-446e-99cb-0ff44fd9c971",
+    "type": "feature",
+    "description": "This release adds support for the new optional field 'LifecycleExpirationDate' in S3 Inventory configurations.",
+    "modules": [
+        "service/s3"
+    ]
+}

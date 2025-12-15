@@ -44,7 +44,7 @@ type ListPoliciesInput struct {
 	// A pagination token returned from a previous [ListPolicies] call. Use this token to retrieve
 	// the next page of results when the response is paginated.
 	//
-	// [ListPolicies]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicies.html
+	// [ListPolicies]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicies.html
 	NextToken *string
 
 	// Optional filter to list policies that apply to a specific resource scope or

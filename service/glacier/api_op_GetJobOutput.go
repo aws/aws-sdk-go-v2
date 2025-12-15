@@ -18,7 +18,7 @@ import (
 //
 // You can download all the job output or download a portion of the output by
 // specifying a byte range. In the case of an archive retrieval job, depending on
-// the byte range you specify, Amazon S3 Glacier (Glacier) returns the checksum for
+// the byte range you specify, Amazon Glacier (Glacier) returns the checksum for
 // the portion of the data. You can compute the checksum on the client and verify
 // that the values match to ensure the portion you downloaded is the correct data.
 //
@@ -32,8 +32,8 @@ import (
 // the range of bytes you specified. For example, if you specify a range of
 // bytes=0-1048575 , you should verify your download size is 1,048,576 bytes. If
 // you download an entire archive, the expected size is the size of the archive
-// when you uploaded it to Amazon S3 Glacier The expected size is also returned in
-// the headers from the Get Job Output response.
+// when you uploaded it to Amazon Glacier The expected size is also returned in the
+// headers from the Get Job Output response.
 //
 // In the case of an archive retrieval job, depending on the byte range you
 // specify, Glacier returns the checksum for the portion of the data. To ensure the
@@ -70,12 +70,12 @@ func (c *Client) GetJobOutput(ctx context.Context, params *GetJobOutputInput, op
 	return out, nil
 }
 
-// Provides options for downloading output of an Amazon S3 Glacier job.
+// Provides options for downloading output of an Amazon Glacier job.
 type GetJobOutputInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// in which case Amazon Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -118,15 +118,15 @@ type GetJobOutputInput struct {
 	//   checksum values. Compute the tree hash of these values to find the checksum of
 	//   the entire output. Using the DescribeJobAPI, obtain job information of the job that
 	//   provided you the output. The response includes the checksum of the entire
-	//   archive stored in Amazon S3 Glacier. You compare this value with the checksum
-	//   you computed to ensure you have downloaded the entire archive content with no
+	//   archive stored in Amazon Glacier. You compare this value with the checksum you
+	//   computed to ensure you have downloaded the entire archive content with no
 	//   errors.
 	Range *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to your request.
+// Contains the Amazon Glacier response to your request.
 type GetJobOutputOutput struct {
 
 	// Indicates the range units accepted. For more information, see [RFC2616].
@@ -157,8 +157,8 @@ type GetJobOutputOutput struct {
 	//   archive), then the x-amz-sha256-tree-hash is returned as a response header.
 	Checksum *string
 
-	// The range of bytes returned by Amazon S3 Glacier. If only partial output is
-	// downloaded, the response provides the range of bytes Amazon S3 Glacier returned.
+	// The range of bytes returned by Amazon Glacier. If only partial output is
+	// downloaded, the response provides the range of bytes Amazon Glacier returned.
 	// For example, bytes 0-1048575/8388608 returns the first 1 MB from 8 MB.
 	ContentRange *string
 

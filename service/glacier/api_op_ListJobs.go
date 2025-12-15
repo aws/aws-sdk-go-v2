@@ -64,12 +64,12 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 	return out, nil
 }
 
-// Provides options for retrieving a job list for an Amazon S3 Glacier vault.
+// Provides options for retrieving a job list for an Amazon Glacier vault.
 type ListJobsInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// in which case Amazon Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -102,7 +102,7 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to your request.
+// Contains the Amazon Glacier response to your request.
 type ListJobsOutput struct {
 
 	// A list of job objects. Each job object contains metadata describing the job.

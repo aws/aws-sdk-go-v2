@@ -13,10 +13,10 @@ import (
 )
 
 // This operation adds an archive to a vault. This is a synchronous operation, and
-// for a successful upload, your data is durably persisted. Amazon S3 Glacier
-// returns the archive ID in the x-amz-archive-id header of the response.
+// for a successful upload, your data is durably persisted. Amazon Glacier returns
+// the archive ID in the x-amz-archive-id header of the response.
 //
-// You must use the archive ID to access your data in Amazon S3 Glacier. After you
+// You must use the archive ID to access your data in Amazon Glacier. After you
 // upload an archive, you should save the archive ID returned so that you can
 // retrieve or delete the archive later. Besides saving the archive ID, you can
 // also index it and give it a friendly name to allow for better searching. You can
@@ -70,7 +70,7 @@ type UploadArchiveInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// in which case Amazon Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -94,19 +94,19 @@ type UploadArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to your request.
+// Contains the Amazon Glacier response to your request.
 //
 // For information about the underlying REST API, see [Upload Archive]. For conceptual
-// information, see [Working with Archives in Amazon S3 Glacier].
+// information, see [Working with Archives in Amazon Glacier].
 //
-// [Working with Archives in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
 // [Upload Archive]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html
+// [Working with Archives in Amazon Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
 type UploadArchiveOutput struct {
 
 	// The ID of the archive. This value is also included as part of the location.
 	ArchiveId *string
 
-	// The checksum of the archive computed by Amazon S3 Glacier.
+	// The checksum of the archive computed by Amazon Glacier.
 	Checksum *string
 
 	// The relative URI path of the newly added archive resource.

@@ -1,0 +1,8 @@
+{
+    "id": "416caeab-c7ae-4ab0-8523-2b42f9cff580",
+    "type": "feature",
+    "description": "EC2 Capacity Manager now supports SpotTotalCount, SpotTotalInterruptions and SpotInterruptionRate metrics for both vCPU and instance units.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -103,9 +103,15 @@ type PutIndexPolicyInput struct {
 	LogGroupIdentifier *string
 
 	// The index policy document, in JSON format. The following is an example of an
-	// index policy document that creates two indexes, RequestId and TransactionId .
+	// index policy document that creates indexes with different types.
 	//
-	//     "policyDocument": "{ "Fields": [ "RequestId", "TransactionId" ] }"
+	//     "policyDocument": "{"Fields": [ "TransactionId" ], "FieldsV2": {"RequestId":
+	//     {"type": "FIELD_INDEX"}, "APIName": {"type": "FACET"}, "StatusCode": {"type":
+	//     "FACET"}}}"
+	//
+	// You can use FieldsV2 to specify the type for each field. Supported types are
+	// FIELD_INDEX and FACET . Field names within Fields and FieldsV2 must be mutually
+	// exclusive.
 	//
 	// The policy document must include at least one field index. For more information
 	// about the fields that can be included and other restrictions, see [Field index syntax and quotas].

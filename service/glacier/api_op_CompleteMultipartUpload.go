@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// You call this operation to inform Amazon S3 Glacier (Glacier) that all the
-// archive parts have been uploaded and that Glacier can now assemble the archive
-// from the uploaded parts. After assembling and saving the archive to the vault,
-// Glacier returns the URI path of the newly created archive resource. Using the
-// URI path, you can then access the archive. After you upload an archive, you
-// should save the archive ID returned to retrieve the archive at a later point.
-// You can also get the vault inventory to obtain a list of archive IDs in a vault.
-// For more information, see InitiateJob.
+// You call this operation to inform Amazon Glacier (Glacier) that all the archive
+// parts have been uploaded and that Glacier can now assemble the archive from the
+// uploaded parts. After assembling and saving the archive to the vault, Glacier
+// returns the URI path of the newly created archive resource. Using the URI path,
+// you can then access the archive. After you upload an archive, you should save
+// the archive ID returned to retrieve the archive at a later point. You can also
+// get the vault inventory to obtain a list of archive IDs in a vault. For more
+// information, see InitiateJob.
 //
 // In the request, you must include the computed SHA256 tree hash of the entire
 // archive you have uploaded. For information about computing a SHA256 tree hash,
@@ -72,7 +72,7 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 }
 
 // Provides options to complete a multipart upload operation. This informs Amazon
-// Glacier that all the archive parts have been uploaded and Amazon S3 Glacier
+// Glacier that all the archive parts have been uploaded and Amazon Glacier
 // (Glacier) can now assemble the archive from the uploaded parts. After assembling
 // and saving the archive to the vault, Glacier returns the URI path of the newly
 // created archive resource.
@@ -80,7 +80,7 @@ type CompleteMultipartUploadInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// in which case Amazon Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -104,25 +104,25 @@ type CompleteMultipartUploadInput struct {
 	// The SHA256 tree hash of the entire archive. It is the tree hash of SHA256 tree
 	// hash of the individual parts. If the value you specify in the request does not
 	// match the SHA256 tree hash of the final assembled archive as computed by Amazon
-	// S3 Glacier (Glacier), Glacier returns an error and the request fails.
+	// Glacier (Glacier), Glacier returns an error and the request fails.
 	Checksum *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to your request.
+// Contains the Amazon Glacier response to your request.
 //
 // For information about the underlying REST API, see [Upload Archive]. For conceptual
-// information, see [Working with Archives in Amazon S3 Glacier].
+// information, see [Working with Archives in Amazon Glacier].
 //
-// [Working with Archives in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
 // [Upload Archive]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html
+// [Working with Archives in Amazon Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
 type CompleteMultipartUploadOutput struct {
 
 	// The ID of the archive. This value is also included as part of the location.
 	ArchiveId *string
 
-	// The checksum of the archive computed by Amazon S3 Glacier.
+	// The checksum of the archive computed by Amazon Glacier.
 	Checksum *string
 
 	// The relative URI path of the newly added archive resource.

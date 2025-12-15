@@ -82,6 +82,29 @@ type UpdateResolverEndpointInput struct {
 	// Updating to IPV6 type isn't currently supported.
 	ResolverEndpointType types.ResolverEndpointType
 
+	// Updates whether RNI enhanced metrics are enabled for the Resolver endpoints.
+	// When set to true, one-minute granular metrics are published in CloudWatch for
+	// each RNI associated with this endpoint. When set to false, metrics are not
+	// published.
+	//
+	// Standard CloudWatch pricing and charges are applied for using the Route 53
+	// Resolver endpoint RNI enhanced metrics. For more information, see [Detailed metrics].
+	//
+	// [Detailed metrics]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
+	RniEnhancedMetricsEnabled *bool
+
+	// Updates whether target name server metrics are enabled for the outbound
+	// Resolver endpoints. When set to true, one-minute granular metrics are published
+	// in CloudWatch for each target name server associated with this endpoint. When
+	// set to false, metrics are not published. This setting is not supported for
+	// inbound Resolver endpoints.
+	//
+	// Standard CloudWatch pricing and charges are applied for using the Route 53
+	// Resolver endpoint target name server metrics. For more information, see [Detailed metrics].
+	//
+	// [Detailed metrics]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
+	TargetNameServerMetricsEnabled *bool
+
 	//  Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to
 	// dual-stack. If you don't specify an IPv6 address, one will be automatically
 	// chosen from your subnet.

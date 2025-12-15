@@ -70,6 +70,26 @@ func (m *validateOpGetAWSDefaultServiceQuota) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetQuotaUtilizationReport struct {
+}
+
+func (*validateOpGetQuotaUtilizationReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQuotaUtilizationReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQuotaUtilizationReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQuotaUtilizationReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetRequestedServiceQuotaChange struct {
 }
 
@@ -322,6 +342,10 @@ func addOpGetAWSDefaultServiceQuotaValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetAWSDefaultServiceQuota{}, middleware.After)
 }
 
+func addOpGetQuotaUtilizationReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQuotaUtilizationReport{}, middleware.After)
+}
+
 func addOpGetRequestedServiceQuotaChangeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRequestedServiceQuotaChange{}, middleware.After)
 }
@@ -451,6 +475,21 @@ func validateOpGetAWSDefaultServiceQuotaInput(v *GetAWSDefaultServiceQuotaInput)
 	}
 	if v.QuotaCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuotaCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQuotaUtilizationReportInput(v *GetQuotaUtilizationReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQuotaUtilizationReportInput"}
+	if v.ReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

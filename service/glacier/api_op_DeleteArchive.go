@@ -16,11 +16,11 @@ import (
 // for this archive ID may or may not succeed according to the following scenarios:
 //
 //   - If the archive retrieval job is actively preparing the data for download
-//     when Amazon S3 Glacier receives the delete archive request, the archival
-//     retrieval operation might fail.
+//     when Amazon Glacier receives the delete archive request, the archival retrieval
+//     operation might fail.
 //
 //   - If the archive retrieval job has successfully prepared the archive for
-//     download when Amazon S3 Glacier receives the delete archive request, you will be
+//     download when Amazon Glacier receives the delete archive request, you will be
 //     able to download the output.
 //
 // This operation is idempotent. Attempting to delete an already-deleted archive
@@ -52,12 +52,12 @@ func (c *Client) DeleteArchive(ctx context.Context, params *DeleteArchiveInput, 
 	return out, nil
 }
 
-// Provides options for deleting an archive from an Amazon S3 Glacier vault.
+// Provides options for deleting an archive from an Amazon Glacier vault.
 type DeleteArchiveInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// in which case Amazon Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//

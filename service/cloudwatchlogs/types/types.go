@@ -932,6 +932,87 @@ type GroupingIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+// An import job to move data from CloudTrail Event Data Store to CloudWatch.
+type Import struct {
+
+	// The timestamp when the import task was created, expressed as the number of
+	// milliseconds after Jan 1, 1970 00:00:00 UTC.
+	CreationTime *int64
+
+	// Error message related to any failed imports
+	ErrorMessage *string
+
+	// The ARN of the managed CloudWatch Logs log group where the events are being
+	// imported to.
+	ImportDestinationArn *string
+
+	// The filter criteria used for this import task.
+	ImportFilter *ImportFilter
+
+	// The unique identifier of the import task.
+	ImportId *string
+
+	// The ARN of the CloudTrail Lake Event Data Store being imported from.
+	ImportSourceArn *string
+
+	// Statistics about the import progress
+	ImportStatistics *ImportStatistics
+
+	// The current status of the import task. Valid values are IN_PROGRESS, CANCELLED,
+	// COMPLETED and FAILED.
+	ImportStatus ImportStatus
+
+	// The timestamp when the import task was last updated, expressed as the number of
+	// milliseconds after Jan 1, 1970 00:00:00 UTC.
+	LastUpdatedTime *int64
+
+	noSmithyDocumentSerde
+}
+
+// A collection of events being imported to CloudWatch
+type ImportBatch struct {
+
+	// The unique identifier of the import batch.
+	//
+	// This member is required.
+	BatchId *string
+
+	// The current status of the import batch. Valid values are IN_PROGRESS,
+	// CANCELLED, COMPLETED and FAILED.
+	//
+	// This member is required.
+	Status ImportStatus
+
+	// The error message if the batch failed to import. Only present when status is
+	// FAILED.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// The filter criteria used for import tasks
+type ImportFilter struct {
+
+	// The end of the time range for events to import, expressed as the number of
+	// milliseconds after Jan 1, 1970 00:00:00 UTC.
+	EndEventTime *int64
+
+	// The start of the time range for events to import, expressed as the number of
+	// milliseconds after Jan 1, 1970 00:00:00 UTC.
+	StartEventTime *int64
+
+	noSmithyDocumentSerde
+}
+
+// Statistics about the import progress
+type ImportStatistics struct {
+
+	// The total number of bytes that have been imported to the managed log group.
+	BytesImported *int64
+
+	noSmithyDocumentSerde
+}
+
 // This structure contains information about one field index policy in this
 // account.
 type IndexPolicy struct {

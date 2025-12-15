@@ -20,7 +20,7 @@ import (
 // deny each action based on the defined policies. This is an asynchronous
 // operation. Use the [GetPolicyEngine]operation to poll the status field to track completion.
 //
-// [GetPolicyEngine]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_GetPolicyEngine.html
+// [GetPolicyEngine]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetPolicyEngine.html
 func (c *Client) CreatePolicyEngine(ctx context.Context, params *CreatePolicyEngineInput, optFns ...func(*Options)) (*CreatePolicyEngineOutput, error) {
 	if params == nil {
 		params = &CreatePolicyEngineInput{}

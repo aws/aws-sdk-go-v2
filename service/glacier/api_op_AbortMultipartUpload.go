@@ -26,12 +26,12 @@ import (
 // permissions by default. You must grant them explicit permission to perform
 // specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
 //
-// For conceptual information and underlying REST API, see [Working with Archives in Amazon S3 Glacier] and [Abort Multipart Upload] in the Amazon
+// For conceptual information and underlying REST API, see [Working with Archives in Amazon Glacier] and [Abort Multipart Upload] in the Amazon
 // Glacier Developer Guide.
 //
 // [Abort Multipart Upload]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html
 // [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
-// [Working with Archives in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
+// [Working with Archives in Amazon Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
 func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipartUploadInput, optFns ...func(*Options)) (*AbortMultipartUploadOutput, error) {
 	if params == nil {
 		params = &AbortMultipartUploadInput{}
@@ -50,15 +50,15 @@ func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipar
 // Provides options to abort a multipart upload identified by the upload ID.
 //
 // For information about the underlying REST API, see [Abort Multipart Upload]. For conceptual
-// information, see [Working with Archives in Amazon S3 Glacier].
+// information, see [Working with Archives in Amazon Glacier].
 //
 // [Abort Multipart Upload]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html
-// [Working with Archives in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
+// [Working with Archives in Amazon Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
 type AbortMultipartUploadInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// in which case Amazon Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//

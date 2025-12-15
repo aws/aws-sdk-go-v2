@@ -18,7 +18,7 @@ import (
 // To configure vault notifications, send a PUT request to the
 // notification-configuration subresource of the vault. The request should include
 // a JSON document that provides an Amazon SNS topic and specific events for which
-// you want Amazon S3 Glacier to send notifications to the topic.
+// you want Amazon Glacier to send notifications to the topic.
 //
 // Amazon SNS topics must grant permission to the vault to be allowed to publish
 // notifications to the topic. You can configure a vault to publish a notification
@@ -39,12 +39,12 @@ import (
 // permissions by default. You must grant them explicit permission to perform
 // specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
 //
-// For conceptual information and underlying REST API, see [Configuring Vault Notifications in Amazon S3 Glacier] and [Set Vault Notification Configuration] in the Amazon
+// For conceptual information and underlying REST API, see [Configuring Vault Notifications in Amazon Glacier] and [Set Vault Notification Configuration] in the Amazon
 // Glacier Developer Guide.
 //
 // [Set Vault Notification Configuration]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html
-// [Configuring Vault Notifications in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
 // [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
+// [Configuring Vault Notifications in Amazon Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
 func (c *Client) SetVaultNotifications(ctx context.Context, params *SetVaultNotificationsInput, optFns ...func(*Options)) (*SetVaultNotificationsOutput, error) {
 	if params == nil {
 		params = &SetVaultNotificationsInput{}
@@ -66,7 +66,7 @@ type SetVaultNotificationsInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// in which case Amazon Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//

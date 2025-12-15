@@ -213,6 +213,103 @@ func (c *Client) addOperationListAggregateLogGroupSummariesMiddlewares(stack *mi
 	return nil
 }
 
+// ListAggregateLogGroupSummariesPaginatorOptions is the paginator options for
+// ListAggregateLogGroupSummaries
+type ListAggregateLogGroupSummariesPaginatorOptions struct {
+	// The maximum number of aggregated summaries to return. If you omit this
+	// parameter, the default is up to 50 aggregated summaries.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAggregateLogGroupSummariesPaginator is a paginator for
+// ListAggregateLogGroupSummaries
+type ListAggregateLogGroupSummariesPaginator struct {
+	options   ListAggregateLogGroupSummariesPaginatorOptions
+	client    ListAggregateLogGroupSummariesAPIClient
+	params    *ListAggregateLogGroupSummariesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAggregateLogGroupSummariesPaginator returns a new
+// ListAggregateLogGroupSummariesPaginator
+func NewListAggregateLogGroupSummariesPaginator(client ListAggregateLogGroupSummariesAPIClient, params *ListAggregateLogGroupSummariesInput, optFns ...func(*ListAggregateLogGroupSummariesPaginatorOptions)) *ListAggregateLogGroupSummariesPaginator {
+	if params == nil {
+		params = &ListAggregateLogGroupSummariesInput{}
+	}
+
+	options := ListAggregateLogGroupSummariesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListAggregateLogGroupSummariesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAggregateLogGroupSummariesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListAggregateLogGroupSummaries page.
+func (p *ListAggregateLogGroupSummariesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAggregateLogGroupSummariesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListAggregateLogGroupSummaries(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListAggregateLogGroupSummariesAPIClient is a client that implements the
+// ListAggregateLogGroupSummaries operation.
+type ListAggregateLogGroupSummariesAPIClient interface {
+	ListAggregateLogGroupSummaries(context.Context, *ListAggregateLogGroupSummariesInput, ...func(*Options)) (*ListAggregateLogGroupSummariesOutput, error)
+}
+
+var _ ListAggregateLogGroupSummariesAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListAggregateLogGroupSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

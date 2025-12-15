@@ -802,6 +802,24 @@ func addOpUpdateSchemaMappingValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateSchemaMapping{}, middleware.After)
 }
 
+func validateCustomerProfilesIntegrationConfig(v *types.CustomerProfilesIntegrationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomerProfilesIntegrationConfig"}
+	if v.DomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainArn"))
+	}
+	if v.ObjectTypeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectTypeArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIdMappingJobOutputSource(v *types.IdMappingJobOutputSource) error {
 	if v == nil {
 		return nil
@@ -1145,14 +1163,16 @@ func validateOutputSource(v *types.OutputSource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OutputSource"}
-	if v.OutputS3Path == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputS3Path"))
-	}
 	if v.Output == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Output"))
 	} else if v.Output != nil {
 		if err := validateOutputAttributes(v.Output); err != nil {
 			invalidParams.AddNested("Output", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomerProfilesIntegrationConfig != nil {
+		if err := validateCustomerProfilesIntegrationConfig(v.CustomerProfilesIntegrationConfig); err != nil {
+			invalidParams.AddNested("CustomerProfilesIntegrationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

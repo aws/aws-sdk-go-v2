@@ -82,7 +82,7 @@ type InitiateVaultLockInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to your request.
+// Contains the Amazon Glacier response to your request.
 type InitiateVaultLockOutput struct {
 
 	// The lock ID, which is used to complete the vault locking process.

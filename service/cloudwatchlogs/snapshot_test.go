@@ -98,6 +98,18 @@ func TestCheckSnapshot_CancelExportTask(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelImportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelImportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelImportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDelivery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDelivery(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_CreateExportTask(t *testing.T) {
 	_, err := svc.CreateExportTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateImportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateImportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateImportTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -487,6 +511,30 @@ func TestCheckSnapshot_DescribeFieldIndexes(t *testing.T) {
 	_, err := svc.DescribeFieldIndexes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeFieldIndexes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeImportTaskBatches(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeImportTaskBatches(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeImportTaskBatches")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeImportTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeImportTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeImportTasks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1333,6 +1381,18 @@ func TestUpdateSnapshot_CancelExportTask(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelImportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelImportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelImportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDelivery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDelivery(context.Background(), nil, func(o *Options) {
@@ -1350,6 +1410,18 @@ func TestUpdateSnapshot_CreateExportTask(t *testing.T) {
 	_, err := svc.CreateExportTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateImportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateImportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateImportTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1722,6 +1794,30 @@ func TestUpdateSnapshot_DescribeFieldIndexes(t *testing.T) {
 	_, err := svc.DescribeFieldIndexes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeFieldIndexes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeImportTaskBatches(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeImportTaskBatches(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeImportTaskBatches")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeImportTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeImportTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeImportTasks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "35039bb5-da7b-439d-95c8-c0098cacb6d7",
+    "type": "feature",
+    "description": "Amazon Connect now supports outbound WhatsApp contacts via the Send message block or StartOutboundChatContact API. Send proactive messages for surveys, reminders, and updates. Offer customers the option to switch to WhatsApp while in queue, eliminating hold time.",
+    "modules": [
+        "service/connect"
+    ]
+}

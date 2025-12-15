@@ -269,6 +269,29 @@ func (FlattenedElement) Values() []FlattenedElement {
 	}
 }
 
+type ImportStatus string
+
+// Enum values for ImportStatus
+const (
+	ImportStatusInProgress ImportStatus = "IN_PROGRESS"
+	ImportStatusCancelled  ImportStatus = "CANCELLED"
+	ImportStatusCompleted  ImportStatus = "COMPLETED"
+	ImportStatusFailed     ImportStatus = "FAILED"
+)
+
+// Values returns all known values for ImportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImportStatus) Values() []ImportStatus {
+	return []ImportStatus{
+		"IN_PROGRESS",
+		"CANCELLED",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type IndexSource string
 
 // Enum values for IndexSource

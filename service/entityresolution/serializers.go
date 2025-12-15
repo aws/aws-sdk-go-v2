@@ -3359,6 +3359,23 @@ func awsRestjson1_serializeOpDocumentUpdateSchemaMappingInput(v *UpdateSchemaMap
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomerProfilesIntegrationConfig(v *types.CustomerProfilesIntegrationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainArn != nil {
+		ok := object.Key("domainArn")
+		ok.String(*v.DomainArn)
+	}
+
+	if v.ObjectTypeArn != nil {
+		ok := object.Key("objectTypeArn")
+		ok.String(*v.ObjectTypeArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIdMappingIncrementalRunConfig(v *types.IdMappingIncrementalRunConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3765,6 +3782,13 @@ func awsRestjson1_serializeDocumentOutputSource(v *types.OutputSource, value smi
 	if v.ApplyNormalization != nil {
 		ok := object.Key("applyNormalization")
 		ok.Boolean(*v.ApplyNormalization)
+	}
+
+	if v.CustomerProfilesIntegrationConfig != nil {
+		ok := object.Key("customerProfilesIntegrationConfig")
+		if err := awsRestjson1_serializeDocumentCustomerProfilesIntegrationConfig(v.CustomerProfilesIntegrationConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KMSArn != nil {

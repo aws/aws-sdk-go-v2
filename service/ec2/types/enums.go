@@ -7933,6 +7933,12 @@ const (
 	MetricSpotAvgRunTimeBeforeInterruptionInst  Metric = "spot-avg-run-time-before-interruption-inst"
 	MetricSpotMaxRunTimeBeforeInterruptionInst  Metric = "spot-max-run-time-before-interruption-inst"
 	MetricSpotMinRunTimeBeforeInterruptionInst  Metric = "spot-min-run-time-before-interruption-inst"
+	MetricSpotTotalInterruptionsInst            Metric = "spot-total-interruptions-inst"
+	MetricSpotTotalInterruptionsVcpu            Metric = "spot-total-interruptions-vcpu"
+	MetricSpotTotalCountInst                    Metric = "spot-total-count-inst"
+	MetricSpotTotalCountVcpu                    Metric = "spot-total-count-vcpu"
+	MetricSpotInterruptionRateInst              Metric = "spot-interruption-rate-inst"
+	MetricSpotInterruptionRateVcpu              Metric = "spot-interruption-rate-vcpu"
 )
 
 // Values returns all known values for Metric. Note that this can be expanded in
@@ -7984,6 +7990,12 @@ func (Metric) Values() []Metric {
 		"spot-avg-run-time-before-interruption-inst",
 		"spot-max-run-time-before-interruption-inst",
 		"spot-min-run-time-before-interruption-inst",
+		"spot-total-interruptions-inst",
+		"spot-total-interruptions-vcpu",
+		"spot-total-count-inst",
+		"spot-total-count-vcpu",
+		"spot-interruption-rate-inst",
+		"spot-interruption-rate-vcpu",
 	}
 }
 

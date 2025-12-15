@@ -149,6 +149,29 @@ func (QuotaContextScope) Values() []QuotaContextScope {
 	}
 }
 
+type ReportStatus string
+
+// Enum values for ReportStatus
+const (
+	ReportStatusPending    ReportStatus = "PENDING"
+	ReportStatusInProgress ReportStatus = "IN_PROGRESS"
+	ReportStatusCompleted  ReportStatus = "COMPLETED"
+	ReportStatusFailed     ReportStatus = "FAILED"
+)
+
+// Values returns all known values for ReportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReportStatus) Values() []ReportStatus {
+	return []ReportStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type RequestStatus string
 
 // Enum values for RequestStatus
@@ -175,6 +198,23 @@ func (RequestStatus) Values() []RequestStatus {
 		"CASE_CLOSED",
 		"NOT_APPROVED",
 		"INVALID_REQUEST",
+	}
+}
+
+type RequestType string
+
+// Enum values for RequestType
+const (
+	RequestTypeAutomaticManagement RequestType = "AutomaticManagement"
+)
+
+// Values returns all known values for RequestType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RequestType) Values() []RequestType {
+	return []RequestType{
+		"AutomaticManagement",
 	}
 }
 

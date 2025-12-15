@@ -20,7 +20,7 @@ import (
 // console for this log group. However, facet data is retained for up to 30 days.
 //
 // You can't use this operation to delete an account-level index policy. Instead,
-// use [DeletAccountPolicy].
+// use [DeleteAccountPolicy].
 //
 // If you delete a log-group level field index policy and there is an
 // account-level field index policy, in a few minutes the log group begins using
@@ -29,7 +29,7 @@ import (
 // preserves any data source-based account policies that may apply to the log
 // group.
 //
-// [DeletAccountPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteAccountPolicy.html
+// [DeleteAccountPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteAccountPolicy.html
 func (c *Client) DeleteIndexPolicy(ctx context.Context, params *DeleteIndexPolicyInput, optFns ...func(*Options)) (*DeleteIndexPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteIndexPolicyInput{}

@@ -28,11 +28,11 @@ import (
 // permissions by default. You must grant them explicit permission to perform
 // specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
 //
-// For conceptual information and underlying REST API, see [Retrieving Vault Metadata in Amazon S3 Glacier] and [List Vaults] in the Amazon
+// For conceptual information and underlying REST API, see [Retrieving Vault Metadata in Amazon Glacier] and [List Vaults] in the Amazon
 // Glacier Developer Guide.
 //
+// [Retrieving Vault Metadata in Amazon Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html
 // [List Vaults]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html
-// [Retrieving Vault Metadata in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html
 // [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
 func (c *Client) ListVaults(ctx context.Context, params *ListVaultsInput, optFns ...func(*Options)) (*ListVaultsOutput, error) {
 	if params == nil {
@@ -75,7 +75,7 @@ type ListVaultsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to your request.
+// Contains the Amazon Glacier response to your request.
 type ListVaultsOutput struct {
 
 	// The vault ARN at which to continue pagination of the results. You use the

@@ -86,7 +86,7 @@ type DataRetrievalRule struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to your request.
+// Contains the Amazon Glacier response to your request.
 type DescribeVaultOutput struct {
 
 	// The Universal Coordinated Time (UTC) date when the vault was created. This
@@ -94,7 +94,7 @@ type DescribeVaultOutput struct {
 	// 2012-03-20T17:03:43.221Z .
 	CreationDate *string
 
-	// The Universal Coordinated Time (UTC) date when Amazon S3 Glacier completed the
+	// The Universal Coordinated Time (UTC) date when Amazon Glacier completed the
 	// last vault inventory. This value should be a string in the ISO 8601 date format,
 	// for example 2012-03-20T17:03:43.221Z .
 	LastInventoryDate *string
@@ -385,8 +385,8 @@ type JobParameters struct {
 	// request.
 	RetrievalByteRange *string
 
-	// The Amazon SNS topic ARN to which Amazon S3 Glacier sends a notification when
-	// the job is completed and the output is ready for you to download. The specified
+	// The Amazon SNS topic ARN to which Amazon Glacier sends a notification when the
+	// job is completed and the output is ready for you to download. The specified
 	// topic publishes the notification to its subscribers. The SNS topic must exist.
 	SNSTopic *string
 
@@ -429,7 +429,7 @@ type PartListElement struct {
 	// The byte range of a part, inclusive of the upper value of the range.
 	RangeInBytes *string
 
-	// The SHA256 tree hash value that Amazon S3 Glacier calculated for the part. This
+	// The SHA256 tree hash value that Amazon Glacier calculated for the part. This
 	// field is never null .
 	SHA256TreeHash *string
 
@@ -548,8 +548,8 @@ type VaultLockPolicy struct {
 // Represents a vault's notification configuration.
 type VaultNotificationConfig struct {
 
-	// A list of one or more events for which Amazon S3 Glacier will send a
-	// notification to the specified Amazon SNS topic.
+	// A list of one or more events for which Amazon Glacier will send a notification
+	// to the specified Amazon SNS topic.
 	Events []string
 
 	// The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name

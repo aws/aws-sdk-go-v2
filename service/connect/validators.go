@@ -16277,6 +16277,11 @@ func validateOpStartOutboundChatContactInput(v *StartOutboundChatContactInput) e
 			invalidParams.AddNested("InitialSystemMessage", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.InitialTemplatedSystemMessage != nil {
+		if err := validateTemplatedMessageConfig(v.InitialTemplatedSystemMessage); err != nil {
+			invalidParams.AddNested("InitialTemplatedSystemMessage", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

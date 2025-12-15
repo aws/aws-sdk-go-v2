@@ -1,0 +1,8 @@
+{
+    "id": "2074a461-2a94-4f13-9f0b-214706dec81c",
+    "type": "feature",
+    "description": "This release allows you to import your historical CloudTrail Lake data into CloudWatch with a few steps, enabling you to easily consolidate operational, security, and compliance data in one place.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

@@ -23,7 +23,7 @@ import (
 // asynchronous operation. Use the [GetPolicy]operation to poll the status field to track
 // completion.
 //
-// [GetPolicy]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_GetPolicy.html
+// [GetPolicy]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetPolicy.html
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {
 		params = &CreatePolicyInput{}

@@ -70,6 +70,26 @@ func (m *validateOpCancelExportTask) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelImportTask struct {
+}
+
+func (*validateOpCancelImportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelImportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelImportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelImportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDelivery struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpCreateExportTask) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateExportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateImportTask struct {
+}
+
+func (*validateOpCreateImportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateImportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateImportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateImportTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -585,6 +625,26 @@ func (m *validateOpDescribeFieldIndexes) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeFieldIndexesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeImportTaskBatches struct {
+}
+
+func (*validateOpDescribeImportTaskBatches) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeImportTaskBatches) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeImportTaskBatchesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeImportTaskBatchesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1662,12 +1722,20 @@ func addOpCancelExportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelExportTask{}, middleware.After)
 }
 
+func addOpCancelImportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelImportTask{}, middleware.After)
+}
+
 func addOpCreateDeliveryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDelivery{}, middleware.After)
 }
 
 func addOpCreateExportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateExportTask{}, middleware.After)
+}
+
+func addOpCreateImportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateImportTask{}, middleware.After)
 }
 
 func addOpCreateLogAnomalyDetectorValidationMiddleware(stack *middleware.Stack) error {
@@ -1764,6 +1832,10 @@ func addOpDescribeAccountPoliciesValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDescribeFieldIndexesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFieldIndexes{}, middleware.After)
+}
+
+func addOpDescribeImportTaskBatchesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeImportTaskBatches{}, middleware.After)
 }
 
 func addOpDescribeIndexPoliciesValidationMiddleware(stack *middleware.Stack) error {
@@ -2859,6 +2931,21 @@ func validateOpCancelExportTaskInput(v *CancelExportTaskInput) error {
 	}
 }
 
+func validateOpCancelImportTaskInput(v *CancelImportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelImportTaskInput"}
+	if v.ImportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDeliveryInput(v *CreateDeliveryInput) error {
 	if v == nil {
 		return nil
@@ -2893,6 +2980,24 @@ func validateOpCreateExportTaskInput(v *CreateExportTaskInput) error {
 	}
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateImportTaskInput(v *CreateImportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateImportTaskInput"}
+	if v.ImportSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportSourceArn"))
+	}
+	if v.ImportRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3285,6 +3390,21 @@ func validateOpDescribeFieldIndexesInput(v *DescribeFieldIndexesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeFieldIndexesInput"}
 	if v.LogGroupIdentifiers == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupIdentifiers"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeImportTaskBatchesInput(v *DescribeImportTaskBatchesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeImportTaskBatchesInput"}
+	if v.ImportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

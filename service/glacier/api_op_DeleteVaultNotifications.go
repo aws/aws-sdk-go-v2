@@ -13,20 +13,20 @@ import (
 
 // This operation deletes the notification configuration set for a vault. The
 // operation is eventually consistent; that is, it might take some time for Amazon
-// S3 Glacier to completely disable the notifications and you might still receive
-// some notifications for a short time after you send the delete request.
+// Glacier to completely disable the notifications and you might still receive some
+// notifications for a short time after you send the delete request.
 //
 // An AWS account has full permission to perform all operations (actions).
 // However, AWS Identity and Access Management (IAM) users don't have any
 // permissions by default. You must grant them explicit permission to perform
 // specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
 //
-// For conceptual information and underlying REST API, see [Configuring Vault Notifications in Amazon S3 Glacier] and [Delete Vault Notification Configuration] in the Amazon S3
+// For conceptual information and underlying REST API, see [Configuring Vault Notifications in Amazon Glacier] and [Delete Vault Notification Configuration] in the Amazon
 // Glacier Developer Guide.
 //
-// [Configuring Vault Notifications in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
 // [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
 // [Delete Vault Notification Configuration]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html
+// [Configuring Vault Notifications in Amazon Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
 func (c *Client) DeleteVaultNotifications(ctx context.Context, params *DeleteVaultNotificationsInput, optFns ...func(*Options)) (*DeleteVaultNotificationsOutput, error) {
 	if params == nil {
 		params = &DeleteVaultNotificationsInput{}
@@ -48,7 +48,7 @@ type DeleteVaultNotificationsInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// in which case Amazon Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//

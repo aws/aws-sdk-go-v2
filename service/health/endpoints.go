@@ -338,6 +338,70 @@ func (r *resolver) ResolveEndpoint(
 	_UseFIPS := *params.UseFIPS
 	_ = _UseFIPS
 
+	if !(params.Endpoint != nil) {
+		if _UseDualStack == false {
+			if exprVal := params.Region; exprVal != nil {
+				_Region := *exprVal
+				_ = _Region
+				if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
+					_PartitionResult := *exprVal
+					_ = _PartitionResult
+					if !(_PartitionResult.Name == "aws") {
+						if !(_PartitionResult.Name == "aws-cn") {
+							if !(_PartitionResult.Name == "aws-us-gov") {
+								if !(_PartitionResult.Name == "aws-iso") {
+									if !(_PartitionResult.Name == "aws-iso-b") {
+										if !(_PartitionResult.Name == "aws-iso-e") {
+											if !(_PartitionResult.Name == "aws-iso-f") {
+												if _UseFIPS == true {
+													uriString := func() string {
+														var out strings.Builder
+														out.WriteString("https://health-fips.")
+														out.WriteString(_Region)
+														out.WriteString(".")
+														out.WriteString(_PartitionResult.DualStackDnsSuffix)
+														return out.String()
+													}()
+
+													uri, err := url.Parse(uriString)
+													if err != nil {
+														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+													}
+
+													return smithyendpoints.Endpoint{
+														URI:     *uri,
+														Headers: http.Header{},
+													}, nil
+												}
+												uriString := func() string {
+													var out strings.Builder
+													out.WriteString("https://health.")
+													out.WriteString(_Region)
+													out.WriteString(".")
+													out.WriteString(_PartitionResult.DualStackDnsSuffix)
+													return out.String()
+												}()
+
+												uri, err := url.Parse(uriString)
+												if err != nil {
+													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+												}
+
+												return smithyendpoints.Endpoint{
+													URI:     *uri,
+													Headers: http.Header{},
+												}, nil
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	if exprVal := params.Endpoint; exprVal != nil {
 		_Endpoint := *exprVal
 		_ = _Endpoint

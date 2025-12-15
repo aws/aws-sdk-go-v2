@@ -45,7 +45,7 @@ type GetPolicyGenerationInput struct {
 	// The unique identifier of the policy generation request to be retrieved. This
 	// must be a valid generation ID from a previous [StartPolicyGeneration]call.
 	//
-	// [StartPolicyGeneration]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_StartPolicyGeneration.html
+	// [StartPolicyGeneration]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_StartPolicyGeneration.html
 	//
 	// This member is required.
 	PolicyGenerationId *string

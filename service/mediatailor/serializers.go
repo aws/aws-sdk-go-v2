@@ -3047,6 +3047,13 @@ func awsRestjson1_serializeOpDocumentPutPlaybackConfigurationInput(v *PutPlaybac
 		}
 	}
 
+	if v.AdDecisionServerConfiguration != nil {
+		ok := object.Key("AdDecisionServerConfiguration")
+		if err := awsRestjson1_serializeDocumentAdDecisionServerConfiguration(v.AdDecisionServerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AdDecisionServerUrl != nil {
 		ok := object.Key("AdDecisionServerUrl")
 		ok.String(*v.AdDecisionServerUrl)
@@ -4228,6 +4235,20 @@ func awsRestjson1_serializeDocumentAdConditioningConfiguration(v *types.AdCondit
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdDecisionServerConfiguration(v *types.AdDecisionServerConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HttpRequest != nil {
+		ok := object.Key("HttpRequest")
+		if err := awsRestjson1_serializeDocumentHttpRequest(v.HttpRequest, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAdMarkerPassthrough(v *types.AdMarkerPassthrough, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4573,6 +4594,35 @@ func awsRestjson1_serializeDocumentHttpPackageConfigurations(v []types.HttpPacka
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpRequest(v *types.HttpRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Body != nil {
+		ok := object.Key("Body")
+		ok.String(*v.Body)
+	}
+
+	if len(v.CompressRequest) > 0 {
+		ok := object.Key("CompressRequest")
+		ok.String(string(v.CompressRequest))
+	}
+
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsRestjson1_serializeDocumentStringMap(v.Headers, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Method) > 0 {
+		ok := object.Key("Method")
+		ok.String(string(v.Method))
+	}
+
 	return nil
 }
 
@@ -5009,6 +5059,17 @@ func awsRestjson1_serializeDocumentSpliceInsertMessage(v *types.SpliceInsertMess
 		ok.Integer(*v.UniqueProgramId)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

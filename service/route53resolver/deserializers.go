@@ -11213,6 +11213,15 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				sv.ResolverEndpointType = types.ResolverEndpointType(jtv)
 			}
 
+		case "RniEnhancedMetricsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected RniEnhancedMetricsEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.RniEnhancedMetricsEnabled = ptr.Bool(jtv)
+			}
+
 		case "SecurityGroupIds":
 			if err := awsAwsjson11_deserializeDocumentSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
 				return err
@@ -11234,6 +11243,15 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "TargetNameServerMetricsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected TargetNameServerMetricsEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.TargetNameServerMetricsEnabled = ptr.Bool(jtv)
 			}
 
 		default:

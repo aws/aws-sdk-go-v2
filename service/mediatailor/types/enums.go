@@ -198,6 +198,25 @@ func (ChannelState) Values() []ChannelState {
 	}
 }
 
+type CompressionMethod string
+
+// Enum values for CompressionMethod
+const (
+	CompressionMethodNone CompressionMethod = "NONE"
+	CompressionMethodGzip CompressionMethod = "GZIP"
+)
+
+// Values returns all known values for CompressionMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CompressionMethod) Values() []CompressionMethod {
+	return []CompressionMethod{
+		"NONE",
+		"GZIP",
+	}
+}
+
 type FillPolicy string
 
 // Enum values for FillPolicy
@@ -389,6 +408,25 @@ func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"SPLICE_INSERT",
 		"TIME_SIGNAL",
+	}
+}
+
+type Method string
+
+// Enum values for Method
+const (
+	MethodGet  Method = "GET"
+	MethodPost Method = "POST"
+)
+
+// Values returns all known values for Method. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Method) Values() []Method {
+	return []Method{
+		"GET",
+		"POST",
 	}
 }
 

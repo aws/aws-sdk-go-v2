@@ -8,6 +8,27 @@ import (
 	"time"
 )
 
+// Specifies the configuration for integrating with Customer Profiles. This
+// configuration enables Entity Resolution to send matched output directly to
+// Customer Profiles instead of Amazon S3, creating a unified customer view by
+// automatically updating customer profiles based on match clusters.
+type CustomerProfilesIntegrationConfig struct {
+
+	// The Amazon Resource Name (ARN) of the Customer Profiles domain where the
+	// matched output will be sent.
+	//
+	// This member is required.
+	DomainArn *string
+
+	// The Amazon Resource Name (ARN) of the Customer Profiles object type that
+	// defines the structure for the matched customer data.
+	//
+	// This member is required.
+	ObjectTypeArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The deleted unique ID.
 type DeletedUniqueId struct {
 
@@ -669,20 +690,24 @@ type OutputSource struct {
 	// This member is required.
 	Output []OutputAttribute
 
-	// The S3 path to which Entity Resolution will write the output table.
-	//
-	// This member is required.
-	OutputS3Path *string
-
 	// Normalizes the attributes defined in the schema in the input data. For example,
 	// if an attribute has an AttributeType of PHONE_NUMBER , and the data in the input
 	// table is in a format of 1234567890, Entity Resolution will normalize this field
 	// in the output to (123)-456-7890.
 	ApplyNormalization *bool
 
+	// Specifies the Customer Profiles integration configuration for sending matched
+	// output directly to Customer Profiles. When configured, Entity Resolution
+	// automatically creates and updates customer profiles based on match clusters,
+	// eliminating the need for manual Amazon S3 integration setup.
+	CustomerProfilesIntegrationConfig *CustomerProfilesIntegrationConfig
+
 	// Customer KMS ARN for encryption at rest. If not provided, system will use an
 	// Entity Resolution managed KMS key.
 	KMSArn *string
+
+	// The S3 path to which Entity Resolution will write the output table.
+	OutputS3Path *string
 
 	noSmithyDocumentSerde
 }

@@ -40,7 +40,7 @@ type ListPolicyEnginesInput struct {
 	// A pagination token returned from a previous [ListPolicyEngines] call. Use this token to retrieve
 	// the next page of results when the response is paginated.
 	//
-	// [ListPolicyEngines]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyEngines.html
+	// [ListPolicyEngines]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngines.html
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -58,7 +58,7 @@ type ListPolicyEnginesOutput struct {
 	// A pagination token that can be used in subsequent [ListPolicyEngines] calls to retrieve additional
 	// results. This token is only present when there are more results available.
 	//
-	// [ListPolicyEngines]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyEngines.html
+	// [ListPolicyEngines]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngines.html
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

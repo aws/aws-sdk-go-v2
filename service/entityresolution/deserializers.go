@@ -7678,6 +7678,55 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCustomerProfilesIntegrationConfig(v **types.CustomerProfilesIntegrationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomerProfilesIntegrationConfig
+	if *v == nil {
+		sv = &types.CustomerProfilesIntegrationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domainArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomerProfilesDomainArn to be of type string, got %T instead", value)
+				}
+				sv.DomainArn = ptr.String(jtv)
+			}
+
+		case "objectTypeArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomerProfilesObjectTypeArn to be of type string, got %T instead", value)
+				}
+				sv.ObjectTypeArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDeletedUniqueId(v **types.DeletedUniqueId, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10301,6 +10350,11 @@ func awsRestjson1_deserializeDocumentOutputSource(v **types.OutputSource, value 
 				sv.ApplyNormalization = ptr.Bool(jtv)
 			}
 
+		case "customerProfilesIntegrationConfig":
+			if err := awsRestjson1_deserializeDocumentCustomerProfilesIntegrationConfig(&sv.CustomerProfilesIntegrationConfig, value); err != nil {
+				return err
+			}
+
 		case "KMSArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10319,7 +10373,7 @@ func awsRestjson1_deserializeDocumentOutputSource(v **types.OutputSource, value 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected S3Path to be of type string, got %T instead", value)
+					return fmt.Errorf("expected OptionalS3Path to be of type string, got %T instead", value)
 				}
 				sv.OutputS3Path = ptr.String(jtv)
 			}

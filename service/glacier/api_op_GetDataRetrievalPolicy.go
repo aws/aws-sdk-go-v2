@@ -48,7 +48,7 @@ type GetDataRetrievalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to the GetDataRetrievalPolicy request.
+// Contains the Amazon Glacier response to the GetDataRetrievalPolicy request.
 type GetDataRetrievalPolicyOutput struct {
 
 	// Contains the returned data retrieval policy in JSON format.

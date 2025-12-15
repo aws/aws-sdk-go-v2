@@ -100,9 +100,14 @@ type PutDeliverySourceInput struct {
 	//
 	//   - For IAM Identity Center, the valid value is ERROR_LOGS .
 	//
+	//   - For Network Firewall Proxy, the valid values are ALERT_LOGS , ALLOW_LOGS ,
+	//   and DENY_LOGS .
+	//
 	//   - For Network Load Balancer, the valid value is NLB_ACCESS_LOGS .
 	//
 	//   - For PCS, the valid values are PCS_SCHEDULER_LOGS and PCS_JOBCOMP_LOGS .
+	//
+	//   - For Quick Suite, the valid values are CHAT_LOGS and FEEDBACK_LOGS .
 	//
 	//   - For Amazon Web Services RTB Fabric, the valid values is APPLICATION_LOGS .
 	//

@@ -12,9 +12,9 @@ import (
 )
 
 // This operation lists all the tags attached to a vault. The operation returns an
-// empty map if there are no tags. For more information about tags, see [Tagging Amazon S3 Glacier Resources].
+// empty map if there are no tags. For more information about tags, see [Tagging Amazon Glacier Resources].
 //
-// [Tagging Amazon S3 Glacier Resources]: https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html
+// [Tagging Amazon Glacier Resources]: https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html
 func (c *Client) ListTagsForVault(ctx context.Context, params *ListTagsForVaultInput, optFns ...func(*Options)) (*ListTagsForVaultOutput, error) {
 	if params == nil {
 		params = &ListTagsForVaultInput{}
@@ -35,7 +35,7 @@ type ListTagsForVaultInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// in which case Amazon Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -50,7 +50,7 @@ type ListTagsForVaultInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon S3 Glacier response to your request.
+// Contains the Amazon Glacier response to your request.
 type ListTagsForVaultOutput struct {
 
 	// The tags attached to the vault. Each tag is composed of a key and a value.
