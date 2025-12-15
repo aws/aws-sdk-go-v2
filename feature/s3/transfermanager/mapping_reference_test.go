@@ -689,7 +689,6 @@ func mockValue(v reflect.Value, field string, legacyTypes map[string]interface{}
 			if !ok {
 				panic(fmt.Sprintf("need to handle %v for field %s", v.Type().Elem().Kind(), field))
 			}
-			//indirV := reflect.Indirect(reflect.ValueOf(&vv))
 			v.Set(reflect.ValueOf(vv))
 		default:
 			panic(fmt.Sprintf("need to handle %v", v.Type().Elem().Kind()))

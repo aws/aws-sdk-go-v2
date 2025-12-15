@@ -389,7 +389,7 @@ type uploadDirectoryTestData struct {
 	Source              string
 	Recursive           bool
 	KeyPrefix           string
-	ExpectFilesUploaded int
+	ExpectFilesUploaded int64
 	ExpectKeys          []string
 	ExpectError         string
 }
@@ -478,7 +478,7 @@ func testUploadDirectory(t *testing.T, bucket string, testData uploadDirectoryTe
 type downloadDirectoryTestData struct {
 	ObjectsSize             map[string]int64
 	KeyPrefix               string
-	ExpectObjectsDownloaded int
+	ExpectObjectsDownloaded int64
 	ExpectFiles             []string
 	ExpectError             string
 }

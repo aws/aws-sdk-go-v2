@@ -738,7 +738,7 @@ func (o *UploadObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, buc
 	o.SSEKMSKeyID = out.SSEKMSKeyId
 	o.ServerSideEncryption = types.ServerSideEncryption(out.ServerSideEncryption)
 	o.VersionID = out.VersionId
-	o.ResultMetadata = out.ResultMetadata.Clone()
+	o.ResultMetadata = out.ResultMetadata
 }
 
 func (o *UploadObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.CompleteMultipartUploadOutput, bucket, uploadID *string, contentLength int64, completedParts completedParts) {
@@ -761,7 +761,7 @@ func (o *UploadObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.Comple
 	o.SSEKMSKeyID = out.SSEKMSKeyId
 	o.ServerSideEncryption = types.ServerSideEncryption(out.ServerSideEncryption)
 	o.VersionID = out.VersionId
-	o.ResultMetadata = out.ResultMetadata.Clone()
+	o.ResultMetadata = out.ResultMetadata
 }
 
 // UploadObject uploads an object to S3, intelligently buffering large

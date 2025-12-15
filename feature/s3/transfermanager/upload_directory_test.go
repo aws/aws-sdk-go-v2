@@ -49,15 +49,14 @@ func TestUploadDirectory(t *testing.T) {
 		recursive            bool
 		keyPrefix            string
 		filter               FileFilter
-		s3Delimiter          string
 		callback             PutRequestCallback
 		failurePolicy        UploadDirectoryFailurePolicy
 		putobjectFunc        func(*s3testing.TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error)
 		preprocessFunc       func(string) (func() error, error)
 		expectKeys           []string
 		expectErr            string
-		expectFilesUploaded  int
-		expectFilesFailed    int
+		expectFilesUploaded  int64
+		expectFilesFailed    int64
 		listenerValidationFn func(*testing.T, *mockDirectoryListener, any, any, error)
 	}{
 		"single file recursively": {

@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -518,7 +519,7 @@ func (o *DownloadObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput, c
 	o.TagCount = out.TagCount
 	o.VersionID = out.VersionId
 	o.WebsiteRedirectLocation = out.WebsiteRedirectLocation
-	o.ResultMetadata = out.ResultMetadata.Clone()
+	o.ResultMetadata = out.ResultMetadata
 }
 
 // DownloadObject downloads an object from S3, intelligently splitting large
@@ -793,7 +794,7 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		return nil, &errReadingBody{err: err}
 	}
 
-	d.incrWritten(n)
+	atomic.AddInt64(&d.written, n)
 	d.emitter.BytesTransferred(ctx, n)
 	return out, nil
 }

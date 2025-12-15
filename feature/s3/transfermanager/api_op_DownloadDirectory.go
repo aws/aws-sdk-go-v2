@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 	"sync"
+	"sync/atomic"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -87,12 +88,12 @@ type DownloadDirectoryOutput struct {
 	// Total number of objects successfully downloaded
 	// this value might not be the real number of success if user passed a customized
 	// failure policy in input
-	ObjectsDownloaded int
+	ObjectsDownloaded int64
 
 	// Total number of objects failed to download
 	// this value might not be the real number of failure if user passed a customized
 	// failure policy in input
-	ObjectsFailed int
+	ObjectsFailed int64
 }
 
 type objectEntry struct {
@@ -132,8 +133,8 @@ type directoryDownloader struct {
 	in            *DownloadDirectoryInput
 	failurePolicy DownloadDirectoryFailurePolicy
 
-	objectsDownloaded int
-	objectsFailed     int
+	objectsDownloaded int64
+	objectsFailed     int64
 
 	err error
 
@@ -272,7 +273,7 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 			if err != nil {
 				d.setErr(fmt.Errorf("error when heading info of object %s: %v", data.key, err))
 			} else {
-				d.incrObjectsFailed(1)
+				atomic.AddInt64(&d.objectsFailed, 1)
 			}
 			continue
 		}
@@ -298,29 +299,15 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 			if err != nil {
 				d.setErr(fmt.Errorf("error when getting object and writing to local file %s: %v", data.path, err))
 			} else {
-				d.incrObjectsFailed(1)
+				atomic.AddInt64(&d.objectsFailed, 1)
 			}
 			os.Remove(data.path)
 			continue
 		}
 
-		d.incrObjectsDownloaded(1)
+		atomic.AddInt64(&d.objectsDownloaded, 1)
 		d.emitter.ObjectsTransferred(ctx, n)
 	}
-}
-
-func (d *directoryDownloader) incrObjectsDownloaded(n int) {
-	d.mu.Lock()
-	defer d.mu.Unlock()
-
-	d.objectsDownloaded += n
-}
-
-func (d *directoryDownloader) incrObjectsFailed(n int) {
-	d.mu.Lock()
-	defer d.mu.Unlock()
-
-	d.objectsFailed += n
 }
 
 func (d *directoryDownloader) setErr(err error) {

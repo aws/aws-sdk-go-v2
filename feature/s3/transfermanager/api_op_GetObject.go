@@ -6,6 +6,7 @@ import (
 	"io"
 	"strconv"
 	"strings"
+	"sync/atomic"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -531,7 +532,7 @@ func (o *GetObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput, checks
 	o.TagCount = out.TagCount
 	o.VersionID = out.VersionId
 	o.WebsiteRedirectLocation = out.WebsiteRedirectLocation
-	o.ResultMetadata = out.ResultMetadata.Clone()
+	o.ResultMetadata = out.ResultMetadata
 }
 
 func (o *GetObjectOutput) mapFromHeadObjectOutput(out *s3.HeadObjectOutput, checksumMode types.ChecksumMode, enableChecksumValidation bool, body *concurrentReader) {
@@ -579,7 +580,7 @@ func (o *GetObjectOutput) mapFromHeadObjectOutput(out *s3.HeadObjectOutput, chec
 	o.TagCount = out.TagCount
 	o.VersionID = out.VersionId
 	o.WebsiteRedirectLocation = out.WebsiteRedirectLocation
-	o.ResultMetadata = out.ResultMetadata.Clone()
+	o.ResultMetadata = out.ResultMetadata
 }
 
 // GetObject downloads an object from S3, intelligently splitting large
@@ -648,7 +649,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		capacity := sectionParts
 		r.sectionParts = sectionParts
 		r.partSize = partSize
-		r.setCapacity(min(capacity, partsCount))
+		atomic.StoreInt32(&r.capacity, min(capacity, partsCount))
 		r.partsCount = partsCount
 	} else {
 		out, err := g.options.S3.HeadObject(ctx, &s3.HeadObjectInput{
@@ -672,7 +673,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		sectionParts := int32(max(1, g.options.GetBufferSize/g.options.PartSizeBytes))
 		capacity := min(sectionParts, partsCount)
 		r.partSize = g.options.PartSizeBytes
-		r.setCapacity(capacity)
+		atomic.StoreInt32(&r.capacity, capacity)
 		r.partsCount = partsCount
 		r.sectionParts = sectionParts
 		r.totalBytes = total

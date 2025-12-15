@@ -59,8 +59,8 @@ func TestDownloadDirectory(t *testing.T) {
 		expectKeys              []string
 		expectFiles             []string
 		expectErr               string
-		expectObjectsDownloaded int
-		expectObjectsFailed     int
+		expectObjectsDownloaded int64
+		expectObjectsFailed     int64
 		listenerValidationFn    func(*testing.T, *mockDirectoryListener, any, any, error)
 	}{
 		"single object": {

@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
+	"sync/atomic"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
@@ -89,12 +90,12 @@ type UploadDirectoryOutput struct {
 	// Total number of objects successfully uploaded
 	// this value might not be the real number of success if user passed a customized
 	// failure policy in input
-	ObjectsUploaded int
+	ObjectsUploaded int64
 
 	// Total number of objects failed to upload
 	// this value might not be the real number of failure is user passed a customized
 	// failure policy in input
-	ObjectsFailed int
+	ObjectsFailed int64
 }
 
 // UploadDirectory traverses a local directory recursively/non-recursively and intelligently
@@ -127,8 +128,8 @@ type directoryUploader struct {
 	in            *UploadDirectoryInput
 	failurePolicy UploadDirectoryFailurePolicy
 
-	filesUploaded int
-	filesFailed   int
+	filesUploaded int64
+	filesFailed   int64
 	traversed     map[string]interface{}
 
 	err error
@@ -378,7 +379,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 				u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
 			} else {
 				// this failed object is ignored, just increase the failure count
-				u.incrFilesFailed(1)
+				atomic.AddInt64(&u.filesFailed, 1)
 			}
 			continue
 		}
@@ -386,23 +387,9 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		u.progressOnce.Do(func() {
 			u.emitter.Start(ctx, u.in)
 		})
-		u.incrFilesUploaded(1)
+		atomic.AddInt64(&u.filesUploaded, 1)
 		u.emitter.ObjectsTransferred(ctx, aws.ToInt64(out.ContentLength))
 	}
-}
-
-func (u *directoryUploader) incrFilesUploaded(n int) {
-	u.mu.Lock()
-	defer u.mu.Unlock()
-
-	u.filesUploaded += n
-}
-
-func (u *directoryUploader) incrFilesFailed(n int) {
-	u.mu.Lock()
-	defer u.mu.Unlock()
-
-	u.filesFailed += n
 }
 
 func (u *directoryUploader) setErr(err error) {
