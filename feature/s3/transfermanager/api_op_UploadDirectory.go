@@ -62,7 +62,11 @@ type PutRequestCallback interface {
 }
 
 // UploadDirectoryFailurePolicy is a callback to allow users to control the
-// upload behavior when there are failed objects. It is invoked for every failed object
+// upload behavior when there are failed objects. It is invoked for every failed object.
+// If the OnUploadFailed returns non-nil error, uploader will cancel all ongoing
+// single object upload requests and terminate the upload directory process, if it returns nil
+// error, uploader will count the current request as a failed object downloaded but continue
+// uploading other objects.
 type UploadDirectoryFailurePolicy interface {
 	OnUploadFailed(*UploadDirectoryInput, *UploadObjectInput, error) error
 }
@@ -88,13 +92,9 @@ func (IgnoreUploadFailurePolicy) OnUploadFailed(*UploadDirectoryInput, *UploadOb
 // UploadDirectoryOutput represents a response from the UploadDirectory() call
 type UploadDirectoryOutput struct {
 	// Total number of objects successfully uploaded
-	// this value might not be the real number of success if user passed a customized
-	// failure policy in input
 	ObjectsUploaded int64
 
 	// Total number of objects failed to upload
-	// this value might not be the real number of failure is user passed a customized
-	// failure policy in input
 	ObjectsFailed int64
 }
 

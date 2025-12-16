@@ -60,7 +60,11 @@ type GetRequestCallback interface {
 }
 
 // DownloadDirectoryFailurePolicy is a callback to allow users to control the
-// download behavior when there are failed objects. It is invoked for every failed object
+// download behavior when there are failed objects. It is invoked for every failed object.
+// If the OnDownloadFailed returns non-nil error, downloader will cancel all ongoing
+// single object download requests and terminate the download directory process, if it returns nil
+// error, downloader will count the current request as a failed object downloaded but continue
+// getting other objects.
 type DownloadDirectoryFailurePolicy interface {
 	OnDownloadFailed(*DownloadDirectoryInput, *GetObjectInput, error) error
 }
@@ -86,13 +90,9 @@ func (IgnoreDownloadFailurePolicy) OnDownloadFailed(*DownloadDirectoryInput, *Ge
 // DownloadDirectoryOutput represents a response from the DownloadDirectory() call
 type DownloadDirectoryOutput struct {
 	// Total number of objects successfully downloaded
-	// this value might not be the real number of success if user passed a customized
-	// failure policy in input
 	ObjectsDownloaded int64
 
 	// Total number of objects failed to download
-	// this value might not be the real number of failure if user passed a customized
-	// failure policy in input
 	ObjectsFailed int64
 }
 
