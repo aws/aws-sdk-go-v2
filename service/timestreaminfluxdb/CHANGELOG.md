@@ -1,3 +1,7 @@
+# v1.18.0 (2025-12-16)
+
+* **Feature**: This release adds support for rebooting InfluxDB DbInstances and DbClusters
+
 # v1.17.10 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -3,4 +3,4 @@
 package wafv2
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.70.4"
+const goModuleVersion = "1.70.5"

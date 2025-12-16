@@ -1,3 +1,7 @@
+# v1.70.0 (2025-12-16)
+
+* **Feature**: Add support for dynamic payloads in IoT Device Management Commands
+
 # v1.69.15 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,14 @@
+# Release (2025-12-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.70.0](service/iot/CHANGELOG.md#v1700-2025-12-16)
+  * **Feature**: Add support for dynamic payloads in IoT Device Management Commands
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.18.0](service/timestreaminfluxdb/CHANGELOG.md#v1180-2025-12-16)
+  * **Feature**: This release adds support for rebooting InfluxDB DbInstances and DbClusters
+
 # Release (2025-12-15)
 
 ## General Highlights

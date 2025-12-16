@@ -1,8 +1,0 @@
-{
-    "id": "5acc410b-1693-4422-8e70-69629861ab78",
-    "type": "feature",
-    "description": "This release adds support for rebooting InfluxDB DbInstances and DbClusters",
-    "modules": [
-        "service/timestreaminfluxdb"
-    ]
-}
