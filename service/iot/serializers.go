@@ -2114,6 +2114,18 @@ func awsRestjson1_serializeOpDocumentCreateCommandInput(v *CreateCommandInput, v
 		}
 	}
 
+	if v.PayloadTemplate != nil {
+		ok := object.Key("payloadTemplate")
+		ok.String(*v.PayloadTemplate)
+	}
+
+	if v.Preprocessor != nil {
+		ok := object.Key("preprocessor")
+		if err := awsRestjson1_serializeDocumentCommandPreprocessor(v.Preprocessor, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
@@ -24409,6 +24421,18 @@ func awsRestjson1_serializeDocumentAwsJobTimeoutConfig(v *types.AwsJobTimeoutCon
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsJsonSubstitutionCommandPreprocessorConfig(v *types.AwsJsonSubstitutionCommandPreprocessorConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.OutputFormat) > 0 {
+		ok := object.Key("outputFormat")
+		ok.String(string(v.OutputFormat))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBehavior(v *types.Behavior, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24755,9 +24779,21 @@ func awsRestjson1_serializeDocumentCommandParameter(v *types.CommandParameter, v
 		ok.String(*v.Name)
 	}
 
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	if v.Value != nil {
 		ok := object.Key("value")
 		if err := awsRestjson1_serializeDocumentCommandParameterValue(v.Value, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ValueConditions != nil {
+		ok := object.Key("valueConditions")
+		if err := awsRestjson1_serializeDocumentCommandParameterValueConditionList(v.ValueConditions, ok); err != nil {
 			return err
 		}
 	}
@@ -24833,6 +24869,104 @@ func awsRestjson1_serializeDocumentCommandParameterValue(v *types.CommandParamet
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCommandParameterValueComparisonOperand(v *types.CommandParameterValueComparisonOperand, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Number != nil {
+		ok := object.Key("number")
+		ok.String(*v.Number)
+	}
+
+	if v.NumberRange != nil {
+		ok := object.Key("numberRange")
+		if err := awsRestjson1_serializeDocumentCommandParameterValueNumberRange(v.NumberRange, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Numbers != nil {
+		ok := object.Key("numbers")
+		if err := awsRestjson1_serializeDocumentCommandParameterValueStringList(v.Numbers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.String_ != nil {
+		ok := object.Key("string")
+		ok.String(*v.String_)
+	}
+
+	if v.Strings != nil {
+		ok := object.Key("strings")
+		if err := awsRestjson1_serializeDocumentCommandParameterValueStringList(v.Strings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCommandParameterValueCondition(v *types.CommandParameterValueCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComparisonOperator) > 0 {
+		ok := object.Key("comparisonOperator")
+		ok.String(string(v.ComparisonOperator))
+	}
+
+	if v.Operand != nil {
+		ok := object.Key("operand")
+		if err := awsRestjson1_serializeDocumentCommandParameterValueComparisonOperand(v.Operand, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCommandParameterValueConditionList(v []types.CommandParameterValueCondition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCommandParameterValueCondition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCommandParameterValueNumberRange(v *types.CommandParameterValueNumberRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Max != nil {
+		ok := object.Key("max")
+		ok.String(*v.Max)
+	}
+
+	if v.Min != nil {
+		ok := object.Key("min")
+		ok.String(*v.Min)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCommandParameterValueStringList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCommandPayload(v *types.CommandPayload, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24845,6 +24979,20 @@ func awsRestjson1_serializeDocumentCommandPayload(v *types.CommandPayload, value
 	if v.ContentType != nil {
 		ok := object.Key("contentType")
 		ok.String(*v.ContentType)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCommandPreprocessor(v *types.CommandPreprocessor, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwsJsonSubstitution != nil {
+		ok := object.Key("awsJsonSubstitution")
+		if err := awsRestjson1_serializeDocumentAwsJsonSubstitutionCommandPreprocessorConfig(v.AwsJsonSubstitution, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

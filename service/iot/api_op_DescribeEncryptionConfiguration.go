@@ -13,10 +13,10 @@ import (
 )
 
 // Retrieves the encryption configuration for resources and data of your Amazon
-// Web Services account in Amazon Web Services IoT Core. For more information, see [Key management in IoT]
-// from the Amazon Web Services IoT Core Developer Guide.
+// Web Services account in Amazon Web Services IoT Core. For more information, see [Data encryption at rest]
+// in the Amazon Web Services IoT Core Developer Guide.
 //
-// [Key management in IoT]: https://docs.aws.amazon.com/iot/latest/developerguide/key-management.html
+// [Data encryption at rest]: https://docs.aws.amazon.com/iot/latest/developerguide/encryption-at-rest.html
 func (c *Client) DescribeEncryptionConfiguration(ctx context.Context, params *DescribeEncryptionConfigurationInput, optFns ...func(*Options)) (*DescribeEncryptionConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeEncryptionConfigurationInput{}
@@ -42,14 +42,14 @@ type DescribeEncryptionConfigurationOutput struct {
 	// KMS key and the KMS access role.
 	ConfigurationDetails *types.ConfigurationDetails
 
-	// The type of the Amazon Web Services Key Management Service (KMS) key.
+	// The type of the KMS key.
 	EncryptionType types.EncryptionType
-
-	// The ARN of the customer-managed KMS key.
-	KmsAccessRoleArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web Services
 	// IoT Core to call KMS on behalf of the customer.
+	KmsAccessRoleArn *string
+
+	// The ARN of the customer managed KMS key.
 	KmsKeyArn *string
 
 	// The date when encryption configuration is last updated.

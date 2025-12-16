@@ -785,6 +785,20 @@ type AwsJobTimeoutConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configures the command to treat the payloadTemplate as a JSON document for
+// preprocessing. This preprocessor substitutes placeholders with parameter values
+// to generate the command execution request payload.
+type AwsJsonSubstitutionCommandPreprocessorConfig struct {
+
+	// Converts the command preprocessor result to the format defined by this
+	// parameter, before sending it to the device.
+	//
+	// This member is required.
+	OutputFormat OutputFormat
+
+	noSmithyDocumentSerde
+}
+
 // A Device Defender security profile behavior.
 type Behavior struct {
 
@@ -1321,15 +1335,20 @@ type CommandParameter struct {
 	// The description of the command parameter.
 	Description *string
 
-	// The value used to describe the command. When you assign a value to a parameter,
-	// it will override any default value that you had already specified.
+	// The type of the command parameter.
+	Type CommandParameterType
+
+	// Parameter value that overrides the default value, if set.
 	Value *CommandParameterValue
+
+	// The list of conditions that a command parameter value must satisfy to create a
+	// command execution.
+	ValueConditions []CommandParameterValueCondition
 
 	noSmithyDocumentSerde
 }
 
-// The range of possible values that's used to describe a specific command
-// parameter.
+// The value of a command parameter used to create a command execution.
 //
 // The commandParameterValue can only have one of the below fields listed.
 type CommandParameterValue struct {
@@ -1364,6 +1383,63 @@ type CommandParameterValue struct {
 	noSmithyDocumentSerde
 }
 
+// The comparison operand used to compare the defined value against the value
+// supplied in request.
+type CommandParameterValueComparisonOperand struct {
+
+	// An operand of number value type, defined as a string.
+	Number *string
+
+	// An operand of numerical range value type.
+	NumberRange *CommandParameterValueNumberRange
+
+	// A List of operands of numerical value type, defined as strings.
+	Numbers []string
+
+	// An operand of string value type.
+	String_ *string
+
+	// A List of operands of string value type.
+	Strings []string
+
+	noSmithyDocumentSerde
+}
+
+// A condition for the command parameter that must be evaluated to true for
+// successful creation of a command execution.
+type CommandParameterValueCondition struct {
+
+	// The comparison operator for the command parameter.
+	//
+	// IN_RANGE, and NOT_IN_RANGE operators include boundary values.
+	//
+	// This member is required.
+	ComparisonOperator CommandParameterValueComparisonOperator
+
+	// The comparison operand for the command parameter.
+	//
+	// This member is required.
+	Operand *CommandParameterValueComparisonOperand
+
+	noSmithyDocumentSerde
+}
+
+// The numerical range value type to compare a command parameter value against.
+type CommandParameterValueNumberRange struct {
+
+	// The maximum value of a numerical range of a command parameter value.
+	//
+	// This member is required.
+	Max *string
+
+	// The minimum value of a numerical range of a command parameter value.
+	//
+	// This member is required.
+	Min *string
+
+	noSmithyDocumentSerde
+}
+
 // The command payload object that contains the instructions for the device to
 // process.
 type CommandPayload struct {
@@ -1377,6 +1453,17 @@ type CommandPayload struct {
 	//
 	// [Common MIME types]: https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types/Common_types
 	ContentType *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that determines how the payloadTemplate is processed by the
+// service to generate the final payload sent to devices at StartCommandExecution
+// API invocation.
+type CommandPreprocessor struct {
+
+	// Configuration for the JSON substitution preprocessor.
+	AwsJsonSubstitution *AwsJsonSubstitutionCommandPreprocessorConfig
 
 	noSmithyDocumentSerde
 }
@@ -1418,12 +1505,12 @@ type Configuration struct {
 }
 
 // The encryption configuration details that include the status information of the
-// Amazon Web Services Key Management Service (KMS) key and the KMS access role.
+// Key Management Service (KMS) key and the KMS access role.
 type ConfigurationDetails struct {
 
 	// The health status of KMS key and KMS access role. If either KMS key or KMS
 	// access role is UNHEALTHY , the return value will be UNHEALTHY . To use a
-	// customer-managed KMS key, the value of configurationStatus must be HEALTHY .
+	// customer managed KMS key, the value of configurationStatus must be HEALTHY .
 	ConfigurationStatus ConfigurationStatus
 
 	// The error code that indicates either the KMS key or the KMS access role is

@@ -611,6 +611,71 @@ func (CommandNamespace) Values() []CommandNamespace {
 	}
 }
 
+type CommandParameterType string
+
+// Enum values for CommandParameterType
+const (
+	CommandParameterTypeString       CommandParameterType = "STRING"
+	CommandParameterTypeInteger      CommandParameterType = "INTEGER"
+	CommandParameterTypeDouble       CommandParameterType = "DOUBLE"
+	CommandParameterTypeLong         CommandParameterType = "LONG"
+	CommandParameterTypeUnsignedlong CommandParameterType = "UNSIGNEDLONG"
+	CommandParameterTypeBoolean      CommandParameterType = "BOOLEAN"
+	CommandParameterTypeBinary       CommandParameterType = "BINARY"
+)
+
+// Values returns all known values for CommandParameterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CommandParameterType) Values() []CommandParameterType {
+	return []CommandParameterType{
+		"STRING",
+		"INTEGER",
+		"DOUBLE",
+		"LONG",
+		"UNSIGNEDLONG",
+		"BOOLEAN",
+		"BINARY",
+	}
+}
+
+type CommandParameterValueComparisonOperator string
+
+// Enum values for CommandParameterValueComparisonOperator
+const (
+	CommandParameterValueComparisonOperatorEquals            CommandParameterValueComparisonOperator = "EQUALS"
+	CommandParameterValueComparisonOperatorNotEquals         CommandParameterValueComparisonOperator = "NOT_EQUALS"
+	CommandParameterValueComparisonOperatorLessThan          CommandParameterValueComparisonOperator = "LESS_THAN"
+	CommandParameterValueComparisonOperatorLessThanEquals    CommandParameterValueComparisonOperator = "LESS_THAN_EQUALS"
+	CommandParameterValueComparisonOperatorGreaterThan       CommandParameterValueComparisonOperator = "GREATER_THAN"
+	CommandParameterValueComparisonOperatorGreaterThanEquals CommandParameterValueComparisonOperator = "GREATER_THAN_EQUALS"
+	CommandParameterValueComparisonOperatorInSet             CommandParameterValueComparisonOperator = "IN_SET"
+	CommandParameterValueComparisonOperatorNotInSet          CommandParameterValueComparisonOperator = "NOT_IN_SET"
+	CommandParameterValueComparisonOperatorInRange           CommandParameterValueComparisonOperator = "IN_RANGE"
+	CommandParameterValueComparisonOperatorNotInRange        CommandParameterValueComparisonOperator = "NOT_IN_RANGE"
+)
+
+// Values returns all known values for CommandParameterValueComparisonOperator.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CommandParameterValueComparisonOperator) Values() []CommandParameterValueComparisonOperator {
+	return []CommandParameterValueComparisonOperator{
+		"EQUALS",
+		"NOT_EQUALS",
+		"LESS_THAN",
+		"LESS_THAN_EQUALS",
+		"GREATER_THAN",
+		"GREATER_THAN_EQUALS",
+		"IN_SET",
+		"NOT_IN_SET",
+		"IN_RANGE",
+		"NOT_IN_RANGE",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -1428,6 +1493,25 @@ func (OTAUpdateStatus) Values() []OTAUpdateStatus {
 		"CREATE_FAILED",
 		"DELETE_IN_PROGRESS",
 		"DELETE_FAILED",
+	}
+}
+
+type OutputFormat string
+
+// Enum values for OutputFormat
+const (
+	OutputFormatJson OutputFormat = "JSON"
+	OutputFormatCbor OutputFormat = "CBOR"
+)
+
+// Values returns all known values for OutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutputFormat) Values() []OutputFormat {
+	return []OutputFormat{
+		"JSON",
+		"CBOR",
 	}
 }
 

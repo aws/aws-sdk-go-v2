@@ -43,18 +43,15 @@ type CreateCommandInput struct {
 	// to be unique. You can update the user-friendly name after you define it.
 	DisplayName *string
 
-	// A list of parameters that are required by the StartCommandExecution API. These
-	// parameters need to be specified only when using the AWS-IoT-FleetWise
-	// namespace. You can either specify them here or when running the command using
-	// the StartCommandExecution API.
+	// A list of parameters that are used by StartCommandExecution API for execution
+	// payload generation.
 	MandatoryParameters []types.CommandParameter
 
 	// The namespace of the command. The MQTT reserved topics and validations will be
 	// used for command executions according to the namespace setting.
 	Namespace types.CommandNamespace
 
-	// The payload object for the command. You must specify this information when
-	// using the AWS-IoT namespace.
+	// The payload object for the static command.
 	//
 	// You can upload a static payload file from your local storage that contains the
 	// instructions for the device to process. The payload file can use any format. To
@@ -62,10 +59,24 @@ type CreateCommandInput struct {
 	// specify the payload content type.
 	Payload *types.CommandPayload
 
+	// The payload template for the dynamic command.
+	//
+	// This parameter is required for dynamic commands where the command execution
+	// placeholders are supplied either from mandatoryParameters or when
+	// StartCommandExecution is invoked.
+	PayloadTemplate *string
+
+	// Configuration that determines how payloadTemplate is processed to generate
+	// command execution payload.
+	//
+	// This parameter is required for dynamic commands, along with payloadTemplate ,
+	// and mandatoryParameters .
+	Preprocessor *types.CommandPreprocessor
+
 	// The IAM role that you must provide when using the AWS-IoT-FleetWise namespace.
 	// The role grants IoT Device Management the permission to access IoT FleetWise
-	// resources for generating the payload for the command. This field is not required
-	// when you use the AWS-IoT namespace.
+	// resources for generating the payload for the command. This field is not
+	// supported when you use the AWS-IoT namespace.
 	RoleArn *string
 
 	// Name-value pairs that are used as metadata to manage a command.

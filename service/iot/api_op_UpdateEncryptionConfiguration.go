@@ -11,14 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the encryption configuration. By default, all Amazon Web Services IoT
-// Core data at rest is encrypted using Amazon Web Services owned keys. Amazon Web
-// Services IoT Core also supports symmetric customer managed keys from Amazon Web
-// Services Key Management Service (KMS). With customer managed keys, you create,
-// own, and manage the KMS keys in your Amazon Web Services account. For more
-// information, see [Data encryption]in the Amazon Web Services IoT Core Developer Guide.
+// Updates the encryption configuration. By default, Amazon Web Services IoT Core
+// encrypts your data at rest using Amazon Web Services owned keys. Amazon Web
+// Services IoT Core also supports symmetric customer managed keys from Key
+// Management Service (KMS). With customer managed keys, you create, own, and
+// manage the KMS keys in your Amazon Web Services account.
 //
-// [Data encryption]: https://docs.aws.amazon.com/iot/latest/developerguide/data-encryption.html
+// Before using this API, you must set up permissions for Amazon Web Services IoT
+// Core to access KMS. For more information, see [Data encryption at rest]in the Amazon Web Services IoT
+// Core Developer Guide.
+//
+// [Data encryption at rest]: https://docs.aws.amazon.com/iot/latest/developerguide/encryption-at-rest.html
 func (c *Client) UpdateEncryptionConfiguration(ctx context.Context, params *UpdateEncryptionConfigurationInput, optFns ...func(*Options)) (*UpdateEncryptionConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateEncryptionConfigurationInput{}
@@ -36,7 +39,7 @@ func (c *Client) UpdateEncryptionConfiguration(ctx context.Context, params *Upda
 
 type UpdateEncryptionConfigurationInput struct {
 
-	// The type of the Amazon Web Services Key Management Service (KMS) key.
+	// The type of the KMS key.
 	//
 	// This member is required.
 	EncryptionType types.EncryptionType
@@ -45,7 +48,7 @@ type UpdateEncryptionConfigurationInput struct {
 	// IoT Core to call KMS on behalf of the customer.
 	KmsAccessRoleArn *string
 
-	// The ARN of the customer-managed KMS key.
+	// The ARN of the customer managedKMS key.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde

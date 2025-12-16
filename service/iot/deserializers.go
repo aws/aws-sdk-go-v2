@@ -20507,6 +20507,15 @@ func awsRestjson1_deserializeOpDocumentGetCommandOutput(v **GetCommandOutput, va
 				return err
 			}
 
+		case "payloadTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CommandPayloadTemplateString to be of type string, got %T instead", value)
+				}
+				sv.PayloadTemplate = ptr.String(jtv)
+			}
+
 		case "pendingDeletion":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -20514,6 +20523,11 @@ func awsRestjson1_deserializeOpDocumentGetCommandOutput(v **GetCommandOutput, va
 					return fmt.Errorf("expected BooleanWrapperObject to be of type *bool, got %T instead", value)
 				}
 				sv.PendingDeletion = ptr.Bool(jtv)
+			}
+
+		case "preprocessor":
+			if err := awsRestjson1_deserializeDocumentCommandPreprocessor(&sv.Preprocessor, value); err != nil {
+				return err
 			}
 
 		case "roleArn":
@@ -47437,6 +47451,46 @@ func awsRestjson1_deserializeDocumentAwsJobRateIncreaseCriteria(v **types.AwsJob
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsJsonSubstitutionCommandPreprocessorConfig(v **types.AwsJsonSubstitutionCommandPreprocessorConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsJsonSubstitutionCommandPreprocessorConfig
+	if *v == nil {
+		sv = &types.AwsJsonSubstitutionCommandPreprocessorConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "outputFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutputFormat to be of type string, got %T instead", value)
+				}
+				sv.OutputFormat = types.OutputFormat(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBehavior(v **types.Behavior, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -49682,8 +49736,22 @@ func awsRestjson1_deserializeDocumentCommandParameter(v **types.CommandParameter
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CommandParameterType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.CommandParameterType(jtv)
+			}
+
 		case "value":
 			if err := awsRestjson1_deserializeDocumentCommandParameterValue(&sv.Value, value); err != nil {
+				return err
+			}
+
+		case "valueConditions":
+			if err := awsRestjson1_deserializeDocumentCommandParameterValueConditionList(&sv.ValueConditions, value); err != nil {
 				return err
 			}
 
@@ -49861,6 +49929,234 @@ func awsRestjson1_deserializeDocumentCommandParameterValue(v **types.CommandPara
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCommandParameterValueComparisonOperand(v **types.CommandParameterValueComparisonOperand, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CommandParameterValueComparisonOperand
+	if *v == nil {
+		sv = &types.CommandParameterValueComparisonOperand{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "number":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringParameterValue to be of type string, got %T instead", value)
+				}
+				sv.Number = ptr.String(jtv)
+			}
+
+		case "numberRange":
+			if err := awsRestjson1_deserializeDocumentCommandParameterValueNumberRange(&sv.NumberRange, value); err != nil {
+				return err
+			}
+
+		case "numbers":
+			if err := awsRestjson1_deserializeDocumentCommandParameterValueStringList(&sv.Numbers, value); err != nil {
+				return err
+			}
+
+		case "string":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringParameterValue to be of type string, got %T instead", value)
+				}
+				sv.String_ = ptr.String(jtv)
+			}
+
+		case "strings":
+			if err := awsRestjson1_deserializeDocumentCommandParameterValueStringList(&sv.Strings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCommandParameterValueCondition(v **types.CommandParameterValueCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CommandParameterValueCondition
+	if *v == nil {
+		sv = &types.CommandParameterValueCondition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "comparisonOperator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CommandParameterValueComparisonOperator to be of type string, got %T instead", value)
+				}
+				sv.ComparisonOperator = types.CommandParameterValueComparisonOperator(jtv)
+			}
+
+		case "operand":
+			if err := awsRestjson1_deserializeDocumentCommandParameterValueComparisonOperand(&sv.Operand, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCommandParameterValueConditionList(v *[]types.CommandParameterValueCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CommandParameterValueCondition
+	if *v == nil {
+		cv = []types.CommandParameterValueCondition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CommandParameterValueCondition
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCommandParameterValueCondition(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCommandParameterValueNumberRange(v **types.CommandParameterValueNumberRange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CommandParameterValueNumberRange
+	if *v == nil {
+		sv = &types.CommandParameterValueNumberRange{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringParameterValue to be of type string, got %T instead", value)
+				}
+				sv.Max = ptr.String(jtv)
+			}
+
+		case "min":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringParameterValue to be of type string, got %T instead", value)
+				}
+				sv.Min = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCommandParameterValueStringList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StringParameterValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCommandPayload(v **types.CommandPayload, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -49903,6 +50199,42 @@ func awsRestjson1_deserializeDocumentCommandPayload(v **types.CommandPayload, va
 					return fmt.Errorf("expected MimeType to be of type string, got %T instead", value)
 				}
 				sv.ContentType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCommandPreprocessor(v **types.CommandPreprocessor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CommandPreprocessor
+	if *v == nil {
+		sv = &types.CommandPreprocessor{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "awsJsonSubstitution":
+			if err := awsRestjson1_deserializeDocumentAwsJsonSubstitutionCommandPreprocessorConfig(&sv.AwsJsonSubstitution, value); err != nil {
+				return err
 			}
 
 		default:

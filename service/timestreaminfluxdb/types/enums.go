@@ -23,13 +23,17 @@ type ClusterStatus string
 
 // Enum values for ClusterStatus
 const (
-	ClusterStatusCreating    ClusterStatus = "CREATING"
-	ClusterStatusUpdating    ClusterStatus = "UPDATING"
-	ClusterStatusDeleting    ClusterStatus = "DELETING"
-	ClusterStatusAvailable   ClusterStatus = "AVAILABLE"
-	ClusterStatusFailed      ClusterStatus = "FAILED"
-	ClusterStatusDeleted     ClusterStatus = "DELETED"
-	ClusterStatusMaintenance ClusterStatus = "MAINTENANCE"
+	ClusterStatusCreating             ClusterStatus = "CREATING"
+	ClusterStatusUpdating             ClusterStatus = "UPDATING"
+	ClusterStatusDeleting             ClusterStatus = "DELETING"
+	ClusterStatusAvailable            ClusterStatus = "AVAILABLE"
+	ClusterStatusFailed               ClusterStatus = "FAILED"
+	ClusterStatusDeleted              ClusterStatus = "DELETED"
+	ClusterStatusMaintenance          ClusterStatus = "MAINTENANCE"
+	ClusterStatusUpdatingInstanceType ClusterStatus = "UPDATING_INSTANCE_TYPE"
+	ClusterStatusRebooting            ClusterStatus = "REBOOTING"
+	ClusterStatusRebootFailed         ClusterStatus = "REBOOT_FAILED"
+	ClusterStatusPartiallyAvailable   ClusterStatus = "PARTIALLY_AVAILABLE"
 )
 
 // Values returns all known values for ClusterStatus. Note that this can be
@@ -45,6 +49,10 @@ func (ClusterStatus) Values() []ClusterStatus {
 		"FAILED",
 		"DELETED",
 		"MAINTENANCE",
+		"UPDATING_INSTANCE_TYPE",
+		"REBOOTING",
+		"REBOOT_FAILED",
+		"PARTIALLY_AVAILABLE",
 	}
 }
 
@@ -305,6 +313,8 @@ const (
 	StatusUpdatingDeploymentType Status = "UPDATING_DEPLOYMENT_TYPE"
 	StatusUpdatingInstanceType   Status = "UPDATING_INSTANCE_TYPE"
 	StatusMaintenance            Status = "MAINTENANCE"
+	StatusRebooting              Status = "REBOOTING"
+	StatusRebootFailed           Status = "REBOOT_FAILED"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
@@ -323,6 +333,8 @@ func (Status) Values() []Status {
 		"UPDATING_DEPLOYMENT_TYPE",
 		"UPDATING_INSTANCE_TYPE",
 		"MAINTENANCE",
+		"REBOOTING",
+		"REBOOT_FAILED",
 	}
 }
 

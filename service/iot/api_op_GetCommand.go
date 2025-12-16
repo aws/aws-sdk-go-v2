@@ -71,8 +71,15 @@ type GetCommandOutput struct {
 	// The payload object that you provided for the command.
 	Payload *types.CommandPayload
 
+	// The payload template for the dynamic command.
+	PayloadTemplate *string
+
 	// Indicates whether the command is being deleted.
 	PendingDeletion *bool
+
+	// Configuration that determines how payloadTemplate is processed to generate
+	// command execution payload.
+	Preprocessor *types.CommandPreprocessor
 
 	// The IAM role that you provided when creating the command with AWS-IoT-FleetWise
 	// as the namespace.

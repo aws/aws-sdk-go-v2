@@ -15,10 +15,10 @@ import (
 //
 // Requires permission to access the [TransferCertificate] action.
 //
-// You can cancel the transfer until it is acknowledged by the recipient.
+// You can cancel the transfer until it is accepted by the recipient.
 //
-// No notification is sent to the transfer destination's account. It's up to the
-// caller to notify the transfer target.
+// No notification is sent to the transfer destination's account. The caller is
+// responsible for notifying the transfer target.
 //
 // The certificate being transferred must not be in the ACTIVE state. You can use
 // the UpdateCertificateaction to deactivate it.
@@ -26,22 +26,23 @@ import (
 // The certificate must not have any policies attached to it. You can use the DetachPolicy
 // action to detach them.
 //
-// Customer managed key behavior: When you use a customer managed key to secure
-// your data and then transfer the key to a customer in a different account using
-// the TransferCertificateoperation, the certificates will no longer be protected by their customer
-// managed key configuration. During the transfer process, certificates are
-// encrypted using IoT owned keys.
+// Customer managed key behavior: When you use a customer managed key to encrypt
+// your data and then transfer the certificate to a customer in a different account
+// using the TransferCertificate operation, the certificates will no longer be
+// encrypted by their customer managed key configuration. During the transfer
+// process, certificates are encrypted using Amazon Web Services IoT Core owned
+// keys.
 //
 // While a certificate is in the PENDING_TRANSFER state, it's always protected by
-// IoT owned keys, regardless of the customer managed key configuration of either
-// the source or destination account.
+// Amazon Web Services IoT Core owned keys, regardless of the customer managed key
+// configuration of either the source or destination account.
 //
 // Once the transfer is completed through AcceptCertificateTransfer, RejectCertificateTransfer, or CancelCertificateTransfer, the certificate will be
 // protected by the customer managed key configuration of the account that owns the
 // certificate after the transfer operation:
 //
-//   - If the transfer is accepted: The certificate is protected by the
-//     destination account's customer managed key configuration.
+//   - If the transfer is accepted: The certificate is encrypted by the target
+//     account's customer managed key configuration.
 //
 //   - If the transfer is rejected or cancelled: The certificate is protected by
 //     the source account's customer managed key configuration.

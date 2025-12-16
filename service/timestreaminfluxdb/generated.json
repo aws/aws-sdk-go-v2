@@ -21,6 +21,8 @@
         "api_op_ListDbInstancesForCluster.go",
         "api_op_ListDbParameterGroups.go",
         "api_op_ListTagsForResource.go",
+        "api_op_RebootDbCluster.go",
+        "api_op_RebootDbInstance.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateDbCluster.go",

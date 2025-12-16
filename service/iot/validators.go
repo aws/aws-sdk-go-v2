@@ -5537,6 +5537,21 @@ func validateAwsJobExponentialRolloutRate(v *types.AwsJobExponentialRolloutRate)
 	}
 }
 
+func validateAwsJsonSubstitutionCommandPreprocessorConfig(v *types.AwsJsonSubstitutionCommandPreprocessorConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsJsonSubstitutionCommandPreprocessorConfig"}
+	if len(v.OutputFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBehavior(v *types.Behavior) error {
 	if v == nil {
 		return nil
@@ -5673,6 +5688,11 @@ func validateCommandParameter(v *types.CommandParameter) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.ValueConditions != nil {
+		if err := validateCommandParameterValueConditionList(v.ValueConditions); err != nil {
+			invalidParams.AddNested("ValueConditions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5688,6 +5708,97 @@ func validateCommandParameterList(v []types.CommandParameter) error {
 	for i := range v {
 		if err := validateCommandParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCommandParameterValueComparisonOperand(v *types.CommandParameterValueComparisonOperand) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommandParameterValueComparisonOperand"}
+	if v.NumberRange != nil {
+		if err := validateCommandParameterValueNumberRange(v.NumberRange); err != nil {
+			invalidParams.AddNested("NumberRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCommandParameterValueCondition(v *types.CommandParameterValueCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommandParameterValueCondition"}
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
+	}
+	if v.Operand == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Operand"))
+	} else if v.Operand != nil {
+		if err := validateCommandParameterValueComparisonOperand(v.Operand); err != nil {
+			invalidParams.AddNested("Operand", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCommandParameterValueConditionList(v []types.CommandParameterValueCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommandParameterValueConditionList"}
+	for i := range v {
+		if err := validateCommandParameterValueCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCommandParameterValueNumberRange(v *types.CommandParameterValueNumberRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommandParameterValueNumberRange"}
+	if v.Min == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Min"))
+	}
+	if v.Max == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Max"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCommandPreprocessor(v *types.CommandPreprocessor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommandPreprocessor"}
+	if v.AwsJsonSubstitution != nil {
+		if err := validateAwsJsonSubstitutionCommandPreprocessorConfig(v.AwsJsonSubstitution); err != nil {
+			invalidParams.AddNested("AwsJsonSubstitution", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7287,6 +7398,11 @@ func validateOpCreateCommandInput(v *CreateCommandInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCommandInput"}
 	if v.CommandId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CommandId"))
+	}
+	if v.Preprocessor != nil {
+		if err := validateCommandPreprocessor(v.Preprocessor); err != nil {
+			invalidParams.AddNested("Preprocessor", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.MandatoryParameters != nil {
 		if err := validateCommandParameterList(v.MandatoryParameters); err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "7752ea6a-5a1d-4a2b-bbd8-36cfb5835dfe",
+    "type": "feature",
+    "description": "Add support for dynamic payloads in IoT Device Management Commands",
+    "modules": [
+        "service/iot"
+    ]
+}
