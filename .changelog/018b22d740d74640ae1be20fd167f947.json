@@ -1,8 +1,0 @@
-{
-    "id": "018b22d7-40d7-4640-ae1b-e20fd167f947",
-    "type": "feature",
-    "description": "Adding the newly launched p6-b300.48xlarge ec2  instance support in Sagemaker(Hyperpod,Training and Sceptor)",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

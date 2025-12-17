@@ -1,3 +1,25 @@
+# Release (2025-12-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.9.0](service/gameliftstreams/CHANGELOG.md#v190-2025-12-17)
+  * **Feature**: Added new stream group operation parameters for scale-on-demand capacity with automatic prewarming. Added new Gen6 stream classes based on the EC2 G6 instance family. Added new StartStreamSession parameter for exposure of real-time performance stats to clients.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.71.0](service/guardduty/CHANGELOG.md#v1710-2025-12-17)
+  * **Feature**: Add support for dbiResourceId in finding.
+* `github.com/aws/aws-sdk-go-v2/service/inspectorscan`: [v1.13.0](service/inspectorscan/CHANGELOG.md#v1130-2025-12-17)
+  * **Feature**: Adds an additional OutputFormat
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.28.0](service/kafkaconnect/CHANGELOG.md#v1280-2025-12-17)
+  * **Feature**: Support dual-stack network connectivity for connectors via NetworkType field.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.86.0](service/mediaconvert/CHANGELOG.md#v1860-2025-12-17)
+  * **Feature**: Adds support for tile encoding in HEVC and audio for video overlays.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.35.0](service/mediapackagev2/CHANGELOG.md#v1350-2025-12-17)
+  * **Feature**: This release adds support for SPEKE V2 content key encryption in MediaPackage v2 Origin Endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.27.0](service/paymentcryptography/CHANGELOG.md#v1270-2025-12-17)
+  * **Feature**: Support for AS2805 standard.  Modifications to import-key and export-key to support AS2805 variants.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.25.0](service/paymentcryptographydata/CHANGELOG.md#v1250-2025-12-17)
+  * **Feature**: Support for AS2805 standard.  New API GenerateAs2805KekValidation and changes to translate pin, GenerateMac and VerifyMac to support AS2805 key variants.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.229.0](service/sagemaker/CHANGELOG.md#v12290-2025-12-17)
+  * **Feature**: Adding the newly launched p6-b300.48xlarge ec2  instance support in Sagemaker(Hyperpod,Training and Sceptor)
+
 # Release (2025-12-16)
 
 ## General Highlights

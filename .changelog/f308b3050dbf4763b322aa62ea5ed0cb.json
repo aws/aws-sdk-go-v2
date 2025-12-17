@@ -1,8 +1,0 @@
-{
-    "id": "f308b305-0dbf-4763-b322-aa62ea5ed0cb",
-    "type": "feature",
-    "description": "This release adds support for SPEKE V2 content key encryption in MediaPackage v2 Origin Endpoints.",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

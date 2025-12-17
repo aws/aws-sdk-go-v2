@@ -1,8 +1,0 @@
-{
-    "id": "78f802e8-4f33-463c-a511-a8e4d0f59258",
-    "type": "feature",
-    "description": "Support for AS2805 standard.  Modifications to import-key and export-key to support AS2805 variants.",
-    "modules": [
-        "service/paymentcryptography"
-    ]
-}

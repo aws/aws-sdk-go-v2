@@ -1,3 +1,7 @@
+# v1.229.0 (2025-12-17)
+
+* **Feature**: Adding the newly launched p6-b300.48xlarge ec2  instance support in Sagemaker(Hyperpod,Training and Sceptor)
+
 # v1.228.2 (2025-12-09)
 
 * No change notes available for this release.

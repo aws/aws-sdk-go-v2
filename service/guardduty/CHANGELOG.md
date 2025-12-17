@@ -1,3 +1,7 @@
+# v1.71.0 (2025-12-17)
+
+* **Feature**: Add support for dbiResourceId in finding.
+
 # v1.70.1 (2025-12-12)
 
 * No change notes available for this release.

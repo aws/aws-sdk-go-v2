@@ -1,3 +1,7 @@
+# v1.28.0 (2025-12-17)
+
+* **Feature**: Support dual-stack network connectivity for connectors via NetworkType field.
+
 # v1.27.16 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

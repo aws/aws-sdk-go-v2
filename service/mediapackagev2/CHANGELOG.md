@@ -1,3 +1,7 @@
+# v1.35.0 (2025-12-17)
+
+* **Feature**: This release adds support for SPEKE V2 content key encryption in MediaPackage v2 Origin Endpoints.
+
 # v1.34.3 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

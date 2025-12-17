@@ -1,8 +1,0 @@
-{
-    "id": "e06e7a3f-b592-4bc3-ad92-d718560fd8be",
-    "type": "feature",
-    "description": "Added new stream group operation parameters for scale-on-demand capacity with automatic prewarming. Added new Gen6 stream classes based on the EC2 G6 instance family. Added new StartStreamSession parameter for exposure of real-time performance stats to clients.",
-    "modules": [
-        "service/gameliftstreams"
-    ]
-}
