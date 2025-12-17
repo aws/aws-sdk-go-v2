@@ -577,6 +577,24 @@ func validateCertificateSubjectType(v *types.CertificateSubjectType) error {
 	}
 }
 
+func validateExportAs2805KeyCryptogram(v *types.ExportAs2805KeyCryptogram) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportAs2805KeyCryptogram"}
+	if v.WrappingKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WrappingKeyIdentifier"))
+	}
+	if len(v.As2805KeyVariant) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("As2805KeyVariant"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExportAttributes(v *types.ExportAttributes) error {
 	if v == nil {
 		return nil
@@ -666,6 +684,11 @@ func validateExportKeyMaterial(v types.ExportKeyMaterial) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportKeyMaterial"}
 	switch uv := v.(type) {
+	case *types.ExportKeyMaterialMemberAs2805KeyCryptogram:
+		if err := validateExportAs2805KeyCryptogram(&uv.Value); err != nil {
+			invalidParams.AddNested("[As2805KeyCryptogram]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
 		if err := validateExportDiffieHellmanTr31KeyBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[DiffieHellmanTr31KeyBlock]", err.(smithy.InvalidParamsError))
@@ -722,6 +745,36 @@ func validateExportTr34KeyBlock(v *types.ExportTr34KeyBlock) error {
 	}
 	if len(v.KeyBlockFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyBlockFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImportAs2805KeyCryptogram(v *types.ImportAs2805KeyCryptogram) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportAs2805KeyCryptogram"}
+	if len(v.As2805KeyVariant) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("As2805KeyVariant"))
+	}
+	if v.KeyModesOfUse == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyModesOfUse"))
+	}
+	if len(v.KeyAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyAlgorithm"))
+	}
+	if v.Exportable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Exportable"))
+	}
+	if v.WrappingKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WrappingKeyIdentifier"))
+	}
+	if v.WrappedKeyCryptogram == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WrappedKeyCryptogram"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -800,6 +853,11 @@ func validateImportKeyMaterial(v types.ImportKeyMaterial) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportKeyMaterial"}
 	switch uv := v.(type) {
+	case *types.ImportKeyMaterialMemberAs2805KeyCryptogram:
+		if err := validateImportAs2805KeyCryptogram(&uv.Value); err != nil {
+			invalidParams.AddNested("[As2805KeyCryptogram]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
 		if err := validateImportDiffieHellmanTr31KeyBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[DiffieHellmanTr31KeyBlock]", err.(smithy.InvalidParamsError))

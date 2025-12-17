@@ -29,6 +29,9 @@ func ExampleExportKeyMaterial_outputUsage() {
 	var union types.ExportKeyMaterial
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ExportKeyMaterialMemberAs2805KeyCryptogram:
+		_ = v.Value // Value is types.ExportAs2805KeyCryptogram
+
 	case *types.ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
 		_ = v.Value // Value is types.ExportDiffieHellmanTr31KeyBlock
 
@@ -52,6 +55,7 @@ func ExampleExportKeyMaterial_outputUsage() {
 
 var _ *types.ExportKeyCryptogram
 var _ *types.ExportTr34KeyBlock
+var _ *types.ExportAs2805KeyCryptogram
 var _ *types.ExportTr31KeyBlock
 var _ *types.ExportDiffieHellmanTr31KeyBlock
 
@@ -59,6 +63,9 @@ func ExampleImportKeyMaterial_outputUsage() {
 	var union types.ImportKeyMaterial
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ImportKeyMaterialMemberAs2805KeyCryptogram:
+		_ = v.Value // Value is types.ImportAs2805KeyCryptogram
+
 	case *types.ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
 		_ = v.Value // Value is types.ImportDiffieHellmanTr31KeyBlock
 
@@ -87,6 +94,7 @@ func ExampleImportKeyMaterial_outputUsage() {
 }
 
 var _ *types.RootCertificatePublicKey
+var _ *types.ImportAs2805KeyCryptogram
 var _ *types.ImportDiffieHellmanTr31KeyBlock
 var _ *types.ImportKeyCryptogram
 var _ *types.TrustedCertificatePublicKey

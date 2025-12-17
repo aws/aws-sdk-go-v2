@@ -138,6 +138,9 @@ type GetStreamSessionOutput struct {
 	// log files to upload.
 	LogFileLocationUri *string
 
+	// The performance stats configuration for the stream session
+	PerformanceStatsConfiguration *types.PerformanceStatsConfiguration
+
 	// The data transfer protocol in use with the stream session.
 	Protocol types.Protocol
 

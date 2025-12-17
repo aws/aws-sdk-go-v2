@@ -1438,6 +1438,15 @@ func awsRestjson1_deserializeOpDocumentDescribeConnectorOutput(v **DescribeConne
 				return err
 			}
 
+		case "networkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
+			}
+
 		case "plugins":
 			if err := awsRestjson1_deserializeDocument__listOfPluginDescription(&sv.Plugins, value); err != nil {
 				return err
@@ -4568,6 +4577,15 @@ func awsRestjson1_deserializeDocumentConnectorSummary(v **types.ConnectorSummary
 		case "logDelivery":
 			if err := awsRestjson1_deserializeDocumentLogDeliveryDescription(&sv.LogDelivery, value); err != nil {
 				return err
+			}
+
+		case "networkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
 			}
 
 		case "plugins":

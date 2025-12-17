@@ -2,6 +2,29 @@
 
 package types
 
+type As2805KeyVariant string
+
+// Enum values for As2805KeyVariant
+const (
+	As2805KeyVariantTerminalMajorKeyVariant00         As2805KeyVariant = "TERMINAL_MAJOR_KEY_VARIANT_00"
+	As2805KeyVariantPinEncryptionKeyVariant28         As2805KeyVariant = "PIN_ENCRYPTION_KEY_VARIANT_28"
+	As2805KeyVariantMessageAuthenticationKeyVariant24 As2805KeyVariant = "MESSAGE_AUTHENTICATION_KEY_VARIANT_24"
+	As2805KeyVariantDataEncryptionKeyVariant22        As2805KeyVariant = "DATA_ENCRYPTION_KEY_VARIANT_22"
+)
+
+// Values returns all known values for As2805KeyVariant. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (As2805KeyVariant) Values() []As2805KeyVariant {
+	return []As2805KeyVariant{
+		"TERMINAL_MAJOR_KEY_VARIANT_00",
+		"PIN_ENCRYPTION_KEY_VARIANT_28",
+		"MESSAGE_AUTHENTICATION_KEY_VARIANT_24",
+		"DATA_ENCRYPTION_KEY_VARIANT_22",
+	}
+}
+
 type DeriveKeyUsage string
 
 // Enum values for DeriveKeyUsage
@@ -314,6 +337,7 @@ const (
 	KeyUsageTr31K0KeyEncryptionKey                 KeyUsage = "TR31_K0_KEY_ENCRYPTION_KEY"
 	KeyUsageTr31K1KeyBlockProtectionKey            KeyUsage = "TR31_K1_KEY_BLOCK_PROTECTION_KEY"
 	KeyUsageTr31K3AsymmetricKeyForKeyAgreement     KeyUsage = "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT"
+	KeyUsageTr31M0Iso16609MacKey                   KeyUsage = "TR31_M0_ISO_16609_MAC_KEY"
 	KeyUsageTr31M3Iso97973MacKey                   KeyUsage = "TR31_M3_ISO_9797_3_MAC_KEY"
 	KeyUsageTr31M1Iso97971MacKey                   KeyUsage = "TR31_M1_ISO_9797_1_MAC_KEY"
 	KeyUsageTr31M6Iso97975CmacKey                  KeyUsage = "TR31_M6_ISO_9797_5_CMAC_KEY"
@@ -345,6 +369,7 @@ func (KeyUsage) Values() []KeyUsage {
 		"TR31_K0_KEY_ENCRYPTION_KEY",
 		"TR31_K1_KEY_BLOCK_PROTECTION_KEY",
 		"TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT",
+		"TR31_M0_ISO_16609_MAC_KEY",
 		"TR31_M3_ISO_9797_3_MAC_KEY",
 		"TR31_M1_ISO_9797_1_MAC_KEY",
 		"TR31_M6_ISO_9797_5_CMAC_KEY",

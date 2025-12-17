@@ -1,0 +1,8 @@
+{
+    "id": "d036661c-3e6a-447e-80bc-b11154c3357e",
+    "type": "feature",
+    "description": "Adds support for tile encoding in HEVC and audio for video overlays.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

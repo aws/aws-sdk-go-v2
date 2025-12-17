@@ -217,6 +217,10 @@ type StartStreamSessionInput struct {
 	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Locations []string
 
+	// Configuration settings for sharing the stream session's performance stats with
+	// the client
+	PerformanceStatsConfiguration *types.PerformanceStatsConfiguration
+
 	// The maximum duration of a session. Amazon GameLift Streams will automatically
 	// terminate a session after this amount of time has elapsed, regardless of any
 	// existing client connections. Default value is 43200 (12 hours).
@@ -306,6 +310,9 @@ type StartStreamSessionOutput struct {
 	// stream session. The Amazon GameLift Streams application resource defines which
 	// log files to upload.
 	LogFileLocationUri *string
+
+	// The performance stats configuration for the stream session
+	PerformanceStatsConfiguration *types.PerformanceStatsConfiguration
 
 	// The data transfer protocol in use with the stream session.
 	Protocol types.Protocol

@@ -1438,6 +1438,11 @@ type SpekeKeyProvider struct {
 	// This member is required.
 	Url *string
 
+	// The ARN for the certificate that you imported to AWS Certificate Manager to add
+	// content key encryption to this endpoint. For this feature to work, your DRM key
+	// provider must support content key encryption.
+	CertificateArn *string
+
 	noSmithyDocumentSerde
 }
 

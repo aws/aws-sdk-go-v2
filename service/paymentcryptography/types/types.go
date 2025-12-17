@@ -36,7 +36,7 @@ type CertificateSubjectType struct {
 	// The city you provide to create the certificate signing request.
 	City *string
 
-	// The city you provide to create the certificate signing request.
+	// The country you provide to create the certificate signing request.
 	Country *string
 
 	// The email address you provide to create the certificate signing request.
@@ -78,6 +78,32 @@ type DiffieHellmanDerivationDataMemberSharedInformation struct {
 }
 
 func (*DiffieHellmanDerivationDataMemberSharedInformation) isDiffieHellmanDerivationData() {}
+
+// Parameter information for key material export using AS2805 key cryptogram
+// format.
+type ExportAs2805KeyCryptogram struct {
+
+	// The cryptographic usage of the key under export.
+	//
+	// This member is required.
+	As2805KeyVariant As2805KeyVariant
+
+	// A key identifier that can be either a key ARN or an alias name. This allows
+	// flexible key identification in operations.
+	//
+	// When using a key ARN, it must be a fully qualified ARN in the format:
+	// arn:aws:payment-cryptography:region:account:key/key-id .
+	//
+	// When using an alias, it must begin with alias/ followed by the alias name.
+	//
+	// Do not include confidential or sensitive information in this field. This field
+	// may be displayed in plaintext in CloudTrail logs and other output.
+	//
+	// This member is required.
+	WrappingKeyIdentifier *string
+
+	noSmithyDocumentSerde
+}
 
 // The attributes for IPEK generation during export.
 type ExportAttributes struct {
@@ -190,6 +216,7 @@ type ExportKeyCryptogram struct {
 //
 // The following types satisfy this interface:
 //
+//	ExportKeyMaterialMemberAs2805KeyCryptogram
 //	ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock
 //	ExportKeyMaterialMemberKeyCryptogram
 //	ExportKeyMaterialMemberTr31KeyBlock
@@ -197,6 +224,16 @@ type ExportKeyCryptogram struct {
 type ExportKeyMaterial interface {
 	isExportKeyMaterial()
 }
+
+// Parameter information for key material export using AS2805 key cryptogram
+// format.
+type ExportKeyMaterialMemberAs2805KeyCryptogram struct {
+	Value ExportAs2805KeyCryptogram
+
+	noSmithyDocumentSerde
+}
+
+func (*ExportKeyMaterialMemberAs2805KeyCryptogram) isExportKeyMaterial() {}
 
 // Key derivation parameter information for key material export using asymmetric
 // ECDH key exchange method.
@@ -304,6 +341,54 @@ type ExportTr34KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
+// Parameter information for key material import using AS2805 key cryptogram
+// format.
+type ImportAs2805KeyCryptogram struct {
+
+	// The cryptographic usage of the key under import.
+	//
+	// This member is required.
+	As2805KeyVariant As2805KeyVariant
+
+	// Specified whether the key is exportable. This data is immutable after the key
+	// is imported.
+	//
+	// This member is required.
+	Exportable *bool
+
+	// The key algorithm of the key under import.
+	//
+	// This member is required.
+	KeyAlgorithm KeyAlgorithm
+
+	// The list of cryptographic operations that you can perform using the key. The
+	// modes of use are deﬁned in section A.5.3 of the TR-31 spec.
+	//
+	// This member is required.
+	KeyModesOfUse *KeyModesOfUse
+
+	// The wrapped key cryptogram under import.
+	//
+	// This member is required.
+	WrappedKeyCryptogram *string
+
+	// A key identifier that can be either a key ARN or an alias name. This allows
+	// flexible key identification in operations.
+	//
+	// When using a key ARN, it must be a fully qualified ARN in the format:
+	// arn:aws:payment-cryptography:region:account:key/key-id .
+	//
+	// When using an alias, it must begin with alias/ followed by the alias name.
+	//
+	// Do not include confidential or sensitive information in this field. This field
+	// may be displayed in plaintext in CloudTrail logs and other output.
+	//
+	// This member is required.
+	WrappingKeyIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
 // Key derivation parameter information for key material import using asymmetric
 // ECDH key exchange method.
 type ImportDiffieHellmanTr31KeyBlock struct {
@@ -394,6 +479,7 @@ type ImportKeyCryptogram struct {
 //
 // The following types satisfy this interface:
 //
+//	ImportKeyMaterialMemberAs2805KeyCryptogram
 //	ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock
 //	ImportKeyMaterialMemberKeyCryptogram
 //	ImportKeyMaterialMemberRootCertificatePublicKey
@@ -403,6 +489,16 @@ type ImportKeyCryptogram struct {
 type ImportKeyMaterial interface {
 	isImportKeyMaterial()
 }
+
+// Parameter information for key material import using AS2805 key cryptogram
+// format.
+type ImportKeyMaterialMemberAs2805KeyCryptogram struct {
+	Value ImportAs2805KeyCryptogram
+
+	noSmithyDocumentSerde
+}
+
+func (*ImportKeyMaterialMemberAs2805KeyCryptogram) isImportKeyMaterial() {}
 
 // Key derivation parameter information for key material import using asymmetric
 // ECDH key exchange method.

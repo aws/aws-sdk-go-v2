@@ -24835,6 +24835,15 @@ func awsRestjson1_deserializeDocumentRdsDbInstanceDetails(v **types.RdsDbInstanc
 				sv.DbInstanceIdentifier = ptr.String(jtv)
 			}
 
+		case "dbiResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DbiResourceId = ptr.String(jtv)
+			}
+
 		case "engine":
 			if value != nil {
 				jtv, ok := value.(string)

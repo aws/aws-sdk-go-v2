@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified connector.
+// Updates the specified connector. For request body, specify only one parameter:
+// either capacity or connectorConfiguration .
 func (c *Client) UpdateConnector(ctx context.Context, params *UpdateConnectorInput, optFns ...func(*Options)) (*UpdateConnectorOutput, error) {
 	if params == nil {
 		params = &UpdateConnectorInput{}

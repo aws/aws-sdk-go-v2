@@ -76,6 +76,53 @@ type AmexCardSecurityCodeVersion2 struct {
 	noSmithyDocumentSerde
 }
 
+// Parameter information for generating a random key for KEK validation to perform
+// node-to-node initialization.
+//
+// The following types satisfy this interface:
+//
+//	As2805KekValidationTypeMemberKekValidationRequest
+//	As2805KekValidationTypeMemberKekValidationResponse
+type As2805KekValidationType interface {
+	isAs2805KekValidationType()
+}
+
+// Parameter information for generating a KEK validation request during
+// node-to-node initialization.
+type As2805KekValidationTypeMemberKekValidationRequest struct {
+	Value KekValidationRequest
+
+	noSmithyDocumentSerde
+}
+
+func (*As2805KekValidationTypeMemberKekValidationRequest) isAs2805KekValidationType() {}
+
+// Parameter information for generating a KEK validation response during
+// node-to-node initialization.
+type As2805KekValidationTypeMemberKekValidationResponse struct {
+	Value KekValidationResponse
+
+	noSmithyDocumentSerde
+}
+
+func (*As2805KekValidationTypeMemberKekValidationResponse) isAs2805KekValidationType() {}
+
+// Parameter information to use a PEK derived using AS2805.
+type As2805PekDerivationAttributes struct {
+
+	// The system trace audit number for the transaction.
+	//
+	// This member is required.
+	SystemTraceAuditNumber *string
+
+	// The transaction amount for the transaction.
+	//
+	// This member is required.
+	TransactionAmount *string
+
+	noSmithyDocumentSerde
+}
+
 // Parameters for plaintext encryption using asymmetric keys.
 type AsymmetricEncryptionAttributes struct {
 
@@ -1063,6 +1110,30 @@ type IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock struct {
 
 func (*IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock) isIncomingKeyMaterial() {}
 
+// Parameter information for generating a KEK validation request during
+// node-to-node initialization.
+type KekValidationRequest struct {
+
+	// The key derivation algorithm to use for generating a KEK validation request.
+	//
+	// This member is required.
+	DeriveKeyAlgorithm SymmetricKeyAlgorithm
+
+	noSmithyDocumentSerde
+}
+
+// Parameter information for generating a KEK validation response during
+// node-to-node initialization.
+type KekValidationResponse struct {
+
+	// The random key for generating a KEK validation response.
+	//
+	// This member is required.
+	RandomKeySend *string
+
+	noSmithyDocumentSerde
+}
+
 // Parameters required for DUKPT MAC generation and verification.
 type MacAlgorithmDukpt struct {
 
@@ -1638,6 +1709,7 @@ type SymmetricEncryptionAttributes struct {
 //
 // The following types satisfy this interface:
 //
+//	TranslationIsoFormatsMemberAs2805Format0
 //	TranslationIsoFormatsMemberIsoFormat0
 //	TranslationIsoFormatsMemberIsoFormat1
 //	TranslationIsoFormatsMemberIsoFormat3
@@ -1646,7 +1718,16 @@ type TranslationIsoFormats interface {
 	isTranslationIsoFormats()
 }
 
-// Parameters that are required for ISO9564 PIN format 0 tranlation.
+// Parameters that are required for AS2805 PIN format 0 translation.
+type TranslationIsoFormatsMemberAs2805Format0 struct {
+	Value TranslationPinDataAs2805Format0
+
+	noSmithyDocumentSerde
+}
+
+func (*TranslationIsoFormatsMemberAs2805Format0) isTranslationIsoFormats() {}
+
+// Parameters that are required for ISO9564 PIN format 0 translation.
 type TranslationIsoFormatsMemberIsoFormat0 struct {
 	Value TranslationPinDataIsoFormat034
 
@@ -1655,7 +1736,7 @@ type TranslationIsoFormatsMemberIsoFormat0 struct {
 
 func (*TranslationIsoFormatsMemberIsoFormat0) isTranslationIsoFormats() {}
 
-// Parameters that are required for ISO9564 PIN format 1 tranlation.
+// Parameters that are required for ISO9564 PIN format 1 translation.
 type TranslationIsoFormatsMemberIsoFormat1 struct {
 	Value TranslationPinDataIsoFormat1
 
@@ -1664,7 +1745,7 @@ type TranslationIsoFormatsMemberIsoFormat1 struct {
 
 func (*TranslationIsoFormatsMemberIsoFormat1) isTranslationIsoFormats() {}
 
-// Parameters that are required for ISO9564 PIN format 3 tranlation.
+// Parameters that are required for ISO9564 PIN format 3 translation.
 type TranslationIsoFormatsMemberIsoFormat3 struct {
 	Value TranslationPinDataIsoFormat034
 
@@ -1673,7 +1754,7 @@ type TranslationIsoFormatsMemberIsoFormat3 struct {
 
 func (*TranslationIsoFormatsMemberIsoFormat3) isTranslationIsoFormats() {}
 
-// Parameters that are required for ISO9564 PIN format 4 tranlation.
+// Parameters that are required for ISO9564 PIN format 4 translation.
 type TranslationIsoFormatsMemberIsoFormat4 struct {
 	Value TranslationPinDataIsoFormat034
 
@@ -1682,8 +1763,22 @@ type TranslationIsoFormatsMemberIsoFormat4 struct {
 
 func (*TranslationIsoFormatsMemberIsoFormat4) isTranslationIsoFormats() {}
 
-// Parameters that are required for tranlation between ISO9564 PIN format 0,3,4
-// tranlation.
+// Parameters that are required for translation between AS2805 PIN format 0
+// translation.
+type TranslationPinDataAs2805Format0 struct {
+
+	// The Primary Account Number (PAN) of the cardholder. A PAN is a unique
+	// identifier for a payment credit or debit card and associates the card to a
+	// specific account holder.
+	//
+	// This member is required.
+	PrimaryAccountNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// Parameters that are required for translation between ISO9564 PIN format 0,3,4
+// translation.
 type TranslationPinDataIsoFormat034 struct {
 
 	// The Primary Account Number (PAN) of the cardholder. A PAN is a unique
@@ -1696,7 +1791,7 @@ type TranslationPinDataIsoFormat034 struct {
 	noSmithyDocumentSerde
 }
 
-// Parameters that are required for ISO9564 PIN format 1 tranlation.
+// Parameters that are required for ISO9564 PIN format 1 translation.
 type TranslationPinDataIsoFormat1 struct {
 	noSmithyDocumentSerde
 }
@@ -1916,6 +2011,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAs2805KekValidationType()        {}
 func (*UnknownUnionMember) isCardGenerationAttributes()       {}
 func (*UnknownUnionMember) isCardVerificationAttributes()     {}
 func (*UnknownUnionMember) isCryptogramAuthResponse()         {}

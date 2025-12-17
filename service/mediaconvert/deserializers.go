@@ -15738,6 +15738,24 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				sv.MinIInterval = ptr.Int32(int32(i64))
 			}
 
+		case "mvOverPictureBoundaries":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265MvOverPictureBoundaries to be of type string, got %T instead", value)
+				}
+				sv.MvOverPictureBoundaries = types.H265MvOverPictureBoundaries(jtv)
+			}
+
+		case "mvTemporalPredictor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265MvTemporalPredictor to be of type string, got %T instead", value)
+				}
+				sv.MvTemporalPredictor = types.H265MvTemporalPredictor(jtv)
+			}
+
 		case "numberBFramesBetweenReferenceFrames":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15912,6 +15930,28 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				sv.TemporalIds = types.H265TemporalIds(jtv)
 			}
 
+		case "tileHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin64Max2160 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileHeight = ptr.Int32(int32(i64))
+			}
+
+		case "tilePadding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265TilePadding to be of type string, got %T instead", value)
+				}
+				sv.TilePadding = types.H265TilePadding(jtv)
+			}
+
 		case "tiles":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15919,6 +15959,28 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return fmt.Errorf("expected H265Tiles to be of type string, got %T instead", value)
 				}
 				sv.Tiles = types.H265Tiles(jtv)
+			}
+
+		case "tileWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin256Max3840 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileWidth = ptr.Int32(int32(i64))
+			}
+
+		case "treeBlockSize":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265TreeBlockSize to be of type string, got %T instead", value)
+				}
+				sv.TreeBlockSize = types.H265TreeBlockSize(jtv)
 			}
 
 		case "unregisteredSeiTimecode":
@@ -17912,6 +17974,15 @@ func awsRestjson1_deserializeDocumentInputVideoGenerator(v **types.InputVideoGen
 					return err
 				}
 				sv.Height = ptr.Int32(int32(i64))
+			}
+
+		case "imageInput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA to be of type string, got %T instead", value)
+				}
+				sv.ImageInput = ptr.String(jtv)
 			}
 
 		case "sampleRate":
@@ -25597,6 +25668,11 @@ func awsRestjson1_deserializeDocumentVideoOverlayInput(v **types.VideoOverlayInp
 
 	for key, value := range shape {
 		switch key {
+		case "audioSelectors":
+			if err := awsRestjson1_deserializeDocument__mapOfAudioSelector(&sv.AudioSelectors, value); err != nil {
+				return err
+			}
+
 		case "fileInput":
 			if value != nil {
 				jtv, ok := value.(string)

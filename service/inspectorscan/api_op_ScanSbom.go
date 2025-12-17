@@ -14,7 +14,14 @@ import (
 
 // Scans a provided CycloneDX 1.5 SBOM and reports on any vulnerabilities
 // discovered in that SBOM. You can generate compatible SBOMs for your resources
-// using the Amazon Inspector SBOM generator.
+// using the [Amazon Inspector SBOM generator].
+//
+// The output of this action reports NVD and CVSS scores when NVD and CVSS scores
+// are available. Because the output reports both scores, you might notice a
+// discrepency between them. However, you can triage the severity of either score
+// depending on the vendor of your choosing.
+//
+// [Amazon Inspector SBOM generator]: https://docs.aws.amazon.com/inspector/latest/user/sbom-generator.html
 func (c *Client) ScanSbom(ctx context.Context, params *ScanSbomInput, optFns ...func(*Options)) (*ScanSbomOutput, error) {
 	if params == nil {
 		params = &ScanSbomInput{}
@@ -33,7 +40,8 @@ func (c *Client) ScanSbom(ctx context.Context, params *ScanSbomInput, optFns ...
 type ScanSbomInput struct {
 
 	// The JSON file for the SBOM you want to scan. The SBOM must be in CycloneDX 1.5
-	// format.
+	// format. This format limits you to passing 2000 components before throwing a
+	// ValidException error.
 	//
 	// This member is required.
 	Sbom document.Interface

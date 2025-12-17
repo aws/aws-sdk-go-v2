@@ -1,0 +1,8 @@
+{
+    "id": "50f2755c-90ad-4db1-a2cc-f1c0cd5d27bc",
+    "type": "feature",
+    "description": "Support dual-stack network connectivity for connectors via NetworkType field.",
+    "modules": [
+        "service/kafkaconnect"
+    ]
+}

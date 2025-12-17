@@ -2417,6 +2417,11 @@ func awsRestjson1_deserializeOpDocumentGetStreamSessionOutput(v **GetStreamSessi
 				sv.LogFileLocationUri = ptr.String(jtv)
 			}
 
+		case "PerformanceStatsConfiguration":
+			if err := awsRestjson1_deserializeDocumentPerformanceStatsConfiguration(&sv.PerformanceStatsConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3717,6 +3722,11 @@ func awsRestjson1_deserializeOpDocumentStartStreamSessionOutput(v **StartStreamS
 					return fmt.Errorf("expected FileLocationUri to be of type string, got %T instead", value)
 				}
 				sv.LogFileLocationUri = ptr.String(jtv)
+			}
+
+		case "PerformanceStatsConfiguration":
+			if err := awsRestjson1_deserializeDocumentPerformanceStatsConfiguration(&sv.PerformanceStatsConfiguration, value); err != nil {
+				return err
 			}
 
 		case "Protocol":
@@ -5509,6 +5519,19 @@ func awsRestjson1_deserializeDocumentLocationState(v **types.LocationState, valu
 				sv.LocationName = ptr.String(jtv)
 			}
 
+		case "MaximumCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaximumCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumCapacity = ptr.Int32(int32(i64))
+			}
+
 		case "OnDemandCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5542,6 +5565,19 @@ func awsRestjson1_deserializeDocumentLocationState(v **types.LocationState, valu
 					return fmt.Errorf("expected StreamGroupLocationStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.StreamGroupLocationStatus(jtv)
+			}
+
+		case "TargetIdleCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TargetIdleCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetIdleCapacity = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -5584,6 +5620,46 @@ func awsRestjson1_deserializeDocumentLocationStates(v *[]types.LocationState, va
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPerformanceStatsConfiguration(v **types.PerformanceStatsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PerformanceStatsConfiguration
+	if *v == nil {
+		sv = &types.PerformanceStatsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SharedWithClient":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SharedWithClient = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -6064,6 +6140,15 @@ func awsRestjson1_deserializeDocumentStreamSessionSummary(v **types.StreamSessio
 					return fmt.Errorf("expected StreamSessionStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.StreamSessionStatus(jtv)
+			}
+
+		case "StatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamSessionStatusReason to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = types.StreamSessionStatusReason(jtv)
 			}
 
 		case "UserId":

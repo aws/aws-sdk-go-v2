@@ -11,21 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a Message Authentication Code (MAC) cryptogram within Amazon Web
-// Services Payment Cryptography.
+// Establishes node-to-node initialization between payment processing nodes such
+// as an acquirer, issuer or payment network using Australian Standard 2805
+// (AS2805).
 //
-// You can use this operation to authenticate card-related data by using known
-// data values to generate MAC for data validation between the sending and
-// receiving parties. This operation uses message data, a secret encryption key and
-// MAC algorithm to generate a unique MAC value for transmission. The receiving
-// party of the MAC must use the same message data, secret encryption key and MAC
-// algorithm to reproduce another MAC value for comparision.
+// During node-to-node initialization, both communicating nodes must validate that
+// they possess the correct Key Encrypting Keys (KEKs) before proceeding with
+// session key exchange. In AS2805, the sending KEK (KEKs) of one node corresponds
+// to the receiving KEK (KEKr) of its partner node. Each node uses its KEK to
+// encrypt and decrypt session keys exchanged between the nodes. A KEK can be
+// created or imported into Amazon Web Services Payment Cryptography using either
+// the [CreateKey]or [ImportKey] operations.
 //
-// You can use this operation to generate a DUPKT, CMAC, HMAC or EMV MAC by
-// setting generation attributes and algorithm to the associated values. The MAC
-// generation encryption key must have valid values for KeyUsage such as
-// TR31_M7_HMAC_KEY for HMAC generation, and the key must have KeyModesOfUse set
-// to Generate .
+// The node initiating communication can use GenerateAS2805KekValidation to
+// generate a combined KEK validation request and KEK validation response to send
+// to the partnering node for validation. When invoked, the API internally
+// generates a random sending key encrypted under KEKs and provides a receiving key
+// encrypted under KEKr as response. The initiating node sends the response
+// returned by this API to its partner for validation.
 //
 // For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
 // Web Services Payment Cryptography User Guide.
@@ -33,73 +36,72 @@ import (
 // Cross-account use: This operation can't be used across different Amazon Web
 // Services accounts.
 //
-// Related operations:
-//
-// # VerifyMac
-//
+// [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
-func (c *Client) GenerateMac(ctx context.Context, params *GenerateMacInput, optFns ...func(*Options)) (*GenerateMacOutput, error) {
+// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+func (c *Client) GenerateAs2805KekValidation(ctx context.Context, params *GenerateAs2805KekValidationInput, optFns ...func(*Options)) (*GenerateAs2805KekValidationOutput, error) {
 	if params == nil {
-		params = &GenerateMacInput{}
+		params = &GenerateAs2805KekValidationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateMac", params, optFns, c.addOperationGenerateMacMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateAs2805KekValidation", params, optFns, c.addOperationGenerateAs2805KekValidationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GenerateMacOutput)
+	out := result.(*GenerateAs2805KekValidationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GenerateMacInput struct {
+type GenerateAs2805KekValidationInput struct {
 
-	// The attributes and data values to use for MAC generation within Amazon Web
-	// Services Payment Cryptography.
+	// Parameter information for generating a random key for KEK validation to perform
+	// node-to-node initialization.
 	//
 	// This member is required.
-	GenerationAttributes types.MacAttributes
+	KekValidationType types.As2805KekValidationType
 
-	// The keyARN of the MAC generation encryption key.
+	// The keyARN of sending KEK that Amazon Web Services Payment Cryptography uses
+	// for node-to-node initialization
 	//
 	// This member is required.
 	KeyIdentifier *string
 
-	// The data for which a MAC is under generation. This value must be hexBinary.
+	// The key variant to use for generating a random key for KEK validation during
+	// node-to-node initialization.
 	//
 	// This member is required.
-	MessageData *string
-
-	// The length of a MAC under generation.
-	MacLength *int32
+	RandomKeySendVariantMask types.RandomKeySendVariantMask
 
 	noSmithyDocumentSerde
 }
 
-type GenerateMacOutput struct {
+type GenerateAs2805KekValidationOutput struct {
 
-	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography
-	// uses for MAC generation.
+	// The keyARN of sending KEK that Amazon Web Services Payment Cryptography
+	// validates for node-to-node initialization
 	//
 	// This member is required.
 	KeyArn *string
 
-	// The key check value (KCV) of the encryption key. The KCV is used to check if
-	// all parties holding a given key have the same key or to detect that a key has
-	// changed.
-	//
-	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
-	// specification.
+	// The key check value (KCV) of the sending KEK that Amazon Web Services Payment
+	// Cryptography validates for node-to-node initialization.
 	//
 	// This member is required.
 	KeyCheckValue *string
 
-	// The MAC cryptogram generated within Amazon Web Services Payment Cryptography.
+	// The random key generated for receiving KEK validation. The initiating node
+	// sends this key to its partner node for validation.
 	//
 	// This member is required.
-	Mac *string
+	RandomKeyReceive *string
+
+	// The random key generated for sending KEK validation.
+	//
+	// This member is required.
+	RandomKeySend *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -107,19 +109,19 @@ type GenerateMacOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGenerateMacMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateAs2805KekValidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateMac{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateAs2805KekValidation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateMac{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateAs2805KekValidation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateMac"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateAs2805KekValidation"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -174,10 +176,10 @@ func (c *Client) addOperationGenerateMacMiddlewares(stack *middleware.Stack, opt
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGenerateMacValidationMiddleware(stack); err != nil {
+	if err = addOpGenerateAs2805KekValidationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateMac(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateAs2805KekValidation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -207,10 +209,10 @@ func (c *Client) addOperationGenerateMacMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGenerateMac(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGenerateAs2805KekValidation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GenerateMac",
+		OperationName: "GenerateAs2805KekValidation",
 	}
 }

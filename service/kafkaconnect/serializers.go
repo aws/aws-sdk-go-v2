@@ -145,6 +145,11 @@ func awsRestjson1_serializeOpDocumentCreateConnectorInput(v *CreateConnectorInpu
 		}
 	}
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("networkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.Plugins != nil {
 		ok := object.Key("plugins")
 		if err := awsRestjson1_serializeDocument__listOfPlugin(v.Plugins, ok); err != nil {

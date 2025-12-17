@@ -7053,6 +7053,16 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 		ok.Integer(*v.MinIInterval)
 	}
 
+	if len(v.MvOverPictureBoundaries) > 0 {
+		ok := object.Key("mvOverPictureBoundaries")
+		ok.String(string(v.MvOverPictureBoundaries))
+	}
+
+	if len(v.MvTemporalPredictor) > 0 {
+		ok := object.Key("mvTemporalPredictor")
+		ok.String(string(v.MvTemporalPredictor))
+	}
+
 	if v.NumberBFramesBetweenReferenceFrames != nil {
 		ok := object.Key("numberBFramesBetweenReferenceFrames")
 		ok.Integer(*v.NumberBFramesBetweenReferenceFrames)
@@ -7147,9 +7157,29 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 		ok.String(string(v.TemporalIds))
 	}
 
+	if v.TileHeight != nil {
+		ok := object.Key("tileHeight")
+		ok.Integer(*v.TileHeight)
+	}
+
+	if len(v.TilePadding) > 0 {
+		ok := object.Key("tilePadding")
+		ok.String(string(v.TilePadding))
+	}
+
 	if len(v.Tiles) > 0 {
 		ok := object.Key("tiles")
 		ok.String(string(v.Tiles))
+	}
+
+	if v.TileWidth != nil {
+		ok := object.Key("tileWidth")
+		ok.Integer(*v.TileWidth)
+	}
+
+	if len(v.TreeBlockSize) > 0 {
+		ok := object.Key("treeBlockSize")
+		ok.String(string(v.TreeBlockSize))
 	}
 
 	if len(v.UnregisteredSeiTimecode) > 0 {
@@ -8131,6 +8161,11 @@ func awsRestjson1_serializeDocumentInputVideoGenerator(v *types.InputVideoGenera
 	if v.Height != nil {
 		ok := object.Key("height")
 		ok.Integer(*v.Height)
+	}
+
+	if v.ImageInput != nil {
+		ok := object.Key("imageInput")
+		ok.String(*v.ImageInput)
 	}
 
 	if v.SampleRate != nil {
@@ -10951,6 +10986,13 @@ func awsRestjson1_serializeDocumentVideoOverlayCrop(v *types.VideoOverlayCrop, v
 func awsRestjson1_serializeDocumentVideoOverlayInput(v *types.VideoOverlayInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AudioSelectors != nil {
+		ok := object.Key("audioSelectors")
+		if err := awsRestjson1_serializeDocument__mapOfAudioSelector(v.AudioSelectors, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.FileInput != nil {
 		ok := object.Key("fileInput")

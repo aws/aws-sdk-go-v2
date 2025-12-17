@@ -1,0 +1,8 @@
+{
+    "id": "3b74acb5-fbbd-4aab-8b14-4db487e45076",
+    "type": "feature",
+    "description": "Adds an additional OutputFormat",
+    "modules": [
+        "service/inspectorscan"
+    ]
+}

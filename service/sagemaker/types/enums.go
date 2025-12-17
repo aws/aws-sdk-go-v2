@@ -1995,6 +1995,7 @@ const (
 	ClusterInstanceTypeMlR7i16xlarge      ClusterInstanceType = "ml.r7i.16xlarge"
 	ClusterInstanceTypeMlR7i24xlarge      ClusterInstanceType = "ml.r7i.24xlarge"
 	ClusterInstanceTypeMlR7i48xlarge      ClusterInstanceType = "ml.r7i.48xlarge"
+	ClusterInstanceTypeMlP6B30048xlarge   ClusterInstanceType = "ml.p6-b300.48xlarge"
 )
 
 // Values returns all known values for ClusterInstanceType. Note that this can be
@@ -2118,6 +2119,7 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.r7i.16xlarge",
 		"ml.r7i.24xlarge",
 		"ml.r7i.48xlarge",
+		"ml.p6-b300.48xlarge",
 	}
 }
 
@@ -7401,6 +7403,7 @@ const (
 	ReservedCapacityInstanceTypeMlP4de24xlarge     ReservedCapacityInstanceType = "ml.p4de.24xlarge"
 	ReservedCapacityInstanceTypeMlP6eGb20036xlarge ReservedCapacityInstanceType = "ml.p6e-gb200.36xlarge"
 	ReservedCapacityInstanceTypeMlP54xlarge        ReservedCapacityInstanceType = "ml.p5.4xlarge"
+	ReservedCapacityInstanceTypeMlP6B30048xlarge   ReservedCapacityInstanceType = "ml.p6-b300.48xlarge"
 )
 
 // Values returns all known values for ReservedCapacityInstanceType. Note that
@@ -7420,6 +7423,7 @@ func (ReservedCapacityInstanceType) Values() []ReservedCapacityInstanceType {
 		"ml.p4de.24xlarge",
 		"ml.p6e-gb200.36xlarge",
 		"ml.p5.4xlarge",
+		"ml.p6-b300.48xlarge",
 	}
 }
 
@@ -9121,6 +9125,7 @@ const (
 	TrainingInstanceTypeMlR7i48xlarge      TrainingInstanceType = "ml.r7i.48xlarge"
 	TrainingInstanceTypeMlP6eGb20036xlarge TrainingInstanceType = "ml.p6e-gb200.36xlarge"
 	TrainingInstanceTypeMlP54xlarge        TrainingInstanceType = "ml.p5.4xlarge"
+	TrainingInstanceTypeMlP6B30048xlarge   TrainingInstanceType = "ml.p6-b300.48xlarge"
 )
 
 // Values returns all known values for TrainingInstanceType. Note that this can be
@@ -9267,6 +9272,7 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.r7i.48xlarge",
 		"ml.p6e-gb200.36xlarge",
 		"ml.p5.4xlarge",
+		"ml.p6-b300.48xlarge",
 	}
 }
 

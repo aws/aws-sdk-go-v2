@@ -91,9 +91,7 @@ type GeneratePinDataInput struct {
 	// The ISO_Format_3 PIN block format is the same as ISO_Format_0 except that the
 	// fill digits are random values from 10 to 15.
 	//
-	// The ISO_Format_4 PIN block format is the only one supporting AES encryption. It
-	// is similar to ISO_Format_3 but doubles the pin block length by padding with
-	// fill digit A and random values from 10 to 15.
+	// The ISO_Format_4 PIN block format is the only one supporting AES encryption.
 	//
 	// This member is required.
 	PinBlockFormat types.PinBlockFormatForPinData

@@ -553,9 +553,14 @@ type AudioSelector struct {
 	// 639-2 or ISO 639-3 three-letter language code
 	CustomLanguageCode *string
 
-	// Enable this setting on one audio selector to set it as the default for the job.
-	// The service uses this default for outputs where it can't find the specified
-	// input audio. If you don't set a default, those outputs have no audio.
+	// Specify a fallback audio selector for this input. Use to ensure outputs have
+	// audio even when the audio selector you specify in your output is missing from
+	// the source. DEFAULT (Checked in the MediaConvert console): If your output
+	// settings specify an audio selector that does not exist in this input,
+	// MediaConvert uses this audio selector instead. This is useful when you have
+	// multiple inputs with a different number of audio tracks. NOT_DEFAULT (Unchecked
+	// in the MediaConvert console): MediaConvert will not fallback from any missing
+	// audio selector. Any output specifying a missing audio selector will be silent.
 	DefaultSelection AudioDefaultSelection
 
 	// Specify the S3, HTTP, or HTTPS URL for your external audio file input.
@@ -4314,6 +4319,14 @@ type H265Settings struct {
 	// GOP size.
 	MinIInterval *int32
 
+	// If you are setting up the picture as a tile, you must set this to "disabled".
+	// In all other configurations, you typically enter "enabled".
+	MvOverPictureBoundaries H265MvOverPictureBoundaries
+
+	// If you are setting up the picture as a tile, you must set this to "disabled".
+	// In other configurations, you typically enter "enabled".
+	MvTemporalPredictor H265MvTemporalPredictor
+
 	// Specify the number of B-frames between reference frames in this output. For the
 	// best video quality: Leave blank. MediaConvert automatically determines the
 	// number of B-frames to use based on the characteristics of your input video. To
@@ -4464,9 +4477,32 @@ type H265Settings struct {
 	// layer) for a half frame rate output.
 	TemporalIds H265TemporalIds
 
+	// Set this field to set up the picture as a tile. You must also set TileWidth.
+	// The tile height must result in 22 or fewer rows in the frame. The tile width
+	// must result in 20 or fewer columns in the frame. And finally, the product of the
+	// column count and row count must be 64 or less. If the tile width and height are
+	// specified, MediaConvert will override the video codec slices field with a value
+	// that MediaConvert calculates.
+	TileHeight *int32
+
+	// Set to "padded" to force MediaConvert to add padding to the frame, to obtain a
+	// frame that is a whole multiple of the tile size. If you are setting up the
+	// picture as a tile, you must enter "padded". In all other configurations, you
+	// typically enter "none".
+	TilePadding H265TilePadding
+
+	// Set this field to set up the picture as a tile. See TileHeight for more
+	// information.
+	TileWidth *int32
+
 	// Enable use of tiles, allowing horizontal as well as vertical subdivision of the
 	// encoded pictures.
 	Tiles H265Tiles
+
+	// Select the tree block size used for encoding. If you enter "auto", the encoder
+	// will pick the best size. If you are setting up the picture as a tile, you must
+	// set this to 32x32. In all other configurations, you typically enter "auto".
+	TreeBlockSize H265TreeBlockSize
 
 	// Inserts timecode for each frame as 4 bytes of an unregistered SEI message.
 	UnregisteredSeiTimecode H265UnregisteredSeiTimecode
@@ -5567,6 +5603,10 @@ type InputVideoGenerator struct {
 	// specify a height: Enter an even integer from 32 to 8192. When you do, you must
 	// also specify a value for width.
 	Height *int32
+
+	// Specify the HTTP, HTTPS, or Amazon S3 location of the image that you want to
+	// overlay on the video. Use a PNG or TGA file.
+	ImageInput *string
 
 	// Specify the audio sample rate, in Hz, for the silent audio in your video
 	// generator input. Enter an integer from 32000 to 48000.
@@ -9200,6 +9240,17 @@ type VideoOverlayCrop struct {
 // Input settings for Video overlay. You can include one or more video overlays in
 // sequence at different times that you specify.
 type VideoOverlayInput struct {
+
+	// Use Audio selectors to specify audio to use during your Video overlay. You can
+	// use multiple Audio selectors per Video overlay. When you include an Audio
+	// selector within a Video overlay, MediaConvert mutes any Audio selectors with the
+	// same name from the underlying input. For example, if your underlying input has
+	// Audio selector 1 and Audio selector 2, and your Video overlay only has Audio
+	// selector 1, then MediaConvert replaces all audio for Audio selector 1 during the
+	// Video overlay. To replace all audio for all Audio selectors from the underlying
+	// input by using a single Audio selector in your overlay, set DefaultSelection to
+	// DEFAULT (Check "Use as default" in the MediaConvert console).
+	AudioSelectors map[string]AudioSelector
 
 	// Specify the input file S3, HTTP, or HTTPS URL for your video overlay. To
 	// specify one or more Transitions for your base input video instead: Leave blank.

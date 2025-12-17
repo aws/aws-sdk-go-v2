@@ -617,6 +617,15 @@ const (
 	ValidationExceptionTypeSecretFromDifferentAccount                             ValidationExceptionType = "SECRET_FROM_DIFFERENT_ACCOUNT"
 	ValidationExceptionTypeSecretFromDifferentRegion                              ValidationExceptionType = "SECRET_FROM_DIFFERENT_REGION"
 	ValidationExceptionTypeInvalidSecret                                          ValidationExceptionType = "INVALID_SECRET"
+	ValidationExceptionTypeResourceNotInSameRegion                                ValidationExceptionType = "RESOURCE_NOT_IN_SAME_REGION"
+	ValidationExceptionTypeCertificateResourceNotFound                            ValidationExceptionType = "CERTIFICATE_RESOURCE_NOT_FOUND"
+	ValidationExceptionTypeCertificateAccessDenied                                ValidationExceptionType = "CERTIFICATE_ACCESS_DENIED"
+	ValidationExceptionTypeDescribeCertificateFailed                              ValidationExceptionType = "DESCRIBE_CERTIFICATE_FAILED"
+	ValidationExceptionTypeInvalidCertificateStatus                               ValidationExceptionType = "INVALID_CERTIFICATE_STATUS"
+	ValidationExceptionTypeInvalidCertificateKeyAlgorithm                         ValidationExceptionType = "INVALID_CERTIFICATE_KEY_ALGORITHM"
+	ValidationExceptionTypeInvalidCertificateSignatureAlgorithm                   ValidationExceptionType = "INVALID_CERTIFICATE_SIGNATURE_ALGORITHM"
+	ValidationExceptionTypeMissingCertificateDomainName                           ValidationExceptionType = "MISSING_CERTIFICATE_DOMAIN_NAME"
+	ValidationExceptionTypeInvalidArn                                             ValidationExceptionType = "INVALID_ARN"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -714,5 +723,14 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"SECRET_FROM_DIFFERENT_ACCOUNT",
 		"SECRET_FROM_DIFFERENT_REGION",
 		"INVALID_SECRET",
+		"RESOURCE_NOT_IN_SAME_REGION",
+		"CERTIFICATE_RESOURCE_NOT_FOUND",
+		"CERTIFICATE_ACCESS_DENIED",
+		"DESCRIBE_CERTIFICATE_FAILED",
+		"INVALID_CERTIFICATE_STATUS",
+		"INVALID_CERTIFICATE_KEY_ALGORITHM",
+		"INVALID_CERTIFICATE_SIGNATURE_ALGORITHM",
+		"MISSING_CERTIFICATE_DOMAIN_NAME",
+		"INVALID_ARN",
 	}
 }

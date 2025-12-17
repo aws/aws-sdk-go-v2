@@ -4548,8 +4548,6 @@ type ClusterOrchestrator struct {
 
 	// The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod
 	// cluster.
-	//
-	// This member is required.
 	Eks *ClusterOrchestratorEksConfig
 
 	noSmithyDocumentSerde

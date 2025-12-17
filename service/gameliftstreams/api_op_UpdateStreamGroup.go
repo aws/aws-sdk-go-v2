@@ -20,20 +20,22 @@ import (
 // group.
 //
 // Stream capacity represents the number of concurrent streams that can be active
-// at a time. You set stream capacity per location, per stream group. There are two
-// types of capacity, always-on and on-demand:
+// at a time. You set stream capacity per location, per stream group. The following
+// capacity settings are available:
 //
-//   - Always-on: The streaming capacity that is allocated and ready to handle
-//     stream requests without delay. You pay for this capacity whether it's in use or
-//     not. Best for quickest time from streaming request to streaming session. Default
-//     is 1 (2 for high stream classes) when creating a stream group or adding a
-//     location.
+//   - Always-on capacity: This setting, if non-zero, indicates minimum streaming
+//     capacity which is allocated to you and is never released back to the service.
+//     You pay for this base level of capacity at all times, whether used or idle.
 //
-//   - On-demand: The streaming capacity that Amazon GameLift Streams can allocate
-//     in response to stream requests, and then de-allocate when the session has
-//     terminated. This offers a cost control measure at the expense of a greater
-//     startup time (typically under 5 minutes). Default is 0 when creating a stream
-//     group or adding a location.
+//   - Maximum capacity: This indicates the maximum capacity that the service can
+//     allocate for you. Newly created streams may take a few minutes to start.
+//     Capacity is released back to the service when idle. You pay for capacity that is
+//     allocated to you until it is released.
+//
+//   - Target-idle capacity: This indicates idle capacity which the service
+//     pre-allocates and holds for you in anticipation of future activity. This helps
+//     to insulate your users from capacity-allocation delays. You pay for capacity
+//     which is held in this intentional idle state.
 //
 // Values for capacity must be whole number multiples of the tenancy value of the
 // stream group's stream class.
@@ -195,19 +197,103 @@ type UpdateStreamGroupOutput struct {
 	//   the server. Try again later.
 	//
 	//   - noAvailableInstances : Amazon GameLift Streams does not currently have
-	//   enough available on-demand capacity to fulfill your request. Wait a few minutes
-	//   and retry the request as capacity can shift frequently. You can also try to make
-	//   the request using a different stream class or in another region.
+	//   enough available capacity to fulfill your request. Wait a few minutes and retry
+	//   the request as capacity can shift frequently. You can also try to make the
+	//   request using a different stream class or in another region.
 	StatusReason types.StreamGroupStatusReason
 
 	// The target stream quality for the stream group.
 	//
 	// A stream class can be one of the following:
 	//
+	//   - gen6n_pro_win2022 (NVIDIA, pro) Supports applications with extremely high 3D
+	//   scene complexity which require maximum resources. Runs applications on Microsoft
+	//   Windows Server 2022 Base and supports DirectX 12. Compatible with Unreal Engine
+	//   versions up through 5.6, 32 and 64-bit applications, and anti-cheat technology.
+	//   Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6n_pro (NVIDIA, pro) Supports applications with extremely high 3D scene
+	//   complexity which require maximum resources. Uses dedicated NVIDIA L4 Tensor Core
+	//   GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6n_ultra_win2022 (NVIDIA, ultra) Supports applications with high 3D scene
+	//   complexity. Runs applications on Microsoft Windows Server 2022 Base and supports
+	//   DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32 and 64-bit
+	//   applications, and anti-cheat technology. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6n_ultra (NVIDIA, ultra) Supports applications with high 3D scene
+	//   complexity. Uses dedicated NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6n_high (NVIDIA, high) Supports applications with moderate to high 3D
+	//   scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 4 vCPUs, 16 GB RAM, 12 GB VRAM
+	//
+	//   - Tenancy: Supports up to 2 concurrent stream sessions
+	//
+	//   - gen6n_medium (NVIDIA, medium) Supports applications with moderate 3D scene
+	//   complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 2 vCPUs, 8 GB RAM, 6 GB VRAM
+	//
+	//   - Tenancy: Supports up to 4 concurrent stream sessions
+	//
+	//   - gen6n_small (NVIDIA, small) Supports applications with lightweight 3D scene
+	//   complexity and low CPU usage. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 1 vCPUs, 4 GB RAM, 2 GB VRAM
+	//
+	//   - Tenancy: Supports up to 12 concurrent stream sessions
+	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
-	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA A10G Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA A10G Tensor Core
+	//   GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -218,7 +304,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen5n_high (NVIDIA, high) Supports applications with moderate to high 3D
-	//   scene complexity. Uses NVIDIA A10G Tensor GPU.
+	//   scene complexity. Uses NVIDIA A10G Tensor Core GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -229,7 +315,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports up to 2 concurrent stream sessions
 	//
 	//   - gen5n_ultra (NVIDIA, ultra) Supports applications with extremely high 3D
-	//   scene complexity. Uses dedicated NVIDIA A10G Tensor GPU.
+	//   scene complexity. Uses dedicated NVIDIA A10G Tensor Core GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -241,8 +327,9 @@ type UpdateStreamGroupOutput struct {
 	//
 	//   - gen4n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
-	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor Core
+	//   GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -253,7 +340,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen4n_high (NVIDIA, high) Supports applications with moderate to high 3D
-	//   scene complexity. Uses NVIDIA T4 Tensor GPU.
+	//   scene complexity. Uses NVIDIA T4 Tensor Core GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -264,7 +351,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports up to 2 concurrent stream sessions
 	//
 	//   - gen4n_ultra (NVIDIA, ultra) Supports applications with high 3D scene
-	//   complexity. Uses dedicated NVIDIA T4 Tensor GPU.
+	//   complexity. Uses dedicated NVIDIA T4 Tensor Core GPU.
 	//
 	//   - Reference resolution: 1080p
 	//

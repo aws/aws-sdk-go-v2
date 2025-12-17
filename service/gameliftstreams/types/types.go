@@ -145,18 +145,36 @@ type LocationConfiguration struct {
 	// This member is required.
 	LocationName *string
 
-	// The streaming capacity that is allocated and ready to handle stream requests
-	// without delay. You pay for this capacity whether it's in use or not. Best for
-	// quickest time from streaming request to streaming session. Default is 1 (2 for
-	// high stream classes) when creating a stream group or adding a location.
+	// This setting, if non-zero, indicates minimum streaming capacity which is
+	// allocated to you and is never released back to the service. You pay for this
+	// base level of capacity at all times, whether used or idle.
 	AlwaysOnCapacity *int32
 
+	// This indicates the maximum capacity that the service can allocate for you.
+	// Newly created streams may take a few minutes to start. Capacity is released back
+	// to the service when idle. You pay for capacity that is allocated to you until it
+	// is released.
+	MaximumCapacity *int32
+
+	// This field is deprecated. Use MaximumCapacity instead. This parameter cannot be
+	// used with MaximumCapacity or TargetIdleCapacity in the same location
+	// configuration.
+	//
 	// The streaming capacity that Amazon GameLift Streams can allocate in response to
 	// stream requests, and then de-allocate when the session has terminated. This
 	// offers a cost control measure at the expense of a greater startup time
 	// (typically under 5 minutes). Default is 0 when creating a stream group or adding
 	// a location.
+	//
+	// Deprecated: This input field is deprecated in favor of explicit MaximumCapacity
+	// values.
 	OnDemandCapacity *int32
+
+	// This indicates idle capacity which the service pre-allocates and holds for you
+	// in anticipation of future activity. This helps to insulate your users from
+	// capacity-allocation delays. You pay for capacity which is held in this
+	// intentional idle state.
+	TargetIdleCapacity *int32
 
 	noSmithyDocumentSerde
 }
@@ -167,18 +185,18 @@ type LocationState struct {
 	// This value is the stream capacity that Amazon GameLift Streams has provisioned
 	// in a stream group that can respond immediately to stream requests. It includes
 	// resources that are currently streaming and resources that are idle and ready to
-	// respond to stream requests. You pay for this capacity whether it's in use or
-	// not. After making changes to capacity, it can take a few minutes for the
-	// allocated capacity count to reflect the change while compute resources are
-	// allocated or deallocated. Similarly, when allocated on-demand capacity is no
-	// longer needed, it can take a few minutes for Amazon GameLift Streams to spin
-	// down the allocated capacity.
+	// respond to stream requests. When target-idle capacity is configured, the idle
+	// resources include the capacity buffer maintained beyond ongoing sessions. You
+	// pay for this capacity whether it's in use or not. After making changes to
+	// capacity, it can take a few minutes for the allocated capacity count to reflect
+	// the change while compute resources are allocated or deallocated. Similarly, when
+	// allocated on-demand capacity is no longer needed, it can take a few minutes for
+	// Amazon GameLift Streams to spin down the allocated capacity.
 	AllocatedCapacity *int32
 
-	// The streaming capacity that is allocated and ready to handle stream requests
-	// without delay. You pay for this capacity whether it's in use or not. Best for
-	// quickest time from streaming request to streaming session. Default is 1 (2 for
-	// high stream classes) when creating a stream group or adding a location.
+	// This setting, if non-zero, indicates minimum streaming capacity which is
+	// allocated to you and is never released back to the service. You pay for this
+	// base level of capacity at all times, whether used or idle.
 	AlwaysOnCapacity *int32
 
 	// This value is the amount of allocated capacity that is not currently streaming.
@@ -192,6 +210,12 @@ type LocationState struct {
 	//
 	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	LocationName *string
+
+	// This indicates the maximum capacity that the service can allocate for you.
+	// Newly created streams may take a few minutes to start. Capacity is released back
+	// to the service when idle. You pay for capacity that is allocated to you until it
+	// is released.
+	MaximumCapacity *int32
 
 	// The streaming capacity that Amazon GameLift Streams can allocate in response to
 	// stream requests, and then de-allocate when the session has terminated. This
@@ -227,6 +251,23 @@ type LocationState struct {
 	//   - REMOVING : Amazon GameLift Streams is working to remove this location. This
 	//   will release all provisioned capacity for this location in this stream group.
 	Status StreamGroupLocationStatus
+
+	// This indicates idle capacity which the service pre-allocates and holds for you
+	// in anticipation of future activity. This helps to insulate your users from
+	// capacity-allocation delays. You pay for capacity which is held in this
+	// intentional idle state.
+	TargetIdleCapacity *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for sharing the stream session's performance stats with
+// the client
+type PerformanceStatsConfiguration struct {
+
+	// Performance stats for the session are streamed to the client when set to true .
+	// Defaults to false .
+	SharedWithClient *bool
 
 	noSmithyDocumentSerde
 }
@@ -352,10 +393,94 @@ type StreamGroupSummary struct {
 	//
 	// A stream class can be one of the following:
 	//
+	//   - gen6n_pro_win2022 (NVIDIA, pro) Supports applications with extremely high 3D
+	//   scene complexity which require maximum resources. Runs applications on Microsoft
+	//   Windows Server 2022 Base and supports DirectX 12. Compatible with Unreal Engine
+	//   versions up through 5.6, 32 and 64-bit applications, and anti-cheat technology.
+	//   Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6n_pro (NVIDIA, pro) Supports applications with extremely high 3D scene
+	//   complexity which require maximum resources. Uses dedicated NVIDIA L4 Tensor Core
+	//   GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6n_ultra_win2022 (NVIDIA, ultra) Supports applications with high 3D scene
+	//   complexity. Runs applications on Microsoft Windows Server 2022 Base and supports
+	//   DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32 and 64-bit
+	//   applications, and anti-cheat technology. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6n_ultra (NVIDIA, ultra) Supports applications with high 3D scene
+	//   complexity. Uses dedicated NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6n_high (NVIDIA, high) Supports applications with moderate to high 3D
+	//   scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 4 vCPUs, 16 GB RAM, 12 GB VRAM
+	//
+	//   - Tenancy: Supports up to 2 concurrent stream sessions
+	//
+	//   - gen6n_medium (NVIDIA, medium) Supports applications with moderate 3D scene
+	//   complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 2 vCPUs, 8 GB RAM, 6 GB VRAM
+	//
+	//   - Tenancy: Supports up to 4 concurrent stream sessions
+	//
+	//   - gen6n_small (NVIDIA, small) Supports applications with lightweight 3D scene
+	//   complexity and low CPU usage. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 1 vCPUs, 4 GB RAM, 2 GB VRAM
+	//
+	//   - Tenancy: Supports up to 12 concurrent stream sessions
+	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
-	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA A10G Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA A10G Tensor Core
+	//   GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -366,7 +491,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen5n_high (NVIDIA, high) Supports applications with moderate to high 3D
-	//   scene complexity. Uses NVIDIA A10G Tensor GPU.
+	//   scene complexity. Uses NVIDIA A10G Tensor Core GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -377,7 +502,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports up to 2 concurrent stream sessions
 	//
 	//   - gen5n_ultra (NVIDIA, ultra) Supports applications with extremely high 3D
-	//   scene complexity. Uses dedicated NVIDIA A10G Tensor GPU.
+	//   scene complexity. Uses dedicated NVIDIA A10G Tensor Core GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -389,8 +514,9 @@ type StreamGroupSummary struct {
 	//
 	//   - gen4n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
-	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.4, 32
-	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor GPU.
+	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32
+	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor Core
+	//   GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -401,7 +527,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen4n_high (NVIDIA, high) Supports applications with moderate to high 3D
-	//   scene complexity. Uses NVIDIA T4 Tensor GPU.
+	//   scene complexity. Uses NVIDIA T4 Tensor Core GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -412,7 +538,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports up to 2 concurrent stream sessions
 	//
 	//   - gen4n_ultra (NVIDIA, ultra) Supports applications with high 3D scene
-	//   complexity. Uses dedicated NVIDIA T4 Tensor GPU.
+	//   complexity. Uses dedicated NVIDIA T4 Tensor Core GPU.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -497,6 +623,51 @@ type StreamSessionSummary struct {
 	//
 	//   - TERMINATED : The stream session has ended.
 	Status StreamSessionStatus
+
+	// A short description of the reason the stream session is in ERROR status or
+	// TERMINATED status.
+	//
+	// ERROR status reasons:
+	//
+	//   - applicationLogS3DestinationError : Could not write the application log to
+	//   the Amazon S3 bucket that is configured for the streaming application. Make sure
+	//   the bucket still exists.
+	//
+	//   - internalError : An internal service error occurred. Start a new stream
+	//   session to continue streaming.
+	//
+	//   - invalidSignalRequest : The WebRTC signal request that was sent is not valid.
+	//   When starting or reconnecting to a stream session, use generateSignalRequest
+	//   in the Amazon GameLift Streams Web SDK to generate a new signal request.
+	//
+	//   - placementTimeout : Amazon GameLift Streams could not find available stream
+	//   capacity to start a stream session. Increase the stream capacity in the stream
+	//   group or wait until capacity becomes available.
+	//
+	// TERMINATED status reasons:
+	//
+	//   - apiTerminated : The stream session was terminated by an API call to [TerminateStreamSession].
+	//
+	//   - applicationExit : The streaming application exited or crashed. The stream
+	//   session was terminated because the application is no longer running.
+	//
+	//   - connectionTimeout : The stream session was terminated because the client
+	//   failed to connect within the connection timeout period specified by
+	//   ConnectionTimeoutSeconds .
+	//
+	//   - idleTimeout : The stream session was terminated because it exceeded the idle
+	//   timeout period of 60 minutes with no user input activity.
+	//
+	//   - maxSessionLengthTimeout : The stream session was terminated because it
+	//   exceeded the maximum session length timeout period specified by
+	//   SessionLengthSeconds .
+	//
+	//   - reconnectionTimeout : The stream session was terminated because the client
+	//   failed to reconnect within the reconnection timeout period specified by
+	//   ConnectionTimeoutSeconds after losing connection.
+	//
+	// [TerminateStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_TerminateStreamSession.html
+	StatusReason StreamSessionStatusReason
 
 	//  An opaque, unique identifier for an end-user, defined by the developer.
 	UserId *string

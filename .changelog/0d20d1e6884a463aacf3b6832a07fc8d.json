@@ -1,0 +1,8 @@
+{
+    "id": "0d20d1e6-884a-463a-acf3-b6832a07fc8d",
+    "type": "feature",
+    "description": "Add support for dbiResourceId in finding.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

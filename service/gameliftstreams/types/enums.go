@@ -128,12 +128,19 @@ type StreamClass string
 
 // Enum values for StreamClass
 const (
-	StreamClassGen4nHigh    StreamClass = "gen4n_high"
-	StreamClassGen4nUltra   StreamClass = "gen4n_ultra"
-	StreamClassGen4nWin2022 StreamClass = "gen4n_win2022"
-	StreamClassGen5nHigh    StreamClass = "gen5n_high"
-	StreamClassGen5nUltra   StreamClass = "gen5n_ultra"
-	StreamClassGen5nWin2022 StreamClass = "gen5n_win2022"
+	StreamClassGen4nHigh         StreamClass = "gen4n_high"
+	StreamClassGen4nUltra        StreamClass = "gen4n_ultra"
+	StreamClassGen4nWin2022      StreamClass = "gen4n_win2022"
+	StreamClassGen5nHigh         StreamClass = "gen5n_high"
+	StreamClassGen5nUltra        StreamClass = "gen5n_ultra"
+	StreamClassGen5nWin2022      StreamClass = "gen5n_win2022"
+	StreamClassGen6nSmall        StreamClass = "gen6n_small"
+	StreamClassGen6nMedium       StreamClass = "gen6n_medium"
+	StreamClassGen6nHigh         StreamClass = "gen6n_high"
+	StreamClassGen6nUltra        StreamClass = "gen6n_ultra"
+	StreamClassGen6nUltraWin2022 StreamClass = "gen6n_ultra_win2022"
+	StreamClassGen6nPro          StreamClass = "gen6n_pro"
+	StreamClassGen6nProWin2022   StreamClass = "gen6n_pro_win2022"
 )
 
 // Values returns all known values for StreamClass. Note that this can be expanded
@@ -148,6 +155,13 @@ func (StreamClass) Values() []StreamClass {
 		"gen5n_high",
 		"gen5n_ultra",
 		"gen5n_win2022",
+		"gen6n_small",
+		"gen6n_medium",
+		"gen6n_high",
+		"gen6n_ultra",
+		"gen6n_ultra_win2022",
+		"gen6n_pro",
+		"gen6n_pro_win2022",
 	}
 }
 

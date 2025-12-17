@@ -1659,6 +1659,23 @@ func awsAwsjson10_serializeDocumentDiffieHellmanDerivationData(v types.DiffieHel
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentExportAs2805KeyCryptogram(v *types.ExportAs2805KeyCryptogram, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.As2805KeyVariant) > 0 {
+		ok := object.Key("As2805KeyVariant")
+		ok.String(string(v.As2805KeyVariant))
+	}
+
+	if v.WrappingKeyIdentifier != nil {
+		ok := object.Key("WrappingKeyIdentifier")
+		ok.String(*v.WrappingKeyIdentifier)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentExportAttributes(v *types.ExportAttributes, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1768,6 +1785,12 @@ func awsAwsjson10_serializeDocumentExportKeyMaterial(v types.ExportKeyMaterial, 
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ExportKeyMaterialMemberAs2805KeyCryptogram:
+		av := object.Key("As2805KeyCryptogram")
+		if err := awsAwsjson10_serializeDocumentExportAs2805KeyCryptogram(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
 		av := object.Key("DiffieHellmanTr31KeyBlock")
 		if err := awsAwsjson10_serializeDocumentExportDiffieHellmanTr31KeyBlock(&uv.Value, av); err != nil {
@@ -1867,6 +1890,45 @@ func awsAwsjson10_serializeDocumentExportTr34KeyBlock(v *types.ExportTr34KeyBloc
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentImportAs2805KeyCryptogram(v *types.ImportAs2805KeyCryptogram, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.As2805KeyVariant) > 0 {
+		ok := object.Key("As2805KeyVariant")
+		ok.String(string(v.As2805KeyVariant))
+	}
+
+	if v.Exportable != nil {
+		ok := object.Key("Exportable")
+		ok.Boolean(*v.Exportable)
+	}
+
+	if len(v.KeyAlgorithm) > 0 {
+		ok := object.Key("KeyAlgorithm")
+		ok.String(string(v.KeyAlgorithm))
+	}
+
+	if v.KeyModesOfUse != nil {
+		ok := object.Key("KeyModesOfUse")
+		if err := awsAwsjson10_serializeDocumentKeyModesOfUse(v.KeyModesOfUse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WrappedKeyCryptogram != nil {
+		ok := object.Key("WrappedKeyCryptogram")
+		ok.String(*v.WrappedKeyCryptogram)
+	}
+
+	if v.WrappingKeyIdentifier != nil {
+		ok := object.Key("WrappingKeyIdentifier")
+		ok.String(*v.WrappingKeyIdentifier)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentImportDiffieHellmanTr31KeyBlock(v *types.ImportDiffieHellmanTr31KeyBlock, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1955,6 +2017,12 @@ func awsAwsjson10_serializeDocumentImportKeyMaterial(v types.ImportKeyMaterial, 
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ImportKeyMaterialMemberAs2805KeyCryptogram:
+		av := object.Key("As2805KeyCryptogram")
+		if err := awsAwsjson10_serializeDocumentImportAs2805KeyCryptogram(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock:
 		av := object.Key("DiffieHellmanTr31KeyBlock")
 		if err := awsAwsjson10_serializeDocumentImportDiffieHellmanTr31KeyBlock(&uv.Value, av); err != nil {

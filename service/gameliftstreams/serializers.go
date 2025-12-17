@@ -1690,6 +1690,13 @@ func awsRestjson1_serializeOpDocumentStartStreamSessionInput(v *StartStreamSessi
 		}
 	}
 
+	if v.PerformanceStatsConfiguration != nil {
+		ok := object.Key("PerformanceStatsConfiguration")
+		if err := awsRestjson1_serializeDocumentPerformanceStatsConfiguration(v.PerformanceStatsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Protocol) > 0 {
 		ok := object.Key("Protocol")
 		ok.String(string(v.Protocol))
@@ -2236,9 +2243,19 @@ func awsRestjson1_serializeDocumentLocationConfiguration(v *types.LocationConfig
 		ok.String(*v.LocationName)
 	}
 
+	if v.MaximumCapacity != nil {
+		ok := object.Key("MaximumCapacity")
+		ok.Integer(*v.MaximumCapacity)
+	}
+
 	if v.OnDemandCapacity != nil {
 		ok := object.Key("OnDemandCapacity")
 		ok.Integer(*v.OnDemandCapacity)
+	}
+
+	if v.TargetIdleCapacity != nil {
+		ok := object.Key("TargetIdleCapacity")
+		ok.Integer(*v.TargetIdleCapacity)
 	}
 
 	return nil
@@ -2265,6 +2282,18 @@ func awsRestjson1_serializeDocumentLocationList(v []string, value smithyjson.Val
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPerformanceStatsConfiguration(v *types.PerformanceStatsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SharedWithClient != nil {
+		ok := object.Key("SharedWithClient")
+		ok.Boolean(*v.SharedWithClient)
+	}
+
 	return nil
 }
 

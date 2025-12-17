@@ -26,8 +26,9 @@ type OutputFormat string
 
 // Enum values for OutputFormat
 const (
-	OutputFormatCycloneDx15 OutputFormat = "CYCLONE_DX_1_5"
-	OutputFormatInspector   OutputFormat = "INSPECTOR"
+	OutputFormatCycloneDx15  OutputFormat = "CYCLONE_DX_1_5"
+	OutputFormatInspector    OutputFormat = "INSPECTOR"
+	OutputFormatInspectorAlt OutputFormat = "INSPECTOR_ALT"
 )
 
 // Values returns all known values for OutputFormat. Note that this can be
@@ -38,6 +39,7 @@ func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"CYCLONE_DX_1_5",
 		"INSPECTOR",
+		"INSPECTOR_ALT",
 	}
 }
 

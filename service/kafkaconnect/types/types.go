@@ -257,6 +257,10 @@ type ConnectorSummary struct {
 	// The settings for delivering connector logs to Amazon CloudWatch Logs.
 	LogDelivery *LogDeliveryDescription
 
+	// The network type of the connector. It gives connectors connectivity to either
+	// IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to IPV4.
+	NetworkType NetworkType
+
 	// Specifies which plugins were used for this connector.
 	Plugins []PluginDescription
 

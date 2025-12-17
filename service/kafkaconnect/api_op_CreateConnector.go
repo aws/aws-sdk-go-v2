@@ -91,6 +91,10 @@ type CreateConnectorInput struct {
 	// Details about log delivery.
 	LogDelivery *types.LogDelivery
 
+	// The network type of the connector. It gives connectors connectivity to either
+	// IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to IPV4.
+	NetworkType types.NetworkType
+
 	// The tags you want to attach to the connector.
 	Tags map[string]string
 

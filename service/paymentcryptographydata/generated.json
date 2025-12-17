@@ -10,6 +10,7 @@
         "api_client_test.go",
         "api_op_DecryptData.go",
         "api_op_EncryptData.go",
+        "api_op_GenerateAs2805KekValidation.go",
         "api_op_GenerateCardValidationData.go",
         "api_op_GenerateMac.go",
         "api_op_GenerateMacEmvPinChange.go",

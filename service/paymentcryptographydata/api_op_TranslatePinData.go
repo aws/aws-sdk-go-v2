@@ -120,6 +120,10 @@ type TranslatePinDataInput struct {
 	// This member is required.
 	OutgoingTranslationAttributes types.TranslationIsoFormats
 
+	// The attributes and values to use for incoming AS2805 encryption key for PIN
+	// block translation.
+	IncomingAs2805Attributes *types.As2805PekDerivationAttributes
+
 	// The attributes and values to use for incoming DUKPT encryption key for PIN
 	// block translation.
 	IncomingDukptAttributes *types.DukptDerivationAttributes

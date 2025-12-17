@@ -1538,6 +1538,7 @@ const (
 	CaptionSourceTypeNullSource CaptionSourceType = "NULL_SOURCE"
 	CaptionSourceTypeImsc       CaptionSourceType = "IMSC"
 	CaptionSourceTypeWebvtt     CaptionSourceType = "WEBVTT"
+	CaptionSourceTypeTt3gpp     CaptionSourceType = "TT_3GPP"
 )
 
 // Values returns all known values for CaptionSourceType. Note that this can be
@@ -1560,6 +1561,7 @@ func (CaptionSourceType) Values() []CaptionSourceType {
 		"NULL_SOURCE",
 		"IMSC",
 		"WEBVTT",
+		"TT_3GPP",
 	}
 }
 
@@ -4887,6 +4889,44 @@ func (H265InterlaceMode) Values() []H265InterlaceMode {
 	}
 }
 
+type H265MvOverPictureBoundaries string
+
+// Enum values for H265MvOverPictureBoundaries
+const (
+	H265MvOverPictureBoundariesEnabled  H265MvOverPictureBoundaries = "ENABLED"
+	H265MvOverPictureBoundariesDisabled H265MvOverPictureBoundaries = "DISABLED"
+)
+
+// Values returns all known values for H265MvOverPictureBoundaries. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265MvOverPictureBoundaries) Values() []H265MvOverPictureBoundaries {
+	return []H265MvOverPictureBoundaries{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type H265MvTemporalPredictor string
+
+// Enum values for H265MvTemporalPredictor
+const (
+	H265MvTemporalPredictorEnabled  H265MvTemporalPredictor = "ENABLED"
+	H265MvTemporalPredictorDisabled H265MvTemporalPredictor = "DISABLED"
+)
+
+// Values returns all known values for H265MvTemporalPredictor. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265MvTemporalPredictor) Values() []H265MvTemporalPredictor {
+	return []H265MvTemporalPredictor{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type H265ParControl string
 
 // Enum values for H265ParControl
@@ -5109,6 +5149,25 @@ func (H265TemporalIds) Values() []H265TemporalIds {
 	}
 }
 
+type H265TilePadding string
+
+// Enum values for H265TilePadding
+const (
+	H265TilePaddingNone   H265TilePadding = "NONE"
+	H265TilePaddingPadded H265TilePadding = "PADDED"
+)
+
+// Values returns all known values for H265TilePadding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265TilePadding) Values() []H265TilePadding {
+	return []H265TilePadding{
+		"NONE",
+		"PADDED",
+	}
+}
+
 type H265Tiles string
 
 // Enum values for H265Tiles
@@ -5125,6 +5184,25 @@ func (H265Tiles) Values() []H265Tiles {
 	return []H265Tiles{
 		"DISABLED",
 		"ENABLED",
+	}
+}
+
+type H265TreeBlockSize string
+
+// Enum values for H265TreeBlockSize
+const (
+	H265TreeBlockSizeAuto          H265TreeBlockSize = "AUTO"
+	H265TreeBlockSizeTreeSize32x32 H265TreeBlockSize = "TREE_SIZE_32X32"
+)
+
+// Values returns all known values for H265TreeBlockSize. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265TreeBlockSize) Values() []H265TreeBlockSize {
+	return []H265TreeBlockSize{
+		"AUTO",
+		"TREE_SIZE_32X32",
 	}
 }
 

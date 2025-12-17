@@ -244,6 +244,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "cloudhsmv2.ap-southeast-3.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-5",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -252,6 +255,9 @@ var defaultPartitions = endpoints.Partitions{
 			}: {
 				Hostname: "cloudhsmv2.ca-central-1.api.aws",
 			},
+			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
@@ -345,6 +351,9 @@ var defaultPartitions = endpoints.Partitions{
 			}: {
 				Hostname: "cloudhsmv2.me-south-1.api.aws",
 			},
+			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},

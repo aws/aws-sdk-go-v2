@@ -3912,6 +3912,11 @@ func awsRestjson1_serializeDocumentSpekeKeyProvider(v *types.SpekeKeyProvider, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.CertificateArn != nil {
+		ok := object.Key("CertificateArn")
+		ok.String(*v.CertificateArn)
+	}
+
 	if v.DrmSystems != nil {
 		ok := object.Key("DrmSystems")
 		if err := awsRestjson1_serializeDocumentDrmSystems(v.DrmSystems, ok); err != nil {

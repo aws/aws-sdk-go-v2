@@ -3340,6 +3340,10 @@ type RdsDbInstanceDetails struct {
 	// finding.
 	DbInstanceIdentifier *string
 
+	// The unique ID of the database resource involved in the activity that prompted
+	// GuardDuty to generate the finding.
+	DbiResourceId *string
+
 	// The database engine of the database instance involved in the finding.
 	Engine *string
 

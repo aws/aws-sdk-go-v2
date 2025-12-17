@@ -211,6 +211,7 @@ const (
 	MacAlgorithmHmacSha256        MacAlgorithm = "HMAC_SHA256"
 	MacAlgorithmHmacSha384        MacAlgorithm = "HMAC_SHA384"
 	MacAlgorithmHmacSha512        MacAlgorithm = "HMAC_SHA512"
+	MacAlgorithmAs280541          MacAlgorithm = "AS2805_4_1"
 )
 
 // Values returns all known values for MacAlgorithm. Note that this can be
@@ -227,6 +228,7 @@ func (MacAlgorithm) Values() []MacAlgorithm {
 		"HMAC_SHA256",
 		"HMAC_SHA384",
 		"HMAC_SHA512",
+		"AS2805_4_1",
 	}
 }
 
@@ -352,6 +354,25 @@ func (PinBlockPaddingType) Values() []PinBlockPaddingType {
 	return []PinBlockPaddingType{
 		"NO_PADDING",
 		"ISO_IEC_7816_4",
+	}
+}
+
+type RandomKeySendVariantMask string
+
+// Enum values for RandomKeySendVariantMask
+const (
+	RandomKeySendVariantMaskVariantMask82c0 RandomKeySendVariantMask = "VARIANT_MASK_82C0"
+	RandomKeySendVariantMaskVariantMask82   RandomKeySendVariantMask = "VARIANT_MASK_82"
+)
+
+// Values returns all known values for RandomKeySendVariantMask. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RandomKeySendVariantMask) Values() []RandomKeySendVariantMask {
+	return []RandomKeySendVariantMask{
+		"VARIANT_MASK_82C0",
+		"VARIANT_MASK_82",
 	}
 }
 
