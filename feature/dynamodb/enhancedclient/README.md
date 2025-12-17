@@ -77,7 +77,9 @@ The `Table[T]` type provides a set of strongly-typed methods for common item-lev
 - `DeleteItem(ctx, item, ...) error`: Delete an item by providing the struct value.
 - `DeleteItemByKey(ctx, key, ...) error`: Delete an item by its key.
 - `Scan(ctx, expr, ...) iter.Seq[ItemResult[T]]`: Scan the table with a filter expression, returning an iterator over results.
+- `ScanIndex(ctx, indexName, expr, ...) iter.Seq[ItemResult[T]]`: Scan the index with a filter expression, returning an iterator over results.
 - `Query(ctx, expr, ...) iter.Seq[ItemResult[T]]`: Query the table or an index using a key condition expression, returning an iterator over results.
+- `QueryIndex(ctx, indexName, expr, ...) iter.Seq[ItemResult[T]]`: Query the index or an index using a key condition expression, returning an iterator over results.
 
 **Batch operations:**
 

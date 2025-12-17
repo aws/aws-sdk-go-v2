@@ -167,56 +167,133 @@ func TestTableE2E(t *testing.T) {
 		t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
 	}
 
-	// Scan()
-	scanExpr := expression.Expression{}
-	items := tbl.Scan(context.Background(), scanExpr)
-	scannedItems := 0
-	for res := range items {
-		if res.Error() != nil {
-			t.Errorf("Error during Scan(): %v", res.Error())
-		}
-		item := res.Item()
-		t.Logf("Scan: %s - %d", item.OrderID, item.CreatedAt)
-		t.Logf("\tVersion: %d - %s", item.Version, item.VersionString)
-		t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
-
-		scannedItems++
-	}
-	if scannedItems != itemsToManage {
-		t.Errorf("Scanned %d item(s), expected %d", scannedItems, itemsToManage)
-	}
-
-	// Query()
-	queriedItems := 0
-	for i := range itemsToManage {
-		queryExprBuilder := expression.NewBuilder()
-		queryExprBuilder = queryExprBuilder.WithKeyCondition(
-			expression.Key("order_id").Equal(expression.Value(orderIds[i])).And(
-				expression.Key("created_at").Equal(expression.Value(createdAts[i])),
-			),
-		)
-		queryExpr, err := queryExprBuilder.Build()
-		if err != nil {
-			t.Errorf("Unable to build query: %v", err)
-
-			return
-		}
-
-		items = tbl.Query(context.Background(), queryExpr)
+	{
+		t.Log("Scan()")
+		scanExpr := expression.Expression{}
+		items := tbl.Scan(context.Background(), scanExpr)
+		scannedItems := 0
 		for res := range items {
 			if res.Error() != nil {
 				t.Errorf("Error during Scan(): %v", res.Error())
 			}
 			item := res.Item()
-			t.Logf("Query: %s - %d", item.OrderID, item.CreatedAt)
+			t.Logf("Scan: %s - %d", item.OrderID, item.CreatedAt)
 			t.Logf("\tVersion: %d - %s", item.Version, item.VersionString)
 			t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
 
-			queriedItems++
+			scannedItems++
+		}
+		if scannedItems != itemsToManage {
+			t.Errorf("Scanned %d item(s), expected %d", scannedItems, itemsToManage)
 		}
 	}
-	if queriedItems != itemsToManage {
-		t.Errorf("Queried %d item(s), expected %d", queriedItems, itemsToManage)
+
+	{
+		t.Log("ScanIndex()")
+		scanExpr := expression.Expression{}
+		items := tbl.ScanIndex(context.Background(), "CustomerIndex", scanExpr)
+		scannedItems := 0
+		for res := range items {
+			if res.Error() != nil {
+				t.Errorf("Error during ScanIndex(): %v", res.Error())
+
+				continue
+			}
+
+			item := res.Item()
+			if item != nil {
+				t.Logf("Scan: %s - %d", item.OrderID, item.CreatedAt)
+				t.Logf("\tVersion: %d - %s", item.Version, item.VersionString)
+				t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
+			} else {
+				t.Log("no error and item was nil :(")
+			}
+
+			scannedItems++
+		}
+		if scannedItems != itemsToManage {
+			t.Errorf("Scanned %d item(s), expected %d", scannedItems, itemsToManage)
+		}
+	}
+
+	knowVersions := map[string]int64{}
+	{
+		t.Log("Query()")
+		queriedItems := 0
+		for i := range itemsToManage {
+			queryExprBuilder := expression.NewBuilder()
+			queryExprBuilder = queryExprBuilder.WithKeyCondition(
+				expression.Key("order_id").Equal(expression.Value(orderIds[i])).And(
+					expression.Key("created_at").Equal(expression.Value(createdAts[i])),
+				),
+			)
+			queryExpr, err := queryExprBuilder.Build()
+			if err != nil {
+				t.Errorf("Unable to build query: %v", err)
+
+				return
+			}
+
+			items := tbl.Query(context.Background(), queryExpr)
+			for res := range items {
+				if res.Error() != nil {
+					t.Errorf("Error during Query(): %v", res.Error())
+
+					continue
+				}
+
+				item := res.Item()
+				t.Logf("Query: %s - %d", item.OrderID, item.CreatedAt)
+				t.Logf("\tVersion: %d - %s", item.Version, item.VersionString)
+				t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
+
+				knowVersions[item.OrderID] = item.Version
+
+				queriedItems++
+			}
+		}
+		if queriedItems != itemsToManage {
+			t.Errorf("Queried %d item(s), expected %d", queriedItems, itemsToManage)
+		}
+	}
+
+	{
+		t.Log("QueryIndex()")
+		queriedItems := 0
+		for orderId, version := range knowVersions {
+			queryExprBuilder := expression.NewBuilder()
+			queryExprBuilder = queryExprBuilder.WithKeyCondition(
+				expression.Key("order_id").Equal(expression.Value(orderId)).And(
+					expression.Key("version").Equal(expression.Value(version)),
+				),
+			)
+			queryExpr, err := queryExprBuilder.Build()
+			if err != nil {
+				t.Errorf("Unable to build query: %v", err)
+
+				return
+			}
+
+			items := tbl.QueryIndex(context.Background(), "OrderVersionIndex", queryExpr)
+			for res := range items {
+				if res.Error() != nil {
+					t.Errorf("Error during QueryIndex(): %v", res.Error())
+
+					continue
+				}
+
+				item := res.Item()
+				t.Logf("Query: %s - %d", item.OrderID, item.CreatedAt)
+				t.Logf("\tVersion: %d - %s", item.Version, item.VersionString)
+				t.Logf("\tCounter (Up/Down): %d/%d", item.CounterUp, item.CounterDown)
+
+				queriedItems++
+			}
+		}
+
+		if queriedItems != itemsToManage {
+			t.Errorf("Queried %d item(s), expected %d", queriedItems, itemsToManage)
+		}
 	}
 
 	// batch
