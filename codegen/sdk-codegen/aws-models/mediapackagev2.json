@@ -1620,7 +1620,8 @@
                                             "CLEAR_KEY_AES_128"
                                         ],
                                         "RoleArn": "arn:aws:iam::123456789012:role/empRole",
-                                        "Url": "https://foo.com"
+                                        "Url": "https://foo.com",
+                                        "CertificateArn": "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
                                     }
                                 }
                             },
@@ -1715,7 +1716,8 @@
                                             "CLEAR_KEY_AES_128"
                                         ],
                                         "RoleArn": "arn:aws:iam::123456789012:role/empRole",
-                                        "Url": "https://foo.com"
+                                        "Url": "https://foo.com",
+                                        "CertificateArn": "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
                                     }
                                 }
                             },
@@ -1813,7 +1815,8 @@
                                             "WIDEVINE"
                                         ],
                                         "RoleArn": "arn:aws:iam::123456789012:role/empRole",
-                                        "Url": "https://foo.com"
+                                        "Url": "https://foo.com",
+                                        "CertificateArn": "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
                                     }
                                 }
                             },
@@ -2013,7 +2016,8 @@
                                             "WIDEVINE"
                                         ],
                                         "RoleArn": "arn:aws:iam::123456789012:role/empRole",
-                                        "Url": "https://foo.com"
+                                        "Url": "https://foo.com",
+                                        "CertificateArn": "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
                                     }
                                 }
                             },
@@ -4698,7 +4702,8 @@
                                             "CLEAR_KEY_AES_128"
                                         ],
                                         "RoleArn": "arn:aws:iam::123456789012:role/empRole",
-                                        "Url": "https://foo.com"
+                                        "Url": "https://foo.com",
+                                        "CertificateArn": "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
                                     }
                                 }
                             },
@@ -7720,6 +7725,17 @@
                         },
                         "smithy.api#required": {}
                     }
+                },
+                "CertificateArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the certificate that you imported to AWS Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>",
+                        "smithy.api#length": {
+                            "min": 20,
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^arn:([^:\\n]+):acm:([^:\\n]+):([0-9]+):certificate/[a-zA-Z0-9-_]+$"
+                    }
                 }
             },
             "traits": {
@@ -8371,7 +8387,8 @@
                                             "CLEAR_KEY_AES_128"
                                         ],
                                         "RoleArn": "arn:aws:iam::123456789012:role/empRole",
-                                        "Url": "https://foo.com"
+                                        "Url": "https://foo.com",
+                                        "CertificateArn": "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
                                     }
                                 }
                             },
@@ -8461,7 +8478,8 @@
                                             "CLEAR_KEY_AES_128"
                                         ],
                                         "RoleArn": "arn:aws:iam::123456789012:role/empRole",
-                                        "Url": "https://foo.com"
+                                        "Url": "https://foo.com",
+                                        "CertificateArn": "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
                                     }
                                 }
                             },
@@ -9413,6 +9431,60 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "INVALID_SECRET"
+                    }
+                },
+                "RESOURCE_NOT_IN_SAME_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_NOT_IN_SAME_REGION"
+                    }
+                },
+                "CERTIFICATE_RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CERTIFICATE_RESOURCE_NOT_FOUND"
+                    }
+                },
+                "CERTIFICATE_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CERTIFICATE_ACCESS_DENIED"
+                    }
+                },
+                "DESCRIBE_CERTIFICATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCRIBE_CERTIFICATE_FAILED"
+                    }
+                },
+                "INVALID_CERTIFICATE_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_CERTIFICATE_STATUS"
+                    }
+                },
+                "INVALID_CERTIFICATE_KEY_ALGORITHM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_CERTIFICATE_KEY_ALGORITHM"
+                    }
+                },
+                "INVALID_CERTIFICATE_SIGNATURE_ALGORITHM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_CERTIFICATE_SIGNATURE_ALGORITHM"
+                    }
+                },
+                "MISSING_CERTIFICATE_DOMAIN_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_CERTIFICATE_DOMAIN_NAME"
+                    }
+                },
+                "INVALID_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ARN"
                     }
                 }
             }

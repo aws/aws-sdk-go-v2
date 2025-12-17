@@ -165,6 +165,35 @@
                 "target": "com.amazonaws.paymentcryptography#Alias"
             }
         },
+        "com.amazonaws.paymentcryptography#As2805KeyVariant": {
+            "type": "enum",
+            "members": {
+                "TERMINAL_MAJOR_KEY_VARIANT_00": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINAL_MAJOR_KEY_VARIANT_00"
+                    }
+                },
+                "PIN_ENCRYPTION_KEY_VARIANT_28": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PIN_ENCRYPTION_KEY_VARIANT_28"
+                    }
+                },
+                "MESSAGE_AUTHENTICATION_KEY_VARIANT_24": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MESSAGE_AUTHENTICATION_KEY_VARIANT_24"
+                    }
+                },
+                "DATA_ENCRYPTION_KEY_VARIANT_22": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_ENCRYPTION_KEY_VARIANT_22"
+                    }
+                }
+            }
+        },
         "com.amazonaws.paymentcryptography#CertificateSigningRequestType": {
             "type": "string",
             "traits": {
@@ -227,7 +256,7 @@
                 "Country": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The city you provide to create the certificate signing request.</p>",
+                        "smithy.api#documentation": "<p>The country you provide to create the certificate signing request.</p>",
                         "smithy.api#length": {
                             "min": 2,
                             "max": 2
@@ -480,7 +509,7 @@
                 "ReplicationRegions": {
                     "target": "com.amazonaws.paymentcryptography#Regions",
                     "traits": {
-                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "aws.cloudformation#cfnMutability": "write",
                         "smithy.api#suppress": [
                             "UnstableTrait"
                         ]
@@ -893,6 +922,27 @@
                 "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$"
             }
         },
+        "com.amazonaws.paymentcryptography#ExportAs2805KeyCryptogram": {
+            "type": "structure",
+            "members": {
+                "WrappingKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "As2805KeyVariant": {
+                    "target": "com.amazonaws.paymentcryptography#As2805KeyVariant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cryptographic usage of the key under export.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for key material export using AS2805 key cryptogram format.</p>"
+            }
+        },
         "com.amazonaws.paymentcryptography#ExportAttributes": {
             "type": "structure",
             "members": {
@@ -1105,6 +1155,12 @@
                     "target": "com.amazonaws.paymentcryptography#ExportDiffieHellmanTr31KeyBlock",
                     "traits": {
                         "smithy.api#documentation": "<p>Key derivation parameter information for key material export using asymmetric ECDH key exchange method.</p>"
+                    }
+                },
+                "As2805KeyCryptogram": {
+                    "target": "com.amazonaws.paymentcryptography#ExportAs2805KeyCryptogram",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for key material export using AS2805 key cryptogram format.</p>"
                     }
                 }
             },
@@ -1776,6 +1832,54 @@
                 "smithy.api#pattern": "^[0-9A-F]{20}$|^[0-9A-F]{24}$"
             }
         },
+        "com.amazonaws.paymentcryptography#ImportAs2805KeyCryptogram": {
+            "type": "structure",
+            "members": {
+                "As2805KeyVariant": {
+                    "target": "com.amazonaws.paymentcryptography#As2805KeyVariant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cryptographic usage of the key under import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyModesOfUse": {
+                    "target": "com.amazonaws.paymentcryptography#KeyModesOfUse",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key algorithm of the key under import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Exportable": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specified whether the key is exportable. This data is immutable after the key is imported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WrappingKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "WrappedKeyCryptogram": {
+                    "target": "com.amazonaws.paymentcryptography#WrappedKeyCryptogram",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The wrapped key cryptogram under import.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for key material import using AS2805 key cryptogram format.</p>"
+            }
+        },
         "com.amazonaws.paymentcryptography#ImportDiffieHellmanTr31KeyBlock": {
             "type": "structure",
             "members": {
@@ -1993,6 +2097,12 @@
                     "target": "com.amazonaws.paymentcryptography#ImportDiffieHellmanTr31KeyBlock",
                     "traits": {
                         "smithy.api#documentation": "<p>Key derivation parameter information for key material import using asymmetric ECDH key exchange method.</p>"
+                    }
+                },
+                "As2805KeyCryptogram": {
+                    "target": "com.amazonaws.paymentcryptography#ImportAs2805KeyCryptogram",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for key material import using AS2805 key cryptogram format.</p>"
                     }
                 }
             },
@@ -2276,7 +2386,7 @@
                 "ReplicationStatus": {
                     "target": "com.amazonaws.paymentcryptography#ReplicationStatus",
                     "traits": {
-                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "aws.cloudformation#cfnMutability": "read",
                         "smithy.api#documentation": "<p>Information about the replication status of the key across different Amazon Web Services Regions.</p> <p>This field provides details about the current state of key replication, including any status messages or operational information. It helps track the progress and health of key replication operations.</p>",
                         "smithy.api#suppress": [
                             "UnstableTrait"
@@ -2915,6 +3025,10 @@
                     {
                         "value": "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT",
                         "name": "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT"
+                    },
+                    {
+                        "value": "TR31_M0_ISO_16609_MAC_KEY",
+                        "name": "TR31_M0_ISO_16609_MAC_KEY"
                     },
                     {
                         "value": "TR31_M3_ISO_9797_3_MAC_KEY",

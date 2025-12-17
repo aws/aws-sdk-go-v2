@@ -1444,7 +1444,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Enable this setting on one audio selector to set it as the default for the job. The service uses this default for outputs where it can't find the specified input audio. If you don't set a default, those outputs have no audio."
+                "smithy.api#documentation": "Specify a fallback audio selector for this input. Use to ensure outputs have audio even when the audio selector you specify in your output is missing from the source. DEFAULT (Checked in the MediaConvert console): If your output settings specify an audio selector that does not exist in this input, MediaConvert uses this audio selector instead. This is useful when you have multiple inputs with a different number of audio tracks. NOT_DEFAULT (Unchecked in the MediaConvert console): MediaConvert will not fallback from any missing audio selector. Any output specifying a missing audio selector will be silent."
             }
         },
         "com.amazonaws.mediaconvert#AudioDescription": {
@@ -1831,7 +1831,7 @@
                 "DefaultSelection": {
                     "target": "com.amazonaws.mediaconvert#AudioDefaultSelection",
                     "traits": {
-                        "smithy.api#documentation": "Enable this setting on one audio selector to set it as the default for the job. The service uses this default for outputs where it can't find the specified input audio. If you don't set a default, those outputs have no audio.",
+                        "smithy.api#documentation": "Specify a fallback audio selector for this input. Use to ensure outputs have audio even when the audio selector you specify in your output is missing from the source. DEFAULT (Checked in the MediaConvert console): If your output settings specify an audio selector that does not exist in this input, MediaConvert uses this audio selector instead. This is useful when you have multiple inputs with a different number of audio tracks. NOT_DEFAULT (Unchecked in the MediaConvert console): MediaConvert will not fallback from any missing audio selector. Any output specifying a missing audio selector will be silent.",
                         "smithy.api#jsonName": "defaultSelection"
                     }
                 },
@@ -3882,6 +3882,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "WEBVTT"
+                    }
+                },
+                "TT_3GPP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TT_3GPP"
                     }
                 }
             },
@@ -12233,6 +12239,46 @@
                 "smithy.api#documentation": "Choose the scan line type for the output. Keep the default value, Progressive to create a progressive output, regardless of the scan type of your input. Use Top field first or Bottom field first to create an output that's interlaced with the same field polarity throughout. Use Follow, default top or Follow, default bottom to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose."
             }
         },
+        "com.amazonaws.mediaconvert#H265MvOverPictureBoundaries": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "If you are setting up the picture as a tile, you must set this to \"disabled\". In all other configurations, you typically enter \"enabled\"."
+            }
+        },
+        "com.amazonaws.mediaconvert#H265MvTemporalPredictor": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "If you are setting up the picture as a tile, you must set this to \"disabled\". In other configurations, you typically enter \"enabled\"."
+            }
+        },
         "com.amazonaws.mediaconvert#H265ParControl": {
             "type": "enum",
             "members": {
@@ -12577,6 +12623,20 @@
                         "smithy.api#jsonName": "minIInterval"
                     }
                 },
+                "MvOverPictureBoundaries": {
+                    "target": "com.amazonaws.mediaconvert#H265MvOverPictureBoundaries",
+                    "traits": {
+                        "smithy.api#documentation": "If you are setting up the picture as a tile, you must set this to \"disabled\". In all other configurations, you typically enter \"enabled\".",
+                        "smithy.api#jsonName": "mvOverPictureBoundaries"
+                    }
+                },
+                "MvTemporalPredictor": {
+                    "target": "com.amazonaws.mediaconvert#H265MvTemporalPredictor",
+                    "traits": {
+                        "smithy.api#documentation": "If you are setting up the picture as a tile, you must set this to \"disabled\". In other configurations, you typically enter \"enabled\".",
+                        "smithy.api#jsonName": "mvTemporalPredictor"
+                    }
+                },
                 "NumberBFramesBetweenReferenceFrames": {
                     "target": "com.amazonaws.mediaconvert#__integerMin0Max7",
                     "traits": {
@@ -12703,11 +12763,39 @@
                         "smithy.api#jsonName": "temporalIds"
                     }
                 },
+                "TileHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin64Max2160",
+                    "traits": {
+                        "smithy.api#documentation": "Set this field to set up the picture as a tile. You must also set TileWidth. The tile height must result in 22 or fewer rows in the frame. The tile width must result in 20 or fewer columns in the frame. And finally, the product of the column count and row count must be 64 or less. If the tile width and height are specified, MediaConvert will override the video codec slices field with a value that MediaConvert calculates.",
+                        "smithy.api#jsonName": "tileHeight"
+                    }
+                },
+                "TilePadding": {
+                    "target": "com.amazonaws.mediaconvert#H265TilePadding",
+                    "traits": {
+                        "smithy.api#documentation": "Set to \"padded\" to force MediaConvert to add padding to the frame, to obtain a frame that is a whole multiple of the tile size. If you are setting up the picture as a tile, you must enter \"padded\". In all other configurations, you typically enter \"none\".",
+                        "smithy.api#jsonName": "tilePadding"
+                    }
+                },
+                "TileWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin256Max3840",
+                    "traits": {
+                        "smithy.api#documentation": "Set this field to set up the picture as a tile. See TileHeight for more information.",
+                        "smithy.api#jsonName": "tileWidth"
+                    }
+                },
                 "Tiles": {
                     "target": "com.amazonaws.mediaconvert#H265Tiles",
                     "traits": {
                         "smithy.api#documentation": "Enable use of tiles, allowing horizontal as well as vertical subdivision of the encoded pictures.",
                         "smithy.api#jsonName": "tiles"
+                    }
+                },
+                "TreeBlockSize": {
+                    "target": "com.amazonaws.mediaconvert#H265TreeBlockSize",
+                    "traits": {
+                        "smithy.api#documentation": "Select the tree block size used for encoding. If you enter \"auto\", the encoder will pick the best size. If you are setting up the picture as a tile, you must set this to 32x32. In all other configurations, you typically enter \"auto\".",
+                        "smithy.api#jsonName": "treeBlockSize"
                     }
                 },
                 "UnregisteredSeiTimecode": {
@@ -12835,6 +12923,26 @@
                 "smithy.api#documentation": "Enables temporal layer identifiers in the encoded bitstream. Up to 3 layers are supported depending on GOP structure: I- and P-frames form one layer, reference B-frames can form a second layer and non-reference b-frames can form a third layer. Decoders can optionally decode only the lower temporal layers to generate a lower frame rate output. For example, given a bitstream with temporal IDs and with b-frames = 1 (i.e. IbPbPb display order), a decoder could decode all the frames for full frame rate output or only the I and P frames (lowest temporal layer) for a half frame rate output."
             }
         },
+        "com.amazonaws.mediaconvert#H265TilePadding": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "PADDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PADDED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Set to \"padded\" to force MediaConvert to add padding to the frame, to obtain a frame that is a whole multiple of the tile size. If you are setting up the picture as a tile, you must enter \"padded\". In all other configurations, you typically enter \"none\"."
+            }
+        },
         "com.amazonaws.mediaconvert#H265Tiles": {
             "type": "enum",
             "members": {
@@ -12853,6 +12961,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Enable use of tiles, allowing horizontal as well as vertical subdivision of the encoded pictures."
+            }
+        },
+        "com.amazonaws.mediaconvert#H265TreeBlockSize": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "TREE_SIZE_32X32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TREE_SIZE_32X32"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Select the tree block size used for encoding. If you enter \"auto\", the encoder will pick the best size. If you are setting up the picture as a tile, you must set this to 32x32. In all other configurations, you typically enter \"auto\"."
             }
         },
         "com.amazonaws.mediaconvert#H265UnregisteredSeiTimecode": {
@@ -14940,6 +15068,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specify the height, in pixels, for your video generator input. This is useful for positioning when you include one or more video overlays for this input. To use the default resolution 540x360: Leave both width and height blank. To specify a height: Enter an even integer from 32 to 8192. When you do, you must also specify a value for width.",
                         "smithy.api#jsonName": "height"
+                    }
+                },
+                "ImageInput": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the HTTP, HTTPS, or Amazon S3 location of the image that you want to overlay on the video. Use a PNG or TGA file.",
+                        "smithy.api#jsonName": "imageInput"
                     }
                 },
                 "SampleRate": {
@@ -26868,6 +27003,13 @@
         "com.amazonaws.mediaconvert#VideoOverlayInput": {
             "type": "structure",
             "members": {
+                "AudioSelectors": {
+                    "target": "com.amazonaws.mediaconvert#__mapOfAudioSelector",
+                    "traits": {
+                        "smithy.api#documentation": "Use Audio selectors to specify audio to use during your Video overlay. You can use multiple Audio selectors per Video overlay. When you include an Audio selector within a Video overlay, MediaConvert mutes any Audio selectors with the same name from the underlying input. For example, if your underlying input has Audio selector 1 and Audio selector 2, and your Video overlay only has Audio selector 1, then MediaConvert replaces all audio for Audio selector 1 during the Video overlay. To replace all audio for all Audio selectors from the underlying input by using a single Audio selector in your overlay, set DefaultSelection to DEFAULT (Check \\\"Use as default\\\" in the MediaConvert console).",
+                        "smithy.api#jsonName": "audioSelectors"
+                    }
+                },
                 "FileInput": {
                     "target": "com.amazonaws.mediaconvert#__stringPatternS3Https",
                     "traits": {
@@ -29494,6 +29636,15 @@
                 }
             }
         },
+        "com.amazonaws.mediaconvert#__integerMin256Max3840": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 256,
+                    "max": 3840
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#__integerMin25Max10000": {
             "type": "integer",
             "traits": {
@@ -29635,6 +29786,15 @@
                 "smithy.api#range": {
                     "min": 64000,
                     "max": 640000
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#__integerMin64Max2160": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 64,
+                    "max": 2160
                 }
             }
         },

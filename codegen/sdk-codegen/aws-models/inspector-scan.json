@@ -12,7 +12,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.\n  </p>",
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -685,7 +685,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure.\n   \n  </p>",
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
@@ -722,6 +722,12 @@
                     "traits": {
                         "smithy.api#enumValue": "INSPECTOR"
                     }
+                },
+                "INSPECTOR_ALT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSPECTOR_ALT"
+                    }
                 }
             }
         },
@@ -751,7 +757,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Scans a provided CycloneDX 1.5 SBOM and reports on any vulnerabilities discovered in that SBOM. You can generate compatible SBOMs for your resources using the <a href=\"\">Amazon Inspector SBOM generator</a>.</p>",
+                "smithy.api#documentation": "<p>Scans a provided CycloneDX 1.5 SBOM and reports on any vulnerabilities discovered in that SBOM. You can generate compatible SBOMs for your resources using the <a href=\"https://docs.aws.amazon.com/inspector/latest/user/sbom-generator.html\">Amazon Inspector SBOM generator</a>.</p> <note> <p> The output of this action reports NVD and CVSS scores when NVD and CVSS scores are available. Because the output reports both scores, you might notice a discrepency between them. However, you can triage the severity of either score depending on the vendor of your choosing. </p> </note>",
                 "smithy.api#examples": [
                     {
                         "title": "Sample ScanSbom Call",
@@ -934,7 +940,7 @@
                 "sbom": {
                     "target": "com.amazonaws.inspectorscan#Sbom",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON file for the SBOM you want to scan. The SBOM must be in CycloneDX 1.5 format.</p>",
+                        "smithy.api#documentation": "<p>The JSON file for the SBOM you want to scan. The SBOM must be in CycloneDX 1.5 format. This format limits you to passing 2000 components before throwing a <code>ValidException</code> error.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -981,7 +987,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request was denied due to request throttling.\n   \n  </p>",
+                "smithy.api#documentation": "<p>The request was denied due to request throttling. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {
@@ -1024,20 +1030,20 @@
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the validation exception.\n   \n  </p>",
+                        "smithy.api#documentation": "<p>The name of the validation exception. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The validation exception message.\n  </p>",
+                        "smithy.api#documentation": "<p>The validation exception message. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request has failed validation due to missing required fields or having invalid inputs.\n   </p>"
+                "smithy.api#documentation": "<p>The request has failed validation due to missing required fields or having invalid inputs. </p>"
             }
         },
         "com.amazonaws.inspectorscan#ValidationExceptionFields": {

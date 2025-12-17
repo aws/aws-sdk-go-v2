@@ -15295,6 +15295,13 @@
                         "smithy.api#jsonName": "dbInstanceArn"
                     }
                 },
+                "DbiResourceId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the database resource involved in the activity that prompted GuardDuty\n      to generate the finding.</p>",
+                        "smithy.api#jsonName": "dbiResourceId"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.guardduty#Tags",
                     "traits": {
