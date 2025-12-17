@@ -174,14 +174,15 @@ func (t *Table[T]) DeleteItemByKey(ctx context.Context, m Map, optFns ...func(*d
 	return err
 }
 
-func (t *Table[T]) Scan(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
 	return func(yield func(ItemResult[T]) bool) {
 		var lastEvaluatedKey map[string]types.AttributeValue
 
 		for {
 			scanInput := &dynamodb.ScanInput{
 				TableName:                 t.options.Schema.TableName(),
-				ConsistentRead:            aws.Bool(true),
+				IndexName:                 indexName,
+				ConsistentRead:            aws.Bool(indexName == nil),
 				ExclusiveStartKey:         lastEvaluatedKey,
 				Select:                    types.SelectAllAttributes,
 				FilterExpression:          expr.Filter(),
@@ -230,14 +231,23 @@ func (t *Table[T]) Scan(ctx context.Context, expr expression.Expression, optFns 
 	}
 }
 
-func (t *Table[T]) Query(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+func (t *Table[T]) ScanIndex(ctx context.Context, indexName string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+	return t.createScanIterator(ctx, &indexName, expr, optFns...)
+}
+
+func (t *Table[T]) Scan(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+	return t.createScanIterator(ctx, nil, expr, optFns...)
+}
+
+func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
 	return func(yield func(ItemResult[T]) bool) {
 		var lastEvaluatedKey map[string]types.AttributeValue
 
 		for {
 			res, err := t.client.Query(ctx, &dynamodb.QueryInput{
 				TableName:                 t.options.Schema.TableName(),
-				ConsistentRead:            aws.Bool(true),
+				IndexName:                 indexName,
+				ConsistentRead:            aws.Bool(indexName == nil),
 				ExclusiveStartKey:         lastEvaluatedKey,
 				KeyConditionExpression:    expr.KeyCondition(),
 				ExpressionAttributeNames:  expr.Names(),
@@ -285,10 +295,18 @@ func (t *Table[T]) Query(ctx context.Context, expr expression.Expression, optFns
 	}
 }
 
+func (t *Table[T]) QueryIndex(ctx context.Context, indexName string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+	return t.createQueryIterator(ctx, &indexName, expr, optFns...)
+}
+
+func (t *Table[T]) Query(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+	return t.createQueryIterator(ctx, nil, expr, optFns...)
+}
+
 func (t *Table[T]) CreateBatchWriteOperation() *BatchWriteOperation[T] {
-	return NewBatchWriteOperation[T](t)
+	return NewBatchWriteOperation(t)
 }
 
 func (t *Table[T]) CreateBatchGetOperation() *BatchGetOperation[T] {
-	return NewBatchGetOperation[T](t)
+	return NewBatchGetOperation(t)
 }
