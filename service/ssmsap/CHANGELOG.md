@@ -1,3 +1,7 @@
+# v1.26.0 (2025-12-18)
+
+* **Feature**: Added "Stopping" for the HANA Database Status.
+
 # v1.25.15 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

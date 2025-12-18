@@ -1,3 +1,7 @@
+# v1.15.0 (2025-12-18)
+
+* **Feature**: Add support for ListReportVersions API  for the calling AWS account.
+
 # v1.14.7 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

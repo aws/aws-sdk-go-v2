@@ -1,8 +1,0 @@
-{
-    "id": "cd188e93-1ffa-4e15-94db-9c6650248ba4",
-    "type": "feature",
-    "description": "Adds support for ECR Create On Push",
-    "modules": [
-        "service/ecr"
-    ]
-}

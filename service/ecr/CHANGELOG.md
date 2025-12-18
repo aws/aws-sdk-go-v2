@@ -1,3 +1,7 @@
+# v1.55.0 (2025-12-18)
+
+* **Feature**: Adds support for ECR Create On Push
+
 # v1.54.4 (2025-12-09)
 
 * No change notes available for this release.

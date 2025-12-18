@@ -1,3 +1,33 @@
+# Release (2025-12-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.53.0](service/appstream/CHANGELOG.md#v1530-2025-12-18)
+  * **Feature**: Added support for new operating systems (1) Ubuntu 24.04 Pro LTS on Elastic fleets, and (2) Microsoft Server 2025 on Always-On and On-Demand fleets
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.3.0](service/arcregionswitch/CHANGELOG.md#v130-2025-12-18)
+  * **Feature**: New API to list Route 53 health checks created by ARC region switch for a plan in a specific AWS Region using the Region switch Regional data plane.
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.15.0](service/artifact/CHANGELOG.md#v1150-2025-12-18)
+  * **Feature**: Add support for ListReportVersions API  for the calling AWS account.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.16.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1160-2025-12-18)
+  * **Feature**: Feature to support header exchanges between Bedrock AgentCore Gateway Targets and client, along with propagating query parameter to the configured targets.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.13.0](service/bedrockdataautomation/CHANGELOG.md#v1130-2025-12-18)
+  * **Feature**: Blueprint Optimization (BPO) is a new Amazon Bedrock Data Automation (BDA) capability that improves blueprint inference accuracy using example content assets and ground truth data. BPO works by generating better instructions for fields in the Blueprint using provided data.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.39.0](service/cleanrooms/CHANGELOG.md#v1390-2025-12-18)
+  * **Feature**: Adding support for collaboration change requests requiring an approval workflow. Adding support for change requests that grant or revoke results receiver ability and modifying auto approved change types in an existing collaboration.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.278.0](service/ec2/CHANGELOG.md#v12780-2025-12-18)
+  * **Feature**: This release adds AvailabilityZoneId support for CreateFleet, ModifyFleet, DescribeFleets, RequestSpotFleet, ModifySpotFleetRequests and DescribeSpotFleetRequests APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.55.0](service/ecr/CHANGELOG.md#v1550-2025-12-18)
+  * **Feature**: Adds support for ECR Create On Push
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.70.0](service/ecs/CHANGELOG.md#v1700-2025-12-18)
+  * **Feature**: Adding support for Event Windows via a new ECS account setting "fargateEventWindows". When enabled, ECS Fargate will use the configured event window for patching tasks. Introducing "CapacityOptionType" for CreateCapacityProvider API, allowing support for Spot capacity for ECS Managed Instances.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.71.0](service/iot/CHANGELOG.md#v1710-2025-12-18)
+  * **Feature**: This release adds message batching for the IoT Rules Engine HTTP action.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.57.0](service/opensearch/CHANGELOG.md#v1570-2025-12-18)
+  * **Feature**: Amazon OpenSearch Service adds support for warm nodes, enabling new multi-tier architecture.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.59.0](service/sesv2/CHANGELOG.md#v1590-2025-12-18)
+  * **Feature**: Amazon SES introduces Email Validation feature which checks email addresses for syntax errors, domain validity, and risky addresses to help maintain deliverability and protect sender reputation. SES also adds resource tagging and ABAC support for EmailTemplates and CustomVerificationEmailTemplates.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.26.0](service/ssmsap/CHANGELOG.md#v1260-2025-12-18)
+  * **Feature**: Added "Stopping" for the HANA Database Status.
+
 # Release (2025-12-17)
 
 ## Module Highlights

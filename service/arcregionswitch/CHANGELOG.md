@@ -1,3 +1,7 @@
+# v1.3.0 (2025-12-18)
+
+* **Feature**: New API to list Route 53 health checks created by ARC region switch for a plan in a specific AWS Region using the Region switch Regional data plane.
+
 # v1.2.18 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

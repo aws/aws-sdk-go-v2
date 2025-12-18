@@ -1,3 +1,7 @@
+# v1.16.0 (2025-12-18)
+
+* **Feature**: Feature to support header exchanges between Bedrock AgentCore Gateway Targets and client, along with propagating query parameter to the configured targets.
+
 # v1.15.2 (2025-12-15)
 
 * **Documentation**: This release updates broken links for AgentCore Policy APIs in the AWS CLI and SDK resources.

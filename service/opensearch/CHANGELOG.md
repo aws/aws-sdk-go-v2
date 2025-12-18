@@ -1,3 +1,7 @@
+# v1.57.0 (2025-12-18)
+
+* **Feature**: Amazon OpenSearch Service adds support for warm nodes, enabling new multi-tier architecture.
+
 # v1.56.0 (2025-12-10)
 
 * **Feature**: The CreateApplication API now supports an optional kms key arn parameter to allow customers to specify a CMK for application encryption.

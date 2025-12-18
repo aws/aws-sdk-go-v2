@@ -1,8 +1,0 @@
-{
-    "id": "93146490-0101-42cf-b4e7-7356dc54fd71",
-    "type": "feature",
-    "description": "Amazon SES introduces Email Validation feature which checks email addresses for syntax errors, domain validity, and risky addresses to help maintain deliverability and protect sender reputation. SES also adds resource tagging and ABAC support for EmailTemplates and CustomVerificationEmailTemplates.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

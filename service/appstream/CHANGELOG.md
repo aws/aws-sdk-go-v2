@@ -1,3 +1,7 @@
+# v1.53.0 (2025-12-18)
+
+* **Feature**: Added support for new operating systems (1) Ubuntu 24.04 Pro LTS on Elastic fleets, and (2) Microsoft Server 2025 on Always-On and On-Demand fleets
+
 # v1.52.5 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

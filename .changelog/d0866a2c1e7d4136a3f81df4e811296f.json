@@ -1,8 +1,0 @@
-{
-    "id": "d0866a2c-1e7d-4136-a3f8-1df4e811296f",
-    "type": "feature",
-    "description": "Feature to support header exchanges between Bedrock AgentCore Gateway Targets and client, along with propagating query parameter to the configured targets.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.39.0 (2025-12-18)
+
+* **Feature**: Adding support for collaboration change requests requiring an approval workflow. Adding support for change requests that grant or revoke results receiver ability and modifying auto approved change types in an existing collaboration.
+
 # v1.38.2 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

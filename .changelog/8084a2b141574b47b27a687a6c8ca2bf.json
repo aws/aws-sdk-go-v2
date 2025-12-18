@@ -1,8 +1,0 @@
-{
-    "id": "8084a2b1-4157-4b47-b27a-687a6c8ca2bf",
-    "type": "feature",
-    "description": "New API to list Route 53 health checks created by ARC region switch for a plan in a specific AWS Region using the Region switch Regional data plane.",
-    "modules": [
-        "service/arcregionswitch"
-    ]
-}

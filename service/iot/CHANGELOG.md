@@ -1,3 +1,7 @@
+# v1.71.0 (2025-12-18)
+
+* **Feature**: This release adds message batching for the IoT Rules Engine HTTP action.
+
 # v1.70.0 (2025-12-16)
 
 * **Feature**: Add support for dynamic payloads in IoT Device Management Commands
