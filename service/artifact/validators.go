@@ -69,6 +69,26 @@ func (m *validateOpGetTermForReport) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListReportVersions struct {
+}
+
+func (*validateOpListReportVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListReportVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListReportVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListReportVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpGetReportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetReport{}, middleware.After)
 }
@@ -79,6 +99,10 @@ func addOpGetReportMetadataValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTermForReportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTermForReport{}, middleware.After)
+}
+
+func addOpListReportVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListReportVersions{}, middleware.After)
 }
 
 func validateOpGetReportInput(v *GetReportInput) error {
@@ -119,6 +143,21 @@ func validateOpGetTermForReportInput(v *GetTermForReportInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTermForReportInput"}
+	if v.ReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListReportVersionsInput(v *ListReportVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListReportVersionsInput"}
 	if v.ReportId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportId"))
 	}

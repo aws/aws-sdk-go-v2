@@ -170,14 +170,6 @@ type UpdateFleetInput struct {
 	//
 	//   - stream.memory.z1d.12xlarge
 	//
-	//   - stream.graphics-design.large
-	//
-	//   - stream.graphics-design.xlarge
-	//
-	//   - stream.graphics-design.2xlarge
-	//
-	//   - stream.graphics-design.4xlarge
-	//
 	//   - stream.graphics.g4dn.xlarge
 	//
 	//   - stream.graphics.g4dn.2xlarge
@@ -264,8 +256,8 @@ type UpdateFleetInput struct {
 	// A unique name for the fleet.
 	Name *string
 
-	// The platform of the fleet. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported
-	// for Elastic fleets.
+	// The platform of the fleet. WINDOWS_SERVER_2019, AMAZON_LINUX2 and
+	// UBUNTU_PRO_2404 are supported for Elastic fleets.
 	Platform types.PlatformType
 
 	// The updated configuration for the root volume of fleet instances. Note that

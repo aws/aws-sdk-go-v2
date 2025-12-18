@@ -306,6 +306,7 @@ const (
 	DatabaseStatusWarning  DatabaseStatus = "WARNING"
 	DatabaseStatusUnknown  DatabaseStatus = "UNKNOWN"
 	DatabaseStatusError    DatabaseStatus = "ERROR"
+	DatabaseStatusStopping DatabaseStatus = "STOPPING"
 )
 
 // Values returns all known values for DatabaseStatus. Note that this can be
@@ -320,6 +321,7 @@ func (DatabaseStatus) Values() []DatabaseStatus {
 		"WARNING",
 		"UNKNOWN",
 		"ERROR",
+		"STOPPING",
 	}
 }
 

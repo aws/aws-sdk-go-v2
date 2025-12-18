@@ -970,6 +970,13 @@ func awsRestjson1_serializeOpDocumentCreateGatewayTargetInput(v *CreateGatewayTa
 		ok.String(*v.Description)
 	}
 
+	if v.MetadataConfiguration != nil {
+		ok := object.Key("metadataConfiguration")
+		if err := awsRestjson1_serializeDocumentMetadataConfiguration(v.MetadataConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -6744,6 +6751,13 @@ func awsRestjson1_serializeOpDocumentUpdateGatewayTargetInput(v *UpdateGatewayTa
 		ok.String(*v.Description)
 	}
 
+	if v.MetadataConfiguration != nil {
+		ok := object.Key("metadataConfiguration")
+		if err := awsRestjson1_serializeDocumentMetadataConfiguration(v.MetadataConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -7446,6 +7460,39 @@ func awsRestjson1_serializeDocumentAllowedAudienceList(v []string, value smithyj
 }
 
 func awsRestjson1_serializeDocumentAllowedClientsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAllowedQueryParameters(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAllowedRequestHeaders(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAllowedResponseHeaders(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -9111,6 +9158,34 @@ func awsRestjson1_serializeDocumentMessageBasedTriggerInput(v *types.MessageBase
 	if v.MessageCount != nil {
 		ok := object.Key("messageCount")
 		ok.Integer(*v.MessageCount)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetadataConfiguration(v *types.MetadataConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedQueryParameters != nil {
+		ok := object.Key("allowedQueryParameters")
+		if err := awsRestjson1_serializeDocumentAllowedQueryParameters(v.AllowedQueryParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedRequestHeaders != nil {
+		ok := object.Key("allowedRequestHeaders")
+		if err := awsRestjson1_serializeDocumentAllowedRequestHeaders(v.AllowedRequestHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedResponseHeaders != nil {
+		ok := object.Key("allowedResponseHeaders")
+		if err := awsRestjson1_serializeDocumentAllowedResponseHeaders(v.AllowedResponseHeaders, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

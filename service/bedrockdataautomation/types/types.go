@@ -145,6 +145,12 @@ type Blueprint struct {
 	// KMS Key Identifier
 	KmsKeyId *string
 
+	// List of Blueprint Optimization Samples
+	OptimizationSamples []BlueprintOptimizationSample
+
+	// Time Stamp
+	OptimizationTime *time.Time
+
 	noSmithyDocumentSerde
 }
 
@@ -178,6 +184,47 @@ type BlueprintItem struct {
 
 	// Blueprint Version
 	BlueprintVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Structure for single blueprint entity.
+type BlueprintOptimizationObject struct {
+
+	// Arn of blueprint.
+	//
+	// This member is required.
+	BlueprintArn *string
+
+	// Stage of blueprint.
+	Stage BlueprintStage
+
+	noSmithyDocumentSerde
+}
+
+// Blueprint Optimization Output configuration.
+type BlueprintOptimizationOutputConfiguration struct {
+
+	// S3 object.
+	//
+	// This member is required.
+	S3Object *S3Object
+
+	noSmithyDocumentSerde
+}
+
+// Blueprint Recommendation Sample
+type BlueprintOptimizationSample struct {
+
+	// S3 Object of the asset
+	//
+	// This member is required.
+	AssetS3Object *S3Object
+
+	// Ground truth for the Blueprint and Asset combination
+	//
+	// This member is required.
+	GroundTruthS3Object *S3Object
 
 	noSmithyDocumentSerde
 }
@@ -586,6 +633,20 @@ type PIIEntitiesConfiguration struct {
 
 	// Mode for redacting detected PII
 	RedactionMaskMode PIIRedactionMaskMode
+
+	noSmithyDocumentSerde
+}
+
+// S3 object
+type S3Object struct {
+
+	// S3 uri.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// S3 object version.
+	Version *string
 
 	noSmithyDocumentSerde
 }

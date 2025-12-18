@@ -84,6 +84,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateAnalysisTemplate.go",
         "api_op_UpdateCollaboration.go",
+        "api_op_UpdateCollaborationChangeRequest.go",
         "api_op_UpdateConfiguredAudienceModelAssociation.go",
         "api_op_UpdateConfiguredTable.go",
         "api_op_UpdateConfiguredTableAnalysisRule.go",

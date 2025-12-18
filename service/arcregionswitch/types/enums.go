@@ -426,6 +426,27 @@ func (ResourceWarningStatus) Values() []ResourceWarningStatus {
 	}
 }
 
+type Route53HealthCheckStatus string
+
+// Enum values for Route53HealthCheckStatus
+const (
+	Route53HealthCheckStatusHealthy   Route53HealthCheckStatus = "healthy"
+	Route53HealthCheckStatusUnhealthy Route53HealthCheckStatus = "unhealthy"
+	Route53HealthCheckStatusUnknown   Route53HealthCheckStatus = "unknown"
+)
+
+// Values returns all known values for Route53HealthCheckStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Route53HealthCheckStatus) Values() []Route53HealthCheckStatus {
+	return []Route53HealthCheckStatus{
+		"healthy",
+		"unhealthy",
+		"unknown",
+	}
+}
+
 type RoutingControlStateChange string
 
 // Enum values for RoutingControlStateChange

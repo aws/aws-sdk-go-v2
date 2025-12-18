@@ -1450,6 +1450,26 @@ func (m *validateOpUpdateAnalysisTemplate) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCollaborationChangeRequest struct {
+}
+
+func (*validateOpUpdateCollaborationChangeRequest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCollaborationChangeRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCollaborationChangeRequestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCollaborationChangeRequestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCollaboration struct {
 }
 
@@ -1976,6 +1996,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAnalysisTemplate{}, middleware.After)
+}
+
+func addOpUpdateCollaborationChangeRequestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCollaborationChangeRequest{}, middleware.After)
 }
 
 func addOpUpdateCollaborationValidationMiddleware(stack *middleware.Stack) error {
@@ -5100,6 +5124,27 @@ func validateOpUpdateAnalysisTemplateInput(v *UpdateAnalysisTemplateInput) error
 	}
 	if v.AnalysisTemplateIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AnalysisTemplateIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCollaborationChangeRequestInput(v *UpdateCollaborationChangeRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCollaborationChangeRequestInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if v.ChangeRequestIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeRequestIdentifier"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

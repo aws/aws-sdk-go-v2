@@ -21,6 +21,7 @@
         "api_op_ListPlans.go",
         "api_op_ListPlansInRegion.go",
         "api_op_ListRoute53HealthChecks.go",
+        "api_op_ListRoute53HealthChecksInRegion.go",
         "api_op_ListTagsForResource.go",
         "api_op_StartPlanExecution.go",
         "api_op_TagResource.go",

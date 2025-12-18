@@ -48,6 +48,10 @@ type PutConfigurationSetSuppressionOptionsInput struct {
 	//   account when a message sent to that address results in a hard bounce.
 	SuppressedReasons []types.SuppressionListReason
 
+	// An object that contains information about the email address suppression
+	// preferences for the configuration set in the current Amazon Web Services Region.
+	ValidationOptions *types.SuppressionValidationOptions
+
 	noSmithyDocumentSerde
 }
 

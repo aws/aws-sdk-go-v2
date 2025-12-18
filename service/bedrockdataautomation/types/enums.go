@@ -65,6 +65,32 @@ func (AudioStandardGenerativeFieldType) Values() []AudioStandardGenerativeFieldT
 	}
 }
 
+type BlueprintOptimizationJobStatus string
+
+// Enum values for BlueprintOptimizationJobStatus
+const (
+	BlueprintOptimizationJobStatusCreated      BlueprintOptimizationJobStatus = "Created"
+	BlueprintOptimizationJobStatusInProgress   BlueprintOptimizationJobStatus = "InProgress"
+	BlueprintOptimizationJobStatusSuccess      BlueprintOptimizationJobStatus = "Success"
+	BlueprintOptimizationJobStatusServiceError BlueprintOptimizationJobStatus = "ServiceError"
+	BlueprintOptimizationJobStatusClientError  BlueprintOptimizationJobStatus = "ClientError"
+)
+
+// Values returns all known values for BlueprintOptimizationJobStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BlueprintOptimizationJobStatus) Values() []BlueprintOptimizationJobStatus {
+	return []BlueprintOptimizationJobStatus{
+		"Created",
+		"InProgress",
+		"Success",
+		"ServiceError",
+		"ClientError",
+	}
+}
+
 type BlueprintStage string
 
 // Enum values for BlueprintStage

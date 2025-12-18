@@ -246,11 +246,34 @@ func (AnalyticsEngine) Values() []AnalyticsEngine {
 	}
 }
 
+type ApprovalStatus string
+
+// Enum values for ApprovalStatus
+const (
+	ApprovalStatusApproved ApprovalStatus = "APPROVED"
+	ApprovalStatusDenied   ApprovalStatus = "DENIED"
+	ApprovalStatusPending  ApprovalStatus = "PENDING"
+)
+
+// Values returns all known values for ApprovalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApprovalStatus) Values() []ApprovalStatus {
+	return []ApprovalStatus{
+		"APPROVED",
+		"DENIED",
+		"PENDING",
+	}
+}
+
 type AutoApprovedChangeType string
 
 // Enum values for AutoApprovedChangeType
 const (
-	AutoApprovedChangeTypeAddMember AutoApprovedChangeType = "ADD_MEMBER"
+	AutoApprovedChangeTypeAddMember                   AutoApprovedChangeType = "ADD_MEMBER"
+	AutoApprovedChangeTypeGrantReceiveResultsAbility  AutoApprovedChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
+	AutoApprovedChangeTypeRevokeReceiveResultsAbility AutoApprovedChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
 )
 
 // Values returns all known values for AutoApprovedChangeType. Note that this can
@@ -260,6 +283,8 @@ const (
 func (AutoApprovedChangeType) Values() []AutoApprovedChangeType {
 	return []AutoApprovedChangeType{
 		"ADD_MEMBER",
+		"GRANT_RECEIVE_RESULTS_ABILITY",
+		"REVOKE_RECEIVE_RESULTS_ABILITY",
 	}
 }
 
@@ -279,6 +304,29 @@ func (AutoRefreshMode) Values() []AutoRefreshMode {
 	return []AutoRefreshMode{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type ChangeRequestAction string
+
+// Enum values for ChangeRequestAction
+const (
+	ChangeRequestActionApprove ChangeRequestAction = "APPROVE"
+	ChangeRequestActionDeny    ChangeRequestAction = "DENY"
+	ChangeRequestActionCancel  ChangeRequestAction = "CANCEL"
+	ChangeRequestActionCommit  ChangeRequestAction = "COMMIT"
+)
+
+// Values returns all known values for ChangeRequestAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeRequestAction) Values() []ChangeRequestAction {
+	return []ChangeRequestAction{
+		"APPROVE",
+		"DENY",
+		"CANCEL",
+		"COMMIT",
 	}
 }
 
@@ -311,7 +359,8 @@ type ChangeSpecificationType string
 
 // Enum values for ChangeSpecificationType
 const (
-	ChangeSpecificationTypeMember ChangeSpecificationType = "MEMBER"
+	ChangeSpecificationTypeMember        ChangeSpecificationType = "MEMBER"
+	ChangeSpecificationTypeCollaboration ChangeSpecificationType = "COLLABORATION"
 )
 
 // Values returns all known values for ChangeSpecificationType. Note that this can
@@ -321,6 +370,7 @@ const (
 func (ChangeSpecificationType) Values() []ChangeSpecificationType {
 	return []ChangeSpecificationType{
 		"MEMBER",
+		"COLLABORATION",
 	}
 }
 
@@ -328,7 +378,10 @@ type ChangeType string
 
 // Enum values for ChangeType
 const (
-	ChangeTypeAddMember ChangeType = "ADD_MEMBER"
+	ChangeTypeAddMember                   ChangeType = "ADD_MEMBER"
+	ChangeTypeGrantReceiveResultsAbility  ChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
+	ChangeTypeRevokeReceiveResultsAbility ChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
+	ChangeTypeEditAutoApprovedChangeTypes ChangeType = "EDIT_AUTO_APPROVED_CHANGE_TYPES"
 )
 
 // Values returns all known values for ChangeType. Note that this can be expanded
@@ -338,6 +391,9 @@ const (
 func (ChangeType) Values() []ChangeType {
 	return []ChangeType{
 		"ADD_MEMBER",
+		"GRANT_RECEIVE_RESULTS_ABILITY",
+		"REVOKE_RECEIVE_RESULTS_ABILITY",
+		"EDIT_AUTO_APPROVED_CHANGE_TYPES",
 	}
 }
 

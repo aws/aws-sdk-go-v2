@@ -24433,6 +24433,28 @@ func awsRestjson1_serializeDocumentAwsJsonSubstitutionCommandPreprocessorConfig(
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBatchConfig(v *types.BatchConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxBatchOpenMs != nil {
+		ok := object.Key("maxBatchOpenMs")
+		ok.Integer(*v.MaxBatchOpenMs)
+	}
+
+	if v.MaxBatchSize != nil {
+		ok := object.Key("maxBatchSize")
+		ok.Integer(*v.MaxBatchSize)
+	}
+
+	if v.MaxBatchSizeBytes != nil {
+		ok := object.Key("maxBatchSizeBytes")
+		ok.Integer(*v.MaxBatchSizeBytes)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBehavior(v *types.Behavior, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25442,9 +25464,21 @@ func awsRestjson1_serializeDocumentHttpAction(v *types.HttpAction, value smithyj
 		}
 	}
 
+	if v.BatchConfig != nil {
+		ok := object.Key("batchConfig")
+		if err := awsRestjson1_serializeDocumentBatchConfig(v.BatchConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ConfirmationUrl != nil {
 		ok := object.Key("confirmationUrl")
 		ok.String(*v.ConfirmationUrl)
+	}
+
+	if v.EnableBatching != nil {
+		ok := object.Key("enableBatching")
+		ok.Boolean(*v.EnableBatching)
 	}
 
 	if v.Headers != nil {

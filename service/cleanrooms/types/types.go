@@ -715,6 +715,19 @@ type AnalysisTemplateValidationStatusReason struct {
 	noSmithyDocumentSerde
 }
 
+// Contains detailed information about the approval state of a given member in the
+// collaboration for a given collaboration change request.
+type ApprovalStatusDetails struct {
+
+	// The approval status of a member's vote on the change request. Valid values are
+	// PENDING (if they haven't voted), APPROVED, or DENIED.
+	//
+	// This member is required.
+	Status ApprovalStatus
+
+	noSmithyDocumentSerde
+}
+
 // A reference to a table within Athena.
 type AthenaTableReference struct {
 
@@ -904,10 +917,21 @@ type ChangeInput struct {
 //
 // The following types satisfy this interface:
 //
+//	ChangeSpecificationMemberCollaboration
 //	ChangeSpecificationMemberMember
 type ChangeSpecification interface {
 	isChangeSpecification()
 }
+
+// The collaboration configuration changes being requested. Currently, this only
+// supports modifying which change types are auto-approved for the collaboration.
+type ChangeSpecificationMemberCollaboration struct {
+	Value CollaborationChangeSpecification
+
+	noSmithyDocumentSerde
+}
+
+func (*ChangeSpecificationMemberCollaboration) isChangeSpecification() {}
 
 // The member change specification when the change type is MEMBER .
 type ChangeSpecificationMemberMember struct {
@@ -1194,6 +1218,10 @@ type CollaborationChangeRequest struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	// A list of approval details from collaboration members, including approval
+	// status and multi-party approval workflow information.
+	Approvals map[string]ApprovalStatusDetails
+
 	noSmithyDocumentSerde
 }
 
@@ -1234,6 +1262,22 @@ type CollaborationChangeRequestSummary struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	// Summary of approval statuses from all collaboration members for this change
+	// request.
+	Approvals map[string]ApprovalStatusDetails
+
+	noSmithyDocumentSerde
+}
+
+// Defines the specific changes being requested for a collaboration, including
+// configuration modifications and approval requirements.
+type CollaborationChangeSpecification struct {
+
+	// Defines requested updates to properties of the collaboration. Currently, this
+	// only supports modifying which change types are auto-approved for the
+	// collaboration.
+	AutoApprovedChangeTypes []AutoApprovedChangeType
 
 	noSmithyDocumentSerde
 }

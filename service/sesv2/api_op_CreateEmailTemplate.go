@@ -50,6 +50,10 @@ type CreateEmailTemplateInput struct {
 	// This member is required.
 	TemplateName *string
 
+	// An array of objects that define the tags (keys and values) to associate with
+	// the email template.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

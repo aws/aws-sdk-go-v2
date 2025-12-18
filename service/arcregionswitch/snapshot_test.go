@@ -218,6 +218,18 @@ func TestCheckSnapshot_ListRoute53HealthChecks(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListRoute53HealthChecksInRegion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRoute53HealthChecksInRegion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRoute53HealthChecksInRegion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -450,6 +462,18 @@ func TestUpdateSnapshot_ListRoute53HealthChecks(t *testing.T) {
 	_, err := svc.ListRoute53HealthChecks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRoute53HealthChecks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRoute53HealthChecksInRegion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRoute53HealthChecksInRegion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRoute53HealthChecksInRegion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

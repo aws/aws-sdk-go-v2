@@ -53,6 +53,7 @@
         "api_op_GetDeliverabilityTestReport.go",
         "api_op_GetDomainDeliverabilityCampaign.go",
         "api_op_GetDomainStatisticsReport.go",
+        "api_op_GetEmailAddressInsights.go",
         "api_op_GetEmailIdentity.go",
         "api_op_GetEmailIdentityPolicies.go",
         "api_op_GetEmailTemplate.go",

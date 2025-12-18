@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CopyBlueprintStage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CopyBlueprintStage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CopyBlueprintStage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateBlueprint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBlueprint(context.Background(), nil, func(o *Options) {
@@ -134,11 +146,35 @@ func TestCheckSnapshot_GetBlueprint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetBlueprintOptimizationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBlueprintOptimizationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetBlueprintOptimizationStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataAutomationProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataAutomationProject(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDataAutomationProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_InvokeBlueprintOptimizationAsync(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeBlueprintOptimizationAsync(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeBlueprintOptimizationAsync")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -229,6 +265,18 @@ func TestCheckSnapshot_UpdateDataAutomationProject(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CopyBlueprintStage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CopyBlueprintStage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CopyBlueprintStage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateBlueprint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBlueprint(context.Background(), nil, func(o *Options) {
@@ -301,11 +349,35 @@ func TestUpdateSnapshot_GetBlueprint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetBlueprintOptimizationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBlueprintOptimizationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetBlueprintOptimizationStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDataAutomationProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataAutomationProject(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDataAutomationProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_InvokeBlueprintOptimizationAsync(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeBlueprintOptimizationAsync(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeBlueprintOptimizationAsync")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

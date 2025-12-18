@@ -1,0 +1,8 @@
+{
+    "id": "ffe88b9f-ff0e-429d-b963-d9ef96978193",
+    "type": "feature",
+    "description": "Adding support for Event Windows via a new ECS account setting \"fargateEventWindows\". When enabled, ECS Fargate will use the configured event window for patching tasks. Introducing \"CapacityOptionType\" for CreateCapacityProvider API, allowing support for Spot capacity for ECS Managed Instances.",
+    "modules": [
+        "service/ecs"
+    ]
+}

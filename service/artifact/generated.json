@@ -13,6 +13,7 @@
         "api_op_GetReportMetadata.go",
         "api_op_GetTermForReport.go",
         "api_op_ListCustomerAgreements.go",
+        "api_op_ListReportVersions.go",
         "api_op_ListReports.go",
         "api_op_PutAccountSettings.go",
         "auth.go",

@@ -1172,6 +1172,44 @@ type DomainIspPlacement struct {
 	noSmithyDocumentSerde
 }
 
+// Contains individual validation checks performed on an email address.
+type EmailAddressInsightsMailboxEvaluations struct {
+
+	// Checks that the domain exists, has valid DNS records, and is conﬁgured to
+	// receive email.
+	HasValidDnsRecords *EmailAddressInsightsVerdict
+
+	// Checks that the email address follows proper RFC standards and contains valid
+	// characters in the correct format.
+	HasValidSyntax *EmailAddressInsightsVerdict
+
+	// Checks disposable or temporary email addresses that could negatively impact
+	// your sender reputation.
+	IsDisposable *EmailAddressInsightsVerdict
+
+	// Checks if the input appears to be random text.
+	IsRandomInput *EmailAddressInsightsVerdict
+
+	// Identiﬁes role-based addresses (such as admin@, support@, or info@) that may
+	// have lower engagement rates.
+	IsRoleAddress *EmailAddressInsightsVerdict
+
+	// Checks that the mailbox exists and can receive messages without actually
+	// sending an email.
+	MailboxExists *EmailAddressInsightsVerdict
+
+	noSmithyDocumentSerde
+}
+
+// Contains the overall validation verdict for an email address.
+type EmailAddressInsightsVerdict struct {
+
+	// The confidence level of the validation verdict.
+	ConfidenceVerdict EmailAddressInsightsConfidenceVerdict
+
+	noSmithyDocumentSerde
+}
+
 // An object that defines the entire content of the email, including the message
 // headers, body content, and attachments. For a simple email message, you specify
 // the subject and provide both text and HTML versions of the message body. You can
@@ -1811,6 +1849,18 @@ type ListManagementOptions struct {
 
 	// The name of the topic.
 	TopicName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed validation information about an email address.
+type MailboxValidation struct {
+
+	// Specific validation checks performed on the email address.
+	Evaluations *EmailAddressInsightsMailboxEvaluations
+
+	// Overall validity assessment with a conﬁdence verdict.
+	IsValid *EmailAddressInsightsVerdict
 
 	noSmithyDocumentSerde
 }
@@ -2547,6 +2597,40 @@ type SuppressionAttributes struct {
 	//   account when a message sent to that address results in a hard bounce.
 	SuppressedReasons []SuppressionListReason
 
+	// Structure containing validation attributes used for suppressing sending to
+	// specific destination on account level.
+	ValidationAttributes *SuppressionValidationAttributes
+
+	noSmithyDocumentSerde
+}
+
+// Contains Auto Validation settings, allowing you to suppress sending to specific
+// destination(s) if they do not meet required threshold. For details on Auto
+// Validation, see [Auto Validation].
+//
+// [Auto Validation]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/email-validation.html
+type SuppressionConditionThreshold struct {
+
+	// Indicates whether Auto Validation is enabled for suppression. Set to ENABLED to
+	// enable the Auto Validation feature, or set to DISABLED to disable it.
+	//
+	// This member is required.
+	ConditionThresholdEnabled FeatureStatus
+
+	// The overall confidence threshold used to determine suppression decisions.
+	OverallConfidenceThreshold *SuppressionConfidenceThreshold
+
+	noSmithyDocumentSerde
+}
+
+// Contains the confidence threshold settings for Auto Validation.
+type SuppressionConfidenceThreshold struct {
+
+	// The confidence level threshold for suppression decisions.
+	//
+	// This member is required.
+	ConfidenceVerdictThreshold SuppressionConfidenceVerdictThreshold
+
 	noSmithyDocumentSerde
 }
 
@@ -2580,6 +2664,32 @@ type SuppressionOptions struct {
 	//   - BOUNCE – Amazon SES adds an email address to the suppression list for your
 	//   account when a message sent to that address results in a hard bounce.
 	SuppressedReasons []SuppressionListReason
+
+	// Contains validation options for email address suppression.
+	ValidationOptions *SuppressionValidationOptions
+
+	noSmithyDocumentSerde
+}
+
+// Structure containing validation attributes used for suppressing sending to
+// specific destination on account level.
+type SuppressionValidationAttributes struct {
+
+	// Specifies the condition threshold settings for account-level suppression.
+	//
+	// This member is required.
+	ConditionThreshold *SuppressionConditionThreshold
+
+	noSmithyDocumentSerde
+}
+
+// Contains validation options for email address suppression.
+type SuppressionValidationOptions struct {
+
+	// Specifies the condition threshold settings for suppression validation.
+	//
+	// This member is required.
+	ConditionThreshold *SuppressionConditionThreshold
 
 	noSmithyDocumentSerde
 }

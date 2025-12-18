@@ -682,9 +682,11 @@ const (
 	PlatformTypeWindowsServer2016 PlatformType = "WINDOWS_SERVER_2016"
 	PlatformTypeWindowsServer2019 PlatformType = "WINDOWS_SERVER_2019"
 	PlatformTypeWindowsServer2022 PlatformType = "WINDOWS_SERVER_2022"
+	PlatformTypeWindowsServer2025 PlatformType = "WINDOWS_SERVER_2025"
 	PlatformTypeAmazonLinux2      PlatformType = "AMAZON_LINUX2"
 	PlatformTypeRhel8             PlatformType = "RHEL8"
 	PlatformTypeRockyLinux8       PlatformType = "ROCKY_LINUX8"
+	PlatformTypeUbuntuPro2404     PlatformType = "UBUNTU_PRO_2404"
 )
 
 // Values returns all known values for PlatformType. Note that this can be
@@ -697,9 +699,11 @@ func (PlatformType) Values() []PlatformType {
 		"WINDOWS_SERVER_2016",
 		"WINDOWS_SERVER_2019",
 		"WINDOWS_SERVER_2022",
+		"WINDOWS_SERVER_2025",
 		"AMAZON_LINUX2",
 		"RHEL8",
 		"ROCKY_LINUX8",
+		"UBUNTU_PRO_2404",
 	}
 }
 

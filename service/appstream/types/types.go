@@ -726,14 +726,6 @@ type Fleet struct {
 	//
 	//   - stream.memory.z1d.12xlarge
 	//
-	//   - stream.graphics-design.large
-	//
-	//   - stream.graphics-design.xlarge
-	//
-	//   - stream.graphics-design.2xlarge
-	//
-	//   - stream.graphics-design.4xlarge
-	//
 	//   - stream.graphics.g4dn.xlarge
 	//
 	//   - stream.graphics.g4dn.2xlarge
@@ -1026,15 +1018,11 @@ type Image struct {
 	//
 	//   - Memory Optimized
 	//
-	//   - Graphics
-	//
-	//   - Graphics Design
-	//
-	//   - Graphics Pro
-	//
 	//   - Graphics G4
 	//
 	//   - Graphics G5
+	//
+	//   - Graphics G6
 	SupportedInstanceFamilies []string
 
 	// Indicates whether the image is public or private.
@@ -1138,14 +1126,6 @@ type ImageBuilder struct {
 	//   - stream.memory.z1d.6xlarge
 	//
 	//   - stream.memory.z1d.12xlarge
-	//
-	//   - stream.graphics-design.large
-	//
-	//   - stream.graphics-design.xlarge
-	//
-	//   - stream.graphics-design.2xlarge
-	//
-	//   - stream.graphics-design.4xlarge
 	//
 	//   - stream.graphics.g4dn.xlarge
 	//

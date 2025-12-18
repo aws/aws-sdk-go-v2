@@ -57,6 +57,10 @@ type UpdateGatewayTargetInput struct {
 	// The updated description for the gateway target.
 	Description *string
 
+	// Configuration for HTTP header and query parameter propagation to the gateway
+	// target.
+	MetadataConfiguration *types.MetadataConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -108,6 +112,9 @@ type UpdateGatewayTargetOutput struct {
 
 	// The date and time at which the targets were last synchronized.
 	LastSynchronizedAt *time.Time
+
+	// The metadata configuration that was applied to the gateway target.
+	MetadataConfiguration *types.MetadataConfiguration
 
 	// The reasons for the current status of the updated gateway target.
 	StatusReasons []string

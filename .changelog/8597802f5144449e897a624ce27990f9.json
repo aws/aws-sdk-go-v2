@@ -1,0 +1,8 @@
+{
+    "id": "8597802f-5144-449e-897a-624ce27990f9",
+    "type": "feature",
+    "description": "Amazon OpenSearch Service adds support for warm nodes, enabling new multi-tier architecture.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

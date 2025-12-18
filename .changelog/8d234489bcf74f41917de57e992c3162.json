@@ -1,0 +1,8 @@
+{
+    "id": "8d234489-bcf7-4f41-917d-e57e992c3162",
+    "type": "feature",
+    "description": "Added support for new operating systems (1) Ubuntu 24.04 Pro LTS on Elastic fleets, and (2) Microsoft Server 2025 on Always-On and On-Demand fleets",
+    "modules": [
+        "service/appstream"
+    ]
+}

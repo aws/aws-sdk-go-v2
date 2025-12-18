@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,6 +72,10 @@ type CreateCustomVerificationEmailTemplateInput struct {
 	//
 	// This member is required.
 	TemplateSubject *string
+
+	// An array of objects that define the tags (keys and values) to associate with
+	// the custom verification email template.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

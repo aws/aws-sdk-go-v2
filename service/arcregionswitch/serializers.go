@@ -665,6 +665,56 @@ func (m *smithyRpcv2cbor_serializeOpListRoute53HealthChecks) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 
+type smithyRpcv2cbor_serializeOpListRoute53HealthChecksInRegion struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpListRoute53HealthChecksInRegion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpListRoute53HealthChecksInRegion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	input, ok := in.Parameters.(*ListRoute53HealthChecksInRegionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/ArcRegionSwitch/operation/ListRoute53HealthChecksInRegion"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_ListRoute53HealthChecksInRegionInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	endTimer()
+	span.End()
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type smithyRpcv2cbor_serializeOpListTagsForResource struct {
 }
 
@@ -2562,6 +2612,46 @@ func serializeCBOR_ListPlansInRegionInput(v *ListPlansInRegionInput) (smithycbor
 }
 
 func serializeCBOR_ListRoute53HealthChecksInput(v *ListRoute53HealthChecksInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Arn != nil {
+		ser, err := serializeCBOR_String(*v.Arn)
+		if err != nil {
+			return nil, err
+		}
+		vm["arn"] = ser
+	}
+	if v.HostedZoneId != nil {
+		ser, err := serializeCBOR_String(*v.HostedZoneId)
+		if err != nil {
+			return nil, err
+		}
+		vm["hostedZoneId"] = ser
+	}
+	if v.RecordName != nil {
+		ser, err := serializeCBOR_String(*v.RecordName)
+		if err != nil {
+			return nil, err
+		}
+		vm["recordName"] = ser
+	}
+	if v.MaxResults != nil {
+		ser, err := serializeCBOR_Int32(*v.MaxResults)
+		if err != nil {
+			return nil, err
+		}
+		vm["maxResults"] = ser
+	}
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["nextToken"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ListRoute53HealthChecksInRegionInput(v *ListRoute53HealthChecksInRegionInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.Arn != nil {
 		ser, err := serializeCBOR_String(*v.Arn)

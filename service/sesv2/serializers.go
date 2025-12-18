@@ -707,6 +707,13 @@ func awsRestjson1_serializeOpDocumentCreateCustomVerificationEmailTemplateInput(
 		ok.String(*v.SuccessRedirectionURL)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TemplateContent != nil {
 		ok := object.Key("TemplateContent")
 		ok.String(*v.TemplateContent)
@@ -1193,6 +1200,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateEmailTemplateInput(v *CreateEmail
 func awsRestjson1_serializeOpDocumentCreateEmailTemplateInput(v *CreateEmailTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.TemplateContent != nil {
 		ok := object.Key("TemplateContent")
@@ -3613,6 +3627,87 @@ func awsRestjson1_serializeOpHttpBindingsGetDomainStatisticsReportInput(v *GetDo
 
 	if v.StartDate != nil {
 		encoder.SetQuery("StartDate").String(smithytime.FormatDateTime(*v.StartDate))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetEmailAddressInsights struct {
+}
+
+func (*awsRestjson1_serializeOpGetEmailAddressInsights) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetEmailAddressInsights) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetEmailAddressInsightsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/email-address-insights")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetEmailAddressInsightsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetEmailAddressInsightsInput(v *GetEmailAddressInsightsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetEmailAddressInsightsInput(v *GetEmailAddressInsightsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EmailAddress != nil {
+		ok := object.Key("EmailAddress")
+		ok.String(*v.EmailAddress)
 	}
 
 	return nil
@@ -6248,6 +6343,13 @@ func awsRestjson1_serializeOpDocumentPutAccountSuppressionAttributesInput(v *Put
 		}
 	}
 
+	if v.ValidationAttributes != nil {
+		ok := object.Key("ValidationAttributes")
+		if err := awsRestjson1_serializeDocumentSuppressionValidationAttributes(v.ValidationAttributes, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6809,6 +6911,13 @@ func awsRestjson1_serializeOpDocumentPutConfigurationSetSuppressionOptionsInput(
 	if v.SuppressedReasons != nil {
 		ok := object.Key("SuppressedReasons")
 		if err := awsRestjson1_serializeDocumentSuppressionListReasons(v.SuppressedReasons, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ValidationOptions != nil {
+		ok := object.Key("ValidationOptions")
+		if err := awsRestjson1_serializeDocumentSuppressionValidationOptions(v.ValidationOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -10676,6 +10785,37 @@ func awsRestjson1_serializeDocumentSnsDestination(v *types.SnsDestination, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSuppressionConditionThreshold(v *types.SuppressionConditionThreshold, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ConditionThresholdEnabled) > 0 {
+		ok := object.Key("ConditionThresholdEnabled")
+		ok.String(string(v.ConditionThresholdEnabled))
+	}
+
+	if v.OverallConfidenceThreshold != nil {
+		ok := object.Key("OverallConfidenceThreshold")
+		if err := awsRestjson1_serializeDocumentSuppressionConfidenceThreshold(v.OverallConfidenceThreshold, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSuppressionConfidenceThreshold(v *types.SuppressionConfidenceThreshold, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ConfidenceVerdictThreshold) > 0 {
+		ok := object.Key("ConfidenceVerdictThreshold")
+		ok.String(string(v.ConfidenceVerdictThreshold))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSuppressionListDestination(v *types.SuppressionListDestination, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10706,6 +10846,41 @@ func awsRestjson1_serializeDocumentSuppressionOptions(v *types.SuppressionOption
 	if v.SuppressedReasons != nil {
 		ok := object.Key("SuppressedReasons")
 		if err := awsRestjson1_serializeDocumentSuppressionListReasons(v.SuppressedReasons, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ValidationOptions != nil {
+		ok := object.Key("ValidationOptions")
+		if err := awsRestjson1_serializeDocumentSuppressionValidationOptions(v.ValidationOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSuppressionValidationAttributes(v *types.SuppressionValidationAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConditionThreshold != nil {
+		ok := object.Key("ConditionThreshold")
+		if err := awsRestjson1_serializeDocumentSuppressionConditionThreshold(v.ConditionThreshold, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSuppressionValidationOptions(v *types.SuppressionValidationOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConditionThreshold != nil {
+		ok := object.Key("ConditionThreshold")
+		if err := awsRestjson1_serializeDocumentSuppressionConditionThreshold(v.ConditionThreshold, ok); err != nil {
 			return err
 		}
 	}

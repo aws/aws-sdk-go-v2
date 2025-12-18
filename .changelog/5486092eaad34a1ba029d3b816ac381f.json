@@ -1,0 +1,8 @@
+{
+    "id": "5486092e-aad3-4a1b-a029-d3b816ac381f",
+    "type": "feature",
+    "description": "This release adds message batching for the IoT Rules Engine HTTP action.",
+    "modules": [
+        "service/iot"
+    ]
+}

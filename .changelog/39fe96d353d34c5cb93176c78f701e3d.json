@@ -1,0 +1,8 @@
+{
+    "id": "39fe96d3-53d3-4c5c-b931-76c78f701e3d",
+    "type": "feature",
+    "description": "This release adds AvailabilityZoneId support for CreateFleet, ModifyFleet, DescribeFleets, RequestSpotFleet, ModifySpotFleetRequests and DescribeSpotFleetRequests APIs.",
+    "modules": [
+        "service/ec2"
+    ]
+}

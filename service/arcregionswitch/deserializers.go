@@ -815,6 +815,71 @@ func (m *smithyRpcv2cbor_deserializeOpListRoute53HealthChecks) HandleDeserialize
 	return out, metadata, nil
 }
 
+type smithyRpcv2cbor_deserializeOpListRoute53HealthChecksInRegion struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpListRoute53HealthChecksInRegion) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpListRoute53HealthChecksInRegion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorListRoute53HealthChecksInRegion(resp)
+	}
+
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	if len(payload) == 0 {
+		out.Result = &ListRoute53HealthChecksInRegionOutput{}
+		return out, metadata, nil
+	}
+
+	cv, err := smithycbor.Decode(payload)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	output, err := deserializeCBOR_ListRoute53HealthChecksInRegionOutput(cv)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	out.Result = output
+
+	return out, metadata, nil
+}
+
 type smithyRpcv2cbor_deserializeOpListTagsForResource struct {
 }
 
@@ -3473,6 +3538,15 @@ func deserializeCBOR_Route53HealthCheck(v smithycbor.Value) (*types.Route53Healt
 			ds.HealthCheckId = ptr.String(dv)
 		}
 
+		if key == "status" {
+
+			dv, err := deserializeCBOR_Route53HealthCheckStatus(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Status = dv
+		}
+
 		if key == "region" {
 			if _, ok := sv.(*smithycbor.Nil); ok {
 				continue
@@ -3579,6 +3653,14 @@ func deserializeCBOR_Route53HealthCheckList(v smithycbor.Value) ([]types.Route53
 		dl = append(dl, *di)
 	}
 	return dl, nil
+}
+
+func deserializeCBOR_Route53HealthCheckStatus(v smithycbor.Value) (types.Route53HealthCheckStatus, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.Route53HealthCheckStatus(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.Route53HealthCheckStatus(av), nil
 }
 
 func deserializeCBOR_Route53ResourceRecordSet(v smithycbor.Value) (*types.Route53ResourceRecordSet, error) {
@@ -4564,6 +4646,39 @@ func deserializeCBOR_ListPlansOutput(v smithycbor.Value) (*ListPlansOutput, erro
 	return ds, nil
 }
 
+func deserializeCBOR_ListRoute53HealthChecksInRegionOutput(v smithycbor.Value) (*ListRoute53HealthChecksInRegionOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &ListRoute53HealthChecksInRegionOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "healthChecks" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Route53HealthCheckList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.HealthChecks = dv
+		}
+
+		if key == "nextToken" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.NextToken = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
 func deserializeCBOR_ListRoute53HealthChecksOutput(v smithycbor.Value) (*ListRoute53HealthChecksOutput, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
@@ -5264,6 +5379,75 @@ func rpc2_deserializeOpErrorListRoute53HealthChecks(resp *smithyhttp.Response) e
 		if err != nil {
 			return &smithy.DeserializationError{
 				Err:      fmt.Errorf("deserialize com.amazonaws.arcregionswitch#AccessDeniedException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "InternalServerException":
+		verr, err := deserializeCBOR_InternalServerException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.arcregionswitch#InternalServerException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "ResourceNotFoundException":
+		verr, err := deserializeCBOR_ResourceNotFoundException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.arcregionswitch#ResourceNotFoundException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	default:
+
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
+func rpc2_deserializeOpErrorListRoute53HealthChecksInRegion(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "AccessDeniedException":
+		verr, err := deserializeCBOR_AccessDeniedException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.arcregionswitch#AccessDeniedException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "IllegalArgumentException":
+		verr, err := deserializeCBOR_IllegalArgumentException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.arcregionswitch#IllegalArgumentException: %w", err),
 				Snapshot: payload,
 			}
 		}

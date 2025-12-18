@@ -590,6 +590,18 @@ func TestCheckSnapshot_GetDomainStatisticsReport(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetEmailAddressInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEmailAddressInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEmailAddressInsights")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetEmailIdentity(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEmailIdentity(context.Background(), nil, func(o *Options) {
@@ -1890,6 +1902,18 @@ func TestUpdateSnapshot_GetDomainStatisticsReport(t *testing.T) {
 	_, err := svc.GetDomainStatisticsReport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDomainStatisticsReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetEmailAddressInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEmailAddressInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEmailAddressInsights")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -62,6 +62,10 @@ type CreateGatewayTargetInput struct {
 	// The description of the gateway target.
 	Description *string
 
+	// Optional configuration for HTTP header and query parameter propagation to and
+	// from the gateway target.
+	MetadataConfiguration *types.MetadataConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -112,6 +116,9 @@ type CreateGatewayTargetOutput struct {
 
 	// The last synchronization of the target.
 	LastSynchronizedAt *time.Time
+
+	// The metadata configuration that was applied to the created gateway target.
+	MetadataConfiguration *types.MetadataConfiguration
 
 	// The reasons for the current status of the target.
 	StatusReasons []string

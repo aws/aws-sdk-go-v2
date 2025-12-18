@@ -99,6 +99,9 @@ func ExampleChangeSpecification_outputUsage() {
 	var union types.ChangeSpecification
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ChangeSpecificationMemberCollaboration:
+		_ = v.Value // Value is types.CollaborationChangeSpecification
+
 	case *types.ChangeSpecificationMemberMember:
 		_ = v.Value // Value is types.MemberChangeSpecification
 
@@ -111,6 +114,7 @@ func ExampleChangeSpecification_outputUsage() {
 	}
 }
 
+var _ *types.CollaborationChangeSpecification
 var _ *types.MemberChangeSpecification
 
 func ExampleComputeConfiguration_outputUsage() {

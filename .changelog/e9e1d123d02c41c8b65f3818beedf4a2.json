@@ -1,0 +1,8 @@
+{
+    "id": "e9e1d123-d02c-41c8-b65f-3818beedf4a2",
+    "type": "feature",
+    "description": "Add support for ListReportVersions API  for the calling AWS account.",
+    "modules": [
+        "service/artifact"
+    ]
+}

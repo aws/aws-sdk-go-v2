@@ -390,6 +390,28 @@ func (DkimStatus) Values() []DkimStatus {
 	}
 }
 
+type EmailAddressInsightsConfidenceVerdict string
+
+// Enum values for EmailAddressInsightsConfidenceVerdict
+const (
+	EmailAddressInsightsConfidenceVerdictLow    EmailAddressInsightsConfidenceVerdict = "LOW"
+	EmailAddressInsightsConfidenceVerdictMedium EmailAddressInsightsConfidenceVerdict = "MEDIUM"
+	EmailAddressInsightsConfidenceVerdictHigh   EmailAddressInsightsConfidenceVerdict = "HIGH"
+)
+
+// Values returns all known values for EmailAddressInsightsConfidenceVerdict. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmailAddressInsightsConfidenceVerdict) Values() []EmailAddressInsightsConfidenceVerdict {
+	return []EmailAddressInsightsConfidenceVerdict{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
+
 type EngagementEventType string
 
 // Enum values for EngagementEventType
@@ -995,6 +1017,28 @@ func (SubscriptionStatus) Values() []SubscriptionStatus {
 	return []SubscriptionStatus{
 		"OPT_IN",
 		"OPT_OUT",
+	}
+}
+
+type SuppressionConfidenceVerdictThreshold string
+
+// Enum values for SuppressionConfidenceVerdictThreshold
+const (
+	SuppressionConfidenceVerdictThresholdMedium  SuppressionConfidenceVerdictThreshold = "MEDIUM"
+	SuppressionConfidenceVerdictThresholdHigh    SuppressionConfidenceVerdictThreshold = "HIGH"
+	SuppressionConfidenceVerdictThresholdManaged SuppressionConfidenceVerdictThreshold = "MANAGED"
+)
+
+// Values returns all known values for SuppressionConfidenceVerdictThreshold. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SuppressionConfidenceVerdictThreshold) Values() []SuppressionConfidenceVerdictThreshold {
+	return []SuppressionConfidenceVerdictThreshold{
+		"MEDIUM",
+		"HIGH",
+		"MANAGED",
 	}
 }
 

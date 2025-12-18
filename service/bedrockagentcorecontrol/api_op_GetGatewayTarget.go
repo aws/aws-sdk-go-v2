@@ -92,6 +92,10 @@ type GetGatewayTargetOutput struct {
 	// The last synchronization of the target.
 	LastSynchronizedAt *time.Time
 
+	// The metadata configuration for HTTP header and query parameter propagation for
+	// the retrieved gateway target.
+	MetadataConfiguration *types.MetadataConfiguration
+
 	// The reasons for the current status of the gateway target.
 	StatusReasons []string
 

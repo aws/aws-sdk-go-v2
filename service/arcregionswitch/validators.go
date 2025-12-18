@@ -230,6 +230,26 @@ func (m *validateOpListRoute53HealthChecks) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRoute53HealthChecksInRegion struct {
+}
+
+func (*validateOpListRoute53HealthChecksInRegion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRoute53HealthChecksInRegion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRoute53HealthChecksInRegionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRoute53HealthChecksInRegionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -412,6 +432,10 @@ func addOpListPlanExecutionsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListRoute53HealthChecksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRoute53HealthChecks{}, middleware.After)
+}
+
+func addOpListRoute53HealthChecksInRegionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRoute53HealthChecksInRegion{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1319,6 +1343,21 @@ func validateOpListRoute53HealthChecksInput(v *ListRoute53HealthChecksInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRoute53HealthChecksInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRoute53HealthChecksInRegionInput(v *ListRoute53HealthChecksInRegionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRoute53HealthChecksInRegionInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}

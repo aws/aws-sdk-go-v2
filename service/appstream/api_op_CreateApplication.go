@@ -65,8 +65,8 @@ type CreateApplicationInput struct {
 	// This member is required.
 	Name *string
 
-	// The platforms the application supports. WINDOWS_SERVER_2019 and AMAZON_LINUX2
-	// are supported for Elastic fleets.
+	// The platforms the application supports. WINDOWS_SERVER_2019, AMAZON_LINUX2 and
+	// UBUNTU_PRO_2404 are supported for Elastic fleets.
 	//
 	// This member is required.
 	Platforms []types.PlatformType

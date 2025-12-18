@@ -134,6 +134,18 @@ func TestCheckSnapshot_ListReports(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListReportVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReportVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListReportVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutAccountSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutAccountSettings(context.Background(), nil, func(o *Options) {
@@ -210,6 +222,18 @@ func TestUpdateSnapshot_ListReports(t *testing.T) {
 	_, err := svc.ListReports(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListReports")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListReportVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReportVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListReportVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

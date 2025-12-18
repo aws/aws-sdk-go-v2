@@ -41,6 +41,9 @@ type PutAccountSuppressionAttributesInput struct {
 	//   account when a message sent to that address results in a hard bounce.
 	SuppressedReasons []types.SuppressionListReason
 
+	// An object that contains additional suppression attributes for your account.
+	ValidationAttributes *types.SuppressionValidationAttributes
+
 	noSmithyDocumentSerde
 }
 
@@ -118,6 +121,9 @@ func (c *Client) addOperationPutAccountSuppressionAttributesMiddlewares(stack *m
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
+	if err = addOpPutAccountSuppressionAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAccountSuppressionAttributes(options.Region), middleware.Before); err != nil {

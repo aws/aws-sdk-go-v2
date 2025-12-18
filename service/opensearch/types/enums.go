@@ -731,6 +731,7 @@ const (
 	NodeTypeData      NodeType = "Data"
 	NodeTypeUltrawarm NodeType = "Ultrawarm"
 	NodeTypeMaster    NodeType = "Master"
+	NodeTypeWarm      NodeType = "Warm"
 )
 
 // Values returns all known values for NodeType. Note that this can be expanded in
@@ -742,6 +743,7 @@ func (NodeType) Values() []NodeType {
 		"Data",
 		"Ultrawarm",
 		"Master",
+		"Warm",
 	}
 }
 

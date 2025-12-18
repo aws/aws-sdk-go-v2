@@ -4905,6 +4905,11 @@ func awsRestjson1_deserializeOpDocumentGetCustomVerificationEmailTemplateOutput(
 				sv.SuccessRedirectionURL = ptr.String(jtv)
 			}
 
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		case "TemplateContent":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6124,6 +6129,161 @@ func awsRestjson1_deserializeOpDocumentGetDomainStatisticsReportOutput(v **GetDo
 	return nil
 }
 
+type awsRestjson1_deserializeOpGetEmailAddressInsights struct {
+}
+
+func (*awsRestjson1_deserializeOpGetEmailAddressInsights) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetEmailAddressInsights) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetEmailAddressInsights(response, &metadata)
+	}
+	output := &GetEmailAddressInsightsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetEmailAddressInsightsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetEmailAddressInsights(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetEmailAddressInsightsOutput(v **GetEmailAddressInsightsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetEmailAddressInsightsOutput
+	if *v == nil {
+		sv = &GetEmailAddressInsightsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MailboxValidation":
+			if err := awsRestjson1_deserializeDocumentMailboxValidation(&sv.MailboxValidation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpGetEmailIdentity struct {
 }
 
@@ -6649,6 +6809,11 @@ func awsRestjson1_deserializeOpDocumentGetEmailTemplateOutput(v **GetEmailTempla
 
 	for key, value := range shape {
 		switch key {
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		case "TemplateContent":
 			if err := awsRestjson1_deserializeDocumentEmailTemplateContent(&sv.TemplateContent, value); err != nil {
 				return err
@@ -17787,6 +17952,107 @@ func awsRestjson1_deserializeDocumentEmailAddressFilterList(v *[]string, value i
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEmailAddressInsightsMailboxEvaluations(v **types.EmailAddressInsightsMailboxEvaluations, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmailAddressInsightsMailboxEvaluations
+	if *v == nil {
+		sv = &types.EmailAddressInsightsMailboxEvaluations{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HasValidDnsRecords":
+			if err := awsRestjson1_deserializeDocumentEmailAddressInsightsVerdict(&sv.HasValidDnsRecords, value); err != nil {
+				return err
+			}
+
+		case "HasValidSyntax":
+			if err := awsRestjson1_deserializeDocumentEmailAddressInsightsVerdict(&sv.HasValidSyntax, value); err != nil {
+				return err
+			}
+
+		case "IsDisposable":
+			if err := awsRestjson1_deserializeDocumentEmailAddressInsightsVerdict(&sv.IsDisposable, value); err != nil {
+				return err
+			}
+
+		case "IsRandomInput":
+			if err := awsRestjson1_deserializeDocumentEmailAddressInsightsVerdict(&sv.IsRandomInput, value); err != nil {
+				return err
+			}
+
+		case "IsRoleAddress":
+			if err := awsRestjson1_deserializeDocumentEmailAddressInsightsVerdict(&sv.IsRoleAddress, value); err != nil {
+				return err
+			}
+
+		case "MailboxExists":
+			if err := awsRestjson1_deserializeDocumentEmailAddressInsightsVerdict(&sv.MailboxExists, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEmailAddressInsightsVerdict(v **types.EmailAddressInsightsVerdict, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmailAddressInsightsVerdict
+	if *v == nil {
+		sv = &types.EmailAddressInsightsVerdict{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConfidenceVerdict":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EmailAddressInsightsConfidenceVerdict to be of type string, got %T instead", value)
+				}
+				sv.ConfidenceVerdict = types.EmailAddressInsightsConfidenceVerdict(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEmailInsights(v **types.EmailInsights, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19868,6 +20134,47 @@ func awsRestjson1_deserializeDocumentListOfDedicatedIpPools(v *[]string, value i
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMailboxValidation(v **types.MailboxValidation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MailboxValidation
+	if *v == nil {
+		sv = &types.MailboxValidation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Evaluations":
+			if err := awsRestjson1_deserializeDocumentEmailAddressInsightsMailboxEvaluations(&sv.Evaluations, value); err != nil {
+				return err
+			}
+
+		case "IsValid":
+			if err := awsRestjson1_deserializeDocumentEmailAddressInsightsVerdict(&sv.IsValid, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -22268,6 +22575,96 @@ func awsRestjson1_deserializeDocumentSuppressionAttributes(v **types.Suppression
 				return err
 			}
 
+		case "ValidationAttributes":
+			if err := awsRestjson1_deserializeDocumentSuppressionValidationAttributes(&sv.ValidationAttributes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSuppressionConditionThreshold(v **types.SuppressionConditionThreshold, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SuppressionConditionThreshold
+	if *v == nil {
+		sv = &types.SuppressionConditionThreshold{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConditionThresholdEnabled":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.ConditionThresholdEnabled = types.FeatureStatus(jtv)
+			}
+
+		case "OverallConfidenceThreshold":
+			if err := awsRestjson1_deserializeDocumentSuppressionConfidenceThreshold(&sv.OverallConfidenceThreshold, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSuppressionConfidenceThreshold(v **types.SuppressionConfidenceThreshold, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SuppressionConfidenceThreshold
+	if *v == nil {
+		sv = &types.SuppressionConfidenceThreshold{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConfidenceVerdictThreshold":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SuppressionConfidenceVerdictThreshold to be of type string, got %T instead", value)
+				}
+				sv.ConfidenceVerdictThreshold = types.SuppressionConfidenceVerdictThreshold(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -22377,6 +22774,83 @@ func awsRestjson1_deserializeDocumentSuppressionOptions(v **types.SuppressionOpt
 		switch key {
 		case "SuppressedReasons":
 			if err := awsRestjson1_deserializeDocumentSuppressionListReasons(&sv.SuppressedReasons, value); err != nil {
+				return err
+			}
+
+		case "ValidationOptions":
+			if err := awsRestjson1_deserializeDocumentSuppressionValidationOptions(&sv.ValidationOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSuppressionValidationAttributes(v **types.SuppressionValidationAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SuppressionValidationAttributes
+	if *v == nil {
+		sv = &types.SuppressionValidationAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConditionThreshold":
+			if err := awsRestjson1_deserializeDocumentSuppressionConditionThreshold(&sv.ConditionThreshold, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSuppressionValidationOptions(v **types.SuppressionValidationOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SuppressionValidationOptions
+	if *v == nil {
+		sv = &types.SuppressionValidationOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConditionThreshold":
+			if err := awsRestjson1_deserializeDocumentSuppressionConditionThreshold(&sv.ConditionThreshold, value); err != nil {
 				return err
 			}
 

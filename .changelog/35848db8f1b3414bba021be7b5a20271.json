@@ -1,0 +1,8 @@
+{
+    "id": "35848db8-f1b3-414b-ba02-1be7b5a20271",
+    "type": "feature",
+    "description": "Added \"Stopping\" for the HANA Database Status.",
+    "modules": [
+        "service/ssmsap"
+    ]
+}

@@ -47491,6 +47491,76 @@ func awsRestjson1_deserializeDocumentAwsJsonSubstitutionCommandPreprocessorConfi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBatchConfig(v **types.BatchConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchConfig
+	if *v == nil {
+		sv = &types.BatchConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxBatchOpenMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxBatchOpenMs to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxBatchOpenMs = ptr.Int32(int32(i64))
+			}
+
+		case "maxBatchSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxBatchSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxBatchSize = ptr.Int32(int32(i64))
+			}
+
+		case "maxBatchSizeBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxBatchSizeBytes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxBatchSizeBytes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBehavior(v **types.Behavior, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52659,6 +52729,11 @@ func awsRestjson1_deserializeDocumentHttpAction(v **types.HttpAction, value inte
 				return err
 			}
 
+		case "batchConfig":
+			if err := awsRestjson1_deserializeDocumentBatchConfig(&sv.BatchConfig, value); err != nil {
+				return err
+			}
+
 		case "confirmationUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -52666,6 +52741,15 @@ func awsRestjson1_deserializeDocumentHttpAction(v **types.HttpAction, value inte
 					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
 				}
 				sv.ConfirmationUrl = ptr.String(jtv)
+			}
+
+		case "enableBatching":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableBatching to be of type *bool, got %T instead", value)
+				}
+				sv.EnableBatching = ptr.Bool(jtv)
 			}
 
 		case "headers":

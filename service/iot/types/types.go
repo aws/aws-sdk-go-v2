@@ -799,6 +799,24 @@ type AwsJsonSubstitutionCommandPreprocessorConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for batching.
+type BatchConfig struct {
+
+	// The maximum amount of time (in milliseconds) that an outgoing call waits for
+	// other calls with which it batches messages of the same type. The higher the
+	// setting, the longer the latency of the batched HTTP Action will be.
+	MaxBatchOpenMs *int32
+
+	// The maximum number of messages that are batched together in a single action
+	// execution.
+	MaxBatchSize *int32
+
+	// Maximum size of a message batch, in bytes.
+	MaxBatchSizeBytes *int32
+
+	noSmithyDocumentSerde
+}
+
 // A Device Defender security profile behavior.
 type Behavior struct {
 
@@ -2040,6 +2058,9 @@ type HttpAction struct {
 	// The authentication method to use when sending data to an HTTPS endpoint.
 	Auth *HttpAuthorization
 
+	// The configuration settings for batching. For more information, see Batching HTTP action messages.
+	BatchConfig *BatchConfig
+
 	// The URL to which IoT sends a confirmation message. The value of the
 	// confirmation URL must be a prefix of the endpoint URL. If you do not specify a
 	// confirmation URL IoT uses the endpoint URL as the confirmation URL. If you use
@@ -2047,6 +2068,10 @@ type HttpAction struct {
 	// rule destinations that match each possible value of the substitution template
 	// before traffic is allowed to your endpoint URL.
 	ConfirmationUrl *string
+
+	// Whether to process the HTTP action messages into a single request. Value can be
+	// true or false.
+	EnableBatching *bool
 
 	// The HTTP headers to send with the message data.
 	Headers []HttpActionHeader

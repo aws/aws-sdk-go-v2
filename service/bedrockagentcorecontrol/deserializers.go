@@ -1802,6 +1802,11 @@ func awsRestjson1_deserializeOpDocumentCreateGatewayTargetOutput(v **CreateGatew
 				sv.LastSynchronizedAt = ptr.Time(t)
 			}
 
+		case "metadataConfiguration":
+			if err := awsRestjson1_deserializeDocumentMetadataConfiguration(&sv.MetadataConfiguration, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7811,6 +7816,11 @@ func awsRestjson1_deserializeOpDocumentGetGatewayTargetOutput(v **GetGatewayTarg
 					return err
 				}
 				sv.LastSynchronizedAt = ptr.Time(t)
+			}
+
+		case "metadataConfiguration":
+			if err := awsRestjson1_deserializeDocumentMetadataConfiguration(&sv.MetadataConfiguration, value); err != nil {
+				return err
 			}
 
 		case "name":
@@ -15380,6 +15390,11 @@ func awsRestjson1_deserializeOpDocumentUpdateGatewayTargetOutput(v **UpdateGatew
 				sv.LastSynchronizedAt = ptr.Time(t)
 			}
 
+		case "metadataConfiguration":
+			if err := awsRestjson1_deserializeDocumentMetadataConfiguration(&sv.MetadataConfiguration, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17753,6 +17768,114 @@ func awsRestjson1_deserializeDocumentAllowedClientsList(v *[]string, value inter
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected AllowedClient to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAllowedQueryParameters(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected HttpQueryParameterName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAllowedRequestHeaders(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected HttpHeaderName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAllowedResponseHeaders(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected HttpHeaderName to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -21308,6 +21431,11 @@ func awsRestjson1_deserializeDocumentGatewayTarget(v **types.GatewayTarget, valu
 				sv.LastSynchronizedAt = ptr.Time(t)
 			}
 
+		case "metadataConfiguration":
+			if err := awsRestjson1_deserializeDocumentMetadataConfiguration(&sv.MetadataConfiguration, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22848,6 +22976,52 @@ func awsRestjson1_deserializeDocumentMessageBasedTrigger(v **types.MessageBasedT
 					return err
 				}
 				sv.MessageCount = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMetadataConfiguration(v **types.MetadataConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetadataConfiguration
+	if *v == nil {
+		sv = &types.MetadataConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedQueryParameters":
+			if err := awsRestjson1_deserializeDocumentAllowedQueryParameters(&sv.AllowedQueryParameters, value); err != nil {
+				return err
+			}
+
+		case "allowedRequestHeaders":
+			if err := awsRestjson1_deserializeDocumentAllowedRequestHeaders(&sv.AllowedRequestHeaders, value); err != nil {
+				return err
+			}
+
+		case "allowedResponseHeaders":
+			if err := awsRestjson1_deserializeDocumentAllowedResponseHeaders(&sv.AllowedResponseHeaders, value); err != nil {
+				return err
 			}
 
 		default:

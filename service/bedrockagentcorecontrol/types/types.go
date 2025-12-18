@@ -1774,6 +1774,10 @@ type GatewayTarget struct {
 	// The last synchronization time.
 	LastSynchronizedAt *time.Time
 
+	// The metadata configuration for HTTP header and query parameter propagation to
+	// and from this gateway target.
+	MetadataConfiguration *MetadataConfiguration
+
 	// The status reasons for the target status.
 	StatusReasons []string
 
@@ -2385,6 +2389,25 @@ type MessageBasedTriggerInput struct {
 
 	// The number of messages that trigger memory processing.
 	MessageCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for HTTP header and query parameter propagation between the
+// gateway and target servers.
+type MetadataConfiguration struct {
+
+	// A list of URL query parameters that are allowed to be propagated from incoming
+	// gateway URL to the target.
+	AllowedQueryParameters []string
+
+	// A list of HTTP headers that are allowed to be propagated from incoming client
+	// requests to the target.
+	AllowedRequestHeaders []string
+
+	// A list of HTTP headers that are allowed to be propagated from the target
+	// response back to the client.
+	AllowedResponseHeaders []string
 
 	noSmithyDocumentSerde
 }

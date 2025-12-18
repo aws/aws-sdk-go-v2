@@ -830,6 +830,26 @@ func (m *validateOpGetDomainStatisticsReport) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEmailAddressInsights struct {
+}
+
+func (*validateOpGetEmailAddressInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEmailAddressInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEmailAddressInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEmailAddressInsightsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEmailIdentity struct {
 }
 
@@ -1145,6 +1165,26 @@ func (m *validateOpPutAccountDetails) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutAccountDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAccountSuppressionAttributes struct {
+}
+
+func (*validateOpPutAccountSuppressionAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountSuppressionAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountSuppressionAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountSuppressionAttributesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1954,6 +1994,10 @@ func addOpGetDomainStatisticsReportValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetDomainStatisticsReport{}, middleware.After)
 }
 
+func addOpGetEmailAddressInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEmailAddressInsights{}, middleware.After)
+}
+
 func addOpGetEmailIdentityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEmailIdentity{}, middleware.After)
 }
@@ -2016,6 +2060,10 @@ func addOpListTenantResourcesValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutAccountDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAccountDetails{}, middleware.After)
+}
+
+func addOpPutAccountSuppressionAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountSuppressionAttributes{}, middleware.After)
 }
 
 func addOpPutAccountVdmAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -2812,6 +2860,41 @@ func validateSnsDestination(v *types.SnsDestination) error {
 	}
 }
 
+func validateSuppressionConditionThreshold(v *types.SuppressionConditionThreshold) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SuppressionConditionThreshold"}
+	if len(v.ConditionThresholdEnabled) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConditionThresholdEnabled"))
+	}
+	if v.OverallConfidenceThreshold != nil {
+		if err := validateSuppressionConfidenceThreshold(v.OverallConfidenceThreshold); err != nil {
+			invalidParams.AddNested("OverallConfidenceThreshold", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSuppressionConfidenceThreshold(v *types.SuppressionConfidenceThreshold) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SuppressionConfidenceThreshold"}
+	if len(v.ConfidenceVerdictThreshold) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfidenceVerdictThreshold"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSuppressionListDestination(v *types.SuppressionListDestination) error {
 	if v == nil {
 		return nil
@@ -2819,6 +2902,61 @@ func validateSuppressionListDestination(v *types.SuppressionListDestination) err
 	invalidParams := smithy.InvalidParamsError{Context: "SuppressionListDestination"}
 	if len(v.SuppressionListImportAction) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SuppressionListImportAction"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSuppressionOptions(v *types.SuppressionOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SuppressionOptions"}
+	if v.ValidationOptions != nil {
+		if err := validateSuppressionValidationOptions(v.ValidationOptions); err != nil {
+			invalidParams.AddNested("ValidationOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSuppressionValidationAttributes(v *types.SuppressionValidationAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SuppressionValidationAttributes"}
+	if v.ConditionThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConditionThreshold"))
+	} else if v.ConditionThreshold != nil {
+		if err := validateSuppressionConditionThreshold(v.ConditionThreshold); err != nil {
+			invalidParams.AddNested("ConditionThreshold", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSuppressionValidationOptions(v *types.SuppressionValidationOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SuppressionValidationOptions"}
+	if v.ConditionThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConditionThreshold"))
+	} else if v.ConditionThreshold != nil {
+		if err := validateSuppressionConditionThreshold(v.ConditionThreshold); err != nil {
+			invalidParams.AddNested("ConditionThreshold", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3064,6 +3202,11 @@ func validateOpCreateConfigurationSetInput(v *CreateConfigurationSetInput) error
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SuppressionOptions != nil {
+		if err := validateSuppressionOptions(v.SuppressionOptions); err != nil {
+			invalidParams.AddNested("SuppressionOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3135,6 +3278,11 @@ func validateOpCreateCustomVerificationEmailTemplateInput(v *CreateCustomVerific
 	}
 	if v.TemplateContent == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateContent"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.SuccessRedirectionURL == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SuccessRedirectionURL"))
@@ -3247,6 +3395,11 @@ func validateOpCreateEmailTemplateInput(v *CreateEmailTemplateInput) error {
 	}
 	if v.TemplateContent == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateContent"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3753,6 +3906,21 @@ func validateOpGetDomainStatisticsReportInput(v *GetDomainStatisticsReportInput)
 	}
 }
 
+func validateOpGetEmailAddressInsightsInput(v *GetEmailAddressInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEmailAddressInsightsInput"}
+	if v.EmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEmailIdentityInput(v *GetEmailIdentityInput) error {
 	if v == nil {
 		return nil
@@ -4005,6 +4173,23 @@ func validateOpPutAccountDetailsInput(v *PutAccountDetailsInput) error {
 	}
 }
 
+func validateOpPutAccountSuppressionAttributesInput(v *PutAccountSuppressionAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountSuppressionAttributesInput"}
+	if v.ValidationAttributes != nil {
+		if err := validateSuppressionValidationAttributes(v.ValidationAttributes); err != nil {
+			invalidParams.AddNested("ValidationAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutAccountVdmAttributesInput(v *PutAccountVdmAttributesInput) error {
 	if v == nil {
 		return nil
@@ -4091,6 +4276,11 @@ func validateOpPutConfigurationSetSuppressionOptionsInput(v *PutConfigurationSet
 	invalidParams := smithy.InvalidParamsError{Context: "PutConfigurationSetSuppressionOptionsInput"}
 	if v.ConfigurationSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
+	}
+	if v.ValidationOptions != nil {
+		if err := validateSuppressionValidationOptions(v.ValidationOptions); err != nil {
+			invalidParams.AddNested("ValidationOptions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

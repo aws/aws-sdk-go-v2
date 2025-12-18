@@ -74,14 +74,6 @@ type CreateImageBuilderInput struct {
 	//
 	//   - stream.memory.z1d.12xlarge
 	//
-	//   - stream.graphics-design.large
-	//
-	//   - stream.graphics-design.xlarge
-	//
-	//   - stream.graphics-design.2xlarge
-	//
-	//   - stream.graphics-design.4xlarge
-	//
 	//   - stream.graphics.g4dn.xlarge
 	//
 	//   - stream.graphics.g4dn.2xlarge

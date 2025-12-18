@@ -787,6 +787,9 @@ type Route53HealthCheck struct {
 	// The Amazon Route 53 health check ID.
 	HealthCheckId *string
 
+	// The Amazon Route 53 health check status.
+	Status Route53HealthCheckStatus
+
 	noSmithyDocumentSerde
 }
 
