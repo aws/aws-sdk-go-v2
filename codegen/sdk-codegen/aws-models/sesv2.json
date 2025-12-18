@@ -1490,6 +1490,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Tags": {
+                    "target": "com.amazonaws.sesv2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) to associate with the\n            custom verification email template.</p>"
+                    }
+                },
                 "SuccessRedirectionURL": {
                     "target": "com.amazonaws.sesv2#SuccessRedirectionURL",
                     "traits": {
@@ -1911,6 +1917,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The content of the email template, composed of a subject line, an HTML part, and a\n            text-only part.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sesv2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) to associate with the email template.</p>"
                     }
                 }
             },
@@ -4043,6 +4055,90 @@
                 }
             }
         },
+        "com.amazonaws.sesv2#EmailAddressInsightsConfidenceVerdict": {
+            "type": "enum",
+            "members": {
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The confidence level of SES that the email address meets the validation criteria:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LOW</code> - Weak or no indication of the speciﬁc check (e.g., LOW for IsRoleAddress means the email is less likely to be a role-based address).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MEDIUM</code> - Moderate indication of the speciﬁc check (e.g., MEDIUM for IsDisposable means the email might be a disposable address).</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code> - Strong indication of the speciﬁc check (e.g., HIGH for IsRandomInput means the email is very likely randomly generated).</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sesv2#EmailAddressInsightsMailboxEvaluations": {
+            "type": "structure",
+            "members": {
+                "HasValidSyntax": {
+                    "target": "com.amazonaws.sesv2#EmailAddressInsightsVerdict",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks that the email address follows proper RFC standards and contains valid characters in the correct format.</p>"
+                    }
+                },
+                "HasValidDnsRecords": {
+                    "target": "com.amazonaws.sesv2#EmailAddressInsightsVerdict",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks that the domain exists, has valid DNS records, and is conﬁgured to receive email.</p>"
+                    }
+                },
+                "MailboxExists": {
+                    "target": "com.amazonaws.sesv2#EmailAddressInsightsVerdict",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks that the mailbox exists and can receive messages without actually sending an email.</p>"
+                    }
+                },
+                "IsRoleAddress": {
+                    "target": "com.amazonaws.sesv2#EmailAddressInsightsVerdict",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identiﬁes role-based addresses (such as admin@, support@, or info@) that may have lower engagement rates.</p>"
+                    }
+                },
+                "IsDisposable": {
+                    "target": "com.amazonaws.sesv2#EmailAddressInsightsVerdict",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks disposable or temporary email addresses that could negatively impact your sender reputation.</p>"
+                    }
+                },
+                "IsRandomInput": {
+                    "target": "com.amazonaws.sesv2#EmailAddressInsightsVerdict",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks if the input appears to be random text.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains individual validation checks performed on an email address.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#EmailAddressInsightsVerdict": {
+            "type": "structure",
+            "members": {
+                "ConfidenceVerdict": {
+                    "target": "com.amazonaws.sesv2#EmailAddressInsightsConfidenceVerdict",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence level of the validation verdict.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the overall validation verdict for an email address.</p>"
+            }
+        },
         "com.amazonaws.sesv2#EmailAddressList": {
             "type": "list",
             "member": {
@@ -5334,6 +5430,12 @@
                         "smithy.api#documentation": "<p>The content of the custom verification email.</p>"
                     }
                 },
+                "Tags": {
+                    "target": "com.amazonaws.sesv2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) that are associated with\n            the custom verification email template.</p>"
+                    }
+                },
                 "SuccessRedirectionURL": {
                     "target": "com.amazonaws.sesv2#SuccessRedirectionURL",
                     "traits": {
@@ -5865,6 +5967,62 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#GetEmailAddressInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#GetEmailAddressInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#GetEmailAddressInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides validation insights about a specific email address, including syntax validation, DNS record checks, mailbox existence, and other deliverability factors.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/email-address-insights",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#GetEmailAddressInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "EmailAddress": {
+                    "target": "com.amazonaws.sesv2#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address to analyze for validation insights.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to return validation insights about an email address.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#GetEmailAddressInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "MailboxValidation": {
+                    "target": "com.amazonaws.sesv2#MailboxValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed validation results for the email address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Validation insights about an email address.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#GetEmailIdentity": {
             "type": "operation",
             "input": {
@@ -6101,6 +6259,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The content of the email template, composed of a subject line, an HTML part, and a\n            text-only part.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sesv2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) that are associated with\n            the email template.</p>"
                     }
                 }
             },
@@ -8949,6 +9113,26 @@
                 }
             }
         },
+        "com.amazonaws.sesv2#MailboxValidation": {
+            "type": "structure",
+            "members": {
+                "IsValid": {
+                    "target": "com.amazonaws.sesv2#EmailAddressInsightsVerdict",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overall validity assessment with a conﬁdence verdict.</p>"
+                    }
+                },
+                "Evaluations": {
+                    "target": "com.amazonaws.sesv2#EmailAddressInsightsMailboxEvaluations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specific validation checks performed on the email address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed validation information about an email address.</p>"
+            }
+        },
         "com.amazonaws.sesv2#Max24HourSend": {
             "type": "double",
             "traits": {
@@ -9909,6 +10093,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list that contains the reasons that email addresses will be automatically added to\n            the suppression list for your account. This list can contain any or all of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a hard\n                    bounce.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "ValidationAttributes": {
+                    "target": "com.amazonaws.sesv2#SuppressionValidationAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains additional suppression attributes for your account.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9920,7 +10110,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n        fails.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -10277,6 +10467,12 @@
                     "target": "com.amazonaws.sesv2#SuppressionListReasons",
                     "traits": {
                         "smithy.api#documentation": "<p>A list that contains the reasons that email addresses are automatically added to the\n            suppression list for your account. This list can contain any or all of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a hard\n                    bounce.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ValidationOptions": {
+                    "target": "com.amazonaws.sesv2#SuppressionValidationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about the email address suppression preferences for the configuration set in the current Amazon Web Services Region.</p>"
                     }
                 }
             },
@@ -12308,6 +12504,9 @@
                     "target": "com.amazonaws.sesv2#GetDomainStatisticsReport"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#GetEmailAddressInsights"
+                },
+                {
                     "target": "com.amazonaws.sesv2#GetEmailIdentity"
                 },
                 {
@@ -13932,10 +14131,75 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list that contains the reasons that email addresses will be automatically added to\n            the suppression list for your account. This list can contain any or all of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a hard\n                    bounce.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "ValidationAttributes": {
+                    "target": "com.amazonaws.sesv2#SuppressionValidationAttributes"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains information about the email address suppression preferences\n            for your account in the current Amazon Web Services Region.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#SuppressionConditionThreshold": {
+            "type": "structure",
+            "members": {
+                "ConditionThresholdEnabled": {
+                    "target": "com.amazonaws.sesv2#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Auto Validation is enabled for suppression. Set to <code>ENABLED</code>\n            to enable the Auto Validation feature, or set to <code>DISABLED</code> to disable\n            it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OverallConfidenceThreshold": {
+                    "target": "com.amazonaws.sesv2#SuppressionConfidenceThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overall confidence threshold used to determine suppression decisions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains Auto Validation settings, allowing you to suppress sending to specific destination(s)\n            if they do not meet required threshold. For details on Auto Validation, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/email-validation.html\">Auto Validation</a>.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#SuppressionConfidenceThreshold": {
+            "type": "structure",
+            "members": {
+                "ConfidenceVerdictThreshold": {
+                    "target": "com.amazonaws.sesv2#SuppressionConfidenceVerdictThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence level threshold for suppression decisions.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the confidence threshold settings for Auto Validation.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#SuppressionConfidenceVerdictThreshold": {
+            "type": "enum",
+            "members": {
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The confidence level threshold for suppression validation:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MEDIUM</code> – Allows emails to be sent to addresses with medium or high delivery likelihood.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code> – Allows emails to be sent only to addresses with high delivery likelihood.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANAGED</code> – Managed confidence threshold where Amazon SES automatically determines the appropriate level.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#SuppressionListDestination": {
@@ -14007,10 +14271,43 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list that contains the reasons that email addresses are automatically added to the\n            suppression list for your account. This list can contain any or all of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a hard\n                    bounce.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "ValidationOptions": {
+                    "target": "com.amazonaws.sesv2#SuppressionValidationOptions"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains information about the suppression list preferences for your\n            account.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#SuppressionValidationAttributes": {
+            "type": "structure",
+            "members": {
+                "ConditionThreshold": {
+                    "target": "com.amazonaws.sesv2#SuppressionConditionThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the condition threshold settings for account-level suppression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Structure containing validation attributes used for suppressing sending to specific destination on account level.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#SuppressionValidationOptions": {
+            "type": "structure",
+            "members": {
+                "ConditionThreshold": {
+                    "target": "com.amazonaws.sesv2#SuppressionConditionThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the condition threshold settings for suppression validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains validation options for email address suppression.</p>"
             }
         },
         "com.amazonaws.sesv2#Tag": {

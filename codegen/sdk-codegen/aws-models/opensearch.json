@@ -11281,6 +11281,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Master"
                     }
+                },
+                "Warm": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Warm"
+                    }
                 }
             }
         },

@@ -4583,6 +4583,32 @@
                 "smithy.api#documentation": "<p>Configures the command to treat the <code>payloadTemplate</code> as a JSON document for preprocessing.\n            This preprocessor substitutes placeholders with parameter values to generate the command execution request payload.\n            </p>"
             }
         },
+        "com.amazonaws.iot#BatchConfig": {
+            "type": "structure",
+            "members": {
+                "maxBatchOpenMs": {
+                    "target": "com.amazonaws.iot#MaxBatchOpenMs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount of time (in milliseconds) that an outgoing call waits for other calls\n         with which it batches messages of the same type. The higher the setting, the longer the\n         latency of the batched HTTP Action will be.</p>"
+                    }
+                },
+                "maxBatchSize": {
+                    "target": "com.amazonaws.iot#MaxBatchSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of messages that are batched together in a single action\n         execution.</p>"
+                    }
+                },
+                "maxBatchSizeBytes": {
+                    "target": "com.amazonaws.iot#MaxBatchSizeBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum size of a message batch, in bytes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for batching.</p>"
+            }
+        },
         "com.amazonaws.iot#BatchMode": {
             "type": "boolean"
         },
@@ -17707,6 +17733,9 @@
         "com.amazonaws.iot#ElasticsearchType": {
             "type": "string"
         },
+        "com.amazonaws.iot#EnableBatching": {
+            "type": "boolean"
+        },
         "com.amazonaws.iot#EnableCachingForHttp": {
             "type": "boolean"
         },
@@ -20506,6 +20535,18 @@
                     "target": "com.amazonaws.iot#HttpAuthorization",
                     "traits": {
                         "smithy.api#documentation": "<p>The authentication method to use when sending data to an HTTPS endpoint.</p>"
+                    }
+                },
+                "enableBatching": {
+                    "target": "com.amazonaws.iot#EnableBatching",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to process the HTTP action messages into a single request. Value can be true or false.</p>"
+                    }
+                },
+                "batchConfig": {
+                    "target": "com.amazonaws.iot#BatchConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for batching. For more information, see <a href=\"/iot/latest/developerguide/http_batching.html\">Batching\n            HTTP action messages</a>.</p>"
                     }
                 }
             },
@@ -28519,6 +28560,33 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9+/]+={0,2}$"
+            }
+        },
+        "com.amazonaws.iot#MaxBatchOpenMs": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#MaxBatchSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.iot#MaxBatchSizeBytes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 100,
+                    "max": 131072
+                }
             }
         },
         "com.amazonaws.iot#MaxBuckets": {

@@ -1142,6 +1142,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ERROR"
                     }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
                 }
             }
         },

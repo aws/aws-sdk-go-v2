@@ -703,85 +703,43 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
+                                                "signingRegion": "eusc-de-east-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://artifact-fips.us-gov-west-1.api.aws"
+                                    "url": "https://artifact-fips.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://artifact-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
+                                                "signingRegion": "eusc-de-east-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://artifact.us-gov-west-1.api.aws"
+                                    "url": "https://artifact.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://artifact.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -955,43 +913,85 @@
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "eusc-de-east-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://artifact-fips.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://artifact-fips.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://artifact-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "eusc-de-east-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://artifact.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://artifact.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://artifact.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -1677,6 +1677,129 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.artifact#ListReportVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.artifact#ListReportVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.artifact#ListReportVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.artifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.artifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.artifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.artifact#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.artifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.artifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List available report versions for a given report.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke ListReportVersions operation",
+                        "documentation": "The ListReportVersions operation returns a collection of report versions\n                        for a given resource.",
+                        "input": {
+                            "reportId": "report-abcdef0123456789"
+                        },
+                        "output": {
+                            "reports": [
+                                {
+                                    "arn": "arn:aws:artifact:us-east-1::report:report-abcdef0123456789:1",
+                                    "category": "category",
+                                    "companyName": "companyName",
+                                    "description": "description",
+                                    "id": "report-abcdef0123456789",
+                                    "name": "name",
+                                    "periodEnd": "2022-04-01T20:32:04Z",
+                                    "periodStart": "2022-04-01T20:32:04Z",
+                                    "productName": "productName",
+                                    "series": "series",
+                                    "state": "PUBLISHED",
+                                    "version": 1
+                                }
+                            ],
+                            "nextToken": "gPFEGk7CF4wS901w7ppYclt7gPFEGk7CF4wS901w7ppYclt7gPFEGk7CF4wS901w7ppYclt7"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v1/report/listVersions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "reports"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.artifact#ListReportVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.artifact#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique resource ID for the report resource.</p>",
+                        "smithy.api#httpQuery": "reportId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.artifact#MaxResultsAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of resources to return in the paginated response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.artifact#NextTokenAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token to request the next page of resources.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.artifact#ListReportVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "reports": {
+                    "target": "com.amazonaws.artifact#ReportsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of report resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.artifact#NextTokenAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token to request the next page of resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.artifact#ListReports": {
             "type": "operation",
             "input": {
@@ -2084,6 +2207,9 @@
                 },
                 {
                     "target": "com.amazonaws.artifact#GetTermForReport"
+                },
+                {
+                    "target": "com.amazonaws.artifact#ListReportVersions"
                 }
             ]
         },

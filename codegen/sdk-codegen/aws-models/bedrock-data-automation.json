@@ -19,6 +19,9 @@
             "version": "2023-07-26",
             "operations": [
                 {
+                    "target": "com.amazonaws.bedrockdataautomation#CopyBlueprintStage"
+                },
+                {
                     "target": "com.amazonaws.bedrockdataautomation#CreateBlueprintVersion"
                 },
                 {
@@ -32,6 +35,9 @@
                 }
             ],
             "resources": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationJobResource"
+                },
                 {
                     "target": "com.amazonaws.bedrockdataautomation#BlueprintResource"
                 },
@@ -930,6 +936,12 @@
                 },
                 "kmsEncryptionContext": {
                     "target": "com.amazonaws.bedrockdataautomation#KmsEncryptionContext"
+                },
+                "optimizationSamples": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationSamples"
+                },
+                "optimizationTime": {
+                    "target": "com.amazonaws.bedrockdataautomation#DateTimestamp"
                 }
             },
             "traits": {
@@ -1005,6 +1017,136 @@
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-_]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintOptimizationInvocationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Invocation arn.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-iso|-iso-[a-z]|-us-gov):bedrock:[a-zA-Z0-9-]*:[0-9]{12}:blueprint-optimization-invocation/[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintOptimizationJobResource": {
+            "type": "resource",
+            "identifiers": {
+                "invocationArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationInvocationArn"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.bedrockdataautomation#InvokeBlueprintOptimizationAsync"
+            },
+            "read": {
+                "target": "com.amazonaws.bedrockdataautomation#GetBlueprintOptimizationStatus"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintOptimizationJobStatus": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Created"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                },
+                "SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ServiceError"
+                    }
+                },
+                "CLIENT_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClientError"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "List of status supported by optimization jobs"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintOptimizationObject": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "Arn of blueprint.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stage": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStage",
+                    "traits": {
+                        "smithy.api#documentation": "Stage of blueprint."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Structure for single blueprint entity."
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintOptimizationOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "s3Object": {
+                    "target": "com.amazonaws.bedrockdataautomation#S3Object",
+                    "traits": {
+                        "smithy.api#documentation": "S3 object.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Blueprint Optimization Output configuration."
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintOptimizationSample": {
+            "type": "structure",
+            "members": {
+                "assetS3Object": {
+                    "target": "com.amazonaws.bedrockdataautomation#S3Object",
+                    "traits": {
+                        "smithy.api#documentation": "S3 Object of the asset",
+                        "smithy.api#required": {}
+                    }
+                },
+                "groundTruthS3Object": {
+                    "target": "com.amazonaws.bedrockdataautomation#S3Object",
+                    "traits": {
+                        "smithy.api#documentation": "Ground truth for the Blueprint and Asset combination",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Blueprint Recommendation Sample"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintOptimizationSamples": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationSample"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Blueprint Optimization Samples"
             }
         },
         "com.amazonaws.bedrockdataautomation#BlueprintResource": {
@@ -1175,6 +1317,87 @@
                 "smithy.api#documentation": "This exception is thrown when there is a conflict performing an operation",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CopyBlueprintStage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#CopyBlueprintStageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#CopyBlueprintStageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Copies a Blueprint from one stage to another",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/blueprints/{blueprintArn}/copy-stage"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CopyBlueprintStageRequest": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "Blueprint to be copied",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStage",
+                    "traits": {
+                        "smithy.api#documentation": "Source stage to copy from",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStage",
+                    "traits": {
+                        "smithy.api#documentation": "Target stage to copy to",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockdataautomation#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "Client token for idempotency",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "CopyBlueprintStage Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CopyBlueprintStageResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "CopyBlueprintStage Response",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockdataautomation#CreateBlueprint": {
@@ -1469,6 +1692,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "Custom output configuration"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProfileArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Data automation profile arn.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:(aws|[0-9]{12}):data-automation-profile/[a-zA-Z0-9-_.]+$"
             }
         },
         "com.amazonaws.bedrockdataautomation#DataAutomationProject": {
@@ -2206,6 +2440,96 @@
                 "smithy.api#readonly": {}
             }
         },
+        "com.amazonaws.bedrockdataautomation#GetBlueprintOptimizationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#GetBlueprintOptimizationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#GetBlueprintOptimizationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "API used to get blueprint optimization status.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/getBlueprintOptimizationStatus/{invocationArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#GetBlueprintOptimizationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "invocationArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationInvocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "Invocation arn.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Structure for request of GetBlueprintOptimizationStatus API.",
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationJobResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#GetBlueprintOptimizationStatusResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Job Status."
+                    }
+                },
+                "errorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Error Type."
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Error Message."
+                    }
+                },
+                "outputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Output configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response of GetBlueprintOptimizationStatus API.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockdataautomation#GetBlueprintRequest": {
             "type": "structure",
             "members": {
@@ -2490,6 +2814,114 @@
                 "smithy.api#documentation": "This exception is thrown if there was an unexpected error during processing of request",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#InvokeBlueprintOptimizationAsync": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#InvokeBlueprintOptimizationAsyncRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#InvokeBlueprintOptimizationAsyncResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Invoke an async job to perform Blueprint Optimization",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/invokeBlueprintOptimizationAsync"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#InvokeBlueprintOptimizationAsyncRequest": {
+            "type": "structure",
+            "members": {
+                "blueprint": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationObject",
+                    "traits": {
+                        "smithy.api#documentation": "Blueprint to be optimized",
+                        "smithy.api#required": {}
+                    }
+                },
+                "samples": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationSamples",
+                    "traits": {
+                        "smithy.api#documentation": "List of Blueprint Optimization Samples",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Output configuration where the results should be placed",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataAutomationProfileArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "Data automation profile ARN",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Encryption configuration."
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockdataautomation#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "List of tags."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Invoke Blueprint Optimization Async Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#InvokeBlueprintOptimizationAsyncResponse": {
+            "type": "structure",
+            "members": {
+                "invocationArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationInvocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the blueprint optimization job",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Invoke Blueprint Optimization Async Response",
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockdataautomation#BlueprintOptimizationJobResource"
+                    }
+                ]
             }
         },
         "com.amazonaws.bedrockdataautomation#KmsEncryptionContext": {
@@ -3222,6 +3654,48 @@
                 "smithy.api#documentation": "Resource Owner"
             }
         },
+        "com.amazonaws.bedrockdataautomation#S3Object": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.bedrockdataautomation#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "S3 uri.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.bedrockdataautomation#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "S3 object version."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "S3 object"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#S3ObjectVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "S3 object version.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A path in S3",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+            }
+        },
         "com.amazonaws.bedrockdataautomation#SensitiveDataConfiguration": {
             "type": "structure",
             "members": {
@@ -3522,7 +3996,7 @@
                     "min": 20,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-z0-9-]*:[0-9]{12}:(blueprint|data-automation-project)/[a-zA-Z0-9-]{12,36}$"
+                "smithy.api#pattern": "^arn:aws(|-cn|-iso|-iso-[a-z]|-us-gov):bedrock:[a-z0-9-]*:[0-9]{12}:(blueprint|data-automation-project|blueprint-optimization-invocation)/[a-zA-Z0-9-]{12,36}$"
             }
         },
         "com.amazonaws.bedrockdataautomation#ThrottlingException": {

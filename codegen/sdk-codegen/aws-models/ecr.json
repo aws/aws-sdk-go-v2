@@ -3306,7 +3306,7 @@
                 "appliedFor": {
                     "target": "com.amazonaws.ecr#RCTAppliedForList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of enumerable strings representing the Amazon ECR repository creation scenarios that\n            this template will apply towards. The two supported scenarios are\n                <code>PULL_THROUGH_CACHE</code> and <code>REPLICATION</code>\n         </p>",
+                        "smithy.api#documentation": "<p>A list of enumerable strings representing the Amazon ECR repository creation scenarios that\n            this template will apply towards. The supported scenarios are\n                <code>PULL_THROUGH_CACHE</code>, <code>REPLICATION</code>, and <code>CREATE_ON_PUSH</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6914,7 +6914,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^$|arn:aws:kms:[a-z0-9-]+:[0-9]{12}:key\\/[a-z0-9-]+$"
+                "smithy.api#pattern": "^$|arn:aws[a-z0-9-]*:kms:[a-z0-9-]+:[0-9]{12}:key\\/[a-z0-9-]+$"
             }
         },
         "com.amazonaws.ecr#LastActivatedAtTimestamp": {
@@ -8797,6 +8797,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PULL_THROUGH_CACHE"
                     }
+                },
+                "CREATE_ON_PUSH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_ON_PUSH"
+                    }
                 }
             }
         },
@@ -9270,7 +9276,7 @@
                 "appliedFor": {
                     "target": "com.amazonaws.ecr#RCTAppliedForList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of enumerable Strings representing the repository creation scenarios that this\n            template will apply towards. The two supported scenarios are PULL_THROUGH_CACHE and\n            REPLICATION</p>"
+                        "smithy.api#documentation": "<p>A list of enumerable Strings representing the repository creation scenarios that this\n            template will apply towards. The supported scenarios are PULL_THROUGH_CACHE, REPLICATION, and\n            CREATE_ON_PUSH</p>"
                     }
                 },
                 "customRoleArn": {
@@ -10983,7 +10989,7 @@
                 "appliedFor": {
                     "target": "com.amazonaws.ecr#RCTAppliedForList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates the list of enumerable strings representing the Amazon ECR repository creation\n            scenarios that this template will apply towards. The two supported scenarios are\n                <code>PULL_THROUGH_CACHE</code> and <code>REPLICATION</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Updates the list of enumerable strings representing the Amazon ECR repository creation\n            scenarios that this template will apply towards. The supported scenarios are\n                <code>PULL_THROUGH_CACHE</code>, <code>REPLICATION</code>, and <code>CREATE_ON_PUSH</code>\n         </p>"
                     }
                 },
                 "customRoleArn": {

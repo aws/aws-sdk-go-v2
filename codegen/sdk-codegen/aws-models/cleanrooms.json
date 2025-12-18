@@ -2089,6 +2089,59 @@
                 }
             }
         },
+        "com.amazonaws.cleanrooms#ApprovalStatus": {
+            "type": "enum",
+            "members": {
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENIED"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#ApprovalStatusDetails": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.cleanrooms#ApprovalStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approval status of a member's vote on the change request. Valid values are PENDING (if they haven't voted), APPROVED, or DENIED.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about the approval state of a given member in the collaboration for a given collaboration change request.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#ApprovalStatuses": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cleanrooms#AccountId"
+            },
+            "value": {
+                "target": "com.amazonaws.cleanrooms#ApprovalStatusDetails"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.cleanrooms#AthenaDatabaseName": {
             "type": "string",
             "traits": {
@@ -2175,6 +2228,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ADD_MEMBER"
+                    }
+                },
+                "GRANT_RECEIVE_RESULTS_ABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_RECEIVE_RESULTS_ABILITY"
+                    }
+                },
+                "REVOKE_RECEIVE_RESULTS_ABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKE_RECEIVE_RESULTS_ABILITY"
                     }
                 }
             }
@@ -2731,6 +2796,35 @@
                 "smithy.api#uniqueItems": {}
             }
         },
+        "com.amazonaws.cleanrooms#ChangeRequestAction": {
+            "type": "enum",
+            "members": {
+                "APPROVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVE"
+                    }
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                },
+                "CANCEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCEL"
+                    }
+                },
+                "COMMIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMMIT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cleanrooms#ChangeRequestStatus": {
             "type": "enum",
             "members": {
@@ -2774,6 +2868,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The member change specification when the change type is <code>MEMBER</code>.</p>"
                     }
+                },
+                "collaboration": {
+                    "target": "com.amazonaws.cleanrooms#CollaborationChangeSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaboration configuration changes being requested. Currently, this only supports modifying which change types are auto-approved for the collaboration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2788,6 +2888,12 @@
                     "traits": {
                         "smithy.api#enumValue": "MEMBER"
                     }
+                },
+                "COLLABORATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLLABORATION"
+                    }
                 }
             }
         },
@@ -2798,6 +2904,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ADD_MEMBER"
+                    }
+                },
+                "GRANT_RECEIVE_RESULTS_ABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_RECEIVE_RESULTS_ABILITY"
+                    }
+                },
+                "REVOKE_RECEIVE_RESULTS_ABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKE_RECEIVE_RESULTS_ABILITY"
+                    }
+                },
+                "EDIT_AUTO_APPROVED_CHANGE_TYPES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDIT_AUTO_APPROVED_CHANGE_TYPES"
                     }
                 }
             }
@@ -3218,6 +3342,12 @@
                         "smithy.api#documentation": "<p>The list of changes specified in this change request.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "approvals": {
+                    "target": "com.amazonaws.cleanrooms#ApprovalStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of approval details from collaboration members, including approval status and multi-party approval workflow information.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3286,6 +3416,12 @@
                         "smithy.api#documentation": "<p>Summary of the changes in this change request.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "approvals": {
+                    "target": "com.amazonaws.cleanrooms#ApprovalStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary of approval statuses from all collaboration members for this change request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3296,6 +3432,20 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cleanrooms#CollaborationChangeRequestSummary"
+            }
+        },
+        "com.amazonaws.cleanrooms#CollaborationChangeSpecification": {
+            "type": "structure",
+            "members": {
+                "autoApprovedChangeTypes": {
+                    "target": "com.amazonaws.cleanrooms#AutoApprovedChangeTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines requested updates to properties of the collaboration. Currently, this only supports modifying which change types are auto-approved for the collaboration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the specific changes being requested for a collaboration, including configuration modifications and approval requirements.</p>"
             }
         },
         "com.amazonaws.cleanrooms#CollaborationConfiguredAudienceModelAssociation": {
@@ -4008,6 +4158,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanrooms#ListSchemas"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#UpdateCollaborationChangeRequest"
                 }
             ],
             "traits": {
@@ -13564,7 +13717,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 250
+                    "max": 1000
                 }
             }
         },
@@ -17202,6 +17355,90 @@
                     "method": "PATCH",
                     "uri": "/collaborations/{collaborationIdentifier}"
                 }
+            }
+        },
+        "com.amazonaws.cleanrooms#UpdateCollaborationChangeRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cleanrooms#UpdateCollaborationChangeRequestInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cleanrooms#UpdateCollaborationChangeRequestOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cleanrooms#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing collaboration change request. This operation allows approval actions for pending change requests in collaborations (APPROVE, DENY, CANCEL, COMMIT).</p> <p>For change requests without automatic approval, a member in the collaboration can manually APPROVE or DENY a change request. The collaboration owner can manually CANCEL or COMMIT a change request.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/collaborations/{collaborationIdentifier}/changeRequests/{changeRequestIdentifier}"
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#UpdateCollaborationChangeRequestInput": {
+            "type": "structure",
+            "members": {
+                "collaborationIdentifier": {
+                    "target": "com.amazonaws.cleanrooms#CollaborationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collaboration that contains the change request to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "CollaborationId"
+                    }
+                },
+                "changeRequestIdentifier": {
+                    "target": "com.amazonaws.cleanrooms#CollaborationChangeRequestIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the specific change request to be updated within the collaboration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "ChangeRequestId"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.cleanrooms#ChangeRequestAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to perform on the change request. Valid values include APPROVE (approve the change), DENY (reject the change), CANCEL (cancel the request), and COMMIT (commit after the request is approved).</p> <p>For change requests without automatic approval, a member in the collaboration can manually APPROVE or DENY a change request. The collaboration owner can manually CANCEL or COMMIT a change request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#UpdateCollaborationChangeRequestOutput": {
+            "type": "structure",
+            "members": {
+                "collaborationChangeRequest": {
+                    "target": "com.amazonaws.cleanrooms#CollaborationChangeRequest",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cleanrooms#UpdateCollaborationInput": {
