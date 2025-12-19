@@ -1,3 +1,7 @@
+# v1.152.0 (2025-12-19)
+
+* **Feature**: Adding support for Custom Metrics and Pre-Defined Attributes to GetCurrentMetricData API.
+
 # v1.151.0 (2025-12-15)
 
 * **Feature**: Amazon Connect now supports outbound WhatsApp contacts via the Send message block or StartOutboundChatContact API. Send proactive messages for surveys, reminders, and updates. Offer customers the option to switch to WhatsApp while in queue, eliminating hold time.

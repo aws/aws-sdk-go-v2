@@ -1,8 +1,0 @@
-{
-    "id": "cdb72b14-6ce0-437c-bade-3a7e2b8bfc19",
-    "type": "feature",
-    "description": "Added JobLevelCostAllocationConfiguration field to enable cost allocation reporting at the job level, providing more granular visibility into EMR Serverless charges",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

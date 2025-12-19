@@ -1,3 +1,7 @@
+# v1.34.0 (2025-12-19)
+
+* **Feature**: It is a internal bug fix for region expansion
+
 # v1.33.17 (2025-12-09)
 
 * No change notes available for this release.

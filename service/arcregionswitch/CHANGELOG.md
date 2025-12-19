@@ -1,3 +1,7 @@
+# v1.4.0 (2025-12-19)
+
+* **Feature**: Automatic Plan Execution Reports allow customers to maintain a concise record of their Region switch Plan executions.  This enables customer SREs and leadership to have a clear view of their recovery posture based on the generated reports for their Plan executions.
+
 # v1.3.0 (2025-12-18)
 
 * **Feature**: New API to list Route 53 health checks created by ARC region switch for a plan in a specific AWS Region using the Region switch Regional data plane.

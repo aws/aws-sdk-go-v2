@@ -1,3 +1,7 @@
+# v1.36.0 (2025-12-19)
+
+* **Feature**: Add support for WebAuthn under user settings.
+
 # v1.35.0 (2025-12-12)
 
 * **Feature**: Adds support for portal branding customization, enabling administrators to personalize end-user portals with custom assets.

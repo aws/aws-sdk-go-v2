@@ -1,3 +1,7 @@
+# v1.38.0 (2025-12-19)
+
+* **Feature**: Added JobLevelCostAllocationConfiguration field to enable cost allocation reporting at the job level, providing more granular visibility into EMR Serverless charges
+
 # v1.37.7 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

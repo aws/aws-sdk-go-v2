@@ -1,8 +1,0 @@
-{
-    "id": "afa10582-64bc-4483-8cb7-4946b00a8567",
-    "type": "feature",
-    "description": "This release adds event-based logging feature that enables granular event logging controls for AWS IoT logs.",
-    "modules": [
-        "service/iot"
-    ]
-}

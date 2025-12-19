@@ -1,3 +1,22 @@
+# Release (2025-12-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.4.0](service/arcregionswitch/CHANGELOG.md#v140-2025-12-19)
+  * **Feature**: Automatic Plan Execution Reports allow customers to maintain a concise record of their Region switch Plan executions.  This enables customer SREs and leadership to have a clear view of their recovery posture based on the generated reports for their Plan executions.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.152.0](service/connect/CHANGELOG.md#v11520-2025-12-19)
+  * **Feature**: Adding support for Custom Metrics and Pre-Defined Attributes to GetCurrentMetricData API.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.38.0](service/emrserverless/CHANGELOG.md#v1380-2025-12-19)
+  * **Feature**: Added JobLevelCostAllocationConfiguration field to enable cost allocation reporting at the job level, providing more granular visibility into EMR Serverless charges
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.72.0](service/iot/CHANGELOG.md#v1720-2025-12-19)
+  * **Feature**: This release adds event-based logging feature that enables granular event logging controls for AWS IoT logs.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.34.0](service/qbusiness/CHANGELOG.md#v1340-2025-12-19)
+  * **Feature**: It is a internal bug fix for region expansion
+* `github.com/aws/aws-sdk-go-v2/service/wickr`: [v1.0.0](service/wickr/CHANGELOG.md#v100-2025-12-19)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Wickr now provides a suite of admin APIs to allow you to programmatically manage secure communication for Wickr networks at scale. These APIs enable you to automate administrative workflows including user lifecycle management, network configuration, and security group administration.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.36.0](service/workspacesweb/CHANGELOG.md#v1360-2025-12-19)
+  * **Feature**: Add support for WebAuthn under user settings.
+
 # Release (2025-12-18)
 
 ## Module Highlights

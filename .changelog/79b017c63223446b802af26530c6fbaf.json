@@ -1,8 +1,0 @@
-{
-    "id": "79b017c6-3223-446b-802a-f26530c6fbaf",
-    "type": "feature",
-    "description": "Adding support for Custom Metrics and Pre-Defined Attributes to GetCurrentMetricData API.",
-    "modules": [
-        "service/connect"
-    ]
-}
