@@ -77,6 +77,12 @@ type CreatePlanInput struct {
 	// plan, in minutes.
 	RecoveryTimeObjectiveMinutes *int32
 
+	// Configuration for automatic report generation for plan executions. When
+	// configured, Region switch automatically generates a report after each plan
+	// execution that includes execution events, plan configuration, and CloudWatch
+	// alarm states.
+	ReportConfiguration *types.ReportConfiguration
+
 	// The tags to apply to the Region switch plan.
 	Tags map[string]string
 

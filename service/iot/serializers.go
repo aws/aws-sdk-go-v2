@@ -12600,6 +12600,10 @@ func (m *awsRestjson1_serializeOpGetV2LoggingOptions) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	if err := awsRestjson1_serializeOpHttpBindingsGetV2LoggingOptionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -12612,6 +12616,10 @@ func (m *awsRestjson1_serializeOpGetV2LoggingOptions) HandleSerialize(ctx contex
 func awsRestjson1_serializeOpHttpBindingsGetV2LoggingOptionsInput(v *GetV2LoggingOptionsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Verbose {
+		encoder.SetQuery("verbose").Boolean(v.Verbose)
 	}
 
 	return nil
@@ -19213,6 +19221,13 @@ func awsRestjson1_serializeOpDocumentSetV2LoggingOptionsInput(v *SetV2LoggingOpt
 	if v.DisableAllLogs {
 		ok := object.Key("disableAllLogs")
 		ok.Boolean(v.DisableAllLogs)
+	}
+
+	if v.EventConfigurations != nil {
+		ok := object.Key("eventConfigurations")
+		if err := awsRestjson1_serializeDocumentLogEventConfigurations(v.EventConfigurations, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RoleArn != nil {
@@ -25887,6 +25902,41 @@ func awsRestjson1_serializeDocumentLocationTimestamp(v *types.LocationTimestamp,
 		ok.String(*v.Value)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLogEventConfiguration(v *types.LogEventConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventType != nil {
+		ok := object.Key("eventType")
+		ok.String(*v.EventType)
+	}
+
+	if v.LogDestination != nil {
+		ok := object.Key("logDestination")
+		ok.String(*v.LogDestination)
+	}
+
+	if len(v.LogLevel) > 0 {
+		ok := object.Key("logLevel")
+		ok.String(string(v.LogLevel))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLogEventConfigurations(v []types.LogEventConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLogEventConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

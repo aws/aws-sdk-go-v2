@@ -3470,6 +3470,26 @@ func (m *validateOpSetV2LoggingLevel) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSetV2LoggingOptions struct {
+}
+
+func (*validateOpSetV2LoggingOptions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetV2LoggingOptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetV2LoggingOptionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetV2LoggingOptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartAuditMitigationActionsTask struct {
 }
 
@@ -4922,6 +4942,10 @@ func addOpSetV2LoggingLevelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetV2LoggingLevel{}, middleware.After)
 }
 
+func addOpSetV2LoggingOptionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetV2LoggingOptions{}, middleware.After)
+}
+
 func addOpStartAuditMitigationActionsTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAuditMitigationActionsTask{}, middleware.After)
 }
@@ -6239,6 +6263,38 @@ func validateLocationTimestamp(v *types.LocationTimestamp) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LocationTimestamp"}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogEventConfiguration(v *types.LogEventConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogEventConfiguration"}
+	if v.EventType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogEventConfigurations(v []types.LogEventConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogEventConfigurations"}
+	for i := range v {
+		if err := validateLogEventConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10093,6 +10149,23 @@ func validateOpSetV2LoggingLevelInput(v *SetV2LoggingLevelInput) error {
 	}
 	if len(v.LogLevel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetV2LoggingOptionsInput(v *SetV2LoggingOptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetV2LoggingOptionsInput"}
+	if v.EventConfigurations != nil {
+		if err := validateLogEventConfigurations(v.EventConfigurations); err != nil {
+			invalidParams.AddNested("EventConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

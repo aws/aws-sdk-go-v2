@@ -1215,6 +1215,10 @@ type UserSettings struct {
 	// streaming session.
 	UploadAllowed EnabledType
 
+	// Specifies whether the user can use WebAuthn redirection for passwordless login
+	// to websites within the streaming session.
+	WebAuthnAllowed EnabledType
+
 	noSmithyDocumentSerde
 }
 
@@ -1272,6 +1276,10 @@ type UserSettingsSummary struct {
 	// Specifies whether the user can upload files from the local device to the
 	// streaming session.
 	UploadAllowed EnabledType
+
+	// Specifies whether the user can use WebAuthn redirection for passwordless login
+	// to websites within the streaming session.
+	WebAuthnAllowed EnabledType
 
 	noSmithyDocumentSerde
 }

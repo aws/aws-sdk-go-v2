@@ -1,0 +1,8 @@
+{
+    "id": "2d4e7591-3d72-479b-b734-60a425fed437",
+    "type": "feature",
+    "description": "AWS Wickr now provides a suite of admin APIs to allow you to programmatically manage secure communication for Wickr networks at scale. These APIs enable you to automate administrative workflows including user lifecycle management, network configuration, and security group administration.",
+    "modules": [
+        "service/wickr"
+    ]
+}

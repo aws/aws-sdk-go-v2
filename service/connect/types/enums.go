@@ -1566,6 +1566,8 @@ const (
 	GroupingRoutingProfile        Grouping = "ROUTING_PROFILE"
 	GroupingRoutingStepExpression Grouping = "ROUTING_STEP_EXPRESSION"
 	GroupingAgentStatus           Grouping = "AGENT_STATUS"
+	GroupingSubtype               Grouping = "SUBTYPE"
+	GroupingValidationTestType    Grouping = "VALIDATION_TEST_TYPE"
 )
 
 // Values returns all known values for Grouping. Note that this can be expanded in
@@ -1579,6 +1581,8 @@ func (Grouping) Values() []Grouping {
 		"ROUTING_PROFILE",
 		"ROUTING_STEP_EXPRESSION",
 		"AGENT_STATUS",
+		"SUBTYPE",
+		"VALIDATION_TEST_TYPE",
 	}
 }
 

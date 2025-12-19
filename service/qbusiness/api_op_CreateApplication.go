@@ -90,12 +90,12 @@ type CreateApplicationInput struct {
 	// experience.
 	QAppsConfiguration *types.QAppsConfiguration
 
-	// The Amazon QuickSight configuration for an Amazon Q Business application that
-	// uses QuickSight for authentication. This configuration is required if your
-	// application uses QuickSight as the identity provider. For more information, see [Creating an Amazon QuickSight integrated application]
-	// .
+	// The Amazon Quick Suite configuration for an Amazon Q Business application that
+	// uses Quick Suite for authentication. This configuration is required if your
+	// application uses Quick Suite as the identity provider. For more information, see
+	// [Creating an Amazon Quick Suite integrated application].
 	//
-	// [Creating an Amazon QuickSight integrated application]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html
+	// [Creating an Amazon Quick Suite integrated application]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html
 	QuickSightConfiguration *types.QuickSightConfiguration
 
 	//  The Amazon Resource Name (ARN) of an IAM role with permissions to access your

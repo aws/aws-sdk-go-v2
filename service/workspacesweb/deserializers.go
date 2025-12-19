@@ -15976,6 +15976,15 @@ func awsRestjson1_deserializeDocumentUserSettings(v **types.UserSettings, value 
 				sv.UserSettingsArn = ptr.String(jtv)
 			}
 
+		case "webAuthnAllowed":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnabledType to be of type string, got %T instead", value)
+				}
+				sv.WebAuthnAllowed = types.EnabledType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16143,6 +16152,15 @@ func awsRestjson1_deserializeDocumentUserSettingsSummary(v **types.UserSettingsS
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.UserSettingsArn = ptr.String(jtv)
+			}
+
+		case "webAuthnAllowed":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnabledType to be of type string, got %T instead", value)
+				}
+				sv.WebAuthnAllowed = types.EnabledType(jtv)
 			}
 
 		default:

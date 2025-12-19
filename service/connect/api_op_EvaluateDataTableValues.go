@@ -17,7 +17,7 @@ import (
 // access are saved alongside the value to help identify values that are actively
 // in use. The term "Batch" is not included in the operation name since it does not
 // meet all the criteria for a batch operation as specified in Batch Operations:
-// AWS API Standards.
+// Amazon Web Services API Standards.
 func (c *Client) EvaluateDataTableValues(ctx context.Context, params *EvaluateDataTableValuesInput, optFns ...func(*Options)) (*EvaluateDataTableValuesOutput, error) {
 	if params == nil {
 		params = &EvaluateDataTableValuesInput{}

@@ -69,6 +69,9 @@ type UpdateApplicationInput struct {
 	// when the application is updated.
 	InteractiveConfiguration *types.InteractiveConfiguration
 
+	// The configuration object that enables job level cost allocation.
+	JobLevelCostAllocationConfiguration *types.JobLevelCostAllocationConfiguration
+
 	// The maximum capacity to allocate when the application is updated. This is
 	// cumulative across all workers at any given point in time during the lifespan of
 	// the application. No new resources will be created once any one of the defined

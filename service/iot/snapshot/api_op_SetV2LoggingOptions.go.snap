@@ -3,6 +3,7 @@ SetV2LoggingOptions
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
+		OperationInputValidation
 	Serialize stack step
 		setOperationInput
 		ResolveEndpoint

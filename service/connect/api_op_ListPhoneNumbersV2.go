@@ -46,8 +46,8 @@ type ListPhoneNumbersV2Input struct {
 	// The identifier of the Amazon Connect instance that phone numbers are claimed
 	// to. You can [find the instance ID]in the Amazon Resource Name (ARN) of the instance. If both TargetArn
 	// and InstanceId are not provided, this API lists numbers claimed to all the
-	// Amazon Connect instances belonging to your account in the same AWS Region as the
-	// request.
+	// Amazon Connect instances belonging to your account in the same Amazon Web
+	// Services Region as the request.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	InstanceId *string

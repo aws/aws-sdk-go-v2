@@ -2270,12 +2270,20 @@ type CrossChannelBehavior struct {
 // Contains information about a real-time metric. For a description of each
 // metric, see [Metrics definitions]in the Amazon Connect Administrator Guide.
 //
+// Only one of either the Name or MetricId is required.
+//
 // [Metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
 type CurrentMetric struct {
+
+	// Out of the box current metrics or custom metrics can be referenced via this
+	// field. This field is a valid AWS Connect Arn or a UUID.
+	MetricId *string
 
 	// The name of the metric.
 	Name CurrentMetricName
 
+	// The Unit parameter is not supported for custom metrics.
+	//
 	// The unit for the metric.
 	Unit Unit
 
@@ -2400,8 +2408,8 @@ type DataTable struct {
 	// An optional description of the data table's purpose and contents.
 	Description *string
 
-	// The AWS region where the data table was last modified, used for region
-	// replication.
+	// The Amazon Web Services Region where the data table was last modified, used for
+	// region replication.
 	LastModifiedRegion *string
 
 	// The lock version information used for optimistic locking and table versioning.
@@ -2470,8 +2478,8 @@ type DataTableAttribute struct {
 	// An optional description explaining the purpose and usage of this attribute.
 	Description *string
 
-	// The AWS region where this attribute was last modified, used for region
-	// replication.
+	// The Amazon Web Services Region where this attribute was last modified, used for
+	// region replication.
 	LastModifiedRegion *string
 
 	// The timestamp when this attribute was last modified.
@@ -2862,6 +2870,12 @@ type Dimensions struct {
 
 	// The expression of a step in a routing criteria.
 	RoutingStepExpression *string
+
+	// The subtype of the channel used for the contact.
+	Subtype *string
+
+	// The testing and simulation type
+	ValidationTestType *string
 
 	noSmithyDocumentSerde
 }
@@ -4802,6 +4816,12 @@ type Filters struct {
 	// A list of expressions as a filter, in which an expression is an object of a
 	// step in a routing criteria.
 	RoutingStepExpressions []string
+
+	// A list of up to 10 subtypes can be provided.
+	Subtypes []string
+
+	// A list of up to 10 validationTestTypes can be provided.
+	ValidationTestTypes []string
 
 	noSmithyDocumentSerde
 }
@@ -10558,7 +10578,7 @@ type Workspace struct {
 	// The description of the workspace.
 	Description *string
 
-	// The AWS Region where the workspace was last modified.
+	// The Amazon Web Services Region where the workspace was last modified.
 	LastModifiedRegion *string
 
 	// The tags used to organize, track, or control access for the workspace.
@@ -10726,7 +10746,7 @@ type WorkspaceSummary struct {
 	// The unique identifier of the workspace.
 	Id *string
 
-	// The AWS Region where the workspace was last modified.
+	// The Amazon Web Services Region where the workspace was last modified.
 	LastModifiedRegion *string
 
 	// The timestamp when the workspace was last modified.

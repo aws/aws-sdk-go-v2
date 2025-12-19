@@ -15,7 +15,7 @@ import (
 // of all table properties except for attributes and values. A table with no
 // attributes and values is a valid state for a table. The number of tables per
 // instance is limited to 100 per instance. Customers can request an increase by
-// using AWS Service Quotas.
+// using Amazon Web Services Service Quotas.
 func (c *Client) CreateDataTable(ctx context.Context, params *CreateDataTableInput, optFns ...func(*Options)) (*CreateDataTableOutput, error) {
 	if params == nil {
 		params = &CreateDataTableInput{}

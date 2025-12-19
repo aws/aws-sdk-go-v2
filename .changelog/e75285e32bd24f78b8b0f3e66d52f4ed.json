@@ -1,0 +1,8 @@
+{
+    "id": "e75285e3-2bd2-4f78-b8b0-f3e66d52f4ed",
+    "type": "feature",
+    "description": "Add support for WebAuthn under user settings.",
+    "modules": [
+        "service/workspacesweb"
+    ]
+}

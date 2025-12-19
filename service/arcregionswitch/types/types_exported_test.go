@@ -17,6 +17,9 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 	case *types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig:
 		_ = v.Value // Value is types.CustomActionLambdaConfiguration
 
+	case *types.ExecutionBlockConfigurationMemberDocumentDbConfig:
+		_ = v.Value // Value is types.DocumentDbConfiguration
+
 	case *types.ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig:
 		_ = v.Value // Value is types.Ec2AsgCapacityIncreaseConfiguration
 
@@ -54,9 +57,50 @@ var _ *types.GlobalAuroraConfiguration
 var _ *types.EcsCapacityIncreaseConfiguration
 var _ *types.ParallelExecutionBlockConfiguration
 var _ *types.Route53HealthCheckConfiguration
+var _ *types.DocumentDbConfiguration
 var _ *types.ExecutionApprovalConfiguration
 var _ *types.ArcRoutingControlConfiguration
 var _ *types.Ec2AsgCapacityIncreaseConfiguration
 var _ *types.EksResourceScalingConfiguration
 var _ *types.RegionSwitchPlanConfiguration
 var _ *types.CustomActionLambdaConfiguration
+
+func ExampleReportOutput_outputUsage() {
+	var union types.ReportOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ReportOutputMemberFailedReportOutput:
+		_ = v.Value // Value is types.FailedReportOutput
+
+	case *types.ReportOutputMemberS3ReportOutput:
+		_ = v.Value // Value is types.S3ReportOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FailedReportOutput
+var _ *types.S3ReportOutput
+
+func ExampleReportOutputConfiguration_outputUsage() {
+	var union types.ReportOutputConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ReportOutputConfigurationMemberS3Configuration:
+		_ = v.Value // Value is types.S3ReportOutputConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3ReportOutputConfiguration

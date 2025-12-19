@@ -307,8 +307,8 @@ type Application struct {
 	// The authentication type being used by a Amazon Q Business application.
 	IdentityType IdentityType
 
-	// The Amazon QuickSight configuration for an Amazon Q Business application that
-	// uses QuickSight as the identity provider.
+	// The Amazon Quick Suite configuration for an Amazon Q Business application that
+	// uses Quick Suite as the identity provider.
 	QuickSightConfiguration *QuickSightConfiguration
 
 	// The status of the Amazon Q Business application. The application is ready to
@@ -2801,14 +2801,14 @@ type QAppsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon QuickSight configuration for an Amazon Q Business application that
-// uses QuickSight as the identity provider. For more information, see [Creating an Amazon QuickSight integrated application].
+// The Amazon Quick Suite configuration for an Amazon Q Business application that
+// uses Quick Suite as the identity provider. For more information, see [Creating an Amazon Quick Suite integrated application].
 //
-// [Creating an Amazon QuickSight integrated application]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html
+// [Creating an Amazon Quick Suite integrated application]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html
 type QuickSightConfiguration struct {
 
-	// The Amazon QuickSight namespace that is used as the identity provider. For more
-	// information about QuickSight namespaces, see [Namespace operations].
+	// The Amazon Quick Suite namespace that is used as the identity provider. For
+	// more information about Quick Suite namespaces, see [Namespace operations].
 	//
 	// [Namespace operations]: https://docs.aws.amazon.com/quicksight/latest/developerguide/namespace-operations.html
 	//

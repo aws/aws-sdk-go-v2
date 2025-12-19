@@ -12,9 +12,9 @@ import (
 )
 
 // Returns all attributes for a specified data table. A maximum of 100 attributes
-// per data table is allowed. Customers can request an increase by using AWS
-// Service Quotas. The response can be filtered by specific attribute IDs for
-// CloudFormation integration.
+// per data table is allowed. Customers can request an increase by using Amazon Web
+// Services Service Quotas. The response can be filtered by specific attribute IDs
+// for CloudFormation integration.
 func (c *Client) ListDataTableAttributes(ctx context.Context, params *ListDataTableAttributesInput, optFns ...func(*Options)) (*ListDataTableAttributesOutput, error) {
 	if params == nil {
 		params = &ListDataTableAttributesInput{}

@@ -1279,6 +1279,93 @@ func serializeCBOR_CustomActionLambdaConfiguration(v *types.CustomActionLambdaCo
 	return vm, nil
 }
 
+func serializeCBOR_DocumentDbClusterArns(v []string) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_String(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_DocumentDbConfiguration(v *types.DocumentDbConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.TimeoutMinutes != nil {
+		ser, err := serializeCBOR_Int32(*v.TimeoutMinutes)
+		if err != nil {
+			return nil, err
+		}
+		vm["timeoutMinutes"] = ser
+	}
+	if v.CrossAccountRole != nil {
+		ser, err := serializeCBOR_String(*v.CrossAccountRole)
+		if err != nil {
+			return nil, err
+		}
+		vm["crossAccountRole"] = ser
+	}
+	if v.ExternalId != nil {
+		ser, err := serializeCBOR_String(*v.ExternalId)
+		if err != nil {
+			return nil, err
+		}
+		vm["externalId"] = ser
+	}
+	if len(v.Behavior) > 0 {
+		ser, err := serializeCBOR_DocumentDbDefaultBehavior(v.Behavior)
+		if err != nil {
+			return nil, err
+		}
+		vm["behavior"] = ser
+	}
+	if v.Ungraceful != nil {
+		ser, err := serializeCBOR_DocumentDbUngraceful(v.Ungraceful)
+		if err != nil {
+			return nil, err
+		}
+		vm["ungraceful"] = ser
+	}
+	if v.GlobalClusterIdentifier != nil {
+		ser, err := serializeCBOR_String(*v.GlobalClusterIdentifier)
+		if err != nil {
+			return nil, err
+		}
+		vm["globalClusterIdentifier"] = ser
+	}
+	if v.DatabaseClusterArns != nil {
+		ser, err := serializeCBOR_DocumentDbClusterArns(v.DatabaseClusterArns)
+		if err != nil {
+			return nil, err
+		}
+		vm["databaseClusterArns"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DocumentDbDefaultBehavior(v types.DocumentDbDefaultBehavior) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_DocumentDbUngraceful(v *types.DocumentDbUngraceful) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if len(v.Ungraceful) > 0 {
+		ser, err := serializeCBOR_DocumentDbUngracefulBehavior(v.Ungraceful)
+		if err != nil {
+			return nil, err
+		}
+		vm["ungraceful"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DocumentDbUngracefulBehavior(v types.DocumentDbUngracefulBehavior) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
 func serializeCBOR_Ec2AsgCapacityIncreaseConfiguration(v *types.Ec2AsgCapacityIncreaseConfiguration) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.TimeoutMinutes != nil {
@@ -1586,6 +1673,12 @@ func serializeCBOR_ExecutionBlockConfiguration(v types.ExecutionBlockConfigurati
 			return nil, err
 		}
 		vm["route53HealthCheckConfig"] = ser
+	case *types.ExecutionBlockConfigurationMemberDocumentDbConfig:
+		ser, err := serializeCBOR_DocumentDbConfiguration(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["documentDbConfig"] = ser
 	default:
 		return nil, fmt.Errorf("unknown variant type %T", v)
 	}
@@ -1898,6 +1991,46 @@ func serializeCBOR_RegionToRunIn(v types.RegionToRunIn) (smithycbor.Value, error
 	return smithycbor.String(string(v)), nil
 }
 
+func serializeCBOR_ReportConfiguration(v *types.ReportConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.ReportOutput != nil {
+		ser, err := serializeCBOR_ReportOutputList(v.ReportOutput)
+		if err != nil {
+			return nil, err
+		}
+		vm["reportOutput"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ReportOutputConfiguration(v types.ReportOutputConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	switch uv := v.(type) {
+	case *types.ReportOutputConfigurationMemberS3Configuration:
+		ser, err := serializeCBOR_S3ReportOutputConfiguration(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["s3Configuration"] = ser
+	default:
+		return nil, fmt.Errorf("unknown variant type %T", v)
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ReportOutputList(v []types.ReportOutputConfiguration) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_ReportOutputConfiguration(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
 func serializeCBOR_Route53HealthCheckConfiguration(v *types.Route53HealthCheckConfiguration) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.TimeoutMinutes != nil {
@@ -1979,6 +2112,25 @@ func serializeCBOR_Route53ResourceRecordSetList(v []types.Route53ResourceRecordS
 
 func serializeCBOR_RoutingControlStateChange(v types.RoutingControlStateChange) (smithycbor.Value, error) {
 	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_S3ReportOutputConfiguration(v *types.S3ReportOutputConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.BucketPath != nil {
+		ser, err := serializeCBOR_String(*v.BucketPath)
+		if err != nil {
+			return nil, err
+		}
+		vm["bucketPath"] = ser
+	}
+	if v.BucketOwner != nil {
+		ser, err := serializeCBOR_String(*v.BucketOwner)
+		if err != nil {
+			return nil, err
+		}
+		vm["bucketOwner"] = ser
+	}
+	return vm, nil
 }
 
 func serializeCBOR_Service(v *types.Service) (smithycbor.Value, error) {
@@ -2366,6 +2518,13 @@ func serializeCBOR_CreatePlanInput(v *CreatePlanInput) (smithycbor.Value, error)
 			return nil, err
 		}
 		vm["triggers"] = ser
+	}
+	if v.ReportConfiguration != nil {
+		ser, err := serializeCBOR_ReportConfiguration(v.ReportConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		vm["reportConfiguration"] = ser
 	}
 	if v.Name != nil {
 		ser, err := serializeCBOR_String(*v.Name)
@@ -2911,6 +3070,13 @@ func serializeCBOR_UpdatePlanInput(v *UpdatePlanInput) (smithycbor.Value, error)
 			return nil, err
 		}
 		vm["triggers"] = ser
+	}
+	if v.ReportConfiguration != nil {
+		ser, err := serializeCBOR_ReportConfiguration(v.ReportConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		vm["reportConfiguration"] = ser
 	}
 	return vm, nil
 }

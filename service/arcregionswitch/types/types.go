@@ -230,6 +230,52 @@ type CustomActionLambdaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for Amazon DocumentDB global clusters used in a Region switch
+// plan.
+type DocumentDbConfiguration struct {
+
+	// The behavior for a global cluster, that is, only allow switchover or also allow
+	// failover.
+	//
+	// This member is required.
+	Behavior DocumentDbDefaultBehavior
+
+	// The database cluster Amazon Resource Names (ARNs) for a DocumentDB global
+	// cluster.
+	//
+	// This member is required.
+	DatabaseClusterArns []string
+
+	// The global cluster identifier for a DocumentDB global cluster.
+	//
+	// This member is required.
+	GlobalClusterIdentifier *string
+
+	// The cross account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	// The settings for ungraceful execution.
+	Ungraceful *DocumentDbUngraceful
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for handling failures when performing operations on DocumentDB
+// global clusters.
+type DocumentDbUngraceful struct {
+
+	// The settings for ungraceful execution.
+	Ungraceful DocumentDbUngracefulBehavior
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for increasing the capacity of Amazon EC2 Auto Scaling groups
 // during a Region switch.
 type Ec2AsgCapacityIncreaseConfiguration struct {
@@ -382,6 +428,7 @@ type ExecutionApprovalConfiguration struct {
 //
 //	ExecutionBlockConfigurationMemberArcRoutingControlConfig
 //	ExecutionBlockConfigurationMemberCustomActionLambdaConfig
+//	ExecutionBlockConfigurationMemberDocumentDbConfig
 //	ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig
 //	ExecutionBlockConfigurationMemberEcsCapacityIncreaseConfig
 //	ExecutionBlockConfigurationMemberEksResourceScalingConfig
@@ -411,6 +458,16 @@ type ExecutionBlockConfigurationMemberCustomActionLambdaConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberCustomActionLambdaConfig) isExecutionBlockConfiguration() {}
+
+// Configuration for Amazon DocumentDB global clusters used in a Region switch
+// plan.
+type ExecutionBlockConfigurationMemberDocumentDbConfig struct {
+	Value DocumentDbConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberDocumentDbConfig) isExecutionBlockConfiguration() {}
 
 // An EC2 Auto Scaling group execution block.
 type ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig struct {
@@ -517,6 +574,30 @@ type ExecutionEvent struct {
 
 	// The type of an execution event.
 	Type ExecutionEventType
+
+	noSmithyDocumentSerde
+}
+
+// Information about a report generation that failed.
+type FailedReportOutput struct {
+
+	// The error code for the failed report generation.
+	ErrorCode FailedReportErrorCode
+
+	// The error message for the failed report generation.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a generated execution report.
+type GeneratedReport struct {
+
+	// The timestamp when the report was generated.
+	ReportGenerationTime *time.Time
+
+	// The output location or cause of a failure in report generation.
+	ReportOutput ReportOutput
 
 	noSmithyDocumentSerde
 }
@@ -701,6 +782,9 @@ type Plan struct {
 	// The recovery time objective for a plan.
 	RecoveryTimeObjectiveMinutes *int32
 
+	// The report configuration for a plan.
+	ReportConfiguration *ReportConfiguration
+
 	// The triggers for a plan.
 	Triggers []Trigger
 
@@ -730,6 +814,64 @@ type RegionSwitchPlanConfiguration struct {
 
 	noSmithyDocumentSerde
 }
+
+// Configuration for automatic report generation for plan executions. When
+// configured, Region switch automatically generates a report after each plan
+// execution that includes execution events, plan configuration, and CloudWatch
+// alarm states.
+type ReportConfiguration struct {
+
+	// The output configuration for the report.
+	ReportOutput []ReportOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The output location or cause of a failure in report generation.
+//
+// The following types satisfy this interface:
+//
+//	ReportOutputMemberFailedReportOutput
+//	ReportOutputMemberS3ReportOutput
+type ReportOutput interface {
+	isReportOutput()
+}
+
+// The details about a failed report generation.
+type ReportOutputMemberFailedReportOutput struct {
+	Value FailedReportOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ReportOutputMemberFailedReportOutput) isReportOutput() {}
+
+// Information about a report delivered to Amazon S3.
+type ReportOutputMemberS3ReportOutput struct {
+	Value S3ReportOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ReportOutputMemberS3ReportOutput) isReportOutput() {}
+
+// Configuration for report output destinations used in a Region switch plan.
+//
+// The following types satisfy this interface:
+//
+//	ReportOutputConfigurationMemberS3Configuration
+type ReportOutputConfiguration interface {
+	isReportOutputConfiguration()
+}
+
+// Configuration for delivering reports to an Amazon S3 bucket.
+type ReportOutputConfigurationMemberS3Configuration struct {
+	Value S3ReportOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ReportOutputConfigurationMemberS3Configuration) isReportOutputConfiguration() {}
 
 // Represents a warning about a resource in a Region switch plan.
 type ResourceWarning struct {
@@ -829,6 +971,29 @@ type Route53ResourceRecordSet struct {
 
 	// The Amazon Route 53 record set Region.
 	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a report delivered to Amazon S3.
+type S3ReportOutput struct {
+
+	// The S3 object key where the generated report is stored.
+	S3ObjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for delivering generated reports to an Amazon S3 bucket.
+type S3ReportOutputConfiguration struct {
+
+	// The Amazon Web Services account ID that owns the S3 bucket. Required to ensure
+	// the bucket is still owned by the same expected owner at generation time.
+	BucketOwner *string
+
+	// The S3 bucket name and optional prefix where reports are stored. Format:
+	// bucket-name or bucket-name/prefix.
+	BucketPath *string
 
 	noSmithyDocumentSerde
 }
@@ -980,3 +1145,5 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isExecutionBlockConfiguration() {}
+func (*UnknownUnionMember) isReportOutput()                {}
+func (*UnknownUnionMember) isReportOutputConfiguration()   {}

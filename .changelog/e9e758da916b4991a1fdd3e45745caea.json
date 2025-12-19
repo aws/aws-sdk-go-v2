@@ -1,0 +1,8 @@
+{
+    "id": "e9e758da-916b-4991-a1fd-d3e45745caea",
+    "type": "feature",
+    "description": "It is a internal bug fix for region expansion",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

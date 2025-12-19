@@ -72,6 +72,9 @@ type CreateApplicationInput struct {
 	// use when running an application.
 	InteractiveConfiguration *types.InteractiveConfiguration
 
+	// The configuration object that enables job level cost allocation.
+	JobLevelCostAllocationConfiguration *types.JobLevelCostAllocationConfiguration
+
 	// The maximum capacity to allocate when the application is created. This is
 	// cumulative across all workers at any given point in time, not just when an
 	// application is created. No new resources will be created once any one of the

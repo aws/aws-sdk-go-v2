@@ -94,7 +94,7 @@ type GetApplicationOutput struct {
 	// experience.
 	QAppsConfiguration *types.QAppsConfiguration
 
-	// The Amazon QuickSight authentication configuration for the Amazon Q Business
+	// The Amazon Quick Suite authentication configuration for the Amazon Q Business
 	// application.
 	QuickSightConfiguration *types.QuickSightConfiguration
 

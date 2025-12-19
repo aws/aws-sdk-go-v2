@@ -96,6 +96,10 @@ type UpdateUserSettingsInput struct {
 	// streaming session.
 	UploadAllowed types.EnabledType
 
+	// Specifies whether the user can use WebAuthn redirection for passwordless login
+	// to websites within the streaming session.
+	WebAuthnAllowed types.EnabledType
+
 	noSmithyDocumentSerde
 }
 

@@ -35234,6 +35234,11 @@ func awsRestjson1_serializeDocumentCurrentMetric(v *types.CurrentMetric, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.MetricId != nil {
+		ok := object.Key("MetricId")
+		ok.String(*v.MetricId)
+	}
+
 	if len(v.Name) > 0 {
 		ok := object.Key("Name")
 		ok.String(string(v.Name))
@@ -37153,6 +37158,20 @@ func awsRestjson1_serializeDocumentFilters(v *types.Filters, value smithyjson.Va
 	if v.RoutingStepExpressions != nil {
 		ok := object.Key("RoutingStepExpressions")
 		if err := awsRestjson1_serializeDocumentRoutingExpressions(v.RoutingStepExpressions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subtypes != nil {
+		ok := object.Key("Subtypes")
+		if err := awsRestjson1_serializeDocumentSubtypes(v.Subtypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ValidationTestTypes != nil {
+		ok := object.Key("ValidationTestTypes")
+		if err := awsRestjson1_serializeDocumentValidationTestTypes(v.ValidationTestTypes, ok); err != nil {
 			return err
 		}
 	}
@@ -40467,6 +40486,17 @@ func awsRestjson1_serializeDocumentSubmitAutoEvaluationActionDefinition(v *types
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSubtypes(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSupportedMessagingContentTypes(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -41476,6 +41506,17 @@ func awsRestjson1_serializeDocumentValidationEnum(v *types.ValidationEnum, value
 }
 
 func awsRestjson1_serializeDocumentValidationEnumValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentValidationTestTypes(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

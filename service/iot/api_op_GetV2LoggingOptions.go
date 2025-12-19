@@ -32,6 +32,11 @@ func (c *Client) GetV2LoggingOptions(ctx context.Context, params *GetV2LoggingOp
 }
 
 type GetV2LoggingOptionsInput struct {
+
+	//  The flag is used to get all the event types and their respective configuration
+	// that event-based logging supports.
+	Verbose bool
+
 	noSmithyDocumentSerde
 }
 
@@ -42,6 +47,9 @@ type GetV2LoggingOptionsOutput struct {
 
 	// Disables all logs.
 	DisableAllLogs bool
+
+	//  The list of event configurations that override account-level logging.
+	EventConfigurations []types.LogEventConfiguration
 
 	// The IAM role ARN IoT uses to write to your CloudWatch logs.
 	RoleArn *string

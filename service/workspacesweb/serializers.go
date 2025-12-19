@@ -1763,6 +1763,11 @@ func awsRestjson1_serializeOpDocumentCreateUserSettingsInput(v *CreateUserSettin
 		ok.String(string(v.UploadAllowed))
 	}
 
+	if len(v.WebAuthnAllowed) > 0 {
+		ok := object.Key("webAuthnAllowed")
+		ok.String(string(v.WebAuthnAllowed))
+	}
+
 	return nil
 }
 
@@ -6318,6 +6323,11 @@ func awsRestjson1_serializeOpDocumentUpdateUserSettingsInput(v *UpdateUserSettin
 	if len(v.UploadAllowed) > 0 {
 		ok := object.Key("uploadAllowed")
 		ok.String(string(v.UploadAllowed))
+	}
+
+	if len(v.WebAuthnAllowed) > 0 {
+		ok := object.Key("webAuthnAllowed")
+		ok.String(string(v.WebAuthnAllowed))
 	}
 
 	return nil

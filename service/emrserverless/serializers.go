@@ -225,6 +225,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		}
 	}
 
+	if v.JobLevelCostAllocationConfiguration != nil {
+		ok := object.Key("jobLevelCostAllocationConfiguration")
+		if err := awsRestjson1_serializeDocumentJobLevelCostAllocationConfiguration(v.JobLevelCostAllocationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumCapacity != nil {
 		ok := object.Key("maximumCapacity")
 		if err := awsRestjson1_serializeDocumentMaximumAllowedResources(v.MaximumCapacity, ok); err != nil {
@@ -1540,6 +1547,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		}
 	}
 
+	if v.JobLevelCostAllocationConfiguration != nil {
+		ok := object.Key("jobLevelCostAllocationConfiguration")
+		if err := awsRestjson1_serializeDocumentJobLevelCostAllocationConfiguration(v.JobLevelCostAllocationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumCapacity != nil {
 		ok := object.Key("maximumCapacity")
 		if err := awsRestjson1_serializeDocumentMaximumAllowedResources(v.MaximumCapacity, ok); err != nil {
@@ -1846,6 +1860,18 @@ func awsRestjson1_serializeDocumentJobDriver(v types.JobDriver, value smithyjson
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJobLevelCostAllocationConfiguration(v *types.JobLevelCostAllocationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
 	return nil
 }
 

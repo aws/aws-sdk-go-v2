@@ -108,6 +108,10 @@ type GetPlanExecutionOutput struct {
 	// The time (UTC) when the plan execution ended.
 	EndTime *time.Time
 
+	// Information about the location of a generated report, or the cause of its
+	// failure.
+	GeneratedReportDetails []types.GeneratedReport
+
 	// Specifies that you want to receive the next page of results. Valid only if you
 	// received a nextToken response in the previous request. If you did, it indicates
 	// that more output is available. Set this parameter to the value provided by the

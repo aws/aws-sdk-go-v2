@@ -2058,7 +2058,9 @@ type HttpAction struct {
 	// The authentication method to use when sending data to an HTTPS endpoint.
 	Auth *HttpAuthorization
 
-	// The configuration settings for batching. For more information, see Batching HTTP action messages.
+	// The configuration settings for batching. For more information, see [Batching HTTP action messages].
+	//
+	// [Batching HTTP action messages]: https://docs.aws.amazon.com/iot/latest/developerguide/http_batching.html
 	BatchConfig *BatchConfig
 
 	// The URL to which IoT sends a confirmation message. The value of the
@@ -2801,6 +2803,30 @@ type LocationTimestamp struct {
 	// Valid values: SECONDS | MILLISECONDS | MICROSECONDS | NANOSECONDS . The default
 	// is MILLISECONDS .
 	Unit *string
+
+	noSmithyDocumentSerde
+}
+
+//	Configuration for event-based logging that specifies which event types to log
+//
+// and their logging settings. Used for account-level logging overrides.
+type LogEventConfiguration struct {
+
+	//  The type of event to log. These include event types like Connect, Publish, and
+	// Disconnect.
+	//
+	// This member is required.
+	EventType *string
+
+	//  CloudWatch Log Group for event-based logging. Specifies where log events
+	// should be sent. The log destination for event-based logging overrides default
+	// Log Group for the specified event type and applies to all resources associated
+	// with that event.
+	LogDestination *string
+
+	//  The logging level for the specified event type. Determines the verbosity of
+	// log messages generated for this event type.
+	LogLevel LogLevel
 
 	noSmithyDocumentSerde
 }

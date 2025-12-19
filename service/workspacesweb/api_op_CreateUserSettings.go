@@ -109,6 +109,10 @@ type CreateUserSettingsInput struct {
 	// toolbar preferences.
 	ToolbarConfiguration *types.ToolbarConfiguration
 
+	// Specifies whether the user can use WebAuthn redirection for passwordless login
+	// to websites within the streaming session.
+	WebAuthnAllowed types.EnabledType
+
 	noSmithyDocumentSerde
 }
 

@@ -59,6 +59,43 @@ func (Approval) Values() []Approval {
 	}
 }
 
+type DocumentDbDefaultBehavior string
+
+// Enum values for DocumentDbDefaultBehavior
+const (
+	DocumentDbDefaultBehaviorSwitchoverOnly DocumentDbDefaultBehavior = "switchoverOnly"
+	DocumentDbDefaultBehaviorFailover       DocumentDbDefaultBehavior = "failover"
+)
+
+// Values returns all known values for DocumentDbDefaultBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentDbDefaultBehavior) Values() []DocumentDbDefaultBehavior {
+	return []DocumentDbDefaultBehavior{
+		"switchoverOnly",
+		"failover",
+	}
+}
+
+type DocumentDbUngracefulBehavior string
+
+// Enum values for DocumentDbUngracefulBehavior
+const (
+	DocumentDbUngracefulBehaviorFailover DocumentDbUngracefulBehavior = "failover"
+)
+
+// Values returns all known values for DocumentDbUngracefulBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentDbUngracefulBehavior) Values() []DocumentDbUngracefulBehavior {
+	return []DocumentDbUngracefulBehavior{
+		"failover",
+	}
+}
+
 type Ec2AsgCapacityMonitoringApproach string
 
 // Enum values for Ec2AsgCapacityMonitoringApproach
@@ -173,6 +210,7 @@ const (
 	ExecutionBlockTypeEcs                ExecutionBlockType = "ECSServiceScaling"
 	ExecutionBlockTypeEksResourceScaling ExecutionBlockType = "EKSResourceScaling"
 	ExecutionBlockTypeRoute53HealthCheck ExecutionBlockType = "Route53HealthCheck"
+	ExecutionBlockTypeDocumentdb         ExecutionBlockType = "DocumentDb"
 )
 
 // Values returns all known values for ExecutionBlockType. Note that this can be
@@ -191,6 +229,7 @@ func (ExecutionBlockType) Values() []ExecutionBlockType {
 		"ECSServiceScaling",
 		"EKSResourceScaling",
 		"Route53HealthCheck",
+		"DocumentDb",
 	}
 }
 
@@ -223,6 +262,7 @@ const (
 	ExecutionEventTypeStepPendingApproval                         ExecutionEventType = "stepPendingApproval"
 	ExecutionEventTypeStepExecutionBehaviorChangedToUngraceful    ExecutionEventType = "stepExecutionBehaviorChangedToUngraceful"
 	ExecutionEventTypeStepPendingApplicationHealthMonitor         ExecutionEventType = "stepPendingApplicationHealthMonitor"
+	ExecutionEventTypePlanEvaluationWarning                       ExecutionEventType = "planEvaluationWarning"
 )
 
 // Values returns all known values for ExecutionEventType. Note that this can be
@@ -256,6 +296,7 @@ func (ExecutionEventType) Values() []ExecutionEventType {
 		"stepPendingApproval",
 		"stepExecutionBehaviorChangedToUngraceful",
 		"stepPendingApplicationHealthMonitor",
+		"planEvaluationWarning",
 	}
 }
 
@@ -312,6 +353,27 @@ func (ExecutionState) Values() []ExecutionState {
 		"failed",
 		"pending",
 		"completedMonitoringApplicationHealth",
+	}
+}
+
+type FailedReportErrorCode string
+
+// Enum values for FailedReportErrorCode
+const (
+	FailedReportErrorCodeInsufficientPermissions FailedReportErrorCode = "insufficientPermissions"
+	FailedReportErrorCodeInvalidResource         FailedReportErrorCode = "invalidResource"
+	FailedReportErrorCodeConfigurationError      FailedReportErrorCode = "configurationError"
+)
+
+// Values returns all known values for FailedReportErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FailedReportErrorCode) Values() []FailedReportErrorCode {
+	return []FailedReportErrorCode{
+		"insufficientPermissions",
+		"invalidResource",
+		"configurationError",
 	}
 }
 

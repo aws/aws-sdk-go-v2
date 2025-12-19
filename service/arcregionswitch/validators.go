@@ -577,6 +577,27 @@ func validateCustomActionLambdaConfiguration(v *types.CustomActionLambdaConfigur
 	}
 }
 
+func validateDocumentDbConfiguration(v *types.DocumentDbConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentDbConfiguration"}
+	if len(v.Behavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Behavior"))
+	}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if v.DatabaseClusterArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseClusterArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEc2AsgCapacityIncreaseConfiguration(v *types.Ec2AsgCapacityIncreaseConfiguration) error {
 	if v == nil {
 		return nil
@@ -757,6 +778,11 @@ func validateExecutionBlockConfiguration(v types.ExecutionBlockConfiguration) er
 	case *types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig:
 		if err := validateCustomActionLambdaConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[customActionLambdaConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ExecutionBlockConfigurationMemberDocumentDbConfig:
+		if err := validateDocumentDbConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[documentDbConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig:

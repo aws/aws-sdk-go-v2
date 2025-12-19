@@ -70,6 +70,9 @@ type Application struct {
 	// an application.
 	InteractiveConfiguration *InteractiveConfiguration
 
+	// The configuration object that enables job level cost allocation.
+	JobLevelCostAllocationConfiguration *JobLevelCostAllocationConfiguration
+
 	// The maximum capacity of the application. This is cumulative across all workers
 	// at any given point in time during the lifespan of the application is created. No
 	// new resources will be created once any one of the defined limits is hit.
@@ -390,6 +393,15 @@ type JobDriverMemberSparkSubmit struct {
 }
 
 func (*JobDriverMemberSparkSubmit) isJobDriver() {}
+
+// The configuration object that enables job level cost allocation.
+type JobLevelCostAllocationConfiguration struct {
+
+	// Enables job level cost allocation for the application.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
 
 // Information about a job run. A job run is a unit of work, such as a Spark JAR,
 // Hive query, or SparkSQL query, that you submit to an Amazon EMR Serverless

@@ -59342,6 +59342,15 @@ func awsRestjson1_deserializeDocumentCurrentMetric(v **types.CurrentMetric, valu
 
 	for key, value := range shape {
 		switch key {
+		case "MetricId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CurrentMetricId to be of type string, got %T instead", value)
+				}
+				sv.MetricId = ptr.String(jtv)
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -60849,6 +60858,24 @@ func awsRestjson1_deserializeDocumentDimensions(v **types.Dimensions, value inte
 					return fmt.Errorf("expected RoutingExpression to be of type string, got %T instead", value)
 				}
 				sv.RoutingStepExpression = ptr.String(jtv)
+			}
+
+		case "Subtype":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Subtype to be of type string, got %T instead", value)
+				}
+				sv.Subtype = ptr.String(jtv)
+			}
+
+		case "ValidationTestType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ValidationTestType to be of type string, got %T instead", value)
+				}
+				sv.ValidationTestType = ptr.String(jtv)
 			}
 
 		default:

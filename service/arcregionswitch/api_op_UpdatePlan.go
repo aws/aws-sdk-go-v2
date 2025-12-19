@@ -57,6 +57,9 @@ type UpdatePlanInput struct {
 	// The updated target recovery time objective (RTO) in minutes for the plan.
 	RecoveryTimeObjectiveMinutes *int32
 
+	// The updated report configuration for the plan.
+	ReportConfiguration *types.ReportConfiguration
+
 	// The updated conditions that can automatically trigger the execution of the plan.
 	Triggers []types.Trigger
 

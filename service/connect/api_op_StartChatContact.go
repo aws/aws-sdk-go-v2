@@ -109,12 +109,6 @@ type StartChatContactInput struct {
 	// A list of participant types to automatically disconnect when the end customer
 	// ends the chat session, allowing them to continue through disconnect flows such
 	// as surveys or feedback forms.
-	//
-	// Valid value: AGENT .
-	//
-	// With the DisconnectOnCustomerExit parameter, you can configure automatic agent
-	// disconnection when end customers end the chat, ensuring that disconnect flows
-	// are triggered consistently regardless of which participant disconnects first.
 	DisconnectOnCustomerExit []types.DisconnectOnCustomerExitParticipantType
 
 	// The initial message to be sent to the newly created chat.

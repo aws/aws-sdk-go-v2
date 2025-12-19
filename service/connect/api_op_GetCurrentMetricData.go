@@ -56,9 +56,12 @@ func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMet
 
 type GetCurrentMetricDataInput struct {
 
-	// The metrics to retrieve. Specify the name and unit for each metric. The
-	// following metrics are available. For a description of all the metrics, see [Metrics definitions]in
-	// the Amazon Connect Administrator Guide.
+	// The metrics to retrieve. Specify the name or metricId, and unit for each
+	// metric. The following metrics are available. For a description of all the
+	// metrics, see [Metrics definitions]in the Amazon Connect Administrator Guide.
+	//
+	// MetricId should be used to reference custom metrics or out of the box metrics
+	// as Arn. If using MetricId, the limit is 10 MetricId per request.
 	//
 	// AGENTS_AFTER_CONTACT_WORK Unit: COUNT
 	//
@@ -157,12 +160,21 @@ type GetCurrentMetricDataInput struct {
 	//
 	//   - AgentStatuses: 50
 	//
+	//   - Subtypes: 10
+	//
+	//   - ValidationTestTypes: 10
+	//
 	// Metric data is retrieved only for the resources associated with the queues or
 	// routing profiles, and by any channels included in the filter. (You cannot filter
 	// by both queue AND routing profile.) You can include both resource IDs and
 	// resource ARNs in the same request.
 	//
 	// When using AgentStatuses as filter make sure Queues is added as primary filter.
+	//
+	// When using Subtypes as filter make sure Queues is added as primary filter.
+	//
+	// When using ValidationTestTypes as filter make sure Queues is added as primary
+	// filter.
 	//
 	// When using the RoutingStepExpression filter, you need to pass exactly one
 	// QueueId . The filter is also case sensitive so when using the
@@ -198,6 +210,9 @@ type GetCurrentMetricDataInput struct {
 	//   - If you group by AGENT_STATUS , you must include the QUEUE as the primary
 	//   grouping and use queue filter. When you group by AGENT_STATUS , the only
 	//   metric available is the AGENTS_ONLINE metric.
+	//
+	//   - If you group by SUBTYPE or VALIDATION_TEST_TYPE as secondary grouping then
+	//   you must include QUEUE as primary grouping and use Queue as filter
 	//
 	//   - If you group by ROUTING_PROFILE , you must include either a queue or routing
 	//   profile filter. In addition, a routing profile filter is required for metrics
