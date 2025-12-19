@@ -20424,7 +20424,16 @@
         },
         "com.amazonaws.iot#GetV2LoggingOptionsRequest": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "verbose": {
+                    "target": "com.amazonaws.iot#VerboseFlag",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n         The flag is used to get all the event types and their respective configuration that event-based logging supports.\n      </p>",
+                        "smithy.api#httpQuery": "verbose"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#input": {}
             }
@@ -20449,6 +20458,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Disables all logs.</p>"
+                    }
+                },
+                "eventConfigurations": {
+                    "target": "com.amazonaws.iot#LogEventConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The list of event configurations that override account-level logging.\n      </p>"
                     }
                 }
             },
@@ -20546,7 +20561,7 @@
                 "batchConfig": {
                     "target": "com.amazonaws.iot#BatchConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for batching. For more information, see <a href=\"/iot/latest/developerguide/http_batching.html\">Batching\n            HTTP action messages</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings for batching. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/http_batching.html\">\n         Batching HTTP action messages</a>.</p>"
                     }
                 }
             },
@@ -28287,6 +28302,58 @@
                 "smithy.api#documentation": "<p>Describes how to interpret an application-defined timestamp value from an MQTT message\n         payload and the precision of that value.</p>"
             }
         },
+        "com.amazonaws.iot#LogDestination": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[.\\-_/#A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.iot#LogEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "eventType": {
+                    "target": "com.amazonaws.iot#LogEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The type of event to log. These include event types like Connect, Publish, and Disconnect.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "logLevel": {
+                    "target": "com.amazonaws.iot#LogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The logging level for the specified event type. Determines the verbosity of log messages generated for this event type.\n      </p>"
+                    }
+                },
+                "logDestination": {
+                    "target": "com.amazonaws.iot#LogDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         CloudWatch Log Group for event-based logging. Specifies where log events should be sent. The log destination for event-based logging overrides default Log Group for the specified event type and applies to all resources associated with that event.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Configuration for event-based logging that specifies which event types to log and their logging settings. Used for account-level logging overrides.\n      </p>"
+            }
+        },
+        "com.amazonaws.iot#LogEventConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#LogEventConfiguration"
+            }
+        },
+        "com.amazonaws.iot#LogEventType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
         "com.amazonaws.iot#LogGroupName": {
             "type": "string"
         },
@@ -33097,6 +33164,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If true all logs are disabled. The default is false.</p>"
+                    }
+                },
+                "eventConfigurations": {
+                    "target": "com.amazonaws.iot#LogEventConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The list of event configurations that override account-level logging.\n      </p>"
                     }
                 }
             },
@@ -39196,6 +39269,12 @@
             "type": "double",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.iot#VerboseFlag": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.iot#VerificationState": {

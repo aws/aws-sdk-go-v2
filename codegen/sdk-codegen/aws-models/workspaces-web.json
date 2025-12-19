@@ -3321,6 +3321,12 @@
                         "smithy.api#documentation": "<p>The branding configuration input that customizes the appearance of the web portal for end users. This includes a custom logo, favicon, wallpaper, localized strings, color theme, and an optional terms of service.</p>",
                         "smithy.api#notProperty": {}
                     }
+                },
+                "webAuthnAllowed": {
+                    "target": "com.amazonaws.workspacesweb#EnabledType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the user can use WebAuthn redirection for passwordless login to websites within the streaming session.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10643,6 +10649,12 @@
                         "smithy.api#documentation": "<p>The branding configuration that customizes the appearance of the web portal for end users. When updating user settings without an existing branding configuration, all fields (logo, favicon, wallpaper, localized strings, and color theme) are required except for terms of service. When updating user settings with an existing branding configuration, all fields are optional.</p>",
                         "smithy.api#notProperty": {}
                     }
+                },
+                "webAuthnAllowed": {
+                    "target": "com.amazonaws.workspacesweb#EnabledType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the user can use WebAuthn redirection for passwordless login to websites within the streaming session.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10882,6 +10894,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The branding configuration output that customizes the appearance of the web portal for end users.</p>"
                     }
+                },
+                "webAuthnAllowed": {
+                    "target": "com.amazonaws.workspacesweb#EnabledType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the user can use WebAuthn redirection for passwordless login to websites within the streaming session.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10946,6 +10964,9 @@
                 },
                 "brandingConfiguration": {
                     "target": "com.amazonaws.workspacesweb#BrandingConfiguration"
+                },
+                "webAuthnAllowed": {
+                    "target": "com.amazonaws.workspacesweb#EnabledType"
                 }
             },
             "create": {
@@ -11053,6 +11074,12 @@
                     "target": "com.amazonaws.workspacesweb#BrandingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The branding configuration output that customizes the appearance of the web portal for end users.</p>"
+                    }
+                },
+                "webAuthnAllowed": {
+                    "target": "com.amazonaws.workspacesweb#EnabledType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the user can use WebAuthn redirection for passwordless login to websites within the streaming session.</p>"
                     }
                 }
             },

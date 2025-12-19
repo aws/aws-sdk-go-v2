@@ -146,6 +146,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM Identity Center configuration applied to enable trusted identity propagation.</p>"
                     }
+                },
+                "jobLevelCostAllocationConfiguration": {
+                    "target": "com.amazonaws.emrserverless#JobLevelCostAllocationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object that enables job level cost allocation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1492,6 +1498,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM Identity Center Configuration accepts the Identity Center instance parameter required to enable trusted identity propagation. This configuration allows identity propagation between integrated services and the Identity Center instance.</p>"
                     }
+                },
+                "jobLevelCostAllocationConfiguration": {
+                    "target": "com.amazonaws.emrserverless#JobLevelCostAllocationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object that enables job level cost allocation.</p>"
+                    }
                 }
             }
         },
@@ -2125,6 +2137,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The driver that the job runs on.</p>"
+            }
+        },
+        "com.amazonaws.emrserverless#JobLevelCostAllocationConfiguration": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables job level cost allocation for the application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration object that enables job level cost allocation.</p>"
             }
         },
         "com.amazonaws.emrserverless#JobRun": {
@@ -4070,6 +4096,12 @@
                     "target": "com.amazonaws.emrserverless#IdentityCenterConfigurationInput",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the IAM Identity Center configuration used to enable or disable trusted identity propagation. When provided, this configuration determines how the application interacts with IAM Identity Center for user authentication and access control.</p>"
+                    }
+                },
+                "jobLevelCostAllocationConfiguration": {
+                    "target": "com.amazonaws.emrserverless#JobLevelCostAllocationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object that enables job level cost allocation.</p>"
                     }
                 }
             }

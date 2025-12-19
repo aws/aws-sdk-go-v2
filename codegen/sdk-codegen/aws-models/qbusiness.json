@@ -545,7 +545,7 @@
                 "quickSightConfiguration": {
                     "target": "com.amazonaws.qbusiness#QuickSightConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight as the identity provider.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Quick Suite configuration for an Amazon Q Business application that uses Quick Suite as the identity provider.</p>"
                     }
                 }
             },
@@ -3025,7 +3025,7 @@
                 "quickSightConfiguration": {
                     "target": "com.amazonaws.qbusiness#QuickSightConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight for authentication. This configuration is required if your application uses QuickSight as the identity provider. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html\">Creating an Amazon QuickSight integrated application</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Quick Suite configuration for an Amazon Q Business application that uses Quick Suite for authentication. This configuration is required if your application uses Quick Suite as the identity provider. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html\">Creating an Amazon Quick Suite integrated application</a>.</p>"
                     }
                 }
             },
@@ -7594,7 +7594,7 @@
                 "quickSightConfiguration": {
                     "target": "com.amazonaws.qbusiness#QuickSightConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight authentication configuration for the Amazon Q Business application.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Quick Suite authentication configuration for the Amazon Q Business application.</p>"
                     }
                 }
             },
@@ -9366,7 +9366,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$"
             }
         },
         "com.amazonaws.qbusiness#IdcApplicationArn": {
@@ -9376,7 +9376,7 @@
                     "min": 10,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
             }
         },
         "com.amazonaws.qbusiness#IdcAuthConfiguration": {
@@ -9408,7 +9408,7 @@
                     "min": 0,
                     "max": 1284
                 },
-                "smithy.api#pattern": "^arn:aws:sso::[0-9]{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:sso::[0-9]{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.qbusiness#IdentityProviderConfiguration": {
@@ -9765,7 +9765,7 @@
                     "min": 10,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
             }
         },
         "com.amazonaws.qbusiness#Instruction": {
@@ -9921,7 +9921,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:lambda:[a-z-]*-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:lambda:[a-z-]*-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?$"
             }
         },
         "com.amazonaws.qbusiness#LicenseNotFoundException": {
@@ -12592,7 +12592,7 @@
         "com.amazonaws.qbusiness#PermissionConditionKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^aws:PrincipalTag/qbusiness-dataaccessor:[a-zA-Z]+"
+                "smithy.api#pattern": "^aws:[a-zA-Z][a-zA-Z0-9-/:]*$"
             }
         },
         "com.amazonaws.qbusiness#PermissionConditionOperator": {
@@ -12613,7 +12613,7 @@
                     "min": 1,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
             }
         },
         "com.amazonaws.qbusiness#PermissionConditionValues": {
@@ -13137,7 +13137,7 @@
                     "min": 1,
                     "max": 1284
                 },
-                "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9_/+=,.@-]+$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:iam::[0-9]{12}:role/[a-zA-Z0-9_/+=,.@-]+$"
             }
         },
         "com.amazonaws.qbusiness#PrincipalUser": {
@@ -13419,13 +13419,13 @@
                 "clientNamespace": {
                     "target": "com.amazonaws.qbusiness#ClientNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight namespace that is used as the identity provider. For more information about QuickSight namespaces, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/developerguide/namespace-operations.html\">Namespace operations</a>. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Quick Suite namespace that is used as the identity provider. For more information about Quick Suite namespaces, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/developerguide/namespace-operations.html\">Namespace operations</a>. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight as the identity provider. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html\">Creating an Amazon QuickSight integrated application</a>.</p>"
+                "smithy.api#documentation": "<p>The Amazon Quick Suite configuration for an Amazon Q Business application that uses Quick Suite as the identity provider. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html\">Creating an Amazon Quick Suite integrated application</a>.</p>"
             }
         },
         "com.amazonaws.qbusiness#ReadAccessType": {
