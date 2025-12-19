@@ -2,12 +2,15 @@ package transfermanager
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"math"
+	"net/http"
 	"strconv"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -22,10 +25,10 @@ import (
 // of s3 GetObject input and destination WriterAt of object
 type DownloadObjectInput struct {
 	// Bucket where the object is downloaded from
-	Bucket string
+	Bucket *string
 
 	// Key of the object to get.
-	Key string
+	Key *string
 
 	// Destination WriterAt which object parts are written to
 	WriterAt io.WriterAt
@@ -43,7 +46,7 @@ type DownloadObjectInput struct {
 	// The account ID of the expected bucket owner. If the account ID that you provide
 	// does not match the actual owner of the bucket, the request fails with the HTTP
 	// status code 403 Forbidden (access denied).
-	ExpectedBucketOwner string
+	ExpectedBucketOwner *string
 
 	// Return the object only if its entity tag (ETag) is the same as the one
 	// specified in this header; otherwise, return a 412 Precondition Failed error.
@@ -56,7 +59,7 @@ type DownloadObjectInput struct {
 	// For more information about conditional requests, see [RFC 7232].
 	//
 	// [RFC 7232]: https://tools.ietf.org/html/rfc7232
-	IfMatch string
+	IfMatch *string
 
 	// Return the object only if it has been modified since the specified time;
 	// otherwise, return a 304 Not Modified error.
@@ -69,7 +72,7 @@ type DownloadObjectInput struct {
 	// For more information about conditional requests, see [RFC 7232].
 	//
 	// [RFC 7232]: https://tools.ietf.org/html/rfc7232
-	IfModifiedSince time.Time
+	IfModifiedSince *time.Time
 
 	// Return the object only if its entity tag (ETag) is different from the one
 	// specified in this header; otherwise, return a 304 Not Modified error.
@@ -82,7 +85,7 @@ type DownloadObjectInput struct {
 	// For more information about conditional requests, see [RFC 7232].
 	//
 	// [RFC 7232]: https://tools.ietf.org/html/rfc7232
-	IfNoneMatch string
+	IfNoneMatch *string
 
 	// Return the object only if it has not been modified since the specified time;
 	// otherwise, return a 412 Precondition Failed error.
@@ -95,20 +98,7 @@ type DownloadObjectInput struct {
 	// For more information about conditional requests, see [RFC 7232].
 	//
 	// [RFC 7232]: https://tools.ietf.org/html/rfc7232
-	IfUnmodifiedSince time.Time
-
-	// Part number of the object being read. This is a positive integer between 1 and
-	// 10,000. Effectively performs a 'ranged' GET request for the part specified.
-	// Useful for downloading just a part of an object.
-	PartNumber int32
-
-	// Downloads the specified byte range of an object. For more information about the
-	// HTTP Range header, see [https://www.rfc-editor.org/rfc/rfc9110.html#name-range].
-	//
-	// Amazon S3 doesn't support retrieving multiple ranges of data per GET request.
-	//
-	// [https://www.rfc-editor.org/rfc/rfc9110.html#name-range]: https://www.rfc-editor.org/rfc/rfc9110.html#name-range
-	Range string
+	IfUnmodifiedSince *time.Time
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. If either the
@@ -123,22 +113,22 @@ type DownloadObjectInput struct {
 	RequestPayer types.RequestPayer
 
 	// Sets the Cache-Control header of the response.
-	ResponseCacheControl string
+	ResponseCacheControl *string
 
 	// Sets the Content-Disposition header of the response.
-	ResponseContentDisposition string
+	ResponseContentDisposition *string
 
 	// Sets the Content-Encoding header of the response.
-	ResponseContentEncoding string
+	ResponseContentEncoding *string
 
 	// Sets the Content-Language header of the response.
-	ResponseContentLanguage string
+	ResponseContentLanguage *string
 
 	// Sets the Content-Type header of the response.
-	ResponseContentType string
+	ResponseContentType *string
 
 	// Sets the Expires header of the response.
-	ResponseExpires time.Time
+	ResponseExpires *time.Time
 
 	// Specifies the algorithm to use when decrypting the object (for example, AES256 ).
 	//
@@ -157,7 +147,7 @@ type DownloadObjectInput struct {
 	// This functionality is not supported for directory buckets.
 	//
 	// [Server-Side Encryption (Using Customer-Provided Encryption Keys)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
-	SSECustomerAlgorithm string
+	SSECustomerAlgorithm *string
 
 	// Specifies the customer-provided encryption key that you originally provided for
 	// Amazon S3 to encrypt the data before storing it. This value is used to decrypt
@@ -180,7 +170,7 @@ type DownloadObjectInput struct {
 	// This functionality is not supported for directory buckets.
 	//
 	// [Server-Side Encryption (Using Customer-Provided Encryption Keys)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
-	SSECustomerKey string
+	SSECustomerKey *string
 
 	// Specifies the 128-bit MD5 digest of the customer-provided encryption key
 	// according to RFC 1321. Amazon S3 uses this header for a message integrity check
@@ -201,7 +191,7 @@ type DownloadObjectInput struct {
 	// This functionality is not supported for directory buckets.
 	//
 	// [Server-Side Encryption (Using Customer-Provided Encryption Keys)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
-	SSECustomerKeyMD5 string
+	SSECustomerKeyMD5 *string
 
 	// Version ID used to reference a specific version of the object.
 	//
@@ -224,13 +214,29 @@ type DownloadObjectInput struct {
 	// For more information about versioning, see [PutBucketVersioning].
 	//
 	// [PutBucketVersioning]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html
-	VersionID string
+	VersionID *string
 }
 
 func (i DownloadObjectInput) mapGetObjectInput(enableChecksumValidation bool) *s3.GetObjectInput {
 	input := &s3.GetObjectInput{
-		Bucket: aws.String(i.Bucket),
-		Key:    aws.String(i.Key),
+		Bucket:                     i.Bucket,
+		Key:                        i.Key,
+		ExpectedBucketOwner:        i.ExpectedBucketOwner,
+		IfMatch:                    i.IfMatch,
+		IfNoneMatch:                i.IfNoneMatch,
+		IfModifiedSince:            i.IfModifiedSince,
+		IfUnmodifiedSince:          i.IfUnmodifiedSince,
+		RequestPayer:               s3types.RequestPayer(i.RequestPayer),
+		ResponseCacheControl:       i.ResponseCacheControl,
+		ResponseContentDisposition: i.ResponseContentDisposition,
+		ResponseContentEncoding:    i.ResponseContentEncoding,
+		ResponseContentLanguage:    i.ResponseContentLanguage,
+		ResponseContentType:        i.ResponseContentType,
+		ResponseExpires:            i.ResponseExpires,
+		SSECustomerAlgorithm:       i.SSECustomerAlgorithm,
+		SSECustomerKey:             i.SSECustomerKey,
+		SSECustomerKeyMD5:          i.SSECustomerKeyMD5,
+		VersionId:                  i.VersionID,
 	}
 
 	if i.ChecksumMode != "" {
@@ -239,26 +245,6 @@ func (i DownloadObjectInput) mapGetObjectInput(enableChecksumValidation bool) *s
 		input.ChecksumMode = s3types.ChecksumModeEnabled
 	}
 
-	if i.RequestPayer != "" {
-		input.RequestPayer = s3types.RequestPayer(i.RequestPayer)
-	}
-
-	input.ExpectedBucketOwner = nzstring(i.ExpectedBucketOwner)
-	input.IfMatch = nzstring(i.IfMatch)
-	input.IfNoneMatch = nzstring(i.IfNoneMatch)
-	input.IfModifiedSince = nztime(i.IfModifiedSince)
-	input.IfUnmodifiedSince = nztime(i.IfUnmodifiedSince)
-	input.ResponseCacheControl = nzstring(i.ResponseCacheControl)
-	input.ResponseContentDisposition = nzstring(i.ResponseContentDisposition)
-	input.ResponseContentEncoding = nzstring(i.ResponseContentEncoding)
-	input.ResponseContentLanguage = nzstring(i.ResponseContentLanguage)
-	input.ResponseContentType = nzstring(i.ResponseContentType)
-	input.ResponseExpires = nztime(i.ResponseExpires)
-	input.SSECustomerAlgorithm = nzstring(i.SSECustomerAlgorithm)
-	input.SSECustomerKey = nzstring(i.SSECustomerKey)
-	input.SSECustomerKeyMD5 = nzstring(i.SSECustomerKeyMD5)
-	input.VersionId = nzstring(i.VersionID)
-
 	return input
 }
 
@@ -266,14 +252,14 @@ func (i DownloadObjectInput) mapGetObjectInput(enableChecksumValidation bool) *s
 // of s3 GetObject output except Body which is replaced by WriterAt of input
 type DownloadObjectOutput struct {
 	// Indicates that a range of bytes was specified in the request.
-	AcceptRanges string
+	AcceptRanges *string
 
 	// Indicates whether the object uses an S3 Bucket Key for server-side encryption
 	// with Key Management Service (KMS) keys (SSE-KMS).
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// Specifies caching behavior along the request/reply chain.
-	CacheControl string
+	CacheControl *string
 
 	// Specifies if the response checksum validation is enabled
 	ChecksumMode types.ChecksumMode
@@ -283,48 +269,63 @@ type DownloadObjectOutput struct {
 	// Amazon S3 User Guide.
 	//
 	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
-	ChecksumCRC32 string
+	ChecksumCRC32 *string
 
 	// The base64-encoded, 32-bit CRC-32C checksum of the object. This will only be
 	// present if it was uploaded with the object. For more information, see [Checking object integrity]in the
 	// Amazon S3 User Guide.
 	//
 	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
-	ChecksumCRC32C string
+	ChecksumCRC32C *string
+
+	// The Base64 encoded, 64-bit CRC64NVME checksum of the object. For more
+	// information, see [Checking object integrity in the Amazon S3 User Guide].
+	//
+	// [Checking object integrity in the Amazon S3 User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumCRC64NVME *string
 
 	// The base64-encoded, 160-bit SHA-1 digest of the object. This will only be
 	// present if it was uploaded with the object. For more information, see [Checking object integrity]in the
 	// Amazon S3 User Guide.
 	//
 	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
-	ChecksumSHA1 string
+	ChecksumSHA1 *string
 
 	// The base64-encoded, 256-bit SHA-256 digest of the object. This will only be
 	// present if it was uploaded with the object. For more information, see [Checking object integrity]in the
 	// Amazon S3 User Guide.
 	//
 	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
-	ChecksumSHA256 string
+	ChecksumSHA256 *string
+
+	// The checksum type, which determines how part-level checksums are combined to
+	// create an object-level checksum for multipart objects. You can use this header
+	// response to verify that the checksum type that is received is the same checksum
+	// type that was specified in the CreateMultipartUpload request. For more
+	// information, see [Checking object integrity]in the Amazon S3 User Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumType types.ChecksumType
 
 	// Specifies presentational information for the object.
-	ContentDisposition string
+	ContentDisposition *string
 
 	// Indicates what content encodings have been applied to the object and thus what
 	// decoding mechanisms must be applied to obtain the media-type referenced by the
 	// Content-Type header field.
-	ContentEncoding string
+	ContentEncoding *string
 
 	// The language the content is in.
-	ContentLanguage string
+	ContentLanguage *string
 
 	// Size of the body in bytes.
-	ContentLength int64
+	ContentLength *int64
 
 	// The portion of the object returned in the response.
-	ContentRange string
+	ContentRange *string
 
 	// A standard MIME type describing the format of the object data.
-	ContentType string
+	ContentType *string
 
 	// Indicates whether the object retrieved was (true) or was not (false) a Delete
 	// Marker. If false, this response header does not appear in the response.
@@ -336,11 +337,11 @@ type DownloadObjectOutput struct {
 	//   - If the specified version in the request is a delete marker, the response
 	//   returns a 405 Method Not Allowed error and the Last-Modified: timestamp
 	//   response header.
-	DeleteMarker bool
+	DeleteMarker *bool
 
 	// An entity tag (ETag) is an opaque identifier assigned by a web server to a
 	// specific version of a resource found at a URL.
-	ETag string
+	ETag *string
 
 	// If the object expiration is configured (see [PutBucketLifecycleConfiguration]PutBucketLifecycleConfiguration ),
 	// the response includes this header. It includes the expiry-date and rule-id
@@ -350,18 +351,18 @@ type DownloadObjectOutput struct {
 	// This functionality is not supported for directory buckets.
 	//
 	// [PutBucketLifecycleConfiguration]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
-	Expiration string
+	Expiration *string
 
 	// The date and time at which the object is no longer cacheable.
 	//
 	// Deprecated: This field is handled inconsistently across AWS SDKs. Prefer using
 	// the ExpiresString field which contains the unparsed value from the service
 	// response.
-	Expires time.Time
+	Expires *time.Time
 
 	// The unparsed value of the Expires field from the service response. Prefer use
 	// of this value over the normal Expires response field where possible.
-	ExpiresString string
+	ExpiresString *string
 
 	// Date and time when the object was last modified.
 	//
@@ -369,7 +370,7 @@ type DownloadObjectOutput struct {
 	// request, if the specified version in the request is a delete marker, the
 	// response returns a 405 Method Not Allowed error and the Last-Modified: timestamp
 	// response header.
-	LastModified time.Time
+	LastModified *time.Time
 
 	// A map of metadata to store with the object in S3.
 	//
@@ -383,7 +384,7 @@ type DownloadObjectOutput struct {
 	// headers.
 	//
 	// This functionality is not supported for directory buckets.
-	MissingMeta int32
+	MissingMeta *int32
 
 	// Indicates whether this object has an active legal hold. This field is only
 	// returned if you have permission to view an object's legal hold status.
@@ -399,11 +400,11 @@ type DownloadObjectOutput struct {
 	// The date and time when this object's Object Lock will expire.
 	//
 	// This functionality is not supported for directory buckets.
-	ObjectLockRetainUntilDate time.Time
+	ObjectLockRetainUntilDate *time.Time
 
 	// The count of parts this object has. This value is only returned if you specify
 	// partNumber in your request and the object was uploaded as a multipart upload.
-	PartsCount int32
+	PartsCount *int32
 
 	// Amazon S3 can return this if your request involves a bucket that is either a
 	// source or destination in a replication rule.
@@ -422,24 +423,24 @@ type DownloadObjectOutput struct {
 	//
 	// This functionality is not supported for directory buckets. Only the S3 Express
 	// One Zone storage class is supported by directory buckets to store objects.
-	Restore string
+	Restore *string
 
 	// If server-side encryption with a customer-provided encryption key was
 	// requested, the response will include this header to confirm the encryption
 	// algorithm that's used.
 	//
 	// This functionality is not supported for directory buckets.
-	SSECustomerAlgorithm string
+	SSECustomerAlgorithm *string
 
 	// If server-side encryption with a customer-provided encryption key was
 	// requested, the response will include this header to provide the round-trip
 	// message integrity verification of the customer-provided encryption key.
 	//
 	// This functionality is not supported for directory buckets.
-	SSECustomerKeyMD5 string
+	SSECustomerKeyMD5 *string
 
 	// If present, indicates the ID of the KMS key that was used for object encryption.
-	SSEKMSKeyID string
+	SSEKMSKeyID *string
 
 	// The server-side encryption algorithm used when you store this object in Amazon
 	// S3.
@@ -460,63 +461,65 @@ type DownloadObjectOutput struct {
 	// This functionality is not supported for directory buckets.
 	//
 	// [GetObjectTagging]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html
-	TagCount int32
+	TagCount *int32
 
 	// Version ID of the object.
 	//
 	// This functionality is not supported for directory buckets.
-	VersionID string
+	VersionID *string
 
 	// If the bucket is configured as a website, redirects requests for this object to
 	// another object in the same bucket or to an external URL. Amazon S3 stores the
 	// value of this header in the object metadata.
 	//
 	// This functionality is not supported for directory buckets.
-	WebsiteRedirectLocation string
+	WebsiteRedirectLocation *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata smithymiddleware.Metadata
 }
 
 func (o *DownloadObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput, checksumMode s3types.ChecksumMode) {
-	o.AcceptRanges = aws.ToString(out.AcceptRanges)
-	o.CacheControl = aws.ToString(out.CacheControl)
+	o.AcceptRanges = out.AcceptRanges
+	o.BucketKeyEnabled = out.BucketKeyEnabled
+	o.CacheControl = out.CacheControl
 	o.ChecksumMode = types.ChecksumMode(checksumMode)
-	o.ChecksumCRC32 = aws.ToString(out.ChecksumCRC32)
-	o.ChecksumCRC32C = aws.ToString(out.ChecksumCRC32C)
-	o.ChecksumSHA1 = aws.ToString(out.ChecksumSHA1)
-	o.ChecksumSHA256 = aws.ToString(out.ChecksumSHA256)
-	o.ContentDisposition = aws.ToString(out.ContentDisposition)
-	o.ContentEncoding = aws.ToString(out.ContentEncoding)
-	o.ContentLanguage = aws.ToString(out.ContentLanguage)
-	o.ContentRange = aws.ToString(out.ContentRange)
-	o.ContentType = aws.ToString(out.ContentType)
-	o.ETag = aws.ToString(out.ETag)
-	o.Expiration = aws.ToString(out.Expiration)
-	o.ExpiresString = aws.ToString(out.ExpiresString)
-	o.Restore = aws.ToString(out.Restore)
-	o.SSECustomerAlgorithm = aws.ToString(out.SSECustomerAlgorithm)
-	o.SSECustomerKeyMD5 = aws.ToString(out.SSECustomerKeyMD5)
-	o.SSEKMSKeyID = aws.ToString(out.SSEKMSKeyId)
-	o.VersionID = aws.ToString(out.VersionId)
-	o.WebsiteRedirectLocation = aws.ToString(out.WebsiteRedirectLocation)
-	o.BucketKeyEnabled = aws.ToBool(out.BucketKeyEnabled)
-	o.DeleteMarker = aws.ToBool(out.DeleteMarker)
-	o.MissingMeta = aws.ToInt32(out.MissingMeta)
-	o.PartsCount = aws.ToInt32(out.PartsCount)
-	o.TagCount = aws.ToInt32(out.TagCount)
-	o.ContentLength = aws.ToInt64(out.ContentLength)
-	o.Expires = aws.ToTime(out.Expires)
-	o.LastModified = aws.ToTime(out.LastModified)
-	o.ObjectLockRetainUntilDate = aws.ToTime(out.ObjectLockRetainUntilDate)
+	o.ChecksumCRC32 = out.ChecksumCRC32
+	o.ChecksumCRC32C = out.ChecksumCRC32C
+	o.ChecksumCRC64NVME = out.ChecksumCRC64NVME
+	o.ChecksumSHA1 = out.ChecksumSHA1
+	o.ChecksumSHA256 = out.ChecksumSHA256
+	o.ChecksumType = types.ChecksumType(out.ChecksumType)
+	o.ContentDisposition = out.ContentDisposition
+	o.ContentEncoding = out.ContentEncoding
+	o.ContentLanguage = out.ContentLanguage
+	o.ContentLength = out.ContentLength
+	o.ContentRange = out.ContentRange
+	o.ContentType = out.ContentType
+	o.DeleteMarker = out.DeleteMarker
+	o.ETag = out.ETag
+	o.Expiration = out.Expiration
+	o.Expires = out.Expires
+	o.ExpiresString = out.ExpiresString
+	o.LastModified = out.LastModified
 	o.Metadata = out.Metadata
+	o.MissingMeta = out.MissingMeta
 	o.ObjectLockLegalHoldStatus = types.ObjectLockLegalHoldStatus(out.ObjectLockLegalHoldStatus)
 	o.ObjectLockMode = types.ObjectLockMode(out.ObjectLockMode)
+	o.ObjectLockRetainUntilDate = out.ObjectLockRetainUntilDate
+	o.PartsCount = out.PartsCount
 	o.ReplicationStatus = types.ReplicationStatus(out.ReplicationStatus)
 	o.RequestCharged = types.RequestCharged(out.RequestCharged)
+	o.Restore = out.Restore
+	o.SSECustomerAlgorithm = out.SSECustomerAlgorithm
+	o.SSECustomerKeyMD5 = out.SSECustomerKeyMD5
+	o.SSEKMSKeyID = out.SSEKMSKeyId
 	o.ServerSideEncryption = types.ServerSideEncryption(out.ServerSideEncryption)
 	o.StorageClass = types.StorageClass(out.StorageClass)
-	o.ResultMetadata = out.ResultMetadata.Clone()
+	o.TagCount = out.TagCount
+	o.VersionID = out.VersionId
+	o.WebsiteRedirectLocation = out.WebsiteRedirectLocation
+	o.ResultMetadata = out.ResultMetadata
 }
 
 // DownloadObject downloads an object from S3, intelligently splitting large
@@ -570,31 +573,23 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 			)
 		}}
 
-	if d.in.PartNumber > 0 {
-		return d.singleDownload(ctx, clientOptions...)
-	}
-
 	var output *DownloadObjectOutput
 	if d.options.GetObjectType == types.GetObjectParts {
-		if d.in.Range != "" {
-			return d.singleDownload(ctx, clientOptions...)
-		}
-
 		output = d.getChunk(ctx, 1, "", clientOptions...)
 		if d.err != nil {
 			d.emitter.Failed(ctx, d.err)
 			return output, d.err
 		}
 
-		if output.PartsCount > 1 {
-			partSize := output.ContentLength
+		if aws.ToInt32(output.PartsCount) > 1 {
+			partSize := aws.ToInt64(output.ContentLength)
 			ch := make(chan dlChunk, d.options.Concurrency)
 			for i := 0; i < d.options.Concurrency; i++ {
 				d.wg.Add(1)
 				go d.downloadPart(ctx, ch, clientOptions...)
 			}
 
-			for i := int32(2); i <= output.PartsCount; i++ {
+			for i := int32(2); i <= aws.ToInt32(output.PartsCount); i++ {
 				if d.getErr() != nil {
 					break
 				}
@@ -607,12 +602,25 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 			d.wg.Wait()
 		}
 	} else {
-		if d.in.Range != "" {
-			d.pos, d.totalBytes = d.getDownloadRange()
-			d.offset = d.pos
-		}
-
 		d.getChunk(ctx, 0, d.byteRange(), clientOptions...)
+		if d.err != nil {
+			// early check to see if error is caused by range download a zero object
+			// which will always return an invalid range error from s3 side
+			var responseError interface {
+				HTTPStatusCode() int
+			}
+			if errors.As(d.err, &responseError) {
+				if responseError.HTTPStatusCode() == http.StatusRequestedRangeNotSatisfiable {
+					out := &DownloadObjectOutput{
+						ContentLength: aws.Int64(0),
+					}
+					d.emitter.Complete(ctx, out)
+					return out, nil
+				}
+			}
+			d.emitter.Failed(ctx, d.err)
+			return nil, d.err
+		}
 		total := d.totalBytes
 
 		ch := make(chan dlChunk, d.options.Concurrency)
@@ -624,7 +632,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 		// Assign work
 		for d.getErr() == nil {
 			if d.pos >= total {
-				break // We're finished queuing chunks
+				break // We finish queuing chunks
 			}
 
 			// Queue the next range of bytes to read.
@@ -644,8 +652,15 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 
 	d.emitter.Complete(ctx, d.out)
 
-	d.out.ContentLength = d.written
-	d.out.ContentRange = fmt.Sprintf("bytes=%d-%d", d.offset, d.totalBytes-1)
+	d.out.ContentRange = aws.String(fmt.Sprintf("bytes=%d-%d", d.offset, d.totalBytes-1))
+	d.out.ContentLength = aws.Int64(d.written)
+	if d.out.ChecksumType == types.ChecksumTypeComposite {
+		d.out.ChecksumCRC32 = nil
+		d.out.ChecksumCRC32C = nil
+		d.out.ChecksumCRC64NVME = nil
+		d.out.ChecksumSHA1 = nil
+		d.out.ChecksumSHA256 = nil
+	}
 	return d.out, nil
 }
 
@@ -664,20 +679,6 @@ func (d *downloader) init() error {
 	}
 
 	return nil
-}
-
-func (d *downloader) singleDownload(ctx context.Context, clientOptions ...func(*s3.Options)) (*DownloadObjectOutput, error) {
-	chunk := dlChunk{w: d.in.WriterAt}
-
-	// progress start is called idempotently on first response received
-	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
-	if err != nil {
-		d.emitter.Failed(ctx, err)
-		return nil, err
-	}
-
-	d.emitter.Complete(ctx, output)
-	return output, nil
 }
 
 func (d *downloader) downloadPart(ctx context.Context, ch chan dlChunk, clientOptions ...func(*s3.Options)) {
@@ -700,7 +701,7 @@ func (d *downloader) downloadPart(ctx context.Context, ch chan dlChunk, clientOp
 }
 
 // getChunk grabs a chunk of data from the body.
-// Not thread safe. Should only used when grabbing data on a single thread.
+// Not thread safe. Should only be used when grabbing data on a single thread.
 func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clientOptions ...func(*s3.Options)) *DownloadObjectOutput {
 	chunk := dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: part, withRange: rng}
 
@@ -711,7 +712,7 @@ func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clien
 	}
 
 	d.setOutput(output)
-	d.pos += output.ContentLength
+	d.pos += aws.ToInt64(output.ContentLength)
 	return output
 }
 
@@ -766,6 +767,21 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		return nil, err
 	}
 
+	if params.Range != nil && out.ContentRange != nil {
+		reqStart, reqEnd, err := getReqRange(aws.ToString(params.Range))
+		if err != nil {
+			return nil, err
+		}
+		respStart, respEnd, err := getRespRange(aws.ToString(out.ContentRange))
+		if err != nil {
+			return nil, err
+		}
+		// don't validate first chunk since object size is unknown when getting that
+		if reqStart != 0 && (reqStart != respStart || reqEnd != respEnd) {
+			return nil, fmt.Errorf("range mismatch between request %d-%d and response %d-%d", reqStart, reqEnd, respStart, respEnd)
+		}
+	}
+
 	d.totalBytesOnce.Do(func() {
 		d.setTotalBytes(out)
 		d.emitter.Start(ctx, d.in, d.totalBytes)
@@ -778,7 +794,7 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		return nil, &errReadingBody{err: err}
 	}
 
-	d.incrWritten(n)
+	atomic.AddInt64(&d.written, n)
 	d.emitter.BytesTransferred(ctx, n)
 	return out, nil
 }
@@ -827,25 +843,6 @@ func (d *downloader) setOutput(resp *DownloadObjectOutput) {
 	d.out = resp
 }
 
-// TODO this might be shared beteen get and download
-func (d *downloader) getDownloadRange() (int64, int64) {
-	parts := strings.Split(strings.Split(d.in.Range, "=")[1], "-")
-
-	start, err := strconv.ParseInt(parts[0], 10, 64)
-	if err != nil {
-		d.err = err
-		return 0, 0
-	}
-
-	end, err := strconv.ParseInt(parts[1], 10, 64)
-	if err != nil {
-		d.err = err
-		return 0, 0
-	}
-
-	return start, end + 1
-}
-
 // byteRange returns a HTTP Byte-Range header value that should be used by the
 // client to request a chunk range.
 func (d *downloader) byteRange() string {
@@ -853,6 +850,34 @@ func (d *downloader) byteRange() string {
 		return fmt.Sprintf("bytes=%d-%d", d.pos, int64(math.Min(float64(d.totalBytes-1), float64(d.pos+d.options.PartSizeBytes-1))))
 	}
 	return fmt.Sprintf("bytes=%d-%d", d.pos, d.pos+d.options.PartSizeBytes-1)
+}
+
+func getReqRange(rng string) (int64, int64, error) {
+	// rng fmt "bytes=start-end"
+	ranges := strings.Split(strings.Split(rng, "=")[1], "-")
+	start, err := strconv.ParseInt(ranges[0], 10, 64)
+	if err != nil {
+		return 0, 0, fmt.Errorf("error when parsing request start: %v", err)
+	}
+	end, err := strconv.ParseInt(ranges[1], 10, 64)
+	if err != nil {
+		return 0, 0, fmt.Errorf("error when parsing request end: %v", err)
+	}
+	return start, end, nil
+}
+
+func getRespRange(rng string) (int64, int64, error) {
+	// rng format "bytes %d-%d/%d"
+	ranges := strings.Split(strings.Split(strings.Split(rng, " ")[1], "/")[0], "-")
+	start, err := strconv.ParseInt(ranges[0], 10, 64)
+	if err != nil {
+		return 0, 0, fmt.Errorf("error when parsing response start: %v", err)
+	}
+	end, err := strconv.ParseInt(ranges[1], 10, 64)
+	if err != nil {
+		return 0, 0, fmt.Errorf("error when parsing response end: %v", err)
+	}
+	return start, end, nil
 }
 
 func (d *downloader) getErr() error {

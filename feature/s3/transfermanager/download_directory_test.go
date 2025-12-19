@@ -36,8 +36,8 @@ type objectkeyCallback struct {
 }
 
 func (oc *objectkeyCallback) UpdateRequest(in *GetObjectInput) {
-	if in.Key == oc.keyword {
-		in.Key = in.Key + "gotyou"
+	if key := aws.ToString(in.Key); key == oc.keyword {
+		in.Key = aws.String(key + "gotyou")
 	}
 }
 
@@ -51,15 +51,16 @@ func TestDownloadDirectory(t *testing.T) {
 		objectsLists            [][]s3types.Object
 		continuationTokens      []string
 		filter                  ObjectFilter
-		s3Delimiter             string
 		concurrency             int
 		callback                GetRequestCallback
+		failurePolicy           DownloadDirectoryFailurePolicy
 		getobjectFn             func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 		expectTokens            []string
 		expectKeys              []string
 		expectFiles             []string
 		expectErr               string
-		expectObjectsDownloaded int
+		expectObjectsDownloaded int64
+		expectObjectsFailed     int64
 		listenerValidationFn    func(*testing.T, *mockDirectoryListener, any, any, error)
 	}{
 		"single object": {
@@ -252,32 +253,6 @@ func TestDownloadDirectory(t *testing.T) {
 				l.expectComplete(t, in, out, 5)
 			},
 		},
-		"multiple objects with keyprefix with customized delimiter suffix": {
-			destination: "multiple-objects-with-keyprefix-customized-delimiter",
-			objectsLists: [][]s3types.Object{
-				{
-					{
-						Key: aws.String("ab/c*d"),
-					},
-					{
-						Key: aws.String("ab/c/e"),
-					},
-					{
-						Key: aws.String("ab/c*f*g"),
-					},
-				},
-			},
-			keyPrefix:               "ab/c",
-			s3Delimiter:             "*",
-			expectTokens:            []string{""},
-			expectKeys:              []string{"ab/c*d", "ab/c/e", "ab/c*f*g"},
-			expectFiles:             []string{"d", "ab/c/e", "f*g"},
-			expectObjectsDownloaded: 3,
-			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
-				l.expectStart(t, in)
-				l.expectComplete(t, in, out, 3)
-			},
-		},
 		"error when path resolved from objects key out of destination scope": {
 			destination: "error-bucket",
 			concurrency: 1,
@@ -396,54 +371,6 @@ func TestDownloadDirectory(t *testing.T) {
 				l.expectComplete(t, in, out, 4)
 			},
 		},
-		"multiple objects paginated with keyprefix, delimiter, filter and callback": {
-			destination: "multiple-objects-with-keyprefix-delimiter-filter-callback",
-			objectsLists: [][]s3types.Object{
-				{
-					{
-						Key: aws.String("a&"),
-					},
-					{
-						Key: aws.String("a&b"),
-					},
-					{
-						Key: aws.String("a@b"),
-					},
-				},
-				{
-					{
-						Key: aws.String("a&foo&bar"),
-					},
-					{
-						Key: aws.String("ac"),
-					},
-					{
-						Key: aws.String("ac@d&e"),
-					},
-				},
-				{
-					{
-						Key: aws.String("ac/d/unwanted"),
-					},
-					{
-						Key: aws.String("a&k.b"),
-					},
-				},
-			},
-			continuationTokens:      []string{"token1", "token2"},
-			s3Delimiter:             "&",
-			keyPrefix:               "a",
-			filter:                  &objectkeyFilter{"unwanted"},
-			callback:                &objectkeyCallback{"a&k.b"},
-			expectTokens:            []string{"", "token1", "token2"},
-			expectKeys:              []string{"a&b", "a@b", "a&foo&bar", "ac", "ac@d&e", "a&k.bgotyou"},
-			expectFiles:             []string{"b", "a@b", "foo&bar", "ac", "ac@d&e", "k.b"},
-			expectObjectsDownloaded: 6,
-			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
-				l.expectStart(t, in)
-				l.expectComplete(t, in, out, 6)
-			},
-		},
 		"error when getting object": {
 			destination: "error-bucket",
 			objectsLists: [][]s3types.Object{
@@ -490,6 +417,58 @@ func TestDownloadDirectory(t *testing.T) {
 				l.expectFailed(t, in, err)
 			},
 		},
+		"specified getting object failure ignored by failure policy": {
+			destination: "error-ignored",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("fo/"),
+					},
+					{
+						Key: aws.String("baz"),
+					},
+				},
+				{
+					{
+						Key: aws.String("foo/zoo/bar"),
+					},
+					{
+						Key: aws.String("foo/zoo/oii/bababoii"),
+					},
+				},
+				{
+					{
+						Key: aws.String("foo/zoo/baz"),
+					},
+					{
+						Key: aws.String("foo/zoo/oii/yee"),
+					},
+				},
+			},
+			concurrency:        1,
+			failurePolicy:      IgnoreDownloadFailurePolicy{},
+			continuationTokens: []string{"token1", "token2"},
+			getobjectFn: func(c *s3testing.TransferManagerLoggingClient, in *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				if key := aws.ToString(in.Key); key == "foo/zoo/bar" || key == "baz" {
+					return nil, fmt.Errorf("mocking error")
+				}
+				return &s3.GetObjectOutput{
+					Body:          ioutil.NopCloser(bytes.NewReader(c.Data)),
+					ContentLength: aws.Int64(int64(len(c.Data))),
+					PartsCount:    aws.Int32(c.PartsCount),
+					ETag:          aws.String(etag),
+				}, nil
+			},
+			expectTokens:            []string{"", "token1", "token2"},
+			expectKeys:              []string{"baz", "foo/zoo/bar", "foo/zoo/oii/bababoii", "foo/zoo/baz", "foo/zoo/oii/yee"},
+			expectFiles:             []string{"foo/zoo/oii/bababoii", "foo/zoo/baz", "foo/zoo/oii/yee"},
+			expectObjectsDownloaded: 3,
+			expectObjectsFailed:     2,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 3)
+			},
+		},
 	}
 
 	for name, c := range cases {
@@ -510,12 +489,12 @@ func TestDownloadDirectory(t *testing.T) {
 			defer os.RemoveAll(dstPath)
 
 			req := &DownloadDirectoryInput{
-				Bucket:      "mock-bucket",
-				Destination: dstPath,
-				KeyPrefix:   c.keyPrefix,
-				S3Delimiter: c.s3Delimiter,
-				Filter:      c.filter,
-				Callback:    c.callback,
+				Bucket:        aws.String("mock-bucket"),
+				Destination:   aws.String(dstPath),
+				KeyPrefix:     nzstring(c.keyPrefix),
+				Filter:        c.filter,
+				Callback:      c.callback,
+				FailurePolicy: c.failurePolicy,
 			}
 			listener := &mockDirectoryListener{}
 
@@ -547,6 +526,9 @@ func TestDownloadDirectory(t *testing.T) {
 			if e, a := c.expectObjectsDownloaded, resp.ObjectsDownloaded; e != a {
 				t.Errorf("expect %d objects downloaded, got %d", e, a)
 			}
+			if e, a := c.expectObjectsFailed, resp.ObjectsFailed; e != a {
+				t.Errorf("expect %d objects failed, got %d", e, a)
+			}
 
 			var actualTokens []string
 			var actualKeys []string
@@ -570,12 +552,8 @@ func TestDownloadDirectory(t *testing.T) {
 				t.Errorf("expect downloaded keys to be %v, got %v", e, a)
 			}
 
-			delimiter := c.s3Delimiter
-			if delimiter == "" {
-				delimiter = "/"
-			}
 			for _, file := range c.expectFiles {
-				path := filepath.Join(dstPath, strings.ReplaceAll(file, delimiter, string(os.PathSeparator)))
+				path := filepath.Join(dstPath, strings.ReplaceAll(file, "/", string(os.PathSeparator)))
 				_, err := os.Stat(path)
 				if os.IsNotExist(err) {
 					t.Errorf("expect %s to be downloaded, got none", path)
@@ -676,8 +654,8 @@ func TestDownloadDirectoryObjectsTransferred(t *testing.T) {
 			defer os.RemoveAll(dstPath)
 
 			req := &DownloadDirectoryInput{
-				Bucket:      "mock-bucket",
-				Destination: dstPath,
+				Bucket:      aws.String("mock-bucket"),
+				Destination: aws.String(dstPath),
 			}
 			listener := &mockDirectoryListener{}
 
@@ -710,8 +688,8 @@ func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
 	close(ctx.DoneCh)
 
 	_, err := u.DownloadDirectory(ctx, &DownloadDirectoryInput{
-		Bucket:      "mock-bucket",
-		Destination: dstPath,
+		Bucket:      aws.String("mock-bucket"),
+		Destination: aws.String(dstPath),
 	})
 	if err == nil {
 		t.Fatalf("expect error, got nil")

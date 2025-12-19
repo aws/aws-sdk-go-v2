@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"io"
 	"sync"
+	"sync/atomic"
 )
 
 // concurrentReader receives object parts from working goroutines, composes those chunks in order and read
@@ -35,7 +36,7 @@ type concurrentReader struct {
 	written      int64
 	partSize     int64
 	invocations  int32
-	etag         string
+	etag         *string
 
 	ctx context.Context
 	m   sync.Mutex
@@ -81,7 +82,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 			break
 		}
 
-		if r.index == r.getCapacity() {
+		if r.index == atomic.LoadInt32(&r.capacity) {
 			continue
 		}
 
@@ -136,12 +137,27 @@ func (r *concurrentReader) downloadChunk(ctx context.Context, chunk getChunk, cl
 		params.Range = aws.String(chunk.withRange)
 	}
 	if params.VersionId == nil {
-		params.IfMatch = aws.String(r.etag)
+		params.IfMatch = r.etag
 	}
 
 	out, err := r.options.S3.GetObject(ctx, params, clientOptions...)
 	if err != nil {
 		return nil, err
+	}
+
+	if params.Range != nil && out.ContentRange != nil {
+		reqStart, reqEnd, err := getReqRange(aws.ToString(params.Range))
+		if err != nil {
+			return nil, err
+		}
+		respStart, respEnd, err := getRespRange(aws.ToString(out.ContentRange))
+		if err != nil {
+			return nil, err
+		}
+		// don't validate first chunk since object size is unknown when getting that
+		if reqStart != 0 && (reqStart != respStart || reqEnd != respEnd) {
+			return nil, fmt.Errorf("range mismatch between request %d-%d and response %d-%d", reqStart, reqEnd, respStart, respEnd)
+		}
 	}
 
 	defer out.Body.Close()
@@ -187,7 +203,7 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 
 	partSize := r.partSize
 	minIndex := int32(r.written / partSize)
-	maxIndex := min(int32((r.written+int64(cap(p))-1)/partSize), r.getCapacity()-1)
+	maxIndex := min(int32((r.written+int64(cap(p))-1)/partSize), atomic.LoadInt32(&r.capacity)-1)
 	for i := minIndex; i <= maxIndex; i++ {
 		if e := r.getErr(); e != nil && e != io.EOF {
 			r.clean()
@@ -208,9 +224,9 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 			if c.cur >= c.length {
 				r.readCount++
 				delete(r.buf, i)
-				if r.readCount == r.getCapacity() {
-					capacity := min(r.getCapacity()+r.sectionParts, r.partsCount)
-					r.setCapacity(capacity)
+				if r.readCount == atomic.LoadInt32(&r.capacity) {
+					capacity := min(atomic.LoadInt32(&r.capacity)+r.sectionParts, r.partsCount)
+					atomic.StoreInt32(&r.capacity, capacity)
 				}
 				if r.readCount >= r.partsCount {
 					r.setErr(io.EOF)
@@ -219,7 +235,7 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 		}
 	}
 
-	for r.receiveCount < r.getCapacity() {
+	for r.receiveCount < atomic.LoadInt32(&r.capacity) {
 		if e := r.getErr(); e != nil && e != io.EOF {
 			r.clean()
 			return written, e
@@ -248,9 +264,9 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 			r.buf[oc.index] = &oc
 		} else {
 			r.readCount++
-			if r.readCount == r.getCapacity() {
-				capacity := min(r.getCapacity()+r.sectionParts, r.partsCount)
-				r.setCapacity(capacity)
+			if r.readCount == atomic.LoadInt32(&r.capacity) {
+				capacity := min(atomic.LoadInt32(&r.capacity)+r.sectionParts, r.partsCount)
+				atomic.StoreInt32(&r.capacity, capacity)
 			}
 			if r.readCount >= r.partsCount {
 				r.setErr(io.EOF)
@@ -259,20 +275,6 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 	}
 
 	return written, r.getErr()
-}
-
-func (r *concurrentReader) setCapacity(n int32) {
-	r.m.Lock()
-	defer r.m.Unlock()
-
-	r.capacity = n
-}
-
-func (r *concurrentReader) getCapacity() int32 {
-	r.m.Lock()
-	defer r.m.Unlock()
-
-	return r.capacity
 }
 
 func (r *concurrentReader) setDone(done bool) {

@@ -20,20 +20,6 @@ func TestInteg_DownloadDirectory(t *testing.T) {
 			ExpectObjectsDownloaded: 3,
 			ExpectFiles:             []string{"bar", "oiibaz/zoo", "baz/zoo"},
 		},
-		"multi file with prefix and custom delimiter": {
-			ObjectsSize: map[string]int64{
-				"yee#bar":        2 * 1024 * 1024,
-				"yee#baz#":       0,
-				"yee#baz#zoo":    10 * 1024 * 1024,
-				"yee#oii@zoo":    10 * 1024 * 1024,
-				"yee#yee#..#bla": 2 * 1024 * 1024,
-				"ye":             20 * 1024 * 1024,
-			},
-			KeyPrefix:               "yee#",
-			Delimiter:               "#",
-			ExpectObjectsDownloaded: 4,
-			ExpectFiles:             []string{"bar", "baz/zoo", "oii@zoo", "bla"},
-		},
 	}
 
 	for name, c := range cases {

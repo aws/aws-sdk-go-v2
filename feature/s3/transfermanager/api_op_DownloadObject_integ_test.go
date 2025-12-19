@@ -25,8 +25,8 @@ func TestInteg_DownloadObject(t *testing.T) {
 			},
 		},
 		"range get empty string body": {
-			Body:        strings.NewReader(""),
-			ExpectError: "InvalidRange",
+			Body:       strings.NewReader(""),
+			ExpectBody: []byte(""),
 			OptFns: []func(*Options){
 				func(opt *Options) {
 					opt.GetObjectType = types.GetObjectRanges

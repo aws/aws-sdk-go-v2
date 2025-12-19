@@ -34,8 +34,8 @@ type keynameCallback struct {
 }
 
 func (kc *keynameCallback) UpdateRequest(in *UploadObjectInput) {
-	if in.Key == kc.keyword {
-		in.Key = in.Key + "/gotyou"
+	if k := aws.ToString(in.Key); k == kc.keyword {
+		*in.Key = k + "/gotyou"
 	}
 }
 
@@ -49,13 +49,14 @@ func TestUploadDirectory(t *testing.T) {
 		recursive            bool
 		keyPrefix            string
 		filter               FileFilter
-		s3Delimiter          string
 		callback             PutRequestCallback
+		failurePolicy        UploadDirectoryFailurePolicy
 		putobjectFunc        func(*s3testing.TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error)
 		preprocessFunc       func(string) (func() error, error)
 		expectKeys           []string
 		expectErr            string
-		expectFilesUploaded  int
+		expectFilesUploaded  int64
+		expectFilesFailed    int64
 		listenerValidationFn func(*testing.T, *mockDirectoryListener, any, any, error)
 	}{
 		"single file recursively": {
@@ -269,22 +270,39 @@ func TestUploadDirectory(t *testing.T) {
 				l.expectFailed(t, in, err)
 			},
 		},
-		"error when a file contains customized delimiter": {
-			source:      filepath.Join(root, "file-contains-non-default-delimiter"),
-			recursive:   true,
-			s3Delimiter: "@",
-			expectErr:   "contains delimiter @",
+		"specified files uploads failure ignored by failure policy for recursive upload": {
+			source:    filepath.Join(root, "multi-file-with-subdir"),
+			recursive: true,
+			putobjectFunc: func(svc *s3testing.TransferManagerLoggingClient, param *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
+				if key := aws.ToString(param.Key); key == "zoo/oii/yee" || key == "foo" {
+					return nil, fmt.Errorf("banned key")
+				}
+				return &s3.PutObjectOutput{}, nil
+			},
+			failurePolicy:       IgnoreUploadFailurePolicy{},
+			expectKeys:          []string{"zoo/baz", "bar", "zoo/oii/yee", "foo"},
+			expectFilesUploaded: 2,
+			expectFilesFailed:   2,
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
-				l.expectFailed(t, in, err)
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 2)
 			},
 		},
-		"error when a sub-folder contains customized delimiter": {
-			source:      filepath.Join(root, "folder-contains-non-default-delimiter"),
-			recursive:   true,
-			s3Delimiter: "@",
-			expectErr:   "contains delimiter @",
+		"specified files uploads failure ignored by failure policy for non-recursive upload": {
+			source: filepath.Join(root, "multi-file-with-subdir"),
+			putobjectFunc: func(svc *s3testing.TransferManagerLoggingClient, param *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
+				if key := aws.ToString(param.Key); key == "zoo/oii/yee" || key == "foo" {
+					return nil, fmt.Errorf("banned key")
+				}
+				return &s3.PutObjectOutput{}, nil
+			},
+			failurePolicy:       IgnoreUploadFailurePolicy{},
+			expectKeys:          []string{"bar", "foo"},
+			expectFilesUploaded: 1,
+			expectFilesFailed:   1,
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
-				l.expectFailed(t, in, err)
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 1)
 			},
 		},
 		"error when a symlink refers to its upper dir": {
@@ -404,65 +422,6 @@ func TestUploadDirectory(t *testing.T) {
 				l.expectComplete(t, in, out, 2)
 			},
 		},
-		"folder containing both file and symlink with keyprefix and custome delimiter": {
-			source:         filepath.Join(root, "multi-file-contain-symlink"),
-			followSymLinks: true,
-			recursive:      true,
-			keyPrefix:      "bla",
-			s3Delimiter:    "#",
-			preprocessFunc: func(root string) (func() error, error) {
-				symlinkPath1 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symFoo")
-				symlinkPath2 := filepath.Join(root, "multi-file-contain-symlink", "to", "symBar")
-				postprocessFunc := func() error {
-					os.Remove(symlinkPath1)
-					os.Remove(symlinkPath2)
-					return nil
-				}
-				if err := os.Symlink(filepath.Join(root, "dstFile1"), symlinkPath1); err != nil {
-					return postprocessFunc, err
-				}
-				if err := os.Symlink(filepath.Join(root, "dstDir1"), symlinkPath2); err != nil {
-					return postprocessFunc, err
-				}
-				return postprocessFunc, nil
-			},
-			expectKeys:          []string{"bla#foo", "bla#bar", "bla#to#baz", "bla#to#the#symFoo", "bla#to#symBar#foo", "bla#to#the#yee"},
-			expectFilesUploaded: 6,
-			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
-				l.expectStart(t, in)
-				l.expectComplete(t, in, out, 6)
-			},
-		},
-		"folder containing both file and symlink with keyprefix, custome delimiter and request callback": {
-			source:         filepath.Join(root, "multi-file-contain-symlink"),
-			followSymLinks: true,
-			recursive:      true,
-			keyPrefix:      "bla",
-			s3Delimiter:    "#",
-			callback:       &keynameCallback{"bla#to#baz"},
-			preprocessFunc: func(root string) (func() error, error) {
-				symlinkPath1 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symFoo")
-				symlinkPath2 := filepath.Join(root, "multi-file-contain-symlink", "to", "symBar")
-				postprocessFunc := func() error {
-					os.Remove(symlinkPath1)
-					os.Remove(symlinkPath2)
-					return nil
-				}
-				if err := os.Symlink(filepath.Join(root, "dstFile1"), symlinkPath1); err != nil {
-					return postprocessFunc, err
-				}
-				if err := os.Symlink(filepath.Join(root, "dstDir1"), symlinkPath2); err != nil {
-					return postprocessFunc, err
-				}
-				return postprocessFunc, nil
-			},
-			expectKeys:          []string{"bla#foo", "bla#bar", "bla#to#baz/gotyou", "bla#to#the#symFoo", "bla#to#symBar#foo", "bla#to#the#yee"},
-			expectFilesUploaded: 6,
-			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
-				l.expectStart(t, in)
-				l.expectComplete(t, in, out, 6)
-			},
-		},
 	}
 
 	for name, c := range cases {
@@ -480,14 +439,14 @@ func TestUploadDirectory(t *testing.T) {
 			}
 
 			req := &UploadDirectoryInput{
-				Bucket:              "mock-bucket",
-				Source:              c.source,
-				FollowSymbolicLinks: c.followSymLinks,
-				Recursive:           c.recursive,
-				KeyPrefix:           c.keyPrefix,
+				Bucket:              aws.String("mock-bucket"),
+				Source:              aws.String(c.source),
+				FollowSymbolicLinks: aws.Bool(c.followSymLinks),
+				Recursive:           aws.Bool(c.recursive),
+				KeyPrefix:           aws.String(c.keyPrefix),
 				Filter:              c.filter,
 				Callback:            c.callback,
-				S3Delimiter:         c.s3Delimiter,
+				FailurePolicy:       c.failurePolicy,
 			}
 
 			listener := &mockDirectoryListener{}
@@ -516,6 +475,9 @@ func TestUploadDirectory(t *testing.T) {
 
 			if e, a := c.expectFilesUploaded, resp.ObjectsUploaded; e != a {
 				t.Errorf("expect %d objects uploaded, got %d", e, a)
+			}
+			if e, a := c.expectFilesFailed, resp.ObjectsFailed; e != a {
+				t.Errorf("expect %d objects failed, got %d", e, a)
 			}
 
 			var actualKeys []string
@@ -569,9 +531,9 @@ func TestUploadDirectoryObjectsTransferred(t *testing.T) {
 			mgr := New(s3Client, Options{})
 
 			req := &UploadDirectoryInput{
-				Bucket:    "mock-bucket",
-				Source:    c.source,
-				Recursive: c.recursive,
+				Bucket:    aws.String("mock-bucket"),
+				Source:    aws.String(c.source),
+				Recursive: aws.Bool(c.recursive),
 			}
 
 			listener := &mockDirectoryListener{}
@@ -603,9 +565,9 @@ func TestUploadDirectoryWithContextCanceled(t *testing.T) {
 	close(ctx.DoneCh)
 
 	_, err := u.UploadDirectory(ctx, &UploadDirectoryInput{
-		Bucket:    "mock-bucket",
-		Source:    filepath.Join(root, "multi-file-contain-symlink"),
-		Recursive: true,
+		Bucket:    aws.String("mock-bucket"),
+		Source:    aws.String(filepath.Join(root, "multi-file-contain-symlink")),
+		Recursive: aws.Bool(true),
 	})
 	if err == nil {
 		t.Fatalf("expect error, got nil")

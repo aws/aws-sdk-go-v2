@@ -36,12 +36,12 @@ func TestUploadOrderMulti(t *testing.T) {
 	mgr := New(c, Options{})
 
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket:               "Bucket",
-		Key:                  "Key - value",
+		Bucket:               aws.String("Bucket"),
+		Key:                  aws.String("Key - value"),
 		Body:                 bytes.NewReader(buf20MB),
 		ServerSideEncryption: "aws:kms",
-		SSEKMSKeyID:          "KmsId",
-		ContentType:          "content/type",
+		SSEKMSKeyID:          aws.String("KmsId"),
+		ContentType:          aws.String("content/type"),
 	})
 
 	if err != nil {
@@ -52,12 +52,12 @@ func TestUploadOrderMulti(t *testing.T) {
 		t.Errorf(diff)
 	}
 
-	if "UPLOAD-ID" != resp.UploadID {
-		t.Errorf("expect %q, got %q", "UPLOAD-ID", resp.UploadID)
+	if "UPLOAD-ID" != aws.ToString(resp.UploadID) {
+		t.Errorf("expect %q, got %q", "UPLOAD-ID", aws.ToString(resp.UploadID))
 	}
 
-	if "VERSION-ID" != resp.VersionID {
-		t.Errorf("expect %q, got %q", "VERSION-ID", resp.VersionID)
+	if "VERSION-ID" != aws.ToString(resp.VersionID) {
+		t.Errorf("expect %q, got %q", "VERSION-ID", aws.ToString(resp.VersionID))
 	}
 
 	// Validate input values
@@ -115,8 +115,8 @@ func TestUploadOrderMultiDifferentPartSize(t *testing.T) {
 	})
 
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   bytes.NewReader(buf20MB),
 	})
 
@@ -144,8 +144,8 @@ func TestUploadFailIfPartSizeTooSmall(t *testing.T) {
 			o.PartSizeBytes = 5
 		})
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   bytes.NewReader(buf20MB),
 	})
 
@@ -165,12 +165,12 @@ func TestUploadOrderSingle(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket:               "Bucket",
-		Key:                  "Key - value",
+		Bucket:               aws.String("Bucket"),
+		Key:                  aws.String("Key - value"),
 		Body:                 bytes.NewReader(buf2MB),
 		ServerSideEncryption: "aws:kms",
-		SSEKMSKeyID:          "KmsId",
-		ContentType:          "content/type",
+		SSEKMSKeyID:          aws.String("KmsId"),
+		ContentType:          aws.String("content/type"),
 	})
 
 	if err != nil {
@@ -181,12 +181,12 @@ func TestUploadOrderSingle(t *testing.T) {
 		t.Error(diff)
 	}
 
-	if e := "VERSION-ID"; e != resp.VersionID {
-		t.Errorf("expect %q, got %q", e, resp.VersionID)
+	if e := "VERSION-ID"; e != aws.ToString(resp.VersionID) {
+		t.Errorf("expect %q, got %q", e, aws.ToString(resp.VersionID))
 	}
 
-	if len(resp.UploadID) > 0 {
-		t.Errorf("expect empty string, got %q", resp.UploadID)
+	if len(aws.ToString(resp.UploadID)) > 0 {
+		t.Errorf("expect empty string, got %q", aws.ToString(resp.UploadID))
 	}
 
 	putObjectInput := (*params)[0].(*s3.PutObjectInput)
@@ -213,8 +213,8 @@ func TestUploadSingleFailure(t *testing.T) {
 
 	mgr := New(c, Options{})
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   bytes.NewReader(buf2MB),
 	})
 
@@ -235,8 +235,8 @@ func TestUploadOrderZero(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   bytes.NewReader(make([]byte, 0)),
 	})
 
@@ -248,8 +248,8 @@ func TestUploadOrderZero(t *testing.T) {
 		t.Error(diff)
 	}
 
-	if len(resp.UploadID) > 0 {
-		t.Errorf("expect empty string, got %q", resp.UploadID)
+	if len(aws.ToString(resp.UploadID)) > 0 {
+		t.Errorf("expect empty string, got %q", aws.ToString(resp.UploadID))
 	}
 
 	if e, a := int64(0), getReaderLength((*params)[0].(*s3.PutObjectInput).Body); e != a {
@@ -271,8 +271,8 @@ func TestUploadOrderMultiFailure(t *testing.T) {
 		o.Concurrency = 1
 	})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   bytes.NewReader(buf20MB),
 	})
 
@@ -296,8 +296,8 @@ func TestUploadOrderMultiFailureOnComplete(t *testing.T) {
 		o.Concurrency = 1
 	})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   bytes.NewReader(buf20MB),
 	})
 
@@ -320,8 +320,8 @@ func TestUploadOrderMultiFailureOnCreate(t *testing.T) {
 
 	mgr := New(c, Options{})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   bytes.NewReader(make([]byte, 1024*1024*12)),
 	})
 
@@ -351,8 +351,8 @@ func TestUploadOrderReadFail1(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   &failreader{times: 1},
 	})
 	if err == nil {
@@ -374,8 +374,8 @@ func TestUploadOrderReadFail2(t *testing.T) {
 		o.Concurrency = 1
 	})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   &failreader{times: 2},
 	})
 	if err == nil {
@@ -418,8 +418,8 @@ func TestUploadOrderMultiBufferedReader(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   &sizedReader{size: 1024 * 1024 * 21},
 	})
 	if err != nil {
@@ -449,8 +449,8 @@ func TestUploadOrderMultiBufferedReaderPartial(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   &sizedReader{size: 1024 * 1024 * 21, err: io.EOF},
 	})
 	if err != nil {
@@ -482,8 +482,8 @@ func TestUploadOrderMultiBufferedReaderEOF(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   &sizedReader{size: 1024 * 1024 * 16, err: io.EOF},
 	})
 
@@ -513,8 +513,8 @@ func TestUploadOrderSingleBufferedReader(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   &sizedReader{size: 1024 * 1024 * 2},
 	})
 
@@ -526,8 +526,8 @@ func TestUploadOrderSingleBufferedReader(t *testing.T) {
 		t.Error(diff)
 	}
 
-	if len(resp.UploadID) > 0 {
-		t.Errorf("expect no value, got %q", resp.UploadID)
+	if len(aws.ToString(resp.UploadID)) > 0 {
+		t.Errorf("expect no value, got %q", aws.ToString(resp.UploadID))
 	}
 }
 
@@ -536,8 +536,8 @@ func TestUploadZeroLenObject(t *testing.T) {
 
 	mgr := New(c, Options{})
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   strings.NewReader(""),
 	})
 
@@ -548,8 +548,8 @@ func TestUploadZeroLenObject(t *testing.T) {
 		t.Errorf("expect request to have been made, but was not, %v", diff)
 	}
 
-	if len(resp.UploadID) > 0 {
-		t.Errorf("expect empty string, but received %q", resp.UploadID)
+	if len(aws.ToString(resp.UploadID)) > 0 {
+		t.Errorf("expect empty string, but received %q", aws.ToString(resp.UploadID))
 	}
 }
 
@@ -565,8 +565,8 @@ func TestProgressListener_SingleUpload_SeekableBody(t *testing.T) {
 
 	body := "foobarbaz"
 	in := &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   strings.NewReader(body),
 	}
 	out, err := mgr.UploadObject(context.Background(), in)
@@ -593,8 +593,8 @@ func TestProgressListener_SingleUpload_UnseekableBody(t *testing.T) {
 
 	body := "foobarbaz"
 	in := &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   bytes.NewBuffer([]byte(body)),
 	}
 	out, err := mgr.UploadObject(context.Background(), in)
@@ -621,8 +621,8 @@ func TestProgressListener_MultiUpload(t *testing.T) {
 	mgr := New(c, opts)
 
 	in := &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   bytes.NewReader(buf40MB),
 	}
 	out, err := mgr.UploadObject(context.Background(), in)
@@ -667,8 +667,8 @@ func TestUploadUnexpectedEOF(t *testing.T) {
 		o.PartSizeBytes = minPartSizeBytes
 	})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body: &testIncompleteReader{
 			Size: minPartSizeBytes + 1,
 		},
@@ -706,10 +706,10 @@ func TestSSE(t *testing.T) {
 	})
 
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket:               "Bucket",
-		Key:                  "Key",
-		SSECustomerAlgorithm: "AES256",
-		SSECustomerKey:       "foo",
+		Bucket:               aws.String("Bucket"),
+		Key:                  aws.String("Key"),
+		SSECustomerAlgorithm: aws.String("AES256"),
+		SSECustomerKey:       aws.String("foo"),
 		Body:                 bytes.NewBuffer(make([]byte, 1024*1024*10)),
 	})
 
@@ -730,8 +730,8 @@ func TestUploadWithContextCanceled(t *testing.T) {
 	close(ctx.DoneCh)
 
 	_, err := u.UploadObject(ctx, &UploadObjectInput{
-		Bucket: "Bucket",
-		Key:    "Key",
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
 		Body:   bytes.NewReader(make([]byte, 0)),
 	})
 	if err == nil {
@@ -794,8 +794,8 @@ func TestUploadRetry(t *testing.T) {
 
 			uploader := New(client, Options{})
 			_, err := uploader.UploadObject(context.Background(), &UploadObjectInput{
-				Bucket: "bucket",
-				Key:    "key",
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
 				Body:   c.Body,
 			})
 
