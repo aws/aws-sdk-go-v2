@@ -712,7 +712,7 @@
                 "mode": {
                     "target": "com.amazonaws.pcs#AccountingMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>",
+                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -754,7 +754,7 @@
                 "mode": {
                     "target": "com.amazonaws.pcs#AccountingMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>",
+                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2563,20 +2563,20 @@
                 "secretArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the JWT key.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the JWT key.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "secretVersion": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the AWS Secrets Manager secret containing the JWT key.</p>",
+                        "smithy.api#documentation": "<p>The version of the Amazon Web Services Secrets Manager secret containing the JWT key.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The JWT key stored in AWS Secrets Manager for Slurm REST API authentication.</p>"
+                "smithy.api#documentation": "<p>The JWT key stored in Amazon Web Services Secrets Manager for Slurm REST API authentication.</p>"
             }
         },
         "com.amazonaws.pcs#ListClusters": {
@@ -3742,7 +3742,7 @@
                 "mode": {
                     "target": "com.amazonaws.pcs#SlurmRestMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>",
+                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3774,7 +3774,7 @@
                 "mode": {
                     "target": "com.amazonaws.pcs#SlurmRestMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>",
+                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4065,7 +4065,7 @@
                 "mode": {
                     "target": "com.amazonaws.pcs#AccountingMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>"
+                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>"
                     }
                 }
             },
@@ -4447,7 +4447,7 @@
                 "mode": {
                     "target": "com.amazonaws.pcs#SlurmRestMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>"
+                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>"
                     }
                 }
             },

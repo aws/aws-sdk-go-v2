@@ -8195,8 +8195,10 @@
                 "AccountIds": {
                     "target": "com.amazonaws.guardduty#AccountIds",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of account identifiers of the GuardDuty member account.</p>",
-                        "smithy.api#jsonName": "accountIds"
+                        "smithy.api#jsonName": "accountIds",
+                        "smithy.api#required": {}
                     }
                 }
             },

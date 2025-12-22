@@ -1951,7 +1951,7 @@
                 "roleARN": {
                     "target": "com.amazonaws.configservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role assumed by Config and used by the specified configuration recorder.</p>\n         <note>\n            <p>\n               <b>The server will reject a request without a defined <code>roleARN</code> for the configuration recorder</b>\n            </p>\n            <p>While the API model does not require this field, the server will reject a request without a defined <code>roleARN</code> for the configuration recorder.</p>\n            <p>\n               <b>Policies and compliance results</b>\n            </p>\n            <p>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html\">IAM policies</a>\n\t\t\t\tand <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html\">other policies managed in Organizations</a>\n\t\t\t\tcan impact whether Config\n\t\t\t\thas permissions to record configuration changes for your resources. Additionally, rules directly evaluate the configuration of a resource and rules don't take into account these policies when running evaluations.\n\t\t\t\tMake sure that the policies in effect align with how you intend to use Config.</p>\n            <p>\n               <b>Keep Minimum Permisions When Reusing an IAM role</b>\n            </p>\n            <p>If you use an Amazon Web Services service that uses Config, such as Security Hub or\n\t\t\t\tControl Tower, and an IAM role has already been created, make sure that the\n\t\t\t\tIAM role that you use when setting up Config keeps the same minimum\n\t\t\t\tpermissions as the pre-existing IAM role. You must do this to ensure that the\n\t\t\t\tother Amazon Web Services service continues to run as expected. </p>\n            <p>For example, if Control Tower has an IAM role that allows Config to read\n\t\t\t\tS3 objects, make sure that the same permissions are granted\n\t\t\t\tto the IAM role you use when setting up Config. Otherwise, it may\n\t\t\t\tinterfere with how Control Tower operates.</p>\n            <p>\n               <b>The service-linked IAM role for Config must be used for service-linked configuration recorders</b>\n            </p>\n            <p>For service-linked configuration recorders, you must use the service-linked IAM role for Config: <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/using-service-linked-roles.html\">AWSServiceRoleForConfig</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role assumed by Config and used by the specified configuration recorder.</p>\n         <note>\n            <p>\n               <b>The server will reject a request without a defined <code>roleARN</code> for the configuration recorder</b>\n            </p>\n            <p>While the API model does not require this field, the server will reject a request without a defined <code>roleARN</code> for the configuration recorder.</p>\n            <p>\n               <b>Policies and compliance results</b>\n            </p>\n            <p>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html\">IAM policies</a>\n\t\t\t\tand <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html\">other policies managed in Organizations</a>\n\t\t\t\tcan impact whether Config\n\t\t\t\thas permissions to record configuration changes for your resources. Additionally, rules directly evaluate the configuration of a resource and rules don't take into account these policies when running evaluations.\n\t\t\t\tMake sure that the policies in effect align with how you intend to use Config.</p>\n            <p>\n               <b>Keep Minimum Permisions When Reusing an IAM role</b>\n            </p>\n            <p>If you use an Amazon Web Services service that uses Config, such as Security Hub CSPM or\n\t\t\t\tControl Tower, and an IAM role has already been created, make sure that the\n\t\t\t\tIAM role that you use when setting up Config keeps the same minimum\n\t\t\t\tpermissions as the pre-existing IAM role. You must do this to ensure that the\n\t\t\t\tother Amazon Web Services service continues to run as expected. </p>\n            <p>For example, if Control Tower has an IAM role that allows Config to read\n\t\t\t\tS3 objects, make sure that the same permissions are granted\n\t\t\t\tto the IAM role you use when setting up Config. Otherwise, it may\n\t\t\t\tinterfere with how Control Tower operates.</p>\n            <p>\n               <b>The service-linked IAM role for Config must be used for service-linked configuration recorders</b>\n            </p>\n            <p>For service-linked configuration recorders, you must use the service-linked IAM role for Config: <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/using-service-linked-roles.html\">AWSServiceRoleForConfig</a>.</p>\n         </note>"
                     }
                 },
                 "recordingGroup": {
@@ -14976,6 +14976,552 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS::Transfer::Profile"
+                    }
+                },
+                "CloudFormationStackSet": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CloudFormation::StackSet"
+                    }
+                },
+                "MediaPackageV2Channel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::MediaPackageV2::Channel"
+                    }
+                },
+                "S3AccessGrantsLocation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::S3::AccessGrantsLocation"
+                    }
+                },
+                "S3AccessGrant": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::S3::AccessGrant"
+                    }
+                },
+                "S3AccessGrantsInstance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::S3::AccessGrantsInstance"
+                    }
+                },
+                "EMRServerlessApplication": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EMRServerless::Application"
+                    }
+                },
+                "ConfigAggregationAuthorization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Config::AggregationAuthorization"
+                    }
+                },
+                "BedrockApplicationInferenceProfile": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Bedrock::ApplicationInferenceProfile"
+                    }
+                },
+                "ApiGatewayV2Integration": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ApiGatewayV2::Integration"
+                    }
+                },
+                "SageMakerMlflowTrackingServer": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SageMaker::MlflowTrackingServer"
+                    }
+                },
+                "SageMakerModelBiasJobDefinition": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SageMaker::ModelBiasJobDefinition"
+                    }
+                },
+                "SecretsManagerRotationSchedule": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SecretsManager::RotationSchedule"
+                    }
+                },
+                "DeadlineQueueFleetAssociation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Deadline::QueueFleetAssociation"
+                    }
+                },
+                "ECRRepositoryCreationTemplate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ECR::RepositoryCreationTemplate"
+                    }
+                },
+                "CloudFormationLambdaHook": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CloudFormation::LambdaHook"
+                    }
+                },
+                "EC2SubnetNetworkAclAssociation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::SubnetNetworkAclAssociation"
+                    }
+                },
+                "ApiGatewayUsagePlan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ApiGateway::UsagePlan"
+                    }
+                },
+                "AppConfigExtension": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::AppConfig::Extension"
+                    }
+                },
+                "DeadlineFleet": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Deadline::Fleet"
+                    }
+                },
+                "EMRStudio": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EMR::Studio"
+                    }
+                },
+                "S3TablesTableBucket": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::S3Tables::TableBucket"
+                    }
+                },
+                "CloudFrontRealtimeLogConfig": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CloudFront::RealtimeLogConfig"
+                    }
+                },
+                "BackupGatewayHypervisor": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::BackupGateway::Hypervisor"
+                    }
+                },
+                "BCMDataExportsExport": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::BCMDataExports::Export"
+                    }
+                },
+                "CloudFormationGuardHook": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CloudFormation::GuardHook"
+                    }
+                },
+                "CloudFrontPublicKey": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CloudFront::PublicKey"
+                    }
+                },
+                "CloudTrailEventDataStore": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CloudTrail::EventDataStore"
+                    }
+                },
+                "EntityResolutionIdMappingWorkflow": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EntityResolution::IdMappingWorkflow"
+                    }
+                },
+                "EntityResolutionSchemaMapping": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EntityResolution::SchemaMapping"
+                    }
+                },
+                "IoTDomainConfiguration": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::IoT::DomainConfiguration"
+                    }
+                },
+                "PCAConnectorADDirectoryRegistration": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::PCAConnectorAD::DirectoryRegistration"
+                    }
+                },
+                "RDSIntegration": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::RDS::Integration"
+                    }
+                },
+                "ConfigConformancePack": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Config::ConformancePack"
+                    }
+                },
+                "RolesAnywhereProfile": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::RolesAnywhere::Profile"
+                    }
+                },
+                "CodeArtifactDomain": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CodeArtifact::Domain"
+                    }
+                },
+                "BackupRestoreTestingPlan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Backup::RestoreTestingPlan"
+                    }
+                },
+                "ConfigStoredQuery": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Config::StoredQuery"
+                    }
+                },
+                "SageMakerDataQualityJobDefinition": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SageMaker::DataQualityJobDefinition"
+                    }
+                },
+                "SageMakerModelExplainabilityJobDefinition": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SageMaker::ModelExplainabilityJobDefinition"
+                    }
+                },
+                "SageMakerModelQualityJobDefinition": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SageMaker::ModelQualityJobDefinition"
+                    }
+                },
+                "SageMakerStudioLifecycleConfig": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SageMaker::StudioLifecycleConfig"
+                    }
+                },
+                "SESDedicatedIpPool": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SES::DedicatedIpPool"
+                    }
+                },
+                "SESMailManagerTrafficPolicy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SES::MailManagerTrafficPolicy"
+                    }
+                },
+                "SSMResourceDataSync": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SSM::ResourceDataSync"
+                    }
+                },
+                "BedrockAgentCoreRuntime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::BedrockAgentCore::Runtime"
+                    }
+                },
+                "BedrockAgentCoreBrowserCustom": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::BedrockAgentCore::BrowserCustom"
+                    }
+                },
+                "ElasticLoadBalancingV2TargetGroup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ElasticLoadBalancingV2::TargetGroup"
+                    }
+                },
+                "EMRContainersVirtualCluster": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EMRContainers::VirtualCluster"
+                    }
+                },
+                "EntityResolutionMatchingWorkflow": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EntityResolution::MatchingWorkflow"
+                    }
+                },
+                "IoTCoreDeviceAdvisorSuiteDefinition": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::IoTCoreDeviceAdvisor::SuiteDefinition"
+                    }
+                },
+                "EC2SecurityGroupVpcAssociation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::SecurityGroupVpcAssociation"
+                    }
+                },
+                "EC2VerifiedAccessInstance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::VerifiedAccessInstance"
+                    }
+                },
+                "KafkaConnectCustomPlugin": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::KafkaConnect::CustomPlugin"
+                    }
+                },
+                "NetworkManagerTransitGatewayPeering": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::NetworkManager::TransitGatewayPeering"
+                    }
+                },
+                "OpenSearchServerlessSecurityConfig": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::OpenSearchServerless::SecurityConfig"
+                    }
+                },
+                "RedshiftIntegration": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Redshift::Integration"
+                    }
+                },
+                "RolesAnywhereTrustAnchor": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::RolesAnywhere::TrustAnchor"
+                    }
+                },
+                "Route53ProfilesProfileAssociation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Route53Profiles::ProfileAssociation"
+                    }
+                },
+                "SSMIncidentsResponsePlan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SSMIncidents::ResponsePlan"
+                    }
+                },
+                "TransferServer": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Transfer::Server"
+                    }
+                },
+                "GlueDatabase": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Glue::Database"
+                    }
+                },
+                "OrganizationsOrganizationalUnit": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Organizations::OrganizationalUnit"
+                    }
+                },
+                "EC2IPAMPoolCidr": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::IPAMPoolCidr"
+                    }
+                },
+                "EC2VPCGatewayAttachment": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::VPCGatewayAttachment"
+                    }
+                },
+                "BedrockPrompt": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Bedrock::Prompt"
+                    }
+                },
+                "ComprehendFlywheel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Comprehend::Flywheel"
+                    }
+                },
+                "DataSyncAgent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::DataSync::Agent"
+                    }
+                },
+                "MediaTailorLiveSource": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::MediaTailor::LiveSource"
+                    }
+                },
+                "MSKServerlessCluster": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::MSK::ServerlessCluster"
+                    }
+                },
+                "IoTSiteWiseAsset": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::IoTSiteWise::Asset"
+                    }
+                },
+                "B2BICapability": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::B2BI::Capability"
+                    }
+                },
+                "CloudFrontKeyValueStore": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CloudFront::KeyValueStore"
+                    }
+                },
+                "DeadlineMonitor": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Deadline::Monitor"
+                    }
+                },
+                "GuardDutyMalwareProtectionPlan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::GuardDuty::MalwareProtectionPlan"
+                    }
+                },
+                "LocationAPIKey": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Location::APIKey"
+                    }
+                },
+                "MediaPackageV2OriginEndpoint": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::MediaPackageV2::OriginEndpoint"
+                    }
+                },
+                "PCAConnectorADConnector": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::PCAConnectorAD::Connector"
+                    }
+                },
+                "S3TablesTableBucketPolicy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::S3Tables::TableBucketPolicy"
+                    }
+                },
+                "SecretsManagerResourcePolicy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SecretsManager::ResourcePolicy"
+                    }
+                },
+                "SSMContactsContact": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SSMContacts::Contact"
+                    }
+                },
+                "IoTThingGroup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::IoT::ThingGroup"
+                    }
+                },
+                "ImageBuilderLifecyclePolicy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ImageBuilder::LifecyclePolicy"
+                    }
+                },
+                "GameLiftBuild": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::GameLift::Build"
+                    }
+                },
+                "ECRReplicationConfiguration": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ECR::ReplicationConfiguration"
+                    }
+                },
+                "EC2SubnetCidrBlock": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::SubnetCidrBlock"
+                    }
+                },
+                "ConnectSecurityProfile": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Connect::SecurityProfile"
+                    }
+                },
+                "CleanRoomsMLTrainingDataset": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CleanRoomsML::TrainingDataset"
+                    }
+                },
+                "AppStreamAppBlockBuilder": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::AppStream::AppBlockBuilder"
+                    }
+                },
+                "Route53DNSSEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Route53::DNSSEC"
+                    }
+                },
+                "SageMakerUserProfile": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SageMaker::UserProfile"
+                    }
+                },
+                "ApiGatewayMethod": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ApiGateway::Method"
                     }
                 }
             }
