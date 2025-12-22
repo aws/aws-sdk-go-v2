@@ -1,8 +1,0 @@
-{
-    "id": "03ac7f35-672e-405c-926d-e7320a78a8e0",
-    "type": "documentation",
-    "description": "Change API Reference Documentation for default Mode in Accounting and SlurmRest",
-    "modules": [
-        "service/pcs"
-    ]
-}

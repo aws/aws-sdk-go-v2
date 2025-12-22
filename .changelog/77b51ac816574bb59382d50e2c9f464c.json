@@ -1,8 +1,0 @@
-{
-    "id": "77b51ac8-1657-4bb5-9382-d50e2c9f464c",
-    "type": "feature",
-    "description": "Make accountIds a required field in GetRemainingFreeTrialDays API to reflect service behavior.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

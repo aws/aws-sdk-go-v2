@@ -1,3 +1,7 @@
+# v1.60.0 (2025-12-22)
+
+* **Feature**: Added supported resourceTypes for Config from July to November 2025
+
 # v1.59.9 (2025-12-09)
 
 * No change notes available for this release.

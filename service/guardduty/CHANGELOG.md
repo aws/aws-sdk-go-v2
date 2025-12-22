@@ -1,3 +1,7 @@
+# v1.72.0 (2025-12-22)
+
+* **Feature**: Make accountIds a required field in GetRemainingFreeTrialDays API to reflect service behavior.
+
 # v1.71.0 (2025-12-17)
 
 * **Feature**: Add support for dbiResourceId in finding.

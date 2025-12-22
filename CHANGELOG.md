@@ -1,3 +1,15 @@
+# Release (2025-12-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.60.0](service/configservice/CHANGELOG.md#v1600-2025-12-22)
+  * **Feature**: Added supported resourceTypes for Config from July to November 2025
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.279.0](service/ec2/CHANGELOG.md#v12790-2025-12-22)
+  * **Feature**: Adds support for linkedGroupId on the CreatePlacementGroup and DescribePlacementGroups APIs. The linkedGroupId parameter is reserved for future use.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.72.0](service/guardduty/CHANGELOG.md#v1720-2025-12-22)
+  * **Feature**: Make accountIds a required field in GetRemainingFreeTrialDays API to reflect service behavior.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.15.5](service/pcs/CHANGELOG.md#v1155-2025-12-22)
+  * **Documentation**: Change API Reference Documentation for default Mode in Accounting and SlurmRest
+
 # Release (2025-12-19)
 
 ## Module Highlights
