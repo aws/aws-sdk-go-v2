@@ -13715,32 +13715,6 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	}
 
 	{
-		headerValue := msg.Headers.Get("stringHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.StringValue)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "stringHeader", headerValue)
-			}
-
-			ihv := hv.Get().(string)
-			v.StringHeader = ptr.String(ihv)
-		}
-	}
-
-	{
-		headerValue := msg.Headers.Get("intHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.Int32Value)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "intHeader", headerValue)
-			}
-
-			ihv := hv.Get().(int32)
-			v.IntHeader = ptr.Int32(ihv)
-		}
-	}
-
-	{
 		headerValue := msg.Headers.Get("blobHeader")
 		if headerValue != nil {
 			hv, ok := headerValue.(eventstream.BytesValue)
@@ -13750,6 +13724,19 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 
 			ihv := hv.Get().([]byte)
 			v.BlobHeader = ihv
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("stringHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(*eventstream.StringValue)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "stringHeader", headerValue)
+			}
+
+			ihv := hv.Get().(string)
+			v.StringHeader = ptr.String(ihv)
 		}
 	}
 
@@ -13793,19 +13780,6 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	}
 
 	{
-		headerValue := msg.Headers.Get("timestampHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.TimestampValue)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "timestampHeader", headerValue)
-			}
-
-			ihv := hv.Get().(time.Time)
-			v.TimestampHeader = ptr.Time(ihv)
-		}
-	}
-
-	{
 		headerValue := msg.Headers.Get("longHeader")
 		if headerValue != nil {
 			hv, ok := headerValue.(*eventstream.Int64Value)
@@ -13815,6 +13789,32 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 
 			ihv := hv.Get().(int64)
 			v.LongHeader = ptr.Int64(ihv)
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("intHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(*eventstream.Int32Value)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "intHeader", headerValue)
+			}
+
+			ihv := hv.Get().(int32)
+			v.IntHeader = ptr.Int32(ihv)
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("timestampHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(*eventstream.TimestampValue)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "timestampHeader", headerValue)
+			}
+
+			ihv := hv.Get().(time.Time)
+			v.TimestampHeader = ptr.Time(ihv)
 		}
 	}
 

@@ -3047,6 +3047,9 @@ func validateOpGetRemainingFreeTrialDaysInput(v *GetRemainingFreeTrialDaysInput)
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

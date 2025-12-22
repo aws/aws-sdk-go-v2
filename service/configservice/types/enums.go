@@ -1213,6 +1213,97 @@ const (
 	ResourceTypeSageMakerInferenceExperiment                         ResourceType = "AWS::SageMaker::InferenceExperiment"
 	ResourceTypeSecurityHubStandard                                  ResourceType = "AWS::SecurityHub::Standard"
 	ResourceTypeTransferProfile                                      ResourceType = "AWS::Transfer::Profile"
+	ResourceTypeCloudFormationStackSet                               ResourceType = "AWS::CloudFormation::StackSet"
+	ResourceTypeMediaPackageV2Channel                                ResourceType = "AWS::MediaPackageV2::Channel"
+	ResourceTypeS3AccessGrantsLocation                               ResourceType = "AWS::S3::AccessGrantsLocation"
+	ResourceTypeS3AccessGrant                                        ResourceType = "AWS::S3::AccessGrant"
+	ResourceTypeS3AccessGrantsInstance                               ResourceType = "AWS::S3::AccessGrantsInstance"
+	ResourceTypeEMRServerlessApplication                             ResourceType = "AWS::EMRServerless::Application"
+	ResourceTypeConfigAggregationAuthorization                       ResourceType = "AWS::Config::AggregationAuthorization"
+	ResourceTypeBedrockApplicationInferenceProfile                   ResourceType = "AWS::Bedrock::ApplicationInferenceProfile"
+	ResourceTypeApiGatewayV2Integration                              ResourceType = "AWS::ApiGatewayV2::Integration"
+	ResourceTypeSageMakerMlflowTrackingServer                        ResourceType = "AWS::SageMaker::MlflowTrackingServer"
+	ResourceTypeSageMakerModelBiasJobDefinition                      ResourceType = "AWS::SageMaker::ModelBiasJobDefinition"
+	ResourceTypeSecretsManagerRotationSchedule                       ResourceType = "AWS::SecretsManager::RotationSchedule"
+	ResourceTypeDeadlineQueueFleetAssociation                        ResourceType = "AWS::Deadline::QueueFleetAssociation"
+	ResourceTypeECRRepositoryCreationTemplate                        ResourceType = "AWS::ECR::RepositoryCreationTemplate"
+	ResourceTypeCloudFormationLambdaHook                             ResourceType = "AWS::CloudFormation::LambdaHook"
+	ResourceTypeEC2SubnetNetworkAclAssociation                       ResourceType = "AWS::EC2::SubnetNetworkAclAssociation"
+	ResourceTypeApiGatewayUsagePlan                                  ResourceType = "AWS::ApiGateway::UsagePlan"
+	ResourceTypeAppConfigExtension                                   ResourceType = "AWS::AppConfig::Extension"
+	ResourceTypeDeadlineFleet                                        ResourceType = "AWS::Deadline::Fleet"
+	ResourceTypeEMRStudio                                            ResourceType = "AWS::EMR::Studio"
+	ResourceTypeS3TablesTableBucket                                  ResourceType = "AWS::S3Tables::TableBucket"
+	ResourceTypeCloudFrontRealtimeLogConfig                          ResourceType = "AWS::CloudFront::RealtimeLogConfig"
+	ResourceTypeBackupGatewayHypervisor                              ResourceType = "AWS::BackupGateway::Hypervisor"
+	ResourceTypeBCMDataExportsExport                                 ResourceType = "AWS::BCMDataExports::Export"
+	ResourceTypeCloudFormationGuardHook                              ResourceType = "AWS::CloudFormation::GuardHook"
+	ResourceTypeCloudFrontPublicKey                                  ResourceType = "AWS::CloudFront::PublicKey"
+	ResourceTypeCloudTrailEventDataStore                             ResourceType = "AWS::CloudTrail::EventDataStore"
+	ResourceTypeEntityResolutionIdMappingWorkflow                    ResourceType = "AWS::EntityResolution::IdMappingWorkflow"
+	ResourceTypeEntityResolutionSchemaMapping                        ResourceType = "AWS::EntityResolution::SchemaMapping"
+	ResourceTypeIoTDomainConfiguration                               ResourceType = "AWS::IoT::DomainConfiguration"
+	ResourceTypePCAConnectorADDirectoryRegistration                  ResourceType = "AWS::PCAConnectorAD::DirectoryRegistration"
+	ResourceTypeRDSIntegration                                       ResourceType = "AWS::RDS::Integration"
+	ResourceTypeConfigConformancePack                                ResourceType = "AWS::Config::ConformancePack"
+	ResourceTypeRolesAnywhereProfile                                 ResourceType = "AWS::RolesAnywhere::Profile"
+	ResourceTypeCodeArtifactDomain                                   ResourceType = "AWS::CodeArtifact::Domain"
+	ResourceTypeBackupRestoreTestingPlan                             ResourceType = "AWS::Backup::RestoreTestingPlan"
+	ResourceTypeConfigStoredQuery                                    ResourceType = "AWS::Config::StoredQuery"
+	ResourceTypeSageMakerDataQualityJobDefinition                    ResourceType = "AWS::SageMaker::DataQualityJobDefinition"
+	ResourceTypeSageMakerModelExplainabilityJobDefinition            ResourceType = "AWS::SageMaker::ModelExplainabilityJobDefinition"
+	ResourceTypeSageMakerModelQualityJobDefinition                   ResourceType = "AWS::SageMaker::ModelQualityJobDefinition"
+	ResourceTypeSageMakerStudioLifecycleConfig                       ResourceType = "AWS::SageMaker::StudioLifecycleConfig"
+	ResourceTypeSESDedicatedIpPool                                   ResourceType = "AWS::SES::DedicatedIpPool"
+	ResourceTypeSESMailManagerTrafficPolicy                          ResourceType = "AWS::SES::MailManagerTrafficPolicy"
+	ResourceTypeSSMResourceDataSync                                  ResourceType = "AWS::SSM::ResourceDataSync"
+	ResourceTypeBedrockAgentCoreRuntime                              ResourceType = "AWS::BedrockAgentCore::Runtime"
+	ResourceTypeBedrockAgentCoreBrowserCustom                        ResourceType = "AWS::BedrockAgentCore::BrowserCustom"
+	ResourceTypeElasticLoadBalancingV2TargetGroup                    ResourceType = "AWS::ElasticLoadBalancingV2::TargetGroup"
+	ResourceTypeEMRContainersVirtualCluster                          ResourceType = "AWS::EMRContainers::VirtualCluster"
+	ResourceTypeEntityResolutionMatchingWorkflow                     ResourceType = "AWS::EntityResolution::MatchingWorkflow"
+	ResourceTypeIoTCoreDeviceAdvisorSuiteDefinition                  ResourceType = "AWS::IoTCoreDeviceAdvisor::SuiteDefinition"
+	ResourceTypeEC2SecurityGroupVpcAssociation                       ResourceType = "AWS::EC2::SecurityGroupVpcAssociation"
+	ResourceTypeEC2VerifiedAccessInstance                            ResourceType = "AWS::EC2::VerifiedAccessInstance"
+	ResourceTypeKafkaConnectCustomPlugin                             ResourceType = "AWS::KafkaConnect::CustomPlugin"
+	ResourceTypeNetworkManagerTransitGatewayPeering                  ResourceType = "AWS::NetworkManager::TransitGatewayPeering"
+	ResourceTypeOpenSearchServerlessSecurityConfig                   ResourceType = "AWS::OpenSearchServerless::SecurityConfig"
+	ResourceTypeRedshiftIntegration                                  ResourceType = "AWS::Redshift::Integration"
+	ResourceTypeRolesAnywhereTrustAnchor                             ResourceType = "AWS::RolesAnywhere::TrustAnchor"
+	ResourceTypeRoute53ProfilesProfileAssociation                    ResourceType = "AWS::Route53Profiles::ProfileAssociation"
+	ResourceTypeSSMIncidentsResponsePlan                             ResourceType = "AWS::SSMIncidents::ResponsePlan"
+	ResourceTypeTransferServer                                       ResourceType = "AWS::Transfer::Server"
+	ResourceTypeGlueDatabase                                         ResourceType = "AWS::Glue::Database"
+	ResourceTypeOrganizationsOrganizationalUnit                      ResourceType = "AWS::Organizations::OrganizationalUnit"
+	ResourceTypeEC2IPAMPoolCidr                                      ResourceType = "AWS::EC2::IPAMPoolCidr"
+	ResourceTypeEC2VPCGatewayAttachment                              ResourceType = "AWS::EC2::VPCGatewayAttachment"
+	ResourceTypeBedrockPrompt                                        ResourceType = "AWS::Bedrock::Prompt"
+	ResourceTypeComprehendFlywheel                                   ResourceType = "AWS::Comprehend::Flywheel"
+	ResourceTypeDataSyncAgent                                        ResourceType = "AWS::DataSync::Agent"
+	ResourceTypeMediaTailorLiveSource                                ResourceType = "AWS::MediaTailor::LiveSource"
+	ResourceTypeMSKServerlessCluster                                 ResourceType = "AWS::MSK::ServerlessCluster"
+	ResourceTypeIoTSiteWiseAsset                                     ResourceType = "AWS::IoTSiteWise::Asset"
+	ResourceTypeB2BICapability                                       ResourceType = "AWS::B2BI::Capability"
+	ResourceTypeCloudFrontKeyValueStore                              ResourceType = "AWS::CloudFront::KeyValueStore"
+	ResourceTypeDeadlineMonitor                                      ResourceType = "AWS::Deadline::Monitor"
+	ResourceTypeGuardDutyMalwareProtectionPlan                       ResourceType = "AWS::GuardDuty::MalwareProtectionPlan"
+	ResourceTypeLocationAPIKey                                       ResourceType = "AWS::Location::APIKey"
+	ResourceTypeMediaPackageV2OriginEndpoint                         ResourceType = "AWS::MediaPackageV2::OriginEndpoint"
+	ResourceTypePCAConnectorADConnector                              ResourceType = "AWS::PCAConnectorAD::Connector"
+	ResourceTypeS3TablesTableBucketPolicy                            ResourceType = "AWS::S3Tables::TableBucketPolicy"
+	ResourceTypeSecretsManagerResourcePolicy                         ResourceType = "AWS::SecretsManager::ResourcePolicy"
+	ResourceTypeSSMContactsContact                                   ResourceType = "AWS::SSMContacts::Contact"
+	ResourceTypeIoTThingGroup                                        ResourceType = "AWS::IoT::ThingGroup"
+	ResourceTypeImageBuilderLifecyclePolicy                          ResourceType = "AWS::ImageBuilder::LifecyclePolicy"
+	ResourceTypeGameLiftBuild                                        ResourceType = "AWS::GameLift::Build"
+	ResourceTypeECRReplicationConfiguration                          ResourceType = "AWS::ECR::ReplicationConfiguration"
+	ResourceTypeEC2SubnetCidrBlock                                   ResourceType = "AWS::EC2::SubnetCidrBlock"
+	ResourceTypeConnectSecurityProfile                               ResourceType = "AWS::Connect::SecurityProfile"
+	ResourceTypeCleanRoomsMLTrainingDataset                          ResourceType = "AWS::CleanRoomsML::TrainingDataset"
+	ResourceTypeAppStreamAppBlockBuilder                             ResourceType = "AWS::AppStream::AppBlockBuilder"
+	ResourceTypeRoute53DNSSEC                                        ResourceType = "AWS::Route53::DNSSEC"
+	ResourceTypeSageMakerUserProfile                                 ResourceType = "AWS::SageMaker::UserProfile"
+	ResourceTypeApiGatewayMethod                                     ResourceType = "AWS::ApiGateway::Method"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1663,6 +1754,97 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::SageMaker::InferenceExperiment",
 		"AWS::SecurityHub::Standard",
 		"AWS::Transfer::Profile",
+		"AWS::CloudFormation::StackSet",
+		"AWS::MediaPackageV2::Channel",
+		"AWS::S3::AccessGrantsLocation",
+		"AWS::S3::AccessGrant",
+		"AWS::S3::AccessGrantsInstance",
+		"AWS::EMRServerless::Application",
+		"AWS::Config::AggregationAuthorization",
+		"AWS::Bedrock::ApplicationInferenceProfile",
+		"AWS::ApiGatewayV2::Integration",
+		"AWS::SageMaker::MlflowTrackingServer",
+		"AWS::SageMaker::ModelBiasJobDefinition",
+		"AWS::SecretsManager::RotationSchedule",
+		"AWS::Deadline::QueueFleetAssociation",
+		"AWS::ECR::RepositoryCreationTemplate",
+		"AWS::CloudFormation::LambdaHook",
+		"AWS::EC2::SubnetNetworkAclAssociation",
+		"AWS::ApiGateway::UsagePlan",
+		"AWS::AppConfig::Extension",
+		"AWS::Deadline::Fleet",
+		"AWS::EMR::Studio",
+		"AWS::S3Tables::TableBucket",
+		"AWS::CloudFront::RealtimeLogConfig",
+		"AWS::BackupGateway::Hypervisor",
+		"AWS::BCMDataExports::Export",
+		"AWS::CloudFormation::GuardHook",
+		"AWS::CloudFront::PublicKey",
+		"AWS::CloudTrail::EventDataStore",
+		"AWS::EntityResolution::IdMappingWorkflow",
+		"AWS::EntityResolution::SchemaMapping",
+		"AWS::IoT::DomainConfiguration",
+		"AWS::PCAConnectorAD::DirectoryRegistration",
+		"AWS::RDS::Integration",
+		"AWS::Config::ConformancePack",
+		"AWS::RolesAnywhere::Profile",
+		"AWS::CodeArtifact::Domain",
+		"AWS::Backup::RestoreTestingPlan",
+		"AWS::Config::StoredQuery",
+		"AWS::SageMaker::DataQualityJobDefinition",
+		"AWS::SageMaker::ModelExplainabilityJobDefinition",
+		"AWS::SageMaker::ModelQualityJobDefinition",
+		"AWS::SageMaker::StudioLifecycleConfig",
+		"AWS::SES::DedicatedIpPool",
+		"AWS::SES::MailManagerTrafficPolicy",
+		"AWS::SSM::ResourceDataSync",
+		"AWS::BedrockAgentCore::Runtime",
+		"AWS::BedrockAgentCore::BrowserCustom",
+		"AWS::ElasticLoadBalancingV2::TargetGroup",
+		"AWS::EMRContainers::VirtualCluster",
+		"AWS::EntityResolution::MatchingWorkflow",
+		"AWS::IoTCoreDeviceAdvisor::SuiteDefinition",
+		"AWS::EC2::SecurityGroupVpcAssociation",
+		"AWS::EC2::VerifiedAccessInstance",
+		"AWS::KafkaConnect::CustomPlugin",
+		"AWS::NetworkManager::TransitGatewayPeering",
+		"AWS::OpenSearchServerless::SecurityConfig",
+		"AWS::Redshift::Integration",
+		"AWS::RolesAnywhere::TrustAnchor",
+		"AWS::Route53Profiles::ProfileAssociation",
+		"AWS::SSMIncidents::ResponsePlan",
+		"AWS::Transfer::Server",
+		"AWS::Glue::Database",
+		"AWS::Organizations::OrganizationalUnit",
+		"AWS::EC2::IPAMPoolCidr",
+		"AWS::EC2::VPCGatewayAttachment",
+		"AWS::Bedrock::Prompt",
+		"AWS::Comprehend::Flywheel",
+		"AWS::DataSync::Agent",
+		"AWS::MediaTailor::LiveSource",
+		"AWS::MSK::ServerlessCluster",
+		"AWS::IoTSiteWise::Asset",
+		"AWS::B2BI::Capability",
+		"AWS::CloudFront::KeyValueStore",
+		"AWS::Deadline::Monitor",
+		"AWS::GuardDuty::MalwareProtectionPlan",
+		"AWS::Location::APIKey",
+		"AWS::MediaPackageV2::OriginEndpoint",
+		"AWS::PCAConnectorAD::Connector",
+		"AWS::S3Tables::TableBucketPolicy",
+		"AWS::SecretsManager::ResourcePolicy",
+		"AWS::SSMContacts::Contact",
+		"AWS::IoT::ThingGroup",
+		"AWS::ImageBuilder::LifecyclePolicy",
+		"AWS::GameLift::Build",
+		"AWS::ECR::ReplicationConfiguration",
+		"AWS::EC2::SubnetCidrBlock",
+		"AWS::Connect::SecurityProfile",
+		"AWS::CleanRoomsML::TrainingDataset",
+		"AWS::AppStream::AppBlockBuilder",
+		"AWS::Route53::DNSSEC",
+		"AWS::SageMaker::UserProfile",
+		"AWS::ApiGateway::Method",
 	}
 }
 

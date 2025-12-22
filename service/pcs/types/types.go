@@ -11,8 +11,8 @@ import (
 // accounting. It's a property of the ClusterSlurmConfiguration object.
 type Accounting struct {
 
-	// The default value for mode is STANDARD . A value of STANDARD means Slurm
-	// accounting is enabled.
+	// The default value for mode is NONE . A value of STANDARD means Slurm accounting
+	// is enabled.
 	//
 	// This member is required.
 	Mode AccountingMode
@@ -37,8 +37,8 @@ type Accounting struct {
 // accounting. It's a property of the ClusterSlurmConfiguration object.
 type AccountingRequest struct {
 
-	// The default value for mode is STANDARD . A value of STANDARD means Slurm
-	// accounting is enabled.
+	// The default value for mode is NONE . A value of STANDARD means Slurm accounting
+	// is enabled.
 	//
 	// This member is required.
 	Mode AccountingMode
@@ -508,16 +508,18 @@ type JwtAuth struct {
 	noSmithyDocumentSerde
 }
 
-// The JWT key stored in AWS Secrets Manager for Slurm REST API authentication.
+// The JWT key stored in Amazon Web Services Secrets Manager for Slurm REST API
+// authentication.
 type JwtKey struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the
-	// JWT key.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret containing the JWT key.
 	//
 	// This member is required.
 	SecretArn *string
 
-	// The version of the AWS Secrets Manager secret containing the JWT key.
+	// The version of the Amazon Web Services Secrets Manager secret containing the
+	// JWT key.
 	//
 	// This member is required.
 	SecretVersion *string
@@ -848,8 +850,8 @@ type SlurmCustomSetting struct {
 // the Slurm REST API. It's a property of the ClusterSlurmConfiguration object.
 type SlurmRest struct {
 
-	// The default value for mode is STANDARD . A value of STANDARD means the Slurm
-	// REST API is enabled.
+	// The default value for mode is NONE . A value of STANDARD means the Slurm REST
+	// API is enabled.
 	//
 	// This member is required.
 	Mode SlurmRestMode
@@ -861,8 +863,8 @@ type SlurmRest struct {
 // the Slurm REST API. It's a property of the ClusterSlurmConfiguration object.
 type SlurmRestRequest struct {
 
-	// The default value for mode is STANDARD . A value of STANDARD means the Slurm
-	// REST API is enabled.
+	// The default value for mode is NONE . A value of STANDARD means the Slurm REST
+	// API is enabled.
 	//
 	// This member is required.
 	Mode SlurmRestMode
@@ -902,8 +904,8 @@ type UpdateAccountingRequest struct {
 	// [slurmdbd.conf documentation at SchedMD]: https://slurm.schedmd.com/slurmdbd.conf.html
 	DefaultPurgeTimeInDays *int32
 
-	// The default value for mode is STANDARD . A value of STANDARD means Slurm
-	// accounting is enabled.
+	// The default value for mode is NONE . A value of STANDARD means Slurm accounting
+	// is enabled.
 	Mode AccountingMode
 
 	noSmithyDocumentSerde
@@ -952,8 +954,8 @@ type UpdateQueueSlurmConfigurationRequest struct {
 // the Slurm REST API.
 type UpdateSlurmRestRequest struct {
 
-	// The default value for mode is STANDARD . A value of STANDARD means the Slurm
-	// REST API is enabled.
+	// The default value for mode is NONE . A value of STANDARD means the Slurm REST
+	// API is enabled.
 	Mode SlurmRestMode
 
 	noSmithyDocumentSerde

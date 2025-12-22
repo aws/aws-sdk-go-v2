@@ -1,0 +1,8 @@
+{
+    "id": "a3d3a07f-64c6-4b59-ac4d-c2b2768a6826",
+    "type": "feature",
+    "description": "Adds support for linkedGroupId on the CreatePlacementGroup and DescribePlacementGroups APIs. The linkedGroupId parameter is reserved for future use.",
+    "modules": [
+        "service/ec2"
+    ]
+}
