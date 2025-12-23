@@ -24,7 +24,7 @@
                 "Position": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 }
             },
@@ -212,7 +212,7 @@
                 "SecondaryAddressComponents": {
                     "target": "com.amazonaws.geoplaces#SecondaryAddressComponentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Components that correspond to secondary identifiers on an Address. Secondary address components include information such as Suite or Unit Number, Building, or Floor.</p>"
+                        "smithy.api#documentation": "<p>Components that correspond to secondary identifiers on an Address. Secondary address components include information such as Suite or Unit Number, Building, or Floor.</p> <note> <p>Coverage for <code>Address.SecondaryAddressComponents</code> is available in the following countries:</p> <p>AUS, CAN, NZL, USA, PRI</p> </note>"
                     }
                 }
             },
@@ -313,7 +313,7 @@
                 "SecondaryAddressComponents": {
                     "target": "com.amazonaws.geoplaces#SecondaryAddressComponentMatchScoreList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Match scores for the secondary address components in the result.</p>"
+                        "smithy.api#documentation": "<p>Match scores for the secondary address components in the result.</p> <note> <p>Coverage for this functionality is available in the following countries: AUS, AUT, BRA, CAN, ESP, FRA, GBR, IDN, IND, NZL, TUR, TWN, USA.</p> </note>"
                     }
                 }
             },
@@ -419,7 +419,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>Autocomplete</code> completes potential places and addresses as the user types, based on the partial input. The API enhances the efficiency and accuracy of address by completing query based on a few entered keystrokes. It helps you by completing partial queries with valid address completion. Also, the API supports the filtering of results based on geographic location, country, or specific place types, and can be tailored using optional parameters like language and political views.</p>",
+                "smithy.api#documentation": "<p> <code>Autocomplete</code> completes potential places and addresses as the user types, based on the partial input. The API enhances the efficiency and accuracy of address by completing query based on a few entered keystrokes. It helps you by completing partial queries with valid address completion. Also, the API supports the filtering of results based on geographic location, country, or specific place types, and can be tailored using optional parameters like language and political views.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html\">Autocomplete</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/autocomplete",
                     "method": "POST"
@@ -665,7 +665,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call. </p>",
+                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 5</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 20
@@ -675,7 +675,7 @@
                 "BiasPosition": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position in longitude and latitude that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>"
+                        "smithy.api#documentation": "<p>The position in longitude and latitude that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>"
                     }
                 },
                 "Filter": {
@@ -1201,7 +1201,7 @@
                 "Center": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The center position, in longitude and latitude, of the <code>FilterCircle</code>.</p>",
+                        "smithy.api#documentation": "<p>The center position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1312,7 +1312,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>Geocode</code> converts a textual address or place into geographic coordinates. You can obtain geographic coordinates, address component, and other related information. It supports flexible queries, including free-form text or structured queries with components like street names, postal codes, and regions. The Geocode API can also provide additional features such as time zone information and the inclusion of political views.</p>",
+                "smithy.api#documentation": "<p> <code>Geocode</code> converts a textual address or place into geographic coordinates. You can obtain geographic coordinates, address component, and other related information. It supports flexible queries, including free-form text or structured queries with components like street names, postal codes, and regions. The Geocode API can also provide additional features such as time zone information and the inclusion of political views.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/geocode.html\">Geocode</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/geocode",
                     "method": "POST"
@@ -1366,7 +1366,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2
+                    "max": 4
                 },
                 "smithy.api#uniqueItems": {}
             }
@@ -1551,7 +1551,7 @@
                 "SecondaryAddressComponents": {
                     "target": "com.amazonaws.geoplaces#ParsedQuerySecondaryAddressComponentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parsed secondary address components from the provided query text.</p>"
+                        "smithy.api#documentation": "<p>Parsed secondary address components from the provided query text.</p> <note> <p>Coverage for <code>ParsedQuery.Address.SecondaryAddressComponents</code> is available in the following countries:</p> <p>AUS, AUT, BRA, CAN, ESP, FRA, GBR, HKG, IDN, IND, NZL, TUR, TWN, USA</p> </note>"
                     }
                 }
             },
@@ -1661,7 +1661,7 @@
                 "QueryText": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>",
+                        "smithy.api#documentation": "<p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 200
@@ -1675,7 +1675,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p>",
+                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -1685,7 +1685,7 @@
                 "BiasPosition": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>"
+                        "smithy.api#documentation": "<p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p>"
                     }
                 },
                 "Filter": {
@@ -1736,7 +1736,7 @@
                 "PricingBucket": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing bucket for which the query is charged at.</p> <p>For more information on pricing, please visit <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service Pricing</a>.</p>",
+                        "smithy.api#documentation": "<p>The pricing bucket for which the query is charged at, or the maximum pricing bucket when the query is charged per item within the query.</p> <p>For more information on pricing, please visit <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service Pricing</a>.</p>",
                         "smithy.api#httpHeader": "x-amz-geo-pricing-bucket",
                         "smithy.api#required": {}
                     }
@@ -1805,7 +1805,7 @@
                 "Position": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position in longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "Distance": {
@@ -1836,7 +1836,7 @@
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point represented by longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "TimeZone": {
@@ -1878,7 +1878,7 @@
                 "SecondaryAddresses": {
                     "target": "com.amazonaws.geoplaces#RelatedPlaceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p>"
+                        "smithy.api#documentation": "<p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p> <note> <p>Coverage for this functionality is available in the following countries: AUS, CAN, NZL, USA, PRI.</p> </note>"
                     }
                 }
             },
@@ -1922,7 +1922,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>GetPlace</code> finds a place by its unique ID. A <code>PlaceId</code> is returned by other place operations.</p>",
+                "smithy.api#documentation": "<p> <code>GetPlace</code> finds a place by its unique ID. A <code>PlaceId</code> is returned by other place operations.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/get-place.html\">GetPlace</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/place/{PlaceId}",
                     "method": "GET"
@@ -1965,7 +1965,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 4
+                    "max": 5
                 },
                 "smithy.api#uniqueItems": {}
             }
@@ -2102,7 +2102,7 @@
                 "Position": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "MapView": {
@@ -2144,7 +2144,7 @@
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point in <code>(lng,lat)</code>.</p>"
+                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "AccessRestrictions": {
@@ -2180,12 +2180,23 @@
                 "SecondaryAddresses": {
                     "target": "com.amazonaws.geoplaces#RelatedPlaceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p>"
+                        "smithy.api#documentation": "<p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p> <note> <p>Coverage for this functionality is available in the following countries: AUS, CAN, NZL, USA, PRI.</p> </note>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.geoplaces#Heading": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 360.0
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.geoplaces#Highlight": {
@@ -2285,7 +2296,7 @@
                 "Position": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "Distance": {
@@ -2311,7 +2322,7 @@
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point represented by longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 }
             },
@@ -2781,6 +2792,10 @@
                     {
                         "name": "SECONDARY_ADDRESS",
                         "value": "SecondaryAddress"
+                    },
+                    {
+                        "name": "INFERRED_SECONDARY_ADDRESS",
+                        "value": "InferredSecondaryAddress"
                     }
                 ],
                 "smithy.api#sensitive": {}
@@ -3685,53 +3700,27 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://places.geo-fips.us-gov-west-1.api.aws/v2"
+                                    "url": "https://geo-places-fips.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://places.geo-fips.us-gov-west-1.amazonaws.com/v2"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://places.geo.us-gov-west-1.api.aws/v2"
+                                    "url": "https://geo-places.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://places.geo.us-gov-west-1.amazonaws.com/v2"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -3841,27 +3830,53 @@
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://geo-places-fips.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://places.geo-fips.us-gov-west-1.api.aws/v2"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://places.geo-fips.us-gov-west-1.amazonaws.com/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://geo-places.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://places.geo.us-gov-west-1.api.aws/v2"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://places.geo.us-gov-west-1.amazonaws.com/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -4211,13 +4226,13 @@
                 "Position": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point represented by longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 }
             },
@@ -4260,7 +4275,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>ReverseGeocode</code> converts geographic coordinates into a human-readable address or place. You can obtain address component, and other related information such as place type, category, street information. The Reverse Geocode API supports filtering to on place type so that you can refine result based on your need. Also, The Reverse Geocode API can also provide additional features such as time zone information and the inclusion of political views.</p>",
+                "smithy.api#documentation": "<p> <code>ReverseGeocode</code> converts geographic coordinates into a human-readable address or place. You can obtain address component, and other related information such as place type, category, street information. The Reverse Geocode API supports filtering to on place type so that you can refine result based on your need. Also, The Reverse Geocode API can also provide additional features such as time zone information and the inclusion of political views.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/reverse-geocode.html\">Reverse Geocode</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/reverse-geocode",
                     "method": "POST"
@@ -4313,7 +4328,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2
+                    "max": 3
                 },
                 "smithy.api#uniqueItems": {}
             }
@@ -4395,7 +4410,7 @@
                 "QueryPosition": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in <code>[lng, lat]</code> for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>",
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude] for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4414,7 +4429,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p>",
+                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 1</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -4456,6 +4471,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>",
                         "smithy.api#httpQuery": "key"
+                    }
+                },
+                "Heading": {
+                    "target": "com.amazonaws.geoplaces#Heading",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The heading in degrees from true north in a navigation context. The heading is measured as the angle clockwise from the North direction.</p> <p>Example: North is <code>0</code> degrees, East is <code>90</code> degrees, South is <code>180</code> degrees, and West is <code>270</code> degrees.</p>"
                     }
                 }
             },
@@ -4538,7 +4560,7 @@
                 "Position": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position in longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "Distance": {
@@ -4569,7 +4591,7 @@
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point represented by longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "TimeZone": {
@@ -4631,7 +4653,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>SearchNearby</code> queries for points of interest within a radius from a central coordinates, returning place results with optional filters such as categories, business chains, food types and more. The API returns details such as a place name, address, phone, category, food type, contact, opening hours. Also, the API can return phonemes, time zones and more based on requested parameters.</p>",
+                "smithy.api#documentation": "<p> <code>SearchNearby</code> queries for points of interest within a radius from a central coordinates, returning place results with optional filters such as categories, business chains, food types and more. The API returns details such as a place name, address, phone, category, food type, contact, opening hours. Also, the API can return phonemes, time zones and more based on requested parameters.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html\">Search Nearby</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/search-nearby",
                     "method": "POST"
@@ -4772,7 +4794,7 @@
                 "QueryPosition": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in <code>[lng, lat]</code> for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>",
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude] for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4791,7 +4813,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p>",
+                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -4921,7 +4943,7 @@
                 "Position": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position in longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "Distance": {
@@ -4970,7 +4992,7 @@
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point represent by longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "AccessRestrictions": {
@@ -5038,7 +5060,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>SearchText</code> searches for geocode and place information. You can then complete a follow-up query suggested from the <code>Suggest</code> API via a query id.</p>",
+                "smithy.api#documentation": "<p> <code>SearchText</code> searches for geocode and place information. You can then complete a follow-up query suggested from the <code>Suggest</code> API via a query id.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/search-text.html\">Search Text</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/search-text",
                     "method": "POST"
@@ -5147,7 +5169,7 @@
                 "QueryText": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>",
+                        "smithy.api#documentation": "<p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>Exactly one of the following fields must be set: <code>QueryText</code> or <code>QueryId</code>.</p> </note>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 200
@@ -5157,7 +5179,7 @@
                 "QueryId": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query Id returned by the suggest API. If passed in the request, the SearchText API will preform a SearchText query with the improved query terms for the original query made to the suggest API.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>",
+                        "smithy.api#documentation": "<p>The query Id returned by the suggest API. If passed in the request, the SearchText API will preform a SearchText query with the improved query terms for the original query made to the suggest API.</p> <note> <p>Exactly one of the following fields must be set: <code>QueryText</code> or <code>QueryId</code>.</p> </note>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 500
@@ -5168,7 +5190,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p>",
+                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -5178,7 +5200,7 @@
                 "BiasPosition": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>"
+                        "smithy.api#documentation": "<p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p> <note> <p>Exactly one of the following fields must be set: <code>BiasPosition</code>, <code>Filter.BoundingBox</code>, or <code>Filter.Circle</code>.</p> </note>"
                     }
                 },
                 "Filter": {
@@ -5304,7 +5326,7 @@
                 "Position": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "Distance": {
@@ -5353,7 +5375,7 @@
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point represent by longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "AccessRestrictions": {
@@ -5410,6 +5432,16 @@
                         },
                         "smithy.api#required": {}
                     }
+                },
+                "Designator": {
+                    "target": "com.amazonaws.geoplaces#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The designator of the secondary address component.</p> <p>Example: <code>Apt</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 20
+                        }
+                    }
                 }
             },
             "traits": {
@@ -5424,7 +5456,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1
+                    "max": 3
                 }
             }
         },
@@ -5621,7 +5653,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>Suggest</code> provides intelligent predictions or recommendations based on the user's input or context, such as relevant places, points of interest, query terms or search category. It is designed to help users find places or point of interests candidates or identify a follow on query based on incomplete or misspelled queries. It returns a list of possible matches or refinements that can be used to formulate a more accurate query. Users can select the most appropriate suggestion and use it for further searching. The API provides options for filtering results by location and other attributes, and allows for additional features like phonemes and timezones. The response includes refined query terms and detailed place information.</p>",
+                "smithy.api#documentation": "<p> <code>Suggest</code> provides intelligent predictions or recommendations based on the user's input or context, such as relevant places, points of interest, query terms or search category. It is designed to help users find places or point of interests candidates or identify a follow on query based on incomplete or misspelled queries. It returns a list of possible matches or refinements that can be used to formulate a more accurate query. Users can select the most appropriate suggestion and use it for further searching. The API provides options for filtering results by location and other attributes, and allows for additional features like phonemes and timezones. The response includes refined query terms and detailed place information.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/suggest.html\">Suggest</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/suggest",
                     "method": "POST"
@@ -5781,7 +5813,7 @@
                 "Position": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "Distance": {
@@ -5818,7 +5850,7 @@
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point represent by longitude and latitude.</p>"
+                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
                 },
                 "AccessRestrictions": {
@@ -5856,7 +5888,7 @@
                 "QueryId": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>QueryId can be used to complete a follow up query through the SearchText API. The QueryId retains context from the original Suggest request such as filters, political view and language. See the SearchText API documentation for more details <a href=\"https://docs.aws.amazon.com/latest/APIReference/API_geoplaces_SearchText.html\">SearchText API docs</a>.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>",
+                        "smithy.api#documentation": "<p>QueryId can be used to complete a follow up query through the SearchText API. The QueryId retains context from the original Suggest request such as filters, political view and language. See the SearchText API documentation for more details <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html\">SearchText API docs</a>.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 500
@@ -5880,7 +5912,7 @@
                 "QueryText": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>",
+                        "smithy.api#documentation": "<p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code> and <code>QueryID</code> are mutually exclusive.</p> </note>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 200
@@ -5892,7 +5924,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p>",
+                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -5913,7 +5945,7 @@
                 "BiasPosition": {
                     "target": "com.amazonaws.geoplaces#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>"
+                        "smithy.api#documentation": "<p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>"
                     }
                 },
                 "Filter": {
