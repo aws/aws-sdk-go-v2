@@ -1,3 +1,7 @@
+# v1.8.0 (2025-12-23)
+
+* **Feature**: Adds support for InferredSecondaryAddress place type, Designator in SecondaryAddressComponent and Heading in ReverseGeocode.
+
 # v1.7.7 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

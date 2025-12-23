@@ -1,3 +1,7 @@
+# v1.27.0 (2025-12-23)
+
+* **Feature**: This release adds support for the Registration Reviewer feature, which provides generative AI feedback on a phone number or sender ID registration to ensure completeness before sending to downstream (carrier) review.
+
 # v1.26.7 (2025-12-09)
 
 * No change notes available for this release.

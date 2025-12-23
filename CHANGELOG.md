@@ -1,3 +1,16 @@
+# Release (2025-12-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.8.0](service/geoplaces/CHANGELOG.md#v180-2025-12-23)
+  * **Feature**: Adds support for InferredSecondaryAddress place type, Designator in SecondaryAddressComponent and Heading in ReverseGeocode.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.27.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1270-2025-12-23)
+  * **Feature**: This release adds support for the Registration Reviewer feature, which provides generative AI feedback on a phone number or sender ID registration to ensure completeness before sending to downstream (carrier) review.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.95.0](service/s3/CHANGELOG.md#v1950-2025-12-23)
+  * **Feature**: Add additional validation to Outpost bucket names.
+
 # Release (2025-12-22)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "c218c128-b55c-4552-9713-c73a63e5cf23",
-    "type": "feature",
-    "description": "Add additional validation to Outpost bucket names.",
-    "modules": [
-        "service/s3"
-    ]
-}
