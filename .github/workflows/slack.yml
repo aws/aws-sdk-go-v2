@@ -19,7 +19,7 @@ jobs:
           curl \
             -X POST \
             -H 'Content-Type: application/json' \
-            -d '{"type": "issues_opened", "id": "${{ github.event.issue.id }}", "title": "${{ github.event.issue.title }}"}' \
+            -d '{"type": "issues_opened", "id": "${{ github.event.issue.number }}", "title": "${{ github.event.issue.title }}"}' \
             ${{ secrets.CI_SLACK_WEBHOOK_URL }}
 
   on-issue-closed:
@@ -31,5 +31,5 @@ jobs:
           curl \
             -X POST \
             -H 'Content-Type: application/json' \
-            -d '{"type": "issues_closed", "id": "${{ github.event.issue.id }}", "title": "${{ github.event.issue.title }}"}' \
+            -d '{"type": "issues_closed", "id": "${{ github.event.issue.number }}", "title": "${{ github.event.issue.title }}"}' \
             ${{ secrets.CI_SLACK_WEBHOOK_URL }}
