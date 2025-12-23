@@ -1,0 +1,35 @@
+name: Slack Notifier
+
+on:
+  issues:
+    types:
+      - opened
+      - closed
+
+permissions:
+  contents: read
+
+jobs:
+  on-issue-opened:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issues' && github.event.action == 'opened'
+    steps:
+      - name: notify
+        run: |
+          curl \
+            -X POST \
+            -H 'Content-Type: application/json' \
+            -d '{"type": "issues_opened", "id": "${{ github.event.issue.id }}", "title": "${{ github.event.issue.title }}"}' \
+            ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+
+  on-issue-closed:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issues' && github.event.action == 'closed'
+    steps:
+      - name: notify
+        run: |
+          curl \
+            -X POST \
+            -H 'Content-Type: application/json' \
+            -d '{"type": "issues_closed", "id": "${{ github.event.issue.id }}", "title": "${{ github.event.issue.title }}"}' \
+            ${{ secrets.CI_SLACK_WEBHOOK_URL }}
