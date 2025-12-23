@@ -10,7 +10,7 @@ import (
 // vehicle.
 type AccessPoint struct {
 
-	// The position, in longitude and latitude.
+	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
 
 	noSmithyDocumentSerde
@@ -76,6 +76,11 @@ type Address struct {
 	// Components that correspond to secondary identifiers on an Address. Secondary
 	// address components include information such as Suite or Unit Number, Building,
 	// or Floor.
+	//
+	// Coverage for Address.SecondaryAddressComponents is available in the following
+	// countries:
+	//
+	// AUS, CAN, NZL, USA, PRI
 	SecondaryAddressComponents []SecondaryAddressComponent
 
 	// The name of the street results should be present in.
@@ -144,6 +149,9 @@ type AddressComponentMatchScores struct {
 	Region float64
 
 	// Match scores for the secondary address components in the result.
+	//
+	// Coverage for this functionality is available in the following countries: AUS,
+	// AUT, BRA, CAN, ESP, FRA, GBR, IDN, IND, NZL, TUR, TWN, USA.
 	SecondaryAddressComponents []SecondaryAddressComponentMatchScore
 
 	// Name of sub-block.
@@ -464,7 +472,8 @@ type CountryHighlights struct {
 // The Circle that all results must be in.
 type FilterCircle struct {
 
-	// The center position, in longitude and latitude, of the FilterCircle .
+	// The center position in World Geodetic System (WGS 84) format: [longitude,
+	// latitude].
 	//
 	// This member is required.
 	Center []float64
@@ -559,6 +568,11 @@ type GeocodeParsedQueryAddressComponents struct {
 	Region []ParsedQueryComponent
 
 	// Parsed secondary address components from the provided query text.
+	//
+	// Coverage for ParsedQuery.Address.SecondaryAddressComponents is available in the
+	// following countries:
+	//
+	// AUS, AUT, BRA, CAN, ESP, FRA, GBR, HKG, IDN, IND, NZL, TUR, TWN, USA
 	SecondaryAddressComponents []ParsedQuerySecondaryAddressComponent
 
 	// The name of the street results should be present in.
@@ -636,7 +650,8 @@ type GeocodeResultItem struct {
 	// This member is required.
 	Title *string
 
-	// Position of the access point represented by longitude and latitude.
+	// Position of the access point in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	AccessPoints []AccessPoint
 
 	// The place's address.
@@ -679,7 +694,7 @@ type GeocodeResultItem struct {
 	// territorial claims through the point of view of the specified country.
 	PoliticalView *string
 
-	// The position in longitude and latitude.
+	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
 
 	// Contains details about the postal code of the place/result.
@@ -688,6 +703,9 @@ type GeocodeResultItem struct {
 	// All secondary addresses that are associated with a main address. A secondary
 	// address is one that includes secondary designators, such as a Suite or Unit
 	// Number, Building, or Floor information.
+	//
+	// Coverage for this functionality is available in the following countries: AUS,
+	// CAN, NZL, USA, PRI.
 	SecondaryAddresses []RelatedPlace
 
 	// The time zone in which the place is located.
@@ -726,7 +744,8 @@ type Intersection struct {
 	// This member is required.
 	Title *string
 
-	// Position of the access point represented by longitude and latitude.
+	// Position of the access point in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	AccessPoints []AccessPoint
 
 	// The place address.
@@ -742,7 +761,7 @@ type Intersection struct {
 	// lng}, {southern lat}, {eastward lng}, {northern lat}]
 	MapView []float64
 
-	// The position, in longitude and latitude.
+	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
 
 	// The distance from the routing position of the nearby address to the street
@@ -985,13 +1004,14 @@ type RelatedPlace struct {
 	// This member is required.
 	Title *string
 
-	// Position of the access point represented by longitude and latitude.
+	// Position of the access point in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	AccessPoints []AccessPoint
 
 	// The place address.
 	Address *Address
 
-	// The position, in longitude and latitude.
+	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
 
 	noSmithyDocumentSerde
@@ -1025,7 +1045,8 @@ type ReverseGeocodeResultItem struct {
 	// This member is required.
 	Title *string
 
-	// Position of the access point represented by longitude and latitude.
+	// Position of the access point in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	AccessPoints []AccessPoint
 
 	// The place's address.
@@ -1058,7 +1079,7 @@ type ReverseGeocodeResultItem struct {
 	// territorial claims through the point of view of the specified country.
 	PoliticalView *string
 
-	// The position in longitude and latitude.
+	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
 
 	// Contains details about the postal code of the place/result.
@@ -1124,7 +1145,8 @@ type SearchNearbyResultItem struct {
 	// This member is required.
 	Title *string
 
-	// Position of the access point represent by longitude and latitude.
+	// Position of the access point in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	AccessPoints []AccessPoint
 
 	// Indicates known access restrictions on a vehicle access point. The index
@@ -1172,7 +1194,7 @@ type SearchNearbyResultItem struct {
 	// territorial claims through the point of view of the specified country.
 	PoliticalView *string
 
-	// The position in longitude and latitude.
+	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
 
 	// The time zone in which the place is located.
@@ -1220,7 +1242,8 @@ type SearchTextResultItem struct {
 	// This member is required.
 	Title *string
 
-	// Position of the access point represent by longitude and latitude.
+	// Position of the access point in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	AccessPoints []AccessPoint
 
 	// Indicates known access restrictions on a vehicle access point. The index
@@ -1268,7 +1291,7 @@ type SearchTextResultItem struct {
 	// territorial claims through the point of view of the specified country.
 	PoliticalView *string
 
-	// The position, in longitude and latitude.
+	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
 
 	// The time zone in which the place is located.
@@ -1285,6 +1308,11 @@ type SecondaryAddressComponent struct {
 	//
 	// This member is required.
 	Number *string
+
+	// The designator of the secondary address component.
+	//
+	// Example: Apt .
+	Designator *string
 
 	noSmithyDocumentSerde
 }
@@ -1420,7 +1448,8 @@ type SuggestHighlights struct {
 // The suggested place results.
 type SuggestPlaceResult struct {
 
-	// Position of the access point represent by longitude and latitude.
+	// Position of the access point in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	AccessPoints []AccessPoint
 
 	// Indicates known access restrictions on a vehicle access point. The index
@@ -1465,7 +1494,7 @@ type SuggestPlaceResult struct {
 	// territorial claims through the point of view of the specified country.
 	PoliticalView *string
 
-	// The position, in longitude and latitude.
+	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
 
 	// The time zone in which the place is located.
@@ -1484,7 +1513,7 @@ type SuggestQueryResult struct {
 	//
 	// The fields QueryText , and QueryID are mutually exclusive.
 	//
-	// [SearchText API docs]: https://docs.aws.amazon.com/latest/APIReference/API_geoplaces_SearchText.html
+	// [SearchText API docs]: https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html
 	QueryId *string
 
 	// The query type. Category queries will search for places which have an entry

@@ -17,6 +17,10 @@ import (
 // structured queries with components like street names, postal codes, and regions.
 // The Geocode API can also provide additional features such as time zone
 // information and the inclusion of political views.
+//
+// For more information, see [Geocode] in the Amazon Location Service Developer Guide.
+//
+// [Geocode]: https://docs.aws.amazon.com/location/latest/developerguide/geocode.html
 func (c *Client) Geocode(ctx context.Context, params *GeocodeInput, optFns ...func(*Options)) (*GeocodeOutput, error) {
 	if params == nil {
 		params = &GeocodeInput{}
@@ -40,10 +44,7 @@ type GeocodeInput struct {
 
 	// The position, in longitude and latitude, that the results should be close to.
 	// Typically, place results returned are ranked higher the closer they are to this
-	// position. Stored in [lng, lat] and in the WSG84 format.
-	//
-	// The fields BiasPosition , FilterBoundingBox , and FilterCircle are mutually
-	// exclusive.
+	// position. Stored in [lng, lat] and in the WGS 84 format.
 	BiasPosition []float64
 
 	// A structure which contains a set of inclusion/exclusion properties that results
@@ -72,6 +73,8 @@ type GeocodeInput struct {
 	Language *string
 
 	// An optional limit for the number of results returned in a single call.
+	//
+	// Default value: 20
 	MaxResults *int32
 
 	// The alpha-2 or alpha-3 character code for the political view of a country. The
@@ -85,8 +88,6 @@ type GeocodeInput struct {
 
 	// The free-form text query to match addresses against. This is usually a
 	// partially typed address from an end user in an address box or form.
-	//
-	// The fields QueryText , and QueryID are mutually exclusive.
 	QueryText *string
 
 	noSmithyDocumentSerde
@@ -94,7 +95,8 @@ type GeocodeInput struct {
 
 type GeocodeOutput struct {
 
-	// The pricing bucket for which the query is charged at.
+	// The pricing bucket for which the query is charged at, or the maximum pricing
+	// bucket when the query is charged per item within the query.
 	//
 	// For more information on pricing, please visit [Amazon Location Service Pricing].
 	//

@@ -21,6 +21,10 @@ import (
 // filtering results by location and other attributes, and allows for additional
 // features like phonemes and timezones. The response includes refined query terms
 // and detailed place information.
+//
+// For more information, see [Suggest] in the Amazon Location Service Developer Guide.
+//
+// [Suggest]: https://docs.aws.amazon.com/location/latest/developerguide/suggest.html
 func (c *Client) Suggest(ctx context.Context, params *SuggestInput, optFns ...func(*Options)) (*SuggestOutput, error) {
 	if params == nil {
 		params = &SuggestInput{}
@@ -41,7 +45,7 @@ type SuggestInput struct {
 	// The free-form text query to match addresses against. This is usually a
 	// partially typed address from an end user in an address box or form.
 	//
-	// The fields QueryText , and QueryID are mutually exclusive.
+	// The fields QueryText and QueryID are mutually exclusive.
 	//
 	// This member is required.
 	QueryText *string
@@ -52,7 +56,7 @@ type SuggestInput struct {
 
 	// The position, in longitude and latitude, that the results should be close to.
 	// Typically, place results returned are ranked higher the closer they are to this
-	// position. Stored in [lng, lat] and in the WSG84 format.
+	// position. Stored in [lng, lat] and in the WGS 84 format.
 	//
 	// The fields BiasPosition , FilterBoundingBox , and FilterCircle are mutually
 	// exclusive.
@@ -80,6 +84,8 @@ type SuggestInput struct {
 	MaxQueryRefinements *int32
 
 	// An optional limit for the number of results returned in a single call.
+	//
+	// Default value: 20
 	MaxResults *int32
 
 	// The alpha-2 or alpha-3 character code for the political view of a country. The

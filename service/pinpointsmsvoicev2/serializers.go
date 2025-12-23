@@ -8427,6 +8427,11 @@ func awsAwsjson10_serializeOpDocumentSubmitRegistrationVersionInput(v *SubmitReg
 	object := value.Object()
 	defer object.Close()
 
+	if v.AwsReview {
+		ok := object.Key("AwsReview")
+		ok.Boolean(v.AwsReview)
+	}
+
 	if v.RegistrationId != nil {
 		ok := object.Key("RegistrationId")
 		ok.String(*v.RegistrationId)

@@ -14089,6 +14089,15 @@ func awsAwsjson10_deserializeDocumentRegistrationFieldValueInformation(v **types
 				sv.DeniedReason = ptr.String(jtv)
 			}
 
+		case "Feedback":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Feedback = ptr.String(jtv)
+			}
+
 		case "FieldPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14667,6 +14676,15 @@ func awsAwsjson10_deserializeDocumentRegistrationVersionInformation(v **types.Re
 				return err
 			}
 
+		case "Feedback":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Feedback = ptr.String(jtv)
+			}
+
 		case "RegistrationVersionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14784,6 +14802,22 @@ func awsAwsjson10_deserializeDocumentRegistrationVersionStatusHistory(v **types.
 						return err
 					}
 					sv.ArchivedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "AwsReviewingTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AwsReviewingTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 
 				default:
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
@@ -21814,6 +21848,15 @@ func awsAwsjson10_deserializeOpDocumentSubmitRegistrationVersionOutput(v **Submi
 
 	for key, value := range shape {
 		switch key {
+		case "AwsReview":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.AwsReview = jtv
+			}
+
 		case "RegistrationArn":
 			if value != nil {
 				jtv, ok := value.(string)

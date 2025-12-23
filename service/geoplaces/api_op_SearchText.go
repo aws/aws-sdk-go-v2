@@ -13,6 +13,10 @@ import (
 
 // SearchText searches for geocode and place information. You can then complete a
 // follow-up query suggested from the Suggest API via a query id.
+//
+// For more information, see [Search Text] in the Amazon Location Service Developer Guide.
+//
+// [Search Text]: https://docs.aws.amazon.com/location/latest/developerguide/search-text.html
 func (c *Client) SearchText(ctx context.Context, params *SearchTextInput, optFns ...func(*Options)) (*SearchTextOutput, error) {
 	if params == nil {
 		params = &SearchTextInput{}
@@ -36,10 +40,10 @@ type SearchTextInput struct {
 
 	// The position, in longitude and latitude, that the results should be close to.
 	// Typically, place results returned are ranked higher the closer they are to this
-	// position. Stored in [lng, lat] and in the WSG84 format.
+	// position. Stored in [lng, lat] and in the WGS 84 format.
 	//
-	// The fields BiasPosition , FilterBoundingBox , and FilterCircle are mutually
-	// exclusive.
+	// Exactly one of the following fields must be set: BiasPosition ,
+	// Filter.BoundingBox , or Filter.Circle .
 	BiasPosition []float64
 
 	// A structure which contains a set of inclusion/exclusion properties that results
@@ -68,6 +72,8 @@ type SearchTextInput struct {
 	Language *string
 
 	// An optional limit for the number of results returned in a single call.
+	//
+	// Default value: 20
 	MaxResults *int32
 
 	// If nextToken is returned, there are more results available. The value of
@@ -83,13 +89,13 @@ type SearchTextInput struct {
 	// SearchText API will preform a SearchText query with the improved query terms for
 	// the original query made to the suggest API.
 	//
-	// The fields QueryText , and QueryID are mutually exclusive.
+	// Exactly one of the following fields must be set: QueryText or QueryId .
 	QueryId *string
 
 	// The free-form text query to match addresses against. This is usually a
 	// partially typed address from an end user in an address box or form.
 	//
-	// The fields QueryText , and QueryID are mutually exclusive.
+	// Exactly one of the following fields must be set: QueryText or QueryId .
 	QueryText *string
 
 	noSmithyDocumentSerde

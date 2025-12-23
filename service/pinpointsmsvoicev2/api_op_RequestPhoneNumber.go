@@ -13,7 +13,8 @@ import (
 )
 
 // Request an origination phone number for use in your account. For more
-// information on phone number request see [Request a phone number]in the End User MessagingSMS User Guide.
+// information on phone number request see [Request a phone number]in the End User Messaging SMS User
+// Guide.
 //
 // [Request a phone number]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-request.html
 func (c *Client) RequestPhoneNumber(ctx context.Context, params *RequestPhoneNumberInput, optFns ...func(*Options)) (*RequestPhoneNumberOutput, error) {
@@ -76,14 +77,14 @@ type RequestPhoneNumberInput struct {
 	// The name of the OptOutList to associate with the phone number. You can use the
 	// OptOutListName or OptOutListArn.
 	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
+	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
 	OptOutListName *string
 
 	// The pool to associated with the phone number. You can use the PoolId or
 	// PoolArn.
 	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
+	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
 	PoolId *string
 
@@ -151,7 +152,7 @@ type RequestPhoneNumberOutput struct {
 
 	// By default this is set to false. When set to false and an end recipient sends a
 	// message that begins with HELP or STOP to one of your dedicated numbers, End User
-	// MessagingSMS automatically replies with a customizable message and adds the end
+	// Messaging SMS automatically replies with a customizable message and adds the end
 	// recipient to the OptOutList. When set to true you're responsible for responding
 	// to HELP and STOP requests. You're also responsible for tracking and honoring
 	// opt-out requests.

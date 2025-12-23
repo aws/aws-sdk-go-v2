@@ -1,0 +1,8 @@
+{
+    "id": "abec9e6a-7bc5-4a4a-a3f1-6b06607d9b9c",
+    "type": "feature",
+    "description": "Adds support for InferredSecondaryAddress place type, Designator in SecondaryAddressComponent and Heading in ReverseGeocode.",
+    "modules": [
+        "service/geoplaces"
+    ]
+}

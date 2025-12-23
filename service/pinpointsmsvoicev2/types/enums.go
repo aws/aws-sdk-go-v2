@@ -942,6 +942,7 @@ type RegistrationStatus string
 const (
 	RegistrationStatusCreated                RegistrationStatus = "CREATED"
 	RegistrationStatusSubmitted              RegistrationStatus = "SUBMITTED"
+	RegistrationStatusAwsReviewing           RegistrationStatus = "AWS_REVIEWING"
 	RegistrationStatusReviewing              RegistrationStatus = "REVIEWING"
 	RegistrationStatusRequiresAuthentication RegistrationStatus = "REQUIRES_AUTHENTICATION"
 	RegistrationStatusProvisioning           RegistrationStatus = "PROVISIONING"
@@ -959,6 +960,7 @@ func (RegistrationStatus) Values() []RegistrationStatus {
 	return []RegistrationStatus{
 		"CREATED",
 		"SUBMITTED",
+		"AWS_REVIEWING",
 		"REVIEWING",
 		"REQUIRES_AUTHENTICATION",
 		"PROVISIONING",
@@ -1012,6 +1014,7 @@ type RegistrationVersionStatus string
 const (
 	RegistrationVersionStatusDraft                  RegistrationVersionStatus = "DRAFT"
 	RegistrationVersionStatusSubmitted              RegistrationVersionStatus = "SUBMITTED"
+	RegistrationVersionStatusAwsReviewing           RegistrationVersionStatus = "AWS_REVIEWING"
 	RegistrationVersionStatusReviewing              RegistrationVersionStatus = "REVIEWING"
 	RegistrationVersionStatusRequiresAuthentication RegistrationVersionStatus = "REQUIRES_AUTHENTICATION"
 	RegistrationVersionStatusApproved               RegistrationVersionStatus = "APPROVED"
@@ -1029,6 +1032,7 @@ func (RegistrationVersionStatus) Values() []RegistrationVersionStatus {
 	return []RegistrationVersionStatus{
 		"DRAFT",
 		"SUBMITTED",
+		"AWS_REVIEWING",
 		"REVIEWING",
 		"REQUIRES_AUTHENTICATION",
 		"APPROVED",

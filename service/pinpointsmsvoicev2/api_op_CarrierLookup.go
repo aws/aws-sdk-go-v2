@@ -61,15 +61,14 @@ type CarrierLookupOutput struct {
 	// provider that the phone number was originally registered with.
 	Carrier *string
 
-	// The name of the country where the phone number was originally registered.
+	// The name of the country or region for the phone number.
 	Country *string
 
-	// The numeric dialing code for the country or region where the phone number was
-	// originally registered.
+	// The country or region numeric dialing code for the phone number.
 	DialingCountryCode *string
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region
-	// where the phone number was originally registered.
+	// The two-character country or region code, in ISO 3166-1 alpha-2 format, for the
+	// phone number.
 	IsoCountryCode *string
 
 	// The phone number's mobile country code, for mobile phone number types

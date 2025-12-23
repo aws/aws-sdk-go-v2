@@ -13,6 +13,10 @@ import (
 
 // GetPlace finds a place by its unique ID. A PlaceId is returned by other place
 // operations.
+//
+// For more information, see [GetPlace] in the Amazon Location Service Developer Guide.
+//
+// [GetPlace]: https://docs.aws.amazon.com/location/latest/developerguide/get-place.html
 func (c *Client) GetPlace(ctx context.Context, params *GetPlaceInput, optFns ...func(*Options)) (*GetPlaceOutput, error) {
 	if params == nil {
 		params = &GetPlaceInput{}
@@ -95,7 +99,8 @@ type GetPlaceOutput struct {
 	// This member is required.
 	Title *string
 
-	// Position of the access point in (lng,lat) .
+	// Position of the access point in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	AccessPoints []types.AccessPoint
 
 	// Indicates known access restrictions on a vehicle access point. The index
@@ -143,7 +148,7 @@ type GetPlaceOutput struct {
 	// territorial claims through the point of view of the specified country.
 	PoliticalView *string
 
-	// The position, in longitude and latitude.
+	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
 
 	// Contains details about the postal code of the place/result.
@@ -152,6 +157,9 @@ type GetPlaceOutput struct {
 	// All secondary addresses that are associated with a main address. A secondary
 	// address is one that includes secondary designators, such as a Suite or Unit
 	// Number, Building, or Floor information.
+	//
+	// Coverage for this functionality is available in the following countries: AUS,
+	// CAN, NZL, USA, PRI.
 	SecondaryAddresses []types.RelatedPlace
 
 	// The time zone in which the place is located.

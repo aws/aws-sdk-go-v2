@@ -64,7 +64,7 @@ type SendDestinationNumberVerificationCodeInput struct {
 	// The origination identity of the message. This can be either the PhoneNumber,
 	// PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.
 	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
+	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
 	OriginationIdentity *string
 

@@ -18,6 +18,10 @@ import (
 // filtering of results based on geographic location, country, or specific place
 // types, and can be tailored using optional parameters like language and political
 // views.
+//
+// For more information, see [Autocomplete] in the Amazon Location Service Developer Guide.
+//
+// [Autocomplete]: https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html
 func (c *Client) Autocomplete(ctx context.Context, params *AutocompleteInput, optFns ...func(*Options)) (*AutocompleteOutput, error) {
 	if params == nil {
 		params = &AutocompleteInput{}
@@ -48,7 +52,7 @@ type AutocompleteInput struct {
 
 	// The position in longitude and latitude that the results should be close to.
 	// Typically, place results returned are ranked higher the closer they are to this
-	// position. Stored in [lng, lat] and in the WSG84 format.
+	// position. Stored in [lng, lat] and in the WGS 84 format.
 	//
 	// The fields BiasPosition , FilterBoundingBox , and FilterCircle are mutually
 	// exclusive.
@@ -73,6 +77,8 @@ type AutocompleteInput struct {
 	Language *string
 
 	// An optional limit for the number of results returned in a single call.
+	//
+	// Default value: 5
 	MaxResults *int32
 
 	// The alpha-2 or alpha-3 character code for the political view of a country. The

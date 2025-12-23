@@ -5694,6 +5694,15 @@ func awsRestjson1_deserializeDocumentSecondaryAddressComponent(v **types.Seconda
 
 	for key, value := range shape {
 		switch key {
+		case "Designator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Designator = ptr.String(jtv)
+			}
+
 		case "Number":
 			if value != nil {
 				jtv, ok := value.(string)

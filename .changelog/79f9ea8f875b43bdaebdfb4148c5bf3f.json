@@ -1,0 +1,8 @@
+{
+    "id": "79f9ea8f-875b-43bd-aebd-fb4148c5bf3f",
+    "type": "feature",
+    "description": "This release adds support for the Registration Reviewer feature, which provides generative AI feedback on a phone number or sender ID registration to ensure completeness before sending to downstream (carrier) review.",
+    "modules": [
+        "service/pinpointsmsvoicev2"
+    ]
+}

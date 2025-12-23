@@ -35,7 +35,7 @@ type UpdateProtectConfigurationCountryRuleSetInput struct {
 	// A map of ProtectConfigurationCountryRuleSetInformation objects that contain the
 	// details for the requested NumberCapability. The Key is the two-letter ISO
 	// country code. For a list of supported ISO country codes, see [Supported countries and regions (SMS channel)]in the End User
-	// MessagingSMS User Guide.
+	// Messaging SMS User Guide.
 	//
 	// For example, to set the United States as allowed and Canada as blocked, the
 	// CountryRuleSetUpdates would be formatted as: "CountryRuleSetUpdates": { "US" :

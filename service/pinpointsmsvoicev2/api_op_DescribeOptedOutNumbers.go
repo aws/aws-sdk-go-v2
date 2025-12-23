@@ -41,7 +41,7 @@ type DescribeOptedOutNumbersInput struct {
 	// The OptOutListName or OptOutListArn of the OptOutList. You can use DescribeOptOutLists to find the
 	// values for OptOutListName and OptOutListArn.
 	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
+	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
 	//
 	// This member is required.

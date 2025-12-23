@@ -11,7 +11,7 @@ import (
 )
 
 // Removes the association of the specified tags from a resource. For more
-// information on tags see [Tags]in the End User MessagingSMS User Guide.
+// information on tags see [Tags]in the End User Messaging SMS User Guide.
 //
 // [Tags]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-tags.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {

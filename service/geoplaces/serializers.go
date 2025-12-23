@@ -476,6 +476,24 @@ func awsRestjson1_serializeOpDocumentReverseGeocodeInput(v *ReverseGeocodeInput,
 		}
 	}
 
+	if v.Heading != 0 {
+		ok := object.Key("Heading")
+		switch {
+		case math.IsNaN(v.Heading):
+			ok.String("NaN")
+
+		case math.IsInf(v.Heading, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Heading, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Heading)
+
+		}
+	}
+
 	if len(v.IntendedUse) > 0 {
 		ok := object.Key("IntendedUse")
 		ok.String(string(v.IntendedUse))

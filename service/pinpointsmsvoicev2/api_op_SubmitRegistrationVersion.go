@@ -34,10 +34,20 @@ type SubmitRegistrationVersionInput struct {
 	// This member is required.
 	RegistrationId *string
 
+	// Set to true to request AWS review of the registration. When enabled, AWS will
+	// perform additional validation and review of the registration submission before
+	// processing.
+	AwsReview bool
+
 	noSmithyDocumentSerde
 }
 
 type SubmitRegistrationVersionOutput struct {
+
+	// Indicates whether AWS review was requested for this registration submission.
+	//
+	// This member is required.
+	AwsReview bool
 
 	// The Amazon Resource Name (ARN) for the registration.
 	//

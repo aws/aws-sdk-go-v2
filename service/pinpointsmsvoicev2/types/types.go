@@ -389,7 +389,7 @@ type PhoneNumberInformation struct {
 	PhoneNumberArn *string
 
 	// When set to false and an end recipient sends a message that begins with HELP or
-	// STOP to one of your dedicated numbers, End User MessagingSMS automatically
+	// STOP to one of your dedicated numbers, End User Messaging SMS automatically
 	// replies with a customizable message and adds the end recipient to the
 	// OptOutList. When set to true you're responsible for responding to HELP and STOP
 	// requests. You're also responsible for tracking and honoring opt-out request. For
@@ -487,7 +487,7 @@ type PoolInformation struct {
 	PoolId *string
 
 	// When set to false, an end recipient sends a message that begins with HELP or
-	// STOP to one of your dedicated numbers, End User MessagingSMS automatically
+	// STOP to one of your dedicated numbers, End User Messaging SMS automatically
 	// replies with a customizable message and adds the end recipient to the
 	// OptOutList. When set to true you're responsible for responding to HELP and STOP
 	// requests. You're also responsible for tracking and honoring opt-out requests.
@@ -868,6 +868,11 @@ type RegistrationFieldValueInformation struct {
 	// A description of why the registration was denied.
 	DeniedReason *string
 
+	// Feedback provided for this specific field during the registration review
+	// process. This may include validation errors, suggestions for improvement, or
+	// additional requirements.
+	Feedback *string
+
 	// The unique identifier for the registration attachment.
 	RegistrationAttachmentId *string
 
@@ -1126,6 +1131,10 @@ type RegistrationVersionInformation struct {
 	// An array of RegistrationDeniedReasonInformation objects.
 	DeniedReasons []RegistrationDeniedReasonInformation
 
+	// Feedback information provided during the registration review process. This
+	// includes comments, suggestions, or additional requirements.
+	Feedback *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1149,6 +1158,11 @@ type RegistrationVersionStatusHistory struct {
 	//
 	// [UNIX epoch time]: https://www.epochconverter.com/
 	ArchivedTimestamp *time.Time
+
+	// The time when the registration was in the AWS reviewing state, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
+	AwsReviewingTimestamp *time.Time
 
 	// The time when the registration was in the denied state, in [UNIX epoch time] format.
 	//
@@ -1224,7 +1238,7 @@ type SelectValidation struct {
 
 //	The alphanumeric sender ID in a specific country that you want to describe.
 //
-// For more information on sender IDs see [Requesting sender IDs]in the End User MessagingSMS User Guide.
+// For more information on sender IDs see [Requesting sender IDs]in the End User Messaging SMS User Guide.
 //
 // [Requesting sender IDs]: https://docs.aws.amazon.com/sms-voice/latest/userguide/sender-id-request.html
 type SenderIdAndCountry struct {
@@ -1322,7 +1336,7 @@ type SnsDestination struct {
 
 // Describes the current monthly spend limits for sending voice and text messages.
 // For more information on increasing your monthly spend limit, see [Requesting a spending quota increase]in the End
-// User MessagingSMS User Guide.
+// User Messaging SMS User Guide.
 //
 // [Requesting a spending quota increase]: https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html
 type SpendLimit struct {

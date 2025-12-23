@@ -11,9 +11,9 @@ import (
 	"time"
 )
 
-// Deletes the resource-based policy document attached to the End User
-// MessagingSMS resource. A shared resource can be a Pool, Opt-out list, Sender Id,
-// or Phone number.
+// Deletes the resource-based policy document attached to the End User Messaging
+// SMS resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone
+// number.
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyInput{}
@@ -31,7 +31,7 @@ func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourc
 
 type DeleteResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the End User MessagingSMS resource you're
+	// The Amazon Resource Name (ARN) of the End User Messaging SMS resource you're
 	// deleting the resource-based policy from.
 	//
 	// This member is required.
@@ -50,7 +50,7 @@ type DeleteResourcePolicyOutput struct {
 	// The JSON formatted resource-based policy that was deleted.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the End User MessagingSMS resource that the
+	// The Amazon Resource Name (ARN) of the End User Messaging SMS resource that the
 	// resource-based policy was deleted from.
 	ResourceArn *string
 

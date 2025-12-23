@@ -3,27 +3,27 @@
 // Package pinpointsmsvoicev2 provides the API client, operations, and parameter
 // types for Amazon Pinpoint SMS Voice V2.
 //
-// Welcome to the End User MessagingSMS, version 2 API Reference. This guide
-// provides information about End User MessagingSMS, version 2 API resources,
+// Welcome to the End User Messaging SMS, version 2 API Reference. This guide
+// provides information about End User Messaging SMS, version 2 API resources,
 // including supported HTTP methods, parameters, and schemas.
 //
 // Amazon Pinpoint is an Amazon Web Services service that you can use to engage
-// with your recipients across multiple messaging channels. The End User
-// MessagingSMS, version 2 API provides programmatic access to options that are
-// unique to the SMS and voice channels. End User MessagingSMS, version 2 resources
-// such as phone numbers, sender IDs, and opt-out lists can be used by the Amazon
-// Pinpoint API.
+// with your recipients across multiple messaging channels. The End User Messaging
+// SMS, version 2 API provides programmatic access to options that are unique to
+// the SMS and voice channels. End User Messaging SMS, version 2 resources such as
+// phone numbers, sender IDs, and opt-out lists can be used by the Amazon Pinpoint
+// API.
 //
-// If you're new to End User MessagingSMS, it's also helpful to review the [End User MessagingSMS User Guide], where
-// you'll find tutorials, code samples, and procedures that demonstrate how to use
-// End User MessagingSMS features programmatically and how to integrate
+// If you're new to End User Messaging SMS, it's also helpful to review the [End User Messaging SMS User Guide],
+// where you'll find tutorials, code samples, and procedures that demonstrate how
+// to use End User Messaging SMS features programmatically and how to integrate
 // functionality into mobile apps and other types of applications. The guide also
-// provides key information, such as End User MessagingSMS integration with other
+// provides key information, such as End User Messaging SMS integration with other
 // Amazon Web Services services, and the quotas that apply to use of the service.
 //
 // # Regional availability
 //
-// The End User MessagingSMS version 2 API Reference is available in several
+// The End User Messaging SMS version 2 API Reference is available in several
 // Amazon Web Services Regions and it provides an endpoint for each of these
 // Regions. For a list of all the Regions and endpoints where the API is currently
 // available, see [Amazon Web Services Service Endpoints]and [Amazon Pinpoint endpoints and quotas] in the Amazon Web Services General Reference. To learn more
@@ -38,8 +38,8 @@
 // the number of Availability Zones that are available in each Region, see [Amazon Web Services Global Infrastructure.]
 //
 // [Managing Amazon Web Services Regions]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html
+// [End User Messaging SMS User Guide]: https://docs.aws.amazon.com/sms-voice/latest/userguide/what-is-service.html
 // [Amazon Web Services Global Infrastructure.]: http://aws.amazon.com/about-aws/global-infrastructure/
 // [Amazon Pinpoint endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/pinpoint.html
 // [Amazon Web Services Service Endpoints]: https://docs.aws.amazon.com/hgeneral/latest/gr/rande.html#pinpoint_region
-// [End User MessagingSMS User Guide]: https://docs.aws.amazon.com/sms-voice/latest/userguide/what-is-service.html
 package pinpointsmsvoicev2

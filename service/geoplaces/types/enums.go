@@ -181,21 +181,22 @@ type PlaceType string
 
 // Enum values for PlaceType
 const (
-	PlaceTypeCountry             PlaceType = "Country"
-	PlaceTypeRegion              PlaceType = "Region"
-	PlaceTypeSubRegion           PlaceType = "SubRegion"
-	PlaceTypeLocality            PlaceType = "Locality"
-	PlaceTypeDistrict            PlaceType = "District"
-	PlaceTypeSubDistrict         PlaceType = "SubDistrict"
-	PlaceTypePostalCode          PlaceType = "PostalCode"
-	PlaceTypeBlock               PlaceType = "Block"
-	PlaceTypeSubBlock            PlaceType = "SubBlock"
-	PlaceTypeIntersection        PlaceType = "Intersection"
-	PlaceTypeStreet              PlaceType = "Street"
-	PlaceTypePointOfInterest     PlaceType = "PointOfInterest"
-	PlaceTypePointAddress        PlaceType = "PointAddress"
-	PlaceTypeInterpolatedAddress PlaceType = "InterpolatedAddress"
-	PlaceTypeSecondaryAddress    PlaceType = "SecondaryAddress"
+	PlaceTypeCountry                  PlaceType = "Country"
+	PlaceTypeRegion                   PlaceType = "Region"
+	PlaceTypeSubRegion                PlaceType = "SubRegion"
+	PlaceTypeLocality                 PlaceType = "Locality"
+	PlaceTypeDistrict                 PlaceType = "District"
+	PlaceTypeSubDistrict              PlaceType = "SubDistrict"
+	PlaceTypePostalCode               PlaceType = "PostalCode"
+	PlaceTypeBlock                    PlaceType = "Block"
+	PlaceTypeSubBlock                 PlaceType = "SubBlock"
+	PlaceTypeIntersection             PlaceType = "Intersection"
+	PlaceTypeStreet                   PlaceType = "Street"
+	PlaceTypePointOfInterest          PlaceType = "PointOfInterest"
+	PlaceTypePointAddress             PlaceType = "PointAddress"
+	PlaceTypeInterpolatedAddress      PlaceType = "InterpolatedAddress"
+	PlaceTypeSecondaryAddress         PlaceType = "SecondaryAddress"
+	PlaceTypeInferredSecondaryAddress PlaceType = "InferredSecondaryAddress"
 )
 
 // Values returns all known values for PlaceType. Note that this can be expanded
@@ -219,6 +220,7 @@ func (PlaceType) Values() []PlaceType {
 		"PointAddress",
 		"InterpolatedAddress",
 		"SecondaryAddress",
+		"InferredSecondaryAddress",
 	}
 }
 

@@ -40,7 +40,7 @@ type SendVoiceMessageInput struct {
 	// The origination identity to use for the voice call. This can be the
 	// PhoneNumber, PhoneNumberId, PhoneNumberArn, PoolId, or PoolArn.
 	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
+	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
 	//
 	// This member is required.

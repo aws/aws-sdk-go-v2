@@ -36,7 +36,7 @@ type UpdatePoolInput struct {
 	// The unique identifier of the pool to update. Valid values are either the PoolId
 	// or PoolArn.
 	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
+	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
 	//
 	// This member is required.
@@ -48,13 +48,13 @@ type UpdatePoolInput struct {
 	// The OptOutList to associate with the pool. Valid values are either
 	// OptOutListName or OptOutListArn.
 	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
+	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
 	OptOutListName *string
 
 	// By default this is set to false. When set to false and an end recipient sends a
 	// message that begins with HELP or STOP to one of your dedicated numbers, End User
-	// MessagingSMS automatically replies with a customizable message and adds the end
+	// Messaging SMS automatically replies with a customizable message and adds the end
 	// recipient to the OptOutList. When set to true you're responsible for responding
 	// to HELP and STOP requests. You're also responsible for tracking and honoring
 	// opt-out requests.
@@ -100,7 +100,7 @@ type UpdatePoolOutput struct {
 	PoolId *string
 
 	// When set to false and an end recipient sends a message that begins with HELP or
-	// STOP to one of your dedicated numbers, End User MessagingSMS automatically
+	// STOP to one of your dedicated numbers, End User Messaging SMS automatically
 	// replies with a customizable message and adds the end recipient to the
 	// OptOutList. When set to true you're responsible for responding to HELP and STOP
 	// requests. You're also responsible for tracking and honoring opt-out requests.

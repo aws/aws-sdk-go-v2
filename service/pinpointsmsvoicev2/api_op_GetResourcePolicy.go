@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves the JSON text of the resource-based policy document attached to the
-// End User MessagingSMS resource. A shared resource can be a Pool, Opt-out list,
+// End User Messaging SMS resource. A shared resource can be a Pool, Opt-out list,
 // Sender Id, or Phone number.
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 
 type GetResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the End User MessagingSMS resource attached
+	// The Amazon Resource Name (ARN) of the End User Messaging SMS resource attached
 	// to the resource-based policy.
 	//
 	// This member is required.
@@ -48,10 +48,10 @@ type GetResourcePolicyOutput struct {
 	CreatedTimestamp *time.Time
 
 	// The JSON formatted string that contains the resource-based policy attached to
-	// the End User MessagingSMS resource.
+	// the End User Messaging SMS resource.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the End User MessagingSMS resource attached
+	// The Amazon Resource Name (ARN) of the End User Messaging SMS resource attached
 	// to the resource-based policy.
 	ResourceArn *string
 

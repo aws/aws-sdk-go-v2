@@ -41,7 +41,7 @@ type DisassociateOriginationIdentityInput struct {
 	// SenderId or SenderIdArn. You can use DescribePhoneNumbersfind the values for PhoneNumberId and
 	// PhoneNumberArn, or use DescribeSenderIdsto get the values for SenderId and SenderIdArn.
 	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
+	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
 	//
 	// This member is required.
@@ -50,7 +50,7 @@ type DisassociateOriginationIdentityInput struct {
 	// The unique identifier for the pool to disassociate with the origination
 	// identity. This value can be either the PoolId or PoolArn.
 	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
+	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
 	//
 	// This member is required.

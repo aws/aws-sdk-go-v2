@@ -54,7 +54,7 @@ type DescribeSenderIdsInput struct {
 
 	// An array of SenderIdAndCountry objects to search for.
 	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
+	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
 	SenderIds []types.SenderIdAndCountry
 

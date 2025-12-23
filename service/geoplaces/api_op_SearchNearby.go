@@ -16,6 +16,10 @@ import (
 // business chains, food types and more. The API returns details such as a place
 // name, address, phone, category, food type, contact, opening hours. Also, the API
 // can return phonemes, time zones and more based on requested parameters.
+//
+// For more information, see [Search Nearby] in the Amazon Location Service Developer Guide.
+//
+// [Search Nearby]: https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html
 func (c *Client) SearchNearby(ctx context.Context, params *SearchNearbyInput, optFns ...func(*Options)) (*SearchNearbyOutput, error) {
 	if params == nil {
 		params = &SearchNearbyInput{}
@@ -33,9 +37,9 @@ func (c *Client) SearchNearby(ctx context.Context, params *SearchNearbyInput, op
 
 type SearchNearbyInput struct {
 
-	// The position, in [lng, lat] for which you are querying nearby results for.
-	// Results closer to the position will be ranked higher then results further away
-	// from the position
+	// The position in World Geodetic System (WGS 84) format: [longitude, latitude]
+	// for which you are querying nearby results for. Results closer to the position
+	// will be ranked higher then results further away from the position
 	//
 	// This member is required.
 	QueryPosition []float64
@@ -70,6 +74,8 @@ type SearchNearbyInput struct {
 	Language *string
 
 	// An optional limit for the number of results returned in a single call.
+	//
+	// Default value: 20
 	MaxResults *int32
 
 	// If nextToken is returned, there are more results available. The value of
