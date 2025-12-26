@@ -3,4 +3,4 @@
 package transfer
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.68.4"
+const goModuleVersion = "1.68.5"

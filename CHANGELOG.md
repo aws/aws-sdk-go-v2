@@ -1,3 +1,9 @@
+# Release (2025-12-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.88.0](service/medialive/CHANGELOG.md#v1880-2025-12-26)
+  * **Feature**: AWS Elemental MediaLive now supports Pipeline Locking using Video Alignment as well as linked single pipeline channels to enable cross-channel and cross-region Pipeline Locking workflows.
+
 # Release (2025-12-23)
 
 ## General Highlights
