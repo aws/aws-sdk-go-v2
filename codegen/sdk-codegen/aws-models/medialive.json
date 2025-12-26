@@ -3707,6 +3707,13 @@
                         "smithy.api#documentation": "Requested engine version for this channel.",
                         "smithy.api#jsonName": "channelEngineVersion"
                     }
+                },
+                "LinkedChannelSettings": {
+                    "target": "com.amazonaws.medialive#DescribeLinkedChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Linked Channel Settings for this channel.",
+                        "smithy.api#jsonName": "linkedChannelSettings"
+                    }
                 }
             },
             "traits": {
@@ -4139,6 +4146,13 @@
                     "traits": {
                         "smithy.api#documentation": "The engine version that the running pipelines are using.",
                         "smithy.api#jsonName": "usedChannelEngineVersions"
+                    }
+                },
+                "LinkedChannelSettings": {
+                    "target": "com.amazonaws.medialive#DescribeLinkedChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Linked Channel Settings for this channel.",
+                        "smithy.api#jsonName": "linkedChannelSettings"
                     }
                 }
             },
@@ -5525,6 +5539,13 @@
                     "target": "com.amazonaws.medialive#__boolean",
                     "traits": {
                         "smithy.api#jsonName": "dryRun"
+                    }
+                },
+                "LinkedChannelSettings": {
+                    "target": "com.amazonaws.medialive#LinkedChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The linked channel settings for the channel.",
+                        "smithy.api#jsonName": "linkedChannelSettings"
                     }
                 }
             },
@@ -8251,6 +8272,13 @@
                         "smithy.api#documentation": "Requested engine version for this channel.",
                         "smithy.api#jsonName": "channelEngineVersion"
                     }
+                },
+                "LinkedChannelSettings": {
+                    "target": "com.amazonaws.medialive#DescribeLinkedChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Linked Channel Settings for this channel.",
+                        "smithy.api#jsonName": "linkedChannelSettings"
+                    }
                 }
             },
             "traits": {
@@ -10403,6 +10431,13 @@
                         "smithy.api#documentation": "Requested engine version for this channel.",
                         "smithy.api#jsonName": "channelEngineVersion"
                     }
+                },
+                "LinkedChannelSettings": {
+                    "target": "com.amazonaws.medialive#DescribeLinkedChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Linked Channel Settings for this channel.",
+                        "smithy.api#jsonName": "linkedChannelSettings"
+                    }
                 }
             },
             "traits": {
@@ -10669,6 +10704,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "Used in ListClustersResult."
+            }
+        },
+        "com.amazonaws.medialive#DescribeFollowerChannelSettings": {
+            "type": "structure",
+            "members": {
+                "LinkedChannelType": {
+                    "target": "com.amazonaws.medialive#LinkedChannelType",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies this as a follower channel",
+                        "smithy.api#jsonName": "linkedChannelType"
+                    }
+                },
+                "PrimaryChannelArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the primary channel this channel follows",
+                        "smithy.api#jsonName": "primaryChannelArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Details of a follower channel in a linked pair"
             }
         },
         "com.amazonaws.medialive#DescribeInput": {
@@ -11392,6 +11449,26 @@
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for DescribeInputSecurityGroupResponse",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#DescribeLinkedChannelSettings": {
+            "type": "structure",
+            "members": {
+                "FollowerChannelSettings": {
+                    "target": "com.amazonaws.medialive#DescribeFollowerChannelSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "followerChannelSettings"
+                    }
+                },
+                "PrimaryChannelSettings": {
+                    "target": "com.amazonaws.medialive#DescribePrimaryChannelSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "primaryChannelSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Linked channel configuration details"
             }
         },
         "com.amazonaws.medialive#DescribeMultiplex": {
@@ -12425,6 +12502,28 @@
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for DescribeOfferingResponse",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#DescribePrimaryChannelSettings": {
+            "type": "structure",
+            "members": {
+                "FollowingChannelArns": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the following channels for this primary channel",
+                        "smithy.api#jsonName": "followingChannelArns"
+                    }
+                },
+                "LinkedChannelType": {
+                    "target": "com.amazonaws.medialive#LinkedChannelType",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies this as a primary channel",
+                        "smithy.api#jsonName": "linkedChannelType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Details of a primary (leader) channel in a linked pair"
             }
         },
         "com.amazonaws.medialive#DescribeReservation": {
@@ -15278,6 +15377,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "Follow reference point."
+            }
+        },
+        "com.amazonaws.medialive#FollowerChannelSettings": {
+            "type": "structure",
+            "members": {
+                "LinkedChannelType": {
+                    "target": "com.amazonaws.medialive#LinkedChannelType",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies this as a follower channel",
+                        "smithy.api#jsonName": "linkedChannelType"
+                    }
+                },
+                "PrimaryChannelArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the primary channel to follow",
+                        "smithy.api#jsonName": "primaryChannelArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for a follower channel in a linked pair"
             }
         },
         "com.amazonaws.medialive#ForbiddenException": {
@@ -22123,6 +22244,46 @@
             },
             "traits": {
                 "smithy.api#documentation": "If you specify a StopTimecode in an input (in order to clip the file), you can specify if you want the clip to exclude (the default) or include the frame specified by the timecode."
+            }
+        },
+        "com.amazonaws.medialive#LinkedChannelSettings": {
+            "type": "structure",
+            "members": {
+                "FollowerChannelSettings": {
+                    "target": "com.amazonaws.medialive#FollowerChannelSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "followerChannelSettings"
+                    }
+                },
+                "PrimaryChannelSettings": {
+                    "target": "com.amazonaws.medialive#PrimaryChannelSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "primaryChannelSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for linked channel relationships"
+            }
+        },
+        "com.amazonaws.medialive#LinkedChannelType": {
+            "type": "enum",
+            "members": {
+                "FOLLOWING_CHANNEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLLOWING_CHANNEL"
+                    }
+                },
+                "PRIMARY_CHANNEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIMARY_CHANNEL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The values for the role for a linked channel."
             }
         },
         "com.amazonaws.medialive#ListAlerts": {
@@ -29864,9 +30025,37 @@
                 "smithy.api#documentation": "Pipeline ID"
             }
         },
+        "com.amazonaws.medialive#PipelineLockingMethod": {
+            "type": "enum",
+            "members": {
+                "SOURCE_TIMECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_TIMECODE"
+                    }
+                },
+                "VIDEO_ALIGNMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_ALIGNMENT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Pipeline Locking Method"
+            }
+        },
         "com.amazonaws.medialive#PipelineLockingSettings": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "PipelineLockingMethod": {
+                    "target": "com.amazonaws.medialive#PipelineLockingMethod",
+                    "traits": {
+                        "smithy.api#documentation": "The method to use to lock the video frames in the pipelines. sourceTimecode (default): Use the timecode in the source. videoAlignment: Lock frames that the encoder identifies as having matching content. If videoAlignment is selected, existing timecodes will not be used for any locking decisions.",
+                        "smithy.api#jsonName": "pipelineLockingMethod"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#documentation": "Pipeline Locking Settings"
             }
@@ -29912,6 +30101,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "Indicates which pipeline is preferred by the multiplex for program ingest.\nIf set to \\\"PIPELINE_0\\\" or \\\"PIPELINE_1\\\" and an unhealthy ingest causes the multiplex to switch to the non-preferred pipeline,\nit will switch back once that ingest is healthy again. If set to \\\"CURRENTLY_ACTIVE\\\",\nit will not switch back to the other pipeline based on it recovering to a healthy state,\nit will only switch if the active pipeline becomes unhealthy."
+            }
+        },
+        "com.amazonaws.medialive#PrimaryChannelSettings": {
+            "type": "structure",
+            "members": {
+                "LinkedChannelType": {
+                    "target": "com.amazonaws.medialive#LinkedChannelType",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies this as a primary channel",
+                        "smithy.api#jsonName": "linkedChannelType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for a primary (leader) channel in a linked pair"
             }
         },
         "com.amazonaws.medialive#PurchaseOffering": {
@@ -30962,6 +31166,13 @@
                     "traits": {
                         "smithy.api#documentation": "Requested engine version for this channel.",
                         "smithy.api#jsonName": "channelEngineVersion"
+                    }
+                },
+                "LinkedChannelSettings": {
+                    "target": "com.amazonaws.medialive#DescribeLinkedChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Linked Channel Settings for this channel.",
+                        "smithy.api#jsonName": "linkedChannelSettings"
                     }
                 }
             },
@@ -33472,6 +33683,13 @@
                         "smithy.api#documentation": "Requested engine version for this channel.",
                         "smithy.api#jsonName": "channelEngineVersion"
                     }
+                },
+                "LinkedChannelSettings": {
+                    "target": "com.amazonaws.medialive#DescribeLinkedChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Linked Channel Settings for this channel.",
+                        "smithy.api#jsonName": "linkedChannelSettings"
+                    }
                 }
             },
             "traits": {
@@ -34794,6 +35012,13 @@
                     "traits": {
                         "smithy.api#documentation": "Requested engine version for this channel.",
                         "smithy.api#jsonName": "channelEngineVersion"
+                    }
+                },
+                "LinkedChannelSettings": {
+                    "target": "com.amazonaws.medialive#DescribeLinkedChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Linked Channel Settings for this channel.",
+                        "smithy.api#jsonName": "linkedChannelSettings"
                     }
                 }
             },
@@ -36322,6 +36547,13 @@
                     "traits": {
                         "smithy.api#documentation": "The Elemental Anywhere settings for this channel.",
                         "smithy.api#jsonName": "anywhereSettings"
+                    }
+                },
+                "LinkedChannelSettings": {
+                    "target": "com.amazonaws.medialive#LinkedChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The linked channel settings for the channel.",
+                        "smithy.api#jsonName": "linkedChannelSettings"
                     }
                 }
             },
