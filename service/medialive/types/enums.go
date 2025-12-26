@@ -4752,6 +4752,25 @@ func (LastFrameClippingBehavior) Values() []LastFrameClippingBehavior {
 	}
 }
 
+type LinkedChannelType string
+
+// Enum values for LinkedChannelType
+const (
+	LinkedChannelTypeFollowingChannel LinkedChannelType = "FOLLOWING_CHANNEL"
+	LinkedChannelTypePrimaryChannel   LinkedChannelType = "PRIMARY_CHANNEL"
+)
+
+// Values returns all known values for LinkedChannelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LinkedChannelType) Values() []LinkedChannelType {
+	return []LinkedChannelType{
+		"FOLLOWING_CHANNEL",
+		"PRIMARY_CHANNEL",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel
@@ -5832,6 +5851,25 @@ func (PipelineId) Values() []PipelineId {
 	return []PipelineId{
 		"PIPELINE_0",
 		"PIPELINE_1",
+	}
+}
+
+type PipelineLockingMethod string
+
+// Enum values for PipelineLockingMethod
+const (
+	PipelineLockingMethodSourceTimecode PipelineLockingMethod = "SOURCE_TIMECODE"
+	PipelineLockingMethodVideoAlignment PipelineLockingMethod = "VIDEO_ALIGNMENT"
+)
+
+// Values returns all known values for PipelineLockingMethod. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PipelineLockingMethod) Values() []PipelineLockingMethod {
+	return []PipelineLockingMethod{
+		"SOURCE_TIMECODE",
+		"VIDEO_ALIGNMENT",
 	}
 }
 

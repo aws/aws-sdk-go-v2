@@ -58,6 +58,9 @@ type CreateChannelInput struct {
 	// Specification of network and file inputs for this channel
 	InputSpecification *types.InputSpecification
 
+	// The linked channel settings for the channel.
+	LinkedChannelSettings *types.LinkedChannelSettings
+
 	// The log level to write to CloudWatch Logs.
 	LogLevel types.LogLevel
 

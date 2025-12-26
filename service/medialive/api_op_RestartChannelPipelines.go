@@ -81,6 +81,9 @@ type RestartChannelPipelinesOutput struct {
 	// Specification of network and file inputs for this channel
 	InputSpecification *types.InputSpecification
 
+	// Linked Channel Settings for this channel.
+	LinkedChannelSettings *types.DescribeLinkedChannelSettings
+
 	// The log level being written to CloudWatch Logs.
 	LogLevel types.LogLevel
 

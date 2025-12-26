@@ -1254,6 +1254,9 @@ type Channel struct {
 	// Specification of network and file inputs for this channel
 	InputSpecification *InputSpecification
 
+	// Linked Channel Settings for this channel.
+	LinkedChannelSettings *DescribeLinkedChannelSettings
+
 	// The log level being written to CloudWatch Logs.
 	LogLevel LogLevel
 
@@ -1377,6 +1380,9 @@ type ChannelSummary struct {
 
 	// Specification of network and file inputs for this channel
 	InputSpecification *InputSpecification
+
+	// Linked Channel Settings for this channel.
+	LinkedChannelSettings *DescribeLinkedChannelSettings
 
 	// The log level being written to CloudWatch Logs.
 	LogLevel LogLevel
@@ -1885,6 +1891,30 @@ type DescribeClusterSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Details of a follower channel in a linked pair
+type DescribeFollowerChannelSettings struct {
+
+	// Specifies this as a follower channel
+	LinkedChannelType LinkedChannelType
+
+	// The ARN of the primary channel this channel follows
+	PrimaryChannelArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Linked channel configuration details
+type DescribeLinkedChannelSettings struct {
+
+	// Details of a follower channel in a linked pair
+	FollowerChannelSettings *DescribeFollowerChannelSettings
+
+	// Details of a primary (leader) channel in a linked pair
+	PrimaryChannelSettings *DescribePrimaryChannelSettings
+
+	noSmithyDocumentSerde
+}
+
 // Used in ListNetworksResult.
 type DescribeNetworkSummary struct {
 
@@ -1963,6 +1993,18 @@ type DescribeNodeSummary struct {
 
 	// The current state of the Node.
 	State NodeState
+
+	noSmithyDocumentSerde
+}
+
+// Details of a primary (leader) channel in a linked pair
+type DescribePrimaryChannelSettings struct {
+
+	// The ARNs of the following channels for this primary channel
+	FollowingChannelArns []string
+
+	// Specifies this as a primary channel
+	LinkedChannelType LinkedChannelType
 
 	noSmithyDocumentSerde
 }
@@ -2660,6 +2702,18 @@ type Fmp4HlsSettings struct {
 	// configure other parameters in the output group or individual outputs, or you add
 	// an ID3 action to the channel schedule.
 	TimedMetadataBehavior Fmp4TimedMetadataBehavior
+
+	noSmithyDocumentSerde
+}
+
+// Settings for a follower channel in a linked pair
+type FollowerChannelSettings struct {
+
+	// Specifies this as a follower channel
+	LinkedChannelType LinkedChannelType
+
+	// The ARN of the primary channel to follow
+	PrimaryChannelArn *string
 
 	noSmithyDocumentSerde
 }
@@ -4778,6 +4832,18 @@ type KeyProviderSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for linked channel relationships
+type LinkedChannelSettings struct {
+
+	// Settings for a follower channel in a linked pair
+	FollowerChannelSettings *FollowerChannelSettings
+
+	// Settings for a primary (leader) channel in a linked pair
+	PrimaryChannelSettings *PrimaryChannelSettings
+
+	noSmithyDocumentSerde
+}
+
 // M2ts Settings
 type M2tsSettings struct {
 
@@ -6553,6 +6619,13 @@ type PipelineDetail struct {
 
 // Pipeline Locking Settings
 type PipelineLockingSettings struct {
+
+	// The method to use to lock the video frames in the pipelines. sourceTimecode
+	// (default): Use the timecode in the source. videoAlignment: Lock frames that the
+	// encoder identifies as having matching content. If videoAlignment is selected,
+	// existing timecodes will not be used for any locking decisions.
+	PipelineLockingMethod PipelineLockingMethod
+
 	noSmithyDocumentSerde
 }
 
@@ -6563,6 +6636,15 @@ type PipelinePauseStateSettings struct {
 	//
 	// This member is required.
 	PipelineId PipelineId
+
+	noSmithyDocumentSerde
+}
+
+// Settings for a primary (leader) channel in a linked pair
+type PrimaryChannelSettings struct {
+
+	// Specifies this as a primary channel
+	LinkedChannelType LinkedChannelType
 
 	noSmithyDocumentSerde
 }

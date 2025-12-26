@@ -5052,6 +5052,11 @@ func awsRestjson1_deserializeOpDocumentDeleteChannelOutput(v **DeleteChannelOutp
 				return err
 			}
 
+		case "linkedChannelSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeLinkedChannelSettings(&sv.LinkedChannelSettings, value); err != nil {
+				return err
+			}
+
 		case "logLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8424,6 +8429,11 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 
 		case "inputSpecification":
 			if err := awsRestjson1_deserializeDocumentInputSpecification(&sv.InputSpecification, value); err != nil {
+				return err
+			}
+
+		case "linkedChannelSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeLinkedChannelSettings(&sv.LinkedChannelSettings, value); err != nil {
 				return err
 			}
 
@@ -18237,6 +18247,11 @@ func awsRestjson1_deserializeOpDocumentRestartChannelPipelinesOutput(v **Restart
 				return err
 			}
 
+		case "linkedChannelSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeLinkedChannelSettings(&sv.LinkedChannelSettings, value); err != nil {
+				return err
+			}
+
 		case "logLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18547,6 +18562,11 @@ func awsRestjson1_deserializeOpDocumentStartChannelOutput(v **StartChannelOutput
 
 		case "inputSpecification":
 			if err := awsRestjson1_deserializeDocumentInputSpecification(&sv.InputSpecification, value); err != nil {
+				return err
+			}
+
+		case "linkedChannelSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeLinkedChannelSettings(&sv.LinkedChannelSettings, value); err != nil {
 				return err
 			}
 
@@ -20243,6 +20263,11 @@ func awsRestjson1_deserializeOpDocumentStopChannelOutput(v **StopChannelOutput, 
 
 		case "inputSpecification":
 			if err := awsRestjson1_deserializeDocumentInputSpecification(&sv.InputSpecification, value); err != nil {
+				return err
+			}
+
+		case "linkedChannelSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeLinkedChannelSettings(&sv.LinkedChannelSettings, value); err != nil {
 				return err
 			}
 
@@ -31296,6 +31321,11 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				return err
 			}
 
+		case "linkedChannelSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeLinkedChannelSettings(&sv.LinkedChannelSettings, value); err != nil {
+				return err
+			}
+
 		case "logLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -31650,6 +31680,11 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 
 		case "inputSpecification":
 			if err := awsRestjson1_deserializeDocumentInputSpecification(&sv.InputSpecification, value); err != nil {
+				return err
+			}
+
+		case "linkedChannelSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeLinkedChannelSettings(&sv.LinkedChannelSettings, value); err != nil {
 				return err
 			}
 
@@ -32895,6 +32930,96 @@ func awsRestjson1_deserializeDocumentDescribeClusterSummary(v **types.DescribeCl
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDescribeFollowerChannelSettings(v **types.DescribeFollowerChannelSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DescribeFollowerChannelSettings
+	if *v == nil {
+		sv = &types.DescribeFollowerChannelSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "linkedChannelType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LinkedChannelType to be of type string, got %T instead", value)
+				}
+				sv.LinkedChannelType = types.LinkedChannelType(jtv)
+			}
+
+		case "primaryChannelArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.PrimaryChannelArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDescribeLinkedChannelSettings(v **types.DescribeLinkedChannelSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DescribeLinkedChannelSettings
+	if *v == nil {
+		sv = &types.DescribeLinkedChannelSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "followerChannelSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeFollowerChannelSettings(&sv.FollowerChannelSettings, value); err != nil {
+				return err
+			}
+
+		case "primaryChannelSettings":
+			if err := awsRestjson1_deserializeDocumentDescribePrimaryChannelSettings(&sv.PrimaryChannelSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDescribeNetworkSummary(v **types.DescribeNetworkSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -33093,6 +33218,51 @@ func awsRestjson1_deserializeDocumentDescribeNodeSummary(v **types.DescribeNodeS
 					return fmt.Errorf("expected NodeState to be of type string, got %T instead", value)
 				}
 				sv.State = types.NodeState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDescribePrimaryChannelSettings(v **types.DescribePrimaryChannelSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DescribePrimaryChannelSettings
+	if *v == nil {
+		sv = &types.DescribePrimaryChannelSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "followingChannelArns":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.FollowingChannelArns, value); err != nil {
+				return err
+			}
+
+		case "linkedChannelType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LinkedChannelType to be of type string, got %T instead", value)
+				}
+				sv.LinkedChannelType = types.LinkedChannelType(jtv)
 			}
 
 		default:
@@ -45442,6 +45612,15 @@ func awsRestjson1_deserializeDocumentPipelineLockingSettings(v **types.PipelineL
 
 	for key, value := range shape {
 		switch key {
+		case "pipelineLockingMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineLockingMethod to be of type string, got %T instead", value)
+				}
+				sv.PipelineLockingMethod = types.PipelineLockingMethod(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

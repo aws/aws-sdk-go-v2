@@ -758,6 +758,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		}
 	}
 
+	if v.LinkedChannelSettings != nil {
+		ok := object.Key("linkedChannelSettings")
+		if err := awsRestjson1_serializeDocumentLinkedChannelSettings(v.LinkedChannelSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("logLevel")
 		ok.String(string(v.LogLevel))
@@ -9003,6 +9010,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		}
 	}
 
+	if v.LinkedChannelSettings != nil {
+		ok := object.Key("linkedChannelSettings")
+		if err := awsRestjson1_serializeDocumentLinkedChannelSettings(v.LinkedChannelSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("logLevel")
 		ok.String(string(v.LogLevel))
@@ -14129,6 +14143,23 @@ func awsRestjson1_serializeDocumentFmp4HlsSettings(v *types.Fmp4HlsSettings, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFollowerChannelSettings(v *types.FollowerChannelSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.LinkedChannelType) > 0 {
+		ok := object.Key("linkedChannelType")
+		ok.String(string(v.LinkedChannelType))
+	}
+
+	if v.PrimaryChannelArn != nil {
+		ok := object.Key("primaryChannelArn")
+		ok.String(*v.PrimaryChannelArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFollowModeScheduleActionStartSettings(v *types.FollowModeScheduleActionStartSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -16090,6 +16121,27 @@ func awsRestjson1_serializeDocumentKeyProviderSettings(v *types.KeyProviderSetti
 	return nil
 }
 
+func awsRestjson1_serializeDocumentLinkedChannelSettings(v *types.LinkedChannelSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FollowerChannelSettings != nil {
+		ok := object.Key("followerChannelSettings")
+		if err := awsRestjson1_serializeDocumentFollowerChannelSettings(v.FollowerChannelSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrimaryChannelSettings != nil {
+		ok := object.Key("primaryChannelSettings")
+		if err := awsRestjson1_serializeDocumentPrimaryChannelSettings(v.PrimaryChannelSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18025,6 +18077,11 @@ func awsRestjson1_serializeDocumentPipelineLockingSettings(v *types.PipelineLock
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.PipelineLockingMethod) > 0 {
+		ok := object.Key("pipelineLockingMethod")
+		ok.String(string(v.PipelineLockingMethod))
+	}
+
 	return nil
 }
 
@@ -18035,6 +18092,18 @@ func awsRestjson1_serializeDocumentPipelinePauseStateSettings(v *types.PipelineP
 	if len(v.PipelineId) > 0 {
 		ok := object.Key("pipelineId")
 		ok.String(string(v.PipelineId))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrimaryChannelSettings(v *types.PrimaryChannelSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.LinkedChannelType) > 0 {
+		ok := object.Key("linkedChannelType")
+		ok.String(string(v.LinkedChannelType))
 	}
 
 	return nil
