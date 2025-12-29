@@ -7161,6 +7161,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ability to perform research-related actions.</p>"
                     }
+                },
+                "SelfUpgradeUserRole": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to enable users to upgrade their user role.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26266,6 +26272,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeSelfUpgradeConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeSelfUpgradeConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeSelfUpgradeConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the self-upgrade configuration for a Quick Suite account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/self-upgrade-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeSelfUpgradeConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the Quick Suite self-upgrade configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Quick Suite namespace that you want to describe the Quick Suite self-upgrade configuration for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeSelfUpgradeConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "SelfUpgradeConfiguration": {
+                    "target": "com.amazonaws.quicksight#SelfUpgradeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The self-upgrade configuration for the Quick Suite account.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeTemplate": {
             "type": "operation",
             "input": {
@@ -33777,7 +33878,7 @@
                 "Context": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity context information for the user. This is an identity token that should be used as the ContextAssertion parameter in the <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">STS AssumeRole API</a> call to obtain identity enhanced AWS credentials.</p>"
+                        "smithy.api#documentation": "<p>The identity context information for the user. This is an identity token that should be used as the ContextAssertion parameter in the <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">STS AssumeRole API</a> call to obtain identity enhanced Amazon Web Services credentials.</p>"
                     }
                 }
             },
@@ -36680,6 +36781,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The <code>NextToken</code> value isn't valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.quicksight#InvalidParameterException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.quicksight#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One or more parameter has a value that isn't valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -40972,6 +41092,124 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListSelfUpgrades": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListSelfUpgradesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListSelfUpgradesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all self-upgrade requests for a Quick Suite account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/self-upgrade-requests",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListSelfUpgradesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the self-upgrade requests.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Quick Suite namespace for the self-upgrade requests.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListSelfUpgradesResponse": {
+            "type": "structure",
+            "members": {
+                "SelfUpgradeRequestDetails": {
+                    "target": "com.amazonaws.quicksight#SelfUpgradeRequestDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of self-upgrade request details.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
                     }
                 },
                 "RequestId": {
@@ -48319,6 +48557,9 @@
                     "target": "com.amazonaws.quicksight#DescribeRoleCustomPermission"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeSelfUpgradeConfiguration"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeTemplate"
                 },
                 {
@@ -48449,6 +48690,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListRoleMemberships"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListSelfUpgrades"
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListTagsForResource"
@@ -48650,6 +48894,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateRoleCustomPermission"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateSelfUpgrade"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateSelfUpgradeConfiguration"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateSPICECapacityConfiguration"
@@ -54243,6 +54493,165 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#SelfUpgradeAdminAction": {
+            "type": "enum",
+            "members": {
+                "APPROVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVE"
+                    }
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                },
+                "VERIFY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERIFY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SelfUpgradeConfiguration": {
+            "type": "structure",
+            "members": {
+                "SelfUpgradeStatus": {
+                    "target": "com.amazonaws.quicksight#SelfUpgradeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status set for the self-upgrade configuration for the Quick Suite account. It can contain the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTO_APPROVAL</code>: All the self-upgrade requests will be auto approved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN_APPROVAL</code>: All the self-upgrade requests will require admin approval.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The self-upgrade configuration for the Quick Suite account.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SelfUpgradeRequestDetail": {
+            "type": "structure",
+            "members": {
+                "UpgradeRequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the self-upgrade request.</p>"
+                    }
+                },
+                "UserName": {
+                    "target": "com.amazonaws.quicksight#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the user who initiated the self-upgrade request.</p>"
+                    }
+                },
+                "OriginalRole": {
+                    "target": "com.amazonaws.quicksight#UserRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The original role of the user before the upgrade.</p>"
+                    }
+                },
+                "RequestedRole": {
+                    "target": "com.amazonaws.quicksight#UserRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role that the user is requesting to upgrade to.</p>"
+                    }
+                },
+                "RequestNote": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional note explaining the reason for the self-upgrade request.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.quicksight#Long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The time when the self-upgrade request was created.</p>"
+                    }
+                },
+                "RequestStatus": {
+                    "target": "com.amazonaws.quicksight#SelfUpgradeRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the self-upgrade request.</p>"
+                    }
+                },
+                "lastUpdateAttemptTime": {
+                    "target": "com.amazonaws.quicksight#Long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The time of the last update attempt for the self-upgrade request.</p>"
+                    }
+                },
+                "lastUpdateFailureReason": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the last update failure, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of a self-upgrade request.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SelfUpgradeRequestDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SelfUpgradeRequestDetail"
+            }
+        },
+        "com.amazonaws.quicksight#SelfUpgradeRequestStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENIED"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "VERIFY_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERIFY_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SelfUpgradeStatus": {
+            "type": "enum",
+            "members": {
+                "AUTO_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO_APPROVAL"
+                    }
+                },
+                "ADMIN_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMIN_APPROVAL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#SemanticEntityType": {
             "type": "structure",
             "members": {
@@ -56909,7 +57318,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a snapshot of a dashboard's output. You can request one or several of the following format configurations in each API call.</p>\n         <ul>\n            <li>\n               <p>1 Paginated PDF</p>\n            </li>\n            <li>\n               <p>1 Excel workbook that includes up to 5 table or pivot table visuals</p>\n            </li>\n            <li>\n               <p>5 CSVs from table or pivot table visuals</p>\n            </li>\n         </ul>\n         <p>The status of a submitted job can be polled with the <code>DescribeDashboardSnapshotJob</code> API. When you call the  <code>DescribeDashboardSnapshotJob</code> API, check the <code>JobStatus</code> field in the response. Once the job reaches a <code>COMPLETED</code> or <code>FAILED</code> status, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the URLs for the generated files. If the job fails, the <code>DescribeDashboardSnapshotJobResult</code> API returns detailed information about the error that occurred.</p>\n         <p>\n            <b>StartDashboardSnapshotJob API throttling</b>\n         </p>\n         <p>Quick Sight utilizes API throttling to create a more consistent user experience within a time span for customers when they call the <code>StartDashboardSnapshotJob</code>. By default, 12 jobs can run simlutaneously in one Amazon Web Services account and users can submit up 10 API requests per second before an account is throttled. If an overwhelming number of API requests are made by the same user in a short period of time, Quick Sight throttles the API calls to maintin an optimal experience and reliability for all Quick Sight users.</p>\n         <p>\n            <b>Common throttling scenarios</b>\n         </p>\n         <p>The following list provides information about the most commin throttling scenarios that can occur.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>A large number of <code>SnapshotExport</code> API jobs are running simultaneously on an Amazon Web Services account.</b> When a new <code>StartDashboardSnapshotJob</code> is created and there are already 12 jobs with the <code>RUNNING</code> status, the new job request fails and returns a <code>LimitExceededException</code> error. Wait for a current job to comlpete before you resubmit the new job.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A large number of API requests are submitted on an Amazon Web Services account.</b> When a user makes more than 10 API calls to the Quick Sight API in one second, a <code>ThrottlingException</code> is returned.</p>\n            </li>\n         </ul>\n         <p>If your use case requires a higher throttling limit, contact your account admin or <a href=\"http://aws.amazon.com/contact-us/\">Amazon Web ServicesSupport</a> to explore options to tailor a more optimal expereince for your account.</p>\n         <p>\n            <b>Best practices to handle throttling</b>\n         </p>\n         <p>If your use case projects high levels of API traffic, try to reduce the degree of frequency and parallelism of API calls as much as you can to avoid throttling. You can also perform a timing test to calculate an estimate for the total processing time of your projected load that stays within the throttling limits of the Quick Sight APIs. For example, if your projected traffic is 100 snapshot jobs before 12:00 PM per day, start 12 jobs in parallel and measure the amount of time it takes to proccess all 12 jobs. Once you obtain the result, multiply the duration by 9, for example <code>(12 minutes * 9 = 108 minutes)</code>. Use the new result to determine the latest time at which the jobs need to be started to meet your target deadline.</p>\n         <p>The time that it takes to process a job can be impacted by the following factors:</p>\n         <ul>\n            <li>\n               <p>The dataset type (Direct Query or SPICE).</p>\n            </li>\n            <li>\n               <p>The size of the dataset.</p>\n            </li>\n            <li>\n               <p>The complexity of the calculated fields that are used in the dashboard.</p>\n            </li>\n            <li>\n               <p>The number of visuals that are on a sheet.</p>\n            </li>\n            <li>\n               <p>The types of visuals that are on the sheet.</p>\n            </li>\n            <li>\n               <p>The number of formats and snapshots that are requested in the job configuration.</p>\n            </li>\n            <li>\n               <p>The size of the generated snapshots.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Registered user support</b>\n         </p>\n         <p>You can generate snapshots for registered Quick Sight users by using the Snapshot Job APIs with <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html\">identity-enhanced IAM role session credentials</a>. This approach allows you to create snapshots on behalf of specific Quick Sight users while respecting their row-level security (RLS), column-level security (CLS), dynamic default parameters and dashboard parameter/filter settings.</p>\n         <p>To generate snapshots for registered Quick Sight users, you need to:</p>\n         <ul>\n            <li>\n               <p>Obtain identity-enhanced IAM role session credentials from AWS Security Token Service (STS).</p>\n            </li>\n            <li>\n               <p>Use these credentials to call the Snapshot Job APIs.</p>\n            </li>\n         </ul>\n         <p>Identity-enhanced credentials are credentials that contain information about the end user (e.g., registered Quick Sight user).</p>\n         <p>If your Quick Sight users are backed by <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">AWS Identity Center</a>, then you need to set up a <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/setuptrustedtokenissuer.html\">trusted token issuer</a>. Then, getting identity-enhanced IAM credentials for a Quick Sight user will look like the following:</p>\n         <ul>\n            <li>\n               <p>Authenticate user with your OIDC compliant Identity Provider. You should get auth tokens back.</p>\n            </li>\n            <li>\n               <p>Use the OIDC API, <a href=\"https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateTokenWithIAM.html\">CreateTokenWithIAM</a>, to exchange auth tokens to IAM tokens. One of the resulted tokens will be identity token.</p>\n            </li>\n            <li>\n               <p>Call STS AssumeRole API as you normally would, but provide an extra <code>ProvidedContexts</code> parameter in the API request. The list of contexts must have a single trusted context assertion. The <code>ProviderArn</code> should be <code>arn:aws:iam::aws:contextProvider/IdentityCenter</code> while <code>ContextAssertion</code> will be the identity token you received in response from CreateTokenWithIAM</p>\n            </li>\n         </ul>\n         <p>For more details, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html\">IdC documentation on Identity-enhanced IAM role sessions</a>.</p>\n         <p>To obtain Identity-enhanced credentials for Quick Sight native users, IAM federated users, or Active Directory users, follow the steps below:</p>\n         <ul>\n            <li>\n               <p>Call Quick Sight <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetIdentityContext.html\">GetIdentityContext API</a> to get identity token.</p>\n            </li>\n            <li>\n               <p>Call STS AssumeRole API as you normally would, but provide extra <code>ProvidedContexts</code> parameter in the API request. The list of contexts must have a single trusted context assertion. The <code>ProviderArn</code> should be <code>arn:aws:iam::aws:contextProvider/QuickSight</code> while <code>ContextAssertion</code> will be the identity token you received in response from GetIdentityContext</p>\n            </li>\n         </ul>\n         <p>After obtaining the identity-enhanced IAM role session credentials, you can use them to start a job, describe the job and describe job result. You can use the same credentials as long as they haven't expired. All API requests made with these credentials are considered to be made by the impersonated Quick Sight user.</p>\n         <important>\n            <p>When using identity-enhanced session credentials, set the UserConfiguration request attribute to null. Otherwise, the request will be invalid.</p>\n         </important>\n         <p>\n            <b>Possible error scenarios</b>\n         </p>\n         <p>The request fails with an Access Denied error in the following scenarios:</p>\n         <ul>\n            <li>\n               <p>The credentials have expired.</p>\n            </li>\n            <li>\n               <p>The impersonated Quick Sight user doesn't have access to the specified dashboard.</p>\n            </li>\n            <li>\n               <p>The impersonated Quick Sight user is restricted from exporting data in the selected formats. For more information about export restrictions, see <a href=\"https://docs.aws.amazon.com/quicksuite/latest/userguide/create-custom-permisions-profile.html\">Customizing access to Amazon Quick Sight capabilities</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a snapshot of a dashboard's output. You can request one or several of the following format configurations in each API call.</p>\n         <ul>\n            <li>\n               <p>1 Paginated PDF</p>\n            </li>\n            <li>\n               <p>1 Excel workbook that includes up to 5 table or pivot table visuals</p>\n            </li>\n            <li>\n               <p>5 CSVs from table or pivot table visuals</p>\n            </li>\n         </ul>\n         <p>The status of a submitted job can be polled with the <code>DescribeDashboardSnapshotJob</code> API. When you call the  <code>DescribeDashboardSnapshotJob</code> API, check the <code>JobStatus</code> field in the response. Once the job reaches a <code>COMPLETED</code> or <code>FAILED</code> status, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the URLs for the generated files. If the job fails, the <code>DescribeDashboardSnapshotJobResult</code> API returns detailed information about the error that occurred.</p>\n         <p>\n            <b>StartDashboardSnapshotJob API throttling</b>\n         </p>\n         <p>Quick Sight utilizes API throttling to create a more consistent user experience within a time span for customers when they call the <code>StartDashboardSnapshotJob</code>. By default, 12 jobs can run simlutaneously in one Amazon Web Services account and users can submit up 10 API requests per second before an account is throttled. If an overwhelming number of API requests are made by the same user in a short period of time, Quick Sight throttles the API calls to maintin an optimal experience and reliability for all Quick Sight users.</p>\n         <p>\n            <b>Common throttling scenarios</b>\n         </p>\n         <p>The following list provides information about the most commin throttling scenarios that can occur.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>A large number of <code>SnapshotExport</code> API jobs are running simultaneously on an Amazon Web Services account.</b> When a new <code>StartDashboardSnapshotJob</code> is created and there are already 12 jobs with the <code>RUNNING</code> status, the new job request fails and returns a <code>LimitExceededException</code> error. Wait for a current job to comlpete before you resubmit the new job.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A large number of API requests are submitted on an Amazon Web Services account.</b> When a user makes more than 10 API calls to the Quick Sight API in one second, a <code>ThrottlingException</code> is returned.</p>\n            </li>\n         </ul>\n         <p>If your use case requires a higher throttling limit, contact your account admin or <a href=\"http://aws.amazon.com/contact-us/\">Amazon Web ServicesSupport</a> to explore options to tailor a more optimal expereince for your account.</p>\n         <p>\n            <b>Best practices to handle throttling</b>\n         </p>\n         <p>If your use case projects high levels of API traffic, try to reduce the degree of frequency and parallelism of API calls as much as you can to avoid throttling. You can also perform a timing test to calculate an estimate for the total processing time of your projected load that stays within the throttling limits of the Quick Sight APIs. For example, if your projected traffic is 100 snapshot jobs before 12:00 PM per day, start 12 jobs in parallel and measure the amount of time it takes to proccess all 12 jobs. Once you obtain the result, multiply the duration by 9, for example <code>(12 minutes * 9 = 108 minutes)</code>. Use the new result to determine the latest time at which the jobs need to be started to meet your target deadline.</p>\n         <p>The time that it takes to process a job can be impacted by the following factors:</p>\n         <ul>\n            <li>\n               <p>The dataset type (Direct Query or SPICE).</p>\n            </li>\n            <li>\n               <p>The size of the dataset.</p>\n            </li>\n            <li>\n               <p>The complexity of the calculated fields that are used in the dashboard.</p>\n            </li>\n            <li>\n               <p>The number of visuals that are on a sheet.</p>\n            </li>\n            <li>\n               <p>The types of visuals that are on the sheet.</p>\n            </li>\n            <li>\n               <p>The number of formats and snapshots that are requested in the job configuration.</p>\n            </li>\n            <li>\n               <p>The size of the generated snapshots.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Registered user support</b>\n         </p>\n         <p>You can generate snapshots for registered Quick Sight users by using the Snapshot Job APIs with <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html\">identity-enhanced IAM role session credentials</a>. This approach allows you to create snapshots on behalf of specific Quick Sight users while respecting their row-level security (RLS), column-level security (CLS), dynamic default parameters and dashboard parameter/filter settings.</p>\n         <p>To generate snapshots for registered Quick Sight users, you need to:</p>\n         <ul>\n            <li>\n               <p>Obtain identity-enhanced IAM role session credentials from Amazon Web Services Security Token Service (STS).</p>\n            </li>\n            <li>\n               <p>Use these credentials to call the Snapshot Job APIs.</p>\n            </li>\n         </ul>\n         <p>Identity-enhanced credentials are credentials that contain information about the end user (e.g., registered Quick Sight user).</p>\n         <p>If your Quick Sight users are backed by <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">Amazon Web Services Identity Center</a>, then you need to set up a <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/setuptrustedtokenissuer.html\">trusted token issuer</a>. Then, getting identity-enhanced IAM credentials for a Quick Sight user will look like the following:</p>\n         <ul>\n            <li>\n               <p>Authenticate user with your OIDC compliant Identity Provider. You should get auth tokens back.</p>\n            </li>\n            <li>\n               <p>Use the OIDC API, <a href=\"https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateTokenWithIAM.html\">CreateTokenWithIAM</a>, to exchange auth tokens to IAM tokens. One of the resulted tokens will be identity token.</p>\n            </li>\n            <li>\n               <p>Call STS AssumeRole API as you normally would, but provide an extra <code>ProvidedContexts</code> parameter in the API request. The list of contexts must have a single trusted context assertion. The <code>ProviderArn</code> should be <code>arn:aws:iam::aws:contextProvider/IdentityCenter</code> while <code>ContextAssertion</code> will be the identity token you received in response from CreateTokenWithIAM</p>\n            </li>\n         </ul>\n         <p>For more details, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html\">IdC documentation on Identity-enhanced IAM role sessions</a>.</p>\n         <p>To obtain Identity-enhanced credentials for Quick Sight native users, IAM federated users, or Active Directory users, follow the steps below:</p>\n         <ul>\n            <li>\n               <p>Call Quick Sight <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetIdentityContext.html\">GetIdentityContext API</a> to get identity token.</p>\n            </li>\n            <li>\n               <p>Call STS AssumeRole API as you normally would, but provide extra <code>ProvidedContexts</code> parameter in the API request. The list of contexts must have a single trusted context assertion. The <code>ProviderArn</code> should be <code>arn:aws:iam::aws:contextProvider/QuickSight</code> while <code>ContextAssertion</code> will be the identity token you received in response from GetIdentityContext</p>\n            </li>\n         </ul>\n         <p>After obtaining the identity-enhanced IAM role session credentials, you can use them to start a job, describe the job and describe job result. You can use the same credentials as long as they haven't expired. All API requests made with these credentials are considered to be made by the impersonated Quick Sight user.</p>\n         <important>\n            <p>When using identity-enhanced session credentials, set the UserConfiguration request attribute to null. Otherwise, the request will be invalid.</p>\n         </important>\n         <p>\n            <b>Possible error scenarios</b>\n         </p>\n         <p>The request fails with an Access Denied error in the following scenarios:</p>\n         <ul>\n            <li>\n               <p>The credentials have expired.</p>\n            </li>\n            <li>\n               <p>The impersonated Quick Sight user doesn't have access to the specified dashboard.</p>\n            </li>\n            <li>\n               <p>The impersonated Quick Sight user is restricted from exporting data in the selected formats. For more information about export restrictions, see <a href=\"https://docs.aws.amazon.com/quicksuite/latest/userguide/create-custom-permisions-profile.html\">Customizing access to Amazon Quick Sight capabilities</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs",
@@ -67311,6 +67720,214 @@
         "com.amazonaws.quicksight#UpdateSPICECapacityConfigurationResponse": {
             "type": "structure",
             "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSelfUpgrade": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateSelfUpgradeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateSelfUpgradeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a self-upgrade request for a Quick Suite user by approving, denying, or verifying the request.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/update-self-upgrade-request",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSelfUpgradeConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateSelfUpgradeConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateSelfUpgradeConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the self-upgrade configuration for a Quick Suite account.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/self-upgrade-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSelfUpgradeConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the Quick Suite self-upgrade configuration that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Quick Suite namespace that you want to update the Quick Suite self-upgrade configuration for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SelfUpgradeStatus": {
+                    "target": "com.amazonaws.quicksight#SelfUpgradeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The self-upgrade status that you want to set for the Quick Suite account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSelfUpgradeConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSelfUpgradeRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the self-upgrade request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Quick Suite namespace for the self-upgrade request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpgradeRequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the self-upgrade request to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.quicksight#SelfUpgradeAdminAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to perform on the self-upgrade request. Valid values are <code>APPROVE</code>, <code>DENY</code>, or <code>VERIFY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSelfUpgradeResponse": {
+            "type": "structure",
+            "members": {
+                "SelfUpgradeRequestDetail": {
+                    "target": "com.amazonaws.quicksight#SelfUpgradeRequestDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the updated self-upgrade request.</p>"
+                    }
+                },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
