@@ -112,7 +112,7 @@ type GetIdentityContextOutput struct {
 
 	// The identity context information for the user. This is an identity token that
 	// should be used as the ContextAssertion parameter in the [STS AssumeRole API]call to obtain identity
-	// enhanced AWS credentials.
+	// enhanced Amazon Web Services credentials.
 	//
 	// [STS AssumeRole API]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
 	Context *string

@@ -98,15 +98,15 @@ import (
 //
 // To generate snapshots for registered Quick Sight users, you need to:
 //
-//   - Obtain identity-enhanced IAM role session credentials from AWS Security
-//     Token Service (STS).
+//   - Obtain identity-enhanced IAM role session credentials from Amazon Web
+//     Services Security Token Service (STS).
 //
 //   - Use these credentials to call the Snapshot Job APIs.
 //
 // Identity-enhanced credentials are credentials that contain information about
 // the end user (e.g., registered Quick Sight user).
 //
-// If your Quick Sight users are backed by [AWS Identity Center], then you need to set up a [trusted token issuer]. Then,
+// If your Quick Sight users are backed by [Amazon Web Services Identity Center], then you need to set up a [trusted token issuer]. Then,
 // getting identity-enhanced IAM credentials for a Quick Sight user will look like
 // the following:
 //
@@ -156,7 +156,6 @@ import (
 //   - The impersonated Quick Sight user is restricted from exporting data in the
 //     selected formats. For more information about export restrictions, see [Customizing access to Amazon Quick Sight capabilities].
 //
-// [AWS Identity Center]: https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
 // [GetIdentityContext API]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetIdentityContext.html
 // [identity-enhanced IAM role session credentials]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html
 // [CreateTokenWithIAM]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateTokenWithIAM.html
@@ -164,6 +163,7 @@ import (
 // [trusted token issuer]: https://docs.aws.amazon.com/singlesignon/latest/userguide/setuptrustedtokenissuer.html
 // [Customizing access to Amazon Quick Sight capabilities]: https://docs.aws.amazon.com/quicksuite/latest/userguide/create-custom-permisions-profile.html
 // [Amazon Web ServicesSupport]: http://aws.amazon.com/contact-us/
+// [Amazon Web Services Identity Center]: https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
 func (c *Client) StartDashboardSnapshotJob(ctx context.Context, params *StartDashboardSnapshotJobInput, optFns ...func(*Options)) (*StartDashboardSnapshotJobOutput, error) {
 	if params == nil {
 		params = &StartDashboardSnapshotJobInput{}

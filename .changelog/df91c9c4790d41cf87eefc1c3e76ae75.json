@@ -1,0 +1,8 @@
+{
+    "id": "df91c9c4-790d-41cf-87ee-fc1c3e76ae75",
+    "type": "feature",
+    "description": "This release adds support for quick users to be able to perform role upgrades on their own. Additionally it allows admins to make this feature admin or auto approval along with new self upgrade capability that can be restricted by Admins.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

@@ -244,6 +244,35 @@ func (e *InternalServiceException) ErrorCode() string {
 }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// This exception occurs when an API request is made to a non-active region in an
+// Amazon Connect instance configured with Amazon Connect Global Resiliency. For
+// example, if the active region is US West (Oregon) and a request is made to US
+// East (N. Virginia), the exception will be returned.
+type InvalidActiveRegionException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidActiveRegionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidActiveRegionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidActiveRegionException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidActiveRegionException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidActiveRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The flow is not valid.
 type InvalidContactFlowException struct {
 	Message *string

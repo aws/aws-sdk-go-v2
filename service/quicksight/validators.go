@@ -2050,6 +2050,26 @@ func (m *validateOpDescribeRoleCustomPermission) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeSelfUpgradeConfiguration struct {
+}
+
+func (*validateOpDescribeSelfUpgradeConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSelfUpgradeConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSelfUpgradeConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSelfUpgradeConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTemplateAlias struct {
 }
 
@@ -2925,6 +2945,26 @@ func (m *validateOpListRoleMemberships) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRoleMembershipsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSelfUpgrades struct {
+}
+
+func (*validateOpListSelfUpgrades) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSelfUpgrades) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSelfUpgradesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSelfUpgradesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4270,6 +4310,46 @@ func (m *validateOpUpdateRoleCustomPermission) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSelfUpgradeConfiguration struct {
+}
+
+func (*validateOpUpdateSelfUpgradeConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSelfUpgradeConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSelfUpgradeConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSelfUpgradeConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSelfUpgrade struct {
+}
+
+func (*validateOpUpdateSelfUpgrade) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSelfUpgrade) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSelfUpgradeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSelfUpgradeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSPICECapacityConfiguration struct {
 }
 
@@ -4938,6 +5018,10 @@ func addOpDescribeRoleCustomPermissionValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpDescribeRoleCustomPermission{}, middleware.After)
 }
 
+func addOpDescribeSelfUpgradeConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSelfUpgradeConfiguration{}, middleware.After)
+}
+
 func addOpDescribeTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTemplateAlias{}, middleware.After)
 }
@@ -5112,6 +5196,10 @@ func addOpListRefreshSchedulesValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpListRoleMembershipsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRoleMemberships{}, middleware.After)
+}
+
+func addOpListSelfUpgradesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSelfUpgrades{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -5380,6 +5468,14 @@ func addOpUpdateRefreshScheduleValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateRoleCustomPermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRoleCustomPermission{}, middleware.After)
+}
+
+func addOpUpdateSelfUpgradeConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSelfUpgradeConfiguration{}, middleware.After)
+}
+
+func addOpUpdateSelfUpgradeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSelfUpgrade{}, middleware.After)
 }
 
 func addOpUpdateSPICECapacityConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -25729,6 +25825,24 @@ func validateOpDescribeRoleCustomPermissionInput(v *DescribeRoleCustomPermission
 	}
 }
 
+func validateOpDescribeSelfUpgradeConfigurationInput(v *DescribeSelfUpgradeConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSelfUpgradeConfigurationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeTemplateAliasInput(v *DescribeTemplateAliasInput) error {
 	if v == nil {
 		return nil
@@ -26519,6 +26633,24 @@ func validateOpListRoleMembershipsInput(v *ListRoleMembershipsInput) error {
 	if len(v.Role) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSelfUpgradesInput(v *ListSelfUpgradesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSelfUpgradesInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
@@ -28058,6 +28190,51 @@ func validateOpUpdateRoleCustomPermissionInput(v *UpdateRoleCustomPermissionInpu
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSelfUpgradeConfigurationInput(v *UpdateSelfUpgradeConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSelfUpgradeConfigurationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if len(v.SelfUpgradeStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SelfUpgradeStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSelfUpgradeInput(v *UpdateSelfUpgradeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSelfUpgradeInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.UpgradeRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpgradeRequestId"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

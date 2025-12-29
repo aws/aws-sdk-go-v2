@@ -36115,6 +36115,9 @@ func awsRestjson1_deserializeOpErrorResumeContactRecording(response *smithyhttp.
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
 
+	case strings.EqualFold("InvalidActiveRegionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidActiveRegionException(response, errorBody)
+
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
 
@@ -41615,6 +41618,9 @@ func awsRestjson1_deserializeOpErrorStartContactRecording(response *smithyhttp.R
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
 
+	case strings.EqualFold("InvalidActiveRegionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidActiveRegionException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
 
@@ -43044,6 +43050,9 @@ func awsRestjson1_deserializeOpErrorStopContact(response *smithyhttp.Response, m
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
 
+	case strings.EqualFold("InvalidActiveRegionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidActiveRegionException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
 
@@ -43243,6 +43252,9 @@ func awsRestjson1_deserializeOpErrorStopContactRecording(response *smithyhttp.Re
 	switch {
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidActiveRegionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidActiveRegionException(response, errorBody)
 
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
@@ -43612,6 +43624,9 @@ func awsRestjson1_deserializeOpErrorSuspendContactRecording(response *smithyhttp
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
 
+	case strings.EqualFold("InvalidActiveRegionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidActiveRegionException(response, errorBody)
+
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
 
@@ -43705,6 +43720,9 @@ func awsRestjson1_deserializeOpErrorTagContact(response *smithyhttp.Response, me
 	switch {
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidActiveRegionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidActiveRegionException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
@@ -44094,6 +44112,9 @@ func awsRestjson1_deserializeOpErrorUntagContact(response *smithyhttp.Response, 
 	switch {
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidActiveRegionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidActiveRegionException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
@@ -44525,6 +44546,9 @@ func awsRestjson1_deserializeOpErrorUpdateContact(response *smithyhttp.Response,
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
 
+	case strings.EqualFold("InvalidActiveRegionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidActiveRegionException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
 
@@ -44624,6 +44648,9 @@ func awsRestjson1_deserializeOpErrorUpdateContactAttributes(response *smithyhttp
 	switch {
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidActiveRegionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidActiveRegionException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
@@ -45528,6 +45555,9 @@ func awsRestjson1_deserializeOpErrorUpdateContactRoutingData(response *smithyhtt
 
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidActiveRegionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidActiveRegionException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
@@ -51645,6 +51675,42 @@ func awsRestjson1_deserializeErrorInternalServiceException(response *smithyhttp.
 	return output
 }
 
+func awsRestjson1_deserializeErrorInvalidActiveRegionException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.InvalidActiveRegionException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentInvalidActiveRegionException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorInvalidContactFlowException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidContactFlowException{}
 	var buff [1024]byte
@@ -56916,6 +56982,11 @@ func awsRestjson1_deserializeDocumentContact(v **types.Contact, value interface{
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "GlobalResiliencyMetadata":
+			if err := awsRestjson1_deserializeDocumentGlobalResiliencyMetadata(&sv.GlobalResiliencyMetadata, value); err != nil {
+				return err
 			}
 
 		case "Id":
@@ -67180,6 +67251,64 @@ func awsRestjson1_deserializeDocumentFunctionArnsList(v *[]string, value interfa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGlobalResiliencyMetadata(v **types.GlobalResiliencyMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GlobalResiliencyMetadata
+	if *v == nil {
+		sv = &types.GlobalResiliencyMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActiveRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActiveRegion to be of type string, got %T instead", value)
+				}
+				sv.ActiveRegion = ptr.String(jtv)
+			}
+
+		case "OriginRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OriginRegion to be of type string, got %T instead", value)
+				}
+				sv.OriginRegion = ptr.String(jtv)
+			}
+
+		case "TrafficDistributionGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrafficDistributionGroupId to be of type string, got %T instead", value)
+				}
+				sv.TrafficDistributionGroupId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGranularAccessControlConfiguration(v **types.GranularAccessControlConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -69374,6 +69503,46 @@ func awsRestjson1_deserializeDocumentInternalServiceException(v **types.Internal
 	var sv *types.InternalServiceException
 	if *v == nil {
 		sv = &types.InternalServiceException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInvalidActiveRegionException(v **types.InvalidActiveRegionException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidActiveRegionException
+	if *v == nil {
+		sv = &types.InvalidActiveRegionException{}
 	} else {
 		sv = *v
 	}

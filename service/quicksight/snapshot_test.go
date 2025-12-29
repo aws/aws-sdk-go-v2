@@ -1286,6 +1286,18 @@ func TestCheckSnapshot_DescribeRoleCustomPermission(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeSelfUpgradeConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSelfUpgradeConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSelfUpgradeConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTemplate(context.Background(), nil, func(o *Options) {
@@ -1807,6 +1819,18 @@ func TestCheckSnapshot_ListRoleMemberships(t *testing.T) {
 	_, err := svc.ListRoleMemberships(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListRoleMemberships")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSelfUpgrades(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSelfUpgrades(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSelfUpgrades")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2611,6 +2635,30 @@ func TestCheckSnapshot_UpdateRoleCustomPermission(t *testing.T) {
 	_, err := svc.UpdateRoleCustomPermission(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateRoleCustomPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateSelfUpgrade(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSelfUpgrade(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSelfUpgrade")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateSelfUpgradeConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSelfUpgradeConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSelfUpgradeConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3997,6 +4045,18 @@ func TestUpdateSnapshot_DescribeRoleCustomPermission(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeSelfUpgradeConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSelfUpgradeConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSelfUpgradeConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTemplate(context.Background(), nil, func(o *Options) {
@@ -4518,6 +4578,18 @@ func TestUpdateSnapshot_ListRoleMemberships(t *testing.T) {
 	_, err := svc.ListRoleMemberships(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRoleMemberships")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSelfUpgrades(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSelfUpgrades(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSelfUpgrades")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5322,6 +5394,30 @@ func TestUpdateSnapshot_UpdateRoleCustomPermission(t *testing.T) {
 	_, err := svc.UpdateRoleCustomPermission(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateRoleCustomPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSelfUpgrade(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSelfUpgrade(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSelfUpgrade")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSelfUpgradeConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSelfUpgradeConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSelfUpgradeConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

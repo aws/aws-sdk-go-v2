@@ -1396,6 +1396,10 @@ type Contact struct {
 	// previous contact indicates the date and time when that contact ended.
 	DisconnectTimestamp *time.Time
 
+	// Information about the global resiliency configuration for the contact,
+	// including traffic distribution details.
+	GlobalResiliencyMetadata *GlobalResiliencyMetadata
+
 	// The identifier for the contact.
 	Id *string
 
@@ -4910,6 +4914,24 @@ type FontFamily struct {
 
 	// The default font family to use in the workspace theme.
 	Default WorkspaceFontFamily
+
+	noSmithyDocumentSerde
+}
+
+// Information about the global resiliency configuration for the contact,
+// including traffic distribution details.
+type GlobalResiliencyMetadata struct {
+
+	// The current AWS region in which the contact is active. This indicates where the
+	// contact is being processed in real-time.
+	ActiveRegion *string
+
+	// The AWS region where the contact was originally created and initiated. This may
+	// differ from the ActiveRegion if the contact has been transferred across regions.
+	OriginRegion *string
+
+	// The identifier of the traffic distribution group.
+	TrafficDistributionGroupId *string
 
 	noSmithyDocumentSerde
 }

@@ -4881,6 +4881,71 @@ func (SelectedTooltipType) Values() []SelectedTooltipType {
 	}
 }
 
+type SelfUpgradeAdminAction string
+
+// Enum values for SelfUpgradeAdminAction
+const (
+	SelfUpgradeAdminActionApprove SelfUpgradeAdminAction = "APPROVE"
+	SelfUpgradeAdminActionDeny    SelfUpgradeAdminAction = "DENY"
+	SelfUpgradeAdminActionVerify  SelfUpgradeAdminAction = "VERIFY"
+)
+
+// Values returns all known values for SelfUpgradeAdminAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SelfUpgradeAdminAction) Values() []SelfUpgradeAdminAction {
+	return []SelfUpgradeAdminAction{
+		"APPROVE",
+		"DENY",
+		"VERIFY",
+	}
+}
+
+type SelfUpgradeRequestStatus string
+
+// Enum values for SelfUpgradeRequestStatus
+const (
+	SelfUpgradeRequestStatusPending      SelfUpgradeRequestStatus = "PENDING"
+	SelfUpgradeRequestStatusApproved     SelfUpgradeRequestStatus = "APPROVED"
+	SelfUpgradeRequestStatusDenied       SelfUpgradeRequestStatus = "DENIED"
+	SelfUpgradeRequestStatusUpdateFailed SelfUpgradeRequestStatus = "UPDATE_FAILED"
+	SelfUpgradeRequestStatusVerifyFailed SelfUpgradeRequestStatus = "VERIFY_FAILED"
+)
+
+// Values returns all known values for SelfUpgradeRequestStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SelfUpgradeRequestStatus) Values() []SelfUpgradeRequestStatus {
+	return []SelfUpgradeRequestStatus{
+		"PENDING",
+		"APPROVED",
+		"DENIED",
+		"UPDATE_FAILED",
+		"VERIFY_FAILED",
+	}
+}
+
+type SelfUpgradeStatus string
+
+// Enum values for SelfUpgradeStatus
+const (
+	SelfUpgradeStatusAutoApproval  SelfUpgradeStatus = "AUTO_APPROVAL"
+	SelfUpgradeStatusAdminApproval SelfUpgradeStatus = "ADMIN_APPROVAL"
+)
+
+// Values returns all known values for SelfUpgradeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SelfUpgradeStatus) Values() []SelfUpgradeStatus {
+	return []SelfUpgradeStatus{
+		"AUTO_APPROVAL",
+		"ADMIN_APPROVAL",
+	}
+}
+
 type ServiceType string
 
 // Enum values for ServiceType

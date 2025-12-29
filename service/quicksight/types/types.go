@@ -3170,6 +3170,9 @@ type Capabilities struct {
 	// The ability to perform research-related actions.
 	Research CapabilityState
 
+	// The ability to enable users to upgrade their user role.
+	SelfUpgradeUserRole CapabilityState
+
 	// The ability to share analyses.
 	ShareAnalyses CapabilityState
 
@@ -16244,6 +16247,53 @@ type SelectedSheetsFilterScopeConfiguration struct {
 	// The sheet ID and visual IDs of the sheet and visuals that the filter is applied
 	// to.
 	SheetVisualScopingConfigurations []SheetVisualScopingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The self-upgrade configuration for the Quick Suite account.
+type SelfUpgradeConfiguration struct {
+
+	// Status set for the self-upgrade configuration for the Quick Suite account. It
+	// can contain the following values:
+	//
+	//   - AUTO_APPROVAL : All the self-upgrade requests will be auto approved.
+	//
+	//   - ADMIN_APPROVAL : All the self-upgrade requests will require admin approval.
+	SelfUpgradeStatus SelfUpgradeStatus
+
+	noSmithyDocumentSerde
+}
+
+// Details of a self-upgrade request.
+type SelfUpgradeRequestDetail struct {
+
+	// The time when the self-upgrade request was created.
+	CreationTime int64
+
+	// The time of the last update attempt for the self-upgrade request.
+	LastUpdateAttemptTime int64
+
+	// The reason for the last update failure, if applicable.
+	LastUpdateFailureReason *string
+
+	// The original role of the user before the upgrade.
+	OriginalRole UserRole
+
+	// An optional note explaining the reason for the self-upgrade request.
+	RequestNote *string
+
+	// The status of the self-upgrade request.
+	RequestStatus SelfUpgradeRequestStatus
+
+	// The role that the user is requesting to upgrade to.
+	RequestedRole UserRole
+
+	// The ID of the self-upgrade request.
+	UpgradeRequestId *string
+
+	// The username of the user who initiated the self-upgrade request.
+	UserName *string
 
 	noSmithyDocumentSerde
 }
