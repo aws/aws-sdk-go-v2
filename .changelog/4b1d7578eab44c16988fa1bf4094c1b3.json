@@ -1,8 +1,0 @@
-{
-    "id": "4b1d7578-eab4-4c16-988f-a1bf4094c1b3",
-    "type": "feature",
-    "description": "Changes for Contact for Global Search",
-    "modules": [
-        "service/connect"
-    ]
-}

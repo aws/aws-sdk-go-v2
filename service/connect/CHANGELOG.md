@@ -1,3 +1,7 @@
+# v1.153.0 (2025-12-29)
+
+* **Feature**: Changes for Contact for Global Search
+
 # v1.152.0 (2025-12-19)
 
 * **Feature**: Adding support for Custom Metrics and Pre-Defined Attributes to GetCurrentMetricData API.
