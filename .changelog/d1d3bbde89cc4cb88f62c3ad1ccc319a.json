@@ -1,8 +1,0 @@
-{
-    "id": "d1d3bbde-89cc-4cb8-8f62-c3ad1ccc319a",
-    "type": "feature",
-    "description": "Adds support for searching global contacts using the ActiveRegions filter, and pagination support for ListSecurityProfileFlowModules and ListEntitySecurityProfiles.",
-    "modules": [
-        "service/connect"
-    ]
-}

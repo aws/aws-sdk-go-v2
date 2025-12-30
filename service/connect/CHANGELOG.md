@@ -1,3 +1,7 @@
+# v1.154.0 (2025-12-30)
+
+* **Feature**: Adds support for searching global contacts using the ActiveRegions filter, and pagination support for ListSecurityProfileFlowModules and ListEntitySecurityProfiles.
+
 # v1.153.0 (2025-12-29)
 
 * **Feature**: Changes for Contact for Global Search

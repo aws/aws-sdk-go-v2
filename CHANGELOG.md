@@ -1,3 +1,11 @@
+# Release (2025-12-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.154.0](service/connect/CHANGELOG.md#v11540-2025-12-30)
+  * **Feature**: Adds support for searching global contacts using the ActiveRegions filter, and pagination support for ListSecurityProfileFlowModules and ListEntitySecurityProfiles.
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.29.0](service/kafkaconnect/CHANGELOG.md#v1290-2025-12-30)
+  * **Feature**: This change sets the KafkaConnect GovCloud FIPS and FIPS DualStack endpoints to use kafkaconnect instead of kafkaconnect-fips as the service name. This is done to match the Kafka endpoints.
+
 # Release (2025-12-29)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "c3d111d6-8991-4b7e-bee8-e56d38e30908",
-    "type": "feature",
-    "description": "This change sets the KafkaConnect GovCloud FIPS and FIPS DualStack endpoints to use kafkaconnect instead of kafkaconnect-fips as the service name. This is done to match the Kafka endpoints.",
-    "modules": [
-        "service/kafkaconnect"
-    ]
-}
