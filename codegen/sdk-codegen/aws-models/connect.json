@@ -257,6 +257,12 @@
                 }
             }
         },
+        "com.amazonaws.connect#ActiveRegionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#RegionName"
+            }
+        },
         "com.amazonaws.connect#AdditionalEmailRecipients": {
             "type": "structure",
             "members": {
@@ -9081,6 +9087,12 @@
                 },
                 "RoutingCriteria": {
                     "target": "com.amazonaws.connect#RoutingCriteria"
+                },
+                "GlobalResiliencyMetadata": {
+                    "target": "com.amazonaws.connect#GlobalResiliencyMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional routing information for contacts created in ACGR instances.</p>"
+                    }
                 }
             },
             "traits": {
@@ -31313,6 +31325,12 @@
                     "method": "POST",
                     "uri": "/entity-security-profiles-summary/{InstanceId}",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "SecurityProfiles",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -33978,6 +33996,12 @@
                     "method": "GET",
                     "uri": "/security-profiles-flow-modules/{InstanceId}/{SecurityProfileId}",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AllowedFlowModules",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -44545,6 +44569,12 @@
                     "target": "com.amazonaws.connect#SearchableSegmentAttributes",
                     "traits": {
                         "smithy.api#documentation": "<p>The search criteria based on searchable segment attributes of a contact.</p>"
+                    }
+                },
+                "ActiveRegions": {
+                    "target": "com.amazonaws.connect#ActiveRegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of active regions for contacts in ACGR instances.</p>"
                     }
                 }
             },
