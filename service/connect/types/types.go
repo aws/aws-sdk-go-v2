@@ -2036,6 +2036,9 @@ type ContactSearchSummary struct {
 	// The timestamp when the customer endpoint disconnected from Amazon Connect.
 	DisconnectTimestamp *time.Time
 
+	// Additional routing information for contacts created in ACGR instances.
+	GlobalResiliencyMetadata *GlobalResiliencyMetadata
+
 	// The identifier of the contact summary.
 	Id *string
 
@@ -8845,6 +8848,9 @@ type SearchContactsTimestampCondition struct {
 
 // A structure of search criteria to be used to return contacts.
 type SearchCriteria struct {
+
+	// The list of active regions for contacts in ACGR instances.
+	ActiveRegions []string
 
 	// Additional TimeRange used to filter contacts.
 	AdditionalTimeRange *SearchContactsAdditionalTimeRange

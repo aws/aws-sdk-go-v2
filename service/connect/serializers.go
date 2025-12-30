@@ -33980,6 +33980,17 @@ func awsRestjson1_serializeOpDocumentUpdateWorkspaceVisibilityInput(v *UpdateWor
 	return nil
 }
 
+func awsRestjson1_serializeDocumentActiveRegionList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAgentConfig(v *types.AgentConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -40027,6 +40038,13 @@ func awsRestjson1_serializeDocumentSearchContactsTimestampCondition(v *types.Sea
 func awsRestjson1_serializeDocumentSearchCriteria(v *types.SearchCriteria, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ActiveRegions != nil {
+		ok := object.Key("ActiveRegions")
+		if err := awsRestjson1_serializeDocumentActiveRegionList(v.ActiveRegions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AdditionalTimeRange != nil {
 		ok := object.Key("AdditionalTimeRange")

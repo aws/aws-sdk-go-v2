@@ -58842,6 +58842,11 @@ func awsRestjson1_deserializeDocumentContactSearchSummary(v **types.ContactSearc
 				}
 			}
 
+		case "GlobalResiliencyMetadata":
+			if err := awsRestjson1_deserializeDocumentGlobalResiliencyMetadata(&sv.GlobalResiliencyMetadata, value); err != nil {
+				return err
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)

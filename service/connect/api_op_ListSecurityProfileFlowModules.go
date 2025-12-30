@@ -175,6 +175,103 @@ func (c *Client) addOperationListSecurityProfileFlowModulesMiddlewares(stack *mi
 	return nil
 }
 
+// ListSecurityProfileFlowModulesPaginatorOptions is the paginator options for
+// ListSecurityProfileFlowModules
+type ListSecurityProfileFlowModulesPaginatorOptions struct {
+	//  The maximum number of results to return per page. The default MaxResult size
+	// is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSecurityProfileFlowModulesPaginator is a paginator for
+// ListSecurityProfileFlowModules
+type ListSecurityProfileFlowModulesPaginator struct {
+	options   ListSecurityProfileFlowModulesPaginatorOptions
+	client    ListSecurityProfileFlowModulesAPIClient
+	params    *ListSecurityProfileFlowModulesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSecurityProfileFlowModulesPaginator returns a new
+// ListSecurityProfileFlowModulesPaginator
+func NewListSecurityProfileFlowModulesPaginator(client ListSecurityProfileFlowModulesAPIClient, params *ListSecurityProfileFlowModulesInput, optFns ...func(*ListSecurityProfileFlowModulesPaginatorOptions)) *ListSecurityProfileFlowModulesPaginator {
+	if params == nil {
+		params = &ListSecurityProfileFlowModulesInput{}
+	}
+
+	options := ListSecurityProfileFlowModulesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListSecurityProfileFlowModulesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSecurityProfileFlowModulesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListSecurityProfileFlowModules page.
+func (p *ListSecurityProfileFlowModulesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSecurityProfileFlowModulesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListSecurityProfileFlowModules(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListSecurityProfileFlowModulesAPIClient is a client that implements the
+// ListSecurityProfileFlowModules operation.
+type ListSecurityProfileFlowModulesAPIClient interface {
+	ListSecurityProfileFlowModules(context.Context, *ListSecurityProfileFlowModulesInput, ...func(*Options)) (*ListSecurityProfileFlowModulesOutput, error)
+}
+
+var _ ListSecurityProfileFlowModulesAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListSecurityProfileFlowModules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

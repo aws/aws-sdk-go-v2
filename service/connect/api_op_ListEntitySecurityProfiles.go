@@ -173,6 +173,103 @@ func (c *Client) addOperationListEntitySecurityProfilesMiddlewares(stack *middle
 	return nil
 }
 
+// ListEntitySecurityProfilesPaginatorOptions is the paginator options for
+// ListEntitySecurityProfiles
+type ListEntitySecurityProfilesPaginatorOptions struct {
+	//  The maximum number of results to return per page. The default MaxResult size
+	// is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEntitySecurityProfilesPaginator is a paginator for
+// ListEntitySecurityProfiles
+type ListEntitySecurityProfilesPaginator struct {
+	options   ListEntitySecurityProfilesPaginatorOptions
+	client    ListEntitySecurityProfilesAPIClient
+	params    *ListEntitySecurityProfilesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEntitySecurityProfilesPaginator returns a new
+// ListEntitySecurityProfilesPaginator
+func NewListEntitySecurityProfilesPaginator(client ListEntitySecurityProfilesAPIClient, params *ListEntitySecurityProfilesInput, optFns ...func(*ListEntitySecurityProfilesPaginatorOptions)) *ListEntitySecurityProfilesPaginator {
+	if params == nil {
+		params = &ListEntitySecurityProfilesInput{}
+	}
+
+	options := ListEntitySecurityProfilesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListEntitySecurityProfilesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEntitySecurityProfilesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListEntitySecurityProfiles page.
+func (p *ListEntitySecurityProfilesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEntitySecurityProfilesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListEntitySecurityProfiles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListEntitySecurityProfilesAPIClient is a client that implements the
+// ListEntitySecurityProfiles operation.
+type ListEntitySecurityProfilesAPIClient interface {
+	ListEntitySecurityProfiles(context.Context, *ListEntitySecurityProfilesInput, ...func(*Options)) (*ListEntitySecurityProfilesOutput, error)
+}
+
+var _ ListEntitySecurityProfilesAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListEntitySecurityProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

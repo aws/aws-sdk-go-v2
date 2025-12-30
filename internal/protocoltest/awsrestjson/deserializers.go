@@ -13728,15 +13728,15 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	}
 
 	{
-		headerValue := msg.Headers.Get("timestampHeader")
+		headerValue := msg.Headers.Get("shortHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.TimestampValue)
+			hv, ok := headerValue.(*eventstream.Int16Value)
 			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "timestampHeader", headerValue)
+				return fmt.Errorf("unexpected event header %s with type %T:", "shortHeader", headerValue)
 			}
 
-			ihv := hv.Get().(time.Time)
-			v.TimestampHeader = ptr.Time(ihv)
+			ihv := hv.Get().(int16)
+			v.ShortHeader = ptr.Int16(ihv)
 		}
 	}
 
@@ -13754,15 +13754,28 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	}
 
 	{
-		headerValue := msg.Headers.Get("shortHeader")
+		headerValue := msg.Headers.Get("stringHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.Int16Value)
+			hv, ok := headerValue.(*eventstream.StringValue)
 			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "shortHeader", headerValue)
+				return fmt.Errorf("unexpected event header %s with type %T:", "stringHeader", headerValue)
 			}
 
-			ihv := hv.Get().(int16)
-			v.ShortHeader = ptr.Int16(ihv)
+			ihv := hv.Get().(string)
+			v.StringHeader = ptr.String(ihv)
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("timestampHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(*eventstream.TimestampValue)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "timestampHeader", headerValue)
+			}
+
+			ihv := hv.Get().(time.Time)
+			v.TimestampHeader = ptr.Time(ihv)
 		}
 	}
 
@@ -13776,19 +13789,6 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 
 			ihv := hv.Get().([]byte)
 			v.BlobHeader = ihv
-		}
-	}
-
-	{
-		headerValue := msg.Headers.Get("stringHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.StringValue)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "stringHeader", headerValue)
-			}
-
-			ihv := hv.Get().(string)
-			v.StringHeader = ptr.String(ihv)
 		}
 	}
 
