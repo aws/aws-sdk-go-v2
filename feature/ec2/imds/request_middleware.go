@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/url"
 	"path"
@@ -176,7 +177,7 @@ func (m *deserializeResponse) HandleDeserialize(
 
 	// read the full body so that any operation timeouts cleanup will not race
 	// the body being read.
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return out, metadata, fmt.Errorf("read response body failed, %w", err)
 	}

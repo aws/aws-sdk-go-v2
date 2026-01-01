@@ -911,7 +911,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 								return
 							}
 
-							actualPayload, err := ioutil.ReadAll(stream)
+							actualPayload, err := io.ReadAll(stream)
 							if err == nil && c.expectReadErr {
 								t.Fatalf("expected read error, got none")
 							}
@@ -1174,7 +1174,7 @@ func TestComputeInputPayloadChecksumRetry(t *testing.T) {
 					}
 
 					stream := request.GetStream()
-					actualPayload, err := ioutil.ReadAll(stream)
+					actualPayload, err := io.ReadAll(stream)
 					if err != nil {
 						t.Fatalf("expected no read error, got %v", err)
 					}

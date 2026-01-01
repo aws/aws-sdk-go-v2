@@ -4,7 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"time"
 
@@ -111,7 +111,7 @@ func main() {
 		panic(fmt.Sprintf("failed get object request: %v", err))
 	}
 
-	_, err = ioutil.ReadAll(getObjectOutput.Body)
+	_, err = io.ReadAll(getObjectOutput.Body)
 	if err != nil {
 		panic(fmt.Sprintf("failed to read object body: %v", err))
 	}

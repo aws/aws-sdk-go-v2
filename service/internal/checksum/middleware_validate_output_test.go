@@ -7,6 +7,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -239,7 +240,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 
 			response := out.RawResponse.(*smithyhttp.Response)
 
-			actualPayload, err := ioutil.ReadAll(response.Body)
+			actualPayload, err := io.ReadAll(response.Body)
 			if err == nil && len(c.expectReadErr) != 0 {
 				t.Fatalf("expected read error: %v, got none", c.expectReadErr)
 			}
