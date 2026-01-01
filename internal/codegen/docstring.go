@@ -63,7 +63,7 @@ func commentify(doc string) string {
 
 	lines := strings.Split(doc, "\n")
 	out := make([]string, 0, len(lines))
-	for i := 0; i < len(lines); i++ {
+	for i := range lines {
 		line := lines[i]
 
 		if i > 0 && line == "" && lines[i-1] == "" {
@@ -449,16 +449,6 @@ type trimSpaceTokenHandler struct {
 	strBuilder *strings.Builder
 }
 
-func newTrimSpaceTokenHandler(w stringWriter) *trimSpaceTokenHandler {
-	strBuilder := &strings.Builder{}
-	return &trimSpaceTokenHandler{
-		origWriter: w,
-		strBuilder: strBuilder,
-		baseTokenHandler: baseTokenHandler{
-			w: strBuilder,
-		},
-	}
-}
 func (e *trimSpaceTokenHandler) OnEndTagToken(token xml.Token, blockClosing bool) {
 	if !blockClosing {
 		return
