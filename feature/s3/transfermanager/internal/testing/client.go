@@ -115,7 +115,7 @@ func (c *TransferManagerLoggingClient) PutObject(ctx context.Context, params *s3
 	defer c.m.Unlock()
 
 	if c.ConsumeBody {
-		io.Copy(ioutil.Discard, params.Body)
+		io.Copy(io.Discard, params.Body)
 	}
 
 	c.traceOperation("PutObject", params)
@@ -139,7 +139,7 @@ func (c *TransferManagerLoggingClient) UploadPart(ctx context.Context, params *s
 	defer c.m.Unlock()
 
 	if c.ConsumeBody {
-		io.Copy(ioutil.Discard, params.Body)
+		io.Copy(io.Discard, params.Body)
 	}
 
 	c.traceOperation("UploadPart", params)
