@@ -28,17 +28,17 @@ func getHost(r *http.Request) string {
 // If Host is an IPv6 literal with a port number, Hostname returns the
 // IPv6 literal without the square brackets. IPv6 literals may include
 // a zone identifier.
-//
-// Copied from the Go 1.8 standard library (net/url)
 func stripPort(hostport string) string {
-	colon := strings.IndexByte(hostport, ':')
-	if colon == -1 {
+	beforeColon, _, found := strings.Cut(hostport, ":")
+	if !found {
 		return hostport
 	}
-	if i := strings.IndexByte(hostport, ']'); i != -1 {
-		return strings.TrimPrefix(hostport[:i], "[")
+
+	if before, _, found := strings.Cut(hostport, "]"); found {
+		return strings.TrimPrefix(before, "[")
 	}
-	return hostport[:colon]
+
+	return beforeColon
 }
 
 // Port returns the port part of u.Host, without the leading colon.
