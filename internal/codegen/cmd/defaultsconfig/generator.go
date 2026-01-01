@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path"
 )
@@ -50,7 +49,7 @@ func (g *generationContext) AddSDKImport(pkg, alias string) (s string) {
 }
 
 func generateConfigPackage(jsonFile, outputFile, packageName, resolverName string) (err error) {
-	config, err := ioutil.ReadFile(jsonFile)
+	config, err := os.ReadFile(jsonFile)
 	if err != nil {
 		return fmt.Errorf("failed to read configuration file: %w", err)
 	}
