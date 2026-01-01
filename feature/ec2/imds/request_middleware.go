@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/url"
 	"path"
@@ -180,7 +181,7 @@ func (m *deserializeResponse) HandleDeserialize(
 	if err != nil {
 		return out, metadata, fmt.Errorf("read response body failed, %w", err)
 	}
-	resp.Body = ioutil.NopCloser(bytes.NewReader(body))
+	resp.Body = io.NopCloser(bytes.NewReader(body))
 
 	// Anything that's not 200 |< 300 is error
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
