@@ -24,11 +24,6 @@ func TestV4(t *testing.T) {
 		t.Fatalf("Did not expect error, got %v", err)
 	}
 
-	_, ok := result[0].(AuthenticationScheme)
-	if !ok {
-		t.Fatalf("Did not get expected AuthenticationScheme. %v", result[0])
-	}
-
 	v4Scheme, ok := result[0].(*AuthenticationSchemeV4)
 	if !ok {
 		t.Fatalf("Did not get expected AuthenticationSchemeV4. %v", result[0])
