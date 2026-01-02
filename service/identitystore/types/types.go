@@ -320,6 +320,22 @@ type Photo struct {
 	noSmithyDocumentSerde
 }
 
+// The role associated with the user.
+type Role struct {
+
+	// A Boolean value representing whether this is the primary role for the
+	// associated resource.
+	Primary bool
+
+	// A string representing the type of role. For example, "Work."
+	Type *string
+
+	// A string containing a role name. For example, "Researcher."
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // An entity attribute that's unique to a specific entity.
 type UniqueAttribute struct {
 
@@ -403,6 +419,9 @@ type User struct {
 
 	// A string containing a URL that might be associated with the user.
 	ProfileUrl *string
+
+	// A list of Role objects containing roles associated with the user.
+	Roles []Role
 
 	// A string containing the time zone of the user.
 	Timezone *string

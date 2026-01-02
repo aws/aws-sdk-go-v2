@@ -1,0 +1,8 @@
+{
+    "id": "6b861894-0c59-470f-a703-22016b31d20a",
+    "type": "feature",
+    "description": "Added support for publishing detailed metrics to CloudWatch for operational monitoring of collaborations, including query performance and resource utilization.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

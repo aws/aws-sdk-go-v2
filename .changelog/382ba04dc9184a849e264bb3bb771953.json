@@ -1,0 +1,8 @@
+{
+    "id": "382ba04d-c918-4a84-9e26-4bb3bb771953",
+    "type": "feature",
+    "description": "This change introduces \"Roles\" attribute for User entities supported by AWS Identity Store SDK.",
+    "modules": [
+        "service/identitystore"
+    ]
+}
