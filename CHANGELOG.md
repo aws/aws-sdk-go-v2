@@ -1,3 +1,11 @@
+# Release (2026-01-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.40.0](service/cleanrooms/CHANGELOG.md#v1400-2026-01-02)
+  * **Feature**: Added support for publishing detailed metrics to CloudWatch for operational monitoring of collaborations, including query performance and resource utilization.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.36.0](service/identitystore/CHANGELOG.md#v1360-2026-01-02)
+  * **Feature**: This change introduces "Roles" attribute for User entities supported by AWS Identity Store SDK.
+
 # Release (2025-12-30)
 
 ## Module Highlights

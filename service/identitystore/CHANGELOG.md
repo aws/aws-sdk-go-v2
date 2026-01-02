@@ -1,3 +1,7 @@
+# v1.36.0 (2026-01-02)
+
+* **Feature**: This change introduces "Roles" attribute for User entities supported by AWS Identity Store SDK.
+
 # v1.35.2 (2025-12-19)
 
 * No change notes available for this release.
