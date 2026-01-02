@@ -793,7 +793,7 @@ func encodeNull() types.AttributeValue {
 // encoderFieldByIndex finds the field with the provided nested index
 func encoderFieldByIndex(v reflect.Value, index []int) (reflect.Value, bool) {
 	for i, x := range index {
-		if i > 0 && v.Kind() == reflect.Ptr && v.Type().Elem().Kind() == reflect.Struct {
+		if i > 0 && v.Kind() == reflect.Pointer && v.Type().Elem().Kind() == reflect.Struct {
 			if v.IsNil() {
 				return reflect.Value{}, false
 			}
@@ -806,8 +806,8 @@ func encoderFieldByIndex(v reflect.Value, index []int) (reflect.Value, bool) {
 
 func valueElem(v reflect.Value) reflect.Value {
 	switch v.Kind() {
-	case reflect.Interface, reflect.Ptr:
-		for v.Kind() == reflect.Interface || v.Kind() == reflect.Ptr {
+	case reflect.Interface, reflect.Pointer:
+		for v.Kind() == reflect.Interface || v.Kind() == reflect.Pointer {
 			v = v.Elem()
 		}
 	}
@@ -833,7 +833,7 @@ func isZeroValue(v reflect.Value) bool {
 		return v.Uint() == 0
 	case reflect.Float32, reflect.Float64:
 		return v.Float() == 0
-	case reflect.Interface, reflect.Ptr:
+	case reflect.Interface, reflect.Pointer:
 		return v.IsNil()
 	}
 	return false
@@ -845,14 +845,14 @@ func isNullableZeroValue(v reflect.Value) bool {
 		return true
 	case reflect.Map, reflect.Slice:
 		return v.IsNil()
-	case reflect.Interface, reflect.Ptr:
+	case reflect.Interface, reflect.Pointer:
 		return v.IsNil()
 	}
 	return false
 }
 
 func (e *Encoder) tryMarshaler(v reflect.Value) (types.AttributeValue, error) {
-	if v.Kind() != reflect.Ptr && v.Type().Name() != "" && v.CanAddr() {
+	if v.Kind() != reflect.Pointer && v.Type().Name() != "" && v.CanAddr() {
 		v = v.Addr()
 	}
 

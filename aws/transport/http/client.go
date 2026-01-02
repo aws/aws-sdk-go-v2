@@ -235,7 +235,7 @@ func shallowCopyStruct(src interface{}) interface{} {
 	srcValType := srcVal.Type()
 
 	var returnAsPtr bool
-	if srcValType.Kind() == reflect.Ptr {
+	if srcValType.Kind() == reflect.Pointer {
 		srcVal = srcVal.Elem()
 		srcValType = srcValType.Elem()
 		returnAsPtr = true

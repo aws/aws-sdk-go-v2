@@ -413,13 +413,13 @@ func assertConvertTest(t *testing.T, actual, expected interface{}, err, expected
 
 func ptrToValue(in interface{}) interface{} {
 	v := reflect.ValueOf(in)
-	if v.Kind() == reflect.Ptr {
+	if v.Kind() == reflect.Pointer {
 		v = v.Elem()
 	}
 	if !v.IsValid() {
 		return nil
 	}
-	if v.Kind() == reflect.Ptr {
+	if v.Kind() == reflect.Pointer {
 		return ptrToValue(v.Interface())
 	}
 	return v.Interface()

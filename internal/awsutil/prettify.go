@@ -19,7 +19,7 @@ func Prettify(i interface{}) string {
 // representation of the value.
 func prettify(v reflect.Value, indent int, buf *bytes.Buffer) {
 	isPtr := false
-	for v.Kind() == reflect.Ptr {
+	for v.Kind() == reflect.Pointer {
 		isPtr = true
 		v = v.Elem()
 	}
@@ -47,7 +47,7 @@ func prettify(v reflect.Value, indent int, buf *bytes.Buffer) {
 			if name[0:1] == strings.ToLower(name[0:1]) {
 				continue // ignore unexported fields
 			}
-			if (f.Kind() == reflect.Ptr || f.Kind() == reflect.Slice || f.Kind() == reflect.Map) && f.IsNil() {
+			if (f.Kind() == reflect.Pointer || f.Kind() == reflect.Slice || f.Kind() == reflect.Map) && f.IsNil() {
 				continue // ignore unset fields
 			}
 			names = append(names, name)
@@ -114,7 +114,7 @@ func prettify(v reflect.Value, indent int, buf *bytes.Buffer) {
 			v = v.Elem()
 		}
 
-		if v.Kind() == reflect.Ptr || v.Kind() == reflect.Struct || v.Kind() == reflect.Map || v.Kind() == reflect.Slice {
+		if v.Kind() == reflect.Pointer || v.Kind() == reflect.Struct || v.Kind() == reflect.Map || v.Kind() == reflect.Slice {
 			prettify(v, indent, buf)
 			return
 		}

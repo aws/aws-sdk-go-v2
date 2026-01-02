@@ -221,13 +221,13 @@ func IsCredentialsProvider(provider, target CredentialsProvider) bool {
 	}
 
 	targetType := reflect.TypeOf(target)
-	if targetType.Kind() != reflect.Ptr {
-		targetType = reflect.PtrTo(targetType)
+	if targetType.Kind() != reflect.Pointer {
+		targetType = reflect.PointerTo(targetType)
 	}
 
 	providerType := reflect.TypeOf(provider)
-	if providerType.Kind() != reflect.Ptr {
-		providerType = reflect.PtrTo(providerType)
+	if providerType.Kind() != reflect.Pointer {
+		providerType = reflect.PointerTo(providerType)
 	}
 
 	return targetType.AssignableTo(providerType)
