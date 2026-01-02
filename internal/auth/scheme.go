@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"fmt"
 
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -69,7 +68,7 @@ func (a *AuthenticationSchemeNone) isAuthenticationScheme() {}
 type NoAuthenticationSchemesFoundError struct{}
 
 func (e *NoAuthenticationSchemesFoundError) Error() string {
-	return fmt.Sprint("No authentication schemes specified.")
+	return "No authentication schemes specified."
 }
 
 // UnSupportedAuthenticationSchemeSpecifiedError is used in
@@ -80,7 +79,7 @@ type UnSupportedAuthenticationSchemeSpecifiedError struct {
 }
 
 func (e *UnSupportedAuthenticationSchemeSpecifiedError) Error() string {
-	return fmt.Sprint("Unsupported authentication scheme specified.")
+	return "Unsupported authentication scheme specified."
 }
 
 // GetAuthenticationSchemes extracts the relevant authentication scheme data

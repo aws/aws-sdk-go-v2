@@ -158,22 +158,6 @@ func getBaseEndpoint(ctx context.Context, configs configs) (value string, found 
 	return
 }
 
-type servicesObjectProvider interface {
-	getServicesObject(ctx context.Context) (map[string]map[string]string, bool, error)
-}
-
-func getServicesObject(ctx context.Context, configs configs) (value map[string]map[string]string, found bool, err error) {
-	for _, cfg := range configs {
-		if p, ok := cfg.(servicesObjectProvider); ok {
-			value, found, err = p.getServicesObject(ctx)
-			if err != nil || found {
-				break
-			}
-		}
-	}
-	return
-}
-
 // appIDProvider provides access to the sdk app ID value
 type appIDProvider interface {
 	getAppID(ctx context.Context) (string, bool, error)
