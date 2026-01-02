@@ -3,13 +3,14 @@ package transfermanager
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"reflect"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
 // all tests use a single package-level instance of this spec
@@ -377,7 +378,7 @@ func TestDefinition_UploadRequest(t *testing.T) {
 		"SSEKMSKeyId": "SSEKMSKeyID",
 	}
 
-	rtype := reflect.TypeOf(UploadObjectInput{})
+	rtype := reflect.TypeFor[UploadObjectInput]()
 
 	for _, field := range mappingReference.Definition.UploadRequest.PutObjectRequest {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -397,7 +398,7 @@ func TestDefinition_UploadResponse(t *testing.T) {
 		"SSEKMSKeyId": "SSEKMSKeyID",
 	}
 
-	rtype := reflect.TypeOf(UploadObjectOutput{})
+	rtype := reflect.TypeFor[UploadObjectOutput]()
 
 	for _, field := range mappingReference.Definition.UploadResponse.PutObjectResponse {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -416,7 +417,7 @@ func TestDefinition_DownloadRequest(t *testing.T) {
 		"VersionId": "VersionID",
 	}
 
-	rtype := reflect.TypeOf(DownloadObjectInput{})
+	rtype := reflect.TypeFor[DownloadObjectInput]()
 
 	for _, field := range mappingReference.Definition.DownloadRequest.GetObjectRequest {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -436,7 +437,7 @@ func TestDefinition_DownloadResponse(t *testing.T) {
 		"SSEKMSKeyId": "SSEKMSKeyID",
 	}
 
-	rtype := reflect.TypeOf(DownloadObjectOutput{})
+	rtype := reflect.TypeFor[DownloadObjectOutput]()
 
 	for _, field := range mappingReference.Definition.DownloadResponse.GetObjectResponse {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -455,7 +456,7 @@ func TestDefinition_GetRequest(t *testing.T) {
 		"VersionId": "VersionID",
 	}
 
-	rtype := reflect.TypeOf(GetObjectInput{})
+	rtype := reflect.TypeFor[GetObjectInput]()
 
 	for _, field := range mappingReference.Definition.DownloadRequest.GetObjectRequest {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -475,7 +476,7 @@ func TestDefinition_GetResponse(t *testing.T) {
 		"SSEKMSKeyId": "SSEKMSKeyID",
 	}
 
-	rtype := reflect.TypeOf(GetObjectOutput{})
+	rtype := reflect.TypeFor[GetObjectOutput]()
 
 	for _, field := range mappingReference.Definition.DownloadResponse.GetObjectResponse {
 		if mapped, ok := legacyMappings[field]; ok {

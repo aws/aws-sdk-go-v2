@@ -296,10 +296,11 @@ func (d *Decoder) Decode(av types.AttributeValue, out interface{}, opts ...func(
 	return d.decode(av, v, tag{})
 }
 
-var stringInterfaceMapType = reflect.TypeOf(map[string]interface{}(nil))
-var byteSliceType = reflect.TypeOf([]byte(nil))
-var byteSliceSliceType = reflect.TypeOf([][]byte(nil))
-var timeType = reflect.TypeOf(time.Time{})
+var stringInterfaceMapType = reflect.TypeFor[map[string]any]()
+
+var byteSliceType = reflect.TypeFor[[]byte]()
+var byteSliceSliceType = reflect.TypeFor[[][]byte]()
+var timeType = reflect.TypeFor[time.Time]()
 
 func (d *Decoder) decode(av types.AttributeValue, v reflect.Value, fieldTag tag) error {
 	var u Unmarshaler
@@ -713,8 +714,7 @@ func (d *Decoder) decodeMap(avMap map[string]types.AttributeValue, v reflect.Val
 	return nil
 }
 
-var numberType = reflect.TypeOf(Number(""))
-var textUnmarshalerType = reflect.TypeOf((*encoding.TextUnmarshaler)(nil)).Elem()
+var textUnmarshalerType = reflect.TypeFor[*encoding.TextUnmarshaler]().Elem()
 
 func (d *Decoder) getMapKeyDecoder(keyType reflect.Type) (func(string, reflect.Value, tag) error, error) {
 	// Test the key type to determine if it implements the TextUnmarshaler interface.

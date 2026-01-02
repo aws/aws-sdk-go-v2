@@ -695,7 +695,7 @@ func TestEncoderFieldByIndex(t *testing.T) {
 
 	// nil embedded struct
 	outer := Outer{}
-	outerFields := unionStructFields(reflect.TypeOf(outer), structFieldOptions{})
+	outerFields := unionStructFields(reflect.TypeFor[Outer](), structFieldOptions{})
 	innerField, _ := outerFields.FieldByName("Inner")
 
 	_, found := encoderFieldByIndex(reflect.ValueOf(&outer).Elem(), innerField.Index)
@@ -705,7 +705,7 @@ func TestEncoderFieldByIndex(t *testing.T) {
 
 	// non-nil embedded struct
 	outer = Outer{Middle: &Middle{Inner: 3}}
-	outerFields = unionStructFields(reflect.TypeOf(outer), structFieldOptions{})
+	outerFields = unionStructFields(reflect.TypeFor[Outer](), structFieldOptions{})
 	innerField, _ = outerFields.FieldByName("Inner")
 
 	f, found := encoderFieldByIndex(reflect.ValueOf(&outer).Elem(), innerField.Index)
