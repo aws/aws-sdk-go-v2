@@ -188,8 +188,8 @@ func TestUnmarshal(t *testing.T) {
 			in:     &types.AttributeValueMemberN{Value: "512"},
 			actual: new(uint8),
 			err: &UnmarshalTypeError{
-				Value: fmt.Sprintf("number overflow, 512"),
-				Type:  reflect.TypeOf(uint8(0)),
+				Value: "number overflow, 512",
+				Type:  reflect.TypeFor[uint8](),
 			},
 		},
 		// -------
@@ -265,7 +265,7 @@ func TestUnmarshalError(t *testing.T) {
 			in:       nil,
 			actual:   int(0),
 			expected: nil,
-			err:      &InvalidUnmarshalError{Type: reflect.TypeOf(int(0))},
+			err:      &InvalidUnmarshalError{Type: reflect.TypeFor[int]()},
 		},
 	}
 
@@ -296,7 +296,7 @@ func TestUnmarshalListError(t *testing.T) {
 			in:       []types.AttributeValue{},
 			actual:   []interface{}{},
 			expected: nil,
-			err:      &InvalidUnmarshalError{Type: reflect.TypeOf([]interface{}{})},
+			err:      &InvalidUnmarshalError{Type: reflect.TypeFor[[]any]()},
 		},
 	}
 
@@ -327,7 +327,7 @@ func TestUnmarshalMapError(t *testing.T) {
 			in:       map[string]types.AttributeValue{},
 			actual:   map[string]interface{}{},
 			expected: nil,
-			err:      &InvalidUnmarshalError{Type: reflect.TypeOf(map[string]interface{}{})},
+			err:      &InvalidUnmarshalError{Type: reflect.TypeFor[map[string]any]()},
 		},
 		{
 			in: map[string]types.AttributeValue{
@@ -337,7 +337,7 @@ func TestUnmarshalMapError(t *testing.T) {
 			expected: nil,
 			err: &UnmarshalTypeError{
 				Value: `map key "BOOL"`,
-				Type:  reflect.TypeOf(int(0)),
+				Type:  reflect.TypeFor[int](),
 			},
 		},
 	}
@@ -713,7 +713,7 @@ func TestDecoderFieldByIndex(t *testing.T) {
 	)
 	var outer Outer
 
-	outerType := reflect.TypeOf(outer)
+	outerType := reflect.TypeFor[Outer]()
 	outerValue := reflect.ValueOf(&outer)
 	outerFields := unionStructFields(outerType, structFieldOptions{})
 	innerField, _ := outerFields.FieldByName("Inner")

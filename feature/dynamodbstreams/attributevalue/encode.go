@@ -49,7 +49,7 @@ func (e *UnixTime) UnmarshalDynamoDBStreamsAttributeValue(av types.AttributeValu
 	if !ok {
 		return &UnmarshalTypeError{
 			Value: fmt.Sprintf("%T", av),
-			Type:  reflect.TypeOf((*UnixTime)(nil)),
+			Type:  reflect.TypeFor[*UnixTime](),
 		}
 	}
 
