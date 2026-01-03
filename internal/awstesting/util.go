@@ -17,7 +17,7 @@ type ZeroReader struct{}
 
 // Read fills the provided byte slice with zeros returning the number of bytes written.
 func (r *ZeroReader) Read(b []byte) (int, error) {
-	for i := 0; i < len(b); i++ {
+	for i := range len(b) {
 		b[i] = 0
 	}
 	return len(b), nil
@@ -41,9 +41,7 @@ func (r *ReadCloser) Read(b []byte) (int, error) {
 	}
 
 	delta := len(b)
-	if delta > r.Size {
-		delta = r.Size
-	}
+	delta = min(delta, r.Size)
 	r.Size -= delta
 
 	for i := 0; i < delta; i++ {
@@ -183,10 +181,12 @@ func ParseSigV4Signature(header http.Header) *SigV4Signature {
 	// sigv4a : AccessKeyID/DateString/SigningName/SignatureID, region set on
 	//          header
 	var signingName, signingRegion string
-	if preamble == signaturePreambleSigV4 {
+	switch preamble {
+	case signaturePreambleSigV4:
 		signingName = credentialParts[3]
 		signingRegion = credentialParts[2]
-	} else if preamble == signaturePreambleSigV4A {
+	case signaturePreambleSigV4A:
+
 		signingName = credentialParts[2]
 		signingRegion = header.Get("X-Amz-Region-Set")
 	}
