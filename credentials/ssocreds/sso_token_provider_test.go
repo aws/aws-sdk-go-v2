@@ -6,7 +6,6 @@ package ssocreds
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -24,7 +23,7 @@ func TestSSOTokenProvider(t *testing.T) {
 	restoreTime := sdk.TestingUseReferenceTime(time.Date(2021, 12, 21, 12, 21, 1, 0, time.UTC))
 	defer restoreTime()
 
-	tempDir, err := ioutil.TempDir(os.TempDir(), "aws-sdk-go-v2-"+t.Name())
+	tempDir, err := os.MkdirTemp(os.TempDir(), "aws-sdk-go-v2-"+t.Name())
 	if err != nil {
 		t.Fatalf("failed to create temporary test directory, %v", err)
 	}
