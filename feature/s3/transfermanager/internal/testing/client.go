@@ -318,7 +318,7 @@ var RangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjec
 	bodyBytes := c.Data[start:fin]
 
 	out := &s3.GetObjectOutput{
-		Body:          ioutil.NopCloser(bytes.NewReader(bodyBytes)),
+		Body:          io.NopCloser(bytes.NewReader(bodyBytes)),
 		ContentLength: aws.Int64(int64(len(bodyBytes))),
 		ETag:          aws.String(etag),
 	}
@@ -361,7 +361,7 @@ var WrongRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.Get
 // NonRangeGetObjectFn mocks getobject behavior of s3 client to return the whole object
 var NonRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	return &s3.GetObjectOutput{
-		Body:          ioutil.NopCloser(bytes.NewReader(c.Data[:])),
+		Body:          io.NopCloser(bytes.NewReader(c.Data[:])),
 		ContentLength: aws.Int64(int64(len(c.Data))),
 	}, nil
 }
@@ -370,7 +370,7 @@ var NonRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetOb
 var ErrReaderFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	r := c.ErrReaders[c.index]
 	out := &s3.GetObjectOutput{
-		Body:          ioutil.NopCloser(&r),
+		Body:          io.NopCloser(&r),
 		ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", 0, r.Len-1, r.Len)),
 		ContentLength: aws.Int64(r.Len),
 		PartsCount:    aws.Int32(c.PartsCount),
@@ -382,7 +382,7 @@ var ErrReaderFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInpu
 // PartGetObjectFn mocks getobject behavior of s3 client to return object parts and total parts count
 var PartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	return &s3.GetObjectOutput{
-		Body:          ioutil.NopCloser(bytes.NewReader(c.Data)),
+		Body:          io.NopCloser(bytes.NewReader(c.Data)),
 		ContentLength: aws.Int64(int64(len(c.Data))),
 		PartsCount:    aws.Int32(c.PartsCount),
 		ETag:          aws.String(etag),
@@ -393,7 +393,7 @@ var PartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObject
 var ReaderPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	index := aws.ToInt32(params.PartNumber) - 1
 	return &s3.GetObjectOutput{
-		Body:          ioutil.NopCloser(bytes.NewReader(c.PartsData[index])),
+		Body:          io.NopCloser(bytes.NewReader(c.PartsData[index])),
 		ContentLength: aws.Int64(int64(len(c.PartsData[index]))),
 		PartsCount:    aws.Int32(c.PartsCount),
 	}, nil
@@ -402,7 +402,7 @@ var ReaderPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.Get
 // CompositePartGetObjectFn mocks getobject behavior of s3 client to return object with composite checksum type and checksum value
 var CompositePartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	return &s3.GetObjectOutput{
-		Body:              ioutil.NopCloser(bytes.NewReader(c.Data)),
+		Body:              io.NopCloser(bytes.NewReader(c.Data)),
 		ContentLength:     aws.Int64(int64(len(c.Data))),
 		PartsCount:        aws.Int32(c.PartsCount),
 		ETag:              aws.String(etag),
