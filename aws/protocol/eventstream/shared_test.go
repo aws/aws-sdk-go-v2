@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 	"testing"
 )
@@ -118,7 +119,7 @@ func readTests(root string) (map[string][]byte, error) {
 		}
 
 		filename := filepath.Join(root, item.Name())
-		data, err := ioutil.ReadFile(filename)
+		data, err := os.ReadFile(filename)
 		if err != nil {
 			return nil, fmt.Errorf("failed to read test_data file %q, %v", filename, err)
 		}
