@@ -248,8 +248,8 @@ func formatComment(cg *ast.CommentGroup) string {
 					flushli(&html, &currli)
 				}
 				currli = strings.TrimPrefix(line, "  -") + " "
-			} else if strings.HasPrefix(line, "  ") {
-				currli += strings.TrimPrefix(line, "  ") + " "
+			} else if after, found := strings.CutPrefix(line, "  "); found {
+				currli += after + " "
 			}
 		} else {
 			currp += line + " "
