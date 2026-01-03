@@ -40,9 +40,9 @@ func rcopy(dst, src reflect.Value, root bool) {
 	}
 
 	switch src.Kind() {
-	case reflect.Ptr:
+	case reflect.Pointer:
 		if _, ok := src.Interface().(io.Reader); ok {
-			if dst.Kind() == reflect.Ptr && dst.Elem().CanSet() {
+			if dst.Kind() == reflect.Pointer && dst.Elem().CanSet() {
 				dst.Elem().Set(src)
 			} else if dst.CanSet() {
 				dst.Set(src)
