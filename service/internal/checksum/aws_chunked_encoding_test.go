@@ -7,7 +7,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"strings"
 	"testing"
 	"testing/iotest"
@@ -149,7 +148,7 @@ func TestAWSChunkedEncoding(t *testing.T) {
 				t.Errorf("expect HTTP headers match\n%v", diff)
 			}
 
-			actualPayload, err := ioutil.ReadAll(c.reader)
+			actualPayload, err := io.ReadAll(c.reader)
 			if err == nil && len(c.expectErr) != 0 {
 				t.Fatalf("expect error %v, got none", c.expectErr)
 			}
@@ -213,7 +212,7 @@ func TestUnsignedAWSChunkReader(t *testing.T) {
 					io.LimitReader(byteReader('a'), defaultChunkLength*2),
 					defaultChunkLength,
 				)
-				actualPayload, err := ioutil.ReadAll(reader)
+				actualPayload, err := io.ReadAll(reader)
 				if err != nil {
 					t.Fatalf("failed to create unknown length reader test data, %v", err)
 				}
@@ -226,7 +225,7 @@ func TestUnsignedAWSChunkReader(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			reader := newUnsignedChunkReader(c.payload, int64(c.payload.Len()))
 
-			actualPayload, err := ioutil.ReadAll(reader)
+			actualPayload, err := io.ReadAll(reader)
 			if err == nil && len(c.expectErr) != 0 {
 				t.Fatalf("expect error %v, got none", c.expectErr)
 			}
@@ -365,7 +364,7 @@ func TestBufferedAWSChunkReader(t *testing.T) {
 					err = nil
 				}
 			} else {
-				actualPayload, err = ioutil.ReadAll(reader)
+				actualPayload, err = io.ReadAll(reader)
 			}
 
 			if err == nil && len(c.expectErr) != 0 {
@@ -444,7 +443,7 @@ func TestAwsChunkedTrailerReader(t *testing.T) {
 				t.Errorf("expect %v encoded length, got %v", e, a)
 			}
 
-			actualPayload, err := ioutil.ReadAll(c.reader)
+			actualPayload, err := io.ReadAll(c.reader)
 
 			// Asserts
 			if err == nil && len(c.expectErr) != 0 {

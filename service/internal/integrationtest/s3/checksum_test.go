@@ -7,6 +7,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -518,7 +519,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 						t.Fatalf("expect no error, got %v", err)
 					}
 
-					actualPayload, err := ioutil.ReadAll(getResult.Body)
+					actualPayload, err := io.ReadAll(getResult.Body)
 					if err == nil && len(c.expectReadErr) != 0 {
 						t.Fatalf("expected read error: %v, got none", c.expectReadErr)
 					}

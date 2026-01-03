@@ -6,7 +6,6 @@ import (
 	"context"
 	"encoding/hex"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"testing"
 
@@ -167,7 +166,7 @@ func TestDecompressGzipMiddleware(t *testing.T) {
 				t.Errorf("expect %v content-length, got %v", e, a)
 			}
 
-			actual, err := ioutil.ReadAll(resp.Body)
+			actual, err := io.ReadAll(resp.Body)
 			if e, a := c.ExpectBody, actual; !bytes.Equal(e, a) {
 				t.Errorf("expect body equal\nexpect:\n%s\nactual:\n%s",
 					hex.Dump(e), hex.Dump(a))

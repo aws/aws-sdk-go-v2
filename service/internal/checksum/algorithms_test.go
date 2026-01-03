@@ -106,7 +106,7 @@ func TestComputeChecksumReader(t *testing.T) {
 			}
 
 			// Validate read reads underlying stream's bytes as expected.
-			b, err := ioutil.ReadAll(r)
+			b, err := io.ReadAll(r)
 			if err == nil && len(c.ExpectReadErr) != 0 {
 				t.Fatalf("expect error %v, got none", c.ExpectReadErr)
 			}
@@ -227,7 +227,7 @@ func TestValidateChecksumReader(t *testing.T) {
 				t.Fatalf("expected non nil response, got nil")
 			}
 
-			actualResponse, err := ioutil.ReadAll(response)
+			actualResponse, err := io.ReadAll(response)
 			if err == nil && len(c.expectChecksumErr) != 0 {
 				t.Fatalf("expected error %v, got none", c.expectChecksumErr)
 			}

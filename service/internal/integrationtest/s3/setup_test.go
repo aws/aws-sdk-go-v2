@@ -10,7 +10,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"strings"
@@ -366,7 +365,7 @@ func testWriteToObject(t *testing.T, bucket string, testData writeToObjectTestDa
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	b, _ := ioutil.ReadAll(resp.Body)
+	b, _ := io.ReadAll(resp.Body)
 	if e, a := testData.ExpectBody, b; !bytes.EqualFold(e, a) {
 		t.Errorf("expect %s, got %s", e, a)
 	}
@@ -412,7 +411,7 @@ func testCopyObject(t *testing.T, sourceBucket, targetBucket string, opts func(o
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	b, _ := ioutil.ReadAll(resp.Body)
+	b, _ := io.ReadAll(resp.Body)
 	if e, a := []byte("hello world"), b; !bytes.EqualFold(e, a) {
 		t.Errorf("expect %s, got %s", e, a)
 	}
