@@ -1,3 +1,9 @@
+# Release (2026-01-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.22.0](service/cleanroomsml/CHANGELOG.md#v1220-2026-01-05)
+  * **Feature**: AWS Clean Rooms ML now supports advanced Spark configurations to optimize SQL performance when creating an MLInputChannel or an audience generation job.
+
 # Release (2026-01-02)
 
 ## Module Highlights
