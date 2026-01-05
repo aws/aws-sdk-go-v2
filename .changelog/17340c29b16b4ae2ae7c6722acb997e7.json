@@ -1,0 +1,8 @@
+{
+    "id": "17340c29-b16b-4ae2-ae7c-6722acb997e7",
+    "type": "feature",
+    "description": "AWS Clean Rooms ML now supports advanced Spark configurations to optimize SQL performance when creating an MLInputChannel or an audience generation job.",
+    "modules": [
+        "service/cleanroomsml"
+    ]
+}
