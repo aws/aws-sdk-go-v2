@@ -5,6 +5,10 @@ on:
     types:
       - opened
       - closed
+  pull_request:
+    types:
+      - opened
+      - closed
 
 permissions:
   contents: read
@@ -36,4 +40,32 @@ jobs:
             -X POST \
             -H 'Content-Type: application/json' \
             -d '{"type": "issues_closed", "id": "${{ github.event.issue.number }}", "title": "'"$ISSUE_TITLE"'"}' \
+            ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+
+  on-r-opened:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    steps:
+      - name: notify
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          curl \
+            -X POST \
+            -H 'Content-Type: application/json' \
+            -d '{"type": "pullrequest_opened", "id": "${{ github.event.pull_request.number }}", "title": "'"$PR_TITLE"'"}' \
+            ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+
+  on-pr-closed:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    steps:
+      - name: notify
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          curl \
+            -X POST \
+            -H 'Content-Type: application/json' \
+            -d '{"type": "pullrequest_closed", "id": "${{ github.event.pull_request.number }}", "title": "'"$PR_TITLE"'"}' \
             ${{ secrets.CI_SLACK_WEBHOOK_URL }}
