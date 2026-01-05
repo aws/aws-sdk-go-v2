@@ -42,7 +42,7 @@ jobs:
             -d '{"type": "issues_closed", "id": "${{ github.event.issue.number }}", "title": "'"$ISSUE_TITLE"'"}' \
             ${{ secrets.CI_SLACK_WEBHOOK_URL }}
 
-  on-pr-opened:
+  on-r-opened:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.action == 'opened'
     steps:
