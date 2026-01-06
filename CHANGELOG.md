@@ -1,3 +1,11 @@
+# Release (2026-01-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.63.0](service/costexplorer/CHANGELOG.md#v1630-2026-01-06)
+  * **Feature**: This release updates existing reservation recommendations API to support deployment model.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.39.0](service/emrserverless/CHANGELOG.md#v1390-2026-01-06)
+  * **Feature**: Added support for enabling disk encryption using customer managed AWS KMS keys to CreateApplication, UpdateApplication and StartJobRun APIs.
+
 # Release (2026-01-05)
 
 ## Module Highlights

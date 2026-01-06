@@ -1,3 +1,7 @@
+# v1.63.0 (2026-01-06)
+
+* **Feature**: This release updates existing reservation recommendations API to support deployment model.
+
 # v1.62.0 (2025-12-08)
 
 * **Feature**: Add support for Cost Category resource associations including filtering by resource type on ListCostCategoryDefinitions and new ListCostCategoryResourceAssociations API.
