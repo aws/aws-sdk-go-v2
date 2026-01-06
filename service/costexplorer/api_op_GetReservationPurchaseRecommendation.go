@@ -282,6 +282,99 @@ func (c *Client) addOperationGetReservationPurchaseRecommendationMiddlewares(sta
 	return nil
 }
 
+// GetReservationPurchaseRecommendationPaginatorOptions is the paginator options
+// for GetReservationPurchaseRecommendation
+type GetReservationPurchaseRecommendationPaginatorOptions struct {
+	// The number of recommendations that you want returned in a single response
+	// object.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetReservationPurchaseRecommendationPaginator is a paginator for
+// GetReservationPurchaseRecommendation
+type GetReservationPurchaseRecommendationPaginator struct {
+	options   GetReservationPurchaseRecommendationPaginatorOptions
+	client    GetReservationPurchaseRecommendationAPIClient
+	params    *GetReservationPurchaseRecommendationInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetReservationPurchaseRecommendationPaginator returns a new
+// GetReservationPurchaseRecommendationPaginator
+func NewGetReservationPurchaseRecommendationPaginator(client GetReservationPurchaseRecommendationAPIClient, params *GetReservationPurchaseRecommendationInput, optFns ...func(*GetReservationPurchaseRecommendationPaginatorOptions)) *GetReservationPurchaseRecommendationPaginator {
+	if params == nil {
+		params = &GetReservationPurchaseRecommendationInput{}
+	}
+
+	options := GetReservationPurchaseRecommendationPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetReservationPurchaseRecommendationPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextPageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetReservationPurchaseRecommendationPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetReservationPurchaseRecommendation page.
+func (p *GetReservationPurchaseRecommendationPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetReservationPurchaseRecommendationOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextPageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.GetReservationPurchaseRecommendation(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// GetReservationPurchaseRecommendationAPIClient is a client that implements the
+// GetReservationPurchaseRecommendation operation.
+type GetReservationPurchaseRecommendationAPIClient interface {
+	GetReservationPurchaseRecommendation(context.Context, *GetReservationPurchaseRecommendationInput, ...func(*Options)) (*GetReservationPurchaseRecommendationOutput, error)
+}
+
+var _ GetReservationPurchaseRecommendationAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opGetReservationPurchaseRecommendation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

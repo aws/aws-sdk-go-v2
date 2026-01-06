@@ -1,0 +1,8 @@
+{
+    "id": "2da3131e-0afa-41be-a5d4-d2ab36249131",
+    "type": "feature",
+    "description": "This release updates existing reservation recommendations API to support deployment model.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

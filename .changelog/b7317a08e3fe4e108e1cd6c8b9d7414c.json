@@ -1,0 +1,8 @@
+{
+    "id": "b7317a08-e3fe-4e10-8e1c-d6c8b9d7414c",
+    "type": "feature",
+    "description": "Added support for enabling disk encryption using customer managed AWS KMS keys to CreateApplication, UpdateApplication and StartJobRun APIs.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}
