@@ -129,6 +129,12 @@
                 "monitoringConfiguration": {
                     "target": "com.amazonaws.emrserverless#MonitoringConfiguration"
                 },
+                "diskEncryptionConfiguration": {
+                    "target": "com.amazonaws.emrserverless#DiskEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object that allows encrypting local disks.</p>"
+                    }
+                },
                 "interactiveConfiguration": {
                     "target": "com.amazonaws.emrserverless#InteractiveConfiguration",
                     "traits": {
@@ -1301,6 +1307,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The override configurations for monitoring.</p>"
                     }
+                },
+                "diskEncryptionConfiguration": {
+                    "target": "com.amazonaws.emrserverless#DiskEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The override configuration to encrypt local disks.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1481,6 +1493,12 @@
                         "smithy.api#documentation": "<p>The configuration setting for monitoring.</p>"
                     }
                 },
+                "diskEncryptionConfiguration": {
+                    "target": "com.amazonaws.emrserverless#DiskEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object that allows encrypting local disks.</p>"
+                    }
+                },
                 "interactiveConfiguration": {
                     "target": "com.amazonaws.emrserverless#InteractiveConfiguration",
                     "traits": {
@@ -1582,6 +1600,26 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.emrserverless#DiskEncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "encryptionContext": {
+                    "target": "com.amazonaws.emrserverless#EncryptionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the optional encryption context that will be used when encrypting the data. An encryption context is a collection of non-secret key-value pairs that represent additional authenticated data. </p>"
+                    }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.emrserverless#EncryptionKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key ARN to encrypt local disks.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration object that allows encrypting local disks.</p>"
+            }
+        },
         "com.amazonaws.emrserverless#DiskSize": {
             "type": "string",
             "traits": {
@@ -1605,6 +1643,38 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1000000
+                }
+            }
+        },
+        "com.amazonaws.emrserverless#EncryptionContext": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.emrserverless#EncryptionContextKey"
+            },
+            "value": {
+                "target": "com.amazonaws.emrserverless#EncryptionContextValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 8
+                }
+            }
+        },
+        "com.amazonaws.emrserverless#EncryptionContextKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.emrserverless#EncryptionContextValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 384
                 }
             }
         },
@@ -4084,6 +4154,12 @@
                     "target": "com.amazonaws.emrserverless#MonitoringConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration setting for monitoring.</p>"
+                    }
+                },
+                "diskEncryptionConfiguration": {
+                    "target": "com.amazonaws.emrserverless#DiskEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object that allows encrypting local disks.</p>"
                     }
                 },
                 "schedulerConfiguration": {
