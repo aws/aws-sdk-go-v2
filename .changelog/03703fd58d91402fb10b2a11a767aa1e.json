@@ -1,0 +1,8 @@
+{
+    "id": "03703fd5-8d91-402f-b10b-2a11a767aa1e",
+    "type": "feature",
+    "description": "Add StateMessage and ProgressPercentage fields to DescribeCustomWorkspaceImageImport API response.",
+    "modules": [
+        "service/workspaces"
+    ]
+}
