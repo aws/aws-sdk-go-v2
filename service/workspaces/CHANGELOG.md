@@ -1,3 +1,7 @@
+# v1.65.0 (2026-01-07)
+
+* **Feature**: Add StateMessage and ProgressPercentage fields to DescribeCustomWorkspaceImageImport API response.
+
 # v1.64.8 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

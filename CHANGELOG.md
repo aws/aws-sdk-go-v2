@@ -1,3 +1,9 @@
+# Release (2026-01-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.65.0](service/workspaces/CHANGELOG.md#v1650-2026-01-07)
+  * **Feature**: Add StateMessage and ProgressPercentage fields to DescribeCustomWorkspaceImageImport API response.
+
 # Release (2026-01-06)
 
 ## Module Highlights

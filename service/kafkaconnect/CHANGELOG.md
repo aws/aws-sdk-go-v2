@@ -1,3 +1,7 @@
+# v1.29.1 (2026-01-07)
+
+* No change notes available for this release.
+
 # v1.29.0 (2025-12-30)
 
 * **Feature**: This change sets the KafkaConnect GovCloud FIPS and FIPS DualStack endpoints to use kafkaconnect instead of kafkaconnect-fips as the service name. This is done to match the Kafka endpoints.
