@@ -474,6 +474,9 @@
                     "target": "com.amazonaws.cloudfront#AccessDenied"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#EntityLimitExceeded"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#EntityNotFound"
                 },
                 {
@@ -563,6 +566,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#EntityNotFound"
@@ -24209,6 +24215,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#CNAMEAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#EntityNotFound"
