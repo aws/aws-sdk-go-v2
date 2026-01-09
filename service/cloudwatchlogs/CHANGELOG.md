@@ -1,3 +1,7 @@
+# v1.63.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.0 (2025-12-15)
 
 * **Feature**: This release allows you to import your historical CloudTrail Lake data into CloudWatch with a few steps, enabling you to easily consolidate operational, security, and compliance data in one place.

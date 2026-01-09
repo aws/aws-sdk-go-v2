@@ -1,3 +1,20 @@
+# Release (2026-01-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.17.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1170-2026-01-09)
+  * **Feature**: Adds optional field "view" to GetMemory API input to give customers control over whether CMK encrypted data such as strategy decryption or override prompts is returned or not.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.59.0](service/cloudfront/CHANGELOG.md#v1590-2026-01-09)
+  * **Feature**: Added EntityLimitExceeded exception handling to the following API operations AssociateDistributionWebACL, AssociateDistributionTenantWebACL, UpdateDistributionWithStagingConfig
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.136.0](service/glue/CHANGELOG.md#v11360-2026-01-09)
+  * **Feature**: Adding MaterializedViews task run APIs
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.89.0](service/medialive/CHANGELOG.md#v1890-2026-01-09)
+  * **Feature**: MediaPackage v2 output groups in MediaLive can now accept one additional destination for single pipeline channels and up to two additional destinations for standard channels. MediaPackage v2 destinations now support sending to cross region MediaPackage channels.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.54.0](service/transcribe/CHANGELOG.md#v1540-2026-01-09)
+  * **Feature**: Adds waiters to Amazon Transcribe.
+
 # Release (2026-01-07)
 
 ## Module Highlights

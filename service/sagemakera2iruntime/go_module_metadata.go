@@ -3,4 +3,4 @@
 package sagemakera2iruntime
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.32.16"
+const goModuleVersion = "1.32.17"

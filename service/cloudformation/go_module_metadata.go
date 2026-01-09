@@ -3,4 +3,4 @@
 package cloudformation
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.71.4"
+const goModuleVersion = "1.71.5"

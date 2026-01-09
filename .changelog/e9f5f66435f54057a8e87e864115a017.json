@@ -1,8 +1,0 @@
-{
-    "id": "e9f5f664-35f5-4057-a8e8-7e864115a017",
-    "type": "feature",
-    "description": "Added EntityLimitExceeded exception handling to the following API operations AssociateDistributionWebACL, AssociateDistributionTenantWebACL, UpdateDistributionWithStagingConfig",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

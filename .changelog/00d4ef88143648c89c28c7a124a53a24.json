@@ -1,8 +1,0 @@
-{
-    "id": "00d4ef88-1436-48c8-9c28-c7a124a53a24",
-    "type": "feature",
-    "description": "Adds waiters to Amazon Transcribe.",
-    "modules": [
-        "service/transcribe"
-    ]
-}

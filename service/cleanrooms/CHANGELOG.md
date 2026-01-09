@@ -1,3 +1,7 @@
+# v1.40.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2026-01-02)
 
 * **Feature**: Added support for publishing detailed metrics to CloudWatch for operational monitoring of collaborations, including query performance and resource utilization.

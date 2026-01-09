@@ -1,3 +1,7 @@
+# v1.87.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.87.0 (2025-12-11)
 
 * **Feature**: Add Dotnet 10 (dotnet10) support to AWS Lambda.

@@ -1,3 +1,7 @@
+# v1.39.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2026-01-06)
 
 * **Feature**: Added support for enabling disk encryption using customer managed AWS KMS keys to CreateApplication, UpdateApplication and StartJobRun APIs.

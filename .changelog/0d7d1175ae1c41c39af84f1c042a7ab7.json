@@ -1,8 +1,0 @@
-{
-    "id": "0d7d1175-ae1c-41c3-9af8-4f1c042a7ab7",
-    "type": "feature",
-    "description": "Adds optional field \"view\" to GetMemory API input to give customers control over whether CMK encrypted data such as strategy decryption or override prompts is returned or not.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

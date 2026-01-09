@@ -1,3 +1,7 @@
+# v1.63.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.0 (2026-01-06)
 
 * **Feature**: This release updates existing reservation recommendations API to support deployment model.

@@ -1,8 +1,0 @@
-{
-    "id": "dfd533a4-a524-4cb0-b512-dafb3b538c3b",
-    "type": "feature",
-    "description": "Adding MaterializedViews task run APIs",
-    "modules": [
-        "service/glue"
-    ]
-}

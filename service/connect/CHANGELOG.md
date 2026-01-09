@@ -1,3 +1,7 @@
+# v1.154.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.154.0 (2025-12-30)
 
 * **Feature**: Adds support for searching global contacts using the ActiveRegions filter, and pagination support for ListSecurityProfileFlowModules and ListEntitySecurityProfiles.
