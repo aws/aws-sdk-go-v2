@@ -1,0 +1,8 @@
+{
+    "id": "f0e99ac8-095c-4702-8b15-e6c73b79eeea",
+    "type": "feature",
+    "description": "MediaPackage v2 output groups in MediaLive can now accept one additional destination for single pipeline channels and up to two additional destinations for standard channels. MediaPackage v2 destinations now support sending to cross region MediaPackage channels.",
+    "modules": [
+        "service/medialive"
+    ]
+}
