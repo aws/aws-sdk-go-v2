@@ -43,20 +43,22 @@ func stripPort(hostport string) string {
 
 // Port returns the port part of u.Host, without the leading colon.
 // If u.Host doesn't contain a port, Port returns an empty string.
-//
-// Copied from the Go 1.8 standard library (net/url)
 func portOnly(hostport string) string {
-	colon := strings.IndexByte(hostport, ':')
-	if colon == -1 {
+	_, afterColon, foundColon := strings.Cut(hostport, ":")
+	if !foundColon {
 		return ""
 	}
-	if i := strings.Index(hostport, "]:"); i != -1 {
-		return hostport[i+len("]:"):]
+
+	if _, after, found := strings.Cut(hostport, "]:"); found {
+		return after
 	}
+
+	// Reject malformed IPv6 (has "]" but no port)
 	if strings.Contains(hostport, "]") {
 		return ""
 	}
-	return hostport[colon+len(":"):]
+
+	return afterColon
 }
 
 // Returns true if the specified URI is using the standard port
