@@ -7,7 +7,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"reflect"
@@ -210,7 +209,7 @@ func TestBuildCanonicalRequest(t *testing.T) {
 
 func TestSigner_SignHTTP_NoReplaceRequestBody(t *testing.T) {
 	req, bodyHash := buildRequest("dynamodb", "us-east-1", "{}")
-	req.Body = ioutil.NopCloser(bytes.NewReader([]byte{}))
+	req.Body = io.NopCloser(bytes.NewReader([]byte{}))
 
 	s := NewSigner()
 

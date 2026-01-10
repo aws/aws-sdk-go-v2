@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"strings"
@@ -26,7 +26,7 @@ func TestAssumeRole(t *testing.T) {
 	client := mockHTTPClient(func(r *http.Request) (*http.Response, error) {
 		return &http.Response{
 			StatusCode: 200,
-			Body: ioutil.NopCloser(bytes.NewReader([]byte(fmt.Sprintf(assumeRoleRespMsg,
+			Body: io.NopCloser(bytes.NewReader([]byte(fmt.Sprintf(assumeRoleRespMsg,
 				time.Now().Add(15*time.Minute).Format("2006-01-02T15:04:05Z"))))),
 		}, nil
 	})
@@ -77,7 +77,7 @@ func TestAssumeRole_WithMFA(t *testing.T) {
 
 		return &http.Response{
 			StatusCode: 200,
-			Body: ioutil.NopCloser(bytes.NewReader([]byte(fmt.Sprintf(assumeRoleRespMsg,
+			Body: io.NopCloser(bytes.NewReader([]byte(fmt.Sprintf(assumeRoleRespMsg,
 				time.Now().Add(15*time.Minute).Format("2006-01-02T15:04:05Z"))))),
 		}, nil
 	})
@@ -171,7 +171,7 @@ func TestAssumeRole_ExtendedDuration(t *testing.T) {
 
 		return &http.Response{
 			StatusCode: 200,
-			Body: ioutil.NopCloser(bytes.NewReader([]byte(fmt.Sprintf(
+			Body: io.NopCloser(bytes.NewReader([]byte(fmt.Sprintf(
 				assumeRoleRespMsg,
 				time.Now().Add(15*time.Minute).Format("2006-01-02T15:04:05Z"))))),
 		}, nil

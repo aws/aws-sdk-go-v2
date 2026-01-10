@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strconv"
 	"testing"
@@ -302,7 +302,7 @@ func newStubResponseError(statusCode int) *smithyhttp.ResponseError {
 			Response: &http.Response{
 				StatusCode: statusCode,
 				Header:     http.Header{},
-				Body:       ioutil.NopCloser(bytes.NewReader(nil)),
+				Body:       io.NopCloser(bytes.NewReader(nil)),
 			},
 		},
 	}

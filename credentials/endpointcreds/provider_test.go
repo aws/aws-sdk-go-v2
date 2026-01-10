@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"strings"
 	"testing"
@@ -33,7 +32,7 @@ func TestRetrieveRefreshableCredentials(t *testing.T) {
 
 			return &http.Response{
 				StatusCode: 200,
-				Body: ioutil.NopCloser(bytes.NewReader([]byte(fmt.Sprintf(`{
+				Body: io.NopCloser(bytes.NewReader([]byte(fmt.Sprintf(`{
   "AccessKeyID": "AKID",
   "SecretAccessKey": "SECRET",
   "Token": "TOKEN",
@@ -77,7 +76,7 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 		o.HTTPClient = mockClient(func(r *http.Request) (*http.Response, error) {
 			return &http.Response{
 				StatusCode: 200,
-				Body: ioutil.NopCloser(bytes.NewReader([]byte(`{
+				Body: io.NopCloser(bytes.NewReader([]byte(`{
   "AccessKeyID": "AKID",
   "SecretAccessKey": "SECRET",
   "AccountID": "012345678901"
@@ -152,7 +151,7 @@ func TestAuthTokenProvider(t *testing.T) {
 					actualToken = r.Header["Authorization"][0]
 					return &http.Response{
 						StatusCode: 200,
-						Body: ioutil.NopCloser(bytes.NewReader([]byte(`{
+						Body: io.NopCloser(bytes.NewReader([]byte(`{
   "AccessKeyID": "AKID",
   "SecretAccessKey": "SECRET"
 }`))),
@@ -202,7 +201,7 @@ func TestFailedRetrieveCredentials(t *testing.T) {
 		o.HTTPClient = mockClient(func(r *http.Request) (*http.Response, error) {
 			return &http.Response{
 				StatusCode: 400,
-				Body: ioutil.NopCloser(bytes.NewReader([]byte(`{
+				Body: io.NopCloser(bytes.NewReader([]byte(`{
   "code": "Error",
   "message": "Message"
 }`))),
@@ -281,7 +280,7 @@ func TestRetryHTTPStatusCode(t *testing.T) {
 				},
 				{
 					StatusCode: 200,
-					Body:       ioutil.NopCloser(strings.NewReader(credsResp)),
+					Body:       io.NopCloser(strings.NewReader(credsResp)),
 					Header: http.Header{
 						"Content-Type": {"application/json"},
 					},
