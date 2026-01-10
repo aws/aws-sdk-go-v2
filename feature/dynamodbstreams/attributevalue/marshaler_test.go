@@ -340,7 +340,7 @@ func Test_New_Unmarshal(t *testing.T) {
 
 func Test_New_UnmarshalError(t *testing.T) {
 	// Test that we get an error using Unmarshal to convert to a nil value.
-	expected := &InvalidUnmarshalError{Type: reflect.TypeOf(nil)}
+	expected := &InvalidUnmarshalError{Type: nil}
 	if err := Unmarshal(nil, nil); err == nil {
 		t.Errorf("Unmarshal with input %T returned no error, expected error `%v`", nil, expected)
 	} else if err.Error() != expected.Error() {
@@ -348,8 +348,8 @@ func Test_New_UnmarshalError(t *testing.T) {
 	}
 
 	// Test that we get an error using Unmarshal to convert to a non-pointer value.
-	var actual map[string]interface{}
-	expected = &InvalidUnmarshalError{Type: reflect.TypeOf(actual)}
+	var actual map[string]any
+	expected = &InvalidUnmarshalError{Type: reflect.TypeFor[map[string]any]()}
 	if err := Unmarshal(nil, actual); err == nil {
 		t.Errorf("Unmarshal with input %T returned no error, expected error `%v`", actual, expected)
 	} else if err.Error() != expected.Error() {
@@ -406,7 +406,7 @@ func Test_New_UnmarshalMap(t *testing.T) {
 
 func Test_New_UnmarshalMapError(t *testing.T) {
 	// Test that we get an error using UnmarshalMap to convert to a nil value.
-	expected := &InvalidUnmarshalError{Type: reflect.TypeOf(nil)}
+	expected := &InvalidUnmarshalError{Type: nil}
 	if err := UnmarshalMap(nil, nil); err == nil {
 		t.Errorf("UnmarshalMap with input %T returned no error, expected error `%v`", nil, expected)
 	} else if err.Error() != expected.Error() {
@@ -414,8 +414,8 @@ func Test_New_UnmarshalMapError(t *testing.T) {
 	}
 
 	// Test that we get an error using UnmarshalMap to convert to a non-pointer value.
-	var actual map[string]interface{}
-	expected = &InvalidUnmarshalError{Type: reflect.TypeOf(actual)}
+	var actual map[string]any
+	expected = &InvalidUnmarshalError{Type: reflect.TypeFor[map[string]any]()}
 	if err := UnmarshalMap(nil, actual); err == nil {
 		t.Errorf("UnmarshalMap with input %T returned no error, expected error `%v`", actual, expected)
 	} else if err.Error() != expected.Error() {
@@ -481,7 +481,7 @@ func Test_New_UnmarshalList(t *testing.T) {
 
 func Test_New_UnmarshalListError(t *testing.T) {
 	// Test that we get an error using UnmarshalList to convert to a nil value.
-	expected := &InvalidUnmarshalError{Type: reflect.TypeOf(nil)}
+	expected := &InvalidUnmarshalError{Type: nil}
 	if err := UnmarshalList(nil, nil); err == nil {
 		t.Errorf("UnmarshalList with input %T returned no error, expected error `%v`", nil, expected)
 	} else if err.Error() != expected.Error() {
@@ -489,8 +489,8 @@ func Test_New_UnmarshalListError(t *testing.T) {
 	}
 
 	// Test that we get an error using UnmarshalList to convert to a non-pointer value.
-	var actual map[string]interface{}
-	expected = &InvalidUnmarshalError{Type: reflect.TypeOf(actual)}
+	var actual map[string]any
+	expected = &InvalidUnmarshalError{Type: reflect.TypeFor[map[string]any]()}
 	if err := UnmarshalList(nil, actual); err == nil {
 		t.Errorf("UnmarshalList with input %T returned no error, expected error `%v`", actual, expected)
 	} else if err.Error() != expected.Error() {
