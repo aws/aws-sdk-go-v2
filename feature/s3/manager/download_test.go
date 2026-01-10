@@ -860,7 +860,7 @@ func TestDownloadBufferStrategy_Errors(t *testing.T) {
 		}
 		seenOps[fingerPrint] = struct{}{}
 
-		_, _ = io.Copy(ioutil.Discard, out.Body)
+		_, _ = io.Copy(io.Discard, out.Body)
 
 		out.Body = ioutil.NopCloser(&badReader{err: io.ErrUnexpectedEOF})
 
