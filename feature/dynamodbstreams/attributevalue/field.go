@@ -121,7 +121,7 @@ func enumFields(t reflect.Type, opts structFieldOptions) []field {
 				}
 
 				ft := sf.Type
-				if ft.Name() == "" && ft.Kind() == reflect.Ptr {
+				if ft.Name() == "" && ft.Kind() == reflect.Pointer {
 					ft = ft.Elem()
 				}
 

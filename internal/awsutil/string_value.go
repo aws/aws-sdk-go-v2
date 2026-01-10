@@ -15,7 +15,7 @@ func StringValue(i interface{}) string {
 }
 
 func stringValue(v reflect.Value, indent int, buf *bytes.Buffer) {
-	for v.Kind() == reflect.Ptr {
+	for v.Kind() == reflect.Pointer {
 		v = v.Elem()
 	}
 
@@ -30,7 +30,7 @@ func stringValue(v reflect.Value, indent int, buf *bytes.Buffer) {
 			if ft.Name[0:1] == strings.ToLower(ft.Name[0:1]) {
 				continue // ignore unexported fields
 			}
-			if (fv.Kind() == reflect.Ptr || fv.Kind() == reflect.Slice) && fv.IsNil() {
+			if (fv.Kind() == reflect.Pointer || fv.Kind() == reflect.Slice) && fv.IsNil() {
 				continue // ignore unset fields
 			}
 

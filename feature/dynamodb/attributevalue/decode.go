@@ -289,7 +289,7 @@ func NewDecoder(optFns ...func(*DecoderOptions)) *Decoder {
 // The output value provided must be a non-nil pointer
 func (d *Decoder) Decode(av types.AttributeValue, out interface{}, opts ...func(*Decoder)) error {
 	v := reflect.ValueOf(out)
-	if v.Kind() != reflect.Ptr || v.IsNil() || !v.IsValid() {
+	if v.Kind() != reflect.Pointer || v.IsNil() || !v.IsValid() {
 		return &InvalidUnmarshalError{Type: reflect.TypeOf(out)}
 	}
 
@@ -718,7 +718,7 @@ var textUnmarshalerType = reflect.TypeOf((*encoding.TextUnmarshaler)(nil)).Elem(
 
 func (d *Decoder) getMapKeyDecoder(keyType reflect.Type) (func(string, reflect.Value, tag) error, error) {
 	// Test the key type to determine if it implements the TextUnmarshaler interface.
-	if reflect.PtrTo(keyType).Implements(textUnmarshalerType) || keyType.Implements(textUnmarshalerType) {
+	if reflect.PointerTo(keyType).Implements(textUnmarshalerType) || keyType.Implements(textUnmarshalerType) {
 		return func(v string, k reflect.Value, _ tag) error {
 			if !k.CanAddr() {
 				return fmt.Errorf("cannot take address of map key, %v", k.Type())
@@ -858,7 +858,7 @@ func decodeUnixTime(n string) (time.Time, error) {
 // embedded parent structs if needed
 func decoderFieldByIndex(v reflect.Value, index []int) reflect.Value {
 	for i, x := range index {
-		if i > 0 && v.Kind() == reflect.Ptr && v.Type().Elem().Kind() == reflect.Struct {
+		if i > 0 && v.Kind() == reflect.Pointer && v.Type().Elem().Kind() == reflect.Struct {
 			if v.IsNil() {
 				v.Set(reflect.New(v.Type().Elem()))
 			}
@@ -897,7 +897,7 @@ func indirect[U any](v reflect.Value, opts indirectOptions) (U, reflect.Value) {
 	// If v is a named type and is addressable,
 	// start with its address, so that if the type has pointer methods,
 	// we find them.
-	if v.Kind() != reflect.Ptr && v.Type().Name() != "" && v.CanAddr() {
+	if v.Kind() != reflect.Pointer && v.Type().Name() != "" && v.CanAddr() {
 		haveAddr = true
 		v = v.Addr()
 	}
@@ -907,17 +907,17 @@ func indirect[U any](v reflect.Value, opts indirectOptions) (U, reflect.Value) {
 		// usefully addressable.
 		if v.Kind() == reflect.Interface && !v.IsNil() {
 			e := v.Elem()
-			if e.Kind() == reflect.Ptr && !e.IsNil() && (!opts.decodeNull || e.Elem().Kind() == reflect.Ptr) {
+			if e.Kind() == reflect.Pointer && !e.IsNil() && (!opts.decodeNull || e.Elem().Kind() == reflect.Pointer) {
 				haveAddr = false
 				v = e
 				continue
 			}
-			if e.Kind() != reflect.Ptr && e.IsValid() {
+			if e.Kind() != reflect.Pointer && e.IsValid() {
 				var u U
 				return u, e
 			}
 		}
-		if v.Kind() != reflect.Ptr {
+		if v.Kind() != reflect.Pointer {
 			break
 		}
 		if opts.decodeNull && v.CanSet() {
@@ -1009,7 +1009,7 @@ func (e *InvalidUnmarshalError) Error() string {
 	var msg string
 	if e.Type == nil {
 		msg = "cannot unmarshal to nil value"
-	} else if e.Type.Kind() != reflect.Ptr {
+	} else if e.Type.Kind() != reflect.Pointer {
 		msg = fmt.Sprintf("cannot unmarshal to non-pointer value, got %s", e.Type.String())
 	} else {
 		msg = fmt.Sprintf("cannot unmarshal to nil value, %s", e.Type.String())
