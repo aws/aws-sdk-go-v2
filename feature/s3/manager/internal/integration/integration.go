@@ -5,7 +5,6 @@ import (
 	"crypto/rand"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"time"
@@ -29,7 +28,7 @@ func MustUUID() string {
 
 // CreateFileOfSize will return an *os.File that is of size bytes
 func CreateFileOfSize(dir string, size int64) (*os.File, error) {
-	file, err := ioutil.TempFile(dir, "s3integration")
+	file, err := os.CreateTemp(dir, "s3integration")
 	if err != nil {
 		return nil, err
 	}
