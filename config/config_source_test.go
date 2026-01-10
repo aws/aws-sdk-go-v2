@@ -61,8 +61,8 @@ func (u *stsCaptureUserAgentFeatures) captureFeatures(r *http.Request) []string 
 
 	var features string
 	for _, part := range parts {
-		if strings.HasPrefix(part, "m/") {
-			features = strings.TrimPrefix(part, "m/")
+		if after, hasPrefix := strings.CutPrefix(part, "m/"); hasPrefix {
+			features = after
 			break
 		}
 	}
