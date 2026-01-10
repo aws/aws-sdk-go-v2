@@ -57,9 +57,6 @@ type Options struct {
 	DirectoryConcurrency int
 }
 
-func (o *Options) init() {
-}
-
 func resolveConcurrency(o *Options) {
 	if o.Concurrency == 0 {
 		o.Concurrency = defaultTransferConcurrency
