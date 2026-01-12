@@ -1,3 +1,7 @@
+# v1.55.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2025-12-18)
 
 * **Feature**: Adds support for ECR Create On Push

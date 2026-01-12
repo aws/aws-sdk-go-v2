@@ -8859,6 +8859,14 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "view": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MemoryView",
+                    "traits": {
+                        "smithy.api#default": "full",
+                        "smithy.api#documentation": "<p>The level of detail to return for the memory.</p>",
+                        "smithy.api#httpQuery": "view"
+                    }
                 }
             },
             "traits": {
@@ -12670,6 +12678,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#MemorySummary"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#MemoryView": {
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "full"
+                    }
+                },
+                "WITHOUT_DECRYPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "without_decryption"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#MessageBasedTrigger": {
