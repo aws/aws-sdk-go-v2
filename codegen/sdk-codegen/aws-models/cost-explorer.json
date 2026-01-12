@@ -1503,6 +1503,16 @@
         "com.amazonaws.costexplorer#AmortizedUpfrontFee": {
             "type": "string"
         },
+        "com.amazonaws.costexplorer#AnalysesPageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 600
+                }
+            }
+        },
         "com.amazonaws.costexplorer#AnalysisDetails": {
             "type": "structure",
             "members": {
@@ -5942,7 +5952,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets recommendations for reservation purchases. These recommendations might help you to\n      reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to\n      On-Demand pricing.</p>\n         <p>Amazon Web Services generates your recommendations by identifying your On-Demand usage\n      during a specific time period and collecting your usage into categories that are eligible for\n      a reservation. After Amazon Web Services has these categories, it simulates every combination\n      of reservations in each category of usage to identify the best number of each type of Reserved\n      Instance (RI) to purchase to maximize your estimated savings. </p>\n         <p>For example, Amazon Web Services automatically aggregates your Amazon EC2 Linux, shared\n      tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy\n      size-flexible regional reservations to apply to the c4 family usage. Amazon Web Services\n      recommends the smallest size instance in an instance family. This makes it easier to purchase\n      a size-flexible Reserved Instance (RI). Amazon Web Services also shows the equal number of\n      normalized units. This way, you can purchase any instance size that you want. For this\n      example, your RI recommendation is for <code>c4.large</code> because that is the smallest size\n      instance in the c4 instance family.</p>"
+                "smithy.api#documentation": "<p>Gets recommendations for reservation purchases. These recommendations might help you to\n      reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to\n      On-Demand pricing.</p>\n         <p>Amazon Web Services generates your recommendations by identifying your On-Demand usage\n      during a specific time period and collecting your usage into categories that are eligible for\n      a reservation. After Amazon Web Services has these categories, it simulates every combination\n      of reservations in each category of usage to identify the best number of each type of Reserved\n      Instance (RI) to purchase to maximize your estimated savings. </p>\n         <p>For example, Amazon Web Services automatically aggregates your Amazon EC2 Linux, shared\n      tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy\n      size-flexible regional reservations to apply to the c4 family usage. Amazon Web Services\n      recommends the smallest size instance in an instance family. This makes it easier to purchase\n      a size-flexible Reserved Instance (RI). Amazon Web Services also shows the equal number of\n      normalized units. This way, you can purchase any instance size that you want. For this\n      example, your RI recommendation is for <code>c4.large</code> because that is the smallest size\n      instance in the c4 instance family.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextPageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "Recommendations",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.costexplorer#GetReservationPurchaseRecommendationRequest": {
@@ -5995,7 +6011,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "target": "com.amazonaws.costexplorer#RecommendationsPageSize",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response\n      object.</p>"
@@ -6156,7 +6172,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates recommendations that help you save cost by identifying idle and underutilized\n      Amazon EC2 instances.</p>\n         <p>Recommendations are generated to either downsize or terminate instances, along with\n      providing savings detail and metrics. For more information about calculation and function, see\n        <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html\">Optimizing Your Cost with Rightsizing Recommendations</a> in the <i>Billing and Cost Management User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates recommendations that help you save cost by identifying idle and underutilized\n      Amazon EC2 instances.</p>\n         <p>Recommendations are generated to either downsize or terminate instances, along with\n      providing savings detail and metrics. For more information about calculation and function, see\n        <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html\">Optimizing Your Cost with Rightsizing Recommendations</a> in the <i>Billing and Cost Management User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextPageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "RightsizingRecommendations",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.costexplorer#GetRightsizingRecommendationRequest": {
@@ -6179,7 +6201,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "target": "com.amazonaws.costexplorer#RecommendationsPageSize",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response object.</p>"
@@ -6452,7 +6474,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "target": "com.amazonaws.costexplorer#RecommendationsPageSize",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response object.</p>"
@@ -7148,7 +7170,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the commitment purchase analyses for your account.</p>"
+                "smithy.api#documentation": "<p>Lists the commitment purchase analyses for your account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextPageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "AnalysisSummaryList",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.costexplorer#ListCommitmentPurchaseAnalysesRequest": {
@@ -7167,7 +7195,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "target": "com.amazonaws.costexplorer#AnalysesPageSize",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of analyses that you want returned in a single response object.</p>"
@@ -7521,7 +7549,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of your historical recommendation generations within the past 30\n      days.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list of your historical recommendation generations within the past 30\n      days.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextPageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "GenerationSummaryList",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.costexplorer#ListSavingsPlansPurchaseRecommendationGenerationRequest": {
@@ -7540,7 +7574,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "target": "com.amazonaws.costexplorer#RecommendationsPageSize",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response object.</p>"
@@ -8279,6 +8313,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommended reservation is size flexible.</p>"
                     }
+                },
+                "DeploymentModel": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the recommendation is for a reservation for RDS Custom.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8542,6 +8582,16 @@
                     "traits": {
                         "smithy.api#enumValue": "CROSS_INSTANCE_FAMILY"
                     }
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#RecommendationsPageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 6000
                 }
             }
         },

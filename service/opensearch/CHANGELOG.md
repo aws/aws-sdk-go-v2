@@ -1,3 +1,7 @@
+# v1.57.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2025-12-18)
 
 * **Feature**: Amazon OpenSearch Service adds support for warm nodes, enabling new multi-tier architecture.

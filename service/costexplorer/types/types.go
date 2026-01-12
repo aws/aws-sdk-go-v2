@@ -1563,6 +1563,9 @@ type RDSInstanceDetails struct {
 	// The database engine that the recommended reservation supports.
 	DatabaseEngine *string
 
+	// Determines whether the recommendation is for a reservation for RDS Custom.
+	DeploymentModel *string
+
 	// Determines whether the recommendation is for a reservation in a single
 	// Availability Zone or a reservation with a backup in a second Availability Zone.
 	DeploymentOption *string

@@ -37,6 +37,9 @@ type GetMemoryInput struct {
 	// This member is required.
 	MemoryId *string
 
+	// The level of detail to return for the memory.
+	View types.MemoryView
+
 	noSmithyDocumentSerde
 }
 
