@@ -1,8 +1,0 @@
-{
-    "id": "66d2bfe3-36a1-445a-838a-a043a3e6d4ff",
-    "type": "feature",
-    "description": "This release introduces WiFi Simple Setup (WSS) enabling device provisioning via barcode scanning with automated network discovery, authentication, and credential provisioning. Additionally, it introduces 2P Device Capability Rediscovery for updating hub-managed device capabilities post-onboarding.",
-    "modules": [
-        "service/iotmanagedintegrations"
-    ]
-}

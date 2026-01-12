@@ -1,3 +1,7 @@
+# v1.230.0 (2026-01-12)
+
+* **Feature**: Added ultraServerType to the UltraServerInfo structure to support server type identification for SageMaker HyperPod
+
 # v1.229.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

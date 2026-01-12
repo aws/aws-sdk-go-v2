@@ -1,3 +1,7 @@
+# v1.7.0 (2026-01-12)
+
+* **Feature**: This release introduces WiFi Simple Setup (WSS) enabling device provisioning via barcode scanning with automated network discovery, authentication, and credential provisioning. Additionally, it introduces 2P Device Capability Rediscovery for updating hub-managed device capabilities post-onboarding.
+
 # v1.6.8 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

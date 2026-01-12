@@ -1,3 +1,13 @@
+# Release (2026-01-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.10.0](service/billing/CHANGELOG.md#v1100-2026-01-12)
+  * **Feature**: Cost Categories filtering support to BillingView data filter expressions through the new costCategories parameter, enabling users to filter billing views by AWS Cost Categories for more granular cost management and allocation.
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.7.0](service/iotmanagedintegrations/CHANGELOG.md#v170-2026-01-12)
+  * **Feature**: This release introduces WiFi Simple Setup (WSS) enabling device provisioning via barcode scanning with automated network discovery, authentication, and credential provisioning. Additionally, it introduces 2P Device Capability Rediscovery for updating hub-managed device capabilities post-onboarding.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.230.0](service/sagemaker/CHANGELOG.md#v12300-2026-01-12)
+  * **Feature**: Added ultraServerType to the UltraServerInfo structure to support server type identification for SageMaker HyperPod
+
 # Release (2026-01-09)
 
 ## General Highlights
