@@ -7287,6 +7287,59 @@ type MappingEntry struct {
 	noSmithyDocumentSerde
 }
 
+// The object that shows the details of the materialized view refresh task run.
+type MaterializedViewRefreshTaskRun struct {
+
+	// The ID of the Data Catalog where the table resides. If none is supplied, the
+	// account ID is used by default.
+	CatalogId *string
+
+	// The time that this task was created.
+	CreationTime *time.Time
+
+	// The Amazon Web Services account ID.
+	CustomerId *string
+
+	// The calculated DPU usage in seconds for all autoscaled workers.
+	DPUSeconds float64
+
+	// The database where the table resides.
+	DatabaseName *string
+
+	// The end time of the task.
+	EndTime *time.Time
+
+	// The error message for the job.
+	ErrorMessage *string
+
+	// The last point in time when this task was modified.
+	LastUpdated *time.Time
+
+	// The identifier of the materialized view refresh task run.
+	MaterializedViewRefreshTaskRunId *string
+
+	// The number of bytes the refresh task run has scanned to refresh the
+	// materialized view.
+	ProcessedBytes *int64
+
+	// The type of the refresh task run. Either FULL or INCREMENTAL.
+	RefreshType MaterializedViewRefreshType
+
+	// The IAM role that the service assumes to generate statistics.
+	Role *string
+
+	// The start time of the task.
+	StartTime *time.Time
+
+	// The status of the task run.
+	Status MaterializedViewRefreshState
+
+	// The name of the table for which statistics is generated.
+	TableName *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a transform that merges a DynamicFrame with a staging DynamicFrame
 // based on the specified primary keys to identify records. Duplicate records
 // (records with the same primary keys) are not de-duplicated.

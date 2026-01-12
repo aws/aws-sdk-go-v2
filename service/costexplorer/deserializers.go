@@ -11173,6 +11173,15 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 				sv.DatabaseEngine = ptr.String(jtv)
 			}
 
+		case "DeploymentModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.DeploymentModel = ptr.String(jtv)
+			}
+
 		case "DeploymentOption":
 			if value != nil {
 				jtv, ok := value.(string)

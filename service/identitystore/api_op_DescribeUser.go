@@ -118,6 +118,9 @@ type DescribeUserOutput struct {
 	// A URL link for the user's profile.
 	ProfileUrl *string
 
+	// The roles of the user.
+	Roles []types.Role
+
 	// The time zone for a user.
 	Timezone *string
 

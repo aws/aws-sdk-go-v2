@@ -932,7 +932,7 @@
                     }
                 },
                 "Primary": {
-                    "target": "com.amazonaws.identitystore#SensitiveBooleanType",
+                    "target": "com.amazonaws.identitystore#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value representing whether this is the primary address for the associated resource.</p>"
@@ -1022,6 +1022,12 @@
             "type": "document",
             "traits": {
                 "smithy.api#documentation": "<p>The value of the attribute. This is a <code>Document</code> type. This type is not supported by Java V1, Go V1, and older versions of the CLI.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#BooleanType": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.identitystore#ConflictException": {
@@ -1336,6 +1342,12 @@
                     "target": "com.amazonaws.identitystore#SensitiveStringType",
                     "traits": {
                         "smithy.api#documentation": "<p>The user's birthdate in YYYY-MM-DD format. This field supports standard date format for storing personal information.</p>"
+                    }
+                },
+                "Roles": {
+                    "target": "com.amazonaws.identitystore#Roles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Role</code> objects containing roles associated with the user.</p>"
                     }
                 },
                 "Extensions": {
@@ -1877,6 +1889,12 @@
                         "smithy.api#documentation": "<p>The user's birthdate in YYYY-MM-DD format. This field returns the stored birthdate information for the user.</p>"
                     }
                 },
+                "Roles": {
+                    "target": "com.amazonaws.identitystore#Roles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The roles of the user.</p>"
+                    }
+                },
                 "CreatedAt": {
                     "target": "com.amazonaws.identitystore#DateType",
                     "traits": {
@@ -1925,7 +1943,7 @@
                     }
                 },
                 "Primary": {
-                    "target": "com.amazonaws.identitystore#SensitiveBooleanType",
+                    "target": "com.amazonaws.identitystore#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value representing whether this is the primary email address for the associated resource.</p>"
@@ -2423,7 +2441,7 @@
                     }
                 },
                 "MembershipExists": {
-                    "target": "com.amazonaws.identitystore#SensitiveBooleanType",
+                    "target": "com.amazonaws.identitystore#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a membership relation exists or not.</p>"
@@ -3023,7 +3041,7 @@
                     }
                 },
                 "Primary": {
-                    "target": "com.amazonaws.identitystore#SensitiveBooleanType",
+                    "target": "com.amazonaws.identitystore#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value representing whether this is the primary phone number for the associated resource.</p>"
@@ -3069,7 +3087,7 @@
                     }
                 },
                 "Primary": {
-                    "target": "com.amazonaws.identitystore#SensitiveBooleanType",
+                    "target": "com.amazonaws.identitystore#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether this is the user's primary photo. Default value is <code>false</code>. Only one photo can be designated as primary per user.</p>"
@@ -3201,11 +3219,43 @@
                 "smithy.api#default": 0
             }
         },
-        "com.amazonaws.identitystore#SensitiveBooleanType": {
-            "type": "boolean",
+        "com.amazonaws.identitystore#Role": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a role name. For example, \"Researcher.\"</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string representing the type of role. For example, \"Work.\"</p>"
+                    }
+                },
+                "Primary": {
+                    "target": "com.amazonaws.identitystore#BooleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean value representing whether this is the primary role for the associated resource.</p>"
+                    }
+                }
+            },
             "traits": {
-                "smithy.api#default": false,
-                "smithy.api#sensitive": {}
+                "smithy.api#documentation": "<p>The role associated with the user.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#Roles": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystore#Role"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.identitystore#SensitiveStringType": {
@@ -3545,6 +3595,12 @@
                     "target": "com.amazonaws.identitystore#SensitiveStringType",
                     "traits": {
                         "smithy.api#documentation": "<p>The user's birthdate in YYYY-MM-DD format. This field stores personal birthdate information for the user.</p>"
+                    }
+                },
+                "Roles": {
+                    "target": "com.amazonaws.identitystore#Roles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Role</code> objects containing roles associated with the user.</p>"
                     }
                 },
                 "CreatedAt": {
