@@ -2039,6 +2039,51 @@ func (LogicalOperator) Values() []LogicalOperator {
 	}
 }
 
+type MaterializedViewRefreshState string
+
+// Enum values for MaterializedViewRefreshState
+const (
+	MaterializedViewRefreshStateStarting  MaterializedViewRefreshState = "STARTING"
+	MaterializedViewRefreshStateRunning   MaterializedViewRefreshState = "RUNNING"
+	MaterializedViewRefreshStateSucceeded MaterializedViewRefreshState = "SUCCEEDED"
+	MaterializedViewRefreshStateFailed    MaterializedViewRefreshState = "FAILED"
+	MaterializedViewRefreshStateStopped   MaterializedViewRefreshState = "STOPPED"
+)
+
+// Values returns all known values for MaterializedViewRefreshState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaterializedViewRefreshState) Values() []MaterializedViewRefreshState {
+	return []MaterializedViewRefreshState{
+		"STARTING",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"STOPPED",
+	}
+}
+
+type MaterializedViewRefreshType string
+
+// Enum values for MaterializedViewRefreshType
+const (
+	MaterializedViewRefreshTypeFull        MaterializedViewRefreshType = "FULL"
+	MaterializedViewRefreshTypeIncremental MaterializedViewRefreshType = "INCREMENTAL"
+)
+
+// Values returns all known values for MaterializedViewRefreshType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaterializedViewRefreshType) Values() []MaterializedViewRefreshType {
+	return []MaterializedViewRefreshType{
+		"FULL",
+		"INCREMENTAL",
+	}
+}
+
 type MetadataOperation string
 
 // Enum values for MetadataOperation

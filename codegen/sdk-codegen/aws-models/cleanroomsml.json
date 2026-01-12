@@ -9988,8 +9988,7 @@
                 "columnClassification": {
                     "target": "com.amazonaws.cleanroomsml#ColumnClassificationDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Classification details for data columns that specify how each column should be treated during synthetic data generation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Classification details for data columns that specify how each column should be treated during synthetic data generation.</p>"
                     }
                 }
             },
@@ -10277,7 +10276,16 @@
                 }
             }
         },
-        "com.amazonaws.cleanroomsml#ParameterKey": {
+        "com.amazonaws.cleanroomsml#ParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cleanroomsml#ParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.cleanroomsml#ParameterValue"
+            }
+        },
+        "com.amazonaws.cleanroomsml#ParameterName": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -10285,15 +10293,6 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[0-9a-zA-Z_]+$"
-            }
-        },
-        "com.amazonaws.cleanroomsml#ParameterMap": {
-            "type": "map",
-            "key": {
-                "target": "com.amazonaws.cleanroomsml#ParameterKey"
-            },
-            "value": {
-                "target": "com.amazonaws.cleanroomsml#ParameterValue"
             }
         },
         "com.amazonaws.cleanroomsml#ParameterValue": {
@@ -10626,7 +10625,7 @@
                 "volumeSizeInGB": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum size of the instance that is used to train the model.</p>",
+                        "smithy.api#documentation": "<p>The volume size of the instance that is used to train the model. Please see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-volumes.html\">EC2 volume limit</a> for volume size limitations on different instance types.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 8192
@@ -10781,6 +10780,39 @@
                     "traits": {
                         "smithy.api#enumValue": "NONE"
                     }
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#SparkProperties": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cleanroomsml#SparkPropertyKey"
+            },
+            "value": {
+                "target": "com.amazonaws.cleanroomsml#SparkPropertyValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#SparkPropertyKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#SparkPropertyValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
                 }
             }
         },
@@ -12558,10 +12590,27 @@
                             "max": 400
                         }
                     }
+                },
+                "properties": {
+                    "target": "com.amazonaws.cleanroomsml#WorkerComputeConfigurationProperties"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration information about the compute workers that perform the transform job.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#WorkerComputeConfigurationProperties": {
+            "type": "union",
+            "members": {
+                "spark": {
+                    "target": "com.amazonaws.cleanroomsml#SparkProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Spark configuration properties for SQL workloads. This map contains key-value pairs that configure Apache Spark settings to optimize performance for your data processing jobs. You can specify up to 50 Spark properties, with each key being 1-200 characters and each value being 0-500 characters. These properties allow you to adjust compute capacity for large datasets and complex workloads.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration properties for the worker compute environment. These properties allow you to customize the compute settings for your Clean Rooms workloads.</p>"
             }
         },
         "com.amazonaws.cleanroomsml#WorkerComputeType": {

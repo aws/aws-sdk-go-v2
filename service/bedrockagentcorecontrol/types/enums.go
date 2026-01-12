@@ -656,6 +656,25 @@ func (MemoryStrategyType) Values() []MemoryStrategyType {
 	}
 }
 
+type MemoryView string
+
+// Enum values for MemoryView
+const (
+	MemoryViewFull              MemoryView = "full"
+	MemoryViewWithoutDecryption MemoryView = "without_decryption"
+)
+
+// Values returns all known values for MemoryView. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MemoryView) Values() []MemoryView {
+	return []MemoryView{
+		"full",
+		"without_decryption",
+	}
+}
+
 type NetworkMode string
 
 // Enum values for NetworkMode
