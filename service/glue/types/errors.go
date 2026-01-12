@@ -809,6 +809,90 @@ func (e *KMSKeyNotAccessibleFault) ErrorCode() string {
 }
 func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Exception thrown when stopping a task that is not in running state.
+type MaterializedViewRefreshTaskNotRunningException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MaterializedViewRefreshTaskNotRunningException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MaterializedViewRefreshTaskNotRunningException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MaterializedViewRefreshTaskNotRunningException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MaterializedViewRefreshTaskNotRunningException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MaterializedViewRefreshTaskNotRunningException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// Exception thrown when a task is already in running state.
+type MaterializedViewRefreshTaskRunningException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MaterializedViewRefreshTaskRunningException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MaterializedViewRefreshTaskRunningException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MaterializedViewRefreshTaskRunningException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MaterializedViewRefreshTaskRunningException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MaterializedViewRefreshTaskRunningException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// Exception thrown when a task is already in stopping state.
+type MaterializedViewRefreshTaskStoppingException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MaterializedViewRefreshTaskStoppingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MaterializedViewRefreshTaskStoppingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MaterializedViewRefreshTaskStoppingException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MaterializedViewRefreshTaskStoppingException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MaterializedViewRefreshTaskStoppingException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The machine learning transform is not ready to run.
 type MLTransformNotReadyException struct {
 	Message *string

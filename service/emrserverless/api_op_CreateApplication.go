@@ -55,6 +55,9 @@ type CreateApplicationInput struct {
 	// amount of time being idle.
 	AutoStopConfiguration *types.AutoStopConfig
 
+	// The configuration object that allows encrypting local disks.
+	DiskEncryptionConfiguration *types.DiskEncryptionConfiguration
+
 	// The IAM Identity Center Configuration accepts the Identity Center instance
 	// parameter required to enable trusted identity propagation. This configuration
 	// allows identity propagation between integrated services and the Identity Center

@@ -26861,6 +26861,40 @@ func awsRestjson1_deserializeDocument__listOfMediaConnectFlow(v *[]types.MediaCo
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfMediaPackageAdditionalDestinations(v *[]types.MediaPackageAdditionalDestinations, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MediaPackageAdditionalDestinations
+	if *v == nil {
+		cv = []types.MediaPackageAdditionalDestinations{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MediaPackageAdditionalDestinations
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMediaPackageAdditionalDestinations(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfMediaPackageOutputDestinationSettings(v *[]types.MediaPackageOutputDestinationSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41448,6 +41482,42 @@ func awsRestjson1_deserializeDocumentMediaConnectFlow(v **types.MediaConnectFlow
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMediaPackageAdditionalDestinations(v **types.MediaPackageAdditionalDestinations, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaPackageAdditionalDestinations
+	if *v == nil {
+		sv = &types.MediaPackageAdditionalDestinations{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "destination":
+			if err := awsRestjson1_deserializeDocumentOutputLocationRef(&sv.Destination, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMediaPackageGroupSettings(v **types.MediaPackageGroupSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41511,6 +41581,15 @@ func awsRestjson1_deserializeDocumentMediaPackageOutputDestinationSettings(v **t
 
 	for key, value := range shape {
 		switch key {
+		case "channelEndpointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
+				}
+				sv.ChannelEndpointId = ptr.String(jtv)
+			}
+
 		case "channelGroup":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -41536,6 +41615,15 @@ func awsRestjson1_deserializeDocumentMediaPackageOutputDestinationSettings(v **t
 					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
 				}
 				sv.ChannelName = ptr.String(jtv)
+			}
+
+		case "mediaPackageRegionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
+				}
+				sv.MediaPackageRegionName = ptr.String(jtv)
 			}
 
 		default:
@@ -41672,6 +41760,11 @@ func awsRestjson1_deserializeDocumentMediaPackageV2GroupSettings(v **types.Media
 
 	for key, value := range shape {
 		switch key {
+		case "additionalDestinations":
+			if err := awsRestjson1_deserializeDocument__listOfMediaPackageAdditionalDestinations(&sv.AdditionalDestinations, value); err != nil {
+				return err
+			}
+
 		case "captionLanguageMappings":
 			if err := awsRestjson1_deserializeDocument__listOfCaptionLanguageMapping(&sv.CaptionLanguageMappings, value); err != nil {
 				return err

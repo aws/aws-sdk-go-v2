@@ -2576,6 +2576,23 @@ func validate__listOfInputChannelLevel(v []types.InputChannelLevel) error {
 	}
 }
 
+func validate__listOfMediaPackageAdditionalDestinations(v []types.MediaPackageAdditionalDestinations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfMediaPackageAdditionalDestinations"}
+	for i := range v {
+		if err := validateMediaPackageAdditionalDestinations(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfMulticastSourceCreateRequest(v []types.MulticastSourceCreateRequest) error {
 	if v == nil {
 		return nil
@@ -4005,6 +4022,21 @@ func validateM2tsSettings(v *types.M2tsSettings) error {
 	}
 }
 
+func validateMediaPackageAdditionalDestinations(v *types.MediaPackageAdditionalDestinations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaPackageAdditionalDestinations"}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMediaPackageGroupSettings(v *types.MediaPackageGroupSettings) error {
 	if v == nil {
 		return nil
@@ -4033,6 +4065,11 @@ func validateMediaPackageV2GroupSettings(v *types.MediaPackageV2GroupSettings) e
 	if v.CaptionLanguageMappings != nil {
 		if err := validate__listOfCaptionLanguageMapping(v.CaptionLanguageMappings); err != nil {
 			invalidParams.AddNested("CaptionLanguageMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalDestinations != nil {
+		if err := validate__listOfMediaPackageAdditionalDestinations(v.AdditionalDestinations); err != nil {
+			invalidParams.AddNested("AdditionalDestinations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

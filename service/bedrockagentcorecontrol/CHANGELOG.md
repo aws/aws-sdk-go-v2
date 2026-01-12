@@ -1,3 +1,8 @@
+# v1.17.0 (2026-01-09)
+
+* **Feature**: Adds optional field "view" to GetMemory API input to give customers control over whether CMK encrypted data such as strategy decryption or override prompts is returned or not.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2025-12-18)
 
 * **Feature**: Feature to support header exchanges between Bedrock AgentCore Gateway Targets and client, along with propagating query parameter to the configured targets.

@@ -389,9 +389,8 @@ type AudioNormalizationSettings struct {
 	AlgorithmControl AudioNormalizationAlgorithmControl
 
 	// Target LKFS(loudness) to adjust volume to. If no value is entered, a default
-	// value will be used according to the chosen algorithm. The CALM Act (1770-1)
-	// recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends
-	// a target of -23 LKFS.
+	// value will be used according to the chosen algorithm. The CALM Act recommends a
+	// target of -24 LKFS. The EBU R-128 specification recommends a target of -23 LKFS.
 	TargetLkfs *float64
 
 	noSmithyDocumentSerde
@@ -5242,6 +5241,17 @@ type MediaConnectFlowRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Additional output destinations for a CMAF Ingest output group
+type MediaPackageAdditionalDestinations struct {
+
+	// The destination location
+	//
+	// This member is required.
+	Destination *OutputLocationRef
+
+	noSmithyDocumentSerde
+}
+
 // Media Package Group Settings
 type MediaPackageGroupSettings struct {
 
@@ -5261,6 +5271,11 @@ type MediaPackageGroupSettings struct {
 // MediaPackage Output Destination Settings
 type MediaPackageOutputDestinationSettings struct {
 
+	// Endpoint 1 or 2 of the channel in MediaPackageV2. Only use if you are sending
+	// CMAF Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses
+	// MediaPackage v2.
+	ChannelEndpointId *string
+
 	// Name of the channel group in MediaPackageV2. Only use if you are sending CMAF
 	// Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses
 	// MediaPackage v2.
@@ -5277,6 +5292,11 @@ type MediaPackageOutputDestinationSettings struct {
 	// output to a CMAF ingest endpoint on a MediaPackage channel that uses
 	// MediaPackage v2.
 	ChannelName *string
+
+	// Region the channel group and channel are located in for MediaPackageV2. Only
+	// use if you are sending CMAF Ingest output to a CMAF ingest endpoint on a
+	// MediaPackage channel that uses MediaPackage v2.
+	MediaPackageRegionName *string
 
 	noSmithyDocumentSerde
 }
@@ -5333,6 +5353,10 @@ type MediaPackageV2DestinationSettings struct {
 
 // Media Package V2 Group Settings
 type MediaPackageV2GroupSettings struct {
+
+	// Optional an array of additional destinational HTTP destinations for the
+	// OutputGroup outputs
+	AdditionalDestinations []MediaPackageAdditionalDestinations
 
 	// Mapping of up to 4 caption channels to caption languages.
 	CaptionLanguageMappings []CaptionLanguageMapping
