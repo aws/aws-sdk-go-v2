@@ -17208,6 +17208,15 @@ func awsRestjson1_deserializeDocumentCollaboration(v **types.Collaboration, valu
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "isMetricsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsMetricsEnabled = ptr.Bool(jtv)
+			}
+
 		case "jobLogStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23630,6 +23639,15 @@ func awsRestjson1_deserializeDocumentMembership(v **types.Membership, value inte
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "isMetricsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsMetricsEnabled = ptr.Bool(jtv)
 			}
 
 		case "jobLogStatus":

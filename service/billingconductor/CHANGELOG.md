@@ -1,3 +1,7 @@
+# v1.28.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2025-12-10)
 
 * **Feature**: Launch itemized custom line item and service line item filter

@@ -1,3 +1,48 @@
+# Release (2026-01-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.17.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1170-2026-01-09)
+  * **Feature**: Adds optional field "view" to GetMemory API input to give customers control over whether CMK encrypted data such as strategy decryption or override prompts is returned or not.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.59.0](service/cloudfront/CHANGELOG.md#v1590-2026-01-09)
+  * **Feature**: Added EntityLimitExceeded exception handling to the following API operations AssociateDistributionWebACL, AssociateDistributionTenantWebACL, UpdateDistributionWithStagingConfig
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.136.0](service/glue/CHANGELOG.md#v11360-2026-01-09)
+  * **Feature**: Adding MaterializedViews task run APIs
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.89.0](service/medialive/CHANGELOG.md#v1890-2026-01-09)
+  * **Feature**: MediaPackage v2 output groups in MediaLive can now accept one additional destination for single pipeline channels and up to two additional destinations for standard channels. MediaPackage v2 destinations now support sending to cross region MediaPackage channels.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.54.0](service/transcribe/CHANGELOG.md#v1540-2026-01-09)
+  * **Feature**: Adds waiters to Amazon Transcribe.
+
+# Release (2026-01-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.65.0](service/workspaces/CHANGELOG.md#v1650-2026-01-07)
+  * **Feature**: Add StateMessage and ProgressPercentage fields to DescribeCustomWorkspaceImageImport API response.
+
+# Release (2026-01-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.63.0](service/costexplorer/CHANGELOG.md#v1630-2026-01-06)
+  * **Feature**: This release updates existing reservation recommendations API to support deployment model.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.39.0](service/emrserverless/CHANGELOG.md#v1390-2026-01-06)
+  * **Feature**: Added support for enabling disk encryption using customer managed AWS KMS keys to CreateApplication, UpdateApplication and StartJobRun APIs.
+
+# Release (2026-01-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.22.0](service/cleanroomsml/CHANGELOG.md#v1220-2026-01-05)
+  * **Feature**: AWS Clean Rooms ML now supports advanced Spark configurations to optimize SQL performance when creating an MLInputChannel or an audience generation job.
+
+# Release (2026-01-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.40.0](service/cleanrooms/CHANGELOG.md#v1400-2026-01-02)
+  * **Feature**: Added support for publishing detailed metrics to CloudWatch for operational monitoring of collaborations, including query performance and resource utilization.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.36.0](service/identitystore/CHANGELOG.md#v1360-2026-01-02)
+  * **Feature**: This change introduces "Roles" attribute for User entities supported by AWS Identity Store SDK.
+
 # Release (2025-12-30)
 
 ## Module Highlights
