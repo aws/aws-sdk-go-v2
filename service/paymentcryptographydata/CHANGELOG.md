@@ -1,3 +1,7 @@
+# v1.25.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2025-12-17)
 
 * **Feature**: Support for AS2805 standard.  New API GenerateAs2805KekValidation and changes to translate pin, GenerateMac and VerifyMac to support AS2805 key variants.

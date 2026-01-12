@@ -21,7 +21,7 @@ import (
 // In the China (Ningxia) Region, you can copy images only within the same Region.
 //
 // In Amazon Web Services GovCloud (US), to copy images to and from other Regions,
-// contact Amazon Web ServicesSupport.
+// contact Amazon Web Services Support.
 //
 // For more information about sharing images, see [Share or Unshare a Custom WorkSpaces Image].
 //
@@ -31,7 +31,7 @@ import (
 //   - Sharing Bring Your Own License (BYOL) images across Amazon Web Services
 //     accounts isn't supported at this time in Amazon Web Services GovCloud (US). To
 //     share BYOL images across accounts in Amazon Web Services GovCloud (US), contact
-//     Amazon Web ServicesSupport.
+//     Amazon Web Services Support.
 //
 // [Share or Unshare a Custom WorkSpaces Image]: https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html
 func (c *Client) UpdateWorkspaceImagePermission(ctx context.Context, params *UpdateWorkspaceImagePermissionInput, optFns ...func(*Options)) (*UpdateWorkspaceImagePermissionOutput, error) {

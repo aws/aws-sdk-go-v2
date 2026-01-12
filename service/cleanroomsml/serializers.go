@@ -6090,6 +6090,17 @@ func awsRestjson1_serializeDocumentS3ConfigMap(v *types.S3ConfigMap, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSparkProperties(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentStoppingCondition(v *types.StoppingCondition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6332,10 +6343,35 @@ func awsRestjson1_serializeDocumentWorkerComputeConfiguration(v *types.WorkerCom
 		ok.Integer(*v.Number)
 	}
 
+	if v.Properties != nil {
+		ok := object.Key("properties")
+		if err := awsRestjson1_serializeDocumentWorkerComputeConfigurationProperties(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkerComputeConfigurationProperties(v types.WorkerComputeConfigurationProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.WorkerComputeConfigurationPropertiesMemberSpark:
+		av := object.Key("spark")
+		if err := awsRestjson1_serializeDocumentSparkProperties(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }

@@ -56,6 +56,9 @@ type Application struct {
 	// amount of time being idle.
 	AutoStopConfiguration *AutoStopConfig
 
+	// The configuration object that allows encrypting local disks.
+	DiskEncryptionConfiguration *DiskEncryptionConfiguration
+
 	// The IAM Identity Center configuration applied to enable trusted identity
 	// propagation.
 	IdentityCenterConfiguration *IdentityCenterConfiguration
@@ -249,8 +252,25 @@ type ConfigurationOverrides struct {
 	// The override configurations for the application.
 	ApplicationConfiguration []Configuration
 
+	// The override configuration to encrypt local disks.
+	DiskEncryptionConfiguration *DiskEncryptionConfiguration
+
 	// The override configurations for monitoring.
 	MonitoringConfiguration *MonitoringConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration object that allows encrypting local disks.
+type DiskEncryptionConfiguration struct {
+
+	// Specifies the optional encryption context that will be used when encrypting the
+	// data. An encryption context is a collection of non-secret key-value pairs that
+	// represent additional authenticated data.
+	EncryptionContext map[string]string
+
+	// The KMS key ARN to encrypt local disks.
+	EncryptionKeyArn *string
 
 	noSmithyDocumentSerde
 }

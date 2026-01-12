@@ -1,3 +1,7 @@
+# v1.34.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2025-12-19)
 
 * **Feature**: It is a internal bug fix for region expansion

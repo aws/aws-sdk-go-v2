@@ -51,6 +51,9 @@ type UpdateApplicationInput struct {
 	// amount of time being idle.
 	AutoStopConfiguration *types.AutoStopConfig
 
+	// The configuration object that allows encrypting local disks.
+	DiskEncryptionConfiguration *types.DiskEncryptionConfiguration
+
 	// Specifies the IAM Identity Center configuration used to enable or disable
 	// trusted identity propagation. When provided, this configuration determines how
 	// the application interacts with IAM Identity Center for user authentication and
