@@ -14013,6 +14013,7 @@
           "ap-southeast-3" : { },
           "ap-southeast-4" : { },
           "ap-southeast-5" : { },
+          "ap-southeast-6" : { },
           "ap-southeast-7" : { },
           "ca-central-1" : { },
           "ca-west-1" : { },
@@ -33819,6 +33820,12 @@
           }
         }
       },
+      "kafkaconnect" : {
+        "endpoints" : {
+          "us-gov-east-1" : { },
+          "us-gov-west-1" : { }
+        }
+      },
       "kendra" : {
         "endpoints" : {
           "fips-us-gov-west-1" : {
@@ -40217,7 +40224,7 @@
     "regionRegex" : "^eusc\\-(de)\\-\\w+\\-\\d+$",
     "regions" : {
       "eusc-de-east-1" : {
-        "description" : "EU (Germany)"
+        "description" : "AWS European Sovereign Cloud (Germany)"
       }
     },
     "services" : {
