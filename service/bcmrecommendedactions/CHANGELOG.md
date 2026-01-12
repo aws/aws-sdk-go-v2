@@ -1,3 +1,7 @@
+# v1.1.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2025-12-12)
 
 * **Feature**: Added new freetier action types to RecommendedAction.type.

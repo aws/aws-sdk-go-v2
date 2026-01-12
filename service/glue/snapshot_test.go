@@ -1622,6 +1622,18 @@ func TestCheckSnapshot_GetMapping(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMaterializedViewRefreshTaskRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMaterializedViewRefreshTaskRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMaterializedViewRefreshTaskRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMLTaskRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMLTaskRun(context.Background(), nil, func(o *Options) {
@@ -2270,6 +2282,18 @@ func TestCheckSnapshot_ListJobs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListMaterializedViewRefreshTaskRuns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMaterializedViewRefreshTaskRuns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMaterializedViewRefreshTaskRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListMLTransforms(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMLTransforms(context.Background(), nil, func(o *Options) {
@@ -2666,6 +2690,18 @@ func TestCheckSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartMaterializedViewRefreshTaskRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMaterializedViewRefreshTaskRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMaterializedViewRefreshTaskRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartMLEvaluationTaskRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMLEvaluationTaskRun(context.Background(), nil, func(o *Options) {
@@ -2755,6 +2791,18 @@ func TestCheckSnapshot_StopCrawlerSchedule(t *testing.T) {
 	_, err := svc.StopCrawlerSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopCrawlerSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopMaterializedViewRefreshTaskRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopMaterializedViewRefreshTaskRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopMaterializedViewRefreshTaskRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4729,6 +4777,18 @@ func TestUpdateSnapshot_GetMapping(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMaterializedViewRefreshTaskRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMaterializedViewRefreshTaskRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMaterializedViewRefreshTaskRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMLTaskRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMLTaskRun(context.Background(), nil, func(o *Options) {
@@ -5377,6 +5437,18 @@ func TestUpdateSnapshot_ListJobs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListMaterializedViewRefreshTaskRuns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMaterializedViewRefreshTaskRuns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMaterializedViewRefreshTaskRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListMLTransforms(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMLTransforms(context.Background(), nil, func(o *Options) {
@@ -5773,6 +5845,18 @@ func TestUpdateSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartMaterializedViewRefreshTaskRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMaterializedViewRefreshTaskRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMaterializedViewRefreshTaskRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartMLEvaluationTaskRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMLEvaluationTaskRun(context.Background(), nil, func(o *Options) {
@@ -5862,6 +5946,18 @@ func TestUpdateSnapshot_StopCrawlerSchedule(t *testing.T) {
 	_, err := svc.StopCrawlerSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopCrawlerSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopMaterializedViewRefreshTaskRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopMaterializedViewRefreshTaskRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopMaterializedViewRefreshTaskRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

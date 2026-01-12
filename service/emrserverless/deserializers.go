@@ -2575,6 +2575,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 			}
 
+		case "diskEncryptionConfiguration":
+			if err := awsRestjson1_deserializeDocumentDiskEncryptionConfiguration(&sv.DiskEncryptionConfiguration, value); err != nil {
+				return err
+			}
+
 		case "identityCenterConfiguration":
 			if err := awsRestjson1_deserializeDocumentIdentityCenterConfiguration(&sv.IdentityCenterConfiguration, value); err != nil {
 				return err
@@ -3150,6 +3155,11 @@ func awsRestjson1_deserializeDocumentConfigurationOverrides(v **types.Configurat
 				return err
 			}
 
+		case "diskEncryptionConfiguration":
+			if err := awsRestjson1_deserializeDocumentDiskEncryptionConfiguration(&sv.DiskEncryptionConfiguration, value); err != nil {
+				return err
+			}
+
 		case "monitoringConfiguration":
 			if err := awsRestjson1_deserializeDocumentMonitoringConfiguration(&sv.MonitoringConfiguration, value); err != nil {
 				return err
@@ -3201,6 +3211,87 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDiskEncryptionConfiguration(v **types.DiskEncryptionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DiskEncryptionConfiguration
+	if *v == nil {
+		sv = &types.DiskEncryptionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "encryptionContext":
+			if err := awsRestjson1_deserializeDocumentEncryptionContext(&sv.EncryptionContext, value); err != nil {
+				return err
+			}
+
+		case "encryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionKeyArn to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEncryptionContext(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EncryptionContextValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

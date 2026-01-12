@@ -93,6 +93,13 @@ type CreateCollaborationInput struct {
 	// Rooms.
 	DataEncryptionMetadata *types.DataEncryptionMetadata
 
+	// An indicator as to whether metrics have been enabled or disabled for the
+	// collaboration.
+	//
+	// When true , collaboration members can opt in to Amazon CloudWatch metrics for
+	// their membership queries. The default value is false .
+	IsMetricsEnabled *bool
+
 	// Specifies whether job logs are enabled for this collaboration.
 	//
 	// When ENABLED , Clean Rooms logs details about jobs run within this
