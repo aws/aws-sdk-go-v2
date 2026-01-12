@@ -1614,6 +1614,33 @@
                     "method": "GET",
                     "uri": "/languagemodels/{ModelName}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "LanguageModelCompleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "LanguageModel.ModelStatus",
+                                        "expected": "COMPLETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "LanguageModel.ModelStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 120
+                    }
                 }
             }
         },
@@ -1742,6 +1769,33 @@
                     "method": "GET",
                     "uri": "/callanalyticsjobs/{CallAnalyticsJobName}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "CallAnalyticsJobCompleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CallAnalyticsJob.CallAnalyticsJobStatus",
+                                        "expected": "COMPLETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CallAnalyticsJob.CallAnalyticsJobStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -1803,6 +1857,33 @@
                     "method": "GET",
                     "uri": "/medicalscribejobs/{MedicalScribeJobName}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "MedicalScribeJobCompleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "MedicalScribeJob.MedicalScribeJobStatus",
+                                        "expected": "COMPLETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "MedicalScribeJob.MedicalScribeJobStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -1864,6 +1945,33 @@
                     "method": "GET",
                     "uri": "/medicaltranscriptionjobs/{MedicalTranscriptionJobName}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "MedicalTranscriptionJobCompleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "MedicalTranscriptionJob.TranscriptionJobStatus",
+                                        "expected": "COMPLETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "MedicalTranscriptionJob.TranscriptionJobStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -1925,6 +2033,33 @@
                     "method": "GET",
                     "uri": "/medicalvocabularies/{VocabularyName}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "MedicalVocabularyReady": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "VocabularyState",
+                                        "expected": "READY",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "VocabularyState",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -2016,6 +2151,33 @@
                     "method": "GET",
                     "uri": "/transcriptionjobs/{TranscriptionJobName}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "TranscriptionJobCompleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "TranscriptionJob.TranscriptionJobStatus",
+                                        "expected": "COMPLETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "TranscriptionJob.TranscriptionJobStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -2077,6 +2239,33 @@
                     "method": "GET",
                     "uri": "/vocabularies/{VocabularyName}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "VocabularyReady": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "VocabularyState",
+                                        "expected": "READY",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "VocabularyState",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },

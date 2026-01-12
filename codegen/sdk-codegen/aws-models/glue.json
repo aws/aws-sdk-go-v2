@@ -424,6 +424,9 @@
                     "target": "com.amazonaws.glue#GetMapping"
                 },
                 {
+                    "target": "com.amazonaws.glue#GetMaterializedViewRefreshTaskRun"
+                },
+                {
                     "target": "com.amazonaws.glue#GetMLTaskRun"
                 },
                 {
@@ -586,6 +589,9 @@
                     "target": "com.amazonaws.glue#ListJobs"
                 },
                 {
+                    "target": "com.amazonaws.glue#ListMaterializedViewRefreshTaskRuns"
+                },
+                {
                     "target": "com.amazonaws.glue#ListMLTransforms"
                 },
                 {
@@ -685,6 +691,9 @@
                     "target": "com.amazonaws.glue#StartJobRun"
                 },
                 {
+                    "target": "com.amazonaws.glue#StartMaterializedViewRefreshTaskRun"
+                },
+                {
                     "target": "com.amazonaws.glue#StartMLEvaluationTaskRun"
                 },
                 {
@@ -707,6 +716,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#StopCrawlerSchedule"
+                },
+                {
+                    "target": "com.amazonaws.glue#StopMaterializedViewRefreshTaskRun"
                 },
                 {
                     "target": "com.amazonaws.glue#StopSession"
@@ -4844,6 +4856,14 @@
         },
         "com.amazonaws.glue#BoxedPositiveInt": {
             "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.glue#ByteCount": {
+            "type": "long",
             "traits": {
                 "smithy.api#range": {
                     "min": 0
@@ -23497,6 +23517,68 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#GetMaterializedViewRefreshTaskRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetMaterializedViewRefreshTaskRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetMaterializedViewRefreshTaskRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the associated metadata/information for a task run, given a task run ID.</p>"
+            }
+        },
+        "com.amazonaws.glue#GetMaterializedViewRefreshTaskRunRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaterializedViewRefreshTaskRunId": {
+                    "target": "com.amazonaws.glue#UUIDv4",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the particular materialized view refresh task run.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetMaterializedViewRefreshTaskRunResponse": {
+            "type": "structure",
+            "members": {
+                "MaterializedViewRefreshTaskRun": {
+                    "target": "com.amazonaws.glue#MaterializedViewRefreshTaskRun",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A MaterializedViewRefreshTaskRun object representing the details of the task run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#GetPartition": {
             "type": "operation",
             "input": {
@@ -31972,6 +32054,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#ListMaterializedViewRefreshTaskRuns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListMaterializedViewRefreshTaskRunsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListMaterializedViewRefreshTaskRunsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all task runs for a particular account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "MaterializedViewRefreshTaskRuns",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListMaterializedViewRefreshTaskRunsRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database where the table resides.</p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table for which statistics is generated.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListMaterializedViewRefreshTaskRunsResponse": {
+            "type": "structure",
+            "members": {
+                "MaterializedViewRefreshTaskRuns": {
+                    "target": "com.amazonaws.glue#MaterializedViewRefreshTaskRunsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the ListMaterializedViewRefreshTaskRuns action. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if not all task run IDs have yet been returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#ListOfString": {
             "type": "list",
             "member": {
@@ -33210,6 +33380,199 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10
+                }
+            }
+        },
+        "com.amazonaws.glue#MaterializedViewRefreshState": {
+            "type": "enum",
+            "members": {
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#MaterializedViewRefreshTaskNotRunningException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.glue#MessageString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Exception thrown when stopping a task that is not in running state.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.glue#MaterializedViewRefreshTaskRun": {
+            "type": "structure",
+            "members": {
+                "CustomerId": {
+                    "target": "com.amazonaws.glue#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>"
+                    }
+                },
+                "MaterializedViewRefreshTaskRunId": {
+                    "target": "com.amazonaws.glue#UUIDv4",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the materialized view refresh task run.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database where the table resides.</p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table for which statistics is generated.</p>"
+                    }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.glue#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that the service assumes to generate statistics.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.glue#MaterializedViewRefreshState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the task run.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that this task was created.</p>"
+                    }
+                },
+                "LastUpdated": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last point in time when this task was modified.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the task.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of the task.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.glue#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message for the job.</p>"
+                    }
+                },
+                "DPUSeconds": {
+                    "target": "com.amazonaws.glue#NonNegativeDouble",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The calculated DPU usage in seconds for all autoscaled workers.</p>"
+                    }
+                },
+                "RefreshType": {
+                    "target": "com.amazonaws.glue#MaterializedViewRefreshType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the refresh task run. Either FULL or INCREMENTAL.</p>"
+                    }
+                },
+                "ProcessedBytes": {
+                    "target": "com.amazonaws.glue#ByteCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bytes the refresh task run has scanned to refresh the materialized view.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that shows the details of the materialized view refresh task run.</p>"
+            }
+        },
+        "com.amazonaws.glue#MaterializedViewRefreshTaskRunningException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.glue#MessageString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Exception thrown when a task is already in running state.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.glue#MaterializedViewRefreshTaskRunsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#MaterializedViewRefreshTaskRun"
+            }
+        },
+        "com.amazonaws.glue#MaterializedViewRefreshTaskStoppingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.glue#MessageString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Exception thrown when a task is already in stopping state.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.glue#MaterializedViewRefreshType": {
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
+                    }
+                },
+                "INCREMENTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREMENTAL"
+                    }
                 }
             }
         },
@@ -41592,6 +41955,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#StartMaterializedViewRefreshTaskRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#StartMaterializedViewRefreshTaskRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#StartMaterializedViewRefreshTaskRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#MaterializedViewRefreshTaskRunningException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a materialized view refresh task run, for a specified table and columns.</p>"
+            }
+        },
+        "com.amazonaws.glue#StartMaterializedViewRefreshTaskRunRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table reside. If none is supplied, the account ID is used by default.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database where the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table to generate run the materialized view refresh task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FullRefresh": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is a full refresh of the task run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#StartMaterializedViewRefreshTaskRunResponse": {
+            "type": "structure",
+            "members": {
+                "MaterializedViewRefreshTaskRunId": {
+                    "target": "com.amazonaws.glue#UUIDv4",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the materialized view refresh task run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#StartTrigger": {
             "type": "operation",
             "input": {
@@ -42357,6 +42801,71 @@
             }
         },
         "com.amazonaws.glue#StopCrawlerScheduleResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#StopMaterializedViewRefreshTaskRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#StopMaterializedViewRefreshTaskRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#StopMaterializedViewRefreshTaskRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#MaterializedViewRefreshTaskNotRunningException"
+                },
+                {
+                    "target": "com.amazonaws.glue#MaterializedViewRefreshTaskStoppingException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a materialized view refresh task run, for a specified table and columns.</p>"
+            }
+        },
+        "com.amazonaws.glue#StopMaterializedViewRefreshTaskRunRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table reside. If none is supplied, the account ID is used by default.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database where the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table to generate statistics.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#StopMaterializedViewRefreshTaskRunResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -44788,6 +45297,12 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.glue#UUIDv4": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
             }
         },
         "com.amazonaws.glue#UnfilteredPartition": {
