@@ -1,0 +1,8 @@
+{
+    "id": "982e3b89-6c68-45c8-a15c-8b2a3ff804bb",
+    "type": "feature",
+    "description": "Added ultraServerType to the UltraServerInfo structure to support server type identification for SageMaker HyperPod",
+    "modules": [
+        "service/sagemaker"
+    ]
+}
