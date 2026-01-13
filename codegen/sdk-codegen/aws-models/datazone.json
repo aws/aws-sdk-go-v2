@@ -8744,6 +8744,12 @@
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
+                    }
                 }
             },
             "traits": {
@@ -8853,6 +8859,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The provider of the subscription target.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
                     }
                 }
             },
@@ -20690,6 +20702,12 @@
                         "smithy.api#documentation": "<p>The provider of the subscription target.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
+                    }
                 }
             },
             "traits": {
@@ -22245,6 +22263,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The hyper pod properties of a Amazon Web Services Glue properties patch.</p>"
+            }
+        },
+        "com.amazonaws.datazone#IamPrincipalArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|user)(/[\\w+=,.@-]*)*/[\\w+=,.@-]+$"
             }
         },
         "com.amazonaws.datazone#IamPropertiesInput": {
@@ -26364,6 +26392,13 @@
                         "smithy.api#httpQuery": "owningProjectId"
                     }
                 },
+                "owningIamPrincipalArn": {
+                    "target": "com.amazonaws.datazone#IamPrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the owning IAM principal.</p>",
+                        "smithy.api#httpQuery": "owningIamPrincipalArn"
+                    }
+                },
                 "owningUserId": {
                     "target": "com.amazonaws.datazone#UserProfileId",
                     "traits": {
@@ -26507,6 +26542,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the project for the subscription requests.</p>",
                         "smithy.api#httpQuery": "owningProjectId"
+                    }
+                },
+                "owningIamPrincipalArn": {
+                    "target": "com.amazonaws.datazone#IamPrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the owning IAM principal.</p>",
+                        "smithy.api#httpQuery": "owningIamPrincipalArn"
                     }
                 },
                 "approverProjectId": {
@@ -26780,6 +26822,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the owning project.</p>",
                         "smithy.api#httpQuery": "owningProjectId"
+                    }
+                },
+                "owningIamPrincipalArn": {
+                    "target": "com.amazonaws.datazone#IamPrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the owning IAM principal.</p>",
+                        "smithy.api#httpQuery": "owningIamPrincipalArn"
                     }
                 },
                 "owningUserId": {
@@ -34002,6 +34051,34 @@
                 "smithy.api#documentation": "<p>The details of the subscribed group.</p>"
             }
         },
+        "com.amazonaws.datazone#SubscribedIamPrincipal": {
+            "type": "structure",
+            "members": {
+                "principalArn": {
+                    "target": "com.amazonaws.datazone#IamPrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the subscribed IAM principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The IAM principal that subscribes to the asset.</p>"
+            }
+        },
+        "com.amazonaws.datazone#SubscribedIamPrincipalInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.datazone#IamPrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the subscribed IAM principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the subscribed IAM principal.</p>"
+            }
+        },
         "com.amazonaws.datazone#SubscribedListing": {
             "type": "structure",
             "members": {
@@ -34130,6 +34207,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The subscribed group.</p>"
                     }
+                },
+                "iam": {
+                    "target": "com.amazonaws.datazone#SubscribedIamPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subscribed IAM principal.</p>"
+                    }
                 }
             },
             "traits": {
@@ -34155,6 +34238,12 @@
                     "target": "com.amazonaws.datazone#SubscribedGroupInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The subscribed group.</p>"
+                    }
+                },
+                "iam": {
+                    "target": "com.amazonaws.datazone#SubscribedIamPrincipalInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subscribed IAM principal.</p>"
                     }
                 }
             },
@@ -34290,6 +34379,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The subscribed user.</p>"
+            }
+        },
+        "com.amazonaws.datazone#SubscriptionGrantCreationMode": {
+            "type": "enum",
+            "members": {
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                }
             }
         },
         "com.amazonaws.datazone#SubscriptionGrantId": {
@@ -34897,6 +35003,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The provider of the subscription target.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
                     }
                 }
             },
@@ -39272,6 +39384,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>"
                     }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
+                    }
                 }
             },
             "traits": {
@@ -39381,6 +39499,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
                     }
                 }
             },
