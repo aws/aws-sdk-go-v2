@@ -6203,6 +6203,24 @@ type SubscribedGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+// The IAM principal that subscribes to the asset.
+type SubscribedIamPrincipal struct {
+
+	// The ARN of the subscribed IAM principal.
+	PrincipalArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the subscribed IAM principal.
+type SubscribedIamPrincipalInput struct {
+
+	// The ARN of the subscribed IAM principal.
+	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of the published asset for which the subscription grant is created.
 type SubscribedListing struct {
 
@@ -6289,6 +6307,7 @@ func (*SubscribedListingItemMemberProductListing) isSubscribedListingItem() {}
 // The following types satisfy this interface:
 //
 //	SubscribedPrincipalMemberGroup
+//	SubscribedPrincipalMemberIam
 //	SubscribedPrincipalMemberProject
 //	SubscribedPrincipalMemberUser
 type SubscribedPrincipal interface {
@@ -6303,6 +6322,15 @@ type SubscribedPrincipalMemberGroup struct {
 }
 
 func (*SubscribedPrincipalMemberGroup) isSubscribedPrincipal() {}
+
+// The subscribed IAM principal.
+type SubscribedPrincipalMemberIam struct {
+	Value SubscribedIamPrincipal
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscribedPrincipalMemberIam) isSubscribedPrincipal() {}
 
 // The project that has the subscription grant.
 type SubscribedPrincipalMemberProject struct {
@@ -6327,6 +6355,7 @@ func (*SubscribedPrincipalMemberUser) isSubscribedPrincipal() {}
 // The following types satisfy this interface:
 //
 //	SubscribedPrincipalInputMemberGroup
+//	SubscribedPrincipalInputMemberIam
 //	SubscribedPrincipalInputMemberProject
 //	SubscribedPrincipalInputMemberUser
 type SubscribedPrincipalInput interface {
@@ -6341,6 +6370,15 @@ type SubscribedPrincipalInputMemberGroup struct {
 }
 
 func (*SubscribedPrincipalInputMemberGroup) isSubscribedPrincipalInput() {}
+
+// The subscribed IAM principal.
+type SubscribedPrincipalInputMemberIam struct {
+	Value SubscribedIamPrincipalInput
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscribedPrincipalInputMemberIam) isSubscribedPrincipalInput() {}
 
 // The project that is to be given a subscription grant.
 type SubscribedPrincipalInputMemberProject struct {
@@ -6691,6 +6729,10 @@ type SubscriptionTargetSummary struct {
 
 	// The manage access role specified in the subscription target.
 	ManageAccessRole *string
+
+	//  Determines the subscription grant creation mode for this target, defining if
+	// grants are auto-created upon subscription approval or managed manually.
+	SubscriptionGrantCreationMode SubscriptionGrantCreationMode
 
 	// The timestamp of when the subscription target was updated.
 	UpdatedAt *time.Time

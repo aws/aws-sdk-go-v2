@@ -1,0 +1,8 @@
+{
+    "id": "7f6488df-ae2d-4376-aede-a2af5cd5a7b1",
+    "type": "feature",
+    "description": "Adds support for IAM role subscriptions to Glue table listings via CreateSubscriptionRequest API. Also adds owningIamPrincipalArn filter to List APIs and subscriptionGrantCreationMode parameter to subscription target APIs for controlling grant creation behavior.",
+    "modules": [
+        "service/datazone"
+    ]
+}

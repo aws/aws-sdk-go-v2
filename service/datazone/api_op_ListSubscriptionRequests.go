@@ -55,6 +55,9 @@ type ListSubscriptionRequestsInput struct {
 	// The ID of the owning group.
 	OwningGroupId *string
 
+	// The ARN of the owning IAM principal.
+	OwningIamPrincipalArn *string
+
 	// The identifier of the project for the subscription requests.
 	OwningProjectId *string
 

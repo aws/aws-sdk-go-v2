@@ -65,6 +65,10 @@ type UpdateSubscriptionTargetInput struct {
 	// The provider to be updated as part of the UpdateSubscriptionTarget action.
 	Provider *string
 
+	//  Determines the subscription grant creation mode for this target, defining if
+	// grants are auto-created upon subscription approval or managed manually.
+	SubscriptionGrantCreationMode types.SubscriptionGrantCreationMode
+
 	// The configuration to be updated as part of the UpdateSubscriptionTarget action.
 	SubscriptionTargetConfig []types.SubscriptionTargetForm
 
@@ -140,6 +144,10 @@ type UpdateSubscriptionTargetOutput struct {
 	// The manage access role to be updated as part of the UpdateSubscriptionTarget
 	// action.
 	ManageAccessRole *string
+
+	//  Determines the subscription grant creation mode for this target, defining if
+	// grants are auto-created upon subscription approval or managed manually.
+	SubscriptionGrantCreationMode types.SubscriptionGrantCreationMode
 
 	// The timestamp of when the subscription target was updated.
 	UpdatedAt *time.Time

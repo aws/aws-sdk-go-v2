@@ -8871,6 +8871,15 @@ func awsRestjson1_deserializeOpDocumentCreateSubscriptionTargetOutput(v **Create
 				sv.Provider = ptr.String(jtv)
 			}
 
+		case "subscriptionGrantCreationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubscriptionGrantCreationMode to be of type string, got %T instead", value)
+				}
+				sv.SubscriptionGrantCreationMode = types.SubscriptionGrantCreationMode(jtv)
+			}
+
 		case "subscriptionTargetConfig":
 			if err := awsRestjson1_deserializeDocumentSubscriptionTargetForms(&sv.SubscriptionTargetConfig, value); err != nil {
 				return err
@@ -21751,6 +21760,15 @@ func awsRestjson1_deserializeOpDocumentGetSubscriptionTargetOutput(v **GetSubscr
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Provider = ptr.String(jtv)
+			}
+
+		case "subscriptionGrantCreationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubscriptionGrantCreationMode to be of type string, got %T instead", value)
+				}
+				sv.SubscriptionGrantCreationMode = types.SubscriptionGrantCreationMode(jtv)
 			}
 
 		case "subscriptionTargetConfig":
@@ -36556,6 +36574,15 @@ func awsRestjson1_deserializeOpDocumentUpdateSubscriptionTargetOutput(v **Update
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Provider = ptr.String(jtv)
+			}
+
+		case "subscriptionGrantCreationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubscriptionGrantCreationMode to be of type string, got %T instead", value)
+				}
+				sv.SubscriptionGrantCreationMode = types.SubscriptionGrantCreationMode(jtv)
 			}
 
 		case "subscriptionTargetConfig":
@@ -55278,6 +55305,46 @@ func awsRestjson1_deserializeDocumentSubscribedGroup(v **types.SubscribedGroup, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSubscribedIamPrincipal(v **types.SubscribedIamPrincipal, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubscribedIamPrincipal
+	if *v == nil {
+		sv = &types.SubscribedIamPrincipal{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "principalArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamPrincipalArn to be of type string, got %T instead", value)
+				}
+				sv.PrincipalArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSubscribedListing(v **types.SubscribedListing, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -55480,6 +55547,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.SubscribedPrincipalMemberGroup{Value: mv}
+			break loop
+
+		case "iam":
+			var mv types.SubscribedIamPrincipal
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSubscribedIamPrincipal(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SubscribedPrincipalMemberIam{Value: mv}
 			break loop
 
 		case "project":
@@ -56492,6 +56569,15 @@ func awsRestjson1_deserializeDocumentSubscriptionTargetSummary(v **types.Subscri
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Provider = ptr.String(jtv)
+			}
+
+		case "subscriptionGrantCreationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubscriptionGrantCreationMode to be of type string, got %T instead", value)
+				}
+				sv.SubscriptionGrantCreationMode = types.SubscriptionGrantCreationMode(jtv)
 			}
 
 		case "subscriptionTargetConfig":
