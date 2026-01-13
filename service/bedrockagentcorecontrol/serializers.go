@@ -3446,6 +3446,10 @@ func awsRestjson1_serializeOpHttpBindingsGetMemoryInput(v *GetMemoryInput, encod
 		}
 	}
 
+	if len(v.View) > 0 {
+		encoder.SetQuery("view").String(string(v.View))
+	}
+
 	return nil
 }
 

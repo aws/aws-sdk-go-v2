@@ -1,3 +1,7 @@
+# v1.13.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2025-12-17)
 
 * **Feature**: Adds an additional OutputFormat

@@ -95634,6 +95634,15 @@ func awsAwsjson11_deserializeDocumentUltraServerInfo(v **types.UltraServerInfo, 
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

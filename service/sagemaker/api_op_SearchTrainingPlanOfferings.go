@@ -43,26 +43,7 @@ func (c *Client) SearchTrainingPlanOfferings(ctx context.Context, params *Search
 type SearchTrainingPlanOfferingsInput struct {
 
 	// The desired duration in hours for the training plan offerings.
-	//
-	// This member is required.
 	DurationHours *int64
-
-	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
-	// SageMaker Endpoints) to search for in the offerings.
-	//
-	// Training plans are specific to their target resource.
-	//
-	//   - A training plan designed for SageMaker training jobs can only be used to
-	//   schedule and run training jobs.
-	//
-	//   - A training plan for HyperPod clusters can be used exclusively to provide
-	//   compute resources to a cluster's instance group.
-	//
-	//   - A training plan for SageMaker endpoints can be used exclusively to provide
-	//   compute resources to SageMaker endpoints for model deployment.
-	//
-	// This member is required.
-	TargetResources []types.SageMakerResourceName
 
 	// A filter to search for reserved capacity offerings with an end time before a
 	// specified date.
@@ -85,6 +66,21 @@ type SearchTrainingPlanOfferingsInput struct {
 	// A filter to search for training plan offerings with a start time after a
 	// specified date.
 	StartTimeAfter *time.Time
+
+	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
+	// SageMaker Endpoints) to search for in the offerings.
+	//
+	// Training plans are specific to their target resource.
+	//
+	//   - A training plan designed for SageMaker training jobs can only be used to
+	//   schedule and run training jobs.
+	//
+	//   - A training plan for HyperPod clusters can be used exclusively to provide
+	//   compute resources to a cluster's instance group.
+	//
+	//   - A training plan for SageMaker endpoints can be used exclusively to provide
+	//   compute resources to SageMaker endpoints for model deployment.
+	TargetResources []types.SageMakerResourceName
 
 	// The number of UltraServers to search for.
 	UltraServerCount *int32
@@ -173,9 +169,6 @@ func (c *Client) addOperationSearchTrainingPlanOfferingsMiddlewares(stack *middl
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpSearchTrainingPlanOfferingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchTrainingPlanOfferings(options.Region), middleware.Before); err != nil {

@@ -1,3 +1,8 @@
+# v1.59.0 (2026-01-09)
+
+* **Feature**: Added EntityLimitExceeded exception handling to the following API operations AssociateDistributionWebACL, AssociateDistributionTenantWebACL, UpdateDistributionWithStagingConfig
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.3 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

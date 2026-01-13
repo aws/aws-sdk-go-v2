@@ -1,3 +1,11 @@
+# v1.22.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.0 (2026-01-05)
+
+* **Feature**: AWS Clean Rooms ML now supports advanced Spark configurations to optimize SQL performance when creating an MLInputChannel or an audience generation job.
+
 # v1.21.2 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

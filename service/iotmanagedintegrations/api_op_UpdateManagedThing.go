@@ -72,6 +72,10 @@ type UpdateManagedThingInput struct {
 	// The serial number of the device.
 	SerialNumber *string
 
+	// The Wi-Fi Simple Setup configuration for the managed thing, which defines
+	// provisioning capabilities and timeout settings.
+	WiFiSimpleSetupConfiguration *types.WiFiSimpleSetupConfiguration
+
 	noSmithyDocumentSerde
 }
 

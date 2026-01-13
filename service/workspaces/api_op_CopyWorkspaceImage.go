@@ -17,7 +17,7 @@ import (
 // In the China (Ningxia) Region, you can copy images only within the same Region.
 //
 // In Amazon Web Services GovCloud (US), to copy images to and from other Regions,
-// contact Amazon Web ServicesSupport.
+// contact Amazon Web Services Support.
 //
 // Before copying a shared image, be sure to verify that it has been shared from
 // the correct Amazon Web Services account. To determine if an image has been

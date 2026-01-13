@@ -15,7 +15,7 @@ import (
 //
 // Terminating a WorkSpace is a permanent action and cannot be undone. The user's
 // data is destroyed. If you need to archive any user data, contact Amazon Web
-// ServicesSupport before terminating the WorkSpace.
+// Services Support before terminating the WorkSpace.
 //
 // You can terminate a WorkSpace that is in any state except SUSPENDED .
 //

@@ -2905,8 +2905,7 @@ type BatchTransformInput struct {
 // The metadata of the Amazon Bedrock custom model deployment.
 type BedrockCustomModelDeploymentMetadata struct {
 
-	//  The Amazon Resource Name (ARN) of the metadata for the Amazon Bedrock custom
-	// model deployment.
+	//  The Amazon Resource Name (ARN) for the Amazon Bedrock custom model deployment.
 	Arn *string
 
 	noSmithyDocumentSerde
@@ -2915,7 +2914,7 @@ type BedrockCustomModelDeploymentMetadata struct {
 // The metadata of the Amazon Bedrock custom model.
 type BedrockCustomModelMetadata struct {
 
-	//  The Amazon Resource Name (ARN) of the Amazon Bedrock custom model metadata.
+	//  The Amazon Resource Name (ARN) of the Amazon Bedrock custom model.
 	Arn *string
 
 	noSmithyDocumentSerde
@@ -2924,7 +2923,7 @@ type BedrockCustomModelMetadata struct {
 // The metadata of the Amazon Bedrock model import.
 type BedrockModelImportMetadata struct {
 
-	//  The Amazon Resource Name (ARN) of the Amazon Bedrock model import metadata.
+	//  The Amazon Resource Name (ARN) of the Amazon Bedrock model import.
 	Arn *string
 
 	noSmithyDocumentSerde
@@ -2934,7 +2933,7 @@ type BedrockModelImportMetadata struct {
 type BedrockProvisionedModelThroughputMetadata struct {
 
 	//  The Amazon Resource Name (ARN) of the Amazon Bedrock provisioned model
-	// throughput metadata.
+	// throughput.
 	Arn *string
 
 	noSmithyDocumentSerde
@@ -10730,7 +10729,7 @@ type InferenceComponentDeploymentConfig struct {
 // The metadata of the inference component.
 type InferenceComponentMetadata struct {
 
-	//  The Amazon Resource Name (ARN) of the inference component metadata.
+	//  The Amazon Resource Name (ARN) of the inference component.
 	Arn *string
 
 	noSmithyDocumentSerde
@@ -12169,16 +12168,16 @@ type LineageGroupSummary struct {
 // contexts.
 type LineageMetadata struct {
 
-	//  The Amazon Resource Name (ARN) of the lineage metadata action.
+	//  The Amazon Resource Name (ARN) of the lineage action.
 	ActionArns map[string]string
 
-	//  The Amazon Resource Name (ARN) of the lineage metadata artifact.
+	//  The Amazon Resource Name (ARN) of the lineage artifact.
 	ArtifactArns map[string]string
 
-	//  The lineage metadata associations.
+	//  The lineage associations.
 	Associations []AssociationInfo
 
-	//  The Amazon Resource Name (ARN) of the lineage metadata context.
+	//  The Amazon Resource Name (ARN) of the lineage context.
 	ContextArns map[string]string
 
 	noSmithyDocumentSerde
@@ -13406,7 +13405,8 @@ type ModelPackageContainerDefinition struct {
 	// container for your model package.
 	AdditionalS3DataSource *AdditionalS3DataSource
 
-	//  The base model of the package.
+	//  Identifies the foundation model that was used as the starting point for model
+	// customization.
 	BaseModel *BaseModel
 
 	// The DNS host name for the Docker container.
@@ -13438,7 +13438,7 @@ type ModelPackageContainerDefinition struct {
 	// training.
 	ImageDigest *string
 
-	//  The checkpoint of the model package.
+	//  Specifies whether the model data is a training checkpoint.
 	IsCheckpoint *bool
 
 	// The ETag associated with Model Data URL.
@@ -22353,6 +22353,9 @@ type UltraServerInfo struct {
 
 	// The unique identifier of the UltraServer.
 	Id *string
+
+	// The type of the UltraServer.
+	Type *string
 
 	noSmithyDocumentSerde
 }

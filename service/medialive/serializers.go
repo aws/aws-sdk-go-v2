@@ -11377,6 +11377,19 @@ func awsRestjson1_serializeDocument__listOfMediaConnectFlowRequest(v []types.Med
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfMediaPackageAdditionalDestinations(v []types.MediaPackageAdditionalDestinations, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMediaPackageAdditionalDestinations(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfMediaPackageOutputDestinationSettings(v []types.MediaPackageOutputDestinationSettings, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -16600,6 +16613,20 @@ func awsRestjson1_serializeDocumentMediaConnectFlowRequest(v *types.MediaConnect
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMediaPackageAdditionalDestinations(v *types.MediaPackageAdditionalDestinations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destination != nil {
+		ok := object.Key("destination")
+		if err := awsRestjson1_serializeDocumentOutputLocationRef(v.Destination, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMediaPackageGroupSettings(v *types.MediaPackageGroupSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -16625,6 +16652,11 @@ func awsRestjson1_serializeDocumentMediaPackageOutputDestinationSettings(v *type
 	object := value.Object()
 	defer object.Close()
 
+	if v.ChannelEndpointId != nil {
+		ok := object.Key("channelEndpointId")
+		ok.String(*v.ChannelEndpointId)
+	}
+
 	if v.ChannelGroup != nil {
 		ok := object.Key("channelGroup")
 		ok.String(*v.ChannelGroup)
@@ -16638,6 +16670,11 @@ func awsRestjson1_serializeDocumentMediaPackageOutputDestinationSettings(v *type
 	if v.ChannelName != nil {
 		ok := object.Key("channelName")
 		ok.String(*v.ChannelName)
+	}
+
+	if v.MediaPackageRegionName != nil {
+		ok := object.Key("mediaPackageRegionName")
+		ok.String(*v.MediaPackageRegionName)
 	}
 
 	return nil
@@ -16687,6 +16724,13 @@ func awsRestjson1_serializeDocumentMediaPackageV2DestinationSettings(v *types.Me
 func awsRestjson1_serializeDocumentMediaPackageV2GroupSettings(v *types.MediaPackageV2GroupSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdditionalDestinations != nil {
+		ok := object.Key("additionalDestinations")
+		if err := awsRestjson1_serializeDocument__listOfMediaPackageAdditionalDestinations(v.AdditionalDestinations, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CaptionLanguageMappings != nil {
 		ok := object.Key("captionLanguageMappings")

@@ -64,8 +64,14 @@ type DescribeCustomWorkspaceImageImportOutput struct {
 	// The timestamp when the WorkSpace image import was last updated.
 	LastUpdatedTime *time.Time
 
+	// The estimated progress percentage of the WorkSpace image import workflow.
+	ProgressPercentage *int32
+
 	// The state of the WorkSpace image.
 	State types.CustomWorkspaceImageImportState
+
+	// The state message of the WorkSpace image import workflow.
+	StateMessage *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

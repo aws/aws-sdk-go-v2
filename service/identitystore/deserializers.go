@@ -2763,7 +2763,7 @@ func awsAwsjson11_deserializeDocumentAddress(v **types.Address, value interface{
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected SensitiveBooleanType to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
 				}
 				sv.Primary = jtv
 			}
@@ -2930,7 +2930,7 @@ func awsAwsjson11_deserializeDocumentEmail(v **types.Email, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected SensitiveBooleanType to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
 				}
 				sv.Primary = jtv
 			}
@@ -3388,7 +3388,7 @@ func awsAwsjson11_deserializeDocumentGroupMembershipExistenceResult(v **types.Gr
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected SensitiveBooleanType to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
 				}
 				sv.MembershipExists = jtv
 			}
@@ -3719,7 +3719,7 @@ func awsAwsjson11_deserializeDocumentPhoneNumber(v **types.PhoneNumber, value in
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected SensitiveBooleanType to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
 				}
 				sv.Primary = jtv
 			}
@@ -3820,7 +3820,7 @@ func awsAwsjson11_deserializeDocumentPhoto(v **types.Photo, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected SensitiveBooleanType to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
 				}
 				sv.Primary = jtv
 			}
@@ -3959,6 +3959,98 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRole(v **types.Role, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Role
+	if *v == nil {
+		sv = &types.Role{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Primary":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
+				}
+				sv.Primary = jtv
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveStringType to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveStringType to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRoles(v *[]types.Role, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Role
+	if *v == nil {
+		cv = []types.Role{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Role
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRole(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -4225,6 +4317,11 @@ func awsAwsjson11_deserializeDocumentUser(v **types.User, value interface{}) err
 					return fmt.Errorf("expected SensitiveStringType to be of type string, got %T instead", value)
 				}
 				sv.ProfileUrl = ptr.String(jtv)
+			}
+
+		case "Roles":
+			if err := awsAwsjson11_deserializeDocumentRoles(&sv.Roles, value); err != nil {
+				return err
 			}
 
 		case "Timezone":
@@ -5034,6 +5131,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 					return fmt.Errorf("expected SensitiveStringType to be of type string, got %T instead", value)
 				}
 				sv.ProfileUrl = ptr.String(jtv)
+			}
+
+		case "Roles":
+			if err := awsAwsjson11_deserializeDocumentRoles(&sv.Roles, value); err != nil {
+				return err
 			}
 
 		case "Timezone":
