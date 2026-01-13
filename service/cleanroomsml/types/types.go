@@ -1258,12 +1258,6 @@ type MLOutputConfiguration struct {
 // training, including privacy settings and column classification details.
 type MLSyntheticDataParameters struct {
 
-	// Classification details for data columns that specify how each column should be
-	// treated during synthetic data generation.
-	//
-	// This member is required.
-	ColumnClassification *ColumnClassificationDetails
-
 	// The epsilon value for differential privacy, which controls the privacy-utility
 	// tradeoff in synthetic data generation. Lower values provide stronger privacy
 	// guarantees but may reduce data utility.
@@ -1277,6 +1271,10 @@ type MLSyntheticDataParameters struct {
 	//
 	// This member is required.
 	MaxMembershipInferenceAttackScore *float64
+
+	// Classification details for data columns that specify how each column should be
+	// treated during synthetic data generation.
+	ColumnClassification *ColumnClassificationDetails
 
 	noSmithyDocumentSerde
 }
@@ -1430,7 +1428,10 @@ type ResourceConfig struct {
 	// This member is required.
 	InstanceType InstanceType
 
-	// The maximum size of the instance that is used to train the model.
+	// The volume size of the instance that is used to train the model. Please see [EC2 volume limit]
+	// for volume size limitations on different instance types.
+	//
+	// [EC2 volume limit]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-volumes.html
 	//
 	// This member is required.
 	VolumeSizeInGB *int32
@@ -1837,11 +1838,41 @@ type WorkerComputeConfiguration struct {
 	// The number of compute workers that are used.
 	Number *int32
 
+	// The configuration properties for the worker compute environment. These
+	// properties allow you to customize the compute settings for your Clean Rooms
+	// workloads.
+	Properties WorkerComputeConfigurationProperties
+
 	// The instance type of the compute workers that are used.
 	Type WorkerComputeType
 
 	noSmithyDocumentSerde
 }
+
+// The configuration properties for the worker compute environment. These
+// properties allow you to customize the compute settings for your Clean Rooms
+// workloads.
+//
+// The following types satisfy this interface:
+//
+//	WorkerComputeConfigurationPropertiesMemberSpark
+type WorkerComputeConfigurationProperties interface {
+	isWorkerComputeConfigurationProperties()
+}
+
+// The Spark configuration properties for SQL workloads. This map contains
+// key-value pairs that configure Apache Spark settings to optimize performance for
+// your data processing jobs. You can specify up to 50 Spark properties, with each
+// key being 1-200 characters and each value being 0-500 characters. These
+// properties allow you to adjust compute capacity for large datasets and complex
+// workloads.
+type WorkerComputeConfigurationPropertiesMemberSpark struct {
+	Value map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (*WorkerComputeConfigurationPropertiesMemberSpark) isWorkerComputeConfigurationProperties() {}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
@@ -1854,6 +1885,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isComputeConfiguration()   {}
-func (*UnknownUnionMember) isInputChannelDataSource() {}
-func (*UnknownUnionMember) isPrivacyBudgets()         {}
+func (*UnknownUnionMember) isComputeConfiguration()                 {}
+func (*UnknownUnionMember) isInputChannelDataSource()               {}
+func (*UnknownUnionMember) isPrivacyBudgets()                       {}
+func (*UnknownUnionMember) isWorkerComputeConfigurationProperties() {}

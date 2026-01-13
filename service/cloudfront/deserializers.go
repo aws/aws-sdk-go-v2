@@ -209,6 +209,9 @@ func awsRestxml_deserializeOpErrorAssociateDistributionTenantWebACL(response *sm
 	case strings.EqualFold("AccessDenied", errorCode):
 		return awsRestxml_deserializeErrorAccessDenied(response, errorBody)
 
+	case strings.EqualFold("EntityLimitExceeded", errorCode):
+		return awsRestxml_deserializeErrorEntityLimitExceeded(response, errorBody)
+
 	case strings.EqualFold("EntityNotFound", errorCode):
 		return awsRestxml_deserializeErrorEntityNotFound(response, errorBody)
 
@@ -399,6 +402,9 @@ func awsRestxml_deserializeOpErrorAssociateDistributionWebACL(response *smithyht
 	switch {
 	case strings.EqualFold("AccessDenied", errorCode):
 		return awsRestxml_deserializeErrorAccessDenied(response, errorBody)
+
+	case strings.EqualFold("EntityLimitExceeded", errorCode):
+		return awsRestxml_deserializeErrorEntityLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("EntityNotFound", errorCode):
 		return awsRestxml_deserializeErrorEntityNotFound(response, errorBody)
@@ -23551,6 +23557,9 @@ func awsRestxml_deserializeOpErrorUpdateDistributionWithStagingConfig(response *
 
 	case strings.EqualFold("CNAMEAlreadyExists", errorCode):
 		return awsRestxml_deserializeErrorCNAMEAlreadyExists(response, errorBody)
+
+	case strings.EqualFold("EntityLimitExceeded", errorCode):
+		return awsRestxml_deserializeErrorEntityLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("EntityNotFound", errorCode):
 		return awsRestxml_deserializeErrorEntityNotFound(response, errorBody)

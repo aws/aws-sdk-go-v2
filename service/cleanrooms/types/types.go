@@ -1019,6 +1019,12 @@ type Collaboration struct {
 	// A description of the collaboration provided by the collaboration owner.
 	Description *string
 
+	// An indicator as to whether metrics are enabled for the collaboration.
+	//
+	// When true , collaboration members can opt in to Amazon CloudWatch metrics for
+	// their membership queries.
+	IsMetricsEnabled *bool
+
 	// An indicator as to whether job logging has been enabled or disabled for the
 	// collaboration.
 	//
@@ -3441,6 +3447,12 @@ type Membership struct {
 	// The default protected query result configuration as specified by the member who
 	// can receive results.
 	DefaultResultConfiguration *MembershipProtectedQueryResultConfiguration
+
+	// An indicator as to whether Amazon CloudWatch metrics are enabled for the
+	// membership.
+	//
+	// When true , metrics about query execution are collected in Amazon CloudWatch.
+	IsMetricsEnabled *bool
 
 	// An indicator as to whether job logging has been enabled or disabled for the
 	// collaboration.

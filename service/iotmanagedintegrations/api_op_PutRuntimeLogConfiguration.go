@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Set the runtime log configuration for a specific managed thing or for all
-// managed things as a group.
+// Set the runtime log configuration for a specific managed thing.
 func (c *Client) PutRuntimeLogConfiguration(ctx context.Context, params *PutRuntimeLogConfigurationInput, optFns ...func(*Options)) (*PutRuntimeLogConfigurationOutput, error) {
 	if params == nil {
 		params = &PutRuntimeLogConfigurationInput{}

@@ -36,7 +36,7 @@ type BillingViewElement struct {
 	// The time when the billing view was created.
 	CreatedAt *time.Time
 
-	//  See [Expression]. Billing view only supports LINKED_ACCOUNT and Tags .
+	//  See [Expression]. Billing view only supports LINKED_ACCOUNT , Tags , and CostCategories .
 	//
 	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html
 	DataFilterExpression *Expression
@@ -115,6 +115,22 @@ type BillingViewListElement struct {
 	noSmithyDocumentSerde
 }
 
+// The Cost Categories values used for filtering the costs.
+type CostCategoryValues struct {
+
+	//  The unique name of the Cost Category.
+	//
+	// This member is required.
+	Key *string
+
+	//  The specific value of the Cost Category.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // The metadata that you can use to filter and group your results.
 type DimensionValues struct {
 
@@ -132,10 +148,13 @@ type DimensionValues struct {
 	noSmithyDocumentSerde
 }
 
-//	See [Expression]. Billing view only supports LINKED_ACCOUNT and Tags .
+//	See [Expression]. Billing view only supports LINKED_ACCOUNT , Tags , and CostCategories .
 //
 // [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html
 type Expression struct {
+
+	//  The filter that's based on CostCategory values.
+	CostCategories *CostCategoryValues
 
 	//  The specific Dimension to use for Expression .
 	Dimensions *DimensionValues

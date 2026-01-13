@@ -80,6 +80,9 @@ type CreateUserInput struct {
 	// A string containing a URL that might be associated with the user.
 	ProfileUrl *string
 
+	// A list of Role objects containing roles associated with the user.
+	Roles []types.Role
+
 	// A string containing the time zone of the user.
 	Timezone *string
 

@@ -1,3 +1,7 @@
+# v1.86.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.86.0 (2025-12-17)
 
 * **Feature**: Adds support for tile encoding in HEVC and audio for video overlays.
