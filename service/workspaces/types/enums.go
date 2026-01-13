@@ -210,11 +210,12 @@ type AssociationErrorCode string
 
 // Enum values for AssociationErrorCode
 const (
-	AssociationErrorCodeInsufficientDiskspace      AssociationErrorCode = "ValidationError.InsufficientDiskSpace"
-	AssociationErrorCodeInsufficientMemory         AssociationErrorCode = "ValidationError.InsufficientMemory"
-	AssociationErrorCodeUnsupportedOperatingSystem AssociationErrorCode = "ValidationError.UnsupportedOperatingSystem"
-	AssociationErrorCodeInternalServerError        AssociationErrorCode = "DeploymentError.InternalServerError"
-	AssociationErrorCodeWorkspaceUnreachable       AssociationErrorCode = "DeploymentError.WorkspaceUnreachable"
+	AssociationErrorCodeInsufficientDiskspace             AssociationErrorCode = "ValidationError.InsufficientDiskSpace"
+	AssociationErrorCodeInsufficientMemory                AssociationErrorCode = "ValidationError.InsufficientMemory"
+	AssociationErrorCodeUnsupportedOperatingSystem        AssociationErrorCode = "ValidationError.UnsupportedOperatingSystem"
+	AssociationErrorCodeInternalServerError               AssociationErrorCode = "DeploymentError.InternalServerError"
+	AssociationErrorCodeWorkspaceUnreachable              AssociationErrorCode = "DeploymentError.WorkspaceUnreachable"
+	AssociationErrorCodeApplicationOldversionexistFailure AssociationErrorCode = "ValidationError.ApplicationOldVersionExists"
 )
 
 // Values returns all known values for AssociationErrorCode. Note that this can be
@@ -228,6 +229,7 @@ func (AssociationErrorCode) Values() []AssociationErrorCode {
 		"ValidationError.UnsupportedOperatingSystem",
 		"DeploymentError.InternalServerError",
 		"DeploymentError.WorkspaceUnreachable",
+		"ValidationError.ApplicationOldVersionExists",
 	}
 }
 
@@ -494,10 +496,20 @@ type CustomWorkspaceImageImportState string
 
 // Enum values for CustomWorkspaceImageImportState
 const (
-	CustomWorkspaceImageImportStatePending    CustomWorkspaceImageImportState = "PENDING"
-	CustomWorkspaceImageImportStateInProgress CustomWorkspaceImageImportState = "IN_PROGRESS"
-	CustomWorkspaceImageImportStateCompleted  CustomWorkspaceImageImportState = "COMPLETED"
-	CustomWorkspaceImageImportStateError      CustomWorkspaceImageImportState = "ERROR"
+	CustomWorkspaceImageImportStatePending                    CustomWorkspaceImageImportState = "PENDING"
+	CustomWorkspaceImageImportStateInProgress                 CustomWorkspaceImageImportState = "IN_PROGRESS"
+	CustomWorkspaceImageImportStateProcessingSourceImage      CustomWorkspaceImageImportState = "PROCESSING_SOURCE_IMAGE"
+	CustomWorkspaceImageImportStateImageTestingStart          CustomWorkspaceImageImportState = "IMAGE_TESTING_START"
+	CustomWorkspaceImageImportStateUpdatingOperatingSystem    CustomWorkspaceImageImportState = "UPDATING_OPERATING_SYSTEM"
+	CustomWorkspaceImageImportStateImageCompatibilityChecking CustomWorkspaceImageImportState = "IMAGE_COMPATIBILITY_CHECKING"
+	CustomWorkspaceImageImportStateImageTestingGeneralization CustomWorkspaceImageImportState = "IMAGE_TESTING_GENERALIZATION"
+	CustomWorkspaceImageImportStateCreatingTestInstance       CustomWorkspaceImageImportState = "CREATING_TEST_INSTANCE"
+	CustomWorkspaceImageImportStateInstallingComponents       CustomWorkspaceImageImportState = "INSTALLING_COMPONENTS"
+	CustomWorkspaceImageImportStateGeneralizing               CustomWorkspaceImageImportState = "GENERALIZING"
+	CustomWorkspaceImageImportStateValidating                 CustomWorkspaceImageImportState = "VALIDATING"
+	CustomWorkspaceImageImportStatePublishing                 CustomWorkspaceImageImportState = "PUBLISHING"
+	CustomWorkspaceImageImportStateCompleted                  CustomWorkspaceImageImportState = "COMPLETED"
+	CustomWorkspaceImageImportStateError                      CustomWorkspaceImageImportState = "ERROR"
 )
 
 // Values returns all known values for CustomWorkspaceImageImportState. Note that
@@ -509,6 +521,16 @@ func (CustomWorkspaceImageImportState) Values() []CustomWorkspaceImageImportStat
 	return []CustomWorkspaceImageImportState{
 		"PENDING",
 		"IN_PROGRESS",
+		"PROCESSING_SOURCE_IMAGE",
+		"IMAGE_TESTING_START",
+		"UPDATING_OPERATING_SYSTEM",
+		"IMAGE_COMPATIBILITY_CHECKING",
+		"IMAGE_TESTING_GENERALIZATION",
+		"CREATING_TEST_INSTANCE",
+		"INSTALLING_COMPONENTS",
+		"GENERALIZING",
+		"VALIDATING",
+		"PUBLISHING",
 		"COMPLETED",
 		"ERROR",
 	}

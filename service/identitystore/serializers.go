@@ -1555,6 +1555,41 @@ func awsAwsjson11_serializeDocumentPhotos(v []types.Photo, value smithyjson.Valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRole(v *types.Role, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Primary {
+		ok := object.Key("Primary")
+		ok.Boolean(v.Primary)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		ok.String(*v.Type)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRoles(v []types.Role, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentRole(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUniqueAttribute(v *types.UniqueAttribute, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1699,6 +1734,13 @@ func awsAwsjson11_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 	if v.ProfileUrl != nil {
 		ok := object.Key("ProfileUrl")
 		ok.String(*v.ProfileUrl)
+	}
+
+	if v.Roles != nil {
+		ok := object.Key("Roles")
+		if err := awsAwsjson11_serializeDocumentRoles(v.Roles, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Timezone != nil {

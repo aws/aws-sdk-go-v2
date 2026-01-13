@@ -1,3 +1,11 @@
+# v1.230.0 (2026-01-12)
+
+* **Feature**: Added ultraServerType to the UltraServerInfo structure to support server type identification for SageMaker HyperPod
+
+# v1.229.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.229.0 (2025-12-17)
 
 * **Feature**: Adding the newly launched p6-b300.48xlarge ec2  instance support in Sagemaker(Hyperpod,Training and Sceptor)

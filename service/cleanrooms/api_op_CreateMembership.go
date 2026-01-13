@@ -54,6 +54,17 @@ type CreateMembershipInput struct {
 	// can receive results.
 	DefaultResultConfiguration *types.MembershipProtectedQueryResultConfiguration
 
+	// An indicator as to whether Amazon CloudWatch metrics have been enabled or
+	// disabled for the membership.
+	//
+	// Amazon CloudWatch metrics are only available when the collaboration has metrics
+	// enabled. This option can be set by collaboration members who have the ability to
+	// run queries (analysis runners) or by members who are configured as payers.
+	//
+	// When true , metrics about query execution are collected in Amazon CloudWatch.
+	// The default value is false .
+	IsMetricsEnabled *bool
+
 	// An indicator as to whether job logging has been enabled or disabled for the
 	// collaboration.
 	//

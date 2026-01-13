@@ -2354,6 +2354,51 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCostCategoryValues(v **types.CostCategoryValues, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CostCategoryValues
+	if *v == nil {
+		sv = &types.CostCategoryValues{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryName to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "values":
+			if err := awsAwsjson10_deserializeDocumentValues(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentDimensionValues(v **types.DimensionValues, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2421,6 +2466,11 @@ func awsAwsjson10_deserializeDocumentExpression(v **types.Expression, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "costCategories":
+			if err := awsAwsjson10_deserializeDocumentCostCategoryValues(&sv.CostCategories, value); err != nil {
+				return err
+			}
+
 		case "dimensions":
 			if err := awsAwsjson10_deserializeDocumentDimensionValues(&sv.Dimensions, value); err != nil {
 				return err

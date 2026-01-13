@@ -3,4 +3,4 @@
 package notificationscontacts
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.5.18"
+const goModuleVersion = "1.5.19"

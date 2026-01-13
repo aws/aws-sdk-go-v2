@@ -264,6 +264,99 @@ func (c *Client) addOperationGetRightsizingRecommendationMiddlewares(stack *midd
 	return nil
 }
 
+// GetRightsizingRecommendationPaginatorOptions is the paginator options for
+// GetRightsizingRecommendation
+type GetRightsizingRecommendationPaginatorOptions struct {
+	// The number of recommendations that you want returned in a single response
+	// object.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetRightsizingRecommendationPaginator is a paginator for
+// GetRightsizingRecommendation
+type GetRightsizingRecommendationPaginator struct {
+	options   GetRightsizingRecommendationPaginatorOptions
+	client    GetRightsizingRecommendationAPIClient
+	params    *GetRightsizingRecommendationInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetRightsizingRecommendationPaginator returns a new
+// GetRightsizingRecommendationPaginator
+func NewGetRightsizingRecommendationPaginator(client GetRightsizingRecommendationAPIClient, params *GetRightsizingRecommendationInput, optFns ...func(*GetRightsizingRecommendationPaginatorOptions)) *GetRightsizingRecommendationPaginator {
+	if params == nil {
+		params = &GetRightsizingRecommendationInput{}
+	}
+
+	options := GetRightsizingRecommendationPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetRightsizingRecommendationPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextPageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetRightsizingRecommendationPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetRightsizingRecommendation page.
+func (p *GetRightsizingRecommendationPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetRightsizingRecommendationOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextPageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.GetRightsizingRecommendation(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// GetRightsizingRecommendationAPIClient is a client that implements the
+// GetRightsizingRecommendation operation.
+type GetRightsizingRecommendationAPIClient interface {
+	GetRightsizingRecommendation(context.Context, *GetRightsizingRecommendationInput, ...func(*Options)) (*GetRightsizingRecommendationOutput, error)
+}
+
+var _ GetRightsizingRecommendationAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opGetRightsizingRecommendation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -802,6 +802,13 @@ func awsRestjson1_serializeOpDocumentCreateManagedThingInput(v *CreateManagedThi
 		}
 	}
 
+	if v.WiFiSimpleSetupConfiguration != nil {
+		ok := object.Key("WiFiSimpleSetupConfiguration")
+		if err := awsRestjson1_serializeDocumentWiFiSimpleSetupConfiguration(v.WiFiSimpleSetupConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5962,6 +5969,16 @@ func awsRestjson1_serializeOpDocumentStartDeviceDiscoveryInput(v *StartDeviceDis
 		ok.String(string(v.DiscoveryType))
 	}
 
+	if v.EndDeviceIdentifier != nil {
+		ok := object.Key("EndDeviceIdentifier")
+		ok.String(*v.EndDeviceIdentifier)
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("Protocol")
+		ok.String(string(v.Protocol))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
@@ -6814,6 +6831,13 @@ func awsRestjson1_serializeOpDocumentUpdateManagedThingInput(v *UpdateManagedThi
 	if v.SerialNumber != nil {
 		ok := object.Key("SerialNumber")
 		ok.String(*v.SerialNumber)
+	}
+
+	if v.WiFiSimpleSetupConfiguration != nil {
+		ok := object.Key("WiFiSimpleSetupConfiguration")
+		if err := awsRestjson1_serializeDocumentWiFiSimpleSetupConfiguration(v.WiFiSimpleSetupConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -8363,5 +8387,27 @@ func awsRestjson1_serializeDocumentValidationSchema(v document.Interface, value 
 		return err
 	}
 	value.Write(db)
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWiFiSimpleSetupConfiguration(v *types.WiFiSimpleSetupConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableAsProvisionee != nil {
+		ok := object.Key("EnableAsProvisionee")
+		ok.Boolean(*v.EnableAsProvisionee)
+	}
+
+	if v.EnableAsProvisioner != nil {
+		ok := object.Key("EnableAsProvisioner")
+		ok.Boolean(*v.EnableAsProvisioner)
+	}
+
+	if v.TimeoutInMinutes != nil {
+		ok := object.Key("TimeoutInMinutes")
+		ok.Integer(*v.TimeoutInMinutes)
+	}
+
 	return nil
 }

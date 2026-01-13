@@ -70,6 +70,18 @@ type StartDeviceDiscoveryInput struct {
 	// of Name set to a non-empty-string.
 	CustomProtocolDetail map[string]string
 
+	// The unique id of the end device for capability rediscovery.
+	//
+	// This parameter is only available when the discovery type is
+	// CONTROLLER_CAPABILITY_REDISCOVERY.
+	EndDeviceIdentifier *string
+
+	// The protocol type for capability rediscovery (ZWAVE, ZIGBEE, or CUSTOM).
+	//
+	// This parameter is only available when the discovery type is
+	// CONTROLLER_CAPABILITY_REDISCOVERY.
+	Protocol types.ProtocolType
+
 	// A set of key/value pairs that are used to manage the device discovery request.
 	//
 	// Deprecated: Tags have been deprecated from this api
