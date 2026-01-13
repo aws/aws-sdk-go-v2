@@ -98,6 +98,10 @@ type CreateManagedThingInput struct {
 	// A set of key/value pairs that are used to manage the managed thing.
 	Tags map[string]string
 
+	// The Wi-Fi Simple Setup configuration for the managed thing, which defines
+	// provisioning capabilities and timeout settings.
+	WiFiSimpleSetupConfiguration *types.WiFiSimpleSetupConfiguration
+
 	noSmithyDocumentSerde
 }
 

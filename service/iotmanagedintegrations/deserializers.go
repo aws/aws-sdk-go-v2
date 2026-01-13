@@ -3337,6 +3337,9 @@ func awsRestjson1_deserializeOpErrorDeregisterAccountAssociation(response *smith
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -5895,6 +5898,11 @@ func awsRestjson1_deserializeOpDocumentGetManagedThingOutput(v **GetManagedThing
 					return fmt.Errorf("expected UpdatedAt to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "WiFiSimpleSetupConfiguration":
+			if err := awsRestjson1_deserializeDocumentWiFiSimpleSetupConfiguration(&sv.WiFiSimpleSetupConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -19073,5 +19081,67 @@ func awsRestjson1_deserializeDocumentValidationSchema(v *document.Interface, val
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
 	*v = internaldocument.NewDocumentUnmarshaler(value)
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWiFiSimpleSetupConfiguration(v **types.WiFiSimpleSetupConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WiFiSimpleSetupConfiguration
+	if *v == nil {
+		sv = &types.WiFiSimpleSetupConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnableAsProvisionee":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableAsProvisionee to be of type *bool, got %T instead", value)
+				}
+				sv.EnableAsProvisionee = ptr.Bool(jtv)
+			}
+
+		case "EnableAsProvisioner":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableAsProvisioner to be of type *bool, got %T instead", value)
+				}
+				sv.EnableAsProvisioner = ptr.Bool(jtv)
+			}
+
+		case "TimeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TimeoutInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutInMinutes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }

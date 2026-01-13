@@ -1,3 +1,8 @@
+# v1.54.0 (2026-01-09)
+
+* **Feature**: Adds waiters to Amazon Transcribe.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.10 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
