@@ -56,7 +56,9 @@ type ListManagedThingsInput struct {
 	// Filter on a parent controller id for a managed thing.
 	ParentControllerIdentifierFilter *string
 
-	// Filter on the status of the device.
+	// Filter on the status of the device. For more information, see [Device Provisioning].
+	//
+	// [Device Provisioning]: https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html
 	ProvisioningStatusFilter types.ProvisioningStatus
 
 	// Filter on the type of device used. This will be the Amazon Web Services hub

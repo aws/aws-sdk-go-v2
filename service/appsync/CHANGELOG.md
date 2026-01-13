@@ -1,3 +1,7 @@
+# v1.53.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2025-12-09)
 
 * **Feature**: Update Event API to require EventConfig parameter in creation and update requests.

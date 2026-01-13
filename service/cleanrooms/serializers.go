@@ -580,6 +580,11 @@ func awsRestjson1_serializeOpDocumentCreateCollaborationInput(v *CreateCollabora
 		ok.String(*v.Description)
 	}
 
+	if v.IsMetricsEnabled != nil {
+		ok := object.Key("isMetricsEnabled")
+		ok.Boolean(*v.IsMetricsEnabled)
+	}
+
 	if len(v.JobLogStatus) > 0 {
 		ok := object.Key("jobLogStatus")
 		ok.String(string(v.JobLogStatus))
@@ -1598,6 +1603,11 @@ func awsRestjson1_serializeOpDocumentCreateMembershipInput(v *CreateMembershipIn
 		if err := awsRestjson1_serializeDocumentMembershipProtectedQueryResultConfiguration(v.DefaultResultConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.IsMetricsEnabled != nil {
+		ok := object.Key("isMetricsEnabled")
+		ok.Boolean(*v.IsMetricsEnabled)
 	}
 
 	if len(v.JobLogStatus) > 0 {

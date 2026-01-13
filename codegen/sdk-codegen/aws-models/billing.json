@@ -1262,7 +1262,7 @@
                 "dataFilterExpression": {
                     "target": "com.amazonaws.billing#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p> See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>"
+                        "smithy.api#documentation": "<p> See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code>, <code>Tags</code>, and <code>CostCategories</code>. </p>"
                     }
                 },
                 "createdAt": {
@@ -1599,6 +1599,38 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.billing#CostCategoryName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^(?! )[\\p{L}\\p{N}\\p{Z}-_]*(?<! )$"
+            }
+        },
+        "com.amazonaws.billing#CostCategoryValues": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.billing#CostCategoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique name of the Cost Category. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.billing#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The specific value of the Cost Category. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The Cost Categories values used for filtering the costs. </p>"
+            }
+        },
         "com.amazonaws.billing#CreateBillingView": {
             "type": "operation",
             "input": {
@@ -1688,7 +1720,7 @@
                 "dataFilterExpression": {
                     "target": "com.amazonaws.billing#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p> See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>"
+                        "smithy.api#documentation": "<p> See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code>, <code>Tags</code>, and <code>CostCategories</code>. </p>"
                     }
                 },
                 "clientToken": {
@@ -1953,6 +1985,12 @@
                         "smithy.api#documentation": "<p> The specific <code>Tag</code> to use for <code>Expression</code>. </p>"
                     }
                 },
+                "costCategories": {
+                    "target": "com.amazonaws.billing#CostCategoryValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The filter that's based on <code>CostCategory</code> values. </p>"
+                    }
+                },
                 "timeRange": {
                     "target": "com.amazonaws.billing#TimeRange",
                     "traits": {
@@ -1961,7 +1999,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>"
+                "smithy.api#documentation": "<p> See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code>, <code>Tags</code>, and <code>CostCategories</code>. </p>"
             }
         },
         "com.amazonaws.billing#FieldName": {
@@ -3053,7 +3091,7 @@
                 "dataFilterExpression": {
                     "target": "com.amazonaws.billing#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>"
+                        "smithy.api#documentation": "<p>See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code>, <code>Tags</code>, and <code>CostCategories</code>. </p>"
                     }
                 }
             },

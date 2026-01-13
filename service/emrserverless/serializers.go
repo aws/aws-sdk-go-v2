@@ -197,6 +197,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		ok.String(*v.ClientToken)
 	}
 
+	if v.DiskEncryptionConfiguration != nil {
+		ok := object.Key("diskEncryptionConfiguration")
+		if err := awsRestjson1_serializeDocumentDiskEncryptionConfiguration(v.DiskEncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdentityCenterConfiguration != nil {
 		ok := object.Key("identityCenterConfiguration")
 		if err := awsRestjson1_serializeDocumentIdentityCenterConfigurationInput(v.IdentityCenterConfiguration, ok); err != nil {
@@ -1519,6 +1526,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		ok.String(*v.ClientToken)
 	}
 
+	if v.DiskEncryptionConfiguration != nil {
+		ok := object.Key("diskEncryptionConfiguration")
+		if err := awsRestjson1_serializeDocumentDiskEncryptionConfiguration(v.DiskEncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdentityCenterConfiguration != nil {
 		ok := object.Key("identityCenterConfiguration")
 		if err := awsRestjson1_serializeDocumentIdentityCenterConfigurationInput(v.IdentityCenterConfiguration, ok); err != nil {
@@ -1717,6 +1731,13 @@ func awsRestjson1_serializeDocumentConfigurationOverrides(v *types.Configuration
 		}
 	}
 
+	if v.DiskEncryptionConfiguration != nil {
+		ok := object.Key("diskEncryptionConfiguration")
+		if err := awsRestjson1_serializeDocumentDiskEncryptionConfiguration(v.DiskEncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MonitoringConfiguration != nil {
 		ok := object.Key("monitoringConfiguration")
 		if err := awsRestjson1_serializeDocumentMonitoringConfiguration(v.MonitoringConfiguration, ok); err != nil {
@@ -1724,6 +1745,36 @@ func awsRestjson1_serializeDocumentConfigurationOverrides(v *types.Configuration
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDiskEncryptionConfiguration(v *types.DiskEncryptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptionContext != nil {
+		ok := object.Key("encryptionContext")
+		if err := awsRestjson1_serializeDocumentEncryptionContext(v.EncryptionContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("encryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEncryptionContext(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

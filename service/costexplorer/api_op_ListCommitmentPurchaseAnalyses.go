@@ -155,6 +155,98 @@ func (c *Client) addOperationListCommitmentPurchaseAnalysesMiddlewares(stack *mi
 	return nil
 }
 
+// ListCommitmentPurchaseAnalysesPaginatorOptions is the paginator options for
+// ListCommitmentPurchaseAnalyses
+type ListCommitmentPurchaseAnalysesPaginatorOptions struct {
+	// The number of analyses that you want returned in a single response object.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCommitmentPurchaseAnalysesPaginator is a paginator for
+// ListCommitmentPurchaseAnalyses
+type ListCommitmentPurchaseAnalysesPaginator struct {
+	options   ListCommitmentPurchaseAnalysesPaginatorOptions
+	client    ListCommitmentPurchaseAnalysesAPIClient
+	params    *ListCommitmentPurchaseAnalysesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCommitmentPurchaseAnalysesPaginator returns a new
+// ListCommitmentPurchaseAnalysesPaginator
+func NewListCommitmentPurchaseAnalysesPaginator(client ListCommitmentPurchaseAnalysesAPIClient, params *ListCommitmentPurchaseAnalysesInput, optFns ...func(*ListCommitmentPurchaseAnalysesPaginatorOptions)) *ListCommitmentPurchaseAnalysesPaginator {
+	if params == nil {
+		params = &ListCommitmentPurchaseAnalysesInput{}
+	}
+
+	options := ListCommitmentPurchaseAnalysesPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListCommitmentPurchaseAnalysesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextPageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCommitmentPurchaseAnalysesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListCommitmentPurchaseAnalyses page.
+func (p *ListCommitmentPurchaseAnalysesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCommitmentPurchaseAnalysesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextPageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListCommitmentPurchaseAnalyses(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListCommitmentPurchaseAnalysesAPIClient is a client that implements the
+// ListCommitmentPurchaseAnalyses operation.
+type ListCommitmentPurchaseAnalysesAPIClient interface {
+	ListCommitmentPurchaseAnalyses(context.Context, *ListCommitmentPurchaseAnalysesInput, ...func(*Options)) (*ListCommitmentPurchaseAnalysesOutput, error)
+}
+
+var _ ListCommitmentPurchaseAnalysesAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListCommitmentPurchaseAnalyses(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -602,7 +602,9 @@ type ManagedThingSummary struct {
 	ParentControllerId *string
 
 	// The provisioning status of the device in the provisioning workflow for
-	// onboarding to IoT managed integrations.
+	// onboarding to IoT managed integrations. For more information, see [Device Provisioning].
+	//
+	// [Device Provisioning]: https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html
 	ProvisioningStatus ProvisioningStatus
 
 	// The type of device used. This will be the Amazon Web Services hub controller,
@@ -1195,6 +1197,25 @@ type TaskProcessingDetails struct {
 
 	// The targets of the over-the-air (OTA) task.
 	ProcessingTargets []string
+
+	noSmithyDocumentSerde
+}
+
+// The Wi-Fi Simple Setup configuration for the managed thing, which defines
+// provisioning capabilities and timeout settings.
+type WiFiSimpleSetupConfiguration struct {
+
+	// Indicates whether the device can act as a provisionee in Wi-Fi Simple Setup,
+	// allowing it to be configured by other devices.
+	EnableAsProvisionee *bool
+
+	// Indicates whether the device can act as a provisioner in Wi-Fi Simple Setup,
+	// allowing it to configure other devices.
+	EnableAsProvisioner *bool
+
+	// The timeout duration in minutes for Wi-Fi Simple Setup. Valid range is 5 to 15
+	// minutes.
+	TimeoutInMinutes *int32
 
 	noSmithyDocumentSerde
 }

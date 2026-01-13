@@ -2290,6 +2290,26 @@ func (m *validateOpGetMapping) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMaterializedViewRefreshTaskRun struct {
+}
+
+func (*validateOpGetMaterializedViewRefreshTaskRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMaterializedViewRefreshTaskRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMaterializedViewRefreshTaskRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMaterializedViewRefreshTaskRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMLTaskRun struct {
 }
 
@@ -3030,6 +3050,26 @@ func (m *validateOpListDataQualityRulesets) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMaterializedViewRefreshTaskRuns struct {
+}
+
+func (*validateOpListMaterializedViewRefreshTaskRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMaterializedViewRefreshTaskRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMaterializedViewRefreshTaskRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMaterializedViewRefreshTaskRunsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMLTransforms struct {
 }
 
@@ -3530,6 +3570,26 @@ func (m *validateOpStartJobRun) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMaterializedViewRefreshTaskRun struct {
+}
+
+func (*validateOpStartMaterializedViewRefreshTaskRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMaterializedViewRefreshTaskRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMaterializedViewRefreshTaskRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMaterializedViewRefreshTaskRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartMLEvaluationTaskRun struct {
 }
 
@@ -3685,6 +3745,26 @@ func (m *validateOpStopCrawlerSchedule) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopCrawlerScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopMaterializedViewRefreshTaskRun struct {
+}
+
+func (*validateOpStopMaterializedViewRefreshTaskRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopMaterializedViewRefreshTaskRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopMaterializedViewRefreshTaskRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopMaterializedViewRefreshTaskRunInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4766,6 +4846,10 @@ func addOpGetMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMapping{}, middleware.After)
 }
 
+func addOpGetMaterializedViewRefreshTaskRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMaterializedViewRefreshTaskRun{}, middleware.After)
+}
+
 func addOpGetMLTaskRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMLTaskRun{}, middleware.After)
 }
@@ -4914,6 +4998,10 @@ func addOpListDataQualityRulesetsValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpListDataQualityRulesets{}, middleware.After)
 }
 
+func addOpListMaterializedViewRefreshTaskRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMaterializedViewRefreshTaskRuns{}, middleware.After)
+}
+
 func addOpListMLTransformsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMLTransforms{}, middleware.After)
 }
@@ -5014,6 +5102,10 @@ func addOpStartJobRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartJobRun{}, middleware.After)
 }
 
+func addOpStartMaterializedViewRefreshTaskRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMaterializedViewRefreshTaskRun{}, middleware.After)
+}
+
 func addOpStartMLEvaluationTaskRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartMLEvaluationTaskRun{}, middleware.After)
 }
@@ -5044,6 +5136,10 @@ func addOpStopCrawlerValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopCrawlerScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopCrawlerSchedule{}, middleware.After)
+}
+
+func addOpStopMaterializedViewRefreshTaskRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopMaterializedViewRefreshTaskRun{}, middleware.After)
 }
 
 func addOpStopSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -11699,6 +11795,24 @@ func validateOpGetMappingInput(v *GetMappingInput) error {
 	}
 }
 
+func validateOpGetMaterializedViewRefreshTaskRunInput(v *GetMaterializedViewRefreshTaskRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMaterializedViewRefreshTaskRunInput"}
+	if v.CatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CatalogId"))
+	}
+	if v.MaterializedViewRefreshTaskRunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaterializedViewRefreshTaskRunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMLTaskRunInput(v *GetMLTaskRunInput) error {
 	if v == nil {
 		return nil
@@ -12380,6 +12494,21 @@ func validateOpListDataQualityRulesetsInput(v *ListDataQualityRulesetsInput) err
 	}
 }
 
+func validateOpListMaterializedViewRefreshTaskRunsInput(v *ListMaterializedViewRefreshTaskRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMaterializedViewRefreshTaskRunsInput"}
+	if v.CatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CatalogId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListMLTransformsInput(v *ListMLTransformsInput) error {
 	if v == nil {
 		return nil
@@ -12831,6 +12960,27 @@ func validateOpStartJobRunInput(v *StartJobRunInput) error {
 	}
 }
 
+func validateOpStartMaterializedViewRefreshTaskRunInput(v *StartMaterializedViewRefreshTaskRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMaterializedViewRefreshTaskRunInput"}
+	if v.CatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CatalogId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartMLEvaluationTaskRunInput(v *StartMLEvaluationTaskRunInput) error {
 	if v == nil {
 		return nil
@@ -12952,6 +13102,27 @@ func validateOpStopCrawlerScheduleInput(v *StopCrawlerScheduleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopCrawlerScheduleInput"}
 	if v.CrawlerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CrawlerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopMaterializedViewRefreshTaskRunInput(v *StopMaterializedViewRefreshTaskRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopMaterializedViewRefreshTaskRunInput"}
+	if v.CatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CatalogId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
