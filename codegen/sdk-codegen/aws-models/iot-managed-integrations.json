@@ -2113,6 +2113,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "WiFiSimpleSetupConfiguration": {
+                    "target": "com.amazonaws.iotmanagedintegrations#WiFiSimpleSetupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.</p>"
+                    }
+                },
                 "SerialNumber": {
                     "target": "com.amazonaws.iotmanagedintegrations#SerialNumber",
                     "traits": {
@@ -3467,6 +3473,9 @@
                     "target": "com.amazonaws.iotmanagedintegrations#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.iotmanagedintegrations#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.iotmanagedintegrations#InternalServerException"
                 },
                 {
@@ -4063,6 +4072,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CUSTOM"
                     }
+                },
+                "CONTROLLER_CAPABILITY_REDISCOVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTROLLER_CAPABILITY_REDISCOVERY"
+                    }
                 }
             }
         },
@@ -4084,6 +4099,12 @@
                     "max": 1430
                 }
             }
+        },
+        "com.amazonaws.iotmanagedintegrations#EnableAsProvisionee": {
+            "type": "boolean"
+        },
+        "com.amazonaws.iotmanagedintegrations#EnableAsProvisioner": {
+            "type": "boolean"
         },
         "com.amazonaws.iotmanagedintegrations#EncryptionType": {
             "type": "enum",
@@ -4280,6 +4301,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DEVICE_OTA"
+                    }
+                },
+                "DEVICE_WSS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVICE_WSS"
                     }
                 },
                 "CONNECTOR_ASSOCIATION": {
@@ -6064,7 +6091,7 @@
                 "ProvisioningStatus": {
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioning status of the device in the provisioning workflow for onboarding to IoT managed integrations.</p>"
+                        "smithy.api#documentation": "<p>The provisioning status of the device in the provisioning workflow for onboarding to IoT managed integrations. For more information, see <a href=\"https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html\">Device Provisioning</a>.</p>"
                     }
                 },
                 "Name": {
@@ -6184,6 +6211,12 @@
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>A set of key/value pairs that are used to manage the managed thing.</p>"
+                    }
+                },
+                "WiFiSimpleSetupConfiguration": {
+                    "target": "com.amazonaws.iotmanagedintegrations#WiFiSimpleSetupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.</p>"
                     }
                 }
             },
@@ -8982,7 +9015,7 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningStatus",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>Filter on the status of the device.</p>",
+                        "smithy.api#documentation": "<p>Filter on the status of the device. For more information, see <a href=\"https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html\">Device Provisioning</a>.</p>",
                         "smithy.api#httpQuery": "ProvisioningStatusFilter"
                     }
                 },
@@ -10202,7 +10235,7 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningStatus",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>The provisioning status of the device in the provisioning workflow for onboarding to IoT managed integrations.</p>"
+                        "smithy.api#documentation": "<p>The provisioning status of the device in the provisioning workflow for onboarding to IoT managed integrations. For more information, see <a href=\"https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html\">Device Provisioning</a>.</p>"
                     }
                 },
                 "Role": {
@@ -11490,6 +11523,29 @@
                 "smithy.api#pattern": "^[/a-zA-Z0-9\\._ -]+$"
             }
         },
+        "com.amazonaws.iotmanagedintegrations#ProtocolType": {
+            "type": "enum",
+            "members": {
+                "ZWAVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZWAVE"
+                    }
+                },
+                "ZIGBEE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZIGBEE"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotmanagedintegrations#ProvisioningProfileArn": {
             "type": "string",
             "traits": {
@@ -11875,7 +11931,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Set the runtime log configuration for a specific managed thing or for all managed things as a group.</p>",
+                "smithy.api#documentation": "<p>Set the runtime log configuration for a specific managed thing.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/runtime-log-configurations/{ManagedThingId}",
@@ -13169,6 +13225,18 @@
                         },
                         "smithy.api#documentation": "<p>A set of key/value pairs that are used to manage the device discovery request.</p>"
                     }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.iotmanagedintegrations#ProtocolType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol type for capability rediscovery (ZWAVE, ZIGBEE, or CUSTOM).</p> <note> <p>This parameter is only available when the discovery type is CONTROLLER_CAPABILITY_REDISCOVERY.</p> </note>"
+                    }
+                },
+                "EndDeviceIdentifier": {
+                    "target": "com.amazonaws.iotmanagedintegrations#ManagedThingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique id of the end device for capability rediscovery.</p> <note> <p>This parameter is only available when the discovery type is CONTROLLER_CAPABILITY_REDISCOVERY.</p> </note>"
+                    }
                 }
             },
             "traits": {
@@ -13490,6 +13558,15 @@
                 "smithy.api#documentation": "<p>The rate exceeds the limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.iotmanagedintegrations#TimeoutInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 15
+                }
             }
         },
         "com.amazonaws.iotmanagedintegrations#TokenEndpointAuthenticationScheme": {
@@ -14072,6 +14149,12 @@
                         "smithy.api#documentation": "<p>The serial number of the device.</p>"
                     }
                 },
+                "WiFiSimpleSetupConfiguration": {
+                    "target": "com.amazonaws.iotmanagedintegrations#WiFiSimpleSetupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.</p>"
+                    }
+                },
                 "Brand": {
                     "target": "com.amazonaws.iotmanagedintegrations#Brand",
                     "traits": {
@@ -14285,6 +14368,32 @@
         },
         "com.amazonaws.iotmanagedintegrations#ValidationSchema": {
             "type": "document"
+        },
+        "com.amazonaws.iotmanagedintegrations#WiFiSimpleSetupConfiguration": {
+            "type": "structure",
+            "members": {
+                "EnableAsProvisioner": {
+                    "target": "com.amazonaws.iotmanagedintegrations#EnableAsProvisioner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the device can act as a provisioner in Wi-Fi Simple Setup, allowing it to configure other devices.</p>"
+                    }
+                },
+                "EnableAsProvisionee": {
+                    "target": "com.amazonaws.iotmanagedintegrations#EnableAsProvisionee",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the device can act as a provisionee in Wi-Fi Simple Setup, allowing it to be configured by other devices.</p>"
+                    }
+                },
+                "TimeoutInMinutes": {
+                    "target": "com.amazonaws.iotmanagedintegrations#TimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timeout duration in minutes for Wi-Fi Simple Setup. Valid range is 5 to 15 minutes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.</p>"
+            }
         }
     }
 }

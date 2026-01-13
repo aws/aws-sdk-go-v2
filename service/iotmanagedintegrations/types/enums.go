@@ -297,10 +297,11 @@ type DiscoveryType string
 
 // Enum values for DiscoveryType
 const (
-	DiscoveryTypeZwave  DiscoveryType = "ZWAVE"
-	DiscoveryTypeZigbee DiscoveryType = "ZIGBEE"
-	DiscoveryTypeCloud  DiscoveryType = "CLOUD"
-	DiscoveryTypeCustom DiscoveryType = "CUSTOM"
+	DiscoveryTypeZwave                           DiscoveryType = "ZWAVE"
+	DiscoveryTypeZigbee                          DiscoveryType = "ZIGBEE"
+	DiscoveryTypeCloud                           DiscoveryType = "CLOUD"
+	DiscoveryTypeCustom                          DiscoveryType = "CUSTOM"
+	DiscoveryTypeControllerCapabilityRediscovery DiscoveryType = "CONTROLLER_CAPABILITY_REDISCOVERY"
 )
 
 // Values returns all known values for DiscoveryType. Note that this can be
@@ -313,6 +314,7 @@ func (DiscoveryType) Values() []DiscoveryType {
 		"ZIGBEE",
 		"CLOUD",
 		"CUSTOM",
+		"CONTROLLER_CAPABILITY_REDISCOVERY",
 	}
 }
 
@@ -363,6 +365,7 @@ const (
 	EventTypeDeviceLifeCycle       EventType = "DEVICE_LIFE_CYCLE"
 	EventTypeDeviceState           EventType = "DEVICE_STATE"
 	EventTypeDeviceOta             EventType = "DEVICE_OTA"
+	EventTypeDeviceWss             EventType = "DEVICE_WSS"
 	EventTypeConnectorAssociation  EventType = "CONNECTOR_ASSOCIATION"
 	EventTypeAccountAssociation    EventType = "ACCOUNT_ASSOCIATION"
 	EventTypeConnectorErrorReport  EventType = "CONNECTOR_ERROR_REPORT"
@@ -381,6 +384,7 @@ func (EventType) Values() []EventType {
 		"DEVICE_LIFE_CYCLE",
 		"DEVICE_STATE",
 		"DEVICE_OTA",
+		"DEVICE_WSS",
 		"CONNECTOR_ASSOCIATION",
 		"ACCOUNT_ASSOCIATION",
 		"CONNECTOR_ERROR_REPORT",
@@ -535,6 +539,27 @@ func (OtaType) Values() []OtaType {
 	return []OtaType{
 		"ONE_TIME",
 		"CONTINUOUS",
+	}
+}
+
+type ProtocolType string
+
+// Enum values for ProtocolType
+const (
+	ProtocolTypeZwave  ProtocolType = "ZWAVE"
+	ProtocolTypeZigbee ProtocolType = "ZIGBEE"
+	ProtocolTypeCustom ProtocolType = "CUSTOM"
+)
+
+// Values returns all known values for ProtocolType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProtocolType) Values() []ProtocolType {
+	return []ProtocolType{
+		"ZWAVE",
+		"ZIGBEE",
+		"CUSTOM",
 	}
 }
 

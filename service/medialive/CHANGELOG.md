@@ -1,3 +1,8 @@
+# v1.89.0 (2026-01-09)
+
+* **Feature**: MediaPackage v2 output groups in MediaLive can now accept one additional destination for single pipeline channels and up to two additional destinations for standard channels. MediaPackage v2 destinations now support sending to cross region MediaPackage channels.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.88.0 (2025-12-26)
 
 * **Feature**: AWS Elemental MediaLive now supports Pipeline Locking using Video Alignment as well as linked single pipeline channels to enable cross-channel and cross-region Pipeline Locking workflows.

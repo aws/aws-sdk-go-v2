@@ -316,6 +316,24 @@ func validateActiveTimeRange(v *types.ActiveTimeRange) error {
 	}
 }
 
+func validateCostCategoryValues(v *types.CostCategoryValues) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CostCategoryValues"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDimensionValues(v *types.DimensionValues) error {
 	if v == nil {
 		return nil
@@ -347,6 +365,11 @@ func validateExpression(v *types.Expression) error {
 	if v.Tags != nil {
 		if err := validateTagValues(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CostCategories != nil {
+		if err := validateCostCategoryValues(v.CostCategories); err != nil {
+			invalidParams.AddNested("CostCategories", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -157,6 +157,100 @@ func (c *Client) addOperationListSavingsPlansPurchaseRecommendationGenerationMid
 	return nil
 }
 
+// ListSavingsPlansPurchaseRecommendationGenerationPaginatorOptions is the
+// paginator options for ListSavingsPlansPurchaseRecommendationGeneration
+type ListSavingsPlansPurchaseRecommendationGenerationPaginatorOptions struct {
+	// The number of recommendations that you want returned in a single response
+	// object.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSavingsPlansPurchaseRecommendationGenerationPaginator is a paginator for
+// ListSavingsPlansPurchaseRecommendationGeneration
+type ListSavingsPlansPurchaseRecommendationGenerationPaginator struct {
+	options   ListSavingsPlansPurchaseRecommendationGenerationPaginatorOptions
+	client    ListSavingsPlansPurchaseRecommendationGenerationAPIClient
+	params    *ListSavingsPlansPurchaseRecommendationGenerationInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSavingsPlansPurchaseRecommendationGenerationPaginator returns a new
+// ListSavingsPlansPurchaseRecommendationGenerationPaginator
+func NewListSavingsPlansPurchaseRecommendationGenerationPaginator(client ListSavingsPlansPurchaseRecommendationGenerationAPIClient, params *ListSavingsPlansPurchaseRecommendationGenerationInput, optFns ...func(*ListSavingsPlansPurchaseRecommendationGenerationPaginatorOptions)) *ListSavingsPlansPurchaseRecommendationGenerationPaginator {
+	if params == nil {
+		params = &ListSavingsPlansPurchaseRecommendationGenerationInput{}
+	}
+
+	options := ListSavingsPlansPurchaseRecommendationGenerationPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListSavingsPlansPurchaseRecommendationGenerationPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextPageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSavingsPlansPurchaseRecommendationGenerationPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListSavingsPlansPurchaseRecommendationGeneration
+// page.
+func (p *ListSavingsPlansPurchaseRecommendationGenerationPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSavingsPlansPurchaseRecommendationGenerationOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextPageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListSavingsPlansPurchaseRecommendationGeneration(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListSavingsPlansPurchaseRecommendationGenerationAPIClient is a client that
+// implements the ListSavingsPlansPurchaseRecommendationGeneration operation.
+type ListSavingsPlansPurchaseRecommendationGenerationAPIClient interface {
+	ListSavingsPlansPurchaseRecommendationGeneration(context.Context, *ListSavingsPlansPurchaseRecommendationGenerationInput, ...func(*Options)) (*ListSavingsPlansPurchaseRecommendationGenerationOutput, error)
+}
+
+var _ ListSavingsPlansPurchaseRecommendationGenerationAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListSavingsPlansPurchaseRecommendationGeneration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
