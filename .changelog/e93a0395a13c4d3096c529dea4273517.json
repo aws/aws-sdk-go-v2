@@ -1,8 +1,0 @@
-{
-    "id": "e93a0395-a13c-4d30-96c5-29dea4273517",
-    "type": "feature",
-    "description": "This change will increase TestCase guardContent input size from 1024 to 2028 characters and PolicyBuildDocumentDescription from 2000 to 4000 characters",
-    "modules": [
-        "service/bedrock"
-    ]
-}

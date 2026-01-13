@@ -1,3 +1,9 @@
+# Release (2026-01-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.50.0](service/datazone/CHANGELOG.md#v1500-2026-01-13)
+  * **Feature**: Adds support for IAM role subscriptions to Glue table listings via CreateSubscriptionRequest API. Also adds owningIamPrincipalArn filter to List APIs and subscriptionGrantCreationMode parameter to subscription target APIs for controlling grant creation behavior.
+
 # Release (2026-01-12)
 
 ## Module Highlights
