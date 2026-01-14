@@ -2221,6 +2221,25 @@ func (NumericQuestionPropertyAutomationLabel) Values() []NumericQuestionProperty
 	}
 }
 
+type OperationalStatus string
+
+// Enum values for OperationalStatus
+const (
+	OperationalStatusOpen   OperationalStatus = "OPEN"
+	OperationalStatusClosed OperationalStatus = "CLOSED"
+)
+
+// Values returns all known values for OperationalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationalStatus) Values() []OperationalStatus {
+	return []OperationalStatus{
+		"OPEN",
+		"CLOSED",
+	}
+}
+
 type OutboundMessageSourceType string
 
 // Enum values for OutboundMessageSourceType
@@ -2283,6 +2302,27 @@ func (OverrideDays) Values() []OverrideDays {
 		"THURSDAY",
 		"FRIDAY",
 		"SATURDAY",
+	}
+}
+
+type OverrideType string
+
+// Enum values for OverrideType
+const (
+	OverrideTypeStandard OverrideType = "STANDARD"
+	OverrideTypeOpen     OverrideType = "OPEN"
+	OverrideTypeClosed   OverrideType = "CLOSED"
+)
+
+// Values returns all known values for OverrideType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OverrideType) Values() []OverrideType {
+	return []OverrideType{
+		"STANDARD",
+		"OPEN",
+		"CLOSED",
 	}
 }
 
@@ -3236,6 +3276,27 @@ func (RecordingStatus) Values() []RecordingStatus {
 	return []RecordingStatus{
 		"AVAILABLE",
 		"DELETED",
+	}
+}
+
+type RecurrenceFrequency string
+
+// Enum values for RecurrenceFrequency
+const (
+	RecurrenceFrequencyWeekly  RecurrenceFrequency = "WEEKLY"
+	RecurrenceFrequencyMonthly RecurrenceFrequency = "MONTHLY"
+	RecurrenceFrequencyYearly  RecurrenceFrequency = "YEARLY"
+)
+
+// Values returns all known values for RecurrenceFrequency. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecurrenceFrequency) Values() []RecurrenceFrequency {
+	return []RecurrenceFrequency{
+		"WEEKLY",
+		"MONTHLY",
+		"YEARLY",
 	}
 }
 

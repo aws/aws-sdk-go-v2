@@ -69,6 +69,9 @@ type CreateRoutingProfileInput struct {
 	// CreateRoutingProfile API request. It is different from the quota of 50 queues
 	// per routing profile per instance that is listed in Amazon Connect service
 	// quotas.
+	//
+	// Note: Use this config for chat, email, and task contacts. It does not support
+	// voice contacts.
 	ManualAssignmentQueueConfigs []types.RoutingProfileManualAssignmentQueueConfig
 
 	// The inbound queues associated with the routing profile. If no queue is added,

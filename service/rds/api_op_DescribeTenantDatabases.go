@@ -213,7 +213,7 @@ type TenantDatabaseAvailableWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, TenantDatabaseAvailableWaiter will use default max delay of 120
+	// set to zero, TenantDatabaseAvailableWaiter will use default max delay of 1800
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -244,7 +244,7 @@ type TenantDatabaseAvailableWaiter struct {
 func NewTenantDatabaseAvailableWaiter(client DescribeTenantDatabasesAPIClient, optFns ...func(*TenantDatabaseAvailableWaiterOptions)) *TenantDatabaseAvailableWaiter {
 	options := TenantDatabaseAvailableWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 1800 * time.Second
 	options.Retryable = tenantDatabaseAvailableStateRetryable
 
 	for _, fn := range optFns {
@@ -279,7 +279,7 @@ func (w *TenantDatabaseAvailableWaiter) WaitForOutput(ctx context.Context, param
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 1800 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {
@@ -472,7 +472,7 @@ type TenantDatabaseDeletedWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, TenantDatabaseDeletedWaiter will use default max delay of 120
+	// set to zero, TenantDatabaseDeletedWaiter will use default max delay of 1800
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -503,7 +503,7 @@ type TenantDatabaseDeletedWaiter struct {
 func NewTenantDatabaseDeletedWaiter(client DescribeTenantDatabasesAPIClient, optFns ...func(*TenantDatabaseDeletedWaiterOptions)) *TenantDatabaseDeletedWaiter {
 	options := TenantDatabaseDeletedWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 1800 * time.Second
 	options.Retryable = tenantDatabaseDeletedStateRetryable
 
 	for _, fn := range optFns {
@@ -538,7 +538,7 @@ func (w *TenantDatabaseDeletedWaiter) WaitForOutput(ctx context.Context, params 
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 1800 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

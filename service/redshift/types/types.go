@@ -314,6 +314,12 @@ type Cluster struct {
 	//   - Pending - The next snapshot is pending to be taken.
 	ExpectedNextSnapshotScheduleTimeStatus *string
 
+	// A boolean value that, if true , indicates that the cluster allocates additional
+	// compute resources to run automatic optimization operations.
+	//
+	// Default: false
+	ExtraComputeForAutomaticOptimization *string
+
 	// A value that reports whether the Amazon Redshift cluster has finished applying
 	// any hardware security module (HSM) settings changes specified in a modify
 	// cluster command.

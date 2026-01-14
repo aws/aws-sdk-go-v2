@@ -1,0 +1,8 @@
+{
+    "id": "b604bc38-d4ac-4a55-a557-4e17eeb4dad5",
+    "type": "documentation",
+    "description": "Cost Categories added support to BillingView data filter expressions through the new costCategories parameter, enabling users to filter billing views by AWS Cost Categories for more granular cost management and allocation.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

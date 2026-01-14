@@ -91,25 +91,27 @@ type AMITypes string
 
 // Enum values for AMITypes
 const (
-	AMITypesAl2X8664                AMITypes = "AL2_x86_64"
-	AMITypesAl2X8664Gpu             AMITypes = "AL2_x86_64_GPU"
-	AMITypesAl2Arm64                AMITypes = "AL2_ARM_64"
-	AMITypesCustom                  AMITypes = "CUSTOM"
-	AMITypesBottlerocketArm64       AMITypes = "BOTTLEROCKET_ARM_64"
-	AMITypesBottlerocketX8664       AMITypes = "BOTTLEROCKET_x86_64"
-	AMITypesBottlerocketArm64Fips   AMITypes = "BOTTLEROCKET_ARM_64_FIPS"
-	AMITypesBottlerocketX8664Fips   AMITypes = "BOTTLEROCKET_x86_64_FIPS"
-	AMITypesBottlerocketArm64Nvidia AMITypes = "BOTTLEROCKET_ARM_64_NVIDIA"
-	AMITypesBottlerocketX8664Nvidia AMITypes = "BOTTLEROCKET_x86_64_NVIDIA"
-	AMITypesWindowsCore2019X8664    AMITypes = "WINDOWS_CORE_2019_x86_64"
-	AMITypesWindowsFull2019X8664    AMITypes = "WINDOWS_FULL_2019_x86_64"
-	AMITypesWindowsCore2022X8664    AMITypes = "WINDOWS_CORE_2022_x86_64"
-	AMITypesWindowsFull2022X8664    AMITypes = "WINDOWS_FULL_2022_x86_64"
-	AMITypesAl2023X8664Standard     AMITypes = "AL2023_x86_64_STANDARD"
-	AMITypesAl2023Arm64Standard     AMITypes = "AL2023_ARM_64_STANDARD"
-	AMITypesAl2023X8664Neuron       AMITypes = "AL2023_x86_64_NEURON"
-	AMITypesAl2023X8664Nvidia       AMITypes = "AL2023_x86_64_NVIDIA"
-	AMITypesAl2023Arm64Nvidia       AMITypes = "AL2023_ARM_64_NVIDIA"
+	AMITypesAl2X8664                    AMITypes = "AL2_x86_64"
+	AMITypesAl2X8664Gpu                 AMITypes = "AL2_x86_64_GPU"
+	AMITypesAl2Arm64                    AMITypes = "AL2_ARM_64"
+	AMITypesCustom                      AMITypes = "CUSTOM"
+	AMITypesBottlerocketArm64           AMITypes = "BOTTLEROCKET_ARM_64"
+	AMITypesBottlerocketX8664           AMITypes = "BOTTLEROCKET_x86_64"
+	AMITypesBottlerocketArm64Fips       AMITypes = "BOTTLEROCKET_ARM_64_FIPS"
+	AMITypesBottlerocketX8664Fips       AMITypes = "BOTTLEROCKET_x86_64_FIPS"
+	AMITypesBottlerocketArm64Nvidia     AMITypes = "BOTTLEROCKET_ARM_64_NVIDIA"
+	AMITypesBottlerocketX8664Nvidia     AMITypes = "BOTTLEROCKET_x86_64_NVIDIA"
+	AMITypesBottlerocketArm64NvidiaFips AMITypes = "BOTTLEROCKET_ARM_64_NVIDIA_FIPS"
+	AMITypesBottlerocketX8664NvidiaFips AMITypes = "BOTTLEROCKET_x86_64_NVIDIA_FIPS"
+	AMITypesWindowsCore2019X8664        AMITypes = "WINDOWS_CORE_2019_x86_64"
+	AMITypesWindowsFull2019X8664        AMITypes = "WINDOWS_FULL_2019_x86_64"
+	AMITypesWindowsCore2022X8664        AMITypes = "WINDOWS_CORE_2022_x86_64"
+	AMITypesWindowsFull2022X8664        AMITypes = "WINDOWS_FULL_2022_x86_64"
+	AMITypesAl2023X8664Standard         AMITypes = "AL2023_x86_64_STANDARD"
+	AMITypesAl2023Arm64Standard         AMITypes = "AL2023_ARM_64_STANDARD"
+	AMITypesAl2023X8664Neuron           AMITypes = "AL2023_x86_64_NEURON"
+	AMITypesAl2023X8664Nvidia           AMITypes = "AL2023_x86_64_NVIDIA"
+	AMITypesAl2023Arm64Nvidia           AMITypes = "AL2023_ARM_64_NVIDIA"
 )
 
 // Values returns all known values for AMITypes. Note that this can be expanded in
@@ -128,6 +130,8 @@ func (AMITypes) Values() []AMITypes {
 		"BOTTLEROCKET_x86_64_FIPS",
 		"BOTTLEROCKET_ARM_64_NVIDIA",
 		"BOTTLEROCKET_x86_64_NVIDIA",
+		"BOTTLEROCKET_ARM_64_NVIDIA_FIPS",
+		"BOTTLEROCKET_x86_64_NVIDIA_FIPS",
 		"WINDOWS_CORE_2019_x86_64",
 		"WINDOWS_FULL_2019_x86_64",
 		"WINDOWS_CORE_2022_x86_64",

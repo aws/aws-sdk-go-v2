@@ -6,88 +6,74 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the hours of operations with the effective override applied.
-func (c *Client) GetEffectiveHoursOfOperations(ctx context.Context, params *GetEffectiveHoursOfOperationsInput, optFns ...func(*Options)) (*GetEffectiveHoursOfOperationsOutput, error) {
+// Disassociates a set of hours of operations with another hours of operation.
+// Refer to Administrator Guide [here]for more information on inheriting overrides from
+// parent hours of operation(s).
+//
+// [here]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+func (c *Client) DisassociateHoursOfOperations(ctx context.Context, params *DisassociateHoursOfOperationsInput, optFns ...func(*Options)) (*DisassociateHoursOfOperationsOutput, error) {
 	if params == nil {
-		params = &GetEffectiveHoursOfOperationsInput{}
+		params = &DisassociateHoursOfOperationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEffectiveHoursOfOperations", params, optFns, c.addOperationGetEffectiveHoursOfOperationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateHoursOfOperations", params, optFns, c.addOperationDisassociateHoursOfOperationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetEffectiveHoursOfOperationsOutput)
+	out := result.(*DisassociateHoursOfOperationsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetEffectiveHoursOfOperationsInput struct {
+type DisassociateHoursOfOperationsInput struct {
 
-	// The date from when the hours of operation are listed.
-	//
-	// This member is required.
-	FromDate *string
-
-	// The identifier for the hours of operation.
+	// The identifier of the child hours of operation.
 	//
 	// This member is required.
 	HoursOfOperationId *string
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The date until when the hours of operation are listed.
+	// The Amazon Resource Names (ARNs) of the parent hours of operation resources to
+	// disassociate with the child hours of operation resource.
 	//
 	// This member is required.
-	ToDate *string
+	ParentHoursOfOperationIds []string
 
 	noSmithyDocumentSerde
 }
 
-type GetEffectiveHoursOfOperationsOutput struct {
-
-	// Information about the effective hours of operations.
-	EffectiveHoursOfOperationList []types.EffectiveHoursOfOperations
-
-	// Information about override configurations applied to the base hours of
-	// operation to calculate the effective hours.
-	//
-	// For more information about how override types are applied, see [Build your list of overrides] in the
-	// Administrator Guide.
-	//
-	// [Build your list of overrides]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
-	EffectiveOverrideHoursList []types.EffectiveOverrideHours
-
-	// The time zone for the hours of operation.
-	TimeZone *string
-
+type DisassociateHoursOfOperationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetEffectiveHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEffectiveHoursOfOperations{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateHoursOfOperations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEffectiveHoursOfOperations{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateHoursOfOperations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEffectiveHoursOfOperations"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateHoursOfOperations"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -142,10 +128,10 @@ func (c *Client) addOperationGetEffectiveHoursOfOperationsMiddlewares(stack *mid
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetEffectiveHoursOfOperationsValidationMiddleware(stack); err != nil {
+	if err = addOpDisassociateHoursOfOperationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEffectiveHoursOfOperations(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateHoursOfOperations(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -175,10 +161,10 @@ func (c *Client) addOperationGetEffectiveHoursOfOperationsMiddlewares(stack *mid
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetEffectiveHoursOfOperations(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDisassociateHoursOfOperations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetEffectiveHoursOfOperations",
+		OperationName: "DisassociateHoursOfOperations",
 	}
 }

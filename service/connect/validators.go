@@ -170,6 +170,26 @@ func (m *validateOpAssociateFlow) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateHoursOfOperations struct {
+}
+
+func (*validateOpAssociateHoursOfOperations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateHoursOfOperations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateHoursOfOperationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateHoursOfOperationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateInstanceStorageConfig struct {
 }
 
@@ -2730,6 +2750,26 @@ func (m *validateOpDisassociateFlow) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateHoursOfOperations struct {
+}
+
+func (*validateOpDisassociateHoursOfOperations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateHoursOfOperations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateHoursOfOperationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateHoursOfOperationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateInstanceStorageConfig struct {
 }
 
@@ -3425,6 +3465,26 @@ func (m *validateOpListBots) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListBotsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChildHoursOfOperations struct {
+}
+
+func (*validateOpListChildHoursOfOperations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChildHoursOfOperations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChildHoursOfOperationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChildHoursOfOperationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6762,6 +6822,10 @@ func addOpAssociateFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateFlow{}, middleware.After)
 }
 
+func addOpAssociateHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateHoursOfOperations{}, middleware.After)
+}
+
 func addOpAssociateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateInstanceStorageConfig{}, middleware.After)
 }
@@ -7274,6 +7338,10 @@ func addOpDisassociateFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateFlow{}, middleware.After)
 }
 
+func addOpDisassociateHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateHoursOfOperations{}, middleware.After)
+}
+
 func addOpDisassociateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateInstanceStorageConfig{}, middleware.After)
 }
@@ -7412,6 +7480,10 @@ func addOpListAuthenticationProfilesValidationMiddleware(stack *middleware.Stack
 
 func addOpListBotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBots{}, middleware.After)
+}
+
+func addOpListChildHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChildHoursOfOperations{}, middleware.After)
 }
 
 func addOpListContactEvaluationsValidationMiddleware(stack *middleware.Stack) error {
@@ -10211,6 +10283,43 @@ func validateQuickConnectConfig(v *types.QuickConnectConfig) error {
 	}
 }
 
+func validateRecurrenceConfig(v *types.RecurrenceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecurrenceConfig"}
+	if v.RecurrencePattern == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecurrencePattern"))
+	} else if v.RecurrencePattern != nil {
+		if err := validateRecurrencePattern(v.RecurrencePattern); err != nil {
+			invalidParams.AddNested("RecurrencePattern", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecurrencePattern(v *types.RecurrencePattern) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecurrencePattern"}
+	if len(v.Frequency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Frequency"))
+	}
+	if v.Interval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateReference(v *types.Reference) error {
 	if v == nil {
 		return nil
@@ -11276,6 +11385,27 @@ func validateOpAssociateFlowInput(v *AssociateFlowInput) error {
 	}
 }
 
+func validateOpAssociateHoursOfOperationsInput(v *AssociateHoursOfOperationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateHoursOfOperationsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if v.ParentHoursOfOperationConfigs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentHoursOfOperationConfigs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateInstanceStorageConfigInput(v *AssociateInstanceStorageConfigInput) error {
 	if v == nil {
 		return nil
@@ -12068,6 +12198,11 @@ func validateOpCreateHoursOfOperationOverrideInput(v *CreateHoursOfOperationOver
 	}
 	if v.EffectiveTill == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EffectiveTill"))
+	}
+	if v.RecurrenceConfig != nil {
+		if err := validateRecurrenceConfig(v.RecurrenceConfig); err != nil {
+			invalidParams.AddNested("RecurrenceConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13914,6 +14049,27 @@ func validateOpDisassociateFlowInput(v *DisassociateFlowInput) error {
 	}
 }
 
+func validateOpDisassociateHoursOfOperationsInput(v *DisassociateHoursOfOperationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateHoursOfOperationsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if v.ParentHoursOfOperationIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentHoursOfOperationIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateInstanceStorageConfigInput(v *DisassociateInstanceStorageConfigInput) error {
 	if v == nil {
 		return nil
@@ -14609,6 +14765,24 @@ func validateOpListBotsInput(v *ListBotsInput) error {
 	}
 	if len(v.LexVersion) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LexVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListChildHoursOfOperationsInput(v *ListChildHoursOfOperationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChildHoursOfOperationsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17072,6 +17246,11 @@ func validateOpUpdateHoursOfOperationOverrideInput(v *UpdateHoursOfOperationOver
 	if v.Config != nil {
 		if err := validateHoursOfOperationOverrideConfigList(v.Config); err != nil {
 			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RecurrenceConfig != nil {
+		if err := validateRecurrenceConfig(v.RecurrenceConfig); err != nil {
+			invalidParams.AddNested("RecurrenceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

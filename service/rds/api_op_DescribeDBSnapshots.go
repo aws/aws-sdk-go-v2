@@ -288,7 +288,7 @@ type DBSnapshotAvailableWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, DBSnapshotAvailableWaiter will use default max delay of 120
+	// set to zero, DBSnapshotAvailableWaiter will use default max delay of 1800
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -319,7 +319,7 @@ type DBSnapshotAvailableWaiter struct {
 func NewDBSnapshotAvailableWaiter(client DescribeDBSnapshotsAPIClient, optFns ...func(*DBSnapshotAvailableWaiterOptions)) *DBSnapshotAvailableWaiter {
 	options := DBSnapshotAvailableWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 1800 * time.Second
 	options.Retryable = dBSnapshotAvailableStateRetryable
 
 	for _, fn := range optFns {
@@ -354,7 +354,7 @@ func (w *DBSnapshotAvailableWaiter) WaitForOutput(ctx context.Context, params *D
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 1800 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {
@@ -592,7 +592,7 @@ type DBSnapshotDeletedWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, DBSnapshotDeletedWaiter will use default max delay of 120 seconds.
+	// set to zero, DBSnapshotDeletedWaiter will use default max delay of 1800 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -622,7 +622,7 @@ type DBSnapshotDeletedWaiter struct {
 func NewDBSnapshotDeletedWaiter(client DescribeDBSnapshotsAPIClient, optFns ...func(*DBSnapshotDeletedWaiterOptions)) *DBSnapshotDeletedWaiter {
 	options := DBSnapshotDeletedWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 1800 * time.Second
 	options.Retryable = dBSnapshotDeletedStateRetryable
 
 	for _, fn := range optFns {
@@ -657,7 +657,7 @@ func (w *DBSnapshotDeletedWaiter) WaitForOutput(ctx context.Context, params *Des
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 1800 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

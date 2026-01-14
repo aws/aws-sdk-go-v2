@@ -1722,6 +1722,11 @@ func awsRestjson1_serializeOpDocumentUpdateWhatsAppMessageTemplateInput(v *Updat
 	object := value.Object()
 	defer object.Close()
 
+	if v.CtaUrlLinkTrackingOptedOut != nil {
+		ok := object.Key("ctaUrlLinkTrackingOptedOut")
+		ok.Boolean(*v.CtaUrlLinkTrackingOptedOut)
+	}
+
 	if v.Id != nil {
 		ok := object.Key("id")
 		ok.String(*v.Id)
@@ -1730,6 +1735,11 @@ func awsRestjson1_serializeOpDocumentUpdateWhatsAppMessageTemplateInput(v *Updat
 	if v.MetaTemplateId != nil {
 		ok := object.Key("metaTemplateId")
 		ok.String(*v.MetaTemplateId)
+	}
+
+	if v.ParameterFormat != nil {
+		ok := object.Key("parameterFormat")
+		ok.String(*v.ParameterFormat)
 	}
 
 	if v.TemplateCategory != nil {

@@ -282,7 +282,7 @@ type DBClusterSnapshotAvailableWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, DBClusterSnapshotAvailableWaiter will use default max delay of 120
+	// set to zero, DBClusterSnapshotAvailableWaiter will use default max delay of 1800
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -315,7 +315,7 @@ type DBClusterSnapshotAvailableWaiter struct {
 func NewDBClusterSnapshotAvailableWaiter(client DescribeDBClusterSnapshotsAPIClient, optFns ...func(*DBClusterSnapshotAvailableWaiterOptions)) *DBClusterSnapshotAvailableWaiter {
 	options := DBClusterSnapshotAvailableWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 1800 * time.Second
 	options.Retryable = dBClusterSnapshotAvailableStateRetryable
 
 	for _, fn := range optFns {
@@ -350,7 +350,7 @@ func (w *DBClusterSnapshotAvailableWaiter) WaitForOutput(ctx context.Context, pa
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 1800 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {
@@ -589,7 +589,7 @@ type DBClusterSnapshotDeletedWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, DBClusterSnapshotDeletedWaiter will use default max delay of 120
+	// set to zero, DBClusterSnapshotDeletedWaiter will use default max delay of 1800
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -620,7 +620,7 @@ type DBClusterSnapshotDeletedWaiter struct {
 func NewDBClusterSnapshotDeletedWaiter(client DescribeDBClusterSnapshotsAPIClient, optFns ...func(*DBClusterSnapshotDeletedWaiterOptions)) *DBClusterSnapshotDeletedWaiter {
 	options := DBClusterSnapshotDeletedWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 1800 * time.Second
 	options.Retryable = dBClusterSnapshotDeletedStateRetryable
 
 	for _, fn := range optFns {
@@ -655,7 +655,7 @@ func (w *DBClusterSnapshotDeletedWaiter) WaitForOutput(ctx context.Context, para
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 1800 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

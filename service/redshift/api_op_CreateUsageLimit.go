@@ -50,7 +50,8 @@ type CreateUsageLimitInput struct {
 	// duration or data size. If FeatureType is spectrum , then LimitType must be
 	// data-scanned . If FeatureType is concurrency-scaling , then LimitType must be
 	// time . If FeatureType is cross-region-datasharing , then LimitType must be
-	// data-scanned .
+	// data-scanned . If FeatureType is extra-compute-for-automatic-optimization , then
+	// LimitType must be time .
 	//
 	// This member is required.
 	LimitType types.UsageLimitLimitType

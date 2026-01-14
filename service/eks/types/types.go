@@ -487,12 +487,11 @@ type AssociatedAccessPolicy struct {
 	noSmithyDocumentSerde
 }
 
-// An Amazon EC2 Auto Scaling group that is associated with an Amazon EKS managed
-// node group.
+// An Auto Scaling group that is associated with an Amazon EKS managed node group.
 type AutoScalingGroup struct {
 
-	// The name of the Amazon EC2 Auto Scaling group associated with an Amazon EKS
-	// managed node group.
+	// The name of the Auto Scaling group associated with an Amazon EKS managed node
+	// group.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -1469,12 +1468,12 @@ type Issue struct {
 	//   - AccessDenied: Amazon EKS or one or more of your managed nodes is failing to
 	//   authenticate or authorize with your Kubernetes cluster API server.
 	//
-	//   - AsgInstanceLaunchFailures: Your Amazon EC2 Auto Scaling group is
-	//   experiencing failures while attempting to launch instances.
+	//   - AsgInstanceLaunchFailures: Your Auto Scaling group is experiencing failures
+	//   while attempting to launch instances.
 	//
-	//   - AutoScalingGroupNotFound: We couldn't find the Amazon EC2 Auto Scaling
-	//   group associated with the managed node group. You may be able to recreate an
-	//   Amazon EC2 Auto Scaling group with the same settings to recover.
+	//   - AutoScalingGroupNotFound: We couldn't find the Auto Scaling group
+	//   associated with the managed node group. You may be able to recreate an Auto
+	//   Scaling group with the same settings to recover.
 	//
 	//   - ClusterUnreachable: Amazon EKS or one or more of your managed nodes is
 	//   unable to to communicate with your Kubernetes cluster API server. This can
@@ -1841,10 +1840,10 @@ type NodegroupResources struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing the scaling configuration details for the Amazon EC2
-// Auto Scaling group that is associated with your node group. When creating a node
-// group, you must specify all or none of the properties. When updating a node
-// group, you can specify any or none of the properties.
+// An object representing the scaling configuration details for the Auto Scaling
+// group that is associated with your node group. When creating a node group, you
+// must specify all or none of the properties. When updating a node group, you can
+// specify any or none of the properties.
 type NodegroupScalingConfig struct {
 
 	// The current number of nodes that the managed node group should maintain.

@@ -1,0 +1,8 @@
+{
+    "id": "a3e6094d-b9ae-4904-8f37-ff6c2a1cdb86",
+    "type": "feature",
+    "description": "no feature changes. model migrated to Smithy",
+    "modules": [
+        "service/rds"
+    ]
+}

@@ -846,6 +846,111 @@ func awsRestjson1_serializeOpDocumentAssociateFlowInput(v *AssociateFlowInput, v
 	return nil
 }
 
+type awsRestjson1_serializeOpAssociateHoursOfOperations struct {
+}
+
+func (*awsRestjson1_serializeOpAssociateHoursOfOperations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAssociateHoursOfOperations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateHoursOfOperationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/hours-of-operations/{InstanceId}/{HoursOfOperationId}/associate-hours")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAssociateHoursOfOperationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssociateHoursOfOperationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAssociateHoursOfOperationsInput(v *AssociateHoursOfOperationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.HoursOfOperationId == nil || len(*v.HoursOfOperationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HoursOfOperationId must not be empty")}
+	}
+	if v.HoursOfOperationId != nil {
+		if err := encoder.SetURI("HoursOfOperationId").String(*v.HoursOfOperationId); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
+	}
+	if v.InstanceId != nil {
+		if err := encoder.SetURI("InstanceId").String(*v.InstanceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssociateHoursOfOperationsInput(v *AssociateHoursOfOperationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ParentHoursOfOperationConfigs != nil {
+		ok := object.Key("ParentHoursOfOperationConfigs")
+		if err := awsRestjson1_serializeDocumentParentHoursOfOperationConfigList(v.ParentHoursOfOperationConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpAssociateInstanceStorageConfig struct {
 }
 
@@ -4577,6 +4682,13 @@ func awsRestjson1_serializeOpDocumentCreateHoursOfOperationInput(v *CreateHoursO
 		ok.String(*v.Name)
 	}
 
+	if v.ParentHoursOfOperationConfigs != nil {
+		ok := object.Key("ParentHoursOfOperationConfigs")
+		if err := awsRestjson1_serializeDocumentParentHoursOfOperationConfigList(v.ParentHoursOfOperationConfigs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -4712,6 +4824,18 @@ func awsRestjson1_serializeOpDocumentCreateHoursOfOperationOverrideInput(v *Crea
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.OverrideType) > 0 {
+		ok := object.Key("OverrideType")
+		ok.String(string(v.OverrideType))
+	}
+
+	if v.RecurrenceConfig != nil {
+		ok := object.Key("RecurrenceConfig")
+		if err := awsRestjson1_serializeDocumentRecurrenceConfig(v.RecurrenceConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -13219,6 +13343,111 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateFlowInput(v *DisassociateFl
 	return nil
 }
 
+type awsRestjson1_serializeOpDisassociateHoursOfOperations struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociateHoursOfOperations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociateHoursOfOperations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateHoursOfOperationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/hours-of-operations/{InstanceId}/{HoursOfOperationId}/disassociate-hours")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociateHoursOfOperationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDisassociateHoursOfOperationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociateHoursOfOperationsInput(v *DisassociateHoursOfOperationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.HoursOfOperationId == nil || len(*v.HoursOfOperationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HoursOfOperationId must not be empty")}
+	}
+	if v.HoursOfOperationId != nil {
+		if err := encoder.SetURI("HoursOfOperationId").String(*v.HoursOfOperationId); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
+	}
+	if v.InstanceId != nil {
+		if err := encoder.SetURI("InstanceId").String(*v.InstanceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDisassociateHoursOfOperationsInput(v *DisassociateHoursOfOperationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ParentHoursOfOperationIds != nil {
+		ok := object.Key("ParentHoursOfOperationIds")
+		if err := awsRestjson1_serializeDocumentParentHoursOfOperationIdList(v.ParentHoursOfOperationIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDisassociateInstanceStorageConfig struct {
 }
 
@@ -16466,6 +16695,94 @@ func awsRestjson1_serializeOpHttpBindingsListBotsInput(v *ListBotsInput, encoder
 
 	if len(v.LexVersion) > 0 {
 		encoder.SetQuery("lexVersion").String(string(v.LexVersion))
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListChildHoursOfOperations struct {
+}
+
+func (*awsRestjson1_serializeOpListChildHoursOfOperations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListChildHoursOfOperations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListChildHoursOfOperationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/hours-of-operations/{InstanceId}/{HoursOfOperationId}/hours")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListChildHoursOfOperationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListChildHoursOfOperationsInput(v *ListChildHoursOfOperationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.HoursOfOperationId == nil || len(*v.HoursOfOperationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HoursOfOperationId must not be empty")}
+	}
+	if v.HoursOfOperationId != nil {
+		if err := encoder.SetURI("HoursOfOperationId").String(*v.HoursOfOperationId); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
+	}
+	if v.InstanceId != nil {
+		if err := encoder.SetURI("InstanceId").String(*v.InstanceId); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxResults != nil {
@@ -29728,6 +30045,18 @@ func awsRestjson1_serializeOpDocumentUpdateHoursOfOperationOverrideInput(v *Upda
 		ok.String(*v.Name)
 	}
 
+	if len(v.OverrideType) > 0 {
+		ok := object.Key("OverrideType")
+		ok.String(string(v.OverrideType))
+	}
+
+	if v.RecurrenceConfig != nil {
+		ok := object.Key("RecurrenceConfig")
+		if err := awsRestjson1_serializeDocumentRecurrenceConfig(v.RecurrenceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -38110,6 +38439,28 @@ func awsRestjson1_serializeDocumentMetricV2(v *types.MetricV2, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMonthDayList(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMonthList(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMultiSelectQuestionRuleCategoryAutomation(v *types.MultiSelectQuestionRuleCategoryAutomation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -38504,6 +38855,42 @@ func awsRestjson1_serializeDocumentPalettePrimary(v *types.PalettePrimary, value
 		ok.String(*v.Default)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParentHoursOfOperationConfig(v *types.ParentHoursOfOperationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HoursOfOperationId != nil {
+		ok := object.Key("HoursOfOperationId")
+		ok.String(*v.HoursOfOperationId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParentHoursOfOperationConfigList(v []types.ParentHoursOfOperationConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentParentHoursOfOperationConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParentHoursOfOperationIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -39290,6 +39677,58 @@ func awsRestjson1_serializeDocumentRecordIds(v []string, value smithyjson.Value)
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecurrenceConfig(v *types.RecurrenceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RecurrencePattern != nil {
+		ok := object.Key("RecurrencePattern")
+		if err := awsRestjson1_serializeDocumentRecurrencePattern(v.RecurrencePattern, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecurrencePattern(v *types.RecurrencePattern, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ByMonth != nil {
+		ok := object.Key("ByMonth")
+		if err := awsRestjson1_serializeDocumentMonthList(v.ByMonth, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ByMonthDay != nil {
+		ok := object.Key("ByMonthDay")
+		if err := awsRestjson1_serializeDocumentMonthDayList(v.ByMonthDay, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ByWeekdayOccurrence != nil {
+		ok := object.Key("ByWeekdayOccurrence")
+		if err := awsRestjson1_serializeDocumentWeekdayOccurrenceList(v.ByWeekdayOccurrence, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Frequency) > 0 {
+		ok := object.Key("Frequency")
+		ok.String(string(v.Frequency))
+	}
+
+	if v.Interval != nil {
+		ok := object.Key("Interval")
+		ok.Integer(*v.Interval)
+	}
+
 	return nil
 }
 
@@ -41665,6 +42104,17 @@ func awsRestjson1_serializeDocumentVoiceRecordingConfiguration(v *types.VoiceRec
 		ok.String(string(v.VoiceRecordingTrack))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWeekdayOccurrenceList(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
 	return nil
 }
 

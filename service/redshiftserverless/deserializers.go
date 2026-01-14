@@ -12222,6 +12222,15 @@ func awsAwsjson11_deserializeDocumentWorkgroup(v **types.Workgroup, value interf
 				sv.EnhancedVpcRouting = ptr.Bool(jtv)
 			}
 
+		case "extraComputeForAutomaticOptimization":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ExtraComputeForAutomaticOptimization = ptr.Bool(jtv)
+			}
+
 		case "ipAddressType":
 			if value != nil {
 				jtv, ok := value.(string)

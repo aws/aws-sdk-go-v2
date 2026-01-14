@@ -31,9 +31,12 @@ type ConfigParameter struct {
 
 	// The key of the parameter. The options are auto_mv , datestyle ,
 	// enable_case_sensitive_identifier , enable_user_activity_logging , query_group ,
-	// search_path , require_ssl , use_fips_ssl , and query monitoring metrics that let
-	// you define performance boundaries. For more information about query monitoring
-	// rules and available metrics, see [Query monitoring metrics for Amazon Redshift Serverless].
+	// search_path , require_ssl , use_fips_ssl , and either wlm_json_configuration or
+	// query monitoring metrics that let you define performance boundaries. You can
+	// either specify individual query monitoring metrics (such as max_scan_row_count ,
+	// max_query_execution_time ) or use wlm_json_configuration to define query queues
+	// with rules, but not both. For more information about query monitoring rules and
+	// available metrics, see [Query monitoring metrics for Amazon Redshift Serverless].
 	//
 	// [Query monitoring metrics for Amazon Redshift Serverless]: https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless
 	ParameterKey *string
@@ -772,9 +775,13 @@ type Workgroup struct {
 	// An array of parameters to set for advanced control over a database. The options
 	// are auto_mv , datestyle , enable_case_sensitive_identifier ,
 	// enable_user_activity_logging , query_group , search_path , require_ssl ,
-	// use_fips_ssl , and query monitoring metrics that let you define performance
-	// boundaries. For more information about query monitoring rules and available
-	// metrics, see [Query monitoring metrics for Amazon Redshift Serverless].
+	// use_fips_ssl , and either wlm_json_configuration or query monitoring metrics
+	// that let you define performance boundaries. You can either specify individual
+	// query monitoring metrics (such as max_scan_row_count , max_query_execution_time
+	// ) or use wlm_json_configuration to define query queues with rules, but not
+	// both. If you're using wlm_json_configuration , the maximum size of
+	// parameterValue is 8000 characters. For more information about query monitoring
+	// rules and available metrics, see [Query monitoring metrics for Amazon Redshift Serverless].
 	//
 	// [Query monitoring metrics for Amazon Redshift Serverless]: https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless
 	ConfigParameters []ConfigParameter
@@ -803,6 +810,12 @@ type Workgroup struct {
 	// routing, which forces Amazon Redshift Serverless to route traffic through your
 	// VPC.
 	EnhancedVpcRouting *bool
+
+	// A boolean value that, if true , indicates that the workgroup allocates
+	// additional compute resources to run automatic optimization operations.
+	//
+	// Default: false
+	ExtraComputeForAutomaticOptimization *bool
 
 	// The IP address type that the workgroup supports. Possible values are ipv4 and
 	// dualstack .
