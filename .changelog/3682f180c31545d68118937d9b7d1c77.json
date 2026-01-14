@@ -1,8 +1,0 @@
-{
-    "id": "3682f180-c315-45d6-8118-937d9b7d1c77",
-    "type": "feature",
-    "description": "Adds support for enabling extra compute resources for automatic optimization during create and update operations in Amazon Redshift Serverless workgroups.",
-    "modules": [
-        "service/redshiftserverless"
-    ]
-}

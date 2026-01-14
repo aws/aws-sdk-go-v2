@@ -1,8 +1,0 @@
-{
-    "id": "efc7b666-157b-4d0b-a111-9ad21ff57fdd",
-    "type": "feature",
-    "description": "Added support for BOTTLEROCKET NVIDIA FIPS AMIs to AMI types in US regions.",
-    "modules": [
-        "service/eks"
-    ]
-}

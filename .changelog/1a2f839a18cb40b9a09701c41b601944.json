@@ -1,8 +1,0 @@
-{
-    "id": "1a2f839a-18cb-40b9-a097-01c41b601944",
-    "type": "feature",
-    "description": "Amazon Connect makes it easier to manage contact center operating hours by enabling automated scheduling for recurring events like holidays and maintenance windows. Set up recurring patterns (weekly, monthly, etc.) or link to another hours of operation to inherit overrides.",
-    "modules": [
-        "service/connect"
-    ]
-}

@@ -1,3 +1,21 @@
+# Release (2026-01-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.155.0](service/connect/CHANGELOG.md#v11550-2026-01-14)
+  * **Feature**: Amazon Connect makes it easier to manage contact center operating hours by enabling automated scheduling for recurring events like holidays and maintenance windows. Set up recurring patterns (weekly, monthly, etc.) or link to another hours of operation to inherit overrides.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.63.2](service/costexplorer/CHANGELOG.md#v1632-2026-01-14)
+  * **Documentation**: Cost Categories added support to BillingView data filter expressions through the new costCategories parameter, enabling users to filter billing views by AWS Cost Categories for more granular cost management and allocation.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.77.0](service/eks/CHANGELOG.md#v1770-2026-01-14)
+  * **Feature**: Added support for BOTTLEROCKET NVIDIA FIPS AMIs to AMI types in US regions.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.114.0](service/rds/CHANGELOG.md#v11140-2026-01-14)
+  * **Feature**: no feature changes. model migrated to Smithy
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.62.0](service/redshift/CHANGELOG.md#v1620-2026-01-14)
+  * **Feature**: Adds support for enabling extra compute resources for automatic optimization during create and modify operations in Amazon Redshift clusters.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.34.0](service/redshiftserverless/CHANGELOG.md#v1340-2026-01-14)
+  * **Feature**: Adds support for enabling extra compute resources for automatic optimization during create and update operations in Amazon Redshift Serverless workgroups.
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.8.0](service/socialmessaging/CHANGELOG.md#v180-2026-01-14)
+  * **Feature**: This release clarifies WhatsApp template operations as a resource-authenticated operation via the parent WhatsApp Business Account. It also introduces new parameters for parameter format, CTA URL link tracking, and template body examples, and increases the phone number ID length.
+
 # Release (2026-01-13)
 
 ## Module Highlights

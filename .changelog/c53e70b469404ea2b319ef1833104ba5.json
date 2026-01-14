@@ -1,8 +1,0 @@
-{
-    "id": "c53e70b4-6940-4ea2-b319-ef1833104ba5",
-    "type": "feature",
-    "description": "This release clarifies WhatsApp template operations as a resource-authenticated operation via the parent WhatsApp Business Account. It also introduces new parameters for parameter format, CTA URL link tracking, and template body examples, and increases the phone number ID length.",
-    "modules": [
-        "service/socialmessaging"
-    ]
-}

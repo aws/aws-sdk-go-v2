@@ -1,3 +1,7 @@
+# v1.77.0 (2026-01-14)
+
+* **Feature**: Added support for BOTTLEROCKET NVIDIA FIPS AMIs to AMI types in US regions.
+
 # v1.76.4 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

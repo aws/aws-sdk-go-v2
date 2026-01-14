@@ -1,8 +1,0 @@
-{
-    "id": "e6826c34-a088-49fb-920f-31bfb6a9314d",
-    "type": "feature",
-    "description": "Adds support for enabling extra compute resources for automatic optimization during create and modify operations in Amazon Redshift clusters.",
-    "modules": [
-        "service/redshift"
-    ]
-}

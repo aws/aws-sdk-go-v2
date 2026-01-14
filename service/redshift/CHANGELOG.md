@@ -1,3 +1,7 @@
+# v1.62.0 (2026-01-14)
+
+* **Feature**: Adds support for enabling extra compute resources for automatic optimization during create and modify operations in Amazon Redshift clusters.
+
 # v1.61.5 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.63.2 (2026-01-14)
+
+* **Documentation**: Cost Categories added support to BillingView data filter expressions through the new costCategories parameter, enabling users to filter billing views by AWS Cost Categories for more granular cost management and allocation.
+
 # v1.63.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

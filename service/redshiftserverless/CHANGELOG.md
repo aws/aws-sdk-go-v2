@@ -1,3 +1,7 @@
+# v1.34.0 (2026-01-14)
+
+* **Feature**: Adds support for enabling extra compute resources for automatic optimization during create and update operations in Amazon Redshift Serverless workgroups.
+
 # v1.33.2 (2026-01-12)
 
 * No change notes available for this release.
