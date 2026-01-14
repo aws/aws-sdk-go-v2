@@ -171,7 +171,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new WhatsApp message template from a custom definition.</p>",
+                "smithy.api#documentation": "<p>Creates a new WhatsApp message template from a custom definition.</p>\n         <note>\n            <p>Amazon Web Services End User Messaging Social does not store any WhatsApp message template content.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/whatsapp/template/put",
@@ -227,7 +227,8 @@
                     "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account to associate with this template.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
                     }
                 }
             },
@@ -275,7 +276,8 @@
                     "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account to associate with this template.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
                     }
                 }
             },
@@ -324,7 +326,8 @@
                     "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account associated with this media upload.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
                     }
                 },
                 "sourceS3File": {
@@ -430,7 +433,7 @@
                 "originationPhoneNumberId": {
                     "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the originating phone number associated with the media. Phone\n         number identifiers are formatted as\n            <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the originating phone number associated with the media. Phone\n         number identifiers are formatted as\n            <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
                         "smithy.api#httpQuery": "originationPhoneNumberId",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
@@ -512,7 +515,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account associated with this template.</p>",
                         "smithy.api#httpQuery": "id",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
                     }
                 },
                 "templateName": {
@@ -587,7 +591,7 @@
                 "id": {
                     "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of your WhatsApp Business Account. WABA identifiers are formatted as\n         <code>waba-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_ListLinkedWhatsAppBusinessAccounts.html\">ListLinkedWhatsAppBusinessAccounts</a> to list all WABAs and their details.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of your WhatsApp Business Account. WABA identifiers are formatted as\n         <code>waba-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_ListLinkedWhatsAppBusinessAccounts.html\">ListLinkedWhatsAppBusinessAccounts</a> to list all WABAs \n         and their details.</p>",
                         "smithy.api#httpQuery": "id",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "WabaId"
@@ -736,7 +740,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use your WhatsApp phone number id to get the WABA account id and phone number\n         details.</p>",
+                "smithy.api#documentation": "<p>Retrieve the WABA account id and phone number details of a WhatsApp business account phone number.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/whatsapp/waba/phone/details",
@@ -751,7 +755,7 @@
                 "id": {
                     "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the phone number. Phone number\n         identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>.\n         Use <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the phone number. Phone number\n         identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>.\n         Use <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html\">GetLinkedWhatsAppBusinessAccount</a> \n         to find a phone number's id.</p>",
                         "smithy.api#httpQuery": "id",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
@@ -829,7 +833,7 @@
                 "originationPhoneNumberId": {
                     "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the originating phone number for the WhatsApp message media.\n         The phone number identifiers are formatted as\n            <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the originating phone number for the WhatsApp message media.\n         The phone number identifiers are formatted as\n            <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
                     }
@@ -869,7 +873,7 @@
                 "fileSize": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file size of the media, in KB.</p>"
+                        "smithy.api#documentation": "<p>The size of the media file, in KB.</p>"
                     }
                 }
             },
@@ -928,7 +932,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account associated with this template.</p>",
                         "smithy.api#httpQuery": "id",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
                     }
                 }
             },
@@ -1224,7 +1229,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 100
+                    "max": 115
                 },
                 "smithy.api#pattern": "(^waba-.*$)|(^arn:.*:waba/[0-9a-zA-Z]+$)"
             }
@@ -1282,7 +1287,31 @@
             },
             "operations": [
                 {
+                    "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplate"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateFromLibrary"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateMedia"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#DeleteWhatsAppMessageTemplate"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#GetWhatsAppMessageTemplate"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ListWhatsAppMessageTemplates"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ListWhatsAppTemplateLibrary"
+                },
+                {
                     "target": "com.amazonaws.socialmessaging#PutWhatsAppBusinessAccountEventDestinations"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#UpdateWhatsAppMessageTemplate"
                 }
             ],
             "traits": {
@@ -1610,7 +1639,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account to list templates for.</p>",
                         "smithy.api#httpQuery": "id",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
                     }
                 },
                 "nextToken": {
@@ -1710,7 +1740,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account to list library templates for.</p>",
                         "smithy.api#httpQuery": "id",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
                     }
                 },
                 "filters": {
@@ -1890,6 +1921,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the template in Meta's library.</p>"
                     }
+                },
+                "templateBodyExampleParams": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateBodyExampleParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Example parameter values for the template body, used to demonstrate how dynamic content appears in the template.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1900,6 +1937,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.socialmessaging#MetaLibraryTemplateDefinition"
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaParameterFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 15
+                }
             }
         },
         "com.amazonaws.socialmessaging#MetaTemplate": {
@@ -1920,6 +1966,12 @@
                 }
             }
         },
+        "com.amazonaws.socialmessaging#MetaTemplateBodyExampleParams": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.socialmessaging#MetaTemplateCategory": {
             "type": "string",
             "traits": {
@@ -1937,6 +1989,9 @@
                     "max": 3000
                 }
             }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateCtaLinkTrackingOptedOut": {
+            "type": "boolean"
         },
         "com.amazonaws.socialmessaging#MetaTemplateDefinition": {
             "type": "blob",
@@ -2135,7 +2190,7 @@
                 "originationPhoneNumberId": {
                     "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the phone number to associate with the WhatsApp media file. The phone number\n         identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>.\n         Use <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a>  to find a phone number's\n         id.</p>",
+                        "smithy.api#documentation": "<p>The ID of the phone number to associate with the WhatsApp media file. The phone number\n         identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>.\n         Use <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html\">GetLinkedWhatsAppBusinessAccount</a> \n         to find a phone number's id.</p>",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
                     }
@@ -2268,7 +2323,7 @@
         "com.amazonaws.socialmessaging#RoleArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws:iam::\\d{12}:role\\/[a-zA-Z0-9+=,.@\\-_]+$"
+                "smithy.api#pattern": "^arn:.*:iam::\\d{12}:role\\/[a-zA-Z0-9+=,.@\\-_]+$"
             }
         },
         "com.amazonaws.socialmessaging#S3File": {
@@ -2289,7 +2344,7 @@
                 "key": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object key of the media file.</p>",
+                        "smithy.api#documentation": "<p>The S3 key prefix that defines the storage location of your media files. The prefix works like a folder path in S3, \n         and is combined with the WhatsApp mediaId to create the final file path.</p>\n         <p>For example, if a media file's WhatsApp mediaId is <code>123.ogg</code>, and the key is <code>audio/example.ogg</code>, \n         the final file path is <code>audio/example.ogg123.ogg</code>.</p>\n         <p>For the same mediaId, a key of <code>audio/</code> results in the file path <code>audio/123.ogg</code>.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 1024
@@ -2371,7 +2426,7 @@
                 "originationPhoneNumberId": {
                     "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the phone number used to send the WhatsApp message. If you are sending a media\n         file only the <code>originationPhoneNumberId</code> used to upload the file can be used.\n         Phone number identifiers are formatted as\n            <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+                        "smithy.api#documentation": "<p>The ID of the phone number used to send the WhatsApp message. If you are sending a media\n         file only the <code>originationPhoneNumberId</code> used to upload the file can be used.\n         Phone number identifiers are formatted as\n            <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
                     }
@@ -2414,37 +2469,13 @@
             "version": "2024-01-01",
             "operations": [
                 {
-                    "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplate"
-                },
-                {
-                    "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateFromLibrary"
-                },
-                {
-                    "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateMedia"
-                },
-                {
-                    "target": "com.amazonaws.socialmessaging#DeleteWhatsAppMessageTemplate"
-                },
-                {
-                    "target": "com.amazonaws.socialmessaging#GetWhatsAppMessageTemplate"
-                },
-                {
                     "target": "com.amazonaws.socialmessaging#ListTagsForResource"
-                },
-                {
-                    "target": "com.amazonaws.socialmessaging#ListWhatsAppMessageTemplates"
-                },
-                {
-                    "target": "com.amazonaws.socialmessaging#ListWhatsAppTemplateLibrary"
                 },
                 {
                     "target": "com.amazonaws.socialmessaging#TagResource"
                 },
                 {
                     "target": "com.amazonaws.socialmessaging#UntagResource"
-                },
-                {
-                    "target": "com.amazonaws.socialmessaging#UpdateWhatsAppMessageTemplate"
                 }
             ],
             "resources": [
@@ -3506,7 +3537,8 @@
                     "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account associated with this template.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
                     }
                 },
                 "metaTemplateId": {
@@ -3514,6 +3546,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The numeric ID of the template assigned by Meta.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "parameterFormat": {
+                    "target": "com.amazonaws.socialmessaging#MetaParameterFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format specification for parameters in the template, this can be either 'named' or 'positional'.</p>"
                     }
                 },
                 "templateCategory": {
@@ -3526,6 +3564,12 @@
                     "target": "com.amazonaws.socialmessaging#MetaTemplateComponents",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated components of the template as a JSON blob (maximum 3000 characters).</p>"
+                    }
+                },
+                "ctaUrlLinkTrackingOptedOut": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateCtaLinkTrackingOptedOut",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, disables click tracking for call-to-action URL buttons in the template.</p>"
                     }
                 }
             },
@@ -3559,7 +3603,7 @@
                 "id": {
                     "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the originating phone number associated with the media. Phone\n         number identifiers are formatted as\n         <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the originating phone number associated with the media. Phone\n         number identifiers are formatted as\n         <code>phone-number-id-01234567890123456789012345678901</code>. Use the \n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html\">GetLinkedWhatsAppBusinessAccount</a> \n         API action to find a phone number's id.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3782,7 +3826,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 100
+                    "max": 115
                 },
                 "smithy.api#pattern": "(^phone-number-id-.*$)|(^arn:.*:phone-number-id/[0-9a-zA-Z]+$)"
             }
