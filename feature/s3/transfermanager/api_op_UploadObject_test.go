@@ -107,6 +107,151 @@ func TestUploadOrderMulti(t *testing.T) {
 	}
 }
 
+func TestUploadOrderMultiTriggerredBySinglePartSize(t *testing.T) {
+	c, invocations, args := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, Options{})
+
+	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket:               aws.String("Bucket"),
+		Key:                  aws.String("Key - value"),
+		Body:                 bytes.NewReader(make([]byte, 8*1024*1024)),
+		ServerSideEncryption: "aws:kms",
+		SSEKMSKeyID:          aws.String("KmsId"),
+		ContentType:          aws.String("content/type"),
+	})
+
+	if err != nil {
+		t.Errorf("Expected no error but received %v", err)
+	}
+
+	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
+		t.Errorf(diff)
+	}
+
+	if "UPLOAD-ID" != aws.ToString(resp.UploadID) {
+		t.Errorf("expect %q, got %q", "UPLOAD-ID", aws.ToString(resp.UploadID))
+	}
+
+	if "VERSION-ID" != aws.ToString(resp.VersionID) {
+		t.Errorf("expect %q, got %q", "VERSION-ID", aws.ToString(resp.VersionID))
+	}
+
+	// Validate input values
+	v := aws.ToString((*args)[1].(*s3.UploadPartInput).UploadId)
+	if "UPLOAD-ID" != v {
+		t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
+	}
+	v = aws.ToString((*args)[2].(*s3.CompleteMultipartUploadInput).UploadId)
+	if "UPLOAD-ID" != v {
+		t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
+	}
+
+	parts := (*args)[2].(*s3.CompleteMultipartUploadInput).MultipartUpload.Parts
+
+	num := parts[0].PartNumber
+	etag := aws.ToString(parts[0].ETag)
+
+	if aws.ToInt32(num) != 1 {
+		t.Errorf("expect part number to be 1, got %d", num)
+	}
+
+	if matched, err := regexp.MatchString(`^ETAG\d+$`, etag); !matched || err != nil {
+		t.Errorf("Failed regexp expression `^ETAG\\d+$`")
+	}
+
+	// Custom headers
+	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
+
+	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
+		t.Errorf("expect %q, got %q", e, a)
+	}
+
+	if e, a := "KmsId", aws.ToString(cmu.SSEKMSKeyId); e != a {
+		t.Errorf("expect %q, got %q", e, a)
+	}
+
+	if e, a := "content/type", aws.ToString(cmu.ContentType); e != a {
+		t.Errorf("expect %q, got %q", e, a)
+	}
+}
+
+func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
+	c, invocations, args := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, Options{})
+
+	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket:               aws.String("Bucket"),
+		Key:                  aws.String("Key - value"),
+		Body:                 bytes.NewReader(make([]byte, 8*1024*1024+1)),
+		ServerSideEncryption: "aws:kms",
+		SSEKMSKeyID:          aws.String("KmsId"),
+		ContentType:          aws.String("content/type"),
+	})
+
+	if err != nil {
+		t.Errorf("Expected no error but received %v", err)
+	}
+
+	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart",
+		"CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
+		t.Errorf(diff)
+	}
+
+	if "UPLOAD-ID" != aws.ToString(resp.UploadID) {
+		t.Errorf("expect %q, got %q", "UPLOAD-ID", aws.ToString(resp.UploadID))
+	}
+
+	if "VERSION-ID" != aws.ToString(resp.VersionID) {
+		t.Errorf("expect %q, got %q", "VERSION-ID", aws.ToString(resp.VersionID))
+	}
+
+	// Validate input values
+
+	// UploadPart
+	for i := 1; i < 3; i++ {
+		v := aws.ToString((*args)[i].(*s3.UploadPartInput).UploadId)
+		if "UPLOAD-ID" != v {
+			t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
+		}
+	}
+
+	// CompleteMultipartUpload
+	v := aws.ToString((*args)[3].(*s3.CompleteMultipartUploadInput).UploadId)
+	if "UPLOAD-ID" != v {
+		t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
+	}
+
+	parts := (*args)[3].(*s3.CompleteMultipartUploadInput).MultipartUpload.Parts
+
+	for i := 0; i < 2; i++ {
+		num := parts[i].PartNumber
+		etag := aws.ToString(parts[i].ETag)
+
+		if int32(i+1) != aws.ToInt32(num) {
+			t.Errorf("expect %d, got %d", i+1, num)
+		}
+
+		if matched, err := regexp.MatchString(`^ETAG\d+$`, etag); !matched || err != nil {
+			t.Errorf("Failed regexp expression `^ETAG\\d+$`")
+		}
+	}
+
+	// Custom headers
+	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
+
+	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
+		t.Errorf("expect %q, got %q", e, a)
+	}
+
+	if e, a := "KmsId", aws.ToString(cmu.SSEKMSKeyId); e != a {
+		t.Errorf("expect %q, got %q", e, a)
+	}
+
+	if e, a := "content/type", aws.ToString(cmu.ContentType); e != a {
+		t.Errorf("expect %q, got %q", e, a)
+	}
+}
+
 func TestUploadOrderMultiDifferentPartSize(t *testing.T) {
 	c, ops, args := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{
@@ -335,13 +480,13 @@ func TestUploadOrderMultiFailureOnCreate(t *testing.T) {
 }
 
 type failreader struct {
-	times     int
-	failCount int
+	failBytes int64
+	readBytes int64
 }
 
 func (f *failreader) Read(b []byte) (int, error) {
-	f.failCount++
-	if f.failCount >= f.times {
+	f.readBytes += int64(len(b))
+	if f.readBytes > f.failBytes {
 		return 0, fmt.Errorf("random failure")
 	}
 	return len(b), nil
@@ -353,7 +498,7 @@ func TestUploadOrderReadFail1(t *testing.T) {
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   &failreader{times: 1},
+		Body:   &failreader{failBytes: 1},
 	})
 	if err == nil {
 		t.Fatalf("expect error to not be nil")
@@ -376,7 +521,7 @@ func TestUploadOrderReadFail2(t *testing.T) {
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   &failreader{times: 2},
+		Body:   &failreader{failBytes: 8 * 1024 * 1024},
 	})
 	if err == nil {
 		t.Fatalf("expect error to not be nil")
@@ -441,6 +586,62 @@ func TestUploadOrderMultiBufferedReader(t *testing.T) {
 	})
 
 	if diff := cmpDiff([]int64{1024 * 1024 * 5, 1024 * 1024 * 8, 1024 * 1024 * 8}, parts); len(diff) > 0 {
+		t.Error(diff)
+	}
+}
+
+func TestUploadOrderMultiBufferedReaderWithSinglePartSize(t *testing.T) {
+	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, Options{})
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   &sizedReader{size: 1024 * 1024 * 8},
+	})
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "CompleteMultipartUpload"},
+		*invocations); len(diff) > 0 {
+		t.Error(diff)
+	}
+
+	// Part lengths
+	parts := []int64{getReaderLength((*params)[1].(*s3.UploadPartInput).Body)}
+
+	if diff := cmpDiff([]int64{1024 * 1024 * 8}, parts); len(diff) > 0 {
+		t.Error(diff)
+	}
+}
+
+func TestUploadOrderMultiBufferedReaderJustExceedSinglePart(t *testing.T) {
+	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, Options{})
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   &sizedReader{size: 1024*1024*8 + 1},
+	})
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart",
+		"CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
+		t.Error(diff)
+	}
+
+	// Part lengths
+	var parts []int64
+	for i := 1; i < 3; i++ {
+		parts = append(parts, getReaderLength((*params)[i].(*s3.UploadPartInput).Body))
+	}
+	sort.Slice(parts, func(i, j int) bool {
+		return parts[i] < parts[j]
+	})
+
+	if diff := cmpDiff([]int64{1, 1024 * 1024 * 8}, parts); len(diff) > 0 {
 		t.Error(diff)
 	}
 }
