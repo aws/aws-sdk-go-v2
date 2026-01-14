@@ -107,7 +107,7 @@ Please be aware of the following notes prior to opening a pull request:
 ### Generated source / API models
 
 There are several components of the SDK that we cannot accept direct changes
-to. **Please be aware of the following before submitting a pull request:**
+to:
 
 1. Many source files in the SDK are code-generated. You can tell when a file is
    code-generated because it will contain a header comment at the top
