@@ -146,7 +146,7 @@ func TestMain(m *testing.M) {
 		return
 	}
 
-	largeObjectBuf = make([]byte, 100*1024*1024)
+	largeObjectBuf = make([]byte, 20*1024*1024)
 	_, err = rand.Read(largeObjectBuf)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "failed to generate large object for multipart upload: %v\n", err)

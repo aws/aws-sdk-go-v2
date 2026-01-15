@@ -663,28 +663,16 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 			return g.singleDownload(ctx, clientOptions...)
 		}
 		total := aws.ToInt64(out.ContentLength)
+		contentLength := total
 
 		output.mapFromHeadObjectOutput(out, g.in.ChecksumMode, !g.options.DisableChecksumValidation, r)
-		output.ContentLength = aws.Int64(total)
+		output.ContentLength = aws.Int64(contentLength)
 		output.ContentRange = aws.String(fmt.Sprintf("bytes=0-%d/%d", total-1, aws.ToInt64(out.ContentLength)))
 
-		partSize := g.options.PartSizeBytes
-		if partSize == minPartSizeBytes { // only optimize part size if user didn't customize it
-			partSize = max(g.options.GetBufferSize/int64(g.options.Concurrency), minPartSizeBytes) // client optimum part size
-			if parts := aws.ToInt32(out.PartsCount); parts > 0 {
-				objectPartSize := aws.ToInt64(out.ContentLength) / int64(parts)
-				if objectPartSize < minPartSizeBytes {
-					partSize = minPartSizeBytes
-				} else {
-					partSize = min(objectPartSize, partSize)
-				}
-			}
-		}
-
-		partsCount := int32((total-1)/partSize + 1)
-		sectionParts := int32(max(1, g.options.GetBufferSize/partSize))
+		partsCount := int32((contentLength-1)/g.options.PartSizeBytes + 1)
+		sectionParts := int32(max(1, g.options.GetBufferSize/g.options.PartSizeBytes))
 		capacity := min(sectionParts, partsCount)
-		r.partSize = partSize
+		r.partSize = g.options.PartSizeBytes
 		atomic.StoreInt32(&r.capacity, capacity)
 		r.partsCount = partsCount
 		r.sectionParts = sectionParts

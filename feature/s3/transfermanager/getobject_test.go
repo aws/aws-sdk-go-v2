@@ -41,25 +41,13 @@ func TestGetObject(t *testing.T) {
 		expectReadErr     string
 		dataValidationFn  func(*testing.T, []byte)
 	}{
-		"range download with part size optimized by buffer size": {
+		"range download in order": {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
 				Concurrency:   1,
 			},
-			expectInvocations: 1,
-			expectRanges:      []string{"bytes=0-20971519"},
-			expectETags:       []string{etag},
-		},
-		"range download with part size optimized by object part size": {
-			data:        buf20MB,
-			getObjectFn: s3testing.RangeGetObjectFn,
-			options: Options{
-				GetObjectType: types.GetObjectRanges,
-				Concurrency:   1,
-			},
-			partsCount:        3,
 			expectInvocations: 3,
 			expectRanges:      []string{"bytes=0-8388607", "bytes=8388608-16777215", "bytes=16777216-20971519"},
 			expectETags:       []string{etag, etag, etag},
@@ -86,7 +74,7 @@ func TestGetObject(t *testing.T) {
 			expectVersions:    []string{vID, vID},
 		},
 		"range download with s3 error": {
-			data:        buf80MB,
+			data:        buf20MB,
 			getObjectFn: s3testing.ErrRangeGetObjectFn,
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
@@ -96,7 +84,7 @@ func TestGetObject(t *testing.T) {
 			expectReadErr:     "s3 service error",
 		},
 		"range download with content mismatch error": {
-			data:        buf80MB,
+			data:        buf20MB,
 			getObjectFn: s3testing.MismatchRangeGetObjectFn,
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
@@ -106,7 +94,7 @@ func TestGetObject(t *testing.T) {
 			expectReadErr:     "PreconditionFailed",
 		},
 		"range download with resp range mismatch error": {
-			data:        buf80MB,
+			data:        buf20MB,
 			getObjectFn: s3testing.WrongRangeGetObjectFn,
 			options: Options{
 				GetObjectType: types.GetObjectRanges,
