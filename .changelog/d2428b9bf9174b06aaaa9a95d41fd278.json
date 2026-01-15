@@ -1,8 +1,0 @@
-{
-    "id": "d2428b9b-f917-4b06-aaaa-9a95d41fd278",
-    "type": "feature",
-    "description": "API Changes for GTCForLocation feature. Includes a new API, GetTemporaryDataLocationCredentials and updates to the APIs RegisterResource and UpdateResource",
-    "modules": [
-        "service/lakeformation"
-    ]
-}

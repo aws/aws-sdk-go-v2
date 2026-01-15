@@ -1,8 +1,0 @@
-{
-    "id": "7a56570a-3537-44cf-aafa-1d871bcffb20",
-    "type": "feature",
-    "description": "Fix inference configuration shapes for the CreateAIPrompt and UpdateAIPrompt APIs, Modify Text Length Limit for SendMessage API",
-    "modules": [
-        "service/qconnect"
-    ]
-}

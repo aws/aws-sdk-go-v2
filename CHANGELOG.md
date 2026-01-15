@@ -1,3 +1,23 @@
+# Release (2026-01-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.41.0](service/cleanrooms/CHANGELOG.md#v1410-2026-01-15)
+  * **Feature**: This release adds support for parameters in PySpark analysis templates.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.23.0](service/deadline/CHANGELOG.md#v1230-2026-01-15)
+  * **Feature**: AWS Deadline Cloud now supports tagging Budget resources with ABAC for permissions management and selecting up to 16 filter values in the monitor and Search API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.279.2](service/ec2/CHANGELOG.md#v12792-2026-01-15)
+  * **Documentation**: This release includes documentation updates to support up to four Elastic Volume modifications per Amazon EBS volume within a rolling 24-hour period.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.71.0](service/ecs/CHANGELOG.md#v1710-2026-01-15)
+  * **Feature**: Adds support for configuring FIPS in AWS GovCloud (US) Regions via a new ECS Capacity Provider field fipsEnabled. When enabled, instances launched by the capacity provider will use a FIPS-140 enabled AMI. Instances will use FIPS-140 compliant cryptographic modules and AWS FIPS endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.6.0](service/evs/CHANGELOG.md#v160-2026-01-15)
+  * **Feature**: A new GetVersions API has been added to retrieve VCF, ESX versions, and EC2 instances provided by Amazon EVS. The CreateEnvironment API now allows you to select a VCF version and the CreateEnvironmentHost API introduces a optional esxVersion parameter.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.47.0](service/lakeformation/CHANGELOG.md#v1470-2026-01-15)
+  * **Feature**: API Changes for GTCForLocation feature. Includes a new API, GetTemporaryDataLocationCredentials and updates to the APIs RegisterResource and UpdateResource
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.29.0](service/opensearchserverless/CHANGELOG.md#v1290-2026-01-15)
+  * **Feature**: Collection groups in Amazon OpenSearch Serverless enables to organize multiple collections and enable compute resource sharing across collections with different KMS keys. This shared compute model reduces costs by eliminating the need for separate OpenSearch Compute Units (OCUs) for each KMS key.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.26.0](service/qconnect/CHANGELOG.md#v1260-2026-01-15)
+  * **Feature**: Fix inference configuration shapes for the CreateAIPrompt and UpdateAIPrompt APIs, Modify Text Length Limit for SendMessage API
+
 # Release (2026-01-14)
 
 ## Module Highlights

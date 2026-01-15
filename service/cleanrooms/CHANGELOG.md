@@ -1,3 +1,7 @@
+# v1.41.0 (2026-01-15)
+
+* **Feature**: This release adds support for parameters in PySpark analysis templates.
+
 # v1.40.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

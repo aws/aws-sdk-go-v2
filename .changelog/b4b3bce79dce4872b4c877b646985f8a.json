@@ -1,8 +1,0 @@
-{
-    "id": "b4b3bce7-9dce-4872-b4c8-77b646985f8a",
-    "type": "documentation",
-    "description": "This release includes documentation updates to support up to four Elastic Volume modifications per Amazon EBS volume within a rolling 24-hour period.",
-    "modules": [
-        "service/ec2"
-    ]
-}

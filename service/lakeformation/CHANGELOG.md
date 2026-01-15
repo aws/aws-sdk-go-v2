@@ -1,3 +1,7 @@
+# v1.47.0 (2026-01-15)
+
+* **Feature**: API Changes for GTCForLocation feature. Includes a new API, GetTemporaryDataLocationCredentials and updates to the APIs RegisterResource and UpdateResource
+
 # v1.46.6 (2026-01-12)
 
 * No change notes available for this release.

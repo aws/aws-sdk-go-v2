@@ -1,3 +1,7 @@
+# v1.26.0 (2026-01-15)
+
+* **Feature**: Fix inference configuration shapes for the CreateAIPrompt and UpdateAIPrompt APIs, Modify Text Length Limit for SendMessage API
+
 # v1.25.3 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions
