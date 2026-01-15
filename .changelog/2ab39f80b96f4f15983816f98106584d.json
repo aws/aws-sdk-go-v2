@@ -1,0 +1,8 @@
+{
+    "id": "2ab39f80-b96f-4f15-9838-16f98106584d",
+    "type": "feature",
+    "description": "Adds support for configuring FIPS in AWS GovCloud (US) Regions via a new ECS Capacity Provider field fipsEnabled. When enabled, instances launched by the capacity provider will use a FIPS-140 enabled AMI. Instances will use FIPS-140 compliant cryptographic modules and AWS FIPS endpoints.",
+    "modules": [
+        "service/ecs"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "2abfb798-e0bf-4090-8cb8-43875aa38afb",
+    "type": "feature",
+    "description": "AWS Deadline Cloud now supports tagging Budget resources with ABAC for permissions management and selecting up to 16 filter values in the monitor and Search API.",
+    "modules": [
+        "service/deadline"
+    ]
+}

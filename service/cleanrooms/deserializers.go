@@ -23404,6 +23404,42 @@ func awsRestjson1_deserializeDocumentJobComputePaymentConfig(v **types.JobComput
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentJobParameterMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected JobParameterValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentJoinOperatorsList(v *[]types.JoinOperator, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25961,6 +25997,11 @@ func awsRestjson1_deserializeDocumentProtectedJobParameters(v **types.ProtectedJ
 					return fmt.Errorf("expected AnalysisTemplateArn to be of type string, got %T instead", value)
 				}
 				sv.AnalysisTemplateArn = ptr.String(jtv)
+			}
+
+		case "parameters":
+			if err := awsRestjson1_deserializeDocumentJobParameterMap(&sv.Parameters, value); err != nil {
+				return err
 			}
 
 		default:

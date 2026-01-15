@@ -57,24 +57,6 @@ var _ *types.ManualSearchAIAgentConfiguration
 var _ *types.EmailOverviewAIAgentConfiguration
 var _ *types.AnswerRecommendationAIAgentConfiguration
 
-func ExampleAIPromptInferenceConfiguration_outputUsage() {
-	var union types.AIPromptInferenceConfiguration
-	// type switches can be used to check the union value
-	switch v := union.(type) {
-	case *types.AIPromptInferenceConfigurationMemberTextAIPromptInferenceConfiguration:
-		_ = v.Value // Value is types.TextAIPromptInferenceConfiguration
-
-	case *types.UnknownUnionMember:
-		fmt.Println("unknown tag:", v.Tag)
-
-	default:
-		fmt.Println("union is nil or unknown type")
-
-	}
-}
-
-var _ *types.TextAIPromptInferenceConfiguration
-
 func ExampleAIPromptTemplateConfiguration_outputUsage() {
 	var union types.AIPromptTemplateConfiguration
 	// type switches can be used to check the union value

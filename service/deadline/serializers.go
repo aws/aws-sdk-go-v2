@@ -1288,6 +1288,13 @@ func awsRestjson1_serializeOpDocumentCreateBudgetInput(v *CreateBudgetInput, val
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UsageTrackingResource != nil {
 		ok := object.Key("usageTrackingResource")
 		if err := awsRestjson1_serializeDocumentUsageTrackingResource(v.UsageTrackingResource, ok); err != nil {
@@ -12286,6 +12293,12 @@ func awsRestjson1_serializeDocumentSearchFilterExpression(v types.SearchFilterEx
 			return err
 		}
 
+	case *types.SearchFilterExpressionMemberStringListFilter:
+		av := object.Key("stringListFilter")
+		if err := awsRestjson1_serializeDocumentStringListFilterExpression(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -12578,6 +12591,41 @@ func awsRestjson1_serializeDocumentStringFilterExpression(v *types.StringFilterE
 	if v.Value != nil {
 		ok := object.Key("value")
 		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringFilterList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringListFilterExpression(v *types.StringListFilterExpression, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("operator")
+		ok.String(string(v.Operator))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.Values, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

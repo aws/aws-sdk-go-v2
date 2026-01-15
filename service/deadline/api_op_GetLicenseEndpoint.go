@@ -67,7 +67,7 @@ type GetLicenseEndpointOutput struct {
 	// The subnet IDs.
 	SubnetIds []string
 
-	// The VCP(virtual private cloud) ID associated with the license endpoint.
+	// The VPC (virtual private cloud) ID associated with the license endpoint.
 	VpcId *string
 
 	// Metadata pertaining to the operation's result.

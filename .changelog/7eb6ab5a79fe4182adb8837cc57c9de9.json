@@ -1,0 +1,8 @@
+{
+    "id": "7eb6ab5a-79fe-4182-adb8-837cc57c9de9",
+    "type": "feature",
+    "description": "This release adds support for parameters in PySpark analysis templates.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

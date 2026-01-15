@@ -74,6 +74,18 @@ func TestCheckSnapshot_BatchGetCollection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetCollectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCollectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetCollectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetEffectiveLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetEffectiveLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -127,6 +139,18 @@ func TestCheckSnapshot_CreateCollection(t *testing.T) {
 	_, err := svc.CreateCollection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateCollection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCollectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCollectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCollectionGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -211,6 +235,18 @@ func TestCheckSnapshot_DeleteCollection(t *testing.T) {
 	_, err := svc.DeleteCollection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCollection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCollectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCollectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCollectionGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -362,6 +398,18 @@ func TestCheckSnapshot_ListAccessPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCollectionGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollectionGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCollectionGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCollections(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCollections(context.Background(), nil, func(o *Options) {
@@ -494,6 +542,18 @@ func TestCheckSnapshot_UpdateCollection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCollectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCollectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCollectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateIndex(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateIndex(context.Background(), nil, func(o *Options) {
@@ -565,6 +625,18 @@ func TestUpdateSnapshot_BatchGetCollection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchGetCollectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCollectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetCollectionGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetEffectiveLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetEffectiveLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -618,6 +690,18 @@ func TestUpdateSnapshot_CreateCollection(t *testing.T) {
 	_, err := svc.CreateCollection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCollection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCollectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCollectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCollectionGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -702,6 +786,18 @@ func TestUpdateSnapshot_DeleteCollection(t *testing.T) {
 	_, err := svc.DeleteCollection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCollection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCollectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCollectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCollectionGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -853,6 +949,18 @@ func TestUpdateSnapshot_ListAccessPolicies(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListCollectionGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollectionGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCollectionGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCollections(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCollections(context.Background(), nil, func(o *Options) {
@@ -978,6 +1086,18 @@ func TestUpdateSnapshot_UpdateCollection(t *testing.T) {
 	_, err := svc.UpdateCollection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCollection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCollectionGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCollectionGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCollectionGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

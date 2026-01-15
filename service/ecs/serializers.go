@@ -5758,6 +5758,11 @@ func awsAwsjson11_serializeDocumentInstanceLaunchTemplate(v *types.InstanceLaunc
 		ok.String(*v.Ec2InstanceProfileArn)
 	}
 
+	if v.FipsEnabled != nil {
+		ok := object.Key("fipsEnabled")
+		ok.Boolean(*v.FipsEnabled)
+	}
+
 	if v.InstanceRequirements != nil {
 		ok := object.Key("instanceRequirements")
 		if err := awsAwsjson11_serializeDocumentInstanceRequirementsRequest(v.InstanceRequirements, ok); err != nil {

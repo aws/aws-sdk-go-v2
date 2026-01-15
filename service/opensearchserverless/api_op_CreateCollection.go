@@ -39,8 +39,14 @@ type CreateCollectionInput struct {
 	// Unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
+	// The name of the collection group to associate with the collection.
+	CollectionGroupName *string
+
 	// Description of the collection.
 	Description *string
+
+	// Encryption settings for the collection.
+	EncryptionConfig *types.EncryptionConfig
 
 	// Indicates whether standby replicas should be used for a collection.
 	StandbyReplicas types.StandbyReplicas

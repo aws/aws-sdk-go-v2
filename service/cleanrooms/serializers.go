@@ -9098,6 +9098,17 @@ func awsRestjson1_serializeDocumentJobComputePaymentConfig(v *types.JobComputePa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentJobParameterMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentJoinOperatorsList(v []types.JoinOperator, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -9661,6 +9672,13 @@ func awsRestjson1_serializeDocumentProtectedJobParameters(v *types.ProtectedJobP
 	if v.AnalysisTemplateArn != nil {
 		ok := object.Key("analysisTemplateArn")
 		ok.String(*v.AnalysisTemplateArn)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentJobParameterMap(v.Parameters, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

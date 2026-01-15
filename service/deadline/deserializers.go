@@ -27420,6 +27420,11 @@ func awsRestjson1_deserializeDocumentStepParameter(v **types.StepParameter, valu
 
 	for key, value := range shape {
 		switch key {
+		case "chunks":
+			if err := awsRestjson1_deserializeDocumentStepParameterChunks(&sv.Chunks, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -27436,6 +27441,72 @@ func awsRestjson1_deserializeDocumentStepParameter(v **types.StepParameter, valu
 					return fmt.Errorf("expected StepParameterType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.StepParameterType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStepParameterChunks(v **types.StepParameterChunks, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StepParameterChunks
+	if *v == nil {
+		sv = &types.StepParameterChunks{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultTaskCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DefaultTaskCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DefaultTaskCount = ptr.Int32(int32(i64))
+			}
+
+		case "rangeConstraint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RangeConstraint to be of type string, got %T instead", value)
+				}
+				sv.RangeConstraint = types.RangeConstraint(jtv)
+			}
+
+		case "targetRuntimeSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TargetRuntimeSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetRuntimeSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -28652,6 +28723,15 @@ func awsRestjson1_deserializeDocumentTaskSearchSummary(v **types.TaskSearchSumma
 					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
 				}
 				sv.JobId = ptr.String(jtv)
+			}
+
+		case "latestSessionActionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SessionActionId to be of type string, got %T instead", value)
+				}
+				sv.LatestSessionActionId = ptr.String(jtv)
 			}
 
 		case "parameters":

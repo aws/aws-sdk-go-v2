@@ -183,8 +183,8 @@ type AggregationConstraint struct {
 // data value in an analysis template.
 type AnalysisParameter struct {
 
-	// The name of the parameter. The name must use only alphanumeric, underscore (_),
-	// or hyphen (-) characters but cannot start or end with a hyphen.
+	// The name of the parameter. The name must use only alphanumeric or underscore
+	// (_) characters.
 	//
 	// This member is required.
 	Name *string
@@ -4529,6 +4529,10 @@ type ProtectedJobParameters struct {
 	//
 	// This member is required.
 	AnalysisTemplateArn *string
+
+	// Runtime configuration values passed to the PySpark analysis script. Parameter
+	// names and types must match those defined in the analysis template.
+	Parameters map[string]string
 
 	noSmithyDocumentSerde
 }

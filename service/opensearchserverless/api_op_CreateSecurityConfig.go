@@ -56,8 +56,8 @@ type CreateSecurityConfigInput struct {
 	// field is required if you specify iamidentitycenter for the type parameter.
 	IamIdentityCenterOptions *types.CreateIamIdentityCenterConfigOptions
 
-	// Describes SAML options in in the form of a key-value map. This field is
-	// required if you specify SAML for the type parameter.
+	// Describes SAML options in the form of a key-value map. This field is required
+	// if you specify SAML for the type parameter.
 	SamlOptions *types.SamlConfigOptions
 
 	noSmithyDocumentSerde

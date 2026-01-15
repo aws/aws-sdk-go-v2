@@ -16427,7 +16427,7 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAIPromptInferenceConfiguration(v *types.AIPromptInferenceConfiguration, value interface{}) error {
+func awsRestjson1_deserializeDocumentAIPromptInferenceConfiguration(v **types.AIPromptInferenceConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16440,30 +16440,115 @@ func awsRestjson1_deserializeDocumentAIPromptInferenceConfiguration(v *types.AIP
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var uv types.AIPromptInferenceConfiguration
-loop:
+	var sv *types.AIPromptInferenceConfiguration
+	if *v == nil {
+		sv = &types.AIPromptInferenceConfiguration{}
+	} else {
+		sv = *v
+	}
+
 	for key, value := range shape {
-		if value == nil {
-			continue
-		}
 		switch key {
-		case "textAIPromptInferenceConfiguration":
-			var mv types.TextAIPromptInferenceConfiguration
-			destAddr := &mv
-			if err := awsRestjson1_deserializeDocumentTextAIPromptInferenceConfiguration(&destAddr, value); err != nil {
-				return err
+		case "maxTokensToSample":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxTokensToSample to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxTokensToSample = ptr.Int32(int32(i64))
 			}
-			mv = *destAddr
-			uv = &types.AIPromptInferenceConfigurationMemberTextAIPromptInferenceConfiguration{Value: mv}
-			break loop
+
+		case "temperature":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Temperature = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Temperature = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Probability to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "topK":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TopK to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TopK = ptr.Int32(int32(i64))
+			}
+
+		case "topP":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.TopP = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.TopP = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Probability to be a JSON Number, got %T instead", value)
+
+				}
+			}
 
 		default:
-			uv = &types.UnknownUnionMember{Tag: key}
-			break loop
+			_, _ = key, value
 
 		}
 	}
-	*v = uv
+	*v = sv
 	return nil
 }
 
@@ -29383,131 +29468,6 @@ func awsRestjson1_deserializeDocumentTags(v *map[string]string, value interface{
 
 	}
 	*v = mv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentTextAIPromptInferenceConfiguration(v **types.TextAIPromptInferenceConfiguration, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.TextAIPromptInferenceConfiguration
-	if *v == nil {
-		sv = &types.TextAIPromptInferenceConfiguration{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "maxTokensToSample":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected MaxTokensToSample to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.MaxTokensToSample = int32(i64)
-			}
-
-		case "temperature":
-			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.Temperature = float32(f64)
-
-				case string:
-					var f64 float64
-					switch {
-					case strings.EqualFold(jtv, "NaN"):
-						f64 = math.NaN()
-
-					case strings.EqualFold(jtv, "Infinity"):
-						f64 = math.Inf(1)
-
-					case strings.EqualFold(jtv, "-Infinity"):
-						f64 = math.Inf(-1)
-
-					default:
-						return fmt.Errorf("unknown JSON number value: %s", jtv)
-
-					}
-					sv.Temperature = float32(f64)
-
-				default:
-					return fmt.Errorf("expected Probability to be a JSON Number, got %T instead", value)
-
-				}
-			}
-
-		case "topK":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected TopK to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.TopK = int32(i64)
-			}
-
-		case "topP":
-			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.TopP = float32(f64)
-
-				case string:
-					var f64 float64
-					switch {
-					case strings.EqualFold(jtv, "NaN"):
-						f64 = math.NaN()
-
-					case strings.EqualFold(jtv, "Infinity"):
-						f64 = math.Inf(1)
-
-					case strings.EqualFold(jtv, "-Infinity"):
-						f64 = math.Inf(-1)
-
-					default:
-						return fmt.Errorf("unknown JSON number value: %s", jtv)
-
-					}
-					sv.TopP = float32(f64)
-
-				default:
-					return fmt.Errorf("expected Probability to be a JSON Number, got %T instead", value)
-
-				}
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
 	return nil
 }
 

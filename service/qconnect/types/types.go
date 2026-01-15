@@ -578,7 +578,7 @@ type AIPromptData struct {
 	Description *string
 
 	// The configuration for inference parameters when using the AI Prompt.
-	InferenceConfiguration AIPromptInferenceConfiguration
+	InferenceConfiguration *AIPromptInferenceConfiguration
 
 	// The time the AI Prompt was last modified.
 	ModifiedTime *time.Time
@@ -598,22 +598,21 @@ type AIPromptData struct {
 }
 
 // The configuration for inference parameters when using AI Prompts.
-//
-// The following types satisfy this interface:
-//
-//	AIPromptInferenceConfigurationMemberTextAIPromptInferenceConfiguration
-type AIPromptInferenceConfiguration interface {
-	isAIPromptInferenceConfiguration()
-}
+type AIPromptInferenceConfiguration struct {
 
-// The inference configuration for text-based AI Prompts.
-type AIPromptInferenceConfigurationMemberTextAIPromptInferenceConfiguration struct {
-	Value TextAIPromptInferenceConfiguration
+	// The maximum number of tokens to generate in the response.
+	MaxTokensToSample *int32
+
+	// The temperature setting for controlling randomness in the generated response.
+	Temperature *float32
+
+	// The top-K sampling parameter for token selection.
+	TopK *int32
+
+	// The top-P sampling parameter for nucleus sampling.
+	TopP *float32
 
 	noSmithyDocumentSerde
-}
-
-func (*AIPromptInferenceConfigurationMemberTextAIPromptInferenceConfiguration) isAIPromptInferenceConfiguration() {
 }
 
 // The summary of the AI Prompt.
@@ -5881,24 +5880,6 @@ type TagFilterMemberTagCondition struct {
 
 func (*TagFilterMemberTagCondition) isTagFilter() {}
 
-// Inference configuration for text-based AI Prompts.
-type TextAIPromptInferenceConfiguration struct {
-
-	// The maximum number of tokens to generate in the response.
-	MaxTokensToSample int32
-
-	// The temperature setting for controlling randomness in the generated response.
-	Temperature float32
-
-	// The top-K sampling parameter for token selection.
-	TopK int32
-
-	// The top-P sampling parameter for nucleus sampling.
-	TopP float32
-
-	noSmithyDocumentSerde
-}
-
 // Details about the source content text data.
 type TextData struct {
 
@@ -6251,7 +6232,6 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAIAgentConfiguration()                      {}
-func (*UnknownUnionMember) isAIPromptInferenceConfiguration()            {}
 func (*UnknownUnionMember) isAIPromptTemplateConfiguration()             {}
 func (*UnknownUnionMember) isAssistantAssociationInputData()             {}
 func (*UnknownUnionMember) isAssistantAssociationOutputData()            {}

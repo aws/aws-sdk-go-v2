@@ -145,6 +145,7 @@ type VcfVersion string
 // Enum values for VcfVersion
 const (
 	VcfVersionVcf521 VcfVersion = "VCF-5.2.1"
+	VcfVersionVcf522 VcfVersion = "VCF-5.2.2"
 )
 
 // Values returns all known values for VcfVersion. Note that this can be expanded
@@ -154,6 +155,7 @@ const (
 func (VcfVersion) Values() []VcfVersion {
 	return []VcfVersion{
 		"VCF-5.2.1",
+		"VCF-5.2.2",
 	}
 }
 

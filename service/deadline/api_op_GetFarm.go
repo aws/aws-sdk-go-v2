@@ -63,17 +63,15 @@ type GetFarmOutput struct {
 	// This member is required.
 	FarmId *string
 
-	// The ARN of the KMS key used on the farm.
-	//
-	// This member is required.
-	KmsKeyArn *string
-
 	// The description of the farm.
 	//
 	// This field can store any content. Escape or encode this content before
 	// displaying it on a webpage or any other system that might interpret the content
 	// of this field.
 	Description *string
+
+	// The ARN of the KMS key used on the farm.
+	KmsKeyArn *string
 
 	// The date and time the resource was updated.
 	UpdatedAt *time.Time

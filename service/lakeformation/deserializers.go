@@ -4654,6 +4654,190 @@ func awsRestjson1_deserializeOpDocumentGetTableObjectsOutput(v **GetTableObjects
 	return nil
 }
 
+type awsRestjson1_deserializeOpGetTemporaryDataLocationCredentials struct {
+}
+
+func (*awsRestjson1_deserializeOpGetTemporaryDataLocationCredentials) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetTemporaryDataLocationCredentials) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetTemporaryDataLocationCredentials(response, &metadata)
+	}
+	output := &GetTemporaryDataLocationCredentialsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetTemporaryDataLocationCredentialsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetTemporaryDataLocationCredentials(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("EntityNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorEntityNotFoundException(response, errorBody)
+
+	case strings.EqualFold("GlueEncryptionException", errorCode):
+		return awsRestjson1_deserializeErrorGlueEncryptionException(response, errorBody)
+
+	case strings.EqualFold("InternalServiceException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidInputException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidInputException(response, errorBody)
+
+	case strings.EqualFold("OperationTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorOperationTimeoutException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetTemporaryDataLocationCredentialsOutput(v **GetTemporaryDataLocationCredentialsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetTemporaryDataLocationCredentialsOutput
+	if *v == nil {
+		sv = &GetTemporaryDataLocationCredentialsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessibleDataLocations":
+			if err := awsRestjson1_deserializeDocumentPathStringList(&sv.AccessibleDataLocations, value); err != nil {
+				return err
+			}
+
+		case "Credentials":
+			if err := awsRestjson1_deserializeDocumentTemporaryCredentials(&sv.Credentials, value); err != nil {
+				return err
+			}
+
+		case "CredentialsScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CredentialsScope to be of type string, got %T instead", value)
+				}
+				sv.CredentialsScope = types.CredentialsScope(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpGetTemporaryGluePartitionCredentials struct {
 }
 
@@ -8847,6 +9031,42 @@ func awsRestjson1_deserializeErrorConcurrentModificationException(response *smit
 	return output
 }
 
+func awsRestjson1_deserializeErrorConflictException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ConflictException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentConflictException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorEntityNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.EntityNotFoundException{}
 	var buff [1024]byte
@@ -9934,6 +10154,46 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 					return fmt.Errorf("expected ExpressionString to be of type string, got %T instead", value)
 				}
 				sv.Expression = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConflictException
+	if *v == nil {
+		sv = &types.ConflictException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -12229,6 +12489,15 @@ func awsRestjson1_deserializeDocumentResourceInfo(v **types.ResourceInfo, value 
 
 	for key, value := range shape {
 		switch key {
+		case "ExpectedResourceOwnerAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountIdString to be of type string, got %T instead", value)
+				}
+				sv.ExpectedResourceOwnerAccount = ptr.String(jtv)
+			}
+
 		case "HybridAccessEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12270,6 +12539,15 @@ func awsRestjson1_deserializeDocumentResourceInfo(v **types.ResourceInfo, value 
 					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "VerificationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VerificationStatus to be of type string, got %T instead", value)
+				}
+				sv.VerificationStatus = types.VerificationStatus(jtv)
 			}
 
 		case "WithFederation":
@@ -13199,6 +13477,80 @@ func awsRestjson1_deserializeDocumentTagValueList(v *[]string, value interface{}
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTemporaryCredentials(v **types.TemporaryCredentials, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TemporaryCredentials
+	if *v == nil {
+		sv = &types.TemporaryCredentials{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessKeyIdString to be of type string, got %T instead", value)
+				}
+				sv.AccessKeyId = ptr.String(jtv)
+			}
+
+		case "Expiration":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Expiration = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected ExpirationTimestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "SecretAccessKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretAccessKeyString to be of type string, got %T instead", value)
+				}
+				sv.SecretAccessKey = ptr.String(jtv)
+			}
+
+		case "SessionToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SessionTokenString to be of type string, got %T instead", value)
+				}
+				sv.SessionToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

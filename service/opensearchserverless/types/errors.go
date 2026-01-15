@@ -8,8 +8,7 @@ import (
 )
 
 // When creating a resource, thrown when a resource with the same name already
-// exists or is being created. When deleting a resource, thrown when the resource
-// is not in the ACTIVE or FAILED state.
+// exists or is being created.
 type ConflictException struct {
 	Message *string
 

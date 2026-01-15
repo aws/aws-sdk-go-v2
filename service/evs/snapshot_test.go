@@ -146,6 +146,18 @@ func TestCheckSnapshot_GetEnvironment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEnvironmentHosts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEnvironmentHosts(context.Background(), nil, func(o *Options) {
@@ -294,6 +306,18 @@ func TestUpdateSnapshot_GetEnvironment(t *testing.T) {
 	_, err := svc.GetEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

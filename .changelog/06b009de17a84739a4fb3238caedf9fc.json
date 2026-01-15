@@ -1,0 +1,8 @@
+{
+    "id": "06b009de-17a8-4739-a4fb-3238caedf9fc",
+    "type": "feature",
+    "description": "A new GetVersions API has been added to retrieve VCF, ESX versions, and EC2 instances provided by Amazon EVS. The CreateEnvironment API now allows you to select a VCF version and the CreateEnvironmentHost API introduces a optional esxVersion parameter.",
+    "modules": [
+        "service/evs"
+    ]
+}

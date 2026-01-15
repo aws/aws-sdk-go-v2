@@ -90,6 +90,26 @@ func (m *validateOpCreateAccessPolicy) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCollectionGroup struct {
+}
+
+func (*validateOpCreateCollectionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCollectionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCollectionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCollectionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCollection struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpDeleteAccessPolicy) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAccessPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCollectionGroup struct {
+}
+
+func (*validateOpDeleteCollectionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCollectionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCollectionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCollectionGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +630,26 @@ func (m *validateOpUpdateAccessPolicy) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCollectionGroup struct {
+}
+
+func (*validateOpUpdateCollectionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCollectionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCollectionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCollectionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCollection struct {
 }
 
@@ -726,6 +786,10 @@ func addOpCreateAccessPolicyValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateAccessPolicy{}, middleware.After)
 }
 
+func addOpCreateCollectionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCollectionGroup{}, middleware.After)
+}
+
 func addOpCreateCollectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCollection{}, middleware.After)
 }
@@ -752,6 +816,10 @@ func addOpCreateVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteAccessPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccessPolicy{}, middleware.After)
+}
+
+func addOpDeleteCollectionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCollectionGroup{}, middleware.After)
 }
 
 func addOpDeleteCollectionValidationMiddleware(stack *middleware.Stack) error {
@@ -824,6 +892,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAccessPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAccessPolicy{}, middleware.After)
+}
+
+func addOpUpdateCollectionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCollectionGroup{}, middleware.After)
 }
 
 func addOpUpdateCollectionValidationMiddleware(stack *middleware.Stack) error {
@@ -1074,6 +1146,29 @@ func validateOpCreateAccessPolicyInput(v *CreateAccessPolicyInput) error {
 	}
 }
 
+func validateOpCreateCollectionGroupInput(v *CreateCollectionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCollectionGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.StandbyReplicas) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StandbyReplicas"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCollectionInput(v *CreateCollectionInput) error {
 	if v == nil {
 		return nil
@@ -1218,6 +1313,21 @@ func validateOpDeleteAccessPolicyInput(v *DeleteAccessPolicyInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCollectionGroupInput(v *DeleteCollectionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCollectionGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1522,6 +1632,21 @@ func validateOpUpdateAccessPolicyInput(v *UpdateAccessPolicyInput) error {
 	}
 	if v.PolicyVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCollectionGroupInput(v *UpdateCollectionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCollectionGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

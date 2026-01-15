@@ -108,6 +108,9 @@ type CollectionDetail struct {
 	// requests to an OpenSearch Serverless collection.
 	CollectionEndpoint *string
 
+	// The name of the collection group that contains this collection.
+	CollectionGroupName *string
+
 	// The Epoch time when the collection was created.
 	CreatedDate *int64
 
@@ -179,11 +182,115 @@ type CollectionErrorDetail struct {
 // OpenSearch Serverless collections.
 type CollectionFilters struct {
 
+	// The name of the collection group to filter by.
+	CollectionGroupName *string
+
 	// The name of the collection.
 	Name *string
 
 	// The current status of the collection.
 	Status CollectionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Capacity limits for a collection group. These limits define the minimum and
+// maximum OpenSearch Compute Units (OCUs) for indexing and search operations that
+// can be used by collections in the group.
+type CollectionGroupCapacityLimits struct {
+
+	// The maximum indexing capacity for collections in the group.
+	MaxIndexingCapacityInOCU *float32
+
+	// The maximum search capacity for collections in the group.
+	MaxSearchCapacityInOCU *float32
+
+	// The minimum indexing capacity for collections in the group.
+	MinIndexingCapacityInOCU *float32
+
+	// The minimum search capacity for collections in the group.
+	MinSearchCapacityInOCU *float32
+
+	noSmithyDocumentSerde
+}
+
+// Details about a collection group.
+type CollectionGroupDetail struct {
+
+	// The Amazon Resource Name (ARN) of the collection group.
+	Arn *string
+
+	// The capacity limits for the collection group, in OpenSearch Compute Units
+	// (OCUs).
+	CapacityLimits *CollectionGroupCapacityLimits
+
+	// The Epoch time when the collection group was created.
+	CreatedDate *int64
+
+	// The description of the collection group.
+	Description *string
+
+	// The unique identifier of the collection group.
+	Id *string
+
+	// The name of the collection group.
+	Name *string
+
+	// The number of collections associated with the collection group.
+	NumberOfCollections *int32
+
+	// Indicates whether standby replicas are used for the collection group.
+	StandbyReplicas StandbyReplicas
+
+	// A map of key-value pairs associated with the collection group.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Error details for a collection group operation.
+type CollectionGroupErrorDetail struct {
+
+	// The error code for the request. For example, NOT_FOUND .
+	ErrorCode *string
+
+	// A description of the error. For example, The specified Collection Group is not
+	// found.
+	ErrorMessage *string
+
+	// If the request contains collection group IDs, the response includes the IDs
+	// provided in the request.
+	Id *string
+
+	// If the request contains collection group names, the response includes the names
+	// provided in the request.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a collection group.
+type CollectionGroupSummary struct {
+
+	// The Amazon Resource Name (ARN) of the collection group.
+	Arn *string
+
+	// Capacity limits for a collection group. These limits define the minimum and
+	// maximum OpenSearch Compute Units (OCUs) for indexing and search operations that
+	// can be used by collections in the group.
+	CapacityLimits *CollectionGroupCapacityLimits
+
+	// The Epoch time when the collection group was created.
+	CreatedDate *int64
+
+	// The unique identifier of the collection group.
+	Id *string
+
+	// The name of the collection group.
+	Name *string
+
+	// The number of collections within the collection group.
+	NumberOfCollections *int32
 
 	noSmithyDocumentSerde
 }
@@ -194,8 +301,15 @@ type CollectionSummary struct {
 	// The Amazon Resource Name (ARN) of the collection.
 	Arn *string
 
+	// The name of the collection group that contains this collection.
+	CollectionGroupName *string
+
 	// The unique identifier of the collection.
 	Id *string
+
+	// The ARN of the Amazon Web Services Key Management Service key used to encrypt
+	// the collection.
+	KmsKeyArn *string
 
 	// The name of the collection.
 	Name *string
@@ -211,6 +325,9 @@ type CreateCollectionDetail struct {
 
 	// The Amazon Resource Name (ARN) of the collection.
 	Arn *string
+
+	// The name of the collection group that contains this collection.
+	CollectionGroupName *string
 
 	// The Epoch time when the collection was created.
 	CreatedDate *int64
@@ -242,6 +359,37 @@ type CreateCollectionDetail struct {
 
 	// Configuration options for vector search capabilities in the collection.
 	VectorOptions *VectorOptions
+
+	noSmithyDocumentSerde
+}
+
+// Details about the created collection group.
+type CreateCollectionGroupDetail struct {
+
+	// The Amazon Resource Name (ARN) of the collection group.
+	Arn *string
+
+	// The capacity limits for the collection group, in OpenSearch Compute Units
+	// (OCUs).
+	CapacityLimits *CollectionGroupCapacityLimits
+
+	// The Epoch time when the collection group was created.
+	CreatedDate *int64
+
+	// The description of the collection group.
+	Description *string
+
+	// The unique identifier of the collection group.
+	Id *string
+
+	// The name of the collection group.
+	Name *string
+
+	// Indicates whether standby replicas are used for the collection group.
+	StandbyReplicas StandbyReplicas
+
+	// A map of key-value pairs associated with the collection group.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -357,6 +505,19 @@ type EffectiveLifecyclePolicyErrorDetail struct {
 
 	// The type of lifecycle policy.
 	Type LifecyclePolicyType
+
+	noSmithyDocumentSerde
+}
+
+// Encryption settings for a collection.
+type EncryptionConfig struct {
+
+	// Indicates whether to use an Amazon Web Services-owned key for encryption.
+	AWSOwnedKey *bool
+
+	// The ARN of the Amazon Web Services Key Management Service key used to encrypt
+	// the collection.
+	KmsKeyArn *string
 
 	noSmithyDocumentSerde
 }
@@ -735,6 +896,34 @@ type UpdateCollectionDetail struct {
 
 	// The collection type.
 	Type CollectionType
+
+	noSmithyDocumentSerde
+}
+
+// Details about the updated collection group.
+type UpdateCollectionGroupDetail struct {
+
+	// The Amazon Resource Name (ARN) of the collection group.
+	Arn *string
+
+	// The capacity limits for the collection group, in OpenSearch Compute Units
+	// (OCUs).
+	CapacityLimits *CollectionGroupCapacityLimits
+
+	// The Epoch time when the collection group was created.
+	CreatedDate *int64
+
+	// The description of the collection group.
+	Description *string
+
+	// The unique identifier of the collection group.
+	Id *string
+
+	// The date and time when the collection group was last modified.
+	LastModifiedDate *int64
+
+	// The name of the collection group.
+	Name *string
 
 	noSmithyDocumentSerde
 }

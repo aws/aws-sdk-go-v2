@@ -86,7 +86,7 @@ type GetTaskOutput struct {
 	// The number of times that the task failed and was retried.
 	FailureRetryCount *int32
 
-	// The latest session ID for the task.
+	// The latest session action ID for the task.
 	LatestSessionActionId *string
 
 	// The parameters for the task.
