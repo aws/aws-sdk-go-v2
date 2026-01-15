@@ -1163,7 +1163,7 @@
                 "name": {
                     "target": "com.amazonaws.cleanrooms#ParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the parameter. The name must use only alphanumeric, underscore (_), or hyphen (-) characters but cannot start or end with a hyphen.</p>",
+                        "smithy.api#documentation": "<p>The name of the parameter. The name must use only alphanumeric or underscore (_) characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10661,6 +10661,37 @@
                 "smithy.api#documentation": "<p>An object representing the collaboration member's payment responsibilities set by the collaboration creator for query and job compute costs.</p>"
             }
         },
+        "com.amazonaws.cleanrooms#JobParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cleanrooms#JobParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.cleanrooms#JobParameterValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#JobParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z_]+$"
+            }
+        },
+        "com.amazonaws.cleanrooms#JobParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.cleanrooms#JobType": {
             "type": "enum",
             "members": {
@@ -14647,6 +14678,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The ARN of the analysis template.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.cleanrooms#JobParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime configuration values passed to the PySpark analysis script. Parameter names and types must match those defined in the analysis template.</p>"
                     }
                 }
             },

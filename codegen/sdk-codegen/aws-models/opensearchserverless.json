@@ -199,6 +199,67 @@
                 "smithy.api#readonly": {}
             }
         },
+        "com.amazonaws.opensearchserverless#BatchGetCollectionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearchserverless#BatchGetCollectionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearchserverless#BatchGetCollectionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns attributes for one or more collection groups, including capacity limits and the number of collections in each group. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html\">Creating and managing Amazon OpenSearch Serverless collections</a>.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#BatchGetCollectionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "ids": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of collection group IDs. You can't provide names and IDs in the same request.</p>"
+                    }
+                },
+                "names": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of collection group names. You can't provide names and IDs in the same request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#BatchGetCollectionGroupResponse": {
+            "type": "structure",
+            "members": {
+                "collectionGroupDetails": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about each collection group.</p>"
+                    }
+                },
+                "collectionGroupErrorDetails": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error information for the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearchserverless#BatchGetCollectionRequest": {
             "type": "structure",
             "members": {
@@ -550,6 +611,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A message associated with the failure code.</p>"
                     }
+                },
+                "collectionGroupName": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the collection group that contains this collection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -614,10 +681,289 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the collection.</p>"
                     }
+                },
+                "collectionGroupName": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the collection group to filter by.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of filter keys that you can use for LIST, UPDATE, and DELETE requests to OpenSearch Serverless collections.</p>"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroup": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.opensearchserverless#CreateCollectionGroup"
+            },
+            "update": {
+                "target": "com.amazonaws.opensearchserverless#UpdateCollectionGroup"
+            },
+            "delete": {
+                "target": "com.amazonaws.opensearchserverless#DeleteCollectionGroup"
+            },
+            "list": {
+                "target": "com.amazonaws.opensearchserverless#ListCollectionGroups"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "collection-group/{id}"
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "CollectionGroup"
+                }
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupCapacityLimits": {
+            "type": "structure",
+            "members": {
+                "maxIndexingCapacityInOCU": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupIndexingCapacityValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum indexing capacity for collections in the group.</p>"
+                    }
+                },
+                "maxSearchCapacityInOCU": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupSearchCapacityValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum search capacity for collections in the group.</p>"
+                    }
+                },
+                "minIndexingCapacityInOCU": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupIndexingCapacityValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum indexing capacity for collections in the group.</p>"
+                    }
+                },
+                "minSearchCapacityInOCU": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupSearchCapacityValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum search capacity for collections in the group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Capacity limits for a collection group. These limits define the minimum and maximum OpenSearch Compute Units (OCUs) for indexing and search operations that can be used by collections in the group.</p>"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupDetail": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collection group.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the collection group.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the collection group.</p>"
+                    }
+                },
+                "standbyReplicas": {
+                    "target": "com.amazonaws.opensearchserverless#StandbyReplicas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether standby replicas are used for the collection group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the collection group.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.opensearchserverless#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs associated with the collection group.</p>"
+                    }
+                },
+                "createdDate": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Epoch time when the collection group was created.</p>"
+                    }
+                },
+                "capacityLimits": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupCapacityLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>"
+                    }
+                },
+                "numberOfCollections": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of collections associated with the collection group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a collection group.</p>"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearchserverless#CollectionGroupDetail"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupErrorDetail": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request contains collection group IDs, the response includes the IDs provided in the request.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request contains collection group names, the response includes the names provided in the request.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the error. For example, <code>The specified Collection Group is not found.</code> </p>"
+                    }
+                },
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the request. For example, <code>NOT_FOUND</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error details for a collection group operation.</p>"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupErrorDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearchserverless#CollectionGroupErrorDetail"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 40
+                },
+                "smithy.api#pattern": "^[a-z0-9]{3,40}$"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearchserverless#CollectionGroupId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupIndexingCapacityValue": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearchserverless#CollectionGroupName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupSearchCapacityValue": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearchserverless#CollectionGroupSummary"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collection group.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the collection group.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the collection group.</p>"
+                    }
+                },
+                "numberOfCollections": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of collections within the collection group.</p>"
+                    }
+                },
+                "createdDate": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Epoch time when the collection group was created.</p>"
+                    }
+                },
+                "capacityLimits": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupCapacityLimits"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a collection group.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#CollectionId": {
@@ -723,6 +1069,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the collection.</p>"
                     }
+                },
+                "kmsKeyArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Key Management Service key used to encrypt the collection.</p>"
+                    }
+                },
+                "collectionGroupName": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the collection group that contains this collection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -778,7 +1136,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>When creating a resource, thrown when a resource with the same name already exists or is being created. When deleting a resource, thrown when the resource is not in the ACTIVE or FAILED state.</p>",
+                "smithy.api#documentation": "<p>When creating a resource, thrown when a resource with the same name already exists or is being created.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -959,10 +1317,164 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the collection was last modified.</p>"
                     }
+                },
+                "collectionGroupName": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the collection group that contains this collection.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about the created OpenSearch Serverless collection.</p>"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CreateCollectionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearchserverless#CreateCollectionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearchserverless#CreateCollectionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearchserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a collection group within OpenSearch Serverless. Collection groups let you manage OpenSearch Compute Units (OCUs) at a group level, with multiple collections sharing the group's capacity limits.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-collection-groups.html\">Managing collection groups</a>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#CreateCollectionGroupDetail": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collection group.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the collection group.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the collection group.</p>"
+                    }
+                },
+                "standbyReplicas": {
+                    "target": "com.amazonaws.opensearchserverless#StandbyReplicas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether standby replicas are used for the collection group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the collection group.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.opensearchserverless#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs associated with the collection group.</p>"
+                    }
+                },
+                "createdDate": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Epoch time when the collection group was created.</p>"
+                    }
+                },
+                "capacityLimits": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupCapacityLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the created collection group.</p>"
+            }
+        },
+        "com.amazonaws.opensearchserverless#CreateCollectionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the collection group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "standbyReplicas": {
+                    "target": "com.amazonaws.opensearchserverless#StandbyReplicas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether standby replicas should be used for a collection group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the collection group.</p>",
+                        "smithy.api#length": {
+                            "max": 1000
+                        }
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.opensearchserverless#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection group.</p>"
+                    }
+                },
+                "capacityLimits": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupCapacityLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs). These limits control the maximum and minimum capacity for collections within the group.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.opensearchserverless#ClientToken",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#CreateCollectionGroupResponse": {
+            "type": "structure",
+            "members": {
+                "createCollectionGroupDetail": {
+                    "target": "com.amazonaws.opensearchserverless#CreateCollectionGroupDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the created collection group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opensearchserverless#CreateCollectionRequest": {
@@ -1006,6 +1518,18 @@
                     "target": "com.amazonaws.opensearchserverless#VectorOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration options for vector search capabilities in the collection.</p>"
+                    }
+                },
+                "collectionGroupName": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the collection group to associate with the collection.</p>"
+                    }
+                },
+                "encryptionConfig": {
+                    "target": "com.amazonaws.opensearchserverless#EncryptionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption settings for the collection.</p>"
                     }
                 },
                 "clientToken": {
@@ -1255,13 +1779,13 @@
                 "samlOptions": {
                     "target": "com.amazonaws.opensearchserverless#SamlConfigOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes SAML options in in the form of a key-value map. This field is required if you specify <code>SAML</code> for the <code>type</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Describes SAML options in the form of a key-value map. This field is required if you specify <code>SAML</code> for the <code>type</code> parameter.</p>"
                     }
                 },
                 "iamIdentityCenterOptions": {
                     "target": "com.amazonaws.opensearchserverless#CreateIamIdentityCenterConfigOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes IAM Identity Center options in the form of a key-value map. This field is required if you specify iamidentitycenter for the type parameter.</p>"
+                        "smithy.api#documentation": "<p>Describes IAM Identity Center options in the form of a key-value map. This field is required if you specify <code>iamidentitycenter</code> for the <code>type</code> parameter.</p>"
                     }
                 },
                 "iamFederationOptions": {
@@ -1582,6 +2106,63 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about a deleted OpenSearch Serverless collection.</p>"
+            }
+        },
+        "com.amazonaws.opensearchserverless#DeleteCollectionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearchserverless#DeleteCollectionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearchserverless#DeleteCollectionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearchserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a collection group. You can only delete empty collection groups that contain no collections. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html\">Creating and managing Amazon OpenSearch Serverless collections</a>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#DeleteCollectionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collection group to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.opensearchserverless#ClientToken",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#DeleteCollectionGroupResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opensearchserverless#DeleteCollectionRequest": {
@@ -2010,6 +2591,31 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.opensearchserverless#EffectiveLifecyclePolicyErrorDetail"
+            }
+        },
+        "com.amazonaws.opensearchserverless#EncryptionConfig": {
+            "type": "structure",
+            "members": {
+                "aWSOwnedKey": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to use an Amazon Web Services-owned key for encryption.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Key Management Service key used to encrypt the collection.</p>",
+                        "smithy.api#length": {
+                            "min": 10,
+                            "max": 100
+                        },
+                        "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Encryption settings for a collection.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#FipsEndpoints": {
@@ -2871,6 +3477,76 @@
                 }
             }
         },
+        "com.amazonaws.opensearchserverless#ListCollectionGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearchserverless#ListCollectionGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearchserverless#ListCollectionGroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of collection groups. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html\">Creating and managing Amazon OpenSearch Serverless collections</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "maxResults": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#ListCollectionGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial <code>ListCollectionGroups</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListCollectionGroups</code> operations, which returns results in the next page.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. Default is 20. You can use <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#ListCollectionGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "collectionGroupSummaries": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about each collection group.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearchserverless#ListCollections": {
             "type": "operation",
             "input": {
@@ -3321,6 +3997,9 @@
                     "target": "com.amazonaws.opensearchserverless#BatchGetCollection"
                 },
                 {
+                    "target": "com.amazonaws.opensearchserverless#BatchGetCollectionGroup"
+                },
+                {
                     "target": "com.amazonaws.opensearchserverless#BatchGetEffectiveLifecyclePolicy"
                 },
                 {
@@ -3363,6 +4042,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#Collection"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroup"
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#Index"
@@ -4988,6 +5670,135 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about an updated OpenSearch Serverless collection.</p>"
+            }
+        },
+        "com.amazonaws.opensearchserverless#UpdateCollectionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearchserverless#UpdateCollectionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearchserverless#UpdateCollectionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearchserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the description and capacity limits of a collection group.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#UpdateCollectionGroupDetail": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collection group.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the collection group.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the collection group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the collection group.</p>"
+                    }
+                },
+                "capacityLimits": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupCapacityLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>"
+                    }
+                },
+                "createdDate": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Epoch time when the collection group was created.</p>"
+                    }
+                },
+                "lastModifiedDate": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the collection group was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the updated collection group.</p>"
+            }
+        },
+        "com.amazonaws.opensearchserverless#UpdateCollectionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collection group to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new description for the collection group.</p>",
+                        "smithy.api#length": {
+                            "max": 1000
+                        }
+                    }
+                },
+                "capacityLimits": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupCapacityLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.opensearchserverless#ClientToken",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#UpdateCollectionGroupResponse": {
+            "type": "structure",
+            "members": {
+                "updateCollectionGroupDetail": {
+                    "target": "com.amazonaws.opensearchserverless#UpdateCollectionGroupDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the updated collection group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opensearchserverless#UpdateCollectionRequest": {

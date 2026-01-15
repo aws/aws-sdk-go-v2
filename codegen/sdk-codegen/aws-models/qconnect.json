@@ -1005,12 +1005,30 @@
             }
         },
         "com.amazonaws.qconnect#AIPromptInferenceConfiguration": {
-            "type": "union",
+            "type": "structure",
             "members": {
-                "textAIPromptInferenceConfiguration": {
-                    "target": "com.amazonaws.qconnect#TextAIPromptInferenceConfiguration",
+                "temperature": {
+                    "target": "com.amazonaws.qconnect#Probability",
                     "traits": {
-                        "smithy.api#documentation": "<p>The inference configuration for text-based AI Prompts.</p>"
+                        "smithy.api#documentation": "<p>The temperature setting for controlling randomness in the generated response.</p>"
+                    }
+                },
+                "topP": {
+                    "target": "com.amazonaws.qconnect#Probability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The top-P sampling parameter for nucleus sampling.</p>"
+                    }
+                },
+                "topK": {
+                    "target": "com.amazonaws.qconnect#TopK",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The top-K sampling parameter for token selection.</p>"
+                    }
+                },
+                "maxTokensToSample": {
+                    "target": "com.amazonaws.qconnect#MaxTokensToSample",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tokens to generate in the response.</p>"
                     }
                 }
             },
@@ -11444,9 +11462,8 @@
         "com.amazonaws.qconnect#MaxTokensToSample": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
-                    "min": 0,
+                    "min": 1,
                     "max": 4096
                 },
                 "smithy.api#sensitive": {}
@@ -13011,7 +13028,6 @@
         "com.amazonaws.qconnect#Probability": {
             "type": "float",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1
@@ -17545,42 +17561,6 @@
                 "smithy.api#sensitive": {}
             }
         },
-        "com.amazonaws.qconnect#TextAIPromptInferenceConfiguration": {
-            "type": "structure",
-            "members": {
-                "temperature": {
-                    "target": "com.amazonaws.qconnect#Probability",
-                    "traits": {
-                        "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The temperature setting for controlling randomness in the generated response.</p>"
-                    }
-                },
-                "topP": {
-                    "target": "com.amazonaws.qconnect#Probability",
-                    "traits": {
-                        "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The top-P sampling parameter for nucleus sampling.</p>"
-                    }
-                },
-                "topK": {
-                    "target": "com.amazonaws.qconnect#TopK",
-                    "traits": {
-                        "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The top-K sampling parameter for token selection.</p>"
-                    }
-                },
-                "maxTokensToSample": {
-                    "target": "com.amazonaws.qconnect#MaxTokensToSample",
-                    "traits": {
-                        "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of tokens to generate in the response.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Inference configuration for text-based AI Prompts.</p>"
-            }
-        },
         "com.amazonaws.qconnect#TextData": {
             "type": "structure",
             "members": {
@@ -17618,8 +17598,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the message data in text type.</p>",
                         "smithy.api#length": {
-                            "min": 1,
-                            "max": 1024
+                            "min": 0,
+                            "max": 25000
                         }
                     }
                 },
@@ -17984,7 +17964,6 @@
         "com.amazonaws.qconnect#TopK": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 200
