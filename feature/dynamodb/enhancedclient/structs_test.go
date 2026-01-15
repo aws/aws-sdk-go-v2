@@ -22,6 +22,7 @@ type order struct {
 	customerNote      string   `dynamodbav:"note" dynamodbgetter:"Note" dynamodbsetter:"SetNote" dynamodbindex:"NoteIndex,global,partition"`
 	CustomerFirstName string   `dynamodbav:"first_name"`
 	CustomerLastName  string   `dynamodbav:"last_name"`
+	CustomerNickName  *string  `dynamodbav:"nick_name"`
 }
 
 // Getter method for customerNote

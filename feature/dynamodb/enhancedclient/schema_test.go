@@ -19,8 +19,8 @@ func TestSchema(t *testing.T) {
 		t.Fatalf("NewSchema error: %v", err)
 	}
 
-	if len(actual.cachedFields.fields) != 17 {
-		t.Fatalf("expected %d CachedFields, found %d", 17, len(actual.cachedFields.fields))
+	if len(actual.cachedFields.fields) != 18 {
+		t.Fatalf("expected %d CachedFields, found %d", 18, len(actual.cachedFields.fields))
 	}
 
 	// | Index Name          | Partition Key | Sort Key     | Type | Notes                       |
@@ -327,6 +327,15 @@ func TestSchema(t *testing.T) {
 						Name: "last_name",
 					},
 				},
+				{
+					Name:        "nick_name",
+					NameFromTag: true,
+					Index:       []int{16},
+					Type:        reflect.TypeFor[string](),
+					Tag: Tag{
+						Name: "nick_name",
+					},
+				},
 			},
 			fieldsByName: map[string]int{
 				"order_id":      0,
@@ -346,6 +355,7 @@ func TestSchema(t *testing.T) {
 				"note":          14,
 				"first_name":    15,
 				"last_name":     16,
+				"nick_name":     17,
 			},
 		},
 		enc: NewEncoder[order](),
@@ -473,6 +483,9 @@ func TestSchemaEncodeDecode(t *testing.T) {
 		},
 		"last_name": &types.AttributeValueMemberS{
 			Value: "1e73f306-3362-49da-af74-41e1befff588",
+		},
+		"nick_name": &types.AttributeValueMemberNULL{
+			Value: true,
 		},
 	}
 

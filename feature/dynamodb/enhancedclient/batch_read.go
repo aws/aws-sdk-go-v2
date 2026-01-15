@@ -32,7 +32,7 @@ type BatchGetOperation[T any] struct {
 func (b *BatchGetOperation[T]) AddReadItem(item *T) error {
 	m, err := b.schema.createKeyMap(item)
 	if err != nil {
-		return fmt.Errorf(`error calling schema.createKeyMap: %v`, err)
+		return fmt.Errorf("error calling schema.createKeyMap: %w", err)
 	}
 
 	b.queue = append(b.queue, batchReadQueueItem{
@@ -62,6 +62,12 @@ func (b *BatchGetOperation[T]) AddReadItemByMap(m Map) error {
 //	seq := op.Execute(ctx)
 //	for res := range iter.Chan(seq) { ... }
 func (b *BatchGetOperation[T]) Execute(ctx context.Context, optFns ...func(options *dynamodb.Options)) iter.Seq[ItemResult[T]] {
+	var consecutiveErrors uint = 0
+	var maxConsecutiveErrors = b.table.options.MaxConsecutiveErrors
+	if maxConsecutiveErrors == 0 {
+		maxConsecutiveErrors = DefaultMaxConsecutiveErrors
+	}
+
 	return func(yield func(ItemResult[T]) bool) {
 		tableName := b.schema.TableName()
 		if tableName == nil {
@@ -87,8 +93,17 @@ func (b *BatchGetOperation[T]) Execute(ctx context.Context, optFns ...func(optio
 
 			res, err := b.client.BatchGetItem(ctx, bgii, optFns...)
 			if err != nil {
-				yield(ItemResult[T]{err: err})
+				if !yield(ItemResult[T]{err: err}) {
+					return
+				}
+
+				if consecutiveErrors >= maxConsecutiveErrors {
+					return
+				} else {
+					continue
+				}
 			}
+			consecutiveErrors = 0
 
 			if res != nil && res.Responses != nil {
 				for _, item := range res.Responses[*tableName] {

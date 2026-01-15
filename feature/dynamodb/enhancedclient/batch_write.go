@@ -36,12 +36,12 @@ type BatchWriteOperation[T any] struct {
 // The item is encoded using the table's schema and extensions are applied before writing.
 func (b *BatchWriteOperation[T]) AddPut(item *T) error {
 	if err := b.table.applyBeforeWriteExtensions(item); err != nil {
-		return fmt.Errorf(`error calling table.applyBeforeWriteExtensions(): %v`, err)
+		return fmt.Errorf("error calling table.applyBeforeWriteExtensions(): %w", err)
 	}
 
 	m, err := b.schema.Encode(item)
 	if err != nil {
-		return fmt.Errorf(`error calling schema.Encode(): %v`, err)
+		return fmt.Errorf("error calling schema.Encode(): %w", err)
 	}
 
 	b.queue = append(b.queue, batchWriteQueueItem{
@@ -72,7 +72,7 @@ func (b *BatchWriteOperation[T]) AddRawPut(i map[string]types.AttributeValue) er
 func (b *BatchWriteOperation[T]) AddDelete(item *T) error {
 	m, err := b.schema.createKeyMap(item)
 	if err != nil {
-		return fmt.Errorf(`error calling schema.createKeyMap(): %v`, err)
+		return fmt.Errorf("error calling schema.createKeyMap(): %w", err)
 	}
 
 	b.queue = append(b.queue, batchWriteQueueItem{
@@ -102,6 +102,12 @@ func (b *BatchWriteOperation[T]) AddRawDelete(i map[string]types.AttributeValue)
 // It sends requests in batches of up to 25 items, and retries unprocessed items until all are written.
 // Returns an error if the table name is not set or if a request fails.
 func (b *BatchWriteOperation[T]) Execute(ctx context.Context, optFns ...func(options *dynamodb.Options)) error {
+	var consecutiveErrors uint = 0
+	var maxConsecutiveErrors = b.table.options.MaxConsecutiveErrors
+	if maxConsecutiveErrors == 0 {
+		maxConsecutiveErrors = DefaultMaxConsecutiveErrors
+	}
+
 	tableName := b.schema.TableName()
 	if tableName == nil {
 		return fmt.Errorf("empty table name, did you forget Schema[T].WithName()?")
@@ -129,7 +135,7 @@ func (b *BatchWriteOperation[T]) Execute(ctx context.Context, optFns ...func(opt
 					},
 				})
 			default:
-				return fmt.Errorf("uknown batchWriteOpType: %d", op.typ)
+				return fmt.Errorf("unknown batchWriteOpType: %d", op.typ)
 			}
 		}
 
@@ -141,22 +147,31 @@ func (b *BatchWriteOperation[T]) Execute(ctx context.Context, optFns ...func(opt
 
 		res, err := b.client.BatchWriteItem(ctx, bwii, optFns...)
 		if err != nil {
-			return err
+			consecutiveErrors++
+
+			if consecutiveErrors >= maxConsecutiveErrors {
+				return err
+			}
 		}
 
+		var unprocessedItems []types.WriteRequest
 		if res != nil && res.UnprocessedItems != nil {
-			for _, ui := range res.UnprocessedItems[*tableName] {
-				if ui.PutRequest != nil {
-					b.queue = append(b.queue, batchWriteQueueItem{
-						typ:  batchWriteOpPut,
-						item: ui.PutRequest.Item,
-					})
-				} else if ui.DeleteRequest != nil {
-					b.queue = append(b.queue, batchWriteQueueItem{
-						typ:  batchWriteOpDelete,
-						item: ui.DeleteRequest.Key,
-					})
-				}
+			unprocessedItems = res.UnprocessedItems[*tableName]
+		} else if err != nil {
+			unprocessedItems = bwii.RequestItems[*tableName]
+		}
+
+		for _, ui := range unprocessedItems {
+			if ui.PutRequest != nil {
+				b.queue = append(b.queue, batchWriteQueueItem{
+					typ:  batchWriteOpPut,
+					item: ui.PutRequest.Item,
+				})
+			} else if ui.DeleteRequest != nil {
+				b.queue = append(b.queue, batchWriteQueueItem{
+					typ:  batchWriteOpDelete,
+					item: ui.DeleteRequest.Key,
+				})
 			}
 		}
 	}
