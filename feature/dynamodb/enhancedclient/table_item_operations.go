@@ -11,6 +11,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
+// GetItem retrieves a single item from the DynamoDB table by its key.
+// Returns the decoded item or an error if not found or decoding fails.
 func (t *Table[T]) GetItem(ctx context.Context, m Map, optFns ...func(*dynamodb.Options)) (*T, error) {
 	res, err := t.client.GetItem(ctx, &dynamodb.GetItemInput{
 		TableName: t.options.Schema.TableName(),
@@ -37,6 +39,8 @@ func (t *Table[T]) GetItem(ctx context.Context, m Map, optFns ...func(*dynamodb.
 	return item, nil
 }
 
+// GetItemWithProjection retrieves a single item from the DynamoDB table by its key, applying a projection to select specific attributes.
+// Returns the decoded item or an error if not found or decoding fails.
 func (t *Table[T]) GetItemWithProjection(ctx context.Context, m Map, proj expression.ProjectionBuilder, optFns ...func(*dynamodb.Options)) (*T, error) {
 	b, err := expression.NewBuilder().WithProjection(proj).Build()
 	if err != nil {
@@ -70,7 +74,8 @@ func (t *Table[T]) GetItemWithProjection(ctx context.Context, m Map, proj expres
 	return item, nil
 }
 
-// PutItem writes the item without checking for collisions
+// PutItem writes the item to the DynamoDB table without checking for collisions.
+// Returns the written item or an error if encoding or writing fails.
 func (t *Table[T]) PutItem(ctx context.Context, item *T, optFns ...func(*dynamodb.Options)) (*T, error) {
 	err := t.applyBeforeWriteExtensions(item)
 	if err != nil {
@@ -105,7 +110,8 @@ func (t *Table[T]) PutItem(ctx context.Context, item *T, optFns ...func(*dynamod
 	return out, nil
 }
 
-// UpdateItem writes the item with additional checks (version checks, etc)
+// UpdateItem writes the item to the DynamoDB table with additional checks (e.g., version checks).
+// Returns the updated item or an error if encoding or updating fails.
 func (t *Table[T]) UpdateItem(ctx context.Context, item *T, optFns ...func(*dynamodb.Options)) (*T, error) {
 	err := t.applyBeforeWriteExtensions(item)
 	if err != nil {
@@ -151,6 +157,8 @@ func (t *Table[T]) UpdateItem(ctx context.Context, item *T, optFns ...func(*dyna
 	return out, nil
 }
 
+// DeleteItem deletes an item from the DynamoDB table by its struct value.
+// Returns an error if the key cannot be created or the delete fails.
 func (t *Table[T]) DeleteItem(ctx context.Context, item *T, optFns ...func(*dynamodb.Options)) error {
 	m, err := t.options.Schema.createKeyMap(item)
 	if err != nil {
@@ -165,6 +173,8 @@ func (t *Table[T]) DeleteItem(ctx context.Context, item *T, optFns ...func(*dyna
 	return err
 }
 
+// DeleteItemByKey deletes an item from the DynamoDB table by its key map.
+// Returns an error if the delete fails.
 func (t *Table[T]) DeleteItemByKey(ctx context.Context, m Map, optFns ...func(*dynamodb.Options)) error {
 	_, err := t.client.DeleteItem(ctx, &dynamodb.DeleteItemInput{
 		TableName: t.options.Schema.TableName(),
@@ -174,7 +184,16 @@ func (t *Table[T]) DeleteItemByKey(ctx context.Context, m Map, optFns ...func(*d
 	return err
 }
 
+// createScanIterator returns an iterator that scans a DynamoDB table or index and yields results as ItemResult[T].
+// It automatically handles pagination and error thresholds using MaxConsecutiveErrors.
+// If the number of consecutive errors reaches the threshold, iteration stops.
 func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+	var consecutiveErrors uint = 0
+	var maxConsecutiveErrors = t.options.MaxConsecutiveErrors
+	if maxConsecutiveErrors == 0 {
+		maxConsecutiveErrors = DefaultMaxConsecutiveErrors
+	}
+
 	return func(yield func(ItemResult[T]) bool) {
 		var lastEvaluatedKey map[string]types.AttributeValue
 
@@ -193,37 +212,50 @@ func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, exp
 
 			res, err := t.client.Scan(ctx, scanInput, optFns...)
 			if err != nil {
+				consecutiveErrors++
+
 				if !yield(ItemResult[T]{err: err}) {
 					return
 				}
 
-				return
-			}
-
-			for _, item := range res.Items {
-				i, err := t.options.Schema.Decode(item)
-				if err != nil {
-					if !yield(ItemResult[T]{err: err}) {
-						return
-					}
-
-					continue
-				}
-
-				if err := t.applyAfterReadExtensions(i); err != nil {
-					if !yield(ItemResult[T]{err: err}) {
-						return
-					}
-
-					continue
-				}
-
-				if !yield(ItemResult[T]{item: i}) {
+				if consecutiveErrors >= maxConsecutiveErrors {
 					return
+				} else {
+					continue
 				}
 			}
 
-			lastEvaluatedKey = res.LastEvaluatedKey
+			consecutiveErrors = 0
+
+			if res != nil && res.Items != nil {
+				for _, item := range res.Items {
+					i, err := t.options.Schema.Decode(item)
+					if err != nil {
+						if !yield(ItemResult[T]{err: err}) {
+							return
+						}
+
+						continue
+					}
+
+					if err := t.applyAfterReadExtensions(i); err != nil {
+						if !yield(ItemResult[T]{err: err}) {
+							return
+						}
+
+						continue
+					}
+
+					if !yield(ItemResult[T]{item: i}) {
+						return
+					}
+				}
+
+				lastEvaluatedKey = res.LastEvaluatedKey
+			} else {
+				lastEvaluatedKey = nil
+			}
+
 			if lastEvaluatedKey == nil {
 				return
 			}
@@ -231,15 +263,28 @@ func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, exp
 	}
 }
 
+// ScanIndex scans a DynamoDB index and returns an iterator of results.
+// The scan uses the provided index name and expression.
 func (t *Table[T]) ScanIndex(ctx context.Context, indexName string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
 	return t.createScanIterator(ctx, &indexName, expr, optFns...)
 }
 
+// Scan scans the DynamoDB table and returns an iterator of results.
+// The scan uses the provided expression.
 func (t *Table[T]) Scan(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
 	return t.createScanIterator(ctx, nil, expr, optFns...)
 }
 
+// createQueryIterator returns an iterator that queries a DynamoDB table or index and yields results as ItemResult[T].
+// It automatically handles pagination and error thresholds using MaxConsecutiveErrors.
+// If the number of consecutive errors reaches the threshold, iteration stops.
 func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+	var consecutiveErrors uint = 0
+	var maxConsecutiveErrors = t.options.MaxConsecutiveErrors
+	if maxConsecutiveErrors == 0 {
+		maxConsecutiveErrors = DefaultMaxConsecutiveErrors
+	}
+
 	return func(yield func(ItemResult[T]) bool) {
 		var lastEvaluatedKey map[string]types.AttributeValue
 
@@ -256,38 +301,56 @@ func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, e
 				ProjectionExpression:      expr.Projection(),
 				Select:                    types.SelectAllAttributes,
 			}, optFns...)
+
 			if err != nil {
+				consecutiveErrors++
+
 				if !yield(ItemResult[T]{err: err}) {
 					return
 				}
 
+				if consecutiveErrors >= maxConsecutiveErrors {
+					return
+				} else {
+					continue
+				}
+			}
+
+			consecutiveErrors = 0
+
+			if res == nil {
 				return
 			}
 
-			for _, item := range res.Items {
-				i, err := t.options.Schema.Decode(item)
-				if err != nil {
-					if !yield(ItemResult[T]{err: err}) {
-						return
+			if res != nil && res.Items != nil {
+				for _, item := range res.Items {
+					i, err := t.options.Schema.Decode(item)
+					if err != nil {
+						if !yield(ItemResult[T]{err: err}) {
+							return
+						}
+
+						continue
 					}
 
-					continue
-				}
+					if err := t.applyAfterReadExtensions(i); err != nil {
+						if !yield(ItemResult[T]{err: err}) {
+							return
+						}
 
-				if err := t.applyAfterReadExtensions(i); err != nil {
-					if !yield(ItemResult[T]{err: err}) {
-						return
+						continue
 					}
 
-					continue
+					if !yield(ItemResult[T]{item: i}) {
+						return
+					}
 				}
 
-				if !yield(ItemResult[T]{item: i}) {
-					return
-				}
+				lastEvaluatedKey = res.LastEvaluatedKey
+			} else {
+				lastEvaluatedKey = nil
 			}
 
-			lastEvaluatedKey = res.LastEvaluatedKey
 			if lastEvaluatedKey == nil {
 				return
 			}
@@ -295,18 +358,26 @@ func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, e
 	}
 }
 
+// QueryIndex queries a DynamoDB index and returns an iterator of results.
+// The query uses the provided index name and expression.
 func (t *Table[T]) QueryIndex(ctx context.Context, indexName string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
 	return t.createQueryIterator(ctx, &indexName, expr, optFns...)
 }
 
+// Query queries the DynamoDB table and returns an iterator of results.
+// The query uses the provided expression.
 func (t *Table[T]) Query(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
 	return t.createQueryIterator(ctx, nil, expr, optFns...)
 }
 
+// CreateBatchWriteOperation creates a new BatchWriteOperation for the table.
+// Use this to perform batched put and delete operations for the table's items.
 func (t *Table[T]) CreateBatchWriteOperation() *BatchWriteOperation[T] {
 	return NewBatchWriteOperation(t)
 }
 
+// CreateBatchGetOperation creates a new BatchGetOperation for the table.
+// Use this to perform batched reads for the table's items.
 func (t *Table[T]) CreateBatchGetOperation() *BatchGetOperation[T] {
 	return NewBatchGetOperation(t)
 }

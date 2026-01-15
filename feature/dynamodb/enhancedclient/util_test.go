@@ -256,3 +256,83 @@ func TestTypeToScalarAttributeType(t *testing.T) {
 		})
 	}
 }
+func TestPointer(t *testing.T) {
+	type foo struct{ X int }
+	cases := []struct {
+		name  string
+		input any
+		want  any
+	}{
+		{"int", 42, 42},
+		{"string", "hello", "hello"},
+		{"struct", foo{X: 7}, foo{X: 7}},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			switch v := c.input.(type) {
+			case int:
+				p := pointer(v)
+				if p == nil || *p != c.want.(int) {
+					t.Errorf("pointer(int): got %v, want pointer to %v", p, c.want)
+				}
+			case string:
+				p := pointer(v)
+				if p == nil || *p != c.want.(string) {
+					t.Errorf("pointer(string): got %v, want pointer to %v", p, c.want)
+				}
+			case foo:
+				p := pointer(v)
+				if p == nil || *p != c.want.(foo) {
+					t.Errorf("pointer(struct): got %v, want pointer to %+v", p, c.want)
+				}
+			default:
+				t.Fatalf("unsupported type: %T", v)
+			}
+		})
+	}
+}
+
+func TestUnwrap(t *testing.T) {
+	type foo struct{ X int }
+	i := 99
+	s := "world"
+	f := foo{X: 123}
+
+	cases := []struct {
+		name  string
+		input any
+		want  any
+	}{
+		{"*int", &i, i},
+		{"nil *int", (*int)(nil), 0},
+		{"*string", &s, s},
+		{"nil *string", (*string)(nil), ""},
+		{"*struct", &f, f},
+		{"nil *struct", (*foo)(nil), foo{}},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			switch v := c.input.(type) {
+			case *int:
+				got := unwrap(v)
+				if got != c.want.(int) {
+					t.Errorf("unwrap(*int): got %v, want %v", got, c.want)
+				}
+			case *string:
+				got := unwrap(v)
+				if got != c.want.(string) {
+					t.Errorf("unwrap(*string): got %v, want %v", got, c.want)
+				}
+			case *foo:
+				got := unwrap(v)
+				if got != c.want.(foo) {
+					t.Errorf("unwrap(*struct): got %+v, want %+v", got, c.want)
+				}
+			default:
+				t.Fatalf("unsupported type: %T", v)
+			}
+		})
+	}
+}
