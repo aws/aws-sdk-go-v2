@@ -565,13 +565,13 @@ func TestUploadOrderMultiFailureLeaveParts(t *testing.T) {
 }
 
 type failreader struct {
-	times     int
-	failCount int
+	failBytes int64
+	readBytes int64
 }
 
 func (f *failreader) Read(b []byte) (int, error) {
-	f.failCount++
-	if f.failCount >= f.times {
+	f.readBytes += int64(len(b))
+	if f.readBytes > f.failBytes {
 		return 0, fmt.Errorf("random failure")
 	}
 	return len(b), nil
@@ -583,7 +583,7 @@ func TestUploadOrderReadFail1(t *testing.T) {
 	_, err := mgr.Upload(context.Background(), &s3.PutObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   &failreader{times: 1},
+		Body:   &failreader{failBytes: 1},
 	})
 	if err == nil {
 		t.Fatalf("expect error to not be nil")
@@ -606,7 +606,7 @@ func TestUploadOrderReadFail2(t *testing.T) {
 	_, err := mgr.Upload(context.Background(), &s3.PutObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   &failreader{times: 2},
+		Body:   &failreader{failBytes: 5 * 1024 * 1024},
 	})
 	if err == nil {
 		t.Fatalf("expect error to not be nil")
