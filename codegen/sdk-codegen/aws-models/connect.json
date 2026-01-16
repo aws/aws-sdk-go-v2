@@ -10818,6 +10818,12 @@
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
+                "ReviewConfiguration": {
+                    "target": "com.amazonaws.connect#EvaluationReviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information about evaluation reviews.</p>"
+                    }
+                },
                 "TargetConfiguration": {
                     "target": "com.amazonaws.connect#EvaluationFormTargetConfiguration",
                     "traits": {
@@ -22388,6 +22394,12 @@
                         "smithy.api#documentation": "<p>The automatic evaluation configuration of an evaluation form.</p>"
                     }
                 },
+                "ReviewConfiguration": {
+                    "target": "com.amazonaws.connect#EvaluationReviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for evaluation review settings of this evaluation form.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
@@ -22494,6 +22506,12 @@
                     "target": "com.amazonaws.connect#EvaluationFormLanguageConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for language settings of this evaluation form content.</p>"
+                    }
+                },
+                "ReviewConfiguration": {
+                    "target": "com.amazonaws.connect#EvaluationReviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for evaluation review settings of this evaluation form content.</p>"
                     }
                 }
             },
@@ -23974,6 +23992,12 @@
                         "smithy.api#documentation": "<p>Information related to evaluation acknowledgement.</p>"
                     }
                 },
+                "Review": {
+                    "target": "com.amazonaws.connect#EvaluationReviewMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about reviews of this evaluation.</p>"
+                    }
+                },
                 "ContactParticipant": {
                     "target": "com.amazonaws.connect#EvaluationContactParticipant",
                     "traits": {
@@ -24078,6 +24102,168 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details of the input data used for automated question processing.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationReviewConfiguration": {
+            "type": "structure",
+            "members": {
+                "ReviewNotificationRecipients": {
+                    "target": "com.amazonaws.connect#EvaluationReviewNotificationRecipientList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of recipients who should be notified when a review is requested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EligibilityDays": {
+                    "target": "com.amazonaws.connect#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Number of days during which a request for review can be submitted for evaluations created from this form.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for evaluation reviews.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationReviewMetadata": {
+            "type": "structure",
+            "members": {
+                "ReviewId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the evaluation review.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the evaluation review was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the evaluation review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReviewRequestComments": {
+                    "target": "com.amazonaws.connect#EvaluationReviewRequestCommentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Comments provided when requesting the evaluation review.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about an evaluation review.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationReviewNotificationRecipient": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.connect#EvaluationReviewNotificationRecipientType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of notification recipient.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#EvaluationReviewNotificationRecipientValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value associated with the notification recipient type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a recipient who should be notified when an evaluation review is requested.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationReviewNotificationRecipientList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationReviewNotificationRecipient"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationReviewNotificationRecipientType": {
+            "type": "enum",
+            "members": {
+                "USER_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_ID"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationReviewNotificationRecipientValue": {
+            "type": "structure",
+            "members": {
+                "UserId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user identifier for the notification recipient.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value information for an evaluation review notification recipient.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationReviewRequestComment": {
+            "type": "structure",
+            "members": {
+                "Comment": {
+                    "target": "com.amazonaws.connect#EvaluationReviewRequestCommentContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text content of the review request comment.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the review request comment was created.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the review request comment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A comment provided when requesting an evaluation review.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationReviewRequestCommentContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationReviewRequestCommentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationReviewRequestComment"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.connect#EvaluationScore": {
@@ -24412,6 +24598,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SUBMITTED"
+                    }
+                },
+                "REVIEW_REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEW_REQUESTED"
+                    }
+                },
+                "UNDER_REVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNDER_REVIEW"
                     }
                 }
             }
@@ -53947,6 +54145,12 @@
                     "target": "com.amazonaws.connect#EvaluationFormAutoEvaluationConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether automated evaluations are enabled.</p>"
+                    }
+                },
+                "ReviewConfiguration": {
+                    "target": "com.amazonaws.connect#EvaluationReviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for evaluation review settings of the evaluation form.</p>"
                     }
                 },
                 "AsDraft": {
