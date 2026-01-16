@@ -156,7 +156,7 @@ func TestUploadOrderMultiTriggerredBySinglePartSize(t *testing.T) {
 	}
 
 	if matched, err := regexp.MatchString(`^ETAG\d+$`, etag); !matched || err != nil {
-		t.Errorf("Failed regexp expression `^ETAG\\d+$`")
+		t.Errorf("Failed regexp expression `^ETAG\\d+$`, got %s", etag)
 	}
 
 	// Custom headers
@@ -621,7 +621,7 @@ func TestUploadOrderMultiBufferedReaderJustExceedSinglePart(t *testing.T) {
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   &sizedReader{size: 1024*1024*8 + 1},
+		Body:   &sizedReader{size: minPartSizeBytes + 1},
 	})
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
