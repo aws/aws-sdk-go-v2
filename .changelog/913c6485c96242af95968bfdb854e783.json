@@ -1,8 +1,0 @@
-{
-    "id": "913c6485-c962-42af-9596-8bfdb854e783",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon Glacier's maintenance mode",
-    "modules": [
-        "service/glacier"
-    ]
-}

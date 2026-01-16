@@ -1,3 +1,7 @@
+# v1.230.1 (2026-01-16)
+
+* **Documentation**: Adding security consideration comments for lcc accessing execution role under root access
+
 # v1.230.0 (2026-01-12)
 
 * **Feature**: Added ultraServerType to the UltraServerInfo structure to support server type identification for SageMaker HyperPod

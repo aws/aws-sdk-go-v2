@@ -1,8 +1,0 @@
-{
-    "id": "84d50c82-111a-4251-a6bb-9fd903e732af",
-    "type": "feature",
-    "description": "This release adds support for numeric filtering and complex free-text searches cases for the Search and SearchListings APIs.",
-    "modules": [
-        "service/datazone"
-    ]
-}

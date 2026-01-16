@@ -1,3 +1,19 @@
+# Release (2026-01-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.156.0](service/connect/CHANGELOG.md#v11560-2026-01-16)
+  * **Feature**: Adds support to allow customers to create form with Dispute configuration
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.51.0](service/datazone/CHANGELOG.md#v1510-2026-01-16)
+  * **Feature**: This release adds support for numeric filtering and complex free-text searches cases for the Search and SearchListings APIs.
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.32.2](service/glacier/CHANGELOG.md#v1322-2026-01-16)
+  * **Documentation**: Documentation updates for Amazon Glacier's maintenance mode
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.14.0](service/launchwizard/CHANGELOG.md#v1140-2026-01-16)
+  * **Feature**: Added UpdateDeployment, ListDeploymentPatternVersions and GetDeploymentPatternVersion APIs for Launch Wizard
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.23.0](service/resourceexplorer2/CHANGELOG.md#v1230-2026-01-16)
+  * **Feature**: Added ViewName to View-related responses and ServiceViewName to GetServiceView response.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.230.1](service/sagemaker/CHANGELOG.md#v12301-2026-01-16)
+  * **Documentation**: Adding security consideration comments for lcc accessing execution role under root access
+
 # Release (2026-01-15)
 
 ## Module Highlights

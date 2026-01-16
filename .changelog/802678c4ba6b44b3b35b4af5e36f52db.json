@@ -1,8 +1,0 @@
-{
-    "id": "802678c4-ba6b-44b3-b35b-4af5e36f52db",
-    "type": "feature",
-    "description": "Added UpdateDeployment, ListDeploymentPatternVersions and GetDeploymentPatternVersion APIs for Launch Wizard",
-    "modules": [
-        "service/launchwizard"
-    ]
-}

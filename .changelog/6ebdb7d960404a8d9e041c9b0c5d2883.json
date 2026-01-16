@@ -1,8 +1,0 @@
-{
-    "id": "6ebdb7d9-6040-4a8d-9e04-1c9b0c5d2883",
-    "type": "feature",
-    "description": "Added ViewName to View-related responses and ServiceViewName to GetServiceView response.",
-    "modules": [
-        "service/resourceexplorer2"
-    ]
-}

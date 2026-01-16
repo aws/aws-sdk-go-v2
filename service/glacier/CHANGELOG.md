@@ -1,3 +1,7 @@
+# v1.32.2 (2026-01-16)
+
+* **Documentation**: Documentation updates for Amazon Glacier's maintenance mode
+
 # v1.32.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

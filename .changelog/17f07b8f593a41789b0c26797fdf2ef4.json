@@ -1,8 +1,0 @@
-{
-    "id": "17f07b8f-593a-4178-9b0c-26797fdf2ef4",
-    "type": "feature",
-    "description": "Adds support to allow customers to create form with Dispute configuration",
-    "modules": [
-        "service/connect"
-    ]
-}

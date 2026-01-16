@@ -1,3 +1,7 @@
+# v1.14.0 (2026-01-16)
+
+* **Feature**: Added UpdateDeployment, ListDeploymentPatternVersions and GetDeploymentPatternVersion APIs for Launch Wizard
+
 # v1.13.17 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

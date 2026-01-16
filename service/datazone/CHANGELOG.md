@@ -1,3 +1,7 @@
+# v1.51.0 (2026-01-16)
+
+* **Feature**: This release adds support for numeric filtering and complex free-text searches cases for the Search and SearchListings APIs.
+
 # v1.50.0 (2026-01-13)
 
 * **Feature**: Adds support for IAM role subscriptions to Glue table listings via CreateSubscriptionRequest API. Also adds owningIamPrincipalArn filter to List APIs and subscriptionGrantCreationMode parameter to subscription target APIs for controlling grant creation behavior.
