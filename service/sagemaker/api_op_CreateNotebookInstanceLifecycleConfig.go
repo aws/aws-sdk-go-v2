@@ -30,6 +30,11 @@ import (
 //
 // For information about notebook instance lifestyle configurations, see [Step 2.1: (Optional) Customize a Notebook Instance].
 //
+// Lifecycle configuration scripts execute with root access and the notebook
+// instance's IAM execution role privileges. Grant this permission only to trusted
+// principals. See [Customize a Notebook Instance Using a Lifecycle Configuration Script]for security best practices.
+//
+// [Customize a Notebook Instance Using a Lifecycle Configuration Script]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
 // [Step 2.1: (Optional) Customize a Notebook Instance]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
 func (c *Client) CreateNotebookInstanceLifecycleConfig(ctx context.Context, params *CreateNotebookInstanceLifecycleConfigInput, optFns ...func(*Options)) (*CreateNotebookInstanceLifecycleConfigOutput, error) {
 	if params == nil {

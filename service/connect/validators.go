@@ -9433,6 +9433,60 @@ func validateEvaluationFormTextQuestionProperties(v *types.EvaluationFormTextQue
 	}
 }
 
+func validateEvaluationReviewConfiguration(v *types.EvaluationReviewConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationReviewConfiguration"}
+	if v.ReviewNotificationRecipients == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReviewNotificationRecipients"))
+	} else if v.ReviewNotificationRecipients != nil {
+		if err := validateEvaluationReviewNotificationRecipientList(v.ReviewNotificationRecipients); err != nil {
+			invalidParams.AddNested("ReviewNotificationRecipients", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationReviewNotificationRecipient(v *types.EvaluationReviewNotificationRecipient) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationReviewNotificationRecipient"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationReviewNotificationRecipientList(v []types.EvaluationReviewNotificationRecipient) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationReviewNotificationRecipientList"}
+	for i := range v {
+		if err := validateEvaluationReviewNotificationRecipient(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEventBridgeActionDefinition(v *types.EventBridgeActionDefinition) error {
 	if v == nil {
 		return nil
@@ -12130,6 +12184,11 @@ func validateOpCreateEvaluationFormInput(v *CreateEvaluationFormInput) error {
 	if v.AutoEvaluationConfiguration != nil {
 		if err := validateEvaluationFormAutoEvaluationConfiguration(v.AutoEvaluationConfiguration); err != nil {
 			invalidParams.AddNested("AutoEvaluationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReviewConfiguration != nil {
+		if err := validateEvaluationReviewConfiguration(v.ReviewConfiguration); err != nil {
+			invalidParams.AddNested("ReviewConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.TargetConfiguration != nil {
@@ -17192,6 +17251,11 @@ func validateOpUpdateEvaluationFormInput(v *UpdateEvaluationFormInput) error {
 	if v.AutoEvaluationConfiguration != nil {
 		if err := validateEvaluationFormAutoEvaluationConfiguration(v.AutoEvaluationConfiguration); err != nil {
 			invalidParams.AddNested("AutoEvaluationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReviewConfiguration != nil {
+		if err := validateEvaluationReviewConfiguration(v.ReviewConfiguration); err != nil {
+			invalidParams.AddNested("ReviewConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.TargetConfiguration != nil {

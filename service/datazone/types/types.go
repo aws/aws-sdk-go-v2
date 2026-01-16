@@ -2596,9 +2596,13 @@ type Filter struct {
 	// This member is required.
 	Attribute *string
 
-	// A search filter value in Amazon DataZone.
-	//
-	// This member is required.
+	// A search filter integer value in Amazon DataZone.
+	IntValue *int64
+
+	// Specifies the search filter operator.
+	Operator FilterOperator
+
+	// A search filter string value in Amazon DataZone.
 	Value *string
 
 	noSmithyDocumentSerde

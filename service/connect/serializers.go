@@ -4550,6 +4550,13 @@ func awsRestjson1_serializeOpDocumentCreateEvaluationFormInput(v *CreateEvaluati
 		}
 	}
 
+	if v.ReviewConfiguration != nil {
+		ok := object.Key("ReviewConfiguration")
+		if err := awsRestjson1_serializeDocumentEvaluationReviewConfiguration(v.ReviewConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ScoringStrategy != nil {
 		ok := object.Key("ScoringStrategy")
 		if err := awsRestjson1_serializeDocumentEvaluationFormScoringStrategy(v.ScoringStrategy, ok); err != nil {
@@ -29772,6 +29779,13 @@ func awsRestjson1_serializeOpDocumentUpdateEvaluationFormInput(v *UpdateEvaluati
 		}
 	}
 
+	if v.ReviewConfiguration != nil {
+		ok := object.Key("ReviewConfiguration")
+		if err := awsRestjson1_serializeDocumentEvaluationReviewConfiguration(v.ReviewConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ScoringStrategy != nil {
 		ok := object.Key("ScoringStrategy")
 		if err := awsRestjson1_serializeDocumentEvaluationFormScoringStrategy(v.ScoringStrategy, ok); err != nil {
@@ -37204,6 +37218,69 @@ func awsRestjson1_serializeDocumentEvaluationNotesMap(v map[string]types.Evaluat
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationReviewConfiguration(v *types.EvaluationReviewConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EligibilityDays != 0 {
+		ok := object.Key("EligibilityDays")
+		ok.Integer(v.EligibilityDays)
+	}
+
+	if v.ReviewNotificationRecipients != nil {
+		ok := object.Key("ReviewNotificationRecipients")
+		if err := awsRestjson1_serializeDocumentEvaluationReviewNotificationRecipientList(v.ReviewNotificationRecipients, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationReviewNotificationRecipient(v *types.EvaluationReviewNotificationRecipient, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		if err := awsRestjson1_serializeDocumentEvaluationReviewNotificationRecipientValue(v.Value, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationReviewNotificationRecipientList(v []types.EvaluationReviewNotificationRecipient, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEvaluationReviewNotificationRecipient(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationReviewNotificationRecipientValue(v *types.EvaluationReviewNotificationRecipientValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UserId != nil {
+		ok := object.Key("UserId")
+		ok.String(*v.UserId)
+	}
+
 	return nil
 }
 

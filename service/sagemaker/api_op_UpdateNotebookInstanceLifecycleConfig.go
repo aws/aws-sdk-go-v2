@@ -13,6 +13,13 @@ import (
 
 // Updates a notebook instance lifecycle configuration created with the [CreateNotebookInstanceLifecycleConfig] API.
 //
+// Updates to lifecycle configurations affect all notebook instances using that
+// configuration upon their next start. Lifecycle configuration scripts execute
+// with root access and the notebook instance's IAM execution role privileges.
+// Grant this permission only to trusted principals. See [Customize a Notebook Instance Using a Lifecycle Configuration Script]for security best
+// practices.
+//
+// [Customize a Notebook Instance Using a Lifecycle Configuration Script]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
 // [CreateNotebookInstanceLifecycleConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateNotebookInstanceLifecycleConfig.html
 func (c *Client) UpdateNotebookInstanceLifecycleConfig(ctx context.Context, params *UpdateNotebookInstanceLifecycleConfigInput, optFns ...func(*Options)) (*UpdateNotebookInstanceLifecycleConfigOutput, error) {
 	if params == nil {

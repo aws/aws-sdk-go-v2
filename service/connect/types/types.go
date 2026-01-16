@@ -3439,6 +3439,9 @@ type EvaluationForm struct {
 	// Configuration for language settings of this evaluation form.
 	LanguageConfiguration *EvaluationFormLanguageConfiguration
 
+	// Configuration for evaluation review settings of this evaluation form.
+	ReviewConfiguration *EvaluationReviewConfiguration
+
 	// A scoring strategy of the evaluation form.
 	ScoringStrategy *EvaluationFormScoringStrategy
 
@@ -3500,6 +3503,9 @@ type EvaluationFormContent struct {
 
 	// Configuration for language settings of this evaluation form content.
 	LanguageConfiguration *EvaluationFormLanguageConfiguration
+
+	// Configuration for evaluation review settings of this evaluation form content.
+	ReviewConfiguration *EvaluationReviewConfiguration
 
 	// A scoring strategy of the evaluation form.
 	ScoringStrategy *EvaluationFormScoringStrategy
@@ -4328,6 +4334,9 @@ type EvaluationMetadata struct {
 	// Information about a contact participant in this evaluation.
 	ContactParticipant *EvaluationContactParticipant
 
+	// Information about reviews of this evaluation.
+	Review *EvaluationReviewMetadata
+
 	// Identifier of the sampling job.
 	SamplingJobId *string
 
@@ -4386,6 +4395,86 @@ type EvaluationQuestionInputDetails struct {
 
 	// Transcript type.
 	TranscriptType EvaluationTranscriptType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for evaluation reviews.
+type EvaluationReviewConfiguration struct {
+
+	// List of recipients who should be notified when a review is requested.
+	//
+	// This member is required.
+	ReviewNotificationRecipients []EvaluationReviewNotificationRecipient
+
+	// Number of days during which a request for review can be submitted for
+	// evaluations created from this form.
+	EligibilityDays int32
+
+	noSmithyDocumentSerde
+}
+
+// Metadata information about an evaluation review.
+type EvaluationReviewMetadata struct {
+
+	// The user who created the evaluation review.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The timestamp when the evaluation review was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// Comments provided when requesting the evaluation review.
+	//
+	// This member is required.
+	ReviewRequestComments []EvaluationReviewRequestComment
+
+	// The unique identifier for the evaluation review.
+	ReviewId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a recipient who should be notified when an evaluation review
+// is requested.
+type EvaluationReviewNotificationRecipient struct {
+
+	// The type of notification recipient.
+	//
+	// This member is required.
+	Type EvaluationReviewNotificationRecipientType
+
+	// The value associated with the notification recipient type.
+	//
+	// This member is required.
+	Value *EvaluationReviewNotificationRecipientValue
+
+	noSmithyDocumentSerde
+}
+
+// The value information for an evaluation review notification recipient.
+type EvaluationReviewNotificationRecipientValue struct {
+
+	// The user identifier for the notification recipient.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// A comment provided when requesting an evaluation review.
+type EvaluationReviewRequestComment struct {
+
+	// The text content of the review request comment.
+	Comment *string
+
+	// The user who created the review request comment.
+	CreatedBy *string
+
+	// The timestamp when the review request comment was created.
+	CreatedTime *time.Time
 
 	noSmithyDocumentSerde
 }

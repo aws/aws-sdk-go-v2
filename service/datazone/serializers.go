@@ -19245,6 +19245,16 @@ func awsRestjson1_serializeDocumentFilter(v *types.Filter, value smithyjson.Valu
 		ok.String(*v.Attribute)
 	}
 
+	if v.IntValue != nil {
+		ok := object.Key("intValue")
+		ok.Long(*v.IntValue)
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("operator")
+		ok.String(string(v.Operator))
+	}
+
 	if v.Value != nil {
 		ok := object.Key("value")
 		ok.String(*v.Value)

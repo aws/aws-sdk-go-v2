@@ -1,0 +1,8 @@
+{
+    "id": "b899aad4-4ae0-48da-8e0b-5ec5a5fa78b8",
+    "type": "documentation",
+    "description": "Adding security consideration comments for lcc accessing execution role under root access",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

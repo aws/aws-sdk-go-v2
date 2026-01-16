@@ -39,6 +39,9 @@ type DeploymentData struct {
 	// The ID of the deployment.
 	Id *string
 
+	// The time the deployment was last modified.
+	ModifiedAt *time.Time
+
 	// The name of the deployment.
 	Name *string
 
@@ -78,6 +81,9 @@ type DeploymentDataSummary struct {
 
 	// The ID of the deployment.
 	Id *string
+
+	// The time the deployment was last modified.
+	ModifiedAt *time.Time
 
 	// The name of the deployment
 	Name *string
@@ -131,6 +137,46 @@ type DeploymentFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a deployment pattern version summary.
+type DeploymentPatternVersionDataSummary struct {
+
+	// The name of the deployment pattern.
+	DeploymentPatternName *string
+
+	// The name of the deployment pattern version.
+	DeploymentPatternVersionName *string
+
+	// The description of the deployment pattern version.
+	Description *string
+
+	// The URL of the documentation for the deployment pattern version.
+	DocumentationUrl *string
+
+	// The name of the workload.
+	WorkloadName *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter for deployment pattern versions. Use this filter to specify criteria
+// for querying deployment pattern versions in Launch Wizard.
+type DeploymentPatternVersionFilter struct {
+
+	// The name of the filter attribute. Specifies which attribute to filter on when
+	// querying deployment pattern versions.
+	//
+	// This member is required.
+	Name DeploymentPatternVersionFilterKey
+
+	// The values to filter by. Contains the specific values to match against when
+	// filtering deployment pattern versions.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // A field that details a specification of a deployment pattern.
 type DeploymentSpecificationsField struct {
 
@@ -168,6 +214,8 @@ type WorkloadData struct {
 	IconUrl *string
 
 	// The status of a workload.
+	//
+	// You can list deployments in the DISABLED status.
 	Status WorkloadStatus
 
 	// The message about a workload's status.
@@ -185,6 +233,9 @@ type WorkloadDataSummary struct {
 	// The display name of the workload data.
 	DisplayName *string
 
+	// The status of the workload.
+	Status WorkloadStatus
+
 	// The name of the workload.
 	WorkloadName *string
 
@@ -196,6 +247,9 @@ type WorkloadDeploymentPatternData struct {
 
 	// The name of the deployment pattern.
 	DeploymentPatternName *string
+
+	// The version name of the deployment pattern.
+	DeploymentPatternVersionName *string
 
 	// The description of the deployment pattern.
 	Description *string
@@ -233,6 +287,9 @@ type WorkloadDeploymentPatternDataSummary struct {
 
 	// The name of a workload deployment pattern.
 	DeploymentPatternName *string
+
+	// The version name of a workload deployment pattern.
+	DeploymentPatternVersionName *string
 
 	// The description of a workload deployment pattern.
 	Description *string

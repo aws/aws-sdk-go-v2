@@ -350,6 +350,9 @@ type ServiceView struct {
 	// included.
 	ScopeType *string
 
+	// The name of the service view.
+	ServiceViewName *string
+
 	// The Amazon Web Services service that has streaming access to this view's data.
 	StreamingAccessForService *string
 
@@ -444,6 +447,9 @@ type View struct {
 	//
 	// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ViewArn *string
+
+	// The name of the view.
+	ViewName *string
 
 	noSmithyDocumentSerde
 }
