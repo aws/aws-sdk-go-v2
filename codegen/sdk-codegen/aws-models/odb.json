@@ -148,7 +148,7 @@
                     "target": "com.amazonaws.odb#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource to associate with the Amazon Web Services Identity and Access Management (IAM) service role.</p>",
-                        "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-[a-z]?|aws-iso):odb:[a-z0-9-]+:\\d{12}:cloud-vm-cluster/[a-z0-9-_]+$",
+                        "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-[a-z]?|aws-iso):odb:[a-z0-9-]+:\\d{12}:(?:cloud-vm-cluster|cloud-autonomous-vm-cluster)/[a-z0-9-_]+$",
                         "smithy.api#required": {}
                     }
                 }
@@ -160,6 +160,12 @@
                         "resource": "com.amazonaws.odb#CloudVmClusterResource",
                         "ids": {
                             "cloudVmClusterId": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.odb#CloudAutonomousVmClusterResource",
+                        "ids": {
+                            "cloudAutonomousVmClusterId": "resourceArn"
                         }
                     }
                 ]
@@ -576,6 +582,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of Autonomous Container Databases that can be created with the allocated local storage.</p>"
                     }
+                },
+                "iamRoles": {
+                    "target": "com.amazonaws.odb#IamRoleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -958,6 +970,12 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of Autonomous Container Databases that can be created in the Autonomous VM cluster.</p>"
+                    }
+                },
+                "iamRoles": {
+                    "target": "com.amazonaws.odb#IamRoleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster in the summary information.</p>"
                     }
                 }
             },
@@ -4597,7 +4615,7 @@
                     "target": "com.amazonaws.odb#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource to disassociate from the Amazon Web Services Identity and Access Management (IAM) service role.</p>",
-                        "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-[a-z]?|aws-iso):odb:[a-z0-9-]+:\\d{12}:cloud-vm-cluster/[a-z0-9-_]+$",
+                        "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-[a-z]?|aws-iso):odb:[a-z0-9-]+:\\d{12}:(?:cloud-vm-cluster|cloud-autonomous-vm-cluster)/[a-z0-9-_]+$",
                         "smithy.api#required": {}
                     }
                 }
@@ -4609,6 +4627,12 @@
                         "resource": "com.amazonaws.odb#CloudVmClusterResource",
                         "ids": {
                             "cloudVmClusterId": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.odb#CloudAutonomousVmClusterResource",
+                        "ids": {
+                            "cloudAutonomousVmClusterId": "resourceArn"
                         }
                     }
                 ]
