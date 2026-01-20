@@ -5412,6 +5412,92 @@ func awsAwsjson10_deserializeDocumentDeterminingPolicyList(v *[]types.Determinin
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentEncryptionContext(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EncryptionContextValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentEncryptionState(v *types.EncryptionState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.EncryptionState
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "default":
+			var mv types.Unit
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentUnit(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.EncryptionStateMemberDefault{Value: mv}
+			break loop
+
+		case "kmsEncryptionState":
+			var mv types.KmsEncryptionState
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentKmsEncryptionState(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.EncryptionStateMemberKmsEncryptionState{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentEntityIdentifier(v **types.EntityIdentifier, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5858,6 +5944,51 @@ func awsAwsjson10_deserializeDocumentInvalidStateException(v **types.InvalidStat
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentKmsEncryptionState(v **types.KmsEncryptionState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KmsEncryptionState
+	if *v == nil {
+		sv = &types.KmsEncryptionState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "encryptionContext":
+			if err := awsAwsjson10_deserializeDocumentEncryptionContext(&sv.EncryptionContext, value); err != nil {
+				return err
+			}
+
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
 			}
 
 		default:
@@ -7667,6 +7798,37 @@ func awsAwsjson10_deserializeDocumentValidationSettings(v **types.ValidationSett
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentUnit(v **types.Unit, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Unit
+	if *v == nil {
+		sv = &types.Unit{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeOpDocumentBatchGetPolicyOutput(v **BatchGetPolicyOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8518,6 +8680,11 @@ func awsAwsjson10_deserializeOpDocumentGetPolicyStoreOutput(v **GetPolicyStoreOu
 					return fmt.Errorf("expected PolicyStoreDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "encryptionState":
+			if err := awsAwsjson10_deserializeDocumentEncryptionState(&sv.EncryptionState, value); err != nil {
+				return err
 			}
 
 		case "lastUpdatedDate":

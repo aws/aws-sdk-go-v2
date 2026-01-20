@@ -207,6 +207,16 @@ type CreateTableInput struct {
 	// [Expiring data by using Amazon Keyspaces Time to Live (TTL)]: https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html
 	Ttl *types.TimeToLive
 
+	// Specifies the warm throughput settings for the table. Pre-warming a table helps
+	// you avoid capacity exceeded exceptions by pre-provisioning read and write
+	// capacity units to reduce cold start latency when your table receives traffic.
+	//
+	// For more information about pre-warming in Amazon Keyspaces, see [Pre-warm a table in Amazon Keyspaces] in the Amazon
+	// Keyspaces Developer Guide.
+	//
+	// [Pre-warm a table in Amazon Keyspaces]: https://docs.aws.amazon.com/keyspaces/latest/devguide/warm-throughput.html
+	WarmThroughputSpecification *types.WarmThroughputSpecification
+
 	noSmithyDocumentSerde
 }
 

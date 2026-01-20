@@ -89,6 +89,9 @@ type GetPolicyStoreOutput struct {
 	// current policy store.
 	Description *string
 
+	// A structure that contains the encryption configuration for the policy store.
+	EncryptionState types.EncryptionState
+
 	// The list of tags associated with the policy store.
 	Tags map[string]string
 

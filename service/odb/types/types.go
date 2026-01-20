@@ -137,6 +137,10 @@ type CloudAutonomousVmCluster struct {
 	// The hostname for the Autonomous VM cluster.
 	Hostname *string
 
+	// The Amazon Web Services Identity and Access Management (IAM) service roles
+	// associated with the Autonomous VM cluster.
+	IamRoles []IamRole
+
 	// Indicates whether mutual TLS (mTLS) authentication is enabled for the
 	// Autonomous VM cluster.
 	IsMtlsEnabledVmCluster *bool
@@ -330,6 +334,10 @@ type CloudAutonomousVmClusterSummary struct {
 
 	// The host name for the Autonomous VM cluster.
 	Hostname *string
+
+	// The Amazon Web Services Identity and Access Management (IAM) service roles
+	// associated with the Autonomous VM cluster in the summary information.
+	IamRoles []IamRole
 
 	// Indicates if mutual TLS (mTLS) authentication is enabled for the Autonomous VM
 	// cluster.

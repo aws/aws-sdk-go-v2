@@ -809,6 +809,18 @@ func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentBillingConfiguration(v *types.BillingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BillingMode) > 0 {
+		ok := object.Key("BillingMode")
+		ok.String(string(v.BillingMode))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentBlockDeviceMappingRequest(v *types.BlockDeviceMappingRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1047,6 +1059,28 @@ func awsAwsjson10_serializeDocumentIamInstanceProfileSpecification(v *types.IamI
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentInstanceConfigurationFilter(v *types.InstanceConfigurationFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BillingMode) > 0 {
+		ok := object.Key("BillingMode")
+		ok.String(string(v.BillingMode))
+	}
+
+	if len(v.PlatformType) > 0 {
+		ok := object.Key("PlatformType")
+		ok.String(string(v.PlatformType))
+	}
+
+	if len(v.Tenancy) > 0 {
+		ok := object.Key("Tenancy")
+		ok.String(string(v.Tenancy))
 	}
 
 	return nil
@@ -1912,6 +1946,13 @@ func awsAwsjson10_serializeOpDocumentCreateWorkspaceInstanceInput(v *CreateWorks
 	object := value.Object()
 	defer object.Close()
 
+	if v.BillingConfiguration != nil {
+		ok := object.Key("BillingConfiguration")
+		if err := awsAwsjson10_serializeDocumentBillingConfiguration(v.BillingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -2000,6 +2041,13 @@ func awsAwsjson10_serializeOpDocumentGetWorkspaceInstanceInput(v *GetWorkspaceIn
 func awsAwsjson10_serializeOpDocumentListInstanceTypesInput(v *ListInstanceTypesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.InstanceConfigurationFilter != nil {
+		ok := object.Key("InstanceConfigurationFilter")
+		if err := awsAwsjson10_serializeDocumentInstanceConfigurationFilter(v.InstanceConfigurationFilter, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")

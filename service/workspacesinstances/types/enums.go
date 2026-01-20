@@ -61,6 +61,25 @@ func (BandwidthWeightingEnum) Values() []BandwidthWeightingEnum {
 	}
 }
 
+type BillingMode string
+
+// Enum values for BillingMode
+const (
+	BillingModeMonthly BillingMode = "MONTHLY"
+	BillingModeHourly  BillingMode = "HOURLY"
+)
+
+// Values returns all known values for BillingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingMode) Values() []BillingMode {
+	return []BillingMode{
+		"MONTHLY",
+		"HOURLY",
+	}
+}
+
 type CapacityReservationPreferenceEnum string
 
 // Enum values for CapacityReservationPreferenceEnum
@@ -197,6 +216,26 @@ func (HttpTokensEnum) Values() []HttpTokensEnum {
 	}
 }
 
+type InstanceConfigurationTenancyEnum string
+
+// Enum values for InstanceConfigurationTenancyEnum
+const (
+	InstanceConfigurationTenancyEnumShared    InstanceConfigurationTenancyEnum = "SHARED"
+	InstanceConfigurationTenancyEnumDedicated InstanceConfigurationTenancyEnum = "DEDICATED"
+)
+
+// Values returns all known values for InstanceConfigurationTenancyEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceConfigurationTenancyEnum) Values() []InstanceConfigurationTenancyEnum {
+	return []InstanceConfigurationTenancyEnum{
+		"SHARED",
+		"DEDICATED",
+	}
+}
+
 type InstanceInterruptionBehaviorEnum string
 
 // Enum values for InstanceInterruptionBehaviorEnum
@@ -273,6 +312,35 @@ func (MarketTypeEnum) Values() []MarketTypeEnum {
 	return []MarketTypeEnum{
 		"spot",
 		"capacity-block",
+	}
+}
+
+type PlatformTypeEnum string
+
+// Enum values for PlatformTypeEnum
+const (
+	PlatformTypeEnumWindows     PlatformTypeEnum = "Windows"
+	PlatformTypeEnumWindowsByol PlatformTypeEnum = "Windows BYOL"
+	PlatformTypeEnumLinuxUnix   PlatformTypeEnum = "Linux/UNIX"
+	PlatformTypeEnumUbuntuPro   PlatformTypeEnum = "Ubuntu Pro Linux"
+	PlatformTypeEnumRhel        PlatformTypeEnum = "Red Hat Enterprise Linux"
+	PlatformTypeEnumLinuxByol   PlatformTypeEnum = "Red Hat BYOL Linux"
+	PlatformTypeEnumSuse        PlatformTypeEnum = "SUSE Linux"
+)
+
+// Values returns all known values for PlatformTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PlatformTypeEnum) Values() []PlatformTypeEnum {
+	return []PlatformTypeEnum{
+		"Windows",
+		"Windows BYOL",
+		"Linux/UNIX",
+		"Ubuntu Pro Linux",
+		"Red Hat Enterprise Linux",
+		"Red Hat BYOL Linux",
+		"SUSE Linux",
 	}
 }
 

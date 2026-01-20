@@ -196,10 +196,14 @@ type CreateAutoScalingGroupInput struct {
 	//  The instance lifecycle policy for the Auto Scaling group. This policy controls
 	// instance behavior when an instance transitions through its lifecycle states.
 	// Configure retention triggers to specify when instances should move to a Retained
-	// state for manual intervention instead of automatic termination.
+	// state instead of automatic termination.
+	//
+	// For more information, see [Control instance retention with instance lifecycle policies] in the Amazon EC2 Auto Scaling User Guide.
 	//
 	// Instances in a Retained state will continue to incur standard EC2 charges until
 	// terminated.
+	//
+	// [Control instance retention with instance lifecycle policies]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html
 	InstanceLifecyclePolicy *types.InstanceLifecyclePolicy
 
 	// An instance maintenance policy. For more information, see [Set instance maintenance policy] in the Amazon EC2

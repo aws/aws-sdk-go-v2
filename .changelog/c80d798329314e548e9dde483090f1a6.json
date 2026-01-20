@@ -1,0 +1,8 @@
+{
+    "id": "c80d7983-2931-4e54-8e9d-de483090f1a6",
+    "type": "feature",
+    "description": "Amazon Verified Permissions now supports encryption of resources by a customer managed KMS key. Customers can now create new encrypted policy stores by passing in their customer managed key during policy store creation.",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

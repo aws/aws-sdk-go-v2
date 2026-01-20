@@ -148,6 +148,10 @@ type UpdateTableInput struct {
 	// [Expiring data by using Amazon Keyspaces Time to Live (TTL)]: https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html
 	Ttl *types.TimeToLive
 
+	// Modifies the warm throughput settings for the table. You can update the read
+	// and write capacity units to adjust the pre-provisioned throughput.
+	WarmThroughputSpecification *types.WarmThroughputSpecification
+
 	noSmithyDocumentSerde
 }
 

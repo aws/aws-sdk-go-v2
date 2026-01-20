@@ -42,16 +42,40 @@ func (c *Client) DescribeScalingActivities(ctx context.Context, params *Describe
 
 type DescribeScalingActivitiesInput struct {
 
-	// The activity IDs of the desired scaling activities. If you omit this property,
-	// all activities for the past six weeks are described. If unknown activities are
-	// requested, they are ignored with no error. If you specify an Auto Scaling group,
-	// the results are limited to that group.
+	//  The activity IDs of the desired scaling activities. If unknown activity IDs
+	// are requested, they are ignored with no error. Only activities started within
+	// the last six weeks can be returned regardless of the activity IDs specified. If
+	// other filters are specified with the request, only results matching all filter
+	// criteria can be returned.
 	//
 	// Array Members: Maximum number of 50 IDs.
 	ActivityIds []string
 
 	// The name of the Auto Scaling group.
+	//
+	// Omitting this property performs an account-wide operation, which can result in
+	// slower or timed-out requests.
 	AutoScalingGroupName *string
+
+	//  One or more filters to limit the results based on specific criteria. The
+	// following filters are supported:
+	//
+	//   - StartTimeLowerBound - The earliest scaling activities to return based on the
+	//   activity start time. Scaling activities with a start time earlier than this
+	//   value are not included in the results. Only activities started within the last
+	//   six weeks can be returned regardless of the value specified.
+	//
+	//   - StartTimeUpperBound - The latest scaling activities to return based on the
+	//   activity start time. Scaling activities with a start time later than this value
+	//   are not included in the results. Only activities started within the last six
+	//   weeks can be returned regardless of the value specified.
+	//
+	//   - Status - The StatusCode value of the scaling activity. This filter can only
+	//   be used in combination with the AutoScalingGroupName parameter. For valid
+	//   StatusCode values, see [Activity]in the Amazon EC2 Auto Scaling API Reference.
+	//
+	// [Activity]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html
+	Filters []types.Filter
 
 	// Indicates whether to include scaling activity from deleted Auto Scaling groups.
 	IncludeDeletedGroups *bool

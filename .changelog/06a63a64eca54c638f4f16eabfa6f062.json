@@ -1,0 +1,8 @@
+{
+    "id": "06a63a64-eca5-4c63-8f4f-16eabfa6f062",
+    "type": "feature",
+    "description": "Added billing configuration support for WorkSpaces Instances with monthly and hourly billing modes, including new filtering capabilities for instance type searches.",
+    "modules": [
+        "service/workspacesinstances"
+    ]
+}

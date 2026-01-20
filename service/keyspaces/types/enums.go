@@ -270,3 +270,22 @@ func (ViewType) Values() []ViewType {
 		"NEW_AND_OLD_IMAGES",
 	}
 }
+
+type WarmThroughputStatus string
+
+// Enum values for WarmThroughputStatus
+const (
+	WarmThroughputStatusAvailable WarmThroughputStatus = "AVAILABLE"
+	WarmThroughputStatusUpdating  WarmThroughputStatus = "UPDATING"
+)
+
+// Values returns all known values for WarmThroughputStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WarmThroughputStatus) Values() []WarmThroughputStatus {
+	return []WarmThroughputStatus{
+		"AVAILABLE",
+		"UPDATING",
+	}
+}

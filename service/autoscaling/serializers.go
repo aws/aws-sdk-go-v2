@@ -7558,6 +7558,13 @@ func awsAwsquery_serializeOpDocumentDescribeScalingActivitiesInput(v *DescribeSc
 		objectKey.String(*v.AutoScalingGroupName)
 	}
 
+	if v.Filters != nil {
+		objectKey := object.Key("Filters")
+		if err := awsAwsquery_serializeDocumentFilters(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.IncludeDeletedGroups != nil {
 		objectKey := object.Key("IncludeDeletedGroups")
 		objectKey.Boolean(*v.IncludeDeletedGroups)

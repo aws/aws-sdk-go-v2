@@ -37,6 +37,11 @@ type CreateWorkspaceInstanceInput struct {
 	// This member is required.
 	ManagedInstance *types.ManagedInstanceRequest
 
+	// Optional billing configuration for the WorkSpace Instance. Allows customers to
+	// specify their preferred billing mode when creating a new instance. Defaults to
+	// hourly billing if not specified.
+	BillingConfiguration *types.BillingConfiguration
+
 	// Unique token to ensure idempotent instance creation, preventing duplicate
 	// workspace launches.
 	ClientToken *string

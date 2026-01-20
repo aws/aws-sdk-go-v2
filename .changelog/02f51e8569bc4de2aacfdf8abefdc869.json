@@ -1,0 +1,8 @@
+{
+    "id": "02f51e85-69bc-4de2-aacf-df8abefdc869",
+    "type": "feature",
+    "description": "Adds support for associating and disassociating IAM roles with Autonomous VM cluster resources through the AssociateIamRoleToResource and DisassociateIamRoleFromResource APIs. The GetCloudAutonomousVmCluster and ListCloudAutonomousVmClusters API responses now include the iamRoles field.",
+    "modules": [
+        "service/odb"
+    ]
+}

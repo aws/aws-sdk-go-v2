@@ -1,0 +1,8 @@
+{
+    "id": "00be94ce-215f-4fdb-a1d9-c3372a880acc",
+    "type": "feature",
+    "description": "Added support for extended prompt caching with one hour TTL.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

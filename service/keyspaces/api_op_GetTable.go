@@ -108,6 +108,10 @@ type GetTableOutput struct {
 	// The custom Time to Live settings of the specified table.
 	Ttl *types.TimeToLive
 
+	// The warm throughput settings for the table, including the current status and
+	// configured read and write capacity units.
+	WarmThroughputSpecification *types.WarmThroughputSpecificationSummary
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

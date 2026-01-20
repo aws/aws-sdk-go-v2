@@ -203,6 +203,50 @@ func ExampleContextDefinition_outputUsage() {
 var _ *string
 var _ map[string]types.AttributeValue
 
+func ExampleEncryptionSettings_outputUsage() {
+	var union types.EncryptionSettings
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EncryptionSettingsMemberDefault:
+		_ = v.Value // Value is types.Unit
+
+	case *types.EncryptionSettingsMemberKmsEncryptionSettings:
+		_ = v.Value // Value is types.KmsEncryptionSettings
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.Unit
+var _ *types.KmsEncryptionSettings
+
+func ExampleEncryptionState_outputUsage() {
+	var union types.EncryptionState
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EncryptionStateMemberDefault:
+		_ = v.Value // Value is types.Unit
+
+	case *types.EncryptionStateMemberKmsEncryptionState:
+		_ = v.Value // Value is types.KmsEncryptionState
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.KmsEncryptionState
+var _ *types.Unit
+
 func ExampleEntitiesDefinition_outputUsage() {
 	var union types.EntitiesDefinition
 	// type switches can be used to check the union value

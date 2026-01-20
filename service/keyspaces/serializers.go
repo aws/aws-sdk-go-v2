@@ -1668,6 +1668,23 @@ func awsAwsjson10_serializeDocumentTimeToLive(v *types.TimeToLive, value smithyj
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentWarmThroughputSpecification(v *types.WarmThroughputSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ReadUnitsPerSecond != nil {
+		ok := object.Key("readUnitsPerSecond")
+		ok.Long(*v.ReadUnitsPerSecond)
+	}
+
+	if v.WriteUnitsPerSecond != nil {
+		ok := object.Key("writeUnitsPerSecond")
+		ok.Long(*v.WriteUnitsPerSecond)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentCreateKeyspaceInput(v *CreateKeyspaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1786,6 +1803,13 @@ func awsAwsjson10_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 	if v.Ttl != nil {
 		ok := object.Key("ttl")
 		if err := awsAwsjson10_serializeDocumentTimeToLive(v.Ttl, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WarmThroughputSpecification != nil {
+		ok := object.Key("warmThroughputSpecification")
+		if err := awsAwsjson10_serializeDocumentWarmThroughputSpecification(v.WarmThroughputSpecification, ok); err != nil {
 			return err
 		}
 	}
@@ -2225,6 +2249,13 @@ func awsAwsjson10_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 	if v.Ttl != nil {
 		ok := object.Key("ttl")
 		if err := awsAwsjson10_serializeDocumentTimeToLive(v.Ttl, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WarmThroughputSpecification != nil {
+		ok := object.Key("warmThroughputSpecification")
+		if err := awsAwsjson10_serializeDocumentWarmThroughputSpecification(v.WarmThroughputSpecification, ok); err != nil {
 			return err
 		}
 	}

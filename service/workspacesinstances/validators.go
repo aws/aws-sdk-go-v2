@@ -5,6 +5,7 @@ package workspacesinstances
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -149,6 +150,26 @@ func (m *validateOpGetWorkspaceInstance) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInstanceTypes struct {
+}
+
+func (*validateOpListInstanceTypes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInstanceTypes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInstanceTypesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInstanceTypesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -237,6 +258,10 @@ func addOpGetWorkspaceInstanceValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetWorkspaceInstance{}, middleware.After)
 }
 
+func addOpListInstanceTypesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInstanceTypes{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -247,6 +272,42 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func validateBillingConfiguration(v *types.BillingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BillingConfiguration"}
+	if len(v.BillingMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BillingMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstanceConfigurationFilter(v *types.InstanceConfigurationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceConfigurationFilter"}
+	if len(v.BillingMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BillingMode"))
+	}
+	if len(v.PlatformType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PlatformType"))
+	}
+	if len(v.Tenancy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Tenancy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpAssociateVolumeInput(v *AssociateVolumeInput) error {
@@ -292,6 +353,11 @@ func validateOpCreateWorkspaceInstanceInput(v *CreateWorkspaceInstanceInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "CreateWorkspaceInstanceInput"}
 	if v.ManagedInstance == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManagedInstance"))
+	}
+	if v.BillingConfiguration != nil {
+		if err := validateBillingConfiguration(v.BillingConfiguration); err != nil {
+			invalidParams.AddNested("BillingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -355,6 +421,23 @@ func validateOpGetWorkspaceInstanceInput(v *GetWorkspaceInstanceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetWorkspaceInstanceInput"}
 	if v.WorkspaceInstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceInstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInstanceTypesInput(v *ListInstanceTypesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInstanceTypesInput"}
+	if v.InstanceConfigurationFilter != nil {
+		if err := validateInstanceConfigurationFilter(v.InstanceConfigurationFilter); err != nil {
+			invalidParams.AddNested("InstanceConfigurationFilter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

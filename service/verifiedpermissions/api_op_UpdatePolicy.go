@@ -65,6 +65,20 @@ func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, op
 
 type UpdatePolicyInput struct {
 
+	// Specifies the ID of the policy that you want to update. To find this value, you
+	// can use [ListPolicies].
+	//
+	// [ListPolicies]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html
+	//
+	// This member is required.
+	PolicyId *string
+
+	// Specifies the ID of the policy store that contains the policy that you want to
+	// update.
+	//
+	// This member is required.
+	PolicyStoreId *string
+
 	// Specifies the updated policy content that you want to replace on the specified
 	// policy. The content must be valid Cedar policy language text.
 	//
@@ -83,23 +97,7 @@ type UpdatePolicyInput struct {
 	//   - The principal referenced by the policy.
 	//
 	//   - The resource referenced by the policy.
-	//
-	// This member is required.
 	Definition types.UpdatePolicyDefinition
-
-	// Specifies the ID of the policy that you want to update. To find this value, you
-	// can use [ListPolicies].
-	//
-	// [ListPolicies]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html
-	//
-	// This member is required.
-	PolicyId *string
-
-	// Specifies the ID of the policy store that contains the policy that you want to
-	// update.
-	//
-	// This member is required.
-	PolicyStoreId *string
 
 	noSmithyDocumentSerde
 }

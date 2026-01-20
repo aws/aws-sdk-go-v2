@@ -1039,6 +1039,25 @@ func validateContextMap(v map[string]types.AttributeValue) error {
 	}
 }
 
+func validateEncryptionSettings(v types.EncryptionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncryptionSettings"}
+	switch uv := v.(type) {
+	case *types.EncryptionSettingsMemberKmsEncryptionSettings:
+		if err := validateKmsEncryptionSettings(&uv.Value); err != nil {
+			invalidParams.AddNested("[kmsEncryptionSettings]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEntitiesDefinition(v types.EntitiesDefinition) error {
 	if v == nil {
 		return nil
@@ -1172,6 +1191,21 @@ func validateEntityReference(v types.EntityReference) error {
 			invalidParams.AddNested("[identifier]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKmsEncryptionSettings(v *types.KmsEncryptionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KmsEncryptionSettings"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1636,6 +1670,11 @@ func validateOpCreatePolicyStoreInput(v *CreatePolicyStoreInput) error {
 			invalidParams.AddNested("ValidationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EncryptionSettings != nil {
+		if err := validateEncryptionSettings(v.EncryptionSettings); err != nil {
+			invalidParams.AddNested("EncryptionSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2044,9 +2083,7 @@ func validateOpUpdatePolicyInput(v *UpdatePolicyInput) error {
 	if v.PolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
 	}
-	if v.Definition == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
-	} else if v.Definition != nil {
+	if v.Definition != nil {
 		if err := validateUpdatePolicyDefinition(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
 		}
