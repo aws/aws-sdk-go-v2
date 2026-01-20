@@ -1,8 +1,0 @@
-{
-    "id": "df75934f-2562-4602-81b6-acdb649b54ea",
-    "type": "feature",
-    "description": "This release adds support for three new filters when describing scaling activities, StartTimeLowerBound, StartTimeUpperBound, and Status.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

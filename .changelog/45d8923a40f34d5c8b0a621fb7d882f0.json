@@ -1,8 +1,0 @@
-{
-    "id": "45d8923a-40f3-4d5c-8b0a-621fb7d882f0",
-    "type": "feature",
-    "description": "Adds support for managing table pre-warming in Amazon Keyspaces (for Apache Cassandra)",
-    "modules": [
-        "service/keyspaces"
-    ]
-}

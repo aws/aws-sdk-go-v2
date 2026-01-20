@@ -1,3 +1,21 @@
+# Release (2026-01-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.21.0](feature/s3/manager/CHANGELOG.md#v1210-2026-01-20)
+  * **Feature**: Optimize allocation for transfer manager v1 uploader so no extra memory is used in buffer pool for single upload.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.63.0](service/autoscaling/CHANGELOG.md#v1630-2026-01-20)
+  * **Feature**: This release adds support for three new filters when describing scaling activities, StartTimeLowerBound, StartTimeUpperBound, and Status.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.48.0](service/bedrockruntime/CHANGELOG.md#v1480-2026-01-20)
+  * **Feature**: Added support for extended prompt caching with one hour TTL.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.25.0](service/keyspaces/CHANGELOG.md#v1250-2026-01-20)
+  * **Feature**: Adds support for managing table pre-warming in Amazon Keyspaces (for Apache Cassandra)
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.8.0](service/odb/CHANGELOG.md#v180-2026-01-20)
+  * **Feature**: Adds support for associating and disassociating IAM roles with Autonomous VM cluster resources through the AssociateIamRoleToResource and DisassociateIamRoleFromResource APIs. The GetCloudAutonomousVmCluster and ListCloudAutonomousVmClusters API responses now include the iamRoles field.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.31.0](service/verifiedpermissions/CHANGELOG.md#v1310-2026-01-20)
+  * **Feature**: Amazon Verified Permissions now supports encryption of resources by a customer managed KMS key. Customers can now create new encrypted policy stores by passing in their customer managed key during policy store creation.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesinstances`: [v1.5.0](service/workspacesinstances/CHANGELOG.md#v150-2026-01-20)
+  * **Feature**: Added billing configuration support for WorkSpaces Instances with monthly and hourly billing modes, including new filtering capabilities for instance type searches.
+
 # Release (2026-01-16)
 
 ## Module Highlights

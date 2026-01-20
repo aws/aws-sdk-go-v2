@@ -1,3 +1,7 @@
+# v1.8.0 (2026-01-20)
+
+* **Feature**: Adds support for associating and disassociating IAM roles with Autonomous VM cluster resources through the AssociateIamRoleToResource and DisassociateIamRoleFromResource APIs. The GetCloudAutonomousVmCluster and ListCloudAutonomousVmClusters API responses now include the iamRoles field.
+
 # v1.7.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions
