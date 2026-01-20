@@ -1,0 +1,8 @@
+{
+    "id": "458251ad-35f0-459c-b2d4-5d165a1d9420",
+    "type": "feature",
+    "description": "Optimize allocation for transfer manager v1 uploader so no extra memory is used in buffer pool for single upload.",
+    "modules": [
+        "feature/s3/manager"
+    ]
+}
