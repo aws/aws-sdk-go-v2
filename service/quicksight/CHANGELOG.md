@@ -1,3 +1,7 @@
+# v1.101.0 (2026-01-21)
+
+* **Feature**: Added documentation and model for sheet layout groups - allows sheet elements to be grouped, Added documentation and the feature enables admins to have granular control over connectors under actions, Updated API documentation for PDF Export in Snapshot Export APIs
+
 # v1.100.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

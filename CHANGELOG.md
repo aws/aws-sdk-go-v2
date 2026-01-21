@@ -1,3 +1,15 @@
+# Release (2026-01-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.11.0](service/bedrockagentcore/CHANGELOG.md#v1110-2026-01-21)
+  * **Feature**: Supports custom browser extensions for AgentCore Browser and increased message payloads up to 100KB per message in an Event for AgentCore Memory
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.61.0](service/configservice/CHANGELOG.md#v1610-2026-01-21)
+  * **Feature**: AWS Config Conformance Packs now support tag-on-create through PutConformancePack API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.280.0](service/ec2/CHANGELOG.md#v12800-2026-01-21)
+  * **Feature**: Added support of multiple EBS cards. New EbsCardIndex parameter enables attaching volumes to specific EBS cards on supported instance types for improved storage performance.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.101.0](service/quicksight/CHANGELOG.md#v11010-2026-01-21)
+  * **Feature**: Added documentation and model for sheet layout groups - allows sheet elements to be grouped, Added documentation and the feature enables admins to have granular control over connectors under actions, Updated API documentation for PDF Export in Snapshot Export APIs
+
 # Release (2026-01-20)
 
 ## Module Highlights

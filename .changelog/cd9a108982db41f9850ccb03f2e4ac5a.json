@@ -1,8 +1,0 @@
-{
-    "id": "cd9a1089-82db-41f9-850c-cb03f2e4ac5a",
-    "type": "feature",
-    "description": "Added documentation and model for sheet layout groups - allows sheet elements to be grouped, Added documentation and the feature enables admins to have granular control over connectors under actions, Updated API documentation for PDF Export in Snapshot Export APIs",
-    "modules": [
-        "service/quicksight"
-    ]
-}
