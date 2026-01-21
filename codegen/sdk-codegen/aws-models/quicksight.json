@@ -7138,6 +7138,1038 @@
                         "smithy.api#documentation": "<p>The ability to perform actions in external services through Action connectors. Actions allow users to interact with third-party systems.</p>"
                     }
                 },
+                "GenericHTTPAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using REST API connection connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGenericHTTPAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update REST API connection actions.</p>"
+                    }
+                },
+                "ShareGenericHTTPAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share REST API connection actions.</p>"
+                    }
+                },
+                "UseGenericHTTPAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use REST API connection actions.</p>"
+                    }
+                },
+                "AsanaAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Asana connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateAsanaAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Asana actions.</p>"
+                    }
+                },
+                "ShareAsanaAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Asana actions.</p>"
+                    }
+                },
+                "UseAsanaAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Asana actions.</p>"
+                    }
+                },
+                "SlackAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Slack connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSlackAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Slack actions.</p>"
+                    }
+                },
+                "ShareSlackAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Slack actions.</p>"
+                    }
+                },
+                "UseSlackAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Slack actions.</p>"
+                    }
+                },
+                "ServiceNowAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using ServiceNow connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateServiceNowAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update ServiceNow actions.</p>"
+                    }
+                },
+                "ShareServiceNowAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share ServiceNow actions.</p>"
+                    }
+                },
+                "UseServiceNowAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use ServiceNow actions.</p>"
+                    }
+                },
+                "SalesforceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Salesforce connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSalesforceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Salesforce actions.</p>"
+                    }
+                },
+                "ShareSalesforceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Salesforce actions.</p>"
+                    }
+                },
+                "UseSalesforceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Salesforce actions.</p>"
+                    }
+                },
+                "MSExchangeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Microsoft Outlook connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateMSExchangeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Microsoft Outlook actions.</p>"
+                    }
+                },
+                "ShareMSExchangeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Microsoft Outlook actions.</p>"
+                    }
+                },
+                "UseMSExchangeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Microsoft Outlook actions.</p>"
+                    }
+                },
+                "PagerDutyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using PagerDuty Advance connectors.</p>"
+                    }
+                },
+                "CreateAndUpdatePagerDutyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update PagerDuty Advance actions.</p>"
+                    }
+                },
+                "SharePagerDutyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share PagerDuty Advance actions.</p>"
+                    }
+                },
+                "UsePagerDutyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use PagerDuty Advance actions.</p>"
+                    }
+                },
+                "JiraAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Jira connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateJiraAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Jira actions.</p>"
+                    }
+                },
+                "ShareJiraAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Jira actions.</p>"
+                    }
+                },
+                "UseJiraAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Jira actions.</p>"
+                    }
+                },
+                "ConfluenceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Atlassian Confluence Cloud connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateConfluenceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Atlassian Confluence Cloud actions.</p>"
+                    }
+                },
+                "ShareConfluenceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Atlassian Confluence Cloud actions.</p>"
+                    }
+                },
+                "UseConfluenceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Atlassian Confluence Cloud actions.</p>"
+                    }
+                },
+                "OneDriveAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Microsoft OneDrive connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateOneDriveAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Microsoft OneDrive actions.</p>"
+                    }
+                },
+                "ShareOneDriveAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Microsoft OneDrive actions.</p>"
+                    }
+                },
+                "UseOneDriveAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Microsoft OneDrive actions.</p>"
+                    }
+                },
+                "SharePointAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Microsoft SharePoint Online connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSharePointAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Microsoft SharePoint Online actions.</p>"
+                    }
+                },
+                "ShareSharePointAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Microsoft SharePoint Online actions.</p>"
+                    }
+                },
+                "UseSharePointAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Microsoft SharePoint Online actions.</p>"
+                    }
+                },
+                "MSTeamsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Microsoft Teams connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateMSTeamsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Microsoft Teams actions.</p>"
+                    }
+                },
+                "ShareMSTeamsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Microsoft Teams actions.</p>"
+                    }
+                },
+                "UseMSTeamsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Microsoft Teams actions.</p>"
+                    }
+                },
+                "GoogleCalendarAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Google Calendar connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGoogleCalendarAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Google Calendar actions.</p>"
+                    }
+                },
+                "ShareGoogleCalendarAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google Calendar actions.</p>"
+                    }
+                },
+                "UseGoogleCalendarAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Google Calendar actions.</p>"
+                    }
+                },
+                "ZendeskAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Zendesk connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateZendeskAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Zendesk actions.</p>"
+                    }
+                },
+                "ShareZendeskAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Zendesk actions.</p>"
+                    }
+                },
+                "UseZendeskAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Zendesk actions.</p>"
+                    }
+                },
+                "SmartsheetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Smartsheet connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSmartsheetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Smartsheet actions.</p>"
+                    }
+                },
+                "ShareSmartsheetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Smartsheet actions.</p>"
+                    }
+                },
+                "UseSmartsheetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Smartsheet actions.</p>"
+                    }
+                },
+                "SAPBusinessPartnerAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using SAP Business Partner connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSAPBusinessPartnerAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update SAP Business Partner actions.</p>"
+                    }
+                },
+                "ShareSAPBusinessPartnerAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share SAP Business Partner actions.</p>"
+                    }
+                },
+                "UseSAPBusinessPartnerAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use SAP Business Partner actions.</p>"
+                    }
+                },
+                "SAPProductMasterDataAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using SAP Product Master connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSAPProductMasterDataAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update SAP Product Master actions.</p>"
+                    }
+                },
+                "ShareSAPProductMasterDataAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share SAP Product Master actions.</p>"
+                    }
+                },
+                "UseSAPProductMasterDataAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use SAP Product Master actions.</p>"
+                    }
+                },
+                "SAPPhysicalInventoryAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using SAP Physical Inventory connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSAPPhysicalInventoryAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update SAP Physical Inventory actions.</p>"
+                    }
+                },
+                "ShareSAPPhysicalInventoryAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share SAP Physical Inventory actions.</p>"
+                    }
+                },
+                "UseSAPPhysicalInventoryAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use SAP Physical Inventory actions.</p>"
+                    }
+                },
+                "SAPBillOfMaterialAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using SAP Bill of Materials connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSAPBillOfMaterialAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update SAP Bill of Materials actions.</p>"
+                    }
+                },
+                "ShareSAPBillOfMaterialAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share SAP Bill of Materials actions.</p>"
+                    }
+                },
+                "UseSAPBillOfMaterialAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use SAP Bill of Materials actions.</p>"
+                    }
+                },
+                "SAPMaterialStockAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using SAP Material Stock connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSAPMaterialStockAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update SAP Material Stock actions.</p>"
+                    }
+                },
+                "ShareSAPMaterialStockAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share SAP Material Stock actions.</p>"
+                    }
+                },
+                "UseSAPMaterialStockAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use SAP Material Stock actions.</p>"
+                    }
+                },
+                "FactSetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using FactSet connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateFactSetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update FactSet actions.</p>"
+                    }
+                },
+                "ShareFactSetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share FactSet actions.</p>"
+                    }
+                },
+                "UseFactSetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use FactSet actions.</p>"
+                    }
+                },
+                "AmazonSThreeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Amazon S3 connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateAmazonSThreeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Amazon S3 actions.</p>"
+                    }
+                },
+                "ShareAmazonSThreeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon S3 actions.</p>"
+                    }
+                },
+                "UseAmazonSThreeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Amazon S3 actions.</p>"
+                    }
+                },
+                "TextractAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Textract connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateTextractAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Textract actions.</p>"
+                    }
+                },
+                "ShareTextractAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Textract actions.</p>"
+                    }
+                },
+                "UseTextractAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Textract actions.</p>"
+                    }
+                },
+                "ComprehendAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Comprehend connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateComprehendAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Comprehend actions.</p>"
+                    }
+                },
+                "ShareComprehendAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Comprehend actions.</p>"
+                    }
+                },
+                "UseComprehendAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Comprehend actions.</p>"
+                    }
+                },
+                "ComprehendMedicalAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Comprehend Medical connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateComprehendMedicalAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Comprehend Medical actions.</p>"
+                    }
+                },
+                "ShareComprehendMedicalAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Comprehend Medical actions.</p>"
+                    }
+                },
+                "UseComprehendMedicalAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Comprehend Medical actions.</p>"
+                    }
+                },
+                "AmazonBedrockARSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Bedrock Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateAmazonBedrockARSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Bedrock Agent actions.</p>"
+                    }
+                },
+                "ShareAmazonBedrockARSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Bedrock Agent actions.</p>"
+                    }
+                },
+                "UseAmazonBedrockARSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Bedrock Agent actions.</p>"
+                    }
+                },
+                "AmazonBedrockFSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Bedrock Runtime connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateAmazonBedrockFSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Bedrock Runtime actions.</p>"
+                    }
+                },
+                "ShareAmazonBedrockFSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Bedrock Runtime actions.</p>"
+                    }
+                },
+                "UseAmazonBedrockFSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Bedrock Runtime actions.</p>"
+                    }
+                },
+                "AmazonBedrockKRSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Bedrock Data Automation Runtime connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateAmazonBedrockKRSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Bedrock Data Automation Runtime actions.</p>"
+                    }
+                },
+                "ShareAmazonBedrockKRSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Bedrock Data Automation Runtime actions.</p>"
+                    }
+                },
+                "UseAmazonBedrockKRSAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Bedrock Data Automation Runtime actions.</p>"
+                    }
+                },
+                "MCPAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Model Context Protocol connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateMCPAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Model Context Protocol actions.</p>"
+                    }
+                },
+                "ShareMCPAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Model Context Protocol actions.</p>"
+                    }
+                },
+                "UseMCPAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Model Context Protocol actions.</p>"
+                    }
+                },
+                "OpenAPIAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using OpenAPI Specification connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateOpenAPIAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update OpenAPI Specification actions.</p>"
+                    }
+                },
+                "ShareOpenAPIAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share OpenAPI Specification actions.</p>"
+                    }
+                },
+                "UseOpenAPIAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use OpenAPI Specification actions.</p>"
+                    }
+                },
+                "SandPGMIAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using S&P Global Market Intelligence connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSandPGMIAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update S&P Global Market Intelligence actions.</p>"
+                    }
+                },
+                "ShareSandPGMIAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share S&P Global Market Intelligence actions.</p>"
+                    }
+                },
+                "UseSandPGMIAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use S&P Global Market Intelligence actions.</p>"
+                    }
+                },
+                "SandPGlobalEnergyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using S&P Global Energy connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSandPGlobalEnergyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update S&P Global Energy actions.</p>"
+                    }
+                },
+                "ShareSandPGlobalEnergyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share S&P Global Energy actions.</p>"
+                    }
+                },
+                "UseSandPGlobalEnergyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use S&P Global Energy actions.</p>"
+                    }
+                },
+                "BambooHRAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using BambooHR connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateBambooHRAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update BambooHR actions.</p>"
+                    }
+                },
+                "ShareBambooHRAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share BambooHR actions.</p>"
+                    }
+                },
+                "UseBambooHRAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use BambooHR actions.</p>"
+                    }
+                },
+                "BoxAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Box Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateBoxAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Box Agent actions.</p>"
+                    }
+                },
+                "ShareBoxAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Box Agent actions.</p>"
+                    }
+                },
+                "UseBoxAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Box Agent actions.</p>"
+                    }
+                },
+                "CanvaAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Canva Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateCanvaAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Canva Agent actions.</p>"
+                    }
+                },
+                "ShareCanvaAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Canva Agent actions.</p>"
+                    }
+                },
+                "UseCanvaAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Canva Agent actions.</p>"
+                    }
+                },
+                "GithubAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using GitHub connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGithubAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update GitHub actions.</p>"
+                    }
+                },
+                "ShareGithubAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share GitHub actions.</p>"
+                    }
+                },
+                "UseGithubAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use GitHub actions.</p>"
+                    }
+                },
+                "NotionAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Notion connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateNotionAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Notion actions.</p>"
+                    }
+                },
+                "ShareNotionAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Notion actions.</p>"
+                    }
+                },
+                "UseNotionAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Notion actions.</p>"
+                    }
+                },
+                "LinearAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Linear connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateLinearAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Linear actions.</p>"
+                    }
+                },
+                "ShareLinearAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Linear actions.</p>"
+                    }
+                },
+                "UseLinearAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Linear actions.</p>"
+                    }
+                },
+                "HuggingFaceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using HuggingFace connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateHuggingFaceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update HuggingFace actions.</p>"
+                    }
+                },
+                "ShareHuggingFaceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share HuggingFace actions.</p>"
+                    }
+                },
+                "UseHuggingFaceAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use HuggingFace actions.</p>"
+                    }
+                },
+                "MondayAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Monday connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateMondayAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Monday actions.</p>"
+                    }
+                },
+                "ShareMondayAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Monday actions.</p>"
+                    }
+                },
+                "UseMondayAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Monday actions.</p>"
+                    }
+                },
+                "HubspotAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Hubspot connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateHubspotAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Hubspot actions.</p>"
+                    }
+                },
+                "ShareHubspotAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Hubspot actions.</p>"
+                    }
+                },
+                "UseHubspotAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Hubspot actions.</p>"
+                    }
+                },
+                "IntercomAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Intercom connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateIntercomAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Intercom actions.</p>"
+                    }
+                },
+                "ShareIntercomAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Intercom actions.</p>"
+                    }
+                },
+                "UseIntercomAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Intercom actions.</p>"
+                    }
+                },
+                "NewRelicAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using New Relic connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateNewRelicAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update New Relic actions.</p>"
+                    }
+                },
+                "ShareNewRelicAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share New Relic actions.</p>"
+                    }
+                },
+                "UseNewRelicAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use New Relic actions.</p>"
+                    }
+                },
                 "Space": {
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {
@@ -30904,6 +31936,12 @@
                 },
                 "CanvasSizeOptions": {
                     "target": "com.amazonaws.quicksight#FreeFormLayoutCanvasSizeOptions"
+                },
+                "Groups": {
+                    "target": "com.amazonaws.quicksight#SheetLayoutGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The groups that are included in a free-form layout.</p>"
+                    }
                 }
             },
             "traits": {
@@ -55663,6 +56701,91 @@
                 "smithy.api#documentation": "<p>The sheet layout maximization options of a dashbaord.</p>"
             }
         },
+        "com.amazonaws.quicksight#SheetLayoutGroup": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Members": {
+                    "target": "com.amazonaws.quicksight#SheetLayoutGroupMemberList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The members of the group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A group of elements within a sheet layout.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SheetLayoutGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SheetLayoutGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 215
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SheetLayoutGroupMember": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the group member.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#SheetLayoutGroupMemberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the group member.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A member of a sheet layout group.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SheetLayoutGroupMemberList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SheetLayoutGroupMember"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 430
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SheetLayoutGroupMemberType": {
+            "type": "enum",
+            "members": {
+                "ELEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELEMENT"
+                    }
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#SheetList": {
             "type": "list",
             "member": {
@@ -57318,7 +58441,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a snapshot of a dashboard's output. You can request one or several of the following format configurations in each API call.</p>\n         <ul>\n            <li>\n               <p>1 Paginated PDF</p>\n            </li>\n            <li>\n               <p>1 Excel workbook that includes up to 5 table or pivot table visuals</p>\n            </li>\n            <li>\n               <p>5 CSVs from table or pivot table visuals</p>\n            </li>\n         </ul>\n         <p>The status of a submitted job can be polled with the <code>DescribeDashboardSnapshotJob</code> API. When you call the  <code>DescribeDashboardSnapshotJob</code> API, check the <code>JobStatus</code> field in the response. Once the job reaches a <code>COMPLETED</code> or <code>FAILED</code> status, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the URLs for the generated files. If the job fails, the <code>DescribeDashboardSnapshotJobResult</code> API returns detailed information about the error that occurred.</p>\n         <p>\n            <b>StartDashboardSnapshotJob API throttling</b>\n         </p>\n         <p>Quick Sight utilizes API throttling to create a more consistent user experience within a time span for customers when they call the <code>StartDashboardSnapshotJob</code>. By default, 12 jobs can run simlutaneously in one Amazon Web Services account and users can submit up 10 API requests per second before an account is throttled. If an overwhelming number of API requests are made by the same user in a short period of time, Quick Sight throttles the API calls to maintin an optimal experience and reliability for all Quick Sight users.</p>\n         <p>\n            <b>Common throttling scenarios</b>\n         </p>\n         <p>The following list provides information about the most commin throttling scenarios that can occur.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>A large number of <code>SnapshotExport</code> API jobs are running simultaneously on an Amazon Web Services account.</b> When a new <code>StartDashboardSnapshotJob</code> is created and there are already 12 jobs with the <code>RUNNING</code> status, the new job request fails and returns a <code>LimitExceededException</code> error. Wait for a current job to comlpete before you resubmit the new job.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A large number of API requests are submitted on an Amazon Web Services account.</b> When a user makes more than 10 API calls to the Quick Sight API in one second, a <code>ThrottlingException</code> is returned.</p>\n            </li>\n         </ul>\n         <p>If your use case requires a higher throttling limit, contact your account admin or <a href=\"http://aws.amazon.com/contact-us/\">Amazon Web ServicesSupport</a> to explore options to tailor a more optimal expereince for your account.</p>\n         <p>\n            <b>Best practices to handle throttling</b>\n         </p>\n         <p>If your use case projects high levels of API traffic, try to reduce the degree of frequency and parallelism of API calls as much as you can to avoid throttling. You can also perform a timing test to calculate an estimate for the total processing time of your projected load that stays within the throttling limits of the Quick Sight APIs. For example, if your projected traffic is 100 snapshot jobs before 12:00 PM per day, start 12 jobs in parallel and measure the amount of time it takes to proccess all 12 jobs. Once you obtain the result, multiply the duration by 9, for example <code>(12 minutes * 9 = 108 minutes)</code>. Use the new result to determine the latest time at which the jobs need to be started to meet your target deadline.</p>\n         <p>The time that it takes to process a job can be impacted by the following factors:</p>\n         <ul>\n            <li>\n               <p>The dataset type (Direct Query or SPICE).</p>\n            </li>\n            <li>\n               <p>The size of the dataset.</p>\n            </li>\n            <li>\n               <p>The complexity of the calculated fields that are used in the dashboard.</p>\n            </li>\n            <li>\n               <p>The number of visuals that are on a sheet.</p>\n            </li>\n            <li>\n               <p>The types of visuals that are on the sheet.</p>\n            </li>\n            <li>\n               <p>The number of formats and snapshots that are requested in the job configuration.</p>\n            </li>\n            <li>\n               <p>The size of the generated snapshots.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Registered user support</b>\n         </p>\n         <p>You can generate snapshots for registered Quick Sight users by using the Snapshot Job APIs with <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html\">identity-enhanced IAM role session credentials</a>. This approach allows you to create snapshots on behalf of specific Quick Sight users while respecting their row-level security (RLS), column-level security (CLS), dynamic default parameters and dashboard parameter/filter settings.</p>\n         <p>To generate snapshots for registered Quick Sight users, you need to:</p>\n         <ul>\n            <li>\n               <p>Obtain identity-enhanced IAM role session credentials from Amazon Web Services Security Token Service (STS).</p>\n            </li>\n            <li>\n               <p>Use these credentials to call the Snapshot Job APIs.</p>\n            </li>\n         </ul>\n         <p>Identity-enhanced credentials are credentials that contain information about the end user (e.g., registered Quick Sight user).</p>\n         <p>If your Quick Sight users are backed by <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">Amazon Web Services Identity Center</a>, then you need to set up a <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/setuptrustedtokenissuer.html\">trusted token issuer</a>. Then, getting identity-enhanced IAM credentials for a Quick Sight user will look like the following:</p>\n         <ul>\n            <li>\n               <p>Authenticate user with your OIDC compliant Identity Provider. You should get auth tokens back.</p>\n            </li>\n            <li>\n               <p>Use the OIDC API, <a href=\"https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateTokenWithIAM.html\">CreateTokenWithIAM</a>, to exchange auth tokens to IAM tokens. One of the resulted tokens will be identity token.</p>\n            </li>\n            <li>\n               <p>Call STS AssumeRole API as you normally would, but provide an extra <code>ProvidedContexts</code> parameter in the API request. The list of contexts must have a single trusted context assertion. The <code>ProviderArn</code> should be <code>arn:aws:iam::aws:contextProvider/IdentityCenter</code> while <code>ContextAssertion</code> will be the identity token you received in response from CreateTokenWithIAM</p>\n            </li>\n         </ul>\n         <p>For more details, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html\">IdC documentation on Identity-enhanced IAM role sessions</a>.</p>\n         <p>To obtain Identity-enhanced credentials for Quick Sight native users, IAM federated users, or Active Directory users, follow the steps below:</p>\n         <ul>\n            <li>\n               <p>Call Quick Sight <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetIdentityContext.html\">GetIdentityContext API</a> to get identity token.</p>\n            </li>\n            <li>\n               <p>Call STS AssumeRole API as you normally would, but provide extra <code>ProvidedContexts</code> parameter in the API request. The list of contexts must have a single trusted context assertion. The <code>ProviderArn</code> should be <code>arn:aws:iam::aws:contextProvider/QuickSight</code> while <code>ContextAssertion</code> will be the identity token you received in response from GetIdentityContext</p>\n            </li>\n         </ul>\n         <p>After obtaining the identity-enhanced IAM role session credentials, you can use them to start a job, describe the job and describe job result. You can use the same credentials as long as they haven't expired. All API requests made with these credentials are considered to be made by the impersonated Quick Sight user.</p>\n         <important>\n            <p>When using identity-enhanced session credentials, set the UserConfiguration request attribute to null. Otherwise, the request will be invalid.</p>\n         </important>\n         <p>\n            <b>Possible error scenarios</b>\n         </p>\n         <p>The request fails with an Access Denied error in the following scenarios:</p>\n         <ul>\n            <li>\n               <p>The credentials have expired.</p>\n            </li>\n            <li>\n               <p>The impersonated Quick Sight user doesn't have access to the specified dashboard.</p>\n            </li>\n            <li>\n               <p>The impersonated Quick Sight user is restricted from exporting data in the selected formats. For more information about export restrictions, see <a href=\"https://docs.aws.amazon.com/quicksuite/latest/userguide/create-custom-permisions-profile.html\">Customizing access to Amazon Quick Sight capabilities</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a snapshot of a dashboard's output. You can request one or several of the following format configurations in each API call.</p>\n         <ul>\n            <li>\n               <p>1 PDF</p>\n            </li>\n            <li>\n               <p>1 Excel workbook that includes up to 5 table or pivot table visuals</p>\n            </li>\n            <li>\n               <p>5 CSVs from table or pivot table visuals</p>\n            </li>\n         </ul>\n         <note>\n            <p>Exporting CSV, Excel, or Pixel Perfect PDF reports requires Pixel Perfect Report Add-on.</p>\n         </note>\n         <p>The status of a submitted job can be polled with the <code>DescribeDashboardSnapshotJob</code> API. When you call the  <code>DescribeDashboardSnapshotJob</code> API, check the <code>JobStatus</code> field in the response. Once the job reaches a <code>COMPLETED</code> or <code>FAILED</code> status, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the URLs for the generated files. If the job fails, the <code>DescribeDashboardSnapshotJobResult</code> API returns detailed information about the error that occurred.</p>\n         <p>\n            <b>StartDashboardSnapshotJob API throttling</b>\n         </p>\n         <p>Quick Sight utilizes API throttling to create a more consistent user experience within a time span for customers when they call the <code>StartDashboardSnapshotJob</code>. By default, 12 jobs can run simlutaneously in one Amazon Web Services account and users can submit up 10 API requests per second before an account is throttled. If an overwhelming number of API requests are made by the same user in a short period of time, Quick Sight throttles the API calls to maintin an optimal experience and reliability for all Quick Sight users.</p>\n         <p>\n            <b>Common throttling scenarios</b>\n         </p>\n         <p>The following list provides information about the most commin throttling scenarios that can occur.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>A large number of <code>SnapshotExport</code> API jobs are running simultaneously on an Amazon Web Services account.</b> When a new <code>StartDashboardSnapshotJob</code> is created and there are already 12 jobs with the <code>RUNNING</code> status, the new job request fails and returns a <code>LimitExceededException</code> error. Wait for a current job to comlpete before you resubmit the new job.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A large number of API requests are submitted on an Amazon Web Services account.</b> When a user makes more than 10 API calls to the Quick Sight API in one second, a <code>ThrottlingException</code> is returned.</p>\n            </li>\n         </ul>\n         <p>If your use case requires a higher throttling limit, contact your account admin or <a href=\"http://aws.amazon.com/contact-us/\">Amazon Web ServicesSupport</a> to explore options to tailor a more optimal expereince for your account.</p>\n         <p>\n            <b>Best practices to handle throttling</b>\n         </p>\n         <p>If your use case projects high levels of API traffic, try to reduce the degree of frequency and parallelism of API calls as much as you can to avoid throttling. You can also perform a timing test to calculate an estimate for the total processing time of your projected load that stays within the throttling limits of the Quick Sight APIs. For example, if your projected traffic is 100 snapshot jobs before 12:00 PM per day, start 12 jobs in parallel and measure the amount of time it takes to proccess all 12 jobs. Once you obtain the result, multiply the duration by 9, for example <code>(12 minutes * 9 = 108 minutes)</code>. Use the new result to determine the latest time at which the jobs need to be started to meet your target deadline.</p>\n         <p>The time that it takes to process a job can be impacted by the following factors:</p>\n         <ul>\n            <li>\n               <p>The dataset type (Direct Query or SPICE).</p>\n            </li>\n            <li>\n               <p>The size of the dataset.</p>\n            </li>\n            <li>\n               <p>The complexity of the calculated fields that are used in the dashboard.</p>\n            </li>\n            <li>\n               <p>The number of visuals that are on a sheet.</p>\n            </li>\n            <li>\n               <p>The types of visuals that are on the sheet.</p>\n            </li>\n            <li>\n               <p>The number of formats and snapshots that are requested in the job configuration.</p>\n            </li>\n            <li>\n               <p>The size of the generated snapshots.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Registered user support</b>\n         </p>\n         <p>You can generate snapshots for registered Quick Sight users by using the Snapshot Job APIs with <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html\">identity-enhanced IAM role session credentials</a>. This approach allows you to create snapshots on behalf of specific Quick Sight users while respecting their row-level security (RLS), column-level security (CLS), dynamic default parameters and dashboard parameter/filter settings.</p>\n         <p>To generate snapshots for registered Quick Sight users, you need to:</p>\n         <ul>\n            <li>\n               <p>Obtain identity-enhanced IAM role session credentials from Amazon Web Services Security Token Service (STS).</p>\n            </li>\n            <li>\n               <p>Use these credentials to call the Snapshot Job APIs.</p>\n            </li>\n         </ul>\n         <p>Identity-enhanced credentials are credentials that contain information about the end user (e.g., registered Quick Sight user).</p>\n         <p>If your Quick Sight users are backed by <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">Amazon Web Services Identity Center</a>, then you need to set up a <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/setuptrustedtokenissuer.html\">trusted token issuer</a>. Then, getting identity-enhanced IAM credentials for a Quick Sight user will look like the following:</p>\n         <ul>\n            <li>\n               <p>Authenticate user with your OIDC compliant Identity Provider. You should get auth tokens back.</p>\n            </li>\n            <li>\n               <p>Use the OIDC API, <a href=\"https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateTokenWithIAM.html\">CreateTokenWithIAM</a>, to exchange auth tokens to IAM tokens. One of the resulted tokens will be identity token.</p>\n            </li>\n            <li>\n               <p>Call STS AssumeRole API as you normally would, but provide an extra <code>ProvidedContexts</code> parameter in the API request. The list of contexts must have a single trusted context assertion. The <code>ProviderArn</code> should be <code>arn:aws:iam::aws:contextProvider/IdentityCenter</code> while <code>ContextAssertion</code> will be the identity token you received in response from CreateTokenWithIAM</p>\n            </li>\n         </ul>\n         <p>For more details, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html\">IdC documentation on Identity-enhanced IAM role sessions</a>.</p>\n         <p>To obtain Identity-enhanced credentials for Quick Sight native users, IAM federated users, or Active Directory users, follow the steps below:</p>\n         <ul>\n            <li>\n               <p>Call Quick Sight <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetIdentityContext.html\">GetIdentityContext API</a> to get identity token.</p>\n            </li>\n            <li>\n               <p>Call STS AssumeRole API as you normally would, but provide extra <code>ProvidedContexts</code> parameter in the API request. The list of contexts must have a single trusted context assertion. The <code>ProviderArn</code> should be <code>arn:aws:iam::aws:contextProvider/QuickSight</code> while <code>ContextAssertion</code> will be the identity token you received in response from GetIdentityContext</p>\n            </li>\n         </ul>\n         <p>After obtaining the identity-enhanced IAM role session credentials, you can use them to start a job, describe the job and describe job result. You can use the same credentials as long as they haven't expired. All API requests made with these credentials are considered to be made by the impersonated Quick Sight user.</p>\n         <important>\n            <p>When using identity-enhanced session credentials, set the UserConfiguration request attribute to null. Otherwise, the request will be invalid.</p>\n         </important>\n         <p>\n            <b>Possible error scenarios</b>\n         </p>\n         <p>The request fails with an Access Denied error in the following scenarios:</p>\n         <ul>\n            <li>\n               <p>The credentials have expired.</p>\n            </li>\n            <li>\n               <p>The impersonated Quick Sight user doesn't have access to the specified dashboard.</p>\n            </li>\n            <li>\n               <p>The impersonated Quick Sight user is restricted from exporting data in the selected formats. For more information about export restrictions, see <a href=\"https://docs.aws.amazon.com/quicksuite/latest/userguide/create-custom-permisions-profile.html\">Customizing access to Amazon Quick Sight capabilities</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs",

@@ -1142,6 +1142,33 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
             }
         },
+        "com.amazonaws.bedrockagentcore#BrowserExtension": {
+            "type": "structure",
+            "members": {
+                "location": {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where the browser extension files are stored. This specifies the source from which the extension will be loaded and installed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Browser extension configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#BrowserExtensions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#BrowserExtension"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcore#BrowserSessionId": {
             "type": "string",
             "traits": {
@@ -1549,7 +1576,7 @@
                         "smithy.api#documentation": "<p>The text content of the memory item.</p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 9000
+                            "max": 100000
                         }
                     }
                 }
@@ -1709,6 +1736,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#RetryableConflictException"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#ServiceException"
@@ -2758,6 +2788,12 @@
                 },
                 "viewPort": {
                     "target": "com.amazonaws.bedrockagentcore#ViewPort"
+                },
+                "extensions": {
+                    "target": "com.amazonaws.bedrockagentcore#BrowserExtensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of browser extensions that are configured in the browser session.</p>"
+                    }
                 },
                 "sessionTimeoutSeconds": {
                     "target": "com.amazonaws.bedrockagentcore#BrowserSessionTimeout",
@@ -5429,6 +5465,20 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcore#ResourceLocation": {
+            "type": "union",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.bedrockagentcore#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the resource. Use this when the resource is stored in an Amazon S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location of the browser extension.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -5568,6 +5618,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcore#RetryableConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The exception that occurs when there is a retryable conflict performing an operation. This is a temporary condition that may resolve itself with retries. We recommend implementing exponential backoff retry logic in your application.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409,
+                "smithy.api#retryable": {}
+            }
+        },
         "com.amazonaws.bedrockagentcore#RightExpression": {
             "type": "union",
             "members": {
@@ -5622,6 +5689,47 @@
                 "smithy.api#documentation": "<p>The exception that occurs when there is an error in the runtime client. This can happen due to network issues, invalid configuration, or other client-side problems. Check the error message for specific details about the error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 424
+            }
+        },
+        "com.amazonaws.bedrockagentcore#S3Location": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket where the resource is stored.</p>",
+                        "smithy.api#length": {
+                            "min": 3,
+                            "max": 63
+                        },
+                        "smithy.api#pattern": "^[a-z0-9][a-z0-9.-]*[a-z0-9]$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "prefix": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 prefix/key where the resource is stored.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 version ID where the resource is stored (Optional).</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 location configuration of a resource.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#ScopeType": {
@@ -5942,6 +6050,12 @@
                     "target": "com.amazonaws.bedrockagentcore#ViewPort",
                     "traits": {
                         "smithy.api#documentation": "<p>The dimensions of the browser viewport for this session. This determines the visible area of the web content and affects how web pages are rendered. If not specified, Amazon Bedrock uses a default viewport size.</p>"
+                    }
+                },
+                "extensions": {
+                    "target": "com.amazonaws.bedrockagentcore#BrowserExtensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of browser extensions to load into the browser session.</p>"
                     }
                 },
                 "clientToken": {
