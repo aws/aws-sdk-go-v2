@@ -9243,6 +9243,12 @@ func awsRestjson1_serializeEventMessageHeadersEvent(v *types.HeadersEvent, msg *
 	}
 
 	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
+	if v.BlobHeader != nil {
+		msg.Headers.Set("blobHeader", eventstream.BytesValue(v.BlobHeader))
+	}
+	if v.IntHeader != nil {
+		msg.Headers.Set("intHeader", eventstream.Int32Value(*v.IntHeader))
+	}
 	if v.BooleanHeader != nil {
 		msg.Headers.Set("booleanHeader", eventstream.BoolValue(*v.BooleanHeader))
 	}
@@ -9260,12 +9266,6 @@ func awsRestjson1_serializeEventMessageHeadersEvent(v *types.HeadersEvent, msg *
 	}
 	if v.StringHeader != nil {
 		msg.Headers.Set("stringHeader", eventstream.StringValue(*v.StringHeader))
-	}
-	if v.BlobHeader != nil {
-		msg.Headers.Set("blobHeader", eventstream.BytesValue(v.BlobHeader))
-	}
-	if v.IntHeader != nil {
-		msg.Headers.Set("intHeader", eventstream.Int32Value(*v.IntHeader))
 	}
 	return nil
 }

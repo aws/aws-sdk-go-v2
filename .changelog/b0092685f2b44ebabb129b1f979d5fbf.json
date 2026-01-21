@@ -1,0 +1,8 @@
+{
+    "id": "b0092685-f2b4-4eba-bb12-9b1f979d5fbf",
+    "type": "feature",
+    "description": "AWS Config Conformance Packs now support tag-on-create through PutConformancePack API.",
+    "modules": [
+        "service/configservice"
+    ]
+}

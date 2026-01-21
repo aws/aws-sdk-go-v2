@@ -9541,6 +9541,13 @@ func awsAwsjson11_serializeOpDocumentPutConformancePackInput(v *PutConformancePa
 		ok.String(*v.DeliveryS3KeyPrefix)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagsList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TemplateBody != nil {
 		ok := object.Key("TemplateBody")
 		ok.String(*v.TemplateBody)

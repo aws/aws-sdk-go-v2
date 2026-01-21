@@ -1,0 +1,8 @@
+{
+    "id": "00469e5a-42e6-4bd2-b127-f8d5bd3609fc",
+    "type": "feature",
+    "description": "Supports custom browser extensions for AgentCore Browser and increased message payloads up to 100KB per message in an Event for AgentCore Memory",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

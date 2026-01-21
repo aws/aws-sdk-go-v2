@@ -26635,9 +26635,34 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.AddOrRunAnomalyDetectionForAnalyses))
 	}
 
+	if len(v.AmazonBedrockARSAction) > 0 {
+		ok := object.Key("AmazonBedrockARSAction")
+		ok.String(string(v.AmazonBedrockARSAction))
+	}
+
+	if len(v.AmazonBedrockFSAction) > 0 {
+		ok := object.Key("AmazonBedrockFSAction")
+		ok.String(string(v.AmazonBedrockFSAction))
+	}
+
+	if len(v.AmazonBedrockKRSAction) > 0 {
+		ok := object.Key("AmazonBedrockKRSAction")
+		ok.String(string(v.AmazonBedrockKRSAction))
+	}
+
+	if len(v.AmazonSThreeAction) > 0 {
+		ok := object.Key("AmazonSThreeAction")
+		ok.String(string(v.AmazonSThreeAction))
+	}
+
 	if len(v.Analysis) > 0 {
 		ok := object.Key("Analysis")
 		ok.String(string(v.Analysis))
+	}
+
+	if len(v.AsanaAction) > 0 {
+		ok := object.Key("AsanaAction")
+		ok.String(string(v.AsanaAction))
 	}
 
 	if len(v.Automate) > 0 {
@@ -26645,9 +26670,94 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.Automate))
 	}
 
+	if len(v.BambooHRAction) > 0 {
+		ok := object.Key("BambooHRAction")
+		ok.String(string(v.BambooHRAction))
+	}
+
+	if len(v.BoxAgentAction) > 0 {
+		ok := object.Key("BoxAgentAction")
+		ok.String(string(v.BoxAgentAction))
+	}
+
+	if len(v.CanvaAgentAction) > 0 {
+		ok := object.Key("CanvaAgentAction")
+		ok.String(string(v.CanvaAgentAction))
+	}
+
 	if len(v.ChatAgent) > 0 {
 		ok := object.Key("ChatAgent")
 		ok.String(string(v.ChatAgent))
+	}
+
+	if len(v.ComprehendAction) > 0 {
+		ok := object.Key("ComprehendAction")
+		ok.String(string(v.ComprehendAction))
+	}
+
+	if len(v.ComprehendMedicalAction) > 0 {
+		ok := object.Key("ComprehendMedicalAction")
+		ok.String(string(v.ComprehendMedicalAction))
+	}
+
+	if len(v.ConfluenceAction) > 0 {
+		ok := object.Key("ConfluenceAction")
+		ok.String(string(v.ConfluenceAction))
+	}
+
+	if len(v.CreateAndUpdateAmazonBedrockARSAction) > 0 {
+		ok := object.Key("CreateAndUpdateAmazonBedrockARSAction")
+		ok.String(string(v.CreateAndUpdateAmazonBedrockARSAction))
+	}
+
+	if len(v.CreateAndUpdateAmazonBedrockFSAction) > 0 {
+		ok := object.Key("CreateAndUpdateAmazonBedrockFSAction")
+		ok.String(string(v.CreateAndUpdateAmazonBedrockFSAction))
+	}
+
+	if len(v.CreateAndUpdateAmazonBedrockKRSAction) > 0 {
+		ok := object.Key("CreateAndUpdateAmazonBedrockKRSAction")
+		ok.String(string(v.CreateAndUpdateAmazonBedrockKRSAction))
+	}
+
+	if len(v.CreateAndUpdateAmazonSThreeAction) > 0 {
+		ok := object.Key("CreateAndUpdateAmazonSThreeAction")
+		ok.String(string(v.CreateAndUpdateAmazonSThreeAction))
+	}
+
+	if len(v.CreateAndUpdateAsanaAction) > 0 {
+		ok := object.Key("CreateAndUpdateAsanaAction")
+		ok.String(string(v.CreateAndUpdateAsanaAction))
+	}
+
+	if len(v.CreateAndUpdateBambooHRAction) > 0 {
+		ok := object.Key("CreateAndUpdateBambooHRAction")
+		ok.String(string(v.CreateAndUpdateBambooHRAction))
+	}
+
+	if len(v.CreateAndUpdateBoxAgentAction) > 0 {
+		ok := object.Key("CreateAndUpdateBoxAgentAction")
+		ok.String(string(v.CreateAndUpdateBoxAgentAction))
+	}
+
+	if len(v.CreateAndUpdateCanvaAgentAction) > 0 {
+		ok := object.Key("CreateAndUpdateCanvaAgentAction")
+		ok.String(string(v.CreateAndUpdateCanvaAgentAction))
+	}
+
+	if len(v.CreateAndUpdateComprehendAction) > 0 {
+		ok := object.Key("CreateAndUpdateComprehendAction")
+		ok.String(string(v.CreateAndUpdateComprehendAction))
+	}
+
+	if len(v.CreateAndUpdateComprehendMedicalAction) > 0 {
+		ok := object.Key("CreateAndUpdateComprehendMedicalAction")
+		ok.String(string(v.CreateAndUpdateComprehendMedicalAction))
+	}
+
+	if len(v.CreateAndUpdateConfluenceAction) > 0 {
+		ok := object.Key("CreateAndUpdateConfluenceAction")
+		ok.String(string(v.CreateAndUpdateConfluenceAction))
 	}
 
 	if len(v.CreateAndUpdateDashboardEmailReports) > 0 {
@@ -26665,6 +26775,161 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.CreateAndUpdateDataSources))
 	}
 
+	if len(v.CreateAndUpdateFactSetAction) > 0 {
+		ok := object.Key("CreateAndUpdateFactSetAction")
+		ok.String(string(v.CreateAndUpdateFactSetAction))
+	}
+
+	if len(v.CreateAndUpdateGenericHTTPAction) > 0 {
+		ok := object.Key("CreateAndUpdateGenericHTTPAction")
+		ok.String(string(v.CreateAndUpdateGenericHTTPAction))
+	}
+
+	if len(v.CreateAndUpdateGithubAction) > 0 {
+		ok := object.Key("CreateAndUpdateGithubAction")
+		ok.String(string(v.CreateAndUpdateGithubAction))
+	}
+
+	if len(v.CreateAndUpdateGoogleCalendarAction) > 0 {
+		ok := object.Key("CreateAndUpdateGoogleCalendarAction")
+		ok.String(string(v.CreateAndUpdateGoogleCalendarAction))
+	}
+
+	if len(v.CreateAndUpdateHubspotAction) > 0 {
+		ok := object.Key("CreateAndUpdateHubspotAction")
+		ok.String(string(v.CreateAndUpdateHubspotAction))
+	}
+
+	if len(v.CreateAndUpdateHuggingFaceAction) > 0 {
+		ok := object.Key("CreateAndUpdateHuggingFaceAction")
+		ok.String(string(v.CreateAndUpdateHuggingFaceAction))
+	}
+
+	if len(v.CreateAndUpdateIntercomAction) > 0 {
+		ok := object.Key("CreateAndUpdateIntercomAction")
+		ok.String(string(v.CreateAndUpdateIntercomAction))
+	}
+
+	if len(v.CreateAndUpdateJiraAction) > 0 {
+		ok := object.Key("CreateAndUpdateJiraAction")
+		ok.String(string(v.CreateAndUpdateJiraAction))
+	}
+
+	if len(v.CreateAndUpdateLinearAction) > 0 {
+		ok := object.Key("CreateAndUpdateLinearAction")
+		ok.String(string(v.CreateAndUpdateLinearAction))
+	}
+
+	if len(v.CreateAndUpdateMCPAction) > 0 {
+		ok := object.Key("CreateAndUpdateMCPAction")
+		ok.String(string(v.CreateAndUpdateMCPAction))
+	}
+
+	if len(v.CreateAndUpdateMondayAction) > 0 {
+		ok := object.Key("CreateAndUpdateMondayAction")
+		ok.String(string(v.CreateAndUpdateMondayAction))
+	}
+
+	if len(v.CreateAndUpdateMSExchangeAction) > 0 {
+		ok := object.Key("CreateAndUpdateMSExchangeAction")
+		ok.String(string(v.CreateAndUpdateMSExchangeAction))
+	}
+
+	if len(v.CreateAndUpdateMSTeamsAction) > 0 {
+		ok := object.Key("CreateAndUpdateMSTeamsAction")
+		ok.String(string(v.CreateAndUpdateMSTeamsAction))
+	}
+
+	if len(v.CreateAndUpdateNewRelicAction) > 0 {
+		ok := object.Key("CreateAndUpdateNewRelicAction")
+		ok.String(string(v.CreateAndUpdateNewRelicAction))
+	}
+
+	if len(v.CreateAndUpdateNotionAction) > 0 {
+		ok := object.Key("CreateAndUpdateNotionAction")
+		ok.String(string(v.CreateAndUpdateNotionAction))
+	}
+
+	if len(v.CreateAndUpdateOneDriveAction) > 0 {
+		ok := object.Key("CreateAndUpdateOneDriveAction")
+		ok.String(string(v.CreateAndUpdateOneDriveAction))
+	}
+
+	if len(v.CreateAndUpdateOpenAPIAction) > 0 {
+		ok := object.Key("CreateAndUpdateOpenAPIAction")
+		ok.String(string(v.CreateAndUpdateOpenAPIAction))
+	}
+
+	if len(v.CreateAndUpdatePagerDutyAction) > 0 {
+		ok := object.Key("CreateAndUpdatePagerDutyAction")
+		ok.String(string(v.CreateAndUpdatePagerDutyAction))
+	}
+
+	if len(v.CreateAndUpdateSalesforceAction) > 0 {
+		ok := object.Key("CreateAndUpdateSalesforceAction")
+		ok.String(string(v.CreateAndUpdateSalesforceAction))
+	}
+
+	if len(v.CreateAndUpdateSandPGlobalEnergyAction) > 0 {
+		ok := object.Key("CreateAndUpdateSandPGlobalEnergyAction")
+		ok.String(string(v.CreateAndUpdateSandPGlobalEnergyAction))
+	}
+
+	if len(v.CreateAndUpdateSandPGMIAction) > 0 {
+		ok := object.Key("CreateAndUpdateSandPGMIAction")
+		ok.String(string(v.CreateAndUpdateSandPGMIAction))
+	}
+
+	if len(v.CreateAndUpdateSAPBillOfMaterialAction) > 0 {
+		ok := object.Key("CreateAndUpdateSAPBillOfMaterialAction")
+		ok.String(string(v.CreateAndUpdateSAPBillOfMaterialAction))
+	}
+
+	if len(v.CreateAndUpdateSAPBusinessPartnerAction) > 0 {
+		ok := object.Key("CreateAndUpdateSAPBusinessPartnerAction")
+		ok.String(string(v.CreateAndUpdateSAPBusinessPartnerAction))
+	}
+
+	if len(v.CreateAndUpdateSAPMaterialStockAction) > 0 {
+		ok := object.Key("CreateAndUpdateSAPMaterialStockAction")
+		ok.String(string(v.CreateAndUpdateSAPMaterialStockAction))
+	}
+
+	if len(v.CreateAndUpdateSAPPhysicalInventoryAction) > 0 {
+		ok := object.Key("CreateAndUpdateSAPPhysicalInventoryAction")
+		ok.String(string(v.CreateAndUpdateSAPPhysicalInventoryAction))
+	}
+
+	if len(v.CreateAndUpdateSAPProductMasterDataAction) > 0 {
+		ok := object.Key("CreateAndUpdateSAPProductMasterDataAction")
+		ok.String(string(v.CreateAndUpdateSAPProductMasterDataAction))
+	}
+
+	if len(v.CreateAndUpdateServiceNowAction) > 0 {
+		ok := object.Key("CreateAndUpdateServiceNowAction")
+		ok.String(string(v.CreateAndUpdateServiceNowAction))
+	}
+
+	if len(v.CreateAndUpdateSharePointAction) > 0 {
+		ok := object.Key("CreateAndUpdateSharePointAction")
+		ok.String(string(v.CreateAndUpdateSharePointAction))
+	}
+
+	if len(v.CreateAndUpdateSlackAction) > 0 {
+		ok := object.Key("CreateAndUpdateSlackAction")
+		ok.String(string(v.CreateAndUpdateSlackAction))
+	}
+
+	if len(v.CreateAndUpdateSmartsheetAction) > 0 {
+		ok := object.Key("CreateAndUpdateSmartsheetAction")
+		ok.String(string(v.CreateAndUpdateSmartsheetAction))
+	}
+
+	if len(v.CreateAndUpdateTextractAction) > 0 {
+		ok := object.Key("CreateAndUpdateTextractAction")
+		ok.String(string(v.CreateAndUpdateTextractAction))
+	}
+
 	if len(v.CreateAndUpdateThemes) > 0 {
 		ok := object.Key("CreateAndUpdateThemes")
 		ok.String(string(v.CreateAndUpdateThemes))
@@ -26673,6 +26938,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.CreateAndUpdateThresholdAlerts) > 0 {
 		ok := object.Key("CreateAndUpdateThresholdAlerts")
 		ok.String(string(v.CreateAndUpdateThresholdAlerts))
+	}
+
+	if len(v.CreateAndUpdateZendeskAction) > 0 {
+		ok := object.Key("CreateAndUpdateZendeskAction")
+		ok.String(string(v.CreateAndUpdateZendeskAction))
 	}
 
 	if len(v.CreateChatAgents) > 0 {
@@ -26725,9 +26995,39 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.ExportToPdfInScheduledReports))
 	}
 
+	if len(v.FactSetAction) > 0 {
+		ok := object.Key("FactSetAction")
+		ok.String(string(v.FactSetAction))
+	}
+
 	if len(v.Flow) > 0 {
 		ok := object.Key("Flow")
 		ok.String(string(v.Flow))
+	}
+
+	if len(v.GenericHTTPAction) > 0 {
+		ok := object.Key("GenericHTTPAction")
+		ok.String(string(v.GenericHTTPAction))
+	}
+
+	if len(v.GithubAction) > 0 {
+		ok := object.Key("GithubAction")
+		ok.String(string(v.GithubAction))
+	}
+
+	if len(v.GoogleCalendarAction) > 0 {
+		ok := object.Key("GoogleCalendarAction")
+		ok.String(string(v.GoogleCalendarAction))
+	}
+
+	if len(v.HubspotAction) > 0 {
+		ok := object.Key("HubspotAction")
+		ok.String(string(v.HubspotAction))
+	}
+
+	if len(v.HuggingFaceAction) > 0 {
+		ok := object.Key("HuggingFaceAction")
+		ok.String(string(v.HuggingFaceAction))
 	}
 
 	if len(v.IncludeContentInScheduledReportsEmail) > 0 {
@@ -26735,9 +27035,69 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.IncludeContentInScheduledReportsEmail))
 	}
 
+	if len(v.IntercomAction) > 0 {
+		ok := object.Key("IntercomAction")
+		ok.String(string(v.IntercomAction))
+	}
+
+	if len(v.JiraAction) > 0 {
+		ok := object.Key("JiraAction")
+		ok.String(string(v.JiraAction))
+	}
+
 	if len(v.KnowledgeBase) > 0 {
 		ok := object.Key("KnowledgeBase")
 		ok.String(string(v.KnowledgeBase))
+	}
+
+	if len(v.LinearAction) > 0 {
+		ok := object.Key("LinearAction")
+		ok.String(string(v.LinearAction))
+	}
+
+	if len(v.MCPAction) > 0 {
+		ok := object.Key("MCPAction")
+		ok.String(string(v.MCPAction))
+	}
+
+	if len(v.MondayAction) > 0 {
+		ok := object.Key("MondayAction")
+		ok.String(string(v.MondayAction))
+	}
+
+	if len(v.MSExchangeAction) > 0 {
+		ok := object.Key("MSExchangeAction")
+		ok.String(string(v.MSExchangeAction))
+	}
+
+	if len(v.MSTeamsAction) > 0 {
+		ok := object.Key("MSTeamsAction")
+		ok.String(string(v.MSTeamsAction))
+	}
+
+	if len(v.NewRelicAction) > 0 {
+		ok := object.Key("NewRelicAction")
+		ok.String(string(v.NewRelicAction))
+	}
+
+	if len(v.NotionAction) > 0 {
+		ok := object.Key("NotionAction")
+		ok.String(string(v.NotionAction))
+	}
+
+	if len(v.OneDriveAction) > 0 {
+		ok := object.Key("OneDriveAction")
+		ok.String(string(v.OneDriveAction))
+	}
+
+	if len(v.OpenAPIAction) > 0 {
+		ok := object.Key("OpenAPIAction")
+		ok.String(string(v.OpenAPIAction))
+	}
+
+	if len(v.PagerDutyAction) > 0 {
+		ok := object.Key("PagerDutyAction")
+		ok.String(string(v.PagerDutyAction))
 	}
 
 	if len(v.PerformFlowUiTask) > 0 {
@@ -26765,14 +27125,114 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.Research))
 	}
 
+	if len(v.SalesforceAction) > 0 {
+		ok := object.Key("SalesforceAction")
+		ok.String(string(v.SalesforceAction))
+	}
+
+	if len(v.SandPGlobalEnergyAction) > 0 {
+		ok := object.Key("SandPGlobalEnergyAction")
+		ok.String(string(v.SandPGlobalEnergyAction))
+	}
+
+	if len(v.SandPGMIAction) > 0 {
+		ok := object.Key("SandPGMIAction")
+		ok.String(string(v.SandPGMIAction))
+	}
+
+	if len(v.SAPBillOfMaterialAction) > 0 {
+		ok := object.Key("SAPBillOfMaterialAction")
+		ok.String(string(v.SAPBillOfMaterialAction))
+	}
+
+	if len(v.SAPBusinessPartnerAction) > 0 {
+		ok := object.Key("SAPBusinessPartnerAction")
+		ok.String(string(v.SAPBusinessPartnerAction))
+	}
+
+	if len(v.SAPMaterialStockAction) > 0 {
+		ok := object.Key("SAPMaterialStockAction")
+		ok.String(string(v.SAPMaterialStockAction))
+	}
+
+	if len(v.SAPPhysicalInventoryAction) > 0 {
+		ok := object.Key("SAPPhysicalInventoryAction")
+		ok.String(string(v.SAPPhysicalInventoryAction))
+	}
+
+	if len(v.SAPProductMasterDataAction) > 0 {
+		ok := object.Key("SAPProductMasterDataAction")
+		ok.String(string(v.SAPProductMasterDataAction))
+	}
+
 	if len(v.SelfUpgradeUserRole) > 0 {
 		ok := object.Key("SelfUpgradeUserRole")
 		ok.String(string(v.SelfUpgradeUserRole))
 	}
 
+	if len(v.ServiceNowAction) > 0 {
+		ok := object.Key("ServiceNowAction")
+		ok.String(string(v.ServiceNowAction))
+	}
+
+	if len(v.ShareAmazonBedrockARSAction) > 0 {
+		ok := object.Key("ShareAmazonBedrockARSAction")
+		ok.String(string(v.ShareAmazonBedrockARSAction))
+	}
+
+	if len(v.ShareAmazonBedrockFSAction) > 0 {
+		ok := object.Key("ShareAmazonBedrockFSAction")
+		ok.String(string(v.ShareAmazonBedrockFSAction))
+	}
+
+	if len(v.ShareAmazonBedrockKRSAction) > 0 {
+		ok := object.Key("ShareAmazonBedrockKRSAction")
+		ok.String(string(v.ShareAmazonBedrockKRSAction))
+	}
+
+	if len(v.ShareAmazonSThreeAction) > 0 {
+		ok := object.Key("ShareAmazonSThreeAction")
+		ok.String(string(v.ShareAmazonSThreeAction))
+	}
+
 	if len(v.ShareAnalyses) > 0 {
 		ok := object.Key("ShareAnalyses")
 		ok.String(string(v.ShareAnalyses))
+	}
+
+	if len(v.ShareAsanaAction) > 0 {
+		ok := object.Key("ShareAsanaAction")
+		ok.String(string(v.ShareAsanaAction))
+	}
+
+	if len(v.ShareBambooHRAction) > 0 {
+		ok := object.Key("ShareBambooHRAction")
+		ok.String(string(v.ShareBambooHRAction))
+	}
+
+	if len(v.ShareBoxAgentAction) > 0 {
+		ok := object.Key("ShareBoxAgentAction")
+		ok.String(string(v.ShareBoxAgentAction))
+	}
+
+	if len(v.ShareCanvaAgentAction) > 0 {
+		ok := object.Key("ShareCanvaAgentAction")
+		ok.String(string(v.ShareCanvaAgentAction))
+	}
+
+	if len(v.ShareComprehendAction) > 0 {
+		ok := object.Key("ShareComprehendAction")
+		ok.String(string(v.ShareComprehendAction))
+	}
+
+	if len(v.ShareComprehendMedicalAction) > 0 {
+		ok := object.Key("ShareComprehendMedicalAction")
+		ok.String(string(v.ShareComprehendMedicalAction))
+	}
+
+	if len(v.ShareConfluenceAction) > 0 {
+		ok := object.Key("ShareConfluenceAction")
+		ok.String(string(v.ShareConfluenceAction))
 	}
 
 	if len(v.ShareDashboards) > 0 {
@@ -26790,6 +27250,181 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.ShareDataSources))
 	}
 
+	if len(v.ShareFactSetAction) > 0 {
+		ok := object.Key("ShareFactSetAction")
+		ok.String(string(v.ShareFactSetAction))
+	}
+
+	if len(v.ShareGenericHTTPAction) > 0 {
+		ok := object.Key("ShareGenericHTTPAction")
+		ok.String(string(v.ShareGenericHTTPAction))
+	}
+
+	if len(v.ShareGithubAction) > 0 {
+		ok := object.Key("ShareGithubAction")
+		ok.String(string(v.ShareGithubAction))
+	}
+
+	if len(v.ShareGoogleCalendarAction) > 0 {
+		ok := object.Key("ShareGoogleCalendarAction")
+		ok.String(string(v.ShareGoogleCalendarAction))
+	}
+
+	if len(v.ShareHubspotAction) > 0 {
+		ok := object.Key("ShareHubspotAction")
+		ok.String(string(v.ShareHubspotAction))
+	}
+
+	if len(v.ShareHuggingFaceAction) > 0 {
+		ok := object.Key("ShareHuggingFaceAction")
+		ok.String(string(v.ShareHuggingFaceAction))
+	}
+
+	if len(v.ShareIntercomAction) > 0 {
+		ok := object.Key("ShareIntercomAction")
+		ok.String(string(v.ShareIntercomAction))
+	}
+
+	if len(v.ShareJiraAction) > 0 {
+		ok := object.Key("ShareJiraAction")
+		ok.String(string(v.ShareJiraAction))
+	}
+
+	if len(v.ShareLinearAction) > 0 {
+		ok := object.Key("ShareLinearAction")
+		ok.String(string(v.ShareLinearAction))
+	}
+
+	if len(v.ShareMCPAction) > 0 {
+		ok := object.Key("ShareMCPAction")
+		ok.String(string(v.ShareMCPAction))
+	}
+
+	if len(v.ShareMondayAction) > 0 {
+		ok := object.Key("ShareMondayAction")
+		ok.String(string(v.ShareMondayAction))
+	}
+
+	if len(v.ShareMSExchangeAction) > 0 {
+		ok := object.Key("ShareMSExchangeAction")
+		ok.String(string(v.ShareMSExchangeAction))
+	}
+
+	if len(v.ShareMSTeamsAction) > 0 {
+		ok := object.Key("ShareMSTeamsAction")
+		ok.String(string(v.ShareMSTeamsAction))
+	}
+
+	if len(v.ShareNewRelicAction) > 0 {
+		ok := object.Key("ShareNewRelicAction")
+		ok.String(string(v.ShareNewRelicAction))
+	}
+
+	if len(v.ShareNotionAction) > 0 {
+		ok := object.Key("ShareNotionAction")
+		ok.String(string(v.ShareNotionAction))
+	}
+
+	if len(v.ShareOneDriveAction) > 0 {
+		ok := object.Key("ShareOneDriveAction")
+		ok.String(string(v.ShareOneDriveAction))
+	}
+
+	if len(v.ShareOpenAPIAction) > 0 {
+		ok := object.Key("ShareOpenAPIAction")
+		ok.String(string(v.ShareOpenAPIAction))
+	}
+
+	if len(v.SharePagerDutyAction) > 0 {
+		ok := object.Key("SharePagerDutyAction")
+		ok.String(string(v.SharePagerDutyAction))
+	}
+
+	if len(v.SharePointAction) > 0 {
+		ok := object.Key("SharePointAction")
+		ok.String(string(v.SharePointAction))
+	}
+
+	if len(v.ShareSalesforceAction) > 0 {
+		ok := object.Key("ShareSalesforceAction")
+		ok.String(string(v.ShareSalesforceAction))
+	}
+
+	if len(v.ShareSandPGlobalEnergyAction) > 0 {
+		ok := object.Key("ShareSandPGlobalEnergyAction")
+		ok.String(string(v.ShareSandPGlobalEnergyAction))
+	}
+
+	if len(v.ShareSandPGMIAction) > 0 {
+		ok := object.Key("ShareSandPGMIAction")
+		ok.String(string(v.ShareSandPGMIAction))
+	}
+
+	if len(v.ShareSAPBillOfMaterialAction) > 0 {
+		ok := object.Key("ShareSAPBillOfMaterialAction")
+		ok.String(string(v.ShareSAPBillOfMaterialAction))
+	}
+
+	if len(v.ShareSAPBusinessPartnerAction) > 0 {
+		ok := object.Key("ShareSAPBusinessPartnerAction")
+		ok.String(string(v.ShareSAPBusinessPartnerAction))
+	}
+
+	if len(v.ShareSAPMaterialStockAction) > 0 {
+		ok := object.Key("ShareSAPMaterialStockAction")
+		ok.String(string(v.ShareSAPMaterialStockAction))
+	}
+
+	if len(v.ShareSAPPhysicalInventoryAction) > 0 {
+		ok := object.Key("ShareSAPPhysicalInventoryAction")
+		ok.String(string(v.ShareSAPPhysicalInventoryAction))
+	}
+
+	if len(v.ShareSAPProductMasterDataAction) > 0 {
+		ok := object.Key("ShareSAPProductMasterDataAction")
+		ok.String(string(v.ShareSAPProductMasterDataAction))
+	}
+
+	if len(v.ShareServiceNowAction) > 0 {
+		ok := object.Key("ShareServiceNowAction")
+		ok.String(string(v.ShareServiceNowAction))
+	}
+
+	if len(v.ShareSharePointAction) > 0 {
+		ok := object.Key("ShareSharePointAction")
+		ok.String(string(v.ShareSharePointAction))
+	}
+
+	if len(v.ShareSlackAction) > 0 {
+		ok := object.Key("ShareSlackAction")
+		ok.String(string(v.ShareSlackAction))
+	}
+
+	if len(v.ShareSmartsheetAction) > 0 {
+		ok := object.Key("ShareSmartsheetAction")
+		ok.String(string(v.ShareSmartsheetAction))
+	}
+
+	if len(v.ShareTextractAction) > 0 {
+		ok := object.Key("ShareTextractAction")
+		ok.String(string(v.ShareTextractAction))
+	}
+
+	if len(v.ShareZendeskAction) > 0 {
+		ok := object.Key("ShareZendeskAction")
+		ok.String(string(v.ShareZendeskAction))
+	}
+
+	if len(v.SlackAction) > 0 {
+		ok := object.Key("SlackAction")
+		ok.String(string(v.SlackAction))
+	}
+
+	if len(v.SmartsheetAction) > 0 {
+		ok := object.Key("SmartsheetAction")
+		ok.String(string(v.SmartsheetAction))
+	}
+
 	if len(v.Space) > 0 {
 		ok := object.Key("Space")
 		ok.String(string(v.Space))
@@ -26800,9 +27435,44 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.SubscribeDashboardEmailReports))
 	}
 
+	if len(v.TextractAction) > 0 {
+		ok := object.Key("TextractAction")
+		ok.String(string(v.TextractAction))
+	}
+
 	if len(v.UseAgentWebSearch) > 0 {
 		ok := object.Key("UseAgentWebSearch")
 		ok.String(string(v.UseAgentWebSearch))
+	}
+
+	if len(v.UseAmazonBedrockARSAction) > 0 {
+		ok := object.Key("UseAmazonBedrockARSAction")
+		ok.String(string(v.UseAmazonBedrockARSAction))
+	}
+
+	if len(v.UseAmazonBedrockFSAction) > 0 {
+		ok := object.Key("UseAmazonBedrockFSAction")
+		ok.String(string(v.UseAmazonBedrockFSAction))
+	}
+
+	if len(v.UseAmazonBedrockKRSAction) > 0 {
+		ok := object.Key("UseAmazonBedrockKRSAction")
+		ok.String(string(v.UseAmazonBedrockKRSAction))
+	}
+
+	if len(v.UseAmazonSThreeAction) > 0 {
+		ok := object.Key("UseAmazonSThreeAction")
+		ok.String(string(v.UseAmazonSThreeAction))
+	}
+
+	if len(v.UseAsanaAction) > 0 {
+		ok := object.Key("UseAsanaAction")
+		ok.String(string(v.UseAsanaAction))
+	}
+
+	if len(v.UseBambooHRAction) > 0 {
+		ok := object.Key("UseBambooHRAction")
+		ok.String(string(v.UseBambooHRAction))
 	}
 
 	if len(v.UseBedrockModels) > 0 {
@@ -26810,9 +27480,199 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.UseBedrockModels))
 	}
 
+	if len(v.UseBoxAgentAction) > 0 {
+		ok := object.Key("UseBoxAgentAction")
+		ok.String(string(v.UseBoxAgentAction))
+	}
+
+	if len(v.UseCanvaAgentAction) > 0 {
+		ok := object.Key("UseCanvaAgentAction")
+		ok.String(string(v.UseCanvaAgentAction))
+	}
+
+	if len(v.UseComprehendAction) > 0 {
+		ok := object.Key("UseComprehendAction")
+		ok.String(string(v.UseComprehendAction))
+	}
+
+	if len(v.UseComprehendMedicalAction) > 0 {
+		ok := object.Key("UseComprehendMedicalAction")
+		ok.String(string(v.UseComprehendMedicalAction))
+	}
+
+	if len(v.UseConfluenceAction) > 0 {
+		ok := object.Key("UseConfluenceAction")
+		ok.String(string(v.UseConfluenceAction))
+	}
+
+	if len(v.UseFactSetAction) > 0 {
+		ok := object.Key("UseFactSetAction")
+		ok.String(string(v.UseFactSetAction))
+	}
+
+	if len(v.UseGenericHTTPAction) > 0 {
+		ok := object.Key("UseGenericHTTPAction")
+		ok.String(string(v.UseGenericHTTPAction))
+	}
+
+	if len(v.UseGithubAction) > 0 {
+		ok := object.Key("UseGithubAction")
+		ok.String(string(v.UseGithubAction))
+	}
+
+	if len(v.UseGoogleCalendarAction) > 0 {
+		ok := object.Key("UseGoogleCalendarAction")
+		ok.String(string(v.UseGoogleCalendarAction))
+	}
+
+	if len(v.UseHubspotAction) > 0 {
+		ok := object.Key("UseHubspotAction")
+		ok.String(string(v.UseHubspotAction))
+	}
+
+	if len(v.UseHuggingFaceAction) > 0 {
+		ok := object.Key("UseHuggingFaceAction")
+		ok.String(string(v.UseHuggingFaceAction))
+	}
+
+	if len(v.UseIntercomAction) > 0 {
+		ok := object.Key("UseIntercomAction")
+		ok.String(string(v.UseIntercomAction))
+	}
+
+	if len(v.UseJiraAction) > 0 {
+		ok := object.Key("UseJiraAction")
+		ok.String(string(v.UseJiraAction))
+	}
+
+	if len(v.UseLinearAction) > 0 {
+		ok := object.Key("UseLinearAction")
+		ok.String(string(v.UseLinearAction))
+	}
+
+	if len(v.UseMCPAction) > 0 {
+		ok := object.Key("UseMCPAction")
+		ok.String(string(v.UseMCPAction))
+	}
+
+	if len(v.UseMondayAction) > 0 {
+		ok := object.Key("UseMondayAction")
+		ok.String(string(v.UseMondayAction))
+	}
+
+	if len(v.UseMSExchangeAction) > 0 {
+		ok := object.Key("UseMSExchangeAction")
+		ok.String(string(v.UseMSExchangeAction))
+	}
+
+	if len(v.UseMSTeamsAction) > 0 {
+		ok := object.Key("UseMSTeamsAction")
+		ok.String(string(v.UseMSTeamsAction))
+	}
+
+	if len(v.UseNewRelicAction) > 0 {
+		ok := object.Key("UseNewRelicAction")
+		ok.String(string(v.UseNewRelicAction))
+	}
+
+	if len(v.UseNotionAction) > 0 {
+		ok := object.Key("UseNotionAction")
+		ok.String(string(v.UseNotionAction))
+	}
+
+	if len(v.UseOneDriveAction) > 0 {
+		ok := object.Key("UseOneDriveAction")
+		ok.String(string(v.UseOneDriveAction))
+	}
+
+	if len(v.UseOpenAPIAction) > 0 {
+		ok := object.Key("UseOpenAPIAction")
+		ok.String(string(v.UseOpenAPIAction))
+	}
+
+	if len(v.UsePagerDutyAction) > 0 {
+		ok := object.Key("UsePagerDutyAction")
+		ok.String(string(v.UsePagerDutyAction))
+	}
+
+	if len(v.UseSalesforceAction) > 0 {
+		ok := object.Key("UseSalesforceAction")
+		ok.String(string(v.UseSalesforceAction))
+	}
+
+	if len(v.UseSandPGlobalEnergyAction) > 0 {
+		ok := object.Key("UseSandPGlobalEnergyAction")
+		ok.String(string(v.UseSandPGlobalEnergyAction))
+	}
+
+	if len(v.UseSandPGMIAction) > 0 {
+		ok := object.Key("UseSandPGMIAction")
+		ok.String(string(v.UseSandPGMIAction))
+	}
+
+	if len(v.UseSAPBillOfMaterialAction) > 0 {
+		ok := object.Key("UseSAPBillOfMaterialAction")
+		ok.String(string(v.UseSAPBillOfMaterialAction))
+	}
+
+	if len(v.UseSAPBusinessPartnerAction) > 0 {
+		ok := object.Key("UseSAPBusinessPartnerAction")
+		ok.String(string(v.UseSAPBusinessPartnerAction))
+	}
+
+	if len(v.UseSAPMaterialStockAction) > 0 {
+		ok := object.Key("UseSAPMaterialStockAction")
+		ok.String(string(v.UseSAPMaterialStockAction))
+	}
+
+	if len(v.UseSAPPhysicalInventoryAction) > 0 {
+		ok := object.Key("UseSAPPhysicalInventoryAction")
+		ok.String(string(v.UseSAPPhysicalInventoryAction))
+	}
+
+	if len(v.UseSAPProductMasterDataAction) > 0 {
+		ok := object.Key("UseSAPProductMasterDataAction")
+		ok.String(string(v.UseSAPProductMasterDataAction))
+	}
+
+	if len(v.UseServiceNowAction) > 0 {
+		ok := object.Key("UseServiceNowAction")
+		ok.String(string(v.UseServiceNowAction))
+	}
+
+	if len(v.UseSharePointAction) > 0 {
+		ok := object.Key("UseSharePointAction")
+		ok.String(string(v.UseSharePointAction))
+	}
+
+	if len(v.UseSlackAction) > 0 {
+		ok := object.Key("UseSlackAction")
+		ok.String(string(v.UseSlackAction))
+	}
+
+	if len(v.UseSmartsheetAction) > 0 {
+		ok := object.Key("UseSmartsheetAction")
+		ok.String(string(v.UseSmartsheetAction))
+	}
+
+	if len(v.UseTextractAction) > 0 {
+		ok := object.Key("UseTextractAction")
+		ok.String(string(v.UseTextractAction))
+	}
+
+	if len(v.UseZendeskAction) > 0 {
+		ok := object.Key("UseZendeskAction")
+		ok.String(string(v.UseZendeskAction))
+	}
+
 	if len(v.ViewAccountSPICECapacity) > 0 {
 		ok := object.Key("ViewAccountSPICECapacity")
 		ok.String(string(v.ViewAccountSPICECapacity))
+	}
+
+	if len(v.ZendeskAction) > 0 {
+		ok := object.Key("ZendeskAction")
+		ok.String(string(v.ZendeskAction))
 	}
 
 	return nil
@@ -34207,6 +35067,13 @@ func awsRestjson1_serializeDocumentFreeFormLayoutConfiguration(v *types.FreeForm
 	if v.Elements != nil {
 		ok := object.Key("Elements")
 		if err := awsRestjson1_serializeDocumentFreeFromLayoutElementList(v.Elements, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Groups != nil {
+		ok := object.Key("Groups")
+		if err := awsRestjson1_serializeDocumentSheetLayoutGroupList(v.Groups, ok); err != nil {
 			return err
 		}
 	}
@@ -45425,6 +46292,68 @@ func awsRestjson1_serializeDocumentSheetLayoutElementMaximizationOption(v *types
 		ok.String(string(v.AvailabilityStatus))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSheetLayoutGroup(v *types.SheetLayoutGroup, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.Members != nil {
+		ok := object.Key("Members")
+		if err := awsRestjson1_serializeDocumentSheetLayoutGroupMemberList(v.Members, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSheetLayoutGroupList(v []types.SheetLayoutGroup, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSheetLayoutGroup(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSheetLayoutGroupMember(v *types.SheetLayoutGroupMember, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSheetLayoutGroupMemberList(v []types.SheetLayoutGroupMember, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSheetLayoutGroupMember(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

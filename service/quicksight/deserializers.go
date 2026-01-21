@@ -57559,6 +57559,42 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.AddOrRunAnomalyDetectionForAnalyses = types.CapabilityState(jtv)
 			}
 
+		case "AmazonBedrockARSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.AmazonBedrockARSAction = types.CapabilityState(jtv)
+			}
+
+		case "AmazonBedrockFSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.AmazonBedrockFSAction = types.CapabilityState(jtv)
+			}
+
+		case "AmazonBedrockKRSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.AmazonBedrockKRSAction = types.CapabilityState(jtv)
+			}
+
+		case "AmazonSThreeAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.AmazonSThreeAction = types.CapabilityState(jtv)
+			}
+
 		case "Analysis":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57566,6 +57602,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.Analysis = types.CapabilityState(jtv)
+			}
+
+		case "AsanaAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.AsanaAction = types.CapabilityState(jtv)
 			}
 
 		case "Automate":
@@ -57577,6 +57622,33 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.Automate = types.CapabilityState(jtv)
 			}
 
+		case "BambooHRAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.BambooHRAction = types.CapabilityState(jtv)
+			}
+
+		case "BoxAgentAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.BoxAgentAction = types.CapabilityState(jtv)
+			}
+
+		case "CanvaAgentAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CanvaAgentAction = types.CapabilityState(jtv)
+			}
+
 		case "ChatAgent":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57584,6 +57656,132 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.ChatAgent = types.CapabilityState(jtv)
+			}
+
+		case "ComprehendAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ComprehendAction = types.CapabilityState(jtv)
+			}
+
+		case "ComprehendMedicalAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ComprehendMedicalAction = types.CapabilityState(jtv)
+			}
+
+		case "ConfluenceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ConfluenceAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateAmazonBedrockARSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateAmazonBedrockARSAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateAmazonBedrockFSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateAmazonBedrockFSAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateAmazonBedrockKRSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateAmazonBedrockKRSAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateAmazonSThreeAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateAmazonSThreeAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateAsanaAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateAsanaAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateBambooHRAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateBambooHRAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateBoxAgentAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateBoxAgentAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateCanvaAgentAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateCanvaAgentAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateComprehendAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateComprehendAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateComprehendMedicalAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateComprehendMedicalAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateConfluenceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateConfluenceAction = types.CapabilityState(jtv)
 			}
 
 		case "CreateAndUpdateDashboardEmailReports":
@@ -57613,6 +57811,285 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.CreateAndUpdateDataSources = types.CapabilityState(jtv)
 			}
 
+		case "CreateAndUpdateFactSetAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateFactSetAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateGenericHTTPAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateGenericHTTPAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateGithubAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateGithubAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateGoogleCalendarAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateGoogleCalendarAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateHubspotAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateHubspotAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateHuggingFaceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateHuggingFaceAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateIntercomAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateIntercomAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateJiraAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateJiraAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateLinearAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateLinearAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateMCPAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateMCPAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateMondayAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateMondayAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateMSExchangeAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateMSExchangeAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateMSTeamsAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateMSTeamsAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateNewRelicAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateNewRelicAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateNotionAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateNotionAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateOneDriveAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateOneDriveAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateOpenAPIAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateOpenAPIAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdatePagerDutyAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdatePagerDutyAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSalesforceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSalesforceAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSandPGlobalEnergyAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSandPGlobalEnergyAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSandPGMIAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSandPGMIAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSAPBillOfMaterialAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSAPBillOfMaterialAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSAPBusinessPartnerAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSAPBusinessPartnerAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSAPMaterialStockAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSAPMaterialStockAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSAPPhysicalInventoryAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSAPPhysicalInventoryAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSAPProductMasterDataAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSAPProductMasterDataAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateServiceNowAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateServiceNowAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSharePointAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSharePointAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSlackAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSlackAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateSmartsheetAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateSmartsheetAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateTextractAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateTextractAction = types.CapabilityState(jtv)
+			}
+
 		case "CreateAndUpdateThemes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57629,6 +58106,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.CreateAndUpdateThresholdAlerts = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateZendeskAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateZendeskAction = types.CapabilityState(jtv)
 			}
 
 		case "CreateChatAgents":
@@ -57721,6 +58207,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.ExportToPdfInScheduledReports = types.CapabilityState(jtv)
 			}
 
+		case "FactSetAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.FactSetAction = types.CapabilityState(jtv)
+			}
+
 		case "Flow":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57728,6 +58223,51 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.Flow = types.CapabilityState(jtv)
+			}
+
+		case "GenericHTTPAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.GenericHTTPAction = types.CapabilityState(jtv)
+			}
+
+		case "GithubAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.GithubAction = types.CapabilityState(jtv)
+			}
+
+		case "GoogleCalendarAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.GoogleCalendarAction = types.CapabilityState(jtv)
+			}
+
+		case "HubspotAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.HubspotAction = types.CapabilityState(jtv)
+			}
+
+		case "HuggingFaceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.HuggingFaceAction = types.CapabilityState(jtv)
 			}
 
 		case "IncludeContentInScheduledReportsEmail":
@@ -57739,6 +58279,24 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.IncludeContentInScheduledReportsEmail = types.CapabilityState(jtv)
 			}
 
+		case "IntercomAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.IntercomAction = types.CapabilityState(jtv)
+			}
+
+		case "JiraAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.JiraAction = types.CapabilityState(jtv)
+			}
+
 		case "KnowledgeBase":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57746,6 +58304,96 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.KnowledgeBase = types.CapabilityState(jtv)
+			}
+
+		case "LinearAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.LinearAction = types.CapabilityState(jtv)
+			}
+
+		case "MCPAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.MCPAction = types.CapabilityState(jtv)
+			}
+
+		case "MondayAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.MondayAction = types.CapabilityState(jtv)
+			}
+
+		case "MSExchangeAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.MSExchangeAction = types.CapabilityState(jtv)
+			}
+
+		case "MSTeamsAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.MSTeamsAction = types.CapabilityState(jtv)
+			}
+
+		case "NewRelicAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.NewRelicAction = types.CapabilityState(jtv)
+			}
+
+		case "NotionAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.NotionAction = types.CapabilityState(jtv)
+			}
+
+		case "OneDriveAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.OneDriveAction = types.CapabilityState(jtv)
+			}
+
+		case "OpenAPIAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.OpenAPIAction = types.CapabilityState(jtv)
+			}
+
+		case "PagerDutyAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.PagerDutyAction = types.CapabilityState(jtv)
 			}
 
 		case "PerformFlowUiTask":
@@ -57793,6 +58441,78 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.Research = types.CapabilityState(jtv)
 			}
 
+		case "SalesforceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SalesforceAction = types.CapabilityState(jtv)
+			}
+
+		case "SandPGlobalEnergyAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SandPGlobalEnergyAction = types.CapabilityState(jtv)
+			}
+
+		case "SandPGMIAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SandPGMIAction = types.CapabilityState(jtv)
+			}
+
+		case "SAPBillOfMaterialAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SAPBillOfMaterialAction = types.CapabilityState(jtv)
+			}
+
+		case "SAPBusinessPartnerAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SAPBusinessPartnerAction = types.CapabilityState(jtv)
+			}
+
+		case "SAPMaterialStockAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SAPMaterialStockAction = types.CapabilityState(jtv)
+			}
+
+		case "SAPPhysicalInventoryAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SAPPhysicalInventoryAction = types.CapabilityState(jtv)
+			}
+
+		case "SAPProductMasterDataAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SAPProductMasterDataAction = types.CapabilityState(jtv)
+			}
+
 		case "SelfUpgradeUserRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57802,6 +58522,51 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.SelfUpgradeUserRole = types.CapabilityState(jtv)
 			}
 
+		case "ServiceNowAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ServiceNowAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareAmazonBedrockARSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareAmazonBedrockARSAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareAmazonBedrockFSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareAmazonBedrockFSAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareAmazonBedrockKRSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareAmazonBedrockKRSAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareAmazonSThreeAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareAmazonSThreeAction = types.CapabilityState(jtv)
+			}
+
 		case "ShareAnalyses":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57809,6 +58574,69 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.ShareAnalyses = types.CapabilityState(jtv)
+			}
+
+		case "ShareAsanaAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareAsanaAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareBambooHRAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareBambooHRAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareBoxAgentAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareBoxAgentAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareCanvaAgentAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareCanvaAgentAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareComprehendAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareComprehendAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareComprehendMedicalAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareComprehendMedicalAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareConfluenceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareConfluenceAction = types.CapabilityState(jtv)
 			}
 
 		case "ShareDashboards":
@@ -57838,6 +58666,321 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.ShareDataSources = types.CapabilityState(jtv)
 			}
 
+		case "ShareFactSetAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareFactSetAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareGenericHTTPAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareGenericHTTPAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareGithubAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareGithubAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareGoogleCalendarAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareGoogleCalendarAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareHubspotAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareHubspotAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareHuggingFaceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareHuggingFaceAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareIntercomAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareIntercomAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareJiraAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareJiraAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareLinearAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareLinearAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareMCPAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareMCPAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareMondayAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareMondayAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareMSExchangeAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareMSExchangeAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareMSTeamsAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareMSTeamsAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareNewRelicAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareNewRelicAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareNotionAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareNotionAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareOneDriveAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareOneDriveAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareOpenAPIAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareOpenAPIAction = types.CapabilityState(jtv)
+			}
+
+		case "SharePagerDutyAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SharePagerDutyAction = types.CapabilityState(jtv)
+			}
+
+		case "SharePointAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SharePointAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSalesforceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSalesforceAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSandPGlobalEnergyAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSandPGlobalEnergyAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSandPGMIAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSandPGMIAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSAPBillOfMaterialAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSAPBillOfMaterialAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSAPBusinessPartnerAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSAPBusinessPartnerAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSAPMaterialStockAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSAPMaterialStockAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSAPPhysicalInventoryAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSAPPhysicalInventoryAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSAPProductMasterDataAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSAPProductMasterDataAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareServiceNowAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareServiceNowAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSharePointAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSharePointAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSlackAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSlackAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareSmartsheetAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareSmartsheetAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareTextractAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareTextractAction = types.CapabilityState(jtv)
+			}
+
+		case "ShareZendeskAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareZendeskAction = types.CapabilityState(jtv)
+			}
+
+		case "SlackAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SlackAction = types.CapabilityState(jtv)
+			}
+
+		case "SmartsheetAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.SmartsheetAction = types.CapabilityState(jtv)
+			}
+
 		case "Space":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57856,6 +58999,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.SubscribeDashboardEmailReports = types.CapabilityState(jtv)
 			}
 
+		case "TextractAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.TextractAction = types.CapabilityState(jtv)
+			}
+
 		case "UseAgentWebSearch":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57863,6 +59015,60 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.UseAgentWebSearch = types.CapabilityState(jtv)
+			}
+
+		case "UseAmazonBedrockARSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseAmazonBedrockARSAction = types.CapabilityState(jtv)
+			}
+
+		case "UseAmazonBedrockFSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseAmazonBedrockFSAction = types.CapabilityState(jtv)
+			}
+
+		case "UseAmazonBedrockKRSAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseAmazonBedrockKRSAction = types.CapabilityState(jtv)
+			}
+
+		case "UseAmazonSThreeAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseAmazonSThreeAction = types.CapabilityState(jtv)
+			}
+
+		case "UseAsanaAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseAsanaAction = types.CapabilityState(jtv)
+			}
+
+		case "UseBambooHRAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseBambooHRAction = types.CapabilityState(jtv)
 			}
 
 		case "UseBedrockModels":
@@ -57874,6 +59080,339 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.UseBedrockModels = types.CapabilityState(jtv)
 			}
 
+		case "UseBoxAgentAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseBoxAgentAction = types.CapabilityState(jtv)
+			}
+
+		case "UseCanvaAgentAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseCanvaAgentAction = types.CapabilityState(jtv)
+			}
+
+		case "UseComprehendAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseComprehendAction = types.CapabilityState(jtv)
+			}
+
+		case "UseComprehendMedicalAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseComprehendMedicalAction = types.CapabilityState(jtv)
+			}
+
+		case "UseConfluenceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseConfluenceAction = types.CapabilityState(jtv)
+			}
+
+		case "UseFactSetAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseFactSetAction = types.CapabilityState(jtv)
+			}
+
+		case "UseGenericHTTPAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseGenericHTTPAction = types.CapabilityState(jtv)
+			}
+
+		case "UseGithubAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseGithubAction = types.CapabilityState(jtv)
+			}
+
+		case "UseGoogleCalendarAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseGoogleCalendarAction = types.CapabilityState(jtv)
+			}
+
+		case "UseHubspotAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseHubspotAction = types.CapabilityState(jtv)
+			}
+
+		case "UseHuggingFaceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseHuggingFaceAction = types.CapabilityState(jtv)
+			}
+
+		case "UseIntercomAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseIntercomAction = types.CapabilityState(jtv)
+			}
+
+		case "UseJiraAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseJiraAction = types.CapabilityState(jtv)
+			}
+
+		case "UseLinearAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseLinearAction = types.CapabilityState(jtv)
+			}
+
+		case "UseMCPAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseMCPAction = types.CapabilityState(jtv)
+			}
+
+		case "UseMondayAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseMondayAction = types.CapabilityState(jtv)
+			}
+
+		case "UseMSExchangeAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseMSExchangeAction = types.CapabilityState(jtv)
+			}
+
+		case "UseMSTeamsAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseMSTeamsAction = types.CapabilityState(jtv)
+			}
+
+		case "UseNewRelicAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseNewRelicAction = types.CapabilityState(jtv)
+			}
+
+		case "UseNotionAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseNotionAction = types.CapabilityState(jtv)
+			}
+
+		case "UseOneDriveAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseOneDriveAction = types.CapabilityState(jtv)
+			}
+
+		case "UseOpenAPIAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseOpenAPIAction = types.CapabilityState(jtv)
+			}
+
+		case "UsePagerDutyAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UsePagerDutyAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSalesforceAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSalesforceAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSandPGlobalEnergyAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSandPGlobalEnergyAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSandPGMIAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSandPGMIAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSAPBillOfMaterialAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSAPBillOfMaterialAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSAPBusinessPartnerAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSAPBusinessPartnerAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSAPMaterialStockAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSAPMaterialStockAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSAPPhysicalInventoryAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSAPPhysicalInventoryAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSAPProductMasterDataAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSAPProductMasterDataAction = types.CapabilityState(jtv)
+			}
+
+		case "UseServiceNowAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseServiceNowAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSharePointAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSharePointAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSlackAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSlackAction = types.CapabilityState(jtv)
+			}
+
+		case "UseSmartsheetAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseSmartsheetAction = types.CapabilityState(jtv)
+			}
+
+		case "UseTextractAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseTextractAction = types.CapabilityState(jtv)
+			}
+
+		case "UseZendeskAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.UseZendeskAction = types.CapabilityState(jtv)
+			}
+
 		case "ViewAccountSPICECapacity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57881,6 +59420,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.ViewAccountSPICECapacity = types.CapabilityState(jtv)
+			}
+
+		case "ZendeskAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ZendeskAction = types.CapabilityState(jtv)
 			}
 
 		default:
@@ -75137,6 +76685,11 @@ func awsRestjson1_deserializeDocumentFreeFormLayoutConfiguration(v **types.FreeF
 
 		case "Elements":
 			if err := awsRestjson1_deserializeDocumentFreeFromLayoutElementList(&sv.Elements, value); err != nil {
+				return err
+			}
+
+		case "Groups":
+			if err := awsRestjson1_deserializeDocumentSheetLayoutGroupList(&sv.Groups, value); err != nil {
 				return err
 			}
 
@@ -100766,6 +102319,168 @@ func awsRestjson1_deserializeDocumentSheetLayoutElementMaximizationOption(v **ty
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetLayoutGroup(v **types.SheetLayoutGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetLayoutGroup
+	if *v == nil {
+		sv = &types.SheetLayoutGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "Members":
+			if err := awsRestjson1_deserializeDocumentSheetLayoutGroupMemberList(&sv.Members, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetLayoutGroupList(v *[]types.SheetLayoutGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SheetLayoutGroup
+	if *v == nil {
+		cv = []types.SheetLayoutGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SheetLayoutGroup
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSheetLayoutGroup(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetLayoutGroupMember(v **types.SheetLayoutGroupMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetLayoutGroupMember
+	if *v == nil {
+		sv = &types.SheetLayoutGroupMember{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SheetLayoutGroupMemberType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SheetLayoutGroupMemberType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetLayoutGroupMemberList(v *[]types.SheetLayoutGroupMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SheetLayoutGroupMember
+	if *v == nil {
+		cv = []types.SheetLayoutGroupMember{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SheetLayoutGroupMember
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSheetLayoutGroupMember(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

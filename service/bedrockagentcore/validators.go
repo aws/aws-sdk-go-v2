@@ -880,6 +880,42 @@ func validateBranchFilter(v *types.BranchFilter) error {
 	}
 }
 
+func validateBrowserExtension(v *types.BrowserExtension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrowserExtension"}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	} else if v.Location != nil {
+		if err := validateResourceLocation(v.Location); err != nil {
+			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBrowserExtensions(v []types.BrowserExtension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrowserExtensions"}
+	for i := range v {
+		if err := validateBrowserExtension(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConversational(v *types.Conversational) error {
 	if v == nil {
 		return nil
@@ -1173,6 +1209,43 @@ func validatePayloadTypeList(v []types.PayloadType) error {
 		if err := validatePayloadType(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceLocation(v types.ResourceLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceLocation"}
+	switch uv := v.(type) {
+	case *types.ResourceLocationMemberS3:
+		if err := validateS3Location(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3Location(v *types.S3Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Location"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Prefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1798,6 +1871,11 @@ func validateOpStartBrowserSessionInput(v *StartBrowserSessionInput) error {
 	if v.ViewPort != nil {
 		if err := validateViewPort(v.ViewPort); err != nil {
 			invalidParams.AddNested("ViewPort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Extensions != nil {
+		if err := validateBrowserExtensions(v.Extensions); err != nil {
+			invalidParams.AddNested("Extensions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

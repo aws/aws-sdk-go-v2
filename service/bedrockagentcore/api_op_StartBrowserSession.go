@@ -61,6 +61,9 @@ type StartBrowserSessionInput struct {
 	// the creation of duplicate sessions if there are temporary network issues.
 	ClientToken *string
 
+	// A list of browser extensions to load into the browser session.
+	Extensions []types.BrowserExtension
+
 	// The name of the browser session. This name helps you identify and manage the
 	// session. The name does not need to be unique.
 	Name *string

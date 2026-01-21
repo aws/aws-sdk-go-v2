@@ -78,6 +78,9 @@ type GetBrowserSessionOutput struct {
 	// This member is required.
 	SessionId *string
 
+	// The list of browser extensions that are configured in the browser session.
+	Extensions []types.BrowserExtension
+
 	// The time at which the browser session was last updated.
 	LastUpdatedAt *time.Time
 

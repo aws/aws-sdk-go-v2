@@ -3091,14 +3091,80 @@ type Capabilities struct {
 	// The ability to add or run anomaly detection.
 	AddOrRunAnomalyDetectionForAnalyses CapabilityState
 
+	// The ability to perform actions using Bedrock Agent connectors.
+	AmazonBedrockARSAction CapabilityState
+
+	// The ability to perform actions using Bedrock Runtime connectors.
+	AmazonBedrockFSAction CapabilityState
+
+	// The ability to perform actions using Bedrock Data Automation Runtime connectors.
+	AmazonBedrockKRSAction CapabilityState
+
+	// The ability to perform actions using Amazon S3 connectors.
+	AmazonSThreeAction CapabilityState
+
 	// The ability to perform analysis-related actions.
 	Analysis CapabilityState
+
+	// The ability to perform actions using Asana connectors.
+	AsanaAction CapabilityState
 
 	// The ability to perform automate-related actions.
 	Automate CapabilityState
 
+	// The ability to perform actions using BambooHR connectors.
+	BambooHRAction CapabilityState
+
+	// The ability to perform actions using Box Agent connectors.
+	BoxAgentAction CapabilityState
+
+	// The ability to perform actions using Canva Agent connectors.
+	CanvaAgentAction CapabilityState
+
 	// The ability to perform chat-related actions.
 	ChatAgent CapabilityState
+
+	// The ability to perform actions using Comprehend connectors.
+	ComprehendAction CapabilityState
+
+	// The ability to perform actions using Comprehend Medical connectors.
+	ComprehendMedicalAction CapabilityState
+
+	// The ability to perform actions using Atlassian Confluence Cloud connectors.
+	ConfluenceAction CapabilityState
+
+	// The ability to create and update Bedrock Agent actions.
+	CreateAndUpdateAmazonBedrockARSAction CapabilityState
+
+	// The ability to create and update Bedrock Runtime actions.
+	CreateAndUpdateAmazonBedrockFSAction CapabilityState
+
+	// The ability to create and update Bedrock Data Automation Runtime actions.
+	CreateAndUpdateAmazonBedrockKRSAction CapabilityState
+
+	// The ability to create and update Amazon S3 actions.
+	CreateAndUpdateAmazonSThreeAction CapabilityState
+
+	// The ability to create and update Asana actions.
+	CreateAndUpdateAsanaAction CapabilityState
+
+	// The ability to create and update BambooHR actions.
+	CreateAndUpdateBambooHRAction CapabilityState
+
+	// The ability to create and update Box Agent actions.
+	CreateAndUpdateBoxAgentAction CapabilityState
+
+	// The ability to create and update Canva Agent actions.
+	CreateAndUpdateCanvaAgentAction CapabilityState
+
+	// The ability to create and update Comprehend actions.
+	CreateAndUpdateComprehendAction CapabilityState
+
+	// The ability to create and update Comprehend Medical actions.
+	CreateAndUpdateComprehendMedicalAction CapabilityState
+
+	// The ability to create and update Atlassian Confluence Cloud actions.
+	CreateAndUpdateConfluenceAction CapabilityState
 
 	// The ability to create and update email reports.
 	CreateAndUpdateDashboardEmailReports CapabilityState
@@ -3109,11 +3175,107 @@ type Capabilities struct {
 	// The ability to create and update datasets.
 	CreateAndUpdateDatasets CapabilityState
 
+	// The ability to create and update FactSet actions.
+	CreateAndUpdateFactSetAction CapabilityState
+
+	// The ability to create and update REST API connection actions.
+	CreateAndUpdateGenericHTTPAction CapabilityState
+
+	// The ability to create and update GitHub actions.
+	CreateAndUpdateGithubAction CapabilityState
+
+	// The ability to create and update Google Calendar actions.
+	CreateAndUpdateGoogleCalendarAction CapabilityState
+
+	// The ability to create and update Hubspot actions.
+	CreateAndUpdateHubspotAction CapabilityState
+
+	// The ability to create and update HuggingFace actions.
+	CreateAndUpdateHuggingFaceAction CapabilityState
+
+	// The ability to create and update Intercom actions.
+	CreateAndUpdateIntercomAction CapabilityState
+
+	// The ability to create and update Jira actions.
+	CreateAndUpdateJiraAction CapabilityState
+
+	// The ability to create and update Linear actions.
+	CreateAndUpdateLinearAction CapabilityState
+
+	// The ability to create and update Model Context Protocol actions.
+	CreateAndUpdateMCPAction CapabilityState
+
+	// The ability to create and update Microsoft Outlook actions.
+	CreateAndUpdateMSExchangeAction CapabilityState
+
+	// The ability to create and update Microsoft Teams actions.
+	CreateAndUpdateMSTeamsAction CapabilityState
+
+	// The ability to create and update Monday actions.
+	CreateAndUpdateMondayAction CapabilityState
+
+	// The ability to create and update New Relic actions.
+	CreateAndUpdateNewRelicAction CapabilityState
+
+	// The ability to create and update Notion actions.
+	CreateAndUpdateNotionAction CapabilityState
+
+	// The ability to create and update Microsoft OneDrive actions.
+	CreateAndUpdateOneDriveAction CapabilityState
+
+	// The ability to create and update OpenAPI Specification actions.
+	CreateAndUpdateOpenAPIAction CapabilityState
+
+	// The ability to create and update PagerDuty Advance actions.
+	CreateAndUpdatePagerDutyAction CapabilityState
+
+	// The ability to create and update SAP Bill of Materials actions.
+	CreateAndUpdateSAPBillOfMaterialAction CapabilityState
+
+	// The ability to create and update SAP Business Partner actions.
+	CreateAndUpdateSAPBusinessPartnerAction CapabilityState
+
+	// The ability to create and update SAP Material Stock actions.
+	CreateAndUpdateSAPMaterialStockAction CapabilityState
+
+	// The ability to create and update SAP Physical Inventory actions.
+	CreateAndUpdateSAPPhysicalInventoryAction CapabilityState
+
+	// The ability to create and update SAP Product Master actions.
+	CreateAndUpdateSAPProductMasterDataAction CapabilityState
+
+	// The ability to create and update Salesforce actions.
+	CreateAndUpdateSalesforceAction CapabilityState
+
+	// The ability to create and update S&P Global Market Intelligence actions.
+	CreateAndUpdateSandPGMIAction CapabilityState
+
+	// The ability to create and update S&P Global Energy actions.
+	CreateAndUpdateSandPGlobalEnergyAction CapabilityState
+
+	// The ability to create and update ServiceNow actions.
+	CreateAndUpdateServiceNowAction CapabilityState
+
+	// The ability to create and update Microsoft SharePoint Online actions.
+	CreateAndUpdateSharePointAction CapabilityState
+
+	// The ability to create and update Slack actions.
+	CreateAndUpdateSlackAction CapabilityState
+
+	// The ability to create and update Smartsheet actions.
+	CreateAndUpdateSmartsheetAction CapabilityState
+
+	// The ability to create and update Textract actions.
+	CreateAndUpdateTextractAction CapabilityState
+
 	// The ability to export to Create and Update themes.
 	CreateAndUpdateThemes CapabilityState
 
 	// The ability to create and update threshold alerts.
 	CreateAndUpdateThresholdAlerts CapabilityState
+
+	// The ability to create and update Zendesk actions.
+	CreateAndUpdateZendeskAction CapabilityState
 
 	// The ability to create chat agents.
 	CreateChatAgents CapabilityState
@@ -3145,15 +3307,69 @@ type Capabilities struct {
 	// The ability to export to PDF files in scheduled email reports.
 	ExportToPdfInScheduledReports CapabilityState
 
+	// The ability to perform actions using FactSet connectors.
+	FactSetAction CapabilityState
+
 	// The ability to perform flow-related actions.
 	Flow CapabilityState
+
+	// The ability to perform actions using REST API connection connectors.
+	GenericHTTPAction CapabilityState
+
+	// The ability to perform actions using GitHub connectors.
+	GithubAction CapabilityState
+
+	// The ability to perform actions using Google Calendar connectors.
+	GoogleCalendarAction CapabilityState
+
+	// The ability to perform actions using Hubspot connectors.
+	HubspotAction CapabilityState
+
+	// The ability to perform actions using HuggingFace connectors.
+	HuggingFaceAction CapabilityState
 
 	// The ability to include content in scheduled email reports.
 	IncludeContentInScheduledReportsEmail CapabilityState
 
+	// The ability to perform actions using Intercom connectors.
+	IntercomAction CapabilityState
+
+	// The ability to perform actions using Jira connectors.
+	JiraAction CapabilityState
+
 	// The ability to use knowledge bases to specify content from external
 	// applications.
 	KnowledgeBase CapabilityState
+
+	// The ability to perform actions using Linear connectors.
+	LinearAction CapabilityState
+
+	// The ability to perform actions using Model Context Protocol connectors.
+	MCPAction CapabilityState
+
+	// The ability to perform actions using Microsoft Outlook connectors.
+	MSExchangeAction CapabilityState
+
+	// The ability to perform actions using Microsoft Teams connectors.
+	MSTeamsAction CapabilityState
+
+	// The ability to perform actions using Monday connectors.
+	MondayAction CapabilityState
+
+	// The ability to perform actions using New Relic connectors.
+	NewRelicAction CapabilityState
+
+	// The ability to perform actions using Notion connectors.
+	NotionAction CapabilityState
+
+	// The ability to perform actions using Microsoft OneDrive connectors.
+	OneDriveAction CapabilityState
+
+	// The ability to perform actions using OpenAPI Specification connectors.
+	OpenAPIAction CapabilityState
+
+	// The ability to perform actions using PagerDuty Advance connectors.
+	PagerDutyAction CapabilityState
 
 	// The ability to use UI Agent step to perform tasks on public websites.
 	PerformFlowUiTask CapabilityState
@@ -3170,11 +3386,71 @@ type Capabilities struct {
 	// The ability to perform research-related actions.
 	Research CapabilityState
 
+	// The ability to perform actions using SAP Bill of Materials connectors.
+	SAPBillOfMaterialAction CapabilityState
+
+	// The ability to perform actions using SAP Business Partner connectors.
+	SAPBusinessPartnerAction CapabilityState
+
+	// The ability to perform actions using SAP Material Stock connectors.
+	SAPMaterialStockAction CapabilityState
+
+	// The ability to perform actions using SAP Physical Inventory connectors.
+	SAPPhysicalInventoryAction CapabilityState
+
+	// The ability to perform actions using SAP Product Master connectors.
+	SAPProductMasterDataAction CapabilityState
+
+	// The ability to perform actions using Salesforce connectors.
+	SalesforceAction CapabilityState
+
+	// The ability to perform actions using S&P Global Market Intelligence connectors.
+	SandPGMIAction CapabilityState
+
+	// The ability to perform actions using S&P Global Energy connectors.
+	SandPGlobalEnergyAction CapabilityState
+
 	// The ability to enable users to upgrade their user role.
 	SelfUpgradeUserRole CapabilityState
 
+	// The ability to perform actions using ServiceNow connectors.
+	ServiceNowAction CapabilityState
+
+	// The ability to share Bedrock Agent actions.
+	ShareAmazonBedrockARSAction CapabilityState
+
+	// The ability to share Bedrock Runtime actions.
+	ShareAmazonBedrockFSAction CapabilityState
+
+	// The ability to share Bedrock Data Automation Runtime actions.
+	ShareAmazonBedrockKRSAction CapabilityState
+
+	// The ability to share Amazon S3 actions.
+	ShareAmazonSThreeAction CapabilityState
+
 	// The ability to share analyses.
 	ShareAnalyses CapabilityState
+
+	// The ability to share Asana actions.
+	ShareAsanaAction CapabilityState
+
+	// The ability to share BambooHR actions.
+	ShareBambooHRAction CapabilityState
+
+	// The ability to share Box Agent actions.
+	ShareBoxAgentAction CapabilityState
+
+	// The ability to share Canva Agent actions.
+	ShareCanvaAgentAction CapabilityState
+
+	// The ability to share Comprehend actions.
+	ShareComprehendAction CapabilityState
+
+	// The ability to share Comprehend Medical actions.
+	ShareComprehendMedicalAction CapabilityState
+
+	// The ability to share Atlassian Confluence Cloud actions.
+	ShareConfluenceAction CapabilityState
 
 	// The ability to share dashboards.
 	ShareDashboards CapabilityState
@@ -3185,22 +3461,262 @@ type Capabilities struct {
 	// The ability to share datasets.
 	ShareDatasets CapabilityState
 
+	// The ability to share FactSet actions.
+	ShareFactSetAction CapabilityState
+
+	// The ability to share REST API connection actions.
+	ShareGenericHTTPAction CapabilityState
+
+	// The ability to share GitHub actions.
+	ShareGithubAction CapabilityState
+
+	// The ability to share Google Calendar actions.
+	ShareGoogleCalendarAction CapabilityState
+
+	// The ability to share Hubspot actions.
+	ShareHubspotAction CapabilityState
+
+	// The ability to share HuggingFace actions.
+	ShareHuggingFaceAction CapabilityState
+
+	// The ability to share Intercom actions.
+	ShareIntercomAction CapabilityState
+
+	// The ability to share Jira actions.
+	ShareJiraAction CapabilityState
+
+	// The ability to share Linear actions.
+	ShareLinearAction CapabilityState
+
+	// The ability to share Model Context Protocol actions.
+	ShareMCPAction CapabilityState
+
+	// The ability to share Microsoft Outlook actions.
+	ShareMSExchangeAction CapabilityState
+
+	// The ability to share Microsoft Teams actions.
+	ShareMSTeamsAction CapabilityState
+
+	// The ability to share Monday actions.
+	ShareMondayAction CapabilityState
+
+	// The ability to share New Relic actions.
+	ShareNewRelicAction CapabilityState
+
+	// The ability to share Notion actions.
+	ShareNotionAction CapabilityState
+
+	// The ability to share Microsoft OneDrive actions.
+	ShareOneDriveAction CapabilityState
+
+	// The ability to share OpenAPI Specification actions.
+	ShareOpenAPIAction CapabilityState
+
+	// The ability to share PagerDuty Advance actions.
+	SharePagerDutyAction CapabilityState
+
+	// The ability to perform actions using Microsoft SharePoint Online connectors.
+	SharePointAction CapabilityState
+
+	// The ability to share SAP Bill of Materials actions.
+	ShareSAPBillOfMaterialAction CapabilityState
+
+	// The ability to share SAP Business Partner actions.
+	ShareSAPBusinessPartnerAction CapabilityState
+
+	// The ability to share SAP Material Stock actions.
+	ShareSAPMaterialStockAction CapabilityState
+
+	// The ability to share SAP Physical Inventory actions.
+	ShareSAPPhysicalInventoryAction CapabilityState
+
+	// The ability to share SAP Product Master actions.
+	ShareSAPProductMasterDataAction CapabilityState
+
+	// The ability to share Salesforce actions.
+	ShareSalesforceAction CapabilityState
+
+	// The ability to share S&P Global Market Intelligence actions.
+	ShareSandPGMIAction CapabilityState
+
+	// The ability to share S&P Global Energy actions.
+	ShareSandPGlobalEnergyAction CapabilityState
+
+	// The ability to share ServiceNow actions.
+	ShareServiceNowAction CapabilityState
+
+	// The ability to share Microsoft SharePoint Online actions.
+	ShareSharePointAction CapabilityState
+
+	// The ability to share Slack actions.
+	ShareSlackAction CapabilityState
+
+	// The ability to share Smartsheet actions.
+	ShareSmartsheetAction CapabilityState
+
+	// The ability to share Textract actions.
+	ShareTextractAction CapabilityState
+
+	// The ability to share Zendesk actions.
+	ShareZendeskAction CapabilityState
+
+	// The ability to perform actions using Slack connectors.
+	SlackAction CapabilityState
+
+	// The ability to perform actions using Smartsheet connectors.
+	SmartsheetAction CapabilityState
+
 	// The ability to perform space-related actions.
 	Space CapabilityState
 
 	// The ability to subscribe to email reports.
 	SubscribeDashboardEmailReports CapabilityState
 
+	// The ability to perform actions using Textract connectors.
+	TextractAction CapabilityState
+
 	// The ability to use internet to enhance results in Chat Agents, Flows, and Quick
 	// Research. Web search queries will be processed securely in an Amazon Web
 	// Services region us-east-1 .
 	UseAgentWebSearch CapabilityState
 
+	// The ability to use Bedrock Agent actions.
+	UseAmazonBedrockARSAction CapabilityState
+
+	// The ability to use Bedrock Runtime actions.
+	UseAmazonBedrockFSAction CapabilityState
+
+	// The ability to use Bedrock Data Automation Runtime actions.
+	UseAmazonBedrockKRSAction CapabilityState
+
+	// The ability to use Amazon S3 actions.
+	UseAmazonSThreeAction CapabilityState
+
+	// The ability to use Asana actions.
+	UseAsanaAction CapabilityState
+
+	// The ability to use BambooHR actions.
+	UseBambooHRAction CapabilityState
+
 	// The ability to use Bedrock models for general knowledge step in flows.
 	UseBedrockModels CapabilityState
 
+	// The ability to use Box Agent actions.
+	UseBoxAgentAction CapabilityState
+
+	// The ability to use Canva Agent actions.
+	UseCanvaAgentAction CapabilityState
+
+	// The ability to use Comprehend actions.
+	UseComprehendAction CapabilityState
+
+	// The ability to use Comprehend Medical actions.
+	UseComprehendMedicalAction CapabilityState
+
+	// The ability to use Atlassian Confluence Cloud actions.
+	UseConfluenceAction CapabilityState
+
+	// The ability to use FactSet actions.
+	UseFactSetAction CapabilityState
+
+	// The ability to use REST API connection actions.
+	UseGenericHTTPAction CapabilityState
+
+	// The ability to use GitHub actions.
+	UseGithubAction CapabilityState
+
+	// The ability to use Google Calendar actions.
+	UseGoogleCalendarAction CapabilityState
+
+	// The ability to use Hubspot actions.
+	UseHubspotAction CapabilityState
+
+	// The ability to use HuggingFace actions.
+	UseHuggingFaceAction CapabilityState
+
+	// The ability to use Intercom actions.
+	UseIntercomAction CapabilityState
+
+	// The ability to use Jira actions.
+	UseJiraAction CapabilityState
+
+	// The ability to use Linear actions.
+	UseLinearAction CapabilityState
+
+	// The ability to use Model Context Protocol actions.
+	UseMCPAction CapabilityState
+
+	// The ability to use Microsoft Outlook actions.
+	UseMSExchangeAction CapabilityState
+
+	// The ability to use Microsoft Teams actions.
+	UseMSTeamsAction CapabilityState
+
+	// The ability to use Monday actions.
+	UseMondayAction CapabilityState
+
+	// The ability to use New Relic actions.
+	UseNewRelicAction CapabilityState
+
+	// The ability to use Notion actions.
+	UseNotionAction CapabilityState
+
+	// The ability to use Microsoft OneDrive actions.
+	UseOneDriveAction CapabilityState
+
+	// The ability to use OpenAPI Specification actions.
+	UseOpenAPIAction CapabilityState
+
+	// The ability to use PagerDuty Advance actions.
+	UsePagerDutyAction CapabilityState
+
+	// The ability to use SAP Bill of Materials actions.
+	UseSAPBillOfMaterialAction CapabilityState
+
+	// The ability to use SAP Business Partner actions.
+	UseSAPBusinessPartnerAction CapabilityState
+
+	// The ability to use SAP Material Stock actions.
+	UseSAPMaterialStockAction CapabilityState
+
+	// The ability to use SAP Physical Inventory actions.
+	UseSAPPhysicalInventoryAction CapabilityState
+
+	// The ability to use SAP Product Master actions.
+	UseSAPProductMasterDataAction CapabilityState
+
+	// The ability to use Salesforce actions.
+	UseSalesforceAction CapabilityState
+
+	// The ability to use S&P Global Market Intelligence actions.
+	UseSandPGMIAction CapabilityState
+
+	// The ability to use S&P Global Energy actions.
+	UseSandPGlobalEnergyAction CapabilityState
+
+	// The ability to use ServiceNow actions.
+	UseServiceNowAction CapabilityState
+
+	// The ability to use Microsoft SharePoint Online actions.
+	UseSharePointAction CapabilityState
+
+	// The ability to use Slack actions.
+	UseSlackAction CapabilityState
+
+	// The ability to use Smartsheet actions.
+	UseSmartsheetAction CapabilityState
+
+	// The ability to use Textract actions.
+	UseTextractAction CapabilityState
+
+	// The ability to use Zendesk actions.
+	UseZendeskAction CapabilityState
+
 	// The ability to view account SPICE capacity.
 	ViewAccountSPICECapacity CapabilityState
+
+	// The ability to perform actions using Zendesk connectors.
+	ZendeskAction CapabilityState
 
 	noSmithyDocumentSerde
 }
@@ -8817,6 +9333,9 @@ type FreeFormLayoutConfiguration struct {
 
 	// Configuration options for the canvas of a free-form layout.
 	CanvasSizeOptions *FreeFormLayoutCanvasSizeOptions
+
+	// The groups that are included in a free-form layout.
+	Groups []SheetLayoutGroup
 
 	noSmithyDocumentSerde
 }
@@ -16728,6 +17247,38 @@ type SheetLayoutElementMaximizationOption struct {
 
 	// The status of the sheet layout maximization options of a dashbaord.
 	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
+// A group of elements within a sheet layout.
+type SheetLayoutGroup struct {
+
+	// A unique identifier for the group.
+	//
+	// This member is required.
+	Id *string
+
+	// The members of the group.
+	//
+	// This member is required.
+	Members []SheetLayoutGroupMember
+
+	noSmithyDocumentSerde
+}
+
+// A member of a sheet layout group.
+type SheetLayoutGroupMember struct {
+
+	// The unique identifier of the group member.
+	//
+	// This member is required.
+	Id *string
+
+	// The type of the group member.
+	//
+	// This member is required.
+	Type SheetLayoutGroupMemberType
 
 	noSmithyDocumentSerde
 }

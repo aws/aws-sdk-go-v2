@@ -12779,6 +12779,11 @@ func validateFreeFormLayoutConfiguration(v *types.FreeFormLayoutConfiguration) e
 			invalidParams.AddNested("CanvasSizeOptions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Groups != nil {
+		if err := validateSheetLayoutGroupList(v.Groups); err != nil {
+			invalidParams.AddNested("Groups", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -19975,6 +19980,80 @@ func validateSheetImageStaticFileSource(v *types.SheetImageStaticFileSource) err
 	invalidParams := smithy.InvalidParamsError{Context: "SheetImageStaticFileSource"}
 	if v.StaticFileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StaticFileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSheetLayoutGroup(v *types.SheetLayoutGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SheetLayoutGroup"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Members == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Members"))
+	} else if v.Members != nil {
+		if err := validateSheetLayoutGroupMemberList(v.Members); err != nil {
+			invalidParams.AddNested("Members", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSheetLayoutGroupList(v []types.SheetLayoutGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SheetLayoutGroupList"}
+	for i := range v {
+		if err := validateSheetLayoutGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSheetLayoutGroupMember(v *types.SheetLayoutGroupMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SheetLayoutGroupMember"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSheetLayoutGroupMemberList(v []types.SheetLayoutGroupMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SheetLayoutGroupMemberList"}
+	for i := range v {
+		if err := validateSheetLayoutGroupMember(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

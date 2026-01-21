@@ -1,0 +1,8 @@
+{
+    "id": "1a1e3986-ce10-4678-813f-2ecc336fe576",
+    "type": "feature",
+    "description": "Added support of multiple EBS cards. New EbsCardIndex parameter enables attaching volumes to specific EBS cards on supported instance types for improved storage performance.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -4527,6 +4527,10 @@ type EbsBlockDevice struct {
 	// [Preserving Amazon EBS volumes on instance termination]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#preserving-volumes-on-termination
 	DeleteOnTermination *bool
 
+	// The index of the EBS card. Some instance types support multiple EBS cards. The
+	// default EBS card index is 0.
+	EbsCardIndex *int32
+
 	// Indicates whether the encryption state of an EBS volume is changed while being
 	// restored from a backing snapshot. The effect of setting the encryption state to
 	// true depends on the volume origin (new or from a snapshot), starting encryption
@@ -4709,6 +4713,33 @@ type EbsBlockDeviceResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the performance characteristics of an EBS card on the instance type.
+type EbsCardInfo struct {
+
+	// The baseline bandwidth performance for the EBS card, in Mbps.
+	BaselineBandwidthInMbps *int32
+
+	// The baseline IOPS performance for the EBS card.
+	BaselineIops *int32
+
+	// The baseline throughput performance for the EBS card, in MBps.
+	BaselineThroughputInMBps *float64
+
+	// The index of the EBS card.
+	EbsCardIndex *int32
+
+	// The maximum bandwidth performance for the EBS card, in Mbps.
+	MaximumBandwidthInMbps *int32
+
+	// The maximum IOPS performance for the EBS card.
+	MaximumIops *int32
+
+	// The maximum throughput performance for the EBS card, in MBps.
+	MaximumThroughputInMBps *float64
+
+	noSmithyDocumentSerde
+}
+
 // Describes the Amazon EBS features supported by the instance type.
 type EbsInfo struct {
 
@@ -4717,6 +4748,9 @@ type EbsInfo struct {
 	//
 	// [Amazon EBS volume limits for Amazon EC2 instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html
 	AttachmentLimitType AttachmentLimitType
+
+	// Describes the EBS cards available for the instance type.
+	EbsCards []EbsCardInfo
 
 	// Describes the optimized EBS performance for the instance type.
 	EbsOptimizedInfo *EbsOptimizedInfo
@@ -4736,6 +4770,9 @@ type EbsInfo struct {
 	// [Amazon EBS volume limits for Amazon EC2 instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html
 	MaximumEbsAttachments *int32
 
+	// Indicates the number of EBS cards supported by the instance type.
+	MaximumEbsCards *int32
+
 	// Indicates whether non-volatile memory express (NVMe) is supported.
 	NvmeSupport EbsNvmeSupport
 
@@ -4754,6 +4791,10 @@ type EbsInstanceBlockDevice struct {
 
 	// Indicates whether the volume is deleted on instance termination.
 	DeleteOnTermination *bool
+
+	// The index of the EBS card. Some instance types support multiple EBS cards. The
+	// default EBS card index is 0.
+	EbsCardIndex *int32
 
 	// The service provider that manages the EBS volume.
 	Operator *OperatorResponse
@@ -12757,6 +12798,10 @@ type LaunchTemplateEbsBlockDevice struct {
 	// Indicates whether the EBS volume is deleted on instance termination.
 	DeleteOnTermination *bool
 
+	// The index of the EBS card. Some instance types support multiple EBS cards. The
+	// default EBS card index is 0.
+	EbsCardIndex *int32
+
 	// Indicates whether the EBS volume is encrypted.
 	Encrypted *bool
 
@@ -12792,6 +12837,10 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 
 	// Indicates whether the EBS volume is deleted on instance termination.
 	DeleteOnTermination *bool
+
+	// The index of the EBS card. Some instance types support multiple EBS cards. The
+	// default EBS card index is 0.
+	EbsCardIndex *int32
 
 	// Indicates whether the EBS volume is encrypted. Encrypted volumes can only be
 	// attached to instances that support Amazon EBS encryption. If you are creating a
@@ -24201,6 +24250,10 @@ type VolumeAttachment struct {
 	// If the volume is attached to an Amazon Web Services-managed resource, this
 	// parameter returns null .
 	Device *string
+
+	// The index of the EBS card. Some instance types support multiple EBS cards. The
+	// default EBS card index is 0.
+	EbsCardIndex *int32
 
 	// The ID of the instance.
 	//
