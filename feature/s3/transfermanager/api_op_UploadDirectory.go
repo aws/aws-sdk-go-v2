@@ -145,7 +145,7 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 	u.init()
 	ch := make(chan fileEntry)
 
-	for i := 0; i < u.options.DirectoryConcurrency; i++ {
+	for i := 0; i < u.options.Concurrency; i++ {
 		u.wg.Add(1)
 		go u.uploadFile(ctx, ch)
 	}

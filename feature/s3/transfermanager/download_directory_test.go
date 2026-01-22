@@ -483,7 +483,7 @@ func TestDownloadDirectory(t *testing.T) {
 			}
 			s3Client.Data = make([]byte, 0)
 			s3Client.PartsCount = 1
-			mgr := New(s3Client, Options{})
+			mgr := New(s3Client)
 
 			dstPath := filepath.Join(root, c.destination)
 			defer os.RemoveAll(dstPath)
@@ -501,7 +501,7 @@ func TestDownloadDirectory(t *testing.T) {
 			resp, err := mgr.DownloadDirectory(context.Background(), req, func(o *Options) {
 				o.DirectoryProgressListeners.Register(listener)
 				if c.concurrency > 0 {
-					o.DirectoryConcurrency = c.concurrency
+					o.Concurrency = c.concurrency
 				}
 			})
 
@@ -648,7 +648,7 @@ func TestDownloadDirectoryObjectsTransferred(t *testing.T) {
 
 			s3Client.Data = make([]byte, 0)
 			s3Client.PartsCount = 1
-			mgr := New(s3Client, Options{})
+			mgr := New(s3Client)
 
 			dstPath := filepath.Join(root, c.destination)
 			defer os.RemoveAll(dstPath)
@@ -661,7 +661,7 @@ func TestDownloadDirectoryObjectsTransferred(t *testing.T) {
 
 			_, err := mgr.DownloadDirectory(context.Background(), req, func(o *Options) {
 				o.DirectoryProgressListeners.Register(listener)
-				o.DirectoryConcurrency = 1
+				o.Concurrency = 1
 			})
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
@@ -681,7 +681,7 @@ func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
 		UsePathStyle: true,
 		Region:       "mock-region",
 	})
-	u := New(c, Options{})
+	u := New(c)
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	ctx.Error = fmt.Errorf("context canceled")

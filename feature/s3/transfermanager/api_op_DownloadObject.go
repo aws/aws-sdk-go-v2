@@ -675,7 +675,7 @@ func (d *downloader) init() error {
 
 	d.totalBytes = -1
 	d.emitter = &singleObjectProgressEmitter{
-		Listeners: d.options.ProgressListeners,
+		Listeners: d.options.ObjectProgressListeners,
 	}
 
 	return nil

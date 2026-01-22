@@ -13,25 +13,25 @@ func (mockPartialListener) OnObjectTransferComplete(context.Context, *ObjectTran
 
 func TestProgressListenerRegisterAndCopy(t *testing.T) {
 	o := Options{}
-	o.ProgressListeners.Register(mockPartialListener{})
+	o.ObjectProgressListeners.Register(mockPartialListener{})
 
-	expectIntEq(t, 1, len(o.ProgressListeners.ObjectTransferStart))
-	expectIntEq(t, 0, len(o.ProgressListeners.ObjectBytesTransferred))
-	expectIntEq(t, 1, len(o.ProgressListeners.ObjectTransferComplete))
-	expectIntEq(t, 0, len(o.ProgressListeners.ObjectTransferFailed))
+	expectIntEq(t, 1, len(o.ObjectProgressListeners.ObjectTransferStart))
+	expectIntEq(t, 0, len(o.ObjectProgressListeners.ObjectBytesTransferred))
+	expectIntEq(t, 1, len(o.ObjectProgressListeners.ObjectTransferComplete))
+	expectIntEq(t, 0, len(o.ObjectProgressListeners.ObjectTransferFailed))
 
 	cp := o.Copy()
-	cp.ProgressListeners.Register(mockPartialListener{})
+	cp.ObjectProgressListeners.Register(mockPartialListener{})
 
-	expectIntEq(t, 1, len(o.ProgressListeners.ObjectTransferStart))
-	expectIntEq(t, 0, len(o.ProgressListeners.ObjectBytesTransferred))
-	expectIntEq(t, 1, len(o.ProgressListeners.ObjectTransferComplete))
-	expectIntEq(t, 0, len(o.ProgressListeners.ObjectTransferFailed))
+	expectIntEq(t, 1, len(o.ObjectProgressListeners.ObjectTransferStart))
+	expectIntEq(t, 0, len(o.ObjectProgressListeners.ObjectBytesTransferred))
+	expectIntEq(t, 1, len(o.ObjectProgressListeners.ObjectTransferComplete))
+	expectIntEq(t, 0, len(o.ObjectProgressListeners.ObjectTransferFailed))
 
-	expectIntEq(t, 2, len(cp.ProgressListeners.ObjectTransferStart))
-	expectIntEq(t, 0, len(cp.ProgressListeners.ObjectBytesTransferred))
-	expectIntEq(t, 2, len(cp.ProgressListeners.ObjectTransferComplete))
-	expectIntEq(t, 0, len(cp.ProgressListeners.ObjectTransferFailed))
+	expectIntEq(t, 2, len(cp.ObjectProgressListeners.ObjectTransferStart))
+	expectIntEq(t, 0, len(cp.ObjectProgressListeners.ObjectBytesTransferred))
+	expectIntEq(t, 2, len(cp.ObjectProgressListeners.ObjectTransferComplete))
+	expectIntEq(t, 0, len(cp.ObjectProgressListeners.ObjectTransferFailed))
 }
 
 func expectIntEq(t *testing.T, expect, actual int) {

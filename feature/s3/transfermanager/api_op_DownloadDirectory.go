@@ -149,7 +149,7 @@ func (d *directoryDownloader) downloadDirectory(ctx context.Context) (*DownloadD
 	d.init()
 	ch := make(chan objectEntry)
 
-	for i := 0; i < d.options.DirectoryConcurrency; i++ {
+	for i := 0; i < d.options.Concurrency; i++ {
 		d.wg.Add(1)
 		go d.downloadObject(ctx, ch)
 	}

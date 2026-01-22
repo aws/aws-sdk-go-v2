@@ -33,8 +33,10 @@ type Client struct {
 
 // New returns an initialized Client from the client Options. Provide
 // more functional options to further configure the Client
-func New(s3Client S3APIClient, opts Options, optFns ...func(*Options)) *Client {
-	opts.S3 = s3Client
+func New(s3Client S3APIClient, optFns ...func(*Options)) *Client {
+	opts := Options{
+		S3: s3Client,
+	}
 	for _, fn := range optFns {
 		fn(&opts)
 	}
@@ -46,7 +48,6 @@ func New(s3Client S3APIClient, opts Options, optFns ...func(*Options)) *Client {
 	resolveGetObjectType(&opts)
 	resolvePartBodyMaxRetries(&opts)
 	resolveGetBufferSize(&opts)
-	resolveDirectoryConcurrency(&opts)
 
 	return &Client{
 		options: opts,
@@ -55,5 +56,5 @@ func New(s3Client S3APIClient, opts Options, optFns ...func(*Options)) *Client {
 
 // NewFromConfig returns a new Client from the provided s3 config
 func NewFromConfig(s3Client S3APIClient, cfg aws.Config, optFns ...func(*Options)) *Client {
-	return New(s3Client, Options{}, optFns...)
+	return New(s3Client, optFns...)
 }
