@@ -1796,7 +1796,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.health#maxResultsLowerRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>"
                     }
                 },
                 "organizationEntityAccountFilters": {
@@ -1859,9 +1859,9 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.health#maxResults",
+                    "target": "com.amazonaws.health#maxResultsLowerRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>"
                     }
                 }
             },
@@ -2348,7 +2348,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.health#maxResultsLowerRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>"
                     }
                 },
                 "locale": {
@@ -2398,9 +2398,9 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.health#maxResults",
+                    "target": "com.amazonaws.health#maxResultsLowerRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>"
                     }
                 },
                 "locale": {

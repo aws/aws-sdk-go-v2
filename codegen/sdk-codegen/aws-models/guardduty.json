@@ -17128,6 +17128,12 @@
                     "traits": {
                         "smithy.api#enumValue": "UNSUPPORTED_COMPOSITE_RECOVERY_POINT"
                     }
+                },
+                "ALL_FILES_SKIPPED_OR_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_FILES_SKIPPED_OR_FAILED"
+                    }
                 }
             }
         },

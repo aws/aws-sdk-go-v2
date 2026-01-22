@@ -597,7 +597,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This API operation is superseded by <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html\">https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html</a>, which\n                can attach multiple traffic sources types. We recommend using\n                <code>AttachTrafficSources</code> to simplify how you manage traffic sources.\n                However, we continue to support <code>AttachLoadBalancers</code>. You can use both\n                the original <code>AttachLoadBalancers</code> API operation and\n                    <code>AttachTrafficSources</code> on the same Auto Scaling group.</p>\n         </note>\n         <p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers the\n            running instances with these Classic Load Balancers.</p>\n         <p>To describe the load balancers for an Auto Scaling group, call the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> API.\n            To detach a load balancer from the Auto Scaling group, call the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachLoadBalancers.html\">DetachLoadBalancers</a>\n            API.</p>\n         <p>This operation is additive and does not detach existing Classic Load Balancers or\n            target groups from the Auto Scaling group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This API operation is superseded by <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html\">AttachTrafficSources</a>, which\n                can attach multiple traffic sources types. We recommend using\n                <code>AttachTrafficSources</code> to simplify how you manage traffic sources.\n                However, we continue to support <code>AttachLoadBalancers</code>. You can use both\n                the original <code>AttachLoadBalancers</code> API operation and\n                    <code>AttachTrafficSources</code> on the same Auto Scaling group.</p>\n         </note>\n         <p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers the\n            running instances with these Classic Load Balancers.</p>\n         <p>To describe the load balancers for an Auto Scaling group, call the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> API.\n            To detach a load balancer from the Auto Scaling group, call the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachLoadBalancers.html\">DetachLoadBalancers</a>\n            API.</p>\n         <p>This operation is additive and does not detach existing Classic Load Balancers or\n            target groups from the Auto Scaling group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To attach a load balancer to an Auto Scaling group",
@@ -936,6 +936,12 @@
                     "target": "com.amazonaws.autoscaling#InstanceMaintenancePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>An instance maintenance policy.</p>"
+                    }
+                },
+                "DeletionProtection": {
+                    "target": "com.amazonaws.autoscaling#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deletion protection setting for the Auto Scaling group.</p>"
                     }
                 },
                 "AvailabilityZoneDistribution": {
@@ -3277,6 +3283,12 @@
                         "smithy.api#documentation": "<p>One or more lifecycle hooks to add to the Auto Scaling group before instances are\n            launched.</p>"
                     }
                 },
+                "DeletionProtection": {
+                    "target": "com.amazonaws.autoscaling#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The deletion protection setting for the Auto Scaling group. This setting helps safeguard your Auto Scaling group and its\n            instances by controlling whether the <code>DeleteAutoScalingGroup</code> operation is allowed. When deletion\n            protection is enabled, users cannot delete the Auto Scaling group according to the specified protection level until\n            the setting is changed back to a less restrictive level.\n        </p>\n         <p>\n            The valid values are <code>none</code>, <code>prevent-force-deletion</code>, and <code>prevent-all-deletion</code>.\n        </p>\n         <p>\n            Default: <code>none</code>\n         </p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.autoscaling#Tags",
                     "traits": {
@@ -4011,6 +4023,29 @@
                     "target": "com.amazonaws.autoscaling#ForceDelete",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies that the warm pool is to be deleted along with all of its associated\n            instances, without waiting for all instances to be terminated. This parameter also\n            deletes any outstanding lifecycle actions associated with the warm pool\n            instances.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#DeletionProtection": {
+            "type": "enum",
+            "members": {
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "PreventForceDeletion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "prevent-force-deletion"
+                    }
+                },
+                "PreventAllDeletion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "prevent-all-deletion"
                     }
                 }
             }
@@ -5749,7 +5784,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This API operation is superseded by <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html\">DetachTrafficSources</a>, which\n                can detach multiple traffic sources types. We recommend using\n                    <code>DetachTrafficSources</code> to simplify how you manage traffic sources.\n                However, we continue to support <code>DetachLoadBalancerTargetGroups</code>. You can\n                use both the original <code>DetachLoadBalancerTargetGroups</code> API operation and\n                    <code>DetachTrafficSources</code> on the same Auto Scaling group.</p>\n         </note>\n         <p>Detaches one or more target groups from the specified Auto Scaling group.</p>\n         <p>When you detach a target group, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the target group using the \n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancerTargetGroups.html\">DescribeLoadBalancerTargetGroups</a>\n            API call. The instances remain running.</p>\n         <note>\n            <p>You can use this operation to detach target groups that were attached by using\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachLoadBalancerTargetGroups.html\">AttachLoadBalancerTargetGroups</a>, but not for target groups that\n                were attached by using <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html\">AttachTrafficSources</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<note>\n            <p>This API operation is superseded by <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachTrafficSources.html\">DetachTrafficSources</a>, which\n                can detach multiple traffic sources types. We recommend using\n                    <code>DetachTrafficSources</code> to simplify how you manage traffic sources.\n                However, we continue to support <code>DetachLoadBalancerTargetGroups</code>. You can\n                use both the original <code>DetachLoadBalancerTargetGroups</code> API operation and\n                    <code>DetachTrafficSources</code> on the same Auto Scaling group.</p>\n         </note>\n         <p>Detaches one or more target groups from the specified Auto Scaling group.</p>\n         <p>When you detach a target group, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the target group using the \n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancerTargetGroups.html\">DescribeLoadBalancerTargetGroups</a>\n            API call. The instances remain running.</p>\n         <note>\n            <p>You can use this operation to detach target groups that were attached by using\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachLoadBalancerTargetGroups.html\">AttachLoadBalancerTargetGroups</a>, but not for target groups that\n                were attached by using <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html\">AttachTrafficSources</a>.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To detach a target group from an Auto Scaling group",
@@ -11698,6 +11733,12 @@
                     "target": "com.amazonaws.autoscaling#InstanceLifecyclePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The instance lifecycle policy for the Auto Scaling group. This policy controls instance behavior when an instance\n            transitions through its lifecycle states. Configure retention triggers to specify when instances should\n            move to a <code>Retained</code> state instead of automatic termination.\n        </p>\n         <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html\">\n                Control instance retention with instance lifecycle policies</a>\n            in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>"
+                    }
+                },
+                "DeletionProtection": {
+                    "target": "com.amazonaws.autoscaling#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The deletion protection setting for the Auto Scaling group. This setting helps safeguard your Auto Scaling group and its\n            instances by controlling whether the <code>DeleteAutoScalingGroup</code> operation is allowed. When deletion\n            protection is enabled, users cannot delete the Auto Scaling group according to the specified protection level until\n            the setting is changed back to a less restrictive level.\n        </p>\n         <p>\n            The valid values are <code>none</code>, <code>prevent-force-deletion</code>, and <code>prevent-all-deletion</code>.\n        </p>\n         <p>\n            Default: <code>none</code>\n         </p>"
                     }
                 }
             }
