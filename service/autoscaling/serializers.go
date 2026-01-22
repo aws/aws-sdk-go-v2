@@ -6909,6 +6909,11 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 		objectKey.Integer(*v.DefaultInstanceWarmup)
 	}
 
+	if len(v.DeletionProtection) > 0 {
+		objectKey := object.Key("DeletionProtection")
+		objectKey.String(string(v.DeletionProtection))
+	}
+
 	if v.DesiredCapacity != nil {
 		objectKey := object.Key("DesiredCapacity")
 		objectKey.Integer(*v.DesiredCapacity)
@@ -8488,6 +8493,11 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 	if v.DefaultInstanceWarmup != nil {
 		objectKey := object.Key("DefaultInstanceWarmup")
 		objectKey.Integer(*v.DefaultInstanceWarmup)
+	}
+
+	if len(v.DeletionProtection) > 0 {
+		objectKey := object.Key("DeletionProtection")
+		objectKey.String(string(v.DeletionProtection))
 	}
 
 	if v.DesiredCapacity != nil {

@@ -190,6 +190,9 @@ type AutoScalingGroup struct {
 	// Scaling group.
 	DefaultInstanceWarmup *int32
 
+	// The deletion protection setting for the Auto Scaling group.
+	DeletionProtection DeletionProtection
+
 	// The unit of measurement for the value specified for desired capacity. Amazon
 	// EC2 Auto Scaling supports DesiredCapacityType for attribute-based instance type
 	// selection only.

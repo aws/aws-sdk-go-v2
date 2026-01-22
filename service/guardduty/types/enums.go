@@ -1354,6 +1354,7 @@ const (
 	ScanStatusReasonUnsupportedAmi                    ScanStatusReason = "UNSUPPORTED_AMI"
 	ScanStatusReasonUnsupportedSnapshot               ScanStatusReason = "UNSUPPORTED_SNAPSHOT"
 	ScanStatusReasonUnsupportedCompositeRecoveryPoint ScanStatusReason = "UNSUPPORTED_COMPOSITE_RECOVERY_POINT"
+	ScanStatusReasonAllFilesSkippedOrFailed           ScanStatusReason = "ALL_FILES_SKIPPED_OR_FAILED"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -1378,6 +1379,7 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"UNSUPPORTED_AMI",
 		"UNSUPPORTED_SNAPSHOT",
 		"UNSUPPORTED_COMPOSITE_RECOVERY_POINT",
+		"ALL_FILES_SKIPPED_OR_FAILED",
 	}
 }
 

@@ -6907,6 +6907,13 @@ type GpuDeviceInfo struct {
 	// The number of GPUs for the instance type.
 	Count *int32
 
+	// The size of each GPU as a fraction of a full GPU, between 0 (excluded) and 1
+	// (included).
+	GpuPartitionSize *float64
+
+	// Total number of GPU devices of this type.
+	LogicalGpuCount *int32
+
 	// The manufacturer of the GPU accelerator.
 	Manufacturer *string
 
@@ -6915,6 +6922,9 @@ type GpuDeviceInfo struct {
 
 	// The name of the GPU accelerator.
 	Name *string
+
+	// A list of workload types this GPU supports.
+	Workloads []string
 
 	noSmithyDocumentSerde
 }

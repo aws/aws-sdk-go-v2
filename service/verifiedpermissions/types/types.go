@@ -961,7 +961,8 @@ type EncryptionSettings interface {
 	isEncryptionSettings()
 }
 
-// Use AWS owned encryption keys for encrypting policy store data.
+// This is the default encryption setting. The policy store uses an Amazon Web
+// Services owned key for encrypting data.
 type EncryptionSettingsMemberDefault struct {
 	Value Unit
 
@@ -995,7 +996,8 @@ type EncryptionState interface {
 	isEncryptionState()
 }
 
-// Policy store data is encrypted using AWS owned encryption keys.
+// This is the default encryption state. The policy store is encrypted using an
+// Amazon Web Services owned key.
 type EncryptionStateMemberDefault struct {
 	Value Unit
 

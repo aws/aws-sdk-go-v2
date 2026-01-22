@@ -1,0 +1,8 @@
+{
+    "id": "957720d8-4eba-49ba-baee-90f98d0c15d3",
+    "type": "documentation",
+    "description": "Adding documentation to user guide and API documentation for how customers can create new encrypted policy stores by passing in their customer managed key during policy store creation.",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

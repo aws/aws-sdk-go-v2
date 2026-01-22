@@ -51,6 +51,10 @@ type UpdateGameSessionInput struct {
 	// properties and modifies existing properties. There is no way to delete
 	// properties. For an example, see [Update the value of a game property].
 	//
+	// Avoid using periods (".") in property keys if you plan to search for game
+	// sessions by properties. Property keys containing periods cannot be searched and
+	// will be filtered out from search results due to search index limitations.
+	//
 	// [Update the value of a game property]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-update
 	GameProperties []types.GameProperty
 

@@ -1,0 +1,8 @@
+{
+    "id": "96d5b8a7-cf88-453b-a584-d0c7f15cb34e",
+    "type": "feature",
+    "description": "Add better support for fractional GPU instances in DescribeInstanceTypes API. The new fields, logicalGpuCount, gpuPartitionSize, and workload array enable better GPU resource selection and filtering for both full and fractional GPU instance types.",
+    "modules": [
+        "service/ec2"
+    ]
+}

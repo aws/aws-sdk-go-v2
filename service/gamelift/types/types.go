@@ -153,7 +153,7 @@ type Build struct {
 	// Operating system that the game server binaries are built to run on. This value
 	// determines the type of fleet resources that you can use for this build.
 	//
-	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
+	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2026. See more details
 	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
 	// for Amazon GameLift Servers, first update the game server build to server SDK
 	// 5.x, and then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
@@ -293,7 +293,7 @@ type Compute struct {
 
 	// The type of operating system on the compute resource.
 	//
-	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
+	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2026. See more details
 	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
 	// for Amazon GameLift Servers, first update the game server build to server SDK
 	// 5.x, and then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
@@ -627,7 +627,7 @@ type ContainerGroupDefinition struct {
 
 	// The platform that all containers in the container group definition run on.
 	//
-	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
+	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2026. See more details
 	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
 	// for Amazon GameLift Servers, first update the game server build to server SDK
 	// 5.x, and then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
@@ -1316,7 +1316,7 @@ type FleetAttributes struct {
 	// system is determined by the OS of the build or script that is deployed on this
 	// fleet. This attribute is used with fleets where ComputeType is EC2 .
 	//
-	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
+	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2026. See more details
 	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
 	// for Amazon GameLift Servers, first update the game server build to server SDK
 	// 5.x, and then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
@@ -1548,6 +1548,10 @@ type FleetUtilization struct {
 type GameProperty struct {
 
 	// The game property identifier.
+	//
+	// Avoid using periods (".") in property keys if you plan to search for game
+	// sessions by properties. Property keys containing periods cannot be searched and
+	// will be filtered out from search results due to search index limitations.
 	//
 	// This member is required.
 	Key *string
@@ -2019,6 +2023,10 @@ type GameSession struct {
 
 	// A set of key-value pairs that can store custom data in a game session. For
 	// example: {"Key": "difficulty", "Value": "novice"} .
+	//
+	// Avoid using periods (".") in property keys if you plan to search for game
+	// sessions by properties. Property keys containing periods cannot be searched and
+	// will be filtered out from search results due to search index limitations.
 	GameProperties []GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
@@ -2203,6 +2211,10 @@ type GameSessionPlacement struct {
 
 	// A set of key-value pairs that can store custom data in a game session. For
 	// example: {"Key": "difficulty", "Value": "novice"} .
+	//
+	// Avoid using periods (".") in property keys if you plan to search for game
+	// sessions by properties. Property keys containing periods cannot be searched and
+	// will be filtered out from search results due to search index limitations.
 	GameProperties []GameProperty
 
 	// Identifier for the game session created by this placement request. This
@@ -2418,7 +2430,7 @@ type Instance struct {
 
 	// Operating system that is running on this EC2 instance.
 	//
-	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
+	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2026. See more details
 	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use server SDK version 4.x
 	// for Amazon GameLift Servers, first update the game server build to server SDK
 	// 5.x, and then deploy to AL2023 instances. See [Migrate to server SDK version 5.]
@@ -2803,6 +2815,10 @@ type MatchmakingConfiguration struct {
 	// example: {"Key": "difficulty", "Value": "novice"} . This information is added to
 	// the new GameSession object that is created for a successful match. This
 	// parameter is not used when FlexMatchMode is set to STANDALONE .
+	//
+	// Avoid using periods (".") in property keys if you plan to search for game
+	// sessions by properties. Property keys containing periods cannot be searched and
+	// will be filtered out from search results due to search index limitations.
 	GameProperties []GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
@@ -3531,6 +3547,11 @@ type Script struct {
 	// A descriptive label that is associated with a script. Script names do not need
 	// to be unique.
 	Name *string
+
+	// The Node.js version used for execution of your Realtime script. The valid
+	// values are 10.x | 24.x . By default, NodeJsVersion is 10.x . This value cannot
+	// be updated later.
+	NodeJsVersion *string
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers
 	// script resource and uniquely identifies it. ARNs are unique across all Regions.

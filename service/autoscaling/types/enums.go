@@ -184,6 +184,27 @@ func (CpuManufacturer) Values() []CpuManufacturer {
 	}
 }
 
+type DeletionProtection string
+
+// Enum values for DeletionProtection
+const (
+	DeletionProtectionNone                 DeletionProtection = "none"
+	DeletionProtectionPreventForceDeletion DeletionProtection = "prevent-force-deletion"
+	DeletionProtectionPreventAllDeletion   DeletionProtection = "prevent-all-deletion"
+)
+
+// Values returns all known values for DeletionProtection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeletionProtection) Values() []DeletionProtection {
+	return []DeletionProtection{
+		"none",
+		"prevent-force-deletion",
+		"prevent-all-deletion",
+	}
+}
+
 type ImpairedZoneHealthCheckBehavior string
 
 // Enum values for ImpairedZoneHealthCheckBehavior

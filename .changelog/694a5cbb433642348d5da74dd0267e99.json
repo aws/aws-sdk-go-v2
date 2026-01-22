@@ -1,0 +1,8 @@
+{
+    "id": "694a5cbb-4336-4234-8d5d-a74dd0267e99",
+    "type": "documentation",
+    "description": "Customer Identifier parameter deprecation date has been removed. For new implementations, we recommend using the CustomerAWSAccountID. Your current integration will continue to work. When updating your implementation, consider migrating to CustomerAWSAccountID for improved integration.",
+    "modules": [
+        "service/marketplacemetering"
+    ]
+}

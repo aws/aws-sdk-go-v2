@@ -132,6 +132,17 @@ type UpdateAutoScalingGroupInput struct {
 	// [Set the default instance warmup for an Auto Scaling group]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
 	DefaultInstanceWarmup *int32
 
+	//  The deletion protection setting for the Auto Scaling group. This setting helps
+	// safeguard your Auto Scaling group and its instances by controlling whether the
+	// DeleteAutoScalingGroup operation is allowed. When deletion protection is
+	// enabled, users cannot delete the Auto Scaling group according to the specified
+	// protection level until the setting is changed back to a less restrictive level.
+	//
+	// The valid values are none , prevent-force-deletion , and prevent-all-deletion .
+	//
+	// Default: none
+	DeletionProtection types.DeletionProtection
+
 	// The desired capacity is the initial capacity of the Auto Scaling group after
 	// this operation completes and the capacity it attempts to maintain. This number
 	// must be greater than or equal to the minimum size of the group and less than or

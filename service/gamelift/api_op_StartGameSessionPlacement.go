@@ -132,6 +132,10 @@ type StartGameSessionPlacementInput struct {
 
 	// A set of key-value pairs that can store custom data in a game session. For
 	// example: {"Key": "difficulty", "Value": "novice"} .
+	//
+	// Avoid using periods (".") in property keys if you plan to search for game
+	// sessions by properties. Property keys containing periods cannot be searched and
+	// will be filtered out from search results due to search index limitations.
 	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.

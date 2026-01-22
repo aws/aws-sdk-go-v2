@@ -4598,6 +4598,16 @@ func awsAwsjson11_deserializeDocumentBudgetPerformanceHistory(v **types.BudgetPe
 				return err
 			}
 
+		case "FilterExpression":
+			if err := awsAwsjson11_deserializeDocumentExpression(&sv.FilterExpression, value); err != nil {
+				return err
+			}
+
+		case "Metrics":
+			if err := awsAwsjson11_deserializeDocumentMetrics(&sv.Metrics, value); err != nil {
+				return err
+			}
+
 		case "TimeUnit":
 			if value != nil {
 				jtv, ok := value.(string)
