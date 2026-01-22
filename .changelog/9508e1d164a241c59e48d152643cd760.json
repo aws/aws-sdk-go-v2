@@ -1,8 +1,0 @@
-{
-    "id": "9508e1d1-64a2-41c5-9e48-d152643cd760",
-    "type": "feature",
-    "description": "Adding new enum value for ScanStatusReason",
-    "modules": [
-        "service/guardduty"
-    ]
-}

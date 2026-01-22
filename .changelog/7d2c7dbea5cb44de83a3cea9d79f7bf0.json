@@ -1,8 +1,0 @@
-{
-    "id": "7d2c7dbe-a5cb-44de-83a3-cea9d79f7bf0",
-    "type": "feature",
-    "description": "This release adds support for Amazon EC2 Auto Scaling group deletion protection",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

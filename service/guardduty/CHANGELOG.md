@@ -1,3 +1,7 @@
+# v1.73.0 (2026-01-22)
+
+* **Feature**: Adding new enum value for ScanStatusReason
+
 # v1.72.2 (2026-01-21)
 
 * No change notes available for this release.

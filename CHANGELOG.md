@@ -1,3 +1,28 @@
+# Release (2026-01-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.64.0](service/autoscaling/CHANGELOG.md#v1640-2026-01-22)
+  * **Feature**: This release adds support for Amazon EC2 Auto Scaling group deletion protection
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.43.0](service/budgets/CHANGELOG.md#v1430-2026-01-22)
+  * **Feature**: Add Budget FilterExpression and Metrics fields to DescribeBudgetPerformanceHistory to support more granular filtering options.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.54.0](service/dynamodb/CHANGELOG.md#v1540-2026-01-22)
+  * **Feature**: Adds additional waiters to Amazon DynamoDB.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.281.0](service/ec2/CHANGELOG.md#v12810-2026-01-22)
+  * **Feature**: Add better support for fractional GPU instances in DescribeInstanceTypes API. The new fields, logicalGpuCount, gpuPartitionSize, and workload array enable better GPU resource selection and filtering for both full and fractional GPU instance types.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.49.0](service/gamelift/CHANGELOG.md#v1490-2026-01-22)
+  * **Feature**: Amazon GameLift Servers Realtime now supports Node.js 24.x runtime on the Amazon Linux 2023 operating system.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.73.0](service/guardduty/CHANGELOG.md#v1730-2026-01-22)
+  * **Feature**: Adding new enum value for ScanStatusReason
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.37.0](service/health/CHANGELOG.md#v1370-2026-01-22)
+  * **Feature**: Updates the lower range for the maxResults request property for DescribeAffectedEntities, DescribeAffectedEntitiesForOrganization, DescribeEvents, and DescribeEventsForOrganization API request properties.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.35.6](service/marketplacemetering/CHANGELOG.md#v1356-2026-01-22)
+  * **Documentation**: Customer Identifier parameter deprecation date has been removed. For new implementations, we recommend using the CustomerAWSAccountID. Your current integration will continue to work. When updating your implementation, consider migrating to CustomerAWSAccountID for improved integration.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.31.1](service/verifiedpermissions/CHANGELOG.md#v1311-2026-01-22)
+  * **Documentation**: Adding documentation to user guide and API documentation for how customers can create new encrypted policy stores by passing in their customer managed key during policy store creation.
+
 # Release (2026-01-21)
 
 ## Module Highlights

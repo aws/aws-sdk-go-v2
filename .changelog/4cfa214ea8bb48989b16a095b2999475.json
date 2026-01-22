@@ -1,8 +1,0 @@
-{
-    "id": "4cfa214e-a8bb-4898-9b16-a095b2999475",
-    "type": "feature",
-    "description": "Adds additional waiters to Amazon DynamoDB.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

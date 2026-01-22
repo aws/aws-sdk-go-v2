@@ -1,8 +1,0 @@
-{
-    "id": "f8d09b0b-b602-49bb-91b8-3557329edfb7",
-    "type": "feature",
-    "description": "Updates the lower range for the maxResults request property for DescribeAffectedEntities, DescribeAffectedEntitiesForOrganization, DescribeEvents, and DescribeEventsForOrganization API request properties.",
-    "modules": [
-        "service/health"
-    ]
-}

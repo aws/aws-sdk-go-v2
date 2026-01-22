@@ -1,3 +1,7 @@
+# v1.31.1 (2026-01-22)
+
+* **Documentation**: Adding documentation to user guide and API documentation for how customers can create new encrypted policy stores by passing in their customer managed key during policy store creation.
+
 # v1.31.0 (2026-01-20)
 
 * **Feature**: Amazon Verified Permissions now supports encryption of resources by a customer managed KMS key. Customers can now create new encrypted policy stores by passing in their customer managed key during policy store creation.
