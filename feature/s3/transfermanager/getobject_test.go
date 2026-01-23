@@ -375,13 +375,14 @@ func TestGetAsyncWithFailure(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			reqCount := int64(0)
+			reqCount := atomic.Int64{}
 
 			s3Client := &s3testing.TransferManagerLoggingClient{}
 			s3Client.PartsCount = 10
 			s3Client.Data = buf80MB
 			s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (out *s3.GetObjectOutput, err error) {
-				switch atomic.LoadInt64(&reqCount) {
+				count := reqCount.Load()
+				switch count {
 				case 1:
 					// Give a chance for the multipart chunks to be queued up
 					time.Sleep(1 * time.Second)
@@ -401,13 +402,13 @@ func TestGetAsyncWithFailure(t *testing.T) {
 						ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, end, body.Len()*10)),
 					}
 
-					if reqCount > 0 {
+					if count > 0 {
 						// sleep here to ensure context switching between goroutines
 						time.Sleep(25 * time.Millisecond)
 					}
 				}
 
-				atomic.AddInt64(&reqCount, 1)
+				reqCount.Add(1)
 				return out, err
 			}
 
@@ -429,7 +430,7 @@ func TestGetAsyncWithFailure(t *testing.T) {
 				t.Fatalf("expect %s error message to be in %s", e, a)
 			}
 
-			if atomic.LoadInt64(&reqCount) > 3 {
+			if reqCount.Load() > 3 {
 				t.Errorf("expect no more than 3 requests, but received %d", reqCount)
 			}
 		})

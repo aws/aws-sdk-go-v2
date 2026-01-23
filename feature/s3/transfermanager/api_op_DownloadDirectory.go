@@ -133,8 +133,8 @@ type directoryDownloader struct {
 	in            *DownloadDirectoryInput
 	failurePolicy DownloadDirectoryFailurePolicy
 
-	objectsDownloaded int64
-	objectsFailed     int64
+	objectsDownloaded atomic.Int64
+	objectsFailed     atomic.Int64
 
 	err error
 
@@ -202,8 +202,8 @@ func (d *directoryDownloader) downloadDirectory(ctx context.Context) (*DownloadD
 	}
 
 	out := &DownloadDirectoryOutput{
-		ObjectsDownloaded: d.objectsDownloaded,
-		ObjectsFailed:     d.objectsFailed,
+		ObjectsDownloaded: d.objectsDownloaded.Load(),
+		ObjectsFailed:     d.objectsFailed.Load(),
 	}
 
 	d.emitter.Complete(ctx, out)
@@ -273,7 +273,7 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 			if err != nil {
 				d.setErr(fmt.Errorf("error when heading info of object %s: %v", data.key, err))
 			} else {
-				atomic.AddInt64(&d.objectsFailed, int64(1))
+				d.objectsFailed.Add(1)
 			}
 			continue
 		}
@@ -299,13 +299,13 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 			if err != nil {
 				d.setErr(fmt.Errorf("error when getting object and writing to local file %s: %v", data.path, err))
 			} else {
-				atomic.AddInt64(&d.objectsFailed, int64(1))
+				d.objectsFailed.Add(1)
 			}
 			os.Remove(data.path)
 			continue
 		}
 
-		atomic.AddInt64(&d.objectsDownloaded, int64(1))
+		d.objectsDownloaded.Add(1)
 		d.emitter.ObjectsTransferred(ctx, n)
 	}
 }
