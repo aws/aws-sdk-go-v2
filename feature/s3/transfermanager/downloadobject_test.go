@@ -547,8 +547,8 @@ func TestDownloadAsyncWithFailure(t *testing.T) {
 				t.Fatalf("expect %s error message to be in %s", e, a)
 			}
 
-			if reqCount.Load() > 3 {
-				t.Errorf("expect no more than 3 requests, but received %d", reqCount)
+			if count := reqCount.Load(); count > 3 {
+				t.Errorf("expect no more than 3 requests, but received %d", count)
 			}
 		})
 	}
