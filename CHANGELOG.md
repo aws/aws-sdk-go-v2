@@ -1,3 +1,13 @@
+# Release (2026-01-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.157.0](service/connect/CHANGELOG.md#v11570-2026-01-23)
+  * **Feature**: Amazon Connect now offers public APIs to programmatically configure and run automated tests for contact center experiences. Integrate testing into CICD pipelines, run multiple tests at scale, and retrieve results via API to automate validation of voice interactions and workflows.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.52.0](service/datazone/CHANGELOG.md#v1520-2026-01-23)
+  * **Feature**: Added api for deleting data export configuration for a domain
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.27.0](service/qconnect/CHANGELOG.md#v1270-2026-01-23)
+  * **Feature**: Fixes incorrect types in the UpdateAssistantAIAgent API request, adds MESSAGE to TargetType enum, and other minor changes.
+
 # Release (2026-01-22)
 
 ## General Highlights

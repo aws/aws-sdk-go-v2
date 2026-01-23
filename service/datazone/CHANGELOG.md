@@ -1,3 +1,7 @@
+# v1.52.0 (2026-01-23)
+
+* **Feature**: Added api for deleting data export configuration for a domain
+
 # v1.51.0 (2026-01-16)
 
 * **Feature**: This release adds support for numeric filtering and complex free-text searches cases for the Search and SearchListings APIs.

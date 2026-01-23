@@ -1,8 +1,0 @@
-{
-    "id": "55ebf12c-a1b3-41f8-92ab-499df46e6c0e",
-    "type": "feature",
-    "description": "Added api for deleting data export configuration for a domain",
-    "modules": [
-        "service/datazone"
-    ]
-}

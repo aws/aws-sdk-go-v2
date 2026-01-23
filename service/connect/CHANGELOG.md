@@ -1,3 +1,7 @@
+# v1.157.0 (2026-01-23)
+
+* **Feature**: Amazon Connect now offers public APIs to programmatically configure and run automated tests for contact center experiences. Integrate testing into CICD pipelines, run multiple tests at scale, and retrieve results via API to automate validation of voice interactions and workflows.
+
 # v1.156.0 (2026-01-16)
 
 * **Feature**: Adds support to allow customers to create form with Dispute configuration
