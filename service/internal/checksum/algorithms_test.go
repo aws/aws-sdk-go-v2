@@ -12,7 +12,6 @@ import (
 	"hash/crc32"
 	"hash/crc64"
 	"io"
-	"io/ioutil"
 	"strings"
 	"testing"
 	"testing/iotest"
@@ -106,7 +105,7 @@ func TestComputeChecksumReader(t *testing.T) {
 			}
 
 			// Validate read reads underlying stream's bytes as expected.
-			b, err := ioutil.ReadAll(r)
+			b, err := io.ReadAll(r)
 			if err == nil && len(c.ExpectReadErr) != 0 {
 				t.Fatalf("expect error %v, got none", c.ExpectReadErr)
 			}
@@ -179,24 +178,24 @@ func TestValidateChecksumReader(t *testing.T) {
 		expectedBody      []byte
 	}{
 		"unknown algorithm": {
-			payload:   ioutil.NopCloser(bytes.NewBuffer(nil)),
+			payload:   io.NopCloser(bytes.NewBuffer(nil)),
 			algorithm: Algorithm("something"),
 			expectErr: "unknown checksum algorithm",
 		},
 		"empty body": {
-			payload:      ioutil.NopCloser(bytes.NewReader([]byte(""))),
+			payload:      io.NopCloser(bytes.NewReader([]byte(""))),
 			algorithm:    AlgorithmCRC32,
 			checksum:     "AAAAAA==",
 			expectedBody: []byte(""),
 		},
 		"standard body": {
-			payload:      ioutil.NopCloser(bytes.NewReader([]byte("Hello world"))),
+			payload:      io.NopCloser(bytes.NewReader([]byte("Hello world"))),
 			algorithm:    AlgorithmCRC32,
 			checksum:     "i9aeUg==",
 			expectedBody: []byte("Hello world"),
 		},
 		"checksum mismatch": {
-			payload:           ioutil.NopCloser(bytes.NewReader([]byte("Hello world"))),
+			payload:           io.NopCloser(bytes.NewReader([]byte("Hello world"))),
 			algorithm:         AlgorithmCRC32,
 			checksum:          "AAAAAA==",
 			expectedBody:      []byte("Hello world"),
@@ -227,7 +226,7 @@ func TestValidateChecksumReader(t *testing.T) {
 				t.Fatalf("expected non nil response, got nil")
 			}
 
-			actualResponse, err := ioutil.ReadAll(response)
+			actualResponse, err := io.ReadAll(response)
 			if err == nil && len(c.expectChecksumErr) != 0 {
 				t.Fatalf("expected error %v, got none", c.expectChecksumErr)
 			}

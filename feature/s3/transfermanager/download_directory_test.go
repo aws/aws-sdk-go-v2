@@ -4,8 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -13,6 +12,8 @@ import (
 	"sort"
 	"strings"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
@@ -406,7 +407,7 @@ func TestDownloadDirectory(t *testing.T) {
 					return nil, fmt.Errorf("mocking error")
 				}
 				return &s3.GetObjectOutput{
-					Body:          ioutil.NopCloser(bytes.NewReader(c.Data)),
+					Body:          io.NopCloser(bytes.NewReader(c.Data)),
 					ContentLength: aws.Int64(int64(len(c.Data))),
 					PartsCount:    aws.Int32(c.PartsCount),
 					ETag:          aws.String(etag),
@@ -453,7 +454,7 @@ func TestDownloadDirectory(t *testing.T) {
 					return nil, fmt.Errorf("mocking error")
 				}
 				return &s3.GetObjectOutput{
-					Body:          ioutil.NopCloser(bytes.NewReader(c.Data)),
+					Body:          io.NopCloser(bytes.NewReader(c.Data)),
 					ContentLength: aws.Int64(int64(len(c.Data))),
 					PartsCount:    aws.Int32(c.PartsCount),
 					ETag:          aws.String(etag),

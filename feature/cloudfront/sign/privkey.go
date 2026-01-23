@@ -9,7 +9,6 @@ import (
 	"encoding/pem"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 )
 
@@ -126,7 +125,7 @@ func LoadPEMPrivKeyPKCS8AsSigner(reader io.Reader) (crypto.Signer, error) {
 }
 
 func loadPem(reader io.Reader) (*pem.Block, error) {
-	b, err := ioutil.ReadAll(reader)
+	b, err := io.ReadAll(reader)
 	if err != nil {
 		return nil, err
 	}

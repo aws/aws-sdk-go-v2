@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/signal"
@@ -139,7 +138,7 @@ func run() (err error) {
 
 			var output string
 			if result.Output != nil {
-				b, err := ioutil.ReadAll(result.Output)
+				b, err := io.ReadAll(result.Output)
 				if err != nil {
 					log.Printf("%s: %s => failed to read result output, %v",
 						relPath, result.Cmd, err)
