@@ -1296,6 +1296,9 @@
                     "target": "com.amazonaws.connect#CreateTaskTemplate"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateTestCase"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateTrafficDistributionGroup"
                 },
                 {
@@ -1398,6 +1401,9 @@
                     "target": "com.amazonaws.connect#DeleteTaskTemplate"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteTestCase"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteTrafficDistributionGroup"
                 },
                 {
@@ -1498,6 +1504,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeSecurityProfile"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeTestCase"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeTrafficDistributionGroup"
@@ -1612,6 +1621,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#GetTaskTemplate"
+                },
+                {
+                    "target": "com.amazonaws.connect#GetTestCaseExecutionSummary"
                 },
                 {
                     "target": "com.amazonaws.connect#GetTrafficDistribution"
@@ -1776,6 +1788,15 @@
                     "target": "com.amazonaws.connect#ListTaskTemplates"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListTestCaseExecutionRecords"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListTestCaseExecutions"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListTestCases"
+                },
+                {
                     "target": "com.amazonaws.connect#ListTrafficDistributionGroups"
                 },
                 {
@@ -1884,6 +1905,9 @@
                     "target": "com.amazonaws.connect#SearchSecurityProfiles"
                 },
                 {
+                    "target": "com.amazonaws.connect#SearchTestCases"
+                },
+                {
                     "target": "com.amazonaws.connect#SearchUserHierarchyGroups"
                 },
                 {
@@ -1944,6 +1968,9 @@
                     "target": "com.amazonaws.connect#StartTaskContact"
                 },
                 {
+                    "target": "com.amazonaws.connect#StartTestCaseExecution"
+                },
+                {
                     "target": "com.amazonaws.connect#StartWebRTCContact"
                 },
                 {
@@ -1957,6 +1984,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#StopContactStreaming"
+                },
+                {
+                    "target": "com.amazonaws.connect#StopTestCaseExecution"
                 },
                 {
                     "target": "com.amazonaws.connect#SubmitContactEvaluation"
@@ -2110,6 +2140,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateTaskTemplate"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateTestCase"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateTrafficDistribution"
@@ -12554,6 +12587,159 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#CreateTestCase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateTestCaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateTestCaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidTestCaseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a test case with its content and metadata for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/test-cases/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateTestCaseRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#TestCaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#TestCaseDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the test.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#TestCaseContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string that represents the content of the test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntryPoint": {
+                    "target": "com.amazonaws.connect#TestCaseEntryPoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the starting point for your test.</p>"
+                    }
+                },
+                "InitializationData": {
+                    "target": "com.amazonaws.connect#TestCaseInitializationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the initial custom attributes for your test.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TestCaseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the test status as either SAVED or PUBLISHED. The PUBLISHED status will initiate validation on the content. The SAVED status does not initiate validation of the content.</p>"
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Id of the test case if you want to create it in a replica region using Amazon Connect Global Resiliency</p>",
+                        "smithy.api#httpHeader": "x-amz-resource-id"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the resource was last modified.</p>",
+                        "smithy.api#httpHeader": "x-amz-last-modified-time"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region in which the resource was last modified</p>",
+                        "smithy.api#httpHeader": "x-amz-last-modified-region"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateTestCaseResponse": {
+            "type": "structure",
+            "members": {
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test.</p>"
+                    }
+                },
+                "TestCaseArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the test.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#CreateTrafficDistributionGroup": {
             "type": "operation",
             "input": {
@@ -16584,6 +16770,74 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#DeleteTestCase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteTestCaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteTestCaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the test case that has already been created for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/test-cases/{InstanceId}/{TestCaseId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteTestCaseRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteTestCaseResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#DeleteTrafficDistributionGroup": {
             "type": "operation",
             "input": {
@@ -19101,6 +19355,88 @@
                     "target": "com.amazonaws.connect#SecurityProfile",
                     "traits": {
                         "smithy.api#documentation": "<p>The security profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeTestCase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeTestCaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeTestCaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the specified test case and allows you to get the content and metadata of the test case for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/test-cases/{InstanceId}/{TestCaseId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeTestCaseRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TestCaseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the test case version to retrieve. If not specified, returns the published version if available, otherwise returns the saved version.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeTestCaseResponse": {
+            "type": "structure",
+            "members": {
+                "TestCase": {
+                    "target": "com.amazonaws.connect#TestCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The test case object containing all test case information.</p>"
                     }
                 }
             },
@@ -25010,6 +25346,76 @@
                 }
             }
         },
+        "com.amazonaws.connect#ExecutionRecord": {
+            "type": "structure",
+            "members": {
+                "ObservationId": {
+                    "target": "com.amazonaws.connect#TestCaseResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the execution record.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#ExecutionRecordStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the action execution.</p>"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the action was executed.</p>"
+                    }
+                },
+                "Record": {
+                    "target": "com.amazonaws.connect#ExecutionRecordString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the executed record.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a test case execution record.</p>"
+            }
+        },
+        "com.amazonaws.connect#ExecutionRecordList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ExecutionRecord"
+            }
+        },
+        "com.amazonaws.connect#ExecutionRecordStatus": {
+            "type": "enum",
+            "members": {
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ExecutionRecordString": {
+            "type": "string"
+        },
         "com.amazonaws.connect#Expiry": {
             "type": "structure",
             "members": {
@@ -26993,6 +27399,107 @@
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#GetTestCaseExecutionSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#GetTestCaseExecutionSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#GetTestCaseExecutionSummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves an overview of a test execution that includes the status of the execution, start and end time, and observation summary.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/test-cases/{InstanceId}/{TestCaseId}/{TestCaseExecutionId}/summary",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#GetTestCaseExecutionSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseExecutionId": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case execution.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#GetTestCaseExecutionSummaryResponse": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the test case execution started.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the test case execution ended.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the test case execution.</p>"
+                    }
+                },
+                "ObservationSummary": {
+                    "target": "com.amazonaws.connect#ObservationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary statistics for the test case execution.</p>"
                     }
                 }
             },
@@ -29618,6 +30125,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Reason why the request was invalid.</p>"
+            }
+        },
+        "com.amazonaws.connect#InvalidTestCaseException": {
+            "type": "structure",
+            "members": {
+                "Problems": {
+                    "target": "com.amazonaws.connect#Problems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The problems with the test. Please fix before trying again.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The test is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.connect#InvisibleFieldInfo": {
@@ -35013,6 +35536,331 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#ListTestCaseExecutionRecords": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListTestCaseExecutionRecordsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListTestCaseExecutionRecordsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists detailed steps of test case execution that includes all observations along with actions taken and data associated in the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/test-cases/{InstanceId}/{TestCaseId}/{TestCaseExecutionId}/records",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#ListTestCaseExecutionRecordsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseExecutionId": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case execution.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter execution records by status.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListTestCaseExecutionRecordsResponse": {
+            "type": "structure",
+            "members": {
+                "ExecutionRecords": {
+                    "target": "com.amazonaws.connect#ExecutionRecordList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of test case execution record objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#LargeNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListTestCaseExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListTestCaseExecutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListTestCaseExecutionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all test case executions and allows filtering by test case id, test case name, start time, end time or status of the execution for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/test-case-executions/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#ListTestCaseExecutionsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter executions by test case identifier.</p>",
+                        "smithy.api#httpQuery": "testCaseId"
+                    }
+                },
+                "TestCaseName": {
+                    "target": "com.amazonaws.connect#TestCaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter executions by test case name.</p>",
+                        "smithy.api#httpQuery": "testCaseName"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter executions that started after this time.</p>",
+                        "smithy.api#httpQuery": "startTime"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter executions that started before this time.</p>",
+                        "smithy.api#httpQuery": "endTime"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter executions by status.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListTestCaseExecutionsResponse": {
+            "type": "structure",
+            "members": {
+                "TestCaseExecutions": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of test case execution summary objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListTestCases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListTestCasesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListTestCasesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the test cases present in the specific Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/test-cases-summary/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TestCaseSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListTestCasesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListTestCasesResponse": {
+            "type": "structure",
+            "members": {
+                "TestCaseSummaryList": {
+                    "target": "com.amazonaws.connect#TestCaseSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the tests.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#ListTrafficDistributionGroupUsers": {
             "type": "operation",
             "input": {
@@ -37217,6 +38065,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the property value used in automation of a numeric questions. Label values are associated with\n   minimum and maximum values for the numeric question.</p>\n         <ul>\n            <li>\n               <p>Sentiment scores have a minimum value of -5 and maximum value of 5.</p>\n            </li>\n            <li>\n               <p> Duration labels, such as <code>NON_TALK_TIME</code>, <code>CONTACT_DURATION</code>,\n      <code>AGENT_INTERACTION_DURATION</code>, <code>CUSTOMER_HOLD_TIME</code> have a minimum value of 0 and maximum\n     value of 63072000.</p>\n            </li>\n            <li>\n               <p>Percentages have a minimum value of 0 and maximum value of 100. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NUMBER_OF_INTERRUPTIONS</code> has a minimum value of 0 and maximum value of 1000.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.connect#ObservationSummary": {
+            "type": "structure",
+            "members": {
+                "TotalObservations": {
+                    "target": "com.amazonaws.connect#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of observations in the test case.</p>"
+                    }
+                },
+                "ObservationsPassed": {
+                    "target": "com.amazonaws.connect#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of observations that passed during execution.</p>"
+                    }
+                },
+                "ObservationsFailed": {
+                    "target": "com.amazonaws.connect#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of observations that failed during execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary statistics about a test case execution.</p>"
             }
         },
         "com.amazonaws.connect#OperatingSystem": {
@@ -46615,6 +47489,114 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#SearchTestCases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchTestCasesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchTestCasesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for test cases in the specified Amazon Connect instance, with optional filtering.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-test-cases",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TestCases",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchTestCasesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "SearchFilter": {
+                    "target": "com.amazonaws.connect#TestCaseSearchFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+                    }
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#TestCaseSearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria to be used to return test cases.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SearchTestCasesResponse": {
+            "type": "structure",
+            "members": {
+                "TestCases": {
+                    "target": "com.amazonaws.connect#TestCaseSearchSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the test cases.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of test cases which matched your search query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#SearchText": {
             "type": "string",
             "traits": {
@@ -49966,6 +50948,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#StartTestCaseExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#StartTestCaseExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#StartTestCaseExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts executing a published test case.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/test-cases/{InstanceId}/{TestCaseId}/start-execution",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#StartTestCaseExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case to execute.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#StartTestCaseExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "TestCaseExecutionId": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case execution.</p>"
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case resource that was executed.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#StartWebRTCContact": {
             "type": "operation",
             "input": {
@@ -50477,6 +51552,88 @@
             }
         },
         "com.amazonaws.connect#StopContactStreamingResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#StopTestCaseExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#StopTestCaseExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#StopTestCaseExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a running test execution.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/test-cases/{InstanceId}/{TestCaseId}/{TestCaseExecutionId}/stop-execution",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#StopTestCaseExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseExecutionId": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case execution to stop.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#StopTestCaseExecutionResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -51692,6 +52849,387 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about template message configuration.</p>"
+            }
+        },
+        "com.amazonaws.connect#TestCase": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the test case.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#TestCaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the test case.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#TestCaseContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string that represents the content of the test.</p>"
+                    }
+                },
+                "EntryPoint": {
+                    "target": "com.amazonaws.connect#TestCaseEntryPoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the starting point for the test, including channel type and parameters.</p>"
+                    }
+                },
+                "InitializationData": {
+                    "target": "com.amazonaws.connect#TestCaseInitializationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the test attributes for precise data representation.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#TestCaseDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the test case.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TestCaseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the test status as either SAVED or PUBLISHED.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the test case was last modified.</p>"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region in which the test case was last modified.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "TestCaseSha256": {
+                    "target": "com.amazonaws.connect#TestCaseSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA256 hash of the test case content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a test case.</p>"
+            }
+        },
+        "com.amazonaws.connect#TestCaseContent": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#TestCaseDescription": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#TestCaseEntryPoint": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.connect#TestCaseEntryPointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of entry point.</p>"
+                    }
+                },
+                "VoiceCallEntryPointParameters": {
+                    "target": "com.amazonaws.connect#VoiceCallEntryPointParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters for voice call entry point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the starting point for a test case.</p>"
+            }
+        },
+        "com.amazonaws.connect#TestCaseEntryPointType": {
+            "type": "enum",
+            "members": {
+                "VOICE_CALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICE_CALL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#TestCaseExecution": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the test case execution started.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the test case execution ended.</p>"
+                    }
+                },
+                "TestCaseExecutionId": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case execution.</p>"
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case.</p>"
+                    }
+                },
+                "TestCaseExecutionStatus": {
+                    "target": "com.amazonaws.connect#TestCaseExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the test case execution.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a test case execution.</p>"
+            }
+        },
+        "com.amazonaws.connect#TestCaseExecutionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connect#TestCaseExecutionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TestCaseExecution"
+            }
+        },
+        "com.amazonaws.connect#TestCaseExecutionStatus": {
+            "type": "enum",
+            "members": {
+                "INITIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIATED"
+                    }
+                },
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a test case execution.</p>"
+            }
+        },
+        "com.amazonaws.connect#TestCaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connect#TestCaseInitializationData": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#TestCaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#TestCaseResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#TestCaseSearchConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TestCaseSearchCriteria"
+            }
+        },
+        "com.amazonaws.connect#TestCaseSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#TestCaseSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an OR condition.</p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#TestCaseSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an AND condition.</p>"
+                    }
+                },
+                "StringCondition": {
+                    "target": "com.amazonaws.connect#StringCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>"
+                    }
+                },
+                "StatusCondition": {
+                    "target": "com.amazonaws.connect#TestCaseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the test case.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to return test cases.</p>"
+            }
+        },
+        "com.amazonaws.connect#TestCaseSearchFilter": {
+            "type": "structure",
+            "members": {
+                "TagFilter": {
+                    "target": "com.amazonaws.connect#ControlPlaneTagFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions inside the SearchFilter. This accepts an OR of AND (List of List) input where: Top level list specifies conditions that need to be applied with OR operator. Inner list specifies conditions that need to be applied with AND operator.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+            }
+        },
+        "com.amazonaws.connect#TestCaseSearchSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TestCase"
+            }
+        },
+        "com.amazonaws.connect#TestCaseSha256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{64}$"
+            }
+        },
+        "com.amazonaws.connect#TestCaseStatus": {
+            "type": "enum",
+            "members": {
+                "PUBLISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHED"
+                    }
+                },
+                "SAVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAVED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a test case.</p>"
+            }
+        },
+        "com.amazonaws.connect#TestCaseSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the test case.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ContactFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the test case.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TestCaseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the test case.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the test case was last modified.</p>"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region in which the test case was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a test case.</p>"
+            }
+        },
+        "com.amazonaws.connect#TestCaseSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TestCaseSummary"
             }
         },
         "com.amazonaws.connect#ThemeImageLink": {
@@ -56362,6 +57900,130 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#UpdateTestCase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateTestCaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateTestCaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidTestCaseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates any of the metadata for a test case, such as the name, description, and status or content of an existing test case. This API doesn't allow customers to update the tags of the test case resource for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/test-cases/{InstanceId}/{TestCaseId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateTestCaseRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestCaseId": {
+                    "target": "com.amazonaws.connect#TestCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test case to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#TestCaseContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string that represents the content of the test.</p>"
+                    }
+                },
+                "EntryPoint": {
+                    "target": "com.amazonaws.connect#TestCaseEntryPoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the starting point for your test.</p>"
+                    }
+                },
+                "InitializationData": {
+                    "target": "com.amazonaws.connect#TestCaseInitializationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the test attributes for precise data representation.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#TestCaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the test case.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#TestCaseDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the test case.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TestCaseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the test status as either SAVED or PUBLISHED. The PUBLISHED status will initiate validation on the content. The SAVED status does not initiate validation of the content.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the resource was last modified.</p>",
+                        "smithy.api#httpHeader": "x-amz-last-modified-time"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region in which the resource was last modified</p>",
+                        "smithy.api#httpHeader": "x-amz-last-modified-region"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateTestCaseResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#UpdateTrafficDistribution": {
             "type": "operation",
             "input": {
@@ -59314,6 +60976,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#VocabularySummary"
+            }
+        },
+        "com.amazonaws.connect#VoiceCallEntryPointParameters": {
+            "type": "structure",
+            "members": {
+                "SourcePhoneNumber": {
+                    "target": "com.amazonaws.connect#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source phone number for the test.</p>"
+                    }
+                },
+                "DestinationPhoneNumber": {
+                    "target": "com.amazonaws.connect#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination phone number for the test.</p>"
+                    }
+                },
+                "FlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow identifier for the test.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameters for initiating a voice call test.</p>"
             }
         },
         "com.amazonaws.connect#VoiceRecordingConfiguration": {

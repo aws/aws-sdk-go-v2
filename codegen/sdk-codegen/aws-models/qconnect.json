@@ -1443,7 +1443,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An annotation that provides additional context or metadata.</p>"
+                "smithy.api#documentation": "<p>An annotation that provides additional context or metadata.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.qconnect#AnswerRecommendationAIAgentConfiguration": {
@@ -2219,7 +2220,7 @@
             "type": "structure",
             "members": {
                 "completion": {
-                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "target": "com.amazonaws.qconnect#NonEmptySensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>A chunk of the case summarization completion.</p>"
                     }
@@ -9407,7 +9408,10 @@
             }
         },
         "com.amazonaws.qconnect#JSONDocument": {
-            "type": "document"
+            "type": "document",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.qconnect#KnowledgeBase": {
             "type": "resource",
@@ -17547,6 +17551,10 @@
                     {
                         "value": "RESULT",
                         "name": "RESULT"
+                    },
+                    {
+                        "value": "MESSAGE",
+                        "name": "MESSAGE"
                     }
                 ]
             }
@@ -17681,7 +17689,7 @@
                     }
                 },
                 "title": {
-                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "target": "com.amazonaws.qconnect#NonEmptySensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The title of the tool configuration.</p>"
                     }
@@ -17693,7 +17701,7 @@
                     }
                 },
                 "description": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.qconnect#NonEmptySensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the tool configuration.</p>"
                     }
@@ -17774,7 +17782,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Instructions for using a tool.</p>"
+                "smithy.api#documentation": "<p>Instructions for using a tool.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.qconnect#ToolOutputConfiguration": {
@@ -17822,6 +17831,9 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qconnect#ToolOutputFilter"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.qconnect#ToolOverrideConstantInputValue": {
@@ -17886,6 +17898,9 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qconnect#ToolOverrideInputValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.qconnect#ToolOverrideInputValueType": {
@@ -18453,10 +18468,10 @@
                         "smithy.api#required": {}
                     }
                 },
-                "orchestratorConfigurationList": {
-                    "target": "com.amazonaws.qconnect#OrchestratorConfigurationList",
+                "orchestratorUseCase": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated list of orchestrator configurations for the assistant AI Agent.</p>"
+                        "smithy.api#documentation": "<p>The orchestrator use case for the AI Agent being added.</p>"
                     }
                 }
             },
