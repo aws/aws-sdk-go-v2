@@ -379,7 +379,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 				u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
 			} else {
 				// this failed object is ignored, just increase the failure count
-				atomic.AddInt64(&u.filesFailed, 1)
+				atomic.AddInt64(&u.filesFailed, int64(1))
 			}
 			continue
 		}
@@ -387,7 +387,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		u.progressOnce.Do(func() {
 			u.emitter.Start(ctx, u.in)
 		})
-		atomic.AddInt64(&u.filesUploaded, 1)
+		atomic.AddInt64(&u.filesUploaded, int64(1))
 		u.emitter.ObjectsTransferred(ctx, aws.ToInt64(out.ContentLength))
 	}
 }

@@ -273,7 +273,7 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 			if err != nil {
 				d.setErr(fmt.Errorf("error when heading info of object %s: %v", data.key, err))
 			} else {
-				atomic.AddInt64(&d.objectsFailed, 1)
+				atomic.AddInt64(&d.objectsFailed, int64(1))
 			}
 			continue
 		}
@@ -299,13 +299,13 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 			if err != nil {
 				d.setErr(fmt.Errorf("error when getting object and writing to local file %s: %v", data.path, err))
 			} else {
-				atomic.AddInt64(&d.objectsFailed, 1)
+				atomic.AddInt64(&d.objectsFailed, int64(1))
 			}
 			os.Remove(data.path)
 			continue
 		}
 
-		atomic.AddInt64(&d.objectsDownloaded, 1)
+		atomic.AddInt64(&d.objectsDownloaded, int64(1))
 		d.emitter.ObjectsTransferred(ctx, n)
 	}
 }
