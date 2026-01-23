@@ -798,6 +798,25 @@ func awsAwsjson10_serializeDocumentBillingViewTypeList(v []types.BillingViewType
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCostCategoryValues(v *types.CostCategoryValues, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsAwsjson10_serializeDocumentValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDimensionValues(v *types.DimensionValues, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -820,6 +839,13 @@ func awsAwsjson10_serializeDocumentDimensionValues(v *types.DimensionValues, val
 func awsAwsjson10_serializeDocumentExpression(v *types.Expression, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CostCategories != nil {
+		ok := object.Key("costCategories")
+		if err := awsAwsjson10_serializeDocumentCostCategoryValues(v.CostCategories, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Dimensions != nil {
 		ok := object.Key("dimensions")

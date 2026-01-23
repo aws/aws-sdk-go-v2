@@ -8699,6 +8699,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The instance requirements. You can specify:</p>\n         <ul>\n            <li>\n               <p>The instance types</p>\n            </li>\n            <li>\n               <p>Instance requirements such as vCPU count, memory, network performance, and\n\t\t\t\t\taccelerator specifications</p>\n            </li>\n         </ul>\n         <p>Amazon ECS automatically selects the instances that match the specified\n\t\t\tcriteria.</p>"
                     }
+                },
+                "fipsEnabled": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether to enable FIPS 140-2 validated cryptographic modules on EC2 instances launched by the capacity provider. If <code>true</code>, instances use FIPS-compliant cryptographic algorithms and modules for enhanced security compliance. If <code>false</code>, instances use standard cryptographic implementations.</p>\n         <p>If not specified, instances are launched with FIPS enabled in AWS GovCloud (US) regions and FIPS disabled in other regions.</p>"
+                    }
                 }
             },
             "traits": {

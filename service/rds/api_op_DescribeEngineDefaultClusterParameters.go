@@ -173,6 +173,111 @@ func (c *Client) addOperationDescribeEngineDefaultClusterParametersMiddlewares(s
 	return nil
 }
 
+// DescribeEngineDefaultClusterParametersPaginatorOptions is the paginator options
+// for DescribeEngineDefaultClusterParameters
+type DescribeEngineDefaultClusterParametersPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEngineDefaultClusterParametersPaginator is a paginator for
+// DescribeEngineDefaultClusterParameters
+type DescribeEngineDefaultClusterParametersPaginator struct {
+	options   DescribeEngineDefaultClusterParametersPaginatorOptions
+	client    DescribeEngineDefaultClusterParametersAPIClient
+	params    *DescribeEngineDefaultClusterParametersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEngineDefaultClusterParametersPaginator returns a new
+// DescribeEngineDefaultClusterParametersPaginator
+func NewDescribeEngineDefaultClusterParametersPaginator(client DescribeEngineDefaultClusterParametersAPIClient, params *DescribeEngineDefaultClusterParametersInput, optFns ...func(*DescribeEngineDefaultClusterParametersPaginatorOptions)) *DescribeEngineDefaultClusterParametersPaginator {
+	if params == nil {
+		params = &DescribeEngineDefaultClusterParametersInput{}
+	}
+
+	options := DescribeEngineDefaultClusterParametersPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeEngineDefaultClusterParametersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEngineDefaultClusterParametersPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeEngineDefaultClusterParameters page.
+func (p *DescribeEngineDefaultClusterParametersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEngineDefaultClusterParametersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeEngineDefaultClusterParameters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = nil
+	if result.EngineDefaults != nil {
+		p.nextToken = result.EngineDefaults.Marker
+	}
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeEngineDefaultClusterParametersAPIClient is a client that implements the
+// DescribeEngineDefaultClusterParameters operation.
+type DescribeEngineDefaultClusterParametersAPIClient interface {
+	DescribeEngineDefaultClusterParameters(context.Context, *DescribeEngineDefaultClusterParametersInput, ...func(*Options)) (*DescribeEngineDefaultClusterParametersOutput, error)
+}
+
+var _ DescribeEngineDefaultClusterParametersAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opDescribeEngineDefaultClusterParameters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

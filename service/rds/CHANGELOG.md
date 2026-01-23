@@ -1,3 +1,11 @@
+# v1.114.0 (2026-01-14)
+
+* **Feature**: no feature changes. model migrated to Smithy
+
+# v1.113.2 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.113.1 (2025-12-09)
 
 * No change notes available for this release.

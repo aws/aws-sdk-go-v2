@@ -3390,6 +3390,15 @@ type InstanceLaunchTemplate struct {
 	// [Instance purchasing options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
 	CapacityOptionType CapacityOptionType
 
+	// Determines whether to enable FIPS 140-2 validated cryptographic modules on EC2
+	// instances launched by the capacity provider. If true , instances use
+	// FIPS-compliant cryptographic algorithms and modules for enhanced security
+	// compliance. If false , instances use standard cryptographic implementations.
+	//
+	// If not specified, instances are launched with FIPS enabled in AWS GovCloud (US)
+	// regions and FIPS disabled in other regions.
+	FipsEnabled *bool
+
 	// The instance requirements. You can specify:
 	//
 	//   - The instance types

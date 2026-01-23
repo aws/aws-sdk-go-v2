@@ -138,7 +138,7 @@
         "com.amazonaws.workspacesinstances#AvailabilityZone": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-z]{2}-[a-z]+-\\d[a-z](-[a-z0-9]+)?$"
+                "smithy.api#pattern": "^[a-z]{2}-[a-z]+-\\d(?:[a-z]|-[a-z]+-\\d[a-z])$"
             }
         },
         "com.amazonaws.workspacesinstances#BandwidthWeightingEnum": {
@@ -160,6 +160,38 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ebs-1"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesinstances#BillingConfiguration": {
+            "type": "structure",
+            "members": {
+                "BillingMode": {
+                    "target": "com.amazonaws.workspacesinstances#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the billing mode for WorkSpace Instances. MONTHLY provides fixed monthly rates for predictable budgeting, while HOURLY enables pay-per-second billing for actual usage.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines billing configuration settings for WorkSpace Instances, containing the billing mode selection.</p>"
+            }
+        },
+        "com.amazonaws.workspacesinstances#BillingMode": {
+            "type": "enum",
+            "members": {
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHLY"
+                    }
+                },
+                "HOURLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURLY"
                     }
                 }
             }
@@ -555,6 +587,12 @@
                         "smithy.api#documentation": "<p>Comprehensive configuration settings for the WorkSpaces Instance, including network, compute, and storage parameters.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "BillingConfiguration": {
+                    "target": "com.amazonaws.workspacesinstances#BillingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional billing configuration for the WorkSpace Instance. Allows customers to specify their preferred billing mode when creating a new instance. Defaults to hourly billing if not specified.</p>"
+                    }
                 }
             },
             "traits": {
@@ -682,7 +720,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete a workspace managed instance in your account"
                 },
-                "smithy.api#documentation": "<p>Deletes the specified WorkSpace</p>"
+                "smithy.api#documentation": "<p>Deletes the specified WorkSpace</p> <important> <p>Usage of this API will result in deletion of the resource in question.</p> </important>"
             }
         },
         "com.amazonaws.workspacesinstances#DeleteWorkspaceInstanceRequest": {
@@ -1368,6 +1406,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details of the associated EC2 managed instance.</p>"
                     }
+                },
+                "BillingConfiguration": {
+                    "target": "com.amazonaws.workspacesinstances#BillingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the current billing configuration for the WorkSpace Instance, indicating the active billing mode.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1496,6 +1540,52 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^ami-[0-9a-zA-Z]{1,63}$"
+            }
+        },
+        "com.amazonaws.workspacesinstances#InstanceConfigurationFilter": {
+            "type": "structure",
+            "members": {
+                "BillingMode": {
+                    "target": "com.amazonaws.workspacesinstances#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters WorkSpace Instance types based on supported billing modes. Allows customers to search for instance types that support their preferred billing model, such as HOURLY or MONTHLY billing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PlatformType": {
+                    "target": "com.amazonaws.workspacesinstances#PlatformTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters WorkSpace Instance types by operating system platform. Allows customers to find instances that support their desired OS, such as Windows, Linux/UNIX, Ubuntu Pro, RHEL, or SUSE.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tenancy": {
+                    "target": "com.amazonaws.workspacesinstances#InstanceConfigurationTenancyEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters WorkSpace Instance types by tenancy model. Allows customers to find instances that match their tenancy requirements, such as SHARED or DEDICATED.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines filtering criteria for WorkSpace Instance type searches. Combines multiple filter conditions including billing mode, platform type, and tenancy to help customers find instance types that meet their specific requirements.</p>"
+            }
+        },
+        "com.amazonaws.workspacesinstances#InstanceConfigurationTenancyEnum": {
+            "type": "enum",
+            "members": {
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                },
+                "DEDICATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEDICATED"
+                    }
+                }
             }
         },
         "com.amazonaws.workspacesinstances#InstanceInterruptionBehaviorEnum": {
@@ -1786,6 +1876,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Unique identifier for the WorkSpace Instance type.</p>"
                     }
+                },
+                "SupportedInstanceConfigurations": {
+                    "target": "com.amazonaws.workspacesinstances#SupportedInstanceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists all valid combinations of tenancy, platform type, and billing mode supported for the specific WorkSpace Instance type. Contains the complete set of configuration options available for this instance type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1987,11 +2083,20 @@
                 "smithy.api#readonly": {}
             }
         },
+        "com.amazonaws.workspacesinstances#ListInstanceTypesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 600
+                }
+            }
+        },
         "com.amazonaws.workspacesinstances#ListInstanceTypesRequest": {
             "type": "structure",
             "members": {
                 "MaxResults": {
-                    "target": "com.amazonaws.workspacesinstances#MaxResults",
+                    "target": "com.amazonaws.workspacesinstances#ListInstanceTypesMaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>Maximum number of instance types to return in a single API call. Enables pagination of instance type results.</p>"
                     }
@@ -2000,6 +2105,12 @@
                     "target": "com.amazonaws.workspacesinstances#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Pagination token for retrieving subsequent pages of instance type results.</p>"
+                    }
+                },
+                "InstanceConfigurationFilter": {
+                    "target": "com.amazonaws.workspacesinstances#InstanceConfigurationFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filter to narrow instance type results based on configuration requirements. Only returns instance types that support the specified combination of tenancy, platform type, and billing mode.</p>"
                     }
                 }
             },
@@ -2589,6 +2700,53 @@
                 "smithy.api#pattern": "^pg-[0-9a-zA-Z]{1,63}$"
             }
         },
+        "com.amazonaws.workspacesinstances#PlatformTypeEnum": {
+            "type": "enum",
+            "members": {
+                "WINDOWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Windows"
+                    }
+                },
+                "WINDOWS_BYOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Windows BYOL"
+                    }
+                },
+                "LINUX_UNIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Linux/UNIX"
+                    }
+                },
+                "UBUNTU_PRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ubuntu Pro Linux"
+                    }
+                },
+                "RHEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Red Hat Enterprise Linux"
+                    }
+                },
+                "LINUX_BYOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Red Hat BYOL Linux"
+                    }
+                },
+                "SUSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSE Linux"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspacesinstances#PrivateDnsNameOptionsRequest": {
             "type": "structure",
             "members": {
@@ -2942,6 +3100,38 @@
                 "smithy.api#pattern": "^subnet-[0-9a-zA-Z]{1,63}$"
             }
         },
+        "com.amazonaws.workspacesinstances#SupportedInstanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "BillingMode": {
+                    "target": "com.amazonaws.workspacesinstances#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the billing mode supported in this configuration combination.</p>"
+                    }
+                },
+                "PlatformType": {
+                    "target": "com.amazonaws.workspacesinstances#PlatformTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the operating system platform supported in this configuration combination.</p>"
+                    }
+                },
+                "Tenancy": {
+                    "target": "com.amazonaws.workspacesinstances#InstanceConfigurationTenancyEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the tenancy model supported in this configuration combination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single valid configuration combination that an instance type supports, combining tenancy, platform type, and billing mode into one complete configuration specification.</p>"
+            }
+        },
+        "com.amazonaws.workspacesinstances#SupportedInstanceConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesinstances#SupportedInstanceConfiguration"
+            }
+        },
         "com.amazonaws.workspacesinstances#Tag": {
             "type": "structure",
             "members": {
@@ -2980,7 +3170,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 30
+                    "max": 50
                 }
             }
         },
@@ -2992,7 +3182,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 30
+                    "max": 50
                 }
             }
         },

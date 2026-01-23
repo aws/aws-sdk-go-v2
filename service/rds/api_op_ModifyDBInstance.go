@@ -315,11 +315,9 @@ type ModifyDBInstanceInput struct {
 	DBSecurityGroups []string
 
 	// The new DB subnet group for the DB instance. You can use this parameter to move
-	// your DB instance to a different VPC.
-	//
-	// If your DB instance isn't in a VPC, you can also use this parameter to move
-	// your DB instance into a VPC. For more information, see [Working with a DB instance in a VPC]in the Amazon RDS User
-	// Guide.
+	// your DB instance to a different VPC. If your DB instance isn't in a VPC, you can
+	// also use this parameter to move your DB instance into a VPC. For more
+	// information, see [Working with a DB instance in a VPC]in the Amazon RDS User Guide.
 	//
 	// Changing the subnet group causes an outage during the change. The change is
 	// applied during the next maintenance window, unless you enable ApplyImmediately .

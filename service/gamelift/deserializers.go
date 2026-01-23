@@ -23343,6 +23343,15 @@ func awsAwsjson11_deserializeDocumentScript(v **types.Script, value interface{})
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "NodeJsVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeJsVersion to be of type string, got %T instead", value)
+				}
+				sv.NodeJsVersion = ptr.String(jtv)
+			}
+
 		case "ScriptArn":
 			if value != nil {
 				jtv, ok := value.(string)

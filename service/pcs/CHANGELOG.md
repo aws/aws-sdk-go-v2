@@ -1,3 +1,7 @@
+# v1.15.6 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.5 (2025-12-22)
 
 * **Documentation**: Change API Reference Documentation for default Mode in Accounting and SlurmRest

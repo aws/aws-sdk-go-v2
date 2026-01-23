@@ -1,3 +1,11 @@
+# v1.29.0 (2026-01-15)
+
+* **Feature**: Collection groups in Amazon OpenSearch Serverless enables to organize multiple collections and enable compute resource sharing across collections with different KMS keys. This shared compute model reduces costs by eliminating the need for separate OpenSearch Compute Units (OCUs) for each KMS key.
+
+# v1.28.2 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.1 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

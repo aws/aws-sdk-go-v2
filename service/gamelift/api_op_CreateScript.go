@@ -73,6 +73,11 @@ type CreateScriptInput struct {
 	// [UpdateScript]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html
 	Name *string
 
+	// The Node.js version used for execution of your Realtime script. The valid
+	// values are 10.x | 24.x . By default, NodeJsVersion is 10.x . This value cannot
+	// be updated later.
+	NodeJsVersion *string
+
 	// The location of the Amazon S3 bucket where a zipped file containing your
 	// Realtime scripts is stored. The storage location must specify the Amazon S3
 	// bucket name, the zip file name (the "key"), and a role ARN that allows Amazon

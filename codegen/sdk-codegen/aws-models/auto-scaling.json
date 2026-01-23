@@ -597,7 +597,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This API operation is superseded by <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html\">https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html</a>, which\n                can attach multiple traffic sources types. We recommend using\n                <code>AttachTrafficSources</code> to simplify how you manage traffic sources.\n                However, we continue to support <code>AttachLoadBalancers</code>. You can use both\n                the original <code>AttachLoadBalancers</code> API operation and\n                    <code>AttachTrafficSources</code> on the same Auto Scaling group.</p>\n         </note>\n         <p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers the\n            running instances with these Classic Load Balancers.</p>\n         <p>To describe the load balancers for an Auto Scaling group, call the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> API.\n            To detach a load balancer from the Auto Scaling group, call the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachLoadBalancers.html\">DetachLoadBalancers</a>\n            API.</p>\n         <p>This operation is additive and does not detach existing Classic Load Balancers or\n            target groups from the Auto Scaling group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This API operation is superseded by <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html\">AttachTrafficSources</a>, which\n                can attach multiple traffic sources types. We recommend using\n                <code>AttachTrafficSources</code> to simplify how you manage traffic sources.\n                However, we continue to support <code>AttachLoadBalancers</code>. You can use both\n                the original <code>AttachLoadBalancers</code> API operation and\n                    <code>AttachTrafficSources</code> on the same Auto Scaling group.</p>\n         </note>\n         <p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers the\n            running instances with these Classic Load Balancers.</p>\n         <p>To describe the load balancers for an Auto Scaling group, call the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> API.\n            To detach a load balancer from the Auto Scaling group, call the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachLoadBalancers.html\">DetachLoadBalancers</a>\n            API.</p>\n         <p>This operation is additive and does not detach existing Classic Load Balancers or\n            target groups from the Auto Scaling group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To attach a load balancer to an Auto Scaling group",
@@ -729,13 +729,13 @@
                 "LaunchConfigurationName": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the associated launch configuration.</p>"
+                        "smithy.api#documentation": "<p>The name of the associated launch configuration for the Auto Scaling group.</p>"
                     }
                 },
                 "LaunchTemplate": {
                     "target": "com.amazonaws.autoscaling#LaunchTemplateSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The launch template for the group.</p>"
+                        "smithy.api#documentation": "<p>The launch template for the Auto Scaling group.</p>"
                     }
                 },
                 "MixedInstancesPolicy": {
@@ -748,7 +748,7 @@
                     "target": "com.amazonaws.autoscaling#AutoScalingGroupMinSize",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The minimum size of the group.</p>",
+                        "smithy.api#documentation": "<p>The minimum size of the Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -756,7 +756,7 @@
                     "target": "com.amazonaws.autoscaling#AutoScalingGroupMaxSize",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The maximum size of the group.</p>",
+                        "smithy.api#documentation": "<p>The maximum size of the Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -764,7 +764,7 @@
                     "target": "com.amazonaws.autoscaling#AutoScalingGroupDesiredCapacity",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The desired size of the group.</p>",
+                        "smithy.api#documentation": "<p>The desired size of the Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -778,7 +778,7 @@
                     "target": "com.amazonaws.autoscaling#Cooldown",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The duration of the default cooldown period, in seconds.</p>",
+                        "smithy.api#documentation": "<p>The duration of the default cooldown period, in seconds, for the Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -786,7 +786,7 @@
                     "target": "com.amazonaws.autoscaling#AvailabilityZones",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>One or more Availability Zones for the group.</p>",
+                        "smithy.api#documentation": "<p>One or more Availability Zones for the Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -806,88 +806,88 @@
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A comma-separated value string of one or more health check types.</p>",
+                        "smithy.api#documentation": "<p>One or more comma-separated health check types for the Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "HealthCheckGracePeriod": {
                     "target": "com.amazonaws.autoscaling#HealthCheckGracePeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The duration of the health check grace period, in seconds.</p>"
+                        "smithy.api#documentation": "<p>The duration of the health check grace period, in seconds, for the Auto Scaling group.</p>"
                     }
                 },
                 "Instances": {
                     "target": "com.amazonaws.autoscaling#Instances",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instances associated with the group.</p>"
+                        "smithy.api#documentation": "<p>The EC2 instances associated with the Auto Scaling group.</p>"
                     }
                 },
                 "CreatedTime": {
                     "target": "com.amazonaws.autoscaling#TimestampType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The date and time the group was created.</p>",
+                        "smithy.api#documentation": "<p>The date and time the Auto Scaling group was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SuspendedProcesses": {
                     "target": "com.amazonaws.autoscaling#SuspendedProcesses",
                     "traits": {
-                        "smithy.api#documentation": "<p>The suspended processes associated with the group.</p>"
+                        "smithy.api#documentation": "<p>The suspended processes associated with the Auto Scaling group.</p>"
                     }
                 },
                 "PlacementGroup": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the placement group into which to launch your instances, if any.</p>"
+                        "smithy.api#documentation": "<p>The name of the placement group into which to launch EC2 instances for the Auto Scaling group.</p>"
                     }
                 },
                 "VPCZoneIdentifier": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen5000",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more subnet IDs, if applicable, separated by commas.</p>"
+                        "smithy.api#documentation": "<p>One or more comma-separated subnet IDs for the Auto Scaling group.</p>"
                     }
                 },
                 "EnabledMetrics": {
                     "target": "com.amazonaws.autoscaling#EnabledMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metrics enabled for the group.</p>"
+                        "smithy.api#documentation": "<p>The metrics enabled for the Auto Scaling group.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the group when the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteAutoScalingGroup.html\">DeleteAutoScalingGroup</a>\n            operation is in progress.</p>"
+                        "smithy.api#documentation": "<p>The current state of the Auto Scaling group when the\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteAutoScalingGroup.html\">DeleteAutoScalingGroup</a>\n            operation is in progress.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.autoscaling#TagDescriptionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags for the group.</p>"
+                        "smithy.api#documentation": "<p>The tags for the Auto Scaling group.</p>"
                     }
                 },
                 "TerminationPolicies": {
                     "target": "com.amazonaws.autoscaling#TerminationPolicies",
                     "traits": {
-                        "smithy.api#documentation": "<p>The termination policies for the group.</p>"
+                        "smithy.api#documentation": "<p>The termination policies for the Auto Scaling group.</p>"
                     }
                 },
                 "NewInstancesProtectedFromScaleIn": {
                     "target": "com.amazonaws.autoscaling#InstanceProtected",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling when scaling in. For more information about preventing instances from terminating on scale in, \n            see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html\">Use instance scale-in protection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>"
+                        "smithy.api#documentation": "<p>Indicates whether newly launched EC2 instances are protected from termination when scaling in for the Auto Scaling group.</p>\n         <p>\n            For more information about preventing instances from terminating on scale in, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html\">Use instance scale-in protection</a>\n            in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>"
                     }
                 },
                 "ServiceLinkedRoleARN": {
                     "target": "com.amazonaws.autoscaling#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to\n            call other Amazon Web Services on your behalf.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other Amazon Web Services on your behalf.</p>"
                     }
                 },
                 "MaxInstanceLifetime": {
                     "target": "com.amazonaws.autoscaling#MaxInstanceLifetime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that an instance can be in service.</p>\n         <p>Valid Range: Minimum value of 0.</p>"
+                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that an EC2 instance can be in service for the Auto Scaling group.</p>"
                     }
                 },
                 "CapacityRebalance": {
@@ -923,7 +923,7 @@
                 "DefaultInstanceWarmup": {
                     "target": "com.amazonaws.autoscaling#DefaultInstanceWarmup",
                     "traits": {
-                        "smithy.api#documentation": "<p>The duration of the default instance warmup, in seconds.</p>"
+                        "smithy.api#documentation": "<p>The duration of the default EC2 instance warmup time, in seconds, for the Auto Scaling group.</p>"
                     }
                 },
                 "TrafficSources": {
@@ -938,28 +938,34 @@
                         "smithy.api#documentation": "<p>An instance maintenance policy.</p>"
                     }
                 },
+                "DeletionProtection": {
+                    "target": "com.amazonaws.autoscaling#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deletion protection setting for the Auto Scaling group.</p>"
+                    }
+                },
                 "AvailabilityZoneDistribution": {
                     "target": "com.amazonaws.autoscaling#AvailabilityZoneDistribution",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The instance capacity distribution across Availability Zones.\n        </p>"
+                        "smithy.api#documentation": "<p>The EC2 instance capacity distribution across Availability Zones for the Auto Scaling group.</p>"
                     }
                 },
                 "AvailabilityZoneImpairmentPolicy": {
                     "target": "com.amazonaws.autoscaling#AvailabilityZoneImpairmentPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The Availability Zone impairment policy.\n        </p>"
+                        "smithy.api#documentation": "<p>The Availability Zone impairment policy for the Auto Scaling group.</p>"
                     }
                 },
                 "CapacityReservationSpecification": {
                     "target": "com.amazonaws.autoscaling#CapacityReservationSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The capacity reservation specification. \n        </p>"
+                        "smithy.api#documentation": "<p>The capacity reservation specification for the Auto Scaling group.</p>"
                     }
                 },
                 "InstanceLifecyclePolicy": {
                     "target": "com.amazonaws.autoscaling#InstanceLifecyclePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The instance lifecycle policy applied to this Auto Scaling group. This policy determines \n            instance behavior when an instance transitions through its lifecycle states. It provides additional \n            control over graceful instance management processes.\n        </p>"
+                        "smithy.api#documentation": "<p>The instance lifecycle policy for the Auto Scaling group.</p>"
                     }
                 }
             },
@@ -1091,7 +1097,7 @@
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The lifecycle state for the instance. The <code>Quarantined</code> state is not used.\n            For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html\">Amazon EC2 Auto Scaling instance\n                lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>\n         <p>Valid values: <code>Pending</code> | <code>Pending:Wait</code> |\n                <code>Pending:Proceed</code> | <code>Quarantined</code> | <code>InService</code> |\n                <code>Terminating</code> | <code>Terminating:Wait</code> |\n                <code>Terminating:Proceed</code> | <code>Terminated</code> | <code>Detaching</code>\n            | <code>Detached</code> | <code>EnteringStandby</code> | <code>Standby</code> |\n                <code>Warmed:Pending</code> | <code>Warmed:Pending:Wait</code> |\n                <code>Warmed:Pending:Proceed</code> | <code>Warmed:Terminating</code> |\n                <code>Warmed:Terminating:Wait</code> | <code>Warmed:Terminating:Proceed</code> |\n                <code>Warmed:Terminated</code> | <code>Warmed:Stopped</code> |\n                <code>Warmed:Running</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The lifecycle state for the instance. The <code>Quarantined</code> state is not used.\n            For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html\">Amazon EC2 Auto Scaling instance\n                lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>\n         <p>Valid values: <code>Pending</code> | <code>Pending:Wait</code> |\n                <code>Pending:Proceed</code> | <code>Quarantined</code> | <code>InService</code> |\n                <code>Terminating</code> | <code>Terminating:Wait</code> |\n                <code>Terminating:Proceed</code> | <code>Terminating:Retained</code> | <code>Terminated</code> | <code>Detaching</code>\n            | <code>Detached</code> | <code>EnteringStandby</code> | <code>Standby</code> |\n                <code>Warmed:Pending</code> | <code>Warmed:Pending:Wait</code> |\n                <code>Warmed:Pending:Proceed</code> | <code>Warmed:Pending:Retained</code> | <code>Warmed:Terminating</code> |\n                <code>Warmed:Terminating:Wait</code> | <code>Warmed:Terminating:Proceed</code> | <code>Warmed:Terminating:Retained</code> |\n                <code>Warmed:Terminated</code> | <code>Warmed:Stopped</code> |\n                <code>Warmed:Running</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3277,6 +3283,12 @@
                         "smithy.api#documentation": "<p>One or more lifecycle hooks to add to the Auto Scaling group before instances are\n            launched.</p>"
                     }
                 },
+                "DeletionProtection": {
+                    "target": "com.amazonaws.autoscaling#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The deletion protection setting for the Auto Scaling group. This setting helps safeguard your Auto Scaling group and its\n            instances by controlling whether the <code>DeleteAutoScalingGroup</code> operation is allowed. When deletion\n            protection is enabled, users cannot delete the Auto Scaling group according to the specified protection level until\n            the setting is changed back to a less restrictive level.\n        </p>\n         <p>\n            The valid values are <code>none</code>, <code>prevent-force-deletion</code>, and <code>prevent-all-deletion</code>.\n        </p>\n         <p>\n            Default: <code>none</code>\n         </p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.autoscaling#Tags",
                     "traits": {
@@ -3352,7 +3364,7 @@
                 "InstanceLifecyclePolicy": {
                     "target": "com.amazonaws.autoscaling#InstanceLifecyclePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The instance lifecycle policy for the Auto Scaling group. This policy controls instance \n            behavior when an instance transitions through its lifecycle states. Configure retention \n            triggers to specify when instances should move to a <code>Retained</code> \n            state for manual intervention instead of automatic termination.\n        </p>\n         <note>\n            <p>Instances in a Retained state will continue to incur standard EC2 charges until terminated.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The instance lifecycle policy for the Auto Scaling group. This policy controls instance behavior when an instance\n            transitions through its lifecycle states. Configure retention triggers to specify when instances should\n            move to a <code>Retained</code> state instead of automatic termination.\n        </p>\n         <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html\">\n                Control instance retention with instance lifecycle policies</a>\n            in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>\n         <note>\n            <p>Instances in a Retained state will continue to incur standard EC2 charges until terminated.</p>\n         </note>"
                     }
                 }
             }
@@ -4011,6 +4023,29 @@
                     "target": "com.amazonaws.autoscaling#ForceDelete",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies that the warm pool is to be deleted along with all of its associated\n            instances, without waiting for all instances to be terminated. This parameter also\n            deletes any outstanding lifecycle actions associated with the warm pool\n            instances.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#DeletionProtection": {
+            "type": "enum",
+            "members": {
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "PreventForceDeletion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "prevent-force-deletion"
+                    }
+                },
+                "PreventAllDeletion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "prevent-all-deletion"
                     }
                 }
             }
@@ -5142,13 +5177,13 @@
                 "ActivityIds": {
                     "target": "com.amazonaws.autoscaling#ActivityIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The activity IDs of the desired scaling activities. If you omit this property, all\n            activities for the past six weeks are described. If unknown activities are requested,\n            they are ignored with no error. If you specify an Auto Scaling group, the results are limited to\n            that group.</p>\n         <p>Array Members: Maximum number of 50 IDs.</p>"
+                        "smithy.api#documentation": "<p>\n            The activity IDs of the desired scaling activities. If unknown activity IDs are requested, they are ignored\n            with no error. Only activities started within the last six weeks can be returned regardless of the activity\n            IDs specified. If other filters are specified with the request, only results matching all filter criteria\n            can be returned.\n        </p>\n         <p>Array Members: Maximum number of 50 IDs.</p>"
                     }
                 },
                 "AutoScalingGroupName": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>\n         <important>\n            <p>\n                Omitting this property performs an account-wide operation, which can result in slower or timed-out requests.\n            </p>\n         </important>"
                     }
                 },
                 "IncludeDeletedGroups": {
@@ -5167,6 +5202,12 @@
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a\n            previous call.)</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.autoscaling#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            One or more filters to limit the results based on specific criteria. The following filters are supported:\n        </p>\n         <ul>\n            <li>\n               <p>\n                  <code>StartTimeLowerBound</code> - The earliest scaling activities to return based on the activity start time.\n                    Scaling activities with a start time earlier than this value are not included in the results.\n                    Only activities started within the last six weeks can be returned regardless of the value specified.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>StartTimeUpperBound</code> - The latest scaling activities to return based on the activity start time.\n                    Scaling activities with a start time later than this value are not included in the results.\n                    Only activities started within the last six weeks can be returned regardless of the value specified.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code> - The <code>StatusCode</code> value of the scaling activity. This filter can only be\n                    used in combination with the <code>AutoScalingGroupName</code> parameter. For valid <code>StatusCode</code>\n                    values, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html\">Activity</a>\n                    in the <i>Amazon EC2 Auto Scaling API Reference</i>.\n                </p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -5743,7 +5784,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This API operation is superseded by <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html\">DetachTrafficSources</a>, which\n                can detach multiple traffic sources types. We recommend using\n                    <code>DetachTrafficSources</code> to simplify how you manage traffic sources.\n                However, we continue to support <code>DetachLoadBalancerTargetGroups</code>. You can\n                use both the original <code>DetachLoadBalancerTargetGroups</code> API operation and\n                    <code>DetachTrafficSources</code> on the same Auto Scaling group.</p>\n         </note>\n         <p>Detaches one or more target groups from the specified Auto Scaling group.</p>\n         <p>When you detach a target group, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the target group using the \n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancerTargetGroups.html\">DescribeLoadBalancerTargetGroups</a>\n            API call. The instances remain running.</p>\n         <note>\n            <p>You can use this operation to detach target groups that were attached by using\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachLoadBalancerTargetGroups.html\">AttachLoadBalancerTargetGroups</a>, but not for target groups that\n                were attached by using <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html\">AttachTrafficSources</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<note>\n            <p>This API operation is superseded by <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachTrafficSources.html\">DetachTrafficSources</a>, which\n                can detach multiple traffic sources types. We recommend using\n                    <code>DetachTrafficSources</code> to simplify how you manage traffic sources.\n                However, we continue to support <code>DetachLoadBalancerTargetGroups</code>. You can\n                use both the original <code>DetachLoadBalancerTargetGroups</code> API operation and\n                    <code>DetachTrafficSources</code> on the same Auto Scaling group.</p>\n         </note>\n         <p>Detaches one or more target groups from the specified Auto Scaling group.</p>\n         <p>When you detach a target group, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the target group using the \n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancerTargetGroups.html\">DescribeLoadBalancerTargetGroups</a>\n            API call. The instances remain running.</p>\n         <note>\n            <p>You can use this operation to detach target groups that were attached by using\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachLoadBalancerTargetGroups.html\">AttachLoadBalancerTargetGroups</a>, but not for target groups that\n                were attached by using <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html\">AttachTrafficSources</a>.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To detach a target group from an Auto Scaling group",
@@ -6367,13 +6408,13 @@
                 "Name": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>The valid values for <code>Name</code> depend on which API operation you're using with\n            the filter (<a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingGroups.html\">DescribeAutoScalingGroups</a> or \n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTags.html\">DescribeTags</a>).</p>\n         <p>\n            <b>DescribeAutoScalingGroups</b>\n         </p>\n         <p>Valid values for <code>Name</code> include the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>tag-key</code> - Accepts tag keys. The results only include information\n                    about the Auto Scaling groups associated with these tag keys. </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-value</code> - Accepts tag values. The results only include\n                    information about the Auto Scaling groups associated with these tag values. </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:<key></code> - Accepts the key/value combination of the tag.\n                    Use the tag key in the filter name and the tag value as the filter value. The\n                    results only include information about the Auto Scaling groups associated with the\n                    specified key/value combination. </p>\n            </li>\n         </ul>\n         <p>\n            <b>DescribeTags</b>\n         </p>\n         <p>Valid values for <code>Name</code> include the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-scaling-group</code> - Accepts the names of Auto Scaling groups. The\n                    results only include information about the tags associated with these Auto Scaling\n                    groups. </p>\n            </li>\n            <li>\n               <p>\n                  <code>key</code> - Accepts tag keys. The results only include information\n                    about the tags associated with these tag keys. </p>\n            </li>\n            <li>\n               <p>\n                  <code>value</code> - Accepts tag values. The results only include information\n                    about the tags associated with these tag values. </p>\n            </li>\n            <li>\n               <p>\n                  <code>propagate-at-launch</code> - Accepts a Boolean value, which specifies\n                    whether tags propagate to instances at launch. The results only include\n                    information about the tags associated with the specified Boolean value. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>\n            The valid values for <code>Name</code> depend on which API operation you're using with the filter.\n        </p>\n         <p>\n            <b>\n               <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingGroups.html\">DescribeAutoScalingGroups</a>\n            </b>\n         </p>\n         <p>Valid values for <code>Name</code> include the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>tag-key</code> - Accepts tag keys. The results only include information\n                    about the Auto Scaling groups associated with these tag keys. </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-value</code> - Accepts tag values. The results only include\n                    information about the Auto Scaling groups associated with these tag values. </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:<key></code> - Accepts the key/value combination of the tag.\n                    Use the tag key in the filter name and the tag value as the filter value. The\n                    results only include information about the Auto Scaling groups associated with the\n                    specified key/value combination. </p>\n            </li>\n         </ul>\n         <p>\n            <b>\n               <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTags.html\">DescribeTags</a>\n            </b>\n         </p>\n         <p>Valid values for <code>Name</code> include the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-scaling-group</code> - Accepts the names of Auto Scaling groups. The\n                    results only include information about the tags associated with these Auto Scaling\n                    groups. </p>\n            </li>\n            <li>\n               <p>\n                  <code>key</code> - Accepts tag keys. The results only include information\n                    about the tags associated with these tag keys. </p>\n            </li>\n            <li>\n               <p>\n                  <code>value</code> - Accepts tag values. The results only include information\n                    about the tags associated with these tag values. </p>\n            </li>\n            <li>\n               <p>\n                  <code>propagate-at-launch</code> - Accepts a Boolean value, which specifies\n                    whether tags propagate to instances at launch. The results only include\n                    information about the tags associated with the specified Boolean value. </p>\n            </li>\n         </ul>\n         <p>\n            <b>\n               <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeScalingActivities.html\">DescribeScalingActivities</a>\n            </b>\n         </p>\n         <p>Valid values for <code>Name</code> include the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>StartTimeLowerBound</code> - The earliest scaling activities to return based on the activity start time.\n                    Scaling activities with a start time earlier than this value are not included in the results.\n                    Only activities started within the last six weeks can be returned regardless of the value specified.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>StartTimeUpperBound</code> - The latest scaling activities to return based on the activity start time.\n                    Scaling activities with a start time later than this value are not included in the results.\n                    Only activities started within the last six weeks can be returned regardless of the value specified.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code> - The <code>StatusCode</code> value of the scaling activity. This filter can only be\n                    used in combination with the <code>AutoScalingGroupName</code> parameter. For valid <code>StatusCode</code>\n                    values, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html\">Activity</a>\n                    in the <i>Amazon EC2 Auto Scaling API Reference</i>.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Values": {
                     "target": "com.amazonaws.autoscaling#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filter values. Filter values are case-sensitive. </p>\n         <p>If you specify multiple values for a filter, the values are automatically logically\n            joined with an <code>OR</code>, and the request returns all results that match any of\n            the specified values. For example, specify \"tag:environment\" for the filter name and\n            \"production,development\" for the filter values to find Auto Scaling groups with the tag\n            \"environment=production\" or \"environment=development\".</p>"
+                        "smithy.api#documentation": "<p>One or more filter values. Filter values are case-sensitive. </p>\n         <p>If you specify multiple values for a filter, the values are automatically logically\n            joined with an <code>OR</code>, and the request returns all results that match any of\n            the specified values.</p>\n         <p>\n            <b>DescribeAutoScalingGroups example:</b> Specify \"tag:environment\" \n            for the filter name and \"production,development\" for the filter values to find Auto Scaling groups with \n            the tag \"environment=production\" or \"environment=development\".\n        </p>\n         <p>\n            <b>DescribeScalingActivities example:</b> Specify \"Status\" for the \n            filter name and \"Successful,Failed\" for the filter values to find scaling activities with a \n            status of either \"Successful\" or \"Failed\".\n        </p>"
                     }
                 }
             },
@@ -6698,12 +6739,12 @@
                 "RetentionTriggers": {
                     "target": "com.amazonaws.autoscaling#RetentionTriggers",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the conditions that trigger instance retention behavior. These triggers determine when instances \n            should move to a Retained state instead of being terminated. This allows you to maintain control over \n            instance management when lifecycle operations fail.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Specifies the conditions that trigger instance retention behavior. These triggers determine when instances \n            should move to a <code>Retained</code> state instead of automatic termination. This allows you to maintain\n            control over instance management when lifecycles transition and operations fail.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Defines the lifecycle policy for instances in an Auto Scaling group. This policy controls instance behavior when lifecycles transition and operations fail. Use lifecycle policies to ensure graceful shutdown for stateful workloads or applications requiring extended draining periods.\n        </p>"
+                "smithy.api#documentation": "<p>\n            The instance lifecycle policy for the Auto Scaling group. This policy controls instance behavior when an instance\n            transitions through its lifecycle states. Configure retention triggers to specify when instances should\n            move to a <code>Retained</code> state instead of automatic termination.\n        </p>\n         <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html\">\n                Control instance retention with instance lifecycle policies</a>\n            in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>"
             }
         },
         "com.amazonaws.autoscaling#InstanceMaintenancePolicy": {
@@ -10062,7 +10103,7 @@
                 "TerminateHookAbandon": {
                     "target": "com.amazonaws.autoscaling#RetentionAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction).\n        </p>\n         <p>\n            Set to <code>Retain</code> to move instances to a <code>Retained</code> state. Set to <code>Terminate</code> for default termination behavior.\n        </p>\n         <p>\n            Retained instances don't count toward desired capacity and remain until you call <code>TerminateInstanceInAutoScalingGroup</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction).\n        </p>\n         <p>\n            Set to <code>retain</code> to move instances to a retained state. Set to <code>terminate</code> for default termination behavior.\n        </p>\n         <p>\n            Retained instances don't count toward desired capacity and remain until you call <code>TerminateInstanceInAutoScalingGroup</code>.\n        </p>"
                     }
                 }
             },
@@ -10960,7 +11001,7 @@
                 "Strategy": {
                     "target": "com.amazonaws.autoscaling#RefreshStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The strategy to use for the instance refresh. The only valid value is\n                <code>Rolling</code>.</p>"
+                        "smithy.api#documentation": "<p>The strategy to use for the instance refresh. The default value is\n                <code>Rolling</code>.</p>"
                     }
                 },
                 "DesiredConfiguration": {
@@ -11691,7 +11732,13 @@
                 "InstanceLifecyclePolicy": {
                     "target": "com.amazonaws.autoscaling#InstanceLifecyclePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The instance lifecycle policy for the Auto Scaling group. Use this to add, modify, or remove lifecycle \n            policies that control instance behavior when an instance transitions through its lifecycle states. Configure \n            retention triggers to specify when to preserve instances for manual intervention.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The instance lifecycle policy for the Auto Scaling group. This policy controls instance behavior when an instance\n            transitions through its lifecycle states. Configure retention triggers to specify when instances should\n            move to a <code>Retained</code> state instead of automatic termination.\n        </p>\n         <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html\">\n                Control instance retention with instance lifecycle policies</a>\n            in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>"
+                    }
+                },
+                "DeletionProtection": {
+                    "target": "com.amazonaws.autoscaling#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The deletion protection setting for the Auto Scaling group. This setting helps safeguard your Auto Scaling group and its\n            instances by controlling whether the <code>DeleteAutoScalingGroup</code> operation is allowed. When deletion\n            protection is enabled, users cannot delete the Auto Scaling group according to the specified protection level until\n            the setting is changed back to a less restrictive level.\n        </p>\n         <p>\n            The valid values are <code>none</code>, <code>prevent-force-deletion</code>, and <code>prevent-all-deletion</code>.\n        </p>\n         <p>\n            Default: <code>none</code>\n         </p>"
                     }
                 }
             }

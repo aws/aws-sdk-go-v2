@@ -60,6 +60,17 @@ type UpdateHoursOfOperationOverrideInput struct {
 	// The name of the hours of operation override.
 	Name *string
 
+	// Whether the override will be defined as a standard or as a recurring event.
+	//
+	// For more information about how override types are applied, see [Build your list of overrides] in the
+	// Administrator Guide.
+	//
+	// [Build your list of overrides]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+	OverrideType types.OverrideType
+
+	// Configuration for a recurring event.
+	RecurrenceConfig *types.RecurrenceConfig
+
 	noSmithyDocumentSerde
 }
 

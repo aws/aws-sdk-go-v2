@@ -38,6 +38,14 @@ type UpdateWhatsAppMessageTemplateInput struct {
 	// This member is required.
 	MetaTemplateId *string
 
+	// When true, disables click tracking for call-to-action URL buttons in the
+	// template.
+	CtaUrlLinkTrackingOptedOut *bool
+
+	// The format specification for parameters in the template, this can be either
+	// 'named' or 'positional'.
+	ParameterFormat *string
+
 	// The new category for the template (for example, UTILITY or MARKETING).
 	TemplateCategory *string
 

@@ -2948,6 +2948,20 @@ type EffectiveHoursOfOperations struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the hours of operation overrides which contribute to
+// effective hours of operations.
+type EffectiveOverrideHours struct {
+
+	// The date that the hours of operation override applies to.
+	Date *string
+
+	// Information about the hours of operation overrides that apply to a specific
+	// date.
+	OverrideHours []OverrideHour
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a source or destination email address.
 type EmailAddressInfo struct {
 
@@ -3425,6 +3439,9 @@ type EvaluationForm struct {
 	// Configuration for language settings of this evaluation form.
 	LanguageConfiguration *EvaluationFormLanguageConfiguration
 
+	// Configuration for evaluation review settings of this evaluation form.
+	ReviewConfiguration *EvaluationReviewConfiguration
+
 	// A scoring strategy of the evaluation form.
 	ScoringStrategy *EvaluationFormScoringStrategy
 
@@ -3486,6 +3503,9 @@ type EvaluationFormContent struct {
 
 	// Configuration for language settings of this evaluation form content.
 	LanguageConfiguration *EvaluationFormLanguageConfiguration
+
+	// Configuration for evaluation review settings of this evaluation form content.
+	ReviewConfiguration *EvaluationReviewConfiguration
 
 	// A scoring strategy of the evaluation form.
 	ScoringStrategy *EvaluationFormScoringStrategy
@@ -4314,6 +4334,9 @@ type EvaluationMetadata struct {
 	// Information about a contact participant in this evaluation.
 	ContactParticipant *EvaluationContactParticipant
 
+	// Information about reviews of this evaluation.
+	Review *EvaluationReviewMetadata
+
 	// Identifier of the sampling job.
 	SamplingJobId *string
 
@@ -4372,6 +4395,86 @@ type EvaluationQuestionInputDetails struct {
 
 	// Transcript type.
 	TranscriptType EvaluationTranscriptType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for evaluation reviews.
+type EvaluationReviewConfiguration struct {
+
+	// List of recipients who should be notified when a review is requested.
+	//
+	// This member is required.
+	ReviewNotificationRecipients []EvaluationReviewNotificationRecipient
+
+	// Number of days during which a request for review can be submitted for
+	// evaluations created from this form.
+	EligibilityDays int32
+
+	noSmithyDocumentSerde
+}
+
+// Metadata information about an evaluation review.
+type EvaluationReviewMetadata struct {
+
+	// The user who created the evaluation review.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The timestamp when the evaluation review was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// Comments provided when requesting the evaluation review.
+	//
+	// This member is required.
+	ReviewRequestComments []EvaluationReviewRequestComment
+
+	// The unique identifier for the evaluation review.
+	ReviewId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a recipient who should be notified when an evaluation review
+// is requested.
+type EvaluationReviewNotificationRecipient struct {
+
+	// The type of notification recipient.
+	//
+	// This member is required.
+	Type EvaluationReviewNotificationRecipientType
+
+	// The value associated with the notification recipient type.
+	//
+	// This member is required.
+	Value *EvaluationReviewNotificationRecipientValue
+
+	noSmithyDocumentSerde
+}
+
+// The value information for an evaluation review notification recipient.
+type EvaluationReviewNotificationRecipientValue struct {
+
+	// The user identifier for the notification recipient.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// A comment provided when requesting an evaluation review.
+type EvaluationReviewRequestComment struct {
+
+	// The text content of the review request comment.
+	Comment *string
+
+	// The user who created the review request comment.
+	CreatedBy *string
+
+	// The timestamp when the review request comment was created.
+	CreatedTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -5411,6 +5514,9 @@ type HoursOfOperation struct {
 	// The name for the hours of operation.
 	Name *string
 
+	// Information about parent hours of operations.
+	ParentHoursOfOperations []HoursOfOperationsIdentifier
+
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
@@ -5469,6 +5575,12 @@ type HoursOfOperationOverride struct {
 
 	// The name of the hours of operation override.
 	Name *string
+
+	// Whether the override will be defined as a standard or as a recurring event.
+	OverrideType OverrideType
+
+	// Configuration for a recurring event.
+	RecurrenceConfig *RecurrenceConfig
 
 	noSmithyDocumentSerde
 }
@@ -5535,6 +5647,25 @@ type HoursOfOperationSearchFilter struct {
 	//
 	//   - Inner list specifies conditions that need to be applied with AND operator.
 	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
+// Identifier for a hours of operations resource: ARN, ID, Name
+type HoursOfOperationsIdentifier struct {
+
+	// Unique identifier of the hours of operation.
+	//
+	// This member is required.
+	Id *string
+
+	// Name of the hours of operation
+	//
+	// This member is required.
+	Name *string
+
+	// Amazon Resource Name (ARN) of the hours of operations.
+	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -6526,6 +6657,26 @@ type OutboundStrategyConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Information about hours of operation override
+type OverrideHour struct {
+
+	// The start time or end time for an hours of operation override.
+	End *OverrideTimeSlice
+
+	// Indicates whether the status is open or closed during the override period. This
+	// status determines how the override modifies the base hours of operation
+	// schedule.
+	OperationalStatus OperationalStatus
+
+	// Unique identifier name for the override.
+	OverrideName *string
+
+	// The start time or end time for an hours of operation override.
+	Start *OverrideTimeSlice
+
+	noSmithyDocumentSerde
+}
+
 // The start time or end time for an hours of operation override.
 type OverrideTimeSlice struct {
 
@@ -6613,6 +6764,15 @@ type PalettePrimary struct {
 
 	// The default primary color used throughout the workspace.
 	Default *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration for the parent hours of operation.
+type ParentHoursOfOperationConfig struct {
+
+	// The identifier for the hours of operation.
+	HoursOfOperationId *string
 
 	noSmithyDocumentSerde
 }
@@ -7965,6 +8125,74 @@ type RecordPrimaryValue struct {
 
 	// The value's record ID.
 	RecordId *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the recurrence configuration for overrides. This configuration uses a
+// recurrence pattern to specify when and how frequently an event should repeat.
+type RecurrenceConfig struct {
+
+	// The recurrence pattern that defines how the event repeats. Example: Frequency,
+	// Interval, ByMonth, ByMonthDay, ByWeekdayOccurrence
+	//
+	// This member is required.
+	RecurrencePattern *RecurrencePattern
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the detailed pattern for event recurrence. Use this to define complex
+// scheduling rules such as "every 2nd Tuesday of the month" or "every 3 months on
+// the 15th".
+type RecurrencePattern struct {
+
+	// Defines how often the pattern repeats. This is the base unit for the recurrence
+	// schedule and works in conjunction with the Interval field to determine the exact
+	// repetition sequence.
+	//
+	// This member is required.
+	Frequency RecurrenceFrequency
+
+	// Specifies the number of frequency units between each occurrence. Must be a
+	// positive integer.
+	//
+	// Examples: To repeat every week, set Interval=1 with WEEKLY frequency. To repeat
+	// every two months, set Interval=2 with MONTHLY frequency.
+	//
+	// This member is required.
+	Interval *int32
+
+	// Specifies which month the event should occur in (1-12, where 1=January,
+	// 12=December). Used with YEARLY frequency to schedule events in specific month.
+	//
+	// Note: It does not accept multiple values in the same list
+	ByMonth []int32
+
+	// Specifies which day of the month the event should occur on (1-31). Used with
+	// MONTHLY or YEARLY frequency to schedule events on specific date within a month.
+	//
+	// Examples: [15] for events on the 15th of each month, [-1] for events on the
+	// last day of month.
+	//
+	// Note: It does not accept multiple values in the same list. If a specified day
+	// doesn't exist in a particular month (e.g., day 31 in February), the event will
+	// be skipped for that month. This field cannot be used simultaneously with
+	// ByWeekdayOccurrence as they represent different scheduling approaches (specific
+	// dates vs. relative weekday positions).
+	ByMonthDay []int32
+
+	// Specifies which occurrence of a weekday within the month the event should occur
+	// on. Must be used with MONTHLY or YEARLY frequency.
+	//
+	// Example: 2 corresponds to second occurrence of the weekday in the month. -1
+	// corresponds to last occurrence of the weekday in the month
+	//
+	// The weekday itself is specified separately in the HoursOfOperationConfig.
+	// Example: To schedule the recurring event for the 2nd Thursday of April every
+	// year, set ByWeekdayOccurrence=[2], Day=THURSDAY, ByMonth=[4], Frequency: YEARLY
+	// and INTERVAL=1.
+	ByWeekdayOccurrence []int32
 
 	noSmithyDocumentSerde
 }

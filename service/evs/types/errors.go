@@ -7,6 +7,32 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// An internal server error occurred. Retry your request.
+type InternalServerException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InternalServerException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InternalServerException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InternalServerException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // A service resource associated with the request could not be found. The resource
 // might not be specified correctly, or it may have a state of DELETED .
 type ResourceNotFoundException struct {
@@ -100,9 +126,9 @@ func (e *TagPolicyException) ErrorCode() string {
 }
 func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation couldn't be performed because the service is throttling requests.
-// This exception is thrown when there are too many requests accepted concurrently
-// from the service endpoint.
+// The operation could not be performed because the service is throttling
+// requests. This exception is thrown when the service endpoint receives too many
+// concurrent requests.
 type ThrottlingException struct {
 	Message *string
 

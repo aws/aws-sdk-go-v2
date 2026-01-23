@@ -17,7 +17,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>You don't have the required permissions to perform this operation. Verify your IAM permissions and try again.</p>"
                     }
                 }
             },
@@ -372,7 +372,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>The requested operation conflicts with the current state of the resource or another concurrent operation.</p>"
                     }
                 }
             },
@@ -571,6 +571,12 @@
                     "target": "com.amazonaws.keyspaces#CdcSpecification",
                     "traits": {
                         "smithy.api#documentation": "<p>The CDC stream settings of the table.</p>"
+                    }
+                },
+                "warmThroughputSpecification": {
+                    "target": "com.amazonaws.keyspaces#WarmThroughputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the warm throughput settings for the table. Pre-warming a table helps you avoid capacity exceeded exceptions by pre-provisioning read and write capacity units to reduce cold start latency when your table receives traffic.</p> <p>For more information about pre-warming in Amazon Keyspaces, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/warm-throughput.html\">Pre-warm a table in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -1266,6 +1272,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CDC stream settings of the table.</p>"
                     }
+                },
+                "warmThroughputSpecification": {
+                    "target": "com.amazonaws.keyspaces#WarmThroughputSpecificationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The warm throughput settings for the table, including the current status and configured read and write capacity units.</p>"
+                    }
                 }
             }
         },
@@ -1398,7 +1410,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>An internal service error occurred. Retry your request. If the problem persists, contact Amazon Web Services Support.</p>"
                     }
                 }
             },
@@ -2930,6 +2942,12 @@
                 },
                 "capacitySpecification": {
                     "target": "com.amazonaws.keyspaces#CapacitySpecificationSummary"
+                },
+                "warmThroughputSpecification": {
+                    "target": "com.amazonaws.keyspaces#WarmThroughputSpecificationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The warm throughput settings for this replica, including the current status and configured read and write capacity units.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3013,13 +3031,13 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>The specified resource was not found. Verify the resource identifier and ensure the resource exists and is in an ACTIVE state.</p>"
                     }
                 },
                 "resourceArn": {
                     "target": "com.amazonaws.keyspaces#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource couldn’t be found.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource couldn't be found.</p>"
                     }
                 }
             },
@@ -3192,7 +3210,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>The requested operation would exceed the service quota for this resource. Review the service quotas and adjust your request accordingly.</p>"
                     }
                 }
             },
@@ -3808,6 +3826,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CDC stream settings of the table.</p>"
                     }
+                },
+                "warmThroughputSpecification": {
+                    "target": "com.amazonaws.keyspaces#WarmThroughputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Modifies the warm throughput settings for the table. You can update the read and write capacity units to adjust the pre-provisioned throughput.</p>"
+                    }
                 }
             }
         },
@@ -3829,7 +3853,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>The request parameters are invalid or malformed. Review the API documentation and correct the request format.</p>"
                     }
                 }
             },
@@ -3861,6 +3885,78 @@
                     {
                         "value": "NEW_AND_OLD_IMAGES",
                         "name": "NEW_AND_OLD_IMAGES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.keyspaces#WarmThroughputSpecification": {
+            "type": "structure",
+            "members": {
+                "readUnitsPerSecond": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of read capacity units per second to pre-warm the table for read capacity throughput. The minimum value is 1.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "writeUnitsPerSecond": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of write capacity units per second to pre-warm the table for write capacity throughput. The minimum value is 1.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the warm throughput settings for a table. Pre-warming a table by specifying warm throughput pre-provisions read and write capacity units to help avoid capacity exceeded exceptions and reduce latency when your table starts receiving traffic.</p> <p>For more information about pre-warming in Amazon Keyspaces, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/warm-throughput.html\">Pre-warm a table in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#WarmThroughputSpecificationSummary": {
+            "type": "structure",
+            "members": {
+                "readUnitsPerSecond": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of read capacity units per second currently configured for warm throughput.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "writeUnitsPerSecond": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of write capacity units per second currently configured for warm throughput.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.keyspaces#WarmThroughputStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the warm throughput configuration. Valid values are <code>AVAILABLE</code> when the configuration is active, and <code>UPDATING</code> when changes are being applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the current warm throughput settings for a table, including the configured capacity units and the current status of the warm throughput configuration.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#WarmThroughputStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
                     }
                 ]
             }

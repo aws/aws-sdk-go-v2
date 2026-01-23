@@ -31,8 +31,7 @@ type Check struct {
 	//   connection to SDDC Manager. If Amazon EVS cannot reach the environment, this
 	//   check fails.
 	//
-	//   - HOST_COUNT : Checks that your environment has a minimum of 4 hosts, which is
-	//   a requirement for VCF 5.2.1.
+	//   - HOST_COUNT : Checks that your environment has a minimum of 4 hosts.
 	//
 	// If this check fails, you will need to add hosts so that your environment meets
 	//   this minimum requirement. Amazon EVS only supports environments with 4-16 hosts.
@@ -203,7 +202,7 @@ type EnvironmentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// An ESXi host that runs on an Amazon EC2 bare metal instance. Four hosts are
+// An ESX host that runs on an Amazon EC2 bare metal instance. Four hosts are
 // created in an Amazon EVS environment during environment creation. You can add
 // hosts to an environment using the CreateEnvironmentHost operation. Amazon EVS
 // supports 4-16 hosts per environment.
@@ -226,6 +225,8 @@ type Host struct {
 	HostState HostState
 
 	// The EC2 instance type of the host.
+	//
+	// Currently, Amazon EVS supports only the i4i.metal instance type.
 	//
 	// EC2 instances created through Amazon EVS do not support associating an IAM
 	// instance profile.
@@ -265,6 +266,8 @@ type HostInfoForCreate struct {
 	HostName *string
 
 	// The EC2 instance type that represents the host.
+	//
+	// Currently, Amazon EVS supports only the i4i.metal instance type.
 	//
 	// This member is required.
 	InstanceType InstanceType
@@ -346,8 +349,8 @@ type InitialVlans struct {
 	//   - The HCX public VLAN CIDR block must be added to the VPC as a secondary CIDR
 	//   block.
 	//
-	//   - Must have at least three Elastic IP addresses to be allocated from the
-	//   public IPAM pool for HCX components.
+	//   - Must have at least two Elastic IP addresses to be allocated from the public
+	//   IPAM pool for HCX components.
 	//
 	// This member is required.
 	Hcx *InitialVlanInfo
@@ -363,7 +366,7 @@ type InitialVlans struct {
 	// This member is required.
 	VMotion *InitialVlanInfo
 
-	//  The vSAN VLAN subnet. This VLAN subnet carries the communication between ESXi
+	//  The vSAN VLAN subnet. This VLAN subnet carries the communication between ESX
 	// hosts to implement a vSAN shared storage pool.
 	//
 	// This member is required.
@@ -382,7 +385,7 @@ type InitialVlans struct {
 	VmManagement *InitialVlanInfo
 
 	//  The host VMkernel management VLAN subnet. This VLAN subnet carries traffic for
-	// managing ESXi hosts and communicating with VMware vCenter Server.
+	// managing ESX hosts and communicating with VMware vCenter Server.
 	//
 	// This member is required.
 	VmkManagement *InitialVlanInfo
@@ -393,6 +396,22 @@ type InitialVlans struct {
 
 	// Determines if the HCX VLAN that Amazon EVS provisions is public or private.
 	IsHcxPublic bool
+
+	noSmithyDocumentSerde
+}
+
+// Information about ESX versions offered for each EC2 instance type.
+type InstanceTypeEsxVersionsInfo struct {
+
+	// The list of ESX versions offered for this instance type.
+	//
+	// This member is required.
+	EsxVersions []string
+
+	// The EC2 instance type.
+	//
+	// This member is required.
+	InstanceType InstanceType
 
 	noSmithyDocumentSerde
 }
@@ -526,6 +545,44 @@ type VcfHostnames struct {
 	//
 	// This member is required.
 	VCenter *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a VCF versions provided by Amazon EVS, including its status,
+// default ESX version, and EC2 instance types.
+type VcfVersionInfo struct {
+
+	// The default ESX version for this VCF version. It is based on Broadcom's Bill Of
+	// Materials (BOM).
+	//
+	// This member is required.
+	DefaultEsxVersion *string
+
+	// EC2 instance types provided by Amazon EVS for this VCF version for creating
+	// environments.
+	//
+	// This member is required.
+	InstanceTypes []InstanceType
+
+	// The status for this VCF version. Valid values are:
+	//
+	//   - AVAILABLE - This VCF version is available to you.
+	//
+	//   - RESTRICTED - This VCF version has limited availability.
+	//
+	// If the version you need shows RESTRICTED, and you require, check out [VCF versions and EC2 instance types provided by Amazon EVS] for more
+	// information.
+	//
+	// [VCF versions and EC2 instance types provided by Amazon EVS]: https://docs.aws.amazon.com/evs/latest/userguide/versions-provided.html
+	//
+	// This member is required.
+	Status *string
+
+	// The VCF version number.
+	//
+	// This member is required.
+	VcfVersion VcfVersion
 
 	noSmithyDocumentSerde
 }

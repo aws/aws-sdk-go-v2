@@ -63,19 +63,24 @@ import (
 //
 // For examples of searching game sessions, see the ones below, and also see [Search game sessions by game property].
 //
-//   - maximumSessions -- Maximum number of player sessions allowed for a game
-//     session.
+// Avoid using periods (".") in property keys if you plan to search for game
 //
-//   - creationTimeMillis -- Value indicating when a game session was created. It
-//     is expressed in Unix time as milliseconds.
+//	sessions by properties. Property keys containing periods cannot be searched and
+//	will be filtered out from search results due to search index limitations.
 //
-//   - playerSessionCount -- Number of players currently connected to a game
-//     session. This value changes rapidly as players join the session or drop out.
+//	- maximumSessions -- Maximum number of player sessions allowed for a game
+//	session.
 //
-//   - hasAvailablePlayerSessions -- Boolean value indicating whether a game
-//     session has reached its maximum number of players. It is highly recommended that
-//     all search requests include this filter attribute to optimize search performance
-//     and return only sessions that players can join.
+//	- creationTimeMillis -- Value indicating when a game session was created. It
+//	is expressed in Unix time as milliseconds.
+//
+//	- playerSessionCount -- Number of players currently connected to a game
+//	session. This value changes rapidly as players join the session or drop out.
+//
+//	- hasAvailablePlayerSessions -- Boolean value indicating whether a game
+//	session has reached its maximum number of players. It is highly recommended that
+//	all search requests include this filter attribute to optimize search performance
+//	and return only sessions that players can join.
 //
 // Returned values for playerSessionCount and hasAvailablePlayerSessions change
 // quickly as players join sessions and others drop out. Results should be

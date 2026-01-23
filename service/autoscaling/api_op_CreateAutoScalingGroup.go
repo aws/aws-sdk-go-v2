@@ -139,6 +139,17 @@ type CreateAutoScalingGroupInput struct {
 	// [Set the default instance warmup for an Auto Scaling group]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
 	DefaultInstanceWarmup *int32
 
+	//  The deletion protection setting for the Auto Scaling group. This setting helps
+	// safeguard your Auto Scaling group and its instances by controlling whether the
+	// DeleteAutoScalingGroup operation is allowed. When deletion protection is
+	// enabled, users cannot delete the Auto Scaling group according to the specified
+	// protection level until the setting is changed back to a less restrictive level.
+	//
+	// The valid values are none , prevent-force-deletion , and prevent-all-deletion .
+	//
+	// Default: none
+	DeletionProtection types.DeletionProtection
+
 	// The desired capacity is the initial capacity of the Auto Scaling group at the
 	// time of its creation and the capacity it attempts to maintain. It can scale
 	// beyond this capacity if you configure auto scaling. This number must be greater
@@ -196,10 +207,14 @@ type CreateAutoScalingGroupInput struct {
 	//  The instance lifecycle policy for the Auto Scaling group. This policy controls
 	// instance behavior when an instance transitions through its lifecycle states.
 	// Configure retention triggers to specify when instances should move to a Retained
-	// state for manual intervention instead of automatic termination.
+	// state instead of automatic termination.
+	//
+	// For more information, see [Control instance retention with instance lifecycle policies] in the Amazon EC2 Auto Scaling User Guide.
 	//
 	// Instances in a Retained state will continue to incur standard EC2 charges until
 	// terminated.
+	//
+	// [Control instance retention with instance lifecycle policies]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html
 	InstanceLifecyclePolicy *types.InstanceLifecyclePolicy
 
 	// An instance maintenance policy. For more information, see [Set instance maintenance policy] in the Amazon EC2

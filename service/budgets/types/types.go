@@ -348,6 +348,12 @@ type BudgetPerformanceHistory struct {
 	// The history of the cost types for a budget during the specified time period.
 	CostTypes *CostTypes
 
+	// The filtering dimensions for the budget and their corresponding values.
+	FilterExpression *Expression
+
+	// The definition for how the budget data is aggregated.
+	Metrics []Metric
+
 	//  The time unit of the budget, such as MONTHLY or QUARTERLY.
 	TimeUnit TimeUnit
 

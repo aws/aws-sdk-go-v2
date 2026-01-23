@@ -1,3 +1,11 @@
+# v1.35.6 (2026-01-22)
+
+* **Documentation**: Customer Identifier parameter deprecation date has been removed. For new implementations, we recommend using the CustomerAWSAccountID. Your current integration will continue to work. When updating your implementation, consider migrating to CustomerAWSAccountID for improved integration.
+
+# v1.35.5 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.4 (2025-12-09)
 
 * No change notes available for this release.

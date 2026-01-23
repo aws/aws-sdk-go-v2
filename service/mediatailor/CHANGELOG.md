@@ -1,3 +1,11 @@
+# v1.55.2 (2026-01-15)
+
+* No change notes available for this release.
+
+# v1.55.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2025-12-15)
 
 * **Feature**: Added support for Ad Decision Server Configuration enabling HTTP POST requests with custom bodies, headers, GZIP compression, and dynamic variables. No changes required for existing GET request configurations.

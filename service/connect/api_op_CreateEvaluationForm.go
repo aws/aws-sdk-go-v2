@@ -70,6 +70,9 @@ type CreateEvaluationFormInput struct {
 	// Configuration for language settings of the evaluation form.
 	LanguageConfiguration *types.EvaluationFormLanguageConfiguration
 
+	// Configuration information about evaluation reviews.
+	ReviewConfiguration *types.EvaluationReviewConfiguration
+
 	// A scoring strategy of the evaluation form.
 	ScoringStrategy *types.EvaluationFormScoringStrategy
 

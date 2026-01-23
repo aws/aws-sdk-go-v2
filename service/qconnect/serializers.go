@@ -9416,21 +9416,56 @@ func awsRestjson1_serializeDocumentAIGuardrailWordPolicyConfig(v *types.AIGuardr
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAIPromptInferenceConfiguration(v types.AIPromptInferenceConfiguration, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAIPromptInferenceConfiguration(v *types.AIPromptInferenceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	switch uv := v.(type) {
-	case *types.AIPromptInferenceConfigurationMemberTextAIPromptInferenceConfiguration:
-		av := object.Key("textAIPromptInferenceConfiguration")
-		if err := awsRestjson1_serializeDocumentTextAIPromptInferenceConfiguration(&uv.Value, av); err != nil {
-			return err
-		}
-
-	default:
-		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
-
+	if v.MaxTokensToSample != nil {
+		ok := object.Key("maxTokensToSample")
+		ok.Integer(*v.MaxTokensToSample)
 	}
+
+	if v.Temperature != nil {
+		ok := object.Key("temperature")
+		switch {
+		case math.IsNaN(float64(*v.Temperature)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Temperature), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Temperature), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Temperature)
+
+		}
+	}
+
+	if v.TopK != nil {
+		ok := object.Key("topK")
+		ok.Integer(*v.TopK)
+	}
+
+	if v.TopP != nil {
+		ok := object.Key("topP")
+		switch {
+		case math.IsNaN(float64(*v.TopP)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.TopP), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.TopP), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.TopP)
+
+		}
+	}
+
 	return nil
 }
 
@@ -12457,59 +12492,6 @@ func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Va
 		om := object.Key(key)
 		om.String(v[key])
 	}
-	return nil
-}
-
-func awsRestjson1_serializeDocumentTextAIPromptInferenceConfiguration(v *types.TextAIPromptInferenceConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.MaxTokensToSample != 0 {
-		ok := object.Key("maxTokensToSample")
-		ok.Integer(v.MaxTokensToSample)
-	}
-
-	if v.Temperature != 0 {
-		ok := object.Key("temperature")
-		switch {
-		case math.IsNaN(float64(v.Temperature)):
-			ok.String("NaN")
-
-		case math.IsInf(float64(v.Temperature), 1):
-			ok.String("Infinity")
-
-		case math.IsInf(float64(v.Temperature), -1):
-			ok.String("-Infinity")
-
-		default:
-			ok.Float(v.Temperature)
-
-		}
-	}
-
-	if v.TopK != 0 {
-		ok := object.Key("topK")
-		ok.Integer(v.TopK)
-	}
-
-	if v.TopP != 0 {
-		ok := object.Key("topP")
-		switch {
-		case math.IsNaN(float64(v.TopP)):
-			ok.String("NaN")
-
-		case math.IsInf(float64(v.TopP), 1):
-			ok.String("Infinity")
-
-		case math.IsInf(float64(v.TopP), -1):
-			ok.String("-Infinity")
-
-		default:
-			ok.Float(v.TopP)
-
-		}
-	}
-
 	return nil
 }
 

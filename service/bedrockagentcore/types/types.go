@@ -81,6 +81,18 @@ type BranchFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Browser extension configuration.
+type BrowserExtension struct {
+
+	// The location where the browser extension files are stored. This specifies the
+	// source from which the extension will be loaded and installed.
+	//
+	// This member is required.
+	Location ResourceLocation
+
+	noSmithyDocumentSerde
+}
+
 // The collection of streams associated with a browser session in Amazon Bedrock.
 // These streams provide different ways to interact with and observe the browser
 // session, including programmatic control and visual representation of the browser
@@ -953,6 +965,25 @@ type ResourceContent struct {
 	noSmithyDocumentSerde
 }
 
+// The location of the browser extension.
+//
+// The following types satisfy this interface:
+//
+//	ResourceLocationMemberS3
+type ResourceLocation interface {
+	isResourceLocation()
+}
+
+// The Amazon S3 location of the resource. Use this when the resource is stored in
+// an Amazon S3 bucket.
+type ResourceLocationMemberS3 struct {
+	Value S3Location
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceLocationMemberS3) isResourceLocation() {}
+
 // Right expression of the eventMetadata filter.
 //
 // The following types satisfy this interface:
@@ -970,6 +1001,25 @@ type RightExpressionMemberMetadataValue struct {
 }
 
 func (*RightExpressionMemberMetadataValue) isRightExpression() {}
+
+// The Amazon S3 location configuration of a resource.
+type S3Location struct {
+
+	// The name of the Amazon S3 bucket where the resource is stored.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The name of the Amazon S3 prefix/key where the resource is stored.
+	//
+	// This member is required.
+	Prefix *string
+
+	// The name of the Amazon S3 version ID where the resource is stored (Optional).
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
 
 // Contains search criteria for retrieving memory records.
 type SearchCriteria struct {
@@ -1234,6 +1284,7 @@ func (*UnknownUnionMember) isLeftExpression()              {}
 func (*UnknownUnionMember) isMemoryContent()               {}
 func (*UnknownUnionMember) isMetadataValue()               {}
 func (*UnknownUnionMember) isPayloadType()                 {}
+func (*UnknownUnionMember) isResourceLocation()            {}
 func (*UnknownUnionMember) isRightExpression()             {}
 func (*UnknownUnionMember) isStreamUpdate()                {}
 func (*UnknownUnionMember) isUserIdentifier()              {}

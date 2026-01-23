@@ -797,6 +797,10 @@ type Resource struct {
 // A structure containing information about an Lake Formation resource.
 type ResourceInfo struct {
 
+	// The Amazon Web Services account that owns the Glue tables associated with
+	// specific Amazon S3 locations.
+	ExpectedResourceOwnerAccount *string
+
 	//  Indicates whether the data access of tables pointing to the location can be
 	// managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
 	HybridAccessEnabled *bool
@@ -809,6 +813,19 @@ type ResourceInfo struct {
 
 	// The IAM role that registered a resource.
 	RoleArn *string
+
+	// Indicates whether the registered role has sufficient permissions to access
+	// registered Amazon S3 location. Verification Status can be one of the following:
+	//
+	//   - VERIFIED - Registered role has sufficient permissions to access registered
+	//   Amazon S3 location.
+	//
+	//   - NOT_VERIFIED - Registered role does not have sufficient permissions to
+	//   access registered Amazon S3 location.
+	//
+	//   - VERIFICATION_FAILED - Unable to verify if the registered role can access
+	//   the registered Amazon S3 location.
+	VerificationStatus VerificationStatus
 
 	// Whether or not the resource is a federated resource.
 	WithFederation *bool
@@ -986,6 +1003,30 @@ type TaggedTable struct {
 
 	// A table that has LF-tags attached to it.
 	Table *TableResource
+
+	noSmithyDocumentSerde
+}
+
+// A temporary set of credentials for an Lake Formation user. These credentials
+// are scoped down to only access the raw data sources that the user has access to.
+//
+// The temporary security credentials consist of an access key and a session
+// token. The access key consists of an access key ID and a secret key. When the
+// credentials are created, they are associated with an IAM access control policy
+// that limits what the user can do when using the credentials.
+type TemporaryCredentials struct {
+
+	// The access key ID for the temporary credentials.
+	AccessKeyId *string
+
+	// The date and time when the temporary credentials expire.
+	Expiration *time.Time
+
+	// The secret key for the temporary credentials.
+	SecretAccessKey *string
+
+	// The session token for the temporary credentials.
+	SessionToken *string
 
 	noSmithyDocumentSerde
 }

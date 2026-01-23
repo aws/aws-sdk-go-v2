@@ -203,7 +203,8 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// To determine the supported features for a specific DB engine and DB engine
 	// version using the CLI, use the following command:
 	//
-	//     aws rds describe-db-engine-versions --engine --engine-version
+	//     aws rds describe-db-engine-versions --engine <engine_name> --engine-version
+	//     <engine_version>
 	//
 	// For example, to determine the supported features for RDS for PostgreSQL version
 	// 13.3 using the CLI, use the following command:

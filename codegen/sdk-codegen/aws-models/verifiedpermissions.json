@@ -22,7 +22,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 200
+                    "max": 512
                 },
                 "smithy.api#pattern": "^.*$",
                 "smithy.api#sensitive": {}
@@ -1841,6 +1841,30 @@
                             "createdDate": "2024-08-12T18:20:50.99Z",
                             "lastUpdatedDate": "2024-08-12T18:20:50.99Z"
                         }
+                    },
+                    {
+                        "title": "To create an encrypted policy store",
+                        "documentation": "The following example creates a new policy store with encryption settings based on a provided KMS key.",
+                        "input": {
+                            "validationSettings": {
+                                "mode": "STRICT"
+                            },
+                            "encryptionSettings": {
+                                "kmsEncryptionSettings": {
+                                    "key": "arn:aws:kms:us-east-1:123456789012:key/abcdefgh-ijkl-mnop-qrst-uvwxyz123456",
+                                    "encryptionContext": {
+                                        "policy_store_owner": "Tim"
+                                    }
+                                }
+                            },
+                            "clientToken": "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111"
+                        },
+                        "output": {
+                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                            "arn": "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a",
+                            "createdDate": "2024-08-12T18:20:50.99Z",
+                            "lastUpdatedDate": "2024-08-12T18:20:50.99Z"
+                        }
                     }
                 ],
                 "smithy.api#idempotent": {}
@@ -1873,6 +1897,12 @@
                     "target": "com.amazonaws.verifiedpermissions#DeletionProtection",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the policy store can be deleted. If enabled, the policy store can't be deleted.</p> <p>The default state is <code>DISABLED</code>.</p>"
+                    }
+                },
+                "encryptionSettings": {
+                    "target": "com.amazonaws.verifiedpermissions#EncryptionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the encryption settings used to encrypt the policy store and their child resources. Allows for the ability to use a customer owned KMS key for encryption of data.</p> <p>This is an optional field to be used when providing a customer-managed KMS key for encryption.</p>"
                     }
                 },
                 "tags": {
@@ -2384,6 +2414,77 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.verifiedpermissions#EncryptionContext": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.verifiedpermissions#EncryptionContextKey"
+            },
+            "value": {
+                "target": "com.amazonaws.verifiedpermissions#EncryptionContextValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 8192,
+                    "unit": "bytes"
+                }
+            }
+        },
+        "com.amazonaws.verifiedpermissions#EncryptionContextKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.verifiedpermissions#EncryptionContextValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.verifiedpermissions#EncryptionSettings": {
+            "type": "union",
+            "members": {
+                "kmsEncryptionSettings": {
+                    "target": "com.amazonaws.verifiedpermissions#KmsEncryptionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS encryption settings for this policy store to encrypt data with. It will contain the customer-managed KMS key, and a user-defined encryption context. </p>"
+                    }
+                },
+                "default": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the default encryption setting. The policy store uses an Amazon Web Services owned key for encrypting data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the encryption configuration for the policy store and child resources. </p> <p>This data type is used as a request parameter in the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicyStore.html\">CreatePolicyStore</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#EncryptionState": {
+            "type": "union",
+            "members": {
+                "kmsEncryptionState": {
+                    "target": "com.amazonaws.verifiedpermissions#KmsEncryptionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS encryption settings currently configured for this policy store to encrypt data with. It contains the customer-managed KMS key, and a user-defined encryption context. </p>"
+                    }
+                },
+                "default": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the default encryption state. The policy store is encrypted using an Amazon Web Services owned key.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the encryption configuration for the policy store and child resources.</p> <p>This data type is used as a response parameter field for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetPolicyStore.html\">GetPolicyStore</a> operation.</p>"
+            }
+        },
         "com.amazonaws.verifiedpermissions#EntitiesDefinition": {
             "type": "union",
             "members": {
@@ -2427,7 +2528,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 200
+                    "max": 612
                 },
                 "smithy.api#pattern": "^.*$",
                 "smithy.api#sensitive": {}
@@ -2879,7 +2980,34 @@
                                 "mode": "STRICT"
                             },
                             "createdDate": "2024-08-12T18:20:50.99Z",
-                            "lastUpdatedDate": "2024-08-12T18:20:50.99Z"
+                            "lastUpdatedDate": "2024-08-12T18:20:50.99Z",
+                            "encryptionState": {
+                                "default": {}
+                            }
+                        }
+                    },
+                    {
+                        "title": "GetPolicyStore that is encrypted",
+                        "documentation": "The following example retrieves details about the specified encrypted policy store.",
+                        "input": {
+                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a"
+                        },
+                        "output": {
+                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                            "arn": "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a",
+                            "validationSettings": {
+                                "mode": "STRICT"
+                            },
+                            "createdDate": "2024-08-12T18:20:50.99Z",
+                            "lastUpdatedDate": "2024-08-12T18:20:50.99Z",
+                            "encryptionState": {
+                                "kmsEncryptionState": {
+                                    "key": "arn:aws:kms:us-east-1:123456789012:key/abcdefgh-ijkl-mnop-qrst-uvwxyz123456",
+                                    "encryptionContext": {
+                                        "policy_store_owner": "Tim"
+                                    }
+                                }
+                            }
                         }
                     }
                 ],
@@ -2958,6 +3086,12 @@
                     "target": "com.amazonaws.verifiedpermissions#DeletionProtection",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the policy store can be deleted. If enabled, the policy store can't be deleted.</p> <p>The default state is <code>DISABLED</code>.</p>"
+                    }
+                },
+                "encryptionState": {
+                    "target": "com.amazonaws.verifiedpermissions#EncryptionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the encryption configuration for the policy store.</p>"
                     }
                 },
                 "cedarVersion": {
@@ -3763,6 +3897,55 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^https://.*$"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#KmsEncryptionSettings": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.verifiedpermissions#KmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-managed KMS key <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a>, alias or ID to be used for encryption processes. </p> <p>Users can provide the full KMS key ARN, a KMS key alias, or a KMS key ID, but it will be mapped to the full KMS key ARN after policy store creation, and referenced when encrypting child resources. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionContext": {
+                    "target": "com.amazonaws.verifiedpermissions#EncryptionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-defined, additional context to be added to encryption processes. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the KMS encryption configuration for the policy store. The encryption settings determine what customer-managed KMS key will be used to encrypt all resources within the policy store, and any user-defined context key-value pairs to append during encryption processes.</p> <p>This data type is used as a field that is part of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EncryptionSettings.html\">EncryptionSettings</a> type.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#KmsEncryptionState": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.verifiedpermissions#KmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-managed KMS key <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> being used for encryption processes. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionContext": {
+                    "target": "com.amazonaws.verifiedpermissions#EncryptionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-defined, additional context added to encryption processes. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the KMS encryption configuration for the policy store. The encryption state shows what customer-managed KMS key is being used to encrypt all resources within the policy store, and any user-defined context key-value pairs added during encryption processes.</p> <p>This data type is used as a field that is part of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EncryptionState.html\">EncryptionState</a> type.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#KmsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9:/_-]+$"
             }
         },
         "com.amazonaws.verifiedpermissions#ListIdentitySources": {
@@ -4938,7 +5121,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9-]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9-/_]*$"
             }
         },
         "com.amazonaws.verifiedpermissions#PolicyItem": {
@@ -6401,8 +6584,7 @@
                     "target": "com.amazonaws.verifiedpermissions#UpdatePolicyDefinition",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>Specifies the updated policy content that you want to replace on the specified policy. The content must be valid Cedar policy language text.</p> <p>You can change only the following elements from the policy definition:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>Changing from <code>static</code> to <code>templateLinked</code>.</p> </li> <li> <p>Changing the effect of the policy from <code>permit</code> or <code>forbid</code>.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the updated policy content that you want to replace on the specified policy. The content must be valid Cedar policy language text.</p> <p>You can change only the following elements from the policy definition:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>Changing from <code>static</code> to <code>templateLinked</code>.</p> </li> <li> <p>Changing the effect of the policy from <code>permit</code> or <code>forbid</code>.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul>"
                     }
                 }
             },

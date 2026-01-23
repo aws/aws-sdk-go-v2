@@ -446,6 +446,18 @@ func TestCheckSnapshot_GetTableObjects(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTemporaryDataLocationCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTemporaryDataLocationCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTemporaryDataLocationCredentials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTemporaryGluePartitionCredentials(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTemporaryGluePartitionCredentials(context.Background(), nil, func(o *Options) {
@@ -1158,6 +1170,18 @@ func TestUpdateSnapshot_GetTableObjects(t *testing.T) {
 	_, err := svc.GetTableObjects(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTableObjects")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTemporaryDataLocationCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTemporaryDataLocationCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTemporaryDataLocationCredentials")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

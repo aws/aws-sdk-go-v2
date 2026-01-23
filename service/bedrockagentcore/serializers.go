@@ -2910,6 +2910,13 @@ func awsRestjson1_serializeOpDocumentStartBrowserSessionInput(v *StartBrowserSes
 		ok.String(*v.ClientToken)
 	}
 
+	if v.Extensions != nil {
+		ok := object.Key("extensions")
+		if err := awsRestjson1_serializeDocumentBrowserExtensions(v.Extensions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3615,6 +3622,33 @@ func awsRestjson1_serializeDocumentBranchFilter(v *types.BranchFilter, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBrowserExtension(v *types.BrowserExtension, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("location")
+		if err := awsRestjson1_serializeDocumentResourceLocation(v.Location, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBrowserExtensions(v []types.BrowserExtension, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBrowserExtension(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContent(v types.Content, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4129,6 +4163,24 @@ func awsRestjson1_serializeDocumentPayloadTypeList(v []types.PayloadType, value 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentResourceLocation(v types.ResourceLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ResourceLocationMemberS3:
+		av := object.Key("s3")
+		if err := awsRestjson1_serializeDocumentS3Location(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRightExpression(v types.RightExpression, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4144,6 +4196,28 @@ func awsRestjson1_serializeDocumentRightExpression(v types.RightExpression, valu
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3Location(v *types.S3Location, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("prefix")
+		ok.String(*v.Prefix)
+	}
+
+	if v.VersionId != nil {
+		ok := object.Key("versionId")
+		ok.String(*v.VersionId)
+	}
+
 	return nil
 }
 

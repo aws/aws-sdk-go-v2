@@ -1,3 +1,11 @@
+# v1.6.0 (2026-01-15)
+
+* **Feature**: A new GetVersions API has been added to retrieve VCF, ESX versions, and EC2 instances provided by Amazon EVS. The CreateEnvironment API now allows you to select a VCF version and the CreateEnvironmentHost API introduces a optional esxVersion parameter.
+
+# v1.5.13 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.12 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

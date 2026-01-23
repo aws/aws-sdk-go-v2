@@ -7,6 +7,20 @@ import (
 	"time"
 )
 
+// Defines billing configuration settings for WorkSpace Instances, containing the
+// billing mode selection.
+type BillingConfiguration struct {
+
+	// Specifies the billing mode for WorkSpace Instances. MONTHLY provides fixed
+	// monthly rates for predictable budgeting, while HOURLY enables pay-per-second
+	// billing for actual usage.
+	//
+	// This member is required.
+	BillingMode BillingMode
+
+	noSmithyDocumentSerde
+}
+
 // Defines device mapping for WorkSpace Instance storage.
 type BlockDeviceMappingRequest struct {
 
@@ -188,6 +202,34 @@ type IamInstanceProfileSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Defines filtering criteria for WorkSpace Instance type searches. Combines
+// multiple filter conditions including billing mode, platform type, and tenancy to
+// help customers find instance types that meet their specific requirements.
+type InstanceConfigurationFilter struct {
+
+	// Filters WorkSpace Instance types based on supported billing modes. Allows
+	// customers to search for instance types that support their preferred billing
+	// model, such as HOURLY or MONTHLY billing.
+	//
+	// This member is required.
+	BillingMode BillingMode
+
+	// Filters WorkSpace Instance types by operating system platform. Allows customers
+	// to find instances that support their desired OS, such as Windows, Linux/UNIX,
+	// Ubuntu Pro, RHEL, or SUSE.
+	//
+	// This member is required.
+	PlatformType PlatformTypeEnum
+
+	// Filters WorkSpace Instance types by tenancy model. Allows customers to find
+	// instances that match their tenancy requirements, such as SHARED or DEDICATED.
+	//
+	// This member is required.
+	Tenancy InstanceConfigurationTenancyEnum
+
+	noSmithyDocumentSerde
+}
+
 // Represents an IPv6 address configuration for a WorkSpace Instance.
 type InstanceIpv6Address struct {
 
@@ -325,6 +367,11 @@ type InstanceTypeInfo struct {
 
 	// Unique identifier for the WorkSpace Instance type.
 	InstanceType *string
+
+	// Lists all valid combinations of tenancy, platform type, and billing mode
+	// supported for the specific WorkSpace Instance type. Contains the complete set of
+	// configuration options available for this instance type.
+	SupportedInstanceConfigurations []SupportedInstanceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -550,6 +597,24 @@ type SpotMarketOptions struct {
 
 	// Timestamp until which spot instance request is valid.
 	ValidUntilUtc *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single valid configuration combination that an instance type
+// supports, combining tenancy, platform type, and billing mode into one complete
+// configuration specification.
+type SupportedInstanceConfiguration struct {
+
+	// Specifies the billing mode supported in this configuration combination.
+	BillingMode BillingMode
+
+	// Specifies the operating system platform supported in this configuration
+	// combination.
+	PlatformType PlatformTypeEnum
+
+	// Specifies the tenancy model supported in this configuration combination.
+	Tenancy InstanceConfigurationTenancyEnum
 
 	noSmithyDocumentSerde
 }

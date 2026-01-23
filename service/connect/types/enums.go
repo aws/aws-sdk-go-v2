@@ -1300,12 +1300,32 @@ func (EvaluationQuestionAnswerAnalysisType) Values() []EvaluationQuestionAnswerA
 	}
 }
 
+type EvaluationReviewNotificationRecipientType string
+
+// Enum values for EvaluationReviewNotificationRecipientType
+const (
+	EvaluationReviewNotificationRecipientTypeUserId EvaluationReviewNotificationRecipientType = "USER_ID"
+)
+
+// Values returns all known values for EvaluationReviewNotificationRecipientType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationReviewNotificationRecipientType) Values() []EvaluationReviewNotificationRecipientType {
+	return []EvaluationReviewNotificationRecipientType{
+		"USER_ID",
+	}
+}
+
 type EvaluationStatus string
 
 // Enum values for EvaluationStatus
 const (
-	EvaluationStatusDraft     EvaluationStatus = "DRAFT"
-	EvaluationStatusSubmitted EvaluationStatus = "SUBMITTED"
+	EvaluationStatusDraft           EvaluationStatus = "DRAFT"
+	EvaluationStatusSubmitted       EvaluationStatus = "SUBMITTED"
+	EvaluationStatusReviewRequested EvaluationStatus = "REVIEW_REQUESTED"
+	EvaluationStatusUnderReview     EvaluationStatus = "UNDER_REVIEW"
 )
 
 // Values returns all known values for EvaluationStatus. Note that this can be
@@ -1316,6 +1336,8 @@ func (EvaluationStatus) Values() []EvaluationStatus {
 	return []EvaluationStatus{
 		"DRAFT",
 		"SUBMITTED",
+		"REVIEW_REQUESTED",
+		"UNDER_REVIEW",
 	}
 }
 
@@ -2221,6 +2243,25 @@ func (NumericQuestionPropertyAutomationLabel) Values() []NumericQuestionProperty
 	}
 }
 
+type OperationalStatus string
+
+// Enum values for OperationalStatus
+const (
+	OperationalStatusOpen   OperationalStatus = "OPEN"
+	OperationalStatusClosed OperationalStatus = "CLOSED"
+)
+
+// Values returns all known values for OperationalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationalStatus) Values() []OperationalStatus {
+	return []OperationalStatus{
+		"OPEN",
+		"CLOSED",
+	}
+}
+
 type OutboundMessageSourceType string
 
 // Enum values for OutboundMessageSourceType
@@ -2283,6 +2324,27 @@ func (OverrideDays) Values() []OverrideDays {
 		"THURSDAY",
 		"FRIDAY",
 		"SATURDAY",
+	}
+}
+
+type OverrideType string
+
+// Enum values for OverrideType
+const (
+	OverrideTypeStandard OverrideType = "STANDARD"
+	OverrideTypeOpen     OverrideType = "OPEN"
+	OverrideTypeClosed   OverrideType = "CLOSED"
+)
+
+// Values returns all known values for OverrideType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OverrideType) Values() []OverrideType {
+	return []OverrideType{
+		"STANDARD",
+		"OPEN",
+		"CLOSED",
 	}
 }
 
@@ -3236,6 +3298,27 @@ func (RecordingStatus) Values() []RecordingStatus {
 	return []RecordingStatus{
 		"AVAILABLE",
 		"DELETED",
+	}
+}
+
+type RecurrenceFrequency string
+
+// Enum values for RecurrenceFrequency
+const (
+	RecurrenceFrequencyWeekly  RecurrenceFrequency = "WEEKLY"
+	RecurrenceFrequencyMonthly RecurrenceFrequency = "MONTHLY"
+	RecurrenceFrequencyYearly  RecurrenceFrequency = "YEARLY"
+)
+
+// Values returns all known values for RecurrenceFrequency. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecurrenceFrequency) Values() []RecurrenceFrequency {
+	return []RecurrenceFrequency{
+		"WEEKLY",
+		"MONTHLY",
+		"YEARLY",
 	}
 }
 

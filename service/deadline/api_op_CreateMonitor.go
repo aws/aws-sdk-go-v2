@@ -41,14 +41,14 @@ type CreateMonitorInput struct {
 	// This member is required.
 	DisplayName *string
 
-	// The Amazon Resource Name (ARN) of the IAM Identity Center instance that
-	// authenticates monitor users.
+	// The Amazon Resource Name of the IAM Identity Center instance that authenticates
+	// monitor users.
 	//
 	// This member is required.
 	IdentityCenterInstanceArn *string
 
-	// The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect
-	// to Deadline Cloud. Every user that signs in to the monitor using IAM Identity
+	// The Amazon Resource Name of the IAM role that the monitor uses to connect to
+	// Deadline Cloud. Every user that signs in to the monitor using IAM Identity
 	// Center uses this role to access Deadline Cloud resources.
 	//
 	// This member is required.
@@ -73,7 +73,7 @@ type CreateMonitorInput struct {
 
 type CreateMonitorOutput struct {
 
-	// The Amazon Resource Name (ARN) that IAM Identity Center assigns to the monitor.
+	// The Amazon Resource Name that IAM Identity Center assigns to the monitor.
 	//
 	// This member is required.
 	IdentityCenterApplicationArn *string

@@ -8747,6 +8747,19 @@ func awsAwsquery_deserializeDocumentAutoScalingGroup(v **types.AutoScalingGroup,
 				sv.DefaultInstanceWarmup = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("DeletionProtection", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DeletionProtection = types.DeletionProtection(xtv)
+			}
+
 		case strings.EqualFold("DesiredCapacity", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

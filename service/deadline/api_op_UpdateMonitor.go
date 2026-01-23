@@ -41,7 +41,7 @@ type UpdateMonitorInput struct {
 	// of this field.
 	DisplayName *string
 
-	// The Amazon Resource Name (ARN) of the new IAM role to use with the monitor.
+	// The Amazon Resource Name of the new IAM role to use with the monitor.
 	RoleArn *string
 
 	// The new value of the subdomain to use when forming the monitor URL.

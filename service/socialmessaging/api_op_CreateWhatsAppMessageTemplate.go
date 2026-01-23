@@ -11,6 +11,9 @@ import (
 )
 
 // Creates a new WhatsApp message template from a custom definition.
+//
+// Amazon Web Services End User Messaging Social does not store any WhatsApp
+// message template content.
 func (c *Client) CreateWhatsAppMessageTemplate(ctx context.Context, params *CreateWhatsAppMessageTemplateInput, optFns ...func(*Options)) (*CreateWhatsAppMessageTemplateOutput, error) {
 	if params == nil {
 		params = &CreateWhatsAppMessageTemplateInput{}

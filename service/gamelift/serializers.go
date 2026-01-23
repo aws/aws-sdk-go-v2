@@ -9443,6 +9443,11 @@ func awsAwsjson11_serializeOpDocumentCreateScriptInput(v *CreateScriptInput, val
 		ok.String(*v.Name)
 	}
 
+	if v.NodeJsVersion != nil {
+		ok := object.Key("NodeJsVersion")
+		ok.String(*v.NodeJsVersion)
+	}
+
 	if v.StorageLocation != nil {
 		ok := object.Key("StorageLocation")
 		if err := awsAwsjson11_serializeDocumentS3Location(v.StorageLocation, ok); err != nil {

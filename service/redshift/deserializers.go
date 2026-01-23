@@ -25162,6 +25162,19 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				sv.ExpectedNextSnapshotScheduleTimeStatus = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ExtraComputeForAutomaticOptimization", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ExtraComputeForAutomaticOptimization = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("HsmStatus", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentHsmStatus(&sv.HsmStatus, nodeDecoder); err != nil {

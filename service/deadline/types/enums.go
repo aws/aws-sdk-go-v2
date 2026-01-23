@@ -131,6 +131,8 @@ const (
 	ComparisonOperatorGreaterThan        ComparisonOperator = "GREATER_THAN"
 	ComparisonOperatorLessThanEqualTo    ComparisonOperator = "LESS_THAN_EQUAL_TO"
 	ComparisonOperatorLessThan           ComparisonOperator = "LESS_THAN"
+	ComparisonOperatorAnyEquals          ComparisonOperator = "ANY_EQUALS"
+	ComparisonOperatorAllNotEquals       ComparisonOperator = "ALL_NOT_EQUALS"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -145,6 +147,8 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 		"GREATER_THAN",
 		"LESS_THAN_EQUAL_TO",
 		"LESS_THAN",
+		"ANY_EQUALS",
+		"ALL_NOT_EQUALS",
 	}
 }
 
@@ -737,6 +741,25 @@ func (QueueStatus) Values() []QueueStatus {
 		"IDLE",
 		"SCHEDULING",
 		"SCHEDULING_BLOCKED",
+	}
+}
+
+type RangeConstraint string
+
+// Enum values for RangeConstraint
+const (
+	RangeConstraintContiguous    RangeConstraint = "CONTIGUOUS"
+	RangeConstraintNoncontiguous RangeConstraint = "NONCONTIGUOUS"
+)
+
+// Values returns all known values for RangeConstraint. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RangeConstraint) Values() []RangeConstraint {
+	return []RangeConstraint{
+		"CONTIGUOUS",
+		"NONCONTIGUOUS",
 	}
 }
 

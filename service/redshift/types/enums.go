@@ -726,9 +726,10 @@ type UsageLimitFeatureType string
 
 // Enum values for UsageLimitFeatureType
 const (
-	UsageLimitFeatureTypeSpectrum               UsageLimitFeatureType = "spectrum"
-	UsageLimitFeatureTypeConcurrencyScaling     UsageLimitFeatureType = "concurrency-scaling"
-	UsageLimitFeatureTypeCrossRegionDatasharing UsageLimitFeatureType = "cross-region-datasharing"
+	UsageLimitFeatureTypeSpectrum                             UsageLimitFeatureType = "spectrum"
+	UsageLimitFeatureTypeConcurrencyScaling                   UsageLimitFeatureType = "concurrency-scaling"
+	UsageLimitFeatureTypeCrossRegionDatasharing               UsageLimitFeatureType = "cross-region-datasharing"
+	UsageLimitFeatureTypeExtraComputeForAutomaticOptimization UsageLimitFeatureType = "extra-compute-for-automatic-optimization"
 )
 
 // Values returns all known values for UsageLimitFeatureType. Note that this can
@@ -740,6 +741,7 @@ func (UsageLimitFeatureType) Values() []UsageLimitFeatureType {
 		"spectrum",
 		"concurrency-scaling",
 		"cross-region-datasharing",
+		"extra-compute-for-automatic-optimization",
 	}
 }
 

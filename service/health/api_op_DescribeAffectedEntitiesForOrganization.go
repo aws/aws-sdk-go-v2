@@ -53,7 +53,7 @@ type DescribeAffectedEntitiesForOrganizationInput struct {
 	// the only supported value at this time.
 	Locale *string
 
-	// The maximum number of items to return in one batch, between 10 and 100,
+	// The maximum number of items to return in one batch, between 1 and 100,
 	// inclusive.
 	MaxResults *int32
 
@@ -203,7 +203,7 @@ func (c *Client) addOperationDescribeAffectedEntitiesForOrganizationMiddlewares(
 // DescribeAffectedEntitiesForOrganizationPaginatorOptions is the paginator
 // options for DescribeAffectedEntitiesForOrganization
 type DescribeAffectedEntitiesForOrganizationPaginatorOptions struct {
-	// The maximum number of items to return in one batch, between 10 and 100,
+	// The maximum number of items to return in one batch, between 1 and 100,
 	// inclusive.
 	Limit int32
 

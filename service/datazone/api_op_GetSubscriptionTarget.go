@@ -113,6 +113,10 @@ type GetSubscriptionTargetOutput struct {
 	// The manage access role with which the subscription target was created.
 	ManageAccessRole *string
 
+	//  Determines the subscription grant creation mode for this target, defining if
+	// grants are auto-created upon subscription approval or managed manually.
+	SubscriptionGrantCreationMode types.SubscriptionGrantCreationMode
+
 	// The timestamp of when the subscription target was updated.
 	UpdatedAt *time.Time
 

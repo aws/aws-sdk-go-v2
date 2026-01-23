@@ -175,6 +175,34 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The exception that occurs when there is a retryable conflict performing an
+// operation. This is a temporary condition that may resolve itself with retries.
+// We recommend implementing exponential backoff retry logic in your application.
+type RetryableConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RetryableConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RetryableConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RetryableConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RetryableConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RetryableConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The exception that occurs when there is an error in the runtime client. This
 // can happen due to network issues, invalid configuration, or other client-side
 // problems. Check the error message for specific details about the error.

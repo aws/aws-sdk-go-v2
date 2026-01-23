@@ -1,3 +1,11 @@
+# v1.37.0 (2026-01-22)
+
+* **Feature**: Updates the lower range for the maxResults request property for DescribeAffectedEntities, DescribeAffectedEntitiesForOrganization, DescribeEvents, and DescribeEventsForOrganization API request properties.
+
+# v1.36.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2025-12-15)
 
 * **Feature**: Updating Health API endpoint generation for dualstack only regions

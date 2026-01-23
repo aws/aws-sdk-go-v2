@@ -7086,6 +7086,15 @@ func awsRestjson1_deserializeDocumentServiceView(v **types.ServiceView, value in
 				sv.ServiceViewArn = ptr.String(jtv)
 			}
 
+		case "ServiceViewName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceViewName to be of type string, got %T instead", value)
+				}
+				sv.ServiceViewName = ptr.String(jtv)
+			}
+
 		case "StreamingAccessForService":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7590,6 +7599,15 @@ func awsRestjson1_deserializeDocumentView(v **types.View, value interface{}) err
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ViewArn = ptr.String(jtv)
+			}
+
+		case "ViewName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViewName to be of type string, got %T instead", value)
+				}
+				sv.ViewName = ptr.String(jtv)
 			}
 
 		default:

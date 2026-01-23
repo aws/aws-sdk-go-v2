@@ -1912,6 +1912,46 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentBillingConfiguration(v **types.BillingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BillingConfiguration
+	if *v == nil {
+		sv = &types.BillingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BillingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2131,6 +2171,11 @@ func awsAwsjson10_deserializeDocumentInstanceTypeInfo(v **types.InstanceTypeInfo
 					return fmt.Errorf("expected InstanceType to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = ptr.String(jtv)
+			}
+
+		case "SupportedInstanceConfigurations":
+			if err := awsAwsjson10_deserializeDocumentSupportedInstanceConfigurations(&sv.SupportedInstanceConfigurations, value); err != nil {
+				return err
 			}
 
 		default:
@@ -2434,6 +2479,98 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSupportedInstanceConfiguration(v **types.SupportedInstanceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SupportedInstanceConfiguration
+	if *v == nil {
+		sv = &types.SupportedInstanceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BillingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
+		case "PlatformType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlatformTypeEnum to be of type string, got %T instead", value)
+				}
+				sv.PlatformType = types.PlatformTypeEnum(jtv)
+			}
+
+		case "Tenancy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceConfigurationTenancyEnum to be of type string, got %T instead", value)
+				}
+				sv.Tenancy = types.InstanceConfigurationTenancyEnum(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSupportedInstanceConfigurations(v *[]types.SupportedInstanceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SupportedInstanceConfiguration
+	if *v == nil {
+		cv = []types.SupportedInstanceConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SupportedInstanceConfiguration
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentSupportedInstanceConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -3134,6 +3271,11 @@ func awsAwsjson10_deserializeOpDocumentGetWorkspaceInstanceOutput(v **GetWorkspa
 
 	for key, value := range shape {
 		switch key {
+		case "BillingConfiguration":
+			if err := awsAwsjson10_deserializeDocumentBillingConfiguration(&sv.BillingConfiguration, value); err != nil {
+				return err
+			}
+
 		case "EC2InstanceErrors":
 			if err := awsAwsjson10_deserializeDocumentEC2InstanceErrors(&sv.EC2InstanceErrors, value); err != nil {
 				return err

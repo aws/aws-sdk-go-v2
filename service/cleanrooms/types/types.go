@@ -183,8 +183,8 @@ type AggregationConstraint struct {
 // data value in an analysis template.
 type AnalysisParameter struct {
 
-	// The name of the parameter. The name must use only alphanumeric, underscore (_),
-	// or hyphen (-) characters but cannot start or end with a hyphen.
+	// The name of the parameter. The name must use only alphanumeric or underscore
+	// (_) characters.
 	//
 	// This member is required.
 	Name *string
@@ -1018,6 +1018,12 @@ type Collaboration struct {
 
 	// A description of the collaboration provided by the collaboration owner.
 	Description *string
+
+	// An indicator as to whether metrics are enabled for the collaboration.
+	//
+	// When true , collaboration members can opt in to Amazon CloudWatch metrics for
+	// their membership queries.
+	IsMetricsEnabled *bool
 
 	// An indicator as to whether job logging has been enabled or disabled for the
 	// collaboration.
@@ -3442,6 +3448,12 @@ type Membership struct {
 	// can receive results.
 	DefaultResultConfiguration *MembershipProtectedQueryResultConfiguration
 
+	// An indicator as to whether Amazon CloudWatch metrics are enabled for the
+	// membership.
+	//
+	// When true , metrics about query execution are collected in Amazon CloudWatch.
+	IsMetricsEnabled *bool
+
 	// An indicator as to whether job logging has been enabled or disabled for the
 	// collaboration.
 	//
@@ -4517,6 +4529,10 @@ type ProtectedJobParameters struct {
 	//
 	// This member is required.
 	AnalysisTemplateArn *string
+
+	// Runtime configuration values passed to the PySpark analysis script. Parameter
+	// names and types must match those defined in the analysis template.
+	Parameters map[string]string
 
 	noSmithyDocumentSerde
 }

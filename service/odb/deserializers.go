@@ -6222,6 +6222,11 @@ func awsAwsjson10_deserializeDocumentCloudAutonomousVmCluster(v **types.CloudAut
 				sv.Hostname = ptr.String(jtv)
 			}
 
+		case "iamRoles":
+			if err := awsAwsjson10_deserializeDocumentIamRoleList(&sv.IamRoles, value); err != nil {
+				return err
+			}
+
 		case "isMtlsEnabledVmCluster":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7212,6 +7217,11 @@ func awsAwsjson10_deserializeDocumentCloudAutonomousVmClusterSummary(v **types.C
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Hostname = ptr.String(jtv)
+			}
+
+		case "iamRoles":
+			if err := awsAwsjson10_deserializeDocumentIamRoleList(&sv.IamRoles, value); err != nil {
+				return err
 			}
 
 		case "isMtlsEnabledVmCluster":

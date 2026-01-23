@@ -1110,6 +1110,9 @@ func ExampleSubscribedPrincipal_outputUsage() {
 	case *types.SubscribedPrincipalMemberGroup:
 		_ = v.Value // Value is types.SubscribedGroup
 
+	case *types.SubscribedPrincipalMemberIam:
+		_ = v.Value // Value is types.SubscribedIamPrincipal
+
 	case *types.SubscribedPrincipalMemberProject:
 		_ = v.Value // Value is types.SubscribedProject
 
@@ -1128,6 +1131,7 @@ func ExampleSubscribedPrincipal_outputUsage() {
 var _ *types.SubscribedProject
 var _ *types.SubscribedGroup
 var _ *types.SubscribedUser
+var _ *types.SubscribedIamPrincipal
 
 func ExampleSubscribedPrincipalInput_outputUsage() {
 	var union types.SubscribedPrincipalInput
@@ -1135,6 +1139,9 @@ func ExampleSubscribedPrincipalInput_outputUsage() {
 	switch v := union.(type) {
 	case *types.SubscribedPrincipalInputMemberGroup:
 		_ = v.Value // Value is types.SubscribedGroupInput
+
+	case *types.SubscribedPrincipalInputMemberIam:
+		_ = v.Value // Value is types.SubscribedIamPrincipalInput
 
 	case *types.SubscribedPrincipalInputMemberProject:
 		_ = v.Value // Value is types.SubscribedProjectInput
@@ -1153,6 +1160,7 @@ func ExampleSubscribedPrincipalInput_outputUsage() {
 
 var _ *types.SubscribedProjectInput
 var _ *types.SubscribedUserInput
+var _ *types.SubscribedIamPrincipalInput
 var _ *types.SubscribedGroupInput
 
 func ExampleUserPolicyGrantPrincipal_outputUsage() {

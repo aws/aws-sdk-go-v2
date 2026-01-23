@@ -274,6 +274,12 @@ type CreateClusterInput struct {
 	// [Enhanced VPC Routing]: https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
 	EnhancedVpcRouting *bool
 
+	// If true , allocates additional compute resources for running automatic
+	// optimization operations.
+	//
+	// Default: false
+	ExtraComputeForAutomaticOptimization *bool
+
 	// Specifies the name of the HSM client certificate the Amazon Redshift cluster
 	// uses to retrieve the data encryption keys stored in an HSM.
 	HsmClientCertificateIdentifier *string

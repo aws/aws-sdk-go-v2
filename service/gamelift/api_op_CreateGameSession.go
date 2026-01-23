@@ -110,6 +110,10 @@ type CreateGameSessionInput struct {
 	// A set of key-value pairs that can store custom data in a game session. For
 	// example: {"Key": "difficulty", "Value": "novice"} . For an example, see [Create a game session with custom properties].
 	//
+	// Avoid using periods (".") in property keys if you plan to search for game
+	// sessions by properties. Property keys containing periods cannot be searched and
+	// will be filtered out from search results due to search index limitations.
+	//
 	// [Create a game session with custom properties]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create
 	GameProperties []types.GameProperty
 

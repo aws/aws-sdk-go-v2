@@ -3,6 +3,7 @@ ListInstanceTypes
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
+		OperationInputValidation
 	Serialize stack step
 		setOperationInput
 		ResolveEndpoint

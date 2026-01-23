@@ -41,6 +41,10 @@ type GetWorkspaceInstanceInput struct {
 // Provides comprehensive details about the requested WorkSpaces Instance.
 type GetWorkspaceInstanceOutput struct {
 
+	// Returns the current billing configuration for the WorkSpace Instance,
+	// indicating the active billing mode.
+	BillingConfiguration *types.BillingConfiguration
+
 	// Includes any underlying EC2 instance errors encountered.
 	EC2InstanceErrors []types.EC2InstanceError
 

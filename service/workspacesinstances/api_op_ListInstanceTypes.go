@@ -32,6 +32,11 @@ func (c *Client) ListInstanceTypes(ctx context.Context, params *ListInstanceType
 // types.
 type ListInstanceTypesInput struct {
 
+	// Optional filter to narrow instance type results based on configuration
+	// requirements. Only returns instance types that support the specified combination
+	// of tenancy, platform type, and billing mode.
+	InstanceConfigurationFilter *types.InstanceConfigurationFilter
+
 	// Maximum number of instance types to return in a single API call. Enables
 	// pagination of instance type results.
 	MaxResults *int32
@@ -124,6 +129,9 @@ func (c *Client) addOperationListInstanceTypesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
+	if err = addOpListInstanceTypesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInstanceTypes(options.Region), middleware.Before); err != nil {

@@ -2251,6 +2251,41 @@ func awsAwsjson10_serializeDocumentContextMap(v map[string]types.AttributeValue,
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentEncryptionContext(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentEncryptionSettings(v types.EncryptionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.EncryptionSettingsMemberDefault:
+		av := object.Key("default")
+		if err := awsAwsjson10_serializeDocumentUnit(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.EncryptionSettingsMemberKmsEncryptionSettings:
+		av := object.Key("kmsEncryptionSettings")
+		if err := awsAwsjson10_serializeDocumentKmsEncryptionSettings(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentEntitiesDefinition(v types.EntitiesDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2414,6 +2449,25 @@ func awsAwsjson10_serializeDocumentIdentitySourceFilters(v []types.IdentitySourc
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentKmsEncryptionSettings(v *types.KmsEncryptionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptionContext != nil {
+		ok := object.Key("encryptionContext")
+		if err := awsAwsjson10_serializeDocumentEncryptionContext(v.EncryptionContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
 	return nil
 }
 
@@ -2927,6 +2981,13 @@ func awsAwsjson10_serializeDocumentValidationSettings(v *types.ValidationSetting
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentUnit(v *types.Unit, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentBatchGetPolicyInput(v *BatchGetPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3073,6 +3134,13 @@ func awsAwsjson10_serializeOpDocumentCreatePolicyStoreInput(v *CreatePolicyStore
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.EncryptionSettings != nil {
+		ok := object.Key("encryptionSettings")
+		if err := awsAwsjson10_serializeDocumentEncryptionSettings(v.EncryptionSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {

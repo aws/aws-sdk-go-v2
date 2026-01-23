@@ -5086,6 +5086,25 @@ func (SheetImageScalingType) Values() []SheetImageScalingType {
 	}
 }
 
+type SheetLayoutGroupMemberType string
+
+// Enum values for SheetLayoutGroupMemberType
+const (
+	SheetLayoutGroupMemberTypeElement SheetLayoutGroupMemberType = "ELEMENT"
+	SheetLayoutGroupMemberTypeGroup   SheetLayoutGroupMemberType = "GROUP"
+)
+
+// Values returns all known values for SheetLayoutGroupMemberType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SheetLayoutGroupMemberType) Values() []SheetLayoutGroupMemberType {
+	return []SheetLayoutGroupMemberType{
+		"ELEMENT",
+		"GROUP",
+	}
+}
+
 type SimpleAttributeAggregationFunction string
 
 // Enum values for SimpleAttributeAggregationFunction

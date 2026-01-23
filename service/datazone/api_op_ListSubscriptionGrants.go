@@ -55,6 +55,9 @@ type ListSubscriptionGrantsInput struct {
 	// The ID of the owning group.
 	OwningGroupId *string
 
+	// The ARN of the owning IAM principal.
+	OwningIamPrincipalArn *string
+
 	// The ID of the owning project of the subscription grants.
 	OwningProjectId *string
 

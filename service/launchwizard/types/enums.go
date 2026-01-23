@@ -21,19 +21,42 @@ func (DeploymentFilterKey) Values() []DeploymentFilterKey {
 	}
 }
 
+type DeploymentPatternVersionFilterKey string
+
+// Enum values for DeploymentPatternVersionFilterKey
+const (
+	DeploymentPatternVersionFilterKeyDeploymentPatternVersionName DeploymentPatternVersionFilterKey = "updateFromVersion"
+)
+
+// Values returns all known values for DeploymentPatternVersionFilterKey. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentPatternVersionFilterKey) Values() []DeploymentPatternVersionFilterKey {
+	return []DeploymentPatternVersionFilterKey{
+		"updateFromVersion",
+	}
+}
+
 type DeploymentStatus string
 
 // Enum values for DeploymentStatus
 const (
-	DeploymentStatusCompleted        DeploymentStatus = "COMPLETED"
-	DeploymentStatusCreating         DeploymentStatus = "CREATING"
-	DeploymentStatusDeleteInProgress DeploymentStatus = "DELETE_IN_PROGRESS"
-	DeploymentStatusDeleteInitiating DeploymentStatus = "DELETE_INITIATING"
-	DeploymentStatusDeleteFailed     DeploymentStatus = "DELETE_FAILED"
-	DeploymentStatusDeleted          DeploymentStatus = "DELETED"
-	DeploymentStatusFailed           DeploymentStatus = "FAILED"
-	DeploymentStatusInProgress       DeploymentStatus = "IN_PROGRESS"
-	DeploymentStatusValidating       DeploymentStatus = "VALIDATING"
+	DeploymentStatusCompleted               DeploymentStatus = "COMPLETED"
+	DeploymentStatusCreating                DeploymentStatus = "CREATING"
+	DeploymentStatusDeleteInProgress        DeploymentStatus = "DELETE_IN_PROGRESS"
+	DeploymentStatusDeleteInitiating        DeploymentStatus = "DELETE_INITIATING"
+	DeploymentStatusDeleteFailed            DeploymentStatus = "DELETE_FAILED"
+	DeploymentStatusDeleted                 DeploymentStatus = "DELETED"
+	DeploymentStatusFailed                  DeploymentStatus = "FAILED"
+	DeploymentStatusInProgress              DeploymentStatus = "IN_PROGRESS"
+	DeploymentStatusValidating              DeploymentStatus = "VALIDATING"
+	DeploymentStatusUpdateInProgress        DeploymentStatus = "UPDATE_IN_PROGRESS"
+	DeploymentStatusUpdateCompleted         DeploymentStatus = "UPDATE_COMPLETED"
+	DeploymentStatusUpdateFailed            DeploymentStatus = "UPDATE_FAILED"
+	DeploymentStatusUpdateRollbackCompleted DeploymentStatus = "UPDATE_ROLLBACK_COMPLETED"
+	DeploymentStatusUpdateRollbackFailed    DeploymentStatus = "UPDATE_ROLLBACK_FAILED"
 )
 
 // Values returns all known values for DeploymentStatus. Note that this can be
@@ -51,6 +74,11 @@ func (DeploymentStatus) Values() []DeploymentStatus {
 		"FAILED",
 		"IN_PROGRESS",
 		"VALIDATING",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_COMPLETED",
+		"UPDATE_FAILED",
+		"UPDATE_ROLLBACK_COMPLETED",
+		"UPDATE_ROLLBACK_FAILED",
 	}
 }
 

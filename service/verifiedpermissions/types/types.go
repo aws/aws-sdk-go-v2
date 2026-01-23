@@ -946,6 +946,77 @@ type DeterminingPolicyItem struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains the encryption configuration for the policy store and
+// child resources.
+//
+// This data type is used as a request parameter in the [CreatePolicyStore] operation.
+//
+// The following types satisfy this interface:
+//
+//	EncryptionSettingsMemberDefault
+//	EncryptionSettingsMemberKmsEncryptionSettings
+//
+// [CreatePolicyStore]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicyStore.html
+type EncryptionSettings interface {
+	isEncryptionSettings()
+}
+
+// This is the default encryption setting. The policy store uses an Amazon Web
+// Services owned key for encrypting data.
+type EncryptionSettingsMemberDefault struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionSettingsMemberDefault) isEncryptionSettings() {}
+
+// The KMS encryption settings for this policy store to encrypt data with. It will
+// contain the customer-managed KMS key, and a user-defined encryption context.
+type EncryptionSettingsMemberKmsEncryptionSettings struct {
+	Value KmsEncryptionSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionSettingsMemberKmsEncryptionSettings) isEncryptionSettings() {}
+
+// A structure that contains the encryption configuration for the policy store and
+// child resources.
+//
+// This data type is used as a response parameter field for the [GetPolicyStore] operation.
+//
+// The following types satisfy this interface:
+//
+//	EncryptionStateMemberDefault
+//	EncryptionStateMemberKmsEncryptionState
+//
+// [GetPolicyStore]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetPolicyStore.html
+type EncryptionState interface {
+	isEncryptionState()
+}
+
+// This is the default encryption state. The policy store is encrypted using an
+// Amazon Web Services owned key.
+type EncryptionStateMemberDefault struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionStateMemberDefault) isEncryptionState() {}
+
+// The KMS encryption settings currently configured for this policy store to
+// encrypt data with. It contains the customer-managed KMS key, and a user-defined
+// encryption context.
+type EncryptionStateMemberKmsEncryptionState struct {
+	Value KmsEncryptionState
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionStateMemberKmsEncryptionState) isEncryptionState() {}
+
 // Contains the list of entities to be considered during an authorization request.
 // This includes all principals, resources, and actions required to successfully
 // evaluate the request.
@@ -1257,6 +1328,58 @@ type IdentitySourceItemDetails struct {
 	// Deprecated: This attribute has been replaced by
 	// configuration.cognitoUserPoolConfiguration.userPoolArn
 	UserPoolArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the KMS encryption configuration for the policy
+// store. The encryption settings determine what customer-managed KMS key will be
+// used to encrypt all resources within the policy store, and any user-defined
+// context key-value pairs to append during encryption processes.
+//
+// This data type is used as a field that is part of the [EncryptionSettings] type.
+//
+// [EncryptionSettings]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EncryptionSettings.html
+type KmsEncryptionSettings struct {
+
+	// The customer-managed KMS key [Amazon Resource Name (ARN)], alias or ID to be used for encryption processes.
+	//
+	// Users can provide the full KMS key ARN, a KMS key alias, or a KMS key ID, but
+	// it will be mapped to the full KMS key ARN after policy store creation, and
+	// referenced when encrypting child resources.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// This member is required.
+	Key *string
+
+	// User-defined, additional context to be added to encryption processes.
+	EncryptionContext map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the KMS encryption configuration for the policy
+// store. The encryption state shows what customer-managed KMS key is being used to
+// encrypt all resources within the policy store, and any user-defined context
+// key-value pairs added during encryption processes.
+//
+// This data type is used as a field that is part of the [EncryptionState] type.
+//
+// [EncryptionState]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EncryptionState.html
+type KmsEncryptionState struct {
+
+	// User-defined, additional context added to encryption processes.
+	//
+	// This member is required.
+	EncryptionContext map[string]string
+
+	// The customer-managed KMS key [Amazon Resource Name (ARN)] being used for encryption processes.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// This member is required.
+	Key *string
 
 	noSmithyDocumentSerde
 }
@@ -2440,6 +2563,10 @@ type ValidationSettings struct {
 	noSmithyDocumentSerde
 }
 
+type Unit struct {
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -2457,6 +2584,8 @@ func (*UnknownUnionMember) isConfiguration()                     {}
 func (*UnknownUnionMember) isConfigurationDetail()               {}
 func (*UnknownUnionMember) isConfigurationItem()                 {}
 func (*UnknownUnionMember) isContextDefinition()                 {}
+func (*UnknownUnionMember) isEncryptionSettings()                {}
+func (*UnknownUnionMember) isEncryptionState()                   {}
 func (*UnknownUnionMember) isEntitiesDefinition()                {}
 func (*UnknownUnionMember) isEntityReference()                   {}
 func (*UnknownUnionMember) isOpenIdConnectTokenSelection()       {}

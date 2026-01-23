@@ -4467,6 +4467,11 @@ func awsRestjson1_serializeOpDocumentCreateSubscriptionTargetInput(v *CreateSubs
 		ok.String(*v.Provider)
 	}
 
+	if len(v.SubscriptionGrantCreationMode) > 0 {
+		ok := object.Key("subscriptionGrantCreationMode")
+		ok.String(string(v.SubscriptionGrantCreationMode))
+	}
+
 	if v.SubscriptionTargetConfig != nil {
 		ok := object.Key("subscriptionTargetConfig")
 		if err := awsRestjson1_serializeDocumentSubscriptionTargetForms(v.SubscriptionTargetConfig, ok); err != nil {
@@ -12525,6 +12530,10 @@ func awsRestjson1_serializeOpHttpBindingsListSubscriptionGrantsInput(v *ListSubs
 		encoder.SetQuery("owningGroupId").String(*v.OwningGroupId)
 	}
 
+	if v.OwningIamPrincipalArn != nil {
+		encoder.SetQuery("owningIamPrincipalArn").String(*v.OwningIamPrincipalArn)
+	}
+
 	if v.OwningProjectId != nil {
 		encoder.SetQuery("owningProjectId").String(*v.OwningProjectId)
 	}
@@ -12640,6 +12649,10 @@ func awsRestjson1_serializeOpHttpBindingsListSubscriptionRequestsInput(v *ListSu
 		encoder.SetQuery("owningGroupId").String(*v.OwningGroupId)
 	}
 
+	if v.OwningIamPrincipalArn != nil {
+		encoder.SetQuery("owningIamPrincipalArn").String(*v.OwningIamPrincipalArn)
+	}
+
 	if v.OwningProjectId != nil {
 		encoder.SetQuery("owningProjectId").String(*v.OwningProjectId)
 	}
@@ -12749,6 +12762,10 @@ func awsRestjson1_serializeOpHttpBindingsListSubscriptionsInput(v *ListSubscript
 
 	if v.OwningGroupId != nil {
 		encoder.SetQuery("owningGroupId").String(*v.OwningGroupId)
+	}
+
+	if v.OwningIamPrincipalArn != nil {
+		encoder.SetQuery("owningIamPrincipalArn").String(*v.OwningIamPrincipalArn)
 	}
 
 	if v.OwningProjectId != nil {
@@ -17578,6 +17595,11 @@ func awsRestjson1_serializeOpDocumentUpdateSubscriptionTargetInput(v *UpdateSubs
 		ok.String(*v.Provider)
 	}
 
+	if len(v.SubscriptionGrantCreationMode) > 0 {
+		ok := object.Key("subscriptionGrantCreationMode")
+		ok.String(string(v.SubscriptionGrantCreationMode))
+	}
+
 	if v.SubscriptionTargetConfig != nil {
 		ok := object.Key("subscriptionTargetConfig")
 		if err := awsRestjson1_serializeDocumentSubscriptionTargetForms(v.SubscriptionTargetConfig, ok); err != nil {
@@ -19221,6 +19243,16 @@ func awsRestjson1_serializeDocumentFilter(v *types.Filter, value smithyjson.Valu
 	if v.Attribute != nil {
 		ok := object.Key("attribute")
 		ok.String(*v.Attribute)
+	}
+
+	if v.IntValue != nil {
+		ok := object.Key("intValue")
+		ok.Long(*v.IntValue)
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("operator")
+		ok.String(string(v.Operator))
 	}
 
 	if v.Value != nil {
@@ -21623,6 +21655,18 @@ func awsRestjson1_serializeDocumentSubscribedGroupInput(v *types.SubscribedGroup
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSubscribedIamPrincipalInput(v *types.SubscribedIamPrincipalInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Identifier != nil {
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSubscribedListingInput(v *types.SubscribedListingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -21656,6 +21700,12 @@ func awsRestjson1_serializeDocumentSubscribedPrincipalInput(v types.SubscribedPr
 	case *types.SubscribedPrincipalInputMemberGroup:
 		av := object.Key("group")
 		if err := awsRestjson1_serializeDocumentSubscribedGroupInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.SubscribedPrincipalInputMemberIam:
+		av := object.Key("iam")
+		if err := awsRestjson1_serializeDocumentSubscribedIamPrincipalInput(&uv.Value, av); err != nil {
 			return err
 		}
 

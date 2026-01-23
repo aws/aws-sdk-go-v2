@@ -4549,6 +4549,11 @@ func awsAwsjson11_serializeOpDocumentCreateWorkgroupInput(v *CreateWorkgroupInpu
 		ok.Boolean(*v.EnhancedVpcRouting)
 	}
 
+	if v.ExtraComputeForAutomaticOptimization != nil {
+		ok := object.Key("extraComputeForAutomaticOptimization")
+		ok.Boolean(*v.ExtraComputeForAutomaticOptimization)
+	}
+
 	if v.IpAddressType != nil {
 		ok := object.Key("ipAddressType")
 		ok.String(*v.IpAddressType)
@@ -5803,6 +5808,11 @@ func awsAwsjson11_serializeOpDocumentUpdateWorkgroupInput(v *UpdateWorkgroupInpu
 	if v.EnhancedVpcRouting != nil {
 		ok := object.Key("enhancedVpcRouting")
 		ok.Boolean(*v.EnhancedVpcRouting)
+	}
+
+	if v.ExtraComputeForAutomaticOptimization != nil {
+		ok := object.Key("extraComputeForAutomaticOptimization")
+		ok.Boolean(*v.ExtraComputeForAutomaticOptimization)
 	}
 
 	if v.IpAddressType != nil {

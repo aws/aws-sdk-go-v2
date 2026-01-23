@@ -181,6 +181,22 @@ type AutoToolChoice struct {
 	noSmithyDocumentSerde
 }
 
+// Cache creation metrics for a specific TTL duration
+type CacheDetail struct {
+
+	// Number of tokens written to cache with this TTL (cache creation tokens)
+	//
+	// This member is required.
+	InputTokens *int32
+
+	// TTL duration for these cached tokens
+	//
+	// This member is required.
+	Ttl CacheTTL
+
+	noSmithyDocumentSerde
+}
+
 // Defines a section of content to be cached for reuse in subsequent API calls.
 type CachePointBlock struct {
 
@@ -188,6 +204,11 @@ type CachePointBlock struct {
 	//
 	// This member is required.
 	Type CachePointType
+
+	// Optional TTL duration for cache entries. When specified, enables extended TTL
+	// caching with the specified duration. When omitted, uses type value for caching
+	// behavior.
+	Ttl CacheTTL
 
 	noSmithyDocumentSerde
 }
@@ -2532,6 +2553,10 @@ type TokenUsage struct {
 	//
 	// This member is required.
 	TotalTokens *int32
+
+	// Detailed breakdown of cache writes by TTL. Empty if no cache creation occurred.
+	// Sorted by TTL duration (1h before 5m).
+	CacheDetails []CacheDetail
 
 	// The number of input tokens read from the cache for the request.
 	CacheReadInputTokens *int32

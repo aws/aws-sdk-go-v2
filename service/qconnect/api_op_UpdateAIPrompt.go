@@ -56,7 +56,7 @@ type UpdateAIPromptInput struct {
 	Description *string
 
 	// The updated inference configuration for the AI Prompt.
-	InferenceConfiguration types.AIPromptInferenceConfiguration
+	InferenceConfiguration *types.AIPromptInferenceConfiguration
 
 	// The identifier of the model used for this AI Prompt.
 	//

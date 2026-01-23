@@ -98,6 +98,18 @@ func TestCheckSnapshot_GetDeployment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDeploymentPatternVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDeploymentPatternVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDeploymentPatternVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetWorkload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetWorkload(context.Background(), nil, func(o *Options) {
@@ -127,6 +139,18 @@ func TestCheckSnapshot_ListDeploymentEvents(t *testing.T) {
 	_, err := svc.ListDeploymentEvents(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDeploymentEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDeploymentPatternVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDeploymentPatternVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDeploymentPatternVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -205,6 +229,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateDeployment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDeployment(context.Background(), nil, func(o *Options) {
@@ -241,6 +277,18 @@ func TestUpdateSnapshot_GetDeployment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDeploymentPatternVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDeploymentPatternVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDeploymentPatternVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetWorkload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetWorkload(context.Background(), nil, func(o *Options) {
@@ -270,6 +318,18 @@ func TestUpdateSnapshot_ListDeploymentEvents(t *testing.T) {
 	_, err := svc.ListDeploymentEvents(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDeploymentEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDeploymentPatternVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDeploymentPatternVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDeploymentPatternVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -342,6 +402,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDeployment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -531,6 +531,10 @@ type ReplicaSpecificationSummary struct {
 	// Region.
 	Status TableStatus
 
+	// The warm throughput settings for this replica, including the current status and
+	// configured read and write capacity units.
+	WarmThroughputSpecification *WarmThroughputSpecificationSummary
+
 	noSmithyDocumentSerde
 }
 
@@ -714,6 +718,55 @@ type TimeToLive struct {
 	//
 	// This member is required.
 	Status TimeToLiveStatus
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the warm throughput settings for a table. Pre-warming a table by
+// specifying warm throughput pre-provisions read and write capacity units to help
+// avoid capacity exceeded exceptions and reduce latency when your table starts
+// receiving traffic.
+//
+// For more information about pre-warming in Amazon Keyspaces, see [Pre-warm a table in Amazon Keyspaces] in the Amazon
+// Keyspaces Developer Guide.
+//
+// [Pre-warm a table in Amazon Keyspaces]: https://docs.aws.amazon.com/keyspaces/latest/devguide/warm-throughput.html
+type WarmThroughputSpecification struct {
+
+	// The number of read capacity units per second to pre-warm the table for read
+	// capacity throughput. The minimum value is 1.
+	ReadUnitsPerSecond *int64
+
+	// The number of write capacity units per second to pre-warm the table for write
+	// capacity throughput. The minimum value is 1.
+	WriteUnitsPerSecond *int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains the current warm throughput settings for a table, including the
+// configured capacity units and the current status of the warm throughput
+// configuration.
+type WarmThroughputSpecificationSummary struct {
+
+	// The number of read capacity units per second currently configured for warm
+	// throughput.
+	//
+	// This member is required.
+	ReadUnitsPerSecond *int64
+
+	// The current status of the warm throughput configuration. Valid values are
+	// AVAILABLE when the configuration is active, and UPDATING when changes are being
+	// applied.
+	//
+	// This member is required.
+	Status WarmThroughputStatus
+
+	// The number of write capacity units per second currently configured for warm
+	// throughput.
+	//
+	// This member is required.
+	WriteUnitsPerSecond *int64
 
 	noSmithyDocumentSerde
 }

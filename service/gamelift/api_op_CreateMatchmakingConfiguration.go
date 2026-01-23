@@ -132,6 +132,10 @@ type CreateMatchmakingConfigurationInput struct {
 	// example: {"Key": "difficulty", "Value": "novice"} . This information is added to
 	// the new GameSession object that is created for a successful match. This
 	// parameter is not used if FlexMatchMode is set to STANDALONE .
+	//
+	// Avoid using periods (".") in property keys if you plan to search for game
+	// sessions by properties. Property keys containing periods cannot be searched and
+	// will be filtered out from search results due to search index limitations.
 	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.

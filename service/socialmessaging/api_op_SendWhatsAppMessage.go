@@ -56,7 +56,7 @@ type SendWhatsAppMessageInput struct {
 	// phone-number-id-01234567890123456789012345678901 . Use [GetLinkedWhatsAppBusinessAccount] to find a phone
 	// number's id.
 	//
-	// [GetLinkedWhatsAppBusinessAccount]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+	// [GetLinkedWhatsAppBusinessAccount]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
 	//
 	// This member is required.
 	OriginationPhoneNumberId *string

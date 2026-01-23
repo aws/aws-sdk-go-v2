@@ -1,3 +1,11 @@
+# v1.61.0 (2026-01-21)
+
+* **Feature**: AWS Config Conformance Packs now support tag-on-create through PutConformancePack API.
+
+# v1.60.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2025-12-22)
 
 * **Feature**: Added supported resourceTypes for Config from July to November 2025

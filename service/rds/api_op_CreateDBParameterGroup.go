@@ -49,7 +49,7 @@ type CreateDBParameterGroupInput struct {
 	// following command:
 	//
 	//     aws rds describe-db-engine-versions --query
-	//     "DBEngineVersions[].DBParameterGroupFamily" --engine
+	//     "DBEngineVersions[].DBParameterGroupFamily" --engine <engine>
 	//
 	// For example, to list all of the available parameter group families for the
 	// MySQL DB engine, use the following command:

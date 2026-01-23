@@ -58,6 +58,25 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 	}
 }
 
+type CredentialsScope string
+
+// Enum values for CredentialsScope
+const (
+	CredentialsScopeRead      CredentialsScope = "READ"
+	CredentialsScopeReadwrite CredentialsScope = "READWRITE"
+)
+
+// Values returns all known values for CredentialsScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CredentialsScope) Values() []CredentialsScope {
+	return []CredentialsScope{
+		"READ",
+		"READWRITE",
+	}
+}
+
 type DataLakeResourceType string
 
 // Enum values for DataLakeResourceType
@@ -368,5 +387,26 @@ func (TransactionType) Values() []TransactionType {
 	return []TransactionType{
 		"READ_AND_WRITE",
 		"READ_ONLY",
+	}
+}
+
+type VerificationStatus string
+
+// Enum values for VerificationStatus
+const (
+	VerificationStatusVerified           VerificationStatus = "VERIFIED"
+	VerificationStatusVerificationFailed VerificationStatus = "VERIFICATION_FAILED"
+	VerificationStatusNotVerified        VerificationStatus = "NOT_VERIFIED"
+)
+
+// Values returns all known values for VerificationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationStatus) Values() []VerificationStatus {
+	return []VerificationStatus{
+		"VERIFIED",
+		"VERIFICATION_FAILED",
+		"NOT_VERIFIED",
 	}
 }

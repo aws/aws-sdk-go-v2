@@ -8744,6 +8744,12 @@
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
+                    }
                 }
             },
             "traits": {
@@ -8853,6 +8859,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The provider of the subscription target.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
                     }
                 }
             },
@@ -15197,12 +15209,25 @@
                 "value": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A search filter value in Amazon DataZone.</p>",
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>A search filter string value in Amazon DataZone.</p>",
                         "smithy.api#length": {
-                            "min": 1,
                             "max": 128
-                        },
-                        "smithy.api#required": {}
+                        }
+                    }
+                },
+                "intValue": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A search filter integer value in Amazon DataZone.</p>"
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.datazone#FilterOperator",
+                    "traits": {
+                        "smithy.api#default": "EQ",
+                        "smithy.api#documentation": "<p>Specifies the search filter operator.</p>"
                     }
                 }
             },
@@ -15318,6 +15343,47 @@
                 },
                 "smithy.api#pattern": "^[\\w -]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#FilterOperator": {
+            "type": "enum",
+            "members": {
+                "EQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
+                    }
+                },
+                "LE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LE"
+                    }
+                },
+                "LT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LT"
+                    }
+                },
+                "GE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GE"
+                    }
+                },
+                "GT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GT"
+                    }
+                },
+                "TEXT_SEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT_SEARCH"
+                    }
+                }
             }
         },
         "com.amazonaws.datazone#FilterStatus": {
@@ -20690,6 +20756,12 @@
                         "smithy.api#documentation": "<p>The provider of the subscription target.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
+                    }
                 }
             },
             "traits": {
@@ -22245,6 +22317,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The hyper pod properties of a Amazon Web Services Glue properties patch.</p>"
+            }
+        },
+        "com.amazonaws.datazone#IamPrincipalArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|user)(/[\\w+=,.@-]*)*/[\\w+=,.@-]+$"
             }
         },
         "com.amazonaws.datazone#IamPropertiesInput": {
@@ -26364,6 +26446,13 @@
                         "smithy.api#httpQuery": "owningProjectId"
                     }
                 },
+                "owningIamPrincipalArn": {
+                    "target": "com.amazonaws.datazone#IamPrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the owning IAM principal.</p>",
+                        "smithy.api#httpQuery": "owningIamPrincipalArn"
+                    }
+                },
                 "owningUserId": {
                     "target": "com.amazonaws.datazone#UserProfileId",
                     "traits": {
@@ -26507,6 +26596,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the project for the subscription requests.</p>",
                         "smithy.api#httpQuery": "owningProjectId"
+                    }
+                },
+                "owningIamPrincipalArn": {
+                    "target": "com.amazonaws.datazone#IamPrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the owning IAM principal.</p>",
+                        "smithy.api#httpQuery": "owningIamPrincipalArn"
                     }
                 },
                 "approverProjectId": {
@@ -26780,6 +26876,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the owning project.</p>",
                         "smithy.api#httpQuery": "owningProjectId"
+                    }
+                },
+                "owningIamPrincipalArn": {
+                    "target": "com.amazonaws.datazone#IamPrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the owning IAM principal.</p>",
+                        "smithy.api#httpQuery": "owningIamPrincipalArn"
                     }
                 },
                 "owningUserId": {
@@ -32036,7 +32139,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for assets in Amazon DataZone.</p> <p>Search in Amazon DataZone is a powerful capability that enables users to discover and explore data assets, glossary terms, and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. Search can be scoped to specific types of resources (like assets, glossary terms, or data products) and can be filtered using various criteria such as creation date, owner, or status. The search functionality is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>Many search commands in Amazon DataZone are paginated, including <code>search</code> and <code>search-types</code>. When the result set is large, Amazon DataZone returns a <code>nextToken</code> in the response. This token can be used to retrieve the next page of results. </p> <p>Prerequisites:</p> <ul> <li> <p>The --domain-identifier must refer to an existing Amazon DataZone domain. </p> </li> <li> <p>--search-scope must be one of: ASSET, GLOSSARY_TERM, DATA_PRODUCT, or GLOSSARY.</p> </li> <li> <p>The user must have search permissions in the specified domain.</p> </li> <li> <p>If using --filters, ensure that the JSON is well-formed and that each filter includes valid attribute and value keys. </p> </li> <li> <p>For paginated results, be prepared to use --next-token to fetch additional pages.</p> </li> </ul>",
+                "smithy.api#documentation": "<p>Searches for assets in Amazon DataZone.</p> <p>Search in Amazon DataZone is a powerful capability that enables users to discover and explore data assets, glossary terms, and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. Search can be scoped to specific types of resources (like assets, glossary terms, or data products) and can be filtered using various criteria such as creation date, owner, or status. The search functionality is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>Many search commands in Amazon DataZone are paginated, including <code>search</code> and <code>search-types</code>. When the result set is large, Amazon DataZone returns a <code>nextToken</code> in the response. This token can be used to retrieve the next page of results. </p> <p>Prerequisites:</p> <ul> <li> <p>The --domain-identifier must refer to an existing Amazon DataZone domain. </p> </li> <li> <p>--search-scope must be one of: ASSET, GLOSSARY_TERM, DATA_PRODUCT, or GLOSSARY.</p> </li> <li> <p>The user must have search permissions in the specified domain.</p> </li> <li> <p>If using --filters, ensure that the JSON is well-formed and that each filter includes valid attribute and value keys. </p> </li> <li> <p>For paginated results, be prepared to use --next-token to fetch additional pages.</p> </li> </ul> <p>To run a standard free-text search, the <code>searchText</code> parameter must be supplied. By default, all searchable fields are indexed for semantic search and will return semantic matches for SearchListings queries. To prevent semantic search indexing for a custom form attribute, see the <a href=\"https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html\">CreateFormType API documentation</a>. To run a lexical search query, enclose the query with double quotes (\"\"). This will disable semantic search even for fields that have semantic search enabled and will only return results that contain the keywords wrapped by double quotes (order of tokens in the query is not enforced). Free-text search is supported for all attributes annotated with @amazon.datazone#searchable.</p> <p>To run a filtered search, provide filter clause using the <code>filters</code> parameter. To filter on glossary terms, use the special attribute <code>__DataZoneGlossaryTerms</code>. To filter on an indexed numeric attribute (i.e., a numeric attribute annotated with <code>@amazon.datazone#sortable</code>), provide a filter using the <code>intValue</code> parameter. The filters parameter can also be used to run more advanced free-text searches that target specific attributes (attributes must be annotated with <code>@amazon.datazone#searchable</code> for free-text search). Create/update timestamp filtering is supported using the special <code>creationTime</code>/<code>lastUpdatedTime</code> attributes. Filter types can be mixed and matched to power complex queries.</p> <p> To find out whether an attribute has been annotated and indexed for a given search type, use the GetFormType API to retrieve the form containing the attribute.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -32310,7 +32413,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches listings in Amazon DataZone.</p> <p>SearchListings is a powerful capability that enables users to discover and explore published assets and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. SearchListings also supports filtering using various criteria such as creation date, owner, or status. This API is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>SearchListings returns results in a paginated format. When the result set is large, the response will include a nextToken, which can be used to retrieve the next page of results.</p> <p>The SearchListings API gives users flexibility in specifying what kind of search is run.</p> <p>To run a free-text search, the <code>searchText</code> parameter must be supplied. By default, all searchable fields are indexed for semantic search and will return semantic matches for SearchListings queries. To prevent semantic search indexing for a custom form attribute, see the <a href=\"https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html\">CreateFormType API documentation</a>. To run a lexical search query, enclose the query with double quotes (\"\"). This will disable semantic search even for fields that have semantic search enabled and will only return results that contain the keywords wrapped by double quotes (order of tokens in the query is not enforced). Free-text search is supported for all attributes annotated with @amazon.datazone#searchable.</p> <p>To run a filtered search, provide filter clause using the filters parameter. To filter on glossary terms, use the special attribute <code>__DataZoneGlossaryTerms</code>.</p> <p> To find out whether an attribute has been annotated and indexed for a given search type, use the GetFormType API to retrieve the form containing the attribute.</p>",
+                "smithy.api#documentation": "<p>Searches listings in Amazon DataZone.</p> <p>SearchListings is a powerful capability that enables users to discover and explore published assets and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. SearchListings also supports filtering using various criteria such as creation date, owner, or status. This API is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>SearchListings returns results in a paginated format. When the result set is large, the response will include a nextToken, which can be used to retrieve the next page of results.</p> <p>The SearchListings API gives users flexibility in specifying what kind of search is run.</p> <p>To run a standard free-text search, the <code>searchText</code> parameter must be supplied. By default, all searchable fields are indexed for semantic search and will return semantic matches for SearchListings queries. To prevent semantic search indexing for a custom form attribute, see the <a href=\"https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html\">CreateFormType API documentation</a>. To run a lexical search query, enclose the query with double quotes (\"\"). This will disable semantic search even for fields that have semantic search enabled and will only return results that contain the keywords wrapped by double quotes (order of tokens in the query is not enforced). Free-text search is supported for all attributes annotated with @amazon.datazone#searchable.</p> <p>To run a filtered search, provide filter clause using the <code>filters</code> parameter. To filter on glossary terms, use the special attribute <code>__DataZoneGlossaryTerms</code>. To filter on an indexed numeric attribute (i.e., a numeric attribute annotated with <code>@amazon.datazone#sortable</code>), provide a filter using the <code>intValue</code> parameter. The filters parameter can also be used to run more advanced free-text searches that target specific attributes (attributes must be annotated with <code>@amazon.datazone#searchable</code> for free-text search). Create/update timestamp filtering is supported using the special <code>creationTime</code>/<code>lastUpdatedTime</code> attributes. Filter types can be mixed and matched to power complex queries.</p> <p> To find out whether an attribute has been annotated and indexed for a given search type, use the GetFormType API to retrieve the form containing the attribute.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -34002,6 +34105,34 @@
                 "smithy.api#documentation": "<p>The details of the subscribed group.</p>"
             }
         },
+        "com.amazonaws.datazone#SubscribedIamPrincipal": {
+            "type": "structure",
+            "members": {
+                "principalArn": {
+                    "target": "com.amazonaws.datazone#IamPrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the subscribed IAM principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The IAM principal that subscribes to the asset.</p>"
+            }
+        },
+        "com.amazonaws.datazone#SubscribedIamPrincipalInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.datazone#IamPrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the subscribed IAM principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the subscribed IAM principal.</p>"
+            }
+        },
         "com.amazonaws.datazone#SubscribedListing": {
             "type": "structure",
             "members": {
@@ -34130,6 +34261,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The subscribed group.</p>"
                     }
+                },
+                "iam": {
+                    "target": "com.amazonaws.datazone#SubscribedIamPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subscribed IAM principal.</p>"
+                    }
                 }
             },
             "traits": {
@@ -34155,6 +34292,12 @@
                     "target": "com.amazonaws.datazone#SubscribedGroupInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The subscribed group.</p>"
+                    }
+                },
+                "iam": {
+                    "target": "com.amazonaws.datazone#SubscribedIamPrincipalInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subscribed IAM principal.</p>"
                     }
                 }
             },
@@ -34290,6 +34433,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The subscribed user.</p>"
+            }
+        },
+        "com.amazonaws.datazone#SubscriptionGrantCreationMode": {
+            "type": "enum",
+            "members": {
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                }
             }
         },
         "com.amazonaws.datazone#SubscriptionGrantId": {
@@ -34897,6 +35057,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The provider of the subscription target.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
                     }
                 }
             },
@@ -39272,6 +39438,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>"
                     }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
+                    }
                 }
             },
             "traits": {
@@ -39381,6 +39553,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "subscriptionGrantCreationMode": {
+                    "target": "com.amazonaws.datazone#SubscriptionGrantCreationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>"
                     }
                 }
             },

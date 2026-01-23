@@ -11060,6 +11060,11 @@ func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, va
 		objectKey.Boolean(*v.EnhancedVpcRouting)
 	}
 
+	if v.ExtraComputeForAutomaticOptimization != nil {
+		objectKey := object.Key("ExtraComputeForAutomaticOptimization")
+		objectKey.Boolean(*v.ExtraComputeForAutomaticOptimization)
+	}
+
 	if v.HsmClientCertificateIdentifier != nil {
 		objectKey := object.Key("HsmClientCertificateIdentifier")
 		objectKey.String(*v.HsmClientCertificateIdentifier)
@@ -13748,6 +13753,11 @@ func awsAwsquery_serializeOpDocumentModifyClusterInput(v *ModifyClusterInput, va
 	if v.EnhancedVpcRouting != nil {
 		objectKey := object.Key("EnhancedVpcRouting")
 		objectKey.Boolean(*v.EnhancedVpcRouting)
+	}
+
+	if v.ExtraComputeForAutomaticOptimization != nil {
+		objectKey := object.Key("ExtraComputeForAutomaticOptimization")
+		objectKey.Boolean(*v.ExtraComputeForAutomaticOptimization)
 	}
 
 	if v.HsmClientCertificateIdentifier != nil {

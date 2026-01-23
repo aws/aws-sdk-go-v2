@@ -21,6 +21,11 @@ import (
 // completes, you can configure VCF in the vSphere user interface according to your
 // needs.
 //
+// When creating a new environment, the default ESX version for the selected VCF
+// version will be used, you cannot choose a specific ESX version in
+// CreateEnvironment action. When a host has been added with a specific ESX
+// version, it can only be upgraded using vCenter Lifecycle Manager.
+//
 // You cannot use the dedicatedHostId and placementGroupId parameters together in
 // the same CreateEnvironment action. This results in a ValidationException
 // response.
@@ -49,7 +54,7 @@ type CreateEnvironmentInput struct {
 	// This member is required.
 	ConnectivityInfo *types.ConnectivityInfo
 
-	// The ESXi hosts to add to the environment. Amazon EVS requires that you provide
+	// The ESX hosts to add to the environment. Amazon EVS requires that you provide
 	// details for a minimum of 4 hosts during environment creation.
 	//
 	// For each host, you must provide the desired hostname, EC2 SSH keypair name, and
@@ -114,8 +119,7 @@ type CreateEnvironmentInput struct {
 	// This member is required.
 	VcfHostnames *types.VcfHostnames
 
-	//  The VCF version to use for the environment. Amazon EVS only supports VCF
-	// version 5.2.1 at this time.
+	//  The VCF version to use for the environment.
 	//
 	// This member is required.
 	VcfVersion types.VcfVersion
@@ -137,7 +141,7 @@ type CreateEnvironmentInput struct {
 	// associations.
 	//
 	// Ensure that you specify a VPC that is adequately sized to accommodate the
-	// {evws} subnets.
+	// Amazon EVS subnets.
 	//
 	// This member is required.
 	VpcId *string

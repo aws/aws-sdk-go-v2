@@ -1,3 +1,11 @@
+# v1.25.0 (2026-01-20)
+
+* **Feature**: Adds support for managing table pre-warming in Amazon Keyspaces (for Apache Cassandra)
+
+# v1.24.10 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.9 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -226,6 +226,10 @@ type MetaLibraryTemplateDefinition struct {
 	// The body text of the template.
 	TemplateBody *string
 
+	// Example parameter values for the template body, used to demonstrate how dynamic
+	// content appears in the template.
+	TemplateBodyExampleParams []string
+
 	// The buttons included in the template.
 	TemplateButtons []LibraryTemplateButtonList
 
@@ -264,7 +268,14 @@ type S3File struct {
 	// This member is required.
 	BucketName *string
 
-	// The object key of the media file.
+	// The S3 key prefix that defines the storage location of your media files. The
+	// prefix works like a folder path in S3, and is combined with the WhatsApp mediaId
+	// to create the final file path.
+	//
+	// For example, if a media file's WhatsApp mediaId is 123.ogg , and the key is
+	// audio/example.ogg , the final file path is audio/example.ogg123.ogg .
+	//
+	// For the same mediaId, a key of audio/ results in the file path audio/123.ogg .
 	//
 	// This member is required.
 	Key *string
@@ -340,10 +351,10 @@ type WabaPhoneNumberSetupFinalization struct {
 
 	// The unique identifier of the originating phone number associated with the
 	// media. Phone number identifiers are formatted as
-	// phone-number-id-01234567890123456789012345678901 . Use [GetLinkedWhatsAppBusinessAccount] to find a phone
-	// number's id.
+	// phone-number-id-01234567890123456789012345678901 . Use the [GetLinkedWhatsAppBusinessAccount] API action to find
+	// a phone number's id.
 	//
-	// [GetLinkedWhatsAppBusinessAccount]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+	// [GetLinkedWhatsAppBusinessAccount]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
 	//
 	// This member is required.
 	Id *string

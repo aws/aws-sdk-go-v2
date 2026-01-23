@@ -95,7 +95,7 @@ type StartInstanceRefreshInput struct {
 	//   - Bake time
 	Preferences *types.RefreshPreferences
 
-	// The strategy to use for the instance refresh. The only valid value is Rolling .
+	// The strategy to use for the instance refresh. The default value is Rolling .
 	Strategy types.RefreshStrategy
 
 	noSmithyDocumentSerde

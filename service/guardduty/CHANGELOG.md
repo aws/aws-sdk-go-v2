@@ -1,3 +1,15 @@
+# v1.73.0 (2026-01-22)
+
+* **Feature**: Adding new enum value for ScanStatusReason
+
+# v1.72.2 (2026-01-21)
+
+* No change notes available for this release.
+
+# v1.72.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.72.0 (2025-12-22)
 
 * **Feature**: Make accountIds a required field in GetRemainingFreeTrialDays API to reflect service behavior.

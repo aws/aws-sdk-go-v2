@@ -2701,6 +2701,93 @@ func awsRestjson1_deserializeDocumentAppliedGuardrailDetails(v **types.AppliedGu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCacheDetail(v **types.CacheDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CacheDetail
+	if *v == nil {
+		sv = &types.CacheDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inputTokens":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InputTokens = ptr.Int32(int32(i64))
+			}
+
+		case "ttl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CacheTTL to be of type string, got %T instead", value)
+				}
+				sv.Ttl = types.CacheTTL(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCacheDetailsList(v *[]types.CacheDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CacheDetail
+	if *v == nil {
+		cv = []types.CacheDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CacheDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCacheDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCitationLocation(v *types.CitationLocation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6785,6 +6872,11 @@ func awsRestjson1_deserializeDocumentTokenUsage(v **types.TokenUsage, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "cacheDetails":
+			if err := awsRestjson1_deserializeDocumentCacheDetailsList(&sv.CacheDetails, value); err != nil {
+				return err
+			}
+
 		case "cacheReadInputTokens":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8006,6 +8098,15 @@ func awsRestjson1_deserializeDocumentCachePointBlock(v **types.CachePointBlock, 
 
 	for key, value := range shape {
 		switch key {
+		case "ttl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CacheTTL to be of type string, got %T instead", value)
+				}
+				sv.Ttl = types.CacheTTL(jtv)
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)

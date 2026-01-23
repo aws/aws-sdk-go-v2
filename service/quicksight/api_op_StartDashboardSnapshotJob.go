@@ -15,11 +15,14 @@ import (
 // You can request one or several of the following format configurations in each
 // API call.
 //
-//   - 1 Paginated PDF
+//   - 1 PDF
 //
 //   - 1 Excel workbook that includes up to 5 table or pivot table visuals
 //
 //   - 5 CSVs from table or pivot table visuals
+//
+// Exporting CSV, Excel, or Pixel Perfect PDF reports requires Pixel Perfect
+// Report Add-on.
 //
 // The status of a submitted job can be polled with the
 // DescribeDashboardSnapshotJob API. When you call the DescribeDashboardSnapshotJob

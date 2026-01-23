@@ -4810,26 +4810,6 @@ func (m *validateOpSearch) HandleInitialize(ctx context.Context, in middleware.I
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpSearchTrainingPlanOfferings struct {
-}
-
-func (*validateOpSearchTrainingPlanOfferings) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpSearchTrainingPlanOfferings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*SearchTrainingPlanOfferingsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpSearchTrainingPlanOfferingsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpSendPipelineExecutionStepFailure struct {
 }
 
@@ -7188,10 +7168,6 @@ func addOpRetryPipelineExecutionValidationMiddleware(stack *middleware.Stack) er
 
 func addOpSearchValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearch{}, middleware.After)
-}
-
-func addOpSearchTrainingPlanOfferingsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpSearchTrainingPlanOfferings{}, middleware.After)
 }
 
 func addOpSendPipelineExecutionStepFailureValidationMiddleware(stack *middleware.Stack) error {
@@ -20120,24 +20096,6 @@ func validateOpSearchInput(v *SearchInput) error {
 		if err := validateSearchExpression(v.SearchExpression); err != nil {
 			invalidParams.AddNested("SearchExpression", err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpSearchTrainingPlanOfferingsInput(v *SearchTrainingPlanOfferingsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "SearchTrainingPlanOfferingsInput"}
-	if v.DurationHours == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DurationHours"))
-	}
-	if v.TargetResources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetResources"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

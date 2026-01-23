@@ -1,3 +1,11 @@
+# v1.43.0 (2026-01-22)
+
+* **Feature**: Add Budget FilterExpression and Metrics fields to DescribeBudgetPerformanceHistory to support more granular filtering options.
+
+# v1.42.4 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.3 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

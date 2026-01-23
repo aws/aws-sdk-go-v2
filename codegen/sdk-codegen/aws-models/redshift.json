@@ -1600,6 +1600,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Glue data catalog associated with the cluster enabled with Amazon Redshift federated permissions.</p>"
                     }
+                },
+                "ExtraComputeForAutomaticOptimization": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean value that, if <code>true</code>, indicates that the cluster allocates additional compute resources to run automatic optimization operations.</p>\n         <p>Default: false</p>"
+                    }
                 }
             },
             "traits": {
@@ -3117,6 +3123,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Glue data catalog that will be associated with the cluster enabled with Amazon Redshift federated permissions.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n               <p>Can only contain lowercase letters (a-z), numbers (0-9), underscores (_), and hyphens (-).</p>\n            </li>\n         </ul>\n         <p>Pattern: <code>^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$</code>\n         </p>\n         <p>Example: <code>my-catalog_01</code>\n         </p>"
                     }
+                },
+                "ExtraComputeForAutomaticOptimization": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, allocates additional compute resources for running automatic optimization operations.</p>\n         <p>Default: false</p>"
+                    }
                 }
             },
             "traits": {
@@ -4480,7 +4492,7 @@
                     "target": "com.amazonaws.redshift#UsageLimitLimitType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The type of limit. Depending on the feature type, this can be based on a time duration or data size.\n            If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>.\n            If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>.\n            If <code>FeatureType</code> is <code>cross-region-datasharing</code>, then <code>LimitType</code> must be <code>data-scanned</code>.\n           </p>",
+                        "smithy.api#documentation": "<p>The type of limit. Depending on the feature type, this can be based on a time duration or data size.\n            If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>.\n            If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>.\n            If <code>FeatureType</code> is <code>cross-region-datasharing</code>, then <code>LimitType</code> must be <code>data-scanned</code>.\n            If <code>FeatureType</code> is <code>extra-compute-for-automatic-optimization</code>, then <code>LimitType</code> must be <code>time</code>.\n           </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12460,6 +12472,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If true and the cluster is currently only deployed in a single Availability Zone, the cluster will be modified to be deployed in two Availability Zones.</p>"
                     }
+                },
+                "ExtraComputeForAutomaticOptimization": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, allocates additional compute resources for running automatic optimization operations.</p>\n         <p>Default: false</p>"
+                    }
                 }
             },
             "traits": {
@@ -20192,6 +20210,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "cross-region-datasharing"
+                    }
+                },
+                "EXTRA_COMPUTE_FOR_AUTOMATIC_OPTIMIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "extra-compute-for-automatic-optimization"
                     }
                 }
             }

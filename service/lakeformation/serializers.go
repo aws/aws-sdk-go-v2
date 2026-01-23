@@ -2851,6 +2851,106 @@ func awsRestjson1_serializeOpDocumentGetTableObjectsInput(v *GetTableObjectsInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpGetTemporaryDataLocationCredentials struct {
+}
+
+func (*awsRestjson1_serializeOpGetTemporaryDataLocationCredentials) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetTemporaryDataLocationCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTemporaryDataLocationCredentialsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetTemporaryDataLocationCredentials")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetTemporaryDataLocationCredentialsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetTemporaryDataLocationCredentialsInput(v *GetTemporaryDataLocationCredentialsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetTemporaryDataLocationCredentialsInput(v *GetTemporaryDataLocationCredentialsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuditContext != nil {
+		ok := object.Key("AuditContext")
+		if err := awsRestjson1_serializeDocumentAuditContext(v.AuditContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.CredentialsScope) > 0 {
+		ok := object.Key("CredentialsScope")
+		ok.String(string(v.CredentialsScope))
+	}
+
+	if v.DataLocations != nil {
+		ok := object.Key("DataLocations")
+		if err := awsRestjson1_serializeDocumentPathStringList(v.DataLocations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DurationSeconds != nil {
+		ok := object.Key("DurationSeconds")
+		ok.Integer(*v.DurationSeconds)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetTemporaryGluePartitionCredentials struct {
 }
 
@@ -4333,6 +4433,11 @@ func awsRestjson1_serializeOpDocumentRegisterResourceInput(v *RegisterResourceIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.ExpectedResourceOwnerAccount != nil {
+		ok := object.Key("ExpectedResourceOwnerAccount")
+		ok.String(*v.ExpectedResourceOwnerAccount)
+	}
+
 	if v.HybridAccessEnabled != nil {
 		ok := object.Key("HybridAccessEnabled")
 		ok.Boolean(*v.HybridAccessEnabled)
@@ -5403,6 +5508,11 @@ func awsRestjson1_serializeOpDocumentUpdateResourceInput(v *UpdateResourceInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.ExpectedResourceOwnerAccount != nil {
+		ok := object.Key("ExpectedResourceOwnerAccount")
+		ok.String(*v.ExpectedResourceOwnerAccount)
+	}
+
 	if v.HybridAccessEnabled != nil {
 		ok := object.Key("HybridAccessEnabled")
 		ok.Boolean(*v.HybridAccessEnabled)
@@ -6263,6 +6373,17 @@ func awsRestjson1_serializeDocumentPartitionValueList(v *types.PartitionValueLis
 }
 
 func awsRestjson1_serializeDocumentPartitionValuesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPathStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

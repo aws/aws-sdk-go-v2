@@ -1,3 +1,15 @@
+# v1.41.0 (2026-01-15)
+
+* **Feature**: This release adds support for parameters in PySpark analysis templates.
+
+# v1.40.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.0 (2026-01-02)
+
+* **Feature**: Added support for publishing detailed metrics to CloudWatch for operational monitoring of collaborations, including query performance and resource utilization.
+
 # v1.39.0 (2025-12-18)
 
 * **Feature**: Adding support for collaboration change requests requiring an approval workflow. Adding support for change requests that grant or revoke results receiver ability and modifying auto approved change types in an existing collaboration.

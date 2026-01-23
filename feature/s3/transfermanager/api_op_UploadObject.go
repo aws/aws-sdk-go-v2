@@ -786,8 +786,9 @@ type uploader struct {
 	in      *UploadObjectInput
 
 	// PartPool allows for the re-usage of streaming payload part buffers between upload calls
-	partPool   bytesBufferPool
-	objectSize int64
+	partPool     bytesBufferPool
+	objectSize   int64
+	multipleRead bool
 
 	progressEmitter *singleObjectProgressEmitter
 }
@@ -796,7 +797,6 @@ func (u *uploader) upload(ctx context.Context) (*UploadObjectOutput, error) {
 	if err := u.init(); err != nil {
 		return nil, fmt.Errorf("unable to initialize upload: %w", err)
 	}
-	defer u.partPool.Close()
 
 	clientOptions := []func(o *s3.Options){
 		func(o *s3.Options) {
@@ -815,6 +815,8 @@ func (u *uploader) upload(ctx context.Context) (*UploadObjectOutput, error) {
 		return nil, err
 	}
 
+	u.partPool = newDefaultSlicePool(u.options.PartSizeBytes, u.options.Concurrency+1) // only create the caching pool for multipart upload
+	defer u.partPool.Close()
 	mu := multiUploader{
 		uploader: u,
 	}
@@ -828,7 +830,6 @@ func (u *uploader) init() error {
 	if err := u.initSize(); err != nil {
 		return err
 	}
-	u.partPool = newDefaultSlicePool(u.options.PartSizeBytes, u.options.Concurrency+1)
 
 	return nil
 }
@@ -886,6 +887,20 @@ func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanU
 
 // nextReader reads the next chunk of data from input Body
 func (u *uploader) nextReader(ctx context.Context) (io.Reader, int, func(), error) {
+	if !u.multipleRead {
+		u.multipleRead = true
+		// read first part up to a maximum of PartSize to avoid allocating 8MB buffer out of the gate
+		r := io.LimitReader(u.in.Body, u.options.PartSizeBytes)
+		firstPart, err := io.ReadAll(r)
+		if err != nil {
+			return nil, 0, func() {}, err
+		}
+		n := len(firstPart)
+		if int64(n) < u.options.PartSizeBytes {
+			return bytes.NewReader(firstPart), n, func() {}, io.EOF
+		}
+		return bytes.NewReader(firstPart), n, func() {}, nil
+	}
 	part, err := u.partPool.Get(ctx)
 	if err != nil {
 		return nil, 0, func() {}, err

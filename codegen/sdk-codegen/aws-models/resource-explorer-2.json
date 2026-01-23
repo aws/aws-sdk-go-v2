@@ -3568,6 +3568,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "ServiceViewName": {
+                    "target": "com.amazonaws.resourceexplorer2#ServiceViewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service view.</p>"
+                    }
+                },
                 "Filters": {
                     "target": "com.amazonaws.resourceexplorer2#SearchFilter"
                 },
@@ -3598,6 +3604,12 @@
             "type": "list",
             "member": {
                 "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ServiceViewName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-]{1,64}$"
             }
         },
         "com.amazonaws.resourceexplorer2#StreamingAccessDetails": {
@@ -4038,6 +4050,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the view.</p>"
+                    }
+                },
+                "ViewName": {
+                    "target": "com.amazonaws.resourceexplorer2#ViewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the view.</p>"
                     }
                 },
                 "Owner": {

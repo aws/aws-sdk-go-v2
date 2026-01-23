@@ -1,3 +1,11 @@
+# v1.48.0 (2026-01-20)
+
+* **Feature**: Added support for extended prompt caching with one hour TTL.
+
+# v1.47.2 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.1 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

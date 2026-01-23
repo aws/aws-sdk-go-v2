@@ -1904,6 +1904,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of amounts of cost or usage that you created budgets for, which are compared to\n\t\t\tyour actual costs or usage.</p>"
                     }
+                },
+                "FilterExpression": {
+                    "target": "com.amazonaws.budgets#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filtering dimensions for the budget and their corresponding values.</p>"
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.budgets#Metrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition for how the budget data is aggregated.</p>"
+                    }
                 }
             },
             "traits": {

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API operation is superseded by [https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html], which can attach multiple traffic sources
+// This API operation is superseded by [AttachTrafficSources], which can attach multiple traffic sources
 // types. We recommend using AttachTrafficSources to simplify how you manage
 // traffic sources. However, we continue to support AttachLoadBalancers . You can
 // use both the original AttachLoadBalancers API operation and AttachTrafficSources
@@ -30,7 +30,7 @@ import (
 //
 // [DetachLoadBalancers]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachLoadBalancers.html
 // [DescribeLoadBalancers]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancers.html
-// [https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html
+// [AttachTrafficSources]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html
 // [Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
 func (c *Client) AttachLoadBalancers(ctx context.Context, params *AttachLoadBalancersInput, optFns ...func(*Options)) (*AttachLoadBalancersOutput, error) {
 	if params == nil {

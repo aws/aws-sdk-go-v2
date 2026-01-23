@@ -158,6 +158,18 @@ func TestCheckSnapshot_AssociateFlow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateHoursOfOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateHoursOfOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateHoursOfOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateInstanceStorageConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateInstanceStorageConfig(context.Background(), nil, func(o *Options) {
@@ -1694,6 +1706,18 @@ func TestCheckSnapshot_DisassociateFlow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateHoursOfOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateHoursOfOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateHoursOfOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateInstanceStorageConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateInstanceStorageConfig(context.Background(), nil, func(o *Options) {
@@ -2107,6 +2131,18 @@ func TestCheckSnapshot_ListBots(t *testing.T) {
 	_, err := svc.ListBots(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListBots")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListChildHoursOfOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChildHoursOfOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListChildHoursOfOperations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4249,6 +4285,18 @@ func TestUpdateSnapshot_AssociateFlow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateHoursOfOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateHoursOfOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateHoursOfOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateInstanceStorageConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateInstanceStorageConfig(context.Background(), nil, func(o *Options) {
@@ -5785,6 +5833,18 @@ func TestUpdateSnapshot_DisassociateFlow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateHoursOfOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateHoursOfOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateHoursOfOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateInstanceStorageConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateInstanceStorageConfig(context.Background(), nil, func(o *Options) {
@@ -6198,6 +6258,18 @@ func TestUpdateSnapshot_ListBots(t *testing.T) {
 	_, err := svc.ListBots(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBots")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListChildHoursOfOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChildHoursOfOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListChildHoursOfOperations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

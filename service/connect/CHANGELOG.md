@@ -1,3 +1,15 @@
+# v1.156.0 (2026-01-16)
+
+* **Feature**: Adds support to allow customers to create form with Dispute configuration
+
+# v1.155.0 (2026-01-14)
+
+* **Feature**: Amazon Connect makes it easier to manage contact center operating hours by enabling automated scheduling for recurring events like holidays and maintenance windows. Set up recurring patterns (weekly, monthly, etc.) or link to another hours of operation to inherit overrides.
+
+# v1.154.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.154.0 (2025-12-30)
 
 * **Feature**: Adds support for searching global contacts using the ActiveRegions filter, and pagination support for ListSecurityProfileFlowModules and ListEntitySecurityProfiles.

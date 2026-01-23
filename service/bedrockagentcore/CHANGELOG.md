@@ -1,3 +1,11 @@
+# v1.11.0 (2026-01-21)
+
+* **Feature**: Supports custom browser extensions for AgentCore Browser and increased message payloads up to 100KB per message in an Event for AgentCore Memory
+
+# v1.10.2 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.1 (2025-12-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

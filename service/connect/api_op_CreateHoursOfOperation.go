@@ -56,6 +56,14 @@ type CreateHoursOfOperationInput struct {
 	// The description of the hours of operation.
 	Description *string
 
+	// Configuration for parent hours of operations. Eg: ResourceArn.
+	//
+	// For more information about parent hours of operations, see [Link overrides from different hours of operation] in the
+	// Administrator Guide.
+	//
+	// [Link overrides from different hours of operation]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+	ParentHoursOfOperationConfigs []types.ParentHoursOfOperationConfig
+
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string

@@ -85,6 +85,25 @@ func (CachePointType) Values() []CachePointType {
 	}
 }
 
+type CacheTTL string
+
+// Enum values for CacheTTL
+const (
+	CacheTTLFiveMinutes CacheTTL = "5m"
+	CacheTTLOneHour     CacheTTL = "1h"
+)
+
+// Values returns all known values for CacheTTL. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CacheTTL) Values() []CacheTTL {
+	return []CacheTTL{
+		"5m",
+		"1h",
+	}
+}
+
 type ConversationRole string
 
 // Enum values for ConversationRole

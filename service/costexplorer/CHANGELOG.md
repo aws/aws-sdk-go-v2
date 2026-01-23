@@ -1,3 +1,15 @@
+# v1.63.2 (2026-01-14)
+
+* **Documentation**: Cost Categories added support to BillingView data filter expressions through the new costCategories parameter, enabling users to filter billing views by AWS Cost Categories for more granular cost management and allocation.
+
+# v1.63.1 (2026-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.63.0 (2026-01-06)
+
+* **Feature**: This release updates existing reservation recommendations API to support deployment model.
+
 # v1.62.0 (2025-12-08)
 
 * **Feature**: Add support for Cost Category resource associations including filtering by resource type on ListCostCategoryDefinitions and new ListCostCategoryResourceAssociations API.

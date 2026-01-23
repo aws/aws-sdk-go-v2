@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes the specified WorkSpace
+//
+// Usage of this API will result in deletion of the resource in question.
 func (c *Client) DeleteWorkspaceInstance(ctx context.Context, params *DeleteWorkspaceInstanceInput, optFns ...func(*Options)) (*DeleteWorkspaceInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteWorkspaceInstanceInput{}

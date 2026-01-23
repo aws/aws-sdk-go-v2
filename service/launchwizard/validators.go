@@ -5,6 +5,7 @@ package launchwizard
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/launchwizard/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -69,6 +70,26 @@ func (m *validateOpGetDeployment) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDeploymentPatternVersion struct {
+}
+
+func (*validateOpGetDeploymentPatternVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeploymentPatternVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeploymentPatternVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeploymentPatternVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWorkloadDeploymentPattern struct {
 }
 
@@ -124,6 +145,26 @@ func (m *validateOpListDeploymentEvents) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDeploymentEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDeploymentPatternVersions struct {
+}
+
+func (*validateOpListDeploymentPatternVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDeploymentPatternVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDeploymentPatternVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDeploymentPatternVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -209,6 +250,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDeployment struct {
+}
+
+func (*validateOpUpdateDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDeployment{}, middleware.After)
 }
@@ -221,6 +282,10 @@ func addOpGetDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDeployment{}, middleware.After)
 }
 
+func addOpGetDeploymentPatternVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeploymentPatternVersion{}, middleware.After)
+}
+
 func addOpGetWorkloadDeploymentPatternValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkloadDeploymentPattern{}, middleware.After)
 }
@@ -231,6 +296,10 @@ func addOpGetWorkloadValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListDeploymentEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDeploymentEvents{}, middleware.After)
+}
+
+func addOpListDeploymentPatternVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDeploymentPatternVersions{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -247,6 +316,45 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDeployment{}, middleware.After)
+}
+
+func validateDeploymentPatternVersionFilter(v *types.DeploymentPatternVersionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentPatternVersionFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterList(v []types.DeploymentPatternVersionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterList"}
+	for i := range v {
+		if err := validateDeploymentPatternVersionFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCreateDeploymentInput(v *CreateDeploymentInput) error {
@@ -303,6 +411,27 @@ func validateOpGetDeploymentInput(v *GetDeploymentInput) error {
 	}
 }
 
+func validateOpGetDeploymentPatternVersionInput(v *GetDeploymentPatternVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentPatternVersionInput"}
+	if v.WorkloadName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadName"))
+	}
+	if v.DeploymentPatternName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentPatternName"))
+	}
+	if v.DeploymentPatternVersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentPatternVersionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetWorkloadDeploymentPatternInput(v *GetWorkloadDeploymentPatternInput) error {
 	if v == nil {
 		return nil
@@ -343,6 +472,29 @@ func validateOpListDeploymentEventsInput(v *ListDeploymentEventsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListDeploymentEventsInput"}
 	if v.DeploymentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDeploymentPatternVersionsInput(v *ListDeploymentPatternVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDeploymentPatternVersionsInput"}
+	if v.WorkloadName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadName"))
+	}
+	if v.DeploymentPatternName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentPatternName"))
+	}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -409,6 +561,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDeploymentInput(v *UpdateDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeploymentInput"}
+	if v.DeploymentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
+	}
+	if v.Specifications == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Specifications"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
