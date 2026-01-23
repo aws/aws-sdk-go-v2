@@ -36,7 +36,7 @@ type Options struct {
 	PartBodyMaxRetries int
 
 	// Max size for the GetObject memory buffer. The reader returned from GetObject can buffer up to
-	// <etObjectBufferSize> bytes of data at any time and only reads more data when user completely consumes
+	// <GetObjectBufferSize> bytes of data at any time and only reads more data when user completely consumes
 	// current data buffered. This mechanism avoids unbounded memory usage when downloading large object via GetObject
 	GetObjectBufferSize int64
 

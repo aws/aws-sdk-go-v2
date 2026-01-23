@@ -1,9 +1,5 @@
 package transfermanager
 
-import (
-	"github.com/aws/aws-sdk-go-v2/aws"
-)
-
 const userAgentKey = "s3-transfer"
 
 // defaultMaxUploadParts is the maximum allowed number of parts in a multi-part upload
@@ -52,9 +48,4 @@ func New(s3Client S3APIClient, optFns ...func(*Options)) *Client {
 	return &Client{
 		options: opts,
 	}
-}
-
-// NewFromConfig returns a new Client from the provided s3 config
-func NewFromConfig(s3Client S3APIClient, cfg aws.Config, optFns ...func(*Options)) *Client {
-	return New(s3Client, optFns...)
 }
