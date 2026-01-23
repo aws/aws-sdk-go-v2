@@ -13,11 +13,21 @@ import (
 
 // Creates data export configuration details.
 //
-// In the current release, you can enable exporting asset metadata only for one
-// domain per Amazon Web Services account per region. If you disable exporting
-// asset metadata feature for a domain where it's already enabled, you cannot
-// enable this feature for another domain in the same Amazon Web Services account
-// and region.
+// If you want to temporarily disable export and later re-enable it for the same
+// domain, use the --no-enable-export flag to disable and the --enable-export flag
+// to re-enable. This preserves the configuration and allows you to re-enable
+// export without deleting S3 table.
+//
+// You can enable asset metadata export for only one domain per account per
+// Region. To enable export for a different domain, complete the following steps:
+//
+//   - Delete the export configuration for the currently enabled domain using the
+//     DeleteDataExportConfiguration operation.
+//
+//   - Delete the asset S3 table under the aws-sagemaker-catalog S3 table bucket.
+//     We recommend backing up the S3 table before deletion.
+//
+//   - Call the PutDataExportConfiguration API to enable export for the new domain.
 func (c *Client) PutDataExportConfiguration(ctx context.Context, params *PutDataExportConfigurationInput, optFns ...func(*Options)) (*PutDataExportConfigurationOutput, error) {
 	if params == nil {
 		params = &PutDataExportConfigurationInput{}
@@ -35,7 +45,7 @@ func (c *Client) PutDataExportConfiguration(ctx context.Context, params *PutData
 
 type PutDataExportConfigurationInput struct {
 
-	// The domain ID where you want to create data export configuration details.
+	// The domain ID for which you want to create data export configuration details.
 	//
 	// This member is required.
 	DomainIdentifier *string

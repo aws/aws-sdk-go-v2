@@ -1440,6 +1440,29 @@ func (EventSourceName) Values() []EventSourceName {
 	}
 }
 
+type ExecutionRecordStatus string
+
+// Enum values for ExecutionRecordStatus
+const (
+	ExecutionRecordStatusPassed     ExecutionRecordStatus = "PASSED"
+	ExecutionRecordStatusFailed     ExecutionRecordStatus = "FAILED"
+	ExecutionRecordStatusInProgress ExecutionRecordStatus = "IN_PROGRESS"
+	ExecutionRecordStatusStopped    ExecutionRecordStatus = "STOPPED"
+)
+
+// Values returns all known values for ExecutionRecordStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionRecordStatus) Values() []ExecutionRecordStatus {
+	return []ExecutionRecordStatus{
+		"PASSED",
+		"FAILED",
+		"IN_PROGRESS",
+		"STOPPED",
+	}
+}
+
 type FailureReasonCode string
 
 // Enum values for FailureReasonCode
@@ -3878,6 +3901,67 @@ func (TaskTemplateStatus) Values() []TaskTemplateStatus {
 	return []TaskTemplateStatus{
 		"ACTIVE",
 		"INACTIVE",
+	}
+}
+
+type TestCaseEntryPointType string
+
+// Enum values for TestCaseEntryPointType
+const (
+	TestCaseEntryPointTypeVoiceCall TestCaseEntryPointType = "VOICE_CALL"
+)
+
+// Values returns all known values for TestCaseEntryPointType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestCaseEntryPointType) Values() []TestCaseEntryPointType {
+	return []TestCaseEntryPointType{
+		"VOICE_CALL",
+	}
+}
+
+type TestCaseExecutionStatus string
+
+// Enum values for TestCaseExecutionStatus
+const (
+	TestCaseExecutionStatusInitiated  TestCaseExecutionStatus = "INITIATED"
+	TestCaseExecutionStatusPassed     TestCaseExecutionStatus = "PASSED"
+	TestCaseExecutionStatusFailed     TestCaseExecutionStatus = "FAILED"
+	TestCaseExecutionStatusInProgress TestCaseExecutionStatus = "IN_PROGRESS"
+	TestCaseExecutionStatusStopped    TestCaseExecutionStatus = "STOPPED"
+)
+
+// Values returns all known values for TestCaseExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestCaseExecutionStatus) Values() []TestCaseExecutionStatus {
+	return []TestCaseExecutionStatus{
+		"INITIATED",
+		"PASSED",
+		"FAILED",
+		"IN_PROGRESS",
+		"STOPPED",
+	}
+}
+
+type TestCaseStatus string
+
+// Enum values for TestCaseStatus
+const (
+	TestCaseStatusPublished TestCaseStatus = "PUBLISHED"
+	TestCaseStatusSaved     TestCaseStatus = "SAVED"
+)
+
+// Values returns all known values for TestCaseStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestCaseStatus) Values() []TestCaseStatus {
+	return []TestCaseStatus{
+		"PUBLISHED",
+		"SAVED",
 	}
 }
 

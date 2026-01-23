@@ -746,6 +746,18 @@ func TestCheckSnapshot_CreateTaskTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTestCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTestCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTestCase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTrafficDistributionGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTrafficDistributionGroup(context.Background(), nil, func(o *Options) {
@@ -1154,6 +1166,18 @@ func TestCheckSnapshot_DeleteTaskTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteTestCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTestCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTestCase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTrafficDistributionGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTrafficDistributionGroup(context.Background(), nil, func(o *Options) {
@@ -1555,6 +1579,18 @@ func TestCheckSnapshot_DescribeSecurityProfile(t *testing.T) {
 	_, err := svc.DescribeSecurityProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeSecurityProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeTestCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTestCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTestCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2011,6 +2047,18 @@ func TestCheckSnapshot_GetTaskTemplate(t *testing.T) {
 	_, err := svc.GetTaskTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetTaskTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTestCaseExecutionSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTestCaseExecutionSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTestCaseExecutionSummary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2666,6 +2714,42 @@ func TestCheckSnapshot_ListTaskTemplates(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTestCaseExecutionRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTestCaseExecutionRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTestCaseExecutionRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTestCaseExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTestCaseExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTestCaseExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTestCases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTestCases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTestCases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTrafficDistributionGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTrafficDistributionGroups(context.Background(), nil, func(o *Options) {
@@ -3098,6 +3182,18 @@ func TestCheckSnapshot_SearchSecurityProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchTestCases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchTestCases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchTestCases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SearchUserHierarchyGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchUserHierarchyGroups(context.Background(), nil, func(o *Options) {
@@ -3338,6 +3434,18 @@ func TestCheckSnapshot_StartTaskContact(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartTestCaseExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTestCaseExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTestCaseExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartWebRTCContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartWebRTCContact(context.Background(), nil, func(o *Options) {
@@ -3391,6 +3499,18 @@ func TestCheckSnapshot_StopContactStreaming(t *testing.T) {
 	_, err := svc.StopContactStreaming(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopContactStreaming")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopTestCaseExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopTestCaseExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopTestCaseExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4003,6 +4123,18 @@ func TestCheckSnapshot_UpdateTaskTemplate(t *testing.T) {
 	_, err := svc.UpdateTaskTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateTaskTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateTestCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTestCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateTestCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4873,6 +5005,18 @@ func TestUpdateSnapshot_CreateTaskTemplate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTestCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTestCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTestCase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTrafficDistributionGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTrafficDistributionGroup(context.Background(), nil, func(o *Options) {
@@ -5281,6 +5425,18 @@ func TestUpdateSnapshot_DeleteTaskTemplate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteTestCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTestCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTestCase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTrafficDistributionGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTrafficDistributionGroup(context.Background(), nil, func(o *Options) {
@@ -5682,6 +5838,18 @@ func TestUpdateSnapshot_DescribeSecurityProfile(t *testing.T) {
 	_, err := svc.DescribeSecurityProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeSecurityProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTestCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTestCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTestCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6138,6 +6306,18 @@ func TestUpdateSnapshot_GetTaskTemplate(t *testing.T) {
 	_, err := svc.GetTaskTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTaskTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTestCaseExecutionSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTestCaseExecutionSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTestCaseExecutionSummary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6793,6 +6973,42 @@ func TestUpdateSnapshot_ListTaskTemplates(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTestCaseExecutionRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTestCaseExecutionRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTestCaseExecutionRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTestCaseExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTestCaseExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTestCaseExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTestCases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTestCases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTestCases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTrafficDistributionGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTrafficDistributionGroups(context.Background(), nil, func(o *Options) {
@@ -7225,6 +7441,18 @@ func TestUpdateSnapshot_SearchSecurityProfiles(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SearchTestCases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchTestCases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchTestCases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SearchUserHierarchyGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchUserHierarchyGroups(context.Background(), nil, func(o *Options) {
@@ -7465,6 +7693,18 @@ func TestUpdateSnapshot_StartTaskContact(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartTestCaseExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTestCaseExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTestCaseExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartWebRTCContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartWebRTCContact(context.Background(), nil, func(o *Options) {
@@ -7518,6 +7758,18 @@ func TestUpdateSnapshot_StopContactStreaming(t *testing.T) {
 	_, err := svc.StopContactStreaming(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopContactStreaming")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopTestCaseExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopTestCaseExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopTestCaseExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8130,6 +8382,18 @@ func TestUpdateSnapshot_UpdateTaskTemplate(t *testing.T) {
 	_, err := svc.UpdateTaskTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateTaskTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateTestCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTestCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateTestCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

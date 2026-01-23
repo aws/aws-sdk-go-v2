@@ -17989,7 +17989,7 @@ func awsRestjson1_deserializeDocumentCaseSummarizationChunkDataDetails(v **types
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected NonEmptySensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Completion = ptr.String(jtv)
 			}
@@ -29673,7 +29673,7 @@ func awsRestjson1_deserializeDocumentToolConfiguration(v **types.ToolConfigurati
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected NonEmptySensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -29707,7 +29707,7 @@ func awsRestjson1_deserializeDocumentToolConfiguration(v **types.ToolConfigurati
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected NonEmptySensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
 			}

@@ -1,0 +1,8 @@
+{
+    "id": "5190e4f8-2e0d-4727-90b6-04359a896ebf",
+    "type": "feature",
+    "description": "Fixes incorrect types in the UpdateAssistantAIAgent API request, adds MESSAGE to TargetType enum, and other minor changes.",
+    "modules": [
+        "service/qconnect"
+    ]
+}

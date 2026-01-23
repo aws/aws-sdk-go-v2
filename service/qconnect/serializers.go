@@ -8335,11 +8335,9 @@ func awsRestjson1_serializeOpDocumentUpdateAssistantAIAgentInput(v *UpdateAssist
 		}
 	}
 
-	if v.OrchestratorConfigurationList != nil {
-		ok := object.Key("orchestratorConfigurationList")
-		if err := awsRestjson1_serializeDocumentOrchestratorConfigurationList(v.OrchestratorConfigurationList, ok); err != nil {
-			return err
-		}
+	if v.OrchestratorUseCase != nil {
+		ok := object.Key("orchestratorUseCase")
+		ok.String(*v.OrchestratorUseCase)
 	}
 
 	return nil

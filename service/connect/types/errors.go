@@ -383,6 +383,34 @@ func (e *InvalidRequestException) ErrorCode() string {
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The test is not valid.
+type InvalidTestCaseException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Problems []ProblemDetail
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidTestCaseException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidTestCaseException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidTestCaseException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidTestCaseException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidTestCaseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The allowed limit for the resource has been exceeded.
 type LimitExceededException struct {
 	Message *string

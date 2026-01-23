@@ -4801,6 +4801,24 @@ type EventBridgeActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a test case execution record.
+type ExecutionRecord struct {
+
+	// The identifier of the execution record.
+	ObservationId *string
+
+	// The details of the executed record.
+	Record *string
+
+	// The status of the action execution.
+	Status ExecutionRecordStatus
+
+	// The timestamp when the action was executed.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // An object to specify the expiration of a routing step.
 type Expiry struct {
 
@@ -6543,6 +6561,21 @@ type NumericQuestionPropertyValueAutomation struct {
 	//
 	// This member is required.
 	Label NumericQuestionPropertyAutomationLabel
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary statistics about a test case execution.
+type ObservationSummary struct {
+
+	// The number of observations that failed during execution.
+	ObservationsFailed *int32
+
+	// The number of observations that passed during execution.
+	ObservationsPassed *int32
+
+	// The total number of observations in the test case.
+	TotalObservations *int32
 
 	noSmithyDocumentSerde
 }
@@ -9764,6 +9797,138 @@ type TemplatedMessageConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a test case.
+type TestCase struct {
+
+	// The Amazon Resource Name (ARN) of the test case.
+	Arn *string
+
+	// The JSON string that represents the content of the test.
+	Content *string
+
+	// The description of the test case.
+	Description *string
+
+	// Defines the starting point for the test, including channel type and parameters.
+	EntryPoint *TestCaseEntryPoint
+
+	// The identifier of the test case.
+	Id *string
+
+	// Defines the test attributes for precise data representation.
+	InitializationData *string
+
+	// The region in which the test case was last modified.
+	LastModifiedRegion *string
+
+	// The time at which the test case was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the test case.
+	Name *string
+
+	// Indicates the test status as either SAVED or PUBLISHED.
+	Status TestCaseStatus
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	// The SHA256 hash of the test case content.
+	TestCaseSha256 *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the starting point for a test case.
+type TestCaseEntryPoint struct {
+
+	// The type of entry point.
+	Type TestCaseEntryPointType
+
+	// Parameters for voice call entry point.
+	VoiceCallEntryPointParameters *VoiceCallEntryPointParameters
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a test case execution.
+type TestCaseExecution struct {
+
+	// The timestamp when the test case execution ended.
+	EndTime *time.Time
+
+	// The timestamp when the test case execution started.
+	StartTime *time.Time
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	// The identifier of the test case execution.
+	TestCaseExecutionId *string
+
+	// The status of the test case execution.
+	TestCaseExecutionStatus TestCaseExecutionStatus
+
+	// The identifier of the test case.
+	TestCaseId *string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return test cases.
+type TestCaseSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []TestCaseSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []TestCaseSearchCriteria
+
+	// The status of the test case.
+	StatusCondition TestCaseStatus
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type TestCaseSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter.
+	// This accepts an OR of AND (List of List) input where: Top level list specifies
+	// conditions that need to be applied with OR operator. Inner list specifies
+	// conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a test case.
+type TestCaseSummary struct {
+
+	// The Amazon Resource Name (ARN) of the test case.
+	Arn *string
+
+	// The identifier of the test case.
+	Id *string
+
+	// The region in which the test case was last modified.
+	LastModifiedRegion *string
+
+	// The time at which the test case was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the test case.
+	Name *string
+
+	// The status of the test case.
+	Status TestCaseStatus
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the threshold for service level metrics.
 type Threshold struct {
 
@@ -10777,6 +10942,21 @@ type VocabularySummary struct {
 
 	// The reason why the custom vocabulary was not created.
 	FailureReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Parameters for initiating a voice call test.
+type VoiceCallEntryPointParameters struct {
+
+	// The destination phone number for the test.
+	DestinationPhoneNumber *string
+
+	// The flow identifier for the test.
+	FlowId *string
+
+	// The source phone number for the test.
+	SourcePhoneNumber *string
 
 	noSmithyDocumentSerde
 }

@@ -1150,6 +1150,26 @@ func (m *validateOpCreateTaskTemplate) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTestCase struct {
+}
+
+func (*validateOpCreateTestCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTestCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTestCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTestCaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTrafficDistributionGroup struct {
 }
 
@@ -1830,6 +1850,26 @@ func (m *validateOpDeleteTaskTemplate) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteTestCase struct {
+}
+
+func (*validateOpDeleteTestCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTestCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTestCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTestCaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTrafficDistributionGroup struct {
 }
 
@@ -2505,6 +2545,26 @@ func (m *validateOpDescribeSecurityProfile) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeSecurityProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeTestCase struct {
+}
+
+func (*validateOpDescribeTestCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTestCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTestCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTestCaseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3265,6 +3325,26 @@ func (m *validateOpGetTaskTemplate) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTaskTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTestCaseExecutionSummary struct {
+}
+
+func (*validateOpGetTestCaseExecutionSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTestCaseExecutionSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTestCaseExecutionSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTestCaseExecutionSummaryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4310,6 +4390,66 @@ func (m *validateOpListTaskTemplates) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTestCaseExecutionRecords struct {
+}
+
+func (*validateOpListTestCaseExecutionRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTestCaseExecutionRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTestCaseExecutionRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTestCaseExecutionRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTestCaseExecutions struct {
+}
+
+func (*validateOpListTestCaseExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTestCaseExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTestCaseExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTestCaseExecutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTestCases struct {
+}
+
+func (*validateOpListTestCases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTestCases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTestCasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTestCasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTrafficDistributionGroupUsers struct {
 }
 
@@ -5010,6 +5150,26 @@ func (m *validateOpSearchSecurityProfiles) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchTestCases struct {
+}
+
+func (*validateOpSearchTestCases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchTestCases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchTestCasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchTestCasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchUserHierarchyGroups struct {
 }
 
@@ -5390,6 +5550,26 @@ func (m *validateOpStartTaskContact) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartTestCaseExecution struct {
+}
+
+func (*validateOpStartTestCaseExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTestCaseExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTestCaseExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTestCaseExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartWebRTCContact struct {
 }
 
@@ -5465,6 +5645,26 @@ func (m *validateOpStopContactStreaming) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopContactStreamingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopTestCaseExecution struct {
+}
+
+func (*validateOpStopTestCaseExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopTestCaseExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopTestCaseExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopTestCaseExecutionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6490,6 +6690,26 @@ func (m *validateOpUpdateTaskTemplate) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTestCase struct {
+}
+
+func (*validateOpUpdateTestCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTestCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTestCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTestCaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTrafficDistribution struct {
 }
 
@@ -7018,6 +7238,10 @@ func addOpCreateTaskTemplateValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateTaskTemplate{}, middleware.After)
 }
 
+func addOpCreateTestCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTestCase{}, middleware.After)
+}
+
 func addOpCreateTrafficDistributionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTrafficDistributionGroup{}, middleware.After)
 }
@@ -7154,6 +7378,10 @@ func addOpDeleteTaskTemplateValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteTaskTemplate{}, middleware.After)
 }
 
+func addOpDeleteTestCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTestCase{}, middleware.After)
+}
+
 func addOpDeleteTrafficDistributionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTrafficDistributionGroup{}, middleware.After)
 }
@@ -7288,6 +7516,10 @@ func addOpDescribeRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeSecurityProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSecurityProfile{}, middleware.After)
+}
+
+func addOpDescribeTestCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTestCase{}, middleware.After)
 }
 
 func addOpDescribeTrafficDistributionGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -7440,6 +7672,10 @@ func addOpGetPromptFileValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTaskTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTaskTemplate{}, middleware.After)
+}
+
+func addOpGetTestCaseExecutionSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTestCaseExecutionSummary{}, middleware.After)
 }
 
 func addOpGetTrafficDistributionValidationMiddleware(stack *middleware.Stack) error {
@@ -7650,6 +7886,18 @@ func addOpListTaskTemplatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTaskTemplates{}, middleware.After)
 }
 
+func addOpListTestCaseExecutionRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTestCaseExecutionRecords{}, middleware.After)
+}
+
+func addOpListTestCaseExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTestCaseExecutions{}, middleware.After)
+}
+
+func addOpListTestCasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTestCases{}, middleware.After)
+}
+
 func addOpListTrafficDistributionGroupUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTrafficDistributionGroupUsers{}, middleware.After)
 }
@@ -7790,6 +8038,10 @@ func addOpSearchSecurityProfilesValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpSearchSecurityProfiles{}, middleware.After)
 }
 
+func addOpSearchTestCasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchTestCases{}, middleware.After)
+}
+
 func addOpSearchUserHierarchyGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchUserHierarchyGroups{}, middleware.After)
 }
@@ -7866,6 +8118,10 @@ func addOpStartTaskContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartTaskContact{}, middleware.After)
 }
 
+func addOpStartTestCaseExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTestCaseExecution{}, middleware.After)
+}
+
 func addOpStartWebRTCContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartWebRTCContact{}, middleware.After)
 }
@@ -7880,6 +8136,10 @@ func addOpStopContactRecordingValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpStopContactStreamingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopContactStreaming{}, middleware.After)
+}
+
+func addOpStopTestCaseExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopTestCaseExecution{}, middleware.After)
 }
 
 func addOpSubmitContactEvaluationValidationMiddleware(stack *middleware.Stack) error {
@@ -8084,6 +8344,10 @@ func addOpUpdateSecurityProfileValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateTaskTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTaskTemplate{}, middleware.After)
+}
+
+func addOpUpdateTestCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTestCase{}, middleware.After)
 }
 
 func addOpUpdateTrafficDistributionValidationMiddleware(stack *middleware.Stack) error {
@@ -12595,6 +12859,27 @@ func validateOpCreateTaskTemplateInput(v *CreateTaskTemplateInput) error {
 	}
 }
 
+func validateOpCreateTestCaseInput(v *CreateTestCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTestCaseInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTrafficDistributionGroupInput(v *CreateTrafficDistributionGroupInput) error {
 	if v == nil {
 		return nil
@@ -13259,6 +13544,24 @@ func validateOpDeleteTaskTemplateInput(v *DeleteTaskTemplateInput) error {
 	}
 }
 
+func validateOpDeleteTestCaseInput(v *DeleteTestCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTestCaseInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteTrafficDistributionGroupInput(v *DeleteTrafficDistributionGroupInput) error {
 	if v == nil {
 		return nil
@@ -13878,6 +14181,24 @@ func validateOpDescribeSecurityProfileInput(v *DescribeSecurityProfileInput) err
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeTestCaseInput(v *DescribeTestCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTestCaseInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14656,6 +14977,27 @@ func validateOpGetTaskTemplateInput(v *GetTaskTemplateInput) error {
 	}
 	if v.TaskTemplateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskTemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTestCaseExecutionSummaryInput(v *GetTestCaseExecutionSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTestCaseExecutionSummaryInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
+	}
+	if v.TestCaseExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseExecutionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15544,6 +15886,57 @@ func validateOpListTaskTemplatesInput(v *ListTaskTemplatesInput) error {
 	}
 }
 
+func validateOpListTestCaseExecutionRecordsInput(v *ListTestCaseExecutionRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTestCaseExecutionRecordsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
+	}
+	if v.TestCaseExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseExecutionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTestCaseExecutionsInput(v *ListTestCaseExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTestCaseExecutionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTestCasesInput(v *ListTestCasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTestCasesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTrafficDistributionGroupUsersInput(v *ListTrafficDistributionGroupUsersInput) error {
 	if v == nil {
 		return nil
@@ -16134,6 +16527,21 @@ func validateOpSearchSecurityProfilesInput(v *SearchSecurityProfilesInput) error
 	}
 }
 
+func validateOpSearchTestCasesInput(v *SearchTestCasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchTestCasesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSearchUserHierarchyGroupsInput(v *SearchUserHierarchyGroupsInput) error {
 	if v == nil {
 		return nil
@@ -16636,6 +17044,24 @@ func validateOpStartTaskContactInput(v *StartTaskContactInput) error {
 	}
 }
 
+func validateOpStartTestCaseExecutionInput(v *StartTestCaseExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTestCaseExecutionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartWebRTCContactInput(v *StartWebRTCContactInput) error {
 	if v == nil {
 		return nil
@@ -16718,6 +17144,27 @@ func validateOpStopContactStreamingInput(v *StopContactStreamingInput) error {
 	}
 	if v.StreamingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopTestCaseExecutionInput(v *StopTestCaseExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopTestCaseExecutionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.TestCaseExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseExecutionId"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17822,6 +18269,24 @@ func validateOpUpdateTaskTemplateInput(v *UpdateTaskTemplateInput) error {
 		if err := validateTaskTemplateFields(v.Fields); err != nil {
 			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTestCaseInput(v *UpdateTestCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTestCaseInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

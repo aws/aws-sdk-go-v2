@@ -1393,6 +1393,7 @@ type TargetType string
 const (
 	TargetTypeRecommendation TargetType = "RECOMMENDATION"
 	TargetTypeResult         TargetType = "RESULT"
+	TargetTypeMessage        TargetType = "MESSAGE"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
@@ -1403,6 +1404,7 @@ func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"RECOMMENDATION",
 		"RESULT",
+		"MESSAGE",
 	}
 }
 

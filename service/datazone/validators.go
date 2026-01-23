@@ -870,6 +870,26 @@ func (m *validateOpDeleteConnection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDataExportConfiguration struct {
+}
+
+func (*validateOpDeleteDataExportConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataExportConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataExportConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataExportConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataProduct struct {
 }
 
@@ -3640,6 +3660,10 @@ func addOpDeleteAssetTypeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnection{}, middleware.After)
+}
+
+func addOpDeleteDataExportConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataExportConfiguration{}, middleware.After)
 }
 
 func addOpDeleteDataProductValidationMiddleware(stack *middleware.Stack) error {
@@ -7321,6 +7345,21 @@ func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDataExportConfigurationInput(v *DeleteDataExportConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataExportConfigurationInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

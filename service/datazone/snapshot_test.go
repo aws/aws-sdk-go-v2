@@ -578,6 +578,18 @@ func TestCheckSnapshot_DeleteConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDataExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataExportConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDataProduct(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataProduct(context.Background(), nil, func(o *Options) {
@@ -2658,6 +2670,18 @@ func TestUpdateSnapshot_DeleteConnection(t *testing.T) {
 	_, err := svc.DeleteConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDataExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataExportConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

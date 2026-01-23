@@ -51,6 +51,7 @@
         "api_op_DeleteAssetFilter.go",
         "api_op_DeleteAssetType.go",
         "api_op_DeleteConnection.go",
+        "api_op_DeleteDataExportConfiguration.go",
         "api_op_DeleteDataProduct.go",
         "api_op_DeleteDataSource.go",
         "api_op_DeleteDomain.go",
