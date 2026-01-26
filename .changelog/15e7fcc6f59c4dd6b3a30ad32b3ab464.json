@@ -1,8 +1,0 @@
-{
-    "id": "15e7fcc6-f59c-4dd6-b3a3-0ad32b3ab464",
-    "type": "feature",
-    "description": "Deprecate all Evidently API for AWS CloudWatch Evidently deprecation",
-    "modules": [
-        "service/evidently"
-    ]
-}

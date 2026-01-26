@@ -1,3 +1,7 @@
+# v1.40.0 (2026-01-26)
+
+* **Feature**: Adds support for AWS Ground Station Telemetry.
+
 # v1.39.7 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.29.0 (2026-01-26)
+
+* **Feature**: Deprecate all Evidently API for AWS CloudWatch Evidently deprecation
+
 # v1.28.16 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

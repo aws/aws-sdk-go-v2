@@ -1,3 +1,15 @@
+# Release (2026-01-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.35.0](service/connectcases/CHANGELOG.md#v1350-2026-01-26)
+  * **Feature**: Amazon Connect now enables you to use tag-based access controls to define who can access specific cases. You can associate tags with case templates and configure security profiles to determine which users can access cases with those tags.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.282.0](service/ec2/CHANGELOG.md#v12820-2026-01-26)
+  * **Feature**: DescribeInstanceTypes API response now includes an additionalFlexibleNetworkInterfaces field, the number of interfaces attachable to an instance when using flexible Elastic Network Adapter (ENA) queues in addition to the base number specified by maximumNetworkInterfaces.
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.29.0](service/evidently/CHANGELOG.md#v1290-2026-01-26)
+  * **Feature**: Deprecate all Evidently API for AWS CloudWatch Evidently deprecation
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.40.0](service/groundstation/CHANGELOG.md#v1400-2026-01-26)
+  * **Feature**: Adds support for AWS Ground Station Telemetry.
+
 # Release (2026-01-23)
 
 ## Module Highlights
