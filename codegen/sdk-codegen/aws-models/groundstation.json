@@ -514,7 +514,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a contact with a specified contact ID.</p>",
+                "smithy.api#documentation": "<p>Cancels or stops a contact with a specified contact ID based on its position in the <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/contacts.lifecycle.html\">contact lifecycle</a>.</p> <p>For contacts that:</p> <ul> <li> <p>Have yet to start, the contact will be cancelled.</p> </li> <li> <p>Have started but have yet to finish, the contact will be stopped.</p> </li> </ul>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/contact/{contactId}"
@@ -535,7 +535,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -833,6 +833,12 @@
                     "traits": {
                         "smithy.api#enumValue": "s3-recording"
                     }
+                },
+                "TELEMETRY_SINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "telemetry-sink"
+                    }
                 }
             }
         },
@@ -882,7 +888,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p> </p>"
             }
         },
         "com.amazonaws.groundstation#ConfigList": {
@@ -959,13 +965,19 @@
                 "uplinkEchoConfig": {
                     "target": "com.amazonaws.groundstation#UplinkEchoConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>"
+                        "smithy.api#documentation": "<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code> AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>"
                     }
                 },
                 "s3RecordingConfig": {
                     "target": "com.amazonaws.groundstation#S3RecordingConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about an S3 recording <code>Config</code>.</p>"
+                    }
+                },
+                "telemetrySinkConfig": {
+                    "target": "com.amazonaws.groundstation#TelemetrySinkConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a telemetry sink <code>Config</code>.</p>"
                     }
                 }
             },
@@ -1139,7 +1151,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p> </p>"
             }
         },
         "com.amazonaws.groundstation#ContactList": {
@@ -1286,7 +1298,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -1310,7 +1322,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <code>DataflowEndpoint</code> group containing the specified list of <code>DataflowEndpoint</code> objects.</p> <p>The <code>name</code> field in each endpoint is used in your mission profile <code>DataflowEndpointConfig</code> to specify which endpoints to use during a contact.</p> <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code>Config</code> must match a <code>DataflowEndpoint</code> in the same group.</p>",
+                "smithy.api#documentation": "<p>Creates a <code>DataflowEndpoint</code> group containing the specified list of <code> DataflowEndpoint</code> objects.</p> <p>The <code>name</code> field in each endpoint is used in your mission profile <code> DataflowEndpointConfig</code> to specify which endpoints to use during a contact.</p> <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code> Config</code> must match a <code>DataflowEndpoint</code> in the same group.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/dataflowEndpointGroup"
@@ -1336,18 +1348,18 @@
                 "contactPrePassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.</p>"
+                        "smithy.api#documentation": "<p> Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html\">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state. </p>"
                     }
                 },
                 "contactPostPassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>"
+                        "smithy.api#documentation": "<p> Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html\">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -1374,7 +1386,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <code>DataflowEndpointGroupV2</code> containing the specified list of <code>DataflowEndpoint</code> objects.</p> <p>The <code>name</code> field in each endpoint is used in your mission profile <code>DataflowEndpointConfig</code> to specify which endpoints to use during a contact.</p> <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code>Config</code> must match a <code>DataflowEndpoint</code> in the same group.</p>",
+                "smithy.api#documentation": "<p>Creates a <code>DataflowEndpoint</code> group containing the specified list of Ground Station Agent based endpoints.</p> <p>The <code>name</code> field in each endpoint is used in your mission profile <code> DataflowEndpointConfig</code> to specify which endpoints to use during a contact.</p> <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code> Config</code> must match a <code>DataflowEndpoint</code> in the same group.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/dataflowEndpointGroupV2"
@@ -1394,13 +1406,13 @@
                 "contactPrePassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.</p>"
+                        "smithy.api#documentation": "<p> Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html\">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state. </p>"
                     }
                 },
                 "contactPostPassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>"
+                        "smithy.api#documentation": "<p> Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html\">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state. </p>"
                     }
                 },
                 "tags": {
@@ -1608,7 +1620,7 @@
                 "dataflowEdges": {
                     "target": "com.amazonaws.groundstation#DataflowEdgeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code> Config</code> and a <i>to</i> <code>Config</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1617,6 +1629,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>ARN of a tracking <code>Config</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "telemetrySinkConfigArn": {
+                    "target": "com.amazonaws.groundstation#ConfigArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of a telemetry sink <code>Config</code>.</p>"
                     }
                 },
                 "tags": {
@@ -1639,7 +1657,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -1836,7 +1854,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.groundstation#DataflowEndpointGroup"
@@ -1961,7 +1979,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -2006,7 +2024,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
@@ -2103,7 +2121,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -2211,7 +2229,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -2328,7 +2346,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#output": {},
                 "smithy.api#references": [
                     {
@@ -3701,7 +3719,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -3750,7 +3768,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#output": {}
             }
         },
@@ -3795,7 +3813,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
@@ -3845,7 +3863,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#output": {},
                 "smithy.api#references": [
                     {
@@ -3985,7 +4003,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -4037,13 +4055,19 @@
                 "dataflowEdges": {
                     "target": "com.amazonaws.groundstation#DataflowEdgeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code> Config</code> and a <i>to</i> <code>Config</code>.</p>"
                     }
                 },
                 "trackingConfigArn": {
                     "target": "com.amazonaws.groundstation#ConfigArn",
                     "traits": {
                         "smithy.api#documentation": "<p>ARN of a tracking <code>Config</code>.</p>"
+                    }
+                },
+                "telemetrySinkConfigArn": {
+                    "target": "com.amazonaws.groundstation#ConfigArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of a telemetry sink <code>Config</code>.</p>"
                     }
                 },
                 "tags": {
@@ -4066,7 +4090,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#output": {},
                 "smithy.api#references": [
                     {
@@ -5186,6 +5210,41 @@
                 }
             }
         },
+        "com.amazonaws.groundstation#KinesisDataStreamArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Kinesis::Stream"
+                },
+                "smithy.api#length": {
+                    "min": 37,
+                    "max": 275
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-.]{1,63}:kinesis:[-a-z0-9]{1,50}:[0-9]{12}:stream/[a-zA-Z0-9_.-]{1,128}$"
+            }
+        },
+        "com.amazonaws.groundstation#KinesisDataStreamData": {
+            "type": "structure",
+            "members": {
+                "kinesisRoleArn": {
+                    "target": "com.amazonaws.groundstation#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the IAM Role used by AWS Ground Station to deliver telemetry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kinesisDataStreamArn": {
+                    "target": "com.amazonaws.groundstation#KinesisDataStreamArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the Kinesis Data Stream to deliver telemetry to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information for telemetry delivery to Kinesis Data Streams.</p>"
+            }
+        },
         "com.amazonaws.groundstation#KmsKey": {
             "type": "union",
             "members": {
@@ -5265,7 +5324,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -5286,7 +5345,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#output": {}
             }
         },
@@ -5310,7 +5369,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of contacts.</p> <p>If <code>statusList</code> contains AVAILABLE, the request must include <code>groundStation</code>, <code>missionprofileArn</code>, and <code>satelliteArn</code>. </p>",
+                "smithy.api#documentation": "<p>Returns a list of contacts.</p> <p>If <code>statusList</code> contains AVAILABLE, the request must include <code> groundStation</code>, <code>missionprofileArn</code>, and <code>satelliteArn</code>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contacts"
@@ -5386,7 +5445,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -5407,7 +5466,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#output": {}
             }
         },
@@ -5464,7 +5523,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -5485,7 +5544,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#output": {}
             }
         },
@@ -5737,7 +5796,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -5758,7 +5817,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#output": {}
             }
         },
@@ -5954,7 +6013,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p> </p>"
             }
         },
         "com.amazonaws.groundstation#MissionProfileList": {
@@ -6021,7 +6080,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Ephemeris data in Orbit Ephemeris Message (OEM) format.</p> <p> AWS Ground Station processes OEM ephemerides according to the <a href=\"https://ccsds.org/wp-content/uploads/gravity_forms/5-448e85c647331d9cbaf66c096458bdd5/2025/01//502x0b3e1.pdf\">CCSDS standard</a> with some extra restrictions. OEM files should be in KVN format. For more detail about the OEM format that AWS Ground Station supports, see <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format\">OEM ephemeris format</a> in the AWS Ground Station user guide. </p>"
+                "smithy.api#documentation": "<p>Ephemeris data in Orbit Ephemeris Message (OEM) format.</p> <p> AWS Ground Station processes OEM ephemerides according to the <a href=\"https://ccsds.org/Pubs/502x0b3e1.pdf\">CCSDS standard</a> with some extra restrictions. OEM files should be in KVN format. For more detail about the OEM format that AWS Ground Station supports, see <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format\">OEM ephemeris format</a> in the AWS Ground Station user guide. </p>"
             }
         },
         "com.amazonaws.groundstation#PaginationMaxResults": {
@@ -6286,7 +6345,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -6336,7 +6395,17 @@
             }
         },
         "com.amazonaws.groundstation#RoleArn": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::IAM::Role"
+                },
+                "smithy.api#length": {
+                    "min": 30,
+                    "max": 165
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-.]{1,63}:iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}$"
+            }
         },
         "com.amazonaws.groundstation#S3BucketName": {
             "type": "string",
@@ -6833,6 +6902,53 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.groundstation#TelemetrySinkConfig": {
+            "type": "structure",
+            "members": {
+                "telemetrySinkType": {
+                    "target": "com.amazonaws.groundstation#TelemetrySinkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of telemetry sink.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "telemetrySinkData": {
+                    "target": "com.amazonaws.groundstation#TelemetrySinkData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the telemetry sink specified by the <code>telemetrySinkType</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a telemetry sink <code>Config</code>.</p>"
+            }
+        },
+        "com.amazonaws.groundstation#TelemetrySinkData": {
+            "type": "union",
+            "members": {
+                "kinesisDataStreamData": {
+                    "target": "com.amazonaws.groundstation#KinesisDataStreamData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a telemetry sink of type <code>KINESIS_DATA_STREAM</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a telemetry sink.</p>"
+            }
+        },
+        "com.amazonaws.groundstation#TelemetrySinkType": {
+            "type": "enum",
+            "members": {
+                "KINESIS_DATA_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KINESIS_DATA_STREAM"
+                    }
+                }
+            }
+        },
         "com.amazonaws.groundstation#TimeAzEl": {
             "type": "structure",
             "members": {
@@ -7158,7 +7274,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -7291,13 +7407,19 @@
                 "dataflowEdges": {
                     "target": "com.amazonaws.groundstation#DataflowEdgeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code> Config</code> and a <i>to</i> <code>Config</code>.</p>"
                     }
                 },
                 "trackingConfigArn": {
                     "target": "com.amazonaws.groundstation#ConfigArn",
                     "traits": {
                         "smithy.api#documentation": "<p>ARN of a tracking <code>Config</code>.</p>"
+                    }
+                },
+                "telemetrySinkConfigArn": {
+                    "target": "com.amazonaws.groundstation#ConfigArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of a telemetry sink <code>Config</code>.</p>"
                     }
                 },
                 "streamsKmsKey": {
@@ -7314,7 +7436,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>",
+                "smithy.api#documentation": "<p> </p>",
                 "smithy.api#input": {}
             }
         },
@@ -7427,7 +7549,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>"
+                "smithy.api#documentation": "<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code> AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>"
             }
         },
         "com.amazonaws.groundstation#UplinkSpectrumConfig": {

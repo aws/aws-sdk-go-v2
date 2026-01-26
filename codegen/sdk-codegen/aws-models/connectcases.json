@@ -1371,6 +1371,12 @@
                 "not": {
                     "target": "com.amazonaws.connectcases#CaseFilter"
                 },
+                "tag": {
+                    "target": "com.amazonaws.connectcases#TagFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to filter on.</p>"
+                    }
+                },
                 "andAll": {
                     "target": "com.amazonaws.connectcases#CaseFilterList",
                     "traits": {
@@ -1870,7 +1876,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>If you provide a value for <code>PerformedBy.UserArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">connect:DescribeUser</a> permission on the User ARN resource that you provide</p> </note> <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <p>The following fields are required when creating a case:</p> <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>",
+                "smithy.api#documentation": "<note> <p>If you provide a value for <code>PerformedBy.UserArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">connect:DescribeUser</a> permission on the User ARN resource that you provide</p> </note> <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <p>When creating a case from a template that has tag propagation configurations, the specified tags are automatically applied to the case.</p> <p>The following fields are required when creating a case:</p> <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases",
                     "method": "POST"
@@ -1918,6 +1924,12 @@
                 },
                 "performedBy": {
                     "target": "com.amazonaws.connectcases#UserUnion"
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#MutableTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
                 }
             }
         },
@@ -2473,6 +2485,12 @@
                     "target": "com.amazonaws.connectcases#TemplateCaseRuleList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of case rules (also known as <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">case field conditions</a>) on a template. </p>"
+                    }
+                },
+                "tagPropagationConfigurations": {
+                    "target": "com.amazonaws.connectcases#TagPropagationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>"
                     }
                 }
             }
@@ -4540,6 +4558,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of case rules (also known as <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">case field conditions</a>) on a template. </p>"
                     }
+                },
+                "tagPropagationConfigurations": {
+                    "target": "com.amazonaws.connectcases#TagPropagationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>"
+                    }
                 }
             }
         },
@@ -5433,6 +5457,31 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connectcases#MutableTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?![aA][wW][sS]:)[a-zA-Z0-9 _.:/=+\\-@]+$"
+            }
+        },
+        "com.amazonaws.connectcases#MutableTags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connectcases#MutableTagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.connectcases#TagValueString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
                 }
             }
         },
@@ -6516,6 +6565,16 @@
                 "smithy.api#sparse": {}
             }
         },
+        "com.amazonaws.connectcases#SearchTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9 _.:/=+\\-@]+$"
+            }
+        },
         "com.amazonaws.connectcases#Section": {
             "type": "union",
             "members": {
@@ -6799,6 +6858,20 @@
                 "target": "com.amazonaws.connectcases#Sort"
             }
         },
+        "com.amazonaws.connectcases#TagFilter": {
+            "type": "union",
+            "members": {
+                "equalTo": {
+                    "target": "com.amazonaws.connectcases#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object containing tag key and value information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for tags. Only one value can be provided.</p>"
+            }
+        },
         "com.amazonaws.connectcases#TagKey": {
             "type": "string",
             "traits": {
@@ -6819,6 +6892,54 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.connectcases#TagPropagationConfiguration": {
+            "type": "structure",
+            "members": {
+                "resourceType": {
+                    "target": "com.amazonaws.connectcases#TagPropagationResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Supported resource types for tag propagation. Determines which resources will receive automatically propagated tags.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagMap": {
+                    "target": "com.amazonaws.connectcases#MutableTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that will be applied to the created resource.</p>",
+                        "smithy.api#length": {
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#TagPropagationConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#TagPropagationConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.connectcases#TagPropagationResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Cases",
+                        "name": "CASES",
+                        "documentation": "Cases resources created within the domain"
+                    }
+                ]
             }
         },
         "com.amazonaws.connectcases#TagResource": {
@@ -6873,6 +6994,35 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.connectcases#TagValue": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.connectcases#SearchTagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key in the tag filter value.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.connectcases#TagValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value in the tag filter value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for case tag filter values.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#TagValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9 _.:/=+\\-@]*)$"
             }
         },
         "com.amazonaws.connectcases#Tags": {
@@ -7054,6 +7204,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the template.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tagPropagationConfigurations": {
+                    "target": "com.amazonaws.connectcases#TagPropagationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>"
                     }
                 }
             },
@@ -7543,6 +7699,12 @@
                     "target": "com.amazonaws.connectcases#TemplateCaseRuleList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of case rules (also known as <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">case field conditions</a>) on a template.</p>"
+                    }
+                },
+                "tagPropagationConfigurations": {
+                    "target": "com.amazonaws.connectcases#TagPropagationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>"
                     }
                 }
             }

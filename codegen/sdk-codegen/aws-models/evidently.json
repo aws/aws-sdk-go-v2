@@ -53,7 +53,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation assigns feature variation to user sessions. For each user session, you pass\n      in an <code>entityID</code> that represents the user. Evidently then checks the evaluation\n      rules and assigns the variation.</p>\n         <p>The first rules that are evaluated are the override rules. If the user's\n        <code>entityID</code> matches an override rule, the user is served the variation specified\n      by that rule.</p>\n         <p>Next, if there is a launch of the feature, the user might be assigned to a variation in\n      the launch. The chance of this depends on the percentage of users that are allocated to that\n      launch. If the user is enrolled in the launch, the variation they are served depends on the\n      allocation of the various feature variations used for the launch.</p>\n         <p>If the user is not assigned to a launch, and there is an ongoing experiment for this feature,  the user might \n      be assigned to a variation in the experiment. The chance of this\n      depends on the percentage of users that are allocated to that experiment. If the user is enrolled in the experiment, \n      the variation they are served depends on the allocation of the various feature variations used for the experiment. </p>\n         <p>If the user is not assigned to a launch or experiment, they are served the default variation.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>This operation assigns feature variation to user sessions. For each user session, you pass in an <code>entityID</code> that represents the user. Evidently then checks the evaluation rules and assigns the variation.</p> <p>The first rules that are evaluated are the override rules. If the user's <code>entityID</code> matches an override rule, the user is served the variation specified by that rule.</p> <p>Next, if there is a launch of the feature, the user might be assigned to a variation in the launch. The chance of this depends on the percentage of users that are allocated to that launch. If the user is enrolled in the launch, the variation they are served depends on the allocation of the various feature variations used for the launch.</p> <p>If the user is not assigned to a launch, and there is an ongoing experiment for this feature, the user might be assigned to a variation in the experiment. The chance of this depends on the percentage of users that are allocated to that experiment. If the user is enrolled in the experiment, the variation they are served depends on the allocation of the various feature variations used for the experiment. </p> <p>If the user is not assigned to a launch or experiment, they are served the default variation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "dataplane."
                 },
@@ -93,7 +97,7 @@
                 "results": {
                     "target": "com.amazonaws.evidently#EvaluationResultsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures, where each structure displays the results of one feature evaluation\n       assignment to one user session.</p>"
+                        "smithy.api#documentation": "<p>An array of structures, where each structure displays the results of one feature evaluation assignment to one user session.</p>"
                     }
                 }
             }
@@ -119,12 +123,12 @@
                 "logGroup": {
                     "target": "com.amazonaws.evidently#CwLogGroupSafeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the log group where the project stores evaluation\n       events.</p>"
+                        "smithy.api#documentation": "<p>The name of the log group where the project stores evaluation events.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing the CloudWatch Logs log group where the project stores evaluation\n       events.</p>"
+                "smithy.api#documentation": "<p>A structure containing the CloudWatch Logs log group where the project stores evaluation events.</p>"
             }
         },
         "com.amazonaws.evidently#CloudWatchLogsDestinationConfig": {
@@ -133,12 +137,12 @@
                 "logGroup": {
                     "target": "com.amazonaws.evidently#CwLogGroupSafeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the log group where the project stores evaluation\n       events.</p>"
+                        "smithy.api#documentation": "<p>The name of the log group where the project stores evaluation events.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing the CloudWatch Logs log group where the project stores evaluation\n       events.</p>"
+                "smithy.api#documentation": "<p>A structure containing the CloudWatch Logs log group where the project stores evaluation events.</p>"
             }
         },
         "com.amazonaws.evidently#ConflictException": {
@@ -192,7 +196,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Evidently <i>experiment</i>. Before you create an experiment,\n      you must create the feature to use for the experiment.</p>\n         <p>An experiment helps you make feature design \n       decisions based on evidence and data. An experiment can test as\n       many as five variations at once. Evidently collects experiment data and analyzes it by statistical methods, and provides\n       clear recommendations about which variations perform better.</p>\n         <p>You can optionally specify a <code>segment</code> to have the experiment consider only certain audience \n     types in the experiment, such as using only user sessions from a certain location or who use a certain internet browser.</p>\n         <p>Don't use this operation to update an existing experiment. Instead, use \n       <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html\">UpdateExperiment</a>. </p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Creates an Evidently <i>experiment</i>. Before you create an experiment, you must create the feature to use for the experiment.</p> <p>An experiment helps you make feature design decisions based on evidence and data. An experiment can test as many as five variations at once. Evidently collects experiment data and analyzes it by statistical methods, and provides clear recommendations about which variations perform better.</p> <p>You can optionally specify a <code>segment</code> to have the experiment consider only certain audience types in the experiment, such as using only user sessions from a certain location or who use a certain internet browser.</p> <p>Don't use this operation to update an existing experiment. Instead, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html\">UpdateExperiment</a>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/experiments",
@@ -235,39 +243,39 @@
                 "metricGoals": {
                     "target": "com.amazonaws.evidently#MetricGoalConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that defines the metrics used for the experiment, and whether a higher\n      or lower value for each metric is the goal.</p>",
+                        "smithy.api#documentation": "<p>An array of structures that defines the metrics used for the experiment, and whether a higher or lower value for each metric is the goal.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "randomizationSalt": {
                     "target": "com.amazonaws.evidently#RandomizationSalt",
                     "traits": {
-                        "smithy.api#documentation": "<p>When Evidently assigns a particular user session to an experiment, it must use a randomization ID\n       to determine which variation the user session is served. This randomization ID is a combination of the entity ID\n       and <code>randomizationSalt</code>. If you omit <code>randomizationSalt</code>, Evidently uses\n       the experiment name as the <code>randomizationSalt</code>.</p>"
+                        "smithy.api#documentation": "<p>When Evidently assigns a particular user session to an experiment, it must use a randomization ID to determine which variation the user session is served. This randomization ID is a combination of the entity ID and <code>randomizationSalt</code>. If you omit <code>randomizationSalt</code>, Evidently uses the experiment name as the <code>randomizationSalt</code>.</p>"
                     }
                 },
                 "samplingRate": {
                     "target": "com.amazonaws.evidently#SplitWeight",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The portion of the available audience that you want to allocate to this experiment, in thousandths of a percent. The available audience\n      is the total audience minus the audience that you have allocated to overrides or current launches of\n      this feature.</p>\n         <p>This is represented in thousandths of a percent. For example, specify 10,000 to allocate 10% of the available audience.</p>"
+                        "smithy.api#documentation": "<p>The portion of the available audience that you want to allocate to this experiment, in thousandths of a percent. The available audience is the total audience minus the audience that you have allocated to overrides or current launches of this feature.</p> <p>This is represented in thousandths of a percent. For example, specify 10,000 to allocate 10% of the available audience.</p>"
                     }
                 },
                 "onlineAbConfig": {
                     "target": "com.amazonaws.evidently#OnlineAbConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the configuration of which variation to use as the \"control\"\n      version. tThe \"control\" version is used for comparison with other variations. This structure\n      also specifies how much experiment traffic is allocated to each variation.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the configuration of which variation to use as the \"control\" version. tThe \"control\" version is used for comparison with other variations. This structure also specifies how much experiment traffic is allocated to each variation.</p>"
                     }
                 },
                 "segment": {
                     "target": "com.amazonaws.evidently#SegmentRef",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an audience <i>segment</i> to use in the experiment. When a segment is used in an experiment, only\n      user sessions that match the segment pattern are used in the experiment.</p>"
+                        "smithy.api#documentation": "<p>Specifies an audience <i>segment</i> to use in the experiment. When a segment is used in an experiment, only user sessions that match the segment pattern are used in the experiment.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.evidently#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the experiment.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can associate as many as 50 tags with an experiment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the experiment.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can associate as many as 50 tags with an experiment.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
                     }
                 }
             }
@@ -278,7 +286,7 @@
                 "experiment": {
                     "target": "com.amazonaws.evidently#Experiment",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing the configuration details of the experiment\n       that you created.</p>",
+                        "smithy.api#documentation": "<p>A structure containing the configuration details of the experiment that you created.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -310,7 +318,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Evidently <i>feature</i> that you want to launch or test. You can define up to \n       five variations of a feature, and use these variations in your launches and experiments. A feature must be created in\n       a project. For information about creating a project, see <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html\">CreateProject</a>.</p>\n         <p>Don't use this operation to update an existing feature. Instead, use \n       <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateFeature.html\">UpdateFeature</a>. </p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Creates an Evidently <i>feature</i> that you want to launch or test. You can define up to five variations of a feature, and use these variations in your launches and experiments. A feature must be created in a project. For information about creating a project, see <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html\">CreateProject</a>.</p> <p>Don't use this operation to update an existing feature. Instead, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateFeature.html\">UpdateFeature</a>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/features",
@@ -339,7 +351,7 @@
                 "evaluationStrategy": {
                     "target": "com.amazonaws.evidently#FeatureEvaluationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify <code>ALL_RULES</code> to activate the traffic allocation specified by any\n      ongoing launches or experiments. Specify <code>DEFAULT_VARIATION</code> to serve the default\n      variation to all users instead.</p>"
+                        "smithy.api#documentation": "<p>Specify <code>ALL_RULES</code> to activate the traffic allocation specified by any ongoing launches or experiments. Specify <code>DEFAULT_VARIATION</code> to serve the default variation to all users instead.</p>"
                     }
                 },
                 "description": {
@@ -358,19 +370,19 @@
                 "defaultVariation": {
                     "target": "com.amazonaws.evidently#VariationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the variation to use as the default variation. The default\n      variation is served to users who are not allocated to any ongoing launches\n      or experiments of this feature.</p>\n         <p>This variation must also be listed in the <code>variations</code> structure.</p>\n         <p>If you omit <code>defaultVariation</code>, the first variation listed in\n       the <code>variations</code> structure is used as the default variation.</p>"
+                        "smithy.api#documentation": "<p>The name of the variation to use as the default variation. The default variation is served to users who are not allocated to any ongoing launches or experiments of this feature.</p> <p>This variation must also be listed in the <code>variations</code> structure.</p> <p>If you omit <code>defaultVariation</code>, the first variation listed in the <code>variations</code> structure is used as the default variation.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.evidently#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the feature.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can associate as many as 50 tags with a feature.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the feature.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can associate as many as 50 tags with a feature.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
                     }
                 },
                 "entityOverrides": {
                     "target": "com.amazonaws.evidently#EntityOverrideMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify users that should always be served a specific variation of a feature. Each user\n      is specified by a key-value pair . For each key, specify a user by entering their user ID,\n      account ID, or some other identifier. For the value, specify the name of the variation that\n      they are to be served.</p>\n         <p>This parameter is limited to 2500 overrides or a total of 40KB. The 40KB limit includes an overhead of 6 bytes\n     per override.</p>"
+                        "smithy.api#documentation": "<p>Specify users that should always be served a specific variation of a feature. Each user is specified by a key-value pair . For each key, specify a user by entering their user ID, account ID, or some other identifier. For the value, specify the name of the variation that they are to be served.</p> <p>This parameter is limited to 2500 overrides or a total of 40KB. The 40KB limit includes an overhead of 6 bytes per override.</p>"
                     }
                 }
             }
@@ -412,7 +424,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <i>launch</i> of a given feature. Before you create a launch, you\n      must create the feature to use for the launch.</p>\n         <p>You can use a launch to safely validate new features by serving them to a specified\n      percentage of your users while you roll out the feature. You can monitor the performance of\n      the new feature to help you decide when to ramp up traffic to more users. This helps you\n      reduce risk and identify unintended consequences before you fully launch the feature.</p>\n         <p>Don't use this operation to update an existing launch. Instead, use \n       <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateLaunch.html\">UpdateLaunch</a>. </p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Creates a <i>launch</i> of a given feature. Before you create a launch, you must create the feature to use for the launch.</p> <p>You can use a launch to safely validate new features by serving them to a specified percentage of your users while you roll out the feature. You can monitor the performance of the new feature to help you decide when to ramp up traffic to more users. This helps you reduce risk and identify unintended consequences before you fully launch the feature.</p> <p>Don't use this operation to update an existing launch. Instead, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateLaunch.html\">UpdateLaunch</a>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/launches",
@@ -447,13 +463,13 @@
                 "scheduledSplitsConfig": {
                     "target": "com.amazonaws.evidently#ScheduledSplitsLaunchConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature\n      variations during each step of the launch.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature variations during each step of the launch.</p>"
                     }
                 },
                 "metricMonitors": {
                     "target": "com.amazonaws.evidently#MetricMonitorConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that define the metrics that will be used to monitor \n       the launch performance.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that define the metrics that will be used to monitor the launch performance.</p>"
                     }
                 },
                 "groups": {
@@ -466,13 +482,13 @@
                 "randomizationSalt": {
                     "target": "com.amazonaws.evidently#RandomizationSalt",
                     "traits": {
-                        "smithy.api#documentation": "<p>When Evidently assigns a particular user session to a launch, it must use a randomization ID\n        to determine which variation the user session is served. This randomization ID is a combination of the entity ID\n        and <code>randomizationSalt</code>. If you omit <code>randomizationSalt</code>, Evidently uses\n      the launch name as the <code>randomizationSalt</code>.</p>"
+                        "smithy.api#documentation": "<p>When Evidently assigns a particular user session to a launch, it must use a randomization ID to determine which variation the user session is served. This randomization ID is a combination of the entity ID and <code>randomizationSalt</code>. If you omit <code>randomizationSalt</code>, Evidently uses the launch name as the <code>randomizationSalt</code>.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.evidently#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the launch.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can associate as many as 50 tags with a launch.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the launch.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can associate as many as 50 tags with a launch.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
                     }
                 }
             }
@@ -512,7 +528,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a project, which is the logical object in Evidently that can contain features, launches, and \n      experiments. Use projects to group similar features together.</p>\n         <p>To update an existing project, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProject.html\">UpdateProject</a>.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Creates a project, which is the logical object in Evidently that can contain features, launches, and experiments. Use projects to group similar features together.</p> <p>To update an existing project, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProject.html\">UpdateProject</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects",
@@ -539,19 +559,19 @@
                 "dataDelivery": {
                     "target": "com.amazonaws.evidently#ProjectDataDeliveryConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains information about where Evidently is to store\n      evaluation events for longer term storage, if you choose to do so. If you choose\n      not to store these events, Evidently deletes them after using them to produce metrics and other experiment\n      results that you can view.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains information about where Evidently is to store evaluation events for longer term storage, if you choose to do so. If you choose not to store these events, Evidently deletes them after using them to produce metrics and other experiment results that you can view.</p>"
                     }
                 },
                 "appConfigResource": {
                     "target": "com.amazonaws.evidently#ProjectAppConfigResourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter if the project will use <i>client-side evaluation powered by AppConfig</i>. Client-side\n      evaluation allows your application to assign variations to user\n      sessions locally instead of by calling the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation. This \n      mitigates the latency and availability risks that come with an API call. For more information, \n      see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-client-side-evaluation.html\">\n        Client-side evaluation - powered by AppConfig.</a>\n         </p>\n         <p>This parameter is a structure that\n      contains information about the AppConfig application and environment that will be used as for client-side evaluation.</p>\n         <p>To create a project that uses client-side evaluation, you must have the\n      <code>evidently:ExportProjectAsConfiguration</code> permission.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter if the project will use <i>client-side evaluation powered by AppConfig</i>. Client-side evaluation allows your application to assign variations to user sessions locally instead of by calling the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation. This mitigates the latency and availability risks that come with an API call. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-client-side-evaluation.html\"> Client-side evaluation - powered by AppConfig.</a> </p> <p>This parameter is a structure that contains information about the AppConfig application and environment that will be used as for client-side evaluation.</p> <p>To create a project that uses client-side evaluation, you must have the <code>evidently:ExportProjectAsConfiguration</code> permission.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.evidently#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the project.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can associate as many as 50 tags with a project.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the project.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can associate as many as 50 tags with a project.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
                     }
                 }
             }
@@ -591,7 +611,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to define a <i>segment</i> of your audience. A segment\n      is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, \n      users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects,\n      such as age.</p>\n         <p>Using a segment in an experiment limits that experiment to evaluate only the users who match the segment \n      criteria. Using one or more segments in a launch allows you to define different traffic splits for the different\n      audience segments.</p>\n         <p>For more information about segment pattern syntax, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html\">\n        Segment rule pattern syntax</a>.</p>\n         <p>The pattern that you define for a segment is matched against the value of <code>evaluationContext</code>, which\n      is passed into Evidently in the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation,\n      when Evidently assigns a feature variation to a user.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Use this operation to define a <i>segment</i> of your audience. A segment is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects, such as age.</p> <p>Using a segment in an experiment limits that experiment to evaluate only the users who match the segment criteria. Using one or more segments in a launch allows you to define different traffic splits for the different audience segments.</p> <p>For more information about segment pattern syntax, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html\"> Segment rule pattern syntax</a>.</p> <p>The pattern that you define for a segment is matched against the value of <code>evaluationContext</code>, which is passed into Evidently in the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation, when Evidently assigns a feature variation to a user.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/segments",
@@ -612,7 +636,7 @@
                 "pattern": {
                     "target": "com.amazonaws.evidently#SegmentPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pattern to use for the segment. For more information about pattern syntax, \n      see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html\">\n        Segment rule pattern syntax</a>.</p>",
+                        "smithy.api#documentation": "<p>The pattern to use for the segment. For more information about pattern syntax, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html\"> Segment rule pattern syntax</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -625,7 +649,7 @@
                 "tags": {
                     "target": "com.amazonaws.evidently#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the segment.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n      permissions by granting a user\n      permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can associate as many as 50 tags with a segment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the segment.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can associate as many as 50 tags with a segment.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
                     }
                 }
             }
@@ -691,7 +715,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Evidently experiment. The feature used for the experiment is not deleted.</p>\n         <p>To stop an experiment without deleting it, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopExperiment.html\">StopExperiment</a>. </p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Deletes an Evidently experiment. The feature used for the experiment is not deleted.</p> <p>To stop an experiment without deleting it, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopExperiment.html\">StopExperiment</a>. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/projects/{project}/experiments/{experiment}",
@@ -751,6 +779,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
                 "smithy.api#documentation": "<p>Deletes an Evidently feature.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -811,7 +843,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Evidently launch. The feature used for the launch is not deleted.</p>\n         <p>To stop a launch without deleting it, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopLaunch.html\">StopLaunch</a>. </p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Deletes an Evidently launch. The feature used for the launch is not deleted.</p> <p>To stop a launch without deleting it, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopLaunch.html\">StopLaunch</a>. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/projects/{project}/launches/{launch}",
@@ -871,7 +907,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Evidently project. Before you can delete a project, you must delete all the\n      features that the project contains. To delete a feature, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_DeleteFeature.html\">DeleteFeature</a>.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Deletes an Evidently project. Before you can delete a project, you must delete all the features that the project contains. To delete a feature, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_DeleteFeature.html\">DeleteFeature</a>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/projects/{project}",
@@ -923,7 +963,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a segment. You can't delete a segment that is being used in a launch or experiment, even if that \n    launch or experiment is not currently running.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Deletes a segment. You can't delete a segment that is being used in a launch or experiment, even if that launch or experiment is not currently running.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/segments/{segment}",
@@ -1038,7 +1082,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation assigns a feature variation to one given user session. You pass in an\n        <code>entityID</code> that represents the user. Evidently then checks the evaluation rules\n      and assigns the variation.</p>\n         <p>The first rules that are evaluated are the override rules. If the user's\n        <code>entityID</code> matches an override rule, the user is served the variation specified\n      by that rule.</p>\n         <p>If there is a current launch with this feature that uses segment overrides, and \n      if the user session's <code>evaluationContext</code> matches a segment rule defined in a\n      segment override, the configuration in the segment overrides is used. For more information\n      about segments, see <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html\">CreateSegment</a> \n      and \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html\">Use segments to focus your \n        audience</a>.</p>\n         <p>If there is a launch with no segment overrides, the user might be assigned to a variation in\n      the launch. The chance of this depends on the percentage of users that are allocated to that\n      launch. If the user is enrolled in the launch, the variation they are served depends on the\n      allocation of the various feature variations used for the launch.</p>\n         <p>If the user is not assigned to a launch, and there is an ongoing experiment for this feature, the user might \n      be assigned to a variation in the experiment. The chance of this\n      depends on the percentage of users that are allocated to that experiment.</p>\n         <p>If the experiment uses a segment, then only \n      user sessions with <code>evaluationContext</code> values that match the segment rule are used in the experiment.</p>\n         <p>If the user is enrolled in the experiment, \n      the variation they are served depends on the allocation of the various feature variations used for the experiment. </p>\n         <p>If the user is not assigned to a launch or experiment, they are served the default variation.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>This operation assigns a feature variation to one given user session. You pass in an <code>entityID</code> that represents the user. Evidently then checks the evaluation rules and assigns the variation.</p> <p>The first rules that are evaluated are the override rules. If the user's <code>entityID</code> matches an override rule, the user is served the variation specified by that rule.</p> <p>If there is a current launch with this feature that uses segment overrides, and if the user session's <code>evaluationContext</code> matches a segment rule defined in a segment override, the configuration in the segment overrides is used. For more information about segments, see <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html\">CreateSegment</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html\">Use segments to focus your audience</a>.</p> <p>If there is a launch with no segment overrides, the user might be assigned to a variation in the launch. The chance of this depends on the percentage of users that are allocated to that launch. If the user is enrolled in the launch, the variation they are served depends on the allocation of the various feature variations used for the launch.</p> <p>If the user is not assigned to a launch, and there is an ongoing experiment for this feature, the user might be assigned to a variation in the experiment. The chance of this depends on the percentage of users that are allocated to that experiment.</p> <p>If the experiment uses a segment, then only user sessions with <code>evaluationContext</code> values that match the segment rule are used in the experiment.</p> <p>If the user is enrolled in the experiment, the variation they are served depends on the allocation of the various feature variations used for the experiment. </p> <p>If the user is not assigned to a launch or experiment, they are served the default variation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "dataplane."
                 },
@@ -1074,14 +1122,14 @@
                 "entityId": {
                     "target": "com.amazonaws.evidently#EntityId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An internal ID that represents a unique user of the application. This\n        <code>entityID</code> is checked against any override rules assigned for this\n      feature.</p>",
+                        "smithy.api#documentation": "<p>An internal ID that represents a unique user of the application. This <code>entityID</code> is checked against any override rules assigned for this feature.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "evaluationContext": {
                     "target": "com.amazonaws.evidently#JsonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON object of attributes that you can optionally pass in as part of the evaluation event\n      sent to Evidently from the user session. Evidently can use \n      this value to match user sessions with defined audience segments. For more information, see\n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html\">Use segments to focus your \n        audience</a>.</p>\n         <p>If you include this parameter, the value must be a JSON object. A JSON array is not supported.</p>"
+                        "smithy.api#documentation": "<p>A JSON object of attributes that you can optionally pass in as part of the evaluation event sent to Evidently from the user session. Evidently can use this value to match user sessions with defined audience segments. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html\">Use segments to focus your audience</a>.</p> <p>If you include this parameter, the value must be a JSON object. A JSON array is not supported.</p>"
                     }
                 }
             }
@@ -1104,7 +1152,7 @@
                 "reason": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the reason that the user session was assigned this variation. Possible values\n      include <code>DEFAULT</code>, meaning the user was served the default variation;\n        <code>LAUNCH_RULE_MATCH</code>, if the user session was enrolled in a launch;\n        <code>EXPERIMENT_RULE_MATCH</code>, if the user session was enrolled in an experiment; or\n        <code>ENTITY_OVERRIDES_MATCH</code>, if the user's <code>entityId</code> matches an override\n      rule.</p>"
+                        "smithy.api#documentation": "<p>Specifies the reason that the user session was assigned this variation. Possible values include <code>DEFAULT</code>, meaning the user was served the default variation; <code>LAUNCH_RULE_MATCH</code>, if the user session was enrolled in a launch; <code>EXPERIMENT_RULE_MATCH</code>, if the user session was enrolled in an experiment; or <code>ENTITY_OVERRIDES_MATCH</code>, if the user's <code>entityId</code> matches an override rule.</p>"
                     }
                 },
                 "details": {
@@ -1128,14 +1176,14 @@
                 "entityId": {
                     "target": "com.amazonaws.evidently#EntityId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An internal ID that represents a unique user session of the application. This\n        <code>entityID</code> is checked against any override rules assigned for this\n      feature.</p>",
+                        "smithy.api#documentation": "<p>An internal ID that represents a unique user session of the application. This <code>entityID</code> is checked against any override rules assigned for this feature.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "evaluationContext": {
                     "target": "com.amazonaws.evidently#JsonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON block of attributes that you can optionally pass in. This JSON block is included\n       in the evaluation events sent to Evidently from the user session. </p>"
+                        "smithy.api#documentation": "<p>A JSON block of attributes that you can optionally pass in. This JSON block is included in the evaluation events sent to Evidently from the user session. </p>"
                     }
                 }
             },
@@ -1193,7 +1241,7 @@
                 "reason": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the reason that the user session was assigned this variation. Possible values\n      include <code>DEFAULT</code>, meaning the user was served the default variation;\n        <code>LAUNCH_RULE_MATCH</code>, if the user session was enrolled in a launch; or\n        <code>EXPERIMENT_RULE_MATCH</code>, if the user session was enrolled in an\n      experiment.</p>"
+                        "smithy.api#documentation": "<p>Specifies the reason that the user session was assigned this variation. Possible values include <code>DEFAULT</code>, meaning the user was served the default variation; <code>LAUNCH_RULE_MATCH</code>, if the user session was enrolled in a launch; or <code>EXPERIMENT_RULE_MATCH</code>, if the user session was enrolled in an experiment.</p>"
                     }
                 },
                 "details": {
@@ -1204,7 +1252,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure displays the results of one feature evaluation assignment to one user\n      session.</p>"
+                "smithy.api#documentation": "<p>This structure displays the results of one feature evaluation assignment to one user session.</p>"
             }
         },
         "com.amazonaws.evidently#EvaluationResultsList": {
@@ -1225,13 +1273,13 @@
                 "type": {
                     "target": "com.amazonaws.evidently#RuleType",
                     "traits": {
-                        "smithy.api#documentation": "<p>This value is <code>aws.evidently.splits</code> if this is an evaluation rule for a launch, and it is\n       <code>aws.evidently.onlineab</code> if this is an evaluation rule for an experiment.</p>",
+                        "smithy.api#documentation": "<p>This value is <code>aws.evidently.splits</code> if this is an evaluation rule for a launch, and it is <code>aws.evidently.onlineab</code> if this is an evaluation rule for an experiment.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the information about an evaluation rule for this feature, \n      if it is used in a launch or experiment.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the information about an evaluation rule for this feature, if it is used in a launch or experiment.</p>"
             }
         },
         "com.amazonaws.evidently#EvaluationRulesList": {
@@ -1253,7 +1301,7 @@
                 "type": {
                     "target": "com.amazonaws.evidently#EventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>aws.evidently.evaluation</code> specifies an evaluation event, which determines\n      which feature variation that a user sees. <code>aws.evidently.custom</code> specifies a custom\n      event, which generates metrics from user actions such as clicks and checkouts.</p>",
+                        "smithy.api#documentation": "<p> <code>aws.evidently.evaluation</code> specifies an evaluation event, which determines which feature variation that a user sees. <code>aws.evidently.custom</code> specifies a custom event, which generates metrics from user actions such as clicks and checkouts.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1266,7 +1314,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the information about one evaluation event or custom event sent to Evidently.\n        This is a JSON payload. If this event specifies a pre-defined event type, the payload must follow the \n        defined event schema.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the information about one evaluation event or custom event sent to Evidently. This is a JSON payload. If this event specifies a pre-defined event type, the payload must follow the defined event schema.</p>"
             }
         },
         "com.amazonaws.evidently#EventList": {
@@ -1340,7 +1388,7 @@
                         "X-Amz-User-Agent"
                     ]
                 },
-                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Evidently to safely validate new features by serving \n      them to a specified percentage\n      of your users while you roll out the feature. You can monitor the performance of the new feature\n      to help you decide when to ramp up traffic to your users. This helps you \n      reduce risk and identify unintended consequences before you fully launch the feature.</p>\n         <p>You can also conduct A/B experiments to make feature design decisions based on evidence\n      and data. An experiment can test as many as five variations at once. Evidently collects\n      experiment data and analyzes it using statistical methods. It also provides clear\n      recommendations about which variations perform better. You can test both user-facing features\n      and backend features.</p>",
+                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Evidently to safely validate new features by serving them to a specified percentage of your users while you roll out the feature. You can monitor the performance of the new feature to help you decide when to ramp up traffic to your users. This helps you reduce risk and identify unintended consequences before you fully launch the feature.</p> <p>You can also conduct A/B experiments to make feature design decisions based on evidence and data. An experiment can test as many as five variations at once. Evidently collects experiment data and analyzes it using statistical methods. It also provides clear recommendations about which variations perform better. You can test both user-facing features and backend features.</p>",
                 "smithy.api#title": "Amazon CloudWatch Evidently",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2065,7 +2113,7 @@
                 "statusReason": {
                     "target": "com.amazonaws.evidently#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the experiment was stopped, this is the string that was entered by the person who \n      stopped the experiment, to explain why it was stopped.</p>"
+                        "smithy.api#documentation": "<p>If the experiment was stopped, this is the string that was entered by the person who stopped the experiment, to explain why it was stopped.</p>"
                     }
                 },
                 "description": {
@@ -2109,20 +2157,20 @@
                 "metricGoals": {
                     "target": "com.amazonaws.evidently#MetricGoalsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that defines the metrics used for the experiment, and whether a higher\n      or lower value for each metric is the goal.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that defines the metrics used for the experiment, and whether a higher or lower value for each metric is the goal.</p>"
                     }
                 },
                 "randomizationSalt": {
                     "target": "com.amazonaws.evidently#RandomizationSalt",
                     "traits": {
-                        "smithy.api#documentation": "<p>This value is used when Evidently assigns a particular user session to the experiment. It\n      helps create a randomization ID to determine which variation the user session is served. This\n      randomization ID is a combination of the entity ID and <code>randomizationSalt</code>.</p>"
+                        "smithy.api#documentation": "<p>This value is used when Evidently assigns a particular user session to the experiment. It helps create a randomization ID to determine which variation the user session is served. This randomization ID is a combination of the entity ID and <code>randomizationSalt</code>.</p>"
                     }
                 },
                 "samplingRate": {
                     "target": "com.amazonaws.evidently#SplitWeight",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>In thousandths of a percent, the amount of the available audience that is allocated to this experiment. \n      The available audience\n      is the total audience minus the audience that you have allocated to overrides or current launches of\n      this feature.</p>\n         <p>This is represented in thousandths of a percent, so a value of 10,000 is 10% of the available audience.</p>"
+                        "smithy.api#documentation": "<p>In thousandths of a percent, the amount of the available audience that is allocated to this experiment. The available audience is the total audience minus the audience that you have allocated to overrides or current launches of this feature.</p> <p>This is represented in thousandths of a percent, so a value of 10,000 is 10% of the available audience.</p>"
                     }
                 },
                 "segment": {
@@ -2141,7 +2189,7 @@
                 "onlineAbDefinition": {
                     "target": "com.amazonaws.evidently#OnlineAbDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the configuration of which variation to use as the \"control\"\n      version. The \"control\" version is used for comparison with other variations. This structure\n      also specifies how much experiment traffic is allocated to each variation.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the configuration of which variation to use as the \"control\" version. The \"control\" version is used for comparison with other variations. This structure also specifies how much experiment traffic is allocated to each variation.</p>"
                     }
                 },
                 "tags": {
@@ -2406,7 +2454,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains experiment results for one metric that is monitored in\n      the experiment.</p>"
+                "smithy.api#documentation": "<p>A structure that contains experiment results for one metric that is monitored in the experiment.</p>"
             }
         },
         "com.amazonaws.evidently#ExperimentResultsDataList": {
@@ -2540,14 +2588,14 @@
                 "evaluationStrategy": {
                     "target": "com.amazonaws.evidently#FeatureEvaluationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this value is <code>ALL_RULES</code>, the traffic allocation specified by\n      any ongoing launches or experiments is being used. If this is <code>DEFAULT_VARIATION</code>,\n      the default variation is being served to all users.</p>",
+                        "smithy.api#documentation": "<p>If this value is <code>ALL_RULES</code>, the traffic allocation specified by any ongoing launches or experiments is being used. If this is <code>DEFAULT_VARIATION</code>, the default variation is being served to all users.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "valueType": {
                     "target": "com.amazonaws.evidently#VariationValueType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of value used to define the different feature variations. \n      For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-variationtypes.html\">Variation types</a>\n         </p>",
+                        "smithy.api#documentation": "<p>Defines the type of value used to define the different feature variations. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-variationtypes.html\">Variation types</a> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2561,7 +2609,7 @@
                 "defaultVariation": {
                     "target": "com.amazonaws.evidently#VariationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the variation that is used as the default variation. The default\n      variation is served to users who are not allocated to any ongoing launches\n      or experiments of this feature.</p>\n         <p>This variation must also be listed in the <code>variations</code> structure.</p>\n         <p>If you omit <code>defaultVariation</code>, the first variation listed in\n    the <code>variations</code> structure is used as the default variation.</p>"
+                        "smithy.api#documentation": "<p>The name of the variation that is used as the default variation. The default variation is served to users who are not allocated to any ongoing launches or experiments of this feature.</p> <p>This variation must also be listed in the <code>variations</code> structure.</p> <p>If you omit <code>defaultVariation</code>, the first variation listed in the <code>variations</code> structure is used as the default variation.</p>"
                     }
                 },
                 "evaluationRules": {
@@ -2579,7 +2627,7 @@
                 "entityOverrides": {
                     "target": "com.amazonaws.evidently#EntityOverrideMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs  that specify users who should always be served a specific\n      variation of a feature. Each key specifies a user using their user ID, account ID, or some\n      other identifier. The value specifies the name of the variation that the user is to be\n      served.</p>\n         <p>For the override to be successful, the value of the key must match the <code>entityId</code> used \n      in the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation.</p>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs that specify users who should always be served a specific variation of a feature. Each key specifies a user using their user ID, account ID, or some other identifier. The value specifies the name of the variation that the user is to be served.</p> <p>For the override to be successful, the value of the key must match the <code>entityId</code> used in the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation.</p>"
                     }
                 }
             },
@@ -2716,7 +2764,7 @@
                 "evaluationStrategy": {
                     "target": "com.amazonaws.evidently#FeatureEvaluationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this value is <code>ALL_RULES</code>, the traffic allocation specified by\n      any ongoing launches or experiments is being used. If this is <code>DEFAULT_VARIATION</code>,\n      the default variation is being served to all users.</p>",
+                        "smithy.api#documentation": "<p>If this value is <code>ALL_RULES</code>, the traffic allocation specified by any ongoing launches or experiments is being used. If this is <code>DEFAULT_VARIATION</code>, the default variation is being served to all users.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2729,7 +2777,7 @@
                 "defaultVariation": {
                     "target": "com.amazonaws.evidently#VariationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the variation that is used as the default variation. The default\n      variation is served to users who are not allocated to any ongoing launches\n      or experiments of this feature.</p>"
+                        "smithy.api#documentation": "<p>The name of the variation that is used as the default variation. The default variation is served to users who are not allocated to any ongoing launches or experiments of this feature.</p>"
                     }
                 },
                 "tags": {
@@ -2775,7 +2823,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details about one experiment. You must already know the \n      experiment name. To retrieve a list of experiments in your account, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListExperiments.html\">ListExperiments</a>.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Returns the details about one experiment. You must already know the experiment name. To retrieve a list of experiments in your account, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListExperiments.html\">ListExperiments</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/projects/{project}/experiments/{experiment}",
@@ -2842,7 +2894,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the results of a running or completed experiment. No results are available until\n       there have been 100 events for each variation and at least 10 minutes have passed since the start of the experiment.\n       To increase the statistical power, Evidently performs an additional offline p-value analysis at the end of the experiment.\n       Offline p-value analysis can detect statistical significance in some cases where the anytime p-values used during \n       the experiment do not find statistical significance.</p>\n         <p>Experiment\n       results are available up to 63 days after the start of the experiment. They are not available after that because\n       of CloudWatch data retention policies.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Retrieves the results of a running or completed experiment. No results are available until there have been 100 events for each variation and at least 10 minutes have passed since the start of the experiment. To increase the statistical power, Evidently performs an additional offline p-value analysis at the end of the experiment. Offline p-value analysis can detect statistical significance in some cases where the anytime p-values used during the experiment do not find statistical significance.</p> <p>Experiment results are available up to 63 days after the start of the experiment. They are not available after that because of CloudWatch data retention policies.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/experiments/{experiment}/results",
@@ -2878,7 +2934,7 @@
                 "endTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the experiment ended, if it is completed. This must be no longer than 30 days \n      after the experiment start time.</p>"
+                        "smithy.api#documentation": "<p>The date and time that the experiment ended, if it is completed. This must be no longer than 30 days after the experiment start time.</p>"
                     }
                 },
                 "metricNames": {
@@ -2898,19 +2954,19 @@
                 "baseStat": {
                     "target": "com.amazonaws.evidently#ExperimentBaseStat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The statistic used to calculate experiment results. Currently the only valid value is <code>mean</code>, \n      which uses the mean of the collected values as the statistic.</p>"
+                        "smithy.api#documentation": "<p>The statistic used to calculate experiment results. Currently the only valid value is <code>mean</code>, which uses the mean of the collected values as the statistic.</p>"
                     }
                 },
                 "resultStats": {
                     "target": "com.amazonaws.evidently#ExperimentResultRequestTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The statistics that you want to see in the returned results.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PValue</code> specifies to use p-values for the results. A p-value is used in hypothesis\n          testing to measure how often you are willing to make a mistake in rejecting the null\n          hypothesis. A general practice is to reject the null hypothesis and declare that the\n          results are statistically significant when the p-value is less than 0.05.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfidenceInterval</code> specifies a confidence interval for the results. The\n          confidence interval represents the range of values for the chosen metric that is likely to\n          contain the true difference between the <code>baseStat</code> of a variation and the\n          baseline. Evidently returns the 95% confidence interval. </p>\n            </li>\n            <li>\n               <p>\n                  <code>TreatmentEffect</code> is the difference in the statistic specified by the\n            <code>baseStat</code> parameter between each variation and the default variation. </p>\n            </li>\n            <li>\n               <p>\n                  <code>BaseStat</code> returns the statistical values collected for the metric for each\n          variation. The statistic uses the same statistic specified in the <code>baseStat</code>\n          parameter. Therefore, if <code>baseStat</code> is <code>mean</code>, this returns the mean\n          of the values collected for each variation.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The statistics that you want to see in the returned results.</p> <ul> <li> <p> <code>PValue</code> specifies to use p-values for the results. A p-value is used in hypothesis testing to measure how often you are willing to make a mistake in rejecting the null hypothesis. A general practice is to reject the null hypothesis and declare that the results are statistically significant when the p-value is less than 0.05.</p> </li> <li> <p> <code>ConfidenceInterval</code> specifies a confidence interval for the results. The confidence interval represents the range of values for the chosen metric that is likely to contain the true difference between the <code>baseStat</code> of a variation and the baseline. Evidently returns the 95% confidence interval. </p> </li> <li> <p> <code>TreatmentEffect</code> is the difference in the statistic specified by the <code>baseStat</code> parameter between each variation and the default variation. </p> </li> <li> <p> <code>BaseStat</code> returns the statistical values collected for the metric for each variation. The statistic uses the same statistic specified in the <code>baseStat</code> parameter. Therefore, if <code>baseStat</code> is <code>mean</code>, this returns the mean of the values collected for each variation.</p> </li> </ul>"
                     }
                 },
                 "reportNames": {
                     "target": "com.amazonaws.evidently#ExperimentReportNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the report types that you want to see. Currently, <code>BayesianInference</code>\n       is the only valid value.</p>"
+                        "smithy.api#documentation": "<p>The names of the report types that you want to see. Currently, <code>BayesianInference</code> is the only valid value.</p>"
                     }
                 },
                 "period": {
@@ -2946,7 +3002,7 @@
                 "details": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the experiment doesn't yet have enough events to provide valid results, this \n      field is returned with the message <code>Not enough events to generate results</code>. If there are \n      enough events to provide valid results, this field is not returned.</p>"
+                        "smithy.api#documentation": "<p>If the experiment doesn't yet have enough events to provide valid results, this field is returned with the message <code>Not enough events to generate results</code>. If there are enough events to provide valid results, this field is not returned.</p>"
                     }
                 }
             }
@@ -2974,7 +3030,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details about one feature. You must already know the feature name. To\n      retrieve a list of features in your account, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListFeatures.html\">ListFeatures</a>.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Returns the details about one feature. You must already know the feature name. To retrieve a list of features in your account, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListFeatures.html\">ListFeatures</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/projects/{project}/features/{feature}",
@@ -3039,7 +3099,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details about one launch. You must already know the \n       launch name. To retrieve a list of launches in your account, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListLaunches.html\">ListLaunches</a>.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Returns the details about one launch. You must already know the launch name. To retrieve a list of launches in your account, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListLaunches.html\">ListLaunches</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/projects/{project}/launches/{launch}",
@@ -3103,7 +3167,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details about one launch. You must already know the \n       project name. To retrieve a list of projects in your account, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListProjects.html\">ListProjects</a>.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Returns the details about one launch. You must already know the project name. To retrieve a list of projects in your account, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListProjects.html\">ListProjects</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/projects/{project}",
@@ -3160,7 +3228,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the specified segment. Specify the segment you want to view\n    by specifying its ARN.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Returns information about the specified segment. Specify the segment you want to view by specifying its ARN.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/segments/{segment}",
@@ -3280,7 +3352,7 @@
                 "statusReason": {
                     "target": "com.amazonaws.evidently#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the launch was stopped, this is the string that was entered by the person who \n      stopped the launch, to explain why it was stopped.</p>"
+                        "smithy.api#documentation": "<p>If the launch was stopped, this is the string that was entered by the person who stopped the launch, to explain why it was stopped.</p>"
                     }
                 },
                 "description": {
@@ -3324,7 +3396,7 @@
                 "randomizationSalt": {
                     "target": "com.amazonaws.evidently#RandomizationSalt",
                     "traits": {
-                        "smithy.api#documentation": "<p>This value is used when Evidently assigns a particular user session to the launch, to help create a randomization ID\n      to determine which variation the user session is served. This randomization ID is a combination of the entity ID\n      and <code>randomizationSalt</code>.</p>"
+                        "smithy.api#documentation": "<p>This value is used when Evidently assigns a particular user session to the launch, to help create a randomization ID to determine which variation the user session is served. This randomization ID is a combination of the entity ID and <code>randomizationSalt</code>.</p>"
                     }
                 },
                 "type": {
@@ -3337,7 +3409,7 @@
                 "scheduledSplitsDefinition": {
                     "target": "com.amazonaws.evidently#ScheduledSplitsLaunchDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature\n      variations during each step of the launch.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature variations during each step of the launch.</p>"
                     }
                 },
                 "tags": {
@@ -3406,7 +3478,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines one launch group in a launch. A launch group is a variation of the feature\n      that you are including in the launch.</p>"
+                "smithy.api#documentation": "<p>A structure that defines one launch group in a launch. A launch group is a variation of the feature that you are including in the launch.</p>"
             }
         },
         "com.amazonaws.evidently#LaunchGroupConfig": {
@@ -3441,7 +3513,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines one launch group in a launch. A launch group is a variation of\n      the feature that you are including in the launch.</p>"
+                "smithy.api#documentation": "<p>A structure that defines one launch group in a launch. A launch group is a variation of the feature that you are including in the launch.</p>"
             }
         },
         "com.amazonaws.evidently#LaunchGroupConfigList": {
@@ -3585,6 +3657,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
                 "smithy.api#documentation": "<p>Returns configuration details about all the experiments in the specified project.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3621,7 +3697,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n       <code>ListExperiments</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous <code>ListExperiments</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3640,13 +3716,13 @@
                 "experiments": {
                     "target": "com.amazonaws.evidently#ExperimentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that contain the configuration details of the experiments in the\n      specified project.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that contain the configuration details of the experiments in the specified project.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListExperiments</code> operation to return\n       the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListExperiments</code> operation to return the next set of results.</p>"
                     }
                 }
             }
@@ -3674,6 +3750,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
                 "smithy.api#documentation": "<p>Returns configuration details about all the features in the specified project.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3710,7 +3790,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n       <code>ListFeatures</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous <code>ListFeatures</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -3722,13 +3802,13 @@
                 "features": {
                     "target": "com.amazonaws.evidently#FeatureSummariesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that contain the configuration details of the features in the\n       specified project.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that contain the configuration details of the features in the specified project.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListFeatures</code> operation to return\n       the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListFeatures</code> operation to return the next set of results.</p>"
                     }
                 }
             }
@@ -3753,6 +3833,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
                 "smithy.api#documentation": "<p>Returns configuration details about all the launches in the specified project.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3789,7 +3873,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n       <code>ListLaunches</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous <code>ListLaunches</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3808,13 +3892,13 @@
                 "launches": {
                     "target": "com.amazonaws.evidently#LaunchesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that contain the configuration details of the launches in the\n       specified project.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that contain the configuration details of the launches in the specified project.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListLaunches</code> operation to return\n       the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListLaunches</code> operation to return the next set of results.</p>"
                     }
                 }
             }
@@ -3839,7 +3923,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns configuration details about all the projects in the current Region in your\n      account.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Returns configuration details about all the projects in the current Region in your account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/projects",
@@ -3867,7 +3955,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n       <code>ListProjects</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous <code>ListProjects</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -3885,7 +3973,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListProjects</code> operation to return\n       the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListProjects</code> operation to return the next set of results.</p>"
                     }
                 }
             }
@@ -3913,6 +4001,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
                 "smithy.api#documentation": "<p>Use this operation to find which experiments or launches are using a specified segment.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3949,7 +4041,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n      <code>ListSegmentReferences</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous <code>ListSegmentReferences</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3969,13 +4061,13 @@
                 "referencedBy": {
                     "target": "com.amazonaws.evidently#RefResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures, where each structure contains information about one experiment or launch that\n      uses this segment.  </p>"
+                        "smithy.api#documentation": "<p>An array of structures, where each structure contains information about one experiment or launch that uses this segment. </p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListSegmentReferences</code> operation to return\n      the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListSegmentReferences</code> operation to return the next set of results.</p>"
                     }
                 }
             }
@@ -4000,6 +4092,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
                 "smithy.api#documentation": "<p>Returns a list of audience segments that you have created in your account in this Region.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4028,7 +4124,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n      <code>ListSegments</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous <code>ListSegments</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -4046,7 +4142,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.evidently#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListSegments</code> operation to return\n      the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListSegments</code> operation to return the next set of results.</p>"
                     }
                 }
             }
@@ -4071,6 +4167,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
                 "smithy.api#documentation": "<p>Displays the tags associated with an Evidently resource.</p>",
                 "smithy.api#http": {
                     "uri": "/tags/{resourceArn}",
@@ -4169,7 +4269,7 @@
                 "entityIdKey": {
                     "target": "com.amazonaws.evidently#JsonPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity, such as a user or session, that does an action that causes a metric\n      value to be recorded.</p>"
+                        "smithy.api#documentation": "<p>The entity, such as a user or session, that does an action that causes a metric value to be recorded.</p>"
                     }
                 },
                 "valueKey": {
@@ -4181,7 +4281,7 @@
                 "eventPattern": {
                     "target": "com.amazonaws.evidently#JsonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EventBridge event pattern that defines how the metric is recorded.</p>\n         <p>For more information about EventBridge event patterns, see \n       <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a>.</p>"
+                        "smithy.api#documentation": "<p>The EventBridge event pattern that defines how the metric is recorded.</p> <p>For more information about EventBridge event patterns, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a>.</p>"
                     }
                 },
                 "unitLabel": {
@@ -4192,7 +4292,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure defines a metric that is being used to evaluate the variations\n      during a launch or experiment.</p>"
+                "smithy.api#documentation": "<p>This structure defines a metric that is being used to evaluate the variations during a launch or experiment.</p>"
             }
         },
         "com.amazonaws.evidently#MetricDefinitionConfig": {
@@ -4208,7 +4308,7 @@
                 "entityIdKey": {
                     "target": "com.amazonaws.evidently#JsonPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity, such as a user or session, that does an action that causes a metric\n       value to be recorded. An example is <code>userDetails.userID</code>.</p>",
+                        "smithy.api#documentation": "<p>The entity, such as a user or session, that does an action that causes a metric value to be recorded. An example is <code>userDetails.userID</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4222,7 +4322,7 @@
                 "eventPattern": {
                     "target": "com.amazonaws.evidently#JsonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EventBridge event pattern that defines how the metric is recorded.</p>\n         <p>For more information about EventBridge event patterns, see \n       <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a>.</p>",
+                        "smithy.api#documentation": "<p>The EventBridge event pattern that defines how the metric is recorded.</p> <p>For more information about EventBridge event patterns, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a>.</p>",
                         "smithy.api#length": {
                             "max": 1024
                         }
@@ -4236,7 +4336,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure defines a metric that you want to use to evaluate the variations\n       during a launch or experiment.</p>"
+                "smithy.api#documentation": "<p>This structure defines a metric that you want to use to evaluate the variations during a launch or experiment.</p>"
             }
         },
         "com.amazonaws.evidently#MetricGoal": {
@@ -4252,12 +4352,12 @@
                 "desiredChange": {
                     "target": "com.amazonaws.evidently#ChangeDirectionEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>INCREASE</code> means that a variation with a higher number for this metric is performing \n      better.</p>\n         <p>\n            <code>DECREASE</code> means that a variation with a lower number for this metric is performing \n     better.</p>"
+                        "smithy.api#documentation": "<p> <code>INCREASE</code> means that a variation with a higher number for this metric is performing better.</p> <p> <code>DECREASE</code> means that a variation with a lower number for this metric is performing better.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that tells Evidently whether higher or lower values are desired for a metric that is \n       used in an experiment.</p>"
+                "smithy.api#documentation": "<p>A structure that tells Evidently whether higher or lower values are desired for a metric that is used in an experiment.</p>"
             }
         },
         "com.amazonaws.evidently#MetricGoalConfig": {
@@ -4273,12 +4373,12 @@
                 "desiredChange": {
                     "target": "com.amazonaws.evidently#ChangeDirectionEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>INCREASE</code> means that a variation with a higher number for this metric is performing \n       better.</p>\n         <p>\n            <code>DECREASE</code> means that a variation with a lower number for this metric is performing \n       better.</p>"
+                        "smithy.api#documentation": "<p> <code>INCREASE</code> means that a variation with a higher number for this metric is performing better.</p> <p> <code>DECREASE</code> means that a variation with a lower number for this metric is performing better.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this structure to tell Evidently whether higher or lower values are desired for a metric that is \n       used in an experiment.</p>"
+                "smithy.api#documentation": "<p>Use this structure to tell Evidently whether higher or lower values are desired for a metric that is used in an experiment.</p>"
             }
         },
         "com.amazonaws.evidently#MetricGoalConfigList": {
@@ -4402,12 +4502,12 @@
                 "treatmentWeights": {
                     "target": "com.amazonaws.evidently#TreatmentToWeightMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs. The keys are variation names, and the values are the portion\n      of experiment traffic to be assigned to that variation. Specify the traffic portion in\n      thousandths of a percent, so 20,000 for a variation would allocate 20% of the experiment\n      traffic to that variation.</p>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs. The keys are variation names, and the values are the portion of experiment traffic to be assigned to that variation. Specify the traffic portion in thousandths of a percent, so 20,000 for a variation would allocate 20% of the experiment traffic to that variation.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the configuration of which variation to use as the \"control\"\n      version. The \"control\" version  is used for comparison with other variations. This structure\n      also specifies how much experiment traffic is allocated to each variation.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the configuration of which variation to use as the \"control\" version. The \"control\" version is used for comparison with other variations. This structure also specifies how much experiment traffic is allocated to each variation.</p>"
             }
         },
         "com.amazonaws.evidently#OnlineAbDefinition": {
@@ -4422,12 +4522,12 @@
                 "treatmentWeights": {
                     "target": "com.amazonaws.evidently#TreatmentToWeightMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs.  The keys are variation names, and the values are the portion\n      of experiment traffic to be assigned to that variation. The traffic portion is specified in\n      thousandths of a percent, so 20,000 for a variation would allocate 20% of the experiment\n      traffic to that variation.</p>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs. The keys are variation names, and the values are the portion of experiment traffic to be assigned to that variation. The traffic portion is specified in thousandths of a percent, so 20,000 for a variation would allocate 20% of the experiment traffic to that variation.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the configuration of which variation to use as the \"control\"\n      version. The \"control\" version is used for comparison with other variations. This structure\n      also specifies how much experiment traffic is allocated to each variation.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the configuration of which variation to use as the \"control\" version. The \"control\" version is used for comparison with other variations. This structure also specifies how much experiment traffic is allocated to each variation.</p>"
             }
         },
         "com.amazonaws.evidently#Project": {
@@ -4483,7 +4583,7 @@
                 "launchCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of launches currently in the project. This includes all launches that have been created\n       and not deleted, whether they are ongoing or not.</p>"
+                        "smithy.api#documentation": "<p>The number of launches currently in the project. This includes all launches that have been created and not deleted, whether they are ongoing or not.</p>"
                     }
                 },
                 "activeLaunchCount": {
@@ -4495,7 +4595,7 @@
                 "experimentCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of experiments currently in the project. This includes all experiments that have been created\n      and not deleted, whether they are ongoing or not.</p>"
+                        "smithy.api#documentation": "<p>The number of experiments currently in the project. This includes all experiments that have been created and not deleted, whether they are ongoing or not.</p>"
                     }
                 },
                 "activeExperimentCount": {
@@ -4507,13 +4607,13 @@
                 "dataDelivery": {
                     "target": "com.amazonaws.evidently#ProjectDataDelivery",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains information about where Evidently is to store\n       evaluation events for longer term storage.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains information about where Evidently is to store evaluation events for longer term storage.</p>"
                     }
                 },
                 "appConfigResource": {
                     "target": "com.amazonaws.evidently#ProjectAppConfigResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>This structure defines the configuration of how your application \n      integrates with AppConfig to run client-side evaluation.</p>"
+                        "smithy.api#documentation": "<p>This structure defines the configuration of how your application integrates with AppConfig to run client-side evaluation.</p>"
                     }
                 },
                 "tags": {
@@ -4524,7 +4624,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure defines a project, which is the logical object in Evidently that can contain features, launches, and \n      experiments. Use projects to group similar features together.</p>"
+                "smithy.api#documentation": "<p>This structure defines a project, which is the logical object in Evidently that can contain features, launches, and experiments. Use projects to group similar features together.</p>"
             }
         },
         "com.amazonaws.evidently#ProjectAppConfigResource": {
@@ -4540,7 +4640,7 @@
                 "environmentId": {
                     "target": "com.amazonaws.evidently#AppConfigResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AppConfig environment to use for client-side evaluation. This must be an \n    environment that is within the application that you specify for <code>applicationId</code>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the AppConfig environment to use for client-side evaluation. This must be an environment that is within the application that you specify for <code>applicationId</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4553,7 +4653,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This is a structure that defines the configuration of how your application \n      integrates with AppConfig to run client-side evaluation.</p>"
+                "smithy.api#documentation": "<p>This is a structure that defines the configuration of how your application integrates with AppConfig to run client-side evaluation.</p>"
             }
         },
         "com.amazonaws.evidently#ProjectAppConfigResourceConfig": {
@@ -4568,12 +4668,12 @@
                 "environmentId": {
                     "target": "com.amazonaws.evidently#AppConfigResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AppConfig environment to use for client-side evaluation. This must be an \n      environment that is within the application that you specify for <code>applicationId</code>.</p>"
+                        "smithy.api#documentation": "<p>The ID of the AppConfig environment to use for client-side evaluation. This must be an environment that is within the application that you specify for <code>applicationId</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this parameter to configure client-side evaluation for your project. Client-side evaluation allows your application to assign \n      variations to user\n      sessions locally instead of by calling the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation to assign the \n      variations. This mitigates the latency and availability risks that come with an API call.</p>\n         <p>\n            <code>ProjectAppConfigResource</code> is a structure that defines the configuration of how your application \n      integrates with AppConfig to run client-side evaluation.</p>"
+                "smithy.api#documentation": "<p>Use this parameter to configure client-side evaluation for your project. Client-side evaluation allows your application to assign variations to user sessions locally instead of by calling the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation to assign the variations. This mitigates the latency and availability risks that come with an API call.</p> <p> <code>ProjectAppConfigResource</code> is a structure that defines the configuration of how your application integrates with AppConfig to run client-side evaluation.</p>"
             }
         },
         "com.amazonaws.evidently#ProjectArn": {
@@ -4592,18 +4692,18 @@
                 "s3Destination": {
                     "target": "com.amazonaws.evidently#S3Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the project stores evaluation events in an Amazon S3 bucket, this structure\n       stores the bucket name and bucket prefix.</p>"
+                        "smithy.api#documentation": "<p>If the project stores evaluation events in an Amazon S3 bucket, this structure stores the bucket name and bucket prefix.</p>"
                     }
                 },
                 "cloudWatchLogs": {
                     "target": "com.amazonaws.evidently#CloudWatchLogsDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the project stores evaluation events in CloudWatch Logs, this structure\n      stores the log group name.</p>"
+                        "smithy.api#documentation": "<p>If the project stores evaluation events in CloudWatch Logs, this structure stores the log group name.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains information about where Evidently is to store\n       evaluation events for longer term storage.</p>"
+                "smithy.api#documentation": "<p>A structure that contains information about where Evidently is to store evaluation events for longer term storage.</p>"
             }
         },
         "com.amazonaws.evidently#ProjectDataDeliveryConfig": {
@@ -4612,18 +4712,18 @@
                 "s3Destination": {
                     "target": "com.amazonaws.evidently#S3DestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the project stores evaluation events in an Amazon S3 bucket, this structure\n       stores the bucket name and bucket prefix.</p>"
+                        "smithy.api#documentation": "<p>If the project stores evaluation events in an Amazon S3 bucket, this structure stores the bucket name and bucket prefix.</p>"
                     }
                 },
                 "cloudWatchLogs": {
                     "target": "com.amazonaws.evidently#CloudWatchLogsDestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the project stores evaluation events in CloudWatch Logs, this structure\n       stores the log group name.</p>"
+                        "smithy.api#documentation": "<p>If the project stores evaluation events in CloudWatch Logs, this structure stores the log group name.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains information about where Evidently is to store\n       evaluation events for longer term storage.</p>"
+                "smithy.api#documentation": "<p>A structure that contains information about where Evidently is to store evaluation events for longer term storage.</p>"
             }
         },
         "com.amazonaws.evidently#ProjectName": {
@@ -4829,7 +4929,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends performance events to Evidently. These events can be used to evaluate a launch or\n      an experiment.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Sends performance events to Evidently. These events can be used to evaluate a launch or an experiment.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "dataplane."
                 },
@@ -4883,7 +4987,7 @@
                 "events": {
                     "target": "com.amazonaws.evidently#EventList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of event structures that contain the performance data that is being sent to\n      Evidently.</p>",
+                        "smithy.api#documentation": "<p>An array of event structures that contain the performance data that is being sent to Evidently.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4901,7 +5005,7 @@
                 "eventResults": {
                     "target": "com.amazonaws.evidently#PutProjectEventsResultEntryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains Evidently's response to the sent events, including an event ID and \n      error codes, if any.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains Evidently's response to the sent events, including an event ID and error codes, if any.</p>"
                     }
                 }
             }
@@ -4918,13 +5022,13 @@
                 "errorCode": {
                     "target": "com.amazonaws.evidently#ErrorCodeEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the <code>PutProjectEvents</code> operation has an error, the error code is returned\n      here.</p>"
+                        "smithy.api#documentation": "<p>If the <code>PutProjectEvents</code> operation has an error, the error code is returned here.</p>"
                     }
                 },
                 "errorMessage": {
                     "target": "com.amazonaws.evidently#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the <code>PutProjectEvents</code> operation has an error, the error message is\n      returned here.</p>"
+                        "smithy.api#documentation": "<p>If the <code>PutProjectEvents</code> operation has an error, the error message is returned here.</p>"
                     }
                 }
             },
@@ -4997,7 +5101,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains information about one experiment or launch that\n      uses the specified segment.  </p>"
+                "smithy.api#documentation": "<p>A structure that contains information about one experiment or launch that uses the specified segment. </p>"
             }
         },
         "com.amazonaws.evidently#RefResourceList": {
@@ -5086,7 +5190,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>If the project stores evaluation events in an Amazon S3 bucket, this structure\n       stores the bucket name and bucket prefix.</p>"
+                "smithy.api#documentation": "<p>If the project stores evaluation events in an Amazon S3 bucket, this structure stores the bucket name and bucket prefix.</p>"
             }
         },
         "com.amazonaws.evidently#S3DestinationConfig": {
@@ -5106,7 +5210,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>If the project stores evaluation events in an Amazon S3 bucket, this structure\n       stores the bucket name and bucket prefix.</p>"
+                "smithy.api#documentation": "<p>If the project stores evaluation events in an Amazon S3 bucket, this structure stores the bucket name and bucket prefix.</p>"
             }
         },
         "com.amazonaws.evidently#S3PrefixSafeName": {
@@ -5132,18 +5236,18 @@
                 "groupWeights": {
                     "target": "com.amazonaws.evidently#GroupToWeightMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations during one step of a\n      launch. This is a set of key-value pairs.   The keys are variation names. The values represent\n      the percentage of traffic to allocate to that variation during this step.</p>\n         <p>The values is expressed in thousandths of a percent,\n       so assigning a weight of 50000 assigns 50% of traffic to that variation.</p>\n         <p>If the sum of the weights for all the variations in a segment override does not add up to 100,000, \n     then the remaining traffic that matches this segment is not assigned by this segment override, and instead moves\n     on to the next segment override or the default traffic split.</p>"
+                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations during one step of a launch. This is a set of key-value pairs. The keys are variation names. The values represent the percentage of traffic to allocate to that variation during this step.</p> <p>The values is expressed in thousandths of a percent, so assigning a weight of 50000 assigns 50% of traffic to that variation.</p> <p>If the sum of the weights for all the variations in a segment override does not add up to 100,000, then the remaining traffic that matches this segment is not assigned by this segment override, and instead moves on to the next segment override or the default traffic split.</p>"
                     }
                 },
                 "segmentOverrides": {
                     "target": "com.amazonaws.evidently#SegmentOverridesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to specify different traffic splits for one or more audience <i>segments</i>. \n      A segment\n      is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, \n      users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects,\n      such as age.</p>\n         <p>This parameter is an array of up to six segment override objects. Each of these objects specifies a segment\n    that you have already created, and defines the traffic split for that segment.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to specify different traffic splits for one or more audience <i>segments</i>. A segment is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects, such as age.</p> <p>This parameter is an array of up to six segment override objects. Each of these objects specifies a segment that you have already created, and defines the traffic split for that segment.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure defines the traffic allocation percentages among the feature\n       variations during one step of a launch, and the start time of that step.</p>"
+                "smithy.api#documentation": "<p>This structure defines the traffic allocation percentages among the feature variations during one step of a launch, and the start time of that step.</p>"
             }
         },
         "com.amazonaws.evidently#ScheduledSplitConfig": {
@@ -5159,19 +5263,19 @@
                 "groupWeights": {
                     "target": "com.amazonaws.evidently#GroupToWeightMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations during one step of a\n      launch. This is a set of key-value pairs. The keys are variation names. The values represent\n      the percentage of traffic to allocate to that variation during this step.</p>\n         <p>The values is expressed in thousandths of a percent,\n       so assigning a weight of 50000 assigns 50% of traffic to that variation.</p>\n         <p>If the sum of the weights for all the variations in a segment override does not add up to 100,000, \n       then the remaining traffic that matches this segment is not assigned by this segment override, and instead moves\n       on to the next segment override or the default traffic split.</p>",
+                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations during one step of a launch. This is a set of key-value pairs. The keys are variation names. The values represent the percentage of traffic to allocate to that variation during this step.</p> <p>The values is expressed in thousandths of a percent, so assigning a weight of 50000 assigns 50% of traffic to that variation.</p> <p>If the sum of the weights for all the variations in a segment override does not add up to 100,000, then the remaining traffic that matches this segment is not assigned by this segment override, and instead moves on to the next segment override or the default traffic split.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "segmentOverrides": {
                     "target": "com.amazonaws.evidently#SegmentOverridesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to specify different traffic splits for one or more audience <i>segments</i>. \n      A segment\n      is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, \n      users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects,\n      such as age.</p>\n         <p>This parameter is an array of up to six segment override objects. Each of these objects specifies a segment\n      that you have already created, and defines the traffic split for that segment.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to specify different traffic splits for one or more audience <i>segments</i>. A segment is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects, such as age.</p> <p>This parameter is an array of up to six segment override objects. Each of these objects specifies a segment that you have already created, and defines the traffic split for that segment.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure defines the traffic allocation percentages among the feature\n       variations during one step of a launch, and the start time of that step.</p>"
+                "smithy.api#documentation": "<p>This structure defines the traffic allocation percentages among the feature variations during one step of a launch, and the start time of that step.</p>"
             }
         },
         "com.amazonaws.evidently#ScheduledSplitConfigList": {
@@ -5192,13 +5296,13 @@
                 "steps": {
                     "target": "com.amazonaws.evidently#ScheduledSplitConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature\n      variations during each step of the launch. This also defines the start time of each\n      step.</p>",
+                        "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature variations during each step of the launch. This also defines the start time of each step.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature\n      variations during each step of a launch. This also defines the start time of each step.</p>"
+                "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature variations during each step of a launch. This also defines the start time of each step.</p>"
             }
         },
         "com.amazonaws.evidently#ScheduledSplitsLaunchDefinition": {
@@ -5207,12 +5311,12 @@
                 "steps": {
                     "target": "com.amazonaws.evidently#ScheduledStepList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature\n      variations during each step of the launch. This also defines the start time of each\n      step.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature variations during each step of the launch. This also defines the start time of each step.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature\n      variations during each step of a launch. This also defines the start time of each step.</p>"
+                "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature variations during each step of a launch. This also defines the start time of each step.</p>"
             }
         },
         "com.amazonaws.evidently#ScheduledStepList": {
@@ -5247,7 +5351,7 @@
                 "pattern": {
                     "target": "com.amazonaws.evidently#SegmentPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pattern that defines the attributes to use to evalute whether a user session will be in the segment. \n    For more information about the pattern syntax, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html\">Segment rule pattern syntax</a>.</p>",
+                        "smithy.api#documentation": "<p>The pattern that defines the attributes to use to evalute whether a user session will be in the segment. For more information about the pattern syntax, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html\">Segment rule pattern syntax</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5274,13 +5378,13 @@
                 "experimentCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of experiments that this segment is used in. This count includes all current experiments, not just\n    those that are currently running.</p>"
+                        "smithy.api#documentation": "<p>The number of experiments that this segment is used in. This count includes all current experiments, not just those that are currently running.</p>"
                     }
                 },
                 "launchCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of launches that this segment is used in. This count includes all current launches, not just\n      those that are currently running.</p>"
+                        "smithy.api#documentation": "<p>The number of launches that this segment is used in. This count includes all current launches, not just those that are currently running.</p>"
                     }
                 },
                 "tags": {
@@ -5291,7 +5395,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure contains information about one audience <i>segment</i>. You can use segments\n    in your experiments and launches to narrow the user sessions used for experiment or launch to only the user\n    sessions that match one or more criteria.</p>"
+                "smithy.api#documentation": "<p>This structure contains information about one audience <i>segment</i>. You can use segments in your experiments and launches to narrow the user sessions used for experiment or launch to only the user sessions that match one or more criteria.</p>"
             }
         },
         "com.amazonaws.evidently#SegmentArn": {
@@ -5333,20 +5437,20 @@
                 "evaluationOrder": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>A number indicating the order to use to evaluate segment overrides, if there are more\n    than one. Segment overrides with lower numbers are evaluated first.</p>",
+                        "smithy.api#documentation": "<p>A number indicating the order to use to evaluate segment overrides, if there are more than one. Segment overrides with lower numbers are evaluated first.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "weights": {
                     "target": "com.amazonaws.evidently#GroupToWeightMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations to assign to this \n      segment. This is a set of key-value pairs.   The keys are variation names. The values represent\n      the amount of traffic to allocate to that variation for this segment. This is expressed in thousandths of a percent,\n    so a weight of 50000 represents 50% of traffic.</p>",
+                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations to assign to this segment. This is a set of key-value pairs. The keys are variation names. The values represent the amount of traffic to allocate to that variation for this segment. This is expressed in thousandths of a percent, so a weight of 50000 represents 50% of traffic.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure specifies a segment\n      that you have already created, and defines the traffic split for that segment to be used in a launch.</p>"
+                "smithy.api#documentation": "<p>This structure specifies a segment that you have already created, and defines the traffic split for that segment to be used in a launch.</p>"
             }
         },
         "com.amazonaws.evidently#SegmentOverridesList": {
@@ -5510,7 +5614,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an existing experiment. To create an experiment, \n        use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateExperiment.html\">CreateExperiment</a>.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Starts an existing experiment. To create an experiment, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateExperiment.html\">CreateExperiment</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/experiments/{experiment}/start",
@@ -5540,7 +5648,7 @@
                 "analysisCompleteTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time to end the experiment. This must be no more than 30 days after\n      the experiment starts.</p>",
+                        "smithy.api#documentation": "<p>The date and time to end the experiment. This must be no more than 30 days after the experiment starts.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5586,7 +5694,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an existing launch. To create a launch, \n       use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateLaunch.html\">CreateLaunch</a>.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Starts an existing launch. To create a launch, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateLaunch.html\">CreateLaunch</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/launches/{launch}/start",
@@ -5656,7 +5768,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops an experiment that is currently running. If you stop an experiment, you can't\n      resume it or restart it.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Stops an experiment that is currently running. If you stop an experiment, you can't resume it or restart it.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/experiments/{experiment}/cancel",
@@ -5686,7 +5802,7 @@
                 "desiredState": {
                     "target": "com.amazonaws.evidently#ExperimentStopDesiredState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify whether the experiment is to be considered <code>COMPLETED</code> or \n      <code>CANCELLED</code> after it stops.</p>"
+                        "smithy.api#documentation": "<p>Specify whether the experiment is to be considered <code>COMPLETED</code> or <code>CANCELLED</code> after it stops.</p>"
                     }
                 },
                 "reason": {
@@ -5731,7 +5847,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops a launch that is currently running. After you stop a launch, you will not be able to resume it or restart it. \n       Also, it \n       will not be evaluated as a rule for traffic allocation, and the traffic that was allocated to the launch\n       will instead be available to the feature's experiment, if there is one. Otherwise, all traffic\n       will be served the default variation after the launch is stopped.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Stops a launch that is currently running. After you stop a launch, you will not be able to resume it or restart it. Also, it will not be evaluated as a rule for traffic allocation, and the traffic that was allocated to the launch will instead be available to the feature's experiment, if there is one. Otherwise, all traffic will be served the default variation after the launch is stopped.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/launches/{launch}/cancel",
@@ -5761,7 +5881,7 @@
                 "desiredState": {
                     "target": "com.amazonaws.evidently#LaunchStopDesiredState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify whether to consider the launch as <code>COMPLETED</code> or\n        <code>CANCELLED</code> after it stops.</p>"
+                        "smithy.api#documentation": "<p>Specify whether to consider the launch as <code>COMPLETED</code> or <code>CANCELLED</code> after it stops.</p>"
                     }
                 },
                 "reason": {
@@ -5834,7 +5954,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch Evidently resource. Projects,\n       features, launches, and experiments can be tagged.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can use the <code>TagResource</code> action with a resource that already has tags. \n       If you specify a new tag key for the resource, \n       this tag is appended to the list of tags associated\n       with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces\n       the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch Evidently resource. Projects, features, launches, and experiments can be tagged.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/tags/{resourceArn}",
                     "method": "POST"
@@ -5895,7 +6019,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to test a rules pattern that you plan to use to create an audience segment. \n      For more information about segments, see <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html\">CreateSegment</a>.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Use this operation to test a rules pattern that you plan to use to create an audience segment. For more information about segments, see <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html\">CreateSegment</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/test-segment-pattern",
@@ -5989,12 +6117,12 @@
                 "featureVariations": {
                     "target": "com.amazonaws.evidently#FeatureToVariationMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The feature variation used for this treatment. This is a key-value pair. The key is the\n      feature name, and the value is the variation name.</p>"
+                        "smithy.api#documentation": "<p>The feature variation used for this treatment. This is a key-value pair. The key is the feature name, and the value is the variation name.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines one treatment in an experiment. A treatment is a variation of the feature\n       that you are including in the experiment.</p>"
+                "smithy.api#documentation": "<p>A structure that defines one treatment in an experiment. A treatment is a variation of the feature that you are including in the experiment.</p>"
             }
         },
         "com.amazonaws.evidently#TreatmentConfig": {
@@ -6029,7 +6157,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines one treatment in an experiment. A treatment is a variation of the feature\n      that you are including in the experiment.</p>"
+                "smithy.api#documentation": "<p>A structure that defines one treatment in an experiment. A treatment is a variation of the feature that you are including in the experiment.</p>"
             }
         },
         "com.amazonaws.evidently#TreatmentConfigList": {
@@ -6106,6 +6234,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
                 "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>",
                 "smithy.api#http": {
                     "uri": "/tags/{resourceArn}",
@@ -6162,7 +6294,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Evidently experiment. </p>\n         <p>Don't use this operation to update an experiment's tag. Instead, use \n      <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html\">TagResource</a>. </p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Updates an Evidently experiment. </p> <p>Don't use this operation to update an experiment's tag. Instead, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html\">TagResource</a>. </p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/projects/{project}/experiments/{experiment}",
@@ -6204,39 +6340,39 @@
                 "metricGoals": {
                     "target": "com.amazonaws.evidently#MetricGoalConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that defines the metrics used for the experiment, and whether a higher\n      or lower value for each metric is the goal.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that defines the metrics used for the experiment, and whether a higher or lower value for each metric is the goal.</p>"
                     }
                 },
                 "randomizationSalt": {
                     "target": "com.amazonaws.evidently#RandomizationSalt",
                     "traits": {
-                        "smithy.api#documentation": "<p>When Evidently assigns a particular user session to an experiment, it must use a randomization ID\n      to determine which variation the user session is served. This randomization ID is a combination of the entity ID\n      and <code>randomizationSalt</code>. If you omit <code>randomizationSalt</code>, Evidently uses\n      the experiment name as the <code>randomizationSalt</code>.</p>"
+                        "smithy.api#documentation": "<p>When Evidently assigns a particular user session to an experiment, it must use a randomization ID to determine which variation the user session is served. This randomization ID is a combination of the entity ID and <code>randomizationSalt</code>. If you omit <code>randomizationSalt</code>, Evidently uses the experiment name as the <code>randomizationSalt</code>.</p>"
                     }
                 },
                 "samplingRate": {
                     "target": "com.amazonaws.evidently#SplitWeight",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The portion of the available audience that you want to allocate to this experiment, in thousandths of a percent. The available audience\n      is the total audience minus the audience that you have allocated to overrides or current launches of\n      this feature.</p>\n         <p>This is represented in thousandths of a percent. For example, specify 20,000 to allocate 20% of the available audience.</p>"
+                        "smithy.api#documentation": "<p>The portion of the available audience that you want to allocate to this experiment, in thousandths of a percent. The available audience is the total audience minus the audience that you have allocated to overrides or current launches of this feature.</p> <p>This is represented in thousandths of a percent. For example, specify 20,000 to allocate 20% of the available audience.</p>"
                     }
                 },
                 "segment": {
                     "target": "com.amazonaws.evidently#SegmentRef",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds an audience <i>segment</i> to an experiment. When a segment is used in an experiment, only\n      user sessions that match the segment pattern are used in the experiment. You can't use this parameter if the \n      experiment is currently\n      running.</p>"
+                        "smithy.api#documentation": "<p>Adds an audience <i>segment</i> to an experiment. When a segment is used in an experiment, only user sessions that match the segment pattern are used in the experiment. You can't use this parameter if the experiment is currently running.</p>"
                     }
                 },
                 "removeSegment": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Removes a segment from being used in an experiment. You can't use this parameter if the experiment is currently\n      running.</p>"
+                        "smithy.api#documentation": "<p>Removes a segment from being used in an experiment. You can't use this parameter if the experiment is currently running.</p>"
                     }
                 },
                 "onlineAbConfig": {
                     "target": "com.amazonaws.evidently#OnlineAbConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the configuration of which variation o use as the \"control\"\n      version. The \"control\" version is used for comparison with other variations. This structure\n      also specifies how much experiment traffic is allocated to each variation.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the configuration of which variation o use as the \"control\" version. The \"control\" version is used for comparison with other variations. This structure also specifies how much experiment traffic is allocated to each variation.</p>"
                     }
                 }
             }
@@ -6247,7 +6383,7 @@
                 "experiment": {
                     "target": "com.amazonaws.evidently#Experiment",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing the configuration details of the experiment\n    that was updated.</p>",
+                        "smithy.api#documentation": "<p>A structure containing the configuration details of the experiment that was updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6279,7 +6415,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing feature.</p>\n         <p>You can't use this operation to update the tags of an existing feature. Instead, use \n      <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html\">TagResource</a>. </p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Updates an existing feature.</p> <p>You can't use this operation to update the tags of an existing feature. Instead, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html\">TagResource</a>. </p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/projects/{project}/features/{feature}",
@@ -6309,7 +6449,7 @@
                 "evaluationStrategy": {
                     "target": "com.amazonaws.evidently#FeatureEvaluationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify <code>ALL_RULES</code> to activate the traffic allocation specified by any ongoing\n      launches or experiments. Specify <code>DEFAULT_VARIATION</code> to serve the default variation\n      to all users instead.</p>"
+                        "smithy.api#documentation": "<p>Specify <code>ALL_RULES</code> to activate the traffic allocation specified by any ongoing launches or experiments. Specify <code>DEFAULT_VARIATION</code> to serve the default variation to all users instead.</p>"
                     }
                 },
                 "description": {
@@ -6321,25 +6461,25 @@
                 "addOrUpdateVariations": {
                     "target": "com.amazonaws.evidently#VariationConfigsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>To update variation configurations for this feature, or add new ones, specify this structure.\n      In this array, include any variations that you want to add or update. If the array includes a variation name that\n      already exists for this feature, it is updated. If it includes a new variation name, it is added\n      as a new variation.</p>"
+                        "smithy.api#documentation": "<p>To update variation configurations for this feature, or add new ones, specify this structure. In this array, include any variations that you want to add or update. If the array includes a variation name that already exists for this feature, it is updated. If it includes a new variation name, it is added as a new variation.</p>"
                     }
                 },
                 "removeVariations": {
                     "target": "com.amazonaws.evidently#VariationNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Removes a variation from the feature. If the variation you specify doesn't exist, then this \n    makes no change and does not report an error.</p>\n         <p>This operation fails if you try to remove a variation that is part of an \n    ongoing launch or experiment.</p>"
+                        "smithy.api#documentation": "<p>Removes a variation from the feature. If the variation you specify doesn't exist, then this makes no change and does not report an error.</p> <p>This operation fails if you try to remove a variation that is part of an ongoing launch or experiment.</p>"
                     }
                 },
                 "defaultVariation": {
                     "target": "com.amazonaws.evidently#VariationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the variation to use as the default variation. The default\n      variation is served to users who are not allocated to any ongoing launches\n      or experiments of this feature.</p>"
+                        "smithy.api#documentation": "<p>The name of the variation to use as the default variation. The default variation is served to users who are not allocated to any ongoing launches or experiments of this feature.</p>"
                     }
                 },
                 "entityOverrides": {
                     "target": "com.amazonaws.evidently#EntityOverrideMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specified users that should always be served a specific variation of a feature. Each user\n      is specified by a key-value pair . For each key, specify a user by entering their user ID,\n      account ID, or some other identifier. For the value, specify the name of the variation that\n      they are to be served.</p>\n         <p>This parameter is limited to 2500 overrides or a total of 40KB. The 40KB limit includes an overhead of 6 bytes\n      per override.</p>"
+                        "smithy.api#documentation": "<p>Specified users that should always be served a specific variation of a feature. Each user is specified by a key-value pair . For each key, specify a user by entering their user ID, account ID, or some other identifier. For the value, specify the name of the variation that they are to be served.</p> <p>This parameter is limited to 2500 overrides or a total of 40KB. The 40KB limit includes an overhead of 6 bytes per override.</p>"
                     }
                 }
             }
@@ -6379,7 +6519,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a launch of a given feature. </p>\n         <p>Don't use this operation to update the tags of an existing launch. Instead, use \n      <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html\">TagResource</a>. </p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Updates a launch of a given feature. </p> <p>Don't use this operation to update the tags of an existing launch. Instead, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html\">TagResource</a>. </p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/projects/{project}/launches/{launch}",
@@ -6415,25 +6559,25 @@
                 "groups": {
                     "target": "com.amazonaws.evidently#LaunchGroupConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that contains the feature and variations that are to be used for\n      the launch.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that contains the feature and variations that are to be used for the launch.</p>"
                     }
                 },
                 "metricMonitors": {
                     "target": "com.amazonaws.evidently#MetricMonitorConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that define the metrics that will be used to monitor \n    the launch performance.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that define the metrics that will be used to monitor the launch performance.</p>"
                     }
                 },
                 "randomizationSalt": {
                     "target": "com.amazonaws.evidently#RandomizationSalt",
                     "traits": {
-                        "smithy.api#documentation": "<p>When Evidently assigns a particular user session to a launch, it must use a randomization ID\n      to determine which variation the user session is served. This randomization ID is a combination of the entity ID\n      and <code>randomizationSalt</code>. If you omit <code>randomizationSalt</code>, Evidently uses\n      the launch name as the <code>randomizationSalt</code>.</p>"
+                        "smithy.api#documentation": "<p>When Evidently assigns a particular user session to a launch, it must use a randomization ID to determine which variation the user session is served. This randomization ID is a combination of the entity ID and <code>randomizationSalt</code>. If you omit <code>randomizationSalt</code>, Evidently uses the launch name as the <code>randomizationSalt</code>.</p>"
                     }
                 },
                 "scheduledSplitsConfig": {
                     "target": "com.amazonaws.evidently#ScheduledSplitsLaunchConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature\n      variations during each step of the launch.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that define the traffic allocation percentages among the feature variations during each step of the launch.</p>"
                     }
                 }
             }
@@ -6476,7 +6620,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the description of an existing project.</p>\n         <p>To create a new project, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html\">CreateProject</a>.</p>\n         <p>Don't use this operation to update the data storage options of a project. Instead, use \n       <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProjectDataDelivery.html\">UpdateProjectDataDelivery</a>. </p>\n         <p>Don't use this operation to update the tags of a project. Instead, use \n       <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html\">TagResource</a>. </p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Updates the description of an existing project.</p> <p>To create a new project, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html\">CreateProject</a>.</p> <p>Don't use this operation to update the data storage options of a project. Instead, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProjectDataDelivery.html\">UpdateProjectDataDelivery</a>. </p> <p>Don't use this operation to update the tags of a project. Instead, use <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html\">TagResource</a>. </p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/projects/{project}",
@@ -6510,7 +6658,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the data storage options for this project. If you store evaluation events, you an\n      keep them and analyze them on your own. If you choose not to store evaluation events,\n      Evidently deletes them after using them to produce metrics and other experiment results that\n      you can view.</p>\n         <p>You can't specify both <code>cloudWatchLogs</code> and <code>s3Destination</code> in the same operation.</p>",
+                "smithy.api#deprecated": {
+                    "message": "AWS CloudWatch Evidently has been deprecated since 11/17/2025.",
+                    "since": "11/17/2025"
+                },
+                "smithy.api#documentation": "<p>Updates the data storage options for this project. If you store evaluation events, you an keep them and analyze them on your own. If you choose not to store evaluation events, Evidently deletes them after using them to produce metrics and other experiment results that you can view.</p> <p>You can't specify both <code>cloudWatchLogs</code> and <code>s3Destination</code> in the same operation.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/projects/{project}/data-delivery",
@@ -6538,7 +6690,7 @@
                 "cloudWatchLogs": {
                     "target": "com.amazonaws.evidently#CloudWatchLogsDestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing the CloudWatch Logs log group where you want to store evaluation\n      events.</p>"
+                        "smithy.api#documentation": "<p>A structure containing the CloudWatch Logs log group where you want to store evaluation events.</p>"
                     }
                 }
             }
@@ -6569,7 +6721,7 @@
                 "appConfigResource": {
                     "target": "com.amazonaws.evidently#ProjectAppConfigResourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter if the project will use client-side evaluation powered by AppConfig. Client-side\n     evaluation allows your application to assign variations to user\n     sessions locally instead of by calling the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation. This \n     mitigates the latency and availability risks that come with an API call. allows\n      you to</p>\n         <p>This parameter is a structure that\n      contains information about the AppConfig application that will be used for client-side evaluation.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter if the project will use client-side evaluation powered by AppConfig. Client-side evaluation allows your application to assign variations to user sessions locally instead of by calling the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation. This mitigates the latency and availability risks that come with an API call. allows you to</p> <p>This parameter is a structure that contains information about the AppConfig application that will be used for client-side evaluation.</p>"
                     }
                 },
                 "description": {
@@ -6684,13 +6836,13 @@
                 "boolValue": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this feature uses the Boolean variation type, this field contains the Boolean value of\n      this variation.</p>"
+                        "smithy.api#documentation": "<p>If this feature uses the Boolean variation type, this field contains the Boolean value of this variation.</p>"
                     }
                 },
                 "stringValue": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this feature uses the string variation type, this field contains the string value of\n       this variation.</p>",
+                        "smithy.api#documentation": "<p>If this feature uses the string variation type, this field contains the string value of this variation.</p>",
                         "smithy.api#length": {
                             "max": 512
                         }
@@ -6699,7 +6851,7 @@
                 "longValue": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this feature uses the long variation type, this field contains the long value of\n       this variation.</p>",
+                        "smithy.api#documentation": "<p>If this feature uses the long variation type, this field contains the long value of this variation.</p>",
                         "smithy.api#range": {
                             "min": -9007199254740991,
                             "max": 9007199254740991
@@ -6709,12 +6861,12 @@
                 "doubleValue": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this feature uses the double integer variation type, this field contains the double integer value of\n       this variation.</p>"
+                        "smithy.api#documentation": "<p>If this feature uses the double integer variation type, this field contains the double integer value of this variation.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The value assigned to a feature variation. This structure must contain exactly one\n      field. It can be <code>boolValue</code>, <code>doubleValue</code>, <code>longValue</code>, or\n        <code>stringValue</code>.</p>"
+                "smithy.api#documentation": "<p>The value assigned to a feature variation. This structure must contain exactly one field. It can be <code>boolValue</code>, <code>doubleValue</code>, <code>longValue</code>, or <code>stringValue</code>.</p>"
             }
         },
         "com.amazonaws.evidently#Variation": {
