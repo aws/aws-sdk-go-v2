@@ -12,6 +12,8 @@ import (
 
 // Deletes a segment. You can't delete a segment that is being used in a launch or
 // experiment, even if that launch or experiment is not currently running.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) DeleteSegment(ctx context.Context, params *DeleteSegmentInput, optFns ...func(*Options)) (*DeleteSegmentOutput, error) {
 	if params == nil {
 		params = &DeleteSegmentInput{}

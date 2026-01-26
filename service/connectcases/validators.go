@@ -2025,6 +2025,41 @@ func validateSortList(v []types.Sort) error {
 	}
 }
 
+func validateTagPropagationConfiguration(v *types.TagPropagationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagPropagationConfiguration"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.TagMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagMap"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagPropagationConfigurationList(v []types.TagPropagationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagPropagationConfigurationList"}
+	for i := range v {
+		if err := validateTagPropagationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTemplateCaseRuleList(v []types.TemplateRule) error {
 	if v == nil {
 		return nil
@@ -2284,6 +2319,11 @@ func validateOpCreateTemplateInput(v *CreateTemplateInput) error {
 	if v.Rules != nil {
 		if err := validateTemplateCaseRuleList(v.Rules); err != nil {
 			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TagPropagationConfigurations != nil {
+		if err := validateTagPropagationConfigurationList(v.TagPropagationConfigurations); err != nil {
+			invalidParams.AddNested("TagPropagationConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2883,6 +2923,11 @@ func validateOpUpdateTemplateInput(v *UpdateTemplateInput) error {
 	if v.Rules != nil {
 		if err := validateTemplateCaseRuleList(v.Rules); err != nil {
 			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TagPropagationConfigurations != nil {
+		if err := validateTagPropagationConfigurationList(v.TagPropagationConfigurations); err != nil {
+			invalidParams.AddNested("TagPropagationConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -13,6 +13,8 @@ import (
 
 // Returns a list of audience segments that you have created in your account in
 // this Region.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) ListSegments(ctx context.Context, params *ListSegmentsInput, optFns ...func(*Options)) (*ListSegmentsOutput, error) {
 	if params == nil {
 		params = &ListSegmentsInput{}

@@ -23,6 +23,8 @@ import (
 // Experiment results are available up to 63 days after the start of the
 // experiment. They are not available after that because of CloudWatch data
 // retention policies.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) GetExperimentResults(ctx context.Context, params *GetExperimentResultsInput, optFns ...func(*Options)) (*GetExperimentResultsOutput, error) {
 	if params == nil {
 		params = &GetExperimentResultsInput{}

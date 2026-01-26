@@ -13,6 +13,8 @@ import (
 
 // Use this operation to find which experiments or launches are using a specified
 // segment.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) ListSegmentReferences(ctx context.Context, params *ListSegmentReferencesInput, optFns ...func(*Options)) (*ListSegmentReferencesOutput, error) {
 	if params == nil {
 		params = &ListSegmentReferencesInput{}

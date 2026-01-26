@@ -25,6 +25,8 @@ import (
 //
 // Don't use this operation to update an existing experiment. Instead, use [UpdateExperiment].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [UpdateExperiment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html
 func (c *Client) CreateExperiment(ctx context.Context, params *CreateExperimentInput, optFns ...func(*Options)) (*CreateExperimentOutput, error) {
 	if params == nil {

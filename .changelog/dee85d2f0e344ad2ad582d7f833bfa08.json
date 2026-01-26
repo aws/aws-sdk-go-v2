@@ -1,0 +1,8 @@
+{
+    "id": "dee85d2f-0e34-4ad2-ad58-2d7f833bfa08",
+    "type": "feature",
+    "description": "Adds support for AWS Ground Station Telemetry.",
+    "modules": [
+        "service/groundstation"
+    ]
+}

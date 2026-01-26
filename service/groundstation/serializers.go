@@ -622,6 +622,11 @@ func awsRestjson1_serializeOpDocumentCreateMissionProfileInput(v *CreateMissionP
 		}
 	}
 
+	if v.TelemetrySinkConfigArn != nil {
+		ok := object.Key("telemetrySinkConfigArn")
+		ok.String(*v.TelemetrySinkConfigArn)
+	}
+
 	if v.TrackingConfigArn != nil {
 		ok := object.Key("trackingConfigArn")
 		ok.String(*v.TrackingConfigArn)
@@ -3092,6 +3097,11 @@ func awsRestjson1_serializeOpDocumentUpdateMissionProfileInput(v *UpdateMissionP
 		ok.String(*v.StreamsKmsRole)
 	}
 
+	if v.TelemetrySinkConfigArn != nil {
+		ok := object.Key("telemetrySinkConfigArn")
+		ok.String(*v.TelemetrySinkConfigArn)
+	}
+
 	if v.TrackingConfigArn != nil {
 		ok := object.Key("trackingConfigArn")
 		ok.String(*v.TrackingConfigArn)
@@ -3543,6 +3553,12 @@ func awsRestjson1_serializeDocumentConfigTypeData(v types.ConfigTypeData, value 
 	case *types.ConfigTypeDataMemberS3RecordingConfig:
 		av := object.Key("s3RecordingConfig")
 		if err := awsRestjson1_serializeDocumentS3RecordingConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConfigTypeDataMemberTelemetrySinkConfig:
+		av := object.Key("telemetrySinkConfig")
+		if err := awsRestjson1_serializeDocumentTelemetrySinkConfig(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4097,6 +4113,23 @@ func awsRestjson1_serializeDocumentISO8601TimeRange(v *types.ISO8601TimeRange, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKinesisDataStreamData(v *types.KinesisDataStreamData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KinesisDataStreamArn != nil {
+		ok := object.Key("kinesisDataStreamArn")
+		ok.String(*v.KinesisDataStreamArn)
+	}
+
+	if v.KinesisRoleArn != nil {
+		ok := object.Key("kinesisRoleArn")
+		ok.String(*v.KinesisRoleArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKmsKey(v types.KmsKey, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4360,6 +4393,43 @@ func awsRestjson1_serializeDocumentTagsMap(v map[string]string, value smithyjson
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTelemetrySinkConfig(v *types.TelemetrySinkConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TelemetrySinkData != nil {
+		ok := object.Key("telemetrySinkData")
+		if err := awsRestjson1_serializeDocumentTelemetrySinkData(v.TelemetrySinkData, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TelemetrySinkType) > 0 {
+		ok := object.Key("telemetrySinkType")
+		ok.String(string(v.TelemetrySinkType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTelemetrySinkData(v types.TelemetrySinkData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.TelemetrySinkDataMemberKinesisDataStreamData:
+		av := object.Key("kinesisDataStreamData")
+		if err := awsRestjson1_serializeDocumentKinesisDataStreamData(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

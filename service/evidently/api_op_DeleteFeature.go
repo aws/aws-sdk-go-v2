@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes an Evidently feature.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) DeleteFeature(ctx context.Context, params *DeleteFeatureInput, optFns ...func(*Options)) (*DeleteFeatureOutput, error) {
 	if params == nil {
 		params = &DeleteFeatureInput{}

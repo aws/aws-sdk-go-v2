@@ -14,6 +14,8 @@ import (
 // Returns the details about one experiment. You must already know the experiment
 // name. To retrieve a list of experiments in your account, use [ListExperiments].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [ListExperiments]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListExperiments.html
 func (c *Client) GetExperiment(ctx context.Context, params *GetExperimentInput, optFns ...func(*Options)) (*GetExperimentOutput, error) {
 	if params == nil {

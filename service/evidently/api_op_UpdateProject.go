@@ -20,6 +20,8 @@ import (
 //
 // Don't use this operation to update the tags of a project. Instead, use [TagResource].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [TagResource]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html
 // [CreateProject]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html
 // [UpdateProjectDataDelivery]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProjectDataDelivery.html

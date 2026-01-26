@@ -30,6 +30,8 @@ import (
 //
 // For more information, see [Tagging Amazon Web Services resources].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {

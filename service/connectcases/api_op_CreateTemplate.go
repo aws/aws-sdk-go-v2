@@ -78,6 +78,11 @@ type CreateTemplateInput struct {
 	// The status of the template.
 	Status types.TemplateStatus
 
+	// Defines tag propagation configuration for resources created within a domain.
+	// Tags specified here will be automatically applied to resources being created for
+	// the specified resource type.
+	TagPropagationConfigurations []types.TagPropagationConfiguration
+
 	noSmithyDocumentSerde
 }
 

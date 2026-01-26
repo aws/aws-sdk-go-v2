@@ -3488,6 +3488,15 @@ func awsRestjson1_deserializeOpDocumentGetMissionProfileOutput(v **GetMissionPro
 				return err
 			}
 
+		case "telemetrySinkConfigArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigArn to be of type string, got %T instead", value)
+				}
+				sv.TelemetrySinkConfigArn = ptr.String(jtv)
+			}
+
 		case "trackingConfigArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6971,6 +6980,16 @@ loop:
 			uv = &types.ConfigTypeDataMemberS3RecordingConfig{Value: mv}
 			break loop
 
+		case "telemetrySinkConfig":
+			var mv types.TelemetrySinkConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentTelemetrySinkConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigTypeDataMemberTelemetrySinkConfig{Value: mv}
+			break loop
+
 		case "trackingConfig":
 			var mv types.TrackingConfig
 			destAddr := &mv
@@ -9065,6 +9084,55 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKinesisDataStreamData(v **types.KinesisDataStreamData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KinesisDataStreamData
+	if *v == nil {
+		sv = &types.KinesisDataStreamData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "kinesisDataStreamArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KinesisDataStreamArn to be of type string, got %T instead", value)
+				}
+				sv.KinesisDataStreamArn = ptr.String(jtv)
+			}
+
+		case "kinesisRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.KinesisRoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentKmsKey(v *types.KmsKey, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10136,6 +10204,91 @@ func awsRestjson1_deserializeDocumentTagsMap(v *map[string]string, value interfa
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTelemetrySinkConfig(v **types.TelemetrySinkConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TelemetrySinkConfig
+	if *v == nil {
+		sv = &types.TelemetrySinkConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "telemetrySinkData":
+			if err := awsRestjson1_deserializeDocumentTelemetrySinkData(&sv.TelemetrySinkData, value); err != nil {
+				return err
+			}
+
+		case "telemetrySinkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TelemetrySinkType to be of type string, got %T instead", value)
+				}
+				sv.TelemetrySinkType = types.TelemetrySinkType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTelemetrySinkData(v *types.TelemetrySinkData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.TelemetrySinkData
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "kinesisDataStreamData":
+			var mv types.KinesisDataStreamData
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentKinesisDataStreamData(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.TelemetrySinkDataMemberKinesisDataStreamData{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

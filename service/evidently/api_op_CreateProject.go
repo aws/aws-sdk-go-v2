@@ -17,6 +17,8 @@ import (
 //
 // To update an existing project, use [UpdateProject].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [UpdateProject]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProject.html
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {

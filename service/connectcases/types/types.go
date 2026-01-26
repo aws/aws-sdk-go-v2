@@ -225,6 +225,7 @@ type CaseEventIncludedData struct {
 //	CaseFilterMemberField
 //	CaseFilterMemberNot
 //	CaseFilterMemberOrAll
+//	CaseFilterMemberTag
 type CaseFilter interface {
 	isCaseFilter()
 }
@@ -264,6 +265,15 @@ type CaseFilterMemberOrAll struct {
 }
 
 func (*CaseFilterMemberOrAll) isCaseFilter() {}
+
+// A list of tags to filter on.
+type CaseFilterMemberTag struct {
+	Value TagFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*CaseFilterMemberTag) isCaseFilter() {}
 
 // Represents what rule type should take place, under what conditions. In the
 // Amazon Connect admin website, case rules are known as case field conditions. For
@@ -1712,6 +1722,55 @@ type Sort struct {
 	noSmithyDocumentSerde
 }
 
+// A filter for tags. Only one value can be provided.
+//
+// The following types satisfy this interface:
+//
+//	TagFilterMemberEqualTo
+type TagFilter interface {
+	isTagFilter()
+}
+
+// Object containing tag key and value information.
+type TagFilterMemberEqualTo struct {
+	Value TagValue
+
+	noSmithyDocumentSerde
+}
+
+func (*TagFilterMemberEqualTo) isTagFilter() {}
+
+// Defines tag propagation configuration for resources created within a domain.
+// Tags specified here will be automatically applied to resources being created for
+// the specified resource type.
+type TagPropagationConfiguration struct {
+
+	// Supported resource types for tag propagation. Determines which resources will
+	// receive automatically propagated tags.
+	//
+	// This member is required.
+	ResourceType TagPropagationResourceType
+
+	// The tags that will be applied to the created resource.
+	//
+	// This member is required.
+	TagMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Object for case tag filter values.
+type TagValue struct {
+
+	// The tag key in the tag filter value.
+	Key *string
+
+	// The tag value in the tag filter value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // An association representing a case rule acting upon a field. In the Amazon
 // Connect admin website, case rules are known as case field conditions. For more
 // information about case field conditions, see [Add case field conditions to a case template].
@@ -1752,6 +1811,11 @@ type TemplateSummary struct {
 	//
 	// This member is required.
 	TemplateId *string
+
+	// Defines tag propagation configuration for resources created within a domain.
+	// Tags specified here will be automatically applied to resources being created for
+	// the specified resource type.
+	TagPropagationConfigurations []TagPropagationConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1810,4 +1874,5 @@ func (*UnknownUnionMember) isRelatedItemInputContent()   {}
 func (*UnknownUnionMember) isRelatedItemTypeFilter()     {}
 func (*UnknownUnionMember) isSection()                   {}
 func (*UnknownUnionMember) isSlaInputContent()           {}
+func (*UnknownUnionMember) isTagFilter()                 {}
 func (*UnknownUnionMember) isUserUnion()                 {}

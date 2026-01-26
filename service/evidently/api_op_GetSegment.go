@@ -13,6 +13,8 @@ import (
 
 // Returns information about the specified segment. Specify the segment you want
 // to view by specifying its ARN.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) GetSegment(ctx context.Context, params *GetSegmentInput, optFns ...func(*Options)) (*GetSegmentOutput, error) {
 	if params == nil {
 		params = &GetSegmentInput{}

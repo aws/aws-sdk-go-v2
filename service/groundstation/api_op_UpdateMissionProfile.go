@@ -45,8 +45,8 @@ type UpdateMissionProfileInput struct {
 	// Contact State Change event indicating the pass has finished.
 	ContactPrePassDurationSeconds *int32
 
-	// A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a
-	// to Config .
+	// A list of lists of ARNs. Each list of ARNs is an edge, with a from  Config and
+	// a to Config .
 	DataflowEdges [][]string
 
 	// Smallest amount of time in seconds that you’d like to see for an available
@@ -62,6 +62,9 @@ type UpdateMissionProfileInput struct {
 
 	// Role to use for encrypting streams with KMS key.
 	StreamsKmsRole *string
+
+	// ARN of a telemetry sink Config .
+	TelemetrySinkConfigArn *string
 
 	// ARN of a tracking Config .
 	TrackingConfigArn *string

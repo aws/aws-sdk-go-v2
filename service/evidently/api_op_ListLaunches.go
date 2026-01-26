@@ -12,6 +12,8 @@ import (
 )
 
 // Returns configuration details about all the launches in the specified project.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) ListLaunches(ctx context.Context, params *ListLaunchesInput, optFns ...func(*Options)) (*ListLaunchesOutput, error) {
 	if params == nil {
 		params = &ListLaunchesInput{}

@@ -13,6 +13,8 @@ import (
 
 // Starts an existing launch. To create a launch, use [CreateLaunch].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [CreateLaunch]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateLaunch.html
 func (c *Client) StartLaunch(ctx context.Context, params *StartLaunchInput, optFns ...func(*Options)) (*StartLaunchOutput, error) {
 	if params == nil {

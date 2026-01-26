@@ -13,6 +13,8 @@ import (
 
 // Starts an existing experiment. To create an experiment, use [CreateExperiment].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [CreateExperiment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateExperiment.html
 func (c *Client) StartExperiment(ctx context.Context, params *StartExperimentInput, optFns ...func(*Options)) (*StartExperimentOutput, error) {
 	if params == nil {

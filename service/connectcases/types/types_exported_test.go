@@ -77,6 +77,9 @@ func ExampleCaseFilter_outputUsage() {
 	case *types.CaseFilterMemberOrAll:
 		_ = v.Value // Value is []types.CaseFilter
 
+	case *types.CaseFilterMemberTag:
+		_ = v.Value // Value is types.TagFilter
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -87,6 +90,7 @@ func ExampleCaseFilter_outputUsage() {
 }
 
 var _ []types.CaseFilter
+var _ types.TagFilter
 var _ types.CaseFilter
 var _ types.FieldFilter
 
@@ -426,6 +430,24 @@ func ExampleSlaInputContent_outputUsage() {
 }
 
 var _ *types.SlaInputConfiguration
+
+func ExampleTagFilter_outputUsage() {
+	var union types.TagFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TagFilterMemberEqualTo:
+		_ = v.Value // Value is types.TagValue
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TagValue
 
 func ExampleUserUnion_outputUsage() {
 	var union types.UserUnion

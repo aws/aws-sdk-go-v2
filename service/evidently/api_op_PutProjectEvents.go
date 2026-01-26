@@ -13,6 +13,8 @@ import (
 
 // Sends performance events to Evidently. These events can be used to evaluate a
 // launch or an experiment.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) PutProjectEvents(ctx context.Context, params *PutProjectEventsInput, optFns ...func(*Options)) (*PutProjectEventsOutput, error) {
 	if params == nil {
 		params = &PutProjectEventsInput{}

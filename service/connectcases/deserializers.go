@@ -3724,6 +3724,11 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				sv.Status = types.TemplateStatus(jtv)
 			}
 
+		case "tagPropagationConfigurations":
+			if err := awsRestjson1_deserializeDocumentTagPropagationConfigurationList(&sv.TagPropagationConfigurations, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -9681,6 +9686,42 @@ func awsRestjson1_deserializeDocumentLayoutSummaryList(v *[]types.LayoutSummary,
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMutableTags(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TagValueString to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOperandOne(v *types.OperandOne, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10842,6 +10883,85 @@ func awsRestjson1_deserializeDocumentSlaFieldValueUnionList(v *[]types.FieldValu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTagPropagationConfiguration(v **types.TagPropagationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TagPropagationConfiguration
+	if *v == nil {
+		sv = &types.TagPropagationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagPropagationResourceType to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = types.TagPropagationResourceType(jtv)
+			}
+
+		case "tagMap":
+			if err := awsRestjson1_deserializeDocumentMutableTags(&sv.TagMap, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTagPropagationConfigurationList(v *[]types.TagPropagationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TagPropagationConfiguration
+	if *v == nil {
+		cv = []types.TagPropagationConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TagPropagationConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTagPropagationConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTags(v *map[string]*string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10999,6 +11119,11 @@ func awsRestjson1_deserializeDocumentTemplateSummary(v **types.TemplateSummary, 
 					return fmt.Errorf("expected TemplateStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.TemplateStatus(jtv)
+			}
+
+		case "tagPropagationConfigurations":
+			if err := awsRestjson1_deserializeDocumentTagPropagationConfigurationList(&sv.TagPropagationConfigurations, value); err != nil {
+				return err
 			}
 
 		case "templateArn":

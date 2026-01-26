@@ -45,6 +45,8 @@ import (
 // If the user is not assigned to a launch or experiment, they are served the
 // default variation.
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [Use segments to focus your audience]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html
 // [CreateSegment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html
 func (c *Client) EvaluateFeature(ctx context.Context, params *EvaluateFeatureInput, optFns ...func(*Options)) (*EvaluateFeatureOutput, error) {

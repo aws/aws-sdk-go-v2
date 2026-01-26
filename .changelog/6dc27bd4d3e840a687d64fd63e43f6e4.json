@@ -1,0 +1,8 @@
+{
+    "id": "6dc27bd4-d3e8-40a6-87d6-4fd63e43f6e4",
+    "type": "feature",
+    "description": "DescribeInstanceTypes API response now includes an additionalFlexibleNetworkInterfaces field, the number of interfaces attachable to an instance when using flexible Elastic Network Adapter (ENA) queues in addition to the base number specified by maximumNetworkInterfaces.",
+    "modules": [
+        "service/ec2"
+    ]
+}

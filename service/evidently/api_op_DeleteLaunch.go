@@ -14,6 +14,8 @@ import (
 //
 // To stop a launch without deleting it, use [StopLaunch].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [StopLaunch]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopLaunch.html
 func (c *Client) DeleteLaunch(ctx context.Context, params *DeleteLaunchInput, optFns ...func(*Options)) (*DeleteLaunchOutput, error) {
 	if params == nil {

@@ -17,6 +17,8 @@ import (
 // traffic allocation, and the traffic that was allocated to the launch will
 // instead be available to the feature's experiment, if there is one. Otherwise,
 // all traffic will be served the default variation after the launch is stopped.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) StopLaunch(ctx context.Context, params *StopLaunchInput, optFns ...func(*Options)) (*StopLaunchOutput, error) {
 	if params == nil {
 		params = &StopLaunchInput{}

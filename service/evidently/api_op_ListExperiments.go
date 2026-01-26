@@ -13,6 +13,8 @@ import (
 
 // Returns configuration details about all the experiments in the specified
 // project.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) ListExperiments(ctx context.Context, params *ListExperimentsInput, optFns ...func(*Options)) (*ListExperimentsOutput, error) {
 	if params == nil {
 		params = &ListExperimentsInput{}

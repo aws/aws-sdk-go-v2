@@ -34,6 +34,8 @@ import (
 //
 // If the user is not assigned to a launch or experiment, they are served the
 // default variation.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) BatchEvaluateFeature(ctx context.Context, params *BatchEvaluateFeatureInput, optFns ...func(*Options)) (*BatchEvaluateFeatureOutput, error) {
 	if params == nil {
 		params = &BatchEvaluateFeatureInput{}

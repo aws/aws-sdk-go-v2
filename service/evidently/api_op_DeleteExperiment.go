@@ -15,6 +15,8 @@ import (
 //
 // To stop an experiment without deleting it, use [StopExperiment].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [StopExperiment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopExperiment.html
 func (c *Client) DeleteExperiment(ctx context.Context, params *DeleteExperimentInput, optFns ...func(*Options)) (*DeleteExperimentOutput, error) {
 	if params == nil {

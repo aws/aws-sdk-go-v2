@@ -14,6 +14,8 @@ import (
 // Returns the details about one launch. You must already know the project name.
 // To retrieve a list of projects in your account, use [ListProjects].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [ListProjects]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListProjects.html
 func (c *Client) GetProject(ctx context.Context, params *GetProjectInput, optFns ...func(*Options)) (*GetProjectOutput, error) {
 	if params == nil {

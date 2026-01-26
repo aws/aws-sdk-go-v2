@@ -12,6 +12,8 @@ import (
 )
 
 // Returns configuration details about all the features in the specified project.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) ListFeatures(ctx context.Context, params *ListFeaturesInput, optFns ...func(*Options)) (*ListFeaturesOutput, error) {
 	if params == nil {
 		params = &ListFeaturesInput{}

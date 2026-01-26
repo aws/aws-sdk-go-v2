@@ -18,6 +18,8 @@ import (
 //
 // Don't use this operation to update an existing feature. Instead, use [UpdateFeature].
 //
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+//
 // [UpdateFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateFeature.html
 // [CreateProject]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html
 func (c *Client) CreateFeature(ctx context.Context, params *CreateFeatureInput, optFns ...func(*Options)) (*CreateFeatureOutput, error) {

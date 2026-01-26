@@ -14,6 +14,8 @@ import (
 
 // Stops an experiment that is currently running. If you stop an experiment, you
 // can't resume it or restart it.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) StopExperiment(ctx context.Context, params *StopExperimentInput, optFns ...func(*Options)) (*StopExperimentOutput, error) {
 	if params == nil {
 		params = &StopExperimentInput{}

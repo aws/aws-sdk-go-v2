@@ -17,6 +17,8 @@ import (
 // metrics and other experiment results that you can view.
 //
 // You can't specify both cloudWatchLogs and s3Destination in the same operation.
+//
+// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
 func (c *Client) UpdateProjectDataDelivery(ctx context.Context, params *UpdateProjectDataDeliveryInput, optFns ...func(*Options)) (*UpdateProjectDataDeliveryOutput, error) {
 	if params == nil {
 		params = &UpdateProjectDataDeliveryInput{}
