@@ -4,15 +4,23 @@
 // Package transfermanager is the new iteration of the original
 // [feature/s3/manager] module implemented for the AWS SDK Go v2.
 //
-// # Beta
+// # Why transfermanager?
 //
-// This module is currently in a BETA release state. It is not subject to the
-// same backwards-compatibility guarantees provided by the generally-available
-// (GA) AWS SDK for Go v2. Features may be added or removed without warning,
-// and APIs may break.
+// Package transfermanager achieves the following improvement compared with original
+// [feature/s3/manager] module:
 //
-// For the current GA transfer manager for AWS SDK Go v2, see
-// [feature/s3/manager].
+//   - Merge all features into a single Client, eliminating the need for separate uploader/downloader
+//     clients, some common options like concurrency and part size could be shared across different APIs
+//   - Simplify input/output configuration with new types for each API, users now deal with new input/output
+//     like they do for normal services and do not need to concern conversion between new type and bottom
+//     S3 request/response
+//   - Optimize single object upload caching strategy to speed up multipart upload
+//   - Introduce new [Client.GetObject] API with object data in output's io.Reader to align with [Client.UploadObject]
+//     input source, while [Client.DownloadObject] from v1 will be ported to maintain backward compatibility
+//   - Add support for downloading an object in parts or ranges according to user configuration
+//   - Add directory transfer APIs for batch upload/download operations, user can define criteria for the
+//     entire workflow. For example, user can add filter type to decide which files should be transferred and
+//     how their S3 requests should be customized
 //
 // # Features
 //
@@ -20,6 +28,14 @@
 // following:
 //   - [Client.UploadObject] - enhanced object write support w/ automatic
 //     multipart upload for large objects
+//   - [Client.DownloadObject] - enhanced object read support w/ automatic
+//     multipart download for large objects
+//   - [Client.GetObject] - mimic s3.GetObject API to support sequential
+//     io.Reader output w/ concurrent multipart download for large objects
+//   - [Client.UploadDirectory] - enhanced directory write support w/ automatic
+//     concurrent files upload for folders with different hierarchy
+//   - [Client.DownloadDirectory] - enhanced bucket read support w/ automatic
+//     concurrent objects download for a bucket's objects
 //
 // The package also exposes several opt-in hooks that configure an
 // http.Transport that may convey performance/reliability enhancements in

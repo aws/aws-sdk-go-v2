@@ -33,7 +33,7 @@ func getReaderLength(r io.Reader) int64 {
 
 func TestUploadOrderMulti(t *testing.T) {
 	c, invocations, args := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket:               aws.String("Bucket"),
@@ -109,7 +109,7 @@ func TestUploadOrderMulti(t *testing.T) {
 
 func TestUploadOrderMultiTriggerredBySinglePartSize(t *testing.T) {
 	c, invocations, args := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket:               aws.String("Bucket"),
@@ -177,7 +177,7 @@ func TestUploadOrderMultiTriggerredBySinglePartSize(t *testing.T) {
 
 func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
 	c, invocations, args := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket:               aws.String("Bucket"),
@@ -254,9 +254,9 @@ func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
 
 func TestUploadOrderMultiDifferentPartSize(t *testing.T) {
 	c, ops, args := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{
-		PartSizeBytes: 1024 * 1024 * 11,
-		Concurrency:   1,
+	mgr := New(c, func(options *Options) {
+		options.PartSizeBytes = 1024 * 1024 * 11
+		options.Concurrency = 1
 	})
 
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
@@ -284,10 +284,9 @@ func TestUploadOrderMultiDifferentPartSize(t *testing.T) {
 }
 
 func TestUploadFailIfPartSizeTooSmall(t *testing.T) {
-	mgr := New(s3.New(s3.Options{}), Options{},
-		func(o *Options) {
-			o.PartSizeBytes = 5
-		})
+	mgr := New(s3.New(s3.Options{}), func(o *Options) {
+		o.PartSizeBytes = 5
+	})
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -308,7 +307,7 @@ func TestUploadFailIfPartSizeTooSmall(t *testing.T) {
 
 func TestUploadOrderSingle(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key - value"),
@@ -356,7 +355,7 @@ func TestUploadSingleFailure(t *testing.T) {
 		return nil, fmt.Errorf("put object failure")
 	}
 
-	mgr := New(c, Options{})
+	mgr := New(c)
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -378,7 +377,7 @@ func TestUploadSingleFailure(t *testing.T) {
 
 func TestUploadOrderZero(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -412,7 +411,7 @@ func TestUploadOrderMultiFailure(t *testing.T) {
 		return &s3.UploadPartOutput{ETag: aws.String(fmt.Sprintf("ETAG%d", u.PartNum))}, nil
 	}
 
-	mgr := New(c, Options{}, func(o *Options) {
+	mgr := New(c, func(o *Options) {
 		o.Concurrency = 1
 	})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
@@ -437,7 +436,7 @@ func TestUploadOrderMultiFailureOnComplete(t *testing.T) {
 		return nil, fmt.Errorf("complete multipart error")
 	}
 
-	mgr := New(c, Options{}, func(o *Options) {
+	mgr := New(c, func(o *Options) {
 		o.Concurrency = 1
 	})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
@@ -463,7 +462,7 @@ func TestUploadOrderMultiFailureOnCreate(t *testing.T) {
 		return nil, fmt.Errorf("create multipart upload failure")
 	}
 
-	mgr := New(c, Options{})
+	mgr := New(c)
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -494,7 +493,7 @@ func (f *failreader) Read(b []byte) (int, error) {
 
 func TestUploadOrderReadFail1(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -515,7 +514,7 @@ func TestUploadOrderReadFail1(t *testing.T) {
 
 func TestUploadOrderReadFail2(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient([]string{"UploadPart"})
-	mgr := New(c, Options{}, func(o *Options) {
+	mgr := New(c, func(o *Options) {
 		o.Concurrency = 1
 	})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
@@ -561,7 +560,7 @@ func (s *sizedReader) Read(p []byte) (n int, err error) {
 
 func TestUploadOrderMultiBufferedReader(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -592,7 +591,7 @@ func TestUploadOrderMultiBufferedReader(t *testing.T) {
 
 func TestUploadOrderMultiBufferedReaderWithSinglePartSize(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -617,7 +616,7 @@ func TestUploadOrderMultiBufferedReaderWithSinglePartSize(t *testing.T) {
 
 func TestUploadOrderMultiBufferedReaderJustExceedSinglePart(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -648,7 +647,7 @@ func TestUploadOrderMultiBufferedReaderJustExceedSinglePart(t *testing.T) {
 
 func TestUploadOrderMultiBufferedReaderPartial(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -681,7 +680,7 @@ func TestUploadOrderMultiBufferedReaderPartial(t *testing.T) {
 // file size is the same as part size.
 func TestUploadOrderMultiBufferedReaderEOF(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -712,7 +711,7 @@ func TestUploadOrderMultiBufferedReaderEOF(t *testing.T) {
 
 func TestUploadOrderSingleBufferedReader(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{})
+	mgr := New(c)
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -735,7 +734,7 @@ func TestUploadOrderSingleBufferedReader(t *testing.T) {
 func TestUploadZeroLenObject(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 
-	mgr := New(c, Options{})
+	mgr := New(c)
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -759,10 +758,9 @@ func TestProgressListener_SingleUpload_SeekableBody(t *testing.T) {
 
 	listener := &mockListener{}
 
-	var opts Options
-	opts.ProgressListeners.Register(listener)
-
-	mgr := New(c, opts)
+	mgr := New(c, func(options *Options) {
+		options.ObjectProgressListeners.Register(listener)
+	})
 
 	body := "foobarbaz"
 	in := &UploadObjectInput{
@@ -787,10 +785,9 @@ func TestProgressListener_SingleUpload_UnseekableBody(t *testing.T) {
 
 	listener := &mockListener{}
 
-	var opts Options
-	opts.ProgressListeners.Register(listener)
-
-	mgr := New(c, opts)
+	mgr := New(c, func(options *Options) {
+		options.ObjectProgressListeners.Register(listener)
+	})
 
 	body := "foobarbaz"
 	in := &UploadObjectInput{
@@ -815,11 +812,10 @@ func TestProgressListener_MultiUpload(t *testing.T) {
 
 	listener := &mockListener{}
 
-	var opts Options
-	opts.ProgressListeners.Register(listener)
-	opts.Concurrency = 1 // ensure deterministic progress listener order
-
-	mgr := New(c, opts)
+	mgr := New(c, func(options *Options) {
+		options.ObjectProgressListeners.Register(listener)
+		options.Concurrency = 1
+	})
 
 	in := &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
@@ -863,7 +859,7 @@ func (r *testIncompleteReader) Read(p []byte) (n int, err error) {
 
 func TestUploadUnexpectedEOF(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c, Options{}, func(o *Options) {
+	mgr := New(c, func(o *Options) {
 		o.Concurrency = 1
 		o.PartSizeBytes = minPartSizeBytes
 	})
@@ -902,7 +898,7 @@ func TestSSE(t *testing.T) {
 		return &s3.UploadPartOutput{ETag: aws.String(fmt.Sprintf("ETAG%d", u.PartNum))}, nil
 	}
 
-	mgr := New(c, Options{}, func(o *Options) {
+	mgr := New(c, func(o *Options) {
 		o.Concurrency = 5
 	})
 
@@ -924,7 +920,7 @@ func TestUploadWithContextCanceled(t *testing.T) {
 		UsePathStyle: true,
 		Region:       "mock-region",
 	})
-	u := New(c, Options{})
+	u := New(c)
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	ctx.Error = fmt.Errorf("context canceled")
@@ -993,7 +989,7 @@ func TestUploadRetry(t *testing.T) {
 				}),
 			})
 
-			uploader := New(client, Options{})
+			uploader := New(client)
 			_, err := uploader.UploadObject(context.Background(), &UploadObjectInput{
 				Bucket: aws.String("bucket"),
 				Key:    aws.String("key"),

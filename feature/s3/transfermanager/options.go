@@ -23,11 +23,10 @@ type Options struct {
 	// Checksum algorithm to use for upload
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
-	// The number of goroutines to spin up in parallel per call to Upload when
-	// transfering parts. If this is set to zero, the DefaultUploadConcurrency value
-	// will be used.
+	// The number of goroutines to spin up in parallel per call to transfer single object parts or directory objects.
+	// If this is set to zero, the DefaultUploadConcurrency value will be used.
 	//
-	// The concurrency pool is not shared between calls to Upload.
+	// The concurrency pool is not shared between multiple API calls.
 	Concurrency int
 
 	// The type indicating if object is multi-downloaded in parts or ranges
@@ -36,25 +35,22 @@ type Options struct {
 	// PartBodyMaxRetries is the number of retry attempts to make for failed part downloads.
 	PartBodyMaxRetries int
 
-	// Max size for the get object buffer
-	GetBufferSize int64
+	// Max size for the GetObject memory buffer. The reader returned from GetObject can buffer up to
+	// <GetObjectBufferSize> bytes of data at any time and only reads more data when user completely consumes
+	// current data buffered. This mechanism avoids unbounded memory usage when downloading large object via GetObject
+	GetObjectBufferSize int64
 
-	// Registry of progress listener hooks.
+	// Registry of single object progress listener hooks.
 	//
 	// It is safe to modify the registry in per-operation functional options,
 	// the original client-level registry will not be affected.
-	ProgressListeners ProgressListeners
+	ObjectProgressListeners ObjectProgressListeners
 
 	// Registry of directory progress listener hooks.
 	//
 	// It is safe to modify the registry in per-operation functional options,
 	// the original client-level registry will not be affected.
 	DirectoryProgressListeners DirectoryProgressListeners
-
-	// The number of goroutines to spin up in parallel per call to UploadDirectory when
-	// transfering files. If this is set to zero, the DefaultUploadConcurrency value
-	// will be used.
-	DirectoryConcurrency int
 }
 
 func (o *Options) init() {
@@ -97,20 +93,14 @@ func resolvePartBodyMaxRetries(o *Options) {
 }
 
 func resolveGetBufferSize(o *Options) {
-	if o.GetBufferSize == 0 {
-		o.GetBufferSize = defaultGetBufferSize
-	}
-}
-
-func resolveDirectoryConcurrency(o *Options) {
-	if o.DirectoryConcurrency == 0 {
-		o.DirectoryConcurrency = defaultTransferConcurrency
+	if o.GetObjectBufferSize == 0 {
+		o.GetObjectBufferSize = defaultGetBufferSize
 	}
 }
 
 // Copy returns new copy of the Options
 func (o Options) Copy() Options {
 	to := o
-	to.ProgressListeners = to.ProgressListeners.Copy()
+	to.ObjectProgressListeners = to.ObjectProgressListeners.Copy()
 	return to
 }

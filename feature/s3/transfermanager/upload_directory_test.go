@@ -428,7 +428,7 @@ func TestUploadDirectory(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			s3Client, params := s3testing.NewUploadDirectoryClient([]string{"UploadPart", "CompleteMultipartUpload"})
 			s3Client.PutObjectFn = c.putobjectFunc
-			mgr := New(s3Client, Options{})
+			mgr := New(s3Client)
 
 			if c.preprocessFunc != nil {
 				postprocessFunc, err := c.preprocessFunc(root)
@@ -528,7 +528,7 @@ func TestUploadDirectoryObjectsTransferred(t *testing.T) {
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			s3Client, _ := s3testing.NewUploadDirectoryClient([]string{"UploadPart", "CompleteMultipartUpload"})
-			mgr := New(s3Client, Options{})
+			mgr := New(s3Client)
 
 			req := &UploadDirectoryInput{
 				Bucket:    aws.String("mock-bucket"),
@@ -540,7 +540,7 @@ func TestUploadDirectoryObjectsTransferred(t *testing.T) {
 
 			_, err := mgr.UploadDirectory(context.Background(), req, func(o *Options) {
 				o.DirectoryProgressListeners.Register(listener)
-				o.DirectoryConcurrency = 1
+				o.Concurrency = 1
 			})
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
@@ -558,7 +558,7 @@ func TestUploadDirectoryWithContextCanceled(t *testing.T) {
 		UsePathStyle: true,
 		Region:       "mock-region",
 	})
-	u := New(c, Options{})
+	u := New(c)
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	ctx.Error = fmt.Errorf("context canceled")

@@ -552,7 +552,7 @@ type downloader struct {
 	offset     int64
 	pos        int64
 	totalBytes int64
-	written    int64
+	written    atomic.Int64
 	etag       string
 
 	err error
@@ -653,7 +653,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	d.emitter.Complete(ctx, d.out)
 
 	d.out.ContentRange = aws.String(fmt.Sprintf("bytes=%d-%d", d.offset, d.totalBytes-1))
-	d.out.ContentLength = aws.Int64(d.written)
+	d.out.ContentLength = aws.Int64(d.written.Load())
 	if d.out.ChecksumType == types.ChecksumTypeComposite {
 		d.out.ChecksumCRC32 = nil
 		d.out.ChecksumCRC32C = nil
@@ -675,7 +675,7 @@ func (d *downloader) init() error {
 
 	d.totalBytes = -1
 	d.emitter = &singleObjectProgressEmitter{
-		Listeners: d.options.ProgressListeners,
+		Listeners: d.options.ObjectProgressListeners,
 	}
 
 	return nil
@@ -794,16 +794,9 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		return nil, &errReadingBody{err: err}
 	}
 
-	atomic.AddInt64(&d.written, n)
+	d.written.Add(n)
 	d.emitter.BytesTransferred(ctx, n)
 	return out, nil
-}
-
-func (d *downloader) incrWritten(n int64) {
-	d.m.Lock()
-	defer d.m.Unlock()
-
-	d.written += n
 }
 
 // setTotalBytes is a thread-safe setter for setting the total byte status.
