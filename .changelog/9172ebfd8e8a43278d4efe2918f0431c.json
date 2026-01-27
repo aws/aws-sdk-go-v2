@@ -1,0 +1,8 @@
+{
+    "id": "9172ebfd-8e8a-4327-8d4e-fe2918f0431c",
+    "type": "release",
+    "description": "Release s3 transfer manager v2 under feature/s3/transfermanager into prod",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
