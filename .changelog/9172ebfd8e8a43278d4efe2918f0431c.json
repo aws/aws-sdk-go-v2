@@ -1,8 +1,0 @@
-{
-    "id": "9172ebfd-8e8a-4327-8d4e-fe2918f0431c",
-    "type": "release",
-    "description": "New release: feature/s3/transfermanager: the v2 iteration of the S3 Transfer Manager high-level library.",
-    "modules": [
-        "feature/s3/transfermanager"
-    ]
-}
