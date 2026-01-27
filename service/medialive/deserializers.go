@@ -29922,6 +29922,15 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				return err
 			}
 
+		case "timecodeInsertion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Av1TimecodeInsertionBehavior to be of type string, got %T instead", value)
+				}
+				sv.TimecodeInsertion = types.Av1TimecodeInsertionBehavior(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -33297,6 +33306,46 @@ func awsRestjson1_deserializeDocumentDescribePrimaryChannelSettings(v **types.De
 					return fmt.Errorf("expected LinkedChannelType to be of type string, got %T instead", value)
 				}
 				sv.LinkedChannelType = types.LinkedChannelType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDisabledLockingSettings(v **types.DisabledLockingSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DisabledLockingSettings
+	if *v == nil {
+		sv = &types.DisabledLockingSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customEpoch":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CustomEpoch = ptr.String(jtv)
 			}
 
 		default:
@@ -45435,6 +45484,11 @@ func awsRestjson1_deserializeDocumentOutputLockingSettings(v **types.OutputLocki
 
 	for key, value := range shape {
 		switch key {
+		case "disabledLockingSettings":
+			if err := awsRestjson1_deserializeDocumentDisabledLockingSettings(&sv.DisabledLockingSettings, value); err != nil {
+				return err
+			}
+
 		case "epochLockingSettings":
 			if err := awsRestjson1_deserializeDocumentEpochLockingSettings(&sv.EpochLockingSettings, value); err != nil {
 				return err
@@ -45705,6 +45759,15 @@ func awsRestjson1_deserializeDocumentPipelineLockingSettings(v **types.PipelineL
 
 	for key, value := range shape {
 		switch key {
+		case "customEpoch":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CustomEpoch = ptr.String(jtv)
+			}
+
 		case "pipelineLockingMethod":
 			if value != nil {
 				jtv, ok := value.(string)

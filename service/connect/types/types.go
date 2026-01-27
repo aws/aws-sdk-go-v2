@@ -9640,6 +9640,22 @@ type TaskActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the task attachment files.
+type TaskAttachment struct {
+
+	// A case-sensitive name of the attached file being uploaded.
+	//
+	// This member is required.
+	FileName *string
+
+	// The pre-signed URLs for the S3 bucket where the task attachment is stored.
+	//
+	// This member is required.
+	S3Url *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes constraints that apply to the template fields.
 type TaskTemplateConstraints struct {
 

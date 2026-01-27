@@ -98,6 +98,11 @@ type DescribeClusterSchedulerConfigOutput struct {
 	// idle compute across entities.
 	SchedulerConfig *types.SchedulerConfig
 
+	// Additional details about the status of the cluster policy. This field provides
+	// context when the policy is in a non-active state, such as during creation,
+	// updates, or if failures occur.
+	StatusDetails map[string]types.SchedulerResourceStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

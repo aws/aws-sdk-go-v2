@@ -1659,6 +1659,11 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		}
 	}
 
+	if v.DescriptionOverride != nil {
+		ok := object.Key("descriptionOverride")
+		ok.String(*v.DescriptionOverride)
+	}
+
 	if v.MaxFailedTasksCount != nil {
 		ok := object.Key("maxFailedTasksCount")
 		ok.Integer(*v.MaxFailedTasksCount)
@@ -1672,6 +1677,11 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 	if v.MaxWorkerCount != nil {
 		ok := object.Key("maxWorkerCount")
 		ok.Integer(*v.MaxWorkerCount)
+	}
+
+	if v.NameOverride != nil {
+		ok := object.Key("nameOverride")
+		ok.String(*v.NameOverride)
 	}
 
 	if v.Parameters != nil {
@@ -9711,6 +9721,11 @@ func awsRestjson1_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
 	if len(v.LifecycleStatus) > 0 {
 		ok := object.Key("lifecycleStatus")
 		ok.String(string(v.LifecycleStatus))
@@ -9729,6 +9744,11 @@ func awsRestjson1_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smi
 	if v.MaxWorkerCount != nil {
 		ok := object.Key("maxWorkerCount")
 		ok.Integer(*v.MaxWorkerCount)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	if v.Priority != nil {

@@ -12544,6 +12544,11 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 		}
 	}
 
+	if len(v.TimecodeInsertion) > 0 {
+		ok := object.Key("timecodeInsertion")
+		ok.String(string(v.TimecodeInsertion))
+	}
+
 	return nil
 }
 
@@ -13351,6 +13356,18 @@ func awsRestjson1_serializeDocumentColorCorrectionSettings(v *types.ColorCorrect
 func awsRestjson1_serializeDocumentColorSpacePassthroughSettings(v *types.ColorSpacePassthroughSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDisabledLockingSettings(v *types.DisabledLockingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomEpoch != nil {
+		ok := object.Key("customEpoch")
+		ok.String(*v.CustomEpoch)
+	}
 
 	return nil
 }
@@ -18002,6 +18019,13 @@ func awsRestjson1_serializeDocumentOutputLockingSettings(v *types.OutputLockingS
 	object := value.Object()
 	defer object.Close()
 
+	if v.DisabledLockingSettings != nil {
+		ok := object.Key("disabledLockingSettings")
+		if err := awsRestjson1_serializeDocumentDisabledLockingSettings(v.DisabledLockingSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EpochLockingSettings != nil {
 		ok := object.Key("epochLockingSettings")
 		if err := awsRestjson1_serializeDocumentEpochLockingSettings(v.EpochLockingSettings, ok); err != nil {
@@ -18120,6 +18144,11 @@ func awsRestjson1_serializeDocumentPauseStateScheduleActionSettings(v *types.Pau
 func awsRestjson1_serializeDocumentPipelineLockingSettings(v *types.PipelineLockingSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomEpoch != nil {
+		ok := object.Key("customEpoch")
+		ok.String(*v.CustomEpoch)
+	}
 
 	if len(v.PipelineLockingMethod) > 0 {
 		ok := object.Key("pipelineLockingMethod")

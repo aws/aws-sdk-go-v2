@@ -697,6 +697,26 @@ func (Av1TemporalAq) Values() []Av1TemporalAq {
 	}
 }
 
+type Av1TimecodeInsertionBehavior string
+
+// Enum values for Av1TimecodeInsertionBehavior
+const (
+	Av1TimecodeInsertionBehaviorDisabled    Av1TimecodeInsertionBehavior = "DISABLED"
+	Av1TimecodeInsertionBehaviorMetadataObu Av1TimecodeInsertionBehavior = "METADATA_OBU"
+)
+
+// Values returns all known values for Av1TimecodeInsertionBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1TimecodeInsertionBehavior) Values() []Av1TimecodeInsertionBehavior {
+	return []Av1TimecodeInsertionBehavior{
+		"DISABLED",
+		"METADATA_OBU",
+	}
+}
+
 type AvailBlankingState string
 
 // Enum values for AvailBlankingState

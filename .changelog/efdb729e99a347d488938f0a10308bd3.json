@@ -1,0 +1,8 @@
+{
+    "id": "efdb729e-99a3-47d4-8893-8f0a10308bd3",
+    "type": "feature",
+    "description": "AWS Deadline Cloud now supports editing job names and descriptions after submission.",
+    "modules": [
+        "service/deadline"
+    ]
+}

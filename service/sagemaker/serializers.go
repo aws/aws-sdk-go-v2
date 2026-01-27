@@ -23136,6 +23136,19 @@ func (m *awsAwsjson11_serializeOpUpdateWorkteam) HandleSerialize(ctx context.Con
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAbsoluteBorrowLimitResourceList(v []types.ComputeQuotaResourceConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentComputeQuotaResourceConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAcceleratorPartitionConfig(v *types.AcceleratorPartitionConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -33737,6 +33750,13 @@ func awsAwsjson11_serializeDocumentResourceSharingConfig(v *types.ResourceSharin
 	object := value.Object()
 	defer object.Close()
 
+	if v.AbsoluteBorrowLimits != nil {
+		ok := object.Key("AbsoluteBorrowLimits")
+		if err := awsAwsjson11_serializeDocumentAbsoluteBorrowLimitResourceList(v.AbsoluteBorrowLimits, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BorrowLimit != nil {
 		ok := object.Key("BorrowLimit")
 		ok.Integer(*v.BorrowLimit)
@@ -34261,6 +34281,11 @@ func awsAwsjson11_serializeDocumentSchedulerConfig(v *types.SchedulerConfig, val
 	if len(v.FairShare) > 0 {
 		ok := object.Key("FairShare")
 		ok.String(string(v.FairShare))
+	}
+
+	if len(v.IdleResourceSharing) > 0 {
+		ok := object.Key("IdleResourceSharing")
+		ok.String(string(v.IdleResourceSharing))
 	}
 
 	if v.PriorityClasses != nil {

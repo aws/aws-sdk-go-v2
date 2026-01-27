@@ -40915,6 +40915,40 @@ func awsAwsjson11_deserializeErrorResourceNotFound(response *smithyhttp.Response
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentAbsoluteBorrowLimitResourceList(v *[]types.ComputeQuotaResourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ComputeQuotaResourceConfig
+	if *v == nil {
+		cv = []types.ComputeQuotaResourceConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ComputeQuotaResourceConfig
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentComputeQuotaResourceConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAcceleratorPartitionConfig(v **types.AcceleratorPartitionConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -86524,6 +86558,11 @@ func awsAwsjson11_deserializeDocumentResourceSharingConfig(v **types.ResourceSha
 
 	for key, value := range shape {
 		switch key {
+		case "AbsoluteBorrowLimits":
+			if err := awsAwsjson11_deserializeDocumentAbsoluteBorrowLimitResourceList(&sv.AbsoluteBorrowLimits, value); err != nil {
+				return err
+			}
+
 		case "BorrowLimit":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -87833,6 +87872,15 @@ func awsAwsjson11_deserializeDocumentSchedulerConfig(v **types.SchedulerConfig, 
 					return fmt.Errorf("expected FairShare to be of type string, got %T instead", value)
 				}
 				sv.FairShare = types.FairShare(jtv)
+			}
+
+		case "IdleResourceSharing":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdleResourceSharing to be of type string, got %T instead", value)
+				}
+				sv.IdleResourceSharing = types.IdleResourceSharing(jtv)
 			}
 
 		case "PriorityClasses":
@@ -89553,6 +89601,42 @@ func awsAwsjson11_deserializeDocumentStairs(v **types.Stairs, value interface{})
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStatusDetailsMap(v *map[string]types.SchedulerResourceStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.SchedulerResourceStatus
+	if *v == nil {
+		mv = map[string]types.SchedulerResourceStatus{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.SchedulerResourceStatus
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SchedulerResourceStatus to be of type string, got %T instead", value)
+			}
+			parsedVal = types.SchedulerResourceStatus(jtv)
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -102471,6 +102555,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeClusterSchedulerConfigOutput(v **
 					return fmt.Errorf("expected SchedulerResourceStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.SchedulerResourceStatus(jtv)
+			}
+
+		case "StatusDetails":
+			if err := awsAwsjson11_deserializeDocumentStatusDetailsMap(&sv.StatusDetails, value); err != nil {
+				return err
 			}
 
 		default:

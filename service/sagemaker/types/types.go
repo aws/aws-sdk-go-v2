@@ -18317,6 +18317,12 @@ type ResourceSharingConfig struct {
 	// This member is required.
 	Strategy ResourceSharingStrategy
 
+	// The absolute limits on compute resources that can be borrowed from idle
+	// compute. When specified, these limits define the maximum amount of specific
+	// resource types (such as accelerators, vCPU, or memory) that an entity can
+	// borrow, regardless of the percentage-based BorrowLimit .
+	AbsoluteBorrowLimits []ComputeQuotaResourceConfig
+
 	// The limit on how much idle compute can be borrowed.The values can be 1 - 500
 	// percent of idle compute that the team is allowed to borrow.
 	//
@@ -18997,6 +19003,11 @@ type SchedulerConfig struct {
 	//
 	// Default is Enabled .
 	FairShare FairShare
+
+	// Configuration for sharing idle compute resources across entities in the
+	// cluster. When enabled, unallocated resources are automatically calculated and
+	// made available for entities to borrow.
+	IdleResourceSharing IdleResourceSharing
 
 	// List of the priority classes, PriorityClass , of the cluster policy. When
 	// specified, these class configurations define how tasks are queued.

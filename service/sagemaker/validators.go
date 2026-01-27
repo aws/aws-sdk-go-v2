@@ -7450,6 +7450,23 @@ func addOpUpdateWorkteamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkteam{}, middleware.After)
 }
 
+func validateAbsoluteBorrowLimitResourceList(v []types.ComputeQuotaResourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AbsoluteBorrowLimitResourceList"}
+	for i := range v {
+		if err := validateComputeQuotaResourceConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAcceleratorPartitionConfig(v *types.AcceleratorPartitionConfig) error {
 	if v == nil {
 		return nil
@@ -13531,6 +13548,11 @@ func validateResourceSharingConfig(v *types.ResourceSharingConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceSharingConfig"}
 	if len(v.Strategy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Strategy"))
+	}
+	if v.AbsoluteBorrowLimits != nil {
+		if err := validateAbsoluteBorrowLimitResourceList(v.AbsoluteBorrowLimits); err != nil {
+			invalidParams.AddNested("AbsoluteBorrowLimits", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

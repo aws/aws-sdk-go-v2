@@ -55,6 +55,10 @@ type CreateJobInput struct {
 	// The unique token which the server uses to recognize retries of the same request.
 	ClientToken *string
 
+	// A custom description to override the job description derived from the job
+	// template.
+	DescriptionOverride *string
+
 	// The number of task failures before the job stops running and is marked as FAILED
 	// .
 	MaxFailedTasksCount *int32
@@ -72,6 +76,9 @@ type CreateJobInput struct {
 	// If you don't specify the maxWorkerCount , Deadline Cloud won't throttle the
 	// number of workers used to process the job.
 	MaxWorkerCount *int32
+
+	// A custom name to override the job name derived from the job template.
+	NameOverride *string
 
 	// The parameters for the job.
 	Parameters map[string]types.JobParameter

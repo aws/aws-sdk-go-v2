@@ -3528,6 +3528,25 @@ func (HyperParameterTuningJobWarmStartType) Values() []HyperParameterTuningJobWa
 	}
 }
 
+type IdleResourceSharing string
+
+// Enum values for IdleResourceSharing
+const (
+	IdleResourceSharingEnabled  IdleResourceSharing = "Enabled"
+	IdleResourceSharingDisabled IdleResourceSharing = "Disabled"
+)
+
+// Values returns all known values for IdleResourceSharing. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdleResourceSharing) Values() []IdleResourceSharing {
+	return []IdleResourceSharing{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type ImageSortBy string
 
 // Enum values for ImageSortBy
@@ -7818,6 +7837,27 @@ func (SagemakerServicecatalogStatus) Values() []SagemakerServicecatalogStatus {
 	return []SagemakerServicecatalogStatus{
 		"Enabled",
 		"Disabled",
+	}
+}
+
+type SchedulerConfigComponent string
+
+// Enum values for SchedulerConfigComponent
+const (
+	SchedulerConfigComponentPriorityClasses     SchedulerConfigComponent = "PriorityClasses"
+	SchedulerConfigComponentFairShare           SchedulerConfigComponent = "FairShare"
+	SchedulerConfigComponentIdleResourceSharing SchedulerConfigComponent = "IdleResourceSharing"
+)
+
+// Values returns all known values for SchedulerConfigComponent. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SchedulerConfigComponent) Values() []SchedulerConfigComponent {
+	return []SchedulerConfigComponent{
+		"PriorityClasses",
+		"FairShare",
+		"IdleResourceSharing",
 	}
 }
 

@@ -699,6 +699,14 @@ type Av1Settings struct {
 	// timecode will become part of the video.
 	TimecodeBurninSettings *TimecodeBurninSettings
 
+	// Controls how MediaLive inserts timecodes into the video output encode.
+	// DISABLED: Do not insert timecodes. METADATA_OBU: Include timecodes. MediaLive
+	// inserts timecode metadata based on the timecode from the source specified in the
+	// Timecode Config property. The timecode metadata is a metadata OBU (Open
+	// Bitstream Unit) of type METADATA_TYPE_TIMECODE, in accordance with
+	// https://aomediacodec.github.io/av1-spec/#metadata-timecode-syntax.
+	TimecodeInsertion Av1TimecodeInsertionBehavior
+
 	noSmithyDocumentSerde
 }
 
@@ -2004,6 +2012,19 @@ type DescribePrimaryChannelSettings struct {
 
 	// Specifies this as a primary channel
 	LinkedChannelType LinkedChannelType
+
+	noSmithyDocumentSerde
+}
+
+// Disabled Locking Settings
+type DisabledLockingSettings struct {
+
+	// Optional. Only applies to CMAF Ingest Output Group and MediaPackage V2 Output
+	// Group. Enter a value here to use a custom epoch, instead of the standard epoch
+	// (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the custom
+	// epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be 2000-01-01T00:00:00 or
+	// later. Always set the MM:SS portion to 00:00.
+	CustomEpoch *string
 
 	noSmithyDocumentSerde
 }
@@ -6555,6 +6576,9 @@ type OutputLocationRef struct {
 // Output Locking Settings
 type OutputLockingSettings struct {
 
+	// Disabled Locking Settings
+	DisabledLockingSettings *DisabledLockingSettings
+
 	// Epoch Locking Settings
 	EpochLockingSettings *EpochLockingSettings
 
@@ -6643,6 +6667,13 @@ type PipelineDetail struct {
 
 // Pipeline Locking Settings
 type PipelineLockingSettings struct {
+
+	// Optional. Only applies to CMAF Ingest Output Group and MediaPackage V2 Output
+	// Group Only. Enter a value here to use a custom epoch, instead of the standard
+	// epoch (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the
+	// custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be
+	// 2000-01-01T00:00:00 or later. Always set the MM:SS portion to 00:00.
+	CustomEpoch *string
 
 	// The method to use to lock the video frames in the pipelines. sourceTimecode
 	// (default): Use the timecode in the source. videoAlignment: Lock frames that the

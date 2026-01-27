@@ -9243,29 +9243,29 @@ func awsRestjson1_serializeEventMessageHeadersEvent(v *types.HeadersEvent, msg *
 	}
 
 	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
-	if v.LongHeader != nil {
-		msg.Headers.Set("longHeader", eventstream.Int64Value(*v.LongHeader))
-	}
-	if v.ShortHeader != nil {
-		msg.Headers.Set("shortHeader", eventstream.Int16Value(*v.ShortHeader))
+	if v.BlobHeader != nil {
+		msg.Headers.Set("blobHeader", eventstream.BytesValue(v.BlobHeader))
 	}
 	if v.IntHeader != nil {
 		msg.Headers.Set("intHeader", eventstream.Int32Value(*v.IntHeader))
 	}
+	if v.LongHeader != nil {
+		msg.Headers.Set("longHeader", eventstream.Int64Value(*v.LongHeader))
+	}
 	if v.StringHeader != nil {
 		msg.Headers.Set("stringHeader", eventstream.StringValue(*v.StringHeader))
-	}
-	if v.TimestampHeader != nil {
-		msg.Headers.Set("timestampHeader", eventstream.TimestampValue(*v.TimestampHeader))
-	}
-	if v.BlobHeader != nil {
-		msg.Headers.Set("blobHeader", eventstream.BytesValue(v.BlobHeader))
 	}
 	if v.BooleanHeader != nil {
 		msg.Headers.Set("booleanHeader", eventstream.BoolValue(*v.BooleanHeader))
 	}
 	if v.ByteHeader != nil {
 		msg.Headers.Set("byteHeader", eventstream.Int8Value(*v.ByteHeader))
+	}
+	if v.ShortHeader != nil {
+		msg.Headers.Set("shortHeader", eventstream.Int16Value(*v.ShortHeader))
+	}
+	if v.TimestampHeader != nil {
+		msg.Headers.Set("timestampHeader", eventstream.TimestampValue(*v.TimestampHeader))
 	}
 	return nil
 }

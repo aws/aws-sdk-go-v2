@@ -11268,6 +11268,41 @@ func validateTaskActionDefinition(v *types.TaskActionDefinition) error {
 	}
 }
 
+func validateTaskAttachment(v *types.TaskAttachment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TaskAttachment"}
+	if v.FileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileName"))
+	}
+	if v.S3Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTaskAttachments(v []types.TaskAttachment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TaskAttachments"}
+	for i := range v {
+		if err := validateTaskAttachment(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTaskTemplateField(v *types.TaskTemplateField) error {
 	if v == nil {
 		return nil
@@ -17035,6 +17070,11 @@ func validateOpStartTaskContactInput(v *StartTaskContactInput) error {
 	if v.References != nil {
 		if err := validateContactReferences(v.References); err != nil {
 			invalidParams.AddNested("References", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Attachments != nil {
+		if err := validateTaskAttachments(v.Attachments); err != nil {
+			invalidParams.AddNested("Attachments", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

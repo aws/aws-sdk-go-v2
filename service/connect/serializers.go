@@ -27197,6 +27197,13 @@ func awsRestjson1_serializeOpDocumentStartTaskContactInput(v *StartTaskContactIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.Attachments != nil {
+		ok := object.Key("Attachments")
+		if err := awsRestjson1_serializeDocumentTaskAttachments(v.Attachments, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Attributes != nil {
 		ok := object.Key("Attributes")
 		if err := awsRestjson1_serializeDocumentAttributes(v.Attributes, ok); err != nil {
@@ -42298,6 +42305,36 @@ func awsRestjson1_serializeDocumentTaskActionDefinition(v *types.TaskActionDefin
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaskAttachment(v *types.TaskAttachment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileName != nil {
+		ok := object.Key("FileName")
+		ok.String(*v.FileName)
+	}
+
+	if v.S3Url != nil {
+		ok := object.Key("S3Url")
+		ok.String(*v.S3Url)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaskAttachments(v []types.TaskAttachment, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTaskAttachment(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
