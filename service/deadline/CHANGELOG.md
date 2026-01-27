@@ -1,3 +1,7 @@
+# v1.24.0 (2026-01-27)
+
+* **Feature**: AWS Deadline Cloud now supports editing job names and descriptions after submission.
+
 # v1.23.0 (2026-01-15)
 
 * **Feature**: AWS Deadline Cloud now supports tagging Budget resources with ABAC for permissions management and selecting up to 16 filter values in the monitor and Search API.

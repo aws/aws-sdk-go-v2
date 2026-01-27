@@ -1,8 +1,0 @@
-{
-    "id": "c0ad4043-ff8b-462a-94fc-7e9e7f405a6b",
-    "type": "feature",
-    "description": "Idle resource sharing enables teams to borrow unused compute resources in your SageMaker HyperPod cluster. This capability maximizes resource utilization by allowing teams to borrow idle compute capacity beyond their allocated compute quotas.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "58be7e53-0163-4561-9a0f-858bec3e238f",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive released two new features that allows customers 1) to set Output Timecode for AV1 encoder, 2) to set a Custom Epoch for CMAF Ingest and MediaPackage V2 output groups when using Pipeline Locking or Disabled Locking modes.",
-    "modules": [
-        "service/medialive"
-    ]
-}

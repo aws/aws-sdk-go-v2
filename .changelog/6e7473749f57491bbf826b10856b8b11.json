@@ -1,8 +1,0 @@
-{
-    "id": "6e747374-9f57-491b-bf82-6b10856b8b11",
-    "type": "feature",
-    "description": "Added support for task attachments. The StartTaskContact API now accepts file attachments, enabling customers to include files (.csv, .doc, .docx, .heic, .jfif, .jpeg, .jpg, .mov, .mp4, .pdf, .png, .ppt, .pptx, .rtf, .txt, etc.) when creating Task contacts. Supports up to 5 attachments per task.",
-    "modules": [
-        "service/connect"
-    ]
-}

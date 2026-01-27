@@ -1,3 +1,17 @@
+# Release (2026-01-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.158.0](service/connect/CHANGELOG.md#v11580-2026-01-27)
+  * **Feature**: Added support for task attachments. The StartTaskContact API now accepts file attachments, enabling customers to include files (.csv, .doc, .docx, .heic, .jfif, .jpeg, .jpg, .mov, .mp4, .pdf, .png, .ppt, .pptx, .rtf, .txt, etc.) when creating Task contacts. Supports up to 5 attachments per task.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.24.0](service/deadline/CHANGELOG.md#v1240-2026-01-27)
+  * **Feature**: AWS Deadline Cloud now supports editing job names and descriptions after submission.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.283.0](service/ec2/CHANGELOG.md#v12830-2026-01-27)
+  * **Feature**: Releasing new EC2 instances. C8gb and M8gb with highest EBS performance, M8gn with 600 Gbps network bandwidth, X8aedz and M8azn with 5GHz AMD processors, X8i with Intel Xeon 6 processors and up to 6TB memory, and Mac-m4max with Apple M4 Max chip for 25 percent faster builds.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.90.0](service/medialive/CHANGELOG.md#v1900-2026-01-27)
+  * **Feature**: AWS Elemental MediaLive released two new features that allows customers 1) to set Output Timecode for AV1 encoder, 2) to set a Custom Epoch for CMAF Ingest and MediaPackage V2 output groups when using Pipeline Locking or Disabled Locking modes.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.231.0](service/sagemaker/CHANGELOG.md#v12310-2026-01-27)
+  * **Feature**: Idle resource sharing enables teams to borrow unused compute resources in your SageMaker HyperPod cluster. This capability maximizes resource utilization by allowing teams to borrow idle compute capacity beyond their allocated compute quotas.
+
 # Release (2026-01-26)
 
 ## Module Highlights
