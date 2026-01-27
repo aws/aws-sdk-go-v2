@@ -26,9 +26,6 @@
   [modules."feature/ec2/imds/internal/configtesting"]
     no_tag = true
 
-  [modules."feature/s3/transfermanager"]
-    no_tag = true
-
   [modules."internal/codegen"]
     no_tag = true
 
