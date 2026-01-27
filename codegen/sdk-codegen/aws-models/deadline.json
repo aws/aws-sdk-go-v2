@@ -2808,6 +2808,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The job ID for the source job.</p>"
                     }
+                },
+                "nameOverride": {
+                    "target": "com.amazonaws.deadline#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom name to override the job name derived from the job template.</p>"
+                    }
+                },
+                "descriptionOverride": {
+                    "target": "com.amazonaws.deadline#JobDescriptionOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom description to override the job description derived from the job template.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11240,6 +11252,17 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.deadline#JobDescriptionOverride": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The input description for the job. Passing in an empty string removes any existing description.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.deadline#JobDetailsEntity": {
             "type": "structure",
             "members": {
@@ -17266,7 +17289,7 @@
                 "stringListFilter": {
                     "target": "com.amazonaws.deadline#StringListFilterExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters by a list of string values.</p>"
+                        "smithy.api#documentation": "<p>Filters by a list of strings.</p>"
                     }
                 },
                 "groupFilter": {
@@ -19768,7 +19791,7 @@
                 "operator": {
                     "target": "com.amazonaws.deadline#ComparisonOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of comparison to use for this search. ANY_EQUALS and ALL_NOT_EQUALS are supported.</p>",
+                        "smithy.api#documentation": "<p>The type of comparison to use for this search.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -19781,7 +19804,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Searches for a match within a list of strings.</p>"
+                "smithy.api#documentation": "<p>Searches for a particular list of strings.</p>"
             }
         },
         "com.amazonaws.deadline#Subdomain": {
@@ -21073,7 +21096,7 @@
                 "priority": {
                     "target": "com.amazonaws.deadline#JobPriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job priority to update.</p>"
+                        "smithy.api#documentation": "<p>The updated job priority.</p>"
                     }
                 },
                 "maxFailedTasksCount": {
@@ -21098,6 +21121,18 @@
                     "target": "com.amazonaws.deadline#MaxWorkerCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of worker hosts that can concurrently process a job. When the <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the job, even if the fleets assigned to the job's queue has available workers.</p> <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no maximum number of workers.</p> <p>If you don't specify the <code>maxWorkerCount</code>, the default is -1.</p> <p>The maximum number of workers that can process tasks in the job.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.deadline#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated job name.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.deadline#JobDescriptionOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated job description.</p>"
                     }
                 },
                 "farmId": {

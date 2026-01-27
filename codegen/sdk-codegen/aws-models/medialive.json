@@ -1935,6 +1935,13 @@
                         "smithy.api#documentation": "Temporal AQ makes adjustments within each frame based on variations in content complexity over time. Enabled: MediaLive will determine the appropriate level of temporal AQ to apply. Disabled: No temporal AQ. For more information, see the topic about video adaptive quantization in the MediaLive user guide.",
                         "smithy.api#jsonName": "temporalAq"
                     }
+                },
+                "TimecodeInsertion": {
+                    "target": "com.amazonaws.medialive#Av1TimecodeInsertionBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "Controls how MediaLive inserts timecodes into the video output encode.\nDISABLED: Do not insert timecodes.\nMETADATA_OBU: Include timecodes. MediaLive inserts timecode metadata based on the timecode from the source specified in the Timecode Config property. The timecode metadata is a metadata OBU (Open Bitstream Unit) of type METADATA_TYPE_TIMECODE, in accordance with https://aomediacodec.github.io/av1-spec/#metadata-timecode-syntax.",
+                        "smithy.api#jsonName": "timecodeInsertion"
+                    }
                 }
             },
             "traits": {
@@ -1979,6 +1986,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Av1 Temporal Aq"
+            }
+        },
+        "com.amazonaws.medialive#Av1TimecodeInsertionBehavior": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "METADATA_OBU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METADATA_OBU"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Av1 Timecode Insertion Behavior"
             }
         },
         "com.amazonaws.medialive#AvailBlanking": {
@@ -13033,6 +13060,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "The status of software on the input device."
+            }
+        },
+        "com.amazonaws.medialive#DisabledLockingSettings": {
+            "type": "structure",
+            "members": {
+                "CustomEpoch": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Only applies to CMAF Ingest Output Group and MediaPackage V2 Output Group. Enter a value here to use a custom epoch, instead of the standard epoch (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be 2000-01-01T00:00:00 or later. Always set the MM:SS portion to 00:00.",
+                        "smithy.api#jsonName": "customEpoch"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Disabled Locking Settings"
             }
         },
         "com.amazonaws.medialive#DolbyEProgramSelection": {
@@ -29898,6 +29940,12 @@
                     "traits": {
                         "smithy.api#jsonName": "pipelineLockingSettings"
                     }
+                },
+                "DisabledLockingSettings": {
+                    "target": "com.amazonaws.medialive#DisabledLockingSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "disabledLockingSettings"
+                    }
                 }
             },
             "traits": {
@@ -30091,6 +30139,13 @@
                     "traits": {
                         "smithy.api#documentation": "The method to use to lock the video frames in the pipelines. sourceTimecode (default): Use the timecode in the source. videoAlignment: Lock frames that the encoder identifies as having matching content. If videoAlignment is selected, existing timecodes will not be used for any locking decisions.",
                         "smithy.api#jsonName": "pipelineLockingMethod"
+                    }
+                },
+                "CustomEpoch": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Only applies to CMAF Ingest Output Group and MediaPackage V2 Output Group Only. Enter a value here to use a custom epoch, instead of the standard epoch (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be 2000-01-01T00:00:00 or later. Always set the MM:SS portion to 00:00.",
+                        "smithy.api#jsonName": "customEpoch"
                     }
                 }
             },

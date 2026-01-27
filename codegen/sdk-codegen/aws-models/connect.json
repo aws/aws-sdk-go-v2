@@ -50928,6 +50928,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments (unique contact ID) using an\n   attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to set Contact Expiry as a duration in minutes and set a UserId for the User who created\n   a task.</p>\n         <note>\n            <p>To set contact expiry, a ValueMap must be specified containing the integer number of minutes the contact will\n    be active for before expiring, with <code>SegmentAttributes</code> like { <code> \"connect:ContactExpiry\":\n     {\"ValueMap\" : { \"ExpiryDuration\": { \"ValueInteger\": 135}}}}</code>. </p>\n            <p>To set the created by user, a valid AgentResourceId must be supplied, with <code>SegmentAttributes</code> like\n    { <code>\"connect:CreatedByUser\" { \"ValueString\":\n     \"arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/agent/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"}}}</code>.\n   </p>\n         </note>"
                     }
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.connect#TaskAttachments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of S3 presigned URLs of task attachments and their file name. You can have a maximum of 5 attachments per task.</p>"
+                    }
                 }
             },
             "traits": {
@@ -52385,6 +52391,41 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the task action.</p>"
+            }
+        },
+        "com.amazonaws.connect#TaskAttachment": {
+            "type": "structure",
+            "members": {
+                "FileName": {
+                    "target": "com.amazonaws.connect#FileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A case-sensitive name of the attached file being uploaded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Url": {
+                    "target": "com.amazonaws.connect#PreSignedAttachmentUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-signed URLs for the S3 bucket where the task attachment is stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the task attachment files.</p>"
+            }
+        },
+        "com.amazonaws.connect#TaskAttachments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TaskAttachment"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connect#TaskDescriptionExpression": {
