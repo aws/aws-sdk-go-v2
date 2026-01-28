@@ -6,6 +6,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
+// Client defines the minimal DynamoDB client interface required by the enhancedclient package.
+// It abstracts the AWS SDK DynamoDB client to enable easier testing and extension.
+// Any implementation (including mocks) must satisfy this interface to be used with Table and batch operations.
 type Client interface {
 	CreateTable(ctx context.Context, input *dynamodb.CreateTableInput, optFns ...func(*dynamodb.Options)) (*dynamodb.CreateTableOutput, error)
 	DescribeTable(ctx context.Context, input *dynamodb.DescribeTableInput, optFns ...func(*dynamodb.Options)) (*dynamodb.DescribeTableOutput, error)

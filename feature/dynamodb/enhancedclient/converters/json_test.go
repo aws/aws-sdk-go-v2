@@ -72,7 +72,7 @@ func TestJsonConverter_FromAttributeValue(t *testing.T) {
 
 	for i, c := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			j := JsonConverter{}
+			j := JSONConverter{}
 			actualOutput, actualError := j.FromAttributeValue(c.input, nil)
 
 			if actualError == nil && c.expectedError {
@@ -137,7 +137,7 @@ func TestJsonConverter_ToAttributeValue(t *testing.T) {
 
 	for i, c := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			j := JsonConverter{}
+			j := JSONConverter{}
 			actualOutput, actualError := j.ToAttributeValue(c.input, nil)
 
 			if actualError == nil && c.expectedError {

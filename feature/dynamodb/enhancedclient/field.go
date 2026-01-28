@@ -5,14 +5,17 @@ import (
 	"sort"
 )
 
+// Field represents metadata about a struct field for schema mapping.
+// It includes the field's name, type, index path, and tag information.
+// Used internally for encoding/decoding Go structs to DynamoDB items.
 type Field struct {
-	Tag
+	Tag // Parsed struct tag information
 
-	Name        string
-	NameFromTag bool
+	Name        string // Field name (possibly overridden by tag)
+	NameFromTag bool   // True if the name was set by a struct tag
 
-	Index []int
-	Type  reflect.Type
+	Index []int        // Index path for reflect.Value.FieldByIndex
+	Type  reflect.Type // Field type
 }
 
 func buildField(pIdx []int, i int, sf reflect.StructField, fieldTag Tag) Field {

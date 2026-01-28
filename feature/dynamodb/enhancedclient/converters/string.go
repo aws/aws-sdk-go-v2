@@ -26,6 +26,8 @@ var _ AttributeConverter[string] = (*StringConverter)(nil)
 type StringConverter struct {
 }
 
+// FromAttributeValue converts a DynamoDB string (S) AttributeValue to a Go string.
+// Returns ErrNilValue for nil pointers, or unsupportedType for unsupported AttributeValue types.
 func (n StringConverter) FromAttributeValue(v types.AttributeValue, _ []string) (string, error) {
 	switch av := v.(type) {
 	case *types.AttributeValueMemberS:
@@ -39,6 +41,7 @@ func (n StringConverter) FromAttributeValue(v types.AttributeValue, _ []string) 
 	}
 }
 
+// ToAttributeValue converts a Go string to a DynamoDB string (S) AttributeValue.
 func (n StringConverter) ToAttributeValue(v string, _ []string) (types.AttributeValue, error) {
 	return &types.AttributeValueMemberS{
 		Value: v,

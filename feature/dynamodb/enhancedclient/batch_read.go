@@ -99,9 +99,9 @@ func (b *BatchGetOperation[T]) Execute(ctx context.Context, optFns ...func(optio
 
 				if consecutiveErrors >= maxConsecutiveErrors {
 					return
-				} else {
-					continue
 				}
+
+				continue
 			}
 			consecutiveErrors = 0
 

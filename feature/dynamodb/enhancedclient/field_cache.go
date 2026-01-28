@@ -29,15 +29,20 @@ func (c *fieldCacher) LoadOrStore(key fieldCacheKey, fs *CachedFields) (*CachedF
 	return v.(*CachedFields), ok
 }
 
+// CachedFields holds a slice of Field metadata and a map for fast lookup by field name.
+// Used to cache struct field information for efficient encoding/decoding.
 type CachedFields struct {
 	fields       []Field
 	fieldsByName map[string]int
 }
 
+// All returns all cached Field metadata for the struct.
 func (f *CachedFields) All() []Field {
 	return f.fields
 }
 
+// FieldByName returns the Field metadata for the given name, case-insensitive.
+// Returns the Field and true if found, or a zero Field and false otherwise.
 func (f *CachedFields) FieldByName(name string) (Field, bool) {
 	if i, ok := f.fieldsByName[name]; ok {
 		return f.fields[i], ok

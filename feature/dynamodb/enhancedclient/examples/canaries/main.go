@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
+// Item example struct
 type Item struct {
 	ID    string `dynamodbav:"id,partition"`
 	Email string `dynamodbav:"email,sort"`
