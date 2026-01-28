@@ -1298,6 +1298,18 @@ func TestCheckSnapshot_UpdateBucketMetadataJournalTableConfiguration(t *testing.
 	}
 }
 
+func TestCheckSnapshot_UpdateObjectEncryption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateObjectEncryption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateObjectEncryption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UploadPart(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UploadPart(context.Background(), nil, func(o *Options) {
@@ -2562,6 +2574,18 @@ func TestUpdateSnapshot_UpdateBucketMetadataJournalTableConfiguration(t *testing
 	_, err := svc.UpdateBucketMetadataJournalTableConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateBucketMetadataJournalTableConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateObjectEncryption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateObjectEncryption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateObjectEncryption")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

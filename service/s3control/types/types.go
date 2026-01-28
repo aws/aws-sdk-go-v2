@@ -972,6 +972,15 @@ type JobOperation struct {
 	// This functionality is not supported by directory buckets.
 	S3ReplicateObject *S3ReplicateObjectOperation
 
+	// Updates the server-side encryption type of an existing encrypted object in a
+	// general purpose bucket. You can use the UpdateObjectEncryption operation to
+	// change encrypted objects from server-side encryption with Amazon S3 managed keys
+	// (SSE-S3) to server-side encryption with Key Management Service (KMS) keys
+	// (SSE-KMS), or to apply S3 Bucket Keys. You can also use the
+	// UpdateObjectEncryption operation to change the customer-managed KMS key used to
+	// encrypt your data so that you can comply with custom key-rotation standards.
+	S3UpdateObjectEncryption *S3UpdateObjectEncryptionOperation
+
 	noSmithyDocumentSerde
 }
 
@@ -1643,6 +1652,19 @@ type NoncurrentVersionTransition struct {
 
 // A filter that returns objects that aren't server-side encrypted.
 type NotSSEFilter struct {
+	noSmithyDocumentSerde
+}
+
+// The updated server-side encryption type for this object. The
+// UpdateObjectEncryption operation supports the SSE-KMS encryption type.
+//
+// Valid Values: SSEKMS
+type ObjectEncryption struct {
+
+	// Specifies to update the object encryption type to server-side encryption with
+	// Key Management Service (KMS) keys (SSE-KMS).
+	SSEKMS *S3UpdateObjectEncryptionSSEKMS
+
 	noSmithyDocumentSerde
 }
 
@@ -2752,6 +2774,41 @@ type S3Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// With the UpdateObjectEncryption operation, you can atomically update the
+// server-side encryption type of an existing object in a general purpose bucket
+// without any data movement.
+type S3UpdateObjectEncryptionOperation struct {
+
+	// The updated server-side encryption type for this S3 object. The
+	// UpdateObjectEncryption operation supports the SSE-KMS encryption type.
+	ObjectEncryption *ObjectEncryption
+
+	noSmithyDocumentSerde
+}
+
+// If SSEKMS is specified for UpdateObjectEncryption , this data type specifies the
+// Amazon Web Services KMS key Amazon Resource Name (ARN) to use and whether to use
+// an S3 Bucket Key for server-side encryption using Key Management Service (KMS)
+// keys (SSE-KMS).
+type S3UpdateObjectEncryptionSSEKMS struct {
+
+	// Specifies the Amazon Web Services KMS key Amazon Resource Name (ARN) to use for
+	// the updated server-side encryption type. Required if UpdateObjectEncryption
+	// specifies SSEKMS .
+	//
+	// This member is required.
+	KMSKeyArn *string
+
+	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
+	// with server-side encryption using Key Management Service (KMS) keys (SSE-KMS).
+	// If this value isn't specified, it defaults to false . Setting this value to true
+	// causes Amazon S3 to use an S3 Bucket Key for update object encryption with
+	// SSE-KMS.
+	BucketKeyEnabled *bool
 
 	noSmithyDocumentSerde
 }

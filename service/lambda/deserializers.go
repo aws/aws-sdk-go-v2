@@ -1339,6 +1339,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 				sv.LastProcessingResult = ptr.String(jtv)
 			}
 
+		case "LoggingConfig":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingLoggingConfig(&sv.LoggingConfig, value); err != nil {
+				return err
+			}
+
 		case "MaximumBatchingWindowInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2828,6 +2833,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.LastProcessingResult = ptr.String(jtv)
+			}
+
+		case "LoggingConfig":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingLoggingConfig(&sv.LoggingConfig, value); err != nil {
+				return err
 			}
 
 		case "MaximumBatchingWindowInSeconds":
@@ -5279,6 +5289,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.LastProcessingResult = ptr.String(jtv)
+			}
+
+		case "LoggingConfig":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingLoggingConfig(&sv.LoggingConfig, value); err != nil {
+				return err
 			}
 
 		case "MaximumBatchingWindowInSeconds":
@@ -15231,6 +15246,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 				sv.LastProcessingResult = ptr.String(jtv)
 			}
 
+		case "LoggingConfig":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingLoggingConfig(&sv.LoggingConfig, value); err != nil {
+				return err
+			}
+
 		case "MaximumBatchingWindowInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22337,6 +22357,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 				sv.LastProcessingResult = ptr.String(jtv)
 			}
 
+		case "LoggingConfig":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingLoggingConfig(&sv.LoggingConfig, value); err != nil {
+				return err
+			}
+
 		case "MaximumBatchingWindowInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22492,6 +22517,46 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.UUID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEventSourceMappingLoggingConfig(v **types.EventSourceMappingLoggingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EventSourceMappingLoggingConfig
+	if *v == nil {
+		sv = &types.EventSourceMappingLoggingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SystemLogLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourceMappingSystemLogLevel to be of type string, got %T instead", value)
+				}
+				sv.SystemLogLevel = types.EventSourceMappingSystemLogLevel(jtv)
 			}
 
 		default:

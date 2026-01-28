@@ -51,6 +51,11 @@ type DescribeFlowSourceMetadataOutput struct {
 	// metadata.
 	Messages []types.MessageDetail
 
+	//  The NDI® specific information about the flow's source. This includes the
+	// current active NDI sender, a list of all discovered NDI senders, the associated
+	// media streams for the active NDI sender, and any relevant status messages.
+	NdiInfo *types.NdiSourceMetadataInfo
+
 	//  The timestamp of the most recent change in metadata for this flow’s source.
 	Timestamp *time.Time
 

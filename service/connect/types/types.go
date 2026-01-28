@@ -2078,6 +2078,10 @@ type ContactSearchSummary struct {
 	// Set of segment attributes for a contact.
 	SegmentAttributes map[string]ContactSearchSummarySegmentAttributeValue
 
+	// Tags associated with the contact. This contains both Amazon Web Services
+	// generated and user-defined tags.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -9127,6 +9131,14 @@ type SearchCriteria struct {
 
 	// Search criteria based on analysis outputs from Amazon Connect Contact Lens.
 	ContactAnalysis *ContactAnalysis
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR of AND (List of List) input where:
+	//
+	//   - Top level list specifies conditions that need to be applied with OR operator
+	//
+	//   - Inner list specifies conditions that need to be applied with AND operator.
+	ContactTags *ControlPlaneTagFilter
 
 	// The list of initiation methods associated with contacts.
 	InitiationMethods []ContactInitiationMethod

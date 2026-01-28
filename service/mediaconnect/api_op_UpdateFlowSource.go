@@ -11,7 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the source of a flow.
+//	Updates the source of a flow.
+//
+// Because UpdateFlowSources and UpdateFlow are separate operations, you can't
+// change both the source type AND the flow size in a single request.
+//
+//   - If you have a MEDIUM flow and you want to change the flow source to NDI®:
+//
+//   - First, use the UpdateFlow operation to upgrade the flow size to LARGE .
+//
+//   - After that, you can then use the UpdateFlowSource operation to configure the
+//     NDI source.
+//
+//   - If you're switching from an NDI source to a transport stream (TS) source
+//     and want to downgrade the flow size:
+//
+//   - First, use the UpdateFlowSource operation to change the flow source type.
+//
+//   - After that, you can then use the UpdateFlow operation to downgrade the flow
+//     size to MEDIUM .
 func (c *Client) UpdateFlowSource(ctx context.Context, params *UpdateFlowSourceInput, optFns ...func(*Options)) (*UpdateFlowSourceOutput, error) {
 	if params == nil {
 		params = &UpdateFlowSourceInput{}
@@ -79,6 +97,10 @@ type UpdateFlowSourceInput struct {
 	// receiver’s minimum latency.
 	MinLatency *int32
 
+	//  The settings for the NDI source. This includes the exact name of the upstream
+	// NDI sender that you want to connect to your source.
+	NdiSourceSettings *types.NdiSourceSettings
+
 	// The protocol that the source uses to deliver the content to MediaConnect.
 	//
 	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
@@ -123,7 +145,7 @@ type UpdateFlowSourceInput struct {
 
 type UpdateFlowSourceOutput struct {
 
-	// The ARN of the flow that you was updated.
+	// The ARN of the flow that you updated.
 	FlowArn *string
 
 	// The details of the sources that are assigned to the flow.

@@ -860,6 +860,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		ok.String(*v.KMSKeyArn)
 	}
 
+	if v.LoggingConfig != nil {
+		ok := object.Key("LoggingConfig")
+		if err := awsRestjson1_serializeDocumentEventSourceMappingLoggingConfig(v.LoggingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumBatchingWindowInSeconds != nil {
 		ok := object.Key("MaximumBatchingWindowInSeconds")
 		ok.Integer(*v.MaximumBatchingWindowInSeconds)
@@ -7355,6 +7362,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		ok.String(*v.KMSKeyArn)
 	}
 
+	if v.LoggingConfig != nil {
+		ok := object.Key("LoggingConfig")
+		if err := awsRestjson1_serializeDocumentEventSourceMappingLoggingConfig(v.LoggingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumBatchingWindowInSeconds != nil {
 		ok := object.Key("MaximumBatchingWindowInSeconds")
 		ok.Integer(*v.MaximumBatchingWindowInSeconds)
@@ -8492,6 +8506,18 @@ func awsRestjson1_serializeDocumentErrorObject(v *types.ErrorObject, value smith
 		if err := awsRestjson1_serializeDocumentStackTraceEntries(v.StackTrace, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventSourceMappingLoggingConfig(v *types.EventSourceMappingLoggingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SystemLogLevel) > 0 {
+		ok := object.Key("SystemLogLevel")
+		ok.String(string(v.SystemLogLevel))
 	}
 
 	return nil

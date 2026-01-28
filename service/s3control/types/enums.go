@@ -559,16 +559,17 @@ type OperationName string
 
 // Enum values for OperationName
 const (
-	OperationNameLambdaInvoke            OperationName = "LambdaInvoke"
-	OperationNameS3PutObjectCopy         OperationName = "S3PutObjectCopy"
-	OperationNameS3PutObjectAcl          OperationName = "S3PutObjectAcl"
-	OperationNameS3PutObjectTagging      OperationName = "S3PutObjectTagging"
-	OperationNameS3DeleteObjectTagging   OperationName = "S3DeleteObjectTagging"
-	OperationNameS3InitiateRestoreObject OperationName = "S3InitiateRestoreObject"
-	OperationNameS3PutObjectLegalHold    OperationName = "S3PutObjectLegalHold"
-	OperationNameS3PutObjectRetention    OperationName = "S3PutObjectRetention"
-	OperationNameS3ReplicateObject       OperationName = "S3ReplicateObject"
-	OperationNameS3ComputeObjectChecksum OperationName = "S3ComputeObjectChecksum"
+	OperationNameLambdaInvoke             OperationName = "LambdaInvoke"
+	OperationNameS3PutObjectCopy          OperationName = "S3PutObjectCopy"
+	OperationNameS3PutObjectAcl           OperationName = "S3PutObjectAcl"
+	OperationNameS3PutObjectTagging       OperationName = "S3PutObjectTagging"
+	OperationNameS3DeleteObjectTagging    OperationName = "S3DeleteObjectTagging"
+	OperationNameS3InitiateRestoreObject  OperationName = "S3InitiateRestoreObject"
+	OperationNameS3PutObjectLegalHold     OperationName = "S3PutObjectLegalHold"
+	OperationNameS3PutObjectRetention     OperationName = "S3PutObjectRetention"
+	OperationNameS3ReplicateObject        OperationName = "S3ReplicateObject"
+	OperationNameS3ComputeObjectChecksum  OperationName = "S3ComputeObjectChecksum"
+	OperationNameS3UpdateObjectEncryption OperationName = "S3UpdateObjectEncryption"
 )
 
 // Values returns all known values for OperationName. Note that this can be
@@ -587,6 +588,7 @@ func (OperationName) Values() []OperationName {
 		"S3PutObjectRetention",
 		"S3ReplicateObject",
 		"S3ComputeObjectChecksum",
+		"S3UpdateObjectEncryption",
 	}
 }
 

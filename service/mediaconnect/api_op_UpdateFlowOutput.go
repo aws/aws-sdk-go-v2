@@ -72,7 +72,7 @@ type UpdateFlowOutputInput struct {
 	// receiver’s minimum latency.
 	MinLatency *int32
 
-	//  A suffix for the names of the NDI sources that the flow creates. If a custom
+	//  A suffix for the name of the NDI® sender that the flow creates. If a custom
 	// name isn't specified, MediaConnect uses the output name.
 	NdiProgramName *string
 

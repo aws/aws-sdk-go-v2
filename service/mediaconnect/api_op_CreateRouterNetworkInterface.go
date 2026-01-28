@@ -42,8 +42,8 @@ type CreateRouterNetworkInterfaceInput struct {
 	// A unique identifier for the request to ensure idempotency.
 	ClientToken *string
 
-	// The AWS Region for the router network interface. Defaults to the current region
-	// if not specified.
+	// The Amazon Web Services Region for the router network interface. Defaults to
+	// the current region if not specified.
 	RegionName *string
 
 	// Key-value pairs that can be used to tag and organize this router network

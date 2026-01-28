@@ -9768,6 +9768,19 @@ func awsRestxml_serializeDocumentJobOperation(v *types.JobOperation, value smith
 			return err
 		}
 	}
+	if v.S3UpdateObjectEncryption != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "S3UpdateObjectEncryption",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentS3UpdateObjectEncryptionOperation(v.S3UpdateObjectEncryption, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -10498,6 +10511,24 @@ func awsRestxml_serializeDocumentNonEmptyMaxLength1024StringList(v []string, val
 
 func awsRestxml_serializeDocumentNotSSEFilter(v *types.NotSSEFilter, value smithyxml.Value) error {
 	defer value.Close()
+	return nil
+}
+
+func awsRestxml_serializeDocumentObjectEncryption(v *types.ObjectEncryption, value smithyxml.Value) error {
+	defer value.Close()
+	if v.SSEKMS != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SSE-KMS",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentS3UpdateObjectEncryptionSSEKMS(v.SSEKMS, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -12260,6 +12291,51 @@ func awsRestxml_serializeDocumentS3TagSet(v []types.S3Tag, value smithyxml.Value
 		if err := awsRestxml_serializeDocumentS3Tag(&v[i], am); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentS3UpdateObjectEncryptionOperation(v *types.S3UpdateObjectEncryptionOperation, value smithyxml.Value) error {
+	defer value.Close()
+	if v.ObjectEncryption != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectEncryption",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentObjectEncryption(v.ObjectEncryption, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentS3UpdateObjectEncryptionSSEKMS(v *types.S3UpdateObjectEncryptionSSEKMS, value smithyxml.Value) error {
+	defer value.Close()
+	if v.BucketKeyEnabled != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "BucketKeyEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.BucketKeyEnabled)
+	}
+	if v.KMSKeyArn != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "KMSKeyArn",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.KMSKeyArn)
 	}
 	return nil
 }

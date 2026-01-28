@@ -7971,6 +7971,23 @@ func awsAwsjson11_serializeDocumentIdpIdentifiersListType(v []string, value smit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInboundFederationLambdaType(v *types.InboundFederationLambdaType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LambdaArn != nil {
+		ok := object.Key("LambdaArn")
+		ok.String(*v.LambdaArn)
+	}
+
+	if len(v.LambdaVersion) > 0 {
+		ok := object.Key("LambdaVersion")
+		ok.String(string(v.LambdaVersion))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentLambdaConfigType(v *types.LambdaConfigType, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8002,6 +8019,13 @@ func awsAwsjson11_serializeDocumentLambdaConfigType(v *types.LambdaConfigType, v
 	if v.DefineAuthChallenge != nil {
 		ok := object.Key("DefineAuthChallenge")
 		ok.String(*v.DefineAuthChallenge)
+	}
+
+	if v.InboundFederation != nil {
+		ok := object.Key("InboundFederation")
+		if err := awsAwsjson11_serializeDocumentInboundFederationLambdaType(v.InboundFederation, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KMSKeyID != nil {

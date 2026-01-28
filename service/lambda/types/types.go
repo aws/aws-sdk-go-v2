@@ -928,6 +928,12 @@ type EventSourceMappingConfiguration struct {
 	// The result of the event source mapping's last processing attempt.
 	LastProcessingResult *string
 
+	// (Amazon MSK, and self-managed Apache Kafka only) The logging configuration for
+	// your event source. For more information, see [Event source mapping logging].
+	//
+	// [Event source mapping logging]: https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html
+	LoggingConfig *EventSourceMappingLoggingConfig
+
 	// The maximum amount of time, in seconds, that Lambda spends gathering records
 	// before invoking the function. You can configure MaximumBatchingWindowInSeconds
 	// to any value from 0 seconds to 300 seconds in increments of seconds.
@@ -1027,14 +1033,39 @@ type EventSourceMappingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// (Amazon MSK, and self-managed Apache Kafka only) The logging configuration for
+// your event source. Use this configuration object to define the level of logs for
+// your event source mapping.
+type EventSourceMappingLoggingConfig struct {
+
+	//  The log level you want your event source mapping to use. Lambda event poller
+	// only sends system logs at the selected level of detail and lower, where DEBUG
+	// is the highest level and WARN is the lowest. For more information about these
+	// metrics, see [Event source mapping logging].
+	//
+	// [Event source mapping logging]: https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html
+	SystemLogLevel EventSourceMappingSystemLogLevel
+
+	noSmithyDocumentSerde
+}
+
 // The metrics configuration for your event source. Use this configuration object
 // to define which metrics you want your event source mapping to produce.
 type EventSourceMappingMetricsConfig struct {
 
-	//  The metrics you want your event source mapping to produce. Include EventCount
-	// to receive event source mapping metrics related to the number of events
-	// processed by your event source mapping. For more information about these
-	// metrics, see [Event source mapping metrics].
+	//  The metrics you want your event source mapping to produce, including EventCount
+	// , ErrorCount , KafkaMetrics .
+	//
+	//   - EventCount to receive metrics related to the number of events processed by
+	//   your event source mapping.
+	//
+	//   - ErrorCount (Amazon MSK and self-managed Apache Kafka) to receive metrics
+	//   related to the number of errors in your event source mapping processing.
+	//
+	//   - KafkaMetrics (Amazon MSK and self-managed Apache Kafka) to receive metrics
+	//   related to the Kafka consumers from your event source mapping.
+	//
+	// For more information about these metrics, see [Event source mapping metrics].
 	//
 	// [Event source mapping metrics]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics
 	Metrics []EventSourceMappingMetric

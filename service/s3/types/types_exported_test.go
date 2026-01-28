@@ -63,6 +63,24 @@ var _ *string
 var _ *types.Tag
 var _ *types.MetricsAndOperator
 
+func ExampleObjectEncryption_outputUsage() {
+	var union types.ObjectEncryption
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ObjectEncryptionMemberSSEKMS:
+		_ = v.Value // Value is types.SSEKMSEncryption
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SSEKMSEncryption
+
 func ExampleSelectObjectContentEventStream_outputUsage() {
 	var union types.SelectObjectContentEventStream
 	// type switches can be used to check the union value

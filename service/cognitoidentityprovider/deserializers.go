@@ -20392,6 +20392,55 @@ func awsAwsjson11_deserializeDocumentIdpIdentifiersListType(v *[]string, value i
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInboundFederationLambdaType(v **types.InboundFederationLambdaType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InboundFederationLambdaType
+	if *v == nil {
+		sv = &types.InboundFederationLambdaType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LambdaArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+				}
+				sv.LambdaArn = ptr.String(jtv)
+			}
+
+		case "LambdaVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InboundFederationLambdaVersionType to be of type string, got %T instead", value)
+				}
+				sv.LambdaVersion = types.InboundFederationLambdaVersionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInternalErrorException(v **types.InternalErrorException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20818,6 +20867,11 @@ func awsAwsjson11_deserializeDocumentLambdaConfigType(v **types.LambdaConfigType
 					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
 				}
 				sv.DefineAuthChallenge = ptr.String(jtv)
+			}
+
+		case "InboundFederation":
+			if err := awsAwsjson11_deserializeDocumentInboundFederationLambdaType(&sv.InboundFederation, value); err != nil {
+				return err
 			}
 
 		case "KMSKeyID":

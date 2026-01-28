@@ -1,0 +1,8 @@
+{
+    "id": "f12d3fa5-d4ab-41c5-b536-0d10dc7acc38",
+    "type": "feature",
+    "description": "We are launching ESM Metrics and logging for Kafka ESM to allow customers to monitor Kafka event processing using CloudWatch Metrics and Logs.",
+    "modules": [
+        "service/lambda"
+    ]
+}

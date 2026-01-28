@@ -995,6 +995,13 @@ func awsRestjson1_serializeOpDocumentCreateFlowInput(v *CreateFlowInput, value s
 		ok.String(*v.AvailabilityZone)
 	}
 
+	if v.EncodingConfig != nil {
+		ok := object.Key("encodingConfig")
+		if err := awsRestjson1_serializeDocumentEncodingConfig(v.EncodingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Entitlements != nil {
 		ok := object.Key("entitlements")
 		if err := awsRestjson1_serializeDocument__listOfGrantEntitlementRequest(v.Entitlements, ok); err != nil {
@@ -6175,6 +6182,13 @@ func awsRestjson1_serializeOpDocumentUpdateFlowInput(v *UpdateFlowInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.EncodingConfig != nil {
+		ok := object.Key("encodingConfig")
+		if err := awsRestjson1_serializeDocumentEncodingConfig(v.EncodingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.FlowSize) > 0 {
 		ok := object.Key("flowSize")
 		ok.String(string(v.FlowSize))
@@ -6815,6 +6829,13 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 	if v.MinLatency != nil {
 		ok := object.Key("minLatency")
 		ok.Integer(*v.MinLatency)
+	}
+
+	if v.NdiSourceSettings != nil {
+		ok := object.Key("ndiSourceSettings")
+		if err := awsRestjson1_serializeDocumentNdiSourceSettings(v.NdiSourceSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.Protocol) > 0 {
@@ -7962,6 +7983,23 @@ func awsRestjson1_serializeDocumentDestinationConfigurationRequest(v *types.Dest
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEncodingConfig(v *types.EncodingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EncodingProfile) > 0 {
+		ok := object.Key("encodingProfile")
+		ok.String(string(v.EncodingProfile))
+	}
+
+	if v.VideoMaxBitrate != nil {
+		ok := object.Key("videoMaxBitrate")
+		ok.Integer(*v.VideoMaxBitrate)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEncodingParametersRequest(v *types.EncodingParametersRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8718,6 +8756,18 @@ func awsRestjson1_serializeDocumentNdiDiscoveryServerConfig(v *types.NdiDiscover
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNdiSourceSettings(v *types.NdiSourceSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SourceName != nil {
+		ok := object.Key("sourceName")
+		ok.String(*v.SourceName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNetworkInterfaceRuleList(v []types.PublicRouterNetworkInterfaceRule, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -9396,6 +9446,13 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.NdiSourceSettings != nil {
+		ok := object.Key("ndiSourceSettings")
+		if err := awsRestjson1_serializeDocumentNdiSourceSettings(v.NdiSourceSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.Protocol) > 0 {

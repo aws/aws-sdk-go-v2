@@ -1,0 +1,8 @@
+{
+    "id": "5b256414-737d-4b86-aa51-35ccf9118e4f",
+    "type": "feature",
+    "description": "This release adds support for a new lambda trigger to transform federated user attributes during the authentication with external identity providers on Cognito Managed Login.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

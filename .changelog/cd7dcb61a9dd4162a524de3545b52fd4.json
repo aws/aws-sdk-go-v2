@@ -1,0 +1,8 @@
+{
+    "id": "cd7dcb61-a9dd-4162-a524-de3545b52fd4",
+    "type": "feature",
+    "description": "Adds support for the UpdateObjectEncryption API to change the server-side encryption type of objects in general purpose buckets.",
+    "modules": [
+        "service/s3control"
+    ]
+}

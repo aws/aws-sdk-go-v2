@@ -41739,6 +41739,13 @@ func awsRestjson1_serializeDocumentSearchCriteria(v *types.SearchCriteria, value
 		}
 	}
 
+	if v.ContactTags != nil {
+		ok := object.Key("ContactTags")
+		if err := awsRestjson1_serializeDocumentControlPlaneTagFilter(v.ContactTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InitiationMethods != nil {
 		ok := object.Key("InitiationMethods")
 		if err := awsRestjson1_serializeDocumentInitiationMethodList(v.InitiationMethods, ok); err != nil {

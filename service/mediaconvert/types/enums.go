@@ -49,11 +49,12 @@ type AacCodingMode string
 
 // Enum values for AacCodingMode
 const (
-	AacCodingModeAdReceiverMix AacCodingMode = "AD_RECEIVER_MIX"
-	AacCodingModeCodingMode10  AacCodingMode = "CODING_MODE_1_0"
-	AacCodingModeCodingMode11  AacCodingMode = "CODING_MODE_1_1"
-	AacCodingModeCodingMode20  AacCodingMode = "CODING_MODE_2_0"
-	AacCodingModeCodingMode51  AacCodingMode = "CODING_MODE_5_1"
+	AacCodingModeAdReceiverMix  AacCodingMode = "AD_RECEIVER_MIX"
+	AacCodingModeCodingMode10   AacCodingMode = "CODING_MODE_1_0"
+	AacCodingModeCodingMode11   AacCodingMode = "CODING_MODE_1_1"
+	AacCodingModeCodingMode20   AacCodingMode = "CODING_MODE_2_0"
+	AacCodingModeCodingMode51   AacCodingMode = "CODING_MODE_5_1"
+	AacCodingModeCodingModeAuto AacCodingMode = "CODING_MODE_AUTO"
 )
 
 // Values returns all known values for AacCodingMode. Note that this can be
@@ -67,6 +68,7 @@ func (AacCodingMode) Values() []AacCodingMode {
 		"CODING_MODE_1_1",
 		"CODING_MODE_2_0",
 		"CODING_MODE_5_1",
+		"CODING_MODE_AUTO",
 	}
 }
 
@@ -208,6 +210,7 @@ const (
 	Ac3CodingModeCodingMode11    Ac3CodingMode = "CODING_MODE_1_1"
 	Ac3CodingModeCodingMode20    Ac3CodingMode = "CODING_MODE_2_0"
 	Ac3CodingModeCodingMode32Lfe Ac3CodingMode = "CODING_MODE_3_2_LFE"
+	Ac3CodingModeCodingModeAuto  Ac3CodingMode = "CODING_MODE_AUTO"
 )
 
 // Values returns all known values for Ac3CodingMode. Note that this can be
@@ -220,6 +223,7 @@ func (Ac3CodingMode) Values() []Ac3CodingMode {
 		"CODING_MODE_1_1",
 		"CODING_MODE_2_0",
 		"CODING_MODE_3_2_LFE",
+		"CODING_MODE_AUTO",
 	}
 }
 
@@ -2873,6 +2877,25 @@ func (DescribeEndpointsMode) Values() []DescribeEndpointsMode {
 	}
 }
 
+type DolbyVisionCompatibility string
+
+// Enum values for DolbyVisionCompatibility
+const (
+	DolbyVisionCompatibilityDuplicateStream    DolbyVisionCompatibility = "DUPLICATE_STREAM"
+	DolbyVisionCompatibilitySupplementalCodecs DolbyVisionCompatibility = "SUPPLEMENTAL_CODECS"
+)
+
+// Values returns all known values for DolbyVisionCompatibility. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DolbyVisionCompatibility) Values() []DolbyVisionCompatibility {
+	return []DolbyVisionCompatibility{
+		"DUPLICATE_STREAM",
+		"SUPPLEMENTAL_CODECS",
+	}
+}
+
 type DolbyVisionLevel6Mode string
 
 // Enum values for DolbyVisionLevel6Mode
@@ -3495,9 +3518,10 @@ type Eac3CodingMode string
 
 // Enum values for Eac3CodingMode
 const (
-	Eac3CodingModeCodingMode10 Eac3CodingMode = "CODING_MODE_1_0"
-	Eac3CodingModeCodingMode20 Eac3CodingMode = "CODING_MODE_2_0"
-	Eac3CodingModeCodingMode32 Eac3CodingMode = "CODING_MODE_3_2"
+	Eac3CodingModeCodingMode10   Eac3CodingMode = "CODING_MODE_1_0"
+	Eac3CodingModeCodingMode20   Eac3CodingMode = "CODING_MODE_2_0"
+	Eac3CodingModeCodingMode32   Eac3CodingMode = "CODING_MODE_3_2"
+	Eac3CodingModeCodingModeAuto Eac3CodingMode = "CODING_MODE_AUTO"
 )
 
 // Values returns all known values for Eac3CodingMode. Note that this can be
@@ -3509,6 +3533,7 @@ func (Eac3CodingMode) Values() []Eac3CodingMode {
 		"CODING_MODE_1_0",
 		"CODING_MODE_2_0",
 		"CODING_MODE_3_2",
+		"CODING_MODE_AUTO",
 	}
 }
 
@@ -3891,6 +3916,7 @@ const (
 	FormatMatroska  Format = "matroska"
 	FormatWebm      Format = "webm"
 	FormatMxf       Format = "mxf"
+	FormatWave      Format = "wave"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -3904,6 +3930,7 @@ func (Format) Values() []Format {
 		"matroska",
 		"webm",
 		"mxf",
+		"wave",
 	}
 }
 
@@ -7924,6 +7951,26 @@ func (MxfProfile) Values() []MxfProfile {
 		"OP1A",
 		"XAVC",
 		"XDCAM_RDD9",
+	}
+}
+
+type MxfUncompressedAudioWrapping string
+
+// Enum values for MxfUncompressedAudioWrapping
+const (
+	MxfUncompressedAudioWrappingAuto MxfUncompressedAudioWrapping = "AUTO"
+	MxfUncompressedAudioWrappingAes3 MxfUncompressedAudioWrapping = "AES3"
+)
+
+// Values returns all known values for MxfUncompressedAudioWrapping. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MxfUncompressedAudioWrapping) Values() []MxfUncompressedAudioWrapping {
+	return []MxfUncompressedAudioWrapping{
+		"AUTO",
+		"AES3",
 	}
 }
 

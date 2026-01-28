@@ -1108,6 +1108,26 @@ type IdentityProviderType struct {
 	noSmithyDocumentSerde
 }
 
+// The properties of an inbound federation Lambda trigger.
+type InboundFederationLambdaType struct {
+
+	// The Amazon Resource Name (ARN) of the function that you want to assign to your
+	// Lambda trigger.
+	//
+	// This member is required.
+	LambdaArn *string
+
+	// The user pool trigger version of the request that Amazon Cognito sends to your
+	// Lambda function. Higher-numbered versions add fields that support new features.
+	//
+	// You must use a LambdaVersion of V1_0 with an inbound federation function.
+	//
+	// This member is required.
+	LambdaVersion InboundFederationLambdaVersionType
+
+	noSmithyDocumentSerde
+}
+
 // A collection of user pool Lambda triggers. Amazon Cognito invokes triggers at
 // several possible stages of user pool operations. Triggers can modify the outcome
 // of the operations that invoked them.
@@ -1141,6 +1161,11 @@ type LambdaConfigType struct {
 	//
 	// [custom authentication challenge triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html
 	DefineAuthChallenge *string
+
+	// The configuration of an inbound federation Lambda trigger. This trigger can
+	// transform federated user attributes during the authentication with external
+	// identity providers.
+	InboundFederation *InboundFederationLambdaType
 
 	// The ARN of an [KMS key]. Amazon Cognito uses the key to encrypt codes and temporary
 	// passwords sent to custom sender Lambda triggers.

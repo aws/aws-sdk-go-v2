@@ -257,6 +257,25 @@ func (EncodingName) Values() []EncodingName {
 	}
 }
 
+type EncodingProfile string
+
+// Enum values for EncodingProfile
+const (
+	EncodingProfileDistributionH264Default EncodingProfile = "DISTRIBUTION_H264_DEFAULT"
+	EncodingProfileContributionH264Default EncodingProfile = "CONTRIBUTION_H264_DEFAULT"
+)
+
+// Values returns all known values for EncodingProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncodingProfile) Values() []EncodingProfile {
+	return []EncodingProfile{
+		"DISTRIBUTION_H264_DEFAULT",
+		"CONTRIBUTION_H264_DEFAULT",
+	}
+}
+
 type EntitlementStatus string
 
 // Enum values for EntitlementStatus
@@ -319,8 +338,9 @@ type FlowSize string
 
 // Enum values for FlowSize
 const (
-	FlowSizeMedium FlowSize = "MEDIUM"
-	FlowSizeLarge  FlowSize = "LARGE"
+	FlowSizeMedium  FlowSize = "MEDIUM"
+	FlowSizeLarge   FlowSize = "LARGE"
+	FlowSizeLarge4x FlowSize = "LARGE_4X"
 )
 
 // Values returns all known values for FlowSize. Note that this can be expanded in
@@ -331,6 +351,7 @@ func (FlowSize) Values() []FlowSize {
 	return []FlowSize{
 		"MEDIUM",
 		"LARGE",
+		"LARGE_4X",
 	}
 }
 

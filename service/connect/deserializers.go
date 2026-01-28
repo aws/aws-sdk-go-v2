@@ -61230,6 +61230,11 @@ func awsRestjson1_deserializeDocumentContactSearchSummary(v **types.ContactSearc
 				return err
 			}
 
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentContactTagMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

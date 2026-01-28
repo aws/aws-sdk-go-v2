@@ -40,11 +40,17 @@ type CreateFlowInput struct {
 	// limited to the Availability Zones within the current Amazon Web Services Region.
 	AvailabilityZone *string
 
+	//  The encoding configuration to apply to the NDI® source when transcoding it to
+	// a transport stream for downstream distribution. You can choose between several
+	// predefined encoding profiles based on common use cases.
+	EncodingConfig *types.EncodingConfig
+
 	//  The entitlements that you want to grant on a flow.
 	Entitlements []types.GrantEntitlementRequest
 
 	//  Determines the processing capacity and feature set of the flow. Set this
-	// optional parameter to LARGE if you want to enable NDI outputs on the flow.
+	// optional parameter to LARGE if you want to enable NDI sources or outputs on the
+	// flow.
 	FlowSize types.FlowSize
 
 	//  The key-value pairs that can be used to tag and organize the flow.
@@ -57,8 +63,8 @@ type CreateFlowInput struct {
 	// media streams with sources and outputs on the flow.
 	MediaStreams []types.AddMediaStreamRequest
 
-	//  Specifies the configuration settings for NDI outputs. Required when the flow
-	// includes NDI outputs.
+	//  Specifies the configuration settings for a flow's NDI source or output.
+	// Required when the flow includes an NDI source or output.
 	NdiConfig *types.NdiConfig
 
 	//  The outputs that you want to add to this flow.

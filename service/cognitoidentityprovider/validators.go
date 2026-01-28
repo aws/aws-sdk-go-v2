@@ -3104,6 +3104,24 @@ func validateCustomSMSLambdaVersionConfigType(v *types.CustomSMSLambdaVersionCon
 	}
 }
 
+func validateInboundFederationLambdaType(v *types.InboundFederationLambdaType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InboundFederationLambdaType"}
+	if len(v.LambdaVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaVersion"))
+	}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLambdaConfigType(v *types.LambdaConfigType) error {
 	if v == nil {
 		return nil
@@ -3122,6 +3140,11 @@ func validateLambdaConfigType(v *types.LambdaConfigType) error {
 	if v.CustomEmailSender != nil {
 		if err := validateCustomEmailLambdaVersionConfigType(v.CustomEmailSender); err != nil {
 			invalidParams.AddNested("CustomEmailSender", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InboundFederation != nil {
+		if err := validateInboundFederationLambdaType(v.InboundFederation); err != nil {
+			invalidParams.AddNested("InboundFederation", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

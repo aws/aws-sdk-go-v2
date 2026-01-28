@@ -1,0 +1,8 @@
+{
+    "id": "c9e45afb-eafb-46b9-ae0b-1c2a46ef967a",
+    "type": "feature",
+    "description": "This release adds support for NDI flow sources in AWS Elemental MediaConnect. You can now send content to your MediaConnect transport streams directly from your NDI environment using the new NDI source type. Also adds support for LARGE 4X flow size, which can be used when creating CDI JPEG-XS flows.",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

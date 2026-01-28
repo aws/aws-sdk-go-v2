@@ -4408,6 +4408,11 @@ func awsRestjson1_deserializeOpDocumentDescribeFlowSourceMetadataOutput(v **Desc
 				return err
 			}
 
+		case "ndiInfo":
+			if err := awsRestjson1_deserializeDocumentNdiSourceMetadataInfo(&sv.NdiInfo, value); err != nil {
+				return err
+			}
+
 		case "timestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15381,6 +15386,74 @@ func awsRestjson1_deserializeDocument__listOfNdiDiscoveryServerConfig(v *[]types
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfNdiMediaStreamInfo(v *[]types.NdiMediaStreamInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NdiMediaStreamInfo
+	if *v == nil {
+		cv = []types.NdiMediaStreamInfo{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NdiMediaStreamInfo
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNdiMediaStreamInfo(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfNdiSourceInfo(v *[]types.NdiSourceInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NdiSourceInfo
+	if *v == nil {
+		cv = []types.NdiSourceInfo{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NdiSourceInfo
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNdiSourceInfo(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfOffering(v *[]types.Offering, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16990,6 +17063,59 @@ func awsRestjson1_deserializeDocumentEgressGatewayBridge(v **types.EgressGateway
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEncodingConfig(v **types.EncodingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EncodingConfig
+	if *v == nil {
+		sv = &types.EncodingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "encodingProfile":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncodingProfile to be of type string, got %T instead", value)
+				}
+				sv.EncodingProfile = types.EncodingProfile(jtv)
+			}
+
+		case "videoMaxBitrate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VideoMaxBitrate = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEncodingParameters(v **types.EncodingParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17643,6 +17769,11 @@ func awsRestjson1_deserializeDocumentFlow(v **types.Flow, value interface{}) err
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.EgressIp = ptr.String(jtv)
+			}
+
+		case "encodingConfig":
+			if err := awsRestjson1_deserializeDocumentEncodingConfig(&sv.EncodingConfig, value); err != nil {
+				return err
 			}
 
 		case "entitlements":
@@ -20880,6 +21011,284 @@ func awsRestjson1_deserializeDocumentNdiDiscoveryServerConfig(v **types.NdiDisco
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.VpcInterfaceAdapter = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNdiMediaInfo(v **types.NdiMediaInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NdiMediaInfo
+	if *v == nil {
+		sv = &types.NdiMediaInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "streams":
+			if err := awsRestjson1_deserializeDocument__listOfNdiMediaStreamInfo(&sv.Streams, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNdiMediaStreamInfo(v **types.NdiMediaStreamInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NdiMediaStreamInfo
+	if *v == nil {
+		sv = &types.NdiMediaStreamInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "channels":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Channels = ptr.Int32(int32(i64))
+			}
+
+		case "codec":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Codec = ptr.String(jtv)
+			}
+
+		case "frameRate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FrameRate = ptr.String(jtv)
+			}
+
+		case "frameResolution":
+			if err := awsRestjson1_deserializeDocumentFrameResolution(&sv.FrameResolution, value); err != nil {
+				return err
+			}
+
+		case "sampleRate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SampleRate = ptr.Int32(int32(i64))
+			}
+
+		case "scanMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScanMode to be of type string, got %T instead", value)
+				}
+				sv.ScanMode = types.ScanMode(jtv)
+			}
+
+		case "streamId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StreamId = ptr.Int32(int32(i64))
+			}
+
+		case "streamType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StreamType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNdiSourceInfo(v **types.NdiSourceInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NdiSourceInfo
+	if *v == nil {
+		sv = &types.NdiSourceInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SourceName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNdiSourceMetadataInfo(v **types.NdiSourceMetadataInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NdiSourceMetadataInfo
+	if *v == nil {
+		sv = &types.NdiSourceMetadataInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "activeSource":
+			if err := awsRestjson1_deserializeDocumentNdiSourceInfo(&sv.ActiveSource, value); err != nil {
+				return err
+			}
+
+		case "discoveredSources":
+			if err := awsRestjson1_deserializeDocument__listOfNdiSourceInfo(&sv.DiscoveredSources, value); err != nil {
+				return err
+			}
+
+		case "mediaInfo":
+			if err := awsRestjson1_deserializeDocumentNdiMediaInfo(&sv.MediaInfo, value); err != nil {
+				return err
+			}
+
+		case "messages":
+			if err := awsRestjson1_deserializeDocument__listOfMessageDetail(&sv.Messages, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNdiSourceSettings(v **types.NdiSourceSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NdiSourceSettings
+	if *v == nil {
+		sv = &types.NdiSourceSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SourceName = ptr.String(jtv)
 			}
 
 		default:
@@ -24682,6 +25091,11 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NdiProgramName = ptr.String(jtv)
+			}
+
+		case "ndiSourceSettings":
+			if err := awsRestjson1_deserializeDocumentNdiSourceSettings(&sv.NdiSourceSettings, value); err != nil {
+				return err
 			}
 
 		case "ndiSpeedHqQuality":
