@@ -7,7 +7,7 @@ const userAgentKey = "s3-transfer"
 const defaultMaxUploadParts = 10000
 
 // defaultPartSizeBytes is the default part size when transferring objects to/from S3
-const minPartSizeBytes = 1024 * 1024 * 8
+const minPartSizeBytes = 1024 * 1024 * 5
 
 // defaultMultipartUploadThreshold is the default size threshold in bytes indicating when to use multipart upload.
 const defaultMultipartUploadThreshold = 1024 * 1024 * 16
