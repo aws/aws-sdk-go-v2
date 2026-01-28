@@ -6597,6 +6597,10 @@
                                 },
                                 "CustomMessage": "arn:aws:lambda:us-east-1:123456789012:function:MyFunction",
                                 "DefineAuthChallenge": "arn:aws:lambda:us-east-1:123456789012:function:MyFunction",
+                                "InboundFederation": {
+                                    "LambdaArn": "arn:aws:lambda:us-east-1:123456789012:function:MyFunction",
+                                    "LambdaVersion": "V1_0"
+                                },
                                 "PostAuthentication": "arn:aws:lambda:us-east-1:123456789012:function:MyFunction",
                                 "PostConfirmation": "arn:aws:lambda:us-east-1:123456789012:function:MyFunction",
                                 "PreAuthentication": "arn:aws:lambda:us-east-1:123456789012:function:MyFunction",
@@ -6717,6 +6721,10 @@
                                         "LambdaVersion": "V1_0"
                                     },
                                     "DefineAuthChallenge": "arn:aws:lambda:us-east-1:123456789012:function:MyFunction",
+                                    "InboundFederation": {
+                                        "LambdaArn": "arn:aws:lambda:us-east-1:123456789012:function:MyFunction",
+                                        "LambdaVersion": "V1_0"
+                                    },
                                     "KMSKeyID": "arn:aws:kms:us-east-1:767671399759:key/4d43904c-8edf-4bb4-9fca-fb1a80e41cbe",
                                     "PostAuthentication": "arn:aws:lambda:us-east-1:123456789012:function:MyFunction",
                                     "PostConfirmation": "arn:aws:lambda:us-east-1:123456789012:function:MyFunction",
@@ -8124,7 +8132,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a user pool. After you delete a user pool, users can no longer sign in to any\n            associated applications. </p>\n         <p>When you delete a user pool, it's no longer visible or operational in your Amazon Web Services account. Amazon Cognito retains deleted user pools in an inactive state for 14\n            days, then begins a cleanup process that fully removes them from Amazon Web Services systems. In case\n            of accidental deletion, contact Amazon Web ServicesSupport within 14 days for restoration\n            assistance.</p>\n         <p>Amazon Cognito begins full deletion of all resources from deleted user pools after 14 days. In\n            the case of large user pools, the cleanup process might take significant additional time\n            before all user data is permanently deleted.</p>"
+                "smithy.api#documentation": "<p>Deletes a user pool. After you delete a user pool, users can no longer sign in to any\n            associated applications. </p>\n         <p>When you delete a user pool, it's no longer visible or operational in your Amazon Web Services account. Amazon Cognito retains deleted user pools in an inactive state for 14\n            days, then begins a cleanup process that fully removes them from Amazon Web Services systems. In case\n            of accidental deletion, contact Amazon Web Services Support within 14 days for restoration\n            assistance.</p>\n         <p>Amazon Cognito begins full deletion of all resources from deleted user pools after 14 days. In\n            the case of large user pools, the cleanup process might take significant additional time\n            before all user data is permanently deleted.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClient": {
@@ -11341,6 +11349,39 @@
         "com.amazonaws.cognitoidentityprovider#ImageUrlType": {
             "type": "string"
         },
+        "com.amazonaws.cognitoidentityprovider#InboundFederationLambdaType": {
+            "type": "structure",
+            "members": {
+                "LambdaVersion": {
+                    "target": "com.amazonaws.cognitoidentityprovider#InboundFederationLambdaVersionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user pool trigger version of the request that Amazon Cognito sends to your Lambda function. Higher-numbered versions add fields that support new features.</p>\n         <p>You must use a <code>LambdaVersion</code> of <code>V1_0</code> with an inbound federation\n            function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LambdaArn": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function that you want to assign to your Lambda trigger.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of an inbound federation Lambda trigger.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#InboundFederationLambdaVersionType": {
+            "type": "enum",
+            "members": {
+                "V1_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "V1_0"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#InitiateAuth": {
             "type": "operation",
             "input": {
@@ -11773,6 +11814,12 @@
                     "target": "com.amazonaws.cognitoidentityprovider#ArnType",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">KMS key</a>. Amazon Cognito uses the key to encrypt codes and temporary passwords sent to\n            custom sender Lambda triggers.</p>"
+                    }
+                },
+                "InboundFederation": {
+                    "target": "com.amazonaws.cognitoidentityprovider#InboundFederationLambdaType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of an inbound federation Lambda trigger. This trigger can transform federated user attributes during the authentication with external identity providers.</p>"
                     }
                 }
             },

@@ -9207,6 +9207,12 @@
                 "RoutingCriteria": {
                     "target": "com.amazonaws.connect#RoutingCriteria"
                 },
+                "Tags": {
+                    "target": "com.amazonaws.connect#ContactTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags associated with the contact. This contains both Amazon Web Services generated and user-defined tags.</p>"
+                    }
+                },
                 "GlobalResiliencyMetadata": {
                     "target": "com.amazonaws.connect#GlobalResiliencyMetadata",
                     "traits": {
@@ -46244,6 +46250,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of active regions for contacts in ACGR instances.</p>"
                     }
+                },
+                "ContactTags": {
+                    "target": "com.amazonaws.connect#ControlPlaneTagFilter"
                 }
             },
             "traits": {
