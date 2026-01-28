@@ -1,0 +1,9 @@
+{
+    "id": "01fe7c45-628d-4d98-a55b-e07d304448ae",
+    "type": "feature",
+    "description": "expression: support for composite keys",
+    "collapse": false,
+    "modules": [
+        "feature/dynamodb/expression"
+    ]
+}
