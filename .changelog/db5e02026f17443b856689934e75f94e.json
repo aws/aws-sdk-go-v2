@@ -1,8 +1,0 @@
-{
-    "id": "db5e0202-6f17-443b-8566-89934e75f94e",
-    "type": "feature",
-    "description": "SearchTransitGatewayRoutes API response now includes a NextToken field, enabling pagination when retrieving large sets of transit gateway routes. Pass the returned NextToken value in subsequent requests to retrieve the next page of results.",
-    "modules": [
-        "service/ec2"
-    ]
-}

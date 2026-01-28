@@ -1,8 +1,0 @@
-{
-    "id": "3f0c79bf-50a2-44df-8397-48ce9b761af4",
-    "type": "feature",
-    "description": "This release adds a follow source mode for audio output channel count, an AES audio frame wrapping option for MXF outputs, and an option to signal DolbyVision compatibility using the SUPPLEMENTAL-CODECS tag in HLS manifests.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

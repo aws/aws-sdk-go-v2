@@ -1,3 +1,7 @@
+# v1.21.1 (2026-01-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2026-01-20)
 
 * **Feature**: Optimize allocation for transfer manager v1 uploader so no extra memory is used in buffer pool for single upload.

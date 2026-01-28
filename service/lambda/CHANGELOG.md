@@ -1,3 +1,7 @@
+# v1.88.0 (2026-01-28)
+
+* **Feature**: We are launching ESM Metrics and logging for Kafka ESM to allow customers to monitor Kafka event processing using CloudWatch Metrics and Logs.
+
 # v1.87.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

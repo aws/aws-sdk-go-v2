@@ -1,3 +1,26 @@
+# Release (2026-01-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.58.0](service/cognitoidentityprovider/CHANGELOG.md#v1580-2026-01-28)
+  * **Feature**: This release adds support for a new lambda trigger to transform federated user attributes during the authentication with external identity providers on Cognito Managed Login.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.159.0](service/connect/CHANGELOG.md#v11590-2026-01-28)
+  * **Feature**: Adds support for filtering search results based on tags assigned to contacts.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.284.0](service/ec2/CHANGELOG.md#v12840-2026-01-28)
+  * **Feature**: SearchTransitGatewayRoutes API response now includes a NextToken field, enabling pagination when retrieving large sets of transit gateway routes. Pass the returned NextToken value in subsequent requests to retrieve the next page of results.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.88.0](service/lambda/CHANGELOG.md#v1880-2026-01-28)
+  * **Feature**: We are launching ESM Metrics and logging for Kafka ESM to allow customers to monitor Kafka event processing using CloudWatch Metrics and Logs.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.47.0](service/mediaconnect/CHANGELOG.md#v1470-2026-01-28)
+  * **Feature**: This release adds support for NDI flow sources in AWS Elemental MediaConnect. You can now send content to your MediaConnect transport streams directly from your NDI environment using the new NDI source type. Also adds support for LARGE 4X flow size, which can be used when creating CDI JPEG-XS flows.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.87.0](service/mediaconvert/CHANGELOG.md#v1870-2026-01-28)
+  * **Feature**: This release adds a follow source mode for audio output channel count, an AES audio frame wrapping option for MXF outputs, and an option to signal DolbyVision compatibility using the SUPPLEMENTAL-CODECS tag in HLS manifests.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.96.0](service/s3/CHANGELOG.md#v1960-2026-01-28)
+  * **Feature**: Adds support for the UpdateObjectEncryption API to change the server-side encryption type of objects in general purpose buckets.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.68.0](service/s3control/CHANGELOG.md#v1680-2026-01-28)
+  * **Feature**: Adds support for the UpdateObjectEncryption API to change the server-side encryption type of objects in general purpose buckets.
+
 # Release (2026-01-27)
 
 ## Module Highlights
