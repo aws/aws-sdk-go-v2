@@ -6,9 +6,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
-var _ AttributeConverter[any] = (*JsonConverter)(nil)
+var _ AttributeConverter[any] = (*JSONConverter)(nil)
 
-// JsonConverter converts between arbitrary Go values and DynamoDB AttributeValues
+// JSONConverter converts between arbitrary Go values and DynamoDB AttributeValues
 // that contain JSON data.
 //
 // Behaviour (matches the implementation in json.go):
@@ -33,10 +33,12 @@ var _ AttributeConverter[any] = (*JsonConverter)(nil)
 //     JSON payloads (and NULL). It does not convert arbitrary AttributeValue types.
 //   - The converter returns ErrNilValue when a concrete B or S member pointer is nil,
 //     and unsupportedType for mismatched AttributeValue types.
-type JsonConverter struct {
+type JSONConverter struct {
 }
 
-func (j JsonConverter) FromAttributeValue(v types.AttributeValue, _ []string) (any, error) {
+// FromAttributeValue converts a DynamoDB AttributeValue containing JSON data (as B or S) to a Go value.
+// Returns ErrNilValue for nil pointers, or unsupportedType for unsupported AttributeValue types.
+func (j JSONConverter) FromAttributeValue(v types.AttributeValue, _ []string) (any, error) {
 	switch av := v.(type) {
 	case *types.AttributeValueMemberB:
 		if av == nil {
@@ -61,7 +63,9 @@ func (j JsonConverter) FromAttributeValue(v types.AttributeValue, _ []string) (a
 	}
 }
 
-func (j JsonConverter) ToAttributeValue(v any, opts []string) (types.AttributeValue, error) {
+// ToAttributeValue marshals a Go value to a DynamoDB AttributeValue as JSON (S or B), or NULL if v is nil.
+// The "as=bytes" option stores the JSON as binary (B); otherwise, it stores as string (S).
+func (j JSONConverter) ToAttributeValue(v any, opts []string) (types.AttributeValue, error) {
 	as := getOpt(opts, "as")
 
 	if v == nil {

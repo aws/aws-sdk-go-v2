@@ -482,13 +482,13 @@ func (e *Encoder[T]) encode(v reflect.Value, fieldTag Tag) (types.AttributeValue
 
 			if fieldTag.AsUnixTime {
 				return UnixTime(t).MarshalDynamoDBAttributeValue()
-			} else {
-				if e.options.EncodeTime != nil {
-					return e.options.EncodeTime(t)
-				} else {
-					return defaultEncodeTime(t)
-				}
 			}
+
+			if e.options.EncodeTime != nil {
+				return e.options.EncodeTime(t)
+			}
+
+			return defaultEncodeTime(t)
 		} else if av, err := e.tryMarshaler(v); err != nil {
 			return nil, err
 		} else if fieldTag.OmitEmpty && isNullAttributeValue(av) {

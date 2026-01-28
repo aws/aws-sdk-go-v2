@@ -8,6 +8,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
+// Map is a convenience type representing a DynamoDB item as a map of attribute names to AttributeValue.
+// It is used for constructing, manipulating, and passing items to and from DynamoDB operations.
 type Map map[string]types.AttributeValue
 
 func (m Map) String() string {

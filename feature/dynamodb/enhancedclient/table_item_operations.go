@@ -220,9 +220,9 @@ func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, exp
 
 				if consecutiveErrors >= maxConsecutiveErrors {
 					return
-				} else {
-					continue
 				}
+
+				continue
 			}
 
 			consecutiveErrors = 0
@@ -311,9 +311,9 @@ func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, e
 
 				if consecutiveErrors >= maxConsecutiveErrors {
 					return
-				} else {
-					continue
 				}
+
+				continue
 			}
 
 			consecutiveErrors = 0

@@ -21,6 +21,8 @@ var _ AttributeConverter[bool] = (*BoolConverter)(nil)
 // AttributeValue will cause an unsupportedType error.
 type BoolConverter struct{}
 
+// FromAttributeValue converts a DynamoDB BOOL AttributeValue to a Go bool.
+// Returns ErrNilValue for nil pointers, or unsupportedType for unsupported AttributeValue types.
 func (n BoolConverter) FromAttributeValue(v types.AttributeValue, _ []string) (bool, error) {
 	switch av := v.(type) {
 	case *types.AttributeValueMemberBOOL:
@@ -34,6 +36,7 @@ func (n BoolConverter) FromAttributeValue(v types.AttributeValue, _ []string) (b
 	}
 }
 
+// ToAttributeValue converts a Go bool to a DynamoDB BOOL AttributeValue.
 func (n BoolConverter) ToAttributeValue(v bool, _ []string) (types.AttributeValue, error) {
 	return &types.AttributeValueMemberBOOL{
 		Value: v,

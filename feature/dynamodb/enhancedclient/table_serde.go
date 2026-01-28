@@ -22,9 +22,9 @@ func (s *Schema[T]) Encode(t *T) (map[string]types.AttributeValue, error) {
 			if err != nil {
 				if unwrap(s.options.ErrorOnMissingField) {
 					return nil, err
-				} else {
-					continue
 				}
+
+				continue
 			}
 		}
 
@@ -73,9 +73,9 @@ func (s *Schema[T]) Decode(m map[string]types.AttributeValue) (*T, error) {
 		if err != nil {
 			if unwrap(s.options.ErrorOnMissingField) {
 				return nil, err
-			} else {
-				continue
 			}
+
+			continue
 		}
 
 		err = s.dec.decode(av, fv, f.Tag)

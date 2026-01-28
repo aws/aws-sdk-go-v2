@@ -272,10 +272,10 @@ func TestTableE2E(t *testing.T) {
 	{
 		t.Log("QueryIndex()")
 		queriedItems := 0
-		for orderId, version := range knowVersions {
+		for orderID, version := range knowVersions {
 			queryExprBuilder := expression.NewBuilder()
 			queryExprBuilder = queryExprBuilder.WithKeyCondition(
-				expression.Key("order_id").Equal(expression.Value(orderId)).And(
+				expression.Key("order_id").Equal(expression.Value(orderID)).And(
 					expression.Key("version").Equal(expression.Value(version)),
 				),
 			)

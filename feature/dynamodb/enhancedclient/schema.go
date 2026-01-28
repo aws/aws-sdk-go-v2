@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
-// Schema[T] defines the structure and metadata for a DynamoDB table item of type T.
+// Schema defines the structure and metadata for a DynamoDB table item of type T.
 // It encapsulates table configuration, key schema, attribute definitions, and options
 // for encoding/decoding items and managing table operations.
 type Schema[T any] struct {

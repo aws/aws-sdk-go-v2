@@ -54,7 +54,7 @@ var DefaultRegistry = &Registry{
 		"*string":    &Wrapper[*string]{Impl: &StringPtrConverter{}},
 		"time.Time":  &Wrapper[time.Time]{Impl: &TimeConverter{}},
 		"*time.Time": &Wrapper[*time.Time]{Impl: &TimePtrConverter{}},
-		"json":       JsonConverter{},
+		"json":       JSONConverter{},
 	},
 }
 

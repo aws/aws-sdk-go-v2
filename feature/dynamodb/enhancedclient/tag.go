@@ -12,6 +12,9 @@ const (
 	tagSetter     = "dynamodbsetter"
 )
 
+// Tag holds parsed metadata from struct field tags for DynamoDB attribute mapping.
+// It captures options such as name overrides, omitempty, index info, custom converters, and more.
+// Used internally for encoding/decoding and schema management.
 type Tag struct {
 	Name          string              // `dynamodbav`
 	Ignore        bool                // `dynamodbav:"-"
@@ -39,6 +42,8 @@ type Tag struct {
 	Options       map[string][]string // keys can be written as <key>:<options>
 }
 
+// Option returns the parsed options for a given key from the struct tag, if present.
+// It is used to retrieve custom tag options such as converter types or atomic counter values.
 func (t *Tag) Option(k string) ([]string, bool) {
 	if t.Options == nil {
 		return nil, false

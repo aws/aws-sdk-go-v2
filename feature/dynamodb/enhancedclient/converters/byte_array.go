@@ -32,6 +32,8 @@ import (
 type ByteArrayConverter struct {
 }
 
+// FromAttributeValue converts a DynamoDB binary (B) AttributeValue to a Go []byte.
+// Returns ErrNilValue for nil pointers, or unsupportedType for unsupported AttributeValue types.
 func (n ByteArrayConverter) FromAttributeValue(v types.AttributeValue, _ []string) ([]byte, error) {
 	switch av := v.(type) {
 	case *types.AttributeValueMemberB:
@@ -44,6 +46,8 @@ func (n ByteArrayConverter) FromAttributeValue(v types.AttributeValue, _ []strin
 	}
 }
 
+// ToAttributeValue converts a Go []byte to a DynamoDB binary (B) AttributeValue.
+// Returns ErrNilValue if the input slice is nil.
 func (n ByteArrayConverter) ToAttributeValue(v []byte, _ []string) (types.AttributeValue, error) {
 	if v == nil {
 		return nil, ErrNilValue
