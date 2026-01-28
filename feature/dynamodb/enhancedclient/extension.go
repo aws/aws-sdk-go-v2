@@ -1,0 +1,659 @@
+package enhancedclient
+
+import (
+	"context"
+	cryptorand "crypto/rand"
+	"fmt"
+	"reflect"
+	"slices"
+	"strconv"
+	"strings"
+	"time"
+
+	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression"
+	smythyrand "github.com/aws/smithy-go/rand"
+)
+
+type (
+	// CachedFieldsKey is the context key for storing CachedFields in a context.Context.
+	CachedFieldsKey struct{}
+
+	// TableSchemaKey is the context key for storing a TableSchema in a context.Context.
+	TableSchemaKey struct{}
+)
+
+// BeforeReader is implemented by types that want to run logic
+// before a value of type T is read (e.g., fetched from storage or unmarshaled).
+// The hook receives the context and a pointer to the value that will be read.
+type BeforeReader[T any] interface {
+	BeforeRead(context.Context, *T) error
+}
+
+// AfterReader is implemented by types that want to run logic
+// after a value of type T is read (e.g., fetched from storage or unmarshaled).
+// The hook receives the context and a pointer to the value that was read.
+type AfterReader[T any] interface {
+	AfterRead(context.Context, *T) error
+}
+
+// BeforeWriter is implemented by types that want to execute logic
+// before a value of type T is written (e.g., persisted or marshaled).
+// The hook receives the context and a pointer to the value that will be written.
+type BeforeWriter[T any] interface {
+	BeforeWrite(context.Context, *T) error
+}
+
+// AfterWriter is implemented by types that want to execute logic
+// after a value of type T is written (e.g., persisted or marshaled).
+// The hook receives the context and a pointer to the value that was written.
+type AfterWriter[T any] interface {
+	AfterWrite(context.Context, *T) error
+}
+
+// ConditionExpressionBuilder allows a type to inject custom logic for building
+// a DynamoDB condition expression during a write operation (UpdateItem).
+// The interface embeds BeforeWriter[T] for pre-write hooks, and provides
+// BuildCondition to modify or set the ConditionBuilder used in the update.
+// Typical use cases include optimistic locking, version checks, or enforcing
+// business rules before an update is applied.
+//
+// Used only in UpdateItem() to construct the ConditionExpression for the request.
+type ConditionExpressionBuilder[T any] interface {
+	BeforeWriter[T]
+	BuildCondition(context.Context, *T, **expression.ConditionBuilder) error
+}
+
+// FilterExpressionBuilder allows a type to inject custom logic for building
+// a DynamoDB condition expression during a write operation (UpdateItem).
+// The interface embeds BeforeWriter[T] for pre-write hooks, and provides
+// BuildFilter to modify or set the ConditionBuilder used as a filter.
+// This is useful for advanced filtering scenarios, though in your codebase
+// it is only used in UpdateItem().
+//
+// Used only in UpdateItem() to construct the FilterExpression for the request.
+type FilterExpressionBuilder[T any] interface {
+	BeforeWriter[T]
+	BuildFilter(context.Context, *T, **expression.ConditionBuilder) error
+}
+
+// KeyConditionBuilder allows a type to inject custom logic for building
+// a DynamoDB condition expression during a write operation (UpdateItem).
+// The interface embeds BeforeWriter[T] for pre-write hooks, and provides
+// BuildKeyCondition to modify or set the KeyConditionBuilder.
+// This is useful for customizing how keys are matched in conditional updates.
+//
+// Used only in UpdateItem() to construct the KeyConditionExpression for the request.
+type KeyConditionBuilder[T any] interface {
+	BeforeWriter[T]
+	BuildKeyCondition(context.Context, *T, **expression.KeyConditionBuilder) error
+}
+
+// ProjectionExpressionBuilder allows a type to inject custom logic for building
+// a DynamoDB condition expression during a write operation (UpdateItem).
+// The interface embeds BeforeWriter[T] for pre-write hooks, and provides
+// BuildProjection to modify or set the ProjectionBuilder.
+// This is useful for controlling which attributes are returned after an update.
+//
+// Used only in UpdateItem() to construct the ProjectionExpression for the request.
+type ProjectionExpressionBuilder[T any] interface {
+	BeforeWriter[T]
+	BuildProjection(context.Context, *T, **expression.ProjectionBuilder) error
+}
+
+// UpdateExpressionBuilder allows a type to inject custom logic for building
+// a DynamoDB update expression during an update operation (UpdateItem).
+// The interface embeds BeforeWriter[T] for pre-write hooks, and provides
+// BuildUpdate to modify or set the UpdateBuilder.
+// This is useful for customizing how attributes are updated, supporting
+// features like atomic counters, version increments, or custom field updates.
+//
+// Used only in UpdateItem() to construct the UpdateExpression for the request.
+type UpdateExpressionBuilder[T any] interface {
+	BeforeWriter[T]
+	BuildUpdate(context.Context, *T, **expression.UpdateBuilder) error
+}
+
+// AutogenerateExtension provides automatic population of fields marked as
+// "autogenerated" in the schema. It supports two main features:
+//   - Key generation: Assigns a UUID to fields tagged with `autogenerated:key`.
+//   - Timestamp generation: Assigns the current time to fields tagged with `autogenerated:timestamp`.
+//
+// The extension is intended to be used as a BeforeWriter and UpdateExpressionBuilder
+// for types managed by the enhanced DynamoDB client. It inspects the schema's
+// CachedFields and updates fields as needed before write operations or when
+// building update expressions.
+//
+// Supported field types for key generation: string, []byte.
+// Supported field types for timestamp generation: string, []byte, int64, uint64, time.Time.
+//
+// Tag options:
+//   - `autogenerated:key`: Generates a UUID for the field.
+//   - Optionally, add "always" to force regeneration even if the field is non-zero.
+//   - `autogenerated:timestamp`: Sets the field to the current time.
+//   - Optionally, add "always" to force update even if the field is non-zero.
+//
+// Errors are returned if the tag is misconfigured, the field type is unsupported,
+// or if UUID/time generation fails.
+type AutogenerateExtension[T any] struct{}
+
+// BeforeWrite scans all CachedFields for the item and automatically populates
+// fields marked as "autogenerated" before a write operation. For each field:
+//   - If tagged with `autogenerated:key`, assigns a UUID if the field is zero
+//     or if the "always" option is present.
+//   - If tagged with `autogenerated:timestamp`, assigns the current time if the
+//     field is zero or if the "always" option is present.
+//
+// Returns an error if tag options are missing, misconfigured, or if assignment fails.
+func (ext *AutogenerateExtension[T]) BeforeWrite(ctx context.Context, item *T) error {
+	cachedFields := ctx.Value(CachedFieldsKey{}).(*CachedFields)
+
+	for _, f := range cachedFields.All() {
+		if !f.AutoGenerated {
+			continue
+		}
+
+		opts, ok := f.Tag.Option("autogenerated")
+		if !ok || len(opts) < 1 {
+			return fmt.Errorf("option autogenerated expects at least 1 option, e.g. autogenerated:key or autogenerated:timestamp")
+		}
+
+		switch opts[0] {
+		case "key":
+			if err := a.processKey(item, f, opts[1:]); err != nil {
+				return err
+			}
+		case "timestamp":
+			if err := a.processTimestamp(item, f, opts[1:]); err != nil {
+				return err
+			}
+		default:
+			return fmt.Errorf(`option autogenerated can only process key and timestamp as first argument, "%s" given`, opts[0])
+		}
+	}
+
+	return nil
+}
+
+// BuildUpdate scans all CachedFields for the item and, for each field marked
+// as "autogenerated", adds an update statement to the UpdateBuilder:
+//   - For `autogenerated:key`, sets the field to its current value (if not a key field).
+//   - For `autogenerated:timestamp`, sets the field to its current value or nil if zero.
+//
+// Returns an error if tag options are missing, misconfigured, or if assignment fails.
+func (ext *AutogenerateExtension[T]) BuildUpdate(ctx context.Context, item *T, ub **expression.UpdateBuilder) error {
+	cachedFields := ctx.Value(CachedFieldsKey{}).(*CachedFields)
+
+	for _, f := range cachedFields.All() {
+		if !f.AutoGenerated {
+			continue
+		}
+
+		opts, ok := f.Tag.Option("autogenerated")
+		if !ok || len(opts) < 1 {
+			return fmt.Errorf("option autogenerated expects at least 1 option, e.g. autogenerated:key or autogenerated:timestamp")
+		}
+
+		switch opts[0] {
+		case "key":
+			if err := a.buildKeyUpdate(item, f, ub); err != nil {
+				return err
+			}
+		case "timestamp":
+			if err := a.buildTimestampUpdate(item, f, ub); err != nil {
+				return err
+			}
+		default:
+			return fmt.Errorf(`option autogenerated can only process key and timestamp as first argument, "%s" given`, opts[0])
+		}
+	}
+
+	return nil
+}
+
+// processKey assigns a UUID to the specified field if it is zero or if the
+// "always" option is present. Supports string and []byte fields. Uses the
+// field's getter/setter if provided.
+//
+// Returns an error if the field type is unsupported or if UUID generation fails.
+func (ext *AutogenerateExtension[T]) processKey(v *T, f Field, opts []string) error {
+	r := reflect.ValueOf(v)
+	var cv reflect.Value
+
+	if f.Tag.Getter != "" {
+		cv = r.MethodByName(f.Tag.Getter).
+			Call([]reflect.Value{})[0]
+	} else {
+		var err error
+		cv, err = r.Elem().FieldByIndexErr(f.Index)
+		if err != nil { //&& unwrap(s.options.ErrorOnMissingField) {
+			return err
+		}
+	}
+
+	shouldUpdate := cv.IsZero() || slices.Contains(opts, "always")
+	if !shouldUpdate {
+		return nil
+	}
+
+	s, err := smythyrand.NewUUID(cryptorand.Reader).GetUUID()
+	if err != nil {
+		return fmt.Errorf("error generating UUID: %v", err)
+	}
+
+	if !cv.CanAddr() && f.Tag.Setter != "" {
+		cv = reflect.New(cv.Type()).Elem()
+	}
+
+	switch cv.Kind() {
+	case reflect.String:
+		cv.SetString(s)
+	case reflect.Slice, reflect.Array:
+		if cv.Type().Elem().Kind() == reflect.Uint8 {
+			cv.SetBytes([]byte(s))
+		}
+	default:
+		return fmt.Errorf("unable to assign autogenerated key to type %s, can only assign to string and []byte", cv.Type())
+	}
+
+	if f.Tag.Setter != "" {
+		r.MethodByName(f.Tag.Setter).
+			Call([]reflect.Value{
+				cv,
+			})
+	}
+
+	return nil
+}
+
+// processTimestamp assigns the current time to the specified field if it is
+// zero or if the "always" option is present. Supports string, []byte, int64,
+// uint64, and time.Time fields. Uses the field's getter/setter if provided.
+//
+// Returns an error if the field type is unsupported or if time assignment fails.
+func (ext *AutogenerateExtension[T]) processTimestamp(v *T, f Field, opts []string) error {
+	r := reflect.ValueOf(v)
+	var cv reflect.Value
+
+	if f.Tag.Getter != "" {
+		cv = r.MethodByName(f.Tag.Getter).
+			Call([]reflect.Value{})[0]
+	} else {
+		var err error
+		cv, err = r.Elem().FieldByIndexErr(f.Index)
+		if err != nil { //&& unwrap(s.options.ErrorOnMissingField) {
+			return err
+		}
+	}
+
+	shouldUpdate := cv.IsZero() || slices.Contains(opts, "always")
+	if !shouldUpdate {
+		return nil
+	}
+
+	now := time.Now()
+
+	if !cv.CanAddr() && f.Tag.Setter != "" {
+		cv = reflect.New(cv.Type()).Elem()
+	}
+
+	switch cv.Kind() {
+	case reflect.String:
+		cv.SetString(now.Format(time.RFC3339))
+	case reflect.Slice, reflect.Array:
+		if cv.Type().Elem().Kind() == reflect.Uint8 {
+			cv.SetBytes([]byte(now.Format(time.RFC3339)))
+		}
+	case reflect.Uint64, reflect.Int64:
+		n := reflect.ValueOf(now.UnixNano()).Convert(cv.Type())
+		cv.Set(n)
+	default:
+		if _, ok := cv.Interface().(time.Time); !ok {
+			return fmt.Errorf("unable to assign autogenerated key to type %s, can only assign to string, []byte and time.Time", cv.Type())
+		}
+
+		cv.Set(reflect.ValueOf(now))
+	}
+
+	if f.Tag.Setter != "" {
+		r.MethodByName(f.Tag.Setter).
+			Call([]reflect.Value{
+				cv,
+			})
+	}
+
+	return nil
+}
+
+// buildKeyUpdate adds an update statement to the UpdateBuilder for a key field
+// marked as "autogenerated". Only non-key fields are updated. Supports string
+// and []byte fields.
+//
+// Returns an error if the field type is unsupported.
+func (ext *AutogenerateExtension[T]) buildKeyUpdate(v *T, f Field, ub **expression.UpdateBuilder) error {
+	var update expression.UpdateBuilder
+	if ub != nil && *ub != nil {
+		update = **ub
+	}
+
+	r := reflect.ValueOf(v)
+	var cv reflect.Value
+
+	if f.Tag.Getter != "" {
+		cv = r.MethodByName(f.Tag.Getter).
+			Call([]reflect.Value{})[0]
+	} else {
+		var err error
+		cv, err = r.Elem().FieldByIndexErr(f.Index)
+		if err != nil { //&& unwrap(s.options.ErrorOnMissingField) {
+			return err
+		}
+	}
+
+	// pk and sk cannot be updated
+	if !cv.IsZero() && (f.Sort || f.Partition) {
+		return nil
+	}
+
+	switch cv.Kind() {
+	case reflect.String:
+		update = update.Set(expression.Name(f.Name), expression.Value(cv.String()))
+	case reflect.Slice, reflect.Array:
+		if cv.Type().Elem().Kind() == reflect.Uint8 {
+			update = update.Set(expression.Name(f.Name), expression.Value(cv.Bytes()))
+		}
+	default:
+		return fmt.Errorf("unable to process update for autogenerated key to type %s, can only process to string and []byte", cv.Type())
+	}
+
+	return nil
+}
+
+// buildTimestampUpdate adds an update statement to the UpdateBuilder for a
+// timestamp field marked as "autogenerated". Sets the field to its current
+// value or nil if zero. Supports string, []byte, int64, uint64, and time.Time fields.
+//
+// Returns an error if the field type is unsupported.
+func (ext *AutogenerateExtension[T]) buildTimestampUpdate(v *T, f Field, ub **expression.UpdateBuilder) error {
+	var update expression.UpdateBuilder
+	if ub != nil && *ub != nil {
+		update = **ub
+	}
+
+	r := reflect.ValueOf(v)
+	var cv reflect.Value
+
+	if f.Tag.Getter != "" {
+		cv = r.MethodByName(f.Tag.Getter).
+			Call([]reflect.Value{})[0]
+	} else {
+		var err error
+		cv, err = r.Elem().FieldByIndexErr(f.Index)
+		if err != nil { //&& unwrap(s.options.ErrorOnMissingField) {
+			return err
+		}
+	}
+
+	// pk and sk cannot be updated
+	if !cv.IsZero() && (f.Sort || f.Partition) {
+		return nil
+	}
+
+	if cv.IsZero() {
+		update = update.Set(expression.Name(f.Name), expression.Value(nil))
+		*ub = &update
+
+		return nil
+	}
+
+	switch cv.Kind() {
+	case reflect.String, reflect.Uint64, reflect.Int64:
+		update = update.Set(expression.Name(f.Name), expression.Value(cv.Interface()))
+		*ub = &update
+	case reflect.Slice, reflect.Array:
+		if cv.Type().Elem().Kind() == reflect.Uint8 {
+			update = update.Set(expression.Name(f.Name), expression.Value(cv.Interface()))
+			*ub = &update
+			break
+		}
+		fallthrough
+	default:
+		if _, ok := cv.Interface().(time.Time); !ok {
+			return fmt.Errorf("unable to process update for autogenerated key to type %s, can only process to string, []byte and time.Time", cv.Type())
+		}
+
+		update = update.Set(expression.Name(f.Name), expression.Value(cv.Interface()))
+		*ub = &update
+	}
+
+	return nil
+}
+
+// VersionExtension provides optimistic locking and version control for items
+// in DynamoDB tables. It automatically manages fields marked as "version" in
+// the schema, ensuring that updates only succeed if the version matches or
+// the attribute does not exist.
+//
+// Usage:
+//   - Implements BeforeWriter, ConditionExpressionBuilder, and UpdateExpressionBuilder.
+//   - Used in UpdateItem() to build conditional expressions and increment version fields.
+//
+// Supported field types: string, int64, uint64.
+//   - For string fields, the value is parsed as an integer and incremented.
+//   - For int64/uint64 fields, the value is incremented directly.
+//
+// Errors are returned if the field type is unsupported or if string parsing fails.
+type VersionExtension[T any] struct{}
+
+// BeforeWrite is a no-op for VersionExtension. It does not modify the item
+// before writing. Always returns nil.
+func (ext *VersionExtension[T]) BeforeWrite(_ context.Context, _ *T) error { return nil }
+
+// BuildCondition constructs a conditional expression for versioned fields.
+// For each field marked as "version":
+//   - The condition requires that the attribute does not exist OR its value
+//     matches the current version.
+//   - This ensures that updates only succeed if the item is new or the version
+//     matches, providing optimistic locking.
+//
+// The resulting ConditionBuilder is set in cb if any version fields are present.
+// Returns nil unless reflection or field access fails.
+func (ext *VersionExtension[T]) BuildCondition(ctx context.Context, item *T, cb **expression.ConditionBuilder) error {
+	cachedFields := ctx.Value(CachedFieldsKey{}).(*CachedFields)
+
+	r := reflect.ValueOf(item)
+	var condition expression.ConditionBuilder
+	if cb != nil && *cb != nil {
+		condition = **cb
+	}
+
+	for _, f := range cachedFields.All() {
+		if !f.Version {
+			continue
+		}
+
+		var cv reflect.Value
+		if f.Tag.Getter != "" {
+			cv = r.MethodByName(f.Tag.Getter).
+				Call([]reflect.Value{})[0]
+		} else {
+			cv = r.Elem().FieldByIndex(f.Index)
+		}
+
+		if condition.IsSet() {
+			condition = condition.And(
+				expression.Or(
+					expression.AttributeNotExists(expression.Name(f.Name)),
+					expression.Equal(
+						expression.Name(f.Name),
+						expression.Value(cv.Interface()),
+					),
+				),
+			)
+		} else {
+			condition = expression.Or(
+				expression.AttributeNotExists(expression.Name(f.Name)),
+				expression.Equal(
+					expression.Name(f.Name),
+					expression.Value(cv.Interface()),
+				),
+			)
+		}
+	}
+
+	if condition.IsSet() {
+		*cb = &condition
+	}
+
+	return nil
+}
+
+// BuildUpdate constructs an update expression for versioned fields.
+// For each field marked as "version":
+//   - If the field is a string and zero, it is initialized to "0".
+//   - The value is incremented by 1 (parsed as int for strings).
+//   - For int64/uint64 fields, the value is incremented directly.
+//
+// The resulting UpdateBuilder is set in ub for each version field.
+// Returns an error if the field type is unsupported or if string parsing fails.
+func (ext *VersionExtension[T]) BuildUpdate(ctx context.Context, item *T, ub **expression.UpdateBuilder) error {
+	cachedFields := ctx.Value(CachedFieldsKey{}).(*CachedFields)
+
+	r := reflect.ValueOf(item)
+	var update expression.UpdateBuilder
+	if ub != nil && *ub != nil {
+		update = **ub
+	}
+
+	for _, f := range cachedFields.All() {
+		if !f.Version {
+			continue
+		}
+
+		var cv reflect.Value
+		if f.Tag.Getter != "" {
+			cv = r.MethodByName(f.Tag.Getter).
+				Call([]reflect.Value{})[0]
+		} else {
+			cv = r.Elem().FieldByIndex(f.Index)
+		}
+
+		switch cv.Kind() {
+		case reflect.String:
+			if cv.IsZero() {
+				cv.SetString("0")
+			}
+			i, err := strconv.ParseInt(cv.String(), 10, 64)
+			if err != nil {
+				return fmt.Errorf("unable to convert string value of version field %s to number", f.Name)
+			}
+			update = update.Set(expression.Name(f.Name), expression.Value(fmt.Sprintf("%d", i+1)))
+			*ub = &update
+		case reflect.Int64:
+			i := cv.Int()
+			update = update.Set(expression.Name(f.Name), expression.Value(i+1))
+			*ub = &update
+		case reflect.Uint64:
+			i := cv.Uint()
+			update = update.Set(expression.Name(f.Name), expression.Value(i+1))
+			*ub = &update
+		default:
+			return fmt.Errorf("unable to use %s as version field %s, can only use uint64, int64 and string", cv.Type(), f.Tag.Getter)
+		}
+	}
+
+	return nil
+}
+
+// AtomicCounterExtension provides automatic atomic increment logic for fields
+// marked as "atomiccounter" in the schema. When used as an UpdateExpressionBuilder,
+// it generates DynamoDB update expressions that increment the field value atomically
+// on each update.
+//
+// Usage:
+//   - Implements BeforeWriter and UpdateExpressionBuilder.
+//   - Used in UpdateItem() to build update expressions for atomic counter fields.
+//
+// Supported field types: int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64.
+//
+// Tag options (on the field):
+//   - "atomiccounter|start=0|delta=1"
+//   - start: Initial value if the attribute does not exist (default: 0).
+//   - delta: Amount to increment on each update (default: 1).
+//
+// Errors are returned if the field type is unsupported, tag options are misconfigured,
+// or option values cannot be parsed as integers.
+type AtomicCounterExtension[T any] struct{}
+
+// BeforeWrite is a no-op for AtomicCounterExtension. It does not modify the item
+// before writing. Always returns nil.
+func (ext *AtomicCounterExtension[T]) BeforeWrite(_ context.Context, _ *T) error { return nil }
+
+// BuildUpdate constructs an update expression for atomic counter fields.
+// For each field marked as "atomiccounter":
+//   - The update expression uses DynamoDB's IfNotExists and Plus functions to
+//     atomically increment the field by the specified delta, initializing to
+//     start-delta if the attribute does not exist.
+//   - Tag options "start" and "delta" can be provided to customize the initial
+//     value and increment amount.
+//
+// The resulting UpdateBuilder is set in ub for each atomic counter field.
+// Returns an error if the field type is unsupported, tag options are misconfigured,
+// or option values cannot be parsed as integers.
+func (ext *AtomicCounterExtension[T]) BuildUpdate(ctx context.Context, item *T, ub **expression.UpdateBuilder) error {
+	cachedFields := ctx.Value(CachedFieldsKey{}).(*CachedFields)
+
+	var update expression.UpdateBuilder
+	if ub != nil && *ub != nil {
+		update = **ub
+	}
+
+	for _, f := range cachedFields.All() {
+		if !f.AtomicCounter {
+			continue
+		}
+
+		if f.Type.Kind() < reflect.Int || f.Type.Kind() > reflect.Uint64 {
+			return fmt.Errorf("atomic counter field %s has unsupported type %s", f.Name, f.Type.Kind())
+		}
+
+		dflt := 0
+		delta := 1
+
+		if opts, ok := f.Option("atomiccounter"); ok {
+			for _, opt := range opts {
+				parts := strings.Split(opt, "=")
+				if len(parts) != 2 {
+					return fmt.Errorf(`field %s has the tag atomiccounter missonfigured, options must look like "atomiccounter|start=0|delta=1", "%s" given`, f.Name, opt)
+				}
+
+				val, err := strconv.Atoi(parts[1])
+				if err != nil {
+					return err
+				}
+
+				switch parts[0] {
+				case "start":
+					dflt = val
+				case "delta":
+					delta = val
+				default:
+					return fmt.Errorf(`unknown options "%s" passed to "atomiccounter" on field %s`, parts[0], f.Name)
+				}
+			}
+		}
+
+		update = update.Set(
+			expression.Name(f.Name),
+			expression.Plus(
+				expression.IfNotExists(
+					expression.Name(f.Name),
+					expression.Value(dflt-delta),
+				),
+				expression.Value(delta),
+			),
+		)
+		*ub = &update
+	}
+
+	return nil
+}

@@ -1,0 +1,1547 @@
+package enhancedclient
+
+import (
+	"fmt"
+	"reflect"
+	"strconv"
+	"strings"
+	"testing"
+	"time"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/enhancedclient/converters"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+)
+
+func TestUnmarshalShared(t *testing.T) {
+	for name, c := range sharedTestCases {
+		t.Run(name, func(t *testing.T) {
+			err := Unmarshal[any](c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
+	}
+}
+
+func TestUnmarshal(t *testing.T) {
+	cases := []struct {
+		in               types.AttributeValue
+		actual, expected interface{}
+		err              error
+	}{
+		//------------
+		// Sets
+		//------------
+		{
+			in: &types.AttributeValueMemberBS{Value: [][]byte{
+				{48, 49}, {50, 51},
+			}},
+			actual:   &[][]byte{},
+			expected: [][]byte{{48, 49}, {50, 51}},
+		},
+		{
+			in: &types.AttributeValueMemberNS{Value: []string{
+				"123", "321",
+			}},
+			actual:   &[]int{},
+			expected: []int{123, 321},
+		},
+		{
+			in: &types.AttributeValueMemberNS{Value: []string{
+				"123", "321",
+			}},
+			actual:   &[]interface{}{},
+			expected: []interface{}{123., 321.},
+		},
+		{
+			in: &types.AttributeValueMemberSS{Value: []string{
+				"abc", "123",
+			}},
+			actual:   &[]string{},
+			expected: &[]string{"abc", "123"},
+		},
+		{
+			in: &types.AttributeValueMemberSS{Value: []string{
+				"abc", "123",
+			}},
+			actual:   &[]*string{},
+			expected: &[]*string{pointer("abc"), pointer("123")},
+		},
+		//------------
+		// Interfaces
+		//------------
+		{
+			in: &types.AttributeValueMemberB{Value: []byte{48, 49}},
+			actual: func() interface{} {
+				var v interface{}
+				return &v
+			}(),
+			expected: []byte{48, 49},
+		},
+		{
+			in: &types.AttributeValueMemberBS{Value: [][]byte{
+				{48, 49}, {50, 51},
+			}},
+			actual: func() interface{} {
+				var v interface{}
+				return &v
+			}(),
+			expected: [][]byte{{48, 49}, {50, 51}},
+		},
+		{
+			in: &types.AttributeValueMemberBOOL{Value: true},
+			actual: func() interface{} {
+				var v interface{}
+				return &v
+			}(),
+			expected: bool(true),
+		},
+		{
+			in: &types.AttributeValueMemberL{Value: []types.AttributeValue{
+				&types.AttributeValueMemberS{Value: "abc"},
+				&types.AttributeValueMemberS{Value: "123"},
+			}},
+			actual: func() interface{} {
+				var v interface{}
+				return &v
+			}(),
+			expected: []interface{}{"abc", "123"},
+		},
+		{
+			in: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"123": &types.AttributeValueMemberS{Value: "abc"},
+				"abc": &types.AttributeValueMemberS{Value: "123"},
+			}},
+			actual: func() interface{} {
+				var v interface{}
+				return &v
+			}(),
+			expected: map[string]interface{}{"123": "abc", "abc": "123"},
+		},
+		{
+			in: &types.AttributeValueMemberN{Value: "123"},
+			actual: func() interface{} {
+				var v interface{}
+				return &v
+			}(),
+			expected: float64(123),
+		},
+		{
+			in: &types.AttributeValueMemberNS{Value: []string{
+				"123", "321",
+			}},
+			actual: func() interface{} {
+				var v interface{}
+				return &v
+			}(),
+			expected: []float64{123., 321.},
+		},
+		{
+			in: &types.AttributeValueMemberS{Value: "123"},
+			actual: func() interface{} {
+				var v interface{}
+				return &v
+			}(),
+			expected: "123",
+		},
+		{
+			in: &types.AttributeValueMemberNULL{Value: true},
+			actual: func() interface{} {
+				var v string
+				return &v
+			}(),
+			expected: "",
+		},
+		{
+			in: &types.AttributeValueMemberNULL{Value: true},
+			actual: func() interface{} {
+				v := new(string)
+				return &v
+			}(),
+			expected: nil,
+		},
+		{
+			in: &types.AttributeValueMemberS{Value: ""},
+			actual: func() interface{} {
+				v := new(string)
+				return &v
+			}(),
+			expected: pointer(""),
+		},
+		{
+			in: &types.AttributeValueMemberSS{Value: []string{
+				"123", "321",
+			}},
+			actual: func() interface{} {
+				var v interface{}
+				return &v
+			}(),
+			expected: []string{"123", "321"},
+		},
+		{
+			in: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"abc": &types.AttributeValueMemberS{Value: "123"},
+				"Cba": &types.AttributeValueMemberS{Value: "321"},
+			}},
+			actual:   &struct{ Abc, Cba string }{},
+			expected: struct{ Abc, Cba string }{Abc: "123", Cba: "321"},
+		},
+		{
+			in:     &types.AttributeValueMemberN{Value: "512"},
+			actual: new(uint8),
+			err: &UnmarshalTypeError{
+				Value: fmt.Sprintf("number overflow, 512"),
+				Type:  reflect.TypeOf(uint8(0)),
+			},
+		},
+		// -------
+		// Empty Values
+		// -------
+		{
+			in:       &types.AttributeValueMemberB{Value: []byte{}},
+			actual:   &[]byte{},
+			expected: []byte{},
+		},
+		{
+			in:       &types.AttributeValueMemberBS{Value: [][]byte{}},
+			actual:   &[][]byte{},
+			expected: [][]byte{},
+		},
+		{
+			in:       &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+			actual:   &[]interface{}{},
+			expected: []interface{}{},
+		},
+		{
+			in:       &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+			actual:   &map[string]interface{}{},
+			expected: map[string]interface{}{},
+		},
+		{
+			in:     &types.AttributeValueMemberN{Value: ""},
+			actual: new(int),
+			err:    fmt.Errorf("invalid syntax"),
+		},
+		{
+			in:       &types.AttributeValueMemberNS{Value: []string{}},
+			actual:   &[]string{},
+			expected: []string{},
+		},
+		{
+			in:       &types.AttributeValueMemberS{Value: ""},
+			actual:   new(string),
+			expected: "",
+		},
+		{
+			in:       &types.AttributeValueMemberSS{Value: []string{}},
+			actual:   &[]string{},
+			expected: []string{},
+		},
+	}
+
+	for i, c := range cases {
+		t.Run(fmt.Sprintf("case %d/%d", i, len(cases)), func(t *testing.T) {
+			err := Unmarshal[any](c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
+	}
+}
+
+func TestInterfaceInput(t *testing.T) {
+	var v interface{}
+	expected := []interface{}{"abc", "123"}
+	err := Unmarshal[any](&types.AttributeValueMemberL{Value: []types.AttributeValue{
+		&types.AttributeValueMemberS{Value: "abc"},
+		&types.AttributeValueMemberS{Value: "123"},
+	}}, &v)
+	assertConvertTest(t, v, expected, err, nil)
+}
+
+func TestUnmarshalError(t *testing.T) {
+	cases := map[string]struct {
+		in               types.AttributeValue
+		actual, expected interface{}
+		err              error
+	}{
+		"invalid unmarshal": {
+			in:       nil,
+			actual:   int(0),
+			expected: nil,
+			err:      &InvalidUnmarshalError{Type: reflect.TypeOf(int(0))},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			err := Unmarshal[any](c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
+	}
+}
+
+func TestUnmarshalListShared(t *testing.T) {
+	for name, c := range sharedListTestCases {
+		t.Run(name, func(t *testing.T) {
+			err := UnmarshalList(c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
+	}
+}
+
+func TestUnmarshalListError(t *testing.T) {
+	cases := map[string]struct {
+		in               []types.AttributeValue
+		actual, expected interface{}
+		err              error
+	}{
+		"invalid unmarshal": {
+			in:       []types.AttributeValue{},
+			actual:   []interface{}{},
+			expected: nil,
+			err:      &InvalidUnmarshalError{Type: reflect.TypeOf([]interface{}{})},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			err := UnmarshalList(c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
+	}
+}
+
+func TestUnmarshalMapShared(t *testing.T) {
+	for name, c := range sharedMapTestCases {
+		t.Run(name, func(t *testing.T) {
+			err := UnmarshalMap[any](c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
+	}
+}
+
+func TestUnmarshalMapError(t *testing.T) {
+	cases := []struct {
+		in               map[string]types.AttributeValue
+		actual, expected interface{}
+		err              error
+	}{
+		{
+			in:       map[string]types.AttributeValue{},
+			actual:   map[string]interface{}{},
+			expected: nil,
+			err:      &InvalidUnmarshalError{Type: reflect.TypeOf(map[string]interface{}{})},
+		},
+		{
+			in: map[string]types.AttributeValue{
+				"BOOL": &types.AttributeValueMemberBOOL{Value: true},
+			},
+			actual:   &map[int]interface{}{},
+			expected: nil,
+			err: &UnmarshalTypeError{
+				Value: `map key "BOOL"`,
+				Type:  reflect.TypeOf(int(0)),
+			},
+		},
+	}
+
+	for i, c := range cases {
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			err := UnmarshalMap[any](c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
+	}
+}
+
+func TestUnmarshalListOfMaps(t *testing.T) {
+	type testItem struct {
+		Value  string
+		Value2 int
+	}
+
+	cases := map[string]struct {
+		in               []map[string]types.AttributeValue
+		actual, expected interface{}
+		err              error
+	}{
+		"simple map conversion": {
+			in: []map[string]types.AttributeValue{
+				{
+					"Value": &types.AttributeValueMemberBOOL{Value: true},
+				},
+			},
+			actual: &[]map[string]interface{}{},
+			expected: []map[string]interface{}{
+				{
+					"Value": true,
+				},
+			},
+		},
+		"attribute to struct": {
+			in: []map[string]types.AttributeValue{
+				{
+					"Value":  &types.AttributeValueMemberS{Value: "abc"},
+					"Value2": &types.AttributeValueMemberN{Value: "123"},
+				},
+			},
+			actual: &[]testItem{},
+			expected: []testItem{
+				{
+					Value:  "abc",
+					Value2: 123,
+				},
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			err := UnmarshalListOfMaps[any](c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
+	}
+}
+
+type unmarshalUnmarshaler struct {
+	Value  string
+	Value2 int
+	Value3 bool
+	Value4 time.Time
+}
+
+func (u *unmarshalUnmarshaler) UnmarshalDynamoDBAttributeValue(av types.AttributeValue) error {
+	m, ok := av.(*types.AttributeValueMemberM)
+	if !ok || m == nil {
+		return fmt.Errorf("expected AttributeValue to be map")
+	}
+
+	if v, ok := m.Value["abc"]; !ok {
+		return fmt.Errorf("expected `abc` map key")
+	} else if vv, kk := v.(*types.AttributeValueMemberS); !kk || vv == nil {
+		return fmt.Errorf("expected `abc` map value string")
+	} else {
+		u.Value = vv.Value
+	}
+
+	if v, ok := m.Value["def"]; !ok {
+		return fmt.Errorf("expected `def` map key")
+	} else if vv, kk := v.(*types.AttributeValueMemberN); !kk || vv == nil {
+		return fmt.Errorf("expected `def` map value number")
+	} else {
+		n, err := strconv.ParseInt(vv.Value, 10, 64)
+		if err != nil {
+			return err
+		}
+		u.Value2 = int(n)
+	}
+
+	if v, ok := m.Value["ghi"]; !ok {
+		return fmt.Errorf("expected `ghi` map key")
+	} else if vv, kk := v.(*types.AttributeValueMemberBOOL); !kk || vv == nil {
+		return fmt.Errorf("expected `ghi` map value number")
+	} else {
+		u.Value3 = vv.Value
+	}
+
+	if v, ok := m.Value["jkl"]; !ok {
+		return fmt.Errorf("expected `jkl` map key")
+	} else if vv, kk := v.(*types.AttributeValueMemberS); !kk || vv == nil {
+		return fmt.Errorf("expected `jkl` map value string")
+	} else {
+		t, err := time.Parse(time.RFC3339, vv.Value)
+		if err != nil {
+			return err
+		}
+		u.Value4 = t
+	}
+
+	return nil
+}
+
+func TestUnmarshalUnmashaler(t *testing.T) {
+	u := &unmarshalUnmarshaler{}
+	av := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"abc": &types.AttributeValueMemberS{Value: "value"},
+			"def": &types.AttributeValueMemberN{Value: "123"},
+			"ghi": &types.AttributeValueMemberBOOL{Value: true},
+			"jkl": &types.AttributeValueMemberS{Value: "2016-05-03T17:06:26.209072Z"},
+		},
+	}
+
+	err := Unmarshal[any](av, u)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	if e, a := "value", u.Value; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := 123, u.Value2; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := true, u.Value3; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := testDate, u.Value4; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestDecodeUseNumber(t *testing.T) {
+	u := map[string]interface{}{}
+	av := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"abc": &types.AttributeValueMemberS{Value: "value"},
+			"def": &types.AttributeValueMemberN{Value: "123"},
+			"ghi": &types.AttributeValueMemberBOOL{Value: true},
+		},
+	}
+
+	decoder := NewDecoder[any](func(o *DecoderOptions) {
+		o.UseNumber = true
+	})
+	err := decoder.Decode(av, &u)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	if e, a := "value", u["abc"]; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	n := u["def"].(Number)
+	if e, a := "123", n.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := true, u["ghi"]; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestDecodeUseNumberNumberSet(t *testing.T) {
+	u := map[string]interface{}{}
+	av := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"ns": &types.AttributeValueMemberNS{
+				Value: []string{
+					"123", "321",
+				},
+			},
+		},
+	}
+
+	decoder := NewDecoder[any](func(o *DecoderOptions) {
+		o.UseNumber = true
+	})
+	err := decoder.Decode(av, &u)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	ns := u["ns"].([]Number)
+
+	if e, a := "123", ns[0].String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "321", ns[1].String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestDecodeEmbeddedPointerStruct(t *testing.T) {
+	type B struct {
+		Bint int
+	}
+	type C struct {
+		Cint int
+	}
+	type A struct {
+		Aint int
+		*B
+		*C
+	}
+	av := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Aint": &types.AttributeValueMemberN{Value: "321"},
+			"Bint": &types.AttributeValueMemberN{Value: "123"},
+		},
+	}
+	decoder := NewDecoder[any]()
+	a := A{}
+	err := decoder.Decode(av, &a)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if e, a := 321, a.Aint; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	// Embedded pointer struct can be created automatically.
+	if e, a := 123, a.Bint; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	// But not for absent CachedFields.
+	if a.C != nil {
+		t.Errorf("expect nil, got %v", a.C)
+	}
+}
+
+func TestDecodeBooleanOverlay(t *testing.T) {
+	type BooleanOverlay bool
+
+	av := &types.AttributeValueMemberBOOL{Value: true}
+
+	decoder := NewDecoder[any]()
+
+	var v BooleanOverlay
+
+	err := decoder.Decode(av, &v)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if e, a := BooleanOverlay(true), v; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestDecodeUnixTime(t *testing.T) {
+	type A struct {
+		Normal time.Time
+		Tagged time.Time `dynamodbav:",unixtime"`
+		Typed  UnixTime
+	}
+
+	expect := A{
+		Normal: time.Unix(123, 0).UTC(),
+		Tagged: time.Unix(456, 0),
+		Typed:  UnixTime(time.Unix(789, 0)),
+	}
+
+	input := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Normal": &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03Z"},
+			"Tagged": &types.AttributeValueMemberN{Value: "456"},
+			"Typed":  &types.AttributeValueMemberN{Value: "789"},
+		},
+	}
+	actual := A{}
+
+	err := Unmarshal[any](input, &actual)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if e, a := expect, actual; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestDecodeAliasedUnixTime(t *testing.T) {
+	type A struct {
+		Normal AliasedTime
+		Tagged AliasedTime `dynamodbav:",unixtime"`
+	}
+
+	expect := A{
+		Normal: AliasedTime(time.Unix(123, 0).UTC()),
+		Tagged: AliasedTime(time.Unix(456, 0)),
+	}
+
+	input := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Normal": &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03Z"},
+			"Tagged": &types.AttributeValueMemberN{Value: "456"},
+		},
+	}
+	actual := A{}
+
+	err := Unmarshal[any](input, &actual)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if expect != actual {
+		t.Errorf("expect %v, got %v", expect, actual)
+	}
+}
+
+// see github issue #1594
+func TestDecodeArrayType(t *testing.T) {
+	cases := []struct {
+		to, from interface{}
+	}{
+		{
+			&[2]int{1, 2},
+			&[2]int{},
+		},
+		{
+			&[2]int64{1, 2},
+			&[2]int64{},
+		},
+		{
+			&[2]byte{1, 2},
+			&[2]byte{},
+		},
+		{
+			&[2]bool{true, false},
+			&[2]bool{},
+		},
+		{
+			&[2]string{"1", "2"},
+			&[2]string{},
+		},
+		{
+			&[2][]string{{"1", "2"}},
+			&[2][]string{},
+		},
+	}
+
+	for _, c := range cases {
+		marshaled, err := Marshal(c.to)
+		if err != nil {
+			t.Errorf("expected no error, but received %v", err)
+		}
+
+		if err = Unmarshal[any](marshaled, c.from); err != nil {
+			t.Errorf("expected no error, but received %v", err)
+		}
+
+		if diff := cmpDiff(c.to, c.from); len(diff) != 0 {
+			t.Errorf("expected match\n:%s", diff)
+		}
+	}
+}
+
+func TestDecoderFieldByIndex(t *testing.T) {
+	type (
+		Middle struct{ Inner int }
+		Outer  struct{ *Middle }
+	)
+	var outer Outer
+
+	outerType := reflect.TypeOf(outer)
+	outerValue := reflect.ValueOf(&outer)
+	outerFields := unionStructFields(outerType, structFieldOptions{})
+	innerField, _ := outerFields.FieldByName("Inner")
+
+	f := decoderFieldByIndex(outerValue.Elem(), innerField.Index)
+	if outer.Middle == nil {
+		t.Errorf("expected outer.Middle to be non-nil")
+	}
+	if f.Kind() != reflect.Int || f.Int() != int64(outer.Inner) {
+		t.Error("expected f to be an int with value equal to outer.Inner")
+	}
+}
+func TestDecodeAliasType(t *testing.T) {
+	type Str string
+	type Int int
+	type Uint uint
+	type TT struct {
+		A Str
+		B Int
+		C Uint
+		S Str
+	}
+
+	expect := TT{
+		A: "12345",
+		B: 12345,
+		C: 12345,
+		S: "string",
+	}
+	m := map[string]types.AttributeValue{
+		"A": &types.AttributeValueMemberN{
+			Value: "12345",
+		},
+		"B": &types.AttributeValueMemberN{
+			Value: "12345",
+		},
+		"C": &types.AttributeValueMemberN{
+			Value: "12345",
+		},
+		"S": &types.AttributeValueMemberS{
+			Value: "string",
+		},
+	}
+
+	var actual TT
+	err := UnmarshalMap(m, &actual)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if !reflect.DeepEqual(expect, actual) {
+		t.Errorf("expect:\n%v\nactual:\n%v", expect, actual)
+	}
+}
+
+type testUnmarshalMapKeyComplex struct {
+	Foo string
+}
+
+func (t *testUnmarshalMapKeyComplex) UnmarshalText(b []byte) error {
+	t.Foo = string(b)
+	return nil
+}
+func (t *testUnmarshalMapKeyComplex) UnmarshalDynamoDBAttributeValue(av types.AttributeValue) error {
+	avM, ok := av.(*types.AttributeValueMemberM)
+	if !ok {
+		return fmt.Errorf("unexpected AttributeValue type %T, %v", av, av)
+	}
+	avFoo, ok := avM.Value["foo"]
+	if !ok {
+		return nil
+	}
+
+	avS, ok := avFoo.(*types.AttributeValueMemberS)
+	if !ok {
+		return fmt.Errorf("unexpected Foo AttributeValue type, %T, %v", avM, avM)
+	}
+
+	t.Foo = avS.Value
+
+	return nil
+}
+
+func TestUnmarshalTime_S_SS(t *testing.T) {
+	type A struct {
+		TimeField   time.Time
+		TimeFields  []time.Time
+		TimeFieldsL []time.Time
+	}
+	cases := map[string]struct {
+		input       string
+		expect      time.Time
+		decodeTimeS func(string) (time.Time, error)
+	}{
+		"String RFC3339Nano (Default)": {
+			input:  "1970-01-01T00:02:03.01Z",
+			expect: time.Unix(123, 10000000).UTC(),
+		},
+		"String UnixDate": {
+			input:  "Thu Jan  1 00:02:03 UTC 1970",
+			expect: time.Unix(123, 0).UTC(),
+			decodeTimeS: func(v string) (time.Time, error) {
+				t, err := time.Parse(time.UnixDate, v)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+				}
+				return t, nil
+			},
+		},
+		"String RFC3339 millis keeping zeroes": {
+			input:  "1970-01-01T00:02:03.010Z",
+			expect: time.Unix(123, 10000000).UTC(),
+			decodeTimeS: func(v string) (time.Time, error) {
+				t, err := time.Parse("2006-01-02T15:04:05.000Z07:00", v)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+				}
+				return t, nil
+			},
+		},
+		"String RFC822": {
+			input:  "01 Jan 70 00:02 UTC",
+			expect: time.Unix(120, 0).UTC(),
+			decodeTimeS: func(v string) (time.Time, error) {
+				t, err := time.Parse(time.RFC822, v)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+				}
+				return t, nil
+			},
+		},
+	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			inputMap := &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"TimeField":  &types.AttributeValueMemberS{Value: c.input},
+					"TimeFields": &types.AttributeValueMemberSS{Value: []string{c.input}},
+					"TimeFieldsL": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+						&types.AttributeValueMemberS{Value: c.input},
+					}},
+				},
+			}
+			expectedValue := A{
+				TimeField:   c.expect,
+				TimeFields:  []time.Time{c.expect},
+				TimeFieldsL: []time.Time{c.expect},
+			}
+
+			var actualValue A
+			if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
+				if c.decodeTimeS != nil {
+					options.DecodeTime.S = c.decodeTimeS
+				}
+			}); err != nil {
+				t.Errorf("expect no error, got %v", err)
+			}
+			if diff := cmpDiff(expectedValue, actualValue); diff != "" {
+				t.Errorf("expect attribute value match\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestUnmarshalTime_N_NS(t *testing.T) {
+	type A struct {
+		TimeField   time.Time
+		TimeFields  []time.Time
+		TimeFieldsL []time.Time
+	}
+	cases := map[string]struct {
+		input       string
+		expect      time.Time
+		decodeTimeN func(string) (time.Time, error)
+	}{
+		"Number Unix seconds (Default)": {
+			input:  "123",
+			expect: time.Unix(123, 0),
+		},
+		"Number Unix milli": {
+			input:  "123010",
+			expect: time.Unix(123, 10000000),
+			decodeTimeN: func(v string) (time.Time, error) {
+				n, err := strconv.ParseInt(v, 10, 64)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{
+						Err: err, Value: v, Type: timeType,
+					}
+				}
+				return time.Unix(0, n*int64(time.Millisecond)), nil
+			},
+		},
+	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			inputMap := &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"TimeField":  &types.AttributeValueMemberN{Value: c.input},
+					"TimeFields": &types.AttributeValueMemberNS{Value: []string{c.input}},
+					"TimeFieldsL": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+						&types.AttributeValueMemberN{Value: c.input},
+					}},
+				},
+			}
+			expectedValue := A{
+				TimeField:   c.expect,
+				TimeFields:  []time.Time{c.expect},
+				TimeFieldsL: []time.Time{c.expect},
+			}
+
+			var actualValue A
+			if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
+				if c.decodeTimeN != nil {
+					options.DecodeTime.N = c.decodeTimeN
+				}
+			}); err != nil {
+				t.Errorf("expect no error, got %v", err)
+			}
+			if diff := cmpDiff(expectedValue, actualValue); diff != "" {
+				t.Errorf("expect attribute value match\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestCustomDecodeSAndDefaultDecodeN(t *testing.T) {
+	type A struct {
+		TimeFieldS time.Time
+		TimeFieldN time.Time
+	}
+	inputMap := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"TimeFieldS": &types.AttributeValueMemberS{Value: "01 Jan 70 00:02 UTC"},
+			"TimeFieldN": &types.AttributeValueMemberN{Value: "123"},
+		},
+	}
+	expectedValue := A{
+		TimeFieldS: time.Unix(120, 0).UTC(),
+		TimeFieldN: time.Unix(123, 0), // will use system's locale
+	}
+
+	var actualValue A
+	if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
+		// overriding only the S time decoder will keep the default N time decoder
+		options.DecodeTime.S = func(v string) (time.Time, error) {
+			t, err := time.Parse(time.RFC822, v)
+			if err != nil {
+				return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+			}
+			return t, nil
+		}
+	}); err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if diff := cmpDiff(expectedValue, actualValue); diff != "" {
+		t.Errorf("expect attribute value match\n%s", diff)
+	}
+}
+
+func TestCustomDecodeNAndDefaultDecodeS(t *testing.T) {
+	type A struct {
+		TimeFieldS time.Time
+		TimeFieldN time.Time
+	}
+	inputMap := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"TimeFieldS": &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03.01Z"},
+			"TimeFieldN": &types.AttributeValueMemberN{Value: "123010"},
+		},
+	}
+	expectedValue := A{
+		TimeFieldS: time.Unix(123, 10000000).UTC(),
+		TimeFieldN: time.Unix(123, 10000000), // will use system's locale
+	}
+
+	var actualValue A
+	if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
+		// overriding only the N time decoder will keep the default S time decoder
+		options.DecodeTime.N = func(v string) (time.Time, error) {
+			n, err := strconv.ParseInt(v, 10, 64)
+			if err != nil {
+				return time.Time{}, &UnmarshalError{
+					Err: err, Value: v, Type: timeType,
+				}
+			}
+			return time.Unix(0, n*int64(time.Millisecond)), nil
+		}
+	}); err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if diff := cmpDiff(expectedValue, actualValue); diff != "" {
+		t.Errorf("expect attribute value match\n%s", diff)
+	}
+}
+
+func TestUnmarshalMap_keyTypes(t *testing.T) {
+	type StrAlias string
+	type IntAlias int
+	type BoolAlias bool
+
+	cases := map[string]struct {
+		input      map[string]types.AttributeValue
+		expectVal  interface{}
+		expectType func() interface{}
+	}{
+		"string key": {
+			input: map[string]types.AttributeValue{
+				"a": &types.AttributeValueMemberN{Value: "123"},
+				"b": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[string]interface{}{} },
+			expectVal: map[string]interface{}{
+				"a": 123.,
+				"b": "efg",
+			},
+		},
+		"string alias key": {
+			input: map[string]types.AttributeValue{
+				"a": &types.AttributeValueMemberN{Value: "123"},
+				"b": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[StrAlias]interface{}{} },
+			expectVal: map[StrAlias]interface{}{
+				"a": 123.,
+				"b": "efg",
+			},
+		},
+		"Number key": {
+			input: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[Number]interface{}{} },
+			expectVal: map[Number]interface{}{
+				Number("1"): 123.,
+				Number("2"): "efg",
+			},
+		},
+		"int key": {
+			input: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[int]interface{}{} },
+			expectVal: map[int]interface{}{
+				1: 123.,
+				2: "efg",
+			},
+		},
+		"int alias key": {
+			input: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[IntAlias]interface{}{} },
+			expectVal: map[IntAlias]interface{}{
+				1: 123.,
+				2: "efg",
+			},
+		},
+		"bool key": {
+			input: map[string]types.AttributeValue{
+				"true":  &types.AttributeValueMemberN{Value: "123"},
+				"false": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[bool]interface{}{} },
+			expectVal: map[bool]interface{}{
+				true:  123.,
+				false: "efg",
+			},
+		},
+		"bool alias key": {
+			input: map[string]types.AttributeValue{
+				"true":  &types.AttributeValueMemberN{Value: "123"},
+				"false": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[BoolAlias]interface{}{} },
+			expectVal: map[BoolAlias]interface{}{
+				true:  123.,
+				false: "efg",
+			},
+		},
+		"textMarshaler key": {
+			input: map[string]types.AttributeValue{
+				"Foo:1": &types.AttributeValueMemberN{Value: "123"},
+				"Foo:2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[testTextMarshaler]interface{}{} },
+			expectVal: map[testTextMarshaler]interface{}{
+				{Foo: "1"}: 123.,
+				{Foo: "2"}: "efg",
+			},
+		},
+		"textMarshaler DDBAvMarshaler key": {
+			input: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[testUnmarshalMapKeyComplex]interface{}{} },
+			expectVal: map[testUnmarshalMapKeyComplex]interface{}{
+				{Foo: "1"}: 123.,
+				{Foo: "2"}: "efg",
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			actualVal := c.expectType()
+			err := UnmarshalMap(c.input, &actualVal)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			t.Logf("expectType, %T", actualVal)
+
+			if diff := cmpDiff(c.expectVal, actualVal); diff != "" {
+				t.Errorf("expect value match\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestUnmarshalMap_keyPtrTypes(t *testing.T) {
+	input := map[string]types.AttributeValue{
+		"Foo:1": &types.AttributeValueMemberN{Value: "123"},
+		"Foo:2": &types.AttributeValueMemberS{Value: "efg"},
+	}
+
+	expectVal := map[*testTextMarshaler]interface{}{
+		{Foo: "1"}: 123.,
+		{Foo: "2"}: "efg",
+	}
+
+	actualVal := map[*testTextMarshaler]interface{}{}
+	err := UnmarshalMap(input, &actualVal)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	t.Logf("expectType, %T", actualVal)
+
+	if e, a := len(expectVal), len(actualVal); e != a {
+		t.Errorf("expect %v values, got %v", e, a)
+	}
+
+	for k, v := range expectVal {
+		var found bool
+		for ak, av := range actualVal {
+			if *k == *ak {
+				found = true
+				if diff := cmpDiff(v, av); diff != "" {
+					t.Errorf("expect value match\n%s", diff)
+				}
+			}
+		}
+		if !found {
+			t.Errorf("expect %v key not found", *k)
+		}
+	}
+
+}
+
+type textUnmarshalerString string
+
+func (v *textUnmarshalerString) UnmarshalText(text []byte) error {
+	*v = textUnmarshalerString("[[" + string(text) + "]]")
+	return nil
+}
+
+func TestUnmarshalTextString(t *testing.T) {
+	in := &types.AttributeValueMemberS{Value: "foo"}
+
+	var actual textUnmarshalerString
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = true
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if string(actual) != "[[foo]]" {
+		t.Errorf("expected [[foo]], got %s", actual)
+	}
+}
+
+func TestUnmarshalTextStringDisabled(t *testing.T) {
+	in := &types.AttributeValueMemberS{Value: "foo"}
+
+	var actual textUnmarshalerString
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = false
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if string(actual) != "foo" {
+		t.Errorf("expected foo, got %s", actual)
+	}
+}
+
+type textUnmarshalerStruct struct {
+	I, J string
+}
+
+func (v *textUnmarshalerStruct) UnmarshalText(text []byte) error {
+	parts := strings.Split(string(text), ";")
+	v.I = parts[0]
+	v.J = parts[1]
+	return nil
+}
+
+func TestUnmarshalTextStruct(t *testing.T) {
+	in := &types.AttributeValueMemberS{Value: "foo;bar"}
+
+	var actual textUnmarshalerStruct
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = true
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	expected := textUnmarshalerStruct{"foo", "bar"}
+	if actual != expected {
+		t.Errorf("expected %v, got %v", expected, actual)
+	}
+}
+
+type binaryUnmarshaler struct {
+	I, J byte
+}
+
+func (v *binaryUnmarshaler) UnmarshalBinary(b []byte) error {
+	v.I = b[0]
+	v.J = b[1]
+	return nil
+}
+
+func TestUnmarshalBinary(t *testing.T) {
+	in := &types.AttributeValueMemberB{Value: []byte{1, 2}}
+
+	var actual binaryUnmarshaler
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = true
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	expected := binaryUnmarshaler{1, 2}
+	if actual != expected {
+		t.Errorf("expected %v, got %v", expected, actual)
+	}
+}
+
+type testStringItem string
+
+func (t *testStringItem) UnmarshalDynamoDBAttributeValue(av types.AttributeValue) error {
+	v, ok := av.(*types.AttributeValueMemberS)
+	if !ok {
+		return fmt.Errorf("expecting string value")
+	}
+	*t = testStringItem(v.Value)
+	return nil
+}
+
+type testNumberItem float64
+
+func (t *testNumberItem) UnmarshalDynamoDBAttributeValue(av types.AttributeValue) error {
+	v, ok := av.(*types.AttributeValueMemberN)
+	if !ok {
+		return fmt.Errorf("expecting number value")
+	}
+	n, err := strconv.ParseFloat(v.Value, 64)
+	if err != nil {
+		return err
+	}
+	*t = testNumberItem(n)
+	return nil
+}
+
+type testBinaryItem []byte
+
+func (t *testBinaryItem) UnmarshalDynamoDBAttributeValue(av types.AttributeValue) error {
+	v, ok := av.(*types.AttributeValueMemberB)
+	if !ok {
+		return fmt.Errorf("expecting binary value")
+	}
+	*t = make([]byte, len(v.Value))
+	copy(*t, v.Value)
+	return nil
+}
+
+type testStringSetWithUnmarshaler struct {
+	Strings  []testStringItem `dynamodbav:",stringset"`
+	Numbers  []testNumberItem `dynamodbav:",numberset"`
+	Binaries []testBinaryItem `dynamodbav:",binaryset"`
+}
+
+func TestUnmarshalIndividualSetValues(t *testing.T) {
+	in := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Strings": &types.AttributeValueMemberSS{
+				Value: []string{"a", "b"},
+			},
+			"Numbers": &types.AttributeValueMemberNS{
+				Value: []string{"1", "2"},
+			},
+			"Binaries": &types.AttributeValueMemberBS{
+				Value: [][]byte{{1, 2}, {3, 4}},
+			},
+		},
+	}
+	var actual testStringSetWithUnmarshaler
+	err := UnmarshalWithOptions(in, &actual)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	expected := testStringSetWithUnmarshaler{
+		Strings:  []testStringItem{"a", "b"},
+		Numbers:  []testNumberItem{1, 2},
+		Binaries: []testBinaryItem{{1, 2}, {3, 4}},
+	}
+	if diff := cmpDiff(expected, actual); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+}
+
+func TestDecodeVersion(t *testing.T) {
+	cases := []struct {
+		ft       Tag
+		actual   any
+		expected types.AttributeValue
+		error    bool
+	}{
+		{
+			ft:     Tag{Version: true},
+			actual: int(5),
+			expected: &types.AttributeValueMemberN{
+				Value: "5",
+			},
+		},
+		{
+			ft:     Tag{Version: true},
+			actual: uint(5),
+			expected: &types.AttributeValueMemberN{
+				Value: "5",
+			},
+		},
+		{
+			ft:     Tag{Version: true},
+			actual: float32(5),
+			expected: &types.AttributeValueMemberN{
+				Value: "5",
+			},
+		},
+		{
+			ft:     Tag{Version: true, AsString: true},
+			actual: "",
+			expected: &types.AttributeValueMemberS{
+				Value: "",
+			},
+		},
+		{
+			ft:     Tag{Version: true},
+			actual: "",
+			expected: &types.AttributeValueMemberS{
+				Value: "",
+			},
+		},
+	}
+	for i, c := range cases {
+		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
+			v := reflect.ValueOf(c.actual)
+			av, err := NewEncoder[any]().encode(v, c.ft)
+
+			if !c.error && err != nil {
+				t.Errorf("unexpected error: %v", err)
+
+				return
+			}
+
+			if c.error && err == nil {
+				t.Error("expected error")
+
+				return
+			}
+
+			if diff := cmpDiff(c.expected, av); len(diff) != 0 {
+				t.Errorf("unexpected diff: %s", diff)
+			}
+		})
+	}
+}
+
+func TestDecoderWithConverters(t *testing.T) {
+	cases := []struct {
+		converter     string
+		input         types.AttributeValue
+		actual        any
+		expected      any
+		expectedError bool
+		fixedExpected bool
+		options       []string
+	}{
+		{converter: "bool", input: &types.AttributeValueMemberBOOL{Value: true}, actual: aws.Bool(false), expected: aws.Bool(false)},
+		{converter: "bool", input: &types.AttributeValueMemberBOOL{Value: false}, actual: aws.Bool(true), expected: aws.Bool(true)},
+		{converter: "uint", input: &types.AttributeValueMemberN{Value: "1"}, actual: aws.Uint(uint(0)), expected: aws.Uint(uint(0))},
+		{converter: "uint8", input: &types.AttributeValueMemberN{Value: "1"}, actual: aws.Uint8(uint8(0)), expected: aws.Uint8(uint8(0))},
+		{converter: "uint16", input: &types.AttributeValueMemberN{Value: "1"}, actual: aws.Uint16(uint16(0)), expected: aws.Uint16(uint16(0))},
+		{converter: "uint32", input: &types.AttributeValueMemberN{Value: "1"}, actual: aws.Uint32(uint32(0)), expected: aws.Uint32(uint32(0))},
+		{converter: "uint64", input: &types.AttributeValueMemberN{Value: "1"}, actual: aws.Uint64(uint64(0)), expected: aws.Uint64(uint64(0))},
+		{converter: "int", input: &types.AttributeValueMemberN{Value: "-1"}, actual: aws.Int(int(0)), expected: aws.Int(int(0))},
+		{converter: "int8", input: &types.AttributeValueMemberN{Value: "-1"}, actual: aws.Int8(int8(0)), expected: aws.Int8(int8(0))},
+		{converter: "int16", input: &types.AttributeValueMemberN{Value: "-1"}, actual: aws.Int16(int16(0)), expected: aws.Int16(int16(0))},
+		{converter: "int32", input: &types.AttributeValueMemberN{Value: "-1"}, actual: aws.Int32(int32(0)), expected: aws.Int32(int32(0))},
+		{converter: "int64", input: &types.AttributeValueMemberN{Value: "-1"}, actual: aws.Int64(int64(0)), expected: aws.Int64(int64(0))},
+		{converter: "float32", input: &types.AttributeValueMemberN{Value: "1.2"}, actual: aws.Float32(float32(0)), expected: aws.Float32(float32(0))},
+		{converter: "float64", input: &types.AttributeValueMemberN{Value: "1.2"}, actual: aws.Float64(float64(0)), expected: aws.Float64(float64(0))},
+		{converter: "time.Time", input: &types.AttributeValueMemberN{Value: "1758633434"}, actual: aws.Time(time.Time{}), expected: aws.Time(time.Time{})},
+		{
+			converter: "time.Time",
+			input:     &types.AttributeValueMemberS{Value: "2025-09-23T16:17:14.000+03:00"},
+			actual:    aws.Time(time.Time{}),
+			expected: func() any {
+				o, _ := time.Parse("2006-01-02T15:04:05.999999999Z07:00", "2025-09-23T16:17:14.000+03:00")
+
+				return aws.Time(o)
+			},
+			fixedExpected: true,
+			options:       []string{"2006-01-02T15:04:05.999999999Z07:00"},
+		},
+		{
+			converter: "time.Time",
+			input:     &types.AttributeValueMemberS{Value: "2025-09-23 16:17:14"},
+			actual:    aws.Time(time.Time{}),
+			expected: func() any {
+				o, _ := time.Parse("2006-01-02 15:04:05", "2025-09-23 16:17:14")
+
+				return aws.Time(o)
+			},
+			fixedExpected: true,
+			options:       []string{"2006-01-02 15:04:05"},
+		},
+		{
+			converter: "json",
+			input:     &types.AttributeValueMemberS{Value: `{"test":"test"}`},
+			actual:    &map[string]any{},
+			expected: &map[string]any{
+				"test": "test",
+			},
+			fixedExpected: true,
+			options:       []string{},
+		},
+		{
+			converter: "json",
+			input:     &types.AttributeValueMemberS{Value: `[{"test":"test"}]`},
+			actual:    &[]any{},
+			expected: &[]any{
+				map[string]any{
+					"test": "test",
+				},
+			},
+			fixedExpected: true,
+			options:       []string{},
+		},
+		{
+			converter:     "json",
+			input:         &types.AttributeValueMemberS{Value: `[{"test":"test"}`},
+			actual:        &[]any{},
+			expectedError: true,
+			fixedExpected: true,
+			options:       []string{},
+		},
+	}
+	sd := NewDecoder[order]()
+	cd := NewDecoder[order](func(options *DecoderOptions) {
+		options.ConverterRegistry = converters.DefaultRegistry.Clone()
+	})
+
+	for i, c := range cases {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			var err error
+
+			err = cd.decode(c.input, reflect.ValueOf(c.actual), Tag{
+				Converter: true,
+				Options: map[string][]string{
+					"converter": append([]string{c.converter}, c.options...),
+				},
+			})
+
+			if err == nil && c.expectedError {
+				t.Logf("%#+v", c.actual)
+				t.Logf("%#+v", c.expected)
+				t.Logf("%q", c.actual)
+				t.Logf("%q", c.expected)
+				t.Fatalf("expected error, got none")
+			}
+
+			if err != nil && !c.expectedError {
+				t.Fatalf("unexpected error, got: %v", err)
+			}
+
+			if err != nil && c.expectedError {
+				return
+			}
+
+			if f, ok := c.expected.(func() any); ok {
+				c.expected = f()
+			}
+
+			if !c.fixedExpected {
+				err = sd.decode(c.input, reflect.ValueOf(c.expected), Tag{
+					Converter: true,
+					Options: map[string][]string{
+						"converter": append([]string{c.converter}, c.options...),
+					},
+				})
+				if err != nil {
+					t.Error(err)
+				}
+			}
+
+			if diff := cmpDiff(c.expected, c.actual); diff != "" {
+				t.Errorf("unexpected diff: %v", diff)
+			}
+		})
+	}
+}
