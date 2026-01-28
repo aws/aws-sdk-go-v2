@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"reflect"
 	"strings"
 	"testing"
@@ -52,7 +51,7 @@ func (c mockClient) GetMetadata(
 	switch params.Path {
 	case iamSecurityCredsPath:
 		return &imds.GetMetadataOutput{
-			Content: ioutil.NopCloser(strings.NewReader(c.roleName)),
+			Content: io.NopCloser(strings.NewReader(c.roleName)),
 		}, nil
 
 	case iamSecurityCredsPath + c.roleName:
@@ -63,7 +62,7 @@ func (c mockClient) GetMetadata(
 			fmt.Fprintf(&w, credsRespTmpl, c.expireOn)
 		}
 		return &imds.GetMetadataOutput{
-			Content: ioutil.NopCloser(strings.NewReader(w.String())),
+			Content: io.NopCloser(strings.NewReader(w.String())),
 		}, nil
 	default:
 		return nil, fmt.Errorf("unexpected path, %v", params.Path)

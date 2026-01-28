@@ -5,7 +5,7 @@ package imds
 
 import (
 	"context"
-	"io/ioutil"
+	"io"
 	"os"
 	"strings"
 	"testing"
@@ -19,7 +19,7 @@ func TestInteg_GetDynamicData(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	b, err := ioutil.ReadAll(result.Content)
+	b, err := io.ReadAll(result.Content)
 	if err != nil {
 		t.Fatalf("expect to read content, got %v", err)
 	}
@@ -60,7 +60,7 @@ func TestInteg_GetMetadata(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	b, err := ioutil.ReadAll(result.Content)
+	b, err := io.ReadAll(result.Content)
 	if err != nil {
 		t.Fatalf("expect to read content, got %v", err)
 	}
@@ -98,7 +98,7 @@ func TestInteg_GetUserData(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	b, err := ioutil.ReadAll(result.Content)
+	b, err := io.ReadAll(result.Content)
 	if err != nil {
 		t.Fatalf("expect to read content, got %v", err)
 	}

@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 	"testing"
@@ -307,7 +307,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 			},
 			"content length preset": {
 				params: &s3.PutObjectInput{
-					Body:              ioutil.NopCloser(strings.NewReader("hello world")),
+					Body:              io.NopCloser(strings.NewReader("hello world")),
 					ContentLength:     aws.Int64(11),
 					ChecksumAlgorithm: s3types.ChecksumAlgorithmCrc32c,
 				},
@@ -323,7 +323,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 			},
 			"unknown content length": {
 				params: &s3.PutObjectInput{
-					Body:              ioutil.NopCloser(strings.NewReader("hello world")),
+					Body:              io.NopCloser(strings.NewReader("hello world")),
 					ChecksumAlgorithm: s3types.ChecksumAlgorithmCrc32c,
 				},
 				expectErr: "MissingContentLength",
@@ -518,7 +518,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 						t.Fatalf("expect no error, got %v", err)
 					}
 
-					actualPayload, err := ioutil.ReadAll(getResult.Body)
+					actualPayload, err := io.ReadAll(getResult.Body)
 					if err == nil && len(c.expectReadErr) != 0 {
 						t.Fatalf("expected read error: %v, got none", c.expectReadErr)
 					}

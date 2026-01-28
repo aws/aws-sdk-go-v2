@@ -5,7 +5,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -28,7 +27,7 @@ import (
 
 // getReaderLength discards the bytes from reader and returns the length
 func getReaderLength(r io.Reader) int64 {
-	n, _ := io.Copy(ioutil.Discard, r)
+	n, _ := io.Copy(io.Discard, r)
 	return n
 }
 
@@ -955,7 +954,7 @@ func TestUploadMaxPartsEOF(t *testing.T) {
 }
 
 func createTempFile(t *testing.T, size int64) (*os.File, func(*testing.T), error) {
-	file, err := ioutil.TempFile(os.TempDir(), aws.SDKName+t.Name())
+	file, err := os.CreateTemp(os.TempDir(), aws.SDKName+t.Name())
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1346,7 +1345,7 @@ func (h successPartHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
-	n, err := io.Copy(ioutil.Discard, r.Body)
+	n, err := io.Copy(io.Discard, r.Body)
 	if err != nil {
 		failRequest(w, 400, "BadRequest",
 			fmt.Sprintf("failed to read body, %v", err))
@@ -1394,7 +1393,7 @@ func (h *failPartHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	io.Copy(ioutil.Discard, r.Body)
+	io.Copy(io.Discard, r.Body)
 
 	failRequest(w, 500, "InternalException",
 		fmt.Sprintf("mock error, partNumber %v", r.URL.Query().Get("partNumber")))

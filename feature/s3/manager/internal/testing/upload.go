@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"sync"
@@ -79,7 +78,7 @@ func (u *UploadLoggingClient) PutObject(ctx context.Context, params *s3.PutObjec
 	defer u.m.Unlock()
 
 	if u.ConsumeBody {
-		io.Copy(ioutil.Discard, params.Body)
+		io.Copy(io.Discard, params.Body)
 	}
 
 	u.traceOperation("PutObject", params)
@@ -102,7 +101,7 @@ func (u *UploadLoggingClient) UploadPart(ctx context.Context, params *s3.UploadP
 	defer u.m.Unlock()
 
 	if u.ConsumeBody {
-		io.Copy(ioutil.Discard, params.Body)
+		io.Copy(io.Discard, params.Body)
 	}
 
 	u.traceOperation("UploadPart", params)

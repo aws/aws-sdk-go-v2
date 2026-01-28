@@ -5,7 +5,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"reflect"
 	"strings"
 	"sync/atomic"
@@ -514,7 +513,7 @@ func TestDownloadAsyncWithFailure(t *testing.T) {
 					}
 					body := bytes.NewReader(make([]byte, minPartSizeBytes))
 					out = &s3.GetObjectOutput{
-						Body:          ioutil.NopCloser(body),
+						Body:          io.NopCloser(body),
 						ContentLength: aws.Int64(int64(body.Len())),
 						ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, end, body.Len()*10)),
 						PartsCount:    aws.Int32(10),

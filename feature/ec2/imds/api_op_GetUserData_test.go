@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/hex"
-	"io/ioutil"
+	"io"
 	"net/http/httptest"
 	"strings"
 	"testing"
@@ -76,7 +76,7 @@ func TestGetUserData(t *testing.T) {
 				t.Fatalf("expect resp, got none")
 			}
 
-			actualContent, err := ioutil.ReadAll(resp.Content)
+			actualContent, err := io.ReadAll(resp.Content)
 			if err != nil {
 				t.Fatalf("expect to read content, got %v", err)
 			}

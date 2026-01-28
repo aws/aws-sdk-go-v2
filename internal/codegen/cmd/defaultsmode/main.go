@@ -6,7 +6,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"regexp"
@@ -43,7 +42,7 @@ func main() {
 		log.Fatal("-json and -output arguments are required")
 	}
 
-	jsonBytes, err := ioutil.ReadFile(jsonFile)
+	jsonBytes, err := os.ReadFile(jsonFile)
 	if err != nil {
 		log.Fatalf("failed to read json file: %v", err)
 	}

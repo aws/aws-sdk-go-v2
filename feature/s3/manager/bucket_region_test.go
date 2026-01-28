@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -24,7 +23,7 @@ var mockErrResponse = []byte(`<?xml version="1.0" encoding="UTF-8"?>
 
 func testSetupGetBucketRegionServer(region string, statusCode int, incHeader bool) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		io.Copy(ioutil.Discard, r.Body)
+		io.Copy(io.Discard, r.Body)
 		if incHeader {
 			w.Header().Set(bucketRegionHeader, region)
 		}

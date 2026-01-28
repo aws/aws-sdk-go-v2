@@ -5,7 +5,6 @@ import (
 	"context"
 	"errors"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -197,7 +196,7 @@ func TestClient_GetCredentials(t *testing.T) {
 					t.Errorf("failed to read r body, %v", err)
 				}
 
-				actualReq.Body = ioutil.NopCloser(bytes.NewReader(buf.Bytes()))
+				actualReq.Body = io.NopCloser(bytes.NewReader(buf.Bytes()))
 
 				w.Header().Set("Content-Type", tt.ResponseContentType)
 				w.WriteHeader(tt.ResponseCode)
