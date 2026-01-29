@@ -1,7 +1,7 @@
 {
     "id": "c8e6d35b-cda1-4e4d-adb6-5b8f8ea45d68",
     "type": "bugfix",
-    "description": "Remove min part size validation from transfer manager side and leave that check to S3 server side",
+    "description": "Don't enforce the default part size as a minimum.",
     "modules": [
         "feature/s3/transfermanager"
     ]
