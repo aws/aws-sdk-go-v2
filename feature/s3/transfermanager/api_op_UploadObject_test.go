@@ -299,6 +299,10 @@ func TestUploadWithPartSizeIncreased(t *testing.T) {
 		t.Errorf("expect no error, got %v", err)
 	}
 
+	// in this case the content length is 20971520 bytes, the calculated parts count will be
+	// 20971520 / 5 = 4194304 exceeding 10000 limit, so the part size increase to
+	// 20971520 / 10000 + 1 = 2098 bytes, and total parts uploaded will be 20971520 / 2098 = 9996
+	// (upper bound for last part)
 	if e, a := 9996, len(*ops); e != a {
 		t.Errorf("expect %d parts uploaded, got %d", e, a)
 	}
