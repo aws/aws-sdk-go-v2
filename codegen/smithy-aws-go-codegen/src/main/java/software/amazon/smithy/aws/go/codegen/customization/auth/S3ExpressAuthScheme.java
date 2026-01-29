@@ -21,6 +21,8 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.AuthSchemeDefinition;
@@ -128,17 +130,17 @@ public class S3ExpressAuthScheme implements GoIntegration {
 
     private static class SigV4S3Express implements AuthSchemeDefinition {
         @Override
-        public GoWriter.Writable generateServiceOption(ProtocolGenerator.GenerationContext context, ServiceShape service) {
+        public Writable generateServiceOption(ProtocolGenerator.GenerationContext context, ServiceShape service) {
             return emptyGoTemplate(); // not modeled
         }
 
         @Override
-        public GoWriter.Writable generateOperationOption(ProtocolGenerator.GenerationContext context, OperationShape operation) {
+        public Writable generateOperationOption(ProtocolGenerator.GenerationContext context, OperationShape operation) {
             return emptyGoTemplate(); // not modeled
         }
 
         @Override
-        public GoWriter.Writable generateDefaultAuthScheme() {
+        public Writable generateDefaultAuthScheme() {
             return goTemplate("""
                     $T($S, &$T{
                         Signer: options.HTTPSignerV4,
@@ -151,12 +153,12 @@ public class S3ExpressAuthScheme implements GoIntegration {
         }
 
         @Override
-        public GoWriter.Writable generateOptionsIdentityResolver() {
+        public Writable generateOptionsIdentityResolver() {
             return goTemplate("getExpressIdentityResolver(o)");
         }
     }
 
-    private GoWriter.Writable generateGetIdentityResolver() {
+    private Writable generateGetIdentityResolver() {
         return goTemplate("""
                 func getExpressIdentityResolver(o Options) $T {
                     if o.ExpressCredentials != nil {

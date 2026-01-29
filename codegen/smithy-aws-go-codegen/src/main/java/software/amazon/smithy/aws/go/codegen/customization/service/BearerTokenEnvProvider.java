@@ -9,6 +9,8 @@ import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.go.codegen.GoCodegenContext;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -54,7 +56,7 @@ public class BearerTokenEnvProvider implements GoIntegration {
         }
     }
 
-    private GoWriter.Writable bearerTokenResolver(ServiceShape service) {
+    private Writable bearerTokenResolver(ServiceShape service) {
         var envSuffix = service.expectTrait(SigV4Trait.class).getName()
                 .toUpperCase()
                 .replace(' ', '_')

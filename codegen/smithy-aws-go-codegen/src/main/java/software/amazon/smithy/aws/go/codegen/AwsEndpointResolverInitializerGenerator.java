@@ -22,6 +22,8 @@ import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
@@ -96,7 +98,7 @@ public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
         });
     }
 
-    private GoWriter.Writable generateConfigResolverMethod(String sdkId) {
+    private Writable generateConfigResolverMethod(String sdkId) {
         return goTemplate(
             """
                 func $resolveMethodName:L(cfg $awsConfig:T, o *Options) {
@@ -129,7 +131,7 @@ public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
         );
     }
 
-    private GoWriter.Writable generateResolveMethod() {
+    private Writable generateResolveMethod() {
         return goTemplate(
             """
                 func $resolveMethodName:L(options *Options) {

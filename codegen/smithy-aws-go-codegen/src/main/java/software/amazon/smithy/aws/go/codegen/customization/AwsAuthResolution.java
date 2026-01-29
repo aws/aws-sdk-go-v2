@@ -22,6 +22,8 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.auth.AuthParameter;
 import software.amazon.smithy.go.codegen.auth.AuthParametersGenerator;
@@ -95,7 +97,7 @@ public class AwsAuthResolution implements GoIntegration {
         return service.hasTrait(SigV4Trait.class);
     };
 
-    private GoWriter.Writable writeRegionResolver() {
+    private Writable writeRegionResolver() {
         return goTemplate("""
                 func bindAuthParamsRegion( _ interface{}, params $P, _ interface{}, options Options) error {
                     params.Region = options.Region
@@ -104,7 +106,7 @@ public class AwsAuthResolution implements GoIntegration {
                 """, AuthParametersGenerator.STRUCT_SYMBOL);
     }
 
-    private GoWriter.Writable writeEndpointParamResolver() {
+    private Writable writeEndpointParamResolver() {
         return goTemplate("""
                 func bindAuthEndpointParams(ctx $P, params $P, input interface{}, options Options) (err error) {
                     params.endpointParams, err = bindEndpointParams(ctx, input, options)

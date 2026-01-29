@@ -22,6 +22,8 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.endpoints.EndpointMiddlewareGenerator;
@@ -96,18 +98,18 @@ public class EndpointDisableHttps implements GoIntegration {
         });
     }
 
-    private GoWriter.Writable generateMiddleware() {
+    private Writable generateMiddleware() {
         return createFinalizeStepMiddleware(MIDDLEWARE_NAME, MiddlewareIdentifier.string(MIDDLEWARE_ID))
                 .asWritable(generateBody(), generateFields());
     }
 
-    private GoWriter.Writable generateFields() {
+    private Writable generateFields() {
         return goTemplate("""
                 DisableHTTPS bool
                 """);
     }
 
-    private GoWriter.Writable generateBody() {
+    private Writable generateBody() {
         return goTemplate("""
                 req, ok := in.Request.($P)
                 if !ok {

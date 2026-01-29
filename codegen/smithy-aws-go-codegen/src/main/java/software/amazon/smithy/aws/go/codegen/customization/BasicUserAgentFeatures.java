@@ -10,6 +10,8 @@ import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoCodegenContext;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
@@ -37,7 +39,7 @@ public class BasicUserAgentFeatures implements GoIntegration {
         var model = ctx.model();
         var service = ctx.settings().getService(model);
         ctx.writerDelegator().useFileWriter("api_client.go", ctx.settings().getModuleName(),
-                GoWriter.ChainWritable.of(
+                ChainWritable.of(
                         FEATURES.stream()
                                 .filter(it -> it.servicePredicate.test(model, service))
                                 .map(Feature::getAddMiddleware)
@@ -66,7 +68,7 @@ public class BasicUserAgentFeatures implements GoIntegration {
                     .build();
         }
 
-        public GoWriter.Writable getAddMiddleware() {
+        public Writable getAddMiddleware() {
             return goTemplate("""
                     func add$featureName:L(stack $stack:P, options Options) error {
                         ua, err := getOrAddRequestUserAgent(stack)

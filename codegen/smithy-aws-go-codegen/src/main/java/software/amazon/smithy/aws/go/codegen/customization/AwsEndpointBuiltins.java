@@ -6,6 +6,8 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
@@ -24,27 +26,27 @@ import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
  * Registers bindings for AWS endpoint resolution builtins.
  */
 public class AwsEndpointBuiltins implements GoIntegration {
-    private static final GoWriter.Writable BindSdkEndpoint =
+    private static final Writable BindSdkEndpoint =
             goTemplate("options.BaseEndpoint");
 
-    private static final GoWriter.Writable BindAwsRegion =
+    private static final Writable BindAwsRegion =
             goTemplate("bindRegion(options.Region)");
-    private static final GoWriter.Writable BindAwsUseFips =
+    private static final Writable BindAwsUseFips =
             goTemplate("$T(options.EndpointOptions.UseFIPSEndpoint == $T)", SdkGoTypes.Aws.Bool, SdkGoTypes.Aws.FIPSEndpointStateEnabled);
-    private static final GoWriter.Writable BindAwsUseDualStack =
+    private static final Writable BindAwsUseDualStack =
             goTemplate("$T(options.EndpointOptions.UseDualStackEndpoint == $T)", SdkGoTypes.Aws.Bool, SdkGoTypes.Aws.DualStackEndpointStateEnabled);
 
-    private static final GoWriter.Writable BindAwsS3ForcePathStyle =
+    private static final Writable BindAwsS3ForcePathStyle =
             goTemplate("$T(options.UsePathStyle)", SdkGoTypes.Aws.Bool);
-    private static final GoWriter.Writable BindAwsS3Accelerate =
+    private static final Writable BindAwsS3Accelerate =
             goTemplate("$T(options.UseAccelerate)", SdkGoTypes.Aws.Bool);
-    private static final GoWriter.Writable BindAwsS3UseArnRegion =
+    private static final Writable BindAwsS3UseArnRegion =
             goTemplate("$T(options.UseARNRegion)", SdkGoTypes.Aws.Bool);
-    private static final GoWriter.Writable BindAwsS3DisableMultiRegionAccessPoints =
+    private static final Writable BindAwsS3DisableMultiRegionAccessPoints =
             goTemplate("$T(options.DisableMultiRegionAccessPoints)", SdkGoTypes.Aws.Bool);
-    private static final GoWriter.Writable BindAccountID =
+    private static final Writable BindAccountID =
             goTemplate("resolveAccountID(getIdentity(ctx), options.AccountIDEndpointMode)");
-    private static final GoWriter.Writable BindAccountIDEndpointMode =
+    private static final Writable BindAccountIDEndpointMode =
             goTemplate("$T(string(options.AccountIDEndpointMode))", SdkGoTypes.Aws.String);
 
     @Override
@@ -94,7 +96,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
         ));
     }
 
-    private GoWriter.Writable builtinBindingSource() {
+    private Writable builtinBindingSource() {
         return goTemplate("""
                 func bindRegion(region string) (*string, error) {
                     if region == "" {

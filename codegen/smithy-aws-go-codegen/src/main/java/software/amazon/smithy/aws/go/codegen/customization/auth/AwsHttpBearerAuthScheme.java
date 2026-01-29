@@ -22,6 +22,8 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
@@ -66,7 +68,7 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
         return service.hasTrait(HttpBearerAuthTrait.class);
     }
 
-    private GoWriter.Writable writeSignerConfigFieldResolver() {
+    private Writable writeSignerConfigFieldResolver() {
         return goTemplate("""
                 func $funcName:L(o *Options) {
                     if o.$signerOption:L != nil {
@@ -82,7 +84,7 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
                 ));
     }
 
-    private GoWriter.Writable writeNewSignerFunc() {
+    private Writable writeNewSignerFunc() {
         return goTemplate("""
                 func $funcName:L(o Options) $signerInterface:T {
                     return $newDefaultSigner:T()
@@ -122,7 +124,7 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
 
     public static class AwsHttpBearer extends HttpBearerDefinition {
         @Override
-        public GoWriter.Writable generateDefaultAuthScheme() {
+        public Writable generateDefaultAuthScheme() {
             return goTemplate("$T($S, &$T{Signer: options.BearerAuthSigner})",
                     SdkGoTypes.Internal.Auth.NewHTTPAuthScheme,
                     HttpBearerAuthTrait.ID.toString(),
@@ -130,7 +132,7 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
         }
 
         @Override
-        public GoWriter.Writable generateOptionsIdentityResolver() {
+        public Writable generateOptionsIdentityResolver() {
             return goTemplate("&$T{Provider: o.BearerAuthTokenProvider}",
                     SdkGoTypes.Internal.Auth.Smithy.BearerTokenProviderAdapter);
         }

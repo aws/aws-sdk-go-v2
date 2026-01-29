@@ -27,6 +27,8 @@ import java.util.Map;
 import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
@@ -37,7 +39,7 @@ import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.utils.MapUtils;
 
-final class CborEventStreamSerializer implements GoWriter.Writable {
+final class CborEventStreamSerializer implements Writable {
     private static final Map<String, Object> templateEnv = MapUtils.of(
             "cborEncode", SmithyGoDependency.SMITHY_CBOR.func("Encode"),
             "eventstreamMessage", AwsCustomGoDependency.SERVICE_INTERNAL_EVENTSTREAM.struct("Message"),
@@ -67,7 +69,7 @@ final class CborEventStreamSerializer implements GoWriter.Writable {
         writer.write(serializeMessage());
     }
 
-    private GoWriter.Writable serializeInitialRequest() {
+    private Writable serializeInitialRequest() {
         return goTemplate("""
                 func $fn:L(input interface{}, msg $eventstreamMessage:P) error {
                     in, ok := input.($input:P)
@@ -90,7 +92,7 @@ final class CborEventStreamSerializer implements GoWriter.Writable {
                 ));
     }
 
-    private GoWriter.Writable serializeMessage() {
+    private Writable serializeMessage() {
         return goTemplate("""
                 func $fn:L(v $union:T, msg $eventstreamMessage:P) error {
                     switch vv := v.(type) {
@@ -104,7 +106,7 @@ final class CborEventStreamSerializer implements GoWriter.Writable {
                 MapUtils.of(
                         "fn", getEventStreamSerializerName(stream, ctx.getService(), ctx.getProtocolName()),
                         "union", ctx.getSymbolProvider().toSymbol(stream),
-                        "variants", GoWriter.ChainWritable.of(
+                        "variants", ChainWritable.of(
                                 stream.members().stream()
                                         .map(this::serializeEventVariant)
                                         .toList()
@@ -112,7 +114,7 @@ final class CborEventStreamSerializer implements GoWriter.Writable {
                 ));
     }
 
-    private GoWriter.Writable serializeEventVariant(MemberShape variant) {
+    private Writable serializeEventVariant(MemberShape variant) {
         var variantSymbol = buildSymbol(
                 ctx.getSymbolProvider().toMemberName(variant),
                 ctx.getSymbolProvider().toSymbol(variant).getNamespace()

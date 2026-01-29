@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.CodegenUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
@@ -192,8 +194,8 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
                 """,
                 MapUtils.of(
-                        "initDecoder", (GoWriter.Writable) writer -> initializeJsonDecoder(writer, "errorBody"),
-                        "handleDecodeError", (GoWriter.Writable) AwsProtocolUtils::handleDecodeError
+                        "initDecoder", (Writable) writer -> initializeJsonDecoder(writer, "errorBody"),
+                        "handleDecodeError", (Writable) AwsProtocolUtils::handleDecodeError
                 ));
         context.getWriter().get()
                 .addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL)

@@ -20,6 +20,8 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.auth.SignRequestMiddlewareGenerator;
@@ -68,15 +70,15 @@ public class LegacyAuthContextOverride implements GoIntegration {
         goDelegator.useFileWriter("auth.go", settings.getModuleName(), generateMiddleware());
     }
 
-    private GoWriter.Writable generateMiddleware() {
-        return GoWriter.ChainWritable.of(
+    private Writable generateMiddleware() {
+        return ChainWritable.of(
                 createFinalizeStepMiddleware(MIDDLEWARE_NAME, MiddlewareIdentifier.string(MIDDLEWARE_ID))
                         .asWritable(generateMiddlewareBody(), emptyGoTemplate()),
                 generateAddFunc()
         ).compose();
     }
 
-    private GoWriter.Writable generateMiddlewareBody() {
+    private Writable generateMiddlewareBody() {
         return goTemplate("""
                 rscheme := getResolvedAuthScheme(ctx)
                 schemeID := rscheme.Scheme.SchemeID()
@@ -109,7 +111,7 @@ public class LegacyAuthContextOverride implements GoIntegration {
                 ));
     }
 
-    private GoWriter.Writable generateAddFunc() {
+    private Writable generateAddFunc() {
         return goTemplate("""
                 func $L(stack $P) error {
                     return stack.Finalize.Insert(&$L{}, $S, $T)

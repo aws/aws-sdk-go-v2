@@ -33,6 +33,8 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.OperationGenerator;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
@@ -766,7 +768,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         return service.expectTrait(ServiceTrait.class).getSdkId().equalsIgnoreCase("Polly");
     }
 
-    private static final class PresignContextPolyfillMiddleware implements GoWriter.Writable {
+    private static final class PresignContextPolyfillMiddleware implements Writable {
         public static final String NAME = "presignContextPolyfillMiddleware";
         public static final String ID = "presignContextPolyfill";
 
@@ -781,12 +783,12 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             writer.write(generateMiddleware());
         }
 
-        private GoWriter.Writable generateMiddleware() {
+        private Writable generateMiddleware() {
             return createFinalizeStepMiddleware(NAME, MiddlewareIdentifier.string(ID))
                     .asWritable(generateBody(), emptyGoTemplate());
         }
 
-        private GoWriter.Writable generateBody() {
+        private Writable generateBody() {
             return goTemplate("""
                 rscheme := getResolvedAuthScheme(ctx)
                 if rscheme == nil {
@@ -825,7 +827,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                 ));
         }
 
-        private GoWriter.Writable generateSetSignerVersion() {
+        private Writable generateSetSignerVersion() {
             return switch (service.expectTrait(ServiceTrait.class).getSdkId().toLowerCase()) {
                 case "s3" ->
                         goTemplate("ctx = $T(ctx, schemeID)", SdkGoTypes.ServiceCustomizations.S3.SetSignerVersion);

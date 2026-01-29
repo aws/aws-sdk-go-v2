@@ -23,6 +23,8 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
@@ -62,7 +64,7 @@ public class LambdaRecursionDetection implements GoIntegration {
         goDelegator.useFileWriter("api_client.go", settings.getModuleName(), addMiddleware());
     }
 
-    private GoWriter.Writable addMiddleware() {
+    private Writable addMiddleware() {
         return goTemplate("""
                 func addRecursionDetection(stack *middleware.Stack) error {
                     return stack.Build.Add(&awsmiddleware.RecursionDetection{}, middleware.After)

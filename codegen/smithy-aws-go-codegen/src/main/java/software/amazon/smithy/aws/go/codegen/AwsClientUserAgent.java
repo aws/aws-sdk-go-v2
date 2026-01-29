@@ -24,6 +24,8 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoUniverseTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
@@ -74,7 +76,7 @@ public class AwsClientUserAgent implements GoIntegration {
         );
     }
 
-    private GoWriter.Writable addMiddleware(String serviceId) {
+    private Writable addMiddleware(String serviceId) {
         return goTemplate("""
                 func addClientUserAgent(stack $middlewareStack:P, options Options) error {
                     ua, err := getOrAddRequestUserAgent(stack)

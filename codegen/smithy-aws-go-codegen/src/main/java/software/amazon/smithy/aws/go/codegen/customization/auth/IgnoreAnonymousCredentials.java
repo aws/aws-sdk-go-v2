@@ -21,6 +21,8 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
@@ -67,7 +69,7 @@ public class IgnoreAnonymousCredentials implements GoIntegration {
         }
     }
 
-    private GoWriter.Writable generateResolver() {
+    private Writable generateResolver() {
         return goTemplate("""
                 func ignoreAnonymousAuth(options *Options) {
                     if $T(options.Credentials, ($P)(nil)) {

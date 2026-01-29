@@ -21,6 +21,8 @@ import software.amazon.smithy.aws.go.codegen.AwsEventStreamUtils;
 import software.amazon.smithy.aws.go.codegen.AwsFnProvider;
 import software.amazon.smithy.aws.go.codegen.AwsProtocolUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.go.codegen.protocol.rpc2.cbor.Rpc2CborProtocolGenerator;
 import software.amazon.smithy.model.knowledge.TopDownIndex;
@@ -56,9 +58,9 @@ public final class AwsRpc2CborProtocolGenerator extends Rpc2CborProtocolGenerato
         var model = ctx.getModel();
         var streamSerializers = TopDownIndex.of(model).getContainedOperations(ctx.getService()).stream()
                 .filter(it -> hasEventStream(model, model.expectShape(it.getOutputShape())))
-                .map(it -> (GoWriter.Writable) new CborEventStreamSerializer(ctx, it))
+                .map(it -> (Writable) new CborEventStreamSerializer(ctx, it))
                 .toList();
-        ctx.getWriter().get().write(GoWriter.ChainWritable.of(streamSerializers).compose());
+        ctx.getWriter().get().write(ChainWritable.of(streamSerializers).compose());
     }
 
     @Override
@@ -68,8 +70,8 @@ public final class AwsRpc2CborProtocolGenerator extends Rpc2CborProtocolGenerato
         var model = ctx.getModel();
         var streamDeserializers = TopDownIndex.of(model).getContainedOperations(ctx.getService()).stream()
                 .filter(it -> hasEventStream(model, model.expectShape(it.getOutputShape())))
-                .map(it -> (GoWriter.Writable) new CborEventStreamDeserializer(ctx, it))
+                .map(it -> (Writable) new CborEventStreamDeserializer(ctx, it))
                 .toList();
-        ctx.getWriter().get().write(GoWriter.ChainWritable.of(streamDeserializers).compose());
+        ctx.getWriter().get().write(ChainWritable.of(streamDeserializers).compose());
     }
 }

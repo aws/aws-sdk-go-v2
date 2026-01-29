@@ -23,6 +23,8 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
@@ -91,7 +93,7 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
 
     public static class AwsSigV4A extends SigV4ADefinition {
         @Override
-        public GoWriter.Writable generateDefaultAuthScheme() {
+        public Writable generateDefaultAuthScheme() {
             return goTemplate("""
                     $T($S, &$T{
                         Signer: options.httpSignerV4a,
@@ -104,19 +106,19 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
         }
 
         @Override
-        public GoWriter.Writable generateOptionsIdentityResolver() {
+        public Writable generateOptionsIdentityResolver() {
             return goTemplate("getSigV4AIdentityResolver(o)");
         }
     }
 
-    private GoWriter.Writable generateAdditionalSource() {
-        return GoWriter.ChainWritable.of(
+    private Writable generateAdditionalSource() {
+        return ChainWritable.of(
                 generateGetIdentityResolver(),
                 generateHelpers()
         ).compose();
     }
 
-    private GoWriter.Writable generateGetIdentityResolver() {
+    private Writable generateGetIdentityResolver() {
         return goTemplate("""
                 func getSigV4AIdentityResolver(o Options) $T {
                     if o.Credentials != nil {
@@ -134,7 +136,7 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
                 SdkGoTypes.Internal.V4A.SymmetricCredentialAdaptor);
     }
 
-    private GoWriter.Writable generateHelpers() {
+    private Writable generateHelpers() {
         return goTemplate("""
                 // WithSigV4ASigningRegions applies an override to the authentication workflow to
                 // use the given signing region set for SigV4A-authenticated operations.
