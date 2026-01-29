@@ -844,10 +844,6 @@ func (u *uploader) init() error {
 
 // initSize checks user configured partsize and up-size it if calculated part count exceeds max value
 func (u *uploader) initSize() error {
-	if u.options.PartSizeBytes < minPartSizeBytes {
-		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
-	}
-
 	u.objectSize = -1
 	switch r := u.in.Body.(type) {
 	case io.Seeker:

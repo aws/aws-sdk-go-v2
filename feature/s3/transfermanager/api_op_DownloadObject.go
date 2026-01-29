@@ -665,10 +665,6 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 }
 
 func (d *downloader) init() error {
-	if d.options.PartSizeBytes < minPartSizeBytes {
-		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
-	}
-
 	if d.options.PartBodyMaxRetries < 0 {
 		return fmt.Errorf("part body retry must be non-negative")
 	}

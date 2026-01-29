@@ -395,7 +395,7 @@ func TestGetAsyncWithFailure(t *testing.T) {
 							return
 						}
 					}
-					body := bytes.NewReader(make([]byte, minPartSizeBytes))
+					body := bytes.NewReader(make([]byte, defaultPartSizeBytes))
 					out = &s3.GetObjectOutput{
 						Body:          ioutil.NopCloser(body),
 						ContentLength: aws.Int64(int64(body.Len())),

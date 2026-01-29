@@ -606,10 +606,6 @@ type getter struct {
 }
 
 func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
-	if err := g.init(); err != nil {
-		return nil, fmt.Errorf("unable to initialize download: %w", err)
-	}
-
 	clientOptions := []func(*s3.Options){
 		func(o *s3.Options) {
 			o.APIOptions = append(o.APIOptions,
@@ -689,14 +685,6 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		output.ChecksumSHA256 = nil
 	}
 	return output, nil
-}
-
-func (g *getter) init() error {
-	if g.options.PartSizeBytes < minPartSizeBytes {
-		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
-	}
-
-	return nil
 }
 
 func (g *getter) singleDownload(ctx context.Context, clientOptions ...func(*s3.Options)) (*GetObjectOutput, error) {

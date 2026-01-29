@@ -64,7 +64,7 @@ func resolveConcurrency(o *Options) {
 
 func resolvePartSizeBytes(o *Options) {
 	if o.PartSizeBytes == 0 {
-		o.PartSizeBytes = minPartSizeBytes
+		o.PartSizeBytes = defaultPartSizeBytes
 	}
 }
 
