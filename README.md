@@ -150,9 +150,7 @@ API operation require parameters.
 documentation to learn how to interface with AWS services. These guides are
 great for getting started with a service, or when looking for more
 information about a service. While this document is not required for coding,
-services may supply helpful samples to look out for.
-
-[Forum](https://forums.aws.amazon.com/forum.jspa?forumID=293) - Ask questions, get help, and give feedback
+services may supply helpful samples to look out for
 
 [Issues] - Report issues, submit pull requests, and get involved
   (see [Apache 2.0 License][license])
