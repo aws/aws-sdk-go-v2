@@ -1,0 +1,8 @@
+{
+    "id": "db60e962-560e-43f0-9a11-f4be118a1cab",
+    "type": "feature",
+    "description": "Marked service APIs as deprecated. This service has reached end-of-life. https://aws.amazon.com/blogs/media/support-for-amazon-elastic-transcoder-ending-soon/",
+    "modules": [
+        "service/elastictranscoder"
+    ]
+}
