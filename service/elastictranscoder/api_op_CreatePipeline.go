@@ -12,6 +12,8 @@ import (
 )
 
 // The CreatePipeline operation creates a pipeline with settings that you specify.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput, optFns ...func(*Options)) (*CreatePipelineOutput, error) {
 	if params == nil {
 		params = &CreatePipelineInput{}
@@ -34,6 +36,8 @@ type CreatePipelineInput struct {
 	// transcode.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputBucket *string
 
 	// The name of the pipeline. We recommend that the name be unique within the AWS
@@ -42,12 +46,16 @@ type CreatePipelineInput struct {
 	// Constraints: Maximum 40 characters.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic
 	// Transcoder to use to create the pipeline.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Role *string
 
 	// The AWS Key Management Service (AWS KMS) key that you want to use with this
@@ -58,6 +66,8 @@ type CreatePipelineInput struct {
 	// created for you automatically. You need to provide an AWS-KMS key only if you
 	// want to use a non-default AWS-KMS key, or if you are using an Encryption:Mode
 	// of aes-cbc-pkcs7 , aes-ctr , or aes-gcm .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AwsKmsKeyArn *string
 
 	// The optional ContentConfig object specifies information about the Amazon S3
@@ -124,6 +134,8 @@ type CreatePipelineInput struct {
 	//   - StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy ,
 	//   that you want Elastic Transcoder to assign to the video files and playlists that
 	//   it stores in your Amazon S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentConfig *types.PipelineOutputConfig
 
 	// The Amazon Simple Notification Service (Amazon SNS) topic that you want to
@@ -150,6 +162,8 @@ type CreatePipelineInput struct {
 	//   - Error: The topic ARN for the Amazon SNS topic that you want to notify when
 	//   Elastic Transcoder encounters an error condition while processing a job in this
 	//   pipeline. This is the ARN that Amazon SNS returned when you created the topic.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Notifications *types.Notifications
 
 	// The Amazon S3 bucket in which you want Elastic Transcoder to save the
@@ -180,6 +194,8 @@ type CreatePipelineInput struct {
 	// in another bucket, specify which users can access the transcoded files or the
 	// permissions the users have, or change the Amazon S3 storage class, omit
 	// OutputBucket and specify values for ContentConfig and ThumbnailConfig instead.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputBucket *string
 
 	// The ThumbnailConfig object specifies several values, including the Amazon S3
@@ -239,6 +255,8 @@ type CreatePipelineInput struct {
 	//   - StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy ,
 	//   that you want Elastic Transcoder to assign to the thumbnails that it stores in
 	//   your Amazon S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThumbnailConfig *types.PipelineOutputConfig
 
 	noSmithyDocumentSerde
@@ -250,6 +268,8 @@ type CreatePipelineOutput struct {
 
 	// A section of the response body that provides information about the pipeline
 	// that is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pipeline *types.Pipeline
 
 	// Elastic Transcoder returns a warning if the resources used by your pipeline are
@@ -258,6 +278,8 @@ type CreatePipelineOutput struct {
 	// Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS
 	// notification topics, and AWS KMS key, reduces processing time and prevents
 	// cross-regional charges.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Warnings []types.Warning
 
 	// Metadata pertaining to the operation's result.

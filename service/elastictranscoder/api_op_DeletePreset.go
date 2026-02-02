@@ -13,6 +13,8 @@ import (
 // The DeletePreset operation removes a preset that you've added in an AWS region.
 //
 // You can't delete the default presets that are included with Elastic Transcoder.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeletePreset(ctx context.Context, params *DeletePresetInput, optFns ...func(*Options)) (*DeletePresetOutput, error) {
 	if params == nil {
 		params = &DeletePresetInput{}
@@ -34,6 +36,8 @@ type DeletePresetInput struct {
 	// The identifier of the preset for which you want to get detailed information.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	noSmithyDocumentSerde

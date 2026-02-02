@@ -13,6 +13,8 @@ import (
 
 // The ListPipelines operation gets a list of the pipelines associated with the
 // current AWS account.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListPipelines(ctx context.Context, params *ListPipelinesInput, optFns ...func(*Options)) (*ListPipelinesOutput, error) {
 	if params == nil {
 		params = &ListPipelinesInput{}
@@ -34,10 +36,14 @@ type ListPipelinesInput struct {
 	// To list pipelines in chronological order by the date and time that they were
 	// created, enter true . To list pipelines in reverse chronological order, enter
 	// false .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ascending *string
 
 	// When Elastic Transcoder returns more than one page of results, use pageToken in
 	// subsequent GET requests to get each successive page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -49,9 +55,13 @@ type ListPipelinesOutput struct {
 	// A value that you use to access the second and subsequent pages of results, if
 	// any. When the pipelines fit on one page or when you've reached the last page of
 	// results, the value of NextPageToken is null .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextPageToken *string
 
 	// An array of Pipeline objects.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pipelines []types.Pipeline
 
 	// Metadata pertaining to the operation's result.

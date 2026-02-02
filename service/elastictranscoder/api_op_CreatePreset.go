@@ -27,6 +27,8 @@ import (
 // information, see the International Telecommunication Union publication
 // Recommendation ITU-T H.264: Advanced video coding for generic audiovisual
 // services.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreatePreset(ctx context.Context, params *CreatePresetInput, optFns ...func(*Options)) (*CreatePresetOutput, error) {
 	if params == nil {
 		params = &CreatePresetInput{}
@@ -49,24 +51,36 @@ type CreatePresetInput struct {
 	// gif , mp3 , mp4 , mpg , mxf , oga , ogg , ts , and webm .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Container *string
 
 	// The name of the preset. We recommend that the name be unique within the AWS
 	// account, but uniqueness is not enforced.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A section of the request body that specifies the audio parameters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Audio *types.AudioParameters
 
 	// A description of the preset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A section of the request body that specifies the thumbnail parameters, if any.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Thumbnails *types.Thumbnails
 
 	// A section of the request body that specifies the video parameters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Video *types.VideoParameters
 
 	noSmithyDocumentSerde
@@ -77,12 +91,16 @@ type CreatePresetOutput struct {
 
 	// A section of the response body that provides information about the preset that
 	// is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Preset *types.Preset
 
 	// If the preset settings don't comply with the standards for the video codec but
 	// Elastic Transcoder created the preset, this message explains the reason the
 	// preset settings don't meet the standard. Elastic Transcoder created the preset
 	// because the settings might produce acceptable output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Warning *string
 
 	// Metadata pertaining to the operation's result.

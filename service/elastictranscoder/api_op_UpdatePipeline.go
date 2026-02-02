@@ -17,6 +17,8 @@ import (
 // that you have already submitted and that Elastic Transcoder has not started to
 // process are affected in addition to jobs that you submit after you change
 // settings.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdatePipeline(ctx context.Context, params *UpdatePipelineInput, optFns ...func(*Options)) (*UpdatePipelineOutput, error) {
 	if params == nil {
 		params = &UpdatePipelineInput{}
@@ -38,6 +40,8 @@ type UpdatePipelineInput struct {
 	// The ID of the pipeline that you want to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The AWS Key Management Service (AWS KMS) key that you want to use with this
@@ -48,6 +52,8 @@ type UpdatePipelineInput struct {
 	// created for you automatically. You need to provide an AWS-KMS key only if you
 	// want to use a non-default AWS-KMS key, or if you are using an Encryption:Mode
 	// of aes-cbc-pkcs7 , aes-ctr , or aes-gcm .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AwsKmsKeyArn *string
 
 	// The optional ContentConfig object specifies information about the Amazon S3
@@ -114,16 +120,22 @@ type UpdatePipelineInput struct {
 	//   - StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy ,
 	//   that you want Elastic Transcoder to assign to the video files and playlists that
 	//   it stores in your Amazon S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentConfig *types.PipelineOutputConfig
 
 	// The Amazon S3 bucket in which you saved the media files that you want to
 	// transcode and the graphics that you want to use as watermarks.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputBucket *string
 
 	// The name of the pipeline. We recommend that the name be unique within the AWS
 	// account, but uniqueness is not enforced.
 	//
 	// Constraints: Maximum 40 characters
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic
@@ -148,10 +160,14 @@ type UpdatePipelineInput struct {
 	//   - Error: The topic ARN for the Amazon SNS topic that you want to notify when
 	//   Elastic Transcoder encounters an error condition. This is the ARN that Amazon
 	//   SNS returned when you created the topic.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Notifications *types.Notifications
 
 	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic
 	// Transcoder to use to transcode jobs for this pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Role *string
 
 	// The ThumbnailConfig object specifies several values, including the Amazon S3
@@ -211,6 +227,8 @@ type UpdatePipelineInput struct {
 	//   - StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy ,
 	//   that you want Elastic Transcoder to assign to the thumbnails that it stores in
 	//   your Amazon S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThumbnailConfig *types.PipelineOutputConfig
 
 	noSmithyDocumentSerde
@@ -221,6 +239,8 @@ type UpdatePipelineInput struct {
 type UpdatePipelineOutput struct {
 
 	// The pipeline updated by this UpdatePipelineResponse call.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pipeline *types.Pipeline
 
 	// Elastic Transcoder returns a warning if the resources used by your pipeline are
@@ -229,6 +249,8 @@ type UpdatePipelineOutput struct {
 	// Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS
 	// notification topics, and AWS KMS key, reduces processing time and prevents
 	// cross-regional charges.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Warnings []types.Warning
 
 	// Metadata pertaining to the operation's result.

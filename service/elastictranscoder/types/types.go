@@ -17,10 +17,14 @@ import (
 type Artwork struct {
 
 	// The format of album art, if any. Valid formats are .jpg and .png .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlbumArtFormat *string
 
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your artwork.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encryption *Encryption
 
 	// The name of the file to be used as album art. To determine which Amazon S3
@@ -31,22 +35,30 @@ type Artwork struct {
 	// If the file name includes a prefix, for example, cooking/pie.jpg , include the
 	// prefix in the key. If the file isn't in the specified bucket, Elastic Transcoder
 	// returns an error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputKey *string
 
 	// The maximum height of the output album art in pixels. If you specify auto ,
 	// Elastic Transcoder uses 600 as the default value. If you specify a numeric
 	// value, enter an even integer between 32 and 3072, inclusive.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxHeight *string
 
 	// The maximum width of the output album art in pixels. If you specify auto ,
 	// Elastic Transcoder uses 600 as the default value. If you specify a numeric
 	// value, enter an even integer between 32 and 4096, inclusive.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxWidth *string
 
 	// When you set PaddingPolicy to Pad , Elastic Transcoder may add white bars to the
 	// top and bottom and/or left and right sides of the output album art to make the
 	// total size of the output art match the values that you specified for MaxWidth
 	// and MaxHeight .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PaddingPolicy *string
 
 	// Specify one of the following values to control scaling of the output album art:
@@ -78,6 +90,8 @@ type Artwork struct {
 	//   dimensions match the values that you specified for at least one of MaxWidth
 	//   and MaxHeight without dropping below either value. If you specify this option,
 	//   Elastic Transcoder does not scale the art up.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SizingPolicy *string
 
 	noSmithyDocumentSerde
@@ -96,6 +110,8 @@ type AudioCodecOptions struct {
 	// Valid values are 16 and 24 .
 	//
 	// The most common bit depth is 24 .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BitDepth *string
 
 	// You can only choose an audio bit order when you specify pcm for the value of
@@ -104,6 +120,8 @@ type AudioCodecOptions struct {
 	// The order the bits of a PCM sample are stored in.
 	//
 	// The supported value is LittleEndian .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BitOrder *string
 
 	// You can only choose an audio profile when you specify AAC for the value of
@@ -128,6 +146,8 @@ type AudioCodecOptions struct {
 	// If you created any presets before AAC profiles were added, Elastic Transcoder
 	// automatically updated your presets to use AAC-LC. You can change the value as
 	// required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Profile *string
 
 	// You can only choose whether an audio sample is signed when you specify pcm for
@@ -137,6 +157,8 @@ type AudioCodecOptions struct {
 	// (signed) or only positive numbers (unsigned).
 	//
 	// The supported value is Signed .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Signed *string
 
 	noSmithyDocumentSerde
@@ -247,10 +269,14 @@ type AudioParameters struct {
 	//
 	//   - auto channels with one track with multiple channels: Up to eight tracks
 	//   with one channel each, plus MOS tracks until there are eight tracks in all
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AudioPackingMode *string
 
 	// The bit rate of the audio stream in the output file, in kilobits/second. Enter
 	// an integer between 64 and 320, inclusive.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BitRate *string
 
 	// The number of audio channels in the output file. The following values are valid:
@@ -278,10 +304,14 @@ type AudioParameters struct {
 	//
 	// For more information about how Elastic Transcoder organizes channels and
 	// tracks, see Audio:AudioPackingMode .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Channels *string
 
 	// The audio codec for the output file. Valid values include aac , flac , mp2 , mp3
 	// , pcm , and vorbis .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Codec *string
 
 	// If you specified AAC for Audio:Codec , this is the AAC compression profile to
@@ -291,6 +321,8 @@ type AudioParameters struct {
 	//
 	// If you specify auto , Elastic Transcoder chooses a profile based on the bit rate
 	// of the output file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CodecOptions *AudioCodecOptions
 
 	// The sample rate of the audio stream in the output file, in Hertz. Valid values
@@ -299,6 +331,8 @@ type AudioParameters struct {
 	// auto , 22050 , 32000 , 44100 , 48000 , 96000
 	//
 	// If you specify auto , Elastic Transcoder automatically detects the sample rate.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SampleRate *string
 
 	noSmithyDocumentSerde
@@ -310,6 +344,8 @@ type CaptionFormat struct {
 
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your caption formats.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encryption *Encryption
 
 	// The format you specify determines whether Elastic Transcoder generates an
@@ -338,6 +374,8 @@ type CaptionFormat struct {
 	//   - Non-FMP4 outputs: All sidecar types
 	//
 	// fmp4 captions have an extension of .ismt
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Format *string
 
 	// The prefix for caption filenames, in the form description- {language} , where:
@@ -355,6 +393,8 @@ type CaptionFormat struct {
 	// For example, suppose you're transcoding into srt format. When you enter
 	// "Sydney-{language}-sunrise", and the language of the captions is English (en),
 	// the name of the first caption file is be Sydney-en-sunrise00000.srt.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pattern *string
 
 	noSmithyDocumentSerde
@@ -365,6 +405,8 @@ type Captions struct {
 
 	// The array of file formats for the output captions. If you leave this value
 	// blank, Elastic Transcoder returns an error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CaptionFormats []CaptionFormat
 
 	// Source files for the input sidecar captions used during the transcoding
@@ -405,15 +447,21 @@ type CaptionSource struct {
 	// The encryption settings, if any, that Elastic Transcoder needs to decyrpt your
 	// caption sources, or that you want Elastic Transcoder to apply to your caption
 	// sources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encryption *Encryption
 
 	// The name of the sidecar caption file that you want Elastic Transcoder to
 	// include in the output file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The label of the caption shown in the player when choosing a language. We
 	// recommend that you put the caption language name here, in the language of the
 	// captions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Label *string
 
 	// A string that specifies the language of the caption. If you specified multiple
@@ -426,6 +474,8 @@ type CaptionSource struct {
 	//
 	// For more information on ISO language codes and language names, see the List of
 	// ISO 639-1 codes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Language *string
 
 	// For clip generation or captions that do not start at the same time as the
@@ -433,6 +483,8 @@ type CaptionSource struct {
 	// video to encode before including captions.
 	//
 	// Specify the TimeOffset in the form [+-]SS.sss or [+-]HH:mm:SS.ss.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeOffset *string
 
 	noSmithyDocumentSerde
@@ -443,6 +495,8 @@ type CaptionSource struct {
 type Clip struct {
 
 	// Settings that determine when a clip begins and how long it lasts.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeSpan *TimeSpan
 
 	noSmithyDocumentSerde
@@ -455,6 +509,8 @@ type CreateJobOutput struct {
 	// file during transcoding. You can specify up to twenty album artworks for each
 	// output. Settings for each artwork must be defined in the job for the current
 	// output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlbumArt *JobAlbumArt
 
 	// You can configure Elastic Transcoder to transcode captions, or subtitles, from
@@ -499,6 +555,8 @@ type CreateJobOutput struct {
 	//
 	// For more information on sidecar files, see the Extensible Metadata Platform and
 	// Sidecar file Wikipedia pages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Captions *Captions
 
 	// You can create an output file that contains an excerpt from the input file.
@@ -514,22 +572,30 @@ type CreateJobOutput struct {
 	// for a transcoding job. This includes the output file and any watermarks,
 	// thumbnails, album art, or captions that you want to use. You must specify
 	// encryption settings for each file individually.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encryption *Encryption
 
 	//  The name to assign to the transcoded file. Elastic Transcoder saves the file
 	// in the Amazon S3 bucket specified by the OutputBucket object in the pipeline
 	// that is specified by the pipeline ID. If a file with the specified name already
 	// exists in the output bucket, the job fails.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	//  The Id of the preset to use for this job. The preset determines the audio,
 	// video, and thumbnail settings that Elastic Transcoder uses for transcoding.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PresetId *string
 
 	//  The number of degrees clockwise by which you want Elastic Transcoder to rotate
 	// the output relative to the input. Enter one of the following values: auto , 0 ,
 	// 90 , 180 , 270 . The value auto generally works only if the file that you're
 	// transcoding contains rotation metadata.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Rotate *string
 
 	// (Outputs in Fragmented MP4 or MPEG-TS format only.
@@ -549,10 +615,14 @@ type CreateJobOutput struct {
 	// Elastic Transcoder creates an output-specific playlist for each output HLS
 	// output that you specify in OutputKeys. To add an output to the master playlist
 	// for this job, include it in the OutputKeys of the associated playlist.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SegmentDuration *string
 
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your thumbnail.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThumbnailEncryption *Encryption
 
 	// Whether you want Elastic Transcoder to create thumbnails for your videos and,
@@ -585,12 +655,16 @@ type CreateJobOutput struct {
 	// the format (.jpg or .png) that appears in the preset that you specified in the
 	// PresetID value of CreateJobOutput . Elastic Transcoder also appends the
 	// applicable file name extension.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThumbnailPattern *string
 
 	// Information about the watermarks that you want Elastic Transcoder to add to the
 	// video during transcoding. You can specify up to four watermarks for each output.
 	// Settings for each watermark must be defined in the preset for the current
 	// output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Watermarks []JobWatermark
 
 	noSmithyDocumentSerde
@@ -601,10 +675,14 @@ type CreateJobPlaylist struct {
 
 	// The format of the output playlist. Valid formats include HLSv3 , HLSv4 , and
 	// Smooth .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Format *string
 
 	// The HLS content protection settings, if any, that you want Elastic Transcoder
 	// to apply to the output files associated with this playlist.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HlsContentProtection *HlsContentProtection
 
 	// The name that you want Elastic Transcoder to assign to the master playlist, for
@@ -617,6 +695,8 @@ type CreateJobPlaylist struct {
 	// file name ( .m3u8 for HLSv3 and HLSv4 playlists, and .ism and .ismc for Smooth
 	// playlists). If you include a file extension in Name , the file name will have
 	// two extensions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// For each output in this job that you want to include in a master playlist, the
@@ -656,10 +736,14 @@ type CreateJobPlaylist struct {
 	// the playlist. For Smooth playlists, the Audio:Profile , Video:Profile , and
 	// Video:FrameRate to Video:KeyframesMaxDist ratio must be the same for all
 	// outputs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputKeys []string
 
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
 	// output files associated with this playlist.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlayReadyDrm *PlayReadyDrm
 
 	noSmithyDocumentSerde
@@ -670,18 +754,28 @@ type CreateJobPlaylist struct {
 type DetectedProperties struct {
 
 	// The detected duration of the input file, in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DurationMillis *int64
 
 	// The detected file size of the input file, in bytes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileSize *int64
 
 	// The detected frame rate of the input file, in frames per second.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FrameRate *string
 
 	// The detected height of the input file, in pixels.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Height *int32
 
 	// The detected width of the input file, in pixels.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Width *int32
 
 	noSmithyDocumentSerde
@@ -699,6 +793,8 @@ type Encryption struct {
 	// Elastic Transcoder to use to encrypt your output files. The initialization
 	// vector must be base64-encoded, and it must be exactly 16 bytes long before being
 	// base64-encoded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitializationVector *string
 
 	// The data encryption key that you want Elastic Transcoder to use to encrypt your
@@ -709,6 +805,8 @@ type Encryption struct {
 	// 128 , 192 , or 256 .
 	//
 	// The key must also be encrypted by using the Amazon Key Management Service.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The MD5 digest of the key that you used to encrypt your input file, or that you
@@ -716,6 +814,8 @@ type Encryption struct {
 	// uses the key digest as a checksum to make sure your key was not corrupted in
 	// transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes
 	// long before being base64-encoded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyMd5 *string
 
 	// The specific server-side encryption mode that you want Elastic Transcoder to
@@ -750,6 +850,8 @@ type Encryption struct {
 	// For the AES modes, your private encryption keys and your unencrypted data are
 	// never stored by AWS; therefore, it is important that you safely manage your
 	// encryption keys. If you lose them, you won't be able to unencrypt your data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Mode *string
 
 	noSmithyDocumentSerde
@@ -766,6 +868,8 @@ type HlsContentProtection struct {
 	// encryption operation, that you want Elastic Transcoder to use to encrypt your
 	// output files. The initialization vector must be base64-encoded, and it must be
 	// exactly 16 bytes before being base64-encoded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitializationVector *string
 
 	// If you want Elastic Transcoder to generate a key for you, leave this field
@@ -776,6 +880,8 @@ type HlsContentProtection struct {
 	// lengths before being base64-encoded:
 	//
 	// 128 , 192 , or 256 .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// If Elastic Transcoder is generating your key for you, you must leave this field
@@ -785,23 +891,31 @@ type HlsContentProtection struct {
 	// your output file, and that you want Elastic Transcoder to use as a checksum to
 	// make sure your key was not corrupted in transit. The key MD5 must be
 	// base64-encoded, and it must be exactly 16 bytes before being base64- encoded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyMd5 *string
 
 	// Specify whether you want Elastic Transcoder to write your HLS license key to an
 	// Amazon S3 bucket. If you choose WithVariantPlaylists , LicenseAcquisitionUrl
 	// must be left blank and Elastic Transcoder writes your data key into the same
 	// bucket as the associated playlist.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyStoragePolicy *string
 
 	// The location of the license key required to decrypt your HLS playlist. The URL
 	// must be an absolute path, and is referenced in the URI attribute of the
 	// EXT-X-KEY metadata tag in the playlist file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LicenseAcquisitionUrl *string
 
 	// The content protection method for your output. The only valid value is: aes-128 .
 	//
 	// This value is written into the method attribute of the EXT-X-KEY metadata tag
 	// in the output playlist.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Method *string
 
 	noSmithyDocumentSerde
@@ -812,6 +926,8 @@ type InputCaptions struct {
 
 	// Source files for the input sidecar captions used during the transcoding
 	// process. To omit all sidecar captions, leave CaptionSources blank.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CaptionSources []CaptionSource
 
 	// A policy that determines how Elastic Transcoder handles the existence of
@@ -832,6 +948,8 @@ type InputCaptions struct {
 	//   specify in CaptionSources .
 	//
 	// MergePolicy cannot be null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MergePolicy *string
 
 	noSmithyDocumentSerde
@@ -842,19 +960,27 @@ type InputCaptions struct {
 type Job struct {
 
 	// The Amazon Resource Name (ARN) for the job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The identifier that Elastic Transcoder assigned to the job. You use this value
 	// to get settings for the job or to delete the job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// A section of the request or response body that provides information about the
 	// file that is being transcoded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Input *JobInput
 
 	// Information about the files that you're transcoding. If you specified multiple
 	// files for this job, Elastic Transcoder stitches the files together to make one
 	// output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Inputs []JobInput
 
 	// If you specified one output for a job, information about that output. If you
@@ -866,12 +992,16 @@ type Job struct {
 	//
 	// A section of the request or response body that provides information about the
 	// transcoded (target) file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Output *JobOutput
 
 	// The value, if any, that you want Elastic Transcoder to prepend to the names of
 	// all files that this job creates, including output files, thumbnails, and
 	// playlists. We recommend that you add a / or some other delimiter to the end of
 	// the OutputKeyPrefix .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputKeyPrefix *string
 
 	// Information about the output files. We recommend that you use the Outputs
@@ -881,12 +1011,16 @@ type Job struct {
 	//
 	// If you specify more than one output for a job, Elastic Transcoder creates the
 	// files for each output in the order in which you specify them in the job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Outputs []JobOutput
 
 	//  The Id of the pipeline that you want Elastic Transcoder to use for
 	// transcoding. The pipeline determines several settings, including the Amazon S3
 	// bucket from which Elastic Transcoder gets the files to transcode and the bucket
 	// into which Elastic Transcoder puts the transcoded files.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineId *string
 
 	// Outputs in Fragmented MP4 or MPEG-TS format only.
@@ -896,13 +1030,19 @@ type Job struct {
 	// master playlists that you want Elastic Transcoder to create.
 	//
 	// The maximum number of master playlists in a job is 30.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Playlists []Playlist
 
 	//  The status of the job: Submitted , Progressing , Complete , Canceled , or Error
 	// .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	// Details about the timing of a job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timing *Timing
 
 	// User-defined metadata that you want to associate with an Elastic Transcoder
@@ -919,6 +1059,8 @@ type Job struct {
 	//   - Space
 	//
 	//   - The following symbols: _.:/=+-%@
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserMetadata map[string]string
 
 	noSmithyDocumentSerde
@@ -929,6 +1071,8 @@ type JobAlbumArt struct {
 
 	// The file to be used as album art. There can be multiple artworks associated
 	// with an audio file, to a maximum of 20. Valid formats are .jpg and .png
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Artwork []Artwork
 
 	// A policy that determines how Elastic Transcoder handles the existence of
@@ -944,6 +1088,8 @@ type JobAlbumArt struct {
 	//   - Fallback: If the original input file contains artwork, Elastic Transcoder
 	//   uses that artwork for the output. If the original input does not contain
 	//   artwork, Elastic Transcoder uses the specified album art file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MergePolicy *string
 
 	noSmithyDocumentSerde
@@ -961,6 +1107,8 @@ type JobInput struct {
 	//
 	// If you specify a value other than auto , Elastic Transcoder disables automatic
 	// detection of the aspect ratio.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AspectRatio *string
 
 	// The container type for the input file. If you want Elastic Transcoder to
@@ -970,14 +1118,20 @@ type JobInput struct {
 	//
 	// 3gp , aac , asf , avi , divx , flv , m4a , mkv , mov , mp3 , mp4 , mpeg ,
 	// mpeg-ps , mpeg-ts , mxf , ogg , vob , wav , webm
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Container *string
 
 	// The detected properties of the input file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectedProperties *DetectedProperties
 
 	// The encryption settings, if any, that are used for decrypting your input files.
 	// If your input file is encrypted, you must specify the mode that Elastic
 	// Transcoder uses to decrypt your file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encryption *Encryption
 
 	// The frame rate of the input file. If you want Elastic Transcoder to
@@ -989,6 +1143,8 @@ type JobInput struct {
 	//
 	// If you specify a value other than auto , Elastic Transcoder disables automatic
 	// detection of the frame rate.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FrameRate *string
 
 	// You can configure Elastic Transcoder to transcode captions, or subtitles, from
@@ -1033,6 +1189,8 @@ type JobInput struct {
 	//
 	// For more information on sidecar files, see the Extensible Metadata Platform and
 	// Sidecar file Wikipedia pages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputCaptions *InputCaptions
 
 	// Whether the input file is interlaced. If you want Elastic Transcoder to
@@ -1044,6 +1202,8 @@ type JobInput struct {
 	//
 	// If you specify a value other than auto , Elastic Transcoder disables automatic
 	// detection of interlacing.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Interlaced *string
 
 	//  The name of the file to transcode. Elsewhere in the body of the JSON block is
@@ -1054,13 +1214,19 @@ type JobInput struct {
 	// If the file name includes a prefix, such as cooking/lasagna.mpg , include the
 	// prefix in the key. If the file isn't in the specified bucket, Elastic Transcoder
 	// returns an error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// This value must be auto , which causes Elastic Transcoder to automatically
 	// detect the resolution of the input file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resolution *string
 
 	// Settings for clipping an input. Each input can have different clip settings.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeSpan *TimeSpan
 
 	noSmithyDocumentSerde
@@ -1075,12 +1241,16 @@ type JobInput struct {
 type JobOutput struct {
 
 	// The album art to be associated with the output file, if any.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlbumArt *JobAlbumArt
 
 	// If Elastic Transcoder used a preset with a ColorSpaceConversionMode to
 	// transcode the output file, the AppliedColorSpaceConversion parameter shows the
 	// conversion used. If no ColorSpaceConversionMode was defined in the preset, this
 	// parameter is not be included in the job response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppliedColorSpaceConversion *string
 
 	// You can configure Elastic Transcoder to transcode captions, or subtitles, from
@@ -1125,6 +1295,8 @@ type JobOutput struct {
 	//
 	// For more information on sidecar files, see the Extensible Metadata Platform and
 	// Sidecar file Wikipedia pages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Captions *Captions
 
 	// You can create an output file that contains an excerpt from the input file.
@@ -1137,33 +1309,49 @@ type JobOutput struct {
 	Composition []Clip
 
 	// Duration of the output file, in seconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Duration *int64
 
 	// Duration of the output file, in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DurationMillis *int64
 
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your output files. If you choose to use encryption, you must specify a mode to
 	// use. If you choose not to use encryption, Elastic Transcoder writes an
 	// unencrypted file to your Amazon S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encryption *Encryption
 
 	// File size of the output file, in bytes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileSize *int64
 
 	// Frame rate of the output file, in frames per second.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FrameRate *string
 
 	// Height of the output file, in pixels.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Height *int32
 
 	// A sequential counter, starting with 1, that identifies an output among the
 	// outputs from the current job. In the Output syntax, this value is always 1.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	//  The name to assign to the transcoded file. Elastic Transcoder saves the file
 	// in the Amazon S3 bucket specified by the OutputBucket object in the pipeline
 	// that is specified by the pipeline ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The value of the Id object for the preset that you want to use for this job.
@@ -1172,6 +1360,8 @@ type JobOutput struct {
 	// preset ID that Elastic Transcoder returned in the response when you created the
 	// preset. You can also use the Elastic Transcoder system presets, which you can
 	// get with ListPresets .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PresetId *string
 
 	// The number of degrees clockwise by which you want Elastic Transcoder to rotate
@@ -1181,6 +1371,8 @@ type JobOutput struct {
 	//
 	// The value auto generally works only if the file that you're transcoding
 	// contains rotation metadata.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Rotate *string
 
 	// (Outputs in Fragmented MP4 or MPEG-TS format only.
@@ -1200,6 +1392,8 @@ type JobOutput struct {
 	// Elastic Transcoder creates an output-specific playlist for each output HLS
 	// output that you specify in OutputKeys. To add an output to the master playlist
 	// for this job, include it in the OutputKeys of the associated playlist.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SegmentDuration *string
 
 	//  The status of one output in a job. If you specified only one output for the
@@ -1224,13 +1418,19 @@ type JobOutput struct {
 	//
 	// The value of Status is one of the following: Submitted , Progressing , Complete
 	// , Canceled , or Error .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	// Information that further explains Status .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusDetail *string
 
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your thumbnail.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThumbnailEncryption *Encryption
 
 	// Whether you want Elastic Transcoder to create thumbnails for your videos and,
@@ -1263,6 +1463,8 @@ type JobOutput struct {
 	// the format (.jpg or .png) that appears in the preset that you specified in the
 	// PresetID value of CreateJobOutput . Elastic Transcoder also appends the
 	// applicable file name extension.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThumbnailPattern *string
 
 	// Information about the watermarks that you want Elastic Transcoder to add to the
@@ -1276,9 +1478,13 @@ type JobOutput struct {
 	// if the settings in a preset cause Elastic Transcoder to place all watermarks in
 	// the same location, the second watermark that you add covers the first one, the
 	// third one covers the second, and the fourth one covers the third.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Watermarks []JobWatermark
 
 	// Specifies the width of the output file in pixels.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Width *int32
 
 	noSmithyDocumentSerde
@@ -1290,6 +1496,8 @@ type JobWatermark struct {
 
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your watermarks.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encryption *Encryption
 
 	//  The name of the .png or .jpg file that you want to use for the watermark. To
@@ -1300,12 +1508,16 @@ type JobWatermark struct {
 	// If the file name includes a prefix, for example, logos/128x64.png, include the
 	// prefix in the key. If the file isn't in the specified bucket, Elastic Transcoder
 	// returns an error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputKey *string
 
 	// The ID of the watermark settings that Elastic Transcoder uses to add watermarks
 	// to the video during transcoding. The settings are in the preset specified by
 	// Preset for the current output. In that preset, the value of Watermarks Id tells
 	// Elastic Transcoder which settings to use.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PresetWatermarkId *string
 
 	noSmithyDocumentSerde
@@ -1320,18 +1532,26 @@ type Notifications struct {
 
 	// The Amazon SNS topic that you want to notify when Elastic Transcoder has
 	// finished processing the job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Completed *string
 
 	// The Amazon SNS topic that you want to notify when Elastic Transcoder encounters
 	// an error condition.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Error *string
 
 	// The Amazon Simple Notification Service (Amazon SNS) topic that you want to
 	// notify when Elastic Transcoder has started to process the job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Progressing *string
 
 	// The Amazon SNS topic that you want to notify when Elastic Transcoder encounters
 	// a warning condition.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Warning *string
 
 	noSmithyDocumentSerde
@@ -1354,12 +1574,16 @@ type Permission struct {
 	//
 	//   - FULL_CONTROL : The grantee has READ, READ_ACP, and WRITE_ACP permissions for
 	//   the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Access []string
 
 	// The AWS user or group that you want to have access to transcoded files and
 	// playlists. To identify the user or group, you can specify the canonical user ID
 	// for an AWS account, an origin access identity for a CloudFront distribution, the
 	// registered email address of an AWS account, or a predefined Amazon S3 group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Grantee *string
 
 	// The type of value that appears in the Grantee object:
@@ -1373,6 +1597,8 @@ type Permission struct {
 	//
 	//   - Group : One of the following predefined Amazon S3 groups: AllUsers ,
 	//   AuthenticatedUsers , or LogDelivery .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GranteeType *string
 
 	noSmithyDocumentSerde
@@ -1382,6 +1608,8 @@ type Permission struct {
 type Pipeline struct {
 
 	// The Amazon Resource Name (ARN) for the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The AWS Key Management Service (AWS KMS) key that you want to use with this
@@ -1392,6 +1620,8 @@ type Pipeline struct {
 	// created for you automatically. You need to provide an AWS-KMS key only if you
 	// want to use a non-default AWS-KMS key, or if you are using an Encryption:Mode
 	// of aes-cbc-pkcs7 , aes-ctr , or aes-gcm .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AwsKmsKeyArn *string
 
 	// Information about the Amazon S3 bucket in which you want Elastic Transcoder to
@@ -1436,21 +1666,29 @@ type Pipeline struct {
 	//   - StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
 	//   that you want Elastic Transcoder to assign to the video files and playlists that
 	//   it stores in your Amazon S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentConfig *PipelineOutputConfig
 
 	// The identifier for the pipeline. You use this value to identify the pipeline in
 	// which you want to perform a variety of operations, such as creating a job or a
 	// preset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The Amazon S3 bucket from which Elastic Transcoder gets media files for
 	// transcoding and the graphics files, if any, that you want to use for watermarks.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputBucket *string
 
 	// The name of the pipeline. We recommend that the name be unique within the AWS
 	// account, but uniqueness is not enforced.
 	//
 	// Constraints: Maximum 40 characters
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The Amazon Simple Notification Service (Amazon SNS) topic that you want to
@@ -1471,15 +1709,21 @@ type Pipeline struct {
 	//
 	//   - Error (optional): The Amazon SNS topic that you want to notify when Elastic
 	//   Transcoder encounters an error condition.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Notifications *Notifications
 
 	// The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded
 	// files, thumbnails, and playlists. Either you specify this value, or you specify
 	// both ContentConfig and ThumbnailConfig .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputBucket *string
 
 	// The IAM Amazon Resource Name (ARN) for the role that Elastic Transcoder uses to
 	// transcode jobs for this pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Role *string
 
 	// The current status of the pipeline:
@@ -1487,6 +1731,8 @@ type Pipeline struct {
 	//   - Active : The pipeline is processing jobs.
 	//
 	//   - Paused : The pipeline is not currently processing jobs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	// Information about the Amazon S3 bucket in which you want Elastic Transcoder to
@@ -1533,6 +1779,8 @@ type Pipeline struct {
 	//   - StorageClass : The Amazon S3 storage class, Standard or ReducedRedundancy ,
 	//   that you want Elastic Transcoder to assign to the thumbnails that it stores in
 	//   your Amazon S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThumbnailConfig *PipelineOutputConfig
 
 	noSmithyDocumentSerde
@@ -1560,6 +1808,8 @@ type PipelineOutputConfig struct {
 	// in another bucket, specify which users can access the transcoded files or the
 	// permissions the users have, or change the Amazon S3 storage class, omit
 	// OutputBucket and specify values for ContentConfig and ThumbnailConfig instead.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// Optional. The Permissions object specifies which users and/or predefined Amazon
@@ -1575,11 +1825,15 @@ type PipelineOutputConfig struct {
 	// If you omit Permissions , Elastic Transcoder grants full control over the
 	// transcoded files and playlists to the owner of the role specified by Role , and
 	// grants no other permissions to any other user or group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Permissions []Permission
 
 	//  The Amazon S3 storage class, Standard or ReducedRedundancy , that you want
 	// Elastic Transcoder to assign to the video files and playlists that it stores in
 	// your Amazon S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StorageClass *string
 
 	noSmithyDocumentSerde
@@ -1595,10 +1849,14 @@ type Playlist struct {
 
 	// The format of the output playlist. Valid formats include HLSv3 , HLSv4 , and
 	// Smooth .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Format *string
 
 	// The HLS content protection settings, if any, that you want Elastic Transcoder
 	// to apply to the output files associated with this playlist.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HlsContentProtection *HlsContentProtection
 
 	// The name that you want Elastic Transcoder to assign to the master playlist, for
@@ -1611,6 +1869,8 @@ type Playlist struct {
 	// file name ( .m3u8 for HLSv3 and HLSv4 playlists, and .ism and .ismc for Smooth
 	// playlists). If you include a file extension in Name , the file name will have
 	// two extensions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// For each output in this job that you want to include in a master playlist, the
@@ -1650,16 +1910,24 @@ type Playlist struct {
 	// the playlist. For Smooth playlists, the Audio:Profile , Video:Profile , and
 	// Video:FrameRate to Video:KeyframesMaxDist ratio must be the same for all
 	// outputs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputKeys []string
 
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
 	// output files associated with this playlist.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlayReadyDrm *PlayReadyDrm
 
 	// The status of the job with which the playlist is associated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	// Information that further explains the status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusDetail *string
 
 	noSmithyDocumentSerde
@@ -1675,6 +1943,8 @@ type PlayReadyDrm struct {
 
 	// The type of DRM, if any, that you want Elastic Transcoder to apply to the
 	// output files associated with this playlist.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Format *string
 
 	// The series of random bits created by a random bit generator, unique for every
@@ -1682,6 +1952,8 @@ type PlayReadyDrm struct {
 	// files. The initialization vector must be base64-encoded, and it must be exactly
 	// 8 bytes long before being base64-encoded. If no initialization vector is
 	// provided, Elastic Transcoder generates one for you.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitializationVector *string
 
 	// The DRM key for your file, provided by your DRM license provider. The key must
@@ -1691,6 +1963,8 @@ type PlayReadyDrm struct {
 	// 128 , 192 , or 256 .
 	//
 	// The key must also be encrypted by using AWS KMS.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The ID for your DRM key, so that your DRM license provider knows which key to
@@ -1700,12 +1974,16 @@ type PlayReadyDrm struct {
 	// to little endian before inserting it into the PlayReady DRM headers. If you are
 	// unsure whether your license server provides your key ID in big or little endian,
 	// check with your DRM provider.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyId *string
 
 	// The MD5 digest of the key used for DRM on your file, and that you want Elastic
 	// Transcoder to use as a checksum to make sure your key was not corrupted in
 	// transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes
 	// before being base64-encoded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyMd5 *string
 
 	// The location of the license key required to play DRM content. The URL must be
@@ -1714,6 +1992,8 @@ type PlayReadyDrm struct {
 	// Streaming outputs, and in the EXT-X-DXDRM and EXT-XDXDRMINFO metadata tags for
 	// HLS playlist outputs. An example URL looks like this:
 	// https://www.example.com/exampleKey/
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LicenseAcquisitionUrl *string
 
 	noSmithyDocumentSerde
@@ -1727,36 +2007,54 @@ type PlayReadyDrm struct {
 type Preset struct {
 
 	// The Amazon Resource Name (ARN) for the preset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// A section of the response body that provides information about the audio preset
 	// values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Audio *AudioParameters
 
 	// The container type for the output file. Valid values include flac , flv , fmp4 ,
 	// gif , mp3 , mp4 , mpg , mxf , oga , ogg , ts , and webm .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Container *string
 
 	// A description of the preset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Identifier for the new preset. You use this value to get settings for the
 	// preset or to delete it.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The name of the preset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A section of the response body that provides information about the thumbnail
 	// preset values, if any.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Thumbnails *Thumbnails
 
 	// Whether the preset is a default preset provided by Elastic Transcoder ( System )
 	// or a preset that you have defined ( Custom ).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	// A section of the response body that provides information about the video preset
 	// values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Video *VideoParameters
 
 	noSmithyDocumentSerde
@@ -1788,6 +2086,8 @@ type PresetWatermark struct {
 	//   the video.
 	//
 	//   - Center: The watermark is centered between the left and right borders.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HorizontalAlign *string
 
 	// The amount by which you want the horizontal position of the watermark to be
@@ -1811,10 +2111,14 @@ type PresetWatermark struct {
 	//
 	// Use the value of Target to specify whether you want to include the black bars
 	// that are added by Elastic Transcoder, if any, in the offset calculation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HorizontalOffset *string
 
 	//  A unique identifier for the settings for one watermark. The value of Id can be
 	// up to 40 characters long.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The maximum height of the watermark in one of the following formats:
@@ -1828,6 +2132,8 @@ type PresetWatermark struct {
 	//
 	// If you specify the value in pixels, it must be less than or equal to the value
 	// of MaxHeight .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxHeight *string
 
 	// The maximum width of the watermark in one of the following formats:
@@ -1841,6 +2147,8 @@ type PresetWatermark struct {
 	//
 	// If you specify the value in pixels, it must be less than or equal to the value
 	//   of MaxWidth .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxWidth *string
 
 	// A percentage that indicates how much you want a watermark to obscure the video
@@ -1851,6 +2159,8 @@ type PresetWatermark struct {
 	// Elastic Transcoder supports transparent .png graphics. If you use a transparent
 	// .png, the transparent portion of the video appears as if you had specified a
 	// value of 0 for Opacity . The .jpg file format doesn't support transparency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Opacity *string
 
 	// A value that controls scaling of the watermark:
@@ -1868,6 +2178,8 @@ type PresetWatermark struct {
 	//   dimensions match the values that you specified for at least one of MaxWidth
 	//   and MaxHeight without exceeding either value. If you specify this option,
 	//   Elastic Transcoder does not scale the watermark up.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SizingPolicy *string
 
 	// A value that determines how Elastic Transcoder interprets values that you
@@ -1884,6 +2196,8 @@ type PresetWatermark struct {
 	//   any. In addition, MaxWidth and MaxHeight , if specified as a percentage, are
 	//   calculated based on the borders of the video including black bars added by
 	//   Elastic Transcoder, if any.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Target *string
 
 	// The vertical position of the watermark unless you specify a non-zero value for
@@ -1896,6 +2210,8 @@ type PresetWatermark struct {
 	//   of the video.
 	//
 	//   - Center: The watermark is centered between the top and bottom borders.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VerticalAlign *string
 
 	//     VerticalOffset
@@ -1922,6 +2238,8 @@ type PresetWatermark struct {
 	// Use the value of Target to specify whether you want Elastic Transcoder to
 	// include the black bars that are added by Elastic Transcoder, if any, in the
 	// offset calculation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VerticalOffset *string
 
 	noSmithyDocumentSerde
@@ -1941,31 +2259,43 @@ type Thumbnails struct {
 	//
 	// If you specify auto , Elastic Transcoder tries to preserve the aspect ratio of
 	// the video in the output file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AspectRatio *string
 
 	// The format of thumbnails, if any. Valid values are jpg and png .
 	//
 	// You specify whether you want Elastic Transcoder to create thumbnails when you
 	// create a job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Format *string
 
 	// The approximate number of seconds between thumbnails. Specify an integer value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Interval *string
 
 	// The maximum height of thumbnails in pixels. If you specify auto, Elastic
 	// Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric
 	// value, enter an even integer between 32 and 3072.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxHeight *string
 
 	// The maximum width of thumbnails in pixels. If you specify auto, Elastic
 	// Transcoder uses 1920 (Full HD) as the default value. If you specify a numeric
 	// value, enter an even integer between 32 and 4096.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxWidth *string
 
 	// When you set PaddingPolicy to Pad , Elastic Transcoder may add black bars to the
 	// top and bottom and/or left and right sides of thumbnails to make the total size
 	// of the thumbnails match the values that you specified for thumbnail MaxWidth
 	// and MaxHeight settings.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PaddingPolicy *string
 
 	// To better control resolution and aspect ratio of thumbnails, we recommend that
@@ -1976,6 +2306,8 @@ type Thumbnails struct {
 	// The width and height of thumbnail files in pixels. Specify a value in the
 	// format width  x  height  where both values are even integers. The values cannot
 	// exceed the width and height that you specified in the Video:Resolution object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resolution *string
 
 	// Specify one of the following values to control scaling of thumbnails:
@@ -2007,6 +2339,8 @@ type Thumbnails struct {
 	//   dimensions match the values that you specified for at least one of MaxWidth
 	//   and MaxHeight without dropping below either value. If you specify this option,
 	//   Elastic Transcoder does not scale thumbnails up.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SizingPolicy *string
 
 	noSmithyDocumentSerde
@@ -2022,12 +2356,16 @@ type TimeSpan struct {
 	//
 	// If you specify a value longer than the duration of the input file, Elastic
 	// Transcoder transcodes the file and returns a warning message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Duration *string
 
 	// The place in the input file where you want a clip to start. The format can be
 	// either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS is thousandths of a
 	// second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value,
 	// Elastic Transcoder starts at the beginning of the input file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartTime *string
 
 	noSmithyDocumentSerde
@@ -2037,12 +2375,18 @@ type TimeSpan struct {
 type Timing struct {
 
 	// The time the job finished transcoding, in epoch milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FinishTimeMillis *int64
 
 	// The time the job began transcoding, in epoch milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartTimeMillis *int64
 
 	// The time the job was submitted to Elastic Transcoder, in epoch milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SubmitTimeMillis *int64
 
 	noSmithyDocumentSerde
@@ -2067,6 +2411,8 @@ type VideoParameters struct {
 	// ratio of the input file, Elastic Transcoder adds pillarboxing (black bars on the
 	// sides) or letterboxing (black bars on the top and bottom) to maintain the aspect
 	// ratio of the active region of the video.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AspectRatio *string
 
 	// The bit rate of the video stream in the output file, in kilobits/second. Valid
@@ -2099,11 +2445,15 @@ type VideoParameters struct {
 	//   - 4 - 20000 : 25000
 	//
 	//   - 4.1 - 50000 : 62500
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BitRate *string
 
 	// The video codec for the output file. Valid values include gif , H.264 , mpeg2 ,
 	// vp8 , and vp9 . You can only specify vp8 and vp9 when the container type is webm
 	// , gif when the container type is gif , and mpeg2 when the container type is mpg .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Codec *string
 
 	//  Profile (H.264/VP8/VP9 Only)
@@ -2249,9 +2599,13 @@ type VideoParameters struct {
 	//
 	// The number of times you want the output gif to loop. Valid values include
 	// Infinite and integers between 0 and 100 , inclusive.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CodecOptions map[string]string
 
 	// The value that Elastic Transcoder adds to the metadata in the output file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DisplayAspectRatio *string
 
 	// Applicable only when the value of Video:Codec is one of H.264 , MPEG2 , or VP8 .
@@ -2265,6 +2619,8 @@ type VideoParameters struct {
 	//   - false : The distance between key frames can vary.
 	//
 	// FixedGOP must be set to true for fmp4 containers.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FixedGOP *string
 
 	// The frames per second for the video stream in the output file. Valid values
@@ -2316,6 +2672,8 @@ type VideoParameters struct {
 	//   - 4 - 62914560
 	//
 	//   - 4.1 - 62914560
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FrameRate *string
 
 	// Applicable only when the value of Video:Codec is one of H.264 , MPEG2 , or VP8 .
@@ -2337,6 +2695,8 @@ type VideoParameters struct {
 	//
 	// Alternately, this can be achieved by setting FrameRate to auto and having the
 	// same values for MaxFrameRate and KeyframesMaxDist .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyframesMaxDist *string
 
 	// If you specify auto for FrameRate , Elastic Transcoder uses the frame rate of
@@ -2344,22 +2704,30 @@ type VideoParameters struct {
 	// frame rate that you want Elastic Transcoder to use when the frame rate of the
 	// input video is greater than the desired maximum frame rate of the output video.
 	// Valid values include: 10 , 15 , 23.97 , 24 , 25 , 29.97 , 30 , 60 .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxFrameRate *string
 
 	// The maximum height of the output video in pixels. If you specify auto , Elastic
 	// Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric
 	// value, enter an even integer between 96 and 3072.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxHeight *string
 
 	//  The maximum width of the output video in pixels. If you specify auto , Elastic
 	// Transcoder uses 1920 (Full HD) as the default value. If you specify a numeric
 	// value, enter an even integer between 128 and 4096.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxWidth *string
 
 	// When you set PaddingPolicy to Pad , Elastic Transcoder may add black bars to the
 	// top and bottom and/or left and right sides of the output video to make the total
 	// size of the output video match the values that you specified for MaxWidth and
 	// MaxHeight .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PaddingPolicy *string
 
 	// To better control resolution and aspect ratio of output videos, we recommend
@@ -2416,6 +2784,8 @@ type VideoParameters struct {
 	//   - 4 - 2097152
 	//
 	//   - 4.1 - 2097152
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resolution *string
 
 	// Specify one of the following values to control scaling of the output video:
@@ -2447,6 +2817,8 @@ type VideoParameters struct {
 	//   dimensions match the values that you specified for at least one of MaxWidth
 	//   and MaxHeight without dropping below either value. If you specify this option,
 	//   Elastic Transcoder does not scale the video up.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SizingPolicy *string
 
 	// Settings for the size, location, and opacity of graphics that you want Elastic
@@ -2463,6 +2835,8 @@ type VideoParameters struct {
 	// You can specify fewer graphics in the job than you specify watermark settings in
 	// the preset, which allows you to use the same preset for up to four watermarks
 	// that have different dimensions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Watermarks []PresetWatermark
 
 	noSmithyDocumentSerde
@@ -2477,12 +2851,16 @@ type VideoParameters struct {
 type Warning struct {
 
 	// The code of the cross-regional warning.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Code *string
 
 	// The message explaining what resources are in a different region from the
 	// pipeline.
 	//
 	// AWS KMS keys must be in the same region as the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Message *string
 
 	noSmithyDocumentSerde

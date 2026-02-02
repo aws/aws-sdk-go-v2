@@ -16,6 +16,8 @@ import (
 //
 // When you update notifications for a pipeline, Elastic Transcoder returns the
 // values that you specified in the request.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdatePipelineNotifications(ctx context.Context, params *UpdatePipelineNotificationsInput, optFns ...func(*Options)) (*UpdatePipelineNotificationsOutput, error) {
 	if params == nil {
 		params = &UpdatePipelineNotificationsInput{}
@@ -38,6 +40,8 @@ type UpdatePipelineNotificationsInput struct {
 	// settings.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic
@@ -64,6 +68,8 @@ type UpdatePipelineNotificationsInput struct {
 	//   SNS returned when you created the topic.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Notifications *types.Notifications
 
 	noSmithyDocumentSerde
@@ -74,6 +80,8 @@ type UpdatePipelineNotificationsOutput struct {
 
 	// A section of the response body that provides information about the pipeline
 	// associated with this notification.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pipeline *types.Pipeline
 
 	// Metadata pertaining to the operation's result.

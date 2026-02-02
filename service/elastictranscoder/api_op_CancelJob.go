@@ -15,6 +15,8 @@ import (
 // You can only cancel a job that has a status of Submitted . To prevent a pipeline
 // from starting to process a job while you're getting the job identifier, use UpdatePipelineStatusto
 // temporarily pause the pipeline.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns ...func(*Options)) (*CancelJobOutput, error) {
 	if params == nil {
 		params = &CancelJobInput{}
@@ -39,6 +41,8 @@ type CancelJobInput struct {
 	// Submitted , use the ListJobsByStatus API action.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	noSmithyDocumentSerde

@@ -12,6 +12,8 @@ import (
 )
 
 // The ReadPipeline operation gets detailed information about a pipeline.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ReadPipeline(ctx context.Context, params *ReadPipelineInput, optFns ...func(*Options)) (*ReadPipelineOutput, error) {
 	if params == nil {
 		params = &ReadPipelineInput{}
@@ -33,6 +35,8 @@ type ReadPipelineInput struct {
 	// The identifier of the pipeline to read.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type ReadPipelineInput struct {
 type ReadPipelineOutput struct {
 
 	// A section of the response body that provides information about the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pipeline *types.Pipeline
 
 	// Elastic Transcoder returns a warning if the resources used by your pipeline are
@@ -50,6 +56,8 @@ type ReadPipelineOutput struct {
 	// Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS
 	// notification topics, and AWS KMS key, reduces processing time and prevents
 	// cross-regional charges.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Warnings []types.Warning
 
 	// Metadata pertaining to the operation's result.

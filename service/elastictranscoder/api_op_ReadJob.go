@@ -15,6 +15,8 @@ import (
 )
 
 // The ReadJob operation returns detailed information about a job.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ReadJob(ctx context.Context, params *ReadJobInput, optFns ...func(*Options)) (*ReadJobOutput, error) {
 	if params == nil {
 		params = &ReadJobInput{}
@@ -36,6 +38,8 @@ type ReadJobInput struct {
 	// The identifier of the job for which you want to get detailed information.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	noSmithyDocumentSerde
@@ -45,6 +49,8 @@ type ReadJobInput struct {
 type ReadJobOutput struct {
 
 	// A section of the response body that provides information about the job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Job *types.Job
 
 	// Metadata pertaining to the operation's result.

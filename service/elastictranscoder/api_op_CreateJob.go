@@ -18,6 +18,8 @@ import (
 // output for the Kindle Fire and another output for the Apple iPhone 4s), you
 // currently must use the Elastic Transcoder API to list the jobs (as opposed to
 // the AWS Console).
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -42,29 +44,41 @@ type CreateJobInput struct {
 	// Elastic Transcoder puts the transcoded files.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineId *string
 
 	// A section of the request body that provides information about the file that is
 	// being transcoded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Input *types.JobInput
 
 	// A section of the request body that provides information about the files that
 	// are being transcoded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Inputs []types.JobInput
 
 	//  A section of the request body that provides information about the transcoded
 	// (target) file. We strongly recommend that you use the Outputs syntax instead of
 	// the Output syntax.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Output *types.CreateJobOutput
 
 	// The value, if any, that you want Elastic Transcoder to prepend to the names of
 	// all files that this job creates, including output files, thumbnails, and
 	// playlists.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputKeyPrefix *string
 
 	//  A section of the request body that provides information about the transcoded
 	// (target) files. We recommend that you use the Outputs syntax instead of the
 	// Output syntax.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Outputs []types.CreateJobOutput
 
 	// If you specify a preset in PresetId for which the value of Container is fmp4
@@ -72,12 +86,16 @@ type CreateJobInput struct {
 	// master playlists that you want Elastic Transcoder to create.
 	//
 	// The maximum number of master playlists in a job is 30.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Playlists []types.CreateJobPlaylist
 
 	// User-defined metadata that you want to associate with an Elastic Transcoder
 	// job. You specify metadata in key/value pairs, and you can add up to 10 key/value
 	// pairs per job. Elastic Transcoder does not guarantee that key/value pairs are
 	// returned in the same order in which you specify them.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserMetadata map[string]string
 
 	noSmithyDocumentSerde
@@ -88,6 +106,8 @@ type CreateJobOutput struct {
 
 	// A section of the response body that provides information about the job that is
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Job *types.Job
 
 	// Metadata pertaining to the operation's result.

@@ -18,6 +18,8 @@ import (
 // You can't cancel jobs after Elastic Transcoder has started processing them; if
 // you pause the pipeline to which you submitted the jobs, you have more time to
 // get the job IDs for the jobs that you want to cancel, and to send a CancelJobrequest.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdatePipelineStatus(ctx context.Context, params *UpdatePipelineStatusInput, optFns ...func(*Options)) (*UpdatePipelineStatusOutput, error) {
 	if params == nil {
 		params = &UpdatePipelineStatusInput{}
@@ -39,6 +41,8 @@ type UpdatePipelineStatusInput struct {
 	// The identifier of the pipeline to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The desired status of the pipeline:
@@ -48,6 +52,8 @@ type UpdatePipelineStatusInput struct {
 	//   - Paused : The pipeline is not currently processing jobs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -58,6 +64,8 @@ type UpdatePipelineStatusInput struct {
 type UpdatePipelineStatusOutput struct {
 
 	// A section of the response body that provides information about the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pipeline *types.Pipeline
 
 	// Metadata pertaining to the operation's result.

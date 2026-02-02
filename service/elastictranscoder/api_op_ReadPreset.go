@@ -12,6 +12,8 @@ import (
 )
 
 // The ReadPreset operation gets detailed information about a preset.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ReadPreset(ctx context.Context, params *ReadPresetInput, optFns ...func(*Options)) (*ReadPresetOutput, error) {
 	if params == nil {
 		params = &ReadPresetInput{}
@@ -33,6 +35,8 @@ type ReadPresetInput struct {
 	// The identifier of the preset for which you want to get detailed information.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type ReadPresetInput struct {
 type ReadPresetOutput struct {
 
 	// A section of the response body that provides information about the preset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Preset *types.Preset
 
 	// Metadata pertaining to the operation's result.

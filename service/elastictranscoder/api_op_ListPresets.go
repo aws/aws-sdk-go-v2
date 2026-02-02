@@ -13,6 +13,8 @@ import (
 
 // The ListPresets operation gets a list of the default presets included with
 // Elastic Transcoder and the presets that you've added in an AWS region.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListPresets(ctx context.Context, params *ListPresetsInput, optFns ...func(*Options)) (*ListPresetsOutput, error) {
 	if params == nil {
 		params = &ListPresetsInput{}
@@ -34,10 +36,14 @@ type ListPresetsInput struct {
 	// To list presets in chronological order by the date and time that they were
 	// created, enter true . To list presets in reverse chronological order, enter
 	// false .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ascending *string
 
 	// When Elastic Transcoder returns more than one page of results, use pageToken in
 	// subsequent GET requests to get each successive page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -49,9 +55,13 @@ type ListPresetsOutput struct {
 	// A value that you use to access the second and subsequent pages of results, if
 	// any. When the presets fit on one page or when you've reached the last page of
 	// results, the value of NextPageToken is null .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextPageToken *string
 
 	// An array of Preset objects.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Presets []types.Preset
 
 	// Metadata pertaining to the operation's result.

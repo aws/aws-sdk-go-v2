@@ -6,4 +6,6 @@
 // # AWS Elastic Transcoder Service
 //
 // The AWS Elastic Transcoder Service.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package elastictranscoder

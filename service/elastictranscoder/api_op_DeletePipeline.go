@@ -15,6 +15,8 @@ import (
 // You can only delete a pipeline that has never been used or that is not
 // currently in use (doesn't contain any active jobs). If the pipeline is currently
 // in use, DeletePipeline returns an error.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeletePipeline(ctx context.Context, params *DeletePipelineInput, optFns ...func(*Options)) (*DeletePipelineOutput, error) {
 	if params == nil {
 		params = &DeletePipelineInput{}
@@ -36,6 +38,8 @@ type DeletePipelineInput struct {
 	// The identifier of the pipeline that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	noSmithyDocumentSerde

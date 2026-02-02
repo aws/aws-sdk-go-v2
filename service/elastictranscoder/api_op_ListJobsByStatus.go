@@ -14,6 +14,8 @@ import (
 // The ListJobsByStatus operation gets a list of jobs that have a specified
 // status. The response body contains one element for each job that satisfies the
 // search criteria.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListJobsByStatus(ctx context.Context, params *ListJobsByStatusInput, optFns ...func(*Options)) (*ListJobsByStatusOutput, error) {
 	if params == nil {
 		params = &ListJobsByStatusInput{}
@@ -37,15 +39,21 @@ type ListJobsByStatusInput struct {
 	// Progressing , Complete , Canceled , or Error .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	//  To list jobs in chronological order by the date and time that they were
 	// submitted, enter true . To list jobs in reverse chronological order, enter false
 	// .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ascending *string
 
 	//  When Elastic Transcoder returns more than one page of results, use pageToken
 	// in subsequent GET requests to get each successive page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -55,11 +63,15 @@ type ListJobsByStatusInput struct {
 type ListJobsByStatusOutput struct {
 
 	// An array of Job objects that have the specified status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Jobs []types.Job
 
 	//  A value that you use to access the second and subsequent pages of results, if
 	// any. When the jobs in the specified pipeline fit on one page or when you've
 	// reached the last page of results, the value of NextPageToken is null .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

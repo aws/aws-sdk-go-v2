@@ -18,7 +18,7 @@ import (
 // checks read access to the input and output buckets, and tries to send a test
 // notification to Amazon SNS topics that you specify.
 //
-// Deprecated: This operation has been deprecated.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) TestRole(ctx context.Context, params *TestRoleInput, optFns ...func(*Options)) (*TestRoleOutput, error) {
 	if params == nil {
 		params = &TestRoleInput{}
@@ -41,24 +41,32 @@ type TestRoleInput struct {
 	// attempts to read from this bucket.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputBucket *string
 
 	// The Amazon S3 bucket that Elastic Transcoder writes transcoded media files to.
 	// The action attempts to read from this bucket.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputBucket *string
 
 	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic
 	// Transcoder to test.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Role *string
 
 	// The ARNs of one or more Amazon Simple Notification Service (Amazon SNS) topics
 	// that you want the action to send a test notification to.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Topics []string
 
 	noSmithyDocumentSerde
@@ -69,10 +77,14 @@ type TestRoleOutput struct {
 
 	// If the Success element contains false , this value is an array of one or more
 	// error messages that were generated during the test process.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Messages []string
 
 	// If the operation is successful, this value is true ; otherwise, the value is
 	// false .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Success *string
 
 	// Metadata pertaining to the operation's result.
