@@ -1,0 +1,8 @@
+{
+    "id": "3019c3ae-7364-405c-b870-87052c7af398",
+    "type": "announcement",
+    "description": "Deprecate feature/s3/manager superceded by feature/s3/transfermanager",
+    "modules": [
+        "feature/s3/manager"
+    ]
+}
