@@ -1,3 +1,4 @@
+// Deprecated: superceded by feature/s3/transfermanager. See https://github.com/aws/aws-sdk-go-v2/discussions/3306
 module github.com/aws/aws-sdk-go-v2/feature/s3/manager
 
 go 1.23
