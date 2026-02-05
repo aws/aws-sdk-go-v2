@@ -10,7 +10,7 @@ UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 SNAPSHOT_TAGS=-tags "snapshot"
 
-SMITHY_GO_SRC ?= $(shell pwd)/../smithy-go
+SMITHY_GO_SRC ?= $(abspath $(shell pwd)/..)/smithy-go
 
 SDK_MIN_GO_VERSION ?= 1.23
 
@@ -452,3 +452,4 @@ list-deps-%:
 	@cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst list-deps-,,$@)) ${EACHMODULE_FLAGS} \
 		"go list -m all | grep -v 'github.com/aws/aws-sdk-go-v2'" | sort -u
+
