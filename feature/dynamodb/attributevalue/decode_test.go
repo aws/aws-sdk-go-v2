@@ -1344,3 +1344,136 @@ func TestUnmarshalIndividualSetValues(t *testing.T) {
 		t.Errorf("expect value match\n%s", diff)
 	}
 }
+
+// TestUnmarshalInterfaceFieldPanic verifies that unmarshaling into a struct
+// with an interface field that already holds a concrete struct type does not
+// panic with "reflect.Set: value of type map[string]interface {} is not
+// assignable to type X".
+//
+// This regression test covers the bug where decodeMap unconditionally tried
+// to Set a map[string]interface{} into an interface value, even when that
+// interface already held a non-assignable concrete type.
+func TestUnmarshalInterfaceFieldPanic(t *testing.T) {
+	type Config struct {
+		Name  string
+		Value int
+	}
+	type Wrapper struct {
+		Data interface{}
+	}
+
+	// Test 1: Interface is nil - should decode to map[string]interface{}
+	t.Run("nil interface", func(t *testing.T) {
+		actual := Wrapper{}
+		in := map[string]types.AttributeValue{
+			"Data": &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Name":  &types.AttributeValueMemberS{Value: "test"},
+					"Value": &types.AttributeValueMemberN{Value: "42"},
+				},
+			},
+		}
+		err := UnmarshalMap(in, &actual)
+		if err != nil {
+			t.Fatalf("expect no error, got %v", err)
+		}
+		if actual.Data == nil {
+			t.Fatal("expect Data to be non-nil")
+		}
+		// Should be a map since interface was nil
+		if _, ok := actual.Data.(map[string]interface{}); !ok {
+			t.Errorf("expected map[string]interface{}, got %T", actual.Data)
+		}
+	})
+
+	// Test 2: Interface contains a pointer to struct - should decode into it
+	t.Run("pointer to struct", func(t *testing.T) {
+		actual := Wrapper{
+			Data: &Config{}, // Pointer to struct
+		}
+		in := map[string]types.AttributeValue{
+			"Data": &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Name":  &types.AttributeValueMemberS{Value: "test"},
+					"Value": &types.AttributeValueMemberN{Value: "42"},
+				},
+			},
+		}
+		err := UnmarshalMap(in, &actual)
+		if err != nil {
+			t.Fatalf("expect no error, got %v", err)
+		}
+		cfg, ok := actual.Data.(*Config)
+		if !ok {
+			t.Fatalf("expected *Config, got %T", actual.Data)
+		}
+		if cfg.Name != "test" || cfg.Value != 42 {
+			t.Errorf("expected {test, 42}, got {%s, %d}", cfg.Name, cfg.Value)
+		}
+	})
+
+	// Test 3: Interface contains a struct value (not pointer) - the panic case
+	// This should NOT panic. It can either:
+	// a) decode into a new struct and set it back, or
+	// b) fall back to map[string]interface{}
+	t.Run("struct value", func(t *testing.T) {
+		actual := Wrapper{
+			Data: Config{}, // Non-pointer struct value
+		}
+		in := map[string]types.AttributeValue{
+			"Data": &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Name":  &types.AttributeValueMemberS{Value: "test"},
+					"Value": &types.AttributeValueMemberN{Value: "42"},
+				},
+			},
+		}
+		// This should NOT panic
+		err := UnmarshalMap(in, &actual)
+		if err != nil {
+			t.Fatalf("expect no error, got %v", err)
+		}
+		if actual.Data == nil {
+			t.Fatal("expect Data to be non-nil")
+		}
+	})
+}
+
+// TestUnmarshalNamedInterfaceFieldPanic verifies that unmarshaling into a struct
+// with a named interface field (not just interface{}) does not panic with
+// "reflect.Set: value of type map[string]interface {} is not assignable to type X".
+//
+// This regression test covers the bug where decodeMap unconditionally tried
+// to Set a map[string]interface{} into an interface value, even when that
+// interface type couldn't accept a map[string]interface{}.
+func TestUnmarshalNamedInterfaceFieldPanic(t *testing.T) {
+	in := map[string]types.AttributeValue{
+		"Config": &types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Name":  &types.AttributeValueMemberS{Value: "test"},
+				"Value": &types.AttributeValueMemberN{Value: "42"},
+			},
+		},
+	}
+
+	// Struct with a named interface field
+	type Wrapper struct {
+		Config fmt.Stringer // Named interface, not interface{}
+	}
+
+	actual := Wrapper{}
+
+	// This should NOT panic, but should return an error since we can't
+	// unmarshal a map into a named interface that doesn't accept map[string]interface{}
+	err := UnmarshalMap(in, &actual)
+	// We expect either an error or graceful handling, but NOT a panic
+	if err != nil {
+		// Error is acceptable - better than panic
+		t.Logf("got expected error: %v", err)
+		return
+	}
+	// If no error, the field should remain nil since we couldn't decode into it
+	if actual.Config != nil {
+		t.Errorf("expected Config to be nil, got %v", actual.Config)
+	}
+}
