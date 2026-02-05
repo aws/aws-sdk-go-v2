@@ -344,6 +344,17 @@ func (d *Decoder) decode(av types.AttributeValue, v reflect.Value, fieldTag tag)
 		return d.decodeList(tv.Value, v)
 
 	case *types.AttributeValueMemberM:
+		// Handle the case where the original value was an interface containing
+		// a non-addressable struct value. We need to create a new addressable
+		// copy, decode into it, and set it back into the interface.
+		if v0.Kind() == reflect.Interface && !v0.IsNil() && v.Kind() == reflect.Struct && !v.CanAddr() {
+			newPtr := reflect.New(v.Type())
+			if err := d.decodeMap(tv.Value, newPtr.Elem()); err != nil {
+				return err
+			}
+			v0.Set(newPtr.Elem())
+			return nil
+		}
 		return d.decodeMap(tv.Value, v)
 
 	case *types.AttributeValueMemberN:
@@ -667,6 +678,35 @@ func (d *Decoder) decodeMap(avMap map[string]types.AttributeValue, v reflect.Val
 		}
 	case reflect.Struct:
 	case reflect.Interface:
+		// Check if interface already holds a value we can decode into
+		if !v.IsNil() {
+			elem := v.Elem()
+			// If the interface holds a pointer, decode into it
+			if elem.Kind() == reflect.Ptr && !elem.IsNil() {
+				return d.decodeMap(avMap, elem.Elem())
+			}
+			// If the interface holds a struct value (not pointer), we can't
+			// decode into it because it's not addressable. Create a new pointer
+			// to the same type, decode into that, and set the interface.
+			if elem.Kind() == reflect.Struct {
+				newPtr := reflect.New(elem.Type())
+				if err := d.decodeMap(avMap, newPtr.Elem()); err != nil {
+					return err
+				}
+				v.Set(newPtr.Elem())
+				return nil
+			}
+		}
+		// For empty interface (interface{}) that is nil, set to map[string]interface{}
+		// For named interfaces (e.g., fmt.Stringer), we cannot assign map[string]interface{}
+		// so return an error.
+		if v.Type().NumMethod() > 0 {
+			return &UnmarshalTypeError{
+				Value: "map",
+				Type:  v.Type(),
+				Err:   fmt.Errorf("cannot unmarshal map into non-empty interface type"),
+			}
+		}
 		v.Set(reflect.MakeMap(stringInterfaceMapType))
 		decodeMapKey = d.decodeString
 		v = v.Elem()
