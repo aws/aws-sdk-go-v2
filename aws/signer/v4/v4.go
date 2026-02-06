@@ -493,9 +493,14 @@ func (s *httpSigner) buildCanonicalString(method, uri, query, signedHeaders, can
 }
 
 func (s *httpSigner) buildStringToSign(credentialScope, canonicalRequestString string) string {
+	timeStr := s.Time.TimeFormat()
+	if s.isCodeCommitGit() {
+		timeStr = s.Time.CodeCommitTimeFormat()
+	}
+
 	return strings.Join([]string{
 		signingAlgorithm,
-		s.Time.TimeFormat(),
+		timeStr,
 		credentialScope,
 		hex.EncodeToString(makeHash(sha256.New(), []byte(canonicalRequestString))),
 	}, "\n")
@@ -513,6 +518,11 @@ func (s *httpSigner) buildSignature(strToSign string) (string, error) {
 }
 
 func (s *httpSigner) setRequiredSigningFields(headers http.Header, query url.Values) {
+	if s.isCodeCommitGit() {
+		// CodeCommit Git requests expect no required fields set
+		return
+	}
+
 	amzDate := s.Time.TimeFormat()
 
 	if s.IsPreSign {
@@ -543,6 +553,11 @@ func logSigningInfo(ctx context.Context, options SignerOptions, request *signedR
 	}
 	logger := logging.WithContext(ctx, options.Logger)
 	logger.Logf(logging.Debug, logSignInfoMsg, request.CanonicalString, request.StringToSign, signedURLMsg)
+}
+
+// Detect signing request for CodeCommit Git operations
+func (s *httpSigner) isCodeCommitGit() bool {
+	return s.ServiceName == "codecommit" && s.Request.Method == "GIT"
 }
 
 type signedRequest struct {

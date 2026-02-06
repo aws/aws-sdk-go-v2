@@ -26,6 +26,11 @@ func (m *SigningTime) ShortTimeFormat() string {
 	return m.format(&m.shortTimeFormat, ShortTimeFormat)
 }
 
+// ShortTimeFormat provides a time formatted of 20060102.
+func (m *SigningTime) CodeCommitTimeFormat() string {
+	return m.format(&m.shortTimeFormat, CodeCommitTimeFormat)
+}
+
 func (m *SigningTime) format(target *string, format string) string {
 	if len(*target) > 0 {
 		return *target

@@ -208,6 +208,53 @@ func TestBuildCanonicalRequest(t *testing.T) {
 	}
 }
 
+func TestCodeCommitSigning(t *testing.T) {
+	region := "us-east-1"
+	repository := "my-repo"
+
+	host := fmt.Sprintf("git-codecommit.%s.amazonaws.com", region)
+	path := fmt.Sprintf("https://%s/v1/repos/%s", host, repository)
+
+	req, err := http.NewRequest("GIT", path, nil)
+	if err != nil {
+		t.Fatalf("failed to create request: %v", err)
+	}
+
+	ctx := &httpSigner{
+		ServiceName:  "codecommit",
+		Region:       "us-east-1",
+		Request:      req,
+		Time:         v4Internal.NewSigningTime(time.Date(2021, 10, 20, 12, 42, 0, 0, time.UTC)),
+		KeyDerivator: v4Internal.NewSigningKeyDeriver(),
+	}
+
+	build, err := ctx.Build()
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	expectedCanonicalString := fmt.Sprintf(`GIT
+/v1/repos/%s
+
+host:git-codecommit.%s.amazonaws.com
+
+host
+`, repository, region)
+
+	expectedStringToSign := fmt.Sprintf(`AWS4-HMAC-SHA256
+20211020T124200
+20211020/%s/codecommit/aws4_request
+a1d3c427fe57dc90a0031cb03cef21be70874879bb17c5c2ab29dfda0f514c7a`, region)
+
+	if build.CanonicalString != expectedCanonicalString {
+		t.Fatalf("Canonical string doesn't match\nExpected:\n%s\nGot:\n%s\n", expectedCanonicalString, build.CanonicalString)
+	}
+
+	if build.StringToSign != expectedStringToSign {
+		t.Fatalf("String to sign doesn't match\nExpected:\n%s\nGot:\n%s\n", expectedStringToSign, build.StringToSign)
+	}
+}
+
 func TestSigner_SignHTTP_NoReplaceRequestBody(t *testing.T) {
 	req, bodyHash := buildRequest("dynamodb", "us-east-1", "{}")
 	req.Body = ioutil.NopCloser(bytes.NewReader([]byte{}))
