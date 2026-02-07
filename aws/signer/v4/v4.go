@@ -495,7 +495,7 @@ func (s *httpSigner) buildCanonicalString(method, uri, query, signedHeaders, can
 func (s *httpSigner) buildStringToSign(credentialScope, canonicalRequestString string) string {
 	timeStr := s.Time.TimeFormat()
 	if s.isCodeCommitGit() {
-		timeStr = s.Time.CodeCommitTimeFormat()
+		timeStr = s.Time.NoZoneTimeFormat()
 	}
 
 	return strings.Join([]string{

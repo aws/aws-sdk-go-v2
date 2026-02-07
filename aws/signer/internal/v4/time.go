@@ -5,8 +5,9 @@ import "time"
 // SigningTime provides a wrapper around a time.Time which provides cached values for SigV4 signing.
 type SigningTime struct {
 	time.Time
-	timeFormat      string
-	shortTimeFormat string
+	timeFormat       string
+	shortTimeFormat  string
+	noZoneTimeFormat string
 }
 
 // NewSigningTime creates a new SigningTime given a time.Time
@@ -26,9 +27,9 @@ func (m *SigningTime) ShortTimeFormat() string {
 	return m.format(&m.shortTimeFormat, ShortTimeFormat)
 }
 
-// ShortTimeFormat provides a time formatted of 20060102.
-func (m *SigningTime) CodeCommitTimeFormat() string {
-	return m.format(&m.shortTimeFormat, CodeCommitTimeFormat)
+// NoZoneTimeFormat provides a time formatted X-Amz-Date format (without Z suffix).
+func (m *SigningTime) NoZoneTimeFormat() string {
+	return m.format(&m.noZoneTimeFormat, NoZoneTimeFormat)
 }
 
 func (m *SigningTime) format(target *string, format string) string {

@@ -29,8 +29,8 @@ const (
 	// TimeFormat is the time format to be used in the X-Amz-Date header or query parameter
 	TimeFormat = "20060102T150405Z"
 
-	// CodeCommitTimeFormat is the time format used by CodeCommit, which does not include the "Z" suffix
-	CodeCommitTimeFormat = "20060102T150405"
+	// NoZoneTimeFormat is the time format used by CodeCommit, which does not include the "Z" suffix
+	NoZoneTimeFormat = "20060102T150405"
 
 	// ShortTimeFormat is the shorten time format used in the credential scope
 	ShortTimeFormat = "20060102"
