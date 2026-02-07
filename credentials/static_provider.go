@@ -2,6 +2,7 @@ package credentials
 
 import (
 	"context"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
@@ -16,6 +17,27 @@ type StaticCredentialsEmptyError struct{}
 
 func (*StaticCredentialsEmptyError) Error() string {
 	return "static credentials are empty"
+}
+
+// AccessKeyIDInvalidWhitespaceError is emitted when AccessKeyID contains invalid whitespace.
+type AccessKeyIDInvalidWhitespaceError struct{}
+
+func (*AccessKeyIDInvalidWhitespaceError) Error() string {
+	return "AccessKeyID contains invalid whitespace"
+}
+
+// SecretAccessKeyInvalidWhitespaceError is emitted when SecretAccessKey contains invalid whitespace.
+type SecretAccessKeyInvalidWhitespaceError struct{}
+
+func (*SecretAccessKeyInvalidWhitespaceError) Error() string {
+	return "SecretAccessKey contains invalid whitespace"
+}
+
+// SessionTokenInvalidWhitespaceError is emitted when SessionToken contains invalid whitespace.
+type SessionTokenInvalidWhitespaceError struct{}
+
+func (*SessionTokenInvalidWhitespaceError) Error() string {
+	return "SessionToken contains invalid whitespace"
 }
 
 // A StaticCredentialsProvider is a set of credentials which are set, and will
@@ -49,6 +71,23 @@ func NewStaticCredentialsProvider(key, secret, session string) StaticCredentials
 // Retrieve returns the credentials or error if the credentials are invalid.
 func (s StaticCredentialsProvider) Retrieve(_ context.Context) (aws.Credentials, error) {
 	v := s.Value
+
+	if strings.ContainsAny(v.AccessKeyID, " \t\r\n") {
+		return aws.Credentials{
+			Source: StaticCredentialsName,
+		}, &AccessKeyIDInvalidWhitespaceError{}
+	}
+	if strings.ContainsAny(v.SecretAccessKey, " \t\r\n") {
+		return aws.Credentials{
+			Source: StaticCredentialsName,
+		}, &SecretAccessKeyInvalidWhitespaceError{}
+	}
+	if strings.ContainsAny(v.SessionToken, " \t\r\n") {
+		return aws.Credentials{
+			Source: StaticCredentialsName,
+		}, &SessionTokenInvalidWhitespaceError{}
+	}
+
 	if v.AccessKeyID == "" || v.SecretAccessKey == "" {
 		return aws.Credentials{
 			Source: StaticCredentialsName,
