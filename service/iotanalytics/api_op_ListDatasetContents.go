@@ -13,6 +13,8 @@ import (
 )
 
 // Lists information about dataset contents that have been created.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDatasetContents(ctx context.Context, params *ListDatasetContentsInput, optFns ...func(*Options)) (*ListDatasetContentsOutput, error) {
 	if params == nil {
 		params = &ListDatasetContentsInput{}
@@ -33,22 +35,32 @@ type ListDatasetContentsInput struct {
 	// The name of the dataset whose contents information you want to list.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetName *string
 
 	// The maximum number of results to return in this request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token for the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A filter to limit results to those dataset contents whose creation is scheduled
 	// before the given time. See the field triggers.schedule in the CreateDataset
 	// request. (timestamp)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScheduledBefore *time.Time
 
 	// A filter to limit results to those dataset contents whose creation is scheduled
 	// on or after the given time. See the field triggers.schedule in the CreateDataset
 	// request. (timestamp)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScheduledOnOrAfter *time.Time
 
 	noSmithyDocumentSerde
@@ -57,10 +69,14 @@ type ListDatasetContentsInput struct {
 type ListDatasetContentsOutput struct {
 
 	// Summary information about dataset contents that have been created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetContentSummaries []types.DatasetContentSummary
 
 	// The token to retrieve the next set of results, or null if there are no more
 	// results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a data store, which is a repository for messages.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateDatastore(ctx context.Context, params *CreateDatastoreInput, optFns ...func(*Options)) (*CreateDatastoreOutput, error) {
 	if params == nil {
 		params = &CreateDatastoreInput{}
@@ -32,15 +34,21 @@ type CreateDatastoreInput struct {
 	// The name of the data store.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreName *string
 
 	//  Contains information about the partition dimensions in a data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastorePartitions *types.DatastorePartitions
 
 	// Where data in a data store is stored.. You can choose serviceManagedS3 storage,
 	// customerManagedS3 storage, or iotSiteWiseMultiLayerStorage storage. The default
 	// is serviceManagedS3 . You can't change the choice of Amazon S3 storage after
 	// your data store is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreStorage types.DatastoreStorage
 
 	// Contains the configuration information of file formats. IoT Analytics data
@@ -51,13 +59,19 @@ type CreateDatastoreInput struct {
 	// You can't change the file format after you create the data store.
 	//
 	// [Parquet]: https://parquet.apache.org/
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileFormatConfiguration *types.FileFormatConfiguration
 
 	// How long, in days, message data is kept for the data store. When
 	// customerManagedS3 storage is selected, this parameter is ignored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata which can be used to manage the data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -66,12 +80,18 @@ type CreateDatastoreInput struct {
 type CreateDatastoreOutput struct {
 
 	// The ARN of the data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreArn *string
 
 	// The name of the data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreName *string
 
 	// How long, in days, message data is kept for the data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata pertaining to the operation's result.

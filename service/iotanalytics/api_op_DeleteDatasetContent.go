@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes the content of the specified dataset.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteDatasetContent(ctx context.Context, params *DeleteDatasetContentInput, optFns ...func(*Options)) (*DeleteDatasetContentOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetContentInput{}
@@ -31,12 +33,16 @@ type DeleteDatasetContentInput struct {
 	// The name of the dataset whose content is deleted.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetName *string
 
 	// The version of the dataset whose content is deleted. You can also use the
 	// strings "$LATEST" or "$LATEST_SUCCEEDED" to delete the latest or latest
 	// successfully completed data set. If not specified, "$LATEST_SUCCEEDED" is the
 	// default.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VersionId *string
 
 	noSmithyDocumentSerde

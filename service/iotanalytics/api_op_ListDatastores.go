@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieves a list of data stores.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDatastores(ctx context.Context, params *ListDatastoresInput, optFns ...func(*Options)) (*ListDatastoresOutput, error) {
 	if params == nil {
 		params = &ListDatastoresInput{}
@@ -32,9 +34,13 @@ type ListDatastoresInput struct {
 	// The maximum number of results to return in this request.
 	//
 	// The default value is 100.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token for the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,10 +49,14 @@ type ListDatastoresInput struct {
 type ListDatastoresOutput struct {
 
 	// A list of DatastoreSummary objects.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreSummaries []types.DatastoreSummary
 
 	// The token to retrieve the next set of results, or null if there are no more
 	// results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

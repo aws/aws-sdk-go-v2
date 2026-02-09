@@ -12,6 +12,8 @@ import (
 )
 
 // Sends messages to a channel.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) BatchPutMessage(ctx context.Context, params *BatchPutMessageInput, optFns ...func(*Options)) (*BatchPutMessageOutput, error) {
 	if params == nil {
 		params = &BatchPutMessageInput{}
@@ -32,6 +34,8 @@ type BatchPutMessageInput struct {
 	// The name of the channel where the messages are sent.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelName *string
 
 	// The list of messages to be sent. Each message has the format: { "messageId":
@@ -58,6 +62,8 @@ type BatchPutMessageInput struct {
 	// 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Messages []types.Message
 
 	noSmithyDocumentSerde
@@ -66,6 +72,8 @@ type BatchPutMessageInput struct {
 type BatchPutMessageOutput struct {
 
 	// A list of any errors encountered when sending the messages to the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchPutMessageErrorEntries []types.BatchPutMessageErrorEntry
 
 	// Metadata pertaining to the operation's result.

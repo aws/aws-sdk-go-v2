@@ -14,7 +14,7 @@ import (
 // Returns the details about one feature. You must already know the feature name.
 // To retrieve a list of features in your account, use [ListFeatures].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [ListFeatures]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListFeatures.html
 func (c *Client) GetFeature(ctx context.Context, params *GetFeatureInput, optFns ...func(*Options)) (*GetFeatureOutput, error) {
@@ -37,11 +37,15 @@ type GetFeatureInput struct {
 	// The name of the feature that you want to retrieve information for.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *string
 
 	// The name or ARN of the project that contains the feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	noSmithyDocumentSerde
@@ -52,6 +56,8 @@ type GetFeatureOutput struct {
 	// A structure containing the configuration details of the feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *types.Feature
 
 	// Metadata pertaining to the operation's result.

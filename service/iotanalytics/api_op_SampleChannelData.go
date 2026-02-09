@@ -13,6 +13,8 @@ import (
 
 // Retrieves a sample of messages from the specified channel ingested during the
 // specified timeframe. Up to 10 messages can be retrieved.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) SampleChannelData(ctx context.Context, params *SampleChannelDataInput, optFns ...func(*Options)) (*SampleChannelDataOutput, error) {
 	if params == nil {
 		params = &SampleChannelDataInput{}
@@ -33,16 +35,24 @@ type SampleChannelDataInput struct {
 	// The name of the channel whose message samples are retrieved.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelName *string
 
 	// The end of the time window from which sample messages are retrieved.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EndTime *time.Time
 
 	// The number of sample messages to be retrieved. The limit is 10. The default is
 	// also 10.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxMessages *int32
 
 	// The start of the time window from which sample messages are retrieved.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -52,6 +62,8 @@ type SampleChannelDataOutput struct {
 
 	// The list of message samples. Each sample message is returned as a
 	// base64-encoded string.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payloads [][]byte
 
 	// Metadata pertaining to the operation's result.

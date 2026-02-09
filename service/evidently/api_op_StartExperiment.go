@@ -13,7 +13,7 @@ import (
 
 // Starts an existing experiment. To create an experiment, use [CreateExperiment].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [CreateExperiment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateExperiment.html
 func (c *Client) StartExperiment(ctx context.Context, params *StartExperimentInput, optFns ...func(*Options)) (*StartExperimentOutput, error) {
@@ -42,11 +42,15 @@ type StartExperimentInput struct {
 	// The name of the experiment to start.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Experiment *string
 
 	// The name or ARN of the project that contains the experiment to start.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	noSmithyDocumentSerde

@@ -12,6 +12,8 @@ import (
 
 // Creates the content of a dataset by applying a queryAction (a SQL query) or a
 // containerAction (executing a containerized application).
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateDatasetContent(ctx context.Context, params *CreateDatasetContentInput, optFns ...func(*Options)) (*CreateDatasetContentOutput, error) {
 	if params == nil {
 		params = &CreateDatasetContentInput{}
@@ -32,12 +34,16 @@ type CreateDatasetContentInput struct {
 	// The name of the dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetName *string
 
 	// The version ID of the dataset content. To specify versionId for a dataset
 	// content, the dataset must use a [DeltaTimer]filter.
 	//
 	// [DeltaTimer]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VersionId *string
 
 	noSmithyDocumentSerde
@@ -46,6 +52,8 @@ type CreateDatasetContentInput struct {
 type CreateDatasetContentOutput struct {
 
 	// The version ID of the dataset contents that are being created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VersionId *string
 
 	// Metadata pertaining to the operation's result.

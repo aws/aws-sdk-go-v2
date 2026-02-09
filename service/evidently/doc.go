@@ -14,4 +14,6 @@
 // Evidently collects experiment data and analyzes it using statistical methods. It
 // also provides clear recommendations about which variations perform better. You
 // can test both user-facing features and backend features.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package evidently

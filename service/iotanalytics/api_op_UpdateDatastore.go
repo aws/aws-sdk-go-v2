@@ -12,6 +12,8 @@ import (
 )
 
 // Used to update the settings of a data store.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateDatastore(ctx context.Context, params *UpdateDatastoreInput, optFns ...func(*Options)) (*UpdateDatastoreOutput, error) {
 	if params == nil {
 		params = &UpdateDatastoreInput{}
@@ -32,12 +34,16 @@ type UpdateDatastoreInput struct {
 	// The name of the data store to be updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreName *string
 
 	// Where data in a data store is stored.. You can choose serviceManagedS3 storage,
 	// customerManagedS3 storage, or iotSiteWiseMultiLayerStorage storage. The default
 	// is serviceManagedS3 . You can't change the choice of Amazon S3 storage after
 	// your data store is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreStorage types.DatastoreStorage
 
 	// Contains the configuration information of file formats. IoT Analytics data
@@ -48,11 +54,15 @@ type UpdateDatastoreInput struct {
 	// You can't change the file format after you create the data store.
 	//
 	// [Parquet]: https://parquet.apache.org/
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileFormatConfiguration *types.FileFormatConfiguration
 
 	// How long, in days, message data is kept for the data store. The retention
 	// period can't be updated if the data store's Amazon S3 storage is
 	// customer-managed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *types.RetentionPeriod
 
 	noSmithyDocumentSerde

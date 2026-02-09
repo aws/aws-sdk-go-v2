@@ -30,7 +30,7 @@ import (
 //
 // For more information, see [Tagging Amazon Web Services resources].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
@@ -53,11 +53,15 @@ type TagResourceInput struct {
 	// The ARN of the CloudWatch Evidently resource that you're adding tags to.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// The list of key-value pairs to associate with the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

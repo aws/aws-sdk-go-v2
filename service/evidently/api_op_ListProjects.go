@@ -14,7 +14,7 @@ import (
 // Returns configuration details about all the projects in the current Region in
 // your account.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, optFns ...func(*Options)) (*ListProjectsOutput, error) {
 	if params == nil {
 		params = &ListProjectsInput{}
@@ -33,10 +33,14 @@ func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, op
 type ListProjectsInput struct {
 
 	// The maximum number of results to include in the response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token to use when requesting the next set of results. You received this
 	// token from a previous ListProjects operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,10 +50,14 @@ type ListProjectsOutput struct {
 
 	// The token to use in a subsequent ListProjects operation to return the next set
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// An array of structures that contain the configuration details of the projects
 	// in the Region.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Projects []types.ProjectSummary
 
 	// Metadata pertaining to the operation's result.

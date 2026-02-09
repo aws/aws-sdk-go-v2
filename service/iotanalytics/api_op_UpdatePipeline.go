@@ -14,6 +14,8 @@ import (
 // Updates the settings of a pipeline. You must specify both a channel and a
 // datastore activity and, optionally, as many as 23 additional activities in the
 // pipelineActivities array.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdatePipeline(ctx context.Context, params *UpdatePipelineInput, optFns ...func(*Options)) (*UpdatePipelineOutput, error) {
 	if params == nil {
 		params = &UpdatePipelineInput{}
@@ -44,11 +46,15 @@ type UpdatePipelineInput struct {
 	//     pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineActivities []types.PipelineActivity
 
 	// The name of the pipeline to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineName *string
 
 	noSmithyDocumentSerde

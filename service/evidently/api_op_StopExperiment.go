@@ -15,7 +15,7 @@ import (
 // Stops an experiment that is currently running. If you stop an experiment, you
 // can't resume it or restart it.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StopExperiment(ctx context.Context, params *StopExperimentInput, optFns ...func(*Options)) (*StopExperimentOutput, error) {
 	if params == nil {
 		params = &StopExperimentInput{}
@@ -36,18 +36,26 @@ type StopExperimentInput struct {
 	// The name of the experiment to stop.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Experiment *string
 
 	// The name or ARN of the project that contains the experiment to stop.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// Specify whether the experiment is to be considered COMPLETED or CANCELLED after
 	// it stops.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DesiredState types.ExperimentStopDesiredState
 
 	// A string that describes why you are stopping the experiment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Reason *string
 
 	noSmithyDocumentSerde

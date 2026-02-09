@@ -17,7 +17,7 @@ import (
 //
 // To update an existing project, use [UpdateProject].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [UpdateProject]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProject.html
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
@@ -40,6 +40,8 @@ type CreateProjectInput struct {
 	// The name for the project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Use this parameter if the project will use client-side evaluation powered by
@@ -56,15 +58,21 @@ type CreateProjectInput struct {
 	//
 	// [Client-side evaluation - powered by AppConfig.]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-client-side-evaluation.html
 	// [EvaluateFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppConfigResource *types.ProjectAppConfigResourceConfig
 
 	// A structure that contains information about where Evidently is to store
 	// evaluation events for longer term storage, if you choose to do so. If you choose
 	// not to store these events, Evidently deletes them after using them to produce
 	// metrics and other experiment results that you can view.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataDelivery *types.ProjectDataDeliveryConfig
 
 	// An optional description of the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Assigns one or more tags (key-value pairs) to the project.
@@ -81,6 +89,8 @@ type CreateProjectInput struct {
 	// For more information, see [Tagging Amazon Web Services resources].
 	//
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -91,6 +101,8 @@ type CreateProjectOutput struct {
 	// A structure that contains information about the created project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *types.Project
 
 	// Metadata pertaining to the operation's result.

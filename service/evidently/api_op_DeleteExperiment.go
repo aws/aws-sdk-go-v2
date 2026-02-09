@@ -15,7 +15,7 @@ import (
 //
 // To stop an experiment without deleting it, use [StopExperiment].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [StopExperiment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopExperiment.html
 func (c *Client) DeleteExperiment(ctx context.Context, params *DeleteExperimentInput, optFns ...func(*Options)) (*DeleteExperimentOutput, error) {
@@ -38,11 +38,15 @@ type DeleteExperimentInput struct {
 	// The name of the experiment to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Experiment *string
 
 	// The name or ARN of the project that contains the experiment to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	noSmithyDocumentSerde

@@ -12,7 +12,7 @@ import (
 
 // Removes one or more tags from the specified resource.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -33,11 +33,15 @@ type UntagResourceInput struct {
 	// The ARN of the CloudWatch Evidently resource that you're removing tags from.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// The list of tag keys to remove from the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TagKeys []string
 
 	noSmithyDocumentSerde

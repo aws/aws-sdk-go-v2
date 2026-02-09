@@ -16,7 +16,7 @@ import (
 // You can't use this operation to update the tags of an existing feature.
 // Instead, use [TagResource].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [TagResource]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html
 func (c *Client) UpdateFeature(ctx context.Context, params *UpdateFeatureInput, optFns ...func(*Options)) (*UpdateFeatureOutput, error) {
@@ -39,11 +39,15 @@ type UpdateFeatureInput struct {
 	// The name of the feature to be updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *string
 
 	// The name or ARN of the project that contains the feature to be updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// To update variation configurations for this feature, or add new ones, specify
@@ -51,14 +55,20 @@ type UpdateFeatureInput struct {
 	// update. If the array includes a variation name that already exists for this
 	// feature, it is updated. If it includes a new variation name, it is added as a
 	// new variation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AddOrUpdateVariations []types.VariationConfig
 
 	// The name of the variation to use as the default variation. The default
 	// variation is served to users who are not allocated to any ongoing launches or
 	// experiments of this feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultVariation *string
 
 	// An optional description of the feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Specified users that should always be served a specific variation of a feature.
@@ -68,11 +78,15 @@ type UpdateFeatureInput struct {
 	//
 	// This parameter is limited to 2500 overrides or a total of 40KB. The 40KB limit
 	// includes an overhead of 6 bytes per override.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntityOverrides map[string]string
 
 	// Specify ALL_RULES to activate the traffic allocation specified by any ongoing
 	// launches or experiments. Specify DEFAULT_VARIATION to serve the default
 	// variation to all users instead.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationStrategy types.FeatureEvaluationStrategy
 
 	// Removes a variation from the feature. If the variation you specify doesn't
@@ -80,6 +94,8 @@ type UpdateFeatureInput struct {
 	//
 	// This operation fails if you try to remove a variation that is part of an
 	// ongoing launch or experiment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RemoveVariations []string
 
 	noSmithyDocumentSerde
@@ -90,6 +106,8 @@ type UpdateFeatureOutput struct {
 	// A structure that contains information about the updated feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *types.Feature
 
 	// Metadata pertaining to the operation's result.

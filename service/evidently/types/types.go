@@ -12,6 +12,8 @@ import (
 type CloudWatchLogsDestination struct {
 
 	// The name of the log group where the project stores evaluation events.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LogGroup *string
 
 	noSmithyDocumentSerde
@@ -22,6 +24,8 @@ type CloudWatchLogsDestination struct {
 type CloudWatchLogsDestinationConfig struct {
 
 	// The name of the log group where the project stores evaluation events.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LogGroup *string
 
 	noSmithyDocumentSerde
@@ -34,17 +38,23 @@ type EvaluationRequest struct {
 	// entityID is checked against any override rules assigned for this feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntityId *string
 
 	// The name of the feature being evaluated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *string
 
 	// A JSON block of attributes that you can optionally pass in. This JSON block is
 	// included in the evaluation events sent to Evidently from the user session.
 	//
 	// This value conforms to the media type: application/json
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationContext *string
 
 	noSmithyDocumentSerde
@@ -57,20 +67,28 @@ type EvaluationResult struct {
 	// An internal ID that represents a unique user session of the application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntityId *string
 
 	// The name of the feature being evaluated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *string
 
 	// If this user was assigned to a launch or experiment, this field lists the
 	// launch or experiment name.
 	//
 	// This value conforms to the media type: application/json
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Details *string
 
 	// The name or ARN of the project that contains the feature being evaluated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// Specifies the reason that the user session was assigned this variation.
@@ -81,6 +99,8 @@ type EvaluationResult struct {
 
 	// The value assigned to this variation to differentiate it from the other
 	// variations of this feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value VariableValue
 
 	// The name of the variation that was served to the user session.
@@ -98,9 +118,13 @@ type EvaluationRule struct {
 	// experiment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	// The name of the experiment or launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -116,6 +140,8 @@ type Event struct {
 	// This value conforms to the media type: application/json
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Data *string
 
 	// The timestamp of the event.
@@ -128,6 +154,8 @@ type Event struct {
 	// event, which generates metrics from user actions such as clicks and checkouts.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type EventType
 
 	noSmithyDocumentSerde
@@ -139,6 +167,8 @@ type Experiment struct {
 	// The ARN of the experiment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time that the experiment is first created.
@@ -154,43 +184,61 @@ type Experiment struct {
 	// The name of the experiment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current state of the experiment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ExperimentStatus
 
 	// The type of this experiment. Currently, this value must be
 	// aws.experiment.onlineab .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type ExperimentType
 
 	// A description of the experiment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A structure that contains the date and time that the experiment started and
 	// ended.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Execution *ExperimentExecution
 
 	// An array of structures that defines the metrics used for the experiment, and
 	// whether a higher or lower value for each metric is the goal.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricGoals []MetricGoal
 
 	// A structure that contains the configuration of which variation to use as the
 	// "control" version. The "control" version is used for comparison with other
 	// variations. This structure also specifies how much experiment traffic is
 	// allocated to each variation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OnlineAbDefinition *OnlineAbDefinition
 
 	// The name or ARN of the project that contains this experiment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// This value is used when Evidently assigns a particular user session to the
 	// experiment. It helps create a randomization ID to determine which variation the
 	// user session is served. This randomization ID is a combination of the entity ID
 	// and randomizationSalt .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RandomizationSalt *string
 
 	// In thousandths of a percent, the amount of the available audience that is
@@ -200,24 +248,36 @@ type Experiment struct {
 	//
 	// This is represented in thousandths of a percent, so a value of 10,000 is 10% of
 	// the available audience.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SamplingRate int64
 
 	// A structure that contains the time and date that Evidently completed the
 	// analysis of the experiment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Schedule *ExperimentSchedule
 
 	// The audience segment being used for the experiment, if a segment is being used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Segment *string
 
 	// If the experiment was stopped, this is the string that was entered by the
 	// person who stopped the experiment, to explain why it was stopped.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusReason *string
 
 	// The list of tag keys and values associated with this experiment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// An array of structures that describe the configuration of each feature
 	// variation used in the experiment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Treatments []Treatment
 
 	noSmithyDocumentSerde
@@ -241,15 +301,23 @@ type ExperimentReport struct {
 	// The content of the report.
 	//
 	// This value conforms to the media type: application/json
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Content *string
 
 	// The name of the metric that is analyzed in this experiment report.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricName *string
 
 	// The type of analysis used for this report.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReportName ExperimentReportName
 
 	// The name of the variation that this report pertains to.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TreatmentName *string
 
 	noSmithyDocumentSerde
@@ -260,15 +328,23 @@ type ExperimentReport struct {
 type ExperimentResultsData struct {
 
 	// The name of the metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricName *string
 
 	// The experiment statistic that these results pertain to.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResultStat ExperimentResultResponseType
 
 	// The treatment, or variation, that returned the values in this structure.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TreatmentName *string
 
 	// The values for the metricName that were recorded in the experiment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Values []float64
 
 	noSmithyDocumentSerde
@@ -290,6 +366,8 @@ type Feature struct {
 	// The ARN of the feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time that the feature is created.
@@ -302,6 +380,8 @@ type Feature struct {
 	// default variation is being served to all users.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationStrategy FeatureEvaluationStrategy
 
 	// The date and time that the feature was most recently updated.
@@ -312,11 +392,15 @@ type Feature struct {
 	// The name of the feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current state of the feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status FeatureStatus
 
 	// Defines the type of value used to define the different feature variations. For
@@ -325,12 +409,16 @@ type Feature struct {
 	// [Variation types]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-variationtypes.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValueType VariationValueType
 
 	// An array of structures that contain the configuration of the feature's
 	// different variations.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Variations []Variation
 
 	// The name of the variation that is used as the default variation. The default
@@ -341,9 +429,13 @@ type Feature struct {
 	//
 	// If you omit defaultVariation , the first variation listed in the variations
 	// structure is used as the default variation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultVariation *string
 
 	// The description of the feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A set of key-value pairs that specify users who should always be served a
@@ -355,15 +447,23 @@ type Feature struct {
 	// used in the [EvaluateFeature]operation.
 	//
 	// [EvaluateFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntityOverrides map[string]string
 
 	// An array of structures that define the evaluation rules for the feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationRules []EvaluationRule
 
 	// The name or ARN of the project that contains the feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// The list of tag keys and values associated with this feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -375,6 +475,8 @@ type FeatureSummary struct {
 	// The ARN of the feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time that the feature is created.
@@ -387,6 +489,8 @@ type FeatureSummary struct {
 	// default variation is being served to all users.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationStrategy FeatureEvaluationStrategy
 
 	// The date and time that the feature was most recently updated.
@@ -397,25 +501,37 @@ type FeatureSummary struct {
 	// The name of the feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current state of the feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status FeatureStatus
 
 	// The name of the variation that is used as the default variation. The default
 	// variation is served to users who are not allocated to any ongoing launches or
 	// experiments of this feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultVariation *string
 
 	// An array of structures that define
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationRules []EvaluationRule
 
 	// The name or ARN of the project that contains the feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// The list of tag keys and values associated with this feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -427,6 +543,8 @@ type Launch struct {
 	// The ARN of the launch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time that the launch is created.
@@ -442,51 +560,75 @@ type Launch struct {
 	// The name of the launch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current state of the launch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status LaunchStatus
 
 	// The type of launch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type LaunchType
 
 	// The description of the launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A structure that contains information about the start and end times of the
 	// launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Execution *LaunchExecution
 
 	// An array of structures that define the feature variations that are being used
 	// in the launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Groups []LaunchGroup
 
 	// An array of structures that define the metrics that are being used to monitor
 	// the launch performance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricMonitors []MetricMonitor
 
 	// The name or ARN of the project that contains the launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// This value is used when Evidently assigns a particular user session to the
 	// launch, to help create a randomization ID to determine which variation the user
 	// session is served. This randomization ID is a combination of the entity ID and
 	// randomizationSalt .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RandomizationSalt *string
 
 	// An array of structures that define the traffic allocation percentages among the
 	// feature variations during each step of the launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScheduledSplitsDefinition *ScheduledSplitsLaunchDefinition
 
 	// If the launch was stopped, this is the string that was entered by the person
 	// who stopped the launch, to explain why it was stopped.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusReason *string
 
 	// The list of tag keys and values associated with this launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -511,14 +653,20 @@ type LaunchGroup struct {
 	// The feature variation for this launch group. This is a key-value pair.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FeatureVariations map[string]string
 
 	// The name of the launch group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A description of the launch group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -531,19 +679,27 @@ type LaunchGroupConfig struct {
 	// The feature that this launch is using.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *string
 
 	// A name for this launch group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The feature variation to use for this launch group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Variation *string
 
 	// A description of the launch group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -555,6 +711,8 @@ type MetricDefinition struct {
 
 	// The entity, such as a user or session, that does an action that causes a metric
 	// value to be recorded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntityIdKey *string
 
 	// The EventBridge event pattern that defines how the metric is recorded.
@@ -564,15 +722,23 @@ type MetricDefinition struct {
 	// [Amazon EventBridge event patterns]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
 	//
 	// This value conforms to the media type: application/json
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EventPattern *string
 
 	// The name of the metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The label for the units that the metric is measuring.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UnitLabel *string
 
 	// The value that is tracked to produce the metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValueKey *string
 
 	noSmithyDocumentSerde
@@ -586,16 +752,22 @@ type MetricDefinitionConfig struct {
 	// value to be recorded. An example is userDetails.userID .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntityIdKey *string
 
 	// A name for the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The value that is tracked to produce the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValueKey *string
 
 	// The EventBridge event pattern that defines how the metric is recorded.
@@ -605,9 +777,13 @@ type MetricDefinitionConfig struct {
 	// [Amazon EventBridge event patterns]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
 	//
 	// This value conforms to the media type: application/json
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EventPattern *string
 
 	// A label for the units that the metric is measuring.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UnitLabel *string
 
 	noSmithyDocumentSerde
@@ -620,6 +796,8 @@ type MetricGoal struct {
 	// A structure that contains details about the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricDefinition *MetricDefinition
 
 	// INCREASE means that a variation with a higher number for this metric is
@@ -627,6 +805,8 @@ type MetricGoal struct {
 	//
 	// DECREASE means that a variation with a lower number for this metric is
 	// performing better.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DesiredChange ChangeDirectionEnum
 
 	noSmithyDocumentSerde
@@ -639,6 +819,8 @@ type MetricGoalConfig struct {
 	// A structure that contains details about the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricDefinition *MetricDefinitionConfig
 
 	// INCREASE means that a variation with a higher number for this metric is
@@ -646,6 +828,8 @@ type MetricGoalConfig struct {
 	//
 	// DECREASE means that a variation with a lower number for this metric is
 	// performing better.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DesiredChange ChangeDirectionEnum
 
 	noSmithyDocumentSerde
@@ -658,6 +842,8 @@ type MetricMonitor struct {
 	// A structure that defines the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricDefinition *MetricDefinition
 
 	noSmithyDocumentSerde
@@ -670,6 +856,8 @@ type MetricMonitorConfig struct {
 	// A structure that defines the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricDefinition *MetricDefinitionConfig
 
 	noSmithyDocumentSerde
@@ -683,12 +871,16 @@ type OnlineAbConfig struct {
 
 	// The name of the variation that is to be the default variation that the other
 	// variations are compared to.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ControlTreatmentName *string
 
 	// A set of key-value pairs. The keys are variation names, and the values are the
 	// portion of experiment traffic to be assigned to that variation. Specify the
 	// traffic portion in thousandths of a percent, so 20,000 for a variation would
 	// allocate 20% of the experiment traffic to that variation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TreatmentWeights map[string]int64
 
 	noSmithyDocumentSerde
@@ -702,12 +894,16 @@ type OnlineAbDefinition struct {
 
 	// The name of the variation that is the default variation that the other
 	// variations are compared to.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ControlTreatmentName *string
 
 	// A set of key-value pairs. The keys are variation names, and the values are the
 	// portion of experiment traffic to be assigned to that variation. The traffic
 	// portion is specified in thousandths of a percent, so 20,000 for a variation
 	// would allocate 20% of the experiment traffic to that variation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TreatmentWeights map[string]int64
 
 	noSmithyDocumentSerde
@@ -721,6 +917,8 @@ type Project struct {
 	// The name or ARN of the project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time that the project is created.
@@ -736,11 +934,15 @@ type Project struct {
 	// The name of the project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current state of the project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ProjectStatus
 
 	// The number of ongoing experiments currently in the project.
@@ -751,13 +953,19 @@ type Project struct {
 
 	// This structure defines the configuration of how your application integrates
 	// with AppConfig to run client-side evaluation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppConfigResource *ProjectAppConfigResource
 
 	// A structure that contains information about where Evidently is to store
 	// evaluation events for longer term storage.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataDelivery *ProjectDataDelivery
 
 	// The user-entered description of the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The number of experiments currently in the project. This includes all
@@ -773,6 +981,8 @@ type Project struct {
 	LaunchCount *int64
 
 	// The list of tag keys and values associated with this project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -785,11 +995,15 @@ type ProjectAppConfigResource struct {
 	// The ID of the AppConfig application to use for client-side evaluation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationId *string
 
 	// The ID of the AppConfig profile to use for client-side evaluation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConfigurationProfileId *string
 
 	// The ID of the AppConfig environment to use for client-side evaluation. This
@@ -797,6 +1011,8 @@ type ProjectAppConfigResource struct {
 	// applicationId .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
@@ -814,11 +1030,15 @@ type ProjectAppConfigResource struct {
 type ProjectAppConfigResourceConfig struct {
 
 	// The ID of the AppConfig application to use for client-side evaluation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationId *string
 
 	// The ID of the AppConfig environment to use for client-side evaluation. This
 	// must be an environment that is within the application that you specify for
 	// applicationId .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
@@ -830,10 +1050,14 @@ type ProjectDataDelivery struct {
 
 	// If the project stores evaluation events in CloudWatch Logs, this structure
 	// stores the log group name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CloudWatchLogs *CloudWatchLogsDestination
 
 	// If the project stores evaluation events in an Amazon S3 bucket, this structure
 	// stores the bucket name and bucket prefix.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Destination *S3Destination
 
 	noSmithyDocumentSerde
@@ -845,10 +1069,14 @@ type ProjectDataDeliveryConfig struct {
 
 	// If the project stores evaluation events in CloudWatch Logs, this structure
 	// stores the log group name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CloudWatchLogs *CloudWatchLogsDestinationConfig
 
 	// If the project stores evaluation events in an Amazon S3 bucket, this structure
 	// stores the bucket name and bucket prefix.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Destination *S3DestinationConfig
 
 	noSmithyDocumentSerde
@@ -860,6 +1088,8 @@ type ProjectSummary struct {
 	// The name or ARN of the project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time that the project is created.
@@ -875,11 +1105,15 @@ type ProjectSummary struct {
 	// The name of the project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current state of the project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ProjectStatus
 
 	// The number of experiments currently in the project.
@@ -889,6 +1123,8 @@ type ProjectSummary struct {
 	ActiveLaunchCount *int64
 
 	// The description of the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The number of experiments currently in the project.
@@ -902,6 +1138,8 @@ type ProjectSummary struct {
 	LaunchCount *int64
 
 	// The list of tag keys and values associated with this project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -912,13 +1150,19 @@ type ProjectSummary struct {
 type PutProjectEventsResultEntry struct {
 
 	// If the PutProjectEvents operation has an error, the error code is returned here.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorCode *string
 
 	// If the PutProjectEvents operation has an error, the error message is returned
 	// here.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	// A unique ID assigned to this PutProjectEvents operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EventId *string
 
 	noSmithyDocumentSerde
@@ -962,9 +1206,13 @@ type RefResource struct {
 type S3Destination struct {
 
 	// The name of the bucket in which Evidently stores evaluation events.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The bucket prefix in which Evidently stores evaluation events.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -975,9 +1223,13 @@ type S3Destination struct {
 type S3DestinationConfig struct {
 
 	// The name of the bucket in which Evidently stores evaluation events.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The bucket prefix in which Evidently stores evaluation events.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -1004,6 +1256,8 @@ type ScheduledSplit struct {
 	// add up to 100,000, then the remaining traffic that matches this segment is not
 	// assigned by this segment override, and instead moves on to the next segment
 	// override or the default traffic split.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GroupWeights map[string]int64
 
 	// Use this parameter to specify different traffic splits for one or more audience
@@ -1015,6 +1269,8 @@ type ScheduledSplit struct {
 	// This parameter is an array of up to six segment override objects. Each of these
 	// objects specifies a segment that you have already created, and defines the
 	// traffic split for that segment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SegmentOverrides []SegmentOverride
 
 	noSmithyDocumentSerde
@@ -1038,6 +1294,8 @@ type ScheduledSplitConfig struct {
 	// override or the default traffic split.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GroupWeights map[string]int64
 
 	// The date and time that this step of the launch starts.
@@ -1054,6 +1312,8 @@ type ScheduledSplitConfig struct {
 	// This parameter is an array of up to six segment override objects. Each of these
 	// objects specifies a segment that you have already created, and defines the
 	// traffic split for that segment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SegmentOverrides []SegmentOverride
 
 	noSmithyDocumentSerde
@@ -1069,6 +1329,8 @@ type ScheduledSplitsLaunchConfig struct {
 	// time of each step.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Steps []ScheduledSplitConfig
 
 	noSmithyDocumentSerde
@@ -1082,6 +1344,8 @@ type ScheduledSplitsLaunchDefinition struct {
 	// An array of structures that define the traffic allocation percentages among the
 	// feature variations during each step of the launch. This also defines the start
 	// time of each step.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Steps []ScheduledSplit
 
 	noSmithyDocumentSerde
@@ -1095,6 +1359,8 @@ type Segment struct {
 	// The ARN of the segment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time that this segment was created.
@@ -1110,6 +1376,8 @@ type Segment struct {
 	// The name of the segment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The pattern that defines the attributes to use to evalute whether a user
@@ -1121,9 +1389,13 @@ type Segment struct {
 	// This value conforms to the media type: application/json
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pattern *string
 
 	// The customer-created description for this segment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The number of experiments that this segment is used in. This count includes all
@@ -1135,6 +1407,8 @@ type Segment struct {
 	LaunchCount *int64
 
 	// The list of tag keys and values associated with this launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1153,6 +1427,8 @@ type SegmentOverride struct {
 	// The ARN of the segment to use.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Segment *string
 
 	// The traffic allocation percentages among the feature variations to assign to
@@ -1162,6 +1438,8 @@ type SegmentOverride struct {
 	// 50000 represents 50% of traffic.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Weights map[string]int64
 
 	noSmithyDocumentSerde
@@ -1174,13 +1452,19 @@ type Treatment struct {
 	// The name of this treatment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The description of the treatment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The feature variation used for this treatment. This is a key-value pair. The
 	// key is the feature name, and the value is the variation name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FeatureVariations map[string]string
 
 	noSmithyDocumentSerde
@@ -1193,19 +1477,27 @@ type TreatmentConfig struct {
 	// The feature that this experiment is testing.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *string
 
 	// A name for this treatment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The name of the variation to use as this treatment in the experiment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Variation *string
 
 	// A description for this treatment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -1285,9 +1577,13 @@ func (*VariableValueMemberStringValue) isVariableValue() {}
 type Variation struct {
 
 	// The name of the variation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The value assigned to this variation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value VariableValue
 
 	noSmithyDocumentSerde
@@ -1300,11 +1596,15 @@ type VariationConfig struct {
 	// The name of the variation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The value assigned to this variation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value VariableValue
 
 	noSmithyDocumentSerde

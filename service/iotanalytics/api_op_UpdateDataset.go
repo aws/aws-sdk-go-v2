@@ -12,6 +12,8 @@ import (
 )
 
 // Updates the settings of a dataset.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, optFns ...func(*Options)) (*UpdateDatasetOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetInput{}
@@ -32,28 +34,40 @@ type UpdateDatasetInput struct {
 	// A list of DatasetAction objects.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Actions []types.DatasetAction
 
 	// The name of the dataset to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetName *string
 
 	// When dataset contents are created, they are delivered to destinations specified
 	// here.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
 	// A list of data rules that send notifications to CloudWatch, when data arrives
 	// late. To specify lateDataRules , the dataset must use a [DeltaTimer] filter.
 	//
 	// [DeltaTimer]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LateDataRules []types.LateDataRule
 
 	// How long, in days, dataset contents are kept for the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *types.RetentionPeriod
 
 	// A list of DatasetTrigger objects. The list can be empty or can contain up to
 	// five DatasetTrigger objects.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Triggers []types.DatasetTrigger
 
 	// Optional. How many versions of dataset contents are kept. If not specified or
@@ -62,6 +76,8 @@ type UpdateDatasetInput struct {
 	// parameter. For more information, see [Keeping Multiple Versions of IoT Analytics datasets]in the IoT Analytics User Guide.
 	//
 	// [Keeping Multiple Versions of IoT Analytics datasets]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VersioningConfiguration *types.VersioningConfiguration
 
 	noSmithyDocumentSerde

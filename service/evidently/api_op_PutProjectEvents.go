@@ -14,7 +14,7 @@ import (
 // Sends performance events to Evidently. These events can be used to evaluate a
 // launch or an experiment.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) PutProjectEvents(ctx context.Context, params *PutProjectEventsInput, optFns ...func(*Options)) (*PutProjectEventsOutput, error) {
 	if params == nil {
 		params = &PutProjectEventsInput{}
@@ -36,11 +36,15 @@ type PutProjectEventsInput struct {
 	// sent to Evidently.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Events []types.Event
 
 	// The name or ARN of the project to write the events to.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	noSmithyDocumentSerde
@@ -50,6 +54,8 @@ type PutProjectEventsOutput struct {
 
 	// A structure that contains Evidently's response to the sent events, including an
 	// event ID and error codes, if any.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EventResults []types.PutProjectEventsResultEntry
 
 	// The number of events in the operation that could not be used by Evidently.

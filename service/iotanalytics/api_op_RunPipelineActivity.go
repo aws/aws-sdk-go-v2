@@ -12,6 +12,8 @@ import (
 )
 
 // Simulates the results of running a pipeline activity on a message payload.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) RunPipelineActivity(ctx context.Context, params *RunPipelineActivityInput, optFns ...func(*Options)) (*RunPipelineActivityOutput, error) {
 	if params == nil {
 		params = &RunPipelineActivityInput{}
@@ -32,6 +34,8 @@ type RunPipelineActivityInput struct {
 	// The sample message payloads on which the pipeline activity is run.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payloads [][]byte
 
 	// The pipeline activity that is run. This must not be a channel activity or a
@@ -41,6 +45,8 @@ type RunPipelineActivityInput struct {
 	// timeout of less than 30 seconds or less) can be used.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineActivity *types.PipelineActivity
 
 	noSmithyDocumentSerde
@@ -49,11 +55,15 @@ type RunPipelineActivityInput struct {
 type RunPipelineActivityOutput struct {
 
 	// In case the pipeline activity fails, the log message that is generated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LogResult *string
 
 	// The enriched or transformed sample message payloads as base64-encoded strings.
 	// (The results of running the pipeline activity on each input sample message
 	// payload, encoded in base64.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payloads [][]byte
 
 	// Metadata pertaining to the operation's result.

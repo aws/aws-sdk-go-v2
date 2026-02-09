@@ -27,7 +27,7 @@ import (
 // evaluationContext , which is passed into Evidently in the [EvaluateFeature] operation, when
 // Evidently assigns a feature variation to a user.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Segment rule pattern syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html
 // [EvaluateFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
@@ -51,6 +51,8 @@ type CreateSegmentInput struct {
 	// A name for the segment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The pattern to use for the segment. For more information about pattern syntax,
@@ -61,9 +63,13 @@ type CreateSegmentInput struct {
 	// This value conforms to the media type: application/json
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pattern *string
 
 	// An optional description for this segment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Assigns one or more tags (key-value pairs) to the segment.
@@ -80,6 +86,8 @@ type CreateSegmentInput struct {
 	// For more information, see [Tagging Amazon Web Services resources].
 	//
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -91,6 +99,8 @@ type CreateSegmentOutput struct {
 	// just created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Segment *types.Segment
 
 	// Metadata pertaining to the operation's result.

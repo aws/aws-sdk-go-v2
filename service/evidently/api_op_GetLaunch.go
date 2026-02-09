@@ -14,7 +14,7 @@ import (
 // Returns the details about one launch. You must already know the launch name. To
 // retrieve a list of launches in your account, use [ListLaunches].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [ListLaunches]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListLaunches.html
 func (c *Client) GetLaunch(ctx context.Context, params *GetLaunchInput, optFns ...func(*Options)) (*GetLaunchOutput, error) {
@@ -37,11 +37,15 @@ type GetLaunchInput struct {
 	// The name of the launch that you want to see the details of.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Launch *string
 
 	// The name or ARN of the project that contains the launch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	noSmithyDocumentSerde
@@ -50,6 +54,8 @@ type GetLaunchInput struct {
 type GetLaunchOutput struct {
 
 	// A structure containing the configuration details of the launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Launch *types.Launch
 
 	// Metadata pertaining to the operation's result.

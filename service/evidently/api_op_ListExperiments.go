@@ -14,7 +14,7 @@ import (
 // Returns configuration details about all the experiments in the specified
 // project.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListExperiments(ctx context.Context, params *ListExperimentsInput, optFns ...func(*Options)) (*ListExperimentsOutput, error) {
 	if params == nil {
 		params = &ListExperimentsInput{}
@@ -35,17 +35,25 @@ type ListExperimentsInput struct {
 	// The name or ARN of the project to return the experiment list from.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// The maximum number of results to include in the response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token to use when requesting the next set of results. You received this
 	// token from a previous ListExperiments operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Use this optional parameter to limit the returned results to only the
 	// experiments with the status that you specify here.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.ExperimentStatus
 
 	noSmithyDocumentSerde
@@ -55,10 +63,14 @@ type ListExperimentsOutput struct {
 
 	// An array of structures that contain the configuration details of the
 	// experiments in the specified project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Experiments []types.Experiment
 
 	// The token to use in a subsequent ListExperiments operation to return the next
 	// set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

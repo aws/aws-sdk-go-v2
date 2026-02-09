@@ -13,7 +13,7 @@ import (
 
 // Starts an existing launch. To create a launch, use [CreateLaunch].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [CreateLaunch]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateLaunch.html
 func (c *Client) StartLaunch(ctx context.Context, params *StartLaunchInput, optFns ...func(*Options)) (*StartLaunchOutput, error) {
@@ -36,11 +36,15 @@ type StartLaunchInput struct {
 	// The name of the launch to start.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Launch *string
 
 	// The name or ARN of the project that contains the launch to start.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	noSmithyDocumentSerde
@@ -51,6 +55,8 @@ type StartLaunchOutput struct {
 	// A structure that contains information about the launch that was started.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Launch *types.Launch
 
 	// Metadata pertaining to the operation's result.

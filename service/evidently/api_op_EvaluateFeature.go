@@ -45,7 +45,7 @@ import (
 // If the user is not assigned to a launch or experiment, they are served the
 // default variation.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Use segments to focus your audience]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html
 // [CreateSegment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html
@@ -70,16 +70,22 @@ type EvaluateFeatureInput struct {
 	// is checked against any override rules assigned for this feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntityId *string
 
 	// The name of the feature being evaluated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *string
 
 	// The name or ARN of the project that contains this feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// A JSON object of attributes that you can optionally pass in as part of the
@@ -93,6 +99,8 @@ type EvaluateFeatureInput struct {
 	// [Use segments to focus your audience]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html
 	//
 	// This value conforms to the media type: application/json
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationContext *string
 
 	noSmithyDocumentSerde
@@ -104,6 +112,8 @@ type EvaluateFeatureOutput struct {
 	// launch or experiment name.
 	//
 	// This value conforms to the media type: application/json
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Details *string
 
 	// Specifies the reason that the user session was assigned this variation.
@@ -115,6 +125,8 @@ type EvaluateFeatureOutput struct {
 
 	// The value assigned to this variation to differentiate it from the other
 	// variations of this feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value types.VariableValue
 
 	// The name of the variation that was served to the user session.

@@ -18,14 +18,20 @@ type AddAttributesActivity struct {
 	// originals, use RemoveAttributeActivity .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// The name of the addAttributes activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The next activity in the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Next *string
 
 	noSmithyDocumentSerde
@@ -35,13 +41,19 @@ type AddAttributesActivity struct {
 type BatchPutMessageErrorEntry struct {
 
 	// The code associated with the error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorCode *string
 
 	// The message associated with the error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	// The ID of the message that caused the error. See the value corresponding to the
 	// messageId key in the message object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MessageId *string
 
 	noSmithyDocumentSerde
@@ -52,9 +64,13 @@ type BatchPutMessageErrorEntry struct {
 type Channel struct {
 
 	// The ARN of the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// When the channel was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The last time when a new message arrived in the channel.
@@ -64,23 +80,35 @@ type Channel struct {
 	//
 	// This feature only applies to messages that arrived in the data store after
 	// October 23, 2020.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastMessageArrivalTime *time.Time
 
 	// When the channel was last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The name of the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// How long, in days, message data is kept for the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *RetentionPeriod
 
 	// The status of the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ChannelStatus
 
 	// Where channel data is stored. You can choose one of serviceManagedS3 or
 	// customerManagedS3 storage. If not specified, the default is serviceManagedS3 .
 	// You can't change this storage option after the channel is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Storage *ChannelStorage
 
 	noSmithyDocumentSerde
@@ -92,14 +120,20 @@ type ChannelActivity struct {
 	// The name of the channel from which the messages are processed.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelName *string
 
 	// The name of the channel activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The next activity in the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Next *string
 
 	noSmithyDocumentSerde
@@ -115,6 +149,8 @@ type ChannelMessages struct {
 	//
 	// Example path: channel/mychannel/__dt=2020-02-29
 	// 00:00:00/1582940490000_1582940520000_123456789012_mychannel_0_2118.0.json.gz
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Paths []string
 
 	noSmithyDocumentSerde
@@ -124,6 +160,8 @@ type ChannelMessages struct {
 type ChannelStatistics struct {
 
 	// The estimated size of the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Size *EstimatedResourceSize
 
 	noSmithyDocumentSerde
@@ -137,10 +175,14 @@ type ChannelStorage struct {
 	// Used to store channel data in an S3 bucket that you manage. If customer managed
 	// storage is selected, the retentionPeriod parameter is ignored. You can't change
 	// the choice of S3 storage after the data store is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomerManagedS3 *CustomerManagedChannelS3Storage
 
 	// Used to store channel data in an S3 bucket managed by IoT Analytics. You can't
 	// change the choice of S3 storage after the data store is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceManagedS3 *ServiceManagedChannelS3Storage
 
 	noSmithyDocumentSerde
@@ -150,9 +192,13 @@ type ChannelStorage struct {
 type ChannelStorageSummary struct {
 
 	// Used to store channel data in an S3 bucket that you manage.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomerManagedS3 *CustomerManagedChannelS3StorageSummary
 
 	// Used to store channel data in an S3 bucket managed by IoT Analytics.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceManagedS3 *ServiceManagedChannelS3StorageSummary
 
 	noSmithyDocumentSerde
@@ -162,12 +208,18 @@ type ChannelStorageSummary struct {
 type ChannelSummary struct {
 
 	// The name of the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelName *string
 
 	// Where channel data is stored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelStorage *ChannelStorageSummary
 
 	// When the channel was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The last time when a new message arrived in the channel.
@@ -177,12 +229,18 @@ type ChannelSummary struct {
 	//
 	// This feature only applies to messages that arrived in the data store after
 	// October 23, 2020.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastMessageArrivalTime *time.Time
 
 	// The last time the channel was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The status of the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ChannelStatus
 
 	noSmithyDocumentSerde
@@ -194,6 +252,8 @@ type Column struct {
 	// The name of the column.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The type of data. For more information about the supported data types, see [Common data types] in
@@ -202,6 +262,8 @@ type Column struct {
 	// [Common data types]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -216,6 +278,8 @@ type ContainerDatasetAction struct {
 	// application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecutionRoleArn *string
 
 	// The ARN of the Docker container stored in your account. The Docker container
@@ -223,17 +287,23 @@ type ContainerDatasetAction struct {
 	// dataset contents.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Image *string
 
 	// Configuration of the resource that executes the containerAction .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceConfiguration *ResourceConfiguration
 
 	// The values of variables used in the context of the execution of the
 	// containerized application (basically, parameters passed to the application).
 	// Each variable must have a name and a value given by one of stringValue ,
 	// datasetContentVersionValue , or outputFileUriValue .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Variables []Variable
 
 	noSmithyDocumentSerde
@@ -247,18 +317,24 @@ type CustomerManagedChannelS3Storage struct {
 	// The name of the S3 bucket in which channel data is stored.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The ARN of the role that grants IoT Analytics permission to interact with your
 	// Amazon S3 resources.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// (Optional) The prefix used to create the keys of the channel data objects. Each
 	// object in an S3 bucket has a key that is its unique identifier in the bucket.
 	// Each object in a bucket has exactly one key. The prefix must end with a forward
 	// slash (/).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyPrefix *string
 
 	noSmithyDocumentSerde
@@ -268,16 +344,22 @@ type CustomerManagedChannelS3Storage struct {
 type CustomerManagedChannelS3StorageSummary struct {
 
 	// The name of the S3 bucket in which channel data is stored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// (Optional) The prefix used to create the keys of the channel data objects. Each
 	// object in an S3 bucket has a key that is its unique identifier within the bucket
 	// (each object in a bucket has exactly one key). The prefix must end with a
 	// forward slash (/).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyPrefix *string
 
 	// The ARN of the role that grants IoT Analytics permission to interact with your
 	// Amazon S3 resources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -291,18 +373,24 @@ type CustomerManagedDatastoreS3Storage struct {
 	// The name of the Amazon S3 bucket where your data is stored.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The ARN of the role that grants IoT Analytics permission to interact with your
 	// Amazon S3 resources.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// (Optional) The prefix used to create the keys of the data store data objects.
 	// Each object in an Amazon S3 bucket has a key that is its unique identifier in
 	// the bucket. Each object in a bucket has exactly one key. The prefix must end
 	// with a forward slash (/).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyPrefix *string
 
 	noSmithyDocumentSerde
@@ -312,16 +400,22 @@ type CustomerManagedDatastoreS3Storage struct {
 type CustomerManagedDatastoreS3StorageSummary struct {
 
 	// The name of the Amazon S3 bucket where your data is stored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// (Optional) The prefix used to create the keys of the data store data objects.
 	// Each object in an Amazon S3 bucket has a key that is its unique identifier in
 	// the bucket. Each object in a bucket has exactly one key. The prefix must end
 	// with a forward slash (/).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyPrefix *string
 
 	// The ARN of the role that grants IoT Analytics permission to interact with your
 	// Amazon S3 resources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -331,38 +425,58 @@ type CustomerManagedDatastoreS3StorageSummary struct {
 type Dataset struct {
 
 	// The DatasetAction objects that automatically create the dataset contents.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Actions []DatasetAction
 
 	// The ARN of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// When dataset contents are created they are delivered to destinations specified
 	// here.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentDeliveryRules []DatasetContentDeliveryRule
 
 	// When the dataset was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The last time the dataset was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// A list of data rules that send notifications to CloudWatch, when data arrives
 	// late. To specify lateDataRules , the dataset must use a [DeltaTimer] filter.
 	//
 	// [DeltaTimer]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LateDataRules []LateDataRule
 
 	// The name of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Optional. How long, in days, message data is kept for the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *RetentionPeriod
 
 	// The status of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DatasetStatus
 
 	// The DatasetTrigger objects that specify when the dataset is automatically
 	// updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Triggers []DatasetTrigger
 
 	// Optional. How many versions of dataset contents are kept. If not specified or
@@ -371,6 +485,8 @@ type Dataset struct {
 	// parameter. For more information, see [Keeping Multiple Versions of IoT Analytics datasets]in the IoT Analytics User Guide.
 	//
 	// [Keeping Multiple Versions of IoT Analytics datasets]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VersioningConfiguration *VersioningConfiguration
 
 	noSmithyDocumentSerde
@@ -382,15 +498,21 @@ type DatasetAction struct {
 
 	// The name of the dataset action by which dataset contents are automatically
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActionName *string
 
 	// Information that allows the system to run a containerized application to create
 	// the dataset contents. The application must be in a Docker container along with
 	// any required support libraries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContainerAction *ContainerDatasetAction
 
 	// An SqlQueryDatasetAction object that uses an SQL query to automatically create
 	// dataset contents.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	QueryAction *SqlQueryDatasetAction
 
 	noSmithyDocumentSerde
@@ -400,9 +522,13 @@ type DatasetAction struct {
 type DatasetActionSummary struct {
 
 	// The name of the action that automatically creates the dataset's contents.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActionName *string
 
 	// The type of action by which the dataset's contents are automatically created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActionType DatasetActionType
 
 	noSmithyDocumentSerde
@@ -412,9 +538,13 @@ type DatasetActionSummary struct {
 type DatasetContentDeliveryDestination struct {
 
 	// Configuration information for delivery of dataset contents to IoT Events.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotEventsDestinationConfiguration *IotEventsDestinationConfiguration
 
 	// Configuration information for delivery of dataset contents to Amazon S3.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3DestinationConfiguration *S3DestinationConfiguration
 
 	noSmithyDocumentSerde
@@ -427,9 +557,13 @@ type DatasetContentDeliveryRule struct {
 	// The destination to which dataset contents are delivered.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Destination *DatasetContentDeliveryDestination
 
 	// The name of the dataset content delivery rules entry.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntryName *string
 
 	noSmithyDocumentSerde
@@ -439,10 +573,14 @@ type DatasetContentDeliveryRule struct {
 type DatasetContentStatus struct {
 
 	// The reason the dataset contents are in this state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Reason *string
 
 	// The state of the dataset contents. Can be one of READY, CREATING, SUCCEEDED, or
 	// FAILED.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State DatasetContentState
 
 	noSmithyDocumentSerde
@@ -452,18 +590,28 @@ type DatasetContentStatus struct {
 type DatasetContentSummary struct {
 
 	// The time the dataset content status was updated to SUCCEEDED or FAILED.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CompletionTime *time.Time
 
 	// The actual time the creation of the dataset contents was started.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The time the creation of the dataset contents was scheduled to start.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScheduleTime *time.Time
 
 	// The status of the dataset contents.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *DatasetContentStatus
 
 	// The version of the dataset contents.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -477,6 +625,8 @@ type DatasetContentVersionValue struct {
 	// or application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetName *string
 
 	noSmithyDocumentSerde
@@ -486,9 +636,13 @@ type DatasetContentVersionValue struct {
 type DatasetEntry struct {
 
 	// The presigned URI of the dataset item.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataURI *string
 
 	// The name of the dataset item.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntryName *string
 
 	noSmithyDocumentSerde
@@ -498,23 +652,35 @@ type DatasetEntry struct {
 type DatasetSummary struct {
 
 	// A list of DataActionSummary objects.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Actions []DatasetActionSummary
 
 	// The time the dataset was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The name of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetName *string
 
 	// The last time the dataset was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The status of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DatasetStatus
 
 	// A list of triggers. A trigger causes dataset content to be populated at a
 	// specified time interval or when another dataset is populated. The list of
 	// triggers can be empty or contain up to five DataSetTrigger objects
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Triggers []DatasetTrigger
 
 	noSmithyDocumentSerde
@@ -525,9 +691,13 @@ type DatasetTrigger struct {
 
 	// The dataset whose content creation triggers the creation of this dataset's
 	// contents.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Dataset *TriggeringDataset
 
 	// The Schedule when the trigger is initiated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Schedule *Schedule
 
 	noSmithyDocumentSerde
@@ -537,12 +707,18 @@ type DatasetTrigger struct {
 type Datastore struct {
 
 	// The ARN of the data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// When the data store was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	//  Contains information about the partition dimensions in a data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastorePartitions *DatastorePartitions
 
 	// Contains the configuration information of file formats. IoT Analytics data
@@ -553,6 +729,8 @@ type Datastore struct {
 	// You can't change the file format after you create the data store.
 	//
 	// [Parquet]: https://parquet.apache.org/
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileFormatConfiguration *FileFormatConfiguration
 
 	// The last time when a new message arrived in the data store.
@@ -563,16 +741,24 @@ type Datastore struct {
 	//
 	// This feature only applies to messages that arrived in the data store after
 	// October 23, 2020.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastMessageArrivalTime *time.Time
 
 	// The last time the data store was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The name of the data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// How long, in days, message data is kept for the data store. When
 	// customerManagedS3 storage is selected, this parameter is ignored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *RetentionPeriod
 
 	// The status of a data store:
@@ -582,12 +768,16 @@ type Datastore struct {
 	// ACTIVE The data store has been created and can be used.
 	//
 	// DELETING The data store is being deleted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DatastoreStatus
 
 	// Where data in a data store is stored.. You can choose serviceManagedS3 storage,
 	// customerManagedS3 storage, or iotSiteWiseMultiLayerStorage storage. The default
 	// is serviceManagedS3 . You can't change the choice of Amazon S3 storage after
 	// your data store is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Storage DatastoreStorage
 
 	noSmithyDocumentSerde
@@ -599,11 +789,15 @@ type DatastoreActivity struct {
 	// The name of the data store where processed messages are stored.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreName *string
 
 	// The name of the datastore activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -619,6 +813,8 @@ type DatastoreIotSiteWiseMultiLayerStorage struct {
 	// manage.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomerManagedS3Storage *IotSiteWiseCustomerManagedDatastoreS3Storage
 
 	noSmithyDocumentSerde
@@ -630,6 +826,8 @@ type DatastoreIotSiteWiseMultiLayerStorage struct {
 type DatastoreIotSiteWiseMultiLayerStorageSummary struct {
 
 	// Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomerManagedS3Storage *IotSiteWiseCustomerManagedDatastoreS3StorageSummary
 
 	noSmithyDocumentSerde
@@ -641,9 +839,13 @@ type DatastoreIotSiteWiseMultiLayerStorageSummary struct {
 type DatastorePartition struct {
 
 	//  A partition dimension defined by an attributeName .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AttributePartition *Partition
 
 	//  A partition dimension defined by a timestamp attribute.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimestampPartition *TimestampPartition
 
 	noSmithyDocumentSerde
@@ -653,6 +855,8 @@ type DatastorePartition struct {
 type DatastorePartitions struct {
 
 	//  A list of partition dimensions in a data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Partitions []DatastorePartition
 
 	noSmithyDocumentSerde
@@ -662,6 +866,8 @@ type DatastorePartitions struct {
 type DatastoreStatistics struct {
 
 	// The estimated size of the data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Size *EstimatedResourceSize
 
 	noSmithyDocumentSerde
@@ -684,6 +890,8 @@ type DatastoreStorage interface {
 // S3-customer-managed; When you choose customer-managed storage, the
 // retentionPeriod parameter is ignored. You can't change the choice of Amazon S3
 // storage after your data store is created.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type DatastoreStorageMemberCustomerManagedS3 struct {
 	Value CustomerManagedDatastoreS3Storage
 
@@ -696,6 +904,8 @@ func (*DatastoreStorageMemberCustomerManagedS3) isDatastoreStorage() {}
 //
 // manage. You can't change the choice of Amazon S3 storage after your data store
 // is created.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type DatastoreStorageMemberIotSiteWiseMultiLayerStorage struct {
 	Value DatastoreIotSiteWiseMultiLayerStorage
 
@@ -706,6 +916,8 @@ func (*DatastoreStorageMemberIotSiteWiseMultiLayerStorage) isDatastoreStorage() 
 
 // Used to store data in an Amazon S3 bucket managed by IoT Analytics. You can't
 // change the choice of Amazon S3 storage after your data store is created.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type DatastoreStorageMemberServiceManagedS3 struct {
 	Value ServiceManagedDatastoreS3Storage
 
@@ -718,13 +930,19 @@ func (*DatastoreStorageMemberServiceManagedS3) isDatastoreStorage() {}
 type DatastoreStorageSummary struct {
 
 	// Used to store data in an Amazon S3 bucket managed by IoT Analytics.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomerManagedS3 *CustomerManagedDatastoreS3StorageSummary
 
 	//  Used to store data used by IoT SiteWise in an Amazon S3 bucket that you
 	// manage.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotSiteWiseMultiLayerStorage *DatastoreIotSiteWiseMultiLayerStorageSummary
 
 	// Used to store data in an Amazon S3 bucket managed by IoT Analytics.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceManagedS3 *ServiceManagedDatastoreS3StorageSummary
 
 	noSmithyDocumentSerde
@@ -734,18 +952,28 @@ type DatastoreStorageSummary struct {
 type DatastoreSummary struct {
 
 	// When the data store was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The name of the data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreName *string
 
 	//  Contains information about the partition dimensions in a data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastorePartitions *DatastorePartitions
 
 	// Where data in a data store is stored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreStorage *DatastoreStorageSummary
 
 	// The file format of the data in the data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileFormatType FileFormatType
 
 	// The last time when a new message arrived in the data store.
@@ -756,12 +984,18 @@ type DatastoreSummary struct {
 	//
 	// This feature only applies to messages that arrived in the data store after
 	// October 23, 2020.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastMessageArrivalTime *time.Time
 
 	// The last time the data store was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The status of the data store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DatastoreStatus
 
 	noSmithyDocumentSerde
@@ -781,6 +1015,8 @@ type DeltaTime struct {
 	// timestamp places it within the previous timeframe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OffsetSeconds *int32
 
 	// An expression by which the time of the message data might be determined. This
@@ -788,6 +1024,8 @@ type DeltaTime struct {
 	// the time the message data was generated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeExpression *string
 
 	noSmithyDocumentSerde
@@ -815,6 +1053,8 @@ type DeltaTimeSessionWindowConfiguration struct {
 	// [Date and Time Functions and Operators]: https://prestodb.io/docs/0.172/functions/datetime.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeoutInMinutes *int32
 
 	noSmithyDocumentSerde
@@ -826,24 +1066,34 @@ type DeviceRegistryEnrichActivity struct {
 	// The name of the attribute that is added to the message.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attribute *string
 
 	// The name of the deviceRegistryEnrich activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The ARN of the role that allows access to the device's registry information.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The name of the IoT device whose registry information is added to the message.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThingName *string
 
 	// The next activity in the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Next *string
 
 	noSmithyDocumentSerde
@@ -856,24 +1106,34 @@ type DeviceShadowEnrichActivity struct {
 	// The name of the attribute that is added to the message.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attribute *string
 
 	// The name of the deviceShadowEnrich activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The ARN of the role that allows access to the device's shadow.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The name of the IoT device whose shadow information is added to the message.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThingName *string
 
 	// The next activity in the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Next *string
 
 	noSmithyDocumentSerde
@@ -883,9 +1143,13 @@ type DeviceShadowEnrichActivity struct {
 type EstimatedResourceSize struct {
 
 	// The time when the estimate of the size of the resource was made.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EstimatedOn *time.Time
 
 	// The estimated size of the resource, in bytes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EstimatedSizeInBytes *float64
 
 	noSmithyDocumentSerde
@@ -902,9 +1166,13 @@ type EstimatedResourceSize struct {
 type FileFormatConfiguration struct {
 
 	// Contains the configuration information of the JSON format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JsonConfiguration *JsonConfiguration
 
 	// Contains the configuration information of the Parquet format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ParquetConfiguration *ParquetConfiguration
 
 	noSmithyDocumentSerde
@@ -917,14 +1185,20 @@ type FilterActivity struct {
 	// value. Messages that satisfy the condition are passed to the next activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filter *string
 
 	// The name of the filter activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The next activity in the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Next *string
 
 	noSmithyDocumentSerde
@@ -938,6 +1212,8 @@ type GlueConfiguration struct {
 	// located. An Glue Data Catalog database contains metadata tables.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// The name of the table in your Glue Data Catalog that is used to perform the ETL
@@ -945,6 +1221,8 @@ type GlueConfiguration struct {
 	// descriptions of data sources and targets.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TableName *string
 
 	noSmithyDocumentSerde
@@ -956,12 +1234,16 @@ type IotEventsDestinationConfiguration struct {
 	// The name of the IoT Events input to which dataset contents are delivered.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputName *string
 
 	// The ARN of the role that grants IoT Analytics permission to deliver dataset
 	// contents to an IoT Events input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -976,12 +1258,16 @@ type IotSiteWiseCustomerManagedDatastoreS3Storage struct {
 	//  The name of the Amazon S3 bucket where your data is stored.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	//  (Optional) The prefix used to create the keys of the data store data objects.
 	// Each object in an Amazon S3 bucket has a key that is its unique identifier in
 	// the bucket. Each object in a bucket has exactly one key. The prefix must end
 	// with a forward slash (/).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyPrefix *string
 
 	noSmithyDocumentSerde
@@ -993,12 +1279,16 @@ type IotSiteWiseCustomerManagedDatastoreS3Storage struct {
 type IotSiteWiseCustomerManagedDatastoreS3StorageSummary struct {
 
 	//  The name of the Amazon S3 bucket where your data is stored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	//  (Optional) The prefix used to create the keys of the data store data objects.
 	// Each object in an Amazon S3 bucket has a key that is its unique identifier in
 	// the bucket. Each object in a bucket has exactly one key. The prefix must end
 	// with a forward slash (/).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyPrefix *string
 
 	noSmithyDocumentSerde
@@ -1018,19 +1308,27 @@ type LambdaActivity struct {
 	// minutes, which is the maximum timeout duration for Lambda functions.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchSize *int32
 
 	// The name of the Lambda function that is run on the message.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LambdaName *string
 
 	// The name of the lambda activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The next activity in the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Next *string
 
 	noSmithyDocumentSerde
@@ -1043,9 +1341,13 @@ type LateDataRule struct {
 	// The information needed to configure the late data rule.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuleConfiguration *LateDataRuleConfiguration
 
 	// The name of the late data rule.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuleName *string
 
 	noSmithyDocumentSerde
@@ -1055,6 +1357,8 @@ type LateDataRule struct {
 type LateDataRuleConfiguration struct {
 
 	// The information needed to configure a delta time session window.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeltaTimeSessionWindowConfiguration *DeltaTimeSessionWindowConfiguration
 
 	noSmithyDocumentSerde
@@ -1066,16 +1370,22 @@ type LoggingOptions struct {
 	// If true, logging is enabled for IoT Analytics.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Enabled bool
 
 	// The logging level. Currently, only ERROR is supported.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Level LoggingLevel
 
 	// The ARN of the role that grants permission to IoT Analytics to perform logging.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -1088,20 +1398,28 @@ type MathActivity struct {
 	// The name of the attribute that contains the result of the math operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attribute *string
 
 	// An expression that uses one or more existing attributes and must return an
 	// integer value.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Math *string
 
 	// The name of the math activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The next activity in the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Next *string
 
 	noSmithyDocumentSerde
@@ -1114,6 +1432,8 @@ type Message struct {
 	// each batch sent.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MessageId *string
 
 	// The payload of the message. This can be a JSON string or a base64-encoded
@@ -1121,6 +1441,8 @@ type Message struct {
 	// pipeline activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload []byte
 
 	noSmithyDocumentSerde
@@ -1133,6 +1455,8 @@ type OutputFileUriValue struct {
 	// file in an S3 bucket.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileName *string
 
 	noSmithyDocumentSerde
@@ -1142,6 +1466,8 @@ type OutputFileUriValue struct {
 type ParquetConfiguration struct {
 
 	// Information needed to define a schema.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SchemaDefinition *SchemaDefinition
 
 	noSmithyDocumentSerde
@@ -1153,6 +1479,8 @@ type Partition struct {
 	//  The name of the attribute that defines a partition dimension.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AttributeName *string
 
 	noSmithyDocumentSerde
@@ -1162,21 +1490,33 @@ type Partition struct {
 type Pipeline struct {
 
 	// The activities that perform transformations on the messages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Activities []PipelineActivity
 
 	// The ARN of the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// When the pipeline was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The last time the pipeline was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The name of the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A summary of information about the pipeline reprocessing.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReprocessingSummaries []ReprocessingSummary
 
 	noSmithyDocumentSerde
@@ -1186,35 +1526,55 @@ type Pipeline struct {
 type PipelineActivity struct {
 
 	// Adds other attributes based on existing attributes in the message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AddAttributes *AddAttributesActivity
 
 	// Determines the source of the messages to be processed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Channel *ChannelActivity
 
 	// Specifies where to store the processed message data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Datastore *DatastoreActivity
 
 	// Adds data from the IoT device registry to your message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceRegistryEnrich *DeviceRegistryEnrichActivity
 
 	// Adds information from the IoT Device Shadow service to a message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceShadowEnrich *DeviceShadowEnrichActivity
 
 	// Filters a message based on its attributes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filter *FilterActivity
 
 	// Runs a Lambda function to modify the message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Lambda *LambdaActivity
 
 	// Computes an arithmetic expression using the message's attributes and adds it to
 	// the message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Math *MathActivity
 
 	// Removes attributes from a message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RemoveAttributes *RemoveAttributesActivity
 
 	// Used to create a new message using only the specified attributes from the
 	// original message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SelectAttributes *SelectAttributesActivity
 
 	noSmithyDocumentSerde
@@ -1224,15 +1584,23 @@ type PipelineActivity struct {
 type PipelineSummary struct {
 
 	// When the pipeline was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// When the pipeline was last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The name of the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineName *string
 
 	// A summary of information about the pipeline reprocessing.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReprocessingSummaries []ReprocessingSummary
 
 	noSmithyDocumentSerde
@@ -1244,6 +1612,8 @@ type QueryFilter struct {
 
 	// Used to limit data to that which has arrived since the last execution of the
 	// action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeltaTime *DeltaTime
 
 	noSmithyDocumentSerde
@@ -1255,14 +1625,20 @@ type RemoveAttributesActivity struct {
 	// A list of 1-50 attributes to remove from the message.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes []string
 
 	// The name of the removeAttributes activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The next activity in the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Next *string
 
 	noSmithyDocumentSerde
@@ -1272,12 +1648,18 @@ type RemoveAttributesActivity struct {
 type ReprocessingSummary struct {
 
 	// The time the pipeline reprocessing was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The reprocessingId returned by StartPipelineReprocessing .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The status of the pipeline reprocessing.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ReprocessingStatus
 
 	noSmithyDocumentSerde
@@ -1290,12 +1672,16 @@ type ResourceConfiguration struct {
 	// values are: ACU_1 (vCPU=4, memory=16 GiB) or ACU_2 (vCPU=8, memory=32 GiB).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComputeType ComputeType
 
 	// The size, in GB, of the persistent storage available to the resource instance
 	// used to execute the containerAction (min: 1, max: 50).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde
@@ -1306,9 +1692,13 @@ type RetentionPeriod struct {
 
 	// The number of days that message data is kept. The unlimited parameter must be
 	// false.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumberOfDays *int32
 
 	// If true, message data is kept indefinitely.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Unlimited bool
 
 	noSmithyDocumentSerde
@@ -1321,6 +1711,8 @@ type S3DestinationConfiguration struct {
 	// The name of the S3 bucket to which dataset contents are delivered.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The key of the dataset contents object in an S3 bucket. Each object has a key
@@ -1346,16 +1738,22 @@ type S3DestinationConfiguration struct {
 	// overwrites the other.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The ARN of the role that grants IoT Analytics permission to interact with your
 	// Amazon S3 and Glue resources.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// Configuration information for coordination with Glue, a fully managed extract,
 	// transform and load (ETL) service.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GlueConfiguration *GlueConfiguration
 
 	noSmithyDocumentSerde
@@ -1368,6 +1766,8 @@ type Schedule struct {
 	// see [Schedule Expressions for Rules]in the Amazon CloudWatch Events User Guide.
 	//
 	// [Schedule Expressions for Rules]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Expression *string
 
 	noSmithyDocumentSerde
@@ -1380,6 +1780,8 @@ type SchemaDefinition struct {
 	//
 	// Each schema can have up to 100 columns. Each column can have up to 100 nested
 	// types.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Columns []Column
 
 	noSmithyDocumentSerde
@@ -1392,14 +1794,20 @@ type SelectAttributesActivity struct {
 	// A list of the attributes to select from the message.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes []string
 
 	// The name of the selectAttributes activity.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The next activity in the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Next *string
 
 	noSmithyDocumentSerde
@@ -1433,9 +1841,13 @@ type SqlQueryDatasetAction struct {
 	// A SQL query string.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SqlQuery *string
 
 	// Prefilters applied to message data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters []QueryFilter
 
 	noSmithyDocumentSerde
@@ -1447,11 +1859,15 @@ type Tag struct {
 	// The tag's key.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The tag's value.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -1463,10 +1879,14 @@ type TimestampPartition struct {
 	//  The attribute name of the partition defined by a timestamp.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AttributeName *string
 
 	//  The timestamp format of a partition defined by a timestamp. The default format
 	// is seconds since epoch (January 1, 1970 at midnight UTC time).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimestampFormat *string
 
 	noSmithyDocumentSerde
@@ -1480,6 +1900,8 @@ type TriggeringDataset struct {
 	// content generation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -1493,19 +1915,29 @@ type Variable struct {
 	// The name of the variable.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The value of the variable as a structure that specifies a dataset content
 	// version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetContentVersionValue *DatasetContentVersionValue
 
 	// The value of the variable as a double (numeric).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DoubleValue *float64
 
 	// The value of the variable as a structure that specifies an output file URI.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputFileUriValue *OutputFileUriValue
 
 	// The value of the variable as a string.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StringValue *string
 
 	noSmithyDocumentSerde
@@ -1516,9 +1948,13 @@ type VersioningConfiguration struct {
 
 	// How many versions of dataset contents are kept. The unlimited parameter must be
 	// false .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxVersions *int32
 
 	// If true, unlimited versions of dataset contents are kept.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Unlimited bool
 
 	noSmithyDocumentSerde

@@ -24,7 +24,7 @@ import (
 // experiment. They are not available after that because of CloudWatch data
 // retention policies.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetExperimentResults(ctx context.Context, params *GetExperimentResultsInput, optFns ...func(*Options)) (*GetExperimentResultsOutput, error) {
 	if params == nil {
 		params = &GetExperimentResultsInput{}
@@ -45,26 +45,36 @@ type GetExperimentResultsInput struct {
 	// The name of the experiment to retrieve the results of.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Experiment *string
 
 	// The names of the experiment metrics that you want to see the results of.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricNames []string
 
 	// The name or ARN of the project that contains the experiment that you want to
 	// see the results of.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// The names of the experiment treatments that you want to see the results for.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TreatmentNames []string
 
 	// The statistic used to calculate experiment results. Currently the only valid
 	// value is mean , which uses the mean of the collected values as the statistic.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BaseStat types.ExperimentBaseStat
 
 	// The date and time that the experiment ended, if it is completed. This must be
@@ -72,10 +82,14 @@ type GetExperimentResultsInput struct {
 	EndTime *time.Time
 
 	// In seconds, the amount of time to aggregate results together.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Period *int64
 
 	// The names of the report types that you want to see. Currently, BayesianInference
 	// is the only valid value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReportNames []types.ExperimentReportName
 
 	// The statistics that you want to see in the returned results.
@@ -98,6 +112,8 @@ type GetExperimentResultsInput struct {
 	//   variation. The statistic uses the same statistic specified in the baseStat
 	//   parameter. Therefore, if baseStat is mean , this returns the mean of the
 	//   values collected for each variation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResultStats []types.ExperimentResultRequestType
 
 	// The date and time that the experiment started.
@@ -114,13 +130,19 @@ type GetExperimentResultsOutput struct {
 	Details *string
 
 	// An array of structures that include the reports that you requested.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Reports []types.ExperimentReport
 
 	// An array of structures that include experiment results including metric names
 	// and values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResultsData []types.ExperimentResultsData
 
 	// The timestamps of each result returned.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timestamps []time.Time
 
 	// Metadata pertaining to the operation's result.

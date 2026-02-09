@@ -11,6 +11,8 @@ import (
 )
 
 // Cancels the reprocessing of data through the pipeline.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CancelPipelineReprocessing(ctx context.Context, params *CancelPipelineReprocessingInput, optFns ...func(*Options)) (*CancelPipelineReprocessingOutput, error) {
 	if params == nil {
 		params = &CancelPipelineReprocessingInput{}
@@ -31,11 +33,15 @@ type CancelPipelineReprocessingInput struct {
 	// The name of pipeline for which data reprocessing is canceled.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineName *string
 
 	// The ID of the reprocessing task (returned by StartPipelineReprocessing ).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReprocessingId *string
 
 	noSmithyDocumentSerde

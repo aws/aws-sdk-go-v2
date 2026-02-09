@@ -18,7 +18,7 @@ import (
 //
 // Don't use this operation to update an existing feature. Instead, use [UpdateFeature].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [UpdateFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateFeature.html
 // [CreateProject]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html
@@ -42,17 +42,23 @@ type CreateFeatureInput struct {
 	// The name for the new feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The name or ARN of the project that is to contain the new feature.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// An array of structures that contain the configuration of the feature's
 	// different variations.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Variations []types.VariationConfig
 
 	// The name of the variation to use as the default variation. The default
@@ -63,9 +69,13 @@ type CreateFeatureInput struct {
 	//
 	// If you omit defaultVariation , the first variation listed in the variations
 	// structure is used as the default variation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultVariation *string
 
 	// An optional description of the feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Specify users that should always be served a specific variation of a feature.
@@ -75,11 +85,15 @@ type CreateFeatureInput struct {
 	//
 	// This parameter is limited to 2500 overrides or a total of 40KB. The 40KB limit
 	// includes an overhead of 6 bytes per override.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntityOverrides map[string]string
 
 	// Specify ALL_RULES to activate the traffic allocation specified by any ongoing
 	// launches or experiments. Specify DEFAULT_VARIATION to serve the default
 	// variation to all users instead.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationStrategy types.FeatureEvaluationStrategy
 
 	// Assigns one or more tags (key-value pairs) to the feature.
@@ -96,6 +110,8 @@ type CreateFeatureInput struct {
 	// For more information, see [Tagging Amazon Web Services resources].
 	//
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -104,6 +120,8 @@ type CreateFeatureInput struct {
 type CreateFeatureOutput struct {
 
 	// A structure that contains information about the new feature.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *types.Feature
 
 	// Metadata pertaining to the operation's result.

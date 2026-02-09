@@ -13,6 +13,8 @@ import (
 
 // Used to create a channel. A channel collects data from an MQTT topic and
 // archives the raw, unprocessed messages before publishing the data to a pipeline.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, optFns ...func(*Options)) (*CreateChannelOutput, error) {
 	if params == nil {
 		params = &CreateChannelInput{}
@@ -33,18 +35,26 @@ type CreateChannelInput struct {
 	// The name of the channel.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelName *string
 
 	// Where channel data is stored. You can choose one of serviceManagedS3 or
 	// customerManagedS3 storage. If not specified, the default is serviceManagedS3 .
 	// You can't change this storage option after the channel is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelStorage *types.ChannelStorage
 
 	// How long, in days, message data is kept for the channel. When customerManagedS3
 	// storage is selected, this parameter is ignored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata which can be used to manage the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -53,12 +63,18 @@ type CreateChannelInput struct {
 type CreateChannelOutput struct {
 
 	// The ARN of the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelArn *string
 
 	// The name of the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelName *string
 
 	// How long, in days, message data is kept for the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata pertaining to the operation's result.

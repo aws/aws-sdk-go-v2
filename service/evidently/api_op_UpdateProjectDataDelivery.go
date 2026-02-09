@@ -18,7 +18,7 @@ import (
 //
 // You can't specify both cloudWatchLogs and s3Destination in the same operation.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateProjectDataDelivery(ctx context.Context, params *UpdateProjectDataDeliveryInput, optFns ...func(*Options)) (*UpdateProjectDataDeliveryOutput, error) {
 	if params == nil {
 		params = &UpdateProjectDataDeliveryInput{}
@@ -40,14 +40,20 @@ type UpdateProjectDataDeliveryInput struct {
 	// for.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// A structure containing the CloudWatch Logs log group where you want to store
 	// evaluation events.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CloudWatchLogs *types.CloudWatchLogsDestinationConfig
 
 	// A structure containing the S3 bucket name and bucket prefix where you want to
 	// store evaluation events.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Destination *types.S3DestinationConfig
 
 	noSmithyDocumentSerde
@@ -58,6 +64,8 @@ type UpdateProjectDataDeliveryOutput struct {
 	// A structure containing details about the project that you updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *types.Project
 
 	// Metadata pertaining to the operation's result.

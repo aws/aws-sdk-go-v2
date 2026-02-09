@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes the specified data store.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteDatastore(ctx context.Context, params *DeleteDatastoreInput, optFns ...func(*Options)) (*DeleteDatastoreOutput, error) {
 	if params == nil {
 		params = &DeleteDatastoreInput{}
@@ -31,6 +33,8 @@ type DeleteDatastoreInput struct {
 	// The name of the data store to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatastoreName *string
 
 	noSmithyDocumentSerde

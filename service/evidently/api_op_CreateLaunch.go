@@ -22,7 +22,7 @@ import (
 //
 // Don't use this operation to update an existing launch. Instead, use [UpdateLaunch].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [UpdateLaunch]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateLaunch.html
 func (c *Client) CreateLaunch(ctx context.Context, params *CreateLaunchInput, optFns ...func(*Options)) (*CreateLaunchOutput, error) {
@@ -46,23 +46,33 @@ type CreateLaunchInput struct {
 	// used for the launch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Groups []types.LaunchGroupConfig
 
 	// The name for the new launch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The name or ARN of the project that you want to create the launch in.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// An optional description for the launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// An array of structures that define the metrics that will be used to monitor the
 	// launch performance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricMonitors []types.MetricMonitorConfig
 
 	// When Evidently assigns a particular user session to a launch, it must use a
@@ -70,10 +80,14 @@ type CreateLaunchInput struct {
 	// randomization ID is a combination of the entity ID and randomizationSalt . If
 	// you omit randomizationSalt , Evidently uses the launch name as the
 	// randomizationSalt .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RandomizationSalt *string
 
 	// An array of structures that define the traffic allocation percentages among the
 	// feature variations during each step of the launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScheduledSplitsConfig *types.ScheduledSplitsLaunchConfig
 
 	// Assigns one or more tags (key-value pairs) to the launch.
@@ -90,6 +104,8 @@ type CreateLaunchInput struct {
 	// For more information, see [Tagging Amazon Web Services resources].
 	//
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -100,6 +116,8 @@ type CreateLaunchOutput struct {
 	// A structure that contains the configuration of the launch that was created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Launch *types.Launch
 
 	// Metadata pertaining to the operation's result.

@@ -14,7 +14,7 @@ import (
 // Returns the details about one launch. You must already know the project name.
 // To retrieve a list of projects in your account, use [ListProjects].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [ListProjects]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListProjects.html
 func (c *Client) GetProject(ctx context.Context, params *GetProjectInput, optFns ...func(*Options)) (*GetProjectOutput, error) {
@@ -37,6 +37,8 @@ type GetProjectInput struct {
 	// The name or ARN of the project that you want to see the details of.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	noSmithyDocumentSerde
@@ -47,6 +49,8 @@ type GetProjectOutput struct {
 	// A structure containing the configuration details of the project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *types.Project
 
 	// Metadata pertaining to the operation's result.

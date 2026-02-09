@@ -13,7 +13,7 @@ import (
 // Deletes an Evidently project. Before you can delete a project, you must delete
 // all the features that the project contains. To delete a feature, use [DeleteFeature].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [DeleteFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_DeleteFeature.html
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
@@ -36,6 +36,8 @@ type DeleteProjectInput struct {
 	// The name or ARN of the project to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	noSmithyDocumentSerde

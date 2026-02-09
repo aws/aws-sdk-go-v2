@@ -14,7 +14,7 @@ import (
 //
 // To stop a launch without deleting it, use [StopLaunch].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [StopLaunch]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopLaunch.html
 func (c *Client) DeleteLaunch(ctx context.Context, params *DeleteLaunchInput, optFns ...func(*Options)) (*DeleteLaunchOutput, error) {
@@ -37,11 +37,15 @@ type DeleteLaunchInput struct {
 	// The name of the launch to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Launch *string
 
 	// The name or ARN of the project that contains the launch to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	noSmithyDocumentSerde

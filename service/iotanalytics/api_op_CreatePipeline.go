@@ -15,6 +15,8 @@ import (
 // to process the messages before storing them in a data store. You must specify
 // both a channel and a datastore activity and, optionally, as many as 23
 // additional activities in the pipelineActivities array.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput, optFns ...func(*Options)) (*CreatePipelineOutput, error) {
 	if params == nil {
 		params = &CreatePipelineInput{}
@@ -45,14 +47,20 @@ type CreatePipelineInput struct {
 	//     pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineActivities []types.PipelineActivity
 
 	// The name of the pipeline.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineName *string
 
 	// Metadata which can be used to manage the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -61,9 +69,13 @@ type CreatePipelineInput struct {
 type CreatePipelineOutput struct {
 
 	// The ARN of the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineArn *string
 
 	// The name of the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineName *string
 
 	// Metadata pertaining to the operation's result.

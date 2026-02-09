@@ -13,6 +13,8 @@ import (
 )
 
 // Starts the reprocessing of raw message data through the pipeline.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartPipelineReprocessing(ctx context.Context, params *StartPipelineReprocessingInput, optFns ...func(*Options)) (*StartPipelineReprocessingOutput, error) {
 	if params == nil {
 		params = &StartPipelineReprocessingInput{}
@@ -33,24 +35,32 @@ type StartPipelineReprocessingInput struct {
 	// The name of the pipeline on which to start reprocessing.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineName *string
 
 	// Specifies one or more sets of channel messages that you want to reprocess.
 	//
 	// If you use the channelMessages object, you must not specify a value for
 	// startTime and endTime .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelMessages *types.ChannelMessages
 
 	// The end time (exclusive) of raw message data that is reprocessed.
 	//
 	// If you specify a value for the endTime parameter, you must not use the
 	// channelMessages object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EndTime *time.Time
 
 	// The start time (inclusive) of raw message data that is reprocessed.
 	//
 	// If you specify a value for the startTime parameter, you must not use the
 	// channelMessages object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -59,6 +69,8 @@ type StartPipelineReprocessingInput struct {
 type StartPipelineReprocessingOutput struct {
 
 	// The ID of the pipeline reprocessing activity that was started.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReprocessingId *string
 
 	// Metadata pertaining to the operation's result.

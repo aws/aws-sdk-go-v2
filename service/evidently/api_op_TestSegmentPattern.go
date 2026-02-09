@@ -13,7 +13,7 @@ import (
 // Use this operation to test a rules pattern that you plan to use to create an
 // audience segment. For more information about segments, see [CreateSegment].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [CreateSegment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html
 func (c *Client) TestSegmentPattern(ctx context.Context, params *TestSegmentPatternInput, optFns ...func(*Options)) (*TestSegmentPatternOutput, error) {
@@ -38,6 +38,8 @@ type TestSegmentPatternInput struct {
 	// This value conforms to the media type: application/json
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pattern *string
 
 	// A sample evaluationContext JSON block to test against the specified pattern.
@@ -45,6 +47,8 @@ type TestSegmentPatternInput struct {
 	// This value conforms to the media type: application/json
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload *string
 
 	noSmithyDocumentSerde

@@ -15,7 +15,7 @@ import (
 //
 // Don't use this operation to update an experiment's tag. Instead, use [TagResource].
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [TagResource]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html
 func (c *Client) UpdateExperiment(ctx context.Context, params *UpdateExperimentInput, optFns ...func(*Options)) (*UpdateExperimentOutput, error) {
@@ -38,25 +38,35 @@ type UpdateExperimentInput struct {
 	// The name of the experiment to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Experiment *string
 
 	// The name or ARN of the project that contains the experiment that you want to
 	// update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	// An optional description of the experiment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// An array of structures that defines the metrics used for the experiment, and
 	// whether a higher or lower value for each metric is the goal.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricGoals []types.MetricGoalConfig
 
 	// A structure that contains the configuration of which variation o use as the
 	// "control" version. The "control" version is used for comparison with other
 	// variations. This structure also specifies how much experiment traffic is
 	// allocated to each variation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OnlineAbConfig *types.OnlineAbConfig
 
 	// When Evidently assigns a particular user session to an experiment, it must use
@@ -64,6 +74,8 @@ type UpdateExperimentInput struct {
 	// randomization ID is a combination of the entity ID and randomizationSalt . If
 	// you omit randomizationSalt , Evidently uses the experiment name as the
 	// randomizationSalt .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RandomizationSalt *string
 
 	// Removes a segment from being used in an experiment. You can't use this
@@ -77,15 +89,21 @@ type UpdateExperimentInput struct {
 	//
 	// This is represented in thousandths of a percent. For example, specify 20,000 to
 	// allocate 20% of the available audience.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SamplingRate *int64
 
 	// Adds an audience segment to an experiment. When a segment is used in an
 	// experiment, only user sessions that match the segment pattern are used in the
 	// experiment. You can't use this parameter if the experiment is currently running.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Segment *string
 
 	// An array of structures that define the variations being tested in the
 	// experiment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Treatments []types.TreatmentConfig
 
 	noSmithyDocumentSerde
@@ -97,6 +115,8 @@ type UpdateExperimentOutput struct {
 	// updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Experiment *types.Experiment
 
 	// Metadata pertaining to the operation's result.

@@ -16,6 +16,8 @@ import (
 // containerized application). This operation creates the skeleton of a dataset.
 // The dataset can be populated manually by calling CreateDatasetContent or
 // automatically according to a trigger you specify.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -36,21 +38,29 @@ type CreateDatasetInput struct {
 	// A list of actions that create the dataset contents.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Actions []types.DatasetAction
 
 	// The name of the dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetName *string
 
 	// When dataset contents are created, they are delivered to destinations specified
 	// here.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
 	// A list of data rules that send notifications to CloudWatch, when data arrives
 	// late. To specify lateDataRules , the dataset must use a [DeltaTimer] filter.
 	//
 	// [DeltaTimer]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LateDataRules []types.LateDataRule
 
 	// Optional. How long, in days, versions of dataset contents are kept for the
@@ -60,14 +70,20 @@ type CreateDatasetInput struct {
 	// information, see [Keeping Multiple Versions of IoT Analytics datasets]in the IoT Analytics User Guide.
 	//
 	// [Keeping Multiple Versions of IoT Analytics datasets]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata which can be used to manage the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	// A list of triggers. A trigger causes dataset contents to be populated at a
 	// specified time interval or when another dataset's contents are created. The list
 	// of triggers can be empty or contain up to five DataSetTrigger objects.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Triggers []types.DatasetTrigger
 
 	// Optional. How many versions of dataset contents are kept. If not specified or
@@ -76,6 +92,8 @@ type CreateDatasetInput struct {
 	// parameter. For more information, see [Keeping Multiple Versions of IoT Analytics datasets]in the IoT Analytics User Guide.
 	//
 	// [Keeping Multiple Versions of IoT Analytics datasets]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VersioningConfiguration *types.VersioningConfiguration
 
 	noSmithyDocumentSerde
@@ -84,12 +102,18 @@ type CreateDatasetInput struct {
 type CreateDatasetOutput struct {
 
 	// The ARN of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetArn *string
 
 	// The name of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetName *string
 
 	// How long, in days, dataset contents are kept for the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata pertaining to the operation's result.

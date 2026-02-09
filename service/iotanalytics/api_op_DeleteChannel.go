@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes the specified channel.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteChannel(ctx context.Context, params *DeleteChannelInput, optFns ...func(*Options)) (*DeleteChannelOutput, error) {
 	if params == nil {
 		params = &DeleteChannelInput{}
@@ -31,6 +33,8 @@ type DeleteChannelInput struct {
 	// The name of the channel to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelName *string
 
 	noSmithyDocumentSerde

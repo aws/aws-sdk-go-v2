@@ -26,4 +26,6 @@
 // and machine learning inference. IoT Analytics includes pre-built models for
 // common IoT use cases so you can answer questions like which devices are about to
 // fail or which customers are at risk of abandoning their wearable devices.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package iotanalytics

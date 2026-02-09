@@ -13,7 +13,7 @@ import (
 // Deletes a segment. You can't delete a segment that is being used in a launch or
 // experiment, even if that launch or experiment is not currently running.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteSegment(ctx context.Context, params *DeleteSegmentInput, optFns ...func(*Options)) (*DeleteSegmentOutput, error) {
 	if params == nil {
 		params = &DeleteSegmentInput{}
@@ -34,6 +34,8 @@ type DeleteSegmentInput struct {
 	// Specifies the segment to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Segment *string
 
 	noSmithyDocumentSerde

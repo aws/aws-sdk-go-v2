@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes the specified pipeline.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeletePipeline(ctx context.Context, params *DeletePipelineInput, optFns ...func(*Options)) (*DeletePipelineOutput, error) {
 	if params == nil {
 		params = &DeletePipelineInput{}
@@ -31,6 +33,8 @@ type DeletePipelineInput struct {
 	// The name of the pipeline to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineName *string
 
 	noSmithyDocumentSerde

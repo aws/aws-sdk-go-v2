@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieves information about a channel.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeChannel(ctx context.Context, params *DescribeChannelInput, optFns ...func(*Options)) (*DescribeChannelOutput, error) {
 	if params == nil {
 		params = &DescribeChannelInput{}
@@ -32,11 +34,15 @@ type DescribeChannelInput struct {
 	// The name of the channel whose information is retrieved.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChannelName *string
 
 	// If true, additional statistical information about the channel is included in
 	// the response. This feature can't be used with a channel whose S3 storage is
 	// customer-managed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IncludeStatistics bool
 
 	noSmithyDocumentSerde
@@ -45,10 +51,14 @@ type DescribeChannelInput struct {
 type DescribeChannelOutput struct {
 
 	// An object that contains information about the channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Channel *types.Channel
 
 	// Statistics about the channel. Included if the includeStatistics parameter is
 	// set to true in the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Statistics *types.ChannelStatistics
 
 	// Metadata pertaining to the operation's result.

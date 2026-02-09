@@ -13,6 +13,8 @@ import (
 )
 
 // Retrieves the contents of a dataset as presigned URIs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetDatasetContent(ctx context.Context, params *GetDatasetContentInput, optFns ...func(*Options)) (*GetDatasetContentOutput, error) {
 	if params == nil {
 		params = &GetDatasetContentInput{}
@@ -33,12 +35,16 @@ type GetDatasetContentInput struct {
 	// The name of the dataset whose contents are retrieved.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetName *string
 
 	// The version of the dataset whose contents are retrieved. You can also use the
 	// strings "$LATEST" or "$LATEST_SUCCEEDED" to retrieve the contents of the
 	// latest or latest successfully completed dataset. If not specified,
 	// "$LATEST_SUCCEEDED" is the default.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VersionId *string
 
 	noSmithyDocumentSerde
@@ -47,12 +53,18 @@ type GetDatasetContentInput struct {
 type GetDatasetContentOutput struct {
 
 	// A list of DatasetEntry objects.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Entries []types.DatasetEntry
 
 	// The status of the dataset content.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *types.DatasetContentStatus
 
 	// The time when the request was made.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timestamp *time.Time
 
 	// Metadata pertaining to the operation's result.

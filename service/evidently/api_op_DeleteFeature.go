@@ -12,7 +12,7 @@ import (
 
 // Deletes an Evidently feature.
 //
-// Deprecated: AWS CloudWatch Evidently has been deprecated since 11/17/2025.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteFeature(ctx context.Context, params *DeleteFeatureInput, optFns ...func(*Options)) (*DeleteFeatureOutput, error) {
 	if params == nil {
 		params = &DeleteFeatureInput{}
@@ -33,11 +33,15 @@ type DeleteFeatureInput struct {
 	// The name of the feature to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Feature *string
 
 	// The name or ARN of the project that contains the feature to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *string
 
 	noSmithyDocumentSerde

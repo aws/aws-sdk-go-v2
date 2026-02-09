@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieves information about a pipeline.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribePipeline(ctx context.Context, params *DescribePipelineInput, optFns ...func(*Options)) (*DescribePipelineOutput, error) {
 	if params == nil {
 		params = &DescribePipelineInput{}
@@ -32,6 +34,8 @@ type DescribePipelineInput struct {
 	// The name of the pipeline whose information is retrieved.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PipelineName *string
 
 	noSmithyDocumentSerde
@@ -40,6 +44,8 @@ type DescribePipelineInput struct {
 type DescribePipelineOutput struct {
 
 	// A Pipeline object that contains information about the pipeline.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pipeline *types.Pipeline
 
 	// Metadata pertaining to the operation's result.
