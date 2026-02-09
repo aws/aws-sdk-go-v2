@@ -1,5 +1,9 @@
 package software.amazon.smithy.aws.go.codegen;
 
+import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
+
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -16,6 +20,7 @@ import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
@@ -49,6 +54,7 @@ import software.amazon.smithy.utils.MapUtils;
 import software.amazon.smithy.utils.StringUtils;
 
 public final class AwsEventStreamUtils {
+
     private static final String EVENT_STREAM_SERIALIZER_HELPER = "eventStreamSerializerHelper";
 
     private static final String EVENT_STREAM_SIGNER_INTERFACE = "eventStreamSigner";
@@ -273,6 +279,7 @@ public final class AwsEventStreamUtils {
 
         var inputInfo = EventStreamIndex.of(model).getInputInfo(operationShape);
         var outputInfo = EventStreamIndex.of(model).getOutputInfo(operationShape);
+        var isv2 = EventStreamGenerator.hasEventStreamOperations(model, serviceShape) && !EventStreamGenerator.isLegacyEventStreamGenerator(operationShape) && outputInfo.isPresent();
 
         var writer = context.getWriter().get();
 
@@ -402,112 +409,129 @@ public final class AwsEventStreamUtils {
                         }
                     }
 
-                    var outputSymbol = symbolProvider.toSymbol(outputShape);
-                    w.write("out, metadata, err = next.HandleDeserialize(ctx, in)");
+                    if (isv2 && outputInfo.isPresent()) {
+                        writer.write(writePartialResponse(operationShape, outputInfo, inputInfo, serviceShape, withInitialMessages, context));
+                    } else {
+                        var outputSymbol = symbolProvider.toSymbol(outputShape);
+                        w.write("out, metadata, err = next.HandleDeserialize(ctx, in)");
 
-                    writer.openBlock("if err != nil {", "}", () -> {
+                        writer.openBlock("if err != nil {", "}", () -> {
+                            if (withInitialMessages && inputInfo.isPresent()) {
+                                w.write("""
+                                        select {
+                                        case sErr := <-reqSend:
+                                            if sErr != nil {
+                                                err = $T("%v: %w", err, sErr)
+                                            }
+                                        default:
+                                        }""", errorf);
+                            }
+                            writer.write("return out, metadata, err");
+                        }).write("");
+
                         if (withInitialMessages && inputInfo.isPresent()) {
                             w.write("""
-                                    select {
-                                    case sErr := <-reqSend:
-                                        if sErr != nil {
-                                            err = $T("%v: %w", err, sErr)
-                                        }
-                                    default:
-                                    }""", errorf);
+                                    if err := <-reqSend; err != nil {
+                                        return out, metadata, err
+                                    }
+                                    """);
                         }
-                        writer.write("return out, metadata, err");
-                    }).write("");
 
-                    if (withInitialMessages && inputInfo.isPresent()) {
                         w.write("""
-                                if err := <-reqSend; err != nil {
-                                    return out, metadata, err
+                                deserializeOutput, ok := out.RawResponse.($P)
+                                if !ok {
+                                    return out, metadata, $T("unknown transport type: %T", out.RawResponse)
                                 }
-                                """);
-                    }
+                                _ = deserializeOutput
 
-                    w.write("""
-                            deserializeOutput, ok := out.RawResponse.($P)
-                            if !ok {
-                                return out, metadata, $T("unknown transport type: %T", out.RawResponse)
+                                output, ok := out.Result.($P)
+                                if out.Result != nil && !ok {
+                                    return out, metadata, $T("unexpected output result type: %T", out.Result)
+                                } else if out.Result == nil {
+                                    output = &$T{}
+                                    out.Result = output
+                                }
+                                """, getSymbol("Response", SmithyGoDependency.SMITHY_HTTP_TRANSPORT), errorf,
+                                outputSymbol, errorf, outputSymbol
+                        );
+
+                        if (outputInfo.isPresent()) {
+                            var events = outputInfo.get().getEventStreamTarget().asUnionShape()
+                                    .get();
+                            var constructorName = getEventStreamReaderImplConstructorName(events,
+                                    serviceShape);
+                            var newDecoder = getEventStreamSymbol("NewDecoder", false);
+                            var decoderOptions = getEventStreamSymbol("DecoderOptions");
+                            w.openBlock("eventReader := $L(", ")", constructorName, () -> {
+                                        w.write("deserializeOutput.Body,")
+                                                .openBlock("$T(func(options $P) {", "}),", newDecoder,
+                                                        decoderOptions, () -> w
+                                                                .write("""
+                                                                       options.Logger = logger
+                                                                       options.LogMessages = m.LogEventStreamReads
+                                                                       """));
+                                        if (withInitialMessages) {
+                                            w.write("$L,", getEventStreamMessageResponseDeserializerName(
+                                                    operationShape.getOutput().get(), serviceShape,
+                                                    context.getProtocolName()));
+                                        }
+                                    })
+                                    .write("""
+                                           defer func() {
+                                               if err == nil {
+                                                   return
+                                               }
+                                               _ = eventReader.Close()
+                                           }()
+                                           """);
+
+                            if (withInitialMessages) {
+                                w.write("""
+                                        ir := <-eventReader.initialResponse
+                                        irv, ok := ir.($P)
+                                        if !ok {
+                                            return out, metadata, $T("unexpected output result type: %T", ir)
+                                        }
+                                        *output = *irv
+                                        """, outputSymbol, errorf);
                             }
-                            _ = deserializeOutput
-
-                            output, ok := out.Result.($P)
-                            if out.Result != nil && !ok {
-                                return out, metadata, $T("unexpected output result type: %T", out.Result)
-                            } else if out.Result == nil {
-                                output = &$T{}
-                                out.Result = output
-                            }
-                            """, getSymbol("Response", SmithyGoDependency.SMITHY_HTTP_TRANSPORT), errorf,
-                            outputSymbol, errorf, outputSymbol
-                    );
-
-                    if (outputInfo.isPresent()) {
-                        var events = outputInfo.get().getEventStreamTarget().asUnionShape()
-                                .get();
-                        var constructorName = getEventStreamReaderImplConstructorName(events,
-                                serviceShape);
-                        var newDecoder = getEventStreamSymbol("NewDecoder", false);
-                        var decoderOptions = getEventStreamSymbol("DecoderOptions");
-                        w.openBlock("eventReader := $L(", ")", constructorName, () -> {
-                                    w.write("deserializeOutput.Body,")
-                                            .openBlock("$T(func(options $P) {", "}),", newDecoder,
-                                                    decoderOptions, () -> w
-                                                            .write("""
-                                                                   options.Logger = logger
-                                                                   options.LogMessages = m.LogEventStreamReads
-                                                                   """));
-                                    if (withInitialMessages) {
-                                        w.write("$L,", getEventStreamMessageResponseDeserializerName(
-                                                operationShape.getOutput().get(), serviceShape,
-                                                context.getProtocolName()));
-                                    }
-                                })
-                                .write("""
-                                       defer func() {
-                                           if err == nil {
-                                               return
-                                           }
-                                           _ = eventReader.Close()
-                                       }()
-                                       """);
-
-                        if (withInitialMessages) {
-                            w.write("""
-                                    ir := <-eventReader.initialResponse
-                                    irv, ok := ir.($P)
-                                    if !ok {
-                                        return out, metadata, $T("unexpected output result type: %T", ir)
-                                    }
-                                    *output = *irv
-                                    """, outputSymbol, errorf);
                         }
+
+                        var streamConstructor = EventStreamGenerator.getEventStreamOperationStructureConstructor(
+                                serviceShape, operationShape);
+                        var operationStream = EventStreamGenerator.getEventStreamOperationStructureSymbol(
+                                serviceShape, operationShape);
+
+                        w.openBlock("output.eventStream = $T(func(stream $P) {", "})", streamConstructor,
+                                        operationStream, () -> {
+                                            inputInfo.ifPresent(eventStreamInfo -> {
+                                                w.write("stream.Writer = eventWriter");
+                                            });
+                                            outputInfo.ifPresent(eventStreamInfo -> {
+                                                w.write("stream.Reader = eventReader");
+                                            });
+                                        })
+                                    .write("")
+                                    .write("go output.eventStream.waitStreamClose()").write("")
+                                    .write("return out, metadata, nil");
                     }
-
-                    var streamConstructor = EventStreamGenerator.getEventStreamOperationStructureConstructor(
-                            serviceShape, operationShape);
-                    var operationStream = EventStreamGenerator.getEventStreamOperationStructureSymbol(
-                            serviceShape, operationShape);
-
-                    w.openBlock("output.eventStream = $T(func(stream $P) {", "})", streamConstructor,
-                                    operationStream, () -> {
-                                        inputInfo.ifPresent(eventStreamInfo -> {
-                                            w.write("stream.Writer = eventWriter");
-                                        });
-                                        outputInfo.ifPresent(eventStreamInfo -> {
-                                            w.write("stream.Reader = eventReader");
-                                        });
-                                    }).write("")
-                            .write("go output.eventStream.waitStreamClose()").write("")
-                            .write("return out, metadata, nil");
                 },
-                (mg, w) -> w.write("""
+                (mg, w) -> {
+                    w.write("""
                                    LogEventStreamWrites bool
                                    LogEventStreamReads  bool
-                                   """));
+                                   """);
+                    if (isv2) {
+                        var outputSymbol = symbolProvider.toSymbol(outputShape);
+                        w.write("""
+                                existingResult $P
+                                asyncResult    chan deserializeResult
+                                """, outputSymbol);
+                    }
+                }
+
+            );
+
 
         var deserializeOutput = getSymbol("DeserializeOutput", SmithyGoDependency.SMITHY_MIDDLEWARE);
         var httpResponse = getSymbol("Response", SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
@@ -548,6 +572,105 @@ public final class AwsEventStreamUtils {
                                  return nil
                                  """, middleware.getMiddlewareSymbol(), before);
                 });
+    }
+
+    private static String getEventStreamConstructorName(Optional<EventStreamInfo> outputInfo, Optional<EventStreamInfo> inputInfo, ServiceShape serviceShape) {
+        final EventStreamInfo eventStream;
+        if (outputInfo.isPresent()) {
+            eventStream = outputInfo.get();
+        } else if (inputInfo.isPresent()) {
+            eventStream = inputInfo.get();
+        } else {
+            throw new RuntimeException("Service has EventStreamInfo input and output but both are empty");
+        }
+        var maybeUnionShape = eventStream.getEventStreamTarget().asUnionShape();
+        if (maybeUnionShape.isEmpty()) {
+            throw new RuntimeException("Event Stream member is not a UnionShape:" + eventStream.getEventStreamTarget());
+        }
+        return getEventStreamReaderImplConstructorName(maybeUnionShape.get(), serviceShape);
+    }
+
+    private static Writable writePartialResponse(OperationShape opShape, Optional<EventStreamInfo> outputInfo, Optional<EventStreamInfo> inputInfo, ServiceShape serviceShape, boolean withInitialMessages, GenerationContext context) {
+        var opName = context.getSymbolProvider().toSymbol(opShape).getName();
+        var constructorName = getEventStreamConstructorName(outputInfo, inputInfo, serviceShape);
+        String initialMessageInput = "";
+        if (withInitialMessages) {
+            initialMessageInput = getEventStreamMessageResponseDeserializerName(
+                                                opShape.getOutput().get(), serviceShape,
+                                                context.getProtocolName()) + ",";
+        }
+        var eventWriterSection = inputInfo.isPresent() ? "stream.Writer = eventWriter": "";
+
+        return goTemplate("""
+            //  storing existing output instead of creating a new one
+            var output *$opName:LOutput
+            var asyncResult chan deserializeResult
+
+            existingResult := m.existingResult
+            asyncResult = m.asyncResult
+            if existingResult == nil {
+               // Create async result channel
+               asyncResult = make(chan deserializeResult, 1)
+               asyncReader := newAsyncEventStreamReader(asyncResult)
+               eventReader := $constructorName:L(
+                       asyncReader.pipeReader,
+                       eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
+                               options.Logger = logger
+                               options.Logger = logger
+                               options.LogMessages = m.LogEventStreamReads
+                       }),
+                       $initialMessageInput:L
+               )
+               output = &$opName:LOutput{}
+               output.eventStream = New$opName:LEventStream(func(stream *$opName:LEventStream) {
+                        $eventWriterSection:L
+                       stream.Reader = eventReader
+               })
+               output.initialReply = make(chan $opName:LInitialReply, 1)
+
+               go output.eventStream.waitStreamClose()
+
+               m.existingResult = output
+               m.asyncResult = asyncResult
+            }
+
+            ctxCh := ctx.Value(partialResultChan{})
+            if ctxCh == nil {
+               return out, metadata, fmt.Errorf("Expected a result channel to be stored in the contex, got none")
+            }
+
+            prc, ok := ctxCh.(chan PartialResult)
+            if !ok {
+                return out, metadata, fmt.Errorf("async channel expected to be of type `chan partialResult`, got: %T", ctxCh)
+            }
+            // Drain existing results from the channel in case this is a retry
+            select {
+            case <-prc:
+            default:
+            }
+            partial := PartialResult{
+               Output:   output,
+               Metadata: middleware.Metadata{},
+               Error:    nil,
+            }
+            prc <- partial
+
+            out, metadata, err = next.HandleDeserialize(ctx, in)
+
+            out.Result = m.existingResult
+            if err == nil {
+               // Extract actual response and create real reader
+               resp := out.RawResponse.(*smithyhttp.Response)
+               asyncResult <- deserializeResult{reader: resp.Body, err: nil}
+            } else {
+               asyncResult <- deserializeResult{reader: nil, err: err}
+            }
+            return out, metadata, err
+            """, Map.of(
+                "opName", opName,
+                "constructorName", constructorName,
+                "eventWriterSection", eventWriterSection,
+            "initialMessageInput", initialMessageInput));
     }
 
     private static void generateEventSignerInterface(GoSettings settings, GoWriter writer) {
