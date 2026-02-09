@@ -17,7 +17,7 @@ func (c *Client) OutputStreamWithInitialResponse(ctx context.Context, params *Ou
 		params = &OutputStreamWithInitialResponseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "OutputStreamWithInitialResponse", params, optFns, c.addOperationOutputStreamWithInitialResponseMiddlewares)
+	result, metadata, err := c.invokeEventStreamOperation(ctx, "OutputStreamWithInitialResponse", params, optFns, c.addOperationOutputStreamWithInitialResponseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,6 +38,7 @@ type OutputStreamWithInitialResponseOutput struct {
 
 	eventStream *OutputStreamWithInitialResponseEventStream
 
+	initialReply chan OutputStreamWithInitialResponseInitialReply
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -47,6 +48,20 @@ type OutputStreamWithInitialResponseOutput struct {
 // GetStream returns the type to interact with the event stream.
 func (o *OutputStreamWithInitialResponseOutput) GetStream() *OutputStreamWithInitialResponseEventStream {
 	return o.eventStream
+}
+
+type OutputStreamWithInitialResponseInitialReply struct {
+
+	// This member is required.
+	InitialResponseMember *string
+	// Metadata pertaining to the operation's result.
+	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
+}
+
+func (o *OutputStreamWithInitialResponseOutput) GetInitialReply() <-chan OutputStreamWithInitialResponseInitialReply {
+	return o.initialReply
 }
 
 func (c *Client) addOperationOutputStreamWithInitialResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
@@ -72,6 +87,9 @@ func (c *Client) addOperationOutputStreamWithInitialResponseMiddlewares(stack *m
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addEventStreamBuild_opOutputStreamWithInitialResponseMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addClientRequestID(stack); err != nil {
@@ -141,6 +159,37 @@ func (c *Client) addOperationOutputStreamWithInitialResponseMiddlewares(stack *m
 		return err
 	}
 	return nil
+}
+
+type eventStreamBuild_opOutputStreamWithInitialResponseMiddleware struct {
+}
+
+func (*eventStreamBuild_opOutputStreamWithInitialResponseMiddleware) ID() string {
+	return "EventStreamBuildMiddleware"
+}
+
+func (m *eventStreamBuild_opOutputStreamWithInitialResponseMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleBuild(ctx, in)
+	response := OutputStreamWithInitialResponseInitialReply{
+		ResultMetadata: metadata,
+	}
+	res, ok := out.Result.(*OutputStreamWithInitialResponseOutput)
+	if !ok {
+		// we have this as error, but really no one will be listening to it
+		return out, metadata, fmt.Errorf("unexpected type of result. expected OutputStreamWithInitialResponseOutput, got %T. Additionally %w", out.Result, err)
+	}
+	if err != nil {
+		// fail the event stream because the middleware failed
+		res.eventStream.err.SetError(err)
+		res.GetStream().Close()
+	}
+	res.initialReply <- response
+	return out, metadata, err
+}
+func addEventStreamBuild_opOutputStreamWithInitialResponseMiddleware(stack *middleware.Stack) error {
+	return stack.Build.Add(&eventStreamBuild_opOutputStreamWithInitialResponseMiddleware{}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opOutputStreamWithInitialResponse(region string) *awsmiddleware.RegisterServiceMetadata {

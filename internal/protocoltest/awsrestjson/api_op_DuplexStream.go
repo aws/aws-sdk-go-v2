@@ -20,7 +20,7 @@ func (c *Client) DuplexStream(ctx context.Context, params *DuplexStreamInput, op
 		params = &DuplexStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DuplexStream", params, optFns, c.addOperationDuplexStreamMiddlewares)
+	result, metadata, err := c.invokeEventStreamOperation(ctx, "DuplexStream", params, optFns, c.addOperationDuplexStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,6 +37,7 @@ type DuplexStreamInput struct {
 type DuplexStreamOutput struct {
 	eventStream *DuplexStreamEventStream
 
+	initialReply chan DuplexStreamInitialReply
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -46,6 +47,17 @@ type DuplexStreamOutput struct {
 // GetStream returns the type to interact with the event stream.
 func (o *DuplexStreamOutput) GetStream() *DuplexStreamEventStream {
 	return o.eventStream
+}
+
+type DuplexStreamInitialReply struct {
+	// Metadata pertaining to the operation's result.
+	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
+}
+
+func (o *DuplexStreamOutput) GetInitialReply() <-chan DuplexStreamInitialReply {
+	return o.initialReply
 }
 
 func (c *Client) addOperationDuplexStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
@@ -74,6 +86,9 @@ func (c *Client) addOperationDuplexStreamMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addEventStreamBuild_opDuplexStreamMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addClientRequestID(stack); err != nil {
@@ -146,6 +161,37 @@ func (c *Client) addOperationDuplexStreamMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+type eventStreamBuild_opDuplexStreamMiddleware struct {
+}
+
+func (*eventStreamBuild_opDuplexStreamMiddleware) ID() string {
+	return "EventStreamBuildMiddleware"
+}
+
+func (m *eventStreamBuild_opDuplexStreamMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleBuild(ctx, in)
+	response := DuplexStreamInitialReply{
+		ResultMetadata: metadata,
+	}
+	res, ok := out.Result.(*DuplexStreamOutput)
+	if !ok {
+		// we have this as error, but really no one will be listening to it
+		return out, metadata, fmt.Errorf("unexpected type of result. expected DuplexStreamOutput, got %T. Additionally %w", out.Result, err)
+	}
+	if err != nil {
+		// fail the event stream because the middleware failed
+		res.eventStream.err.SetError(err)
+		res.GetStream().Close()
+	}
+	res.initialReply <- response
+	return out, metadata, err
+}
+func addEventStreamBuild_opDuplexStreamMiddleware(stack *middleware.Stack) error {
+	return stack.Build.Add(&eventStreamBuild_opDuplexStreamMiddleware{}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDuplexStream(region string) *awsmiddleware.RegisterServiceMetadata {
