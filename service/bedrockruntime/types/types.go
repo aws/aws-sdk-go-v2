@@ -181,6 +181,25 @@ type AutoToolChoice struct {
 	noSmithyDocumentSerde
 }
 
+// Payload content for the bidirectional input. The input is an audio stream.
+type BidirectionalInputPayloadPart struct {
+
+	// The audio content for the bidirectional input.
+	Bytes []byte
+
+	noSmithyDocumentSerde
+}
+
+// Output from the bidirectional stream. The output is speech and a text
+// transcription.
+type BidirectionalOutputPayloadPart struct {
+
+	// The speech output of the bidirectional stream.
+	Bytes []byte
+
+	noSmithyDocumentSerde
+}
+
 // Cache creation metrics for a specific TTL duration
 type CacheDetail struct {
 
@@ -2150,6 +2169,45 @@ type InvokeModelTokensRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Payload content, the speech chunk, for the bidirectional input of the
+// invocation step.
+//
+// The following types satisfy this interface:
+//
+//	InvokeModelWithBidirectionalStreamInputMemberChunk
+type InvokeModelWithBidirectionalStreamInput interface {
+	isInvokeModelWithBidirectionalStreamInput()
+}
+
+// The audio chunk that is used as input for the invocation step.
+type InvokeModelWithBidirectionalStreamInputMemberChunk struct {
+	Value BidirectionalInputPayloadPart
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeModelWithBidirectionalStreamInputMemberChunk) isInvokeModelWithBidirectionalStreamInput() {
+}
+
+// Output from the bidirectional stream that was used for model invocation.
+//
+// The following types satisfy this interface:
+//
+//	InvokeModelWithBidirectionalStreamOutputMemberChunk
+type InvokeModelWithBidirectionalStreamOutput interface {
+	isInvokeModelWithBidirectionalStreamOutput()
+}
+
+// The speech chunk that was provided as output from the invocation step.
+type InvokeModelWithBidirectionalStreamOutputMemberChunk struct {
+	Value BidirectionalOutputPayloadPart
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeModelWithBidirectionalStreamOutputMemberChunk) isInvokeModelWithBidirectionalStreamOutput() {
+}
+
 // JSON schema structured output format options.
 type JsonSchemaDefinition struct {
 
@@ -3067,34 +3125,36 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAsyncInvokeOutputDataConfig()        {}
-func (*UnknownUnionMember) isAudioSource()                        {}
-func (*UnknownUnionMember) isCitationGeneratedContent()           {}
-func (*UnknownUnionMember) isCitationLocation()                   {}
-func (*UnknownUnionMember) isCitationSourceContent()              {}
-func (*UnknownUnionMember) isContentBlock()                       {}
-func (*UnknownUnionMember) isContentBlockDelta()                  {}
-func (*UnknownUnionMember) isContentBlockStart()                  {}
-func (*UnknownUnionMember) isConverseOutput()                     {}
-func (*UnknownUnionMember) isConverseStreamOutput()               {}
-func (*UnknownUnionMember) isCountTokensInput()                   {}
-func (*UnknownUnionMember) isDocumentContentBlock()               {}
-func (*UnknownUnionMember) isDocumentSource()                     {}
-func (*UnknownUnionMember) isGuardrailAutomatedReasoningFinding() {}
-func (*UnknownUnionMember) isGuardrailContentBlock()              {}
-func (*UnknownUnionMember) isGuardrailConverseContentBlock()      {}
-func (*UnknownUnionMember) isGuardrailConverseImageSource()       {}
-func (*UnknownUnionMember) isGuardrailImageSource()               {}
-func (*UnknownUnionMember) isImageSource()                        {}
-func (*UnknownUnionMember) isOutputFormatStructure()              {}
-func (*UnknownUnionMember) isPromptVariableValues()               {}
-func (*UnknownUnionMember) isReasoningContentBlock()              {}
-func (*UnknownUnionMember) isReasoningContentBlockDelta()         {}
-func (*UnknownUnionMember) isResponseStream()                     {}
-func (*UnknownUnionMember) isSystemContentBlock()                 {}
-func (*UnknownUnionMember) isTool()                               {}
-func (*UnknownUnionMember) isToolChoice()                         {}
-func (*UnknownUnionMember) isToolInputSchema()                    {}
-func (*UnknownUnionMember) isToolResultBlockDelta()               {}
-func (*UnknownUnionMember) isToolResultContentBlock()             {}
-func (*UnknownUnionMember) isVideoSource()                        {}
+func (*UnknownUnionMember) isAsyncInvokeOutputDataConfig()              {}
+func (*UnknownUnionMember) isAudioSource()                              {}
+func (*UnknownUnionMember) isCitationGeneratedContent()                 {}
+func (*UnknownUnionMember) isCitationLocation()                         {}
+func (*UnknownUnionMember) isCitationSourceContent()                    {}
+func (*UnknownUnionMember) isContentBlock()                             {}
+func (*UnknownUnionMember) isContentBlockDelta()                        {}
+func (*UnknownUnionMember) isContentBlockStart()                        {}
+func (*UnknownUnionMember) isConverseOutput()                           {}
+func (*UnknownUnionMember) isConverseStreamOutput()                     {}
+func (*UnknownUnionMember) isCountTokensInput()                         {}
+func (*UnknownUnionMember) isDocumentContentBlock()                     {}
+func (*UnknownUnionMember) isDocumentSource()                           {}
+func (*UnknownUnionMember) isGuardrailAutomatedReasoningFinding()       {}
+func (*UnknownUnionMember) isGuardrailContentBlock()                    {}
+func (*UnknownUnionMember) isGuardrailConverseContentBlock()            {}
+func (*UnknownUnionMember) isGuardrailConverseImageSource()             {}
+func (*UnknownUnionMember) isGuardrailImageSource()                     {}
+func (*UnknownUnionMember) isImageSource()                              {}
+func (*UnknownUnionMember) isInvokeModelWithBidirectionalStreamInput()  {}
+func (*UnknownUnionMember) isInvokeModelWithBidirectionalStreamOutput() {}
+func (*UnknownUnionMember) isOutputFormatStructure()                    {}
+func (*UnknownUnionMember) isPromptVariableValues()                     {}
+func (*UnknownUnionMember) isReasoningContentBlock()                    {}
+func (*UnknownUnionMember) isReasoningContentBlockDelta()               {}
+func (*UnknownUnionMember) isResponseStream()                           {}
+func (*UnknownUnionMember) isSystemContentBlock()                       {}
+func (*UnknownUnionMember) isTool()                                     {}
+func (*UnknownUnionMember) isToolChoice()                               {}
+func (*UnknownUnionMember) isToolInputSchema()                          {}
+func (*UnknownUnionMember) isToolResultBlockDelta()                     {}
+func (*UnknownUnionMember) isToolResultContentBlock()                   {}
+func (*UnknownUnionMember) isVideoSource()                              {}
