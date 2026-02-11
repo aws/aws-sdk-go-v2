@@ -1,3 +1,7 @@
+# v1.30.0 (2026-02-10)
+
+* **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+
 # v1.29.0 (2026-01-26)
 
 * **Feature**: Deprecate all Evidently API for AWS CloudWatch Evidently deprecation

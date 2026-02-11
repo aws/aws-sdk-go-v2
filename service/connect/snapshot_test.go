@@ -4154,6 +4154,18 @@ func TestCheckSnapshot_UpdateTrafficDistribution(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateUserConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateUserConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateUserConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateUserHierarchy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateUserHierarchy(context.Background(), nil, func(o *Options) {
@@ -8406,6 +8418,18 @@ func TestUpdateSnapshot_UpdateTrafficDistribution(t *testing.T) {
 	_, err := svc.UpdateTrafficDistribution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateTrafficDistribution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateUserConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateUserConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateUserConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

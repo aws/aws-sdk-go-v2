@@ -6887,6 +6887,20 @@ func awsRestjson1_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.AfterContactWorkConfigs != nil {
+		ok := object.Key("AfterContactWorkConfigs")
+		if err := awsRestjson1_serializeDocumentAfterContactWorkConfigs(v.AfterContactWorkConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AutoAcceptConfigs != nil {
+		ok := object.Key("AutoAcceptConfigs")
+		if err := awsRestjson1_serializeDocumentAutoAcceptConfigs(v.AutoAcceptConfigs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DirectoryUserId != nil {
 		ok := object.Key("DirectoryUserId")
 		ok.String(*v.DirectoryUserId)
@@ -6909,9 +6923,23 @@ func awsRestjson1_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 		ok.String(*v.Password)
 	}
 
+	if v.PersistentConnectionConfigs != nil {
+		ok := object.Key("PersistentConnectionConfigs")
+		if err := awsRestjson1_serializeDocumentPersistentConnectionConfigs(v.PersistentConnectionConfigs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PhoneConfig != nil {
 		ok := object.Key("PhoneConfig")
 		if err := awsRestjson1_serializeDocumentUserPhoneConfig(v.PhoneConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PhoneNumberConfigs != nil {
+		ok := object.Key("PhoneNumberConfigs")
+		if err := awsRestjson1_serializeDocumentPhoneNumberConfigs(v.PhoneNumberConfigs, ok); err != nil {
 			return err
 		}
 	}
@@ -6938,6 +6966,13 @@ func awsRestjson1_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 	if v.Username != nil {
 		ok := object.Key("Username")
 		ok.String(*v.Username)
+	}
+
+	if v.VoiceEnhancementConfigs != nil {
+		ok := object.Key("VoiceEnhancementConfigs")
+		if err := awsRestjson1_serializeDocumentVoiceEnhancementConfigs(v.VoiceEnhancementConfigs, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -33974,6 +34009,139 @@ func awsRestjson1_serializeOpDocumentUpdateTrafficDistributionInput(v *UpdateTra
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateUserConfig struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateUserConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateUserConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateUserConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/users/{InstanceId}/{UserId}/config")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateUserConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateUserConfigInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateUserConfigInput(v *UpdateUserConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
+	}
+	if v.InstanceId != nil {
+		if err := encoder.SetURI("InstanceId").String(*v.InstanceId); err != nil {
+			return err
+		}
+	}
+
+	if v.UserId == nil || len(*v.UserId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member UserId must not be empty")}
+	}
+	if v.UserId != nil {
+		if err := encoder.SetURI("UserId").String(*v.UserId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateUserConfigInput(v *UpdateUserConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AfterContactWorkConfigs != nil {
+		ok := object.Key("AfterContactWorkConfigs")
+		if err := awsRestjson1_serializeDocumentAfterContactWorkConfigs(v.AfterContactWorkConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AutoAcceptConfigs != nil {
+		ok := object.Key("AutoAcceptConfigs")
+		if err := awsRestjson1_serializeDocumentAutoAcceptConfigs(v.AutoAcceptConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PersistentConnectionConfigs != nil {
+		ok := object.Key("PersistentConnectionConfigs")
+		if err := awsRestjson1_serializeDocumentPersistentConnectionConfigs(v.PersistentConnectionConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PhoneNumberConfigs != nil {
+		ok := object.Key("PhoneNumberConfigs")
+		if err := awsRestjson1_serializeDocumentPhoneNumberConfigs(v.PhoneNumberConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VoiceEnhancementConfigs != nil {
+		ok := object.Key("VoiceEnhancementConfigs")
+		if err := awsRestjson1_serializeDocumentVoiceEnhancementConfigs(v.VoiceEnhancementConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateUserHierarchy struct {
 }
 
@@ -35476,6 +35644,57 @@ func awsRestjson1_serializeDocumentActiveRegionList(v []string, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAfterContactWorkConfig(v *types.AfterContactWorkConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AfterContactWorkTimeLimit != 0 {
+		ok := object.Key("AfterContactWorkTimeLimit")
+		ok.Integer(v.AfterContactWorkTimeLimit)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAfterContactWorkConfigPerChannel(v *types.AfterContactWorkConfigPerChannel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AfterContactWorkConfig != nil {
+		ok := object.Key("AfterContactWorkConfig")
+		if err := awsRestjson1_serializeDocumentAfterContactWorkConfig(v.AfterContactWorkConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AgentFirstCallbackAfterContactWorkConfig != nil {
+		ok := object.Key("AgentFirstCallbackAfterContactWorkConfig")
+		if err := awsRestjson1_serializeDocumentAfterContactWorkConfig(v.AgentFirstCallbackAfterContactWorkConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Channel) > 0 {
+		ok := object.Key("Channel")
+		ok.String(string(v.Channel))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAfterContactWorkConfigs(v []types.AfterContactWorkConfigPerChannel, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAfterContactWorkConfigPerChannel(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAgentConfig(v *types.AgentConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -35946,6 +36165,41 @@ func awsRestjson1_serializeDocumentAttributes(v map[string]string, value smithyj
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutoAcceptConfig(v *types.AutoAcceptConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentFirstCallbackAutoAccept != nil {
+		ok := object.Key("AgentFirstCallbackAutoAccept")
+		ok.Boolean(*v.AgentFirstCallbackAutoAccept)
+	}
+
+	{
+		ok := object.Key("AutoAccept")
+		ok.Boolean(v.AutoAccept)
+	}
+
+	if len(v.Channel) > 0 {
+		ok := object.Key("Channel")
+		ok.String(string(v.Channel))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutoAcceptConfigs(v []types.AutoAcceptConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAutoAcceptConfig(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -40263,6 +40517,71 @@ func awsRestjson1_serializeDocumentPersistentChat(v *types.PersistentChat, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPersistentConnectionConfig(v *types.PersistentConnectionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Channel) > 0 {
+		ok := object.Key("Channel")
+		ok.String(string(v.Channel))
+	}
+
+	if v.PersistentConnection != nil {
+		ok := object.Key("PersistentConnection")
+		ok.Boolean(*v.PersistentConnection)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPersistentConnectionConfigs(v []types.PersistentConnectionConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPersistentConnectionConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPhoneNumberConfig(v *types.PhoneNumberConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Channel) > 0 {
+		ok := object.Key("Channel")
+		ok.String(string(v.Channel))
+	}
+
+	if v.PhoneNumber != nil {
+		ok := object.Key("PhoneNumber")
+		ok.String(*v.PhoneNumber)
+	}
+
+	if len(v.PhoneType) > 0 {
+		ok := object.Key("PhoneType")
+		ok.String(string(v.PhoneType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPhoneNumberConfigs(v []types.PhoneNumberConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPhoneNumberConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPhoneNumberCountryCodes(v []types.PhoneNumberCountryCode, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -43444,6 +43763,36 @@ func awsRestjson1_serializeDocumentVoiceCallEntryPointParameters(v *types.VoiceC
 		ok.String(*v.SourcePhoneNumber)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVoiceEnhancementConfig(v *types.VoiceEnhancementConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Channel) > 0 {
+		ok := object.Key("Channel")
+		ok.String(string(v.Channel))
+	}
+
+	if len(v.VoiceEnhancementMode) > 0 {
+		ok := object.Key("VoiceEnhancementMode")
+		ok.String(string(v.VoiceEnhancementMode))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVoiceEnhancementConfigs(v []types.VoiceEnhancementConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentVoiceEnhancementConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

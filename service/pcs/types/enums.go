@@ -34,6 +34,7 @@ const (
 	ClusterStatusUpdateFailed ClusterStatus = "UPDATE_FAILED"
 	ClusterStatusSuspending   ClusterStatus = "SUSPENDING"
 	ClusterStatusSuspended    ClusterStatus = "SUSPENDED"
+	ClusterStatusResuming     ClusterStatus = "RESUMING"
 )
 
 // Values returns all known values for ClusterStatus. Note that this can be
@@ -51,6 +52,7 @@ func (ClusterStatus) Values() []ClusterStatus {
 		"UPDATE_FAILED",
 		"SUSPENDING",
 		"SUSPENDED",
+		"RESUMING",
 	}
 }
 
@@ -68,6 +70,7 @@ const (
 	ComputeNodeGroupStatusDeleted      ComputeNodeGroupStatus = "DELETED"
 	ComputeNodeGroupStatusSuspending   ComputeNodeGroupStatus = "SUSPENDING"
 	ComputeNodeGroupStatusSuspended    ComputeNodeGroupStatus = "SUSPENDED"
+	ComputeNodeGroupStatusResuming     ComputeNodeGroupStatus = "RESUMING"
 )
 
 // Values returns all known values for ComputeNodeGroupStatus. Note that this can
@@ -86,6 +89,7 @@ func (ComputeNodeGroupStatus) Values() []ComputeNodeGroupStatus {
 		"DELETED",
 		"SUSPENDING",
 		"SUSPENDED",
+		"RESUMING",
 	}
 }
 
@@ -163,6 +167,7 @@ const (
 	QueueStatusUpdateFailed QueueStatus = "UPDATE_FAILED"
 	QueueStatusSuspending   QueueStatus = "SUSPENDING"
 	QueueStatusSuspended    QueueStatus = "SUSPENDED"
+	QueueStatusResuming     QueueStatus = "RESUMING"
 )
 
 // Values returns all known values for QueueStatus. Note that this can be expanded
@@ -180,6 +185,7 @@ func (QueueStatus) Values() []QueueStatus {
 		"UPDATE_FAILED",
 		"SUSPENDING",
 		"SUSPENDED",
+		"RESUMING",
 	}
 }
 

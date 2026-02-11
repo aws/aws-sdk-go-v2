@@ -1114,6 +1114,7 @@ const (
 	UpdateTypeRemoteNetworkConfigUpdate          UpdateType = "RemoteNetworkConfigUpdate"
 	UpdateTypeDeletionProtectionUpdate           UpdateType = "DeletionProtectionUpdate"
 	UpdateTypeControlPlaneScalingConfigUpdate    UpdateType = "ControlPlaneScalingConfigUpdate"
+	UpdateTypeVendedLogsUpdate                   UpdateType = "VendedLogsUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -1138,6 +1139,7 @@ func (UpdateType) Values() []UpdateType {
 		"RemoteNetworkConfigUpdate",
 		"DeletionProtectionUpdate",
 		"ControlPlaneScalingConfigUpdate",
+		"VendedLogsUpdate",
 	}
 }
 

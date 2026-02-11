@@ -52018,6 +52018,115 @@ func awsRestjson1_deserializeOpErrorUpdateTrafficDistribution(response *smithyht
 	}
 }
 
+type awsRestjson1_deserializeOpUpdateUserConfig struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateUserConfig) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateUserConfig) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateUserConfig(response, &metadata)
+	}
+	output := &UpdateUserConfigOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateUserConfig(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ConditionalOperationFailedException", errorCode):
+		return awsRestjson1_deserializeErrorConditionalOperationFailedException(response, errorBody)
+
+	case strings.EqualFold("InternalServiceException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestjson1_deserializeOpUpdateUserHierarchy struct {
 }
 
@@ -54732,6 +54841,134 @@ func awsRestjson1_deserializeDocumentAdditionalEmailRecipients(v **types.Additio
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAfterContactWorkConfig(v **types.AfterContactWorkConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AfterContactWorkConfig
+	if *v == nil {
+		sv = &types.AfterContactWorkConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AfterContactWorkTimeLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AfterContactWorkTimeLimit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AfterContactWorkTimeLimit = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAfterContactWorkConfigPerChannel(v **types.AfterContactWorkConfigPerChannel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AfterContactWorkConfigPerChannel
+	if *v == nil {
+		sv = &types.AfterContactWorkConfigPerChannel{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AfterContactWorkConfig":
+			if err := awsRestjson1_deserializeDocumentAfterContactWorkConfig(&sv.AfterContactWorkConfig, value); err != nil {
+				return err
+			}
+
+		case "AgentFirstCallbackAfterContactWorkConfig":
+			if err := awsRestjson1_deserializeDocumentAfterContactWorkConfig(&sv.AgentFirstCallbackAfterContactWorkConfig, value); err != nil {
+				return err
+			}
+
+		case "Channel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Channel to be of type string, got %T instead", value)
+				}
+				sv.Channel = types.Channel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAfterContactWorkConfigs(v *[]types.AfterContactWorkConfigPerChannel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AfterContactWorkConfigPerChannel
+	if *v == nil {
+		cv = []types.AfterContactWorkConfigPerChannel{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AfterContactWorkConfigPerChannel
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAfterContactWorkConfigPerChannel(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -57550,6 +57787,98 @@ func awsRestjson1_deserializeDocumentAuthenticationProfileSummaryList(v *[]types
 		var col types.AuthenticationProfileSummary
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentAuthenticationProfileSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutoAcceptConfig(v **types.AutoAcceptConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoAcceptConfig
+	if *v == nil {
+		sv = &types.AutoAcceptConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AgentFirstCallbackAutoAccept":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected AgentFirstCallbackAutoAccept to be of type *bool, got %T instead", value)
+				}
+				sv.AgentFirstCallbackAutoAccept = ptr.Bool(jtv)
+			}
+
+		case "AutoAccept":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected AutoAccept to be of type *bool, got %T instead", value)
+				}
+				sv.AutoAccept = jtv
+			}
+
+		case "Channel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Channel to be of type string, got %T instead", value)
+				}
+				sv.Channel = types.Channel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutoAcceptConfigs(v *[]types.AutoAcceptConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutoAcceptConfig
+	if *v == nil {
+		cv = []types.AutoAcceptConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutoAcceptConfig
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutoAcceptConfig(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -75765,6 +76094,181 @@ func awsRestjson1_deserializeDocumentPermissionsList(v *[]string, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPersistentConnectionConfig(v **types.PersistentConnectionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PersistentConnectionConfig
+	if *v == nil {
+		sv = &types.PersistentConnectionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Channel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Channel to be of type string, got %T instead", value)
+				}
+				sv.Channel = types.Channel(jtv)
+			}
+
+		case "PersistentConnection":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PersistentConnection to be of type *bool, got %T instead", value)
+				}
+				sv.PersistentConnection = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPersistentConnectionConfigs(v *[]types.PersistentConnectionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PersistentConnectionConfig
+	if *v == nil {
+		cv = []types.PersistentConnectionConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PersistentConnectionConfig
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPersistentConnectionConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPhoneNumberConfig(v **types.PhoneNumberConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PhoneNumberConfig
+	if *v == nil {
+		sv = &types.PhoneNumberConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Channel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Channel to be of type string, got %T instead", value)
+				}
+				sv.Channel = types.Channel(jtv)
+			}
+
+		case "PhoneNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitivePhoneNumber to be of type string, got %T instead", value)
+				}
+				sv.PhoneNumber = ptr.String(jtv)
+			}
+
+		case "PhoneType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PhoneType to be of type string, got %T instead", value)
+				}
+				sv.PhoneType = types.PhoneType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPhoneNumberConfigs(v *[]types.PhoneNumberConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PhoneNumberConfig
+	if *v == nil {
+		cv = []types.PhoneNumberConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PhoneNumberConfig
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPhoneNumberConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPhoneNumberQuickConnectConfig(v **types.PhoneNumberQuickConnectConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -85352,6 +85856,11 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 
 	for key, value := range shape {
 		switch key {
+		case "AfterContactWorkConfigs":
+			if err := awsRestjson1_deserializeDocumentAfterContactWorkConfigs(&sv.AfterContactWorkConfigs, value); err != nil {
+				return err
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -85359,6 +85868,11 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "AutoAcceptConfigs":
+			if err := awsRestjson1_deserializeDocumentAutoAcceptConfigs(&sv.AutoAcceptConfigs, value); err != nil {
+				return err
 			}
 
 		case "DirectoryUserId":
@@ -85418,8 +85932,18 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				}
 			}
 
+		case "PersistentConnectionConfigs":
+			if err := awsRestjson1_deserializeDocumentPersistentConnectionConfigs(&sv.PersistentConnectionConfigs, value); err != nil {
+				return err
+			}
+
 		case "PhoneConfig":
 			if err := awsRestjson1_deserializeDocumentUserPhoneConfig(&sv.PhoneConfig, value); err != nil {
+				return err
+			}
+
+		case "PhoneNumberConfigs":
+			if err := awsRestjson1_deserializeDocumentPhoneNumberConfigs(&sv.PhoneNumberConfigs, value); err != nil {
 				return err
 			}
 
@@ -85449,6 +85973,11 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 					return fmt.Errorf("expected AgentUsername to be of type string, got %T instead", value)
 				}
 				sv.Username = ptr.String(jtv)
+			}
+
+		case "VoiceEnhancementConfigs":
+			if err := awsRestjson1_deserializeDocumentVoiceEnhancementConfigs(&sv.VoiceEnhancementConfigs, value); err != nil {
+				return err
 			}
 
 		default:
@@ -85857,7 +86386,7 @@ func awsRestjson1_deserializeDocumentUserPhoneConfig(v **types.UserPhoneConfig, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected PhoneNumber to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitivePhoneNumber to be of type string, got %T instead", value)
 				}
 				sv.DeskPhoneNumber = ptr.String(jtv)
 			}
@@ -86126,6 +86655,11 @@ func awsRestjson1_deserializeDocumentUserSearchSummary(v **types.UserSearchSumma
 
 	for key, value := range shape {
 		switch key {
+		case "AfterContactWorkConfigs":
+			if err := awsRestjson1_deserializeDocumentAfterContactWorkConfigs(&sv.AfterContactWorkConfigs, value); err != nil {
+				return err
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -86133,6 +86667,11 @@ func awsRestjson1_deserializeDocumentUserSearchSummary(v **types.UserSearchSumma
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "AutoAcceptConfigs":
+			if err := awsRestjson1_deserializeDocumentAutoAcceptConfigs(&sv.AutoAcceptConfigs, value); err != nil {
+				return err
 			}
 
 		case "DirectoryUserId":
@@ -86167,8 +86706,18 @@ func awsRestjson1_deserializeDocumentUserSearchSummary(v **types.UserSearchSumma
 				return err
 			}
 
+		case "PersistentConnectionConfigs":
+			if err := awsRestjson1_deserializeDocumentPersistentConnectionConfigs(&sv.PersistentConnectionConfigs, value); err != nil {
+				return err
+			}
+
 		case "PhoneConfig":
 			if err := awsRestjson1_deserializeDocumentUserPhoneConfig(&sv.PhoneConfig, value); err != nil {
+				return err
+			}
+
+		case "PhoneNumberConfigs":
+			if err := awsRestjson1_deserializeDocumentPhoneNumberConfigs(&sv.PhoneNumberConfigs, value); err != nil {
 				return err
 			}
 
@@ -86198,6 +86747,11 @@ func awsRestjson1_deserializeDocumentUserSearchSummary(v **types.UserSearchSumma
 					return fmt.Errorf("expected AgentUsername to be of type string, got %T instead", value)
 				}
 				sv.Username = ptr.String(jtv)
+			}
+
+		case "VoiceEnhancementConfigs":
+			if err := awsRestjson1_deserializeDocumentVoiceEnhancementConfigs(&sv.VoiceEnhancementConfigs, value); err != nil {
+				return err
 			}
 
 		default:
@@ -87582,6 +88136,89 @@ func awsRestjson1_deserializeDocumentVoiceCallEntryPointParameters(v **types.Voi
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVoiceEnhancementConfig(v **types.VoiceEnhancementConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VoiceEnhancementConfig
+	if *v == nil {
+		sv = &types.VoiceEnhancementConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Channel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Channel to be of type string, got %T instead", value)
+				}
+				sv.Channel = types.Channel(jtv)
+			}
+
+		case "VoiceEnhancementMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VoiceEnhancementMode to be of type string, got %T instead", value)
+				}
+				sv.VoiceEnhancementMode = types.VoiceEnhancementMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVoiceEnhancementConfigs(v *[]types.VoiceEnhancementConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VoiceEnhancementConfig
+	if *v == nil {
+		cv = []types.VoiceEnhancementConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VoiceEnhancementConfig
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVoiceEnhancementConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

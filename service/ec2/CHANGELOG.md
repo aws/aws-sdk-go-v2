@@ -1,3 +1,7 @@
+# v1.286.0 (2026-02-10)
+
+* **Feature**: Amazon Secondary Networks is a networking feature that provides high-performance, low-latency connectivity for specialized workloads.
+
 # v1.285.0 (2026-01-29)
 
 * **Feature**: G7e instances feature up to 8 NVIDIA RTX PRO 6000 Blackwell Server Edition GPUs with 768 GB of memory and 5th generation Intel Xeon Scalable processors. Supporting up to 192 vCPUs, 1600 Gbps networking bandwidth with EFA, up to 2 TiB of system memory, and up to 15.2 TB of local NVMe SSD storage.

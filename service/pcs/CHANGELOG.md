@@ -1,3 +1,7 @@
+# v1.16.0 (2026-02-10)
+
+* **Feature**: Introduces RESUMING state for clusters, compute node groups, and queues.
+
 # v1.15.6 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

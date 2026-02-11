@@ -680,6 +680,30 @@
                 "smithy.api#documentation": "<p>Returns information about a cluster.</p>"
             }
         },
+        "com.amazonaws.kafka#ClusterConnectivityException": {
+            "type": "structure",
+            "members": {
+                "InvalidParameter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+                        "smithy.api#jsonName": "invalidParameter"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the error.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.kafka#ClusterInfo": {
             "type": "structure",
             "members": {
@@ -1530,6 +1554,30 @@
                 "smithy.api#documentation": "<p>Details about consumer group replication.</p>"
             }
         },
+        "com.amazonaws.kafka#ControllerMovedException": {
+            "type": "structure",
+            "members": {
+                "InvalidParameter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+                        "smithy.api#jsonName": "invalidParameter"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the error.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.kafka#ControllerNodeInfo": {
             "type": "structure",
             "members": {
@@ -2088,6 +2136,152 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#CreateTopic": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#CreateTopicRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#CreateTopicResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ClusterConnectivityException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ControllerMovedException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#GroupSubscribedToTopicException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#KafkaRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#KafkaTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotControllerException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ReassignmentInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TopicExistsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnknownTopicOrPartitionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a topic in the specified MSK cluster.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/clusters/{ClusterArn}/topics",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#CreateTopicRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the topic to create.</p>",
+                        "smithy.api#jsonName": "topicName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionCount": {
+                    "target": "com.amazonaws.kafka#__integerMin1",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of partitions for the topic.</p>",
+                        "smithy.api#jsonName": "partitionCount",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReplicationFactor": {
+                    "target": "com.amazonaws.kafka#__integerMin1",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The replication factor for the topic.</p>",
+                        "smithy.api#jsonName": "replicationFactor",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Configs": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Topic configurations encoded as a Base64 string.</p>",
+                        "smithy.api#jsonName": "configs"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#CreateTopicResponse": {
+            "type": "structure",
+            "members": {
+                "TopicArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the topic.</p>",
+                        "smithy.api#jsonName": "topicArn"
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the topic that was created.</p>",
+                        "smithy.api#jsonName": "topicName"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kafka#TopicState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the topic creation.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#CreateVpcConnection": {
             "type": "operation",
             "input": {
@@ -2552,6 +2746,114 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the replicator.</p>",
                         "smithy.api#jsonName": "replicatorState"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#DeleteTopic": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DeleteTopicRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DeleteTopicResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ClusterConnectivityException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ControllerMovedException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#GroupSubscribedToTopicException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#KafkaRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#KafkaTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotControllerException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ReassignmentInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnknownTopicOrPartitionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a topic in the specified MSK cluster.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/clusters/{ClusterArn}/topics/{TopicName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#DeleteTopicRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the topic to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DeleteTopicResponse": {
+            "type": "structure",
+            "members": {
+                "TopicArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the topic.</p>",
+                        "smithy.api#jsonName": "topicArn"
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the topic that was deleted.</p>",
+                        "smithy.api#jsonName": "topicName"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kafka#TopicState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the topic deletion.</p>",
+                        "smithy.api#jsonName": "status"
                     }
                 }
             },
@@ -4042,6 +4344,30 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#GroupSubscribedToTopicException": {
+            "type": "structure",
+            "members": {
+                "InvalidParameter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+                        "smithy.api#jsonName": "invalidParameter"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the error.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.kafka#Iam": {
             "type": "structure",
             "members": {
@@ -4138,6 +4464,9 @@
                     "target": "com.amazonaws.kafka#CreateReplicator"
                 },
                 {
+                    "target": "com.amazonaws.kafka#CreateTopic"
+                },
+                {
                     "target": "com.amazonaws.kafka#CreateVpcConnection"
                 },
                 {
@@ -4151,6 +4480,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#DeleteReplicator"
+                },
+                {
+                    "target": "com.amazonaws.kafka#DeleteTopic"
                 },
                 {
                     "target": "com.amazonaws.kafka#DeleteVpcConnection"
@@ -4286,6 +4618,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#UpdateStorage"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UpdateTopic"
                 }
             ],
             "traits": {
@@ -5314,6 +5649,54 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Summarized information about Kafka Cluster used as source / target for replication.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaRequestException": {
+            "type": "structure",
+            "members": {
+                "InvalidParameter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+                        "smithy.api#jsonName": "invalidParameter"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the error.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.kafka#KafkaTimeoutException": {
+            "type": "structure",
+            "members": {
+                "InvalidParameter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+                        "smithy.api#jsonName": "invalidParameter"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the error.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.kafka#KafkaVersion": {
@@ -6829,6 +7212,30 @@
                 "smithy.api#documentation": "<p>The broker or Zookeeper node.</p>"
             }
         },
+        "com.amazonaws.kafka#NotControllerException": {
+            "type": "structure",
+            "members": {
+                "InvalidParameter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+                        "smithy.api#jsonName": "invalidParameter"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the error.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.kafka#NotFoundException": {
             "type": "structure",
             "members": {
@@ -7235,6 +7642,30 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#ReassignmentInProgressException": {
+            "type": "structure",
+            "members": {
+                "InvalidParameter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+                        "smithy.api#jsonName": "invalidParameter"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the error.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.kafka#Rebalancing": {
@@ -8098,6 +8529,30 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.kafka#TopicExistsException": {
+            "type": "structure",
+            "members": {
+                "InvalidParameter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+                        "smithy.api#jsonName": "invalidParameter"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the error.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.kafka#TopicInfo": {
             "type": "structure",
             "members": {
@@ -8355,6 +8810,30 @@
                 "smithy.api#documentation": "<p>Returns information about an error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 401
+            }
+        },
+        "com.amazonaws.kafka#UnknownTopicOrPartitionException": {
+            "type": "structure",
+            "members": {
+                "InvalidParameter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+                        "smithy.api#jsonName": "invalidParameter"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the error.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.kafka#UnprocessedScramSecret": {
@@ -9624,6 +10103,134 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#UpdateTopic": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#UpdateTopicRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#UpdateTopicResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ClusterConnectivityException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ControllerMovedException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#GroupSubscribedToTopicException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#KafkaRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#KafkaTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotControllerException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ReassignmentInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnknownTopicOrPartitionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration of the specified topic.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/clusters/{ClusterArn}/topics/{TopicName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#UpdateTopicRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the topic to update configuration for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Configs": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new topic configurations encoded as a Base64 string.</p>",
+                        "smithy.api#jsonName": "configs"
+                    }
+                },
+                "PartitionCount": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new total number of partitions for the topic.</p>",
+                        "smithy.api#jsonName": "partitionCount"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#UpdateTopicResponse": {
+            "type": "structure",
+            "members": {
+                "TopicArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the topic.</p>",
+                        "smithy.api#jsonName": "topicArn"
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the topic whose configuration was updated.</p>",
+                        "smithy.api#jsonName": "topicName"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kafka#TopicState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the topic update.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#UserIdentity": {
             "type": "structure",
             "members": {
@@ -10030,6 +10637,14 @@
         },
         "com.amazonaws.kafka#__integer": {
             "type": "integer"
+        },
+        "com.amazonaws.kafka#__integerMin1": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
         },
         "com.amazonaws.kafka#__integerMin1Max15": {
             "type": "integer",

@@ -196,6 +196,42 @@ func ExamplePayloadType_outputUsage() {
 var _ document.Interface
 var _ *types.Conversational
 
+func ExampleProxy_outputUsage() {
+	var union types.Proxy
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProxyMemberExternalProxy:
+		_ = v.Value // Value is types.ExternalProxy
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ExternalProxy
+
+func ExampleProxyCredentials_outputUsage() {
+	var union types.ProxyCredentials
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProxyCredentialsMemberBasicAuth:
+		_ = v.Value // Value is types.BasicAuth
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.BasicAuth
+
 func ExampleResourceLocation_outputUsage() {
 	var union types.ResourceLocation
 	// type switches can be used to check the union value

@@ -1027,7 +1027,7 @@ func (m *awsRestjson1_deserializeOpDuplexStream) HandleDeserialize(ctx context.C
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorDuplexStream(response, &metadata)
 	}
-	output := &DuplexStreamInitialReply{}
+	output := &DuplexStreamOutput{}
 	out.Result = output
 
 	span.End()
@@ -1261,7 +1261,7 @@ func (m *awsRestjson1_deserializeOpDuplexStreamWithInitialMessages) HandleDeseri
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorDuplexStreamWithInitialMessages(response, &metadata)
 	}
-	output := &DuplexStreamWithInitialMessagesInitialReply{}
+	output := &DuplexStreamWithInitialMessagesOutput{}
 	out.Result = output
 
 	err = awsRestjson1_deserializeOpHttpBindingsDuplexStreamWithInitialMessagesOutput(output, response)
@@ -1327,7 +1327,7 @@ func awsRestjson1_deserializeOpErrorDuplexStreamWithInitialMessages(response *sm
 	}
 }
 
-func awsRestjson1_deserializeOpHttpBindingsDuplexStreamWithInitialMessagesOutput(v *DuplexStreamWithInitialMessagesInitialReply, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsDuplexStreamWithInitialMessagesOutput(v *DuplexStreamWithInitialMessagesOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -10349,7 +10349,7 @@ func (m *awsRestjson1_deserializeOpOutputStream) HandleDeserialize(ctx context.C
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorOutputStream(response, &metadata)
 	}
-	output := &OutputStreamInitialReply{}
+	output := &OutputStreamOutput{}
 	out.Result = output
 
 	span.End()
@@ -10437,7 +10437,7 @@ func (m *awsRestjson1_deserializeOpOutputStreamWithInitialResponse) HandleDeseri
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorOutputStreamWithInitialResponse(response, &metadata)
 	}
-	output := &OutputStreamWithInitialResponseInitialReply{}
+	output := &OutputStreamWithInitialResponseOutput{}
 	out.Result = output
 
 	err = awsRestjson1_deserializeOpHttpBindingsOutputStreamWithInitialResponseOutput(output, response)
@@ -10500,7 +10500,7 @@ func awsRestjson1_deserializeOpErrorOutputStreamWithInitialResponse(response *sm
 	}
 }
 
-func awsRestjson1_deserializeOpHttpBindingsOutputStreamWithInitialResponseOutput(v *OutputStreamWithInitialResponseInitialReply, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsOutputStreamWithInitialResponseOutput(v *OutputStreamWithInitialResponseOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -13715,54 +13715,15 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	}
 
 	{
-		headerValue := msg.Headers.Get("timestampHeader")
+		headerValue := msg.Headers.Get("longHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.TimestampValue)
+			hv, ok := headerValue.(*eventstream.Int64Value)
 			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "timestampHeader", headerValue)
+				return fmt.Errorf("unexpected event header %s with type %T:", "longHeader", headerValue)
 			}
 
-			ihv := hv.Get().(time.Time)
-			v.TimestampHeader = ptr.Time(ihv)
-		}
-	}
-
-	{
-		headerValue := msg.Headers.Get("stringHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.StringValue)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "stringHeader", headerValue)
-			}
-
-			ihv := hv.Get().(string)
-			v.StringHeader = ptr.String(ihv)
-		}
-	}
-
-	{
-		headerValue := msg.Headers.Get("blobHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(eventstream.BytesValue)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "blobHeader", headerValue)
-			}
-
-			ihv := hv.Get().([]byte)
-			v.BlobHeader = ihv
-		}
-	}
-
-	{
-		headerValue := msg.Headers.Get("booleanHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.BoolValue)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "booleanHeader", headerValue)
-			}
-
-			ihv := hv.Get().(bool)
-			v.BooleanHeader = ptr.Bool(ihv)
+			ihv := hv.Get().(int64)
+			v.LongHeader = ptr.Int64(ihv)
 		}
 	}
 
@@ -13780,15 +13741,15 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	}
 
 	{
-		headerValue := msg.Headers.Get("longHeader")
+		headerValue := msg.Headers.Get("booleanHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.Int64Value)
+			hv, ok := headerValue.(*eventstream.BoolValue)
 			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "longHeader", headerValue)
+				return fmt.Errorf("unexpected event header %s with type %T:", "booleanHeader", headerValue)
 			}
 
-			ihv := hv.Get().(int64)
-			v.LongHeader = ptr.Int64(ihv)
+			ihv := hv.Get().(bool)
+			v.BooleanHeader = ptr.Bool(ihv)
 		}
 	}
 
@@ -13802,6 +13763,45 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 
 			ihv := hv.Get().(int32)
 			v.IntHeader = ptr.Int32(ihv)
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("stringHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(*eventstream.StringValue)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "stringHeader", headerValue)
+			}
+
+			ihv := hv.Get().(string)
+			v.StringHeader = ptr.String(ihv)
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("timestampHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(*eventstream.TimestampValue)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "timestampHeader", headerValue)
+			}
+
+			ihv := hv.Get().(time.Time)
+			v.TimestampHeader = ptr.Time(ihv)
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("blobHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(eventstream.BytesValue)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "blobHeader", headerValue)
+			}
+
+			ihv := hv.Get().([]byte)
+			v.BlobHeader = ihv
 		}
 	}
 

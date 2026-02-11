@@ -80,6 +80,13 @@ type StartBrowserSessionInput struct {
 	// or personalized settings.
 	ProfileConfiguration *types.BrowserProfileConfiguration
 
+	// Optional proxy configuration for routing browser traffic through
+	// customer-specified proxy servers. When provided, enables HTTP Basic
+	// authentication via Amazon Web Services Secrets Manager and domain-based routing
+	// rules. Requires secretsmanager:GetSecretValue IAM permission for the specified
+	// secret ARNs.
+	ProxyConfiguration *types.ProxyConfiguration
+
 	// The time in seconds after which the session automatically terminates if there
 	// is no activity. The default value is 3600 seconds (1 hour). The minimum allowed
 	// value is 60 seconds, and the maximum allowed value is 28800 seconds (8 hours).

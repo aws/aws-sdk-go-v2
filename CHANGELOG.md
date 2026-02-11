@@ -1,3 +1,41 @@
+# Release (2026-02-10.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.13.0](service/bedrockagentcore/CHANGELOG.md#v1130-2026-02-102)
+  * **Feature**: Added AgentCore browser proxy configuration support, allowing routing of browser traffic through HTTP and HTTPS proxy servers with authentication and bypass rules.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.161.0](service/connect/CHANGELOG.md#v11610-2026-02-102)
+  * **Feature**: Amazon Connect now supports per-channel auto-accept and After Contact Work (ACW) timeouts. Configure agents with auto-accept and ACW timeout settings for chat, tasks, emails, and callbacks. Use the new UpdateUserConfig API to manage these settings.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.79.0](service/eks/CHANGELOG.md#v1790-2026-02-102)
+  * **Feature**: Introducing an optional policy field, an IAM policy applied to pod identity associations in addition to IAM role policies. When specified, pod permissions are the intersection of IAM role policies and the policy field, ensuring the principle of least privilege.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.47.0](service/kafka/CHANGELOG.md#v1470-2026-02-102)
+  * **Feature**: Amazon MSK adds three new APIs, CreateTopic, UpdateTopic, and DeleteTopic for managing Kafka topics in your MSK clusters.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.115.0](service/rds/CHANGELOG.md#v11150-2026-02-102)
+  * **Feature**: This release adds backup configuration for RDS and Aurora restores, letting customers set backup retention period and preferred backup window during restore. It also enables viewing backup settings when describing snapshots or automated backups for instances and clusters.
+
+# Release (2026-02-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.11.0](service/connectcampaignsv2/CHANGELOG.md#v1110-2026-02-10)
+  * **Feature**: Add the missing event type for WhatsApp
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.286.0](service/ec2/CHANGELOG.md#v12860-2026-02-10)
+  * **Feature**: Amazon Secondary Networks is a networking feature that provides high-performance, low-latency connectivity for specialized workloads.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.78.0](service/eks/CHANGELOG.md#v1780-2026-02-10)
+  * **Feature**: Amazon EKS adds a new DescribeUpdate update type, VendedLogsUpdate, to support an integration between EKS Auto Mode and Amazon CloudWatch Vended Logs.
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.30.0](service/evidently/CHANGELOG.md#v1300-2026-02-10)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.51.0](service/imagebuilder/CHANGELOG.md#v1510-2026-02-10)
+  * **Feature**: EC2 Image Builder now supports wildcard patterns in lifecycle policies with recipes and enhances the experience of tag-scoped policies.
+* `github.com/aws/aws-sdk-go-v2/service/iotanalytics`: [v1.32.0](service/iotanalytics/CHANGELOG.md#v1320-2026-02-10)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.47.1](service/lakeformation/CHANGELOG.md#v1471-2026-02-10)
+  * **Documentation**: Allow cross account v5 in put data lake settings
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.17.0](service/neptunedata/CHANGELOG.md#v1170-2026-02-10)
+  * **Feature**: Added edgeOnlyLoad boolean parameter to Neptune bulk load request. When TRUE, files are loaded in order without scanning. When FALSE (default), the loader scans files first, then loads vertex files before edge files automatically.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.16.0](service/pcs/CHANGELOG.md#v1160-2026-02-10)
+  * **Feature**: Introduces RESUMING state for clusters, compute node groups, and queues.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.69.1](service/transfer/CHANGELOG.md#v1691-2026-02-10)
+  * **Documentation**: This release adds a documentation update for MdnResponse of type "ASYNC"
+
 # Release (2026-02-06)
 
 ## Module Highlights

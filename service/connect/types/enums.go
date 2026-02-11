@@ -4256,6 +4256,27 @@ func (VocabularyState) Values() []VocabularyState {
 	}
 }
 
+type VoiceEnhancementMode string
+
+// Enum values for VoiceEnhancementMode
+const (
+	VoiceEnhancementModeVoiceIsolation   VoiceEnhancementMode = "VOICE_ISOLATION"
+	VoiceEnhancementModeNoiseSuppression VoiceEnhancementMode = "NOISE_SUPPRESSION"
+	VoiceEnhancementModeNone             VoiceEnhancementMode = "NONE"
+)
+
+// Values returns all known values for VoiceEnhancementMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VoiceEnhancementMode) Values() []VoiceEnhancementMode {
+	return []VoiceEnhancementMode{
+		"VOICE_ISOLATION",
+		"NOISE_SUPPRESSION",
+		"NONE",
+	}
+}
+
 type VoiceRecordingTrack string
 
 // Enum values for VoiceRecordingTrack

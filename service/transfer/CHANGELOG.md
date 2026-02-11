@@ -1,3 +1,7 @@
+# v1.69.1 (2026-02-10)
+
+* **Documentation**: This release adds a documentation update for MdnResponse of type "ASYNC"
+
 # v1.69.0 (2026-02-05)
 
 * **Feature**: Adds support for the customer to send custom HTTP headers and configure an AS2 Connector to receive Asynchronous MDNs from their trading partner

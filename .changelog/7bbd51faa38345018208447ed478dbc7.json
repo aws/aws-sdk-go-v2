@@ -1,9 +1,0 @@
-{
-    "id": "7bbd51fa-a383-4501-8208-447ed478dbc7",
-    "type": "feature",
-    "description": "Marked service APIs as deprecated. This service has reached end-of-life.",
-    "modules": [
-        "service/evidently",
-        "service/iotanalytics"
-    ]
-}

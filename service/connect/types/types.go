@@ -30,6 +30,38 @@ type AdditionalEmailRecipients struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for after contact work (ACW) timeout.
+type AfterContactWorkConfig struct {
+
+	// The ACW timeout duration in seconds. Minimum: 1 second. Maximum: 2,000,000
+	// seconds (24 days). Enter 0 for indefinite ACW time.
+	AfterContactWorkTimeLimit int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for after contact work (ACW) timeout for a specific
+// channel.
+type AfterContactWorkConfigPerChannel struct {
+
+	// The ACW timeout settings for this channel.
+	//
+	// This member is required.
+	AfterContactWorkConfig *AfterContactWorkConfig
+
+	// The channel for this ACW timeout configuration. Valid values: VOICE, CHAT,
+	// TASK, EMAIL.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The ACW timeout settings for agent-first callbacks. This setting only applies
+	// to the VOICE channel.
+	AgentFirstCallbackAfterContactWorkConfig *AfterContactWorkConfig
+
+	noSmithyDocumentSerde
+}
+
 // The distribution of agents between the instance and its replica(s).
 type AgentConfig struct {
 
@@ -771,6 +803,28 @@ type AuthenticationProfileSummary struct {
 
 	// The name of the authentication profile summary.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for auto-accept for a specific channel.
+type AutoAcceptConfig struct {
+
+	// Indicates whether auto-accept is enabled for this channel. When enabled,
+	// available agents are automatically connected to contacts from this channel.
+	//
+	// This member is required.
+	AutoAccept bool
+
+	// The channel for this auto-accept configuration. Valid values: VOICE, CHAT,
+	// TASK, EMAIL.
+	//
+	// This member is required.
+	Channel Channel
+
+	// Indicates whether auto-accept is enabled for agent-first callbacks. This
+	// setting only applies to the VOICE channel.
+	AgentFirstCallbackAutoAccept *bool
 
 	noSmithyDocumentSerde
 }
@@ -7026,6 +7080,45 @@ type PersistentChat struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for persistent connection for a specific channel.
+type PersistentConnectionConfig struct {
+
+	// Configuration settings for persistent connection. Only VOICE is supported for
+	// this data type.
+	//
+	// This member is required.
+	Channel Channel
+
+	// Indicates whether persistent connection is enabled. When enabled, the agent's
+	// connection is maintained after a call ends, enabling subsequent calls to connect
+	// faster.
+	//
+	// This member is required.
+	PersistentConnection *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for phone type and phone number.
+type PhoneNumberConfig struct {
+
+	// The channel for this phone number configuration. Only VOICE is supported for
+	// this data type.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The phone type. Valid values: SOFT_PHONE, DESK_PHONE.
+	//
+	// This member is required.
+	PhoneType PhoneType
+
+	// The phone number for the user's desk phone.
+	PhoneNumber *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a phone number for a quick connect.
 type PhoneNumberQuickConnectConfig struct {
 
@@ -10228,8 +10321,15 @@ type UseCase struct {
 // Contains information about a user account for an Amazon Connect instance.
 type User struct {
 
+	// The list of after contact work (ACW) timeout configuration settings for each
+	// channel.
+	AfterContactWorkConfigs []AfterContactWorkConfigPerChannel
+
 	// The Amazon Resource Name (ARN) of the user account.
 	Arn *string
+
+	// The list of auto-accept configuration settings for each channel.
+	AutoAcceptConfigs []AutoAcceptConfig
 
 	// The identifier of the user account in the directory used for identity
 	// management.
@@ -10250,8 +10350,14 @@ type User struct {
 	// The timestamp when this resource was last modified.
 	LastModifiedTime *time.Time
 
+	// The list of persistent connection configuration settings for each channel.
+	PersistentConnectionConfigs []PersistentConnectionConfig
+
 	// Information about the phone configuration for the user.
 	PhoneConfig *UserPhoneConfig
+
+	// The list of phone number configuration settings for each channel.
+	PhoneNumberConfigs []PhoneNumberConfig
 
 	// The identifier of the routing profile for the user.
 	RoutingProfileId *string
@@ -10264,6 +10370,9 @@ type User struct {
 
 	// The user name assigned to the user account.
 	Username *string
+
+	// The list of voice enhancement configuration settings for each channel.
+	VoiceEnhancementConfigs []VoiceEnhancementConfig
 
 	noSmithyDocumentSerde
 }
@@ -10430,11 +10539,6 @@ type UserInfo struct {
 // Contains information about the phone configuration settings for a user.
 type UserPhoneConfig struct {
 
-	// The phone type.
-	//
-	// This member is required.
-	PhoneType PhoneType
-
 	// The After Call Work (ACW) timeout setting, in seconds. This parameter has a
 	// minimum value of 0 and a maximum value of 2,000,000 seconds (24 days). Enter 0
 	// if you don't want to allocate a specific amount of ACW time. It essentially
@@ -10453,6 +10557,9 @@ type UserPhoneConfig struct {
 
 	// The persistent connection setting for the user.
 	PersistentConnection *bool
+
+	// The phone type.
+	PhoneType PhoneType
 
 	noSmithyDocumentSerde
 }
@@ -10588,8 +10695,15 @@ type UserSearchFilter struct {
 // Information about the returned users.
 type UserSearchSummary struct {
 
+	// The list of after contact work (ACW) timeout configuration settings for each
+	// channel.
+	AfterContactWorkConfigs []AfterContactWorkConfigPerChannel
+
 	// The Amazon Resource Name (ARN) of the user.
 	Arn *string
+
+	// The list of auto-accept configuration settings for each channel.
+	AutoAcceptConfigs []AutoAcceptConfig
 
 	// The directory identifier of the user.
 	DirectoryUserId *string
@@ -10603,8 +10717,14 @@ type UserSearchSummary struct {
 	// The user's first name and last name.
 	IdentityInfo *UserIdentityInfoLite
 
+	// The list of persistent connection configuration settings for each channel.
+	PersistentConnectionConfigs []PersistentConnectionConfig
+
 	// Contains information about the phone configuration settings for a user.
 	PhoneConfig *UserPhoneConfig
+
+	// The list of phone number configuration settings for each channel.
+	PhoneNumberConfigs []PhoneNumberConfig
 
 	// The identifier of the user's routing profile.
 	RoutingProfileId *string
@@ -10618,6 +10738,9 @@ type UserSearchSummary struct {
 
 	// The name of the user.
 	Username *string
+
+	// The list of voice enhancement configuration settings for each channel.
+	VoiceEnhancementConfigs []VoiceEnhancementConfig
 
 	noSmithyDocumentSerde
 }
@@ -10996,6 +11119,23 @@ type VoiceCallEntryPointParameters struct {
 
 	// The source phone number for the test.
 	SourcePhoneNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for voice enhancement.
+type VoiceEnhancementConfig struct {
+
+	// The channel for this voice enhancement configuration. Only VOICE is supported
+	// for this data type.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The voice enhancement mode.
+	//
+	// This member is required.
+	VoiceEnhancementMode VoiceEnhancementMode
 
 	noSmithyDocumentSerde
 }

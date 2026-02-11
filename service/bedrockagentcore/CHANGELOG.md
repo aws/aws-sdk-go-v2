@@ -1,3 +1,7 @@
+# v1.13.0 (2026-02-10.2)
+
+* **Feature**: Added AgentCore browser proxy configuration support, allowing routing of browser traffic through HTTP and HTTPS proxy servers with authentication and bypass rules.
+
 # v1.12.0 (2026-02-05)
 
 * **Feature**: Support Browser profile persistence (cookies and local storage) across sessions for AgentCore Browser.

@@ -1,3 +1,7 @@
+# v1.115.0 (2026-02-10.2)
+
+* **Feature**: This release adds backup configuration for RDS and Aurora restores, letting customers set backup retention period and preferred backup window during restore. It also enables viewing backup settings when describing snapshots or automated backups for instances and clusters.
+
 # v1.114.0 (2026-01-14)
 
 * **Feature**: no feature changes. model migrated to Smithy

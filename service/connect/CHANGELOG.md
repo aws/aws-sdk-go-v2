@@ -1,3 +1,7 @@
+# v1.161.0 (2026-02-10.2)
+
+* **Feature**: Amazon Connect now supports per-channel auto-accept and After Contact Work (ACW) timeouts. Configure agents with auto-accept and ACW timeout settings for chat, tasks, emails, and callbacks. Use the new UpdateUserConfig API to manage these settings.
+
 # v1.160.0 (2026-01-30)
 
 * **Feature**: This release adds Estimated Wait Time support to the GetContactMetrics API for Amazon Connect.

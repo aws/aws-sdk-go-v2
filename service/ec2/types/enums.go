@@ -9400,6 +9400,9 @@ const (
 	ResourceTypeIpamPrefixListResolver                                 ResourceType = "ipam-prefix-list-resolver"
 	ResourceTypeIpamPolicy                                             ResourceType = "ipam-policy"
 	ResourceTypeIpamPrefixListResolverTarget                           ResourceType = "ipam-prefix-list-resolver-target"
+	ResourceTypeSecondaryInterface                                     ResourceType = "secondary-interface"
+	ResourceTypeSecondaryNetwork                                       ResourceType = "secondary-network"
+	ResourceTypeSecondarySubnet                                        ResourceType = "secondary-subnet"
 	ResourceTypeCapacityManagerDataExport                              ResourceType = "capacity-manager-data-export"
 	ResourceTypeVpnConcentrator                                        ResourceType = "vpn-concentrator"
 )
@@ -9512,6 +9515,9 @@ func (ResourceType) Values() []ResourceType {
 		"ipam-prefix-list-resolver",
 		"ipam-policy",
 		"ipam-prefix-list-resolver-target",
+		"secondary-interface",
+		"secondary-network",
+		"secondary-subnet",
 		"capacity-manager-data-export",
 		"vpn-concentrator",
 	}
@@ -9950,6 +9956,169 @@ func (Scope) Values() []Scope {
 	return []Scope{
 		"Availability Zone",
 		"Region",
+	}
+}
+
+type SecondaryInterfaceStatus string
+
+// Enum values for SecondaryInterfaceStatus
+const (
+	SecondaryInterfaceStatusAvailable SecondaryInterfaceStatus = "available"
+	SecondaryInterfaceStatusInUse     SecondaryInterfaceStatus = "in-use"
+)
+
+// Values returns all known values for SecondaryInterfaceStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecondaryInterfaceStatus) Values() []SecondaryInterfaceStatus {
+	return []SecondaryInterfaceStatus{
+		"available",
+		"in-use",
+	}
+}
+
+type SecondaryInterfaceType string
+
+// Enum values for SecondaryInterfaceType
+const (
+	SecondaryInterfaceTypeSecondary SecondaryInterfaceType = "secondary"
+)
+
+// Values returns all known values for SecondaryInterfaceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecondaryInterfaceType) Values() []SecondaryInterfaceType {
+	return []SecondaryInterfaceType{
+		"secondary",
+	}
+}
+
+type SecondaryNetworkCidrBlockAssociationState string
+
+// Enum values for SecondaryNetworkCidrBlockAssociationState
+const (
+	SecondaryNetworkCidrBlockAssociationStateAssociating          SecondaryNetworkCidrBlockAssociationState = "associating"
+	SecondaryNetworkCidrBlockAssociationStateAssociated           SecondaryNetworkCidrBlockAssociationState = "associated"
+	SecondaryNetworkCidrBlockAssociationStateAssociationFailed    SecondaryNetworkCidrBlockAssociationState = "association-failed"
+	SecondaryNetworkCidrBlockAssociationStateDisassociating       SecondaryNetworkCidrBlockAssociationState = "disassociating"
+	SecondaryNetworkCidrBlockAssociationStateDisassociated        SecondaryNetworkCidrBlockAssociationState = "disassociated"
+	SecondaryNetworkCidrBlockAssociationStateDisassociationFailed SecondaryNetworkCidrBlockAssociationState = "disassociation-failed"
+)
+
+// Values returns all known values for SecondaryNetworkCidrBlockAssociationState.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecondaryNetworkCidrBlockAssociationState) Values() []SecondaryNetworkCidrBlockAssociationState {
+	return []SecondaryNetworkCidrBlockAssociationState{
+		"associating",
+		"associated",
+		"association-failed",
+		"disassociating",
+		"disassociated",
+		"disassociation-failed",
+	}
+}
+
+type SecondaryNetworkState string
+
+// Enum values for SecondaryNetworkState
+const (
+	SecondaryNetworkStateCreateInProgress SecondaryNetworkState = "create-in-progress"
+	SecondaryNetworkStateCreateComplete   SecondaryNetworkState = "create-complete"
+	SecondaryNetworkStateCreateFailed     SecondaryNetworkState = "create-failed"
+	SecondaryNetworkStateDeleteInProgress SecondaryNetworkState = "delete-in-progress"
+	SecondaryNetworkStateDeleteComplete   SecondaryNetworkState = "delete-complete"
+	SecondaryNetworkStateDeleteFailed     SecondaryNetworkState = "delete-failed"
+)
+
+// Values returns all known values for SecondaryNetworkState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecondaryNetworkState) Values() []SecondaryNetworkState {
+	return []SecondaryNetworkState{
+		"create-in-progress",
+		"create-complete",
+		"create-failed",
+		"delete-in-progress",
+		"delete-complete",
+		"delete-failed",
+	}
+}
+
+type SecondaryNetworkType string
+
+// Enum values for SecondaryNetworkType
+const (
+	SecondaryNetworkTypeRdma SecondaryNetworkType = "rdma"
+)
+
+// Values returns all known values for SecondaryNetworkType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecondaryNetworkType) Values() []SecondaryNetworkType {
+	return []SecondaryNetworkType{
+		"rdma",
+	}
+}
+
+type SecondarySubnetCidrBlockAssociationState string
+
+// Enum values for SecondarySubnetCidrBlockAssociationState
+const (
+	SecondarySubnetCidrBlockAssociationStateAssociating          SecondarySubnetCidrBlockAssociationState = "associating"
+	SecondarySubnetCidrBlockAssociationStateAssociated           SecondarySubnetCidrBlockAssociationState = "associated"
+	SecondarySubnetCidrBlockAssociationStateAssociationFailed    SecondarySubnetCidrBlockAssociationState = "association-failed"
+	SecondarySubnetCidrBlockAssociationStateDisassociating       SecondarySubnetCidrBlockAssociationState = "disassociating"
+	SecondarySubnetCidrBlockAssociationStateDisassociated        SecondarySubnetCidrBlockAssociationState = "disassociated"
+	SecondarySubnetCidrBlockAssociationStateDisassociationFailed SecondarySubnetCidrBlockAssociationState = "disassociation-failed"
+)
+
+// Values returns all known values for SecondarySubnetCidrBlockAssociationState.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecondarySubnetCidrBlockAssociationState) Values() []SecondarySubnetCidrBlockAssociationState {
+	return []SecondarySubnetCidrBlockAssociationState{
+		"associating",
+		"associated",
+		"association-failed",
+		"disassociating",
+		"disassociated",
+		"disassociation-failed",
+	}
+}
+
+type SecondarySubnetState string
+
+// Enum values for SecondarySubnetState
+const (
+	SecondarySubnetStateCreateInProgress SecondarySubnetState = "create-in-progress"
+	SecondarySubnetStateCreateComplete   SecondarySubnetState = "create-complete"
+	SecondarySubnetStateCreateFailed     SecondarySubnetState = "create-failed"
+	SecondarySubnetStateDeleteInProgress SecondarySubnetState = "delete-in-progress"
+	SecondarySubnetStateDeleteComplete   SecondarySubnetState = "delete-complete"
+	SecondarySubnetStateDeleteFailed     SecondarySubnetState = "delete-failed"
+)
+
+// Values returns all known values for SecondarySubnetState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecondarySubnetState) Values() []SecondarySubnetState {
+	return []SecondarySubnetState{
+		"create-in-progress",
+		"create-complete",
+		"create-failed",
+		"delete-in-progress",
+		"delete-complete",
+		"delete-failed",
 	}
 }
 

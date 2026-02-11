@@ -283,6 +283,58 @@
                 "smithy.api#documentation": "<p>List of additional email addresses for an email contact.</p>"
             }
         },
+        "com.amazonaws.connect#AfterContactWorkConfig": {
+            "type": "structure",
+            "members": {
+                "AfterContactWorkTimeLimit": {
+                    "target": "com.amazonaws.connect#AfterContactWorkTimeLimit",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The ACW timeout duration in seconds. Minimum: 1 second. Maximum: 2,000,000 seconds (24 days). Enter 0 for indefinite ACW time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for after contact work (ACW) timeout.</p>"
+            }
+        },
+        "com.amazonaws.connect#AfterContactWorkConfigPerChannel": {
+            "type": "structure",
+            "members": {
+                "Channel": {
+                    "target": "com.amazonaws.connect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel for this ACW timeout configuration. Valid values: VOICE, CHAT, TASK, EMAIL.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AfterContactWorkConfig": {
+                    "target": "com.amazonaws.connect#AfterContactWorkConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ACW timeout settings for this channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentFirstCallbackAfterContactWorkConfig": {
+                    "target": "com.amazonaws.connect#AfterContactWorkConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ACW timeout settings for agent-first callbacks. This setting only applies to the VOICE channel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for after contact work (ACW) timeout for a specific channel.</p>"
+            }
+        },
+        "com.amazonaws.connect#AfterContactWorkConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AfterContactWorkConfigPerChannel"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of after contact work (ACW) timeout configuration settings for each channel.</p>"
+            }
+        },
         "com.amazonaws.connect#AfterContactWorkTimeLimit": {
             "type": "integer",
             "traits": {
@@ -390,6 +442,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Information about agent-first outbound strategy configuration.</p>"
             }
+        },
+        "com.amazonaws.connect#AgentFirstCallbackAutoAccept": {
+            "type": "boolean"
         },
         "com.amazonaws.connect#AgentFirstName": {
             "type": "string",
@@ -2146,6 +2201,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateTrafficDistribution"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateUserConfig"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateUserHierarchy"
@@ -5404,6 +5462,44 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.connect#AutoAcceptConfig": {
+            "type": "structure",
+            "members": {
+                "Channel": {
+                    "target": "com.amazonaws.connect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel for this auto-accept configuration. Valid values: VOICE, CHAT, TASK, EMAIL.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutoAccept": {
+                    "target": "com.amazonaws.connect#AutoAccept",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether auto-accept is enabled for this channel. When enabled, available agents are automatically connected to contacts from this channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentFirstCallbackAutoAccept": {
+                    "target": "com.amazonaws.connect#AgentFirstCallbackAutoAccept",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether auto-accept is enabled for agent-first callbacks. This setting only applies to the VOICE channel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for auto-accept for a specific channel.</p>"
+            }
+        },
+        "com.amazonaws.connect#AutoAcceptConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AutoAcceptConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of auto-accept configuration settings for each channel.</p>"
             }
         },
         "com.amazonaws.connect#AutoEvaluationConfiguration": {
@@ -12979,7 +13075,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a user account for the specified Amazon Connect instance.</p>\n         <important>\n            <p>Certain <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UserIdentityInfo.html\">UserIdentityInfo</a> parameters are required in some situations. For example, <code>Email</code>,\n     <code>FirstName</code> and <code>LastName</code> are required if you are using Amazon Connect or SAML for\n    identity management.</p>\n         </important>\n         <p>For information about how to create users using the Amazon Connect admin website, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html\">Add Users</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a user account for the specified Amazon Connect instance.</p>\n         <important>\n            <p>Certain <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UserIdentityInfo.html\">UserIdentityInfo</a> parameters are required in some situations. For example, <code>Email</code>,\n     <code>FirstName</code> and <code>LastName</code> are required if you are using Amazon Connect or SAML for\n    identity management.</p>\n         </important>\n         <note>\n            <p>Fields in <code>PhoneConfig</code> cannot be set simultaneously with their corresponding channel-specific configuration parameters. Specifically:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>PhoneConfig.AutoAccept</code> conflicts with <code>AutoAcceptConfigs</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>PhoneConfig.AfterContactWorkTimeLimit</code> conflicts with <code>AfterContactWorkConfigs</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>PhoneConfig.PhoneType</code> and <code>PhoneConfig.PhoneNumber</code> conflict with <code>PhoneNumberConfigs</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>PhoneConfig.PersistentConnection</code> conflicts with <code>PersistentConnectionConfigs</code>\n                  </p>\n               </li>\n            </ul>\n            <p>We recommend using channel-specific parameters such as <code>AutoAcceptConfigs</code>, <code>AfterContactWorkConfigs</code>, <code>PhoneNumberConfigs</code>, <code>PersistentConnectionConfigs</code>, and <code>VoiceEnhancementConfigs</code> for per-channel configuration.</p>\n         </note>\n         <p>For information about how to create users using the Amazon Connect admin website, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html\">Add Users</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/users/{InstanceId}",
@@ -13107,8 +13203,7 @@
                 "PhoneConfig": {
                     "target": "com.amazonaws.connect#UserPhoneConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The phone settings for the user.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The phone settings for the user. This parameter is optional. If not provided, the user can be configured using channel-specific parameters such as <code>AutoAcceptConfigs</code>, <code>AfterContactWorkConfigs</code>, <code>PhoneNumberConfigs</code>, <code>PersistentConnectionConfigs</code>, and <code>VoiceEnhancementConfigs</code>.</p>"
                     }
                 },
                 "DirectoryUserId": {
@@ -13143,6 +13238,36 @@
                         "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "AutoAcceptConfigs": {
+                    "target": "com.amazonaws.connect#AutoAcceptConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of auto-accept configuration settings for each channel.</p>"
+                    }
+                },
+                "AfterContactWorkConfigs": {
+                    "target": "com.amazonaws.connect#AfterContactWorkConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of after contact work (ACW) timeout configuration settings for each channel.</p>"
+                    }
+                },
+                "PhoneNumberConfigs": {
+                    "target": "com.amazonaws.connect#PhoneNumberConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of phone number configuration settings for each channel.</p>"
+                    }
+                },
+                "PersistentConnectionConfigs": {
+                    "target": "com.amazonaws.connect#PersistentConnectionConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of persistent connection configuration settings for each channel.</p>"
+                    }
+                },
+                "VoiceEnhancementConfigs": {
+                    "target": "com.amazonaws.connect#VoiceEnhancementConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of voice enhancement configuration settings for each channel.</p>"
                     }
                 },
                 "Tags": {
@@ -39260,10 +39385,79 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.connect#PersistentConnectionConfig": {
+            "type": "structure",
+            "members": {
+                "Channel": {
+                    "target": "com.amazonaws.connect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for persistent connection. <b>Only <code>VOICE</code> is supported for this data type.</b>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PersistentConnection": {
+                    "target": "com.amazonaws.connect#PersistentConnection",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Indicates whether persistent connection is enabled. When enabled, the agent's connection is maintained after a call ends, enabling subsequent calls to connect faster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for persistent connection for a specific channel.</p>"
+            }
+        },
+        "com.amazonaws.connect#PersistentConnectionConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#PersistentConnectionConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of persistent connection configuration settings for each channel.</p>"
+            }
+        },
         "com.amazonaws.connect#PhoneNumber": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^\\\\+[1-9]\\\\d{1,14}$"
+            }
+        },
+        "com.amazonaws.connect#PhoneNumberConfig": {
+            "type": "structure",
+            "members": {
+                "Channel": {
+                    "target": "com.amazonaws.connect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel for this phone number configuration. <b>Only <code>VOICE</code> is supported for this data type.</b>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PhoneType": {
+                    "target": "com.amazonaws.connect#PhoneType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone type. Valid values: SOFT_PHONE, DESK_PHONE.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.connect#SensitivePhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number for the user's desk phone.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for phone type and phone number.</p>"
+            }
+        },
+        "com.amazonaws.connect#PhoneNumberConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#PhoneNumberConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of phone number configuration settings for each channel.</p>"
             }
         },
         "com.amazonaws.connect#PhoneNumberCountryCode": {
@@ -49200,6 +49394,13 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#SensitivePhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\+[1-9]\\d{1,14}$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.connect#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -58164,6 +58365,97 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#UpdateUserConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateUserConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#ConditionalOperationFailedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration settings for the specified user, including per-channel auto-accept and after contact work (ACW) timeout settings.</p>\n         <note>\n            <p>This operation replaces the UpdateUserPhoneConfig API. While UpdateUserPhoneConfig applies the same ACW timeout to all channels, UpdateUserConfig allows you to set different auto-accept and ACW timeout values for each channel type.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/users/{InstanceId}/{UserId}/config",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateUserConfigRequest": {
+            "type": "structure",
+            "members": {
+                "AutoAcceptConfigs": {
+                    "target": "com.amazonaws.connect#AutoAcceptConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of auto-accept configuration settings for each channel. When auto-accept is enabled for a channel, available agents are automatically connected to contacts from that channel without needing to manually accept. Auto-accept connects agents to contacts in less than one second.</p>"
+                    }
+                },
+                "AfterContactWorkConfigs": {
+                    "target": "com.amazonaws.connect#AfterContactWorkConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of after contact work (ACW) timeout configuration settings for each channel. ACW timeout specifies how many seconds agents have for after contact work, such as entering notes about the contact. The minimum setting is 1 second, and the maximum is 2,000,000 seconds (24 days). Enter 0 for an indefinite amount of time, meaning agents must manually choose to end ACW.</p>"
+                    }
+                },
+                "PhoneNumberConfigs": {
+                    "target": "com.amazonaws.connect#PhoneNumberConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of phone number configuration settings for each channel.</p>"
+                    }
+                },
+                "PersistentConnectionConfigs": {
+                    "target": "com.amazonaws.connect#PersistentConnectionConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of persistent connection configuration settings for each channel.</p>"
+                    }
+                },
+                "VoiceEnhancementConfigs": {
+                    "target": "com.amazonaws.connect#VoiceEnhancementConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of voice enhancement configuration settings for each channel.</p>"
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.connect#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.connect#UpdateUserHierarchy": {
             "type": "operation",
             "input": {
@@ -58447,7 +58739,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the phone configuration settings for the specified user.</p>",
+                "smithy.api#documentation": "<p>Updates the phone configuration settings for the specified user.</p>\n         <note>\n            <p>We recommend using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateUserConfig.html\">UpdateUserConfig</a> API, which supports additional functionality that is not available in the UpdateUserPhoneConfig API, such as voice enhancement settings and per-channel configuration for auto-accept and After Contact Work (ACW) timeouts. In comparison, the UpdateUserPhoneConfig API will always set the same ACW timeouts to all channels the user handles.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/users/{InstanceId}/{UserId}/phone-config",
@@ -59400,6 +59692,36 @@
                         "smithy.api#documentation": "<p>The\n   tags.</p>"
                     }
                 },
+                "AutoAcceptConfigs": {
+                    "target": "com.amazonaws.connect#AutoAcceptConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of auto-accept configuration settings for each channel.</p>"
+                    }
+                },
+                "AfterContactWorkConfigs": {
+                    "target": "com.amazonaws.connect#AfterContactWorkConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of after contact work (ACW) timeout configuration settings for each channel.</p>"
+                    }
+                },
+                "PhoneNumberConfigs": {
+                    "target": "com.amazonaws.connect#PhoneNumberConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of phone number configuration settings for each channel.</p>"
+                    }
+                },
+                "PersistentConnectionConfigs": {
+                    "target": "com.amazonaws.connect#PersistentConnectionConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of persistent connection configuration settings for each channel.</p>"
+                    }
+                },
+                "VoiceEnhancementConfigs": {
+                    "target": "com.amazonaws.connect#VoiceEnhancementConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of voice enhancement configuration settings for each channel.</p>"
+                    }
+                },
                 "LastModifiedTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
@@ -59687,8 +60009,9 @@
                 "PhoneType": {
                     "target": "com.amazonaws.connect#PhoneType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The phone type.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "SOFT_PHONE",
+                        "smithy.api#documentation": "<p>The phone type.</p>"
                     }
                 },
                 "AutoAccept": {
@@ -59706,7 +60029,7 @@
                     }
                 },
                 "DeskPhoneNumber": {
-                    "target": "com.amazonaws.connect#PhoneNumber",
+                    "target": "com.amazonaws.connect#SensitivePhoneNumber",
                     "traits": {
                         "smithy.api#documentation": "<p>The phone number for the user's desk phone.</p>"
                     }
@@ -59948,6 +60271,36 @@
                     "target": "com.amazonaws.connect#AgentUsername",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the user.</p>"
+                    }
+                },
+                "AutoAcceptConfigs": {
+                    "target": "com.amazonaws.connect#AutoAcceptConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of auto-accept configuration settings for each channel.</p>"
+                    }
+                },
+                "AfterContactWorkConfigs": {
+                    "target": "com.amazonaws.connect#AfterContactWorkConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of after contact work (ACW) timeout configuration settings for each channel.</p>"
+                    }
+                },
+                "PhoneNumberConfigs": {
+                    "target": "com.amazonaws.connect#PhoneNumberConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of phone number configuration settings for each channel.</p>"
+                    }
+                },
+                "PersistentConnectionConfigs": {
+                    "target": "com.amazonaws.connect#PersistentConnectionConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of persistent connection configuration settings for each channel.</p>"
+                    }
+                },
+                "VoiceEnhancementConfigs": {
+                    "target": "com.amazonaws.connect#VoiceEnhancementConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of voice enhancement configuration settings for each channel.</p>"
                     }
                 }
             },
@@ -61064,6 +61417,60 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Parameters for initiating a voice call test.</p>"
+            }
+        },
+        "com.amazonaws.connect#VoiceEnhancementConfig": {
+            "type": "structure",
+            "members": {
+                "Channel": {
+                    "target": "com.amazonaws.connect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel for this voice enhancement configuration. <b>Only <code>VOICE</code> is supported for this data type.</b>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VoiceEnhancementMode": {
+                    "target": "com.amazonaws.connect#VoiceEnhancementMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The voice enhancement mode.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for voice enhancement.</p>"
+            }
+        },
+        "com.amazonaws.connect#VoiceEnhancementConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#VoiceEnhancementConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of voice enhancement configuration settings for each channel.</p>"
+            }
+        },
+        "com.amazonaws.connect#VoiceEnhancementMode": {
+            "type": "enum",
+            "members": {
+                "VOICE_ISOLATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICE_ISOLATION"
+                    }
+                },
+                "NOISE_SUPPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOISE_SUPPRESSION"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.connect#VoiceRecordingConfiguration": {

@@ -1,3 +1,11 @@
+# v1.79.0 (2026-02-10.2)
+
+* **Feature**: Introducing an optional policy field, an IAM policy applied to pod identity associations in addition to IAM role policies. When specified, pod permissions are the intersection of IAM role policies and the policy field, ensuring the principle of least privilege.
+
+# v1.78.0 (2026-02-10)
+
+* **Feature**: Amazon EKS adds a new DescribeUpdate update type, VendedLogsUpdate, to support an integration between EKS Auto Mode and Amazon CloudWatch Vended Logs.
+
 # v1.77.1 (2026-02-04)
 
 * **Documentation**: Update delete cluster description

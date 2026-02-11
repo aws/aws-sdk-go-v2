@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateReplicator(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTopic(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTopic(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTopic")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateVpcConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVpcConnection(context.Background(), nil, func(o *Options) {
@@ -187,6 +199,18 @@ func TestCheckSnapshot_DeleteReplicator(t *testing.T) {
 	_, err := svc.DeleteReplicator(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteReplicator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTopic(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTopic(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTopic")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -733,6 +757,18 @@ func TestCheckSnapshot_UpdateStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateTopic(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTopic(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateTopic")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_BatchAssociateScramSecret(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchAssociateScramSecret(context.Background(), nil, func(o *Options) {
@@ -805,6 +841,18 @@ func TestUpdateSnapshot_CreateReplicator(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTopic(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTopic(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTopic")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateVpcConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVpcConnection(context.Background(), nil, func(o *Options) {
@@ -858,6 +906,18 @@ func TestUpdateSnapshot_DeleteReplicator(t *testing.T) {
 	_, err := svc.DeleteReplicator(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteReplicator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTopic(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTopic(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTopic")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1398,6 +1458,18 @@ func TestUpdateSnapshot_UpdateStorage(t *testing.T) {
 	_, err := svc.UpdateStorage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateTopic(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTopic(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateTopic")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

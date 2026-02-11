@@ -22171,7 +22171,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicyResourceSelectionRecipe(v **
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected VersionNumber to be of type string, got %T instead", value)
+					return fmt.Errorf("expected WildcardVersionNumber to be of type string, got %T instead", value)
 				}
 				sv.SemanticVersion = ptr.String(jtv)
 			}

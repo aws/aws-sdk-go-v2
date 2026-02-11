@@ -206,6 +206,7 @@ const (
 	EventTypeCampaignSms           EventType = "Campaign-SMS"
 	EventTypeCampaignTelephony     EventType = "Campaign-Telephony"
 	EventTypeCampaignOrchestration EventType = "Campaign-Orchestration"
+	EventTypeCampaignWhatsApp      EventType = "Campaign-WhatsApp"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
@@ -218,6 +219,7 @@ func (EventType) Values() []EventType {
 		"Campaign-SMS",
 		"Campaign-Telephony",
 		"Campaign-Orchestration",
+		"Campaign-WhatsApp",
 	}
 }
 

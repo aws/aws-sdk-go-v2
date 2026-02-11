@@ -349,6 +349,7 @@
         "api_op_UpdateTaskTemplate.go",
         "api_op_UpdateTestCase.go",
         "api_op_UpdateTrafficDistribution.go",
+        "api_op_UpdateUserConfig.go",
         "api_op_UpdateUserHierarchy.go",
         "api_op_UpdateUserHierarchyGroupName.go",
         "api_op_UpdateUserHierarchyStructure.go",

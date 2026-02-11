@@ -30614,6 +30614,19 @@ func awsAwsquery_deserializeDocumentDBClusterAutomatedBackup(v **types.DBCluster
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("PreferredBackupWindow", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PreferredBackupWindow = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Region", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -32500,6 +32513,23 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 				return err
 			}
 
+		case strings.EqualFold("BackupRetentionPeriod", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("ClusterCreateTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -32708,6 +32738,19 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("PreferredBackupWindow", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PreferredBackupWindow = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SnapshotCreateTime", t.Name.Local):
@@ -35429,6 +35472,19 @@ func awsAwsquery_deserializeDocumentDBInstanceAutomatedBackup(v **types.DBInstan
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("PreferredBackupWindow", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PreferredBackupWindow = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Region", t.Name.Local):
@@ -39647,6 +39703,23 @@ func awsAwsquery_deserializeDocumentDBSnapshot(v **types.DBSnapshot, decoder smi
 				sv.AvailabilityZone = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("BackupRetentionPeriod", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("DBInstanceIdentifier", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -39937,6 +40010,19 @@ func awsAwsquery_deserializeDocumentDBSnapshot(v **types.DBSnapshot, decoder smi
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("PreferredBackupWindow", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PreferredBackupWindow = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ProcessorFeatures", t.Name.Local):

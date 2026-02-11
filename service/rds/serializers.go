@@ -18082,6 +18082,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		objectKey.Long(*v.BacktrackWindow)
 	}
 
+	if v.BackupRetentionPeriod != nil {
+		objectKey := object.Key("BackupRetentionPeriod")
+		objectKey.Integer(*v.BackupRetentionPeriod)
+	}
+
 	if v.CopyTagsToSnapshot != nil {
 		objectKey := object.Key("CopyTagsToSnapshot")
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
@@ -18209,6 +18214,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		objectKey.Integer(*v.Port)
 	}
 
+	if v.PreferredBackupWindow != nil {
+		objectKey := object.Key("PreferredBackupWindow")
+		objectKey.String(*v.PreferredBackupWindow)
+	}
+
 	if v.PubliclyAccessible != nil {
 		objectKey := object.Key("PubliclyAccessible")
 		objectKey.Boolean(*v.PubliclyAccessible)
@@ -18276,6 +18286,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.BacktrackWindow != nil {
 		objectKey := object.Key("BacktrackWindow")
 		objectKey.Long(*v.BacktrackWindow)
+	}
+
+	if v.BackupRetentionPeriod != nil {
+		objectKey := object.Key("BackupRetentionPeriod")
+		objectKey.Integer(*v.BackupRetentionPeriod)
 	}
 
 	if v.CopyTagsToSnapshot != nil {
@@ -18390,6 +18405,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 		objectKey.Integer(*v.Port)
 	}
 
+	if v.PreferredBackupWindow != nil {
+		objectKey := object.Key("PreferredBackupWindow")
+		objectKey.String(*v.PreferredBackupWindow)
+	}
+
 	if v.PubliclyAccessible != nil {
 		objectKey := object.Key("PubliclyAccessible")
 		objectKey.Boolean(*v.PubliclyAccessible)
@@ -18494,6 +18514,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 	if v.AvailabilityZone != nil {
 		objectKey := object.Key("AvailabilityZone")
 		objectKey.String(*v.AvailabilityZone)
+	}
+
+	if v.BackupRetentionPeriod != nil {
+		objectKey := object.Key("BackupRetentionPeriod")
+		objectKey.Integer(*v.BackupRetentionPeriod)
 	}
 
 	if v.BackupTarget != nil {
@@ -18658,6 +18683,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 	if v.Port != nil {
 		objectKey := object.Key("Port")
 		objectKey.Integer(*v.Port)
+	}
+
+	if v.PreferredBackupWindow != nil {
+		objectKey := object.Key("PreferredBackupWindow")
+		objectKey.String(*v.PreferredBackupWindow)
 	}
 
 	if v.ProcessorFeatures != nil {
@@ -19038,6 +19068,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 		objectKey.String(*v.AvailabilityZone)
 	}
 
+	if v.BackupRetentionPeriod != nil {
+		objectKey := object.Key("BackupRetentionPeriod")
+		objectKey.Integer(*v.BackupRetentionPeriod)
+	}
+
 	if v.BackupTarget != nil {
 		objectKey := object.Key("BackupTarget")
 		objectKey.String(*v.BackupTarget)
@@ -19190,6 +19225,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 	if v.Port != nil {
 		objectKey := object.Key("Port")
 		objectKey.Integer(*v.Port)
+	}
+
+	if v.PreferredBackupWindow != nil {
+		objectKey := object.Key("PreferredBackupWindow")
+		objectKey.String(*v.PreferredBackupWindow)
 	}
 
 	if v.ProcessorFeatures != nil {

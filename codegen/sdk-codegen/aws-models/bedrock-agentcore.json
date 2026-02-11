@@ -831,6 +831,21 @@
                 "smithy.api#documentation": "<p>Contains information about an update to an automation stream.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#BasicAuth": {
+            "type": "structure",
+            "members": {
+                "secretArn": {
+                    "target": "com.amazonaws.bedrockagentcore#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing proxy credentials. The secret must be a JSON object with <code>username</code> and <code>password</code> string fields that meet validation requirements. The caller must have <code>secretsmanager:GetSecretValue</code> permission for this ARN. Example secret format: <code>{\"username\": \"proxy_user\", \"password\": \"secure_password\"}</code> </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for HTTP Basic Authentication using credentials stored in Amazon Web Services Secrets Manager. The secret must contain a JSON object with <code>username</code> and <code>password</code> string fields. Username allows alphanumeric characters and <code>@._+=-</code> symbols (pattern: <code>^[a-zA-Z0-9@._+=\\-]+$</code>). Password allows alphanumeric characters and <code>@._+=-!#$%&amp;*</code> symbols (pattern: <code>^[a-zA-Z0-9@._+=\\-!#$%&amp;*]+$</code>). Both fields have a maximum length of 256 characters.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#BatchCreateMemoryRecords": {
             "type": "operation",
             "input": {
@@ -2100,6 +2115,28 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentcore#DomainPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^(\\.)?[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DomainPatterns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#DomainPattern"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcore#DuplicateIdException": {
             "type": "structure",
             "members": {
@@ -2483,6 +2520,44 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcore#ExternalProxy": {
+            "type": "structure",
+            "members": {
+                "server": {
+                    "target": "com.amazonaws.bedrockagentcore#HostName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hostname of the proxy server. Must be a valid DNS hostname (maximum 253 characters).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "port": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number of the proxy server. Valid range: 1-65535.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 65535
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainPatterns": {
+                    "target": "com.amazonaws.bedrockagentcore#DomainPatterns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional array of domain patterns that should route through this specific proxy. Supports <code>.example.com</code> for subdomain matching (matches any subdomain of example.com) or <code>example.com</code> for exact domain matching. If omitted, this proxy acts as a catch-all for domains not matched by other proxies. Maximum 100 patterns per proxy, each up to 253 characters.</p>"
+                    }
+                },
+                "credentials": {
+                    "target": "com.amazonaws.bedrockagentcore#ProxyCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional authentication credentials for the proxy server. If omitted, the proxy is accessed without authentication (useful for IP-allowlisted proxies).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a customer-managed external proxy server. Includes server location, optional domain-based routing patterns, and authentication credentials.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#ExtractionJob": {
             "type": "structure",
             "members": {
@@ -2854,6 +2929,12 @@
                     "target": "com.amazonaws.bedrockagentcore#BrowserSessionStream",
                     "traits": {
                         "smithy.api#documentation": "<p>The streams associated with this browser session. These include the automation stream and live view stream.</p>"
+                    }
+                },
+                "proxyConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcore#ProxyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The active proxy configuration for this browser session. This field is only present if proxy configuration was provided when the session was started using <code>StartBrowserSession</code>. The configuration includes proxy servers, domain bypass rules and the proxy authentication credentials.</p>"
                     }
                 },
                 "sessionReplayArtifact": {
@@ -3577,6 +3658,16 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#HostName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)*$"
             }
         },
         "com.amazonaws.bedrockagentcore#HttpResponseCode": {
@@ -5432,6 +5523,79 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcore#Proxies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#Proxy"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#Proxy": {
+            "type": "union",
+            "members": {
+                "externalProxy": {
+                    "target": "com.amazonaws.bedrockagentcore#ExternalProxy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for an external customer-managed proxy server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Union type representing different proxy configurations. Currently supports external customer-managed proxies.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ProxyBypass": {
+            "type": "structure",
+            "members": {
+                "domainPatterns": {
+                    "target": "com.amazonaws.bedrockagentcore#DomainPatterns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of domain patterns that should bypass the proxy. Supports <code>.amazonaws.com</code> for subdomain matching or <code>amazonaws.com</code> for exact domain matching. Requests to these domains connect directly without using any proxy. Maximum 253 characters per pattern.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for domains that should bypass all proxies and connect directly to the internet. These bypass rules take precedence over all proxy routing rules.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ProxyConfiguration": {
+            "type": "structure",
+            "members": {
+                "proxies": {
+                    "target": "com.amazonaws.bedrockagentcore#Proxies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of 1-5 proxy server configurations for domain-based routing. Each proxy can specify which domains it handles via <code>domainPatterns</code>, enabling flexible routing of different traffic through different proxies based on destination domain.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "bypass": {
+                    "target": "com.amazonaws.bedrockagentcore#ProxyBypass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration for domains that should bypass all proxies and connect directly to their destination, like the internet. Takes precedence over all proxy routing rules.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for routing browser traffic through customer-managed proxy servers. Supports 1-5 proxy servers for domain-based routing and proxy bypass rules.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ProxyCredentials": {
+            "type": "union",
+            "members": {
+                "basicAuth": {
+                    "target": "com.amazonaws.bedrockagentcore#BasicAuth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>HTTP Basic Authentication credentials (username and password) stored in Amazon Web Services Secrets Manager.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Union type representing different proxy authentication methods. Currently supports HTTP Basic Authentication (username and password).</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#RequestIdentifier": {
             "type": "string",
             "traits": {
@@ -5965,6 +6129,12 @@
                 "smithy.api#documentation": "<p>Contains search criteria for retrieving memory records.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#SecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$"
+            }
+        },
         "com.amazonaws.bedrockagentcore#SensitiveString": {
             "type": "string",
             "traits": {
@@ -6238,6 +6408,12 @@
                     "target": "com.amazonaws.bedrockagentcore#BrowserProfileConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The browser profile configuration to use for this session. A browser profile contains persistent data such as cookies and local storage that can be reused across multiple browser sessions. If specified, the session initializes with the profile's stored data, enabling continuity for tasks that require authentication or personalized settings.</p>"
+                    }
+                },
+                "proxyConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcore#ProxyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional proxy configuration for routing browser traffic through customer-specified proxy servers. When provided, enables HTTP Basic authentication via Amazon Web Services Secrets Manager and domain-based routing rules. Requires <code>secretsmanager:GetSecretValue</code> IAM permission for the specified secret ARNs.</p>"
                     }
                 },
                 "clientToken": {

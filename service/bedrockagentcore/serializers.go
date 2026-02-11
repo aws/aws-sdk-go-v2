@@ -3043,6 +3043,13 @@ func awsRestjson1_serializeOpDocumentStartBrowserSessionInput(v *StartBrowserSes
 		}
 	}
 
+	if v.ProxyConfiguration != nil {
+		ok := object.Key("proxyConfiguration")
+		if err := awsRestjson1_serializeDocumentProxyConfiguration(v.ProxyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SessionTimeoutSeconds != nil {
 		ok := object.Key("sessionTimeoutSeconds")
 		ok.Integer(*v.SessionTimeoutSeconds)
@@ -3709,6 +3716,18 @@ func awsRestjson1_serializeDocumentAutomationStreamUpdate(v *types.AutomationStr
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBasicAuth(v *types.BasicAuth, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretArn != nil {
+		ok := object.Key("secretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBranch(v *types.Branch, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3843,6 +3862,17 @@ func awsRestjson1_serializeDocumentDocument(v document.Interface, value smithyjs
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDomainPatterns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEvaluationInput(v types.EvaluationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3921,6 +3951,37 @@ func awsRestjson1_serializeDocumentEventMetadataFilterList(v []types.EventMetada
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExternalProxy(v *types.ExternalProxy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Credentials != nil {
+		ok := object.Key("credentials")
+		if err := awsRestjson1_serializeDocumentProxyCredentials(v.Credentials, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainPatterns != nil {
+		ok := object.Key("domainPatterns")
+		if err := awsRestjson1_serializeDocumentDomainPatterns(v.DomainPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.Server != nil {
+		ok := object.Key("server")
+		ok.String(*v.Server)
+	}
+
 	return nil
 }
 
@@ -4292,6 +4353,93 @@ func awsRestjson1_serializeDocumentPayloadTypeList(v []types.PayloadType, value 
 		if err := awsRestjson1_serializeDocumentPayloadType(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProxies(v []types.Proxy, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentProxy(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProxy(v types.Proxy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ProxyMemberExternalProxy:
+		av := object.Key("externalProxy")
+		if err := awsRestjson1_serializeDocumentExternalProxy(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProxyBypass(v *types.ProxyBypass, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainPatterns != nil {
+		ok := object.Key("domainPatterns")
+		if err := awsRestjson1_serializeDocumentDomainPatterns(v.DomainPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProxyConfiguration(v *types.ProxyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bypass != nil {
+		ok := object.Key("bypass")
+		if err := awsRestjson1_serializeDocumentProxyBypass(v.Bypass, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Proxies != nil {
+		ok := object.Key("proxies")
+		if err := awsRestjson1_serializeDocumentProxies(v.Proxies, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProxyCredentials(v types.ProxyCredentials, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ProxyCredentialsMemberBasicAuth:
+		av := object.Key("basicAuth")
+		if err := awsRestjson1_serializeDocumentBasicAuth(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }
