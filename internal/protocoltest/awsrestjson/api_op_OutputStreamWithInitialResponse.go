@@ -32,10 +32,6 @@ type OutputStreamWithInitialResponseInput struct {
 }
 
 type OutputStreamWithInitialResponseOutput struct {
-
-	// This member is required.
-	InitialResponseMember *string
-
 	eventStream *OutputStreamWithInitialResponseEventStream
 
 	initialReply chan OutputStreamWithInitialResponseInitialReply
@@ -172,18 +168,23 @@ func (m *eventStreamBuild_opOutputStreamWithInitialResponseMiddleware) HandleBui
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleBuild(ctx, in)
-	response := OutputStreamWithInitialResponseInitialReply{
-		ResultMetadata: metadata,
-	}
-	res, ok := out.Result.(*OutputStreamWithInitialResponseOutput)
+	initialReply, ok := out.Result.(*OutputStreamWithInitialResponseInitialReply)
+	_ = initialReply
 	if !ok {
-		// we have this as error, but really no one will be listening to it
-		return out, metadata, fmt.Errorf("unexpected type of result. expected OutputStreamWithInitialResponseOutput, got %T. Additionally %w", out.Result, err)
+		return out, metadata, fmt.Errorf("unexpected type of result. expected OutputStreamWithInitialResponseInitialReply, got %T. Additionally %w", out.Result, err)
+	}
+	res, ok := middleware.GetEventStreamOutputToMetadata[OutputStreamWithInitialResponseOutput](&metadata)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected to find an object of type OutputStreamWithInitialResponseOutput on metadata, none was found. Metadata %v. Additionally %w", metadata, err)
 	}
 	if err != nil {
 		// fail the event stream because the middleware failed
 		res.eventStream.err.SetError(err)
 		res.GetStream().Close()
+	}
+	response := OutputStreamWithInitialResponseInitialReply{
+		ResultMetadata:        metadata,
+		initialResponseMember: initialReply.initialResponseMember,
 	}
 	res.initialReply <- response
 	return out, metadata, err

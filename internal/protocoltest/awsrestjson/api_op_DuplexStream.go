@@ -174,18 +174,22 @@ func (m *eventStreamBuild_opDuplexStreamMiddleware) HandleBuild(ctx context.Cont
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleBuild(ctx, in)
-	response := DuplexStreamInitialReply{
-		ResultMetadata: metadata,
-	}
-	res, ok := out.Result.(*DuplexStreamOutput)
+	initialReply, ok := out.Result.(*DuplexStreamInitialReply)
+	_ = initialReply
 	if !ok {
-		// we have this as error, but really no one will be listening to it
-		return out, metadata, fmt.Errorf("unexpected type of result. expected DuplexStreamOutput, got %T. Additionally %w", out.Result, err)
+		return out, metadata, fmt.Errorf("unexpected type of result. expected DuplexStreamInitialReply, got %T. Additionally %w", out.Result, err)
+	}
+	res, ok := middleware.GetEventStreamOutputToMetadata[DuplexStreamOutput](&metadata)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected to find an object of type DuplexStreamOutput on metadata, none was found. Metadata %v. Additionally %w", metadata, err)
 	}
 	if err != nil {
 		// fail the event stream because the middleware failed
 		res.eventStream.err.SetError(err)
 		res.GetStream().Close()
+	}
+	response := DuplexStreamInitialReply{
+		ResultMetadata: metadata,
 	}
 	res.initialReply <- response
 	return out, metadata, err

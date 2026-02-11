@@ -39,10 +39,6 @@ type DuplexStreamWithInitialMessagesInput struct {
 }
 
 type DuplexStreamWithInitialMessagesOutput struct {
-
-	// This member is required.
-	InitialResponseMember *string
-
 	eventStream *DuplexStreamWithInitialMessagesEventStream
 
 	initialReply chan DuplexStreamWithInitialMessagesInitialReply
@@ -188,18 +184,23 @@ func (m *eventStreamBuild_opDuplexStreamWithInitialMessagesMiddleware) HandleBui
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleBuild(ctx, in)
-	response := DuplexStreamWithInitialMessagesInitialReply{
-		ResultMetadata: metadata,
-	}
-	res, ok := out.Result.(*DuplexStreamWithInitialMessagesOutput)
+	initialReply, ok := out.Result.(*DuplexStreamWithInitialMessagesInitialReply)
+	_ = initialReply
 	if !ok {
-		// we have this as error, but really no one will be listening to it
-		return out, metadata, fmt.Errorf("unexpected type of result. expected DuplexStreamWithInitialMessagesOutput, got %T. Additionally %w", out.Result, err)
+		return out, metadata, fmt.Errorf("unexpected type of result. expected DuplexStreamWithInitialMessagesInitialReply, got %T. Additionally %w", out.Result, err)
+	}
+	res, ok := middleware.GetEventStreamOutputToMetadata[DuplexStreamWithInitialMessagesOutput](&metadata)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected to find an object of type DuplexStreamWithInitialMessagesOutput on metadata, none was found. Metadata %v. Additionally %w", metadata, err)
 	}
 	if err != nil {
 		// fail the event stream because the middleware failed
 		res.eventStream.err.SetError(err)
 		res.GetStream().Close()
+	}
+	response := DuplexStreamWithInitialMessagesInitialReply{
+		ResultMetadata:        metadata,
+		initialResponseMember: initialReply.initialResponseMember,
 	}
 	res.initialReply <- response
 	return out, metadata, err

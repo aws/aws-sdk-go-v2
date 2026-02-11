@@ -515,7 +515,6 @@ func (m *awsRestjson1_deserializeOpEventStreamDuplexStream) HandleDeserialize(ct
 
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
-	out.Result = m.existingResult
 	if err == nil {
 		// Extract actual response and create real reader
 		resp := out.RawResponse.(*smithyhttp.Response)
@@ -523,6 +522,7 @@ func (m *awsRestjson1_deserializeOpEventStreamDuplexStream) HandleDeserialize(ct
 	} else {
 		asyncResult <- deserializeResult{reader: nil, err: err}
 	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
 	return out, metadata, err
 }
 
@@ -805,7 +805,6 @@ func (m *awsRestjson1_deserializeOpEventStreamDuplexStreamWithInitialMessages) H
 
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
-	out.Result = m.existingResult
 	if err == nil {
 		// Extract actual response and create real reader
 		resp := out.RawResponse.(*smithyhttp.Response)
@@ -813,6 +812,7 @@ func (m *awsRestjson1_deserializeOpEventStreamDuplexStreamWithInitialMessages) H
 	} else {
 		asyncResult <- deserializeResult{reader: nil, err: err}
 	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
 	return out, metadata, err
 }
 
@@ -1168,7 +1168,6 @@ func (m *awsRestjson1_deserializeOpEventStreamOutputStream) HandleDeserialize(ct
 
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
-	out.Result = m.existingResult
 	if err == nil {
 		// Extract actual response and create real reader
 		resp := out.RawResponse.(*smithyhttp.Response)
@@ -1176,6 +1175,7 @@ func (m *awsRestjson1_deserializeOpEventStreamOutputStream) HandleDeserialize(ct
 	} else {
 		asyncResult <- deserializeResult{reader: nil, err: err}
 	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
 	return out, metadata, err
 }
 
@@ -1281,7 +1281,6 @@ func (m *awsRestjson1_deserializeOpEventStreamOutputStreamWithInitialResponse) H
 
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
-	out.Result = m.existingResult
 	if err == nil {
 		// Extract actual response and create real reader
 		resp := out.RawResponse.(*smithyhttp.Response)
@@ -1289,6 +1288,7 @@ func (m *awsRestjson1_deserializeOpEventStreamOutputStreamWithInitialResponse) H
 	} else {
 		asyncResult <- deserializeResult{reader: nil, err: err}
 	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
 	return out, metadata, err
 }
 
