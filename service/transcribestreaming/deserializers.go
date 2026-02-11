@@ -763,7 +763,7 @@ func (m *awsRestjson1_deserializeOpStartStreamTranscription) HandleDeserialize(c
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorStartStreamTranscription(response, &metadata)
 	}
-	output := &StartStreamTranscriptionOutput{}
+	output := &StartStreamTranscriptionInitialReply{}
 	out.Result = output
 
 	err = awsRestjson1_deserializeOpHttpBindingsStartStreamTranscriptionOutput(output, response)
@@ -841,7 +841,7 @@ func awsRestjson1_deserializeOpErrorStartStreamTranscription(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeOpHttpBindingsStartStreamTranscriptionOutput(v *StartStreamTranscriptionOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsStartStreamTranscriptionOutput(v *StartStreamTranscriptionInitialReply, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}

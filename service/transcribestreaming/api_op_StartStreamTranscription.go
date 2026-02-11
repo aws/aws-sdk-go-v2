@@ -35,7 +35,7 @@ func (c *Client) StartStreamTranscription(ctx context.Context, params *StartStre
 		params = &StartStreamTranscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartStreamTranscription", params, optFns, c.addOperationStartStreamTranscriptionMiddlewares)
+	result, metadata, err := c.invokeEventStreamOperation(ctx, "StartStreamTranscription", params, optFns, c.addOperationStartStreamTranscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -339,6 +339,21 @@ type StartStreamTranscriptionInput struct {
 }
 
 type StartStreamTranscriptionOutput struct {
+	eventStream *StartStreamTranscriptionEventStream
+
+	initialReply chan StartStreamTranscriptionInitialReply
+	// Metadata pertaining to the operation's result.
+	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
+}
+
+// GetStream returns the type to interact with the event stream.
+func (o *StartStreamTranscriptionOutput) GetStream() *StartStreamTranscriptionEventStream {
+	return o.eventStream
+}
+
+type StartStreamTranscriptionInitialReply struct {
 
 	// Shows whether content identification was enabled for your transcription.
 	ContentIdentificationType types.ContentIdentificationType
@@ -414,18 +429,14 @@ type StartStreamTranscriptionOutput struct {
 	// Provides the names of the custom vocabularies that you specified in your
 	// request.
 	VocabularyNames *string
-
-	eventStream *StartStreamTranscriptionEventStream
-
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-// GetStream returns the type to interact with the event stream.
-func (o *StartStreamTranscriptionOutput) GetStream() *StartStreamTranscriptionEventStream {
-	return o.eventStream
+func (o *StartStreamTranscriptionOutput) GetInitialReply() <-chan StartStreamTranscriptionInitialReply {
+	return o.initialReply
 }
 
 func (c *Client) addOperationStartStreamTranscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
@@ -454,6 +465,9 @@ func (c *Client) addOperationStartStreamTranscriptionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addEventStreamBuild_opStartStreamTranscriptionMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addClientRequestID(stack); err != nil {
@@ -529,6 +543,64 @@ func (c *Client) addOperationStartStreamTranscriptionMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+type eventStreamBuild_opStartStreamTranscriptionMiddleware struct {
+}
+
+func (*eventStreamBuild_opStartStreamTranscriptionMiddleware) ID() string {
+	return "EventStreamBuildMiddleware"
+}
+
+func (m *eventStreamBuild_opStartStreamTranscriptionMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleBuild(ctx, in)
+	initialReply, ok := out.Result.(*StartStreamTranscriptionInitialReply)
+	_ = initialReply
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected type of result. expected StartStreamTranscriptionInitialReply, got %T. Additionally %w", out.Result, err)
+	}
+	res, ok := middleware.GetEventStreamOutputToMetadata[StartStreamTranscriptionOutput](&metadata)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected to find an object of type StartStreamTranscriptionOutput on metadata, none was found. Metadata %v. Additionally %w", metadata, err)
+	}
+	if err != nil {
+		// fail the event stream because the middleware failed
+		res.eventStream.err.SetError(err)
+		res.GetStream().Close()
+	}
+	response := StartStreamTranscriptionInitialReply{
+		ResultMetadata:                    metadata,
+		ContentIdentificationType:         initialReply.ContentIdentificationType,
+		ContentRedactionType:              initialReply.ContentRedactionType,
+		EnableChannelIdentification:       initialReply.EnableChannelIdentification,
+		EnablePartialResultsStabilization: initialReply.EnablePartialResultsStabilization,
+		IdentifyLanguage:                  initialReply.IdentifyLanguage,
+		IdentifyMultipleLanguages:         initialReply.IdentifyMultipleLanguages,
+		LanguageCode:                      initialReply.LanguageCode,
+		LanguageModelName:                 initialReply.LanguageModelName,
+		LanguageOptions:                   initialReply.LanguageOptions,
+		MediaEncoding:                     initialReply.MediaEncoding,
+		MediaSampleRateHertz:              initialReply.MediaSampleRateHertz,
+		NumberOfChannels:                  initialReply.NumberOfChannels,
+		PartialResultsStability:           initialReply.PartialResultsStability,
+		PiiEntityTypes:                    initialReply.PiiEntityTypes,
+		PreferredLanguage:                 initialReply.PreferredLanguage,
+		RequestId:                         initialReply.RequestId,
+		SessionId:                         initialReply.SessionId,
+		ShowSpeakerLabel:                  initialReply.ShowSpeakerLabel,
+		VocabularyFilterMethod:            initialReply.VocabularyFilterMethod,
+		VocabularyFilterName:              initialReply.VocabularyFilterName,
+		VocabularyFilterNames:             initialReply.VocabularyFilterNames,
+		VocabularyName:                    initialReply.VocabularyName,
+		VocabularyNames:                   initialReply.VocabularyNames,
+	}
+	res.initialReply <- response
+	return out, metadata, err
+}
+func addEventStreamBuild_opStartStreamTranscriptionMiddleware(stack *middleware.Stack) error {
+	return stack.Build.Add(&eventStreamBuild_opStartStreamTranscriptionMiddleware{}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opStartStreamTranscription(region string) *awsmiddleware.RegisterServiceMetadata {
