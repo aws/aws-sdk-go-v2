@@ -880,7 +880,6 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream
 
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
-	out.Result = m.existingResult
 	if err == nil {
 		// Extract actual response and create real reader
 		resp := out.RawResponse.(*smithyhttp.Response)
@@ -888,6 +887,7 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream
 	} else {
 		asyncResult <- deserializeResult{reader: nil, err: err}
 	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
 	return out, metadata, err
 }
 

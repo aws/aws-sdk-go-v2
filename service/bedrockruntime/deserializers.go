@@ -1172,7 +1172,7 @@ func (m *awsRestjson1_deserializeOpInvokeModelWithBidirectionalStream) HandleDes
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorInvokeModelWithBidirectionalStream(response, &metadata)
 	}
-	output := &InvokeModelWithBidirectionalStreamOutput{}
+	output := &InvokeModelWithBidirectionalStreamInitialReply{}
 	out.Result = output
 
 	span.End()

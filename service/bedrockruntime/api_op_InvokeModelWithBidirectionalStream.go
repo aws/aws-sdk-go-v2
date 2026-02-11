@@ -193,18 +193,22 @@ func (m *eventStreamBuild_opInvokeModelWithBidirectionalStreamMiddleware) Handle
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleBuild(ctx, in)
-	response := InvokeModelWithBidirectionalStreamInitialReply{
-		ResultMetadata: metadata,
-	}
-	res, ok := out.Result.(*InvokeModelWithBidirectionalStreamOutput)
+	initialReply, ok := out.Result.(*InvokeModelWithBidirectionalStreamInitialReply)
+	_ = initialReply
 	if !ok {
-		// we have this as error, but really no one will be listening to it
-		return out, metadata, fmt.Errorf("unexpected type of result. expected InvokeModelWithBidirectionalStreamOutput, got %T. Additionally %w", out.Result, err)
+		return out, metadata, fmt.Errorf("unexpected type of result. expected InvokeModelWithBidirectionalStreamInitialReply, got %T. Additionally %w", out.Result, err)
+	}
+	res, ok := middleware.GetEventStreamOutputToMetadata[InvokeModelWithBidirectionalStreamOutput](&metadata)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected to find an object of type InvokeModelWithBidirectionalStreamOutput on metadata, none was found. Metadata %v. Additionally %w", metadata, err)
 	}
 	if err != nil {
 		// fail the event stream because the middleware failed
 		res.eventStream.err.SetError(err)
 		res.GetStream().Close()
+	}
+	response := InvokeModelWithBidirectionalStreamInitialReply{
+		ResultMetadata: metadata,
 	}
 	res.initialReply <- response
 	return out, metadata, err
