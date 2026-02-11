@@ -279,7 +279,7 @@ public final class AwsEventStreamUtils {
 
         var inputInfo = EventStreamIndex.of(model).getInputInfo(operationShape);
         var outputInfo = EventStreamIndex.of(model).getOutputInfo(operationShape);
-        var isv2 = EventStreamGenerator.hasEventStreamOperations(model, serviceShape) && !EventStreamGenerator.isLegacyEventStreamGenerator(operationShape) && outputInfo.isPresent();
+        var isv2 = EventStreamGenerator.isV2EventStream(model, operationShape);
 
         var writer = context.getWriter().get();
 
@@ -657,7 +657,6 @@ public final class AwsEventStreamUtils {
 
             out, metadata, err = next.HandleDeserialize(ctx, in)
 
-            out.Result = m.existingResult
             if err == nil {
                // Extract actual response and create real reader
                resp := out.RawResponse.(*smithyhttp.Response)
@@ -665,6 +664,7 @@ public final class AwsEventStreamUtils {
             } else {
                asyncResult <- deserializeResult{reader: nil, err: err}
             }
+            middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
             return out, metadata, err
             """, Map.of(
                 "opName", opName,
