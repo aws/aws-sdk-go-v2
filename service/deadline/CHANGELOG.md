@@ -1,3 +1,7 @@
+# v1.25.0 (2026-02-06)
+
+* **Feature**: Adds support for tagging jobs during job creation
+
 # v1.24.0 (2026-01-27)
 
 * **Feature**: AWS Deadline Cloud now supports editing job names and descriptions after submission.

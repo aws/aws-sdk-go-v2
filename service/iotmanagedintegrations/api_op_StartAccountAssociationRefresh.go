@@ -40,7 +40,9 @@ type StartAccountAssociationRefreshInput struct {
 type StartAccountAssociationRefreshOutput struct {
 
 	// Third-party IoT platform OAuth authorization server URL with all required
-	// parameters to perform end-user authentication during the refresh process.
+	// parameters to perform end-user authentication during the refresh process. This
+	// field will be empty when using General Authorization flows that do not require
+	// OAuth.
 	//
 	// This member is required.
 	OAuthAuthorizationUrl *string

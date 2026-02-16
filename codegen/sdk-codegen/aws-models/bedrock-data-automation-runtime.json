@@ -1319,6 +1319,12 @@
                     "traits": {
                         "smithy.api#documentation": "Encryption configuration."
                     }
+                },
+                "outputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#OutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Output configuration."
+                    }
                 }
             },
             "traits": {
@@ -1329,6 +1335,12 @@
         "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationResponse": {
             "type": "structure",
             "members": {
+                "outputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#OutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Output configuration"
+                    }
+                },
                 "semanticModality": {
                     "target": "com.amazonaws.bedrockdataautomationruntime#SemanticModality",
                     "traits": {
@@ -1339,8 +1351,9 @@
                 "outputSegments": {
                     "target": "com.amazonaws.bedrockdataautomationruntime#OutputSegmentList",
                     "traits": {
-                        "smithy.api#documentation": "List of outputs for each logical sub-doc",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "List of outputs for each logical sub-doc"
                     }
                 }
             },

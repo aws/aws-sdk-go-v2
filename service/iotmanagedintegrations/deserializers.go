@@ -214,7 +214,7 @@ func awsRestjson1_deserializeOpDocumentCreateAccountAssociationOutput(v **Create
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected OAuthAuthorizationUrl to be of type string, got %T instead", value)
+					return fmt.Errorf("expected OAuthAuthorizationUrlOutput to be of type string, got %T instead", value)
 				}
 				sv.OAuthAuthorizationUrl = ptr.String(jtv)
 			}
@@ -3569,6 +3569,11 @@ func awsRestjson1_deserializeOpDocumentGetAccountAssociationOutput(v **GetAccoun
 				sv.ErrorMessage = ptr.String(jtv)
 			}
 
+		case "GeneralAuthorization":
+			if err := awsRestjson1_deserializeDocumentGeneralAuthorizationName(&sv.GeneralAuthorization, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3582,7 +3587,7 @@ func awsRestjson1_deserializeOpDocumentGetAccountAssociationOutput(v **GetAccoun
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected OAuthAuthorizationUrl to be of type string, got %T instead", value)
+					return fmt.Errorf("expected OAuthAuthorizationUrlOutput to be of type string, got %T instead", value)
 				}
 				sv.OAuthAuthorizationUrl = ptr.String(jtv)
 			}
@@ -12675,6 +12680,9 @@ func awsRestjson1_deserializeOpErrorStartAccountAssociationRefresh(response *smi
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -12726,7 +12734,7 @@ func awsRestjson1_deserializeOpDocumentStartAccountAssociationRefreshOutput(v **
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected OAuthAuthorizationUrl to be of type string, got %T instead", value)
+					return fmt.Errorf("expected OAuthAuthorizationUrlOutput to be of type string, got %T instead", value)
 				}
 				sv.OAuthAuthorizationUrl = ptr.String(jtv)
 			}
@@ -14751,6 +14759,11 @@ func awsRestjson1_deserializeDocumentAuthConfig(v **types.AuthConfig, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "GeneralAuthorization":
+			if err := awsRestjson1_deserializeDocumentAuthMaterials(&sv.GeneralAuthorization, value); err != nil {
+				return err
+			}
+
 		case "oAuth":
 			if err := awsRestjson1_deserializeDocumentOAuthConfig(&sv.OAuth, value); err != nil {
 				return err
@@ -14762,6 +14775,85 @@ func awsRestjson1_deserializeDocumentAuthConfig(v **types.AuthConfig, value inte
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAuthMaterial(v **types.AuthMaterial, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AuthMaterial
+	if *v == nil {
+		sv = &types.AuthMaterial{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AuthMaterialName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthMaterialName to be of type string, got %T instead", value)
+				}
+				sv.AuthMaterialName = ptr.String(jtv)
+			}
+
+		case "SecretsManager":
+			if err := awsRestjson1_deserializeDocumentSecretsManager(&sv.SecretsManager, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAuthMaterials(v *[]types.AuthMaterial, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AuthMaterial
+	if *v == nil {
+		cv = []types.AuthMaterial{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AuthMaterial
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAuthMaterial(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -16227,6 +16319,46 @@ func awsRestjson1_deserializeDocumentExponentialRolloutRate(v **types.Exponentia
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGeneralAuthorizationName(v **types.GeneralAuthorizationName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeneralAuthorizationName
+	if *v == nil {
+		sv = &types.GeneralAuthorizationName{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AuthMaterialName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthMaterialName to be of type string, got %T instead", value)
+				}
+				sv.AuthMaterialName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalFailureException(v **types.InternalFailureException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16456,6 +16588,15 @@ func awsRestjson1_deserializeDocumentManagedThingAssociation(v **types.ManagedTh
 					return fmt.Errorf("expected AccountAssociationId to be of type string, got %T instead", value)
 				}
 				sv.AccountAssociationId = ptr.String(jtv)
+			}
+
+		case "ManagedThingAssociationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedThingAssociationStatus to be of type string, got %T instead", value)
+				}
+				sv.ManagedThingAssociationStatus = types.ManagedThingAssociationStatus(jtv)
 			}
 
 		case "ManagedThingId":

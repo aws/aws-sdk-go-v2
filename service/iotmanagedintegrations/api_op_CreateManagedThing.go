@@ -33,7 +33,7 @@ func (c *Client) CreateManagedThing(ctx context.Context, params *CreateManagedTh
 type CreateManagedThingInput struct {
 
 	// The authentication material defining the device connectivity setup requests.
-	// The authentication materials used are the device bar code.
+	// The authorization materials used are the device bar code.
 	//
 	// This member is required.
 	AuthenticationMaterial *string

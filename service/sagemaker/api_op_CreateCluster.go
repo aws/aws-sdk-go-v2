@@ -72,8 +72,12 @@ type CreateClusterInput struct {
 	NodeRecovery types.ClusterNodeRecovery
 
 	// The type of orchestrator to use for the SageMaker HyperPod cluster. Currently,
-	// the only supported value is "eks" , which is to use an Amazon Elastic Kubernetes
-	// Service cluster as the orchestrator.
+	// supported values are "Eks" and "Slurm" , which is to use an Amazon Elastic
+	// Kubernetes Service or Slurm cluster as the orchestrator.
+	//
+	// If you specify the Orchestrator field, you must provide exactly one
+	// orchestrator configuration: either Eks or Slurm . Specifying both or providing
+	// an empty configuration returns a validation error.
 	Orchestrator *types.ClusterOrchestrator
 
 	// The specialized instance groups for training models like Amazon Nova to be

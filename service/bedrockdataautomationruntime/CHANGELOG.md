@@ -1,3 +1,7 @@
+# v1.10.0 (2026-02-06)
+
+* **Feature**: Add OutputConfiguration to InvokeDataAutomation input and output to support S3 output
+
 # v1.9.4 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,89 @@
+# Release (2026-02-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.54.0](service/cloudwatch/CHANGELOG.md#v1540-2026-02-13)
+  * **Feature**: Adding new evaluation states that provides information about the alarm evaluation process. Evaluation error Indicates configuration errors in alarm setup that require review and correction. Evaluation failure Indicates temporary CloudWatch issues.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.162.0](service/connect/CHANGELOG.md#v11620-2026-02-13)
+  * **Feature**: API release for headerr notifications in the admin website. APIs allow customers to publish brief messages (including URLs) to a specified audience, and a new header icon will indicate when unread messages are available.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.289.0](service/ec2/CHANGELOG.md#v12890-2026-02-13)
+  * **Feature**: This release adds geography information to EC2 region and availability zone APIs. DescribeRegions now includes a Geography field, while DescribeAvailabilityZones includes both Geography and SubGeography fields, enabling better geographic classification for AWS regions and zones.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.47.0](service/inspector2/CHANGELOG.md#v1470-2026-02-13)
+  * **Feature**: Added .Net 10 (dotnet10) and Node 24.x (node24.x) runtime support for lambda package scanning
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.233.0](service/sagemaker/CHANGELOG.md#v12330-2026-02-13)
+  * **Feature**: Enable g7e instance type support for SageMaker Processing, and enable single file configuration provisioning for HyperPod Slurm, where customers have the option to use HyperPod API to provide the provisioning parameters.
+
+# Release (2026-02-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.288.0](service/ec2/CHANGELOG.md#v12880-2026-02-12)
+  * **Feature**: Launching nested virtualization. This feature allows you to run nested VMs inside virtual (non-bare metal) EC2 instances.
+
+# Release (2026-02-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.60.0](service/batch/CHANGELOG.md#v1600-2026-02-11)
+  * **Feature**: Add support for listing jobs by share identifier and getting snapshots of active capacity utilization by job queue and share.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.287.0](service/ec2/CHANGELOG.md#v12870-2026-02-11)
+  * **Feature**: R8i instances powered by custom Intel Xeon 6 processors available only on AWS with sustained all-core 3.9 GHz turbo frequency
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.80.0](service/eks/CHANGELOG.md#v1800-2026-02-11)
+  * **Feature**: This release adds support for Windows Server 2025 in Amazon EKS Managed Node Groups.
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.30.0](service/kafkaconnect/CHANGELOG.md#v1300-2026-02-11)
+  * **Feature**: Support configurable upper limits on task count during autoscaling operations via maxAutoscalingTaskCount parameter.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.14.0](service/s3tables/CHANGELOG.md#v1140-2026-02-11)
+  * **Feature**: S3 Tables now supports setting partition specifications and sort orders on tables. Partition specs allow users to define how data is organized using transform functions. Sort order configurations enable users to specify sort directions and null ordering preferences for optimized data layout.
+
+# Release (2026-02-10.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.13.0](service/bedrockagentcore/CHANGELOG.md#v1130-2026-02-102)
+  * **Feature**: Added AgentCore browser proxy configuration support, allowing routing of browser traffic through HTTP and HTTPS proxy servers with authentication and bypass rules.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.161.0](service/connect/CHANGELOG.md#v11610-2026-02-102)
+  * **Feature**: Amazon Connect now supports per-channel auto-accept and After Contact Work (ACW) timeouts. Configure agents with auto-accept and ACW timeout settings for chat, tasks, emails, and callbacks. Use the new UpdateUserConfig API to manage these settings.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.79.0](service/eks/CHANGELOG.md#v1790-2026-02-102)
+  * **Feature**: Introducing an optional policy field, an IAM policy applied to pod identity associations in addition to IAM role policies. When specified, pod permissions are the intersection of IAM role policies and the policy field, ensuring the principle of least privilege.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.47.0](service/kafka/CHANGELOG.md#v1470-2026-02-102)
+  * **Feature**: Amazon MSK adds three new APIs, CreateTopic, UpdateTopic, and DeleteTopic for managing Kafka topics in your MSK clusters.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.115.0](service/rds/CHANGELOG.md#v11150-2026-02-102)
+  * **Feature**: This release adds backup configuration for RDS and Aurora restores, letting customers set backup retention period and preferred backup window during restore. It also enables viewing backup settings when describing snapshots or automated backups for instances and clusters.
+
+# Release (2026-02-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.11.0](service/connectcampaignsv2/CHANGELOG.md#v1110-2026-02-10)
+  * **Feature**: Add the missing event type for WhatsApp
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.286.0](service/ec2/CHANGELOG.md#v12860-2026-02-10)
+  * **Feature**: Amazon Secondary Networks is a networking feature that provides high-performance, low-latency connectivity for specialized workloads.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.78.0](service/eks/CHANGELOG.md#v1780-2026-02-10)
+  * **Feature**: Amazon EKS adds a new DescribeUpdate update type, VendedLogsUpdate, to support an integration between EKS Auto Mode and Amazon CloudWatch Vended Logs.
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.30.0](service/evidently/CHANGELOG.md#v1300-2026-02-10)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.51.0](service/imagebuilder/CHANGELOG.md#v1510-2026-02-10)
+  * **Feature**: EC2 Image Builder now supports wildcard patterns in lifecycle policies with recipes and enhances the experience of tag-scoped policies.
+* `github.com/aws/aws-sdk-go-v2/service/iotanalytics`: [v1.32.0](service/iotanalytics/CHANGELOG.md#v1320-2026-02-10)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.47.1](service/lakeformation/CHANGELOG.md#v1471-2026-02-10)
+  * **Documentation**: Allow cross account v5 in put data lake settings
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.17.0](service/neptunedata/CHANGELOG.md#v1170-2026-02-10)
+  * **Feature**: Added edgeOnlyLoad boolean parameter to Neptune bulk load request. When TRUE, files are loaded in order without scanning. When FALSE (default), the loader scans files first, then loads vertex files before edge files automatically.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.16.0](service/pcs/CHANGELOG.md#v1160-2026-02-10)
+  * **Feature**: Introduces RESUMING state for clusters, compute node groups, and queues.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.69.1](service/transfer/CHANGELOG.md#v1691-2026-02-10)
+  * **Documentation**: This release adds a documentation update for MdnResponse of type "ASYNC"
+
+# Release (2026-02-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.10.0](service/bedrockdataautomationruntime/CHANGELOG.md#v1100-2026-02-06)
+  * **Feature**: Add OutputConfiguration to InvokeDataAutomation input and output to support S3 output
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.25.0](service/deadline/CHANGELOG.md#v1250-2026-02-06)
+  * **Feature**: Adds support for tagging jobs during job creation
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.8.0](service/iotmanagedintegrations/CHANGELOG.md#v180-2026-02-06)
+  * **Feature**: Adding support for Custom(General) Authorization in managed integrations for AWS IoT Device Management cloud connectors.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.14.0](service/partnercentralselling/CHANGELOG.md#v1140-2026-02-06)
+  * **Feature**: Releasing AWS Opportunity Snapshots for SDK release.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.232.0](service/sagemaker/CHANGELOG.md#v12320-2026-02-06)
+  * **Feature**: Adding g7e instance support in Sagemaker Training
+
 # Release (2026-02-05)
 
 ## Module Highlights

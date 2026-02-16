@@ -70,6 +70,12 @@ func ExampleClusterInstanceStorageConfig_outputUsage() {
 	case *types.ClusterInstanceStorageConfigMemberEbsVolumeConfig:
 		_ = v.Value // Value is types.ClusterEbsVolumeConfig
 
+	case *types.ClusterInstanceStorageConfigMemberFsxLustreConfig:
+		_ = v.Value // Value is types.ClusterFsxLustreConfig
+
+	case *types.ClusterInstanceStorageConfigMemberFsxOpenZfsConfig:
+		_ = v.Value // Value is types.ClusterFsxOpenZfsConfig
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -79,7 +85,9 @@ func ExampleClusterInstanceStorageConfig_outputUsage() {
 	}
 }
 
+var _ *types.ClusterFsxOpenZfsConfig
 var _ *types.ClusterEbsVolumeConfig
+var _ *types.ClusterFsxLustreConfig
 
 func ExampleCollectionConfig_outputUsage() {
 	var union types.CollectionConfig

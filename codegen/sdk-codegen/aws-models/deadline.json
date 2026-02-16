@@ -2687,6 +2687,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "aws.iam#iamAction": {
                     "name": "CreateJob",
                     "documentation": "Grants permission to create a job",
@@ -2819,6 +2823,12 @@
                     "target": "com.amazonaws.deadline#JobDescriptionOverride",
                     "traits": {
                         "smithy.api#documentation": "<p>A custom description to override the job description derived from the job template.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.deadline#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to your job. Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>"
                     }
                 }
             },
@@ -10056,7 +10066,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -10077,7 +10087,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -11776,7 +11786,8 @@
                 "aws.iam#conditionKeys": [
                     "deadline:FarmMembershipLevels",
                     "deadline:QueueMembershipLevels",
-                    "deadline:JobMembershipLevels"
+                    "deadline:JobMembershipLevels",
+                    "aws:ResourceTag/${TagKey}"
                 ],
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
@@ -12425,7 +12436,7 @@
             "type": "structure",
             "members": {
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -12455,7 +12466,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -12525,7 +12536,7 @@
             "type": "structure",
             "members": {
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -12563,7 +12574,7 @@
             "type": "structure",
             "members": {
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -12643,7 +12654,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -12673,7 +12684,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -12746,7 +12757,7 @@
             "type": "structure",
             "members": {
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -12776,7 +12787,7 @@
             "type": "structure",
             "members": {
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -12869,7 +12880,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -12899,7 +12910,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -13004,7 +13015,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -13034,7 +13045,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -13128,7 +13139,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -13158,7 +13169,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -13252,7 +13263,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -13282,7 +13293,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -13380,7 +13391,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -13410,7 +13421,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -13478,7 +13489,7 @@
             "type": "structure",
             "members": {
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -13508,7 +13519,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -13581,7 +13592,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -13611,7 +13622,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -13682,7 +13693,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -13712,7 +13723,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -13777,7 +13788,7 @@
             "type": "structure",
             "members": {
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -13800,7 +13811,7 @@
             "type": "structure",
             "members": {
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -13893,7 +13904,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -13923,7 +13934,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -14016,7 +14027,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -14046,7 +14057,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -14138,7 +14149,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -14168,7 +14179,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -14254,7 +14265,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -14284,7 +14295,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -14382,7 +14393,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -14412,7 +14423,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -14519,7 +14530,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -14549,7 +14560,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -14697,7 +14708,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -14727,7 +14738,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>"
                     }
@@ -14771,7 +14782,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -14801,7 +14812,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -14903,7 +14914,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -14937,7 +14948,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -15039,7 +15050,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -15073,7 +15084,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -15167,7 +15178,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -15197,7 +15208,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -15334,7 +15345,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -15364,7 +15375,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -15386,7 +15397,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -15416,7 +15427,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -15464,6 +15475,7 @@
                             "fleet": {},
                             "license-endpoint": {},
                             "queue": {},
+                            "job": {},
                             "worker": {},
                             "monitor": {},
                             "budget": {}
@@ -15604,7 +15616,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -15634,7 +15646,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -15721,7 +15733,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
                         "smithy.api#httpQuery": "nextToken"
@@ -15744,7 +15756,7 @@
             "type": "structure",
             "members": {
                 "nextToken": {
-                    "target": "com.amazonaws.deadline#String",
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
@@ -16238,6 +16250,14 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.deadline#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4096
                 }
             }
         },
@@ -19923,6 +19943,7 @@
                             "fleet": {},
                             "license-endpoint": {},
                             "queue": {},
+                            "job": {},
                             "worker": {},
                             "monitor": {},
                             "budget": {}
@@ -20612,6 +20633,7 @@
                             "fleet": {},
                             "license-endpoint": {},
                             "queue": {},
+                            "job": {},
                             "worker": {},
                             "monitor": {},
                             "budget": {}

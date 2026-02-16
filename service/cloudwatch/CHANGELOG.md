@@ -1,3 +1,7 @@
+# v1.54.0 (2026-02-13)
+
+* **Feature**: Adding new evaluation states that provides information about the alarm evaluation process. Evaluation error Indicates configuration errors in alarm setup that require review and correction. Evaluation failure Indicates temporary CloudWatch issues.
+
 # v1.53.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

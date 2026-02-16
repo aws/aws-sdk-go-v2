@@ -51,6 +51,27 @@ type AutomationStreamUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for HTTP Basic Authentication using credentials stored in Amazon
+// Web Services Secrets Manager. The secret must contain a JSON object with
+// username and password string fields. Username allows alphanumeric characters
+// and @._+=- symbols (pattern: ^[a-zA-Z0-9@._+=\-]+$ ). Password allows
+// alphanumeric characters and @._+=-!#$%&* symbols (pattern:
+// ^[a-zA-Z0-9@._+=\-!#$%&*]+$ ). Both fields have a maximum length of 256
+// characters.
+type BasicAuth struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret containing proxy credentials. The secret must be a JSON object with
+	// username and password string fields that meet validation requirements. The
+	// caller must have secretsmanager:GetSecretValue permission for this ARN. Example
+	// secret format: {"username": "proxy_user", "password": "secure_password"}
+	//
+	// This member is required.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a branch in an AgentCore Memory resource. Branches
 // allow for organizing events into different conversation threads or paths.
 type Branch struct {
@@ -549,6 +570,36 @@ type EventMetadataFilterExpression struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a customer-managed external proxy server. Includes server
+// location, optional domain-based routing patterns, and authentication
+// credentials.
+type ExternalProxy struct {
+
+	// The port number of the proxy server. Valid range: 1-65535.
+	//
+	// This member is required.
+	Port *int32
+
+	// The hostname of the proxy server. Must be a valid DNS hostname (maximum 253
+	// characters).
+	//
+	// This member is required.
+	Server *string
+
+	// Optional authentication credentials for the proxy server. If omitted, the proxy
+	// is accessed without authentication (useful for IP-allowlisted proxies).
+	Credentials ProxyCredentials
+
+	// Optional array of domain patterns that should route through this specific
+	// proxy. Supports .example.com for subdomain matching (matches any subdomain of
+	// example.com) or example.com for exact domain matching. If omitted, this proxy
+	// acts as a catch-all for domains not matched by other proxies. Maximum 100
+	// patterns per proxy, each up to 253 characters.
+	DomainPatterns []string
+
+	noSmithyDocumentSerde
+}
+
 // Represents the metadata of a memory extraction job such as the message
 // identifiers that compose this job.
 type ExtractionJob struct {
@@ -959,6 +1010,80 @@ type PayloadTypeMemberConversational struct {
 
 func (*PayloadTypeMemberConversational) isPayloadType() {}
 
+// Union type representing different proxy configurations. Currently supports
+// external customer-managed proxies.
+//
+// The following types satisfy this interface:
+//
+//	ProxyMemberExternalProxy
+type Proxy interface {
+	isProxy()
+}
+
+// Configuration for an external customer-managed proxy server.
+type ProxyMemberExternalProxy struct {
+	Value ExternalProxy
+
+	noSmithyDocumentSerde
+}
+
+func (*ProxyMemberExternalProxy) isProxy() {}
+
+// Configuration for domains that should bypass all proxies and connect directly
+// to the internet. These bypass rules take precedence over all proxy routing
+// rules.
+type ProxyBypass struct {
+
+	// Array of domain patterns that should bypass the proxy. Supports .amazonaws.com
+	// for subdomain matching or amazonaws.com for exact domain matching. Requests to
+	// these domains connect directly without using any proxy. Maximum 253 characters
+	// per pattern.
+	DomainPatterns []string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for routing browser traffic through customer-managed proxy
+// servers. Supports 1-5 proxy servers for domain-based routing and proxy bypass
+// rules.
+type ProxyConfiguration struct {
+
+	// An array of 1-5 proxy server configurations for domain-based routing. Each
+	// proxy can specify which domains it handles via domainPatterns , enabling
+	// flexible routing of different traffic through different proxies based on
+	// destination domain.
+	//
+	// This member is required.
+	Proxies []Proxy
+
+	// Optional configuration for domains that should bypass all proxies and connect
+	// directly to their destination, like the internet. Takes precedence over all
+	// proxy routing rules.
+	Bypass *ProxyBypass
+
+	noSmithyDocumentSerde
+}
+
+// Union type representing different proxy authentication methods. Currently
+// supports HTTP Basic Authentication (username and password).
+//
+// The following types satisfy this interface:
+//
+//	ProxyCredentialsMemberBasicAuth
+type ProxyCredentials interface {
+	isProxyCredentials()
+}
+
+// HTTP Basic Authentication credentials (username and password) stored in Amazon
+// Web Services Secrets Manager.
+type ProxyCredentialsMemberBasicAuth struct {
+	Value BasicAuth
+
+	noSmithyDocumentSerde
+}
+
+func (*ProxyCredentialsMemberBasicAuth) isProxyCredentials() {}
+
 // Contains information about resource content.
 type ResourceContent struct {
 
@@ -1301,6 +1426,8 @@ func (*UnknownUnionMember) isLeftExpression()              {}
 func (*UnknownUnionMember) isMemoryContent()               {}
 func (*UnknownUnionMember) isMetadataValue()               {}
 func (*UnknownUnionMember) isPayloadType()                 {}
+func (*UnknownUnionMember) isProxy()                       {}
+func (*UnknownUnionMember) isProxyCredentials()            {}
 func (*UnknownUnionMember) isResourceLocation()            {}
 func (*UnknownUnionMember) isRightExpression()             {}
 func (*UnknownUnionMember) isStreamUpdate()                {}

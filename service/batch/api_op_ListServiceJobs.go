@@ -30,8 +30,12 @@ func (c *Client) ListServiceJobs(ctx context.Context, params *ListServiceJobsInp
 type ListServiceJobsInput struct {
 
 	// The filter to apply to the query. Only one filter can be used at a time. When
-	// the filter is used, jobStatus is ignored. The results are sorted by the
-	// createdAt field, with the most recent jobs being first.
+	// the filter is used, jobStatus is ignored with the exception that
+	// SHARE_IDENTIFIER and jobStatus can be used together. The results are sorted by
+	// the createdAt field, with the most recent jobs being first.
+	//
+	// The SHARE_IDENTIFIER filter and the jobStatus field can be used together to
+	// filter results.
 	//
 	// JOB_NAME The value of the filter is a case-insensitive match for the job name.
 	// If the value ends with an asterisk (*), the filter matches any job name that
@@ -49,12 +53,22 @@ type ListServiceJobsInput struct {
 	// created. This corresponds to the createdAt value. The value is a string
 	// representation of the number of milliseconds since 00:00:00 UTC (midnight) on
 	// January 1, 1970.
+	//
+	// SHARE_IDENTIFIER The value for the filter is the fairshare scheduling share
+	// identifier.
 	Filters []types.KeyValuesPair
 
 	// The name or ARN of the job queue with which to list service jobs.
 	JobQueue *string
 
-	// The job status with which to filter service jobs.
+	// The job status used to filter service jobs in the specified queue. If the
+	// filters parameter is specified, the jobStatus parameter is ignored and jobs
+	// with any status are returned. The exception is the SHARE_IDENTIFIER filter and
+	// jobStatus can be used together. If you don't specify a status, only RUNNING
+	// jobs are returned.
+	//
+	// The SHARE_IDENTIFIER filter and the jobStatus field can be used together to
+	// filter results.
 	JobStatus types.ServiceJobStatus
 
 	// The maximum number of results returned by ListServiceJobs in paginated output.

@@ -1,3 +1,11 @@
+# v1.233.0 (2026-02-13)
+
+* **Feature**: Enable g7e instance type support for SageMaker Processing, and enable single file configuration provisioning for HyperPod Slurm, where customers have the option to use HyperPod API to provide the provisioning parameters.
+
+# v1.232.0 (2026-02-06)
+
+* **Feature**: Adding g7e instance support in Sagemaker Training
+
 # v1.231.0 (2026-01-27)
 
 * **Feature**: Idle resource sharing enables teams to borrow unused compute resources in your SageMaker HyperPod cluster. This capability maximizes resource utilization by allowing teams to borrow idle compute capacity beyond their allocated compute quotas.

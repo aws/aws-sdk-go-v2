@@ -15312,6 +15312,14 @@
                     {
                         "value": "RUBY_3_2",
                         "name": "RUBY_3_2"
+                    },
+                    {
+                        "value": "DOTNET_10",
+                        "name": "DOTNET_10"
+                    },
+                    {
+                        "value": "NODEJS_24_X",
+                        "name": "NODEJS_24_X"
                     }
                 ]
             }

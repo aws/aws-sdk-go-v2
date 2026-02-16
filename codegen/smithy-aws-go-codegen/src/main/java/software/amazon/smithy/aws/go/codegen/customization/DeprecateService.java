@@ -36,7 +36,11 @@ public class DeprecateService implements GoIntegration {
         "com.amazonaws.apptest#AwsApptestControlPlaneService",
 
         // 11/13/25
-        "com.amazonaws.elastictranscoder#EtsCustomerService"
+        "com.amazonaws.elastictranscoder#EtsCustomerService",
+
+        // 2/9/26
+        "com.amazonaws.evidently#Evidently",
+        "com.amazonaws.iotanalytics#AWSIoTAnalytics"
     );
 
     @Override

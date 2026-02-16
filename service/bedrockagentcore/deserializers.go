@@ -1735,6 +1735,11 @@ func awsRestjson1_deserializeOpDocumentGetBrowserSessionOutput(v **GetBrowserSes
 				return err
 			}
 
+		case "proxyConfiguration":
+			if err := awsRestjson1_deserializeDocumentProxyConfiguration(&sv.ProxyConfiguration, value); err != nil {
+				return err
+			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8225,6 +8230,46 @@ func awsRestjson1_deserializeDocumentAutomationStream(v **types.AutomationStream
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBasicAuth(v **types.BasicAuth, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BasicAuth
+	if *v == nil {
+		sv = &types.BasicAuth{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "secretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBranch(v **types.Branch, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8814,6 +8859,42 @@ func awsRestjson1_deserializeDocumentDocument(v *document.Interface, value inter
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDomainPatterns(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DomainPattern to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDuplicateIdException(v **types.DuplicateIdException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9155,6 +9236,69 @@ func awsRestjson1_deserializeDocumentEventList(v *[]types.Event, value interface
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExternalProxy(v **types.ExternalProxy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExternalProxy
+	if *v == nil {
+		sv = &types.ExternalProxy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "credentials":
+			if err := awsRestjson1_deserializeDocumentProxyCredentials(&sv.Credentials, value); err != nil {
+				return err
+			}
+
+		case "domainPatterns":
+			if err := awsRestjson1_deserializeDocumentDomainPatterns(&sv.DomainPatterns, value); err != nil {
+				return err
+			}
+
+		case "port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "server":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HostName to be of type string, got %T instead", value)
+				}
+				sv.Server = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -10060,6 +10204,195 @@ func awsRestjson1_deserializeDocumentPayloadTypeList(v *[]types.PayloadType, val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProxies(v *[]types.Proxy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Proxy
+	if *v == nil {
+		cv = []types.Proxy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Proxy
+		if err := awsRestjson1_deserializeDocumentProxy(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProxy(v *types.Proxy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.Proxy
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "externalProxy":
+			var mv types.ExternalProxy
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentExternalProxy(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ProxyMemberExternalProxy{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProxyBypass(v **types.ProxyBypass, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProxyBypass
+	if *v == nil {
+		sv = &types.ProxyBypass{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domainPatterns":
+			if err := awsRestjson1_deserializeDocumentDomainPatterns(&sv.DomainPatterns, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProxyConfiguration(v **types.ProxyConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProxyConfiguration
+	if *v == nil {
+		sv = &types.ProxyConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bypass":
+			if err := awsRestjson1_deserializeDocumentProxyBypass(&sv.Bypass, value); err != nil {
+				return err
+			}
+
+		case "proxies":
+			if err := awsRestjson1_deserializeDocumentProxies(&sv.Proxies, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProxyCredentials(v *types.ProxyCredentials, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ProxyCredentials
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "basicAuth":
+			var mv types.BasicAuth
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentBasicAuth(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ProxyCredentialsMemberBasicAuth{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

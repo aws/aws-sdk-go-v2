@@ -1,3 +1,7 @@
+# v1.52.1 (2026-02-10)
+
+* No change notes available for this release.
+
 # v1.52.0 (2026-01-23)
 
 * **Feature**: Added api for deleting data export configuration for a domain

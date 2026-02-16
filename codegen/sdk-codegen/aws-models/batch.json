@@ -4316,6 +4316,12 @@
                         "smithy.api#documentation": "<p>A list of job attempts associated with the service job.</p>"
                     }
                 },
+                "capacityUsage": {
+                    "target": "com.amazonaws.batch#ServiceJobCapacityUsageDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configured capacity for the service job, such as the number of instances. The\n            number of instances should be the same value as the\n                <code>serviceRequestPayload.InstanceCount</code> field.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.batch#Long",
                     "traits": {
@@ -4368,6 +4374,12 @@
                     "target": "com.amazonaws.batch#ServiceJobRetryStrategy",
                     "traits": {
                         "smithy.api#documentation": "<p>The retry strategy to use for failed service jobs that are submitted with this service job.</p>"
+                    }
+                },
+                "scheduledAt": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the service job was scheduled. This\n            represents when the service job was dispatched to SageMaker and the service job transitioned to the\n                <code>SCHEDULED</code> state.</p>"
                     }
                 },
                 "schedulingPriority": {
@@ -4503,6 +4515,9 @@
             "member": {
                 "target": "com.amazonaws.batch#Device"
             }
+        },
+        "com.amazonaws.batch#Double": {
+            "type": "double"
         },
         "com.amazonaws.batch#EFSAuthorizationConfig": {
             "type": "structure",
@@ -5750,6 +5765,58 @@
                 "target": "com.amazonaws.batch#EvaluateOnExit"
             }
         },
+        "com.amazonaws.batch#FairshareCapacityUsage": {
+            "type": "structure",
+            "members": {
+                "capacityUnit": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measure for the capacity usage. For compute jobs, this is\n                <code>VCPU</code> for Amazon EC2 and <code>cpu</code> for Amazon EKS. For service jobs, this is <code>NUM_INSTANCES</code>.</p>"
+                    }
+                },
+                "quantity": {
+                    "target": "com.amazonaws.batch#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantity of capacity being used, measured in the units specified by\n                <code>capacityUnit</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity usage for a fairshare scheduling job queue.</p>"
+            }
+        },
+        "com.amazonaws.batch#FairshareCapacityUsageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#FairshareCapacityUsage"
+            }
+        },
+        "com.amazonaws.batch#FairshareCapacityUtilization": {
+            "type": "structure",
+            "members": {
+                "shareIdentifier": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The share identifier for the fairshare scheduling job queue.</p>"
+                    }
+                },
+                "capacityUsage": {
+                    "target": "com.amazonaws.batch#FairshareCapacityUsageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity usage information for this share, including the unit of measure and\n            quantity being used. This is\n            <code>VCPU</code> for Amazon EC2 and <code>cpu</code> for Amazon EKS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity utilization for a specific share in a fairshare scheduling job queue, including the share identifier and its current usage.</p>"
+            }
+        },
+        "com.amazonaws.batch#FairshareCapacityUtilizationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#FairshareCapacityUtilization"
+            }
+        },
         "com.amazonaws.batch#FairsharePolicy": {
             "type": "structure",
             "members": {
@@ -5774,6 +5841,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The fair-share scheduling policy details.</p>"
+            }
+        },
+        "com.amazonaws.batch#FairshareUtilizationDetail": {
+            "type": "structure",
+            "members": {
+                "activeShareCount": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of active shares in the fairshare scheduling job queue that are\n            currently utilizing capacity.</p>"
+                    }
+                },
+                "topCapacityUtilization": {
+                    "target": "com.amazonaws.batch#FairshareCapacityUtilizationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the top 20 shares with the highest capacity utilization, ordered by usage\n            amount.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The fairshare utilization for a job queue, including the number\n            of active shares and top capacity utilization.</p>"
             }
         },
         "com.amazonaws.batch#FargatePlatformConfiguration": {
@@ -5904,7 +5991,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a list of the first 100 <code>RUNNABLE</code> jobs associated to a single job queue.</p>",
+                "smithy.api#documentation": "<p>Provides a list of the first 100 <code>RUNNABLE</code> jobs associated to a single job\n      queue and includes capacity utilization, including total usage and breakdown by share for fairshare scheduling job queues. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/getjobqueuesnapshot",
@@ -5934,7 +6021,13 @@
                 "frontOfQueue": {
                     "target": "com.amazonaws.batch#FrontOfQueueDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of the first 100 <code>RUNNABLE</code> jobs in each job queue. For first-in-first-out (FIFO) job queues, jobs are ordered based on their submission time. For fair-share scheduling (FSS) job queues, jobs are ordered based on their job priority and share usage.</p>"
+                        "smithy.api#documentation": "<p>The list of the first 100 <code>RUNNABLE</code> jobs in each job queue. For\n      first-in-first-out (FIFO) job queues, jobs are ordered based on their submission time. For\n      fair-share scheduling (FSS) job queues, jobs are ordered based on their job priority and share\n      usage.</p>"
+                    }
+                },
+                "queueUtilization": {
+                    "target": "com.amazonaws.batch#QueueSnapshotUtilizationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job queue's capacity utilization, including total usage and\n            breakdown by fairshare scheduling queue.</p>"
                     }
                 }
             },
@@ -6055,6 +6148,32 @@
                         "smithy.api#enumValue": "INVALID"
                     }
                 }
+            }
+        },
+        "com.amazonaws.batch#JobCapacityUsageSummary": {
+            "type": "structure",
+            "members": {
+                "capacityUnit": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measure for the capacity usage. This is\n            <code>VCPU</code> for Amazon EC2 and <code>cpu</code> for Amazon EKS.</p>"
+                    }
+                },
+                "quantity": {
+                    "target": "com.amazonaws.batch#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantity of capacity being used by the job, measured in the units specified by\n                <code>capacityUnit</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity usage for a job, including the unit of measure\n            and quantity of resources being used.</p>"
+            }
+        },
+        "com.amazonaws.batch#JobCapacityUsageSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#JobCapacityUsageSummary"
             }
         },
         "com.amazonaws.batch#JobDefinition": {
@@ -6716,10 +6835,28 @@
                         "smithy.api#required": {}
                     }
                 },
+                "capacityUsage": {
+                    "target": "com.amazonaws.batch#JobCapacityUsageSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configured capacity usage information for this job, including the unit of measure and\n            quantity of resources.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.batch#Long",
                     "traits": {
                         "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the job was created. For non-array jobs and\n   parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time\n    <a href=\"https://docs.aws.amazon.com/batch/latest/APIReference/API_SubmitJob.html\">SubmitJob</a>\n   was called). For array child jobs, this is when the child job was spawned by its parent and\n   entered the <code>PENDING</code> state.</p>"
+                    }
+                },
+                "scheduledAt": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the job was scheduled for\n            execution. For more information on job statues, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/service-job-status.html\">Service job status</a> in the <i>Batch User Guide</i>.</p>"
+                    }
+                },
+                "shareIdentifier": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The share identifier for the fairshare scheduling queue that this job is\n            associated with.</p>"
                     }
                 },
                 "status": {
@@ -7138,7 +7275,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of Batch jobs.</p>\n         <p>You must specify only one of the following items:</p>\n         <ul>\n            <li>\n               <p>A job queue ID to return a list of jobs in that job queue</p>\n            </li>\n            <li>\n               <p>A multi-node parallel job ID to return a list of nodes for that job</p>\n            </li>\n            <li>\n               <p>An array job ID to return a list of the children for that job</p>\n            </li>\n         </ul>\n         <p>You can filter the results by job status with the <code>jobStatus</code> parameter. If you\n      don't specify a status, only <code>RUNNING</code> jobs are returned.</p>",
+                "smithy.api#documentation": "<p>Returns a list of Batch jobs.</p>\n         <p>You must specify only one of the following items:</p>\n         <ul>\n            <li>\n               <p>A job queue ID to return a list of jobs in that job queue</p>\n            </li>\n            <li>\n               <p>A multi-node parallel job ID to return a list of nodes for that job</p>\n            </li>\n            <li>\n               <p>An array job ID to return a list of the children for that job</p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
                         "title": "To list running jobs",
@@ -7353,7 +7490,7 @@
                 "shareIdentifier": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fair-share scheduling policy identifier for the job.</p>"
+                        "smithy.api#documentation": "<p>The fair-share scheduling identifier for the job.</p>"
                     }
                 },
                 "jobStatus": {
@@ -7441,7 +7578,7 @@
                 "jobStatus": {
                     "target": "com.amazonaws.batch#JobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job status used to filter jobs in the specified queue. If the <code>filters</code>\n      parameter is specified, the <code>jobStatus</code> parameter is ignored and jobs with any\n      status are returned. If you don't specify a status, only <code>RUNNING</code> jobs are\n      returned.</p>\n         <note>\n            <p>Array job parents are updated to <code>PENDING</code> when any child job is updated to <code>RUNNABLE</code> and remain in <code>PENDING</code> status while child jobs are running. To view these jobs, filter by <code>PENDING</code> status until all child jobs reach a terminal state.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The job status used to filter jobs in the specified queue. If the <code>filters</code>\n      parameter is specified, the <code>jobStatus</code> parameter is ignored and jobs with any\n      status are returned. The exception is the <code>SHARE_IDENTIFIER</code> filter and <code>jobStatus</code> can be used together. If you don't specify a status, only <code>RUNNING</code> jobs are\n      returned.</p>\n         <note>\n            <p>Array job parents are updated to <code>PENDING</code> when any child job is updated to <code>RUNNABLE</code> and remain in <code>PENDING</code> status while child jobs are running. To view these jobs, filter by <code>PENDING</code> status until all child jobs reach a terminal state.</p>\n         </note>"
                     }
                 },
                 "maxResults": {
@@ -7459,7 +7596,7 @@
                 "filters": {
                     "target": "com.amazonaws.batch#ListJobsFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter to apply to the query. Only one filter can be used at a time. When the filter\n      is used, <code>jobStatus</code> is ignored. The filter doesn't apply to child jobs in an array\n      or multi-node parallel (MNP) jobs. The results are sorted by the <code>createdAt</code> field,\n      with the most recent jobs being first.</p>\n         <dl>\n            <dt>JOB_NAME</dt>\n            <dd>\n               <p>The value of the filter is a case-insensitive match for the job name. If the value\n            ends with an asterisk (*), the filter matches any job name that begins with the string\n            before the '*'. This corresponds to the <code>jobName</code> value. For example,\n              <code>test1</code> matches both <code>Test1</code> and <code>test1</code>, and\n              <code>test1*</code> matches both <code>test1</code> and <code>Test10</code>. When the\n              <code>JOB_NAME</code> filter is used, the results are grouped by the job name and\n            version.</p>\n            </dd>\n            <dt>JOB_DEFINITION</dt>\n            <dd>\n               <p>The value for the filter is the name or Amazon Resource Name (ARN) of the job definition. This\n            corresponds to the <code>jobDefinition</code> value. The value is case sensitive. When\n            the value for the filter is the job definition name, the results include all the jobs\n            that used any revision of that job definition name. If the value ends with an asterisk\n            (*), the filter matches any job definition name that begins with the string before the\n            '*'. For example, <code>jd1</code> matches only <code>jd1</code>, and <code>jd1*</code>\n            matches both <code>jd1</code> and <code>jd1A</code>. The version of the job definition\n            that's used doesn't affect the sort order. When the <code>JOB_DEFINITION</code> filter\n            is used and the ARN is used (which is in the form\n              <code>arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}</code>),\n            the results include jobs that used the specified revision of the job definition.\n            Asterisk (*) isn't supported when the ARN is used.</p>\n            </dd>\n            <dt>BEFORE_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's before the job was created. This\n            corresponds to the <code>createdAt</code> value. The value is a string representation of\n            the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.</p>\n            </dd>\n            <dt>AFTER_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's after the job was created. This\n            corresponds to the <code>createdAt</code> value. The value is a string representation of\n            the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The filter to apply to the query. Only one filter can be used at a time. When the filter\n      is used, <code>jobStatus</code> is ignored with the exception that <code>SHARE_IDENTIFIER</code> and <code>jobStatus</code> can be used together. The filter doesn't apply to child jobs in an array\n      or multi-node parallel (MNP) jobs. The results are sorted by the <code>createdAt</code> field,\n      with the most recent jobs being first.</p>\n         <note>\n            <p>The <code>SHARE_IDENTIFIER</code> filter and the <code>jobStatus</code> field can be used together to filter results.</p>\n         </note>\n         <dl>\n            <dt>JOB_NAME</dt>\n            <dd>\n               <p>The value of the filter is a case-insensitive match for the job name. If the value\n            ends with an asterisk (*), the filter matches any job name that begins with the string\n            before the '*'. This corresponds to the <code>jobName</code> value. For example,\n              <code>test1</code> matches both <code>Test1</code> and <code>test1</code>, and\n              <code>test1*</code> matches both <code>test1</code> and <code>Test10</code>. When the\n              <code>JOB_NAME</code> filter is used, the results are grouped by the job name and\n            version.</p>\n            </dd>\n            <dt>JOB_DEFINITION</dt>\n            <dd>\n               <p>The value for the filter is the name or Amazon Resource Name (ARN) of the job definition. This\n            corresponds to the <code>jobDefinition</code> value. The value is case sensitive. When\n            the value for the filter is the job definition name, the results include all the jobs\n            that used any revision of that job definition name. If the value ends with an asterisk\n            (*), the filter matches any job definition name that begins with the string before the\n            '*'. For example, <code>jd1</code> matches only <code>jd1</code>, and <code>jd1*</code>\n            matches both <code>jd1</code> and <code>jd1A</code>. The version of the job definition\n            that's used doesn't affect the sort order. When the <code>JOB_DEFINITION</code> filter\n            is used and the ARN is used (which is in the form\n              <code>arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}</code>),\n            the results include jobs that used the specified revision of the job definition.\n            Asterisk (*) isn't supported when the ARN is used.</p>\n            </dd>\n            <dt>BEFORE_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's before the job was created. This\n            corresponds to the <code>createdAt</code> value. The value is a string representation of\n            the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.</p>\n            </dd>\n            <dt>AFTER_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's after the job was created. This\n            corresponds to the <code>createdAt</code> value. The value is a string representation of\n            the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.</p>\n            </dd>\n            <dt>SHARE_IDENTIFIER</dt>\n            <dd>\n               <p>The value for the filter is the fairshare scheduling share identifier.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -7605,7 +7742,7 @@
                 "jobStatus": {
                     "target": "com.amazonaws.batch#ServiceJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job status with which to filter service jobs. </p>"
+                        "smithy.api#documentation": "<p>The job status used to filter service jobs in the specified queue. If the <code>filters</code>\n\t            parameter is specified, the <code>jobStatus</code> parameter is ignored and jobs with any\n\t            status are returned. The exception is the <code>SHARE_IDENTIFIER</code> filter and <code>jobStatus</code> can be used together. If you don't specify a status, only <code>RUNNING</code> jobs are\n\t            returned.</p>\n         <note>\n            <p>The <code>SHARE_IDENTIFIER</code> filter and the <code>jobStatus</code> field can be used together to filter results.</p>\n         </note>"
                     }
                 },
                 "maxResults": {
@@ -7623,7 +7760,7 @@
                 "filters": {
                     "target": "com.amazonaws.batch#ListJobsFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter to apply to the query. Only one filter can be used at a time. When the filter\n           is used, <code>jobStatus</code> is ignored. The results are sorted by the <code>createdAt</code> field,\n           with the most recent jobs being first.</p>\n         <dl>\n            <dt>JOB_NAME</dt>\n            <dd>\n               <p>The value of the filter is a case-insensitive match for the job name. If the value\n                       ends with an asterisk (*), the filter matches any job name that begins with the string\n                       before the '*'. This corresponds to the <code>jobName</code> value. For example,\n                       <code>test1</code> matches both <code>Test1</code> and <code>test1</code>, and\n                       <code>test1*</code> matches both <code>test1</code> and <code>Test10</code>. When the\n                       <code>JOB_NAME</code> filter is used, the results are grouped by the job name and\n                       version.</p>\n            </dd>\n            <dt>BEFORE_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's before the job was created. This\n                       corresponds to the <code>createdAt</code> value. The value is a string representation of\n                       the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.</p>\n            </dd>\n            <dt>AFTER_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's after the job was created. This\n                       corresponds to the <code>createdAt</code> value. The value is a string representation of\n                       the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The filter to apply to the query. Only one filter can be used at a time. When the\n\t            filter is used, <code>jobStatus</code> is ignored with the exception that <code>SHARE_IDENTIFIER</code> and <code>jobStatus</code> can be used together. The results are sorted by the\n\t                <code>createdAt</code> field, with the most recent jobs being first.</p>\n         <note>\n            <p>The <code>SHARE_IDENTIFIER</code> filter and the <code>jobStatus</code> field can be used together to filter results.</p>\n         </note>\n         <dl>\n            <dt>JOB_NAME</dt>\n            <dd>\n               <p>The value of the filter is a case-insensitive match for the job name. If the value\n                       ends with an asterisk (*), the filter matches any job name that begins with the string\n                       before the '*'. This corresponds to the <code>jobName</code> value. For example,\n                       <code>test1</code> matches both <code>Test1</code> and <code>test1</code>, and\n                       <code>test1*</code> matches both <code>test1</code> and <code>Test10</code>. When the\n                       <code>JOB_NAME</code> filter is used, the results are grouped by the job name and\n                       version.</p>\n            </dd>\n            <dt>BEFORE_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's before the job was created. This\n                       corresponds to the <code>createdAt</code> value. The value is a string representation of\n                       the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.</p>\n            </dd>\n            <dt>AFTER_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's after the job was created. This\n                       corresponds to the <code>createdAt</code> value. The value is a string representation of\n                       the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.</p>\n            </dd>\n            <dt>SHARE_IDENTIFIER</dt>\n            <dd>\n               <p>The value for the filter is the fairshare scheduling share identifier.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -8178,6 +8315,58 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.batch#QueueSnapshotCapacityUsage": {
+            "type": "structure",
+            "members": {
+                "capacityUnit": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measure for the capacity usage. For compute jobs, this is\n            <code>VCPU</code> for Amazon EC2 and <code>cpu</code> for Amazon EKS. For service jobs, this is <code>NUM_INSTANCES</code>.</p>"
+                    }
+                },
+                "quantity": {
+                    "target": "com.amazonaws.batch#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantity of capacity being used in the queue snapshot, measured in the units\n            specified by <code>capacityUnit</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configured capacity usage for a job queue snapshot, including the unit of\n            measure and quantity of resources being used.</p>"
+            }
+        },
+        "com.amazonaws.batch#QueueSnapshotCapacityUsageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#QueueSnapshotCapacityUsage"
+            }
+        },
+        "com.amazonaws.batch#QueueSnapshotUtilizationDetail": {
+            "type": "structure",
+            "members": {
+                "totalCapacityUsage": {
+                    "target": "com.amazonaws.batch#QueueSnapshotCapacityUsageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total capacity usage for the entire job queue, for both first-in,\n            first-out (FIFO) and fairshare scheduling job queue.</p>"
+                    }
+                },
+                "fairshareUtilization": {
+                    "target": "com.amazonaws.batch#FairshareUtilizationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The utilization information for a fairshare scheduling job queues, including\n            active share count and top capacity utilization by share.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the queue utilization information was\n            last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The job queue utilization at a specific point in time,\n            including total capacity usage and fairshare utilization breakdown.</p>"
             }
         },
         "com.amazonaws.batch#RegisterJobDefinition": {
@@ -8834,6 +9023,58 @@
                 "target": "com.amazonaws.batch#ServiceJobAttemptDetail"
             }
         },
+        "com.amazonaws.batch#ServiceJobCapacityUsageDetail": {
+            "type": "structure",
+            "members": {
+                "capacityUnit": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measure for the service job capacity usage. For service jobs, this is\n                <code>NUM_INSTANCES</code>.</p>"
+                    }
+                },
+                "quantity": {
+                    "target": "com.amazonaws.batch#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantity of capacity being used by the service job, measured in the units\n            specified by <code>capacityUnit</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity usage for a service job, including the unit of\n            measure and quantity of resources being consumed.</p>"
+            }
+        },
+        "com.amazonaws.batch#ServiceJobCapacityUsageDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#ServiceJobCapacityUsageDetail"
+            }
+        },
+        "com.amazonaws.batch#ServiceJobCapacityUsageSummary": {
+            "type": "structure",
+            "members": {
+                "capacityUnit": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measure for the service job capacity usage. For service jobs, this is\n                <code>NUM_INSTANCES</code>.</p>"
+                    }
+                },
+                "quantity": {
+                    "target": "com.amazonaws.batch#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantity of capacity being used by the service job, measured in the units\n            specified by <code>capacityUnit</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity usage for a service job, including the unit of\n            measure and quantity of resources being used.</p>"
+            }
+        },
+        "com.amazonaws.batch#ServiceJobCapacityUsageSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#ServiceJobCapacityUsageSummary"
+            }
+        },
         "com.amazonaws.batch#ServiceJobEvaluateOnExit": {
             "type": "structure",
             "members": {
@@ -8961,6 +9202,12 @@
                         "smithy.api#documentation": "<p>Information about the latest attempt for the service job.</p>"
                     }
                 },
+                "capacityUsage": {
+                    "target": "com.amazonaws.batch#ServiceJobCapacityUsageSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity usage information for this service job, including the unit of measure and\n            quantity of resources being used.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.batch#Long",
                     "traits": {
@@ -8987,6 +9234,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the service job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "scheduledAt": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the service job was scheduled for\n            execution.</p>"
                     }
                 },
                 "serviceJobType": {

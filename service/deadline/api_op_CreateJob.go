@@ -89,6 +89,10 @@ type CreateJobInput struct {
 	// The storage profile ID for the storage profile to connect to the job.
 	StorageProfileId *string
 
+	// The tags to add to your job. Each tag consists of a tag key and a tag value.
+	// Tag keys and values are both required, but tag values can be empty strings.
+	Tags map[string]string
+
 	// The initial job status when it is created. Jobs that are created with a
 	// SUSPENDED status will not run until manually requeued.
 	TargetTaskRunStatus types.CreateJobTargetTaskRunStatus

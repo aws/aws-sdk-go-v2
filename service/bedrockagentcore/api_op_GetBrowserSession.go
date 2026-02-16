@@ -92,6 +92,12 @@ type GetBrowserSessionOutput struct {
 	// local storage.
 	ProfileConfiguration *types.BrowserProfileConfiguration
 
+	// The active proxy configuration for this browser session. This field is only
+	// present if proxy configuration was provided when the session was started using
+	// StartBrowserSession . The configuration includes proxy servers, domain bypass
+	// rules and the proxy authentication credentials.
+	ProxyConfiguration *types.ProxyConfiguration
+
 	// The artifact containing the session replay information.
 	SessionReplayArtifact *string
 

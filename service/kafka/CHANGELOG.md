@@ -1,3 +1,7 @@
+# v1.47.0 (2026-02-10.2)
+
+* **Feature**: Amazon MSK adds three new APIs, CreateTopic, UpdateTopic, and DeleteTopic for managing Kafka topics in your MSK clusters.
+
 # v1.46.7 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

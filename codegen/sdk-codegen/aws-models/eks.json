@@ -128,6 +128,18 @@
                         "smithy.api#enumValue": "WINDOWS_FULL_2022_x86_64"
                     }
                 },
+                "WINDOWS_CORE_2025_x86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_CORE_2025_x86_64"
+                    }
+                },
+                "WINDOWS_FULL_2025_x86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_FULL_2025_x86_64"
+                    }
+                },
                 "AL2023_x86_64_STANDARD": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -4824,6 +4836,12 @@
                     "target": "com.amazonaws.eks#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target IAM role to associate with the service account. This role\n            is assumed by using the EKS Pod Identity association role, then the credentials for this\n            role are injected into the Pod.</p>\n         <p>When you run applications on Amazon EKS, your application might need to access Amazon Web Services\n            resources from a different role that exists in the same or different Amazon Web Services account. For\n            example, your application running in “Account A” might need to access resources, such as\n            Amazon S3 buckets in “Account B” or within “Account A” itself. You can create a association\n            to access Amazon Web Services resources in “Account B” by creating two IAM roles: a role in “Account\n            A” and a role in “Account B” (which can be the same or different account), each with the\n            necessary trust and permission policies. After you provide these roles in the\n                <i>IAM role</i> and <i>Target IAM role</i> fields, EKS\n            will perform role chaining to ensure your application gets the required permissions.\n            This means Role A will assume Role B, allowing your Pods to securely access resources\n            like S3 buckets in the target account.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional IAM policy in JSON format (as an escaped string) that applies additional\n            restrictions to this pod identity association beyond the IAM policies attached to the\n            IAM role. This policy is applied as the intersection of the role's policies and this\n            policy, allowing you to reduce the permissions that applications in the pods can use.\n            Use this policy to enforce least privilege access while still leveraging a shared IAM\n            role across multiple applications.</p>\n         <p>\n            <b>Important considerations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Session tags:</b> When using this policy,\n                    <code>disableSessionTags</code> must be set to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Target role permissions:</b> If you specify both\n                    a <code>TargetRoleArn</code> and a policy, the policy restrictions apply only to\n                    the target role's permissions, not to the initial role used for assuming the\n                    target role.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -10732,6 +10750,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for this EKS Pod Identity association for a target IAM role. You put this value\n            in the trust policy of the target role, in a <code>Condition</code> to match the\n                <code>sts.ExternalId</code>. This ensures that the target role can only be assumed\n            by this association. This prevents the <i>confused deputy problem</i>. For\n            more information about the confused deputy problem, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html\">The confused deputy\n            problem</a> in the <i>IAM User Guide</i>.</p>\n         <p>If you want to use the same target role with multiple associations or\n            other roles, use independent statements in the trust policy to allow\n            <code>sts:AssumeRole</code> access from each role.</p>"
                     }
+                },
+                "policy": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional IAM policy in JSON format (as an escaped string) that applies additional\n            restrictions to this pod identity association beyond the IAM policies attached to the\n            IAM role. This policy is applied as the intersection of the role's policies and this\n            policy, allowing you to reduce the permissions that applications in the pods can use.\n            Use this policy to enforce least privilege access while still leveraging a shared IAM\n            role across multiple applications.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12968,6 +12992,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target IAM role to associate with the service account. This\n            role is assumed by using the EKS Pod Identity association role, then the credentials for this\n            role are injected into the Pod.</p>\n         <p>When you run applications on Amazon EKS, your application might need to access Amazon Web Services\n            resources from a different role that exists in the same or different Amazon Web Services account. For\n            example, your application running in “Account A” might need to access resources, such as\n            buckets in “Account B” or within “Account A” itself. You can create a association to\n            access Amazon Web Services resources in “Account B” by creating two IAM roles: a role in “Account A”\n            and a role in “Account B” (which can be the same or different account), each with the\n            necessary trust and permission policies. After you provide these roles in the <i>IAM role</i>\n            and <i>Target IAM role</i> fields, EKS will perform role chaining to ensure your application\n            gets the required permissions. This means Role A will assume Role B, allowing your Pods\n            to securely access resources like S3 buckets in the target account.</p>"
                     }
+                },
+                "policy": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional IAM policy in JSON format (as an escaped string) that applies additional\n            restrictions to this pod identity association beyond the IAM policies attached to the\n            IAM role. This policy is applied as the intersection of the role's policies and this\n            policy, allowing you to reduce the permissions that applications in the pods can use.\n            Use this policy to enforce least privilege access while still leveraging a shared IAM\n            role across multiple applications.</p>\n         <p>\n            <b>Important considerations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Session tags:</b> When using this policy,\n                    <code>disableSessionTags</code> must be set to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Target role permissions:</b> If you specify both\n                    a <code>TargetRoleArn</code> and a policy, the policy restrictions apply only to\n                    the target role's permissions, not to the initial role used for assuming the\n                    target role.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -13154,6 +13184,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ControlPlaneScalingConfigUpdate"
+                    }
+                },
+                "VENDED_LOGS_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VendedLogsUpdate"
                     }
                 }
             }

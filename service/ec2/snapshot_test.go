@@ -1526,6 +1526,30 @@ func TestCheckSnapshot_CreateRouteTable(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateSecondaryNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSecondaryNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSecondaryNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateSecondarySubnet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSecondarySubnet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSecondarySubnet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateSecurityGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSecurityGroup(context.Background(), nil, func(o *Options) {
@@ -2623,6 +2647,30 @@ func TestCheckSnapshot_DeleteRouteTable(t *testing.T) {
 	_, err := svc.DeleteRouteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteRouteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteSecondaryNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSecondaryNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSecondaryNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteSecondarySubnet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSecondarySubnet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSecondarySubnet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4639,6 +4687,42 @@ func TestCheckSnapshot_DescribeScheduledInstances(t *testing.T) {
 	_, err := svc.DescribeScheduledInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeScheduledInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeSecondaryInterfaces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecondaryInterfaces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSecondaryInterfaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeSecondaryNetworks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecondaryNetworks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSecondaryNetworks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeSecondarySubnets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecondarySubnets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSecondarySubnets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10513,6 +10597,30 @@ func TestUpdateSnapshot_CreateRouteTable(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateSecondaryNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSecondaryNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSecondaryNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateSecondarySubnet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSecondarySubnet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSecondarySubnet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateSecurityGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSecurityGroup(context.Background(), nil, func(o *Options) {
@@ -11610,6 +11718,30 @@ func TestUpdateSnapshot_DeleteRouteTable(t *testing.T) {
 	_, err := svc.DeleteRouteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRouteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSecondaryNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSecondaryNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSecondaryNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSecondarySubnet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSecondarySubnet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSecondarySubnet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -13626,6 +13758,42 @@ func TestUpdateSnapshot_DescribeScheduledInstances(t *testing.T) {
 	_, err := svc.DescribeScheduledInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeScheduledInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeSecondaryInterfaces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecondaryInterfaces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSecondaryInterfaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeSecondaryNetworks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecondaryNetworks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSecondaryNetworks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeSecondarySubnets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecondarySubnets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSecondarySubnets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

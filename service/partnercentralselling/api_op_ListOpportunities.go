@@ -58,6 +58,9 @@ type ListOpportunitiesInput struct {
 	// This member is required.
 	Catalog *string
 
+	// Filter opportunities by creation date criteria.
+	CreatedDate *types.CreatedDateFilter
+
 	// Filters the opportunities based on the customer's company name. This allows
 	// partners to search for opportunities associated with a specific customer by
 	// matching the provided company name string.

@@ -56,10 +56,14 @@ type AutoScaling struct {
 	// This member is required.
 	MinWorkerCount int32
 
-	// The sacle-in policy for the connector.
+	// The maximum number of tasks allocated to the connector during autoscaling
+	// operations. Must be at least equal to maxWorkerCount.
+	MaxAutoscalingTaskCount int32
+
+	// The scale-in policy for the connector.
 	ScaleInPolicy *ScaleInPolicy
 
-	// The sacle-out policy for the connector.
+	// The scale-out policy for the connector.
 	ScaleOutPolicy *ScaleOutPolicy
 
 	noSmithyDocumentSerde
@@ -67,6 +71,10 @@ type AutoScaling struct {
 
 // Information about the auto scaling parameters for the connector.
 type AutoScalingDescription struct {
+
+	// The maximum number of tasks allocated to the connector during autoscaling
+	// operations. Must be at least equal to maxWorkerCount.
+	MaxAutoscalingTaskCount int32
 
 	// The maximum number of workers allocated to the connector.
 	MaxWorkerCount int32
@@ -78,10 +86,10 @@ type AutoScalingDescription struct {
 	// The minimum number of workers allocated to the connector.
 	MinWorkerCount int32
 
-	// The sacle-in policy for the connector.
+	// The scale-in policy for the connector.
 	ScaleInPolicy *ScaleInPolicyDescription
 
-	// The sacle-out policy for the connector.>
+	// The scale-out policy for the connector.
 	ScaleOutPolicy *ScaleOutPolicyDescription
 
 	noSmithyDocumentSerde
@@ -106,15 +114,19 @@ type AutoScalingUpdate struct {
 	// This member is required.
 	MinWorkerCount int32
 
-	// The target sacle-in policy for the connector.
+	// The target scale-in policy for the connector.
 	//
 	// This member is required.
 	ScaleInPolicy *ScaleInPolicyUpdate
 
-	// The target sacle-out policy for the connector.
+	// The target scale-out policy for the connector.
 	//
 	// This member is required.
 	ScaleOutPolicy *ScaleOutPolicyUpdate
+
+	// The maximum number of tasks allocated to the connector during autoscaling
+	// operations. Must be at least equal to maxWorkerCount.
+	MaxAutoscalingTaskCount int32
 
 	noSmithyDocumentSerde
 }

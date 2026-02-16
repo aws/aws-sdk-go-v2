@@ -662,7 +662,7 @@
                 "target": "com.amazonaws.partnercentralselling#MonetaryAmount"
             },
             "traits": {
-                "smithy.api#documentation": "Maps spend amounts to AWS programs and strategic initiatives"
+                "smithy.api#documentation": "<p>Maps spend amounts to AWS programs and modernization pathways.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#ApnPrograms": {
@@ -1306,7 +1306,10 @@
                     }
                 },
                 "AwsProductsSpendInsightsBySource": {
-                    "target": "com.amazonaws.partnercentralselling#AwsProductsSpendInsightsBySource"
+                    "target": "com.amazonaws.partnercentralselling#AwsProductsSpendInsightsBySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source-separated spend insights that provide independent analysis for AWS recommendations and partner estimates.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1367,7 +1370,7 @@
                 "AwsPartition": {
                     "target": "com.amazonaws.partnercentralselling#AwsPartition",
                     "traits": {
-                        "smithy.api#documentation": "AWS partition where the opportunity will be deployed. Possible values: 'aws-eusc' for AWS European Sovereign Cloud, `null` for all other partitions"
+                        "smithy.api#documentation": "<p>AWS partition where the opportunity will be deployed. Possible values: <code>aws-eusc</code> for AWS European Sovereign Cloud, <code>null</code> for all other partitions.</p>"
                     }
                 }
             },
@@ -1544,6 +1547,65 @@
                 }
             }
         },
+        "com.amazonaws.partnercentralselling#AwsOpportunitySummaryFullView": {
+            "type": "structure",
+            "members": {
+                "RelatedOpportunityId": {
+                    "target": "com.amazonaws.partnercentralselling#OpportunityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the related partner opportunity.</p>"
+                    }
+                },
+                "Origin": {
+                    "target": "com.amazonaws.partnercentralselling#OpportunityOrigin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source origin of the AWS opportunity.</p>"
+                    }
+                },
+                "InvolvementType": {
+                    "target": "com.amazonaws.partnercentralselling#SalesInvolvementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of AWS involvement in the opportunity.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.partnercentralselling#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Visibility level for the AWS opportunity.</p>"
+                    }
+                },
+                "LifeCycle": {
+                    "target": "com.amazonaws.partnercentralselling#AwsOpportunityLifeCycle"
+                },
+                "OpportunityTeam": {
+                    "target": "com.amazonaws.partnercentralselling#AwsOpportunityTeamMembersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS team members involved in the opportunity.</p>"
+                    }
+                },
+                "Insights": {
+                    "target": "com.amazonaws.partnercentralselling#AwsOpportunityInsights"
+                },
+                "InvolvementTypeChangeReason": {
+                    "target": "com.amazonaws.partnercentralselling#InvolvementTypeChangeReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reason for changes in AWS involvement type for the opportunity.</p>"
+                    }
+                },
+                "RelatedEntityIds": {
+                    "target": "com.amazonaws.partnercentralselling#AwsOpportunityRelatedEntities"
+                },
+                "Customer": {
+                    "target": "com.amazonaws.partnercentralselling#AwsOpportunityCustomer"
+                },
+                "Project": {
+                    "target": "com.amazonaws.partnercentralselling#AwsOpportunityProject"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a comprehensive view of AwsOpportunitySummaryFullView template.</p>"
+            }
+        },
         "com.amazonaws.partnercentralselling#AwsOpportunityTeamMembersList": {
             "type": "list",
             "member": {
@@ -1567,20 +1629,20 @@
                 "ProductCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "AWS Partner Central product identifier used for opportunity association",
+                        "smithy.api#documentation": "<p>AWS Partner Central product identifier used for opportunity association.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServiceCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Pricing Calculator service code (links to original calculator URL)"
+                        "smithy.api#documentation": "<p>Pricing Calculator service code.</p>"
                     }
                 },
                 "Categories": {
                     "target": "com.amazonaws.partnercentralselling#StringList",
                     "traits": {
-                        "smithy.api#documentation": "List of program and pathway categories this product is eligible for",
+                        "smithy.api#documentation": "<p>List of program and pathway categories this product is eligible for.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 20
@@ -1591,31 +1653,31 @@
                 "Amount": {
                     "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
                     "traits": {
-                        "smithy.api#documentation": "Baseline service cost before optimizations (may be null for AWS-sourced predictions)"
+                        "smithy.api#documentation": "<p>Baseline service cost before optimizations.</p>"
                     }
                 },
                 "OptimizedAmount": {
                     "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
                     "traits": {
-                        "smithy.api#documentation": "Service cost after applying optimizations (may be null for AWS-sourced predictions)"
+                        "smithy.api#documentation": "<p>Service cost after applying optimizations.</p>"
                     }
                 },
                 "PotentialSavingsAmount": {
                     "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
                     "traits": {
-                        "smithy.api#documentation": "Service-specific cost reduction through optimizations (may be null for AWS-sourced predictions)"
+                        "smithy.api#documentation": "<p>Service-specific cost reduction through optimizations.</p>"
                     }
                 },
                 "Optimizations": {
                     "target": "com.amazonaws.partnercentralselling#AwsProductOptimizationsList",
                     "traits": {
-                        "smithy.api#documentation": "List of specific optimization recommendations for this product",
+                        "smithy.api#documentation": "<p>List of specific optimization recommendations for this product.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "AWS services with program eligibility indicators (MAP, modernization pathways), cost estimates, and optimization recommendations."
+                "smithy.api#documentation": "<p>List of AWS services with program eligibility indicators (MAP, modernization pathways), cost estimates, and optimization recommendations.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#AwsProductIdentifier": {
@@ -1633,7 +1695,7 @@
                 "CurrencyCode": {
                     "target": "com.amazonaws.partnercentralselling#CurrencyCode",
                     "traits": {
-                        "smithy.api#documentation": "ISO 4217 currency code (e.g., \"USD\") ensuring consistent representation across calculations",
+                        "smithy.api#documentation": "<p>ISO 4217 currency code.</p>",
                         "smithy.api#pattern": "^USD$",
                         "smithy.api#required": {}
                     }
@@ -1641,45 +1703,45 @@
                 "Frequency": {
                     "target": "com.amazonaws.partnercentralselling#PaymentFrequency",
                     "traits": {
-                        "smithy.api#documentation": "Time period for spend amounts: \"Monthly\" or \"Annually\"",
+                        "smithy.api#documentation": "<p>Time period for spend amounts.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TotalAmount": {
                     "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
                     "traits": {
-                        "smithy.api#documentation": "Total estimated spend for this source before optimizations"
+                        "smithy.api#documentation": "<p>Total estimated spend for this source before optimizations.</p>"
                     }
                 },
                 "TotalOptimizedAmount": {
                     "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
                     "traits": {
-                        "smithy.api#documentation": "Total estimated spend after applying recommended optimizations"
+                        "smithy.api#documentation": "<p>Total estimated spend after applying recommended optimizations.</p>"
                     }
                 },
                 "TotalPotentialSavingsAmount": {
                     "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
                     "traits": {
-                        "smithy.api#documentation": "Quantified savings achievable through implementing optimizations"
+                        "smithy.api#documentation": "<p>Quantified savings achievable through implementing optimizations.</p>"
                     }
                 },
                 "TotalAmountByCategory": {
                     "target": "com.amazonaws.partnercentralselling#AmountMap",
                     "traits": {
-                        "smithy.api#documentation": "Spend amounts mapped to AWS programs and modernization pathways",
+                        "smithy.api#documentation": "<p>Spend amounts mapped to AWS programs and modernization pathways.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AwsProducts": {
                     "target": "com.amazonaws.partnercentralselling#AwsProductsList",
                     "traits": {
-                        "smithy.api#documentation": "Product-level details including costs and optimization recommendations",
+                        "smithy.api#documentation": "<p>Product-level details including costs and optimization recommendations.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Comprehensive spend analysis for a single source (AWS or Partner) including total amounts, optimization savings, program category breakdowns, and detailed product-level insights."
+                "smithy.api#documentation": "<p>Comprehensive spend analysis for a single source (AWS or Partner) including total amounts, optimization savings, program category breakdowns, and detailed product-level insights.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#AwsProductOptimization": {
@@ -1688,20 +1750,20 @@
                 "Description": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Human-readable explanation of the optimization strategy",
+                        "smithy.api#documentation": "<p>Human-readable explanation of the optimization strategy.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SavingsAmount": {
                     "target": "com.amazonaws.partnercentralselling#MonetaryAmount",
                     "traits": {
-                        "smithy.api#documentation": "Quantified cost savings achievable by implementing this optimization",
+                        "smithy.api#documentation": "<p>Quantified cost savings achievable by implementing this optimization.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Details for a specific optimization recommendation"
+                "smithy.api#documentation": "<p>Specific optimization strategies partners can implement to reduce costs.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#AwsProductOptimizationsList": {
@@ -1710,7 +1772,7 @@
                 "target": "com.amazonaws.partnercentralselling#AwsProductOptimization"
             },
             "traits": {
-                "smithy.api#documentation": "List of optimization recommendations",
+                "smithy.api#documentation": "<p>List of optimization recommendations.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10
@@ -1723,7 +1785,7 @@
                 "target": "com.amazonaws.partnercentralselling#AwsProductDetails"
             },
             "traits": {
-                "smithy.api#documentation": "AwsProductDetailsList of AWS services with program eligibility indicators (MAP, modernization pathways), cost estimates, and optimization recommendations.",
+                "smithy.api#documentation": "<p>List of AWS services with program eligibility indicators.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
@@ -1736,18 +1798,18 @@
                 "Partner": {
                     "target": "com.amazonaws.partnercentralselling#AwsProductInsights",
                     "traits": {
-                        "smithy.api#documentation": "Partner-sourced insights derived from Pricing Calculator URLs including detailed service costs and optimizations"
+                        "smithy.api#documentation": "<p>Partner-sourced insights derived from Pricing Calculator URLs.</p>"
                     }
                 },
                 "AWS": {
                     "target": "com.amazonaws.partnercentralselling#AwsProductInsights",
                     "traits": {
-                        "smithy.api#documentation": "AI-generated insights including recommended products from AWS"
+                        "smithy.api#documentation": "<p>AI-generated insights including recommended products from AWS.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Source-separated spend insights that provide independent analysis for AWS predictions and partner estimates"
+                "smithy.api#documentation": "<p>Source-separated spend insights that provide independent analysis for AWS recommendations and partner estimates.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#AwsSubmission": {
@@ -4438,6 +4500,26 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#CreatedDateFilter": {
+            "type": "structure",
+            "members": {
+                "AfterCreatedDate": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter opportunities created after this date.</p>"
+                    }
+                },
+                "BeforeCreatedDate": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter opportunities created before this date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter for opportunities based on creation date range.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#CurrencyCode": {
@@ -7492,6 +7574,12 @@
                 },
                 "Payload": {
                     "target": "com.amazonaws.partnercentralselling#ResourceSnapshotPayload"
+                },
+                "TargetMemberAccounts": {
+                    "target": "com.amazonaws.partnercentralselling#AwsAccountIdOrAliasList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Target member accounts associated with the resource snapshot.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9386,6 +9474,12 @@
                             "max": 10
                         }
                     }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.partnercentralselling#CreatedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter opportunities by creation date criteria.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10524,6 +10618,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CustomerCompanyName"
                     }
+                },
+                "CREATED_DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreatedDate"
+                    }
                 }
             }
         },
@@ -10920,7 +11020,7 @@
                 "AwsPartition": {
                     "target": "com.amazonaws.partnercentralselling#AwsPartition",
                     "traits": {
-                        "smithy.api#documentation": "AWS partition where the opportunity will be deployed. Possible values: 'aws-eusc' for AWS European Sovereign Cloud, `null` for all other partitions"
+                        "smithy.api#documentation": "<p>AWS partition where the opportunity will be deployed. Possible values: <code>aws-eusc</code> for AWS European Sovereign Cloud, <code>null</code> for all other partitions.</p>"
                     }
                 }
             },
@@ -11644,6 +11744,12 @@
                     "target": "com.amazonaws.partnercentralselling#OpportunitySummaryView",
                     "traits": {
                         "smithy.api#documentation": "<p> An object that contains an <code>opportunity</code>'s subset of fields. </p>"
+                    }
+                },
+                "AwsOpportunitySummaryFullView": {
+                    "target": "com.amazonaws.partnercentralselling#AwsOpportunitySummaryFullView",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a comprehensive view of AwsOpportunitySummaryFullView template.</p>"
                     }
                 }
             },

@@ -1,3 +1,7 @@
+# v1.14.0 (2026-02-06)
+
+* **Feature**: Releasing AWS Opportunity Snapshots for SDK release.
+
 # v1.13.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

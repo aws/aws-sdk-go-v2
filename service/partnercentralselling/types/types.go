@@ -217,7 +217,7 @@ type AwsOpportunityCustomer struct {
 type AwsOpportunityInsights struct {
 
 	// Source-separated spend insights that provide independent analysis for AWS
-	// predictions and partner estimates
+	// recommendations and partner estimates.
 	AwsProductsSpendInsightsBySource *AwsProductsSpendInsightsBySource
 
 	// Represents a score assigned by AWS to indicate the level of engagement and
@@ -268,8 +268,8 @@ type AwsOpportunityLifeCycle struct {
 // objectives, scope, and customer requirements.
 type AwsOpportunityProject struct {
 
-	// AWS partition where the opportunity will be deployed. Possible values:
-	// 'aws-eusc' for AWS European Sovereign Cloud, null for all other partitions
+	// AWS partition where the opportunity will be deployed. Possible values: aws-eusc
+	// for AWS European Sovereign Cloud, null for all other partitions.
 	AwsPartition AwsPartition
 
 	// Indicates the expected spending by the customer over the course of the project.
@@ -301,38 +301,82 @@ type AwsOpportunityRelatedEntities struct {
 	noSmithyDocumentSerde
 }
 
-// AWS services with program eligibility indicators (MAP, modernization pathways),
-// cost estimates, and optimization recommendations.
+// Provides a comprehensive view of AwsOpportunitySummaryFullView template.
+type AwsOpportunitySummaryFullView struct {
+
+	// Represents the customer associated with the AWS opportunity. This field
+	// captures key details about the customer that are necessary for managing the
+	// opportunity.
+	Customer *AwsOpportunityCustomer
+
+	// Contains insights provided by AWS for the opportunity, offering recommendations
+	// and analysis that can help the partner optimize their engagement and strategy.
+	Insights *AwsOpportunityInsights
+
+	// Type of AWS involvement in the opportunity.
+	InvolvementType SalesInvolvementType
+
+	// Reason for changes in AWS involvement type for the opportunity.
+	InvolvementTypeChangeReason InvolvementTypeChangeReason
+
+	// Tracks the lifecycle of the AWS opportunity, including stages such as
+	// qualification, validation, and closure. This field helps partners understand the
+	// current status and progression of the opportunity.
+	LifeCycle *AwsOpportunityLifeCycle
+
+	// AWS team members involved in the opportunity.
+	OpportunityTeam []AwsTeamMember
+
+	// Source origin of the AWS opportunity.
+	Origin OpportunityOrigin
+
+	// Captures details about the project associated with the opportunity, including
+	// objectives, scope, and customer requirements.
+	Project *AwsOpportunityProject
+
+	// Represents other entities related to the AWS opportunity, such as AWS products,
+	// partner solutions, and marketplace offers. These associations help build a
+	// complete picture of the solution being sold.
+	RelatedEntityIds *AwsOpportunityRelatedEntities
+
+	// Identifier of the related partner opportunity.
+	RelatedOpportunityId *string
+
+	// Visibility level for the AWS opportunity.
+	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// List of AWS services with program eligibility indicators (MAP, modernization
+// pathways), cost estimates, and optimization recommendations.
 type AwsProductDetails struct {
 
-	// List of program and pathway categories this product is eligible for
+	// List of program and pathway categories this product is eligible for.
 	//
 	// This member is required.
 	Categories []string
 
-	// List of specific optimization recommendations for this product
+	// List of specific optimization recommendations for this product.
 	//
 	// This member is required.
 	Optimizations []AwsProductOptimization
 
-	// AWS Partner Central product identifier used for opportunity association
+	// AWS Partner Central product identifier used for opportunity association.
 	//
 	// This member is required.
 	ProductCode *string
 
-	// Baseline service cost before optimizations (may be null for AWS-sourced
-	// predictions)
+	// Baseline service cost before optimizations.
 	Amount *string
 
-	// Service cost after applying optimizations (may be null for AWS-sourced
-	// predictions)
+	// Service cost after applying optimizations.
 	OptimizedAmount *string
 
-	// Service-specific cost reduction through optimizations (may be null for
-	// AWS-sourced predictions)
+	// Service-specific cost reduction through optimizations.
 	PotentialSavingsAmount *string
 
-	// Pricing Calculator service code (links to original calculator URL)
+	// Pricing Calculator service code.
 	ServiceCode *string
 
 	noSmithyDocumentSerde
@@ -343,48 +387,47 @@ type AwsProductDetails struct {
 // product-level insights.
 type AwsProductInsights struct {
 
-	// Product-level details including costs and optimization recommendations
+	// Product-level details including costs and optimization recommendations.
 	//
 	// This member is required.
 	AwsProducts []AwsProductDetails
 
-	// ISO 4217 currency code (e.g., "USD") ensuring consistent representation across
-	// calculations
+	// ISO 4217 currency code.
 	//
 	// This member is required.
 	CurrencyCode CurrencyCode
 
-	// Time period for spend amounts: "Monthly" or "Annually"
+	// Time period for spend amounts.
 	//
 	// This member is required.
 	Frequency PaymentFrequency
 
-	// Spend amounts mapped to AWS programs and modernization pathways
+	// Spend amounts mapped to AWS programs and modernization pathways.
 	//
 	// This member is required.
 	TotalAmountByCategory map[string]string
 
-	// Total estimated spend for this source before optimizations
+	// Total estimated spend for this source before optimizations.
 	TotalAmount *string
 
-	// Total estimated spend after applying recommended optimizations
+	// Total estimated spend after applying recommended optimizations.
 	TotalOptimizedAmount *string
 
-	// Quantified savings achievable through implementing optimizations
+	// Quantified savings achievable through implementing optimizations.
 	TotalPotentialSavingsAmount *string
 
 	noSmithyDocumentSerde
 }
 
-// Details for a specific optimization recommendation
+// Specific optimization strategies partners can implement to reduce costs.
 type AwsProductOptimization struct {
 
-	// Human-readable explanation of the optimization strategy
+	// Human-readable explanation of the optimization strategy.
 	//
 	// This member is required.
 	Description *string
 
-	// Quantified cost savings achievable by implementing this optimization
+	// Quantified cost savings achievable by implementing this optimization.
 	//
 	// This member is required.
 	SavingsAmount *string
@@ -393,14 +436,13 @@ type AwsProductOptimization struct {
 }
 
 // Source-separated spend insights that provide independent analysis for AWS
-// predictions and partner estimates
+// recommendations and partner estimates.
 type AwsProductsSpendInsightsBySource struct {
 
-	// AI-generated insights including recommended products from AWS
+	// AI-generated insights including recommended products from AWS.
 	AWS *AwsProductInsights
 
-	// Partner-sourced insights derived from Pricing Calculator URLs including
-	// detailed service costs and optimizations
+	// Partner-sourced insights derived from Pricing Calculator URLs.
 	Partner *AwsProductInsights
 
 	noSmithyDocumentSerde
@@ -464,6 +506,18 @@ type Contact struct {
 
 	// The contact's phone number associated with the Opportunity .
 	Phone *string
+
+	noSmithyDocumentSerde
+}
+
+// Filter for opportunities based on creation date range.
+type CreatedDateFilter struct {
+
+	// Filter opportunities created after this date.
+	AfterCreatedDate *time.Time
+
+	// Filter opportunities created before this date.
+	BeforeCreatedDate *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -1932,8 +1986,8 @@ type Project struct {
 	// Program | WWPS NDPP
 	ApnPrograms []string
 
-	// AWS partition where the opportunity will be deployed. Possible values:
-	// 'aws-eusc' for AWS European Sovereign Cloud, null for all other partitions
+	// AWS partition where the opportunity will be deployed. Possible values: aws-eusc
+	// for AWS European Sovereign Cloud, null for all other partitions.
 	AwsPartition AwsPartition
 
 	// Name of the Opportunity 's competitor (if any). Use Other to submit a value not
@@ -2253,10 +2307,20 @@ type ResourceSnapshotJobSummary struct {
 //
 // The following types satisfy this interface:
 //
+//	ResourceSnapshotPayloadMemberAwsOpportunitySummaryFullView
 //	ResourceSnapshotPayloadMemberOpportunitySummary
 type ResourceSnapshotPayload interface {
 	isResourceSnapshotPayload()
 }
+
+// Provides a comprehensive view of AwsOpportunitySummaryFullView template.
+type ResourceSnapshotPayloadMemberAwsOpportunitySummaryFullView struct {
+	Value AwsOpportunitySummaryFullView
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceSnapshotPayloadMemberAwsOpportunitySummaryFullView) isResourceSnapshotPayload() {}
 
 // An object that contains an opportunity 's subset of fields.
 type ResourceSnapshotPayloadMemberOpportunitySummary struct {

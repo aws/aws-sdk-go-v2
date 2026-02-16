@@ -1,3 +1,7 @@
+# v1.8.0 (2026-02-06)
+
+* **Feature**: Adding support for Custom(General) Authorization in managed integrations for AWS IoT Device Management cloud connectors.
+
 # v1.7.0 (2026-01-12)
 
 * **Feature**: This release introduces WiFi Simple Setup (WSS) enabling device provisioning via barcode scanning with automated network discovery, authentication, and credential provisioning. Additionally, it introduces 2P Device Capability Rediscovery for updating hub-managed device capabilities post-onboarding.

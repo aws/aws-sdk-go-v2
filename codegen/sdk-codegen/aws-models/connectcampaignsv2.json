@@ -2249,6 +2249,10 @@
                     {
                         "value": "Campaign-Orchestration",
                         "name": "CAMPAIGN_ORCHESTRATION"
+                    },
+                    {
+                        "value": "Campaign-WhatsApp",
+                        "name": "CAMPAIGN_WHATS_APP"
                     }
                 ]
             }

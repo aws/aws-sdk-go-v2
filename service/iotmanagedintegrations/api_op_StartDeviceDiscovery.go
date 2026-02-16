@@ -60,6 +60,9 @@ type StartDeviceDiscoveryInput struct {
 	// Deprecated: ConnectorAssociationIdentifier is deprecated
 	ConnectorAssociationIdentifier *string
 
+	// Used as a filter for PLA discoveries.
+	ConnectorDeviceIdList []string
+
 	// The id of the end-user's IoT hub.
 	ControllerIdentifier *string
 

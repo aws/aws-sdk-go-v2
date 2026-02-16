@@ -25219,6 +25219,45 @@ func awsAwsjson11_serializeDocumentClusterEbsVolumeConfig(v *types.ClusterEbsVol
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterFsxLustreConfig(v *types.ClusterFsxLustreConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DnsName != nil {
+		ok := object.Key("DnsName")
+		ok.String(*v.DnsName)
+	}
+
+	if v.MountName != nil {
+		ok := object.Key("MountName")
+		ok.String(*v.MountName)
+	}
+
+	if v.MountPath != nil {
+		ok := object.Key("MountPath")
+		ok.String(*v.MountPath)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterFsxOpenZfsConfig(v *types.ClusterFsxOpenZfsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DnsName != nil {
+		ok := object.Key("DnsName")
+		ok.String(*v.DnsName)
+	}
+
+	if v.MountPath != nil {
+		ok := object.Key("MountPath")
+		ok.String(*v.MountPath)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25302,6 +25341,13 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.Cl
 		}
 	}
 
+	if v.SlurmConfig != nil {
+		ok := object.Key("SlurmConfig")
+		if err := awsAwsjson11_serializeDocumentClusterSlurmConfig(v.SlurmConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ThreadsPerCore != nil {
 		ok := object.Key("ThreadsPerCore")
 		ok.Integer(*v.ThreadsPerCore)
@@ -25347,6 +25393,18 @@ func awsAwsjson11_serializeDocumentClusterInstanceStorageConfig(v types.ClusterI
 	case *types.ClusterInstanceStorageConfigMemberEbsVolumeConfig:
 		av := object.Key("EbsVolumeConfig")
 		if err := awsAwsjson11_serializeDocumentClusterEbsVolumeConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ClusterInstanceStorageConfigMemberFsxLustreConfig:
+		av := object.Key("FsxLustreConfig")
+		if err := awsAwsjson11_serializeDocumentClusterFsxLustreConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ClusterInstanceStorageConfigMemberFsxOpenZfsConfig:
+		av := object.Key("FsxOpenZfsConfig")
+		if err := awsAwsjson11_serializeDocumentClusterFsxOpenZfsConfig(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -25497,6 +25555,13 @@ func awsAwsjson11_serializeDocumentClusterOrchestrator(v *types.ClusterOrchestra
 		}
 	}
 
+	if v.Slurm != nil {
+		ok := object.Key("Slurm")
+		if err := awsAwsjson11_serializeDocumentClusterOrchestratorSlurmConfig(v.Slurm, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -25509,6 +25574,29 @@ func awsAwsjson11_serializeDocumentClusterOrchestratorEksConfig(v *types.Cluster
 		ok.String(*v.ClusterArn)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterOrchestratorSlurmConfig(v *types.ClusterOrchestratorSlurmConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SlurmConfigStrategy) > 0 {
+		ok := object.Key("SlurmConfigStrategy")
+		ok.String(string(v.SlurmConfigStrategy))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterPartitionNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -25594,6 +25682,25 @@ func awsAwsjson11_serializeDocumentClusterRestrictedInstanceGroupSpecifications(
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterSlurmConfig(v *types.ClusterSlurmConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.NodeType) > 0 {
+		ok := object.Key("NodeType")
+		ok.String(string(v.NodeType))
+	}
+
+	if v.PartitionNames != nil {
+		ok := object.Key("PartitionNames")
+		if err := awsAwsjson11_serializeDocumentClusterPartitionNames(v.PartitionNames, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -47027,6 +47134,13 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 	if len(v.NodeRecovery) > 0 {
 		ok := object.Key("NodeRecovery")
 		ok.String(string(v.NodeRecovery))
+	}
+
+	if v.Orchestrator != nil {
+		ok := object.Key("Orchestrator")
+		if err := awsAwsjson11_serializeDocumentClusterOrchestrator(v.Orchestrator, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RestrictedInstanceGroups != nil {

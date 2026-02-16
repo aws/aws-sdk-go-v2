@@ -1236,6 +1236,10 @@ type DBClusterAutomatedBackup struct {
 	// Valid Values: 1150-65535
 	Port *int32
 
+	// The daily time range during which automated backups are created if automated
+	// backups are enabled, as determined by the BackupRetentionPeriod .
+	PreferredBackupWindow *string
+
 	// The Amazon Web Services Region associated with the automated backup.
 	Region *string
 
@@ -1471,6 +1475,9 @@ type DBClusterSnapshot struct {
 	// can be restored.
 	AvailabilityZones []string
 
+	// The number of days for which automatic DB snapshots are retained.
+	BackupRetentionPeriod *int32
+
 	// The time when the DB cluster was created, in Universal Coordinated Time (UTC).
 	ClusterCreateTime *time.Time
 
@@ -1522,6 +1529,10 @@ type DBClusterSnapshot struct {
 
 	// The port that the DB cluster was listening on at the time of the snapshot.
 	Port *int32
+
+	// The daily time range during which automated backups are created if automated
+	// backups are enabled, as determined by the BackupRetentionPeriod .
+	PreferredBackupWindow *string
 
 	// The time when the snapshot was taken, in Universal Coordinated Time (UTC).
 	SnapshotCreateTime *time.Time
@@ -2389,6 +2400,10 @@ type DBInstanceAutomatedBackup struct {
 	// Valid Values: 1150-65535
 	Port *int32
 
+	// The daily time range during which automated backups are created if automated
+	// backups are enabled, as determined by the BackupRetentionPeriod .
+	PreferredBackupWindow *string
+
 	// The Amazon Web Services Region associated with the automated backup.
 	Region *string
 
@@ -3077,6 +3092,9 @@ type DBSnapshot struct {
 	// the time of the DB snapshot.
 	AvailabilityZone *string
 
+	// The number of days for which automatic DB snapshots are retained.
+	BackupRetentionPeriod *int32
+
 	// Specifies the DB instance identifier of the DB instance this DB snapshot was
 	// created from.
 	DBInstanceIdentifier *string
@@ -3150,6 +3168,10 @@ type DBSnapshot struct {
 	// Specifies the port that the database engine was listening on at the time of the
 	// snapshot.
 	Port *int32
+
+	// The daily time range during which automated backups are created if automated
+	// backups are enabled, as determined by the BackupRetentionPeriod .
+	PreferredBackupWindow *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance when the DB snapshot was created.

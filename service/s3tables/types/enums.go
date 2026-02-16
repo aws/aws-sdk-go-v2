@@ -25,6 +25,44 @@ func (IcebergCompactionStrategy) Values() []IcebergCompactionStrategy {
 	}
 }
 
+type IcebergNullOrder string
+
+// Enum values for IcebergNullOrder
+const (
+	IcebergNullOrderNullsFirst IcebergNullOrder = "nulls-first"
+	IcebergNullOrderNullsLast  IcebergNullOrder = "nulls-last"
+)
+
+// Values returns all known values for IcebergNullOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IcebergNullOrder) Values() []IcebergNullOrder {
+	return []IcebergNullOrder{
+		"nulls-first",
+		"nulls-last",
+	}
+}
+
+type IcebergSortDirection string
+
+// Enum values for IcebergSortDirection
+const (
+	IcebergSortDirectionAsc  IcebergSortDirection = "asc"
+	IcebergSortDirectionDesc IcebergSortDirection = "desc"
+)
+
+// Values returns all known values for IcebergSortDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IcebergSortDirection) Values() []IcebergSortDirection {
+	return []IcebergSortDirection{
+		"asc",
+		"desc",
+	}
+}
+
 type JobStatus string
 
 // Enum values for JobStatus

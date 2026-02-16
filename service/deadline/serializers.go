@@ -1706,6 +1706,13 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		ok.String(*v.StorageProfileId)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.TargetTaskRunStatus) > 0 {
 		ok := object.Key("targetTaskRunStatus")
 		ok.String(string(v.TargetTaskRunStatus))

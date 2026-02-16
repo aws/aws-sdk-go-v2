@@ -50,8 +50,70 @@ type IcebergMetadata struct {
 	// This member is required.
 	Schema *IcebergSchema
 
-	// Contains configuration properties for an Iceberg table.
+	// The partition specification for the Iceberg table. Partitioning organizes data
+	// into separate files based on the values of one or more fields, which can improve
+	// query performance by reducing the amount of data scanned. Each partition field
+	// applies a transform (such as identity, year, month, or bucket) to a single
+	// field.
+	PartitionSpec *IcebergPartitionSpec
+
+	// A map of custom configuration properties for the Iceberg table.
 	Properties map[string]string
+
+	// The sort order for the Iceberg table. Sort order defines how data is sorted
+	// within data files, which can improve query performance by enabling more
+	// efficient data skipping and filtering.
+	WriteOrder *IcebergSortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Defines a single partition field in an Iceberg partition specification.
+type IcebergPartitionField struct {
+
+	// The name for this partition field. This name is used in the partitioned file
+	// paths.
+	//
+	// This member is required.
+	Name *string
+
+	// The ID of the source schema field to partition by. This must reference a valid
+	// field ID from the table schema.
+	//
+	// This member is required.
+	SourceId *int32
+
+	// The partition transform to apply to the source field. Supported transforms
+	// include identity , year , month , day , hour , bucket , and truncate . For more
+	// information, see the [Apache Iceberg partition transforms documentation].
+	//
+	// [Apache Iceberg partition transforms documentation]: https://iceberg.apache.org/spec/#partition-transforms
+	//
+	// This member is required.
+	Transform *string
+
+	// An optional unique identifier for this partition field. If not specified, S3
+	// Tables automatically assigns a field ID.
+	FieldId *int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines how data in an Iceberg table is partitioned. Partitioning helps
+// optimize query performance by organizing data into separate files based on field
+// values. Each partition field specifies a transform to apply to a source field.
+type IcebergPartitionSpec struct {
+
+	// The list of partition fields that define how the table data is partitioned.
+	// Each field specifies a source field and a transform to apply. This field is
+	// required if partitionSpec is provided.
+	//
+	// This member is required.
+	Fields []IcebergPartitionField
+
+	// The unique identifier for this partition specification. If not specified,
+	// defaults to 0 .
+	SpecId *int32
 
 	noSmithyDocumentSerde
 }
@@ -78,6 +140,57 @@ type IcebergSnapshotManagementSettings struct {
 
 	// The minimum number of snapshots to keep.
 	MinSnapshotsToKeep *int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines a single sort field in an Iceberg sort order specification.
+type IcebergSortField struct {
+
+	// The sort direction. Valid values are asc for ascending order or desc for
+	// descending order.
+	//
+	// This member is required.
+	Direction IcebergSortDirection
+
+	// Specifies how null values are ordered. Valid values are nulls-first to place
+	// nulls before non-null values, or nulls-last to place nulls after non-null
+	// values.
+	//
+	// This member is required.
+	NullOrder IcebergNullOrder
+
+	// The ID of the source schema field to sort by. This must reference a valid field
+	// ID from the table schema.
+	//
+	// This member is required.
+	SourceId *int32
+
+	// The transform to apply to the source field before sorting. Use identity to sort
+	// by the field value directly, or specify other transforms as needed.
+	//
+	// This member is required.
+	Transform *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the sort order for data within an Iceberg table. Sorting data can
+// improve query performance by enabling more efficient data skipping.
+type IcebergSortOrder struct {
+
+	// The list of sort fields that define how data is sorted within files. Each field
+	// specifies a source field, sort direction, and null ordering. This field is
+	// required if writeOrder is provided.
+	//
+	// This member is required.
+	Fields []IcebergSortField
+
+	// The unique identifier for this sort order. If not specified, defaults to 1 . The
+	// order ID is used by Apache Iceberg to track sort order evolution.
+	//
+	// This member is required.
+	OrderId *int32
 
 	noSmithyDocumentSerde
 }
@@ -224,6 +337,11 @@ type SchemaField struct {
 	//
 	// This member is required.
 	Type *string
+
+	// An optional unique identifier for the schema field. Field IDs are used by
+	// Apache Iceberg to track schema evolution and maintain compatibility across
+	// schema changes. If not specified, S3 Tables automatically assigns field IDs.
+	Id *int32
 
 	// A Boolean value that specifies whether values are required for each row in this
 	// field. By default, this is false and null values are allowed in the field. If

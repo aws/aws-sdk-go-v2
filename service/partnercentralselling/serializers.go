@@ -2834,6 +2834,23 @@ func awsAwsjson10_serializeDocumentContextIdentifiers(v []string, value smithyjs
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCreatedDateFilter(v *types.CreatedDateFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AfterCreatedDate != nil {
+		ok := object.Key("AfterCreatedDate")
+		ok.String(smithytime.FormatDateTime(*v.AfterCreatedDate))
+	}
+
+	if v.BeforeCreatedDate != nil {
+		ok := object.Key("BeforeCreatedDate")
+		ok.String(smithytime.FormatDateTime(*v.BeforeCreatedDate))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentCustomer(v *types.Customer, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4976,6 +4993,13 @@ func awsAwsjson10_serializeOpDocumentListOpportunitiesInput(v *ListOpportunities
 	if v.Catalog != nil {
 		ok := object.Key("Catalog")
 		ok.String(*v.Catalog)
+	}
+
+	if v.CreatedDate != nil {
+		ok := object.Key("CreatedDate")
+		if err := awsAwsjson10_serializeDocumentCreatedDateFilter(v.CreatedDate, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.CustomerCompanyName != nil {

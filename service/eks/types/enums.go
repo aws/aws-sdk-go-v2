@@ -107,6 +107,8 @@ const (
 	AMITypesWindowsFull2019X8664        AMITypes = "WINDOWS_FULL_2019_x86_64"
 	AMITypesWindowsCore2022X8664        AMITypes = "WINDOWS_CORE_2022_x86_64"
 	AMITypesWindowsFull2022X8664        AMITypes = "WINDOWS_FULL_2022_x86_64"
+	AMITypesWindowsCore2025X8664        AMITypes = "WINDOWS_CORE_2025_x86_64"
+	AMITypesWindowsFull2025X8664        AMITypes = "WINDOWS_FULL_2025_x86_64"
 	AMITypesAl2023X8664Standard         AMITypes = "AL2023_x86_64_STANDARD"
 	AMITypesAl2023Arm64Standard         AMITypes = "AL2023_ARM_64_STANDARD"
 	AMITypesAl2023X8664Neuron           AMITypes = "AL2023_x86_64_NEURON"
@@ -136,6 +138,8 @@ func (AMITypes) Values() []AMITypes {
 		"WINDOWS_FULL_2019_x86_64",
 		"WINDOWS_CORE_2022_x86_64",
 		"WINDOWS_FULL_2022_x86_64",
+		"WINDOWS_CORE_2025_x86_64",
+		"WINDOWS_FULL_2025_x86_64",
 		"AL2023_x86_64_STANDARD",
 		"AL2023_ARM_64_STANDARD",
 		"AL2023_x86_64_NEURON",
@@ -1114,6 +1118,7 @@ const (
 	UpdateTypeRemoteNetworkConfigUpdate          UpdateType = "RemoteNetworkConfigUpdate"
 	UpdateTypeDeletionProtectionUpdate           UpdateType = "DeletionProtectionUpdate"
 	UpdateTypeControlPlaneScalingConfigUpdate    UpdateType = "ControlPlaneScalingConfigUpdate"
+	UpdateTypeVendedLogsUpdate                   UpdateType = "VendedLogsUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -1138,6 +1143,7 @@ func (UpdateType) Values() []UpdateType {
 		"RemoteNetworkConfigUpdate",
 		"DeletionProtectionUpdate",
 		"ControlPlaneScalingConfigUpdate",
+		"VendedLogsUpdate",
 	}
 }
 

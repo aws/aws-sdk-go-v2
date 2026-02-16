@@ -3045,6 +3045,11 @@ func awsRestjson1_serializeOpDocumentStartLoaderJobInput(v *StartLoaderJobInput,
 		}
 	}
 
+	if v.EdgeOnlyLoad != nil {
+		ok := object.Key("edgeOnlyLoad")
+		ok.Boolean(*v.EdgeOnlyLoad)
+	}
+
 	if v.FailOnError != nil {
 		ok := object.Key("failOnError")
 		ok.Boolean(*v.FailOnError)

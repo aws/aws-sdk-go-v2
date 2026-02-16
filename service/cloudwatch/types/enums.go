@@ -115,7 +115,9 @@ type EvaluationState string
 
 // Enum values for EvaluationState
 const (
-	EvaluationStatePartialData EvaluationState = "PARTIAL_DATA"
+	EvaluationStatePartialData       EvaluationState = "PARTIAL_DATA"
+	EvaluationStateEvaluationFailure EvaluationState = "EVALUATION_FAILURE"
+	EvaluationStateEvaluationError   EvaluationState = "EVALUATION_ERROR"
 )
 
 // Values returns all known values for EvaluationState. Note that this can be
@@ -125,6 +127,8 @@ const (
 func (EvaluationState) Values() []EvaluationState {
 	return []EvaluationState{
 		"PARTIAL_DATA",
+		"EVALUATION_FAILURE",
+		"EVALUATION_ERROR",
 	}
 }
 

@@ -30,6 +30,38 @@ type AdditionalEmailRecipients struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for after contact work (ACW) timeout.
+type AfterContactWorkConfig struct {
+
+	// The ACW timeout duration in seconds. Minimum: 1 second. Maximum: 2,000,000
+	// seconds (24 days). Enter 0 for indefinite ACW time.
+	AfterContactWorkTimeLimit int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for after contact work (ACW) timeout for a specific
+// channel.
+type AfterContactWorkConfigPerChannel struct {
+
+	// The ACW timeout settings for this channel.
+	//
+	// This member is required.
+	AfterContactWorkConfig *AfterContactWorkConfig
+
+	// The channel for this ACW timeout configuration. Valid values: VOICE, CHAT,
+	// TASK, EMAIL.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The ACW timeout settings for agent-first callbacks. This setting only applies
+	// to the VOICE channel.
+	AgentFirstCallbackAfterContactWorkConfig *AfterContactWorkConfig
+
+	noSmithyDocumentSerde
+}
+
 // The distribution of agents between the instance and its replica(s).
 type AgentConfig struct {
 
@@ -771,6 +803,28 @@ type AuthenticationProfileSummary struct {
 
 	// The name of the authentication profile summary.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for auto-accept for a specific channel.
+type AutoAcceptConfig struct {
+
+	// Indicates whether auto-accept is enabled for this channel. When enabled,
+	// available agents are automatically connected to contacts from this channel.
+	//
+	// This member is required.
+	AutoAccept bool
+
+	// The channel for this auto-accept configuration. Valid values: VOICE, CHAT,
+	// TASK, EMAIL.
+	//
+	// This member is required.
+	Channel Channel
+
+	// Indicates whether auto-accept is enabled for agent-first callbacks. This
+	// setting only applies to the VOICE channel.
+	AgentFirstCallbackAutoAccept *bool
 
 	noSmithyDocumentSerde
 }
@@ -6509,6 +6563,52 @@ type NextContactMetadataMemberQuickConnectContactData struct {
 
 func (*NextContactMetadataMemberQuickConnectContactData) isNextContactMetadata() {}
 
+// Contains information about a notification, including its content, priority,
+// recipients, and metadata.
+type Notification struct {
+
+	// The Amazon Resource Name (ARN) of the notification.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier for the notification.
+	//
+	// This member is required.
+	Id *string
+
+	// The timestamp when the notification was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The localized content of the notification. A map where keys are locale codes
+	// and values are the notification text in that locale.
+	Content map[string]string
+
+	// The timestamp when the notification was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the notification expires and is no longer displayed to users.
+	ExpiresAt *time.Time
+
+	// The AWS Region where the notification was last modified.
+	LastModifiedRegion *string
+
+	// The priority level of the notification. Valid values are URGENT, HIGH, and LOW.
+	Priority NotificationPriority
+
+	// A list of Amazon Resource Names (ARNs) identifying the recipients of the
+	// notification. Maximum of 200 recipients.
+	Recipients []string
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} } .
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The type of notification recipient.
 type NotificationRecipientType struct {
 
@@ -6521,6 +6621,69 @@ type NotificationRecipientType struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users
 	// with the specified tags will be notified.
 	UserTags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return notifications.
+type NotificationSearchCriteria struct {
+
+	// A list of conditions that must all be satisfied.
+	AndConditions []NotificationSearchCriteria
+
+	// A list of conditions to be met, where at least one condition must be satisfied.
+	OrConditions []NotificationSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to apply when searching for notifications.
+type NotificationSearchFilter struct {
+
+	// Attribute-based filters to apply to the search results.
+	AttributeFilter *ControlPlaneAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a notification returned from a search operation.
+type NotificationSearchSummary struct {
+
+	// The Amazon Resource Name (ARN) of the notification.
+	Arn *string
+
+	// The localized content of the notification.
+	Content map[string]string
+
+	// The timestamp when the notification was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the notification expires.
+	ExpiresAt *time.Time
+
+	// The unique identifier for the notification.
+	Id *string
+
+	// The identifier of the Amazon Connect instance.
+	InstanceId *string
+
+	// The AWS Region where the notification was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the notification was last modified.
+	LastModifiedTime *time.Time
+
+	// The priority level of the notification.
+	Priority NotificationPriority
+
+	// A list of recipient Amazon Resource Names (ARNs).
+	Recipients []string
+
+	// The tags associated with the notification.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -7022,6 +7185,45 @@ type PersistentChat struct {
 
 	// The contactId from which a persistent chat session must be started.
 	SourceContactId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for persistent connection for a specific channel.
+type PersistentConnectionConfig struct {
+
+	// Configuration settings for persistent connection. Only VOICE is supported for
+	// this data type.
+	//
+	// This member is required.
+	Channel Channel
+
+	// Indicates whether persistent connection is enabled. When enabled, the agent's
+	// connection is maintained after a call ends, enabling subsequent calls to connect
+	// faster.
+	//
+	// This member is required.
+	PersistentConnection *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for phone type and phone number.
+type PhoneNumberConfig struct {
+
+	// The channel for this phone number configuration. Only VOICE is supported for
+	// this data type.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The phone type. Valid values: SOFT_PHONE, DESK_PHONE.
+	//
+	// This member is required.
+	PhoneType PhoneType
+
+	// The phone number for the user's desk phone.
+	PhoneNumber *string
 
 	noSmithyDocumentSerde
 }
@@ -10228,8 +10430,15 @@ type UseCase struct {
 // Contains information about a user account for an Amazon Connect instance.
 type User struct {
 
+	// The list of after contact work (ACW) timeout configuration settings for each
+	// channel.
+	AfterContactWorkConfigs []AfterContactWorkConfigPerChannel
+
 	// The Amazon Resource Name (ARN) of the user account.
 	Arn *string
+
+	// The list of auto-accept configuration settings for each channel.
+	AutoAcceptConfigs []AutoAcceptConfig
 
 	// The identifier of the user account in the directory used for identity
 	// management.
@@ -10250,8 +10459,14 @@ type User struct {
 	// The timestamp when this resource was last modified.
 	LastModifiedTime *time.Time
 
+	// The list of persistent connection configuration settings for each channel.
+	PersistentConnectionConfigs []PersistentConnectionConfig
+
 	// Information about the phone configuration for the user.
 	PhoneConfig *UserPhoneConfig
+
+	// The list of phone number configuration settings for each channel.
+	PhoneNumberConfigs []PhoneNumberConfig
 
 	// The identifier of the routing profile for the user.
 	RoutingProfileId *string
@@ -10264,6 +10479,9 @@ type User struct {
 
 	// The user name assigned to the user account.
 	Username *string
+
+	// The list of voice enhancement configuration settings for each channel.
+	VoiceEnhancementConfigs []VoiceEnhancementConfig
 
 	noSmithyDocumentSerde
 }
@@ -10427,13 +10645,44 @@ type UserInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information about a notification for a specific user, including the
+// user's read status.
+type UserNotificationSummary struct {
+
+	// The localized content of the notification.
+	Content map[string]string
+
+	// The timestamp when the notification was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the notification expires.
+	ExpiresAt *time.Time
+
+	// The identifier of the Amazon Connect instance.
+	InstanceId *string
+
+	// The unique identifier for the notification.
+	NotificationId *string
+
+	// The status of the notification for this user. Valid values are READ, UNREAD,
+	// and HIDDEN.
+	NotificationStatus NotificationStatus
+
+	// The priority level of the notification.
+	Priority NotificationPriority
+
+	// The identifier of the recipient user.
+	RecipientId *string
+
+	// The source that created the notification. Valid values are CUSTOMER, RULES, and
+	// SYSTEM.
+	Source NotificationSource
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the phone configuration settings for a user.
 type UserPhoneConfig struct {
-
-	// The phone type.
-	//
-	// This member is required.
-	PhoneType PhoneType
 
 	// The After Call Work (ACW) timeout setting, in seconds. This parameter has a
 	// minimum value of 0 and a maximum value of 2,000,000 seconds (24 days). Enter 0
@@ -10453,6 +10702,9 @@ type UserPhoneConfig struct {
 
 	// The persistent connection setting for the user.
 	PersistentConnection *bool
+
+	// The phone type.
+	PhoneType PhoneType
 
 	noSmithyDocumentSerde
 }
@@ -10588,8 +10840,15 @@ type UserSearchFilter struct {
 // Information about the returned users.
 type UserSearchSummary struct {
 
+	// The list of after contact work (ACW) timeout configuration settings for each
+	// channel.
+	AfterContactWorkConfigs []AfterContactWorkConfigPerChannel
+
 	// The Amazon Resource Name (ARN) of the user.
 	Arn *string
+
+	// The list of auto-accept configuration settings for each channel.
+	AutoAcceptConfigs []AutoAcceptConfig
 
 	// The directory identifier of the user.
 	DirectoryUserId *string
@@ -10603,8 +10862,14 @@ type UserSearchSummary struct {
 	// The user's first name and last name.
 	IdentityInfo *UserIdentityInfoLite
 
+	// The list of persistent connection configuration settings for each channel.
+	PersistentConnectionConfigs []PersistentConnectionConfig
+
 	// Contains information about the phone configuration settings for a user.
 	PhoneConfig *UserPhoneConfig
+
+	// The list of phone number configuration settings for each channel.
+	PhoneNumberConfigs []PhoneNumberConfig
 
 	// The identifier of the user's routing profile.
 	RoutingProfileId *string
@@ -10618,6 +10883,9 @@ type UserSearchSummary struct {
 
 	// The name of the user.
 	Username *string
+
+	// The list of voice enhancement configuration settings for each channel.
+	VoiceEnhancementConfigs []VoiceEnhancementConfig
 
 	noSmithyDocumentSerde
 }
@@ -10996,6 +11264,23 @@ type VoiceCallEntryPointParameters struct {
 
 	// The source phone number for the test.
 	SourcePhoneNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for voice enhancement.
+type VoiceEnhancementConfig struct {
+
+	// The channel for this voice enhancement configuration. Only VOICE is supported
+	// for this data type.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The voice enhancement mode.
+	//
+	// This member is required.
+	VoiceEnhancementMode VoiceEnhancementMode
 
 	noSmithyDocumentSerde
 }

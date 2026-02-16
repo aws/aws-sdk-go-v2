@@ -106,6 +106,13 @@ func awsRestjson1_serializeOpDocumentCreateAccountAssociationInput(v *CreateAcco
 		ok.String(*v.Description)
 	}
 
+	if v.GeneralAuthorization != nil {
+		ok := object.Key("GeneralAuthorization")
+		if err := awsRestjson1_serializeDocumentGeneralAuthorizationName(v.GeneralAuthorization, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -1228,6 +1235,11 @@ func awsRestjson1_serializeOpDocumentCreateProvisioningProfileInput(v *CreatePro
 	if v.CaCertificate != nil {
 		ok := object.Key("CaCertificate")
 		ok.String(*v.CaCertificate)
+	}
+
+	if v.ClaimCertificate != nil {
+		ok := object.Key("ClaimCertificate")
+		ok.String(*v.ClaimCertificate)
 	}
 
 	if v.ClientToken != nil {
@@ -5952,6 +5964,13 @@ func awsRestjson1_serializeOpDocumentStartDeviceDiscoveryInput(v *StartDeviceDis
 		ok.String(*v.ConnectorAssociationIdentifier)
 	}
 
+	if v.ConnectorDeviceIdList != nil {
+		ok := object.Key("ConnectorDeviceIdList")
+		if err := awsRestjson1_serializeDocumentConnectorDeviceIdList(v.ConnectorDeviceIdList, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ControllerIdentifier != nil {
 		ok := object.Key("ControllerIdentifier")
 		ok.String(*v.ControllerIdentifier)
@@ -7093,6 +7112,13 @@ func awsRestjson1_serializeDocumentAuthConfig(v *types.AuthConfig, value smithyj
 	object := value.Object()
 	defer object.Close()
 
+	if v.GeneralAuthorization != nil {
+		ok := object.Key("GeneralAuthorization")
+		if err := awsRestjson1_serializeDocumentAuthMaterials(v.GeneralAuthorization, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OAuth != nil {
 		ok := object.Key("oAuth")
 		if err := awsRestjson1_serializeDocumentOAuthConfig(v.OAuth, ok); err != nil {
@@ -7107,6 +7133,13 @@ func awsRestjson1_serializeDocumentAuthConfigUpdate(v *types.AuthConfigUpdate, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.GeneralAuthorizationUpdate != nil {
+		ok := object.Key("GeneralAuthorizationUpdate")
+		if err := awsRestjson1_serializeDocumentGeneralAuthorizationUpdate(v.GeneralAuthorizationUpdate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OAuthUpdate != nil {
 		ok := object.Key("oAuthUpdate")
 		if err := awsRestjson1_serializeDocumentOAuthUpdate(v.OAuthUpdate, ok); err != nil {
@@ -7114,6 +7147,38 @@ func awsRestjson1_serializeDocumentAuthConfigUpdate(v *types.AuthConfigUpdate, v
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAuthMaterial(v *types.AuthMaterial, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthMaterialName != nil {
+		ok := object.Key("AuthMaterialName")
+		ok.String(*v.AuthMaterialName)
+	}
+
+	if v.SecretsManager != nil {
+		ok := object.Key("SecretsManager")
+		if err := awsRestjson1_serializeDocumentSecretsManager(v.SecretsManager, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAuthMaterials(v []types.AuthMaterial, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAuthMaterial(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -7447,6 +7512,17 @@ func awsRestjson1_serializeDocumentCommandEndpoints(v []types.CommandEndpoint, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConnectorDeviceIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCustomProtocolDetail(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7579,6 +7655,39 @@ func awsRestjson1_serializeDocumentExponentialRolloutRate(v *types.ExponentialRo
 	if v.RateIncreaseCriteria != nil {
 		ok := object.Key("RateIncreaseCriteria")
 		if err := awsRestjson1_serializeDocumentRolloutRateIncreaseCriteria(v.RateIncreaseCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGeneralAuthorizationName(v *types.GeneralAuthorizationName, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthMaterialName != nil {
+		ok := object.Key("AuthMaterialName")
+		ok.String(*v.AuthMaterialName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGeneralAuthorizationUpdate(v *types.GeneralAuthorizationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthMaterialsToAdd != nil {
+		ok := object.Key("AuthMaterialsToAdd")
+		if err := awsRestjson1_serializeDocumentAuthMaterials(v.AuthMaterialsToAdd, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AuthMaterialsToUpdate != nil {
+		ok := object.Key("AuthMaterialsToUpdate")
+		if err := awsRestjson1_serializeDocumentAuthMaterials(v.AuthMaterialsToUpdate, ok); err != nil {
 			return err
 		}
 	}

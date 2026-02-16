@@ -41,6 +41,9 @@ type CreateProvisioningProfileInput struct {
 	// The id of the certificate authority (CA) certificate.
 	CaCertificate *string
 
+	// The claim certificate.
+	ClaimCertificate *string
+
 	// An idempotency token. If you retry a request that completed successfully
 	// initially using the same client token and parameters, then the retry attempt
 	// will succeed without performing any further actions.

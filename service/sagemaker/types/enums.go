@@ -2181,6 +2181,48 @@ func (ClusterNodeRecovery) Values() []ClusterNodeRecovery {
 	}
 }
 
+type ClusterSlurmConfigStrategy string
+
+// Enum values for ClusterSlurmConfigStrategy
+const (
+	ClusterSlurmConfigStrategyOverwrite ClusterSlurmConfigStrategy = "Overwrite"
+	ClusterSlurmConfigStrategyManaged   ClusterSlurmConfigStrategy = "Managed"
+	ClusterSlurmConfigStrategyMerge     ClusterSlurmConfigStrategy = "Merge"
+)
+
+// Values returns all known values for ClusterSlurmConfigStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterSlurmConfigStrategy) Values() []ClusterSlurmConfigStrategy {
+	return []ClusterSlurmConfigStrategy{
+		"Overwrite",
+		"Managed",
+		"Merge",
+	}
+}
+
+type ClusterSlurmNodeType string
+
+// Enum values for ClusterSlurmNodeType
+const (
+	ClusterSlurmNodeTypeController ClusterSlurmNodeType = "Controller"
+	ClusterSlurmNodeTypeLogin      ClusterSlurmNodeType = "Login"
+	ClusterSlurmNodeTypeCompute    ClusterSlurmNodeType = "Compute"
+)
+
+// Values returns all known values for ClusterSlurmNodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterSlurmNodeType) Values() []ClusterSlurmNodeType {
+	return []ClusterSlurmNodeType{
+		"Controller",
+		"Login",
+		"Compute",
+	}
+}
+
 type ClusterSortBy string
 
 // Enum values for ClusterSortBy
@@ -6236,6 +6278,12 @@ const (
 	ProcessingInstanceTypeMlR7i24xlarge  ProcessingInstanceType = "ml.r7i.24xlarge"
 	ProcessingInstanceTypeMlR7i48xlarge  ProcessingInstanceType = "ml.r7i.48xlarge"
 	ProcessingInstanceTypeMlP54xlarge    ProcessingInstanceType = "ml.p5.4xlarge"
+	ProcessingInstanceTypeMlG7e2xlarge   ProcessingInstanceType = "ml.g7e.2xlarge"
+	ProcessingInstanceTypeMlG7e4xlarge   ProcessingInstanceType = "ml.g7e.4xlarge"
+	ProcessingInstanceTypeMlG7e8xlarge   ProcessingInstanceType = "ml.g7e.8xlarge"
+	ProcessingInstanceTypeMlG7e12xlarge  ProcessingInstanceType = "ml.g7e.12xlarge"
+	ProcessingInstanceTypeMlG7e24xlarge  ProcessingInstanceType = "ml.g7e.24xlarge"
+	ProcessingInstanceTypeMlG7e48xlarge  ProcessingInstanceType = "ml.g7e.48xlarge"
 )
 
 // Values returns all known values for ProcessingInstanceType. Note that this can
@@ -6365,6 +6413,12 @@ func (ProcessingInstanceType) Values() []ProcessingInstanceType {
 		"ml.r7i.24xlarge",
 		"ml.r7i.48xlarge",
 		"ml.p5.4xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
 	}
 }
 
@@ -9166,6 +9220,12 @@ const (
 	TrainingInstanceTypeMlP6eGb20036xlarge TrainingInstanceType = "ml.p6e-gb200.36xlarge"
 	TrainingInstanceTypeMlP54xlarge        TrainingInstanceType = "ml.p5.4xlarge"
 	TrainingInstanceTypeMlP6B30048xlarge   TrainingInstanceType = "ml.p6-b300.48xlarge"
+	TrainingInstanceTypeMlG7e2xlarge       TrainingInstanceType = "ml.g7e.2xlarge"
+	TrainingInstanceTypeMlG7e4xlarge       TrainingInstanceType = "ml.g7e.4xlarge"
+	TrainingInstanceTypeMlG7e8xlarge       TrainingInstanceType = "ml.g7e.8xlarge"
+	TrainingInstanceTypeMlG7e12xlarge      TrainingInstanceType = "ml.g7e.12xlarge"
+	TrainingInstanceTypeMlG7e24xlarge      TrainingInstanceType = "ml.g7e.24xlarge"
+	TrainingInstanceTypeMlG7e48xlarge      TrainingInstanceType = "ml.g7e.48xlarge"
 )
 
 // Values returns all known values for TrainingInstanceType. Note that this can be
@@ -9313,6 +9373,12 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.p6e-gb200.36xlarge",
 		"ml.p5.4xlarge",
 		"ml.p6-b300.48xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
 	}
 }
 

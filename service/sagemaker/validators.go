@@ -8722,6 +8722,39 @@ func validateClusterAutoScalingConfig(v *types.ClusterAutoScalingConfig) error {
 	}
 }
 
+func validateClusterFsxLustreConfig(v *types.ClusterFsxLustreConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterFsxLustreConfig"}
+	if v.DnsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DnsName"))
+	}
+	if v.MountName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MountName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterFsxOpenZfsConfig(v *types.ClusterFsxOpenZfsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterFsxOpenZfsConfig"}
+	if v.DnsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DnsName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpecification) error {
 	if v == nil {
 		return nil
@@ -8746,6 +8779,11 @@ func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpec
 	if v.ExecutionRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRole"))
 	}
+	if v.InstanceStorageConfigs != nil {
+		if err := validateClusterInstanceStorageConfigs(v.InstanceStorageConfigs); err != nil {
+			invalidParams.AddNested("InstanceStorageConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.OverrideVpcConfig != nil {
 		if err := validateVpcConfig(v.OverrideVpcConfig); err != nil {
 			invalidParams.AddNested("OverrideVpcConfig", err.(smithy.InvalidParamsError))
@@ -8759,6 +8797,11 @@ func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpec
 	if v.KubernetesConfig != nil {
 		if err := validateClusterKubernetesConfig(v.KubernetesConfig); err != nil {
 			invalidParams.AddNested("KubernetesConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SlurmConfig != nil {
+		if err := validateClusterSlurmConfig(v.SlurmConfig); err != nil {
+			invalidParams.AddNested("SlurmConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8775,6 +8818,47 @@ func validateClusterInstanceGroupSpecifications(v []types.ClusterInstanceGroupSp
 	invalidParams := smithy.InvalidParamsError{Context: "ClusterInstanceGroupSpecifications"}
 	for i := range v {
 		if err := validateClusterInstanceGroupSpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterInstanceStorageConfig(v types.ClusterInstanceStorageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterInstanceStorageConfig"}
+	switch uv := v.(type) {
+	case *types.ClusterInstanceStorageConfigMemberFsxLustreConfig:
+		if err := validateClusterFsxLustreConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[FsxLustreConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ClusterInstanceStorageConfigMemberFsxOpenZfsConfig:
+		if err := validateClusterFsxOpenZfsConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[FsxOpenZfsConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterInstanceStorageConfigs(v []types.ClusterInstanceStorageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterInstanceStorageConfigs"}
+	for i := range v {
+		if err := validateClusterInstanceStorageConfig(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -8904,6 +8988,11 @@ func validateClusterRestrictedInstanceGroupSpecification(v *types.ClusterRestric
 	if v.ExecutionRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRole"))
 	}
+	if v.InstanceStorageConfigs != nil {
+		if err := validateClusterInstanceStorageConfigs(v.InstanceStorageConfigs); err != nil {
+			invalidParams.AddNested("InstanceStorageConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.OverrideVpcConfig != nil {
 		if err := validateVpcConfig(v.OverrideVpcConfig); err != nil {
 			invalidParams.AddNested("OverrideVpcConfig", err.(smithy.InvalidParamsError))
@@ -8937,6 +9026,21 @@ func validateClusterRestrictedInstanceGroupSpecifications(v []types.ClusterRestr
 		if err := validateClusterRestrictedInstanceGroupSpecification(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterSlurmConfig(v *types.ClusterSlurmConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterSlurmConfig"}
+	if len(v.NodeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20617,6 +20721,11 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 	if v.AutoScaling != nil {
 		if err := validateClusterAutoScalingConfig(v.AutoScaling); err != nil {
 			invalidParams.AddNested("AutoScaling", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Orchestrator != nil {
+		if err := validateClusterOrchestrator(v.Orchestrator); err != nil {
+			invalidParams.AddNested("Orchestrator", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

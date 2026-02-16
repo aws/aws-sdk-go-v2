@@ -756,6 +756,13 @@ func awsAwsjson11_serializeOpDocumentInvokeDataAutomationInput(v *InvokeDataAuto
 		}
 	}
 
+	if v.OutputConfiguration != nil {
+		ok := object.Key("outputConfiguration")
+		if err := awsAwsjson11_serializeDocumentOutputConfiguration(v.OutputConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

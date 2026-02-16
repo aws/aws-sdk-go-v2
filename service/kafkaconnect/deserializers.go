@@ -4068,6 +4068,19 @@ func awsRestjson1_deserializeDocumentAutoScalingDescription(v **types.AutoScalin
 
 	for key, value := range shape {
 		switch key {
+		case "maxAutoscalingTaskCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAutoscalingTaskCount = int32(i64)
+			}
+
 		case "maxWorkerCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)

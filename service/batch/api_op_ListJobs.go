@@ -20,9 +20,6 @@ import (
 //   - A multi-node parallel job ID to return a list of nodes for that job
 //
 //   - An array job ID to return a list of the children for that job
-//
-// You can filter the results by job status with the jobStatus parameter. If you
-// don't specify a status, only RUNNING jobs are returned.
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {
 	if params == nil {
 		params = &ListJobsInput{}
@@ -46,9 +43,13 @@ type ListJobsInput struct {
 	ArrayJobId *string
 
 	// The filter to apply to the query. Only one filter can be used at a time. When
-	// the filter is used, jobStatus is ignored. The filter doesn't apply to child
-	// jobs in an array or multi-node parallel (MNP) jobs. The results are sorted by
-	// the createdAt field, with the most recent jobs being first.
+	// the filter is used, jobStatus is ignored with the exception that
+	// SHARE_IDENTIFIER and jobStatus can be used together. The filter doesn't apply
+	// to child jobs in an array or multi-node parallel (MNP) jobs. The results are
+	// sorted by the createdAt field, with the most recent jobs being first.
+	//
+	// The SHARE_IDENTIFIER filter and the jobStatus field can be used together to
+	// filter results.
 	//
 	// JOB_NAME The value of the filter is a case-insensitive match for the job name.
 	// If the value ends with an asterisk (*), the filter matches any job name that
@@ -79,6 +80,9 @@ type ListJobsInput struct {
 	// created. This corresponds to the createdAt value. The value is a string
 	// representation of the number of milliseconds since 00:00:00 UTC (midnight) on
 	// January 1, 1970.
+	//
+	// SHARE_IDENTIFIER The value for the filter is the fairshare scheduling share
+	// identifier.
 	Filters []types.KeyValuesPair
 
 	// The name or full Amazon Resource Name (ARN) of the job queue used to list jobs.
@@ -86,7 +90,8 @@ type ListJobsInput struct {
 
 	// The job status used to filter jobs in the specified queue. If the filters
 	// parameter is specified, the jobStatus parameter is ignored and jobs with any
-	// status are returned. If you don't specify a status, only RUNNING jobs are
+	// status are returned. The exception is the SHARE_IDENTIFIER filter and jobStatus
+	// can be used together. If you don't specify a status, only RUNNING jobs are
 	// returned.
 	//
 	// Array job parents are updated to PENDING when any child job is updated to

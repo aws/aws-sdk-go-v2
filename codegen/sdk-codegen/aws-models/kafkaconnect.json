@@ -73,13 +73,20 @@
                 "scaleInPolicy": {
                     "target": "com.amazonaws.kafkaconnect#ScaleInPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sacle-in policy for the connector.</p>"
+                        "smithy.api#documentation": "<p>The scale-in policy for the connector.</p>"
                     }
                 },
                 "scaleOutPolicy": {
                     "target": "com.amazonaws.kafkaconnect#ScaleOutPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sacle-out policy for the connector.</p>"
+                        "smithy.api#documentation": "<p>The scale-out policy for the connector.</p>"
+                    }
+                },
+                "maxAutoscalingTaskCount": {
+                    "target": "com.amazonaws.kafkaconnect#__integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of tasks allocated to the connector during autoscaling operations. Must be at least equal to maxWorkerCount.</p>"
                     }
                 }
             },
@@ -114,13 +121,20 @@
                 "scaleInPolicy": {
                     "target": "com.amazonaws.kafkaconnect#ScaleInPolicyDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sacle-in policy for the connector.</p>"
+                        "smithy.api#documentation": "<p>The scale-in policy for the connector.</p>"
                     }
                 },
                 "scaleOutPolicy": {
                     "target": "com.amazonaws.kafkaconnect#ScaleOutPolicyDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sacle-out policy for the connector.&gt;</p>"
+                        "smithy.api#documentation": "<p>The scale-out policy for the connector.</p>"
+                    }
+                },
+                "maxAutoscalingTaskCount": {
+                    "target": "com.amazonaws.kafkaconnect#__integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of tasks allocated to the connector during autoscaling operations. Must be at least equal to maxWorkerCount.</p>"
                     }
                 }
             },
@@ -158,15 +172,22 @@
                 "scaleInPolicy": {
                     "target": "com.amazonaws.kafkaconnect#ScaleInPolicyUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target sacle-in policy for the connector.</p>",
+                        "smithy.api#documentation": "<p>The target scale-in policy for the connector.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "scaleOutPolicy": {
                     "target": "com.amazonaws.kafkaconnect#ScaleOutPolicyUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target sacle-out policy for the connector.</p>",
+                        "smithy.api#documentation": "<p>The target scale-out policy for the connector.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "maxAutoscalingTaskCount": {
+                    "target": "com.amazonaws.kafkaconnect#__integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of tasks allocated to the connector during autoscaling operations. Must be at least equal to maxWorkerCount.</p>"
                     }
                 }
             },

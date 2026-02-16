@@ -113,6 +113,18 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Valid for: Aurora DB clusters only
 	BacktrackWindow *int64
 
+	// The number of days for which automated backups are retained. Specify a minimum
+	// value of 1 .
+	//
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+	//
+	// Default: Uses existing setting
+	//
+	// Constraints:
+	//
+	//   - Must be a value from 1 to 35.
+	BackupRetentionPeriod *int32
+
 	// Specifies whether to copy all tags from the restored DB cluster to snapshots of
 	// the restored DB cluster. The default is not to copy them.
 	//
@@ -439,6 +451,28 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//
 	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	Port *int32
+
+	// The daily time range during which automated backups are created if automated
+	// backups are enabled, using the BackupRetentionPeriod parameter.
+	//
+	// The default is a 30-minute window selected at random from an 8-hour block of
+	// time for each Amazon Web Services Region. To view the time blocks available, see
+	// [Backup window]in the Amazon Aurora User Guide.
+	//
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+	//
+	// Constraints:
+	//
+	//   - Must be in the format hh24:mi-hh24:mi .
+	//
+	//   - Must be in Universal Coordinated Time (UTC).
+	//
+	//   - Must not conflict with the preferred maintenance window.
+	//
+	//   - Must be at least 30 minutes.
+	//
+	// [Backup window]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
+	PreferredBackupWindow *string
 
 	// Specifies whether the DB cluster is publicly accessible.
 	//

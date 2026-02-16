@@ -1,3 +1,7 @@
+# v1.47.1 (2026-02-10)
+
+* **Documentation**: Allow cross account v5 in put data lake settings
+
 # v1.47.0 (2026-01-15)
 
 * **Feature**: API Changes for GTCForLocation feature. Includes a new API, GetTemporaryDataLocationCredentials and updates to the APIs RegisterResource and UpdateResource

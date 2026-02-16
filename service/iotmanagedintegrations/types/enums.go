@@ -76,6 +76,7 @@ const (
 	AuthMaterialTypeZwaveQrBarCode          AuthMaterialType = "ZWAVE_QR_BAR_CODE"
 	AuthMaterialTypeZigbeeQrBarCode         AuthMaterialType = "ZIGBEE_QR_BAR_CODE"
 	AuthMaterialTypeDiscoveredDevice        AuthMaterialType = "DISCOVERED_DEVICE"
+	AuthMaterialTypePreOnboardedCloud       AuthMaterialType = "PRE_ONBOARDED_CLOUD"
 )
 
 // Values returns all known values for AuthMaterialType. Note that this can be
@@ -89,6 +90,7 @@ func (AuthMaterialType) Values() []AuthMaterialType {
 		"ZWAVE_QR_BAR_CODE",
 		"ZIGBEE_QR_BAR_CODE",
 		"DISCOVERED_DEVICE",
+		"PRE_ONBOARDED_CLOUD",
 	}
 }
 
@@ -430,6 +432,26 @@ func (LogLevel) Values() []LogLevel {
 		"ERROR",
 		"INFO",
 		"WARN",
+	}
+}
+
+type ManagedThingAssociationStatus string
+
+// Enum values for ManagedThingAssociationStatus
+const (
+	ManagedThingAssociationStatusPreAssociated ManagedThingAssociationStatus = "PRE_ASSOCIATED"
+	ManagedThingAssociationStatusAssociated    ManagedThingAssociationStatus = "ASSOCIATED"
+)
+
+// Values returns all known values for ManagedThingAssociationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedThingAssociationStatus) Values() []ManagedThingAssociationStatus {
+	return []ManagedThingAssociationStatus{
+		"PRE_ASSOCIATED",
+		"ASSOCIATED",
 	}
 }
 
