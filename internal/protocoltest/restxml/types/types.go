@@ -77,6 +77,26 @@ type UnionPayloadMemberGreeting struct {
 
 func (*UnionPayloadMemberGreeting) isUnionPayload() {}
 
+type XmlAttributesInMiddlePayloadRequest struct {
+	Attr *string
+
+	Baz *string
+
+	Foo *string
+
+	noSmithyDocumentSerde
+}
+
+type XmlAttributesInMiddlePayloadResponse struct {
+	Attr *string
+
+	Baz *string
+
+	Foo *string
+
+	noSmithyDocumentSerde
+}
+
 type XmlAttributesPayloadRequest struct {
 	Attr *string
 

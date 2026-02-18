@@ -104,6 +104,8 @@
         "api_op_TimestampFormatHeaders.go",
         "api_op_TimestampFormatHeaders_test.go",
         "api_op_XmlAttributes.go",
+        "api_op_XmlAttributesInMiddle.go",
+        "api_op_XmlAttributesInMiddle_test.go",
         "api_op_XmlAttributesOnPayload.go",
         "api_op_XmlAttributesOnPayload_test.go",
         "api_op_XmlAttributes_test.go",

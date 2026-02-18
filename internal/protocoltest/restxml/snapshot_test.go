@@ -650,6 +650,18 @@ func TestCheckSnapshot_XmlAttributes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_XmlAttributesInMiddle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.XmlAttributesInMiddle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "XmlAttributesInMiddle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_XmlAttributesOnPayload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.XmlAttributesOnPayload(context.Background(), nil, func(o *Options) {
@@ -1410,6 +1422,18 @@ func TestUpdateSnapshot_XmlAttributes(t *testing.T) {
 	_, err := svc.XmlAttributes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "XmlAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_XmlAttributesInMiddle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.XmlAttributesInMiddle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "XmlAttributesInMiddle")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
