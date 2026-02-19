@@ -221,7 +221,7 @@ func (r *rfc3339) UnmarshalJSON(bytes []byte) (err error) {
 
 	*r, err = parseRFC3339(value)
 
-	return nil
+	return err
 }
 
 func (r *rfc3339) MarshalJSON() ([]byte, error) {
