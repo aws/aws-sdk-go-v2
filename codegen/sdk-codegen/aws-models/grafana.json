@@ -50,7 +50,7 @@
                     "sdkId": "grafana",
                     "arnNamespace": "grafana",
                     "cloudFormationName": "Grafana",
-                    "cloudTrailEventSource": "EVENT_SOURCE_VALUE"
+                    "cloudTrailEventSource": "grafana.amazonaws.com"
                 },
                 "aws.auth#sigv4": {
                     "name": "grafana"
@@ -75,7 +75,7 @@
                         "x-amz-apigw-id,date"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon Managed Grafana is a fully managed and secure data visualization service that\n            you can use to instantly query, correlate, and visualize operational metrics, logs, and\n            traces from multiple sources. Amazon Managed Grafana makes it easy to deploy, operate, and\n            scale Grafana, a widely deployed data visualization tool that is popular for its\n            extensible data support.</p>\n         <p>With Amazon Managed Grafana, you create logically isolated Grafana servers called\n                <i>workspaces</i>. In a workspace, you can create Grafana dashboards\n            and visualizations to analyze your metrics, logs, and traces without having to build,\n            package, or deploy any hardware to run Grafana servers. </p>",
+                "smithy.api#documentation": "<p>Amazon Managed Grafana is a fully managed and secure data visualization service that you can use to instantly query, correlate, and visualize operational metrics, logs, and traces from multiple sources. Amazon Managed Grafana makes it easy to deploy, operate, and scale Grafana, a widely deployed data visualization tool that is popular for its extensible data support.</p> <p>With Amazon Managed Grafana, you create logically isolated Grafana servers called <i>workspaces</i>. In a workspace, you can create Grafana dashboards and visualizations to analyze your metrics, logs, and traces without having to build, package, or deploy any hardware to run Grafana servers. </p>",
                 "smithy.api#title": "Amazon Managed Grafana",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -879,25 +879,25 @@
                 "name": {
                     "target": "com.amazonaws.grafana#AssertionAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\"\n            names for SAML users.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\" names for SAML users.</p>"
                     }
                 },
                 "login": {
                     "target": "com.amazonaws.grafana#AssertionAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the login names for SAML\n            users.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the login names for SAML users.</p>"
                     }
                 },
                 "email": {
                     "target": "com.amazonaws.grafana#AssertionAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the email names for SAML\n            users.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the email names for SAML users.</p>"
                     }
                 },
                 "groups": {
                     "target": "com.amazonaws.grafana#AssertionAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\"\n            names for user groups.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\" names for user groups.</p>"
                     }
                 },
                 "role": {
@@ -909,12 +909,12 @@
                 "org": {
                     "target": "com.amazonaws.grafana#AssertionAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\"\n            names for the users' organizations.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\" names for the users' organizations.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines which attributes in the IdP assertion are to be used to\n            define information about the users authenticated by the IdP to use the workspace.</p>"
+                "smithy.api#documentation": "<p>A structure that defines which attributes in the IdP assertion are to be used to define information about the users authenticated by the IdP to use the workspace.</p>"
             }
         },
         "com.amazonaws.grafana#AssociateLicense": {
@@ -943,7 +943,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns a Grafana Enterprise license to a workspace. To upgrade, you must use\n            <code>ENTERPRISE</code> for the <code>licenseType</code>, and pass in a valid\n            Grafana Labs token for the <code>grafanaToken</code>. Upgrading to Grafana Enterprise\n            incurs additional fees. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html\">Upgrade a\n                workspace to Grafana Enterprise</a>.</p>",
+                "smithy.api#documentation": "<p>Assigns a Grafana Enterprise license to a workspace. To upgrade, you must use <code>ENTERPRISE</code> for the <code>licenseType</code>, and pass in a valid Grafana Labs token for the <code>grafanaToken</code>. Upgrading to Grafana Enterprise incurs additional fees. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html\">Upgrade a workspace to Grafana Enterprise</a>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -965,7 +965,7 @@
                 "licenseType": {
                     "target": "com.amazonaws.grafana#LicenseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of license to associate with the workspace.</p>\n         <note>\n            <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The type of license to associate with the workspace.</p> <note> <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p> </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -973,7 +973,7 @@
                 "grafanaToken": {
                     "target": "com.amazonaws.grafana#GrafanaToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token from Grafana Labs that ties your Amazon Web Services account with a Grafana \n            Labs account. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Link your account with Grafana Labs</a>.</p>",
+                        "smithy.api#documentation": "<p>A token from Grafana Labs that ties your Amazon Web Services account with a Grafana Labs account. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Link your account with Grafana Labs</a>.</p>",
                         "smithy.api#httpHeader": "Grafana-Token"
                     }
                 }
@@ -1017,14 +1017,14 @@
                 "providers": {
                     "target": "com.amazonaws.grafana#AuthenticationProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace uses IAM Identity Center, SAML, or both methods to\n            authenticate users to use the Grafana console in the Amazon Managed Grafana\n            workspace.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether this workspace uses IAM Identity Center, SAML, or both methods to authenticate users to use the Grafana console in the Amazon Managed Grafana workspace.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "saml": {
                     "target": "com.amazonaws.grafana#SamlAuthentication",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing information about how this workspace works with SAML, including\n            what attributes within the assertion are to be mapped to user information in the\n            workspace. </p>"
+                        "smithy.api#documentation": "<p>A structure containing information about how this workspace works with SAML, including what attributes within the assertion are to be mapped to user information in the workspace. </p>"
                     }
                 },
                 "awsSso": {
@@ -1035,7 +1035,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing information about the user authentication methods used by the\n            workspace.</p>"
+                "smithy.api#documentation": "<p>A structure containing information about the user authentication methods used by the workspace.</p>"
             }
         },
         "com.amazonaws.grafana#AuthenticationProviderTypes": {
@@ -1067,19 +1067,19 @@
                 "providers": {
                     "target": "com.amazonaws.grafana#AuthenticationProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the workspace uses SAML, IAM Identity Center, or both methods for\n            user authentication.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the workspace uses SAML, IAM Identity Center, or both methods for user authentication.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "samlConfigurationStatus": {
                     "target": "com.amazonaws.grafana#SamlConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the workplace's user authentication method is fully\n            configured.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the workplace's user authentication method is fully configured.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or\n            both methods for user authentication, and whether that authentication is fully\n            configured.</p>"
+                "smithy.api#documentation": "<p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or both methods for user authentication, and whether that authentication is fully configured.</p>"
             }
         },
         "com.amazonaws.grafana#AwsSsoAuthentication": {
@@ -1183,7 +1183,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <i>workspace</i>. In a workspace, you can create Grafana\n            dashboards and visualizations to analyze your metrics, logs, and traces. You don't have\n            to build, package, or deploy any hardware to run the Grafana server.</p>\n         <p>Don't use <code>CreateWorkspace</code> to modify an existing workspace. Instead, use\n                <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html\">UpdateWorkspace</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a <i>workspace</i>. In a workspace, you can create Grafana dashboards and visualizations to analyze your metrics, logs, and traces. You don't have to build, package, or deploy any hardware to run the Grafana server.</p> <p>Don't use <code>CreateWorkspace</code> to modify an existing workspace. Instead, use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html\">UpdateWorkspace</a>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -1224,7 +1224,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Grafana API key for the workspace. This key can be used to authenticate\n            requests sent to the workspace's HTTP API. See <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html\">https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html</a>\n            for available APIs and example requests.</p>\n         <note>\n            <p>In workspaces compatible with Grafana version 9 or above, use workspace service \n                accounts instead of API keys. API keys will be removed in a future release.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a Grafana API key for the workspace. This key can be used to authenticate requests sent to the workspace's HTTP API. See <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html\">https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html</a> for available APIs and example requests.</p> <note> <p>In workspaces compatible with Grafana version 9 or above, use workspace service accounts instead of API keys. API keys will be removed in a future release.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1245,14 +1245,14 @@
                 "keyRole": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the permission level of the key.</p>\n         <p> Valid values: <code>ADMIN</code>|<code>EDITOR</code>|<code>VIEWER</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the permission level of the key.</p> <p> Valid values: <code>ADMIN</code>|<code>EDITOR</code>|<code>VIEWER</code> </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "secondsToLive": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the time in seconds until the key expires. Keys can be valid for up to 30\n            days.</p>",
+                        "smithy.api#documentation": "<p>Specifies the time in seconds until the key expires. Keys can be valid for up to 30 days.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 2592000
@@ -1283,7 +1283,7 @@
                 "key": {
                     "target": "com.amazonaws.grafana#ApiKeyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key token. Use this value as a bearer token to authenticate HTTP requests to the\n            workspace.</p>",
+                        "smithy.api#documentation": "<p>The key token. Use this value as a bearer token to authenticate HTTP requests to the workspace.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1302,34 +1302,34 @@
                 "accountAccessType": {
                     "target": "com.amazonaws.grafana#AccountAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this\n                Amazon Web Services account only, or whether it can also access Amazon Web Services\n            resources in other accounts in the same organization. If you specify\n                <code>ORGANIZATION</code>, you must specify which organizational units the workspace\n            can access in the <code>workspaceOrganizationalUnits</code> parameter.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must specify which organizational units the workspace can access in the <code>workspaceOrganizationalUnits</code> parameter.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.grafana#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive, user-provided identifier to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "organizationRoleName": {
                     "target": "com.amazonaws.grafana#OrganizationRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an IAM role that already exists to use with Organizations to access Amazon Web Services data sources and notification channels in other accounts\n            in an organization.</p>"
+                        "smithy.api#documentation": "<p>The name of an IAM role that already exists to use with Organizations to access Amazon Web Services data sources and notification channels in other accounts in an organization.</p>"
                     }
                 },
                 "permissionType": {
                     "target": "com.amazonaws.grafana#PermissionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>When creating a workspace through the Amazon Web Services API, CLI or Amazon Web Services CloudFormation, you must manage IAM roles and provision the\n            permissions that the workspace needs to use Amazon Web Services data sources and\n            notification channels.</p>\n         <p>You must also specify a <code>workspaceRoleArn</code> for a role that you will\n            manage for the workspace to use when accessing those datasources and notification \n            channels.</p>\n         <p>The ability for Amazon Managed Grafana to create and update IAM roles on\n            behalf of the user is supported only in the Amazon Managed Grafana console, where this value\n            may be set to <code>SERVICE_MANAGED</code>.</p>\n         <note>\n            <p>Use only the <code>CUSTOMER_MANAGED</code> permission type when creating a\n                workspace with the API, CLI or Amazon Web Services CloudFormation. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana\n                permissions and policies for Amazon Web Services data sources and notification\n                channels</a>.</p>",
+                        "smithy.api#documentation": "<p>When creating a workspace through the Amazon Web Services API, CLI or Amazon Web Services CloudFormation, you must manage IAM roles and provision the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>You must also specify a <code>workspaceRoleArn</code> for a role that you will manage for the workspace to use when accessing those datasources and notification channels.</p> <p>The ability for Amazon Managed Grafana to create and update IAM roles on behalf of the user is supported only in the Amazon Managed Grafana console, where this value may be set to <code>SERVICE_MANAGED</code>.</p> <note> <p>Use only the <code>CUSTOMER_MANAGED</code> permission type when creating a workspace with the API, CLI or Amazon Web Services CloudFormation. </p> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "stackSetName": {
                     "target": "com.amazonaws.grafana#StackSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the CloudFormation stack set to use to generate IAM\n            roles to be used for this workspace.</p>"
+                        "smithy.api#documentation": "<p>The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.</p>"
                     }
                 },
                 "workspaceDataSources": {
@@ -1341,7 +1341,7 @@
                 "workspaceDescription": {
                     "target": "com.amazonaws.grafana#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the workspace. This is used only to help you identify this\n            workspace.</p>\n         <p>Pattern: <code>^[\\\\p{L}\\\\p{Z}\\\\p{N}\\\\p{P}]{0,2048}$</code>\n         </p>"
+                        "smithy.api#documentation": "<p>A description for the workspace. This is used only to help you identify this workspace.</p> <p>Pattern: <code>^[\\\\p{L}\\\\p{Z}\\\\p{N}\\\\p{P}]{0,2048}$</code> </p>"
                     }
                 },
                 "workspaceName": {
@@ -1353,25 +1353,25 @@
                 "workspaceNotificationDestinations": {
                     "target": "com.amazonaws.grafana#NotificationDestinationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the Amazon Web Services notification channels that you plan to use in this\n            workspace. Specifying these data sources here enables Amazon Managed Grafana to create\n                IAM roles and permissions that allow Amazon Managed Grafana to use these\n            channels.</p>"
+                        "smithy.api#documentation": "<p>Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to use these channels.</p>"
                     }
                 },
                 "workspaceOrganizationalUnits": {
                     "target": "com.amazonaws.grafana#OrganizationalUnitList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the organizational units that this workspace is allowed to use data sources\n            from, if this workspace is in an account that is part of an organization.</p>"
+                        "smithy.api#documentation": "<p>Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.</p>"
                     }
                 },
                 "workspaceRoleArn": {
                     "target": "com.amazonaws.grafana#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specified the IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from, including both data \n            sources and notification channels. You are responsible for managing the permissions \n            for this role as new data sources or notification channels are added. </p>"
+                        "smithy.api#documentation": "<p>Specified the IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from, including both data sources and notification channels. You are responsible for managing the permissions for this role as new data sources or notification channels are added. </p>"
                     }
                 },
                 "authenticationProviders": {
                     "target": "com.amazonaws.grafana#AuthenticationProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to\n            authenticate users for using the Grafana console within a workspace. For more\n            information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in\n                    Amazon Managed Grafana</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to authenticate users for using the Grafana console within a workspace. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in Amazon Managed Grafana</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1384,25 +1384,31 @@
                 "vpcConfiguration": {
                     "target": "com.amazonaws.grafana#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for\n            your Grafana workspace to connect to.</p>\n         <note>\n            <p>Connecting to a private VPC is not yet available in the Asia Pacific (Seoul) \n                Region (ap-northeast-2).</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.</p> <note> <p>Connecting to a private VPC is not yet available in the Asia Pacific (Seoul) Region (ap-northeast-2).</p> </note>"
                     }
                 },
                 "configuration": {
                     "target": "com.amazonaws.grafana#OverridableConfigurationJson",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration string for the workspace that you create. For more information about\n            the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana\n                workspace</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration string for the workspace that you create. For more information about the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana workspace</a>.</p>"
                     }
                 },
                 "networkAccessControl": {
                     "target": "com.amazonaws.grafana#NetworkAccessConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for network access to your workspace.</p>\n         <p>When this is configured, only listed IP addresses and VPC endpoints will be able to\n            access your workspace. Standard Grafana authentication and authorization will still be\n            required.</p>\n         <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will\n            be allowed. Standard Grafana authentication and authorization will still be\n            required.</p>"
+                        "smithy.api#documentation": "<p>Configuration for network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>"
                     }
                 },
                 "grafanaVersion": {
                     "target": "com.amazonaws.grafana#GrafanaVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace. If not specified, \n            defaults to the latest version (for example, 10.4).</p>\n         <p>To get a list of supported versions, use the <code>ListVersions</code>\n            operation.</p>"
+                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace. If not specified, defaults to the latest version (for example, 10.4).</p> <p>To get a list of supported versions, use the <code>ListVersions</code> operation.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.grafana#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the Key Management Service key to use for encrypting workspace data.</p>"
                     }
                 }
             }
@@ -1451,7 +1457,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a service account for the workspace. A service account can be used to call \n            Grafana HTTP APIs, and run automated workloads. After creating the service account with\n            the correct <code>GrafanaRole</code> for your use case, use \n            <code>CreateWorkspaceServiceAccountToken</code> to create a token that can be used to\n            authenticate and authorize Grafana HTTP API calls.</p>\n         <p>You can only create service accounts for workspaces that are compatible with Grafana\n            version 9 and above.</p>\n         <note>\n            <p>For more information about service accounts, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/service-accounts.html\">Service accounts</a> in \n                the <i>Amazon Managed Grafana User Guide</i>.</p>\n            <p>For more information about the Grafana HTTP APIs, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html\">Using Grafana HTTP \n                APIs</a> in the <i>Amazon Managed Grafana User Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a service account for the workspace. A service account can be used to call Grafana HTTP APIs, and run automated workloads. After creating the service account with the correct <code>GrafanaRole</code> for your use case, use <code>CreateWorkspaceServiceAccountToken</code> to create a token that can be used to authenticate and authorize Grafana HTTP API calls.</p> <p>You can only create service accounts for workspaces that are compatible with Grafana version 9 and above.</p> <note> <p>For more information about service accounts, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/service-accounts.html\">Service accounts</a> in the <i>Amazon Managed Grafana User Guide</i>.</p> <p>For more information about the Grafana HTTP APIs, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html\">Using Grafana HTTP APIs</a> in the <i>Amazon Managed Grafana User Guide</i>.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1465,14 +1471,14 @@
                 "name": {
                     "target": "com.amazonaws.grafana#ServiceAccountName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the service account. The name must be unique within the workspace, as it\n            determines the ID associated with the service account.</p>",
+                        "smithy.api#documentation": "<p>A name for the service account. The name must be unique within the workspace, as it determines the ID associated with the service account.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "grafanaRole": {
                     "target": "com.amazonaws.grafana#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permission level to use for this service account.</p>\n         <note>\n            <p>For more information about the roles and the permissions each has, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Grafana-user-roles.html\">User\n                roles</a> in the <i>Amazon Managed Grafana User Guide</i>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The permission level to use for this service account.</p> <note> <p>For more information about the roles and the permissions each has, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Grafana-user-roles.html\">User roles</a> in the <i>Amazon Managed Grafana User Guide</i>.</p> </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1557,7 +1563,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a token that can be used to authenticate and authorize Grafana HTTP API\n            operations for the given <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/service-accounts.html\">workspace service \n            account</a>. The service account acts as a user for the API operations, and\n            defines the permissions that are used by the API.</p>\n         <important>\n            <p>When you create the service account token, you will receive a key that is used\n                when calling Grafana APIs. Do not lose this key, as it will not be retrievable\n                again.</p>\n            <p>If you do lose the key, you can delete the token and recreate it to receive a \n                new key. This will disable the initial key.</p>\n         </important>\n         <p>Service accounts are only available for workspaces that are compatible with Grafana\n            version 9 and above.</p>",
+                "smithy.api#documentation": "<p>Creates a token that can be used to authenticate and authorize Grafana HTTP API operations for the given <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/service-accounts.html\">workspace service account</a>. The service account acts as a user for the API operations, and defines the permissions that are used by the API.</p> <important> <p>When you create the service account token, you will receive a key that is used when calling Grafana APIs. Do not lose this key, as it will not be retrievable again.</p> <p>If you do lose the key, you can delete the token and recreate it to receive a new key. This will disable the initial key.</p> </important> <p>Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1578,7 +1584,7 @@
                 "secondsToLive": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets how long the token will be valid, in seconds. You can set the time up to 30 \n            days in the future.</p>",
+                        "smithy.api#documentation": "<p>Sets how long the token will be valid, in seconds. You can set the time up to 30 days in the future.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 2592000
@@ -1613,7 +1619,7 @@
                 "serviceAccountToken": {
                     "target": "com.amazonaws.grafana#ServiceAccountTokenSummaryWithKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the created token, including the key. Be sure to store the key\n            securely.</p>",
+                        "smithy.api#documentation": "<p>Information about the created token, including the key. Be sure to store the key securely.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1761,7 +1767,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Grafana API key for the workspace.</p>\n         <note>\n            <p>In workspaces compatible with Grafana version 9 or above, use workspace service \n                accounts instead of API keys. API keys will be removed in a future release.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a Grafana API key for the workspace.</p> <note> <p>In workspaces compatible with Grafana version 9 or above, use workspace service accounts instead of API keys. API keys will be removed in a future release.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -1863,7 +1869,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a workspace service account from the workspace.</p>\n         <p>This will delete any tokens created for the service account, as well. If the tokens\n            are currently in use, the will fail to authenticate / authorize after they are \n            deleted.</p>\n         <p>Service accounts are only available for workspaces that are compatible with Grafana\n            version 9 and above.</p>",
+                "smithy.api#documentation": "<p>Deletes a workspace service account from the workspace.</p> <p>This will delete any tokens created for the service account, as well. If the tokens are currently in use, the will fail to authenticate / authorize after they are deleted.</p> <p>Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -1946,7 +1952,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a token for the workspace service account.</p>\n         <p>This will disable the key associated with the token. If any automation is currently \n            using the key, it will no longer be authenticated or authorized to perform actions with \n            the Grafana HTTP APIs.</p>\n         <p>Service accounts are only available for workspaces that are compatible with Grafana\n            version 9 and above.</p>",
+                "smithy.api#documentation": "<p>Deletes a token for the workspace service account.</p> <p>This will disable the key associated with the token. If any automation is currently using the key, it will no longer be authenticated or authorized to perform actions with the Grafana HTTP APIs.</p> <p>Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -2079,7 +2085,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays information about the authentication methods used in one Amazon Managed Grafana\n            workspace.</p>",
+                "smithy.api#documentation": "<p>Displays information about the authentication methods used in one Amazon Managed Grafana workspace.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2107,7 +2113,7 @@
                 "authentication": {
                     "target": "com.amazonaws.grafana#AuthenticationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing information about the authentication methods used in the\n            workspace.</p>",
+                        "smithy.api#documentation": "<p>A structure containing information about the authentication methods used in the workspace.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2163,7 +2169,7 @@
                 "configuration": {
                     "target": "com.amazonaws.grafana#OverridableConfigurationJson",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration string for the workspace that you requested. For more information\n            about the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana\n                workspace</a>.</p>",
+                        "smithy.api#documentation": "<p>The configuration string for the workspace that you requested. For more information about the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana workspace</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2340,7 +2346,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing the identity provider (IdP) metadata used to integrate the\n            identity provider with this workspace. You can specify the metadata either by providing\n            a URL to its location in the <code>url</code> parameter, or by specifying the full\n            metadata in XML format in the <code>xml</code> parameter. Specifying both will cause an\n            error.</p>"
+                "smithy.api#documentation": "<p>A structure containing the identity provider (IdP) metadata used to integrate the identity provider with this workspace. You can specify the metadata either by providing a URL to its location in the <code>url</code> parameter, or by specifying the full metadata in XML format in the <code>xml</code> parameter. Specifying both will cause an error.</p>"
             }
         },
         "com.amazonaws.grafana#IdpMetadataUrl": {
@@ -2375,6 +2381,16 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.grafana#KmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:/_-]+$"
             }
         },
         "com.amazonaws.grafana#License": {
@@ -2444,7 +2460,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the users and groups who have the Grafana <code>Admin</code> and\n                <code>Editor</code> roles in this workspace. If you use this operation without\n            specifying <code>userId</code> or <code>groupId</code>, the operation returns the roles\n            of all users and groups. If you specify a <code>userId</code> or a <code>groupId</code>,\n            only the roles for that user or group are returned. If you do this, you can specify only\n            one <code>userId</code> or one <code>groupId</code>.</p>",
+                "smithy.api#documentation": "<p>Lists the users and groups who have the Grafana <code>Admin</code> and <code>Editor</code> roles in this workspace. If you use this operation without specifying <code>userId</code> or <code>groupId</code>, the operation returns the roles of all users and groups. If you specify a <code>userId</code> or a <code>groupId</code>, only the roles for that user or group are returned. If you do this, you can specify only one <code>userId</code> or one <code>groupId</code>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2477,14 +2493,14 @@
                     "target": "com.amazonaws.grafana#PaginationToken",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from\n            a previous <code>ListPermissions</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous <code>ListPermissions</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "userType": {
                     "target": "com.amazonaws.grafana#UserType",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) If you specify <code>SSO_USER</code>, then only the permissions of IAM Identity Center users are returned. If you specify <code>SSO_GROUP</code>, only the\n            permissions of IAM Identity Center groups are returned.</p>",
+                        "smithy.api#documentation": "<p>(Optional) If you specify <code>SSO_USER</code>, then only the permissions of IAM Identity Center users are returned. If you specify <code>SSO_GROUP</code>, only the permissions of IAM Identity Center groups are returned.</p>",
                         "smithy.api#httpQuery": "userType"
                     }
                 },
@@ -2519,7 +2535,7 @@
                     "target": "com.amazonaws.grafana#PaginationToken",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListPermissions</code> operation to return the\n            next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListPermissions</code> operation to return the next set of results.</p>"
                     }
                 },
                 "permissions": {
@@ -2557,7 +2573,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListTagsForResource</code> operation returns the tags that are associated\n            with the Amazon Managed Service for Grafana resource specified by the\n                <code>resourceArn</code>. Currently, the only resource that can be tagged is a\n            workspace. </p>",
+                "smithy.api#documentation": "<p>The <code>ListTagsForResource</code> operation returns the tags that are associated with the Amazon Managed Service for Grafana resource specified by the <code>resourceArn</code>. Currently, the only resource that can be tagged is a workspace. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}"
@@ -2615,7 +2631,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists available versions of Grafana. These are available when calling \n            <code>CreateWorkspace</code>. Optionally, include a workspace to list the versions \n            to which it can be upgraded.</p>",
+                "smithy.api#documentation": "<p>Lists available versions of Grafana. These are available when calling <code>CreateWorkspace</code>. Optionally, include a workspace to list the versions to which it can be upgraded.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2648,14 +2664,14 @@
                     "target": "com.amazonaws.grafana#PaginationToken",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You receive this token from\n            a previous <code>ListVersions</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You receive this token from a previous <code>ListVersions</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "workspaceId": {
                     "target": "com.amazonaws.grafana#WorkspaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workspace to list the available upgrade versions. If not included, \n            lists all versions of Grafana that are supported for \n            <code>CreateWorkspace</code>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the workspace to list the available upgrade versions. If not included, lists all versions of Grafana that are supported for <code>CreateWorkspace</code>.</p>",
                         "smithy.api#httpQuery": "workspace-id"
                     }
                 }
@@ -2671,13 +2687,13 @@
                     "target": "com.amazonaws.grafana#PaginationToken",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListVersions</code> operation to return the\n            next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListVersions</code> operation to return the next set of results.</p>"
                     }
                 },
                 "grafanaVersions": {
                     "target": "com.amazonaws.grafana#GrafanaVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Grafana versions available to create. If a workspace ID is included in the \n            request, the Grafana versions to which this workspace can be upgraded.</p>"
+                        "smithy.api#documentation": "<p>The Grafana versions available to create. If a workspace ID is included in the request, the Grafana versions to which this workspace can be upgraded.</p>"
                     }
                 }
             },
@@ -2714,7 +2730,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of tokens for a workspace service account.</p>\n         <note>\n            <p>This does not return the key for each token. You cannot access keys after they\n                are created. To create a new key, delete the token and recreate it.</p>\n         </note>\n         <p>Service accounts are only available for workspaces that are compatible with Grafana\n            version 9 and above.</p>",
+                "smithy.api#documentation": "<p>Returns a list of tokens for a workspace service account.</p> <note> <p>This does not return the key for each token. You cannot access keys after they are created. To create a new key, delete the token and recreate it.</p> </note> <p>Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2747,7 +2763,7 @@
                     "target": "com.amazonaws.grafana#PaginationToken",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>The token for the next set of service accounts to return. (You receive this token\n            from a previous <code>ListWorkspaceServiceAccountTokens</code> operation.)</p>",
+                        "smithy.api#documentation": "<p>The token for the next set of service accounts to return. (You receive this token from a previous <code>ListWorkspaceServiceAccountTokens</code> operation.)</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -2837,7 +2853,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of service accounts for a workspace.</p>\n         <p>Service accounts are only available for workspaces that are compatible with Grafana\n            version 9 and above.</p>",
+                "smithy.api#documentation": "<p>Returns a list of service accounts for a workspace.</p> <p>Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2870,7 +2886,7 @@
                     "target": "com.amazonaws.grafana#PaginationToken",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>The token for the next set of service accounts to return. (You receive this token\n            from a previous <code>ListWorkspaceServiceAccounts</code> operation.)</p>",
+                        "smithy.api#documentation": "<p>The token for the next set of service accounts to return. (You receive this token from a previous <code>ListWorkspaceServiceAccounts</code> operation.)</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -2936,7 +2952,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of Amazon Managed Grafana workspaces in the account, with some information\n            about each workspace. For more complete information about one workspace, use <a href=\"https://docs.aws.amazon.com/AAMG/latest/APIReference/API_DescribeWorkspace.html\">DescribeWorkspace</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of Amazon Managed Grafana workspaces in the account, with some information about each workspace. For more complete information about one workspace, use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_DescribeWorkspace.html\">DescribeWorkspace</a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2968,7 +2984,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.grafana#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of workspaces to return. (You receive this token from a\n            previous <code>ListWorkspaces</code> operation.)</p>",
+                        "smithy.api#documentation": "<p>The token for the next set of workspaces to return. (You receive this token from a previous <code>ListWorkspaces</code> operation.)</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -2980,7 +2996,7 @@
                 "workspaces": {
                     "target": "com.amazonaws.grafana#WorkspaceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that contain some information about the workspaces in the\n            account.</p>",
+                        "smithy.api#documentation": "<p>An array of structures that contain some information about the workspaces in the account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3004,20 +3020,20 @@
                 "prefixListIds": {
                     "target": "com.amazonaws.grafana#PrefixListIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses.\n            The IP addresses specified are allowed to access your workspace. If the list is not\n            included in the configuration (passed an empty array) then no IP addresses are \n            allowed to access the workspace. You create a prefix list using the Amazon VPC \n            console.</p>\n         <p>Prefix list IDs have the format <code>pl-<i>1a2b3c4d</i>\n            </code>.</p>\n         <p>For more information about prefix lists, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html\">Group CIDR blocks using managed\n                prefix lists</a>in the <i>Amazon Virtual Private Cloud User\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration (passed an empty array) then no IP addresses are allowed to access the workspace. You create a prefix list using the Amazon VPC console.</p> <p>Prefix list IDs have the format <code>pl-<i>1a2b3c4d</i> </code>.</p> <p>For more information about prefix lists, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html\">Group CIDR blocks using managed prefix lists</a>in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "vpceIds": {
                     "target": "com.amazonaws.grafana#VpceIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of Amazon VPC endpoint IDs for the workspace. You can create VPC\n            endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a\n                <code>NetworkAccessConfiguration</code> is specified then only VPC endpoints\n            specified here are allowed to access the workspace. If you pass in an empty array\n            of strings, then no VPCs are allowed to access the workspace.</p>\n         <p>VPC endpoint IDs have the format\n            <code>vpce-<i>1a2b3c4d</i>\n            </code>.</p>\n         <p>For more information about creating an interface VPC endpoint, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints\">Interface VPC\n                endpoints</a> in the <i>Amazon Managed Grafana User\n            Guide</i>.</p>\n         <note>\n            <p>The only VPC endpoints that can be specified here are interface VPC endpoints for\n                Grafana workspaces (using the <code>com.amazonaws.[region].grafana-workspace</code>\n                service endpoint). Other VPC endpoints are ignored.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>An array of Amazon VPC endpoint IDs for the workspace. You can create VPC endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a <code>NetworkAccessConfiguration</code> is specified then only VPC endpoints specified here are allowed to access the workspace. If you pass in an empty array of strings, then no VPCs are allowed to access the workspace.</p> <p>VPC endpoint IDs have the format <code>vpce-<i>1a2b3c4d</i> </code>.</p> <p>For more information about creating an interface VPC endpoint, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints\">Interface VPC endpoints</a> in the <i>Amazon Managed Grafana User Guide</i>.</p> <note> <p>The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the <code>com.amazonaws.[region].grafana-workspace</code> service endpoint). Other VPC endpoints are ignored.</p> </note>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration settings for in-bound network access to your workspace.</p>\n         <p>When this is configured, only listed IP addresses and VPC endpoints will be able to\n            access your workspace. Standard Grafana authentication and authorization are still\n            required.</p>\n         <p>Access is granted to a caller that is in either the IP address list or the VPC \n            endpoint list - they do not need to be in both.</p>\n         <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints are\n            allowed. Standard Grafana authentication and authorization are still\n            required.</p>\n         <note>\n            <p>While both <code>prefixListIds</code> and <code>vpceIds</code> are required, you \n                can pass in an empty array of strings for either parameter if you do not want to allow any\n                of that type.</p>\n            <p>If both are passed as empty arrays, no traffic is allowed to the workspace, \n                because only <i>explicitly</i> allowed connections are accepted.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The configuration settings for in-bound network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization are still required.</p> <p>Access is granted to a caller that is in either the IP address list or the VPC endpoint list - they do not need to be in both.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints are allowed. Standard Grafana authentication and authorization are still required.</p> <note> <p>While both <code>prefixListIds</code> and <code>vpceIds</code> are required, you can pass in an empty array of strings for either parameter if you do not want to allow any of that type.</p> <p>If both are passed as empty arrays, no traffic is allowed to the workspace, because only <i>explicitly</i> allowed connections are accepted.</p> </note>"
             }
         },
         "com.amazonaws.grafana#NotificationDestinationType": {
@@ -3111,13 +3127,13 @@
                 "role": {
                     "target": "com.amazonaws.grafana#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the user or group has the <code>Admin</code>, <code>Editor</code>,\n            or <code>Viewer</code> role.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the user or group has the <code>Admin</code>, <code>Editor</code>, or <code>Viewer</code> role.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing the identity of one user or group and the <code>Admin</code>,\n                <code>Editor</code>, or <code>Viewer</code> role that they have.</p>"
+                "smithy.api#documentation": "<p>A structure containing the identity of one user or group and the <code>Admin</code>, <code>Editor</code>, or <code>Viewer</code> role that they have.</p>"
             }
         },
         "com.amazonaws.grafana#PermissionEntryList": {
@@ -3235,18 +3251,18 @@
                 "editor": {
                     "target": "com.amazonaws.grafana#RoleValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of groups from the SAML assertion attribute to grant the Grafana\n                <code>Editor</code> role to.</p>"
+                        "smithy.api#documentation": "<p>A list of groups from the SAML assertion attribute to grant the Grafana <code>Editor</code> role to.</p>"
                     }
                 },
                 "admin": {
                     "target": "com.amazonaws.grafana#RoleValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of groups from the SAML assertion attribute to grant the Grafana\n                <code>Admin</code> role to.</p>"
+                        "smithy.api#documentation": "<p>A list of groups from the SAML assertion attribute to grant the Grafana <code>Admin</code> role to.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure defines which groups defined in the SAML assertion attribute are to be\n            mapped to the Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.\n            SAML authenticated users not part of <code>Admin</code> or <code>Editor</code> role\n            groups have <code>Viewer</code> permission over the workspace.</p>"
+                "smithy.api#documentation": "<p>This structure defines which groups defined in the SAML assertion attribute are to be mapped to the Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace. SAML authenticated users not part of <code>Admin</code> or <code>Editor</code> role groups have <code>Viewer</code> permission over the workspace.</p>"
             }
         },
         "com.amazonaws.grafana#SSOClientId": {
@@ -3279,33 +3295,33 @@
                 "idpMetadata": {
                     "target": "com.amazonaws.grafana#IdpMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing the identity provider (IdP) metadata used to integrate the\n            identity provider with this workspace.</p>",
+                        "smithy.api#documentation": "<p>A structure containing the identity provider (IdP) metadata used to integrate the identity provider with this workspace.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "assertionAttributes": {
                     "target": "com.amazonaws.grafana#AssertionAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that defines which attributes in the SAML assertion are to be used to\n            define information about the users authenticated by that IdP to use the\n            workspace.</p>"
+                        "smithy.api#documentation": "<p>A structure that defines which attributes in the SAML assertion are to be used to define information about the users authenticated by that IdP to use the workspace.</p>"
                     }
                 },
                 "roleValues": {
                     "target": "com.amazonaws.grafana#RoleValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing arrays that map group names in the SAML assertion to the\n            Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>"
+                        "smithy.api#documentation": "<p>A structure containing arrays that map group names in the SAML assertion to the Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>"
                     }
                 },
                 "allowedOrganizations": {
                     "target": "com.amazonaws.grafana#AllowedOrganizations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists which organizations defined in the SAML assertion are allowed to use the Amazon Managed Grafana workspace. If this is empty, all organizations in the assertion attribute\n            have access.</p>"
+                        "smithy.api#documentation": "<p>Lists which organizations defined in the SAML assertion are allowed to use the Amazon Managed Grafana workspace. If this is empty, all organizations in the assertion attribute have access.</p>"
                     }
                 },
                 "loginValidityDuration": {
                     "target": "com.amazonaws.grafana#LoginValidityDuration",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>How long a sign-on session by a SAML user is valid, before the user has to sign on\n            again.</p>"
+                        "smithy.api#documentation": "<p>How long a sign-on session by a SAML user is valid, before the user has to sign on again.</p>"
                     }
                 }
             },
@@ -3410,14 +3426,14 @@
                 "isDisabled": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns true if the service account is disabled. Service accounts can be disabled and\n            enabled in the Amazon Managed Grafana console.</p>",
+                        "smithy.api#documentation": "<p>Returns true if the service account is disabled. Service accounts can be disabled and enabled in the Amazon Managed Grafana console.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "grafanaRole": {
                     "target": "com.amazonaws.grafana#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role of the service account, which sets the permission level used when calling\n            Grafana APIs.</p>",
+                        "smithy.api#documentation": "<p>The role of the service account, which sets the permission level used when calling Grafana APIs.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3536,13 +3552,13 @@
                 "key": {
                     "target": "com.amazonaws.grafana#ServiceAccountTokenKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key for the service account token. Used when making calls to the Grafana HTTP \n            APIs to authenticate and authorize the requests.</p>",
+                        "smithy.api#documentation": "<p>The key for the service account token. Used when making calls to the Grafana HTTP APIs to authenticate and authorize the requests.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the information about a service account token.</p>\n         <p>This structure is returned when creating the token. It is important to store the\n            <code>key</code> that is returned, as it is not retrievable at a later time.</p>\n         <p>If you lose the key, you can delete and recreate the token, which will create a\n            new key.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the information about a service account token.</p> <p>This structure is returned when creating the token. It is important to store the <code>key</code> that is returned, as it is not retrievable at a later time.</p> <p>If you lose the key, you can delete and recreate the token, which will create a new key.</p>"
             }
         },
         "com.amazonaws.grafana#ServiceQuotaExceededException": {
@@ -3678,7 +3694,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>TagResource</code> operation associates tags with an Amazon Managed Grafana\n            resource. Currently, the only resource that can be tagged is workspaces. </p>\n         <p>If you specify a new tag key for the resource, this tag is appended to the list of\n            tags associated with the resource. If you specify a tag key that is already associated\n            with the resource, the new tag value that you specify replaces the previous value for\n            that tag.</p>",
+                "smithy.api#documentation": "<p>The <code>TagResource</code> operation associates tags with an Amazon Managed Grafana resource. Currently, the only resource that can be tagged is workspaces. </p> <p>If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}"
@@ -3699,7 +3715,7 @@
                 "tags": {
                     "target": "com.amazonaws.grafana#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tag keys and values to associate with the resource. You can associate tag\n            keys only, tags (key and values) only or a combination of tag keys and tags.</p>",
+                        "smithy.api#documentation": "<p>The list of tag keys and values to associate with the resource. You can associate tag keys only, tags (key and values) only or a combination of tag keys and tags.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3781,7 +3797,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>UntagResource</code> operation removes the association of the tag with the\n            Amazon Managed Grafana resource. </p>",
+                "smithy.api#documentation": "<p>The <code>UntagResource</code> operation removes the association of the tag with the Amazon Managed Grafana resource. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}"
@@ -3861,7 +3877,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing information about one error encountered while performing an\n                <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a> operation.</p>"
+                "smithy.api#documentation": "<p>A structure containing information about one error encountered while performing an <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a> operation.</p>"
             }
         },
         "com.amazonaws.grafana#UpdateErrorList": {
@@ -3883,7 +3899,7 @@
                 "role": {
                     "target": "com.amazonaws.grafana#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role to add or revoke for the user or the group specified in\n            <code>users</code>.</p>",
+                        "smithy.api#documentation": "<p>The role to add or revoke for the user or the group specified in <code>users</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3937,7 +3953,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates which users in a workspace have the Grafana <code>Admin</code> or\n                <code>Editor</code> roles.</p>",
+                "smithy.api#documentation": "<p>Updates which users in a workspace have the Grafana <code>Admin</code> or <code>Editor</code> roles.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PATCH",
@@ -4007,7 +4023,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies an existing Amazon Managed Grafana workspace. If you use this operation and omit\n            any optional parameters, the existing values of those parameters are not changed.</p>\n         <p>To modify the user authentication methods that the workspace uses, such as SAML or\n                IAM Identity Center, use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspaceAuthentication.html\">UpdateWorkspaceAuthentication</a>.</p>\n         <p>To modify which users in the workspace have the <code>Admin</code> and\n                <code>Editor</code> Grafana roles, use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a>.</p>",
+                "smithy.api#documentation": "<p>Modifies an existing Amazon Managed Grafana workspace. If you use this operation and omit any optional parameters, the existing values of those parameters are not changed.</p> <p>To modify the user authentication methods that the workspace uses, such as SAML or IAM Identity Center, use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspaceAuthentication.html\">UpdateWorkspaceAuthentication</a>.</p> <p>To modify which users in the workspace have the <code>Admin</code> and <code>Editor</code> Grafana roles, use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -4044,7 +4060,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to define the identity provider (IdP) that this workspace\n            authenticates users from, using SAML. You can also map SAML assertion attributes to\n            workspace user information and define which groups in the assertion attribute are to\n            have the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>\n         <note>\n            <p>Changes to the authentication method for a workspace may take a few minutes to\n                take effect.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Use this operation to define the identity provider (IdP) that this workspace authenticates users from, using SAML. You can also map SAML assertion attributes to workspace user information and define which groups in the assertion attribute are to have the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p> <note> <p>Changes to the authentication method for a workspace may take a few minutes to take effect.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4066,14 +4082,14 @@
                 "authenticationProviders": {
                     "target": "com.amazonaws.grafana#AuthenticationProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to\n            authenticate users for using the Grafana console within a workspace. For more\n            information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in\n                    Amazon Managed Grafana</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to authenticate users for using the Grafana console within a workspace. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in Amazon Managed Grafana</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "samlConfiguration": {
                     "target": "com.amazonaws.grafana#SamlConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the workspace uses SAML, use this structure to map SAML assertion attributes to\n            workspace user information and define which groups in the assertion attribute are to\n            have the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>"
+                        "smithy.api#documentation": "<p>If the workspace uses SAML, use this structure to map SAML assertion attributes to workspace user information and define which groups in the assertion attribute are to have the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>"
                     }
                 }
             }
@@ -4084,7 +4100,7 @@
                 "authentication": {
                     "target": "com.amazonaws.grafana#AuthenticationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that describes the user authentication for this workspace after the update\n            is made.</p>",
+                        "smithy.api#documentation": "<p>A structure that describes the user authentication for this workspace after the update is made.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4133,7 +4149,7 @@
                 "configuration": {
                     "target": "com.amazonaws.grafana#OverridableConfigurationJson",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new configuration string for the workspace. For more information about the format\n            and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana\n                workspace</a>.</p>",
+                        "smithy.api#documentation": "<p>The new configuration string for the workspace. For more information about the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana workspace</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4148,7 +4164,7 @@
                 "grafanaVersion": {
                     "target": "com.amazonaws.grafana#GrafanaVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the workspace. If not specified, \n            keeps the current version of the workspace.</p>\n         <p>Can only be used to upgrade (for example, from 8.4 to 9.4), not\n            downgrade (for example, from 9.4 to 8.4).</p>\n         <p>To know what versions are available to upgrade to for a specific workspace, see \n            the <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html\">ListVersions</a> operation.</p>"
+                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the workspace. If not specified, keeps the current version of the workspace.</p> <p>Can only be used to upgrade (for example, from 8.4 to 9.4), not downgrade (for example, from 9.4 to 8.4).</p> <p>To know what versions are available to upgrade to for a specific workspace, see the <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html\">ListVersions</a> operation.</p>"
                     }
                 }
             }
@@ -4163,25 +4179,25 @@
                 "accountAccessType": {
                     "target": "com.amazonaws.grafana#AccountAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this\n                Amazon Web Services account only, or whether it can also access Amazon Web Services\n            resources in other accounts in the same organization. If you specify\n                <code>ORGANIZATION</code>, you must specify which organizational units the workspace\n            can access in the <code>workspaceOrganizationalUnits</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must specify which organizational units the workspace can access in the <code>workspaceOrganizationalUnits</code> parameter.</p>"
                     }
                 },
                 "organizationRoleName": {
                     "target": "com.amazonaws.grafana#OrganizationRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an IAM role that already exists to use to access resources\n            through Organizations. This can only be used with a workspace that has the \n            <code>permissionType</code> set to <code>CUSTOMER_MANAGED</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of an IAM role that already exists to use to access resources through Organizations. This can only be used with a workspace that has the <code>permissionType</code> set to <code>CUSTOMER_MANAGED</code>.</p>"
                     }
                 },
                 "permissionType": {
                     "target": "com.amazonaws.grafana#PermissionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter if you want to change a workspace from <code>SERVICE_MANAGED</code>\n            to <code>CUSTOMER_MANAGED</code>. This allows you to manage the permissions that the \n            workspace uses to access datasources and notification channels. If the workspace is\n            in a member Amazon Web Services account of an organization, and that account is not\n            a delegated administrator account, and you want the workspace to access data sources in \n            other Amazon Web Services accounts in the organization, you must choose \n            <code>CUSTOMER_MANAGED</code>.</p>\n         <p>If you specify this as <code>CUSTOMER_MANAGED</code>, you must also specify a \n            <code>workspaceRoleArn</code> that the workspace will use for accessing Amazon Web Services\n            resources.</p>\n         <p>For more information on the role and permissions needed, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources \n            and notification channels</a>\n         </p>\n         <note>\n            <p>Do not use this to convert a <code>CUSTOMER_MANAGED</code> workspace to\n                <code>SERVICE_MANAGED</code>. Do not include this \n                parameter if you want to leave the workspace as <code>SERVICE_MANAGED</code>.</p>\n            <p>You can convert a <code>CUSTOMER_MANAGED</code> workspace to \n                <code>SERVICE_MANAGED</code> using the Amazon Managed Grafana console. For more \n                information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html\">Managing permissions for data sources and notification channels</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Use this parameter if you want to change a workspace from <code>SERVICE_MANAGED</code> to <code>CUSTOMER_MANAGED</code>. This allows you to manage the permissions that the workspace uses to access datasources and notification channels. If the workspace is in a member Amazon Web Services account of an organization, and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>If you specify this as <code>CUSTOMER_MANAGED</code>, you must also specify a <code>workspaceRoleArn</code> that the workspace will use for accessing Amazon Web Services resources.</p> <p>For more information on the role and permissions needed, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p> <note> <p>Do not use this to convert a <code>CUSTOMER_MANAGED</code> workspace to <code>SERVICE_MANAGED</code>. Do not include this parameter if you want to leave the workspace as <code>SERVICE_MANAGED</code>.</p> <p>You can convert a <code>CUSTOMER_MANAGED</code> workspace to <code>SERVICE_MANAGED</code> using the Amazon Managed Grafana console. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html\">Managing permissions for data sources and notification channels</a>.</p> </note>"
                     }
                 },
                 "stackSetName": {
                     "target": "com.amazonaws.grafana#StackSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the CloudFormation stack set to use to generate IAM\n            roles to be used for this workspace.</p>"
+                        "smithy.api#documentation": "<p>The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.</p>"
                     }
                 },
                 "workspaceDataSources": {
@@ -4193,7 +4209,7 @@
                 "workspaceDescription": {
                     "target": "com.amazonaws.grafana#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the workspace. This is used only to help you identify this\n            workspace.</p>"
+                        "smithy.api#documentation": "<p>A description for the workspace. This is used only to help you identify this workspace.</p>"
                     }
                 },
                 "workspaceId": {
@@ -4213,43 +4229,43 @@
                 "workspaceNotificationDestinations": {
                     "target": "com.amazonaws.grafana#NotificationDestinationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the Amazon Web Services notification channels that you plan to use in this\n            workspace. Specifying these data sources here enables Amazon Managed Grafana to create\n                IAM roles and permissions that allow Amazon Managed Grafana to use these\n            channels.</p>"
+                        "smithy.api#documentation": "<p>Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to use these channels.</p>"
                     }
                 },
                 "workspaceOrganizationalUnits": {
                     "target": "com.amazonaws.grafana#OrganizationalUnitList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the organizational units that this workspace is allowed to use data sources\n            from, if this workspace is in an account that is part of an organization.</p>"
+                        "smithy.api#documentation": "<p>Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.</p>"
                     }
                 },
                 "workspaceRoleArn": {
                     "target": "com.amazonaws.grafana#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an IAM role that grants permissions to Amazon Web Services\n            resources that the workspace accesses, such as data sources and notification channels.\n            If this workspace has <code>permissionType</code>\n            <code>CUSTOMER_MANAGED</code>,\n            then this role is required.</p>"
+                        "smithy.api#documentation": "<p>Specifies an IAM role that grants permissions to Amazon Web Services resources that the workspace accesses, such as data sources and notification channels. If this workspace has <code>permissionType</code> <code>CUSTOMER_MANAGED</code>, then this role is required.</p>"
                     }
                 },
                 "vpcConfiguration": {
                     "target": "com.amazonaws.grafana#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for\n            your Grafana workspace to connect to.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.</p>"
                     }
                 },
                 "removeVpcConfiguration": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to remove the VPC configuration from the workspace.</p>\n         <p>Setting this to <code>true</code> and providing a <code>vpcConfiguration</code> to set\n            will return an error.</p>"
+                        "smithy.api#documentation": "<p>Whether to remove the VPC configuration from the workspace.</p> <p>Setting this to <code>true</code> and providing a <code>vpcConfiguration</code> to set will return an error.</p>"
                     }
                 },
                 "networkAccessControl": {
                     "target": "com.amazonaws.grafana#NetworkAccessConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for network access to your workspace.</p>\n         <p>When this is configured, only listed IP addresses and VPC endpoints will be able to\n            access your workspace. Standard Grafana authentication and authorization will still be\n            required.</p>\n         <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will\n            be allowed. Standard Grafana authentication and authorization will still be\n            required.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings for network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>"
                     }
                 },
                 "removeNetworkAccessConfiguration": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to remove the network access configuration from the workspace.</p>\n         <p>Setting this to <code>true</code> and providing a <code>networkAccessControl</code> to\n            set will return an error.</p>\n         <p>If you remove this configuration by setting this to <code>true</code>, then all IP\n            addresses and VPC endpoints will be allowed. Standard Grafana authentication and\n            authorization will still be required.</p>"
+                        "smithy.api#documentation": "<p>Whether to remove the network access configuration from the workspace.</p> <p>Setting this to <code>true</code> and providing a <code>networkAccessControl</code> to set will return an error.</p> <p>If you remove this configuration by setting this to <code>true</code>, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>"
                     }
                 }
             }
@@ -4272,7 +4288,7 @@
                 "id": {
                     "target": "com.amazonaws.grafana#SsoId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the user or group.</p>\n         <p>Pattern:\n                <code>^([0-9a-fA-F]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The ID of the user or group.</p> <p>Pattern: <code>^([0-9a-fA-F]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$</code> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4360,7 +4376,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains information about a request parameter that caused an\n            error.</p>"
+                "smithy.api#documentation": "<p>A structure that contains information about a request parameter that caused an error.</p>"
             }
         },
         "com.amazonaws.grafana#ValidationExceptionFieldList": {
@@ -4398,20 +4414,20 @@
                 "securityGroupIds": {
                     "target": "com.amazonaws.grafana#SecurityGroupIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of Amazon EC2 security group IDs attached to the Amazon VPC\n            for your Grafana workspace to connect. Duplicates not allowed.</p>",
+                        "smithy.api#documentation": "<p>The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "subnetIds": {
                     "target": "com.amazonaws.grafana#SubnetIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of Amazon EC2 subnet IDs created in the Amazon VPC for your\n            Grafana workspace to connect. Duplicates not allowed.</p>",
+                        "smithy.api#documentation": "<p>The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for\n            your Grafana workspace to connect to.</p>\n         <note>\n            <p>Provided <code>securityGroupIds</code> and <code>subnetIds</code> must be part of\n                the same VPC.</p>\n            <p>Connecting to a private VPC is not yet available in the Asia Pacific (Seoul) \n                Region (ap-northeast-2).</p>\n         </note>"
+                "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.</p> <note> <p>Provided <code>securityGroupIds</code> and <code>subnetIds</code> must be part of the same VPC.</p> <p>Connecting to a private VPC is not yet available in the Asia Pacific (Seoul) Region (ap-northeast-2).</p> </note>"
             }
         },
         "com.amazonaws.grafana#VpceId": {
@@ -4464,7 +4480,7 @@
                 "accountAccessType": {
                     "target": "com.amazonaws.grafana#AccountAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this\n                Amazon Web Services account only, or whether it can also access Amazon Web Services\n            resources in other accounts in the same organization. If this is\n                <code>ORGANIZATION</code>, the <code>workspaceOrganizationalUnits</code> parameter\n            specifies which organizational units the workspace can access.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If this is <code>ORGANIZATION</code>, the <code>workspaceOrganizationalUnits</code> parameter specifies which organizational units the workspace can access.</p>"
                     }
                 },
                 "created": {
@@ -4477,7 +4493,7 @@
                 "dataSources": {
                     "target": "com.amazonaws.grafana#DataSourceTypesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services data sources that have been configured to have\n                IAM roles and permissions created to allow Amazon Managed Grafana to read\n            data from these sources.</p>\n         <p>This list is only used when the workspace was created through the Amazon Web Services\n            console, and the <code>permissionType</code> is <code>SERVICE_MANAGED</code>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services data sources that have been configured to have IAM roles and permissions created to allow Amazon Managed Grafana to read data from these sources.</p> <p>This list is only used when the workspace was created through the Amazon Web Services console, and the <code>permissionType</code> is <code>SERVICE_MANAGED</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4524,25 +4540,25 @@
                 "organizationRoleName": {
                     "target": "com.amazonaws.grafana#OrganizationRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM role that is used to access resources through\n                Organizations.</p>"
+                        "smithy.api#documentation": "<p>The name of the IAM role that is used to access resources through Organizations.</p>"
                     }
                 },
                 "notificationDestinations": {
                     "target": "com.amazonaws.grafana#NotificationDestinationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically\n            create IAM roles and permissions for, to allow Amazon Managed Grafana to use\n            these channels.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically create IAM roles and permissions for, to allow Amazon Managed Grafana to use these channels.</p>"
                     }
                 },
                 "organizationalUnits": {
                     "target": "com.amazonaws.grafana#OrganizationalUnitList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the organizational units that this workspace is allowed to use data sources\n            from, if this workspace is in an account that is part of an organization.</p>"
+                        "smithy.api#documentation": "<p>Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.</p>"
                     }
                 },
                 "permissionType": {
                     "target": "com.amazonaws.grafana#PermissionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this is <code>SERVICE_MANAGED</code>, and the workplace was created through the \n            Amazon Managed Grafana console, then Amazon Managed Grafana automatically creates the\n            IAM roles and provisions the permissions that the workspace needs to\n            use Amazon Web Services data sources and notification channels.</p>\n         <p>If this is <code>CUSTOMER_MANAGED</code>, you must manage those roles and permissions\n            yourself.</p>\n         <p>If you are working with a workspace in a member account of an organization and\n            that account is not a delegated administrator account, and you want the workspace to\n            access data sources in other Amazon Web Services accounts in the organization, this\n            parameter must be set to <code>CUSTOMER_MANAGED</code>.</p>\n         <p>For more information about converting between customer and service managed, see\n            <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html\">Managing permissions for data sources and notification channels</a>. For more\n            information about the roles and permissions that must be managed for customer managed \n            workspaces, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana\n            permissions and policies for Amazon Web Services data sources and notification\n            channels</a>\n         </p>"
+                        "smithy.api#documentation": "<p>If this is <code>SERVICE_MANAGED</code>, and the workplace was created through the Amazon Managed Grafana console, then Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If this is <code>CUSTOMER_MANAGED</code>, you must manage those roles and permissions yourself.</p> <p>If you are working with a workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, this parameter must be set to <code>CUSTOMER_MANAGED</code>.</p> <p>For more information about converting between customer and service managed, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html\">Managing permissions for data sources and notification channels</a>. For more information about the roles and permissions that must be managed for customer managed workspaces, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>"
                     }
                 },
                 "stackSetName": {
@@ -4561,37 +4577,37 @@
                 "workspaceRoleArn": {
                     "target": "com.amazonaws.grafana#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that grants permissions to the Amazon Web Services\n            resources that the workspace will view data from. This role must already exist.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. This role must already exist.</p>"
                     }
                 },
                 "licenseType": {
                     "target": "com.amazonaws.grafana#LicenseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace has a full Grafana Enterprise license.</p>\n         <note>\n            <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether this workspace has a full Grafana Enterprise license.</p> <note> <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p> </note>"
                     }
                 },
                 "freeTrialConsumed": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace has already fully used its free trial for Grafana\n            Enterprise.</p>\n         <note>\n            <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether this workspace has already fully used its free trial for Grafana Enterprise.</p> <note> <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p> </note>"
                     }
                 },
                 "licenseExpiration": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this workspace has a full Grafana Enterprise license purchased through \n            Amazon Web Services Marketplace, this specifies when the\n            license ends and will need to be renewed. Purchasing the Enterprise plugins option \n            through Amazon Managed Grafana does not have an expiration. It is valid until the \n            license is removed.</p>"
+                        "smithy.api#documentation": "<p>If this workspace has a full Grafana Enterprise license purchased through Amazon Web Services Marketplace, this specifies when the license ends and will need to be renewed. Purchasing the Enterprise plugins option through Amazon Managed Grafana does not have an expiration. It is valid until the license is removed.</p>"
                     }
                 },
                 "freeTrialExpiration": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this workspace is currently in the free trial period for Grafana Enterprise, this\n            value specifies when that free trial ends.</p>\n         <note>\n            <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>If this workspace is currently in the free trial period for Grafana Enterprise, this value specifies when that free trial ends.</p> <note> <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p> </note>"
                     }
                 },
                 "authentication": {
                     "target": "com.amazonaws.grafana#AuthenticationSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or\n            both methods for user authentication.</p>",
+                        "smithy.api#documentation": "<p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or both methods for user authentication.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4616,12 +4632,18 @@
                 "grafanaToken": {
                     "target": "com.amazonaws.grafana#GrafanaToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, \n            see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Link your account with Grafana Labs</a>.</p>"
+                        "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Link your account with Grafana Labs</a>.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.grafana#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the Key Management Service key used for encrypting workspace data.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing information about an Amazon Managed Grafana workspace in your\n            account.</p>"
+                "smithy.api#documentation": "<p>A structure containing information about an Amazon Managed Grafana workspace in your account.</p>"
             }
         },
         "com.amazonaws.grafana#WorkspaceId": {
@@ -4768,7 +4790,7 @@
                 "notificationDestinations": {
                     "target": "com.amazonaws.grafana#NotificationDestinationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically\n            create IAM roles and permissions for, which allows Amazon Managed Grafana to\n            use these channels.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically create IAM roles and permissions for, which allows Amazon Managed Grafana to use these channels.</p>"
                     }
                 },
                 "status": {
@@ -4781,7 +4803,7 @@
                 "authentication": {
                     "target": "com.amazonaws.grafana#AuthenticationSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing information about the authentication methods used in the\n            workspace.</p>",
+                        "smithy.api#documentation": "<p>A structure containing information about the authentication methods used in the workspace.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4794,13 +4816,13 @@
                 "licenseType": {
                     "target": "com.amazonaws.grafana#LicenseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace has a full Grafana Enterprise license.</p>\n         <note>\n            <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether this workspace has a full Grafana Enterprise license.</p> <note> <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p> </note>"
                     }
                 },
                 "grafanaToken": {
                     "target": "com.amazonaws.grafana#GrafanaToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, \n            see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Link your account with Grafana Labs</a>.</p>"
+                        "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Link your account with Grafana Labs</a>.</p>"
                     }
                 }
             },

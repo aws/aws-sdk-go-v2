@@ -1,3 +1,7 @@
+# v1.116.0 (2026-02-17)
+
+* **Feature**: Adds support for the StorageEncryptionType field to specify encryption type for DB clusters, DB instances, snapshots, automated backups, and global clusters.
+
 # v1.115.0 (2026-02-10.2)
 
 * **Feature**: This release adds backup configuration for RDS and Aurora restores, letting customers set backup retention period and preferred backup window during restore. It also enables viewing backup settings when describing snapshots or automated backups for instances and clusters.

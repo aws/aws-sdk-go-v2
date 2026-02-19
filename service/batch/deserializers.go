@@ -2843,6 +2843,11 @@ func awsRestjson1_deserializeOpDocumentDescribeServiceJobOutput(v **DescribeServ
 				return err
 			}
 
+		case "capacityUsage":
+			if err := awsRestjson1_deserializeDocumentServiceJobCapacityUsageDetailList(&sv.CapacityUsage, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2909,6 +2914,19 @@ func awsRestjson1_deserializeOpDocumentDescribeServiceJobOutput(v **DescribeServ
 		case "retryStrategy":
 			if err := awsRestjson1_deserializeDocumentServiceJobRetryStrategy(&sv.RetryStrategy, value); err != nil {
 				return err
+			}
+
+		case "scheduledAt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScheduledAt = ptr.Int64(i64)
 			}
 
 		case "schedulingPriority":
@@ -3157,6 +3175,11 @@ func awsRestjson1_deserializeOpDocumentGetJobQueueSnapshotOutput(v **GetJobQueue
 		switch key {
 		case "frontOfQueue":
 			if err := awsRestjson1_deserializeDocumentFrontOfQueueDetail(&sv.FrontOfQueue, value); err != nil {
+				return err
+			}
+
+		case "queueUtilization":
+			if err := awsRestjson1_deserializeDocumentQueueSnapshotUtilizationDetail(&sv.QueueUtilization, value); err != nil {
 				return err
 			}
 
@@ -10202,6 +10225,193 @@ func awsRestjson1_deserializeDocumentEvaluateOnExitList(v *[]types.EvaluateOnExi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFairshareCapacityUsage(v **types.FairshareCapacityUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FairshareCapacityUsage
+	if *v == nil {
+		sv = &types.FairshareCapacityUsage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CapacityUnit = ptr.String(jtv)
+			}
+
+		case "quantity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFairshareCapacityUsageList(v *[]types.FairshareCapacityUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FairshareCapacityUsage
+	if *v == nil {
+		cv = []types.FairshareCapacityUsage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FairshareCapacityUsage
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFairshareCapacityUsage(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFairshareCapacityUtilization(v **types.FairshareCapacityUtilization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FairshareCapacityUtilization
+	if *v == nil {
+		sv = &types.FairshareCapacityUtilization{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityUsage":
+			if err := awsRestjson1_deserializeDocumentFairshareCapacityUsageList(&sv.CapacityUsage, value); err != nil {
+				return err
+			}
+
+		case "shareIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ShareIdentifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFairshareCapacityUtilizationList(v *[]types.FairshareCapacityUtilization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FairshareCapacityUtilization
+	if *v == nil {
+		cv = []types.FairshareCapacityUtilization{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FairshareCapacityUtilization
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFairshareCapacityUtilization(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFairsharePolicy(v **types.FairsharePolicy, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10252,6 +10462,55 @@ func awsRestjson1_deserializeDocumentFairsharePolicy(v **types.FairsharePolicy, 
 
 		case "shareDistribution":
 			if err := awsRestjson1_deserializeDocumentShareAttributesList(&sv.ShareDistribution, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFairshareUtilizationDetail(v **types.FairshareUtilizationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FairshareUtilizationDetail
+	if *v == nil {
+		sv = &types.FairshareUtilizationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "activeShareCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ActiveShareCount = ptr.Int64(i64)
+			}
+
+		case "topCapacityUtilization":
+			if err := awsRestjson1_deserializeDocumentFairshareCapacityUtilizationList(&sv.TopCapacityUtilization, value); err != nil {
 				return err
 			}
 
@@ -10625,6 +10884,114 @@ func awsRestjson1_deserializeDocumentImagePullSecrets(v *[]types.ImagePullSecret
 		var col types.ImagePullSecret
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentImagePullSecret(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJobCapacityUsageSummary(v **types.JobCapacityUsageSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JobCapacityUsageSummary
+	if *v == nil {
+		sv = &types.JobCapacityUsageSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CapacityUnit = ptr.String(jtv)
+			}
+
+		case "quantity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJobCapacityUsageSummaryList(v *[]types.JobCapacityUsageSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.JobCapacityUsageSummary
+	if *v == nil {
+		cv = []types.JobCapacityUsageSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.JobCapacityUsageSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentJobCapacityUsageSummary(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -11497,6 +11864,11 @@ func awsRestjson1_deserializeDocumentJobSummary(v **types.JobSummary, value inte
 				return err
 			}
 
+		case "capacityUsage":
+			if err := awsRestjson1_deserializeDocumentJobCapacityUsageSummaryList(&sv.CapacityUsage, value); err != nil {
+				return err
+			}
+
 		case "container":
 			if err := awsRestjson1_deserializeDocumentContainerSummary(&sv.Container, value); err != nil {
 				return err
@@ -11554,6 +11926,28 @@ func awsRestjson1_deserializeDocumentJobSummary(v **types.JobSummary, value inte
 		case "nodeProperties":
 			if err := awsRestjson1_deserializeDocumentNodePropertiesSummary(&sv.NodeProperties, value); err != nil {
 				return err
+			}
+
+		case "scheduledAt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScheduledAt = ptr.Int64(i64)
+			}
+
+		case "shareIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ShareIdentifier = ptr.String(jtv)
 			}
 
 		case "startedAt":
@@ -13077,6 +13471,168 @@ func awsRestjson1_deserializeDocumentPlatformCapabilityList(v *[]types.PlatformC
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentQueueSnapshotCapacityUsage(v **types.QueueSnapshotCapacityUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueueSnapshotCapacityUsage
+	if *v == nil {
+		sv = &types.QueueSnapshotCapacityUsage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CapacityUnit = ptr.String(jtv)
+			}
+
+		case "quantity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQueueSnapshotCapacityUsageList(v *[]types.QueueSnapshotCapacityUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.QueueSnapshotCapacityUsage
+	if *v == nil {
+		cv = []types.QueueSnapshotCapacityUsage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.QueueSnapshotCapacityUsage
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentQueueSnapshotCapacityUsage(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQueueSnapshotUtilizationDetail(v **types.QueueSnapshotUtilizationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueueSnapshotUtilizationDetail
+	if *v == nil {
+		sv = &types.QueueSnapshotUtilizationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fairshareUtilization":
+			if err := awsRestjson1_deserializeDocumentFairshareUtilizationDetail(&sv.FairshareUtilization, value); err != nil {
+				return err
+			}
+
+		case "lastUpdatedAt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LastUpdatedAt = ptr.Int64(i64)
+			}
+
+		case "totalCapacityUsage":
+			if err := awsRestjson1_deserializeDocumentQueueSnapshotCapacityUsageList(&sv.TotalCapacityUsage, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRepositoryCredentials(v **types.RepositoryCredentials, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13900,6 +14456,222 @@ func awsRestjson1_deserializeDocumentServiceJobAttemptDetails(v *[]types.Service
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentServiceJobCapacityUsageDetail(v **types.ServiceJobCapacityUsageDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceJobCapacityUsageDetail
+	if *v == nil {
+		sv = &types.ServiceJobCapacityUsageDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CapacityUnit = ptr.String(jtv)
+			}
+
+		case "quantity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceJobCapacityUsageDetailList(v *[]types.ServiceJobCapacityUsageDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ServiceJobCapacityUsageDetail
+	if *v == nil {
+		cv = []types.ServiceJobCapacityUsageDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ServiceJobCapacityUsageDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentServiceJobCapacityUsageDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceJobCapacityUsageSummary(v **types.ServiceJobCapacityUsageSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceJobCapacityUsageSummary
+	if *v == nil {
+		sv = &types.ServiceJobCapacityUsageSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CapacityUnit = ptr.String(jtv)
+			}
+
+		case "quantity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceJobCapacityUsageSummaryList(v *[]types.ServiceJobCapacityUsageSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ServiceJobCapacityUsageSummary
+	if *v == nil {
+		cv = []types.ServiceJobCapacityUsageSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ServiceJobCapacityUsageSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentServiceJobCapacityUsageSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceJobEvaluateOnExit(v **types.ServiceJobEvaluateOnExit, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14054,6 +14826,11 @@ func awsRestjson1_deserializeDocumentServiceJobSummary(v **types.ServiceJobSumma
 
 	for key, value := range shape {
 		switch key {
+		case "capacityUsage":
+			if err := awsRestjson1_deserializeDocumentServiceJobCapacityUsageSummaryList(&sv.CapacityUsage, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14097,6 +14874,19 @@ func awsRestjson1_deserializeDocumentServiceJobSummary(v **types.ServiceJobSumma
 		case "latestAttempt":
 			if err := awsRestjson1_deserializeDocumentLatestServiceJobAttempt(&sv.LatestAttempt, value); err != nil {
 				return err
+			}
+
+		case "scheduledAt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScheduledAt = ptr.Int64(i64)
 			}
 
 		case "serviceJobType":

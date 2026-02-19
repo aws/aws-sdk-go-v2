@@ -8530,6 +8530,11 @@ func awsRestjson1_serializeDocumentAthenaTableReference(v *types.AthenaTableRefe
 	object := value.Object()
 	defer object.Close()
 
+	if v.CatalogName != nil {
+		ok := object.Key("catalogName")
+		ok.String(*v.CatalogName)
+	}
+
 	if v.DatabaseName != nil {
 		ok := object.Key("databaseName")
 		ok.String(*v.DatabaseName)

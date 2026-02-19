@@ -1,3 +1,7 @@
+# v1.233.0 (2026-02-13)
+
+* **Feature**: Enable g7e instance type support for SageMaker Processing, and enable single file configuration provisioning for HyperPod Slurm, where customers have the option to use HyperPod API to provide the provisioning parameters.
+
 # v1.232.0 (2026-02-06)
 
 * **Feature**: Adding g7e instance support in Sagemaker Training

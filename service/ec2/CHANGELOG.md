@@ -1,3 +1,23 @@
+# v1.290.0 (2026-02-17)
+
+* **Feature**: Add Operator field to CreatePlacementGroup and DescribePlacementGroup APIs.
+
+# v1.289.1 (2026-02-16)
+
+* **Documentation**: Documentation updates for EC2 Secondary Networks
+
+# v1.289.0 (2026-02-13)
+
+* **Feature**: This release adds geography information to EC2 region and availability zone APIs. DescribeRegions now includes a Geography field, while DescribeAvailabilityZones includes both Geography and SubGeography fields, enabling better geographic classification for AWS regions and zones.
+
+# v1.288.0 (2026-02-12)
+
+* **Feature**: Launching nested virtualization. This feature allows you to run nested VMs inside virtual (non-bare metal) EC2 instances.
+
+# v1.287.0 (2026-02-11)
+
+* **Feature**: R8i instances powered by custom Intel Xeon 6 processors available only on AWS with sustained all-core 3.9 GHz turbo frequency
+
 # v1.286.0 (2026-02-10)
 
 * **Feature**: Amazon Secondary Networks is a networking feature that provides high-performance, low-latency connectivity for specialized workloads.

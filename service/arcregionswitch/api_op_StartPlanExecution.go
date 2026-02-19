@@ -12,11 +12,10 @@ import (
 )
 
 // Starts the execution of a Region switch plan. You can execute a plan in either
-// PRACTICE or RECOVERY mode.
+// graceful or ungraceful mode.
 //
-// In PRACTICE mode, the execution simulates the steps without making actual
-// changes to your application's traffic routing. In RECOVERY mode, the execution
-// performs actual changes to shift traffic between Regions.
+// Specifing ungraceful mode either changes the behavior of the execution blocks
+// in a workflow or skips specific execution blocks.
 func (c *Client) StartPlanExecution(ctx context.Context, params *StartPlanExecutionInput, optFns ...func(*Options)) (*StartPlanExecutionOutput, error) {
 	if params == nil {
 		params = &StartPlanExecutionInput{}

@@ -614,6 +614,18 @@ func TestCheckSnapshot_CreateIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateNotification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNotification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateParticipant(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateParticipant(context.Background(), nil, func(o *Options) {
@@ -1058,6 +1070,18 @@ func TestCheckSnapshot_DeleteIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteNotification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNotification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeletePredefinedAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeletePredefinedAttribute(context.Background(), nil, func(o *Options) {
@@ -1483,6 +1507,18 @@ func TestCheckSnapshot_DescribeInstanceStorageConfig(t *testing.T) {
 	_, err := svc.DescribeInstanceStorageConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeInstanceStorageConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeNotification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNotification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeNotification")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2486,6 +2522,18 @@ func TestCheckSnapshot_ListLexBots(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListNotifications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNotifications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNotifications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPhoneNumbers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPhoneNumbers(context.Background(), nil, func(o *Options) {
@@ -2798,6 +2846,18 @@ func TestCheckSnapshot_ListUserHierarchyGroups(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListUserNotifications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUserNotifications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListUserNotifications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListUserProficiencies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUserProficiencies(context.Background(), nil, func(o *Options) {
@@ -3091,6 +3151,18 @@ func TestCheckSnapshot_SearchHoursOfOperations(t *testing.T) {
 	_, err := svc.SearchHoursOfOperations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchHoursOfOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchNotifications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchNotifications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchNotifications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3866,6 +3938,18 @@ func TestCheckSnapshot_UpdateInstanceStorageConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateNotificationContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNotificationContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateNotificationContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateParticipantAuthentication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateParticipantAuthentication(context.Background(), nil, func(o *Options) {
@@ -4207,6 +4291,18 @@ func TestCheckSnapshot_UpdateUserIdentityInfo(t *testing.T) {
 	_, err := svc.UpdateUserIdentityInfo(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateUserIdentityInfo")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateUserNotificationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateUserNotificationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateUserNotificationStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4885,6 +4981,18 @@ func TestUpdateSnapshot_CreateIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateNotification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNotification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateParticipant(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateParticipant(context.Background(), nil, func(o *Options) {
@@ -5329,6 +5437,18 @@ func TestUpdateSnapshot_DeleteIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteNotification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNotification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeletePredefinedAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeletePredefinedAttribute(context.Background(), nil, func(o *Options) {
@@ -5754,6 +5874,18 @@ func TestUpdateSnapshot_DescribeInstanceStorageConfig(t *testing.T) {
 	_, err := svc.DescribeInstanceStorageConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeInstanceStorageConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeNotification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNotification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeNotification")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6757,6 +6889,18 @@ func TestUpdateSnapshot_ListLexBots(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListNotifications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNotifications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNotifications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListPhoneNumbers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPhoneNumbers(context.Background(), nil, func(o *Options) {
@@ -7069,6 +7213,18 @@ func TestUpdateSnapshot_ListUserHierarchyGroups(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListUserNotifications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUserNotifications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListUserNotifications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListUserProficiencies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUserProficiencies(context.Background(), nil, func(o *Options) {
@@ -7362,6 +7518,18 @@ func TestUpdateSnapshot_SearchHoursOfOperations(t *testing.T) {
 	_, err := svc.SearchHoursOfOperations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchHoursOfOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchNotifications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchNotifications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchNotifications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8137,6 +8305,18 @@ func TestUpdateSnapshot_UpdateInstanceStorageConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateNotificationContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNotificationContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateNotificationContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateParticipantAuthentication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateParticipantAuthentication(context.Background(), nil, func(o *Options) {
@@ -8478,6 +8658,18 @@ func TestUpdateSnapshot_UpdateUserIdentityInfo(t *testing.T) {
 	_, err := svc.UpdateUserIdentityInfo(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateUserIdentityInfo")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateUserNotificationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateUserNotificationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateUserNotificationStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

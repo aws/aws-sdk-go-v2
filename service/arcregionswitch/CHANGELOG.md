@@ -1,3 +1,7 @@
+# v1.5.1 (2026-02-16)
+
+* **Documentation**: Clarify documentation on ARC Region Switch start-plan-execution operation
+
 # v1.5.0 (2026-02-05)
 
 * **Feature**: Updates documentation for ARC Region switch and provides stronger validation for Amazon Aurora Global Database execution block parameters.

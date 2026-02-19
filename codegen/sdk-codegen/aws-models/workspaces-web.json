@@ -1463,8 +1463,7 @@
                 "wallpaper": {
                     "target": "com.amazonaws.workspacesweb#ImageMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata for the wallpaper image file, including the MIME type, file extension, and upload timestamp.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Metadata for the wallpaper image file, including the MIME type, file extension, and upload timestamp.</p>"
                     }
                 },
                 "favicon": {
@@ -1512,9 +1511,7 @@
                 "wallpaper": {
                     "target": "com.amazonaws.workspacesweb#WallpaperImageInput",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The wallpaper image for the portal. Provide either a binary image file or an S3 URI pointing to the image file. Maximum 5 MB in JPEG or PNG format.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The wallpaper image for the portal. Provide either a binary image file or an S3 URI pointing to the image file. Maximum 5 MB in JPEG or PNG format. If not provided, a default wallpaper will be used as the background image.</p>"
                     }
                 },
                 "favicon": {
@@ -3324,7 +3321,7 @@
                 "brandingConfigurationInput": {
                     "target": "com.amazonaws.workspacesweb#BrandingConfigurationCreateInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The branding configuration input that customizes the appearance of the web portal for end users. This includes a custom logo, favicon, wallpaper, localized strings, color theme, and an optional terms of service.</p>",
+                        "smithy.api#documentation": "<p>The branding configuration input that customizes the appearance of the web portal for end users. This includes a custom logo, favicon, localized strings, color theme, and optionally a wallpaper and terms of service.</p>",
                         "smithy.api#notProperty": {}
                     }
                 },
@@ -8293,7 +8290,7 @@
                     "min": 1,
                     "max": 253
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\\.)+[a-zA-Z0-9]+$"
+                "smithy.api#pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"
             }
         },
         "com.amazonaws.workspacesweb#PortalId": {
@@ -10683,7 +10680,7 @@
                 "brandingConfigurationInput": {
                     "target": "com.amazonaws.workspacesweb#BrandingConfigurationUpdateInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The branding configuration that customizes the appearance of the web portal for end users. When updating user settings without an existing branding configuration, all fields (logo, favicon, wallpaper, localized strings, and color theme) are required except for terms of service. When updating user settings with an existing branding configuration, all fields are optional.</p>",
+                        "smithy.api#documentation": "<p>The branding configuration that customizes the appearance of the web portal for end users. When updating user settings without an existing branding configuration, all fields (logo, favicon, localized strings, and color theme) are required except for wallpaper and terms of service. When updating user settings with an existing branding configuration, all fields are optional.</p>",
                         "smithy.api#notProperty": {}
                     }
                 },

@@ -34,17 +34,15 @@ type BrandingConfiguration struct {
 	// This member is required.
 	Logo *ImageMetadata
 
-	// Metadata for the wallpaper image file, including the MIME type, file extension,
-	// and upload timestamp.
-	//
-	// This member is required.
-	Wallpaper *ImageMetadata
-
 	// The terms of service text in Markdown format that users must accept before
 	// accessing the portal.
 	//
 	// This value conforms to the media type: text/markdown
 	TermsOfService *string
+
+	// Metadata for the wallpaper image file, including the MIME type, file extension,
+	// and upload timestamp.
+	Wallpaper *ImageMetadata
 
 	noSmithyDocumentSerde
 }
@@ -76,17 +74,16 @@ type BrandingConfigurationCreateInput struct {
 	// This member is required.
 	Logo IconImageInput
 
-	// The wallpaper image for the portal. Provide either a binary image file or an S3
-	// URI pointing to the image file. Maximum 5 MB in JPEG or PNG format.
-	//
-	// This member is required.
-	Wallpaper WallpaperImageInput
-
 	// The terms of service text in Markdown format. Users will be presented with the
 	// terms of service after successfully signing in.
 	//
 	// This value conforms to the media type: text/markdown
 	TermsOfService *string
+
+	// The wallpaper image for the portal. Provide either a binary image file or an S3
+	// URI pointing to the image file. Maximum 5 MB in JPEG or PNG format. If not
+	// provided, a default wallpaper will be used as the background image.
+	Wallpaper WallpaperImageInput
 
 	noSmithyDocumentSerde
 }

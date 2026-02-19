@@ -5069,6 +5069,19 @@ const (
 	InstanceTypeG7e12xlarge        InstanceType = "g7e.12xlarge"
 	InstanceTypeG7e24xlarge        InstanceType = "g7e.24xlarge"
 	InstanceTypeG7e48xlarge        InstanceType = "g7e.48xlarge"
+	InstanceTypeR8idLarge          InstanceType = "r8id.large"
+	InstanceTypeR8idXlarge         InstanceType = "r8id.xlarge"
+	InstanceTypeR8id2xlarge        InstanceType = "r8id.2xlarge"
+	InstanceTypeR8id4xlarge        InstanceType = "r8id.4xlarge"
+	InstanceTypeR8id8xlarge        InstanceType = "r8id.8xlarge"
+	InstanceTypeR8id12xlarge       InstanceType = "r8id.12xlarge"
+	InstanceTypeR8id16xlarge       InstanceType = "r8id.16xlarge"
+	InstanceTypeR8id24xlarge       InstanceType = "r8id.24xlarge"
+	InstanceTypeR8id32xlarge       InstanceType = "r8id.32xlarge"
+	InstanceTypeR8id48xlarge       InstanceType = "r8id.48xlarge"
+	InstanceTypeR8id96xlarge       InstanceType = "r8id.96xlarge"
+	InstanceTypeR8idMetal48xl      InstanceType = "r8id.metal-48xl"
+	InstanceTypeR8idMetal96xl      InstanceType = "r8id.metal-96xl"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -6249,6 +6262,19 @@ func (InstanceType) Values() []InstanceType {
 		"g7e.12xlarge",
 		"g7e.24xlarge",
 		"g7e.48xlarge",
+		"r8id.large",
+		"r8id.xlarge",
+		"r8id.2xlarge",
+		"r8id.4xlarge",
+		"r8id.8xlarge",
+		"r8id.12xlarge",
+		"r8id.16xlarge",
+		"r8id.24xlarge",
+		"r8id.32xlarge",
+		"r8id.48xlarge",
+		"r8id.96xlarge",
+		"r8id.metal-48xl",
+		"r8id.metal-96xl",
 	}
 }
 
@@ -8360,6 +8386,26 @@ func (NatGatewayState) Values() []NatGatewayState {
 		"available",
 		"deleting",
 		"deleted",
+	}
+}
+
+type NestedVirtualizationSpecification string
+
+// Enum values for NestedVirtualizationSpecification
+const (
+	NestedVirtualizationSpecificationEnabled  NestedVirtualizationSpecification = "enabled"
+	NestedVirtualizationSpecificationDisabled NestedVirtualizationSpecification = "disabled"
+)
+
+// Values returns all known values for NestedVirtualizationSpecification. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NestedVirtualizationSpecification) Values() []NestedVirtualizationSpecification {
+	return []NestedVirtualizationSpecification{
+		"enabled",
+		"disabled",
 	}
 }
 
@@ -10831,7 +10877,8 @@ type SupportedAdditionalProcessorFeature string
 
 // Enum values for SupportedAdditionalProcessorFeature
 const (
-	SupportedAdditionalProcessorFeatureAmdSevSnp SupportedAdditionalProcessorFeature = "amd-sev-snp"
+	SupportedAdditionalProcessorFeatureAmdSevSnp            SupportedAdditionalProcessorFeature = "amd-sev-snp"
+	SupportedAdditionalProcessorFeatureNestedVirtualization SupportedAdditionalProcessorFeature = "nested-virtualization"
 )
 
 // Values returns all known values for SupportedAdditionalProcessorFeature. Note
@@ -10842,6 +10889,7 @@ const (
 func (SupportedAdditionalProcessorFeature) Values() []SupportedAdditionalProcessorFeature {
 	return []SupportedAdditionalProcessorFeature{
 		"amd-sev-snp",
+		"nested-virtualization",
 	}
 }
 

@@ -7743,6 +7743,12 @@
                         "smithy.api#documentation": "<p>Indicates whether the DB cluster is encrypted.</p>"
                     }
                 },
+                "StorageEncryptionType": {
+                    "target": "com.amazonaws.rds#StorageEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption used to protect data at rest in the DB cluster. Possible values:</p> <ul> <li> <p> <code>none</code> - The DB cluster is not encrypted.</p> </li> <li> <p> <code>sse-rds</code> - The DB cluster is encrypted using an Amazon Web Services owned KMS key.</p> </li> <li> <p> <code>sse-kms</code> - The DB cluster is encrypted using a customer managed KMS key or Amazon Web Services managed KMS key.</p> </li> </ul>"
+                    }
+                },
                 "KmsKeyId": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
@@ -8153,6 +8159,12 @@
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the source DB cluster is encrypted.</p>"
+                    }
+                },
+                "StorageEncryptionType": {
+                    "target": "com.amazonaws.rds#StorageEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption used to protect data at rest in the automated backup. Possible values:</p> <ul> <li> <p> <code>none</code> - The automated backup is not encrypted.</p> </li> <li> <p> <code>sse-rds</code> - The automated backup is encrypted using an Amazon Web Services owned KMS key.</p> </li> <li> <p> <code>sse-kms</code> - The automated backup is encrypted using a customer managed KMS key or Amazon Web Services managed KMS key.</p> </li> </ul>"
                     }
                 },
                 "AllocatedStorage": {
@@ -9026,6 +9038,12 @@
                         "smithy.api#documentation": "<p>Indicates whether the DB cluster snapshot is encrypted.</p>"
                     }
                 },
+                "StorageEncryptionType": {
+                    "target": "com.amazonaws.rds#StorageEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption used to protect data at rest in the DB cluster snapshot. Possible values:</p> <ul> <li> <p> <code>none</code> - The DB cluster snapshot is not encrypted.</p> </li> <li> <p> <code>sse-rds</code> - The DB cluster snapshot is encrypted using an Amazon Web Services owned KMS key.</p> </li> <li> <p> <code>sse-kms</code> - The DB cluster snapshot is encrypted using a customer managed KMS key or Amazon Web Services managed KMS key.</p> </li> </ul>"
+                    }
+                },
                 "BackupRetentionPeriod": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
@@ -9730,6 +9748,12 @@
                         "smithy.api#documentation": "<p>The storage type associated with the DB instance.</p>"
                     }
                 },
+                "StorageEncryptionType": {
+                    "target": "com.amazonaws.rds#StorageEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption used to protect data at rest in the DB instance. Possible values:</p> <ul> <li> <p> <code>none</code> - The DB instance is not encrypted.</p> </li> <li> <p> <code>sse-rds</code> - The DB instance is encrypted using an Amazon Web Services owned KMS key.</p> </li> <li> <p> <code>sse-kms</code> - The DB instance is encrypted using a customer managed KMS key or Amazon Web Services managed KMS key.</p> </li> </ul>"
+                    }
+                },
                 "TdeCredentialArn": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
@@ -10188,6 +10212,12 @@
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the automated backup is encrypted.</p>"
+                    }
+                },
+                "StorageEncryptionType": {
+                    "target": "com.amazonaws.rds#StorageEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption used to protect data at rest in the automated backup. Possible values:</p> <ul> <li> <p> <code>none</code> - The automated backup is not encrypted.</p> </li> <li> <p> <code>sse-rds</code> - The automated backup is encrypted using an Amazon Web Services owned KMS key.</p> </li> <li> <p> <code>sse-kms</code> - The automated backup is encrypted using a customer managed KMS key or Amazon Web Services managed KMS key.</p> </li> </ul>"
                     }
                 },
                 "StorageType": {
@@ -12016,6 +12046,12 @@
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the DB snapshot is encrypted.</p>"
+                    }
+                },
+                "StorageEncryptionType": {
+                    "target": "com.amazonaws.rds#StorageEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption used to protect data at rest in the DB snapshot. Possible values:</p> <ul> <li> <p> <code>none</code> - The DB snapshot is not encrypted.</p> </li> <li> <p> <code>sse-rds</code> - The DB snapshot is encrypted using an Amazon Web Services owned KMS key.</p> </li> <li> <p> <code>sse-kms</code> - The DB snapshot is encrypted using a customer managed KMS key or Amazon Web Services managed KMS key.</p> </li> </ul>"
                     }
                 },
                 "BackupRetentionPeriod": {
@@ -20728,6 +20764,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>The storage encryption setting for the global database cluster.</p>"
+                    }
+                },
+                "StorageEncryptionType": {
+                    "target": "com.amazonaws.rds#StorageEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption used to protect data at rest in the global database cluster. Possible values:</p> <ul> <li> <p> <code>none</code> - The global database cluster is not encrypted.</p> </li> <li> <p> <code>sse-rds</code> - The global database cluster is encrypted using an Amazon Web Services owned KMS key.</p> </li> <li> <p> <code>sse-kms</code> - The global database cluster is encrypted using a customer managed KMS key or Amazon Web Services managed KMS key.</p> </li> </ul>"
                     }
                 },
                 "DeletionProtection": {
@@ -32193,6 +32235,29 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rds#StorageEncryptionType": {
+            "type": "enum",
+            "members": {
+                "UNENCRYPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "CMK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sse-kms"
+                    }
+                },
+                "SSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sse-rds"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#StorageQuotaExceededFault": {

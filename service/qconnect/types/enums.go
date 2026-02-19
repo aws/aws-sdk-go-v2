@@ -819,7 +819,8 @@ type MessageType string
 
 // Enum values for MessageType
 const (
-	MessageTypeText MessageType = "TEXT"
+	MessageTypeText          MessageType = "TEXT"
+	MessageTypeToolUseResult MessageType = "TOOL_USE_RESULT"
 )
 
 // Values returns all known values for MessageType. Note that this can be expanded
@@ -829,6 +830,7 @@ const (
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"TEXT",
+		"TOOL_USE_RESULT",
 	}
 }
 

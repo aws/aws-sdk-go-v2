@@ -1,3 +1,7 @@
+# v1.30.0 (2026-02-11)
+
+* **Feature**: Support configurable upper limits on task count during autoscaling operations via maxAutoscalingTaskCount parameter.
+
 # v1.29.2 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

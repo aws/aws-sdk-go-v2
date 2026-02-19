@@ -1103,6 +1103,20 @@
         "com.amazonaws.kafka#ClusterOperationV2Serverless": {
             "type": "structure",
             "members": {
+                "SourceClusterInfo": {
+                    "target": "com.amazonaws.kafka#ServerlessConnectivityInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the cluster's attributes before any updates are applied. For example, networkType, which can be either IPv4 or DUAL.</p>",
+                        "smithy.api#jsonName": "sourceClusterInfo"
+                    }
+                },
+                "TargetClusterInfo": {
+                    "target": "com.amazonaws.kafka#ServerlessConnectivityInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the cluster's attributes after any updates are applied. For example, networkType, which can be either IPv4 or DUAL.</p>",
+                        "smithy.api#jsonName": "targetClusterInfo"
+                    }
+                },
                 "VpcConnectionInfo": {
                     "target": "com.amazonaws.kafka#VpcConnectionInfoServerless",
                     "traits": {
@@ -1465,6 +1479,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>VPC connectivity access control for brokers.</p>",
                         "smithy.api#jsonName": "vpcConnectivity"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.kafka#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the cluster, which is IPv4 or DUAL. The DUAL network type uses both IPv4 and IPv6 addresses for your cluster and its resources.</p><p>By default, a cluster uses the IPv4 network type.</p>",
+                        "smithy.api#jsonName": "networkType"
                     }
                 }
             },
@@ -4198,6 +4219,34 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A string containing one or more DNS names (or IP) and SASL/IAM port pairs for VPC connectivity.</p>",
                         "smithy.api#jsonName": "bootstrapBrokerStringVpcConnectivitySaslIam"
+                    }
+                },
+                "BootstrapBrokerStringIpv6": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that contains one or more DNS names (or IP) and port pairs for IPv6 connectivity.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringIpv6"
+                    }
+                },
+                "BootstrapBrokerStringTlsIpv6": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that contains one or more DNS names (or IP) and TLS port pairs for IPv6 connectivity.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringTlsIpv6"
+                    }
+                },
+                "BootstrapBrokerStringSaslScramIpv6": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that contains one or more DNS names (or IP) and SASL SCRAM port pairs for IPv6 connectivity.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringSaslScramIpv6"
+                    }
+                },
+                "BootstrapBrokerStringSaslIamIpv6": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that contains one or more DNS names (or IP) and SASL IAM port pairs for IPv6 connectivity.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringSaslIamIpv6"
                     }
                 }
             },
@@ -7107,6 +7156,26 @@
                 "smithy.api#documentation": "<p>Information about cluster attributes that can be updated via update APIs.</p>"
             }
         },
+        "com.amazonaws.kafka#NetworkType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "DUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUAL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The network type of the cluster, which is IPv4 or DUAL. The DUAL network type uses both IPv4 and IPv6 addresses for your cluster and its resources.</p><p>By default, a cluster uses the IPv4 network type.</p>"
+            }
+        },
         "com.amazonaws.kafka#NodeExporter": {
             "type": "structure",
             "members": {
@@ -8256,6 +8325,13 @@
                         "smithy.api#documentation": "<p>Includes all client authentication information.</p>",
                         "smithy.api#jsonName": "clientAuthentication"
                     }
+                },
+                "ConnectivityInfo": {
+                    "target": "com.amazonaws.kafka#ServerlessConnectivityInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the cluster's connectivity information, such as its network type, which is IPv4 or DUAL.</p>",
+                        "smithy.api#jsonName": "connectivityInfo"
+                    }
                 }
             },
             "traits": {
@@ -8275,6 +8351,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Includes all client authentication information.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ServerlessConnectivityInfo": {
+            "type": "structure",
+            "members": {
+                "NetworkType": {
+                    "target": "com.amazonaws.kafka#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the cluster, which is IPv4 or DUAL. The DUAL network type uses both IPv4 and IPv6 addresses for your cluster and its resources.</p><p>By default, a cluster uses the IPv4 network type.</p>",
+                        "smithy.api#jsonName": "networkType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the cluster's connectivity information, such as its network type, which is IPv4 or DUAL.</p>"
             }
         },
         "com.amazonaws.kafka#ServerlessRequest": {

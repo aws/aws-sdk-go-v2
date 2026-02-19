@@ -746,6 +746,9 @@ type AthenaTableReference struct {
 	// This member is required.
 	WorkGroup *string
 
+	//  The catalog name.
+	CatalogName *string
+
 	//  The output location for the Athena table.
 	OutputLocation *string
 

@@ -7,8 +7,7 @@
 // and reliably shift traffic away from an impaired Amazon Web Services Region to a
 // healthy Region. With Region switch, you can create plans that define the steps
 // to shift traffic for your application from one Amazon Web Services Region to
-// another. You can test your plans in practice mode before using them in a real
-// recovery scenario.
+// another.
 //
 // Region switch provides a structured approach to multi-Region failover, helping
 // you to meet your recovery time objectives (RTOs) and maintain business

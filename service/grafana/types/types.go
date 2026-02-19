@@ -533,6 +533,10 @@ type WorkspaceDescription struct {
 	// [Link your account with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
 	GrafanaToken *string
 
+	// The ID or ARN of the Key Management Service key used for encrypting workspace
+	// data.
+	KmsKeyId *string
+
 	// If this workspace has a full Grafana Enterprise license purchased through
 	// Amazon Web Services Marketplace, this specifies when the license ends and will
 	// need to be renewed. Purchasing the Enterprise plugins option through Amazon

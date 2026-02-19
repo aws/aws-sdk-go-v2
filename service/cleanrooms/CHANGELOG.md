@@ -1,3 +1,7 @@
+# v1.42.0 (2026-02-18)
+
+* **Feature**: This release adds support for federated catalogs in Athena-sourced configured tables.
+
 # v1.41.0 (2026-01-15)
 
 * **Feature**: This release adds support for parameters in PySpark analysis templates.

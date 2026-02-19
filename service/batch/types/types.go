@@ -2786,6 +2786,34 @@ type EvaluateOnExit struct {
 	noSmithyDocumentSerde
 }
 
+// The capacity usage for a fairshare scheduling job queue.
+type FairshareCapacityUsage struct {
+
+	// The unit of measure for the capacity usage. For compute jobs, this is VCPU for
+	// Amazon EC2 and cpu for Amazon EKS. For service jobs, this is NUM_INSTANCES .
+	CapacityUnit *string
+
+	// The quantity of capacity being used, measured in the units specified by
+	// capacityUnit .
+	Quantity *float64
+
+	noSmithyDocumentSerde
+}
+
+// The capacity utilization for a specific share in a fairshare scheduling job
+// queue, including the share identifier and its current usage.
+type FairshareCapacityUtilization struct {
+
+	// The capacity usage information for this share, including the unit of measure
+	// and quantity being used. This is VCPU for Amazon EC2 and cpu for Amazon EKS.
+	CapacityUsage []FairshareCapacityUsage
+
+	// The share identifier for the fairshare scheduling job queue.
+	ShareIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
 // The fair-share scheduling policy details.
 type FairsharePolicy struct {
 
@@ -2821,6 +2849,21 @@ type FairsharePolicy struct {
 	// identifiers for the fair-share policy. Share identifiers that aren't included
 	// have a default weight of 1.0 .
 	ShareDistribution []ShareAttributes
+
+	noSmithyDocumentSerde
+}
+
+// The fairshare utilization for a job queue, including the number of active
+// shares and top capacity utilization.
+type FairshareUtilizationDetail struct {
+
+	// The total number of active shares in the fairshare scheduling job queue that
+	// are currently utilizing capacity.
+	ActiveShareCount *int64
+
+	// A list of the top 20 shares with the highest capacity utilization, ordered by
+	// usage amount.
+	TopCapacityUtilization []FairshareCapacityUtilization
 
 	noSmithyDocumentSerde
 }
@@ -2928,6 +2971,21 @@ type ImagePullSecret struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The capacity usage for a job, including the unit of measure and quantity of
+// resources being used.
+type JobCapacityUsageSummary struct {
+
+	// The unit of measure for the capacity usage. This is VCPU for Amazon EC2 and cpu
+	// for Amazon EKS.
+	CapacityUnit *string
+
+	// The quantity of capacity being used by the job, measured in the units specified
+	// by capacityUnit .
+	Quantity *float64
 
 	noSmithyDocumentSerde
 }
@@ -3331,6 +3389,10 @@ type JobSummary struct {
 	// The array properties of the job, if it's an array job.
 	ArrayProperties *ArrayPropertiesSummary
 
+	// The configured capacity usage information for this job, including the unit of
+	// measure and quantity of resources.
+	CapacityUsage []JobCapacityUsageSummary
+
 	// An object that represents the details of the container that's associated with
 	// the job.
 	Container *ContainerSummary
@@ -3353,6 +3415,16 @@ type JobSummary struct {
 	//
 	// This isn't applicable to jobs that are running on Fargate resources.
 	NodeProperties *NodePropertiesSummary
+
+	// The Unix timestamp (in milliseconds) for when the job was scheduled for
+	// execution. For more information on job statues, see [Service job status]in the Batch User Guide.
+	//
+	// [Service job status]: https://docs.aws.amazon.com/batch/latest/userguide/service-job-status.html
+	ScheduledAt *int64
+
+	// The share identifier for the fairshare scheduling queue that this job is
+	// associated with.
+	ShareIdentifier *string
 
 	// The Unix timestamp for when the job was started. More specifically, it's when
 	// the job transitioned from the STARTING state to the RUNNING state.
@@ -3730,7 +3802,7 @@ type ListJobsByConsumableResourceSummary struct {
 	// The Amazon Resource Name (ARN) of the job definition.
 	JobDefinitionArn *string
 
-	// The fair-share scheduling policy identifier for the job.
+	// The fair-share scheduling identifier for the job.
 	ShareIdentifier *string
 
 	// The Unix timestamp for when the job was started. More specifically, it's when
@@ -4036,6 +4108,40 @@ type NodeRangeProperty struct {
 	//
 	// In addition, this list object is currently limited to one element.
 	InstanceTypes []string
+
+	noSmithyDocumentSerde
+}
+
+// The configured capacity usage for a job queue snapshot, including the unit of
+// measure and quantity of resources being used.
+type QueueSnapshotCapacityUsage struct {
+
+	// The unit of measure for the capacity usage. For compute jobs, this is VCPU for
+	// Amazon EC2 and cpu for Amazon EKS. For service jobs, this is NUM_INSTANCES .
+	CapacityUnit *string
+
+	// The quantity of capacity being used in the queue snapshot, measured in the
+	// units specified by capacityUnit .
+	Quantity *float64
+
+	noSmithyDocumentSerde
+}
+
+// The job queue utilization at a specific point in time, including total capacity
+// usage and fairshare utilization breakdown.
+type QueueSnapshotUtilizationDetail struct {
+
+	// The utilization information for a fairshare scheduling job queues, including
+	// active share count and top capacity utilization by share.
+	FairshareUtilization *FairshareUtilizationDetail
+
+	// The Unix timestamp (in milliseconds) for when the queue utilization information
+	// was last updated.
+	LastUpdatedAt *int64
+
+	// The total capacity usage for the entire job queue, for both first-in, first-out
+	// (FIFO) and fairshare scheduling job queue.
+	TotalCapacityUsage []QueueSnapshotCapacityUsage
 
 	noSmithyDocumentSerde
 }
@@ -4375,6 +4481,36 @@ type ServiceJobAttemptDetail struct {
 	noSmithyDocumentSerde
 }
 
+// The capacity usage for a service job, including the unit of measure and
+// quantity of resources being consumed.
+type ServiceJobCapacityUsageDetail struct {
+
+	// The unit of measure for the service job capacity usage. For service jobs, this
+	// is NUM_INSTANCES .
+	CapacityUnit *string
+
+	// The quantity of capacity being used by the service job, measured in the units
+	// specified by capacityUnit .
+	Quantity *float64
+
+	noSmithyDocumentSerde
+}
+
+// The capacity usage for a service job, including the unit of measure and
+// quantity of resources being used.
+type ServiceJobCapacityUsageSummary struct {
+
+	// The unit of measure for the service job capacity usage. For service jobs, this
+	// is NUM_INSTANCES .
+	CapacityUnit *string
+
+	// The quantity of capacity being used by the service job, measured in the units
+	// specified by capacityUnit .
+	Quantity *float64
+
+	noSmithyDocumentSerde
+}
+
 // Specifies conditions for when to exit or retry a service job based on the exit
 // status or status reason.
 type ServiceJobEvaluateOnExit struct {
@@ -4431,6 +4567,10 @@ type ServiceJobSummary struct {
 	// This member is required.
 	ServiceJobType ServiceJobType
 
+	// The capacity usage information for this service job, including the unit of
+	// measure and quantity of resources being used.
+	CapacityUsage []ServiceJobCapacityUsageSummary
+
 	// The Unix timestamp (in milliseconds) for when the service job was created.
 	CreatedAt *int64
 
@@ -4439,6 +4579,10 @@ type ServiceJobSummary struct {
 
 	// Information about the latest attempt for the service job.
 	LatestAttempt *LatestServiceJobAttempt
+
+	// The Unix timestamp (in milliseconds) for when the service job was scheduled for
+	// execution.
+	ScheduledAt *int64
 
 	// The share identifier for the job.
 	ShareIdentifier *string

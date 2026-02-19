@@ -859,6 +859,10 @@ type AuthorizationRule struct {
 // Describes Availability Zones, Local Zones, and Wavelength Zones.
 type AvailabilityZone struct {
 
+	// The geography information for the Availability Zone or Local Zone. The
+	// geography is returned as a list.
+	Geography []AvailabilityZoneGeography
+
 	// The long name of the Availability Zone group, Local Zone group, or Wavelength
 	// Zone group.
 	GroupLongName *string
@@ -899,6 +903,10 @@ type AvailabilityZone struct {
 	// The state of the Availability Zone, Local Zone, or Wavelength Zone. The
 	// possible values are available , unavailable , and constrained .
 	State AvailabilityZoneState
+
+	// The sub-geography information for the Availability Zone or Local Zone. The
+	// sub-geography is returned as a list.
+	SubGeography []AvailabilityZoneSubGeography
 
 	// The ID of the Availability Zone, Local Zone, or Wavelength Zone.
 	ZoneId *string
@@ -954,11 +962,29 @@ type AvailabilityZoneAddress struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the geography information for an Availability Zone or Local Zone.
+type AvailabilityZoneGeography struct {
+
+	// The name of the geography, for example, United States of America .
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a message about an Availability Zone, Local Zone, or Wavelength Zone.
 type AvailabilityZoneMessage struct {
 
 	// The message about the Availability Zone, Local Zone, or Wavelength Zone.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the sub-geography information for an Availability Zone or Local Zone.
+type AvailabilityZoneSubGeography struct {
+
+	// The name of the sub-geography, for example, Oregon.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -3219,6 +3245,9 @@ type CpuOptions struct {
 	// The number of CPU cores for the instance.
 	CoreCount *int32
 
+	// Indicates whether the instance is enabled for nested virtualization.
+	NestedVirtualization NestedVirtualizationSpecification
+
 	// The number of threads per CPU core.
 	ThreadsPerCore *int32
 
@@ -3238,6 +3267,12 @@ type CpuOptionsRequest struct {
 
 	// The number of CPU cores for the instance.
 	CoreCount *int32
+
+	// Indicates whether to enable the instance for nested virtualization. Nested
+	// virtualization is supported only on 8th generation Intel-based instance types
+	// (c8i, m8i, r8i, and their flex variants). When nested virtualization is enabled,
+	// Virtual Secure Mode (VSM) is automatically disabled for the instance.
+	NestedVirtualization NestedVirtualizationSpecification
 
 	// The number of threads per CPU core. To disable multithreading for the instance,
 	// specify a value of 1 . Otherwise, specify the default value of 2 .
@@ -12892,6 +12927,9 @@ type LaunchTemplateCpuOptions struct {
 	// The number of CPU cores for the instance.
 	CoreCount *int32
 
+	// Indicates whether the instance is enabled for nested virtualization.
+	NestedVirtualization NestedVirtualizationSpecification
+
 	// The number of threads per CPU core.
 	ThreadsPerCore *int32
 
@@ -12911,6 +12949,12 @@ type LaunchTemplateCpuOptionsRequest struct {
 
 	// The number of CPU cores for the instance.
 	CoreCount *int32
+
+	// Indicates whether to enable the instance for nested virtualization. Nested
+	// virtualization is supported only on 8th generation Intel-based instance types
+	// (c8i, m8i, r8i, and their flex variants). When nested virtualization is enabled,
+	// Virtual Secure Mode (VSM) is automatically disabled for the instance.
+	NestedVirtualization NestedVirtualizationSpecification
 
 	// The number of threads per CPU core. To disable multithreading for the instance,
 	// specify a value of 1 . Otherwise, specify the default value of 2 .
@@ -16993,6 +17037,9 @@ type PlacementGroup struct {
 	// Reserved for future use.
 	LinkedGroupId *string
 
+	// The service provider that manages the Placement Group.
+	Operator *OperatorResponse
+
 	// The number of partitions. Valid only if strategy is set to partition .
 	PartitionCount *int32
 
@@ -17524,6 +17571,9 @@ type Region struct {
 	// The Region service endpoint.
 	Endpoint *string
 
+	// The geography information for the Region. The geography is returned as a list.
+	Geography []RegionGeography
+
 	// The Region opt-in status. The possible values are opt-in-not-required , opted-in
 	// , and not-opted-in .
 	OptInStatus *string
@@ -17547,6 +17597,15 @@ type RegionalSummary struct {
 
 	// The Amazon Web Services Region.
 	RegionName *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the geography information for a Region.
+type RegionGeography struct {
+
+	// The name of the geography, for example, United States of America .
+	Name *string
 
 	noSmithyDocumentSerde
 }

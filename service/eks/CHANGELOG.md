@@ -1,3 +1,7 @@
+# v1.80.0 (2026-02-11)
+
+* **Feature**: This release adds support for Windows Server 2025 in Amazon EKS Managed Node Groups.
+
 # v1.79.0 (2026-02-10.2)
 
 * **Feature**: Introducing an optional policy field, an IAM policy applied to pod identity associations in addition to IAM role policies. When specified, pod permissions are the intersection of IAM role policies and the policy field, ensuring the principle of least privilege.

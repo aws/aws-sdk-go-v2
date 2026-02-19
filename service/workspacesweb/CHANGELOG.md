@@ -1,3 +1,7 @@
+# v1.38.0 (2026-02-17)
+
+* **Feature**: Adds support for branding customization without requiring a custom wallpaper.
+
 # v1.37.0 (2026-02-04)
 
 * **Feature**: Support for configuring and managing custom domain names for WorkSpaces Secure Browser portals.

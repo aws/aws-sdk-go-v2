@@ -1,3 +1,11 @@
+# v1.162.1 (2026-02-18)
+
+* **Documentation**: Correcting in-app notifications API documentation.
+
+# v1.162.0 (2026-02-13)
+
+* **Feature**: API release for headerr notifications in the admin website. APIs allow customers to publish brief messages (including URLs) to a specified audience, and a new header icon will indicate when unread messages are available.
+
 # v1.161.0 (2026-02-10.2)
 
 * **Feature**: Amazon Connect now supports per-channel auto-accept and After Contact Work (ACW) timeouts. Configure agents with auto-accept and ACW timeout settings for chat, tasks, emails, and callbacks. Use the new UpdateUserConfig API to manage these settings.

@@ -1318,6 +1318,9 @@
                     "target": "com.amazonaws.connect#CreateIntegrationAssociation"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateNotification"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateParticipant"
                 },
                 {
@@ -1429,6 +1432,9 @@
                     "target": "com.amazonaws.connect#DeleteIntegrationAssociation"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteNotification"
+                },
+                {
                     "target": "com.amazonaws.connect#DeletePredefinedAttribute"
                 },
                 {
@@ -1535,6 +1541,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeInstanceStorageConfig"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeNotification"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribePhoneNumber"
@@ -1786,6 +1795,9 @@
                     "target": "com.amazonaws.connect#ListLexBots"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListNotifications"
+                },
+                {
                     "target": "com.amazonaws.connect#ListPhoneNumbers"
                 },
                 {
@@ -1864,6 +1876,9 @@
                     "target": "com.amazonaws.connect#ListUserHierarchyGroups"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListUserNotifications"
+                },
+                {
                     "target": "com.amazonaws.connect#ListUserProficiencies"
                 },
                 {
@@ -1937,6 +1952,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#SearchHoursOfOperations"
+                },
+                {
+                    "target": "com.amazonaws.connect#SearchNotifications"
                 },
                 {
                     "target": "com.amazonaws.connect#SearchPredefinedAttributes"
@@ -2131,6 +2149,9 @@
                     "target": "com.amazonaws.connect#UpdateInstanceStorageConfig"
                 },
                 {
+                    "target": "com.amazonaws.connect#UpdateNotificationContent"
+                },
+                {
                     "target": "com.amazonaws.connect#UpdateParticipantAuthentication"
                 },
                 {
@@ -2216,6 +2237,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateUserIdentityInfo"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateUserNotificationStatus"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateUserPhoneConfig"
@@ -7542,6 +7566,26 @@
                 "target": "com.amazonaws.connect#Condition"
             }
         },
+        "com.amazonaws.connect#ConfigurableNotificationPriority": {
+            "type": "enum",
+            "members": {
+                "High": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "Low": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The priority level that can be set when creating a customer notification. Valid values are HIGH and LOW. URGENT priority is reserved for system-generated notifications.</p>"
+            }
+        },
         "com.amazonaws.connect#ConflictException": {
             "type": "structure",
             "members": {
@@ -11455,6 +11499,126 @@
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#CreateNotification": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateNotificationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateNotificationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new notification to be delivered to specified recipients. Notifications can include localized content with links, and an optional expiration time. Recipients can be specified as individual user ARNs or instance ARNs to target all users in an instance.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/notifications/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateNotificationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the notification should expire and no longer be displayed to users. If not specified, defaults to one week from creation.</p>"
+                    }
+                },
+                "Recipients": {
+                    "target": "com.amazonaws.connect#RecipientList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Resource Names (ARNs) identifying the recipients of the notification. Can include user ARNs or instance ARNs to target all users in an instance. Maximum of 200 recipients.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Priority": {
+                    "target": "com.amazonaws.connect#ConfigurableNotificationPriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority level of the notification. Valid values are HIGH and LOW. High priority notifications are displayed above low priority notifications.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#NotificationContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The localized content of the notification. A map where keys are locale codes and values are the notification text in that locale. Content supports links. Maximum 250 characters per locale.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, <code>{ \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }</code>.</p>"
+                    }
+                },
+                "PredefinedNotificationId": {
+                    "target": "com.amazonaws.connect#NotificationId"
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateNotificationResponse": {
+            "type": "structure",
+            "members": {
+                "NotificationId": {
+                    "target": "com.amazonaws.connect#NotificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the created notification.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotificationArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created notification.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -16353,6 +16517,75 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#DeleteNotification": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteNotificationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteNotificationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a notification. Once deleted, the notification is no longer visible to all users and cannot be managed through the Admin Website or APIs.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/notifications/{InstanceId}/{NotificationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteNotificationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotificationId": {
+                    "target": "com.amazonaws.connect#NotificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notification to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteNotificationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The response from deleting a notification.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#DeletePredefinedAttribute": {
             "type": "operation",
             "input": {
@@ -18929,6 +19162,82 @@
                     "target": "com.amazonaws.connect#InstanceStorageConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>A valid storage type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeNotification": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeNotificationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeNotificationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about a specific notification, including its content, priority, recipients, and metadata.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/notifications/{InstanceId}/{NotificationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeNotificationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotificationId": {
+                    "target": "com.amazonaws.connect#NotificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notification.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeNotificationResponse": {
+            "type": "structure",
+            "members": {
+                "Notification": {
+                    "target": "com.amazonaws.connect#Notification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The complete notification information including content, priority, recipients, and metadata.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -33693,6 +34002,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#ListNotifications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListNotificationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListNotificationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a paginated list of all notifications in the Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/notifications/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#ListNotificationsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. Valid range is 1-100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListNotificationsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. If present, there are more results available.</p>"
+                    }
+                },
+                "NotificationSummaryList": {
+                    "target": "com.amazonaws.connect#NotificationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of notification summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#ListPhoneNumbers": {
             "type": "operation",
             "input": {
@@ -36366,6 +36763,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#ListUserNotifications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListUserNotificationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListUserNotificationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a paginated list of notifications for a specific user, including the notification status for that user.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/users/{InstanceId}/{UserId}/notifications",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#ListUserNotificationsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. Valid range is 1-1000.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.connect#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListUserNotificationsResponse": {
+            "type": "structure",
+            "members": {
+                "UserNotifications": {
+                    "target": "com.amazonaws.connect#UserNotificationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of notifications sent to the specified user.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. If present, there are more results available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#ListUserProficiencies": {
             "type": "operation",
             "input": {
@@ -37038,6 +37530,90 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#LocaleCode": {
+            "type": "enum",
+            "members": {
+                "EnUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en_US"
+                    }
+                },
+                "DeDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de_DE"
+                    }
+                },
+                "EsES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es_ES"
+                    }
+                },
+                "FrFR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr_FR"
+                    }
+                },
+                "IdID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "id_ID"
+                    }
+                },
+                "ItIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "it_IT"
+                    }
+                },
+                "JaJP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ja_JP"
+                    }
+                },
+                "KoKR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ko_KR"
+                    }
+                },
+                "PtBR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt_BR"
+                    }
+                },
+                "ZhCN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh_CN"
+                    }
+                },
+                "ZhTW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh_TW"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The locale code for localized content. Supported values include en_US, de_DE, es_ES, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, zh_CN, and zh_TW.</p>"
+            }
+        },
+        "com.amazonaws.connect#LocalizedString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A localized string value. Maximum length is 500 characters.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
             }
         },
         "com.amazonaws.connect#Long": {
@@ -37953,6 +38529,89 @@
                 }
             }
         },
+        "com.amazonaws.connect#Notification": {
+            "type": "structure",
+            "members": {
+                "Content": {
+                    "target": "com.amazonaws.connect#NotificationContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The localized content of the notification. A map where keys are locale codes and values are the notification text in that locale.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.connect#NotificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notification.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notification.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Priority": {
+                    "target": "com.amazonaws.connect#NotificationPriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority level of the notification. Valid values are URGENT, HIGH, and LOW.</p>"
+                    }
+                },
+                "Recipients": {
+                    "target": "com.amazonaws.connect#RecipientList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Resource Names (ARNs) identifying the recipients of the notification. Maximum of 200 recipients.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the notification was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the notification was created.</p>"
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the notification expires and is no longer displayed to users.</p>"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region where the notification was last modified.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, <code>{ \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a notification, including its content, priority, recipients, and metadata.</p>"
+            }
+        },
+        "com.amazonaws.connect#NotificationContent": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#LocaleCode"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#LocalizedString"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of localized notification content where keys are locale codes and values are the notification text in that locale. Each localized string can be 0-500 characters.</p>"
+            }
+        },
         "com.amazonaws.connect#NotificationContentType": {
             "type": "enum",
             "members": {
@@ -37975,6 +38634,42 @@
                 }
             }
         },
+        "com.amazonaws.connect#NotificationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The unique identifier for a notification.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#NotificationPriority": {
+            "type": "enum",
+            "members": {
+                "Urgent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URGENT"
+                    }
+                },
+                "High": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "Low": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The priority level of a notification. Valid values are URGENT (reserved for system-generated notifications during availability or security events), HIGH, and LOW. High priority notifications are displayed above low priority notifications in the notification widget.</p>"
+            }
+        },
         "com.amazonaws.connect#NotificationRecipientType": {
             "type": "structure",
             "members": {
@@ -37993,6 +38688,193 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of notification recipient.</p>"
+            }
+        },
+        "com.amazonaws.connect#NotificationSearchConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#NotificationSearchCriteria"
+            }
+        },
+        "com.amazonaws.connect#NotificationSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#NotificationSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions to be met, where at least one condition must be satisfied.</p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#NotificationSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that must all be satisfied.</p>"
+                    }
+                },
+                "StringCondition": {
+                    "target": "com.amazonaws.connect#StringCondition"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to return notifications.</p>"
+            }
+        },
+        "com.amazonaws.connect#NotificationSearchFilter": {
+            "type": "structure",
+            "members": {
+                "AttributeFilter": {
+                    "target": "com.amazonaws.connect#ControlPlaneAttributeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Attribute-based filters to apply to the search results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters to apply when searching for notifications.</p>"
+            }
+        },
+        "com.amazonaws.connect#NotificationSearchSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#NotificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notification.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notification.</p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#NotificationContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The localized content of the notification.</p>"
+                    }
+                },
+                "Priority": {
+                    "target": "com.amazonaws.connect#NotificationPriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority level of the notification.</p>"
+                    }
+                },
+                "Recipients": {
+                    "target": "com.amazonaws.connect#RecipientList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of recipient Amazon Resource Names (ARNs).</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the notification was created.</p>"
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the notification expires.</p>"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region where the notification was last modified.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the notification was last modified.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the notification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a notification returned from a search operation.</p>"
+            }
+        },
+        "com.amazonaws.connect#NotificationSearchSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#NotificationSearchSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of notification search summaries.</p>"
+            }
+        },
+        "com.amazonaws.connect#NotificationSource": {
+            "type": "enum",
+            "members": {
+                "Customer": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                },
+                "Rules": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RULES"
+                    }
+                },
+                "System": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source that created the notification. Possible values include CUSTOMER (user-created), RULES (rule-generated), and SYSTEM (system-generated).</p>"
+            }
+        },
+        "com.amazonaws.connect#NotificationStatus": {
+            "type": "enum",
+            "members": {
+                "Read": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READ"
+                    }
+                },
+                "Unread": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNREAD"
+                    }
+                },
+                "Hidden": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIDDEN"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a notification for a specific user. Valid values are READ, UNREAD, and HIDDEN (removes the notification from the widget).</p>"
+            }
+        },
+        "com.amazonaws.connect#NotificationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#Notification"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of notification summaries.</p>"
             }
         },
         "com.amazonaws.connect#NullableBoolean": {
@@ -43525,6 +44407,19 @@
                 "target": "com.amazonaws.connect#RealtimeContactAnalysisSegment"
             }
         },
+        "com.amazonaws.connect#RecipientList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ARN"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of recipient Amazon Resource Names (ARNs). Maximum of 200 recipients.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.connect#RecordIds": {
             "type": "list",
             "member": {
@@ -46971,6 +47866,108 @@
                     "target": "com.amazonaws.connect#ApproximateTotalCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of hours of operations which matched your search query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#SearchNotifications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchNotificationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchNotificationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for notifications based on specified criteria and filters. Returns a paginated list of notifications matching the search parameters, ordered by descending creation time. Supports filtering by content and tags.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-notifications",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchNotificationsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response to retrieve the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. Valid range is 1-100.</p>"
+                    }
+                },
+                "SearchFilter": {
+                    "target": "com.amazonaws.connect#NotificationSearchFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to apply to the search results, such as tag-based filters.</p>"
+                    }
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#NotificationSearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria to apply when searching for notifications. Supports filtering by notification ID and message content using comparison types such as STARTS_WITH, CONTAINS, and EXACT.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SearchNotificationsResponse": {
+            "type": "structure",
+            "members": {
+                "Notifications": {
+                    "target": "com.amazonaws.connect#NotificationSearchSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of notifications matching the search criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. If present, there are more results available.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approximate total number of notifications matching the search criteria.</p>"
                     }
                 }
             },
@@ -56374,6 +57371,82 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#UpdateNotificationContent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateNotificationContentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateNotificationContentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the localized content of an existing notification. This operation applies to all users for whom the notification was sent.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/notifications/{InstanceId}/{NotificationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateNotificationContentRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotificationId": {
+                    "target": "com.amazonaws.connect#NotificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notification to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#NotificationContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated localized content of the notification. A map of locale codes and values. Maximum 500 characters per locale.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateNotificationContentResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The response from updating notification content.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#UpdateParticipantAuthentication": {
             "type": "operation",
             "input": {
@@ -58713,6 +59786,104 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#UpdateUserNotificationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateUserNotificationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateUserNotificationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the status of a notification for a specific user, such as marking it as read or hidden. Users can only update notification status for notifications that have been sent to them. READ status deprioritizes the notification and greys it out, while HIDDEN status removes it from the notification widget.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/users/{InstanceId}/{UserId}/notifications/{NotificationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateUserNotificationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotificationId": {
+                    "target": "com.amazonaws.connect#NotificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notification.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.connect#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user whose notification status is being updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#NotificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new status for the notification. Valid values are READ, UNREAD, and HIDDEN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the notification status was last modified. Used for cross-region replication and optimistic locking.</p>",
+                        "smithy.api#httpHeader": "x-amz-last-modified-time"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region where the notification status was last modified. Used for cross-region replication.</p>",
+                        "smithy.api#httpHeader": "x-amz-last-modified-region"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateUserNotificationStatusResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The response from updating a user's notification status.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#UpdateUserPhoneConfig": {
             "type": "operation",
             "input": {
@@ -60001,6 +61172,77 @@
                 "smithy.api#documentation": "<p>No user with the specified credentials was found in the Amazon Connect instance.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.connect#UserNotificationSummary": {
+            "type": "structure",
+            "members": {
+                "NotificationId": {
+                    "target": "com.amazonaws.connect#NotificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notification.</p>"
+                    }
+                },
+                "NotificationStatus": {
+                    "target": "com.amazonaws.connect#NotificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the notification for this user. Valid values are READ, UNREAD, and HIDDEN.</p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>"
+                    }
+                },
+                "RecipientId": {
+                    "target": "com.amazonaws.connect#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the recipient user.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#NotificationContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The localized content of the notification.</p>"
+                    }
+                },
+                "Priority": {
+                    "target": "com.amazonaws.connect#NotificationPriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority level of the notification.</p>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.connect#NotificationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source that created the notification. Valid values are CUSTOMER, RULES, and SYSTEM.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the notification was created.</p>"
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the notification expires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a notification for a specific user, including the user's read status.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserNotificationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#UserNotificationSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of user notification summaries.</p>"
             }
         },
         "com.amazonaws.connect#UserPhoneConfig": {

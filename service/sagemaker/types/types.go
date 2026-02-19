@@ -3973,6 +3973,43 @@ type ClusterEventSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the configuration for attaching an Amazon FSx for Lustre file system to
+// instances in a SageMaker HyperPod cluster instance group.
+type ClusterFsxLustreConfig struct {
+
+	// The DNS name of the Amazon FSx for Lustre file system.
+	//
+	// This member is required.
+	DnsName *string
+
+	// The mount name of the Amazon FSx for Lustre file system.
+	//
+	// This member is required.
+	MountName *string
+
+	// The local path where the Amazon FSx for Lustre file system is mounted on
+	// instances.
+	MountPath *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the configuration for attaching an Amazon FSx for OpenZFS file system
+// to instances in a SageMaker HyperPod cluster instance group.
+type ClusterFsxOpenZfsConfig struct {
+
+	// The DNS name of the Amazon FSx for OpenZFS file system.
+	//
+	// This member is required.
+	DnsName *string
+
+	// The local path where the Amazon FSx for OpenZFS file system is mounted on
+	// instances.
+	MountPath *string
+
+	noSmithyDocumentSerde
+}
+
 // Details of an instance group in a SageMaker HyperPod cluster.
 type ClusterInstanceGroupDetails struct {
 
@@ -4033,6 +4070,9 @@ type ClusterInstanceGroupDetails struct {
 	// The configuration object of the schedule that SageMaker follows when updating
 	// the AMI.
 	ScheduledUpdateConfig *ScheduledUpdateConfig
+
+	// The Slurm configuration for the instance group.
+	SlurmConfig *ClusterSlurmConfigDetails
 
 	// Status of the last software udpate request.
 	//
@@ -4221,6 +4261,9 @@ type ClusterInstanceGroupSpecification struct {
 	// The configuration object of the schedule that SageMaker uses to update the AMI.
 	ScheduledUpdateConfig *ScheduledUpdateConfig
 
+	// Specifies the Slurm configuration for the instance group.
+	SlurmConfig *ClusterSlurmConfig
+
 	// Specifies the value for Threads per core. For instance types that support
 	// multithreading, you can specify 1 for disabling multithreading and 2 for
 	// enabling multithreading. For instance types that doesn't support multithreading,
@@ -4278,6 +4321,8 @@ type ClusterInstanceStatusDetails struct {
 // The following types satisfy this interface:
 //
 //	ClusterInstanceStorageConfigMemberEbsVolumeConfig
+//	ClusterInstanceStorageConfigMemberFsxLustreConfig
+//	ClusterInstanceStorageConfigMemberFsxOpenZfsConfig
 //
 // [SageMaker HyperPod release notes: June 20, 2024]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620
 type ClusterInstanceStorageConfig interface {
@@ -4295,6 +4340,26 @@ type ClusterInstanceStorageConfigMemberEbsVolumeConfig struct {
 }
 
 func (*ClusterInstanceStorageConfigMemberEbsVolumeConfig) isClusterInstanceStorageConfig() {}
+
+// Defines the configuration for attaching an Amazon FSx for Lustre file system to
+// the instances in the SageMaker HyperPod cluster instance group.
+type ClusterInstanceStorageConfigMemberFsxLustreConfig struct {
+	Value ClusterFsxLustreConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ClusterInstanceStorageConfigMemberFsxLustreConfig) isClusterInstanceStorageConfig() {}
+
+// Defines the configuration for attaching an Amazon FSx for OpenZFS file system
+// to the instances in the SageMaker HyperPod cluster instance group.
+type ClusterInstanceStorageConfigMemberFsxOpenZfsConfig struct {
+	Value ClusterFsxOpenZfsConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ClusterInstanceStorageConfigMemberFsxOpenZfsConfig) isClusterInstanceStorageConfig() {}
 
 // Kubernetes configuration that specifies labels and taints to be applied to
 // cluster nodes in an instance group.
@@ -4549,6 +4614,9 @@ type ClusterOrchestrator struct {
 	// cluster.
 	Eks *ClusterOrchestratorEksConfig
 
+	// The Slurm orchestrator configuration for the SageMaker HyperPod cluster.
+	Slurm *ClusterOrchestratorSlurmConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -4561,6 +4629,17 @@ type ClusterOrchestratorEksConfig struct {
 	//
 	// This member is required.
 	ClusterArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration settings for the Slurm orchestrator used with the SageMaker
+// HyperPod cluster.
+type ClusterOrchestratorSlurmConfig struct {
+
+	// The strategy for managing partitions for the Slurm configuration. Valid values
+	// are Managed , Overwrite , and Merge .
+	SlurmConfigStrategy ClusterSlurmConfigStrategy
 
 	noSmithyDocumentSerde
 }
@@ -4751,6 +4830,37 @@ type ClusterSchedulerConfigSummary struct {
 
 	// Last modified time of the cluster policy.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The Slurm configuration for an instance group in a SageMaker HyperPod cluster.
+type ClusterSlurmConfig struct {
+
+	// The type of Slurm node for the instance group. Valid values are Controller ,
+	// Worker , and Login .
+	//
+	// This member is required.
+	NodeType ClusterSlurmNodeType
+
+	// The list of Slurm partition names that the instance group belongs to.
+	PartitionNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The Slurm configuration details for an instance group in a SageMaker HyperPod
+// cluster.
+type ClusterSlurmConfigDetails struct {
+
+	// The type of Slurm node for the instance group. Valid values are Controller ,
+	// Worker , and Login .
+	//
+	// This member is required.
+	NodeType ClusterSlurmNodeType
+
+	// The list of Slurm partition names that the instance group belongs to.
+	PartitionNames []string
 
 	noSmithyDocumentSerde
 }

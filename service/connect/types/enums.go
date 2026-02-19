@@ -395,6 +395,26 @@ func (Comparison) Values() []Comparison {
 	}
 }
 
+type ConfigurableNotificationPriority string
+
+// Enum values for ConfigurableNotificationPriority
+const (
+	ConfigurableNotificationPriorityHigh ConfigurableNotificationPriority = "HIGH"
+	ConfigurableNotificationPriorityLow  ConfigurableNotificationPriority = "LOW"
+)
+
+// Values returns all known values for ConfigurableNotificationPriority. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurableNotificationPriority) Values() []ConfigurableNotificationPriority {
+	return []ConfigurableNotificationPriority{
+		"HIGH",
+		"LOW",
+	}
+}
+
 type ContactFlowModuleState string
 
 // Enum values for ContactFlowModuleState
@@ -2048,6 +2068,43 @@ func (ListFlowAssociationResourceType) Values() []ListFlowAssociationResourceTyp
 	}
 }
 
+type LocaleCode string
+
+// Enum values for LocaleCode
+const (
+	LocaleCodeEnUS LocaleCode = "en_US"
+	LocaleCodeDeDE LocaleCode = "de_DE"
+	LocaleCodeEsES LocaleCode = "es_ES"
+	LocaleCodeFrFR LocaleCode = "fr_FR"
+	LocaleCodeIdID LocaleCode = "id_ID"
+	LocaleCodeItIT LocaleCode = "it_IT"
+	LocaleCodeJaJP LocaleCode = "ja_JP"
+	LocaleCodeKoKR LocaleCode = "ko_KR"
+	LocaleCodePtBR LocaleCode = "pt_BR"
+	LocaleCodeZhCN LocaleCode = "zh_CN"
+	LocaleCodeZhTW LocaleCode = "zh_TW"
+)
+
+// Values returns all known values for LocaleCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LocaleCode) Values() []LocaleCode {
+	return []LocaleCode{
+		"en_US",
+		"de_DE",
+		"es_ES",
+		"fr_FR",
+		"id_ID",
+		"it_IT",
+		"ja_JP",
+		"ko_KR",
+		"pt_BR",
+		"zh_CN",
+		"zh_TW",
+	}
+}
+
 type MediaStreamType string
 
 // Enum values for MediaStreamType
@@ -2196,6 +2253,69 @@ const (
 func (NotificationDeliveryType) Values() []NotificationDeliveryType {
 	return []NotificationDeliveryType{
 		"EMAIL",
+	}
+}
+
+type NotificationPriority string
+
+// Enum values for NotificationPriority
+const (
+	NotificationPriorityUrgent NotificationPriority = "URGENT"
+	NotificationPriorityHigh   NotificationPriority = "HIGH"
+	NotificationPriorityLow    NotificationPriority = "LOW"
+)
+
+// Values returns all known values for NotificationPriority. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationPriority) Values() []NotificationPriority {
+	return []NotificationPriority{
+		"URGENT",
+		"HIGH",
+		"LOW",
+	}
+}
+
+type NotificationSource string
+
+// Enum values for NotificationSource
+const (
+	NotificationSourceCustomer NotificationSource = "CUSTOMER"
+	NotificationSourceRules    NotificationSource = "RULES"
+	NotificationSourceSystem   NotificationSource = "SYSTEM"
+)
+
+// Values returns all known values for NotificationSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationSource) Values() []NotificationSource {
+	return []NotificationSource{
+		"CUSTOMER",
+		"RULES",
+		"SYSTEM",
+	}
+}
+
+type NotificationStatus string
+
+// Enum values for NotificationStatus
+const (
+	NotificationStatusRead   NotificationStatus = "READ"
+	NotificationStatusUnread NotificationStatus = "UNREAD"
+	NotificationStatusHidden NotificationStatus = "HIDDEN"
+)
+
+// Values returns all known values for NotificationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationStatus) Values() []NotificationStatus {
+	return []NotificationStatus{
+		"READ",
+		"UNREAD",
+		"HIDDEN",
 	}
 }
 

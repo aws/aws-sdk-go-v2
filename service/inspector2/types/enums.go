@@ -1961,6 +1961,8 @@ const (
 	RuntimeDotnet7      Runtime = "DOTNET_7"
 	RuntimeRuby27       Runtime = "RUBY_2_7"
 	RuntimeRuby32       Runtime = "RUBY_3_2"
+	RuntimeDotnet10     Runtime = "DOTNET_10"
+	RuntimeNodejs24X    Runtime = "NODEJS_24_X"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -1990,6 +1992,8 @@ func (Runtime) Values() []Runtime {
 		"DOTNET_7",
 		"RUBY_2_7",
 		"RUBY_3_2",
+		"DOTNET_10",
+		"NODEJS_24_X",
 	}
 }
 

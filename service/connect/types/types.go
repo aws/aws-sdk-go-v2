@@ -6563,6 +6563,52 @@ type NextContactMetadataMemberQuickConnectContactData struct {
 
 func (*NextContactMetadataMemberQuickConnectContactData) isNextContactMetadata() {}
 
+// Contains information about a notification, including its content, priority,
+// recipients, and metadata.
+type Notification struct {
+
+	// The Amazon Resource Name (ARN) of the notification.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier for the notification.
+	//
+	// This member is required.
+	Id *string
+
+	// The timestamp when the notification was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The localized content of the notification. A map where keys are locale codes
+	// and values are the notification text in that locale.
+	Content map[string]string
+
+	// The timestamp when the notification was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the notification expires and is no longer displayed to users.
+	ExpiresAt *time.Time
+
+	// The AWS Region where the notification was last modified.
+	LastModifiedRegion *string
+
+	// The priority level of the notification. Valid values are URGENT, HIGH, and LOW.
+	Priority NotificationPriority
+
+	// A list of Amazon Resource Names (ARNs) identifying the recipients of the
+	// notification. Maximum of 200 recipients.
+	Recipients []string
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} } .
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The type of notification recipient.
 type NotificationRecipientType struct {
 
@@ -6575,6 +6621,69 @@ type NotificationRecipientType struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users
 	// with the specified tags will be notified.
 	UserTags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return notifications.
+type NotificationSearchCriteria struct {
+
+	// A list of conditions that must all be satisfied.
+	AndConditions []NotificationSearchCriteria
+
+	// A list of conditions to be met, where at least one condition must be satisfied.
+	OrConditions []NotificationSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to apply when searching for notifications.
+type NotificationSearchFilter struct {
+
+	// Attribute-based filters to apply to the search results.
+	AttributeFilter *ControlPlaneAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a notification returned from a search operation.
+type NotificationSearchSummary struct {
+
+	// The Amazon Resource Name (ARN) of the notification.
+	Arn *string
+
+	// The localized content of the notification.
+	Content map[string]string
+
+	// The timestamp when the notification was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the notification expires.
+	ExpiresAt *time.Time
+
+	// The unique identifier for the notification.
+	Id *string
+
+	// The identifier of the Amazon Connect instance.
+	InstanceId *string
+
+	// The AWS Region where the notification was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the notification was last modified.
+	LastModifiedTime *time.Time
+
+	// The priority level of the notification.
+	Priority NotificationPriority
+
+	// A list of recipient Amazon Resource Names (ARNs).
+	Recipients []string
+
+	// The tags associated with the notification.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -10532,6 +10641,42 @@ type UserInfo struct {
 
 	// The user identifier for the contact.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a notification for a specific user, including the
+// user's read status.
+type UserNotificationSummary struct {
+
+	// The localized content of the notification.
+	Content map[string]string
+
+	// The timestamp when the notification was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the notification expires.
+	ExpiresAt *time.Time
+
+	// The identifier of the Amazon Connect instance.
+	InstanceId *string
+
+	// The unique identifier for the notification.
+	NotificationId *string
+
+	// The status of the notification for this user. Valid values are READ, UNREAD,
+	// and HIDDEN.
+	NotificationStatus NotificationStatus
+
+	// The priority level of the notification.
+	Priority NotificationPriority
+
+	// The identifier of the recipient user.
+	RecipientId *string
+
+	// The source that created the notification. Valid values are CUSTOMER, RULES, and
+	// SYSTEM.
+	Source NotificationSource
 
 	noSmithyDocumentSerde
 }

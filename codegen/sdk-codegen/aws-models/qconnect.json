@@ -12575,6 +12575,10 @@
                     {
                         "value": "TEXT",
                         "name": "TEXT"
+                    },
+                    {
+                        "value": "TOOL_USE_RESULT",
+                        "name": "TOOL_USE_RESULT"
                     }
                 ]
             }

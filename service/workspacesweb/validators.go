@@ -1602,9 +1602,6 @@ func validateBrandingConfigurationCreateInput(v *types.BrandingConfigurationCrea
 	if v.Logo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Logo"))
 	}
-	if v.Wallpaper == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Wallpaper"))
-	}
 	if v.Favicon == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Favicon"))
 	}

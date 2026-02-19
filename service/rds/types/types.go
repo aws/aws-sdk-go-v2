@@ -1125,6 +1125,18 @@ type DBCluster struct {
 	// Indicates whether the DB cluster is encrypted.
 	StorageEncrypted *bool
 
+	// The type of encryption used to protect data at rest in the DB cluster. Possible
+	// values:
+	//
+	//   - none - The DB cluster is not encrypted.
+	//
+	//   - sse-rds - The DB cluster is encrypted using an Amazon Web Services owned KMS
+	//   key.
+	//
+	//   - sse-kms - The DB cluster is encrypted using a customer managed KMS key or
+	//   Amazon Web Services managed KMS key.
+	StorageEncryptionType StorageEncryptionType
+
 	// The storage throughput for the DB cluster. The throughput is automatically set
 	// based on the IOPS that you provision, and is not configurable.
 	//
@@ -1253,6 +1265,18 @@ type DBClusterAutomatedBackup struct {
 
 	// Indicates whether the source DB cluster is encrypted.
 	StorageEncrypted *bool
+
+	// The type of encryption used to protect data at rest in the automated backup.
+	// Possible values:
+	//
+	//   - none - The automated backup is not encrypted.
+	//
+	//   - sse-rds - The automated backup is encrypted using an Amazon Web Services
+	//   owned KMS key.
+	//
+	//   - sse-kms - The automated backup is encrypted using a customer managed KMS key
+	//   or Amazon Web Services managed KMS key.
+	StorageEncryptionType StorageEncryptionType
 
 	// The storage throughput for the automated backup. The throughput is
 	// automatically set based on the IOPS that you provision, and is not configurable.
@@ -1556,6 +1580,18 @@ type DBClusterSnapshot struct {
 
 	// Indicates whether the DB cluster snapshot is encrypted.
 	StorageEncrypted *bool
+
+	// The type of encryption used to protect data at rest in the DB cluster snapshot.
+	// Possible values:
+	//
+	//   - none - The DB cluster snapshot is not encrypted.
+	//
+	//   - sse-rds - The DB cluster snapshot is encrypted using an Amazon Web Services
+	//   owned KMS key.
+	//
+	//   - sse-kms - The DB cluster snapshot is encrypted using a customer managed KMS
+	//   key or Amazon Web Services managed KMS key.
+	StorageEncryptionType StorageEncryptionType
 
 	// The storage throughput for the DB cluster snapshot. The throughput is
 	// automatically set based on the IOPS that you provision, and is not configurable.
@@ -2257,6 +2293,18 @@ type DBInstance struct {
 	// Indicates whether the DB instance is encrypted.
 	StorageEncrypted *bool
 
+	// The type of encryption used to protect data at rest in the DB instance.
+	// Possible values:
+	//
+	//   - none - The DB instance is not encrypted.
+	//
+	//   - sse-rds - The DB instance is encrypted using an Amazon Web Services owned
+	//   KMS key.
+	//
+	//   - sse-kms - The DB instance is encrypted using a customer managed KMS key or
+	//   Amazon Web Services managed KMS key.
+	StorageEncryptionType StorageEncryptionType
+
 	// The storage throughput for the DB instance.
 	//
 	// This setting applies only to the gp3 storage type.
@@ -2419,6 +2467,18 @@ type DBInstanceAutomatedBackup struct {
 	//   - creating - Automated backups that are waiting for the first automated
 	//   snapshot to be available.
 	Status *string
+
+	// The type of encryption used to protect data at rest in the automated backup.
+	// Possible values:
+	//
+	//   - none - The automated backup is not encrypted.
+	//
+	//   - sse-rds - The automated backup is encrypted using an Amazon Web Services
+	//   owned KMS key.
+	//
+	//   - sse-kms - The automated backup is encrypted using a customer managed KMS key
+	//   or Amazon Web Services managed KMS key.
+	StorageEncryptionType StorageEncryptionType
 
 	// The storage throughput for the automated backup.
 	StorageThroughput *int32
@@ -3216,6 +3276,18 @@ type DBSnapshot struct {
 	// Specifies the status of this DB snapshot.
 	Status *string
 
+	// The type of encryption used to protect data at rest in the DB snapshot.
+	// Possible values:
+	//
+	//   - none - The DB snapshot is not encrypted.
+	//
+	//   - sse-rds - The DB snapshot is encrypted using an Amazon Web Services owned
+	//   KMS key.
+	//
+	//   - sse-kms - The DB snapshot is encrypted using a customer managed KMS key or
+	//   Amazon Web Services managed KMS key.
+	StorageEncryptionType StorageEncryptionType
+
 	// Specifies the storage throughput for the DB snapshot.
 	StorageThroughput *int32
 
@@ -3833,6 +3905,18 @@ type GlobalCluster struct {
 
 	// The storage encryption setting for the global database cluster.
 	StorageEncrypted *bool
+
+	// The type of encryption used to protect data at rest in the global database
+	// cluster. Possible values:
+	//
+	//   - none - The global database cluster is not encrypted.
+	//
+	//   - sse-rds - The global database cluster is encrypted using an Amazon Web
+	//   Services owned KMS key.
+	//
+	//   - sse-kms - The global database cluster is encrypted using a customer managed
+	//   KMS key or Amazon Web Services managed KMS key.
+	StorageEncryptionType StorageEncryptionType
 
 	// A list of tags.
 	//

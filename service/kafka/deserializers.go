@@ -4793,6 +4793,15 @@ func awsRestjson1_deserializeOpDocumentGetBootstrapBrokersOutput(v **GetBootstra
 				sv.BootstrapBrokerString = ptr.String(jtv)
 			}
 
+		case "bootstrapBrokerStringIpv6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.BootstrapBrokerStringIpv6 = ptr.String(jtv)
+			}
+
 		case "bootstrapBrokerStringPublicSaslIam":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4829,6 +4838,15 @@ func awsRestjson1_deserializeOpDocumentGetBootstrapBrokersOutput(v **GetBootstra
 				sv.BootstrapBrokerStringSaslIam = ptr.String(jtv)
 			}
 
+		case "bootstrapBrokerStringSaslIamIpv6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.BootstrapBrokerStringSaslIamIpv6 = ptr.String(jtv)
+			}
+
 		case "bootstrapBrokerStringSaslScram":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4838,6 +4856,15 @@ func awsRestjson1_deserializeOpDocumentGetBootstrapBrokersOutput(v **GetBootstra
 				sv.BootstrapBrokerStringSaslScram = ptr.String(jtv)
 			}
 
+		case "bootstrapBrokerStringSaslScramIpv6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.BootstrapBrokerStringSaslScramIpv6 = ptr.String(jtv)
+			}
+
 		case "bootstrapBrokerStringTls":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4845,6 +4872,15 @@ func awsRestjson1_deserializeOpDocumentGetBootstrapBrokersOutput(v **GetBootstra
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.BootstrapBrokerStringTls = ptr.String(jtv)
+			}
+
+		case "bootstrapBrokerStringTlsIpv6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.BootstrapBrokerStringTlsIpv6 = ptr.String(jtv)
 			}
 
 		case "bootstrapBrokerStringVpcConnectivitySaslIam":
@@ -13676,6 +13712,16 @@ func awsRestjson1_deserializeDocumentClusterOperationV2Serverless(v **types.Clus
 
 	for key, value := range shape {
 		switch key {
+		case "sourceClusterInfo":
+			if err := awsRestjson1_deserializeDocumentServerlessConnectivityInfo(&sv.SourceClusterInfo, value); err != nil {
+				return err
+			}
+
+		case "targetClusterInfo":
+			if err := awsRestjson1_deserializeDocumentServerlessConnectivityInfo(&sv.TargetClusterInfo, value); err != nil {
+				return err
+			}
+
 		case "vpcConnectionInfo":
 			if err := awsRestjson1_deserializeDocumentVpcConnectionInfoServerless(&sv.VpcConnectionInfo, value); err != nil {
 				return err
@@ -14117,6 +14163,15 @@ func awsRestjson1_deserializeDocumentConnectivityInfo(v **types.ConnectivityInfo
 
 	for key, value := range shape {
 		switch key {
+		case "networkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
+			}
+
 		case "publicAccess":
 			if err := awsRestjson1_deserializeDocumentPublicAccess(&sv.PublicAccess, value); err != nil {
 				return err
@@ -16508,6 +16563,11 @@ func awsRestjson1_deserializeDocumentServerless(v **types.Serverless, value inte
 				return err
 			}
 
+		case "connectivityInfo":
+			if err := awsRestjson1_deserializeDocumentServerlessConnectivityInfo(&sv.ConnectivityInfo, value); err != nil {
+				return err
+			}
+
 		case "vpcConfigs":
 			if err := awsRestjson1_deserializeDocument__listOfVpcConfig(&sv.VpcConfigs, value); err != nil {
 				return err
@@ -16547,6 +16607,46 @@ func awsRestjson1_deserializeDocumentServerlessClientAuthentication(v **types.Se
 		case "sasl":
 			if err := awsRestjson1_deserializeDocumentServerlessSasl(&sv.Sasl, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServerlessConnectivityInfo(v **types.ServerlessConnectivityInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServerlessConnectivityInfo
+	if *v == nil {
+		sv = &types.ServerlessConnectivityInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "networkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
 			}
 
 		default:

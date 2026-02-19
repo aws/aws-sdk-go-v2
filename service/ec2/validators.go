@@ -20437,12 +20437,6 @@ func validateOpModifyInstanceCpuOptionsInput(v *ModifyInstanceCpuOptionsInput) e
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
-	if v.CoreCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CoreCount"))
-	}
-	if v.ThreadsPerCore == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ThreadsPerCore"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

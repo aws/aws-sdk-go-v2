@@ -1,3 +1,79 @@
+# Release (2026-02-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.42.0](service/cleanrooms/CHANGELOG.md#v1420-2026-02-18)
+  * **Feature**: This release adds support for federated catalogs in Athena-sourced configured tables.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.162.1](service/connect/CHANGELOG.md#v11621-2026-02-18)
+  * **Documentation**: Correcting in-app notifications API documentation.
+
+# Release (2026-02-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.290.0](service/ec2/CHANGELOG.md#v12900-2026-02-17)
+  * **Feature**: Add Operator field to CreatePlacementGroup and DescribePlacementGroup APIs.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.33.0](service/grafana/CHANGELOG.md#v1330-2026-02-17)
+  * **Feature**: This release updates Amazon Managed Grafana's APIs to support customer managed KMS keys.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.116.0](service/rds/CHANGELOG.md#v11160-2026-02-17)
+  * **Feature**: Adds support for the StorageEncryptionType field to specify encryption type for DB clusters, DB instances, snapshots, automated backups, and global clusters.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.38.0](service/workspacesweb/CHANGELOG.md#v1380-2026-02-17)
+  * **Feature**: Adds support for branding customization without requiring a custom wallpaper.
+
+# Release (2026-02-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.5.1](service/arcregionswitch/CHANGELOG.md#v151-2026-02-16)
+  * **Documentation**: Clarify documentation on ARC Region Switch start-plan-execution operation
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.289.1](service/ec2/CHANGELOG.md#v12891-2026-02-16)
+  * **Documentation**: Documentation updates for EC2 Secondary Networks
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.55.2](service/ecr/CHANGELOG.md#v1552-2026-02-16)
+  * **Documentation**: Adds support for enabling blob mounting, and removes support for Clair based image scanning
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.48.0](service/kafka/CHANGELOG.md#v1480-2026-02-16)
+  * **Feature**: Amazon MSK now supports dual-stack connectivity (IPv4 and IPv6) for existing MSK clusters. You can enable dual-stack on existing clusters by specifying the NetworkType parameter in updateConnectivity API.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.50.0](service/kms/CHANGELOG.md#v1500-2026-02-16)
+  * **Feature**: Added support for Decrypt and ReEncrypt API's to use dry run feature without ciphertext for authorization validation
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.28.0](service/qconnect/CHANGELOG.md#v1280-2026-02-16)
+  * **Feature**: Update MessageType enum to include missing types.
+
+# Release (2026-02-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.54.0](service/cloudwatch/CHANGELOG.md#v1540-2026-02-13)
+  * **Feature**: Adding new evaluation states that provides information about the alarm evaluation process. Evaluation error Indicates configuration errors in alarm setup that require review and correction. Evaluation failure Indicates temporary CloudWatch issues.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.162.0](service/connect/CHANGELOG.md#v11620-2026-02-13)
+  * **Feature**: API release for headerr notifications in the admin website. APIs allow customers to publish brief messages (including URLs) to a specified audience, and a new header icon will indicate when unread messages are available.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.289.0](service/ec2/CHANGELOG.md#v12890-2026-02-13)
+  * **Feature**: This release adds geography information to EC2 region and availability zone APIs. DescribeRegions now includes a Geography field, while DescribeAvailabilityZones includes both Geography and SubGeography fields, enabling better geographic classification for AWS regions and zones.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.47.0](service/inspector2/CHANGELOG.md#v1470-2026-02-13)
+  * **Feature**: Added .Net 10 (dotnet10) and Node 24.x (node24.x) runtime support for lambda package scanning
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.233.0](service/sagemaker/CHANGELOG.md#v12330-2026-02-13)
+  * **Feature**: Enable g7e instance type support for SageMaker Processing, and enable single file configuration provisioning for HyperPod Slurm, where customers have the option to use HyperPod API to provide the provisioning parameters.
+
+# Release (2026-02-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.288.0](service/ec2/CHANGELOG.md#v12880-2026-02-12)
+  * **Feature**: Launching nested virtualization. This feature allows you to run nested VMs inside virtual (non-bare metal) EC2 instances.
+
+# Release (2026-02-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.60.0](service/batch/CHANGELOG.md#v1600-2026-02-11)
+  * **Feature**: Add support for listing jobs by share identifier and getting snapshots of active capacity utilization by job queue and share.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.287.0](service/ec2/CHANGELOG.md#v12870-2026-02-11)
+  * **Feature**: R8i instances powered by custom Intel Xeon 6 processors available only on AWS with sustained all-core 3.9 GHz turbo frequency
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.80.0](service/eks/CHANGELOG.md#v1800-2026-02-11)
+  * **Feature**: This release adds support for Windows Server 2025 in Amazon EKS Managed Node Groups.
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.30.0](service/kafkaconnect/CHANGELOG.md#v1300-2026-02-11)
+  * **Feature**: Support configurable upper limits on task count during autoscaling operations via maxAutoscalingTaskCount parameter.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.14.0](service/s3tables/CHANGELOG.md#v1140-2026-02-11)
+  * **Feature**: S3 Tables now supports setting partition specifications and sort orders on tables. Partition specs allow users to define how data is organized using transform functions. Sort order configurations enable users to specify sort directions and null ordering preferences for optimized data layout.
+
 # Release (2026-02-10.2)
 
 ## Module Highlights

@@ -5462,6 +5462,11 @@ func awsRestjson1_serializeDocumentConnectivityInfo(v *types.ConnectivityInfo, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("networkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.PublicAccess != nil {
 		ok := object.Key("publicAccess")
 		if err := awsRestjson1_serializeDocumentPublicAccess(v.PublicAccess, ok); err != nil {

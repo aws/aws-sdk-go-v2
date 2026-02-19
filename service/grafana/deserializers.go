@@ -6619,6 +6619,15 @@ func awsRestjson1_deserializeDocumentWorkspaceDescription(v **types.WorkspaceDes
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
 		case "licenseExpiration":
 			if value != nil {
 				switch jtv := value.(type) {

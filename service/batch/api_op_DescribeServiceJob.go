@@ -73,6 +73,11 @@ type DescribeServiceJobOutput struct {
 	// A list of job attempts associated with the service job.
 	Attempts []types.ServiceJobAttemptDetail
 
+	// The configured capacity for the service job, such as the number of instances.
+	// The number of instances should be the same value as the
+	// serviceRequestPayload.InstanceCount field.
+	CapacityUsage []types.ServiceJobCapacityUsageDetail
+
 	// The Unix timestamp (in milliseconds) for when the service job was created.
 	CreatedAt *int64
 
@@ -88,6 +93,11 @@ type DescribeServiceJobOutput struct {
 	// The retry strategy to use for failed service jobs that are submitted with this
 	// service job.
 	RetryStrategy *types.ServiceJobRetryStrategy
+
+	// The Unix timestamp (in milliseconds) for when the service job was scheduled.
+	// This represents when the service job was dispatched to SageMaker and the service
+	// job transitioned to the SCHEDULED state.
+	ScheduledAt *int64
 
 	// The scheduling priority of the service job.
 	SchedulingPriority *int32

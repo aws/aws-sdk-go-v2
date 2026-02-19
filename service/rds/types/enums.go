@@ -626,6 +626,27 @@ func (SourceType) Values() []SourceType {
 	}
 }
 
+type StorageEncryptionType string
+
+// Enum values for StorageEncryptionType
+const (
+	StorageEncryptionTypeUnencrypted StorageEncryptionType = "none"
+	StorageEncryptionTypeCmk         StorageEncryptionType = "sse-kms"
+	StorageEncryptionTypeSse         StorageEncryptionType = "sse-rds"
+)
+
+// Values returns all known values for StorageEncryptionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageEncryptionType) Values() []StorageEncryptionType {
+	return []StorageEncryptionType{
+		"none",
+		"sse-kms",
+		"sse-rds",
+	}
+}
+
 type TargetConnectionNetworkType string
 
 // Enum values for TargetConnectionNetworkType

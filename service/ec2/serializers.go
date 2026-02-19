@@ -54116,6 +54116,11 @@ func awsEc2query_serializeDocumentCpuOptionsRequest(v *types.CpuOptionsRequest, 
 		objectKey.Integer(*v.CoreCount)
 	}
 
+	if len(v.NestedVirtualization) > 0 {
+		objectKey := object.Key("NestedVirtualization")
+		objectKey.String(string(v.NestedVirtualization))
+	}
+
 	if v.ThreadsPerCore != nil {
 		objectKey := object.Key("ThreadsPerCore")
 		objectKey.Integer(*v.ThreadsPerCore)
@@ -58117,6 +58122,11 @@ func awsEc2query_serializeDocumentLaunchTemplateCpuOptionsRequest(v *types.Launc
 	if v.CoreCount != nil {
 		objectKey := object.Key("CoreCount")
 		objectKey.Integer(*v.CoreCount)
+	}
+
+	if len(v.NestedVirtualization) > 0 {
+		objectKey := object.Key("NestedVirtualization")
+		objectKey.String(string(v.NestedVirtualization))
 	}
 
 	if v.ThreadsPerCore != nil {
@@ -69027,6 +69037,13 @@ func awsEc2query_serializeOpDocumentCreatePlacementGroupInput(v *CreatePlacement
 	if v.LinkedGroupId != nil {
 		objectKey := object.Key("LinkedGroupId")
 		objectKey.String(*v.LinkedGroupId)
+	}
+
+	if v.Operator != nil {
+		objectKey := object.Key("Operator")
+		if err := awsEc2query_serializeDocumentOperatorRequest(v.Operator, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.PartitionCount != nil {
@@ -84296,6 +84313,11 @@ func awsEc2query_serializeOpDocumentModifyInstanceCpuOptionsInput(v *ModifyInsta
 	if v.InstanceId != nil {
 		objectKey := object.Key("InstanceId")
 		objectKey.String(*v.InstanceId)
+	}
+
+	if len(v.NestedVirtualization) > 0 {
+		objectKey := object.Key("NestedVirtualization")
+		objectKey.String(string(v.NestedVirtualization))
 	}
 
 	if v.ThreadsPerCore != nil {

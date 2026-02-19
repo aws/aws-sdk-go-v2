@@ -1582,6 +1582,11 @@ func awsRestjson1_serializeDocumentAutoScaling(v *types.AutoScaling, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.MaxAutoscalingTaskCount != 0 {
+		ok := object.Key("maxAutoscalingTaskCount")
+		ok.Integer(v.MaxAutoscalingTaskCount)
+	}
+
 	{
 		ok := object.Key("maxWorkerCount")
 		ok.Integer(v.MaxWorkerCount)
@@ -1617,6 +1622,11 @@ func awsRestjson1_serializeDocumentAutoScaling(v *types.AutoScaling, value smith
 func awsRestjson1_serializeDocumentAutoScalingUpdate(v *types.AutoScalingUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.MaxAutoscalingTaskCount != 0 {
+		ok := object.Key("maxAutoscalingTaskCount")
+		ok.Integer(v.MaxAutoscalingTaskCount)
+	}
 
 	{
 		ok := object.Key("maxWorkerCount")

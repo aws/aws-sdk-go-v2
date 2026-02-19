@@ -49461,6 +49461,113 @@ func awsAwsjson11_deserializeDocumentClusterEventSummary(v **types.ClusterEventS
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClusterFsxLustreConfig(v **types.ClusterFsxLustreConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterFsxLustreConfig
+	if *v == nil {
+		sv = &types.ClusterFsxLustreConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DnsName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterDnsName to be of type string, got %T instead", value)
+				}
+				sv.DnsName = ptr.String(jtv)
+			}
+
+		case "MountName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterMountName to be of type string, got %T instead", value)
+				}
+				sv.MountName = ptr.String(jtv)
+			}
+
+		case "MountPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterFsxMountPath to be of type string, got %T instead", value)
+				}
+				sv.MountPath = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterFsxOpenZfsConfig(v **types.ClusterFsxOpenZfsConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterFsxOpenZfsConfig
+	if *v == nil {
+		sv = &types.ClusterFsxOpenZfsConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DnsName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterDnsName to be of type string, got %T instead", value)
+				}
+				sv.DnsName = ptr.String(jtv)
+			}
+
+		case "MountPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterFsxMountPath to be of type string, got %T instead", value)
+				}
+				sv.MountPath = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.ClusterInstanceGroupDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -49596,6 +49703,11 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 
 		case "ScheduledUpdateConfig":
 			if err := awsAwsjson11_deserializeDocumentScheduledUpdateConfig(&sv.ScheduledUpdateConfig, value); err != nil {
+				return err
+			}
+
+		case "SlurmConfig":
+			if err := awsAwsjson11_deserializeDocumentClusterSlurmConfigDetails(&sv.SlurmConfig, value); err != nil {
 				return err
 			}
 
@@ -49843,6 +49955,26 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ClusterInstanceStorageConfigMemberEbsVolumeConfig{Value: mv}
+			break loop
+
+		case "FsxLustreConfig":
+			var mv types.ClusterFsxLustreConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentClusterFsxLustreConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ClusterInstanceStorageConfigMemberFsxLustreConfig{Value: mv}
+			break loop
+
+		case "FsxOpenZfsConfig":
+			var mv types.ClusterFsxOpenZfsConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentClusterFsxOpenZfsConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ClusterInstanceStorageConfigMemberFsxOpenZfsConfig{Value: mv}
 			break loop
 
 		default:
@@ -50703,6 +50835,11 @@ func awsAwsjson11_deserializeDocumentClusterOrchestrator(v **types.ClusterOrches
 				return err
 			}
 
+		case "Slurm":
+			if err := awsAwsjson11_deserializeDocumentClusterOrchestratorSlurmConfig(&sv.Slurm, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -50749,6 +50886,82 @@ func awsAwsjson11_deserializeDocumentClusterOrchestratorEksConfig(v **types.Clus
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterOrchestratorSlurmConfig(v **types.ClusterOrchestratorSlurmConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterOrchestratorSlurmConfig
+	if *v == nil {
+		sv = &types.ClusterOrchestratorSlurmConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SlurmConfigStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterSlurmConfigStrategy to be of type string, got %T instead", value)
+				}
+				sv.SlurmConfigStrategy = types.ClusterSlurmConfigStrategy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterPartitionNames(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ClusterPartitionName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -51087,6 +51300,51 @@ func awsAwsjson11_deserializeDocumentClusterSchedulerConfigSummaryList(v *[]type
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterSlurmConfigDetails(v **types.ClusterSlurmConfigDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterSlurmConfigDetails
+	if *v == nil {
+		sv = &types.ClusterSlurmConfigDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NodeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterSlurmNodeType to be of type string, got %T instead", value)
+				}
+				sv.NodeType = types.ClusterSlurmNodeType(jtv)
+			}
+
+		case "PartitionNames":
+			if err := awsAwsjson11_deserializeDocumentClusterPartitionNames(&sv.PartitionNames, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
