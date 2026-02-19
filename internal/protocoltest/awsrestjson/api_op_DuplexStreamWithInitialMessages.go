@@ -184,11 +184,6 @@ func (m *eventStreamBuild_opDuplexStreamWithInitialMessagesMiddleware) HandleBui
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleBuild(ctx, in)
-	initialReply, ok := out.Result.(*DuplexStreamWithInitialMessagesInitialReply)
-	_ = initialReply
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected type of result. expected DuplexStreamWithInitialMessagesInitialReply, got %T. Additionally %w", out.Result, err)
-	}
 	res, ok := middleware.GetEventStreamOutputToMetadata[DuplexStreamWithInitialMessagesOutput](&metadata)
 	if !ok {
 		return out, metadata, fmt.Errorf("expected to find an object of type DuplexStreamWithInitialMessagesOutput on metadata, none was found. Metadata %v. Additionally %w", metadata, err)
@@ -198,9 +193,19 @@ func (m *eventStreamBuild_opDuplexStreamWithInitialMessagesMiddleware) HandleBui
 		res.eventStream.err.SetError(err)
 		res.GetStream().Close()
 	}
+	initialReply, ok := out.Result.(*DuplexStreamWithInitialMessagesInitialReply)
+	_ = initialReply
+	if !ok {
+		// set an initial reply with just the metadata. Error was set above
+		response := DuplexStreamWithInitialMessagesInitialReply{
+			ResultMetadata: metadata,
+		}
+		res.initialReply <- response
+		return out, metadata, fmt.Errorf("unexpected type of result. expected DuplexStreamWithInitialMessagesInitialReply, got %T. Additionally %w", out.Result, err)
+	}
 	response := DuplexStreamWithInitialMessagesInitialReply{
 		ResultMetadata:        metadata,
-		initialResponseMember: initialReply.initialResponseMember,
+		InitialResponseMember: initialReply.InitialResponseMember,
 	}
 	res.initialReply <- response
 	return out, metadata, err

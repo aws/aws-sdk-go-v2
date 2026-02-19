@@ -401,28 +401,27 @@ func (c *Client) invokeEventStreamOperation(
 	// create a channel that returns immediately as soon as the request to the server is made
 	results := make(chan PartialResult, 1)
 	ctx = context.WithValue(ctx, partialResultChan{}, results)
-	// do
 	go func() {
-		result, metadata, err = decorated.Handle(ctx, params)
-		if err != nil {
-			span.SetProperty("exception.type", fmt.Sprintf("%T", err))
-			span.SetProperty("exception.message", err.Error())
+		_, _, asyncErr := decorated.Handle(ctx, params)
+		if asyncErr != nil {
+			span.SetProperty("exception.type", fmt.Sprintf("%T", asyncErr))
+			span.SetProperty("exception.message", asyncErr.Error())
 
 			var aerr smithy.APIError
-			if errors.As(err, &aerr) {
+			if errors.As(asyncErr, &aerr) {
 				span.SetProperty("api.error_code", aerr.ErrorCode())
 				span.SetProperty("api.error_message", aerr.ErrorMessage())
 				span.SetProperty("api.error_fault", aerr.ErrorFault().String())
 			}
 
-			err = &smithy.OperationError{
+			asyncErr = &smithy.OperationError{
 				ServiceID:     ServiceID,
 				OperationName: opID,
-				Err:           err,
+				Err:           asyncErr,
 			}
 		}
-		span.SetProperty("error", err != nil)
-		if err == nil {
+		span.SetProperty("error", asyncErr != nil)
+		if asyncErr == nil {
 			span.SetStatus(tracing.SpanStatusOK)
 		} else {
 			span.SetStatus(tracing.SpanStatusError)

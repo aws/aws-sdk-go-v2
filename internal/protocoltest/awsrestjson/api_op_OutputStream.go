@@ -165,11 +165,6 @@ func (m *eventStreamBuild_opOutputStreamMiddleware) HandleBuild(ctx context.Cont
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleBuild(ctx, in)
-	initialReply, ok := out.Result.(*OutputStreamInitialReply)
-	_ = initialReply
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected type of result. expected OutputStreamInitialReply, got %T. Additionally %w", out.Result, err)
-	}
 	res, ok := middleware.GetEventStreamOutputToMetadata[OutputStreamOutput](&metadata)
 	if !ok {
 		return out, metadata, fmt.Errorf("expected to find an object of type OutputStreamOutput on metadata, none was found. Metadata %v. Additionally %w", metadata, err)
@@ -178,6 +173,16 @@ func (m *eventStreamBuild_opOutputStreamMiddleware) HandleBuild(ctx context.Cont
 		// fail the event stream because the middleware failed
 		res.eventStream.err.SetError(err)
 		res.GetStream().Close()
+	}
+	initialReply, ok := out.Result.(*OutputStreamInitialReply)
+	_ = initialReply
+	if !ok {
+		// set an initial reply with just the metadata. Error was set above
+		response := OutputStreamInitialReply{
+			ResultMetadata: metadata,
+		}
+		res.initialReply <- response
+		return out, metadata, fmt.Errorf("unexpected type of result. expected OutputStreamInitialReply, got %T. Additionally %w", out.Result, err)
 	}
 	response := OutputStreamInitialReply{
 		ResultMetadata: metadata,
