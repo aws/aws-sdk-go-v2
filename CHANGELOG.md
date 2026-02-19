@@ -1,3 +1,11 @@
+# Release (2026-02-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bcmdashboards`: [v1.1.0](service/bcmdashboards/CHANGELOG.md#v110-2026-02-19)
+  * **Feature**: The Billing and Cost Management GetDashboard API now returns identifier for each widget, enabling users to uniquely identify widgets within their dashboards.
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep`: [v1.11.0](service/pcaconnectorscep/CHANGELOG.md#v1110-2026-02-19)
+  * **Feature**: AWS Private CA Connector for SCEP now supports AWS PrivateLink, allowing your clients to request certificates from within your Amazon Virtual Private Cloud (VPC) without traversing the public internet. With this launch, you can create VPC endpoints to connect to your SCEP connector privately.
+
 # Release (2026-02-18)
 
 ## General Highlights

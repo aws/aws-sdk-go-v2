@@ -29,10 +29,12 @@ type ConnectorStatusReason string
 
 // Enum values for ConnectorStatusReason
 const (
-	ConnectorStatusReasonInternalFailure           ConnectorStatusReason = "INTERNAL_FAILURE"
-	ConnectorStatusReasonPrivatecaAccessDenied     ConnectorStatusReason = "PRIVATECA_ACCESS_DENIED"
-	ConnectorStatusReasonPrivatecaInvalidState     ConnectorStatusReason = "PRIVATECA_INVALID_STATE"
-	ConnectorStatusReasonPrivatecaResourceNotFound ConnectorStatusReason = "PRIVATECA_RESOURCE_NOT_FOUND"
+	ConnectorStatusReasonInternalFailure               ConnectorStatusReason = "INTERNAL_FAILURE"
+	ConnectorStatusReasonPrivatecaAccessDenied         ConnectorStatusReason = "PRIVATECA_ACCESS_DENIED"
+	ConnectorStatusReasonPrivatecaInvalidState         ConnectorStatusReason = "PRIVATECA_INVALID_STATE"
+	ConnectorStatusReasonPrivatecaResourceNotFound     ConnectorStatusReason = "PRIVATECA_RESOURCE_NOT_FOUND"
+	ConnectorStatusReasonVpcEndpointResourceNotFound   ConnectorStatusReason = "VPC_ENDPOINT_RESOURCE_NOT_FOUND"
+	ConnectorStatusReasonVpcEndpointDnsEntriesNotFound ConnectorStatusReason = "VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND"
 )
 
 // Values returns all known values for ConnectorStatusReason. Note that this can
@@ -45,6 +47,8 @@ func (ConnectorStatusReason) Values() []ConnectorStatusReason {
 		"PRIVATECA_ACCESS_DENIED",
 		"PRIVATECA_INVALID_STATE",
 		"PRIVATECA_RESOURCE_NOT_FOUND",
+		"VPC_ENDPOINT_RESOURCE_NOT_FOUND",
+		"VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND",
 	}
 }
 

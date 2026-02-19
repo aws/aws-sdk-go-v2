@@ -56,7 +56,7 @@ type CreateConnectorInput struct {
 	// each call, Connector for SCEP recognizes that you are requesting multiple
 	// challenge passwords.
 	//
-	// [CreateChallenge]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
+	// [CreateChallenge]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
 	ClientToken *string
 
 	// If you don't supply a value, by default Connector for SCEP creates a connector
@@ -76,6 +76,11 @@ type CreateConnectorInput struct {
 
 	// The key-value pairs to associate with the resource.
 	Tags map[string]string
+
+	// If you don't supply a value, by default Connector for SCEP creates a connector
+	// accessible over the public internet. If you provide a VPC endpoint ID, creates a
+	// connector accessible only through that specific VPC endpoint.
+	VpcEndpointId *string
 
 	noSmithyDocumentSerde
 }

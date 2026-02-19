@@ -15,7 +15,7 @@ import (
 // details about the connector, such as the public SCEP URL where your clients can
 // request certificates.
 //
-// [Connector]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Connector.html
+// [Connector]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Connector.html
 func (c *Client) GetConnector(ctx context.Context, params *GetConnectorInput, optFns ...func(*Options)) (*GetConnectorOutput, error) {
 	if params == nil {
 		params = &GetConnectorInput{}

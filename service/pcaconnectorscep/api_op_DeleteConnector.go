@@ -13,7 +13,7 @@ import (
 // Deletes the specified [Connector]. This operation also deletes any challenges associated
 // with the connector.
 //
-// [Connector]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Connector.html
+// [Connector]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Connector.html
 func (c *Client) DeleteConnector(ctx context.Context, params *DeleteConnectorInput, optFns ...func(*Options)) (*DeleteConnectorOutput, error) {
 	if params == nil {
 		params = &DeleteConnectorInput{}
