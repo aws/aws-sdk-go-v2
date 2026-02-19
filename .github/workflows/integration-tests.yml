@@ -26,6 +26,10 @@ jobs:
         with:
           role-to-assume: ${{ secrets.CI_AWS_ROLE_ARN }}
           aws-region: us-west-2
+      - name: Find smithy-go
+        env:
+          RUNNER_TMPDIR: ${{ runner.temp }}
+        run: ./ci-find-smithy-go.sh
       - name: Run tests
         id: integration-tests
         uses: aws-actions/aws-codebuild-run-build@v1
