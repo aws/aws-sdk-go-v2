@@ -182,6 +182,13 @@ type AssociationDescription struct {
 	// it. This parameter isn't supported for rate expressions.
 	ApplyOnlyAtCronInterval bool
 
+	// A role used by association to take actions on your behalf. State Manager will
+	// assume this role and call required APIs when dispatching configurations to
+	// nodes. If not specified, [service-linked role for Systems Manager]will be used by default.
+	//
+	// [service-linked role for Systems Manager]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html
+	AssociationDispatchAssumeRole *string
+
 	// The association ID.
 	AssociationId *string
 
@@ -483,6 +490,13 @@ type AssociationVersionInfo struct {
 	// this option if you don't want an association to run immediately after you create
 	// it. This parameter isn't supported for rate expressions.
 	ApplyOnlyAtCronInterval bool
+
+	// A role used by association to take actions on your behalf. State Manager will
+	// assume this role and call required APIs when dispatching configurations to
+	// nodes. If not specified, [service-linked role for Systems Manager]will be used by default.
+	//
+	// [service-linked role for Systems Manager]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html
+	AssociationDispatchAssumeRole *string
 
 	// The ID created by the system when the association was created.
 	AssociationId *string

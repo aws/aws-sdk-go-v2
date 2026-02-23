@@ -12,7 +12,8 @@ import (
 )
 
 // Update the lifecycle of a Recommendation within an Organization. This API only
-// supports prioritized recommendations.
+// supports prioritized recommendations and updates global priority
+// recommendations, eliminating the need to call the API in each AWS Region.
 func (c *Client) UpdateOrganizationRecommendationLifecycle(ctx context.Context, params *UpdateOrganizationRecommendationLifecycleInput, optFns ...func(*Options)) (*UpdateOrganizationRecommendationLifecycleOutput, error) {
 	if params == nil {
 		params = &UpdateOrganizationRecommendationLifecycleInput{}

@@ -1,3 +1,20 @@
+# Release (2026-02-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.54.0](service/appstream/CHANGELOG.md#v1540-2026-02-20)
+  * **Feature**: Adding new attribute to disable IMDS v1 APIs for fleet, Image Builder and AppBlockBuilder instances.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.72.0](service/ecs/CHANGELOG.md#v1720-2026-02-20)
+  * **Feature**: Migrated to Smithy. No functional changes
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.39.0](service/sagemakerruntime/CHANGELOG.md#v1390-2026-02-20)
+  * **Feature**: Added support for S3OutputPathExtension and Filename parameters to the InvokeEndpointAsync API to allow users to customize the S3 output path and file name for async inference response payloads.
+* `github.com/aws/aws-sdk-go-v2/service/signerdata`: [v1.0.0](service/signerdata/CHANGELOG.md#v100-2026-02-20)
+  * **Release**: New AWS service client module
+  * **Feature**: This release introduces AWS Signer Data Plane SDK client supporting GetRevocationStatus API. The new client enables AWS PrivateLink connectivity with both private DNS and VPC endpoint URLs.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.68.0](service/ssm/CHANGELOG.md#v1680-2026-02-20)
+  * **Feature**: Add support for AssociationDispatchAssumeRole in AWS SSM State Manager.
+* `github.com/aws/aws-sdk-go-v2/service/trustedadvisor`: [v1.14.0](service/trustedadvisor/CHANGELOG.md#v1140-2026-02-20)
+  * **Feature**: Adding a new enum attribute(statusReason) to TrustedAdvisorAPI response. This attribute explains reasoning behind check status for certain specific scenarios.
+
 # Release (2026-02-19)
 
 ## Module Highlights

@@ -12,7 +12,8 @@ import (
 )
 
 // Update the lifecyle of a Recommendation. This API only supports prioritized
-// recommendations.
+// recommendations and updates global priority recommendations, eliminating the
+// need to call the API in each AWS Region.
 func (c *Client) UpdateRecommendationLifecycle(ctx context.Context, params *UpdateRecommendationLifecycleInput, optFns ...func(*Options)) (*UpdateRecommendationLifecycleOutput, error) {
 	if params == nil {
 		params = &UpdateRecommendationLifecycleInput{}

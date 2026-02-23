@@ -1,3 +1,7 @@
+# v1.14.0 (2026-02-20)
+
+* **Feature**: Adding a new enum attribute(statusReason) to TrustedAdvisorAPI response. This attribute explains reasoning behind check status for certain specific scenarios.
+
 # v1.13.18 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

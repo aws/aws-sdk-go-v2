@@ -178,6 +178,10 @@ type AppBlockBuilder struct {
 	// The description of the app block builder.
 	Description *string
 
+	// Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for
+	// the app block builder.
+	DisableIMDSV1 *bool
+
 	// The display name of the app block builder.
 	DisplayName *string
 
@@ -799,6 +803,10 @@ type Fleet struct {
 	// The description to display.
 	Description *string
 
+	// Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for
+	// the fleet.
+	DisableIMDSV1 *bool
+
 	// The amount of time that a streaming session remains active after users
 	// disconnect. If they try to reconnect to the streaming session after a
 	// disconnection or network interruption within this time interval, they are
@@ -1056,6 +1064,10 @@ type ImageBuilder struct {
 
 	// The description to display.
 	Description *string
+
+	// Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for
+	// the image builder.
+	DisableIMDSV1 *bool
 
 	// The image builder name to display.
 	DisplayName *string

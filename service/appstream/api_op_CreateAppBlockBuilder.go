@@ -72,6 +72,10 @@ type CreateAppBlockBuilderInput struct {
 	// The description of the app block builder.
 	Description *string
 
+	// Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce
+	// IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+	DisableIMDSV1 *bool
+
 	// The display name of the app block builder.
 	DisplayName *string
 

@@ -418,6 +418,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>"
                     }
+                },
+                "DisableIMDSV1": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for the app block builder.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1764,6 +1770,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>"
                     }
+                },
+                "DisableIMDSV1": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2495,6 +2507,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for the root volume of fleet instances. Use this to customize storage capacity from 200 GB up to 500 GB based on your application requirements.</p>"
                     }
+                },
+                "DisableIMDSV1": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>\n         <note>\n            <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -2663,6 +2681,12 @@
                     "target": "com.amazonaws.appstream#StringList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of license included applications to uninstall from the image builder during creation.</p>\n         <p>Possible values include the following:</p>\n         <ul>\n            <li>\n               <p>Microsoft_Office_2021_LTSC_Professional_Plus_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Office_2021_LTSC_Professional_Plus_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Office_2024_LTSC_Professional_Plus_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Office_2024_LTSC_Professional_Plus_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Visio_2021_LTSC_Professional_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Visio_2021_LTSC_Professional_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Visio_2024_LTSC_Professional_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Visio_2024_LTSC_Professional_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Project_2021_Professional_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Project_2021_Professional_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Project_2024_Professional_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Project_2024_Professional_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Office_2021_LTSC_Standard_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Office_2021_LTSC_Standard_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Office_2024_LTSC_Standard_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Office_2024_LTSC_Standard_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Visio_2021_LTSC_Standard_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Visio_2021_LTSC_Standard_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Visio_2024_LTSC_Standard_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Visio_2024_LTSC_Standard_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Project_2021_Standard_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Project_2021_Standard_64Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Project_2024_Standard_32Bit</p>\n            </li>\n            <li>\n               <p>Microsoft_Project_2024_Standard_64Bit</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DisableIMDSV1": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>\n         <note>\n            <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p>\n         </note>"
                     }
                 }
             },
@@ -6579,6 +6603,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current configuration of the root volume for fleet instances, including the storage size in GB.</p>"
                     }
+                },
+                "DisableIMDSV1": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for the fleet.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7244,6 +7274,12 @@
                     "target": "com.amazonaws.appstream#LatestAppstreamAgentVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the image builder is using the latest WorkSpaces Applications agent version or not.</p>"
+                    }
+                },
+                "DisableIMDSV1": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for the image builder.</p>"
                     }
                 }
             },
@@ -11026,6 +11062,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The attributes to delete from the app block builder.</p>"
                     }
+                },
+                "DisableIMDSV1": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11490,6 +11532,12 @@
                     "target": "com.amazonaws.appstream#VolumeConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated configuration for the root volume of fleet instances. Note that volume size cannot be decreased below the image volume size.</p>"
+                    }
+                },
+                "DisableIMDSV1": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>\n         <note>\n            <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p>\n         </note>"
                     }
                 }
             },

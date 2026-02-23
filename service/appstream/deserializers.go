@@ -11442,6 +11442,15 @@ func awsAwsjson11_deserializeDocumentAppBlockBuilder(v **types.AppBlockBuilder, 
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "DisableIMDSV1":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.DisableIMDSV1 = ptr.Bool(jtv)
+			}
+
 		case "DisplayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13210,6 +13219,15 @@ func awsAwsjson11_deserializeDocumentFleet(v **types.Fleet, value interface{}) e
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "DisableIMDSV1":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.DisableIMDSV1 = ptr.Bool(jtv)
+			}
+
 		case "DisconnectTimeoutInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13830,6 +13848,15 @@ func awsAwsjson11_deserializeDocumentImageBuilder(v **types.ImageBuilder, value 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "DisableIMDSV1":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.DisableIMDSV1 = ptr.Bool(jtv)
 			}
 
 		case "DisplayName":

@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// List a filterable set of Recommendations
+// List a filterable set of Recommendations. This API provides global
+// recommendations, eliminating the need to call the API in each AWS Region.
 func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommendationsInput, optFns ...func(*Options)) (*ListRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListRecommendationsInput{}
@@ -41,6 +42,10 @@ type ListRecommendationsInput struct {
 
 	// The check identifier of the Recommendation
 	CheckIdentifier *string
+
+	// The ISO 639-1 code for the language that you want your recommendations to
+	// appear in.
+	Language types.RecommendationLanguage
 
 	// The maximum number of results to return per page.
 	MaxResults *int32

@@ -229,6 +229,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointAsyncInput(v *InvokeEndpo
 		}
 	}
 
+	if v.Filename != nil {
+		locationName := "X-Amzn-Sagemaker-Filename"
+		encoder.SetHeader(locationName).String(*v.Filename)
+	}
+
 	if v.InferenceId != nil {
 		locationName := "X-Amzn-Sagemaker-Inference-Id"
 		encoder.SetHeader(locationName).String(*v.InferenceId)
@@ -247,6 +252,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointAsyncInput(v *InvokeEndpo
 	if v.RequestTTLSeconds != nil {
 		locationName := "X-Amzn-Sagemaker-Requestttlseconds"
 		encoder.SetHeader(locationName).Integer(*v.RequestTTLSeconds)
+	}
+
+	if v.S3OutputPathExtension != nil {
+		locationName := "X-Amzn-Sagemaker-S3outputpathextension"
+		encoder.SetHeader(locationName).String(*v.S3OutputPathExtension)
 	}
 
 	return nil

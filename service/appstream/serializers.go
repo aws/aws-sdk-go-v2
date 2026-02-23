@@ -6256,6 +6256,11 @@ func awsAwsjson11_serializeOpDocumentCreateAppBlockBuilderInput(v *CreateAppBloc
 		ok.String(*v.Description)
 	}
 
+	if v.DisableIMDSV1 != nil {
+		ok := object.Key("DisableIMDSV1")
+		ok.Boolean(*v.DisableIMDSV1)
+	}
+
 	if v.DisplayName != nil {
 		ok := object.Key("DisplayName")
 		ok.String(*v.DisplayName)
@@ -6562,6 +6567,11 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 		ok.String(*v.Description)
 	}
 
+	if v.DisableIMDSV1 != nil {
+		ok := object.Key("DisableIMDSV1")
+		ok.Boolean(*v.DisableIMDSV1)
+	}
+
 	if v.DisconnectTimeoutInSeconds != nil {
 		ok := object.Key("DisconnectTimeoutInSeconds")
 		ok.Integer(*v.DisconnectTimeoutInSeconds)
@@ -6701,6 +6711,11 @@ func awsAwsjson11_serializeOpDocumentCreateImageBuilderInput(v *CreateImageBuild
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.DisableIMDSV1 != nil {
+		ok := object.Key("DisableIMDSV1")
+		ok.Boolean(*v.DisableIMDSV1)
 	}
 
 	if v.DisplayName != nil {
@@ -8143,6 +8158,11 @@ func awsAwsjson11_serializeOpDocumentUpdateAppBlockBuilderInput(v *UpdateAppBloc
 		ok.String(*v.Description)
 	}
 
+	if v.DisableIMDSV1 != nil {
+		ok := object.Key("DisableIMDSV1")
+		ok.Boolean(*v.DisableIMDSV1)
+	}
+
 	if v.DisplayName != nil {
 		ok := object.Key("DisplayName")
 		ok.String(*v.DisplayName)
@@ -8332,6 +8352,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.DisableIMDSV1 != nil {
+		ok := object.Key("DisableIMDSV1")
+		ok.Boolean(*v.DisableIMDSV1)
 	}
 
 	if v.DisconnectTimeoutInSeconds != nil {
