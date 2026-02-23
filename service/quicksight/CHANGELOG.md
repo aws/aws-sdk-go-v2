@@ -1,3 +1,8 @@
+# v1.103.0 (2026-02-23)
+
+* **Feature**: Adds support for SEMISTRUCT to InputColumn Type
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.102.0 (2026-01-30)
 
 * **Feature**: Improve SessionTag usage guidelines in the GenerateEmbedURLForAnonymousUser API documentation. Update the GetIdentityContext document with the region support context.

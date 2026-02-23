@@ -1,3 +1,8 @@
+# v1.53.0 (2026-02-23)
+
+* **Feature**: Add workflow properties support to connections APIs
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.1 (2026-02-10)
 
 * No change notes available for this release.

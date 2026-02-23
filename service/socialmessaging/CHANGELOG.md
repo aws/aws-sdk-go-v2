@@ -1,3 +1,7 @@
+# v1.8.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2026-01-14)
 
 * **Feature**: This release clarifies WhatsApp template operations as a resource-authenticated operation via the parent WhatsApp Business Account. It also introduces new parameters for parameter format, CTA URL link tracking, and template body examples, and increases the phone number ID length.

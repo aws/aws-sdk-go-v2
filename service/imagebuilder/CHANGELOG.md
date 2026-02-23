@@ -1,3 +1,7 @@
+# v1.51.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.0 (2026-02-10)
 
 * **Feature**: EC2 Image Builder now supports wildcard patterns in lifecycle policies with recipes and enhances the experience of tag-scoped policies.

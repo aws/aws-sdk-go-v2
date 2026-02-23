@@ -1,3 +1,7 @@
+# v1.23.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2026-01-16)
 
 * **Feature**: Added ViewName to View-related responses and ServiceViewName to GetServiceView response.

@@ -1,3 +1,7 @@
+# v1.116.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.116.0 (2026-02-17)
 
 * **Feature**: Adds support for the StorageEncryptionType field to specify encryption type for DB clusters, DB instances, snapshots, automated backups, and global clusters.

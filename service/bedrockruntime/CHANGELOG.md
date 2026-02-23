@@ -1,3 +1,8 @@
+# v1.50.0 (2026-02-23)
+
+* **Feature**: Support bedrockruntime#InvokeModelWithBidirectionalStream by changing event stream code generation
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2026-02-04)
 
 * **Feature**: Added support for structured outputs to Converse and ConverseStream APIs.

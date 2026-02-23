@@ -1,3 +1,7 @@
+# v1.69.2 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.69.1 (2026-02-10)
 
 * **Documentation**: This release adds a documentation update for MdnResponse of type "ASYNC"

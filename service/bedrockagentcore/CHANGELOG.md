@@ -1,3 +1,7 @@
+# v1.13.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2026-02-10.2)
 
 * **Feature**: Added AgentCore browser proxy configuration support, allowing routing of browser traffic through HTTP and HTTPS proxy servers with authentication and bypass rules.

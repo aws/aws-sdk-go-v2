@@ -1,3 +1,7 @@
+# v1.50.3 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.2 (2026-02-03)
 
 * **Documentation**: Updated the CloseAccount description.

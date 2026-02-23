@@ -1,3 +1,7 @@
+# v1.61.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2026-01-21)
 
 * **Feature**: AWS Config Conformance Packs now support tag-on-create through PutConformancePack API.

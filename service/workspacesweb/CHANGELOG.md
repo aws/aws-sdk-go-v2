@@ -1,3 +1,7 @@
+# v1.38.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2026-02-17)
 
 * **Feature**: Adds support for branding customization without requiring a custom wallpaper.

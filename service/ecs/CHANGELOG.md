@@ -1,3 +1,7 @@
+# v1.72.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.72.0 (2026-02-20)
 
 * **Feature**: Migrated to Smithy. No functional changes

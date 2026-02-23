@@ -1,3 +1,7 @@
+# v1.80.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.80.0 (2026-02-11)
 
 * **Feature**: This release adds support for Windows Server 2025 in Amazon EKS Managed Node Groups.

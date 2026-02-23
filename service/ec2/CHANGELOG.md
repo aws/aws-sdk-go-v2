@@ -1,3 +1,7 @@
+# v1.290.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.290.0 (2026-02-17)
 
 * **Feature**: Add Operator field to CreatePlacementGroup and DescribePlacementGroup APIs.

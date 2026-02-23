@@ -1,3 +1,7 @@
+# v1.137.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.137.0 (2026-02-05)
 
 * **Feature**: This release adds the capability to easily create custom AWS Glue connections to data sources with REST APIs.

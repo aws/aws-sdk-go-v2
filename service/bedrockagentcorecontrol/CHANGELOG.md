@@ -1,3 +1,7 @@
+# v1.19.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2026-02-05)
 
 * **Feature**: Support Browser profile persistence (cookies and local storage) across sessions for AgentCore Browser.

@@ -1,3 +1,7 @@
+# v1.34.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2026-01-14)
 
 * **Feature**: Adds support for enabling extra compute resources for automatic optimization during create and update operations in Amazon Redshift Serverless workgroups.

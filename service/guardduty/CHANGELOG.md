@@ -1,3 +1,7 @@
+# v1.73.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.73.0 (2026-01-22)
 
 * **Feature**: Adding new enum value for ScanStatusReason

@@ -1,3 +1,7 @@
+# v1.62.2 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.1 (2026-02-04)
 
 * **Documentation**: We have increased the maximum duration for a deferred maintenance window from 45 days to 60 days for Amazon Redshift provisioned clusters. This enhancement provides customers with greater flexibility in scheduling patching and maintenance activities while also maintaining security compliance.

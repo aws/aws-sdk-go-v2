@@ -1,3 +1,7 @@
+# v1.21.18 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.17 (2026-02-05)
 
 * **Documentation**: Minor neptune-graph documentation changes

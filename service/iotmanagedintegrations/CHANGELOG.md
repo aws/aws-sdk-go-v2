@@ -1,3 +1,7 @@
+# v1.8.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2026-02-06)
 
 * **Feature**: Adding support for Custom(General) Authorization in managed integrations for AWS IoT Device Management cloud connectors.

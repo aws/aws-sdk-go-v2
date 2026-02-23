@@ -1,3 +1,7 @@
+# v1.25.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2026-02-06)
 
 * **Feature**: Adds support for tagging jobs during job creation

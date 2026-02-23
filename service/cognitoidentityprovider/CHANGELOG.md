@@ -1,3 +1,7 @@
+# v1.58.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2026-01-28)
 
 * **Feature**: This release adds support for a new lambda trigger to transform federated user attributes during the authentication with external identity providers on Cognito Managed Login.

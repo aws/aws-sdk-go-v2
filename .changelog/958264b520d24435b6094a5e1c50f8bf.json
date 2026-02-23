@@ -1,8 +1,0 @@
-{
-    "id": "958264b5-20d2-4435-b609-4a5e1c50f8bf",
-    "type": "feature",
-    "description": "This change supports the creation of multi-account global tables. It adds one new arguments to UpdateTable, GlobalTableSettingsReplicationMode.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

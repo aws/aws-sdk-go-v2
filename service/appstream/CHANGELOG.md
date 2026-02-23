@@ -1,3 +1,7 @@
+# v1.54.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2026-02-20)
 
 * **Feature**: Adding new attribute to disable IMDS v1 APIs for fleet, Image Builder and AppBlockBuilder instances.

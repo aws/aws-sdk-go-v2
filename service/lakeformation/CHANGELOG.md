@@ -1,3 +1,7 @@
+# v1.47.2 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.1 (2026-02-10)
 
 * **Documentation**: Allow cross account v5 in put data lake settings

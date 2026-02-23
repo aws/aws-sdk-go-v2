@@ -1,8 +1,0 @@
-{
-    "id": "03f01516-2067-42f8-8e53-4574986b73ca",
-    "type": "feature",
-    "description": "Add workflow properties support to connections APIs",
-    "modules": [
-        "service/datazone"
-    ]
-}

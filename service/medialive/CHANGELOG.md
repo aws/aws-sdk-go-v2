@@ -1,3 +1,7 @@
+# v1.92.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.92.0 (2026-02-05)
 
 * **Feature**: Outputs using the AV1 codec in CMAF Ingest output groups in MediaLive now have the ability to specify a target bit depth of 8 or 10.

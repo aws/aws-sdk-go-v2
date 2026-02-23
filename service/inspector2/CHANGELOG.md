@@ -1,3 +1,7 @@
+# v1.47.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.0 (2026-02-13)
 
 * **Feature**: Added .Net 10 (dotnet10) and Node 24.x (node24.x) runtime support for lambda package scanning

@@ -1,3 +1,7 @@
+# v1.11.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2026-02-10)
 
 * **Feature**: Add the missing event type for WhatsApp

@@ -1,3 +1,7 @@
+# v1.5.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2026-01-20)
 
 * **Feature**: Added billing configuration support for WorkSpaces Instances with monthly and hourly billing modes, including new filtering capabilities for instance type searches.

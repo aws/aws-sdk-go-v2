@@ -1,3 +1,7 @@
+# v1.28.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2026-02-16)
 
 * **Feature**: Update MessageType enum to include missing types.

@@ -1,3 +1,7 @@
+# v1.64.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.0 (2026-01-22)
 
 * **Feature**: This release adds support for Amazon EC2 Auto Scaling group deletion protection

@@ -1,8 +1,0 @@
-{
-    "id": "351f105a-fb8a-439e-aa24-fae47f98e309",
-    "type": "feature",
-    "description": "AWS Wickr now provides APIs to manage your Wickr OpenTDF integration. These APIs enable you to test and save your OpenTDF configuration allowing you to manage rooms based on Trusted Data Format attributes.",
-    "modules": [
-        "service/wickr"
-    ]
-}

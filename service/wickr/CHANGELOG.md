@@ -1,3 +1,8 @@
+# v1.1.0 (2026-02-23)
+
+* **Feature**: AWS Wickr now provides APIs to manage your Wickr OpenTDF integration. These APIs enable you to test and save your OpenTDF configuration allowing you to manage rooms based on Trusted Data Format attributes.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,8 @@
+# v1.54.0 (2026-02-23)
+
+* **Feature**: Automated Reasoning checks in Amazon Bedrock Guardrails now support fidelity report generation. The new workflow type assesses policy coverage and accuracy against customer documents. The GetAutomatedReasoningPolicyBuildWorkflowResultAssets API adds support for the three new asset types.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.2 (2026-01-27)
 
 * No change notes available for this release.

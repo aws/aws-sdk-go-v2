@@ -1,3 +1,7 @@
+# v1.162.2 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.162.1 (2026-02-18)
 
 * **Documentation**: Correcting in-app notifications API documentation.

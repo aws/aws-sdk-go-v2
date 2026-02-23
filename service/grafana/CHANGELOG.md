@@ -1,3 +1,7 @@
+# v1.33.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2026-02-17)
 
 * **Feature**: This release updates Amazon Managed Grafana's APIs to support customer managed KMS keys.

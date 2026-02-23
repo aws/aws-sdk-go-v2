@@ -1,3 +1,8 @@
+# v1.37.0 (2026-02-23)
+
+* **Feature**: SearchCases API can now accept 25 fields in the request and response as opposed to the previous limit of 10. DeleteField's hard limit of 100 fields per domain has been lifted.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2026-02-04)
 
 * **Feature**: Amazon Connect Cases now supports larger, multi-line text fields with up to 4,100 characters. Administrators can use the Admin UI to select the appropriate configuration (single-line or multi-line) on a per-field basis, improving case documentation capabilities.

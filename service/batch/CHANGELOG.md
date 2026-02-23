@@ -1,3 +1,7 @@
+# v1.60.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2026-02-11)
 
 * **Feature**: Add support for listing jobs by share identifier and getting snapshots of active capacity utilization by job queue and share.

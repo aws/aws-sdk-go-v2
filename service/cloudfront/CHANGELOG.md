@@ -1,3 +1,7 @@
+# v1.60.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2026-02-02)
 
 * **Feature**: Add OriginMTLS support to CloudFront Distribution APIs

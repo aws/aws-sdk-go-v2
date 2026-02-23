@@ -1,3 +1,7 @@
+# v1.57.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2026-02-05)
 
 * **Feature**: Reduces the minimum TargetDpus to create or update capacity reservations from 24 to 4.

@@ -1,3 +1,30 @@
+# Release (2026-02-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.54.0](service/bedrock/CHANGELOG.md#v1540-2026-02-23)
+  * **Feature**: Automated Reasoning checks in Amazon Bedrock Guardrails now support fidelity report generation. The new workflow type assesses policy coverage and accuracy against customer documents. The GetAutomatedReasoningPolicyBuildWorkflowResultAssets API adds support for the three new asset types.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.50.0](service/bedrockruntime/CHANGELOG.md#v1500-2026-02-23)
+  * **Feature**: Support bedrockruntime#InvokeModelWithBidirectionalStream by changing event stream code generation
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime/internal/testing`: [v1.0.0-preview](service/bedrockruntime/internal/testing/CHANGELOG.md#v100-preview-2026-02-23)
+  * **Feature**: Support bedrockruntime#InvokeModelWithBidirectionalStream by changing event stream code generation
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.37.0](service/connectcases/CHANGELOG.md#v1370-2026-02-23)
+  * **Feature**: SearchCases API can now accept 25 fields in the request and response as opposed to the previous limit of 10. DeleteField's hard limit of 100 fields per domain has been lifted.
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.14.6](service/controlcatalog/CHANGELOG.md#v1146-2026-02-23)
+  * **Documentation**: Updated ExemptedPrincipalArns parameter documentation for improved accuracy
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.53.0](service/datazone/CHANGELOG.md#v1530-2026-02-23)
+  * **Feature**: Add workflow properties support to connections APIs
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.56.0](service/dynamodb/CHANGELOG.md#v1560-2026-02-23)
+  * **Feature**: This change supports the creation of multi-account global tables. It adds one new arguments to UpdateTable, GlobalTableSettingsReplicationMode.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.56.0](service/mediatailor/CHANGELOG.md#v1560-2026-02-23)
+  * **Feature**: Updated endpoint rule set for dualstack endpoints. Added a new opt-in option to log raw ad decision server requests for Playback Configurations.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.103.0](service/quicksight/CHANGELOG.md#v11030-2026-02-23)
+  * **Feature**: Adds support for SEMISTRUCT to InputColumn Type
+* `github.com/aws/aws-sdk-go-v2/service/wickr`: [v1.1.0](service/wickr/CHANGELOG.md#v110-2026-02-23)
+  * **Feature**: AWS Wickr now provides APIs to manage your Wickr OpenTDF integration. These APIs enable you to test and save your OpenTDF configuration allowing you to manage rooms based on Trusted Data Format attributes.
+
 # Release (2026-02-20)
 
 ## Module Highlights
