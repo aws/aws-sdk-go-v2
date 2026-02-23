@@ -20,7 +20,7 @@ func (c *Client) DuplexStreamWithInitialMessages(ctx context.Context, params *Du
 		params = &DuplexStreamWithInitialMessagesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DuplexStreamWithInitialMessages", params, optFns, c.addOperationDuplexStreamWithInitialMessagesMiddlewares)
+	result, metadata, err := c.invokeEventStreamOperation(ctx, "DuplexStreamWithInitialMessages", params, optFns, c.addOperationDuplexStreamWithInitialMessagesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,12 +39,9 @@ type DuplexStreamWithInitialMessagesInput struct {
 }
 
 type DuplexStreamWithInitialMessagesOutput struct {
-
-	// This member is required.
-	InitialResponseMember *string
-
 	eventStream *DuplexStreamWithInitialMessagesEventStream
 
+	initialReply chan DuplexStreamWithInitialMessagesInitialReply
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -54,6 +51,20 @@ type DuplexStreamWithInitialMessagesOutput struct {
 // GetStream returns the type to interact with the event stream.
 func (o *DuplexStreamWithInitialMessagesOutput) GetStream() *DuplexStreamWithInitialMessagesEventStream {
 	return o.eventStream
+}
+
+type DuplexStreamWithInitialMessagesInitialReply struct {
+
+	// This member is required.
+	InitialResponseMember *string
+	// Metadata pertaining to the operation's result.
+	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
+}
+
+func (o *DuplexStreamWithInitialMessagesOutput) GetInitialReply() <-chan DuplexStreamWithInitialMessagesInitialReply {
+	return o.initialReply
 }
 
 func (c *Client) addOperationDuplexStreamWithInitialMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
@@ -82,6 +93,9 @@ func (c *Client) addOperationDuplexStreamWithInitialMessagesMiddlewares(stack *m
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addEventStreamBuild_opDuplexStreamWithInitialMessagesMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addClientRequestID(stack); err != nil {
@@ -157,6 +171,47 @@ func (c *Client) addOperationDuplexStreamWithInitialMessagesMiddlewares(stack *m
 		return err
 	}
 	return nil
+}
+
+type eventStreamBuild_opDuplexStreamWithInitialMessagesMiddleware struct {
+}
+
+func (*eventStreamBuild_opDuplexStreamWithInitialMessagesMiddleware) ID() string {
+	return "EventStreamBuildMiddleware"
+}
+
+func (m *eventStreamBuild_opDuplexStreamWithInitialMessagesMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleBuild(ctx, in)
+	res, ok := middleware.GetEventStreamOutputToMetadata[DuplexStreamWithInitialMessagesOutput](&metadata)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected to find an object of type DuplexStreamWithInitialMessagesOutput on metadata, none was found. Metadata %v. Additionally %w", metadata, err)
+	}
+	if err != nil {
+		// fail the event stream because the middleware failed
+		res.eventStream.err.SetError(err)
+		res.GetStream().Close()
+	}
+	initialReply, ok := out.Result.(*DuplexStreamWithInitialMessagesInitialReply)
+	_ = initialReply
+	if !ok {
+		// set an initial reply with just the metadata. Error was set above
+		response := DuplexStreamWithInitialMessagesInitialReply{
+			ResultMetadata: metadata,
+		}
+		res.initialReply <- response
+		return out, metadata, fmt.Errorf("unexpected type of result. expected DuplexStreamWithInitialMessagesInitialReply, got %T. Additionally %w", out.Result, err)
+	}
+	response := DuplexStreamWithInitialMessagesInitialReply{
+		ResultMetadata:        metadata,
+		InitialResponseMember: initialReply.InitialResponseMember,
+	}
+	res.initialReply <- response
+	return out, metadata, err
+}
+func addEventStreamBuild_opDuplexStreamWithInitialMessagesMiddleware(stack *middleware.Stack) error {
+	return stack.Build.Add(&eventStreamBuild_opDuplexStreamWithInitialMessagesMiddleware{}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDuplexStreamWithInitialMessages(region string) *awsmiddleware.RegisterServiceMetadata {

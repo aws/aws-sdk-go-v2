@@ -1,0 +1,11 @@
+{
+    "id": "30cf5d60-665c-4b4a-9221-c4972708dbcd",
+    "type": "feature",
+    "description": "Support bedrockruntime#InvokeModelWithBidirectionalStream by changing event stream code generation",
+    "modules": [
+        "internal/protocoltest/awsrestjson",
+        "service/bedrockruntime",
+        "service/bedrockruntime/internal/testing",
+        "service/internal/integrationtest"
+    ]
+}

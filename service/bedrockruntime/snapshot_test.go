@@ -134,6 +134,18 @@ func TestCheckSnapshot_InvokeModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InvokeModelWithBidirectionalStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeModelWithBidirectionalStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeModelWithBidirectionalStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_InvokeModelWithResponseStream(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeModelWithResponseStream(context.Background(), nil, func(o *Options) {
@@ -234,6 +246,18 @@ func TestUpdateSnapshot_InvokeModel(t *testing.T) {
 	_, err := svc.InvokeModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "InvokeModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_InvokeModelWithBidirectionalStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeModelWithBidirectionalStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeModelWithBidirectionalStream")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

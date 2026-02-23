@@ -4,6 +4,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.41.1
 	github.com/aws/aws-sdk-go-v2/config v1.32.9
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.22.2
+	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.55.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.290.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.88.0
@@ -12,7 +13,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.42.21
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.6
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.33.6
-	github.com/aws/smithy-go v1.24.0
+	github.com/aws/smithy-go v1.24.1
 )
 
 require (
@@ -56,6 +57,8 @@ replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../../internal/
 replace github.com/aws/aws-sdk-go-v2/internal/ini => ../../../internal/ini/
 
 replace github.com/aws/aws-sdk-go-v2/internal/v4a => ../../../internal/v4a/
+
+replace github.com/aws/aws-sdk-go-v2/service/bedrockruntime => ../../../service/bedrockruntime/
 
 replace github.com/aws/aws-sdk-go-v2/service/dynamodb => ../../../service/dynamodb/
 

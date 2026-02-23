@@ -382,6 +382,9 @@ func (r *eventStreamReader) Closed() <-chan struct{} {
 type awsRestjson1_deserializeOpEventStreamDuplexStream struct {
 	LogEventStreamWrites bool
 	LogEventStreamReads  bool
+
+	existingResult *DuplexStreamOutput
+	asyncResult    chan deserializeResult
 }
 
 func (*awsRestjson1_deserializeOpEventStreamDuplexStream) ID() string {
@@ -458,48 +461,69 @@ func (m *awsRestjson1_deserializeOpEventStreamDuplexStream) HandleDeserialize(ct
 		_ = eventWriter.Close()
 	}()
 
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
+	//  storing existing output instead of creating a new one
+	var output *DuplexStreamOutput
+	var asyncResult chan deserializeResult
 
-	deserializeOutput, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type: %T", out.RawResponse)
-	}
-	_ = deserializeOutput
-
-	output, ok := out.Result.(*DuplexStreamOutput)
-	if out.Result != nil && !ok {
-		return out, metadata, fmt.Errorf("unexpected output result type: %T", out.Result)
-	} else if out.Result == nil {
+	existingResult := m.existingResult
+	asyncResult = m.asyncResult
+	if existingResult == nil {
+		// Create async result channel
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newEventStreamReader(
+			asyncReader.pipeReader,
+			eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
+				options.Logger = logger
+				options.Logger = logger
+				options.LogMessages = m.LogEventStreamReads
+			}),
+		)
 		output = &DuplexStreamOutput{}
-		out.Result = output
+		output.eventStream = NewDuplexStreamEventStream(func(stream *DuplexStreamEventStream) {
+			stream.Writer = eventWriter
+			stream.Reader = eventReader
+		})
+		output.initialReply = make(chan DuplexStreamInitialReply, 1)
+
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
 	}
 
-	eventReader := newEventStreamReader(
-		deserializeOutput.Body,
-		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
-			options.Logger = logger
-			options.LogMessages = m.LogEventStreamReads
+	ctxCh := ctx.Value(partialResultChan{})
+	if ctxCh == nil {
+		return out, metadata, fmt.Errorf("Expected a result channel to be stored in the contex, got none")
+	}
 
-		}),
-	)
-	defer func() {
-		if err == nil {
-			return
-		}
-		_ = eventReader.Close()
-	}()
+	prc, ok := ctxCh.(chan PartialResult)
+	if !ok {
+		return out, metadata, fmt.Errorf("async channel expected to be of type `chan partialResult`, got: %T", ctxCh)
+	}
+	// Drain existing results from the channel in case this is a retry
+	select {
+	case <-prc:
+	default:
+	}
+	partial := PartialResult{
+		Output:   output,
+		Metadata: middleware.Metadata{},
+		Error:    nil,
+	}
+	prc <- partial
 
-	output.eventStream = NewDuplexStreamEventStream(func(stream *DuplexStreamEventStream) {
-		stream.Writer = eventWriter
-		stream.Reader = eventReader
-	})
+	out, metadata, err = next.HandleDeserialize(ctx, in)
 
-	go output.eventStream.waitStreamClose()
-
-	return out, metadata, nil
+	if err == nil {
+		// Extract actual response and create real reader
+		resp := out.RawResponse.(*smithyhttp.Response)
+		asyncResult <- deserializeResult{reader: resp.Body, err: nil}
+	} else {
+		asyncResult <- deserializeResult{reader: nil, err: err}
+	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
+	return out, metadata, err
 }
 
 func (*awsRestjson1_deserializeOpEventStreamDuplexStream) closeResponseBody(out middleware.DeserializeOutput) {
@@ -648,6 +672,9 @@ func addEventStreamDuplexStreamWithDistinctStreamsMiddleware(stack *middleware.S
 type awsRestjson1_deserializeOpEventStreamDuplexStreamWithInitialMessages struct {
 	LogEventStreamWrites bool
 	LogEventStreamReads  bool
+
+	existingResult *DuplexStreamWithInitialMessagesOutput
+	asyncResult    chan deserializeResult
 }
 
 func (*awsRestjson1_deserializeOpEventStreamDuplexStreamWithInitialMessages) ID() string {
@@ -724,48 +751,69 @@ func (m *awsRestjson1_deserializeOpEventStreamDuplexStreamWithInitialMessages) H
 		_ = eventWriter.Close()
 	}()
 
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
+	//  storing existing output instead of creating a new one
+	var output *DuplexStreamWithInitialMessagesOutput
+	var asyncResult chan deserializeResult
 
-	deserializeOutput, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type: %T", out.RawResponse)
-	}
-	_ = deserializeOutput
-
-	output, ok := out.Result.(*DuplexStreamWithInitialMessagesOutput)
-	if out.Result != nil && !ok {
-		return out, metadata, fmt.Errorf("unexpected output result type: %T", out.Result)
-	} else if out.Result == nil {
+	existingResult := m.existingResult
+	asyncResult = m.asyncResult
+	if existingResult == nil {
+		// Create async result channel
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newEventStreamReader(
+			asyncReader.pipeReader,
+			eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
+				options.Logger = logger
+				options.Logger = logger
+				options.LogMessages = m.LogEventStreamReads
+			}),
+		)
 		output = &DuplexStreamWithInitialMessagesOutput{}
-		out.Result = output
+		output.eventStream = NewDuplexStreamWithInitialMessagesEventStream(func(stream *DuplexStreamWithInitialMessagesEventStream) {
+			stream.Writer = eventWriter
+			stream.Reader = eventReader
+		})
+		output.initialReply = make(chan DuplexStreamWithInitialMessagesInitialReply, 1)
+
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
 	}
 
-	eventReader := newEventStreamReader(
-		deserializeOutput.Body,
-		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
-			options.Logger = logger
-			options.LogMessages = m.LogEventStreamReads
+	ctxCh := ctx.Value(partialResultChan{})
+	if ctxCh == nil {
+		return out, metadata, fmt.Errorf("Expected a result channel to be stored in the contex, got none")
+	}
 
-		}),
-	)
-	defer func() {
-		if err == nil {
-			return
-		}
-		_ = eventReader.Close()
-	}()
+	prc, ok := ctxCh.(chan PartialResult)
+	if !ok {
+		return out, metadata, fmt.Errorf("async channel expected to be of type `chan partialResult`, got: %T", ctxCh)
+	}
+	// Drain existing results from the channel in case this is a retry
+	select {
+	case <-prc:
+	default:
+	}
+	partial := PartialResult{
+		Output:   output,
+		Metadata: middleware.Metadata{},
+		Error:    nil,
+	}
+	prc <- partial
 
-	output.eventStream = NewDuplexStreamWithInitialMessagesEventStream(func(stream *DuplexStreamWithInitialMessagesEventStream) {
-		stream.Writer = eventWriter
-		stream.Reader = eventReader
-	})
+	out, metadata, err = next.HandleDeserialize(ctx, in)
 
-	go output.eventStream.waitStreamClose()
-
-	return out, metadata, nil
+	if err == nil {
+		// Extract actual response and create real reader
+		resp := out.RawResponse.(*smithyhttp.Response)
+		asyncResult <- deserializeResult{reader: resp.Body, err: nil}
+	} else {
+		asyncResult <- deserializeResult{reader: nil, err: err}
+	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
+	return out, metadata, err
 }
 
 func (*awsRestjson1_deserializeOpEventStreamDuplexStreamWithInitialMessages) closeResponseBody(out middleware.DeserializeOutput) {
@@ -1039,6 +1087,9 @@ func addEventStreamInputStreamWithInitialRequestMiddleware(stack *middleware.Sta
 type awsRestjson1_deserializeOpEventStreamOutputStream struct {
 	LogEventStreamWrites bool
 	LogEventStreamReads  bool
+
+	existingResult *OutputStreamOutput
+	asyncResult    chan deserializeResult
 }
 
 func (*awsRestjson1_deserializeOpEventStreamOutputStream) ID() string {
@@ -1063,47 +1114,69 @@ func (m *awsRestjson1_deserializeOpEventStreamOutputStream) HandleDeserialize(ct
 	}
 	_ = request
 
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
+	//  storing existing output instead of creating a new one
+	var output *OutputStreamOutput
+	var asyncResult chan deserializeResult
 
-	deserializeOutput, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type: %T", out.RawResponse)
-	}
-	_ = deserializeOutput
-
-	output, ok := out.Result.(*OutputStreamOutput)
-	if out.Result != nil && !ok {
-		return out, metadata, fmt.Errorf("unexpected output result type: %T", out.Result)
-	} else if out.Result == nil {
+	existingResult := m.existingResult
+	asyncResult = m.asyncResult
+	if existingResult == nil {
+		// Create async result channel
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newEventStreamReader(
+			asyncReader.pipeReader,
+			eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
+				options.Logger = logger
+				options.Logger = logger
+				options.LogMessages = m.LogEventStreamReads
+			}),
+		)
 		output = &OutputStreamOutput{}
-		out.Result = output
+		output.eventStream = NewOutputStreamEventStream(func(stream *OutputStreamEventStream) {
+
+			stream.Reader = eventReader
+		})
+		output.initialReply = make(chan OutputStreamInitialReply, 1)
+
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
 	}
 
-	eventReader := newEventStreamReader(
-		deserializeOutput.Body,
-		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
-			options.Logger = logger
-			options.LogMessages = m.LogEventStreamReads
+	ctxCh := ctx.Value(partialResultChan{})
+	if ctxCh == nil {
+		return out, metadata, fmt.Errorf("Expected a result channel to be stored in the contex, got none")
+	}
 
-		}),
-	)
-	defer func() {
-		if err == nil {
-			return
-		}
-		_ = eventReader.Close()
-	}()
+	prc, ok := ctxCh.(chan PartialResult)
+	if !ok {
+		return out, metadata, fmt.Errorf("async channel expected to be of type `chan partialResult`, got: %T", ctxCh)
+	}
+	// Drain existing results from the channel in case this is a retry
+	select {
+	case <-prc:
+	default:
+	}
+	partial := PartialResult{
+		Output:   output,
+		Metadata: middleware.Metadata{},
+		Error:    nil,
+	}
+	prc <- partial
 
-	output.eventStream = NewOutputStreamEventStream(func(stream *OutputStreamEventStream) {
-		stream.Reader = eventReader
-	})
+	out, metadata, err = next.HandleDeserialize(ctx, in)
 
-	go output.eventStream.waitStreamClose()
-
-	return out, metadata, nil
+	if err == nil {
+		// Extract actual response and create real reader
+		resp := out.RawResponse.(*smithyhttp.Response)
+		asyncResult <- deserializeResult{reader: resp.Body, err: nil}
+	} else {
+		asyncResult <- deserializeResult{reader: nil, err: err}
+	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
+	return out, metadata, err
 }
 
 func (*awsRestjson1_deserializeOpEventStreamOutputStream) closeResponseBody(out middleware.DeserializeOutput) {
@@ -1127,6 +1200,9 @@ func addEventStreamOutputStreamMiddleware(stack *middleware.Stack, options Optio
 type awsRestjson1_deserializeOpEventStreamOutputStreamWithInitialResponse struct {
 	LogEventStreamWrites bool
 	LogEventStreamReads  bool
+
+	existingResult *OutputStreamWithInitialResponseOutput
+	asyncResult    chan deserializeResult
 }
 
 func (*awsRestjson1_deserializeOpEventStreamOutputStreamWithInitialResponse) ID() string {
@@ -1151,47 +1227,69 @@ func (m *awsRestjson1_deserializeOpEventStreamOutputStreamWithInitialResponse) H
 	}
 	_ = request
 
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
+	//  storing existing output instead of creating a new one
+	var output *OutputStreamWithInitialResponseOutput
+	var asyncResult chan deserializeResult
 
-	deserializeOutput, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type: %T", out.RawResponse)
-	}
-	_ = deserializeOutput
-
-	output, ok := out.Result.(*OutputStreamWithInitialResponseOutput)
-	if out.Result != nil && !ok {
-		return out, metadata, fmt.Errorf("unexpected output result type: %T", out.Result)
-	} else if out.Result == nil {
+	existingResult := m.existingResult
+	asyncResult = m.asyncResult
+	if existingResult == nil {
+		// Create async result channel
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newEventStreamReader(
+			asyncReader.pipeReader,
+			eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
+				options.Logger = logger
+				options.Logger = logger
+				options.LogMessages = m.LogEventStreamReads
+			}),
+		)
 		output = &OutputStreamWithInitialResponseOutput{}
-		out.Result = output
+		output.eventStream = NewOutputStreamWithInitialResponseEventStream(func(stream *OutputStreamWithInitialResponseEventStream) {
+
+			stream.Reader = eventReader
+		})
+		output.initialReply = make(chan OutputStreamWithInitialResponseInitialReply, 1)
+
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
 	}
 
-	eventReader := newEventStreamReader(
-		deserializeOutput.Body,
-		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
-			options.Logger = logger
-			options.LogMessages = m.LogEventStreamReads
+	ctxCh := ctx.Value(partialResultChan{})
+	if ctxCh == nil {
+		return out, metadata, fmt.Errorf("Expected a result channel to be stored in the contex, got none")
+	}
 
-		}),
-	)
-	defer func() {
-		if err == nil {
-			return
-		}
-		_ = eventReader.Close()
-	}()
+	prc, ok := ctxCh.(chan PartialResult)
+	if !ok {
+		return out, metadata, fmt.Errorf("async channel expected to be of type `chan partialResult`, got: %T", ctxCh)
+	}
+	// Drain existing results from the channel in case this is a retry
+	select {
+	case <-prc:
+	default:
+	}
+	partial := PartialResult{
+		Output:   output,
+		Metadata: middleware.Metadata{},
+		Error:    nil,
+	}
+	prc <- partial
 
-	output.eventStream = NewOutputStreamWithInitialResponseEventStream(func(stream *OutputStreamWithInitialResponseEventStream) {
-		stream.Reader = eventReader
-	})
+	out, metadata, err = next.HandleDeserialize(ctx, in)
 
-	go output.eventStream.waitStreamClose()
-
-	return out, metadata, nil
+	if err == nil {
+		// Extract actual response and create real reader
+		resp := out.RawResponse.(*smithyhttp.Response)
+		asyncResult <- deserializeResult{reader: resp.Body, err: nil}
+	} else {
+		asyncResult <- deserializeResult{reader: nil, err: err}
+	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
+	return out, metadata, err
 }
 
 func (*awsRestjson1_deserializeOpEventStreamOutputStreamWithInitialResponse) closeResponseBody(out middleware.DeserializeOutput) {
