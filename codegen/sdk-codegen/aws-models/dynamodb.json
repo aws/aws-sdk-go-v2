@@ -4408,9 +4408,9 @@
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
-                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-east-1",
                                                                     "signingName": "dynamodb",
-                                                                    "signingRegion": "us-east-1"
+                                                                    "name": "sigv4"
                                                                 }
                                                             ]
                                                         },
@@ -8446,8 +8446,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8482,8 +8482,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8534,8 +8534,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8562,8 +8562,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8590,8 +8590,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8618,8 +8618,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8646,8 +8646,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8674,8 +8674,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8749,8 +8749,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8787,8 +8787,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8825,8 +8825,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8863,8 +8863,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8932,8 +8932,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8982,8 +8982,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9009,8 +9009,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9071,8 +9071,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9107,8 +9107,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9159,8 +9159,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9187,8 +9187,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9215,8 +9215,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9243,8 +9243,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9271,8 +9271,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9299,8 +9299,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9374,8 +9374,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9412,8 +9412,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9450,8 +9450,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9488,8 +9488,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9557,8 +9557,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9607,8 +9607,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9634,8 +9634,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9696,8 +9696,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9732,8 +9732,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9784,8 +9784,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9812,8 +9812,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9840,8 +9840,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9868,8 +9868,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9896,8 +9896,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9924,8 +9924,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9999,8 +9999,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10037,8 +10037,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10075,8 +10075,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10113,8 +10113,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10182,8 +10182,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10232,8 +10232,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10259,8 +10259,8 @@
                                         "authSchemes": [
                                             {
                                                 "signingRegion": "us-east-1",
-                                                "name": "sigv4",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -14339,18 +14339,6 @@
                             }
                         },
                         {
-                            "documentation": "{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1}",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Endpoint": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws",
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
                             "documentation": "{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}",
                             "expect": {
                                 "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
@@ -14361,42 +14349,14 @@
                             }
                         },
                         {
-                            "documentation": "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}",
+                            "documentation": "{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1}",
                             "expect": {
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                                "endpoint": {
+                                    "url": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"
+                                }
                             },
                             "params": {
-                                "Endpoint": "https://dynamodb.us-west-2.api.aws",
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1}",
-                            "expect": {
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-                            },
-                            "params": {
-                                "Endpoint": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn",
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}",
-                            "expect": {
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-                            },
-                            "params": {
-                                "Endpoint": "https://dynamodb.us-gov-east-1.api.aws",
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}",
-                            "expect": {
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-                            },
-                            "params": {
-                                "Endpoint": "https://dynamodb.us-east-1.api.aws",
+                                "Endpoint": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws",
                                 "Region": "us-east-1"
                             }
                         },
@@ -14410,6 +14370,46 @@
                             "params": {
                                 "Endpoint": "https://111111111111.ddb.us-east-1.api.aws",
                                 "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}",
+                            "expect": {
+                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                            },
+                            "params": {
+                                "Endpoint": "https://dynamodb.us-east-1.api.aws",
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}",
+                            "expect": {
+                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                            },
+                            "params": {
+                                "Endpoint": "https://dynamodb.us-gov-east-1.api.aws",
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1}",
+                            "expect": {
+                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                            },
+                            "params": {
+                                "Endpoint": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn",
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}",
+                            "expect": {
+                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                            },
+                            "params": {
+                                "Endpoint": "https://dynamodb.us-west-2.api.aws",
+                                "Region": "us-west-2"
                             }
                         }
                     ],
@@ -17109,7 +17109,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists completed exports within the past 90 days.</p>",
+                "smithy.api#documentation": "<p>Lists completed exports within the past 90 days, in reverse alphanumeric order of <code>ExportArn</code>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -18178,7 +18178,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Creates a new item, or replaces an old item with a new item. If an item that has the\n            same primary key as the new item already exists in the specified table, the new item\n            completely replaces the existing item. You can perform a conditional put operation (add\n            a new item if one with the specified primary key doesn't exist), or replace an existing\n            item if it has certain attribute values. You can return the item's attribute values in\n            the same operation, using the <code>ReturnValues</code> parameter.</p>\n         <p>When you add an item, the primary key attributes are the only required attributes. </p>\n         <p>Empty String and Binary attribute values are allowed. Attribute values of type String\n            and Binary must have a length greater than zero if the attribute is used as a key\n            attribute for a table or index. Set type attributes cannot be empty. </p>\n         <p>Invalid Requests with empty values will be rejected with a\n                <code>ValidationException</code> exception.</p>\n         <note>\n            <p>To prevent a new item from replacing an existing item, use a conditional\n                expression that contains the <code>attribute_not_exists</code> function with the\n                name of the attribute being used as the partition key for the table. Since every\n                record must contain that attribute, the <code>attribute_not_exists</code> function\n                will only succeed if no matching item exists.</p>\n         </note>\n         <p>For more information about <code>PutItem</code>, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html\">Working with\n                Items</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a new item, or replaces an old item with a new item. If an item that has the\n            same primary key as the new item already exists in the specified table, the new item\n            completely replaces the existing item. You can perform a conditional put operation (add\n            a new item if one with the specified primary key doesn't exist), or replace an existing\n            item if it has certain attribute values. You can return the item's attribute values in\n            the same operation, using the <code>ReturnValues</code> parameter.</p>\n         <p>When you add an item, the primary key attributes are the only required attributes. </p>\n         <p>Empty String and Binary attribute values are allowed. Attribute values of type String\n            and Binary must have a length greater than zero if the attribute is used as a key\n            attribute for a table or index. Set type attributes cannot be empty. </p>\n         <p>Invalid Requests with empty values will be rejected with a\n                <code>ValidationException</code> exception.</p>\n         <note>\n            <p>To prevent a new item from replacing an existing item, use a conditional\n                expression that contains the <code>attribute_not_exists</code> function with the\n                name of the attribute being used as the partition key for the table. Since every\n                record must contain that attribute, the <code>attribute_not_exists</code> function\n                will only succeed if no matching item exists.</p>\n         </note>\n         <note>\n            <p>To determine whether <code>PutItem</code> overwrote an existing item, use\n                <code>ReturnValues</code> set to <code>ALL_OLD</code>. If the response includes\n                the <code>Attributes</code> element, an existing item was overwritten.</p>\n         </note>\n         <p>For more information about <code>PutItem</code>, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html\">Working with\n                Items</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To add an item to a table",
@@ -22085,7 +22085,7 @@
                 "UpdateExpression": {
                     "target": "com.amazonaws.dynamodb#UpdateExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An expression that defines one or more attributes to be updated, the action to be\n            performed on them, and new values for them.</p>\n         <p>The following action values are available for <code>UpdateExpression</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SET</code> - Adds one or more attributes and values to an item. If any of\n                    these attributes already exist, they are replaced by the new values. You can\n                    also use <code>SET</code> to add or subtract from an attribute that is of type\n                    Number. For example: <code>SET myNum = myNum + :val</code>\n               </p>\n               <p>\n                  <code>SET</code> supports the following functions:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>if_not_exists (path, operand)</code> - if the item does not\n                            contain an attribute at the specified path, then\n                                <code>if_not_exists</code> evaluates to operand; otherwise, it\n                            evaluates to path. You can use this function to avoid overwriting an\n                            attribute that may already be present in the item.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>list_append (operand, operand)</code> - evaluates to a list with a\n                            new element added to it. You can append the new element to the start or\n                            the end of the list by reversing the order of the operands.</p>\n                  </li>\n               </ul>\n               <p>These function names are case-sensitive.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVE</code> - Removes one or more attributes from an item.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADD</code> - Adds the specified value to the item, if the attribute does\n                    not already exist. If the attribute does exist, then the behavior of\n                        <code>ADD</code> depends on the data type of the attribute:</p>\n               <ul>\n                  <li>\n                     <p>If the existing attribute is a number, and if <code>Value</code> is\n                            also a number, then <code>Value</code> is mathematically added to the\n                            existing attribute. If <code>Value</code> is a negative number, then it\n                            is subtracted from the existing attribute.</p>\n                     <note>\n                        <p>If you use <code>ADD</code> to increment or decrement a number\n                                value for an item that doesn't exist before the update, DynamoDB\n                                uses <code>0</code> as the initial value.</p>\n                        <p>Similarly, if you use <code>ADD</code> for an existing item to\n                                increment or decrement an attribute value that doesn't exist before\n                                the update, DynamoDB uses <code>0</code> as the initial value. For\n                                example, suppose that the item you want to update doesn't have an\n                                attribute named <code>itemcount</code>, but you decide to\n                                    <code>ADD</code> the number <code>3</code> to this attribute\n                                anyway. DynamoDB will create the <code>itemcount</code> attribute,\n                                set its initial value to <code>0</code>, and finally add\n                                    <code>3</code> to it. The result will be a new\n                                    <code>itemcount</code> attribute in the item, with a value of\n                                    <code>3</code>.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>If the existing data type is a set and if <code>Value</code> is also a\n                            set, then <code>Value</code> is added to the existing set. For example,\n                            if the attribute value is the set <code>[1,2]</code>, and the\n                                <code>ADD</code> action specified <code>[3]</code>, then the final\n                            attribute value is <code>[1,2,3]</code>. An error occurs if an\n                                <code>ADD</code> action is specified for a set attribute and the\n                            attribute type specified does not match the existing set type. </p>\n                     <p>Both sets must have the same primitive data type. For example, if the\n                            existing data type is a set of strings, the <code>Value</code> must also\n                            be a set of strings.</p>\n                  </li>\n               </ul>\n               <important>\n                  <p>The <code>ADD</code> action only supports Number and set data types. In\n                        addition, <code>ADD</code> can only be used on top-level attributes, not\n                        nested attributes.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE</code> - Deletes an element from a set.</p>\n               <p>If a set of values is specified, then those values are subtracted from the old\n                    set. For example, if the attribute value was the set <code>[a,b,c]</code> and\n                    the <code>DELETE</code> action specifies <code>[a,c]</code>, then the final\n                    attribute value is <code>[b]</code>. Specifying an empty set is an error.</p>\n               <important>\n                  <p>The <code>DELETE</code> action only supports set data types. In addition,\n                            <code>DELETE</code> can only be used on top-level attributes, not nested\n                        attributes.</p>\n               </important>\n            </li>\n         </ul>\n         <p>You can have many actions in a single expression, such as the following: <code>SET\n                a=:value1, b=:value2 DELETE :value3, :value4, :value5</code>\n         </p>\n         <p>For more information on update expressions, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html\">Modifying\n                Items and Attributes</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An expression that defines one or more attributes to be updated, the action to be\n            performed on them, and new values for them.</p>\n         <p>The following action values are available for <code>UpdateExpression</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SET</code> - Adds one or more attributes and values to an item. If any of\n                    these attributes already exist, they are replaced by the new values. You can\n                    also use <code>SET</code> to add or subtract from an attribute that is of type\n                    Number. For example: <code>SET myNum = myNum + :val</code>\n               </p>\n               <p>\n                  <code>SET</code> supports the following functions:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>if_not_exists (path, operand)</code> - if the item does not\n                            contain an attribute at the specified path, then\n                                <code>if_not_exists</code> evaluates to operand; otherwise, it\n                            evaluates to path. You can use this function to avoid overwriting an\n                            attribute that may already be present in the item.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>list_append (operand, operand)</code> - evaluates to a list with a\n                            new element added to it. You can append the new element to the start or\n                            the end of the list by reversing the order of the operands.</p>\n                  </li>\n               </ul>\n               <p>These function names are case-sensitive.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVE</code> - Removes one or more attributes from an item.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADD</code> - Adds the specified value to the item, if the attribute does\n                    not already exist. If the attribute does exist, then the behavior of\n                        <code>ADD</code> depends on the data type of the attribute:</p>\n               <ul>\n                  <li>\n                     <p>If the existing attribute is a number, and if <code>Value</code> is\n                            also a number, then <code>Value</code> is mathematically added to the\n                            existing attribute. If <code>Value</code> is a negative number, then it\n                            is subtracted from the existing attribute.</p>\n                     <note>\n                        <p>If you use <code>ADD</code> to increment or decrement a number\n                                value for an item that doesn't exist before the update, DynamoDB\n                                uses <code>0</code> as the initial value.</p>\n                        <p>Similarly, if you use <code>ADD</code> for an existing item to\n                                increment or decrement an attribute value that doesn't exist before\n                                the update, DynamoDB uses <code>0</code> as the initial value. For\n                                example, suppose that the item you want to update doesn't have an\n                                attribute named <code>itemcount</code>, but you decide to\n                                    <code>ADD</code> the number <code>3</code> to this attribute\n                                anyway. DynamoDB will create the <code>itemcount</code> attribute,\n                                set its initial value to <code>0</code>, and finally add\n                                    <code>3</code> to it. The result will be a new\n                                    <code>itemcount</code> attribute in the item, with a value of\n                                    <code>3</code>.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>If the existing data type is a set and if <code>Value</code> is also a\n                            set, then <code>Value</code> is added to the existing set. For example,\n                            if the attribute value is the set <code>[1,2]</code>, and the\n                                <code>ADD</code> action specified <code>[3]</code>, then the final\n                            attribute value is <code>[1,2,3]</code>. An error occurs if an\n                                <code>ADD</code> action is specified for a set attribute and the\n                            attribute type specified does not match the existing set type. </p>\n                     <p>Both sets must have the same primitive data type. For example, if the\n                            existing data type is a set of strings, the <code>Value</code> must also\n                            be a set of strings.</p>\n                  </li>\n               </ul>\n               <important>\n                  <p>The <code>ADD</code> action only supports Number and set data types.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE</code> - Deletes an element from a set.</p>\n               <p>If a set of values is specified, then those values are subtracted from the old\n                    set. For example, if the attribute value was the set <code>[a,b,c]</code> and\n                    the <code>DELETE</code> action specifies <code>[a,c]</code>, then the final\n                    attribute value is <code>[b]</code>. Specifying an empty set is an error.</p>\n               <important>\n                  <p>The <code>DELETE</code> action only supports set data types.</p>\n               </important>\n            </li>\n         </ul>\n         <p>You can have many actions in a single expression, such as the following: <code>SET\n                a=:value1, b=:value2 DELETE :value3, :value4, :value5</code>\n         </p>\n         <p>For more information on update expressions, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html\">Modifying\n                Items and Attributes</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
                     }
                 },
                 "ConditionExpression": {
@@ -22420,6 +22420,12 @@
                     "target": "com.amazonaws.dynamodb#WarmThroughput",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the warm throughput (in read units per second and write units per second)\n            for updating a table.</p>"
+                    }
+                },
+                "GlobalTableSettingsReplicationMode": {
+                    "target": "com.amazonaws.dynamodb#GlobalTableSettingsReplicationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the settings replication mode for a global table replica. This attribute can be defined\n            using UpdateTable operation only on a regional table with values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code>: Defines settings replication on a regional table to be used as a\n                    source table for creating Multi-Account Global Table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code>: Remove settings replication on a regional table. Settings replication needs\n                    to be defined to ENABLED again in order to create a Multi-Account Global Table using this table.\n                </p>\n            </li>\n         </ul>"
                     }
                 }
             },

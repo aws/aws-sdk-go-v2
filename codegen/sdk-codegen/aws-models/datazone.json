@@ -3414,6 +3414,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The MLflow properties of a connection.</p>"
                     }
+                },
+                "workflowsMwaaProperties": {
+                    "target": "com.amazonaws.datazone#WorkflowsMwaaPropertiesInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon MWAA properties of a connection.</p>"
+                    }
+                },
+                "workflowsServerlessProperties": {
+                    "target": "com.amazonaws.datazone#WorkflowsServerlessPropertiesInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MWAA serverless properties of a connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3481,6 +3493,18 @@
                     "target": "com.amazonaws.datazone#MlflowPropertiesOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>The MLflow properties of a connection.</p>"
+                    }
+                },
+                "workflowsMwaaProperties": {
+                    "target": "com.amazonaws.datazone#WorkflowsMwaaPropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon MWAA properties of a connection.</p>"
+                    }
+                },
+                "workflowsServerlessProperties": {
+                    "target": "com.amazonaws.datazone#WorkflowsServerlessPropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MWAA serverless properties of a connection.</p>"
                     }
                 }
             },
@@ -40086,6 +40110,48 @@
                 "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.datazone#WorkflowsMwaaPropertiesInput": {
+            "type": "structure",
+            "members": {
+                "mwaaEnvironmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MWAA environment name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon MWAA properties.</p>"
+            }
+        },
+        "com.amazonaws.datazone#WorkflowsMwaaPropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "mwaaEnvironmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MWAA environment name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon MWAA properties.</p>"
+            }
+        },
+        "com.amazonaws.datazone#WorkflowsServerlessPropertiesInput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The MWAA serverless properties.</p>"
+            }
+        },
+        "com.amazonaws.datazone#WorkflowsServerlessPropertiesOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The MWAA serverless properties.</p>"
             }
         }
     }

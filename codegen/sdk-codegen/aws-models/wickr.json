@@ -3775,6 +3775,144 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.wickr#GetOpentdfConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wickr#GetOpentdfConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wickr#GetOpentdfConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wickr#BadRequestError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#ForbiddenError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#RateLimitError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#ResourceNotFoundError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#UnauthorizedError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#ValidationError"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the OpenTDF integration configuration for a Wickr network.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get OpenTDF info successfully",
+                        "input": {
+                            "networkId": "12345678"
+                        },
+                        "output": {
+                            "clientId": "client123",
+                            "clientSecret": "secret456",
+                            "domain": "https://api.sample.com",
+                            "provider": "virtru"
+                        }
+                    },
+                    {
+                        "title": "Get OpenTDF info - not configured",
+                        "input": {
+                            "networkId": "12345678"
+                        },
+                        "output": {
+                            "clientId": "",
+                            "clientSecret": "",
+                            "domain": "",
+                            "provider": ""
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/networks/{networkId}/tdf",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "opentdf",
+                    "tdf"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetOpentdfConfigUnauthorized",
+                        "params": {
+                            "networkId": "00000000"
+                        },
+                        "expect": {
+                            "failure": {}
+                        },
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wickr#GetOpentdfConfigRequest": {
+            "type": "structure",
+            "members": {
+                "networkId": {
+                    "target": "com.amazonaws.wickr#NetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Wickr network for which OpenTDF integration will be retrieved.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wickr#GetOpentdfConfigResponse": {
+            "type": "structure",
+            "members": {
+                "clientId": {
+                    "target": "com.amazonaws.wickr#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC client ID used for authenticating with the OpenTDF provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domain": {
+                    "target": "com.amazonaws.wickr#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of the OpenTDF server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientSecret": {
+                    "target": "com.amazonaws.wickr#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC client secret used for authenticating with the OpenTDF provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.wickr#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider of the OpenTDF platform.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.wickr#GetSecurityGroup": {
             "type": "operation",
             "input": {
@@ -6076,6 +6214,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the data retention feature is enabled for the network. When true, messages are captured by the data retention bot for compliance and archiving purposes.</p>"
                     }
+                },
+                "enableTrustedDataFormat": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for OpenTDF integration at the network level, enforcing ABAC decision making when operating in TDF enabled rooms.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6799,6 +6943,221 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the provider supports Microsoft multi-refresh tokens.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wickr#RegisterOpentdfConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wickr#RegisterOpentdfConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wickr#RegisterOpentdfConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wickr#BadRequestError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#ForbiddenError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#RateLimitError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#ResourceNotFoundError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#UnauthorizedError"
+                },
+                {
+                    "target": "com.amazonaws.wickr#ValidationError"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers and saves OpenTDF configuration for a Wickr network, enabling attribute-based access control for Wickr through an OpenTDF provider.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Save OpenTDF config successfully",
+                        "input": {
+                            "networkId": "12345678",
+                            "clientId": "client123",
+                            "clientSecret": "secret456",
+                            "domain": "https://api.sample.com",
+                            "provider": "virtru"
+                        },
+                        "output": {
+                            "clientId": "client123",
+                            "clientSecret": "secret456",
+                            "domain": "https://api.sample.com",
+                            "provider": "virtru"
+                        }
+                    },
+                    {
+                        "title": "Dry run saving OpenTDF config",
+                        "input": {
+                            "networkId": "12345678",
+                            "clientId": "client123",
+                            "clientSecret": "secret456",
+                            "domain": "https://api.sample.com",
+                            "provider": "virtru",
+                            "dryRun": true
+                        },
+                        "output": {
+                            "clientId": "client123",
+                            "clientSecret": "secret456",
+                            "domain": "https://api.sample.com",
+                            "provider": "virtru"
+                        }
+                    },
+                    {
+                        "title": "Dry run saving OpenTDF config - failed test",
+                        "input": {
+                            "networkId": "12345678",
+                            "clientId": "client123",
+                            "clientSecret": "secret456",
+                            "domain": "https://api.sample.com",
+                            "provider": "virtru",
+                            "dryRun": true
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.wickr#ValidationError",
+                            "content": {
+                                "message": "Failed to communicate with OpenTDF service"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Save OpenTDF config - invalid provider",
+                        "input": {
+                            "networkId": "12345678",
+                            "clientId": "client123",
+                            "clientSecret": "secret456",
+                            "domain": "https://api.sample.com",
+                            "provider": "invalid provider"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.wickr#ValidationError",
+                            "content": {
+                                "message": "Invalid input provided"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Save OpenTDF config - network not found",
+                        "input": {
+                            "networkId": "99999999",
+                            "clientId": "client123",
+                            "clientSecret": "secret456",
+                            "domain": "https://api.sample.com",
+                            "provider": "virtru"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.wickr#ResourceNotFoundError",
+                            "content": {
+                                "message": "Network not found"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/networks/{networkId}/tdf",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#tags": [
+                    "opentdf",
+                    "tdf"
+                ]
+            }
+        },
+        "com.amazonaws.wickr#RegisterOpentdfConfigRequest": {
+            "type": "structure",
+            "members": {
+                "networkId": {
+                    "target": "com.amazonaws.wickr#NetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Wickr network for which OpenTDF integration will be configured.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientId": {
+                    "target": "com.amazonaws.wickr#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC client ID used for authenticating with the OpenTDF provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientSecret": {
+                    "target": "com.amazonaws.wickr#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC client secret used for authenticating with the OpenTDF provider</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domain": {
+                    "target": "com.amazonaws.wickr#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of the OpenTDF server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.wickr#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider of the OpenTDF platform.</p> <note> <p>Currently only Virtru is supported as the OpenTDF provider.</p> </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dryRun": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Perform dry-run test connection of OpenTDF configuration (optional).</p>",
+                        "smithy.api#httpQuery": "dryRun"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wickr#RegisterOpentdfConfigResponse": {
+            "type": "structure",
+            "members": {
+                "clientId": {
+                    "target": "com.amazonaws.wickr#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC client ID used for authenticating with the OpenTDF provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domain": {
+                    "target": "com.amazonaws.wickr#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of the OpenTDF server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientSecret": {
+                    "target": "com.amazonaws.wickr#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC client secret used for authenticating with the OpenTDF provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.wickr#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider of the OpenTDF platform.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -8640,6 +8999,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of validation error details, where each item identifies a specific field that failed validation and explains the reason for the failure.</p>"
                     }
+                },
+                "message": {
+                    "target": "com.amazonaws.wickr#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the validation error error that occurred.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8719,6 +9084,9 @@
                     "target": "com.amazonaws.wickr#GetOidcInfo"
                 },
                 {
+                    "target": "com.amazonaws.wickr#GetOpentdfConfig"
+                },
+                {
                     "target": "com.amazonaws.wickr#GetSecurityGroup"
                 },
                 {
@@ -8756,6 +9124,9 @@
                 },
                 {
                     "target": "com.amazonaws.wickr#RegisterOidcConfigTest"
+                },
+                {
+                    "target": "com.amazonaws.wickr#RegisterOpentdfConfig"
                 },
                 {
                     "target": "com.amazonaws.wickr#UpdateBot"

@@ -1585,6 +1585,15 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyAccuracyScore": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 1.0
+                }
+            }
+        },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyAddRuleAnnotation": {
             "type": "structure",
             "members": {
@@ -1737,6 +1746,73 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A mutation operation that adds a new variable to the policy definition during the build process.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedChunk": {
+            "type": "structure",
+            "members": {
+                "pageNumber": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The page number where this chunk begins, if the document is divided into pages.</p>"
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedContentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lines of text contained within this chunk, each annotated with its line number.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a portion of a source document with line number annotations. Chunks help organize document content for easier navigation and reference.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedChunkList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedChunk"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedContent": {
+            "type": "union",
+            "members": {
+                "line": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedLine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An annotated line of text from the source document, including both the line number and the text content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a content element within an annotated chunk. This union type allows for different types of content elements to be included in document chunks, such as individual lines of text with their line numbers.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedContentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedContent"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedLine": {
+            "type": "structure",
+            "members": {
+                "lineNumber": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The line number of this text within the source document.</p>"
+                    }
+                },
+                "lineText": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyLineText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actual text content of this line from the source document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single line of text from a source document, annotated with its line number for precise referencing.</p>"
             }
         },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotation": {
@@ -1900,6 +1976,41 @@
                 "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyArn"
             }
         },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyAtomicStatement": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for this atomic statement within the fidelity report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "text": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actual text content of the atomic statement as extracted from the source document.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "location": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about where this statement appears in the source document, including line numbers.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single, indivisible statement extracted from a source document. Atomic statements are the fundamental units used to ground policy rules and variables to their source material.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyAtomicStatementList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyAtomicStatement"
+            }
+        },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentBlob": {
             "type": "blob",
             "traits": {
@@ -2018,6 +2129,72 @@
                 }
             }
         },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F\\-]+$"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetManifest": {
+            "type": "structure",
+            "members": {
+                "entries": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetManifestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of asset entries in the manifest, each describing an available artifact that can be retrieved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A catalog of all artifacts produced by a build workflow, providing a comprehensive list of available assets including their types and identifiers.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetManifestEntry": {
+            "type": "structure",
+            "members": {
+                "assetType": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of asset (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT, ASSET_MANIFEST, SOURCE_DOCUMENT).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetName": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable name for the asset, if applicable. This helps identify specific documents or reports within the workflow results.</p>"
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the asset, if applicable. Use this ID when requesting specific assets through the API.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single entry in the asset manifest, describing one artifact produced by the build workflow.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetManifestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetManifestEntry"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetType": {
             "type": "enum",
             "members": {
@@ -2049,6 +2226,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "POLICY_SCENARIOS"
+                    }
+                },
+                "FIDELITY_REPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIDELITY_REPORT"
+                    }
+                },
+                "ASSET_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSET_MANIFEST"
+                    }
+                },
+                "SOURCE_DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_DOCUMENT"
                     }
                 }
             }
@@ -2084,6 +2279,24 @@
                     "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyScenarios",
                     "traits": {
                         "smithy.api#documentation": "<p>An entity encompassing all the policy scenarios generated by the build workflow, which can be used to validate an Automated Reasoning policy. </p>"
+                    }
+                },
+                "assetManifest": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetManifest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A manifest listing all available artifacts produced by the build workflow. This provides a catalog of all assets that can be retrieved, including their types, names, and identifiers.</p>"
+                    }
+                },
+                "document": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicySourceDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A source document that was used as input during the build workflow. This allows you to retrieve the original documents that were processed to generate the policy.</p>"
+                    }
+                },
+                "fidelityReport": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyFidelityReport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comprehensive fidelity report that measures how accurately the generated policy represents the source documents. The report includes coverage and accuracy scores, along with detailed grounding information for rules and variables.</p>"
                     }
                 }
             },
@@ -2404,6 +2617,12 @@
                     "traits": {
                         "smithy.api#enumValue": "IMPORT_POLICY"
                     }
+                },
+                "GENERATE_FIDELITY_REPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERATE_FIDELITY_REPORT"
+                    }
                 }
             }
         },
@@ -2416,6 +2635,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
+                }
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyCoverageScore": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 1.0
                 }
             }
         },
@@ -3013,8 +3241,95 @@
                 }
             }
         },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyDocumentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 8
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyDocumentSha256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 64,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyFidelityReport": {
+            "type": "structure",
+            "members": {
+                "coverageScore": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyCoverageScore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A score from 0.0 to 1.0 indicating how well the policy covers the statements in the source documents. A higher score means more of the source content is represented in the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accuracyScore": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyAccuracyScore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A score from 0.0 to 1.0 indicating how accurate the policy rules are relative to the source documents. A higher score means the policy rules more faithfully represent the source material.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ruleReports": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyRuleReportMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping from rule identifiers to detailed fidelity reports for each rule, showing which source statements ground each rule and how accurate it is.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "variableReports": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyVariableReportMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping from variable names to detailed fidelity reports for each variable, showing which source statements ground each variable and how accurate it is.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentSources": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyReportSourceDocumentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of source documents with their content broken down into atomic statements and annotated with line numbers for precise referencing.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A comprehensive analysis report that measures how accurately a generated policy represents the source documents. The report includes coverage and accuracy scores, detailed grounding information linking policy elements to source statements, and annotated document content.</p>"
+            }
+        },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyFormatVersion": {
             "type": "string"
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyGenerateFidelityReportContent": {
+            "type": "union",
+            "members": {
+                "documents": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyGenerateFidelityReportDocumentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source documents to analyze for generating a new fidelity report. The documents will be processed to create atomic statements and grounding information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for generating a fidelity report, which can either analyze new documents or update an existing fidelity report with a new policy definition.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyGenerateFidelityReportDocumentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildWorkflowDocument"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
         },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyGeneratedTestCase": {
             "type": "structure",
@@ -3101,6 +3416,36 @@
                 "smithy.api#documentation": "<p>An annotation for processing and incorporating new content into an Automated Reasoning policy.</p>"
             }
         },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationText"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyLineNumberList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Integer"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyLineText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyMutation": {
             "type": "union",
             "members": {
@@ -3179,6 +3524,55 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>Represents the planning phase of policy build workflow, where the system analyzes source content and determines what operations to perform.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyReportSourceDocument": {
+            "type": "structure",
+            "members": {
+                "documentName": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source document that was analyzed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentHash": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyDocumentSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SHA-256 hash of the document content, used for verification and ensuring the document hasn't changed since analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentId": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyDocumentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for this document within the fidelity report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "atomicStatements": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyAtomicStatementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of atomic statements extracted from this document, representing the fundamental units of meaning used for grounding.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentContent": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedChunkList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document's content organized into annotated chunks with line number information for precise referencing.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a source document that was analyzed during fidelity report generation, including the document's metadata and its content broken down into atomic statements.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyReportSourceDocumentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyReportSourceDocument"
             }
         },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyResource": {
@@ -3263,6 +3657,54 @@
                 }
             ]
         },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyRuleReport": {
+            "type": "structure",
+            "members": {
+                "rule": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionRuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the policy rule being analyzed in this report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "groundingStatements": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>References to statements from the source documents that provide the basis or justification for this rule.</p>"
+                    }
+                },
+                "groundingJustifications": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Explanations describing how the source statements support and justify this specific rule.</p>"
+                    }
+                },
+                "accuracyScore": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyAccuracyScore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A score from 0.0 to 1.0 indicating how accurately this rule represents the source material.</p>"
+                    }
+                },
+                "accuracyJustification": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A textual explanation of the accuracy score, describing why the rule received this particular accuracy rating.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides detailed fidelity analysis for a specific policy rule, including which source document statements support it and how accurate the rule is.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyRuleReportMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionRuleId"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyRuleReport"
+            }
+        },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyScenario": {
             "type": "structure",
             "members": {
@@ -3336,6 +3778,109 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains a comprehensive entity encompassing all the scenarios generated by the build workflow, which can be used to validate an Automated Reasoning policy.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicySourceDocument": {
+            "type": "structure",
+            "members": {
+                "document": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw content of the source document as a binary blob.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentContentType": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the document (e.g., application/pdf, text/plain).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentName": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source document for identification purposes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentDescription": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description providing context about the document's content and purpose.</p>"
+                    }
+                },
+                "documentHash": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyDocumentSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SHA-256 hash of the document content, used for verification and integrity checking.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a source document that was processed during a build workflow. Contains the document content, metadata, and a hash for verification.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 8
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementLocation": {
+            "type": "structure",
+            "members": {
+                "lines": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyLineNumberList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The line numbers in the source document where this statement appears.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the location of a statement within a source document using line numbers.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementReference": {
+            "type": "structure",
+            "members": {
+                "documentId": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyDocumentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the document containing the referenced statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statementId": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the specific atomic statement being referenced.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>References a specific atomic statement within a source document, used to link policy elements back to their source material.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementReferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementReference"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrock#AutomatedReasoningPolicySummaries": {
@@ -3870,6 +4415,54 @@
                 "smithy.api#documentation": "<p>A mutation operation that modifies an existing variable in the policy definition during the build process.</p>"
             }
         },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyVariableReport": {
+            "type": "structure",
+            "members": {
+                "policyVariable": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionVariableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy variable being analyzed in this report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "groundingStatements": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>References to statements from the source documents that provide the basis or justification for this variable.</p>"
+                    }
+                },
+                "groundingJustifications": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Explanations describing how the source statements support and justify this specific variable definition.</p>"
+                    }
+                },
+                "accuracyScore": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyAccuracyScore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A score from 0.0 to 1.0 indicating how accurately this variable represents concepts from the source material.</p>"
+                    }
+                },
+                "accuracyJustification": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A textual explanation of the accuracy score, describing why the variable received this particular accuracy rating.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides detailed fidelity analysis for a specific policy variable, including which source document statements support it and how accurate the variable definition is.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyVariableReportMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionVariableName"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyVariableReport"
+            }
+        },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyVersion": {
             "type": "string",
             "traits": {
@@ -3892,6 +4485,12 @@
                     "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildWorkflowRepairContent",
                     "traits": {
                         "smithy.api#documentation": "<p>The assets and instructions needed for a policy repair workflow, including repair annotations and guidance.</p>"
+                    }
+                },
+                "generateFidelityReportContent": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyGenerateFidelityReportContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content configuration for generating a fidelity report workflow. This can include source documents to analyze or an existing fidelity report to update with a new policy definition.</p>"
                     }
                 }
             },
@@ -9561,9 +10160,16 @@
                 "assetType": {
                     "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of asset to retrieve (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION).</p>",
+                        "smithy.api#documentation": "<p>The type of asset to retrieve (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT, ASSET_MANIFEST, SOURCE_DOCUMENT).</p>",
                         "smithy.api#httpQuery": "assetType",
                         "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the specific asset to retrieve when multiple assets of the same type exist. This is required when retrieving SOURCE_DOCUMENT assets, as multiple source documents may have been used in the workflow. The asset ID can be obtained from the asset manifest.</p>",
+                        "smithy.api#httpQuery": "assetId"
                     }
                 }
             },

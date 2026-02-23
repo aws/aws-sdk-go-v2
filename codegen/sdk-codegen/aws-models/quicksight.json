@@ -32733,7 +32733,7 @@
                 "SessionTags": {
                     "target": "com.amazonaws.quicksight#SessionTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Session tags are user-specified strings that identify a session in your application. You can use these tags to implement row-level security (RLS) controls.\n            Before you use the <code>SessionTags</code> parameter, make sure that you have configured the relevant datasets using the <code>DataSet$RowLevelPermissionTagConfiguration</code> parameter\n            so that session tags can be used to provide row-level security.</p>\n         <p>When using session tags, you must call <code>GenerateEmbedUrlForAnonymousUser</code> from a secure, trusted environment.\n            The API call passes session tags that enable server-side data redaction by using the row-level security (RLS) rules configured in your datasets.\n            A secure, trusted environment has access controls that you implement. These controls ensure that only your server or authorized users can add or modify session tags.</p>\n         <p>Besides, these are not the tags used for the Amazon Web Services resource tagging feature.\n            For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html\">Using Row-Level Security (RLS) with Tags</a> in the <i>Amazon Quick Suite User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Session tags are user-specified strings that identify a session in your application. You can use these tags to implement row-level security (RLS) controls.\n            Before you use the <code>SessionTags</code> parameter, make sure that you have configured the relevant datasets using the <code>DataSet$RowLevelPermissionTagConfiguration</code> parameter\n            so that session tags can be used to provide row-level security.</p>\n         <p>When using <code>SessionTags</code> in <code>GenerateEmbedUrlForAnonymousUser</code>,</p>\n         <ul>\n            <li>\n               <p>Treat <code>SessionTags</code> as security credentials. Do not expose <code>SessionTags</code> to end users or client-side code.</p>\n            </li>\n            <li>\n               <p>Implement server-side controls. Ensure that <code>SessionTags</code> are set exclusively by your trusted backend services, not by parameters that end users can modify.</p>\n            </li>\n            <li>\n               <p>Protect <code>SessionTags</code> from enumeration. Ensure that users in one tenant cannot discover or guess sessionTag values belonging to other tenants.</p>\n            </li>\n            <li>\n               <p>Review your architecture. If downstream customers or partners are allowed to call the <code>GenerateEmbedUrlForAnonymousUser</code> API directly,\n                    evaluate whether those parties could specify sessionTag values for tenants they should not access.</p>\n            </li>\n         </ul>\n         <p>Besides, these are not the tags used for the Amazon Web Services resource tagging feature.\n            For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html\">Using Row-Level Security (RLS) with Tags</a> in the <i>Amazon Quick Suite User Guide</i>.</p>"
                     }
                 },
                 "AuthorizedResourceArns": {
@@ -37391,7 +37391,7 @@
                 "Type": {
                     "target": "com.amazonaws.quicksight#InputColumnDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type of the column.</p>",
+                        "smithy.api#documentation": "<p>The data type of the column.</p>\n         <p>\n            <b>Note:</b>\n            <code>SEMISTRUCT</code> represents Athena's map, row, and struct data types. It is supported when using the new data preparation experience.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -37449,6 +37449,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "SEMISTRUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEMISTRUCT"
                     }
                 }
             }
