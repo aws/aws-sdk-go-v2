@@ -1,0 +1,8 @@
+{
+    "id": "675292d1-2084-445f-aef3-7a6a4ee8c8c3",
+    "type": "documentation",
+    "description": "Updated ExemptedPrincipalArns parameter documentation for improved accuracy",
+    "modules": [
+        "service/controlcatalog"
+    ]
+}

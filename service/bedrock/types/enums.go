@@ -207,6 +207,9 @@ const (
 	AutomatedReasoningPolicyBuildResultAssetTypePolicyDefinition   AutomatedReasoningPolicyBuildResultAssetType = "POLICY_DEFINITION"
 	AutomatedReasoningPolicyBuildResultAssetTypeGeneratedTestCases AutomatedReasoningPolicyBuildResultAssetType = "GENERATED_TEST_CASES"
 	AutomatedReasoningPolicyBuildResultAssetTypePolicyScenarios    AutomatedReasoningPolicyBuildResultAssetType = "POLICY_SCENARIOS"
+	AutomatedReasoningPolicyBuildResultAssetTypeFidelityReport     AutomatedReasoningPolicyBuildResultAssetType = "FIDELITY_REPORT"
+	AutomatedReasoningPolicyBuildResultAssetTypeAssetManifest      AutomatedReasoningPolicyBuildResultAssetType = "ASSET_MANIFEST"
+	AutomatedReasoningPolicyBuildResultAssetTypeSourceDocument     AutomatedReasoningPolicyBuildResultAssetType = "SOURCE_DOCUMENT"
 )
 
 // Values returns all known values for
@@ -221,6 +224,9 @@ func (AutomatedReasoningPolicyBuildResultAssetType) Values() []AutomatedReasonin
 		"POLICY_DEFINITION",
 		"GENERATED_TEST_CASES",
 		"POLICY_SCENARIOS",
+		"FIDELITY_REPORT",
+		"ASSET_MANIFEST",
+		"SOURCE_DOCUMENT",
 	}
 }
 
@@ -260,9 +266,10 @@ type AutomatedReasoningPolicyBuildWorkflowType string
 
 // Enum values for AutomatedReasoningPolicyBuildWorkflowType
 const (
-	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
-	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy  AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
-	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy  AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent          AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
+	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy           AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy           AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeGenerateFidelityReport AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_FIDELITY_REPORT"
 )
 
 // Values returns all known values for AutomatedReasoningPolicyBuildWorkflowType.
@@ -275,6 +282,7 @@ func (AutomatedReasoningPolicyBuildWorkflowType) Values() []AutomatedReasoningPo
 		"INGEST_CONTENT",
 		"REFINE_POLICY",
 		"IMPORT_POLICY",
+		"GENERATE_FIDELITY_REPORT",
 	}
 }
 

@@ -19100,6 +19100,214 @@ func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAddVariableMutation
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotatedChunk(v **types.AutomatedReasoningPolicyAnnotatedChunk, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyAnnotatedChunk
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyAnnotatedChunk{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "content":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotatedContentList(&sv.Content, value); err != nil {
+				return err
+			}
+
+		case "pageNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PageNumber = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotatedChunkList(v *[]types.AutomatedReasoningPolicyAnnotatedChunk, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutomatedReasoningPolicyAnnotatedChunk
+	if *v == nil {
+		cv = []types.AutomatedReasoningPolicyAnnotatedChunk{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutomatedReasoningPolicyAnnotatedChunk
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotatedChunk(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotatedContent(v *types.AutomatedReasoningPolicyAnnotatedContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.AutomatedReasoningPolicyAnnotatedContent
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "line":
+			var mv types.AutomatedReasoningPolicyAnnotatedLine
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotatedLine(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutomatedReasoningPolicyAnnotatedContentMemberLine{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotatedContentList(v *[]types.AutomatedReasoningPolicyAnnotatedContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutomatedReasoningPolicyAnnotatedContent
+	if *v == nil {
+		cv = []types.AutomatedReasoningPolicyAnnotatedContent{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutomatedReasoningPolicyAnnotatedContent
+		if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotatedContent(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotatedLine(v **types.AutomatedReasoningPolicyAnnotatedLine, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyAnnotatedLine
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyAnnotatedLine{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lineNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LineNumber = ptr.Int32(int32(i64))
+			}
+
+		case "lineText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyLineText to be of type string, got %T instead", value)
+				}
+				sv.LineText = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotation(v *types.AutomatedReasoningPolicyAnnotation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19328,6 +19536,94 @@ func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyArnList(v *[]string
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAtomicStatement(v **types.AutomatedReasoningPolicyAtomicStatement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyAtomicStatement
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyAtomicStatement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyStatementId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "location":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyStatementLocation(&sv.Location, value); err != nil {
+				return err
+			}
+
+		case "text":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyStatementText to be of type string, got %T instead", value)
+				}
+				sv.Text = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAtomicStatementList(v *[]types.AutomatedReasoningPolicyAtomicStatement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutomatedReasoningPolicyAtomicStatement
+	if *v == nil {
+		cv = []types.AutomatedReasoningPolicyAtomicStatement{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutomatedReasoningPolicyAtomicStatement
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAtomicStatement(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyBuildLog(v **types.AutomatedReasoningPolicyBuildLog, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19448,6 +19744,134 @@ func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyBuildLogEntryList(v
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyBuildResultAssetManifest(v **types.AutomatedReasoningPolicyBuildResultAssetManifest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyBuildResultAssetManifest
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyBuildResultAssetManifest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "entries":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyBuildResultAssetManifestList(&sv.Entries, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyBuildResultAssetManifestEntry(v **types.AutomatedReasoningPolicyBuildResultAssetManifestEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyBuildResultAssetManifestEntry
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyBuildResultAssetManifestEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "assetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyBuildResultAssetId to be of type string, got %T instead", value)
+				}
+				sv.AssetId = ptr.String(jtv)
+			}
+
+		case "assetName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyBuildResultAssetName to be of type string, got %T instead", value)
+				}
+				sv.AssetName = ptr.String(jtv)
+			}
+
+		case "assetType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyBuildResultAssetType to be of type string, got %T instead", value)
+				}
+				sv.AssetType = types.AutomatedReasoningPolicyBuildResultAssetType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyBuildResultAssetManifestList(v *[]types.AutomatedReasoningPolicyBuildResultAssetManifestEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutomatedReasoningPolicyBuildResultAssetManifestEntry
+	if *v == nil {
+		cv = []types.AutomatedReasoningPolicyBuildResultAssetManifestEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutomatedReasoningPolicyBuildResultAssetManifestEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyBuildResultAssetManifestEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyBuildResultAssets(v *types.AutomatedReasoningPolicyBuildResultAssets, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19468,6 +19892,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "assetManifest":
+			var mv types.AutomatedReasoningPolicyBuildResultAssetManifest
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyBuildResultAssetManifest(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutomatedReasoningPolicyBuildResultAssetsMemberAssetManifest{Value: mv}
+			break loop
+
 		case "buildLog":
 			var mv types.AutomatedReasoningPolicyBuildLog
 			destAddr := &mv
@@ -19476,6 +19910,26 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog{Value: mv}
+			break loop
+
+		case "document":
+			var mv types.AutomatedReasoningPolicySourceDocument
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicySourceDocument(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutomatedReasoningPolicyBuildResultAssetsMemberDocument{Value: mv}
+			break loop
+
+		case "fidelityReport":
+			var mv types.AutomatedReasoningPolicyFidelityReport
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyFidelityReport(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutomatedReasoningPolicyBuildResultAssetsMemberFidelityReport{Value: mv}
 			break loop
 
 		case "generatedTestCases":
@@ -21049,6 +21503,120 @@ func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyDisjointRuleSetList
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyFidelityReport(v **types.AutomatedReasoningPolicyFidelityReport, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyFidelityReport
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyFidelityReport{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accuracyScore":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AccuracyScore = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.AccuracyScore = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected AutomatedReasoningPolicyAccuracyScore to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "coverageScore":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CoverageScore = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.CoverageScore = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected AutomatedReasoningPolicyCoverageScore to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "documentSources":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyReportSourceDocumentList(&sv.DocumentSources, value); err != nil {
+				return err
+			}
+
+		case "ruleReports":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyRuleReportMap(&sv.RuleReports, value); err != nil {
+				return err
+			}
+
+		case "variableReports":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyVariableReportMap(&sv.VariableReports, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyGeneratedTestCase(v **types.AutomatedReasoningPolicyGeneratedTestCase, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21217,6 +21785,82 @@ func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyIngestContentAnnota
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyJustificationList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AutomatedReasoningPolicyJustificationText to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyLineNumberList(v *[]int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int32
+	if *v == nil {
+		cv = []int32{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = int32(i64)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyMutation(v *types.AutomatedReasoningPolicyMutation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21368,6 +22012,236 @@ func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyPlanning(v **types.
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyReportSourceDocument(v **types.AutomatedReasoningPolicyReportSourceDocument, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyReportSourceDocument
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyReportSourceDocument{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "atomicStatements":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAtomicStatementList(&sv.AtomicStatements, value); err != nil {
+				return err
+			}
+
+		case "documentContent":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyAnnotatedChunkList(&sv.DocumentContent, value); err != nil {
+				return err
+			}
+
+		case "documentHash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyDocumentSha256 to be of type string, got %T instead", value)
+				}
+				sv.DocumentHash = ptr.String(jtv)
+			}
+
+		case "documentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyDocumentId to be of type string, got %T instead", value)
+				}
+				sv.DocumentId = ptr.String(jtv)
+			}
+
+		case "documentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyBuildDocumentName to be of type string, got %T instead", value)
+				}
+				sv.DocumentName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyReportSourceDocumentList(v *[]types.AutomatedReasoningPolicyReportSourceDocument, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutomatedReasoningPolicyReportSourceDocument
+	if *v == nil {
+		cv = []types.AutomatedReasoningPolicyReportSourceDocument{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutomatedReasoningPolicyReportSourceDocument
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyReportSourceDocument(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyRuleReport(v **types.AutomatedReasoningPolicyRuleReport, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyRuleReport
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyRuleReport{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accuracyJustification":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyJustificationText to be of type string, got %T instead", value)
+				}
+				sv.AccuracyJustification = ptr.String(jtv)
+			}
+
+		case "accuracyScore":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AccuracyScore = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.AccuracyScore = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected AutomatedReasoningPolicyAccuracyScore to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "groundingJustifications":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyJustificationList(&sv.GroundingJustifications, value); err != nil {
+				return err
+			}
+
+		case "groundingStatements":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyStatementReferenceList(&sv.GroundingStatements, value); err != nil {
+				return err
+			}
+
+		case "rule":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyDefinitionRuleId to be of type string, got %T instead", value)
+				}
+				sv.Rule = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyRuleReportMap(v *map[string]types.AutomatedReasoningPolicyRuleReport, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.AutomatedReasoningPolicyRuleReport
+	if *v == nil {
+		mv = map[string]types.AutomatedReasoningPolicyRuleReport{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.AutomatedReasoningPolicyRuleReport
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyRuleReport(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyScenario(v **types.AutomatedReasoningPolicyScenario, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21498,6 +22372,205 @@ func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyScenarios(v **types
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicySourceDocument(v **types.AutomatedReasoningPolicySourceDocument, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicySourceDocument
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicySourceDocument{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "document":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyBuildDocumentBlob to be []byte, got %T instead", value)
+				}
+				dv, err := base64.StdEncoding.DecodeString(jtv)
+				if err != nil {
+					return fmt.Errorf("failed to base64 decode AutomatedReasoningPolicyBuildDocumentBlob, %w", err)
+				}
+				sv.Document = dv
+			}
+
+		case "documentContentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyBuildDocumentContentType to be of type string, got %T instead", value)
+				}
+				sv.DocumentContentType = types.AutomatedReasoningPolicyBuildDocumentContentType(jtv)
+			}
+
+		case "documentDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyBuildDocumentDescription to be of type string, got %T instead", value)
+				}
+				sv.DocumentDescription = ptr.String(jtv)
+			}
+
+		case "documentHash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyDocumentSha256 to be of type string, got %T instead", value)
+				}
+				sv.DocumentHash = ptr.String(jtv)
+			}
+
+		case "documentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyBuildDocumentName to be of type string, got %T instead", value)
+				}
+				sv.DocumentName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyStatementLocation(v **types.AutomatedReasoningPolicyStatementLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyStatementLocation
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyStatementLocation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lines":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyLineNumberList(&sv.Lines, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyStatementReference(v **types.AutomatedReasoningPolicyStatementReference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyStatementReference
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyStatementReference{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "documentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyDocumentId to be of type string, got %T instead", value)
+				}
+				sv.DocumentId = ptr.String(jtv)
+			}
+
+		case "statementId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyStatementId to be of type string, got %T instead", value)
+				}
+				sv.StatementId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyStatementReferenceList(v *[]types.AutomatedReasoningPolicyStatementReference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutomatedReasoningPolicyStatementReference
+	if *v == nil {
+		cv = []types.AutomatedReasoningPolicyStatementReference{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutomatedReasoningPolicyStatementReference
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyStatementReference(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -22446,6 +23519,134 @@ func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyUpdateVariableMutat
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyVariableReport(v **types.AutomatedReasoningPolicyVariableReport, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyVariableReport
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyVariableReport{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accuracyJustification":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyJustificationText to be of type string, got %T instead", value)
+				}
+				sv.AccuracyJustification = ptr.String(jtv)
+			}
+
+		case "accuracyScore":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AccuracyScore = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.AccuracyScore = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected AutomatedReasoningPolicyAccuracyScore to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "groundingJustifications":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyJustificationList(&sv.GroundingJustifications, value); err != nil {
+				return err
+			}
+
+		case "groundingStatements":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyStatementReferenceList(&sv.GroundingStatements, value); err != nil {
+				return err
+			}
+
+		case "policyVariable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyDefinitionVariableName to be of type string, got %T instead", value)
+				}
+				sv.PolicyVariable = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyVariableReportMap(v *map[string]types.AutomatedReasoningPolicyVariableReport, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.AutomatedReasoningPolicyVariableReport
+	if *v == nil {
+		mv = map[string]types.AutomatedReasoningPolicyVariableReport{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.AutomatedReasoningPolicyVariableReport
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyVariableReport(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "44f5fc71-2ca9-4d8b-b80f-7da4b818dc38",
+    "type": "feature",
+    "description": "Adds support for SEMISTRUCT to InputColumn Type",
+    "modules": [
+        "service/quicksight"
+    ]
+}

@@ -3646,6 +3646,10 @@ func awsRestjson1_serializeOpHttpBindingsGetAutomatedReasoningPolicyBuildWorkflo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AssetId != nil {
+		encoder.SetQuery("assetId").String(*v.AssetId)
+	}
+
 	if len(v.AssetType) > 0 {
 		encoder.SetQuery("assetType").String(string(v.AssetType))
 	}
@@ -9307,6 +9311,37 @@ func awsRestjson1_serializeDocumentAutomatedReasoningPolicyDeleteVariableAnnotat
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAutomatedReasoningPolicyGenerateFidelityReportContent(v types.AutomatedReasoningPolicyGenerateFidelityReportContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.AutomatedReasoningPolicyGenerateFidelityReportContentMemberDocuments:
+		av := object.Key("documents")
+		if err := awsRestjson1_serializeDocumentAutomatedReasoningPolicyGenerateFidelityReportDocumentList(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutomatedReasoningPolicyGenerateFidelityReportDocumentList(v []types.AutomatedReasoningPolicyBuildWorkflowDocument, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAutomatedReasoningPolicyBuildWorkflowDocument(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAutomatedReasoningPolicyIngestContentAnnotation(v *types.AutomatedReasoningPolicyIngestContentAnnotation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9517,6 +9552,12 @@ func awsRestjson1_serializeDocumentAutomatedReasoningPolicyWorkflowTypeContent(v
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments:
 		av := object.Key("documents")
 		if err := awsRestjson1_serializeDocumentAutomatedReasoningPolicyBuildWorkflowDocumentList(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent:
+		av := object.Key("generateFidelityReportContent")
+		if err := awsRestjson1_serializeDocumentAutomatedReasoningPolicyGenerateFidelityReportContent(uv.Value, av); err != nil {
 			return err
 		}
 

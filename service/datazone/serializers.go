@@ -18561,6 +18561,18 @@ func awsRestjson1_serializeDocumentConnectionPropertiesInput(v types.ConnectionP
 			return err
 		}
 
+	case *types.ConnectionPropertiesInputMemberWorkflowsMwaaProperties:
+		av := object.Key("workflowsMwaaProperties")
+		if err := awsRestjson1_serializeDocumentWorkflowsMwaaPropertiesInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConnectionPropertiesInputMemberWorkflowsServerlessProperties:
+		av := object.Key("workflowsServerlessProperties")
+		if err := awsRestjson1_serializeDocumentWorkflowsServerlessPropertiesInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -22039,5 +22051,24 @@ func awsRestjson1_serializeDocumentUserPolicyGrantPrincipal(v types.UserPolicyGr
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkflowsMwaaPropertiesInput(v *types.WorkflowsMwaaPropertiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MwaaEnvironmentName != nil {
+		ok := object.Key("mwaaEnvironmentName")
+		ok.String(*v.MwaaEnvironmentName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkflowsServerlessPropertiesInput(v *types.WorkflowsServerlessPropertiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	return nil
 }

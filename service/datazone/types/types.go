@@ -1014,6 +1014,8 @@ type ConnectionCredentials struct {
 //	ConnectionPropertiesInputMemberS3Properties
 //	ConnectionPropertiesInputMemberSparkEmrProperties
 //	ConnectionPropertiesInputMemberSparkGlueProperties
+//	ConnectionPropertiesInputMemberWorkflowsMwaaProperties
+//	ConnectionPropertiesInputMemberWorkflowsServerlessProperties
 type ConnectionPropertiesInput interface {
 	isConnectionPropertiesInput()
 }
@@ -1108,6 +1110,24 @@ type ConnectionPropertiesInputMemberSparkGlueProperties struct {
 
 func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertiesInput() {}
 
+// The Amazon MWAA properties of a connection.
+type ConnectionPropertiesInputMemberWorkflowsMwaaProperties struct {
+	Value WorkflowsMwaaPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberWorkflowsMwaaProperties) isConnectionPropertiesInput() {}
+
+// The MWAA serverless properties of a connection.
+type ConnectionPropertiesInputMemberWorkflowsServerlessProperties struct {
+	Value WorkflowsServerlessPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberWorkflowsServerlessProperties) isConnectionPropertiesInput() {}
+
 // The properties of a connection.
 //
 // The following types satisfy this interface:
@@ -1122,6 +1142,8 @@ func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertie
 //	ConnectionPropertiesOutputMemberS3Properties
 //	ConnectionPropertiesOutputMemberSparkEmrProperties
 //	ConnectionPropertiesOutputMemberSparkGlueProperties
+//	ConnectionPropertiesOutputMemberWorkflowsMwaaProperties
+//	ConnectionPropertiesOutputMemberWorkflowsServerlessProperties
 type ConnectionPropertiesOutput interface {
 	isConnectionPropertiesOutput()
 }
@@ -1215,6 +1237,25 @@ type ConnectionPropertiesOutputMemberSparkGlueProperties struct {
 }
 
 func (*ConnectionPropertiesOutputMemberSparkGlueProperties) isConnectionPropertiesOutput() {}
+
+// The Amazon MWAA properties of a connection.
+type ConnectionPropertiesOutputMemberWorkflowsMwaaProperties struct {
+	Value WorkflowsMwaaPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberWorkflowsMwaaProperties) isConnectionPropertiesOutput() {}
+
+// The MWAA serverless properties of a connection.
+type ConnectionPropertiesOutputMemberWorkflowsServerlessProperties struct {
+	Value WorkflowsServerlessPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberWorkflowsServerlessProperties) isConnectionPropertiesOutput() {
+}
 
 // The connection properties patch.
 //
@@ -6998,6 +7039,34 @@ type UserProfileSummary struct {
 	// The type of the user profile.
 	Type UserProfileType
 
+	noSmithyDocumentSerde
+}
+
+// The Amazon MWAA properties.
+type WorkflowsMwaaPropertiesInput struct {
+
+	// The MWAA environment name.
+	MwaaEnvironmentName *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon MWAA properties.
+type WorkflowsMwaaPropertiesOutput struct {
+
+	// The MWAA environment name.
+	MwaaEnvironmentName *string
+
+	noSmithyDocumentSerde
+}
+
+// The MWAA serverless properties.
+type WorkflowsServerlessPropertiesInput struct {
+	noSmithyDocumentSerde
+}
+
+// The MWAA serverless properties.
+type WorkflowsServerlessPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 

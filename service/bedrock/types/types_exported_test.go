@@ -67,6 +67,24 @@ var _ *types.AutomatedReasoningCheckInvalidFinding
 var _ *types.AutomatedReasoningCheckTranslationAmbiguousFinding
 var _ *types.AutomatedReasoningCheckSatisfiableFinding
 
+func ExampleAutomatedReasoningPolicyAnnotatedContent_outputUsage() {
+	var union types.AutomatedReasoningPolicyAnnotatedContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedReasoningPolicyAnnotatedContentMemberLine:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyAnnotatedLine
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomatedReasoningPolicyAnnotatedLine
+
 func ExampleAutomatedReasoningPolicyAnnotation_outputUsage() {
 	var union types.AutomatedReasoningPolicyAnnotation
 	// type switches can be used to check the union value
@@ -137,8 +155,17 @@ func ExampleAutomatedReasoningPolicyBuildResultAssets_outputUsage() {
 	var union types.AutomatedReasoningPolicyBuildResultAssets
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberAssetManifest:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyBuildResultAssetManifest
+
 	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyBuildLog
+
+	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberDocument:
+		_ = v.Value // Value is types.AutomatedReasoningPolicySourceDocument
+
+	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberFidelityReport:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyFidelityReport
 
 	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberGeneratedTestCases:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyGeneratedTestCases
@@ -161,10 +188,13 @@ func ExampleAutomatedReasoningPolicyBuildResultAssets_outputUsage() {
 	}
 }
 
+var _ *types.AutomatedReasoningPolicySourceDocument
 var _ *types.AutomatedReasoningPolicyScenarios
+var _ *types.AutomatedReasoningPolicyFidelityReport
 var _ *types.AutomatedReasoningPolicyBuildLog
 var _ *types.AutomatedReasoningPolicyDefinitionQualityReport
 var _ *types.AutomatedReasoningPolicyDefinition
+var _ *types.AutomatedReasoningPolicyBuildResultAssetManifest
 var _ *types.AutomatedReasoningPolicyGeneratedTestCases
 
 func ExampleAutomatedReasoningPolicyBuildStepContext_outputUsage() {
@@ -214,6 +244,24 @@ func ExampleAutomatedReasoningPolicyDefinitionElement_outputUsage() {
 var _ *types.AutomatedReasoningPolicyDefinitionRule
 var _ *types.AutomatedReasoningPolicyDefinitionType
 var _ *types.AutomatedReasoningPolicyDefinitionVariable
+
+func ExampleAutomatedReasoningPolicyGenerateFidelityReportContent_outputUsage() {
+	var union types.AutomatedReasoningPolicyGenerateFidelityReportContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedReasoningPolicyGenerateFidelityReportContentMemberDocuments:
+		_ = v.Value // Value is []types.AutomatedReasoningPolicyBuildWorkflowDocument
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.AutomatedReasoningPolicyBuildWorkflowDocument
 
 func ExampleAutomatedReasoningPolicyMutation_outputUsage() {
 	var union types.AutomatedReasoningPolicyMutation
@@ -298,6 +346,9 @@ func ExampleAutomatedReasoningPolicyWorkflowTypeContent_outputUsage() {
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments:
 		_ = v.Value // Value is []types.AutomatedReasoningPolicyBuildWorkflowDocument
 
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyGenerateFidelityReportContent
+
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyBuildWorkflowRepairContent
 
@@ -311,6 +362,7 @@ func ExampleAutomatedReasoningPolicyWorkflowTypeContent_outputUsage() {
 }
 
 var _ *types.AutomatedReasoningPolicyBuildWorkflowRepairContent
+var _ types.AutomatedReasoningPolicyGenerateFidelityReportContent
 var _ []types.AutomatedReasoningPolicyBuildWorkflowDocument
 
 func ExampleCustomizationConfig_outputUsage() {

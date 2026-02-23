@@ -900,8 +900,9 @@ type FieldValue struct {
 
 // Object to store union of Field values.
 //
-// The Summary system field accepts 3000 characters while all other fields accept
-// 500 characters.
+// The Summary system field accepts up to 3000 characters, while all other fields
+// accept up to 4100 characters. If you use multi-byte characters, the effective
+// character limit may be lower.
 //
 // The following types satisfy this interface:
 //

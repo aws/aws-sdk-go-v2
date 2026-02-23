@@ -11305,6 +11305,9 @@ type InputColumn struct {
 
 	// The data type of the column.
 	//
+	// Note: SEMISTRUCT represents Athena's map, row, and struct data types. It is
+	// supported when using the new data preparation experience.
+	//
 	// This member is required.
 	Type InputColumnDataType
 

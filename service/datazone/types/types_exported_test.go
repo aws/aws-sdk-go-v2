@@ -125,6 +125,12 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	case *types.ConnectionPropertiesInputMemberSparkGlueProperties:
 		_ = v.Value // Value is types.SparkGluePropertiesInput
 
+	case *types.ConnectionPropertiesInputMemberWorkflowsMwaaProperties:
+		_ = v.Value // Value is types.WorkflowsMwaaPropertiesInput
+
+	case *types.ConnectionPropertiesInputMemberWorkflowsServerlessProperties:
+		_ = v.Value // Value is types.WorkflowsServerlessPropertiesInput
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -135,6 +141,7 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 }
 
 var _ *types.SparkEmrPropertiesInput
+var _ *types.WorkflowsMwaaPropertiesInput
 var _ *types.AmazonQPropertiesInput
 var _ *types.GluePropertiesInput
 var _ *types.S3PropertiesInput
@@ -143,6 +150,7 @@ var _ *types.IamPropertiesInput
 var _ *types.SparkGluePropertiesInput
 var _ *types.HyperPodPropertiesInput
 var _ *types.RedshiftPropertiesInput
+var _ *types.WorkflowsServerlessPropertiesInput
 var _ *types.MlflowPropertiesInput
 
 func ExampleConnectionPropertiesOutput_outputUsage() {
@@ -179,6 +187,12 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 	case *types.ConnectionPropertiesOutputMemberSparkGlueProperties:
 		_ = v.Value // Value is types.SparkGluePropertiesOutput
 
+	case *types.ConnectionPropertiesOutputMemberWorkflowsMwaaProperties:
+		_ = v.Value // Value is types.WorkflowsMwaaPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberWorkflowsServerlessProperties:
+		_ = v.Value // Value is types.WorkflowsServerlessPropertiesOutput
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -190,9 +204,11 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 
 var _ *types.MlflowPropertiesOutput
 var _ *types.S3PropertiesOutput
+var _ *types.WorkflowsMwaaPropertiesOutput
 var _ *types.AthenaPropertiesOutput
 var _ *types.SparkGluePropertiesOutput
 var _ *types.IamPropertiesOutput
+var _ *types.WorkflowsServerlessPropertiesOutput
 var _ *types.RedshiftPropertiesOutput
 var _ *types.AmazonQPropertiesOutput
 var _ *types.HyperPodPropertiesOutput

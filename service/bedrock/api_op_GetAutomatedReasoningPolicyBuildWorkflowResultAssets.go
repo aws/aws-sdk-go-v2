@@ -32,7 +32,8 @@ func (c *Client) GetAutomatedReasoningPolicyBuildWorkflowResultAssets(ctx contex
 type GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput struct {
 
 	// The type of asset to retrieve (e.g., BUILD_LOG, QUALITY_REPORT,
-	// POLICY_DEFINITION).
+	// POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT,
+	// ASSET_MANIFEST, SOURCE_DOCUMENT).
 	//
 	// This member is required.
 	AssetType types.AutomatedReasoningPolicyBuildResultAssetType
@@ -48,6 +49,12 @@ type GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput struct {
 	//
 	// This member is required.
 	PolicyArn *string
+
+	// The unique identifier of the specific asset to retrieve when multiple assets of
+	// the same type exist. This is required when retrieving SOURCE_DOCUMENT assets, as
+	// multiple source documents may have been used in the workflow. The asset ID can
+	// be obtained from the asset manifest.
+	AssetId *string
 
 	noSmithyDocumentSerde
 }

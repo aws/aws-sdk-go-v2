@@ -450,6 +450,26 @@ func (m *validateOpGetOidcInfo) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetOpentdfConfig struct {
+}
+
+func (*validateOpGetOpentdfConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetOpentdfConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetOpentdfConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetOpentdfConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSecurityGroup struct {
 }
 
@@ -690,6 +710,26 @@ func (m *validateOpRegisterOidcConfigTest) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterOpentdfConfig struct {
+}
+
+func (*validateOpRegisterOpentdfConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterOpentdfConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterOpentdfConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterOpentdfConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateBot struct {
 }
 
@@ -918,6 +958,10 @@ func addOpGetOidcInfoValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOidcInfo{}, middleware.After)
 }
 
+func addOpGetOpentdfConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetOpentdfConfig{}, middleware.After)
+}
+
 func addOpGetSecurityGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSecurityGroup{}, middleware.After)
 }
@@ -964,6 +1008,10 @@ func addOpRegisterOidcConfigValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpRegisterOidcConfigTestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterOidcConfigTest{}, middleware.After)
+}
+
+func addOpRegisterOpentdfConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterOpentdfConfig{}, middleware.After)
 }
 
 func addOpUpdateBotValidationMiddleware(stack *middleware.Stack) error {
@@ -1532,6 +1580,21 @@ func validateOpGetOidcInfoInput(v *GetOidcInfoInput) error {
 	}
 }
 
+func validateOpGetOpentdfConfigInput(v *GetOpentdfConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetOpentdfConfigInput"}
+	if v.NetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSecurityGroupInput(v *GetSecurityGroupInput) error {
 	if v == nil {
 		return nil
@@ -1731,6 +1794,33 @@ func validateOpRegisterOidcConfigTestInput(v *RegisterOidcConfigTestInput) error
 	}
 	if v.Scopes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Scopes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterOpentdfConfigInput(v *RegisterOpentdfConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterOpentdfConfigInput"}
+	if v.NetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Provider == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
