@@ -134,7 +134,7 @@ func TestTableCreate(t *testing.T) {
 				t.Errorf("unexpcted table error: %v", err)
 			}
 
-			_, err = table.Create(context.TODO())
+			_, err = table.Create(context.Background())
 			if c.expectedError && err == nil {
 				t.Fatalf("expected error but got none")
 			}
@@ -195,9 +195,9 @@ func TestTableDescribe(t *testing.T) {
 				t.Errorf("unexpcted table error: %v", err)
 			}
 
-			_, _ = table.Create(context.TODO())
+			_, _ = table.Create(context.Background())
 
-			_, err = table.Describe(context.TODO())
+			_, err = table.Describe(context.Background())
 			if c.expectedError && err == nil {
 				t.Fatalf("expected error but got none")
 			}
@@ -257,9 +257,9 @@ func TestTableDelete(t *testing.T) {
 				t.Errorf("unexpcted table error: %v", err)
 			}
 
-			_, _ = table.Create(context.TODO())
+			_, _ = table.Create(context.Background())
 
-			_, err = table.Delete(context.TODO())
+			_, err = table.Delete(context.Background())
 			if c.expectedError && err == nil {
 				t.Fatalf("expected error but got none")
 			}
@@ -300,7 +300,7 @@ func TestTableGetItem(t *testing.T) {
 				t.Errorf("unexpcted table error: %v", err)
 			}
 
-			_, err = table.GetItem(context.TODO(), Map{})
+			_, err = table.GetItem(context.Background(), Map{})
 			if c.expectedError && err == nil {
 				t.Fatalf("expected error but got none")
 			}
@@ -341,7 +341,7 @@ func TestTablePutItem(t *testing.T) {
 				t.Errorf("unexpcted table error: %v", err)
 			}
 
-			_, err = table.PutItem(context.TODO(), &order{})
+			_, err = table.PutItem(context.Background(), &order{})
 			if c.expectedError && err == nil {
 				t.Fatalf("expected error but got none")
 			}
@@ -382,7 +382,7 @@ func TestTableUpdateItem(t *testing.T) {
 				t.Errorf("unexpcted table error: %v", err)
 			}
 
-			_, err = table.UpdateItem(context.TODO(), &order{})
+			_, err = table.UpdateItem(context.Background(), &order{})
 			if c.expectedError && err == nil {
 				t.Fatalf("expected error but got none")
 			}
@@ -425,7 +425,7 @@ func TestTableDeleteItem(t *testing.T) {
 				t.Errorf("unexpcted table error: %v", err)
 			}
 
-			err = table.DeleteItem(context.TODO(), &order{})
+			err = table.DeleteItem(context.Background(), &order{})
 			if c.expectedError && err == nil {
 				t.Fatalf("expected error but got none")
 			}
@@ -471,7 +471,7 @@ func TestTableQuery(t *testing.T) {
 				t.Errorf("unexpcted table error: %v", err)
 			}
 
-			for res := range table.Query(context.TODO(), expression.Expression{}) {
+			for res := range table.Query(context.Background(), expression.Expression{}) {
 				if c.expectedError && res.Error() == nil {
 					t.Fatalf("expected error but got none")
 				}
@@ -518,7 +518,7 @@ func TestTableScan(t *testing.T) {
 				t.Errorf("unexpcted table error: %v", err)
 			}
 
-			for res := range table.Scan(context.TODO(), expression.Expression{}) {
+			for res := range table.Scan(context.Background(), expression.Expression{}) {
 				if c.expectedError && res.Error() == nil {
 					t.Fatalf("expected error but got none")
 				}
@@ -573,7 +573,7 @@ func TestTableBatchGetItem(t *testing.T) {
 				bgio.AddReadItemByMap(item)
 			}
 
-			for res := range bgio.Execute(context.TODO()) {
+			for res := range bgio.Execute(context.Background()) {
 				if c.expectedError && res.Error() == nil {
 					t.Fatalf("expected error but got none")
 				}
@@ -644,7 +644,7 @@ func TestTableBatchWriteItem(t *testing.T) {
 				}
 			}
 
-			err = bgwo.Execute(context.TODO())
+			err = bgwo.Execute(context.Background())
 			if c.expectedError && err == nil {
 				t.Fatalf("expected error but got none")
 			}

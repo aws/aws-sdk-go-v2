@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
@@ -51,6 +52,12 @@ func NewTable[T any](client Client, fns ...func(options *TableOptions[T])) (*Tab
 	}
 
 	opts := TableOptions[T]{}
+
+	if c, ok := client.(*dynamodb.Client); ok {
+		client = dynamodb.New(c.Options(), func(o *dynamodb.Options) {
+			o.APIOptions = append(o.APIOptions, awsmiddleware.AddUserAgentKeyValue(UserAgentPart, EntityManagerVersion))
+		})
+	}
 
 	for _, fn := range fns {
 		fn(&opts)

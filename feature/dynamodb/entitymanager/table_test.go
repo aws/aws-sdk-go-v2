@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net/http"
+	"strings"
 	"testing"
 	"time"
 
@@ -319,7 +321,7 @@ func TestTableE2E(t *testing.T) {
 			}
 		}
 
-		if err := bwo.Execute(context.TODO()); err != nil {
+		if err := bwo.Execute(context.Background()); err != nil {
 			t.Error(err.Error())
 		} else {
 			t.Log("BatchWritePut done")
@@ -336,7 +338,7 @@ func TestTableE2E(t *testing.T) {
 			}
 		}
 
-		for item := range bgo.Execute(context.TODO()) {
+		for item := range bgo.Execute(context.Background()) {
 			if item.Error() != nil {
 				t.Errorf("error during BatchGetOperation iteration: %v", item.Error())
 				continue
@@ -367,8 +369,53 @@ func TestTableE2E(t *testing.T) {
 			}
 		}
 
-		if err := bwod.Execute(context.TODO()); err != nil {
+		if err := bwod.Execute(context.Background()); err != nil {
 			t.Error(err.Error())
 		}
+	}
+}
+
+type captureHTTPClient struct {
+	req *http.Request
+}
+
+func (c *captureHTTPClient) Do(req *http.Request) (*http.Response, error) {
+	c.req = req
+	return nil, nil
+}
+
+func TestTableAddsHeaderToClient(t *testing.T) {
+	ctx := context.Background()
+	httpClient := &captureHTTPClient{}
+
+	cfg, err := config.LoadDefaultConfig(ctx, config.WithHTTPClient(httpClient))
+	if err != nil {
+		t.Fatalf("LoadDefaultConfig() error: %v", err)
+	}
+
+	client := dynamodb.NewFromConfig(cfg)
+
+	tbl, err := NewTable[order](client)
+	if err != nil {
+		t.Fatalf("NewTable() error: %v", err)
+	}
+
+	_, _ = tbl.GetItem(ctx, Map{})
+
+	if httpClient.req == nil {
+		t.Fatal("expected HTTP request to be captured, got nil")
+	}
+
+	ua := httpClient.req.Header.Get("User-Agent")
+	t.Logf(`Found user agent: "%s"`, ua)
+	if ua == "" {
+		t.Fatal("expected User-Agent header to be set, got empty string")
+	}
+
+	if !strings.Contains(ua, UserAgentPart) {
+		t.Fatalf("expected User-Agent header to contain %q, got %q", UserAgentPart, ua)
+	}
+	if !strings.Contains(ua, EntityManagerVersion) {
+		t.Fatalf("expected User-Agent header to contain %q, got %q", EntityManagerVersion, ua)
 	}
 }
