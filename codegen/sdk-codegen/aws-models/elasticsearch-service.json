@@ -3492,13 +3492,15 @@
                     "target": "com.amazonaws.elasticsearchservice#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>"
+                        "smithy.api#documentation": "<p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.elasticsearchservice#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>"
+                        "smithy.api#documentation": "<p>NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>",
+                        "smithy.api#httpQuery": "nextToken"
                     }
                 }
             },

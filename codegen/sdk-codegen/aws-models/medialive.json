@@ -3775,6 +3775,13 @@
                         "smithy.api#documentation": "A list of IDs for all the Input Security Groups attached to the channel.",
                         "smithy.api#jsonName": "channelSecurityGroups"
                     }
+                },
+                "InferenceSettings": {
+                    "target": "com.amazonaws.medialive#DescribeInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
+                        "smithy.api#jsonName": "inferenceSettings"
+                    }
                 }
             },
             "traits": {
@@ -4221,6 +4228,13 @@
                     "traits": {
                         "smithy.api#documentation": "A list of IDs for all the Input Security Groups attached to the channel.",
                         "smithy.api#jsonName": "channelSecurityGroups"
+                    }
+                },
+                "InferenceSettings": {
+                    "target": "com.amazonaws.medialive#DescribeInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
+                        "smithy.api#jsonName": "inferenceSettings"
                     }
                 }
             },
@@ -5641,6 +5655,13 @@
                     "traits": {
                         "smithy.api#documentation": "A list of IDs for all the Input Security Groups attached to the channel.",
                         "smithy.api#jsonName": "channelSecurityGroups"
+                    }
+                },
+                "InferenceSettings": {
+                    "target": "com.amazonaws.medialive#InferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
+                        "smithy.api#jsonName": "inferenceSettings"
                     }
                 }
             },
@@ -8381,6 +8402,13 @@
                         "smithy.api#documentation": "A list of IDs for all the Input Security Groups attached to the channel.",
                         "smithy.api#jsonName": "channelSecurityGroups"
                     }
+                },
+                "InferenceSettings": {
+                    "target": "com.amazonaws.medialive#DescribeInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
+                        "smithy.api#jsonName": "inferenceSettings"
+                    }
                 }
             },
             "traits": {
@@ -10547,6 +10575,13 @@
                         "smithy.api#documentation": "A list of IDs for all the Input Security Groups attached to the channel.",
                         "smithy.api#jsonName": "channelSecurityGroups"
                     }
+                },
+                "InferenceSettings": {
+                    "target": "com.amazonaws.medialive#DescribeInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
+                        "smithy.api#jsonName": "inferenceSettings"
+                    }
                 }
             },
             "traits": {
@@ -10835,6 +10870,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "Details of a follower channel in a linked pair"
+            }
+        },
+        "com.amazonaws.medialive#DescribeInferenceSettings": {
+            "type": "structure",
+            "members": {
+                "FeedArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.",
+                        "smithy.api#jsonName": "feedArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configures Elemental Inference features in a channel."
             }
         },
         "com.amazonaws.medialive#DescribeInput": {
@@ -19943,6 +19993,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "Include Filler Nal Units"
+            }
+        },
+        "com.amazonaws.medialive#InferenceSettings": {
+            "type": "structure",
+            "members": {
+                "FeedArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.",
+                        "smithy.api#jsonName": "feedArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configures Elemental Inference features in a channel."
             }
         },
         "com.amazonaws.medialive#Input": {
@@ -31383,6 +31448,13 @@
                         "smithy.api#documentation": "A list of IDs for all the Input Security Groups attached to the channel.",
                         "smithy.api#jsonName": "channelSecurityGroups"
                     }
+                },
+                "InferenceSettings": {
+                    "target": "com.amazonaws.medialive#DescribeInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
+                        "smithy.api#jsonName": "inferenceSettings"
+                    }
                 }
             },
             "traits": {
@@ -34044,6 +34116,13 @@
                         "smithy.api#documentation": "A list of IDs for all the Input Security Groups attached to the channel.",
                         "smithy.api#jsonName": "channelSecurityGroups"
                     }
+                },
+                "InferenceSettings": {
+                    "target": "com.amazonaws.medialive#DescribeInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
+                        "smithy.api#jsonName": "inferenceSettings"
+                    }
                 }
             },
             "traits": {
@@ -35380,6 +35459,13 @@
                     "traits": {
                         "smithy.api#documentation": "A list of IDs for all the Input Security Groups attached to the channel.",
                         "smithy.api#jsonName": "channelSecurityGroups"
+                    }
+                },
+                "InferenceSettings": {
+                    "target": "com.amazonaws.medialive#DescribeInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
+                        "smithy.api#jsonName": "inferenceSettings"
                     }
                 }
             },
@@ -36922,6 +37008,13 @@
                     "traits": {
                         "smithy.api#documentation": "A list of IDs for all the Input Security Groups attached to the channel.",
                         "smithy.api#jsonName": "channelSecurityGroups"
+                    }
+                },
+                "InferenceSettings": {
+                    "target": "com.amazonaws.medialive#InferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
+                        "smithy.api#jsonName": "inferenceSettings"
                     }
                 }
             },
@@ -39214,6 +39307,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "STRETCH_TO_OUTPUT"
+                    }
+                },
+                "SMART_CROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMART_CROP"
                     }
                 }
             },

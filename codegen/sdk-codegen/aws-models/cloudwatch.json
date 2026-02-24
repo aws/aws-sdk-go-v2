@@ -210,6 +210,79 @@
                 "target": "com.amazonaws.cloudwatch#AlarmHistoryItem"
             }
         },
+        "com.amazonaws.cloudwatch#AlarmMuteRuleStatus": {
+            "type": "enum",
+            "members": {
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#AlarmMuteRuleStatuses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#AlarmMuteRuleStatus"
+            }
+        },
+        "com.amazonaws.cloudwatch#AlarmMuteRuleSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#AlarmMuteRuleSummary"
+            }
+        },
+        "com.amazonaws.cloudwatch#AlarmMuteRuleSummary": {
+            "type": "structure",
+            "members": {
+                "AlarmMuteRuleArn": {
+                    "target": "com.amazonaws.cloudwatch#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the alarm mute rule.</p>"
+                    }
+                },
+                "ExpireDate": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the mute rule expires and is no longer evaluated. This field is only present if an expiration date was configured.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudwatch#AlarmMuteRuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the alarm mute rule. Valid values are <code>SCHEDULED</code>, <code>ACTIVE</code>, or <code>EXPIRED</code>.</p>"
+                    }
+                },
+                "MuteType": {
+                    "target": "com.amazonaws.cloudwatch#MuteType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the mute rule is one-time or recurring. Valid values are <code>ONE_TIME</code> or <code>RECURRING</code>.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the mute rule was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an alarm mute rule, including its name, status, and configuration details.</p>"
+            }
+        },
         "com.amazonaws.cloudwatch#AlarmName": {
             "type": "string",
             "traits": {
@@ -457,6 +530,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudwatch#AnomalyDetector"
+            }
+        },
+        "com.amazonaws.cloudwatch#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                }
             }
         },
         "com.amazonaws.cloudwatch#AttributeName": {
@@ -932,6 +1014,34 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.cloudwatch#DeleteAlarmMuteRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#DeleteAlarmMuteRuleInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a specific alarm mute rule.</p>\n         <p>When you delete a mute rule, any alarms that are currently being muted by that rule are immediately unmuted. If those alarms are in an ALARM state, their configured actions will trigger.</p>\n         <p>This operation is idempotent. If you delete a mute rule that does not exist, the operation succeeds without returning an error.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To delete a mute rule, you need the <code>cloudwatch:DeleteAlarmMuteRule</code> permission on the alarm mute rule resource.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#DeleteAlarmMuteRuleInput": {
+            "type": "structure",
+            "members": {
+                "AlarmMuteRuleName": {
+                    "target": "com.amazonaws.cloudwatch#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the alarm mute rule to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatch#DeleteAlarms": {
@@ -1919,6 +2029,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatch#Duration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#EnableAlarmActions": {
             "type": "operation",
             "input": {
@@ -2164,6 +2283,15 @@
         "com.amazonaws.cloudwatch#ExceptionType": {
             "type": "string"
         },
+        "com.amazonaws.cloudwatch#Expression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#ExtendedStatistic": {
             "type": "string"
         },
@@ -2190,6 +2318,126 @@
         },
         "com.amazonaws.cloudwatch#FaultDescription": {
             "type": "string"
+        },
+        "com.amazonaws.cloudwatch#GetAlarmMuteRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#GetAlarmMuteRuleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#GetAlarmMuteRuleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details for a specific alarm mute rule.</p>\n         <p>This operation returns complete information about the mute rule, including its configuration, status, targeted alarms, and metadata.</p>\n         <p>The returned status indicates the current state of the mute rule:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>SCHEDULED</b>: The mute rule is configured and will become active in the future</p>\n            </li>\n            <li>\n               <p>\n                  <b>ACTIVE</b>: The mute rule is currently muting alarm actions</p>\n            </li>\n            <li>\n               <p>\n                  <b>EXPIRED</b>: The mute rule has passed its expiration date and will no longer become active</p>\n            </li>\n         </ul>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To retrieve details for a mute rule, you need the <code>cloudwatch:GetAlarmMuteRule</code> permission on the alarm mute rule resource.</p>",
+                "smithy.waiters#waitable": {
+                    "AlarmMuteRuleExists": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "success": true
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ],
+                        "minDelay": 5
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#GetAlarmMuteRuleInput": {
+            "type": "structure",
+            "members": {
+                "AlarmMuteRuleName": {
+                    "target": "com.amazonaws.cloudwatch#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the alarm mute rule to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#GetAlarmMuteRuleOutput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudwatch#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alarm mute rule.</p>"
+                    }
+                },
+                "AlarmMuteRuleArn": {
+                    "target": "com.amazonaws.cloudwatch#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the alarm mute rule.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.cloudwatch#AlarmDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the alarm mute rule.</p>"
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.cloudwatch#Rule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that defines when and how long alarms are muted.</p>"
+                    }
+                },
+                "MuteTargets": {
+                    "target": "com.amazonaws.cloudwatch#MuteTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which alarms this rule applies to.</p>"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the mute rule becomes active. If not set, the rule is active immediately.</p>"
+                    }
+                },
+                "ExpireDate": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the mute rule expires and is no longer evaluated.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudwatch#AlarmMuteRuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the alarm mute rule. Valid values are <code>SCHEDULED</code>, <code>ACTIVE</code>, or <code>EXPIRED</code>.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the mute rule was last updated.</p>"
+                    }
+                },
+                "MuteType": {
+                    "target": "com.amazonaws.cloudwatch#MuteType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the mute rule is one-time or recurring. Valid values are <code>ONE_TIME</code> or <code>RECURRING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.cloudwatch#GetDashboard": {
             "type": "operation",
@@ -2787,6 +3035,9 @@
             "version": "2010-08-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.cloudwatch#DeleteAlarmMuteRule"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#DeleteAlarms"
                 },
                 {
@@ -2832,6 +3083,9 @@
                     "target": "com.amazonaws.cloudwatch#EnableInsightRules"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#GetAlarmMuteRule"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#GetDashboard"
                 },
                 {
@@ -2850,6 +3104,9 @@
                     "target": "com.amazonaws.cloudwatch#GetMetricWidgetImage"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#ListAlarmMuteRules"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#ListDashboards"
                 },
                 {
@@ -2863,6 +3120,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#PutAlarmMuteRule"
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#PutAnomalyDetector"
@@ -4200,6 +4460,84 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudwatch#ListAlarmMuteRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#ListAlarmMuteRulesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#ListAlarmMuteRulesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#InvalidNextToken"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists alarm mute rules in your Amazon Web Services account and region.</p>\n         <p>You can filter the results by alarm name to find all mute rules targeting a specific alarm, or by status to find rules that are scheduled, active, or expired.</p>\n         <p>This operation supports pagination for accounts with many mute rules. Use the <code>MaxRecords</code> and <code>NextToken</code> parameters to retrieve results in multiple calls.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To list mute rules, you need the <code>cloudwatch:ListAlarmMuteRules</code> permission.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AlarmMuteRuleSummaries",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#ListAlarmMuteRulesInput": {
+            "type": "structure",
+            "members": {
+                "AlarmName": {
+                    "target": "com.amazonaws.cloudwatch#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to show only mute rules that target the specified alarm name.</p>"
+                    }
+                },
+                "Statuses": {
+                    "target": "com.amazonaws.cloudwatch#AlarmMuteRuleStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to show only mute rules with the specified statuses. Valid values are <code>SCHEDULED</code>, <code>ACTIVE</code>, or <code>EXPIRED</code>.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.cloudwatch#MaxRecords",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of mute rules to return in one call. The default is 50.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudwatch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous call to indicate where to continue retrieving results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#ListAlarmMuteRulesOutput": {
+            "type": "structure",
+            "members": {
+                "AlarmMuteRuleSummaries": {
+                    "target": "com.amazonaws.cloudwatch#AlarmMuteRuleSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of alarm mute rule summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudwatch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. If this field is absent, there are no more results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatch#ListDashboards": {
             "type": "operation",
             "input": {
@@ -5457,6 +5795,46 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudwatch#MuteTargetAlarmNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#Name"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#MuteTargets": {
+            "type": "structure",
+            "members": {
+                "AlarmNames": {
+                    "target": "com.amazonaws.cloudwatch#MuteTargetAlarmNameList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The list of alarm names that this mute rule targets. You can specify up to 100 alarm names.</p>\n         <p>Each alarm name must be between 1 and 255 characters in length. The alarm names must match existing alarms in your Amazon Web Services account and region.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies which alarms an alarm mute rule applies to.</p>\n         <p>You can target up to 100 specific alarms by name. When a mute rule is active, the targeted alarms continue to evaluate metrics and transition between states, but their configured actions are muted.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#MuteType": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudwatch#Name": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#Namespace": {
             "type": "string",
             "traits": {
@@ -5521,6 +5899,77 @@
         },
         "com.amazonaws.cloudwatch#PeriodicSpikes": {
             "type": "boolean"
+        },
+        "com.amazonaws.cloudwatch#PutAlarmMuteRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#PutAlarmMuteRuleInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#LimitExceededFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates an alarm mute rule.</p>\n         <p>Alarm mute rules automatically mute alarm actions during predefined time windows. When a mute rule is active, targeted alarms continue to evaluate metrics and transition between states, but their configured actions (such as Amazon SNS notifications or Auto Scaling actions) are muted.</p>\n         <p>You can create mute rules with recurring schedules using <code>cron</code> expressions or one-time mute windows using <code>at</code> expressions. Each mute rule can target up to 100 specific alarms by name.</p>\n         <p>If you specify a rule name that already exists, this operation updates the existing rule with the new configuration.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To create or update a mute rule, you must have the <code>cloudwatch:PutAlarmMuteRule</code> permission on two types of resources: the alarm mute rule resource itself, and each alarm that the rule targets.</p>\n         <p>For example, If you want to allow a user to create mute rules that target only specific alarms named \"WebServerCPUAlarm\" and \"DatabaseConnectionAlarm\", you would create an IAM policy with one statement granting <code>cloudwatch:PutAlarmMuteRule</code> on the alarm mute rule resource (<code>arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute:*</code>), and another statement granting <code>cloudwatch:PutAlarmMuteRule</code> on the targeted alarm resources (<code>arn:aws:cloudwatch:[REGION]:123456789012:alarm:WebServerCPUAlarm</code> and <code>arn:aws:cloudwatch:[REGION]:123456789012:alarm:DatabaseConnectionAlarm</code>).</p>\n         <p>You can also use IAM policy conditions to allow targeting alarms based on resource tags. For example, you can restrict users to create/update mute rules to only target alarms that have a specific tag key-value pair, such as <code>Team=TeamA</code>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#PutAlarmMuteRuleInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudwatch#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the alarm mute rule. This name must be unique within your Amazon Web Services account and region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.cloudwatch#AlarmDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the alarm mute rule that helps you identify its purpose.</p>"
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.cloudwatch#Rule",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The configuration that defines when and how long alarms should be muted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MuteTargets": {
+                    "target": "com.amazonaws.cloudwatch#MuteTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which alarms this rule applies to.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudwatch#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs to associate with the alarm mute rule. You can use tags to categorize and manage your mute rules.</p>"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time after which the mute rule takes effect. If not specified, the mute rule takes effect immediately upon creation and the mutes are applied as per the schedule expression. This date and time is interpreted according to the schedule timezone, or UTC if no timezone is specified.</p>"
+                    }
+                },
+                "ExpireDate": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the mute rule expires and is no longer evaluated. After this time, the rule status becomes EXPIRED and will no longer mute the targeted alarms. This date and time is interpreted according to the schedule timezone, or UTC if no timezone is specified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.cloudwatch#PutAnomalyDetector": {
             "type": "operation",
@@ -6353,6 +6802,22 @@
         "com.amazonaws.cloudwatch#ReturnData": {
             "type": "boolean"
         },
+        "com.amazonaws.cloudwatch#Rule": {
+            "type": "structure",
+            "members": {
+                "Schedule": {
+                    "target": "com.amazonaws.cloudwatch#Schedule",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The schedule configuration that defines when the mute rule activates and how long it remains active.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the schedule configuration for an alarm mute rule.</p>\n         <p>The rule contains a schedule that specifies when and how long alarms should be muted. The schedule can be a recurring pattern using cron expressions or a one-time mute window using at expressions.</p>"
+            }
+        },
         "com.amazonaws.cloudwatch#ScanBy": {
             "type": "enum",
             "members": {
@@ -6368,6 +6833,36 @@
                         "smithy.api#enumValue": "TimestampAscending"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cloudwatch#Schedule": {
+            "type": "structure",
+            "members": {
+                "Expression": {
+                    "target": "com.amazonaws.cloudwatch#Expression",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The schedule expression that defines when the mute rule activates. The expression must be between 1 and 256 characters in length.</p>\n         <p>You can use one of two expression formats:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Cron expressions</b> - For recurring mute windows. Format: <code>cron(Minutes Hours Day-of-month Month Day-of-week)</code>\n               </p>\n               <p>Examples:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>cron(0 2 * * *)</code> - Activates daily at 2:00 AM</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>cron(0 2 * * SUN)</code> - Activates every Sunday at 2:00 AM for weekly system maintenance</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>cron(0 1 1 * *)</code> - Activates on the first day of each month at 1:00 AM for monthly database maintenance</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>cron(0 18 * * FRI)</code> - Activates every Friday at 6:00 PM</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>cron(0 23 * * *)</code> - Activates every day at 11:00 PM during nightly backup operations</p>\n                  </li>\n               </ul>\n               <p>The characters <code>*</code>, <code>-</code>, and <code>,</code> are supported in all fields. English names can be used for the month (JAN-DEC) and day of week (SUN-SAT) fields.</p>\n            </li>\n            <li>\n               <p>\n                  <b>At expressions</b> - For one-time mute windows. Format: <code>at(yyyy-MM-ddThh:mm)</code>\n               </p>\n               <p>Examples:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>at(2024-05-10T14:00)</code> - Activates once on May 10, 2024 at 2:00 PM during an active incident response session</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>at(2024-12-23T00:00)</code> - Activates once on December 23, 2024 at midnight during annual company shutdown</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Duration": {
+                    "target": "com.amazonaws.cloudwatch#Duration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The length of time that alarms remain muted when the schedule activates. The duration must be between 1 and 50 characters in length.</p>\n         <p>Specify the duration using ISO 8601 duration format with a minimum of 1 minute (<code>PT1M</code>) and maximum of 15 days (<code>P15D</code>).</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PT4H</code> - 4 hours for weekly system maintenance</p>\n            </li>\n            <li>\n               <p>\n                  <code>P2DT12H</code> - 2 days and 12 hours for weekend muting from Friday 6:00 PM to Monday 6:00 AM</p>\n            </li>\n            <li>\n               <p>\n                  <code>PT6H</code> - 6 hours for monthly database maintenance</p>\n            </li>\n            <li>\n               <p>\n                  <code>PT2H</code> - 2 hours for nightly backup operations</p>\n            </li>\n            <li>\n               <p>\n                  <code>P7D</code> - 7 days for annual company shutdown</p>\n            </li>\n         </ul>\n         <p>The duration begins when the schedule expression time is reached. For recurring schedules, the duration applies to each occurrence.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Timezone": {
+                    "target": "com.amazonaws.cloudwatch#Timezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone to use when evaluating the schedule expression. The time zone must be between 1 and 50 characters in length.</p>\n         <p>Specify the time zone using standard timezone identifiers (for example, <code>America/New_York</code>, <code>Europe/London</code>, or <code>Asia/Tokyo</code>).</p>\n         <p>If you don't specify a time zone, UTC is used by default. The time zone affects how cron and at expressions are interpreted, as well as start and expire dates you specify</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>America/New_York</code> - Eastern Time (US)</p>\n            </li>\n            <li>\n               <p>\n                  <code>America/Los_Angeles</code> - Pacific Time (US)</p>\n            </li>\n            <li>\n               <p>\n                  <code>Europe/London</code> - British Time</p>\n            </li>\n            <li>\n               <p>\n                  <code>Asia/Tokyo</code> - Japan Standard Time</p>\n            </li>\n            <li>\n               <p>\n                  <code>UTC</code> - Coordinated Universal Time</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies when and how long an alarm mute rule is active.</p>\n         <p>The schedule uses either a cron expression for recurring mute windows or an at expression for one-time mute windows. When the schedule activates, the mute rule mutes alarm actions for the specified duration.</p>"
             }
         },
         "com.amazonaws.cloudwatch#SetAlarmState": {
@@ -7036,6 +7531,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudwatch#Timestamp"
+            }
+        },
+        "com.amazonaws.cloudwatch#Timezone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.cloudwatch#TreatMissingData": {

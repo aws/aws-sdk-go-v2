@@ -5215,13 +5215,15 @@
                     "target": "com.amazonaws.opensearch#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can\n            use <code>nextToken</code> to get the next page of results.</p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can\n            use <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>DescribeDomainAutoTunes</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>DescribeDomainAutoTunes</code> operations, which returns results in the\n            next page.</p>"
+                        "smithy.api#documentation": "<p>If your initial <code>DescribeDomainAutoTunes</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>DescribeDomainAutoTunes</code> operations, which returns results in the\n            next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
                     }
                 }
             },
