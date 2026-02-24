@@ -1,8 +1,0 @@
-{
-    "id": "d6ed9008-fc3e-4c13-9dfc-5d4201b23923",
-    "type": "feature",
-    "description": "Initial GA launch for AWS Elemental Inference including capabilities of Smart Crop and Live Event Clipping",
-    "modules": [
-        "service/elementalinference"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.15.0 (2026-02-24)
+
+* **Feature**: Added support for filtering opportunities by target close date in the ListOpportunities API. You can now filter results to return opportunities with a target close date before or after a specified date, enabling more precise opportunity searches based on expected closure timelines.
+
 # v1.14.1 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

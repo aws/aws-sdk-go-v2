@@ -1,3 +1,24 @@
+# Release (2026-02-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.55.0](service/cloudwatch/CHANGELOG.md#v1550-2026-02-24)
+  * **Feature**: This release adds the APIs (PutAlarmMuteRule, ListAlarmMuteRules, GetAlarmMuteRule and DeleteAlarmMuteRule) to manage a new Cloudwatch resource, AlarmMuteRules. AlarmMuteRules allow customers to temporarily mute alarm notifications during expected downtime periods.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.291.0](service/ec2/CHANGELOG.md#v12910-2026-02-24)
+  * **Feature**: Adds httpTokensEnforced property to ModifyInstanceMetadataDefaults API. Set per account or manage organization-wide using declarative policies to prevent IMDSv1-enabled instance launch and block attempts to enable IMDSv1 on existing IMDSv2-only instances.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.38.0](service/elasticsearchservice/CHANGELOG.md#v1380-2026-02-24)
+  * **Feature**: Fixed HTTP binding for DescribeDomainAutoTunes API to correctly pass request parameters as query parameters in the HTTP request.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.0.0](service/elementalinference/CHANGELOG.md#v100-2026-02-24)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial GA launch for AWS Elemental Inference including capabilities of Smart Crop and Live Event Clipping
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.93.0](service/medialive/CHANGELOG.md#v1930-2026-02-24)
+  * **Feature**: AWS Elemental MediaLive - Added support for Elemental Inference for Smart Cropping and Clipping features for MediaLive.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.10.0](service/observabilityadmin/CHANGELOG.md#v1100-2026-02-24)
+  * **Feature**: Adding a new field in the CreateCentralizationRuleForOrganization, UpdateCentralizationRuleForOrganization API and updating the GetCentralizationRuleForOrganization API response to include the new field
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.58.0](service/opensearch/CHANGELOG.md#v1580-2026-02-24)
+  * **Feature**: Fixed HTTP binding for DescribeDomainAutoTunes API to correctly pass request parameters as query parameters in the HTTP request.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.15.0](service/partnercentralselling/CHANGELOG.md#v1150-2026-02-24)
+  * **Feature**: Added support for filtering opportunities by target close date in the ListOpportunities API. You can now filter results to return opportunities with a target close date before or after a specified date, enabling more precise opportunity searches based on expected closure timelines.
+
 # Release (2026-02-23)
 
 ## General Highlights

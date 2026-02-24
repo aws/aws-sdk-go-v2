@@ -1,8 +1,0 @@
-{
-    "id": "a349f1b8-7b24-40f6-a9b6-bb20d2a92866",
-    "type": "feature",
-    "description": "Adds httpTokensEnforced property to ModifyInstanceMetadataDefaults API. Set per account or manage organization-wide using declarative policies to prevent IMDSv1-enabled instance launch and block attempts to enable IMDSv1 on existing IMDSv2-only instances.",
-    "modules": [
-        "service/ec2"
-    ]
-}

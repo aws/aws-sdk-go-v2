@@ -1,3 +1,7 @@
+# v1.58.0 (2026-02-24)
+
+* **Feature**: Fixed HTTP binding for DescribeDomainAutoTunes API to correctly pass request parameters as query parameters in the HTTP request.
+
 # v1.57.2 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "785144a6-7944-4617-a155-81c2b5539650",
-    "type": "feature",
-    "description": "Adding a new field in the CreateCentralizationRuleForOrganization, UpdateCentralizationRuleForOrganization API and updating the GetCentralizationRuleForOrganization API response to include the new field",
-    "modules": [
-        "service/observabilityadmin"
-    ]
-}

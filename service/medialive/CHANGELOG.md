@@ -1,3 +1,7 @@
+# v1.93.0 (2026-02-24)
+
+* **Feature**: AWS Elemental MediaLive - Added support for Elemental Inference for Smart Cropping and Clipping features for MediaLive.
+
 # v1.92.1 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

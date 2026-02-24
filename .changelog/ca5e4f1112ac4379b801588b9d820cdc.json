@@ -1,8 +1,0 @@
-{
-    "id": "ca5e4f11-12ac-4379-b801-588b9d820cdc",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive - Added support for Elemental Inference for Smart Cropping and Clipping features for MediaLive.",
-    "modules": [
-        "service/medialive"
-    ]
-}
