@@ -1,0 +1,8 @@
+{
+    "id": "7bce852f-0c27-45cd-8579-d83accc31da3",
+    "type": "feature",
+    "description": "This release adds the APIs (PutAlarmMuteRule, ListAlarmMuteRules, GetAlarmMuteRule and DeleteAlarmMuteRule) to manage a new Cloudwatch resource, AlarmMuteRules. AlarmMuteRules allow customers to temporarily mute alarm notifications during expected downtime periods.",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

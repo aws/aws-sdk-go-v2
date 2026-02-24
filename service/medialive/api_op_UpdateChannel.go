@@ -56,6 +56,9 @@ type UpdateChannelInput struct {
 	// The encoder settings for this channel.
 	EncoderSettings *types.EncoderSettings
 
+	// Include this setting to include Elemental Inference features in this channel.
+	InferenceSettings *types.InferenceSettings
+
 	// Placeholder documentation for __listOfInputAttachment
 	InputAttachments []types.InputAttachment
 

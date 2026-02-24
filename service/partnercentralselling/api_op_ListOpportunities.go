@@ -102,6 +102,11 @@ type ListOpportunitiesInput struct {
 	// value is LastModifiedDate .
 	Sort *types.OpportunitySort
 
+	// Filters opportunities based on their target close date. This filter helps
+	// retrieve opportunities with an expected close date before or after a specified
+	// date.
+	TargetCloseDate *types.TargetCloseDateFilter
+
 	noSmithyDocumentSerde
 }
 

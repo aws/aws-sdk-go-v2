@@ -5047,6 +5047,11 @@ func awsRestjson1_deserializeOpDocumentDeleteChannelOutput(v **DeleteChannelOutp
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "inferenceSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeInferenceSettings(&sv.InferenceSettings, value); err != nil {
+				return err
+			}
+
 		case "inputAttachments":
 			if err := awsRestjson1_deserializeDocument__listOfInputAttachment(&sv.InputAttachments, value); err != nil {
 				return err
@@ -8430,6 +8435,11 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "inferenceSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeInferenceSettings(&sv.InferenceSettings, value); err != nil {
+				return err
 			}
 
 		case "inputAttachments":
@@ -18257,6 +18267,11 @@ func awsRestjson1_deserializeOpDocumentRestartChannelPipelinesOutput(v **Restart
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "inferenceSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeInferenceSettings(&sv.InferenceSettings, value); err != nil {
+				return err
+			}
+
 		case "inputAttachments":
 			if err := awsRestjson1_deserializeDocument__listOfInputAttachment(&sv.InputAttachments, value); err != nil {
 				return err
@@ -18578,6 +18593,11 @@ func awsRestjson1_deserializeOpDocumentStartChannelOutput(v **StartChannelOutput
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "inferenceSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeInferenceSettings(&sv.InferenceSettings, value); err != nil {
+				return err
 			}
 
 		case "inputAttachments":
@@ -20284,6 +20304,11 @@ func awsRestjson1_deserializeOpDocumentStopChannelOutput(v **StopChannelOutput, 
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "inferenceSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeInferenceSettings(&sv.InferenceSettings, value); err != nil {
+				return err
 			}
 
 		case "inputAttachments":
@@ -31398,6 +31423,11 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "inferenceSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeInferenceSettings(&sv.InferenceSettings, value); err != nil {
+				return err
+			}
+
 		case "inputAttachments":
 			if err := awsRestjson1_deserializeDocument__listOfInputAttachment(&sv.InputAttachments, value); err != nil {
 				return err
@@ -31763,6 +31793,11 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "inferenceSettings":
+			if err := awsRestjson1_deserializeDocumentDescribeInferenceSettings(&sv.InferenceSettings, value); err != nil {
+				return err
 			}
 
 		case "inputAttachments":
@@ -33060,6 +33095,46 @@ func awsRestjson1_deserializeDocumentDescribeFollowerChannelSettings(v **types.D
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.PrimaryChannelArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDescribeInferenceSettings(v **types.DescribeInferenceSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DescribeInferenceSettings
+	if *v == nil {
+		sv = &types.DescribeInferenceSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "feedArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.FeedArn = ptr.String(jtv)
 			}
 
 		default:

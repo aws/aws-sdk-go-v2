@@ -751,6 +751,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		}
 	}
 
+	if v.InferenceSettings != nil {
+		ok := object.Key("inferenceSettings")
+		if err := awsRestjson1_serializeDocumentInferenceSettings(v.InferenceSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputAttachments != nil {
 		ok := object.Key("inputAttachments")
 		if err := awsRestjson1_serializeDocument__listOfInputAttachment(v.InputAttachments, ok); err != nil {
@@ -9010,6 +9017,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		}
 	}
 
+	if v.InferenceSettings != nil {
+		ok := object.Key("inferenceSettings")
+		if err := awsRestjson1_serializeDocumentInferenceSettings(v.InferenceSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputAttachments != nil {
 		ok := object.Key("inputAttachments")
 		if err := awsRestjson1_serializeDocument__listOfInputAttachment(v.InputAttachments, ok); err != nil {
@@ -15558,6 +15572,18 @@ func awsRestjson1_serializeDocumentId3SegmentTaggingScheduleActionSettings(v *ty
 func awsRestjson1_serializeDocumentImmediateModeScheduleActionStartSettings(v *types.ImmediateModeScheduleActionStartSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInferenceSettings(v *types.InferenceSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FeedArn != nil {
+		ok := object.Key("feedArn")
+		ok.String(*v.FeedArn)
+	}
 
 	return nil
 }

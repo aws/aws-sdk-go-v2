@@ -2512,6 +2512,20 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// Filters opportunities based on their target close date.
+type TargetCloseDateFilter struct {
+
+	// Filters opportunities with a target close date after this date. Use the
+	// YYYY-MM-DD format.
+	AfterTargetCloseDate *string
+
+	// Filters opportunities with a target close date before this date. Use the
+	// YYYY-MM-DD format.
+	BeforeTargetCloseDate *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents the updated payload of an engagement context. The structure of this
 // payload varies based on the context type being updated.
 //

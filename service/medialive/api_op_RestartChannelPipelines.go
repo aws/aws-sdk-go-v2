@@ -78,6 +78,9 @@ type RestartChannelPipelinesOutput struct {
 	// The unique id of the channel.
 	Id *string
 
+	// Include this setting to include Elemental Inference features in this channel.
+	InferenceSettings *types.DescribeInferenceSettings
+
 	// List of input attachments for channel.
 	InputAttachments []types.InputAttachment
 

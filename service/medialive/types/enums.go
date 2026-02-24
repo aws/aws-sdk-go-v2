@@ -7178,6 +7178,7 @@ type VideoDescriptionScalingBehavior string
 const (
 	VideoDescriptionScalingBehaviorDefault         VideoDescriptionScalingBehavior = "DEFAULT"
 	VideoDescriptionScalingBehaviorStretchToOutput VideoDescriptionScalingBehavior = "STRETCH_TO_OUTPUT"
+	VideoDescriptionScalingBehaviorSmartCrop       VideoDescriptionScalingBehavior = "SMART_CROP"
 )
 
 // Values returns all known values for VideoDescriptionScalingBehavior. Note that
@@ -7189,6 +7190,7 @@ func (VideoDescriptionScalingBehavior) Values() []VideoDescriptionScalingBehavio
 	return []VideoDescriptionScalingBehavior{
 		"DEFAULT",
 		"STRETCH_TO_OUTPUT",
+		"SMART_CROP",
 	}
 }
 

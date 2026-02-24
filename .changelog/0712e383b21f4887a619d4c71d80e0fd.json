@@ -1,0 +1,8 @@
+{
+    "id": "0712e383-b21f-4887-a619-d4c71d80e0fd",
+    "type": "feature",
+    "description": "Fixed HTTP binding for DescribeDomainAutoTunes API to correctly pass request parameters as query parameters in the HTTP request.",
+    "modules": [
+        "service/elasticsearchservice"
+    ]
+}

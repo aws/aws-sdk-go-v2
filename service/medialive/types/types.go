@@ -1262,6 +1262,9 @@ type Channel struct {
 	// The unique id of the channel.
 	Id *string
 
+	// Include this setting to include Elemental Inference features in this channel.
+	InferenceSettings *DescribeInferenceSettings
+
 	// List of input attachments for channel.
 	InputAttachments []InputAttachment
 
@@ -1391,6 +1394,9 @@ type ChannelSummary struct {
 
 	// The unique id of the channel.
 	Id *string
+
+	// Include this setting to include Elemental Inference features in this channel.
+	InferenceSettings *DescribeInferenceSettings
 
 	// List of input attachments for channel.
 	InputAttachments []InputAttachment
@@ -1916,6 +1922,16 @@ type DescribeFollowerChannelSettings struct {
 
 	// The ARN of the primary channel this channel follows
 	PrimaryChannelArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configures Elemental Inference features in a channel.
+type DescribeInferenceSettings struct {
+
+	// The ARN of the feed resource that is associated with this channel. The feed is
+	// a resource in the Elemental Inference service.
+	FeedArn *string
 
 	noSmithyDocumentSerde
 }
@@ -3964,6 +3980,16 @@ type Id3SegmentTaggingScheduleActionSettings struct {
 
 // Settings to configure an action so that it occurs as soon as possible.
 type ImmediateModeScheduleActionStartSettings struct {
+	noSmithyDocumentSerde
+}
+
+// Configures Elemental Inference features in a channel.
+type InferenceSettings struct {
+
+	// The ARN of the feed resource that is associated with this channel. The feed is
+	// a resource in the Elemental Inference service.
+	FeedArn *string
+
 	noSmithyDocumentSerde
 }
 

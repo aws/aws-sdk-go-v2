@@ -3538,6 +3538,13 @@ func awsRestjson1_serializeDocumentDestinationLogsConfiguration(v *types.Destina
 		}
 	}
 
+	if v.LogGroupNameConfiguration != nil {
+		ok := object.Key("LogGroupNameConfiguration")
+		if err := awsRestjson1_serializeDocumentLogGroupNameConfiguration(v.LogGroupNameConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogsEncryptionConfiguration != nil {
 		ok := object.Key("LogsEncryptionConfiguration")
 		if err := awsRestjson1_serializeDocumentLogsEncryptionConfiguration(v.LogsEncryptionConfiguration, ok); err != nil {
@@ -3701,6 +3708,18 @@ func awsRestjson1_serializeDocumentLoggingFilter(v *types.LoggingFilter, value s
 		if err := awsRestjson1_serializeDocumentFilters(v.Filters, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLogGroupNameConfiguration(v *types.LogGroupNameConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogGroupNamePattern != nil {
+		ok := object.Key("LogGroupNamePattern")
+		ok.String(*v.LogGroupNamePattern)
 	}
 
 	return nil

@@ -229,6 +229,11 @@ type DestinationLogsConfiguration struct {
 	// destination.
 	BackupConfiguration *LogsBackupConfiguration
 
+	// Configuration that specifies a naming pattern for destination log groups
+	// created during centralization. The pattern supports static text and dynamic
+	// variables that are replaced with source attributes when log groups are created.
+	LogGroupNameConfiguration *LogGroupNameConfiguration
+
 	// The encryption configuration for centralization destination log groups.
 	LogsEncryptionConfiguration *LogsEncryptionConfiguration
 
@@ -351,6 +356,39 @@ type LoggingFilter struct {
 
 	//  A list of filter conditions that determine log record handling behavior.
 	Filters []Filter
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that specifies a naming pattern for destination log groups
+// created during centralization. The pattern supports static text and dynamic
+// variables that are replaced with source attributes when log groups are created.
+type LogGroupNameConfiguration struct {
+
+	// The pattern used to generate destination log group names during centralization.
+	// The pattern can contain static text and dynamic variables that are replaced with
+	// source attributes. If a variable cannot be resolved, it inherits the value from
+	// its parent variable in the hierarchy. The pattern must be between 1 and 512
+	// characters.
+	//
+	// Supported variables:
+	//
+	//   - ${source.logGroup} — The original log group name from the source account.
+	//
+	//   - ${source.accountId} — The AWS account ID where the log originated.
+	//
+	//   - ${source.region} — The AWS Region where the log originated.
+	//
+	//   - ${source.org.id} — The AWS Organization ID of the source account.
+	//
+	//   - ${source.org.ouId} — The organizational unit ID of the source account.
+	//
+	//   - ${source.org.rootId} — The organization Root ID.
+	//
+	//   - ${source.org.path} — The organizational path from account to root.
+	//
+	// This member is required.
+	LogGroupNamePattern *string
 
 	noSmithyDocumentSerde
 }
@@ -505,6 +543,10 @@ type TelemetryConfiguration struct {
 	// Metrics: Enabled; Traces: NotApplicable; } .
 	TelemetryConfigurationState map[string]TelemetryState
 
+	//  Specifies the type of telemetry source for a resource, such as EKS cluster
+	// logs.
+	TelemetrySourceType TelemetrySourceType
+
 	noSmithyDocumentSerde
 }
 
@@ -579,8 +621,33 @@ type TelemetryPipeline struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the configuration for a telemetry pipeline, including how data flows
-// from sources through processors to destinations.
+// Defines the configuration for a pipeline, including how data flows from sources
+// through processors to destinations. The configuration is specified in YAML
+// format and must include a valid pipeline definition with required source and
+// sink components. This pipeline enables end-to-end telemetry data collection,
+// transformation, and delivery while supporting optional processing steps and
+// extensions for enhanced functionality.
+//
+// The primary pipeline configuration section are:
+//
+//   - Source: Defines where log data originates from (S3 buckets, CloudWatch
+//     Logs, third-party APIs). Each pipeline must have exactly one source.
+//
+//   - Processors (optional): Transform, parse, and enrich log data as it flows
+//     through the pipeline. Processors are applied sequentially in the order they are
+//     defined.
+//
+//   - Sink: Defines the destination where processed log data is sent. Each
+//     pipeline must have exactly one sink.
+//
+//   - Extensions (optional): Provide additional functionality such as Amazon Web
+//     Services Secrets Manager integration for credential management.
+//
+// For more details on each configuration section see [CloudWatch pipelines User Guide]. Additional comprehensive
+// configuration examples can be found in the [CreateTelemetryPipeline API docs].
+//
+// [CreateTelemetryPipeline API docs]: https://docs.aws.amazon.com/cloudwatch/latest/observabilityadmin/API_CreateTelemetryPipeline.html#API_CreateTelemetryPipeline_Examples
+// [CloudWatch pipelines User Guide]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-pipelines.html
 type TelemetryPipelineConfiguration struct {
 
 	// The pipeline configuration body that defines the data processing rules and

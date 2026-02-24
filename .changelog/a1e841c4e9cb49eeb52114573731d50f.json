@@ -1,0 +1,8 @@
+{
+    "id": "a1e841c4-e9cb-49ee-b521-14573731d50f",
+    "type": "feature",
+    "description": "Fixed HTTP binding for DescribeDomainAutoTunes API to correctly pass request parameters as query parameters in the HTTP request.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

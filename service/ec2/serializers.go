@@ -84464,6 +84464,11 @@ func awsEc2query_serializeOpDocumentModifyInstanceMetadataDefaultsInput(v *Modif
 		objectKey.String(string(v.HttpTokens))
 	}
 
+	if len(v.HttpTokensEnforced) > 0 {
+		objectKey := object.Key("HttpTokensEnforced")
+		objectKey.String(string(v.HttpTokensEnforced))
+	}
+
 	if len(v.InstanceMetadataTags) > 0 {
 		objectKey := object.Key("InstanceMetadataTags")
 		objectKey.String(string(v.InstanceMetadataTags))

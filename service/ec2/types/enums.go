@@ -1800,6 +1800,28 @@ func (DatafeedSubscriptionState) Values() []DatafeedSubscriptionState {
 	}
 }
 
+type DefaultHttpTokensEnforcedState string
+
+// Enum values for DefaultHttpTokensEnforcedState
+const (
+	DefaultHttpTokensEnforcedStateDisabled     DefaultHttpTokensEnforcedState = "disabled"
+	DefaultHttpTokensEnforcedStateEnabled      DefaultHttpTokensEnforcedState = "enabled"
+	DefaultHttpTokensEnforcedStateNoPreference DefaultHttpTokensEnforcedState = "no-preference"
+)
+
+// Values returns all known values for DefaultHttpTokensEnforcedState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultHttpTokensEnforcedState) Values() []DefaultHttpTokensEnforcedState {
+	return []DefaultHttpTokensEnforcedState{
+		"disabled",
+		"enabled",
+		"no-preference",
+	}
+}
+
 type DefaultInstanceMetadataEndpointState string
 
 // Enum values for DefaultInstanceMetadataEndpointState
@@ -3181,6 +3203,25 @@ func (HostTenancy) Values() []HostTenancy {
 		"default",
 		"dedicated",
 		"host",
+	}
+}
+
+type HttpTokensEnforcedState string
+
+// Enum values for HttpTokensEnforcedState
+const (
+	HttpTokensEnforcedStateDisabled HttpTokensEnforcedState = "disabled"
+	HttpTokensEnforcedStateEnabled  HttpTokensEnforcedState = "enabled"
+)
+
+// Values returns all known values for HttpTokensEnforcedState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HttpTokensEnforcedState) Values() []HttpTokensEnforcedState {
+	return []HttpTokensEnforcedState{
+		"disabled",
+		"enabled",
 	}
 }
 
