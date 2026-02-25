@@ -114,6 +114,26 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					"CRC32": "AAAAAA==",
 				},
 			},
+			"http unknown algorithm checksum header preset": {
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("https://example.aws")
+						r.ContentLength = 11
+						r.Header.Set(AlgorithmHTTPHeader("emoji"), "🎉")
+						r = requestMust(r.SetStream(bytes.NewReader([]byte("hello world"))))
+						return r
+					}(),
+				},
+				expectHeader: http.Header{
+					"X-Amz-Checksum-Emoji": []string{"🎉"},
+				},
+				expectContentLength: 11,
+				expectPayload:       []byte("hello world"),
+				expectChecksumMetadata: map[string]string{
+					"EMOJI": "🎉",
+				},
+			},
 			"http no algorithm set": {
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
