@@ -1478,6 +1478,9 @@ type CapacityBlockExtension struct {
 	// The total price to be paid up front.
 	UpfrontFee *string
 
+	// The type of zone where the Capacity Block extension is located.
+	ZoneType *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1531,6 +1534,9 @@ type CapacityBlockExtensionOffering struct {
 	// The total price of the Capacity Block extension offering, to be paid up front.
 	UpfrontFee *string
 
+	// The type of zone where the Capacity Block extension offering is available.
+	ZoneType *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1579,6 +1585,9 @@ type CapacityBlockOffering struct {
 
 	// The total price to be paid up front.
 	UpfrontFee *string
+
+	// The type of zone where the Capacity Block offering is available.
+	ZoneType *string
 
 	noSmithyDocumentSerde
 }

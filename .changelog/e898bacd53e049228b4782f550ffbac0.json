@@ -1,0 +1,8 @@
+{
+    "id": "e898bacd-53e0-4922-8b47-82f550ffbac0",
+    "type": "feature",
+    "description": "Update repository name regex to comply with OCI Distribution Specification",
+    "modules": [
+        "service/ecr"
+    ]
+}

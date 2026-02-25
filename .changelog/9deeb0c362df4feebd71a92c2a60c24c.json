@@ -1,0 +1,8 @@
+{
+    "id": "9deeb0c3-62df-4fee-bd71-a92c2a60c24c",
+    "type": "feature",
+    "description": "Neptune global clusters now supports tags",
+    "modules": [
+        "service/neptune"
+    ]
+}

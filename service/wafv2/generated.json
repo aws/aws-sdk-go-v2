@@ -38,6 +38,7 @@
         "api_op_GetRegexPatternSet.go",
         "api_op_GetRuleGroup.go",
         "api_op_GetSampledRequests.go",
+        "api_op_GetTopPathStatisticsByTraffic.go",
         "api_op_GetWebACL.go",
         "api_op_GetWebACLForResource.go",
         "api_op_ListAPIKeys.go",

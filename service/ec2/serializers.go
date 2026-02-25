@@ -73614,6 +73614,11 @@ func awsEc2query_serializeOpDocumentDescribeCapacityBlockOfferingsInput(v *Descr
 	object := value.Object()
 	_ = object
 
+	if v.AllAvailabilityZones != nil {
+		objectKey := object.Key("AllAvailabilityZones")
+		objectKey.Boolean(*v.AllAvailabilityZones)
+	}
+
 	if v.CapacityDurationHours != nil {
 		objectKey := object.Key("CapacityDurationHours")
 		objectKey.Integer(*v.CapacityDurationHours)

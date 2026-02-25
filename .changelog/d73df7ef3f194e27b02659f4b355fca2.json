@@ -1,0 +1,8 @@
+{
+    "id": "d73df7ef-3f19-4e27-b026-59f4b355fca2",
+    "type": "feature",
+    "description": "Add support for EC2 Capacity Blocks in Local Zones.",
+    "modules": [
+        "service/ec2"
+    ]
+}

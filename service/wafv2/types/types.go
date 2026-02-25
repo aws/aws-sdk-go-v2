@@ -476,6 +476,29 @@ type Body struct {
 	noSmithyDocumentSerde
 }
 
+// Statistics about a specific bot's traffic to a path, including the bot name,
+// request count, and percentage of traffic.
+type BotStatistics struct {
+
+	// The name of the bot. For example, gptbot or googlebot .
+	//
+	// This member is required.
+	BotName *string
+
+	// The percentage of total requests to the associated path that came from this bot.
+	//
+	// This member is required.
+	Percentage float64
+
+	// The number of requests from this bot to the associated path within the
+	// specified time window.
+	//
+	// This member is required.
+	RequestCount int64
+
+	noSmithyDocumentSerde
+}
+
 // A rule statement that defines a string match search for WAF to apply to web
 // requests. The byte match statement provides the bytes to search for, the
 // location in requests that you want WAF to search, and other settings. The bytes
@@ -1455,6 +1478,26 @@ type Filter struct {
 	//
 	// This member is required.
 	Requirement FilterRequirement
+
+	noSmithyDocumentSerde
+}
+
+// Information about the bot filter that was applied to the request. This
+// structure is populated in the response when you filter by bot category,
+// organization, or name.
+type FilterSource struct {
+
+	// The bot category that was used to filter the results. For example, ai or
+	// search_engine .
+	BotCategory *string
+
+	// The bot name that was used to filter the results. For example, gptbot or
+	// googlebot .
+	BotName *string
+
+	// The bot organization that was used to filter the results. For example, OpenAI
+	// or Google .
+	BotOrganization *string
 
 	noSmithyDocumentSerde
 }
@@ -3030,6 +3073,39 @@ type PasswordField struct {
 	//
 	// This member is required.
 	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Statistics about bot traffic to a specific URI path, including the path,
+// request count, percentage of total traffic, and the top bots accessing that
+// path.
+type PathStatistics struct {
+
+	// The URI path. For example, /api/ or /api/v1/users .
+	//
+	// This member is required.
+	Path *string
+
+	// The percentage of total requests that were made to this path.
+	//
+	// This member is required.
+	Percentage float64
+
+	// The number of requests to this path within the specified time window.
+	//
+	// This member is required.
+	RequestCount int64
+
+	// Information about the bot filter that was applied to generate these statistics.
+	// This field is only populated when you filter by bot category, organization, or
+	// name.
+	Source *FilterSource
+
+	// The list of top bots accessing this path, ordered by request count. The number
+	// of bots included is determined by the NumberOfTopTrafficBotsPerPath parameter
+	// in the request.
+	TopBots []BotStatistics
 
 	noSmithyDocumentSerde
 }

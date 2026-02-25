@@ -1,0 +1,8 @@
+{
+    "id": "ea744277-b168-4bdc-829b-b0593f084150",
+    "type": "feature",
+    "description": "AWS WAF now supports GetTopPathStatisticsByTraffic that provides aggregated statistics on the top URI paths accessed by bot traffic. Use this operation to see which paths receive the most bot traffic, identify the specific bots accessing them, and filter by category, organization, or bot name.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

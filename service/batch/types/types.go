@@ -2790,7 +2790,7 @@ type EvaluateOnExit struct {
 type FairshareCapacityUsage struct {
 
 	// The unit of measure for the capacity usage. For compute jobs, this is VCPU for
-	// Amazon EC2 and cpu for Amazon EKS. For service jobs, this is NUM_INSTANCES .
+	// Amazon EC2 and cpu for Amazon EKS. For service jobs, this is the instance type.
 	CapacityUnit *string
 
 	// The quantity of capacity being used, measured in the units specified by
@@ -4117,7 +4117,7 @@ type NodeRangeProperty struct {
 type QueueSnapshotCapacityUsage struct {
 
 	// The unit of measure for the capacity usage. For compute jobs, this is VCPU for
-	// Amazon EC2 and cpu for Amazon EKS. For service jobs, this is NUM_INSTANCES .
+	// Amazon EC2 and cpu for Amazon EKS. For service jobs, this is the instance type.
 	CapacityUnit *string
 
 	// The quantity of capacity being used in the queue snapshot, measured in the
@@ -4486,7 +4486,7 @@ type ServiceJobAttemptDetail struct {
 type ServiceJobCapacityUsageDetail struct {
 
 	// The unit of measure for the service job capacity usage. For service jobs, this
-	// is NUM_INSTANCES .
+	// is the instance type.
 	CapacityUnit *string
 
 	// The quantity of capacity being used by the service job, measured in the units
@@ -4501,7 +4501,7 @@ type ServiceJobCapacityUsageDetail struct {
 type ServiceJobCapacityUsageSummary struct {
 
 	// The unit of measure for the service job capacity usage. For service jobs, this
-	// is NUM_INSTANCES .
+	// is the instance type.
 	CapacityUnit *string
 
 	// The quantity of capacity being used by the service job, measured in the units

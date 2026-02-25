@@ -42,6 +42,9 @@ type CreateGlobalClusterInput struct {
 	// This member is required.
 	GlobalClusterIdentifier *string
 
+	// The name for the new global database (up to 64 alpha-numeric characters.
+	DatabaseName *string
+
 	// The deletion protection setting for the new global database. The global
 	// database can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
@@ -62,6 +65,9 @@ type CreateGlobalClusterInput struct {
 
 	// The storage encryption setting for the new global database cluster.
 	StorageEncrypted *bool
+
+	// Tags to assign to the global cluster.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

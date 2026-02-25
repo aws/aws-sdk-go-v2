@@ -590,6 +590,26 @@ func (m *validateOpGetSampledRequests) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTopPathStatisticsByTraffic struct {
+}
+
+func (*validateOpGetTopPathStatisticsByTraffic) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTopPathStatisticsByTraffic) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTopPathStatisticsByTrafficInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTopPathStatisticsByTrafficInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWebACLForResource struct {
 }
 
@@ -1164,6 +1184,10 @@ func addOpGetRegexPatternSetValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetSampledRequestsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSampledRequests{}, middleware.After)
+}
+
+func addOpGetTopPathStatisticsByTrafficValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTopPathStatisticsByTraffic{}, middleware.After)
 }
 
 func addOpGetWebACLForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -4243,6 +4267,37 @@ func validateOpGetSampledRequestsInput(v *GetSampledRequestsInput) error {
 	}
 	if v.MaxItems == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxItems"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTopPathStatisticsByTrafficInput(v *GetTopPathStatisticsByTrafficInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTopPathStatisticsByTrafficInput"}
+	if v.WebAclArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebAclArn"))
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.TimeWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeWindow"))
+	} else if v.TimeWindow != nil {
+		if err := validateTimeWindow(v.TimeWindow); err != nil {
+			invalidParams.AddNested("TimeWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Limit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Limit"))
+	}
+	if v.NumberOfTopTrafficBotsPerPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberOfTopTrafficBotsPerPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

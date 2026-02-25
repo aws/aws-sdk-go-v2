@@ -6002,6 +6002,11 @@ func awsAwsquery_serializeOpDocumentCreateGlobalClusterInput(v *CreateGlobalClus
 	object := value.Object()
 	_ = object
 
+	if v.DatabaseName != nil {
+		objectKey := object.Key("DatabaseName")
+		objectKey.String(*v.DatabaseName)
+	}
+
 	if v.DeletionProtection != nil {
 		objectKey := object.Key("DeletionProtection")
 		objectKey.Boolean(*v.DeletionProtection)
@@ -6030,6 +6035,13 @@ func awsAwsquery_serializeOpDocumentCreateGlobalClusterInput(v *CreateGlobalClus
 	if v.StorageEncrypted != nil {
 		objectKey := object.Key("StorageEncrypted")
 		objectKey.Boolean(*v.StorageEncrypted)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

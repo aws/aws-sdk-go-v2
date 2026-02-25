@@ -1,0 +1,8 @@
+{
+    "id": "79000595-0037-4a47-9f09-a5009d830879",
+    "type": "documentation",
+    "description": "AWS Batch documentation update for service job capacity units.",
+    "modules": [
+        "service/batch"
+    ]
+}

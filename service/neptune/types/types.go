@@ -1137,6 +1137,9 @@ type Filter struct {
 // This data type is used as a response element for the CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and RemoveFromGlobalCluster actions.
 type GlobalCluster struct {
 
+	// The default database name within the new global database cluster.
+	DatabaseName *string
+
 	// The deletion protection setting for the global database.
 	DeletionProtection *bool
 
@@ -1173,6 +1176,9 @@ type GlobalCluster struct {
 
 	// The storage encryption setting for the global database.
 	StorageEncrypted *bool
+
+	// A list of global cluster tags.
+	TagList []Tag
 
 	noSmithyDocumentSerde
 }
