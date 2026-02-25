@@ -1,3 +1,7 @@
+# v1.60.2 (2026-02-25)
+
+* **Documentation**: AWS Batch documentation update for service job capacity units.
+
 # v1.60.1 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,15 @@
+# Release (2026-02-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.60.2](service/batch/CHANGELOG.md#v1602-2026-02-25)
+  * **Documentation**: AWS Batch documentation update for service job capacity units.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.292.0](service/ec2/CHANGELOG.md#v12920-2026-02-25)
+  * **Feature**: Add support for EC2 Capacity Blocks in Local Zones.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.44.0](service/neptune/CHANGELOG.md#v1440-2026-02-25)
+  * **Feature**: Neptune global clusters now supports tags
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.71.0](service/wafv2/CHANGELOG.md#v1710-2026-02-25)
+  * **Feature**: AWS WAF now supports GetTopPathStatisticsByTraffic that provides aggregated statistics on the top URI paths accessed by bot traffic. Use this operation to see which paths receive the most bot traffic, identify the specific bots accessing them, and filter by category, organization, or bot name.
+
 # Release (2026-02-24)
 
 ## Module Highlights

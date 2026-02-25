@@ -1,3 +1,7 @@
+# v1.71.0 (2026-02-25)
+
+* **Feature**: AWS WAF now supports GetTopPathStatisticsByTraffic that provides aggregated statistics on the top URI paths accessed by bot traffic. Use this operation to see which paths receive the most bot traffic, identify the specific bots accessing them, and filter by category, organization, or bot name.
+
 # v1.70.8 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

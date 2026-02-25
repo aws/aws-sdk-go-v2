@@ -1,3 +1,7 @@
+# v1.44.0 (2026-02-25)
+
+* **Feature**: Neptune global clusters now supports tags
+
 # v1.43.10 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions
