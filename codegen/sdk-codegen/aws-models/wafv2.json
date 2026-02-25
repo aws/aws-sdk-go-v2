@@ -322,6 +322,9 @@
                     "target": "com.amazonaws.wafv2#GetSampledRequests"
                 },
                 {
+                    "target": "com.amazonaws.wafv2#GetTopPathStatisticsByTraffic"
+                },
+                {
                     "target": "com.amazonaws.wafv2#GetWebACL"
                 },
                 {
@@ -1996,6 +1999,43 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.wafv2#BotStatistics": {
+            "type": "structure",
+            "members": {
+                "BotName": {
+                    "target": "com.amazonaws.wafv2#FilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the bot. For example, <code>gptbot</code> or <code>googlebot</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestCount": {
+                    "target": "com.amazonaws.wafv2#RequestCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of requests from this bot to the associated path within the specified time window.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Percentage": {
+                    "target": "com.amazonaws.wafv2#PercentageValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The percentage of total requests to the associated path that came from this bot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Statistics about a specific bot's traffic to a path, including the bot name, request count, and percentage of traffic.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#BotStatisticsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#BotStatistics"
             }
         },
         "com.amazonaws.wafv2#ByteMatchStatement": {
@@ -6011,6 +6051,42 @@
                 }
             }
         },
+        "com.amazonaws.wafv2#FilterSource": {
+            "type": "structure",
+            "members": {
+                "BotCategory": {
+                    "target": "com.amazonaws.wafv2#FilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot category that was used to filter the results. For example, <code>ai</code> or <code>search_engine</code>.</p>"
+                    }
+                },
+                "BotOrganization": {
+                    "target": "com.amazonaws.wafv2#FilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot organization that was used to filter the results. For example, <code>OpenAI</code> or <code>Google</code>.</p>"
+                    }
+                },
+                "BotName": {
+                    "target": "com.amazonaws.wafv2#FilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot name that was used to filter the results. For example, <code>gptbot</code> or <code>googlebot</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the bot filter that was applied to the request. This structure is populated in the response when you filter by bot category, organization, or name.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#FilterString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
         "com.amazonaws.wafv2#Filters": {
             "type": "list",
             "member": {
@@ -6961,6 +7037,143 @@
                     "target": "com.amazonaws.wafv2#TimeWindow",
                     "traits": {
                         "smithy.api#documentation": "<p>Usually, <code>TimeWindow</code> is the time range that you specified in the\n            <code>GetSampledRequests</code> request. However, if your Amazon Web Services resource received more\n         than 5,000 requests during the time range that you specified in the request,\n            <code>GetSampledRequests</code> returns the time range for the first 5,000 requests.\n         Times are in Coordinated Universal Time (UTC) format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wafv2#GetTopPathStatisticsByTraffic": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wafv2#GetTopPathStatisticsByTrafficRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wafv2#GetTopPathStatisticsByTrafficResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFFeatureNotIncludedInPricingPlanException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFNonexistentItemException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves aggregated statistics about the top URI paths accessed by bot traffic for a specified web ACL and time window. \n         You can use this operation to analyze which paths on your web application receive the most bot traffic and identify the specific bots accessing those paths. \n         The operation supports filtering by bot category, organization, or name, and allows you to drill down into specific path prefixes to view detailed URI-level statistics.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#GetTopPathStatisticsByTrafficRequest": {
+            "type": "structure",
+            "members": {
+                "WebAclArn": {
+                    "target": "com.amazonaws.wafv2#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL for which you want to retrieve path statistics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.wafv2#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the web ACL is for an Amazon Web Services CloudFront distribution or for a regional application. \n         A regional application can be an Application Load Balancer, an AppSync GraphQL API, an Amazon Cognito user pool, \n         an Amazon Web Services App Runner service, or an Amazon Web Services Verified Access instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UriPathPrefix": {
+                    "target": "com.amazonaws.wafv2#UriPathPrefixString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URI path prefix to filter the results. When you specify this parameter, the operation returns statistics for individual URIs within the specified path prefix. \n         For example, if you specify <code>/api</code>, the response includes statistics for paths like <code>/api/v1/users</code> and <code>/api/v2/orders</code>. \n         If you don't specify this parameter, the operation returns top-level path statistics.</p>"
+                    }
+                },
+                "TimeWindow": {
+                    "target": "com.amazonaws.wafv2#TimeWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time window for which you want to retrieve path statistics. The time window must be within the data retention period for your web ACL.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BotCategory": {
+                    "target": "com.amazonaws.wafv2#FilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results to include only traffic from bots in the specified category. For example, you can filter by <code>ai</code> \n         to see only AI crawler traffic, or <code>search_engine</code> to see only search engine bot traffic. \n         When you apply this filter, the <code>Source</code> field is populated in the response.</p>"
+                    }
+                },
+                "BotOrganization": {
+                    "target": "com.amazonaws.wafv2#FilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results to include only traffic from bots belonging to the specified organization. For example, you can filter by <code>openai</code> or <code>google</code>. \n         When you apply this filter, the <code>Source</code> field is populated in the response.</p>"
+                    }
+                },
+                "BotName": {
+                    "target": "com.amazonaws.wafv2#FilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results to include only traffic from the specified bot. For example, you can filter by <code>gptbot</code> or <code>googlebot</code>. \n         When you apply this filter, the <code>Source</code> field is populated in the response.</p>"
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.wafv2#PathStatisticsLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of path statistics to return. Valid values are 1 to 100.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberOfTopTrafficBotsPerPath": {
+                    "target": "com.amazonaws.wafv2#NumberOfTopTrafficBotsPerPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of top bots to include in the statistics for each path. Valid values are 1 to 10.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.wafv2#NextMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, WAF\n         returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, \n         provide the marker from the prior call in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wafv2#GetTopPathStatisticsByTrafficResponse": {
+            "type": "structure",
+            "members": {
+                "PathStatistics": {
+                    "target": "com.amazonaws.wafv2#PathStatisticsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of path statistics, ordered by request count. Each entry includes the path, request count, \n         percentage of total traffic, and the top bots accessing that path.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalRequestCount": {
+                    "target": "com.amazonaws.wafv2#RequestCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of requests that match the query criteria within the specified time window.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.wafv2#NextMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that \n         are still available for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> value in the response. \n         To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+                    }
+                },
+                "TopCategories": {
+                    "target": "com.amazonaws.wafv2#PathStatisticsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category-level aggregations for visualizing bot category to path relationships. This field is only populated when no bot filters are applied to the request. \n         Each entry includes the bot category and the paths accessed by bots in that category.</p>"
                     }
                 }
             },
@@ -9317,6 +9530,15 @@
                 "smithy.api#documentation": "<p>A logical rule statement used to negate the results of another rule statement. You provide one <a>Statement</a> within the <code>NotStatement</code>.</p>"
             }
         },
+        "com.amazonaws.wafv2#NumberOfTopTrafficBotsPerPath": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.wafv2#OnSourceDDoSProtectionConfig": {
             "type": "structure",
             "members": {
@@ -9862,6 +10084,73 @@
                 "smithy.api#documentation": "<p>The name of the field in the request payload that contains your customer's password. </p>\n         <p>This data type is used in the <code>RequestInspection</code> and <code>RequestInspectionACFP</code> data types. </p>"
             }
         },
+        "com.amazonaws.wafv2#PathStatistics": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.wafv2#FilterSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the bot filter that was applied to generate these statistics. This field is only populated when you filter by bot category, organization, or name.</p>"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.wafv2#PathString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI path. For example, <code>/api/</code> or <code>/api/v1/users</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestCount": {
+                    "target": "com.amazonaws.wafv2#RequestCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of requests to this path within the specified time window.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Percentage": {
+                    "target": "com.amazonaws.wafv2#PercentageValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The percentage of total requests that were made to this path.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopBots": {
+                    "target": "com.amazonaws.wafv2#BotStatisticsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of top bots accessing this path, ordered by request count. The number of bots included is determined by the \n         <code>NumberOfTopTrafficBotsPerPath</code> parameter in the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Statistics about bot traffic to a specific URI path, including the path, request count, percentage of total traffic, and the top bots accessing that path.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#PathStatisticsLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wafv2#PathStatisticsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#PathStatistics"
+            }
+        },
+        "com.amazonaws.wafv2#PathString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
         "com.amazonaws.wafv2#PayloadType": {
             "type": "enum",
             "members": {
@@ -9876,6 +10165,16 @@
                     "traits": {
                         "smithy.api#enumValue": "FORM_ENCODED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.wafv2#PercentageValue": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 100.0
                 }
             }
         },
@@ -10857,6 +11156,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Customizes the maximum size of the request body that your protected CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified Access resources forward to WAF for inspection. The default size is 16 KB (16,384 bytes). You can change the setting for any of the available resource types. </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>\n         <p>Example JSON: <code> {\n    \"API_GATEWAY\": \"KB_48\",\n    \"APP_RUNNER_SERVICE\": \"KB_32\"\n    }</code>\n         </p>\n         <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>\n         <p>This is used in the <code>AssociationConfig</code> of the web ACL. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#RequestCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.wafv2#RequestInspection": {
@@ -13116,6 +13424,16 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>Inspect the path component of the URI of the web request. This is the part of the web\n         request that identifies a resource. For example, <code>/images/daily-ad.jpg</code>.</p>\n         <p>This is used in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"UriPath\": {}</code>\n         </p>"
+            }
+        },
+        "com.amazonaws.wafv2#UriPathPrefixString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^\\/[^ ]*$"
             }
         },
         "com.amazonaws.wafv2#UsageOfAction": {

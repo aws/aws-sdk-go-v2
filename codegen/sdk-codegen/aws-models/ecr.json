@@ -7989,7 +7989,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"
+                "smithy.api#pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"
             }
         },
         "com.amazonaws.ecr#PrefixList": {
@@ -8110,7 +8110,7 @@
                     "min": 2,
                     "max": 30
                 },
-                "smithy.api#pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"
+                "smithy.api#pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"
             }
         },
         "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefixList": {
@@ -9376,7 +9376,7 @@
                     "min": 2,
                     "max": 256
                 },
-                "smithy.api#pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+                "smithy.api#pattern": "^[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*$"
             }
         },
         "com.amazonaws.ecr#RepositoryNameList": {
