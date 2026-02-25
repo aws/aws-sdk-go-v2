@@ -110,6 +110,9 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				},
 				expectContentLength: 11,
 				expectPayload:       []byte("hello world"),
+				expectChecksumMetadata: map[string]string{
+					"CRC32": "AAAAAA==",
+				},
 			},
 			"http no algorithm set": {
 				buildInput: middleware.BuildInput{
