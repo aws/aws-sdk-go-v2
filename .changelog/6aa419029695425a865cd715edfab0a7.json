@@ -1,0 +1,8 @@
+{
+    "id": "6aa41902-9695-425a-865c-d715edfab0a7",
+    "type": "bugfix",
+    "description": "Allow sending unkown checksum values if the value is precalculated on the input request",
+    "modules": [
+        "service/internal/checksum"
+    ]
+}
