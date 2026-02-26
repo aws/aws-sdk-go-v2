@@ -11,23 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// We recommend using Organizations instead of Security Hub invitations to manage
-// your member accounts. For information, see [Managing Security Hub administrator and member accounts with Organizations]in the Security Hub User Guide.
+// We recommend using Organizations instead of Security Hub CSPM invitations to
+// manage your member accounts. For information, see [Managing Security Hub CSPM administrator and member accounts with Organizations]in the Security Hub CSPM User
+// Guide.
 //
 // Invites other Amazon Web Services accounts to become member accounts for the
-// Security Hub administrator account that the invitation is sent from.
+// Security Hub CSPM administrator account that the invitation is sent from.
 //
 // This operation is only used to invite accounts that don't belong to an Amazon
 // Web Services organization. Organization accounts don't receive invitations.
 //
 // Before you can use this action to invite a member, you must first use the
-// CreateMembers action to create the member account in Security Hub.
+// CreateMembers action to create the member account in Security Hub CSPM.
 //
-// When the account owner enables Security Hub and accepts the invitation to
+// When the account owner enables Security Hub CSPM and accepts the invitation to
 // become a member account, the administrator account can view the findings
 // generated in the member account.
 //
-// [Managing Security Hub administrator and member accounts with Organizations]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
+// [Managing Security Hub CSPM administrator and member accounts with Organizations]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
 func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, optFns ...func(*Options)) (*InviteMembersOutput, error) {
 	if params == nil {
 		params = &InviteMembersInput{}
@@ -46,7 +47,7 @@ func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, 
 type InviteMembersInput struct {
 
 	// The list of account IDs of the Amazon Web Services accounts to invite to
-	// Security Hub as members.
+	// Security Hub CSPM as members.
 	//
 	// This member is required.
 	AccountIds []string

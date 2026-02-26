@@ -341,6 +341,11 @@ func awsAwsjson11_serializeDocumentUsageRecord(v *types.UsageRecord, value smith
 		ok.String(*v.Dimension)
 	}
 
+	if v.LicenseArn != nil {
+		ok := object.Key("LicenseArn")
+		ok.String(*v.LicenseArn)
+	}
+
 	if v.Quantity != nil {
 		ok := object.Key("Quantity")
 		ok.Integer(*v.Quantity)

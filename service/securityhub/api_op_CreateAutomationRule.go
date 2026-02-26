@@ -36,9 +36,9 @@ type CreateAutomationRuleInput struct {
 	Actions []types.AutomationRulesAction
 
 	//  A set of ASFF finding field attributes and corresponding expected values that
-	// Security Hub uses to filter findings. If a rule is enabled and a finding matches
-	// the conditions specified in this parameter, Security Hub applies the rule action
-	// to the finding.
+	// Security Hub CSPM uses to filter findings. If a rule is enabled and a finding
+	// matches the conditions specified in this parameter, Security Hub CSPM applies
+	// the rule action to the finding.
 	//
 	// This member is required.
 	Criteria *types.AutomationRulesFindingFilters
@@ -54,8 +54,8 @@ type CreateAutomationRuleInput struct {
 	RuleName *string
 
 	// An integer ranging from 1 to 1000 that represents the order in which the rule
-	// action is applied to findings. Security Hub applies rules with lower values for
-	// this parameter first.
+	// action is applied to findings. Security Hub CSPM applies rules with lower values
+	// for this parameter first.
 	//
 	// This member is required.
 	RuleOrder *int32
@@ -63,15 +63,15 @@ type CreateAutomationRuleInput struct {
 	// Specifies whether a rule is the last to be applied with respect to a finding
 	// that matches the rule criteria. This is useful when a finding matches the
 	// criteria for multiple rules, and each rule has different actions. If a rule is
-	// terminal, Security Hub applies the rule action to a finding that matches the
-	// rule criteria and doesn't evaluate other rules for the finding. By default, a
-	// rule isn't terminal.
+	// terminal, Security Hub CSPM applies the rule action to a finding that matches
+	// the rule criteria and doesn't evaluate other rules for the finding. By default,
+	// a rule isn't terminal.
 	IsTerminal *bool
 
 	//  Whether the rule is active after it is created. If this parameter is equal to
-	// ENABLED , Security Hub starts applying the rule to findings and finding updates
-	// after the rule is created. To change the value of this parameter after creating
-	// a rule, use [BatchUpdateAutomationRules]BatchUpdateAutomationRules .
+	// ENABLED , Security Hub CSPM starts applying the rule to findings and finding
+	// updates after the rule is created. To change the value of this parameter after
+	// creating a rule, use [BatchUpdateAutomationRules]BatchUpdateAutomationRules .
 	//
 	// [BatchUpdateAutomationRules]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
 	RuleStatus types.RuleStatus

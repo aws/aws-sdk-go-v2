@@ -12,10 +12,11 @@ import (
 	"time"
 )
 
-//	Returns the history of a Security Hub finding. The history includes changes
+//	Returns the history of a Security Hub CSPM finding. The history includes
 //
-// made to any fields in the Amazon Web Services Security Finding Format (ASFF)
-// except top-level timestamp fields, such as the CreatedAt and UpdatedAt fields.
+// changes made to any fields in the Amazon Web Services Security Finding Format
+// (ASFF) except top-level timestamp fields, such as the CreatedAt and UpdatedAt
+// fields.
 //
 // This operation might return fewer results than the maximum number of results (
 // MaxResults ) specified in a request, even when more results are available. If
@@ -49,47 +50,47 @@ type GetFindingHistoryInput struct {
 	//  An ISO 8601-formatted timestamp that indicates the end time of the requested
 	// finding history.
 	//
-	// If you provide values for both StartTime and EndTime , Security Hub returns
+	// If you provide values for both StartTime and EndTime , Security Hub CSPM returns
 	// finding history for the specified time period. If you provide a value for
-	// StartTime but not for EndTime , Security Hub returns finding history from the
-	// StartTime to the time at which the API is called. If you provide a value for
-	// EndTime but not for StartTime , Security Hub returns finding history from the [CreatedAt]
-	// timestamp of the finding to the EndTime . If you provide neither StartTime nor
-	// EndTime , Security Hub returns finding history from the CreatedAt timestamp of
-	// the finding to the time at which the API is called. In all of these scenarios,
-	// the response is limited to 100 results.
+	// StartTime but not for EndTime , Security Hub CSPM returns finding history from
+	// the StartTime to the time at which the API is called. If you provide a value
+	// for EndTime but not for StartTime , Security Hub CSPM returns finding history
+	// from the [CreatedAt]timestamp of the finding to the EndTime . If you provide neither
+	// StartTime nor EndTime , Security Hub CSPM returns finding history from the
+	// CreatedAt timestamp of the finding to the time at which the API is called. In
+	// all of these scenarios, the response is limited to 100 results.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	// [CreatedAt]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
 	EndTime *time.Time
 
 	//  The maximum number of results to be returned. If you don’t provide it,
-	// Security Hub returns up to 100 results of finding history.
+	// Security Hub CSPM returns up to 100 results of finding history.
 	MaxResults *int32
 
 	//  A token for pagination purposes. Provide NULL as the initial value. In
 	// subsequent requests, provide the token included in the response to get up to an
 	// additional 100 results of finding history. If you don’t provide NextToken ,
-	// Security Hub returns up to 100 results of finding history for each request.
+	// Security Hub CSPM returns up to 100 results of finding history for each request.
 	NextToken *string
 
 	// A timestamp that indicates the start time of the requested finding history.
 	//
-	// If you provide values for both StartTime and EndTime , Security Hub returns
+	// If you provide values for both StartTime and EndTime , Security Hub CSPM returns
 	// finding history for the specified time period. If you provide a value for
-	// StartTime but not for EndTime , Security Hub returns finding history from the
-	// StartTime to the time at which the API is called. If you provide a value for
-	// EndTime but not for StartTime , Security Hub returns finding history from the [CreatedAt]
-	// timestamp of the finding to the EndTime . If you provide neither StartTime nor
-	// EndTime , Security Hub returns finding history from the CreatedAt timestamp of
-	// the finding to the time at which the API is called. In all of these scenarios,
-	// the response is limited to 100 results.
+	// StartTime but not for EndTime , Security Hub CSPM returns finding history from
+	// the StartTime to the time at which the API is called. If you provide a value
+	// for EndTime but not for StartTime , Security Hub CSPM returns finding history
+	// from the [CreatedAt]timestamp of the finding to the EndTime . If you provide neither
+	// StartTime nor EndTime , Security Hub CSPM returns finding history from the
+	// CreatedAt timestamp of the finding to the time at which the API is called. In
+	// all of these scenarios, the response is limited to 100 results.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	// [CreatedAt]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
@@ -218,7 +219,7 @@ func (c *Client) addOperationGetFindingHistoryMiddlewares(stack *middleware.Stac
 // GetFindingHistoryPaginatorOptions is the paginator options for GetFindingHistory
 type GetFindingHistoryPaginatorOptions struct {
 	//  The maximum number of results to be returned. If you don’t provide it,
-	// Security Hub returns up to 100 results of finding history.
+	// Security Hub CSPM returns up to 100 results of finding history.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

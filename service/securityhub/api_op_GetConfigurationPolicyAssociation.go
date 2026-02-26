@@ -15,8 +15,8 @@ import (
 //	Returns the association between a configuration and a target account,
 //
 // organizational unit, or the root. The configuration can be a configuration
-// policy or self-managed behavior. Only the Security Hub delegated administrator
-// can invoke this operation from the home Region.
+// policy or self-managed behavior. Only the Security Hub CSPM delegated
+// administrator can invoke this operation from the home Region.
 func (c *Client) GetConfigurationPolicyAssociation(ctx context.Context, params *GetConfigurationPolicyAssociationInput, optFns ...func(*Options)) (*GetConfigurationPolicyAssociationOutput, error) {
 	if params == nil {
 		params = &GetConfigurationPolicyAssociationInput{}
@@ -53,8 +53,8 @@ type GetConfigurationPolicyAssociationOutput struct {
 	AssociationStatusMessage *string
 
 	//  Indicates whether the association between the specified target and the
-	// configuration was directly applied by the Security Hub delegated administrator
-	// or inherited from a parent.
+	// configuration was directly applied by the Security Hub CSPM delegated
+	// administrator or inherited from a parent.
 	AssociationType types.AssociationType
 
 	//  The universally unique identifier (UUID) of a configuration policy. For

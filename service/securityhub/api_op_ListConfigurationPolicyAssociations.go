@@ -13,8 +13,8 @@ import (
 
 //	Provides information about the associations for your configuration policies
 //
-// and self-managed behavior. Only the Security Hub delegated administrator can
-// invoke this operation from the home Region.
+// and self-managed behavior. Only the Security Hub CSPM delegated administrator
+// can invoke this operation from the home Region.
 func (c *Client) ListConfigurationPolicyAssociations(ctx context.Context, params *ListConfigurationPolicyAssociationsInput, optFns ...func(*Options)) (*ListConfigurationPolicyAssociationsOutput, error) {
 	if params == nil {
 		params = &ListConfigurationPolicyAssociationsInput{}

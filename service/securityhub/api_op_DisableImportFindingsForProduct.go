@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables the integration of the specified product with Security Hub. After the
-// integration is disabled, findings from that product are no longer sent to
-// Security Hub.
+// Disables the integration of the specified product with Security Hub CSPM. After
+// the integration is disabled, findings from that product are no longer sent to
+// Security Hub CSPM.
 func (c *Client) DisableImportFindingsForProduct(ctx context.Context, params *DisableImportFindingsForProductInput, optFns ...func(*Options)) (*DisableImportFindingsForProductOutput, error) {
 	if params == nil {
 		params = &DisableImportFindingsForProductInput{}

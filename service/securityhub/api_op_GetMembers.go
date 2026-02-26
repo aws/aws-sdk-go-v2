@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the details for the Security Hub member accounts for the specified
+// Returns the details for the Security Hub CSPM member accounts for the specified
 // account IDs.
 //
-// An administrator account can be either the delegated Security Hub administrator
-// account for an organization or an administrator account that enabled Security
-// Hub manually.
+// An administrator account can be either the delegated Security Hub CSPM
+// administrator account for an organization or an administrator account that
+// enabled Security Hub CSPM manually.
 //
 // The results include both member accounts that are managed using Organizations
 // and accounts that were invited manually.
@@ -37,7 +37,7 @@ func (c *Client) GetMembers(ctx context.Context, params *GetMembersInput, optFns
 
 type GetMembersInput struct {
 
-	// The list of account IDs for the Security Hub member accounts to return the
+	// The list of account IDs for the Security Hub CSPM member accounts to return the
 	// details for.
 	//
 	// This member is required.
@@ -48,7 +48,7 @@ type GetMembersInput struct {
 
 type GetMembersOutput struct {
 
-	// The list of details about the Security Hub member accounts.
+	// The list of details about the Security Hub CSPM member accounts.
 	Members []types.Member
 
 	// The list of Amazon Web Services accounts that could not be processed. For each

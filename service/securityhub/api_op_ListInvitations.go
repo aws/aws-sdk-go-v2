@@ -11,17 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// We recommend using Organizations instead of Security Hub invitations to manage
-// your member accounts. For information, see [Managing Security Hub administrator and member accounts with Organizations]in the Security Hub User Guide.
+// We recommend using Organizations instead of Security Hub CSPM invitations to
+// manage your member accounts. For information, see [Managing Security Hub CSPM administrator and member accounts with Organizations]in the Security Hub CSPM User
+// Guide.
 //
-// Lists all Security Hub membership invitations that were sent to the calling
-// account.
+// Lists all Security Hub CSPM membership invitations that were sent to the
+// calling account.
 //
 // Only accounts that are managed by invitation can use this operation. Accounts
 // that are managed using the integration with Organizations don't receive
 // invitations.
 //
-// [Managing Security Hub administrator and member accounts with Organizations]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
+// [Managing Security Hub CSPM administrator and member accounts with Organizations]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
 func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInput, optFns ...func(*Options)) (*ListInvitationsOutput, error) {
 	if params == nil {
 		params = &ListInvitationsInput{}

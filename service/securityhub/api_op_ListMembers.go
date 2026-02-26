@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists details about all member accounts for the current Security Hub
+// Lists details about all member accounts for the current Security Hub CSPM
 // administrator account.
 //
 // The results include both member accounts that belong to an organization and

@@ -227,6 +227,33 @@ func (e *InvalidEndpointRegionException) ErrorCode() string {
 }
 func (e *InvalidEndpointRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Ensure the LicenseArn is valid, matches the customer, and usage is within the
+// license activation period.
+type InvalidLicenseException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidLicenseException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidLicenseException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidLicenseException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidLicenseException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidLicenseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The product code passed does not match the product code used for publishing the
 // product.
 type InvalidProductCodeException struct {

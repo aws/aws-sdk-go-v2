@@ -10,13 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// We recommend using Organizations instead of Security Hub invitations to manage
-// your member accounts. For information, see [Managing Security Hub administrator and member accounts with Organizations]in the Security Hub User Guide.
+// We recommend using Organizations instead of Security Hub CSPM invitations to
+// manage your member accounts. For information, see [Managing Security Hub CSPM administrator and member accounts with Organizations]in the Security Hub CSPM User
+// Guide.
 //
-// Returns the count of all Security Hub membership invitations that were sent to
-// the calling member account, not including the currently accepted invitation.
+// Returns the count of all Security Hub CSPM membership invitations that were
+// sent to the calling member account, not including the currently accepted
+// invitation.
 //
-// [Managing Security Hub administrator and member accounts with Organizations]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
+// [Managing Security Hub CSPM administrator and member accounts with Organizations]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
 func (c *Client) GetInvitationsCount(ctx context.Context, params *GetInvitationsCountInput, optFns ...func(*Options)) (*GetInvitationsCountOutput, error) {
 	if params == nil {
 		params = &GetInvitationsCountInput{}
@@ -38,7 +40,7 @@ type GetInvitationsCountInput struct {
 
 type GetInvitationsCountOutput struct {
 
-	// The number of all membership invitations sent to this Security Hub member
+	// The number of all membership invitations sent to this Security Hub CSPM member
 	// account, not including the currently accepted invitation.
 	InvitationsCount *int32
 

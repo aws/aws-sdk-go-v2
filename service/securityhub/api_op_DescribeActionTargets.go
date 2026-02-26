@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the custom action targets in Security Hub in your account.
+// Returns a list of the custom action targets in Security Hub CSPM in your
+// account.
 func (c *Client) DescribeActionTargets(ctx context.Context, params *DescribeActionTargetsInput, optFns ...func(*Options)) (*DescribeActionTargetsOutput, error) {
 	if params == nil {
 		params = &DescribeActionTargetsInput{}
@@ -48,7 +49,7 @@ type DescribeActionTargetsInput struct {
 type DescribeActionTargetsOutput struct {
 
 	// A list of ActionTarget objects. Each object includes the ActionTargetArn ,
-	// Description , and Name of a custom action target available in Security Hub.
+	// Description , and Name of a custom action target available in Security Hub CSPM.
 	//
 	// This member is required.
 	ActionTargets []types.ActionTarget

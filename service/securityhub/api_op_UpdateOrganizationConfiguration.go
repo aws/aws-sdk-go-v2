@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration of your organization in Security Hub. Only the
-// Security Hub administrator account can invoke this operation.
+// Updates the configuration of your organization in Security Hub CSPM. Only the
+// Security Hub CSPM administrator account can invoke this operation.
 func (c *Client) UpdateOrganizationConfiguration(ctx context.Context, params *UpdateOrganizationConfigurationInput, optFns ...func(*Options)) (*UpdateOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateOrganizationConfigurationInput{}
@@ -30,28 +30,28 @@ func (c *Client) UpdateOrganizationConfiguration(ctx context.Context, params *Up
 
 type UpdateOrganizationConfigurationInput struct {
 
-	// Whether to automatically enable Security Hub in new member accounts when they
-	// join the organization.
+	// Whether to automatically enable Security Hub CSPM in new member accounts when
+	// they join the organization.
 	//
-	// If set to true , then Security Hub is automatically enabled in new accounts. If
-	// set to false , then Security Hub isn't enabled in new accounts automatically.
-	// The default value is false .
+	// If set to true , then Security Hub CSPM is automatically enabled in new
+	// accounts. If set to false , then Security Hub CSPM isn't enabled in new accounts
+	// automatically. The default value is false .
 	//
 	// If the ConfigurationType of your organization is set to CENTRAL , then this
 	// field is set to false and can't be changed in the home Region and linked
 	// Regions. However, in that case, the delegated administrator can create a
-	// configuration policy in which Security Hub is enabled and associate the policy
-	// with new organization accounts.
+	// configuration policy in which Security Hub CSPM is enabled and associate the
+	// policy with new organization accounts.
 	//
 	// This member is required.
 	AutoEnable *bool
 
-	// Whether to automatically enable Security Hub [default standards] in new member accounts when they
-	// join the organization.
+	// Whether to automatically enable Security Hub CSPM [default standards] in new member accounts when
+	// they join the organization.
 	//
 	// The default value of this parameter is equal to DEFAULT .
 	//
-	// If equal to DEFAULT , then Security Hub default standards are automatically
+	// If equal to DEFAULT , then Security Hub CSPM default standards are automatically
 	// enabled for new member accounts. If equal to NONE , then default standards are
 	// not automatically enabled for new member accounts.
 	//
@@ -65,7 +65,7 @@ type UpdateOrganizationConfigurationInput struct {
 	AutoEnableStandards types.AutoEnableStandards
 
 	//  Provides information about the way an organization is configured in Security
-	// Hub.
+	// Hub CSPM.
 	OrganizationConfiguration *types.OrganizationConfiguration
 
 	noSmithyDocumentSerde

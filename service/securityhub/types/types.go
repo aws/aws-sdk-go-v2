@@ -152,7 +152,7 @@ type ActionTarget struct {
 //
 // Threat Detection attack sequence. GuardDuty generates an attack sequence finding
 // when multiple events align to a potentially suspicious activity. To receive
-// GuardDuty attack sequence findings in Security Hub, you must have GuardDuty
+// GuardDuty attack sequence findings in Security Hub CSPM, you must have GuardDuty
 // enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
 //
 // [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
@@ -175,8 +175,8 @@ type Actor struct {
 // identified in an Amazon GuardDuty Extended Threat Detection attack sequence.
 // GuardDuty generates an attack sequence finding when multiple events align to a
 // potentially suspicious activity. To receive GuardDuty attack sequence findings
-// in Security Hub, you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in
-// the Amazon GuardDuty User Guide.
+// in Security Hub CSPM, you must have GuardDuty enabled. For more information, see
+// [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
 //
 // [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
 type ActorSession struct {
@@ -211,8 +211,8 @@ type ActorSession struct {
 // in an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty
 // generates an attack sequence finding when multiple events align to a potentially
 // suspicious activity. To receive GuardDuty attack sequence findings in Security
-// Hub, you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon
-// GuardDuty User Guide.
+// Hub CSPM, you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the
+// Amazon GuardDuty User Guide.
 //
 // [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
 type ActorUser struct {
@@ -247,16 +247,16 @@ type Adjustment struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a Security Hub administrator account designated by an organization
-// management account.
+// Represents a Security Hub CSPM administrator account designated by an
+// organization management account.
 type AdminAccount struct {
 
-	// The Amazon Web Services account identifier of the Security Hub administrator
-	// account.
+	// The Amazon Web Services account identifier of the Security Hub CSPM
+	// administrator account.
 	AccountId *string
 
-	// The current status of the Security Hub administrator account. Indicates whether
-	// the account is currently enabled as a Security Hub administrator.
+	// The current status of the Security Hub CSPM administrator account. Indicates
+	// whether the account is currently enabled as a Security Hub CSPM administrator.
 	Status AdminStatus
 
 	noSmithyDocumentSerde
@@ -298,8 +298,8 @@ type AssociationFilters struct {
 	AssociationStatus ConfigurationPolicyAssociationStatus
 
 	//  Indicates whether the association between a target and a configuration was
-	// directly applied by the Security Hub delegated administrator or inherited from a
-	// parent.
+	// directly applied by the Security Hub CSPM delegated administrator or inherited
+	// from a parent.
 	AssociationType AssociationType
 
 	//  The ARN or UUID of the configuration policy.
@@ -346,16 +346,16 @@ type AssociationStateDetails struct {
 	noSmithyDocumentSerde
 }
 
-//	One or more actions that Security Hub takes when a finding matches the defined
+//	One or more actions that Security Hub CSPM takes when a finding matches the
 //
-// criteria of a rule.
+// defined criteria of a rule.
 type AutomationRulesAction struct {
 
 	//  Specifies that the automation rule action is an update to a finding field.
 	FindingFieldsUpdate *AutomationRulesFindingFieldsUpdate
 
-	//  Specifies the type of action that Security Hub takes when a finding matches
-	// the defined criteria of a rule.
+	//  Specifies the type of action that Security Hub CSPM takes when a finding
+	// matches the defined criteria of a rule.
 	Type AutomationRulesActionType
 
 	noSmithyDocumentSerde
@@ -399,7 +399,7 @@ type AutomationRulesConfig struct {
 	//  A timestamp that indicates when the rule was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedAt *time.Time
@@ -408,9 +408,9 @@ type AutomationRulesConfig struct {
 	CreatedBy *string
 
 	//  A set of [Amazon Web Services Security Finding Format] finding field attributes and corresponding expected values that
-	// Security Hub uses to filter findings. If a rule is enabled and a finding matches
-	// the conditions specified in this parameter, Security Hub applies the rule action
-	// to the finding.
+	// Security Hub CSPM uses to filter findings. If a rule is enabled and a finding
+	// matches the conditions specified in this parameter, Security Hub CSPM applies
+	// the rule action to the finding.
 	//
 	// [Amazon Web Services Security Finding Format]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html
 	Criteria *AutomationRulesFindingFilters
@@ -421,9 +421,9 @@ type AutomationRulesConfig struct {
 	// Specifies whether a rule is the last to be applied with respect to a finding
 	// that matches the rule criteria. This is useful when a finding matches the
 	// criteria for multiple rules, and each rule has different actions. If a rule is
-	// terminal, Security Hub applies the rule action to a finding that matches the
-	// rule criteria and doesn't evaluate other rules for the finding. By default, a
-	// rule isn't terminal.
+	// terminal, Security Hub CSPM applies the rule action to a finding that matches
+	// the rule criteria and doesn't evaluate other rules for the finding. By default,
+	// a rule isn't terminal.
 	IsTerminal *bool
 
 	//  The Amazon Resource Name (ARN) of a rule.
@@ -433,19 +433,19 @@ type AutomationRulesConfig struct {
 	RuleName *string
 
 	//  An integer ranging from 1 to 1000 that represents the order in which the rule
-	// action is applied to findings. Security Hub applies rules with lower values for
-	// this parameter first.
+	// action is applied to findings. Security Hub CSPM applies rules with lower values
+	// for this parameter first.
 	RuleOrder *int32
 
 	//  Whether the rule is active after it is created. If this parameter is equal to
-	// ENABLED , Security Hub starts applying the rule to findings and finding updates
-	// after the rule is created.
+	// ENABLED , Security Hub CSPM starts applying the rule to findings and finding
+	// updates after the rule is created.
 	RuleStatus RuleStatus
 
 	//  A timestamp that indicates when the rule was most recently updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	UpdatedAt *time.Time
@@ -552,7 +552,7 @@ type AutomationRulesFindingFilters struct {
 	// 100 percent confidence. For example, a data exfiltration detection based on a
 	// statistical deviation of network traffic has low confidence because an actual
 	// exfiltration hasn't been verified. For more information, see [Confidence]in the Security
-	// Hub User Guide.
+	// Hub CSPM User Guide.
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	//
@@ -562,7 +562,7 @@ type AutomationRulesFindingFilters struct {
 	//  A timestamp that indicates when this finding record was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	//
@@ -573,7 +573,8 @@ type AutomationRulesFindingFilters struct {
 	// with a finding. Criticality is scored on a 0–100 basis, using a ratio scale
 	// that supports only full integers. A score of 0 means that the underlying
 	// resources have no criticality, and a score of 100 is reserved for the most
-	// critical resources. For more information, see [Criticality]in the Security Hub User Guide.
+	// critical resources. For more information, see [Criticality]in the Security Hub CSPM User
+	// Guide.
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	//
@@ -589,7 +590,7 @@ type AutomationRulesFindingFilters struct {
 	// finding was first observed by the security findings product.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	//
@@ -610,7 +611,7 @@ type AutomationRulesFindingFilters struct {
 	// observed a change in the resource that is involved in the finding.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	//
@@ -625,7 +626,7 @@ type AutomationRulesFindingFilters struct {
 	//  The timestamp of when the note was updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	//
@@ -638,13 +639,13 @@ type AutomationRulesFindingFilters struct {
 	NoteUpdatedBy []StringFilter
 
 	//  The Amazon Resource Name (ARN) for a third-party product that generated a
-	// finding in Security Hub.
+	// finding in Security Hub CSPM.
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	ProductArn []StringFilter
 
 	//  Provides the name of the product that generated the finding. For control-based
-	// findings, the product name is Security Hub.
+	// findings, the product name is Security Hub CSPM.
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	ProductName []StringFilter
@@ -732,7 +733,7 @@ type AutomationRulesFindingFilters struct {
 
 	//  One or more finding types in the format of namespace/category/classifier that
 	// classify a finding. For a list of namespaces, classifiers, and categories, see [Types taxonomy for ASFF]
-	// in the Security Hub User Guide.
+	// in the Security Hub CSPM User Guide.
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	//
@@ -742,7 +743,7 @@ type AutomationRulesFindingFilters struct {
 	//  A timestamp that indicates when the finding record was most recently updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	//
@@ -775,7 +776,7 @@ type AutomationRulesMetadata struct {
 	//  A timestamp that indicates when the rule was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedAt *time.Time
@@ -789,9 +790,9 @@ type AutomationRulesMetadata struct {
 	// Specifies whether a rule is the last to be applied with respect to a finding
 	// that matches the rule criteria. This is useful when a finding matches the
 	// criteria for multiple rules, and each rule has different actions. If a rule is
-	// terminal, Security Hub applies the rule action to a finding that matches the
-	// rule criteria and doesn't evaluate other rules for the finding. By default, a
-	// rule isn't terminal.
+	// terminal, Security Hub CSPM applies the rule action to a finding that matches
+	// the rule criteria and doesn't evaluate other rules for the finding. By default,
+	// a rule isn't terminal.
 	IsTerminal *bool
 
 	//  The Amazon Resource Name (ARN) for the rule.
@@ -801,14 +802,14 @@ type AutomationRulesMetadata struct {
 	RuleName *string
 
 	// An integer ranging from 1 to 1000 that represents the order in which the rule
-	// action is applied to findings. Security Hub applies rules with lower values for
-	// this parameter first.
+	// action is applied to findings. Security Hub CSPM applies rules with lower values
+	// for this parameter first.
 	RuleOrder *int32
 
 	//  Whether the rule is active after it is created. If this parameter is equal to
-	// ENABLED , Security Hub starts applying the rule to findings and finding updates
-	// after the rule is created. To change the value of this parameter after creating
-	// a rule, use [BatchUpdateAutomationRules]BatchUpdateAutomationRules .
+	// ENABLED , Security Hub CSPM starts applying the rule to findings and finding
+	// updates after the rule is created. To change the value of this parameter after
+	// creating a rule, use [BatchUpdateAutomationRules]BatchUpdateAutomationRules .
 	//
 	// [BatchUpdateAutomationRules]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
 	RuleStatus RuleStatus
@@ -816,7 +817,7 @@ type AutomationRulesMetadata struct {
 	//  A timestamp that indicates when the rule was most recently updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	UpdatedAt *time.Time
@@ -1092,7 +1093,7 @@ type AwsApiCallAction struct {
 	// A timestamp that indicates when the API call was first observed.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	FirstSeen *string
@@ -1100,7 +1101,7 @@ type AwsApiCallAction struct {
 	// A timestamp that indicates when the API call was most recently observed.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastSeen *string
@@ -1258,7 +1259,7 @@ type AwsApiGatewayRestApiDetails struct {
 	// Indicates when the API was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedDate *string
@@ -1312,7 +1313,7 @@ type AwsApiGatewayStageDetails struct {
 	// Indicates when the stage was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedDate *string
@@ -1329,7 +1330,7 @@ type AwsApiGatewayStageDetails struct {
 	// Indicates when the stage was most recently updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastUpdatedDate *string
@@ -1386,7 +1387,7 @@ type AwsApiGatewayV2ApiDetails struct {
 	// Indicates when the API was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedDate *string
@@ -1466,7 +1467,7 @@ type AwsApiGatewayV2StageDetails struct {
 	// Indicates when the stage was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedDate *string
@@ -1487,7 +1488,7 @@ type AwsApiGatewayV2StageDetails struct {
 	// Indicates when the stage was most recently updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastUpdatedDate *string
@@ -1761,7 +1762,7 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 	// Indicates when the auto scaling group was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedTime *string
@@ -2002,7 +2003,7 @@ type AwsAutoScalingLaunchConfigurationDetails struct {
 	// The creation date and time for the launch configuration.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedTime *string
@@ -2043,8 +2044,7 @@ type AwsAutoScalingLaunchConfigurationDetails struct {
 	// The identifier of the RAM disk associated with the AMI.
 	RamdiskId *string
 
-	// The security groups to assign to the instances in the Amazon EC2 Auto Scaling
-	// group.
+	// The security groups to assign to the instances in the Auto Scaling group.
 	SecurityGroups []string
 
 	// The maximum hourly price to be paid for any Spot Instance that is launched to
@@ -2445,7 +2445,7 @@ type AwsCertificateManagerCertificateDetails struct {
 	// Indicates when the certificate was requested.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedAt *string
@@ -2479,7 +2479,7 @@ type AwsCertificateManagerCertificateDetails struct {
 	// is IMPORTED .
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ImportedAt *string
@@ -2491,7 +2491,7 @@ type AwsCertificateManagerCertificateDetails struct {
 	// AMAZON_ISSUED .
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	IssuedAt *string
@@ -2511,7 +2511,7 @@ type AwsCertificateManagerCertificateDetails struct {
 	// The time after which the certificate becomes invalid.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	NotAfter *string
@@ -2519,7 +2519,7 @@ type AwsCertificateManagerCertificateDetails struct {
 	// The time before which the certificate is not valid.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	NotBefore *string
@@ -2666,7 +2666,7 @@ type AwsCertificateManagerCertificateRenewalSummary struct {
 	// Indicates when the renewal summary was last updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	UpdatedAt *string
@@ -2845,7 +2845,7 @@ type AwsCloudFrontDistributionDetails struct {
 	// Indicates when that the distribution was last modified.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastModifiedTime *string
@@ -3747,7 +3747,7 @@ type AwsDynamoDbTableBillingModeSummary struct {
 	// to that value.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastUpdateToPayPerRequestDateTime *string
@@ -3767,7 +3767,7 @@ type AwsDynamoDbTableDetails struct {
 	// Indicates when the table was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreationDateTime *string
@@ -3944,7 +3944,7 @@ type AwsDynamoDbTableProvisionedThroughput struct {
 	// Indicates when the provisioned throughput was last decreased.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastDecreaseDateTime *string
@@ -3952,7 +3952,7 @@ type AwsDynamoDbTableProvisionedThroughput struct {
 	// Indicates when the provisioned throughput was last increased.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastIncreaseDateTime *string
@@ -4034,7 +4034,7 @@ type AwsDynamoDbTableRestoreSummary struct {
 	// Indicates the point in time that the table was restored to.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	RestoreDateTime *string
@@ -4058,7 +4058,7 @@ type AwsDynamoDbTableSseDescription struct {
 	// key was inaccessible.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	InaccessibleEncryptionDateTime *string
@@ -4326,7 +4326,7 @@ type AwsEc2InstanceDetails struct {
 	// Indicates when the instance was launched.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LaunchedAt *string
@@ -5287,7 +5287,7 @@ type AwsEc2NetworkInterfaceAttachment struct {
 	// Indicates when the attachment initiated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	AttachTime *string
@@ -5667,7 +5667,7 @@ type AwsEc2VolumeDetails struct {
 	// Indicates when the volume was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreateTime *string
@@ -6008,7 +6008,7 @@ type AwsEc2VpnConnectionVgwTelemetryDetails struct {
 	// The date and time of the last change in status.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastStatusChange *string
@@ -6044,7 +6044,7 @@ type AwsEcrContainerImageDetails struct {
 	// The date and time when the image was pushed to the repository.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ImagePublishedAt *string
@@ -6371,7 +6371,7 @@ type AwsEcsServiceDetails struct {
 	EnableExecuteCommand *bool
 
 	// After a task starts, the amount of time in seconds that the Amazon ECS service
-	// scheduler ignores unhealthy ELB target health checks.
+	// scheduler ignores unhealthy Elastic Load Balancing target health checks.
 	HealthCheckGracePeriodSeconds *int32
 
 	// The launch type that the service uses.
@@ -6408,8 +6408,8 @@ type AwsEcsServiceDetails struct {
 	PropagateTags *string
 
 	// The ARN of the IAM role that is associated with the service. The role allows
-	// the Amazon ECS container agent to register container instances with an ELB load
-	// balancer.
+	// the Amazon ECS container agent to register container instances with an Elastic
+	// Load Balancing load balancer.
 	Role *string
 
 	// The scheduling strategy to use for the service.
@@ -6465,7 +6465,8 @@ type AwsEcsServiceLoadBalancersDetails struct {
 	// Balancer or a Network Load Balancer, the load balancer name is omitted.
 	LoadBalancerName *string
 
-	// The ARN of the ELB target group or groups associated with a service or task set.
+	// The ARN of the Elastic Load Balancing target group or groups associated with a
+	// service or task set.
 	//
 	// Only specified when using an Application Load Balancer or a Network Load
 	// Balancer. For a Classic Load Balancer, the target group ARN is omitted.
@@ -8142,7 +8143,7 @@ type AwsElbLoadBalancerDetails struct {
 	// Indicates when the load balancer was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedTime *string
@@ -8332,7 +8333,7 @@ type AwsElbv2LoadBalancerDetails struct {
 	// Indicates when the load balancer was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedTime *string
@@ -8712,7 +8713,7 @@ type AwsIamAccessKeyDetails struct {
 	// Indicates when the IAM access key was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedAt *string
@@ -8761,7 +8762,7 @@ type AwsIamAccessKeySessionContextAttributes struct {
 	// Indicates when the session was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreationDate *string
@@ -8815,7 +8816,7 @@ type AwsIamGroupDetails struct {
 	// Indicates when the IAM group was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreateDate *string
@@ -8853,7 +8854,7 @@ type AwsIamInstanceProfile struct {
 	// Indicates when the instance profile was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreateDate *string
@@ -8885,7 +8886,7 @@ type AwsIamInstanceProfileRole struct {
 	// Indicates when the role was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreateDate *string
@@ -8924,7 +8925,7 @@ type AwsIamPolicyDetails struct {
 	// When the policy was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreateDate *string
@@ -8957,7 +8958,7 @@ type AwsIamPolicyDetails struct {
 	// When the policy was most recently updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	UpdateDate *string
@@ -8971,7 +8972,7 @@ type AwsIamPolicyVersion struct {
 	// Indicates when the version was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreateDate *string
@@ -8997,7 +8998,7 @@ type AwsIamRoleDetails struct {
 	// Indicates when the role was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreateDate *string
@@ -9046,7 +9047,7 @@ type AwsIamUserDetails struct {
 	// Indicates when the user was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreateDate *string
@@ -9129,7 +9130,7 @@ type AwsKmsKeyDetails struct {
 	// Indicates when the KMS key was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreationDate *float64
@@ -9237,7 +9238,7 @@ type AwsLambdaFunctionDetails struct {
 	// Indicates when the function was last updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastModified *string
@@ -9363,7 +9364,7 @@ type AwsLambdaLayerVersionDetails struct {
 	// Indicates when the version was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedDate *string
@@ -9965,7 +9966,7 @@ type AwsRdsDbClusterDetails struct {
 	// Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ClusterCreateTime *string
@@ -10165,7 +10166,7 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	// Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ClusterCreateTime *string
@@ -10207,7 +10208,7 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	// Indicates when the snapshot was taken.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	SnapshotCreateTime *string
@@ -10384,7 +10385,7 @@ type AwsRdsDbInstanceDetails struct {
 	// Indicates when the DB instance was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	InstanceCreateTime *string
@@ -10400,7 +10401,7 @@ type AwsRdsDbInstanceDetails struct {
 	// point-in-time restore.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LatestRestorableTime *string
@@ -10921,7 +10922,7 @@ type AwsRdsEventSubscriptionDetails struct {
 	// The datetime when the event notification subscription was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	SubscriptionCreationTime *string
@@ -11038,7 +11039,7 @@ type AwsRedshiftClusterDeferredMaintenanceWindow struct {
 	// The end of the time window for which maintenance was deferred.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	DeferMaintenanceEndTime *string
@@ -11049,7 +11050,7 @@ type AwsRedshiftClusterDeferredMaintenanceWindow struct {
 	// The start of the time window for which maintenance was deferred.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	DeferMaintenanceStartTime *string
@@ -11089,7 +11090,7 @@ type AwsRedshiftClusterDetails struct {
 	// Indicates when the cluster was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ClusterCreateTime *string
@@ -11163,7 +11164,7 @@ type AwsRedshiftClusterDetails struct {
 	// a valid snapshot schedule and have backups enabled.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ExpectedNextSnapshotScheduleTime *string
@@ -11208,7 +11209,7 @@ type AwsRedshiftClusterDetails struct {
 	// Indicates the start of the next maintenance window.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	NextMaintenanceWindowStartTime *string
@@ -11338,7 +11339,7 @@ type AwsRedshiftClusterLoggingStatus struct {
 	// The last time when logs failed to be delivered.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastFailureTime *string
@@ -11346,7 +11347,7 @@ type AwsRedshiftClusterLoggingStatus struct {
 	// The last time that logs were delivered successfully.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastSuccessfulDeliveryTime *string
@@ -11644,7 +11645,7 @@ type AwsS3BucketBucketLifecycleConfigurationRulesDetails struct {
 	// The date when objects are moved or deleted.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ExpirationDate *string
@@ -11778,7 +11779,7 @@ type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails struct {
 	// provide Date , you cannot provide Days .
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	Date *string
@@ -11841,7 +11842,7 @@ type AwsS3BucketDetails struct {
 	// Indicates when the S3 bucket was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedAt *string
@@ -12127,7 +12128,7 @@ type AwsS3ObjectDetails struct {
 	// Indicates when the object was last modified.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastModified *string
@@ -12294,7 +12295,7 @@ type AwsSecretsManagerSecretRotationRules struct {
 	noSmithyDocumentSerde
 }
 
-// Provides a consistent format for Security Hub findings. AwsSecurityFinding
+// Provides a consistent format for Security Hub CSPM findings. AwsSecurityFinding
 // format allows you to share findings between Amazon Web Services security
 // services and third-party solutions.
 //
@@ -12313,7 +12314,7 @@ type AwsSecurityFinding struct {
 	// issue that a finding captured.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	//
@@ -12344,9 +12345,9 @@ type AwsSecurityFinding struct {
 	// This member is required.
 	Id *string
 
-	// The ARN generated by Security Hub that uniquely identifies a product that
+	// The ARN generated by Security Hub CSPM that uniquely identifies a product that
 	// generates findings. This can be the ARN for a third-party product that is
-	// integrated with Security Hub, or the ARN for a custom integration.
+	// integrated with Security Hub CSPM, or the ARN for a custom integration.
 	//
 	// Length Constraints: Minimum length of 12. Maximum length of 2048.
 	//
@@ -12376,7 +12377,7 @@ type AwsSecurityFinding struct {
 	// Indicates when the security findings provider last updated the finding record.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	//
@@ -12393,11 +12394,11 @@ type AwsSecurityFinding struct {
 
 	// The name of the company for the product that generated the finding.
 	//
-	// Security Hub populates this attribute automatically for each finding. You
+	// Security Hub CSPM populates this attribute automatically for each finding. You
 	// cannot update this attribute with BatchImportFindings or BatchUpdateFindings .
 	// The exception to this is a custom integration.
 	//
-	// When you use the Security Hub console or API to filter findings by company
+	// When you use the Security Hub CSPM console or API to filter findings by company
 	// name, you use this attribute.
 	//
 	// Length Constraints: Minimum length of 1. Maximum length of 128.
@@ -12425,8 +12426,8 @@ type AwsSecurityFinding struct {
 	//  Provides details about an Amazon GuardDuty Extended Threat Detection attack
 	// sequence. GuardDuty generates an attack sequence finding when multiple events
 	// align to a potentially suspicious activity. To receive GuardDuty attack sequence
-	// findings in Security Hub, you must have GuardDuty enabled. For more information,
-	// see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+	// findings in Security Hub CSPM, you must have GuardDuty enabled. For more
+	// information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
 	//
 	// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
 	Detection *Detection
@@ -12440,7 +12441,7 @@ type AwsSecurityFinding struct {
 	// security issue that a finding captured.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	FirstObservedAt *string
@@ -12449,14 +12450,14 @@ type AwsSecurityFinding struct {
 	// This field pertains to findings that relate to Lambda functions. Amazon
 	// Inspector identifies policy violations and vulnerabilities in Lambda function
 	// code based on internal detectors developed in collaboration with Amazon
-	// CodeGuru. Security Hub receives those findings.
+	// CodeGuru. Security Hub CSPM receives those findings.
 	GeneratorDetails *GeneratorDetails
 
 	// Indicates when the security findings provider most recently observed a change
 	// in the resource that is involved in the finding.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastObservedAt *string
@@ -12483,11 +12484,11 @@ type AwsSecurityFinding struct {
 	// The details of process-related information about a finding.
 	Process *ProcessDetails
 
-	// A timestamp that indicates when Security Hub received a finding and begins to
-	// process it.
+	// A timestamp that indicates when Security Hub CSPM received a finding and begins
+	// to process it.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ProcessedAt *string
@@ -12502,11 +12503,11 @@ type AwsSecurityFinding struct {
 
 	// The name of the product that generated the finding.
 	//
-	// Security Hub populates this attribute automatically for each finding. You
+	// Security Hub CSPM populates this attribute automatically for each finding. You
 	// cannot update this attribute with BatchImportFindings or BatchUpdateFindings .
 	// The exception to this is a custom integration.
 	//
-	// When you use the Security Hub console or API to filter findings by product
+	// When you use the Security Hub CSPM console or API to filter findings by product
 	// name, you use this attribute.
 	//
 	// Length Constraints: Minimum length of 1. Maximum length of 128.
@@ -12517,7 +12518,7 @@ type AwsSecurityFinding struct {
 
 	// The Region from which the finding was generated.
 	//
-	// Security Hub populates this attribute automatically for each finding. You
+	// Security Hub CSPM populates this attribute automatically for each finding. You
 	// cannot update it using BatchImportFindings or BatchUpdateFindings .
 	//
 	// Length Constraints: Minimum length of 1. Maximum length of 16.
@@ -12587,7 +12588,7 @@ type AwsSecurityFinding struct {
 }
 
 // A collection of filters that are applied to all active findings aggregated by
-// Security Hub.
+// Security Hub CSPM.
 //
 // You can filter by up to ten finding attributes. For each attribute, you can
 // provide up to 20 filter values.
@@ -12637,7 +12638,7 @@ type AwsSecurityFindingFilters struct {
 	// potential security issue that a finding reflects.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	CreatedAt []DateFilter
@@ -12691,7 +12692,7 @@ type AwsSecurityFindingFilters struct {
 	// the potential security issue that a finding captured.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	FirstObservedAt []DateFilter
@@ -12713,7 +12714,7 @@ type AwsSecurityFindingFilters struct {
 	// observed a change in the resource that is involved in the finding.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastObservedAt []DateFilter
@@ -12776,7 +12777,7 @@ type AwsSecurityFindingFilters struct {
 	// A timestamp that identifies when the process was launched.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ProcessLaunchedAt []DateFilter
@@ -12797,14 +12798,14 @@ type AwsSecurityFindingFilters struct {
 	// A timestamp that identifies when the process was terminated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ProcessTerminatedAt []DateFilter
 
-	// The ARN generated by Security Hub that uniquely identifies a third-party
+	// The ARN generated by Security Hub CSPM that uniquely identifies a third-party
 	// company (security findings provider) after this provider's product (solution
-	// that generates findings) is registered with Security Hub.
+	// that generates findings) is registered with Security Hub CSPM.
 	ProductArn []StringFilter
 
 	// A data type where security findings providers can include additional
@@ -12896,7 +12897,7 @@ type AwsSecurityFindingFilters struct {
 	// A timestamp that identifies when the container was started.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ResourceContainerLaunchedAt []DateFilter
@@ -12955,7 +12956,7 @@ type AwsSecurityFindingFilters struct {
 	// indicator.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	ThreatIntelIndicatorLastObservedAt []DateFilter
@@ -12983,7 +12984,7 @@ type AwsSecurityFindingFilters struct {
 	// finding record.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	UpdatedAt []DateFilter
@@ -12996,13 +12997,13 @@ type AwsSecurityFindingFilters struct {
 	VerificationState []StringFilter
 
 	//  Indicates whether a software vulnerability in your environment has a known
-	// exploit. You can filter findings by this field only if you use Security Hub and
-	// Amazon Inspector.
+	// exploit. You can filter findings by this field only if you use Security Hub CSPM
+	// and Amazon Inspector.
 	VulnerabilitiesExploitAvailable []StringFilter
 
 	//  Indicates whether a vulnerability is fixed in a newer version of the affected
 	// software packages. You can filter findings by this field only if you use
-	// Security Hub and Amazon Inspector.
+	// Security Hub CSPM and Amazon Inspector.
 	VulnerabilitiesFixAvailable []StringFilter
 
 	// The workflow state of a finding.
@@ -13016,8 +13017,8 @@ type AwsSecurityFindingFilters struct {
 	//
 	//   - NEW - The initial state of a finding, before it is reviewed.
 	//
-	// Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in
-	//   the following cases:
+	// Security Hub CSPM also resets the workflow status from NOTIFIED or RESOLVED to
+	//   NEW in the following cases:
 	//
 	//   - RecordState changes from ARCHIVED to ACTIVE .
 	//
@@ -13055,7 +13056,7 @@ type AwsSecurityFindingFilters struct {
 	// In those cases, the workflow status is automatically reset to NEW .
 	//
 	// For findings from controls, if Compliance.Status is PASSED , then Security Hub
-	//   automatically sets the workflow status to RESOLVED .
+	//   CSPM automatically sets the workflow status to RESOLVED .
 	WorkflowStatus []StringFilter
 
 	noSmithyDocumentSerde
@@ -13069,9 +13070,9 @@ type AwsSecurityFindingIdentifier struct {
 	// This member is required.
 	Id *string
 
-	// The ARN generated by Security Hub that uniquely identifies a product that
+	// The ARN generated by Security Hub CSPM that uniquely identifies a product that
 	// generates findings. This can be the ARN for a third-party product that is
-	// integrated with Security Hub, or the ARN for a custom integration.
+	// integrated with Security Hub CSPM, or the ARN for a custom integration.
 	//
 	// This member is required.
 	ProductArn *string
@@ -14122,8 +14123,8 @@ type AwsXrayEncryptionConfigDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A finding from a BatchUpdateFindings request that Security Hub was unable to
-// update.
+// A finding from a BatchUpdateFindings request that Security Hub CSPM was unable
+// to update.
 type BatchUpdateFindingsUnprocessedFinding struct {
 
 	// The code associated with the error. Possible values are:
@@ -14216,7 +14217,7 @@ type BatchUpdateFindingsV2UnprocessedFinding struct {
 // boolean parameter, the options are true and false .
 type BooleanConfigurationOptions struct {
 
-	//  The Security Hub default value for a boolean parameter.
+	//  The Security Hub CSPM default value for a boolean parameter.
 	DefaultValue *bool
 
 	noSmithyDocumentSerde
@@ -14380,7 +14381,7 @@ type CodeVulnerabilitiesFilePath struct {
 // This object typically provides details about a control finding, such as
 // applicable standards and the status of control checks. While finding providers
 // can add custom content in Compliance object fields, they are typically used to
-// review details of Security Hub control findings.
+// review details of Security Hub CSPM control findings.
 type Compliance struct {
 
 	// Typically provides an array of enabled security standards in which a security
@@ -14395,8 +14396,8 @@ type Compliance struct {
 	RelatedRequirements []string
 
 	//  Typically provides the unique identifier of a control across standards. For
-	// Security Hub controls, this field consists of an Amazon Web Services service and
-	// a unique number, such as APIGateway.5 .
+	// Security Hub CSPM controls, this field consists of an Amazon Web Services
+	// service and a unique number, such as APIGateway.5 .
 	SecurityControlId *string
 
 	//  Typically an object that includes security control parameter names and values.
@@ -14404,7 +14405,7 @@ type Compliance struct {
 
 	// Typically summarizes the result of a control check.
 	//
-	// For Security Hub controls, valid values for Status are as follows.
+	// For Security Hub CSPM controls, valid values for Status are as follows.
 	//
 	//   - PASSED - Standards check passed for all evaluated resources.
 	//
@@ -14415,8 +14416,8 @@ type Compliance struct {
 	//
 	//   - NOT_AVAILABLE - Check could not be performed due to a service outage, API
 	//   error, or because the result of the Config evaluation was NOT_APPLICABLE . If
-	//   the Config evaluation result was NOT_APPLICABLE for a Security Hub control,
-	//   Security Hub automatically archives the finding after 3 days.
+	//   the Config evaluation result was NOT_APPLICABLE for a Security Hub CSPM
+	//   control, Security Hub CSPM automatically archives the finding after 3 days.
 	Status ComplianceStatus
 
 	// Typically used to provide a list of reasons for the value of Status .
@@ -14558,11 +14559,11 @@ type ConfigurationOptionsMemberStringList struct {
 
 func (*ConfigurationOptionsMemberStringList) isConfigurationOptions() {}
 
-//	Provides details about the association between an Security Hub configuration
+//	Provides details about the association between an Security Hub CSPM
 //
-// and a target account, organizational unit, or the root. An association can exist
-// between a target and a configuration policy, or between a target and
-// self-managed behavior.
+// configuration and a target account, organizational unit, or the root. An
+// association can exist between a target and a configuration policy, or between a
+// target and self-managed behavior.
 type ConfigurationPolicyAssociation struct {
 
 	//  The target account, organizational unit, or the root.
@@ -14584,8 +14585,8 @@ type ConfigurationPolicyAssociationSummary struct {
 	AssociationStatusMessage *string
 
 	//  Indicates whether the association between the specified target and the
-	// configuration was directly applied by the Security Hub delegated administrator
-	// or inherited from a parent.
+	// configuration was directly applied by the Security Hub CSPM delegated
+	// administrator or inherited from a parent.
 	AssociationType AssociationType
 
 	//  The universally unique identifier (UUID) of the configuration policy.
@@ -14605,9 +14606,9 @@ type ConfigurationPolicyAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
-//	An object that contains the details of an Security Hub configuration policy
+//	An object that contains the details of an Security Hub CSPM configuration
 //
-// that’s returned in a ListConfigurationPolicies request.
+// policy that’s returned in a ListConfigurationPolicies request.
 type ConfigurationPolicySummary struct {
 
 	//  The Amazon Resource Name (ARN) of the configuration policy.
@@ -14683,7 +14684,7 @@ type ContainerDetails struct {
 	// Indicates when the container started.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LaunchedAt *string
@@ -14805,7 +14806,7 @@ type DateFilter struct {
 	// A timestamp that provides the end date for the date filter.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	End *string
@@ -14813,7 +14814,7 @@ type DateFilter struct {
 	// A timestamp that provides the start date for the date filter.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	Start *string
@@ -14837,9 +14838,9 @@ type DateRange struct {
 //
 // Extended Threat Detection attack sequence. GuardDuty generates an attack
 // sequence finding when multiple events align to a potentially suspicious
-// activity. To receive GuardDuty attack sequence findings in Security Hub, you
-// must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty
-// User Guide.
+// activity. To receive GuardDuty attack sequence findings in Security Hub CSPM,
+// you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon
+// GuardDuty User Guide.
 //
 // [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
 type Detection struct {
@@ -14873,7 +14874,7 @@ type DnsRequestAction struct {
 // The options for customizing a security control parameter that is a double.
 type DoubleConfigurationOptions struct {
 
-	//  The Security Hub default value for a control parameter that is a double.
+	//  The Security Hub CSPM default value for a control parameter that is a double.
 	DefaultValue *float64
 
 	//  The maximum valid value for a control parameter that is a double.
@@ -14891,7 +14892,7 @@ type EnumConfigurationOptions struct {
 	//  The valid values for a control parameter that is an enum.
 	AllowedValues []string
 
-	//  The Security Hub default value for a control parameter that is an enum.
+	//  The Security Hub CSPM default value for a control parameter that is an enum.
 	DefaultValue *string
 
 	noSmithyDocumentSerde
@@ -14905,7 +14906,7 @@ type EnumListConfigurationOptions struct {
 	//  The valid values for a control parameter that is a list of enums.
 	AllowedValues []string
 
-	//  The Security Hub default value for a control parameter that is a list of
+	//  The Security Hub CSPM default value for a control parameter that is a list of
 	// enums.
 	DefaultValue []string
 
@@ -14953,8 +14954,9 @@ type FilePaths struct {
 	noSmithyDocumentSerde
 }
 
-// A finding aggregator is a Security Hub resource that specifies cross-Region
-// aggregation settings, including the home Region and any linked Regions.
+// A finding aggregator is a Security Hub CSPM resource that specifies
+// cross-Region aggregation settings, including the home Region and any linked
+// Regions.
 type FindingAggregator struct {
 
 	// The ARN of the finding aggregator. You use the finding aggregator ARN to
@@ -14986,18 +14988,18 @@ type FindingHistoryRecord struct {
 
 	//  Identifies the source of the event that changed the finding. For example, an
 	// integrated Amazon Web Services service or third-party partner integration may
-	// call [BatchImportFindings]BatchImportFindings , or an Security Hub customer may call [BatchUpdateFindings]
+	// call [BatchImportFindings]BatchImportFindings , or an Security Hub CSPM customer may call [BatchUpdateFindings]
 	// BatchUpdateFindings .
 	//
 	// [BatchUpdateFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
 	// [BatchImportFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
 	UpdateSource *FindingHistoryUpdateSource
 
-	//  A timestamp that indicates when Security Hub processed the updated finding
-	// record.
+	//  A timestamp that indicates when Security Hub CSPM processed the updated
+	// finding record.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	UpdateTime *time.Time
@@ -15019,8 +15021,8 @@ type FindingHistoryRecord struct {
 type FindingHistoryUpdate struct {
 
 	//  The value of the ASFF field after the finding change event. To preserve
-	// storage and readability, Security Hub omits this value if [FindingHistoryRecord]FindingHistoryRecord
-	// exceeds database limits.
+	// storage and readability, Security Hub CSPM omits this value if [FindingHistoryRecord]
+	// FindingHistoryRecord exceeds database limits.
 	//
 	// [FindingHistoryRecord]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_FindingHistoryRecord.html
 	NewValue *string
@@ -15044,7 +15046,7 @@ type FindingHistoryUpdateSource struct {
 
 	//  Describes the type of finding change event, such as a call to [BatchImportFindings]
 	// BatchImportFindings (by an integrated Amazon Web Services service or third party
-	// partner integration) or [BatchUpdateFindings]BatchUpdateFindings (by a Security Hub customer).
+	// partner integration) or [BatchUpdateFindings]BatchUpdateFindings (by a Security Hub CSPM customer).
 	//
 	// [BatchUpdateFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
 	// [BatchImportFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
@@ -15068,9 +15070,9 @@ type FindingHistoryUpdateSource struct {
 //
 // The preceding fields are nested under the FindingProviderFields object, but
 // also have analogues of the same name as top-level ASFF fields. When a new
-// finding is sent to Security Hub by a finding provider, Security Hub populates
-// the FindingProviderFields object automatically, if it is empty, based on the
-// corresponding top-level fields.
+// finding is sent to Security Hub CSPM by a finding provider, Security Hub CSPM
+// populates the FindingProviderFields object automatically, if it is empty, based
+// on the corresponding top-level fields.
 //
 // Finding providers can update FindingProviderFields only by using the
 // BatchImportFindings operation. Finding providers can't update this object with
@@ -15078,9 +15080,9 @@ type FindingHistoryUpdateSource struct {
 // using the BatchUpdateFindings operation. Customers can't update
 // FindingProviderFields .
 //
-// For information about how Security Hub handles updates from BatchImportFindings
-// to FindingProviderFields and to the corresponding top-level attributes, see [Using FindingProviderFields]
-// FindingProviderFields in the Security Hub User Guide.
+// For information about how Security Hub CSPM handles updates from
+// BatchImportFindings to FindingProviderFields and to the corresponding top-level
+// attributes, see [Using FindingProviderFields]FindingProviderFields in the Security Hub CSPM User Guide.
 //
 // [Using FindingProviderFields]: https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchimportfindings.html#batchimportfindings-findingproviderfields
 // [BatchUpdateFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
@@ -15128,7 +15130,7 @@ type FindingProviderFields struct {
 //   - Product
 //
 // If a [BatchImportFindings]BatchImportFindings request for a new finding only provides Label or only
-// provides Normalized , Security Hub automatically populates the value of the
+// provides Normalized , Security Hub CSPM automatically populates the value of the
 // other field.
 //
 // The Normalized and Product attributes are included in the
@@ -15137,7 +15139,7 @@ type FindingProviderFields struct {
 // modified using the [BatchUpdateFindings]BatchUpdateFindings operation.
 //
 // If the top-level Finding.Severity object is present, but
-// Finding.FindingProviderFields isn't present, Security Hub creates the
+// Finding.FindingProviderFields isn't present, Security Hub CSPM creates the
 // FindingProviderFields.Severity object and copies the entire Finding.Severity
 // object into it. This ensures that the original, provider-supplied details are
 // retained within the FindingProviderFields.Severity object, even if the
@@ -15194,7 +15196,7 @@ type FindingsTrendsStringFilter struct {
 	// The name of the findings field to filter on.
 	FieldName FindingsTrendsStringField
 
-	// A string filter for filtering Security Hub findings.
+	// A string filter for filtering Security Hub CSPM findings.
 	Filter *StringFilter
 
 	noSmithyDocumentSerde
@@ -15268,7 +15270,7 @@ type FirewallPolicyStatelessRuleGroupReferencesDetails struct {
 // This field pertains to findings that relate to Lambda functions. Amazon
 // Inspector identifies policy violations and vulnerabilities in Lambda function
 // code based on internal detectors developed in collaboration with Amazon
-// CodeGuru. Security Hub receives those findings.
+// CodeGuru. Security Hub CSPM receives those findings.
 type GeneratorDetails struct {
 
 	//  The description of the detector used to identify the code vulnerability.
@@ -15398,7 +15400,7 @@ type ImportFindingsError struct {
 // which can be API activities or findings that GuardDuty uses to detect an attack
 // sequence finding. GuardDuty generates an attack sequence finding when multiple
 // signals align to a potentially suspicious activity. To receive GuardDuty attack
-// sequence findings in Security Hub, you must have GuardDuty and GuardDuty S3
+// sequence findings in Security Hub CSPM, you must have GuardDuty and GuardDuty S3
 // Protection enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User
 // Guide.
 //
@@ -15422,7 +15424,7 @@ type Indicator struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a Security Hub insight.
+// Contains information about a Security Hub CSPM insight.
 type Insight struct {
 
 	// One or more attributes used to filter the findings included in the insight. You
@@ -15441,12 +15443,12 @@ type Insight struct {
 	// This member is required.
 	GroupByAttribute *string
 
-	// The ARN of a Security Hub insight.
+	// The ARN of a Security Hub CSPM insight.
 	//
 	// This member is required.
 	InsightArn *string
 
-	// The name of a Security Hub insight.
+	// The name of a Security Hub CSPM insight.
 	//
 	// This member is required.
 	Name *string
@@ -15497,7 +15499,8 @@ type InsightResultValue struct {
 // The options for customizing a security control parameter that is an integer.
 type IntegerConfigurationOptions struct {
 
-	//  The Security Hub default value for a control parameter that is an integer.
+	//  The Security Hub CSPM default value for a control parameter that is an
+	// integer.
 	DefaultValue *int32
 
 	//  The maximum valid value for a control parameter that is an integer.
@@ -15514,7 +15517,7 @@ type IntegerConfigurationOptions struct {
 // integers.
 type IntegerListConfigurationOptions struct {
 
-	//  The Security Hub default value for a control parameter that is a list of
+	//  The Security Hub CSPM default value for a control parameter that is a list of
 	// integers.
 	DefaultValue []int32
 
@@ -15534,8 +15537,8 @@ type IntegerListConfigurationOptions struct {
 // Details about an invitation.
 type Invitation struct {
 
-	// The account ID of the Security Hub administrator account that the invitation
-	// was sent from.
+	// The account ID of the Security Hub CSPM administrator account that the
+	// invitation was sent from.
 	AccountId *string
 
 	// The ID of the invitation sent to the member account.
@@ -15695,12 +15698,12 @@ type Malware struct {
 	noSmithyDocumentSerde
 }
 
-// A map filter for filtering Security Hub findings. Each map filter provides the
-// field to check for, the value to check for, and the comparison operator.
+// A map filter for filtering Security Hub CSPM findings. Each map filter provides
+// the field to check for, the value to check for, and the comparison operator.
 type MapFilter struct {
 
-	// The condition to apply to the key value when filtering Security Hub findings
-	// with a map filter.
+	// The condition to apply to the key value when filtering Security Hub CSPM
+	// findings with a map filter.
 	//
 	// To search for values that have the filter value, use one of the following
 	// comparison operators:
@@ -15744,7 +15747,7 @@ type MapFilter struct {
 	// on the same field. Combining filters in this way returns an error.
 	//
 	// CONTAINS and NOT_CONTAINS operators can be used only with automation rules. For
-	// more information, see [Automation rules]in the Security Hub User Guide.
+	// more information, see [Automation rules]in the Security Hub CSPM User Guide.
 	//
 	// [Automation rules]: https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html
 	Comparison MapFilterComparison
@@ -15767,8 +15770,8 @@ type Member struct {
 	// The Amazon Web Services account ID of the member account.
 	AccountId *string
 
-	// The Amazon Web Services account ID of the Security Hub administrator account
-	// associated with this member account.
+	// The Amazon Web Services account ID of the Security Hub CSPM administrator
+	// account associated with this member account.
 	AdministratorId *string
 
 	// The email address of the member account.
@@ -15780,8 +15783,8 @@ type Member struct {
 
 	// This is replaced by AdministratorID .
 	//
-	// The Amazon Web Services account ID of the Security Hub administrator account
-	// associated with this member account.
+	// The Amazon Web Services account ID of the Security Hub CSPM administrator
+	// account associated with this member account.
 	//
 	// Deprecated: This field is deprecated, use AdministratorId instead.
 	MasterId *string
@@ -15875,8 +15878,8 @@ type Network struct {
 // involved in an Amazon GuardDuty Extended Threat Detection attack sequence.
 // GuardDuty generates an attack sequence finding when multiple events align to a
 // potentially suspicious activity. To receive GuardDuty attack sequence findings
-// in Security Hub, you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in
-// the Amazon GuardDuty User Guide.
+// in Security Hub CSPM, you must have GuardDuty enabled. For more information, see
+// [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
 //
 // [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
 type NetworkAutonomousSystem struct {
@@ -15894,9 +15897,9 @@ type NetworkAutonomousSystem struct {
 //
 // GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an
 // attack sequence finding when multiple events align to a potentially suspicious
-// activity. To receive GuardDuty attack sequence findings in Security Hub, you
-// must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty
-// User Guide.
+// activity. To receive GuardDuty attack sequence findings in Security Hub CSPM,
+// you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon
+// GuardDuty User Guide.
 //
 // [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
 type NetworkConnection struct {
@@ -15939,9 +15942,9 @@ type NetworkConnectionAction struct {
 //
 // Extended Threat Detection attack sequence. GuardDuty generates an attack
 // sequence finding when multiple events align to a potentially suspicious
-// activity. To receive GuardDuty attack sequence findings in Security Hub, you
-// must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty
-// User Guide.
+// activity. To receive GuardDuty attack sequence findings in Security Hub CSPM,
+// you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon
+// GuardDuty User Guide.
 //
 // This field can provide information about the network endpoints associated with
 // the resource in the attack sequence finding, or about a specific network
@@ -15979,8 +15982,8 @@ type NetworkEndpoint struct {
 // Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates
 // an attack sequence finding when multiple events align to a potentially
 // suspicious activity. To receive GuardDuty attack sequence findings in Security
-// Hub, you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon
-// GuardDuty User Guide.
+// Hub CSPM, you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the
+// Amazon GuardDuty User Guide.
 //
 // [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
 type NetworkGeoLocation struct {
@@ -16067,7 +16070,7 @@ type Note struct {
 	// A timestamp that indicates when the note was updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	//
@@ -16229,8 +16232,8 @@ type OcsfMapFilter struct {
 	// The name of the field.
 	FieldName OcsfMapField
 
-	// A map filter for filtering Security Hub findings. Each map filter provides the
-	// field to check for, the value to check for, and the comparison operator.
+	// A map filter for filtering Security Hub CSPM findings. Each map filter provides
+	// the field to check for, the value to check for, and the comparison operator.
 	Filter *MapFilter
 
 	noSmithyDocumentSerde
@@ -16254,7 +16257,7 @@ type OcsfStringFilter struct {
 	// The name of the field.
 	FieldName OcsfStringField
 
-	// A string filter for filtering Security Hub findings.
+	// A string filter for filtering Security Hub CSPM findings.
 	Filter *StringFilter
 
 	noSmithyDocumentSerde
@@ -16262,22 +16265,22 @@ type OcsfStringFilter struct {
 
 //	Provides information about the way an organization is configured in Security
 //
-// Hub.
+// Hub CSPM.
 type OrganizationConfiguration struct {
 
 	//  Indicates whether the organization uses local or central configuration.
 	//
-	// If you use local configuration, the Security Hub delegated administrator can
-	// set AutoEnable to true and AutoEnableStandards to DEFAULT . This automatically
-	// enables Security Hub and default security standards in new organization
-	// accounts. These new account settings must be set separately in each Amazon Web
-	// Services Region, and settings may be different in each Region.
+	// If you use local configuration, the Security Hub CSPM delegated administrator
+	// can set AutoEnable to true and AutoEnableStandards to DEFAULT . This
+	// automatically enables Security Hub CSPM and default security standards in new
+	// organization accounts. These new account settings must be set separately in each
+	// Amazon Web Services Region, and settings may be different in each Region.
 	//
 	// If you use central configuration, the delegated administrator can create
 	// configuration policies. Configuration policies can be used to configure Security
-	// Hub, security standards, and security controls in multiple accounts and Regions.
-	// If you want new organization accounts to use a specific configuration, you can
-	// create a configuration policy and associate it with the root or specific
+	// Hub CSPM, security standards, and security controls in multiple accounts and
+	// Regions. If you want new organization accounts to use a specific configuration,
+	// you can create a configuration policy and associate it with the root or specific
 	// organizational units (OUs). New accounts will inherit the policy from the root
 	// or their assigned OU.
 	ConfigurationType OrganizationConfigurationConfigurationType
@@ -16317,12 +16320,12 @@ type Page struct {
 type ParameterConfiguration struct {
 
 	//  Identifies whether a control parameter uses a custom user-defined value or
-	// subscribes to the default Security Hub behavior.
+	// subscribes to the default Security Hub CSPM behavior.
 	//
 	// When ValueType is set equal to DEFAULT , the default behavior can be a specific
-	// Security Hub default value, or the default behavior can be to ignore a specific
-	// parameter. When ValueType is set equal to DEFAULT , Security Hub ignores
-	// user-provided input for the Value field.
+	// Security Hub CSPM default value, or the default behavior can be to ignore a
+	// specific parameter. When ValueType is set equal to DEFAULT , Security Hub CSPM
+	// ignores user-provided input for the Value field.
 	//
 	// When ValueType is set equal to CUSTOM , the Value field can't be empty.
 	//
@@ -16499,7 +16502,7 @@ type PatchSummary struct {
 	// Indicates when the operation completed.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	OperationEndTime *string
@@ -16507,7 +16510,7 @@ type PatchSummary struct {
 	// Indicates when the operation started.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	OperationStartTime *string
@@ -16520,15 +16523,16 @@ type PatchSummary struct {
 	noSmithyDocumentSerde
 }
 
-//	An object that defines how Security Hub is configured. It includes whether
+//	An object that defines how Security Hub CSPM is configured. It includes
 //
-// Security Hub is enabled or disabled, a list of enabled security standards, a
-// list of enabled or disabled security controls, and a list of custom parameter
-// values for specified controls. If you provide a list of security controls that
-// are enabled in the configuration policy, Security Hub disables all other
-// controls (including newly released controls). If you provide a list of security
-// controls that are disabled in the configuration policy, Security Hub enables all
-// other controls (including newly released controls).
+// whether Security Hub CSPM is enabled or disabled, a list of enabled security
+// standards, a list of enabled or disabled security controls, and a list of custom
+// parameter values for specified controls. If you provide a list of security
+// controls that are enabled in the configuration policy, Security Hub CSPM
+// disables all other controls (including newly released controls). If you provide
+// a list of security controls that are disabled in the configuration policy,
+// Security Hub CSPM enables all other controls (including newly released
+// controls).
 //
 // The following types satisfy this interface:
 //
@@ -16606,7 +16610,7 @@ type ProcessDetails struct {
 	// Indicates when the process was launched.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LaunchedAt *string
@@ -16631,7 +16635,7 @@ type ProcessDetails struct {
 	// Indicates when the process was terminated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	TerminatedAt *string
@@ -16648,7 +16652,7 @@ type Product struct {
 	ProductArn *string
 
 	// The URL to the service or product documentation about the integration with
-	// Security Hub, including how to activate the integration.
+	// Security Hub CSPM, including how to activate the integration.
 	ActivationUrl *string
 
 	// The categories assigned to the product.
@@ -16664,14 +16668,14 @@ type Product struct {
 	// following.
 	//
 	//   - SEND_FINDINGS_TO_SECURITY_HUB - The integration sends findings to Security
-	//   Hub.
+	//   Hub CSPM.
 	//
 	//   - RECEIVE_FINDINGS_FROM_SECURITY_HUB - The integration receives findings from
-	//   Security Hub.
+	//   Security Hub CSPM.
 	//
 	//   - UPDATE_FINDINGS_IN_SECURITY_HUB - The integration does not send new findings
-	//   to Security Hub, but does make updates to the findings that it receives from
-	//   Security Hub.
+	//   to Security Hub CSPM, but does make updates to the findings that it receives
+	//   from Security Hub CSPM.
 	IntegrationTypes []IntegrationType
 
 	// For integrations with Amazon Web Services services, the Amazon Web Services
@@ -16708,6 +16712,9 @@ type ProductV2 struct {
 
 	// The type of integration.
 	IntegrationV2Types []IntegrationV2Type
+
+	// The identifier for the AWS Marketplace product associated with this integration.
+	MarketplaceProductId *string
 
 	// The console URL where you can purchase or subscribe to products.
 	MarketplaceUrl *string
@@ -17416,7 +17423,7 @@ type ResourceResult struct {
 }
 
 // Enables the creation of criteria for Amazon Web Services resources in Security
-// Hub.
+// Hub CSPM.
 type ResourcesCompositeFilter struct {
 
 	// Enables filtering based on date and timestamp field values.
@@ -17520,8 +17527,8 @@ type ResourcesMapFilter struct {
 	// The name of the field.
 	FieldName ResourcesMapField
 
-	// A map filter for filtering Security Hub findings. Each map filter provides the
-	// field to check for, the value to check for, and the comparison operator.
+	// A map filter for filtering Security Hub CSPM findings. Each map filter provides
+	// the field to check for, the value to check for, and the comparison operator.
 	Filter *MapFilter
 
 	noSmithyDocumentSerde
@@ -17545,7 +17552,7 @@ type ResourcesStringFilter struct {
 	// The name of the field.
 	FieldName ResourcesStringField
 
-	// A string filter for filtering Security Hub findings.
+	// A string filter for filtering Security Hub CSPM findings.
 	Filter *StringFilter
 
 	noSmithyDocumentSerde
@@ -17607,7 +17614,7 @@ type ResourcesTrendsStringFilter struct {
 	// or region.
 	FieldName ResourcesTrendsStringField
 
-	// A string filter for filtering Security Hub findings.
+	// A string filter for filtering Security Hub CSPM findings.
 	Filter *StringFilter
 
 	noSmithyDocumentSerde
@@ -17988,21 +17995,21 @@ type RuleGroupVariablesPortSetsDetails struct {
 	noSmithyDocumentSerde
 }
 
-//	A security control in Security Hub describes a security best practice related
+//	A security control in Security Hub CSPM describes a security best practice
 //
-// to a specific resource.
+// related to a specific resource.
 type SecurityControl struct {
 
 	//  The description of a security control across standards. This typically
-	// summarizes how Security Hub evaluates the control and the conditions under which
-	// it produces a failed finding. This parameter doesn't reference a specific
+	// summarizes how Security Hub CSPM evaluates the control and the conditions under
+	// which it produces a failed finding. This parameter doesn't reference a specific
 	// standard.
 	//
 	// This member is required.
 	Description *string
 
-	//  A link to Security Hub documentation that explains how to remediate a failed
-	// finding for a security control.
+	//  A link to Security Hub CSPM documentation that explains how to remediate a
+	// failed finding for a security control.
 	//
 	// This member is required.
 	RemediationUrl *string
@@ -18027,7 +18034,7 @@ type SecurityControl struct {
 	SecurityControlStatus ControlStatus
 
 	//  The severity of a security control. For more information about how Security
-	// Hub determines control severity, see [Assigning severity to control findings]in the Security Hub User Guide.
+	// Hub CSPM determines control severity, see [Assigning severity to control findings]in the Security Hub CSPM User Guide.
 	//
 	// [Assigning severity to control findings]: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity
 	//
@@ -18053,10 +18060,10 @@ type SecurityControl struct {
 	Parameters map[string]ParameterConfiguration
 
 	//  Identifies whether customizable properties of a security control are reflected
-	// in Security Hub findings. A status of READY indicates that Security Hub uses
-	// the current control parameter values when running security checks of the
-	// control. A status of UPDATING indicates that all security checks might not use
-	// the current parameter values.
+	// in Security Hub CSPM findings. A status of READY indicates that Security Hub
+	// CSPM uses the current control parameter values when running security checks of
+	// the control. A status of UPDATING indicates that all security checks might not
+	// use the current parameter values.
 	UpdateStatus UpdateStatus
 
 	noSmithyDocumentSerde
@@ -18090,15 +18097,15 @@ type SecurityControlDefinition struct {
 	CurrentRegionAvailability RegionAvailabilityStatus
 
 	//  The description of a security control across standards. This typically
-	// summarizes how Security Hub evaluates the control and the conditions under which
-	// it produces a failed finding. This parameter doesn't reference a specific
+	// summarizes how Security Hub CSPM evaluates the control and the conditions under
+	// which it produces a failed finding. This parameter doesn't reference a specific
 	// standard.
 	//
 	// This member is required.
 	Description *string
 
-	//  A link to Security Hub documentation that explains how to remediate a failed
-	// finding for a security control.
+	//  A link to Security Hub CSPM documentation that explains how to remediate a
+	// failed finding for a security control.
 	//
 	// This member is required.
 	RemediationUrl *string
@@ -18114,7 +18121,7 @@ type SecurityControlDefinition struct {
 	SecurityControlId *string
 
 	//  The severity of a security control. For more information about how Security
-	// Hub determines control severity, see [Assigning severity to control findings]in the Security Hub User Guide.
+	// Hub CSPM determines control severity, see [Assigning severity to control findings]in the Security Hub CSPM User Guide.
 	//
 	// [Assigning severity to control findings]: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity
 	//
@@ -18153,18 +18160,18 @@ type SecurityControlParameter struct {
 
 //	An object that defines which security controls are enabled in an Security Hub
 //
-// configuration policy. The enablement status of a control is aligned across all
-// of the enabled standards in an account.
+// CSPM configuration policy. The enablement status of a control is aligned across
+// all of the enabled standards in an account.
 type SecurityControlsConfiguration struct {
 
 	//  A list of security controls that are disabled in the configuration policy.
-	// Security Hub enables all other controls (including newly released controls)
+	// Security Hub CSPM enables all other controls (including newly released controls)
 	// other than the listed controls.
 	DisabledSecurityControlIdentifiers []string
 
 	//  A list of security controls that are enabled in the configuration policy.
-	// Security Hub disables all other controls (including newly released controls)
-	// other than the listed controls.
+	// Security Hub CSPM disables all other controls (including newly released
+	// controls) other than the listed controls.
 	EnabledSecurityControlIdentifiers []string
 
 	//  A list of security controls and control parameter values that are included in
@@ -18174,15 +18181,16 @@ type SecurityControlsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-//	An object that defines how Security Hub is configured. The configuration
+//	An object that defines how Security Hub CSPM is configured. The configuration
 //
-// policy includes whether Security Hub is enabled or disabled, a list of enabled
-// security standards, a list of enabled or disabled security controls, and a list
-// of custom parameter values for specified controls. If you provide a list of
-// security controls that are enabled in the configuration policy, Security Hub
-// disables all other controls (including newly released controls). If you provide
-// a list of security controls that are disabled in the configuration policy,
-// Security Hub enables all other controls (including newly released controls).
+// policy includes whether Security Hub CSPM is enabled or disabled, a list of
+// enabled security standards, a list of enabled or disabled security controls, and
+// a list of custom parameter values for specified controls. If you provide a list
+// of security controls that are enabled in the configuration policy, Security Hub
+// CSPM disables all other controls (including newly released controls). If you
+// provide a list of security controls that are disabled in the configuration
+// policy, Security Hub CSPM enables all other controls (including newly released
+// controls).
 type SecurityHubPolicy struct {
 
 	//  A list that defines which security standards are enabled in the configuration
@@ -18194,7 +18202,7 @@ type SecurityHubPolicy struct {
 	// of the enabled standards in an account.
 	SecurityControlsConfiguration *SecurityControlsConfiguration
 
-	//  Indicates whether Security Hub is enabled in the policy.
+	//  Indicates whether Security Hub CSPM is enabled in the policy.
 	ServiceEnabled *bool
 
 	noSmithyDocumentSerde
@@ -18238,8 +18246,8 @@ type SensitiveDataResult struct {
 //
 // attack sequence finding. GuardDuty generates an attack sequence finding when
 // multiple events align to a potentially suspicious activity. To receive GuardDuty
-// attack sequence findings in Security Hub, you must have GuardDuty enabled. For
-// more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+// attack sequence findings in Security Hub CSPM, you must have GuardDuty enabled.
+// For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
 //
 // [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
 type Sequence struct {
@@ -18321,9 +18329,9 @@ type ServiceNowUpdateConfiguration struct {
 // only update the severity if it hasn't been updated using BatchUpdateFindings .
 //
 // The finding must have either Label or Normalized populated. If only one of
-// these attributes is populated, then Security Hub automatically populates the
-// other one. If neither attribute is populated, then the finding is invalid. Label
-// is the preferred attribute.
+// these attributes is populated, then Security Hub CSPM automatically populates
+// the other one. If neither attribute is populated, then the finding is invalid.
+// Label is the preferred attribute.
 type Severity struct {
 
 	// The severity value of the finding. The allowed values are the following.
@@ -18485,8 +18493,8 @@ type SeverityUpdate struct {
 // Extended Threat Detection attack sequence. An attack sequence is a type of
 // threat detected by GuardDuty. GuardDuty generates an attack sequence finding
 // when multiple events, or signals, align to a potentially suspicious activity.
-// When GuardDuty and Security Hub are integrated, GuardDuty sends attack sequence
-// findings to Security Hub.
+// When GuardDuty and Security Hub CSPM are integrated, GuardDuty sends attack
+// sequence findings to Security Hub CSPM.
 //
 // A signal can be an API activity or a finding that GuardDuty uses to detect an
 // attack sequence finding.
@@ -18630,12 +18638,13 @@ type Standard struct {
 	// A description of the standard.
 	Description *string
 
-	// Whether the standard is enabled by default. When Security Hub is enabled from
-	// the console, if a standard is enabled by default, the check box for that
+	// Whether the standard is enabled by default. When Security Hub CSPM is enabled
+	// from the console, if a standard is enabled by default, the check box for that
 	// standard is selected by default.
 	//
-	// When Security Hub is enabled using the EnableSecurityHub API operation, the
-	// standard is enabled by default unless EnableDefaultStandards is set to false .
+	// When Security Hub CSPM is enabled using the EnableSecurityHub API operation,
+	// the standard is enabled by default unless EnableDefaultStandards is set to false
+	// .
 	EnabledByDefault *bool
 
 	// The name of the standard.
@@ -18657,8 +18666,8 @@ type StandardsControl struct {
 	ControlId *string
 
 	// The current status of the security standard control. Indicates whether the
-	// control is enabled or disabled. Security Hub does not check against disabled
-	// controls.
+	// control is enabled or disabled. Security Hub CSPM does not check against
+	// disabled controls.
 	ControlStatus ControlStatus
 
 	// The date and time that the status of the security standard control was most
@@ -18675,7 +18684,7 @@ type StandardsControl struct {
 	// The list of requirements that are related to this control.
 	RelatedRequirements []string
 
-	// A link to remediation information for the control in the Security Hub user
+	// A link to remediation information for the control in the Security Hub CSPM user
 	// documentation.
 	RemediationUrl *string
 
@@ -18725,13 +18734,13 @@ type StandardsControlAssociationDetail struct {
 	// to the standard.
 	RelatedRequirements []string
 
-	//  Provides the input parameter that Security Hub uses to call the [UpdateStandardsControl] API. This API
-	// can be used to enable or disable a control in a specified standard.
+	//  Provides the input parameter that Security Hub CSPM uses to call the [UpdateStandardsControl] API.
+	// This API can be used to enable or disable a control in a specified standard.
 	//
 	// [UpdateStandardsControl]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateStandardsControl.html
 	StandardsControlArns []string
 
-	//  The description of a control. This typically summarizes how Security Hub
+	//  The description of a control. This typically summarizes how Security Hub CSPM
 	// evaluates the control and the conditions under which it produces a failed
 	// finding. This parameter may reference a specific standard.
 	StandardsControlDescription *string
@@ -18804,7 +18813,7 @@ type StandardsControlAssociationSummary struct {
 	// related to the standard.
 	RelatedRequirements []string
 
-	//  The description of a control. This typically summarizes how Security Hub
+	//  The description of a control. This typically summarizes how Security Hub CSPM
 	// evaluates the control and the conditions under which it produces a failed
 	// finding. The parameter may reference a specific standard.
 	StandardsControlDescription *string
@@ -18894,19 +18903,19 @@ type StandardsSubscription struct {
 	// The status of your subscription to the standard. Possible values are:
 	//
 	//   - PENDING - The standard is in the process of being enabled. Or the standard
-	//   is already enabled and Security Hub is adding new controls to the standard.
+	//   is already enabled and Security Hub CSPM is adding new controls to the standard.
 	//
 	//   - READY - The standard is enabled.
 	//
 	//   - INCOMPLETE - The standard could not be enabled completely. One or more
-	//   errors ( StandardsStatusReason ) occurred when Security Hub attempted to
+	//   errors ( StandardsStatusReason ) occurred when Security Hub CSPM attempted to
 	//   enable the standard.
 	//
 	//   - DELETING - The standard is in the process of being disabled.
 	//
 	//   - FAILED - The standard could not be disabled. One or more errors (
-	//   StandardsStatusReason ) occurred when Security Hub attempted to disable the
-	//   standard.
+	//   StandardsStatusReason ) occurred when Security Hub CSPM attempted to disable
+	//   the standard.
 	//
 	// This member is required.
 	StandardsStatus StandardsStatus
@@ -18978,7 +18987,7 @@ type StatelessCustomPublishMetricActionDimension struct {
 type StatusReason struct {
 
 	// A code that represents a reason for the control status. For the list of status
-	// reason codes and their meanings, see [Compliance details for control findings]in the Security Hub User Guide.
+	// reason codes and their meanings, see [Compliance details for control findings]in the Security Hub CSPM User Guide.
 	//
 	// [Compliance details for control findings]: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-asff-compliance
 	//
@@ -18994,23 +19003,24 @@ type StatusReason struct {
 // The options for customizing a security control parameter that is a string.
 type StringConfigurationOptions struct {
 
-	//  The Security Hub default value for a control parameter that is a string.
+	//  The Security Hub CSPM default value for a control parameter that is a string.
 	DefaultValue *string
 
 	//  The description of the RE2 regular expression.
 	ExpressionDescription *string
 
-	//  An RE2 regular expression that Security Hub uses to validate a user-provided
-	// control parameter string.
+	//  An RE2 regular expression that Security Hub CSPM uses to validate a
+	// user-provided control parameter string.
 	Re2Expression *string
 
 	noSmithyDocumentSerde
 }
 
-// A string filter for filtering Security Hub findings.
+// A string filter for filtering Security Hub CSPM findings.
 type StringFilter struct {
 
-	// The condition to apply to a string value when filtering Security Hub findings.
+	// The condition to apply to a string value when filtering Security Hub CSPM
+	// findings.
 	//
 	// To search for values that have the filter value, use one of the following
 	// comparison operators:
@@ -19062,13 +19072,13 @@ type StringFilter struct {
 	// filters. NOT_CONTAINS filters can only be used with other NOT_CONTAINS filters.
 	//
 	// You can combine PREFIX filters with NOT_EQUALS or PREFIX_NOT_EQUALS filters for
-	// the same field. Security Hub first processes the PREFIX filters, and then the
-	// NOT_EQUALS or PREFIX_NOT_EQUALS filters.
+	// the same field. Security Hub CSPM first processes the PREFIX filters, and then
+	// the NOT_EQUALS or PREFIX_NOT_EQUALS filters.
 	//
-	// For example, for the following filters, Security Hub first identifies findings
-	// that have resource types that start with either AwsIam or AwsEc2 . It then
-	// excludes findings that have a resource type of AwsIamPolicy and findings that
-	// have a resource type of AwsEc2NetworkInterface .
+	// For example, for the following filters, Security Hub CSPM first identifies
+	// findings that have resource types that start with either AwsIam or AwsEc2 . It
+	// then excludes findings that have a resource type of AwsIamPolicy and findings
+	// that have a resource type of AwsEc2NetworkInterface .
 	//
 	//   - ResourceType PREFIX AwsIam
 	//
@@ -19081,13 +19091,13 @@ type StringFilter struct {
 	// CONTAINS and NOT_CONTAINS operators can be used only with automation rules V1.
 	// CONTAINS_WORD operator is only supported in GetFindingsV2 ,
 	// GetFindingStatisticsV2 , GetResourcesV2 , and GetResourceStatisticsV2 APIs. For
-	// more information, see [Automation rules]in the Security Hub User Guide.
+	// more information, see [Automation rules]in the Security Hub CSPM User Guide.
 	//
 	// [Automation rules]: https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html
 	Comparison StringFilterComparison
 
 	// The string filter value. Filter values are case sensitive. For example, the
-	// product name for control-based findings is Security Hub . If you provide
+	// product name for control-based findings is Security Hub CSPM . If you provide
 	// security hub as the filter value, there's no match.
 	Value *string
 
@@ -19099,7 +19109,7 @@ type StringFilter struct {
 // strings.
 type StringListConfigurationOptions struct {
 
-	//  The Security Hub default value for a control parameter that is a list of
+	//  The Security Hub CSPM default value for a control parameter that is a list of
 	// strings.
 	DefaultValue []string
 
@@ -19110,8 +19120,8 @@ type StringListConfigurationOptions struct {
 	// accept.
 	MaxItems *int32
 
-	//  An RE2 regular expression that Security Hub uses to validate a user-provided
-	// list of strings for a control parameter.
+	//  An RE2 regular expression that Security Hub CSPM uses to validate a
+	// user-provided list of strings for a control parameter.
 	Re2Expression *string
 
 	noSmithyDocumentSerde
@@ -19119,8 +19129,8 @@ type StringListConfigurationOptions struct {
 
 //	The target account, organizational unit, or the root that is associated with
 //
-// an Security Hub configuration. The configuration can be a configuration policy
-// or self-managed behavior.
+// an Security Hub CSPM configuration. The configuration can be a configuration
+// policy or self-managed behavior.
 //
 // The following types satisfy this interface:
 //
@@ -19193,7 +19203,7 @@ type ThreatIntelIndicator struct {
 	// observed.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	LastObservedAt *string
@@ -19385,9 +19395,9 @@ type UpdateAutomationRulesRequestItem struct {
 	Actions []AutomationRulesAction
 
 	//  A set of ASFF finding field attributes and corresponding expected values that
-	// Security Hub uses to filter findings. If a rule is enabled and a finding matches
-	// the conditions specified in this parameter, Security Hub applies the rule action
-	// to the finding.
+	// Security Hub CSPM uses to filter findings. If a rule is enabled and a finding
+	// matches the conditions specified in this parameter, Security Hub CSPM applies
+	// the rule action to the finding.
 	Criteria *AutomationRulesFindingFilters
 
 	//  A description of the rule.
@@ -19396,23 +19406,23 @@ type UpdateAutomationRulesRequestItem struct {
 	// Specifies whether a rule is the last to be applied with respect to a finding
 	// that matches the rule criteria. This is useful when a finding matches the
 	// criteria for multiple rules, and each rule has different actions. If a rule is
-	// terminal, Security Hub applies the rule action to a finding that matches the
-	// rule criteria and doesn't evaluate other rules for the finding. By default, a
-	// rule isn't terminal.
+	// terminal, Security Hub CSPM applies the rule action to a finding that matches
+	// the rule criteria and doesn't evaluate other rules for the finding. By default,
+	// a rule isn't terminal.
 	IsTerminal *bool
 
 	//  The name of the rule.
 	RuleName *string
 
 	//  An integer ranging from 1 to 1000 that represents the order in which the rule
-	// action is applied to findings. Security Hub applies rules with lower values for
-	// this parameter first.
+	// action is applied to findings. Security Hub CSPM applies rules with lower values
+	// for this parameter first.
 	RuleOrder *int32
 
 	//  Whether the rule is active after it is created. If this parameter is equal to
-	// ENABLED , Security Hub starts applying the rule to findings and finding updates
-	// after the rule is created. To change the value of this parameter after creating
-	// a rule, use [BatchUpdateAutomationRules]BatchUpdateAutomationRules .
+	// ENABLED , Security Hub CSPM starts applying the rule to findings and finding
+	// updates after the rule is created. To change the value of this parameter after
+	// creating a rule, use [BatchUpdateAutomationRules]BatchUpdateAutomationRules .
 	//
 	// [BatchUpdateAutomationRules]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
 	RuleStatus RuleStatus
@@ -19425,8 +19435,8 @@ type UpdateAutomationRulesRequestItem struct {
 // Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates
 // an attack sequence finding when multiple events align to a potentially
 // suspicious activity. To receive GuardDuty attack sequence findings in Security
-// Hub, you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon
-// GuardDuty User Guide.
+// Hub CSPM, you must have GuardDuty enabled. For more information, see [GuardDuty Extended Threat Detection]in the
+// Amazon GuardDuty User Guide.
 //
 // [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
 type UserAccount struct {
@@ -19498,7 +19508,7 @@ type Vulnerability struct {
 	Id *string
 
 	// The vulnerabilities found in your Lambda function code. This field pertains to
-	// findings that Security Hub receives from Amazon Inspector.
+	// findings that Security Hub CSPM receives from Amazon Inspector.
 	CodeVulnerabilities []VulnerabilityCodeVulnerabilities
 
 	// CVSS scores from the advisory related to the vulnerability.
@@ -19543,7 +19553,7 @@ type Vulnerability struct {
 }
 
 // Provides details about the vulnerabilities found in your Lambda function code.
-// This field pertains to findings that Security Hub receives from Amazon
+// This field pertains to findings that Security Hub CSPM receives from Amazon
 // Inspector.
 type VulnerabilityCodeVulnerabilities struct {
 
@@ -19576,7 +19586,7 @@ type VulnerabilityVendor struct {
 	// Indicates when the vulnerability advisory was created.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	VendorCreatedAt *string
@@ -19587,7 +19597,7 @@ type VulnerabilityVendor struct {
 	// Indicates when the vulnerability advisory was last updated.
 	//
 	// For more information about the validation and formatting of timestamp fields in
-	// Security Hub, see [Timestamps].
+	// Security Hub CSPM, see [Timestamps].
 	//
 	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
 	VendorUpdatedAt *string
@@ -19649,8 +19659,8 @@ type Workflow struct {
 	//
 	//   - NEW - The initial state of a finding, before it is reviewed.
 	//
-	// Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in
-	//   the following cases:
+	// Security Hub CSPM also resets the workflow status from NOTIFIED or RESOLVED to
+	//   NEW in the following cases:
 	//
 	//   - RecordState changes from ARCHIVED to ACTIVE .
 	//
@@ -19683,8 +19693,8 @@ type WorkflowUpdate struct {
 	//
 	//   - NEW - The initial state of a finding, before it is reviewed.
 	//
-	// Security Hub also resets WorkFlowStatus from NOTIFIED or RESOLVED to NEW in the
-	//   following cases:
+	// Security Hub CSPM also resets WorkFlowStatus from NOTIFIED or RESOLVED to NEW in
+	//   the following cases:
 	//
 	//   - The record state changes from ARCHIVED to ACTIVE .
 	//

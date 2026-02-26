@@ -230,9 +230,6 @@ func validateOpBatchMeterUsageInput(v *BatchMeterUsageInput) error {
 			invalidParams.AddNested("UsageRecords", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ProductCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductCode"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

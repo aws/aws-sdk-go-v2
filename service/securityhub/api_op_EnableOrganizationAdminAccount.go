@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Designates the Security Hub administrator account for an organization. Can only
-// be called by the organization management account.
+// Designates the Security Hub CSPM administrator account for an organization. Can
+// only be called by the organization management account.
 func (c *Client) EnableOrganizationAdminAccount(ctx context.Context, params *EnableOrganizationAdminAccountInput, optFns ...func(*Options)) (*EnableOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &EnableOrganizationAdminAccountInput{}
@@ -31,13 +31,13 @@ func (c *Client) EnableOrganizationAdminAccount(ctx context.Context, params *Ena
 type EnableOrganizationAdminAccountInput struct {
 
 	// The Amazon Web Services account identifier of the account to designate as the
-	// Security Hub administrator account.
+	// Security Hub CSPM administrator account.
 	//
 	// This member is required.
 	AdminAccountId *string
 
 	// The feature for which the delegated admin account is enabled. Defaults to
-	// Security Hub if not specified.
+	// Security Hub CSPM if not specified.
 	Feature types.SecurityHubFeature
 
 	noSmithyDocumentSerde
@@ -46,11 +46,12 @@ type EnableOrganizationAdminAccountInput struct {
 type EnableOrganizationAdminAccountOutput struct {
 
 	// The Amazon Web Services account identifier of the account to designate as the
-	// Security Hub administrator account.
+	// Security Hub CSPM administrator account.
 	AdminAccountId *string
 
 	// The feature where the delegated administrator is enabled. The default is
-	// Security Hub CSPM if no delegated administrator is specified in the request.
+	// Security Hub CSPM CSPM if no delegated administrator is specified in the
+	// request.
 	Feature types.SecurityHubFeature
 
 	// Metadata pertaining to the operation's result.

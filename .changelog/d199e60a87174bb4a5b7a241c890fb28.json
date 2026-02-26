@@ -1,0 +1,8 @@
+{
+    "id": "d199e60a-8717-4bb4-a5b7-a241c890fb28",
+    "type": "feature",
+    "description": "This release updates GetGateway API to include deprecationDate and softwareVersion in the response, enabling customers to track gateway software versions and upcoming deprecation dates.",
+    "modules": [
+        "service/backupgateway"
+    ]
+}

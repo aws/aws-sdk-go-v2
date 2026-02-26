@@ -14,7 +14,7 @@ import (
 // process. When a buyer visits your website during the registration process, the
 // buyer submits a registration token through their browser. The registration token
 // is resolved through this API to obtain a CustomerIdentifier along with the
-// CustomerAWSAccountId and ProductCode .
+// CustomerAWSAccountId , ProductCode , and LicenseArn .
 //
 // To successfully resolve the token, the API must be called from the account that
 // was used to publish the SaaS application. For an example of using
@@ -49,8 +49,8 @@ type ResolveCustomerInput struct {
 
 	// When a buyer visits your website during the registration process, the buyer
 	// submits a registration token through the browser. The registration token is
-	// resolved to obtain a CustomerIdentifier along with the CustomerAWSAccountId and
-	// ProductCode .
+	// resolved to obtain a CustomerIdentifier along with the CustomerAWSAccountId ,
+	// ProductCode , and LicenseArn .
 	//
 	// This member is required.
 	RegistrationToken *string
@@ -59,17 +59,25 @@ type ResolveCustomerInput struct {
 }
 
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier
-// along with the CustomerAWSAccountId and ProductCode .
+// along with the CustomerAWSAccountId , ProductCode , and LicenseArn .
 type ResolveCustomerOutput struct {
 
 	// The CustomerAWSAccountId provides the Amazon Web Services account ID associated
-	// with the CustomerIdentifier for the individual customer.
+	// with the CustomerIdentifier for the individual customer. Calls to
+	// BatchMeterUsage require CustomerAWSAccountId for each UsageRecord .
 	CustomerAWSAccountId *string
 
 	// The CustomerIdentifier is used to identify an individual customer in your
-	// application. Calls to BatchMeterUsage require CustomerIdentifiers for each
-	// UsageRecord .
+	// application.
 	CustomerIdentifier *string
+
+	// The LicenseArn is a unique identifier for a specific granted license. These are
+	// typically used for software purchased through Amazon Web Services Marketplace.
+	// Calls to BatchMeterUsage require LicenseArn for each UsageRecord .
+	//
+	// Once you receive the CustomerAWSAccountId and LicenseArn in the response, store
+	// that for future purposes/API calls/integrations.
+	LicenseArn *string
 
 	// The product code is returned to confirm that the buyer is registering for your
 	// product. Subsequent BatchMeterUsage calls should be made using this product

@@ -3632,6 +3632,22 @@ func awsAwsjson10_deserializeDocumentGatewayDetails(v **types.GatewayDetails, va
 
 	for key, value := range shape {
 		switch key {
+		case "DeprecationDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DeprecationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "GatewayArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3703,6 +3719,15 @@ func awsAwsjson10_deserializeDocumentGatewayDetails(v **types.GatewayDetails, va
 					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "SoftwareVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.SoftwareVersion = ptr.String(jtv)
 			}
 
 		case "VpcEndpoint":

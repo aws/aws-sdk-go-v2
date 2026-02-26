@@ -127,6 +127,9 @@ func awsAwsjson11_deserializeOpErrorBatchMeterUsage(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidCustomerIdentifierException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidCustomerIdentifierException(response, errorBody)
 
+	case strings.EqualFold("InvalidLicenseException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidLicenseException(response, errorBody)
+
 	case strings.EqualFold("InvalidProductCodeException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidProductCodeException(response, errorBody)
 
@@ -831,6 +834,41 @@ func awsAwsjson11_deserializeErrorInvalidEndpointRegionException(response *smith
 	return output
 }
 
+func awsAwsjson11_deserializeErrorInvalidLicenseException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.InvalidLicenseException{}
+	err := awsAwsjson11_deserializeDocumentInvalidLicenseException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorInvalidProductCodeException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1501,6 +1539,46 @@ func awsAwsjson11_deserializeDocumentInvalidEndpointRegionException(v **types.In
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInvalidLicenseException(v **types.InvalidLicenseException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidLicenseException
+	if *v == nil {
+		sv = &types.InvalidLicenseException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInvalidProductCodeException(v **types.InvalidProductCodeException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2116,6 +2194,15 @@ func awsAwsjson11_deserializeDocumentUsageRecord(v **types.UsageRecord, value in
 				sv.Dimension = ptr.String(jtv)
 			}
 
+		case "LicenseArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LicenseArn to be of type string, got %T instead", value)
+				}
+				sv.LicenseArn = ptr.String(jtv)
+			}
+
 		case "Quantity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2456,6 +2543,15 @@ func awsAwsjson11_deserializeOpDocumentResolveCustomerOutput(v **ResolveCustomer
 					return fmt.Errorf("expected CustomerIdentifier to be of type string, got %T instead", value)
 				}
 				sv.CustomerIdentifier = ptr.String(jtv)
+			}
+
+		case "LicenseArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LicenseArn to be of type string, got %T instead", value)
+				}
+				sv.LicenseArn = ptr.String(jtv)
 			}
 
 		case "ProductCode":

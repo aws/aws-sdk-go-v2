@@ -308,6 +308,15 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				}
 			}
 
+		case "LicenseArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LicenseArn = ptr.String(jtv)
+			}
+
 		case "ProductCode":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates the current Security Hub member account from the associated
+// Disassociates the current Security Hub CSPM member account from the associated
 // administrator account.
 //
 // This operation is only used by accounts that are not part of an organization.

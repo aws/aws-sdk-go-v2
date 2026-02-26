@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	The CustomerIdentifier and CustomerAWSAccountID are mutually exclusive
-//
-// parameters. You must use one or the other, but not both in the same API request.
-// For new implementations, we recommend using the CustomerAWSAccountID . Your
-// current integration will continue to work. When updating your implementation,
-// consider migrating to CustomerAWSAccountID for improved integration.
+// Amazon Web Services Marketplace is introducing Concurrent Agreements, enabling
+// buyers to make multiple purchases per Amazon Web Services account. Starting June
+// 1, 2026, new SaaS products must use CustomerAWSAccountId (instead of
+// CustomerIdentifier ), LicenseArn (instead of ProductCode ) to support this
+// feature. Existing integrations will continue to work. Review the new integration
+// for Concurrent Agreements [here].
 //
 // To post metering records for customers, SaaS applications call BatchMeterUsage ,
 // which is used for metering SaaS flexible consumption pricing (FCP). Identical
@@ -41,6 +41,7 @@ import (
 // For an example of BatchMeterUsage , see [BatchMeterUsage code example] in the Amazon Web Services Marketplace
 // Seller Guide.
 //
+// [here]: https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements
 // [BatchMeterUsage code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
 // [BatchMeterUsage Region support]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
 func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInput, optFns ...func(*Options)) (*BatchMeterUsageOutput, error) {
@@ -62,18 +63,16 @@ func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInp
 // usage within your application.
 type BatchMeterUsageInput struct {
 
-	// Product code is used to uniquely identify a product in Amazon Web Services
-	// Marketplace. The product code should be the same as the one used during the
-	// publishing of a new product.
-	//
-	// This member is required.
-	ProductCode *string
-
 	// The set of UsageRecords to submit. BatchMeterUsage accepts up to 25 UsageRecords
 	// at a time.
 	//
 	// This member is required.
 	UsageRecords []types.UsageRecord
+
+	// Product code is used to uniquely identify a product in Amazon Web Services
+	// Marketplace. The product code should be the same as the one used during the
+	// publishing of a new product.
+	ProductCode *string
 
 	noSmithyDocumentSerde
 }

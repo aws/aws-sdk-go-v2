@@ -12,7 +12,7 @@ import (
 // application or some amount of data capacity in a multi-tenant database.
 type Entitlement struct {
 
-	//  The CustomerAWSAccountID parameter specifies the AWS account ID of the buyer.
+	//  The CustomerAWSAccountId parameter specifies the AWS account ID of the buyer.
 	CustomerAWSAccountId *string
 
 	// The customer identifier is a handle to each unique customer in an application.
@@ -31,6 +31,10 @@ type Entitlement struct {
 	// contract. Customers who are opting to renew their contract will still have
 	// entitlements with an expiration date.
 	ExpirationDate *time.Time
+
+	// The LicenseArn is a unique identifier for a specific granted license. These are
+	// used for software purchased through AWS Marketplace.
+	LicenseArn *string
 
 	// The product code for which the given entitlement applies. Product codes are
 	// provided by AWS Marketplace when the product listing is created.

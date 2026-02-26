@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Lists the configuration policies that the Security Hub delegated administrator
+//	Lists the configuration policies that the Security Hub CSPM delegated
 //
-// has created for your organization. Only the delegated administrator can invoke
-// this operation from the home Region.
+// administrator has created for your organization. Only the delegated
+// administrator can invoke this operation from the home Region.
 func (c *Client) ListConfigurationPolicies(ctx context.Context, params *ListConfigurationPoliciesInput, optFns ...func(*Options)) (*ListConfigurationPoliciesOutput, error) {
 	if params == nil {
 		params = &ListConfigurationPoliciesInput{}
