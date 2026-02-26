@@ -1,3 +1,7 @@
+# v1.68.0 (2026-02-26)
+
+* **Feature**: Security Hub added EXTENDED PLAN integration type to DescribeProductsV2 and added metadata.product.vendor name GroupBy support to GetFindingStatisticsV2
+
 # v1.67.5 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

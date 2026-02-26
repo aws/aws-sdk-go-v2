@@ -1,3 +1,7 @@
+# v1.36.0 (2026-02-26)
+
+* **Feature**: Added License Arn as a new optional filter for GetEntitlements and LicenseArn field in each entitlement in the response.
+
 # v1.35.6 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "4d273d3d-35b1-4e85-828b-002da89504c7",
-    "type": "feature",
-    "description": "Adding support for Capacity Reservations for ECS Managed Instances by introducing a new \"capacityOptionType\" value of \"RESERVED\" and new field \"capacityReservations\" for CreateCapacityProvider and UpdateCapacityProvider APIs.",
-    "modules": [
-        "service/ecs"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.73.0 (2026-02-26)
+
+* **Feature**: Adding support for Capacity Reservations for ECS Managed Instances by introducing a new "capacityOptionType" value of "RESERVED" and new field "capacityReservations" for CreateCapacityProvider and UpdateCapacityProvider APIs.
+
 # v1.72.1 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

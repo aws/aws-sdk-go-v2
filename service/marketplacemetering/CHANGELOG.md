@@ -1,3 +1,7 @@
+# v1.36.0 (2026-02-26)
+
+* **Feature**: Added LicenseArn to ResolveCustomer response and BatchMeterUsage usage records. BatchMeterUsage now accepts LicenseArn in each UsageRecord to report usage at the license level. Added InvalidLicenseException error response for invalid license parameters.
+
 # v1.35.7 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

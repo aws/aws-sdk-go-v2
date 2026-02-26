@@ -1,3 +1,7 @@
+# v1.26.0 (2026-02-26)
+
+* **Feature**: This release updates GetGateway API to include deprecationDate and softwareVersion in the response, enabling customers to track gateway software versions and upcoming deprecation dates.
+
 # v1.25.18 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

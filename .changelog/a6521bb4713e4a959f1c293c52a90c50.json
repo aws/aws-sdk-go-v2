@@ -1,8 +1,0 @@
-{
-    "id": "a6521bb4-713e-4a95-9f1c-293c52a90c50",
-    "type": "feature",
-    "description": "Added License Arn as a new optional filter for GetEntitlements and LicenseArn field in each entitlement in the response.",
-    "modules": [
-        "service/marketplaceentitlementservice"
-    ]
-}

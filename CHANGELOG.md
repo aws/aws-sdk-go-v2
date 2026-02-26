@@ -1,3 +1,24 @@
+# Release (2026-02-26)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.26.0](service/backupgateway/CHANGELOG.md#v1260-2026-02-26)
+  * **Feature**: This release updates GetGateway API to include deprecationDate and softwareVersion in the response, enabling customers to track gateway software versions and upcoming deprecation dates.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.293.0](service/ec2/CHANGELOG.md#v12930-2026-02-26)
+  * **Feature**: Add c8id, m8id and hpc8a instance types.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.73.0](service/ecs/CHANGELOG.md#v1730-2026-02-26)
+  * **Feature**: Adding support for Capacity Reservations for ECS Managed Instances by introducing a new "capacityOptionType" value of "RESERVED" and new field "capacityReservations" for CreateCapacityProvider and UpdateCapacityProvider APIs.
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.9.10](service/internal/checksum/CHANGELOG.md#v1910-2026-02-26)
+  * **Bug Fix**: Allow sending unkown checksum values if the value is precalculated on the input request
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.36.0](service/marketplaceentitlementservice/CHANGELOG.md#v1360-2026-02-26)
+  * **Feature**: Added License Arn as a new optional filter for GetEntitlements and LicenseArn field in each entitlement in the response.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.36.0](service/marketplacemetering/CHANGELOG.md#v1360-2026-02-26)
+  * **Feature**: Added LicenseArn to ResolveCustomer response and BatchMeterUsage usage records. BatchMeterUsage now accepts LicenseArn in each UsageRecord to report usage at the license level. Added InvalidLicenseException error response for invalid license parameters.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.68.0](service/securityhub/CHANGELOG.md#v1680-2026-02-26)
+  * **Feature**: Security Hub added EXTENDED PLAN integration type to DescribeProductsV2 and added metadata.product.vendor name GroupBy support to GetFindingStatisticsV2
+
 # Release (2026-02-25)
 
 ## Module Highlights

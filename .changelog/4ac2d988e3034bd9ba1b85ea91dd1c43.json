@@ -1,8 +1,0 @@
-{
-    "id": "4ac2d988-e303-4bd9-ba1b-85ea91dd1c43",
-    "type": "feature",
-    "description": "Add c8id, m8id and hpc8a instance types.",
-    "modules": [
-        "service/ec2"
-    ]
-}
