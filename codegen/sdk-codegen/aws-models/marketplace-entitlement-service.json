@@ -930,7 +930,7 @@
                 "CustomerAWSAccountId": {
                     "target": "com.amazonaws.marketplaceentitlementservice#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The <code>CustomerAWSAccountID</code> parameter specifies the AWS account ID of the buyer.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The <code>CustomerAWSAccountId</code> parameter specifies the AWS account ID of the buyer.\n    </p>"
                     }
                 },
                 "Value": {
@@ -943,6 +943,12 @@
                     "target": "com.amazonaws.marketplaceentitlementservice#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The expiration date represents the minimum date through which this entitlement is\n   expected to remain valid. For contractual products listed on AWS Marketplace, the expiration date\n   is the date at which the customer will renew or cancel their contract. Customers who are opting\n   to renew their contract will still have entitlements with an expiration date.</p>"
+                    }
+                },
+                "LicenseArn": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>LicenseArn</code> is a unique identifier for a specific granted license. These are used for software purchased through AWS Marketplace.</p>"
                     }
                 }
             },
@@ -1030,6 +1036,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CUSTOMER_AWS_ACCOUNT_ID"
                     }
+                },
+                "LICENSE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LICENSE_ARN"
+                    }
                 }
             }
         },
@@ -1062,7 +1074,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>GetEntitlements retrieves entitlement values for a given product. The results can be\n      filtered based on customer identifier, AWS account ID, or product dimensions.</p>\n         <important>\n            <p>\n       The <code>CustomerIdentifier</code> parameter is on path for deprecation. Use <code>CustomerAWSAccountID</code> instead.</p>\n            <p>These parameters are mutually exclusive. You can't specify both <code>CustomerIdentifier</code> and <code>CustomerAWSAccountID</code> in the same request.\n     </p>\n         </important>",
+                "smithy.api#documentation": "<p>GetEntitlements retrieves entitlement values for a given product. The results can be\n      filtered based on customer identifier, AWS account ID, license ARN, or product dimensions.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1083,7 +1095,7 @@
                 "Filter": {
                     "target": "com.amazonaws.marketplaceentitlementservice#GetEntitlementFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter is used to return entitlements for a specific customer or for a specific\n      dimension. Filters are described as keys mapped to a lists of values. Filtered requests are\n        <i>unioned</i> for each value in the value list, and then\n        <i>intersected</i> for each filter key.</p>\n         <p>\n            <code>CustomerIdentifier</code> and <code>CustomerAWSAccountID</code> are mutually exclusive. You can't specify both in the same request.\n   </p>"
+                        "smithy.api#documentation": "<p>Filter is used to return entitlements for a specific customer or for a specific\n      dimension. Filters are described as keys mapped to a lists of values. Filtered requests are\n        <i>unioned</i> for each value in the value list, and then\n        <i>intersected</i> for each filter key.</p>\n         <p>\n            <code>CustomerIdentifier</code> and <code>CustomerAWSAccountId</code> are mutually exclusive parameters. You must use one or the other, but not both in the same request.\n   </p>\n         <note>\n            <p>If you're migrating an existing integration, use <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html\">Account Feeds</a> to map <code>CustomerIdentifier</code> to <code>CustomerAWSAccountId</code>, and <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html\">Agreements Feeds</a> to map <code>CustomerAWSAccountId</code> and <code>LicenseArn</code>.</p>\n         </note>"
                     }
                 },
                 "NextToken": {
