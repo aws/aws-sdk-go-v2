@@ -168,7 +168,7 @@ gen-mod-dropreplace-smithy-%:
 	@# e.g. gen-mod-dropreplace-smithy-service_ssooidc
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst gen-mod-dropreplace-smithy-,,$@)) ${EACHMODULE_FLAGS} \
-			"go mod edit -dropreplace github.com/aws/smithy-go"
+			"go mod edit -dropreplace github.com/aws/smithy-go -dropreplace github.com/aws/smithy-go/aws-protocols"
 
 gen-aws-ptrs:
 	cd aws && go generate
