@@ -47,6 +47,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#AddCustomAttributes"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#AddUserPoolClientSecret"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#AdminAddUserToGroup"
                 },
                 {
@@ -197,6 +200,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClient"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientSecret"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#DeleteUserPoolDomain"
                 },
                 {
@@ -303,6 +309,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ListUserPoolClients"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ListUserPoolClientSecrets"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ListUserPools"
@@ -1574,6 +1583,19 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentityprovider#MessageType"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This exception is thrown when you don't have sufficient permissions to perform the requested operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#AccessTokenValidityType": {
             "type": "integer",
             "traits": {
@@ -1765,6 +1787,82 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#AddUserPoolClientSecret": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#AddUserPoolClientSecretRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#AddUserPoolClientSecretResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new client secret for an existing confidential user pool app client. Supports up to 2 active secrets per app client for zero-downtime credential rotation workflows.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AddUserPoolClientSecretRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the app client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client for which you want to create a new secret.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientSecret": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSecretType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client secret value you want to use. If you don't provide this parameter, Amazon Cognito generates a secure secret for you.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request to create a new client secret for a user pool app client.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AddUserPoolClientSecretResponse": {
+            "type": "structure",
+            "members": {
+                "ClientSecretDescriptor": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSecretDescriptorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the newly created client secret, including its unique identifier and creation timestamp. The ClientSecretValue is only returned when Amazon Cognito generates the secret. For custom secrets that you provide, the ClientSecretValue is not included in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response from creating a new client secret.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#AdminAddUserToGroup": {
             "type": "operation",
             "input": {
@@ -1893,7 +1991,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>If your user pool configuration includes triggers, the AdminConfirmSignUp API action\n            invokes the Lambda function that is specified for the <i>post\n                confirmation</i> trigger. When Amazon Cognito invokes this function, it passes a JSON\n            payload, which the function receives as input. In this payload, the\n                <code>clientMetadata</code> attribute provides the data that you assigned to the\n            ClientMetadata parameter in your AdminConfirmSignUp request. In your function code in\n            Lambda, you can process the ClientMetadata value to enhance your workflow for your\n            specific needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -2113,7 +2211,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool triggers.\n            When you use the AdminCreateUser API action, Amazon Cognito invokes the function that is assigned\n            to the <i>pre sign-up</i> trigger. When Amazon Cognito invokes this function, it\n            passes a JSON payload, which the function receives as input. This payload contains a\n                <code>ClientMetadata</code> attribute, which provides the data that you assigned to\n            the ClientMetadata parameter in your AdminCreateUser request. In your function code in\n            Lambda, you can process the <code>clientMetadata</code> value to enhance your\n            workflow for your specific needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -2823,7 +2921,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for certain custom\n            workflows that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool triggers.\n            When you use the AdminInitiateAuth API action, Amazon Cognito invokes the Lambda functions that\n            are specified for various triggers. The ClientMetadata value is passed as input to the\n            functions for only the following triggers:</p>\n         <ul>\n            <li>\n               <p>Pre signup</p>\n            </li>\n            <li>\n               <p>Pre authentication</p>\n            </li>\n            <li>\n               <p>User migration</p>\n            </li>\n         </ul>\n         <p>When Amazon Cognito invokes the functions for these triggers, it passes a JSON payload, which\n            the function receives as input. This payload contains a <code>validationData</code>\n            attribute, which provides the data that you assigned to the ClientMetadata parameter in\n            your AdminInitiateAuth request. In your function code in Lambda, you can process the\n                <code>validationData</code> value to enhance your workflow for your specific\n            needs.</p>\n         <p>When you use the AdminInitiateAuth API action, Amazon Cognito also invokes the functions for\n            the following triggers, but it doesn't provide the ClientMetadata value as input:</p>\n         <ul>\n            <li>\n               <p>Post authentication</p>\n            </li>\n            <li>\n               <p>Custom message</p>\n            </li>\n            <li>\n               <p>Pre token generation</p>\n            </li>\n            <li>\n               <p>Create auth challenge</p>\n            </li>\n            <li>\n               <p>Define auth challenge</p>\n            </li>\n            <li>\n               <p>Custom email sender</p>\n            </li>\n            <li>\n               <p>Custom SMS sender</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <p>The <code>ClientMetadata</code> value is passed as input to the functions for only the\n            following triggers:</p>\n         <ul>\n            <li>\n               <p>Pre signup</p>\n            </li>\n            <li>\n               <p>Pre authentication</p>\n            </li>\n            <li>\n               <p>User migration</p>\n            </li>\n         </ul>\n         <p>This request also invokes the functions for the following triggers, but doesn't pass\n                <code>ClientMetadata</code>:</p>\n         <ul>\n            <li>\n               <p>Post authentication</p>\n            </li>\n            <li>\n               <p>Custom message</p>\n            </li>\n            <li>\n               <p>Pre token generation</p>\n            </li>\n            <li>\n               <p>Create auth challenge</p>\n            </li>\n            <li>\n               <p>Define auth challenge</p>\n            </li>\n            <li>\n               <p>Custom email sender</p>\n            </li>\n            <li>\n               <p>Custom SMS sender</p>\n            </li>\n         </ul>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "AnalyticsMetadata": {
@@ -3372,7 +3470,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool\n            triggers. The <code>AdminResetUserPassword</code> API operation invokes the function\n            that is assigned to the <i>custom message</i> trigger. When Amazon Cognito invokes\n            this function, it passes a JSON payload, which the function receives as input. This\n            payload contains a <code>clientMetadata</code> attribute, which provides the data that\n            you assigned to the ClientMetadata parameter in your AdminResetUserPassword request. In\n            your function code in Lambda, you can process the\n                <code>clientMetadata</code> value to enhance your workflow for your specific needs. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -3520,7 +3618,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool triggers.\n            When you use the AdminRespondToAuthChallenge API action, Amazon Cognito invokes any functions\n            that you have assigned to the following triggers: </p>\n         <ul>\n            <li>\n               <p>Pre sign-up</p>\n            </li>\n            <li>\n               <p>custom message</p>\n            </li>\n            <li>\n               <p>Post authentication</p>\n            </li>\n            <li>\n               <p>User migration</p>\n            </li>\n            <li>\n               <p>Pre token generation</p>\n            </li>\n            <li>\n               <p>Define auth challenge</p>\n            </li>\n            <li>\n               <p>Create auth challenge</p>\n            </li>\n            <li>\n               <p>Verify auth challenge response</p>\n            </li>\n         </ul>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your AdminRespondToAuthChallenge request. In your function code in Lambda, you can\n            process the <code>clientMetadata</code> value to enhance your workflow for your specific\n            needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -3609,7 +3707,7 @@
                 "SoftwareTokenMfaSettings": {
                     "target": "com.amazonaws.cognitoidentityprovider#SoftwareTokenMfaSettingsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>User preferences for time-based one-time password (TOTP) MFA. Activates or deactivates\n            TOTP MFA and sets it as the preferred MFA method when multiple methods are available.\n            This operation can set TOTP as a user's preferred MFA method before they register a\n            TOTP authenticator.</p>"
+                        "smithy.api#documentation": "<p>User preferences for time-based one-time password (TOTP) MFA. Activates or deactivates\n            TOTP MFA and sets it as the preferred MFA method when multiple methods are\n            available.</p>"
                     }
                 },
                 "EmailMfaSettings": {
@@ -4029,7 +4127,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool\n            triggers. When you use the AdminUpdateUserAttributes API action, Amazon Cognito invokes the\n            function that is assigned to the <i>custom message</i> trigger. When Amazon Cognito\n            invokes this function, it passes a JSON payload, which the function receives as input.\n            This payload contains a <code>clientMetadata</code> attribute, which provides the data\n            that you assigned to the ClientMetadata parameter in your AdminUpdateUserAttributes\n            request. In your function code in Lambda, you can process the\n                <code>clientMetadata</code> value to enhance your workflow for your specific\n            needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -4618,7 +4716,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r ]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AttributeType": {
@@ -4627,7 +4725,7 @@
                 "Name": {
                     "target": "com.amazonaws.cognitoidentityprovider#AttributeNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute.</p>",
+                        "smithy.api#documentation": "<p>The name of the attribute, for example <code>email</code> or\n                <code>custom:department</code>.</p>\n         <p>In some older user pools, the regex pattern for acceptable values of this parameter is\n                <code>[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+</code>. Older pools will eventually be updated to\n            use the new pattern. Affected user pools are those created before May 2024 in\n            US East (N. Virginia), US East (Ohio), US West (N. California), US West (Oregon),\n            Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Seoul),\n            Asia Pacific (Singapore), Asia Pacific (Sydney), Canada (Central),\n            Europe (Frankfurt), Europe (Ireland), Europe (London), Europe (Paris),\n            Europe (Stockholm), Middle East (Bahrain), and South America (São Paulo). </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5232,11 +5330,55 @@
                 }
             }
         },
-        "com.amazonaws.cognitoidentityprovider#ClientSecretType": {
+        "com.amazonaws.cognitoidentityprovider#ClientSecretDescriptorListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentityprovider#ClientSecretDescriptorType"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a client secret for list operations. This type excludes the actual secret value for security reasons.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ClientSecretDescriptorType": {
+            "type": "structure",
+            "members": {
+                "ClientSecretId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSecretIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the client secret. This identifier follows the format <client-id>--<epoch-create-time>.</p>"
+                    }
+                },
+                "ClientSecretValue": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSecretType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actual secret value. This is only returned when creating a new secret and only if Amazon Cognito generated the secret. For custom secrets that you provide, this field is not included in the response.</p>"
+                    }
+                },
+                "ClientSecretCreateDate": {
+                    "target": "com.amazonaws.cognitoidentityprovider#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the client secret was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a client secret, including its unique identifier, value, and creation timestamp.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ClientSecretIdType": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ClientSecretType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 24,
                     "max": 64
                 },
                 "smithy.api#pattern": "^[\\w+]+$",
@@ -5367,6 +5509,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
@@ -5744,7 +5889,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool triggers.\n            When you use the ConfirmForgotPassword API action, Amazon Cognito invokes the function that is\n            assigned to the <i>post confirmation</i> trigger. When Amazon Cognito invokes this\n            function, it passes a JSON payload, which the function receives as input. This payload\n            contains a <code>clientMetadata</code> attribute, which provides the data that you\n            assigned to the ClientMetadata parameter in your ConfirmForgotPassword request. In your\n            function code in Lambda, you can process the <code>clientMetadata</code> value to\n            enhance your workflow for your specific needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -5874,7 +6019,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool\n            triggers. When you use the ConfirmSignUp API action, Amazon Cognito invokes the function that is\n            assigned to the <i>post confirmation</i> trigger. When Amazon Cognito invokes this\n            function, it passes a JSON payload, which the function receives as input. This payload\n            contains a <code>clientMetadata</code> attribute, which provides the data that you\n            assigned to the ClientMetadata parameter in your ConfirmSignUp request. In your function\n            code in Lambda, you can process the <code>clientMetadata</code> value to\n            enhance your workflow for your specific needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "Session": {
@@ -7195,6 +7340,12 @@
                         "smithy.api#documentation": "<p>When <code>true</code>, generates a client secret for the app client. Client secrets\n            are used with server-side and machine-to-machine applications. Client secrets are\n            automatically generated; you can't specify a secret value. For more information,\n            see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html#user-pool-settings-client-app-client-types\">App client types</a>.</p>"
                     }
                 },
+                "ClientSecret": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSecretType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom client secret that you want to use for the app client. You cannot specify both GenerateSecret as true and provide a ClientSecret value.</p>"
+                    }
+                },
                 "RefreshTokenValidity": {
                     "target": "com.amazonaws.cognitoidentityprovider#RefreshTokenValidityType",
                     "traits": {
@@ -7247,7 +7398,7 @@
                 "CallbackURLs": {
                     "target": "com.amazonaws.cognitoidentityprovider#CallbackURLsListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of allowed redirect, or callback, URLs for managed login authentication. These\n            URLs are the paths where you want to send your users' browsers after they complete\n            authentication with managed login or a third-party IdP. Typically, callback URLs are the\n            home of an application that uses OAuth or OIDC libraries to process authentication\n            outcomes.</p>\n         <p>A redirect URI must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Be an absolute URI.</p>\n            </li>\n            <li>\n               <p>Be registered with the authorization server. Amazon Cognito doesn't accept\n                    authorization requests with <code>redirect_uri</code> values that aren't in\n                    the list of <code>CallbackURLs</code> that you provide in this parameter.</p>\n            </li>\n            <li>\n               <p>Not include a fragment component.</p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://tools.ietf.org/html/rfc6749#section-3.1.2\">OAuth 2.0 -\n                Redirection Endpoint</a>.</p>\n         <p>Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes\n            only.</p>\n         <p>App callback URLs such as myapp://example are also supported.</p>"
+                        "smithy.api#documentation": "<p>A list of allowed redirect, or callback, URLs for managed login authentication. These\n            URLs are the paths where you want to send your users' browsers after they complete\n            authentication with managed login or a third-party IdP. Typically, callback URLs are the\n            home of an application that uses OAuth or OIDC libraries to process authentication\n            outcomes.</p>\n         <p>A redirect URI must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Be an absolute URI.</p>\n            </li>\n            <li>\n               <p>Be registered with the authorization server. Amazon Cognito doesn't accept\n                    authorization requests with <code>redirect_uri</code> values that aren't in\n                    the list of <code>CallbackURLs</code> that you provide in this parameter.</p>\n            </li>\n            <li>\n               <p>Not include a fragment component.</p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://tools.ietf.org/html/rfc6749#section-3.1.2\">OAuth 2.0 -\n                Redirection Endpoint</a>.</p>\n         <p>Amazon Cognito requires HTTPS over HTTP except for callback URLs to\n                <code>http://localhost</code>, <code>http://127.0.0.1</code> and\n                <code>http://[::1]</code>. These callback URLs are for testing purposes only. You\n            can specify custom TCP ports for your callback URLs.</p>\n         <p>App callback URLs such as <code>myapp://example</code> are also supported.</p>"
                     }
                 },
                 "LogoutURLs": {
@@ -8190,6 +8341,73 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientSecret": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientSecretRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientSecretResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a specific client secret from a user pool app client. You cannot delete the last remaining secret for an app client.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientSecretRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the app client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client from which you want to delete the secret.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientSecretId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSecretIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the client secret you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request to delete a specific client secret from a user pool app client.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientSecretResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The response from deleting a client secret.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#DeleteUserPoolDomain": {
             "type": "operation",
             "input": {
@@ -8303,6 +8521,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -10062,7 +10283,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool\n            triggers. When you use the ForgotPassword API action, Amazon Cognito invokes any\n            functions that are assigned to the following triggers: <i>pre sign-up</i>,\n                <i>custom message</i>, and <i>user migration</i>. When\n            Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute, which provides the data that you assigned to the ClientMetadata parameter in\n            your ForgotPassword request. In your function code in Lambda, you can\n            process the <code>clientMetadata</code> value to enhance your workflow for your specific\n            needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -10566,7 +10787,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for certain custom\n            workflows that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool triggers.\n            When you use the <code>GetTokensFromRefreshToken</code> API action, Amazon Cognito invokes the\n            Lambda function the pre token generation trigger.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -10780,7 +11001,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool\n            triggers. When you use the GetUserAttributeVerificationCode API action, Amazon Cognito invokes\n            the function that is assigned to the <i>custom message</i> trigger. When\n            Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as\n            input. This payload contains a <code>clientMetadata</code> attribute, which provides the\n            data that you assigned to the ClientMetadata parameter in your\n            GetUserAttributeVerificationCode request. In your function code in Lambda, you can process the <code>clientMetadata</code> value to enhance your workflow for\n            your specific needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -11501,7 +11722,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for certain custom\n            workflows that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool triggers.\n            When you send an <code>InitiateAuth</code> request, Amazon Cognito invokes the Lambda functions\n            that are specified for various triggers. The <code>ClientMetadata</code> value is passed\n            as input to the functions for only the following triggers.</p>\n         <ul>\n            <li>\n               <p>Pre sign-up</p>\n            </li>\n            <li>\n               <p>Pre authentication</p>\n            </li>\n            <li>\n               <p>User migration</p>\n            </li>\n         </ul>\n         <p>When Amazon Cognito invokes the functions for these triggers, it passes a JSON payload as input\n            to the function. This payload contains a <code>validationData</code> attribute with the\n            data that you assigned to the <code>ClientMetadata</code> parameter in your\n                <code>InitiateAuth</code> request. In your function, <code>validationData</code> can\n            contribute to operations that require data that isn't in the default\n            payload.</p>\n         <p>\n            <code>InitiateAuth</code> requests invokes the following triggers without\n                <code>ClientMetadata</code> as input.</p>\n         <ul>\n            <li>\n               <p>Post authentication</p>\n            </li>\n            <li>\n               <p>Custom message</p>\n            </li>\n            <li>\n               <p>Pre token generation</p>\n            </li>\n            <li>\n               <p>Create auth challenge</p>\n            </li>\n            <li>\n               <p>Define auth challenge</p>\n            </li>\n            <li>\n               <p>Custom email sender</p>\n            </li>\n            <li>\n               <p>Custom SMS sender</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <p>The <code>ClientMetadata</code> value is passed as input to the functions for only the\n            following triggers:</p>\n         <ul>\n            <li>\n               <p>Pre signup</p>\n            </li>\n            <li>\n               <p>Pre authentication</p>\n            </li>\n            <li>\n               <p>User migration</p>\n            </li>\n         </ul>\n         <p>This request also invokes the functions for the following triggers, but doesn't pass\n            <code>ClientMetadata</code>:</p>\n         <ul>\n            <li>\n               <p>Post authentication</p>\n            </li>\n            <li>\n               <p>Custom message</p>\n            </li>\n            <li>\n               <p>Pre token generation</p>\n            </li>\n            <li>\n               <p>Create auth challenge</p>\n            </li>\n            <li>\n               <p>Define auth challenge</p>\n            </li>\n            <li>\n               <p>Custom email sender</p>\n            </li>\n            <li>\n               <p>Custom SMS sender</p>\n            </li>\n         </ul>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "ClientId": {
@@ -11592,6 +11813,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>This exception is thrown when Amazon Cognito encounters an internal error.</p>",
+                "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentityprovider#MessageType"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This exception is thrown when Amazon Cognito encounters an internal server error.</p>",
                 "smithy.api#error": "server"
             }
         },
@@ -12464,6 +12697,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#ListUserPoolClientSecrets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#ListUserPoolClientSecretsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#ListUserPoolClientSecretsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all client secrets associated with a user pool app client. Returns metadata about the secrets. The response does not include pagination tokens as there are only 2 secrets at any given time and we return both with every ListUserPoolClientSecrets call. For security reasons, the response never reveals the actual secret value in ClientSecretValue.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ListUserPoolClientSecretsRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the app client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client whose secrets you want to list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This API operation returns a limited number of results. The pagination token is\nan identifier that you can present in an additional API request with the same parameters. When\nyou include the pagination token, Amazon Cognito returns the next set of items after the current list. \nSubsequent requests return a new pagination token. By use of this token, you can paginate \nthrough the full list of items.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request to list client secrets for a user pool app client.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ListUserPoolClientSecretsResponse": {
+            "type": "structure",
+            "members": {
+                "ClientSecrets": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSecretDescriptorListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of client secret descriptors containing the identifier and creation date for each secret. For security reasons, the response never reveals the actual secret value in ClientSecretValue.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier that Amazon Cognito returned with the previous request to this operation. When \nyou include a pagination token in your request, Amazon Cognito returns the next set of items in \nthe list. By use of this token, you can paginate through the full list of items.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response containing the list of client secret metadata. This response does not include a NextToken field as all secrets are returned in a single response.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#ListUserPoolClients": {
             "type": "operation",
             "input": {
@@ -12664,7 +12976,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Given a user pool ID, returns a list of users and their basic details in a user\n            pool.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Given a user pool ID, returns a list of users and their basic details in a user\n            pool.</p>\n         <p>This operation is eventually consistent. You might experience a delay before results\n            are up-to-date. To validate the existence or configuration of an individual user, use\n                <code>AdminGetUser</code>.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "A ListUsers request for the next 3 users whose email address starts with \"testuser.\"",
@@ -12800,7 +13112,7 @@
                 "Limit": {
                     "target": "com.amazonaws.cognitoidentityprovider#QueryLimitType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of groups that you want Amazon Cognito to return in the response.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of groups that you want Amazon Cognito to return in the response. In some\n            SDK contexts, this operation might return fewer items than you specify in the\n                <code>Limit</code> parameter without having reached the end of the full list. If the\n            response contains a <code>PaginationToken</code>, then there are more results.</p>"
                     }
                 },
                 "NextToken": {
@@ -12853,7 +13165,7 @@
                 "Limit": {
                     "target": "com.amazonaws.cognitoidentityprovider#QueryLimitType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of users that you want Amazon Cognito to return in the response.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of users that you want Amazon Cognito to return in the response. In some SDK\n            contexts, this operation might return fewer items than you specify in the\n                <code>Limit</code> parameter without having reached the end of the full list. If the\n            response contains a <code>PaginationToken</code>, then there are more results.</p>"
                     }
                 },
                 "PaginationToken": {
@@ -12880,7 +13192,7 @@
                 "Users": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsersListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of user pool users who match your query, and their attributes.</p>"
+                        "smithy.api#documentation": "<p>An array of user pool users who match your query, and their attributes. Between\n            different requests, you might observe variations in the sequence that users in this\n            response object are sorted into. The sort order of users isn't guaranteed to follow a\n            single pattern, but the paginated list from a single chain of requests won't return\n            duplicates.</p>"
                     }
                 },
                 "PaginationToken": {
@@ -12918,6 +13230,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
@@ -13292,7 +13607,7 @@
                 "ReplyTo": {
                     "target": "com.amazonaws.cognitoidentityprovider#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reply-to email address of an email template.</p>"
+                        "smithy.api#documentation": "<p>The reply-to email address of an email template. Can be an email address in the format\n                <code>admin@example.com</code> or <code>Administrator\n                <admin@example.com></code>.</p>"
                     }
                 },
                 "SourceArn": {
@@ -13997,7 +14312,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool triggers.\n            When you use the ResendConfirmationCode API action, Amazon Cognito invokes the function that is\n            assigned to the <i>custom message</i> trigger. When Amazon Cognito invokes this\n            function, it passes a JSON payload, which the function receives as input. This payload\n            contains a <code>clientMetadata</code> attribute, which provides the data that you\n            assigned to the ClientMetadata parameter in your ResendConfirmationCode request. In your\n            function code in Lambda, you can process the <code>clientMetadata</code> value to enhance\n            your workflow for your specific needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -14287,7 +14602,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool\n            triggers. When you use the RespondToAuthChallenge API action, Amazon Cognito invokes any\n            functions that are assigned to the following triggers: <i>post\n                authentication</i>, <i>pre token generation</i>,\n                <i>define auth challenge</i>, <i>create auth\n                challenge</i>, and <i>verify auth challenge</i>. When Amazon Cognito\n            invokes any of these functions, it passes a JSON payload, which the function receives as\n            input. This payload contains a <code>clientMetadata</code> attribute, which provides the\n            data that you assigned to the ClientMetadata parameter in your RespondToAuthChallenge\n            request. In your function code in Lambda, you can process the\n                <code>clientMetadata</code> value to enhance your workflow for your specific\n            needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -15378,7 +15693,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers.</p>\n         <p>You create custom workflows by assigning Lambda functions to user pool triggers.\n            When you use the SignUp API action, Amazon Cognito invokes any functions that are assigned to the\n            following triggers: <i>pre sign-up</i>, <i>custom\n                message</i>, and <i>post confirmation</i>. When Amazon Cognito invokes\n            any of these functions, it passes a JSON payload, which the function receives as input.\n            This payload contains a <code>clientMetadata</code> attribute, which provides the data\n            that you assigned to the ClientMetadata parameter in your SignUp request. In your\n            function code in Lambda, you can process the <code>clientMetadata</code> value to enhance\n            your workflow for your specific needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -15656,6 +15971,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
@@ -16055,7 +16373,7 @@
                 "Links": {
                     "target": "com.amazonaws.cognitoidentityprovider#LinksType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of URLs to languages. For each localized language that will view the requested\n            <code>TermsName</code>, assign a URL. A selection of <code>cognito:default</code>\n            displays for all languages that don't have a language-specific URL.</p>\n         <p>For example, <code>\"cognito:default\": \"https://terms.example.com\", \"cognito:spanish\":\n                \"https://terms.example.com/es\"</code>.</p>",
+                        "smithy.api#documentation": "<p>A map of URLs to languages. For each localized language that will view the requested\n                <code>TermsName</code>, assign a URL. A selection of <code>cognito:default</code>\n            displays for all languages that don't have a language-specific URL.</p>\n         <p>For example, <code>\"cognito:default\": \"https://terms.example.com\", \"cognito:spanish\":\n                \"https://terms.example.com/es\"</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17072,7 +17390,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action initiates. </p>\n         <p>You create custom workflows by assigning Lambda functions to user pool triggers. When\n            you use the UpdateUserAttributes API action, Amazon Cognito invokes the function that is assigned\n            to the <i>custom message</i> trigger. When Amazon Cognito invokes this function, it\n            passes a JSON payload, which the function receives as input. This payload contains a\n                <code>clientMetadata</code> attribute, which provides the data that you assigned to\n            the ClientMetadata parameter in your UpdateUserAttributes request. In your function code\n            in Lambda, you can process the <code>clientMetadata</code> value to enhance your workflow\n            for your specific needs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">\nUsing Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -17146,7 +17464,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the configuration of a user pool. To avoid setting parameters to Amazon Cognito\n            defaults, construct this API request to pass the existing configuration of your user\n            pool, modified to include the changes that you want to make.</p>\n         <important>\n            <p>If you don't provide a value for an attribute, Amazon Cognito sets it to its default value.</p>\n         </important>\n         <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers\n            require you to register an origination phone number before you can send SMS messages\n            to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a\n            phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>.\n            Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must\n            receive SMS messages might not be able to sign up, activate their accounts, or sign\n            in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Services service,\n            Amazon Simple Notification Service might place your account in the SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you can send messages only to verified phone\n            numbers. After you test your app while in the sandbox environment, you can move out\n            of the sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html\"> SMS message settings for Amazon Cognito user pools</a> in the <i>Amazon Cognito\n                Developer Guide</i>.</p>\n         </note>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Updates the configuration of a user pool. To avoid setting parameters to Amazon Cognito\n            defaults, construct this API request to pass the existing configuration of your user\n            pool, modified to include the changes that you want to make.</p>\n         <important>\n            <p>With the exception of <code>UserPoolTier</code>, if you don't provide a value for an attribute, Amazon Cognito sets it to its default value.</p>\n         </important>\n         <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers\n            require you to register an origination phone number before you can send SMS messages\n            to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a\n            phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>.\n            Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must\n            receive SMS messages might not be able to sign up, activate their accounts, or sign\n            in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Services service,\n            Amazon Simple Notification Service might place your account in the SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you can send messages only to verified phone\n            numbers. After you test your app while in the sandbox environment, you can move out\n            of the sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html\"> SMS message settings for Amazon Cognito user pools</a> in the <i>Amazon Cognito\n                Developer Guide</i>.</p>\n         </note>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#UpdateUserPoolClient": {
@@ -18036,7 +18354,7 @@
                 "CallbackURLs": {
                     "target": "com.amazonaws.cognitoidentityprovider#CallbackURLsListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of allowed redirect (callback) URLs for the IdPs.</p>\n         <p>A redirect URI must:</p>\n         <ul>\n            <li>\n               <p>Be an absolute URI.</p>\n            </li>\n            <li>\n               <p>Be registered with the authorization server.</p>\n            </li>\n            <li>\n               <p>Not include a fragment component.</p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://tools.ietf.org/html/rfc6749#section-3.1.2\">OAuth 2.0 -\n                Redirection Endpoint</a>.</p>\n         <p>Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes\n            only.</p>\n         <p>App callback URLs such as myapp://example are also supported.</p>"
+                        "smithy.api#documentation": "<p>A list of allowed redirect (callback) URLs for the IdPs.</p>\n         <p>A redirect URI must:</p>\n         <ul>\n            <li>\n               <p>Be an absolute URI.</p>\n            </li>\n            <li>\n               <p>Be registered with the authorization server.</p>\n            </li>\n            <li>\n               <p>Not include a fragment component.</p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://tools.ietf.org/html/rfc6749#section-3.1.2\">OAuth 2.0 -\n                Redirection Endpoint</a>.</p>\n         <p>Amazon Cognito requires HTTPS over HTTP for callback URLs to <code>http://localhost</code>,\n                <code>http://127.0.0.1</code> and <code>http://[::1]</code>. These callback URLs are\n            for testing purposes only. You can specify custom TCP ports for your callback\n            URLs.</p>\n         <p>App callback URLs such as myapp://example are also supported.</p>"
                     }
                 },
                 "LogoutURLs": {
@@ -18048,7 +18366,7 @@
                 "DefaultRedirectURI": {
                     "target": "com.amazonaws.cognitoidentityprovider#RedirectUrlType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default redirect URI. Must be in the <code>CallbackURLs</code> list.</p>\n         <p>A redirect URI must:</p>\n         <ul>\n            <li>\n               <p>Be an absolute URI.</p>\n            </li>\n            <li>\n               <p>Be registered with the authorization server.</p>\n            </li>\n            <li>\n               <p>Not include a fragment component.</p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://tools.ietf.org/html/rfc6749#section-3.1.2\">OAuth 2.0 -\n                Redirection Endpoint</a>.</p>\n         <p>Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes\n            only.</p>\n         <p>App callback URLs such as myapp://example are also supported.</p>"
+                        "smithy.api#documentation": "<p>The default redirect URI. Must be in the <code>CallbackURLs</code> list.</p>\n         <p>A redirect URI must:</p>\n         <ul>\n            <li>\n               <p>Be an absolute URI.</p>\n            </li>\n            <li>\n               <p>Be registered with the authorization server.</p>\n            </li>\n            <li>\n               <p>Not include a fragment component.</p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://tools.ietf.org/html/rfc6749#section-3.1.2\">OAuth 2.0 -\n                Redirection Endpoint</a>.</p>\n         <p>Amazon Cognito requires HTTPS over HTTP for callback URLs to <code>http://localhost</code>,\n                <code>http://127.0.0.1</code> and <code>http://[::1]</code>. These callback URLs are\n            for testing purposes only. You can specify custom TCP ports for your callback\n            URLs.</p>\n         <p>App callback URLs such as myapp://example are also supported.</p>"
                     }
                 },
                 "AllowedOAuthFlows": {

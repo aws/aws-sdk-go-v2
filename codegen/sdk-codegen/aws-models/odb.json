@@ -3115,6 +3115,12 @@
                         "smithy.api#documentation": "<p>A list of CIDR blocks to add to the peering connection. These CIDR blocks define the IP address ranges that can communicate through the peering connection.</p>"
                     }
                 },
+                "peerNetworkRouteTableIds": {
+                    "target": "com.amazonaws.odb#PeerNetworkRouteTableIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.odb#GeneralInputString",
                     "traits": {
@@ -8475,6 +8481,24 @@
                     "traits": {
                         "smithy.api#enumValue": "NONROLLING"
                     }
+                }
+            }
+        },
+        "com.amazonaws.odb#PeerNetworkRouteTableId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^rtb-[a-z0-9]{8,17}$"
+            }
+        },
+        "com.amazonaws.odb#PeerNetworkRouteTableIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#PeerNetworkRouteTableId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
                 }
             }
         },
