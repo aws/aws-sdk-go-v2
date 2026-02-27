@@ -160,7 +160,7 @@ gen-mod-replace-smithy-%:
 	@# e.g. gen-mod-replace-smithy-service_ssooidc
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst gen-mod-replace-smithy-,,$@)) ${EACHMODULE_FLAGS} \
-			"go mod edit -replace github.com/aws/smithy-go=${SMITHY_GO_SRC}"
+			"go mod edit -replace github.com/aws/smithy-go=${SMITHY_GO_SRC} -replace github.com/aws/smithy-go/aws-protocols=${SMITHY_GO_SRC}/aws-protocols"
 
 gen-mod-dropreplace-smithy-%:
 	@# See suffix-to-path pattern. Defines build filter for modules to add `-dropreplace` to
