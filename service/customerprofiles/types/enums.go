@@ -1213,6 +1213,8 @@ const (
 	StandardIdentifierProfile             StandardIdentifier = "PROFILE"
 	StandardIdentifierAsset               StandardIdentifier = "ASSET"
 	StandardIdentifierCase                StandardIdentifier = "CASE"
+	StandardIdentifierDevice              StandardIdentifier = "DEVICE"
+	StandardIdentifierWebAnalytics        StandardIdentifier = "WEB_ANALYTICS"
 	StandardIdentifierOrder               StandardIdentifier = "ORDER"
 	StandardIdentifierCommunicationRecord StandardIdentifier = "COMMUNICATION_RECORD"
 	StandardIdentifierAirPreference       StandardIdentifier = "AIR_PREFERENCE"
@@ -1239,6 +1241,8 @@ func (StandardIdentifier) Values() []StandardIdentifier {
 		"PROFILE",
 		"ASSET",
 		"CASE",
+		"DEVICE",
+		"WEB_ANALYTICS",
 		"ORDER",
 		"COMMUNICATION_RECORD",
 		"AIR_PREFERENCE",

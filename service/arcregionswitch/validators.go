@@ -815,6 +815,16 @@ func validateExecutionBlockConfiguration(v types.ExecutionBlockConfiguration) er
 			invalidParams.AddNested("[parallelConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig:
+		if err := validateRdsCreateCrossRegionReplicaConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[rdsCreateCrossRegionReadReplicaConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig:
+		if err := validateRdsPromoteReadReplicaConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[rdsPromoteReadReplicaConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ExecutionBlockConfigurationMemberRegionSwitchPlanConfig:
 		if err := validateRegionSwitchPlanConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[regionSwitchPlanConfig]", err.(smithy.InvalidParamsError))
@@ -935,6 +945,36 @@ func validateParallelExecutionBlockConfiguration(v *types.ParallelExecutionBlock
 		if err := validateSteps(v.Steps); err != nil {
 			invalidParams.AddNested("Steps", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRdsCreateCrossRegionReplicaConfiguration(v *types.RdsCreateCrossRegionReplicaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RdsCreateCrossRegionReplicaConfiguration"}
+	if v.DbInstanceArnMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbInstanceArnMap"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRdsPromoteReadReplicaConfiguration(v *types.RdsPromoteReadReplicaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RdsPromoteReadReplicaConfiguration"}
+	if v.DbInstanceArnMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbInstanceArnMap"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

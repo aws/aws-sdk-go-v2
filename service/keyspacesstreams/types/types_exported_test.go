@@ -35,6 +35,9 @@ func ExampleKeyspacesCellValue_outputUsage() {
 	case *types.KeyspacesCellValueMemberDoubleT:
 		_ = v.Value // Value is string
 
+	case *types.KeyspacesCellValueMemberDurationT:
+		_ = v.Value // Value is string
+
 	case *types.KeyspacesCellValueMemberFloatT:
 		_ = v.Value // Value is string
 

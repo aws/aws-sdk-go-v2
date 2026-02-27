@@ -1,0 +1,8 @@
+{
+    "id": "8db66824-93d9-4865-be7a-92bc5be56a66",
+    "type": "feature",
+    "description": "Added support for Change Data Capture (CDC) streams with Duration DataType.",
+    "modules": [
+        "service/keyspacesstreams"
+    ]
+}

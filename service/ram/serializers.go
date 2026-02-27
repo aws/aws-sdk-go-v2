@@ -612,6 +612,13 @@ func awsRestjson1_serializeOpDocumentCreateResourceShareInput(v *CreateResourceS
 		}
 	}
 
+	if v.ResourceShareConfiguration != nil {
+		ok := object.Key("resourceShareConfiguration")
+		if err := awsRestjson1_serializeDocumentResourceShareConfiguration(v.ResourceShareConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Sources != nil {
 		ok := object.Key("sources")
 		if err := awsRestjson1_serializeDocumentSourceArnOrAccountList(v.Sources, ok); err != nil {
@@ -3407,6 +3414,18 @@ func awsRestjson1_serializeDocumentResourceShareArnList(v []string, value smithy
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceShareConfiguration(v *types.ResourceShareConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RetainSharingOnAccountLeaveOrganization != nil {
+		ok := object.Key("retainSharingOnAccountLeaveOrganization")
+		ok.Boolean(*v.RetainSharingOnAccountLeaveOrganization)
+	}
+
 	return nil
 }
 

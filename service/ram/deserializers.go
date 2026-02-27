@@ -8738,6 +8738,11 @@ func awsRestjson1_deserializeDocumentResourceShare(v **types.ResourceShare, valu
 				sv.ResourceShareArn = ptr.String(jtv)
 			}
 
+		case "resourceShareConfiguration":
+			if err := awsRestjson1_deserializeDocumentResourceShareConfiguration(&sv.ResourceShareConfiguration, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8927,6 +8932,46 @@ func awsRestjson1_deserializeDocumentResourceShareAssociationList(v *[]types.Res
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceShareConfiguration(v **types.ResourceShareConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourceShareConfiguration
+	if *v == nil {
+		sv = &types.ResourceShareConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "retainSharingOnAccountLeaveOrganization":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RetainSharingOnAccountLeaveOrganization = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

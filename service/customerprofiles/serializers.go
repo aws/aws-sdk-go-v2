@@ -8083,6 +8083,11 @@ func awsRestjson1_serializeOpDocumentPutProfileObjectTypeInput(v *PutProfileObje
 		ok.String(*v.SourceLastUpdatedTimestampFormat)
 	}
 
+	if v.SourcePriority != nil {
+		ok := object.Key("SourcePriority")
+		ok.Integer(*v.SourcePriority)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {

@@ -8516,6 +8516,19 @@ func awsRestjson1_deserializeOpDocumentGetProfileObjectTypeOutput(v **GetProfile
 				sv.SourceLastUpdatedTimestampFormat = ptr.String(jtv)
 			}
 
+		case "SourcePriority":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected minSize1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SourcePriority = ptr.Int32(int32(i64))
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
@@ -16425,6 +16438,19 @@ func awsRestjson1_deserializeOpDocumentPutProfileObjectTypeOutput(v **PutProfile
 					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
 				}
 				sv.SourceLastUpdatedTimestampFormat = ptr.String(jtv)
+			}
+
+		case "SourcePriority":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected minSize1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SourcePriority = ptr.Int32(int32(i64))
 			}
 
 		case "Tags":
@@ -24459,6 +24485,19 @@ func awsRestjson1_deserializeDocumentListProfileObjectTypeItem(v **types.ListPro
 					return fmt.Errorf("expected typeName to be of type string, got %T instead", value)
 				}
 				sv.ObjectTypeName = ptr.String(jtv)
+			}
+
+		case "SourcePriority":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected minSize1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SourcePriority = ptr.Int32(int32(i64))
 			}
 
 		case "Tags":

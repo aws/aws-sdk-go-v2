@@ -58,6 +58,10 @@ type CreateOdbPeeringConnectionInput struct {
 	// connection.
 	PeerNetworkCidrsToBeAdded []string
 
+	// The unique identifier of the VPC route table for which a route to the ODB
+	// network is automatically created during peering connection establishment.
+	PeerNetworkRouteTableIds []string
+
 	// The tags to assign to the ODB peering connection.
 	Tags map[string]string
 

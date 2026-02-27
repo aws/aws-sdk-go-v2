@@ -1928,6 +1928,11 @@ func awsRestjson1_serializeOpDocumentCreateModelInvocationJobInput(v *CreateMode
 		ok.String(*v.ModelId)
 	}
 
+	if len(v.ModelInvocationType) > 0 {
+		ok := object.Key("modelInvocationType")
+		ok.String(string(v.ModelInvocationType))
+	}
+
 	if v.OutputDataConfig != nil {
 		ok := object.Key("outputDataConfig")
 		if err := awsRestjson1_serializeDocumentModelInvocationJobOutputDataConfig(v.OutputDataConfig, ok); err != nil {

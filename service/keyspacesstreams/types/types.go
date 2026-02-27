@@ -52,6 +52,7 @@ type KeyspacesCellMapDefinition struct {
 //	KeyspacesCellValueMemberDateT
 //	KeyspacesCellValueMemberDecimalT
 //	KeyspacesCellValueMemberDoubleT
+//	KeyspacesCellValueMemberDurationT
 //	KeyspacesCellValueMemberFloatT
 //	KeyspacesCellValueMemberInetT
 //	KeyspacesCellValueMemberIntT
@@ -145,6 +146,16 @@ type KeyspacesCellValueMemberDoubleT struct {
 }
 
 func (*KeyspacesCellValueMemberDoubleT) isKeyspacesCellValue() {}
+
+// A duration value with nanosecond precision, representing a period of time
+// encoded as 32-bit months, 32-bit days, and 64-bit nanoseconds.
+type KeyspacesCellValueMemberDurationT struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*KeyspacesCellValueMemberDurationT) isKeyspacesCellValue() {}
 
 // A 32-bit single-precision floating point value.
 type KeyspacesCellValueMemberFloatT struct {
@@ -293,7 +304,7 @@ type KeyspacesCellValueMemberVarcharT struct {
 
 func (*KeyspacesCellValueMemberVarcharT) isKeyspacesCellValue() {}
 
-// A variable precision integer value with arbitrary length.
+// An integer value within the +/-10^38 range.
 type KeyspacesCellValueMemberVarintT struct {
 	Value string
 

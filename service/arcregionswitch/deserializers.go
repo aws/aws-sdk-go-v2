@@ -1393,6 +1393,17 @@ func deserializeCBOR_AbbreviatedExecution(v smithycbor.Value) (*types.Abbreviate
 			ds.ExecutionRegion = ptr.String(dv)
 		}
 
+		if key == "recoveryExecutionId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.RecoveryExecutionId = ptr.String(dv)
+		}
+
 		if key == "actualRecoveryTime" {
 			if _, ok := sv.(*smithycbor.Nil); ok {
 				continue
@@ -2597,6 +2608,28 @@ func deserializeCBOR_ExecutionBlockConfiguration(v smithycbor.Value) (types.Exec
 			}
 			return &types.ExecutionBlockConfigurationMemberDocumentDbConfig{Value: *dv}, nil
 		}
+
+		if key == "rdsPromoteReadReplicaConfig" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RdsPromoteReadReplicaConfiguration(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig{Value: *dv}, nil
+		}
+
+		if key == "rdsCreateCrossRegionReadReplicaConfig" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RdsCreateCrossRegionReplicaConfiguration(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig{Value: *dv}, nil
+		}
 	}
 	return nil, fmt.Errorf("unrecognized variant")
 }
@@ -3496,6 +3529,133 @@ func deserializeCBOR_PlanWarnings(v smithycbor.Value) ([]types.ResourceWarning, 
 		dl = append(dl, *di)
 	}
 	return dl, nil
+}
+
+func deserializeCBOR_RdsCreateCrossRegionReplicaConfiguration(v smithycbor.Value) (*types.RdsCreateCrossRegionReplicaConfiguration, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.RdsCreateCrossRegionReplicaConfiguration{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "timeoutMinutes" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TimeoutMinutes = ptr.Int32(dv)
+		}
+
+		if key == "crossAccountRole" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CrossAccountRole = ptr.String(dv)
+		}
+
+		if key == "externalId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ExternalId = ptr.String(dv)
+		}
+
+		if key == "dbInstanceArnMap" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RdsDbInstanceArnMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.DbInstanceArnMap = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_RdsDbInstanceArnMap(v smithycbor.Value) (map[string]string, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]string{}
+	for key, sv := range av {
+
+		dv, err := deserializeCBOR_String(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_RdsPromoteReadReplicaConfiguration(v smithycbor.Value) (*types.RdsPromoteReadReplicaConfiguration, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.RdsPromoteReadReplicaConfiguration{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "timeoutMinutes" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TimeoutMinutes = ptr.Int32(dv)
+		}
+
+		if key == "crossAccountRole" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CrossAccountRole = ptr.String(dv)
+		}
+
+		if key == "externalId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ExternalId = ptr.String(dv)
+		}
+
+		if key == "dbInstanceArnMap" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RdsDbInstanceArnMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.DbInstanceArnMap = dv
+		}
+	}
+	return ds, nil
 }
 
 func deserializeCBOR_RecoveryApproach(v smithycbor.Value) (types.RecoveryApproach, error) {
@@ -4814,6 +4974,17 @@ func deserializeCBOR_GetPlanExecutionOutput(v smithycbor.Value) (*GetPlanExecuti
 				return nil, err
 			}
 			ds.ExecutionRegion = ptr.String(dv)
+		}
+
+		if key == "recoveryExecutionId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.RecoveryExecutionId = ptr.String(dv)
 		}
 
 		if key == "stepStates" {

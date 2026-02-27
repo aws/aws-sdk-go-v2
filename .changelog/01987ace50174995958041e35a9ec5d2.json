@@ -1,0 +1,8 @@
+{
+    "id": "01987ace-5017-4995-9580-41e35a9ec5d2",
+    "type": "feature",
+    "description": "Deprecate EvaluationReviewMetadata's CreatedBy and CreatedTime, add EvaluationReviewMetadata's RequestedBy and RequestedTime",
+    "modules": [
+        "service/connect"
+    ]
+}

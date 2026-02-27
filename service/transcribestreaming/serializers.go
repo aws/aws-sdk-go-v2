@@ -585,6 +585,11 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 		encoder.SetHeader(locationName).String(*v.SessionId)
 	}
 
+	if v.SessionResumeWindow != nil {
+		locationName := "X-Amzn-Transcribe-Session-Resume-Window"
+		encoder.SetHeader(locationName).Integer(*v.SessionResumeWindow)
+	}
+
 	if v.ShowSpeakerLabel {
 		locationName := "X-Amzn-Transcribe-Show-Speaker-Label"
 		encoder.SetHeader(locationName).Boolean(v.ShowSpeakerLabel)

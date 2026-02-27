@@ -9788,6 +9788,15 @@ func awsRestjson1_deserializeOpDocumentGetModelInvocationJobOutput(v **GetModelI
 				sv.ModelId = ptr.String(jtv)
 			}
 
+		case "modelInvocationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationType to be of type string, got %T instead", value)
+				}
+				sv.ModelInvocationType = types.ModelInvocationType(jtv)
+			}
+
 		case "outputDataConfig":
 			if err := awsRestjson1_deserializeDocumentModelInvocationJobOutputDataConfig(&sv.OutputDataConfig, value); err != nil {
 				return err
@@ -26507,6 +26516,58 @@ func awsRestjson1_deserializeDocumentFoundationModelLifecycle(v **types.Foundati
 
 	for key, value := range shape {
 		switch key {
+		case "endOfLifeTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.EndOfLifeTime = ptr.Time(t)
+			}
+
+		case "legacyTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LegacyTime = ptr.Time(t)
+			}
+
+		case "publicExtendedAccessTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.PublicExtendedAccessTime = ptr.Time(t)
+			}
+
+		case "startOfLifeTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StartOfLifeTime = ptr.Time(t)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -30840,6 +30901,15 @@ func awsRestjson1_deserializeDocumentModelInvocationJobSummary(v **types.ModelIn
 					return fmt.Errorf("expected ModelId to be of type string, got %T instead", value)
 				}
 				sv.ModelId = ptr.String(jtv)
+			}
+
+		case "modelInvocationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationType to be of type string, got %T instead", value)
+				}
+				sv.ModelInvocationType = types.ModelInvocationType(jtv)
 			}
 
 		case "outputDataConfig":

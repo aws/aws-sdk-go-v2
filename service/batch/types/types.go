@@ -557,6 +557,12 @@ type ComputeResource struct {
 	// [Placement groups]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
 	PlacementGroup *string
 
+	// The scaling policy configuration for the compute environment.
+	//
+	// This parameter isn't applicable to jobs that are running on Fargate resources.
+	// Don't specify it.
+	ScalingPolicy *ComputeScalingPolicy
+
 	// The Amazon EC2 security groups that are associated with instances launched in
 	// the compute environment. One or more security groups must be specified, either
 	// in securityGroupIds or using a launch template referenced in launchTemplate .
@@ -862,6 +868,12 @@ type ComputeResourceUpdate struct {
 	// [Placement groups]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
 	PlacementGroup *string
 
+	// The scaling policy configuration for the compute environment.
+	//
+	// This parameter isn't applicable to jobs that are running on Fargate resources.
+	// Don't specify it.
+	ScalingPolicy *ComputeScalingPolicy
+
 	// The Amazon EC2 security groups that are associated with instances launched in
 	// the compute environment. This parameter is required for Fargate compute
 	// resources, where it can contain up to 5 security groups. For Fargate compute
@@ -950,6 +962,29 @@ type ComputeResourceUpdate struct {
 	// [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
 	// [Updating the AMI ID]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html#updating-compute-environments-ami
 	UpdateToLatestImageVersion *bool
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents a scaling policy for a compute environment.
+type ComputeScalingPolicy struct {
+
+	// The minimum time (in minutes) that Batch keeps instances running in the compute
+	// environment after their jobs complete. For each instance, the delay period
+	// begins when the last job finishes. If no new jobs are placed on the instance
+	// during this delay, Batch terminates the instance once the delay expires.
+	//
+	// Valid Range: Minimum value of 20. Maximum value of 10080. Use 0 to unset and
+	// disable the scale down delay.
+	//
+	// The scale down delay does not apply to:
+	//
+	//   - Instances being replaced during infrastructure updates
+	//
+	//   - Newly launched instances that have not yet run any jobs
+	//
+	//   - Spot instances reclaimed due to interruption
+	MinScaleDownDelayMinutes *int32
 
 	noSmithyDocumentSerde
 }

@@ -74,6 +74,18 @@ func TestCheckSnapshot_AddCustomAttributes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AddUserPoolClientSecret(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddUserPoolClientSecret(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AddUserPoolClientSecret")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AdminAddUserToGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AdminAddUserToGroup(context.Background(), nil, func(o *Options) {
@@ -674,6 +686,18 @@ func TestCheckSnapshot_DeleteUserPoolClient(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteUserPoolClientSecret(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteUserPoolClientSecret(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteUserPoolClientSecret")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteUserPoolDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteUserPoolDomain(context.Background(), nil, func(o *Options) {
@@ -1106,6 +1130,18 @@ func TestCheckSnapshot_ListUserPoolClients(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListUserPoolClientSecrets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUserPoolClientSecrets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListUserPoolClientSecrets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListUserPools(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUserPools(context.Background(), nil, func(o *Options) {
@@ -1494,6 +1530,18 @@ func TestUpdateSnapshot_AddCustomAttributes(t *testing.T) {
 	_, err := svc.AddCustomAttributes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AddCustomAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AddUserPoolClientSecret(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddUserPoolClientSecret(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AddUserPoolClientSecret")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2101,6 +2149,18 @@ func TestUpdateSnapshot_DeleteUserPoolClient(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteUserPoolClientSecret(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteUserPoolClientSecret(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteUserPoolClientSecret")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteUserPoolDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteUserPoolDomain(context.Background(), nil, func(o *Options) {
@@ -2526,6 +2586,18 @@ func TestUpdateSnapshot_ListUserPoolClients(t *testing.T) {
 	_, err := svc.ListUserPoolClients(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListUserPoolClients")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListUserPoolClientSecrets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUserPoolClientSecrets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListUserPoolClientSecrets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -61,6 +61,11 @@ type StartPlanExecutionInput struct {
 	// in graceful mode, or ungraceful , for starting the execution in ungraceful mode.
 	Mode types.ExecutionMode
 
+	// The execution identifier of the recovery execution that ran in the opposite
+	// region post-recovery is ran in. Required when starting a post-recovery
+	// execution.
+	RecoveryExecutionId *string
+
 	noSmithyDocumentSerde
 }
 

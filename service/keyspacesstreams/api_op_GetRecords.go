@@ -35,16 +35,16 @@ type GetRecordsInput struct {
 
 	//  The unique identifier of the shard iterator. A shard iterator specifies the
 	// position in the shard from which you want to start reading data records
-	// sequentially. You obtain this value by calling the GetShardIterator operation.
+	// sequentially. You obtain this value by calling the GetShardIterator  operation.
 	// Each shard iterator is valid for 15 minutes after creation.
 	//
 	// This member is required.
 	ShardIterator *string
 
-	//  The maximum number of records to return in a single GetRecords request.
-	// Default value is 1000. You can specify a limit between 1 and 1000, but the
-	// actual number returned might be less than the specified maximum if the size of
-	// the data for the returned records exceeds the internal size limit.
+	//  The maximum number of records to return in a single GetRecords request. The
+	// default value is 100. You can specify a limit between 1 and 1000, but the actual
+	// number returned might be less than the specified maximum if the size of the data
+	// for the returned records exceeds the internal size limit.
 	MaxResults *int32
 
 	noSmithyDocumentSerde
@@ -59,7 +59,7 @@ type GetRecordsOutput struct {
 	ChangeRecords []types.Record
 
 	//  The next position in the shard from which to start sequentially reading data
-	// records. If null, the shard has been closed and the requested iterator doesn't
+	// records. If null, the shard has been closed and the requested iterator will not
 	// return any more data.
 	NextShardIterator *string
 

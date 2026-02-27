@@ -74,6 +74,9 @@ type CreateModelInvocationJobInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
 
+	// The invocation endpoint for ModelInvocationJob
+	ModelInvocationType types.ModelInvocationType
+
 	// Any tags to associate with the batch inference job. For more information, see [Tagging Amazon Bedrock resources].
 	//
 	// [Tagging Amazon Bedrock resources]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html

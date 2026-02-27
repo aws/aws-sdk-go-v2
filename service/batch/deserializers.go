@@ -6974,6 +6974,11 @@ func awsRestjson1_deserializeDocumentComputeResource(v **types.ComputeResource, 
 				sv.PlacementGroup = ptr.String(jtv)
 			}
 
+		case "scalingPolicy":
+			if err := awsRestjson1_deserializeDocumentComputeScalingPolicy(&sv.ScalingPolicy, value); err != nil {
+				return err
+			}
+
 		case "securityGroupIds":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.SecurityGroupIds, value); err != nil {
 				return err
@@ -7005,6 +7010,50 @@ func awsRestjson1_deserializeDocumentComputeResource(v **types.ComputeResource, 
 					return fmt.Errorf("expected CRType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.CRType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentComputeScalingPolicy(v **types.ComputeScalingPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComputeScalingPolicy
+	if *v == nil {
+		sv = &types.ComputeScalingPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "minScaleDownDelayMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinScaleDownDelayMinutes = ptr.Int32(int32(i64))
 			}
 
 		default:

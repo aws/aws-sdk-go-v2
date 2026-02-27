@@ -14,6 +14,10 @@ import (
 // Given a user pool ID, returns a list of users and their basic details in a user
 // pool.
 //
+// This operation is eventually consistent. You might experience a delay before
+// results are up-to-date. To validate the existence or configuration of an
+// individual user, use AdminGetUser .
+//
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
 // credentials to authorize requests, and you must grant yourself the corresponding
@@ -120,7 +124,9 @@ type ListUsersInput struct {
 	Filter *string
 
 	// The maximum number of users that you want Amazon Cognito to return in the
-	// response.
+	// response. In some SDK contexts, this operation might return fewer items than you
+	// specify in the Limit parameter without having reached the end of the full list.
+	// If the response contains a PaginationToken , then there are more results.
 	Limit *int32
 
 	// This API operation returns a limited number of results. The pagination token is
@@ -143,7 +149,11 @@ type ListUsersOutput struct {
 	// paginate through the full list of items.
 	PaginationToken *string
 
-	// An array of user pool users who match your query, and their attributes.
+	// An array of user pool users who match your query, and their attributes. Between
+	// different requests, you might observe variations in the sequence that users in
+	// this response object are sorted into. The sort order of users isn't guaranteed
+	// to follow a single pattern, but the paginated list from a single chain of
+	// requests won't return duplicates.
 	Users []types.UserType
 
 	// Metadata pertaining to the operation's result.
@@ -255,7 +265,9 @@ func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, optio
 // ListUsersPaginatorOptions is the paginator options for ListUsers
 type ListUsersPaginatorOptions struct {
 	// The maximum number of users that you want Amazon Cognito to return in the
-	// response.
+	// response. In some SDK contexts, this operation might return fewer items than you
+	// specify in the Limit parameter without having reached the end of the full list.
+	// If the response contains a PaginationToken , then there are more results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
