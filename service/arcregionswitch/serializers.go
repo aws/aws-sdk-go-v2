@@ -1679,6 +1679,18 @@ func serializeCBOR_ExecutionBlockConfiguration(v types.ExecutionBlockConfigurati
 			return nil, err
 		}
 		vm["documentDbConfig"] = ser
+	case *types.ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig:
+		ser, err := serializeCBOR_RdsPromoteReadReplicaConfiguration(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["rdsPromoteReadReplicaConfig"] = ser
+	case *types.ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig:
+		ser, err := serializeCBOR_RdsCreateCrossRegionReplicaConfiguration(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["rdsCreateCrossRegionReadReplicaConfig"] = ser
 	default:
 		return nil, fmt.Errorf("unknown variant type %T", v)
 	}
@@ -1911,6 +1923,85 @@ func serializeCBOR_ParallelExecutionBlockConfiguration(v *types.ParallelExecutio
 			return nil, err
 		}
 		vm["steps"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RdsCreateCrossRegionReplicaConfiguration(v *types.RdsCreateCrossRegionReplicaConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.TimeoutMinutes != nil {
+		ser, err := serializeCBOR_Int32(*v.TimeoutMinutes)
+		if err != nil {
+			return nil, err
+		}
+		vm["timeoutMinutes"] = ser
+	}
+	if v.CrossAccountRole != nil {
+		ser, err := serializeCBOR_String(*v.CrossAccountRole)
+		if err != nil {
+			return nil, err
+		}
+		vm["crossAccountRole"] = ser
+	}
+	if v.ExternalId != nil {
+		ser, err := serializeCBOR_String(*v.ExternalId)
+		if err != nil {
+			return nil, err
+		}
+		vm["externalId"] = ser
+	}
+	if v.DbInstanceArnMap != nil {
+		ser, err := serializeCBOR_RdsDbInstanceArnMap(v.DbInstanceArnMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["dbInstanceArnMap"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RdsDbInstanceArnMap(v map[string]string) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	for k, vv := range v {
+
+		ser, err := serializeCBOR_String(vv)
+		if err != nil {
+			return nil, err
+		}
+		vm[k] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RdsPromoteReadReplicaConfiguration(v *types.RdsPromoteReadReplicaConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.TimeoutMinutes != nil {
+		ser, err := serializeCBOR_Int32(*v.TimeoutMinutes)
+		if err != nil {
+			return nil, err
+		}
+		vm["timeoutMinutes"] = ser
+	}
+	if v.CrossAccountRole != nil {
+		ser, err := serializeCBOR_String(*v.CrossAccountRole)
+		if err != nil {
+			return nil, err
+		}
+		vm["crossAccountRole"] = ser
+	}
+	if v.ExternalId != nil {
+		ser, err := serializeCBOR_String(*v.ExternalId)
+		if err != nil {
+			return nil, err
+		}
+		vm["externalId"] = ser
+	}
+	if v.DbInstanceArnMap != nil {
+		ser, err := serializeCBOR_RdsDbInstanceArnMap(v.DbInstanceArnMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["dbInstanceArnMap"] = ser
 	}
 	return vm, nil
 }
@@ -2905,6 +2996,13 @@ func serializeCBOR_StartPlanExecutionInput(v *StartPlanExecutionInput) (smithycb
 			return nil, err
 		}
 		vm["latestVersion"] = ser
+	}
+	if v.RecoveryExecutionId != nil {
+		ser, err := serializeCBOR_String(*v.RecoveryExecutionId)
+		if err != nil {
+			return nil, err
+		}
+		vm["recoveryExecutionId"] = ser
 	}
 	return vm, nil
 }

@@ -103,6 +103,9 @@ type CreateResourceShareInput struct {
 	// resource share.
 	ResourceArns []string
 
+	// Specifies the configuration of this resource share.
+	ResourceShareConfiguration *types.ResourceShareConfiguration
+
 	// Specifies source constraints (accounts, ARNs, organization IDs, or organization
 	// paths) that limit when service principals can access resources in this resource
 	// share. When a service principal attempts to access a shared resource, validation

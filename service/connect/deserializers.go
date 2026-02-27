@@ -69482,6 +69482,31 @@ func awsRestjson1_deserializeDocumentEvaluationReviewMetadata(v **types.Evaluati
 				}
 			}
 
+		case "RequestedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.RequestedBy = ptr.String(jtv)
+			}
+
+		case "RequestedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RequestedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "ReviewId":
 			if value != nil {
 				jtv, ok := value.(string)

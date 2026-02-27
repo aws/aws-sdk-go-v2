@@ -1869,6 +1869,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies source constraints (accounts, ARNs, organization IDs, or organization paths) that limit when service principals can access resources in this resource share. When a service principal attempts to access a shared resource, validation is performed to ensure the request originates from one of the specified sources. This helps prevent confused deputy attacks by applying constraints on where service principals can access resources from.</p>"
                     }
+                },
+                "resourceShareConfiguration": {
+                    "target": "com.amazonaws.ram#ResourceShareConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration of this resource share.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5116,6 +5122,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates what features are available for this resource share. This parameter can have one of\n            the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>STANDARD</b> – A resource share that supports all\n                    functionality. These resource shares are visible to all principals you share the resource share with. \n                    You can modify these resource shares in RAM using the console or APIs. This resource share might \n                    have been created by RAM, or it might have been <b>CREATED_FROM_POLICY</b> and then promoted.</p>\n            </li>\n            <li>\n               <p>\n                  <b>CREATED_FROM_POLICY</b> – The customer\n                    manually shared a resource by attaching a resource-based policy. That policy did\n                    not match any existing managed permissions, so RAM created this customer managed permission automatically on the\n                    customer's behalf based on the attached policy document. This type of resource share \n                    is visible only to the Amazon Web Services account that created it. You can't modify it in \n                    RAM unless you promote it. For more information, \n                    see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PROMOTING_TO_STANDARD</b> – This\n                    resource share was originally <code>CREATED_FROM_POLICY</code>, but the customer ran\n                    the <a>PromoteResourceShareCreatedFromPolicy</a> and that operation\n                    is still in progress. This value changes to <code>STANDARD</code> when\n                    complete.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "resourceShareConfiguration": {
+                    "target": "com.amazonaws.ram#ResourceShareConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the resource share</p>"
+                    }
                 }
             },
             "traits": {
@@ -5276,6 +5288,20 @@
                         "smithy.api#enumValue": "SOURCE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ram#ResourceShareConfiguration": {
+            "type": "structure",
+            "members": {
+                "retainSharingOnAccountLeaveOrganization": {
+                    "target": "com.amazonaws.ram#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the consumer account retains access to the resource share after leaving the organization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the resource share</p>"
             }
         },
         "com.amazonaws.ram#ResourceShareFeatureSet": {

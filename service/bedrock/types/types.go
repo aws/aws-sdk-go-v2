@@ -3227,6 +3227,21 @@ type FoundationModelLifecycle struct {
 	// This member is required.
 	Status FoundationModelLifecycleStatus
 
+	// Time when the model is no longer available for use
+	EndOfLifeTime *time.Time
+
+	// Time when the model enters legacy state. Models in legacy state can still be
+	// used, but users should plan to transition to an Active model before the end of
+	// life time
+	LegacyTime *time.Time
+
+	// Public extended access portion of the legacy period, when users should expect
+	// higher pricing
+	PublicExtendedAccessTime *time.Time
+
+	// Launch time when the model first becomes available
+	StartOfLifeTime *time.Time
+
 	noSmithyDocumentSerde
 }
 
@@ -5416,6 +5431,9 @@ type ModelInvocationJobSummary struct {
 	// If the batch inference job failed, this field contains a message describing why
 	// the job failed.
 	Message *string
+
+	// The invocation endpoint for ModelInvocationJob
+	ModelInvocationType ModelInvocationType
 
 	// The status of the batch inference job.
 	//

@@ -8565,6 +8565,12 @@
                         "smithy.api#documentation": "<p>The amount of profile object max count assigned to the object type.</p>"
                     }
                 },
+                "SourcePriority": {
+                    "target": "com.amazonaws.customerprofiles#minSize1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer that determines the priority of this object type when data from multiple sources is ingested. Lower values take priority. Object types without a specified source priority default to the lowest priority.</p>"
+                    }
+                },
                 "Fields": {
                     "target": "com.amazonaws.customerprofiles#FieldMap",
                     "traits": {
@@ -11975,6 +11981,12 @@
                         "smithy.api#documentation": "<p>The amount of provisioned profile object max count available.</p>"
                     }
                 },
+                "SourcePriority": {
+                    "target": "com.amazonaws.customerprofiles#minSize1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer that determines the priority of this object type when data from multiple sources is ingested. Lower values take priority. Object types without a specified source priority default to the lowest priority.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
@@ -14982,6 +14994,12 @@
                         "smithy.api#documentation": "<p>The amount of profile object max count assigned to the object type</p>"
                     }
                 },
+                "SourcePriority": {
+                    "target": "com.amazonaws.customerprofiles#minSize1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer that determines the priority of this object type when data from multiple sources is ingested. Lower values take priority. Object types without a specified source priority default to the lowest priority.</p>"
+                    }
+                },
                 "Fields": {
                     "target": "com.amazonaws.customerprofiles#FieldMap",
                     "traits": {
@@ -15063,6 +15081,12 @@
                     "target": "com.amazonaws.customerprofiles#minSize0",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of provisioned profile object max count available.</p>"
+                    }
+                },
+                "SourcePriority": {
+                    "target": "com.amazonaws.customerprofiles#minSize1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer that determines the priority of this object type when data from multiple sources is ingested. Lower values take priority. Object types without a specified source priority default to the lowest priority.</p>"
                     }
                 },
                 "Fields": {
@@ -16732,6 +16756,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CASE"
+                    }
+                },
+                "DEVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVICE"
+                    }
+                },
+                "WEB_ANALYTICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEB_ANALYTICS"
                     }
                 },
                 "ORDER": {

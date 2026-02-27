@@ -99,6 +99,9 @@ type GetModelInvocationJobOutput struct {
 	// the job failed.
 	Message *string
 
+	// The invocation endpoint for ModelInvocationJob
+	ModelInvocationType types.ModelInvocationType
+
 	// The status of the batch inference job.
 	//
 	// The following statuses are possible:

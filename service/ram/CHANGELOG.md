@@ -1,3 +1,7 @@
+# v1.36.0 (2026-02-27)
+
+* **Feature**: Resource owners can now specify ResourceShareConfiguration request parameter for CreateResourceShare API including RetainSharingOnAccountLeaveOrganization boolean parameter
+
 # v1.35.1 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

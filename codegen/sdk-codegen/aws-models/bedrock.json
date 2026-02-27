@@ -6742,6 +6742,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Any tags to associate with the batch inference job. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html\">Tagging Amazon Bedrock resources</a>.</p>"
                     }
+                },
+                "modelInvocationType": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationType",
+                    "traits": {
+                        "smithy.api#default": "InvokeModel",
+                        "smithy.api#documentation": "<p>The invocation endpoint for ModelInvocationJob</p>"
+                    }
                 }
             },
             "traits": {
@@ -9681,6 +9688,30 @@
                         "smithy.api#documentation": "<p>Specifies whether a model version is available (<code>ACTIVE</code>) or deprecated (<code>LEGACY</code>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "startOfLifeTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch time when the model first becomes available</p>"
+                    }
+                },
+                "endOfLifeTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time when the model is no longer available for use</p>"
+                    }
+                },
+                "legacyTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time when the model enters legacy state. Models in legacy state can still be used, but users should plan to transition to an Active model before the end of life time</p>"
+                    }
+                },
+                "publicExtendedAccessTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Public extended access portion of the legacy period, when users should expect higher pricing</p>"
+                    }
                 }
             },
             "traits": {
@@ -12275,6 +12306,12 @@
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the batch inference job times or timed out.</p>"
+                    }
+                },
+                "modelInvocationType": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation endpoint for ModelInvocationJob</p>"
                     }
                 }
             },
@@ -18864,6 +18901,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the batch inference job times or timed out.</p>"
                     }
+                },
+                "modelInvocationType": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation endpoint for ModelInvocationJob</p>"
+                    }
                 }
             },
             "traits": {
@@ -18876,6 +18919,23 @@
                 "smithy.api#range": {
                     "min": 24,
                     "max": 168
+                }
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationType": {
+            "type": "enum",
+            "members": {
+                "InvokeModel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvokeModel"
+                    }
+                },
+                "Converse": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Converse"
+                    }
                 }
             }
         },

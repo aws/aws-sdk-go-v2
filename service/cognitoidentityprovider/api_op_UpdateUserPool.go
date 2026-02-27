@@ -15,8 +15,8 @@ import (
 // Cognito defaults, construct this API request to pass the existing configuration
 // of your user pool, modified to include the changes that you want to make.
 //
-// If you don't provide a value for an attribute, Amazon Cognito sets it to its
-// default value.
+// With the exception of UserPoolTier , if you don't provide a value for an
+// attribute, Amazon Cognito sets it to its default value.
 //
 // This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you

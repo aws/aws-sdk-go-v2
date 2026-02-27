@@ -30,6 +30,26 @@ func (m *validateOpAddCustomAttributes) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAddUserPoolClientSecret struct {
+}
+
+func (*validateOpAddUserPoolClientSecret) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddUserPoolClientSecret) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddUserPoolClientSecretInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddUserPoolClientSecretInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAdminAddUserToGroup struct {
 }
 
@@ -990,6 +1010,26 @@ func (m *validateOpDeleteUserPoolClient) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteUserPoolClientSecret struct {
+}
+
+func (*validateOpDeleteUserPoolClientSecret) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteUserPoolClientSecret) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteUserPoolClientSecretInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteUserPoolClientSecretInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteUserPoolDomain struct {
 }
 
@@ -1710,6 +1750,26 @@ func (m *validateOpListUserImportJobs) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListUserPoolClientSecrets struct {
+}
+
+func (*validateOpListUserPoolClientSecrets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListUserPoolClientSecrets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListUserPoolClientSecretsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListUserPoolClientSecretsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListUserPoolClients struct {
 }
 
@@ -2374,6 +2434,10 @@ func addOpAddCustomAttributesValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpAddCustomAttributes{}, middleware.After)
 }
 
+func addOpAddUserPoolClientSecretValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddUserPoolClientSecret{}, middleware.After)
+}
+
 func addOpAdminAddUserToGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAdminAddUserToGroup{}, middleware.After)
 }
@@ -2566,6 +2630,10 @@ func addOpDeleteUserPoolClientValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteUserPoolClient{}, middleware.After)
 }
 
+func addOpDeleteUserPoolClientSecretValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteUserPoolClientSecret{}, middleware.After)
+}
+
 func addOpDeleteUserPoolDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUserPoolDomain{}, middleware.After)
 }
@@ -2708,6 +2776,10 @@ func addOpListTermsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListUserImportJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUserImportJobs{}, middleware.After)
+}
+
+func addOpListUserPoolClientSecretsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListUserPoolClientSecrets{}, middleware.After)
 }
 
 func addOpListUserPoolClientsValidationMiddleware(stack *middleware.Stack) error {
@@ -3409,6 +3481,24 @@ func validateOpAddCustomAttributesInput(v *AddCustomAttributesInput) error {
 	}
 	if v.CustomAttributes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomAttributes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddUserPoolClientSecretInput(v *AddUserPoolClientSecretInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddUserPoolClientSecretInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4416,6 +4506,27 @@ func validateOpDeleteUserPoolClientInput(v *DeleteUserPoolClientInput) error {
 	}
 }
 
+func validateOpDeleteUserPoolClientSecretInput(v *DeleteUserPoolClientSecretInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserPoolClientSecretInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecretId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecretId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteUserPoolDomainInput(v *DeleteUserPoolDomainInput) error {
 	if v == nil {
 		return nil
@@ -4996,6 +5107,24 @@ func validateOpListUserImportJobsInput(v *ListUserImportJobsInput) error {
 	}
 	if v.MaxResults == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListUserPoolClientSecretsInput(v *ListUserPoolClientSecretsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListUserPoolClientSecretsInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,3 +1,7 @@
+# v1.61.0 (2026-02-27)
+
+* **Feature**: This feature allows customers to specify the minimum time (in minutes) that AWS Batch keeps instances running in a compute environment after all jobs on the instance complete
+
 # v1.60.2 (2026-02-25)
 
 * **Documentation**: AWS Batch documentation update for service job capacity units.

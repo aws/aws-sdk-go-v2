@@ -61,6 +61,10 @@ type AbbreviatedExecution struct {
 	// The timestamp when the plan execution was ended.
 	EndTime *time.Time
 
+	// The unique identifier of the most recent recovery execution. Required when
+	// starting a post-recovery execution.
+	RecoveryExecutionId *string
+
 	// The timestamp when the plan execution was last updated.
 	UpdatedAt *time.Time
 
@@ -210,7 +214,10 @@ type CustomActionLambdaConfiguration struct {
 	// This member is required.
 	Lambdas []Lambdas
 
-	// The Amazon Web Services Region for the function to run in.
+	// The Amazon Web Services Region for the function to run in. For recovery
+	// workflows use activatingRegion or deactivatingRegion . For post-recovery
+	// workflows, use activeRegion (the Region with customer traffic) or inactiveRegion
+	// (the Region with no customer traffic).
 	//
 	// This member is required.
 	RegionToRun RegionToRunIn
@@ -434,6 +441,8 @@ type ExecutionApprovalConfiguration struct {
 //	ExecutionBlockConfigurationMemberExecutionApprovalConfig
 //	ExecutionBlockConfigurationMemberGlobalAuroraConfig
 //	ExecutionBlockConfigurationMemberParallelConfig
+//	ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig
+//	ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig
 //	ExecutionBlockConfigurationMemberRegionSwitchPlanConfig
 //	ExecutionBlockConfigurationMemberRoute53HealthCheckConfig
 type ExecutionBlockConfiguration interface {
@@ -522,6 +531,26 @@ type ExecutionBlockConfigurationMemberParallelConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberParallelConfig) isExecutionBlockConfiguration() {}
+
+// An Amazon RDS create cross-Region replica execution block.
+type ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig struct {
+	Value RdsCreateCrossRegionReplicaConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig) isExecutionBlockConfiguration() {
+}
+
+// An Amazon RDS promote read replica execution block.
+type ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig struct {
+	Value RdsPromoteReadReplicaConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig) isExecutionBlockConfiguration() {
+}
 
 // A Region switch plan execution block.
 type ExecutionBlockConfigurationMemberRegionSwitchPlanConfig struct {
@@ -792,6 +821,48 @@ type Plan struct {
 
 	// The version for the plan.
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for creating an Amazon RDS cross-Region read replica during
+// post-recovery in a Region switch.
+type RdsCreateCrossRegionReplicaConfiguration struct {
+
+	// A map of database instance ARNs for each Region in the plan.
+	//
+	// This member is required.
+	DbInstanceArnMap map[string]string
+
+	// The cross-account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for promoting an Amazon RDS read replica to a standalone database
+// instance during a Region switch.
+type RdsPromoteReadReplicaConfiguration struct {
+
+	// A map of database instance ARNs for each Region in the plan.
+	//
+	// This member is required.
+	DbInstanceArnMap map[string]string
+
+	// The cross-account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
 
 	noSmithyDocumentSerde
 }

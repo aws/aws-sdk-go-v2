@@ -1607,6 +1607,11 @@ type ListProfileObjectTypeItem struct {
 	// The amount of profile object max count assigned to the object type.
 	MaxProfileObjectCount *int32
 
+	// An integer that determines the priority of this object type when data from
+	// multiple sources is ingested. Lower values take priority. Object types without a
+	// specified source priority default to the lowest priority.
+	SourcePriority *int32
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 

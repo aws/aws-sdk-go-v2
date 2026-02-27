@@ -1078,6 +1078,18 @@ loop:
 			uv = &types.KeyspacesCellValueMemberDoubleT{Value: mv}
 			break loop
 
+		case "durationT":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.KeyspacesCellValueMemberDurationT{Value: mv}
+			break loop
+
 		case "floatT":
 			var mv string
 			if value != nil {

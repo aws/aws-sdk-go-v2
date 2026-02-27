@@ -3974,6 +3974,13 @@ func awsRestjson1_serializeDocumentComputeResource(v *types.ComputeResource, val
 		ok.String(*v.PlacementGroup)
 	}
 
+	if v.ScalingPolicy != nil {
+		ok := object.Key("scalingPolicy")
+		if err := awsRestjson1_serializeDocumentComputeScalingPolicy(v.ScalingPolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("securityGroupIds")
 		if err := awsRestjson1_serializeDocumentStringList(v.SecurityGroupIds, ok); err != nil {
@@ -4078,6 +4085,13 @@ func awsRestjson1_serializeDocumentComputeResourceUpdate(v *types.ComputeResourc
 		ok.String(*v.PlacementGroup)
 	}
 
+	if v.ScalingPolicy != nil {
+		ok := object.Key("scalingPolicy")
+		if err := awsRestjson1_serializeDocumentComputeScalingPolicy(v.ScalingPolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("securityGroupIds")
 		if err := awsRestjson1_serializeDocumentStringList(v.SecurityGroupIds, ok); err != nil {
@@ -4107,6 +4121,18 @@ func awsRestjson1_serializeDocumentComputeResourceUpdate(v *types.ComputeResourc
 	if v.UpdateToLatestImageVersion != nil {
 		ok := object.Key("updateToLatestImageVersion")
 		ok.Boolean(*v.UpdateToLatestImageVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComputeScalingPolicy(v *types.ComputeScalingPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MinScaleDownDelayMinutes != nil {
+		ok := object.Key("minScaleDownDelayMinutes")
+		ok.Integer(*v.MinScaleDownDelayMinutes)
 	}
 
 	return nil

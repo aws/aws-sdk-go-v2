@@ -279,6 +279,9 @@ type ResourceShare struct {
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArn *string
 
+	// The configuration of the resource share
+	ResourceShareConfiguration *ResourceShareConfiguration
+
 	// The current status of the resource share.
 	Status ResourceShareStatus
 
@@ -340,6 +343,16 @@ type ResourceShareAssociation struct {
 
 	// A message about the status of the association.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the resource share
+type ResourceShareConfiguration struct {
+
+	// Specifies whether the consumer account retains access to the resource share
+	// after leaving the organization.
+	RetainSharingOnAccountLeaveOrganization *bool
 
 	noSmithyDocumentSerde
 }

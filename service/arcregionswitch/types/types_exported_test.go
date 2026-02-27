@@ -38,6 +38,12 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 	case *types.ExecutionBlockConfigurationMemberParallelConfig:
 		_ = v.Value // Value is types.ParallelExecutionBlockConfiguration
 
+	case *types.ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig:
+		_ = v.Value // Value is types.RdsCreateCrossRegionReplicaConfiguration
+
+	case *types.ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig:
+		_ = v.Value // Value is types.RdsPromoteReadReplicaConfiguration
+
 	case *types.ExecutionBlockConfigurationMemberRegionSwitchPlanConfig:
 		_ = v.Value // Value is types.RegionSwitchPlanConfiguration
 
@@ -53,17 +59,19 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.RdsCreateCrossRegionReplicaConfiguration
+var _ *types.DocumentDbConfiguration
+var _ *types.ExecutionApprovalConfiguration
+var _ *types.EksResourceScalingConfiguration
+var _ *types.RegionSwitchPlanConfiguration
+var _ *types.CustomActionLambdaConfiguration
 var _ *types.GlobalAuroraConfiguration
 var _ *types.EcsCapacityIncreaseConfiguration
 var _ *types.ParallelExecutionBlockConfiguration
 var _ *types.Route53HealthCheckConfiguration
-var _ *types.DocumentDbConfiguration
-var _ *types.ExecutionApprovalConfiguration
 var _ *types.ArcRoutingControlConfiguration
 var _ *types.Ec2AsgCapacityIncreaseConfiguration
-var _ *types.EksResourceScalingConfiguration
-var _ *types.RegionSwitchPlanConfiguration
-var _ *types.CustomActionLambdaConfiguration
+var _ *types.RdsPromoteReadReplicaConfiguration
 
 func ExampleReportOutput_outputUsage() {
 	var union types.ReportOutput

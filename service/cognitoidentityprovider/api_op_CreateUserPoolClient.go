@@ -159,13 +159,19 @@ type CreateUserPoolClientInput struct {
 	//
 	// See [OAuth 2.0 - Redirection Endpoint].
 	//
-	// Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing
-	// purposes only.
+	// Amazon Cognito requires HTTPS over HTTP except for callback URLs to
+	// http://localhost , http://127.0.0.1 and http://[::1] . These callback URLs are
+	// for testing purposes only. You can specify custom TCP ports for your callback
+	// URLs.
 	//
 	// App callback URLs such as myapp://example are also supported.
 	//
 	// [OAuth 2.0 - Redirection Endpoint]: https://tools.ietf.org/html/rfc6749#section-3.1.2
 	CallbackURLs []string
+
+	// A custom client secret that you want to use for the app client. You cannot
+	// specify both GenerateSecret as true and provide a ClientSecret value.
+	ClientSecret *string
 
 	// The default redirect URI. In app clients with one assigned IdP, replaces
 	// redirect_uri in authentication requests. Must be in the CallbackURLs list.

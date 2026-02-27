@@ -2778,6 +2778,15 @@
                 "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
             }
         },
+        "com.amazonaws.transcribestreaming#SessionResumeWindow": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 300
+                }
+            }
+        },
         "com.amazonaws.transcribestreaming#Specialty": {
             "type": "enum",
             "members": {
@@ -3668,7 +3677,7 @@
                 "PiiEntityTypes": {
                     "target": "com.amazonaws.transcribestreaming#PiiEntityTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify which types of personally identifiable information (PII) you want to redact in your \n      transcript. You can include as many types as you'd like, or you can select \n      <code>ALL</code>.</p>\n         <p>Values must be comma-separated and can include: <code>ADDRESS</code>, \n      <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,\n      <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>,\n      <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, \n      <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, \n      <code>SSN</code>, or <code>ALL</code>.</p>\n         <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include \n      <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n         <p>If you include <code>ContentRedactionType</code> or \n      <code>ContentIdentificationType</code> in your request, but do not include \n      <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>",
+                        "smithy.api#documentation": "<p>Specify which types of personally identifiable information (PII) you want to redact in your \n      transcript. You can include as many types as you'd like, or you can select \n      <code>ALL</code>.</p>\n         <p>Values must be comma-separated and can include: <code>ADDRESS</code>, \n      <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,\n      <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>,\n      <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, \n      <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, \n      <code>SSN</code>, <code>AGE</code>, <code>DATE_TIME</code>,\n      <code>LICENSE_PLATE</code>, <code>PASSPORT_NUMBER</code>,\n      <code>PASSWORD</code>, <code>USERNAME</code>, <code>VEHICLE_IDENTIFICATION_NUMBER</code>, or <code>ALL</code>.</p>\n         <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include \n      <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n         <p>If you include <code>ContentRedactionType</code> or \n      <code>ContentIdentificationType</code> in your request, but do not include \n      <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-pii-entity-types"
                     }
                 },
@@ -3721,6 +3730,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specify the names of the custom vocabulary filters that you want to use when processing\n      your transcription. Note that vocabulary filter names are case sensitive.</p>\n         <p>If none of the languages of the specified custom vocabulary filters match the language identified\n      in your media, your job fails.</p>\n         <important>\n            <p>This parameter is only intended for use <b>with</b> \n        the <code>IdentifyLanguage</code> parameter. If you're <b>not</b> \n        including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter \n        with your transcription, use the <code>VocabularyFilterName</code> parameter instead.</p>\n         </important>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html\">Using vocabulary filtering with unwanted \n      words</a>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-names"
+                    }
+                },
+                "SessionResumeWindow": {
+                    "target": "com.amazonaws.transcribestreaming#SessionResumeWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the time window, in minutes, during which your transcription session can be resumed,\n       measured from the stream start time. This optional parameter accepts integer values from 1 to 300 (5 hours).</p>\n         <p> For example, if your stream starts at 1 PM and you specify a <code>SessionResumeWindow</code> of 30 minutes,\n      you can reconnect to the session as many times as you want until 1:30 PM. </p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-session-resume-window"
                     }
                 }
             },
@@ -3902,6 +3918,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides the names of the custom vocabulary filters that you specified in your\n      request.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-names"
+                    }
+                },
+                "SessionResumeWindow": {
+                    "target": "com.amazonaws.transcribestreaming#SessionResumeWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the session resume window, in minutes, that you specified in your request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-session-resume-window"
                     }
                 }
             },

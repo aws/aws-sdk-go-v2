@@ -3585,7 +3585,7 @@
                     "min": 6,
                     "max": 18
                 },
-                "smithy.api#pattern": "^[a-z]{2}\\-[0-9a-z\\-]{4,16}$"
+                "smithy.api#pattern": "^[a-z]{2,4}\\-[0-9a-z\\-]{4,16}$"
             }
         },
         "com.amazonaws.health#availabilityZones": {

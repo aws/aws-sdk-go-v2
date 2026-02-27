@@ -120,6 +120,10 @@ type GetPlanExecutionOutput struct {
 	// The details of the Region switch plan.
 	Plan *types.Plan
 
+	// The unique identifier of the most recent recovery execution. Required when
+	// starting a post-recovery execution.
+	RecoveryExecutionId *string
+
 	// The states of the steps in the plan execution.
 	StepStates []types.StepState
 

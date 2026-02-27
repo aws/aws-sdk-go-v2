@@ -4486,20 +4486,26 @@ type EvaluationReviewConfiguration struct {
 // Metadata information about an evaluation review.
 type EvaluationReviewMetadata struct {
 
-	// The user who created the evaluation review.
-	//
-	// This member is required.
-	CreatedBy *string
-
-	// The timestamp when the evaluation review was created.
-	//
-	// This member is required.
-	CreatedTime *time.Time
-
 	// Comments provided when requesting the evaluation review.
 	//
 	// This member is required.
 	ReviewRequestComments []EvaluationReviewRequestComment
+
+	// The user who created the evaluation review.
+	//
+	// Deprecated: CreatedBy is deprecated.
+	CreatedBy *string
+
+	// The timestamp when the evaluation review was created.
+	//
+	// Deprecated: CreatedTime is deprecated.
+	CreatedTime *time.Time
+
+	// The user who requested the evaluation review.
+	RequestedBy *string
+
+	// The timestamp when the evaluation review was requested.
+	RequestedTime *time.Time
 
 	// The unique identifier for the evaluation review.
 	ReviewId *string
@@ -4539,10 +4545,10 @@ type EvaluationReviewRequestComment struct {
 	// The text content of the review request comment.
 	Comment *string
 
-	// The user who created the review request comment.
+	// The user who created the evaluation review request comment.
 	CreatedBy *string
 
-	// The timestamp when the review request comment was created.
+	// The timestamp when the evaluation review request comment was created.
 	CreatedTime *time.Time
 
 	noSmithyDocumentSerde

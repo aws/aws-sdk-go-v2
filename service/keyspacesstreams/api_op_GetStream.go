@@ -42,17 +42,17 @@ type GetStreamInput struct {
 	StreamArn *string
 
 	//  The maximum number of shard objects to return in a single GetStream request.
-	// Default value is 100. The minimum value is 1 and the maximum value is 100.
+	// The default value is 100. The minimum value is 1 and the maximum value is 100.
 	MaxResults *int32
 
 	//  An optional pagination token provided by a previous GetStream operation. If
 	// this parameter is specified, the response includes only records beyond the
-	// token, up to the value specified by maxResults .
+	// token, up to the value specified by MaxResults .
 	NextToken *string
 
 	//  Optional filter criteria to apply when retrieving shards. You can filter
-	// shards based on their state or other attributes to narrow down the results
-	// returned by the GetStream operation.
+	// shards based on their parent shardID to get a list of children shards to narrow
+	// down the results returned by the GetStream operation.
 	ShardFilter *types.ShardFilter
 
 	noSmithyDocumentSerde
@@ -233,7 +233,7 @@ func (c *Client) addOperationGetStreamMiddlewares(stack *middleware.Stack, optio
 // GetStreamPaginatorOptions is the paginator options for GetStream
 type GetStreamPaginatorOptions struct {
 	//  The maximum number of shard objects to return in a single GetStream request.
-	// Default value is 100. The minimum value is 1 and the maximum value is 100.
+	// The default value is 100. The minimum value is 1 and the maximum value is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
