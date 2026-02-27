@@ -1,3 +1,7 @@
+# v1.56.0 (2026-02-27)
+
+* **Feature**: This release introduces an optional SourcePriority parameter to the ProfileObjectType APIs, allowing you to control the precedence of object types when ingesting data from multiple sources. Additionally, WebAnalytics and Device have been added as new StandardIdentifier values.
+
 # v1.55.4 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

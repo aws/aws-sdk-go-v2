@@ -1,8 +1,0 @@
-{
-    "id": "e0ebfa7c-516c-4cde-abc4-c6faa7bb5491",
-    "type": "feature",
-    "description": "ODB Networking Route Management is a feature improvement which allows for implicit creation and deletion of EC2 Routes in the Peer Network Route Table designated by the customer via new optional input. This feature release is combined with Multiple App-VPC functionality for ODB Network Peering(s).",
-    "modules": [
-        "service/odb"
-    ]
-}

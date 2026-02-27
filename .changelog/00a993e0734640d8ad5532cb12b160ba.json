@@ -1,8 +1,0 @@
-{
-    "id": "00a993e0-7346-40d8-ad55-32cb12b160ba",
-    "type": "feature",
-    "description": "Updates the regex for validating availabilityZone strings used in the describe events filters.",
-    "modules": [
-        "service/health"
-    ]
-}

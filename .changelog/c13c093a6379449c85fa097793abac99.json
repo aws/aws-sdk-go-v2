@@ -1,8 +1,0 @@
-{
-    "id": "c13c093a-6379-449c-85fa-097793abac99",
-    "type": "feature",
-    "description": "Cognito is introducing a two-secret rotation model for app clients, enabling seamless credential rotation without downtime. Dedicated APIs support passing in a custom secret. Custom secrets need to be at least 24 characters. This eliminates reconfiguration needs and reduces security risks.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

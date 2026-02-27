@@ -1,3 +1,7 @@
+# v1.6.0 (2026-02-27)
+
+* **Feature**: Added support for Change Data Capture (CDC) streams with Duration DataType.
+
 # v1.5.9 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

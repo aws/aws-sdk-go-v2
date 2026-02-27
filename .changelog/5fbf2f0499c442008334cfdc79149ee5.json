@@ -1,8 +1,0 @@
-{
-    "id": "5fbf2f04-99c4-4200-8334-cfdc79149ee5",
-    "type": "feature",
-    "description": "Added four new model lifecycle date fields, startOfLifeTime, endOfLifeTime, legacyTime, and publicExtendedAccessTime. Adds support for using the Converse API with Bedrock Batch inference jobs.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

@@ -1,3 +1,27 @@
+# Release (2026-02-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.6.0](service/arcregionswitch/CHANGELOG.md#v160-2026-02-27)
+  * **Feature**: Post-Recovery Workflows enable customers to maintain comprehensive disaster recovery automation. This allows customer SREs and leadership to have complete recovery orchestration from failover through post-recovery preparation, ensuring Regions remain ready for subsequent recovery events.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.61.0](service/batch/CHANGELOG.md#v1610-2026-02-27)
+  * **Feature**: This feature allows customers to specify the minimum time (in minutes) that AWS Batch keeps instances running in a compute environment after all jobs on the instance complete
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.55.0](service/bedrock/CHANGELOG.md#v1550-2026-02-27)
+  * **Feature**: Added four new model lifecycle date fields, startOfLifeTime, endOfLifeTime, legacyTime, and publicExtendedAccessTime. Adds support for using the Converse API with Bedrock Batch inference jobs.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.59.0](service/cognitoidentityprovider/CHANGELOG.md#v1590-2026-02-27)
+  * **Feature**: Cognito is introducing a two-secret rotation model for app clients, enabling seamless credential rotation without downtime. Dedicated APIs support passing in a custom secret. Custom secrets need to be at least 24 characters. This eliminates reconfiguration needs and reduces security risks.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.163.0](service/connect/CHANGELOG.md#v11630-2026-02-27)
+  * **Feature**: Deprecate EvaluationReviewMetadata's CreatedBy and CreatedTime, add EvaluationReviewMetadata's RequestedBy and RequestedTime
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.56.0](service/customerprofiles/CHANGELOG.md#v1560-2026-02-27)
+  * **Feature**: This release introduces an optional SourcePriority parameter to the ProfileObjectType APIs, allowing you to control the precedence of object types when ingesting data from multiple sources. Additionally, WebAnalytics and Device have been added as new StandardIdentifier values.
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.6.0](service/keyspacesstreams/CHANGELOG.md#v160-2026-02-27)
+  * **Feature**: Added support for Change Data Capture (CDC) streams with Duration DataType.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.9.0](service/odb/CHANGELOG.md#v190-2026-02-27)
+  * **Feature**: ODB Networking Route Management is a feature improvement which allows for implicit creation and deletion of EC2 Routes in the Peer Network Route Table designated by the customer via new optional input. This feature release is combined with Multiple App-VPC functionality for ODB Network Peering(s).
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.36.0](service/ram/CHANGELOG.md#v1360-2026-02-27)
+  * **Feature**: Resource owners can now specify ResourceShareConfiguration request parameter for CreateResourceShare API including RetainSharingOnAccountLeaveOrganization boolean parameter
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.34.0](service/transcribestreaming/CHANGELOG.md#v1340-2026-02-27)
+  * **Feature**: AWS Transcribe Streaming now supports specifying a resumption window for the stream through the SessionResumeWindow parameter, allowing customers to reconnect to their streams for a longer duration beyond stream start time.
+
 # Release (2026-02-26)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.6.0 (2026-02-27)
+
+* **Feature**: Post-Recovery Workflows enable customers to maintain comprehensive disaster recovery automation. This allows customer SREs and leadership to have complete recovery orchestration from failover through post-recovery preparation, ensuring Regions remain ready for subsequent recovery events.
+
 # v1.5.2 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

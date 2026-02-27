@@ -1,8 +1,0 @@
-{
-    "id": "d7815830-320e-45ef-81da-a22e34ea8f76",
-    "type": "feature",
-    "description": "AWS Transcribe Streaming now supports specifying a resumption window for the stream through the SessionResumeWindow parameter, allowing customers to reconnect to their streams for a longer duration beyond stream start time.",
-    "modules": [
-        "service/transcribestreaming"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "0f9ec5b0-0b5f-4d3f-8e7d-547ac46da88f",
-    "type": "feature",
-    "description": "Post-Recovery Workflows enable customers to maintain comprehensive disaster recovery automation. This allows customer SREs and leadership to have complete recovery orchestration from failover through post-recovery preparation, ensuring Regions remain ready for subsequent recovery events.",
-    "modules": [
-        "service/arcregionswitch"
-    ]
-}

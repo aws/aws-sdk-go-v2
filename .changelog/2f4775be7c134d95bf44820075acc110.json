@@ -1,8 +1,0 @@
-{
-    "id": "2f4775be-7c13-4d95-bf44-820075acc110",
-    "type": "feature",
-    "description": "Resource owners can now specify ResourceShareConfiguration request parameter for CreateResourceShare API including RetainSharingOnAccountLeaveOrganization boolean parameter",
-    "modules": [
-        "service/ram"
-    ]
-}
