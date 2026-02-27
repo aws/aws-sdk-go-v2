@@ -1,13 +1,13 @@
 module github.com/aws/aws-sdk-go-v2/service/transcribestreaming/internal/testing
 
-go 1.23
+go 1.24
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.41.2
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.5
 	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.6.36
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.33.7
-	github.com/aws/smithy-go v1.24.1
+	github.com/aws/smithy-go v1.24.2
 )
 
 require (

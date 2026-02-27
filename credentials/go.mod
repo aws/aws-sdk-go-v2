@@ -1,6 +1,6 @@
 module github.com/aws/aws-sdk-go-v2/credentials
 
-go 1.23
+go 1.24
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.41.2
@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sso v1.30.11
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.15
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.7
-	github.com/aws/smithy-go v1.24.1
+	github.com/aws/smithy-go v1.24.2
 )
 
 require (
