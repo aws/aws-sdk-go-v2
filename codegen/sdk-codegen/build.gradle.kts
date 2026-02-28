@@ -72,6 +72,10 @@ tasks.register("generate-smithy-build") {
             emptyList()
         }
 
+        val rolloutExperimentalSerdeServices = listOf(
+           "aws.protocoltests.json10"
+        )
+
         fileTree(models).filter { it.isFile }.files.forEach eachFile@{ file ->
             val model = Model.assembler()
                     .addImport(file.absolutePath)
@@ -96,6 +100,8 @@ tasks.register("generate-smithy-build") {
             }
 
             val useExperimentalSerde = experimentalSerdeServices.any {
+                service.id.toString().startsWith(it)
+            } || rolloutExperimentalSerdeServices.any {
                 service.id.toString().startsWith(it)
             }
 
