@@ -52,7 +52,8 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.json10#JsonRpc10",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10"
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10",
+          "useExperimentalSerde": true
         }
       }
     },
@@ -196,7 +197,8 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.json10#QueryCompatibleJsonRpc10",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/querycompatiblejsonrpc10"
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/querycompatiblejsonrpc10",
+          "useExperimentalSerde": true
         }
       }
     },
