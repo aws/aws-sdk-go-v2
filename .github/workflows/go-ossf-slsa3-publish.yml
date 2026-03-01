@@ -1,0 +1,93 @@
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/aws/aws-sdk-go-v2/aws"
+    "github.com/aws/aws-sdk-go-v2/config"
+    "github.com/aws/aws-sdk-go-v2/service/dynamodb"
+)
+
+func main() {
+    // Using the SDK's default configuration, loading additional config
+    // and credentials values from the environment variables, shared
+    // credentials, and shared configuration files
+    cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-west-2"))
+    if err != nil {
+        log.Fatalf("unable to load SDK config, %v", err)
+    }
+
+    // Using the Config value, create the DynamoDB client
+    svc := dynamodb.NewFromConfig(cfg)
+
+    // Build the request with its input parameters
+    resp, err := svc.ListTables(context.TODO(), &dynamodb.ListTablesInput{
+        Limit: aws.Int32(5),
+    })
+    if err != nil {
+        log.Fatalf("failed to list tables, %v", err)
+    }
+
+    fmt.Println("Tables:")
+    for _, tableName := range resp.TableNames {
+        fmt.Println(tableName)
+    }
+}github.com/aws/aws-sdk-go-v2/awsgithub.com/aws/aws-sdk-go-v2/service/dynamodbgithub.com/aws/aws-sdk-go-v2/config$ go get github.com/aws/aws-sdk-go-v2/aws
+$ go get github.com/aws/aws-sdk-go-v2/config
+$ go get github.com/aws/aws-sdk-go-v2/service/dynamodbresp.TableNamesgitaly['env'] = {
+    'GOOGLE_APPLICATION_CREDENTIALS' => '/path/to/service.json'
+}
+gitaly['configuration'] = {
+    backup: {
+        go_cloud_url: 'gs://<bucket>'
+    }
+}$ mkdir ~/helloaws
+$ cd ~/helloaws
+$ go mod init helloawsgitaly['env'] = {
+    'AWS_ACCESS_KEY_ID' => 'aws_access_key_id',
+    'AWS_SECRET_ACCESS_KEY' => 'aws_secret_access_key'
+}
+gitaly['configuration'] = {
+    backup: {
+        go_cloud_url: 's3://<bucket>?region=us-west-1'
+    }
+}# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# This workflow lets you compile your Go project using a SLSA3 compliant builder.
+# This workflow will generate a so-called "provenance" file describing the steps
+# that were performed to generate the final binary.
+# The project is an initiative of the OpenSSF (openssf.org) and is developed at
+# https://github.com/slsa-framework/slsa-github-generator.
+# The provenance file can be verified using https://github.com/slsa-framework/slsa-verifier.
+# For more information about SLSA and how it improves the supply-chain, visit slsa.dev.
+
+name: SLSA Go releaser
+on:
+  workflow_dispatch:
+  release:
+    types: [created]
+
+permissions: read-all
+
+jobs:
+  # ========================================================================================================================================
+  #     Prerequesite: Create a .slsa-goreleaser.yml in the root directory of your project.
+  #       See format in https://github.com/slsa-framework/slsa-github-generator/blob/main/internal/builders/go/README.md#configuration-file
+  #=========================================================================================================================================
+  build:
+    permissions:
+      id-token: write # To sign.
+      contents: write # To upload release assets.
+      actions: read   # To read workflow path.
+    uses: slsa-framework/slsa-github-generator/.github/workflows/builder_go_slsa3.yml@v1.4.0
+    with:
+      go-version: 1.17
+      # =============================================================================================================
+      #     Optional: For more options, see https://github.com/slsa-framework/slsa-github-generator#golang-projects
+      # =============================================================================================================
+
