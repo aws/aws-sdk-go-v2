@@ -9,7 +9,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
@@ -667,7 +666,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 						r.URL, _ = url.Parse("https://example.aws")
 						r.ContentLength = -1
-						r = requestMust(r.SetStream(ioutil.NopCloser(bytes.NewBuffer([]byte("hello world")))))
+						r = requestMust(r.SetStream(io.NopCloser(bytes.NewBuffer([]byte("hello world")))))
 						return r
 					}(),
 				},
@@ -934,7 +933,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 								return
 							}
 
-							actualPayload, err := ioutil.ReadAll(stream)
+							actualPayload, err := io.ReadAll(stream)
 							if err == nil && c.expectReadErr {
 								t.Fatalf("expected read error, got none")
 							}
@@ -1197,7 +1196,7 @@ func TestComputeInputPayloadChecksumRetry(t *testing.T) {
 					}
 
 					stream := request.GetStream()
-					actualPayload, err := ioutil.ReadAll(stream)
+					actualPayload, err := io.ReadAll(stream)
 					if err != nil {
 						t.Fatalf("expected no read error, got %v", err)
 					}

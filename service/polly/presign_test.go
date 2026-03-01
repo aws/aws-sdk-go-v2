@@ -3,12 +3,13 @@ package polly
 import (
 	"context"
 	"fmt"
+	"io"
+	"testing"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"io/ioutil"
-	"testing"
 )
 
 func TestPresignOpSynthesizeSpeechInput(t *testing.T) {
@@ -89,7 +90,7 @@ func TestPresignOpSynthesizeSpeechInput(t *testing.T) {
 			}
 
 			stream := updatedRequest.GetStream()
-			b, _ := ioutil.ReadAll(stream)
+			b, _ := io.ReadAll(stream)
 			if e, a := c.ExpectStream, string(b); e != a {
 				t.Errorf("expect request stream value %v, got %v", e, a)
 			}

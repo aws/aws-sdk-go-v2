@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -175,7 +174,7 @@ func TestProviderNotExpired(t *testing.T) {
 		t.Errorf("expected %v, got %v", "no error", err)
 	}
 
-	tmpFile, err := ioutil.TempFile(os.TempDir(), "tmp_expiring")
+	tmpFile, err := os.CreateTemp(os.TempDir(), "tmp_expiring")
 	if err != nil {
 		t.Errorf("expected %v, got %v", "no error", err)
 	}
@@ -213,7 +212,7 @@ func TestProviderExpired(t *testing.T) {
 		t.Errorf("expected %v, got %v", "no error", err)
 	}
 
-	tmpFile, err := ioutil.TempFile(os.TempDir(), "tmp_expired")
+	tmpFile, err := os.CreateTemp(os.TempDir(), "tmp_expired")
 	if err != nil {
 		t.Errorf("expected %v, got %v", "no error", err)
 	}
@@ -252,7 +251,7 @@ func TestProviderForceExpire(t *testing.T) {
 	if err != nil {
 		t.Errorf("expected %v, got %v", "no error", err)
 	}
-	tmpFile, err := ioutil.TempFile(os.TempDir(), "tmp_force_expire")
+	tmpFile, err := os.CreateTemp(os.TempDir(), "tmp_force_expire")
 	if err != nil {
 		t.Errorf("expected %v, got %v", "no error", err)
 	}

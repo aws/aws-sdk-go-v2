@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"reflect"
 	"testing"
 	"time"
@@ -234,7 +233,7 @@ func TestCopyReader(t *testing.T) {
 	var buf io.Reader = bytes.NewReader([]byte("hello world"))
 	var r io.Reader
 	awsutil.Copy(&r, buf)
-	b, err := ioutil.ReadAll(r)
+	b, err := io.ReadAll(r)
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
@@ -243,7 +242,7 @@ func TestCopyReader(t *testing.T) {
 	}
 
 	// empty bytes because this is not a deep copy
-	b, err = ioutil.ReadAll(buf)
+	b, err = io.ReadAll(buf)
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}

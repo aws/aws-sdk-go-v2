@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/hex"
-	"io/ioutil"
+	"io"
 	"net/http/httptest"
 	"testing"
 	"time"
@@ -87,7 +87,7 @@ func TestGetMetadata(t *testing.T) {
 				t.Fatalf("expect resp, got none")
 			}
 
-			actualContent, err := ioutil.ReadAll(resp.Content)
+			actualContent, err := io.ReadAll(resp.Content)
 			if err != nil {
 				t.Fatalf("expect to read content, got %v", err)
 			}

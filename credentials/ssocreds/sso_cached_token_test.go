@@ -1,7 +1,6 @@
 package ssocreds
 
 import (
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -146,7 +145,7 @@ func TestLoadCachedToken(t *testing.T) {
 }
 
 func TestStoreCachedToken(t *testing.T) {
-	tempDir, err := ioutil.TempDir(os.TempDir(), "aws-sdk-go-v2-"+t.Name())
+	tempDir, err := os.MkdirTemp(os.TempDir(), "aws-sdk-go-v2-"+t.Name())
 	if err != nil {
 		t.Fatalf("failed to create temporary test directory, %v", err)
 	}
