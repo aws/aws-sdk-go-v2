@@ -311,6 +311,94 @@ func TestUploadWithPartSizeIncreased(t *testing.T) {
 	}
 }
 
+// TestUploadMultipartTriggeredByThreshold tests that MultipartUploadThreshold is used
+// to decide when to use multipart upload. With a low threshold (1KB), a 100KB file
+// should trigger multipart upload even though it's smaller than PartSizeBytes (5MB).
+func TestUploadMultipartTriggeredByThreshold(t *testing.T) {
+	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, func(o *Options) {
+		o.MultipartUploadThreshold = 1024       // 1 KB threshold
+		o.PartSizeBytes = 5 * 1024 * 1024       // 5 MB part size (S3 minimum)
+	})
+
+	// Upload 100KB - this is > 1KB threshold, so should use multipart
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(make([]byte, 100*1024)), // 100 KB
+	})
+
+	if err != nil {
+		t.Errorf("expect no error but received %v", err)
+	}
+
+	// Should use multipart upload (CreateMultipartUpload -> UploadPart -> Complete)
+	// not single upload (PutObject)
+	if len(*invocations) == 0 {
+		t.Fatal("expected at least one invocation")
+	}
+	if (*invocations)[0] != "CreateMultipartUpload" {
+		t.Errorf("expected multipart upload due to threshold, but got %v", *invocations)
+	}
+}
+
+// TestUploadSingleWhenBelowThreshold tests that files smaller than
+// MultipartUploadThreshold use single upload (PutObject).
+func TestUploadSingleWhenBelowThreshold(t *testing.T) {
+	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, func(o *Options) {
+		o.MultipartUploadThreshold = 200 * 1024 // 200 KB threshold
+		o.PartSizeBytes = 5 * 1024 * 1024       // 5 MB part size
+	})
+
+	// Upload 100KB - this is < 200KB threshold, so should use single upload
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(make([]byte, 100*1024)), // 100 KB
+	})
+
+	if err != nil {
+		t.Errorf("expect no error but received %v", err)
+	}
+
+	// Should use single upload (PutObject), not multipart
+	if diff := cmpDiff([]string{"PutObject"}, *invocations); len(diff) > 0 {
+		t.Errorf("expected single upload when below threshold: %s", diff)
+	}
+}
+
+// TestUploadThresholdCappedByPartSize tests that when MultipartUploadThreshold
+// is larger than PartSizeBytes, the effective threshold is capped to PartSizeBytes.
+// This ensures backward compatibility with existing behavior.
+func TestUploadThresholdCappedByPartSize(t *testing.T) {
+	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, func(o *Options) {
+		o.MultipartUploadThreshold = 16 * 1024 * 1024 // 16 MB threshold
+		o.PartSizeBytes = 8 * 1024 * 1024             // 8 MB part size
+	})
+
+	// Upload exactly 8MB - should trigger multipart because it equals PartSizeBytes
+	// (which caps the effective threshold)
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(make([]byte, 8*1024*1024)), // 8 MB
+	})
+
+	if err != nil {
+		t.Errorf("expect no error but received %v", err)
+	}
+
+	// Should use multipart upload because 8MB >= min(16MB, 8MB) = 8MB
+	if len(*invocations) == 0 {
+		t.Fatal("expected at least one invocation")
+	}
+	if (*invocations)[0] != "CreateMultipartUpload" {
+		t.Errorf("expected multipart upload when at part size boundary, but got %v", *invocations)
+	}
+}
+
 func TestUploadOrderSingle(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c)
