@@ -5,7 +5,6 @@ package jsonrpc10
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -17,7 +16,7 @@ import (
 	"testing"
 )
 
-func TestClient_OperationWithRequiredMembersWithDefaults_awsAwsjson10Deserialize(t *testing.T) {
+func TestClient_OperationWithRequiredMembersWithDefaults_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -91,12 +90,7 @@ func TestClient_OperationWithRequiredMembersWithDefaults_awsAwsjson10Deserialize
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				Region: "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
 			})
 			var params OperationWithRequiredMembersWithDefaultsInput
 			result, err := client.OperationWithRequiredMembersWithDefaults(context.Background(), &params)

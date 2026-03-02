@@ -6,7 +6,6 @@ import (
 	"bytes"
 	"context"
 	"errors"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -18,7 +17,7 @@ import (
 	"testing"
 )
 
-func TestClient_GreetingWithErrors_awsRestxmlDeserialize(t *testing.T) {
+func TestClient_GreetingWithErrors_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -74,13 +73,8 @@ func TestClient_GreetingWithErrors_awsRestxmlDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
@@ -97,7 +91,7 @@ func TestClient_GreetingWithErrors_awsRestxmlDeserialize(t *testing.T) {
 	}
 }
 
-func TestClient_GreetingWithErrors_InvalidGreeting_awsRestxmlDeserialize(t *testing.T) {
+func TestClient_GreetingWithErrors_InvalidGreeting_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -162,13 +156,8 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestxmlDeserialize(t *test
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
@@ -202,7 +191,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestxmlDeserialize(t *test
 	}
 }
 
-func TestClient_GreetingWithErrors_ComplexError_awsRestxmlDeserialize(t *testing.T) {
+func TestClient_GreetingWithErrors_ComplexError_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -274,13 +263,8 @@ func TestClient_GreetingWithErrors_ComplexError_awsRestxmlDeserialize(t *testing
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)

@@ -5,10 +5,8 @@ package jsonrpc
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -18,7 +16,7 @@ import (
 	"testing"
 )
 
-func TestClient_SparseNullsOperation_awsAwsjson11Serialize(t *testing.T) {
+func TestClient_SparseNullsOperation_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *SparseNullsOperationInput
 		ExpectMethod  string
@@ -102,17 +100,17 @@ func TestClient_SparseNullsOperation_awsAwsjson11Serialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient: protocoltesthttp.NewClient(),
-				Region:     "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
 			})
 			result, err := client.SparseNullsOperation(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -143,7 +141,7 @@ func TestClient_SparseNullsOperation_awsAwsjson11Serialize(t *testing.T) {
 	}
 }
 
-func TestClient_SparseNullsOperation_awsAwsjson11Deserialize(t *testing.T) {
+func TestClient_SparseNullsOperation_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -223,12 +221,7 @@ func TestClient_SparseNullsOperation_awsAwsjson11Deserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				Region: "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
 			})
 			var params SparseNullsOperationInput
 			result, err := client.SparseNullsOperation(context.Background(), &params)

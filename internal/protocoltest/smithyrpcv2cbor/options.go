@@ -52,8 +52,7 @@ type Options struct {
 	// the client option BaseEndpoint instead.
 	EndpointResolver EndpointResolver
 
-	// Resolves the endpoint used for a particular service operation. This should be
-	// used over the deprecated EndpointResolver.
+	// Resolves the endpoint used for a particular service operation.
 	EndpointResolverV2 EndpointResolverV2
 
 	// The logger writer interface to write logging messages to.

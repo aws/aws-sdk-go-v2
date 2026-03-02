@@ -11,9 +11,11 @@ import (
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/internal/endpoints"
+	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/url"
 	"os"
@@ -266,6 +268,20 @@ func (r *resolver) ResolveEndpoint(
 	return endpoint, fmt.Errorf("no endpoint rules defined")
 }
 
+type endpointParamsBinder interface {
+	bindEndpointParams(*EndpointParameters)
+}
+
+func bindEndpointParams(ctx context.Context, input interface{}, options Options) (*EndpointParameters, error) {
+	params := &EndpointParameters{}
+
+	if b, ok := input.(endpointParamsBinder); ok {
+		b.bindEndpointParams(params)
+	}
+
+	return params, nil
+}
+
 type resolveEndpointV2Middleware struct {
 	options Options
 }
@@ -277,5 +293,57 @@ func (*resolveEndpointV2Middleware) ID() string {
 func (m *resolveEndpointV2Middleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "ResolveEndpoint")
+	defer span.End()
+
+	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.options.EndpointResolverV2 == nil {
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params, err := bindEndpointParams(ctx, getOperationInput(ctx), m.options)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to bind endpoint params, %w", err)
+	}
+	endpt, err := timeOperationMetric(ctx, "client.call.resolve_endpoint_duration",
+		func() (smithyendpoints.Endpoint, error) {
+			return m.options.EndpointResolverV2.ResolveEndpoint(ctx, *params)
+		})
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	span.SetProperty("client.call.resolved_endpoint", endpt.URI.String())
+
+	if endpt.URI.RawPath == "" && req.URL.RawPath != "" {
+		endpt.URI.RawPath = endpt.URI.Path
+	}
+	req.URL.Scheme = endpt.URI.Scheme
+	req.URL.Host = endpt.URI.Host
+	req.URL.Path = smithyhttp.JoinPath(endpt.URI.Path, req.URL.Path)
+	req.URL.RawPath = smithyhttp.JoinPath(endpt.URI.RawPath, req.URL.RawPath)
+	for k := range endpt.Headers {
+		req.Header.Set(k, endpt.Headers.Get(k))
+	}
+
+	rscheme := getResolvedAuthScheme(ctx)
+	if rscheme == nil {
+		return out, metadata, fmt.Errorf("no resolved auth scheme")
+	}
+
+	opts, _ := smithyauth.GetAuthOptions(&endpt.Properties)
+	for _, o := range opts {
+		rscheme.SignerProperties.SetAll(&o.SignerProperties)
+	}
+
+	span.End()
 	return next.HandleFinalize(ctx, in)
 }
