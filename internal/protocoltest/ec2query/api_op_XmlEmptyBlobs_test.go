@@ -5,7 +5,6 @@ package ec2query
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go/middleware"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -15,7 +14,7 @@ import (
 	"testing"
 )
 
-func TestClient_XmlEmptyBlobs_awsEc2queryDeserialize(t *testing.T) {
+func TestClient_XmlEmptyBlobs_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -91,13 +90,8 @@ func TestClient_XmlEmptyBlobs_awsEc2queryDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params XmlEmptyBlobsInput
 			result, err := client.XmlEmptyBlobs(context.Background(), &params)

@@ -63,11 +63,6 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     }
 
     @Override
-    public void generateProtocolTests(GenerationContext context) {
-        AwsProtocolUtils.generateHttpProtocolTests(context);
-    }
-
-    @Override
     protected TimestampFormatTrait.Format getDocumentTimestampFormat() {
         return TimestampFormatTrait.Format.DATE_TIME;
     }

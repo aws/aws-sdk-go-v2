@@ -34,6 +34,7 @@ func TestCredentialRefreshRetry(t *testing.T) {
 		Credentials: &mockCredentials{
 			credentials: credvalues,
 		},
+		EndpointResolverV2: &endpointResolver{},
 	})
 
 	_, err := svc.GetItem(context.Background(), nil)

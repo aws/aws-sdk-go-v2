@@ -6,7 +6,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -17,7 +16,7 @@ import (
 	"testing"
 )
 
-func TestClient_FractionalSeconds_smithyRpcv2cborDeserialize(t *testing.T) {
+func TestClient_FractionalSeconds_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -81,12 +80,7 @@ func TestClient_FractionalSeconds_smithyRpcv2cborDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				Region: "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
 			})
 			var params FractionalSecondsInput
 			result, err := client.FractionalSeconds(context.Background(), &params)

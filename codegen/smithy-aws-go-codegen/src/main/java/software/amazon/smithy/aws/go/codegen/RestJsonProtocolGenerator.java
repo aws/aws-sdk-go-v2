@@ -514,11 +514,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     }
 
     @Override
-    public void generateProtocolTests(GenerationContext context) {
-        AwsProtocolUtils.generateHttpProtocolTests(context);
-    }
-
-    @Override
     public void generateProtocolDocumentMarshalerUnmarshalDocument(GenerationContext context) {
         JsonProtocolDocumentUtils.generateProtocolDocumentMarshalerUnmarshalDocument(context);
     }
