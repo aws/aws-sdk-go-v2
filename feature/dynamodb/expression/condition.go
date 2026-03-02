@@ -1360,7 +1360,7 @@ func (nb NameBuilder) BeginsWith(prefix string) ConditionBuilder {
 //	expression.Contains(expression.Name("InviteList"), "Ben")
 //	// Let :ben be an ExpressionAttributeValue representing the value "Ben"
 //	"contains (InviteList, :ben)"
-func Contains(nameBuilder NameBuilder, val interface{}) ConditionBuilder {
+func Contains(nameBuilder NameBuilder, val any) ConditionBuilder {
 	v := ValueBuilder{
 		value: val,
 	}
@@ -1395,7 +1395,7 @@ func Contains(nameBuilder NameBuilder, val interface{}) ConditionBuilder {
 //	expression.Name("InviteList").Contains("Ben")
 //	// Let :ben be an ExpressionAttributeValue representing the value "Ben"
 //	"contains (InviteList, :ben)"
-func (nb NameBuilder) Contains(val interface{}) ConditionBuilder {
+func (nb NameBuilder) Contains(val any) ConditionBuilder {
 	return Contains(nb, val)
 }
 

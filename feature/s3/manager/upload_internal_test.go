@@ -205,7 +205,7 @@ func TestUploadByteSlicePoolConcurrentMultiPartSize(t *testing.T) {
 	})
 
 	var wg sync.WaitGroup
-	for i := 0; i < 2; i++ {
+	for range 2 {
 		wg.Add(2)
 		go func() {
 			defer wg.Done()

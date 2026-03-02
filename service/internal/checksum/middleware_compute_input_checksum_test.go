@@ -1,5 +1,4 @@
 //go:build go1.21
-// +build go1.21
 
 package checksum
 
@@ -843,7 +842,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					ctx := context.Background()
 					var logged bytes.Buffer
 					logger := logging.LoggerFunc(
-						func(classification logging.Classification, format string, v ...interface{}) {
+						func(classification logging.Classification, format string, v ...any) {
 							fmt.Fprintf(&logged, format, v...)
 						},
 					)
@@ -914,8 +913,8 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					// Request validation
 					//------------------------------
 					validateRequestHandler := middleware.HandlerFunc(
-						func(ctx context.Context, input interface{}) (
-							output interface{}, metadata middleware.Metadata, err error,
+						func(ctx context.Context, input any) (
+							output any, metadata middleware.Metadata, err error,
 						) {
 							request := input.(*smithyhttp.Request)
 
@@ -1187,8 +1186,8 @@ func TestComputeInputPayloadChecksumRetry(t *testing.T) {
 			), middleware.After)
 
 			validateRequestHandler := middleware.HandlerFunc(
-				func(ctx context.Context, input interface{}) (
-					output interface{}, metadata middleware.Metadata, err error,
+				func(ctx context.Context, input any) (
+					output any, metadata middleware.Metadata, err error,
 				) {
 					request := input.(*smithyhttp.Request)
 

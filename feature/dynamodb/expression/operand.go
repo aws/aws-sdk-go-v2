@@ -18,7 +18,7 @@ import (
 //	// Create a ValueBuilder representing the string "aValue"
 //	valueBuilder := expression.Value("aValue")
 type ValueBuilder struct {
-	value   interface{}
+	value   any
 	options ValueBuilderOptions
 }
 
@@ -237,7 +237,7 @@ func NameNoDotSplit(name string) NameBuilder {
 //	condition := expression.Name("foo").Equal(expression.Value(10))
 //	// Use Value() to set the value of a set expression.
 //	update := Set(expression.Name("greets"), expression.Value(&types.AttributeValueMemberS{Value: "hello"}))
-func Value(value interface{}) ValueBuilder {
+func Value(value any) ValueBuilder {
 	return ValueBuilder{
 		value: value,
 	}
@@ -262,7 +262,7 @@ func Value(value interface{}) ValueBuilder {
 //	condition := expression.Name("foo").Equal(expression.Value(10))
 //	// Use Value() to set the value of a set expression.
 //	update := Set(expression.Name("greets"), expression.Value(&types.AttributeValueMemberS{Value: "hello"}))
-func ValueWithOptions(value interface{}, optFns ...func(*ValueBuilderOptions)) ValueBuilder {
+func ValueWithOptions(value any, optFns ...func(*ValueBuilderOptions)) ValueBuilder {
 	var options ValueBuilderOptions
 	for _, fn := range optFns {
 		fn(&options)

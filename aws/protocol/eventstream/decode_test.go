@@ -105,7 +105,7 @@ func TestDecoder_DecodeMultipleMessages(t *testing.T) {
 	)
 
 	r := bytes.NewBuffer(nil)
-	for i := 0; i < expectMsgCount; i++ {
+	for range expectMsgCount {
 		r.Write(testEncodedMsg)
 	}
 

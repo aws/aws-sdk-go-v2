@@ -198,7 +198,7 @@ func generatePKCS8(typ keyType) (io.Reader, error) {
 	return &buf, err
 }
 
-func generatePrivateKey(typ keyType) (interface{}, string, error) {
+func generatePrivateKey(typ keyType) (any, string, error) {
 	switch typ {
 	case keyTypeRSA:
 		key, err := rsa.GenerateKey(cryptorand.Reader, 1024)

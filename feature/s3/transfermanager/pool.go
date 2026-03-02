@@ -19,7 +19,7 @@ func newDefaultSlicePool(sliceSize int64, capacity int) *defaultSlicePool {
 	p := &defaultSlicePool{}
 
 	slices := make(chan []byte, capacity)
-	for i := 0; i < capacity; i++ {
+	for range capacity {
 		slices <- make([]byte, sliceSize)
 	}
 

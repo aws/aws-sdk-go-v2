@@ -100,29 +100,29 @@ func TestPresignMiddleware(t *testing.T) {
 func getURLPresignMiddlewareOptions() Options {
 	return Options{
 		Accessor: ParameterAccessor{
-			GetPresignedURL: func(c interface{}) (string, bool, error) {
+			GetPresignedURL: func(c any) (string, bool, error) {
 				presignURL := c.(*mockURLPresignInput).PresignedURL
 				if len(presignURL) != 0 {
 					return presignURL, true, nil
 				}
 				return "", false, nil
 			},
-			GetSourceRegion: func(c interface{}) (string, bool, error) {
+			GetSourceRegion: func(c any) (string, bool, error) {
 				srcRegion := c.(*mockURLPresignInput).SourceRegion
 				if len(srcRegion) != 0 {
 					return srcRegion, true, nil
 				}
 				return "", false, nil
 			},
-			CopyInput: func(c interface{}) (interface{}, error) {
+			CopyInput: func(c any) (any, error) {
 				input := *(c.(*mockURLPresignInput))
 				return &input, nil
 			},
-			SetDestinationRegion: func(c interface{}, v string) error {
+			SetDestinationRegion: func(c any, v string) error {
 				c.(*mockURLPresignInput).DestinationRegion = v
 				return nil
 			},
-			SetPresignedURL: func(c interface{}, v string) error {
+			SetPresignedURL: func(c any, v string) error {
 				c.(*mockURLPresignInput).PresignedURL = v
 				return nil
 			},
@@ -139,7 +139,7 @@ type mockURLPresignInput struct {
 
 type mockURLPresigner struct{}
 
-func (*mockURLPresigner) PresignURL(ctx context.Context, srcRegion string, params interface{}) (
+func (*mockURLPresigner) PresignURL(ctx context.Context, srcRegion string, params any) (
 	req *v4.PresignedHTTPRequest, err error,
 ) {
 	in := params.(*mockURLPresignInput)
@@ -151,7 +151,7 @@ func (*mockURLPresigner) PresignURL(ctx context.Context, srcRegion string, param
 	}, nil
 }
 
-func cmpDiff(e, a interface{}) string {
+func cmpDiff(e, a any) string {
 	if !reflect.DeepEqual(e, a) {
 		return fmt.Sprintf("%v != %v", e, a)
 	}

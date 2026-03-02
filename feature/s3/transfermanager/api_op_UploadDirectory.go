@@ -130,7 +130,7 @@ type directoryUploader struct {
 
 	filesUploaded atomic.Int64
 	filesFailed   atomic.Int64
-	traversed     map[string]interface{}
+	traversed     map[string]any
 
 	err error
 
@@ -208,7 +208,7 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 }
 
 func (u *directoryUploader) init() {
-	u.traversed = make(map[string]interface{})
+	u.traversed = make(map[string]any)
 
 	u.failurePolicy = TerminateUploadPolicy{}
 	if u.in.FailurePolicy != nil {

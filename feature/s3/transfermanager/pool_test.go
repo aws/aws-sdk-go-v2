@@ -13,7 +13,7 @@ func TestDefaultSlicePool(t *testing.T) {
 	var err error
 	var wg sync.WaitGroup
 
-	for i := 0; i < 200; i++ {
+	for range 200 {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -21,7 +21,7 @@ func TestDefaultSlicePool(t *testing.T) {
 		}()
 	}
 	// wait for a slice to be put back
-	for i := 0; i < 200; i++ {
+	for range 200 {
 		bs, err = pool.Get(context.Background())
 		if err != nil {
 			t.Errorf("failed to get slice from pool: %v", err)
