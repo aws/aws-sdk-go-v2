@@ -49,7 +49,7 @@ func TestUploadOrderMulti(t *testing.T) {
 	}
 
 	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart", "UploadPart", "CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
-		t.Errorf(diff)
+		t.Error(diff)
 	}
 
 	if "UPLOAD-ID" != aws.ToString(resp.UploadID) {
@@ -125,7 +125,7 @@ func TestUploadOrderMultiTriggerredBySinglePartSize(t *testing.T) {
 	}
 
 	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
-		t.Errorf(diff)
+		t.Error(diff)
 	}
 
 	if "UPLOAD-ID" != aws.ToString(resp.UploadID) {
@@ -194,7 +194,7 @@ func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
 
 	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart",
 		"CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
-		t.Errorf(diff)
+		t.Error(diff)
 	}
 
 	if "UPLOAD-ID" != aws.ToString(resp.UploadID) {

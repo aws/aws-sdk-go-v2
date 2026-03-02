@@ -3,6 +3,7 @@ package imds
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -327,7 +328,7 @@ type mockDelayer struct {
 // BackoffDelay implements retry.BackoffDelayer.BackoffDelay()
 func (d *mockDelayer) BackoffDelay(attempt int, err error) (time.Duration, error) {
 	if d.err != "" {
-		return 0, fmt.Errorf(d.err)
+		return 0, errors.New(d.err)
 	}
 	return d.delay, nil
 }
