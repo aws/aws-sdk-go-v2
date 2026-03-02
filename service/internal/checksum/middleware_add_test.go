@@ -1,5 +1,4 @@
 //go:build go1.21
-// +build go1.21
 
 package checksum
 
@@ -23,7 +22,7 @@ func TestAddInputMiddleware(t *testing.T) {
 	}{
 		"with trailing checksum": {
 			options: InputMiddlewareOptions{
-				GetAlgorithm: func(interface{}) (string, bool) {
+				GetAlgorithm: func(any) (string, bool) {
 					return string(AlgorithmCRC32), true
 				},
 				EnableTrailingChecksum:           true,
@@ -47,7 +46,7 @@ func TestAddInputMiddleware(t *testing.T) {
 				"Deserialize stack step",
 			},
 			expectInitialize: &SetupInputContext{
-				GetAlgorithm: func(interface{}) (string, bool) {
+				GetAlgorithm: func(any) (string, bool) {
 					return string(AlgorithmCRC32), true
 				},
 			},
@@ -59,7 +58,7 @@ func TestAddInputMiddleware(t *testing.T) {
 		},
 		"with checksum required": {
 			options: InputMiddlewareOptions{
-				GetAlgorithm: func(interface{}) (string, bool) {
+				GetAlgorithm: func(any) (string, bool) {
 					return string(AlgorithmCRC32), true
 				},
 				EnableTrailingChecksum: true,
@@ -82,7 +81,7 @@ func TestAddInputMiddleware(t *testing.T) {
 				"Deserialize stack step",
 			},
 			expectInitialize: &SetupInputContext{
-				GetAlgorithm: func(interface{}) (string, bool) {
+				GetAlgorithm: func(any) (string, bool) {
 					return string(AlgorithmCRC32), true
 				},
 			},
@@ -92,7 +91,7 @@ func TestAddInputMiddleware(t *testing.T) {
 		},
 		"no trailing checksum": {
 			options: InputMiddlewareOptions{
-				GetAlgorithm: func(interface{}) (string, bool) {
+				GetAlgorithm: func(any) (string, bool) {
 					return string(AlgorithmCRC32), true
 				},
 			},
@@ -112,7 +111,7 @@ func TestAddInputMiddleware(t *testing.T) {
 				"Deserialize stack step",
 			},
 			expectInitialize: &SetupInputContext{
-				GetAlgorithm: func(interface{}) (string, bool) {
+				GetAlgorithm: func(any) (string, bool) {
 					return string(AlgorithmCRC32), true
 				},
 			},
@@ -229,7 +228,7 @@ func TestAddOutputMiddleware(t *testing.T) {
 	}{
 		"validate output": {
 			options: OutputMiddlewareOptions{
-				GetValidationMode: func(interface{}) (string, bool) {
+				GetValidationMode: func(any) (string, bool) {
 					return "ENABLED", true
 				},
 				ValidationAlgorithms: []string{
@@ -250,7 +249,7 @@ func TestAddOutputMiddleware(t *testing.T) {
 				"AWSChecksum:ValidateOutputPayloadChecksum",
 			},
 			expectInitialize: &setupOutputContext{
-				GetValidationMode: func(interface{}) (string, bool) {
+				GetValidationMode: func(any) (string, bool) {
 					return "ENABLED", true
 				},
 			},
@@ -265,7 +264,7 @@ func TestAddOutputMiddleware(t *testing.T) {
 		},
 		"validate options off": {
 			options: OutputMiddlewareOptions{
-				GetValidationMode: func(interface{}) (string, bool) {
+				GetValidationMode: func(any) (string, bool) {
 					return "ENABLED", true
 				},
 				ValidationAlgorithms: []string{
@@ -283,7 +282,7 @@ func TestAddOutputMiddleware(t *testing.T) {
 				"AWSChecksum:ValidateOutputPayloadChecksum",
 			},
 			expectInitialize: &setupOutputContext{
-				GetValidationMode: func(interface{}) (string, bool) {
+				GetValidationMode: func(any) (string, bool) {
 					return "ENABLED", true
 				},
 			},
@@ -402,7 +401,7 @@ func nopFinalizeMiddleware(id string) middleware.FinalizeMiddleware {
 		})
 }
 
-func cmpDiff(e, a interface{}) string {
+func cmpDiff(e, a any) string {
 	if !reflect.DeepEqual(e, a) {
 		return fmt.Sprintf("%v != %v", e, a)
 	}

@@ -28,7 +28,7 @@ func NewAWSEpochTime(t time.Time) *AWSEpochTime {
 
 // MarshalJSON serializes the epoch time as AWS Profile epoch time.
 func (t AWSEpochTime) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`{"AWS:EpochTime":%d}`, t.UTC().Unix())), nil
+	return fmt.Appendf(nil, `{"AWS:EpochTime":%d}`, t.UTC().Unix()), nil
 }
 
 // UnmarshalJSON unserializes AWS Profile epoch time.

@@ -60,7 +60,7 @@ func TestStartStreamTranscription_Read(t *testing.T) {
 		},
 	}
 
-	for i := 0; i < len(expectEvents); i++ {
+	for i := range expectEvents {
 		event := <-resp.GetStream().Events()
 		if event == nil {
 			t.Errorf("%d, expect event, got nil", i)
@@ -128,7 +128,7 @@ func setupBasicEventStream(t *testing.T, payload string) (aws.Config, func(), er
 							Value: eventstream.StringValue("application/json"),
 						},
 					},
-					Payload: []byte(fmt.Sprintf(`{"bytes":"%s"}`, toBase64(payload))),
+					Payload: fmt.Appendf(nil, `{"bytes":"%s"}`, toBase64(payload)),
 				},
 			},
 			BiDirectional: true,
@@ -154,7 +154,7 @@ func TestStartStreamTranscription_ReadUnknownEvent(t *testing.T) {
 							Value: eventstream.StringValue("application/json"),
 						},
 					},
-					Payload: []byte(fmt.Sprintf(`{"bytes":"%s"}`, toBase64(payload))),
+					Payload: fmt.Appendf(nil, `{"bytes":"%s"}`, toBase64(payload)),
 				},
 				{
 					Headers: eventstream.Headers{
@@ -206,7 +206,7 @@ func TestStartStreamTranscription_ReadUnknownEvent(t *testing.T) {
 		}()},
 	}
 
-	for i := 0; i < len(expectEvents); i++ {
+	for i := range expectEvents {
 		event := <-resp.GetStream().Events()
 		if event == nil {
 			t.Errorf("%d, expect event, got nil", i)
@@ -422,7 +422,7 @@ func TestStartStreamTranscription_ReadWrite(t *testing.T) {
 							Value: eventstream.StringValue("application/json"),
 						},
 					},
-					Payload: []byte(fmt.Sprintf(`{"bytes":"%s"}`, toBase64(payload))),
+					Payload: fmt.Appendf(nil, `{"bytes":"%s"}`, toBase64(payload)),
 				},
 			},
 			Events: []eventstream.Message{
@@ -438,7 +438,7 @@ func TestStartStreamTranscription_ReadWrite(t *testing.T) {
 							Value: eventstream.StringValue("application/json"),
 						},
 					},
-					Payload: []byte(fmt.Sprintf(`{"bytes":"%s"}`, toBase64(payload))),
+					Payload: fmt.Appendf(nil, `{"bytes":"%s"}`, toBase64(payload)),
 				},
 			},
 			BiDirectional: true,
@@ -472,7 +472,7 @@ func TestStartStreamTranscription_ReadWrite(t *testing.T) {
 				Value: types.BidirectionalOutputPayloadPart{Bytes: []byte(payload)},
 			},
 		}
-		for i := 0; i < len(expectedServiceEvents); i++ {
+		for i := range expectedServiceEvents {
 			event := <-resp.GetStream().Events()
 			if event == nil {
 				t.Errorf("%d, expect event, got nil", i)
@@ -520,7 +520,7 @@ func TestInvokeModelWithBidirectionalStream_Write(t *testing.T) {
 							Value: eventstream.StringValue("application/json"),
 						},
 					},
-					Payload: []byte(fmt.Sprintf(`{"bytes":"%s"}`, toBase64(payload))),
+					Payload: fmt.Appendf(nil, `{"bytes":"%s"}`, toBase64(payload)),
 				},
 			},
 			BiDirectional: true,
@@ -681,7 +681,7 @@ func TestInvokeModelWithBidirectionalStream_ResponseError(t *testing.T) {
 	}
 }
 
-func cmpDiff(e, a interface{}) string {
+func cmpDiff(e, a any) string {
 	if !reflect.DeepEqual(e, a) {
 		return fmt.Sprintf("%v != %v", e, a)
 	}

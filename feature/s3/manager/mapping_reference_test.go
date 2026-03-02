@@ -354,7 +354,7 @@ func TestDefinition_UploadResponse(t *testing.T) {
 		"VersionId": "VersionID",
 	}
 
-	rtype := reflect.TypeOf(UploadOutput{})
+	rtype := reflect.TypeFor[UploadOutput]()
 
 	for _, field := range mappingReference.Definition.UploadResponse.PutObjectResponse {
 		if mapped, ok := legacyMappings[field]; ok {

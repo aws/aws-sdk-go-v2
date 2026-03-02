@@ -3,6 +3,7 @@ package dynamodb
 import (
 	"context"
 	"net/http"
+	"slices"
 	"strings"
 	"testing"
 
@@ -70,10 +71,8 @@ func TestUserAgent_AccountIDEndpointMode(t *testing.T) {
 
 func expectContains(t *testing.T, have []string, want string) {
 	t.Helper()
-	for _, s := range have {
-		if s == want {
-			return
-		}
+	if slices.Contains(have, want) {
+		return
 	}
 	t.Errorf("[]string %v did not contain %s", have, want)
 }
