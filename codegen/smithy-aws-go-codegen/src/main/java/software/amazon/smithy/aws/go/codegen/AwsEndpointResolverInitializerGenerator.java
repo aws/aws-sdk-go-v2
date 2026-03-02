@@ -22,13 +22,11 @@ import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
-import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
-import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
@@ -47,18 +45,6 @@ public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
     public static final String RESOLVE_BASE_ENDPOINT = "resolveBaseEndpoint";
 
     private Map<String, Object> commonCodegenArgs;
-
-
-    private static final ConfigField EndpointResolverV2 = ConfigField.builder()
-            .name(EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME)
-            .type(buildPackageSymbol(EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME))
-            .documentation(String.format("""
-                    Resolves the endpoint used for a particular service operation.
-                    This should be used over the deprecated %s.
-                    """, EndpointGenerator.RESOLVER_INTERFACE_NAME)
-            )
-            .withHelper(true)
-            .build();
 
     private static final ConfigFieldResolver ResolveEndpointResolverV2 = ConfigFieldResolver.builder()
             .resolver(buildPackageSymbol(RESOLVE_ENDPOINT_RESOLVER_V2))
@@ -150,7 +136,6 @@ public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
     public List<RuntimeClientPlugin> getClientPlugins() {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
-                        .addConfigField(EndpointResolverV2)
                         .addConfigFieldResolver(ResolveEndpointResolverV2)
                         .build()
         );

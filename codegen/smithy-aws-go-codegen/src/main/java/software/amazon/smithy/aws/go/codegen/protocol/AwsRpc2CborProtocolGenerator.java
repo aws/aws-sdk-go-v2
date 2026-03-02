@@ -33,11 +33,6 @@ import software.amazon.smithy.model.knowledge.TopDownIndex;
  */
 public final class AwsRpc2CborProtocolGenerator extends Rpc2CborProtocolGenerator {
     @Override
-    public void generateProtocolTests(GenerationContext context) {
-        AwsProtocolUtils.generateHttpProtocolTests(context);
-    }
-
-    @Override
     public void generateEventStreamComponents(GenerationContext context) {
         // This automagically wires up ALL the framing logic for both directions of streams. All we have to do is fill
         // in the serde elsewhere (it's different signatures than normal request/response), see:

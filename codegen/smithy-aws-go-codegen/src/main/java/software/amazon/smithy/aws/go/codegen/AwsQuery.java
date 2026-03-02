@@ -157,11 +157,6 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     }
 
     @Override
-    public void generateProtocolTests(GenerationContext context) {
-        AwsProtocolUtils.generateHttpProtocolTests(context);
-    }
-
-    @Override
     public Map<String, ShapeId> getOperationErrors(GenerationContext context, OperationShape operation) {
         Map<String, ShapeId> errors = new TreeMap<>();
 
