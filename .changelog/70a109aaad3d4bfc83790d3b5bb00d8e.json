@@ -1,0 +1,8 @@
+{
+    "id": "70a109aa-ad3d-4bfc-8379-0d3b5bb00d8e",
+    "type": "feature",
+    "description": "Support for AgentCore Policy GA",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

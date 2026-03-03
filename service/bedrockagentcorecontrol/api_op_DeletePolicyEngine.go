@@ -90,6 +90,10 @@ type DeletePolicyEngineOutput struct {
 	// The human-readable description of the deleted policy engine.
 	Description *string
 
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine
+	// data.
+	EncryptionKeyArn *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

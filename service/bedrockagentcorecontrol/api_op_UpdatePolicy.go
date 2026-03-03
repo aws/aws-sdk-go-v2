@@ -34,13 +34,6 @@ func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, op
 
 type UpdatePolicyInput struct {
 
-	// The new Cedar policy statement that defines the access control rules. This
-	// replaces the existing policy definition with new logic while maintaining the
-	// policy's identity.
-	//
-	// This member is required.
-	Definition types.PolicyDefinition
-
 	// The identifier of the policy engine that manages the policy to be updated. This
 	// ensures the policy is updated within the correct policy engine context.
 	//
@@ -53,9 +46,14 @@ type UpdatePolicyInput struct {
 	// This member is required.
 	PolicyId *string
 
+	// The new Cedar policy statement that defines the access control rules. This
+	// replaces the existing policy definition with new logic while maintaining the
+	// policy's identity.
+	Definition types.PolicyDefinition
+
 	// The new human-readable description for the policy. This optional field allows
 	// updating the policy's documentation while keeping the same policy logic.
-	Description *string
+	Description *types.UpdatedDescription
 
 	// The validation mode for the policy update. Determines how Cedar analyzer
 	// validation results are handled during policy updates. FAIL_ON_ANY_FINDINGS runs

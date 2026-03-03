@@ -3428,6 +3428,29 @@ func validatePolicyDefinition(v types.PolicyDefinition) error {
 			invalidParams.AddNested("[cedar]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.PolicyDefinitionMemberPolicyGeneration:
+		if err := validatePolicyGenerationDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[policyGeneration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyGenerationDetails(v *types.PolicyGenerationDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyGenerationDetails"}
+	if v.PolicyGenerationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyGenerationId"))
+	}
+	if v.PolicyGenerationAssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyGenerationAssetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3513,6 +3536,21 @@ func validateRule(v *types.Rule) error {
 		if err := validateSessionConfig(v.SessionConfig); err != nil {
 			invalidParams.AddNested("SessionConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeMetadataConfiguration(v *types.RuntimeMetadataConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeMetadataConfiguration"}
+	if v.RequireMMDSV2 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequireMMDSV2"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5140,6 +5178,11 @@ func validateOpUpdateAgentRuntimeInput(v *UpdateAgentRuntimeInput) error {
 			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MetadataConfiguration != nil {
+		if err := validateRuntimeMetadataConfiguration(v.MetadataConfiguration); err != nil {
+			invalidParams.AddNested("MetadataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5356,9 +5399,7 @@ func validateOpUpdatePolicyInput(v *UpdatePolicyInput) error {
 	if v.PolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
 	}
-	if v.Definition == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
-	} else if v.Definition != nil {
+	if v.Definition != nil {
 		if err := validatePolicyDefinition(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
 		}

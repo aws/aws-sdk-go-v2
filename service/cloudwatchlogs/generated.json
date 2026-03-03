@@ -87,6 +87,7 @@
         "api_op_ListTagsForResource.go",
         "api_op_ListTagsLogGroup.go",
         "api_op_PutAccountPolicy.go",
+        "api_op_PutBearerTokenAuthentication.go",
         "api_op_PutDataProtectionPolicy.go",
         "api_op_PutDeliveryDestination.go",
         "api_op_PutDeliveryDestinationPolicy.go",

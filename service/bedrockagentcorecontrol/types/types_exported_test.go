@@ -755,6 +755,9 @@ func ExamplePolicyDefinition_outputUsage() {
 	case *types.PolicyDefinitionMemberCedar:
 		_ = v.Value // Value is types.CedarPolicy
 
+	case *types.PolicyDefinitionMemberPolicyGeneration:
+		_ = v.Value // Value is types.PolicyGenerationDetails
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -764,6 +767,7 @@ func ExamplePolicyDefinition_outputUsage() {
 	}
 }
 
+var _ *types.PolicyGenerationDetails
 var _ *types.CedarPolicy
 
 func ExampleRatingScale_outputUsage() {

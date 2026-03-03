@@ -57,6 +57,15 @@ type CreatePolicyEngineInput struct {
 	// managing multiple policy engines across different services or environments.
 	Description *string
 
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine
+	// data.
+	EncryptionKeyArn *string
+
+	// A map of tag keys and values to assign to an AgentCore Policy. Tags enable you
+	// to categorize your resources in different ways, for example, by purpose, owner,
+	// or environment.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -108,6 +117,10 @@ type CreatePolicyEngineOutput struct {
 
 	// A human-readable description of the policy engine's purpose.
 	Description *string
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine
+	// data.
+	EncryptionKeyArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

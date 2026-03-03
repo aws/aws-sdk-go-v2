@@ -148,6 +148,7 @@
         "api_op_PostTimeSeriesDataPoints.go",
         "api_op_PutDataExportConfiguration.go",
         "api_op_PutEnvironmentBlueprintConfiguration.go",
+        "api_op_QueryGraph.go",
         "api_op_RejectPredictions.go",
         "api_op_RejectSubscriptionRequest.go",
         "api_op_RemoveEntityOwner.go",

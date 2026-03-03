@@ -65,6 +65,10 @@ type UpdateAgentRuntimeInput struct {
 	// The updated life cycle configuration for the AgentCore Runtime.
 	LifecycleConfiguration *types.LifecycleConfiguration
 
+	// The updated configuration for microVM Metadata Service (MMDS) settings for the
+	// AgentCore Runtime.
+	MetadataConfiguration *types.RuntimeMetadataConfiguration
+
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
 	ProtocolConfiguration *types.ProtocolConfiguration

@@ -1742,6 +1742,18 @@ func TestCheckSnapshot_PutEnvironmentBlueprintConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_QueryGraph(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.QueryGraph(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "QueryGraph")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RejectPredictions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RejectPredictions(context.Background(), nil, func(o *Options) {
@@ -3834,6 +3846,18 @@ func TestUpdateSnapshot_PutEnvironmentBlueprintConfiguration(t *testing.T) {
 	_, err := svc.PutEnvironmentBlueprintConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutEnvironmentBlueprintConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_QueryGraph(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.QueryGraph(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "QueryGraph")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

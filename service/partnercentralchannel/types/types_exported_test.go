@@ -114,11 +114,11 @@ func ExampleSupportPlan_outputUsage() {
 	case *types.SupportPlanMemberPartnerLedSupport:
 		_ = v.Value // Value is types.PartnerLedSupport
 
-	case *types.SupportPlanMemberResoldBusiness:
-		_ = v.Value // Value is types.ResoldBusiness
-
 	case *types.SupportPlanMemberResoldEnterprise:
 		_ = v.Value // Value is types.ResoldEnterprise
+
+	case *types.SupportPlanMemberResoldUnifiedOperations:
+		_ = v.Value // Value is types.ResoldUnifiedOperations
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -129,6 +129,6 @@ func ExampleSupportPlan_outputUsage() {
 	}
 }
 
-var _ *types.ResoldBusiness
+var _ *types.ResoldUnifiedOperations
 var _ *types.ResoldEnterprise
 var _ *types.PartnerLedSupport

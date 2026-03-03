@@ -108,6 +108,10 @@ type GetAgentRuntimeOutput struct {
 	// The reason for failure if the AgentCore Runtime is in a failed state.
 	FailureReason *string
 
+	// Configuration for microVM Metadata Service (MMDS) settings for the AgentCore
+	// Runtime.
+	MetadataConfiguration *types.RuntimeMetadataConfiguration
+
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
 	ProtocolConfiguration *types.ProtocolConfiguration

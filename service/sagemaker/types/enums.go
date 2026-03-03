@@ -6594,10 +6594,11 @@ type ProductionVariantInferenceAmiVersion string
 
 // Enum values for ProductionVariantInferenceAmiVersion
 const (
-	ProductionVariantInferenceAmiVersionAl2Gpu2    ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-2"
-	ProductionVariantInferenceAmiVersionAl2Gpu21   ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-2-1"
-	ProductionVariantInferenceAmiVersionAl2Gpu31   ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-3-1"
-	ProductionVariantInferenceAmiVersionAl2Neuron2 ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-neuron-2"
+	ProductionVariantInferenceAmiVersionAl2Gpu2     ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-2"
+	ProductionVariantInferenceAmiVersionAl2Gpu21    ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-2-1"
+	ProductionVariantInferenceAmiVersionAl2Gpu31    ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-3-1"
+	ProductionVariantInferenceAmiVersionAl2Neuron2  ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-neuron-2"
+	ProductionVariantInferenceAmiVersionAl2023Gpu41 ProductionVariantInferenceAmiVersion = "al2023-ami-sagemaker-inference-gpu-4-1"
 )
 
 // Values returns all known values for ProductionVariantInferenceAmiVersion. Note
@@ -6611,6 +6612,7 @@ func (ProductionVariantInferenceAmiVersion) Values() []ProductionVariantInferenc
 		"al2-ami-sagemaker-inference-gpu-2-1",
 		"al2-ami-sagemaker-inference-gpu-3-1",
 		"al2-ami-sagemaker-inference-neuron-2",
+		"al2023-ami-sagemaker-inference-gpu-4-1",
 	}
 }
 
@@ -6746,6 +6748,12 @@ const (
 	ProductionVariantInstanceTypeMlG6e16xlarge      ProductionVariantInstanceType = "ml.g6e.16xlarge"
 	ProductionVariantInstanceTypeMlG6e24xlarge      ProductionVariantInstanceType = "ml.g6e.24xlarge"
 	ProductionVariantInstanceTypeMlG6e48xlarge      ProductionVariantInstanceType = "ml.g6e.48xlarge"
+	ProductionVariantInstanceTypeMlG7e2xlarge       ProductionVariantInstanceType = "ml.g7e.2xlarge"
+	ProductionVariantInstanceTypeMlG7e4xlarge       ProductionVariantInstanceType = "ml.g7e.4xlarge"
+	ProductionVariantInstanceTypeMlG7e8xlarge       ProductionVariantInstanceType = "ml.g7e.8xlarge"
+	ProductionVariantInstanceTypeMlG7e12xlarge      ProductionVariantInstanceType = "ml.g7e.12xlarge"
+	ProductionVariantInstanceTypeMlG7e24xlarge      ProductionVariantInstanceType = "ml.g7e.24xlarge"
+	ProductionVariantInstanceTypeMlG7e48xlarge      ProductionVariantInstanceType = "ml.g7e.48xlarge"
 	ProductionVariantInstanceTypeMlP4d24xlarge      ProductionVariantInstanceType = "ml.p4d.24xlarge"
 	ProductionVariantInstanceTypeMlC7gLarge         ProductionVariantInstanceType = "ml.c7g.large"
 	ProductionVariantInstanceTypeMlC7gXlarge        ProductionVariantInstanceType = "ml.c7g.xlarge"
@@ -6880,6 +6888,7 @@ const (
 	ProductionVariantInstanceTypeMlC6in24xlarge     ProductionVariantInstanceType = "ml.c6in.24xlarge"
 	ProductionVariantInstanceTypeMlC6in32xlarge     ProductionVariantInstanceType = "ml.c6in.32xlarge"
 	ProductionVariantInstanceTypeMlP6B20048xlarge   ProductionVariantInstanceType = "ml.p6-b200.48xlarge"
+	ProductionVariantInstanceTypeMlP6B30048xlarge   ProductionVariantInstanceType = "ml.p6-b300.48xlarge"
 	ProductionVariantInstanceTypeMlP6eGb20036xlarge ProductionVariantInstanceType = "ml.p6e-gb200.36xlarge"
 	ProductionVariantInstanceTypeMlP54xlarge        ProductionVariantInstanceType = "ml.p5.4xlarge"
 )
@@ -7019,6 +7028,12 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.g6e.16xlarge",
 		"ml.g6e.24xlarge",
 		"ml.g6e.48xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
 		"ml.p4d.24xlarge",
 		"ml.c7g.large",
 		"ml.c7g.xlarge",
@@ -7153,6 +7168,7 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.c6in.24xlarge",
 		"ml.c6in.32xlarge",
 		"ml.p6-b200.48xlarge",
+		"ml.p6-b300.48xlarge",
 		"ml.p6e-gb200.36xlarge",
 		"ml.p5.4xlarge",
 	}

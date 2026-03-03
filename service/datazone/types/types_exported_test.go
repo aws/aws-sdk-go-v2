@@ -490,6 +490,28 @@ func ExampleListingItem_outputUsage() {
 var _ *types.AssetListing
 var _ *types.DataProductListing
 
+func ExampleMatchClause_outputUsage() {
+	var union types.MatchClause
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MatchClauseMemberEntityPattern:
+		_ = v.Value // Value is types.EntityPattern
+
+	case *types.MatchClauseMemberRelationPattern:
+		_ = v.Value // Value is types.RelationPattern
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EntityPattern
+var _ *types.RelationPattern
+
 func ExampleMatchRationaleItem_outputUsage() {
 	var union types.MatchRationaleItem
 	// type switches can be used to check the union value
@@ -869,6 +891,24 @@ func ExampleRegion_outputUsage() {
 
 var _ *string
 var _ *string
+
+func ExampleResultItem_outputUsage() {
+	var union types.ResultItem
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ResultItemMemberLineageNode:
+		_ = v.Value // Value is types.LineageNodeItem
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LineageNodeItem
 
 func ExampleRowFilter_outputUsage() {
 	var union types.RowFilter

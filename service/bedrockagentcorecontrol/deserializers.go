@@ -3110,6 +3110,15 @@ func awsRestjson1_deserializeOpDocumentCreatePolicyEngineOutput(v **CreatePolicy
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "encryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5898,6 +5907,15 @@ func awsRestjson1_deserializeOpDocumentDeletePolicyEngineOutput(v **DeletePolicy
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "encryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6411,6 +6429,11 @@ func awsRestjson1_deserializeOpDocumentGetAgentRuntimeOutput(v **GetAgentRuntime
 
 		case "lifecycleConfiguration":
 			if err := awsRestjson1_deserializeDocumentLifecycleConfiguration(&sv.LifecycleConfiguration, value); err != nil {
+				return err
+			}
+
+		case "metadataConfiguration":
+			if err := awsRestjson1_deserializeDocumentRuntimeMetadataConfiguration(&sv.MetadataConfiguration, value); err != nil {
 				return err
 			}
 
@@ -9669,6 +9692,15 @@ func awsRestjson1_deserializeOpDocumentGetPolicyEngineOutput(v **GetPolicyEngine
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "encryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
 
 		case "name":
@@ -17375,6 +17407,15 @@ func awsRestjson1_deserializeOpDocumentUpdatePolicyEngineOutput(v **UpdatePolicy
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "encryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
 
 		case "name":
@@ -25212,6 +25253,16 @@ loop:
 			uv = &types.PolicyDefinitionMemberCedar{Value: mv}
 			break loop
 
+		case "policyGeneration":
+			var mv types.PolicyGenerationDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPolicyGenerationDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PolicyDefinitionMemberPolicyGeneration{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -25264,6 +25315,15 @@ func awsRestjson1_deserializeDocumentPolicyEngine(v **types.PolicyEngine, value 
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "encryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
 
 		case "name":
@@ -25574,6 +25634,55 @@ func awsRestjson1_deserializeDocumentPolicyGenerationAssets(v *[]types.PolicyGen
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPolicyGenerationDetails(v **types.PolicyGenerationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PolicyGenerationDetails
+	if *v == nil {
+		sv = &types.PolicyGenerationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "policyGenerationAssetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.PolicyGenerationAssetId = ptr.String(jtv)
+			}
+
+		case "policyGenerationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.PolicyGenerationId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -26201,6 +26310,46 @@ func awsRestjson1_deserializeDocumentRule(v **types.Rule, value interface{}) err
 		case "sessionConfig":
 			if err := awsRestjson1_deserializeDocumentSessionConfig(&sv.SessionConfig, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuntimeMetadataConfiguration(v **types.RuntimeMetadataConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuntimeMetadataConfiguration
+	if *v == nil {
+		sv = &types.RuntimeMetadataConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "requireMMDSV2":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RequireMMDSV2 = ptr.Bool(jtv)
 			}
 
 		default:

@@ -1645,9 +1645,21 @@ func awsRestjson1_serializeOpDocumentCreatePolicyEngineInput(v *CreatePolicyEngi
 		ok.String(*v.Description)
 	}
 
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("encryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -6485,6 +6497,13 @@ func awsRestjson1_serializeOpDocumentUpdateAgentRuntimeInput(v *UpdateAgentRunti
 		}
 	}
 
+	if v.MetadataConfiguration != nil {
+		ok := object.Key("metadataConfiguration")
+		if err := awsRestjson1_serializeDocumentRuntimeMetadataConfiguration(v.MetadataConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NetworkConfiguration != nil {
 		ok := object.Key("networkConfiguration")
 		if err := awsRestjson1_serializeDocumentNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
@@ -7472,7 +7491,7 @@ func (m *awsRestjson1_serializeOpUpdatePolicy) HandleSerialize(ctx context.Conte
 	opPath, opQuery := httpbinding.SplitURI("/policy-engines/{policyEngineId}/policies/{policyId}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "PUT"
+	request.Method = "PATCH"
 	var restEncoder *httpbinding.Encoder
 	if request.URL.RawPath == "" {
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
@@ -7548,7 +7567,9 @@ func awsRestjson1_serializeOpDocumentUpdatePolicyInput(v *UpdatePolicyInput, val
 
 	if v.Description != nil {
 		ok := object.Key("description")
-		ok.String(*v.Description)
+		if err := awsRestjson1_serializeDocumentUpdatedDescription(v.Description, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ValidationMode) > 0 {
@@ -7587,7 +7608,7 @@ func (m *awsRestjson1_serializeOpUpdatePolicyEngine) HandleSerialize(ctx context
 	opPath, opQuery := httpbinding.SplitURI("/policy-engines/{policyEngineId}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "PUT"
+	request.Method = "PATCH"
 	var restEncoder *httpbinding.Encoder
 	if request.URL.RawPath == "" {
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
@@ -7647,7 +7668,9 @@ func awsRestjson1_serializeOpDocumentUpdatePolicyEngineInput(v *UpdatePolicyEngi
 
 	if v.Description != nil {
 		ok := object.Key("description")
-		ok.String(*v.Description)
+		if err := awsRestjson1_serializeDocumentUpdatedDescription(v.Description, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -10037,10 +10060,33 @@ func awsRestjson1_serializeDocumentPolicyDefinition(v types.PolicyDefinition, va
 			return err
 		}
 
+	case *types.PolicyDefinitionMemberPolicyGeneration:
+		av := object.Key("policyGeneration")
+		if err := awsRestjson1_serializeDocumentPolicyGenerationDetails(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPolicyGenerationDetails(v *types.PolicyGenerationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PolicyGenerationAssetId != nil {
+		ok := object.Key("policyGenerationAssetId")
+		ok.String(*v.PolicyGenerationAssetId)
+	}
+
+	if v.PolicyGenerationId != nil {
+		ok := object.Key("policyGenerationId")
+		ok.String(*v.PolicyGenerationId)
+	}
+
 	return nil
 }
 
@@ -10211,6 +10257,18 @@ func awsRestjson1_serializeDocumentRule(v *types.Rule, value smithyjson.Value) e
 		if err := awsRestjson1_serializeDocumentSessionConfig(v.SessionConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuntimeMetadataConfiguration(v *types.RuntimeMetadataConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RequireMMDSV2 != nil {
+		ok := object.Key("requireMMDSV2")
+		ok.Boolean(*v.RequireMMDSV2)
 	}
 
 	return nil
@@ -10757,6 +10815,18 @@ func awsRestjson1_serializeDocumentTriggerConditionInputList(v []types.TriggerCo
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdatedDescription(v *types.UpdatedDescription, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OptionalValue != nil {
+		ok := object.Key("optionalValue")
+		ok.String(*v.OptionalValue)
+	}
+
 	return nil
 }
 

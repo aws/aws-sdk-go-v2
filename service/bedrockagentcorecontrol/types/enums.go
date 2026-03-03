@@ -10,6 +10,7 @@ const (
 	AgentManagedRuntimeTypePython311 AgentManagedRuntimeType = "PYTHON_3_11"
 	AgentManagedRuntimeTypePython312 AgentManagedRuntimeType = "PYTHON_3_12"
 	AgentManagedRuntimeTypePython313 AgentManagedRuntimeType = "PYTHON_3_13"
+	AgentManagedRuntimeTypePython314 AgentManagedRuntimeType = "PYTHON_3_14"
 )
 
 // Values returns all known values for AgentManagedRuntimeType. Note that this can
@@ -22,6 +23,7 @@ func (AgentManagedRuntimeType) Values() []AgentManagedRuntimeType {
 		"PYTHON_3_11",
 		"PYTHON_3_12",
 		"PYTHON_3_13",
+		"PYTHON_3_14",
 	}
 }
 

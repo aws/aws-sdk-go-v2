@@ -91,6 +91,10 @@ type GetPolicyEngineOutput struct {
 	// helps administrators understand the policy engine's role in governance.
 	Description *string
 
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine
+	// data.
+	EncryptionKeyArn *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -215,7 +219,7 @@ type PolicyEngineActiveWaiterOptions struct {
 	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
-	// PolicyEngineActiveWaiter will use default minimum delay of 2 seconds. Note that
+	// PolicyEngineActiveWaiter will use default minimum delay of 5 seconds. Note that
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
@@ -249,7 +253,7 @@ type PolicyEngineActiveWaiter struct {
 // NewPolicyEngineActiveWaiter constructs a PolicyEngineActiveWaiter.
 func NewPolicyEngineActiveWaiter(client GetPolicyEngineAPIClient, optFns ...func(*PolicyEngineActiveWaiterOptions)) *PolicyEngineActiveWaiter {
 	options := PolicyEngineActiveWaiterOptions{}
-	options.MinDelay = 2 * time.Second
+	options.MinDelay = 5 * time.Second
 	options.MaxDelay = 120 * time.Second
 	options.Retryable = policyEngineActiveStateRetryable
 

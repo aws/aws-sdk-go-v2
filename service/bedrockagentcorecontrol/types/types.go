@@ -3155,6 +3155,7 @@ type Policy struct {
 // The following types satisfy this interface:
 //
 //	PolicyDefinitionMemberCedar
+//	PolicyDefinitionMemberPolicyGeneration
 type PolicyDefinition interface {
 	isPolicyDefinition()
 }
@@ -3175,6 +3176,20 @@ type PolicyDefinitionMemberCedar struct {
 }
 
 func (*PolicyDefinitionMemberCedar) isPolicyDefinition() {}
+
+// The generated policy asset information within the policy definition structure.
+// This contains information identifying a generated policy asset from the
+// AI-powered policy generation process within the AgentCore Policy system. Each
+// asset contains a Cedar policy statement generated from natural language input,
+// along with associated metadata and analysis findings to help users evaluate and
+// select the most appropriate policy option.
+type PolicyDefinitionMemberPolicyGeneration struct {
+	Value PolicyGenerationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyDefinitionMemberPolicyGeneration) isPolicyDefinition() {}
 
 // Represents a policy engine resource within the AgentCore Policy system. Policy
 // engines serve as containers for grouping related policies and provide the
@@ -3235,6 +3250,10 @@ type PolicyEngine struct {
 	// to 4,096 characters, this helps administrators understand the policy engine's
 	// role in the overall governance strategy.
 	Description *string
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine
+	// data.
+	EncryptionKeyArn *string
 
 	noSmithyDocumentSerde
 }
@@ -3341,6 +3360,27 @@ type PolicyGenerationAsset struct {
 	// system. This structure encapsulates different policy formats and languages that
 	// can be used to define access control rules.
 	Definition PolicyDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Represents the information identifying a generated policy asset from the
+// AI-powered policy generation process within the AgentCore Policy system. Each
+// asset contains a Cedar policy statement generated from natural language input,
+// along with associated metadata and analysis findings to help users evaluate and
+// select the most appropriate policy option.
+type PolicyGenerationDetails struct {
+
+	// The unique identifier for this generated policy asset within the policy
+	// generation request.
+	//
+	// This member is required.
+	PolicyGenerationAssetId *string
+
+	// The unique identifier for this policy generation request.
+	//
+	// This member is required.
+	PolicyGenerationId *string
 
 	noSmithyDocumentSerde
 }
@@ -3495,6 +3535,18 @@ type Rule struct {
 	//  The session configuration that defines timeout settings for detecting when
 	// agent sessions are complete and ready for evaluation.
 	SessionConfig *SessionConfig
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for microVM metadata service settings.
+type RuntimeMetadataConfiguration struct {
+
+	// Enables MMDSv2 (microVM Metadata Service Version 2) requirement for the agent
+	// runtime. When set to true , the runtime microVM will only accept MMDSv2 requests.
+	//
+	// This member is required.
+	RequireMMDSV2 *bool
 
 	noSmithyDocumentSerde
 }
@@ -4100,6 +4152,19 @@ type TriggerConditionInputMemberTokenBasedTrigger struct {
 }
 
 func (*TriggerConditionInputMemberTokenBasedTrigger) isTriggerConditionInput() {}
+
+// Respresents an optional value that can be provided to update the human-readable
+// description of the resource. If the field is omitted from the request, it will
+// leave the current decription value unchanged.
+type UpdatedDescription struct {
+
+	// Represents an optional value that is used to update the human-readable
+	// description of the resource. If set to null, it will clear the current
+	// description of the resource.
+	OptionalValue *string
+
+	noSmithyDocumentSerde
+}
 
 // Contains user preference consolidation override configuration.
 type UserPreferenceConsolidationOverride struct {

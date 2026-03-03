@@ -232,7 +232,7 @@ type PolicyActiveWaiterOptions struct {
 	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
-	// PolicyActiveWaiter will use default minimum delay of 2 seconds. Note that
+	// PolicyActiveWaiter will use default minimum delay of 5 seconds. Note that
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
@@ -266,7 +266,7 @@ type PolicyActiveWaiter struct {
 // NewPolicyActiveWaiter constructs a PolicyActiveWaiter.
 func NewPolicyActiveWaiter(client GetPolicyAPIClient, optFns ...func(*PolicyActiveWaiterOptions)) *PolicyActiveWaiter {
 	options := PolicyActiveWaiterOptions{}
-	options.MinDelay = 2 * time.Second
+	options.MinDelay = 5 * time.Second
 	options.MaxDelay = 120 * time.Second
 	options.Retryable = policyActiveStateRetryable
 

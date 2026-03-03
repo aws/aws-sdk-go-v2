@@ -239,7 +239,7 @@ type PolicyGenerationCompletedWaiterOptions struct {
 	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
-	// PolicyGenerationCompletedWaiter will use default minimum delay of 2 seconds.
+	// PolicyGenerationCompletedWaiter will use default minimum delay of 5 seconds.
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
@@ -275,7 +275,7 @@ type PolicyGenerationCompletedWaiter struct {
 // NewPolicyGenerationCompletedWaiter constructs a PolicyGenerationCompletedWaiter.
 func NewPolicyGenerationCompletedWaiter(client GetPolicyGenerationAPIClient, optFns ...func(*PolicyGenerationCompletedWaiterOptions)) *PolicyGenerationCompletedWaiter {
 	options := PolicyGenerationCompletedWaiterOptions{}
-	options.MinDelay = 2 * time.Second
+	options.MinDelay = 5 * time.Second
 	options.MaxDelay = 120 * time.Second
 	options.Retryable = policyGenerationCompletedStateRetryable
 

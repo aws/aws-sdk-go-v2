@@ -1,0 +1,8 @@
+{
+    "id": "4a13d009-3b6f-49a6-b616-c9c913d88523",
+    "type": "feature",
+    "description": "This release adds b300 and g7e instance types for SageMaker inference endpoints.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}
