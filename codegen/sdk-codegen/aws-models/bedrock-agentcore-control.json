@@ -78,6 +78,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PYTHON_3_13"
                     }
+                },
+                "PYTHON_3_14": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PYTHON_3_14"
+                    }
                 }
             }
         },
@@ -4337,6 +4343,18 @@
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request with the same client token, the service returns the same response without creating a duplicate policy engine.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of tag keys and values to assign to an AgentCore Policy. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4399,6 +4417,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the policy engine status. This provides details about any failures or the current state of the policy engine creation process.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
                     }
                 }
             },
@@ -6472,6 +6496,12 @@
                         "smithy.api#documentation": "<p>Additional information about the deletion status. This provides details about the deletion process or any issues that may have occurred.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8350,6 +8380,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for HTTP request headers that will be passed through to the runtime.</p>"
                     }
+                },
+                "metadataConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeMetadataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for microVM Metadata Service (MMDS) settings for the AgentCore Runtime.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9750,7 +9786,7 @@
                                 }
                             }
                         ],
-                        "minDelay": 2,
+                        "minDelay": 5,
                         "maxDelay": 120
                     },
                     "PolicyDeleted": {
@@ -9867,7 +9903,7 @@
                                 }
                             }
                         ],
-                        "minDelay": 2,
+                        "minDelay": 5,
                         "maxDelay": 120
                     },
                     "PolicyEngineDeleted": {
@@ -9979,6 +10015,12 @@
                         "smithy.api#documentation": "<p>Additional information about the policy engine status. This provides details about any failures or the current state of the policy engine.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10062,7 +10104,7 @@
                                 }
                             }
                         ],
-                        "minDelay": 2,
+                        "minDelay": 5,
                         "maxDelay": 120
                     }
                 }
@@ -14488,6 +14530,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Cedar policy definition within the policy definition structure. This contains the Cedar policy statement that defines the authorization logic using Cedar's human-readable, analyzable policy language. Cedar policies specify principals (who can access), actions (what operations are allowed), resources (what can be accessed), and optional conditions for fine-grained control. Cedar provides a formal policy language designed for authorization with deterministic evaluation, making policies testable, reviewable, and auditable. All Cedar policies follow a default-deny model where actions are denied unless explicitly permitted, and forbid policies always override permit policies.</p>"
                     }
+                },
+                "policyGeneration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generated policy asset information within the policy definition structure. This contains information identifying a generated policy asset from the AI-powered policy generation process within the AgentCore Policy system. Each asset contains a Cedar policy statement generated from natural language input, along with associated metadata and analysis findings to help users evaluate and select the most appropriate policy option.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14550,6 +14598,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the policy engine status. This provides details about any failures or the current state of the policy engine lifecycle.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
                     }
                 }
             },
@@ -14793,6 +14847,28 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationAsset"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationDetails": {
+            "type": "structure",
+            "members": {
+                "policyGenerationId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for this policy generation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyGenerationAssetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for this generated policy asset within the policy generation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the information identifying a generated policy asset from the AI-powered policy generation process within the AgentCore Policy system. Each asset contains a Cedar policy statement generated from natural language input, along with associated metadata and analysis findings to help users evaluate and select the most appropriate policy option.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationName": {
@@ -15365,6 +15441,21 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#RuntimeMetadataConfiguration": {
+            "type": "structure",
+            "members": {
+                "requireMMDSV2": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables MMDSv2 (microVM Metadata Service Version 2) requirement for the agent runtime. When set to <code>true</code>, the runtime microVM will only accept MMDSv2 requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for microVM metadata service settings.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#S3BucketUri": {
@@ -16236,7 +16327,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 35,
-                    "max": 153600
+                    "max": 10000
                 }
             }
         },
@@ -17365,6 +17456,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated life cycle configuration for the AgentCore Runtime.</p>"
+                    }
+                },
+                "metadataConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeMetadataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated configuration for microVM Metadata Service (MMDS) settings for the AgentCore Runtime.</p>"
                     }
                 },
                 "environmentVariables": {
@@ -18541,7 +18638,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates an existing policy within the AgentCore Policy system. This operation allows modification of the policy description and definition while maintaining the policy's identity. The updated policy is validated against the Cedar schema before being applied. This is an asynchronous operation. Use the <code>GetPolicy</code> operation to poll the <code>status</code> field to track completion.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
+                    "method": "PATCH",
                     "uri": "/policy-engines/{policyEngineId}/policies/{policyId}",
                     "code": 202
                 },
@@ -18579,7 +18676,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates an existing policy engine within the AgentCore Policy system. This operation allows modification of the policy engine description while maintaining its identity. This is an asynchronous operation. Use the <code>GetPolicyEngine</code> operation to poll the <code>status</code> field to track completion.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
+                    "method": "PATCH",
                     "uri": "/policy-engines/{policyEngineId}",
                     "code": 202
                 },
@@ -18598,7 +18695,7 @@
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "target": "com.amazonaws.bedrockagentcorecontrol#UpdatedDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The new description for the policy engine.</p>"
                     }
@@ -18665,6 +18762,12 @@
                         "smithy.api#documentation": "<p>Additional information about the update status.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18691,7 +18794,7 @@
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "target": "com.amazonaws.bedrockagentcorecontrol#UpdatedDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The new human-readable description for the policy. This optional field allows updating the policy's documentation while keeping the same policy logic.</p>"
                     }
@@ -18699,8 +18802,7 @@
                 "definition": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new Cedar policy statement that defines the access control rules. This replaces the existing policy definition with new logic while maintaining the policy's identity.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The new Cedar policy statement that defines the access control rules. This replaces the existing policy definition with new logic while maintaining the policy's identity.</p>"
                     }
                 },
                 "validationMode": {
@@ -18901,6 +19003,20 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdatedDescription": {
+            "type": "structure",
+            "members": {
+                "optionalValue": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents an optional value that is used to update the human-readable description of the resource. If set to null, it will clear the current description of the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Respresents an optional value that can be provided to update the human-readable description of the resource. If the field is omitted from the request, it will leave the current decription value unchanged.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#UserPreferenceConsolidationOverride": {

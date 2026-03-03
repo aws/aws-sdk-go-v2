@@ -3690,21 +3690,6 @@
                 }
             }
         },
-        "com.amazonaws.partnercentralchannel#ResoldBusiness": {
-            "type": "structure",
-            "members": {
-                "coverage": {
-                    "target": "com.amazonaws.partnercentralchannel#Coverage",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The coverage level for resold business support.</p>",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Configuration for resold business support plans.</p>"
-            }
-        },
         "com.amazonaws.partnercentralchannel#ResoldEnterprise": {
             "type": "structure",
             "members": {
@@ -3731,6 +3716,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for resold enterprise support plans.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ResoldUnifiedOperations": {
+            "type": "structure",
+            "members": {
+                "coverage": {
+                    "target": "com.amazonaws.partnercentralchannel#Coverage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The coverage level for resold unified operations support.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tamLocation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the Technical Account Manager (TAM).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "chargeAccountId": {
+                    "target": "com.amazonaws.partnercentralchannel#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID to charge for the support plan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for resold unified operations support plans.</p>"
             }
         },
         "com.amazonaws.partnercentralchannel#ResourceNotFoundException": {
@@ -4108,12 +4121,6 @@
         "com.amazonaws.partnercentralchannel#SupportPlan": {
             "type": "union",
             "members": {
-                "resoldBusiness": {
-                    "target": "com.amazonaws.partnercentralchannel#ResoldBusiness",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Configuration for resold business support plans.</p>"
-                    }
-                },
                 "resoldEnterprise": {
                     "target": "com.amazonaws.partnercentralchannel#ResoldEnterprise",
                     "traits": {
@@ -4124,6 +4131,12 @@
                     "target": "com.amazonaws.partnercentralchannel#PartnerLedSupport",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for partner-led support plans.</p>"
+                    }
+                },
+                "resoldUnifiedOperations": {
+                    "target": "com.amazonaws.partnercentralchannel#ResoldUnifiedOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for resold unified operations support plans.</p>"
                     }
                 }
             },

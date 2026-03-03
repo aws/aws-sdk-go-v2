@@ -816,6 +816,20 @@
                 "smithy.api#documentation": "<p>The details of the policy grant.</p>"
             }
         },
+        "com.amazonaws.datazone#AdditionalAttributes": {
+            "type": "structure",
+            "members": {
+                "formNames": {
+                    "target": "com.amazonaws.datazone#FormNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Names of forms on the query entity that can be requested in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional details on the queried entity that can be requested in the response.</p>"
+            }
+        },
         "com.amazonaws.datazone#AggregationAttributeDisplayValue": {
             "type": "string"
         },
@@ -10653,6 +10667,9 @@
                     "target": "com.amazonaws.datazone#PutDataExportConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.datazone#QueryGraph"
+                },
+                {
                     "target": "com.amazonaws.datazone#RejectPredictions"
                 },
                 {
@@ -14302,6 +14319,35 @@
                 "target": "com.amazonaws.datazone#OwnerPropertiesOutput"
             }
         },
+        "com.amazonaws.datazone#EntityPattern": {
+            "type": "structure",
+            "members": {
+                "entityType": {
+                    "target": "com.amazonaws.datazone#GraphEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of entity to be matched during the graph query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the root entity to start traversal from during the graph query.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2086
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.datazone#FilterClause"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pattern describing the entities to be matched during the graph query.</p>"
+            }
+        },
         "com.amazonaws.datazone#EntityType": {
             "type": "enum",
             "members": {
@@ -15611,6 +15657,18 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^(?![0-9_])\\w+$|^_\\w*[a-zA-Z0-9]\\w*$"
+            }
+        },
+        "com.amazonaws.datazone#FormNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#FormName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.datazone#FormOutput": {
@@ -22167,6 +22225,17 @@
                 "smithy.api#documentation": "<p>The details of a listing for which a subscription is to be granted.</p>"
             }
         },
+        "com.amazonaws.datazone#GraphEntityType": {
+            "type": "enum",
+            "members": {
+                "LINEAGE_NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINEAGE_NODE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datazone#GreaterThanExpression": {
             "type": "structure",
             "members": {
@@ -23110,6 +23179,113 @@
                     "min": 1,
                     "max": 2086
                 }
+            }
+        },
+        "com.amazonaws.datazone#LineageNodeIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#LineageNodeId"
+            }
+        },
+        "com.amazonaws.datazone#LineageNodeItem": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain of the data lineage node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data lineage node.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data lineage node.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data lineage node was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the data lineage node.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.datazone#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data lineage node was updated.</p>"
+                    }
+                },
+                "updatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who updated the data lineage node.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#LineageNodeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data lineage node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the type of the data lineage node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the revision of the data lineage node.</p>"
+                    }
+                },
+                "sourceIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alternate ID of the data lineage node.</p>"
+                    }
+                },
+                "eventTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event timestamp of the data lineage node.</p>"
+                    }
+                },
+                "formsOutput": {
+                    "target": "com.amazonaws.datazone#FormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forms included in the additional attributes of a data lineage node.</p>"
+                    }
+                },
+                "upstreamLineageNodeIds": {
+                    "target": "com.amazonaws.datazone#LineageNodeIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the upstream data lineage nodes.</p>"
+                    }
+                },
+                "downstreamLineageNodeIds": {
+                    "target": "com.amazonaws.datazone#LineageNodeIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the downstream data lineage nodes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary and output forms of a LineageNode</p>"
             }
         },
         "com.amazonaws.datazone#LineageNodeReference": {
@@ -27579,6 +27755,38 @@
                 }
             }
         },
+        "com.amazonaws.datazone#MatchClause": {
+            "type": "union",
+            "members": {
+                "relationPattern": {
+                    "target": "com.amazonaws.datazone#RelationPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern describing the query's relational traversal.</p>"
+                    }
+                },
+                "entityPattern": {
+                    "target": "com.amazonaws.datazone#EntityPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern describing the entities for the query to traverse.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A clause to match a query pattern</p>"
+            }
+        },
+        "com.amazonaws.datazone#MatchClauses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#MatchClause"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.datazone#MatchCriteria": {
             "type": "list",
             "member": {
@@ -30060,6 +30268,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#QueryGraph": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#QueryGraphInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#QueryGraphOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Queries entities in the graph store.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/graph/query"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                }
+            }
+        },
+        "com.amazonaws.datazone#QueryGraphInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "match": {
+                    "target": "com.amazonaws.datazone#MatchClauses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of query match clauses.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of entities to return in a single call to <code>QueryGraph</code>. When the number of entities to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>QueryGraph</code> to list the next set of entities.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of entities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of entities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>QueryGraph</code> to list the next set of entities.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "additionalAttributes": {
+                    "target": "com.amazonaws.datazone#AdditionalAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional details on the queried entity that can be requested in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#QueryGraphOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.datazone#ResultItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the <code>QueryGraph</code> action.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of entities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of entities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>QueryGraph</code> to list the next set of entities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#RecommendationConfiguration": {
             "type": "structure",
             "members": {
@@ -30912,6 +31220,66 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#RelationDirection": {
+            "type": "enum",
+            "members": {
+                "IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN"
+                    }
+                },
+                "OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#RelationPattern": {
+            "type": "structure",
+            "members": {
+                "relationType": {
+                    "target": "com.amazonaws.datazone#RelationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of relation to query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relationDirection": {
+                    "target": "com.amazonaws.datazone#RelationDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The direction to query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxPathLength": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hops to query.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 5
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pattern describing the query's relational traversal.</p>"
+            }
+        },
+        "com.amazonaws.datazone#RelationType": {
+            "type": "enum",
+            "members": {
+                "LINEAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINEAGE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datazone#RelationalFilterConfiguration": {
             "type": "structure",
             "members": {
@@ -31318,6 +31686,26 @@
                 "smithy.api#length": {
                     "max": 25
                 }
+            }
+        },
+        "com.amazonaws.datazone#ResultItem": {
+            "type": "union",
+            "members": {
+                "lineageNode": {
+                    "target": "com.amazonaws.datazone#LineageNodeItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resulting data lineage node from the query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resulting entity from the query.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ResultItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#ResultItem"
             }
         },
         "com.amazonaws.datazone#Revision": {
