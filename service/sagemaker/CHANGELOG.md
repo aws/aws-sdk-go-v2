@@ -1,3 +1,9 @@
+# v1.234.0 (2026-03-03)
+
+* **Feature**: This release adds b300 and g7e instance types for SageMaker inference endpoints.
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.233.1 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

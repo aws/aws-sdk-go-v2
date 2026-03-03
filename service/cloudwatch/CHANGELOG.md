@@ -1,3 +1,8 @@
+# v1.55.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2026-02-24)
 
 * **Feature**: This release adds the APIs (PutAlarmMuteRule, ListAlarmMuteRules, GetAlarmMuteRule and DeleteAlarmMuteRule) to manage a new Cloudwatch resource, AlarmMuteRules. AlarmMuteRules allow customers to temporarily mute alarm notifications during expected downtime periods.

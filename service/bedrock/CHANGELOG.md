@@ -1,3 +1,8 @@
+# v1.55.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2026-02-27)
 
 * **Feature**: Added four new model lifecycle date fields, startOfLifeTime, endOfLifeTime, legacyTime, and publicExtendedAccessTime. Adds support for using the Converse API with Bedrock Batch inference jobs.

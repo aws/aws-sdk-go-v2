@@ -1,8 +1,0 @@
-{
-    "id": "0abee9d6-873f-4774-b5be-1921891f6cb6",
-    "type": "feature",
-    "description": "Adds the Resold Unified Operations support plan and removes the Resold Business support plan in the CreateRelationship and UpdateRelationship APIs",
-    "modules": [
-        "service/partnercentralchannel"
-    ]
-}

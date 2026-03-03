@@ -1,3 +1,9 @@
+# v1.1.0 (2026-03-03)
+
+* **Feature**: Adds the Resold Unified Operations support plan and removes the Resold Business support plan in the CreateRelationship and UpdateRelationship APIs
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.6 (2026-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

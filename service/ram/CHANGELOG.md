@@ -1,3 +1,8 @@
+# v1.36.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2026-02-27)
 
 * **Feature**: Resource owners can now specify ResourceShareConfiguration request parameter for CreateResourceShare API including RetainSharingOnAccountLeaveOrganization boolean parameter

@@ -1,3 +1,8 @@
+# v1.68.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.68.0 (2026-02-26)
 
 * **Feature**: Security Hub added EXTENDED PLAN integration type to DescribeProductsV2 and added metadata.product.vendor name GroupBy support to GetFindingStatisticsV2

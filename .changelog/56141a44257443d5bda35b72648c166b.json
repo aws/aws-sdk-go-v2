@@ -1,8 +1,0 @@
-{
-    "id": "56141a44-2574-43d5-bda3-5b72648c166b",
-    "type": "feature",
-    "description": "CloudWatch Logs updates- Added support for the PutBearerTokenAuthentication API to enable or disable bearer token authentication on a log group. For more information, see CloudWatch Logs API documentation.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

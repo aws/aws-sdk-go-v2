@@ -1,3 +1,8 @@
+# v1.6.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2026-02-27)
 
 * **Feature**: Added support for Change Data Capture (CDC) streams with Duration DataType.

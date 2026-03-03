@@ -1,3 +1,22 @@
+# Release (2026-03-03)
+
+## General Highlights
+* **Bug Fix**: Modernize non codegen files with go fix
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.20.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1200-2026-03-03)
+  * **Feature**: Support for AgentCore Policy GA
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.64.0](service/cloudwatchlogs/CHANGELOG.md#v1640-2026-03-03)
+  * **Feature**: CloudWatch Logs updates- Added support for the PutBearerTokenAuthentication API to enable or disable bearer token authentication on a log group. For more information, see CloudWatch Logs API documentation.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.54.0](service/datazone/CHANGELOG.md#v1540-2026-03-03)
+  * **Feature**: Adding QueryGraph operation to DataZone SDK
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralchannel`: [v1.1.0](service/partnercentralchannel/CHANGELOG.md#v110-2026-03-03)
+  * **Feature**: Adds the Resold Unified Operations support plan and removes the Resold Business support plan in the CreateRelationship and UpdateRelationship APIs
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.234.0](service/sagemaker/CHANGELOG.md#v12340-2026-03-03)
+  * **Feature**: This release adds b300 and g7e instance types for SageMaker inference endpoints.
+
 # Release (2026-02-27)
 
 ## Module Highlights

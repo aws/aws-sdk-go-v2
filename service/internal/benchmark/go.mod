@@ -4,24 +4,24 @@ go 1.24
 
 require (
 	github.com/aws/aws-sdk-go v1.44.28
-	github.com/aws/aws-sdk-go-v2 v1.41.2
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.56.0
-	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.29.18
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.96.2
-	github.com/aws/aws-sdk-go-v2/service/schemas v1.34.9
+	github.com/aws/aws-sdk-go-v2 v1.41.3
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.56.1
+	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.29.19
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.96.3
+	github.com/aws/aws-sdk-go-v2/service/schemas v1.34.10
 	github.com/aws/smithy-go v1.24.2
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.5 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.18 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.18 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.18 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.5 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.10 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.11.18 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.18 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.18 // indirect
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.6 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.19 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.19 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.19 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.6 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.11 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.11.19 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.19 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.19 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 

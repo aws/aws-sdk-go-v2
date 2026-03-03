@@ -1,3 +1,8 @@
+# v1.44.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2026-02-25)
 
 * **Feature**: Neptune global clusters now supports tags

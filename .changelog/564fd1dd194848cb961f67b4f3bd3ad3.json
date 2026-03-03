@@ -1,8 +1,0 @@
-{
-    "id": "564fd1dd-1948-48cb-961f-67b4f3bd3ad3",
-    "type": "feature",
-    "description": "Adding QueryGraph operation to DataZone SDK",
-    "modules": [
-        "service/datazone"
-    ]
-}
