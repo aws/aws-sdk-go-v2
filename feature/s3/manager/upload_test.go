@@ -11,7 +11,7 @@ import (
 	"os"
 	"reflect"
 	"regexp"
-	"sort"
+	"slices"
 	"strconv"
 	"strings"
 	"testing"
@@ -84,7 +84,7 @@ func TestUploadOrderMulti(t *testing.T) {
 
 	parts := (*args)[4].(*s3.CompleteMultipartUploadInput).MultipartUpload.Parts
 
-	for i := 0; i < 3; i++ {
+	for i := range 3 {
 		num := parts[i].PartNumber
 		etag := aws.ToString(parts[i].ETag)
 
@@ -238,7 +238,7 @@ func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
 
 	parts := (*args)[3].(*s3.CompleteMultipartUploadInput).MultipartUpload.Parts
 
-	for i := 0; i < 2; i++ {
+	for i := range 2 {
 		num := parts[i].PartNumber
 		etag := aws.ToString(parts[i].ETag)
 
@@ -666,9 +666,7 @@ func TestUploadOrderMultiBufferedReader(t *testing.T) {
 	for i := 1; i <= 3; i++ {
 		parts = append(parts, getReaderLength((*params)[i].(*s3.UploadPartInput).Body))
 	}
-	sort.Slice(parts, func(i, j int) bool {
-		return parts[i] < parts[j]
-	})
+	slices.Sort(parts)
 
 	if diff := cmpDiff([]int64{1024 * 1024 * 2, 1024 * 1024 * 5, 1024 * 1024 * 5}, parts); len(diff) > 0 {
 		t.Error(diff)
@@ -697,9 +695,7 @@ func TestUploadOrderMultiBufferedReaderPartial(t *testing.T) {
 	for i := 1; i <= 3; i++ {
 		parts = append(parts, getReaderLength((*params)[i].(*s3.UploadPartInput).Body))
 	}
-	sort.Slice(parts, func(i, j int) bool {
-		return parts[i] < parts[j]
-	})
+	slices.Sort(parts)
 
 	if diff := cmpDiff([]int64{1024 * 1024 * 2, 1024 * 1024 * 5, 1024 * 1024 * 5}, parts); len(diff) > 0 {
 		t.Error(diff)
@@ -730,9 +726,7 @@ func TestUploadOrderMultiBufferedReaderEOF(t *testing.T) {
 	for i := 1; i <= 2; i++ {
 		parts = append(parts, getReaderLength((*params)[i].(*s3.UploadPartInput).Body))
 	}
-	sort.Slice(parts, func(i, j int) bool {
-		return parts[i] < parts[j]
-	})
+	slices.Sort(parts)
 
 	if diff := cmpDiff([]int64{1024 * 1024 * 5, 1024 * 1024 * 5}, parts); len(diff) > 0 {
 		t.Error(diff)
@@ -978,7 +972,7 @@ func createTempFile(t *testing.T, size int64) (*os.File, func(*testing.T), error
 
 func buildFailHandlers(tb testing.TB, parts, retry int) []http.Handler {
 	handlers := make([]http.Handler, parts)
-	for i := 0; i < len(handlers); i++ {
+	for i := range handlers {
 		handlers[i] = &failPartHandler{
 			tb:             tb,
 			failsRemaining: retry,
@@ -1444,7 +1438,7 @@ const completeUploadResp = `<CompleteMultipartUploadResponse>
 
 const abortUploadResp = `<AbortMultipartUploadResponse></AbortMultipartUploadResponse>`
 
-func cmpDiff(e, a interface{}) string {
+func cmpDiff(e, a any) string {
 	if !reflect.DeepEqual(e, a) {
 		return fmt.Sprintf("%v != %v", e, a)
 	}

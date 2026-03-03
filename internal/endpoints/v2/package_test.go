@@ -1362,7 +1362,7 @@ func TestLogDeprecated(t *testing.T) {
 	}
 }
 
-func cmpDiff(e, a interface{}) string {
+func cmpDiff(e, a any) string {
 	if !reflect.DeepEqual(e, a) {
 		return fmt.Sprintf("%v != %v", e, a)
 	}

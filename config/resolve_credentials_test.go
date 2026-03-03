@@ -112,22 +112,22 @@ func setupCredentialsEndpoints() (aws.EndpointResolverWithOptions, func()) {
 			case "AssumeRole":
 				if val, ok := r.Header["X-Amz-Security-Token"]; ok {
 					if val[0] == "ecs-full-path-token" {
-						w.Write([]byte(fmt.Sprintf(
+						w.Write(fmt.Appendf(nil,
 							assumeRoleRespEcsFullPathMsg,
 							smithytime.FormatDateTime(time.Now().
-								Add(15*time.Minute)))))
+								Add(15*time.Minute))))
 						return
 					}
 				}
-				w.Write([]byte(fmt.Sprintf(
+				w.Write(fmt.Appendf(nil,
 					assumeRoleRespMsg,
 					smithytime.FormatDateTime(time.Now().
-						Add(15*time.Minute)))))
+						Add(15*time.Minute))))
 				return
 			case "AssumeRoleWithWebIdentity":
-				w.Write([]byte(fmt.Sprintf(assumeRoleWithWebIdentityResponse,
+				w.Write(fmt.Appendf(nil, assumeRoleWithWebIdentityResponse,
 					smithytime.FormatDateTime(time.Now().
-						Add(15*time.Minute)))))
+						Add(15*time.Minute))))
 				return
 			default:
 				w.WriteHeader(404)
@@ -136,15 +136,15 @@ func setupCredentialsEndpoints() (aws.EndpointResolverWithOptions, func()) {
 		}))
 
 	ssoServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(fmt.Sprintf(
+		w.Write(fmt.Appendf(nil,
 			getRoleCredentialsResponse,
 			time.Now().
 				Add(15*time.Minute).
-				UnixNano()/int64(time.Millisecond))))
+				UnixNano()/int64(time.Millisecond)))
 	}))
 
 	resolver := aws.EndpointResolverWithOptionsFunc(
-		func(service, region string, options ...interface{}) (aws.Endpoint, error) {
+		func(service, region string, options ...any) (aws.Endpoint, error) {
 			switch service {
 			case sts.ServiceID:
 				return aws.Endpoint{

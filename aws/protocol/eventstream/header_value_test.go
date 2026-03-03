@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func binWrite(v interface{}) []byte {
+func binWrite(v any) []byte {
 	var w bytes.Buffer
 	binary.Write(&w, binary.BigEndian, v)
 	return w.Bytes()

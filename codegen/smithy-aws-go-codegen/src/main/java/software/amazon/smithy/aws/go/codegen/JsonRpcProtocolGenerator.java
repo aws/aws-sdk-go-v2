@@ -171,11 +171,6 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     }
 
     @Override
-    public void generateProtocolTests(GenerationContext context) {
-        AwsProtocolUtils.generateHttpProtocolTests(context);
-    }
-
-    @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
         var tmpl = goTemplate("""
                 headerCode := response.Header.Get("X-Amzn-ErrorType")

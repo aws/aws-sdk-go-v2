@@ -388,7 +388,7 @@ func TestDefinition_UploadRequest(t *testing.T) {
 		"SSEKMSKeyId": "SSEKMSKeyID",
 	}
 
-	rtype := reflect.TypeOf(UploadObjectInput{})
+	rtype := reflect.TypeFor[UploadObjectInput]()
 
 	for _, field := range mappingReference.Definition.UploadRequest.PutObjectRequest {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -408,7 +408,7 @@ func TestDefinition_UploadResponse(t *testing.T) {
 		"SSEKMSKeyId": "SSEKMSKeyID",
 	}
 
-	rtype := reflect.TypeOf(UploadObjectOutput{})
+	rtype := reflect.TypeFor[UploadObjectOutput]()
 
 	for _, field := range mappingReference.Definition.UploadResponse.PutObjectResponse {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -427,7 +427,7 @@ func TestDefinition_DownloadRequest(t *testing.T) {
 		"VersionId": "VersionID",
 	}
 
-	rtype := reflect.TypeOf(DownloadObjectInput{})
+	rtype := reflect.TypeFor[DownloadObjectInput]()
 
 	for _, field := range mappingReference.Definition.DownloadRequest.GetObjectRequest {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -447,7 +447,7 @@ func TestDefinition_DownloadResponse(t *testing.T) {
 		"SSEKMSKeyId": "SSEKMSKeyID",
 	}
 
-	rtype := reflect.TypeOf(DownloadObjectOutput{})
+	rtype := reflect.TypeFor[DownloadObjectOutput]()
 
 	for _, field := range mappingReference.Definition.DownloadResponse.GetObjectResponse {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -466,7 +466,7 @@ func TestDefinition_GetRequest(t *testing.T) {
 		"VersionId": "VersionID",
 	}
 
-	rtype := reflect.TypeOf(GetObjectInput{})
+	rtype := reflect.TypeFor[GetObjectInput]()
 
 	for _, field := range mappingReference.Definition.DownloadRequest.GetObjectRequest {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -486,7 +486,7 @@ func TestDefinition_GetResponse(t *testing.T) {
 		"SSEKMSKeyId": "SSEKMSKeyID",
 	}
 
-	rtype := reflect.TypeOf(GetObjectOutput{})
+	rtype := reflect.TypeFor[GetObjectOutput]()
 
 	for _, field := range mappingReference.Definition.DownloadResponse.GetObjectResponse {
 		if mapped, ok := legacyMappings[field]; ok {
@@ -504,7 +504,7 @@ func TestConversion_UploadRequest_PutObjectRequest(t *testing.T) {
 	src := UploadObjectInput{}
 
 	now := time.Now()
-	mockFields(&src, mappingReference.Conversion.UploadRequest.PutObjectRequest, map[string]interface{}{
+	mockFields(&src, mappingReference.Conversion.UploadRequest.PutObjectRequest, map[string]any{
 		"Time": &now,
 	})
 
@@ -521,7 +521,7 @@ func TestConversion_UploadRequest_CreateMultipartUploadRequest(t *testing.T) {
 	src := UploadObjectInput{}
 
 	now := time.Now()
-	mockFields(&src, mappingReference.Conversion.UploadRequest.CreateMultipartRequest, map[string]interface{}{
+	mockFields(&src, mappingReference.Conversion.UploadRequest.CreateMultipartRequest, map[string]any{
 		"Time": &now,
 	})
 
@@ -537,7 +537,7 @@ func TestConversion_UploadRequest_CreateMultipartUploadRequest(t *testing.T) {
 func TestConversion_UploadRequest_UploadPartRequest(t *testing.T) {
 	src := UploadObjectInput{}
 
-	mockFields(&src, mappingReference.Conversion.UploadRequest.UploadPartRequest, map[string]interface{}{})
+	mockFields(&src, mappingReference.Conversion.UploadRequest.UploadPartRequest, map[string]any{})
 
 	dst := src.mapUploadPartInput(strings.NewReader(""), aws.Int32(1), aws.String(""), types.ChecksumAlgorithmCrc32)
 
@@ -549,7 +549,7 @@ func TestConversion_UploadRequest_UploadPartRequest(t *testing.T) {
 func TestConversion_UploadRequest_CompleteMultipartUploadRequest(t *testing.T) {
 	src := UploadObjectInput{}
 
-	mockFields(&src, mappingReference.Conversion.UploadRequest.CompleteMultipartRequest, map[string]interface{}{})
+	mockFields(&src, mappingReference.Conversion.UploadRequest.CompleteMultipartRequest, map[string]any{})
 
 	dst := src.mapCompleteMultipartUploadInput(aws.String(""), []types.CompletedPart{})
 
@@ -561,7 +561,7 @@ func TestConversion_UploadRequest_CompleteMultipartUploadRequest(t *testing.T) {
 func TestConversion_UploadRequest_AbortMultipartUploadRequest(t *testing.T) {
 	src := UploadObjectInput{}
 
-	mockFields(&src, mappingReference.Conversion.UploadRequest.AbortMultipartRequest, map[string]interface{}{})
+	mockFields(&src, mappingReference.Conversion.UploadRequest.AbortMultipartRequest, map[string]any{})
 
 	dst := src.mapAbortMultipartUploadInput(aws.String(""))
 
@@ -574,7 +574,7 @@ func TestConversion_CompleteMultipartUploadResponse_UploadResponse(t *testing.T)
 	dst := UploadObjectOutput{}
 	src := s3.CompleteMultipartUploadOutput{}
 
-	mockFields(&src, mappingReference.Conversion.CompleteMultipartResponse.UploadResponse, map[string]interface{}{})
+	mockFields(&src, mappingReference.Conversion.CompleteMultipartResponse.UploadResponse, map[string]any{})
 
 	dst.mapFromCompleteMultipartUploadOutput(&src, aws.String("Bucket"), aws.String(""), 0, []types.CompletedPart{})
 
@@ -590,7 +590,7 @@ func TestConversion_PutObjectResponse_UploadResponse(t *testing.T) {
 	dst := UploadObjectOutput{}
 	src := s3.PutObjectOutput{}
 
-	mockFields(&src, mappingReference.Conversion.PutObjectResponse.UploadResponse, map[string]interface{}{})
+	mockFields(&src, mappingReference.Conversion.PutObjectResponse.UploadResponse, map[string]any{})
 
 	dst.mapFromPutObjectOutput(&src, aws.String(""), aws.String(""), 0)
 
@@ -607,7 +607,7 @@ func TestConversion_GetObjectResponse_DownloadResponse(t *testing.T) {
 	src := s3.GetObjectOutput{}
 
 	now := time.Now()
-	mockFields(&src, mappingReference.Conversion.GetObjectResponse.DownloadResponse, map[string]interface{}{
+	mockFields(&src, mappingReference.Conversion.GetObjectResponse.DownloadResponse, map[string]any{
 		"Time": &now,
 	})
 
@@ -626,7 +626,7 @@ func TestConversion_GetObjectResponse_GetResponse(t *testing.T) {
 	src := s3.GetObjectOutput{}
 
 	now := time.Now()
-	mockFields(&src, mappingReference.Conversion.GetObjectResponse.DownloadResponse, map[string]interface{}{
+	mockFields(&src, mappingReference.Conversion.GetObjectResponse.DownloadResponse, map[string]any{
 		"Time": &now,
 	})
 
@@ -673,14 +673,14 @@ func expectConvertedFields(t *testing.T, dst, src any, fields []string, legacyNa
 }
 
 // v must be a pointer to a struct
-func mockFields(v any, fields []string, legacyTypes map[string]interface{}) {
+func mockFields(v any, fields []string, legacyTypes map[string]any) {
 	rv := reflect.ValueOf(v).Elem()
 	for _, field := range fields {
 		mockValue(rv.FieldByName(field), field, legacyTypes)
 	}
 }
 
-func mockValue(v reflect.Value, field string, legacyTypes map[string]interface{}) {
+func mockValue(v reflect.Value, field string, legacyTypes map[string]any) {
 	switch v.Kind() {
 	case reflect.Pointer:
 		switch v.Type().Elem().Kind() {

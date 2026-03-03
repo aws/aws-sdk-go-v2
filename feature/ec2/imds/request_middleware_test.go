@@ -35,10 +35,10 @@ func TestAddRequestMiddleware(t *testing.T) {
 			AddMiddleware: func(stack *middleware.Stack, options Options) error {
 				return addAPIRequestMiddleware(stack, options,
 					"TestRequest",
-					func(interface{}) (string, error) {
+					func(any) (string, error) {
 						return "/mockPath", nil
 					},
-					func(*smithyhttp.Response) (interface{}, error) {
+					func(*smithyhttp.Response) (any, error) {
 						return struct{}{}, nil
 					},
 				)
@@ -73,10 +73,10 @@ func TestAddRequestMiddleware(t *testing.T) {
 		"base request": {
 			AddMiddleware: func(stack *middleware.Stack, options Options) error {
 				return addRequestMiddleware(stack, options, "POST", "TestRequest",
-					func(interface{}) (string, error) {
+					func(any) (string, error) {
 						return "/mockPath", nil
 					},
-					func(*smithyhttp.Response) (interface{}, error) {
+					func(*smithyhttp.Response) (any, error) {
 						return struct{}{}, nil
 					},
 				)
@@ -252,7 +252,7 @@ func TestDeserailizeResponse_cacheBody(t *testing.T) {
 		Content io.ReadCloser
 	}
 	m := &deserializeResponse{
-		GetOutput: func(resp *smithyhttp.Response) (interface{}, error) {
+		GetOutput: func(resp *smithyhttp.Response) (any, error) {
 			return &Output{
 				Content: resp.Body,
 			}, nil
@@ -616,7 +616,7 @@ func TestRequestGetToken(t *testing.T) {
 			})
 
 			ctx := context.Background()
-			var result interface{}
+			var result any
 			var err error
 			for i := 0; i < c.APICallCount; i++ {
 				result, _, err = client.invokeOperation(ctx, "TestRequest", struct{}{}, nil,
@@ -624,10 +624,10 @@ func TestRequestGetToken(t *testing.T) {
 						return addAPIRequestMiddleware(stack,
 							client.options.Copy(),
 							"TestRequest",
-							func(interface{}) (string, error) {
+							func(any) (string, error) {
 								return "/latest/foo", nil
 							},
-							func(resp *smithyhttp.Response) (interface{}, error) {
+							func(resp *smithyhttp.Response) (any, error) {
 								return &mockRequestOutput{
 									Content: resp.Body,
 								}, nil
@@ -671,7 +671,7 @@ func TestRequestGetToken(t *testing.T) {
 	}
 }
 
-func cmpDiff(e, a interface{}) string {
+func cmpDiff(e, a any) string {
 	if !reflect.DeepEqual(e, a) {
 		return fmt.Sprintf("%v != %v", e, a)
 	}

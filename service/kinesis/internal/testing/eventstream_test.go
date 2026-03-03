@@ -74,7 +74,7 @@ func TestSubscribeToShard_Read(t *testing.T) {
 		},
 	}
 
-	for i := 0; i < len(expectEvents); i++ {
+	for i := range expectEvents {
 		event := <-resp.GetStream().Events()
 		if event == nil {
 			t.Errorf("%d, expect event, got nil", i)
@@ -224,7 +224,7 @@ func TestSubscribeToShard_ReadUnknownEvent(t *testing.T) {
 		}()},
 	}
 
-	for i := 0; i < len(expectEvents); i++ {
+	for i := range expectEvents {
 		event := <-resp.GetStream().Events()
 		if event == nil {
 			t.Errorf("%d, expect event, got nil", i)
@@ -482,7 +482,7 @@ func TestSubscribeToShard_ResponseError(t *testing.T) {
 	}
 }
 
-func cmpDiff(e, a interface{}) string {
+func cmpDiff(e, a any) string {
 	if !reflect.DeepEqual(e, a) {
 		return fmt.Sprintf("%v != %v", e, a)
 	}

@@ -5,7 +5,6 @@ package query
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
@@ -17,7 +16,7 @@ import (
 	"testing"
 )
 
-func TestClient_FractionalSeconds_awsAwsqueryDeserialize(t *testing.T) {
+func TestClient_FractionalSeconds_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -79,13 +78,8 @@ func TestClient_FractionalSeconds_awsAwsqueryDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params FractionalSecondsInput
 			result, err := client.FractionalSeconds(context.Background(), &params)

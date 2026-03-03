@@ -12,7 +12,7 @@ SNAPSHOT_TAGS=-tags "snapshot"
 
 SMITHY_GO_SRC ?= $(abspath $(shell pwd)/..)/smithy-go
 
-SDK_MIN_GO_VERSION ?= 1.23
+SDK_MIN_GO_VERSION ?= 1.24
 
 EACHMODULE_FAILFAST ?= true
 EACHMODULE_FAILFAST_FLAG=-fail-fast=${EACHMODULE_FAILFAST}

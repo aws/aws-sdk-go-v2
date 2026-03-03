@@ -107,7 +107,7 @@ func ExampleWithEndpointResolver() {
 func ExampleWithEndpointResolverWithOptions() {
 	cfg, err := config.LoadDefaultConfig(context.TODO(),
 		config.WithEndpointResolverWithOptions(aws.EndpointResolverWithOptionsFunc(
-			func(service, region string, options ...interface{}) (aws.Endpoint, error) {
+			func(service, region string, options ...any) (aws.Endpoint, error) {
 				return aws.Endpoint{URL: "https://mock.amazonaws.com"}, nil
 			})),
 	)

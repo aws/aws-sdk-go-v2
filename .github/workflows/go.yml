@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        go-version: ["1.23", "1.24", "1.25"]
+        go-version: ["1.24", "1.25", "1.26"]
     steps:
     - uses: actions/checkout@v2
 
@@ -51,7 +51,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        go-version: ["1.23"]
+        go-version: ["1.24"]
     env:
       GOARCH: "386"
     steps:
@@ -79,7 +79,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
-        go-version: ["1.23", "1.24", "1.25"]
+        go-version: ["1.24", "1.25", "1.26"]
     env:
       EACHMODULE_SKIP: "internal\\repotools\\changes"
     steps:

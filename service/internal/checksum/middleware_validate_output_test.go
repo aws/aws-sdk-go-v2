@@ -1,5 +1,4 @@
 //go:build go1.21
-// +build go1.21
 
 package checksum
 
@@ -194,7 +193,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			var logged bytes.Buffer
 			ctx := middleware.SetLogger(context.Background(), logging.LoggerFunc(
-				func(classification logging.Classification, format string, v ...interface{}) {
+				func(classification logging.Classification, format string, v ...any) {
 					fmt.Fprintf(&logged, format, v...)
 				}))
 

@@ -11,7 +11,7 @@ func TestMaxSlicePool(t *testing.T) {
 	pool := newMaxSlicePool(0)
 
 	var wg sync.WaitGroup
-	for i := 0; i < 100; i++ {
+	for range 100 {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -98,7 +98,7 @@ func TestPoolShouldPreferAllocatedSlicesOverNewAllocations(t *testing.T) {
 	}
 	pool.Put(initialSlice)
 
-	for i := 0; i < 100; i++ {
+	for range 100 {
 		newSlice, err := pool.Get(context.Background())
 		if err != nil {
 			t.Errorf("failed to get slice from pool: %v", err)
@@ -164,7 +164,7 @@ type syncSlicePool struct {
 
 func newSyncSlicePool(sliceSize int64) *syncSlicePool {
 	p := &syncSlicePool{sliceSize: sliceSize}
-	p.New = func() interface{} {
+	p.New = func() any {
 		bs := make([]byte, p.sliceSize)
 		return &bs
 	}

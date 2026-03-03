@@ -157,7 +157,7 @@ func TestPresignPutObject(t *testing.T) {
 			if err != nil {
 				t.Error("expected base64 encoded policy, got error", err, "policy", policy)
 			}
-			var policyJSON map[string]interface{}
+			var policyJSON map[string]any
 			err = json.Unmarshal(decoded, &policyJSON)
 			if err != nil {
 				t.Error("expected valid JSON for policy, got error", err, "with policy", policy)
@@ -212,13 +212,13 @@ func TestSampleFromPublicDocs(t *testing.T) {
 
 	presignClient := NewPresignClient(NewFromConfig(cfg))
 	input := PutObjectInput{Bucket: aws.String(bucket), Key: aws.String(key)}
-	conditions := []interface{}{
-		[]interface{}{"starts-with", "$key", "user/user1/"},
+	conditions := []any{
+		[]any{"starts-with", "$key", "user/user1/"},
 		map[string]string{"acl": "public-read"},
 		map[string]string{"success_action_redirect": "http://sigv4examplebucket.s3.amazonaws.com/successful_upload.html"},
-		[]interface{}{"starts-with", "$Content-Type", "image/"},
+		[]any{"starts-with", "$Content-Type", "image/"},
 		map[string]string{"x-amz-meta-uuid": "14365123651274"},
-		[]interface{}{"starts-with", "$x-amz-meta-tag", ""},
+		[]any{"starts-with", "$x-amz-meta-tag", ""},
 	}
 	opts := func(o *PresignPostOptions) {
 		o.Expires = expiresIn
@@ -262,38 +262,38 @@ func TestSampleFromPublicDocs(t *testing.T) {
 func TestBuildPresignPostRequest(t *testing.T) {
 	cases := map[string]struct {
 		credentials       aws.Credentials
-		extraConditions   []interface{}
+		extraConditions   []any
 		isKeyConditionSet bool
 	}{
 		"credentials without access token": {
 			credentials:     credentialsNoToken,
-			extraConditions: []interface{}{},
+			extraConditions: []any{},
 		},
 		"credentials with access token": {
 			credentials:     credentialsWithToken,
-			extraConditions: []interface{}{},
+			extraConditions: []any{},
 		},
 		"no extra conditions": {
 			credentials:     credentialsWithToken,
-			extraConditions: []interface{}{},
+			extraConditions: []any{},
 		},
 		"extra conditions": {
 			credentials: credentialsWithToken,
-			extraConditions: []interface{}{
+			extraConditions: []any{
 				map[string]string{"acl": "public-read"},
 				[]string{"starts-with", "$Content-Type", "image/"},
 			},
 		},
 		"extra conditions collision": {
 			credentials: credentialsWithToken,
-			extraConditions: []interface{}{
+			extraConditions: []any{
 				map[string]string{"bucket": "otherBucket"},
 			},
 		},
 		"a key condition is set, no extra one is generated": {
 			credentials: credentialsNoToken,
-			extraConditions: []interface{}{
-				[]interface{}{"starts-with", "$key", "user/user1/"},
+			extraConditions: []any{
+				[]any{"starts-with", "$key", "user/user1/"},
 			},
 			isKeyConditionSet: true,
 		},
@@ -347,7 +347,7 @@ func TestBuildPresignPostRequest(t *testing.T) {
 			if err != nil {
 				t.Errorf("Decoding policy document %s failed with error %v", policy, err)
 			}
-			var doc map[string]interface{}
+			var doc map[string]any
 			err = json.Unmarshal(decoded, &doc)
 			if err != nil {
 				t.Errorf("Policy document %s failed to parse to JSON with error %v", policy, err)
@@ -371,7 +371,7 @@ func TestBuildPresignPostRequest(t *testing.T) {
 			if !isEqual {
 				t.Errorf("Expected policy expiration to be %v. Got %v", expiration, docExpiration)
 			}
-			conditions := doc["conditions"].([]interface{})
+			conditions := doc["conditions"].([]any)
 			if len(conditions) == 0 {
 				t.Errorf("Policy document didn't contain any conditions")
 			}
@@ -439,7 +439,7 @@ func (p staticCredentialsProvider) Retrieve(ctx context.Context) (aws.Credential
 var credentialsNoToken = aws.Credentials{AccessKeyID: "AKID", SecretAccessKey: "SECRET"}
 var credentialsWithToken = aws.Credentials{AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION"}
 
-func isPresent(needle interface{}, haystack []interface{}) bool {
+func isPresent(needle any, haystack []any) bool {
 	needleValue := reflect.ValueOf(needle)
 	for _, item := range haystack {
 		itemValue := reflect.ValueOf(item)
@@ -512,10 +512,10 @@ func areMapsEqual(aVal reflect.Value, bVal reflect.Value) bool {
 
 // filters items in slice that have a map[string]interface{} and returns
 // the first items map that has the key from "key"
-func findInSlice(slice []interface{}, key string) interface{} {
+func findInSlice(slice []any, key string) any {
 	for _, item := range slice {
 		// filter only the values with keys. Ignore stuff like arrays
-		if v, ok := item.(map[string]interface{}); ok {
+		if v, ok := item.(map[string]any); ok {
 			// once in the maps, check if they have the desired key
 			if _, ok := v[key]; ok {
 				return v[key]
