@@ -366,7 +366,7 @@
                     }
                 },
                 "SizeOnDisk": {
-                    "target": "com.amazonaws.gamelift#PositiveLong",
+                    "target": "com.amazonaws.gamelift#WholeNumberLong",
                     "traits": {
                         "smithy.api#documentation": "<p>File size of the uploaded game build, expressed in bytes. When the build status is\n                <code>INITIALIZED</code> or when using a custom Amazon S3 storage location, this value is\n            0.</p>"
                     }
@@ -1105,6 +1105,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the container fleet's remote locations where fleet instances are\n            deployed.</p>"
                     }
+                },
+                "PlayerGatewayMode": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether player gateway is enabled for this container fleet. Player gateway provides benefits such as DDoS protection with negligible impact to latency.</p>\n         <p>If <code>ENABLED</code> or <code>REQUIRED</code>, game clients can use player gateway to connect with the game server. If <code>DISABLED</code>, game clients cannot use player gateway. Instead, they have to directly connect to the game server.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1152,6 +1158,12 @@
                     "target": "com.amazonaws.gamelift#ContainerFleetLocationStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of fleet activity in the location. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> -- A new container fleet has been requested.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> -- A new container fleet resource is being created.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATED</code> -- A new container fleet resource has been created. No\n                    fleet instances have been deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVATING</code> -- New container fleet instances are being\n                    deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> -- The container fleet has been deployed and is ready to\n                    host game sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> -- Updates to the container fleet is being updated. A\n                    deployment is in progress.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "PlayerGatewayStatus": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of player gateway in this location for this container fleet. Note, even if a container fleet has PlayerGatewayMode configured as <code>ENABLED</code>, player gateway might not be available in a specific location. For more information about locations where player gateway is supported, see <a href=\"https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html\">Amazon GameLift Servers service locations</a>.</p>\n         <p>Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> -- Player gateway is available for this container fleet location.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> -- Player gateway is not available for this container fleet location.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2038,6 +2050,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of labels to assign to the new fleet resource. Tags are developer-defined\n            key-value pairs. Tagging Amazon Web Services resources are useful for resource management, access\n            management and cost allocation. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging Amazon Web Services Resources</a> in the\n            <i>Amazon Web Services General Reference</i>.</p>"
                     }
+                },
+                "PlayerGatewayMode": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures player gateway for your fleet. Player gateway provides benefits such as DDoS protection by rate limiting and validating traﬃc before it reaches game servers, hiding game server IP addresses from players, and providing updated endpoints when relay endpoints become unhealthy.</p>\n         <p>\n            <b>How it works:</b> When enabled, game clients connect to relay endpoints instead of to your game servers. Player gateway validates player gateway tokens and routes traffic to the appropriate game server. Your game backend calls <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html\">GetPlayerConnectionDetails</a> to retrieve relay endpoints and player gateway tokens for your game clients. To learn more about this topic, see <a href=\"https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html\">DDoS protection with Amazon GameLift Servers player gateway</a>.</p>\n         <p>Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DISABLED</code> (default) -- Game clients connect to the game server endpoint. Use this when you do not intend to integrate your game with player gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> -- Player gateway is available in fleet locations where it is supported. Your game backend can call <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html\">GetPlayerConnectionDetails</a> to obtain a player gateway token and endpoints for game clients.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REQUIRED</code> -- Player gateway is available in fleet locations where it is supported, and the fleet can only use locations that support this feature. Attempting to add a remote location to your fleet which does not support player gateway will result in an <code>InvalidRequestException</code>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -2359,6 +2377,18 @@
                     "target": "com.amazonaws.gamelift#InstanceRoleCredentialsProvider",
                     "traits": {
                         "smithy.api#documentation": "<p>Prompts Amazon GameLift Servers to generate a shared credentials file for the IAM role\n            that's defined in <code>InstanceRoleArn</code>. The shared credentials file is stored on\n            each fleet instance and refreshed as needed. Use shared credentials for applications\n            that are deployed along with the game server executable, if the game server is\n            integrated with server SDK version 5.x. For more information about using shared\n            credentials, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\"> Communicate\n                with other Amazon Web Services resources from your fleets</a>.</p>"
+                    }
+                },
+                "PlayerGatewayMode": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures player gateway for your fleet. Player gateway provides benefits such as DDoS protection by rate limiting and validating traﬃc before it reaches game servers, hiding game server IP addresses from players, and providing updated endpoints when relay endpoints become unhealthy. Note, player gateway is only available for fleets using server SDK 5.x or later game server builds.</p>\n         <p>\n            <b>How it works:</b> When enabled, game clients connect to relay endpoints instead of to your game servers. Player gateway validates player gateway tokens and routes traffic to the appropriate game server. Your game backend calls <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html\">GetPlayerConnectionDetails</a> to retrieve relay endpoints and player gateway tokens for your game clients. To learn more about this topic, see <a href=\"https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html\">DDoS protection with Amazon GameLift Servers player gateway</a>.</p>\n         <p>Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DISABLED</code> (default) -- Game clients connect to the game server endpoint. Use this when you do not intend to integrate your game with player gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> -- Player gateway is available in fleet locations where it is supported. Your game backend can call <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html\">GetPlayerConnectionDetails</a> to obtain a player gateway token and endpoints for game clients.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REQUIRED</code> -- Player gateway is available in fleet locations where it is supported, and the fleet can only use locations that support this feature. Attempting to add a remote location to your fleet which does not support player gateway will result in an <code>InvalidRequestException</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "PlayerGatewayConfiguration": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for player gateway. Use this to specify advanced options for how player gateway handles connections.</p>"
                     }
                 }
             },
@@ -2685,7 +2715,7 @@
                 "GameProperties": {
                     "target": "com.amazonaws.gamelift#GamePropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.\n          For an example, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create\">Create a game session with custom properties</a>.                    \n        </p>\n         <note>\n            <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.\n          For an example, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create\">Create a game session with custom properties</a>.                    \n        </p>\n         <note>\n            <ul>\n               <li>\n                  <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n               </li>\n               <li>\n                  <p>If you use SearchGameSessions API, there is a limit of 500 game property keys across all game sessions and all fleets per region. If the limit is exceeded, there will potentially be game session entries missing from SearchGameSessions API results.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "CreatorId": {
@@ -3021,7 +3051,7 @@
                 "GameProperties": {
                     "target": "com.amazonaws.gamelift#GamePropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>. This information is added to the new <code>GameSession</code> object that is\n            created for a successful match. This parameter is not used if <code>FlexMatchMode</code>\n            is set to <code>STANDALONE</code>.</p>\n         <note>\n            <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>. This information is added to the new <code>GameSession</code> object that is\n            created for a successful match. This parameter is not used if <code>FlexMatchMode</code>\n            is set to <code>STANDALONE</code>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n               </li>\n               <li>\n                  <p>If you use SearchGameSessions API, there is a limit of 500 game property keys across all game sessions and all fleets per region. If the limit is exceeded, there will potentially be game session entries missing from SearchGameSessions API results.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "GameSessionData": {
@@ -4987,7 +5017,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Retrieves core fleet-wide properties for fleets in an Amazon Web Services Region. Properties include the computing\n            hardware and deployment configuration for instances in the fleet.</p>\n         <p>You can use this operation in the following ways: </p>\n         <ul>\n            <li>\n               <p>To get attributes for specific fleets, provide a list of fleet IDs or fleet ARNs.</p>\n            </li>\n            <li>\n               <p>To get attributes for all fleets, do not provide a fleet identifier.</p>\n            </li>\n         </ul>\n         <p>When requesting attributes for multiple fleets, use the pagination parameters to\n            retrieve results as a set of sequential pages. </p>\n         <p>If successful, a <code>FleetAttributes</code> object is returned for each fleet\n            requested, unless the fleet identifier is not found. </p>\n         <note>\n            <p>Some API operations limit the number of fleet IDs that allowed in one request. If\n                a request exceeds this limit, the request fails and the error message contains the\n                maximum allowed number.</p>\n         </note>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>",
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere</p>\n         <p>Retrieves core fleet-wide properties for fleets in an Amazon Web Services Region. Properties include the computing\n            hardware and deployment configuration for instances in the fleet.</p>\n         <p>You can use this operation in the following ways: </p>\n         <ul>\n            <li>\n               <p>To get attributes for specific fleets, provide a list of fleet IDs or fleet ARNs.</p>\n            </li>\n            <li>\n               <p>To get attributes for all fleets, do not provide a fleet identifier.</p>\n            </li>\n         </ul>\n         <p>When requesting attributes for multiple fleets, use the pagination parameters to\n            retrieve results as a set of sequential pages. </p>\n         <p>If successful, a <code>FleetAttributes</code> object is returned for each fleet\n            requested, unless the fleet identifier is not found. </p>\n         <note>\n            <p>Some API operations limit the number of fleet IDs that allowed in one request. If\n                a request exceeds this limit, the request fails and the error message contains the\n                maximum allowed number.</p>\n         </note>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -6027,7 +6057,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Retrieves information, including current status, about a game session placement\n            request. </p>\n         <p>To get game session placement details, specify the placement ID.</p>\n         <p>This operation is not designed to be continually called to track game session status.\n            This practice can cause you to exceed your API limit, which results in errors. Instead,\n            you must configure an Amazon Simple Notification Service (SNS) topic to receive notifications from FlexMatch or\n            queues. Continuously polling with <code>DescribeGameSessionPlacement</code> should only\n            be used for games in development with low game session usage. </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Retrieves information, including current status, about a game session placement\n            request. </p>\n         <p>To get game session placement details, specify the placement ID.</p>\n         <p>This operation is not designed to be continually called to track game session status.\n            This practice can cause you to exceed your API limit, which results in errors. Instead,\n            you must configure an Amazon Simple Notification Service (SNS) topic to receive notifications from FlexMatch or\n            queues. Continuously polling with <code>DescribeGameSessionPlacement</code> should only\n            be used for games in development with low game session usage. For a reference \n            implementation of event-based game session placement tracking, see <a href=\"https://github.com/amazon-gamelift/amazon-gamelift-toolkit/tree/main/event-based-session-placement\">\n                Event-based game session placement guidance</a> in the Amazon GameLift Toolkit.</p>"
             }
         },
         "com.amazonaws.gamelift#DescribeGameSessionPlacementInput": {
@@ -6272,7 +6302,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Retrieves information about the EC2 instances in an Amazon GameLift Servers managed fleet, including\n            instance ID, connection data, and status. You can use this operation with a\n            multi-location fleet to get location-specific instance information. As an alternative,\n            use the operations <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute\">https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute</a> and <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeCompute\">https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeCompute</a>\n            to retrieve information for compute resources, including EC2 and Anywhere fleets.</p>\n         <p>You can call this operation in the following ways:</p>\n         <ul>\n            <li>\n               <p>To get information on all instances in a fleet's home Region, specify the\n                    fleet ID.</p>\n            </li>\n            <li>\n               <p>To get information on all instances in a fleet's remote location, specify the\n                    fleet ID and location name.</p>\n            </li>\n            <li>\n               <p>To get information on a specific instance in a fleet, specify the fleet ID and\n                    instance ID.</p>\n            </li>\n         </ul>\n         <p>Use the pagination parameters to retrieve results as a set of sequential pages. </p>\n         <p>If successful, this operation returns <code>Instance</code> objects for each requested\n            instance, listed in no particular order. If you call this operation for an Anywhere\n            fleet, you receive an InvalidRequestException.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html\">Remotely connect to\n                fleet instances</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html\">Debug fleet\n                issues</a>\n         </p>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>",
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b>EC2, Container</p>\n         <p>Retrieves information about the EC2 instances in an Amazon GameLift Servers managed fleet, including\n            instance ID, connection data, and status. You can use this operation with a\n            multi-location fleet to get location-specific instance information. As an alternative,\n            use the operations <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute\">https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute</a> and <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeCompute\">https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeCompute</a>\n            to retrieve information for compute resources, including EC2 and Anywhere fleets.</p>\n         <p>You can call this operation in the following ways:</p>\n         <ul>\n            <li>\n               <p>To get information on all instances in a fleet's home Region, specify the\n                    fleet ID.</p>\n            </li>\n            <li>\n               <p>To get information on all instances in a fleet's remote location, specify the\n                    fleet ID and location name.</p>\n            </li>\n            <li>\n               <p>To get information on a specific instance in a fleet, specify the fleet ID and\n                    instance ID.</p>\n            </li>\n         </ul>\n         <p>Use the pagination parameters to retrieve results as a set of sequential pages. </p>\n         <p>If successful, this operation returns <code>Instance</code> objects for each requested\n            instance, listed in no particular order. If you call this operation for an Anywhere\n            fleet, you receive an InvalidRequestException.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html\">Remotely connect to\n                fleet instances</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html\">Debug fleet\n                issues</a>\n         </p>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -10755,6 +10785,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates that fleet instances maintain a shared credentials file for the IAM role defined in <code>InstanceRoleArn</code>. Shared credentials allow\n            applications that are deployed with the game server executable to communicate with other\n            Amazon Web Services resources. This property is used only when the game server is integrated with the\n            server SDK version 5.x. For more information about using shared credentials, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\"> Communicate\n                with other Amazon Web Services resources from your fleets</a>. This attribute is used with\n                fleets where <code>ComputeType</code> is <code>EC2</code>.</p>"
                     }
+                },
+                "PlayerGatewayMode": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether player gateway is enabled for this fleet. Player gateway provides benefits such as DDoS protection with negligible impact to latency.</p>\n         <p>If <code>ENABLED</code> or <code>REQUIRED</code>, game clients can use player gateway to connect with the game server. If <code>DISABLED</code>, game clients cannot use player gateway. Instead, they have to directly connect to the game server.</p>"
+                    }
+                },
+                "PlayerGatewayConfiguration": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for player gateway on this fleet.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11335,6 +11377,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#GetInstanceAccess"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#GetPlayerConnectionDetails"
                 },
                 {
                     "target": "com.amazonaws.gamelift#ListAliases"
@@ -12376,7 +12421,7 @@
                     "target": "com.amazonaws.gamelift#GamePropertyKey",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The game property identifier.</p>\n         <note>\n            <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The game property identifier.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n               </li>\n               <li>\n                  <p>If you use SearchGameSessions API, there is a limit of 500 game property keys across all game sessions and all fleets per region. If the limit is exceeded, there will potentially be game session entries missing from SearchGameSessions API results.</p>\n               </li>\n            </ul>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13551,6 +13596,23 @@
                 "target": "com.amazonaws.gamelift#GameServerInstance"
             }
         },
+        "com.amazonaws.gamelift#GameServerIpProtocolSupported": {
+            "type": "enum",
+            "members": {
+                "IPv4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPv4"
+                    }
+                },
+                "DUAL_STACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUAL_STACK"
+                    }
+                }
+            }
+        },
         "com.amazonaws.gamelift#GameServerProtectionPolicy": {
             "type": "enum",
             "members": {
@@ -13657,7 +13719,7 @@
                 "GameProperties": {
                     "target": "com.amazonaws.gamelift#GamePropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.</p>\n         <note>\n            <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n               </li>\n               <li>\n                  <p>If you use SearchGameSessions API, there is a limit of 500 game property keys across all game sessions and all fleets per region. If the limit is exceeded, there will potentially be game session entries missing from SearchGameSessions API results.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "IpAddress": {
@@ -13707,6 +13769,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The fleet location where the game session is running. This value might specify the\n            fleet's home Region or a remote location. Location is expressed as an Amazon Web Services Region code\n            such as <code>us-west-2</code>. </p>"
                     }
+                },
+                "PlayerGatewayStatus": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether player gateway is available for use for this game session. Note, even if a fleet has PlayerGatewayMode configured as <code>ENABLED</code>, player gateway might not be available in a specific location. For more information about locations where player gateway is supported, see <a href=\"https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html\">Amazon GameLift Servers service locations</a>.</p>\n         <p>Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> -- Player gateway is available for routing player connections for this game session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> -- Player gateway is not available for this game session.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -13753,6 +13821,12 @@
                     "target": "com.amazonaws.gamelift#MatchedPlayerSessionList",
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of player session IDs, one for each player ID that was included in the\n            original matchmaking request. </p>"
+                    }
+                },
+                "PlayerGatewayStatus": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of player gateway for the game session. Note, even if a fleet has PlayerGatewayMode configured as <code>ENABLED</code>, player gateway might not be available in a specific location. For more information about locations where player gateway is supported, see <a href=\"https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html\">supported locations</a>.</p>\n         <p>Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> -- Player gateway is available for this game session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> -- Player gateway is not available for this game session.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -13857,7 +13931,7 @@
                 "GameProperties": {
                     "target": "com.amazonaws.gamelift#GamePropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.</p>\n         <note>\n            <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n               </li>\n               <li>\n                  <p>If you use SearchGameSessions API, there is a limit of 500 game property keys across all game sessions and all fleets per region. If the limit is exceeded, there will potentially be game session entries missing from SearchGameSessions API results.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "MaximumPlayerSessionCount": {
@@ -13948,6 +14022,12 @@
                     "target": "com.amazonaws.gamelift#PriorityConfigurationOverride",
                     "traits": {
                         "smithy.api#documentation": "<p>An alternative priority list of locations that's included with a game session\n            placement request. When provided, the list overrides a queue's location order list for\n            this game session placement request only. The list might include Amazon Web Services Regions, local\n            zones, and custom locations (for Anywhere fleets). The fallback strategy tells Amazon GameLift Servers\n            what action to take (if any) in the event that it failed to place a new game session. </p>"
+                    }
+                },
+                "PlayerGatewayStatus": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of player gateway for the game session placement. Note, even if a fleet has PlayerGatewayMode configured as <code>ENABLED</code>, player gateway might not be available in a specific location. For more information about locations where player gateway is supported, see <a href=\"https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html\">Amazon GameLift Servers service locations</a>.</p>\n         <p>Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> -- Player gateway is available for this game session placement.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> -- Player gateway is not available for this game session placement.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -14485,6 +14565,85 @@
                     "target": "com.amazonaws.gamelift#InstanceAccess",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection information for a fleet instance, including IP address and access\n            credentials.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamelift#GetPlayerConnectionDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamelift#GetPlayerConnectionDetailsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamelift#GetPlayerConnectionDetailsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamelift#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#InvalidGameSessionStatusException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2 (server SDK 5.x or later), Container</p>\n         <p>Retrieves connection details for game clients to connect to game sessions. </p>\n         <p>\n            <b>Player gateway benefits:</b> DDoS protection with negligible impact to latency. </p>\n         <p>To enable player gateway on your fleet, set <code>PlayerGatewayMode</code> to <code>ENABLED</code> or <code>REQUIRED</code> when calling\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateFleet.html\">CreateFleet</a> or\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerFleet.html\">CreateContainerFleet</a>.</p>\n         <p>\n            <b>How to use:</b> After creating a game session and adding players, call this operation with the game session ID and player IDs. When player gateway is enabled, the response includes connection endpoints and player gateway tokens that your game clients can use to connect to the game session through player gateway. To learn more about player gateway integration,  see <a href=\"https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html\">DDoS protection with Amazon GameLift Servers player gateway</a>.</p>\n         <p>When player gateway is disabled or in locations where player gateway is not supported, this operation returns game server connection information without player gateway tokens, so that your game clients directly connect to the game server endpoint.</p>"
+            }
+        },
+        "com.amazonaws.gamelift#GetPlayerConnectionDetailsInput": {
+            "type": "structure",
+            "members": {
+                "GameSessionId": {
+                    "target": "com.amazonaws.gamelift#ArnStringModel",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A unique identifier for the game session for which to retrieve player connection details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PlayerIds": {
+                    "target": "com.amazonaws.gamelift#PlayerIdList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>List of unique identifiers for players. Connection details are returned for each player in this list.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamelift#GetPlayerConnectionDetailsOutput": {
+            "type": "structure",
+            "members": {
+                "GameSessionId": {
+                    "target": "com.amazonaws.gamelift#ArnStringModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the game session for which the player connection details were retrieved.</p>"
+                    }
+                },
+                "PlayerConnectionDetails": {
+                    "target": "com.amazonaws.gamelift#PlayerConnectionDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of player connection detail objects, one for each requested player.</p>"
                     }
                 }
             },
@@ -16234,6 +16393,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The life-cycle status of a fleet location. </p>"
                     }
+                },
+                "PlayerGatewayStatus": {
+                    "target": "com.amazonaws.gamelift#PlayerGatewayStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of player gateway in this location for this fleet. Note, even if a fleet has PlayerGatewayMode configured as <code>ENABLED</code>, player gateway might not be available in a specific location. For more information about locations where player gateway is supported, see <a href=\"https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html\">Amazon GameLift Servers service locations</a>.</p>\n         <p>Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> -- Player gateway is available for this fleet location.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> -- Player gateway is not available for this fleet location.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -16497,7 +16662,7 @@
                 "GameProperties": {
                     "target": "com.amazonaws.gamelift#GamePropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>. This information is added to the new <code>GameSession</code> object that is\n            created for a successful match. This parameter is not used when\n                <code>FlexMatchMode</code> is set to <code>STANDALONE</code>.</p>\n         <note>\n            <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>. This information is added to the new <code>GameSession</code> object that is\n            created for a successful match. This parameter is not used when\n                <code>FlexMatchMode</code> is set to <code>STANDALONE</code>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n               </li>\n               <li>\n                  <p>If you use SearchGameSessions API, there is a limit of 500 game property keys across all game sessions and all fleets per region. If the limit is exceeded, there will potentially be game session entries missing from SearchGameSessions API results.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "GameSessionData": {
@@ -16785,6 +16950,15 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 2147483647
+                }
+            }
+        },
+        "com.amazonaws.gamelift#MaxString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
                 }
             }
         },
@@ -17177,6 +17351,75 @@
                 "target": "com.amazonaws.gamelift#PlayerAttributeString"
             }
         },
+        "com.amazonaws.gamelift#PlayerConnectionDetail": {
+            "type": "structure",
+            "members": {
+                "PlayerId": {
+                    "target": "com.amazonaws.gamelift#PlayerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for a player associated with this connection.</p>"
+                    }
+                },
+                "Endpoints": {
+                    "target": "com.amazonaws.gamelift#PlayerConnectionEndpointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of connection endpoints for the game client. Your game client uses these IP address(es) and port(s) to connect to the game session.</p>\n         <p>When player gateway is enabled, these are relay endpoints with benefits such as DDoS protection. When disabled, this is the game server endpoint.</p>"
+                    }
+                },
+                "PlayerGatewayToken": {
+                    "target": "com.amazonaws.gamelift#MaxString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Access token that your game client must prepend to all traffic sent through player gateway. Player gateway verifies identity and authorizes connection based on this token.</p>\n         <p>This value is empty when player gateway is disabled.</p>"
+                    }
+                },
+                "Expiration": {
+                    "target": "com.amazonaws.gamelift#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When player gateway is enabled, this is the timestamp indicating when player gateway token expires. Your game backend should call <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html\">GetPlayerConnectionDetails</a> to retrieve fresh connection information for your game clients before this time. Format is a number expressed in Unix time as milliseconds (for example <code>\"1469498468.057\"</code>). </p>\n         <p>This value is empty when player gateway is disabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Connection information for a game client to connect to a game session. This object contains the IP address(es), port(s), and authentication details your game client needs to establish a connection.</p>\n         <p>\n            <b>With player gateway enabled:</b> Contains relay endpoints and a player gateway token. Your game client must prepend player gateway token to each payload for validation and connection through relay endpoints.</p>\n         <p>\n            <b>With player gateway disabled:</b> Contains game server endpoint. Player gateway token and expiration fields are empty.</p>"
+            }
+        },
+        "com.amazonaws.gamelift#PlayerConnectionDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamelift#PlayerConnectionDetail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.gamelift#PlayerConnectionEndpoint": {
+            "type": "structure",
+            "members": {
+                "IpAddress": {
+                    "target": "com.amazonaws.gamelift#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IP address for connecting to the game session. When player gateway is enabled, this is a player gateway IP address. When player gateway is disabled, this is the game server IP address.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.gamelift#PortNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Port number for connecting to the game session. When player gateway is enabled, this is a player gateway port. When player gateway is disabled, this is the game server port.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Network address(es) and port(s) for connecting to a game session. </p>"
+            }
+        },
+        "com.amazonaws.gamelift#PlayerConnectionEndpointList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamelift#PlayerConnectionEndpoint"
+            }
+        },
         "com.amazonaws.gamelift#PlayerData": {
             "type": "string",
             "traits": {
@@ -17193,6 +17436,60 @@
             },
             "value": {
                 "target": "com.amazonaws.gamelift#PlayerData"
+            }
+        },
+        "com.amazonaws.gamelift#PlayerGatewayConfiguration": {
+            "type": "structure",
+            "members": {
+                "GameServerIpProtocolSupported": {
+                    "target": "com.amazonaws.gamelift#GameServerIpProtocolSupported",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP protocol that your game servers support for player connections through player gateway. If the value is set to <code>IPv4</code>, GameLift will install and execute a lightweight IP translation software on fleet instances to receive and transform incoming IPv6 traffic to IPv4. If the value is set to <code>DUAL_STACK</code>, the lightweight IP translation software will not be installed on fleet instances. <code>DUAL_STACK</code> provides slightly better performance than <code>IPv4</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for player gateway. Use these settings to specify advanced options for how player gateway handles connections.</p>"
+            }
+        },
+        "com.amazonaws.gamelift#PlayerGatewayMode": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.gamelift#PlayerGatewayStatus": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.gamelift#PlayerId": {
@@ -17458,14 +17755,6 @@
         },
         "com.amazonaws.gamelift#PositiveInteger": {
             "type": "integer",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 1
-                }
-            }
-        },
-        "com.amazonaws.gamelift#PositiveLong": {
-            "type": "long",
             "traits": {
                 "smithy.api#range": {
                     "min": 1
@@ -18431,7 +18720,7 @@
                     }
                 },
                 "SizeOnDisk": {
-                    "target": "com.amazonaws.gamelift#PositiveLong",
+                    "target": "com.amazonaws.gamelift#WholeNumberLong",
                     "traits": {
                         "smithy.api#documentation": "<p>The file size of the uploaded Realtime script, expressed in bytes. When files are\n            uploaded from an S3 location, this value remains at \"0\".</p>"
                     }
@@ -18512,7 +18801,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Retrieves all active game sessions that match a set of search criteria and sorts them\n            into a specified order. </p>\n         <p>This operation is not designed to continually track game session status because that practice can cause you to exceed your API limit and generate errors. Instead, configure an Amazon Simple Notification Service (Amazon SNS) topic to receive notifications from a matchmaker or a game session placement queue.</p>\n         <p>When searching for game sessions, you specify exactly where you want to search and\n            provide a search filter expression, a sort expression, or both. A search request can\n            search only one fleet, but it can search all of a fleet's locations. </p>\n         <p>This operation can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To search all game sessions that are currently running on all locations in a\n                    fleet, provide a fleet or alias ID. This approach returns game sessions in the\n                    fleet's home Region and all remote locations that fit the search\n                    criteria.</p>\n            </li>\n            <li>\n               <p>To search all game sessions that are currently running on a specific fleet\n                    location, provide a fleet or alias ID and a location name. For location, you can\n                    specify a fleet's home Region or any remote location.</p>\n            </li>\n         </ul>\n         <p>Use the pagination parameters to retrieve results as a set of sequential pages. </p>\n         <p>If successful, a <code>GameSession</code> object is returned for each game session\n            that matches the request. Search finds game sessions that are in <code>ACTIVE</code>\n            status only. To retrieve information on game sessions in other statuses, use <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessions.html\">DescribeGameSessions</a>.</p>\n         <p>To set search and sort criteria, create a filter expression using the following game session attributes. For game session search examples, see the Examples section of this topic.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>gameSessionId</b> -- A unique identifier for the game session. You can use either a\n                        <code>GameSessionId</code> or <code>GameSessionArn</code> value. </p>\n            </li>\n            <li>\n               <p>\n                  <b>gameSessionName</b> -- Name assigned to a game\n                    session. Game session names do not need to be unique to a game session.</p>\n            </li>\n            <li>\n               <p>\n                  <b>gameSessionProperties</b> -- A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.\n                    The filter expression must specify the <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameProperty\">https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameProperty</a> -- a <code>Key</code> and a string <code>Value</code> to search for the game sessions.</p>\n               <p>For example, to search for the above key-value pair, specify the following search filter: <code>gameSessionProperties.difficulty = \"novice\"</code>.\n                    All game property values are searched as strings.</p>\n               <p>\n                    For examples of searching game sessions, see the ones below, and also see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-search\">Search game sessions by game property</a>.\n                    </p>\n               <note>\n                  <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>maximumSessions</b> -- Maximum number of player\n                    sessions allowed for a game session.</p>\n            </li>\n            <li>\n               <p>\n                  <b>creationTimeMillis</b> -- Value indicating when a\n                    game session was created. It is expressed in Unix time as milliseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <b>playerSessionCount</b> -- Number of players\n                    currently connected to a game session. This value changes rapidly as players\n                    join the session or drop out.</p>\n            </li>\n            <li>\n               <p>\n                  <b>hasAvailablePlayerSessions</b> -- Boolean value\n                    indicating whether a game session has reached its maximum number of players. It\n                    is highly recommended that all search requests include this filter attribute to\n                    optimize search performance and return only sessions that players can join.\n                </p>\n            </li>\n         </ul>\n         <note>\n            <p>Returned values for <code>playerSessionCount</code> and\n                    <code>hasAvailablePlayerSessions</code> change quickly as players join sessions\n                and others drop out. Results should be considered a snapshot in time. Be sure to\n                refresh search results often, and handle sessions that fill up before a player can\n                join. </p>\n         </note>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>",
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Retrieves all active game sessions that match a set of search criteria and sorts them\n            into a specified order. </p>\n         <p>This operation is not designed to continually track game session status because that practice can cause you to exceed your API limit and generate errors. Instead, configure an Amazon Simple Notification Service (Amazon SNS) topic to receive notifications from a matchmaker or a game session placement queue.</p>\n         <p>When searching for game sessions, you specify exactly where you want to search and\n            provide a search filter expression, a sort expression, or both. A search request can\n            search only one fleet, but it can search all of a fleet's locations. </p>\n         <p>This operation can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To search all game sessions that are currently running on all locations in a\n                    fleet, provide a fleet or alias ID. This approach returns game sessions in the\n                    fleet's home Region and all remote locations that fit the search\n                    criteria.</p>\n            </li>\n            <li>\n               <p>To search all game sessions that are currently running on a specific fleet\n                    location, provide a fleet or alias ID and a location name. For location, you can\n                    specify a fleet's home Region or any remote location.</p>\n            </li>\n         </ul>\n         <p>Use the pagination parameters to retrieve results as a set of sequential pages. </p>\n         <p>If successful, a <code>GameSession</code> object is returned for each game session\n            that matches the request. Search finds game sessions that are in <code>ACTIVE</code>\n            status only. To retrieve information on game sessions in other statuses, use <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessions.html\">DescribeGameSessions</a>.</p>\n         <p>To set search and sort criteria, create a filter expression using the following game session attributes. For game session search examples, see the Examples section of this topic.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>gameSessionId</b> -- A unique identifier for the game session. You can use either a\n                        <code>GameSessionId</code> or <code>GameSessionArn</code> value. </p>\n            </li>\n            <li>\n               <p>\n                  <b>gameSessionName</b> -- Name assigned to a game\n                    session. Game session names do not need to be unique to a game session.</p>\n            </li>\n            <li>\n               <p>\n                  <b>gameSessionProperties</b> -- A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.\n                    The filter expression must specify the <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameProperty\">https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameProperty</a> -- a <code>Key</code> and a string <code>Value</code> to search for the game sessions.</p>\n               <p>For example, to search for the above key-value pair, specify the following search filter: <code>gameSessionProperties.difficulty = \"novice\"</code>.\n                    All game property values are searched as strings.</p>\n               <p>\n                    For examples of searching game sessions, see the ones below, and also see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-search\">Search game sessions by game property</a>.\n                    </p>\n               <note>\n                  <ul>\n                     <li>\n                        <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n                     </li>\n                     <li>\n                        <p>If you use SearchGameSessions API, there is a limit of 500 game property keys across all game sessions and all fleets per region. If the limit is exceeded, there will potentially be game session entries missing from SearchGameSessions API results.</p>\n                     </li>\n                  </ul>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>maximumSessions</b> -- Maximum number of player\n                    sessions allowed for a game session.</p>\n            </li>\n            <li>\n               <p>\n                  <b>creationTimeMillis</b> -- Value indicating when a\n                    game session was created. It is expressed in Unix time as milliseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <b>playerSessionCount</b> -- Number of players\n                    currently connected to a game session. This value changes rapidly as players\n                    join the session or drop out.</p>\n            </li>\n            <li>\n               <p>\n                  <b>hasAvailablePlayerSessions</b> -- Boolean value\n                    indicating whether a game session has reached its maximum number of players. It\n                    is highly recommended that all search requests include this filter attribute to\n                    optimize search performance and return only sessions that players can join.\n                </p>\n            </li>\n         </ul>\n         <note>\n            <p>Returned values for <code>playerSessionCount</code> and\n                    <code>hasAvailablePlayerSessions</code> change quickly as players join sessions\n                and others drop out. Results should be considered a snapshot in time. Be sure to\n                refresh search results often, and handle sessions that fill up before a player can\n                join. </p>\n         </note>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -18816,7 +19105,7 @@
                 "GameProperties": {
                     "target": "com.amazonaws.gamelift#GamePropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.</p>\n         <note>\n            <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n               </li>\n               <li>\n                  <p>If you use SearchGameSessions API, there is a limit of 500 game property keys across all game sessions and all fleets per region. If the limit is exceeded, there will potentially be game session entries missing from SearchGameSessions API results.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "MaximumPlayerSessionCount": {
@@ -20752,7 +21041,7 @@
                 "GameProperties": {
                     "target": "com.amazonaws.gamelift#GamePropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.\n        You can use this parameter to modify game properties in an active game session.\n        This action adds new properties and modifies existing properties.\n        There is no way to delete properties.\n        For an example, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-update\">Update the value of a game property</a>.\n      </p>\n         <note>\n            <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>.\n        You can use this parameter to modify game properties in an active game session.\n        This action adds new properties and modifies existing properties.\n        There is no way to delete properties.\n        For an example, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-update\">Update the value of a game property</a>.\n      </p>\n         <note>\n            <ul>\n               <li>\n                  <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n               </li>\n               <li>\n                  <p>If you use SearchGameSessions API, there is a limit of 500 game property keys across all game sessions and all fleets per region. If the limit is exceeded, there will potentially be game session entries missing from SearchGameSessions API results.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -20966,7 +21255,7 @@
                 "GameProperties": {
                     "target": "com.amazonaws.gamelift#GamePropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>. This information is added to the new <code>GameSession</code> object that is\n            created for a successful match. This parameter is not used if <code>FlexMatchMode</code>\n            is set to <code>STANDALONE</code>.</p>\n         <note>\n            <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A set of key-value pairs that can store custom data in a game session.\n  For example: <code>{\"Key\": \"difficulty\", \"Value\": \"novice\"}</code>. This information is added to the new <code>GameSession</code> object that is\n            created for a successful match. This parameter is not used if <code>FlexMatchMode</code>\n            is set to <code>STANDALONE</code>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Avoid using periods (\".\") in property keys if you plan to search for game sessions by properties. Property keys containing periods cannot be searched and will be filtered out from search results due to search index limitations.</p>\n               </li>\n               <li>\n                  <p>If you use SearchGameSessions API, there is a limit of 500 game property keys across all game sessions and all fleets per region. If the limit is exceeded, there will potentially be game session entries missing from SearchGameSessions API results.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "GameSessionData": {
@@ -21363,6 +21652,14 @@
         },
         "com.amazonaws.gamelift#WholeNumber": {
             "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.gamelift#WholeNumberLong": {
+            "type": "long",
             "traits": {
                 "smithy.api#range": {
                     "min": 0

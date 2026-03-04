@@ -2753,6 +2753,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>Tag</code> added during domain creation.</p>"
                     }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment strategy options.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3430,6 +3436,63 @@
                         "smithy.api#enumValue": "ELIGIBLE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DeploymentStrategy": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Default"
+                    }
+                },
+                "CAPACITY_OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CapacityOptimized"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the deployment strategy for the domain. Valid values are <code>Default</code> and <code>CapacityOptimized</code>.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DeploymentStrategyOptions": {
+            "type": "structure",
+            "members": {
+                "DeploymentStrategy": {
+                    "target": "com.amazonaws.elasticsearchservice#DeploymentStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment strategy for the domain. Valid values are <code>Default</code> and <code>CapacityOptimized</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the deployment strategy options for the domain.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DeploymentStrategyOptionsStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.elasticsearchservice#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies deployment strategy options for the specified Elasticsearch domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticsearchservice#OptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of the deployment strategy options for the specified Elasticsearch domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the status of deployment strategy options for the specified Elasticsearch domain.</p>"
             }
         },
         "com.amazonaws.elasticsearchservice#DeploymentType": {
@@ -5503,6 +5566,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the domain properties that are currently being modified.</p>"
                     }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#DeploymentStrategyOptionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies <code>DeploymentStrategyOptions</code> for the domain. </p>"
+                    }
                 }
             },
             "traits": {
@@ -5673,6 +5742,12 @@
                     "target": "com.amazonaws.elasticsearchservice#ModifyingPropertiesList",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the domain properties that are currently being modified.</p>"
+                    }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Elasticsearch domain's deployment strategy options.</p>"
                     }
                 }
             },
@@ -9153,6 +9228,12 @@
                     "target": "com.amazonaws.elasticsearchservice#DryRun",
                     "traits": {
                         "smithy.api#documentation": "<p>\n           This flag, when set to True, specifies whether the <code>UpdateElasticsearchDomain</code> request should return the results of validation checks without actually applying the change.\n           This flag, when set to True, specifies the deployment mechanism through which the update shall be applied on the domain.\n           This will not actually perform the Update.\n       </p>"
+                    }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment strategy options.</p>"
                     }
                 }
             },

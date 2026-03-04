@@ -5015,6 +5015,12 @@
                     "traits": {
                         "smithy.api#enumValue": "bundle"
                     }
+                },
+                "analyze": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "analyze"
+                    }
                 }
             }
         },
@@ -6994,7 +7000,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a request to compile the specified type of information of the deployed\n      environment.</p>\n         <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from\n      the application server log files of every Amazon EC2 instance in your environment. </p>\n         <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application\n      server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET\n      containers do not support bundle logs. </p>\n         <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>RetrieveEnvironmentInfo</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Initiates a request to compile the specified type of information of the deployed\n      environment.</p>\n         <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from\n      the application server log files of every Amazon EC2 instance in your environment. </p>\n         <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application\n      server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET\n      containers do not support bundle logs. </p>\n         <p> Setting the <code>InfoType</code> to <code>analyze</code> collects recent events,\n      instance health, and logs from your environment and sends them to Amazon Bedrock in your\n      account to generate diagnostic insights and recommended next steps. </p>\n         <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>RetrieveEnvironmentInfo</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
                         "title": "To request tailed logs",

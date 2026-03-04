@@ -3938,6 +3938,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Options for all machine learning features for the specified domain.</p>"
                     }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment strategy options for the domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5122,6 +5128,63 @@
                         "smithy.api#enumValue": "ELIGIBLE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.opensearch#DeploymentStrategy": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Default"
+                    }
+                },
+                "CAPACITY_OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CapacityOptimized"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the deployment strategy for the domain. Valid values are <code>Default</code> and <code>CapacityOptimized</code>.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#DeploymentStrategyOptions": {
+            "type": "structure",
+            "members": {
+                "DeploymentStrategy": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment strategy for the domain. Valid values are <code>Default</code> and <code>CapacityOptimized</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the deployment strategy options for the domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#DeploymentStrategyOptionsStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Deployment strategy options for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#OptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the deployment strategy options for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of deployment strategy options for the domain.</p>"
             }
         },
         "com.amazonaws.opensearch#DeploymentType": {
@@ -6853,6 +6916,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Container for parameters required to enable all machine learning features.</p>"
                     }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategyOptionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies <code>DeploymentStrategyOptions</code> for the domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7552,6 +7621,12 @@
                     "target": "com.amazonaws.opensearch#AIMLOptionsOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>Container for parameters required to enable all machine learning features.</p>"
+                    }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the domain's deployment strategy options.</p>"
                     }
                 }
             },
@@ -15005,6 +15080,12 @@
                     "target": "com.amazonaws.opensearch#AIMLOptionsInput",
                     "traits": {
                         "smithy.api#documentation": "<p>Options for all machine learning features for the specified domain.</p>"
+                    }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment strategy options for the domain.</p>"
                     }
                 }
             },
