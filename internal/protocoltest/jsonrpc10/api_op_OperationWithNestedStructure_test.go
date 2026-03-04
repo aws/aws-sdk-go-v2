@@ -190,6 +190,141 @@ func TestClient_OperationWithNestedStructure_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_OperationWithNestedStructure_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *OperationWithNestedStructureInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"AwsJson10ClientPopulatesNestedDefaultValuesWhenMissing": {
+			Params: &OperationWithNestedStructureInput{
+				TopLevel: &types.TopLevel{
+					Dialog: &types.Dialog{
+						Language: ptr.String("en"),
+					},
+					DialogList: []types.Dialog{
+						{},
+						{
+							Farewell: &types.Farewell{},
+						},
+						{
+							Language: ptr.String("it"),
+							Greeting: ptr.String("ciao"),
+							Farewell: &types.Farewell{
+								Phrase: ptr.String("arrivederci"),
+							},
+						},
+					},
+					DialogMap: map[string]types.Dialog{
+						"emptyDialog": {},
+						"partialEmptyDialog": {
+							Language: ptr.String("en"),
+							Farewell: &types.Farewell{},
+						},
+						"nonEmptyDialog": {
+							Greeting: ptr.String("konnichiwa"),
+							Farewell: &types.Farewell{
+								Phrase: ptr.String("sayonara"),
+							},
+						},
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "topLevel": {
+			        "dialog": {
+			            "language": "en",
+			            "greeting": "hi"
+			        },
+			        "dialogList": [
+			            {
+			                "greeting": "hi"
+			            },
+			            {
+			                "greeting": "hi",
+			                "farewell": {
+			                    "phrase": "bye"
+			                }
+			            },
+			            {
+			                "language": "it",
+			                "greeting": "ciao",
+			                "farewell": {
+			                    "phrase": "arrivederci"
+			                }
+			            }
+			        ],
+			        "dialogMap": {
+			            "emptyDialog": {
+			                "greeting": "hi"
+			            },
+			            "partialEmptyDialog": {
+			                "language": "en",
+			                "greeting": "hi",
+			                "farewell": {
+			                    "phrase": "bye"
+			                }
+			            },
+			            "nonEmptyDialog": {
+			                "greeting": "konnichiwa",
+			                "farewell": {
+			                    "phrase": "sayonara"
+			                }
+			            }
+			        }
+			    }
+			}`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
+			})
+			for i := 0; i < b.N; i++ {
+				client.OperationWithNestedStructure(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_OperationWithNestedStructure_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -333,6 +468,142 @@ func TestClient_OperationWithNestedStructure_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_OperationWithNestedStructure_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *OperationWithNestedStructureOutput
+	}{
+		"AwsJson10ClientPopulatesNestedDefaultsWhenMissingInResponseBody": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "dialog": {
+			        "language": "en"
+			    },
+			    "dialogList": [
+			        {
+			        },
+			        {
+			            "farewell": {}
+			        },
+			        {
+			            "language": "it",
+			            "greeting": "ciao",
+			            "farewell": {
+			                "phrase": "arrivederci"
+			            }
+			        }
+			    ],
+			    "dialogMap": {
+			        "emptyDialog": {
+			        },
+			        "partialEmptyDialog": {
+			            "language": "en",
+			            "farewell": {}
+			        },
+			        "nonEmptyDialog": {
+			            "greeting": "konnichiwa",
+			            "farewell": {
+			                "phrase": "sayonara"
+			            }
+			        }
+			    }
+			}`),
+			ExpectResult: &OperationWithNestedStructureOutput{
+				Dialog: &types.Dialog{
+					Language: ptr.String("en"),
+					Greeting: ptr.String("hi"),
+				},
+				DialogList: []types.Dialog{
+					{
+						Greeting: ptr.String("hi"),
+					},
+					{
+						Greeting: ptr.String("hi"),
+						Farewell: &types.Farewell{
+							Phrase: ptr.String("bye"),
+						},
+					},
+					{
+						Language: ptr.String("it"),
+						Greeting: ptr.String("ciao"),
+						Farewell: &types.Farewell{
+							Phrase: ptr.String("arrivederci"),
+						},
+					},
+				},
+				DialogMap: map[string]types.Dialog{
+					"emptyDialog": {
+						Greeting: ptr.String("hi"),
+					},
+					"partialEmptyDialog": {
+						Language: ptr.String("en"),
+						Greeting: ptr.String("hi"),
+						Farewell: &types.Farewell{
+							Phrase: ptr.String("bye"),
+						},
+					},
+					"nonEmptyDialog": {
+						Greeting: ptr.String("konnichiwa"),
+						Farewell: &types.Farewell{
+							Phrase: ptr.String("sayonara"),
+						},
+					},
+				},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params OperationWithNestedStructureInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.OperationWithNestedStructure(context.Background(), &params)
 			}
 		})
 	}

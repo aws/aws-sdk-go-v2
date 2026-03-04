@@ -107,3 +107,63 @@ func TestClient_TestPostNoInputNoPayload_Serialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_TestPostNoInputNoPayload_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *TestPostNoInputNoPayloadInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonHttpPostWithNoInput": {
+			Params:        &TestPostNoInputNoPayloadInput{},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/no_input_no_payload",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ForbidHeader: []string{
+				"Content-Type",
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.TestPostNoInputNoPayload(context.Background(), c.Params)
+			}
+		})
+	}
+}

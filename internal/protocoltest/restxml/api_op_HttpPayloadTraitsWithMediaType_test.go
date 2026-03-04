@@ -118,6 +118,73 @@ func TestClient_HttpPayloadTraitsWithMediaType_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_HttpPayloadTraitsWithMediaType_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *HttpPayloadTraitsWithMediaTypeInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"HttpPayloadTraitsWithMediaTypeWithBlob": {
+			Params: &HttpPayloadTraitsWithMediaTypeInput{
+				Foo:  ptr.String("Foo"),
+				Blob: []byte("blobby blob blob"),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/HttpPayloadTraitsWithMediaType",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"text/plain"},
+				"X-Foo":        []string{"Foo"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderBytes(actual, []byte(`blobby blob blob`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.HttpPayloadTraitsWithMediaType(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_HttpPayloadTraitsWithMediaType_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -188,6 +255,73 @@ func TestClient_HttpPayloadTraitsWithMediaType_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_HttpPayloadTraitsWithMediaType_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *HttpPayloadTraitsWithMediaTypeOutput
+	}{
+		"HttpPayloadTraitsWithMediaTypeWithBlob": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/plain"},
+				"X-Foo":        []string{"Foo"},
+			},
+			Body: []byte(`blobby blob blob`),
+			ExpectResult: &HttpPayloadTraitsWithMediaTypeOutput{
+				Foo:  ptr.String("Foo"),
+				Blob: []byte("blobby blob blob"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params HttpPayloadTraitsWithMediaTypeInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.HttpPayloadTraitsWithMediaType(context.Background(), &params)
 			}
 		})
 	}

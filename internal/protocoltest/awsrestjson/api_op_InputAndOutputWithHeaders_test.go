@@ -313,6 +313,255 @@ func TestClient_InputAndOutputWithHeaders_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_InputAndOutputWithHeaders_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *InputAndOutputWithHeadersInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonInputAndOutputWithStringHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderString: ptr.String("Hello"),
+				HeaderStringList: []string{
+					"a",
+					"b",
+					"c",
+				},
+				HeaderStringSet: []string{
+					"a",
+					"b",
+					"c",
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-String":     []string{"Hello"},
+				"X-StringList": []string{"a, b, c"},
+				"X-StringSet":  []string{"a, b, c"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonInputAndOutputWithQuotedStringHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderStringList: []string{
+					"b,c",
+					"\"def\"",
+					"a",
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-StringList": []string{"\"b,c\", \"\\\"def\\\"\", a"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonInputAndOutputWithNumericHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderByte:    ptr.Int8(1),
+				HeaderShort:   ptr.Int16(123),
+				HeaderInteger: ptr.Int32(123),
+				HeaderLong:    ptr.Int64(123),
+				HeaderFloat:   ptr.Float32(1.1),
+				HeaderDouble:  ptr.Float64(1.1),
+				HeaderIntegerList: []int32{
+					1,
+					2,
+					3,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Byte":        []string{"1"},
+				"X-Double":      []string{"1.1"},
+				"X-Float":       []string{"1.1"},
+				"X-Integer":     []string{"123"},
+				"X-IntegerList": []string{"1, 2, 3"},
+				"X-Long":        []string{"123"},
+				"X-Short":       []string{"123"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonInputAndOutputWithBooleanHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderTrueBool:  ptr.Bool(true),
+				HeaderFalseBool: ptr.Bool(false),
+				HeaderBooleanList: []bool{
+					true,
+					false,
+					true,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Boolean1":    []string{"true"},
+				"X-Boolean2":    []string{"false"},
+				"X-BooleanList": []string{"true, false, true"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonInputAndOutputWithTimestampHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderTimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1576540098),
+					smithytime.ParseEpochSeconds(1576540098),
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-TimestampList": []string{"Mon, 16 Dec 2019 23:48:18 GMT, Mon, 16 Dec 2019 23:48:18 GMT"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonInputAndOutputWithEnumHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderEnum: types.FooEnum("Foo"),
+				HeaderEnumList: []types.FooEnum{
+					types.FooEnum("Foo"),
+					types.FooEnum("Bar"),
+					types.FooEnum("Baz"),
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Enum":     []string{"Foo"},
+				"X-EnumList": []string{"Foo, Bar, Baz"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonInputAndOutputWithIntEnumHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderIntegerEnum: 1,
+				HeaderIntegerEnumList: []types.IntegerEnum{
+					1,
+					2,
+					3,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-IntegerEnum":     []string{"1"},
+				"X-IntegerEnumList": []string{"1, 2, 3"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonSupportsNaNFloatHeaderInputs": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderFloat:  ptr.Float32(float32(math.NaN())),
+				HeaderDouble: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Double": []string{"NaN"},
+				"X-Float":  []string{"NaN"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonSupportsInfinityFloatHeaderInputs": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(1))),
+				HeaderDouble: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Double": []string{"Infinity"},
+				"X-Float":  []string{"Infinity"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonSupportsNegativeInfinityFloatHeaderInputs": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(-1))),
+				HeaderDouble: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Double": []string{"-Infinity"},
+				"X-Float":  []string{"-Infinity"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.InputAndOutputWithHeaders(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_InputAndOutputWithHeaders_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -531,6 +780,212 @@ func TestClient_InputAndOutputWithHeaders_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_InputAndOutputWithHeaders_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *InputAndOutputWithHeadersOutput
+	}{
+		"RestJsonInputAndOutputWithStringHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-String":     []string{"Hello"},
+				"X-StringList": []string{"a, b, c"},
+				"X-StringSet":  []string{"a, b, c"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderString: ptr.String("Hello"),
+				HeaderStringList: []string{
+					"a",
+					"b",
+					"c",
+				},
+				HeaderStringSet: []string{
+					"a",
+					"b",
+					"c",
+				},
+			},
+		},
+		"RestJsonInputAndOutputWithQuotedStringHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-StringList": []string{"\"b,c\", \"\\\"def\\\"\", a"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderStringList: []string{
+					"b,c",
+					"\"def\"",
+					"a",
+				},
+			},
+		},
+		"RestJsonInputAndOutputWithNumericHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Byte":        []string{"1"},
+				"X-Double":      []string{"1.1"},
+				"X-Float":       []string{"1.1"},
+				"X-Integer":     []string{"123"},
+				"X-IntegerList": []string{"1, 2, 3"},
+				"X-Long":        []string{"123"},
+				"X-Short":       []string{"123"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderByte:    ptr.Int8(1),
+				HeaderShort:   ptr.Int16(123),
+				HeaderInteger: ptr.Int32(123),
+				HeaderLong:    ptr.Int64(123),
+				HeaderFloat:   ptr.Float32(1.1),
+				HeaderDouble:  ptr.Float64(1.1),
+				HeaderIntegerList: []int32{
+					1,
+					2,
+					3,
+				},
+			},
+		},
+		"RestJsonInputAndOutputWithBooleanHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Boolean1":    []string{"true"},
+				"X-Boolean2":    []string{"false"},
+				"X-BooleanList": []string{"true, false, true"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderTrueBool:  ptr.Bool(true),
+				HeaderFalseBool: ptr.Bool(false),
+				HeaderBooleanList: []bool{
+					true,
+					false,
+					true,
+				},
+			},
+		},
+		"RestJsonInputAndOutputWithTimestampHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-TimestampList": []string{"Mon, 16 Dec 2019 23:48:18 GMT, Mon, 16 Dec 2019 23:48:18 GMT"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderTimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1576540098),
+					smithytime.ParseEpochSeconds(1576540098),
+				},
+			},
+		},
+		"RestJsonInputAndOutputWithEnumHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Enum":     []string{"Foo"},
+				"X-EnumList": []string{"Foo, Bar, Baz"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderEnum: types.FooEnum("Foo"),
+				HeaderEnumList: []types.FooEnum{
+					types.FooEnum("Foo"),
+					types.FooEnum("Bar"),
+					types.FooEnum("Baz"),
+				},
+			},
+		},
+		"RestJsonInputAndOutputWithIntEnumHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-IntegerEnum":     []string{"1"},
+				"X-IntegerEnumList": []string{"1, 2, 3"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderIntegerEnum: 1,
+				HeaderIntegerEnumList: []types.IntegerEnum{
+					1,
+					2,
+					3,
+				},
+			},
+		},
+		"RestJsonSupportsNaNFloatHeaderOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Double": []string{"NaN"},
+				"X-Float":  []string{"NaN"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderFloat:  ptr.Float32(float32(math.NaN())),
+				HeaderDouble: ptr.Float64(math.NaN()),
+			},
+		},
+		"RestJsonSupportsInfinityFloatHeaderOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Double": []string{"Infinity"},
+				"X-Float":  []string{"Infinity"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(1))),
+				HeaderDouble: ptr.Float64(math.Inf(1)),
+			},
+		},
+		"RestJsonSupportsNegativeInfinityFloatHeaderOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Double": []string{"-Infinity"},
+				"X-Float":  []string{"-Infinity"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(-1))),
+				HeaderDouble: ptr.Float64(math.Inf(-1)),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params InputAndOutputWithHeadersInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.InputAndOutputWithHeaders(context.Background(), &params)
 			}
 		})
 	}

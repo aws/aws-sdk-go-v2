@@ -102,3 +102,79 @@ func TestClient_OperationWithRequiredMembers_Deserialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_OperationWithRequiredMembers_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *OperationWithRequiredMembersOutput
+	}{
+		"AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body:          []byte(`{}`),
+			ExpectResult: &OperationWithRequiredMembersOutput{
+				RequiredString:    ptr.String(""),
+				RequiredBoolean:   ptr.Bool(false),
+				RequiredList:      []string{},
+				RequiredTimestamp: ptr.Time(smithytime.ParseEpochSeconds(0)),
+				RequiredBlob:      []byte(""),
+				RequiredByte:      ptr.Int8(0),
+				RequiredShort:     ptr.Int16(0),
+				RequiredInteger:   ptr.Int32(0),
+				RequiredLong:      ptr.Int64(0),
+				RequiredFloat:     ptr.Float32(0.0),
+				RequiredDouble:    ptr.Float64(0.0),
+				RequiredMap:       map[string]string{},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params OperationWithRequiredMembersInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.OperationWithRequiredMembers(context.Background(), &params)
+			}
+		})
+	}
+}

@@ -300,6 +300,231 @@ func TestClient_OperationWithDefaults_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_OperationWithDefaults_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *OperationWithDefaultsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"AwsJson10ClientPopulatesDefaultValuesInInput": {
+			Params: &OperationWithDefaultsInput{
+				Defaults: &types.Defaults{},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "defaults": {
+			        "defaultString": "hi",
+			        "defaultBoolean": true,
+			        "defaultList": [],
+			        "defaultDocumentMap": {},
+			        "defaultDocumentString": "hi",
+			        "defaultDocumentBoolean": true,
+			        "defaultDocumentList": [],
+			        "defaultTimestamp": 0,
+			        "defaultBlob": "YWJj",
+			        "defaultByte": 1,
+			        "defaultShort": 1,
+			        "defaultInteger": 10,
+			        "defaultLong": 100,
+			        "defaultFloat": 1.0,
+			        "defaultDouble": 1.0,
+			        "defaultMap": {},
+			        "defaultEnum": "FOO",
+			        "defaultIntEnum": 1,
+			        "emptyString": "",
+			        "falseBoolean": false,
+			        "emptyBlob": "",
+			        "zeroByte": 0,
+			        "zeroShort": 0,
+			        "zeroInteger": 0,
+			        "zeroLong": 0,
+			        "zeroFloat": 0.0,
+			        "zeroDouble": 0.0
+			    }
+			}`))
+			},
+		},
+		"AwsJson10ClientSkipsTopLevelDefaultValuesInInput": {
+			Params:        &OperationWithDefaultsInput{},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			}`))
+			},
+		},
+		"AwsJson10ClientUsesExplicitlyProvidedMemberValuesOverDefaults": {
+			Params: &OperationWithDefaultsInput{
+				Defaults: &types.Defaults{
+					DefaultString:  ptr.String("bye"),
+					DefaultBoolean: ptr.Bool(true),
+					DefaultList: []string{
+						"a",
+					},
+					DefaultDocumentMap: document.NewLazyDocument(map[string]interface{}{
+						"name": "Jack",
+					}),
+					DefaultDocumentString:  document.NewLazyDocument("bye"),
+					DefaultDocumentBoolean: document.NewLazyDocument(true),
+					DefaultDocumentList: document.NewLazyDocument([]interface{}{
+						"b",
+					}),
+					DefaultNullDocument: document.NewLazyDocument("notNull"),
+					DefaultTimestamp:    ptr.Time(smithytime.ParseEpochSeconds(1)),
+					DefaultBlob:         []byte("hi"),
+					DefaultByte:         ptr.Int8(2),
+					DefaultShort:        ptr.Int16(2),
+					DefaultInteger:      ptr.Int32(20),
+					DefaultLong:         ptr.Int64(200),
+					DefaultFloat:        ptr.Float32(2.0),
+					DefaultDouble:       ptr.Float64(2.0),
+					DefaultMap: map[string]string{
+						"name": "Jack",
+					},
+					DefaultEnum:    types.TestEnum("BAR"),
+					DefaultIntEnum: 2,
+					EmptyString:    ptr.String("foo"),
+					FalseBoolean:   true,
+					EmptyBlob:      []byte("hi"),
+					ZeroByte:       1,
+					ZeroShort:      1,
+					ZeroInteger:    1,
+					ZeroLong:       1,
+					ZeroFloat:      1.0,
+					ZeroDouble:     1.0,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "defaults": {
+			        "defaultString": "bye",
+			        "defaultBoolean": true,
+			        "defaultList": ["a"],
+			        "defaultDocumentMap": {"name": "Jack"},
+			        "defaultDocumentString": "bye",
+			        "defaultDocumentBoolean": true,
+			        "defaultDocumentList": ["b"],
+			        "defaultNullDocument": "notNull",
+			        "defaultTimestamp": 1,
+			        "defaultBlob": "aGk=",
+			        "defaultByte": 2,
+			        "defaultShort": 2,
+			        "defaultInteger": 20,
+			        "defaultLong": 200,
+			        "defaultFloat": 2.0,
+			        "defaultDouble": 2.0,
+			        "defaultMap": {"name": "Jack"},
+			        "defaultEnum": "BAR",
+			        "defaultIntEnum": 2,
+			        "emptyString": "foo",
+			        "falseBoolean": true,
+			        "emptyBlob": "aGk=",
+			        "zeroByte": 1,
+			        "zeroShort": 1,
+			        "zeroInteger": 1,
+			        "zeroLong": 1,
+			        "zeroFloat": 1.0,
+			        "zeroDouble": 1.0
+			    }
+			}`))
+			},
+		},
+		"AwsJson10ClientUsesExplicitlyProvidedValuesInTopLevel": {
+			Params: &OperationWithDefaultsInput{
+				TopLevelDefault:      ptr.String("hi"),
+				OtherTopLevelDefault: 0,
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "topLevelDefault": "hi",
+			    "otherTopLevelDefault": 0
+			}`))
+			},
+		},
+		"AwsJson10ClientIgnoresNonTopLevelDefaultsOnMembersWithClientOptional": {
+			Params: &OperationWithDefaultsInput{
+				ClientOptionalDefaults: &types.ClientOptionalDefaults{},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "clientOptionalDefaults": {}
+			}`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
+			})
+			for i := 0; i < b.N; i++ {
+				client.OperationWithDefaults(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_OperationWithDefaults_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -478,6 +703,172 @@ func TestClient_OperationWithDefaults_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_OperationWithDefaults_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *OperationWithDefaultsOutput
+	}{
+		"AwsJson10ClientPopulatesDefaultsValuesWhenMissingInResponse": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body:          []byte(`{}`),
+			ExpectResult: &OperationWithDefaultsOutput{
+				DefaultString:          ptr.String("hi"),
+				DefaultBoolean:         ptr.Bool(true),
+				DefaultList:            []string{},
+				DefaultDocumentMap:     document.NewLazyDocument(map[string]interface{}{}),
+				DefaultDocumentString:  document.NewLazyDocument("hi"),
+				DefaultDocumentBoolean: document.NewLazyDocument(true),
+				DefaultDocumentList:    document.NewLazyDocument([]interface{}{}),
+				DefaultTimestamp:       ptr.Time(smithytime.ParseEpochSeconds(0)),
+				DefaultBlob:            []byte("abc"),
+				DefaultByte:            ptr.Int8(1),
+				DefaultShort:           ptr.Int16(1),
+				DefaultInteger:         ptr.Int32(10),
+				DefaultLong:            ptr.Int64(100),
+				DefaultFloat:           ptr.Float32(1.0),
+				DefaultDouble:          ptr.Float64(1.0),
+				DefaultMap:             map[string]string{},
+				DefaultEnum:            types.TestEnum("FOO"),
+				DefaultIntEnum:         1,
+				EmptyString:            ptr.String(""),
+				FalseBoolean:           false,
+				EmptyBlob:              []byte(""),
+				ZeroByte:               0,
+				ZeroShort:              0,
+				ZeroInteger:            0,
+				ZeroLong:               0,
+				ZeroFloat:              0.0,
+				ZeroDouble:             0.0,
+			},
+		},
+		"AwsJson10ClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "defaultString": "bye",
+			    "defaultBoolean": false,
+			    "defaultList": ["a"],
+			    "defaultDocumentMap": {"name": "Jack"},
+			    "defaultDocumentString": "bye",
+			    "defaultDocumentBoolean": false,
+			    "defaultDocumentList": ["b"],
+			    "defaultNullDocument": "notNull",
+			    "defaultTimestamp": 2,
+			    "defaultBlob": "aGk=",
+			    "defaultByte": 2,
+			    "defaultShort": 2,
+			    "defaultInteger": 20,
+			    "defaultLong": 200,
+			    "defaultFloat": 2.0,
+			    "defaultDouble": 2.0,
+			    "defaultMap": {"name": "Jack"},
+			    "defaultEnum": "BAR",
+			    "defaultIntEnum": 2,
+			    "emptyString": "foo",
+			    "falseBoolean": true,
+			    "emptyBlob": "aGk=",
+			    "zeroByte": 1,
+			    "zeroShort": 1,
+			    "zeroInteger": 1,
+			    "zeroLong": 1,
+			    "zeroFloat": 1.0,
+			    "zeroDouble": 1.0
+			}`),
+			ExpectResult: &OperationWithDefaultsOutput{
+				DefaultString:  ptr.String("bye"),
+				DefaultBoolean: ptr.Bool(false),
+				DefaultList: []string{
+					"a",
+				},
+				DefaultDocumentMap: document.NewLazyDocument(map[string]interface{}{
+					"name": "Jack",
+				}),
+				DefaultDocumentString:  document.NewLazyDocument("bye"),
+				DefaultDocumentBoolean: document.NewLazyDocument(false),
+				DefaultDocumentList: document.NewLazyDocument([]interface{}{
+					"b",
+				}),
+				DefaultNullDocument: document.NewLazyDocument("notNull"),
+				DefaultTimestamp:    ptr.Time(smithytime.ParseEpochSeconds(2)),
+				DefaultBlob:         []byte("hi"),
+				DefaultByte:         ptr.Int8(2),
+				DefaultShort:        ptr.Int16(2),
+				DefaultInteger:      ptr.Int32(20),
+				DefaultLong:         ptr.Int64(200),
+				DefaultFloat:        ptr.Float32(2.0),
+				DefaultDouble:       ptr.Float64(2.0),
+				DefaultMap: map[string]string{
+					"name": "Jack",
+				},
+				DefaultEnum:    types.TestEnum("BAR"),
+				DefaultIntEnum: 2,
+				EmptyString:    ptr.String("foo"),
+				FalseBoolean:   true,
+				EmptyBlob:      []byte("hi"),
+				ZeroByte:       1,
+				ZeroShort:      1,
+				ZeroInteger:    1,
+				ZeroLong:       1,
+				ZeroFloat:      1.0,
+				ZeroDouble:     1.0,
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params OperationWithDefaultsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.OperationWithDefaults(context.Background(), &params)
 			}
 		})
 	}

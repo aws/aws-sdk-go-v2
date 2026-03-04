@@ -117,6 +117,71 @@ func TestClient_QueryCompatibleOperation_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_QueryCompatibleOperation_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *QueryCompatibleOperationInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"QueryCompatibleRpcV2CborSendsQueryModeHeader": {
+			Params:        &QueryCompatibleOperationInput{},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/QueryCompatibleRpcV2Protocol/operation/QueryCompatibleOperation",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":            []string{"application/cbor"},
+				"smithy-protocol":   []string{"rpc-v2-cbor"},
+				"x-amzn-query-mode": []string{"true"},
+			},
+			ForbidHeader: []string{
+				"Content-Type",
+				"X-Amz-Target",
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
+			})
+			for i := 0; i < b.N; i++ {
+				client.QueryCompatibleOperation(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_QueryCompatibleOperation_NoCustomCodeError_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -210,6 +275,79 @@ func TestClient_QueryCompatibleOperation_NoCustomCodeError_Deserialize(t *testin
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_QueryCompatibleOperation_NoCustomCodeError_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectError   *types.NoCustomCodeError
+	}{
+		"QueryCompatibleRpcV2CborNoCustomCodeError": {
+			StatusCode: 400,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`uQACZl9fdHlwZXgtYXdzLnByb3RvY29sdGVzdHMucnBjdjJjYm9yI05vQ3VzdG9tQ29kZUVycm9yZ21lc3NhZ2ViSGk=`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectError: &types.NoCustomCodeError{
+				Message: ptr.String("Hi"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params QueryCompatibleOperationInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.QueryCompatibleOperation(context.Background(), &params)
 			}
 		})
 	}
@@ -310,6 +448,81 @@ func TestClient_QueryCompatibleOperation_CustomCodeError_Deserialize(t *testing.
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_QueryCompatibleOperation_CustomCodeError_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectError   *types.CustomCodeError
+	}{
+		"QueryCompatibleRpcV2CborCustomCodeError": {
+			StatusCode: 400,
+			Header: http.Header{
+				"Content-Type":       []string{"application/cbor"},
+				"smithy-protocol":    []string{"rpc-v2-cbor"},
+				"x-amzn-query-error": []string{"Customized;Sender"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`uQACZl9fdHlwZXgrYXdzLnByb3RvY29sdGVzdHMucnBjdjJjYm9yI0N1c3RvbUNvZGVFcnJvcmdtZXNzYWdlYkhp`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectError: &types.CustomCodeError{
+				Message:           ptr.String("Hi"),
+				ErrorCodeOverride: ptr.String("Customized"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params QueryCompatibleOperationInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.QueryCompatibleOperation(context.Background(), &params)
 			}
 		})
 	}

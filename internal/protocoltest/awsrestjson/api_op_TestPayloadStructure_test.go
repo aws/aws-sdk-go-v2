@@ -154,3 +154,107 @@ func TestClient_TestPayloadStructure_Serialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_TestPayloadStructure_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *TestPayloadStructureInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonHttpWithEmptyStructurePayload": {
+			Params:        &TestPayloadStructureInput{},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/payload",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
+			},
+		},
+		"RestJsonTestPayloadStructure": {
+			Params: &TestPayloadStructureInput{
+				PayloadConfig: &types.PayloadConfig{
+					Data: ptr.Int32(25),
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/payload",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"data": 25
+			}`))
+			},
+		},
+		"RestJsonHttpWithHeadersButNoPayload": {
+			Params: &TestPayloadStructureInput{
+				TestId: ptr.String("t-12345"),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/payload",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type":  []string{"application/json"},
+				"X-Amz-Test-Id": []string{"t-12345"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.TestPayloadStructure(context.Background(), c.Params)
+			}
+		})
+	}
+}

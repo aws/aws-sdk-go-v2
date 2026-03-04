@@ -91,3 +91,73 @@ func TestClient_XmlBlobs_Deserialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_XmlBlobs_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *XmlBlobsOutput
+	}{
+		"Ec2XmlBlobs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml;charset=UTF-8"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlBlobsResponse xmlns="https://example.com/">
+			    <data>dmFsdWU=</data>
+			    <requestId>requestid</requestId>
+			</XmlBlobsResponse>
+			`),
+			ExpectResult: &XmlBlobsOutput{
+				Data: []byte("value"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params XmlBlobsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.XmlBlobs(context.Background(), &params)
+			}
+		})
+	}
+}

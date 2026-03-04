@@ -113,3 +113,68 @@ func TestClient_HttpRequestWithLabelsAndTimestampFormat_Serialize(t *testing.T) 
 		})
 	}
 }
+
+func BenchmarkClient_HttpRequestWithLabelsAndTimestampFormat_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *HttpRequestWithLabelsAndTimestampFormatInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"HttpRequestWithLabelsAndTimestampFormat": {
+			Params: &HttpRequestWithLabelsAndTimestampFormatInput{
+				MemberEpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+				MemberHttpDate:     ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+				MemberDateTime:     ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+				DefaultFormat:      ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+				TargetEpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+				TargetHttpDate:     ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+				TargetDateTime:     ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/HttpRequestWithLabelsAndTimestampFormat/1576540098/Mon%2C%2016%20Dec%202019%2023%3A48%3A18%20GMT/2019-12-16T23%3A48%3A18Z/2019-12-16T23%3A48%3A18Z/1576540098/Mon%2C%2016%20Dec%202019%2023%3A48%3A18%20GMT/2019-12-16T23%3A48%3A18Z",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.HttpRequestWithLabelsAndTimestampFormat(context.Background(), c.Params)
+			}
+		})
+	}
+}

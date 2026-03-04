@@ -179,6 +179,131 @@ func TestClient_RpcV2CborDenseMaps_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_RpcV2CborDenseMaps_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *RpcV2CborDenseMapsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RpcV2CborMaps": {
+			Params: &RpcV2CborDenseMapsInput{
+				DenseStructMap: map[string]types.GreetingStruct{
+					"foo": {
+						Hi: ptr.String("there"),
+					},
+					"baz": {
+						Hi: ptr.String("bye"),
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `oW5kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZQ==`)
+			},
+		},
+		"RpcV2CborSerializesZeroValuesInMaps": {
+			Params: &RpcV2CborDenseMapsInput{
+				DenseNumberMap: map[string]int32{
+					"x": 0,
+				},
+				DenseBooleanMap: map[string]bool{
+					"x": false,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `om5kZW5zZU51bWJlck1hcKFheABvZGVuc2VCb29sZWFuTWFwoWF49A==`)
+			},
+		},
+		"RpcV2CborSerializesDenseSetMap": {
+			Params: &RpcV2CborDenseMapsInput{
+				DenseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `oWtkZW5zZVNldE1hcKJheIBheYJhYWFi`)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
+			})
+			for i := 0; i < b.N; i++ {
+				client.RpcV2CborDenseMaps(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_RpcV2CborDenseMaps_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -344,6 +469,160 @@ func TestClient_RpcV2CborDenseMaps_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_RpcV2CborDenseMaps_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *RpcV2CborDenseMapsOutput
+	}{
+		"RpcV2CborMaps": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oW5kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZQ==`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborDenseMapsOutput{
+				DenseStructMap: map[string]types.GreetingStruct{
+					"foo": {
+						Hi: ptr.String("there"),
+					},
+					"baz": {
+						Hi: ptr.String("bye"),
+					},
+				},
+			},
+		},
+		"RpcV2CborDeserializesZeroValuesInMaps": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`om5kZW5zZU51bWJlck1hcKFheABvZGVuc2VCb29sZWFuTWFwoWF49A==`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborDenseMapsOutput{
+				DenseNumberMap: map[string]int32{
+					"x": 0,
+				},
+				DenseBooleanMap: map[string]bool{
+					"x": false,
+				},
+			},
+		},
+		"RpcV2CborDeserializesDenseSetMap": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oWtkZW5zZVNldE1hcKJheIBheYJhYWFi`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborDenseMapsOutput{
+				DenseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
+			},
+		},
+		"RpcV2CborDeserializesDenseSetMapAndSkipsNull": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oWtkZW5zZVNldE1hcKNheIBheYJhYWFiYXr2`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborDenseMapsOutput{
+				DenseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params RpcV2CborDenseMapsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.RpcV2CborDenseMaps(context.Background(), &params)
 			}
 		})
 	}

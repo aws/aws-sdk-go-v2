@@ -113,3 +113,68 @@ func TestClient_OmitsSerializingEmptyLists_Serialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_OmitsSerializingEmptyLists_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *OmitsSerializingEmptyListsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonOmitsEmptyListQueryValues": {
+			Params: &OmitsSerializingEmptyListsInput{
+				QueryStringList:      []string{},
+				QueryIntegerList:     []int32{},
+				QueryDoubleList:      []float64{},
+				QueryBooleanList:     []bool{},
+				QueryTimestampList:   []time.Time{},
+				QueryEnumList:        []types.FooEnum{},
+				QueryIntegerEnumList: []types.IntegerEnum{},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/OmitsSerializingEmptyLists",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.OmitsSerializingEmptyLists(context.Background(), c.Params)
+			}
+		})
+	}
+}

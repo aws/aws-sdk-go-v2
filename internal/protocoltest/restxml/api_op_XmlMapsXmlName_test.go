@@ -138,6 +138,92 @@ func TestClient_XmlMapsXmlName_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_XmlMapsXmlName_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *XmlMapsXmlNameInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"XmlMapsXmlName": {
+			Params: &XmlMapsXmlNameInput{
+				MyMap: map[string]types.GreetingStruct{
+					"foo": {
+						Hi: ptr.String("there"),
+					},
+					"baz": {
+						Hi: ptr.String("bye"),
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlMapsXmlName",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlMapsXmlNameRequest>
+			    <myMap>
+			        <entry>
+			            <Attribute>foo</Attribute>
+			            <Setting>
+			                <hi>there</hi>
+			            </Setting>
+			        </entry>
+			        <entry>
+			            <Attribute>baz</Attribute>
+			            <Setting>
+			                <hi>bye</hi>
+			            </Setting>
+			        </entry>
+			    </myMap>
+			</XmlMapsXmlNameRequest>
+			`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.XmlMapsXmlName(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_XmlMapsXmlName_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -230,6 +316,95 @@ func TestClient_XmlMapsXmlName_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_XmlMapsXmlName_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *XmlMapsXmlNameOutput
+	}{
+		"XmlMapsXmlName": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlMapsXmlNameResponse>
+			    <myMap>
+			        <entry>
+			            <Attribute>foo</Attribute>
+			            <Setting>
+			                <hi>there</hi>
+			            </Setting>
+			        </entry>
+			        <entry>
+			            <Attribute>baz</Attribute>
+			            <Setting>
+			                <hi>bye</hi>
+			            </Setting>
+			        </entry>
+			    </myMap>
+			</XmlMapsXmlNameResponse>
+			`),
+			ExpectResult: &XmlMapsXmlNameOutput{
+				MyMap: map[string]types.GreetingStruct{
+					"foo": {
+						Hi: ptr.String("there"),
+					},
+					"baz": {
+						Hi: ptr.String("bye"),
+					},
+				},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params XmlMapsXmlNameInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.XmlMapsXmlName(context.Background(), &params)
 			}
 		})
 	}

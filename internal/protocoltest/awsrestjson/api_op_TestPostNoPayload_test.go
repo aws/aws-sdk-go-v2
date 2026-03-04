@@ -125,3 +125,80 @@ func TestClient_TestPostNoPayload_Serialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_TestPostNoPayload_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *TestPostNoPayloadInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonHttpPostWithNoModeledBody": {
+			Params:        &TestPostNoPayloadInput{},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/no_payload",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ForbidHeader: []string{
+				"Content-Type",
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonHttpWithPostHeaderMemberNoModeledBody": {
+			Params: &TestPostNoPayloadInput{
+				TestId: ptr.String("t-12345"),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/no_payload",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Amz-Test-Id": []string{"t-12345"},
+			},
+			ForbidHeader: []string{
+				"Content-Type",
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.TestPostNoPayload(context.Background(), c.Params)
+			}
+		})
+	}
+}

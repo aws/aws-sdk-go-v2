@@ -105,6 +105,82 @@ func TestClient_GreetingWithErrors_Deserialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_GreetingWithErrors_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *GreetingWithErrorsOutput
+	}{
+		"RestJsonGreetingWithErrors": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Greeting": []string{"Hello"},
+			},
+			BodyMediaType: "application/json",
+			Body:          []byte(`{}`),
+			ExpectResult: &GreetingWithErrorsOutput{
+				Greeting: ptr.String("Hello"),
+			},
+		},
+		"RestJsonGreetingWithErrorsNoPayload": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Greeting": []string{"Hello"},
+			},
+			Body: []byte(``),
+			ExpectResult: &GreetingWithErrorsOutput{
+				Greeting: ptr.String("Hello"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params GreetingWithErrorsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.GreetingWithErrors(context.Background(), &params)
+			}
+		})
+	}
+}
+
 func TestClient_GreetingWithErrors_InvalidGreeting_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -194,6 +270,75 @@ func TestClient_GreetingWithErrors_InvalidGreeting_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_GreetingWithErrors_InvalidGreeting_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectError   *types.InvalidGreeting
+	}{
+		"RestJsonInvalidGreetingError": {
+			StatusCode: 400,
+			Header: http.Header{
+				"Content-Type":     []string{"application/json"},
+				"X-Amzn-Errortype": []string{"InvalidGreeting"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "Message": "Hi"
+			}`),
+			ExpectError: &types.InvalidGreeting{
+				Message: ptr.String("Hi"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params GreetingWithErrorsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.GreetingWithErrors(context.Background(), &params)
 			}
 		})
 	}
@@ -306,6 +451,93 @@ func TestClient_GreetingWithErrors_ComplexError_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_GreetingWithErrors_ComplexError_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectError   *types.ComplexError
+	}{
+		"RestJsonComplexErrorWithNoMessage": {
+			StatusCode: 403,
+			Header: http.Header{
+				"Content-Type":     []string{"application/json"},
+				"X-Amzn-Errortype": []string{"ComplexError"},
+				"X-Header":         []string{"Header"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "TopLevel": "Top level",
+			    "Nested": {
+			        "Fooooo": "bar"
+			    }
+			}`),
+			ExpectError: &types.ComplexError{
+				Header:   ptr.String("Header"),
+				TopLevel: ptr.String("Top level"),
+				Nested: &types.ComplexNestedErrorData{
+					Foo: ptr.String("bar"),
+				},
+			},
+		},
+		"RestJsonEmptyComplexErrorWithNoMessage": {
+			StatusCode: 403,
+			Header: http.Header{
+				"Content-Type":     []string{"application/json"},
+				"X-Amzn-Errortype": []string{"ComplexError"},
+			},
+			BodyMediaType: "application/json",
+			Body:          []byte(`{}`),
+			ExpectError:   &types.ComplexError{},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params GreetingWithErrorsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.GreetingWithErrors(context.Background(), &params)
 			}
 		})
 	}
@@ -524,6 +756,165 @@ func TestClient_GreetingWithErrors_FooError_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_GreetingWithErrors_FooError_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectError   *types.FooError
+	}{
+		"RestJsonFooErrorUsingXAmznErrorType": {
+			StatusCode: 500,
+			Header: http.Header{
+				"X-Amzn-Errortype": []string{"FooError"},
+			},
+			ExpectError: &types.FooError{},
+		},
+		"RestJsonFooErrorUsingXAmznErrorTypeWithUri": {
+			StatusCode: 500,
+			Header: http.Header{
+				"X-Amzn-Errortype": []string{"FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"},
+			},
+			ExpectError: &types.FooError{},
+		},
+		"RestJsonFooErrorUsingXAmznErrorTypeWithUriAndNamespace": {
+			StatusCode: 500,
+			Header: http.Header{
+				"X-Amzn-Errortype": []string{"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"},
+			},
+			ExpectError: &types.FooError{},
+		},
+		"RestJsonFooErrorUsingCode": {
+			StatusCode: 500,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "code": "FooError"
+			}`),
+			ExpectError: &types.FooError{},
+		},
+		"RestJsonFooErrorUsingCodeAndNamespace": {
+			StatusCode: 500,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "code": "aws.protocoltests.restjson#FooError"
+			}`),
+			ExpectError: &types.FooError{},
+		},
+		"RestJsonFooErrorUsingCodeUriAndNamespace": {
+			StatusCode: 500,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "code": "aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+			}`),
+			ExpectError: &types.FooError{},
+		},
+		"RestJsonFooErrorWithDunderType": {
+			StatusCode: 500,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "__type": "FooError"
+			}`),
+			ExpectError: &types.FooError{},
+		},
+		"RestJsonFooErrorWithDunderTypeAndNamespace": {
+			StatusCode: 500,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "__type": "aws.protocoltests.restjson#FooError"
+			}`),
+			ExpectError: &types.FooError{},
+		},
+		"RestJsonFooErrorWithDunderTypeUriAndNamespace": {
+			StatusCode: 500,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "__type": "aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+			}`),
+			ExpectError: &types.FooError{},
+		},
+		"RestJsonFooErrorWithNestedTypeProperty": {
+			StatusCode: 500,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "__type": "aws.protocoltests.restjson#FooError",
+			    "ErrorDetails": [
+			      {
+			          "__type": "com.amazon.internal#ErrorDetails",
+			          "reason": "Some reason"
+			      }
+			    ]
+			}`),
+			ExpectError: &types.FooError{},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params GreetingWithErrorsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.GreetingWithErrors(context.Background(), &params)
 			}
 		})
 	}

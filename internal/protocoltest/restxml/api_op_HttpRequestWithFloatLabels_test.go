@@ -134,3 +134,87 @@ func TestClient_HttpRequestWithFloatLabels_Serialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_HttpRequestWithFloatLabels_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *HttpRequestWithFloatLabelsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestXmlSupportsNaNFloatLabels": {
+			Params: &HttpRequestWithFloatLabelsInput{
+				Float:  ptr.Float32(float32(math.NaN())),
+				Double: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/FloatHttpLabels/NaN/NaN",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlSupportsInfinityFloatLabels": {
+			Params: &HttpRequestWithFloatLabelsInput{
+				Float:  ptr.Float32(float32(math.Inf(1))),
+				Double: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/FloatHttpLabels/Infinity/Infinity",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlSupportsNegativeInfinityFloatLabels": {
+			Params: &HttpRequestWithFloatLabelsInput{
+				Float:  ptr.Float32(float32(math.Inf(-1))),
+				Double: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/FloatHttpLabels/-Infinity/-Infinity",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.HttpRequestWithFloatLabels(context.Background(), c.Params)
+			}
+		})
+	}
+}

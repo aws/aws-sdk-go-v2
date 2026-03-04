@@ -139,6 +139,93 @@ func TestClient_RecursiveShapes_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_RecursiveShapes_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *RecursiveShapesInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonRecursiveShapes": {
+			Params: &RecursiveShapesInput{
+				Nested: &types.RecursiveShapesInputOutputNested1{
+					Foo: ptr.String("Foo1"),
+					Nested: &types.RecursiveShapesInputOutputNested2{
+						Bar: ptr.String("Bar1"),
+						RecursiveMember: &types.RecursiveShapesInputOutputNested1{
+							Foo: ptr.String("Foo2"),
+							Nested: &types.RecursiveShapesInputOutputNested2{
+								Bar: ptr.String("Bar2"),
+							},
+						},
+					},
+				},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/RecursiveShapes",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "nested": {
+			        "foo": "Foo1",
+			        "nested": {
+			            "bar": "Bar1",
+			            "recursiveMember": {
+			                "foo": "Foo2",
+			                "nested": {
+			                    "bar": "Bar2"
+			                }
+			            }
+			        }
+			    }
+			}`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.RecursiveShapes(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_RecursiveShapes_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -232,6 +319,96 @@ func TestClient_RecursiveShapes_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_RecursiveShapes_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *RecursiveShapesOutput
+	}{
+		"RestJsonRecursiveShapes": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "nested": {
+			        "foo": "Foo1",
+			        "nested": {
+			            "bar": "Bar1",
+			            "recursiveMember": {
+			                "foo": "Foo2",
+			                "nested": {
+			                    "bar": "Bar2"
+			                }
+			            }
+			        }
+			    }
+			}`),
+			ExpectResult: &RecursiveShapesOutput{
+				Nested: &types.RecursiveShapesInputOutputNested1{
+					Foo: ptr.String("Foo1"),
+					Nested: &types.RecursiveShapesInputOutputNested2{
+						Bar: ptr.String("Bar1"),
+						RecursiveMember: &types.RecursiveShapesInputOutputNested1{
+							Foo: ptr.String("Foo2"),
+							Nested: &types.RecursiveShapesInputOutputNested2{
+								Bar: ptr.String("Bar2"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params RecursiveShapesInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.RecursiveShapes(context.Background(), &params)
 			}
 		})
 	}
