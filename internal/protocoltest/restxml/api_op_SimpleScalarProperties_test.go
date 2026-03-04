@@ -262,6 +262,210 @@ func TestClient_SimpleScalarProperties_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_SimpleScalarProperties_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *SimpleScalarPropertiesInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"SimpleScalarProperties": {
+			Params: &SimpleScalarPropertiesInput{
+				Foo:               ptr.String("Foo"),
+				StringValue:       ptr.String("string"),
+				TrueBooleanValue:  ptr.Bool(true),
+				FalseBooleanValue: ptr.Bool(false),
+				ByteValue:         ptr.Int8(1),
+				ShortValue:        ptr.Int16(2),
+				IntegerValue:      ptr.Int32(3),
+				LongValue:         ptr.Int64(4),
+				FloatValue:        ptr.Float32(5.5),
+				DoubleValue:       ptr.Float64(6.5),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
+			    <stringValue>string</stringValue>
+			    <trueBooleanValue>true</trueBooleanValue>
+			    <falseBooleanValue>false</falseBooleanValue>
+			    <byteValue>1</byteValue>
+			    <shortValue>2</shortValue>
+			    <integerValue>3</integerValue>
+			    <longValue>4</longValue>
+			    <floatValue>5.5</floatValue>
+			    <DoubleDribble>6.5</DoubleDribble>
+			</SimpleScalarPropertiesRequest>
+			`))
+			},
+		},
+		"SimpleScalarPropertiesWithEscapedCharacter": {
+			Params: &SimpleScalarPropertiesInput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("<string>"),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
+			    <stringValue>&lt;string&gt;</stringValue>
+			</SimpleScalarPropertiesRequest>
+			`))
+			},
+		},
+		"SimpleScalarPropertiesWithWhiteSpace": {
+			Params: &SimpleScalarPropertiesInput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("  string with white    space  "),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
+			    <stringValue>  string with white    space  </stringValue>
+			</SimpleScalarPropertiesRequest>
+			`))
+			},
+		},
+		"SimpleScalarPropertiesPureWhiteSpace": {
+			Params: &SimpleScalarPropertiesInput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("   "),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
+			    <stringValue>   </stringValue>
+			</SimpleScalarPropertiesRequest>
+			`))
+			},
+		},
+		"RestXmlSupportsNaNFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.NaN())),
+				DoubleValue: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
+			    <floatValue>NaN</floatValue>
+			    <DoubleDribble>NaN</DoubleDribble>
+			</SimpleScalarPropertiesRequest>
+			`))
+			},
+		},
+		"RestXmlSupportsInfinityFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+				DoubleValue: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
+			    <floatValue>Infinity</floatValue>
+			    <DoubleDribble>Infinity</DoubleDribble>
+			</SimpleScalarPropertiesRequest>
+			`))
+			},
+		},
+		"RestXmlSupportsNegativeInfinityFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+				DoubleValue: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
+			    <floatValue>-Infinity</floatValue>
+			    <DoubleDribble>-Infinity</DoubleDribble>
+			</SimpleScalarPropertiesRequest>
+			`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.SimpleScalarProperties(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_SimpleScalarProperties_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -500,6 +704,226 @@ func TestClient_SimpleScalarProperties_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_SimpleScalarProperties_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *SimpleScalarPropertiesOutput
+	}{
+		"SimpleScalarProperties": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesResponse>
+			    <stringValue>string</stringValue>
+			    <trueBooleanValue>true</trueBooleanValue>
+			    <falseBooleanValue>false</falseBooleanValue>
+			    <byteValue>1</byteValue>
+			    <shortValue>2</shortValue>
+			    <integerValue>3</integerValue>
+			    <longValue>4</longValue>
+			    <floatValue>5.5</floatValue>
+			    <DoubleDribble>6.5</DoubleDribble>
+			</SimpleScalarPropertiesResponse>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:               ptr.String("Foo"),
+				StringValue:       ptr.String("string"),
+				TrueBooleanValue:  ptr.Bool(true),
+				FalseBooleanValue: ptr.Bool(false),
+				ByteValue:         ptr.Int8(1),
+				ShortValue:        ptr.Int16(2),
+				IntegerValue:      ptr.Int32(3),
+				LongValue:         ptr.Int64(4),
+				FloatValue:        ptr.Float32(5.5),
+				DoubleValue:       ptr.Float64(6.5),
+			},
+		},
+		"SimpleScalarPropertiesComplexEscapes": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesResponse>
+			    <stringValue>escaped data: &amp;lt;&#xD;&#10;</stringValue>
+			</SimpleScalarPropertiesResponse>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("escaped data: &lt;\r\n"),
+			},
+		},
+		"SimpleScalarPropertiesWithEscapedCharacter": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesResponse>
+			    <stringValue>&lt;string&gt;</stringValue>
+			</SimpleScalarPropertiesResponse>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("<string>"),
+			},
+		},
+		"SimpleScalarPropertiesWithXMLPreamble": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<?xml version = "1.0" encoding = "UTF-8"?>
+			<SimpleScalarPropertiesResponse>
+			    <![CDATA[characters representing CDATA]]>
+			    <stringValue>string</stringValue>
+			    <!--xml comment-->
+			</SimpleScalarPropertiesResponse>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("string"),
+			},
+		},
+		"SimpleScalarPropertiesWithWhiteSpace": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<?xml version = "1.0" encoding = "UTF-8"?>
+			<SimpleScalarPropertiesResponse>
+			    <stringValue> string with white    space </stringValue>
+			</SimpleScalarPropertiesResponse>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String(" string with white    space "),
+			},
+		},
+		"SimpleScalarPropertiesPureWhiteSpace": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<?xml version = "1.0" encoding = "UTF-8"?>
+			<SimpleScalarPropertiesResponse>
+			    <stringValue>  </stringValue>
+			</SimpleScalarPropertiesResponse>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("  "),
+			},
+		},
+		"RestXmlSupportsNaNFloatOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesResponse>
+			    <floatValue>NaN</floatValue>
+			    <DoubleDribble>NaN</DoubleDribble>
+			</SimpleScalarPropertiesResponse>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.NaN())),
+				DoubleValue: ptr.Float64(math.NaN()),
+			},
+		},
+		"RestXmlSupportsInfinityFloatOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesResponse>
+			    <floatValue>Infinity</floatValue>
+			    <DoubleDribble>Infinity</DoubleDribble>
+			</SimpleScalarPropertiesResponse>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+				DoubleValue: ptr.Float64(math.Inf(1)),
+			},
+		},
+		"RestXmlSupportsNegativeInfinityFloatOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesResponse>
+			    <floatValue>-Infinity</floatValue>
+			    <DoubleDribble>-Infinity</DoubleDribble>
+			</SimpleScalarPropertiesResponse>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+				DoubleValue: ptr.Float64(math.Inf(-1)),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params SimpleScalarPropertiesInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.SimpleScalarProperties(context.Background(), &params)
 			}
 		})
 	}

@@ -317,6 +317,261 @@ func TestClient_JsonUnions_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_JsonUnions_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *JsonUnionsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonSerializeStringUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberStringValue{Value: "foo"},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "stringValue": "foo"
+			    }
+			}`))
+			},
+		},
+		"RestJsonSerializeBooleanUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberBooleanValue{Value: true},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "booleanValue": true
+			    }
+			}`))
+			},
+		},
+		"RestJsonSerializeNumberUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberNumberValue{Value: 1},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "numberValue": 1
+			    }
+			}`))
+			},
+		},
+		"RestJsonSerializeBlobUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberBlobValue{Value: []byte("foo")},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "blobValue": "Zm9v"
+			    }
+			}`))
+			},
+		},
+		"RestJsonSerializeTimestampUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberTimestampValue{Value: smithytime.ParseEpochSeconds(1398796238)},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "timestampValue": 1398796238
+			    }
+			}`))
+			},
+		},
+		"RestJsonSerializeEnumUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberEnumValue{Value: types.FooEnum("Foo")},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "enumValue": "Foo"
+			    }
+			}`))
+			},
+		},
+		"RestJsonSerializeListUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberListValue{Value: []string{
+					"foo",
+					"bar",
+				}},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "listValue": ["foo", "bar"]
+			    }
+			}`))
+			},
+		},
+		"RestJsonSerializeMapUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberMapValue{Value: map[string]string{
+					"foo":  "bar",
+					"spam": "eggs",
+				}},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "mapValue": {
+			            "foo": "bar",
+			            "spam": "eggs"
+			        }
+			    }
+			}`))
+			},
+		},
+		"RestJsonSerializeStructureUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberStructureValue{Value: types.GreetingStruct{
+					Hi: ptr.String("hello"),
+				}},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "structureValue": {
+			            "hi": "hello"
+			        }
+			    }
+			}`))
+			},
+		},
+		"RestJsonSerializeRenamedStructureUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberRenamedStructureValue{Value: types.RenamedGreeting{
+					Salutation: ptr.String("hello!"),
+				}},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "renamedStructureValue": {
+			            "salutation": "hello!"
+			        }
+			    }
+			}`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.JsonUnions(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_JsonUnions_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -556,6 +811,229 @@ func TestClient_JsonUnions_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_JsonUnions_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *JsonUnionsOutput
+	}{
+		"RestJsonDeserializeStringUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "stringValue": "foo"
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberStringValue{Value: "foo"},
+			},
+		},
+		"RestJsonDeserializeBooleanUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "booleanValue": true
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberBooleanValue{Value: true},
+			},
+		},
+		"RestJsonDeserializeNumberUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "numberValue": 1
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberNumberValue{Value: 1},
+			},
+		},
+		"RestJsonDeserializeBlobUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "blobValue": "Zm9v"
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberBlobValue{Value: []byte("foo")},
+			},
+		},
+		"RestJsonDeserializeTimestampUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "timestampValue": 1398796238
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberTimestampValue{Value: smithytime.ParseEpochSeconds(1398796238)},
+			},
+		},
+		"RestJsonDeserializeEnumUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "enumValue": "Foo"
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberEnumValue{Value: types.FooEnum("Foo")},
+			},
+		},
+		"RestJsonDeserializeListUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "listValue": ["foo", "bar"]
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberListValue{Value: []string{
+					"foo",
+					"bar",
+				}},
+			},
+		},
+		"RestJsonDeserializeMapUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "mapValue": {
+			            "foo": "bar",
+			            "spam": "eggs"
+			        }
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberMapValue{Value: map[string]string{
+					"foo":  "bar",
+					"spam": "eggs",
+				}},
+			},
+		},
+		"RestJsonDeserializeStructureUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "structureValue": {
+			            "hi": "hello"
+			        }
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberStructureValue{Value: types.GreetingStruct{
+					Hi: ptr.String("hello"),
+				}},
+			},
+		},
+		"RestJsonDeserializeIgnoreType": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "__type": "aws.protocoltests.json10#MyUnion",
+			        "structureValue": {
+			            "hi": "hello"
+			        }
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberStructureValue{Value: types.GreetingStruct{
+					Hi: ptr.String("hello"),
+				}},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params JsonUnionsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.JsonUnions(context.Background(), &params)
 			}
 		})
 	}

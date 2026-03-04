@@ -129,3 +129,84 @@ func TestClient_ConstantAndVariableQueryString_Serialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_ConstantAndVariableQueryString_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *ConstantAndVariableQueryStringInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"ConstantAndVariableQueryStringMissingOneValue": {
+			Params: &ConstantAndVariableQueryStringInput{
+				Baz: ptr.String("bam"),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/ConstantAndVariableQueryString",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "foo", Value: "bar"},
+				{Key: "baz", Value: "bam"},
+			},
+			ForbidQuery: []string{
+				"maybeSet",
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"ConstantAndVariableQueryStringAllValues": {
+			Params: &ConstantAndVariableQueryStringInput{
+				Baz:      ptr.String("bam"),
+				MaybeSet: ptr.String("yes"),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/ConstantAndVariableQueryString",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "foo", Value: "bar"},
+				{Key: "baz", Value: "bam"},
+				{Key: "maybeSet", Value: "yes"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.ConstantAndVariableQueryString(context.Background(), c.Params)
+			}
+		})
+	}
+}

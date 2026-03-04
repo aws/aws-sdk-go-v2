@@ -116,3 +116,71 @@ func TestClient_NullAndEmptyHeadersClient_Serialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_NullAndEmptyHeadersClient_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *NullAndEmptyHeadersClientInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonNullAndEmptyHeaders": {
+			Params: &NullAndEmptyHeadersClientInput{
+				A: nil,
+				B: ptr.String(""),
+				C: []string{},
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/NullAndEmptyHeadersClient",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-B": []string{""},
+				"X-C": []string{""},
+			},
+			ForbidHeader: []string{
+				"X-A",
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.NullAndEmptyHeadersClient(context.Background(), c.Params)
+			}
+		})
+	}
+}

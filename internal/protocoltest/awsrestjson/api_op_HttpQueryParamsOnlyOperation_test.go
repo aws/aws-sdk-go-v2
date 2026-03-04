@@ -118,3 +118,73 @@ func TestClient_HttpQueryParamsOnlyOperation_Serialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_HttpQueryParamsOnlyOperation_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *HttpQueryParamsOnlyOperationInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"HttpQueryParamsOnlyRequest": {
+			Params: &HttpQueryParamsOnlyOperationInput{
+				QueryMap: map[string]string{
+					"a": "b",
+					"c": "d",
+				},
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/http-query-params-only",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "a", Value: "b"},
+				{Key: "c", Value: "d"},
+			},
+		},
+		"HttpQueryParamsOnlyEmptyRequest": {
+			Params: &HttpQueryParamsOnlyOperationInput{
+				QueryMap: map[string]string{},
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/http-query-params-only",
+			ExpectQuery:   []smithytesting.QueryItem{},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.HttpQueryParamsOnlyOperation(context.Background(), c.Params)
+			}
+		})
+	}
+}

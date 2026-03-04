@@ -133,3 +133,87 @@ func TestClient_HttpRequestWithLabels_Serialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_HttpRequestWithLabels_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *HttpRequestWithLabelsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonInputWithHeadersAndAllParams": {
+			Params: &HttpRequestWithLabelsInput{
+				String_:   ptr.String("string"),
+				Short:     ptr.Int16(1),
+				Integer:   ptr.Int32(2),
+				Long:      ptr.Int64(3),
+				Float:     ptr.Float32(4.1),
+				Double:    ptr.Float64(5.1),
+				Boolean:   ptr.Bool(true),
+				Timestamp: ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/HttpRequestWithLabels/string/1/2/3/4.1/5.1/true/2019-12-16T23%3A48%3A18Z",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonHttpRequestLabelEscaping": {
+			Params: &HttpRequestWithLabelsInput{
+				String_:   ptr.String(" %:/?#[]@!$&'()*+,;=😹"),
+				Short:     ptr.Int16(1),
+				Integer:   ptr.Int32(2),
+				Long:      ptr.Int64(3),
+				Float:     ptr.Float32(4.1),
+				Double:    ptr.Float64(5.1),
+				Boolean:   ptr.Bool(true),
+				Timestamp: ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/HttpRequestWithLabels/%20%25%3A%2F%3F%23%5B%5D%40%21%24%26%27%28%29%2A%2B%2C%3B%3D%F0%9F%98%B9/1/2/3/4.1/5.1/true/2019-12-16T23%3A48%3A18Z",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.HttpRequestWithLabels(context.Background(), c.Params)
+			}
+		})
+	}
+}

@@ -190,3 +190,163 @@ func TestClient_XmlTimestamps_Deserialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_XmlTimestamps_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *XmlTimestampsOutput
+	}{
+		"Ec2XmlTimestamps": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml;charset=UTF-8"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
+			    <normal>2014-04-29T18:30:38Z</normal>
+			    <requestId>requestid</requestId>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				Normal: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"Ec2XmlTimestampsWithDateTimeFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml;charset=UTF-8"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
+			    <dateTime>2014-04-29T18:30:38Z</dateTime>
+			    <requestId>requestid</requestId>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				DateTime: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"Ec2XmlTimestampsWithDateTimeOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml;charset=UTF-8"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
+			    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
+			    <requestId>requestid</requestId>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"Ec2XmlTimestampsWithEpochSecondsFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml;charset=UTF-8"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
+			    <epochSeconds>1398796238</epochSeconds>
+			    <requestId>requestid</requestId>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				EpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"Ec2XmlTimestampsWithEpochSecondsOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml;charset=UTF-8"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
+			    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
+			    <requestId>requestid</requestId>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"Ec2XmlTimestampsWithHttpDateFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml;charset=UTF-8"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
+			    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>
+			    <requestId>requestid</requestId>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				HttpDate: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"Ec2XmlTimestampsWithHttpDateOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml;charset=UTF-8"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
+			    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
+			    <requestId>requestid</requestId>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params XmlTimestampsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.XmlTimestamps(context.Background(), &params)
+			}
+		})
+	}
+}

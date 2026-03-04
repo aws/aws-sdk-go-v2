@@ -176,3 +176,152 @@ func TestClient_Float16_Deserialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_Float16_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *Float16Output
+	}{
+		"RpcV2CborFloat16Inf": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oWV2YWx1Zfl8AA==`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &Float16Output{
+				Value: ptr.Float64(math.Inf(1)),
+			},
+		},
+		"RpcV2CborFloat16NegInf": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oWV2YWx1Zfn8AA==`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &Float16Output{
+				Value: ptr.Float64(math.Inf(-1)),
+			},
+		},
+		"RpcV2CborFloat16LSBNaN": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oWV2YWx1Zfl8AQ==`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &Float16Output{
+				Value: ptr.Float64(math.NaN()),
+			},
+		},
+		"RpcV2CborFloat16MSBNaN": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oWV2YWx1Zfl+AA==`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &Float16Output{
+				Value: ptr.Float64(math.NaN()),
+			},
+		},
+		"RpcV2CborFloat16Subnormal": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oWV2YWx1ZfkAUA==`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &Float16Output{
+				Value: ptr.Float64(4.76837158203125e-6),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params Float16Input
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.Float16(context.Background(), &params)
+			}
+		})
+	}
+}

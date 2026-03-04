@@ -138,6 +138,92 @@ func TestClient_XmlAttributes_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_XmlAttributes_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *XmlAttributesInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"XmlAttributes": {
+			Params: &XmlAttributesInput{
+				Foo:  ptr.String("hi"),
+				Attr: ptr.String("test"),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/XmlAttributes",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlAttributesRequest test="test">
+			    <foo>hi</foo>
+			</XmlAttributesRequest>
+			`))
+			},
+		},
+		"XmlAttributesWithEscaping": {
+			Params: &XmlAttributesInput{
+				Foo:  ptr.String("hi"),
+				Attr: ptr.String("<test&mock>"),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/XmlAttributes",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlAttributesRequest test="&lt;test&amp;mock&gt;">
+			    <foo>hi</foo>
+			</XmlAttributesRequest>
+			`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.XmlAttributes(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_XmlAttributes_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -211,6 +297,76 @@ func TestClient_XmlAttributes_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_XmlAttributes_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *XmlAttributesOutput
+	}{
+		"XmlAttributes": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlAttributesResponse test="test">
+			    <foo>hi</foo>
+			</XmlAttributesResponse>
+			`),
+			ExpectResult: &XmlAttributesOutput{
+				Foo:  ptr.String("hi"),
+				Attr: ptr.String("test"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params XmlAttributesInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.XmlAttributes(context.Background(), &params)
 			}
 		})
 	}

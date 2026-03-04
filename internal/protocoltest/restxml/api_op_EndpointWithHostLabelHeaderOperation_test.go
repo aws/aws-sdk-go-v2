@@ -124,3 +124,77 @@ func TestClient_EndpointWithHostLabelHeaderOperation_Serialize(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClient_EndpointWithHostLabelHeaderOperation_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *EndpointWithHostLabelHeaderOperationInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestXmlEndpointTraitWithHostLabelAndHttpBinding": {
+			Params: &EndpointWithHostLabelHeaderOperationInput{
+				AccountId: ptr.String("bar"),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/EndpointWithHostLabelHeaderOperation",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Amz-Account-Id": []string{"bar"},
+			},
+			Host: func() *url.URL {
+				host := "https://example.com"
+				if len(host) == 0 {
+					return nil
+				}
+				u, err := url.Parse(host)
+				if err != nil {
+					panic(err)
+				}
+				return u
+			}(),
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.EndpointWithHostLabelHeaderOperation(context.Background(), c.Params)
+			}
+		})
+	}
+}

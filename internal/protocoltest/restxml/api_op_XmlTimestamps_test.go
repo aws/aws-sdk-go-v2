@@ -233,6 +233,180 @@ func TestClient_XmlTimestamps_Serialize(t *testing.T) {
 	}
 }
 
+func BenchmarkClient_XmlTimestamps_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *XmlTimestampsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"XmlTimestamps": {
+			Params: &XmlTimestampsInput{
+				Normal: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
+			    <normal>2014-04-29T18:30:38Z</normal>
+			</XmlTimestampsRequest>
+			`))
+			},
+		},
+		"XmlTimestampsWithDateTimeFormat": {
+			Params: &XmlTimestampsInput{
+				DateTime: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
+			    <dateTime>2014-04-29T18:30:38Z</dateTime>
+			</XmlTimestampsRequest>
+			`))
+			},
+		},
+		"XmlTimestampsWithDateTimeOnTargetFormat": {
+			Params: &XmlTimestampsInput{
+				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
+			    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
+			</XmlTimestampsRequest>
+			`))
+			},
+		},
+		"XmlTimestampsWithEpochSecondsFormat": {
+			Params: &XmlTimestampsInput{
+				EpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
+			    <epochSeconds>1398796238</epochSeconds>
+			</XmlTimestampsRequest>
+			`))
+			},
+		},
+		"XmlTimestampsWithEpochSecondsOnTargetFormat": {
+			Params: &XmlTimestampsInput{
+				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
+			    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
+			</XmlTimestampsRequest>
+			`))
+			},
+		},
+		"XmlTimestampsWithHttpDateFormat": {
+			Params: &XmlTimestampsInput{
+				HttpDate: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
+			    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>
+			</XmlTimestampsRequest>
+			`))
+			},
+		},
+		"XmlTimestampsWithHttpDateOnTargetFormat": {
+			Params: &XmlTimestampsInput{
+				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
+			    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
+			</XmlTimestampsRequest>
+			`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.XmlTimestamps(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
 func TestClient_XmlTimestamps_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -396,6 +570,159 @@ func TestClient_XmlTimestamps_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_XmlTimestamps_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *XmlTimestampsOutput
+	}{
+		"XmlTimestamps": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse>
+			    <normal>2014-04-29T18:30:38Z</normal>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				Normal: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"XmlTimestampsWithDateTimeFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse>
+			    <dateTime>2014-04-29T18:30:38Z</dateTime>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				DateTime: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"XmlTimestampsWithDateTimeOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse>
+			    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"XmlTimestampsWithEpochSecondsFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse>
+			    <epochSeconds>1398796238</epochSeconds>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				EpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"XmlTimestampsWithEpochSecondsOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse>
+			    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"XmlTimestampsWithHttpDateFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse>
+			    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				HttpDate: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"XmlTimestampsWithHttpDateOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse>
+			    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params XmlTimestampsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.XmlTimestamps(context.Background(), &params)
 			}
 		})
 	}
