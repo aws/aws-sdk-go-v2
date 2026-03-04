@@ -80,6 +80,7 @@
         "api_op_GetComputeAuthToken.go",
         "api_op_GetGameSessionLogUrl.go",
         "api_op_GetInstanceAccess.go",
+        "api_op_GetPlayerConnectionDetails.go",
         "api_op_ListAliases.go",
         "api_op_ListBuilds.go",
         "api_op_ListCompute.go",

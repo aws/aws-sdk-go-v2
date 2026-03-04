@@ -3031,6 +3031,21 @@ type EffectiveOverrideHours struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration object that specifies an email address to be associated with a
+// queue. This configuration contains the identifier of the email address that
+// should be linked to the queue for routing email contacts.
+type EmailAddressConfig struct {
+
+	// The identifier of the email address that should be associated with the queue.
+	// This email address must already exist in the Amazon Connect instance and will be
+	// used to route incoming email contacts to the specified queue.
+	//
+	// This member is required.
+	EmailAddressId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a source or destination email address.
 type EmailAddressInfo struct {
 
@@ -3096,6 +3111,25 @@ type EmailAddressSearchFilter struct {
 	//
 	//   - Inner list specifies conditions that need to be applied with AND operator.
 	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an email address associated with a queue. Contains
+// the essential details needed to identify and manage the email address routing
+// configuration.
+type EmailAddressSummary struct {
+
+	// The Amazon Resource Name (ARN) of the email address associated with the queue.
+	Arn *string
+
+	// The unique identifier of the email address associated with the queue.
+	Id *string
+
+	// Indicates whether this email address is configured as the default outbound
+	// email address for the queue. When set to true, this email address is used as the
+	// default sender for outbound email contacts from this queue.
+	IsDefaultOutboundEmail bool
 
 	noSmithyDocumentSerde
 }

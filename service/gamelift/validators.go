@@ -1210,6 +1210,26 @@ func (m *validateOpGetInstanceAccess) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPlayerConnectionDetails struct {
+}
+
+func (*validateOpGetPlayerConnectionDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPlayerConnectionDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPlayerConnectionDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPlayerConnectionDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListCompute struct {
 }
 
@@ -2168,6 +2188,10 @@ func addOpGetGameSessionLogUrlValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetInstanceAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInstanceAccess{}, middleware.After)
+}
+
+func addOpGetPlayerConnectionDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPlayerConnectionDetails{}, middleware.After)
 }
 
 func addOpListComputeValidationMiddleware(stack *middleware.Stack) error {
@@ -4046,6 +4070,24 @@ func validateOpGetInstanceAccessInput(v *GetInstanceAccessInput) error {
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPlayerConnectionDetailsInput(v *GetPlayerConnectionDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPlayerConnectionDetailsInput"}
+	if v.GameSessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GameSessionId"))
+	}
+	if v.PlayerIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlayerIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

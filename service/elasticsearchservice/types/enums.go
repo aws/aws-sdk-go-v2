@@ -127,6 +127,25 @@ func (DeploymentStatus) Values() []DeploymentStatus {
 	}
 }
 
+type DeploymentStrategy string
+
+// Enum values for DeploymentStrategy
+const (
+	DeploymentStrategyDefault           DeploymentStrategy = "Default"
+	DeploymentStrategyCapacityOptimized DeploymentStrategy = "CapacityOptimized"
+)
+
+// Values returns all known values for DeploymentStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentStrategy) Values() []DeploymentStrategy {
+	return []DeploymentStrategy{
+		"Default",
+		"CapacityOptimized",
+	}
+}
+
 type DescribePackagesFilterName string
 
 // Enum values for DescribePackagesFilterName

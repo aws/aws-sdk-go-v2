@@ -926,6 +926,18 @@ func TestCheckSnapshot_GetInstanceAccess(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPlayerConnectionDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPlayerConnectionDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPlayerConnectionDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAliases(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAliases(context.Background(), nil, func(o *Options) {
@@ -2334,6 +2346,18 @@ func TestUpdateSnapshot_GetInstanceAccess(t *testing.T) {
 	_, err := svc.GetInstanceAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetInstanceAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPlayerConnectionDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPlayerConnectionDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPlayerConnectionDetails")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

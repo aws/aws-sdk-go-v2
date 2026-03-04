@@ -829,6 +829,34 @@ type DataSourceTypeMemberS3GlueDataCatalog struct {
 
 func (*DataSourceTypeMemberS3GlueDataCatalog) isDataSourceType() {}
 
+// Specifies the deployment strategy options for the domain.
+type DeploymentStrategyOptions struct {
+
+	// Specifies the deployment strategy for the domain. Valid values are Default and
+	// CapacityOptimized .
+	//
+	// This member is required.
+	DeploymentStrategy DeploymentStrategy
+
+	noSmithyDocumentSerde
+}
+
+// The status of deployment strategy options for the domain.
+type DeploymentStrategyOptionsStatus struct {
+
+	// Deployment strategy options for the domain.
+	//
+	// This member is required.
+	Options *DeploymentStrategyOptions
+
+	// The current status of the deployment strategy options for the domain.
+	//
+	// This member is required.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
 // A filter to apply to the DescribePackage response.
 type DescribePackagesFilter struct {
 
@@ -929,6 +957,9 @@ type DomainConfig struct {
 
 	// Container for Amazon Cognito options for the domain.
 	CognitoOptions *CognitoOptionsStatus
+
+	// Specifies DeploymentStrategyOptions for the domain.
+	DeploymentStrategyOptions *DeploymentStrategyOptionsStatus
 
 	// Additional options for the domain endpoint, such as whether to require HTTPS
 	// for all traffic.
@@ -1213,6 +1244,9 @@ type DomainStatus struct {
 	// complete. False if domain deletion is still in progress. Once deletion is
 	// complete, the status of the domain is no longer returned.
 	Deleted *bool
+
+	// The current status of the domain's deployment strategy options.
+	DeploymentStrategyOptions *DeploymentStrategyOptions
 
 	// Additional options for the domain endpoint, such as whether to require HTTPS
 	// for all traffic.

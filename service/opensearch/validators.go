@@ -1769,6 +1769,21 @@ func validateColdStorageOptions(v *types.ColdStorageOptions) error {
 	}
 }
 
+func validateDeploymentStrategyOptions(v *types.DeploymentStrategyOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentStrategyOptions"}
+	if len(v.DeploymentStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDirectQueryDataSourceType(v types.DirectQueryDataSourceType) error {
 	if v == nil {
 		return nil
@@ -2282,6 +2297,11 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v.OffPeakWindowOptions != nil {
 		if err := validateOffPeakWindowOptions(v.OffPeakWindowOptions); err != nil {
 			invalidParams.AddNested("OffPeakWindowOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentStrategyOptions != nil {
+		if err := validateDeploymentStrategyOptions(v.DeploymentStrategyOptions); err != nil {
+			invalidParams.AddNested("DeploymentStrategyOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3188,6 +3208,11 @@ func validateOpUpdateDomainConfigInput(v *UpdateDomainConfigInput) error {
 	if v.OffPeakWindowOptions != nil {
 		if err := validateOffPeakWindowOptions(v.OffPeakWindowOptions); err != nil {
 			invalidParams.AddNested("OffPeakWindowOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentStrategyOptions != nil {
+		if err := validateDeploymentStrategyOptions(v.DeploymentStrategyOptions); err != nil {
+			invalidParams.AddNested("DeploymentStrategyOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

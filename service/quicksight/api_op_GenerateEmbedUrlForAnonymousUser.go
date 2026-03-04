@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates an embed URL that you can use to embed an Amazon Quick Suite
-// dashboard or visual in your website, without having to register any reader
-// users. Before you use this action, make sure that you have configured the
-// dashboards and permissions.
+// Generates an embed URL that you can use to embed an Amazon Quick dashboard or
+// visual in your website, without having to register any reader users. Before you
+// use this action, make sure that you have configured the dashboards and
+// permissions.
 //
 // The following rules apply to the generated URL:
 //
@@ -27,15 +27,15 @@ import (
 //     session duration is 10 hours.
 //
 //   - You are charged only when the URL is used or there is interaction with
-//     Amazon Quick Suite.
+//     Amazon Quick.
 //
-// For more information, see [Embedded Analytics] in the Amazon Quick Suite User Guide.
+// For more information, see [Embedded Analytics] in the Amazon Quick User Guide.
 //
 // For more information about the high-level steps for embedding and for an
-// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Suite Developer Portal].
+// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Developer Portal].
 //
 // [Embedded Analytics]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html
-// [Amazon Quick Suite Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+// [Amazon Quick Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
 // [SessionLifetimeInMinutes]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes
 func (c *Client) GenerateEmbedUrlForAnonymousUser(ctx context.Context, params *GenerateEmbedUrlForAnonymousUserInput, optFns ...func(*Options)) (*GenerateEmbedUrlForAnonymousUserOutput, error) {
 	if params == nil {
@@ -80,8 +80,7 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	ExperienceConfiguration *types.AnonymousUserEmbeddingExperienceConfiguration
 
 	// The Amazon Quick Sight namespace that the anonymous user virtually belongs to.
-	// If you are not using an Amazon Quick Suite custom namespace, set this to default
-	// .
+	// If you are not using an Amazon Quick custom namespace, set this to default .
 	//
 	// This member is required.
 	Namespace *string
@@ -125,7 +124,7 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	//   access.
 	//
 	// Besides, these are not the tags used for the Amazon Web Services resource
-	// tagging feature. For more information, see [Using Row-Level Security (RLS) with Tags]in the Amazon Quick Suite User Guide.
+	// tagging feature. For more information, see [Using Row-Level Security (RLS) with Tags]in the Amazon Quick User Guide.
 	//
 	// [Using Row-Level Security (RLS) with Tags]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html
 	SessionTags []types.SessionTag
@@ -135,7 +134,7 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 
 type GenerateEmbedUrlForAnonymousUserOutput struct {
 
-	// The Amazon Resource Name (ARN) to use for the anonymous Amazon Quick Suite user.
+	// The Amazon Resource Name (ARN) to use for the anonymous Amazon Quick user.
 	//
 	// This member is required.
 	AnonymousUserArn *string

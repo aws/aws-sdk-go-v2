@@ -10343,6 +10343,87 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDeploymentStrategyOptions(v **types.DeploymentStrategyOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeploymentStrategyOptions
+	if *v == nil {
+		sv = &types.DeploymentStrategyOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeploymentStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentStrategy to be of type string, got %T instead", value)
+				}
+				sv.DeploymentStrategy = types.DeploymentStrategy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDeploymentStrategyOptionsStatus(v **types.DeploymentStrategyOptionsStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeploymentStrategyOptionsStatus
+	if *v == nil {
+		sv = &types.DeploymentStrategyOptionsStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Options":
+			if err := awsRestjson1_deserializeDocumentDeploymentStrategyOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
+		case "Status":
+			if err := awsRestjson1_deserializeDocumentOptionStatus(&sv.Status, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDisabledOperationException(v **types.DisabledOperationException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11248,6 +11329,11 @@ func awsRestjson1_deserializeDocumentElasticsearchDomainConfig(v **types.Elastic
 				return err
 			}
 
+		case "DeploymentStrategyOptions":
+			if err := awsRestjson1_deserializeDocumentDeploymentStrategyOptionsStatus(&sv.DeploymentStrategyOptions, value); err != nil {
+				return err
+			}
+
 		case "DomainEndpointOptions":
 			if err := awsRestjson1_deserializeDocumentDomainEndpointOptionsStatus(&sv.DomainEndpointOptions, value); err != nil {
 				return err
@@ -11388,6 +11474,11 @@ func awsRestjson1_deserializeDocumentElasticsearchDomainStatus(v **types.Elastic
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.Deleted = ptr.Bool(jtv)
+			}
+
+		case "DeploymentStrategyOptions":
+			if err := awsRestjson1_deserializeDocumentDeploymentStrategyOptions(&sv.DeploymentStrategyOptions, value); err != nil {
+				return err
 			}
 
 		case "DomainEndpointOptions":

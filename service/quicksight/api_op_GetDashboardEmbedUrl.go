@@ -26,18 +26,18 @@ import (
 //   - They are valid for 5 minutes after you run this command.
 //
 //   - You are charged only when the URL is used or there is interaction with
-//     Quick Suite.
+//     Quick.
 //
 //   - The resulting user session is valid for 15 minutes (default) up to 10 hours
 //     (maximum). You can use the optional SessionLifetimeInMinutes parameter to
 //     customize session duration.
 //
-// For more information, see [Embedding Analytics Using GetDashboardEmbedUrl] in the Amazon Quick Suite User Guide.
+// For more information, see [Embedding Analytics Using GetDashboardEmbedUrl] in the Amazon Quick User Guide.
 //
 // For more information about the high-level steps for embedding and for an
-// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Suite Developer Portal].
+// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Developer Portal].
 //
-// [Amazon Quick Suite Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+// [Amazon Quick Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
 // [Embedding Analytics Using GetDashboardEmbedUrl]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html
 func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardEmbedUrlInput, optFns ...func(*Options)) (*GetDashboardEmbedUrlOutput, error) {
 	if params == nil {
@@ -75,9 +75,9 @@ type GetDashboardEmbedUrlInput struct {
 
 	// A list of one or more dashboard IDs that you want anonymous users to have
 	// tempporary access to. Currently, the IdentityType parameter must be set to
-	// ANONYMOUS because other identity types authenticate as Quick Suite or IAM users.
-	// For example, if you set " --dashboard-id dash_id1 --dashboard-id dash_id2
-	// dash_id3 identity-type ANONYMOUS ", the session can access all three dashboards.
+	// ANONYMOUS because other identity types authenticate as Quick or IAM users. For
+	// example, if you set " --dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+	// identity-type ANONYMOUS ", the session can access all three dashboards.
 	AdditionalDashboardIds []string
 
 	// The Amazon Quick Sight namespace that contains the dashboard IDs in this
@@ -105,10 +105,9 @@ type GetDashboardEmbedUrlInput struct {
 	// which enables the undo/redo button.
 	UndoRedoDisabled bool
 
-	// The Amazon Quick Suite user's Amazon Resource Name (ARN), for use with
-	// QUICKSIGHT identity type. You can use this for any Amazon Quick Suite users in
-	// your account (readers, authors, or admins) authenticated as one of the
-	// following:
+	// The Amazon Quick user's Amazon Resource Name (ARN), for use with QUICKSIGHT
+	// identity type. You can use this for any Amazon Quick users in your account
+	// (readers, authors, or admins) authenticated as one of the following:
 	//
 	//   - Active Directory (AD) users or group members
 	//

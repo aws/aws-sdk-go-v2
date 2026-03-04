@@ -254,6 +254,40 @@ type CreateFleetInput struct {
 	// [VPC Peering with Amazon GameLift Servers Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
 	PeerVpcId *string
 
+	// Configuration settings for player gateway. Use this to specify advanced options
+	// for how player gateway handles connections.
+	PlayerGatewayConfiguration *types.PlayerGatewayConfiguration
+
+	// Configures player gateway for your fleet. Player gateway provides benefits such
+	// as DDoS protection by rate limiting and validating traﬃc before it reaches game
+	// servers, hiding game server IP addresses from players, and providing updated
+	// endpoints when relay endpoints become unhealthy. Note, player gateway is only
+	// available for fleets using server SDK 5.x or later game server builds.
+	//
+	// How it works: When enabled, game clients connect to relay endpoints instead of
+	// to your game servers. Player gateway validates player gateway tokens and routes
+	// traffic to the appropriate game server. Your game backend calls [GetPlayerConnectionDetails]to retrieve
+	// relay endpoints and player gateway tokens for your game clients. To learn more
+	// about this topic, see [DDoS protection with Amazon GameLift Servers player gateway].
+	//
+	// Possible values include:
+	//
+	//   - DISABLED (default) -- Game clients connect to the game server endpoint. Use
+	//   this when you do not intend to integrate your game with player gateway.
+	//
+	//   - ENABLED -- Player gateway is available in fleet locations where it is
+	//   supported. Your game backend can call [GetPlayerConnectionDetails]to obtain a player gateway token and
+	//   endpoints for game clients.
+	//
+	//   - REQUIRED -- Player gateway is available in fleet locations where it is
+	//   supported, and the fleet can only use locations that support this feature.
+	//   Attempting to add a remote location to your fleet which does not support player
+	//   gateway will result in an InvalidRequestException .
+	//
+	// [DDoS protection with Amazon GameLift Servers player gateway]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html
+	// [GetPlayerConnectionDetails]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html
+	PlayerGatewayMode types.PlayerGatewayMode
+
 	// A policy that limits the number of game sessions that an individual player can
 	// create on instances in this fleet within a specified span of time.
 	ResourceCreationLimitPolicy *types.ResourceCreationLimitPolicy

@@ -1026,6 +1026,21 @@ func validateColdStorageOptions(v *types.ColdStorageOptions) error {
 	}
 }
 
+func validateDeploymentStrategyOptions(v *types.DeploymentStrategyOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentStrategyOptions"}
+	if len(v.DeploymentStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDomainInformation(v *types.DomainInformation) error {
 	if v == nil {
 		return nil
@@ -1252,6 +1267,11 @@ func validateOpCreateElasticsearchDomainInput(v *CreateElasticsearchDomainInput)
 	if v.TagList != nil {
 		if err := validateTagList(v.TagList); err != nil {
 			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentStrategyOptions != nil {
+		if err := validateDeploymentStrategyOptions(v.DeploymentStrategyOptions); err != nil {
+			invalidParams.AddNested("DeploymentStrategyOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1765,6 +1785,11 @@ func validateOpUpdateElasticsearchDomainConfigInput(v *UpdateElasticsearchDomain
 	if v.AdvancedSecurityOptions != nil {
 		if err := validateAdvancedSecurityOptionsInput(v.AdvancedSecurityOptions); err != nil {
 			invalidParams.AddNested("AdvancedSecurityOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentStrategyOptions != nil {
+		if err := validateDeploymentStrategyOptions(v.DeploymentStrategyOptions); err != nil {
+			invalidParams.AddNested("DeploymentStrategyOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

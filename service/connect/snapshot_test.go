@@ -218,6 +218,18 @@ func TestCheckSnapshot_AssociatePhoneNumberContactFlow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateQueueEmailAddresses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateQueueEmailAddresses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateQueueEmailAddresses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateQueueQuickConnects(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateQueueQuickConnects(context.Background(), nil, func(o *Options) {
@@ -1838,6 +1850,18 @@ func TestCheckSnapshot_DisassociatePhoneNumberContactFlow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateQueueEmailAddresses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateQueueEmailAddresses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateQueueEmailAddresses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateQueueQuickConnects(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateQueueQuickConnects(context.Background(), nil, func(o *Options) {
@@ -2575,6 +2599,18 @@ func TestCheckSnapshot_ListPrompts(t *testing.T) {
 	_, err := svc.ListPrompts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListPrompts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListQueueEmailAddresses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQueueEmailAddresses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListQueueEmailAddresses")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4585,6 +4621,18 @@ func TestUpdateSnapshot_AssociatePhoneNumberContactFlow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateQueueEmailAddresses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateQueueEmailAddresses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateQueueEmailAddresses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateQueueQuickConnects(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateQueueQuickConnects(context.Background(), nil, func(o *Options) {
@@ -6205,6 +6253,18 @@ func TestUpdateSnapshot_DisassociatePhoneNumberContactFlow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateQueueEmailAddresses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateQueueEmailAddresses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateQueueEmailAddresses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateQueueQuickConnects(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateQueueQuickConnects(context.Background(), nil, func(o *Options) {
@@ -6942,6 +7002,18 @@ func TestUpdateSnapshot_ListPrompts(t *testing.T) {
 	_, err := svc.ListPrompts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListPrompts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListQueueEmailAddresses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQueueEmailAddresses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListQueueEmailAddresses")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

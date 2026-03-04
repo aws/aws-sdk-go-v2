@@ -30,9 +30,9 @@ import (
 // Before you can turn on public sharing on your account, make sure to give public
 // sharing permissions to an administrative user in the Identity and Access
 // Management (IAM) console. For more information on using IAM with Amazon Quick
-// Sight, see [Using Quick Suite with IAM]in the Amazon Quick Sight User Guide.
+// Sight, see [Using Quick with IAM]in the Amazon Quick Sight User Guide.
 //
-// [Using Quick Suite with IAM]: https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html
+// [Using Quick with IAM]: https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html
 func (c *Client) UpdatePublicSharingSettings(ctx context.Context, params *UpdatePublicSharingSettingsInput, optFns ...func(*Options)) (*UpdatePublicSharingSettingsOutput, error) {
 	if params == nil {
 		params = &UpdatePublicSharingSettingsInput{}
@@ -57,7 +57,7 @@ type UpdatePublicSharingSettingsInput struct {
 	AwsAccountId *string
 
 	// A Boolean value that indicates whether public sharing is turned on for an Quick
-	// Suite account.
+	// account.
 	PublicSharingEnabled bool
 
 	noSmithyDocumentSerde

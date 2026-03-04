@@ -288,6 +288,35 @@ type CreateContainerFleetInput struct {
 	// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
 	PerInstanceContainerGroupDefinitionName *string
 
+	// Configures player gateway for your fleet. Player gateway provides benefits such
+	// as DDoS protection by rate limiting and validating traﬃc before it reaches game
+	// servers, hiding game server IP addresses from players, and providing updated
+	// endpoints when relay endpoints become unhealthy.
+	//
+	// How it works: When enabled, game clients connect to relay endpoints instead of
+	// to your game servers. Player gateway validates player gateway tokens and routes
+	// traffic to the appropriate game server. Your game backend calls [GetPlayerConnectionDetails]to retrieve
+	// relay endpoints and player gateway tokens for your game clients. To learn more
+	// about this topic, see [DDoS protection with Amazon GameLift Servers player gateway].
+	//
+	// Possible values include:
+	//
+	//   - DISABLED (default) -- Game clients connect to the game server endpoint. Use
+	//   this when you do not intend to integrate your game with player gateway.
+	//
+	//   - ENABLED -- Player gateway is available in fleet locations where it is
+	//   supported. Your game backend can call [GetPlayerConnectionDetails]to obtain a player gateway token and
+	//   endpoints for game clients.
+	//
+	//   - REQUIRED -- Player gateway is available in fleet locations where it is
+	//   supported, and the fleet can only use locations that support this feature.
+	//   Attempting to add a remote location to your fleet which does not support player
+	//   gateway will result in an InvalidRequestException .
+	//
+	// [DDoS protection with Amazon GameLift Servers player gateway]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html
+	// [GetPlayerConnectionDetails]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html
+	PlayerGatewayMode types.PlayerGatewayMode
+
 	// A list of labels to assign to the new fleet resource. Tags are
 	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
 	// useful for resource management, access management and cost allocation. For more

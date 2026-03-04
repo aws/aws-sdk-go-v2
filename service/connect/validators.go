@@ -270,6 +270,26 @@ func (m *validateOpAssociatePhoneNumberContactFlow) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateQueueEmailAddresses struct {
+}
+
+func (*validateOpAssociateQueueEmailAddresses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateQueueEmailAddresses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateQueueEmailAddressesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateQueueEmailAddressesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateQueueQuickConnects struct {
 }
 
@@ -2970,6 +2990,26 @@ func (m *validateOpDisassociatePhoneNumberContactFlow) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateQueueEmailAddresses struct {
+}
+
+func (*validateOpDisassociateQueueEmailAddresses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateQueueEmailAddresses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateQueueEmailAddressesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateQueueEmailAddressesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateQueueQuickConnects struct {
 }
 
@@ -4165,6 +4205,26 @@ func (m *validateOpListPrompts) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPromptsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListQueueEmailAddresses struct {
+}
+
+func (*validateOpListQueueEmailAddresses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQueueEmailAddresses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQueueEmailAddressesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQueueEmailAddressesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -7242,6 +7302,10 @@ func addOpAssociatePhoneNumberContactFlowValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpAssociatePhoneNumberContactFlow{}, middleware.After)
 }
 
+func addOpAssociateQueueEmailAddressesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateQueueEmailAddresses{}, middleware.After)
+}
+
 func addOpAssociateQueueQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateQueueQuickConnects{}, middleware.After)
 }
@@ -7782,6 +7846,10 @@ func addOpDisassociatePhoneNumberContactFlowValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpDisassociatePhoneNumberContactFlow{}, middleware.After)
 }
 
+func addOpDisassociateQueueEmailAddressesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateQueueEmailAddresses{}, middleware.After)
+}
+
 func addOpDisassociateQueueQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateQueueQuickConnects{}, middleware.After)
 }
@@ -8020,6 +8088,10 @@ func addOpListPredefinedAttributesValidationMiddleware(stack *middleware.Stack) 
 
 func addOpListPromptsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPrompts{}, middleware.After)
+}
+
+func addOpListQueueEmailAddressesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQueueEmailAddresses{}, middleware.After)
 }
 
 func addOpListQueueQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
@@ -9193,6 +9265,38 @@ func validateDistributionList(v []types.Distribution) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DistributionList"}
 	for i := range v {
 		if err := validateDistribution(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailAddressConfig(v *types.EmailAddressConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailAddressConfig"}
+	if v.EmailAddressId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddressId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailAddressConfigList(v []types.EmailAddressConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailAddressConfigList"}
+	for i := range v {
+		if err := validateEmailAddressConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -12218,6 +12322,31 @@ func validateOpAssociatePhoneNumberContactFlowInput(v *AssociatePhoneNumberConta
 	}
 }
 
+func validateOpAssociateQueueEmailAddressesInput(v *AssociateQueueEmailAddressesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateQueueEmailAddressesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.EmailAddressesConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddressesConfig"))
+	} else if v.EmailAddressesConfig != nil {
+		if err := validateEmailAddressConfigList(v.EmailAddressesConfig); err != nil {
+			invalidParams.AddNested("EmailAddressesConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateQueueQuickConnectsInput(v *AssociateQueueQuickConnectsInput) error {
 	if v == nil {
 		return nil
@@ -13133,6 +13262,11 @@ func validateOpCreateQueueInput(v *CreateQueueInput) error {
 	}
 	if v.HoursOfOperationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if v.EmailAddressesConfig != nil {
+		if err := validateEmailAddressConfigList(v.EmailAddressesConfig); err != nil {
+			invalidParams.AddNested("EmailAddressesConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15011,6 +15145,27 @@ func validateOpDisassociatePhoneNumberContactFlowInput(v *DisassociatePhoneNumbe
 	}
 }
 
+func validateOpDisassociateQueueEmailAddressesInput(v *DisassociateQueueEmailAddressesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateQueueEmailAddressesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.EmailAddressesId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddressesId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateQueueQuickConnectsInput(v *DisassociateQueueQuickConnectsInput) error {
 	if v == nil {
 		return nil
@@ -16124,6 +16279,24 @@ func validateOpListPromptsInput(v *ListPromptsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListPromptsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQueueEmailAddressesInput(v *ListQueueEmailAddressesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQueueEmailAddressesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

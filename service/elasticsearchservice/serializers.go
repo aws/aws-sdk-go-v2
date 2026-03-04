@@ -630,6 +630,13 @@ func awsRestjson1_serializeOpDocumentCreateElasticsearchDomainInput(v *CreateEla
 		}
 	}
 
+	if v.DeploymentStrategyOptions != nil {
+		ok := object.Key("DeploymentStrategyOptions")
+		if err := awsRestjson1_serializeDocumentDeploymentStrategyOptions(v.DeploymentStrategyOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DomainEndpointOptions != nil {
 		ok := object.Key("DomainEndpointOptions")
 		if err := awsRestjson1_serializeDocumentDomainEndpointOptions(v.DomainEndpointOptions, ok); err != nil {
@@ -3956,6 +3963,13 @@ func awsRestjson1_serializeOpDocumentUpdateElasticsearchDomainConfigInput(v *Upd
 		}
 	}
 
+	if v.DeploymentStrategyOptions != nil {
+		ok := object.Key("DeploymentStrategyOptions")
+		if err := awsRestjson1_serializeDocumentDeploymentStrategyOptions(v.DeploymentStrategyOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DomainEndpointOptions != nil {
 		ok := object.Key("DomainEndpointOptions")
 		if err := awsRestjson1_serializeDocumentDomainEndpointOptions(v.DomainEndpointOptions, ok); err != nil {
@@ -4458,6 +4472,18 @@ func awsRestjson1_serializeDocumentColdStorageOptions(v *types.ColdStorageOption
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")
 		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeploymentStrategyOptions(v *types.DeploymentStrategyOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DeploymentStrategy) > 0 {
+		ok := object.Key("DeploymentStrategy")
+		ok.String(string(v.DeploymentStrategy))
 	}
 
 	return nil

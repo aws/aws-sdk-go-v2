@@ -4410,6 +4410,67 @@ func (m *awsAwsjson11_serializeOpGetInstanceAccess) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetPlayerConnectionDetails struct {
+}
+
+func (*awsAwsjson11_serializeOpGetPlayerConnectionDetails) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetPlayerConnectionDetails) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPlayerConnectionDetailsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.GetPlayerConnectionDetails")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetPlayerConnectionDetailsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListAliases struct {
 }
 
@@ -8122,6 +8183,18 @@ func awsAwsjson11_serializeDocumentPlayerDataMap(v map[string]string, value smit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPlayerGatewayConfiguration(v *types.PlayerGatewayConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.GameServerIpProtocolSupported) > 0 {
+		ok := object.Key("GameServerIpProtocolSupported")
+		ok.String(string(v.GameServerIpProtocolSupported))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPlayerIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -8839,6 +8912,11 @@ func awsAwsjson11_serializeOpDocumentCreateContainerFleetInput(v *CreateContaine
 		ok.String(*v.PerInstanceContainerGroupDefinitionName)
 	}
 
+	if len(v.PlayerGatewayMode) > 0 {
+		ok := object.Key("PlayerGatewayMode")
+		ok.String(string(v.PlayerGatewayMode))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -9019,6 +9097,18 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 	if v.PeerVpcId != nil {
 		ok := object.Key("PeerVpcId")
 		ok.String(*v.PeerVpcId)
+	}
+
+	if v.PlayerGatewayConfiguration != nil {
+		ok := object.Key("PlayerGatewayConfiguration")
+		if err := awsAwsjson11_serializeDocumentPlayerGatewayConfiguration(v.PlayerGatewayConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.PlayerGatewayMode) > 0 {
+		ok := object.Key("PlayerGatewayMode")
+		ok.String(string(v.PlayerGatewayMode))
 	}
 
 	if v.ResourceCreationLimitPolicy != nil {
@@ -10517,6 +10607,25 @@ func awsAwsjson11_serializeOpDocumentGetInstanceAccessInput(v *GetInstanceAccess
 	if v.InstanceId != nil {
 		ok := object.Key("InstanceId")
 		ok.String(*v.InstanceId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetPlayerConnectionDetailsInput(v *GetPlayerConnectionDetailsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GameSessionId != nil {
+		ok := object.Key("GameSessionId")
+		ok.String(*v.GameSessionId)
+	}
+
+	if v.PlayerIds != nil {
+		ok := object.Key("PlayerIds")
+		if err := awsAwsjson11_serializeDocumentPlayerIdList(v.PlayerIds, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

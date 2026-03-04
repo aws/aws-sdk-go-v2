@@ -1103,6 +1103,13 @@ func awsRestjson1_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		}
 	}
 
+	if v.DeploymentStrategyOptions != nil {
+		ok := object.Key("DeploymentStrategyOptions")
+		if err := awsRestjson1_serializeDocumentDeploymentStrategyOptions(v.DeploymentStrategyOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DomainEndpointOptions != nil {
 		ok := object.Key("DomainEndpointOptions")
 		if err := awsRestjson1_serializeDocumentDomainEndpointOptions(v.DomainEndpointOptions, ok); err != nil {
@@ -6502,6 +6509,13 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigInput(v *UpdateDomainConf
 		}
 	}
 
+	if v.DeploymentStrategyOptions != nil {
+		ok := object.Key("DeploymentStrategyOptions")
+		if err := awsRestjson1_serializeDocumentDeploymentStrategyOptions(v.DeploymentStrategyOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DomainEndpointOptions != nil {
 		ok := object.Key("DomainEndpointOptions")
 		if err := awsRestjson1_serializeDocumentDomainEndpointOptions(v.DomainEndpointOptions, ok); err != nil {
@@ -7631,6 +7645,18 @@ func awsRestjson1_serializeDocumentDataSourceType(v types.DataSourceType, value 
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeploymentStrategyOptions(v *types.DeploymentStrategyOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DeploymentStrategy) > 0 {
+		ok := object.Key("DeploymentStrategy")
+		ok.String(string(v.DeploymentStrategy))
+	}
+
 	return nil
 }
 

@@ -36,8 +36,8 @@ type AccountInfo struct {
 
 	// The account name that you provided for the Amazon Quick Sight subscription in
 	// your Amazon Web Services account. You create this name when you sign up for
-	// Quick Suite. It's unique over all of Amazon Web Services, and it appears only
-	// when users sign in.
+	// Quick. It's unique over all of Amazon Web Services, and it appears only when
+	// users sign in.
 	AccountName *string
 
 	// The status of your account subscription.
@@ -78,7 +78,7 @@ type AccountSettings struct {
 	NotificationEmail *string
 
 	// A Boolean value that indicates whether public sharing is turned on for an Quick
-	// Suite account. For more information about turning on public sharing, see [UpdatePublicSharingSettings].
+	// account. For more information about turning on public sharing, see [UpdatePublicSharingSettings].
 	//
 	// [UpdatePublicSharingSettings]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html
 	PublicSharingEnabled bool
@@ -741,7 +741,7 @@ type AnonymousUserDashboardVisualEmbeddingConfiguration struct {
 }
 
 // The type of experience you want to embed. For anonymous users, you can embed
-// Quick Suite dashboards.
+// Quick dashboards.
 type AnonymousUserEmbeddingExperienceConfiguration struct {
 
 	// The type of embedding experience. In this case, Amazon Quick Sight dashboards.
@@ -2953,7 +2953,7 @@ type BrandDefinition struct {
 // The details of the brand.
 type BrandDetail struct {
 
-	// The ID of the Quick Suite brand.
+	// The ID of the Quick brand.
 	//
 	// This member is required.
 	BrandId *string
@@ -3000,7 +3000,7 @@ type BrandSummary struct {
 	// The Amazon Resource Name (ARN) of the brand.
 	Arn *string
 
-	// The ID of the Quick Suite brand.
+	// The ID of the Quick brand.
 	BrandId *string
 
 	// The name of the brand.
@@ -3106,6 +3106,9 @@ type Capabilities struct {
 	// The ability to perform analysis-related actions.
 	Analysis CapabilityState
 
+	// The ability to review and approve sharing requests of Flows.
+	ApproveFlowShareRequests CapabilityState
+
 	// The ability to perform actions using Asana connectors.
 	AsanaAction CapabilityState
 
@@ -3117,6 +3120,9 @@ type Capabilities struct {
 
 	// The ability to perform actions using Box Agent connectors.
 	BoxAgentAction CapabilityState
+
+	// The ability to Build Calculation with AI
+	BuildCalculatedFieldWithQ CapabilityState
 
 	// The ability to perform actions using Canva Agent connectors.
 	CanvaAgentAction CapabilityState
@@ -3280,6 +3286,9 @@ type Capabilities struct {
 	// The ability to create chat agents.
 	CreateChatAgents CapabilityState
 
+	// The ability to Create Executive Summary
+	CreateDashboardExecutiveSummaryWithQ CapabilityState
+
 	// The ability to create a SPICE dataset.
 	CreateSPICEDataset CapabilityState
 
@@ -3288,6 +3297,9 @@ type Capabilities struct {
 
 	// The ability to perform dashboard-related actions.
 	Dashboard CapabilityState
+
+	// The ability to Edit Visual with AI
+	EditVisualWithQ CapabilityState
 
 	// The ability to export to CSV files from the UI.
 	ExportToCsv CapabilityState
@@ -3306,6 +3318,9 @@ type Capabilities struct {
 
 	// The ability to export to PDF files in scheduled email reports.
 	ExportToPdfInScheduledReports CapabilityState
+
+	// The ability to perform Extension-related actions.
+	Extension CapabilityState
 
 	// The ability to perform actions using FactSet connectors.
 	FactSetAction CapabilityState
@@ -3574,6 +3589,9 @@ type Capabilities struct {
 
 	// The ability to perform actions using Textract connectors.
 	TextractAction CapabilityState
+
+	// The ability to perform Topic-related actions.
+	Topic CapabilityState
 
 	// The ability to use internet to enhance results in Chat Agents, Flows, and Quick
 	// Research. Web search queries will be processed securely in an Amazon Web
@@ -5578,15 +5596,15 @@ type DashboardVisualId struct {
 
 	// The ID of the dashboard that has the visual that you want to embed. The
 	// DashboardId can be found in the IDs for developers section of the Embed visual
-	// pane of the visual's on-visual menu of the Quick Suite console. You can also get
-	// the DashboardId with a ListDashboards API operation.
+	// pane of the visual's on-visual menu of the Quick console. You can also get the
+	// DashboardId with a ListDashboards API operation.
 	//
 	// This member is required.
 	DashboardId *string
 
 	// The ID of the sheet that the has visual that you want to embed. The SheetId can
 	// be found in the IDs for developers section of the Embed visual pane of the
-	// visual's on-visual menu of the Quick Suite console.
+	// visual's on-visual menu of the Quick console.
 	//
 	// This member is required.
 	SheetId *string
@@ -13849,8 +13867,8 @@ type Permission struct {
 	Actions []string
 
 	// The Amazon Resource Name (ARN) of the principal. This can be an Amazon Quick
-	// Suite user, group or namespace associated with the flow. Namespace principal can
-	// only be set as a viewer and will grant everyone in the same namespace viewer
+	// user, group or namespace associated with the flow. Namespace principal can only
+	// be set as a viewer and will grant everyone in the same namespace viewer
 	// permissions.
 	//
 	// This member is required.
@@ -15711,7 +15729,7 @@ type RegisteredUserDashboardVisualEmbeddingConfiguration struct {
 }
 
 // The type of experience you want to embed. For registered users, you can embed
-// Quick Suite dashboards or the Amazon Quick Sight console.
+// Quick dashboards or the Amazon Quick Sight console.
 //
 // Exactly one of the experience configurations is required. You can choose
 // Dashboard or QuickSightConsole . You cannot choose more than one experience
@@ -15745,8 +15763,8 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 
 	// The configuration details for providing each Amazon Quick Sight console
 	// embedding experience. This can be used along with custom permissions to restrict
-	// access to certain features. For more information, see [Customizing Access to the Amazon Quick Sight Console]in the Amazon Quick Suite
-	// User Guide.
+	// access to certain features. For more information, see [Customizing Access to the Amazon Quick Sight Console]in the Amazon Quick User
+	// Guide.
 	//
 	// Use [GenerateEmbedUrlForRegisteredUser] where you want to provide an authoring portal that allows users to create
 	// data sources, datasets, analyses, and dashboards. The users who accesses an
@@ -15754,21 +15772,20 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	// security cohort. If you want to restrict permissions to some of these features,
 	// add a custom permissions profile to the user with the [UpdateUser]API operation. Use the [RegisterUser]
 	// API operation to add a new user with a custom permission profile attached. For
-	// more information, see the following sections in the Amazon Quick Suite User
-	// Guide:
+	// more information, see the following sections in the Amazon Quick User Guide:
 	//
 	// [Embedding the Full Functionality of the Amazon Quick Sight Console for Authenticated Users]
 	//
-	// [Customizing Access to the Amazon Quick Suite Console]
+	// [Customizing Access to the Amazon Quick Console]
 	//
 	// For more information about the high-level steps for embedding and for an
-	// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Suite Developer Portal].
+	// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Developer Portal].
 	//
+	// [Amazon Quick Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
 	// [Customizing Access to the Amazon Quick Sight Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
 	// [Embedding the Full Functionality of the Amazon Quick Sight Console for Authenticated Users]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html
 	// [UpdateUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html
-	// [Amazon Quick Suite Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
-	// [Customizing Access to the Amazon Quick Suite Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
+	// [Customizing Access to the Amazon Quick Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
 	// [GenerateEmbedUrlForRegisteredUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html
 	// [RegisterUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html
 	QuickSightConsole *RegisteredUserQuickSightConsoleEmbeddingConfiguration
@@ -15782,8 +15799,8 @@ type RegisteredUserGenerativeQnAEmbeddingConfiguration struct {
 
 	// The ID of the new Q reader experience topic that you want to make the starting
 	// topic in the Generative Q&A experience. You can find a topic ID by navigating to
-	// the Topics pane in the Quick Suite application and opening a topic. The ID is in
-	// the URL for the topic that you open.
+	// the Topics pane in the Quick application and opening a topic. The ID is in the
+	// URL for the topic that you open.
 	//
 	// If you don't specify an initial topic or you specify a legacy topic, a list of
 	// all shared new reader experience topics is shown in the Generative Q&A
@@ -16773,11 +16790,11 @@ type SelectedSheetsFilterScopeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The self-upgrade configuration for the Quick Suite account.
+// The self-upgrade configuration for the Quick account.
 type SelfUpgradeConfiguration struct {
 
-	// Status set for the self-upgrade configuration for the Quick Suite account. It
-	// can contain the following values:
+	// Status set for the self-upgrade configuration for the Quick account. It can
+	// contain the following values:
 	//
 	//   - AUTO_APPROVAL : All the self-upgrade requests will be auto approved.
 	//
@@ -17094,7 +17111,7 @@ type SheetDefinition struct {
 	Layouts []Layout
 
 	// The name of the sheet. This name is displayed on the sheet's tab in the Quick
-	// Suite console.
+	// console.
 	Name *string
 
 	// The list of parameter controls that are on a sheet.
@@ -17476,7 +17493,7 @@ type SnapshotAnonymousUser struct {
 	//
 	// These are not the tags that are used for Amazon Web Services resource tagging.
 	// For more information on row level security in Amazon Quick Sight, see [Using Row-Level Security (RLS) with Tags]in the
-	// Amazon Quick Suite User Guide.
+	// Amazon Quick User Guide.
 	//
 	// [Using Row-Level Security (RLS) with Tags]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html
 	RowLevelPermissionTags []SessionTag

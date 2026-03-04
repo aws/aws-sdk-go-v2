@@ -8746,6 +8746,135 @@ func awsAwsjson11_deserializeOpErrorGetInstanceAccess(response *smithyhttp.Respo
 	}
 }
 
+type awsAwsjson11_deserializeOpGetPlayerConnectionDetails struct {
+}
+
+func (*awsAwsjson11_deserializeOpGetPlayerConnectionDetails) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpGetPlayerConnectionDetails) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetPlayerConnectionDetails(response, &metadata)
+	}
+	output := &GetPlayerConnectionDetailsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetPlayerConnectionDetailsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorGetPlayerConnectionDetails(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("InternalServiceException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidGameSessionStatusException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidGameSessionStatusException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidRequestException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsAwsjson11_deserializeErrorUnauthorizedException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedRegionException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedRegionException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpListAliases struct {
 }
 
@@ -15323,7 +15452,7 @@ func awsAwsjson11_deserializeDocumentBuild(v **types.Build, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected PositiveLong to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected WholeNumberLong to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -16225,6 +16354,15 @@ func awsAwsjson11_deserializeDocumentContainerFleet(v **types.ContainerFleet, va
 				sv.PerInstanceContainerGroupDefinitionName = ptr.String(jtv)
 			}
 
+		case "PlayerGatewayMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlayerGatewayMode to be of type string, got %T instead", value)
+				}
+				sv.PlayerGatewayMode = types.PlayerGatewayMode(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16306,6 +16444,15 @@ func awsAwsjson11_deserializeDocumentContainerFleetLocationAttributes(v **types.
 					return fmt.Errorf("expected LocationStringModel to be of type string, got %T instead", value)
 				}
 				sv.Location = ptr.String(jtv)
+			}
+
+		case "PlayerGatewayStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlayerGatewayStatus to be of type string, got %T instead", value)
+				}
+				sv.PlayerGatewayStatus = types.PlayerGatewayStatus(jtv)
 			}
 
 		case "Status":
@@ -17690,6 +17837,20 @@ func awsAwsjson11_deserializeDocumentFleetAttributes(v **types.FleetAttributes, 
 					return fmt.Errorf("expected OperatingSystem to be of type string, got %T instead", value)
 				}
 				sv.OperatingSystem = types.OperatingSystem(jtv)
+			}
+
+		case "PlayerGatewayConfiguration":
+			if err := awsAwsjson11_deserializeDocumentPlayerGatewayConfiguration(&sv.PlayerGatewayConfiguration, value); err != nil {
+				return err
+			}
+
+		case "PlayerGatewayMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlayerGatewayMode to be of type string, got %T instead", value)
+				}
+				sv.PlayerGatewayMode = types.PlayerGatewayMode(jtv)
 			}
 
 		case "ResourceCreationLimitPolicy":
@@ -19204,6 +19365,15 @@ func awsAwsjson11_deserializeDocumentGameSession(v **types.GameSession, value in
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "PlayerGatewayStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlayerGatewayStatus to be of type string, got %T instead", value)
+				}
+				sv.PlayerGatewayStatus = types.PlayerGatewayStatus(jtv)
+			}
+
 		case "PlayerSessionCreationPolicy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19321,6 +19491,15 @@ func awsAwsjson11_deserializeDocumentGameSessionConnectionInfo(v **types.GameSes
 		case "MatchedPlayerSessions":
 			if err := awsAwsjson11_deserializeDocumentMatchedPlayerSessionList(&sv.MatchedPlayerSessions, value); err != nil {
 				return err
+			}
+
+		case "PlayerGatewayStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlayerGatewayStatus to be of type string, got %T instead", value)
+				}
+				sv.PlayerGatewayStatus = types.PlayerGatewayStatus(jtv)
 			}
 
 		case "Port":
@@ -19704,6 +19883,15 @@ func awsAwsjson11_deserializeDocumentGameSessionPlacement(v **types.GameSessionP
 					return fmt.Errorf("expected IdStringModel to be of type string, got %T instead", value)
 				}
 				sv.PlacementId = ptr.String(jtv)
+			}
+
+		case "PlayerGatewayStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlayerGatewayStatus to be of type string, got %T instead", value)
+				}
+				sv.PlayerGatewayStatus = types.PlayerGatewayStatus(jtv)
 			}
 
 		case "PlayerLatencies":
@@ -21076,6 +21264,15 @@ func awsAwsjson11_deserializeDocumentLocationState(v **types.LocationState, valu
 				sv.Location = ptr.String(jtv)
 			}
 
+		case "PlayerGatewayStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlayerGatewayStatus to be of type string, got %T instead", value)
+				}
+				sv.PlayerGatewayStatus = types.PlayerGatewayStatus(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22299,6 +22496,237 @@ func awsAwsjson11_deserializeDocumentPlayerAttributeStringList(v *[]string, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPlayerConnectionDetail(v **types.PlayerConnectionDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PlayerConnectionDetail
+	if *v == nil {
+		sv = &types.PlayerConnectionDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Endpoints":
+			if err := awsAwsjson11_deserializeDocumentPlayerConnectionEndpointList(&sv.Endpoints, value); err != nil {
+				return err
+			}
+
+		case "Expiration":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Expiration = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "PlayerGatewayToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaxString to be of type string, got %T instead", value)
+				}
+				sv.PlayerGatewayToken = ptr.String(jtv)
+			}
+
+		case "PlayerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlayerId to be of type string, got %T instead", value)
+				}
+				sv.PlayerId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPlayerConnectionDetailList(v *[]types.PlayerConnectionDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PlayerConnectionDetail
+	if *v == nil {
+		cv = []types.PlayerConnectionDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PlayerConnectionDetail
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPlayerConnectionDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPlayerConnectionEndpoint(v **types.PlayerConnectionEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PlayerConnectionEndpoint
+	if *v == nil {
+		sv = &types.PlayerConnectionEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
+				}
+				sv.IpAddress = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PortNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPlayerConnectionEndpointList(v *[]types.PlayerConnectionEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PlayerConnectionEndpoint
+	if *v == nil {
+		cv = []types.PlayerConnectionEndpoint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PlayerConnectionEndpoint
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPlayerConnectionEndpoint(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPlayerGatewayConfiguration(v **types.PlayerGatewayConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PlayerGatewayConfiguration
+	if *v == nil {
+		sv = &types.PlayerGatewayConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GameServerIpProtocolSupported":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GameServerIpProtocolSupported to be of type string, got %T instead", value)
+				}
+				sv.GameServerIpProtocolSupported = types.GameServerIpProtocolSupported(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPlayerLatency(v **types.PlayerLatency, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23432,7 +23860,7 @@ func awsAwsjson11_deserializeDocumentScript(v **types.Script, value interface{})
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected PositiveLong to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected WholeNumberLong to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -27116,6 +27544,51 @@ func awsAwsjson11_deserializeOpDocumentGetInstanceAccessOutput(v **GetInstanceAc
 		switch key {
 		case "InstanceAccess":
 			if err := awsAwsjson11_deserializeDocumentInstanceAccess(&sv.InstanceAccess, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentGetPlayerConnectionDetailsOutput(v **GetPlayerConnectionDetailsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetPlayerConnectionDetailsOutput
+	if *v == nil {
+		sv = &GetPlayerConnectionDetailsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GameSessionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnStringModel to be of type string, got %T instead", value)
+				}
+				sv.GameSessionId = ptr.String(jtv)
+			}
+
+		case "PlayerConnectionDetails":
+			if err := awsAwsjson11_deserializeDocumentPlayerConnectionDetailList(&sv.PlayerConnectionDetails, value); err != nil {
 				return err
 			}
 
