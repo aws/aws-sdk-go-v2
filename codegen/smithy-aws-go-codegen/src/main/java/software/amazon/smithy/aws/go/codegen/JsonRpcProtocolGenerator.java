@@ -25,6 +25,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.CodegenUtils;
+import software.amazon.smithy.go.codegen.EventStreamGenerator;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
@@ -364,6 +365,16 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
             var outputShape = model.expectShape(streamInfo.getOperation().getOutput().get());
             var functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(outputShape,
                     context.getService(), context.getProtocolName());
+            if (EventStreamGenerator.isV2EventStream(model, streamInfo.getOperation())) {
+                // all of the initial response members are filtered out in the
+                // generated struct, so basically do nothing
+                AwsEventStreamUtils.generateEventMessageRequestDeserializer(context, outputShape,
+                        (ctx, payloadTarget, operand) -> {
+                            ctx.getWriter().get().write("return v, nil");
+                        });
+                continue;
+            }
+
             AwsEventStreamUtils.generateEventMessageRequestDeserializer(context, outputShape,
                     (ctx, payloadTarget, operand) -> {
                         AwsProtocolUtils.initializeJsonEventMessageDeserializer(ctx, "nil,");
