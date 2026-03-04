@@ -1,8 +1,0 @@
-{
-    "id": "dd023f0b-d6e2-4ec0-8042-f9507fdbefe4",
-    "type": "feature",
-    "description": "Added support for configuring additional email addresses on queues in Amazon Connect. Agents can now select an outbound email address and associate additional email addresses for replying to or initiating emails.",
-    "modules": [
-        "service/connect"
-    ]
-}

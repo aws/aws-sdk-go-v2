@@ -1,3 +1,19 @@
+# Release (2026-03-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.164.0](service/connect/CHANGELOG.md#v11640-2026-03-04)
+  * **Feature**: Added support for configuring additional email addresses on queues in Amazon Connect. Agents can now select an outbound email address and associate additional email addresses for replying to or initiating emails.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.34.0](service/elasticbeanstalk/CHANGELOG.md#v1340-2026-03-04)
+  * **Feature**: As part of this release, Beanstalk introduce a new info type - analyze for request environment info and retrieve environment info operations. When customers request an Al analysis, Elastic Beanstalk runs a script on an instance in their environment and returns an analysis of events, health and logs.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.39.0](service/elasticsearchservice/CHANGELOG.md#v1390-2026-03-04)
+  * **Feature**: Adds support for DeploymentStrategyOptions.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.51.0](service/gamelift/CHANGELOG.md#v1510-2026-03-04)
+  * **Feature**: Amazon GameLift Servers now offers DDoS protection for Linux-based EC2 and Container Fleets on SDKv5. The player gateway proxy relay network provides traffic validation, per-player rate limiting, and game server IP address obfuscation all with negligible added latency and no additional cost.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.59.0](service/opensearch/CHANGELOG.md#v1590-2026-03-04)
+  * **Feature**: Adding support for DeploymentStrategyOptions
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.104.0](service/quicksight/CHANGELOG.md#v11040-2026-03-04)
+  * **Feature**: Added several new values for Capabilities, increased visual limit per sheet from previous limit to 75, renamed Quick Suite to Quick in several places.
+
 # Release (2026-03-03)
 
 ## General Highlights

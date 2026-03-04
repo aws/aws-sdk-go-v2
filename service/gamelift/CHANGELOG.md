@@ -1,3 +1,7 @@
+# v1.51.0 (2026-03-04)
+
+* **Feature**: Amazon GameLift Servers now offers DDoS protection for Linux-based EC2 and Container Fleets on SDKv5. The player gateway proxy relay network provides traffic validation, per-player rate limiting, and game server IP address obfuscation all with negligible added latency and no additional cost.
+
 # v1.50.2 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

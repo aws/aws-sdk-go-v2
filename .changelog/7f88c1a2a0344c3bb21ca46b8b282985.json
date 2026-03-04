@@ -1,8 +1,0 @@
-{
-    "id": "7f88c1a2-a034-4c3b-b21c-a46b8b282985",
-    "type": "feature",
-    "description": "As part of this release, Beanstalk introduce a new info type - analyze for request environment info and retrieve environment info operations. When customers request an Al analysis, Elastic Beanstalk runs a script on an instance in their environment and returns an analysis of events, health and logs.",
-    "modules": [
-        "service/elasticbeanstalk"
-    ]
-}

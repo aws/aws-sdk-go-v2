@@ -1,8 +1,0 @@
-{
-    "id": "10d1ab7a-5edc-48cc-b689-b318c3fbb2e8",
-    "type": "feature",
-    "description": "Adding support for DeploymentStrategyOptions",
-    "modules": [
-        "service/opensearch"
-    ]
-}

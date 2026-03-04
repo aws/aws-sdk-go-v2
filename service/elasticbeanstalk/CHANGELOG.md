@@ -1,3 +1,7 @@
+# v1.34.0 (2026-03-04)
+
+* **Feature**: As part of this release, Beanstalk introduce a new info type - analyze for request environment info and retrieve environment info operations. When customers request an Al analysis, Elastic Beanstalk runs a script on an instance in their environment and returns an analysis of events, health and logs.
+
 # v1.33.21 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

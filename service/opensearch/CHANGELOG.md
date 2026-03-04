@@ -1,3 +1,7 @@
+# v1.59.0 (2026-03-04)
+
+* **Feature**: Adding support for DeploymentStrategyOptions
+
 # v1.58.1 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

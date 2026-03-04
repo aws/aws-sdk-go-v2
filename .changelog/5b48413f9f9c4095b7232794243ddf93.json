@@ -1,8 +1,0 @@
-{
-    "id": "5b48413f-9f9c-4095-b723-2794243ddf93",
-    "type": "feature",
-    "description": "Adds support for DeploymentStrategyOptions.",
-    "modules": [
-        "service/elasticsearchservice"
-    ]
-}

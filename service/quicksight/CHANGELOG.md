@@ -1,3 +1,7 @@
+# v1.104.0 (2026-03-04)
+
+* **Feature**: Added several new values for Capabilities, increased visual limit per sheet from previous limit to 75, renamed Quick Suite to Quick in several places.
+
 # v1.103.1 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

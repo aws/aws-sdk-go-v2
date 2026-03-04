@@ -1,3 +1,7 @@
+# v1.164.0 (2026-03-04)
+
+* **Feature**: Added support for configuring additional email addresses on queues in Amazon Connect. Agents can now select an outbound email address and associate additional email addresses for replying to or initiating emails.
+
 # v1.163.1 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24
