@@ -1,8 +1,0 @@
-{
-    "id": "0d46f8ef-4c27-43cb-a55c-727a79090db9",
-    "type": "feature",
-    "description": "Added metadata field to CapacityAllocation.",
-    "modules": [
-        "service/ec2"
-    ]
-}

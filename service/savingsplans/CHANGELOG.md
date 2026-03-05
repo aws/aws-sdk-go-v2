@@ -1,3 +1,7 @@
+# v1.32.0 (2026-03-05)
+
+* **Feature**: Added support for OpenSearch and Neptune Analytics to Database Savings Plans.
+
 # v1.31.4 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

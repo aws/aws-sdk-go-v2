@@ -1,3 +1,7 @@
+# v1.235.0 (2026-03-05)
+
+* **Feature**: Adds support for S3 Bucket Ownership validation for SageMaker Managed MLflow.
+
 # v1.234.0 (2026-03-03)
 
 * **Feature**: This release adds b300 and g7e instance types for SageMaker inference endpoints.

@@ -1,3 +1,7 @@
+# v1.74.0 (2026-03-05)
+
+* **Feature**: Added MALICIOUS FILE to IndicatorType enum in MDC Sequence
+
 # v1.73.2 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

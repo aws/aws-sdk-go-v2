@@ -1,8 +1,0 @@
-{
-    "id": "acfbf460-22fc-48cc-bf12-5c2c03aae7b9",
-    "type": "feature",
-    "description": "Connect-Health SDK is AWS's unified SDK for the Amazon Connect Health offering. It allows healthcare developers to integrate purpose-built agents - such as patient insights, ambient documentation, and medical coding - into their existing applications, including EHRs, telehealth, and revenue cycle.",
-    "modules": [
-        "service/connecthealth"
-    ]
-}

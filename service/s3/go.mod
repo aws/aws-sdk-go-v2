@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.6
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.19
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.19
-	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.19
+	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.20
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.6
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.11
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.19

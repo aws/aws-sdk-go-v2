@@ -1,3 +1,7 @@
+# v1.7.0 (2026-03-05)
+
+* **Feature**: Updates to multi-party approval (MPA) service to add support for approval team baseline operations.
+
 # v1.6.2 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

@@ -1,3 +1,25 @@
+# Release (2026-03-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/internal/v4a`: [v1.4.20](internal/v4a/CHANGELOG.md#v1420-2026-03-05)
+  * **Bug Fix**: Read the correct auth property for SigV4A signing names.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.0.0](service/connecthealth/CHANGELOG.md#v100-2026-03-05)
+  * **Release**: New AWS service client module
+  * **Feature**: Connect-Health SDK is AWS's unified SDK for the Amazon Connect Health offering. It allows healthcare developers to integrate purpose-built agents - such as patient insights, ambient documentation, and medical coding - into their existing applications, including EHRs, telehealth, and revenue cycle.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.294.0](service/ec2/CHANGELOG.md#v12940-2026-03-05)
+  * **Feature**: Added metadata field to CapacityAllocation.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.74.0](service/guardduty/CHANGELOG.md#v1740-2026-03-05)
+  * **Feature**: Added MALICIOUS FILE to IndicatorType enum in MDC Sequence
+* `github.com/aws/aws-sdk-go-v2/service/mpa`: [v1.7.0](service/mpa/CHANGELOG.md#v170-2026-03-05)
+  * **Feature**: Updates to multi-party approval (MPA) service to add support for approval team baseline operations.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.235.0](service/sagemaker/CHANGELOG.md#v12350-2026-03-05)
+  * **Feature**: Adds support for S3 Bucket Ownership validation for SageMaker Managed MLflow.
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.32.0](service/savingsplans/CHANGELOG.md#v1320-2026-03-05)
+  * **Feature**: Added support for OpenSearch and Neptune Analytics to Database Savings Plans.
+
 # Release (2026-03-04)
 
 ## Module Highlights

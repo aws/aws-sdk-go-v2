@@ -1,8 +1,0 @@
-{
-    "id": "9fdf1a7d-31c8-419e-834c-bf84c888c1d7",
-    "type": "bugfix",
-    "description": "Read the correct auth property for SigV4A signing names.",
-    "modules": [
-        "internal/v4a"
-    ]
-}
