@@ -93,6 +93,9 @@ tidy-modules-. add-module-license-files gen-aws-ptrs format gen-mod-dropreplace-
 generate-dev: smithy-generate update-requires gen-repo-mod-replace gen-mod-replace-smithy-config gen-mod-replace-smithy-aws gen-mod-replace-smithy-service_${DEV_SERVICE} update-module-metadata smithy-annotate-stable \
 gen-config-asserts gen-internal-codegen tidy-modules-config tidy-modules-aws tidy-modules-service_${DEV_SERVICE} format-dev
 
+generate-protocoltest-dev: smithy-generate update-requires gen-repo-mod-replace gen-mod-replace-smithy-config gen-mod-replace-smithy-aws gen-mod-replace-smithy-internal_protocoltest_${DEV_SERVICE} update-module-metadata smithy-annotate-stable \
+gen-config-asserts gen-internal-codegen tidy-modules-config tidy-modules-aws tidy-modules-internal_protocoltest_${DEV_SERVICE} format-protocoltest-dev
+
 reset-sum:
 	find . -name go.sum -exec git checkout -- {} \;
 
@@ -135,6 +138,9 @@ format:
 
 format-dev:
 	gofmt -w -s service/${DEV_SERVICE}
+
+format-protocoltest-dev:
+	gofmt -w -s internal/protocoltest/${DEV_SERVICE}
 
 gen-config-asserts:
 	@echo "Generating SDK config package implementor assertions"
