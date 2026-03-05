@@ -457,6 +457,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.mpa#StartActiveApprovalTeamDeletion"
+                },
+                {
+                    "target": "com.amazonaws.mpa#StartApprovalTeamBaseline"
                 }
             ],
             "traits": {
@@ -633,6 +636,29 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETE_FAILED_VALIDATION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mpa#ApproverLastActivity": {
+            "type": "enum",
+            "members": {
+                "VOTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOTED"
+                    }
+                },
+                "BASELINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASELINED"
+                    }
+                },
+                "RESPONDED_TO_INVITATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESPONDED_TO_INVITATION"
                     }
                 }
             }
@@ -1362,6 +1388,24 @@
                     "target": "com.amazonaws.mpa#IdentityStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Status for the identity source. For example, if an approver has accepted a team invitation with a user authentication method managed by the identity source.</p>"
+                    }
+                },
+                "LastActivity": {
+                    "target": "com.amazonaws.mpa#ApproverLastActivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last Activity performed by the approver.</p>"
+                    }
+                },
+                "LastActivityTime": {
+                    "target": "com.amazonaws.mpa#IsoTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when the approver last responded to an operation or invitation request.</p>"
+                    }
+                },
+                "PendingBaselineSessionArn": {
+                    "target": "com.amazonaws.mpa#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) for the pending baseline session.</p>"
                     }
                 },
                 "MfaMethods": {
@@ -3992,6 +4036,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CONFIGURATION_CHANGED"
                     }
+                },
+                "ALL_APPROVERS_IN_SESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_APPROVERS_IN_SESSION"
+                    }
                 }
             }
         },
@@ -4086,6 +4136,93 @@
                     "target": "com.amazonaws.mpa#IsoTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>Timestamp when the deletion process was initiated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mpa#StartApprovalTeamBaseline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mpa#StartApprovalTeamBaselineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mpa#StartApprovalTeamBaselineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mpa#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mpa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mpa#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mpa#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.mpa#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to start a baseline for an active approval team"
+                },
+                "smithy.api#documentation": "<p>Starts a baseline session for specified approvers on an <code>ACTIVE</code> approval team.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/approval-teams/{Arn}/baseline"
+                }
+            }
+        },
+        "com.amazonaws.mpa#StartApprovalTeamBaselineApproverIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mpa#ParticipantId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.mpa#StartApprovalTeamBaselineRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.mpa#ApprovalTeamArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) for the approval team.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApproverIds": {
+                    "target": "com.amazonaws.mpa#StartApprovalTeamBaselineApproverIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of approver IDs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mpa#StartApprovalTeamBaselineResponse": {
+            "type": "structure",
+            "members": {
+                "BaselineSessionArn": {
+                    "target": "com.amazonaws.mpa#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) for the session.</p>"
                     }
                 }
             },

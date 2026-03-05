@@ -2438,6 +2438,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DMS"
                     }
+                },
+                "OPENSEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OpenSearch"
+                    }
                 }
             }
         },
@@ -2795,6 +2801,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AWSDatabaseMigrationSvc"
                     }
+                },
+                "ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonES"
+                    }
                 }
             }
         },
@@ -2895,6 +2907,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NCU-hr"
+                    }
+                },
+                "OCU_HRS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OCU-hours"
+                    }
+                },
+                "JOBS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Jobs"
                     }
                 }
             }
