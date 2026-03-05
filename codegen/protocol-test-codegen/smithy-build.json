@@ -89,7 +89,8 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.restjson#RestJson",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson"
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson",
+          "useExperimentalSerde": true
         }
       }
     },
