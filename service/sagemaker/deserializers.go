@@ -107079,6 +107079,24 @@ func awsAwsjson11_deserializeOpDocumentDescribeMlflowTrackingServerOutput(v **De
 				sv.RoleArn = ptr.String(jtv)
 			}
 
+		case "S3BucketOwnerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.S3BucketOwnerAccountId = ptr.String(jtv)
+			}
+
+		case "S3BucketOwnerVerification":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.S3BucketOwnerVerification = ptr.Bool(jtv)
+			}
+
 		case "TrackingServerArn":
 			if value != nil {
 				jtv, ok := value.(string)

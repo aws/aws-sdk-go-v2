@@ -99,6 +99,27 @@ func (ApprovalTeamStatusCode) Values() []ApprovalTeamStatusCode {
 	}
 }
 
+type ApproverLastActivity string
+
+// Enum values for ApproverLastActivity
+const (
+	ApproverLastActivityVoted                 ApproverLastActivity = "VOTED"
+	ApproverLastActivityBaselined             ApproverLastActivity = "BASELINED"
+	ApproverLastActivityRespondedToInvitation ApproverLastActivity = "RESPONDED_TO_INVITATION"
+)
+
+// Values returns all known values for ApproverLastActivity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApproverLastActivity) Values() []ApproverLastActivity {
+	return []ApproverLastActivity{
+		"VOTED",
+		"BASELINED",
+		"RESPONDED_TO_INVITATION",
+	}
+}
+
 type FilterField string
 
 // Enum values for FilterField
@@ -390,9 +411,10 @@ type SessionStatusCode string
 
 // Enum values for SessionStatusCode
 const (
-	SessionStatusCodeRejected             SessionStatusCode = "REJECTED"
-	SessionStatusCodeExpired              SessionStatusCode = "EXPIRED"
-	SessionStatusCodeConfigurationChanged SessionStatusCode = "CONFIGURATION_CHANGED"
+	SessionStatusCodeRejected              SessionStatusCode = "REJECTED"
+	SessionStatusCodeExpired               SessionStatusCode = "EXPIRED"
+	SessionStatusCodeConfigurationChanged  SessionStatusCode = "CONFIGURATION_CHANGED"
+	SessionStatusCodeAllApproversInSession SessionStatusCode = "ALL_APPROVERS_IN_SESSION"
 )
 
 // Values returns all known values for SessionStatusCode. Note that this can be
@@ -404,6 +426,7 @@ func (SessionStatusCode) Values() []SessionStatusCode {
 		"REJECTED",
 		"EXPIRED",
 		"CONFIGURATION_CHANGED",
+		"ALL_APPROVERS_IN_SESSION",
 	}
 }
 

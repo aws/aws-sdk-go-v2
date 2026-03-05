@@ -13728,32 +13728,6 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	}
 
 	{
-		headerValue := msg.Headers.Get("intHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.Int32Value)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "intHeader", headerValue)
-			}
-
-			ihv := hv.Get().(int32)
-			v.IntHeader = ptr.Int32(ihv)
-		}
-	}
-
-	{
-		headerValue := msg.Headers.Get("stringHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.StringValue)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "stringHeader", headerValue)
-			}
-
-			ihv := hv.Get().(string)
-			v.StringHeader = ptr.String(ihv)
-		}
-	}
-
-	{
 		headerValue := msg.Headers.Get("timestampHeader")
 		if headerValue != nil {
 			hv, ok := headerValue.(*eventstream.TimestampValue)
@@ -13767,28 +13741,15 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	}
 
 	{
-		headerValue := msg.Headers.Get("booleanHeader")
+		headerValue := msg.Headers.Get("intHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.BoolValue)
+			hv, ok := headerValue.(*eventstream.Int32Value)
 			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "booleanHeader", headerValue)
+				return fmt.Errorf("unexpected event header %s with type %T:", "intHeader", headerValue)
 			}
 
-			ihv := hv.Get().(bool)
-			v.BooleanHeader = ptr.Bool(ihv)
-		}
-	}
-
-	{
-		headerValue := msg.Headers.Get("byteHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.Int8Value)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "byteHeader", headerValue)
-			}
-
-			ihv := hv.Get().(int8)
-			v.ByteHeader = ptr.Int8(ihv)
+			ihv := hv.Get().(int32)
+			v.IntHeader = ptr.Int32(ihv)
 		}
 	}
 
@@ -13815,6 +13776,45 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 
 			ihv := hv.Get().([]byte)
 			v.BlobHeader = ihv
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("stringHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(*eventstream.StringValue)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "stringHeader", headerValue)
+			}
+
+			ihv := hv.Get().(string)
+			v.StringHeader = ptr.String(ihv)
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("booleanHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(*eventstream.BoolValue)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "booleanHeader", headerValue)
+			}
+
+			ihv := hv.Get().(bool)
+			v.BooleanHeader = ptr.Bool(ihv)
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("byteHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(*eventstream.Int8Value)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "byteHeader", headerValue)
+			}
+
+			ihv := hv.Get().(int8)
+			v.ByteHeader = ptr.Int8(ihv)
 		}
 	}
 

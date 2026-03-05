@@ -38579,6 +38579,16 @@ func awsAwsjson11_serializeOpDocumentCreateMlflowTrackingServerInput(v *CreateMl
 		ok.String(*v.RoleArn)
 	}
 
+	if v.S3BucketOwnerAccountId != nil {
+		ok := object.Key("S3BucketOwnerAccountId")
+		ok.String(*v.S3BucketOwnerAccountId)
+	}
+
+	if v.S3BucketOwnerVerification != nil {
+		ok := object.Key("S3BucketOwnerVerification")
+		ok.Boolean(*v.S3BucketOwnerVerification)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -47943,6 +47953,16 @@ func awsAwsjson11_serializeOpDocumentUpdateMlflowTrackingServerInput(v *UpdateMl
 	if v.AutomaticModelRegistration != nil {
 		ok := object.Key("AutomaticModelRegistration")
 		ok.Boolean(*v.AutomaticModelRegistration)
+	}
+
+	if v.S3BucketOwnerAccountId != nil {
+		ok := object.Key("S3BucketOwnerAccountId")
+		ok.String(*v.S3BucketOwnerAccountId)
+	}
+
+	if v.S3BucketOwnerVerification != nil {
+		ok := object.Key("S3BucketOwnerVerification")
+		ok.Boolean(*v.S3BucketOwnerVerification)
 	}
 
 	if v.TrackingServerName != nil {

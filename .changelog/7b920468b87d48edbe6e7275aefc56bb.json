@@ -1,0 +1,8 @@
+{
+    "id": "7b920468-b87d-48ed-be6e-7275aefc56bb",
+    "type": "feature",
+    "description": "Adds support for S3 Bucket Ownership validation for SageMaker Managed MLflow.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

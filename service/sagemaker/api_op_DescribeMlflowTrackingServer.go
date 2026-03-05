@@ -70,6 +70,14 @@ type DescribeMlflowTrackingServerOutput struct {
 	// described MLflow Tracking Server uses to access the artifact store in Amazon S3.
 	RoleArn *string
 
+	// Expected Amazon Web Services account ID that owns the Amazon S3 bucket for
+	// artifact storage.
+	S3BucketOwnerAccountId *string
+
+	// Whether Amazon S3 Bucket Ownership checks are enabled whenever the tracking
+	// server interacts with Amazon Amazon S3.
+	S3BucketOwnerVerification *bool
+
 	// The ARN of the described tracking server.
 	TrackingServerArn *string
 

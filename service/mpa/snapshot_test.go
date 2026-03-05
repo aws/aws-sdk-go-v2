@@ -278,6 +278,18 @@ func TestCheckSnapshot_StartActiveApprovalTeamDeletion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartApprovalTeamBaseline(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartApprovalTeamBaseline(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartApprovalTeamBaseline")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -522,6 +534,18 @@ func TestUpdateSnapshot_StartActiveApprovalTeamDeletion(t *testing.T) {
 	_, err := svc.StartActiveApprovalTeamDeletion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartActiveApprovalTeamDeletion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartApprovalTeamBaseline(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartApprovalTeamBaseline(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartApprovalTeamBaseline")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

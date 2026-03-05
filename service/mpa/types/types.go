@@ -113,8 +113,18 @@ type GetApprovalTeamResponseApprover struct {
 	// ID for the approver.
 	ApproverId *string
 
+	// Last Activity performed by the approver.
+	LastActivity ApproverLastActivity
+
+	// Timestamp when the approver last responded to an operation or invitation
+	// request.
+	LastActivityTime *time.Time
+
 	// Multi-factor authentication configuration for the approver
 	MfaMethods []MfaMethod
+
+	// Amazon Resource Name (ARN) for the pending baseline session.
+	PendingBaselineSessionArn *string
 
 	// ID for the user.
 	PrimaryIdentityId *string

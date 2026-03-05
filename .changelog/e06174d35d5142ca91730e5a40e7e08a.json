@@ -1,0 +1,8 @@
+{
+    "id": "e06174d3-5d51-42ca-9173-0e5a40e7e08a",
+    "type": "feature",
+    "description": "Added support for OpenSearch and Neptune Analytics to Database Savings Plans.",
+    "modules": [
+        "service/savingsplans"
+    ]
+}

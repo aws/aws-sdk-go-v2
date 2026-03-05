@@ -1,0 +1,8 @@
+{
+    "id": "ac9f1abf-ef26-48e8-9101-82c8d9370812",
+    "type": "feature",
+    "description": "Updates to multi-party approval (MPA) service to add support for approval team baseline operations.",
+    "modules": [
+        "service/mpa"
+    ]
+}

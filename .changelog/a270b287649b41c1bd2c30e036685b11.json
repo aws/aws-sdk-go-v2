@@ -1,0 +1,8 @@
+{
+    "id": "a270b287-649b-41c1-bd2c-30e036685b11",
+    "type": "feature",
+    "description": "Added MALICIOUS FILE to IndicatorType enum in MDC Sequence",
+    "modules": [
+        "service/guardduty"
+    ]
+}
