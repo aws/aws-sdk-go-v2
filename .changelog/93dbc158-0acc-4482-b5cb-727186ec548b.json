@@ -1,0 +1,10 @@
+{
+    "id": "93dbc158-0acc-4482-b5cb-727186ec548b",
+    "type": "bugfix",
+    "description": "attributevalue marshal to AttributeValueMemberNULL with double pointer when outer pointer is not nil",
+    "collapse": false,
+    "modules": [
+        "feature/dynamodb/attributevalue",
+        "feature/dynamodbstreams/attributevalue"
+    ]
+}
