@@ -1,8 +1,0 @@
-{
-    "id": "0d9337d5-8a15-47ad-9b02-80bd2b6f43a6",
-    "type": "feature",
-    "description": "Adds support for streaming memory records in AgentCore Memory",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

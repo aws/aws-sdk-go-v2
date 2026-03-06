@@ -1,3 +1,7 @@
+# v1.165.0 (2026-03-06)
+
+* **Feature**: Amazon Connect now supports the ability to programmatically configure and run automated tests for contact center experiences for Chat. Integrate testing into CICD pipelines, run multiple tests at scale, and retrieve results via API to automate validation of chat interactions and workflows.
+
 # v1.164.0 (2026-03-04)
 
 * **Feature**: Added support for configuring additional email addresses on queues in Amazon Connect. Agents can now select an outbound email address and associate additional email addresses for replying to or initiating emails.

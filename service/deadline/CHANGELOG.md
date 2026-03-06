@@ -1,3 +1,7 @@
+# v1.26.0 (2026-03-06)
+
+* **Feature**: AWS Deadline Cloud now supports cost scale factors for farms, enabling studios to adjust reported costs to reflect their actual rendering economics. Adjusted costs are reflected in Deadline Cloud's Usage Explorer and Budgets.
+
 # v1.25.2 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

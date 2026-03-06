@@ -1,3 +1,21 @@
+# Release (2026-03-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.13.0](service/bcmdataexports/CHANGELOG.md#v1130-2026-03-06)
+  * **Feature**: Fixed wrong endpoint resolutions in few regions. Added AWS CFN resource schema for BCM Data Exports. Added max value validation for pagination parameter. Fixed ARN format validation for BCM Data Exports resources. Updated size constraints for table properties. Added AccessDeniedException error.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.56.0](service/bedrock/CHANGELOG.md#v1560-2026-03-06)
+  * **Feature**: Amazon Bedrock Guardrails account-level enforcement APIs now support lists for model inclusion and exclusion from guardrail enforcement.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.21.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1210-2026-03-06)
+  * **Feature**: Adds support for streaming memory records in AgentCore Memory
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.165.0](service/connect/CHANGELOG.md#v11650-2026-03-06)
+  * **Feature**: Amazon Connect now supports the ability to programmatically configure and run automated tests for contact center experiences for Chat. Integrate testing into CICD pipelines, run multiple tests at scale, and retrieve results via API to automate validation of chat interactions and workflows.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.26.0](service/deadline/CHANGELOG.md#v1260-2026-03-06)
+  * **Feature**: AWS Deadline Cloud now supports cost scale factors for farms, enabling studios to adjust reported costs to reflect their actual rendering economics. Adjusted costs are reflected in Deadline Cloud's Usage Explorer and Budgets.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.10.0](service/gameliftstreams/CHANGELOG.md#v1100-2026-03-06)
+  * **Feature**: Added new Gen6 stream classes based on the EC2 G6f instance family. These stream classes provide cost-optimized options for streaming well-optimized or lower-fidelity games on Windows environments.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.60.0](service/sesv2/CHANGELOG.md#v1600-2026-03-06)
+  * **Feature**: Adds support for longer email message header values, increasing the maximum length from 870 to 995 characters for RFC 5322 compliance.
+
 # Release (2026-03-05)
 
 ## General Highlights

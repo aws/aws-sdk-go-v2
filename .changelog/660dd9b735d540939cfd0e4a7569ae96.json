@@ -1,8 +1,0 @@
-{
-    "id": "660dd9b7-35d5-4093-9cfd-0e4a7569ae96",
-    "type": "feature",
-    "description": "Fixed wrong endpoint resolutions in few regions. Added AWS CFN resource schema for BCM Data Exports. Added max value validation for pagination parameter. Fixed ARN format validation for BCM Data Exports resources. Updated size constraints for table properties. Added AccessDeniedException error.",
-    "modules": [
-        "service/bcmdataexports"
-    ]
-}

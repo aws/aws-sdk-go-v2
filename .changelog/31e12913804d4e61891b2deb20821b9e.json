@@ -1,8 +1,0 @@
-{
-    "id": "31e12913-804d-4e61-891b-2deb20821b9e",
-    "type": "feature",
-    "description": "This release adds support for webhooks, allowing customers to create an Event Integration with a webhook source.",
-    "modules": [
-        "service/appintegrations"
-    ]
-}

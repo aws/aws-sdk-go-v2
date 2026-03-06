@@ -1,3 +1,7 @@
+# v1.21.0 (2026-03-06)
+
+* **Feature**: Adds support for streaming memory records in AgentCore Memory
+
 # v1.20.0 (2026-03-03)
 
 * **Feature**: Support for AgentCore Policy GA

@@ -1,3 +1,7 @@
+# v1.56.0 (2026-03-06)
+
+* **Feature**: Amazon Bedrock Guardrails account-level enforcement APIs now support lists for model inclusion and exclusion from guardrail enforcement.
+
 # v1.55.1 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24
