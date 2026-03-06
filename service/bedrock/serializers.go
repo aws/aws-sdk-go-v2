@@ -8691,6 +8691,13 @@ func awsRestjson1_serializeDocumentAccountEnforcedGuardrailInferenceInputConfigu
 		ok.String(string(v.InputTags))
 	}
 
+	if v.ModelEnforcement != nil {
+		ok := object.Key("modelEnforcement")
+		if err := awsRestjson1_serializeDocumentModelEnforcement(v.ModelEnforcement, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -10067,6 +10074,17 @@ func awsRestjson1_serializeDocumentEvaluatorModelConfig(v types.EvaluatorModelCo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentExcludedModelsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentExternalSource(v *types.ExternalSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10967,6 +10985,17 @@ func awsRestjson1_serializeDocumentImplicitFilterConfiguration(v *types.Implicit
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIncludedModelsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInferenceProfileModelSource(v types.InferenceProfileModelSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11291,6 +11320,27 @@ func awsRestjson1_serializeDocumentModelDataSource(v types.ModelDataSource, valu
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentModelEnforcement(v *types.ModelEnforcement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExcludedModels != nil {
+		ok := object.Key("excludedModels")
+		if err := awsRestjson1_serializeDocumentExcludedModelsList(v.ExcludedModels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludedModels != nil {
+		ok := object.Key("includedModels")
+		if err := awsRestjson1_serializeDocumentIncludedModelsList(v.IncludedModels, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

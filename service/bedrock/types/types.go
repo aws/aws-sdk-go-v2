@@ -26,6 +26,10 @@ type AccountEnforcedGuardrailInferenceInputConfiguration struct {
 	// This member is required.
 	InputTags InputTags
 
+	// Model-specific information for the enforced guardrail configuration. If not
+	// present, the configuration is enforced on all models
+	ModelEnforcement *ModelEnforcement
+
 	noSmithyDocumentSerde
 }
 
@@ -52,6 +56,9 @@ type AccountEnforcedGuardrailOutputConfiguration struct {
 
 	// Whether to honor or ignore input tags at runtime.
 	InputTags InputTags
+
+	// Model-specific information for the enforced guardrail configuration.
+	ModelEnforcement *ModelEnforcement
 
 	// Configuration owner type.
 	Owner ConfigurationOwner
@@ -5256,6 +5263,22 @@ type ModelDataSourceMemberS3DataSource struct {
 }
 
 func (*ModelDataSourceMemberS3DataSource) isModelDataSource() {}
+
+// Model-specific information for the enforced guardrail configuration.
+type ModelEnforcement struct {
+
+	// Models to exclude from enforcement of the guardrail.
+	//
+	// This member is required.
+	ExcludedModels []string
+
+	// Models to enforce the guardrail on.
+	//
+	// This member is required.
+	IncludedModels []string
+
+	noSmithyDocumentSerde
+}
 
 // Information about the import job.
 type ModelImportJobSummary struct {

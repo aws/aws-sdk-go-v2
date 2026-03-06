@@ -4033,6 +4033,7 @@ type TestCaseEntryPointType string
 // Enum values for TestCaseEntryPointType
 const (
 	TestCaseEntryPointTypeVoiceCall TestCaseEntryPointType = "VOICE_CALL"
+	TestCaseEntryPointTypeChat      TestCaseEntryPointType = "CHAT"
 )
 
 // Values returns all known values for TestCaseEntryPointType. Note that this can
@@ -4042,6 +4043,7 @@ const (
 func (TestCaseEntryPointType) Values() []TestCaseEntryPointType {
 	return []TestCaseEntryPointType{
 		"VOICE_CALL",
+		"CHAT",
 	}
 }
 

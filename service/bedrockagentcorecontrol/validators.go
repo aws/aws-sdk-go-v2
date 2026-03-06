@@ -2157,6 +2157,38 @@ func validateContainerConfiguration(v *types.ContainerConfiguration) error {
 	}
 }
 
+func validateContentConfiguration(v *types.ContentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentConfigurationList(v []types.ContentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentConfigurationList"}
+	for i := range v {
+		if err := validateContentConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCredentialProvider(v types.CredentialProvider) error {
 	if v == nil {
 		return nil
@@ -2864,6 +2896,28 @@ func validateInvocationConfigurationInput(v *types.InvocationConfigurationInput)
 	}
 	if v.PayloadDeliveryBucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PayloadDeliveryBucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKinesisResource(v *types.KinesisResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KinesisResource"}
+	if v.DataStreamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataStreamArn"))
+	}
+	if v.ContentConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentConfigurations"))
+	} else if v.ContentConfigurations != nil {
+		if err := validateContentConfigurationList(v.ContentConfigurations); err != nil {
+			invalidParams.AddNested("ContentConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3778,6 +3832,61 @@ func validateSlackOauth2ProviderConfigInput(v *types.SlackOauth2ProviderConfigIn
 	}
 }
 
+func validateStreamDeliveryResource(v types.StreamDeliveryResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamDeliveryResource"}
+	switch uv := v.(type) {
+	case *types.StreamDeliveryResourceMemberKinesis:
+		if err := validateKinesisResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[kinesis]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamDeliveryResources(v *types.StreamDeliveryResources) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamDeliveryResources"}
+	if v.Resources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resources"))
+	} else if v.Resources != nil {
+		if err := validateStreamDeliveryResourcesList(v.Resources); err != nil {
+			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamDeliveryResourcesList(v []types.StreamDeliveryResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamDeliveryResourcesList"}
+	for i := range v {
+		if err := validateStreamDeliveryResource(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSummaryMemoryStrategyInput(v *types.SummaryMemoryStrategyInput) error {
 	if v == nil {
 		return nil
@@ -4259,6 +4368,11 @@ func validateOpCreateMemoryInput(v *CreateMemoryInput) error {
 	if v.MemoryStrategies != nil {
 		if err := validateMemoryStrategyInputList(v.MemoryStrategies); err != nil {
 			invalidParams.AddNested("MemoryStrategies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StreamDeliveryResources != nil {
+		if err := validateStreamDeliveryResources(v.StreamDeliveryResources); err != nil {
+			invalidParams.AddNested("StreamDeliveryResources", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5314,6 +5428,11 @@ func validateOpUpdateMemoryInput(v *UpdateMemoryInput) error {
 	if v.MemoryStrategies != nil {
 		if err := validateModifyMemoryStrategies(v.MemoryStrategies); err != nil {
 			invalidParams.AddNested("MemoryStrategies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StreamDeliveryResources != nil {
+		if err := validateStreamDeliveryResources(v.StreamDeliveryResources); err != nil {
+			invalidParams.AddNested("StreamDeliveryResources", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

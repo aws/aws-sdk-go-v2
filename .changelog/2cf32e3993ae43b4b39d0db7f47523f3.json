@@ -1,0 +1,8 @@
+{
+    "id": "2cf32e39-93ae-43b4-b39d-0db7f47523f3",
+    "type": "feature",
+    "description": "Amazon Bedrock Guardrails account-level enforcement APIs now support lists for model inclusion and exclusion from guardrail enforcement.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

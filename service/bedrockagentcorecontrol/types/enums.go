@@ -259,6 +259,42 @@ func (CodeInterpreterStatus) Values() []CodeInterpreterStatus {
 	}
 }
 
+type ContentLevel string
+
+// Enum values for ContentLevel
+const (
+	ContentLevelMetadataOnly ContentLevel = "METADATA_ONLY"
+	ContentLevelFullContent  ContentLevel = "FULL_CONTENT"
+)
+
+// Values returns all known values for ContentLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentLevel) Values() []ContentLevel {
+	return []ContentLevel{
+		"METADATA_ONLY",
+		"FULL_CONTENT",
+	}
+}
+
+type ContentType string
+
+// Enum values for ContentType
+const (
+	ContentTypeMemoryRecords ContentType = "MEMORY_RECORDS"
+)
+
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentType) Values() []ContentType {
+	return []ContentType{
+		"MEMORY_RECORDS",
+	}
+}
+
 type CredentialProviderType string
 
 // Enum values for CredentialProviderType

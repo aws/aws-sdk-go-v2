@@ -1,0 +1,8 @@
+{
+    "id": "ecfcb9a6-9b66-4e01-9257-5a8ada11cb8d",
+    "type": "feature",
+    "description": "Adds support for longer email message header values, increasing the maximum length from 870 to 995 characters for RFC 5322 compliance.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

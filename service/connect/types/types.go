@@ -1154,6 +1154,15 @@ type ChatContactMetrics struct {
 	noSmithyDocumentSerde
 }
 
+// Parameters for initiating a chat test.
+type ChatEntryPointParameters struct {
+
+	// The flow identifier for the test.
+	FlowId *string
+
+	noSmithyDocumentSerde
+}
+
 // Chat integration event containing payload to perform different chat actions
 // such as:
 //
@@ -10122,6 +10131,9 @@ type TestCase struct {
 
 // Defines the starting point for a test case.
 type TestCaseEntryPoint struct {
+
+	// Parameters for chat entry point.
+	ChatEntryPointParameters *ChatEntryPointParameters
 
 	// The type of entry point.
 	Type TestCaseEntryPointType

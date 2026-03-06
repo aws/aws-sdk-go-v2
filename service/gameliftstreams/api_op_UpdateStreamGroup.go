@@ -289,6 +289,28 @@ type UpdateStreamGroupOutput struct {
 	//
 	//   - Tenancy: Supports up to 12 concurrent stream sessions
 	//
+	//   - gen6n_medium_win2022 (NVIDIA, medium) Supports applications with low 3D
+	//   scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 8 vCPUs, 32 GB RAM, 6 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6n_small_win2022 (NVIDIA, small) Supports applications with low 3D scene
+	//   complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 2 vCPUs, 8 GB RAM, 3 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
 	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32

@@ -5857,6 +5857,40 @@ func awsRestjson1_deserializeOpDocumentGetFarmOutput(v **GetFarmOutput, value in
 
 	for key, value := range shape {
 		switch key {
+		case "costScaleFactor":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CostScaleFactor = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.CostScaleFactor = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected CostScaleFactor to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)

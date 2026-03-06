@@ -1387,6 +1387,24 @@ func awsRestjson1_serializeOpDocumentCreateFarmInput(v *CreateFarmInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.CostScaleFactor != nil {
+		ok := object.Key("costScaleFactor")
+		switch {
+		case math.IsNaN(float64(*v.CostScaleFactor)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.CostScaleFactor), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.CostScaleFactor), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.CostScaleFactor)
+
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -9463,6 +9481,24 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFarmInput(v *UpdateFarmInput, enc
 func awsRestjson1_serializeOpDocumentUpdateFarmInput(v *UpdateFarmInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CostScaleFactor != nil {
+		ok := object.Key("costScaleFactor")
+		switch {
+		case math.IsNaN(float64(*v.CostScaleFactor)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.CostScaleFactor), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.CostScaleFactor), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.CostScaleFactor)
+
+		}
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")

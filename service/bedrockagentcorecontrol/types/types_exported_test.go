@@ -850,6 +850,24 @@ func ExampleResource_outputUsage() {
 
 var _ *string
 
+func ExampleStreamDeliveryResource_outputUsage() {
+	var union types.StreamDeliveryResource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.StreamDeliveryResourceMemberKinesis:
+		_ = v.Value // Value is types.KinesisResource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.KinesisResource
+
 func ExampleTargetConfiguration_outputUsage() {
 	var union types.TargetConfiguration
 	// type switches can be used to check the union value

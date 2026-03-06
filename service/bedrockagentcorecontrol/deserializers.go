@@ -20504,6 +20504,89 @@ func awsRestjson1_deserializeDocumentContainerConfiguration(v **types.ContainerC
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentContentConfiguration(v **types.ContentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContentConfiguration
+	if *v == nil {
+		sv = &types.ContentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "level":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentLevel to be of type string, got %T instead", value)
+				}
+				sv.Level = types.ContentLevel(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ContentType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContentConfigurationList(v *[]types.ContentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ContentConfiguration
+	if *v == nil {
+		cv = []types.ContentConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ContentConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentContentConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCredentialProvider(v *types.CredentialProvider, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23006,6 +23089,51 @@ func awsRestjson1_deserializeDocumentInvocationConfiguration(v **types.Invocatio
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKinesisResource(v **types.KinesisResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KinesisResource
+	if *v == nil {
+		sv = &types.KinesisResource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "contentConfigurations":
+			if err := awsRestjson1_deserializeDocumentContentConfigurationList(&sv.ContentConfigurations, value); err != nil {
+				return err
+			}
+
+		case "dataStreamArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.DataStreamArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentKmsConfiguration(v **types.KmsConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23695,6 +23823,11 @@ func awsRestjson1_deserializeDocumentMemory(v **types.Memory, value interface{})
 
 		case "strategies":
 			if err := awsRestjson1_deserializeDocumentMemoryStrategyList(&sv.Strategies, value); err != nil {
+				return err
+			}
+
+		case "streamDeliveryResources":
+			if err := awsRestjson1_deserializeDocumentStreamDeliveryResources(&sv.StreamDeliveryResources, value); err != nil {
 				return err
 			}
 
@@ -27203,6 +27336,114 @@ func awsRestjson1_deserializeDocumentStrategyConfiguration(v **types.StrategyCon
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStreamDeliveryResource(v *types.StreamDeliveryResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.StreamDeliveryResource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "kinesis":
+			var mv types.KinesisResource
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentKinesisResource(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.StreamDeliveryResourceMemberKinesis{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStreamDeliveryResources(v **types.StreamDeliveryResources, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StreamDeliveryResources
+	if *v == nil {
+		sv = &types.StreamDeliveryResources{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resources":
+			if err := awsRestjson1_deserializeDocumentStreamDeliveryResourcesList(&sv.Resources, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStreamDeliveryResourcesList(v *[]types.StreamDeliveryResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StreamDeliveryResource
+	if *v == nil {
+		cv = []types.StreamDeliveryResource{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StreamDeliveryResource
+		if err := awsRestjson1_deserializeDocumentStreamDeliveryResource(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

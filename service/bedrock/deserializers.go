@@ -4242,6 +4242,9 @@ func awsRestjson1_deserializeOpErrorDeleteGuardrail(response *smithyhttp.Respons
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsRestjson1_deserializeErrorResourceInUseException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -17458,6 +17461,11 @@ func awsRestjson1_deserializeDocumentAccountEnforcedGuardrailOutputConfiguration
 				sv.InputTags = types.InputTags(jtv)
 			}
 
+		case "modelEnforcement":
+			if err := awsRestjson1_deserializeDocumentModelEnforcement(&sv.ModelEnforcement, value); err != nil {
+				return err
+			}
+
 		case "owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26081,6 +26089,42 @@ func awsRestjson1_deserializeDocumentEvaluatorModelIdentifiers(v *[]string, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExcludedModelsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ExcludedModelId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentExternalSource(v **types.ExternalSource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -28773,6 +28817,42 @@ func awsRestjson1_deserializeDocumentImportedModelSummaryList(v *[]types.Importe
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIncludedModelsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected IncludedModelId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInferenceProfileModel(v **types.InferenceProfileModel, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -30410,6 +30490,47 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelEnforcement(v **types.ModelEnforcement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelEnforcement
+	if *v == nil {
+		sv = &types.ModelEnforcement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "excludedModels":
+			if err := awsRestjson1_deserializeDocumentExcludedModelsList(&sv.ExcludedModels, value); err != nil {
+				return err
+			}
+
+		case "includedModels":
+			if err := awsRestjson1_deserializeDocumentIncludedModelsList(&sv.IncludedModels, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

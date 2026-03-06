@@ -1920,6 +1920,11 @@ func validateAccountEnforcedGuardrailInferenceInputConfiguration(v *types.Accoun
 	if len(v.InputTags) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InputTags"))
 	}
+	if v.ModelEnforcement != nil {
+		if err := validateModelEnforcement(v.ModelEnforcement); err != nil {
+			invalidParams.AddNested("ModelEnforcement", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4151,6 +4156,24 @@ func validateModelDataSource(v types.ModelDataSource) error {
 			invalidParams.AddNested("[s3DataSource]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelEnforcement(v *types.ModelEnforcement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelEnforcement"}
+	if v.IncludedModels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncludedModels"))
+	}
+	if v.ExcludedModels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExcludedModels"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

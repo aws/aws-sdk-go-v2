@@ -752,6 +752,20 @@ type ContentMemberRawText struct {
 
 func (*ContentMemberRawText) isContent() {}
 
+// Defines what content to stream and at what level of detail.
+type ContentConfiguration struct {
+
+	// Type of content to stream.
+	//
+	// This member is required.
+	Type ContentType
+
+	// Level of detail for streamed content.
+	Level ContentLevel
+
+	noSmithyDocumentSerde
+}
+
 // A credential provider for gateway authentication. This structure contains the
 // configuration for authenticating with the target endpoint.
 //
@@ -2030,6 +2044,22 @@ type InvocationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for Kinesis Data Stream delivery.
+type KinesisResource struct {
+
+	// Content configurations for stream delivery.
+	//
+	// This member is required.
+	ContentConfigurations []ContentConfiguration
+
+	// ARN of the Kinesis Data Stream.
+	//
+	// This member is required.
+	DataStreamArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the KMS configuration for a resource.
 type KmsConfiguration struct {
 
@@ -2298,6 +2328,9 @@ type Memory struct {
 
 	// The list of memory strategies associated with this memory.
 	Strategies []MemoryStrategy
+
+	// Configuration for streaming memory record data to external resources.
+	StreamDeliveryResources *StreamDeliveryResources
 
 	noSmithyDocumentSerde
 }
@@ -3868,6 +3901,35 @@ type StrategyConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Supported stream delivery resource types.
+//
+// The following types satisfy this interface:
+//
+//	StreamDeliveryResourceMemberKinesis
+type StreamDeliveryResource interface {
+	isStreamDeliveryResource()
+}
+
+// Kinesis Data Stream configuration.
+type StreamDeliveryResourceMemberKinesis struct {
+	Value KinesisResource
+
+	noSmithyDocumentSerde
+}
+
+func (*StreamDeliveryResourceMemberKinesis) isStreamDeliveryResource() {}
+
+// Configuration for streaming memory record data to external resources.
+type StreamDeliveryResources struct {
+
+	// List of stream delivery resource configurations.
+	//
+	// This member is required.
+	Resources []StreamDeliveryResource
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary consolidation override configuration.
 type SummaryConsolidationOverride struct {
 
@@ -4368,6 +4430,7 @@ func (*UnknownUnionMember) isRatingScale()                           {}
 func (*UnknownUnionMember) isReflectionConfiguration()               {}
 func (*UnknownUnionMember) isRequestHeaderConfiguration()            {}
 func (*UnknownUnionMember) isResource()                              {}
+func (*UnknownUnionMember) isStreamDeliveryResource()                {}
 func (*UnknownUnionMember) isTargetConfiguration()                   {}
 func (*UnknownUnionMember) isToolSchema()                            {}
 func (*UnknownUnionMember) isTriggerCondition()                      {}

@@ -53,6 +53,9 @@ type UpdateMemoryInput struct {
 	// The memory strategies to add, modify, or delete.
 	MemoryStrategies *types.ModifyMemoryStrategies
 
+	// Configuration for streaming memory record data to external resources.
+	StreamDeliveryResources *types.StreamDeliveryResources
+
 	noSmithyDocumentSerde
 }
 

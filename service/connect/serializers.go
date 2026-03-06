@@ -37417,6 +37417,18 @@ func awsRestjson1_serializeDocumentChannels(v []types.Channel, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentChatEntryPointParameters(v *types.ChatEntryPointParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FlowId != nil {
+		ok := object.Key("FlowId")
+		ok.String(*v.FlowId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChatEvent(v *types.ChatEvent, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -44071,6 +44083,13 @@ func awsRestjson1_serializeDocumentTemplatedMessageConfig(v *types.TemplatedMess
 func awsRestjson1_serializeDocumentTestCaseEntryPoint(v *types.TestCaseEntryPoint, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ChatEntryPointParameters != nil {
+		ok := object.Key("ChatEntryPointParameters")
+		if err := awsRestjson1_serializeDocumentChatEntryPointParameters(v.ChatEntryPointParameters, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")

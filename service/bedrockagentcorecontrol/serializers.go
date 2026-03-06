@@ -1207,6 +1207,13 @@ func awsRestjson1_serializeOpDocumentCreateMemoryInput(v *CreateMemoryInput, val
 		ok.String(*v.Name)
 	}
 
+	if v.StreamDeliveryResources != nil {
+		ok := object.Key("streamDeliveryResources")
+		if err := awsRestjson1_serializeDocumentStreamDeliveryResources(v.StreamDeliveryResources, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
@@ -7237,6 +7244,13 @@ func awsRestjson1_serializeOpDocumentUpdateMemoryInput(v *UpdateMemoryInput, val
 		}
 	}
 
+	if v.StreamDeliveryResources != nil {
+		ok := object.Key("streamDeliveryResources")
+		if err := awsRestjson1_serializeDocumentStreamDeliveryResources(v.StreamDeliveryResources, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8295,6 +8309,36 @@ func awsRestjson1_serializeDocumentContent(v types.Content, value smithyjson.Val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContentConfiguration(v *types.ContentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Level) > 0 {
+		ok := object.Key("level")
+		ok.String(string(v.Level))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContentConfigurationList(v []types.ContentConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentContentConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCredentialProvider(v types.CredentialProvider, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9224,6 +9268,25 @@ func awsRestjson1_serializeDocumentInvocationConfigurationInput(v *types.Invocat
 	if v.TopicArn != nil {
 		ok := object.Key("topicArn")
 		ok.String(*v.TopicArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKinesisResource(v *types.KinesisResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContentConfigurations != nil {
+		ok := object.Key("contentConfigurations")
+		if err := awsRestjson1_serializeDocumentContentConfigurationList(v.ContentConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataStreamArn != nil {
+		ok := object.Key("dataStreamArn")
+		ok.String(*v.DataStreamArn)
 	}
 
 	return nil
@@ -10560,6 +10623,54 @@ func awsRestjson1_serializeDocumentSlackOauth2ProviderConfigInput(v *types.Slack
 		ok.String(*v.ClientSecret)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStreamDeliveryResource(v types.StreamDeliveryResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.StreamDeliveryResourceMemberKinesis:
+		av := object.Key("kinesis")
+		if err := awsRestjson1_serializeDocumentKinesisResource(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStreamDeliveryResources(v *types.StreamDeliveryResources, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Resources != nil {
+		ok := object.Key("resources")
+		if err := awsRestjson1_serializeDocumentStreamDeliveryResourcesList(v.Resources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStreamDeliveryResourcesList(v []types.StreamDeliveryResource, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentStreamDeliveryResource(v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

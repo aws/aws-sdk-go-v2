@@ -118,6 +118,9 @@ func awsAwsjson11_deserializeOpErrorCreateExport(response *smithyhttp.Response, 
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
@@ -1069,6 +1072,9 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
@@ -1189,6 +1195,9 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
@@ -1309,6 +1318,9 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
@@ -1449,6 +1461,41 @@ func awsAwsjson11_deserializeOpErrorUpdateExport(response *smithyhttp.Response, 
 		return genericError
 
 	}
+}
+
+func awsAwsjson11_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.AccessDeniedException{}
+	err := awsAwsjson11_deserializeDocumentAccessDeniedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
 }
 
 func awsAwsjson11_deserializeErrorInternalServerException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
@@ -1624,6 +1671,46 @@ func awsAwsjson11_deserializeErrorValidationException(response *smithyhttp.Respo
 
 	errorBody.Seek(0, io.SeekStart)
 	return output
+}
+
+func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDeniedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessDeniedException
+	if *v == nil {
+		sv = &types.AccessDeniedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 func awsAwsjson11_deserializeDocumentColumn(v **types.Column, value interface{}) error {
@@ -2825,7 +2912,7 @@ func awsAwsjson11_deserializeDocumentTableProperties(v *map[string]string, value
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				return fmt.Errorf("expected TablePropertyGenericString to be of type string, got %T instead", value)
 			}
 			parsedVal = jtv
 		}

@@ -233,14 +233,6 @@ func bindRegion(region string) (*string, error) {
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
-	// The AWS region used to dispatch the request.
-	//
-	// Parameter is
-	// required.
-	//
-	// AWS::Region
-	Region *string
-
 	// When true, send this request to the FIPS-compliant regional endpoint. If the
 	// configured endpoint does not have a FIPS compliant endpoint, dispatching the
 	// request will return an error.
@@ -258,6 +250,14 @@ type EndpointParameters struct {
 	//
 	// SDK::Endpoint
 	Endpoint *string
+
+	// The AWS region used to dispatch the request.
+	//
+	// Parameter is
+	// required.
+	//
+	// AWS::Region
+	Region *string
 }
 
 // ValidateRequired validates required parameters are set.
@@ -343,30 +343,131 @@ func (r *resolver) ResolveEndpoint(
 		if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
 			_PartitionResult := *exprVal
 			_ = _PartitionResult
-			if _PartitionResult.Name == "aws" {
-				if _UseFIPS == true {
-					if _PartitionResult.SupportsFIPS == true {
-						uriString := func() string {
-							var out strings.Builder
-							out.WriteString("https://bcm-data-exports-fips.")
-							out.WriteString(_Region)
-							out.WriteString(".api.aws")
-							return out.String()
-						}()
+			if _PartitionResult.Name == "aws-iso" {
+				if _UseFIPS == false {
+					uriString := "https://bcm-data-exports.us-iso-east-1.c2s.ic.gov"
 
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
+					uri, err := url.Parse(uriString)
+					if err != nil {
+						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 					}
-					return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
+
+					return smithyendpoints.Endpoint{
+						URI:     *uri,
+						Headers: http.Header{},
+						Properties: func() smithy.Properties {
+							var out smithy.Properties
+							smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+								{
+									SchemeID: "aws.auth#sigv4",
+									SignerProperties: func() smithy.Properties {
+										var sp smithy.Properties
+										smithyhttp.SetSigV4SigningRegion(&sp, "us-iso-east-1")
+										return sp
+									}(),
+								},
+							})
+							return out
+						}(),
+					}, nil
 				}
-				uriString := "https://bcm-data-exports.us-east-1.api.aws"
+			}
+			if _PartitionResult.Name == "aws-iso-b" {
+				if _UseFIPS == false {
+					uriString := "https://bcm-data-exports.us-isob-east-1.sc2s.sgov.gov"
+
+					uri, err := url.Parse(uriString)
+					if err != nil {
+						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+					}
+
+					return smithyendpoints.Endpoint{
+						URI:     *uri,
+						Headers: http.Header{},
+						Properties: func() smithy.Properties {
+							var out smithy.Properties
+							smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+								{
+									SchemeID: "aws.auth#sigv4",
+									SignerProperties: func() smithy.Properties {
+										var sp smithy.Properties
+										smithyhttp.SetSigV4SigningRegion(&sp, "us-isob-east-1")
+										return sp
+									}(),
+								},
+							})
+							return out
+						}(),
+					}, nil
+				}
+			}
+			if _PartitionResult.Name == "aws-iso-e" {
+				if _UseFIPS == false {
+					uriString := "https://bcm-data-exports.eu-isoe-west-1.cloud.adc-e.uk"
+
+					uri, err := url.Parse(uriString)
+					if err != nil {
+						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+					}
+
+					return smithyendpoints.Endpoint{
+						URI:     *uri,
+						Headers: http.Header{},
+						Properties: func() smithy.Properties {
+							var out smithy.Properties
+							smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+								{
+									SchemeID: "aws.auth#sigv4",
+									SignerProperties: func() smithy.Properties {
+										var sp smithy.Properties
+										smithyhttp.SetSigV4SigningRegion(&sp, "eu-isoe-west-1")
+										return sp
+									}(),
+								},
+							})
+							return out
+						}(),
+					}, nil
+				}
+			}
+			if _PartitionResult.Name == "aws-iso-f" {
+				if _UseFIPS == false {
+					uriString := "https://bcm-data-exports.us-isof-south-1.csp.hci.ic.gov"
+
+					uri, err := url.Parse(uriString)
+					if err != nil {
+						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+					}
+
+					return smithyendpoints.Endpoint{
+						URI:     *uri,
+						Headers: http.Header{},
+						Properties: func() smithy.Properties {
+							var out smithy.Properties
+							smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+								{
+									SchemeID: "aws.auth#sigv4",
+									SignerProperties: func() smithy.Properties {
+										var sp smithy.Properties
+										smithyhttp.SetSigV4SigningRegion(&sp, "us-isof-south-1")
+										return sp
+									}(),
+								},
+							})
+							return out
+						}(),
+					}, nil
+				}
+			}
+			if _UseFIPS == true {
+				uriString := func() string {
+					var out strings.Builder
+					out.WriteString("https://bcm-data-exports-fips.")
+					out.WriteString(_PartitionResult.ImplicitGlobalRegion)
+					out.WriteString(".")
+					out.WriteString(_PartitionResult.DualStackDnsSuffix)
+					return out.String()
+				}()
 
 				uri, err := url.Parse(uriString)
 				if err != nil {
@@ -383,10 +484,7 @@ func (r *resolver) ResolveEndpoint(
 								SchemeID: "aws.auth#sigv4",
 								SignerProperties: func() smithy.Properties {
 									var sp smithy.Properties
-									smithyhttp.SetSigV4SigningName(&sp, "bcm-data-exports")
-									smithyhttp.SetSigV4ASigningName(&sp, "bcm-data-exports")
-
-									smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+									smithyhttp.SetSigV4SigningRegion(&sp, _PartitionResult.ImplicitGlobalRegion)
 									return sp
 								}(),
 							},
@@ -395,78 +493,12 @@ func (r *resolver) ResolveEndpoint(
 					}(),
 				}, nil
 			}
-			if true == _PartitionResult.SupportsDualStack {
-				if _UseFIPS == true {
-					if _PartitionResult.SupportsFIPS == true {
-						uriString := func() string {
-							var out strings.Builder
-							out.WriteString("https://bcm-data-exports-fips.")
-							out.WriteString(_Region)
-							out.WriteString(".")
-							out.WriteString(_PartitionResult.DualStackDnsSuffix)
-							return out.String()
-						}()
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
-					}
-					return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
-				}
-				uriString := func() string {
-					var out strings.Builder
-					out.WriteString("https://bcm-data-exports.")
-					out.WriteString(_Region)
-					out.WriteString(".")
-					out.WriteString(_PartitionResult.DualStackDnsSuffix)
-					return out.String()
-				}()
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-				}, nil
-			}
-			if _UseFIPS == true {
-				if _PartitionResult.SupportsFIPS == true {
-					uriString := func() string {
-						var out strings.Builder
-						out.WriteString("https://bcm-data-exports-fips.")
-						out.WriteString(_Region)
-						out.WriteString(".")
-						out.WriteString(_PartitionResult.DnsSuffix)
-						return out.String()
-					}()
-
-					uri, err := url.Parse(uriString)
-					if err != nil {
-						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-					}
-
-					return smithyendpoints.Endpoint{
-						URI:     *uri,
-						Headers: http.Header{},
-					}, nil
-				}
-				return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
-			}
 			uriString := func() string {
 				var out strings.Builder
 				out.WriteString("https://bcm-data-exports.")
-				out.WriteString(_Region)
+				out.WriteString(_PartitionResult.ImplicitGlobalRegion)
 				out.WriteString(".")
-				out.WriteString(_PartitionResult.DnsSuffix)
+				out.WriteString(_PartitionResult.DualStackDnsSuffix)
 				return out.String()
 			}()
 
@@ -478,6 +510,20 @@ func (r *resolver) ResolveEndpoint(
 			return smithyendpoints.Endpoint{
 				URI:     *uri,
 				Headers: http.Header{},
+				Properties: func() smithy.Properties {
+					var out smithy.Properties
+					smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+						{
+							SchemeID: "aws.auth#sigv4",
+							SignerProperties: func() smithy.Properties {
+								var sp smithy.Properties
+								smithyhttp.SetSigV4SigningRegion(&sp, _PartitionResult.ImplicitGlobalRegion)
+								return sp
+							}(),
+						},
+					})
+					return out
+				}(),
 			}, nil
 		}
 		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
@@ -492,14 +538,13 @@ type endpointParamsBinder interface {
 func bindEndpointParams(ctx context.Context, input interface{}, options Options) (*EndpointParameters, error) {
 	params := &EndpointParameters{}
 
+	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
+	params.Endpoint = options.BaseEndpoint
 	region, err := bindRegion(options.Region)
 	if err != nil {
 		return nil, err
 	}
 	params.Region = region
-
-	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
-	params.Endpoint = options.BaseEndpoint
 
 	if b, ok := input.(endpointParamsBinder); ok {
 		b.bindEndpointParams(params)
