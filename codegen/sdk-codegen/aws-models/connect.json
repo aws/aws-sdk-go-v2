@@ -7140,6 +7140,20 @@
                 }
             }
         },
+        "com.amazonaws.connect#ChatEntryPointParameters": {
+            "type": "structure",
+            "members": {
+                "FlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flow identifier for the test.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameters for initiating a chat test.</p>"
+            }
+        },
         "com.amazonaws.connect#ChatEvent": {
             "type": "structure",
             "members": {
@@ -54580,6 +54594,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Parameters for voice call entry point.</p>"
                     }
+                },
+                "ChatEntryPointParameters": {
+                    "target": "com.amazonaws.connect#ChatEntryPointParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters for chat entry point.</p>"
+                    }
                 }
             },
             "traits": {
@@ -54593,6 +54613,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VOICE_CALL"
+                    }
+                },
+                "CHAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHAT"
                     }
                 }
             }

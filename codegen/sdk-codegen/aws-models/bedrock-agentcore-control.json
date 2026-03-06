@@ -2481,6 +2481,62 @@
                 "smithy.api#documentation": "<p>Represents content input for policy generation operations. This structure encapsulates the natural language descriptions or other content formats that are used as input for AI-powered policy generation.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ContentConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of content to stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "level": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ContentLevel",
+                    "traits": {
+                        "smithy.api#default": "METADATA_ONLY",
+                        "smithy.api#documentation": "<p>Level of detail for streamed content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines what content to stream and at what level of detail.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ContentConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ContentConfiguration"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ContentLevel": {
+            "type": "enum",
+            "members": {
+                "METADATA_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METADATA_ONLY"
+                    }
+                },
+                "FULL_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL_CONTENT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ContentType": {
+            "type": "enum",
+            "members": {
+                "MEMORY_RECORDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEMORY_RECORDS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#CreateAgentRuntime": {
             "type": "operation",
             "input": {
@@ -3927,6 +3983,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#MemoryStrategyInputList",
                     "traits": {
                         "smithy.api#documentation": "<p>The memory strategies to use for this memory. Strategies define how information is extracted, processed, and consolidated.</p>"
+                    }
+                },
+                "streamDeliveryResources": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#StreamDeliveryResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for streaming memory record data to external resources.</p>"
                     }
                 },
                 "tags": {
@@ -10933,6 +10995,32 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#KinesisResource": {
+            "type": "structure",
+            "members": {
+                "dataStreamArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the Kinesis Data Stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ContentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Content configurations for stream delivery.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for Kinesis Data Stream delivery.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#KmsConfiguration": {
             "type": "structure",
             "members": {
@@ -13002,6 +13090,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#MemoryStrategyList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of memory strategies associated with this memory.</p>"
+                    }
+                },
+                "streamDeliveryResources": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#StreamDeliveryResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for streaming memory record data to external resources.</p>"
                     }
                 }
             },
@@ -16388,6 +16482,46 @@
                 "smithy.api#documentation": "<p>Contains configuration information for a memory strategy.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#StreamDeliveryResource": {
+            "type": "union",
+            "members": {
+                "kinesis": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KinesisResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kinesis Data Stream configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Supported stream delivery resource types.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#StreamDeliveryResources": {
+            "type": "structure",
+            "members": {
+                "resources": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#StreamDeliveryResourcesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of stream delivery resource configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for streaming memory record data to external resources.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#StreamDeliveryResourcesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#StreamDeliveryResource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#String": {
             "type": "string"
         },
@@ -18294,6 +18428,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#ModifyMemoryStrategies",
                     "traits": {
                         "smithy.api#documentation": "<p>The memory strategies to add, modify, or delete.</p>"
+                    }
+                },
+                "streamDeliveryResources": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#StreamDeliveryResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for streaming memory record data to external resources.</p>"
                     }
                 }
             },

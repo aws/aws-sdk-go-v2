@@ -2231,6 +2231,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.deadline#CostScaleFactor": {
+            "type": "float",
+            "traits": {
+                "smithy.api#documentation": "A multiplier applied to calculated costs. Valid range is 0 to 100. Values less than 1.0 represent discounts, values greater than 1.0 represent markups, and a value of 1.0 represents no adjustment.",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.deadline#CpuArchitectureType": {
             "type": "enum",
             "members": {
@@ -2474,6 +2484,13 @@
                     "target": "com.amazonaws.deadline#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the KMS key to use on the farm.</p>"
+                    }
+                },
+                "costScaleFactor": {
+                    "target": "com.amazonaws.deadline#CostScaleFactor",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>The cost scale factor to apply on the farm.</p>"
                     }
                 },
                 "tags": {
@@ -7729,6 +7746,14 @@
                     "target": "com.amazonaws.deadline#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the KMS key used on the farm.</p>"
+                    }
+                },
+                "costScaleFactor": {
+                    "target": "com.amazonaws.deadline#CostScaleFactor",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>The cost scale factor applied on the farm.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
@@ -20881,6 +20906,12 @@
                     "target": "com.amazonaws.deadline#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the farm to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
+                    }
+                },
+                "costScaleFactor": {
+                    "target": "com.amazonaws.deadline#CostScaleFactor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cost scale factor of the farm to update.</p>"
                     }
                 }
             },

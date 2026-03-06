@@ -3656,7 +3656,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^aws\\.partner\\/.*$"
+                "smithy.api#pattern": "^(aws\\.(partner\\/.*|cases|cases\\-test))|Pipe\\s.[a-zA-Z0-9\\/\\._\\-]+$|app\\-integrations\\.webhooks\\/[a-zA-Z0-9\\-_.\\/]+$"
             }
         },
         "com.amazonaws.appintegrations#SourceURI": {

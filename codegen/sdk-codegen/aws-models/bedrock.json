@@ -49,6 +49,12 @@
                         "smithy.api#documentation": "<p>Whether to honor or ignore input tags at runtime.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "modelEnforcement": {
+                    "target": "com.amazonaws.bedrock#ModelEnforcement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model-specific information for the enforced guardrail configuration. If not present, the configuration is enforced on all models</p>"
+                    }
                 }
             },
             "traits": {
@@ -117,6 +123,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration owner type.</p>"
                     }
+                },
+                "modelEnforcement": {
+                    "target": "com.amazonaws.bedrock#ModelEnforcement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model-specific information for the enforced guardrail configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -130,7 +142,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1
                 }
             }
@@ -7951,6 +7963,9 @@
                     "target": "com.amazonaws.bedrock#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.bedrock#ResourceInUseException"
+                },
+                {
                     "target": "com.amazonaws.bedrock#ResourceNotFoundException"
                 },
                 {
@@ -9316,6 +9331,23 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrock#ExcludedModelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}){0,1}$"
+            }
+        },
+        "com.amazonaws.bedrock#ExcludedModelsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#ExcludedModelId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
                 }
             }
         },
@@ -14988,6 +15020,23 @@
                 "target": "com.amazonaws.bedrock#ImportedModelSummary"
             }
         },
+        "com.amazonaws.bedrock#IncludedModelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(ALL|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}){0,1})$"
+            }
+        },
+        "com.amazonaws.bedrock#IncludedModelsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#IncludedModelId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.bedrock#InferenceProfileArn": {
             "type": "string",
             "traits": {
@@ -18442,6 +18491,28 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^([0-9a-zA-Z][_-]?){1,63}$"
+            }
+        },
+        "com.amazonaws.bedrock#ModelEnforcement": {
+            "type": "structure",
+            "members": {
+                "includedModels": {
+                    "target": "com.amazonaws.bedrock#IncludedModelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Models to enforce the guardrail on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "excludedModels": {
+                    "target": "com.amazonaws.bedrock#ExcludedModelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Models to exclude from enforcement of the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Model-specific information for the enforced guardrail configuration.</p>"
             }
         },
         "com.amazonaws.bedrock#ModelId": {
