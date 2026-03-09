@@ -49,6 +49,11 @@ type AddDirectQueryDataSourceInput struct {
 	// This member is required.
 	OpenSearchArns []string
 
+	//  An optional IAM access policy document that defines the permissions for
+	// accessing the data source. The policy document must be in valid JSON format and
+	// follow IAM policy syntax.
+	DataSourceAccessPolicy *string
+
 	//  An optional text field for providing additional context and details about the
 	// data source.
 	Description *string

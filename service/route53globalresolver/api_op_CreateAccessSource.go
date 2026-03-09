@@ -15,6 +15,12 @@ import (
 // Creates an access source for a DNS view. Access sources define IP addresses or
 // CIDR ranges that are allowed to send DNS queries to the Route 53 Global
 // Resolver, along with the permitted DNS protocols.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) CreateAccessSource(ctx context.Context, params *CreateAccessSourceInput, optFns ...func(*Options)) (*CreateAccessSourceOutput, error) {
 	if params == nil {
 		params = &CreateAccessSourceInput{}

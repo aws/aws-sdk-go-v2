@@ -16,6 +16,12 @@ import (
 // users, user groups, networks, and devices, and serves as a parent resource that
 // holds configurations controlling access, authorization, DNS firewall rules, and
 // forwarding rules.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) CreateDNSView(ctx context.Context, params *CreateDNSViewInput, optFns ...func(*Options)) (*CreateDNSViewOutput, error) {
 	if params == nil {
 		params = &CreateDNSViewInput{}

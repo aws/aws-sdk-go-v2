@@ -1,0 +1,8 @@
+{
+    "id": "a5479268-b64d-40c3-9779-340d99a8bc04",
+    "type": "documentation",
+    "description": "Added support for CloudWatch Logs long-term API keys, currently available in Preview",
+    "modules": [
+        "service/iam"
+    ]
+}

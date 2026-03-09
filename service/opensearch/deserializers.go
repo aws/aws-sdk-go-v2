@@ -7815,6 +7815,15 @@ func awsRestjson1_deserializeOpDocumentGetDirectQueryDataSourceOutput(v **GetDir
 
 	for key, value := range shape {
 		switch key {
+		case "DataSourceAccessPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyDocument to be of type string, got %T instead", value)
+				}
+				sv.DataSourceAccessPolicy = ptr.String(jtv)
+			}
+
 		case "DataSourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12721,6 +12730,9 @@ func awsRestjson1_deserializeOpErrorUpdateDirectQueryDataSource(response *smithy
 	case strings.EqualFold("InternalException", errorCode):
 		return awsRestjson1_deserializeErrorInternalException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -17065,6 +17077,15 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 					return fmt.Errorf("expected DataSourceDescription to be of type string, got %T instead", value)
 				}
 				sv.DataSourceDescription = ptr.String(jtv)
+			}
+
+		case "iamRoleForDataSourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.IamRoleForDataSourceArn = ptr.String(jtv)
 			}
 
 		default:

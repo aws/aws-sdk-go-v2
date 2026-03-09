@@ -13,6 +13,12 @@ import (
 )
 
 // Retrieves information about a Route 53 Global Resolver instance.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) GetGlobalResolver(ctx context.Context, params *GetGlobalResolverInput, optFns ...func(*Options)) (*GetGlobalResolverOutput, error) {
 	if params == nil {
 		params = &GetGlobalResolverInput{}
@@ -77,7 +83,7 @@ type GetGlobalResolverOutput struct {
 	// This member is required.
 	Name *string
 
-	// The AWS Regions in which the Global Resolver operate.
+	// The Amazon Web Services Regions in which the Global Resolver operate.
 	//
 	// This member is required.
 	Regions []string
@@ -95,8 +101,15 @@ type GetGlobalResolverOutput struct {
 	// The description of the Global Resolver.
 	Description *string
 
-	// The AWS Regions in which the users' Global Resolver query resolution logs will
-	// be propagated.
+	// The IP address type configured for the Global Resolver.
+	IpAddressType types.GlobalResolverIpAddressType
+
+	// List of anycast IPv6 addresses associated with the Global Resolver instance.
+	// This field is only populated when ipAddressType is DUAL_STACK.
+	Ipv6Addresses []string
+
+	// The Amazon Web Services Regions in which the users' Global Resolver query
+	// resolution logs will be propagated.
 	ObservabilityRegion *string
 
 	// Metadata pertaining to the operation's result.

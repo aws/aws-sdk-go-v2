@@ -13,6 +13,12 @@ import (
 
 // Updates multiple DNS firewall rules in a single operation. This is more
 // efficient than updating rules individually.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) BatchUpdateFirewallRule(ctx context.Context, params *BatchUpdateFirewallRuleInput, optFns ...func(*Options)) (*BatchUpdateFirewallRuleOutput, error) {
 	if params == nil {
 		params = &BatchUpdateFirewallRuleInput{}

@@ -77,6 +77,9 @@ type UpdateReplicationConfigurationTemplateInput struct {
 	// Update replication configuration template Staging Area Tags request.
 	StagingAreaTags map[string]string
 
+	// Update replication configuration template store snapshot on local zone request.
+	StoreSnapshotOnLocalZone *bool
+
 	// Update replication configuration template use dedicated Replication Server
 	// request.
 	UseDedicatedReplicationServer *bool
@@ -133,6 +136,9 @@ type UpdateReplicationConfigurationTemplateOutput struct {
 
 	// Replication Configuration template Staging Area Tags.
 	StagingAreaTags map[string]string
+
+	// Replication Configuration template store snapshot on local zone.
+	StoreSnapshotOnLocalZone *bool
 
 	// Replication Configuration template Tags.
 	Tags map[string]string

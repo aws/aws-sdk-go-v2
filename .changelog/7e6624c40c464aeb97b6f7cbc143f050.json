@@ -1,0 +1,8 @@
+{
+    "id": "7e6624c4-0c46-4aeb-97b6-f7cbc143f050",
+    "type": "feature",
+    "description": "Adds support for new storeSnapshotOnLocalZone field in ReplicationConfiguration and updateReplicationConfiguration",
+    "modules": [
+        "service/mgn"
+    ]
+}

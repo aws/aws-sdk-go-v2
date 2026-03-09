@@ -654,7 +654,7 @@ type GlobalResolversItem struct {
 	// This member is required.
 	Name *string
 
-	// The AWS Regions where the global resolver is deployed.
+	// The Amazon Web Services Regions where the global resolver is deployed.
 	//
 	// This member is required.
 	Regions []string
@@ -672,7 +672,15 @@ type GlobalResolversItem struct {
 	// A description of the global resolver.
 	Description *string
 
-	// The AWS Region where observability data is collected for the global resolver.
+	// The IP address type configured for the global resolver.
+	IpAddressType GlobalResolverIpAddressType
+
+	// The IPv6 addresses assigned to the global resolver. This field is only
+	// populated when ipAddressType is DUAL_STACK.
+	Ipv6Addresses []string
+
+	// The Amazon Web Services Region where observability data is collected for the
+	// global resolver.
 	ObservabilityRegion *string
 
 	noSmithyDocumentSerde

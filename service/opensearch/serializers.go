@@ -268,6 +268,11 @@ func awsRestjson1_serializeOpDocumentAddDirectQueryDataSourceInput(v *AddDirectQ
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataSourceAccessPolicy != nil {
+		ok := object.Key("DataSourceAccessPolicy")
+		ok.String(*v.DataSourceAccessPolicy)
+	}
+
 	if v.DataSourceName != nil {
 		ok := object.Key("DataSourceName")
 		ok.String(*v.DataSourceName)
@@ -6354,6 +6359,11 @@ func awsRestjson1_serializeOpDocumentUpdateDirectQueryDataSourceInput(v *UpdateD
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataSourceAccessPolicy != nil {
+		ok := object.Key("DataSourceAccessPolicy")
+		ok.String(*v.DataSourceAccessPolicy)
+	}
+
 	if v.DataSourceType != nil {
 		ok := object.Key("DataSourceType")
 		if err := awsRestjson1_serializeDocumentDirectQueryDataSourceType(v.DataSourceType, ok); err != nil {
@@ -7612,6 +7622,11 @@ func awsRestjson1_serializeDocumentDataSource(v *types.DataSource, value smithyj
 	if v.DataSourceDescription != nil {
 		ok := object.Key("dataSourceDescription")
 		ok.String(*v.DataSourceDescription)
+	}
+
+	if v.IamRoleForDataSourceArn != nil {
+		ok := object.Key("iamRoleForDataSourceArn")
+		ok.String(*v.IamRoleForDataSourceArn)
 	}
 
 	return nil

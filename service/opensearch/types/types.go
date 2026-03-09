@@ -790,6 +790,10 @@ type DataSource struct {
 	// Detailed description of a data source.
 	DataSourceDescription *string
 
+	// The ARN of the IAM role to be used for cross account/region data source
+	// association.
+	IamRoleForDataSourceArn *string
+
 	noSmithyDocumentSerde
 }
 

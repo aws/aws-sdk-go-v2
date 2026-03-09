@@ -88,6 +88,9 @@ type GetReplicationConfigurationOutput struct {
 	// Replication Configuration Staging Area tags.
 	StagingAreaTags map[string]string
 
+	// Replication Configuration store snapshot on local zone.
+	StoreSnapshotOnLocalZone *bool
+
 	// Replication Configuration use Dedicated Replication Server.
 	UseDedicatedReplicationServer *bool
 

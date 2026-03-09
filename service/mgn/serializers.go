@@ -967,6 +967,11 @@ func awsRestjson1_serializeOpDocumentCreateReplicationConfigurationTemplateInput
 		}
 	}
 
+	if v.StoreSnapshotOnLocalZone != nil {
+		ok := object.Key("storeSnapshotOnLocalZone")
+		ok.Boolean(*v.StoreSnapshotOnLocalZone)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
@@ -6372,6 +6377,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationInput(v *Upda
 		}
 	}
 
+	if v.StoreSnapshotOnLocalZone != nil {
+		ok := object.Key("storeSnapshotOnLocalZone")
+		ok.Boolean(*v.StoreSnapshotOnLocalZone)
+	}
+
 	if v.UseDedicatedReplicationServer != nil {
 		ok := object.Key("useDedicatedReplicationServer")
 		ok.Boolean(*v.UseDedicatedReplicationServer)
@@ -6530,6 +6540,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationTemplateInput
 		if err := awsRestjson1_serializeDocumentTagsMap(v.StagingAreaTags, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.StoreSnapshotOnLocalZone != nil {
+		ok := object.Key("storeSnapshotOnLocalZone")
+		ok.Boolean(*v.StoreSnapshotOnLocalZone)
 	}
 
 	if v.UseDedicatedReplicationServer != nil {

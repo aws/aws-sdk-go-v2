@@ -67,8 +67,9 @@ type DnsAdvancedProtection string
 
 // Enum values for DnsAdvancedProtection
 const (
-	DnsAdvancedProtectionDga          DnsAdvancedProtection = "DGA"
-	DnsAdvancedProtectionDnsTunneling DnsAdvancedProtection = "DNS_TUNNELING"
+	DnsAdvancedProtectionDga           DnsAdvancedProtection = "DGA"
+	DnsAdvancedProtectionDnsTunneling  DnsAdvancedProtection = "DNS_TUNNELING"
+	DnsAdvancedProtectionDictionaryDga DnsAdvancedProtection = "DICTIONARY_DGA"
 )
 
 // Values returns all known values for DnsAdvancedProtection. Note that this can
@@ -79,6 +80,7 @@ func (DnsAdvancedProtection) Values() []DnsAdvancedProtection {
 	return []DnsAdvancedProtection{
 		"DGA",
 		"DNS_TUNNELING",
+		"DICTIONARY_DGA",
 	}
 }
 
@@ -199,6 +201,25 @@ func (FirewallRulesFailOpenType) Values() []FirewallRulesFailOpenType {
 	return []FirewallRulesFailOpenType{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type GlobalResolverIpAddressType string
+
+// Enum values for GlobalResolverIpAddressType
+const (
+	GlobalResolverIpAddressTypeIpv4      GlobalResolverIpAddressType = "IPV4"
+	GlobalResolverIpAddressTypeDualStack GlobalResolverIpAddressType = "DUAL_STACK"
+)
+
+// Values returns all known values for GlobalResolverIpAddressType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GlobalResolverIpAddressType) Values() []GlobalResolverIpAddressType {
+	return []GlobalResolverIpAddressType{
+		"IPV4",
+		"DUAL_STACK",
 	}
 }
 

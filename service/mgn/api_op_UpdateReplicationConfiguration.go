@@ -80,6 +80,9 @@ type UpdateReplicationConfigurationInput struct {
 	// Update replication configuration Staging Area Tags request.
 	StagingAreaTags map[string]string
 
+	// Update replication configuration store snapshot on local zone.
+	StoreSnapshotOnLocalZone *bool
+
 	// Update replication configuration use dedicated Replication Server request.
 	UseDedicatedReplicationServer *bool
 
@@ -136,6 +139,9 @@ type UpdateReplicationConfigurationOutput struct {
 
 	// Replication Configuration Staging Area tags.
 	StagingAreaTags map[string]string
+
+	// Replication Configuration store snapshot on local zone.
+	StoreSnapshotOnLocalZone *bool
 
 	// Replication Configuration use Dedicated Replication Server.
 	UseDedicatedReplicationServer *bool

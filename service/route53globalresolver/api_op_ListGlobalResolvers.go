@@ -13,6 +13,12 @@ import (
 
 // Lists all Route 53 Global Resolver instances in your account with pagination
 // support.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) ListGlobalResolvers(ctx context.Context, params *ListGlobalResolversInput, optFns ...func(*Options)) (*ListGlobalResolversOutput, error) {
 	if params == nil {
 		params = &ListGlobalResolversInput{}

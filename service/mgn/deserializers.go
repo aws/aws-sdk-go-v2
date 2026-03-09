@@ -1946,6 +1946,15 @@ func awsRestjson1_deserializeOpDocumentCreateReplicationConfigurationTemplateOut
 				return err
 			}
 
+		case "storeSnapshotOnLocalZone":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StoreSnapshotOnLocalZone = ptr.Bool(jtv)
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
 				return err
@@ -5178,6 +5187,15 @@ func awsRestjson1_deserializeOpDocumentGetReplicationConfigurationOutput(v **Get
 		case "stagingAreaTags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.StagingAreaTags, value); err != nil {
 				return err
+			}
+
+		case "storeSnapshotOnLocalZone":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StoreSnapshotOnLocalZone = ptr.Bool(jtv)
 			}
 
 		case "useDedicatedReplicationServer":
@@ -12119,6 +12137,15 @@ func awsRestjson1_deserializeOpDocumentUpdateReplicationConfigurationOutput(v **
 				return err
 			}
 
+		case "storeSnapshotOnLocalZone":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StoreSnapshotOnLocalZone = ptr.Bool(jtv)
+			}
+
 		case "useDedicatedReplicationServer":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12413,6 +12440,15 @@ func awsRestjson1_deserializeOpDocumentUpdateReplicationConfigurationTemplateOut
 		case "stagingAreaTags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.StagingAreaTags, value); err != nil {
 				return err
+			}
+
+		case "storeSnapshotOnLocalZone":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StoreSnapshotOnLocalZone = ptr.Bool(jtv)
 			}
 
 		case "tags":
@@ -17723,6 +17759,15 @@ func awsRestjson1_deserializeDocumentReplicationConfigurationTemplate(v **types.
 		case "stagingAreaTags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.StagingAreaTags, value); err != nil {
 				return err
+			}
+
+		case "storeSnapshotOnLocalZone":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StoreSnapshotOnLocalZone = ptr.Bool(jtv)
 			}
 
 		case "tags":

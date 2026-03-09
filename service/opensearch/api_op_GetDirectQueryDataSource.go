@@ -42,6 +42,11 @@ type GetDirectQueryDataSourceInput struct {
 
 type GetDirectQueryDataSourceOutput struct {
 
+	//  The IAM access policy document that defines the permissions for accessing the
+	// direct query data source. Returns the current policy configuration in JSON
+	// format, or null if no custom policy is configured.
+	DataSourceAccessPolicy *string
+
 	//  The unique, system-generated identifier that represents the data source.
 	DataSourceArn *string
 

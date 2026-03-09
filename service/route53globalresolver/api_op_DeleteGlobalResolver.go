@@ -15,6 +15,12 @@ import (
 // Deletes a Route 53 Global Resolver instance. This operation cannot be undone.
 // All associated DNS views, access sources, tokens, and firewall rules are also
 // deleted.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) DeleteGlobalResolver(ctx context.Context, params *DeleteGlobalResolverInput, optFns ...func(*Options)) (*DeleteGlobalResolverOutput, error) {
 	if params == nil {
 		params = &DeleteGlobalResolverInput{}
@@ -79,8 +85,8 @@ type DeleteGlobalResolverOutput struct {
 	// This member is required.
 	Name *string
 
-	// The AWS Regions where the deleted Route 53 Global Resolver was deployed and
-	// operational.
+	// The Amazon Web Services Regions where the deleted Route 53 Global Resolver was
+	// deployed and operational.
 	//
 	// This member is required.
 	Regions []string
@@ -99,8 +105,16 @@ type DeleteGlobalResolverOutput struct {
 	// The description of the deleted Route 53 Global Resolver.
 	Description *string
 
-	// The AWS Region where observability data for the deleted Route 53 Global
-	// Resolver was stored.
+	// The IP address type that was configured for the deleted Route 53 Global
+	// Resolver.
+	IpAddressType types.GlobalResolverIpAddressType
+
+	// The global anycast IPv6 addresses that were associated with the deleted Route
+	// 53 Global Resolver.
+	Ipv6Addresses []string
+
+	// The Amazon Web Services Region where observability data for the deleted Route
+	// 53 Global Resolver was stored.
 	ObservabilityRegion *string
 
 	// Metadata pertaining to the operation's result.
