@@ -184,17 +184,17 @@ func (t *Table[T]) DeleteItemByKey(ctx context.Context, m Map, optFns ...func(*d
 	return err
 }
 
-// createScanIterator returns an iterator that scans a DynamoDB table or index and yields results as ItemResult[T].
+// createScanIterator returns an iterator that scans a DynamoDB table or index and yields results as ItemResult[*T].
 // It automatically handles pagination and error thresholds using MaxConsecutiveErrors.
 // If the number of consecutive errors reaches the threshold, iteration stops.
-func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[*T]] {
 	var consecutiveErrors uint = 0
 	var maxConsecutiveErrors = t.options.MaxConsecutiveErrors
 	if maxConsecutiveErrors == 0 {
 		maxConsecutiveErrors = DefaultMaxConsecutiveErrors
 	}
 
-	return func(yield func(ItemResult[T]) bool) {
+	return func(yield func(ItemResult[*T]) bool) {
 		var lastEvaluatedKey map[string]types.AttributeValue
 
 		for {
@@ -214,7 +214,7 @@ func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, exp
 			if err != nil {
 				consecutiveErrors++
 
-				if !yield(ItemResult[T]{err: err}) {
+				if !yield(ItemResult[*T]{err: err, table: *t.options.Schema.TableName()}) {
 					return
 				}
 
@@ -231,7 +231,7 @@ func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, exp
 				for _, item := range res.Items {
 					i, err := t.options.Schema.Decode(item)
 					if err != nil {
-						if !yield(ItemResult[T]{err: err}) {
+						if !yield(ItemResult[*T]{err: err, table: *t.options.Schema.TableName()}) {
 							return
 						}
 
@@ -239,14 +239,14 @@ func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, exp
 					}
 
 					if err := t.applyAfterReadExtensions(i); err != nil {
-						if !yield(ItemResult[T]{err: err}) {
+						if !yield(ItemResult[*T]{err: err, table: *t.options.Schema.TableName()}) {
 							return
 						}
 
 						continue
 					}
 
-					if !yield(ItemResult[T]{item: i}) {
+					if !yield(ItemResult[*T]{item: i, table: *t.options.Schema.TableName()}) {
 						return
 					}
 				}
@@ -265,27 +265,27 @@ func (t Table[T]) createScanIterator(ctx context.Context, indexName *string, exp
 
 // ScanIndex scans a DynamoDB index and returns an iterator of results.
 // The scan uses the provided index name and expression.
-func (t *Table[T]) ScanIndex(ctx context.Context, indexName string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+func (t *Table[T]) ScanIndex(ctx context.Context, indexName string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[*T]] {
 	return t.createScanIterator(ctx, &indexName, expr, optFns...)
 }
 
 // Scan scans the DynamoDB table and returns an iterator of results.
 // The scan uses the provided expression.
-func (t *Table[T]) Scan(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+func (t *Table[T]) Scan(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[*T]] {
 	return t.createScanIterator(ctx, nil, expr, optFns...)
 }
 
-// createQueryIterator returns an iterator that queries a DynamoDB table or index and yields results as ItemResult[T].
+// createQueryIterator returns an iterator that queries a DynamoDB table or index and yields results as ItemResult[*T].
 // It automatically handles pagination and error thresholds using MaxConsecutiveErrors.
 // If the number of consecutive errors reaches the threshold, iteration stops.
-func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[*T]] {
 	var consecutiveErrors uint = 0
 	var maxConsecutiveErrors = t.options.MaxConsecutiveErrors
 	if maxConsecutiveErrors == 0 {
 		maxConsecutiveErrors = DefaultMaxConsecutiveErrors
 	}
 
-	return func(yield func(ItemResult[T]) bool) {
+	return func(yield func(ItemResult[*T]) bool) {
 		var lastEvaluatedKey map[string]types.AttributeValue
 
 		for {
@@ -305,7 +305,7 @@ func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, e
 			if err != nil {
 				consecutiveErrors++
 
-				if !yield(ItemResult[T]{err: err}) {
+				if !yield(ItemResult[*T]{err: err, table: *t.options.Schema.TableName()}) {
 					return
 				}
 
@@ -326,7 +326,7 @@ func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, e
 				for _, item := range res.Items {
 					i, err := t.options.Schema.Decode(item)
 					if err != nil {
-						if !yield(ItemResult[T]{err: err}) {
+						if !yield(ItemResult[*T]{err: err, table: *t.options.Schema.TableName()}) {
 							return
 						}
 
@@ -334,14 +334,14 @@ func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, e
 					}
 
 					if err := t.applyAfterReadExtensions(i); err != nil {
-						if !yield(ItemResult[T]{err: err}) {
+						if !yield(ItemResult[*T]{err: err, table: *t.options.Schema.TableName()}) {
 							return
 						}
 
 						continue
 					}
 
-					if !yield(ItemResult[T]{item: i}) {
+					if !yield(ItemResult[*T]{item: i, table: *t.options.Schema.TableName()}) {
 						return
 					}
 				}
@@ -360,13 +360,13 @@ func (t *Table[T]) createQueryIterator(ctx context.Context, indexName *string, e
 
 // QueryIndex queries a DynamoDB index and returns an iterator of results.
 // The query uses the provided index name and expression.
-func (t *Table[T]) QueryIndex(ctx context.Context, indexName string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+func (t *Table[T]) QueryIndex(ctx context.Context, indexName string, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[*T]] {
 	return t.createQueryIterator(ctx, &indexName, expr, optFns...)
 }
 
 // Query queries the DynamoDB table and returns an iterator of results.
 // The query uses the provided expression.
-func (t *Table[T]) Query(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[T]] {
+func (t *Table[T]) Query(ctx context.Context, expr expression.Expression, optFns ...func(*dynamodb.Options)) iter.Seq[ItemResult[*T]] {
 	return t.createQueryIterator(ctx, nil, expr, optFns...)
 }
 

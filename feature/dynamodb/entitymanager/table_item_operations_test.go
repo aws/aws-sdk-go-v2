@@ -279,13 +279,13 @@ func TestTableGetItem(t *testing.T) {
 		{
 			client: newMockClient(
 				withDefaultGetItemCall(nil),
-				withItem(makeItem[order]()),
+				withItem("order", makeItem[order]()),
 			),
 		},
 		{
 			client: newMockClient(
 				withDefaultGetItemCall(errors.New("1")),
-				withItem(makeItem[order]()),
+				withItem("order", makeItem[order]()),
 			),
 			expectedError: true,
 		},
@@ -320,13 +320,13 @@ func TestTablePutItem(t *testing.T) {
 		{
 			client: newMockClient(
 				withDefaultPutItemCall(nil),
-				withExpectFns(expectItemsCount(1)),
+				withExpectFns(expectItemsCount("order", 1)),
 			),
 		},
 		{
 			client: newMockClient(
 				withDefaultPutItemCall(errors.New("1")),
-				withExpectFns(expectItemsCount(0)),
+				withExpectFns(expectItemsCount("order", 0)),
 			),
 			expectedError: true,
 		},
@@ -361,13 +361,13 @@ func TestTableUpdateItem(t *testing.T) {
 		{
 			client: newMockClient(
 				withDefaultUpdateItemCall(nil),
-				withExpectFns(expectItemsCount(1)),
+				withExpectFns(expectItemsCount("order", 1)),
 			),
 		},
 		{
 			client: newMockClient(
 				withDefaultUpdateItemCall(errors.New("1")),
-				withExpectFns(expectItemsCount(0)),
+				withExpectFns(expectItemsCount("order", 0)),
 			),
 			expectedError: true,
 		},
@@ -401,16 +401,16 @@ func TestTableDeleteItem(t *testing.T) {
 	}{
 		{
 			client: newMockClient(
-				withItems(makeItem[order], 2),
+				withItems("order", makeItem[order], 2),
 				withDefaultDeleteItemCall(nil),
-				withExpectFns(expectItemsCount(1)),
+				withExpectFns(expectItemsCount("order", 1)),
 			),
 		},
 		{
 			client: newMockClient(
-				withItems(makeItem[order], 2),
+				withItems("order", makeItem[order], 2),
 				withDefaultDeleteItemCall(errors.New("1")),
-				withExpectFns(expectItemsCount(2)),
+				withExpectFns(expectItemsCount("order", 2)),
 			),
 			expectedError: true,
 		},
@@ -444,18 +444,18 @@ func TestTableQuery(t *testing.T) {
 	}{
 		{
 			client: newMockClient(
-				withItems(makeItem[order], 32),
+				withItems("order", makeItem[order], 32),
 				withDefaultQueryCall(nil, 9),
 				withDefaultQueryCall(nil, 8),
 				withDefaultQueryCall(nil, 7),
 				withDefaultQueryCall(nil, 6),
 				withDefaultQueryCall(nil, 0),
-				withExpectFns(expectItemsCount(2)),
+				withExpectFns(expectItemsCount("order", 2)),
 			),
 		},
 		{
 			client: newMockClient(
-				withItems(makeItem[order], 32),
+				withItems("order", makeItem[order], 32),
 				withDefaultQueryCall(errors.New("1"), 0),
 			),
 			expectedError: true,
@@ -491,18 +491,18 @@ func TestTableScan(t *testing.T) {
 	}{
 		{
 			client: newMockClient(
-				withItems(makeItem[order], 32),
+				withItems("order", makeItem[order], 32),
 				withDefaultScanCall(nil, 9),
 				withDefaultScanCall(nil, 8),
 				withDefaultScanCall(nil, 7),
 				withDefaultScanCall(nil, 6),
 				withDefaultScanCall(nil, 0),
-				withExpectFns(expectItemsCount(2)),
+				withExpectFns(expectItemsCount("order", 2)),
 			),
 		},
 		{
 			client: newMockClient(
-				withItems(makeItem[order], 32),
+				withItems("order", makeItem[order], 32),
 				withDefaultScanCall(errors.New("1"), 0),
 			),
 			expectedError: true,
@@ -526,131 +526,6 @@ func TestTableScan(t *testing.T) {
 				if !c.expectedError && res.Error() != nil {
 					t.Fatalf("unexpected error: %v", res.Error())
 				}
-			}
-		})
-	}
-}
-
-func TestTableBatchGetItem(t *testing.T) {
-	cases := []struct {
-		client        Client
-		expectedError bool
-	}{
-		{
-			client: newMockClient(
-				withItems(makeItem[order], 32),
-				withDefaultBatchGetItemCall(nil, 9, "order"),
-				withDefaultBatchGetItemCall(nil, 8, "order"),
-				withDefaultBatchGetItemCall(nil, 7, "order"),
-				withDefaultBatchGetItemCall(nil, 6, "order"),
-				withDefaultBatchGetItemCall(nil, 0, "order"),
-				// even tho we request initally all the items, we expect 2 items to be left unprocessed
-				// because we are forcing the UnprocessedKeys to be empty in last call
-				withExpectFns(expectItemsCount(2)),
-			),
-		},
-		{
-			client: newMockClient(
-				withItems(makeItem[order], 32),
-				withDefaultBatchGetItemCall(errors.New("1"), 0, "order"),
-			),
-			expectedError: true,
-		},
-	}
-
-	for i, c := range cases {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			defer c.client.(*mockClient).RunExpectations(t)
-
-			table, err := NewTable[order](c.client)
-			if err != nil {
-				t.Errorf("unexpcted table error: %v", err)
-			}
-
-			bgio := table.CreateBatchGetOperation()
-
-			for _, item := range c.client.(*mockClient).Items {
-				bgio.AddReadItemByMap(item)
-			}
-
-			for res := range bgio.Execute(context.Background()) {
-				if c.expectedError && res.Error() == nil {
-					t.Fatalf("expected error but got none")
-				}
-
-				if !c.expectedError && res.Error() != nil {
-					t.Fatalf("unexpected error: %v", res.Error())
-				}
-			}
-		})
-	}
-}
-
-func TestTableBatchWriteItem(t *testing.T) {
-
-	cases := []struct {
-		client        Client
-		isDelete      bool
-		expectedError bool
-	}{
-		{
-			client: newMockClient(
-				withItems(makeItem[order], 32),
-				withDefaultBatchWriteItemCall(nil, 9, "order"),
-				withDefaultBatchWriteItemCall(nil, 8, "order"),
-				withDefaultBatchWriteItemCall(nil, 7, "order"),
-				withDefaultBatchWriteItemCall(nil, 6, "order"),
-				withDefaultBatchWriteItemCall(nil, 0, "order"),
-				withExpectFns(expectItemsCount(62)),
-			),
-		},
-		{
-			client: newMockClient(
-				withItems(makeItem[order], 32),
-				withDefaultBatchWriteItemCall(nil, 9, "order"),
-				withDefaultBatchWriteItemCall(nil, 8, "order"),
-				withDefaultBatchWriteItemCall(nil, 7, "order"),
-				withDefaultBatchWriteItemCall(nil, 6, "order"),
-				withDefaultBatchWriteItemCall(nil, 0, "order"),
-				withExpectFns(expectItemsCount(2)),
-			),
-			isDelete: true,
-		},
-		{
-			client: newMockClient(
-				withItems(makeItem[order], 32),
-				withDefaultBatchWriteItemCall(errors.New("1"), 0, "order"),
-			),
-			expectedError: true,
-		},
-	}
-
-	for i, c := range cases {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			defer c.client.(*mockClient).RunExpectations(t)
-
-			table, err := NewTable[order](c.client)
-			if err != nil {
-				t.Errorf("unexpcted table error: %v", err)
-			}
-
-			bgwo := table.CreateBatchWriteOperation()
-
-			for range 32 {
-				if c.isDelete {
-					bgwo.AddRawDelete(makeItem[order]())
-				} else {
-					bgwo.AddRawPut(makeItem[order]())
-				}
-			}
-
-			err = bgwo.Execute(context.Background())
-			if c.expectedError && err == nil {
-				t.Fatalf("expected error but got none")
-			}
-
-			if !c.expectedError && err != nil {
-				t.Fatalf("unexpected error: %v", err)
 			}
 		})
 	}

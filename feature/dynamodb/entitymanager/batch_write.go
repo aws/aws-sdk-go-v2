@@ -8,20 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
-type batchWriteOpType int
-
-const (
-	batchWriteOpPut    batchWriteOpType = 0
-	batchWriteOpDelete batchWriteOpType = 1
-
-	maxItemsInBatchWrite = 25
-)
-
-type batchWriteQueueItem struct {
-	typ  batchWriteOpType
-	item map[string]types.AttributeValue
-}
-
 // BatchWriteOperation provides a batched write (BatchWriteItem) operation for a DynamoDB table.
 // It allows adding put and delete operations to a queue and executes them in batches.
 type BatchWriteOperation[T any] struct {
@@ -29,7 +15,7 @@ type BatchWriteOperation[T any] struct {
 	table  *Table[T]
 	schema *Schema[T]
 
-	queue []batchWriteQueueItem
+	queue []batchOperation
 }
 
 // AddPut adds a put (insert/update) operation to the batch write queue.
@@ -44,8 +30,8 @@ func (b *BatchWriteOperation[T]) AddPut(item *T) error {
 		return fmt.Errorf("error calling schema.Encode(): %w", err)
 	}
 
-	b.queue = append(b.queue, batchWriteQueueItem{
-		typ:  batchWriteOpPut,
+	b.queue = append(b.queue, batchOperation{
+		typ:  batchOperationPut,
 		item: m,
 	})
 
@@ -59,8 +45,8 @@ func (b *BatchWriteOperation[T]) AddRawPut(i map[string]types.AttributeValue) er
 		return fmt.Errorf("input map is empty")
 	}
 
-	b.queue = append(b.queue, batchWriteQueueItem{
-		typ:  batchWriteOpPut,
+	b.queue = append(b.queue, batchOperation{
+		typ:  batchOperationPut,
 		item: i,
 	})
 
@@ -75,8 +61,8 @@ func (b *BatchWriteOperation[T]) AddDelete(item *T) error {
 		return fmt.Errorf("error calling schema.createKeyMap(): %w", err)
 	}
 
-	b.queue = append(b.queue, batchWriteQueueItem{
-		typ:  batchWriteOpDelete,
+	b.queue = append(b.queue, batchOperation{
+		typ:  batchOperationDelete,
 		item: m,
 	})
 
@@ -90,93 +76,61 @@ func (b *BatchWriteOperation[T]) AddRawDelete(i map[string]types.AttributeValue)
 		return fmt.Errorf("input map is empty")
 	}
 
-	b.queue = append(b.queue, batchWriteQueueItem{
-		typ:  batchWriteOpDelete,
+	b.queue = append(b.queue, batchOperation{
+		typ:  batchOperationDelete,
 		item: i,
 	})
 
 	return nil
 }
 
-// Execute performs the batch write operation for all queued put and delete requests.
-// It sends requests in batches of up to 25 items, and retries unprocessed items until all are written.
-// Returns an error if the table name is not set or if a request fails.
+// tableName returns the DynamoDB table name associated with this batch write operation.
+func (b *BatchWriteOperation[T]) tableName() string {
+	return *b.schema.TableName()
+}
+
+// queueItem returns the queued batch operation at the given offset, if any.
+func (b *BatchWriteOperation[T]) queueItem(offset int) (batchOperation, bool) {
+	if offset >= len(b.queue) {
+		return batchOperation{}, false
+	}
+
+	return b.queue[offset], true
+}
+
+// fromMap satisfies the batcher interface for write operations. It returns nil
+// because BatchWriteItem does not return items that need decoding.
+func (b *BatchWriteOperation[T]) fromMap(_ map[string]types.AttributeValue) (any, error) {
+	return nil, nil
+}
+
+// maxConsecutiveErrors returns the maximum number of allowed consecutive errors
+// before the batch write executor stops processing requests.
+func (b *BatchWriteOperation[T]) maxConsecutiveErrors() uint {
+	return b.table.options.MaxConsecutiveErrors
+}
+
+// Merge creates a new BatchWriteExecutor that combines this batch write
+// operation with additional batchers, allowing multiple tables or queues to be
+// written in a single BatchWriteItem workflow.
+func (b *BatchWriteOperation[T]) Merge(bs ...batcher) *BatchWriteExecutor[any] {
+	return &BatchWriteExecutor[any]{
+		client:   b.client,
+		batchers: append([]batcher{b}, bs...),
+	}
+}
+
+// Execute performs the batch write operation for all queued put and delete
+// requests. It sends requests in batches of up to the maximum BatchWriteItem
+// size and retries unprocessed items until they are written or the
+// executor's maximum consecutive error threshold is reached.
 func (b *BatchWriteOperation[T]) Execute(ctx context.Context, optFns ...func(options *dynamodb.Options)) error {
-	var consecutiveErrors uint = 0
-	var maxConsecutiveErrors = b.table.options.MaxConsecutiveErrors
-	if maxConsecutiveErrors == 0 {
-		maxConsecutiveErrors = DefaultMaxConsecutiveErrors
+	executor := &BatchWriteExecutor[T]{
+		client:   b.client,
+		batchers: []batcher{b},
 	}
 
-	tableName := b.schema.TableName()
-	if tableName == nil {
-		return fmt.Errorf("empty table name, did you forget Schema[T].WithName()?")
-	}
-
-	for len(b.queue) > 0 {
-		pos := min(maxItemsInBatchWrite, len(b.queue))
-		batch := make([]types.WriteRequest, 0, pos)
-
-		ops := b.queue[0:pos]
-		b.queue = b.queue[pos:]
-
-		for _, op := range ops {
-			switch op.typ {
-			case batchWriteOpPut:
-				batch = append(batch, types.WriteRequest{
-					PutRequest: &types.PutRequest{
-						Item: op.item,
-					},
-				})
-			case batchWriteOpDelete:
-				batch = append(batch, types.WriteRequest{
-					DeleteRequest: &types.DeleteRequest{
-						Key: op.item,
-					},
-				})
-			default:
-				return fmt.Errorf("unknown batchWriteOpType: %d", op.typ)
-			}
-		}
-
-		bwii := &dynamodb.BatchWriteItemInput{
-			RequestItems: map[string][]types.WriteRequest{
-				*tableName: batch,
-			},
-		}
-
-		res, err := b.client.BatchWriteItem(ctx, bwii, optFns...)
-		if err != nil {
-			consecutiveErrors++
-
-			if consecutiveErrors >= maxConsecutiveErrors {
-				return err
-			}
-		}
-
-		var unprocessedItems []types.WriteRequest
-		if res != nil && res.UnprocessedItems != nil {
-			unprocessedItems = res.UnprocessedItems[*tableName]
-		} else if err != nil {
-			unprocessedItems = bwii.RequestItems[*tableName]
-		}
-
-		for _, ui := range unprocessedItems {
-			if ui.PutRequest != nil {
-				b.queue = append(b.queue, batchWriteQueueItem{
-					typ:  batchWriteOpPut,
-					item: ui.PutRequest.Item,
-				})
-			} else if ui.DeleteRequest != nil {
-				b.queue = append(b.queue, batchWriteQueueItem{
-					typ:  batchWriteOpDelete,
-					item: ui.DeleteRequest.Key,
-				})
-			}
-		}
-	}
-
-	return nil
+	return executor.Execute(ctx, optFns...)
 }
 
 // NewBatchWriteOperation creates a new BatchWriteOperation for the given table.

@@ -17,7 +17,7 @@ var _ Client = (*mockClient)(nil)
 
 type mockClient struct {
 	TableDescriptions map[string]types.TableDescription
-	Items             []map[string]types.AttributeValue
+	Items             map[string][]map[string]types.AttributeValue
 
 	SetupFns []mockClientSetupFn
 	Expects  []expectFn
@@ -342,14 +342,16 @@ func defaultGetItemCall(client *mockClient, err error) ddbCall[dynamodb.GetItemI
 			return nil, err
 		}
 
-		if len(client.Items) == 0 {
+		tableName := aws.ToString(input.TableName)
+
+		if len(client.Items) == 0 || len(client.Items[tableName]) == 0 {
 			return &dynamodb.GetItemOutput{
 				Item: nil,
 			}, nil
 		}
 
-		item := client.Items[0]
-		client.Items = client.Items[1:]
+		item := client.Items[tableName][0]
+		client.Items[tableName] = client.Items[tableName][1:]
 
 		return &dynamodb.GetItemOutput{
 			Item: item,
@@ -369,7 +371,13 @@ func defaultPutItemCall(client *mockClient, err error) ddbCall[dynamodb.PutItemI
 			return nil, err
 		}
 
-		client.Items = append(client.Items, input.Item)
+		tableName := aws.ToString(input.TableName)
+
+		if client.Items == nil {
+			client.Items = make(map[string][]map[string]types.AttributeValue)
+		}
+
+		client.Items[tableName] = append(client.Items[tableName], input.Item)
 
 		return &dynamodb.PutItemOutput{
 			Attributes: input.Item,
@@ -389,14 +397,16 @@ func defaultDeleteItemCall(client *mockClient, err error) ddbCall[dynamodb.Delet
 			return nil, err
 		}
 
-		if len(client.Items) == 0 {
+		tableName := aws.ToString(input.TableName)
+
+		if len(client.Items) == 0 || len(client.Items[tableName]) == 0 {
 			return &dynamodb.DeleteItemOutput{
 				Attributes: nil,
 			}, nil
 		}
 
-		item := client.Items[0]
-		client.Items = client.Items[1:]
+		item := client.Items[tableName][0]
+		client.Items[tableName] = client.Items[tableName][1:]
 
 		return &dynamodb.DeleteItemOutput{
 			Attributes: item,
@@ -416,6 +426,8 @@ func defaultUpdateItemCall(client *mockClient, err error) ddbCall[dynamodb.Updat
 			return nil, err
 		}
 
+		tableName := aws.ToString(input.TableName)
+
 		item := map[string]types.AttributeValue{}
 		maps.Copy(item, input.Key)
 
@@ -427,7 +439,12 @@ func defaultUpdateItemCall(client *mockClient, err error) ddbCall[dynamodb.Updat
 			item[k] = v
 		}
 
-		client.Items = append(client.Items, item)
+		if client.Items == nil {
+			client.Items = make(map[string][]map[string]types.AttributeValue)
+		}
+
+		// naive implementation; always assume insert since update supports upserts
+		client.Items[tableName] = append(client.Items[tableName], item)
 
 		return &dynamodb.UpdateItemOutput{
 			Attributes: item,
@@ -435,19 +452,19 @@ func defaultUpdateItemCall(client *mockClient, err error) ddbCall[dynamodb.Updat
 	}
 }
 
-func withDefaultBatchGetItemCall(err error, retCount uint, tableName string) mockClientSetupFn {
+func withDefaultBatchGetItemCall(err error, retCounts map[string]uint) mockClientSetupFn {
 	return func(m *mockClient) {
-		m.BatchGetItemCalls = append(m.BatchGetItemCalls, defaultBatchGetItemCall(m, err, retCount, tableName))
+		m.BatchGetItemCalls = append(m.BatchGetItemCalls, defaultBatchGetItemCall(m, err, retCounts))
 	}
 }
 
-func defaultBatchGetItemCall(client *mockClient, err error, retCount uint, tableName string) ddbCall[dynamodb.BatchGetItemInput, dynamodb.BatchGetItemOutput] {
+func defaultBatchGetItemCall(client *mockClient, err error, retCounts map[string]uint) ddbCall[dynamodb.BatchGetItemInput, dynamodb.BatchGetItemOutput] {
 	return func(_ Client, _ context.Context, input *dynamodb.BatchGetItemInput, optFns ...func(*dynamodb.Options)) (*dynamodb.BatchGetItemOutput, error) {
 		if err != nil {
 			return nil, err
 		}
 
-		if retCount == 0 {
+		if len(retCounts) == 0 {
 			return &dynamodb.BatchGetItemOutput{}, nil
 		}
 
@@ -455,20 +472,28 @@ func defaultBatchGetItemCall(client *mockClient, err error, retCount uint, table
 			return nil, errors.New("items have already been exhausted")
 		}
 
-		items := client.Items[0:retCount]
 		out := &dynamodb.BatchGetItemOutput{
-			Responses: map[string][]map[string]types.AttributeValue{
-				tableName: items,
-			},
+			Responses: make(map[string][]map[string]types.AttributeValue),
 		}
 
-		client.Items = client.Items[len(items):]
+		for tableName, retCount := range retCounts {
+			// allow tests to force 0 responses
+			if retCount == 0 {
+				continue
+			}
 
-		if len(client.Items) > 0 {
-			out.UnprocessedKeys = map[string]types.KeysAndAttributes{
-				tableName: {
+			items := client.Items[tableName][0:retCount]
+			client.Items[tableName] = client.Items[tableName][len(items):]
+
+			out.Responses[tableName] = items
+
+			if len(client.Items[tableName]) > 0 {
+				if out.UnprocessedKeys == nil {
+					out.UnprocessedKeys = make(map[string]types.KeysAndAttributes)
+				}
+				out.UnprocessedKeys[tableName] = types.KeysAndAttributes{
 					Keys: input.RequestItems[tableName].Keys[len(items):],
-				},
+				}
 			}
 		}
 
@@ -476,19 +501,19 @@ func defaultBatchGetItemCall(client *mockClient, err error, retCount uint, table
 	}
 }
 
-func withDefaultBatchWriteItemCall(err error, retCount uint, tableName string) mockClientSetupFn {
+func withDefaultBatchWriteItemCall(err error, retCounts map[string]uint) mockClientSetupFn {
 	return func(m *mockClient) {
-		m.BatchWriteItemCalls = append(m.BatchWriteItemCalls, defaultBatchWriteItemCall(m, err, retCount, tableName))
+		m.BatchWriteItemCalls = append(m.BatchWriteItemCalls, defaultBatchWriteItemCall(m, err, retCounts))
 	}
 }
 
-func defaultBatchWriteItemCall(client *mockClient, err error, retCount uint, tableName string) ddbCall[dynamodb.BatchWriteItemInput, dynamodb.BatchWriteItemOutput] {
+func defaultBatchWriteItemCall(client *mockClient, err error, retCounts map[string]uint) ddbCall[dynamodb.BatchWriteItemInput, dynamodb.BatchWriteItemOutput] {
 	return func(_ Client, _ context.Context, input *dynamodb.BatchWriteItemInput, optFns ...func(*dynamodb.Options)) (*dynamodb.BatchWriteItemOutput, error) {
 		if err != nil {
 			return nil, err
 		}
 
-		if retCount == 0 {
+		if len(retCounts) == 0 {
 			return &dynamodb.BatchWriteItemOutput{}, nil
 		}
 
@@ -496,20 +521,34 @@ func defaultBatchWriteItemCall(client *mockClient, err error, retCount uint, tab
 			return nil, errors.New("items have already been exhausted")
 		}
 
-		items := input.RequestItems[tableName][:retCount]
-		for _, i := range items {
-			if i.PutRequest != nil {
-				client.Items = append(client.Items, i.PutRequest.Item)
-			}
-			if i.DeleteRequest != nil {
-				client.Items = client.Items[1:]
-			}
-		}
 		out := &dynamodb.BatchWriteItemOutput{}
 
-		if len(client.Items) > 0 {
-			out.UnprocessedItems = map[string][]types.WriteRequest{
-				tableName: input.RequestItems[tableName][retCount:],
+		for tableName, retCount := range retCounts {
+			// allow tests to force 0 responses
+			if retCount == 0 {
+				continue
+			}
+
+			if len(input.RequestItems[tableName]) < int(retCount) {
+				continue
+			}
+
+			items := input.RequestItems[tableName][:retCount]
+			for _, i := range items {
+				if i.PutRequest != nil {
+					client.Items[tableName] = append(client.Items[tableName], i.PutRequest.Item)
+				}
+				if i.DeleteRequest != nil {
+					client.Items[tableName] = client.Items[tableName][1:]
+				}
+			}
+
+			if len(client.Items[tableName]) > 0 {
+				if out.UnprocessedItems == nil {
+					out.UnprocessedItems = make(map[string][]types.WriteRequest)
+				}
+
+				out.UnprocessedItems[tableName] = input.RequestItems[tableName][retCount:]
 			}
 		}
 
@@ -537,12 +576,14 @@ func defaultScanCall(client *mockClient, err error, retCount uint) ddbCall[dynam
 			return nil, errors.New("items have already been exhausted")
 		}
 
-		items := client.Items[0:retCount]
+		tableName := aws.ToString(input.TableName)
+
+		items := client.Items[tableName][0:retCount]
 		out := &dynamodb.ScanOutput{
 			Items: items,
 		}
 
-		client.Items = client.Items[len(items):]
+		client.Items[tableName] = client.Items[tableName][len(items):]
 
 		if len(client.Items) > 0 {
 			out.LastEvaluatedKey = items[len(items)-1]
@@ -572,12 +613,14 @@ func defaultQueryCall(client *mockClient, err error, retCount uint) ddbCall[dyna
 			return nil, errors.New("items have already been exhausted")
 		}
 
-		items := client.Items[0:retCount]
+		tableName := aws.ToString(input.TableName)
+
+		items := client.Items[tableName][0:retCount]
 		out := &dynamodb.QueryOutput{
 			Items: items,
 		}
 
-		client.Items = client.Items[len(items):]
+		client.Items[tableName] = client.Items[tableName][len(items):]
 
 		if len(client.Items) > 0 {
 			out.LastEvaluatedKey = items[len(items)-1]
@@ -587,16 +630,24 @@ func defaultQueryCall(client *mockClient, err error, retCount uint) ddbCall[dyna
 	}
 }
 
-func withItem(item map[string]types.AttributeValue) mockClientSetupFn {
+func withItem(tableName string, item map[string]types.AttributeValue) mockClientSetupFn {
 	return func(m *mockClient) {
-		m.Items = append(m.Items, item)
+		if m.Items == nil {
+			m.Items = make(map[string][]map[string]types.AttributeValue)
+		}
+
+		m.Items[tableName] = append(m.Items[tableName], item)
 	}
 }
 
-func withItems(generator func() map[string]types.AttributeValue, count uint) mockClientSetupFn {
+func withItems(tableName string, generator func() map[string]types.AttributeValue, count uint) mockClientSetupFn {
 	return func(m *mockClient) {
+		if m.Items == nil {
+			m.Items = make(map[string][]map[string]types.AttributeValue)
+		}
+
 		for i := count; i > 0; i-- {
-			m.Items = append(m.Items, generator())
+			m.Items[tableName] = append(m.Items[tableName], generator())
 		}
 	}
 }
@@ -629,10 +680,10 @@ func expectTable(tableName string) expectFn {
 	}
 }
 
-func expectItemsCount(c uint) expectFn {
+func expectItemsCount(tableName string, c uint) expectFn {
 	return func(t *testing.T, m *mockClient) error {
-		if len(m.Items) != int(c) {
-			return fmt.Errorf("expected %d items, but found %d", c, len(m.Items))
+		if len(m.Items[tableName]) != int(c) {
+			return fmt.Errorf("expected %d items, but found %d", c, len(m.Items[tableName]))
 		}
 
 		return nil

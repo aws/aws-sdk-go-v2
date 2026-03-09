@@ -35,7 +35,9 @@ func (s *Schema[T]) resolveTableName() error {
 		return fmt.Errorf("resolveTableName() expected the type to be a struct or struct pointer, got: %V", reflect.New(s.typ).Interface())
 	}
 
-	s.tableName = pointer(r.Name())
+	if s.tableName == nil {
+		s.tableName = pointer(r.Name())
+	}
 
 	return nil
 }

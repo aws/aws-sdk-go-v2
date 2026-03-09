@@ -34,17 +34,26 @@ type Product struct {
 }
 
 // default usage
-table := entitymanager.NewTable[Product](client)
+table, err := entitymanager.NewTable[Product](client)
+if err != nil {
+    // handle error
+}
 
 // customized schema options
-schema := entitymanager.NewSchema[Product]()
+schema, err := entitymanager.NewSchema[Product]()
+if err != nil {
+    // handle error
+}
 schema = schema.WithProvisionedThroughput(&types.ProvisionedThroughput{
 		ReadCapacityUnits:  5,
 		WriteCapacityUnits: 5,
 })
 schema = schema.WithTableClass(types.TableClassStandardInfrequentAccess)
 schema = schema.WithTags([]types.Tag{{Key: aws.String("env"), Value: aws.String("prod")}})
-table := entitymanager.NewTable(client, entitymanager.WithSchema(schema))
+table, err = entitymanager.NewTable[Product](client, entitymanager.WithSchema(schema))
+if err != nil {
+    // handle error
+}
 ```
 
 The `Table[T]` type provides a high-level, type-safe interface for managing DynamoDB tables. It abstracts away much of the boilerplate required for table lifecycle management, making it easier to work with DynamoDB in Go.
@@ -60,8 +69,6 @@ The `Table[T]` type provides a high-level, type-safe interface for managing Dyna
 
 These features allow you to manage the full lifecycle of your DynamoDB tables in a concise, idiomatic Go style, while leveraging the full power of DynamoDB's management capabilities.
 
-> **Note:** Only table level scans are supported at the moment.
-
 > **Note:** Table schema updates (such as adding or modifying attributes, indexes, or throughput settings after table creation) are not supported at this time. Only the table management functions listed above are available. Support for table updates is planned for a future release.
 
 ## Item Operations
@@ -76,10 +83,10 @@ The `Table[T]` type provides a set of strongly-typed methods for common item-lev
 - `UpdateItem(ctx, item, ...) (*T, error)`: Update an existing item, using the struct as the source of changes.
 - `DeleteItem(ctx, item, ...) error`: Delete an item by providing the struct value.
 - `DeleteItemByKey(ctx, key, ...) error`: Delete an item by its key.
-- `Scan(ctx, expr, ...) iter.Seq[ItemResult[T]]`: Scan the table with a filter expression, returning an iterator over results.
-- `ScanIndex(ctx, indexName, expr, ...) iter.Seq[ItemResult[T]]`: Scan the index with a filter expression, returning an iterator over results.
-- `Query(ctx, expr, ...) iter.Seq[ItemResult[T]]`: Query the table or an index using a key condition expression, returning an iterator over results.
-- `QueryIndex(ctx, indexName, expr, ...) iter.Seq[ItemResult[T]]`: Query the index or an index using a key condition expression, returning an iterator over results.
+- `Scan(ctx, expr, ...) iter.Seq[ItemResult[*T]]`: Scan the table with a filter expression, returning an iterator over results.
+- `ScanIndex(ctx, indexName, expr, ...) iter.Seq[ItemResult[*T]]`: Scan the index with a filter expression, returning an iterator over results.
+- `Query(ctx, expr, ...) iter.Seq[ItemResult[*T]]`: Query the table or an index using a key condition expression, returning an iterator over results.
+- `QueryIndex(ctx, indexName, expr, ...) iter.Seq[ItemResult[*T]]`: Query the index or an index using a key condition expression, returning an iterator over results.
 
 **Batch operations:**
 
@@ -87,10 +94,12 @@ The `Table[T]` type provides a set of strongly-typed methods for common item-lev
     - Use `AddPut(item *T)` or `AddRawPut(map[string]types.AttributeValue)` to queue items for writing.
     - Use `AddDelete(item *T)` or `AddRawDelete(map[string]types.AttributeValue)` to queue items for deletion.
     - Call `Execute(ctx, ...)` to perform the batch write.
+    - Use `Merge(otherBatchers...)` on a `BatchWriteOperation` to create a `BatchWriteExecutor` that can write to multiple tables in a single coordinated workflow.
 
 - `CreateBatchGetOperation() *BatchGetOperation[T]`: Returns a new batch get operation, allowing you to queue multiple keys for retrieval and execute them in a single batch request. Handles chunking, retries for unprocessed keys, and respects DynamoDB's batch size limits.
     - Use `AddReadItem(item *T)` or `AddReadItemByMap(map[string]types.AttributeValue)` to queue keys for retrieval.
     - Call `Execute(ctx, ...)` to perform the batch get, which yields results as an iterator.
+    - Use `Merge(otherBatchers...)` on a `BatchGetOperation` to create a `BatchGetExecutor` that can read from multiple tables in a single `BatchGetItem` workflow.
 
 Batch operations are useful for efficiently processing large numbers of items, minimizing network calls, and handling DynamoDB's batch constraints automatically.
 
@@ -98,13 +107,13 @@ These methods are designed to be ergonomic and safe, leveraging Go's type system
 
 **Iterators and ItemResult:**
 
-Many methods, such as `Scan`, `Query`, and `BatchGetOperation.Execute`, return an iterator in the form of an `iter.Seq[ItemResult[T]]`, which is a function that accepts a callback. Each callback invocation receives an `ItemResult[T]` containing either a successfully decoded item or an error encountered during retrieval or decoding.
+Many methods, such as `Scan`, `Query`, and `BatchGetOperation.Execute`, return an iterator in the form of an `iter.Seq[ItemResult[*T]]`, which is a function that accepts a callback. Each callback invocation receives an `ItemResult[*T]` containing either a successfully decoded item (accessible via `Item()`) or an error encountered during retrieval or decoding (accessible via `Error()`). For batch operations that may span multiple tables, `ItemResult` also exposes a `Table()` method that returns the source table name for the item.
 
 When consuming these iterators, use the callback or range pattern and always check the `Error()` method on each result before using the item:
 
 ```go
 // Callback-based iteration (idiomatic for iter.Seq):
-table.Scan(ctx, expr, ...)(func(result ItemResult[T]) bool {
+table.Scan(ctx, expr, ...)(func(result ItemResult[*T]) bool {
 		if err := result.Error(); err != nil {
 				// handle error, e.g. log or collect
 				return true // continue to next result
@@ -125,6 +134,74 @@ for res := range table.Scan(ctx, expr, ...) {
 ```
 
 This pattern ensures robust error handling and makes it easy to process large result sets efficiently and safely.
+
+### Advanced: merged batch operations
+
+You can merge batch operations from multiple tables and execute them together. This is useful when you want to minimize network calls and still keep type-safe table APIs.
+
+**Merged BatchGetOperation (multi-table read):**
+
+```go
+ordersTable, _ := entitymanager.NewTable[Order](client)
+customersTable, _ := entitymanager.NewTable[Customer](client)
+
+ordersBatch := ordersTable.CreateBatchGetOperation()
+customersBatch := customersTable.CreateBatchGetOperation()
+
+// queue keys for both tables
+for _, key := range orderKeys {
+    _ = ordersBatch.AddReadItemByMap(key)
+}
+for _, key := range customerKeys {
+    _ = customersBatch.AddReadItemByMap(key)
+}
+
+// merge into a single executor
+executor := ordersBatch.Merge(customersBatch)
+
+for res := range executor.Execute(ctx) { // iter.Seq[ItemResult[any]]
+    if err := res.Error(); err != nil {
+        // handle error
+        continue
+    }
+
+    switch res.Table() {
+    case "orders":
+        order := res.Item().(*Order)
+        // process order
+    case "customers":
+        customer := res.Item().(*Customer)
+        // process customer
+    }
+}
+```
+
+**Merged BatchWriteOperation (multi-table write):**
+
+```go
+ordersTable, _ := entitymanager.NewTable[Order](client)
+customersTable, _ := entitymanager.NewTable[Customer](client)
+
+ordersBatch := ordersTable.CreateBatchWriteOperation()
+customersBatch := customersTable.CreateBatchWriteOperation()
+
+// queue writes for both tables
+for _, o := range ordersToUpsert {
+    _ = ordersBatch.AddPut(&o)
+}
+for _, c := range customersToDelete {
+    _ = customersBatch.AddDelete(&c)
+}
+
+// merge and execute in a single workflow
+executor := ordersBatch.Merge(customersBatch)
+
+if err := executor.Execute(ctx); err != nil {
+    // handle error
+}
+```
+
+In these advanced scenarios, the merge APIs (`Merge`) let you coordinate multi-table operations while still using the high-level, type-safe table abstractions provided by this package. Due to Go generics limitations, merged executors always return `ItemResult[any]`, so you must type-assert each item, typically by switching on `res.Table()` and then asserting the concrete type of `res.Item()`.
 
 ## Extensions
 
@@ -255,20 +332,29 @@ The default extension registry includes several built-in extensions that provide
     - **How it works:**
         - Fields with the `version` tag option are checked and incremented on each write. If the version in the database does not match the expected value, the write fails, preventing lost updates.
 
-These extensions are automatically included when you use `DefaultExtensionRegistry`:
+These extensions are automatically included by default via `DefaultExtensionRegistry` when you create a new table, but you can still override or customize the registry if needed:
 
 ```go
-table := entitymanager.NewTable[Product](
+table, err := entitymanager.NewTable[Product](client)
+if err != nil {
+    // handle error
+}
+
+// or customize the registry explicitly
+table, err := entitymanager.NewTable[Product](
     client,
     entitymanager.WithExtensionRegistry(
         entitymanager.DefaultExtensionRegistry[Product](),
     ),
 )
+if err != nil {
+    // handle error
+}
 ```
 
 You can also clone and customize the registry to add or remove extensions as needed for your application.
 
-**Note:** Because extensions can modify how your data is processed, the extension registry is not enabled by default. Enable it explicitly if you want to use these features.
+**Note:** Because extensions can modify how your data is processed, they are enabled by default via `DefaultExtensionRegistry`. If you need different behavior, provide a custom registry with `WithExtensionRegistry` when creating the table.
 
 ## Custom converters
 
@@ -312,9 +398,12 @@ my_registry := converters.NewRegistry()
 // register converter
 my_registry.Add("my_custom_converter", &MyCustomConverter{})
 
-schema := entitymanager.NewSchema[MyStruct]func(options *SchemaOptions) {
+schema, err := entitymanager.NewSchema[MyStruct](func(options *entitymanager.SchemaOptions) {
     options.ConverterRegistry = my_registry
 })
+if err != nil {
+    // handle error
+}
 
 // add it to the struct
 type MyStruct struct {
@@ -336,6 +425,7 @@ import (
     "time"
 
     "github.com/aws/aws-sdk-go-v2/config"
+    "github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression"
     "github.com/aws/aws-sdk-go-v2/service/dynamodb"
     "github.com/aws/aws-sdk-go-v2/feature/dynamodb/entitymanager"
 )
@@ -378,8 +468,13 @@ func main() {
     }
     log.Printf("Got item: %+v", got)
 
-    // Scan all items
-    for res := range table.Scan(context.Background(), entitymanager.ScanExpression{}) {
+    // Scan all items (no additional filter in this example)
+    expr, err := expression.NewBuilder().Build()
+    if err != nil {
+        log.Fatalf("failed to build scan expression: %v", err)
+    }
+
+    for res := range table.Scan(context.Background(), expr) {
         if err := res.Error(); err != nil {
             log.Printf("scan error: %v", err)
             continue

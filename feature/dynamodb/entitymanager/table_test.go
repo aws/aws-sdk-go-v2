@@ -29,7 +29,7 @@ func (a *MyAuditExtension) AfterRead(ctx context.Context, v *order) error {
 }
 
 func TestTableE2E(t *testing.T) {
-	t.Parallel() // Safe to run in parallel if table names are unique
+	t.Parallel()
 
 	// Constants for test configuration
 	const (

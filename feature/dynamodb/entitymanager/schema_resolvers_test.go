@@ -377,7 +377,7 @@ func TestResolveSecondaryIndexes(t *testing.T) {
 					},
 				},
 			},
-			expectedLSIs: []types.LocalSecondaryIndex{},
+			expectedLSIs: []types.LocalSecondaryIndex(nil),
 			expectedGSIs: []types.GlobalSecondaryIndex{
 				{
 					IndexName: pointer("gsi1"),
