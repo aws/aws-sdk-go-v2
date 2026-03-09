@@ -1,8 +1,0 @@
-{
-    "id": "11043d92-79b1-462e-9a66-792c5e39452c",
-    "type": "feature",
-    "description": "This change enables cross-account and cross-region access for DataSources. Customers can now define access policies on their datasources to allow other AWS accounts to access and query their data.",
-    "modules": [
-        "service/opensearch"
-    ]
-}

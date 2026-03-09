@@ -1,3 +1,15 @@
+# Release (2026-03-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.53.5](service/iam/CHANGELOG.md#v1535-2026-03-09)
+  * **Documentation**: Added support for CloudWatch Logs long-term API keys, currently available in Preview
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.40.0](service/mgn/CHANGELOG.md#v1400-2026-03-09)
+  * **Feature**: Adds support for new storeSnapshotOnLocalZone field in ReplicationConfiguration and updateReplicationConfiguration
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.60.0](service/opensearch/CHANGELOG.md#v1600-2026-03-09)
+  * **Feature**: This change enables cross-account and cross-region access for DataSources. Customers can now define access policies on their datasources to allow other AWS accounts to access and query their data.
+* `github.com/aws/aws-sdk-go-v2/service/route53globalresolver`: [v1.1.0](service/route53globalresolver/CHANGELOG.md#v110-2026-03-09)
+  * **Feature**: Adds support for dual stack Global Resolvers and Dictionary-based Domain Generation Firewall Advanced Protection.
+
 # Release (2026-03-06)
 
 ## Module Highlights

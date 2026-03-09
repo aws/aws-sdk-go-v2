@@ -1,3 +1,7 @@
+# v1.40.0 (2026-03-09)
+
+* **Feature**: Adds support for new storeSnapshotOnLocalZone field in ReplicationConfiguration and updateReplicationConfiguration
+
 # v1.39.3 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

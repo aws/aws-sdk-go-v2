@@ -1,8 +1,0 @@
-{
-    "id": "1dc64de9-cca9-4456-85a7-ef7e7d27e402",
-    "type": "feature",
-    "description": "Adds support for dual stack Global Resolvers and Dictionary-based Domain Generation Firewall Advanced Protection.",
-    "modules": [
-        "service/route53globalresolver"
-    ]
-}
