@@ -4076,6 +4076,12 @@ func awsRestjson1_serializeDocumentBooleanCondition(v types.BooleanCondition, va
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.BooleanConditionMemberAndAll:
+		av := object.Key("andAll")
+		if err := awsRestjson1_serializeDocumentCompoundCondition(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.BooleanConditionMemberEqualTo:
 		av := object.Key("equalTo")
 		if err := awsRestjson1_serializeDocumentBooleanOperands(&uv.Value, av); err != nil {
@@ -4085,6 +4091,12 @@ func awsRestjson1_serializeDocumentBooleanCondition(v types.BooleanCondition, va
 	case *types.BooleanConditionMemberNotEqualTo:
 		av := object.Key("notEqualTo")
 		if err := awsRestjson1_serializeDocumentBooleanOperands(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.BooleanConditionMemberOrAll:
+		av := object.Key("orAll")
+		if err := awsRestjson1_serializeDocumentCompoundCondition(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4295,6 +4307,20 @@ func awsRestjson1_serializeDocumentCommentContent(v *types.CommentContent, value
 func awsRestjson1_serializeDocumentCommentFilter(v *types.CommentFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompoundCondition(v *types.CompoundCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Conditions != nil {
+		ok := object.Key("conditions")
+		if err := awsRestjson1_serializeDocumentBooleanConditionList(v.Conditions, ok); err != nil {
+			return err
+		}
+	}
 
 	return nil
 }

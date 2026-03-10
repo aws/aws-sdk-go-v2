@@ -1046,6 +1046,7 @@ const (
 	ServerProtocolMcp  ServerProtocol = "MCP"
 	ServerProtocolHttp ServerProtocol = "HTTP"
 	ServerProtocolA2a  ServerProtocol = "A2A"
+	ServerProtocolAgui ServerProtocol = "AGUI"
 )
 
 // Values returns all known values for ServerProtocol. Note that this can be
@@ -1057,6 +1058,7 @@ func (ServerProtocol) Values() []ServerProtocol {
 		"MCP",
 		"HTTP",
 		"A2A",
+		"AGUI",
 	}
 }
 

@@ -1479,6 +1479,55 @@ type BotAliasTestExecutionTarget struct {
 	noSmithyDocumentSerde
 }
 
+// Contains summary information about a historical bot analysis execution.
+type BotAnalyzerHistorySummary struct {
+
+	// The unique identifier for the analysis request.
+	//
+	// This member is required.
+	BotAnalyzerRequestId *string
+
+	// The status of the historical analysis execution.
+	//
+	// Valid Values: Processing | Available | Failed | Stopping | Stopped
+	//
+	// This member is required.
+	BotAnalyzerStatus BotAnalyzerStatus
+
+	// The date and time when the analysis was initiated.
+	CreationDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains a recommendation for bot optimization identified by the Bot Analyzer.
+type BotAnalyzerRecommendation struct {
+
+	// A detailed description of the identified configuration issue.
+	//
+	// This member is required.
+	IssueDescription *string
+
+	// The location information for the identified issue within the bot configuration.
+	//
+	// This member is required.
+	IssueLocation *IssueLocation
+
+	// The priority level of the recommendation.
+	//
+	// Valid Values: High | Medium | Low
+	//
+	// This member is required.
+	Priority Priority
+
+	// The recommended solution to address the identified issue.
+	//
+	// This member is required.
+	ProposedFix *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides the identity of a the bot that was exported.
 type BotExportSpecification struct {
 
@@ -3534,6 +3583,21 @@ type InvokedIntentSample struct {
 
 	// The name of an intent that was invoked.
 	IntentName *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the location of an identified issue within the bot configuration.
+type IssueLocation struct {
+
+	// The locale identifier where the issue was found.
+	BotLocale *string
+
+	// The intent identifier where the issue was found, if applicable.
+	IntentId *string
+
+	// The slot identifier where the issue was found, if applicable.
+	SlotId *string
 
 	noSmithyDocumentSerde
 }

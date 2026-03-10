@@ -1,0 +1,8 @@
+{
+    "id": "f39425e1-8825-4b90-b324-56f9e3c14ac3",
+    "type": "feature",
+    "description": "Adding first class support for AG-UI protocol in AgentCore Runtime.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

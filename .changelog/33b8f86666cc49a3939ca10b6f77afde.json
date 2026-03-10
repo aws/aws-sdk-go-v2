@@ -1,0 +1,8 @@
+{
+    "id": "33b8f866-66cc-49a3-939c-a10b6f77afde",
+    "type": "documentation",
+    "description": "Not need to include to any release notes. The only change is to correct LoadTimeout unit from milliseconds to seconds in RedshiftSettings",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

@@ -3546,7 +3546,7 @@ type RedshiftSettings struct {
 	// [Multipart upload overview]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
 	FileTransferUploadStreams *int32
 
-	// The amount of time to wait (in milliseconds) before timing out of operations
+	// The amount of time to wait (in seconds) before timing out of operations
 	// performed by DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE,
 	// and UPDATE.
 	LoadTimeout *int32

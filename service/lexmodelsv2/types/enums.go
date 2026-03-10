@@ -60,6 +60,23 @@ func (AggregatedUtterancesSortAttribute) Values() []AggregatedUtterancesSortAttr
 	}
 }
 
+type AnalysisScope string
+
+// Enum values for AnalysisScope
+const (
+	AnalysisScopeBotLocale AnalysisScope = "BotLocale"
+)
+
+// Values returns all known values for AnalysisScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisScope) Values() []AnalysisScope {
+	return []AnalysisScope{
+		"BotLocale",
+	}
+}
+
 type AnalyticsBinByName string
 
 // Enum values for AnalyticsBinByName
@@ -721,6 +738,31 @@ func (BotAliasStatus) Values() []BotAliasStatus {
 		"Available",
 		"Deleting",
 		"Failed",
+	}
+}
+
+type BotAnalyzerStatus string
+
+// Enum values for BotAnalyzerStatus
+const (
+	BotAnalyzerStatusProcessing BotAnalyzerStatus = "Processing"
+	BotAnalyzerStatusAvailable  BotAnalyzerStatus = "Available"
+	BotAnalyzerStatusFailed     BotAnalyzerStatus = "Failed"
+	BotAnalyzerStatusStopping   BotAnalyzerStatus = "Stopping"
+	BotAnalyzerStatusStopped    BotAnalyzerStatus = "Stopped"
+)
+
+// Values returns all known values for BotAnalyzerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BotAnalyzerStatus) Values() []BotAnalyzerStatus {
+	return []BotAnalyzerStatus{
+		"Processing",
+		"Available",
+		"Failed",
+		"Stopping",
+		"Stopped",
 	}
 }
 
@@ -1581,6 +1623,27 @@ func (ObfuscationSettingType) Values() []ObfuscationSettingType {
 	return []ObfuscationSettingType{
 		"None",
 		"DefaultObfuscation",
+	}
+}
+
+type Priority string
+
+// Enum values for Priority
+const (
+	PriorityHigh   Priority = "High"
+	PriorityMedium Priority = "Medium"
+	PriorityLow    Priority = "Low"
+)
+
+// Values returns all known values for Priority. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Priority) Values() []Priority {
+	return []Priority{
+		"High",
+		"Medium",
+		"Low",
 	}
 }
 

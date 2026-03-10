@@ -7399,6 +7399,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "andAll":
+			var mv types.CompoundCondition
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCompoundCondition(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.BooleanConditionMemberAndAll{Value: mv}
+			break loop
+
 		case "equalTo":
 			var mv types.BooleanOperands
 			destAddr := &mv
@@ -7417,6 +7427,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.BooleanConditionMemberNotEqualTo{Value: mv}
+			break loop
+
+		case "orAll":
+			var mv types.CompoundCondition
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCompoundCondition(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.BooleanConditionMemberOrAll{Value: mv}
 			break loop
 
 		default:
@@ -7896,6 +7916,42 @@ func awsRestjson1_deserializeDocumentCommentContent(v **types.CommentContent, va
 					return fmt.Errorf("expected CommentBodyTextType to be of type string, got %T instead", value)
 				}
 				sv.ContentType = types.CommentBodyTextType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCompoundCondition(v **types.CompoundCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CompoundCondition
+	if *v == nil {
+		sv = &types.CompoundCondition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "conditions":
+			if err := awsRestjson1_deserializeDocumentBooleanConditionList(&sv.Conditions, value); err != nil {
+				return err
 			}
 
 		default:

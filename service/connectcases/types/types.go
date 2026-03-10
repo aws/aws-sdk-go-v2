@@ -155,13 +155,25 @@ type BasicLayout struct {
 //
 // The following types satisfy this interface:
 //
+//	BooleanConditionMemberAndAll
 //	BooleanConditionMemberEqualTo
 //	BooleanConditionMemberNotEqualTo
+//	BooleanConditionMemberOrAll
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
 type BooleanCondition interface {
 	isBooleanCondition()
 }
+
+// Combines multiple conditions with AND operator. All conditions must be true for
+// the compound condition to be true.
+type BooleanConditionMemberAndAll struct {
+	Value CompoundCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*BooleanConditionMemberAndAll) isBooleanCondition() {}
 
 // Tests that operandOne is equal to operandTwo.
 type BooleanConditionMemberEqualTo struct {
@@ -180,6 +192,16 @@ type BooleanConditionMemberNotEqualTo struct {
 }
 
 func (*BooleanConditionMemberNotEqualTo) isBooleanCondition() {}
+
+// Combines multiple conditions with OR operator. At least one condition must be
+// true for the compound condition to be true.
+type BooleanConditionMemberOrAll struct {
+	Value CompoundCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*BooleanConditionMemberOrAll) isBooleanCondition() {}
 
 // Boolean operands for a condition. In the Amazon Connect admin website, case
 // rules are known as case field conditions. For more information about case field
@@ -419,6 +441,21 @@ type CommentContent struct {
 
 // A filter for related items of type Comment .
 type CommentFilter struct {
+	noSmithyDocumentSerde
+}
+
+// A compound condition that combines multiple boolean conditions using logical
+// operators. In the Amazon Connect admin website, case rules are known as case
+// field conditions. For more information about case field conditions, see [Add case field conditions to a case template].
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type CompoundCondition struct {
+
+	// The list of conditions to combine using the logical operator.
+	//
+	// This member is required.
+	Conditions []BooleanCondition
+
 	noSmithyDocumentSerde
 }
 

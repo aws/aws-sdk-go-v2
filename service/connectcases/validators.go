@@ -1039,6 +1039,11 @@ func validateBooleanCondition(v types.BooleanCondition) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BooleanCondition"}
 	switch uv := v.(type) {
+	case *types.BooleanConditionMemberAndAll:
+		if err := validateCompoundCondition(&uv.Value); err != nil {
+			invalidParams.AddNested("[andAll]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.BooleanConditionMemberEqualTo:
 		if err := validateBooleanOperands(&uv.Value); err != nil {
 			invalidParams.AddNested("[equalTo]", err.(smithy.InvalidParamsError))
@@ -1047,6 +1052,11 @@ func validateBooleanCondition(v types.BooleanCondition) error {
 	case *types.BooleanConditionMemberNotEqualTo:
 		if err := validateBooleanOperands(&uv.Value); err != nil {
 			invalidParams.AddNested("[notEqualTo]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BooleanConditionMemberOrAll:
+		if err := validateCompoundCondition(&uv.Value); err != nil {
+			invalidParams.AddNested("[orAll]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1236,6 +1246,25 @@ func validateCommentContent(v *types.CommentContent) error {
 	}
 	if len(v.ContentType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCompoundCondition(v *types.CompoundCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompoundCondition"}
+	if v.Conditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Conditions"))
+	} else if v.Conditions != nil {
+		if err := validateBooleanConditionList(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

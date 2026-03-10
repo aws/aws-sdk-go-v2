@@ -290,6 +290,18 @@ func TestCheckSnapshot_DeleteBotAlias(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteBotAnalyzerRecommendation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBotAnalyzerRecommendation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteBotAnalyzerRecommendation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteBotLocale(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBotLocale(context.Background(), nil, func(o *Options) {
@@ -463,6 +475,18 @@ func TestCheckSnapshot_DescribeBotAlias(t *testing.T) {
 	_, err := svc.DescribeBotAlias(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeBotAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeBotAnalyzerRecommendation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBotAnalyzerRecommendation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeBotAnalyzerRecommendation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -715,6 +739,18 @@ func TestCheckSnapshot_ListBotAliasReplicas(t *testing.T) {
 	_, err := svc.ListBotAliasReplicas(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListBotAliasReplicas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListBotAnalyzerHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBotAnalyzerHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBotAnalyzerHistory")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1070,6 +1106,18 @@ func TestCheckSnapshot_SearchAssociatedTranscripts(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartBotAnalyzer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartBotAnalyzer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartBotAnalyzer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartBotRecommendation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartBotRecommendation(context.Background(), nil, func(o *Options) {
@@ -1123,6 +1171,18 @@ func TestCheckSnapshot_StartTestSetGeneration(t *testing.T) {
 	_, err := svc.StartTestSetGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartTestSetGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopBotAnalyzer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopBotAnalyzer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopBotAnalyzer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1513,6 +1573,18 @@ func TestUpdateSnapshot_DeleteBotAlias(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteBotAnalyzerRecommendation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBotAnalyzerRecommendation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteBotAnalyzerRecommendation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteBotLocale(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBotLocale(context.Background(), nil, func(o *Options) {
@@ -1686,6 +1758,18 @@ func TestUpdateSnapshot_DescribeBotAlias(t *testing.T) {
 	_, err := svc.DescribeBotAlias(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeBotAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeBotAnalyzerRecommendation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBotAnalyzerRecommendation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeBotAnalyzerRecommendation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1938,6 +2022,18 @@ func TestUpdateSnapshot_ListBotAliasReplicas(t *testing.T) {
 	_, err := svc.ListBotAliasReplicas(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBotAliasReplicas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBotAnalyzerHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBotAnalyzerHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBotAnalyzerHistory")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2293,6 +2389,18 @@ func TestUpdateSnapshot_SearchAssociatedTranscripts(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartBotAnalyzer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartBotAnalyzer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartBotAnalyzer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartBotRecommendation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartBotRecommendation(context.Background(), nil, func(o *Options) {
@@ -2346,6 +2454,18 @@ func TestUpdateSnapshot_StartTestSetGeneration(t *testing.T) {
 	_, err := svc.StartTestSetGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartTestSetGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopBotAnalyzer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopBotAnalyzer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopBotAnalyzer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

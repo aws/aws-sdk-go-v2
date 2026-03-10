@@ -44,11 +44,17 @@ func ExampleBooleanCondition_outputUsage() {
 	var union types.BooleanCondition
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.BooleanConditionMemberAndAll:
+		_ = v.Value // Value is types.CompoundCondition
+
 	case *types.BooleanConditionMemberEqualTo:
 		_ = v.Value // Value is types.BooleanOperands
 
 	case *types.BooleanConditionMemberNotEqualTo:
 		_ = v.Value // Value is types.BooleanOperands
+
+	case *types.BooleanConditionMemberOrAll:
+		_ = v.Value // Value is types.CompoundCondition
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -60,6 +66,7 @@ func ExampleBooleanCondition_outputUsage() {
 }
 
 var _ *types.BooleanOperands
+var _ *types.CompoundCondition
 
 func ExampleCaseFilter_outputUsage() {
 	var union types.CaseFilter

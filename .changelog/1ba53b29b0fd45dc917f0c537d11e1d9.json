@@ -1,0 +1,8 @@
+{
+    "id": "1ba53b29-b0fd-45dc-917f-0c537d11e1d9",
+    "type": "feature",
+    "description": "Add dual stack endpoint to SDK",
+    "modules": [
+        "service/kafka"
+    ]
+}

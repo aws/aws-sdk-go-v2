@@ -1,0 +1,8 @@
+{
+    "id": "2f61886d-f8dc-4899-a643-a1f69e110f57",
+    "type": "feature",
+    "description": "Added functionality for the Required and Hidden case rule types to be conditionally evaluated on up to 5 conditions.",
+    "modules": [
+        "service/connectcases"
+    ]
+}
