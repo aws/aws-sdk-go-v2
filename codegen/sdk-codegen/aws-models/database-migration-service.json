@@ -16412,7 +16412,7 @@
                 "LoadTimeout": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time to wait (in milliseconds) before timing out of operations performed\n         by DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE, and UPDATE.</p>"
+                        "smithy.api#documentation": "<p>The amount of time to wait (in seconds) before timing out of operations performed\n         by DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE, and UPDATE.</p>"
                     }
                 },
                 "MaxFileSize": {

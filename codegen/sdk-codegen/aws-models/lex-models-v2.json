@@ -320,6 +320,20 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#AnalysisScope": {
+            "type": "enum",
+            "members": {
+                "BotLocale": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotLocale"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scope of analysis to perform on the bot.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotLocale</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#AnalyticsBinByList": {
             "type": "list",
             "member": {
@@ -3098,6 +3112,120 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The target Amazon S3 location for the test set execution using a bot alias.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAnalyzerHistoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#BotAnalyzerHistorySummary"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAnalyzerHistorySummary": {
+            "type": "structure",
+            "members": {
+                "botAnalyzerStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the historical analysis execution.</p>\n         <p>Valid Values: <code>Processing | Available | Failed | Stopping | Stopped</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the analysis was initiated.</p>"
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the analysis request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a historical bot analysis execution.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAnalyzerRecommendation": {
+            "type": "structure",
+            "members": {
+                "issueLocation": {
+                    "target": "com.amazonaws.lexmodelsv2#IssueLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location information for the identified issue within the bot configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "priority": {
+                    "target": "com.amazonaws.lexmodelsv2#Priority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority level of the recommendation.</p>\n         <p>Valid Values: <code>High | Medium | Low</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "issueDescription": {
+                    "target": "com.amazonaws.lexmodelsv2#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description of the identified configuration issue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "proposedFix": {
+                    "target": "com.amazonaws.lexmodelsv2#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended solution to address the identified issue.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a recommendation for bot optimization identified by the Bot Analyzer.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAnalyzerRecommendationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#BotAnalyzerRecommendation"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAnalyzerStatus": {
+            "type": "enum",
+            "members": {
+                "Processing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Processing"
+                    }
+                },
+                "Available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Available"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Stopping": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopping"
+                    }
+                },
+                "Stopped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the bot analysis execution.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Processing</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Available</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Stopping</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Stopped</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotExportSpecification": {
@@ -7483,6 +7611,68 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Permanently deletes the recommendations and analysis results for a specific bot analysis request. This operation is provided for GDPR compliance and cannot be undone.</p>\n         <p>After deletion, the analysis results cannot be retrieved. The analysis request ID will still appear in the history list, but attempting to describe the recommendations will return a <code>ResourceNotFoundException</code>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/bots/{botId}/botanalyzer/{botAnalyzerRequestId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendationRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis request whose recommendations should be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lexmodelsv2#DeleteBotLocale": {
             "type": "operation",
             "input": {
@@ -8839,6 +9029,129 @@
                     "target": "com.amazonaws.lexmodelsv2#ParentBotNetworks",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the networks to which the bot alias you described belongs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the analysis results and recommendations for bot optimization. The analysis must be in <code>Available</code> status before recommendations can be retrieved.</p>\n         <p>Recommendations are returned with pagination support. Each recommendation includes the issue location, priority level, detailed description, and proposed fix.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botanalyzer/describe/{botAnalyzerRequestId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "botAnalyzerRecommendationList",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendationRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from a previous request was truncated, the <code>nextToken</code> value is used to retrieve the next page of recommendations.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of recommendations to return in the response. The default is 5.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendationResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that was analyzed.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot locale that was analyzed.</p>"
+                    }
+                },
+                "botAnalyzerStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the analysis.</p>\n         <p>Valid Values: <code>Processing | Available | Failed | Stopping | Stopped</code>\n         </p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the analysis was initiated.</p>"
+                    }
+                },
+                "botAnalyzerRecommendationList": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerRecommendationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of recommendations for optimizing your bot configuration. Each recommendation includes the issue location, priority, description, and proposed fix.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, this token can be used in a subsequent request to retrieve the next page of recommendations.</p>"
                     }
                 }
             },
@@ -13514,6 +13827,32 @@
                 "target": "com.amazonaws.lexmodelsv2#InvokedIntentSample"
             }
         },
+        "com.amazonaws.lexmodelsv2#IssueLocation": {
+            "type": "structure",
+            "members": {
+                "botLocale": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier where the issue was found.</p>"
+                    }
+                },
+                "intentId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The intent identifier where the issue was found, if applicable.</p>"
+                    }
+                },
+                "slotId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The slot identifier where the issue was found, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the location of an identified issue within the bot configuration.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#ItemId": {
             "type": "string",
             "traits": {
@@ -13665,6 +14004,9 @@
                     "target": "com.amazonaws.lexmodelsv2#DeleteBotAlias"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendation"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#DeleteBotLocale"
                 },
                 {
@@ -13708,6 +14050,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotAlias"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendation"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotLocale"
@@ -13771,6 +14116,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListBotAliasReplicas"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistory"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListBotLocales"
@@ -13860,6 +14208,9 @@
                     "target": "com.amazonaws.lexmodelsv2#SearchAssociatedTranscripts"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#StartBotAnalyzer"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#StartBotRecommendation"
                 },
                 {
@@ -13873,6 +14224,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#StartTestSetGeneration"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#StopBotAnalyzer"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#StopBotRecommendation"
@@ -15022,6 +15376,121 @@
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the bot associated with the aliases.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of historical bot analysis executions for a specific bot. You can filter the results by locale and bot version.</p>\n         <p>The history includes all analysis executions regardless of their status, allowing you to track past analyses and their outcomes.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botanalyzer/history",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "botAnalyzerHistoryList",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistoryRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier to filter the history. If not specified, returns history for all locales.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version to filter the history. If not specified, defaults to <code>DRAFT</code>.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from a previous request was truncated, the <code>nextToken</code> value is used to retrieve the next page of history entries.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of history entries to return in the response. The default is 10.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistoryResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier used to filter the history.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version used to filter the history.</p>"
+                    }
+                },
+                "botAnalyzerHistoryList": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerHistoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of historical analysis executions, ordered by creation date with the most recent first.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, this token can be used in a subsequent request to retrieve the next page of history entries.</p>"
                     }
                 }
             },
@@ -18878,6 +19347,32 @@
                 "target": "com.amazonaws.lexmodelsv2#Principal"
             }
         },
+        "com.amazonaws.lexmodelsv2#Priority": {
+            "type": "enum",
+            "members": {
+                "High": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                },
+                "Medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "Low": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The priority level of a recommendation.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>High</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Medium</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Low</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#PriorityValue": {
             "type": "integer",
             "traits": {
@@ -20907,6 +21402,119 @@
                 "smithy.api#documentation": "<p>Settings that control how Amazon Lex processes and recognizes speech input from users.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#StartBotAnalyzer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#StartBotAnalyzerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#StartBotAnalyzerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates an asynchronous analysis of your bot configuration using AI-powered analysis to identify potential issues and recommend improvements based on AWS best practices.</p>\n         <p>The analysis examines your bot's configuration, including intents, utterances, slots, and conversation flows, to provide actionable recommendations for optimization.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botanalyzer",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotAnalyzerRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to analyze.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "analysisScope": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalysisScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of analysis to perform. Currently only <code>BotLocale</code> scope is supported.</p>\n         <p>Valid Values: <code>BotLocale</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier for the bot locale to analyze. Required when <code>analysisScope</code> is <code>BotLocale</code>.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to analyze. Defaults to <code>DRAFT</code> if not specified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotAnalyzerResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot being analyzed.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot being analyzed.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot locale being analyzed.</p>"
+                    }
+                },
+                "botAnalyzerStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the analysis. The initial status is <code>Processing</code>.</p>\n         <p>Valid Values: <code>Processing | Available | Failed | Stopping | Stopped</code>\n         </p>"
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for this analysis request. Use this identifier to check the status and retrieve results.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the analysis was initiated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lexmodelsv2#StartBotRecommendation": {
             "type": "operation",
             "input": {
@@ -21601,6 +22209,99 @@
                     "min": 1,
                     "max": 900
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StopBotAnalyzer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#StopBotAnalyzerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#StopBotAnalyzerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels an ongoing bot analysis execution. Once stopped, the analysis cannot be resumed and no recommendations will be generated.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/bots/{botId}/botanalyzer/{botAnalyzerRequestId}/stop",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StopBotAnalyzerRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis request to stop.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StopBotAnalyzerResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot locale.</p>"
+                    }
+                },
+                "botAnalyzerStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated status of the analysis. The status will be <code>Stopping</code> and will eventually transition to <code>Stopped</code>.</p>\n         <p>Valid Values: <code>Processing | Available | Failed | Stopping | Stopped</code>\n         </p>"
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lexmodelsv2#StopBotRecommendation": {
@@ -23071,6 +23772,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the messages in the turn.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings": {

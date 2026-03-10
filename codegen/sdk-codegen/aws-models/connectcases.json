@@ -1240,6 +1240,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Tests that operandOne is not equal to operandTwo.</p>"
                     }
+                },
+                "andAll": {
+                    "target": "com.amazonaws.connectcases#CompoundCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Combines multiple conditions with AND operator. All conditions must be true for the compound condition to be true.</p>"
+                    }
+                },
+                "orAll": {
+                    "target": "com.amazonaws.connectcases#CompoundCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Combines multiple conditions with OR operator. At least one condition must be true for the compound condition to be true.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1703,6 +1715,21 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>A filter for related items of type <code>Comment</code>.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CompoundCondition": {
+            "type": "structure",
+            "members": {
+                "conditions": {
+                    "target": "com.amazonaws.connectcases#BooleanConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of conditions to combine using the logical operator.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A compound condition that combines multiple boolean conditions using logical operators. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#ConflictException": {
