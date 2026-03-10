@@ -1,3 +1,7 @@
+# v1.22.0 (2026-03-10)
+
+* **Feature**: Adding first class support for AG-UI protocol in AgentCore Runtime.
+
 # v1.21.0 (2026-03-06)
 
 * **Feature**: Adds support for streaming memory records in AgentCore Memory

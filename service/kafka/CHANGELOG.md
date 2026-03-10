@@ -1,3 +1,7 @@
+# v1.49.0 (2026-03-10)
+
+* **Feature**: Add dual stack endpoint to SDK
+
 # v1.48.2 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

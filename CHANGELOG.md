@@ -1,3 +1,17 @@
+# Release (2026-03-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.22.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1220-2026-03-10)
+  * **Feature**: Adding first class support for AG-UI protocol in AgentCore Runtime.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.38.0](service/connectcases/CHANGELOG.md#v1380-2026-03-10)
+  * **Feature**: Added functionality for the Required and Hidden case rule types to be conditionally evaluated on up to 5 conditions.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.61.8](service/databasemigrationservice/CHANGELOG.md#v1618-2026-03-10)
+  * **Documentation**: Not need to include to any release notes. The only change is to correct LoadTimeout unit from milliseconds to seconds in RedshiftSettings
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.49.0](service/kafka/CHANGELOG.md#v1490-2026-03-10)
+  * **Feature**: Add dual stack endpoint to SDK
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.60.0](service/lexmodelsv2/CHANGELOG.md#v1600-2026-03-10)
+  * **Feature**: This release introduces a new generative AI feature called Lex Bot Analyzer. This feature leverage AI to analyze the bot configuration against AWS Lex best practices to identify configuration issues and provides recommendations.
+
 # Release (2026-03-09)
 
 ## Module Highlights
