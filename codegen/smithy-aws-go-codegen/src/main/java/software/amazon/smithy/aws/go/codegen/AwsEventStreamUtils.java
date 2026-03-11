@@ -352,7 +352,7 @@ public final class AwsEventStreamUtils {
                                 MapUtils.of(
                                         "getSignature", getSignedRequestSignature,
                                         "errorf", GoStdlibTypes.Fmt.Errorf,
-                                        "credentialsAdapter", SdkGoTypes.Internal.Auth.Smithy.CredentialsAdapter,
+                                        "credentialsAdapter", AwsGoDependency.INTERNAL_AUTH_SMITHY.struct("CredentialsAdapter"),
                                         "getSigningName", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4SigningName"),
                                         "getSigningRegion", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4SigningRegion")
                                 ));

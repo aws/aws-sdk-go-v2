@@ -16,7 +16,7 @@
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
 import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4aUtils;
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.aws.traits.auth.SigV4ATrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
@@ -100,9 +100,9 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
                         Logger: options.Logger,
                         LogSigning: options.ClientLogMode.IsSigning(),
                     })""",
-                    SdkGoTypes.Internal.Auth.NewHTTPAuthScheme,
+                    AwsGoDependency.INTERNAL_AUTH.func("NewHTTPAuthScheme"),
                     SigV4ATrait.ID.toString(),
-                    SdkGoTypes.Internal.V4A.SignerAdapter);
+                    AwsGoDependency.INTERNAL_SIGV4A.struct("SignerAdapter"));
         }
 
         @Override
@@ -132,8 +132,8 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
                 }
                 """,
                 SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("IdentityResolver"),
-                SdkGoTypes.Internal.V4A.CredentialsProviderAdapter,
-                SdkGoTypes.Internal.V4A.SymmetricCredentialAdaptor);
+                AwsGoDependency.INTERNAL_SIGV4A.struct("CredentialsProviderAdapter"),
+                AwsGoDependency.INTERNAL_SIGV4A.struct("SymmetricCredentialAdaptor"));
     }
 
     private Writable generateHelpers() {

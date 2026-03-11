@@ -17,7 +17,6 @@ package software.amazon.smithy.aws.go.codegen.customization.auth;
 
 import java.util.List;
 
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -31,6 +30,7 @@ import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.integration.auth.HttpBearerDefinition;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.traits.HttpBearerAuthTrait;
@@ -125,15 +125,15 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
         @Override
         public Writable generateDefaultAuthScheme() {
             return goTemplate("$T($S, &$T{Signer: options.BearerAuthSigner})",
-                    SdkGoTypes.Internal.Auth.NewHTTPAuthScheme,
+                    AwsGoDependency.INTERNAL_AUTH.func("NewHTTPAuthScheme"),
                     HttpBearerAuthTrait.ID.toString(),
-                    SdkGoTypes.Internal.Auth.Smithy.BearerTokenSignerAdapter);
+                    AwsGoDependency.INTERNAL_AUTH_SMITHY.struct("BearerTokenSignerAdapter"));
         }
 
         @Override
         public Writable generateOptionsIdentityResolver() {
             return goTemplate("&$T{Provider: o.BearerAuthTokenProvider}",
-                    SdkGoTypes.Internal.Auth.Smithy.BearerTokenProviderAdapter);
+                    AwsGoDependency.INTERNAL_AUTH_SMITHY.struct("BearerTokenProviderAdapter"));
         }
     }
 }

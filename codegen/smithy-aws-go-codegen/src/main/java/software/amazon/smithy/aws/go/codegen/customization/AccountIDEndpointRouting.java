@@ -1,6 +1,5 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -8,6 +7,7 @@ import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.rulesengine.language.syntax.Identifier;
@@ -64,12 +64,12 @@ public class AccountIDEndpointRouting implements GoIntegration {
         """,
         MapUtils.of(
         "auth", SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("Identity"),
-        "accountIDEndpointMode", SdkGoTypes.Aws.AccountIDEndpointMode,
-        "credentialsAdapter", SdkGoTypes.Internal.Auth.Smithy.CredentialsAdapter,
-        "aidModePreferred", SdkGoTypes.Aws.AccountIDEndpointModePreferred,
-        "aidModeRequired", SdkGoTypes.Aws.AccountIDEndpointModeRequired,
-        "aidModeUnset", SdkGoTypes.Aws.AccountIDEndpointModeUnset,
-        "aidModeDisabled", SdkGoTypes.Aws.AccountIDEndpointModeDisabled,
+        "accountIDEndpointMode", AwsGoDependency.AWS_CORE.func("AccountIDEndpointMode"),
+        "credentialsAdapter", AwsGoDependency.INTERNAL_AUTH_SMITHY.struct("CredentialsAdapter"),
+        "aidModePreferred", AwsGoDependency.AWS_CORE.constSymbol("AccountIDEndpointModePreferred"),
+        "aidModeRequired", AwsGoDependency.AWS_CORE.constSymbol("AccountIDEndpointModeRequired"),
+        "aidModeUnset", AwsGoDependency.AWS_CORE.constSymbol("AccountIDEndpointModeUnset"),
+        "aidModeDisabled", AwsGoDependency.AWS_CORE.constSymbol("AccountIDEndpointModeDisabled"),
         "errorf", GoStdlibTypes.Fmt.Errorf
         )
         ));

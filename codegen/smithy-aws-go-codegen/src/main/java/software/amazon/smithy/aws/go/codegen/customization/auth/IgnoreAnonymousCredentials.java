@@ -15,7 +15,6 @@
 
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
@@ -26,6 +25,7 @@ import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
@@ -76,6 +76,6 @@ public class IgnoreAnonymousCredentials implements GoIntegration {
                         options.Credentials = nil
                     }
                 }
-                """, SdkGoTypes.Aws.IsCredentialsProvider, SdkGoTypes.Aws.AnonymousCredentials);
+                """, AwsGoDependency.AWS_CORE.func("IsCredentialsProvider"), AwsGoDependency.AWS_CORE.struct("AnonymousCredentials"));
     }
 }

@@ -1,6 +1,5 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -12,6 +11,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.rulesengine.traits.EndpointRuleSetTrait;
 import software.amazon.smithy.utils.ListUtils;
@@ -31,22 +31,22 @@ public class AwsEndpointBuiltins implements GoIntegration {
     private static final Writable BindAwsRegion =
             goTemplate("bindRegion(options.Region)");
     private static final Writable BindAwsUseFips =
-            goTemplate("$T(options.EndpointOptions.UseFIPSEndpoint == $T)", SdkGoTypes.Aws.Bool, SdkGoTypes.Aws.FIPSEndpointStateEnabled);
+            goTemplate("$T(options.EndpointOptions.UseFIPSEndpoint == $T)", AwsGoDependency.AWS_CORE.func("Bool"), AwsGoDependency.AWS_CORE.constSymbol("FIPSEndpointStateEnabled"));
     private static final Writable BindAwsUseDualStack =
-            goTemplate("$T(options.EndpointOptions.UseDualStackEndpoint == $T)", SdkGoTypes.Aws.Bool, SdkGoTypes.Aws.DualStackEndpointStateEnabled);
+            goTemplate("$T(options.EndpointOptions.UseDualStackEndpoint == $T)", AwsGoDependency.AWS_CORE.func("Bool"), AwsGoDependency.AWS_CORE.constSymbol("DualStackEndpointStateEnabled"));
 
     private static final Writable BindAwsS3ForcePathStyle =
-            goTemplate("$T(options.UsePathStyle)", SdkGoTypes.Aws.Bool);
+            goTemplate("$T(options.UsePathStyle)", AwsGoDependency.AWS_CORE.func("Bool"));
     private static final Writable BindAwsS3Accelerate =
-            goTemplate("$T(options.UseAccelerate)", SdkGoTypes.Aws.Bool);
+            goTemplate("$T(options.UseAccelerate)", AwsGoDependency.AWS_CORE.func("Bool"));
     private static final Writable BindAwsS3UseArnRegion =
-            goTemplate("$T(options.UseARNRegion)", SdkGoTypes.Aws.Bool);
+            goTemplate("$T(options.UseARNRegion)", AwsGoDependency.AWS_CORE.func("Bool"));
     private static final Writable BindAwsS3DisableMultiRegionAccessPoints =
-            goTemplate("$T(options.DisableMultiRegionAccessPoints)", SdkGoTypes.Aws.Bool);
+            goTemplate("$T(options.DisableMultiRegionAccessPoints)", AwsGoDependency.AWS_CORE.func("Bool"));
     private static final Writable BindAccountID =
             goTemplate("resolveAccountID(getIdentity(ctx), options.AccountIDEndpointMode)");
     private static final Writable BindAccountIDEndpointMode =
-            goTemplate("$T(string(options.AccountIDEndpointMode))", SdkGoTypes.Aws.String);
+            goTemplate("$T(string(options.AccountIDEndpointMode))", AwsGoDependency.AWS_CORE.func("String"));
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
@@ -86,11 +86,11 @@ public class AwsEndpointBuiltins implements GoIntegration {
         """,
                 MapUtils.of(
                         "auth", SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("Identity"),
-                        "accountIDEndpointMode", SdkGoTypes.Aws.AccountIDEndpointMode,
-                        "aidModeUnset", SdkGoTypes.Aws.AccountIDEndpointModeUnset,
-                        "aidModeDisabled", SdkGoTypes.Aws.AccountIDEndpointModeDisabled,
-                        "credentialsAdapter", SdkGoTypes.Internal.Auth.Smithy.CredentialsAdapter,
-                        "string", SdkGoTypes.Aws.String
+                        "accountIDEndpointMode", AwsGoDependency.AWS_CORE.func("AccountIDEndpointMode"),
+                        "aidModeUnset", AwsGoDependency.AWS_CORE.constSymbol("AccountIDEndpointModeUnset"),
+                        "aidModeDisabled", AwsGoDependency.AWS_CORE.constSymbol("AccountIDEndpointModeDisabled"),
+                        "credentialsAdapter", AwsGoDependency.INTERNAL_AUTH_SMITHY.struct("CredentialsAdapter"),
+                        "string", AwsGoDependency.AWS_CORE.func("String")
                 )
         ));
     }
@@ -109,8 +109,8 @@ public class AwsEndpointBuiltins implements GoIntegration {
                 }
                 """,
                 MapUtils.of(
-                        "awsString", SdkGoTypes.Aws.String,
-                        "mapFipsRegion", SdkGoTypes.Internal.Endpoints.MapFIPSRegion,
+                        "awsString", AwsGoDependency.AWS_CORE.func("String"),
+                        "mapFipsRegion", AwsGoDependency.INTERNAL_ENDPOINTS.func("MapFIPSRegion"),
                         "error", GoStdlibTypes.Fmt.Errorf,
                         "validHost", SymbolUtils.createValueSymbolBuilder("IsValidHostLabel",
                                 SmithyGoDependency.SMITHY_ENDPOINT_RULESFN).build()

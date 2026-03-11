@@ -15,8 +15,9 @@
 
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.aws.go.codegen.customization.service.s3.S3ModelUtils;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
+import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -147,9 +148,9 @@ public class S3ExpressAuthScheme implements GoIntegration {
                         Logger: options.Logger,
                         LogSigning: options.ClientLogMode.IsSigning(),
                     })""",
-                    SdkGoTypes.Internal.Auth.NewHTTPAuthScheme,
+                    AwsGoDependency.INTERNAL_AUTH.func("NewHTTPAuthScheme"),
                     SigV4S3ExpressTrait.ID.toString(),
-                    SdkGoTypes.ServiceCustomizations.S3.ExpressSigner);
+                    AwsCustomGoDependency.S3_CUSTOMIZATION.func("ExpressSigner"));
         }
 
         @Override
@@ -168,6 +169,6 @@ public class S3ExpressAuthScheme implements GoIntegration {
                 }
                 """,
                 SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("IdentityResolver"),
-                SdkGoTypes.ServiceCustomizations.S3.ExpressIdentityResolver);
+                AwsCustomGoDependency.S3_CUSTOMIZATION.func("ExpressIdentityResolver"));
     }
 }

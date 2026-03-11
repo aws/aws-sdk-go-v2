@@ -246,19 +246,19 @@ public class AddAwsConfigFields implements GoIntegration {
                     .build(),
             AwsConfigField.builder()
                     .name(SDK_ACCOUNTID_ENDPOINT_MODE)
-                    .type(SdkGoTypes.Aws.AccountIDEndpointMode)
+                    .type(AwsGoDependency.AWS_CORE.func("AccountIDEndpointMode"))
                     .documentation("Indicates how aws account ID is applied in endpoint2.0 routing")
                     .servicePredicate(AccountIDEndpointRouting::hasAccountIdEndpoints)
                     .build(),
             AwsConfigField.builder()
                     .name(REQUEST_CHECKSUM_CALCULATION)
-                    .type(SdkGoTypes.Aws.RequestChecksumCalculation)
+                    .type(AwsGoDependency.AWS_CORE.func("RequestChecksumCalculation"))
                     .documentation("Indicates how user opt-in/out request checksum calculation")
                     .servicePredicate(AwsHttpChecksumGenerator::hasInputChecksumTrait)
                     .build(),
             AwsConfigField.builder()
                     .name(RESPONSE_CHECKSUM_VALIDATION)
-                    .type(SdkGoTypes.Aws.ResponseChecksumValidation)
+                    .type(AwsGoDependency.AWS_CORE.func("ResponseChecksumValidation"))
                     .documentation("Indicates how user opt-in/out response checksum validation")
                     .servicePredicate(AwsHttpChecksumGenerator::hasOutputChecksumTrait)
                     .build(),

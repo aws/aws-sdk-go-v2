@@ -15,7 +15,6 @@
 
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -28,6 +27,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
@@ -102,8 +102,8 @@ public class LegacyAuthContextOverride implements GoIntegration {
                 return next.HandleFinalize(ctx, in)
                 """,
                 MapUtils.of(
-                        "getSigningName", SdkGoTypes.Aws.Middleware.GetSigningName,
-                        "getSigningRegion", SdkGoTypes.Aws.Middleware.GetSigningRegion,
+                        "getSigningName", AwsGoDependency.AWS_MIDDLEWARE.func("GetSigningName"),
+                        "getSigningRegion", AwsGoDependency.AWS_MIDDLEWARE.func("GetSigningRegion"),
                         "setSigV4SigningName", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("SetSigV4SigningName"),
                         "setSigV4ASigningName", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("SetSigV4ASigningName"),
                         "setSigV4SigningRegion", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("SetSigV4SigningRegion"),
