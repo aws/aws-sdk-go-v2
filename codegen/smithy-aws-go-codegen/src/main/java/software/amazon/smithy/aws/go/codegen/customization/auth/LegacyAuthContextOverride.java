@@ -23,11 +23,11 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.auth.SignRequestMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
@@ -104,10 +104,10 @@ public class LegacyAuthContextOverride implements GoIntegration {
                 MapUtils.of(
                         "getSigningName", SdkGoTypes.Aws.Middleware.GetSigningName,
                         "getSigningRegion", SdkGoTypes.Aws.Middleware.GetSigningRegion,
-                        "setSigV4SigningName", SmithyGoTypes.Transport.Http.SetSigV4SigningName,
-                        "setSigV4ASigningName", SmithyGoTypes.Transport.Http.SetSigV4ASigningName,
-                        "setSigV4SigningRegion", SmithyGoTypes.Transport.Http.SetSigV4SigningRegion,
-                        "setSigV4ASigningRegions", SmithyGoTypes.Transport.Http.SetSigV4ASigningRegions
+                        "setSigV4SigningName", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("SetSigV4SigningName"),
+                        "setSigV4ASigningName", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("SetSigV4ASigningName"),
+                        "setSigV4SigningRegion", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("SetSigV4SigningRegion"),
+                        "setSigV4ASigningRegions", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("SetSigV4ASigningRegions")
                 ));
     }
 
@@ -118,9 +118,9 @@ public class LegacyAuthContextOverride implements GoIntegration {
                 }
                 """,
                 MIDDLEWARE_ADD_FUNC,
-                SmithyGoTypes.Middleware.Stack,
+                SmithyGoDependency.SMITHY_MIDDLEWARE.struct("Stack"),
                 MIDDLEWARE_NAME,
                 SignRequestMiddlewareGenerator.MIDDLEWARE_ID,
-                SmithyGoTypes.Middleware.Before);
+                SmithyGoDependency.SMITHY_MIDDLEWARE.func("Before"));
     }
 }

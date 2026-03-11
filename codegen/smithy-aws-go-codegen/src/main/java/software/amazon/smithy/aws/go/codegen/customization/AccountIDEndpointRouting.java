@@ -7,7 +7,7 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.rulesengine.language.syntax.Identifier;
@@ -63,7 +63,7 @@ public class AccountIDEndpointRouting implements GoIntegration {
         }
         """,
         MapUtils.of(
-        "auth", SmithyGoTypes.Auth.Identity,
+        "auth", SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("Identity"),
         "accountIDEndpointMode", SdkGoTypes.Aws.AccountIDEndpointMode,
         "credentialsAdapter", SdkGoTypes.Internal.Auth.Smithy.CredentialsAdapter,
         "aidModePreferred", SdkGoTypes.Aws.AccountIDEndpointModePreferred,

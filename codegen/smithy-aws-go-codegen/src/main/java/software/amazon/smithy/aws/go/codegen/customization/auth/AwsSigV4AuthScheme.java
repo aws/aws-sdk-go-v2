@@ -23,10 +23,10 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.integration.auth.SigV4Definition;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
@@ -95,7 +95,7 @@ public class AwsSigV4AuthScheme implements GoIntegration {
                     return nil
                 }
                 """,
-                SmithyGoTypes.Auth.IdentityResolver,
+                SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("IdentityResolver"),
                 SdkGoTypes.Internal.Auth.Smithy.CredentialsProviderAdapter);
     }
 
@@ -138,8 +138,8 @@ public class AwsSigV4AuthScheme implements GoIntegration {
                 }
                 """,
                 MapUtils.of(
-                        "stack", SmithyGoTypes.Middleware.Stack,
-                        "before", SmithyGoTypes.Middleware.Before,
+                        "stack", SmithyGoDependency.SMITHY_MIDDLEWARE.struct("Stack"),
+                        "before", SmithyGoDependency.SMITHY_MIDDLEWARE.func("Before"),
                         "nameMW", generateInitializeMiddlewareFunc(goTemplate("""
                                 return next.HandleInitialize($T(ctx, name), in)
                                 """, SdkGoTypes.Aws.Middleware.SetSigningName)),

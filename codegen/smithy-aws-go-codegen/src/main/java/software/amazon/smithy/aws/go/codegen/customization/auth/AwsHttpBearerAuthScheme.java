@@ -25,7 +25,6 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
@@ -92,8 +91,8 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
                 """,
                 MapUtils.of(
                         "funcName", NEW_DEFAULT_SIGNER_NAME,
-                        "signerInterface", SmithyGoTypes.Auth.Bearer.Signer,
-                        "newDefaultSigner", SmithyGoTypes.Auth.Bearer.NewSignHTTPSMessage
+                        "signerInterface", SmithyGoDependency.SMITHY_AUTH_BEARER.interfaceSymbol("Signer"),
+                        "newDefaultSigner", SmithyGoDependency.SMITHY_AUTH_BEARER.func("NewSignHTTPSMessage")
                 ));
     }
 
@@ -104,12 +103,12 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
                         .servicePredicate(this::isHttpBearerService)
                         .addConfigField(ConfigField.builder()
                                 .name(TOKEN_PROVIDER_OPTION_NAME)
-                                .type(SmithyGoTypes.Auth.Bearer.TokenProvider)
+                                .type(SmithyGoDependency.SMITHY_AUTH_BEARER.interfaceSymbol("TokenProvider"))
                                 .documentation("Bearer token value provider")
                                 .build())
                         .addConfigField(ConfigField.builder()
                                 .name(SIGNER_OPTION_NAME)
-                                .type(SmithyGoTypes.Auth.Bearer.Signer)
+                                .type(SmithyGoDependency.SMITHY_AUTH_BEARER.interfaceSymbol("Signer"))
                                 .documentation("Signer for authenticating requests with bearer auth")
                                 .build())
                         .addConfigFieldResolver(ConfigFieldResolver.builder()

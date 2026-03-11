@@ -9,7 +9,6 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
@@ -86,7 +85,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
         }
         """,
                 MapUtils.of(
-                        "auth", SmithyGoTypes.Auth.Identity,
+                        "auth", SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("Identity"),
                         "accountIDEndpointMode", SdkGoTypes.Aws.AccountIDEndpointMode,
                         "aidModeUnset", SdkGoTypes.Aws.AccountIDEndpointModeUnset,
                         "aidModeDisabled", SdkGoTypes.Aws.AccountIDEndpointModeDisabled,

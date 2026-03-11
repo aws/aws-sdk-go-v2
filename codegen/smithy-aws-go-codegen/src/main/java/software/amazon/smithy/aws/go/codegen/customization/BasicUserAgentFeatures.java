@@ -12,10 +12,10 @@ import software.amazon.smithy.go.codegen.GoCodegenContext;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.protocol.traits.Rpcv2CborTrait;
@@ -81,7 +81,7 @@ public class BasicUserAgentFeatures implements GoIntegration {
                     }
                     """,
                     Map.of(
-                            "stack", SmithyGoTypes.Middleware.Stack,
+                            "stack", SmithyGoDependency.SMITHY_MIDDLEWARE.struct("Stack"),
                             "featureName", featureId.getName(),
                             "featureEnum", featureId
                     ));

@@ -23,7 +23,6 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.AuthSchemeDefinition;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
@@ -31,6 +30,7 @@ import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -167,7 +167,7 @@ public class S3ExpressAuthScheme implements GoIntegration {
                     return nil
                 }
                 """,
-                SmithyGoTypes.Auth.IdentityResolver,
+                SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("IdentityResolver"),
                 SdkGoTypes.ServiceCustomizations.S3.ExpressIdentityResolver);
     }
 }

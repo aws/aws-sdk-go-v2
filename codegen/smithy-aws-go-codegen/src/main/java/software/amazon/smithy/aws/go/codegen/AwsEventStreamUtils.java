@@ -23,7 +23,6 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
 import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
@@ -354,8 +353,8 @@ public final class AwsEventStreamUtils {
                                         "getSignature", getSignedRequestSignature,
                                         "errorf", GoStdlibTypes.Fmt.Errorf,
                                         "credentialsAdapter", SdkGoTypes.Internal.Auth.Smithy.CredentialsAdapter,
-                                        "getSigningName", SmithyGoTypes.Transport.Http.GetSigV4SigningName,
-                                        "getSigningRegion", SmithyGoTypes.Transport.Http.GetSigV4SigningRegion
+                                        "getSigningName", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4SigningName"),
+                                        "getSigningRegion", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4SigningRegion")
                                 ));
 
                         var events = inputInfo.get().getEventStreamTarget().asUnionShape()

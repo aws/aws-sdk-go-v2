@@ -27,7 +27,6 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -112,7 +111,7 @@ public class AwsClientUserAgent implements GoIntegration {
                 """,
                 MapUtils.of(
                         "service", serviceId,
-                        "middlewareStack", SmithyGoTypes.Middleware.Stack
+                        "middlewareStack", SmithyGoDependency.SMITHY_MIDDLEWARE.struct("Stack")
                 ));
     }
 }

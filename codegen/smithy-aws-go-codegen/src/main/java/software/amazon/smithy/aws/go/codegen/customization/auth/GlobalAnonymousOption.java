@@ -22,10 +22,10 @@ import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
@@ -91,8 +91,8 @@ public class GlobalAnonymousOption implements GoIntegration {
                 """,
                 MapUtils.of(
                         "context", GoStdlibTypes.Context.Context,
-                        "option", SmithyGoTypes.Auth.Option,
-                        "anonymous", SmithyGoTypes.Auth.SchemeIDAnonymous
+                        "option", SmithyGoDependency.SMITHY_AUTH.struct("Option"),
+                        "anonymous", SmithyGoDependency.SMITHY_AUTH.constSymbol("SchemeIDAnonymous")
                 ));
     }
 

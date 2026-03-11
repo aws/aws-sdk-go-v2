@@ -33,7 +33,6 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoUniverseTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
@@ -196,7 +195,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     // TOKEN_PROVIDER_OPTION_NAME added API Client's Options by HttpBearerAuth. Only
                     // need to add NewFromConfig resolver from aws#Config type.
                     .name(AwsHttpBearerAuthScheme.TOKEN_PROVIDER_OPTION_NAME)
-                    .type(SmithyGoTypes.Auth.Bearer.TokenProvider)
+                    .type(SmithyGoDependency.SMITHY_AUTH_BEARER.interfaceSymbol("TokenProvider"))
                     .documentation("The bearer authentication token provider for authentication requests.")
                     .servicePredicate(AddAwsConfigFields::isHttpBearerService)
                     .generatedOnClient(false)

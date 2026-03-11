@@ -38,7 +38,6 @@ import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.OperationGenerator;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.auth.SignRequestMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -412,7 +411,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                             """,
                             PresignContextPolyfillMiddleware.NAME,
                             SignRequestMiddlewareGenerator.MIDDLEWARE_ID,
-                            SmithyGoTypes.Middleware.Before);
+                            SmithyGoDependency.SMITHY_MIDDLEWARE.func("Before"));
 
                     writer.openBlock("pmw := $T($T{", "})", presignMiddleware, middlewareOptionsSymbol, () -> {
                         writer.write("CredentialsProvider: options.$L,", AddAwsConfigFields.CREDENTIALS_CONFIG_NAME);
@@ -818,10 +817,10 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                 MapUtils.of(
                         "errorf", GoStdlibTypes.Fmt.Errorf,
                         "setSignerVersion", generateSetSignerVersion(),
-                        "propsGetV4Name", SmithyGoTypes.Transport.Http.GetSigV4SigningName,
-                        "propsGetV4AName", SmithyGoTypes.Transport.Http.GetSigV4ASigningName,
-                        "propsGetV4Region",  SmithyGoTypes.Transport.Http.GetSigV4SigningRegion,
-                        "propsGetV4ARegions",  SmithyGoTypes.Transport.Http.GetSigV4ASigningRegions,
+                        "propsGetV4Name", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4SigningName"),
+                        "propsGetV4AName", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4ASigningName"),
+                        "propsGetV4Region",  SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4SigningRegion"),
+                        "propsGetV4ARegions",  SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4ASigningRegions"),
                         "ctxSetName",  SdkGoTypes.Aws.Middleware.SetSigningName,
                         "ctxSetRegion", SdkGoTypes.Aws.Middleware.SetSigningRegion
                 ));
