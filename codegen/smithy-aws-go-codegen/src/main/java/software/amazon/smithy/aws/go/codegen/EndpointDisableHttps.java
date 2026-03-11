@@ -25,11 +25,11 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.endpoints.EndpointMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.ListUtils;
 
@@ -91,10 +91,10 @@ public class EndpointDisableHttps implements GoIntegration {
                     }
                     """,
                     MIDDLEWARE_ADDER,
-                    SmithyGoTypes.Middleware.Stack,
+                    SmithyGoDependency.SMITHY_MIDDLEWARE.struct("Stack"),
                     MIDDLEWARE_NAME,
                     EndpointMiddlewareGenerator.MIDDLEWARE_ID,
-                    SmithyGoTypes.Middleware.After);
+                    SmithyGoDependency.SMITHY_MIDDLEWARE.func("After"));
         });
     }
 
@@ -122,8 +122,8 @@ public class EndpointDisableHttps implements GoIntegration {
 
                 return next.HandleFinalize(ctx, in)
                 """,
-                SmithyGoTypes.Transport.Http.Request,
+                SmithyGoDependency.SMITHY_HTTP_TRANSPORT.struct("Request"),
                 GoStdlibTypes.Fmt.Errorf,
-                SmithyGoTypes.Transport.Http.GetHostnameImmutable);
+                SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetHostnameImmutable"));
     }
 }

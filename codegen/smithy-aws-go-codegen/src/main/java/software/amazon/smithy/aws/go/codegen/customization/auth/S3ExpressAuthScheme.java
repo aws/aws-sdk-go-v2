@@ -15,15 +15,15 @@
 
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.aws.go.codegen.customization.service.s3.S3ModelUtils;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
+import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.AuthSchemeDefinition;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
@@ -31,6 +31,7 @@ import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -147,9 +148,9 @@ public class S3ExpressAuthScheme implements GoIntegration {
                         Logger: options.Logger,
                         LogSigning: options.ClientLogMode.IsSigning(),
                     })""",
-                    SdkGoTypes.Internal.Auth.NewHTTPAuthScheme,
+                    AwsGoDependency.INTERNAL_AUTH.func("NewHTTPAuthScheme"),
                     SigV4S3ExpressTrait.ID.toString(),
-                    SdkGoTypes.ServiceCustomizations.S3.ExpressSigner);
+                    AwsCustomGoDependency.S3_CUSTOMIZATION.func("ExpressSigner"));
         }
 
         @Override
@@ -167,7 +168,7 @@ public class S3ExpressAuthScheme implements GoIntegration {
                     return nil
                 }
                 """,
-                SmithyGoTypes.Auth.IdentityResolver,
-                SdkGoTypes.ServiceCustomizations.S3.ExpressIdentityResolver);
+                SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("IdentityResolver"),
+                AwsCustomGoDependency.S3_CUSTOMIZATION.func("ExpressIdentityResolver"));
     }
 }

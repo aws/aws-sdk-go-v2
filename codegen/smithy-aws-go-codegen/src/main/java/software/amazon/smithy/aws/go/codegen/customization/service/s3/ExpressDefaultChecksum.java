@@ -1,6 +1,5 @@
 package software.amazon.smithy.aws.go.codegen.customization.service.s3;
 
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.aws.traits.HttpChecksumTrait;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -8,6 +7,8 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
+import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -24,7 +25,7 @@ import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
  */
 public class ExpressDefaultChecksum implements GoIntegration {
     private static final MiddlewareRegistrar SET_ALGORITHM_MIDDLEWARE = MiddlewareRegistrar.builder()
-            .resolvedFunction(SdkGoTypes.ServiceCustomizations.S3.AddExpressDefaultChecksumMiddleware)
+            .resolvedFunction(AwsCustomGoDependency.S3_CUSTOMIZATION.func("AddExpressDefaultChecksumMiddleware"))
             .build();
 
     private static final MiddlewareRegistrar SET_MPU_ALGORITHM_MIDDLEWARE = MiddlewareRegistrar.builder()
@@ -68,7 +69,7 @@ public class ExpressDefaultChecksum implements GoIntegration {
                 backend := $T(&endpt.Properties)
                 ctx = $T(ctx, backend)
                 """,
-                SdkGoTypes.ServiceCustomizations.S3.GetPropertiesBackend,
-                SdkGoTypes.Internal.Context.SetS3Backend);
+                AwsCustomGoDependency.S3_CUSTOMIZATION.func("GetPropertiesBackend"),
+                AwsGoDependency.INTERNAL_CONTEXT.func("SetS3Backend"));
     }
 }

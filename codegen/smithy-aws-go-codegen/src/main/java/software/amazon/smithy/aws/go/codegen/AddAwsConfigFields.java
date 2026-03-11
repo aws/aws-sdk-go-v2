@@ -33,7 +33,6 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoUniverseTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
@@ -196,7 +195,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     // TOKEN_PROVIDER_OPTION_NAME added API Client's Options by HttpBearerAuth. Only
                     // need to add NewFromConfig resolver from aws#Config type.
                     .name(AwsHttpBearerAuthScheme.TOKEN_PROVIDER_OPTION_NAME)
-                    .type(SmithyGoTypes.Auth.Bearer.TokenProvider)
+                    .type(SmithyGoDependency.SMITHY_AUTH_BEARER.interfaceSymbol("TokenProvider"))
                     .documentation("The bearer authentication token provider for authentication requests.")
                     .servicePredicate(AddAwsConfigFields::isHttpBearerService)
                     .generatedOnClient(false)
@@ -247,19 +246,19 @@ public class AddAwsConfigFields implements GoIntegration {
                     .build(),
             AwsConfigField.builder()
                     .name(SDK_ACCOUNTID_ENDPOINT_MODE)
-                    .type(SdkGoTypes.Aws.AccountIDEndpointMode)
+                    .type(AwsGoDependency.AWS_CORE.func("AccountIDEndpointMode"))
                     .documentation("Indicates how aws account ID is applied in endpoint2.0 routing")
                     .servicePredicate(AccountIDEndpointRouting::hasAccountIdEndpoints)
                     .build(),
             AwsConfigField.builder()
                     .name(REQUEST_CHECKSUM_CALCULATION)
-                    .type(SdkGoTypes.Aws.RequestChecksumCalculation)
+                    .type(AwsGoDependency.AWS_CORE.func("RequestChecksumCalculation"))
                     .documentation("Indicates how user opt-in/out request checksum calculation")
                     .servicePredicate(AwsHttpChecksumGenerator::hasInputChecksumTrait)
                     .build(),
             AwsConfigField.builder()
                     .name(RESPONSE_CHECKSUM_VALIDATION)
-                    .type(SdkGoTypes.Aws.ResponseChecksumValidation)
+                    .type(AwsGoDependency.AWS_CORE.func("ResponseChecksumValidation"))
                     .documentation("Indicates how user opt-in/out response checksum validation")
                     .servicePredicate(AwsHttpChecksumGenerator::hasOutputChecksumTrait)
                     .build(),
