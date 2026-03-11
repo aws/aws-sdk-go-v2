@@ -8244,6 +8244,12 @@
                         "smithy.api#enumValue": "WINDOWS_SERVER_2022"
                     }
                 },
+                "WINDOWS_SERVER_2025": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2025"
+                    }
+                },
                 "RHEL_8": {
                     "target": "smithy.api#Unit",
                     "traits": {

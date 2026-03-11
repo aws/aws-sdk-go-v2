@@ -1232,6 +1232,18 @@
                 "target": "com.amazonaws.customerprofiles#CalculatedAttributeDimension"
             }
         },
+        "com.amazonaws.customerprofiles#CandidateIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#CatalogItem": {
             "type": "structure",
             "members": {
@@ -2801,6 +2813,104 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#CreateRecommenderFilter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateRecommenderFilterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateRecommenderFilterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a recommender filter. A recommender filter specifies which items to include or exclude from recommendations.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/recommender-filters/{RecommenderFilterName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateRecommenderFilterRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommenderFilterName": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender filter. The name must be unique within the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommenderFilterExpression": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter expression that defines which items to include or exclude from recommendations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the recommender filter.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateRecommenderFilterResponse": {
+            "type": "structure",
+            "members": {
+                "RecommenderFilterArn": {
+                    "target": "com.amazonaws.customerprofiles#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#CreateRecommenderRequest": {
             "type": "structure",
             "members": {
@@ -3340,6 +3450,9 @@
                     "target": "com.amazonaws.customerprofiles#CreateRecommender"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#CreateRecommenderFilter"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#CreateSegmentDefinition"
                 },
                 {
@@ -3386,6 +3499,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteRecommender"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteRecommenderFilter"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteSegmentDefinition"
@@ -3446,6 +3562,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetRecommender"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetRecommenderFilter"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetSegmentDefinition"
@@ -3524,6 +3643,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplates"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListRecommenderFilters"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListRecommenderRecipes"
@@ -5300,6 +5422,79 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#DeleteRecommenderFilter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteRecommenderFilterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteRecommenderFilterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a recommender filter from a domain.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}/recommender-filters/{RecommenderFilterName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteRecommenderFilterRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommenderFilterName": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender filter to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteRecommenderFilterResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that indicates the delete request is done.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#DeleteRecommenderRequest": {
             "type": "structure",
             "members": {
@@ -5877,6 +6072,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The minimum value threshold that an event must meet to be considered valid.</p>"
                     }
+                },
+                "EventWeight": {
+                    "target": "com.amazonaws.customerprofiles#EventParametersEventWeightDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight of the event type. A higher weight means higher importance of the event type for the created solution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5889,6 +6090,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#EventParametersEventWeightDouble": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 1.0
                 }
             }
         },
@@ -8773,10 +8983,34 @@
                         "smithy.api#documentation": "<p>The contextual metadata used to provide dynamic runtime information to tailor recommendations.</p>"
                     }
                 },
+                "RecommenderFilters": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filters to apply to the returned recommendations. Filters define criteria for including or excluding items from the recommendation results.</p>"
+                    }
+                },
+                "RecommenderPromotionalFilters": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderPromotionalFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of promotional filters to apply to the recommendations. Promotional filters allow you to promote specific items within a configurable subset of recommendation results.</p>"
+                    }
+                },
+                "CandidateIds": {
+                    "target": "com.amazonaws.customerprofiles#CandidateIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of item IDs to rank for the user. Use this when you want to re-rank a specific set of items rather than getting recommendations from the full item catalog. Required for personalized-ranking use cases.</p>"
+                    }
+                },
                 "MaxResults": {
-                    "target": "com.amazonaws.customerprofiles#MaxSize10",
+                    "target": "com.amazonaws.customerprofiles#MaxSize500",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of recommendations to return. The default value is 10.</p>"
+                    }
+                },
+                "MetadataConfig": {
+                    "target": "com.amazonaws.customerprofiles#MetadataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for including item metadata in the recommendation response. Use this to specify which metadata columns to return alongside recommended items.</p>"
                     }
                 }
             },
@@ -8831,6 +9065,120 @@
                     "code": 200
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetRecommenderFilter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetRecommenderFilterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetRecommenderFilterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a specific recommender filter in a domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/recommender-filters/{RecommenderFilterName}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetRecommenderFilterRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommenderFilterName": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender filter to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetRecommenderFilterResponse": {
+            "type": "structure",
+            "members": {
+                "RecommenderFilterName": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommenderFilterExpression": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter expression that defines which items to include or exclude from recommendations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the recommender filter was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the recommender filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the recommender filter.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the recommender filter failed, provides the reason for the failure.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.customerprofiles#GetRecommenderRequest": {
@@ -10208,6 +10556,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the configuration used when importing incremental records from the\n         source.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#InferenceConfig": {
+            "type": "structure",
+            "members": {
+                "MinProvisionedTPS": {
+                    "target": "com.amazonaws.customerprofiles#InferenceConfigMinProvisionedTPSInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum provisioned transactions per second (TPS) that the recommender supports. The default value is 1. A high MinProvisionedTPS will increase your cost.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for inference behavior of the recommender.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#InferenceConfigMinProvisionedTPSInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
             }
         },
         "com.amazonaws.customerprofiles#IntegrationConfig": {
@@ -12314,6 +12685,97 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#ListRecommenderFilters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListRecommenderFiltersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListRecommenderFiltersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of recommender filters in the specified domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/recommender-filters",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RecommenderFilters",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListRecommenderFiltersRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of recommender filters to return in the response. The default value is 100.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token received from a previous ListRecommenderFilters call to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListRecommenderFiltersResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to retrieve the next page of results. Null if there are no more results to retrieve.</p>"
+                    }
+                },
+                "RecommenderFilters": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of recommender filters and their properties in the specified domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#ListRecommenderRecipes": {
             "type": "operation",
             "input": {
@@ -13312,15 +13774,6 @@
                 }
             }
         },
-        "com.amazonaws.customerprofiles#MaxSize10": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 10
-                }
-            }
-        },
         "com.amazonaws.customerprofiles#MaxSize500": {
             "type": "integer",
             "traits": {
@@ -13409,6 +13862,41 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#MetadataColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#MetadataColumnsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#MetadataColumnName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#MetadataConfig": {
+            "type": "structure",
+            "members": {
+                "MetadataColumns": {
+                    "target": "com.amazonaws.customerprofiles#MetadataColumnsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of metadata column names from your Items dataset to include in the recommendation response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for metadata to include in recommendation responses.</p>"
             }
         },
         "com.amazonaws.customerprofiles#Metrics": {
@@ -13723,6 +14211,15 @@
             "traits": {
                 "smithy.api#deprecated": {},
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#PercentPromotedItems": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.customerprofiles#Period": {
@@ -15308,14 +15805,19 @@
                 "EventsConfig": {
                     "target": "com.amazonaws.customerprofiles#EventsConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration settings for how the recommender processes and uses events.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Configuration settings for how the recommender processes and uses events.</p>"
                     }
                 },
                 "TrainingFrequency": {
                     "target": "com.amazonaws.customerprofiles#RecommenderConfigTrainingFrequencyInteger",
                     "traits": {
                         "smithy.api#documentation": "<p>How often the recommender should retrain its model with new data.</p>"
+                    }
+                },
+                "InferenceConfig": {
+                    "target": "com.amazonaws.customerprofiles#InferenceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for how the recommender handles inference requests.</p>"
                     }
                 }
             },
@@ -15327,8 +15829,8 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 7,
-                    "max": 7
+                    "min": 1,
+                    "max": 30
                 }
             }
         },
@@ -15342,6 +15844,228 @@
             },
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender filter to apply.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that specifies criteria for including or excluding items from recommendations.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderFilterAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderFilterAttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderFilterExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2500
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderFilterStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderFilterSummary": {
+            "type": "structure",
+            "members": {
+                "RecommenderFilterName": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender filter.</p>"
+                    }
+                },
+                "RecommenderFilterExpression": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter expression that defines which items to include or exclude from recommendations.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the recommender filter was created.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the recommender filter's purpose and characteristics.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current operational status of the recommender filter.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the recommender filter is in a failed state, provides the reason for the failure.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of a recommender filter's configuration and current state.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderFilterSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#RecommenderFilterSummary"
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderFilterValues": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#RecommenderFilterAttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#RecommenderFilterAttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#RecommenderFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderPromotionalFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender filter to use for the promotion.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to use when promoting items. For each placeholder parameter in your promotion's filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.</p>"
+                    }
+                },
+                "PromotionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the promotion.</p>"
+                    }
+                },
+                "PercentPromotedItems": {
+                    "target": "com.amazonaws.customerprofiles#PercentPromotedItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of recommended items to apply the promotion to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on a promotion. A promotion defines additional business rules that apply to a configurable subset of recommended items.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderPromotionalFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#RecommenderPromotionalFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.customerprofiles#RecommenderRecipe": {
@@ -15395,6 +16119,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "trending-now"
+                    }
+                },
+                "PERSONALIZED_RANKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "personalized-ranking"
                     }
                 }
             }

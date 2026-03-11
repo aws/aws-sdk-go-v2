@@ -1,0 +1,1563 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.simpledbv2#AwsAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.simpledbv2#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Indicates a conflict with one or more parameters of the request.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.simpledbv2#DomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The domain name that uniquely identifies a SimpleDB domain within your account.",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#ExportArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A unique ARN identifier for the export.",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#ExportDataCutoffTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.simpledbv2#ExportManifestSummary": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#ExportStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The current state of the export. Current possible values include : PENDING - export request received,\n     IN_PROGRESS - export is being processed, SUCCEEDED - export completed successfully, and FAILED - export encountered an error."
+            }
+        },
+        "com.amazonaws.simpledbv2#ExportSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.simpledbv2#ExportSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of export summaries containing export ARN, status, creation timestamp, and associated domain name.",
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#ExportSummary": {
+            "type": "structure",
+            "members": {
+                "exportArn": {
+                    "target": "com.amazonaws.simpledbv2#ExportArn",
+                    "traits": {
+                        "smithy.api#documentation": "Unique ARN identifier of the export.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "exportStatus": {
+                    "target": "com.amazonaws.simpledbv2#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The current state of the export. Current possible values include : PENDING - export request received,\n         IN_PROGRESS - export is being processed, SUCCEEDED - export completed successfully, and FAILED - export encountered an error.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestedAt": {
+                    "target": "com.amazonaws.simpledbv2#RequestedAt",
+                    "traits": {
+                        "smithy.api#documentation": "Timestamp when the export request was received by the service",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainName": {
+                    "target": "com.amazonaws.simpledbv2#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the domain for which the export was created.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Summary information about an export, including its unique identifier, current status,\n     creation time, and the domain being exported."
+            }
+        },
+        "com.amazonaws.simpledbv2#FailureCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.simpledbv2#FailureMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#GetExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simpledbv2#GetExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.simpledbv2#GetExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simpledbv2#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.simpledbv2#NoSuchExportException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Returns information for an existing domain export.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get export details",
+                        "input": {
+                            "exportArn": "arn:aws:sdb:us-east-1:123456789012:export/abc123"
+                        },
+                        "output": {
+                            "exportArn": "arn:aws:sdb:us-east-1:123456789012:export/abc123",
+                            "clientToken": "abc123-def456-ghi789",
+                            "exportStatus": "SUCCEEDED",
+                            "domainName": "my-domain",
+                            "requestedAt": 1234567890,
+                            "s3Bucket": "my-export-bucket",
+                            "exportDataCutoffTime": 1234567895
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/v2/GetExport",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetExportFailure",
+                        "params": {
+                            "exportArn": "arn:aws:sdb:us-east-1:123456789012:domain/testDomain/export/3eb4eaed-872b-4e08-b4b6-ff6999a83e01"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.simpledbv2#NoSuchExportException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ],
+                "smithy.waiters#waitable": {
+                    "ExportSucceeded": {
+                        "minDelay": 30,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "exportStatus",
+                                        "expected": "SUCCEEDED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "exportStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#GetExportRequest": {
+            "type": "structure",
+            "members": {
+                "exportArn": {
+                    "target": "com.amazonaws.simpledbv2#ExportArn",
+                    "traits": {
+                        "smithy.api#documentation": "Unique ARN identifier of the export.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.simpledbv2#GetExportResponse": {
+            "type": "structure",
+            "members": {
+                "exportArn": {
+                    "target": "com.amazonaws.simpledbv2#ExportArn",
+                    "traits": {
+                        "smithy.api#documentation": "Unique ARN identifier of the export.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.simpledbv2#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "The client token provided for this export.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "exportStatus": {
+                    "target": "com.amazonaws.simpledbv2#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The current state of the export. Current possible values include : PENDING - export request received,\n         IN_PROGRESS - export is being processed, SUCCEEDED - export completed successfully, and FAILED - export encountered an error.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainName": {
+                    "target": "com.amazonaws.simpledbv2#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the domain that was exported.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestedAt": {
+                    "target": "com.amazonaws.simpledbv2#RequestedAt",
+                    "traits": {
+                        "smithy.api#documentation": "Timestamp when the export request was received by the service.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Bucket": {
+                    "target": "com.amazonaws.simpledbv2#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the S3 bucket for this export.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3KeyPrefix": {
+                    "target": "com.amazonaws.simpledbv2#S3KeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "The S3 key prefix provided in the corresponding StartDomainExport request."
+                    }
+                },
+                "s3SseAlgorithm": {
+                    "target": "com.amazonaws.simpledbv2#S3SseAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "The S3 SSE encryption algorithm for this export."
+                    }
+                },
+                "s3SseKmsKeyId": {
+                    "target": "com.amazonaws.simpledbv2#S3SseKmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "The KMS key ID for this export."
+                    }
+                },
+                "s3BucketOwner": {
+                    "target": "com.amazonaws.simpledbv2#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "The S3 bucket owner account ID for this export."
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.simpledbv2#FailureCode",
+                    "traits": {
+                        "smithy.api#documentation": "Failure code for the result of the failed export."
+                    }
+                },
+                "failureMessage": {
+                    "target": "com.amazonaws.simpledbv2#FailureMessage",
+                    "traits": {
+                        "smithy.api#documentation": "Export failure reason description."
+                    }
+                },
+                "exportManifest": {
+                    "target": "com.amazonaws.simpledbv2#ExportManifestSummary",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the manifest summary file for the export."
+                    }
+                },
+                "itemsCount": {
+                    "target": "com.amazonaws.simpledbv2#ItemsCount",
+                    "traits": {
+                        "smithy.api#documentation": "Total number of exported items."
+                    }
+                },
+                "exportDataCutoffTime": {
+                    "target": "com.amazonaws.simpledbv2#ExportDataCutoffTime",
+                    "traits": {
+                        "smithy.api#documentation": "The timestamp indicating the cutoff point for data inclusion in the export.\n    All data inserted or modified before this time will be present in the exported data.\n    Data insertions or modifications after this timestamp may or may not be present in the export."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.simpledbv2#IdempotencyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#InvalidNextTokenException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The specified next token is not valid.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.simpledbv2#InvalidParameterCombinationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Parameters that must not be used together were used together in the request.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.simpledbv2#InvalidParameterValueException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The specified parameter value is not valid.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.simpledbv2#ItemsCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#ListExports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simpledbv2#ListExportsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.simpledbv2#ListExportsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simpledbv2#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.simpledbv2#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.simpledbv2#NoSuchDomainException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all exports that were created. The results are paginated and can be filtered by domain name.",
+                "smithy.api#examples": [
+                    {
+                        "title": "List all exports",
+                        "input": {},
+                        "output": {
+                            "exportSummaries": [
+                                {
+                                    "exportArn": "arn:aws:sdb:us-east-1:123456789012:export/abc123",
+                                    "domainName": "my-domain",
+                                    "exportStatus": "SUCCEEDED",
+                                    "requestedAt": 1234567890
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/v2/ListExports",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "exportSummaries",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListExportsSuccess",
+                        "params": {},
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    },
+                    {
+                        "id": "ListExportsWithInvalidDomain",
+                        "params": {
+                            "domainName": "non-existent-domain-12345"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.simpledbv2#NoSuchDomainException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simpledbv2#ListExportsRequest": {
+            "type": "structure",
+            "members": {
+                "domainName": {
+                    "target": "com.amazonaws.simpledbv2#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the domain to filter exports. If not provided, exports for all the domains will be listed."
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.simpledbv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of exports to return in a single response."
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.simpledbv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "A pagination token used to retrieve the next page of results. This token is obtained from\n        the nextToken field in the previous ListExportsResponse. Leave empty for the first request."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.simpledbv2#ListExportsResponse": {
+            "type": "structure",
+            "members": {
+                "exportSummaries": {
+                    "target": "com.amazonaws.simpledbv2#ExportSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "List of export summaries containing export ARN, status, request timestamp, and associated domain name.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.simpledbv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "A pagination token indicating that more results are available. To retrieve the next page\n        of results, provide this token in a subsequent ListExports request. If null or empty, there are no\n        more results to retrieve."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.simpledbv2#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "The maximum number of results to return in a single response. Note: The actual number of results returned might\n    be less than the specified maxResults.",
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A pagination token used for retrieving subsequent pages of results.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#NoSuchDomainException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The specified domain does not exist.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.simpledbv2#NoSuchExportException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Export with specified ARN does not exist.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.simpledbv2#NumberExportsLimitExceeded": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Cannot start export as export quota limit was exceeded",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.simpledbv2#RequestedAt": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#documentation": "Timestamp when the export (or any other operation) was requested."
+            }
+        },
+        "com.amazonaws.simpledbv2#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-z0-9A-Z]+[\\.\\-\\w]*[a-z0-9A-Z]+$"
+            }
+        },
+        "com.amazonaws.simpledbv2#S3KeyPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 850
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#S3SseAlgorithm": {
+            "type": "enum",
+            "members": {
+                "AES256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES256"
+                    }
+                },
+                "KMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KMS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#S3SseKmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#SimpleDBv2": {
+            "type": "service",
+            "version": "2025-09-26",
+            "operations": [
+                {
+                    "target": "com.amazonaws.simpledbv2#GetExport"
+                },
+                {
+                    "target": "com.amazonaws.simpledbv2#ListExports"
+                },
+                {
+                    "target": "com.amazonaws.simpledbv2#StartDomainExport"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SimpleDBv2",
+                    "arnNamespace": "sdb",
+                    "cloudFormationName": "SDB",
+                    "endpointPrefix": "sdb"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sdb"
+                },
+                "aws.endpoints#standardRegionalEndpoints": {
+                    "regionSpecialCases": {
+                        "us-east-1": [
+                            {
+                                "endpoint": "https://sdb.amazonaws.com"
+                            }
+                        ]
+                    }
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "Amazon SimpleDB is a web service providing the core database functions of data indexing and\n     querying in the cloud. By offloading the time and effort associated with building and operating a web-scale\n     database, SimpleDB provides developers the freedom to focus on application development. \n\n     A traditional, clustered relational database requires a sizable upfront capital outlay, is complex to design,\n     and often requires extensive and repetitive database administration. Amazon SimpleDB is dramatically simpler,\n     requiring no schema, automatically indexing your data and providing a simple API for storage and access.\n     This approach eliminates the administrative burden of data modeling, index maintenance, and performance tuning.\n     Developers gain access to this functionality within Amazon's proven computing environment, are able to scale\n     instantly, and pay only for what they use.",
+                "smithy.api#title": "Amazon SimpleDB v2",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "Region"
+                                                                },
+                                                                "us-east-1"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://sdb.amazonaws.com",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://sdb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://sdb-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://sdb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://sdb.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sdb.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.simpledbv2#StartDomainExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simpledbv2#StartDomainExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.simpledbv2#StartDomainExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simpledbv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.simpledbv2#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.simpledbv2#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.simpledbv2#NoSuchDomainException"
+                },
+                {
+                    "target": "com.amazonaws.simpledbv2#NumberExportsLimitExceeded"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Initiates the export of a SimpleDB domain to an S3 bucket.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Start a domain export",
+                        "input": {
+                            "domainName": "my-domain",
+                            "s3Bucket": "my-export-bucket"
+                        },
+                        "output": {
+                            "clientToken": "abc123-def456-ghi789",
+                            "exportArn": "arn:aws:sdb:us-east-1:123456789012:export/abc123",
+                            "requestedAt": 1234567890
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/v2/StartDomainExport",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "StartDomainExportWithInvalidDomain",
+                        "params": {
+                            "domainName": "non-existent-domain-12345",
+                            "s3Bucket": "test-bucket"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.simpledbv2#NoSuchDomainException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simpledbv2#StartDomainExportRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.simpledbv2#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "Providing a ClientToken makes the call to StartDomainExport API idempotent,\n    meaning that multiple identical calls have the same effect as one single call. A client token is valid for\n    8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token\n    is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours,\n    or the result might not be idempotent. If you submit a request with the same client token but a change\n    in other parameters within the 8-hour idempotency window, a ConflictException will be returned.",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "domainName": {
+                    "target": "com.amazonaws.simpledbv2#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the domain to export.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Bucket": {
+                    "target": "com.amazonaws.simpledbv2#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the S3 bucket where the domain data will be exported.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3KeyPrefix": {
+                    "target": "com.amazonaws.simpledbv2#S3KeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "The prefix string to be used to generate the S3 object keys for export artifacts."
+                    }
+                },
+                "s3SseAlgorithm": {
+                    "target": "com.amazonaws.simpledbv2#S3SseAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "The server-side encryption algorithm to use for the exported data in S3.\n     Valid values are: AES256 (SSE-S3) and KMS (SSE-KMS). If not specified, bucket's default encryption will apply."
+                    }
+                },
+                "s3SseKmsKeyId": {
+                    "target": "com.amazonaws.simpledbv2#S3SseKmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "The KMS key ID to use for server-side encryption with AWS KMS-managed keys (SSE-KMS).\n     This parameter is only expected with KMS as the S3 SSE algorithm."
+                    }
+                },
+                "s3BucketOwner": {
+                    "target": "com.amazonaws.simpledbv2#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the AWS account that owns the bucket the export will be stored in."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.simpledbv2#StartDomainExportResponse": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.simpledbv2#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "The client token that was provided in the request.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "exportArn": {
+                    "target": "com.amazonaws.simpledbv2#ExportArn",
+                    "traits": {
+                        "smithy.api#documentation": "Unique ARN identifier of the export.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestedAt": {
+                    "target": "com.amazonaws.simpledbv2#RequestedAt",
+                    "traits": {
+                        "smithy.api#documentation": "Timestamp when the export request was received by the service.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        }
+    }
+}
