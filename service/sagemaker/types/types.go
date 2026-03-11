@@ -18179,6 +18179,12 @@ type ReservedCapacityOffering struct {
 	// The end time of the reserved capacity offering.
 	EndTime *time.Time
 
+	// The end time of the extension for the reserved capacity offering.
+	ExtensionEndTime *time.Time
+
+	// The start time of the extension for the reserved capacity offering.
+	ExtensionStartTime *time.Time
+
 	// The type of reserved capacity offering.
 	ReservedCapacityType ReservedCapacityType
 
@@ -21174,6 +21180,82 @@ type TrainingJobSummary struct {
 
 	// The status of the warm pool associated with the training job.
 	WarmPoolStatus *WarmPoolStatus
+
+	noSmithyDocumentSerde
+}
+
+// Details about an extension to a training plan, including the offering ID,
+// dates, status, and cost information.
+type TrainingPlanExtension struct {
+
+	// The unique identifier of the extension offering that was used to create this
+	// extension.
+	//
+	// This member is required.
+	TrainingPlanExtensionOfferingId *string
+
+	// The Availability Zone of the extension.
+	AvailabilityZone *string
+
+	// The Availability Zone ID of the extension.
+	AvailabilityZoneId *string
+
+	// The currency code for the upfront fee (e.g., USD).
+	CurrencyCode *string
+
+	// The duration of the extension in hours.
+	DurationHours *int32
+
+	// The end date of the extension period.
+	EndDate *time.Time
+
+	// The timestamp when the extension was created.
+	ExtendedAt *time.Time
+
+	// The payment processing status of the extension.
+	PaymentStatus *string
+
+	// The start date of the extension period.
+	StartDate *time.Time
+
+	// The current status of the extension (e.g., Pending, Active, Scheduled, Failed,
+	// Expired).
+	Status *string
+
+	// The upfront fee for the extension.
+	UpfrontFee *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an available extension offering for a training plan. Use the
+// offering ID with the [ExtendTrainingPlan]API to extend a training plan.
+//
+// [ExtendTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ExtendTrainingPlan.html
+type TrainingPlanExtensionOffering struct {
+
+	// The unique identifier for this extension offering.
+	//
+	// This member is required.
+	TrainingPlanExtensionOfferingId *string
+
+	// The Availability Zone for this extension offering.
+	AvailabilityZone *string
+
+	// The currency code for the upfront fee (e.g., USD).
+	CurrencyCode *string
+
+	// The duration of this extension offering in hours.
+	DurationHours *int32
+
+	// The end date of this extension offering.
+	EndDate *time.Time
+
+	// The start date of this extension offering.
+	StartDate *time.Time
+
+	// The upfront fee for this extension offering.
+	UpfrontFee *string
 
 	noSmithyDocumentSerde
 }

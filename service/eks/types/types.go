@@ -1022,8 +1022,8 @@ type ControlPlanePlacementResponse struct {
 type ControlPlaneScalingConfig struct {
 
 	// The control plane scaling tier configuration. Available options are standard ,
-	// tier-xl , tier-2xl , or tier-4xl . For more information, see EKS Provisioned
-	// Control Plane in the Amazon EKS User Guide.
+	// tier-xl , tier-2xl , tier-4xl, or tier-8xl . For more information, see EKS
+	// Provisioned Control Plane in the Amazon EKS User Guide.
 	Tier ProvisionedControlPlaneTier
 
 	noSmithyDocumentSerde

@@ -45,12 +45,30 @@ type GetProfileRecommendationsInput struct {
 	// This member is required.
 	RecommenderName *string
 
+	// A list of item IDs to rank for the user. Use this when you want to re-rank a
+	// specific set of items rather than getting recommendations from the full item
+	// catalog. Required for personalized-ranking use cases.
+	CandidateIds []string
+
 	// The contextual metadata used to provide dynamic runtime information to tailor
 	// recommendations.
 	Context map[string]string
 
 	// The maximum number of recommendations to return. The default value is 10.
 	MaxResults *int32
+
+	// Configuration for including item metadata in the recommendation response. Use
+	// this to specify which metadata columns to return alongside recommended items.
+	MetadataConfig *types.MetadataConfig
+
+	// A list of filters to apply to the returned recommendations. Filters define
+	// criteria for including or excluding items from the recommendation results.
+	RecommenderFilters []types.RecommenderFilter
+
+	// A list of promotional filters to apply to the recommendations. Promotional
+	// filters allow you to promote specific items within a configurable subset of
+	// recommendation results.
+	RecommenderPromotionalFilters []types.RecommenderPromotionalFilter
 
 	noSmithyDocumentSerde
 }

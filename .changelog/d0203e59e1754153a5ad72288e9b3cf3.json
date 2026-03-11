@@ -1,0 +1,8 @@
+{
+    "id": "d0203e59-e175-4153-a5ad-72288e9b3cf3",
+    "type": "feature",
+    "description": "Added WINDOWS SERVER 2025 OperatingSystemName.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

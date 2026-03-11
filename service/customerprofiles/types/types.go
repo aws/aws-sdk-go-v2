@@ -791,6 +791,10 @@ type EventParameters struct {
 	// The minimum value threshold that an event must meet to be considered valid.
 	EventValueThreshold *float64
 
+	// The weight of the event type. A higher weight means higher importance of the
+	// event type for the created solution.
+	EventWeight *float64
+
 	noSmithyDocumentSerde
 }
 
@@ -1309,6 +1313,17 @@ type IncrementalPullConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for inference behavior of the recommender.
+type InferenceConfig struct {
+
+	// The minimum provisioned transactions per second (TPS) that the recommender
+	// supports. The default value is 1. A high MinProvisionedTPS will increase your
+	// cost.
+	MinProvisionedTPS *int32
+
+	noSmithyDocumentSerde
+}
+
 // Configuration data for integration workflow.
 type IntegrationConfig struct {
 
@@ -1787,6 +1802,16 @@ type MatchItem struct {
 
 	// A list of identifiers for profiles that match.
 	ProfileIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for metadata to include in recommendation responses.
+type MetadataConfig struct {
+
+	// A list of metadata column names from your Items dataset to include in the
+	// recommendation response.
+	MetadataColumns []string
 
 	noSmithyDocumentSerde
 }
@@ -2271,12 +2296,80 @@ type Recommendation struct {
 type RecommenderConfig struct {
 
 	// Configuration settings for how the recommender processes and uses events.
-	//
-	// This member is required.
 	EventsConfig *EventsConfig
+
+	// Configuration settings for how the recommender handles inference requests.
+	InferenceConfig *InferenceConfig
 
 	// How often the recommender should retrain its model with new data.
 	TrainingFrequency *int32
+
+	noSmithyDocumentSerde
+}
+
+// A filter that specifies criteria for including or excluding items from
+// recommendations.
+type RecommenderFilter struct {
+
+	// The name of the recommender filter to apply.
+	Name *string
+
+	// The values to use when filtering recommendations. For each placeholder
+	// parameter in your filter expression, provide the parameter name (in matching
+	// case) as a key and the filter value(s) as the corresponding value. Separate
+	// multiple values for one parameter with a comma.
+	Values map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of a recommender filter's configuration and current state.
+type RecommenderFilterSummary struct {
+
+	// The timestamp when the recommender filter was created.
+	CreatedAt *time.Time
+
+	// A description of the recommender filter's purpose and characteristics.
+	Description *string
+
+	// If the recommender filter is in a failed state, provides the reason for the
+	// failure.
+	FailureReason *string
+
+	// The filter expression that defines which items to include or exclude from
+	// recommendations.
+	RecommenderFilterExpression *string
+
+	// The name of the recommender filter.
+	RecommenderFilterName *string
+
+	// The current operational status of the recommender filter.
+	Status RecommenderFilterStatus
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on a promotion. A promotion defines additional business
+// rules that apply to a configurable subset of recommended items.
+type RecommenderPromotionalFilter struct {
+
+	// The name of the recommender filter to use for the promotion.
+	Name *string
+
+	// The percentage of recommended items to apply the promotion to.
+	PercentPromotedItems *int32
+
+	// The name of the promotion.
+	PromotionName *string
+
+	// The values to use when promoting items. For each placeholder parameter in your
+	// promotion's filter expression, provide the parameter name (in matching case) as
+	// a key and the filter value(s) as the corresponding value. Separate multiple
+	// values for one parameter with a comma.
+	Values map[string]string
 
 	noSmithyDocumentSerde
 }

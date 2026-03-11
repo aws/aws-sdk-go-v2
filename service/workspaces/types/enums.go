@@ -923,6 +923,7 @@ const (
 	OperatingSystemNameWindowsServer2016 OperatingSystemName = "WINDOWS_SERVER_2016"
 	OperatingSystemNameWindowsServer2019 OperatingSystemName = "WINDOWS_SERVER_2019"
 	OperatingSystemNameWindowsServer2022 OperatingSystemName = "WINDOWS_SERVER_2022"
+	OperatingSystemNameWindowsServer2025 OperatingSystemName = "WINDOWS_SERVER_2025"
 	OperatingSystemNameRhel8             OperatingSystemName = "RHEL_8"
 	OperatingSystemNameRocky8            OperatingSystemName = "ROCKY_8"
 )
@@ -944,6 +945,7 @@ func (OperatingSystemName) Values() []OperatingSystemName {
 		"WINDOWS_SERVER_2016",
 		"WINDOWS_SERVER_2019",
 		"WINDOWS_SERVER_2022",
+		"WINDOWS_SERVER_2025",
 		"RHEL_8",
 		"ROCKY_8",
 	}

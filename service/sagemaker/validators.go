@@ -3990,6 +3990,26 @@ func (m *validateOpDescribeTrainingJob) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTrainingPlanExtensionHistory struct {
+}
+
+func (*validateOpDescribeTrainingPlanExtensionHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTrainingPlanExtensionHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTrainingPlanExtensionHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTrainingPlanExtensionHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTrainingPlan struct {
 }
 
@@ -4165,6 +4185,26 @@ func (m *validateOpDisassociateTrialComponent) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateTrialComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExtendTrainingPlan struct {
+}
+
+func (*validateOpExtendTrainingPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExtendTrainingPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExtendTrainingPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExtendTrainingPlanInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -7006,6 +7046,10 @@ func addOpDescribeTrainingJobValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeTrainingJob{}, middleware.After)
 }
 
+func addOpDescribeTrainingPlanExtensionHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTrainingPlanExtensionHistory{}, middleware.After)
+}
+
 func addOpDescribeTrainingPlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTrainingPlan{}, middleware.After)
 }
@@ -7040,6 +7084,10 @@ func addOpDetachClusterNodeVolumeValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDisassociateTrialComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateTrialComponent{}, middleware.After)
+}
+
+func addOpExtendTrainingPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExtendTrainingPlan{}, middleware.After)
 }
 
 func addOpGetDeviceFleetReportValidationMiddleware(stack *middleware.Stack) error {
@@ -19525,6 +19573,21 @@ func validateOpDescribeTrainingJobInput(v *DescribeTrainingJobInput) error {
 	}
 }
 
+func validateOpDescribeTrainingPlanExtensionHistoryInput(v *DescribeTrainingPlanExtensionHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrainingPlanExtensionHistoryInput"}
+	if v.TrainingPlanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingPlanArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeTrainingPlanInput(v *DescribeTrainingPlanInput) error {
 	if v == nil {
 		return nil
@@ -19664,6 +19727,21 @@ func validateOpDisassociateTrialComponentInput(v *DisassociateTrialComponentInpu
 	}
 	if v.TrialName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrialName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExtendTrainingPlanInput(v *ExtendTrainingPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExtendTrainingPlanInput"}
+	if v.TrainingPlanExtensionOfferingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingPlanExtensionOfferingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

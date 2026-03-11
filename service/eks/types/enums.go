@@ -864,6 +864,7 @@ const (
 	ProvisionedControlPlaneTierTierXl   ProvisionedControlPlaneTier = "tier-xl"
 	ProvisionedControlPlaneTierTier2xl  ProvisionedControlPlaneTier = "tier-2xl"
 	ProvisionedControlPlaneTierTier4xl  ProvisionedControlPlaneTier = "tier-4xl"
+	ProvisionedControlPlaneTierTier8xl  ProvisionedControlPlaneTier = "tier-8xl"
 )
 
 // Values returns all known values for ProvisionedControlPlaneTier. Note that this
@@ -876,6 +877,7 @@ func (ProvisionedControlPlaneTier) Values() []ProvisionedControlPlaneTier {
 		"tier-xl",
 		"tier-2xl",
 		"tier-4xl",
+		"tier-8xl",
 	}
 }
 

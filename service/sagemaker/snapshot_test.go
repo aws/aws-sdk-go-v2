@@ -2462,6 +2462,18 @@ func TestCheckSnapshot_DescribeTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeTrainingPlanExtensionHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTrainingPlanExtensionHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTrainingPlanExtensionHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeTransformJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTransformJob(context.Background(), nil, func(o *Options) {
@@ -2575,6 +2587,18 @@ func TestCheckSnapshot_EnableSagemakerServicecatalogPortfolio(t *testing.T) {
 	_, err := svc.EnableSagemakerServicecatalogPortfolio(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableSagemakerServicecatalogPortfolio")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ExtendTrainingPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExtendTrainingPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ExtendTrainingPlan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7009,6 +7033,18 @@ func TestUpdateSnapshot_DescribeTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeTrainingPlanExtensionHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTrainingPlanExtensionHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTrainingPlanExtensionHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeTransformJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTransformJob(context.Background(), nil, func(o *Options) {
@@ -7122,6 +7158,18 @@ func TestUpdateSnapshot_EnableSagemakerServicecatalogPortfolio(t *testing.T) {
 	_, err := svc.EnableSagemakerServicecatalogPortfolio(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableSagemakerServicecatalogPortfolio")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ExtendTrainingPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExtendTrainingPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ExtendTrainingPlan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

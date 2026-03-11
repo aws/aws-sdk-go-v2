@@ -1,0 +1,8 @@
+{
+    "id": "561c0b15-80b1-4632-b1db-897c0b70d471",
+    "type": "feature",
+    "description": "Introduced Amazon SimpleDB export functionality enabling domain data export to S3 in JSON format. Added three new APIs StartDomainExport, GetExport, and ListExports via SimpleDBv2 service. Supports cross-region exports and KMS encryption.",
+    "modules": [
+        "service/simpledbv2"
+    ]
+}
