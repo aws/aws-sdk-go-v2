@@ -1,3 +1,20 @@
+# Release (2026-03-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.57.0](service/customerprofiles/CHANGELOG.md#v1570-2026-03-11)
+  * **Feature**: Today, Amazon Connect is announcing the ability to filter (include or exclude) recommendations based on properties of items and interactions.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.81.0](service/eks/CHANGELOG.md#v1810-2026-03-11)
+  * **Feature**: Adds support for a new tier in controlPlaneScalingConfig on EKS Clusters.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.55.0](service/polly/CHANGELOG.md#v1550-2026-03-11)
+  * **Feature**: Added support for the new voices - Ambre (fr-FR), Beatrice (it-IT), Florian (fr-FR), Lennart (de-DE), Lorenzo (it-IT) and Tiffany (en-US). They are available as a Generative voices only.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.236.0](service/sagemaker/CHANGELOG.md#v12360-2026-03-11)
+  * **Feature**: SageMaker training plans allow you to extend your existing training plans to avoid workload interruptions without workload reconfiguration. When a training plan is approaching expiration, you can extend it directly through the SageMaker AI console or programmatically using the API or AWS CLI.
+* `github.com/aws/aws-sdk-go-v2/service/simpledbv2`: [v1.0.0](service/simpledbv2/CHANGELOG.md#v100-2026-03-11)
+  * **Release**: New AWS service client module
+  * **Feature**: Introduced Amazon SimpleDB export functionality enabling domain data export to S3 in JSON format. Added three new APIs StartDomainExport, GetExport, and ListExports via SimpleDBv2 service. Supports cross-region exports and KMS encryption.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.67.0](service/workspaces/CHANGELOG.md#v1670-2026-03-11)
+  * **Feature**: Added WINDOWS SERVER 2025 OperatingSystemName.
+
 # Release (2026-03-10)
 
 ## Module Highlights

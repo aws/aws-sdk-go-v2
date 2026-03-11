@@ -1,3 +1,7 @@
+# v1.55.0 (2026-03-11)
+
+* **Feature**: Added support for the new voices - Ambre (fr-FR), Beatrice (it-IT), Florian (fr-FR), Lennart (de-DE), Lorenzo (it-IT) and Tiffany (en-US). They are available as a Generative voices only.
+
 # v1.54.12 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

@@ -1,3 +1,7 @@
+# v1.81.0 (2026-03-11)
+
+* **Feature**: Adds support for a new tier in controlPlaneScalingConfig on EKS Clusters.
+
 # v1.80.2 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

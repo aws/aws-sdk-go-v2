@@ -1,3 +1,7 @@
+# v1.104.1 (2026-03-11)
+
+* No change notes available for this release.
+
 # v1.104.0 (2026-03-04)
 
 * **Feature**: Added several new values for Capabilities, increased visual limit per sheet from previous limit to 75, renamed Quick Suite to Quick in several places.

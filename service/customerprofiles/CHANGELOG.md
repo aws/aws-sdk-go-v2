@@ -1,3 +1,7 @@
+# v1.57.0 (2026-03-11)
+
+* **Feature**: Today, Amazon Connect is announcing the ability to filter (include or exclude) recommendations based on properties of items and interactions.
+
 # v1.56.1 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

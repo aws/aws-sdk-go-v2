@@ -1,3 +1,7 @@
+# v1.236.0 (2026-03-11)
+
+* **Feature**: SageMaker training plans allow you to extend your existing training plans to avoid workload interruptions without workload reconfiguration. When a training plan is approaching expiration, you can extend it directly through the SageMaker AI console or programmatically using the API or AWS CLI.
+
 # v1.235.0 (2026-03-05)
 
 * **Feature**: Adds support for S3 Bucket Ownership validation for SageMaker Managed MLflow.

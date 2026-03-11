@@ -1,3 +1,7 @@
+# v1.67.0 (2026-03-11)
+
+* **Feature**: Added WINDOWS SERVER 2025 OperatingSystemName.
+
 # v1.66.2 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

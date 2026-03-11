@@ -1,8 +1,0 @@
-{
-    "id": "758b6014-6cc4-47fb-9979-026a88967127",
-    "type": "feature",
-    "description": "Today, Amazon Connect is announcing the ability to filter (include or exclude) recommendations based on properties of items and interactions.",
-    "modules": [
-        "service/customerprofiles"
-    ]
-}
