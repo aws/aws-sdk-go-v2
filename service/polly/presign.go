@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -64,7 +65,7 @@ func presignSerializeOpDocumentSynthesizeSpeechInput(v *SynthesizeSpeechInput, v
 	object := value.Object()
 	_ = object
 
-	if v.LexiconNames != nil && len(v.LexiconNames) > 0 {
+	if len(v.LexiconNames) > 0 {
 		objectKey := object.KeyWithValues("LexiconNames")
 		for _, name := range v.LexiconNames {
 			objectKey.String(name)
@@ -94,6 +95,23 @@ func presignSerializeOpDocumentSynthesizeSpeechInput(v *SynthesizeSpeechInput, v
 	if len(v.VoiceId) > 0 {
 		objectKey := object.Key("VoiceId")
 		objectKey.String(string(v.VoiceId))
+	}
+
+	if v.Engine != "" {
+		objectKey := object.Key("Engine")
+		objectKey.String(string(v.Engine))
+	}
+
+	if v.LanguageCode != "" {
+		objectKey := object.Key("LanguageCode")
+		objectKey.String(string(v.LanguageCode))
+	}
+
+	if len(v.SpeechMarkTypes) > 0 {
+		objectKey := object.KeyWithValues("SpeechMarkTypes")
+		for _, t := range v.SpeechMarkTypes {
+			objectKey.String(string(t))
+		}
 	}
 
 	return nil
