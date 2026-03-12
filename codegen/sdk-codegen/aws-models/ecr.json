@@ -11213,6 +11213,12 @@
                     "traits": {
                         "smithy.api#enumValue": "gitlab-container-registry"
                     }
+                },
+                "Chainguard": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "chainguard"
+                    }
                 }
             }
         },

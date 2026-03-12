@@ -468,13 +468,13 @@
                 "CmkSecretConfig": {
                     "target": "com.amazonaws.datasync#CmkSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the authentication token that DataSync uses to access a specific AzureBlob\n      storage location, with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationAzureBlob</code> request,\n      you provide only the KMS key ARN. DataSync uses this KMS key together with the authentication token you specify for\n        <code>SasConfiguration</code> to create a DataSync-managed secret to store the\n      location access credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n          <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationAzureBlob</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the authentication token that DataSync uses to access a specific AzureBlob\n      storage location, with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationAzureBlob</code> request,\n      you provide only the KMS key ARN. DataSync uses this KMS key together with the authentication token you specify for\n        <code>SasConfiguration</code> to create a DataSync-managed secret to store the\n      location access credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key\">\n        Using a service-managed secret encrypted with a custom KMS key</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n          <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationAzureBlob</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
                     }
                 },
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the authentication token for an AzureBlob storage location is stored in plain text, in Secrets\n      Manager. This configuration includes the secret ARN, and the ARN for an IAM role\n      that provides access to the secret.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n          <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationAzureBlob</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the authentication token for an AzureBlob storage location is stored in plain text, in Secrets\n      Manager. This configuration includes the secret ARN, and the ARN for an IAM role\n      that provides access to the secret. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key\">\n        Using a secret that you manage</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n          <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationAzureBlob</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
                     }
                 }
             },
@@ -866,8 +866,19 @@
                 "Password": {
                     "target": "com.amazonaws.datasync#SmbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the password of the user with the permissions to mount and access the files,\n      folders, and file metadata in your FSx for Windows File Server file system.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the password of the user with the permissions to mount and access the files,\n      folders, and file metadata in your FSx for Windows File Server file system.</p>"
+                    }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the password that DataSync uses to access a specific FSx Windows\n      storage location, with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationFsxWindows</code> request,\n      you provide only the KMS key ARN. DataSync uses this KMS key together with the <code>Password</code> you specify for\n      to create a DataSync-managed secret to store the location access credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key\">\n        Using a service-managed secret encrypted with a custom KMS key</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>Password</code>) or\n        <code>CustomSecretConfig</code> (without <code>Password</code>) to provide\n        credentials for a <code>CreateLocationFsxWindows</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the password for an FSx for Windows File Server storage location is stored in plain text, in Secrets\n      Manager. This configuration includes the secret ARN, and the ARN for an IAM role\n      that provides access to the secret. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key\">\n        Using a secret that you manage</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>Password</code>) or\n        <code>CustomSecretConfig</code> (without <code>Password</code>) to provide\n        credentials for a <code>CreateLocationFsxWindows</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
                     }
                 }
             },
@@ -991,6 +1002,18 @@
                     "target": "com.amazonaws.datasync#InputTagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The key-value pair that represents the tag that you want to add to the location. The value\n      can be an empty string. We recommend using tags to name your resources. </p>"
+                    }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the Kerberos keytab that DataSync uses to access a specific Hadoop\n      Distributed File System (HDFS) storage location, with a\n      customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationHdfs</code> request,\n      you provide only the KMS key ARN. DataSync uses this KMS key together with the <code>KerberosKeytab</code> you specify for\n      to create a DataSync-managed secret to store the location access credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key\">\n        Using a service-managed secret encrypted with a custom KMS key</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>KerberosKeytab</code>) or\n        <code>CustomSecretConfig</code> (without <code>KerberosKeytab</code>) to provide\n        credentials for a <code>CreateLocationHdfs</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the Kerberos keytab for the HDFS storage location is stored in binary, in Secrets\n      Manager. This configuration includes the secret ARN, and the ARN for an IAM role\n      that provides access to the secret. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key\">\n        Using a secret that you manage</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>KerberosKeytab</code>) or\n        <code>CustomSecretConfig</code> (without <code>KerberosKeytab</code>) to provide\n        credentials for a <code>CreateLocationHdfs</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
                     }
                 }
             },
@@ -1177,13 +1200,13 @@
                 "CmkSecretConfig": {
                     "target": "com.amazonaws.datasync#CmkSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the <code>SecretKey</code> that DataSync uses to access a specific object\n      storage location, with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationObjectStorage</code>\n      request, you provide only the KMS key ARN. DataSync uses this KMS key together with the value you specify for the <code>SecretKey</code> parameter\n      to create a DataSync-managed secret to store the location access credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SecretKey</code>) or\n          <code>CustomSecretConfig</code> (without <code>SecretKey</code>) to provide credentials\n        for a <code>CreateLocationObjectStorage</code> request. Do not provide both parameters for\n        the same request.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the <code>SecretKey</code> that DataSync uses to access a specific object\n      storage location, with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationObjectStorage</code>\n      request, you provide only the KMS key ARN. DataSync uses this KMS key together with the value you specify for the <code>SecretKey</code> parameter\n      to create a DataSync-managed secret to store the location access credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key\">\n        Using a service-managed secret encrypted with a custom KMS key</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SecretKey</code>) or\n          <code>CustomSecretConfig</code> (without <code>SecretKey</code>) to provide credentials\n        for a <code>CreateLocationObjectStorage</code> request. Do not provide both parameters for\n        the same request.</p>\n         </note>"
                     }
                 },
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the secret key for a specific object storage location is stored in plain text, in Secrets Manager.\n      This configuration includes the secret ARN, and the ARN for an IAM role that\n      provides access to the secret.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SecretKey</code>) or\n          <code>CustomSecretConfig</code> (without <code>SecretKey</code>) to provide credentials\n        for a <code>CreateLocationObjectStorage</code> request. Do not provide both parameters for\n        the same request.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the secret key for a specific object storage location is stored in plain text, in Secrets Manager.\n      This configuration includes the secret ARN, and the ARN for an IAM role that\n      provides access to the secret. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key\">\n        Using a secret that you manage</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SecretKey</code>) or\n          <code>CustomSecretConfig</code> (without <code>SecretKey</code>) to provide credentials\n        for a <code>CreateLocationObjectStorage</code> request. Do not provide both parameters for\n        the same request.</p>\n         </note>"
                     }
                 }
             },
@@ -1346,13 +1369,13 @@
                 "CmkSecretConfig": {
                     "target": "com.amazonaws.datasync#CmkSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, either a\n      <code>Password</code> or <code>KerberosKeytab</code> (for <code>NTLM</code> (default) and\n      <code>KERBEROS</code> authentication types, respectively) that DataSync uses to\n      access a specific SMB storage location, with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationSmbRequest</code> request,\n      you provide only the KMS key ARN. DataSync uses this KMS key together with either the <code>Password</code> or <code>KerberosKeytab</code>\n      you specify to create a DataSync-managed secret to store the location access\n      credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with either <code>Password</code> or\n        <code>KerberosKeytab</code>) or <code>CustomSecretConfig</code> (without any <code>Password</code>\n        and <code>KerberosKeytab</code>) to provide credentials for a <code>CreateLocationSmbRequest</code>\n        request. Do not provide both <code>CmkSecretConfig</code> and <code>CustomSecretConfig</code>\n        parameters for the same request.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, either a\n      <code>Password</code> or <code>KerberosKeytab</code> (for <code>NTLM</code> (default) and\n      <code>KERBEROS</code> authentication types, respectively) that DataSync uses to\n      access a specific SMB storage location, with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationSmbRequest</code> request,\n      you provide only the KMS key ARN. DataSync uses this KMS key together with either the <code>Password</code> or <code>KerberosKeytab</code>\n      you specify to create a DataSync-managed secret to store the location access\n      credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key\">\n        Using a service-managed secret encrypted with a custom KMS key</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with either <code>Password</code> or\n        <code>KerberosKeytab</code>) or <code>CustomSecretConfig</code> (without any <code>Password</code>\n        and <code>KerberosKeytab</code>) to provide credentials for a <code>CreateLocationSmbRequest</code>\n        request. Do not provide both <code>CmkSecretConfig</code> and <code>CustomSecretConfig</code>\n        parameters for the same request.</p>\n         </note>"
                     }
                 },
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the SMB storage location credentials is stored in Secrets Manager as plain text (for\n      <code>Password</code>) or binary (for <code>KerberosKeytab</code>). This configuration includes\n      the secret ARN, and the ARN for an IAM role that provides access to the secret.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n        <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationSmbRequest</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the SMB storage location credentials is stored in Secrets Manager as plain text (for\n      <code>Password</code>) or binary (for <code>KerberosKeytab</code>). This configuration includes\n      the secret ARN, and the ARN for an IAM role that provides access to the secret. For\n      more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key\">\n        Using a secret that you manage</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or\n        <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide\n        credentials for a <code>CreateLocationSmbRequest</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
                     }
                 },
                 "AgentArns": {
@@ -1880,7 +1903,7 @@
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes configuration information for a customer-managed secret, such as an\n      authentication token that DataSync uses to access a specific storage location, with\n      a customer-managed KMS key.</p>"
+                        "smithy.api#documentation": "<p>Describes configuration information for a customer-managed secret, such as an\n      authentication token that DataSync uses to access a specific storage location, with\n      a customer-managed Identity and Access Management (IAM) role that provides access to\n      the secret.</p>"
                     }
                 }
             },
@@ -2267,6 +2290,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Microsoft Active Directory domain that the FSx for Windows File Server file\n      system belongs to.</p>"
                     }
+                },
+                "ManagedSecretConfig": {
+                    "target": "com.amazonaws.datasync#ManagedSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes configuration information for a DataSync-managed secret, such as a\n      <code>Password</code> that DataSync uses to access\n      a specific storage location. DataSync uses the default Amazon Web Services-managed\n      KMS key to encrypt this secret in Secrets Manager.</p>"
+                    }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes configuration information for a DataSync-managed secret, such as a\n      <code>Password</code> that DataSync uses to access\n      a specific storage location, with a customer-managed KMS key.</p>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes configuration information for a customer-managed secret, such as a\n      <code>Password</code> that DataSync uses to access\n      a specific storage location, with a customer-managed Identity and Access Management\n      (IAM) role that provides access to the secret.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2381,6 +2422,24 @@
                     "target": "com.amazonaws.datasync#Time",
                     "traits": {
                         "smithy.api#documentation": "<p>The time that the HDFS location was created.</p>"
+                    }
+                },
+                "ManagedSecretConfig": {
+                    "target": "com.amazonaws.datasync#ManagedSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes configuration information for a DataSync-managed secret, such as a\n      <code>KerberosKeytab</code> that DataSync uses to access\n      a specific storage location. DataSync uses the default Amazon Web Services-managed\n      KMS key to encrypt this secret in Secrets Manager.</p>"
+                    }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes configuration information for a DataSync-managed secret, such as a\n      <code>KerberosKeytab</code> that DataSync uses to access\n      a specific storage location, with a customer-managed KMS key.</p>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes configuration information for a customer-managed secret, such as a\n      <code>KerberosKeytab</code> that DataSync uses to access\n      a specific storage location, with a customer-managed Identity and Access Management\n      (IAM) role that provides access to the secret.</p>"
                     }
                 }
             },
@@ -2562,7 +2621,7 @@
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes configuration information for a customer-managed secret, such as an\n      authentication token or set of credentials that DataSync uses to access a specific\n      transfer location, and a customer-managed KMS key.</p>"
+                        "smithy.api#documentation": "<p>Describes configuration information for a customer-managed secret, such as an\n      authentication token or set of credentials that DataSync uses to access a specific\n      transfer location, and a customer-managed Identity and Access Management (IAM) role\n      that provides access to the secret.</p>"
                     }
                 }
             },
@@ -2763,7 +2822,7 @@
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes configuration information for a customer-managed secret, such as a\n      <code>Password</code> or <code>KerberosKeytab</code> that DataSync uses to access\n      a specific storage location, with a customer-managed KMS key.</p>"
+                        "smithy.api#documentation": "<p>Describes configuration information for a customer-managed secret, such as a\n      <code>Password</code> or <code>KerberosKeytab</code> that DataSync uses to access\n      a specific storage location, with a customer-managed Identity and Access Management (IAM)\n      role that provides access to the secret.</p>"
                     }
                 }
             },
@@ -4643,8 +4702,9 @@
                 "Password": {
                     "target": "com.amazonaws.datasync#SmbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the password of a user who has permission to access your SVM.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Specifies the password of a user who has permission to access your SVM.</p>"
                     }
                 },
                 "User": {
@@ -4652,6 +4712,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a user that can mount and access the files, folders, and metadata in your\n      SVM.</p>\n         <p>For information about choosing a user with the right level of access for your transfer,\n      see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb\">Using\n        the SMB protocol</a>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ManagedSecretConfig": {
+                    "target": "com.amazonaws.datasync#ManagedSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes configuration information for a DataSync-managed secret, such as a\n      <code>Password</code> that DataSync uses to access\n      a specific storage location. DataSync uses the default Amazon Web Services-managed\n      KMS key to encrypt this secret in Secrets Manager.</p>\n         <note>\n            <p>Do not provide this for a <code>CreateLocation</code> request. <code>ManagedSecretConfig</code>\n        is a ReadOnly property and is only be populated in the <code>DescribeLocation</code>\n        response.</p>\n         </note>"
+                    }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, which\n      includes the password that DataSync uses to access a specific FSx for ONTAP\n      storage location (using SMB), with a customer-managed KMS key.</p>\n         <p>When you include this parameter as part of a <code>CreateLocationFsxOntap</code> request,\n      you provide only the KMS key ARN. DataSync uses this KMS key together with the <code>Password</code> you specify for\n      to create a DataSync-managed secret to store the location access credentials.</p>\n         <p>Make sure that DataSync has permission to access the KMS key that\n      you specify. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key\">\n        Using a service-managed secret encrypted with a custom KMS key</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>Password</code>) or\n        <code>CustomSecretConfig</code> (without <code>Password</code>) to provide\n        credentials for a <code>CreateLocationFsxOntap</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed Secrets Manager secret where\n      the password for an FSx for ONTAP storage location (using SMB) is stored in plain text,\n      in Secrets Manager. This configuration includes the secret ARN, and the ARN for\n      an IAM role that provides access to the secret. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key\">\n        Using a secret that you manage</a>.</p>\n         <note>\n            <p>You can use either <code>CmkSecretConfig</code> (with <code>Password</code>) or\n        <code>CustomSecretConfig</code> (without <code>Password</code>) to provide\n        credentials for a <code>CreateLocationFsxOntap</code> request. Do not provide both\n        parameters for the same request.</p>\n         </note>"
                     }
                 }
             },
@@ -4698,6 +4776,18 @@
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a user that can mount and access the files, folders, and metadata in your\n      SVM.</p>\n         <p>For information about choosing a user with the right level of access for your transfer,\n      see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb\">Using\n        the SMB protocol</a>.</p>"
+                    }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, such as a\n      <code>Password</code> or set of credentials that DataSync uses to access a\n      specific transfer location, and a customer-managed KMS key.</p>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed secret, such as a\n      <code>Password</code> or set of credentials that DataSync uses to access a\n      specific transfer location. This configuration includes the secret ARN, and the ARN\n      for an IAM role that provides access to the secret.</p>"
                     }
                 }
             },
@@ -7639,7 +7729,7 @@
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed secret, such as an\n      authentication token or set of credentials that DataSync uses to access a specific\n      transfer location, and a customer-managed KMS key.</p>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed secret, such as an\n      authentication token or set of credentials that DataSync uses to access a specific\n      transfer location, and a customer-managed Identity and Access Management (IAM) role that\n      provides access to the secret.</p>"
                     }
                 }
             },
@@ -7926,6 +8016,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the password of the user with the permissions to mount and access the files,\n      folders, and file metadata in your FSx for Windows File Server file system.</p>"
                     }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, such as a\n      <code>Password</code> or set of credentials that DataSync uses to access a specific\n      transfer location, and a customer-managed KMS key.</p>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed secret, such as a\n      <code>Password</code> or set of credentials that DataSync uses to access a specific\n      transfer location, and a customer-managed Identity and Access Management (IAM) role\n      that provides access to the secret.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8039,6 +8141,18 @@
                     "target": "com.amazonaws.datasync#AgentArnList",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the DataSync agents that can connect to your\n      HDFS cluster.</p>"
+                    }
+                },
+                "CmkSecretConfig": {
+                    "target": "com.amazonaws.datasync#CmkSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a DataSync-managed secret, such as a\n      <code>KerberosKeytab</code> or set of credentials that DataSync uses to access a\n      specific transfer location, and a customer-managed KMS key.</p>"
+                    }
+                },
+                "CustomSecretConfig": {
+                    "target": "com.amazonaws.datasync#CustomSecretConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed secret, such as a\n      <code>KerberosKeytab</code> or set of credentials that DataSync uses to\n      access a specific transfer location, and a customer-managed\n      Identity and Access Management (IAM) role that provides access to the secret.</p>"
                     }
                 }
             },
@@ -8200,7 +8314,7 @@
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed secret, such as an\n      authentication token or set of credentials that DataSync uses to access a specific\n      transfer location, and a customer-managed KMS key.</p>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed secret, such as an\n      authentication token or set of credentials that DataSync uses to access a specific\n      transfer location, and a customer-managed Identity and Access Management (IAM) role\n      that provides access to the secret.</p>"
                     }
                 }
             },
@@ -8341,7 +8455,7 @@
                 "CustomSecretConfig": {
                     "target": "com.amazonaws.datasync#CustomSecretConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed secret, such as a\n      <code>Password</code> or <code>KerberosKeytab</code> or set of credentials that DataSync uses to access a specific transfer location, and a\n      customer-managed KMS key.</p>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for a customer-managed secret, such as a\n      <code>Password</code> or <code>KerberosKeytab</code> or set of credentials that DataSync uses to access a specific transfer location, and a\n      customer-managed Identity and Access Management (IAM) role that provides access to\n      the secret.</p>"
                     }
                 },
                 "AgentArns": {
