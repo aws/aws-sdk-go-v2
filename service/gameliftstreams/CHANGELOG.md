@@ -1,3 +1,16 @@
+# v1.10.0 (2026-03-06)
+
+* **Feature**: Added new Gen6 stream classes based on the EC2 G6f instance family. These stream classes provide cost-optimized options for streaming well-optimized or lower-fidelity games on Windows environments.
+
+# v1.9.3 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.2 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

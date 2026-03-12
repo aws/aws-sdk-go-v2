@@ -7069,6 +7069,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose <code>dualstack</code> to help optimize reliability.</p>"
                     }
+                },
+                "OriginMtlsConfig": {
+                    "target": "com.amazonaws.cloudfront#OriginMtlsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures mutual TLS authentication between CloudFront and your origin server.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19005,6 +19011,21 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.cloudfront#OriginMtlsConfig": {
+            "type": "structure",
+            "members": {
+                "ClientCertificateArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the client certificate stored in Amazon Web Services Certificate Manager (ACM) that CloudFront uses to authenticate with your origin using Mutual TLS.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures mutual TLS authentication between CloudFront and your origin server.</p>"
             }
         },
         "com.amazonaws.cloudfront#OriginProtocolPolicy": {

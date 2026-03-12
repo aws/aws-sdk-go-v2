@@ -40,7 +40,8 @@ type RetrieveMemoryRecordsInput struct {
 	// This member is required.
 	MemoryId *string
 
-	// The namespace to filter memory records by.
+	// The namespace prefix to filter memory records by. Searches for memory records
+	// in namespaces that start with the provided prefix.
 	//
 	// This member is required.
 	Namespace *string

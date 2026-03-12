@@ -261,7 +261,7 @@ type AddOutputRequest struct {
 	//  The name of the output. This value must be unique within the current flow.
 	Name *string
 
-	//  A suffix for the names of the NDI sources that the flow creates. If a custom
+	//  A suffix for the name of the NDI® sender that the flow creates. If a custom
 	// name isn't specified, MediaConnect uses the output name.
 	NdiProgramName *string
 
@@ -686,6 +686,27 @@ type EgressGatewayBridge struct {
 	noSmithyDocumentSerde
 }
 
+//	The encoding configuration to apply to the NDI® source when transcoding it to
+//
+// a transport stream for downstream distribution. You can choose between several
+// predefined encoding profiles based on common use cases.
+type EncodingConfig struct {
+
+	//  The encoding profile to use when transcoding the NDI source content to a
+	// transport stream. You can change this value while the flow is running.
+	EncodingProfile EncodingProfile
+
+	//  The maximum video bitrate to use when transcoding the NDI source to a
+	// transport stream. This parameter enables you to override the default video
+	// bitrate within the encoding profile's supported range.
+	//
+	// The supported range is 10,000,000 - 50,000,000 bits per second (bps). If you
+	// don't specify a value, MediaConnect uses the default value of 20,000,000 bps.
+	VideoMaxBitrate *int32
+
+	noSmithyDocumentSerde
+}
+
 //	A collection of parameters that determine how MediaConnect will convert the
 //
 // content. These fields only apply to outputs on flows that have a CDI source.
@@ -734,7 +755,7 @@ type EncodingParametersRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the encryption of the flow.
+// Encryption information.
 type Encryption struct {
 
 	//  The ARN of the role that you created during setup (when you set up
@@ -1009,8 +1030,11 @@ type Flow struct {
 	//  The IP address from which video will be sent to output destinations.
 	EgressIp *string
 
-	//  Determines the processing capacity and feature set of the flow. Set this
-	// optional parameter to LARGE if you want to enable NDI outputs on the flow.
+	//  The encoding configuration to apply to the NDI® source when transcoding it to
+	// a transport stream for downstream distribution.
+	EncodingConfig *EncodingConfig
+
+	//  Determines the processing capacity and feature set of the flow.
 	FlowSize FlowSize
 
 	//  The maintenance settings for the flow.
@@ -1020,8 +1044,8 @@ type Flow struct {
 	// media stream with a source, you can also associate it with outputs on the flow.
 	MediaStreams []MediaStream
 
-	// Specifies the configuration settings for NDI outputs. Required when the flow
-	// includes NDI outputs.
+	// Specifies the configuration settings for a flow's NDI source or output.
+	// Required when the flow includes an NDI source or output.
 	NdiConfig *NdiConfig
 
 	//  The settings for the source failover.
@@ -1075,7 +1099,7 @@ type FlowTransitEncryptionKeyConfigurationMemberAutomatic struct {
 func (*FlowTransitEncryptionKeyConfigurationMemberAutomatic) isFlowTransitEncryptionKeyConfiguration() {
 }
 
-// The configuration settings for transit encryption using AWS Secrets Manager,
+// The configuration settings for transit encryption using Secrets Manager,
 // including the secret ARN and role ARN.
 type FlowTransitEncryptionKeyConfigurationMemberSecretsManager struct {
 	Value SecretsManagerEncryptionKeyConfiguration
@@ -1593,7 +1617,7 @@ type ListedRouterInput struct {
 	// This member is required.
 	Name *string
 
-	// The AWS Region where the router input is located.
+	// The Amazon Web Services Region where the router input is located.
 	//
 	// This member is required.
 	RegionName *string
@@ -1671,7 +1695,7 @@ type ListedRouterNetworkInterface struct {
 	// This member is required.
 	NetworkInterfaceType RouterNetworkInterfaceType
 
-	// The AWS Region where the router network interface is located.
+	// The Amazon Web Services Region where the router network interface is located.
 	//
 	// This member is required.
 	RegionName *string
@@ -1734,7 +1758,7 @@ type ListedRouterOutput struct {
 	// This member is required.
 	OutputType RouterOutputType
 
-	// The AWS Region where the router output is located.
+	// The AAmazon Web Services Region where the router output is located.
 	//
 	// This member is required.
 	RegionName *string
@@ -1921,7 +1945,7 @@ type MediaLiveInputRouterOutputStreamDetails struct {
 // The encryption configuration that defines how content is encrypted during
 // transit between MediaConnect Router and MediaLive. This configuration determines
 // whether encryption keys are automatically managed by the service or manually
-// managed through AWS Secrets Manager.
+// managed through Secrets Manager.
 type MediaLiveTransitEncryption struct {
 
 	// The configuration details for the MediaLive encryption key.
@@ -1956,7 +1980,7 @@ type MediaLiveTransitEncryptionKeyConfigurationMemberAutomatic struct {
 func (*MediaLiveTransitEncryptionKeyConfigurationMemberAutomatic) isMediaLiveTransitEncryptionKeyConfiguration() {
 }
 
-// The configuration settings for transit encryption using AWS Secrets Manager,
+// The configuration settings for transit encryption using Secrets Manager,
 // including the secret ARN and role ARN.
 type MediaLiveTransitEncryptionKeyConfigurationMemberSecretsManager struct {
 	Value SecretsManagerEncryptionKeyConfiguration
@@ -2280,8 +2304,7 @@ type MulticastSourceSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the configuration settings for NDI outputs. Required when the flow
-// includes NDI outputs.
+// Specifies the configuration settings for NDI sources and outputs.
 type NdiConfig struct {
 
 	// A prefix for the names of the NDI sources that the flow creates. If a custom
@@ -2294,14 +2317,17 @@ type NdiConfig struct {
 	// properly.
 	NdiDiscoveryServers []NdiDiscoveryServerConfig
 
-	// A setting that controls whether NDI outputs can be used in the flow. Must be
-	// ENABLED to add NDI outputs. Default is DISABLED.
+	// A setting that controls whether NDI® sources or outputs can be used in the
+	// flow.
+	//
+	// The default value is DISABLED . This value must be set as ENABLED for your flow
+	// to support NDI sources or outputs.
 	NdiState NdiState
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the configuration settings for individual NDI discovery servers. A
+// Specifies the configuration settings for individual NDI® discovery servers. A
 // maximum of 3 servers is allowed.
 type NdiDiscoveryServerConfig struct {
 
@@ -2319,6 +2345,116 @@ type NdiDiscoveryServerConfig struct {
 	// The port for the NDI discovery server. Defaults to 5959 if a custom port isn't
 	// specified.
 	DiscoveryServerPort *int32
+
+	noSmithyDocumentSerde
+}
+
+//	Metadata about the audio and video media that is part of the NDI® source
+//
+// content. This includes details about the individual media streams.
+type NdiMediaInfo struct {
+
+	//  A list of the individual media streams that make up the NDI source. This
+	// includes details about each stream's codec, resolution, frame rate, audio
+	// channels, and other parameters.
+	//
+	// This member is required.
+	Streams []NdiMediaStreamInfo
+
+	noSmithyDocumentSerde
+}
+
+//	Detailed information about a single media stream that is part of an NDI®
+//
+// source. This includes details about the stream type, codec, resolution, frame
+// rate, audio channels, and sample rate.
+type NdiMediaStreamInfo struct {
+
+	//  The codec used for the media stream. For NDI sources, use speed-hq .
+	//
+	// This member is required.
+	Codec *string
+
+	//  A unique identifier for the media stream.
+	//
+	// This member is required.
+	StreamId *int32
+
+	//  The type of media stream (for example, Video or Audio ).
+	//
+	// This member is required.
+	StreamType *string
+
+	//  The number of audio channels in the stream. Used when the streamType is Audio .
+	Channels *int32
+
+	//  The number of video frames displayed per second. Used when the streamType is
+	// Video .
+	FrameRate *string
+
+	//  The width and height dimensions of the video frame in pixels. Used when the
+	// streamType is Video .
+	FrameResolution *FrameResolution
+
+	//  The number of audio samples captured per second, measured in kilohertz (kHz).
+	// Used when the streamType is Audio .
+	SampleRate *int32
+
+	//  The method used to display video frames. Used when the streamType is Video .
+	ScanMode ScanMode
+
+	noSmithyDocumentSerde
+}
+
+// Information about a single NDI® sender, including its name.
+type NdiSourceInfo struct {
+
+	//  The name of the upstream NDI sender.
+	//
+	// This member is required.
+	SourceName *string
+
+	noSmithyDocumentSerde
+}
+
+//	Comprehensive information about the NDI® source that's associated with a flow.
+//
+// This includes the currently active NDI source, a list of all discovered NDI
+// senders, metadata about the media streams, and any relevant status messages.
+type NdiSourceMetadataInfo struct {
+
+	//  A list of the available upstream NDI senders aggregated from all of your
+	// configured discovery servers.
+	//
+	// This member is required.
+	DiscoveredSources []NdiSourceInfo
+
+	//  Detailed information about the media streams (video, audio, and so on) that
+	// are part of the active NDI source.
+	//
+	// This member is required.
+	MediaInfo *NdiMediaInfo
+
+	//  Any status messages or error codes related to the NDI source and its metadata.
+	//
+	// This member is required.
+	Messages []MessageDetail
+
+	//  The connected NDI sender that's currently sending source content to the flow's
+	// NDI source.
+	ActiveSource *NdiSourceInfo
+
+	noSmithyDocumentSerde
+}
+
+//	The settings for the NDI® source. This includes the exact name of the upstream
+//
+// NDI sender that you want to connect to your source.
+type NdiSourceSettings struct {
+
+	//  The exact name of an existing NDI sender that's registered with your discovery
+	// server. If included, the format of this name must be MACHINENAME (ProgramName) .
+	SourceName *string
 
 	noSmithyDocumentSerde
 }
@@ -2441,7 +2577,7 @@ type Output struct {
 	//   shows the address of the connected receiver.
 	//
 	//   - Peer IP addresses aren't available for entitlements, managed MediaLive
-	//   outputs, NDI outputs, and CDI/ST2110 outputs.
+	//   outputs, NDI® sources and outputs, and CDI/ST2110 outputs.
 	//
 	//   - The peer IP address might not be visible for flows that haven't been
 	//   started yet, or flows that were started before May 2025. In these cases, restart
@@ -2704,7 +2840,7 @@ type RouterInput struct {
 	// This member is required.
 	Name *string
 
-	// The AWS Region where the router input is located.
+	// The Amazon Web Services Region where the router input is located.
 	//
 	// This member is required.
 	RegionName *string
@@ -3090,7 +3226,7 @@ type RouterInputTransitEncryptionKeyConfigurationMemberAutomatic struct {
 func (*RouterInputTransitEncryptionKeyConfigurationMemberAutomatic) isRouterInputTransitEncryptionKeyConfiguration() {
 }
 
-// The configuration settings for transit encryption using AWS Secrets Manager,
+// The configuration settings for transit encryption using Secrets Manager,
 // including the secret ARN and role ARN.
 type RouterInputTransitEncryptionKeyConfigurationMemberSecretsManager struct {
 	Value SecretsManagerEncryptionKeyConfiguration
@@ -3146,7 +3282,7 @@ type RouterNetworkInterface struct {
 	// This member is required.
 	NetworkInterfaceType RouterNetworkInterfaceType
 
-	// The AWS Region where the router network interface is located.
+	// The Amazon Web Services Region where the router network interface is located.
 	//
 	// This member is required.
 	RegionName *string
@@ -3297,7 +3433,7 @@ type RouterOutput struct {
 	// This member is required.
 	OutputType RouterOutputType
 
-	// The AWS Region where the router output is located.
+	// The Amazon Web Services Region where the router output is located.
 	//
 	// This member is required.
 	RegionName *string
@@ -3622,17 +3758,17 @@ type RtpRouterOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration settings for transit encryption using AWS Secrets Manager,
+// The configuration settings for transit encryption using Secrets Manager,
 // including the secret ARN and role ARN.
 type SecretsManagerEncryptionKeyConfiguration struct {
 
-	// The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets
-	// Manager secret.
+	// The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager
+	// secret.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The ARN of the AWS Secrets Manager secret used for transit encryption.
+	// The ARN of the Secrets Manager secret used for transit encryption.
 	//
 	// This member is required.
 	SecretArn *string
@@ -3699,6 +3835,10 @@ type SetSourceRequest struct {
 
 	//  The name of the source.
 	Name *string
+
+	//  The settings for the NDI® source. This includes the exact name of the upstream
+	// NDI sender that you want to connect to your source.
+	NdiSourceSettings *NdiSourceSettings
 
 	//  The protocol that is used by the source.
 	//
@@ -4113,9 +4253,13 @@ type Transport struct {
 	// receiver’s minimum latency.
 	MinLatency *int32
 
-	// A suffix for the names of the NDI sources that the flow creates. If a custom
+	// A suffix for the name of the NDI® sender that the flow creates. If a custom
 	// name isn't specified, MediaConnect uses the output name.
 	NdiProgramName *string
+
+	//  The settings for the NDI source. This includes the exact name of the upstream
+	// NDI sender that you want to connect to your source.
+	NdiSourceSettings *NdiSourceSettings
 
 	// A quality setting for the NDI Speed HQ encoder.
 	NdiSpeedHqQuality *int32

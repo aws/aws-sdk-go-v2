@@ -1,3 +1,20 @@
+# v1.28.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.0 (2026-02-16)
+
+* **Feature**: Update MessageType enum to include missing types.
+
+# v1.27.0 (2026-01-23)
+
+* **Feature**: Fixes incorrect types in the UpdateAssistantAIAgent API request, adds MESSAGE to TargetType enum, and other minor changes.
+
 # v1.26.0 (2026-01-15)
 
 * **Feature**: Fix inference configuration shapes for the CreateAIPrompt and UpdateAIPrompt APIs, Modify Text Length Limit for SendMessage API

@@ -5993,11 +5993,6 @@ func validateOpUpdateAssistantAIAgentInput(v *UpdateAssistantAIAgentInput) error
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.OrchestratorConfigurationList != nil {
-		if err := validateOrchestratorConfigurationList(v.OrchestratorConfigurationList); err != nil {
-			invalidParams.AddNested("OrchestratorConfigurationList", err.(smithy.InvalidParamsError))
-		}
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

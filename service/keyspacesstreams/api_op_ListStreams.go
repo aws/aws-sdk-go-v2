@@ -38,8 +38,8 @@ type ListStreamsInput struct {
 	// all keyspaces are included in the results.
 	KeyspaceName *string
 
-	//  The maximum number of streams to return in a single ListStreams request.
-	// Default value is 100. The minimum value is 1 and the maximum value is 100.
+	//  The maximum number of streams to return in a single ListStreams request. The
+	// default value is 100. The minimum value is 1 and the maximum value is 100.
 	MaxResults *int32
 
 	//  An optional pagination token provided by a previous ListStreams operation. If
@@ -59,7 +59,7 @@ type ListStreamsOutput struct {
 
 	//  A pagination token that can be used in a subsequent ListStreams request. This
 	// token is returned if the response contains more streams than can be returned in
-	// a single response based on the MaxResults parameter.
+	// a single response based on the maxResults parameter.
 	NextToken *string
 
 	//  An array of stream objects, each containing summary information about a stream
@@ -172,8 +172,8 @@ func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, opt
 
 // ListStreamsPaginatorOptions is the paginator options for ListStreams
 type ListStreamsPaginatorOptions struct {
-	//  The maximum number of streams to return in a single ListStreams request.
-	// Default value is 100. The minimum value is 1 and the maximum value is 100.
+	//  The maximum number of streams to return in a single ListStreams request. The
+	// default value is 100. The minimum value is 1 and the maximum value is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

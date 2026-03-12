@@ -3527,6 +3527,42 @@
                     "traits": {
                         "smithy.api#enumValue": "Jihye"
                     }
+                },
+                "Ambre": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ambre"
+                    }
+                },
+                "Beatrice": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Beatrice"
+                    }
+                },
+                "Florian": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Florian"
+                    }
+                },
+                "Lennart": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Lennart"
+                    }
+                },
+                "Lorenzo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Lorenzo"
+                    }
+                },
+                "Tiffany": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tiffany"
+                    }
                 }
             }
         },

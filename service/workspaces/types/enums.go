@@ -407,6 +407,18 @@ const (
 	ComputeGraphicspro           Compute = "GRAPHICSPRO"
 	ComputeGraphicsG4dn          Compute = "GRAPHICS_G4DN"
 	ComputeGraphicsproG4dn       Compute = "GRAPHICSPRO_G4DN"
+	ComputeGraphicsG6Xlarge      Compute = "GRAPHICS_G6_XLARGE"
+	ComputeGraphicsG62xlarge     Compute = "GRAPHICS_G6_2XLARGE"
+	ComputeGraphicsG64xlarge     Compute = "GRAPHICS_G6_4XLARGE"
+	ComputeGraphicsG68xlarge     Compute = "GRAPHICS_G6_8XLARGE"
+	ComputeGraphicsG616xlarge    Compute = "GRAPHICS_G6_16XLARGE"
+	ComputeGraphicsGr64xlarge    Compute = "GRAPHICS_GR6_4XLARGE"
+	ComputeGraphicsGr68xlarge    Compute = "GRAPHICS_GR6_8XLARGE"
+	ComputeGraphicsG6fLarge      Compute = "GRAPHICS_G6F_LARGE"
+	ComputeGraphicsG6fXlarge     Compute = "GRAPHICS_G6F_XLARGE"
+	ComputeGraphicsG6f2xlarge    Compute = "GRAPHICS_G6F_2XLARGE"
+	ComputeGraphicsG6f4xlarge    Compute = "GRAPHICS_G6F_4XLARGE"
+	ComputeGraphicsGr6f4xlarge   Compute = "GRAPHICS_GR6F_4XLARGE"
 )
 
 // Values returns all known values for Compute. Note that this can be expanded in
@@ -426,6 +438,18 @@ func (Compute) Values() []Compute {
 		"GRAPHICSPRO",
 		"GRAPHICS_G4DN",
 		"GRAPHICSPRO_G4DN",
+		"GRAPHICS_G6_XLARGE",
+		"GRAPHICS_G6_2XLARGE",
+		"GRAPHICS_G6_4XLARGE",
+		"GRAPHICS_G6_8XLARGE",
+		"GRAPHICS_G6_16XLARGE",
+		"GRAPHICS_GR6_4XLARGE",
+		"GRAPHICS_GR6_8XLARGE",
+		"GRAPHICS_G6F_LARGE",
+		"GRAPHICS_G6F_XLARGE",
+		"GRAPHICS_G6F_2XLARGE",
+		"GRAPHICS_G6F_4XLARGE",
+		"GRAPHICS_GR6F_4XLARGE",
 	}
 }
 
@@ -774,6 +798,7 @@ type ImageComputeType string
 const (
 	ImageComputeTypeBase         ImageComputeType = "BASE"
 	ImageComputeTypeGraphicsG4dn ImageComputeType = "GRAPHICS_G4DN"
+	ImageComputeTypeGraphicsG6   ImageComputeType = "GRAPHICS_G6"
 )
 
 // Values returns all known values for ImageComputeType. Note that this can be
@@ -784,6 +809,7 @@ func (ImageComputeType) Values() []ImageComputeType {
 	return []ImageComputeType{
 		"BASE",
 		"GRAPHICS_G4DN",
+		"GRAPHICS_G6",
 	}
 }
 
@@ -897,6 +923,7 @@ const (
 	OperatingSystemNameWindowsServer2016 OperatingSystemName = "WINDOWS_SERVER_2016"
 	OperatingSystemNameWindowsServer2019 OperatingSystemName = "WINDOWS_SERVER_2019"
 	OperatingSystemNameWindowsServer2022 OperatingSystemName = "WINDOWS_SERVER_2022"
+	OperatingSystemNameWindowsServer2025 OperatingSystemName = "WINDOWS_SERVER_2025"
 	OperatingSystemNameRhel8             OperatingSystemName = "RHEL_8"
 	OperatingSystemNameRocky8            OperatingSystemName = "ROCKY_8"
 )
@@ -918,6 +945,7 @@ func (OperatingSystemName) Values() []OperatingSystemName {
 		"WINDOWS_SERVER_2016",
 		"WINDOWS_SERVER_2019",
 		"WINDOWS_SERVER_2022",
+		"WINDOWS_SERVER_2025",
 		"RHEL_8",
 		"ROCKY_8",
 	}

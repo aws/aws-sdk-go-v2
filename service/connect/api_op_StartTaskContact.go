@@ -81,6 +81,10 @@ type StartTaskContactInput struct {
 	// This member is required.
 	Name *string
 
+	// List of S3 presigned URLs of task attachments and their file name. You can have
+	// a maximum of 5 attachments per task.
+	Attachments []types.TaskAttachment
+
 	// A custom key-value pair using an attribute map. The attributes are standard
 	// Amazon Connect attributes, and can be accessed in flows just like any other
 	// contact attributes.

@@ -6,11 +6,9 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithytime "github.com/aws/smithy-go/time"
@@ -23,7 +21,7 @@ import (
 	"time"
 )
 
-func TestClient_RpcV2CborLists_smithyRpcv2cborSerialize(t *testing.T) {
+func TestClient_RpcV2CborLists_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *RpcV2CborListsInput
 		ExpectMethod  string
@@ -175,17 +173,17 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborSerialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient: protocoltesthttp.NewClient(),
-				Region:     "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
 			})
 			result, err := client.RpcV2CborLists(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -216,7 +214,165 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborSerialize(t *testing.T) {
 	}
 }
 
-func TestClient_RpcV2CborLists_smithyRpcv2cborDeserialize(t *testing.T) {
+func BenchmarkClient_RpcV2CborLists_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *RpcV2CborListsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RpcV2CborLists": {
+			Params: &RpcV2CborListsInput{
+				StringList: []string{
+					"foo",
+					"bar",
+				},
+				StringSet: []string{
+					"foo",
+					"bar",
+				},
+				IntegerList: []int32{
+					1,
+					2,
+				},
+				BooleanList: []bool{
+					true,
+					false,
+				},
+				TimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1398796238),
+					smithytime.ParseEpochSeconds(1398796238),
+				},
+				EnumList: []types.FooEnum{
+					types.FooEnum("Foo"),
+					types.FooEnum("0"),
+				},
+				IntEnumList: []types.IntegerEnum{
+					1,
+					2,
+				},
+				NestedStringList: [][]string{
+					{
+						"foo",
+						"bar",
+					},
+					{
+						"baz",
+						"qux",
+					},
+				},
+				StructureList: []types.StructureListMember{
+					{
+						A: ptr.String("1"),
+						B: ptr.String("2"),
+					},
+					{
+						A: ptr.String("3"),
+						B: ptr.String("4"),
+					},
+				},
+				BlobList: [][]byte{
+					[]byte("foo"),
+					[]byte("bar"),
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborLists",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v2pzdHJpbmdMaXN0gmNmb29jYmFyaXN0cmluZ1NldIJjZm9vY2JhcmtpbnRlZ2VyTGlzdIIBAmtib29sZWFuTGlzdIL19G10aW1lc3RhbXBMaXN0gsH7QdTX+/OAAADB+0HU1/vzgAAAaGVudW1MaXN0gmNGb29hMGtpbnRFbnVtTGlzdIIBAnBuZXN0ZWRTdHJpbmdMaXN0goJjZm9vY2JhcoJjYmF6Y3F1eG1zdHJ1Y3R1cmVMaXN0gqJhYWExYWJhMqJhYWEzYWJhNGhibG9iTGlzdIJDZm9vQ2Jhcv8=`)
+			},
+		},
+		"RpcV2CborListsEmpty": {
+			Params: &RpcV2CborListsInput{
+				StringList: []string{},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborLists",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v2pzdHJpbmdMaXN0n///`)
+			},
+		},
+		"RpcV2CborListsEmptyUsingDefiniteLength": {
+			Params: &RpcV2CborListsInput{
+				StringList: []string{},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborLists",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `oWpzdHJpbmdMaXN0gA==`)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
+			})
+			for i := 0; i < b.N; i++ {
+				client.RpcV2CborLists(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
+func TestClient_RpcV2CborLists_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -399,12 +555,7 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				Region: "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
 			})
 			var params RpcV2CborListsInput
 			result, err := client.RpcV2CborLists(context.Background(), &params)
@@ -416,6 +567,195 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborDeserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_RpcV2CborLists_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *RpcV2CborListsOutput
+	}{
+		"RpcV2CborLists": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2pzdHJpbmdMaXN0n2Nmb29jYmFy/2lzdHJpbmdTZXSfY2Zvb2NiYXL/a2ludGVnZXJMaXN0nwEC/2tib29sZWFuTGlzdJ/19P9tdGltZXN0YW1wTGlzdJ/B+0HU1/vzgAAAwftB1Nf784AAAP9oZW51bUxpc3SfY0Zvb2Ew/2tpbnRFbnVtTGlzdJ8BAv9wbmVzdGVkU3RyaW5nTGlzdJ+fY2Zvb2NiYXL/n2NiYXpjcXV4//9tc3RydWN0dXJlTGlzdJ+/YWFhMWFiYTL/v2FhYTNhYmE0//9oYmxvYkxpc3SfQ2Zvb0NiYXL//w==`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborListsOutput{
+				StringList: []string{
+					"foo",
+					"bar",
+				},
+				StringSet: []string{
+					"foo",
+					"bar",
+				},
+				IntegerList: []int32{
+					1,
+					2,
+				},
+				BooleanList: []bool{
+					true,
+					false,
+				},
+				TimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1398796238),
+					smithytime.ParseEpochSeconds(1398796238),
+				},
+				EnumList: []types.FooEnum{
+					types.FooEnum("Foo"),
+					types.FooEnum("0"),
+				},
+				IntEnumList: []types.IntegerEnum{
+					1,
+					2,
+				},
+				NestedStringList: [][]string{
+					{
+						"foo",
+						"bar",
+					},
+					{
+						"baz",
+						"qux",
+					},
+				},
+				StructureList: []types.StructureListMember{
+					{
+						A: ptr.String("1"),
+						B: ptr.String("2"),
+					},
+					{
+						A: ptr.String("3"),
+						B: ptr.String("4"),
+					},
+				},
+				BlobList: [][]byte{
+					[]byte("foo"),
+					[]byte("bar"),
+				},
+			},
+		},
+		"RpcV2CborListsEmpty": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2pzdHJpbmdMaXN0n///`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborListsOutput{
+				StringList: []string{},
+			},
+		},
+		"RpcV2CborIndefiniteStringInsideIndefiniteListCanDeserialize": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2pzdHJpbmdMaXN0n394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n//8=`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborListsOutput{
+				StringList: []string{
+					"An example indefinite string, which will be chunked, on each comma",
+					"Another example indefinite string with only one chunk",
+					"This is a plain string",
+				},
+			},
+		},
+		"RpcV2CborIndefiniteStringInsideDefiniteListCanDeserialize": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oWpzdHJpbmdMaXN0g394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborListsOutput{
+				StringList: []string{
+					"An example indefinite string, which will be chunked, on each comma",
+					"Another example indefinite string with only one chunk",
+					"This is a plain string",
+				},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params RpcV2CborListsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.RpcV2CborLists(context.Background(), &params)
 			}
 		})
 	}

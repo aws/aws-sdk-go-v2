@@ -292,7 +292,7 @@ type DataLakeSettings struct {
 
 	// A key-value map that provides an additional configuration on your data lake.
 	// CROSS_ACCOUNT_VERSION is the key you can configure in the Parameters field.
-	// Accepted values for the CrossAccountVersion key are 1, 2, 3, and 4.
+	// Accepted values for the CrossAccountVersion key are 1, 2, 3, 4 and 5.
 	Parameters map[string]string
 
 	// A list of Lake Formation principals with only view access to the resources,
@@ -700,6 +700,11 @@ type QueryPlanningContext struct {
 // A structure used as a protocol between query engines and Lake Formation or
 // Glue. Contains both a Lake Formation generated authorization identifier and
 // information from the request's authorization context.
+//
+// For more information about how to utilize QuerySessionContext, see [Lake Formation workflow for application integration API operations] in the
+// developer guide.
+//
+// [Lake Formation workflow for application integration API operations]: https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html
 type QuerySessionContext struct {
 
 	// An opaque string-string map passed by the query engine.

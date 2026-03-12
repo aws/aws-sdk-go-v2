@@ -701,6 +701,24 @@ func (IdentityProviderTypeType) Values() []IdentityProviderTypeType {
 	}
 }
 
+type InboundFederationLambdaVersionType string
+
+// Enum values for InboundFederationLambdaVersionType
+const (
+	InboundFederationLambdaVersionTypeV10 InboundFederationLambdaVersionType = "V1_0"
+)
+
+// Values returns all known values for InboundFederationLambdaVersionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InboundFederationLambdaVersionType) Values() []InboundFederationLambdaVersionType {
+	return []InboundFederationLambdaVersionType{
+		"V1_0",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel

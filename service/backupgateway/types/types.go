@@ -49,8 +49,6 @@ type BandwidthRateLimitInterval struct {
 	// The average upload rate limit component of the bandwidth rate limit interval,
 	// in bits per second. This field does not appear in the response if the upload
 	// rate limit is not set.
-	//
-	// For Backup Gateway, the minimum value is (Value) .
 	AverageUploadRateLimitInBitsPerSec *int64
 
 	noSmithyDocumentSerde
@@ -84,6 +82,10 @@ type Gateway struct {
 // The details of gateway.
 type GatewayDetails struct {
 
+	// Date after which this gateway will not receive software updates for new
+	// features and bug fixes.
+	DeprecationDate *time.Time
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayArn *string
@@ -108,6 +110,9 @@ type GatewayDetails struct {
 
 	// Details showing the next update availability time of the gateway.
 	NextUpdateAvailabilityTime *time.Time
+
+	// The version number of the software running on the gateway appliance.
+	SoftwareVersion *string
 
 	// The DNS name for the virtual private cloud (VPC) endpoint the gateway uses to
 	// connect to the cloud for backup gateway.
@@ -213,8 +218,8 @@ type MaintenanceStartTime struct {
 }
 
 // A key-value pair you can use to manage, filter, and search for your resources.
-// Allowed characters include UTF-8 letters, numbers, spaces, and the following
-// characters: + - = . _ : /.
+// Allowed characters include UTF-8 letters, numbers, and the following characters:
+// + - = . _ : /. Spaces are not allowed in tag values.
 type Tag struct {
 
 	// The key part of a tag's key-value pair. The key can't start with aws: .
@@ -306,8 +311,8 @@ type VmwareTag struct {
 	noSmithyDocumentSerde
 }
 
-// This displays the mapping of on-premises VMware tags to the corresponding
-// Amazon Web Services tags.
+// This displays the mapping of VMware tags to the corresponding Amazon Web
+// Services tags.
 type VmwareToAwsTagMapping struct {
 
 	// The key part of the Amazon Web Services tag's key-value pair.

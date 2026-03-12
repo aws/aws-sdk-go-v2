@@ -1,3 +1,28 @@
+# v1.61.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.61.0 (2026-02-27)
+
+* **Feature**: This feature allows customers to specify the minimum time (in minutes) that AWS Batch keeps instances running in a compute environment after all jobs on the instance complete
+
+# v1.60.2 (2026-02-25)
+
+* **Documentation**: AWS Batch documentation update for service job capacity units.
+
+# v1.60.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.60.0 (2026-02-11)
+
+* **Feature**: Add support for listing jobs by share identifier and getting snapshots of active capacity utilization by job queue and share.
+
+# v1.59.0 (2026-02-03)
+
+* **Feature**: AWS Batch Array Job Visibility feature support. Includes new statusSummaryLastUpdatedAt for array job parent DescribeJobs responses for the last time the statusSummary was updated. Includes both statusSummary and statusSummaryLastUpdatedAt in ListJobs responses for array job parents.
+
 # v1.58.12 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

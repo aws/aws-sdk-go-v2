@@ -23,7 +23,10 @@ import (
 // errors. Instead, you must configure an Amazon Simple Notification Service (SNS)
 // topic to receive notifications from FlexMatch or queues. Continuously polling
 // with DescribeGameSessionPlacement should only be used for games in development
-// with low game session usage.
+// with low game session usage. For a reference implementation of event-based game
+// session placement tracking, see [Event-based game session placement guidance]in the Amazon GameLift Toolkit.
+//
+// [Event-based game session placement guidance]: https://github.com/amazon-gamelift/amazon-gamelift-toolkit/tree/main/event-based-session-placement
 func (c *Client) DescribeGameSessionPlacement(ctx context.Context, params *DescribeGameSessionPlacementInput, optFns ...func(*Options)) (*DescribeGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionPlacementInput{}

@@ -66,6 +66,9 @@ type EnableEnhancedMonitoringInput struct {
 	// The ARN of the stream.
 	StreamARN *string
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	// The name of the stream for which to enable enhanced monitoring.
 	StreamName *string
 
@@ -75,6 +78,7 @@ type EnableEnhancedMonitoringInput struct {
 func (in *EnableEnhancedMonitoringInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("control")
 }
 

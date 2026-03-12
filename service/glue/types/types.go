@@ -501,6 +501,19 @@ type BasicAuthenticationCredentials struct {
 	noSmithyDocumentSerde
 }
 
+// Basic authentication configuration that defines the username and password
+// properties for HTTP Basic authentication.
+type BasicAuthenticationProperties struct {
+
+	// The password property name to use for Basic authentication credentials.
+	Password *ConnectorProperty
+
+	// The username property name to use for Basic authentication credentials.
+	Username *ConnectorProperty
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a target that uses a Glue Data Catalog table.
 type BasicCatalogTarget struct {
 
@@ -1234,6 +1247,37 @@ type Classifier struct {
 
 	// A classifier for XML content.
 	XMLClassifier *XMLClassifier
+
+	noSmithyDocumentSerde
+}
+
+// OAuth2 client credentials configuration that defines the properties needed for
+// the Client Credentials grant type flow.
+type ClientCredentialsProperties struct {
+
+	// The OAuth2 client identifier provided by the authorization server.
+	ClientId *ConnectorProperty
+
+	// The OAuth2 client secret provided by the authorization server.
+	ClientSecret *ConnectorProperty
+
+	// The content type to use for token requests, such as
+	// application/x-www-form-urlencoded or application/json.
+	ContentType ContentType
+
+	// The HTTP method to use when making token requests, typically POST.
+	RequestMethod HTTPMethod
+
+	// The OAuth2 scope that defines the level of access requested for the client
+	// credentials flow.
+	Scope *ConnectorProperty
+
+	// The token endpoint URL where the client will request access tokens using client
+	// credentials.
+	TokenUrl *ConnectorProperty
+
+	// Additional parameters to include in token URL requests as key-value pairs.
+	TokenUrlParameters []ConnectorProperty
 
 	noSmithyDocumentSerde
 }
@@ -2382,6 +2426,22 @@ type ConnectionPasswordEncryption struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration that defines the base URL and additional request parameters
+// needed during connection creation.
+type ConnectionPropertiesConfiguration struct {
+
+	// Key-value pairs of additional request parameters that may be needed during
+	// connection creation, such as API versions or service-specific configuration
+	// options.
+	AdditionalRequestParameters []ConnectorProperty
+
+	// The base instance URL for the endpoint that this connection type will connect
+	// to.
+	Url *ConnectorProperty
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the connections used by a job.
 type ConnectionsList struct {
 
@@ -2428,9 +2488,9 @@ type ConnectionTypeBrief struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a variant of a connection type in Glue Data Catalog. Connection type
-// variants provide specific configurations and behaviors for different
-// implementations of the same general connection type.
+// Represents a variant of a connection type in Glue. Connection type variants
+// provide specific configurations and behaviors for different implementations of
+// the same general connection type.
 type ConnectionTypeVariant struct {
 
 	// The unique identifier for the connection type variant. This name is used
@@ -2447,6 +2507,78 @@ type ConnectionTypeVariant struct {
 
 	// The URL of the logo associated with a connection type variant.
 	LogoUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that defines the supported authentication types and required
+// properties for the connection type.
+type ConnectorAuthenticationConfiguration struct {
+
+	// A list of authentication types supported by this connection type, such as
+	// Basic, OAuth2, or Custom authentication methods.
+	//
+	// This member is required.
+	AuthenticationTypes []AuthenticationType
+
+	// Basic authentication configuration that defines the username and password
+	// properties for HTTP Basic authentication.
+	BasicAuthenticationProperties *BasicAuthenticationProperties
+
+	// Custom authentication configuration that allows for flexible authentication
+	// mechanisms beyond standard Basic and OAuth2 flows.
+	CustomAuthenticationProperties *CustomAuthenticationProperties
+
+	// OAuth2 configuration container that defines the authentication properties and
+	// flow-specific configurations for OAuth2-based connections.
+	OAuth2Properties *ConnectorOAuth2Properties
+
+	noSmithyDocumentSerde
+}
+
+// OAuth2 authorization code configuration that defines the properties needed for
+// the Authorization Code grant type flow.
+type ConnectorAuthorizationCodeProperties struct {
+
+	// The authorization code received from the authorization server after user
+	// consent.
+	AuthorizationCode *ConnectorProperty
+
+	// The authorization endpoint URL where users will be redirected to grant
+	// authorization.
+	AuthorizationCodeUrl *ConnectorProperty
+
+	// The OAuth2 client identifier provided by the authorization server.
+	ClientId *ConnectorProperty
+
+	// The OAuth2 client secret provided by the authorization server.
+	ClientSecret *ConnectorProperty
+
+	// The content type to use for token exchange requests, such as
+	// application/x-www-form-urlencoded or application/json.
+	ContentType ContentType
+
+	// The OAuth2 prompt parameter that controls the authorization server's behavior
+	// during user authentication.
+	Prompt *ConnectorProperty
+
+	// The redirect URI that must match the URI registered with the authorization
+	// server.
+	RedirectUri *ConnectorProperty
+
+	// The HTTP method to use when making token exchange requests, typically POST.
+	RequestMethod HTTPMethod
+
+	// The OAuth2 scope that defines the level of access requested for the
+	// authorization code flow.
+	Scope *ConnectorProperty
+
+	// The token endpoint URL where the authorization code will be exchanged for an
+	// access token.
+	TokenUrl *ConnectorProperty
+
+	// Additional parameters to include in token URL requests as key-value pairs.
+	TokenUrlParameters []ConnectorProperty
 
 	noSmithyDocumentSerde
 }
@@ -2533,6 +2665,66 @@ type ConnectorDataTarget struct {
 
 	// The nodes that are inputs to the data target.
 	Inputs []string
+
+	noSmithyDocumentSerde
+}
+
+// OAuth2 configuration container that defines the authentication properties and
+// flow-specific configurations for OAuth2-based connections.
+type ConnectorOAuth2Properties struct {
+
+	// The OAuth2 grant type to use for authentication, such as CLIENT_CREDENTIALS,
+	// JWT_BEARER, or AUTHORIZATION_CODE.
+	//
+	// This member is required.
+	OAuth2GrantType ConnectorOAuth2GrantType
+
+	// Configuration properties specific to the OAuth2 Authorization Code grant type
+	// flow.
+	AuthorizationCodeProperties *ConnectorAuthorizationCodeProperties
+
+	// Configuration properties specific to the OAuth2 Client Credentials grant type
+	// flow.
+	ClientCredentialsProperties *ClientCredentialsProperties
+
+	// Configuration properties specific to the OAuth2 JWT Bearer grant type flow.
+	JWTBearerProperties *JWTBearerProperties
+
+	noSmithyDocumentSerde
+}
+
+// Defines a property configuration for connection types, default values, and
+// where the property should be used in requests.
+type ConnectorProperty struct {
+
+	// The name of the property.
+	//
+	// This member is required.
+	Name *string
+
+	// The data type of this property
+	//
+	// This member is required.
+	PropertyType PropertyType
+
+	// Indicates whether the property is required.
+	//
+	// This member is required.
+	Required *bool
+
+	// A list of AllowedValue objects representing the values allowed for the property.
+	AllowedValues []string
+
+	// The default value for the property.
+	DefaultValue *string
+
+	// A key name to use when sending this property in API requests, if different from
+	// the display name.
+	KeyOverride *string
+
+	// Specifies where this property should be included in REST requests, such as in
+	// headers, query parameters, or request body.
+	PropertyLocation PropertyLocation
 
 	noSmithyDocumentSerde
 }
@@ -2968,6 +3160,36 @@ type CsvClassifier struct {
 
 	// The version of this classifier.
 	Version int64
+
+	noSmithyDocumentSerde
+}
+
+// Cursor-based pagination configuration that defines how to handle pagination
+// using cursor tokens or next page identifiers.
+type CursorConfiguration struct {
+
+	// The parameter name or JSON path that contains the cursor or token for
+	// retrieving the next page of results.
+	//
+	// This member is required.
+	NextPage *ExtractedParameter
+
+	// The parameter name used to specify the maximum number of results to return per
+	// page.
+	LimitParameter *ExtractedParameter
+
+	noSmithyDocumentSerde
+}
+
+// Custom authentication configuration that allows for flexible authentication
+// mechanisms beyond standard Basic and OAuth2 flows.
+type CustomAuthenticationProperties struct {
+
+	// A map of custom authentication parameters that define the specific
+	// authentication mechanism and required properties.
+	//
+	// This member is required.
+	AuthenticationParameters []ConnectorProperty
 
 	noSmithyDocumentSerde
 }
@@ -4393,6 +4615,21 @@ type Entity struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration that defines how to interact with a specific data entity through
+// the REST API, including its access patterns and schema definition.
+type EntityConfiguration struct {
+
+	// The schema definition for this entity, including field names, types, and other
+	// metadata that describes the structure of the data.
+	Schema map[string]FieldDefinition
+
+	// The source configuration that defines how to make requests to access this
+	// entity's data through the REST API.
+	SourceConfiguration *SourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about an error.
 type ErrorDetail struct {
 
@@ -4554,6 +4791,27 @@ type ExportLabelsTaskRunProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Parameter extraction configuration that defines how to extract and map values
+// from API responses to request parameters.
+type ExtractedParameter struct {
+
+	// The default value to use if the parameter cannot be extracted from the response.
+	DefaultValue *string
+
+	// The parameter key name that will be used in subsequent requests.
+	Key *string
+
+	// Specifies where this extracted parameter should be placed in subsequent
+	// requests, such as in headers, query parameters, or request body.
+	PropertyLocation PropertyLocation
+
+	// The JSON path or extraction mapping that defines how to extract the parameter
+	// value from API responses.
+	Value *ResponseExtractionMapping
+
+	noSmithyDocumentSerde
+}
+
 // A catalog that points to an entity outside the Glue Data Catalog.
 type FederatedCatalog struct {
 
@@ -4668,6 +4926,23 @@ type Field struct {
 
 	// A list of supported values for the field.
 	SupportedValues []string
+
+	noSmithyDocumentSerde
+}
+
+// Defines a field in an entity schema for REST connector data sources, specifying
+// the field name and data type.
+type FieldDefinition struct {
+
+	// The data type of the field.
+	//
+	// This member is required.
+	FieldDataType FieldDataType
+
+	// The name of the field in the entity schema.
+	//
+	// This member is required.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -6875,6 +7150,30 @@ type JsonClassifier struct {
 	noSmithyDocumentSerde
 }
 
+// JWT bearer token configuration that defines the properties needed for the JWT
+// Bearer grant type flow.
+type JWTBearerProperties struct {
+
+	// The content type to use for JWT bearer token requests, such as
+	// application/x-www-form-urlencoded or application/json.
+	ContentType ContentType
+
+	// The JWT token to be used in the bearer token grant flow for authentication.
+	JwtToken *ConnectorProperty
+
+	// The HTTP method to use when making JWT bearer token requests, typically POST.
+	RequestMethod HTTPMethod
+
+	// The token endpoint URL where the JWT bearer token will be exchanged for an
+	// access token.
+	TokenUrl *ConnectorProperty
+
+	// Additional parameters to include in token URL requests as key-value pairs.
+	TokenUrlParameters []ConnectorProperty
+
+	noSmithyDocumentSerde
+}
+
 // Additional options for streaming.
 type KafkaStreamingSourceOptions struct {
 
@@ -7833,6 +8132,25 @@ type OAuth2PropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+// Offset-based pagination configuration that defines how to handle pagination
+// using numeric offsets and limits.
+type OffsetConfiguration struct {
+
+	// The parameter name used to specify the maximum number of results to return per
+	// page.
+	//
+	// This member is required.
+	LimitParameter *ExtractedParameter
+
+	// The parameter name used to specify the starting position or offset for
+	// retrieving results.
+	//
+	// This member is required.
+	OffsetParameter *ExtractedParameter
+
+	noSmithyDocumentSerde
+}
+
 // A structure representing an open format table.
 type OpenTableFormatInput struct {
 
@@ -7951,6 +8269,21 @@ type OtherMetadataValueListItem struct {
 	// The metadata key’s corresponding value for the other metadata belonging to the
 	// same metadata key.
 	MetadataValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that defines how to handle paginated responses from REST APIs,
+// supporting different pagination strategies used by various services.
+type PaginationConfiguration struct {
+
+	// Configuration for cursor-based pagination, where the API provides a cursor or
+	// token to retrieve the next page of results.
+	CursorConfiguration *CursorConfiguration
+
+	// Configuration for offset-based pagination, where the API uses numeric offsets
+	// and limits to control which results are returned.
+	OffsetConfiguration *OffsetConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -8311,6 +8644,14 @@ type Property struct {
 	// The default value for the property.
 	DefaultValue *string
 
+	// A key name to use when sending this property in API requests, if different from
+	// the display name.
+	KeyOverride *string
+
+	// Specifies where this property should be included in REST requests, such as in
+	// headers, query parameters, or request body.
+	PropertyLocation PropertyLocation
+
 	noSmithyDocumentSerde
 }
 
@@ -8601,6 +8942,57 @@ type ResourceUri struct {
 
 	// The URI for accessing the resource.
 	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that defines how to parse JSON responses from REST API calls,
+// including paths to result data and error information.
+type ResponseConfiguration struct {
+
+	// The JSON path expression that identifies where the actual result data is
+	// located within the API response.
+	//
+	// This member is required.
+	ResultPath *string
+
+	// The JSON path expression that identifies where error information is located
+	// within API responses when requests fail.
+	ErrorPath *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that defines how to extract values from HTTP response content or
+// headers for use in subsequent requests or parameter mapping.
+type ResponseExtractionMapping struct {
+
+	// A JSON path expression that specifies how to extract a value from the response
+	// body content.
+	ContentPath *string
+
+	// The name of an HTTP response header from which to extract the value.
+	HeaderKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that defines HTTP request and response handling, validation
+// endpoints, and entity configurations for REST API interactions.
+type RestConfiguration struct {
+
+	// A map of entity configurations that define how to interact with different data
+	// entities available through the REST API, including their schemas and access
+	// patterns.
+	EntityConfigurations map[string]EntityConfiguration
+
+	// Global configuration settings that apply to all REST API requests for this
+	// connection type, including common request methods, paths, and parameters.
+	GlobalSourceConfiguration *SourceConfiguration
+
+	// Configuration for the endpoint used to validate connection credentials and test
+	// connectivity during connection creation.
+	ValidationEndpointConfiguration *SourceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -10113,6 +10505,32 @@ type SortCriterion struct {
 
 	// An ascending or descending sort.
 	Sort Sort
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that defines how to make requests to endpoints, including request
+// methods, paths, parameters, and response handling.
+type SourceConfiguration struct {
+
+	// Configuration for handling paginated responses from the REST API, supporting
+	// both cursor-based and offset-based pagination strategies.
+	PaginationConfiguration *PaginationConfiguration
+
+	// The HTTP method to use for requests to this endpoint, such as GET, POST.
+	RequestMethod HTTPMethod
+
+	// Configuration for request parameters that should be included in API calls, such
+	// as query parameters, headers, or body content.
+	RequestParameters []ConnectorProperty
+
+	// The URL path for the REST endpoint, which may include parameter placeholders
+	// that will be replaced with actual values during requests.
+	RequestPath *string
+
+	// Configuration that defines how to parse and extract data from API responses,
+	// including success and error handling.
+	ResponseConfiguration *ResponseConfiguration
 
 	noSmithyDocumentSerde
 }

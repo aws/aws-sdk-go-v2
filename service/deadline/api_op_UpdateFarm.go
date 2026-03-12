@@ -33,6 +33,9 @@ type UpdateFarmInput struct {
 	// This member is required.
 	FarmId *string
 
+	// The cost scale factor of the farm to update.
+	CostScaleFactor *float32
+
 	// The description of the farm to update.
 	//
 	// This field can store any content. Escape or encode this content before

@@ -1,3 +1,24 @@
+# v1.6.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.0 (2026-02-27)
+
+* **Feature**: Post-Recovery Workflows enable customers to maintain comprehensive disaster recovery automation. This allows customer SREs and leadership to have complete recovery orchestration from failover through post-recovery preparation, ensuring Regions remain ready for subsequent recovery events.
+
+# v1.5.2 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.5.1 (2026-02-16)
+
+* **Documentation**: Clarify documentation on ARC Region Switch start-plan-execution operation
+
+# v1.5.0 (2026-02-05)
+
+* **Feature**: Updates documentation for ARC Region switch and provides stronger validation for Amazon Aurora Global Database execution block parameters.
+
 # v1.4.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

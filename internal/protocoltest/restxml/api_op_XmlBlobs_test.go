@@ -5,10 +5,8 @@ package restxml
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -19,7 +17,7 @@ import (
 	"testing"
 )
 
-func TestClient_XmlBlobs_awsRestxmlSerialize(t *testing.T) {
+func TestClient_XmlBlobs_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *XmlBlobsInput
 		ExpectMethod  string
@@ -76,18 +74,18 @@ func TestClient_XmlBlobs_awsRestxmlSerialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient:               protocoltesthttp.NewClient(),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			result, err := client.XmlBlobs(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -118,7 +116,73 @@ func TestClient_XmlBlobs_awsRestxmlSerialize(t *testing.T) {
 	}
 }
 
-func TestClient_XmlBlobs_awsRestxmlDeserialize(t *testing.T) {
+func BenchmarkClient_XmlBlobs_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *XmlBlobsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"XmlBlobs": {
+			Params: &XmlBlobsInput{
+				Data: []byte("value"),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/XmlBlobs",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlBlobsRequest>
+			    <data>dmFsdWU=</data>
+			</XmlBlobsRequest>
+			`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.XmlBlobs(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
+func TestClient_XmlBlobs_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -177,13 +241,8 @@ func TestClient_XmlBlobs_awsRestxmlDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params XmlBlobsInput
 			result, err := client.XmlBlobs(context.Background(), &params)
@@ -195,6 +254,75 @@ func TestClient_XmlBlobs_awsRestxmlDeserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_XmlBlobs_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *XmlBlobsOutput
+	}{
+		"XmlBlobs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlBlobsResponse>
+			    <data>dmFsdWU=</data>
+			</XmlBlobsResponse>
+			`),
+			ExpectResult: &XmlBlobsOutput{
+				Data: []byte("value"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params XmlBlobsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.XmlBlobs(context.Background(), &params)
 			}
 		})
 	}

@@ -1,3 +1,33 @@
+# v1.236.0 (2026-03-11)
+
+* **Feature**: SageMaker training plans allow you to extend your existing training plans to avoid workload interruptions without workload reconfiguration. When a training plan is approaching expiration, you can extend it directly through the SageMaker AI console or programmatically using the API or AWS CLI.
+
+# v1.235.0 (2026-03-05)
+
+* **Feature**: Adds support for S3 Bucket Ownership validation for SageMaker Managed MLflow.
+
+# v1.234.0 (2026-03-03)
+
+* **Feature**: This release adds b300 and g7e instance types for SageMaker inference endpoints.
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.233.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.233.0 (2026-02-13)
+
+* **Feature**: Enable g7e instance type support for SageMaker Processing, and enable single file configuration provisioning for HyperPod Slurm, where customers have the option to use HyperPod API to provide the provisioning parameters.
+
+# v1.232.0 (2026-02-06)
+
+* **Feature**: Adding g7e instance support in Sagemaker Training
+
+# v1.231.0 (2026-01-27)
+
+* **Feature**: Idle resource sharing enables teams to borrow unused compute resources in your SageMaker HyperPod cluster. This capability maximizes resource utilization by allowing teams to borrow idle compute capacity beyond their allocated compute quotas.
+
 # v1.230.1 (2026-01-16)
 
 * **Documentation**: Adding security consideration comments for lcc accessing execution role under root access

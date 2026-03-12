@@ -13,6 +13,12 @@ import (
 
 // Lists all firewall domain lists for a Route 53 Global Resolver with pagination
 // support.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) ListFirewallDomainLists(ctx context.Context, params *ListFirewallDomainListsInput, optFns ...func(*Options)) (*ListFirewallDomainListsOutput, error) {
 	if params == nil {
 		params = &ListFirewallDomainListsInput{}

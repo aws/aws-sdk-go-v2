@@ -1039,6 +1039,11 @@ func validateBooleanCondition(v types.BooleanCondition) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BooleanCondition"}
 	switch uv := v.(type) {
+	case *types.BooleanConditionMemberAndAll:
+		if err := validateCompoundCondition(&uv.Value); err != nil {
+			invalidParams.AddNested("[andAll]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.BooleanConditionMemberEqualTo:
 		if err := validateBooleanOperands(&uv.Value); err != nil {
 			invalidParams.AddNested("[equalTo]", err.(smithy.InvalidParamsError))
@@ -1047,6 +1052,11 @@ func validateBooleanCondition(v types.BooleanCondition) error {
 	case *types.BooleanConditionMemberNotEqualTo:
 		if err := validateBooleanOperands(&uv.Value); err != nil {
 			invalidParams.AddNested("[notEqualTo]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BooleanConditionMemberOrAll:
+		if err := validateCompoundCondition(&uv.Value); err != nil {
+			invalidParams.AddNested("[orAll]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1244,6 +1254,25 @@ func validateCommentContent(v *types.CommentContent) error {
 	}
 }
 
+func validateCompoundCondition(v *types.CompoundCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompoundCondition"}
+	if v.Conditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Conditions"))
+	} else if v.Conditions != nil {
+		if err := validateBooleanConditionList(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConnectCaseInputContent(v *types.ConnectCaseInputContent) error {
 	if v == nil {
 		return nil
@@ -1395,6 +1424,25 @@ func validateEventIncludedData(v *types.EventIncludedData) error {
 		if err := validateRelatedItemEventIncludedData(v.RelatedItemData); err != nil {
 			invalidParams.AddNested("RelatedItemData", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldAttributes(v types.FieldAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldAttributes"}
+	switch uv := v.(type) {
+	case *types.FieldAttributesMemberText:
+		if err := validateTextAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[text]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2025,6 +2073,41 @@ func validateSortList(v []types.Sort) error {
 	}
 }
 
+func validateTagPropagationConfiguration(v *types.TagPropagationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagPropagationConfiguration"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.TagMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagMap"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagPropagationConfigurationList(v []types.TagPropagationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagPropagationConfigurationList"}
+	for i := range v {
+		if err := validateTagPropagationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTemplateCaseRuleList(v []types.TemplateRule) error {
 	if v == nil {
 		return nil
@@ -2049,6 +2132,21 @@ func validateTemplateRule(v *types.TemplateRule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TemplateRule"}
 	if v.CaseRuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CaseRuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextAttributes(v *types.TextAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextAttributes"}
+	if v.IsMultiline == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsMultiline"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2205,6 +2303,11 @@ func validateOpCreateFieldInput(v *CreateFieldInput) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if v.Attributes != nil {
+		if err := validateFieldAttributes(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2284,6 +2387,11 @@ func validateOpCreateTemplateInput(v *CreateTemplateInput) error {
 	if v.Rules != nil {
 		if err := validateTemplateCaseRuleList(v.Rules); err != nil {
 			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TagPropagationConfigurations != nil {
+		if err := validateTagPropagationConfigurationList(v.TagPropagationConfigurations); err != nil {
+			invalidParams.AddNested("TagPropagationConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2834,6 +2942,11 @@ func validateOpUpdateFieldInput(v *UpdateFieldInput) error {
 	if v.FieldId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldId"))
 	}
+	if v.Attributes != nil {
+		if err := validateFieldAttributes(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2883,6 +2996,11 @@ func validateOpUpdateTemplateInput(v *UpdateTemplateInput) error {
 	if v.Rules != nil {
 		if err := validateTemplateCaseRuleList(v.Rules); err != nil {
 			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TagPropagationConfigurations != nil {
+		if err := validateTagPropagationConfigurationList(v.TagPropagationConfigurations); err != nil {
+			invalidParams.AddNested("TagPropagationConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

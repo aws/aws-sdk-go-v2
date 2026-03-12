@@ -1190,6 +1190,26 @@ func (m *validateOpDeleteConnection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteConnectionType struct {
+}
+
+func (*validateOpDeleteConnectionType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnectionType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectionTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectionTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCrawler struct {
 }
 
@@ -3270,6 +3290,26 @@ func (m *validateOpPutWorkflowRunProperties) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterConnectionType struct {
+}
+
+func (*validateOpRegisterConnectionType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterConnectionType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterConnectionTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterConnectionTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterSchemaVersion struct {
 }
 
@@ -4626,6 +4666,10 @@ func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnection{}, middleware.After)
 }
 
+func addOpDeleteConnectionTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnectionType{}, middleware.After)
+}
+
 func addOpDeleteCrawlerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCrawler{}, middleware.After)
 }
@@ -5042,6 +5086,10 @@ func addOpPutWorkflowRunPropertiesValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpPutWorkflowRunProperties{}, middleware.After)
 }
 
+func addOpRegisterConnectionTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterConnectionType{}, middleware.After)
+}
+
 func addOpRegisterSchemaVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterSchemaVersion{}, middleware.After)
 }
@@ -5373,6 +5421,28 @@ func validateAthenaConnectorSource(v *types.AthenaConnectorSource) error {
 	if v.OutputSchemas != nil {
 		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
 			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBasicAuthenticationProperties(v *types.BasicAuthenticationProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BasicAuthenticationProperties"}
+	if v.Username != nil {
+		if err := validateConnectorProperty(v.Username); err != nil {
+			invalidParams.AddNested("Username", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Password != nil {
+		if err := validateConnectorProperty(v.Password); err != nil {
+			invalidParams.AddNested("Password", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5727,6 +5797,43 @@ func validateCatalogTargetList(v []types.CatalogTarget) error {
 	for i := range v {
 		if err := validateCatalogTarget(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClientCredentialsProperties(v *types.ClientCredentialsProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientCredentialsProperties"}
+	if v.TokenUrl != nil {
+		if err := validateConnectorProperty(v.TokenUrl); err != nil {
+			invalidParams.AddNested("TokenUrl", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientId != nil {
+		if err := validateConnectorProperty(v.ClientId); err != nil {
+			invalidParams.AddNested("ClientId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientSecret != nil {
+		if err := validateConnectorProperty(v.ClientSecret); err != nil {
+			invalidParams.AddNested("ClientSecret", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Scope != nil {
+		if err := validateConnectorProperty(v.Scope); err != nil {
+			invalidParams.AddNested("Scope", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TokenUrlParameters != nil {
+		if err := validateConnectorPropertyList(v.TokenUrlParameters); err != nil {
+			invalidParams.AddNested("TokenUrlParameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6407,6 +6514,115 @@ func validateConnectionPasswordEncryption(v *types.ConnectionPasswordEncryption)
 	}
 }
 
+func validateConnectionPropertiesConfiguration(v *types.ConnectionPropertiesConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectionPropertiesConfiguration"}
+	if v.Url != nil {
+		if err := validateConnectorProperty(v.Url); err != nil {
+			invalidParams.AddNested("Url", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalRequestParameters != nil {
+		if err := validateConnectorPropertyList(v.AdditionalRequestParameters); err != nil {
+			invalidParams.AddNested("AdditionalRequestParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorAuthenticationConfiguration(v *types.ConnectorAuthenticationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorAuthenticationConfiguration"}
+	if v.AuthenticationTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationTypes"))
+	}
+	if v.OAuth2Properties != nil {
+		if err := validateConnectorOAuth2Properties(v.OAuth2Properties); err != nil {
+			invalidParams.AddNested("OAuth2Properties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BasicAuthenticationProperties != nil {
+		if err := validateBasicAuthenticationProperties(v.BasicAuthenticationProperties); err != nil {
+			invalidParams.AddNested("BasicAuthenticationProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomAuthenticationProperties != nil {
+		if err := validateCustomAuthenticationProperties(v.CustomAuthenticationProperties); err != nil {
+			invalidParams.AddNested("CustomAuthenticationProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorAuthorizationCodeProperties(v *types.ConnectorAuthorizationCodeProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorAuthorizationCodeProperties"}
+	if v.AuthorizationCodeUrl != nil {
+		if err := validateConnectorProperty(v.AuthorizationCodeUrl); err != nil {
+			invalidParams.AddNested("AuthorizationCodeUrl", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AuthorizationCode != nil {
+		if err := validateConnectorProperty(v.AuthorizationCode); err != nil {
+			invalidParams.AddNested("AuthorizationCode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RedirectUri != nil {
+		if err := validateConnectorProperty(v.RedirectUri); err != nil {
+			invalidParams.AddNested("RedirectUri", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TokenUrl != nil {
+		if err := validateConnectorProperty(v.TokenUrl); err != nil {
+			invalidParams.AddNested("TokenUrl", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientId != nil {
+		if err := validateConnectorProperty(v.ClientId); err != nil {
+			invalidParams.AddNested("ClientId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientSecret != nil {
+		if err := validateConnectorProperty(v.ClientSecret); err != nil {
+			invalidParams.AddNested("ClientSecret", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Scope != nil {
+		if err := validateConnectorProperty(v.Scope); err != nil {
+			invalidParams.AddNested("Scope", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Prompt != nil {
+		if err := validateConnectorProperty(v.Prompt); err != nil {
+			invalidParams.AddNested("Prompt", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TokenUrlParameters != nil {
+		if err := validateConnectorPropertyList(v.TokenUrlParameters); err != nil {
+			invalidParams.AddNested("TokenUrlParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConnectorDataSource(v *types.ConnectorDataSource) error {
 	if v == nil {
 		return nil
@@ -6446,6 +6662,74 @@ func validateConnectorDataTarget(v *types.ConnectorDataTarget) error {
 	}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorOAuth2Properties(v *types.ConnectorOAuth2Properties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorOAuth2Properties"}
+	if len(v.OAuth2GrantType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OAuth2GrantType"))
+	}
+	if v.ClientCredentialsProperties != nil {
+		if err := validateClientCredentialsProperties(v.ClientCredentialsProperties); err != nil {
+			invalidParams.AddNested("ClientCredentialsProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JWTBearerProperties != nil {
+		if err := validateJWTBearerProperties(v.JWTBearerProperties); err != nil {
+			invalidParams.AddNested("JWTBearerProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AuthorizationCodeProperties != nil {
+		if err := validateConnectorAuthorizationCodeProperties(v.AuthorizationCodeProperties); err != nil {
+			invalidParams.AddNested("AuthorizationCodeProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorProperty(v *types.ConnectorProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorProperty"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Required == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Required"))
+	}
+	if len(v.PropertyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorPropertyList(v []types.ConnectorProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorPropertyList"}
+	for i := range v {
+		if err := validateConnectorProperty(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6567,6 +6851,40 @@ func validateCreateXMLClassifierRequest(v *types.CreateXMLClassifierRequest) err
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCursorConfiguration(v *types.CursorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CursorConfiguration"}
+	if v.NextPage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NextPage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomAuthenticationProperties(v *types.CustomAuthenticationProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomAuthenticationProperties"}
+	if v.AuthenticationParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationParameters"))
+	} else if v.AuthenticationParameters != nil {
+		if err := validateConnectorPropertyList(v.AuthenticationParameters); err != nil {
+			invalidParams.AddNested("AuthenticationParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7139,6 +7457,46 @@ func validateEncryptionAtRest(v *types.EncryptionAtRest) error {
 	}
 }
 
+func validateEntityConfiguration(v *types.EntityConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntityConfiguration"}
+	if v.SourceConfiguration != nil {
+		if err := validateSourceConfiguration(v.SourceConfiguration); err != nil {
+			invalidParams.AddNested("SourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Schema != nil {
+		if err := validateFieldDefinitionMap(v.Schema); err != nil {
+			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEntityConfigurationMap(v map[string]types.EntityConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntityConfigurationMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateEntityConfiguration(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvaluateDataQuality(v *types.EvaluateDataQuality) error {
 	if v == nil {
 		return nil
@@ -7188,6 +7546,42 @@ func validateEventBatchingCondition(v *types.EventBatchingCondition) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EventBatchingCondition"}
 	if v.BatchSize == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BatchSize"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldDefinition(v *types.FieldDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldDefinition"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.FieldDataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldDataType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldDefinitionMap(v map[string]types.FieldDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldDefinitionMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateFieldDefinition(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7908,6 +8302,33 @@ func validateJoinColumns(v []types.JoinColumn) error {
 	}
 }
 
+func validateJWTBearerProperties(v *types.JWTBearerProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JWTBearerProperties"}
+	if v.TokenUrl != nil {
+		if err := validateConnectorProperty(v.TokenUrl); err != nil {
+			invalidParams.AddNested("TokenUrl", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JwtToken != nil {
+		if err := validateConnectorProperty(v.JwtToken); err != nil {
+			invalidParams.AddNested("JwtToken", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TokenUrlParameters != nil {
+		if err := validateConnectorPropertyList(v.TokenUrlParameters); err != nil {
+			invalidParams.AddNested("TokenUrlParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLocation(v *types.Location) error {
 	if v == nil {
 		return nil
@@ -8115,6 +8536,24 @@ func validateNullValueFields(v []types.NullValueField) error {
 	}
 }
 
+func validateOffsetConfiguration(v *types.OffsetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OffsetConfiguration"}
+	if v.OffsetParameter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OffsetParameter"))
+	}
+	if v.LimitParameter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitParameter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpenTableFormatInput(v *types.OpenTableFormatInput) error {
 	if v == nil {
 		return nil
@@ -8200,6 +8639,28 @@ func validateOrderList(v []types.Order) error {
 	for i := range v {
 		if err := validateOrder(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePaginationConfiguration(v *types.PaginationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PaginationConfiguration"}
+	if v.CursorConfiguration != nil {
+		if err := validateCursorConfiguration(v.CursorConfiguration); err != nil {
+			invalidParams.AddNested("CursorConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OffsetConfiguration != nil {
+		if err := validateOffsetConfiguration(v.OffsetConfiguration); err != nil {
+			invalidParams.AddNested("OffsetConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8546,6 +9007,48 @@ func validateRenameField(v *types.RenameField) error {
 	}
 	if v.TargetPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseConfiguration(v *types.ResponseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseConfiguration"}
+	if v.ResultPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRestConfiguration(v *types.RestConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestConfiguration"}
+	if v.GlobalSourceConfiguration != nil {
+		if err := validateSourceConfiguration(v.GlobalSourceConfiguration); err != nil {
+			invalidParams.AddNested("GlobalSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ValidationEndpointConfiguration != nil {
+		if err := validateSourceConfiguration(v.ValidationEndpointConfiguration); err != nil {
+			invalidParams.AddNested("ValidationEndpointConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EntityConfigurations != nil {
+		if err := validateEntityConfigurationMap(v.EntityConfigurations); err != nil {
+			invalidParams.AddNested("EntityConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9183,6 +9686,33 @@ func validateSnowflakeTarget(v *types.SnowflakeTarget) error {
 	}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceConfiguration(v *types.SourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceConfiguration"}
+	if v.RequestParameters != nil {
+		if err := validateConnectorPropertyList(v.RequestParameters); err != nil {
+			invalidParams.AddNested("RequestParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResponseConfiguration != nil {
+		if err := validateResponseConfiguration(v.ResponseConfiguration); err != nil {
+			invalidParams.AddNested("ResponseConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PaginationConfiguration != nil {
+		if err := validatePaginationConfiguration(v.PaginationConfiguration); err != nil {
+			invalidParams.AddNested("PaginationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10870,6 +11400,21 @@ func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectionInput"}
 	if v.ConnectionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConnectionTypeInput(v *DeleteConnectionTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectionTypeInput"}
+	if v.ConnectionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12675,6 +13220,45 @@ func validateOpPutWorkflowRunPropertiesInput(v *PutWorkflowRunPropertiesInput) e
 	}
 	if v.RunProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RunProperties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterConnectionTypeInput(v *RegisterConnectionTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterConnectionTypeInput"}
+	if v.ConnectionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	}
+	if len(v.IntegrationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationType"))
+	}
+	if v.ConnectionProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionProperties"))
+	} else if v.ConnectionProperties != nil {
+		if err := validateConnectionPropertiesConfiguration(v.ConnectionProperties); err != nil {
+			invalidParams.AddNested("ConnectionProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConnectorAuthenticationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorAuthenticationConfiguration"))
+	} else if v.ConnectorAuthenticationConfiguration != nil {
+		if err := validateConnectorAuthenticationConfiguration(v.ConnectorAuthenticationConfiguration); err != nil {
+			invalidParams.AddNested("ConnectorAuthenticationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RestConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestConfiguration"))
+	} else if v.RestConfiguration != nil {
+		if err := validateRestConfiguration(v.RestConfiguration); err != nil {
+			invalidParams.AddNested("RestConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

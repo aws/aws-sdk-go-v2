@@ -275,6 +275,27 @@ func (ProvisionTargetType) Values() []ProvisionTargetType {
 	}
 }
 
+type RegionStatus string
+
+// Enum values for RegionStatus
+const (
+	RegionStatusActive   RegionStatus = "ACTIVE"
+	RegionStatusAdding   RegionStatus = "ADDING"
+	RegionStatusRemoving RegionStatus = "REMOVING"
+)
+
+// Values returns all known values for RegionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegionStatus) Values() []RegionStatus {
+	return []RegionStatus{
+		"ACTIVE",
+		"ADDING",
+		"REMOVING",
+	}
+}
+
 type ResourceNotFoundExceptionReason string
 
 // Enum values for ResourceNotFoundExceptionReason

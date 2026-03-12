@@ -2,6 +2,23 @@
 
 package types
 
+type Buildings string
+
+// Enum values for Buildings
+const (
+	BuildingsBuildings3d Buildings = "Buildings3D"
+)
+
+// Values returns all known values for Buildings. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Buildings) Values() []Buildings {
+	return []Buildings{
+		"Buildings3D",
+	}
+}
+
 type ColorScheme string
 
 // Enum values for ColorScheme
@@ -146,6 +163,7 @@ type Terrain string
 // Enum values for Terrain
 const (
 	TerrainHillshade Terrain = "Hillshade"
+	TerrainTerrain3d Terrain = "Terrain3D"
 )
 
 // Values returns all known values for Terrain. Note that this can be expanded in
@@ -155,6 +173,7 @@ const (
 func (Terrain) Values() []Terrain {
 	return []Terrain{
 		"Hillshade",
+		"Terrain3D",
 	}
 }
 

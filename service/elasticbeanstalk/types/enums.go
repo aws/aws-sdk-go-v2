@@ -246,8 +246,9 @@ type EnvironmentInfoType string
 
 // Enum values for EnvironmentInfoType
 const (
-	EnvironmentInfoTypeTail   EnvironmentInfoType = "tail"
-	EnvironmentInfoTypeBundle EnvironmentInfoType = "bundle"
+	EnvironmentInfoTypeTail    EnvironmentInfoType = "tail"
+	EnvironmentInfoTypeBundle  EnvironmentInfoType = "bundle"
+	EnvironmentInfoTypeAnalyze EnvironmentInfoType = "analyze"
 )
 
 // Values returns all known values for EnvironmentInfoType. Note that this can be
@@ -258,6 +259,7 @@ func (EnvironmentInfoType) Values() []EnvironmentInfoType {
 	return []EnvironmentInfoType{
 		"tail",
 		"bundle",
+		"analyze",
 	}
 }
 

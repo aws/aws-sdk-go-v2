@@ -1,3 +1,16 @@
+# v1.137.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.137.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.137.0 (2026-02-05)
+
+* **Feature**: This release adds the capability to easily create custom AWS Glue connections to data sources with REST APIs.
+
 # v1.136.1 (2026-01-12)
 
 * No change notes available for this release.

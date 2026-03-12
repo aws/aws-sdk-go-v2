@@ -48,7 +48,6 @@
         "internal/endpoints/endpoints.go",
         "internal/endpoints/endpoints_test.go",
         "options.go",
-        "protocol_test.go",
         "serializers.go",
         "snapshot_test.go",
         "sra_operation_order_test.go",
@@ -57,7 +56,7 @@
         "types/types.go",
         "validators.go"
     ],
-    "go": "1.23",
+    "go": "1.24",
     "module": "github.com/aws/aws-sdk-go-v2/service/chimesdkidentity",
     "unstable": false
 }

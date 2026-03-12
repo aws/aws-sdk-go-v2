@@ -103,6 +103,17 @@ type GetCurrentMetricDataInput struct {
 	//
 	// Name in real-time metrics report: [Scheduled]
 	//
+	// ESTIMATED_WAIT_TIME Unit: SECONDS
+	//
+	// This metric supports filter and grouping combination only used for core routing
+	// purpose. Valid filter and grouping use cases:
+	//
+	//   - Filter by a list of [Queues] and a list of [Channels], group by [“QUEUE”,
+	//   “CHANNEL”]
+	//
+	//   - Filter by a singleton list of [Queue], a singleton list of [Channel], a
+	//   list of [RoutingStepExpression], group by [“ROUTING_STEP_EXPRESSION”].
+	//
 	// OLDEST_CONTACT_AGE Unit: SECONDS
 	//
 	// When you use groupings, Unit says SECONDS and the Value is returned in SECONDS.

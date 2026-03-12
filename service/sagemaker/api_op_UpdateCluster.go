@@ -59,6 +59,9 @@ type UpdateClusterInput struct {
 	// The node recovery mode to be applied to the SageMaker HyperPod cluster.
 	NodeRecovery types.ClusterNodeRecovery
 
+	// The type of orchestrator used for the SageMaker HyperPod cluster.
+	Orchestrator *types.ClusterOrchestrator
+
 	// The specialized instance groups for training models like Amazon Nova to be
 	// created in the SageMaker HyperPod cluster.
 	RestrictedInstanceGroups []types.ClusterRestrictedInstanceGroupSpecification

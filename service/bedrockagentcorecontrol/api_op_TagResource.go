@@ -15,8 +15,8 @@ import (
 // are not changed. When a resource is deleted, the tags associated with that
 // resource are also deleted.
 //
-// This feature is currently available only for AgentCore Runtime, Browser, Code
-// Interpreter tool, and Gateway.
+// This feature is currently available only for AgentCore Runtime, Browser,
+// Browser Profile, Code Interpreter tool, and Gateway.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

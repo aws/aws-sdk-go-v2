@@ -1,3 +1,16 @@
+# v1.9.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.0 (2026-02-03)
+
+* **Feature**: Added support for optional style parameters in maps, including 3D terrain and 3D Buildings
+
 # v1.8.9 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -89,7 +89,7 @@ func LoadEncryptedPEMPrivKey(reader io.Reader, password []byte) (*rsa.PrivateKey
 //
 // If calling code can opaquely handle the returned key as a crypto.Signer, use
 // [LoadPEMPrivKeyPKCS8AsSigner] instead.
-func LoadPEMPrivKeyPKCS8(reader io.Reader) (interface{}, error) {
+func LoadPEMPrivKeyPKCS8(reader io.Reader) (any, error) {
 	block, err := loadPem(reader)
 	if err != nil {
 		return nil, fmt.Errorf("load pem: %v", err)

@@ -5,10 +5,8 @@ package awsrestjson
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -21,7 +19,7 @@ import (
 	"testing"
 )
 
-func TestClient_JsonTimestamps_awsRestjson1Serialize(t *testing.T) {
+func TestClient_JsonTimestamps_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *JsonTimestampsInput
 		ExpectMethod  string
@@ -186,18 +184,18 @@ func TestClient_JsonTimestamps_awsRestjson1Serialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient:               protocoltesthttp.NewClient(),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			result, err := client.JsonTimestamps(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -228,7 +226,174 @@ func TestClient_JsonTimestamps_awsRestjson1Serialize(t *testing.T) {
 	}
 }
 
-func TestClient_JsonTimestamps_awsRestjson1Deserialize(t *testing.T) {
+func BenchmarkClient_JsonTimestamps_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *JsonTimestampsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonJsonTimestamps": {
+			Params: &JsonTimestampsInput{
+				Normal: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "normal": 1398796238
+			}`))
+			},
+		},
+		"RestJsonJsonTimestampsWithDateTimeFormat": {
+			Params: &JsonTimestampsInput{
+				DateTime: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "dateTime": "2014-04-29T18:30:38Z"
+			}`))
+			},
+		},
+		"RestJsonJsonTimestampsWithDateTimeOnTargetFormat": {
+			Params: &JsonTimestampsInput{
+				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "dateTimeOnTarget": "2014-04-29T18:30:38Z"
+			}`))
+			},
+		},
+		"RestJsonJsonTimestampsWithEpochSecondsFormat": {
+			Params: &JsonTimestampsInput{
+				EpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "epochSeconds": 1398796238
+			}`))
+			},
+		},
+		"RestJsonJsonTimestampsWithEpochSecondsOnTargetFormat": {
+			Params: &JsonTimestampsInput{
+				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "epochSecondsOnTarget": 1398796238
+			}`))
+			},
+		},
+		"RestJsonJsonTimestampsWithHttpDateFormat": {
+			Params: &JsonTimestampsInput{
+				HttpDate: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "httpDate": "Tue, 29 Apr 2014 18:30:38 GMT"
+			}`))
+			},
+		},
+		"RestJsonJsonTimestampsWithHttpDateOnTargetFormat": {
+			Params: &JsonTimestampsInput{
+				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "httpDateOnTarget": "Tue, 29 Apr 2014 18:30:38 GMT"
+			}`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.JsonTimestamps(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
+func TestClient_JsonTimestamps_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -371,13 +536,8 @@ func TestClient_JsonTimestamps_awsRestjson1Deserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params JsonTimestampsInput
 			result, err := client.JsonTimestamps(context.Background(), &params)
@@ -389,6 +549,152 @@ func TestClient_JsonTimestamps_awsRestjson1Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_JsonTimestamps_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *JsonTimestampsOutput
+	}{
+		"RestJsonJsonTimestamps": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "normal": 1398796238
+			}`),
+			ExpectResult: &JsonTimestampsOutput{
+				Normal: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"RestJsonJsonTimestampsWithDateTimeFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "dateTime": "2014-04-29T18:30:38Z"
+			}`),
+			ExpectResult: &JsonTimestampsOutput{
+				DateTime: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"RestJsonJsonTimestampsWithDateTimeOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "dateTimeOnTarget": "2014-04-29T18:30:38Z"
+			}`),
+			ExpectResult: &JsonTimestampsOutput{
+				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"RestJsonJsonTimestampsWithEpochSecondsFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "epochSeconds": 1398796238
+			}`),
+			ExpectResult: &JsonTimestampsOutput{
+				EpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"RestJsonJsonTimestampsWithEpochSecondsOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "epochSecondsOnTarget": 1398796238
+			}`),
+			ExpectResult: &JsonTimestampsOutput{
+				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"RestJsonJsonTimestampsWithHttpDateFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "httpDate": "Tue, 29 Apr 2014 18:30:38 GMT"
+			}`),
+			ExpectResult: &JsonTimestampsOutput{
+				HttpDate: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		"RestJsonJsonTimestampsWithHttpDateOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "httpDateOnTarget": "Tue, 29 Apr 2014 18:30:38 GMT"
+			}`),
+			ExpectResult: &JsonTimestampsOutput{
+				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params JsonTimestampsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.JsonTimestamps(context.Background(), &params)
 			}
 		})
 	}

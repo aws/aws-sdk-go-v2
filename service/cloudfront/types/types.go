@@ -1755,6 +1755,9 @@ type CustomOriginConfig struct {
 	// [Keep-alive timeout (custom origins only)]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout
 	OriginKeepaliveTimeout *int32
 
+	// Configures mutual TLS authentication between CloudFront and your origin server.
+	OriginMtlsConfig *OriginMtlsConfig
+
 	// Specifies how long, in seconds, CloudFront waits for a response from the
 	// origin. This is also known as the origin response timeout. The minimum timeout
 	// is 1 second, the maximum is 120 seconds, and the default (if you don't specify
@@ -4534,6 +4537,19 @@ type OriginGroups struct {
 
 	// The items (origin groups) in a distribution.
 	Items []OriginGroup
+
+	noSmithyDocumentSerde
+}
+
+// Configures mutual TLS authentication between CloudFront and your origin server.
+type OriginMtlsConfig struct {
+
+	// The Amazon Resource Name (ARN) of the client certificate stored in Amazon Web
+	// Services Certificate Manager (ACM) that CloudFront uses to authenticate with
+	// your origin using Mutual TLS.
+	//
+	// This member is required.
+	ClientCertificateArn *string
 
 	noSmithyDocumentSerde
 }

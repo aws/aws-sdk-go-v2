@@ -55,6 +55,10 @@ type CreateJobInput struct {
 	// The unique token which the server uses to recognize retries of the same request.
 	ClientToken *string
 
+	// A custom description to override the job description derived from the job
+	// template.
+	DescriptionOverride *string
+
 	// The number of task failures before the job stops running and is marked as FAILED
 	// .
 	MaxFailedTasksCount *int32
@@ -73,6 +77,9 @@ type CreateJobInput struct {
 	// number of workers used to process the job.
 	MaxWorkerCount *int32
 
+	// A custom name to override the job name derived from the job template.
+	NameOverride *string
+
 	// The parameters for the job.
 	Parameters map[string]types.JobParameter
 
@@ -81,6 +88,10 @@ type CreateJobInput struct {
 
 	// The storage profile ID for the storage profile to connect to the job.
 	StorageProfileId *string
+
+	// The tags to add to your job. Each tag consists of a tag key and a tag value.
+	// Tag keys and values are both required, but tag values can be empty strings.
+	Tags map[string]string
 
 	// The initial job status when it is created. Jobs that are created with a
 	// SUSPENDED status will not run until manually requeued.

@@ -7953,7 +7953,7 @@ func awsRestjson1_deserializeDocumentAiffSettings(v **types.AiffSettings, value 
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin1Max64 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin0Max64 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -12372,6 +12372,15 @@ func awsRestjson1_deserializeDocumentDolbyVision(v **types.DolbyVision, value in
 
 	for key, value := range shape {
 		switch key {
+		case "compatibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DolbyVisionCompatibility to be of type string, got %T instead", value)
+				}
+				sv.Compatibility = types.DolbyVisionCompatibility(jtv)
+			}
+
 		case "l6Metadata":
 			if err := awsRestjson1_deserializeDocumentDolbyVisionLevel6Metadata(&sv.L6Metadata, value); err != nil {
 				return err
@@ -14400,7 +14409,7 @@ func awsRestjson1_deserializeDocumentFlacSettings(v **types.FlacSettings, value 
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin1Max8 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin0Max8 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -20554,7 +20563,7 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin1Max2 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin0Max2 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -20624,7 +20633,7 @@ func awsRestjson1_deserializeDocumentMp3Settings(v **types.Mp3Settings, value in
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin1Max2 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin0Max2 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -21576,6 +21585,15 @@ func awsRestjson1_deserializeDocumentMxfSettings(v **types.MxfSettings, value in
 				sv.Profile = types.MxfProfile(jtv)
 			}
 
+		case "uncompressedAudioWrapping":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MxfUncompressedAudioWrapping to be of type string, got %T instead", value)
+				}
+				sv.UncompressedAudioWrapping = types.MxfUncompressedAudioWrapping(jtv)
+			}
+
 		case "xavcProfileSettings":
 			if err := awsRestjson1_deserializeDocumentMxfXavcProfileSettings(&sv.XavcProfileSettings, value); err != nil {
 				return err
@@ -22237,7 +22255,7 @@ func awsRestjson1_deserializeDocumentOpusSettings(v **types.OpusSettings, value 
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin1Max2 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin0Max2 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -26291,7 +26309,7 @@ func awsRestjson1_deserializeDocumentVorbisSettings(v **types.VorbisSettings, va
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin1Max2 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin0Max2 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -26833,7 +26851,7 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin1Max64 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin0Max64 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

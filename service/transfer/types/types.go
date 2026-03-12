@@ -7,10 +7,31 @@ import (
 	"time"
 )
 
+// Contains the configuration details for asynchronous Message Disposition
+// Notification (MDN) responses in AS2 connectors. This configuration specifies
+// where asynchronous MDN responses should be sent and which servers should handle
+// them.
+type As2AsyncMdnConnectorConfig struct {
+
+	// A list of server identifiers that can handle asynchronous MDN responses. You
+	// can specify between 1 and 10 server IDs.
+	ServerIds []string
+
+	// The URL endpoint where asynchronous MDN responses should be sent.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the details for an AS2 connector object. The connector object is used
 // for AS2 outbound processes, to connect the Transfer Family customer with the
 // trading partner.
 type As2ConnectorConfig struct {
+
+	// Configuration settings for asynchronous Message Disposition Notification (MDN)
+	// responses. This allows you to configure where asynchronous MDN responses should
+	// be sent and which servers should handle them.
+	AsyncMdnConfig *As2AsyncMdnConnectorConfig
 
 	// Provides Basic authentication support to the AS2 Connectors API. To use Basic
 	// authentication, you must provide the name or Amazon Resource Name (ARN) of a
@@ -65,6 +86,9 @@ type As2ConnectorConfig struct {
 	// Used for outbound requests (from an Transfer Family connector to a partner AS2
 	// server) to determine whether the partner response for transfers is synchronous
 	// or asynchronous. Specify either of the following values:
+	//
+	//   - ASYNC : The system expects an asynchronous MDN response, confirming that the
+	//   file was transferred successfully (or not).
 	//
 	//   - SYNC : The system expects a synchronous MDN response, confirming that the
 	//   file was transferred successfully (or not).
@@ -239,6 +263,19 @@ type CustomDirectoriesType struct {
 	//
 	// This member is required.
 	TemporaryFilesDirectory *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a custom HTTP header that can be included in AS2 messages. Each
+// header consists of a key-value pair.
+type CustomHttpHeader struct {
+
+	// The name of the custom HTTP header.
+	Key *string
+
+	// The value of the custom HTTP header.
+	Value *string
 
 	noSmithyDocumentSerde
 }

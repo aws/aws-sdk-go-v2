@@ -47,8 +47,7 @@ import (
 // OAuth2 credentials ( client_id , client_secret )
 //
 // Okta Sources (SSO, Auth0)  Updatable: All Amazon Web Services Secrets Manager
-// attributes, domain , range (SSO only), OAuth2 credentials ( client_id ,
-// client_secret )
+// attributes, domain , range , OAuth2 credentials ( client_id , client_secret )
 //
 // Palo Alto Networks  Updatable: All Amazon Web Services Secrets Manager
 // attributes, hostname , basic authentication credentials ( username , password )

@@ -10,6 +10,7 @@ const (
 	AgentManagedRuntimeTypePython311 AgentManagedRuntimeType = "PYTHON_3_11"
 	AgentManagedRuntimeTypePython312 AgentManagedRuntimeType = "PYTHON_3_12"
 	AgentManagedRuntimeTypePython313 AgentManagedRuntimeType = "PYTHON_3_13"
+	AgentManagedRuntimeTypePython314 AgentManagedRuntimeType = "PYTHON_3_14"
 )
 
 // Values returns all known values for AgentManagedRuntimeType. Note that this can
@@ -22,6 +23,7 @@ func (AgentManagedRuntimeType) Values() []AgentManagedRuntimeType {
 		"PYTHON_3_11",
 		"PYTHON_3_12",
 		"PYTHON_3_13",
+		"PYTHON_3_14",
 	}
 }
 
@@ -138,6 +140,29 @@ func (BrowserNetworkMode) Values() []BrowserNetworkMode {
 	}
 }
 
+type BrowserProfileStatus string
+
+// Enum values for BrowserProfileStatus
+const (
+	BrowserProfileStatusReady    BrowserProfileStatus = "READY"
+	BrowserProfileStatusDeleting BrowserProfileStatus = "DELETING"
+	BrowserProfileStatusDeleted  BrowserProfileStatus = "DELETED"
+	BrowserProfileStatusSaving   BrowserProfileStatus = "SAVING"
+)
+
+// Values returns all known values for BrowserProfileStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BrowserProfileStatus) Values() []BrowserProfileStatus {
+	return []BrowserProfileStatus{
+		"READY",
+		"DELETING",
+		"DELETED",
+		"SAVING",
+	}
+}
+
 type BrowserStatus string
 
 // Enum values for BrowserStatus
@@ -231,6 +256,42 @@ func (CodeInterpreterStatus) Values() []CodeInterpreterStatus {
 		"DELETING",
 		"DELETE_FAILED",
 		"DELETED",
+	}
+}
+
+type ContentLevel string
+
+// Enum values for ContentLevel
+const (
+	ContentLevelMetadataOnly ContentLevel = "METADATA_ONLY"
+	ContentLevelFullContent  ContentLevel = "FULL_CONTENT"
+)
+
+// Values returns all known values for ContentLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentLevel) Values() []ContentLevel {
+	return []ContentLevel{
+		"METADATA_ONLY",
+		"FULL_CONTENT",
+	}
+}
+
+type ContentType string
+
+// Enum values for ContentType
+const (
+	ContentTypeMemoryRecords ContentType = "MEMORY_RECORDS"
+)
+
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentType) Values() []ContentType {
+	return []ContentType{
+		"MEMORY_RECORDS",
 	}
 }
 
@@ -985,6 +1046,7 @@ const (
 	ServerProtocolMcp  ServerProtocol = "MCP"
 	ServerProtocolHttp ServerProtocol = "HTTP"
 	ServerProtocolA2a  ServerProtocol = "A2A"
+	ServerProtocolAgui ServerProtocol = "AGUI"
 )
 
 // Values returns all known values for ServerProtocol. Note that this can be
@@ -996,6 +1058,7 @@ func (ServerProtocol) Values() []ServerProtocol {
 		"MCP",
 		"HTTP",
 		"A2A",
+		"AGUI",
 	}
 }
 

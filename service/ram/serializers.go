@@ -612,6 +612,13 @@ func awsRestjson1_serializeOpDocumentCreateResourceShareInput(v *CreateResourceS
 		}
 	}
 
+	if v.ResourceShareConfiguration != nil {
+		ok := object.Key("resourceShareConfiguration")
+		if err := awsRestjson1_serializeDocumentResourceShareConfiguration(v.ResourceShareConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Sources != nil {
 		ok := object.Key("sources")
 		if err := awsRestjson1_serializeDocumentSourceArnOrAccountList(v.Sources, ok); err != nil {
@@ -2535,6 +2542,114 @@ func awsRestjson1_serializeOpDocumentListResourceTypesInput(v *ListResourceTypes
 	return nil
 }
 
+type awsRestjson1_serializeOpListSourceAssociations struct {
+}
+
+func (*awsRestjson1_serializeOpListSourceAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListSourceAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSourceAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/listsourceassociations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListSourceAssociationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListSourceAssociationsInput(v *ListSourceAssociationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListSourceAssociationsInput(v *ListSourceAssociationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AssociationStatus) > 0 {
+		ok := object.Key("associationStatus")
+		ok.String(string(v.AssociationStatus))
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.ResourceShareArns != nil {
+		ok := object.Key("resourceShareArns")
+		if err := awsRestjson1_serializeDocumentResourceShareArnList(v.ResourceShareArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceId != nil {
+		ok := object.Key("sourceId")
+		ok.String(*v.SourceId)
+	}
+
+	if v.SourceType != nil {
+		ok := object.Key("sourceType")
+		ok.String(*v.SourceType)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPromotePermissionCreatedFromPolicy struct {
 }
 
@@ -3299,6 +3414,18 @@ func awsRestjson1_serializeDocumentResourceShareArnList(v []string, value smithy
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceShareConfiguration(v *types.ResourceShareConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RetainSharingOnAccountLeaveOrganization != nil {
+		ok := object.Key("retainSharingOnAccountLeaveOrganization")
+		ok.Boolean(*v.RetainSharingOnAccountLeaveOrganization)
+	}
+
 	return nil
 }
 

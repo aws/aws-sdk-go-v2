@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the self-upgrade configuration for a Quick Suite account.
+// Describes the self-upgrade configuration for a Quick account.
 func (c *Client) DescribeSelfUpgradeConfiguration(ctx context.Context, params *DescribeSelfUpgradeConfigurationInput, optFns ...func(*Options)) (*DescribeSelfUpgradeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeSelfUpgradeConfigurationInput{}
@@ -29,14 +29,14 @@ func (c *Client) DescribeSelfUpgradeConfiguration(ctx context.Context, params *D
 
 type DescribeSelfUpgradeConfigurationInput struct {
 
-	// The ID of the Amazon Web Services account that contains the Quick Suite
-	// self-upgrade configuration.
+	// The ID of the Amazon Web Services account that contains the Quick self-upgrade
+	// configuration.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The Quick Suite namespace that you want to describe the Quick Suite
-	// self-upgrade configuration for.
+	// The Quick namespace that you want to describe the Quick self-upgrade
+	// configuration for.
 	//
 	// This member is required.
 	Namespace *string
@@ -49,7 +49,7 @@ type DescribeSelfUpgradeConfigurationOutput struct {
 	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
-	// The self-upgrade configuration for the Quick Suite account.
+	// The self-upgrade configuration for the Quick account.
 	SelfUpgradeConfiguration *types.SelfUpgradeConfiguration
 
 	// The HTTP status of the request.

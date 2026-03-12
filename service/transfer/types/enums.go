@@ -436,8 +436,9 @@ type MdnResponse string
 
 // Enum values for MdnResponse
 const (
-	MdnResponseSync MdnResponse = "SYNC"
-	MdnResponseNone MdnResponse = "NONE"
+	MdnResponseSync  MdnResponse = "SYNC"
+	MdnResponseNone  MdnResponse = "NONE"
+	MdnResponseAsync MdnResponse = "ASYNC"
 )
 
 // Values returns all known values for MdnResponse. Note that this can be expanded
@@ -448,6 +449,7 @@ func (MdnResponse) Values() []MdnResponse {
 	return []MdnResponse{
 		"SYNC",
 		"NONE",
+		"ASYNC",
 	}
 }
 

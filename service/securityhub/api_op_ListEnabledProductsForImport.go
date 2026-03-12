@@ -11,7 +11,7 @@ import (
 )
 
 // Lists all findings-generating solutions (products) that you are subscribed to
-// receive findings from in Security Hub.
+// receive findings from in Security Hub CSPM.
 func (c *Client) ListEnabledProductsForImport(ctx context.Context, params *ListEnabledProductsForImportInput, optFns ...func(*Options)) (*ListEnabledProductsForImportOutput, error) {
 	if params == nil {
 		params = &ListEnabledProductsForImportInput{}

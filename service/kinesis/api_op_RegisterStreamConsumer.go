@@ -69,6 +69,9 @@ type RegisterStreamConsumerInput struct {
 	// This member is required.
 	StreamARN *string
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	// A set of up to 50 key-value pairs. A tag consists of a required key and an
 	// optional value.
 	Tags map[string]string
@@ -79,6 +82,7 @@ type RegisterStreamConsumerInput struct {
 func (in *RegisterStreamConsumerInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("control")
 }
 

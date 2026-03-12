@@ -30,6 +30,17 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.geomaps#Buildings": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "BUILDINGS_3D",
+                        "value": "Buildings3D"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.geomaps#ColorScheme": {
             "type": "string",
             "traits": {
@@ -50,7 +61,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 7000
+                    "max": 5000
                 },
                 "smithy.api#sensitive": {}
             }
@@ -93,7 +104,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 7000
+                    "max": 4200
                 },
                 "smithy.api#sensitive": {}
             }
@@ -381,7 +392,7 @@
                         "smithy.api#documentation": "<p>Takes in two or more pair of coordinates in World Geodetic System (WGS 84) format: [longitude, latitude], with each coordinate separated by a comma. The API will generate an image to encompass all of the provided coordinates. </p> <note> <p>Cannot be used with <code>Zoom</code> and or <code>Radius</code> </p> </note> <p>Example: 97.170451,78.039098,99.045536,27.176178</p>",
                         "smithy.api#httpQuery": "bounded-positions",
                         "smithy.api#length": {
-                            "max": 2000
+                            "max": 5000
                         }
                     }
                 },
@@ -642,14 +653,14 @@
                 "Terrain": {
                     "target": "com.amazonaws.geomaps#Terrain",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adjusts how physical terrain details are rendered on the map.</p> <p>The following terrain styles are currently supported:</p> <ul> <li> <p> <code>Hillshade</code>: Displays the physical terrain details through shading and highlighting of elevation change and geographic features.</p> </li> </ul> <p>This parameter is valid only for the <code>Standard</code> map style.</p>",
+                        "smithy.api#documentation": "<p>Adjusts how physical terrain details are rendered on the map.</p> <p>The following terrain styles are currently supported:</p> <ul> <li> <p> <code>Hillshade</code>: Displays the physical terrain details through shading and highlighting of elevation change and geographic features.</p> </li> <li> <p> <code>Terrain3D</code>: Displays physical terrain details and elevations as a three-dimensional model.</p> </li> </ul> <p> <code>Hillshade</code> is valid only for the <code>Standard</code> and <code>Monochrome</code> map styles.</p>",
                         "smithy.api#httpQuery": "terrain"
                     }
                 },
                 "ContourDensity": {
                     "target": "com.amazonaws.geomaps#ContourDensity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Displays the shape and steepness of terrain features using elevation lines. The density value controls how densely the available contour line information is rendered on the map.</p> <p>This parameter is valid only for the <code>Standard</code> map style.</p>",
+                        "smithy.api#documentation": "<p>Displays the shape and steepness of terrain features using elevation lines. The density value controls how densely the available contour line information is rendered on the map.</p> <p>This parameter is valid only for the <code>Standard</code>, <code>Monochrome</code>, and <code>Hybrid</code> map styles.</p>",
                         "smithy.api#httpQuery": "contour-density"
                     }
                 },
@@ -665,6 +676,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Renders additional map information relevant to selected travel modes. Information for multiple travel modes can be displayed simultaneously, although this increases the overall information density rendered on the map.</p> <p>This parameter is valid only for the <code>Standard</code> map style.</p>",
                         "smithy.api#httpQuery": "travel-modes"
+                    }
+                },
+                "Buildings": {
+                    "target": "com.amazonaws.geomaps#Buildings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adjusts how building details are rendered on the map.</p> <p>The following building styles are currently supported:</p> <ul> <li> <p> <code>Buildings3D</code>: Displays buildings as three-dimensional extrusions on the map.</p> </li> </ul> <p> <code>Buildings3D</code> is valid only for the <code>Standard</code> and <code>Monochrome</code> map styles.</p>",
+                        "smithy.api#httpQuery": "buildings"
                     }
                 },
                 "Key": {
@@ -781,7 +799,7 @@
                 "Tileset": {
                     "target": "com.amazonaws.geomaps#Tileset",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the desired tile set.</p> <p>Valid Values: <code>raster.satellite | vector.basemap</code> </p>",
+                        "smithy.api#documentation": "<p>Specifies the desired tile set.</p> <p>Valid Values: <code>raster.satellite | vector.basemap | vector.traffic | raster.dem</code> </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1867,53 +1885,27 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://maps.geo-fips.us-gov-west-1.api.aws/v2"
+                                    "url": "https://geo-maps-fips.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://maps.geo-fips.us-gov-west-1.amazonaws.com/v2"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://maps.geo.us-gov-west-1.api.aws/v2"
+                                    "url": "https://geo-maps.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://maps.geo.us-gov-west-1.amazonaws.com/v2"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -2023,27 +2015,53 @@
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://geo-maps-fips.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://maps.geo-fips.us-gov-west-1.api.aws/v2"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://maps.geo-fips.us-gov-west-1.amazonaws.com/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://geo-maps.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://maps.geo.us-gov-west-1.api.aws/v2"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://maps.geo.us-gov-west-1.amazonaws.com/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -2063,8 +2081,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 7,
-                    "max": 7000
+                    "min": 7
                 },
                 "smithy.api#pattern": "^(-?\\d{1,3}(\\.\\d{1,14})?,-?\\d{1,2}(\\.\\d{1,14})?)(,(-?\\d{1,3}(\\.\\d{1,14})?,-?\\d{1,2}(\\.\\d{1,14})?))*$",
                 "smithy.api#sensitive": {}
@@ -2181,6 +2198,10 @@
                     {
                         "name": "HILLSHADE",
                         "value": "Hillshade"
+                    },
+                    {
+                        "name": "TERRAIN_3D",
+                        "value": "Terrain3D"
                     }
                 ]
             }

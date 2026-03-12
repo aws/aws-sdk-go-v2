@@ -396,6 +396,10 @@ func awsRestjson1_serializeOpHttpBindingsGetStyleDescriptorInput(v *GetStyleDesc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.Buildings) > 0 {
+		encoder.SetQuery("buildings").String(string(v.Buildings))
+	}
+
 	if len(v.ColorScheme) > 0 {
 		encoder.SetQuery("color-scheme").String(string(v.ColorScheme))
 	}

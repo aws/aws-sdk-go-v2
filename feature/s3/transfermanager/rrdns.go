@@ -94,7 +94,7 @@ func (r *rrDNS) getAddr(ctx context.Context, host string) (string, error) {
 }
 
 func (r *rrDNS) lookupHost(ctx context.Context, host string) (string, error) {
-	ch := r.sf.DoChan(host, func() (interface{}, error) {
+	ch := r.sf.DoChan(host, func() (any, error) {
 		addrs, err := r.resolver.LookupHost(ctx, host)
 		if err != nil {
 			return nil, err

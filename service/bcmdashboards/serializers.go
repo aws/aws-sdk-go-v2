@@ -1150,6 +1150,11 @@ func awsAwsjson10_serializeDocumentWidget(v *types.Widget, value smithyjson.Valu
 		ok.Integer(v.HorizontalOffset)
 	}
 
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
 	if v.Title != nil {
 		ok := object.Key("title")
 		ok.String(*v.Title)

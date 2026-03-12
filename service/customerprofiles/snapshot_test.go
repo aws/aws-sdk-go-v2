@@ -194,6 +194,18 @@ func TestCheckSnapshot_CreateRecommender(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRecommenderFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRecommenderFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRecommenderFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateSegmentDefinition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSegmentDefinition(context.Background(), nil, func(o *Options) {
@@ -379,6 +391,18 @@ func TestCheckSnapshot_DeleteRecommender(t *testing.T) {
 	_, err := svc.DeleteRecommender(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteRecommender")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRecommenderFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRecommenderFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRecommenderFilter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -619,6 +643,18 @@ func TestCheckSnapshot_GetRecommender(t *testing.T) {
 	_, err := svc.GetRecommender(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetRecommender")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRecommenderFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecommenderFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRecommenderFilter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -931,6 +967,18 @@ func TestCheckSnapshot_ListProfileObjectTypeTemplates(t *testing.T) {
 	_, err := svc.ListProfileObjectTypeTemplates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListProfileObjectTypeTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRecommenderFilters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecommenderFilters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRecommenderFilters")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1369,6 +1417,18 @@ func TestUpdateSnapshot_CreateRecommender(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRecommenderFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRecommenderFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRecommenderFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateSegmentDefinition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSegmentDefinition(context.Background(), nil, func(o *Options) {
@@ -1554,6 +1614,18 @@ func TestUpdateSnapshot_DeleteRecommender(t *testing.T) {
 	_, err := svc.DeleteRecommender(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRecommender")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRecommenderFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRecommenderFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRecommenderFilter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1794,6 +1866,18 @@ func TestUpdateSnapshot_GetRecommender(t *testing.T) {
 	_, err := svc.GetRecommender(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRecommender")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRecommenderFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecommenderFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRecommenderFilter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2106,6 +2190,18 @@ func TestUpdateSnapshot_ListProfileObjectTypeTemplates(t *testing.T) {
 	_, err := svc.ListProfileObjectTypeTemplates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListProfileObjectTypeTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRecommenderFilters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecommenderFilters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRecommenderFilters")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

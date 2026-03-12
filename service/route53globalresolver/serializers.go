@@ -1054,6 +1054,11 @@ func awsRestjson1_serializeOpDocumentCreateGlobalResolverInput(v *CreateGlobalRe
 		ok.String(*v.Description)
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -4020,6 +4025,11 @@ func awsRestjson1_serializeOpDocumentUpdateGlobalResolverInput(v *UpdateGlobalRe
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.Name != nil {

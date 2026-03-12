@@ -150,6 +150,15 @@ type ActionParametersMemberAwsConsoleLink struct {
 
 func (*ActionParametersMemberAwsConsoleLink) isActionParameters() {}
 
+// Additional details on the queried entity that can be requested in the response.
+type AdditionalAttributes struct {
+
+	// Names of forms on the query entity that can be requested in the response.
+	FormNames []string
+
+	noSmithyDocumentSerde
+}
+
 // The details of the policy grant.
 type AddToProjectMemberPoolPolicyGrantDetail struct {
 
@@ -1014,6 +1023,8 @@ type ConnectionCredentials struct {
 //	ConnectionPropertiesInputMemberS3Properties
 //	ConnectionPropertiesInputMemberSparkEmrProperties
 //	ConnectionPropertiesInputMemberSparkGlueProperties
+//	ConnectionPropertiesInputMemberWorkflowsMwaaProperties
+//	ConnectionPropertiesInputMemberWorkflowsServerlessProperties
 type ConnectionPropertiesInput interface {
 	isConnectionPropertiesInput()
 }
@@ -1108,6 +1119,24 @@ type ConnectionPropertiesInputMemberSparkGlueProperties struct {
 
 func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertiesInput() {}
 
+// The Amazon MWAA properties of a connection.
+type ConnectionPropertiesInputMemberWorkflowsMwaaProperties struct {
+	Value WorkflowsMwaaPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberWorkflowsMwaaProperties) isConnectionPropertiesInput() {}
+
+// The MWAA serverless properties of a connection.
+type ConnectionPropertiesInputMemberWorkflowsServerlessProperties struct {
+	Value WorkflowsServerlessPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberWorkflowsServerlessProperties) isConnectionPropertiesInput() {}
+
 // The properties of a connection.
 //
 // The following types satisfy this interface:
@@ -1122,6 +1151,8 @@ func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertie
 //	ConnectionPropertiesOutputMemberS3Properties
 //	ConnectionPropertiesOutputMemberSparkEmrProperties
 //	ConnectionPropertiesOutputMemberSparkGlueProperties
+//	ConnectionPropertiesOutputMemberWorkflowsMwaaProperties
+//	ConnectionPropertiesOutputMemberWorkflowsServerlessProperties
 type ConnectionPropertiesOutput interface {
 	isConnectionPropertiesOutput()
 }
@@ -1215,6 +1246,25 @@ type ConnectionPropertiesOutputMemberSparkGlueProperties struct {
 }
 
 func (*ConnectionPropertiesOutputMemberSparkGlueProperties) isConnectionPropertiesOutput() {}
+
+// The Amazon MWAA properties of a connection.
+type ConnectionPropertiesOutputMemberWorkflowsMwaaProperties struct {
+	Value WorkflowsMwaaPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberWorkflowsMwaaProperties) isConnectionPropertiesOutput() {}
+
+// The MWAA serverless properties of a connection.
+type ConnectionPropertiesOutputMemberWorkflowsServerlessProperties struct {
+	Value WorkflowsServerlessPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberWorkflowsServerlessProperties) isConnectionPropertiesOutput() {
+}
 
 // The connection properties patch.
 //
@@ -2168,6 +2218,26 @@ type EncryptionConfiguration struct {
 	//
 	// [Permissions requirements for S3 Tables SSE-KMS encryption]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
 	SseAlgorithm *string
+
+	noSmithyDocumentSerde
+}
+
+// The pattern describing the entities to be matched during the graph query.
+type EntityPattern struct {
+
+	// The type of entity to be matched during the graph query.
+	//
+	// This member is required.
+	EntityType GraphEntityType
+
+	// The identifier of the root entity to start traversal from during the graph
+	// query.
+	//
+	// This member is required.
+	Identifier *string
+
+	// A search filter clause in Amazon DataZone.
+	Filters FilterClause
 
 	noSmithyDocumentSerde
 }
@@ -3577,6 +3647,63 @@ type LineageInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The summary and output forms of a LineageNode
+type LineageNodeItem struct {
+
+	// The ID of the domain of the data lineage node.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The ID of the data lineage node.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the type of the data lineage node.
+	//
+	// This member is required.
+	TypeName *string
+
+	// The timestamp at which the data lineage node was created.
+	CreatedAt *time.Time
+
+	// The user who created the data lineage node.
+	CreatedBy *string
+
+	// The description of the data lineage node.
+	Description *string
+
+	// The IDs of the downstream data lineage nodes.
+	DownstreamLineageNodeIds []string
+
+	// The event timestamp of the data lineage node.
+	EventTimestamp *time.Time
+
+	// The forms included in the additional attributes of a data lineage node.
+	FormsOutput []FormOutput
+
+	// The name of the data lineage node.
+	Name *string
+
+	// The alternate ID of the data lineage node.
+	SourceIdentifier *string
+
+	// The type of the revision of the data lineage node.
+	TypeRevision *string
+
+	// The timestamp at which the data lineage node was updated.
+	UpdatedAt *time.Time
+
+	// The user who updated the data lineage node.
+	UpdatedBy *string
+
+	// The IDs of the upstream data lineage nodes.
+	UpstreamLineageNodeIds []string
+
+	noSmithyDocumentSerde
+}
+
 // The reference details for the data lineage node.
 type LineageNodeReference struct {
 
@@ -3819,6 +3946,34 @@ type ManagedEndpointCredentials struct {
 
 	noSmithyDocumentSerde
 }
+
+// A clause to match a query pattern
+//
+// The following types satisfy this interface:
+//
+//	MatchClauseMemberEntityPattern
+//	MatchClauseMemberRelationPattern
+type MatchClause interface {
+	isMatchClause()
+}
+
+// The pattern describing the entities for the query to traverse.
+type MatchClauseMemberEntityPattern struct {
+	Value EntityPattern
+
+	noSmithyDocumentSerde
+}
+
+func (*MatchClauseMemberEntityPattern) isMatchClause() {}
+
+// The pattern describing the query's relational traversal.
+type MatchClauseMemberRelationPattern struct {
+	Value RelationPattern
+
+	noSmithyDocumentSerde
+}
+
+func (*MatchClauseMemberRelationPattern) isMatchClause() {}
 
 // The offset of a matched term.
 type MatchOffset struct {
@@ -5261,6 +5416,25 @@ type RelationalFilterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The pattern describing the query's relational traversal.
+type RelationPattern struct {
+
+	// The direction to query.
+	//
+	// This member is required.
+	RelationDirection RelationDirection
+
+	// The type of relation to query.
+	//
+	// This member is required.
+	RelationType RelationType
+
+	// The number of hops to query.
+	MaxPathLength *int32
+
+	noSmithyDocumentSerde
+}
+
 // The details of a provisioned resource of this Amazon DataZone environment.
 type Resource struct {
 
@@ -5325,6 +5499,24 @@ type ResourceTagParameter struct {
 
 	noSmithyDocumentSerde
 }
+
+// Resulting entity from the query.
+//
+// The following types satisfy this interface:
+//
+//	ResultItemMemberLineageNode
+type ResultItem interface {
+	isResultItem()
+}
+
+// Resulting data lineage node from the query.
+type ResultItemMemberLineageNode struct {
+	Value LineageNodeItem
+
+	noSmithyDocumentSerde
+}
+
+func (*ResultItemMemberLineageNode) isResultItem() {}
 
 // The row filter.
 //
@@ -7001,6 +7193,34 @@ type UserProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon MWAA properties.
+type WorkflowsMwaaPropertiesInput struct {
+
+	// The MWAA environment name.
+	MwaaEnvironmentName *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon MWAA properties.
+type WorkflowsMwaaPropertiesOutput struct {
+
+	// The MWAA environment name.
+	MwaaEnvironmentName *string
+
+	noSmithyDocumentSerde
+}
+
+// The MWAA serverless properties.
+type WorkflowsServerlessPropertiesInput struct {
+	noSmithyDocumentSerde
+}
+
+// The MWAA serverless properties.
+type WorkflowsServerlessPropertiesOutput struct {
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -7030,6 +7250,7 @@ func (*UnknownUnionMember) isGrantedEntityInput()            {}
 func (*UnknownUnionMember) isGroupPolicyGrantPrincipal()     {}
 func (*UnknownUnionMember) isJobRunDetails()                 {}
 func (*UnknownUnionMember) isListingItem()                   {}
+func (*UnknownUnionMember) isMatchClause()                   {}
 func (*UnknownUnionMember) isMatchRationaleItem()            {}
 func (*UnknownUnionMember) isMember()                        {}
 func (*UnknownUnionMember) isMemberDetails()                 {}
@@ -7046,6 +7267,7 @@ func (*UnknownUnionMember) isRedshiftCredentials()           {}
 func (*UnknownUnionMember) isRedshiftStorage()               {}
 func (*UnknownUnionMember) isRedshiftStorageProperties()     {}
 func (*UnknownUnionMember) isRegion()                        {}
+func (*UnknownUnionMember) isResultItem()                    {}
 func (*UnknownUnionMember) isRowFilter()                     {}
 func (*UnknownUnionMember) isRowFilterExpression()           {}
 func (*UnknownUnionMember) isRuleDetail()                    {}

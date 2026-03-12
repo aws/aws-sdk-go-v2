@@ -81,7 +81,7 @@ type PutRecordInput struct {
 	// The data blob to put into the record, which is base64-encoded when the blob is
 	// serialized. When the data blob (the payload before base64-encoding) is added to
 	// the partition key size, the total size must not exceed the maximum record size
-	// (1 MiB).
+	// (10 MiB).
 	//
 	// This member is required.
 	Data []byte
@@ -112,6 +112,9 @@ type PutRecordInput struct {
 	// The ARN of the stream.
 	StreamARN *string
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	// The name of the stream to put the data record into.
 	StreamName *string
 
@@ -121,6 +124,7 @@ type PutRecordInput struct {
 func (in *PutRecordInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("data")
 }
 

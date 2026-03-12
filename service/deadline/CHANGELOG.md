@@ -1,3 +1,24 @@
+# v1.26.0 (2026-03-06)
+
+* **Feature**: AWS Deadline Cloud now supports cost scale factors for farms, enabling studios to adjust reported costs to reflect their actual rendering economics. Adjusted costs are reflected in Deadline Cloud's Usage Explorer and Budgets.
+
+# v1.25.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.0 (2026-02-06)
+
+* **Feature**: Adds support for tagging jobs during job creation
+
+# v1.24.0 (2026-01-27)
+
+* **Feature**: AWS Deadline Cloud now supports editing job names and descriptions after submission.
+
 # v1.23.0 (2026-01-15)
 
 * **Feature**: AWS Deadline Cloud now supports tagging Budget resources with ABAC for permissions management and selecting up to 16 filter values in the monitor and Search API.

@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Deletes a configuration policy. Only the Security Hub delegated administrator
+//	Deletes a configuration policy. Only the Security Hub CSPM delegated
 //
-// can invoke this operation from the home Region. For the deletion to succeed, you
-// must first disassociate a configuration policy from target accounts,
-// organizational units, or the root by invoking the
+// administrator can invoke this operation from the home Region. For the deletion
+// to succeed, you must first disassociate a configuration policy from target
+// accounts, organizational units, or the root by invoking the
 // StartConfigurationPolicyDisassociation operation.
 func (c *Client) DeleteConfigurationPolicy(ctx context.Context, params *DeleteConfigurationPolicyInput, optFns ...func(*Options)) (*DeleteConfigurationPolicyOutput, error) {
 	if params == nil {

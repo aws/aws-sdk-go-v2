@@ -200,6 +200,11 @@ func awsRestjson1_serializeOpDocumentCreateWorkspaceInput(v *CreateWorkspaceInpu
 		ok.String(*v.GrafanaVersion)
 	}
 
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
 	if v.NetworkAccessControl != nil {
 		ok := object.Key("networkAccessControl")
 		if err := awsRestjson1_serializeDocumentNetworkAccessConfiguration(v.NetworkAccessControl, ok); err != nil {

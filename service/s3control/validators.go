@@ -2638,6 +2638,11 @@ func validateJobOperation(v *types.JobOperation) error {
 			invalidParams.AddNested("S3PutObjectRetention", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.S3UpdateObjectEncryption != nil {
+		if err := validateS3UpdateObjectEncryptionOperation(v.S3UpdateObjectEncryption); err != nil {
+			invalidParams.AddNested("S3UpdateObjectEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2789,6 +2794,23 @@ func validateMultiRegionAccessPointRoute(v *types.MultiRegionAccessPointRoute) e
 	invalidParams := smithy.InvalidParamsError{Context: "MultiRegionAccessPointRoute"}
 	if v.TrafficDialPercentage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficDialPercentage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateObjectEncryption(v *types.ObjectEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObjectEncryption"}
+	if v.SSEKMS != nil {
+		if err := validateS3UpdateObjectEncryptionSSEKMS(v.SSEKMS); err != nil {
+			invalidParams.AddNested("SSEKMS", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3346,6 +3368,38 @@ func validateS3TagSet(v []types.S3Tag) error {
 		if err := validateS3Tag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3UpdateObjectEncryptionOperation(v *types.S3UpdateObjectEncryptionOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3UpdateObjectEncryptionOperation"}
+	if v.ObjectEncryption != nil {
+		if err := validateObjectEncryption(v.ObjectEncryption); err != nil {
+			invalidParams.AddNested("ObjectEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3UpdateObjectEncryptionSSEKMS(v *types.S3UpdateObjectEncryptionSSEKMS) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3UpdateObjectEncryptionSSEKMS"}
+	if v.KMSKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KMSKeyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

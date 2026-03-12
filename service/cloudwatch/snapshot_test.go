@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_DeleteAlarmMuteRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAlarmMuteRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAlarmMuteRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAlarms(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlarms(context.Background(), nil, func(o *Options) {
@@ -242,6 +254,18 @@ func TestCheckSnapshot_EnableInsightRules(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAlarmMuteRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAlarmMuteRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAlarmMuteRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDashboard(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDashboard(context.Background(), nil, func(o *Options) {
@@ -314,6 +338,18 @@ func TestCheckSnapshot_GetMetricWidgetImage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAlarmMuteRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAlarmMuteRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAlarmMuteRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDashboards(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDashboards(context.Background(), nil, func(o *Options) {
@@ -367,6 +403,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAlarmMuteRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAlarmMuteRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAlarmMuteRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -529,6 +577,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_DeleteAlarmMuteRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAlarmMuteRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAlarmMuteRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAlarms(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlarms(context.Background(), nil, func(o *Options) {
@@ -709,6 +769,18 @@ func TestUpdateSnapshot_EnableInsightRules(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAlarmMuteRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAlarmMuteRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAlarmMuteRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDashboard(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDashboard(context.Background(), nil, func(o *Options) {
@@ -781,6 +853,18 @@ func TestUpdateSnapshot_GetMetricWidgetImage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAlarmMuteRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAlarmMuteRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAlarmMuteRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDashboards(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDashboards(context.Background(), nil, func(o *Options) {
@@ -834,6 +918,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAlarmMuteRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAlarmMuteRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAlarmMuteRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

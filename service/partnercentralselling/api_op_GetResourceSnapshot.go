@@ -120,6 +120,9 @@ type GetResourceSnapshotOutput struct {
 	// sequential and unique within the context of a resource view.
 	Revision *int32
 
+	// Target member accounts associated with the resource snapshot.
+	TargetMemberAccounts []string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

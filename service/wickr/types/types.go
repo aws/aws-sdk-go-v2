@@ -361,6 +361,10 @@ type NetworkSettings struct {
 	// Wickr backend server for service improvement and troubleshooting.
 	EnableClientMetrics *bool
 
+	// Configuration for OpenTDF integration at the network level, enforcing ABAC
+	// decision making when operating in TDF enabled rooms.
+	EnableTrustedDataFormat *bool
+
 	// Configuration for read receipts at the network level, controlling the default
 	// behavior for whether senders can see when their messages have been read.
 	ReadReceiptConfig *ReadReceiptConfig

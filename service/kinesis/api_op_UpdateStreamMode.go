@@ -51,6 +51,9 @@ type UpdateStreamModeInput struct {
 	// This member is required.
 	StreamModeDetails *types.StreamModeDetails
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	// The target warm throughput in MB/s that the stream should be scaled to handle.
 	// This represents the throughput capacity that will be immediately available for
 	// write operations. This field is only valid when the stream mode is being updated
@@ -63,6 +66,7 @@ type UpdateStreamModeInput struct {
 func (in *UpdateStreamModeInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("control")
 }
 

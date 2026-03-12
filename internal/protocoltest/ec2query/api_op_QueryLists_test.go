@@ -4,11 +4,9 @@ package ec2query
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -18,7 +16,7 @@ import (
 	"testing"
 )
 
-func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
+func TestClient_QueryLists_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *QueryListsInput
 		ExpectMethod  string
@@ -160,18 +158,18 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient:               protocoltesthttp.NewClient(),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			result, err := client.QueryLists(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -197,6 +195,152 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 				if err := c.BodyAssert(actualReq.Body); err != nil {
 					t.Errorf("expect body equal, got %v", err)
 				}
+			}
+		})
+	}
+}
+
+func BenchmarkClient_QueryLists_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *QueryListsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"Ec2Lists": {
+			Params: &QueryListsInput{
+				ListArg: []string{
+					"foo",
+					"bar",
+					"baz",
+				},
+				ComplexListArg: []types.GreetingStruct{
+					{
+						Hi: ptr.String("hello"),
+					},
+					{
+						Hi: ptr.String("hola"),
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&ListArg.1=foo&ListArg.2=bar&ListArg.3=baz&ComplexListArg.1.Hi=hello&ComplexListArg.2.Hi=hola`))
+			},
+		},
+		"Ec2EmptyQueryLists": {
+			Params: &QueryListsInput{
+				ListArg: []string{},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08`))
+			},
+		},
+		"Ec2ListArgWithXmlNameMember": {
+			Params: &QueryListsInput{
+				ListArgWithXmlNameMember: []string{
+					"A",
+					"B",
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&ListArgWithXmlNameMember.1=A&ListArgWithXmlNameMember.2=B`))
+			},
+		},
+		"Ec2ListMemberWithXmlName": {
+			Params: &QueryListsInput{
+				ListArgWithXmlName: []string{
+					"A",
+					"B",
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&Hi.1=A&Hi.2=B`))
+			},
+		},
+		"Ec2ListNestedStructWithList": {
+			Params: &QueryListsInput{
+				NestedWithList: &types.NestedStructWithList{
+					ListArg: []string{
+						"A",
+						"B",
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&NestedWithList.ListArg.1=A&NestedWithList.ListArg.2=B`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.QueryLists(context.Background(), c.Params)
 			}
 		})
 	}

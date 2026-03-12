@@ -304,6 +304,74 @@
         "com.amazonaws.ssoadmin#ActorPolicyDocument": {
             "type": "document"
         },
+        "com.amazonaws.ssoadmin#AddRegion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssoadmin#AddRegionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssoadmin#AddRegionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a Region to an IAM Identity Center instance. This operation initiates an asynchronous workflow to replicate the IAM Identity Center instance to the target Region. The Region status is set to ADDING at first and changes to ACTIVE when the workflow completes.</p> <p>To use this operation, your IAM Identity Center instance and the target Region must meet the requirements described in the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/multi-region-iam-identity-center.html#multi-region-prerequisites\">IAM Identity Center User Guide</a>. </p> <p>The following actions are related to <code>AddRegion</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_RemoveRegion.html\">RemoveRegion</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DescribeRegion.html\">DescribeRegion</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListRegions.html\">ListRegions</a> </p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.ssoadmin#AddRegionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.ssoadmin#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center instance to replicate to the target Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegionName": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Region to add to the IAM Identity Center instance. The Region name must be 1-32 characters long and follow the pattern of Amazon Web Services Region names (for example, us-east-1).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssoadmin#AddRegionResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.ssoadmin#RegionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Region after the Add operation. The status is ADDING when the asynchronous workflow is in progress and changes to ACTIVE when complete.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ssoadmin#Application": {
             "type": "structure",
             "members": {
@@ -360,6 +428,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the application was originally created.</p>"
                     }
+                },
+                "CreatedFrom": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the application was created in IAM Identity Center.</p>"
+                    }
                 }
             },
             "traits": {
@@ -396,7 +470,7 @@
                     "min": 10,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
             }
         },
         "com.amazonaws.ssoadmin#ApplicationAssignment": {
@@ -574,7 +648,7 @@
                     "min": 10,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::aws:applicationProvider/[a-zA-Z0-9-/]+$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso::aws:applicationProvider/[a-zA-Z0-9-/]+$"
             }
         },
         "com.amazonaws.ssoadmin#ApplicationProviderList": {
@@ -2687,6 +2761,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date the application was created.</p>"
                     }
+                },
+                "CreatedFrom": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the application was created in IAM Identity Center.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2983,6 +3063,90 @@
                     "target": "com.amazonaws.ssoadmin#PermissionSet",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the level of access on an Amazon Web Services account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssoadmin#DescribeRegion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssoadmin#DescribeRegionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssoadmin#DescribeRegionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details about a specific Region enabled in an IAM Identity Center instance. Details include the Region name, current status (ACTIVE, ADDING, or REMOVING), the date when the Region was added, and whether it is the primary Region. The request must be made from one of the enabled Regions of the IAM Identity Center instance.</p> <p>The following actions are related to <code>DescribeRegion</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_AddRegion.html\"> AddRegion</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_RemoveRegion.html\">RemoveRegion</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListRegions.html\">ListRegions</a> </p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.ssoadmin#DescribeRegionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.ssoadmin#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegionName": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Region to retrieve information about. The Region name must be 1-32 characters long and follow the pattern of Amazon Web Services Region names (for example, us-east-1).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssoadmin#DescribeRegionResponse": {
+            "type": "structure",
+            "members": {
+                "RegionName": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region name.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssoadmin#RegionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Region. Valid values are ACTIVE (Region is operational), ADDING (Region replication workflow is in progress), or REMOVING (Region removal workflow is in progress).</p>"
+                    }
+                },
+                "AddedDate": {
+                    "target": "com.amazonaws.ssoadmin#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the Region was added to the IAM Identity Center instance. For the primary Region, this is the IAM Identity Center instance creation time.</p>"
+                    }
+                },
+                "IsPrimaryRegion": {
+                    "target": "com.amazonaws.ssoadmin#IsPrimaryRegion",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether this is the primary Region where the IAM Identity Center instance was originally enabled. For more information on the difference between the primary Region and additional Regions, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/multi-region-iam-identity-center.html\">IAM Identity Center User Guide</a> </p>"
                     }
                 }
             },
@@ -3945,7 +4109,7 @@
                     "min": 10,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
             }
         },
         "com.amazonaws.ssoadmin#InstanceList": {
@@ -4055,6 +4219,12 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.ssoadmin#IsPrimaryRegion": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.ssoadmin#JMESPath": {
             "type": "string",
             "traits": {
@@ -4097,7 +4267,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-[bcd]):kms:([a-z]{2,}(-[a-z0-9]+)+){1}:[0-9]{12}:key/(mrk-[a-f0-9]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:kms:([a-z]{2,}(-[a-z0-9]+)+){1}:[0-9]{12}:key/(mrk-[a-f0-9]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"
             }
         },
         "com.amazonaws.ssoadmin#KmsKeyStatus": {
@@ -5759,6 +5929,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ssoadmin#ListRegions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssoadmin#ListRegionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssoadmin#ListRegionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all enabled Regions of an IAM Identity Center instance, including those that are being added or removed. This operation returns Regions with ACTIVE, ADDING, or REMOVING status.</p> <p>The following actions are related to <code>ListRegions</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_AddRegion.html\"> AddRegion</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_RemoveRegion.html\">RemoveRegion</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DescribeRegion.html\">DescribeRegion</a> </p> </li> </ul>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Regions",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssoadmin#ListRegionsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.ssoadmin#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssoadmin#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Default is 100.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssoadmin#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssoadmin#ListRegionsResponse": {
+            "type": "structure",
+            "members": {
+                "Regions": {
+                    "target": "com.amazonaws.ssoadmin#RegionMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Regions enabled in the IAM Identity Center instance, including Regions with ACTIVE, ADDING, or REMOVING status.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssoadmin#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to be used in subsequent calls. If the value is null, then there are no more entries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ssoadmin#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -5926,7 +6175,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::aws:policy((/[A-Za-z0-9\\.,\\+@=_-]+)*)/([A-Za-z0-9\\.,\\+=@_-]+)$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:iam::aws:policy((/[A-Za-z0-9\\.,\\+@=_-]+)*)/([A-Za-z0-9\\.,\\+=@_-]+)$"
             }
         },
         "com.amazonaws.ssoadmin#ManagedPolicyName": {
@@ -6104,7 +6353,7 @@
                     "min": 10,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}$"
             }
         },
         "com.amazonaws.ssoadmin#PermissionSetDescription": {
@@ -6875,6 +7124,78 @@
                 "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Refresh Token Grant. For more, see <a href=\"https://datatracker.ietf.org/doc/html/rfc6749#section-1.5\">RFC 6749</a>.</p>"
             }
         },
+        "com.amazonaws.ssoadmin#RegionMetadata": {
+            "type": "structure",
+            "members": {
+                "RegionName": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region name.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssoadmin#RegionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Region. Valid values are ACTIVE (Region is operational), ADDING (Region extension workflow is in progress), or REMOVING (Region removal workflow is in progress).</p>"
+                    }
+                },
+                "AddedDate": {
+                    "target": "com.amazonaws.ssoadmin#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the Region was added to the IAM Identity Center instance. For the primary Region, this is the instance creation time.</p>"
+                    }
+                },
+                "IsPrimaryRegion": {
+                    "target": "com.amazonaws.ssoadmin#IsPrimaryRegion",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether this is the primary Region where the IAM Identity Center instance was originally enabled. The primary Region cannot be removed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an enabled Region of an IAM Identity Center instance, including the Region name, status, date added, and whether it is the primary Region.</p>"
+            }
+        },
+        "com.amazonaws.ssoadmin#RegionMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssoadmin#RegionMetadata"
+            }
+        },
+        "com.amazonaws.ssoadmin#RegionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^([a-z]+-){2,3}\\d$"
+            }
+        },
+        "com.amazonaws.ssoadmin#RegionStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ADDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDING"
+                    }
+                },
+                "REMOVING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssoadmin#RelayState": {
             "type": "string",
             "traits": {
@@ -6883,6 +7204,74 @@
                     "max": 240
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9&$@#\\\\\\/%?=~\\-_'\"|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+$"
+            }
+        },
+        "com.amazonaws.ssoadmin#RemoveRegion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssoadmin#RemoveRegionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssoadmin#RemoveRegionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an additional Region from an IAM Identity Center instance. This operation initiates an asynchronous workflow to clean up IAM Identity Center resources in the specified additional Region. The Region status is set to REMOVING and the Region record is deleted when the workflow completes. The request must be made from the primary Region. The target Region cannot be the primary Region, and no other add or remove Region workflows can be in progress.</p> <p>The following actions are related to <code>RemoveRegion</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_AddRegion.html\"> AddRegion</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DescribeRegion.html\">DescribeRegion</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListRegions.html\">ListRegions</a> </p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.ssoadmin#RemoveRegionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.ssoadmin#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegionName": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Region to remove from the IAM Identity Center instance. The Region name must be 1-32 characters long and follow the pattern of Amazon Web Services Region names (for example, us-east-1). The primary Region cannot be removed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssoadmin#RemoveRegionResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.ssoadmin#RegionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Region after the remove operation. The status is REMOVING when the asynchronous workflow is in progress. The Region record is deleted when the workflow completes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssoadmin#ResourceNotFoundException": {
@@ -6976,6 +7365,9 @@
             "version": "2020-07-20",
             "operations": [
                 {
+                    "target": "com.amazonaws.ssoadmin#AddRegion"
+                },
+                {
                     "target": "com.amazonaws.ssoadmin#AttachCustomerManagedPolicyReferenceToPermissionSet"
                 },
                 {
@@ -7057,6 +7449,9 @@
                     "target": "com.amazonaws.ssoadmin#DescribePermissionSetProvisioningStatus"
                 },
                 {
+                    "target": "com.amazonaws.ssoadmin#DescribeRegion"
+                },
+                {
                     "target": "com.amazonaws.ssoadmin#DescribeTrustedTokenIssuer"
                 },
                 {
@@ -7123,6 +7518,9 @@
                     "target": "com.amazonaws.ssoadmin#ListPermissionSetsProvisionedToAccount"
                 },
                 {
+                    "target": "com.amazonaws.ssoadmin#ListRegions"
+                },
+                {
                     "target": "com.amazonaws.ssoadmin#ListTagsForResource"
                 },
                 {
@@ -7142,6 +7540,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssoadmin#PutPermissionsBoundaryToPermissionSet"
+                },
+                {
+                    "target": "com.amazonaws.ssoadmin#RemoveRegion"
                 },
                 {
                     "target": "com.amazonaws.ssoadmin#TagResource"
@@ -7189,9 +7590,6 @@
                 },
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>IAM Identity Center is the Amazon Web Services solution for connecting your workforce users to Amazon Web Services managed applications and other Amazon Web Services resources. You can connect your existing identity provider and synchronize users and groups from your directory, or create and manage your users directly in IAM Identity Center. You can then use IAM Identity Center for either or both of the following:</p> <ul> <li> <p>User access to applications</p> </li> <li> <p>User access to Amazon Web Services accounts</p> </li> </ul> <p>This guide provides information about single sign-on operations that you can use for access to applications and Amazon Web Services accounts. For information about IAM Identity Center features, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center User Guide</a>.</p> <note> <p>IAM Identity Center uses the <code>sso</code> and <code>identitystore</code> API namespaces.</p> </note> <p>Many API operations for IAM Identity Center rely on identifiers for users and groups, known as principals. For more information about how to work with principals and principal IDs in IAM Identity Center, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Identity Store API Reference</a>.</p> <note> <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The SDKs provide a convenient way to create programmatic access to IAM Identity Center and other Amazon Web Services services. For more information about the Amazon Web Services SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p> </note>",
-                "smithy.api#suppress": [
-                    "DeprecatedShape"
-                ],
                 "smithy.api#title": "AWS Single Sign-On Admin",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -8098,7 +8496,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}|:instance/(sso)?ins-[a-zA-Z0-9-.]{16})$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso::(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}|:instance/(sso)?ins-[a-zA-Z0-9-.]{16})$"
             }
         },
         "com.amazonaws.ssoadmin#ScopeTargets": {
@@ -8345,7 +8743,7 @@
                     "min": 10,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::((:instance/(sso)?ins-[a-zA-Z0-9-.]{16})|(:permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16})|(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16})|(\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}))$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso::((:instance/(sso)?ins-[a-zA-Z0-9-.]{16})|(:permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16})|(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16})|(\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}))$"
             }
         },
         "com.amazonaws.ssoadmin#TargetId": {
@@ -8447,7 +8845,7 @@
                     "min": 10,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso::\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.ssoadmin#TrustedTokenIssuerConfiguration": {
@@ -8822,7 +9220,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.ssoadmin#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys (CMK) or Amazon Web Services owned KMS keys for encrypting your instance data.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys or Amazon Web Services owned KMS keys for encrypting your instance data.</p>"
                     }
                 }
             },

@@ -7454,6 +7454,11 @@ func awsRestjson1_deserializeDocumentDestinationLogsConfiguration(v **types.Dest
 				return err
 			}
 
+		case "LogGroupNameConfiguration":
+			if err := awsRestjson1_deserializeDocumentLogGroupNameConfiguration(&sv.LogGroupNameConfiguration, value); err != nil {
+				return err
+			}
+
 		case "LogsEncryptionConfiguration":
 			if err := awsRestjson1_deserializeDocumentLogsEncryptionConfiguration(&sv.LogsEncryptionConfiguration, value); err != nil {
 				return err
@@ -8082,6 +8087,46 @@ func awsRestjson1_deserializeDocumentLoggingFilter(v **types.LoggingFilter, valu
 		case "Filters":
 			if err := awsRestjson1_deserializeDocumentFilters(&sv.Filters, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLogGroupNameConfiguration(v **types.LogGroupNameConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LogGroupNameConfiguration
+	if *v == nil {
+		sv = &types.LogGroupNameConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LogGroupNamePattern":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogGroupNamePattern to be of type string, got %T instead", value)
+				}
+				sv.LogGroupNamePattern = ptr.String(jtv)
 			}
 
 		default:
@@ -8990,6 +9035,15 @@ func awsRestjson1_deserializeDocumentTelemetryConfiguration(v **types.TelemetryC
 		case "TelemetryConfigurationState":
 			if err := awsRestjson1_deserializeDocumentTelemetryConfigurationState(&sv.TelemetryConfigurationState, value); err != nil {
 				return err
+			}
+
+		case "TelemetrySourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TelemetrySourceType to be of type string, got %T instead", value)
+				}
+				sv.TelemetrySourceType = types.TelemetrySourceType(jtv)
 			}
 
 		default:

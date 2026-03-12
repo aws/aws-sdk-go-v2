@@ -83,6 +83,11 @@ type CreateOnlineEvaluationConfigInput struct {
 	// monitoring purpose and scope.
 	Description *string
 
+	// A map of tag keys and values to assign to an AgentCore Online Evaluation
+	// Config. Tags enable you to categorize your resources in different ways, for
+	// example, by purpose, owner, or environment.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

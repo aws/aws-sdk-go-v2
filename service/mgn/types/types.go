@@ -1030,6 +1030,9 @@ type ReplicationConfigurationTemplate struct {
 	// Replication Configuration template Staging Area Tags.
 	StagingAreaTags map[string]string
 
+	// Replication Configuration template store snapshot on local zone.
+	StoreSnapshotOnLocalZone *bool
+
 	// Replication Configuration template Tags.
 	Tags map[string]string
 

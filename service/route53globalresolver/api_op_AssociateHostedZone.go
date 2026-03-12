@@ -15,6 +15,12 @@ import (
 // Associates a Route 53 private hosted zone with a Route 53 Global Resolver
 // resource. This allows the resolver to resolve DNS queries for the private hosted
 // zone from anywhere globally.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) AssociateHostedZone(ctx context.Context, params *AssociateHostedZoneInput, optFns ...func(*Options)) (*AssociateHostedZoneOutput, error) {
 	if params == nil {
 		params = &AssociateHostedZoneInput{}
@@ -85,8 +91,8 @@ type AssociateHostedZoneOutput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Aggregate status for all the AWS Regions in which the Route 53 Global Resolver
-	// exists.
+	// Aggregate status for all the Amazon Web Services Regions in which the Route 53
+	// Global Resolver exists.
 	//
 	// This member is required.
 	Status types.HostedZoneAssociationStatus

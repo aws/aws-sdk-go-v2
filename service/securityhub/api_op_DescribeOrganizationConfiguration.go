@@ -12,7 +12,8 @@ import (
 )
 
 // Returns information about the way your organization is configured in Security
-// Hub. Only the Security Hub administrator account can invoke this operation.
+// Hub CSPM. Only the Security Hub CSPM administrator account can invoke this
+// operation.
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}
@@ -34,24 +35,24 @@ type DescribeOrganizationConfigurationInput struct {
 
 type DescribeOrganizationConfigurationOutput struct {
 
-	// Whether to automatically enable Security Hub in new member accounts when they
-	// join the organization.
+	// Whether to automatically enable Security Hub CSPM in new member accounts when
+	// they join the organization.
 	//
-	// If set to true , then Security Hub is automatically enabled in new accounts. If
-	// set to false , then Security Hub isn't enabled in new accounts automatically.
-	// The default value is false .
+	// If set to true , then Security Hub CSPM is automatically enabled in new
+	// accounts. If set to false , then Security Hub CSPM isn't enabled in new accounts
+	// automatically. The default value is false .
 	//
 	// If the ConfigurationType of your organization is set to CENTRAL , then this
 	// field is set to false and can't be changed in the home Region and linked
 	// Regions. However, in that case, the delegated administrator can create a
-	// configuration policy in which Security Hub is enabled and associate the policy
-	// with new organization accounts.
+	// configuration policy in which Security Hub CSPM is enabled and associate the
+	// policy with new organization accounts.
 	AutoEnable *bool
 
-	// Whether to automatically enable Security Hub [default standards] in new member accounts when they
-	// join the organization.
+	// Whether to automatically enable Security Hub CSPM [default standards] in new member accounts when
+	// they join the organization.
 	//
-	// If equal to DEFAULT , then Security Hub default standards are automatically
+	// If equal to DEFAULT , then Security Hub CSPM default standards are automatically
 	// enabled for new member accounts. If equal to NONE , then default standards are
 	// not automatically enabled for new member accounts. The default value of this
 	// parameter is equal to DEFAULT .
@@ -66,11 +67,11 @@ type DescribeOrganizationConfigurationOutput struct {
 	AutoEnableStandards types.AutoEnableStandards
 
 	// Whether the maximum number of allowed member accounts are already associated
-	// with the Security Hub administrator account.
+	// with the Security Hub CSPM administrator account.
 	MemberAccountLimitReached *bool
 
 	//  Provides information about the way an organization is configured in Security
-	// Hub.
+	// Hub CSPM.
 	OrganizationConfiguration *types.OrganizationConfiguration
 
 	// Metadata pertaining to the operation's result.

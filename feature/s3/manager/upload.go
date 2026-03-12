@@ -209,6 +209,8 @@ func WithUploaderRequestOptions(opts ...func(*s3.Options)) func(*Uploader) {
 // the individual uploaded parts. The UploadOutput result from Upload will
 // include the checksum of part checksums provided by S3
 // CompleteMultipartUpload API call.
+//
+// Deprecated: superceded by feature/s3/transfermanager. See https://github.com/aws/aws-sdk-go-v2/discussions/3306
 type Uploader struct {
 	// The buffer size (in bytes) to use when buffering data into chunks and
 	// sending them as parts to S3. The minimum allowed part size is 5MB, and
@@ -304,6 +306,8 @@ type Uploader struct {
 //	uploader := manager.NewUploader(client, func(u *manager.Uploader) {
 //		u.PartSize = 64 * 1024 * 1024 // 64MB per part
 //	})
+//
+// Deprecated: superceded by feature/s3/transfermanager. See https://github.com/aws/aws-sdk-go-v2/discussions/3306
 func NewUploader(client UploadAPIClient, options ...func(*Uploader)) *Uploader {
 	u := &Uploader{
 		S3:                         client,
@@ -337,6 +341,8 @@ func NewUploader(client UploadAPIClient, options ...func(*Uploader)) *Uploader {
 // options that will be applied to all API operations made with this uploader.
 //
 // It is safe to call this method concurrently across goroutines.
+//
+// Deprecated: superceded by feature/s3/transfermanager. See https://github.com/aws/aws-sdk-go-v2/discussions/3306
 func (u Uploader) Upload(ctx context.Context, input *s3.PutObjectInput, opts ...func(*Uploader)) (
 	*UploadOutput, error,
 ) {

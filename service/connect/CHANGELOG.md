@@ -1,3 +1,52 @@
+# v1.165.0 (2026-03-06)
+
+* **Feature**: Amazon Connect now supports the ability to programmatically configure and run automated tests for contact center experiences for Chat. Integrate testing into CICD pipelines, run multiple tests at scale, and retrieve results via API to automate validation of chat interactions and workflows.
+
+# v1.164.0 (2026-03-04)
+
+* **Feature**: Added support for configuring additional email addresses on queues in Amazon Connect. Agents can now select an outbound email address and associate additional email addresses for replying to or initiating emails.
+
+# v1.163.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.163.0 (2026-02-27)
+
+* **Feature**: Deprecate EvaluationReviewMetadata's CreatedBy and CreatedTime, add EvaluationReviewMetadata's RequestedBy and RequestedTime
+
+# v1.162.2 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.162.1 (2026-02-18)
+
+* **Documentation**: Correcting in-app notifications API documentation.
+
+# v1.162.0 (2026-02-13)
+
+* **Feature**: API release for headerr notifications in the admin website. APIs allow customers to publish brief messages (including URLs) to a specified audience, and a new header icon will indicate when unread messages are available.
+
+# v1.161.0 (2026-02-10.2)
+
+* **Feature**: Amazon Connect now supports per-channel auto-accept and After Contact Work (ACW) timeouts. Configure agents with auto-accept and ACW timeout settings for chat, tasks, emails, and callbacks. Use the new UpdateUserConfig API to manage these settings.
+
+# v1.160.0 (2026-01-30)
+
+* **Feature**: This release adds Estimated Wait Time support to the GetContactMetrics API for Amazon Connect.
+
+# v1.159.0 (2026-01-28)
+
+* **Feature**: Adds support for filtering search results based on tags assigned to contacts.
+
+# v1.158.0 (2026-01-27)
+
+* **Feature**: Added support for task attachments. The StartTaskContact API now accepts file attachments, enabling customers to include files (.csv, .doc, .docx, .heic, .jfif, .jpeg, .jpg, .mov, .mp4, .pdf, .png, .ppt, .pptx, .rtf, .txt, etc.) when creating Task contacts. Supports up to 5 attachments per task.
+
+# v1.157.0 (2026-01-23)
+
+* **Feature**: Amazon Connect now offers public APIs to programmatically configure and run automated tests for contact center experiences. Integrate testing into CICD pipelines, run multiple tests at scale, and retrieve results via API to automate validation of voice interactions and workflows.
+
 # v1.156.0 (2026-01-16)
 
 * **Feature**: Adds support to allow customers to create form with Dispute configuration

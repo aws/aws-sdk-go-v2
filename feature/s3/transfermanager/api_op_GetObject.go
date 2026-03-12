@@ -606,10 +606,6 @@ type getter struct {
 }
 
 func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
-	if err := g.init(); err != nil {
-		return nil, fmt.Errorf("unable to initialize download: %w", err)
-	}
-
 	clientOptions := []func(*s3.Options){
 		func(o *s3.Options) {
 			o.APIOptions = append(o.APIOptions,
@@ -645,7 +641,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 
 		partsCount := max(aws.ToInt32(out.PartsCount), 1)
 		partSize := max(aws.ToInt64(out.ContentLength), 1)
-		sectionParts := int32(max(1, g.options.GetBufferSize/partSize))
+		sectionParts := int32(max(1, g.options.GetObjectBufferSize/partSize))
 		capacity := sectionParts
 		r.sectionParts = sectionParts
 		r.partSize = partSize
@@ -670,7 +666,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		output.ContentRange = aws.String(fmt.Sprintf("bytes=0-%d/%d", total-1, aws.ToInt64(out.ContentLength)))
 
 		partsCount := int32((contentLength-1)/g.options.PartSizeBytes + 1)
-		sectionParts := int32(max(1, g.options.GetBufferSize/g.options.PartSizeBytes))
+		sectionParts := int32(max(1, g.options.GetObjectBufferSize/g.options.PartSizeBytes))
 		capacity := min(sectionParts, partsCount)
 		r.partSize = g.options.PartSizeBytes
 		atomic.StoreInt32(&r.capacity, capacity)
@@ -689,14 +685,6 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		output.ChecksumSHA256 = nil
 	}
 	return output, nil
-}
-
-func (g *getter) init() error {
-	if g.options.PartSizeBytes < minPartSizeBytes {
-		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
-	}
-
-	return nil
 }
 
 func (g *getter) singleDownload(ctx context.Context, clientOptions ...func(*s3.Options)) (*GetObjectOutput, error) {

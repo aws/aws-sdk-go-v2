@@ -20,10 +20,10 @@ import (
 // single tenant and unique. It runs on its own set of Amazon EC2 instances.
 //
 // The cluster control plane is provisioned across multiple Availability Zones and
-// fronted by an ELB Network Load Balancer. Amazon EKS also provisions elastic
-// network interfaces in your VPC subnets to provide connectivity from the control
-// plane instances to the nodes (for example, to support kubectl exec , logs , and
-// proxy data flows).
+// fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also
+// provisions elastic network interfaces in your VPC subnets to provide
+// connectivity from the control plane instances to the nodes (for example, to
+// support kubectl exec , logs , and proxy data flows).
 //
 // Amazon EKS nodes run in your Amazon Web Services account and connect to your
 // cluster's control plane over the Kubernetes API server endpoint and a

@@ -53,6 +53,9 @@ type IncreaseStreamRetentionPeriodInput struct {
 	// The ARN of the stream.
 	StreamARN *string
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	// The name of the stream to modify.
 	StreamName *string
 
@@ -62,6 +65,7 @@ type IncreaseStreamRetentionPeriodInput struct {
 func (in *IncreaseStreamRetentionPeriodInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("control")
 }
 

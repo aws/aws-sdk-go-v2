@@ -63,24 +63,28 @@ import (
 //
 // For examples of searching game sessions, see the ones below, and also see [Search game sessions by game property].
 //
-// Avoid using periods (".") in property keys if you plan to search for game
+//   - Avoid using periods (".") in property keys if you plan to search for game
+//     sessions by properties. Property keys containing periods cannot be searched and
+//     will be filtered out from search results due to search index limitations.
 //
-//	sessions by properties. Property keys containing periods cannot be searched and
-//	will be filtered out from search results due to search index limitations.
+//   - If you use SearchGameSessions API, there is a limit of 500 game property
+//     keys across all game sessions and all fleets per region. If the limit is
+//     exceeded, there will potentially be game session entries missing from
+//     SearchGameSessions API results.
 //
-//	- maximumSessions -- Maximum number of player sessions allowed for a game
-//	session.
+//   - maximumSessions -- Maximum number of player sessions allowed for a game
+//     session.
 //
-//	- creationTimeMillis -- Value indicating when a game session was created. It
-//	is expressed in Unix time as milliseconds.
+//   - creationTimeMillis -- Value indicating when a game session was created. It
+//     is expressed in Unix time as milliseconds.
 //
-//	- playerSessionCount -- Number of players currently connected to a game
-//	session. This value changes rapidly as players join the session or drop out.
+//   - playerSessionCount -- Number of players currently connected to a game
+//     session. This value changes rapidly as players join the session or drop out.
 //
-//	- hasAvailablePlayerSessions -- Boolean value indicating whether a game
-//	session has reached its maximum number of players. It is highly recommended that
-//	all search requests include this filter attribute to optimize search performance
-//	and return only sessions that players can join.
+//   - hasAvailablePlayerSessions -- Boolean value indicating whether a game
+//     session has reached its maximum number of players. It is highly recommended that
+//     all search requests include this filter attribute to optimize search performance
+//     and return only sessions that players can join.
 //
 // Returned values for playerSessionCount and hasAvailablePlayerSessions change
 // quickly as players join sessions and others drop out. Results should be

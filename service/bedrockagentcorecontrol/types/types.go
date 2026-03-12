@@ -9,7 +9,7 @@ import (
 )
 
 // Contains information about an agent runtime. An agent runtime is the execution
-// environment for a Amazon Bedrock Agent.
+// environment for a Amazon Bedrock AgentCore Agent.
 type AgentRuntime struct {
 
 	// The Amazon Resource Name (ARN) of the agent runtime.
@@ -383,6 +383,57 @@ type BrowserNetworkConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains summary information about a browser profile. A browser profile stores
+// persistent browser data that can be reused across browser sessions.
+type BrowserProfileSummary struct {
+
+	// The timestamp when the browser profile was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The timestamp when the browser profile was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The name of the browser profile.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the browser profile.
+	//
+	// This member is required.
+	ProfileArn *string
+
+	// The unique identifier of the browser profile.
+	//
+	// This member is required.
+	ProfileId *string
+
+	// The current status of the browser profile. Possible values include READY,
+	// SAVING, DELETING, and DELETED.
+	//
+	// This member is required.
+	Status BrowserProfileStatus
+
+	// The description of the browser profile.
+	Description *string
+
+	// The timestamp when browser session data was last saved to this profile.
+	LastSavedAt *time.Time
+
+	// The identifier of the browser from which data was last saved to this profile.
+	LastSavedBrowserId *string
+
+	// The identifier of the browser session from which data was last saved to this
+	// profile.
+	LastSavedBrowserSessionId *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for enabling browser signing capabilities that allow agents to
 // cryptographically identify themselves to websites using HTTP message signatures.
 type BrowserSigningConfigInput struct {
@@ -411,7 +462,7 @@ type BrowserSigningConfigOutput struct {
 }
 
 // Contains summary information about a browser. A browser enables Amazon Bedrock
-// Agent to interact with web content.
+// AgentCore Agent to interact with web content.
 type BrowserSummary struct {
 
 	// The Amazon Resource Name (ARN) of the browser.
@@ -614,7 +665,7 @@ type CodeInterpreterNetworkConfiguration struct {
 }
 
 // Contains summary information about a code interpreter. A code interpreter
-// enables Amazon Bedrock Agent to execute code.
+// enables Amazon Bedrock AgentCore Agent to execute code.
 type CodeInterpreterSummary struct {
 
 	// The Amazon Resource Name (ARN) of the code interpreter.
@@ -700,6 +751,20 @@ type ContentMemberRawText struct {
 }
 
 func (*ContentMemberRawText) isContent() {}
+
+// Defines what content to stream and at what level of detail.
+type ContentConfiguration struct {
+
+	// Type of content to stream.
+	//
+	// This member is required.
+	Type ContentType
+
+	// Level of detail for streamed content.
+	Level ContentLevel
+
+	noSmithyDocumentSerde
+}
 
 // A credential provider for gateway authentication. This structure contains the
 // configuration for authenticating with the target endpoint.
@@ -1979,6 +2044,22 @@ type InvocationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for Kinesis Data Stream delivery.
+type KinesisResource struct {
+
+	// Content configurations for stream delivery.
+	//
+	// This member is required.
+	ContentConfigurations []ContentConfiguration
+
+	// ARN of the Kinesis Data Stream.
+	//
+	// This member is required.
+	DataStreamArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the KMS configuration for a resource.
 type KmsConfiguration struct {
 
@@ -2247,6 +2328,9 @@ type Memory struct {
 
 	// The list of memory strategies associated with this memory.
 	Strategies []MemoryStrategy
+
+	// Configuration for streaming memory record data to external resources.
+	StreamDeliveryResources *StreamDeliveryResources
 
 	noSmithyDocumentSerde
 }
@@ -3104,6 +3188,7 @@ type Policy struct {
 // The following types satisfy this interface:
 //
 //	PolicyDefinitionMemberCedar
+//	PolicyDefinitionMemberPolicyGeneration
 type PolicyDefinition interface {
 	isPolicyDefinition()
 }
@@ -3124,6 +3209,20 @@ type PolicyDefinitionMemberCedar struct {
 }
 
 func (*PolicyDefinitionMemberCedar) isPolicyDefinition() {}
+
+// The generated policy asset information within the policy definition structure.
+// This contains information identifying a generated policy asset from the
+// AI-powered policy generation process within the AgentCore Policy system. Each
+// asset contains a Cedar policy statement generated from natural language input,
+// along with associated metadata and analysis findings to help users evaluate and
+// select the most appropriate policy option.
+type PolicyDefinitionMemberPolicyGeneration struct {
+	Value PolicyGenerationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyDefinitionMemberPolicyGeneration) isPolicyDefinition() {}
 
 // Represents a policy engine resource within the AgentCore Policy system. Policy
 // engines serve as containers for grouping related policies and provide the
@@ -3184,6 +3283,10 @@ type PolicyEngine struct {
 	// to 4,096 characters, this helps administrators understand the policy engine's
 	// role in the overall governance strategy.
 	Description *string
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine
+	// data.
+	EncryptionKeyArn *string
 
 	noSmithyDocumentSerde
 }
@@ -3290,6 +3393,27 @@ type PolicyGenerationAsset struct {
 	// system. This structure encapsulates different policy formats and languages that
 	// can be used to define access control rules.
 	Definition PolicyDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Represents the information identifying a generated policy asset from the
+// AI-powered policy generation process within the AgentCore Policy system. Each
+// asset contains a Cedar policy statement generated from natural language input,
+// along with associated metadata and analysis findings to help users evaluate and
+// select the most appropriate policy option.
+type PolicyGenerationDetails struct {
+
+	// The unique identifier for this generated policy asset within the policy
+	// generation request.
+	//
+	// This member is required.
+	PolicyGenerationAssetId *string
+
+	// The unique identifier for this policy generation request.
+	//
+	// This member is required.
+	PolicyGenerationId *string
 
 	noSmithyDocumentSerde
 }
@@ -3444,6 +3568,18 @@ type Rule struct {
 	//  The session configuration that defines timeout settings for detecting when
 	// agent sessions are complete and ready for evaluation.
 	SessionConfig *SessionConfig
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for microVM metadata service settings.
+type RuntimeMetadataConfiguration struct {
+
+	// Enables MMDSv2 (microVM Metadata Service Version 2) requirement for the agent
+	// runtime. When set to true , the runtime microVM will only accept MMDSv2 requests.
+	//
+	// This member is required.
+	RequireMMDSV2 *bool
 
 	noSmithyDocumentSerde
 }
@@ -3765,6 +3901,35 @@ type StrategyConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Supported stream delivery resource types.
+//
+// The following types satisfy this interface:
+//
+//	StreamDeliveryResourceMemberKinesis
+type StreamDeliveryResource interface {
+	isStreamDeliveryResource()
+}
+
+// Kinesis Data Stream configuration.
+type StreamDeliveryResourceMemberKinesis struct {
+	Value KinesisResource
+
+	noSmithyDocumentSerde
+}
+
+func (*StreamDeliveryResourceMemberKinesis) isStreamDeliveryResource() {}
+
+// Configuration for streaming memory record data to external resources.
+type StreamDeliveryResources struct {
+
+	// List of stream delivery resource configurations.
+	//
+	// This member is required.
+	Resources []StreamDeliveryResource
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary consolidation override configuration.
 type SummaryConsolidationOverride struct {
 
@@ -4050,6 +4215,19 @@ type TriggerConditionInputMemberTokenBasedTrigger struct {
 
 func (*TriggerConditionInputMemberTokenBasedTrigger) isTriggerConditionInput() {}
 
+// Respresents an optional value that can be provided to update the human-readable
+// description of the resource. If the field is omitted from the request, it will
+// leave the current decription value unchanged.
+type UpdatedDescription struct {
+
+	// Represents an optional value that is used to update the human-readable
+	// description of the resource. If set to null, it will clear the current
+	// description of the resource.
+	OptionalValue *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains user preference consolidation override configuration.
 type UserPreferenceConsolidationOverride struct {
 
@@ -4252,6 +4430,7 @@ func (*UnknownUnionMember) isRatingScale()                           {}
 func (*UnknownUnionMember) isReflectionConfiguration()               {}
 func (*UnknownUnionMember) isRequestHeaderConfiguration()            {}
 func (*UnknownUnionMember) isResource()                              {}
+func (*UnknownUnionMember) isStreamDeliveryResource()                {}
 func (*UnknownUnionMember) isTargetConfiguration()                   {}
 func (*UnknownUnionMember) isToolSchema()                            {}
 func (*UnknownUnionMember) isTriggerCondition()                      {}

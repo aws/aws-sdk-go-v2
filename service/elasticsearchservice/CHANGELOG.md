@@ -1,3 +1,20 @@
+# v1.39.0 (2026-03-04)
+
+* **Feature**: Adds support for DeploymentStrategyOptions.
+
+# v1.38.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.0 (2026-02-24)
+
+* **Feature**: Fixed HTTP binding for DescribeDomainAutoTunes API to correctly pass request parameters as query parameters in the HTTP request.
+
+# v1.37.20 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.19 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	smithy "github.com/aws/smithy-go"
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 )
@@ -35,6 +36,12 @@ func (m mockHTTP) Do(r *http.Request) (*http.Response, error) {
 	}, nil
 }
 
+type endpointResolver struct{}
+
+func (*endpointResolver) ResolveEndpoint(ctx context.Context, params EndpointParameters) (smithyendpoints.Endpoint, error) {
+	return smithyendpoints.Endpoint{}, nil
+}
+
 // TC1: Validate SDK can parse Code field
 func TestQueryCompatible_SEP1(t *testing.T) {
 	svc := New(Options{
@@ -42,6 +49,7 @@ func TestQueryCompatible_SEP1(t *testing.T) {
 			QueryError: "AWS.SimpleQueueService.NonExistentQueue;Sender",
 			BodyType:   "aws.protocoltests.json#ItemNotFound",
 		},
+		EndpointResolverV2: &endpointResolver{},
 	})
 	_, err := svc.GetItem(context.Background(), &GetItemInput{})
 	if err == nil {
@@ -50,7 +58,7 @@ func TestQueryCompatible_SEP1(t *testing.T) {
 
 	var terr smithy.APIError
 	if !errors.As(err, &terr) {
-		t.Fatalf("expect smithy.APIError, got %T", err)
+		t.Fatalf("expect smithy.APIError, got %v", err)
 	}
 
 	expect := "AWS.SimpleQueueService.NonExistentQueue"
@@ -66,6 +74,7 @@ func TestQueryCompatible_SEP2(t *testing.T) {
 		HTTPClient: mockHTTP{
 			BodyType: "aws.protocoltests.json#ItemNotFound",
 		},
+		EndpointResolverV2: &endpointResolver{},
 	})
 	_, err := svc.GetItem(context.Background(), &GetItemInput{})
 	if err == nil {
@@ -90,6 +99,7 @@ func TestQueryCompatible_SEP3(t *testing.T) {
 			QueryError: "AWS.SimpleQueueService.NonExistentQueue;Sender",
 			BodyType:   "aws.protocoltests.json#ItemNotFound",
 		},
+		EndpointResolverV2: &endpointResolver{},
 	})
 	_, err := svc.GetItem(context.Background(), &GetItemInput{})
 	if err == nil {

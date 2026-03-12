@@ -69537,6 +69537,15 @@ func awsRestjson1_deserializeDocumentProductV2(v **types.ProductV2, value interf
 				return err
 			}
 
+		case "MarketplaceProductId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MarketplaceProductId = ptr.String(jtv)
+			}
+
 		case "MarketplaceUrl":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -42,12 +42,16 @@ type UpdateMaxRecordSizeInput struct {
 	// The Amazon Resource Name (ARN) of the stream for the MaxRecordSize update.
 	StreamARN *string
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	noSmithyDocumentSerde
 }
 
 func (in *UpdateMaxRecordSizeInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("control")
 }
 

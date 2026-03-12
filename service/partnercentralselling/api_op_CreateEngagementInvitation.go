@@ -54,7 +54,9 @@ type CreateEngagementInvitationInput struct {
 	// invitation to a partner. It contains a personalized message from the sender, the
 	// invitation's receiver, and a payload. The Payload can be the
 	// OpportunityInvitation , which includes detailed structures for sender contacts,
-	// partner responsibilities, customer information, and project details.
+	// partner responsibilities, customer information, and project details, or
+	// LeadInvitation , which includes structures for customer information and
+	// interaction details.
 	//
 	// This member is required.
 	Invitation *types.Invitation

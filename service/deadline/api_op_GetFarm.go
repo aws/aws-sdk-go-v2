@@ -39,6 +39,11 @@ type GetFarmInput struct {
 
 type GetFarmOutput struct {
 
+	// The cost scale factor applied on the farm.
+	//
+	// This member is required.
+	CostScaleFactor *float32
+
 	// The date and time the resource was created.
 	//
 	// This member is required.

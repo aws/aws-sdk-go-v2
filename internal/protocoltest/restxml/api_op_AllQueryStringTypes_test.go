@@ -4,11 +4,9 @@ package restxml
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -21,7 +19,7 @@ import (
 	"time"
 )
 
-func TestClient_AllQueryStringTypes_awsRestxmlSerialize(t *testing.T) {
+func TestClient_AllQueryStringTypes_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *AllQueryStringTypesInput
 		ExpectMethod  string
@@ -259,18 +257,18 @@ func TestClient_AllQueryStringTypes_awsRestxmlSerialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient:               protocoltesthttp.NewClient(),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			result, err := client.AllQueryStringTypes(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -296,6 +294,247 @@ func TestClient_AllQueryStringTypes_awsRestxmlSerialize(t *testing.T) {
 				if err := c.BodyAssert(actualReq.Body); err != nil {
 					t.Errorf("expect body equal, got %v", err)
 				}
+			}
+		})
+	}
+}
+
+func BenchmarkClient_AllQueryStringTypes_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *AllQueryStringTypesInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"AllQueryStringTypes": {
+			Params: &AllQueryStringTypesInput{
+				QueryString: ptr.String("Hello there"),
+				QueryStringList: []string{
+					"a",
+					"b",
+					"c",
+				},
+				QueryStringSet: []string{
+					"a",
+					"b",
+					"c",
+				},
+				QueryByte:    ptr.Int8(1),
+				QueryShort:   ptr.Int16(2),
+				QueryInteger: ptr.Int32(3),
+				QueryIntegerList: []int32{
+					1,
+					2,
+					3,
+				},
+				QueryIntegerSet: []int32{
+					1,
+					2,
+					3,
+				},
+				QueryLong:   ptr.Int64(4),
+				QueryFloat:  ptr.Float32(1.1),
+				QueryDouble: ptr.Float64(1.1),
+				QueryDoubleList: []float64{
+					1.1,
+					2.1,
+					3.1,
+				},
+				QueryBoolean: ptr.Bool(true),
+				QueryBooleanList: []bool{
+					true,
+					false,
+					true,
+				},
+				QueryTimestamp: ptr.Time(smithytime.ParseEpochSeconds(1)),
+				QueryTimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1),
+					smithytime.ParseEpochSeconds(2),
+					smithytime.ParseEpochSeconds(3),
+				},
+				QueryEnum: types.FooEnum("Foo"),
+				QueryEnumList: []types.FooEnum{
+					types.FooEnum("Foo"),
+					types.FooEnum("Baz"),
+					types.FooEnum("Bar"),
+				},
+				QueryIntegerEnum: 1,
+				QueryIntegerEnumList: []types.IntegerEnum{
+					1,
+					2,
+				},
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "String", Value: "Hello%20there"},
+				{Key: "StringList", Value: "a"},
+				{Key: "StringList", Value: "b"},
+				{Key: "StringList", Value: "c"},
+				{Key: "StringSet", Value: "a"},
+				{Key: "StringSet", Value: "b"},
+				{Key: "StringSet", Value: "c"},
+				{Key: "Byte", Value: "1"},
+				{Key: "Short", Value: "2"},
+				{Key: "Integer", Value: "3"},
+				{Key: "IntegerList", Value: "1"},
+				{Key: "IntegerList", Value: "2"},
+				{Key: "IntegerList", Value: "3"},
+				{Key: "IntegerSet", Value: "1"},
+				{Key: "IntegerSet", Value: "2"},
+				{Key: "IntegerSet", Value: "3"},
+				{Key: "Long", Value: "4"},
+				{Key: "Float", Value: "1.1"},
+				{Key: "Double", Value: "1.1"},
+				{Key: "DoubleList", Value: "1.1"},
+				{Key: "DoubleList", Value: "2.1"},
+				{Key: "DoubleList", Value: "3.1"},
+				{Key: "Boolean", Value: "true"},
+				{Key: "BooleanList", Value: "true"},
+				{Key: "BooleanList", Value: "false"},
+				{Key: "BooleanList", Value: "true"},
+				{Key: "Timestamp", Value: "1970-01-01T00%3A00%3A01Z"},
+				{Key: "TimestampList", Value: "1970-01-01T00%3A00%3A01Z"},
+				{Key: "TimestampList", Value: "1970-01-01T00%3A00%3A02Z"},
+				{Key: "TimestampList", Value: "1970-01-01T00%3A00%3A03Z"},
+				{Key: "Enum", Value: "Foo"},
+				{Key: "EnumList", Value: "Foo"},
+				{Key: "EnumList", Value: "Baz"},
+				{Key: "EnumList", Value: "Bar"},
+				{Key: "IntegerEnum", Value: "1"},
+				{Key: "IntegerEnumList", Value: "1"},
+				{Key: "IntegerEnumList", Value: "2"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlQueryStringMap": {
+			Params: &AllQueryStringTypesInput{
+				QueryParamsMapOfStrings: map[string]string{
+					"QueryParamsStringKeyA": "Foo",
+					"QueryParamsStringKeyB": "Bar",
+				},
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "QueryParamsStringKeyA", Value: "Foo"},
+				{Key: "QueryParamsStringKeyB", Value: "Bar"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlQueryStringEscaping": {
+			Params: &AllQueryStringTypesInput{
+				QueryString: ptr.String(" %:/?#[]@!$&'()*+,;=😹"),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "String", Value: "%20%25%3A%2F%3F%23%5B%5D%40%21%24%26%27%28%29%2A%2B%2C%3B%3D%F0%9F%98%B9"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlSupportsNaNFloatQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryFloat:  ptr.Float32(float32(math.NaN())),
+				QueryDouble: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Float", Value: "NaN"},
+				{Key: "Double", Value: "NaN"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlSupportsInfinityFloatQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryFloat:  ptr.Float32(float32(math.Inf(1))),
+				QueryDouble: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Float", Value: "Infinity"},
+				{Key: "Double", Value: "Infinity"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlSupportsNegativeInfinityFloatQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryFloat:  ptr.Float32(float32(math.Inf(-1))),
+				QueryDouble: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Float", Value: "-Infinity"},
+				{Key: "Double", Value: "-Infinity"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlZeroAndFalseQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryInteger: ptr.Int32(0),
+				QueryBoolean: ptr.Bool(false),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Integer", Value: "0"},
+				{Key: "Boolean", Value: "false"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.AllQueryStringTypes(context.Background(), c.Params)
 			}
 		})
 	}

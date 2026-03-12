@@ -418,6 +418,13 @@ func awsRestjson1_serializeOpDocumentCreateCaseInput(v *CreateCaseInput, value s
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentMutableTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TemplateId != nil {
 		ok := object.Key("templateId")
 		ok.String(*v.TemplateId)
@@ -698,6 +705,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateFieldInput(v *CreateFieldInput, e
 func awsRestjson1_serializeOpDocumentCreateFieldInput(v *CreateFieldInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("attributes")
+		if err := awsRestjson1_serializeDocumentFieldAttributes(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")
@@ -1055,6 +1069,13 @@ func awsRestjson1_serializeOpDocumentCreateTemplateInput(v *CreateTemplateInput,
 	if len(v.Status) > 0 {
 		ok := object.Key("status")
 		ok.String(string(v.Status))
+	}
+
+	if v.TagPropagationConfigurations != nil {
+		ok := object.Key("tagPropagationConfigurations")
+		if err := awsRestjson1_serializeDocumentTagPropagationConfigurationList(v.TagPropagationConfigurations, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3745,6 +3766,13 @@ func awsRestjson1_serializeOpDocumentUpdateFieldInput(v *UpdateFieldInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.Attributes != nil {
+		ok := object.Key("attributes")
+		if err := awsRestjson1_serializeDocumentFieldAttributes(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -3999,6 +4027,13 @@ func awsRestjson1_serializeOpDocumentUpdateTemplateInput(v *UpdateTemplateInput,
 		ok.String(string(v.Status))
 	}
 
+	if v.TagPropagationConfigurations != nil {
+		ok := object.Key("tagPropagationConfigurations")
+		if err := awsRestjson1_serializeDocumentTagPropagationConfigurationList(v.TagPropagationConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4041,6 +4076,12 @@ func awsRestjson1_serializeDocumentBooleanCondition(v types.BooleanCondition, va
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.BooleanConditionMemberAndAll:
+		av := object.Key("andAll")
+		if err := awsRestjson1_serializeDocumentCompoundCondition(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.BooleanConditionMemberEqualTo:
 		av := object.Key("equalTo")
 		if err := awsRestjson1_serializeDocumentBooleanOperands(&uv.Value, av); err != nil {
@@ -4050,6 +4091,12 @@ func awsRestjson1_serializeDocumentBooleanCondition(v types.BooleanCondition, va
 	case *types.BooleanConditionMemberNotEqualTo:
 		av := object.Key("notEqualTo")
 		if err := awsRestjson1_serializeDocumentBooleanOperands(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.BooleanConditionMemberOrAll:
+		av := object.Key("orAll")
+		if err := awsRestjson1_serializeDocumentCompoundCondition(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4142,6 +4189,12 @@ func awsRestjson1_serializeDocumentCaseFilter(v types.CaseFilter, value smithyjs
 	case *types.CaseFilterMemberOrAll:
 		av := object.Key("orAll")
 		if err := awsRestjson1_serializeDocumentCaseFilterList(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CaseFilterMemberTag:
+		av := object.Key("tag")
+		if err := awsRestjson1_serializeDocumentTagFilter(uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4254,6 +4307,20 @@ func awsRestjson1_serializeDocumentCommentContent(v *types.CommentContent, value
 func awsRestjson1_serializeDocumentCommentFilter(v *types.CommentFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompoundCondition(v *types.CompoundCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Conditions != nil {
+		ok := object.Key("conditions")
+		if err := awsRestjson1_serializeDocumentBooleanConditionList(v.Conditions, ok); err != nil {
+			return err
+		}
+	}
 
 	return nil
 }
@@ -4444,6 +4511,24 @@ func awsRestjson1_serializeDocumentEventIncludedData(v *types.EventIncludedData,
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFieldAttributes(v types.FieldAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.FieldAttributesMemberText:
+		av := object.Key("text")
+		if err := awsRestjson1_serializeDocumentTextAttributes(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -4786,6 +4871,17 @@ func awsRestjson1_serializeDocumentLayoutSections(v *types.LayoutSections, value
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMutableTags(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 
@@ -5238,6 +5334,56 @@ func awsRestjson1_serializeDocumentSortList(v []types.Sort, value smithyjson.Val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTagFilter(v types.TagFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.TagFilterMemberEqualTo:
+		av := object.Key("equalTo")
+		if err := awsRestjson1_serializeDocumentTagValue(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagPropagationConfiguration(v *types.TagPropagationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ResourceType) > 0 {
+		ok := object.Key("resourceType")
+		ok.String(string(v.ResourceType))
+	}
+
+	if v.TagMap != nil {
+		ok := object.Key("tagMap")
+		if err := awsRestjson1_serializeDocumentMutableTags(v.TagMap, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagPropagationConfigurationList(v []types.TagPropagationConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTagPropagationConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTags(v map[string]*string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5250,6 +5396,23 @@ func awsRestjson1_serializeDocumentTags(v map[string]*string, value smithyjson.V
 		}
 		om.String(*v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagValue(v *types.TagValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
 	return nil
 }
 
@@ -5278,6 +5441,18 @@ func awsRestjson1_serializeDocumentTemplateRule(v *types.TemplateRule, value smi
 	if v.FieldId != nil {
 		ok := object.Key("fieldId")
 		ok.String(*v.FieldId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTextAttributes(v *types.TextAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsMultiline != nil {
+		ok := object.Key("isMultiline")
+		ok.Boolean(*v.IsMultiline)
 	}
 
 	return nil

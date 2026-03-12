@@ -2,6 +2,8 @@ package software.amazon.smithy.aws.go.codegen.customization;
 
 import software.amazon.smithy.go.codegen.GoCodegenContext;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.knowledge.TopDownIndex;
@@ -26,7 +28,7 @@ public class SraOperationOrderTest implements GoIntegration {
         });
     }
 
-    private GoWriter.Writable renderCommonTestSource() {
+    private Writable renderCommonTestSource() {
         return goTemplate("""
                 $D $D
                 var errTestReturnEarly = errors.New("errTestReturnEarly")
@@ -40,7 +42,7 @@ public class SraOperationOrderTest implements GoIntegration {
                 """, SmithyGoDependency.ERRORS, SmithyGoDependency.SMITHY_MIDDLEWARE);
     }
 
-    private GoWriter.Writable renderTest(String operationName) {
+    private Writable renderTest(String operationName) {
         return goTemplate("""
                 $1D $2D $3D $4D $5D $6D
                 func TestOp$7LSRAOperationOrder(t *testing.T) {

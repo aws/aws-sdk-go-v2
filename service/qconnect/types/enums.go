@@ -819,7 +819,8 @@ type MessageType string
 
 // Enum values for MessageType
 const (
-	MessageTypeText MessageType = "TEXT"
+	MessageTypeText          MessageType = "TEXT"
+	MessageTypeToolUseResult MessageType = "TOOL_USE_RESULT"
 )
 
 // Values returns all known values for MessageType. Note that this can be expanded
@@ -829,6 +830,7 @@ const (
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"TEXT",
+		"TOOL_USE_RESULT",
 	}
 }
 
@@ -1393,6 +1395,7 @@ type TargetType string
 const (
 	TargetTypeRecommendation TargetType = "RECOMMENDATION"
 	TargetTypeResult         TargetType = "RESULT"
+	TargetTypeMessage        TargetType = "MESSAGE"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
@@ -1403,6 +1406,7 @@ func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"RECOMMENDATION",
 		"RESULT",
+		"MESSAGE",
 	}
 }
 

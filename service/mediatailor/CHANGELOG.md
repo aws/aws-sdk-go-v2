@@ -1,3 +1,13 @@
+# v1.56.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.56.0 (2026-02-23)
+
+* **Feature**: Updated endpoint rule set for dualstack endpoints. Added a new opt-in option to log raw ad decision server requests for Playback Configurations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.2 (2026-01-15)
 
 * No change notes available for this release.

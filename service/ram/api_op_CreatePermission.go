@@ -67,9 +67,10 @@ type CreatePermissionInput struct {
 	// Specifies the name of the resource type that this customer managed permission
 	// applies to.
 	//
-	// The format is  :  and is not case sensitive. For example, to specify an Amazon
-	// EC2 Subnet, you can use the string ec2:subnet . To see the list of valid values
-	// for this parameter, query the ListResourceTypesoperation.
+	// The format is  :  and is case sensitive. For example, to specify an Amazon EC2
+	// Subnet, you can use the string ec2:Subnet . To see the list of valid values for
+	// this parameter, query the ListResourceTypesoperation. This value must match the display name of
+	// the resource (available in ListResourceTypes ).
 	//
 	// This member is required.
 	ResourceType *string

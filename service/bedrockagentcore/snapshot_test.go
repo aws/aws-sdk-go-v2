@@ -398,6 +398,18 @@ func TestCheckSnapshot_RetrieveMemoryRecords(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SaveBrowserSessionProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SaveBrowserSessionProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SaveBrowserSessionProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartBrowserSession(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartBrowserSession(context.Background(), nil, func(o *Options) {
@@ -810,6 +822,18 @@ func TestUpdateSnapshot_RetrieveMemoryRecords(t *testing.T) {
 	_, err := svc.RetrieveMemoryRecords(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RetrieveMemoryRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SaveBrowserSessionProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SaveBrowserSessionProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SaveBrowserSessionProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

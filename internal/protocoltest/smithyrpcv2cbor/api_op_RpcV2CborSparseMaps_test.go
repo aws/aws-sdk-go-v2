@@ -6,11 +6,9 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -21,7 +19,7 @@ import (
 	"testing"
 )
 
-func TestClient_RpcV2CborSparseMaps_smithyRpcv2cborSerialize(t *testing.T) {
+func TestClient_RpcV2CborSparseMaps_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *RpcV2CborSparseMapsInput
 		ExpectMethod  string
@@ -200,17 +198,17 @@ func TestClient_RpcV2CborSparseMaps_smithyRpcv2cborSerialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient: protocoltesthttp.NewClient(),
-				Region:     "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
 			})
 			result, err := client.RpcV2CborSparseMaps(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -241,7 +239,190 @@ func TestClient_RpcV2CborSparseMaps_smithyRpcv2cborSerialize(t *testing.T) {
 	}
 }
 
-func TestClient_RpcV2CborSparseMaps_smithyRpcv2cborDeserialize(t *testing.T) {
+func BenchmarkClient_RpcV2CborSparseMaps_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *RpcV2CborSparseMapsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RpcV2CborSparseMaps": {
+			Params: &RpcV2CborSparseMapsInput{
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"foo": {
+						Hi: ptr.String("there"),
+					},
+					"baz": {
+						Hi: ptr.String("bye"),
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v29zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb79iaGlldGhlcmX/Y2Jher9iaGljYnll////`)
+			},
+		},
+		"RpcV2CborSerializesNullMapValues": {
+			Params: &RpcV2CborSparseMapsInput{
+				SparseBooleanMap: map[string]*bool{
+					"x": nil,
+				},
+				SparseNumberMap: map[string]*int32{
+					"x": nil,
+				},
+				SparseStringMap: map[string]*string{
+					"x": nil,
+				},
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"x": nil,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//`)
+			},
+		},
+		"RpcV2CborSerializesSparseSetMap": {
+			Params: &RpcV2CborSparseMapsInput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v2xzcGFyc2VTZXRNYXC/YXif/2F5n2FhYWL///8=`)
+			},
+		},
+		"RpcV2CborSerializesSparseSetMapAndRetainsNull": {
+			Params: &RpcV2CborSparseMapsInput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+					"z": nil,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v2xzcGFyc2VTZXRNYXC/YXif/2F5n2FhYWL/YXr2//8=`)
+			},
+		},
+		"RpcV2CborSerializesZeroValuesInSparseMaps": {
+			Params: &RpcV2CborSparseMapsInput{
+				SparseNumberMap: map[string]*int32{
+					"x": ptr.Int32(0),
+				},
+				SparseBooleanMap: map[string]*bool{
+					"x": ptr.Bool(false),
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v29zcGFyc2VOdW1iZXJNYXC/YXgA/3BzcGFyc2VCb29sZWFuTWFwv2F49P//`)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
+			})
+			for i := 0; i < b.N; i++ {
+				client.RpcV2CborSparseMaps(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
+func TestClient_RpcV2CborSparseMaps_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -421,12 +602,7 @@ func TestClient_RpcV2CborSparseMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				Region: "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
 			})
 			var params RpcV2CborSparseMapsInput
 			result, err := client.RpcV2CborSparseMaps(context.Background(), &params)
@@ -438,6 +614,191 @@ func TestClient_RpcV2CborSparseMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_RpcV2CborSparseMaps_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *RpcV2CborSparseMapsOutput
+	}{
+		"RpcV2CborSparseJsonMaps": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v29zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb79iaGlldGhlcmX/Y2Jher9iaGljYnll////`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborSparseMapsOutput{
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"foo": {
+						Hi: ptr.String("there"),
+					},
+					"baz": {
+						Hi: ptr.String("bye"),
+					},
+				},
+			},
+		},
+		"RpcV2CborDeserializesNullMapValues": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborSparseMapsOutput{
+				SparseBooleanMap: map[string]*bool{
+					"x": nil,
+				},
+				SparseNumberMap: map[string]*int32{
+					"x": nil,
+				},
+				SparseStringMap: map[string]*string{
+					"x": nil,
+				},
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"x": nil,
+				},
+			},
+		},
+		"RpcV2CborDeserializesSparseSetMap": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2xzcGFyc2VTZXRNYXC/YXmfYWFhYv9heJ////8=`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborSparseMapsOutput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
+			},
+		},
+		"RpcV2CborDeserializesSparseSetMapAndRetainsNull": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2xzcGFyc2VTZXRNYXC/YXif/2F5n2FhYWL/YXr2//8=`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborSparseMapsOutput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+					"z": nil,
+				},
+			},
+		},
+		"RpcV2CborDeserializesZeroValuesInSparseMaps": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v29zcGFyc2VOdW1iZXJNYXC/YXgA/3BzcGFyc2VCb29sZWFuTWFwv2F49P//`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborSparseMapsOutput{
+				SparseNumberMap: map[string]*int32{
+					"x": ptr.Int32(0),
+				},
+				SparseBooleanMap: map[string]*bool{
+					"x": ptr.Bool(false),
+				},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params RpcV2CborSparseMapsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.RpcV2CborSparseMaps(context.Background(), &params)
 			}
 		})
 	}

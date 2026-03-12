@@ -3784,6 +3784,12 @@
                         "smithy.api#documentation": "<p>The metrics configuration for your event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics\">Event source mapping metrics</a>.</p>"
                     }
                 },
+                "LoggingConfig": {
+                    "target": "com.amazonaws.lambda#EventSourceMappingLoggingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Amazon MSK, and self-managed Apache Kafka only) The logging configuration for your event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html\">Event source mapping logging</a>.</p>"
+                    }
+                },
                 "ProvisionedPollerConfig": {
                     "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
                     "traits": {
@@ -6056,6 +6062,12 @@
                         "smithy.api#documentation": "<p>The metrics configuration for your event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics\">Event source mapping metrics</a>.</p>"
                     }
                 },
+                "LoggingConfig": {
+                    "target": "com.amazonaws.lambda#EventSourceMappingLoggingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Amazon MSK, and self-managed Apache Kafka only) The logging configuration for your event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html\">Event source mapping logging</a>.</p>"
+                    }
+                },
                 "ProvisionedPollerConfig": {
                     "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
                     "traits": {
@@ -6067,6 +6079,20 @@
                 "smithy.api#documentation": "<p>A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.</p>"
             }
         },
+        "com.amazonaws.lambda#EventSourceMappingLoggingConfig": {
+            "type": "structure",
+            "members": {
+                "SystemLogLevel": {
+                    "target": "com.amazonaws.lambda#EventSourceMappingSystemLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The log level you want your event source mapping to use. Lambda event poller only sends system logs at the selected level of detail and lower, where <code>DEBUG</code> is the highest level and <code>WARN</code> is the lowest. For more information about these metrics, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html\"> Event source mapping logging</a>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>(Amazon MSK, and self-managed Apache Kafka only) The logging configuration for your event source. Use this configuration object to define the level of logs for your event source mapping. </p>"
+            }
+        },
         "com.amazonaws.lambda#EventSourceMappingMetric": {
             "type": "enum",
             "members": {
@@ -6074,6 +6100,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EventCount"
+                    }
+                },
+                "ErrorCount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ErrorCount"
+                    }
+                },
+                "KafkaMetrics": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KafkaMetrics"
                     }
                 }
             }
@@ -6086,7 +6124,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1
+                    "max": 3
                 }
             }
         },
@@ -6096,12 +6134,35 @@
                 "Metrics": {
                     "target": "com.amazonaws.lambda#EventSourceMappingMetricList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The metrics you want your event source mapping to produce. Include <code>EventCount</code> to receive event source mapping metrics related to the number of events processed by your event source mapping. For more information about these metrics, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics\"> Event source mapping metrics</a>. </p>"
+                        "smithy.api#documentation": "<p> The metrics you want your event source mapping to produce, including <code>EventCount</code>, <code>ErrorCount</code>, <code>KafkaMetrics</code>. </p> <ul> <li> <p> <code>EventCount</code> to receive metrics related to the number of events processed by your event source mapping.</p> </li> <li> <p> <code>ErrorCount</code> (Amazon MSK and self-managed Apache Kafka) to receive metrics related to the number of errors in your event source mapping processing.</p> </li> <li> <p> <code>KafkaMetrics</code> (Amazon MSK and self-managed Apache Kafka) to receive metrics related to the Kafka consumers from your event source mapping.</p> </li> </ul> <p> For more information about these metrics, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics\"> Event source mapping metrics</a>. </p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The metrics configuration for your event source. Use this configuration object to define which metrics you want your event source mapping to produce.</p>"
+            }
+        },
+        "com.amazonaws.lambda#EventSourceMappingSystemLogLevel": {
+            "type": "enum",
+            "members": {
+                "Debug": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEBUG"
+                    }
+                },
+                "Info": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                },
+                "Warn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARN"
+                    }
+                }
             }
         },
         "com.amazonaws.lambda#EventSourceMappingsList": {
@@ -9636,8 +9697,8 @@
                 "smithy.api#documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To get a provisioned concurrency configuration",
-                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "title": "To view a provisioned concurrency configuration",
+                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
                             "Qualifier": "BLUE"
@@ -9651,8 +9712,8 @@
                         }
                     },
                     {
-                        "title": "To view a provisioned concurrency configuration",
-                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "title": "To get a provisioned concurrency configuration",
+                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
                             "Qualifier": "BLUE"
@@ -18341,6 +18402,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The metrics configuration for your event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics\">Event source mapping metrics</a>.</p>"
                     }
+                },
+                "LoggingConfig": {
+                    "target": "com.amazonaws.lambda#EventSourceMappingLoggingConfig"
                 },
                 "ProvisionedPollerConfig": {
                     "target": "com.amazonaws.lambda#ProvisionedPollerConfig",

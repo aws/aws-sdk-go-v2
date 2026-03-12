@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Security Hub administrator accounts. Can only be called by the
+// Lists the Security Hub CSPM administrator accounts. Can only be called by the
 // organization management account.
 func (c *Client) ListOrganizationAdminAccounts(ctx context.Context, params *ListOrganizationAdminAccountsInput, optFns ...func(*Options)) (*ListOrganizationAdminAccountsOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) ListOrganizationAdminAccounts(ctx context.Context, params *List
 type ListOrganizationAdminAccountsInput struct {
 
 	// The feature where the delegated administrator account is listed. Defaults to
-	// Security Hub if not specified.
+	// Security Hub CSPM if not specified.
 	Feature types.SecurityHubFeature
 
 	// The maximum number of items to return in the response.
@@ -48,11 +48,11 @@ type ListOrganizationAdminAccountsInput struct {
 
 type ListOrganizationAdminAccountsOutput struct {
 
-	// The list of Security Hub administrator accounts.
+	// The list of Security Hub CSPM administrator accounts.
 	AdminAccounts []types.AdminAccount
 
 	// The feature where the delegated administrator account is listed. Defaults to
-	// Security Hub CSPM if not specified.
+	// Security Hub CSPM CSPM if not specified.
 	Feature types.SecurityHubFeature
 
 	// The pagination token to use to request the next page of results.

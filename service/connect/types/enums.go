@@ -395,6 +395,26 @@ func (Comparison) Values() []Comparison {
 	}
 }
 
+type ConfigurableNotificationPriority string
+
+// Enum values for ConfigurableNotificationPriority
+const (
+	ConfigurableNotificationPriorityHigh ConfigurableNotificationPriority = "HIGH"
+	ConfigurableNotificationPriorityLow  ConfigurableNotificationPriority = "LOW"
+)
+
+// Values returns all known values for ConfigurableNotificationPriority. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurableNotificationPriority) Values() []ConfigurableNotificationPriority {
+	return []ConfigurableNotificationPriority{
+		"HIGH",
+		"LOW",
+	}
+}
+
 type ContactFlowModuleState string
 
 // Enum values for ContactFlowModuleState
@@ -588,7 +608,8 @@ type ContactMetricName string
 
 // Enum values for ContactMetricName
 const (
-	ContactMetricNamePositionInQueue ContactMetricName = "POSITION_IN_QUEUE"
+	ContactMetricNameEstimatedWaitTime ContactMetricName = "ESTIMATED_WAIT_TIME"
+	ContactMetricNamePositionInQueue   ContactMetricName = "POSITION_IN_QUEUE"
 )
 
 // Values returns all known values for ContactMetricName. Note that this can be
@@ -597,6 +618,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ContactMetricName) Values() []ContactMetricName {
 	return []ContactMetricName{
+		"ESTIMATED_WAIT_TIME",
 		"POSITION_IN_QUEUE",
 	}
 }
@@ -693,6 +715,7 @@ const (
 	CurrentMetricNameAgentsOnContact        CurrentMetricName = "AGENTS_ON_CONTACT"
 	CurrentMetricNameSlotsActive            CurrentMetricName = "SLOTS_ACTIVE"
 	CurrentMetricNameSlotsAvailable         CurrentMetricName = "SLOTS_AVAILABLE"
+	CurrentMetricNameEstimatedWaitTime      CurrentMetricName = "ESTIMATED_WAIT_TIME"
 )
 
 // Values returns all known values for CurrentMetricName. Note that this can be
@@ -714,6 +737,7 @@ func (CurrentMetricName) Values() []CurrentMetricName {
 		"AGENTS_ON_CONTACT",
 		"SLOTS_ACTIVE",
 		"SLOTS_AVAILABLE",
+		"ESTIMATED_WAIT_TIME",
 	}
 }
 
@@ -1440,6 +1464,29 @@ func (EventSourceName) Values() []EventSourceName {
 	}
 }
 
+type ExecutionRecordStatus string
+
+// Enum values for ExecutionRecordStatus
+const (
+	ExecutionRecordStatusPassed     ExecutionRecordStatus = "PASSED"
+	ExecutionRecordStatusFailed     ExecutionRecordStatus = "FAILED"
+	ExecutionRecordStatusInProgress ExecutionRecordStatus = "IN_PROGRESS"
+	ExecutionRecordStatusStopped    ExecutionRecordStatus = "STOPPED"
+)
+
+// Values returns all known values for ExecutionRecordStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionRecordStatus) Values() []ExecutionRecordStatus {
+	return []ExecutionRecordStatus{
+		"PASSED",
+		"FAILED",
+		"IN_PROGRESS",
+		"STOPPED",
+	}
+}
+
 type FailureReasonCode string
 
 // Enum values for FailureReasonCode
@@ -2021,6 +2068,43 @@ func (ListFlowAssociationResourceType) Values() []ListFlowAssociationResourceTyp
 	}
 }
 
+type LocaleCode string
+
+// Enum values for LocaleCode
+const (
+	LocaleCodeEnUS LocaleCode = "en_US"
+	LocaleCodeDeDE LocaleCode = "de_DE"
+	LocaleCodeEsES LocaleCode = "es_ES"
+	LocaleCodeFrFR LocaleCode = "fr_FR"
+	LocaleCodeIdID LocaleCode = "id_ID"
+	LocaleCodeItIT LocaleCode = "it_IT"
+	LocaleCodeJaJP LocaleCode = "ja_JP"
+	LocaleCodeKoKR LocaleCode = "ko_KR"
+	LocaleCodePtBR LocaleCode = "pt_BR"
+	LocaleCodeZhCN LocaleCode = "zh_CN"
+	LocaleCodeZhTW LocaleCode = "zh_TW"
+)
+
+// Values returns all known values for LocaleCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LocaleCode) Values() []LocaleCode {
+	return []LocaleCode{
+		"en_US",
+		"de_DE",
+		"es_ES",
+		"fr_FR",
+		"id_ID",
+		"it_IT",
+		"ja_JP",
+		"ko_KR",
+		"pt_BR",
+		"zh_CN",
+		"zh_TW",
+	}
+}
+
 type MediaStreamType string
 
 // Enum values for MediaStreamType
@@ -2169,6 +2253,69 @@ const (
 func (NotificationDeliveryType) Values() []NotificationDeliveryType {
 	return []NotificationDeliveryType{
 		"EMAIL",
+	}
+}
+
+type NotificationPriority string
+
+// Enum values for NotificationPriority
+const (
+	NotificationPriorityUrgent NotificationPriority = "URGENT"
+	NotificationPriorityHigh   NotificationPriority = "HIGH"
+	NotificationPriorityLow    NotificationPriority = "LOW"
+)
+
+// Values returns all known values for NotificationPriority. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationPriority) Values() []NotificationPriority {
+	return []NotificationPriority{
+		"URGENT",
+		"HIGH",
+		"LOW",
+	}
+}
+
+type NotificationSource string
+
+// Enum values for NotificationSource
+const (
+	NotificationSourceCustomer NotificationSource = "CUSTOMER"
+	NotificationSourceRules    NotificationSource = "RULES"
+	NotificationSourceSystem   NotificationSource = "SYSTEM"
+)
+
+// Values returns all known values for NotificationSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationSource) Values() []NotificationSource {
+	return []NotificationSource{
+		"CUSTOMER",
+		"RULES",
+		"SYSTEM",
+	}
+}
+
+type NotificationStatus string
+
+// Enum values for NotificationStatus
+const (
+	NotificationStatusRead   NotificationStatus = "READ"
+	NotificationStatusUnread NotificationStatus = "UNREAD"
+	NotificationStatusHidden NotificationStatus = "HIDDEN"
+)
+
+// Values returns all known values for NotificationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationStatus) Values() []NotificationStatus {
+	return []NotificationStatus{
+		"READ",
+		"UNREAD",
+		"HIDDEN",
 	}
 }
 
@@ -3881,6 +4028,69 @@ func (TaskTemplateStatus) Values() []TaskTemplateStatus {
 	}
 }
 
+type TestCaseEntryPointType string
+
+// Enum values for TestCaseEntryPointType
+const (
+	TestCaseEntryPointTypeVoiceCall TestCaseEntryPointType = "VOICE_CALL"
+	TestCaseEntryPointTypeChat      TestCaseEntryPointType = "CHAT"
+)
+
+// Values returns all known values for TestCaseEntryPointType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestCaseEntryPointType) Values() []TestCaseEntryPointType {
+	return []TestCaseEntryPointType{
+		"VOICE_CALL",
+		"CHAT",
+	}
+}
+
+type TestCaseExecutionStatus string
+
+// Enum values for TestCaseExecutionStatus
+const (
+	TestCaseExecutionStatusInitiated  TestCaseExecutionStatus = "INITIATED"
+	TestCaseExecutionStatusPassed     TestCaseExecutionStatus = "PASSED"
+	TestCaseExecutionStatusFailed     TestCaseExecutionStatus = "FAILED"
+	TestCaseExecutionStatusInProgress TestCaseExecutionStatus = "IN_PROGRESS"
+	TestCaseExecutionStatusStopped    TestCaseExecutionStatus = "STOPPED"
+)
+
+// Values returns all known values for TestCaseExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestCaseExecutionStatus) Values() []TestCaseExecutionStatus {
+	return []TestCaseExecutionStatus{
+		"INITIATED",
+		"PASSED",
+		"FAILED",
+		"IN_PROGRESS",
+		"STOPPED",
+	}
+}
+
+type TestCaseStatus string
+
+// Enum values for TestCaseStatus
+const (
+	TestCaseStatusPublished TestCaseStatus = "PUBLISHED"
+	TestCaseStatusSaved     TestCaseStatus = "SAVED"
+)
+
+// Values returns all known values for TestCaseStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestCaseStatus) Values() []TestCaseStatus {
+	return []TestCaseStatus{
+		"PUBLISHED",
+		"SAVED",
+	}
+}
+
 type TimerEligibleParticipantRoles string
 
 // Enum values for TimerEligibleParticipantRoles
@@ -4165,6 +4375,27 @@ func (VocabularyState) Values() []VocabularyState {
 		"ACTIVE",
 		"CREATION_FAILED",
 		"DELETE_IN_PROGRESS",
+	}
+}
+
+type VoiceEnhancementMode string
+
+// Enum values for VoiceEnhancementMode
+const (
+	VoiceEnhancementModeVoiceIsolation   VoiceEnhancementMode = "VOICE_ISOLATION"
+	VoiceEnhancementModeNoiseSuppression VoiceEnhancementMode = "NOISE_SUPPRESSION"
+	VoiceEnhancementModeNone             VoiceEnhancementMode = "NONE"
+)
+
+// Values returns all known values for VoiceEnhancementMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VoiceEnhancementMode) Values() []VoiceEnhancementMode {
+	return []VoiceEnhancementMode{
+		"VOICE_ISOLATION",
+		"NOISE_SUPPRESSION",
+		"NONE",
 	}
 }
 

@@ -12,15 +12,15 @@ import (
 
 // This method is deprecated. Instead, use AcceptAdministratorInvitation .
 //
-// The Security Hub console continues to use AcceptInvitation . It will eventually
-// change to use AcceptAdministratorInvitation . Any IAM policies that specifically
-// control access to this function must continue to use AcceptInvitation . You
-// should also add AcceptAdministratorInvitation to your policies to ensure that
-// the correct permissions are in place after the console begins to use
-// AcceptAdministratorInvitation .
+// The Security Hub CSPM console continues to use AcceptInvitation . It will
+// eventually change to use AcceptAdministratorInvitation . Any IAM policies that
+// specifically control access to this function must continue to use
+// AcceptInvitation . You should also add AcceptAdministratorInvitation to your
+// policies to ensure that the correct permissions are in place after the console
+// begins to use AcceptAdministratorInvitation .
 //
 // Accepts the invitation to be a member account and be monitored by the Security
-// Hub administrator account that the invitation was sent from.
+// Hub CSPM administrator account that the invitation was sent from.
 //
 // This operation is only used by member accounts that are not added through
 // Organizations.
@@ -47,13 +47,13 @@ func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationI
 
 type AcceptInvitationInput struct {
 
-	// The identifier of the invitation sent from the Security Hub administrator
+	// The identifier of the invitation sent from the Security Hub CSPM administrator
 	// account.
 	//
 	// This member is required.
 	InvitationId *string
 
-	// The account ID of the Security Hub administrator account that sent the
+	// The account ID of the Security Hub CSPM administrator account that sent the
 	// invitation.
 	//
 	// This member is required.

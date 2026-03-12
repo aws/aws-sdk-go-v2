@@ -60,7 +60,7 @@ type StartImportTaskInput struct {
 	FailOnError *bool
 
 	// Specifies the format of Amazon S3 data to be imported. Valid values are CSV,
-	// which identifies the Gremlin CSV format or OPENCYPHER, which identies the
+	// which identifies the Gremlin CSV format or OPENCYPHER, which identifies the
 	// openCypher load format.
 	Format types.Format
 
@@ -103,7 +103,7 @@ type StartImportTaskOutput struct {
 	TaskId *string
 
 	// Specifies the format of Amazon S3 data to be imported. Valid values are CSV,
-	// which identifies the Gremlin CSV format or OPENCYPHER, which identies the
+	// which identifies the Gremlin CSV format or OPENCYPHER, which identifies the
 	// openCypher load format.
 	Format types.Format
 

@@ -584,8 +584,15 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains data processing unit (DPU) configuration settings and parameter
-// mappings for a notebook engine.
+// The engine configuration for the workgroup, which includes the minimum/maximum
+// number of Data Processing Units (DPU) that queries should use when running in
+// provisioned capacity. If not specified, Athena uses default values (Default
+// value for min is 4 and for max is Minimum of 124 and allocated DPUs).
+//
+// To specify DPU values for PC queries the WG containing EngineConfiguration
+// should have the following values: The name of the Classifications should be
+// athena-query-engine-properties , with the only allowed properties as
+// max-dpu-count and min-dpu-count .
 type EngineConfiguration struct {
 
 	// Contains additional notebook engine MAP parameter mappings in the form of
@@ -1696,8 +1703,15 @@ type WorkGroupConfiguration struct {
 	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	EnforceWorkGroupConfiguration *bool
 
-	// Contains data processing unit (DPU) configuration settings and parameter
-	// mappings for a notebook engine.
+	// The engine configuration for the workgroup, which includes the minimum/maximum
+	// number of Data Processing Units (DPU) that queries should use when running in
+	// provisioned capacity. If not specified, Athena uses default values (Default
+	// value for min is 4 and for max is Minimum of 124 and allocated DPUs).
+	//
+	// To specify DPU values for PC queries the WG containing EngineConfiguration
+	// should have the following values: The name of the Classifications should be
+	// athena-query-engine-properties , with the only allowed properties as
+	// max-dpu-count and min-dpu-count .
 	EngineConfiguration *EngineConfiguration
 
 	// The engine version that all queries running on the workgroup use. Queries on
@@ -1788,8 +1802,15 @@ type WorkGroupConfigurationUpdates struct {
 	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	EnforceWorkGroupConfiguration *bool
 
-	// Contains data processing unit (DPU) configuration settings and parameter
-	// mappings for a notebook engine.
+	// The engine configuration for the workgroup, which includes the minimum/maximum
+	// number of Data Processing Units (DPU) that queries should use when running in
+	// provisioned capacity. If not specified, Athena uses default values (Default
+	// value for min is 4 and for max is Minimum of 124 and allocated DPUs).
+	//
+	// To specify DPU values for PC queries the WG containing EngineConfiguration
+	// should have the following values: The name of the Classifications should be
+	// athena-query-engine-properties , with the only allowed properties as
+	// max-dpu-count and min-dpu-count .
 	EngineConfiguration *EngineConfiguration
 
 	// The engine version requested when a workgroup is updated. After the update, all

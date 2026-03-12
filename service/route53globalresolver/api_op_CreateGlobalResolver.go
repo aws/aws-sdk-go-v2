@@ -15,6 +15,12 @@ import (
 // Creates a new Route 53 Global Resolver instance. A Route 53 Global Resolver is
 // a global, internet-accessible DNS resolver that provides secure DNS resolution
 // for both public and private domains through global anycast IP addresses.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) CreateGlobalResolver(ctx context.Context, params *CreateGlobalResolverInput, optFns ...func(*Options)) (*CreateGlobalResolverOutput, error) {
 	if params == nil {
 		params = &CreateGlobalResolverInput{}
@@ -38,9 +44,9 @@ type CreateGlobalResolverInput struct {
 	// This member is required.
 	Name *string
 
-	// List of AWS regions where the Route 53 Global Resolver will operate. The
-	// resolver will be distributed across these regions to provide global availability
-	// and low-latency DNS resolution.
+	// List of Amazon Web Services Regions where the Route 53 Global Resolver will
+	// operate. The resolver will be distributed across these Regions to provide global
+	// availability and low-latency DNS resolution.
 	//
 	// This member is required.
 	Regions []string
@@ -54,8 +60,12 @@ type CreateGlobalResolverInput struct {
 	// length of 1024 characters.
 	Description *string
 
-	// The AWS region where query resolution logs and metrics will be aggregated and
-	// delivered. If not specified, logging is not enabled.
+	// The IP address type for the Route 53 Global Resolver. Valid values are IPV4
+	// (default) or DUAL_STACK for both IPv4 and IPv6 support.
+	IpAddressType types.GlobalResolverIpAddressType
+
+	// The Amazon Web Services Region where query resolution logs and metrics will be
+	// aggregated and delivered. If not specified, logging is not enabled.
 	ObservabilityRegion *string
 
 	// Tags to associate with the Route 53 Global Resolver. Tags are key-value pairs
@@ -105,7 +115,8 @@ type CreateGlobalResolverOutput struct {
 	// This member is required.
 	Name *string
 
-	// The AWS Regions where the Route 53 Global Resolver is deployed and operational.
+	// The Amazon Web Services Regions where the Route 53 Global Resolver is deployed
+	// and operational.
 	//
 	// This member is required.
 	Regions []string
@@ -125,8 +136,17 @@ type CreateGlobalResolverOutput struct {
 	// The description of the Route 53 Global Resolver.
 	Description *string
 
-	// The AWS Region where observability data for the Route 53 Global Resolver is
-	// stored.
+	// The IP address type configured for the Route 53 Global Resolver (IPV4 or
+	// DUAL_STACK).
+	IpAddressType types.GlobalResolverIpAddressType
+
+	// The global anycast IPv6 addresses associated with the Route 53 Global Resolver.
+	// This field is only populated when ipAddressType is DUAL_STACK. DNS clients can
+	// send queries to these addresses from anywhere on the internet.
+	Ipv6Addresses []string
+
+	// The Amazon Web Services Region where observability data for the Route 53 Global
+	// Resolver is stored.
 	ObservabilityRegion *string
 
 	// Metadata pertaining to the operation's result.

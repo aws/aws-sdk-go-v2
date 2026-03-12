@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Deletes the specifed graph snapshot.
+// Deletes the specified graph snapshot.
 func (c *Client) DeleteGraphSnapshot(ctx context.Context, params *DeleteGraphSnapshotInput, optFns ...func(*Options)) (*DeleteGraphSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteGraphSnapshotInput{}

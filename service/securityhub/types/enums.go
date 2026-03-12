@@ -498,6 +498,7 @@ const (
 	GroupByFieldComplianceStandards                    GroupByField = "compliance.standards"
 	GroupByFieldCloudAccountName                       GroupByField = "cloud.account.name"
 	GroupByFieldVendorAttributesSeverity               GroupByField = "vendor_attributes.severity"
+	GroupByFieldMetadataProductVendorName              GroupByField = "metadata.product.vendor_name"
 )
 
 // Values returns all known values for GroupByField. Note that this can be
@@ -529,6 +530,7 @@ func (GroupByField) Values() []GroupByField {
 		"compliance.standards",
 		"cloud.account.name",
 		"vendor_attributes.severity",
+		"metadata.product.vendor_name",
 	}
 }
 
@@ -560,6 +562,7 @@ const (
 	IntegrationV2TypeSendFindingsToSecurityHub      IntegrationV2Type = "SEND_FINDINGS_TO_SECURITY_HUB"
 	IntegrationV2TypeReceiveFindingsFromSecurityHub IntegrationV2Type = "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
 	IntegrationV2TypeUpdateFindingsInSecurityHub    IntegrationV2Type = "UPDATE_FINDINGS_IN_SECURITY_HUB"
+	IntegrationV2TypeExtendedPlan                   IntegrationV2Type = "EXTENDED_PLAN"
 )
 
 // Values returns all known values for IntegrationV2Type. Note that this can be
@@ -571,6 +574,7 @@ func (IntegrationV2Type) Values() []IntegrationV2Type {
 		"SEND_FINDINGS_TO_SECURITY_HUB",
 		"RECEIVE_FINDINGS_FROM_SECURITY_HUB",
 		"UPDATE_FINDINGS_IN_SECURITY_HUB",
+		"EXTENDED_PLAN",
 	}
 }
 

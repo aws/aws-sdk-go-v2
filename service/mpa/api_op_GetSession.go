@@ -51,6 +51,9 @@ type GetSessionOutput struct {
 	// Name of the protected operation.
 	ActionName *string
 
+	// A list of AdditionalSecurityRequirement applied to the session.
+	AdditionalSecurityRequirements []types.AdditionalSecurityRequirement
+
 	// An ApprovalStrategyResponse object. Contains details for how the team grants
 	// approval
 	ApprovalStrategy types.ApprovalStrategyResponse

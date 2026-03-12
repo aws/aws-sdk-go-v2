@@ -344,6 +344,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The OAuth configuration settings used for authentication with the third-party service.</p>"
                     }
+                },
+                "GeneralAuthorization": {
+                    "target": "com.amazonaws.iotmanagedintegrations#AuthMaterials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization materials for General Authorization.</p>"
+                    }
                 }
             },
             "traits": {
@@ -358,10 +364,47 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated OAuth configuration settings for the authentication configuration.</p>"
                     }
+                },
+                "GeneralAuthorizationUpdate": {
+                    "target": "com.amazonaws.iotmanagedintegrations#GeneralAuthorizationUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The General Authorization update information containing authorization materials to add or update in Kinesis Data Streams.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The updated authentication configuration details for a connector destination.</p>"
+            }
+        },
+        "com.amazonaws.iotmanagedintegrations#AuthMaterial": {
+            "type": "structure",
+            "members": {
+                "SecretsManager": {
+                    "target": "com.amazonaws.iotmanagedintegrations#SecretsManager",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuthMaterialName": {
+                    "target": "com.amazonaws.iotmanagedintegrations#AuthMaterialName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the authorization material.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The authorization material containing the Secrets Manager arn and version.</p>"
+            }
+        },
+        "com.amazonaws.iotmanagedintegrations#AuthMaterialName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9=_+/-]+$"
             }
         },
         "com.amazonaws.iotmanagedintegrations#AuthMaterialString": {
@@ -407,6 +450,23 @@
                     "traits": {
                         "smithy.api#enumValue": "DISCOVERED_DEVICE"
                     }
+                },
+                "PRE_ONBOARDED_CLOUD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_ONBOARDED_CLOUD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotmanagedintegrations#AuthMaterials": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotmanagedintegrations#AuthMaterial"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 3
                 }
             }
         },
@@ -1210,6 +1270,17 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.iotmanagedintegrations#ConnectorDeviceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotmanagedintegrations#ConnectorDeviceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.iotmanagedintegrations#ConnectorDeviceName": {
             "type": "string",
             "traits": {
@@ -1217,8 +1288,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[\\p{L}\\p{N} ._-]+$",
-                "smithy.api#sensitive": {}
+                "smithy.api#pattern": "^[\\p{L}\\p{N} ._-]+$"
             }
         },
         "com.amazonaws.iotmanagedintegrations#ConnectorEventMessage": {
@@ -1268,8 +1338,7 @@
                     "min": 1,
                     "max": 6
                 },
-                "smithy.api#pattern": "^[0-9.]+$",
-                "smithy.api#sensitive": {}
+                "smithy.api#pattern": "^[0-9.]+$"
             }
         },
         "com.amazonaws.iotmanagedintegrations#ConnectorEventStatusCode": {
@@ -1278,8 +1347,7 @@
                 "smithy.api#range": {
                     "min": 100,
                     "max": 550
-                },
-                "smithy.api#sensitive": {}
+                }
             }
         },
         "com.amazonaws.iotmanagedintegrations#ConnectorId": {
@@ -1440,6 +1508,12 @@
                         "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>A set of key/value pairs that are used to manage the account association.</p>"
                     }
+                },
+                "GeneralAuthorization": {
+                    "target": "com.amazonaws.iotmanagedintegrations#GeneralAuthorizationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The General Authorization reference by authorization material name.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1450,10 +1524,12 @@
             "type": "structure",
             "members": {
                 "OAuthAuthorizationUrl": {
-                    "target": "com.amazonaws.iotmanagedintegrations#OAuthAuthorizationUrl",
+                    "target": "com.amazonaws.iotmanagedintegrations#OAuthAuthorizationUrlOutput",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>Third-party IoT platform OAuth authorization server URL backed with all the required parameters to perform end-user authentication.</p>",
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Third-party IoT platform OAuth authorization server URL backed with all the required parameters to perform end-user authentication. This field will be empty when using General Authorization flows that do not require OAuth.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1693,8 +1769,7 @@
                 "AuthType": {
                     "target": "com.amazonaws.iotmanagedintegrations#AuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication type used for the connector destination, which determines how credentials and access are managed.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The authentication type used for the connector destination, which determines how credentials and access are managed.</p>"
                     }
                 },
                 "AuthConfig": {
@@ -1707,8 +1782,7 @@
                 "SecretsManager": {
                     "target": "com.amazonaws.iotmanagedintegrations#SecretsManager",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Secrets Manager configuration used to securely store and manage sensitive information for the connector destination.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The AWS Secrets Manager configuration used to securely store and manage sensitive information for the connector destination.</p>"
                     }
                 },
                 "ClientToken": {
@@ -2101,7 +2175,7 @@
                     "target": "com.amazonaws.iotmanagedintegrations#AuthMaterialString",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "create",
-                        "smithy.api#documentation": "<p>The authentication material defining the device connectivity setup requests. The authentication materials used are the device bar code.</p>",
+                        "smithy.api#documentation": "<p>The authentication material defining the device connectivity setup requests. The authorization materials used are the device bar code.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2601,6 +2675,13 @@
                     "traits": {
                         "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>The id of the certificate authority (CA) certificate.</p>"
+                    }
+                },
+                "ClaimCertificate": {
+                    "target": "com.amazonaws.iotmanagedintegrations#ClaimCertificate",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
+                        "smithy.api#documentation": "<p>The claim certificate.</p>"
                     }
                 },
                 "Name": {
@@ -4372,6 +4453,40 @@
                 "smithy.api#pattern": "^0[xX][0-9a-fA-F]+$|^[0-9]+$"
             }
         },
+        "com.amazonaws.iotmanagedintegrations#GeneralAuthorizationName": {
+            "type": "structure",
+            "members": {
+                "AuthMaterialName": {
+                    "target": "com.amazonaws.iotmanagedintegrations#AuthMaterialName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the authorization material.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The General Authorization reference by authorization material name.</p>"
+            }
+        },
+        "com.amazonaws.iotmanagedintegrations#GeneralAuthorizationUpdate": {
+            "type": "structure",
+            "members": {
+                "AuthMaterialsToAdd": {
+                    "target": "com.amazonaws.iotmanagedintegrations#AuthMaterials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization materials to add.</p>"
+                    }
+                },
+                "AuthMaterialsToUpdate": {
+                    "target": "com.amazonaws.iotmanagedintegrations#AuthMaterials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization materials to update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The General Authorization update information containing authorization materials to add or update.</p>"
+            }
+        },
         "com.amazonaws.iotmanagedintegrations#GetAccountAssociation": {
             "type": "operation",
             "input": {
@@ -4499,9 +4614,11 @@
                     }
                 },
                 "OAuthAuthorizationUrl": {
-                    "target": "com.amazonaws.iotmanagedintegrations#OAuthAuthorizationUrl",
+                    "target": "com.amazonaws.iotmanagedintegrations#OAuthAuthorizationUrlOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Third party IoT platform OAuth authorization server URL backed with all the required parameters to perform end-user authentication.</p>",
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Third party IoT platform OAuth authorization server URL backed with all the required parameters to perform end-user authentication. This field will be empty when using General Authorization flows that do not require OAuth.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4510,6 +4627,12 @@
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>A set of key/value pairs that are used to manage the account association.</p>"
+                    }
+                },
+                "GeneralAuthorization": {
+                    "target": "com.amazonaws.iotmanagedintegrations#GeneralAuthorizationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The General Authorization reference by authorization material name.</p>"
                     }
                 }
             },
@@ -7345,6 +7468,15 @@
                 "aws.endpoints#dualStackOnlyEndpoints": {},
                 "aws.endpoints#standardRegionalEndpoints": {},
                 "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "origin": "*",
+                    "maxAge": 86400,
+                    "additionalAllowedHeaders": [
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "content-type"
+                    ]
+                },
                 "smithy.api#documentation": "Managed integrations is a feature of AWS IoT Device Management that enables developers to quickly build innovative IoT solutions. Customers can use managed integrations to automate device setup workflows and support interoperability across many devices, regardless of device vendor or connectivity protocol. This allows developers to use a single user-interface to control, manage, and operate a range of devices.",
                 "smithy.api#title": "Managed integrations for AWS IoT Device Management",
                 "smithy.rules#endpointRuleSet": {
@@ -9816,7 +9948,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "List tags for the specified resource.",
+                "smithy.api#documentation": "<p>Lists the tags for a specified resource.</p>",
                 "smithy.api#http": {
                     "uri": "/tags/{ResourceArn}",
                     "method": "GET"
@@ -9860,7 +9992,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.iotmanagedintegrations#IoTManagedIntegrationsResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the resource for which to list tags.",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which to list tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9876,7 +10008,7 @@
                 "tags": {
                     "target": "com.amazonaws.iotmanagedintegrations#TagsMap",
                     "traits": {
-                        "smithy.api#documentation": "A set of key/value pairs that are used to manage the resource."
+                        "smithy.api#documentation": "<p>A set of key/value pairs that are used to manage the resource.</p>"
                     }
                 }
             },
@@ -9967,6 +10099,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the account association in the association.</p>"
                     }
+                },
+                "ManagedThingAssociationStatus": {
+                    "target": "com.amazonaws.iotmanagedintegrations#ManagedThingAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the registration between the managed thing and the account association. Indicates whether the device is pre-associated or fully associated with the account association.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9995,6 +10133,23 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "managed-thing-associations"
+                }
+            }
+        },
+        "com.amazonaws.iotmanagedintegrations#ManagedThingAssociationStatus": {
+            "type": "enum",
+            "members": {
+                "PRE_ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_ASSOCIATED"
+                    }
+                },
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED"
+                    }
                 }
             }
         },
@@ -10890,14 +11045,14 @@
                 }
             }
         },
-        "com.amazonaws.iotmanagedintegrations#OAuthAuthorizationUrl": {
+        "com.amazonaws.iotmanagedintegrations#OAuthAuthorizationUrlOutput": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^(https)://.*$",
+                "smithy.api#pattern": "^$|^(https):\\/\\/.*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -13060,6 +13215,9 @@
                     "target": "com.amazonaws.iotmanagedintegrations#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.iotmanagedintegrations#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.iotmanagedintegrations#InternalServerException"
                 },
                 {
@@ -13105,10 +13263,12 @@
             "type": "structure",
             "members": {
                 "OAuthAuthorizationUrl": {
-                    "target": "com.amazonaws.iotmanagedintegrations#OAuthAuthorizationUrl",
+                    "target": "com.amazonaws.iotmanagedintegrations#OAuthAuthorizationUrlOutput",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
-                        "smithy.api#documentation": "<p>Third-party IoT platform OAuth authorization server URL with all required parameters to perform end-user authentication during the refresh process.</p>",
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Third-party IoT platform OAuth authorization server URL with all required parameters to perform end-user authentication during the refresh process. This field will be empty when using General Authorization flows that do not require OAuth.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -13224,6 +13384,12 @@
                             "since": "06-25-2025"
                         },
                         "smithy.api#documentation": "<p>A set of key/value pairs that are used to manage the device discovery request.</p>"
+                    }
+                },
+                "ConnectorDeviceIdList": {
+                    "target": "com.amazonaws.iotmanagedintegrations#ConnectorDeviceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used as a filter for PLA discoveries.</p>"
                     }
                 },
                 "Protocol": {
@@ -13397,12 +13563,49 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Add tags for the specified resource.",
+                "smithy.api#documentation": "<p>Adds tags to a specified resource.</p>",
                 "smithy.api#http": {
                     "uri": "/tags/{ResourceArn}",
                     "method": "POST"
                 },
-                "smithy.api#idempotent": {}
+                "smithy.api#idempotent": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "TagResourceNotFound",
+                        "params": {
+                            "ResourceArn": "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent",
+                            "Tags": {
+                                "key1": "value1"
+                            }
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.iotmanagedintegrations#ResourceNotFoundException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    },
+                    {
+                        "id": "TagResourceSuccess",
+                        "params": {
+                            "ResourceArn": "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123",
+                            "Tags": {
+                                "key1": "value1",
+                                "key2": "value2"
+                            }
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.iotmanagedintegrations#TagResourceRequest": {
@@ -13411,7 +13614,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.iotmanagedintegrations#IoTManagedIntegrationsResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the resource to which to add tags.",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which to add tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -13419,7 +13622,7 @@
                 "Tags": {
                     "target": "com.amazonaws.iotmanagedintegrations#TagsMap",
                     "traits": {
-                        "smithy.api#documentation": "A set of key/value pairs that are used to manage the resource",
+                        "smithy.api#documentation": "<p>A set of key/value pairs that are used to manage the resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -13656,12 +13859,49 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Remove tags for the specified resource.",
+                "smithy.api#documentation": "<p>Removes tags from a specified resource.</p>",
                 "smithy.api#http": {
                     "uri": "/tags/{ResourceArn}",
                     "method": "DELETE"
                 },
-                "smithy.api#idempotent": {}
+                "smithy.api#idempotent": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "UntagResourceNotFound",
+                        "params": {
+                            "ResourceArn": "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent",
+                            "TagKeys": [
+                                "key1"
+                            ]
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.iotmanagedintegrations#ResourceNotFoundException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    },
+                    {
+                        "id": "UntagResourceSuccess",
+                        "params": {
+                            "ResourceArn": "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123",
+                            "TagKeys": [
+                                "key1",
+                                "key2"
+                            ]
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.iotmanagedintegrations#UntagResourceRequest": {
@@ -13670,7 +13910,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.iotmanagedintegrations#IoTManagedIntegrationsResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the resource to which to add tags.",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to remove tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -13678,7 +13918,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.iotmanagedintegrations#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "A list of tag keys to remove from the resource.",
+                        "smithy.api#documentation": "<p>A list of tag keys to remove from the resource.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }

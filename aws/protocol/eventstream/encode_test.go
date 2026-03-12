@@ -64,7 +64,7 @@ func TestEncoder_Limits(t *testing.T) {
 	}
 
 	headers := make(Headers, 0, 10_000) // Previously we failed if headers size was above a certain size
-	for i := 0; i < 10_000; i++ {
+	for range 10_000 {
 		headers = append(headers, h)
 	}
 

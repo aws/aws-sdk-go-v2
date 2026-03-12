@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of browser sessions in Amazon Bedrock that match the specified
-// criteria. This operation returns summary information about each session,
-// including identifiers, status, and timestamps.
+// Retrieves a list of browser sessions in Amazon Bedrock AgentCore that match the
+// specified criteria. This operation returns summary information about each
+// session, including identifiers, status, and timestamps.
 //
 // You can filter the results by browser identifier and session status. The
 // operation supports pagination to handle large result sets efficiently.
@@ -60,7 +60,7 @@ type ListBrowserSessionsInput struct {
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results. If not
-	// specified, Amazon Bedrock returns the first page of results.
+	// specified, Amazon Bedrock AgentCore returns the first page of results.
 	NextToken *string
 
 	// The status of the browser sessions to list. Valid values include ACTIVE,

@@ -5784,6 +5784,42 @@ func awsAwsjson10_deserializeDocumentApnPrograms(v *[]string, value interface{})
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAwsAccountIdOrAliasList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AwsAccount to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentAwsMarketplaceOfferIdentifiers(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6093,6 +6129,112 @@ func awsAwsjson10_deserializeDocumentAwsOpportunityRelatedEntities(v **types.Aws
 		case "Solutions":
 			if err := awsAwsjson10_deserializeDocumentSolutionIdentifiers(&sv.Solutions, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAwsOpportunitySummaryFullView(v **types.AwsOpportunitySummaryFullView, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsOpportunitySummaryFullView
+	if *v == nil {
+		sv = &types.AwsOpportunitySummaryFullView{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Customer":
+			if err := awsAwsjson10_deserializeDocumentAwsOpportunityCustomer(&sv.Customer, value); err != nil {
+				return err
+			}
+
+		case "Insights":
+			if err := awsAwsjson10_deserializeDocumentAwsOpportunityInsights(&sv.Insights, value); err != nil {
+				return err
+			}
+
+		case "InvolvementType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SalesInvolvementType to be of type string, got %T instead", value)
+				}
+				sv.InvolvementType = types.SalesInvolvementType(jtv)
+			}
+
+		case "InvolvementTypeChangeReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InvolvementTypeChangeReason to be of type string, got %T instead", value)
+				}
+				sv.InvolvementTypeChangeReason = types.InvolvementTypeChangeReason(jtv)
+			}
+
+		case "LifeCycle":
+			if err := awsAwsjson10_deserializeDocumentAwsOpportunityLifeCycle(&sv.LifeCycle, value); err != nil {
+				return err
+			}
+
+		case "OpportunityTeam":
+			if err := awsAwsjson10_deserializeDocumentAwsOpportunityTeamMembersList(&sv.OpportunityTeam, value); err != nil {
+				return err
+			}
+
+		case "Origin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OpportunityOrigin to be of type string, got %T instead", value)
+				}
+				sv.Origin = types.OpportunityOrigin(jtv)
+			}
+
+		case "Project":
+			if err := awsAwsjson10_deserializeDocumentAwsOpportunityProject(&sv.Project, value); err != nil {
+				return err
+			}
+
+		case "RelatedEntityIds":
+			if err := awsAwsjson10_deserializeDocumentAwsOpportunityRelatedEntities(&sv.RelatedEntityIds, value); err != nil {
+				return err
+			}
+
+		case "RelatedOpportunityId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OpportunityIdentifier to be of type string, got %T instead", value)
+				}
+				sv.RelatedOpportunityId = ptr.String(jtv)
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.Visibility(jtv)
 			}
 
 		default:
@@ -10530,6 +10672,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "AwsOpportunitySummaryFullView":
+			var mv types.AwsOpportunitySummaryFullView
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentAwsOpportunitySummaryFullView(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceSnapshotPayloadMemberAwsOpportunitySummaryFullView{Value: mv}
+			break loop
+
 		case "OpportunitySummary":
 			var mv types.OpportunitySummaryView
 			destAddr := &mv
@@ -12613,6 +12765,11 @@ func awsAwsjson10_deserializeOpDocumentGetResourceSnapshotOutput(v **GetResource
 					return err
 				}
 				sv.Revision = ptr.Int32(int32(i64))
+			}
+
+		case "TargetMemberAccounts":
+			if err := awsAwsjson10_deserializeDocumentAwsAccountIdOrAliasList(&sv.TargetMemberAccounts, value); err != nil {
+				return err
 			}
 
 		default:

@@ -1323,19 +1323,29 @@ func awsAwsjson10_serializeDocumentRelationshipDisplayNameList(v []string, value
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentResoldBusiness(v *types.ResoldBusiness, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentResoldEnterprise(v *types.ResoldEnterprise, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ChargeAccountId != nil {
+		ok := object.Key("chargeAccountId")
+		ok.String(*v.ChargeAccountId)
+	}
 
 	if len(v.Coverage) > 0 {
 		ok := object.Key("coverage")
 		ok.String(string(v.Coverage))
 	}
 
+	if v.TamLocation != nil {
+		ok := object.Key("tamLocation")
+		ok.String(*v.TamLocation)
+	}
+
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentResoldEnterprise(v *types.ResoldEnterprise, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentResoldUnifiedOperations(v *types.ResoldUnifiedOperations, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1490,15 +1500,15 @@ func awsAwsjson10_serializeDocumentSupportPlan(v types.SupportPlan, value smithy
 			return err
 		}
 
-	case *types.SupportPlanMemberResoldBusiness:
-		av := object.Key("resoldBusiness")
-		if err := awsAwsjson10_serializeDocumentResoldBusiness(&uv.Value, av); err != nil {
-			return err
-		}
-
 	case *types.SupportPlanMemberResoldEnterprise:
 		av := object.Key("resoldEnterprise")
 		if err := awsAwsjson10_serializeDocumentResoldEnterprise(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.SupportPlanMemberResoldUnifiedOperations:
+		av := object.Key("resoldUnifiedOperations")
+		if err := awsAwsjson10_serializeDocumentResoldUnifiedOperations(&uv.Value, av); err != nil {
 			return err
 		}
 

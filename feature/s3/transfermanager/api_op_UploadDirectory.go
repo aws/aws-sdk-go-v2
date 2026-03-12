@@ -128,9 +128,9 @@ type directoryUploader struct {
 	in            *UploadDirectoryInput
 	failurePolicy UploadDirectoryFailurePolicy
 
-	filesUploaded int64
-	filesFailed   int64
-	traversed     map[string]interface{}
+	filesUploaded atomic.Int64
+	filesFailed   atomic.Int64
+	traversed     map[string]any
 
 	err error
 
@@ -145,7 +145,7 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 	u.init()
 	ch := make(chan fileEntry)
 
-	for i := 0; i < u.options.DirectoryConcurrency; i++ {
+	for i := 0; i < u.options.Concurrency; i++ {
 		u.wg.Add(1)
 		go u.uploadFile(ctx, ch)
 	}
@@ -200,15 +200,15 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 	}
 
 	out := &UploadDirectoryOutput{
-		ObjectsUploaded: u.filesUploaded,
-		ObjectsFailed:   u.filesFailed,
+		ObjectsUploaded: u.filesUploaded.Load(),
+		ObjectsFailed:   u.filesFailed.Load(),
 	}
 	u.emitter.Complete(ctx, out)
 	return out, nil
 }
 
 func (u *directoryUploader) init() {
-	u.traversed = make(map[string]interface{})
+	u.traversed = make(map[string]any)
 
 	u.failurePolicy = TerminateUploadPolicy{}
 	if u.in.FailurePolicy != nil {
@@ -379,7 +379,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 				u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
 			} else {
 				// this failed object is ignored, just increase the failure count
-				atomic.AddInt64(&u.filesFailed, 1)
+				u.filesFailed.Add(1)
 			}
 			continue
 		}
@@ -387,7 +387,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		u.progressOnce.Do(func() {
 			u.emitter.Start(ctx, u.in)
 		})
-		atomic.AddInt64(&u.filesUploaded, 1)
+		u.filesUploaded.Add(1)
 		u.emitter.ObjectsTransferred(ctx, aws.ToInt64(out.ContentLength))
 	}
 }

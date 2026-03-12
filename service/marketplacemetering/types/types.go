@@ -64,12 +64,25 @@ type UsageRecord struct {
 	// This member is required.
 	Timestamp *time.Time
 
-	//  The CustomerAWSAccountID parameter specifies the AWS account ID of the buyer.
+	// The CustomerAWSAccountId parameter specifies the AWS account ID of the buyer.
+	//
+	// For existing integrations, to access your CustomerIdentifier to
+	// CustomerAWSAccountId mapping, see [Account Feeds].
+	//
+	// [Account Feeds]: https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html
 	CustomerAWSAccountId *string
 
 	// The CustomerIdentifier is obtained through the ResolveCustomer operation and
 	// represents an individual buyer in your application.
 	CustomerIdentifier *string
+
+	// The LicenseArn is a unique identifier for a specific granted license. These are
+	// used for software purchased through Amazon Web Services Marketplace.
+	//
+	// To access your CustomerAWSAccountId and LicenseArn mapping, visit [Agreements Feeds].
+	//
+	// [Agreements Feeds]: https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html
+	LicenseArn *string
 
 	// The quantity of usage consumed by the customer for the given dimension and
 	// time. Defaults to 0 if not specified.

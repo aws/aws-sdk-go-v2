@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateBrowser(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateBrowserProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBrowserProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateBrowserProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCodeInterpreter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCodeInterpreter(context.Background(), nil, func(o *Options) {
@@ -271,6 +283,18 @@ func TestCheckSnapshot_DeleteBrowser(t *testing.T) {
 	_, err := svc.DeleteBrowser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteBrowser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteBrowserProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBrowserProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteBrowserProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -451,6 +475,18 @@ func TestCheckSnapshot_GetBrowser(t *testing.T) {
 	_, err := svc.GetBrowser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetBrowser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetBrowserProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBrowserProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetBrowserProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -655,6 +691,18 @@ func TestCheckSnapshot_ListApiKeyCredentialProviders(t *testing.T) {
 	_, err := svc.ListApiKeyCredentialProviders(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListApiKeyCredentialProviders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListBrowserProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBrowserProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBrowserProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1093,6 +1141,18 @@ func TestUpdateSnapshot_CreateBrowser(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateBrowserProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBrowserProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateBrowserProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCodeInterpreter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCodeInterpreter(context.Background(), nil, func(o *Options) {
@@ -1254,6 +1314,18 @@ func TestUpdateSnapshot_DeleteBrowser(t *testing.T) {
 	_, err := svc.DeleteBrowser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBrowser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteBrowserProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBrowserProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteBrowserProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1434,6 +1506,18 @@ func TestUpdateSnapshot_GetBrowser(t *testing.T) {
 	_, err := svc.GetBrowser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetBrowser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetBrowserProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBrowserProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetBrowserProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1638,6 +1722,18 @@ func TestUpdateSnapshot_ListApiKeyCredentialProviders(t *testing.T) {
 	_, err := svc.ListApiKeyCredentialProviders(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListApiKeyCredentialProviders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBrowserProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBrowserProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBrowserProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

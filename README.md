@@ -4,7 +4,7 @@
 
 `aws-sdk-go-v2` is the v2 AWS SDK for the Go programming language.
 
-The v2 SDK requires a minimum version of `Go 1.23`.
+The v2 SDK requires a minimum version of `Go 1.24`.
 
 Check out the [release notes](https://github.com/aws/aws-sdk-go-v2/blob/main/CHANGELOG.md) for information about the latest bug
 fixes, updates, and features added to the SDK.
@@ -150,9 +150,7 @@ API operation require parameters.
 documentation to learn how to interface with AWS services. These guides are
 great for getting started with a service, or when looking for more
 information about a service. While this document is not required for coding,
-services may supply helpful samples to look out for.
-
-[Forum](https://forums.aws.amazon.com/forum.jspa?forumID=293) - Ask questions, get help, and give feedback
+services may supply helpful samples to look out for
 
 [Issues] - Report issues, submit pull requests, and get involved
   (see [Apache 2.0 License][license])

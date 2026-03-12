@@ -1,3 +1,24 @@
+# v1.34.2 (2026-03-06)
+
+* No change notes available for this release.
+
+# v1.34.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.0 (2026-02-27)
+
+* **Feature**: AWS Transcribe Streaming now supports specifying a resumption window for the stream through the SessionResumeWindow parameter, allowing customers to reconnect to their streams for a longer duration beyond stream start time.
+
+# v1.33.7 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.33.6 (2026-02-05)
+
+* No change notes available for this release.
+
 # v1.33.5 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

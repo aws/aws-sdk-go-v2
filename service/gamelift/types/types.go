@@ -535,6 +535,15 @@ type ContainerFleet struct {
 	// The name of the fleet's per-instance container group definition.
 	PerInstanceContainerGroupDefinitionName *string
 
+	// Indicates whether player gateway is enabled for this container fleet. Player
+	// gateway provides benefits such as DDoS protection with negligible impact to
+	// latency.
+	//
+	// If ENABLED or REQUIRED , game clients can use player gateway to connect with the
+	// game server. If DISABLED , game clients cannot use player gateway. Instead, they
+	// have to directly connect to the game server.
+	PlayerGatewayMode PlayerGatewayMode
+
 	// The current status of the container fleet.
 	//
 	//   - PENDING -- A new container fleet has been requested.
@@ -561,6 +570,21 @@ type ContainerFleetLocationAttributes struct {
 
 	// A location identifier.
 	Location *string
+
+	// The current status of player gateway in this location for this container fleet.
+	// Note, even if a container fleet has PlayerGatewayMode configured as ENABLED ,
+	// player gateway might not be available in a specific location. For more
+	// information about locations where player gateway is supported, see [Amazon GameLift Servers service locations].
+	//
+	// Possible values include:
+	//
+	//   - ENABLED -- Player gateway is available for this container fleet location.
+	//
+	//   - DISABLED -- Player gateway is not available for this container fleet
+	//   location.
+	//
+	// [Amazon GameLift Servers service locations]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
+	PlayerGatewayStatus PlayerGatewayStatus
 
 	// The status of fleet activity in the location.
 	//
@@ -1325,6 +1349,17 @@ type FleetAttributes struct {
 	// [Amazon Linux 2 FAQs]: http://aws.amazon.com/aws.amazon.com/amazon-linux-2/faqs/
 	OperatingSystem OperatingSystem
 
+	// Configuration settings for player gateway on this fleet.
+	PlayerGatewayConfiguration *PlayerGatewayConfiguration
+
+	// Indicates whether player gateway is enabled for this fleet. Player gateway
+	// provides benefits such as DDoS protection with negligible impact to latency.
+	//
+	// If ENABLED or REQUIRED , game clients can use player gateway to connect with the
+	// game server. If DISABLED , game clients cannot use player gateway. Instead, they
+	// have to directly connect to the game server.
+	PlayerGatewayMode PlayerGatewayMode
+
 	// A policy that puts limits on the number of game sessions that a player can
 	// create within a specified span of time. With this policy, you can control
 	// players' ability to consume available resources.
@@ -1433,6 +1468,9 @@ type FleetCapacity struct {
 	// The fleet location for the instance count information, expressed as an Amazon
 	// Web Services Region code, such as us-west-2 .
 	Location *string
+
+	// Configuration settings for managed capacity scaling.
+	ManagedCapacityConfiguration *ManagedCapacityConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1549,9 +1587,14 @@ type GameProperty struct {
 
 	// The game property identifier.
 	//
-	// Avoid using periods (".") in property keys if you plan to search for game
-	// sessions by properties. Property keys containing periods cannot be searched and
-	// will be filtered out from search results due to search index limitations.
+	//   - Avoid using periods (".") in property keys if you plan to search for game
+	//   sessions by properties. Property keys containing periods cannot be searched and
+	//   will be filtered out from search results due to search index limitations.
+	//
+	//   - If you use SearchGameSessions API, there is a limit of 500 game property
+	//   keys across all game sessions and all fleets per region. If the limit is
+	//   exceeded, there will potentially be game session entries missing from
+	//   SearchGameSessions API results.
 	//
 	// This member is required.
 	Key *string
@@ -2024,9 +2067,14 @@ type GameSession struct {
 	// A set of key-value pairs that can store custom data in a game session. For
 	// example: {"Key": "difficulty", "Value": "novice"} .
 	//
-	// Avoid using periods (".") in property keys if you plan to search for game
-	// sessions by properties. Property keys containing periods cannot be searched and
-	// will be filtered out from search results due to search index limitations.
+	//   - Avoid using periods (".") in property keys if you plan to search for game
+	//   sessions by properties. Property keys containing periods cannot be searched and
+	//   will be filtered out from search results due to search index limitations.
+	//
+	//   - If you use SearchGameSessions API, there is a limit of 500 game property
+	//   keys across all game sessions and all fleets per region. If the limit is
+	//   exceeded, there will potentially be game session entries missing from
+	//   SearchGameSessions API results.
 	GameProperties []GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
@@ -2066,6 +2114,21 @@ type GameSession struct {
 	// A descriptive label that is associated with a game session. Session names do
 	// not need to be unique.
 	Name *string
+
+	// Indicates whether player gateway is available for use for this game session.
+	// Note, even if a fleet has PlayerGatewayMode configured as ENABLED , player
+	// gateway might not be available in a specific location. For more information
+	// about locations where player gateway is supported, see [Amazon GameLift Servers service locations].
+	//
+	// Possible values include:
+	//
+	//   - ENABLED -- Player gateway is available for routing player connections for
+	//   this game session.
+	//
+	//   - DISABLED -- Player gateway is not available for this game session.
+	//
+	// [Amazon GameLift Servers service locations]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
+	PlayerGatewayStatus PlayerGatewayStatus
 
 	// Indicates whether the game session is accepting new players.
 	PlayerSessionCreationPolicy PlayerSessionCreationPolicy
@@ -2127,6 +2190,20 @@ type GameSessionConnectionInfo struct {
 	// A collection of player session IDs, one for each player ID that was included in
 	// the original matchmaking request.
 	MatchedPlayerSessions []MatchedPlayerSession
+
+	// The current status of player gateway for the game session. Note, even if a
+	// fleet has PlayerGatewayMode configured as ENABLED , player gateway might not be
+	// available in a specific location. For more information about locations where
+	// player gateway is supported, see [supported locations].
+	//
+	// Possible values include:
+	//
+	//   - ENABLED -- Player gateway is available for this game session.
+	//
+	//   - DISABLED -- Player gateway is not available for this game session.
+	//
+	// [supported locations]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
+	PlayerGatewayStatus PlayerGatewayStatus
 
 	// The port number for the game session. To connect to a Amazon GameLift Servers
 	// game server, an app needs both the IP address and port number.
@@ -2212,9 +2289,14 @@ type GameSessionPlacement struct {
 	// A set of key-value pairs that can store custom data in a game session. For
 	// example: {"Key": "difficulty", "Value": "novice"} .
 	//
-	// Avoid using periods (".") in property keys if you plan to search for game
-	// sessions by properties. Property keys containing periods cannot be searched and
-	// will be filtered out from search results due to search index limitations.
+	//   - Avoid using periods (".") in property keys if you plan to search for game
+	//   sessions by properties. Property keys containing periods cannot be searched and
+	//   will be filtered out from search results due to search index limitations.
+	//
+	//   - If you use SearchGameSessions API, there is a limit of 500 game property
+	//   keys across all game sessions and all fleets per region. If the limit is
+	//   exceeded, there will potentially be game session entries missing from
+	//   SearchGameSessions API results.
 	GameProperties []GameProperty
 
 	// Identifier for the game session created by this placement request. This
@@ -2272,6 +2354,20 @@ type GameSessionPlacement struct {
 
 	// A unique identifier for a game session placement.
 	PlacementId *string
+
+	// The current status of player gateway for the game session placement. Note, even
+	// if a fleet has PlayerGatewayMode configured as ENABLED , player gateway might
+	// not be available in a specific location. For more information about locations
+	// where player gateway is supported, see [Amazon GameLift Servers service locations].
+	//
+	// Possible values include:
+	//
+	//   - ENABLED -- Player gateway is available for this game session placement.
+	//
+	//   - DISABLED -- Player gateway is not available for this game session placement.
+	//
+	// [Amazon GameLift Servers service locations]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
+	PlayerGatewayStatus PlayerGatewayStatus
 
 	// A set of values, expressed in milliseconds, that indicates the amount of
 	// latency that a player experiences when connected to Amazon Web Services Regions.
@@ -2368,6 +2464,8 @@ type GameSessionQueue struct {
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
 	// changes to a TIMED_OUT status.
+	//
+	// The minimum value is 10 and the maximum value is 600.
 	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -2697,6 +2795,20 @@ type LocationState struct {
 	// us-west-2 .
 	Location *string
 
+	// The current status of player gateway in this location for this fleet. Note,
+	// even if a fleet has PlayerGatewayMode configured as ENABLED , player gateway
+	// might not be available in a specific location. For more information about
+	// locations where player gateway is supported, see [Amazon GameLift Servers service locations].
+	//
+	// Possible values include:
+	//
+	//   - ENABLED -- Player gateway is available for this fleet location.
+	//
+	//   - DISABLED -- Player gateway is not available for this fleet location.
+	//
+	// [Amazon GameLift Servers service locations]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
+	PlayerGatewayStatus PlayerGatewayStatus
+
 	// The life-cycle status of a fleet location.
 	Status FleetStatus
 
@@ -2726,6 +2838,47 @@ type LogConfiguration struct {
 
 	// If log destination is S3 , logs are sent to the specified Amazon S3 bucket name.
 	S3BucketName *string
+
+	noSmithyDocumentSerde
+}
+
+// Use ManagedCapacityConfiguration with the "SCALE_TO_AND_FROM_ZERO"
+// ZeroCapacityStrategy to enable Amazon GameLift Servers to fully manage the
+// MinSize value, switching between 0 and 1 based on game session activity. This is
+// ideal for eliminating compute costs during periods of no game activity. It is
+// particularly beneficial during development when you're away from your desk,
+// iterating on builds for extended periods, in production environments serving
+// low-traffic locations, or for games with long, predictable downtime windows. By
+// automatically managing capacity between 0 and 1 instances, you avoid paying for
+// idle instances while maintaining the ability to serve game sessions when demand
+// arrives. Note that while scale-out is triggered immediately upon receiving a
+// game session request, actual game session availability depends on your server
+// process startup time, so this approach works best with multi-location Fleets
+// where cold-start latency is tolerable. With a "MANUAL" ZeroCapacityStrategy
+// Amazon GameLift Servers will not modify Fleet MinSize values automatically and
+// will not scale out from zero instances in response to game sessions.
+type ManagedCapacityConfiguration struct {
+
+	// Length of time, in minutes, that Amazon GameLift Servers will wait before
+	// scaling in your MinSize and DesiredInstances to 0 after a period with no game
+	// session activity. Default: 30 minutes.
+	ScaleInAfterInactivityMinutes *int32
+
+	// The strategy Amazon GameLift Servers will use to automatically scale your
+	// capacity to and from zero instances in response to game session activity. Game
+	// session activity refers to any active running sessions or game session requests.
+	//
+	// Possible ZeroCapacityStrategy types include:
+	//
+	//   - MANUAL -- (default value) Amazon GameLift Servers will not update capacity
+	//   to and from zero on your behalf.
+	//
+	//   - SCALE_TO_AND_FROM_ZERO -- Amazon GameLift Servers will automatically scale
+	//   out MinSize and DesiredInstances from 0 to 1 in response to a game session
+	//   request, and will scale in MinSize and DesiredInstances to 0 after a period with
+	//   no game session activity. The duration of this scale in period can be configured
+	//   using ScaleInAfterInactivityMinutes.
+	ZeroCapacityStrategy ZeroCapacityStrategy
 
 	noSmithyDocumentSerde
 }
@@ -2816,9 +2969,14 @@ type MatchmakingConfiguration struct {
 	// the new GameSession object that is created for a successful match. This
 	// parameter is not used when FlexMatchMode is set to STANDALONE .
 	//
-	// Avoid using periods (".") in property keys if you plan to search for game
-	// sessions by properties. Property keys containing periods cannot be searched and
-	// will be filtered out from search results due to search index limitations.
+	//   - Avoid using periods (".") in property keys if you plan to search for game
+	//   sessions by properties. Property keys containing periods cannot be searched and
+	//   will be filtered out from search results due to search index limitations.
+	//
+	//   - If you use SearchGameSessions API, there is a limit of 500 game property
+	//   keys across all game sessions and all fleets per region. If the limit is
+	//   exceeded, there will potentially be game session entries missing from
+	//   SearchGameSessions API results.
 	GameProperties []GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
@@ -3067,6 +3225,79 @@ type Player struct {
 	// Name of the team that the player is assigned to in a match. Team names are
 	// defined in a matchmaking rule set.
 	Team *string
+
+	noSmithyDocumentSerde
+}
+
+// Connection information for a game client to connect to a game session. This
+// object contains the IP address(es), port(s), and authentication details your
+// game client needs to establish a connection.
+//
+// With player gateway enabled: Contains relay endpoints and a player gateway
+// token. Your game client must prepend player gateway token to each payload for
+// validation and connection through relay endpoints.
+//
+// With player gateway disabled: Contains game server endpoint. Player gateway
+// token and expiration fields are empty.
+type PlayerConnectionDetail struct {
+
+	// List of connection endpoints for the game client. Your game client uses these
+	// IP address(es) and port(s) to connect to the game session.
+	//
+	// When player gateway is enabled, these are relay endpoints with benefits such as
+	// DDoS protection. When disabled, this is the game server endpoint.
+	Endpoints []PlayerConnectionEndpoint
+
+	// When player gateway is enabled, this is the timestamp indicating when player
+	// gateway token expires. Your game backend should call [GetPlayerConnectionDetails]to retrieve fresh
+	// connection information for your game clients before this time. Format is a
+	// number expressed in Unix time as milliseconds (for example "1469498468.057" ).
+	//
+	// This value is empty when player gateway is disabled.
+	//
+	// [GetPlayerConnectionDetails]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html
+	Expiration *time.Time
+
+	// Access token that your game client must prepend to all traffic sent through
+	// player gateway. Player gateway verifies identity and authorizes connection based
+	// on this token.
+	//
+	// This value is empty when player gateway is disabled.
+	PlayerGatewayToken *string
+
+	// A unique identifier for a player associated with this connection.
+	PlayerId *string
+
+	noSmithyDocumentSerde
+}
+
+// Network address(es) and port(s) for connecting to a game session.
+type PlayerConnectionEndpoint struct {
+
+	// IP address for connecting to the game session. When player gateway is enabled,
+	// this is a player gateway IP address. When player gateway is disabled, this is
+	// the game server IP address.
+	IpAddress *string
+
+	// Port number for connecting to the game session. When player gateway is enabled,
+	// this is a player gateway port. When player gateway is disabled, this is the game
+	// server port.
+	Port *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for player gateway. Use these settings to specify
+// advanced options for how player gateway handles connections.
+type PlayerGatewayConfiguration struct {
+
+	// The IP protocol that your game servers support for player connections through
+	// player gateway. If the value is set to IPv4 , GameLift will install and execute
+	// a lightweight IP translation software on fleet instances to receive and
+	// transform incoming IPv6 traffic to IPv4. If the value is set to DUAL_STACK , the
+	// lightweight IP translation software will not be installed on fleet instances.
+	// DUAL_STACK provides slightly better performance than IPv4 .
+	GameServerIpProtocolSupported GameServerIpProtocolSupported
 
 	noSmithyDocumentSerde
 }

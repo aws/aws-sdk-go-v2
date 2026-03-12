@@ -310,7 +310,9 @@ type DelegationRequest struct {
 
 	// The expiry time of this delegation request
 	//
-	// See the Understanding the Request Lifecycle for details on the life time of a delegation request at each state.
+	// See the [Understanding the Request Lifecycle] for details on the life time of a delegation request at each state.
+	//
+	// [Understanding the Request Lifecycle]: https://docs.aws.amazon.com/IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle
 	ExpirationTime *time.Time
 
 	// Notes added to this delegation request, if this request was updated via the [UpdateDelegationRequest]
@@ -364,7 +366,9 @@ type DelegationRequest struct {
 
 	// If the PermissionPolicy includes role creation permissions, this element will
 	// include the list of permissions boundary policies associated with the role
-	// creation. See Permissions boundaries for IAM entitiesfor more details about IAM permission boundaries.
+	// creation. See [Permissions boundaries for IAM entities]for more details about IAM permission boundaries.
+	//
+	// [Permissions boundaries for IAM entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
 	RolePermissionRestrictionArns []string
 
 	// The life-time of the requested session credential.
@@ -372,7 +376,9 @@ type DelegationRequest struct {
 
 	// The state of this delegation request.
 	//
-	// See the Understanding the Request Lifecycle for an explanation of how these states are transitioned.
+	// See the [Understanding the Request Lifecycle] for an explanation of how these states are transitioned.
+	//
+	// [Understanding the Request Lifecycle]: https://docs.aws.amazon.com/IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle
 	State StateType
 
 	// Last updated timestamp of the request.
@@ -1773,17 +1779,18 @@ type ServiceSpecificCredential struct {
 	UserName *string
 
 	// The date and time when the service specific credential expires. This field is
-	// only present for Bedrock API keys that were created with an expiration period.
+	// only present for Bedrock API keys and CloudWatch Logs API keys that were created
+	// with an expiration period.
 	ExpirationDate *time.Time
 
-	// For Bedrock API keys, this is the public portion of the credential that
-	// includes the IAM user name and a suffix containing version and creation
-	// information.
+	// For Bedrock API keys and CloudWatch Logs API keys, this is the public portion
+	// of the credential that includes the IAM user name and a suffix containing
+	// version and creation information.
 	ServiceCredentialAlias *string
 
-	// For Bedrock API keys, this is the secret portion of the credential that should
-	// be used to authenticate API calls. This value is returned only when the
-	// credential is created.
+	// For Bedrock API keys and CloudWatch Logs API keys, this is the secret portion
+	// of the credential that should be used to authenticate API calls. This value is
+	// returned only when the credential is created.
 	ServiceCredentialSecret *string
 
 	// The generated password for the service-specific credential.
@@ -1830,12 +1837,13 @@ type ServiceSpecificCredentialMetadata struct {
 	UserName *string
 
 	// The date and time when the service specific credential expires. This field is
-	// only present for Bedrock API keys that were created with an expiration period.
+	// only present for Bedrock API keys and CloudWatch Logs API keys that were created
+	// with an expiration period.
 	ExpirationDate *time.Time
 
-	// For Bedrock API keys, this is the public portion of the credential that
-	// includes the IAM user name and a suffix containing version and creation
-	// information.
+	// For Bedrock API keys and CloudWatch Logs API keys, this is the public portion
+	// of the credential that includes the IAM user name and a suffix containing
+	// version and creation information.
 	ServiceCredentialAlias *string
 
 	// The generated user name for the service-specific credential.

@@ -1,5 +1,4 @@
 //go:build go1.21
-// +build go1.21
 
 package checksum
 
@@ -19,15 +18,15 @@ func TestSetupInput(t *testing.T) {
 	}
 
 	cases := map[string]struct {
-		inputParams                interface{}
-		getAlgorithm               func(interface{}) (string, bool)
+		inputParams                any
+		getAlgorithm               func(any) (string, bool)
 		RequireChecksum            bool
 		RequestChecksumCalculation aws.RequestChecksumCalculation
 		expectValue                string
 	}{
 		"user config require checksum and algorithm unset": {
 			RequestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
-			getAlgorithm: func(v interface{}) (string, bool) {
+			getAlgorithm: func(v any) (string, bool) {
 				return "", false
 			},
 			expectValue: "",
@@ -35,7 +34,7 @@ func TestSetupInput(t *testing.T) {
 		"require checksum found empty": {
 			RequireChecksum: true,
 			inputParams:     Params{Value: ""},
-			getAlgorithm: func(v interface{}) (string, bool) {
+			getAlgorithm: func(v any) (string, bool) {
 				vv := v.(Params)
 				return vv.Value, true
 			},
@@ -44,7 +43,7 @@ func TestSetupInput(t *testing.T) {
 		"user config require checksum found empty": {
 			RequestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
 			inputParams:                Params{Value: ""},
-			getAlgorithm: func(v interface{}) (string, bool) {
+			getAlgorithm: func(v any) (string, bool) {
 				vv := v.(Params)
 				return vv.Value, true
 			},
@@ -53,7 +52,7 @@ func TestSetupInput(t *testing.T) {
 		"require checksum and found": {
 			RequireChecksum: true,
 			inputParams:     Params{Value: "abc123"},
-			getAlgorithm: func(v interface{}) (string, bool) {
+			getAlgorithm: func(v any) (string, bool) {
 				vv := v.(Params)
 				return vv.Value, true
 			},
@@ -61,7 +60,7 @@ func TestSetupInput(t *testing.T) {
 		},
 		"user config support checksum and found": {
 			inputParams: Params{Value: "abc123"},
-			getAlgorithm: func(v interface{}) (string, bool) {
+			getAlgorithm: func(v any) (string, bool) {
 				vv := v.(Params)
 				return vv.Value, true
 			},
@@ -70,7 +69,7 @@ func TestSetupInput(t *testing.T) {
 		"user config require checksum and found": {
 			RequestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
 			inputParams:                Params{Value: "abc123"},
-			getAlgorithm: func(v interface{}) (string, bool) {
+			getAlgorithm: func(v any) (string, bool) {
 				vv := v.(Params)
 				return vv.Value, true
 			},
@@ -78,14 +77,14 @@ func TestSetupInput(t *testing.T) {
 		},
 		"require checksum unset and use default": {
 			RequireChecksum: true,
-			getAlgorithm: func(v interface{}) (string, bool) {
+			getAlgorithm: func(v any) (string, bool) {
 				return "", false
 			},
 			expectValue: "CRC32",
 		},
 		"user config support checksum and use default": {
 			RequestChecksumCalculation: aws.RequestChecksumCalculationWhenSupported,
-			getAlgorithm: func(v interface{}) (string, bool) {
+			getAlgorithm: func(v any) (string, bool) {
 				return "", false
 			},
 			expectValue: "CRC32",
@@ -128,21 +127,21 @@ func TestSetupOutput(t *testing.T) {
 	}
 
 	cases := map[string]struct {
-		inputParams                interface{}
+		inputParams                any
 		ResponseChecksumValidation aws.ResponseChecksumValidation
-		getValidationMode          func(interface{}) (string, bool)
-		setValidationMode          func(interface{}, string)
+		getValidationMode          func(any) (string, bool)
+		setValidationMode          func(any, string)
 		expectCtxValue             string
 		expectInputValue           string
 	}{
 		"user config support checksum found empty": {
 			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenSupported,
 			inputParams:                &Params{Value: ""},
-			getValidationMode: func(v interface{}) (string, bool) {
+			getValidationMode: func(v any) (string, bool) {
 				vv := v.(*Params)
 				return vv.Value, true
 			},
-			setValidationMode: func(v interface{}, m string) {
+			setValidationMode: func(v any, m string) {
 				vv := v.(*Params)
 				vv.Value = m
 			},
@@ -152,12 +151,12 @@ func TestSetupOutput(t *testing.T) {
 		"user config support checksum found invalid value": {
 			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenSupported,
 			inputParams:                &Params{Value: "abc123"},
-			getValidationMode: func(v interface{}) (string, bool) {
+			getValidationMode: func(v any) (string, bool) {
 				vv := v.(*Params)
 				return vv.Value, true
 
 			},
-			setValidationMode: func(v interface{}, m string) {
+			setValidationMode: func(v any, m string) {
 				vv := v.(*Params)
 				vv.Value = m
 			},
@@ -167,11 +166,11 @@ func TestSetupOutput(t *testing.T) {
 		"user config require checksum found invalid value": {
 			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenRequired,
 			inputParams:                &Params{Value: "abc123"},
-			getValidationMode: func(v interface{}) (string, bool) {
+			getValidationMode: func(v any) (string, bool) {
 				vv := v.(*Params)
 				return vv.Value, true
 			},
-			setValidationMode: func(v interface{}, m string) {
+			setValidationMode: func(v any, m string) {
 				vv := v.(*Params)
 				vv.Value = m
 			},
@@ -181,11 +180,11 @@ func TestSetupOutput(t *testing.T) {
 		"user config require checksum found valid value": {
 			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenRequired,
 			inputParams:                &Params{Value: "ENABLED"},
-			getValidationMode: func(v interface{}) (string, bool) {
+			getValidationMode: func(v any) (string, bool) {
 				vv := v.(*Params)
 				return vv.Value, true
 			},
-			setValidationMode: func(v interface{}, m string) {
+			setValidationMode: func(v any, m string) {
 				vv := v.(*Params)
 				vv.Value = m
 			},

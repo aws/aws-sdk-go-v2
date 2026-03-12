@@ -2007,6 +2007,26 @@ func (GameServerInstanceStatus) Values() []GameServerInstanceStatus {
 	}
 }
 
+type GameServerIpProtocolSupported string
+
+// Enum values for GameServerIpProtocolSupported
+const (
+	GameServerIpProtocolSupportedIPv4      GameServerIpProtocolSupported = "IPv4"
+	GameServerIpProtocolSupportedDualStack GameServerIpProtocolSupported = "DUAL_STACK"
+)
+
+// Values returns all known values for GameServerIpProtocolSupported. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GameServerIpProtocolSupported) Values() []GameServerIpProtocolSupported {
+	return []GameServerIpProtocolSupported{
+		"IPv4",
+		"DUAL_STACK",
+	}
+}
+
 type GameServerProtectionPolicy string
 
 // Enum values for GameServerProtectionPolicy
@@ -2367,6 +2387,46 @@ func (PlacementFallbackStrategy) Values() []PlacementFallbackStrategy {
 	}
 }
 
+type PlayerGatewayMode string
+
+// Enum values for PlayerGatewayMode
+const (
+	PlayerGatewayModeDisabled PlayerGatewayMode = "DISABLED"
+	PlayerGatewayModeEnabled  PlayerGatewayMode = "ENABLED"
+	PlayerGatewayModeRequired PlayerGatewayMode = "REQUIRED"
+)
+
+// Values returns all known values for PlayerGatewayMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PlayerGatewayMode) Values() []PlayerGatewayMode {
+	return []PlayerGatewayMode{
+		"DISABLED",
+		"ENABLED",
+		"REQUIRED",
+	}
+}
+
+type PlayerGatewayStatus string
+
+// Enum values for PlayerGatewayStatus
+const (
+	PlayerGatewayStatusDisabled PlayerGatewayStatus = "DISABLED"
+	PlayerGatewayStatusEnabled  PlayerGatewayStatus = "ENABLED"
+)
+
+// Values returns all known values for PlayerGatewayStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PlayerGatewayStatus) Values() []PlayerGatewayStatus {
+	return []PlayerGatewayStatus{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type PlayerSessionCreationPolicy string
 
 // Enum values for PlayerSessionCreationPolicy
@@ -2574,5 +2634,24 @@ func (TerminationMode) Values() []TerminationMode {
 	return []TerminationMode{
 		"TRIGGER_ON_PROCESS_TERMINATE",
 		"FORCE_TERMINATE",
+	}
+}
+
+type ZeroCapacityStrategy string
+
+// Enum values for ZeroCapacityStrategy
+const (
+	ZeroCapacityStrategyManual             ZeroCapacityStrategy = "MANUAL"
+	ZeroCapacityStrategyScaleToAndFromZero ZeroCapacityStrategy = "SCALE_TO_AND_FROM_ZERO"
+)
+
+// Values returns all known values for ZeroCapacityStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ZeroCapacityStrategy) Values() []ZeroCapacityStrategy {
+	return []ZeroCapacityStrategy{
+		"MANUAL",
+		"SCALE_TO_AND_FROM_ZERO",
 	}
 }

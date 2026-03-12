@@ -66,6 +66,9 @@ type DisableEnhancedMonitoringInput struct {
 	// The ARN of the stream.
 	StreamARN *string
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	// The name of the Kinesis data stream for which to disable enhanced monitoring.
 	StreamName *string
 
@@ -75,6 +78,7 @@ type DisableEnhancedMonitoringInput struct {
 func (in *DisableEnhancedMonitoringInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("control")
 }
 

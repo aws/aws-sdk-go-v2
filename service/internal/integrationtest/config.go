@@ -42,7 +42,7 @@ func LoadConfigWithDefaultRegion(defaultRegion string) (cfg aws.Config, err erro
 
 type logger struct{}
 
-func (logger) Logf(format string, args ...interface{}) {
+func (logger) Logf(format string, args ...any) {
 	log.Printf(format, args...)
 }
 

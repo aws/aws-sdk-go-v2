@@ -26,6 +26,8 @@ import java.util.Map;
 import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.model.shapes.MemberShape;
@@ -36,7 +38,7 @@ import software.amazon.smithy.model.traits.ErrorTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.utils.MapUtils;
 
-final class CborEventStreamDeserializer implements GoWriter.Writable {
+final class CborEventStreamDeserializer implements Writable {
     private static final Map<String, Object> templateEnv = MapUtils.of(
             "bytesNewBuffer", SmithyGoDependency.BYTES.func("NewBuffer"),
             "cborDecode", SmithyGoDependency.SMITHY_CBOR.func("Decode"),
@@ -71,7 +73,7 @@ final class CborEventStreamDeserializer implements GoWriter.Writable {
         writer.write(deserializeError());
     }
 
-    private GoWriter.Writable deserializeInitialResponse() {
+    private Writable deserializeInitialResponse() {
         return goTemplate("""
                 func $fn:L(msg $eventstreamMessage:P) (interface{}, error) {
                     cv, err := $cborDecode:T(msg.Payload)
@@ -89,7 +91,7 @@ final class CborEventStreamDeserializer implements GoWriter.Writable {
                 ));
     }
 
-    private GoWriter.Writable deserializeEvent() {
+    private Writable deserializeEvent() {
         return goTemplate("""
                 func $fn:L(v *$union:T, msg $eventstreamMessage:P) error {
                     cv, err := $cborDecode:T(msg.Payload)
@@ -119,7 +121,7 @@ final class CborEventStreamDeserializer implements GoWriter.Writable {
                 MapUtils.of(
                         "fn", getEventStreamDeserializerName(stream, ctx.getService(), ctx.getProtocolName()),
                         "union", ctx.getSymbolProvider().toSymbol(stream),
-                        "variants", GoWriter.ChainWritable.of(
+                        "variants", ChainWritable.of(
                                 stream.members().stream()
                                         .filter(it -> !ctx.getModel().expectShape(it.getTarget()).hasTrait(ErrorTrait.class))
                                         .map(this::deserializeEventVariant)
@@ -128,7 +130,7 @@ final class CborEventStreamDeserializer implements GoWriter.Writable {
                 ));
     }
 
-    private GoWriter.Writable deserializeError() {
+    private Writable deserializeError() {
         return goTemplate("""
                 func $fn:L(msg $eventstreamMessage:P) error {
                     cv, err := $cborDecode:T(msg.Payload)
@@ -165,7 +167,7 @@ final class CborEventStreamDeserializer implements GoWriter.Writable {
                 templateEnv,
                 MapUtils.of(
                         "fn", getEventStreamExceptionDeserializerName(stream, ctx.getService(), ctx.getProtocolName()),
-                        "variants", GoWriter.ChainWritable.of(
+                        "variants", ChainWritable.of(
                                 stream.members().stream()
                                         .filter(it -> ctx.getModel().expectShape(it.getTarget()).hasTrait(ErrorTrait.class))
                                         .map(this::deserializeErrorVariant)
@@ -174,7 +176,7 @@ final class CborEventStreamDeserializer implements GoWriter.Writable {
                 ));
     }
 
-    private GoWriter.Writable deserializeEventVariant(MemberShape variant) {
+    private Writable deserializeEventVariant(MemberShape variant) {
         var variantSymbol = buildSymbol(
                 ctx.getSymbolProvider().toMemberName(variant),
                 ctx.getSymbolProvider().toSymbol(variant).getNamespace()
@@ -196,7 +198,7 @@ final class CborEventStreamDeserializer implements GoWriter.Writable {
                 ));
     }
 
-    private GoWriter.Writable deserializeErrorVariant(MemberShape variant) {
+    private Writable deserializeErrorVariant(MemberShape variant) {
         return goTemplate("""
                 case $stringsEqualFold:T(typ.String(), $variantName:S):
                      verr, err := $deserialize:L(cv)

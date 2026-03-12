@@ -57,8 +57,8 @@ type GetPlanExecutionInput struct {
 
 type GetPlanExecutionOutput struct {
 
-	// The plan execution action. Valid values are Activate , to activate an Amazon Web
-	// Services Region, or Deactivate , to deactivate a Region.
+	// The plan execution action. Valid values are activate , to activate an Amazon Web
+	// Services Region, or deactivate , to deactivate a Region.
 	//
 	// This member is required.
 	ExecutionAction types.ExecutionAction
@@ -79,9 +79,8 @@ type GetPlanExecutionOutput struct {
 	// This member is required.
 	ExecutionState types.ExecutionState
 
-	// The plan execution mode. Valid values are Practice , for testing without making
-	// actual changes, or Recovery , for actual traffic shifting and application
-	// recovery.
+	// The plan execution mode. Valid values are graceful , for graceful executions, or
+	// ungraceful , for ungraceful executions.
 	//
 	// This member is required.
 	Mode types.ExecutionMode
@@ -120,6 +119,10 @@ type GetPlanExecutionOutput struct {
 
 	// The details of the Region switch plan.
 	Plan *types.Plan
+
+	// The unique identifier of the most recent recovery execution. Required when
+	// starting a post-recovery execution.
+	RecoveryExecutionId *string
 
 	// The states of the steps in the plan execution.
 	StepStates []types.StepState

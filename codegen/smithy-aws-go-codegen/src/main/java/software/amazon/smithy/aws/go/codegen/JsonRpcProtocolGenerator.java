@@ -25,7 +25,10 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.CodegenUtils;
+import software.amazon.smithy.go.codegen.EventStreamGenerator;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
@@ -169,11 +172,6 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     }
 
     @Override
-    public void generateProtocolTests(GenerationContext context) {
-        AwsProtocolUtils.generateHttpProtocolTests(context);
-    }
-
-    @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
         var tmpl = goTemplate("""
                 headerCode := response.Header.Get("X-Amzn-ErrorType")
@@ -192,8 +190,8 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
                 """,
                 MapUtils.of(
-                        "initDecoder", (GoWriter.Writable) writer -> initializeJsonDecoder(writer, "errorBody"),
-                        "handleDecodeError", (GoWriter.Writable) AwsProtocolUtils::handleDecodeError
+                        "initDecoder", (Writable) writer -> initializeJsonDecoder(writer, "errorBody"),
+                        "handleDecodeError", (Writable) AwsProtocolUtils::handleDecodeError
                 ));
         context.getWriter().get()
                 .addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL)
@@ -367,6 +365,16 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
             var outputShape = model.expectShape(streamInfo.getOperation().getOutput().get());
             var functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(outputShape,
                     context.getService(), context.getProtocolName());
+            if (EventStreamGenerator.isV2EventStream(model, streamInfo.getOperation())) {
+                // all of the initial response members are filtered out in the
+                // generated struct, so basically do nothing
+                AwsEventStreamUtils.generateEventMessageRequestDeserializer(context, outputShape,
+                        (ctx, payloadTarget, operand) -> {
+                            ctx.getWriter().get().write("return v, nil");
+                        });
+                continue;
+            }
+
             AwsEventStreamUtils.generateEventMessageRequestDeserializer(context, outputShape,
                     (ctx, payloadTarget, operand) -> {
                         AwsProtocolUtils.initializeJsonEventMessageDeserializer(ctx, "nil,");

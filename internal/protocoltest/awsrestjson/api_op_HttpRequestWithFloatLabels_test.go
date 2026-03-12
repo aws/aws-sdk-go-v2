@@ -4,10 +4,8 @@ package awsrestjson
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -18,7 +16,7 @@ import (
 	"testing"
 )
 
-func TestClient_HttpRequestWithFloatLabels_awsRestjson1Serialize(t *testing.T) {
+func TestClient_HttpRequestWithFloatLabels_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *HttpRequestWithFloatLabelsInput
 		ExpectMethod  string
@@ -95,18 +93,18 @@ func TestClient_HttpRequestWithFloatLabels_awsRestjson1Serialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient:               protocoltesthttp.NewClient(),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			result, err := client.HttpRequestWithFloatLabels(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -132,6 +130,90 @@ func TestClient_HttpRequestWithFloatLabels_awsRestjson1Serialize(t *testing.T) {
 				if err := c.BodyAssert(actualReq.Body); err != nil {
 					t.Errorf("expect body equal, got %v", err)
 				}
+			}
+		})
+	}
+}
+
+func BenchmarkClient_HttpRequestWithFloatLabels_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *HttpRequestWithFloatLabelsInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RestJsonSupportsNaNFloatLabels": {
+			Params: &HttpRequestWithFloatLabelsInput{
+				Float:  ptr.Float32(float32(math.NaN())),
+				Double: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/FloatHttpLabels/NaN/NaN",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonSupportsInfinityFloatLabels": {
+			Params: &HttpRequestWithFloatLabelsInput{
+				Float:  ptr.Float32(float32(math.Inf(1))),
+				Double: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/FloatHttpLabels/Infinity/Infinity",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestJsonSupportsNegativeInfinityFloatLabels": {
+			Params: &HttpRequestWithFloatLabelsInput{
+				Float:  ptr.Float32(float32(math.Inf(-1))),
+				Double: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/FloatHttpLabels/-Infinity/-Infinity",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.HttpRequestWithFloatLabels(context.Background(), c.Params)
 			}
 		})
 	}

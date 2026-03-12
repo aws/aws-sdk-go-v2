@@ -50,7 +50,9 @@ type AacSettings struct {
 	// Audio Description (Receiver Mix): One channel, C. Includes audio description
 	// data from your stereo input. For more information see ETSI TS 101 154 Annex E. *
 	// 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. * 5.1 Surround: Six
-	// channels, C, L, R, Ls, Rs, LFE.
+	// channels, C, L, R, Ls, Rs, LFE. To follow the number of channels from your input
+	// audio, choose CODING_MODE_AUTO, and the service will automatically choose from
+	// one of the coding modes above.
 	CodingMode AacCodingMode
 
 	// Choose the loudness measurement mode for your audio content. For music or
@@ -211,8 +213,10 @@ type AiffSettings struct {
 	// audio track.
 	BitDepth *int32
 
-	// Specify the number of channels in this output audio track. Valid values are 1
-	// and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.
+	// Specify the number of channels in this output audio track. Valid values are 0,
+	// 1, and even numbers up to 64. Choose 0 to follow the number of channels from
+	// your input audio. Otherwise, manually choose from 1, 2, 4, 6, and so on, up to
+	// 64.
 	Channels *int32
 
 	// Sample rate in Hz.
@@ -2253,8 +2257,8 @@ type Container struct {
 	Duration *float64
 
 	// The format of your media file. For example: MP4, QuickTime (MOV), Matroska
-	// (MKV), WebM or MXF. Note that this will be blank if your media file has a format
-	// that the MediaConvert Probe operation does not recognize.
+	// (MKV), WebM, MXF or Wave. Note that this will be blank if your media file has a
+	// format that the MediaConvert Probe operation does not recognize.
 	Format Format
 
 	// Details about each track (video, audio, or data) in the media file.
@@ -2618,6 +2622,14 @@ type DestinationSettings struct {
 
 // Create Dolby Vision Profile 5 or Profile 8.1 compatible video output.
 type DolbyVision struct {
+
+	// When you set Compatibility mapping to Duplicate Stream, DolbyVision streams
+	// that have a backward compatible base layer (e.g., DolbyVision 8.1) will cause a
+	// duplicate stream to be signaled in the manifest as a duplicate stream. When you
+	// set Compatibility mapping to Supplemntal Codecs, DolbyVision streams that have a
+	// backward compatible base layer (e.g., DolbyVision 8.1) will cause the associate
+	// stream in the manifest to include a SUPPLEMENTAL_CODECS property.
+	Compatibility DolbyVisionCompatibility
 
 	// Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override
 	// the MaxCLL and MaxFALL values in your input with new values.
@@ -3526,9 +3538,9 @@ type FlacSettings struct {
 	// quality for this audio track.
 	BitDepth *int32
 
-	// Specify the number of channels in this output audio track. Choosing Mono on the
-	// console gives you 1 output channel; choosing Stereo gives you 2. In the API,
-	// valid values are between 1 and 8.
+	// Specify the number of channels in this output audio track. Valid values are 0,
+	// 1, and even numbers up to 8. Choose 0 to follow the number of channels from your
+	// input audio. Otherwise, manually choose from 1, 2, 4, 6, and 8.
 	Channels *int32
 
 	// Sample rate in Hz.
@@ -6790,8 +6802,9 @@ type Mp2Settings struct {
 	Bitrate *int32
 
 	// Set Channels to specify the number of channels in this output audio track.
-	// Choosing Mono in will give you 1 output channel; choosing Stereo will give you
-	// 2. In the API, valid values are 1 and 2.
+	// Choosing Follow input will use the number of channels found in the audio source;
+	// choosing Mono will give you 1 output channel; choosing Stereo will give you 2.
+	// In the API, valid values are 0, 1, and 2.
 	Channels *int32
 
 	// Sample rate in Hz.
@@ -6807,9 +6820,10 @@ type Mp3Settings struct {
 	// Specify the average bitrate in bits per second.
 	Bitrate *int32
 
-	// Specify the number of channels in this output audio track. Choosing Mono gives
-	// you 1 output channel; choosing Stereo gives you 2. In the API, valid values are
-	// 1 and 2.
+	// Specify the number of channels in this output audio track. Choosing Follow
+	// input will use the number of channels found in the audio source; choosing Mono
+	// gives you 1 output channel; choosing Stereo gives you 2. In the API, valid
+	// values are 0, 1, and 2.
 	Channels *int32
 
 	// Specify whether the service encodes this MP3 audio output with a constant
@@ -7375,6 +7389,12 @@ type MxfSettings struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.
 	Profile MxfProfile
 
+	// Choose the audio frame wrapping mode for PCM tracks in MXF outputs. AUTO
+	// (default): Uses codec-appropriate defaults - BWF for H.264/AVC, AES3 for
+	// MPEG2/XDCAM. AES3: Use AES3 frame wrapping with SMPTE-compliant descriptors.
+	// This setting only takes effect when the MXF profile is OP1a.
+	UncompressedAudioWrapping MxfUncompressedAudioWrapping
+
 	// Specify the XAVC profile settings for MXF outputs when you set your MXF profile
 	// to XAVC.
 	XavcProfileSettings *MxfXavcProfileSettings
@@ -7635,9 +7655,10 @@ type OpusSettings struct {
 	// we recommend for quality and bandwidth.
 	Bitrate *int32
 
-	// Specify the number of channels in this output audio track. Choosing Mono on
+	// Specify the number of channels in this output audio track. Choosing Follow
+	// input will use the number of channels found in the audio source; choosing Mono
 	// gives you 1 output channel; choosing Stereo gives you 2. In the API, valid
-	// values are 1 and 2.
+	// values are 0, 1, and 2.
 	Channels *int32
 
 	// Optional. Sample rate in Hz. Valid values are 16000, 24000, and 48000. The
@@ -9585,9 +9606,9 @@ type VideoSelector struct {
 
 	// Specify one or more video streams for MediaConvert to use from your HLS input.
 	// Enter an integer corresponding to the stream number, with the first stream in
-	// your HLS multivariant playlist starting at 1.For re-encoding workflows,
+	// your HLS multivariant playlist starting at 1. For re-encoding workflows,
 	// MediaConvert uses the video stream that you select with the highest bitrate as
-	// the input.For video passthrough workflows, you specify whether to passthrough a
+	// the input. For video passthrough workflows, you specify whether to passthrough a
 	// single video stream or multiple video streams under Video selector source in the
 	// output video encoding settings.
 	Streams []int32
@@ -9600,8 +9621,9 @@ type VideoSelector struct {
 type VorbisSettings struct {
 
 	// Optional. Specify the number of channels in this output audio track. Choosing
+	// Follow input will use the number of channels found in the audio source; choosing
 	// Mono on the console gives you 1 output channel; choosing Stereo gives you 2. In
-	// the API, valid values are 1 and 2. The default value is 2.
+	// the API, valid values are 0, 1, and 2. The default value is 2.
 	Channels *int32
 
 	// Optional. Specify the audio sample rate in Hz. Valid values are 22050, 32000,
@@ -9830,8 +9852,10 @@ type WavSettings struct {
 	// audio track.
 	BitDepth *int32
 
-	// Specify the number of channels in this output audio track. Valid values are 1
-	// and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.
+	// Specify the number of channels in this output audio track. Valid values are 0,
+	// 1, and even numbers up to 64. Choose 0 to follow the number of channels from
+	// your input audio. Otherwise, manually choose from 1, 2, 4, 6, and so on, up to
+	// 64.
 	Channels *int32
 
 	// Specify the file format for your wave audio output. To use a RIFF wave format:

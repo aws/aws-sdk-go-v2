@@ -156,6 +156,14 @@ type CreateFleetInput struct {
 	// The description to display.
 	Description *string
 
+	// Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce
+	// IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+	//
+	// Before disabling IMDSv1, ensure your WorkSpaces Applications images are running
+	// the agent version or managed image update released on or after January 16, 2024
+	// to support IMDSv2 enforcement.
+	DisableIMDSV1 *bool
+
 	// The amount of time that a streaming session remains active after users
 	// disconnect. If users try to reconnect to the streaming session after a
 	// disconnection or network interruption within this time interval, they are

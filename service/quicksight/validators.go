@@ -18646,14 +18646,14 @@ func validateRegisteredUserDashboardFeatureConfigurations(v *types.RegisteredUse
 			invalidParams.AddNested("StatePersistence", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SharedView != nil {
-		if err := validateSharedViewConfigurations(v.SharedView); err != nil {
-			invalidParams.AddNested("SharedView", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Bookmarks != nil {
 		if err := validateBookmarksConfigurations(v.Bookmarks); err != nil {
 			invalidParams.AddNested("Bookmarks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SharedView != nil {
+		if err := validateSharedViewConfigurations(v.SharedView); err != nil {
+			invalidParams.AddNested("SharedView", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AmazonQInQuickSight != nil {

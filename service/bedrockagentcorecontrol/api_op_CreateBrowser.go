@@ -47,7 +47,7 @@ type CreateBrowserInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the operation completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request but does not return an error.
+	// AgentCore ignores the request but does not return an error.
 	ClientToken *string
 
 	// The description of the browser.

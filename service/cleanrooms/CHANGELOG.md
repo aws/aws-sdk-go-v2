@@ -1,3 +1,16 @@
+# v1.42.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.0 (2026-02-18)
+
+* **Feature**: This release adds support for federated catalogs in Athena-sourced configured tables.
+
 # v1.41.0 (2026-01-15)
 
 * **Feature**: This release adds support for parameters in PySpark analysis templates.

@@ -90,6 +90,26 @@ func (m *validateOpCreateBrowser) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBrowserProfile struct {
+}
+
+func (*validateOpCreateBrowserProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBrowserProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBrowserProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBrowserProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCodeInterpreter struct {
 }
 
@@ -365,6 +385,26 @@ func (m *validateOpDeleteBrowser) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteBrowserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBrowserProfile struct {
+}
+
+func (*validateOpDeleteBrowserProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBrowserProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBrowserProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBrowserProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -665,6 +705,26 @@ func (m *validateOpGetBrowser) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetBrowserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBrowserProfile struct {
+}
+
+func (*validateOpGetBrowserProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBrowserProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBrowserProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBrowserProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1426,6 +1486,10 @@ func addOpCreateBrowserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBrowser{}, middleware.After)
 }
 
+func addOpCreateBrowserProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBrowserProfile{}, middleware.After)
+}
+
 func addOpCreateCodeInterpreterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCodeInterpreter{}, middleware.After)
 }
@@ -1480,6 +1544,10 @@ func addOpDeleteApiKeyCredentialProviderValidationMiddleware(stack *middleware.S
 
 func addOpDeleteBrowserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBrowser{}, middleware.After)
+}
+
+func addOpDeleteBrowserProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBrowserProfile{}, middleware.After)
 }
 
 func addOpDeleteCodeInterpreterValidationMiddleware(stack *middleware.Stack) error {
@@ -1540,6 +1608,10 @@ func addOpGetApiKeyCredentialProviderValidationMiddleware(stack *middleware.Stac
 
 func addOpGetBrowserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBrowser{}, middleware.After)
+}
+
+func addOpGetBrowserProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBrowserProfile{}, middleware.After)
 }
 
 func addOpGetCodeInterpreterValidationMiddleware(stack *middleware.Stack) error {
@@ -2077,6 +2149,38 @@ func validateContainerConfiguration(v *types.ContainerConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ContainerConfiguration"}
 	if v.ContainerUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContainerUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentConfiguration(v *types.ContentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentConfigurationList(v []types.ContentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentConfigurationList"}
+	for i := range v {
+		if err := validateContentConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2800,6 +2904,28 @@ func validateInvocationConfigurationInput(v *types.InvocationConfigurationInput)
 	}
 }
 
+func validateKinesisResource(v *types.KinesisResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KinesisResource"}
+	if v.DataStreamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataStreamArn"))
+	}
+	if v.ContentConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentConfigurations"))
+	} else if v.ContentConfigurations != nil {
+		if err := validateContentConfigurationList(v.ContentConfigurations); err != nil {
+			invalidParams.AddNested("ContentConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKmsConfiguration(v *types.KmsConfiguration) error {
 	if v == nil {
 		return nil
@@ -3356,6 +3482,29 @@ func validatePolicyDefinition(v types.PolicyDefinition) error {
 			invalidParams.AddNested("[cedar]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.PolicyDefinitionMemberPolicyGeneration:
+		if err := validatePolicyGenerationDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[policyGeneration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyGenerationDetails(v *types.PolicyGenerationDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyGenerationDetails"}
+	if v.PolicyGenerationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyGenerationId"))
+	}
+	if v.PolicyGenerationAssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyGenerationAssetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3441,6 +3590,21 @@ func validateRule(v *types.Rule) error {
 		if err := validateSessionConfig(v.SessionConfig); err != nil {
 			invalidParams.AddNested("SessionConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeMetadataConfiguration(v *types.RuntimeMetadataConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeMetadataConfiguration"}
+	if v.RequireMMDSV2 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequireMMDSV2"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3660,6 +3824,61 @@ func validateSlackOauth2ProviderConfigInput(v *types.SlackOauth2ProviderConfigIn
 	}
 	if v.ClientSecret == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamDeliveryResource(v types.StreamDeliveryResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamDeliveryResource"}
+	switch uv := v.(type) {
+	case *types.StreamDeliveryResourceMemberKinesis:
+		if err := validateKinesisResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[kinesis]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamDeliveryResources(v *types.StreamDeliveryResources) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamDeliveryResources"}
+	if v.Resources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resources"))
+	} else if v.Resources != nil {
+		if err := validateStreamDeliveryResourcesList(v.Resources); err != nil {
+			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamDeliveryResourcesList(v []types.StreamDeliveryResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamDeliveryResourcesList"}
+	for i := range v {
+		if err := validateStreamDeliveryResource(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4004,6 +4223,21 @@ func validateOpCreateBrowserInput(v *CreateBrowserInput) error {
 	}
 }
 
+func validateOpCreateBrowserProfileInput(v *CreateBrowserProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBrowserProfileInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCodeInterpreterInput(v *CreateCodeInterpreterInput) error {
 	if v == nil {
 		return nil
@@ -4134,6 +4368,11 @@ func validateOpCreateMemoryInput(v *CreateMemoryInput) error {
 	if v.MemoryStrategies != nil {
 		if err := validateMemoryStrategyInputList(v.MemoryStrategies); err != nil {
 			invalidParams.AddNested("MemoryStrategies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StreamDeliveryResources != nil {
+		if err := validateStreamDeliveryResources(v.StreamDeliveryResources); err != nil {
+			invalidParams.AddNested("StreamDeliveryResources", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4316,6 +4555,21 @@ func validateOpDeleteBrowserInput(v *DeleteBrowserInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBrowserInput"}
 	if v.BrowserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrowserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBrowserProfileInput(v *DeleteBrowserProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBrowserProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4550,6 +4804,21 @@ func validateOpGetBrowserInput(v *GetBrowserInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetBrowserInput"}
 	if v.BrowserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrowserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBrowserProfileInput(v *GetBrowserProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBrowserProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5023,6 +5292,11 @@ func validateOpUpdateAgentRuntimeInput(v *UpdateAgentRuntimeInput) error {
 			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MetadataConfiguration != nil {
+		if err := validateRuntimeMetadataConfiguration(v.MetadataConfiguration); err != nil {
+			invalidParams.AddNested("MetadataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5156,6 +5430,11 @@ func validateOpUpdateMemoryInput(v *UpdateMemoryInput) error {
 			invalidParams.AddNested("MemoryStrategies", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.StreamDeliveryResources != nil {
+		if err := validateStreamDeliveryResources(v.StreamDeliveryResources); err != nil {
+			invalidParams.AddNested("StreamDeliveryResources", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5239,9 +5518,7 @@ func validateOpUpdatePolicyInput(v *UpdatePolicyInput) error {
 	if v.PolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
 	}
-	if v.Definition == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
-	} else if v.Definition != nil {
+	if v.Definition != nil {
 		if err := validatePolicyDefinition(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
 		}

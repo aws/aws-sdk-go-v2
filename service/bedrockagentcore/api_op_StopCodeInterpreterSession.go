@@ -11,9 +11,9 @@ import (
 	"time"
 )
 
-// Terminates an active code interpreter session in Amazon Bedrock. This operation
-// stops the session, releases associated resources, and makes the session
-// unavailable for further use.
+// Terminates an active code interpreter session in Amazon Bedrock AgentCore. This
+// operation stops the session, releases associated resources, and makes the
+// session unavailable for further use.
 //
 // To stop a code interpreter session, you must specify both the code interpreter
 // identifier and the session ID. Once stopped, a session cannot be restarted; you
@@ -56,7 +56,7 @@ type StopCodeInterpreterSessionInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error.
+	// AgentCore ignores the request, but does not return an error.
 	ClientToken *string
 
 	// The trace identifier for request tracking.

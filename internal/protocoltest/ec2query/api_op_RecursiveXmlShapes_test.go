@@ -5,7 +5,6 @@ package ec2query
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -17,7 +16,7 @@ import (
 	"testing"
 )
 
-func TestClient_RecursiveXmlShapes_awsEc2queryDeserialize(t *testing.T) {
+func TestClient_RecursiveXmlShapes_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -99,13 +98,8 @@ func TestClient_RecursiveXmlShapes_awsEc2queryDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params RecursiveXmlShapesInput
 			result, err := client.RecursiveXmlShapes(context.Background(), &params)
@@ -117,6 +111,98 @@ func TestClient_RecursiveXmlShapes_awsEc2queryDeserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_RecursiveXmlShapes_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *RecursiveXmlShapesOutput
+	}{
+		"Ec2RecursiveShapes": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml;charset=UTF-8"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<RecursiveXmlShapesResponse xmlns="https://example.com/">
+			    <nested>
+			        <foo>Foo1</foo>
+			        <nested>
+			            <bar>Bar1</bar>
+			            <recursiveMember>
+			                <foo>Foo2</foo>
+			                <nested>
+			                    <bar>Bar2</bar>
+			                </nested>
+			            </recursiveMember>
+			        </nested>
+			    </nested>
+			    <requestId>requestid</requestId>
+			</RecursiveXmlShapesResponse>
+			`),
+			ExpectResult: &RecursiveXmlShapesOutput{
+				Nested: &types.RecursiveXmlShapesOutputNested1{
+					Foo: ptr.String("Foo1"),
+					Nested: &types.RecursiveXmlShapesOutputNested2{
+						Bar: ptr.String("Bar1"),
+						RecursiveMember: &types.RecursiveXmlShapesOutputNested1{
+							Foo: ptr.String("Foo2"),
+							Nested: &types.RecursiveXmlShapesOutputNested2{
+								Bar: ptr.String("Bar2"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params RecursiveXmlShapesInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.RecursiveXmlShapes(context.Background(), &params)
 			}
 		})
 	}

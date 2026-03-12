@@ -1007,7 +1007,7 @@
                 "AverageUploadRateLimitInBitsPerSec": {
                     "target": "com.amazonaws.backupgateway#AverageUploadRateLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The average upload rate limit component of the bandwidth rate limit \n      interval, in bits per second. This field does not appear in the response if \n      the upload rate limit is not set.</p>\n         <note>\n            <p>For Backup Gateway, the minimum value is <code>(Value)</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The average upload rate limit component of the bandwidth rate limit \n      interval, in bits per second. This field does not appear in the response if \n      the upload rate limit is not set.</p>"
                     }
                 },
                 "StartHourOfDay": {
@@ -1355,7 +1355,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 50,
-                    "max": 500
+                    "max": 180
                 },
                 "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):backup-gateway(:[a-zA-Z-0-9]+){3}\\/[a-zA-Z-0-9]+$"
             }
@@ -1409,6 +1409,18 @@
                     "target": "com.amazonaws.backupgateway#VpcEndpoint",
                     "traits": {
                         "smithy.api#documentation": "<p>The DNS name for the virtual private cloud (VPC) endpoint the gateway \n      uses to connect to the cloud for backup gateway.</p>"
+                    }
+                },
+                "DeprecationDate": {
+                    "target": "com.amazonaws.backupgateway#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date after which this gateway will not receive software updates for new features and bug fixes.</p>"
+                    }
+                },
+                "SoftwareVersion": {
+                    "target": "com.amazonaws.backupgateway#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the software running on the gateway appliance.</p>"
                     }
                 }
             },
@@ -1626,7 +1638,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This action retrieves the property mappings for the specified hypervisor. \n      A hypervisor property mapping displays the relationship of entity properties \n      available from the on-premises hypervisor to the properties available in Amazon Web Services.</p>",
+                "smithy.api#documentation": "<p>This action retrieves the property mappings for the specified hypervisor. \n      A hypervisor property mapping displays the relationship of entity properties \n      available from the hypervisor to the properties available in Amazon Web Services.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -1654,7 +1666,7 @@
                 "VmwareToAwsTagMappings": {
                     "target": "com.amazonaws.backupgateway#VmwareToAwsTagMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is a display of the mappings of on-premises VMware tags to the \n      Amazon Web Services tags.</p>"
+                        "smithy.api#documentation": "<p>This is a display of the mappings of VMware tags to the \n      Amazon Web Services tags.</p>"
                     }
                 },
                 "IamRoleArn": {
@@ -2400,7 +2412,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This action sets the property mappings for the specified hypervisor. \n      A hypervisor property mapping displays the relationship of entity properties \n      available from the on-premises hypervisor to the properties available in Amazon Web Services.</p>",
+                "smithy.api#documentation": "<p>This action sets the property mappings for the specified hypervisor. \n      A hypervisor property mapping displays the relationship of entity properties \n      available from the hypervisor to the properties available in Amazon Web Services.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2417,7 +2429,7 @@
                 "VmwareToAwsTagMappings": {
                     "target": "com.amazonaws.backupgateway#VmwareToAwsTagMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>This action requests the mappings of on-premises VMware tags to the \n      Amazon Web Services tags.</p>",
+                        "smithy.api#documentation": "<p>This action requests the mappings of VMware tags to the \n      Amazon Web Services tags.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2638,7 +2650,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A key-value pair you can use to manage, filter, and search for your resources. Allowed\n      characters include UTF-8 letters, numbers, spaces, and the following characters: + - = . _ :\n      /.</p>"
+                "smithy.api#documentation": "<p>A key-value pair you can use to manage, filter, and search for your resources. Allowed\n      characters include UTF-8 letters, numbers, and the following characters: + - = . _ :\n      /. Spaces are not allowed in tag values.</p>"
             }
         },
         "com.amazonaws.backupgateway#TagKey": {
@@ -3242,7 +3254,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This displays the mapping of on-premises VMware tags to the \n      corresponding Amazon Web Services tags.</p>"
+                "smithy.api#documentation": "<p>This displays the mapping of VMware tags to the \n      corresponding Amazon Web Services tags.</p>"
             }
         },
         "com.amazonaws.backupgateway#VmwareToAwsTagMappings": {

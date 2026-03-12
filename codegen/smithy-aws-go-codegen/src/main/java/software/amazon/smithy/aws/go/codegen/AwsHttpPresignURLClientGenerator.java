@@ -33,10 +33,11 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.OperationGenerator;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.auth.SignRequestMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -387,15 +388,15 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     writer.write("""
                             if _, ok := stack.Finalize.Get(($1P)(nil).ID()); ok {
                                 stack.Finalize.Remove(($1P)(nil).ID())
-                            }""", SdkGoTypes.ServiceInternal.AcceptEncoding.DisableGzip);
+                            }""", AwsCustomGoDependency.ACCEPT_ENCODING_CUSTOMIZATION.struct("DisableGzip"));
                     writer.write("""
                         if _, ok := stack.Finalize.Get(($1P)(nil).ID()); ok {
                             stack.Finalize.Remove(($1P)(nil).ID())
-                        }""", SdkGoTypes.Aws.Retry.Attempt);
+                        }""", AwsGoDependency.AWS_RETRY.struct("Attempt"));
                     writer.write("""
                         if _, ok := stack.Finalize.Get(($1P)(nil).ID()); ok {
                             stack.Finalize.Remove(($1P)(nil).ID())
-                        }""", SdkGoTypes.Aws.Retry.MetricsHeader);
+                        }""", AwsGoDependency.AWS_RETRY.struct("MetricsHeader"));
                     writer.write("stack.Deserialize.Clear()");
                     writer.write("stack.Build.Remove(($P)(nil).ID())", requestInvocationID);
                     writer.write("stack.Build.Remove($S)", "UserAgent");
@@ -410,7 +411,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                             """,
                             PresignContextPolyfillMiddleware.NAME,
                             SignRequestMiddlewareGenerator.MIDDLEWARE_ID,
-                            SmithyGoTypes.Middleware.Before);
+                            SmithyGoDependency.SMITHY_MIDDLEWARE.func("Before"));
 
                     writer.openBlock("pmw := $T($T{", "})", presignMiddleware, middlewareOptionsSymbol, () -> {
                         writer.write("CredentialsProvider: options.$L,", AddAwsConfigFields.CREDENTIALS_CONFIG_NAME);
@@ -766,7 +767,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         return service.expectTrait(ServiceTrait.class).getSdkId().equalsIgnoreCase("Polly");
     }
 
-    private static final class PresignContextPolyfillMiddleware implements GoWriter.Writable {
+    private static final class PresignContextPolyfillMiddleware implements Writable {
         public static final String NAME = "presignContextPolyfillMiddleware";
         public static final String ID = "presignContextPolyfill";
 
@@ -781,12 +782,12 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             writer.write(generateMiddleware());
         }
 
-        private GoWriter.Writable generateMiddleware() {
+        private Writable generateMiddleware() {
             return createFinalizeStepMiddleware(NAME, MiddlewareIdentifier.string(ID))
                     .asWritable(generateBody(), emptyGoTemplate());
         }
 
-        private GoWriter.Writable generateBody() {
+        private Writable generateBody() {
             return goTemplate("""
                 rscheme := getResolvedAuthScheme(ctx)
                 if rscheme == nil {
@@ -816,21 +817,21 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                 MapUtils.of(
                         "errorf", GoStdlibTypes.Fmt.Errorf,
                         "setSignerVersion", generateSetSignerVersion(),
-                        "propsGetV4Name", SmithyGoTypes.Transport.Http.GetSigV4SigningName,
-                        "propsGetV4AName", SmithyGoTypes.Transport.Http.GetSigV4ASigningName,
-                        "propsGetV4Region",  SmithyGoTypes.Transport.Http.GetSigV4SigningRegion,
-                        "propsGetV4ARegions",  SmithyGoTypes.Transport.Http.GetSigV4ASigningRegions,
-                        "ctxSetName",  SdkGoTypes.Aws.Middleware.SetSigningName,
-                        "ctxSetRegion", SdkGoTypes.Aws.Middleware.SetSigningRegion
+                        "propsGetV4Name", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4SigningName"),
+                        "propsGetV4AName", SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4ASigningName"),
+                        "propsGetV4Region",  SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4SigningRegion"),
+                        "propsGetV4ARegions",  SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("GetSigV4ASigningRegions"),
+                        "ctxSetName",  AwsGoDependency.AWS_MIDDLEWARE.func("SetSigningName"),
+                        "ctxSetRegion", AwsGoDependency.AWS_MIDDLEWARE.func("SetSigningRegion")
                 ));
         }
 
-        private GoWriter.Writable generateSetSignerVersion() {
+        private Writable generateSetSignerVersion() {
             return switch (service.expectTrait(ServiceTrait.class).getSdkId().toLowerCase()) {
                 case "s3" ->
-                        goTemplate("ctx = $T(ctx, schemeID)", SdkGoTypes.ServiceCustomizations.S3.SetSignerVersion);
+                        goTemplate("ctx = $T(ctx, schemeID)", AwsCustomGoDependency.S3_CUSTOMIZATION.func("SetSignerVersion"));
                 case "eventbridge" ->
-                        goTemplate("ctx = $T(ctx, schemeID)", SdkGoTypes.ServiceCustomizations.EventBridge.SetSignerVersion);
+                        goTemplate("ctx = $T(ctx, schemeID)", AwsCustomGoDependency.EVENTBRIDGE_CUSTOMIZATION.func("SetSignerVersion"));
                 default ->
                         emptyGoTemplate();
             };

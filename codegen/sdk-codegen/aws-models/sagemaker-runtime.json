@@ -1076,6 +1076,16 @@
         "com.amazonaws.sagemakerruntime#ErrorCode": {
             "type": "string"
         },
+        "com.amazonaws.sagemakerruntime#FilenameHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^(?!.*\\..*\\.)[a-zA-Z0-9][a-zA-Z0-9-_\\.]*$"
+            }
+        },
         "com.amazonaws.sagemakerruntime#Header": {
             "type": "string",
             "traits": {
@@ -1274,6 +1284,20 @@
                         "smithy.api#documentation": "<p>The Amazon S3 URI where the inference request payload is stored.</p>",
                         "smithy.api#httpHeader": "X-Amzn-SageMaker-InputLocation",
                         "smithy.api#required": {}
+                    }
+                },
+                "S3OutputPathExtension": {
+                    "target": "com.amazonaws.sagemakerruntime#S3OutputPathExtensionHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path extension that is appended to the Amazon S3 output path where the inference\n            response payload is stored.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-S3OutputPathExtension"
+                    }
+                },
+                "Filename": {
+                    "target": "com.amazonaws.sagemakerruntime#FilenameHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filename for the inference response payload stored in Amazon S3. If not\n            specified, Amazon SageMaker AI generates a filename based on the inference ID.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Filename"
                     }
                 },
                 "RequestTTLSeconds": {
@@ -1767,6 +1791,16 @@
             "traits": {
                 "smithy.api#documentation": "<p>A stream of payload parts. Each part contains a portion of the response for a\n            streaming inference request.</p>",
                 "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.sagemakerruntime#S3OutputPathExtensionHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^(?!s3:|https:)[a-zA-Z0-9!_.*'()/-]+$"
             }
         },
         "com.amazonaws.sagemakerruntime#ServiceUnavailable": {

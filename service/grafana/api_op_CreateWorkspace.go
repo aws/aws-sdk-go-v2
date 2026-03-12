@@ -93,6 +93,10 @@ type CreateWorkspaceInput struct {
 	// To get a list of supported versions, use the ListVersions operation.
 	GrafanaVersion *string
 
+	// The ID or ARN of the Key Management Service key to use for encrypting workspace
+	// data.
+	KmsKeyId *string
+
 	// Configuration for network access to your workspace.
 	//
 	// When this is configured, only listed IP addresses and VPC endpoints will be

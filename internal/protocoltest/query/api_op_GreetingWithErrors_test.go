@@ -6,7 +6,6 @@ import (
 	"bytes"
 	"context"
 	"errors"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -18,7 +17,7 @@ import (
 	"testing"
 )
 
-func TestClient_GreetingWithErrors_awsAwsqueryDeserialize(t *testing.T) {
+func TestClient_GreetingWithErrors_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -80,13 +79,8 @@ func TestClient_GreetingWithErrors_awsAwsqueryDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
@@ -103,7 +97,78 @@ func TestClient_GreetingWithErrors_awsAwsqueryDeserialize(t *testing.T) {
 	}
 }
 
-func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsqueryDeserialize(t *testing.T) {
+func BenchmarkClient_GreetingWithErrors_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *GreetingWithErrorsOutput
+	}{
+		"QueryGreetingWithErrors": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<GreetingWithErrorsResponse xmlns="https://example.com/">
+			    <GreetingWithErrorsResult>
+			        <greeting>Hello</greeting>
+			    </GreetingWithErrorsResult>
+			</GreetingWithErrorsResponse>
+			`),
+			ExpectResult: &GreetingWithErrorsOutput{
+				Greeting: ptr.String("Hello"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params GreetingWithErrorsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.GreetingWithErrors(context.Background(), &params)
+			}
+		})
+	}
+}
+
+func TestClient_GreetingWithErrors_InvalidGreeting_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -167,13 +232,8 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsqueryDeserialize(t *tes
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
@@ -207,7 +267,81 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsqueryDeserialize(t *tes
 	}
 }
 
-func TestClient_GreetingWithErrors_ComplexError_awsAwsqueryDeserialize(t *testing.T) {
+func BenchmarkClient_GreetingWithErrors_InvalidGreeting_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectError   *types.InvalidGreeting
+	}{
+		"QueryInvalidGreetingError": {
+			StatusCode: 400,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<ErrorResponse>
+			   <Error>
+			      <Type>Sender</Type>
+			      <Code>InvalidGreeting</Code>
+			      <Message>Hi</Message>
+			   </Error>
+			   <RequestId>foo-id</RequestId>
+			</ErrorResponse>
+			`),
+			ExpectError: &types.InvalidGreeting{
+				Message: ptr.String("Hi"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params GreetingWithErrorsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.GreetingWithErrors(context.Background(), &params)
+			}
+		})
+	}
+}
+
+func TestClient_GreetingWithErrors_ComplexError_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -276,13 +410,8 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsqueryDeserialize(t *testin
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
@@ -316,7 +445,87 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsqueryDeserialize(t *testin
 	}
 }
 
-func TestClient_GreetingWithErrors_CustomCodeError_awsAwsqueryDeserialize(t *testing.T) {
+func BenchmarkClient_GreetingWithErrors_ComplexError_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectError   *types.ComplexError
+	}{
+		"QueryComplexError": {
+			StatusCode: 400,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<ErrorResponse>
+			   <Error>
+			      <Type>Sender</Type>
+			      <Code>ComplexError</Code>
+			      <TopLevel>Top level</TopLevel>
+			      <Nested>
+			          <Foo>bar</Foo>
+			      </Nested>
+			   </Error>
+			   <RequestId>foo-id</RequestId>
+			</ErrorResponse>
+			`),
+			ExpectError: &types.ComplexError{
+				TopLevel: ptr.String("Top level"),
+				Nested: &types.ComplexNestedErrorData{
+					Foo: ptr.String("bar"),
+				},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params GreetingWithErrorsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.GreetingWithErrors(context.Background(), &params)
+			}
+		})
+	}
+}
+
+func TestClient_GreetingWithErrors_CustomCodeError_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -380,13 +589,8 @@ func TestClient_GreetingWithErrors_CustomCodeError_awsAwsqueryDeserialize(t *tes
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params GreetingWithErrorsInput
 			result, err := client.GreetingWithErrors(context.Background(), &params)
@@ -415,6 +619,80 @@ func TestClient_GreetingWithErrors_CustomCodeError_awsAwsqueryDeserialize(t *tes
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_GreetingWithErrors_CustomCodeError_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectError   *types.CustomCodeError
+	}{
+		"QueryCustomizedError": {
+			StatusCode: 402,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<ErrorResponse>
+			   <Error>
+			      <Type>Sender</Type>
+			      <Code>Customized</Code>
+			      <Message>Hi</Message>
+			   </Error>
+			   <RequestId>foo-id</RequestId>
+			</ErrorResponse>
+			`),
+			ExpectError: &types.CustomCodeError{
+				Message: ptr.String("Hi"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params GreetingWithErrorsInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.GreetingWithErrors(context.Background(), &params)
 			}
 		})
 	}

@@ -73,6 +73,9 @@ func ExampleResourceSnapshotPayload_outputUsage() {
 	var union types.ResourceSnapshotPayload
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ResourceSnapshotPayloadMemberAwsOpportunitySummaryFullView:
+		_ = v.Value // Value is types.AwsOpportunitySummaryFullView
+
 	case *types.ResourceSnapshotPayloadMemberOpportunitySummary:
 		_ = v.Value // Value is types.OpportunitySummaryView
 
@@ -86,6 +89,7 @@ func ExampleResourceSnapshotPayload_outputUsage() {
 }
 
 var _ *types.OpportunitySummaryView
+var _ *types.AwsOpportunitySummaryFullView
 
 func ExampleUpdateEngagementContextPayload_outputUsage() {
 	var union types.UpdateEngagementContextPayload

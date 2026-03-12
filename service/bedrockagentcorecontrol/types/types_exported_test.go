@@ -755,6 +755,9 @@ func ExamplePolicyDefinition_outputUsage() {
 	case *types.PolicyDefinitionMemberCedar:
 		_ = v.Value // Value is types.CedarPolicy
 
+	case *types.PolicyDefinitionMemberPolicyGeneration:
+		_ = v.Value // Value is types.PolicyGenerationDetails
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -764,6 +767,7 @@ func ExamplePolicyDefinition_outputUsage() {
 	}
 }
 
+var _ *types.PolicyGenerationDetails
 var _ *types.CedarPolicy
 
 func ExampleRatingScale_outputUsage() {
@@ -845,6 +849,24 @@ func ExampleResource_outputUsage() {
 }
 
 var _ *string
+
+func ExampleStreamDeliveryResource_outputUsage() {
+	var union types.StreamDeliveryResource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.StreamDeliveryResourceMemberKinesis:
+		_ = v.Value // Value is types.KinesisResource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.KinesisResource
 
 func ExampleTargetConfiguration_outputUsage() {
 	var union types.TargetConfiguration

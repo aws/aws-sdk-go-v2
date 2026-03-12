@@ -2002,7 +2002,7 @@
                 "KeySchema": {
                     "target": "com.amazonaws.dynamodb#KeySchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key schema for the global secondary index.</p>",
+                        "smithy.api#documentation": "<p>The key schema for the global secondary index.\n            Global secondary index supports up to 4 partition and up to 4 sort keys.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2217,8 +2217,7 @@
                 "AttributeDefinitions": {
                     "target": "com.amazonaws.dynamodb#AttributeDefinitions",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of attributes that describe the key schema for the table and indexes.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An array of attributes that describe the key schema for the table and indexes.</p>"
                     }
                 },
                 "TableName": {
@@ -2234,8 +2233,7 @@
                 "KeySchema": {
                     "target": "com.amazonaws.dynamodb#KeySchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the attributes that make up the primary key for a table or an index. The\n            attributes in <code>KeySchema</code> must also be defined in the\n                <code>AttributeDefinitions</code> array. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html\">Data\n                Model</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>\n         <p>Each <code>KeySchemaElement</code> in the array is composed of:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AttributeName</code> - The name of this key attribute.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyType</code> - The role that the key attribute will assume:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>HASH</code> - partition key</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RANGE</code> - sort key</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <note>\n            <p>The partition key of an item is also known as its <i>hash\n                    attribute</i>. The term \"hash attribute\" derives from the DynamoDB usage\n                of an internal hash function to evenly distribute data items across partitions,\n                based on their partition key values.</p>\n            <p>The sort key of an item is also known as its <i>range attribute</i>.\n                The term \"range attribute\" derives from the way DynamoDB stores items with the same\n                partition key physically close together, in sorted order by the sort key\n                value.</p>\n         </note>\n         <p>For a simple primary key (partition key), you must provide exactly one element with a\n                <code>KeyType</code> of <code>HASH</code>.</p>\n         <p>For a composite primary key (partition key and sort key), you must provide exactly two\n            elements, in this order: The first element must have a <code>KeyType</code> of\n                <code>HASH</code>, and the second element must have a <code>KeyType</code> of\n                <code>RANGE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key\">Working with Tables</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the attributes that make up the primary key for a table or an index. The\n            attributes in <code>KeySchema</code> must also be defined in the\n                <code>AttributeDefinitions</code> array. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html\">Data\n                Model</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>\n         <p>Each <code>KeySchemaElement</code> in the array is composed of:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AttributeName</code> - The name of this key attribute.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyType</code> - The role that the key attribute will assume:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>HASH</code> - partition key</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RANGE</code> - sort key</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <note>\n            <p>The partition key of an item is also known as its <i>hash\n                    attribute</i>. The term \"hash attribute\" derives from the DynamoDB usage\n                of an internal hash function to evenly distribute data items across partitions,\n                based on their partition key values.</p>\n            <p>The sort key of an item is also known as its <i>range attribute</i>.\n                The term \"range attribute\" derives from the way DynamoDB stores items with the same\n                partition key physically close together, in sorted order by the sort key\n                value.</p>\n         </note>\n         <p>For a simple primary key (partition key), you must provide exactly one element with a\n                <code>KeyType</code> of <code>HASH</code>.</p>\n         <p>For a composite primary key (partition key and sort key), you must provide exactly two\n            elements, in this order: The first element must have a <code>KeyType</code> of\n                <code>HASH</code>, and the second element must have a <code>KeyType</code> of\n                <code>RANGE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key\">Working with Tables</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
                     }
                 },
                 "LocalSecondaryIndexes": {
@@ -2247,7 +2245,7 @@
                 "GlobalSecondaryIndexes": {
                     "target": "com.amazonaws.dynamodb#GlobalSecondaryIndexList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more global secondary indexes (the maximum is 20) to be created on the table.\n            Each global secondary index in the array includes the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IndexName</code> - The name of the global secondary index. Must be unique\n                    only for this table.</p>\n               <p></p>\n            </li>\n            <li>\n               <p>\n                  <code>KeySchema</code> - Specifies the key schema for the global secondary\n                    index.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Projection</code> - Specifies attributes that are copied (projected) from\n                    the table into the index. These are in addition to the primary key attributes\n                    and index key attributes, which are automatically projected. Each attribute\n                    specification is composed of:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProjectionType</code> - One of the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>KEYS_ONLY</code> - Only the index and primary keys are\n                                    projected into the index.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INCLUDE</code> - Only the specified table attributes are\n                                    projected into the index. The list of projected attributes is in\n                                        <code>NonKeyAttributes</code>.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ALL</code> - All of the table attributes are projected\n                                    into the index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NonKeyAttributes</code> - A list of one or more non-key attribute\n                            names that are projected into the secondary index. The total count of\n                            attributes provided in <code>NonKeyAttributes</code>, summed across all\n                            of the secondary indexes, must not exceed 100. If you project the same\n                            attribute into two different indexes, this counts as two distinct\n                            attributes when determining the total. This limit only applies when you\n                            specify the ProjectionType of <code>INCLUDE</code>. You still can\n                            specify the ProjectionType of <code>ALL</code> to project all attributes\n                            from the source table, even if the table has more than 100\n                            attributes.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ProvisionedThroughput</code> - The provisioned throughput settings for the\n                    global secondary index, consisting of read and write capacity units.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>One or more global secondary indexes (the maximum is 20) to be created on the table.\n            Each global secondary index in the array includes the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IndexName</code> - The name of the global secondary index. Must be unique\n                    only for this table.</p>\n               <p></p>\n            </li>\n            <li>\n               <p>\n                  <code>KeySchema</code> - Specifies the key schema for the global secondary\n                    index. Each global secondary index supports up to 4 partition keys and up to 4 sort keys.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Projection</code> - Specifies attributes that are copied (projected) from\n                    the table into the index. These are in addition to the primary key attributes\n                    and index key attributes, which are automatically projected. Each attribute\n                    specification is composed of:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProjectionType</code> - One of the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>KEYS_ONLY</code> - Only the index and primary keys are\n                                    projected into the index.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INCLUDE</code> - Only the specified table attributes are\n                                    projected into the index. The list of projected attributes is in\n                                        <code>NonKeyAttributes</code>.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ALL</code> - All of the table attributes are projected\n                                    into the index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NonKeyAttributes</code> - A list of one or more non-key attribute\n                            names that are projected into the secondary index. The total count of\n                            attributes provided in <code>NonKeyAttributes</code>, summed across all\n                            of the secondary indexes, must not exceed 100. If you project the same\n                            attribute into two different indexes, this counts as two distinct\n                            attributes when determining the total. This limit only applies when you\n                            specify the ProjectionType of <code>INCLUDE</code>. You still can\n                            specify the ProjectionType of <code>ALL</code> to project all attributes\n                            from the source table, even if the table has more than 100\n                            attributes.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ProvisionedThroughput</code> - The provisioned throughput settings for the\n                    global secondary index, consisting of read and write capacity units.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "BillingMode": {
@@ -2308,6 +2306,18 @@
                     "target": "com.amazonaws.dynamodb#OnDemandThroughput",
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the maximum number of read and write units for the specified table in on-demand\n            capacity mode. If you use this parameter, you must specify\n                <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
+                    }
+                },
+                "GlobalTableSourceArn": {
+                    "target": "com.amazonaws.dynamodb#TableArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source table used for the creation\n            of a multi-account global table.</p>"
+                    }
+                },
+                "GlobalTableSettingsReplicationMode": {
+                    "target": "com.amazonaws.dynamodb#GlobalTableSettingsReplicationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the settings synchronization mode for the global table. For multi-account global tables,\n            this parameter is required and the only supported value is ENABLED. For same-account global tables,\n            this parameter is set to ENABLED_WITH_OVERRIDES.\n        </p>"
                     }
                 }
             },
@@ -4398,9 +4408,9 @@
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
-                                                                    "name": "sigv4",
                                                                     "signingRegion": "us-east-1",
-                                                                    "signingName": "dynamodb"
+                                                                    "signingName": "dynamodb",
+                                                                    "name": "sigv4"
                                                                 }
                                                             ]
                                                         },
@@ -8435,9 +8445,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8471,9 +8481,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8523,9 +8533,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8551,9 +8561,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8579,9 +8589,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8607,9 +8617,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8635,9 +8645,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8663,9 +8673,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8738,9 +8748,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8776,9 +8786,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8814,9 +8824,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8852,9 +8862,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8921,9 +8931,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8971,9 +8981,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8998,9 +9008,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9060,9 +9070,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9096,9 +9106,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9148,9 +9158,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9176,9 +9186,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9204,9 +9214,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9232,9 +9242,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9260,9 +9270,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9288,9 +9298,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9363,9 +9373,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9401,9 +9411,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9439,9 +9449,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9477,9 +9487,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9546,9 +9556,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9596,9 +9606,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9623,9 +9633,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9685,9 +9695,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9721,9 +9731,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9773,9 +9783,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9801,9 +9811,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9829,9 +9839,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9857,9 +9867,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9885,9 +9895,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9913,9 +9923,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9988,9 +9998,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10026,9 +10036,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10064,9 +10074,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10102,9 +10112,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10171,9 +10181,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10221,9 +10231,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -10248,9 +10258,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1",
                                                 "signingName": "dynamodb",
-                                                "signingRegion": "us-east-1"
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -14339,42 +14349,14 @@
                             }
                         },
                         {
-                            "documentation": "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}",
+                            "documentation": "{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1}",
                             "expect": {
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                                "endpoint": {
+                                    "url": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"
+                                }
                             },
                             "params": {
-                                "Endpoint": "https://dynamodb.us-west-2.api.aws",
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1}",
-                            "expect": {
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-                            },
-                            "params": {
-                                "Endpoint": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn",
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}",
-                            "expect": {
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-                            },
-                            "params": {
-                                "Endpoint": "https://dynamodb.us-gov-east-1.api.aws",
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}",
-                            "expect": {
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-                            },
-                            "params": {
-                                "Endpoint": "https://dynamodb.us-east-1.api.aws",
+                                "Endpoint": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws",
                                 "Region": "us-east-1"
                             }
                         },
@@ -14391,15 +14373,43 @@
                             }
                         },
                         {
-                            "documentation": "{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1}",
+                            "documentation": "{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}",
                             "expect": {
-                                "endpoint": {
-                                    "url": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"
-                                }
+                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
                             },
                             "params": {
-                                "Endpoint": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws",
+                                "Endpoint": "https://dynamodb.us-east-1.api.aws",
                                 "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}",
+                            "expect": {
+                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                            },
+                            "params": {
+                                "Endpoint": "https://dynamodb.us-gov-east-1.api.aws",
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1}",
+                            "expect": {
+                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                            },
+                            "params": {
+                                "Endpoint": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn",
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}",
+                            "expect": {
+                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                            },
+                            "params": {
+                                "Endpoint": "https://dynamodb.us-west-2.api.aws",
+                                "Region": "us-west-2"
                             }
                         }
                     ],
@@ -15053,7 +15063,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.dynamodb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Providing a <code>ClientToken</code> makes the call to\n                <code>ExportTableToPointInTimeInput</code> idempotent, meaning that multiple\n            identical calls have the same effect as one single call.</p>\n         <p>A client token is valid for 8 hours after the first request that uses it is completed.\n            After 8 hours, any request with the same client token is treated as a new request. Do\n            not resubmit the same request with the same client token for more than 8 hours, or the\n            result might not be idempotent.</p>\n         <p>If you submit a request with the same client token but a change in other parameters\n            within the 8-hour idempotency window, DynamoDB returns an\n                <code>ImportConflictException</code>.</p>",
+                        "smithy.api#documentation": "<p>Providing a <code>ClientToken</code> makes the call to\n                <code>ExportTableToPointInTimeInput</code> idempotent, meaning that multiple\n            identical calls have the same effect as one single call.</p>\n         <p>A client token is valid for 8 hours after the first request that uses it is completed.\n            After 8 hours, any request with the same client token is treated as a new request. Do\n            not resubmit the same request with the same client token for more than 8 hours, or the\n            result might not be idempotent.</p>\n         <p>If you submit a request with the same client token but a change in other parameters\n            within the 8-hour idempotency window, DynamoDB returns an\n                <code>ExportConflictException</code>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -15852,6 +15862,29 @@
             "traits": {
                 "smithy.api#documentation": "<p>The specified global table does not exist.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.dynamodb#GlobalTableSettingsReplicationMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED_WITH_OVERRIDES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED_WITH_OVERRIDES"
+                    }
+                }
             }
         },
         "com.amazonaws.dynamodb#GlobalTableStatus": {
@@ -17076,7 +17109,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists completed exports within the past 90 days.</p>",
+                "smithy.api#documentation": "<p>Lists completed exports within the past 90 days, in reverse alphanumeric order of <code>ExportArn</code>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -18145,7 +18178,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Creates a new item, or replaces an old item with a new item. If an item that has the\n            same primary key as the new item already exists in the specified table, the new item\n            completely replaces the existing item. You can perform a conditional put operation (add\n            a new item if one with the specified primary key doesn't exist), or replace an existing\n            item if it has certain attribute values. You can return the item's attribute values in\n            the same operation, using the <code>ReturnValues</code> parameter.</p>\n         <p>When you add an item, the primary key attributes are the only required attributes. </p>\n         <p>Empty String and Binary attribute values are allowed. Attribute values of type String\n            and Binary must have a length greater than zero if the attribute is used as a key\n            attribute for a table or index. Set type attributes cannot be empty. </p>\n         <p>Invalid Requests with empty values will be rejected with a\n                <code>ValidationException</code> exception.</p>\n         <note>\n            <p>To prevent a new item from replacing an existing item, use a conditional\n                expression that contains the <code>attribute_not_exists</code> function with the\n                name of the attribute being used as the partition key for the table. Since every\n                record must contain that attribute, the <code>attribute_not_exists</code> function\n                will only succeed if no matching item exists.</p>\n         </note>\n         <p>For more information about <code>PutItem</code>, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html\">Working with\n                Items</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a new item, or replaces an old item with a new item. If an item that has the\n            same primary key as the new item already exists in the specified table, the new item\n            completely replaces the existing item. You can perform a conditional put operation (add\n            a new item if one with the specified primary key doesn't exist), or replace an existing\n            item if it has certain attribute values. You can return the item's attribute values in\n            the same operation, using the <code>ReturnValues</code> parameter.</p>\n         <p>When you add an item, the primary key attributes are the only required attributes. </p>\n         <p>Empty String and Binary attribute values are allowed. Attribute values of type String\n            and Binary must have a length greater than zero if the attribute is used as a key\n            attribute for a table or index. Set type attributes cannot be empty. </p>\n         <p>Invalid Requests with empty values will be rejected with a\n                <code>ValidationException</code> exception.</p>\n         <note>\n            <p>To prevent a new item from replacing an existing item, use a conditional\n                expression that contains the <code>attribute_not_exists</code> function with the\n                name of the attribute being used as the partition key for the table. Since every\n                record must contain that attribute, the <code>attribute_not_exists</code> function\n                will only succeed if no matching item exists.</p>\n         </note>\n         <note>\n            <p>To determine whether <code>PutItem</code> overwrote an existing item, use\n                <code>ReturnValues</code> set to <code>ALL_OLD</code>. If the response includes\n                the <code>Attributes</code> element, an existing item was overwritten.</p>\n         </note>\n         <p>For more information about <code>PutItem</code>, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html\">Working with\n                Items</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To add an item to a table",
@@ -18795,6 +18828,12 @@
                 },
                 "ReplicaTableClassSummary": {
                     "target": "com.amazonaws.dynamodb#TableClassSummary"
+                },
+                "GlobalTableSettingsReplicationMode": {
+                    "target": "com.amazonaws.dynamodb#GlobalTableSettingsReplicationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates one of the settings synchronization modes for the global table replica:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code>: Indicates that the settings synchronization mode for the global table\n                    replica is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code>: Indicates that the settings synchronization mode for the global table\n                    replica is disabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED_WITH_OVERRIDES</code>: This mode is set by default for a same account global table.\n                    Indicates that certain global table settings can be overridden.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -20685,6 +20724,12 @@
                         "smithy.api#documentation": "<p>The witness Region and its current status in the MRSC global table. Only one witness\n            Region can be configured per MRSC global table.</p>"
                     }
                 },
+                "GlobalTableSettingsReplicationMode": {
+                    "target": "com.amazonaws.dynamodb#GlobalTableSettingsReplicationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates one of the settings synchronization modes for the global table:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code>: Indicates that the settings synchronization mode for the global table\n                    is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code>: Indicates that the settings synchronization mode for the global table is\n                    disabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED_WITH_OVERRIDES</code>: This mode is set by default for a same account global table.\n                    Indicates that certain global table settings can be overridden.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "RestoreSummary": {
                     "target": "com.amazonaws.dynamodb#RestoreSummary",
                     "traits": {
@@ -21379,7 +21424,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The entire transaction request was canceled.</p>\n         <p>DynamoDB cancels a <code>TransactWriteItems</code> request under the following\n            circumstances:</p>\n         <ul>\n            <li>\n               <p>A condition in one of the condition expressions is not met.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactWriteItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>More than one action in the <code>TransactWriteItems</code> operation\n                    targets the same item.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>An item size becomes too large (larger than 400 KB), or a local secondary\n                    index (LSI) becomes too large, or a similar validation error occurs because of\n                    changes made by the transaction.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n            <li>\n               <p> There is an ongoing <code>TransactWriteItems</code> operation that\n                    conflicts with a concurrent <code>TransactWriteItems</code> request. In this\n                    case the <code>TransactWriteItems</code> operation fails with a\n                        <code>TransactionCanceledException</code>. </p>\n            </li>\n         </ul>\n         <p>DynamoDB cancels a <code>TransactGetItems</code> request under the\n            following circumstances:</p>\n         <ul>\n            <li>\n               <p>There is an ongoing <code>TransactGetItems</code> operation that conflicts\n                    with a concurrent <code>PutItem</code>, <code>UpdateItem</code>,\n                        <code>DeleteItem</code> or <code>TransactWriteItems</code> request. In this\n                    case the <code>TransactGetItems</code> operation fails with a\n                        <code>TransactionCanceledException</code>.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactGetItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If using Java, DynamoDB lists the cancellation reasons on the\n                    <code>CancellationReasons</code> property. This property is not set for other\n                languages. Transaction cancellation reasons are ordered in the order of requested\n                items, if an item has no error it will have <code>None</code> code and\n                    <code>Null</code> message.</p>\n         </note>\n         <p>Cancellation reason codes and possible error messages:</p>\n         <ul>\n            <li>\n               <p>No Errors:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>None</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: <code>null</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Conditional Check Failed:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ConditionalCheckFailed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: The conditional request failed. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Item Collection Size Limit Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ItemCollectionSizeLimitExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Collection size exceeded.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Transaction Conflict:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>TransactionConflict</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Transaction is ongoing for the item.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Provisioned Throughput Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ProvisionedThroughputExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages:</p>\n                     <ul>\n                        <li>\n                           <p>The level of configured provisioned throughput for the\n                                    table was exceeded. Consider increasing your provisioning level\n                                    with the UpdateTable API.</p>\n                           <note>\n                              <p>This Message is received when provisioned throughput is\n                                        exceeded is on a provisioned DynamoDB\n                                        table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>The level of configured provisioned throughput for one or\n                                    more global secondary indexes of the table was exceeded.\n                                    Consider increasing your provisioning level for the\n                                    under-provisioned global secondary indexes with the UpdateTable\n                                    API.</p>\n                           <note>\n                              <p>This message is returned when provisioned throughput is\n                                        exceeded is on a provisioned GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Throttling Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ThrottlingError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>Throughput exceeds the current capacity of your table or\n                                    index. DynamoDB is automatically scaling your table or\n                                    index so please try again shortly. If exceptions persist, check\n                                    if you have a hot key:\n                                    https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on an\n                                        On-Demand table as DynamoDB is automatically\n                                        scaling the table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>Throughput exceeds the current capacity for one or more\n                                    global secondary indexes. DynamoDB is automatically\n                                    scaling your index so please try again shortly.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on an\n                                        On-Demand GSI as DynamoDB is automatically scaling\n                                        the GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Validation Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ValidationError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>One or more parameter values were invalid.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key beyond allowed size limits.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key to unsupported type.</p>\n                        </li>\n                        <li>\n                           <p>An operand in the update expression has an incorrect data\n                                    type.</p>\n                        </li>\n                        <li>\n                           <p>Item size to update has exceeded the maximum allowed\n                                    size.</p>\n                        </li>\n                        <li>\n                           <p>Number overflow. Attempting to store a number with\n                                    magnitude larger than supported range.</p>\n                        </li>\n                        <li>\n                           <p>Type mismatch for attribute to update.</p>\n                        </li>\n                        <li>\n                           <p>Nesting Levels have exceeded supported limits.</p>\n                        </li>\n                        <li>\n                           <p>The document path provided in the update expression is\n                                    invalid for update.</p>\n                        </li>\n                        <li>\n                           <p>The provided expression refers to an attribute that does\n                                    not exist in the item.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The entire transaction request was canceled.</p>\n         <p>DynamoDB cancels a <code>TransactWriteItems</code> request under the following\n            circumstances:</p>\n         <ul>\n            <li>\n               <p>A condition in one of the condition expressions is not met.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactWriteItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>More than one action in the <code>TransactWriteItems</code> operation\n                    targets the same item.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>An item size becomes too large (larger than 400 KB), or a local secondary\n                    index (LSI) becomes too large, or a similar validation error occurs because of\n                    changes made by the transaction.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n            <li>\n               <p> There is an ongoing <code>TransactWriteItems</code> operation that\n                    conflicts with a concurrent <code>TransactWriteItems</code> request. In this\n                    case the <code>TransactWriteItems</code> operation fails with a\n                        <code>TransactionCanceledException</code>. </p>\n            </li>\n         </ul>\n         <p>DynamoDB cancels a <code>TransactGetItems</code> request under the\n            following circumstances:</p>\n         <ul>\n            <li>\n               <p>There is an ongoing <code>TransactGetItems</code> operation that conflicts\n                    with a concurrent <code>PutItem</code>, <code>UpdateItem</code>,\n                        <code>DeleteItem</code> or <code>TransactWriteItems</code> request. In this\n                    case the <code>TransactGetItems</code> operation fails with a\n                        <code>TransactionCanceledException</code>.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactGetItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n         </ul>\n         <note>\n            <p>DynamoDB lists the cancellation reasons on the\n                    <code>CancellationReasons</code> property. Transaction cancellation reasons are ordered in the order of requested\n                items, if an item has no error it will have <code>None</code> code and\n                    <code>Null</code> message.</p>\n         </note>\n         <p>Cancellation reason codes and possible error messages:</p>\n         <ul>\n            <li>\n               <p>No Errors:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>None</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: <code>null</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Conditional Check Failed:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ConditionalCheckFailed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: The conditional request failed. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Item Collection Size Limit Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ItemCollectionSizeLimitExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Collection size exceeded.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Transaction Conflict:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>TransactionConflict</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Transaction is ongoing for the item.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Provisioned Throughput Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ProvisionedThroughputExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages:</p>\n                     <ul>\n                        <li>\n                           <p>The level of configured provisioned throughput for the\n                                    table was exceeded. Consider increasing your provisioning level\n                                    with the UpdateTable API.</p>\n                           <note>\n                              <p>This Message is received when provisioned throughput is\n                                        exceeded is on a provisioned DynamoDB\n                                        table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>The level of configured provisioned throughput for one or\n                                    more global secondary indexes of the table was exceeded.\n                                    Consider increasing your provisioning level for the\n                                    under-provisioned global secondary indexes with the UpdateTable\n                                    API.</p>\n                           <note>\n                              <p>This message is returned when provisioned throughput is\n                                        exceeded is on a provisioned GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Throttling Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ThrottlingError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>Throughput exceeds the current capacity of your table or\n                                    index. DynamoDB is automatically scaling your table or\n                                    index so please try again shortly. If exceptions persist, check\n                                    if you have a hot key:\n                                    https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on an\n                                        On-Demand table as DynamoDB is automatically\n                                        scaling the table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>Throughput exceeds the current capacity for one or more\n                                    global secondary indexes. DynamoDB is automatically\n                                    scaling your index so please try again shortly.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on an\n                                        On-Demand GSI as DynamoDB is automatically scaling\n                                        the GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Validation Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ValidationError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>One or more parameter values were invalid.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key beyond allowed size limits.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key to unsupported type.</p>\n                        </li>\n                        <li>\n                           <p>An operand in the update expression has an incorrect data\n                                    type.</p>\n                        </li>\n                        <li>\n                           <p>Item size to update has exceeded the maximum allowed\n                                    size.</p>\n                        </li>\n                        <li>\n                           <p>Number overflow. Attempting to store a number with\n                                    magnitude larger than supported range.</p>\n                        </li>\n                        <li>\n                           <p>Type mismatch for attribute to update.</p>\n                        </li>\n                        <li>\n                           <p>Nesting Levels have exceeded supported limits.</p>\n                        </li>\n                        <li>\n                           <p>The document path provided in the update expression is\n                                    invalid for update.</p>\n                        </li>\n                        <li>\n                           <p>The provided expression refers to an attribute that does\n                                    not exist in the item.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -22040,7 +22085,7 @@
                 "UpdateExpression": {
                     "target": "com.amazonaws.dynamodb#UpdateExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An expression that defines one or more attributes to be updated, the action to be\n            performed on them, and new values for them.</p>\n         <p>The following action values are available for <code>UpdateExpression</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SET</code> - Adds one or more attributes and values to an item. If any of\n                    these attributes already exist, they are replaced by the new values. You can\n                    also use <code>SET</code> to add or subtract from an attribute that is of type\n                    Number. For example: <code>SET myNum = myNum + :val</code>\n               </p>\n               <p>\n                  <code>SET</code> supports the following functions:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>if_not_exists (path, operand)</code> - if the item does not\n                            contain an attribute at the specified path, then\n                                <code>if_not_exists</code> evaluates to operand; otherwise, it\n                            evaluates to path. You can use this function to avoid overwriting an\n                            attribute that may already be present in the item.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>list_append (operand, operand)</code> - evaluates to a list with a\n                            new element added to it. You can append the new element to the start or\n                            the end of the list by reversing the order of the operands.</p>\n                  </li>\n               </ul>\n               <p>These function names are case-sensitive.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVE</code> - Removes one or more attributes from an item.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADD</code> - Adds the specified value to the item, if the attribute does\n                    not already exist. If the attribute does exist, then the behavior of\n                        <code>ADD</code> depends on the data type of the attribute:</p>\n               <ul>\n                  <li>\n                     <p>If the existing attribute is a number, and if <code>Value</code> is\n                            also a number, then <code>Value</code> is mathematically added to the\n                            existing attribute. If <code>Value</code> is a negative number, then it\n                            is subtracted from the existing attribute.</p>\n                     <note>\n                        <p>If you use <code>ADD</code> to increment or decrement a number\n                                value for an item that doesn't exist before the update, DynamoDB\n                                uses <code>0</code> as the initial value.</p>\n                        <p>Similarly, if you use <code>ADD</code> for an existing item to\n                                increment or decrement an attribute value that doesn't exist before\n                                the update, DynamoDB uses <code>0</code> as the initial value. For\n                                example, suppose that the item you want to update doesn't have an\n                                attribute named <code>itemcount</code>, but you decide to\n                                    <code>ADD</code> the number <code>3</code> to this attribute\n                                anyway. DynamoDB will create the <code>itemcount</code> attribute,\n                                set its initial value to <code>0</code>, and finally add\n                                    <code>3</code> to it. The result will be a new\n                                    <code>itemcount</code> attribute in the item, with a value of\n                                    <code>3</code>.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>If the existing data type is a set and if <code>Value</code> is also a\n                            set, then <code>Value</code> is added to the existing set. For example,\n                            if the attribute value is the set <code>[1,2]</code>, and the\n                                <code>ADD</code> action specified <code>[3]</code>, then the final\n                            attribute value is <code>[1,2,3]</code>. An error occurs if an\n                                <code>ADD</code> action is specified for a set attribute and the\n                            attribute type specified does not match the existing set type. </p>\n                     <p>Both sets must have the same primitive data type. For example, if the\n                            existing data type is a set of strings, the <code>Value</code> must also\n                            be a set of strings.</p>\n                  </li>\n               </ul>\n               <important>\n                  <p>The <code>ADD</code> action only supports Number and set data types. In\n                        addition, <code>ADD</code> can only be used on top-level attributes, not\n                        nested attributes.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE</code> - Deletes an element from a set.</p>\n               <p>If a set of values is specified, then those values are subtracted from the old\n                    set. For example, if the attribute value was the set <code>[a,b,c]</code> and\n                    the <code>DELETE</code> action specifies <code>[a,c]</code>, then the final\n                    attribute value is <code>[b]</code>. Specifying an empty set is an error.</p>\n               <important>\n                  <p>The <code>DELETE</code> action only supports set data types. In addition,\n                            <code>DELETE</code> can only be used on top-level attributes, not nested\n                        attributes.</p>\n               </important>\n            </li>\n         </ul>\n         <p>You can have many actions in a single expression, such as the following: <code>SET\n                a=:value1, b=:value2 DELETE :value3, :value4, :value5</code>\n         </p>\n         <p>For more information on update expressions, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html\">Modifying\n                Items and Attributes</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An expression that defines one or more attributes to be updated, the action to be\n            performed on them, and new values for them.</p>\n         <p>The following action values are available for <code>UpdateExpression</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SET</code> - Adds one or more attributes and values to an item. If any of\n                    these attributes already exist, they are replaced by the new values. You can\n                    also use <code>SET</code> to add or subtract from an attribute that is of type\n                    Number. For example: <code>SET myNum = myNum + :val</code>\n               </p>\n               <p>\n                  <code>SET</code> supports the following functions:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>if_not_exists (path, operand)</code> - if the item does not\n                            contain an attribute at the specified path, then\n                                <code>if_not_exists</code> evaluates to operand; otherwise, it\n                            evaluates to path. You can use this function to avoid overwriting an\n                            attribute that may already be present in the item.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>list_append (operand, operand)</code> - evaluates to a list with a\n                            new element added to it. You can append the new element to the start or\n                            the end of the list by reversing the order of the operands.</p>\n                  </li>\n               </ul>\n               <p>These function names are case-sensitive.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVE</code> - Removes one or more attributes from an item.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADD</code> - Adds the specified value to the item, if the attribute does\n                    not already exist. If the attribute does exist, then the behavior of\n                        <code>ADD</code> depends on the data type of the attribute:</p>\n               <ul>\n                  <li>\n                     <p>If the existing attribute is a number, and if <code>Value</code> is\n                            also a number, then <code>Value</code> is mathematically added to the\n                            existing attribute. If <code>Value</code> is a negative number, then it\n                            is subtracted from the existing attribute.</p>\n                     <note>\n                        <p>If you use <code>ADD</code> to increment or decrement a number\n                                value for an item that doesn't exist before the update, DynamoDB\n                                uses <code>0</code> as the initial value.</p>\n                        <p>Similarly, if you use <code>ADD</code> for an existing item to\n                                increment or decrement an attribute value that doesn't exist before\n                                the update, DynamoDB uses <code>0</code> as the initial value. For\n                                example, suppose that the item you want to update doesn't have an\n                                attribute named <code>itemcount</code>, but you decide to\n                                    <code>ADD</code> the number <code>3</code> to this attribute\n                                anyway. DynamoDB will create the <code>itemcount</code> attribute,\n                                set its initial value to <code>0</code>, and finally add\n                                    <code>3</code> to it. The result will be a new\n                                    <code>itemcount</code> attribute in the item, with a value of\n                                    <code>3</code>.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>If the existing data type is a set and if <code>Value</code> is also a\n                            set, then <code>Value</code> is added to the existing set. For example,\n                            if the attribute value is the set <code>[1,2]</code>, and the\n                                <code>ADD</code> action specified <code>[3]</code>, then the final\n                            attribute value is <code>[1,2,3]</code>. An error occurs if an\n                                <code>ADD</code> action is specified for a set attribute and the\n                            attribute type specified does not match the existing set type. </p>\n                     <p>Both sets must have the same primitive data type. For example, if the\n                            existing data type is a set of strings, the <code>Value</code> must also\n                            be a set of strings.</p>\n                  </li>\n               </ul>\n               <important>\n                  <p>The <code>ADD</code> action only supports Number and set data types.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE</code> - Deletes an element from a set.</p>\n               <p>If a set of values is specified, then those values are subtracted from the old\n                    set. For example, if the attribute value was the set <code>[a,b,c]</code> and\n                    the <code>DELETE</code> action specifies <code>[a,c]</code>, then the final\n                    attribute value is <code>[b]</code>. Specifying an empty set is an error.</p>\n               <important>\n                  <p>The <code>DELETE</code> action only supports set data types.</p>\n               </important>\n            </li>\n         </ul>\n         <p>You can have many actions in a single expression, such as the following: <code>SET\n                a=:value1, b=:value2 DELETE :value3, :value4, :value5</code>\n         </p>\n         <p>For more information on update expressions, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html\">Modifying\n                Items and Attributes</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
                     }
                 },
                 "ConditionExpression": {
@@ -22375,6 +22420,12 @@
                     "target": "com.amazonaws.dynamodb#WarmThroughput",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the warm throughput (in read units per second and write units per second)\n            for updating a table.</p>"
+                    }
+                },
+                "GlobalTableSettingsReplicationMode": {
+                    "target": "com.amazonaws.dynamodb#GlobalTableSettingsReplicationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the settings replication mode for a global table replica. This attribute can be defined\n            using UpdateTable operation only on a regional table with values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code>: Defines settings replication on a regional table to be used as a\n                    source table for creating Multi-Account Global Table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code>: Remove settings replication on a regional table. Settings replication needs\n                    to be defined to ENABLED again in order to create a Multi-Account Global Table using this table.\n                </p>\n            </li>\n         </ul>"
                     }
                 }
             },

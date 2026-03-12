@@ -12,6 +12,7 @@
         "api_op_CreateAgentRuntimeEndpoint.go",
         "api_op_CreateApiKeyCredentialProvider.go",
         "api_op_CreateBrowser.go",
+        "api_op_CreateBrowserProfile.go",
         "api_op_CreateCodeInterpreter.go",
         "api_op_CreateEvaluator.go",
         "api_op_CreateGateway.go",
@@ -26,6 +27,7 @@
         "api_op_DeleteAgentRuntimeEndpoint.go",
         "api_op_DeleteApiKeyCredentialProvider.go",
         "api_op_DeleteBrowser.go",
+        "api_op_DeleteBrowserProfile.go",
         "api_op_DeleteCodeInterpreter.go",
         "api_op_DeleteEvaluator.go",
         "api_op_DeleteGateway.go",
@@ -41,6 +43,7 @@
         "api_op_GetAgentRuntimeEndpoint.go",
         "api_op_GetApiKeyCredentialProvider.go",
         "api_op_GetBrowser.go",
+        "api_op_GetBrowserProfile.go",
         "api_op_GetCodeInterpreter.go",
         "api_op_GetEvaluator.go",
         "api_op_GetGateway.go",
@@ -58,6 +61,7 @@
         "api_op_ListAgentRuntimeVersions.go",
         "api_op_ListAgentRuntimes.go",
         "api_op_ListApiKeyCredentialProviders.go",
+        "api_op_ListBrowserProfiles.go",
         "api_op_ListBrowsers.go",
         "api_op_ListCodeInterpreters.go",
         "api_op_ListEvaluators.go",
@@ -104,7 +108,6 @@
         "internal/endpoints/endpoints.go",
         "internal/endpoints/endpoints_test.go",
         "options.go",
-        "protocol_test.go",
         "serializers.go",
         "snapshot_test.go",
         "sra_operation_order_test.go",
@@ -114,7 +117,7 @@
         "types/types_exported_test.go",
         "validators.go"
     ],
-    "go": "1.23",
+    "go": "1.24",
     "module": "github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol",
     "unstable": false
 }

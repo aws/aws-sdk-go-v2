@@ -128,7 +128,7 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 		t.Errorf("expect %v provider, got %v", e, a)
 	}
 
-	var expectedSources []interface{}
+	var expectedSources []any
 	for _, s := range cfg.ConfigSources {
 		expectedSources = append(expectedSources, s)
 	}
@@ -195,7 +195,7 @@ func generateProfiles(n int) (string, error) {
 		return "", err
 	}
 
-	for i := 0; i < n; i++ {
+	for range n {
 		if _, err := fmt.Fprintf(f, profileTemplate, n); err != nil {
 			f.Close()
 			os.Remove(f.Name())
@@ -211,7 +211,7 @@ func generateProfiles(n int) (string, error) {
 	return f.Name(), nil
 }
 
-func cmpDiff(e, a interface{}) string {
+func cmpDiff(e, a any) string {
 	if !reflect.DeepEqual(e, a) {
 		return fmt.Sprintf("%v != %v", e, a)
 	}

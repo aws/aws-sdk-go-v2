@@ -79,12 +79,16 @@ type ListStreamConsumersInput struct {
 	// You can't specify this parameter if you specify the NextToken parameter.
 	StreamCreationTimestamp *time.Time
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	noSmithyDocumentSerde
 }
 
 func (in *ListStreamConsumersInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("control")
 }
 

@@ -422,6 +422,18 @@ func TestCheckSnapshot_GetSampledRequests(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTopPathStatisticsByTraffic(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTopPathStatisticsByTraffic(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTopPathStatisticsByTraffic")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetWebACL(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetWebACL(context.Background(), nil, func(o *Options) {
@@ -1062,6 +1074,18 @@ func TestUpdateSnapshot_GetSampledRequests(t *testing.T) {
 	_, err := svc.GetSampledRequests(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSampledRequests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTopPathStatisticsByTraffic(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTopPathStatisticsByTraffic(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTopPathStatisticsByTraffic")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

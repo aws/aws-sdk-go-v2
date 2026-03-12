@@ -1531,6 +1531,78 @@
                     "traits": {
                         "smithy.api#enumValue": "GRAPHICSPRO_G4DN"
                     }
+                },
+                "GRAPHICS_G6_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6_XLARGE"
+                    }
+                },
+                "GRAPHICS_G6_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6_2XLARGE"
+                    }
+                },
+                "GRAPHICS_G6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6_4XLARGE"
+                    }
+                },
+                "GRAPHICS_G6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6_8XLARGE"
+                    }
+                },
+                "GRAPHICS_G6_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6_16XLARGE"
+                    }
+                },
+                "GRAPHICS_GR6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_GR6_4XLARGE"
+                    }
+                },
+                "GRAPHICS_GR6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_GR6_8XLARGE"
+                    }
+                },
+                "GRAPHICS_G6F_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6F_LARGE"
+                    }
+                },
+                "GRAPHICS_G6F_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6F_XLARGE"
+                    }
+                },
+                "GRAPHICS_G6F_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6F_2XLARGE"
+                    }
+                },
+                "GRAPHICS_G6F_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6F_4XLARGE"
+                    }
+                },
+                "GRAPHICS_GR6F_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_GR6F_4XLARGE"
+                    }
                 }
             }
         },
@@ -6254,6 +6326,12 @@
                     "traits": {
                         "smithy.api#enumValue": "GRAPHICS_G4DN"
                     }
+                },
+                "GRAPHICS_G6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6"
+                    }
                 }
             }
         },
@@ -8164,6 +8242,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "WINDOWS_SERVER_2022"
+                    }
+                },
+                "WINDOWS_SERVER_2025": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2025"
                     }
                 },
                 "RHEL_8": {

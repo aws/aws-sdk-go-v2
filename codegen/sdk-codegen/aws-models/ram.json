@@ -202,6 +202,9 @@
                     "target": "com.amazonaws.ram#ListResourceTypes"
                 },
                 {
+                    "target": "com.amazonaws.ram#ListSourceAssociations"
+                },
+                {
                     "target": "com.amazonaws.ram#PromotePermissionCreatedFromPolicy"
                 },
                 {
@@ -1259,7 +1262,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified list of principals and list of resources to a resource share. Principals that\n            already have access to this resource share immediately receive access to the added resources.\n            Newly added principals immediately receive access to the resources shared in this resource share. </p>",
+                "smithy.api#documentation": "<p>Adds the specified list of principals, resources, and source constraints to a resource share. Principals that\n            already have access to this resource share immediately receive access to the added resources.\n            Newly added principals immediately receive access to the resources shared in this resource share. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/associateresourceshare",
@@ -1386,7 +1389,7 @@
                 "principals": {
                     "target": "com.amazonaws.ram#PrincipalArnOrIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of principals to whom you want to the resource share. This can be\n                <code>null</code> if you want to add only resources.</p>\n         <p>What the principals can do with the resources in the share is determined by the RAM\n            permissions that you associate with the resource share. See <a>AssociateResourceSharePermission</a>.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a list of principals to whom you want to the resource share. This can be\n                <code>null</code> if you want to add only resources.</p>\n         <p>What the principals can do with the resources in the share is determined by the RAM\n            permissions that you associate with the resource share. See <a>AssociateResourceSharePermission</a>.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n            <li>\n               <p>A service principal name, for example: <code>service-id.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
                     }
                 },
                 "clientToken": {
@@ -1398,7 +1401,7 @@
                 "sources": {
                     "target": "com.amazonaws.ram#SourceArnOrAccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies from which source accounts the service principal\n            has access to the resources in this resource share.</p>"
+                        "smithy.api#documentation": "<p>Specifies source constraints (accounts, ARNs, organization IDs, or organization paths) that limit when service principals can access resources in this resource share. When a service principal attempts to access a shared resource, validation is performed to ensure the request originates from one of the specified sources. This helps prevent confused deputy attacks by applying constraints on where service principals can access resources from.</p>"
                     }
                 }
             },
@@ -1491,6 +1494,65 @@
                 }
             }
         },
+        "com.amazonaws.ram#AssociatedSource": {
+            "type": "structure",
+            "members": {
+                "resourceShareArn": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource share that contains the source association.</p>"
+                    }
+                },
+                "sourceId": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the source. This can be an account ID, Amazon Resource Name (ARN), organization ID, or organization path.</p>"
+                    }
+                },
+                "sourceType": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of source.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the source association.</p>"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.ram#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the source association was last updated.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.ram#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the source association was created.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message about the status of the source association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a source association in a resource share. Source associations control which sources can be used with service principals.</p>"
+            }
+        },
+        "com.amazonaws.ram#AssociatedSourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ram#AssociatedSource",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ram#Boolean": {
             "type": "boolean"
         },
@@ -1556,7 +1618,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the resource type that this customer managed permission applies to.</p>\n         <p>The format is\n                    <code>\n               <i><service-code></i>:<i><resource-type></i>\n            </code>\n            and is not case sensitive. For example, to specify an Amazon EC2 Subnet, you can use the\n            string <code>ec2:subnet</code>. To see the list of valid values for this parameter,\n            query the <a>ListResourceTypes</a> operation.</p>",
+                        "smithy.api#documentation": "<p>Specifies the name of the resource type that this customer managed permission applies to.</p>\n         <p>The format is\n                    <code>\n               <i><service-code></i>:<i><resource-type></i>\n            </code>\n            and is case sensitive. For example, to specify an Amazon EC2 Subnet, you can use the\n            string <code>ec2:Subnet</code>. To see the list of valid values for this parameter,\n            query the <a>ListResourceTypes</a> operation. This value must match the display name of the resource \n            (available in <code>ListResourceTypes</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1741,11 +1803,14 @@
                     "target": "com.amazonaws.ram#TagPolicyViolationException"
                 },
                 {
+                    "target": "com.amazonaws.ram#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.ram#UnknownResourceException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a resource share. You can provide a list of the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> for the resources that you\n            want to share, a list of principals you want to share the resources with, and the\n            permissions to grant those principals.</p>\n         <note>\n            <p>Sharing a resource makes it available for use by principals outside of the\n                Amazon Web Services account that created the resource. Sharing doesn't change any permissions or\n                quotas that apply to the resource in the account that created it.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a resource share. You can provide a list of the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> for the resources that you\n            want to share, a list of principals you want to share the resources with, the\n            permissions to grant those principals, and optionally source constraints to enhance security for service principal sharing.</p>\n         <note>\n            <p>Sharing a resource makes it available for use by principals outside of the\n                Amazon Web Services account that created the resource. Sharing doesn't change any permissions or\n                quotas that apply to the resource in the account that created it.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createresourceshare",
@@ -1772,7 +1837,7 @@
                 "principals": {
                     "target": "com.amazonaws.ram#PrincipalArnOrIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of one or more principals to associate with the resource share.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a list of one or more principals to associate with the resource share.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n            <li>\n               <p>A service principal name, for example: <code>service-id.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
                     }
                 },
                 "tags": {
@@ -1802,7 +1867,13 @@
                 "sources": {
                     "target": "com.amazonaws.ram#SourceArnOrAccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies from which source accounts the service principal\n            has access to the resources in this resource share.</p>"
+                        "smithy.api#documentation": "<p>Specifies source constraints (accounts, ARNs, organization IDs, or organization paths) that limit when service principals can access resources in this resource share. When a service principal attempts to access a shared resource, validation is performed to ensure the request originates from one of the specified sources. This helps prevent confused deputy attacks by applying constraints on where service principals can access resources from.</p>"
+                    }
+                },
+                "resourceShareConfiguration": {
+                    "target": "com.amazonaws.ram#ResourceShareConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration of this resource share.</p>"
                     }
                 }
             },
@@ -2058,6 +2129,9 @@
                     "target": "com.amazonaws.ram#ServiceUnavailableException"
                 },
                 {
+                    "target": "com.amazonaws.ram#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.ram#UnknownResourceException"
                 }
             ],
@@ -2151,11 +2225,14 @@
                     "target": "com.amazonaws.ram#ServiceUnavailableException"
                 },
                 {
+                    "target": "com.amazonaws.ram#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.ram#UnknownResourceException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified principals or resources from participating in the specified\n            resource share.</p>",
+                "smithy.api#documentation": "<p>Removes the specified principals, resources, or source constraints from participating in the specified\n            resource share.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/disassociateresourceshare",
@@ -2273,7 +2350,7 @@
                 "principals": {
                     "target": "com.amazonaws.ram#PrincipalArnOrIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of one or more principals that no longer are to have access to the\n            resources in this resource share.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a list of one or more principals that no longer are to have access to the\n            resources in this resource share.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n            <li>\n               <p>A service principal name, for example: <code>service-id.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
                     }
                 },
                 "clientToken": {
@@ -2285,7 +2362,7 @@
                 "sources": {
                     "target": "com.amazonaws.ram#SourceArnOrAccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies from which source accounts the\n            service principal no longer has access to the resources in this resource share.</p>"
+                        "smithy.api#documentation": "<p>Specifies source constraints (accounts, ARNs, organization IDs, or organization paths) to remove from the resource share. This enables granular management of source constraints while maintaining service principal associations. At least one source must remain when service principals are present.</p>"
                     }
                 }
             },
@@ -2464,7 +2541,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the resource policies for the specified resources that you own and have\n            shared.</p>",
+                "smithy.api#documentation": "<p>Retrieves the resource policies for the specified resources that you own and have\n            shared.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/getresourcepolicies",
@@ -2562,7 +2639,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the lists of resources and principals that associated for resource shares that you\n            own.</p>",
+                "smithy.api#documentation": "<p>Retrieves the lists of resources and principals that associated for resource shares that you\n            own.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/getresourceshareassociations",
@@ -2681,7 +2758,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details about invitations that you have received for resource shares.</p>",
+                "smithy.api#documentation": "<p>Retrieves details about invitations that you have received for resource shares.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/getresourceshareinvitations",
@@ -2775,7 +2852,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details about the resource shares that you own or that are shared with you.</p>",
+                "smithy.api#documentation": "<p>Retrieves details about the resource shares that you own or that are shared with you.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/getresourceshares",
@@ -3072,7 +3149,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the resources in a resource share that is shared with you but for which the invitation is\n            still <code>PENDING</code>. That means that you haven't accepted or rejected the\n            invitation and the invitation hasn't expired.</p>",
+                "smithy.api#documentation": "<p>Lists the resources in a resource share that is shared with you but for which the invitation is\n            still <code>PENDING</code>. That means that you haven't accepted or rejected the\n            invitation and the invitation hasn't expired.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listpendinginvitationresources",
@@ -3164,7 +3241,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists information about the managed permission and its associations to any resource shares that use\n            this managed permission. This lets you see which resource shares use which versions of the specified\n            managed permission.</p>",
+                "smithy.api#documentation": "<p>Lists information about the managed permission and its associations to any resource shares that use\n            this managed permission. This lets you see which resource shares use which versions of the specified\n            managed permission.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listpermissionassociations",
@@ -3285,7 +3362,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the available versions of the specified RAM permission.</p>",
+                "smithy.api#documentation": "<p>Lists the available versions of the specified RAM permission.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listpermissionversions",
@@ -3371,7 +3448,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of available RAM permissions that you can use for the supported\n            resource types. </p>",
+                "smithy.api#documentation": "<p>Retrieves a list of available RAM permissions that you can use for the supported\n            resource types. </p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listpermissions",
@@ -3465,7 +3542,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the principals that you are sharing resources with or that are sharing resources\n            with you.</p>",
+                "smithy.api#documentation": "<p>Lists the principals that you are sharing resources with or that are sharing resources\n            with you.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listprincipals",
@@ -3497,7 +3574,7 @@
                 "principals": {
                     "target": "com.amazonaws.ram#PrincipalArnOrIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to list information for only the listed principals.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies that you want to list information for only the listed principals.</p>\n         <p>You can include the following values:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services account ID, for example: <code>123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an organization in Organizations, for example:\n                        <code>organizations::123456789012:organization/o-exampleorgid</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an organizational unit (OU) in Organizations, for example:\n                        <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM role, for example:\n                        <code>iam::123456789012:role/rolename</code>\n               </p>\n            </li>\n            <li>\n               <p>An ARN of an IAM user, for example:\n                        <code>iam::123456789012user/username</code>\n               </p>\n            </li>\n            <li>\n               <p>A service principal name, for example: <code>service-id.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Not all resource types can be shared with IAM roles and users. \n             For more information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n         </note>"
                     }
                 },
                 "resourceType": {
@@ -3572,7 +3649,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the current status of the asynchronous tasks performed by RAM when you\n            perform the <a>ReplacePermissionAssociationsWork</a> operation.</p>",
+                "smithy.api#documentation": "<p>Retrieves the current status of the asynchronous tasks performed by RAM when you\n            perform the <a>ReplacePermissionAssociationsWork</a> operation.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listreplacepermissionassociationswork",
@@ -3669,7 +3746,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the RAM permissions that are associated with a resource share.</p>",
+                "smithy.api#documentation": "<p>Lists the RAM permissions that are associated with a resource share.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listresourcesharepermissions",
@@ -3843,7 +3920,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the resources that you added to a resource share or the resources that are shared with\n            you.</p>",
+                "smithy.api#documentation": "<p>Lists the resources that you added to a resource share or the resources that are shared with\n            you.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value\nwhen calling a paginated operation. These operations can occasionally return an empty set of results even when there are more\nresults available. The <code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i>\nwhen there are no more results to display.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listresources",
@@ -3926,6 +4003,113 @@
                     "target": "com.amazonaws.ram#String",
                     "traits": {
                         "smithy.api#documentation": "<p>If present, this value indicates that more output is available than \n             is included in the current response. Use this value in the <code>NextToken</code> \n             request parameter in a subsequent call to the operation to get the next part of the \n             output. You should repeat this until the <code>NextToken</code> response element comes \n             back as <code>null</code>. This indicates that this is the last page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ram#ListSourceAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ram#ListSourceAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ram#ListSourceAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ram#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.ram#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ram#MalformedArnException"
+                },
+                {
+                    "target": "com.amazonaws.ram#ServerInternalException"
+                },
+                {
+                    "target": "com.amazonaws.ram#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.ram#UnknownResourceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists source associations for resource shares. Source associations control which sources can be used with service principals in resource shares. This operation provides visibility into source associations for resource share owners.</p>\n         <p>You can filter the results by resource share Amazon Resource Name (ARN), source ID, source type, or association status. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/listsourceassociations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "sourceAssociations",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.ram#ListSourceAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "resourceShareArns": {
+                    "target": "com.amazonaws.ram#ResourceShareArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resource shares for which you want to retrieve source associations.</p>"
+                    }
+                },
+                "sourceId": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the source for which you want to retrieve associations. This can be an account ID, Amazon Resource Name (ARN), organization ID, or organization path.</p>"
+                    }
+                },
+                "sourceType": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of source for which you want to retrieve associations.</p>"
+                    }
+                },
+                "associationStatus": {
+                    "target": "com.amazonaws.ram#ResourceShareAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the source associations that you want to retrieve.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ram#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ram#ListSourceAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "sourceAssociations": {
+                    "target": "com.amazonaws.ram#AssociatedSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the source associations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
                     }
                 }
             },
@@ -4272,6 +4456,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.ram#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ram#InvalidPolicyException"
                 },
                 {
                     "target": "com.amazonaws.ram#MalformedArnException"
@@ -4935,6 +5122,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates what features are available for this resource share. This parameter can have one of\n            the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>STANDARD</b> – A resource share that supports all\n                    functionality. These resource shares are visible to all principals you share the resource share with. \n                    You can modify these resource shares in RAM using the console or APIs. This resource share might \n                    have been created by RAM, or it might have been <b>CREATED_FROM_POLICY</b> and then promoted.</p>\n            </li>\n            <li>\n               <p>\n                  <b>CREATED_FROM_POLICY</b> – The customer\n                    manually shared a resource by attaching a resource-based policy. That policy did\n                    not match any existing managed permissions, so RAM created this customer managed permission automatically on the\n                    customer's behalf based on the attached policy document. This type of resource share \n                    is visible only to the Amazon Web Services account that created it. You can't modify it in \n                    RAM unless you promote it. For more information, \n                    see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PROMOTING_TO_STANDARD</b> – This\n                    resource share was originally <code>CREATED_FROM_POLICY</code>, but the customer ran\n                    the <a>PromoteResourceShareCreatedFromPolicy</a> and that operation\n                    is still in progress. This value changes to <code>STANDARD</code> when\n                    complete.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "resourceShareConfiguration": {
+                    "target": "com.amazonaws.ram#ResourceShareConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the resource share</p>"
+                    }
                 }
             },
             "traits": {
@@ -5053,6 +5246,24 @@
                     "traits": {
                         "smithy.api#enumValue": "DISASSOCIATED"
                     }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDED"
+                    }
+                },
+                "SUSPENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDING"
+                    }
+                },
+                "RESTORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORING"
+                    }
                 }
             }
         },
@@ -5070,7 +5281,27 @@
                     "traits": {
                         "smithy.api#enumValue": "RESOURCE"
                     }
+                },
+                "SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.ram#ResourceShareConfiguration": {
+            "type": "structure",
+            "members": {
+                "retainSharingOnAccountLeaveOrganization": {
+                    "target": "com.amazonaws.ram#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the consumer account retains access to the resource share after leaving the organization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the resource share</p>"
             }
         },
         "com.amazonaws.ram#ResourceShareFeatureSet": {
@@ -5303,7 +5534,7 @@
                     "code": "ResourceShareLimitExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The operation failed because it would exceed the limit for resource shares for your account. To\n            view the limits for your Amazon Web Services account, see the <a href=\"https://console.aws.amazon.com/servicequotas/home/services/ram/quotas\">RAM page in the Service Quotas\n                console</a>.</p>",
+                "smithy.api#documentation": "<p>The operation failed because it would exceed the limit for resource shares for your account. You\n            can associate up to 100 resources per call. To view the limits for your Amazon Web Services account,\n            see the <a href=\"https://console.aws.amazon.com/servicequotas/home/services/ram/quotas\">RAM page in\n                the Service Quotas console</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5775,7 +6006,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tag key and optional list of possible values that you can use to filter results for\n            tagged resources.</p>"
+                "smithy.api#documentation": "<p>A tag key and optional list of possible values that you can use to filter results for\n            tagged resources.</p>\n         <note>\n            <p>Multiple tag filters are evaluated as an OR condition.</p>\n         </note>"
             }
         },
         "com.amazonaws.ram#TagFilters": {

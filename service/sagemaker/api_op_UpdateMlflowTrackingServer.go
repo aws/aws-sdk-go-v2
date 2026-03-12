@@ -44,6 +44,14 @@ type UpdateMlflowTrackingServerInput struct {
 	// not specified, AutomaticModelRegistration defaults to False
 	AutomaticModelRegistration *bool
 
+	// The new expected Amazon Web Services account ID that owns the Amazon S3 bucket
+	// for artifact storage.
+	S3BucketOwnerAccountId *string
+
+	// Whether to enable or disable Amazon S3 Bucket Owenrship Verifaction whenever
+	// the MLflow Tracking Server interacts with Amazon Amazon S3.
+	S3BucketOwnerVerification *bool
+
 	// The new size for the MLflow Tracking Server.
 	TrackingServerSize types.TrackingServerSize
 

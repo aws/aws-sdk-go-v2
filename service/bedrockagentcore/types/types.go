@@ -20,10 +20,10 @@ type ActorSummary struct {
 }
 
 // The configuration for a stream that enables programmatic control of a browser
-// session in Amazon Bedrock. This stream provides a bidirectional communication
-// channel for sending commands to the browser and receiving responses, allowing
-// agents to automate web interactions such as navigation, form filling, and
-// element clicking.
+// session in Amazon Bedrock AgentCore. This stream provides a bidirectional
+// communication channel for sending commands to the browser and receiving
+// responses, allowing agents to automate web interactions such as navigation, form
+// filling, and element clicking.
 type AutomationStream struct {
 
 	// The endpoint URL for the automation stream. This URL is used to establish a
@@ -47,6 +47,27 @@ type AutomationStreamUpdate struct {
 
 	// The status of the automation stream.
 	StreamStatus AutomationStreamStatus
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for HTTP Basic Authentication using credentials stored in Amazon
+// Web Services Secrets Manager. The secret must contain a JSON object with
+// username and password string fields. Username allows alphanumeric characters
+// and @._+=- symbols (pattern: ^[a-zA-Z0-9@._+=\-]+$ ). Password allows
+// alphanumeric characters and @._+=-!#$%&* symbols (pattern:
+// ^[a-zA-Z0-9@._+=\-!#$%&*]+$ ). Both fields have a maximum length of 256
+// characters.
+type BasicAuth struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret containing proxy credentials. The secret must be a JSON object with
+	// username and password string fields that meet validation requirements. The
+	// caller must have secretsmanager:GetSecretValue permission for this ARN. Example
+	// secret format: {"username": "proxy_user", "password": "secure_password"}
+	//
+	// This member is required.
+	SecretArn *string
 
 	noSmithyDocumentSerde
 }
@@ -93,10 +114,27 @@ type BrowserExtension struct {
 	noSmithyDocumentSerde
 }
 
-// The collection of streams associated with a browser session in Amazon Bedrock.
-// These streams provide different ways to interact with and observe the browser
-// session, including programmatic control and visual representation of the browser
-// content.
+// The configuration for a browser profile in Amazon Bedrock AgentCore. A browser
+// profile contains persistent browser data such as cookies and local storage that
+// can be saved from one browser session and reused in subsequent sessions. Browser
+// profiles enable continuity for tasks that require authentication, maintain user
+// preferences, or depend on previously stored browser state.
+type BrowserProfileConfiguration struct {
+
+	// The unique identifier of the browser profile. This identifier is used to
+	// reference the profile when starting new browser sessions or saving session data
+	// to the profile.
+	//
+	// This member is required.
+	ProfileIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The collection of streams associated with a browser session in Amazon Bedrock
+// AgentCore. These streams provide different ways to interact with and observe the
+// browser session, including programmatic control and visual representation of the
+// browser content.
 type BrowserSessionStream struct {
 
 	// The stream that enables programmatic control of the browser. This stream allows
@@ -114,8 +152,8 @@ type BrowserSessionStream struct {
 	noSmithyDocumentSerde
 }
 
-// A condensed representation of a browser session in Amazon Bedrock. This
-// structure contains key information about a browser session, including
+// A condensed representation of a browser session in Amazon Bedrock AgentCore.
+// This structure contains key information about a browser session, including
 // identifiers, status, and timestamps, without the full details of the session
 // configuration and streams.
 type BrowserSessionSummary struct {
@@ -156,10 +194,10 @@ type BrowserSessionSummary struct {
 }
 
 // The output produced by executing code in a code interpreter session in Amazon
-// Bedrock. This structure contains the results of code execution, including
-// textual output, structured data, and error information. Agents use these results
-// to generate responses that incorporate computation, data analysis, and
-// visualization.
+// Bedrock AgentCore. This structure contains the results of code execution,
+// including textual output, structured data, and error information. Agents use
+// these results to generate responses that incorporate computation, data analysis,
+// and visualization.
 type CodeInterpreterResult struct {
 
 	// The textual content of the execution result. This includes standard output from
@@ -183,10 +221,10 @@ type CodeInterpreterResult struct {
 	noSmithyDocumentSerde
 }
 
-// A condensed representation of a code interpreter session in Amazon Bedrock.
-// This structure contains key information about a code interpreter session,
-// including identifiers, status, and timestamps, without the full details of the
-// session configuration.
+// A condensed representation of a code interpreter session in Amazon Bedrock
+// AgentCore. This structure contains key information about a code interpreter
+// session, including identifiers, status, and timestamps, without the full details
+// of the session configuration.
 type CodeInterpreterSessionSummary struct {
 
 	// The unique identifier of the code interpreter associated with the session. This
@@ -234,10 +272,10 @@ type CodeInterpreterStreamOutput interface {
 }
 
 // The output produced by executing code in a code interpreter session in Amazon
-// Bedrock. This structure contains the results of code execution, including
-// textual output, structured data, and error information. Agents use these results
-// to generate responses that incorporate computation, data analysis, and
-// visualization.
+// Bedrock AgentCore. This structure contains the results of code execution,
+// including textual output, structured data, and error information. Agents use
+// these results to generate responses that incorporate computation, data analysis,
+// and visualization.
 type CodeInterpreterStreamOutputMemberResult struct {
 	Value CodeInterpreterResult
 
@@ -532,6 +570,36 @@ type EventMetadataFilterExpression struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a customer-managed external proxy server. Includes server
+// location, optional domain-based routing patterns, and authentication
+// credentials.
+type ExternalProxy struct {
+
+	// The port number of the proxy server. Valid range: 1-65535.
+	//
+	// This member is required.
+	Port *int32
+
+	// The hostname of the proxy server. Must be a valid DNS hostname (maximum 253
+	// characters).
+	//
+	// This member is required.
+	Server *string
+
+	// Optional authentication credentials for the proxy server. If omitted, the proxy
+	// is accessed without authentication (useful for IP-allowlisted proxies).
+	Credentials ProxyCredentials
+
+	// Optional array of domain patterns that should route through this specific
+	// proxy. Supports .example.com for subdomain matching (matches any subdomain of
+	// example.com) or example.com for exact domain matching. If omitted, this proxy
+	// acts as a catch-all for domains not matched by other proxies. Maximum 100
+	// patterns per proxy, each up to 253 characters.
+	DomainPatterns []string
+
+	noSmithyDocumentSerde
+}
+
 // Represents the metadata of a memory extraction job such as the message
 // identifiers that compose this job.
 type ExtractionJob struct {
@@ -663,9 +731,9 @@ type LeftExpressionMemberMetadataKey struct {
 func (*LeftExpressionMemberMetadataKey) isLeftExpression() {}
 
 // The configuration for a stream that provides a visual representation of a
-// browser session in Amazon Bedrock. This stream enables agents to observe the
-// current state of the browser, including rendered web pages, visual elements, and
-// the results of interactions.
+// browser session in Amazon Bedrock AgentCore. This stream enables agents to
+// observe the current state of the browser, including rendered web pages, visual
+// elements, and the results of interactions.
 type LiveViewStream struct {
 
 	// The endpoint URL for the live view stream. This URL is used to establish a
@@ -942,6 +1010,80 @@ type PayloadTypeMemberConversational struct {
 
 func (*PayloadTypeMemberConversational) isPayloadType() {}
 
+// Union type representing different proxy configurations. Currently supports
+// external customer-managed proxies.
+//
+// The following types satisfy this interface:
+//
+//	ProxyMemberExternalProxy
+type Proxy interface {
+	isProxy()
+}
+
+// Configuration for an external customer-managed proxy server.
+type ProxyMemberExternalProxy struct {
+	Value ExternalProxy
+
+	noSmithyDocumentSerde
+}
+
+func (*ProxyMemberExternalProxy) isProxy() {}
+
+// Configuration for domains that should bypass all proxies and connect directly
+// to the internet. These bypass rules take precedence over all proxy routing
+// rules.
+type ProxyBypass struct {
+
+	// Array of domain patterns that should bypass the proxy. Supports .amazonaws.com
+	// for subdomain matching or amazonaws.com for exact domain matching. Requests to
+	// these domains connect directly without using any proxy. Maximum 253 characters
+	// per pattern.
+	DomainPatterns []string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for routing browser traffic through customer-managed proxy
+// servers. Supports 1-5 proxy servers for domain-based routing and proxy bypass
+// rules.
+type ProxyConfiguration struct {
+
+	// An array of 1-5 proxy server configurations for domain-based routing. Each
+	// proxy can specify which domains it handles via domainPatterns , enabling
+	// flexible routing of different traffic through different proxies based on
+	// destination domain.
+	//
+	// This member is required.
+	Proxies []Proxy
+
+	// Optional configuration for domains that should bypass all proxies and connect
+	// directly to their destination, like the internet. Takes precedence over all
+	// proxy routing rules.
+	Bypass *ProxyBypass
+
+	noSmithyDocumentSerde
+}
+
+// Union type representing different proxy authentication methods. Currently
+// supports HTTP Basic Authentication (username and password).
+//
+// The following types satisfy this interface:
+//
+//	ProxyCredentialsMemberBasicAuth
+type ProxyCredentials interface {
+	isProxyCredentials()
+}
+
+// HTTP Basic Authentication credentials (username and password) stored in Amazon
+// Web Services Secrets Manager.
+type ProxyCredentialsMemberBasicAuth struct {
+	Value BasicAuth
+
+	noSmithyDocumentSerde
+}
+
+func (*ProxyCredentialsMemberBasicAuth) isProxyCredentials() {}
+
 // Contains information about resource content.
 type ResourceContent struct {
 
@@ -1132,9 +1274,9 @@ type TokenUsage struct {
 }
 
 // The collection of arguments that specify the operation to perform and its
-// parameters when invoking a tool in Amazon Bedrock. Different tools require
-// different arguments, and this structure provides a flexible way to pass the
-// appropriate arguments to each tool type.
+// parameters when invoking a tool in Amazon Bedrock AgentCore. Different tools
+// require different arguments, and this structure provides a flexible way to pass
+// the appropriate arguments to each tool type.
 type ToolArguments struct {
 
 	// Whether to clear the context for the tool.
@@ -1284,6 +1426,8 @@ func (*UnknownUnionMember) isLeftExpression()              {}
 func (*UnknownUnionMember) isMemoryContent()               {}
 func (*UnknownUnionMember) isMetadataValue()               {}
 func (*UnknownUnionMember) isPayloadType()                 {}
+func (*UnknownUnionMember) isProxy()                       {}
+func (*UnknownUnionMember) isProxyCredentials()            {}
 func (*UnknownUnionMember) isResourceLocation()            {}
 func (*UnknownUnionMember) isRightExpression()             {}
 func (*UnknownUnionMember) isStreamUpdate()                {}

@@ -43,6 +43,9 @@ type CreateChannelInput struct {
 	// The desired engine version for this channel.
 	ChannelEngineVersion *types.ChannelEngineVersionRequest
 
+	// A list of IDs for all the Input Security Groups attached to the channel.
+	ChannelSecurityGroups []string
+
 	// Placeholder documentation for __listOfOutputDestination
 	Destinations []types.OutputDestination
 
@@ -51,6 +54,9 @@ type CreateChannelInput struct {
 
 	// Encoder Settings
 	EncoderSettings *types.EncoderSettings
+
+	// Include this setting to include Elemental Inference features in this channel.
+	InferenceSettings *types.InferenceSettings
 
 	// List of input attachments for channel.
 	InputAttachments []types.InputAttachment

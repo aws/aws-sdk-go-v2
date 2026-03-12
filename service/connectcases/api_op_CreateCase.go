@@ -17,6 +17,9 @@ import (
 // Creates a case in the specified Cases domain. Case system and custom fields are
 // taken as an array id/value pairs with a declared data types.
 //
+// When creating a case from a template that has tag propagation configurations,
+// the specified tags are automatically applied to the case.
+//
 // The following fields are required when creating a case:
 //
 //   - customer_id - You must provide the full customer profile ARN in this format:
@@ -68,6 +71,10 @@ type CreateCaseInput struct {
 
 	// Represents the entity that performed the action.
 	PerformedBy types.UserUnion
+
+	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// organize, track, or control access for this resource.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

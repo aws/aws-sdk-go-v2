@@ -71,13 +71,13 @@
                 "updatedOnBehalfOf": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information\n            is only available when a Technical Account Manager takes an action on a recommendation managed by AWS\n            Trusted Advisor Priority\n        </p>"
+                        "smithy.api#documentation": "<p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>"
                     }
                 },
                 "updatedOnBehalfOfJobTitle": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation.\n            This information is only available when a Technical Account Manager takes an action on a recommendation\n            managed by AWS Trusted Advisor Priority\n        </p>"
+                        "smithy.api#documentation": "<p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>"
                     }
                 },
                 "updateReason": {
@@ -136,7 +136,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update one or more exclusion status for a list of recommendation resources</p>",
+                "smithy.api#documentation": "<p>Update one or more exclusion statuses for a list of recommendation resources. This API supports up to 25 unique recommendation resource ARNs per request. This API currently doesn't support prioritized recommendation resources. This API updates global recommendations, eliminating the need to call the API in each AWS Region. After submitting an exclusion update, note that it might take a few minutes for the changes to be reflected in the system.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Batch updates the exclusion status for a list of recommendation resources",
@@ -165,7 +165,10 @@
                     "code": 200
                 },
                 "smithy.api#idempotent": {},
-                "smithy.api#tags": []
+                "smithy.api#tags": [
+                    "not_aws-cn_prod",
+                    "not_aws-us-gov_prod"
+                ]
             }
         },
         "com.amazonaws.trustedadvisor#BatchUpdateRecommendationResourceExclusionRequest": {
@@ -347,7 +350,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get a specific recommendation within an AWS Organizations organization. This API supports only prioritized\n            recommendations.\n        </p>",
+                "smithy.api#documentation": "<p>Get a specific recommendation within an AWS Organizations organization. This API supports only prioritized recommendations and provides global priority recommendations, eliminating the need to call the API in each AWS Region. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Get an AWS Organization's Recommendation by ARN",
@@ -445,7 +448,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get a specific Recommendation</p>",
+                "smithy.api#documentation": "<p>Get a specific Recommendation. This API provides global recommendations, eliminating the need to call the API in each AWS Region.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Get a Recommendation by ARN",
@@ -502,6 +505,13 @@
                         "smithy.api#documentation": "<p>The Recommendation identifier</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "language": {
+                    "target": "com.amazonaws.trustedadvisor#RecommendationLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>",
+                        "smithy.api#httpQuery": "language"
                     }
                 }
             },
@@ -563,7 +573,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List a filterable set of Checks</p>",
+                "smithy.api#documentation": "<p>List a filterable set of Checks. This API provides global recommendations, eliminating the need to call the API in each AWS Region.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "List all AWS Trusted Advisor Checks",
@@ -676,7 +686,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#httpQuery": "nextToken",
                         "smithy.api#length": {
                             "min": 4,
@@ -734,7 +744,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#length": {
                             "min": 4,
                             "max": 10000
@@ -779,7 +789,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the accounts that own the resources for an organization aggregate recommendation. This API only\n            supports prioritized recommendations.\n        </p>",
+                "smithy.api#documentation": "<p>Lists the accounts that own the resources for an organization aggregate recommendation. This API only supports prioritized recommendations and provides global priority recommendations, eliminating the need to call the API in each AWS Region. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "List all Accounts for an AWS Organization's Recommendation",
@@ -822,7 +832,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#httpQuery": "nextToken",
                         "smithy.api#length": {
                             "min": 4,
@@ -867,7 +877,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#length": {
                             "min": 4,
                             "max": 10000
@@ -912,7 +922,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List Resources of a Recommendation within an Organization. This API only supports prioritized\n            recommendations.\n        </p>",
+                "smithy.api#documentation": "<p>List Resources of a Recommendation within an Organization. This API only supports prioritized recommendations and provides global priority recommendations, eliminating the need to call the API in each AWS Region. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "List all Resources for an AWS Organization's Recommendation",
@@ -1007,7 +1017,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#httpQuery": "nextToken",
                         "smithy.api#length": {
                             "min": 4,
@@ -1073,7 +1083,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#length": {
                             "min": 4,
                             "max": 10000
@@ -1115,7 +1125,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List a filterable set of Recommendations within an Organization. This API only supports prioritized\n            recommendations.\n        </p>",
+                "smithy.api#documentation": "<p>List a filterable set of Recommendations within an Organization. This API only supports prioritized recommendations and provides global priority recommendations, eliminating the need to call the API in each AWS Region. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "List all of an AWS Organization's Recommendations",
@@ -1256,7 +1266,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#httpQuery": "nextToken",
                         "smithy.api#length": {
                             "min": 4,
@@ -1342,7 +1352,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#length": {
                             "min": 4,
                             "max": 10000
@@ -1387,7 +1397,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List Resources of a Recommendation</p>",
+                "smithy.api#documentation": "<p>List Resources of a Recommendation. This API provides global recommendations, eliminating the need to call the API in each AWS Region.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "List all Resources for a Recommendation",
@@ -1482,7 +1492,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#httpQuery": "nextToken",
                         "smithy.api#length": {
                             "min": 4,
@@ -1497,7 +1507,7 @@
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
-                            "max": 200
+                            "max": 5000
                         }
                     }
                 },
@@ -1529,6 +1539,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "language": {
+                    "target": "com.amazonaws.trustedadvisor#RecommendationLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>",
+                        "smithy.api#httpQuery": "language"
+                    }
                 }
             },
             "traits": {
@@ -1541,7 +1558,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#length": {
                             "min": 4,
                             "max": 10000
@@ -1583,7 +1600,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List a filterable set of Recommendations</p>",
+                "smithy.api#documentation": "<p>List a filterable set of Recommendations. This API provides global recommendations, eliminating the need to call the API in each AWS Region.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "List all Recommendations",
@@ -1748,7 +1765,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#httpQuery": "nextToken",
                         "smithy.api#length": {
                             "min": 4,
@@ -1822,6 +1839,13 @@
                         "smithy.api#documentation": "<p>Before the last update of the Recommendation</p>",
                         "smithy.api#httpQuery": "beforeLastUpdatedAt"
                     }
+                },
+                "language": {
+                    "target": "com.amazonaws.trustedadvisor#RecommendationLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>",
+                        "smithy.api#httpQuery": "language"
+                    }
                 }
             },
             "traits": {
@@ -1834,7 +1858,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request\n            to retrieve the next set of results.\n        </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
                         "smithy.api#length": {
                             "min": 4,
                             "max": 10000
@@ -1966,13 +1990,13 @@
                 "updatedOnBehalfOf": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information\n            is only available when a Technical Account Manager takes an action on a recommendation managed by AWS\n            Trusted Advisor Priority\n        </p>"
+                        "smithy.api#documentation": "<p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>"
                     }
                 },
                 "updatedOnBehalfOfJobTitle": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation.\n            This information is only available when a Technical Account Manager takes an action on a recommendation\n            managed by AWS Trusted Advisor Priority\n        </p>"
+                        "smithy.api#documentation": "<p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>"
                     }
                 },
                 "updateReason": {
@@ -2039,7 +2063,7 @@
                 "awsResourceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS resource identifier</p>",
+                        "smithy.api#documentation": "<p>The AWS resource identifier. There are certain checks that generate recommendation resources without an awsResourceId.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2308,6 +2332,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "statusReason": {
+                    "target": "com.amazonaws.trustedadvisor#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This attribute provides additional details about potential discrepancies in check status determination.</p>"
+                    }
+                },
                 "description": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -2324,13 +2354,13 @@
                 "updatedOnBehalfOf": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information\n            is only available when a Technical Account Manager takes an action on a recommendation managed by AWS\n            Trusted Advisor Priority\n        </p>"
+                        "smithy.api#documentation": "<p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>"
                     }
                 },
                 "updatedOnBehalfOfJobTitle": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation.\n            This information is only available when a Technical Account Manager takes an action on a recommendation\n            managed by AWS Trusted Advisor Priority\n        </p>"
+                        "smithy.api#documentation": "<p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>"
                     }
                 },
                 "updateReason": {
@@ -2544,6 +2574,10 @@
                 "target": "com.amazonaws.trustedadvisor#RecommendationPillar"
             },
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
                 "smithy.api#uniqueItems": {}
             }
         },
@@ -2610,7 +2644,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 100
+                    "max": 25
                 },
                 "smithy.api#uniqueItems": {}
             }
@@ -2635,7 +2669,7 @@
                 "awsResourceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS resource identifier</p>",
+                        "smithy.api#documentation": "<p>The AWS resource identifier. There are certain checks that generate recommendation resources without an awsResourceId.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2706,7 +2740,7 @@
                 "warningCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of AWS resources that were flagged to have warning according to the Trusted Advisor check\n        </p>",
+                        "smithy.api#documentation": "<p>The number of AWS resources that were flagged to have warning according to the Trusted Advisor check </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2715,6 +2749,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of AWS resources that were flagged to have errors according to the Trusted Advisor check</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "excludedCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of AWS resources belonging to this Trusted Advisor check that were excluded by the customer</p>"
                     }
                 }
             },
@@ -2801,6 +2841,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "well_architected"
+                    }
+                },
+                "COST_OPTIMIZATION_HUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cost_optimization_hub"
                     }
                 }
             }
@@ -2924,6 +2970,12 @@
                         "smithy.api#documentation": "<p>The ARN of the Recommendation</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.trustedadvisor#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This attribute provides additional details about potential discrepancies in check status determination.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2999,6 +3051,17 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "error"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.trustedadvisor#StatusReason": {
+            "type": "enum",
+            "members": {
+                "NO_DATA_OK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "no_data_ok"
                     }
                 }
             }
@@ -3768,7 +3831,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the lifecycle of a Recommendation within an Organization. This API only supports prioritized\n            recommendations.\n        </p>",
+                "smithy.api#documentation": "<p>Update the lifecycle of a Recommendation within an Organization. This API only supports prioritized recommendations and updates global priority recommendations, eliminating the need to call the API in each AWS Region. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Update the lifecycle stage of an AWS Organization's Recommendation that is managed by AWS Trusted Advisor Priority",
@@ -3854,7 +3917,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the lifecyle of a Recommendation. This API only supports prioritized recommendations.</p>",
+                "smithy.api#documentation": "<p>Update the lifecyle of a Recommendation. This API only supports prioritized recommendations and updates global priority recommendations, eliminating the need to call the API in each AWS Region.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Update the lifecycle stage of a Recommendation managed by AWS Trusted Advisor Priority",

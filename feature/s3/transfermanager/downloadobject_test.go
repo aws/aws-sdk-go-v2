@@ -25,7 +25,7 @@ func TestDownloadObject(t *testing.T) {
 		data                 []byte
 		errReaders           []s3testing.TestErrReader
 		getObjectFn          func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
-		options              Options
+		optFn                func(*Options)
 		expectInvocations    int
 		expectRanges         []string
 		versionID            string
@@ -41,9 +41,9 @@ func TestDownloadObject(t *testing.T) {
 		"range download in order": {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
-			options: Options{
-				Concurrency:   1,
-				GetObjectType: types.GetObjectRanges,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 3,
 			expectRanges:      []string{"bytes=0-8388607", "bytes=8388608-16777215", "bytes=16777216-20971519"},
@@ -58,8 +58,8 @@ func TestDownloadObject(t *testing.T) {
 		"range download zero": {
 			data:        []byte{},
 			getObjectFn: s3testing.RangeGetObjectFn,
-			options: Options{
-				GetObjectType: types.GetObjectRanges,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 1,
 			expectRanges:      []string{"bytes=0-8388607"},
@@ -72,10 +72,10 @@ func TestDownloadObject(t *testing.T) {
 		"range download with customized part size with version ID": {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
-			options: Options{
-				Concurrency:   1,
-				GetObjectType: types.GetObjectRanges,
-				PartSizeBytes: 10 * 1024 * 1024,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+				o.GetObjectType = types.GetObjectRanges
+				o.PartSizeBytes = 10 * 1024 * 1024
 			},
 			versionID:         vID,
 			expectInvocations: 2,
@@ -91,9 +91,9 @@ func TestDownloadObject(t *testing.T) {
 		"range download with s3 error": {
 			data:        buf20MB,
 			getObjectFn: s3testing.ErrRangeGetObjectFn,
-			options: Options{
-				Concurrency:   1,
-				GetObjectType: types.GetObjectRanges,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 2,
 			expectErr:         "s3 service error",
@@ -105,9 +105,9 @@ func TestDownloadObject(t *testing.T) {
 		"range download with content mismatch error": {
 			data:        buf20MB,
 			getObjectFn: s3testing.MismatchRangeGetObjectFn,
-			options: Options{
-				Concurrency:   1,
-				GetObjectType: types.GetObjectRanges,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 2,
 			expectErr:         "PreconditionFailed",
@@ -119,9 +119,9 @@ func TestDownloadObject(t *testing.T) {
 		"range download with resp range mismatch error": {
 			data:        buf20MB,
 			getObjectFn: s3testing.WrongRangeGetObjectFn,
-			options: Options{
-				Concurrency:   1,
-				GetObjectType: types.GetObjectRanges,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 2,
 			expectErr:         "range mismatch between request",
@@ -133,8 +133,8 @@ func TestDownloadObject(t *testing.T) {
 		"content length download single chunk": {
 			data:        buf2MB,
 			getObjectFn: s3testing.NonRangeGetObjectFn,
-			options: Options{
-				GetObjectType: types.GetObjectRanges,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 1,
 			expectRanges:      []string{"bytes=0-8388607"},
@@ -155,9 +155,9 @@ func TestDownloadObject(t *testing.T) {
 		"range download single chunk with version ID": {
 			data:        buf2MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
-			options: Options{
-				Concurrency:   1,
-				GetObjectType: types.GetObjectRanges,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+				o.GetObjectType = types.GetObjectRanges
 			},
 			versionID:         vID,
 			expectInvocations: 1,
@@ -183,9 +183,9 @@ func TestDownloadObject(t *testing.T) {
 				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
-			options: Options{
-				Concurrency:   1,
-				GetObjectType: types.GetObjectRanges,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 2,
 			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
@@ -203,9 +203,9 @@ func TestDownloadObject(t *testing.T) {
 			errReaders: []s3testing.TestErrReader{
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
-			options: Options{
-				Concurrency:   1,
-				GetObjectType: types.GetObjectRanges,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 1,
 			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
@@ -223,10 +223,10 @@ func TestDownloadObject(t *testing.T) {
 			errReaders: []s3testing.TestErrReader{
 				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
 			},
-			options: Options{
-				Concurrency:        1,
-				PartBodyMaxRetries: 1,
-				GetObjectType:      types.GetObjectRanges,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+				o.PartBodyMaxRetries = 1
+				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 1,
 			expectErr:         "unexpected EOF",
@@ -244,8 +244,8 @@ func TestDownloadObject(t *testing.T) {
 		"parts download in order": {
 			data:        buf2MB,
 			getObjectFn: s3testing.PartGetObjectFn,
-			options: Options{
-				Concurrency: 1,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
 			},
 			partsCount:        3,
 			versionID:         vID,
@@ -260,8 +260,8 @@ func TestDownloadObject(t *testing.T) {
 		"parts download in order with composite checksum type": {
 			data:        buf2MB,
 			getObjectFn: s3testing.CompositePartGetObjectFn,
-			options: Options{
-				Concurrency: 1,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
 			},
 			partsCount:        3,
 			versionID:         vID,
@@ -277,8 +277,8 @@ func TestDownloadObject(t *testing.T) {
 		"part download zero": {
 			data:              buf2MB,
 			getObjectFn:       s3testing.PartGetObjectFn,
-			options:           Options{},
 			partsCount:        1,
+			optFn:             func(o *Options) {},
 			expectInvocations: 1,
 			expectParts:       []int32{1},
 			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
@@ -289,8 +289,8 @@ func TestDownloadObject(t *testing.T) {
 		"part download with s3 error": {
 			data:        buf2MB,
 			getObjectFn: s3testing.ErrPartGetObjectFn,
-			options: Options{
-				Concurrency: 1,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
 			},
 			partsCount:        3,
 			expectInvocations: 2,
@@ -302,8 +302,8 @@ func TestDownloadObject(t *testing.T) {
 		"part download with mismatch error": {
 			data:        buf2MB,
 			getObjectFn: s3testing.MismatchPartGetObjectFn,
-			options: Options{
-				Concurrency: 1,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
 			},
 			partsCount:        3,
 			expectInvocations: 2,
@@ -315,8 +315,8 @@ func TestDownloadObject(t *testing.T) {
 		"part download single chunk": {
 			data:              []byte("123"),
 			getObjectFn:       s3testing.PartGetObjectFn,
-			options:           Options{},
 			partsCount:        1,
+			optFn:             func(o *Options) {},
 			expectInvocations: 1,
 			expectParts:       []int32{1},
 			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
@@ -335,8 +335,8 @@ func TestDownloadObject(t *testing.T) {
 				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
-			options: Options{
-				Concurrency: 1,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
 			},
 			partsCount:        1,
 			expectInvocations: 2,
@@ -356,8 +356,8 @@ func TestDownloadObject(t *testing.T) {
 			errReaders: []s3testing.TestErrReader{
 				{Buf: []byte("ab"), Len: 3, Err: io.EOF},
 			},
-			options: Options{
-				Concurrency: 1,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
 			},
 			partsCount:        1,
 			expectInvocations: 1,
@@ -377,9 +377,9 @@ func TestDownloadObject(t *testing.T) {
 			errReaders: []s3testing.TestErrReader{
 				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
 			},
-			options: Options{
-				Concurrency:        1,
-				PartBodyMaxRetries: 1,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+				o.PartBodyMaxRetries = 1
 			},
 			expectInvocations: 1,
 			expectErr:         "unexpected EOF",
@@ -403,7 +403,8 @@ func TestDownloadObject(t *testing.T) {
 			s3Client.GetObjectFn = c.getObjectFn
 			s3Client.ErrReaders = c.errReaders
 			s3Client.PartsCount = c.partsCount
-			mgr := New(s3Client, c.options)
+
+			mgr := New(s3Client, c.optFn)
 			w := types.NewWriteAtBuffer(make([]byte, 0))
 
 			input := &DownloadObjectInput{
@@ -416,7 +417,7 @@ func TestDownloadObject(t *testing.T) {
 			listener := &mockListener{}
 
 			output, err := mgr.DownloadObject(context.Background(), input, func(o *Options) {
-				o.ProgressListeners.Register(listener)
+				o.ObjectProgressListeners.Register(listener)
 			})
 			if err != nil {
 				if c.expectErr == "" {
@@ -492,11 +493,12 @@ func TestDownloadAsyncWithFailure(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			reqCount := int64(0)
+			reqCount := atomic.Int64{}
 
 			s3Client := &s3testing.TransferManagerLoggingClient{}
 			s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (out *s3.GetObjectOutput, err error) {
-				switch atomic.LoadInt64(&reqCount) {
+				count := reqCount.Load()
+				switch count {
 				case 1:
 					// Give a chance for the multipart chunks to be queued up
 					time.Sleep(1 * time.Second)
@@ -509,25 +511,25 @@ func TestDownloadAsyncWithFailure(t *testing.T) {
 							return
 						}
 					}
-					body := bytes.NewReader(make([]byte, minPartSizeBytes))
+					body := bytes.NewReader(make([]byte, defaultPartSizeBytes))
 					out = &s3.GetObjectOutput{
 						Body:          io.NopCloser(body),
 						ContentLength: aws.Int64(int64(body.Len())),
 						ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, end, body.Len()*10)),
 						PartsCount:    aws.Int32(10),
 					}
-					if reqCount > 0 {
+					if count > 0 {
 						// sleep here to ensure context switching between goroutines
 						time.Sleep(25 * time.Millisecond)
 					}
 				}
-				atomic.AddInt64(&reqCount, 1)
+				reqCount.Add(1)
 				return out, err
 			}
 
-			d := New(s3Client, Options{
-				Concurrency:   2,
-				GetObjectType: c.downloadType,
+			d := New(s3Client, func(o *Options) {
+				o.Concurrency = 2
+				o.GetObjectType = c.downloadType
 			})
 
 			w := types.NewWriteAtBuffer(make([]byte, 0))
@@ -544,8 +546,8 @@ func TestDownloadAsyncWithFailure(t *testing.T) {
 				t.Fatalf("expect %s error message to be in %s", e, a)
 			}
 
-			if atomic.LoadInt64(&reqCount) > 3 {
-				t.Errorf("expect no more than 3 requests, but received %d", reqCount)
+			if count := reqCount.Load(); count > 3 {
+				t.Errorf("expect no more than 3 requests, but received %d", count)
 			}
 		})
 	}
@@ -565,8 +567,8 @@ func TestDownloadObjectWithContextCanceled(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			d := New(s3.New(s3.Options{
 				Region: "mock-region",
-			}), Options{
-				GetObjectType: c.downloadType,
+			}), func(o *Options) {
+				o.GetObjectType = c.downloadType
 			})
 
 			ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}

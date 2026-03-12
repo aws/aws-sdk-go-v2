@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the results of the Security Hub insight specified by the insight ARN.
+// Lists the results of the Security Hub CSPM insight specified by the insight ARN.
 func (c *Client) GetInsightResults(ctx context.Context, params *GetInsightResultsInput, optFns ...func(*Options)) (*GetInsightResultsOutput, error) {
 	if params == nil {
 		params = &GetInsightResultsInput{}

@@ -469,6 +469,36 @@ type CompatibleVersionsMap struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the deployment strategy options for the domain.
+type DeploymentStrategyOptions struct {
+
+	// Specifies the deployment strategy for the domain. Valid values are Default and
+	// CapacityOptimized .
+	//
+	// This member is required.
+	DeploymentStrategy DeploymentStrategy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the status of deployment strategy options for the specified
+// Elasticsearch domain.
+type DeploymentStrategyOptionsStatus struct {
+
+	// Specifies deployment strategy options for the specified Elasticsearch domain.
+	//
+	// This member is required.
+	Options *DeploymentStrategyOptions
+
+	// Specifies the status of the deployment strategy options for the specified
+	// Elasticsearch domain.
+	//
+	// This member is required.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
 // Filter to apply in DescribePackage response.
 type DescribePackagesFilter struct {
 
@@ -759,6 +789,9 @@ type ElasticsearchDomainConfig struct {
 	// [Amazon Cognito Authentication for Kibana]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
 	CognitoOptions *CognitoOptionsStatus
 
+	// Specifies DeploymentStrategyOptions for the domain.
+	DeploymentStrategyOptions *DeploymentStrategyOptionsStatus
+
 	// Specifies the DomainEndpointOptions for the Elasticsearch domain.
 	DomainEndpointOptions *DomainEndpointOptionsStatus
 
@@ -852,6 +885,9 @@ type ElasticsearchDomainStatus struct {
 	// been deleted. Once domain deletion is complete, the status of the domain is no
 	// longer returned.
 	Deleted *bool
+
+	// The current status of the Elasticsearch domain's deployment strategy options.
+	DeploymentStrategyOptions *DeploymentStrategyOptions
 
 	// The current status of the Elasticsearch domain's endpoint options.
 	DomainEndpointOptions *DomainEndpointOptions

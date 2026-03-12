@@ -350,6 +350,26 @@ func (m *validateOpDeleteBotAlias) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteBotAnalyzerRecommendation struct {
+}
+
+func (*validateOpDeleteBotAnalyzerRecommendation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBotAnalyzerRecommendation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBotAnalyzerRecommendationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBotAnalyzerRecommendationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBot struct {
 }
 
@@ -645,6 +665,26 @@ func (m *validateOpDescribeBotAlias) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeBotAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeBotAnalyzerRecommendation struct {
+}
+
+func (*validateOpDescribeBotAnalyzerRecommendation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBotAnalyzerRecommendation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBotAnalyzerRecommendationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBotAnalyzerRecommendationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1085,6 +1125,26 @@ func (m *validateOpListBotAliasReplicas) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListBotAliasReplicasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListBotAnalyzerHistory struct {
+}
+
+func (*validateOpListBotAnalyzerHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBotAnalyzerHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBotAnalyzerHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBotAnalyzerHistoryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1670,6 +1730,26 @@ func (m *validateOpSearchAssociatedTranscripts) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartBotAnalyzer struct {
+}
+
+func (*validateOpStartBotAnalyzer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartBotAnalyzer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartBotAnalyzerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartBotAnalyzerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartBotRecommendation struct {
 }
 
@@ -1765,6 +1845,26 @@ func (m *validateOpStartTestSetGeneration) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartTestSetGenerationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopBotAnalyzer struct {
+}
+
+func (*validateOpStopBotAnalyzer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopBotAnalyzer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopBotAnalyzerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopBotAnalyzerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2098,6 +2198,10 @@ func addOpDeleteBotAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBotAlias{}, middleware.After)
 }
 
+func addOpDeleteBotAnalyzerRecommendationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBotAnalyzerRecommendation{}, middleware.After)
+}
+
 func addOpDeleteBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBot{}, middleware.After)
 }
@@ -2156,6 +2260,10 @@ func addOpDeleteUtterancesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeBotAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeBotAlias{}, middleware.After)
+}
+
+func addOpDescribeBotAnalyzerRecommendationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBotAnalyzerRecommendation{}, middleware.After)
 }
 
 func addOpDescribeBotValidationMiddleware(stack *middleware.Stack) error {
@@ -2244,6 +2352,10 @@ func addOpListBotAliasesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListBotAliasReplicasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBotAliasReplicas{}, middleware.After)
+}
+
+func addOpListBotAnalyzerHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBotAnalyzerHistory{}, middleware.After)
 }
 
 func addOpListBotLocalesValidationMiddleware(stack *middleware.Stack) error {
@@ -2362,6 +2474,10 @@ func addOpSearchAssociatedTranscriptsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpSearchAssociatedTranscripts{}, middleware.After)
 }
 
+func addOpStartBotAnalyzerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartBotAnalyzer{}, middleware.After)
+}
+
 func addOpStartBotRecommendationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartBotRecommendation{}, middleware.After)
 }
@@ -2380,6 +2496,10 @@ func addOpStartTestExecutionValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpStartTestSetGenerationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartTestSetGeneration{}, middleware.After)
+}
+
+func addOpStopBotAnalyzerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopBotAnalyzer{}, middleware.After)
 }
 
 func addOpStopBotRecommendationValidationMiddleware(stack *middleware.Stack) error {
@@ -7219,6 +7339,24 @@ func validateOpDeleteBotAliasInput(v *DeleteBotAliasInput) error {
 	}
 }
 
+func validateOpDeleteBotAnalyzerRecommendationInput(v *DeleteBotAnalyzerRecommendationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBotAnalyzerRecommendationInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.BotAnalyzerRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotAnalyzerRequestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBotInput(v *DeleteBotInput) error {
 	if v == nil {
 		return nil
@@ -7490,6 +7628,24 @@ func validateOpDescribeBotAliasInput(v *DescribeBotAliasInput) error {
 	}
 	if v.BotId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBotAnalyzerRecommendationInput(v *DescribeBotAnalyzerRecommendationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBotAnalyzerRecommendationInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.BotAnalyzerRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotAnalyzerRequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7918,6 +8074,21 @@ func validateOpListBotAliasReplicasInput(v *ListBotAliasReplicasInput) error {
 	}
 	if v.ReplicaRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicaRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListBotAnalyzerHistoryInput(v *ListBotAnalyzerHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBotAnalyzerHistoryInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8691,6 +8862,24 @@ func validateOpSearchAssociatedTranscriptsInput(v *SearchAssociatedTranscriptsIn
 	}
 }
 
+func validateOpStartBotAnalyzerInput(v *StartBotAnalyzerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartBotAnalyzerInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if len(v.AnalysisScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisScope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartBotRecommendationInput(v *StartBotRecommendationInput) error {
 	if v == nil {
 		return nil
@@ -8817,6 +9006,24 @@ func validateOpStartTestSetGenerationInput(v *StartTestSetGenerationInput) error
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopBotAnalyzerInput(v *StopBotAnalyzerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopBotAnalyzerInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.BotAnalyzerRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotAnalyzerRequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

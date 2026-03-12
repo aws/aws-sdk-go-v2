@@ -1599,6 +1599,8 @@ const (
 	OpportunitySortNameLastModifieddate    OpportunitySortName = "LastModifiedDate"
 	OpportunitySortNameIdentifier          OpportunitySortName = "Identifier"
 	OpportunitySortNameCustomerCompanyName OpportunitySortName = "CustomerCompanyName"
+	OpportunitySortNameCreatedDate         OpportunitySortName = "CreatedDate"
+	OpportunitySortNameTargetCloseDate     OpportunitySortName = "TargetCloseDate"
 )
 
 // Values returns all known values for OpportunitySortName. Note that this can be
@@ -1610,6 +1612,8 @@ func (OpportunitySortName) Values() []OpportunitySortName {
 		"LastModifiedDate",
 		"Identifier",
 		"CustomerCompanyName",
+		"CreatedDate",
+		"TargetCloseDate",
 	}
 }
 

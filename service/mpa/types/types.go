@@ -113,6 +113,19 @@ type GetApprovalTeamResponseApprover struct {
 	// ID for the approver.
 	ApproverId *string
 
+	// Last Activity performed by the approver.
+	LastActivity ApproverLastActivity
+
+	// Timestamp when the approver last responded to an operation or invitation
+	// request.
+	LastActivityTime *time.Time
+
+	// Multi-factor authentication configuration for the approver
+	MfaMethods []MfaMethod
+
+	// Amazon Resource Name (ARN) for the pending baseline session.
+	PendingBaselineSessionArn *string
+
 	// ID for the user.
 	PrimaryIdentityId *string
 
@@ -361,6 +374,9 @@ type ListSessionsResponseSession struct {
 	// Name of the protected operation.
 	ActionName *string
 
+	// A list of AdditionalSecurityRequirement applied to the session.
+	AdditionalSecurityRequirements []AdditionalSecurityRequirement
+
 	// Amazon Resource Name (ARN) for the approval team.
 	ApprovalTeamArn *string
 
@@ -409,6 +425,22 @@ type ListSessionsResponseSession struct {
 
 	// Message describing the status for session.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// MFA configuration and sycnronization status for an approver
+type MfaMethod struct {
+
+	// Indicates if the approver's MFA device is in-sync with the Identity Source
+	//
+	// This member is required.
+	SyncStatus MfaSyncStatus
+
+	// The type of MFA configuration used by the approver
+	//
+	// This member is required.
+	Type MfaType
 
 	noSmithyDocumentSerde
 }
@@ -467,11 +499,6 @@ type PendingUpdate struct {
 
 // Contains details for a policy. Policies define what operations a team that
 // define the permissions for team resources.
-//
-// The protected operation for a service integration might require specific
-// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-//
-// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 type Policy struct {
 
 	// Amazon Resource Name (ARN) for the policy.
@@ -499,11 +526,6 @@ type Policy struct {
 
 // Contains the Amazon Resource Name (ARN) for a policy. Policies define what
 // operations a team that define the permissions for team resources.
-//
-// The protected operation for a service integration might require specific
-// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-//
-// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 type PolicyReference struct {
 
 	// Amazon Resource Name (ARN) for the policy.
@@ -516,11 +538,6 @@ type PolicyReference struct {
 
 // Contains details for the version of a policy. Policies define what operations a
 // team that define the permissions for team resources.
-//
-// The protected operation for a service integration might require specific
-// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-//
-// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 type PolicyVersion struct {
 
 	// Amazon Resource Name (ARN) for the team.
@@ -565,7 +582,7 @@ type PolicyVersion struct {
 
 	// Status for the policy. For example, if the policy is [attachable] or [deprecated].
 	//
-	// [deprecated]: https://docs.aws.amazon.com/access_policies_managed-deprecated.html
+	// [deprecated]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-deprecated.html
 	// [attachable]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_attach-policy.html
 	//
 	// This member is required.
@@ -581,11 +598,6 @@ type PolicyVersion struct {
 
 // Contains details for the version of a policy. Policies define what operations a
 // team that define the permissions for team resources.
-//
-// The protected operation for a service integration might require specific
-// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-//
-// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 type PolicyVersionSummary struct {
 
 	// Amazon Resource Name (ARN) for the team.
@@ -625,7 +637,7 @@ type PolicyVersionSummary struct {
 
 	// Status for the policy. For example, if the policy is [attachable] or [deprecated].
 	//
-	// [deprecated]: https://docs.aws.amazon.com/access_policies_managed-deprecated.html
+	// [deprecated]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-deprecated.html
 	// [attachable]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_attach-policy.html
 	//
 	// This member is required.

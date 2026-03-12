@@ -205,6 +205,11 @@ func awsRestjson1_serializeOpDocumentCreateConnectorInput(v *CreateConnectorInpu
 		}
 	}
 
+	if v.VpcEndpointId != nil {
+		ok := object.Key("VpcEndpointId")
+		ok.String(*v.VpcEndpointId)
+	}
+
 	return nil
 }
 

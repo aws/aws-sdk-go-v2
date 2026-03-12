@@ -37,7 +37,7 @@ type GetTileInput struct {
 
 	// Specifies the desired tile set.
 	//
-	// Valid Values: raster.satellite | vector.basemap
+	// Valid Values: raster.satellite | vector.basemap | vector.traffic | raster.dem
 	//
 	// This member is required.
 	Tileset *string

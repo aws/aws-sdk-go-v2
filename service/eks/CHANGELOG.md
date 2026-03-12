@@ -1,3 +1,32 @@
+# v1.81.0 (2026-03-11)
+
+* **Feature**: Adds support for a new tier in controlPlaneScalingConfig on EKS Clusters.
+
+# v1.80.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.80.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.80.0 (2026-02-11)
+
+* **Feature**: This release adds support for Windows Server 2025 in Amazon EKS Managed Node Groups.
+
+# v1.79.0 (2026-02-10.2)
+
+* **Feature**: Introducing an optional policy field, an IAM policy applied to pod identity associations in addition to IAM role policies. When specified, pod permissions are the intersection of IAM role policies and the policy field, ensuring the principle of least privilege.
+
+# v1.78.0 (2026-02-10)
+
+* **Feature**: Amazon EKS adds a new DescribeUpdate update type, VendedLogsUpdate, to support an integration between EKS Auto Mode and Amazon CloudWatch Vended Logs.
+
+# v1.77.1 (2026-02-04)
+
+* **Documentation**: Update delete cluster description
+
 # v1.77.0 (2026-01-14)
 
 * **Feature**: Added support for BOTTLEROCKET NVIDIA FIPS AMIs to AMI types in US regions.

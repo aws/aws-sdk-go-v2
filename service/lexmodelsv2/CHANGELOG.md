@@ -1,3 +1,16 @@
+# v1.60.0 (2026-03-10)
+
+* **Feature**: This release introduces a new generative AI feature called Lex Bot Analyzer. This feature leverage AI to analyze the bot configuration against AWS Lex best practices to identify configuration issues and provides recommendations.
+
+# v1.59.5 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.59.4 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.3 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

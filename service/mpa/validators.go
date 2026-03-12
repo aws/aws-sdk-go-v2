@@ -310,6 +310,26 @@ func (m *validateOpStartActiveApprovalTeamDeletion) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartApprovalTeamBaseline struct {
+}
+
+func (*validateOpStartApprovalTeamBaseline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartApprovalTeamBaseline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartApprovalTeamBaselineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartApprovalTeamBaselineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -428,6 +448,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpStartActiveApprovalTeamDeletionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartActiveApprovalTeamDeletion{}, middleware.After)
+}
+
+func addOpStartApprovalTeamBaselineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartApprovalTeamBaseline{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -830,6 +854,21 @@ func validateOpStartActiveApprovalTeamDeletionInput(v *StartActiveApprovalTeamDe
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartActiveApprovalTeamDeletionInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartApprovalTeamBaselineInput(v *StartApprovalTeamBaselineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartApprovalTeamBaselineInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}

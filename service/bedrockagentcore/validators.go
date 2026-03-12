@@ -570,6 +570,26 @@ func (m *validateOpRetrieveMemoryRecords) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSaveBrowserSessionProfile struct {
+}
+
+func (*validateOpSaveBrowserSessionProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSaveBrowserSessionProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SaveBrowserSessionProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSaveBrowserSessionProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartBrowserSession struct {
 }
 
@@ -822,6 +842,10 @@ func addOpRetrieveMemoryRecordsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpRetrieveMemoryRecords{}, middleware.After)
 }
 
+func addOpSaveBrowserSessionProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSaveBrowserSessionProfile{}, middleware.After)
+}
+
 func addOpStartBrowserSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartBrowserSession{}, middleware.After)
 }
@@ -848,6 +872,21 @@ func addOpStopRuntimeSessionValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateBrowserStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBrowserStream{}, middleware.After)
+}
+
+func validateBasicAuth(v *types.BasicAuth) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BasicAuth"}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateBranch(v *types.Branch) error {
@@ -916,6 +955,21 @@ func validateBrowserExtensions(v []types.BrowserExtension) error {
 	}
 }
 
+func validateBrowserProfileConfiguration(v *types.BrowserProfileConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrowserProfileConfiguration"}
+	if v.ProfileIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConversational(v *types.Conversational) error {
 	if v == nil {
 		return nil
@@ -960,6 +1014,29 @@ func validateEventMetadataFilterList(v []types.EventMetadataFilterExpression) er
 	for i := range v {
 		if err := validateEventMetadataFilterExpression(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExternalProxy(v *types.ExternalProxy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExternalProxy"}
+	if v.Server == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Server"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if v.Credentials != nil {
+		if err := validateProxyCredentials(v.Credentials); err != nil {
+			invalidParams.AddNested("Credentials", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1209,6 +1286,80 @@ func validatePayloadTypeList(v []types.PayloadType) error {
 		if err := validatePayloadType(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProxies(v []types.Proxy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Proxies"}
+	for i := range v {
+		if err := validateProxy(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProxy(v types.Proxy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Proxy"}
+	switch uv := v.(type) {
+	case *types.ProxyMemberExternalProxy:
+		if err := validateExternalProxy(&uv.Value); err != nil {
+			invalidParams.AddNested("[externalProxy]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProxyConfiguration(v *types.ProxyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProxyConfiguration"}
+	if v.Proxies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Proxies"))
+	} else if v.Proxies != nil {
+		if err := validateProxies(v.Proxies); err != nil {
+			invalidParams.AddNested("Proxies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProxyCredentials(v types.ProxyCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProxyCredentials"}
+	switch uv := v.(type) {
+	case *types.ProxyCredentialsMemberBasicAuth:
+		if err := validateBasicAuth(&uv.Value); err != nil {
+			invalidParams.AddNested("[basicAuth]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1860,6 +2011,27 @@ func validateOpRetrieveMemoryRecordsInput(v *RetrieveMemoryRecordsInput) error {
 	}
 }
 
+func validateOpSaveBrowserSessionProfileInput(v *SaveBrowserSessionProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SaveBrowserSessionProfileInput"}
+	if v.ProfileIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileIdentifier"))
+	}
+	if v.BrowserIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrowserIdentifier"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartBrowserSessionInput(v *StartBrowserSessionInput) error {
 	if v == nil {
 		return nil
@@ -1876,6 +2048,16 @@ func validateOpStartBrowserSessionInput(v *StartBrowserSessionInput) error {
 	if v.Extensions != nil {
 		if err := validateBrowserExtensions(v.Extensions); err != nil {
 			invalidParams.AddNested("Extensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProfileConfiguration != nil {
+		if err := validateBrowserProfileConfiguration(v.ProfileConfiguration); err != nil {
+			invalidParams.AddNested("ProfileConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProxyConfiguration != nil {
+		if err := validateProxyConfiguration(v.ProxyConfiguration); err != nil {
+			invalidParams.AddNested("ProxyConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

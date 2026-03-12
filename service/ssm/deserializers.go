@@ -23202,6 +23202,15 @@ func awsAwsjson11_deserializeDocumentAssociationDescription(v **types.Associatio
 				sv.ApplyOnlyAtCronInterval = jtv
 			}
 
+		case "AssociationDispatchAssumeRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssociationDispatchAssumeRoleArn to be of type string, got %T instead", value)
+				}
+				sv.AssociationDispatchAssumeRole = ptr.String(jtv)
+			}
+
 		case "AssociationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24140,6 +24149,15 @@ func awsAwsjson11_deserializeDocumentAssociationVersionInfo(v **types.Associatio
 					return fmt.Errorf("expected ApplyOnlyAtCronInterval to be of type *bool, got %T instead", value)
 				}
 				sv.ApplyOnlyAtCronInterval = jtv
+			}
+
+		case "AssociationDispatchAssumeRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssociationDispatchAssumeRoleArn to be of type string, got %T instead", value)
+				}
+				sv.AssociationDispatchAssumeRole = ptr.String(jtv)
 			}
 
 		case "AssociationId":

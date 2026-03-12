@@ -15733,6 +15733,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Directs the specified job to compute checksum values for every object in the manifest.</p>"
                     }
+                },
+                "S3UpdateObjectEncryption": {
+                    "target": "com.amazonaws.s3control#S3UpdateObjectEncryptionOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the server-side encryption type of an existing encrypted\n object in a general purpose bucket. You can use the <code>UpdateObjectEncryption</code>\n operation to change encrypted objects from server-side encryption with\n Amazon S3 managed keys (SSE-S3) to server-side encryption with Key Management Service (KMS) \n keys (SSE-KMS), or to apply S3 Bucket Keys. You can also use the \n <code>UpdateObjectEncryption</code> operation to change the customer-managed\n KMS key used to encrypt your data so that you can comply with custom \n key-rotation standards.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18133,8 +18139,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 2000
+                    "min": 20,
+                    "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[a-zA-Z0-9-]*:kms:[a-z0-9-]+:[0-9]{12}:key/[a-zA-Z0-9-]+$"
             }
@@ -18266,6 +18272,21 @@
         },
         "com.amazonaws.s3control#ObjectCreationTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.s3control#ObjectEncryption": {
+            "type": "structure",
+            "members": {
+                "SSEKMS": {
+                    "target": "com.amazonaws.s3control#S3UpdateObjectEncryptionSSEKMS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies to update the object encryption type to server-side encryption\n with Key Management Service (KMS) keys (SSE-KMS).</p>",
+                        "smithy.api#xmlName": "SSE-KMS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The updated server-side encryption type for this object. The\n <code>UpdateObjectEncryption</code> operation supports the\n SSE-KMS encryption type.</p>\n         <p>Valid Values: <code>SSEKMS</code>\n         </p>"
+            }
         },
         "com.amazonaws.s3control#ObjectEncryptionFilter": {
             "type": "union",
@@ -18688,6 +18709,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "S3ComputeObjectChecksum"
+                    }
+                },
+                "S3UpdateObjectEncryption": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3UpdateObjectEncryption"
                     }
                 }
             }
@@ -21501,6 +21528,43 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.s3control#S3Tag"
+            }
+        },
+        "com.amazonaws.s3control#S3UpdateObjectEncryptionOperation": {
+            "type": "structure",
+            "members": {
+                "ObjectEncryption": {
+                    "target": "com.amazonaws.s3control#ObjectEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated server-side encryption type for this S3 object. The\n <code>UpdateObjectEncryption</code> operation supports the\n SSE-KMS encryption type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>With the <code>UpdateObjectEncryption</code> operation, you can atomically\n update the server-side encryption type of an existing object in a general\n purpose bucket without any data movement.</p>"
+            }
+        },
+        "com.amazonaws.s3control#S3UpdateObjectEncryptionSSEKMS": {
+            "type": "structure",
+            "members": {
+                "KMSKeyArn": {
+                    "target": "com.amazonaws.s3control#NonEmptyKmsKeyArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services KMS key Amazon Resource Name (ARN) to use for the\n updated server-side encryption type. Required if <code>UpdateObjectEncryption</code>\n specifies <code>SSEKMS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BucketKeyEnabled": {
+                    "target": "com.amazonaws.s3control#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption\n with server-side encryption using Key Management Service (KMS) keys (SSE-KMS). If this\n value isn't specified, it defaults to <code>false</code>. Setting this value\n to <code>true</code> causes Amazon S3 to use an S3 Bucket Key for update object\n encryption with SSE-KMS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>If <code>SSEKMS</code> is specified for <code>UpdateObjectEncryption</code>,\n this data type specifies the Amazon Web Services KMS key Amazon Resource Name (ARN) to use\n and whether to use an S3 Bucket Key for server-side encryption using \n Key Management Service (KMS) keys (SSE-KMS).</p>",
+                "smithy.api#xmlName": "SSE-KMS"
             }
         },
         "com.amazonaws.s3control#S3UserMetadata": {

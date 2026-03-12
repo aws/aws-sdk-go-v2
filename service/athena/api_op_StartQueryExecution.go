@@ -53,8 +53,15 @@ type StartQueryExecutionInput struct {
 	// you must provide this token or the action will fail.
 	ClientRequestToken *string
 
-	// Contains data processing unit (DPU) configuration settings and parameter
-	// mappings for a notebook engine.
+	// The engine configuration for the workgroup, which includes the minimum/maximum
+	// number of Data Processing Units (DPU) that queries should use when running in
+	// provisioned capacity. If not specified, Athena uses default values (Default
+	// value for min is 4 and for max is Minimum of 124 and allocated DPUs).
+	//
+	// To specify minimum and maximum DPU values for Capacity Reservations queries,
+	// the workgroup containing EngineConfiguration should have the following values:
+	// The name of the Classifications should be athena-query-engine-properties , with
+	// the only allowed properties as max-dpu-count and min-dpu-count .
 	EngineConfiguration *types.EngineConfiguration
 
 	// A list of values for the parameters in a query. The values are applied

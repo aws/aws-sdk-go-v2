@@ -101,6 +101,7 @@ const (
 	SavingsPlanProductTypeTimestream  SavingsPlanProductType = "Timestream"
 	SavingsPlanProductTypeKeyspaces   SavingsPlanProductType = "Keyspaces"
 	SavingsPlanProductTypeDms         SavingsPlanProductType = "DMS"
+	SavingsPlanProductTypeOpensearch  SavingsPlanProductType = "OpenSearch"
 )
 
 // Values returns all known values for SavingsPlanProductType. Note that this can
@@ -122,6 +123,7 @@ func (SavingsPlanProductType) Values() []SavingsPlanProductType {
 		"Timestream",
 		"Keyspaces",
 		"DMS",
+		"OpenSearch",
 	}
 }
 
@@ -227,6 +229,7 @@ const (
 	SavingsPlanRateServiceCodeTimestream  SavingsPlanRateServiceCode = "AmazonTimestream"
 	SavingsPlanRateServiceCodeMcs         SavingsPlanRateServiceCode = "AmazonMCS"
 	SavingsPlanRateServiceCodeDms         SavingsPlanRateServiceCode = "AWSDatabaseMigrationSvc"
+	SavingsPlanRateServiceCodeEs          SavingsPlanRateServiceCode = "AmazonES"
 )
 
 // Values returns all known values for SavingsPlanRateServiceCode. Note that this
@@ -249,6 +252,7 @@ func (SavingsPlanRateServiceCode) Values() []SavingsPlanRateServiceCode {
 		"AmazonTimestream",
 		"AmazonMCS",
 		"AWSDatabaseMigrationSvc",
+		"AmazonES",
 	}
 }
 
@@ -271,6 +275,8 @@ const (
 	SavingsPlanRateUnitElastiCacheProcessingUnit      SavingsPlanRateUnit = "ElastiCacheProcessingUnit"
 	SavingsPlanRateUnitDcuHr                          SavingsPlanRateUnit = "DCU-Hr"
 	SavingsPlanRateUnitNcuHr                          SavingsPlanRateUnit = "NCU-hr"
+	SavingsPlanRateUnitOcuHrs                         SavingsPlanRateUnit = "OCU-hours"
+	SavingsPlanRateUnitJobs                           SavingsPlanRateUnit = "Jobs"
 )
 
 // Values returns all known values for SavingsPlanRateUnit. Note that this can be
@@ -294,6 +300,8 @@ func (SavingsPlanRateUnit) Values() []SavingsPlanRateUnit {
 		"ElastiCacheProcessingUnit",
 		"DCU-Hr",
 		"NCU-hr",
+		"OCU-hours",
+		"Jobs",
 	}
 }
 

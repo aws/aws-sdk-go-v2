@@ -13,7 +13,7 @@ import (
 
 // Retrieves the metadata for the specified [Challenge].
 //
-// [Challenge]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Challenge.html
+// [Challenge]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Challenge.html
 func (c *Client) GetChallengeMetadata(ctx context.Context, params *GetChallengeMetadataInput, optFns ...func(*Options)) (*GetChallengeMetadataOutput, error) {
 	if params == nil {
 		params = &GetChallengeMetadataInput{}

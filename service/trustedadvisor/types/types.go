@@ -191,7 +191,8 @@ type OrganizationRecommendationResourceSummary struct {
 	// This member is required.
 	Arn *string
 
-	// The AWS resource identifier
+	// The AWS resource identifier. There are certain checks that generate
+	// recommendation resources without an awsResourceId.
 	//
 	// This member is required.
 	AwsResourceId *string
@@ -373,6 +374,10 @@ type Recommendation struct {
 	// When the Recommendation was resolved
 	ResolvedAt *time.Time
 
+	// This attribute provides additional details about potential discrepancies in
+	// check status determination.
+	StatusReason StatusReason
+
 	// Reason for the lifecycle stage change
 	UpdateReason *string
 
@@ -457,6 +462,10 @@ type RecommendationResourcesAggregates struct {
 	// This member is required.
 	WarningCount *int64
 
+	// The number of AWS resources belonging to this Trusted Advisor check that were
+	// excluded by the customer
+	ExcludedCount *int64
+
 	noSmithyDocumentSerde
 }
 
@@ -468,7 +477,8 @@ type RecommendationResourceSummary struct {
 	// This member is required.
 	Arn *string
 
-	// The AWS resource identifier
+	// The AWS resource identifier. There are certain checks that generate
+	// recommendation resources without an awsResourceId.
 	//
 	// This member is required.
 	AwsResourceId *string
@@ -570,6 +580,10 @@ type RecommendationSummary struct {
 
 	// The pillar aggregations for cost savings
 	PillarSpecificAggregates *RecommendationPillarSpecificAggregates
+
+	// This attribute provides additional details about potential discrepancies in
+	// check status determination.
+	StatusReason StatusReason
 
 	noSmithyDocumentSerde
 }

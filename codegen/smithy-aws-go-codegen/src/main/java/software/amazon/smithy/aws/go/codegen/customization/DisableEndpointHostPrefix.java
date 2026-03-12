@@ -18,7 +18,6 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.aws.go.codegen.customization.service.s3.S3ModelUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
@@ -35,7 +34,7 @@ import software.amazon.smithy.utils.ListUtils;
  */
 public class DisableEndpointHostPrefix implements GoIntegration {
     private static final MiddlewareRegistrar DisableHostPrefixMiddleware = MiddlewareRegistrar.builder()
-            .resolvedFunction(SdkGoTypes.ServiceCustomizations.S3Control.AddDisableHostPrefixMiddleware)
+            .resolvedFunction(AwsCustomGoDependency.S3CONTROL_CUSTOMIZATION.func("AddDisableHostPrefixMiddleware"))
             .build();
 
     private static boolean hasAccountIdEndpointPrefix(Model model, ServiceShape service, OperationShape operation) {

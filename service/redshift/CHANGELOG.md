@@ -1,3 +1,16 @@
+# v1.62.3 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.2 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.1 (2026-02-04)
+
+* **Documentation**: We have increased the maximum duration for a deferred maintenance window from 45 days to 60 days for Amazon Redshift provisioned clusters. This enhancement provides customers with greater flexibility in scheduling patching and maintenance activities while also maintaining security compliance.
+
 # v1.62.0 (2026-01-14)
 
 * **Feature**: Adds support for enabling extra compute resources for automatic optimization during create and modify operations in Amazon Redshift clusters.

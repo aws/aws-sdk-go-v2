@@ -36,22 +36,14 @@ type CreateConnectorDestinationInput struct {
 	// This member is required.
 	AuthConfig *types.AuthConfig
 
-	// The authentication type used for the connector destination, which determines
-	// how credentials and access are managed.
-	//
-	// This member is required.
-	AuthType types.AuthType
-
 	// The identifier of the C2C connector.
 	//
 	// This member is required.
 	CloudConnectorId *string
 
-	// The AWS Secrets Manager configuration used to securely store and manage
-	// sensitive information for the connector destination.
-	//
-	// This member is required.
-	SecretsManager *types.SecretsManager
+	// The authentication type used for the connector destination, which determines
+	// how credentials and access are managed.
+	AuthType types.AuthType
 
 	// An idempotency token. If you retry a request that completed successfully
 	// initially using the same client token and parameters, then the retry attempt
@@ -63,6 +55,10 @@ type CreateConnectorDestinationInput struct {
 
 	// The display name of the connector destination.
 	Name *string
+
+	// The AWS Secrets Manager configuration used to securely store and manage
+	// sensitive information for the connector destination.
+	SecretsManager *types.SecretsManager
 
 	noSmithyDocumentSerde
 }

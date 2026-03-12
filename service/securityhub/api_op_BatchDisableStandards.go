@@ -13,7 +13,7 @@ import (
 
 // Disables the standards specified by the provided StandardsSubscriptionArns .
 //
-// For more information, see [Security Standards] section of the Security Hub User Guide.
+// For more information, see [Security Standards] section of the Security Hub CSPM User Guide.
 //
 // [Security Standards]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html
 func (c *Client) BatchDisableStandards(ctx context.Context, params *BatchDisableStandardsInput, optFns ...func(*Options)) (*BatchDisableStandardsOutput, error) {

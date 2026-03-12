@@ -30,6 +30,11 @@ import (
 //	published after the account closes successfully. For information on using
 //	CloudTrail with Organizations, see [Logging and monitoring in Organizations]in the Organizations User Guide.
 //
+//	- Resources remaining within the account after closing will be automatically
+//	deleted after 90 days. During this 90-day period, the resources won't be
+//	available unless you contact Amazon Web Services Support to reopen the account.
+//	After 90 days, you can't reopen an account. You might still receive a [bill after account closure].
+//
 //	- You can close only 10% of member accounts, between 10 and 1000, within a
 //	rolling 30 day period. This quota is not bound by a calendar month, but starts
 //	when you close an account. After you reach this limit, you can't close
@@ -48,6 +53,7 @@ import (
 //
 // [Quotas for Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html
 // [Logging and monitoring in Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
+// [bill after account closure]: https://repost.aws/knowledge-center/closed-account-bill
 // [Closing an Amazon Web Services GovCloud (US) account]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
 // [Closing a member account in your organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
 func (c *Client) CloseAccount(ctx context.Context, params *CloseAccountInput, optFns ...func(*Options)) (*CloseAccountOutput, error) {

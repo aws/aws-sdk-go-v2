@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates configuration options for Security Hub.
+// Updates configuration options for Security Hub CSPM.
 func (c *Client) UpdateSecurityHubConfiguration(ctx context.Context, params *UpdateSecurityHubConfigurationInput, optFns ...func(*Options)) (*UpdateSecurityHubConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateSecurityHubConfigurationInput{}
@@ -38,20 +38,21 @@ type UpdateSecurityHubConfigurationInput struct {
 	// When you automatically enable new controls, you can interact with the controls
 	// in the console and programmatically immediately after release. However,
 	// automatically enabled controls have a temporary default status of DISABLED . It
-	// can take up to several days for Security Hub to process the control release and
-	// designate the control as ENABLED in your account. During the processing period,
-	// you can manually enable or disable a control, and Security Hub will maintain
-	// that designation regardless of whether you have AutoEnableControls set to true .
+	// can take up to several days for Security Hub CSPM to process the control release
+	// and designate the control as ENABLED in your account. During the processing
+	// period, you can manually enable or disable a control, and Security Hub CSPM will
+	// maintain that designation regardless of whether you have AutoEnableControls set
+	// to true .
 	AutoEnableControls *bool
 
 	// Updates whether the calling account has consolidated control findings turned
-	// on. If the value for this field is set to SECURITY_CONTROL , Security Hub
+	// on. If the value for this field is set to SECURITY_CONTROL , Security Hub CSPM
 	// generates a single finding for a control check even when the check applies to
 	// multiple enabled standards.
 	//
-	// If the value for this field is set to STANDARD_CONTROL , Security Hub generates
-	// separate findings for a control check when the check applies to multiple enabled
-	// standards.
+	// If the value for this field is set to STANDARD_CONTROL , Security Hub CSPM
+	// generates separate findings for a control check when the check applies to
+	// multiple enabled standards.
 	//
 	// For accounts that are part of an organization, this value can only be updated
 	// in the administrator account.

@@ -764,6 +764,46 @@ func (ConnectionType) Values() []ConnectionType {
 	}
 }
 
+type ConnectorOAuth2GrantType string
+
+// Enum values for ConnectorOAuth2GrantType
+const (
+	ConnectorOAuth2GrantTypeClientCredentials ConnectorOAuth2GrantType = "CLIENT_CREDENTIALS"
+	ConnectorOAuth2GrantTypeJwtBearer         ConnectorOAuth2GrantType = "JWT_BEARER"
+	ConnectorOAuth2GrantTypeAuthorizationCode ConnectorOAuth2GrantType = "AUTHORIZATION_CODE"
+)
+
+// Values returns all known values for ConnectorOAuth2GrantType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorOAuth2GrantType) Values() []ConnectorOAuth2GrantType {
+	return []ConnectorOAuth2GrantType{
+		"CLIENT_CREDENTIALS",
+		"JWT_BEARER",
+		"AUTHORIZATION_CODE",
+	}
+}
+
+type ContentType string
+
+// Enum values for ContentType
+const (
+	ContentTypeApplicationJson ContentType = "APPLICATION_JSON"
+	ContentTypeUrlEncoded      ContentType = "URL_ENCODED"
+)
+
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentType) Values() []ContentType {
+	return []ContentType{
+		"APPLICATION_JSON",
+		"URL_ENCODED",
+	}
+}
+
 type CrawlerHistoryState string
 
 // Enum values for CrawlerHistoryState
@@ -1266,6 +1306,8 @@ const (
 	FieldDataTypeShort     FieldDataType = "SHORT"
 	FieldDataTypeDouble    FieldDataType = "DOUBLE"
 	FieldDataTypeStruct    FieldDataType = "STRUCT"
+	FieldDataTypeBinary    FieldDataType = "BINARY"
+	FieldDataTypeUnion     FieldDataType = "UNION"
 )
 
 // Values returns all known values for FieldDataType. Note that this can be
@@ -1290,6 +1332,8 @@ func (FieldDataType) Values() []FieldDataType {
 		"SHORT",
 		"DOUBLE",
 		"STRUCT",
+		"BINARY",
+		"UNION",
 	}
 }
 
@@ -1501,6 +1545,25 @@ func (GlueRecordType) Values() []GlueRecordType {
 	}
 }
 
+type HTTPMethod string
+
+// Enum values for HTTPMethod
+const (
+	HTTPMethodGet  HTTPMethod = "GET"
+	HTTPMethodPost HTTPMethod = "POST"
+)
+
+// Values returns all known values for HTTPMethod. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HTTPMethod) Values() []HTTPMethod {
+	return []HTTPMethod{
+		"GET",
+		"POST",
+	}
+}
+
 type HudiTargetCompressionType string
 
 // Enum values for HudiTargetCompressionType
@@ -1702,6 +1765,23 @@ func (IntegrationStatus) Values() []IntegrationStatus {
 		"DELETING",
 		"SYNCING",
 		"NEEDS_ATTENTION",
+	}
+}
+
+type IntegrationType string
+
+// Enum values for IntegrationType
+const (
+	IntegrationTypeRest IntegrationType = "REST"
+)
+
+// Values returns all known values for IntegrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationType) Values() []IntegrationType {
+	return []IntegrationType{
+		"REST",
 	}
 }
 
@@ -2347,6 +2427,29 @@ func (PrincipalType) Values() []PrincipalType {
 		"USER",
 		"ROLE",
 		"GROUP",
+	}
+}
+
+type PropertyLocation string
+
+// Enum values for PropertyLocation
+const (
+	PropertyLocationHeader     PropertyLocation = "HEADER"
+	PropertyLocationBody       PropertyLocation = "BODY"
+	PropertyLocationQueryParam PropertyLocation = "QUERY_PARAM"
+	PropertyLocationPath       PropertyLocation = "PATH"
+)
+
+// Values returns all known values for PropertyLocation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PropertyLocation) Values() []PropertyLocation {
+	return []PropertyLocation{
+		"HEADER",
+		"BODY",
+		"QUERY_PARAM",
+		"PATH",
 	}
 }
 

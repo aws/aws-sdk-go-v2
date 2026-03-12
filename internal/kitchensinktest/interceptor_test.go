@@ -7,6 +7,7 @@ import (
 	"reflect"
 	"testing"
 
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -124,6 +125,12 @@ func (i *expectOutputInterceptor) AfterExecution(ctx context.Context, in *smithy
 	return nil
 }
 
+type endpointResolver struct{}
+
+func (*endpointResolver) ResolveEndpoint(ctx context.Context, params EndpointParameters) (smithyendpoints.Endpoint, error) {
+	return smithyendpoints.Endpoint{}, nil
+}
+
 func TestInterceptor_PerOperationConfig(t *testing.T) {
 	i := &allInterceptors{}
 	svc := New(Options{}, func(o *Options) {
@@ -161,6 +168,7 @@ func TestInterceptor_CorrectOrder(t *testing.T) {
 		HTTPClient: &mockHTTP{
 			resps: []*http.Response{mockResp},
 		},
+		EndpointResolverV2: &endpointResolver{},
 	}, func(o *Options) {
 		i.Register(&o.Interceptors)
 	})
@@ -196,6 +204,7 @@ func TestInterceptor_TransmitFailure(t *testing.T) {
 		HTTPClient: &mockHTTP{
 			err: errors.New("the ethernet cable exploded"),
 		},
+		EndpointResolverV2: &endpointResolver{},
 	}, func(o *Options) {
 		o.RetryMaxAttempts = 2
 		i.Register(&o.Interceptors)
@@ -247,6 +256,7 @@ func TestInterceptor_Transmit4XX(t *testing.T) {
 		HTTPClient: &mockHTTP{
 			resps: []*http.Response{mockResp1, mockResp2},
 		},
+		EndpointResolverV2: &endpointResolver{},
 	}, func(o *Options) {
 		o.RetryMaxAttempts = 2
 		i.Register(&o.Interceptors)
@@ -301,6 +311,7 @@ func TestInterceptor_OutputAvailable(t *testing.T) {
 		HTTPClient: &mockHTTP{
 			resps: []*http.Response{mockResp},
 		},
+		EndpointResolverV2: &endpointResolver{},
 	}, func(o *Options) {
 		o.Interceptors.AddAfterDeserialization(i)
 		o.Interceptors.AddAfterExecution(i)

@@ -4270,6 +4270,23 @@ func awsAwsjson11_serializeDocumentCapacityProviderStrategyItem(v *types.Capacit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCapacityReservationRequest(v *types.CapacityReservationRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ReservationGroupArn != nil {
+		ok := object.Key("reservationGroupArn")
+		ok.String(*v.ReservationGroupArn)
+	}
+
+	if len(v.ReservationPreference) > 0 {
+		ok := object.Key("reservationPreference")
+		ok.String(string(v.ReservationPreference))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterConfiguration(v *types.ClusterConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5753,6 +5770,13 @@ func awsAwsjson11_serializeDocumentInstanceLaunchTemplate(v *types.InstanceLaunc
 		ok.String(string(v.CapacityOptionType))
 	}
 
+	if v.CapacityReservations != nil {
+		ok := object.Key("capacityReservations")
+		if err := awsAwsjson11_serializeDocumentCapacityReservationRequest(v.CapacityReservations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Ec2InstanceProfileArn != nil {
 		ok := object.Key("ec2InstanceProfileArn")
 		ok.String(*v.Ec2InstanceProfileArn)
@@ -5795,6 +5819,13 @@ func awsAwsjson11_serializeDocumentInstanceLaunchTemplate(v *types.InstanceLaunc
 func awsAwsjson11_serializeDocumentInstanceLaunchTemplateUpdate(v *types.InstanceLaunchTemplateUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CapacityReservations != nil {
+		ok := object.Key("capacityReservations")
+		if err := awsAwsjson11_serializeDocumentCapacityReservationRequest(v.CapacityReservations, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Ec2InstanceProfileArn != nil {
 		ok := object.Key("ec2InstanceProfileArn")

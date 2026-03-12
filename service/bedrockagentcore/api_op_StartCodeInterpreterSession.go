@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Creates and initializes a code interpreter session in Amazon Bedrock. The
-// session enables agents to execute code as part of their response generation,
+// Creates and initializes a code interpreter session in Amazon Bedrock AgentCore.
+// The session enables agents to execute code as part of their response generation,
 // supporting programming languages such as Python for data analysis,
 // visualization, and computation tasks.
 //
@@ -57,8 +57,9 @@ type StartCodeInterpreterSessionInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. This parameter helps prevent
-	// the creation of duplicate sessions if there are temporary network issues.
+	// AgentCore ignores the request, but does not return an error. This parameter
+	// helps prevent the creation of duplicate sessions if there are temporary network
+	// issues.
 	ClientToken *string
 
 	// The name of the code interpreter session. This name helps you identify and

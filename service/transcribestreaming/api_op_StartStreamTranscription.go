@@ -229,7 +229,8 @@ type StartStreamTranscriptionInput struct {
 	//
 	// Values must be comma-separated and can include: ADDRESS , BANK_ACCOUNT_NUMBER ,
 	// BANK_ROUTING , CREDIT_DEBIT_CVV , CREDIT_DEBIT_EXPIRY , CREDIT_DEBIT_NUMBER ,
-	// EMAIL , NAME , PHONE , PIN , SSN , or ALL .
+	// EMAIL , NAME , PHONE , PIN , SSN , AGE , DATE_TIME , LICENSE_PLATE ,
+	// PASSPORT_NUMBER , PASSWORD , USERNAME , VEHICLE_IDENTIFICATION_NUMBER , or ALL .
 	//
 	// Note that if you include PiiEntityTypes in your request, you must also include
 	// ContentIdentificationType or ContentRedactionType .
@@ -249,6 +250,15 @@ type StartStreamTranscriptionInput struct {
 	// parameter in your request, Amazon Transcribe generates an ID and returns it in
 	// the response.
 	SessionId *string
+
+	// Specify the time window, in minutes, during which your transcription session
+	// can be resumed, measured from the stream start time. This optional parameter
+	// accepts integer values from 1 to 300 (5 hours).
+	//
+	// For example, if your stream starts at 1 PM and you specify a SessionResumeWindow
+	// of 30 minutes, you can reconnect to the session as many times as you want until
+	// 1:30 PM.
+	SessionResumeWindow *int32
 
 	// Enables speaker partitioning (diarization) in your transcription output.
 	// Speaker partitioning labels the speech from individual speakers in your media
@@ -393,6 +403,10 @@ type StartStreamTranscriptionOutput struct {
 
 	// Provides the identifier for your transcription session.
 	SessionId *string
+
+	// Provides the session resume window, in minutes, that you specified in your
+	// request.
+	SessionResumeWindow *int32
 
 	// Shows whether speaker partitioning was enabled for your transcription.
 	ShowSpeakerLabel bool

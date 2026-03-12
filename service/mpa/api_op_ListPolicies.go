@@ -12,11 +12,6 @@ import (
 )
 
 // Returns a list of policies. Policies define the permissions for team resources.
-//
-// The protected operation for a service integration might require specific
-// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-//
-// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, optFns ...func(*Options)) (*ListPoliciesOutput, error) {
 	if params == nil {
 		params = &ListPoliciesInput{}
@@ -58,11 +53,6 @@ type ListPoliciesOutput struct {
 
 	// An array of Policy objects. Contains a list of policies that define the
 	// permissions for team resources.
-	//
-	// The protected operation for a service integration might require specific
-	// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-	//
-	// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 	Policies []types.Policy
 
 	// Metadata pertaining to the operation's result.

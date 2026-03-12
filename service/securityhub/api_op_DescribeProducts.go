@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about product integrations in Security Hub.
+// Returns information about product integrations in Security Hub CSPM.
 //
 // You can optionally provide an integration ARN. If you provide an integration
 // ARN, then the results only include that integration.

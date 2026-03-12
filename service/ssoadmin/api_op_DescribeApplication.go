@@ -54,6 +54,10 @@ type DescribeApplicationOutput struct {
 	// The date the application was created.
 	CreatedDate *time.Time
 
+	// The Amazon Web Services Region where the application was created in IAM
+	// Identity Center.
+	CreatedFrom *string
+
 	// The description of the .
 	Description *string
 

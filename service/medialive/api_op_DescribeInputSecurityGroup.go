@@ -44,6 +44,10 @@ type DescribeInputSecurityGroupOutput struct {
 	// Unique ARN of Input Security Group
 	Arn *string
 
+	// The list of channels currently using this Input Security Group as their channel
+	// security group.
+	Channels []string
+
 	// The Id of the Input Security Group
 	Id *string
 

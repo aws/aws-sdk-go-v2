@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_AddCustomAttributes.go",
+        "api_op_AddUserPoolClientSecret.go",
         "api_op_AdminAddUserToGroup.go",
         "api_op_AdminConfirmSignUp.go",
         "api_op_AdminCreateUser.go",
@@ -59,6 +60,7 @@
         "api_op_DeleteUserAttributes.go",
         "api_op_DeleteUserPool.go",
         "api_op_DeleteUserPoolClient.go",
+        "api_op_DeleteUserPoolClientSecret.go",
         "api_op_DeleteUserPoolDomain.go",
         "api_op_DeleteWebAuthnCredential.go",
         "api_op_DescribeIdentityProvider.go",
@@ -94,6 +96,7 @@
         "api_op_ListTagsForResource.go",
         "api_op_ListTerms.go",
         "api_op_ListUserImportJobs.go",
+        "api_op_ListUserPoolClientSecrets.go",
         "api_op_ListUserPoolClients.go",
         "api_op_ListUserPools.go",
         "api_op_ListUsers.go",
@@ -141,7 +144,6 @@
         "internal/endpoints/endpoints.go",
         "internal/endpoints/endpoints_test.go",
         "options.go",
-        "protocol_test.go",
         "serializers.go",
         "snapshot_test.go",
         "sra_operation_order_test.go",
@@ -150,7 +152,7 @@
         "types/types.go",
         "validators.go"
     ],
-    "go": "1.23",
+    "go": "1.24",
     "module": "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider",
     "unstable": false
 }

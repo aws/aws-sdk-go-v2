@@ -82,6 +82,11 @@ type SearchTrainingPlanOfferingsInput struct {
 	//   compute resources to SageMaker endpoints for model deployment.
 	TargetResources []types.SageMakerResourceName
 
+	// The Amazon Resource Name (ARN); of an existing training plan to search for
+	// extension offerings. When specified, the API returns extension offerings that
+	// can be used to extend the specified training plan.
+	TrainingPlanArn *string
+
 	// The number of UltraServers to search for.
 	UltraServerCount *int32
 
@@ -97,6 +102,12 @@ type SearchTrainingPlanOfferingsOutput struct {
 	//
 	// This member is required.
 	TrainingPlanOfferings []types.TrainingPlanOffering
+
+	// A list of extension offerings available for the specified training plan. These
+	// offerings can be used with the [ExtendTrainingPlan]API to extend an existing training plan.
+	//
+	// [ExtendTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ExtendTrainingPlan.html
+	TrainingPlanExtensionOfferings []types.TrainingPlanExtensionOffering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

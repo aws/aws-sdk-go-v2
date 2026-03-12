@@ -1,3 +1,22 @@
+# v1.54.0 (2026-03-03)
+
+* **Feature**: Adding QueryGraph operation to DataZone SDK
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.0 (2026-02-23)
+
+* **Feature**: Add workflow properties support to connections APIs
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.52.1 (2026-02-10)
+
+* No change notes available for this release.
+
+# v1.52.0 (2026-01-23)
+
+* **Feature**: Added api for deleting data export configuration for a domain
+
 # v1.51.0 (2026-01-16)
 
 * **Feature**: This release adds support for numeric filtering and complex free-text searches cases for the Search and SearchListings APIs.

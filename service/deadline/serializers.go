@@ -1387,6 +1387,24 @@ func awsRestjson1_serializeOpDocumentCreateFarmInput(v *CreateFarmInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.CostScaleFactor != nil {
+		ok := object.Key("costScaleFactor")
+		switch {
+		case math.IsNaN(float64(*v.CostScaleFactor)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.CostScaleFactor), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.CostScaleFactor), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.CostScaleFactor)
+
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -1659,6 +1677,11 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		}
 	}
 
+	if v.DescriptionOverride != nil {
+		ok := object.Key("descriptionOverride")
+		ok.String(*v.DescriptionOverride)
+	}
+
 	if v.MaxFailedTasksCount != nil {
 		ok := object.Key("maxFailedTasksCount")
 		ok.Integer(*v.MaxFailedTasksCount)
@@ -1672,6 +1695,11 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 	if v.MaxWorkerCount != nil {
 		ok := object.Key("maxWorkerCount")
 		ok.Integer(*v.MaxWorkerCount)
+	}
+
+	if v.NameOverride != nil {
+		ok := object.Key("nameOverride")
+		ok.String(*v.NameOverride)
 	}
 
 	if v.Parameters != nil {
@@ -1694,6 +1722,13 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 	if v.StorageProfileId != nil {
 		ok := object.Key("storageProfileId")
 		ok.String(*v.StorageProfileId)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.TargetTaskRunStatus) > 0 {
@@ -9447,6 +9482,24 @@ func awsRestjson1_serializeOpDocumentUpdateFarmInput(v *UpdateFarmInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.CostScaleFactor != nil {
+		ok := object.Key("costScaleFactor")
+		switch {
+		case math.IsNaN(float64(*v.CostScaleFactor)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.CostScaleFactor), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.CostScaleFactor), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.CostScaleFactor)
+
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -9711,6 +9764,11 @@ func awsRestjson1_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
 	if len(v.LifecycleStatus) > 0 {
 		ok := object.Key("lifecycleStatus")
 		ok.String(string(v.LifecycleStatus))
@@ -9729,6 +9787,11 @@ func awsRestjson1_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smi
 	if v.MaxWorkerCount != nil {
 		ok := object.Key("maxWorkerCount")
 		ok.Integer(*v.MaxWorkerCount)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	if v.Priority != nil {

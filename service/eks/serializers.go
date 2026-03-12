@@ -1462,6 +1462,11 @@ func awsRestjson1_serializeOpDocumentCreatePodIdentityAssociationInput(v *Create
 		ok.String(*v.Namespace)
 	}
 
+	if v.Policy != nil {
+		ok := object.Key("policy")
+		ok.String(*v.Policy)
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
@@ -6187,6 +6192,11 @@ func awsRestjson1_serializeOpDocumentUpdatePodIdentityAssociationInput(v *Update
 	if v.DisableSessionTags != nil {
 		ok := object.Key("disableSessionTags")
 		ok.Boolean(*v.DisableSessionTags)
+	}
+
+	if v.Policy != nil {
+		ok := object.Key("policy")
+		ok.String(*v.Policy)
 	}
 
 	if v.RoleArn != nil {

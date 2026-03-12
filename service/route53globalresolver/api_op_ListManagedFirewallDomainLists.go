@@ -11,8 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of the AWS Managed DNS Lists and the categories for
-// DNS Firewall. The categories are either THREAT or CONTENT .
+// Returns a paginated list of the Amazon Web Services Managed DNS Lists and the
+// categories for DNS Firewall. The categories are either THREAT or CONTENT .
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) ListManagedFirewallDomainLists(ctx context.Context, params *ListManagedFirewallDomainListsInput, optFns ...func(*Options)) (*ListManagedFirewallDomainListsOutput, error) {
 	if params == nil {
 		params = &ListManagedFirewallDomainListsInput{}

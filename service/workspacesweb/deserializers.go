@@ -14188,6 +14188,15 @@ func awsRestjson1_deserializeDocumentPortal(v **types.Portal, value interface{})
 				sv.PortalArn = ptr.String(jtv)
 			}
 
+		case "portalCustomDomain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortalCustomDomain to be of type string, got %T instead", value)
+				}
+				sv.PortalCustomDomain = ptr.String(jtv)
+			}
+
 		case "portalEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14433,6 +14442,15 @@ func awsRestjson1_deserializeDocumentPortalSummary(v **types.PortalSummary, valu
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.PortalArn = ptr.String(jtv)
+			}
+
+		case "portalCustomDomain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortalCustomDomain to be of type string, got %T instead", value)
+				}
+				sv.PortalCustomDomain = ptr.String(jtv)
 			}
 
 		case "portalEndpoint":

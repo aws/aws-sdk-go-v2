@@ -8761,6 +8761,87 @@ func awsAwsjson11_deserializeDocumentAddressAllocationIds(v *[]string, value int
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAs2AsyncMdnConnectorConfig(v **types.As2AsyncMdnConnectorConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.As2AsyncMdnConnectorConfig
+	if *v == nil {
+		sv = &types.As2AsyncMdnConnectorConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ServerIds":
+			if err := awsAwsjson11_deserializeDocumentAs2AsyncMdnServerIds(&sv.ServerIds, value); err != nil {
+				return err
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAs2AsyncMdnServerIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ServerId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAs2ConnectorConfig(v **types.As2ConnectorConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8783,6 +8864,11 @@ func awsAwsjson11_deserializeDocumentAs2ConnectorConfig(v **types.As2ConnectorCo
 
 	for key, value := range shape {
 		switch key {
+		case "AsyncMdnConfig":
+			if err := awsAwsjson11_deserializeDocumentAs2AsyncMdnConnectorConfig(&sv.AsyncMdnConfig, value); err != nil {
+				return err
+			}
+
 		case "BasicAuthSecretId":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -48,7 +48,7 @@
 //
 //   - Resolves the registration token that the buyer submits through the browser
 //     during the registration process. Obtains a CustomerIdentifier along with the
-//     CustomerAWSAccountId and ProductCode .
+//     CustomerAWSAccountId , ProductCode , and LicenseArn .
 //
 //   - Called from: SaaS application during the registration process
 //

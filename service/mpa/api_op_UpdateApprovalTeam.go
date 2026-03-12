@@ -49,6 +49,9 @@ type UpdateApprovalTeamInput struct {
 	// Description for the team.
 	Description *string
 
+	// A list of UpdateAction to perform when updating the team.
+	UpdateActions []types.UpdateAction
+
 	noSmithyDocumentSerde
 }
 

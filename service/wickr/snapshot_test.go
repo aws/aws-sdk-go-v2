@@ -326,6 +326,18 @@ func TestCheckSnapshot_GetOidcInfo(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetOpentdfConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOpentdfConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetOpentdfConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSecurityGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSecurityGroup(context.Background(), nil, func(o *Options) {
@@ -475,6 +487,18 @@ func TestCheckSnapshot_RegisterOidcConfigTest(t *testing.T) {
 	_, err := svc.RegisterOidcConfigTest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RegisterOidcConfigTest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RegisterOpentdfConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterOpentdfConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterOpentdfConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -829,6 +853,18 @@ func TestUpdateSnapshot_GetOidcInfo(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetOpentdfConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOpentdfConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetOpentdfConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSecurityGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSecurityGroup(context.Background(), nil, func(o *Options) {
@@ -978,6 +1014,18 @@ func TestUpdateSnapshot_RegisterOidcConfigTest(t *testing.T) {
 	_, err := svc.RegisterOidcConfigTest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RegisterOidcConfigTest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RegisterOpentdfConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterOpentdfConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterOpentdfConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

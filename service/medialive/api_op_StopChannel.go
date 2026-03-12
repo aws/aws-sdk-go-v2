@@ -57,6 +57,9 @@ type StopChannelOutput struct {
 	// Requested engine version for this channel.
 	ChannelEngineVersion *types.ChannelEngineVersionResponse
 
+	// A list of IDs for all the Input Security Groups attached to the channel.
+	ChannelSecurityGroups []string
+
 	// A list of destinations of the channel. For UDP outputs, there is one
 	// destination per output. For other types (HLS, for example), there is one
 	// destination per packager.
@@ -70,6 +73,9 @@ type StopChannelOutput struct {
 
 	// The unique id of the channel.
 	Id *string
+
+	// Include this setting to include Elemental Inference features in this channel.
+	InferenceSettings *types.DescribeInferenceSettings
 
 	// List of input attachments for channel.
 	InputAttachments []types.InputAttachment

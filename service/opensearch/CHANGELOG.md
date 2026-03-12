@@ -1,3 +1,24 @@
+# v1.60.0 (2026-03-09)
+
+* **Feature**: This change enables cross-account and cross-region access for DataSources. Customers can now define access policies on their datasources to allow other AWS accounts to access and query their data.
+
+# v1.59.0 (2026-03-04)
+
+* **Feature**: Adding support for DeploymentStrategyOptions
+
+# v1.58.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.58.0 (2026-02-24)
+
+* **Feature**: Fixed HTTP binding for DescribeDomainAutoTunes API to correctly pass request parameters as query parameters in the HTTP request.
+
+# v1.57.2 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

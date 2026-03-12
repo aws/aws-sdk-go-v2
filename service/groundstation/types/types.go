@@ -422,6 +422,7 @@ type ConfigListItem struct {
 //	ConfigTypeDataMemberAntennaUplinkConfig
 //	ConfigTypeDataMemberDataflowEndpointConfig
 //	ConfigTypeDataMemberS3RecordingConfig
+//	ConfigTypeDataMemberTelemetrySinkConfig
 //	ConfigTypeDataMemberTrackingConfig
 //	ConfigTypeDataMemberUplinkEchoConfig
 type ConfigTypeData interface {
@@ -475,6 +476,15 @@ type ConfigTypeDataMemberS3RecordingConfig struct {
 }
 
 func (*ConfigTypeDataMemberS3RecordingConfig) isConfigTypeData() {}
+
+// Information about a telemetry sink Config .
+type ConfigTypeDataMemberTelemetrySinkConfig struct {
+	Value TelemetrySinkConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigTypeDataMemberTelemetrySinkConfig) isConfigTypeData() {}
 
 // Object that determines whether tracking should be used during a contact
 // executed with this Config in the mission profile.
@@ -907,7 +917,7 @@ func (*EphemerisDataMemberAzEl) isEphemerisData() {}
 // format that AWS Ground Station supports, see [OEM ephemeris format]in the AWS Ground Station user
 // guide.
 //
-// [CCSDS standard]: https://ccsds.org/wp-content/uploads/gravity_forms/5-448e85c647331d9cbaf66c096458bdd5/2025/01//502x0b3e1.pdf
+// [CCSDS standard]: https://ccsds.org/Pubs/502x0b3e1.pdf
 // [OEM ephemeris format]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format
 type EphemerisDataMemberOem struct {
 	Value OEMEphemeris
@@ -1190,6 +1200,22 @@ type ISO8601TimeRange struct {
 	noSmithyDocumentSerde
 }
 
+// Information for telemetry delivery to Kinesis Data Streams.
+type KinesisDataStreamData struct {
+
+	// ARN of the Kinesis Data Stream to deliver telemetry to.
+	//
+	// This member is required.
+	KinesisDataStreamArn *string
+
+	// ARN of the IAM Role used by AWS Ground Station to deliver telemetry.
+	//
+	// This member is required.
+	KinesisRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // KMS key info.
 //
 // The following types satisfy this interface:
@@ -1253,7 +1279,7 @@ type MissionProfileListItem struct {
 // format that AWS Ground Station supports, see [OEM ephemeris format]in the AWS Ground Station user
 // guide.
 //
-// [CCSDS standard]: https://ccsds.org/wp-content/uploads/gravity_forms/5-448e85c647331d9cbaf66c096458bdd5/2025/01//502x0b3e1.pdf
+// [CCSDS standard]: https://ccsds.org/Pubs/502x0b3e1.pdf
 // [OEM ephemeris format]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format
 type OEMEphemeris struct {
 
@@ -1466,6 +1492,40 @@ type SpectrumConfig struct {
 
 	noSmithyDocumentSerde
 }
+
+// Information about a telemetry sink Config .
+type TelemetrySinkConfig struct {
+
+	// Information about the telemetry sink specified by the telemetrySinkType .
+	//
+	// This member is required.
+	TelemetrySinkData TelemetrySinkData
+
+	// The type of telemetry sink.
+	//
+	// This member is required.
+	TelemetrySinkType TelemetrySinkType
+
+	noSmithyDocumentSerde
+}
+
+// Information about a telemetry sink.
+//
+// The following types satisfy this interface:
+//
+//	TelemetrySinkDataMemberKinesisDataStreamData
+type TelemetrySinkData interface {
+	isTelemetrySinkData()
+}
+
+// Information about a telemetry sink of type KINESIS_DATA_STREAM .
+type TelemetrySinkDataMemberKinesisDataStreamData struct {
+	Value KinesisDataStreamData
+
+	noSmithyDocumentSerde
+}
+
+func (*TelemetrySinkDataMemberKinesisDataStreamData) isTelemetrySinkData() {}
 
 // Time-tagged azimuth elevation pointing data.
 //
@@ -1722,4 +1782,5 @@ func (*UnknownUnionMember) isEphemerisFilter()          {}
 func (*UnknownUnionMember) isEphemerisTypeDescription() {}
 func (*UnknownUnionMember) isKmsKey()                   {}
 func (*UnknownUnionMember) isProgramTrackSettings()     {}
+func (*UnknownUnionMember) isTelemetrySinkData()        {}
 func (*UnknownUnionMember) isUplinkDataflowDetails()    {}

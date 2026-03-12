@@ -469,6 +469,32 @@ type CapacityProviderStrategyItem struct {
 	noSmithyDocumentSerde
 }
 
+// The Capacity Reservation configurations to be used when using the RESERVED
+// capacity option type.
+type CapacityReservationRequest struct {
+
+	// The ARN of the Capacity Reservation resource group in which to run the instance.
+	ReservationGroupArn *string
+
+	// The preference on when capacity reservations should be used.
+	//
+	// Valid values are:
+	//
+	//   - RESERVATIONS_ONLY - Exclusively launch instances into capacity reservations
+	//   that match the instance requirements configured for the capacity provider. If
+	//   none exist, instances will fail to provision.
+	//
+	//   - RESERVATIONS_FIRST - Prefer to launch instances into a capacity reservation
+	//   if any exist that match the instance requirements configured for the capacity
+	//   provider. If none exist, fall back to launching instances On-Demand.
+	//
+	//   - RESERVATIONS_EXCLUDED - Avoid using capacity reservations and launch
+	//   exclusively On-Demand.
+	ReservationPreference CapacityReservationPreference
+
+	noSmithyDocumentSerde
+}
+
 // A regional grouping of one or more container instances where you can run task
 // requests. Each account receives a default cluster the first time you use the
 // Amazon ECS service, but you may also create other clusters. Clusters may contain
@@ -1080,8 +1106,8 @@ type ContainerDefinition struct {
 	//
 	//   - Images in Amazon ECR repositories can be specified by either using the full
 	//   registry/repository:tag or registry/repository@digest . For example,
-	//   012345678910.dkr.ecr..amazonaws.com/:latest or
-	//   012345678910.dkr.ecr..amazonaws.com/@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE
+	//   012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>:latest or
+	//   012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE
 	//   .
 	//
 	//   - Images in official repositories on Docker Hub use a single name (for
@@ -2463,10 +2489,10 @@ type EBSTagSpecification struct {
 	// This member is required.
 	ResourceType EBSResourceType
 
-	// Determines whether to propagate the tags from the task definition to  the
-	// Amazon EBS volume. Tags can only propagate to a SERVICE specified in
+	// Determines whether to propagate the tags from the task definition to the Amazon
+	// EBS volume. Tags can only propagate to a SERVICE specified in
 	// ServiceVolumeConfiguration . If no value is specified, the tags aren't
-	//  propagated.
+	// propagated.
 	PropagateTags PropagateTags
 
 	// The tags applied to this Amazon EBS volume. AmazonECSCreated and
@@ -3370,8 +3396,9 @@ type InstanceLaunchTemplate struct {
 	// This member is required.
 	NetworkConfiguration *ManagedInstancesNetworkConfiguration
 
-	// The capacity option type. This determines whether Amazon ECS launches On-Demand
-	// or Spot Instances for your managed instance capacity provider.
+	// The capacity option type. This determines whether Amazon ECS launches
+	// On-Demand, Spot or Capacity Reservation Instances for your managed instance
+	// capacity provider.
 	//
 	// Valid values are:
 	//
@@ -3382,6 +3409,10 @@ type InstanceLaunchTemplate struct {
 	//   cost. Spot Instances can be interrupted by Amazon EC2 with a two-minute
 	//   notification when the capacity is needed back.
 	//
+	//   - RESERVED - Launches Instances using Amazon EC2 Capacity Reservations.
+	//   Capacity Reservations allow you to reserve compute capacity for Amazon EC2
+	//   instances in a specific Availability Zone.
+	//
 	// The default is On-Demand
 	//
 	// For more information about Amazon EC2 capacity options, see [Instance purchasing options] in the Amazon EC2
@@ -3389,6 +3420,15 @@ type InstanceLaunchTemplate struct {
 	//
 	// [Instance purchasing options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
 	CapacityOptionType CapacityOptionType
+
+	// Capacity reservation specifications. You can specify:
+	//
+	//   - Capacity reservation preference
+	//
+	//   - Reservation resource group to be used for targeted capacity reservations
+	//
+	// Amazon ECS will launch instances according to the specified criteria.
+	CapacityReservations *CapacityReservationRequest
 
 	// Determines whether to enable FIPS 140-2 validated cryptographic modules on EC2
 	// instances launched by the capacity provider. If true , instances use
@@ -3435,6 +3475,11 @@ type InstanceLaunchTemplate struct {
 //
 // [Store instance launch parameters in Amazon EC2 launch templates]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
 type InstanceLaunchTemplateUpdate struct {
+
+	// The updated capacity reservations specifications for Amazon ECS Managed
+	// Instances. Changes to capacity reservations settings apply to new instances
+	// launched after the update.
+	CapacityReservations *CapacityReservationRequest
 
 	// The updated Amazon Resource Name (ARN) of the instance profile. The new
 	// instance profile must have the necessary permissions for your tasks.
@@ -6165,7 +6210,7 @@ type ServiceManagedEBSVolumeConfiguration struct {
 	// snapshot was created. If there is a filesystem type mismatch, the tasks will
 	// fail to start.
 	//
-	// The available Linux filesystem types are  ext3 , ext4 , and xfs . If no value is
+	// The available Linux filesystem types are ext3 , ext4 , and xfs . If no value is
 	// specified, the xfs filesystem type is used by default.
 	//
 	// The available Windows filesystem types are NTFS .
@@ -6990,9 +7035,9 @@ type TaskDefinition struct {
 	//
 	// For Amazon ECS tasks on Fargate, the awsvpc network mode is required. For
 	// Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.
-	// For Amazon ECS tasks on Amazon EC2 Windows instances, or awsvpc can be used. If
-	// the network mode is set to none , you cannot specify port mappings in your
-	// container definitions, and the tasks containers do not have external
+	// For Amazon ECS tasks on Amazon EC2 Windows instances, <default> or awsvpc can
+	// be used. If the network mode is set to none , you cannot specify port mappings
+	// in your container definitions, and the tasks containers do not have external
 	// connectivity. The host and awsvpc network modes offer the highest networking
 	// performance for containers because they use the EC2 network stack instead of the
 	// virtualized network stack provided by the bridge mode.
@@ -7154,7 +7199,7 @@ type TaskEphemeralStorage struct {
 	KmsKeyId *string
 
 	// The total amount, in GiB, of the ephemeral storage to set for the task. The
-	// minimum supported value is 20 GiB and the maximum supported value is  200 GiB.
+	// minimum supported value is 20 GiB and the maximum supported value is 200 GiB.
 	SizeInGiB int32
 
 	noSmithyDocumentSerde
@@ -7190,7 +7235,7 @@ type TaskManagedEBSVolumeConfiguration struct {
 	// snapshot was created. If there is a filesystem type mismatch, the task will fail
 	// to start.
 	//
-	// The available filesystem types are  ext3 , ext4 , and xfs . If no value is
+	// The available filesystem types are ext3 , ext4 , and xfs . If no value is
 	// specified, the xfs filesystem type is used by default.
 	FilesystemType TaskFilesystemType
 
@@ -7320,10 +7365,10 @@ type TaskManagedEBSVolumeConfiguration struct {
 type TaskManagedEBSVolumeTerminationPolicy struct {
 
 	// Indicates whether the volume should be deleted on when the task stops. If a
-	// value of true is specified,  Amazon ECS deletes the Amazon EBS volume on your
+	// value of true is specified, Amazon ECS deletes the Amazon EBS volume on your
 	// behalf when the task goes into the STOPPED state. If no value is specified, the
-	//  default value is true is used. When set to false , Amazon ECS leaves the volume
-	// in your  account.
+	// default value is true is used. When set to false , Amazon ECS leaves the volume
+	// in your account.
 	//
 	// This member is required.
 	DeleteOnTermination *bool
@@ -7844,7 +7889,7 @@ type VpcLatticeConfiguration struct {
 	PortName *string
 
 	// The ARN of the IAM role to associate with this VPC Lattice configuration. This
-	// is the Amazon ECS  infrastructure IAM role that is used to manage your VPC
+	// is the Amazon ECS infrastructure IAM role that is used to manage your VPC
 	// Lattice infrastructure.
 	//
 	// This member is required.

@@ -74,6 +74,9 @@ func ExampleConfigTypeData_outputUsage() {
 	case *types.ConfigTypeDataMemberS3RecordingConfig:
 		_ = v.Value // Value is types.S3RecordingConfig
 
+	case *types.ConfigTypeDataMemberTelemetrySinkConfig:
+		_ = v.Value // Value is types.TelemetrySinkConfig
+
 	case *types.ConfigTypeDataMemberTrackingConfig:
 		_ = v.Value // Value is types.TrackingConfig
 
@@ -95,6 +98,7 @@ var _ *types.AntennaDownlinkDemodDecodeConfig
 var _ *types.S3RecordingConfig
 var _ *types.AntennaUplinkConfig
 var _ *types.AntennaDownlinkConfig
+var _ *types.TelemetrySinkConfig
 var _ *types.DataflowEndpointConfig
 
 func ExampleCreateEndpointDetails_outputUsage() {
@@ -248,6 +252,24 @@ func ExampleProgramTrackSettings_outputUsage() {
 }
 
 var _ *types.AzElProgramTrackSettings
+
+func ExampleTelemetrySinkData_outputUsage() {
+	var union types.TelemetrySinkData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TelemetrySinkDataMemberKinesisDataStreamData:
+		_ = v.Value // Value is types.KinesisDataStreamData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.KinesisDataStreamData
 
 func ExampleUplinkDataflowDetails_outputUsage() {
 	var union types.UplinkDataflowDetails

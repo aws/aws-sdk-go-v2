@@ -1,3 +1,16 @@
+# v1.14.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.0 (2026-02-20)
+
+* **Feature**: Adding a new enum attribute(statusReason) to TrustedAdvisorAPI response. This attribute explains reasoning behind check status for certain specific scenarios.
+
 # v1.13.18 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

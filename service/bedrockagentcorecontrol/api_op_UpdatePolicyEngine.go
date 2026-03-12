@@ -39,7 +39,7 @@ type UpdatePolicyEngineInput struct {
 	PolicyEngineId *string
 
 	// The new description for the policy engine.
-	Description *string
+	Description *types.UpdatedDescription
 
 	noSmithyDocumentSerde
 }
@@ -83,6 +83,10 @@ type UpdatePolicyEngineOutput struct {
 
 	// The updated description of the policy engine.
 	Description *string
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine
+	// data.
+	EncryptionKeyArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

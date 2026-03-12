@@ -1,3 +1,20 @@
+# v1.36.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.36.0 (2026-02-27)
+
+* **Feature**: Resource owners can now specify ResourceShareConfiguration request parameter for CreateResourceShare API including RetainSharingOnAccountLeaveOrganization boolean parameter
+
+# v1.35.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.35.0 (2026-02-05)
+
+* **Feature**: Added ListSourceAssociations API. Allows RAM resource share owners to list source associations that determine which sources can access resources through service principal associations. Supports filtering by resource share ARN, source ID, source type, or status, with pagination.
+
 # v1.34.19 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

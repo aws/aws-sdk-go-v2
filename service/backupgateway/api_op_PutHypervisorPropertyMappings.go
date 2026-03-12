@@ -13,8 +13,8 @@ import (
 
 // This action sets the property mappings for the specified hypervisor. A
 // hypervisor property mapping displays the relationship of entity properties
-// available from the on-premises hypervisor to the properties available in Amazon
-// Web Services.
+// available from the hypervisor to the properties available in Amazon Web
+// Services.
 func (c *Client) PutHypervisorPropertyMappings(ctx context.Context, params *PutHypervisorPropertyMappingsInput, optFns ...func(*Options)) (*PutHypervisorPropertyMappingsOutput, error) {
 	if params == nil {
 		params = &PutHypervisorPropertyMappingsInput{}
@@ -42,8 +42,8 @@ type PutHypervisorPropertyMappingsInput struct {
 	// This member is required.
 	IamRoleArn *string
 
-	// This action requests the mappings of on-premises VMware tags to the Amazon Web
-	// Services tags.
+	// This action requests the mappings of VMware tags to the Amazon Web Services
+	// tags.
 	//
 	// This member is required.
 	VmwareToAwsTagMappings []types.VmwareToAwsTagMapping

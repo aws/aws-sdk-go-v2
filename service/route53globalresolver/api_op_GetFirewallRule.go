@@ -13,6 +13,12 @@ import (
 )
 
 // Retrieves information about a DNS firewall rule.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) GetFirewallRule(ctx context.Context, params *GetFirewallRuleInput, optFns ...func(*Options)) (*GetFirewallRuleOutput, error) {
 	if params == nil {
 		params = &GetFirewallRuleInput{}
@@ -109,8 +115,8 @@ type GetFirewallRuleOutput struct {
 	// The description of the DNS Firewall rule.
 	Description *string
 
-	// The type of the DNS Firewall Advanced rule. Valid values are DGA and
-	// DNS_TUNNELING.
+	// The type of the DNS Firewall Advanced rule. Valid values are DGA,
+	// DNS_TUNNELING, and DICTIONARY_DGA.
 	DnsAdvancedProtection types.DnsAdvancedProtection
 
 	// The ID of a DNS Firewall domain list.

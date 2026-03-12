@@ -12,7 +12,8 @@ import (
 )
 
 // Get a specific recommendation within an AWS Organizations organization. This
-// API supports only prioritized recommendations.
+// API supports only prioritized recommendations and provides global priority
+// recommendations, eliminating the need to call the API in each AWS Region.
 func (c *Client) GetOrganizationRecommendation(ctx context.Context, params *GetOrganizationRecommendationInput, optFns ...func(*Options)) (*GetOrganizationRecommendationOutput, error) {
 	if params == nil {
 		params = &GetOrganizationRecommendationInput{}

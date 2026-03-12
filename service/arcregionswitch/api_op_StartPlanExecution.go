@@ -12,11 +12,10 @@ import (
 )
 
 // Starts the execution of a Region switch plan. You can execute a plan in either
-// PRACTICE or RECOVERY mode.
+// graceful or ungraceful mode.
 //
-// In PRACTICE mode, the execution simulates the steps without making actual
-// changes to your application's traffic routing. In RECOVERY mode, the execution
-// performs actual changes to shift traffic between Regions.
+// Specifing ungraceful mode either changes the behavior of the execution blocks
+// in a workflow or skips specific execution blocks.
 func (c *Client) StartPlanExecution(ctx context.Context, params *StartPlanExecutionInput, optFns ...func(*Options)) (*StartPlanExecutionOutput, error) {
 	if params == nil {
 		params = &StartPlanExecutionInput{}
@@ -34,8 +33,8 @@ func (c *Client) StartPlanExecution(ctx context.Context, params *StartPlanExecut
 
 type StartPlanExecutionInput struct {
 
-	// The action to perform. Valid values are ACTIVATE (to shift traffic to the
-	// target Region) or DEACTIVATE (to shift traffic away from the target Region).
+	// The action to perform. Valid values are activate (to shift traffic to the
+	// target Region) or deactivate (to shift traffic away from the target Region).
 	//
 	// This member is required.
 	Action types.ExecutionAction
@@ -58,10 +57,14 @@ type StartPlanExecutionInput struct {
 	// set to false, you must specify a specific version.
 	LatestVersion *string
 
-	// The plan execution mode. Valid values are Practice , for testing without making
-	// actual changes, or Recovery , for actual traffic shifting and application
-	// recovery.
+	// The plan execution mode. Valid values are graceful , for starting the execution
+	// in graceful mode, or ungraceful , for starting the execution in ungraceful mode.
 	Mode types.ExecutionMode
+
+	// The execution identifier of the recovery execution that ran in the opposite
+	// region post-recovery is ran in. Required when starting a post-recovery
+	// execution.
+	RecoveryExecutionId *string
 
 	noSmithyDocumentSerde
 }

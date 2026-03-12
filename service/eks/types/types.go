@@ -1022,8 +1022,8 @@ type ControlPlanePlacementResponse struct {
 type ControlPlaneScalingConfig struct {
 
 	// The control plane scaling tier configuration. Available options are standard ,
-	// tier-xl , tier-2xl , or tier-4xl . For more information, see EKS Provisioned
-	// Control Plane in the Amazon EKS User Guide.
+	// tier-xl , tier-2xl , tier-4xl, or tier-8xl . For more information, see EKS
+	// Provisioned Control Plane in the Amazon EKS User Guide.
 	Tier ProvisionedControlPlaneTier
 
 	noSmithyDocumentSerde
@@ -2221,6 +2221,14 @@ type PodIdentityAssociation struct {
 
 	// If defined, the EKS Pod Identity association is owned by an Amazon EKS add-on.
 	OwnerArn *string
+
+	// An optional IAM policy in JSON format (as an escaped string) that applies
+	// additional restrictions to this pod identity association beyond the IAM policies
+	// attached to the IAM role. This policy is applied as the intersection of the
+	// role's policies and this policy, allowing you to reduce the permissions that
+	// applications in the pods can use. Use this policy to enforce least privilege
+	// access while still leveraging a shared IAM role across multiple applications.
+	Policy *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to associate with the service
 	// account. The EKS Pod Identity agent manages credentials to assume this role for

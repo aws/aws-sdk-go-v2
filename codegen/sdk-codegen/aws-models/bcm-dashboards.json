@@ -2379,6 +2379,12 @@
         "com.amazonaws.bcmdashboards#Widget": {
             "type": "structure",
             "members": {
+                "id": {
+                    "target": "com.amazonaws.bcmdashboards#WidgetId",
+                    "traits": {
+                        "smithy.api#documentation": "The unique identifier for the widget."
+                    }
+                },
                 "title": {
                     "target": "com.amazonaws.bcmdashboards#WidgetTitle",
                     "traits": {
@@ -2466,6 +2472,16 @@
                     "min": 4,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.bcmdashboards#WidgetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[0-9a-f]{32}$"
             }
         },
         "com.amazonaws.bcmdashboards#WidgetList": {

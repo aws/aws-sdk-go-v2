@@ -58,6 +58,10 @@ type UpdatePortalInput struct {
 	// The maximum number of concurrent sessions for the portal.
 	MaxConcurrentSessions *int32
 
+	// The custom domain of the web portal that users access in order to start
+	// streaming sessions.
+	PortalCustomDomain *string
+
 	noSmithyDocumentSerde
 }
 

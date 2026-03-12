@@ -24,6 +24,8 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
@@ -116,7 +118,7 @@ public class S3ExpiresShapeCustomization implements GoIntegration {
                 .build();
     }
 
-    private GoWriter.Writable deserializeS3Expires() {
+    private Writable deserializeS3Expires() {
         return goTemplate("""
                 func $name:L(v string) ($time:P, error) {
                     t, err := $parseHTTPDate:T(v)

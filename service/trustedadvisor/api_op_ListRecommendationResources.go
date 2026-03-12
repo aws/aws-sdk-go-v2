@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List Resources of a Recommendation
+// List Resources of a Recommendation. This API provides global recommendations,
+// eliminating the need to call the API in each AWS Region.
 func (c *Client) ListRecommendationResources(ctx context.Context, params *ListRecommendationResourcesInput, optFns ...func(*Options)) (*ListRecommendationResourcesOutput, error) {
 	if params == nil {
 		params = &ListRecommendationResourcesInput{}
@@ -36,6 +37,10 @@ type ListRecommendationResourcesInput struct {
 
 	// The exclusion status of the resource
 	ExclusionStatus types.ExclusionStatus
+
+	// The ISO 639-1 code for the language that you want your recommendations to
+	// appear in.
+	Language types.RecommendationLanguage
 
 	// The maximum number of results to return per page.
 	MaxResults *int32

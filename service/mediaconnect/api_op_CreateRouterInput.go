@@ -69,8 +69,8 @@ type CreateRouterInputInput struct {
 	// preferred maintenance windows and schedules.
 	MaintenanceConfiguration types.MaintenanceConfiguration
 
-	// The AWS Region for the router input. Defaults to the current region if not
-	// specified.
+	// The Amazon Web Services Region for the router input. Defaults to the current
+	// region if not specified.
 	RegionName *string
 
 	// Key-value pairs that can be used to tag and organize this router input.

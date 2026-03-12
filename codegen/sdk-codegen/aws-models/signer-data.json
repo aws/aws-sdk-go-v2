@@ -1,0 +1,467 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.signerdata#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                },
+                "code": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient permissions to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.signerdata#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.signerdata#CertificateHash": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.signerdata#CertificateHashes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signerdata#CertificateHash"
+            }
+        },
+        "com.amazonaws.signerdata#GetRevocationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signerdata#GetRevocationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signerdata#GetRevocationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signerdata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signerdata#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signerdata#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signerdata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the revocation status for a signed artifact by checking if the signing profile, job, or certificate has been revoked.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Check revocation status for a signed artifact",
+                        "documentation": "Checks if a signing profile, job, or certificate has been revoked for a given artifact.",
+                        "input": {
+                            "signatureTimestamp": 1700000000,
+                            "platformId": "Notation-OCI-SHA384-ECDSA",
+                            "profileVersionArn": "arn:aws:signer:us-east-1:123456789012:/signing-profiles/my-profile/v1",
+                            "jobArn": "arn:aws:signer:us-east-1:123456789012:/signing-jobs/my-job-id",
+                            "certificateHashes": [
+                                "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                            ]
+                        },
+                        "output": {
+                            "revokedEntities": []
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/revocations"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetRevocationStatusSuccess",
+                        "params": {
+                            "signatureTimestamp": 1700000000,
+                            "platformId": "Notation-OCI-SHA384-ECDSA",
+                            "profileVersionArn": "arn:aws:signer:us-east-1:123456789012:/signing-profiles/test-profile/v1",
+                            "jobArn": "arn:aws:signer:us-east-1:123456789012:/signing-jobs/test-job",
+                            "certificateHashes": [
+                                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                            ]
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.signerdata#GetRevocationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "signatureTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the artifact was signed, in ISO 8601 format.</p>",
+                        "smithy.api#httpQuery": "signatureTimestamp",
+                        "smithy.api#required": {}
+                    }
+                },
+                "platformId": {
+                    "target": "com.amazonaws.signerdata#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform identifier for the signing platform used.</p>",
+                        "smithy.api#httpQuery": "platformId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileVersionArn": {
+                    "target": "com.amazonaws.signerdata#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the signing profile version used to sign the artifact.</p>",
+                        "smithy.api#httpQuery": "profileVersionArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobArn": {
+                    "target": "com.amazonaws.signerdata#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the signing job that produced the signature.</p>",
+                        "smithy.api#httpQuery": "jobArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "certificateHashes": {
+                    "target": "com.amazonaws.signerdata#CertificateHashes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of certificate hashes to check for revocation.</p>",
+                        "smithy.api#httpQuery": "certificateHashes",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for checking revocation status.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signerdata#GetRevocationStatusResponse": {
+            "type": "structure",
+            "members": {
+                "revokedEntities": {
+                    "target": "com.amazonaws.signerdata#RevokedEntities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of entity identifiers that have been revoked. Empty if no revocations found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response containing the list of revoked entities.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signerdata#InternalServiceErrorException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                },
+                "code": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal service error occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.signerdata#PlatformId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.signerdata#RevokedEntities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signerdata#RevokedEntity"
+            }
+        },
+        "com.amazonaws.signerdata#RevokedEntity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.signerdata#SignerDataPlane": {
+            "type": "service",
+            "version": "2017-08-25",
+            "operations": [
+                {
+                    "target": "com.amazonaws.signerdata#GetRevocationStatus"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Signer Data",
+                    "arnNamespace": "signer",
+                    "endpointPrefix": "data-signer"
+                },
+                "aws.auth#sigv4": {
+                    "name": "signer"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>AWS Signer Data Plane service provides APIs for checking revocation status of signed artifacts.</p>",
+                "smithy.api#title": "AWS Signer Data Plane",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "required": true,
+                            "type": "String",
+                            "builtIn": "AWS::Region",
+                            "documentation": "The AWS region used to dispatch the request."
+                        },
+                        "UseFIPS": {
+                            "required": true,
+                            "type": "Boolean",
+                            "builtIn": "AWS::UseFIPS",
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint."
+                        },
+                        "UseDualStack": {
+                            "required": true,
+                            "type": "Boolean",
+                            "builtIn": "AWS::UseDualStack",
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint."
+                        },
+                        "Endpoint": {
+                            "required": false,
+                            "type": "String",
+                            "builtIn": "SDK::Endpoint",
+                            "documentation": "Override the endpoint used to send this request."
+                        }
+                    },
+                    "rules": [
+                        {
+                            "type": "endpoint",
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                }
+                            }
+                        },
+                        {
+                            "type": "tree",
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "type": "endpoint",
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "endpoint": {
+                                        "url": "https://data-signer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}"
+                                    }
+                                },
+                                {
+                                    "type": "endpoint",
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "endpoint": {
+                                        "url": "https://data-signer-fips.{Region}.{PartitionResult#dnsSuffix}"
+                                    }
+                                },
+                                {
+                                    "type": "endpoint",
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "endpoint": {
+                                        "url": "https://data-signer.{Region}.{PartitionResult#dualStackDnsSuffix}"
+                                    }
+                                },
+                                {
+                                    "type": "endpoint",
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://data-signer.{Region}.{PartitionResult#dnsSuffix}"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "version": "1.0",
+                    "testCases": [
+                        {
+                            "documentation": "Standard region endpoint",
+                            "params": {
+                                "Region": "us-east-1"
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://data-signer.us-east-1.amazonaws.com"
+                                }
+                            }
+                        },
+                        {
+                            "documentation": "European Sovereign Cloud region endpoint",
+                            "params": {
+                                "Region": "eusc-de-east-1"
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://data-signer.eusc-de-east-1.amazonaws.eu"
+                                }
+                            }
+                        },
+                        {
+                            "documentation": "Custom endpoint override",
+                            "params": {
+                                "Region": "us-east-1",
+                                "Endpoint": "https://vpce-123.data-signer.us-east-1.vpce.amazonaws.com"
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpce-123.data-signer.us-east-1.vpce.amazonaws.com"
+                                }
+                            }
+                        },
+                        {
+                            "documentation": "FIPS endpoint",
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://data-signer-fips.us-east-1.amazonaws.com"
+                                }
+                            }
+                        },
+                        {
+                            "documentation": "Dual-stack endpoint",
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://data-signer.us-east-1.api.aws"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "com.amazonaws.signerdata#TooManyRequestsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                },
+                "code": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.signerdata#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                },
+                "code": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request contains invalid parameters or is malformed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

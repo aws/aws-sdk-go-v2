@@ -40,8 +40,8 @@ type ListMemoryRecordsInput struct {
 	// This member is required.
 	MemoryId *string
 
-	// The namespace to filter memory records by. If specified, only memory records in
-	// this namespace are returned.
+	// The namespace prefix to filter memory records by. Returns all memory records in
+	// namespaces that start with the provided prefix.
 	//
 	// This member is required.
 	Namespace *string

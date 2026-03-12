@@ -4031,6 +4031,11 @@ func validateCustomOriginConfig(v *types.CustomOriginConfig) error {
 			invalidParams.AddNested("OriginSslProtocols", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OriginMtlsConfig != nil {
+		if err := validateOriginMtlsConfig(v.OriginMtlsConfig); err != nil {
+			invalidParams.AddNested("OriginMtlsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5061,6 +5066,21 @@ func validateOriginList(v []types.Origin) error {
 		if err := validateOrigin(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOriginMtlsConfig(v *types.OriginMtlsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OriginMtlsConfig"}
+	if v.ClientCertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientCertificateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

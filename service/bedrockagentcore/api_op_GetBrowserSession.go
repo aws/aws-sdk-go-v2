@@ -13,8 +13,8 @@ import (
 )
 
 // Retrieves detailed information about a specific browser session in Amazon
-// Bedrock. This operation returns the session's configuration, current status,
-// associated streams, and metadata.
+// Bedrock AgentCore. This operation returns the session's configuration, current
+// status, associated streams, and metadata.
 //
 // To get a browser session, you must specify both the browser identifier and the
 // session ID. The response includes information about the session's viewport
@@ -86,6 +86,17 @@ type GetBrowserSessionOutput struct {
 
 	// The name of the browser session.
 	Name *string
+
+	// The browser profile configuration associated with this session. Contains the
+	// profile identifier that links to persistent browser data such as cookies and
+	// local storage.
+	ProfileConfiguration *types.BrowserProfileConfiguration
+
+	// The active proxy configuration for this browser session. This field is only
+	// present if proxy configuration was provided when the session was started using
+	// StartBrowserSession . The configuration includes proxy servers, domain bypass
+	// rules and the proxy authentication credentials.
+	ProxyConfiguration *types.ProxyConfiguration
 
 	// The artifact containing the session replay information.
 	SessionReplayArtifact *string

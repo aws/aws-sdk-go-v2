@@ -72,11 +72,6 @@ type GetApprovalTeamOutput struct {
 
 	// An array of PolicyReference objects. Contains a list of policies that define
 	// the permissions for team resources.
-	//
-	// The protected operation for a service integration might require specific
-	// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-	//
-	// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 	Policies []types.PolicyReference
 
 	// Status for the team. For more information, see [Team health] in the Multi-party approval

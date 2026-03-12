@@ -5,7 +5,6 @@ package query
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go/middleware"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -15,7 +14,7 @@ import (
 	"testing"
 )
 
-func TestClient_FlattenedXmlMapWithXmlName_awsAwsqueryDeserialize(t *testing.T) {
+func TestClient_FlattenedXmlMapWithXmlName_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -85,13 +84,8 @@ func TestClient_FlattenedXmlMapWithXmlName_awsAwsqueryDeserialize(t *testing.T) 
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params FlattenedXmlMapWithXmlNameInput
 			result, err := client.FlattenedXmlMapWithXmlName(context.Background(), &params)
@@ -103,6 +97,86 @@ func TestClient_FlattenedXmlMapWithXmlName_awsAwsqueryDeserialize(t *testing.T) 
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_FlattenedXmlMapWithXmlName_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *FlattenedXmlMapWithXmlNameOutput
+	}{
+		"QueryQueryFlattenedXmlMapWithXmlName": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<FlattenedXmlMapWithXmlNameResponse xmlns="https://example.com/">
+			    <FlattenedXmlMapWithXmlNameResult>
+			        <KVP>
+			            <K>a</K>
+			            <V>A</V>
+			        </KVP>
+			        <KVP>
+			            <K>b</K>
+			            <V>B</V>
+			        </KVP>
+			    </FlattenedXmlMapWithXmlNameResult>
+			</FlattenedXmlMapWithXmlNameResponse>`),
+			ExpectResult: &FlattenedXmlMapWithXmlNameOutput{
+				MyMap: map[string]string{
+					"a": "A",
+					"b": "B",
+				},
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params FlattenedXmlMapWithXmlNameInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.FlattenedXmlMapWithXmlName(context.Background(), &params)
 			}
 		})
 	}

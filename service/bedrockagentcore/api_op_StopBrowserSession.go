@@ -11,9 +11,9 @@ import (
 	"time"
 )
 
-// Terminates an active browser session in Amazon Bedrock. This operation stops
-// the session, releases associated resources, and makes the session unavailable
-// for further use.
+// Terminates an active browser session in Amazon Bedrock AgentCore. This
+// operation stops the session, releases associated resources, and makes the
+// session unavailable for further use.
 //
 // To stop a browser session, you must specify both the browser identifier and the
 // session ID. Once stopped, a session cannot be restarted; you must create a new
@@ -56,7 +56,7 @@ type StopBrowserSessionInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error.
+	// AgentCore ignores the request, but does not return an error.
 	ClientToken *string
 
 	// The trace identifier for request tracking.

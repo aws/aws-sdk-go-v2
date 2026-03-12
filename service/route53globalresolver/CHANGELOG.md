@@ -1,3 +1,16 @@
+# v1.1.0 (2026-03-09)
+
+* **Feature**: Adds support for dual stack Global Resolvers and Dictionary-based Domain Generation Firewall Advanced Protection.
+
+# v1.0.5 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.4 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.3 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

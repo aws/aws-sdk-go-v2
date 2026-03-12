@@ -6,10 +6,8 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -21,7 +19,7 @@ import (
 	"testing"
 )
 
-func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
+func TestClient_SimpleScalarProperties_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *SimpleScalarPropertiesInput
 		ExpectMethod  string
@@ -176,17 +174,17 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient: protocoltesthttp.NewClient(),
-				Region:     "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
 			})
 			result, err := client.SimpleScalarProperties(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -217,7 +215,166 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 	}
 }
 
-func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) {
+func BenchmarkClient_SimpleScalarProperties_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *SimpleScalarPropertiesInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"RpcV2CborSimpleScalarProperties": {
+			Params: &SimpleScalarPropertiesInput{
+				ByteValue:         ptr.Int8(5),
+				DoubleValue:       ptr.Float64(1.889),
+				FalseBooleanValue: ptr.Bool(false),
+				FloatValue:        ptr.Float32(7.625),
+				IntegerValue:      ptr.Int32(256),
+				LongValue:         ptr.Int64(9873),
+				ShortValue:        ptr.Int16(9898),
+				StringValue:       ptr.String("simple"),
+				TrueBooleanValue:  ptr.Bool(true),
+				BlobValue:         []byte("foo"),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kD0AABsaW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==`)
+			},
+		},
+		"RpcV2CborClientDoesntSerializeNullStructureValues": {
+			Params: &SimpleScalarPropertiesInput{
+				StringValue: nil,
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v/8=`)
+			},
+		},
+		"RpcV2CborSupportsNaNFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				DoubleValue: ptr.Float64(math.NaN()),
+				FloatValue:  ptr.Float32(float32(math.NaN())),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v2tkb3VibGVWYWx1Zft/+AAAAAAAAGpmbG9hdFZhbHVl+n/AAAD/`)
+			},
+		},
+		"RpcV2CborSupportsInfinityFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				DoubleValue: ptr.Float64(math.Inf(1)),
+				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v2tkb3VibGVWYWx1Zft/8AAAAAAAAGpmbG9hdFZhbHVl+n+AAAD/`)
+			},
+		},
+		"RpcV2CborSupportsNegativeInfinityFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				DoubleValue: ptr.Float64(math.Inf(-1)),
+				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v2tkb3VibGVWYWx1Zfv/8AAAAAAAAGpmbG9hdFZhbHVl+v+AAAD/`)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
+			})
+			for i := 0; i < b.N; i++ {
+				client.SimpleScalarProperties(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
+func TestClient_SimpleScalarProperties_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -454,12 +611,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				Region: "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
 			})
 			var params SimpleScalarPropertiesInput
 			result, err := client.SimpleScalarProperties(context.Background(), &params)
@@ -471,6 +623,242 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_SimpleScalarProperties_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *SimpleScalarPropertiesOutput
+	}{
+		"RpcV2CborSimpleScalarProperties": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kD0AABsaW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb2//`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				TrueBooleanValue:  ptr.Bool(true),
+				FalseBooleanValue: ptr.Bool(false),
+				ByteValue:         ptr.Int8(5),
+				DoubleValue:       ptr.Float64(1.889),
+				FloatValue:        ptr.Float32(7.625),
+				IntegerValue:      ptr.Int32(256),
+				ShortValue:        ptr.Int16(9898),
+				StringValue:       ptr.String("simple"),
+				BlobValue:         []byte("foo"),
+			},
+		},
+		"RpcV2CborSimpleScalarPropertiesUsingDefiniteLength": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`qXB0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kD0AABsaW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb28=`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				TrueBooleanValue:  ptr.Bool(true),
+				FalseBooleanValue: ptr.Bool(false),
+				ByteValue:         ptr.Int8(5),
+				DoubleValue:       ptr.Float64(1.889),
+				FloatValue:        ptr.Float32(7.625),
+				IntegerValue:      ptr.Int32(256),
+				ShortValue:        ptr.Int16(9898),
+				StringValue:       ptr.String("simple"),
+				BlobValue:         []byte("foo"),
+			},
+		},
+		"RpcV2CborClientDoesntDeserializeNullStructureValues": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2tzdHJpbmdWYWx1Zfb/`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &SimpleScalarPropertiesOutput{},
+		},
+		"RpcV2CborSupportsNaNFloatOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2tkb3VibGVWYWx1Zft/+AAAAAAAAGpmbG9hdFZhbHVl+n/AAAD/`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				DoubleValue: ptr.Float64(math.NaN()),
+				FloatValue:  ptr.Float32(float32(math.NaN())),
+			},
+		},
+		"RpcV2CborSupportsInfinityFloatOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2tkb3VibGVWYWx1Zft/8AAAAAAAAGpmbG9hdFZhbHVl+n+AAAD/`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				DoubleValue: ptr.Float64(math.Inf(1)),
+				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+			},
+		},
+		"RpcV2CborSupportsNegativeInfinityFloatOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2tkb3VibGVWYWx1Zfv/8AAAAAAAAGpmbG9hdFZhbHVl+v+AAAD/`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				DoubleValue: ptr.Float64(math.Inf(-1)),
+				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+			},
+		},
+		"RpcV2CborSupportsUpcastingDataOnDeserialize": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2tkb3VibGVWYWx1Zfk+AGpmbG9hdFZhbHVl+UegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8=`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				DoubleValue:  ptr.Float64(1.5),
+				FloatValue:   ptr.Float32(7.625),
+				IntegerValue: ptr.Int32(56),
+				LongValue:    ptr.Int64(256),
+				ShortValue:   ptr.Int16(10),
+			},
+		},
+		"RpcV2CborExtraFieldsInTheBodyShouldBeSkippedByClients": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kD0AABrZXh0cmFPYmplY3S/c2luZGVmaW5pdGVMZW5ndGhNYXC/a3dpdGhBbkFycmF5nwECA///cWRlZmluaXRlTGVuZ3RoTWFwo3J3aXRoQURlZmluaXRlQXJyYXmDAQIDeB1hbmRTb21lSW5kZWZpbml0ZUxlbmd0aFN0cmluZ3gfdGhhdCBoYXMsIGJlZW4gY2h1bmtlZCBvbiBjb21tYWxub3JtYWxTdHJpbmdjZm9vanNob3J0VmFsdWUZJw9uc29tZU90aGVyRmllbGR2dGhpcyBzaG91bGQgYmUgc2tpcHBlZP9saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				ByteValue:         ptr.Int8(5),
+				DoubleValue:       ptr.Float64(1.889),
+				FalseBooleanValue: ptr.Bool(false),
+				FloatValue:        ptr.Float32(7.625),
+				IntegerValue:      ptr.Int32(256),
+				LongValue:         ptr.Int64(9873),
+				ShortValue:        ptr.Int16(9898),
+				StringValue:       ptr.String("simple"),
+				TrueBooleanValue:  ptr.Bool(true),
+				BlobValue:         []byte("foo"),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params SimpleScalarPropertiesInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.SimpleScalarProperties(context.Background(), &params)
 			}
 		})
 	}

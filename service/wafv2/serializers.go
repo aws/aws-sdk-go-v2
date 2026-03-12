@@ -1847,6 +1847,67 @@ func (m *awsAwsjson11_serializeOpGetSampledRequests) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetTopPathStatisticsByTraffic struct {
+}
+
+func (*awsAwsjson11_serializeOpGetTopPathStatisticsByTraffic) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetTopPathStatisticsByTraffic) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTopPathStatisticsByTrafficInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetTopPathStatisticsByTraffic")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetTopPathStatisticsByTrafficInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetWebACL struct {
 }
 
@@ -6968,6 +7029,65 @@ func awsAwsjson11_serializeOpDocumentGetSampledRequestsInput(v *GetSampledReques
 		if err := awsAwsjson11_serializeDocumentTimeWindow(v.TimeWindow, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.WebAclArn != nil {
+		ok := object.Key("WebAclArn")
+		ok.String(*v.WebAclArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetTopPathStatisticsByTrafficInput(v *GetTopPathStatisticsByTrafficInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BotCategory != nil {
+		ok := object.Key("BotCategory")
+		ok.String(*v.BotCategory)
+	}
+
+	if v.BotName != nil {
+		ok := object.Key("BotName")
+		ok.String(*v.BotName)
+	}
+
+	if v.BotOrganization != nil {
+		ok := object.Key("BotOrganization")
+		ok.String(*v.BotOrganization)
+	}
+
+	if v.Limit != nil {
+		ok := object.Key("Limit")
+		ok.Integer(*v.Limit)
+	}
+
+	if v.NextMarker != nil {
+		ok := object.Key("NextMarker")
+		ok.String(*v.NextMarker)
+	}
+
+	if v.NumberOfTopTrafficBotsPerPath != nil {
+		ok := object.Key("NumberOfTopTrafficBotsPerPath")
+		ok.Integer(*v.NumberOfTopTrafficBotsPerPath)
+	}
+
+	if len(v.Scope) > 0 {
+		ok := object.Key("Scope")
+		ok.String(string(v.Scope))
+	}
+
+	if v.TimeWindow != nil {
+		ok := object.Key("TimeWindow")
+		if err := awsAwsjson11_serializeDocumentTimeWindow(v.TimeWindow, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UriPathPrefix != nil {
+		ok := object.Key("UriPathPrefix")
+		ok.String(*v.UriPathPrefix)
 	}
 
 	if v.WebAclArn != nil {

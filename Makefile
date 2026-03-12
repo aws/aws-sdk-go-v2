@@ -10,9 +10,9 @@ UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 SNAPSHOT_TAGS=-tags "snapshot"
 
-SMITHY_GO_SRC ?= $(shell pwd)/../smithy-go
+SMITHY_GO_SRC ?= $(abspath $(shell pwd)/..)/smithy-go
 
-SDK_MIN_GO_VERSION ?= 1.23
+SDK_MIN_GO_VERSION ?= 1.24
 
 EACHMODULE_FAILFAST ?= true
 EACHMODULE_FAILFAST_FLAG=-fail-fast=${EACHMODULE_FAILFAST}
@@ -58,6 +58,8 @@ REPOTOOLS_CALCULATE_RELEASE_VERBOSE_FLAG=-v=${REPOTOOLS_CALCULATE_RELEASE_VERBOS
 
 REPOTOOLS_CALCULATE_RELEASE_ADDITIONAL_ARGS ?=
 
+DEV_SERVICE ?= s3
+
 ifneq ($(PRE_RELEASE_VERSION),)
 	REPOTOOLS_CALCULATE_RELEASE_ADDITIONAL_ARGS += -preview=${PRE_RELEASE_VERSION}
 endif
@@ -84,9 +86,12 @@ tidy-modules-. add-module-license-files gen-aws-ptrs format gen-mod-dropreplace-
 
 # stripped-down regenerate script that eliminates a lot of the cruft you don't
 # need in development (that takes time)
-# modify this with whatever service you're working on
-generate-dev: smithy-generate update-requires gen-repo-mod-replace gen-mod-replace-smithy-config gen-mod-replace-smithy-aws gen-mod-replace-smithy-service_s3 update-module-metadata smithy-annotate-stable \
-gen-config-asserts gen-internal-codegen tidy-modules-config tidy-modules-aws tidy-modules-service_s3 format-dev
+# set DEV_SERVICE to the service package name (e.g. ec2, bedrockruntime)
+#
+# e.g.:
+# SMITHY_GO_BUILD_API=com.amazonaws.sqs DEV_SERVICE=sqs make generate-dev
+generate-dev: smithy-generate update-requires gen-repo-mod-replace gen-mod-replace-smithy-config gen-mod-replace-smithy-aws gen-mod-replace-smithy-service_${DEV_SERVICE} update-module-metadata smithy-annotate-stable \
+gen-config-asserts gen-internal-codegen tidy-modules-config tidy-modules-aws tidy-modules-service_${DEV_SERVICE} format-dev
 
 reset-sum:
 	find . -name go.sum -exec git checkout -- {} \;
@@ -129,7 +134,7 @@ format:
 	gofmt -w -s .
 
 format-dev:
-	gofmt -w -s service/s3
+	gofmt -w -s service/${DEV_SERVICE}
 
 gen-config-asserts:
 	@echo "Generating SDK config package implementor assertions"
@@ -452,3 +457,4 @@ list-deps-%:
 	@cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst list-deps-,,$@)) ${EACHMODULE_FLAGS} \
 		"go list -m all | grep -v 'github.com/aws/aws-sdk-go-v2'" | sort -u
+

@@ -119,6 +119,9 @@ type ListShardsInput struct {
 	// You cannot specify this parameter if you specify the NextToken parameter.
 	StreamCreationTimestamp *time.Time
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	// The name of the data stream whose shards you want to list.
 	//
 	// You cannot specify this parameter if you specify the NextToken parameter.
@@ -130,6 +133,7 @@ type ListShardsInput struct {
 func (in *ListShardsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("control")
 }
 

@@ -870,6 +870,26 @@ func (m *validateOpDeleteConnection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDataExportConfiguration struct {
+}
+
+func (*validateOpDeleteDataExportConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataExportConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataExportConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataExportConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataProduct struct {
 }
 
@@ -2770,6 +2790,26 @@ func (m *validateOpPutEnvironmentBlueprintConfiguration) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpQueryGraph struct {
+}
+
+func (*validateOpQueryGraph) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpQueryGraph) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*QueryGraphInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpQueryGraphInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRejectPredictions struct {
 }
 
@@ -3642,6 +3682,10 @@ func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnection{}, middleware.After)
 }
 
+func addOpDeleteDataExportConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataExportConfiguration{}, middleware.After)
+}
+
 func addOpDeleteDataProductValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataProduct{}, middleware.After)
 }
@@ -4020,6 +4064,10 @@ func addOpPutDataExportConfigurationValidationMiddleware(stack *middleware.Stack
 
 func addOpPutEnvironmentBlueprintConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutEnvironmentBlueprintConfiguration{}, middleware.After)
+}
+
+func addOpQueryGraphValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpQueryGraph{}, middleware.After)
 }
 
 func addOpRejectPredictionsValidationMiddleware(stack *middleware.Stack) error {
@@ -4730,6 +4778,29 @@ func validateDomainUnitTarget(v *types.DomainUnitTarget) error {
 	}
 }
 
+func validateEntityPattern(v *types.EntityPattern) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntityPattern"}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Filters != nil {
+		if err := validateFilterClause(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEnvironmentConfiguration(v *types.EnvironmentConfiguration) error {
 	if v == nil {
 		return nil
@@ -5274,6 +5345,47 @@ func validateListingRevisionInput(v *types.ListingRevisionInput) error {
 	}
 }
 
+func validateMatchClause(v types.MatchClause) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchClause"}
+	switch uv := v.(type) {
+	case *types.MatchClauseMemberEntityPattern:
+		if err := validateEntityPattern(&uv.Value); err != nil {
+			invalidParams.AddNested("[entityPattern]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.MatchClauseMemberRelationPattern:
+		if err := validateRelationPattern(&uv.Value); err != nil {
+			invalidParams.AddNested("[relationPattern]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchClauses(v []types.MatchClause) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchClauses"}
+	for i := range v {
+		if err := validateMatchClause(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetadataFormEnforcementDetail(v *types.MetadataFormEnforcementDetail) error {
 	if v == nil {
 		return nil
@@ -5778,6 +5890,24 @@ func validateRelationalFilterConfigurations(v []types.RelationalFilterConfigurat
 		if err := validateRelationalFilterConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRelationPattern(v *types.RelationPattern) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RelationPattern"}
+	if len(v.RelationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RelationType"))
+	}
+	if len(v.RelationDirection) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RelationDirection"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7321,6 +7451,21 @@ func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDataExportConfigurationInput(v *DeleteDataExportConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataExportConfigurationInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9053,6 +9198,28 @@ func validateOpPutEnvironmentBlueprintConfigurationInput(v *PutEnvironmentBluepr
 	}
 	if v.EnabledRegions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnabledRegions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpQueryGraphInput(v *QueryGraphInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryGraphInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Match == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Match"))
+	} else if v.Match != nil {
+		if err := validateMatchClauses(v.Match); err != nil {
+			invalidParams.AddNested("Match", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

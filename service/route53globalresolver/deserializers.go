@@ -2365,8 +2365,22 @@ func awsRestjson1_deserializeOpDocumentCreateGlobalResolverOutput(v **CreateGlob
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlobalResolverIpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.GlobalResolverIpAddressType(jtv)
+			}
+
 		case "ipv4Addresses":
 			if err := awsRestjson1_deserializeDocumentIPv4Addresses(&sv.Ipv4Addresses, value); err != nil {
+				return err
+			}
+
+		case "ipv6Addresses":
+			if err := awsRestjson1_deserializeDocumentIPv6Addresses(&sv.Ipv6Addresses, value); err != nil {
 				return err
 			}
 
@@ -3892,8 +3906,22 @@ func awsRestjson1_deserializeOpDocumentDeleteGlobalResolverOutput(v **DeleteGlob
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlobalResolverIpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.GlobalResolverIpAddressType(jtv)
+			}
+
 		case "ipv4Addresses":
 			if err := awsRestjson1_deserializeDocumentIPv4Addresses(&sv.Ipv4Addresses, value); err != nil {
+				return err
+			}
+
+		case "ipv6Addresses":
+			if err := awsRestjson1_deserializeDocumentIPv6Addresses(&sv.Ipv6Addresses, value); err != nil {
 				return err
 			}
 
@@ -4065,6 +4093,9 @@ func awsRestjson1_deserializeOpErrorDisableDNSView(response *smithyhttp.Response
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -4585,6 +4616,9 @@ func awsRestjson1_deserializeOpErrorEnableDNSView(response *smithyhttp.Response,
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -6357,8 +6391,22 @@ func awsRestjson1_deserializeOpDocumentGetGlobalResolverOutput(v **GetGlobalReso
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlobalResolverIpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.GlobalResolverIpAddressType(jtv)
+			}
+
 		case "ipv4Addresses":
 			if err := awsRestjson1_deserializeDocumentIPv4Addresses(&sv.Ipv4Addresses, value); err != nil {
+				return err
+			}
+
+		case "ipv6Addresses":
+			if err := awsRestjson1_deserializeDocumentIPv6Addresses(&sv.Ipv6Addresses, value); err != nil {
 				return err
 			}
 
@@ -6964,6 +7012,9 @@ func awsRestjson1_deserializeOpErrorImportFirewallDomains(response *smithyhttp.R
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -9302,6 +9353,9 @@ func awsRestjson1_deserializeOpErrorUpdateAccessToken(response *smithyhttp.Respo
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -9481,6 +9535,9 @@ func awsRestjson1_deserializeOpErrorUpdateDNSView(response *smithyhttp.Response,
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -9760,6 +9817,9 @@ func awsRestjson1_deserializeOpErrorUpdateFirewallDomains(response *smithyhttp.R
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -9948,6 +10008,9 @@ func awsRestjson1_deserializeOpErrorUpdateFirewallRule(response *smithyhttp.Resp
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -10280,6 +10343,9 @@ func awsRestjson1_deserializeOpErrorUpdateGlobalResolver(response *smithyhttp.Re
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -10376,8 +10442,22 @@ func awsRestjson1_deserializeOpDocumentUpdateGlobalResolverOutput(v **UpdateGlob
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlobalResolverIpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.GlobalResolverIpAddressType(jtv)
+			}
+
 		case "ipv4Addresses":
 			if err := awsRestjson1_deserializeDocumentIPv4Addresses(&sv.Ipv4Addresses, value); err != nil {
+				return err
+			}
+
+		case "ipv6Addresses":
+			if err := awsRestjson1_deserializeDocumentIPv6Addresses(&sv.Ipv6Addresses, value); err != nil {
 				return err
 			}
 
@@ -10549,6 +10629,9 @@ func awsRestjson1_deserializeOpErrorUpdateHostedZoneAssociation(response *smithy
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -12868,8 +12951,22 @@ func awsRestjson1_deserializeDocumentGlobalResolversItem(v **types.GlobalResolve
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlobalResolverIpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.GlobalResolverIpAddressType(jtv)
+			}
+
 		case "ipv4Addresses":
 			if err := awsRestjson1_deserializeDocumentIPv4Addresses(&sv.Ipv4Addresses, value); err != nil {
+				return err
+			}
+
+		case "ipv6Addresses":
+			if err := awsRestjson1_deserializeDocumentIPv6Addresses(&sv.Ipv6Addresses, value); err != nil {
 				return err
 			}
 
@@ -13151,6 +13248,42 @@ func awsRestjson1_deserializeDocumentIPv4Addresses(v *[]string, value interface{
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected IPv4Address to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIPv6Addresses(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected IPv6Address to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}

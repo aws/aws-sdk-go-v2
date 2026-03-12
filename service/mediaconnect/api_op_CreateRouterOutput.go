@@ -68,8 +68,8 @@ type CreateRouterOutputInput struct {
 	// preferred maintenance windows and schedules.
 	MaintenanceConfiguration types.MaintenanceConfiguration
 
-	// The AWS Region for the router output. Defaults to the current region if not
-	// specified.
+	// The Amazon Web Services Region for the router output. Defaults to the current
+	// region if not specified.
 	RegionName *string
 
 	// Key-value pairs that can be used to tag this router output.

@@ -2,6 +2,7 @@ package s3
 
 import (
 	"context"
+	"slices"
 	"testing"
 
 	smithy "github.com/aws/smithy-go"
@@ -39,12 +40,7 @@ func (*mockIdentityResolver) GetIdentity(ctx context.Context, props smithy.Prope
 }
 
 func contains(have []string, want string) bool {
-	for _, v := range have {
-		if v == want {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(have, want)
 }
 
 func TestSelectScheme(t *testing.T) {

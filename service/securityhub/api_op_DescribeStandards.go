@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the available standards in Security Hub.
+// Returns a list of the available standards in Security Hub CSPM.
 //
 // For each standard, the results include the standard ARN, the name, and a
 // description.

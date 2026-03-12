@@ -4230,6 +4230,13 @@ func awsRestjson1_serializeDocumentIcebergMetadata(v *types.IcebergMetadata, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.PartitionSpec != nil {
+		ok := object.Key("partitionSpec")
+		if err := awsRestjson1_serializeDocumentIcebergPartitionSpec(v.PartitionSpec, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Properties != nil {
 		ok := object.Key("properties")
 		if err := awsRestjson1_serializeDocumentTableProperties(v.Properties, ok); err != nil {
@@ -4242,6 +4249,72 @@ func awsRestjson1_serializeDocumentIcebergMetadata(v *types.IcebergMetadata, val
 		if err := awsRestjson1_serializeDocumentIcebergSchema(v.Schema, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.WriteOrder != nil {
+		ok := object.Key("writeOrder")
+		if err := awsRestjson1_serializeDocumentIcebergSortOrder(v.WriteOrder, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIcebergPartitionField(v *types.IcebergPartitionField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldId != nil {
+		ok := object.Key("field-id")
+		ok.Integer(*v.FieldId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.SourceId != nil {
+		ok := object.Key("source-id")
+		ok.Integer(*v.SourceId)
+	}
+
+	if v.Transform != nil {
+		ok := object.Key("transform")
+		ok.String(*v.Transform)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIcebergPartitionFieldList(v []types.IcebergPartitionField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentIcebergPartitionField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIcebergPartitionSpec(v *types.IcebergPartitionSpec, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("fields")
+		if err := awsRestjson1_serializeDocumentIcebergPartitionFieldList(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpecId != nil {
+		ok := object.Key("spec-id")
+		ok.Integer(*v.SpecId)
 	}
 
 	return nil
@@ -4273,6 +4346,65 @@ func awsRestjson1_serializeDocumentIcebergSnapshotManagementSettings(v *types.Ic
 	if v.MinSnapshotsToKeep != nil {
 		ok := object.Key("minSnapshotsToKeep")
 		ok.Integer(*v.MinSnapshotsToKeep)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIcebergSortField(v *types.IcebergSortField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Direction) > 0 {
+		ok := object.Key("direction")
+		ok.String(string(v.Direction))
+	}
+
+	if len(v.NullOrder) > 0 {
+		ok := object.Key("null-order")
+		ok.String(string(v.NullOrder))
+	}
+
+	if v.SourceId != nil {
+		ok := object.Key("source-id")
+		ok.Integer(*v.SourceId)
+	}
+
+	if v.Transform != nil {
+		ok := object.Key("transform")
+		ok.String(*v.Transform)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIcebergSortFieldList(v []types.IcebergSortField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentIcebergSortField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIcebergSortOrder(v *types.IcebergSortOrder, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("fields")
+		if err := awsRestjson1_serializeDocumentIcebergSortFieldList(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrderId != nil {
+		ok := object.Key("order-id")
+		ok.Integer(*v.OrderId)
 	}
 
 	return nil
@@ -4334,6 +4466,11 @@ func awsRestjson1_serializeDocumentReplicationDestinations(v []types.Replication
 func awsRestjson1_serializeDocumentSchemaField(v *types.SchemaField, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.Integer(*v.Id)
+	}
 
 	if v.Name != nil {
 		ok := object.Key("name")

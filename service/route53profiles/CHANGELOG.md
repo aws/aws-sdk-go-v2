@@ -1,3 +1,16 @@
+# v1.9.21 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.20 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.19 (2026-02-05)
+
+* No change notes available for this release.
+
 # v1.9.18 (2026-01-16)
 
 * No change notes available for this release.

@@ -13,8 +13,8 @@ import (
 
 // This action retrieves the property mappings for the specified hypervisor. A
 // hypervisor property mapping displays the relationship of entity properties
-// available from the on-premises hypervisor to the properties available in Amazon
-// Web Services.
+// available from the hypervisor to the properties available in Amazon Web
+// Services.
 func (c *Client) GetHypervisorPropertyMappings(ctx context.Context, params *GetHypervisorPropertyMappingsInput, optFns ...func(*Options)) (*GetHypervisorPropertyMappingsOutput, error) {
 	if params == nil {
 		params = &GetHypervisorPropertyMappingsInput{}
@@ -48,8 +48,8 @@ type GetHypervisorPropertyMappingsOutput struct {
 	// The Amazon Resource Name (ARN) of the IAM role.
 	IamRoleArn *string
 
-	// This is a display of the mappings of on-premises VMware tags to the Amazon Web
-	// Services tags.
+	// This is a display of the mappings of VMware tags to the Amazon Web Services
+	// tags.
 	VmwareToAwsTagMappings []types.VmwareToAwsTagMapping
 
 	// Metadata pertaining to the operation's result.

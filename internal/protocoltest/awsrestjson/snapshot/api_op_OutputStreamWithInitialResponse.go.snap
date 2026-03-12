@@ -8,6 +8,7 @@ OutputStreamWithInitialResponse
 		ResolveEndpoint
 		OperationSerializer
 	Build stack step
+		EventStreamBuildMiddleware
 		ClientRequestID
 		ComputeContentLength
 		SetCredentialSourceMiddleware

@@ -42,6 +42,9 @@ type CreateAccountAssociationInput struct {
 	// A description of the account association request.
 	Description *string
 
+	// The General Authorization reference by authorization material name.
+	GeneralAuthorization *types.GeneralAuthorizationName
+
 	// The name of the destination for the new account association.
 	Name *string
 
@@ -64,7 +67,8 @@ type CreateAccountAssociationOutput struct {
 	AssociationState types.AssociationState
 
 	// Third-party IoT platform OAuth authorization server URL backed with all the
-	// required parameters to perform end-user authentication.
+	// required parameters to perform end-user authentication. This field will be empty
+	// when using General Authorization flows that do not require OAuth.
 	//
 	// This member is required.
 	OAuthAuthorizationUrl *string

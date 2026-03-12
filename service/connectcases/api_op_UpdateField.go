@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +38,9 @@ type UpdateFieldInput struct {
 	//
 	// This member is required.
 	FieldId *string
+
+	// Union of field attributes.
+	Attributes types.FieldAttributes
 
 	// The description of a field.
 	Description *string

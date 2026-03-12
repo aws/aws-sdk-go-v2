@@ -374,6 +374,18 @@ func TestCheckSnapshot_ListResourceTypes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListSourceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSourceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSourceAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PromotePermissionCreatedFromPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PromotePermissionCreatedFromPolicy(context.Background(), nil, func(o *Options) {
@@ -774,6 +786,18 @@ func TestUpdateSnapshot_ListResourceTypes(t *testing.T) {
 	_, err := svc.ListResourceTypes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListResourceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSourceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSourceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSourceAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -67,6 +67,9 @@ type AccountAssociationItem struct {
 // OAuth settings and other authentication parameters.
 type AuthConfig struct {
 
+	// The authorization materials for General Authorization.
+	GeneralAuthorization []AuthMaterial
+
 	// The OAuth configuration settings used for authentication with the third-party
 	// service.
 	OAuth *OAuthConfig
@@ -77,8 +80,29 @@ type AuthConfig struct {
 // The updated authentication configuration details for a connector destination.
 type AuthConfigUpdate struct {
 
+	// The General Authorization update information containing authorization materials
+	// to add or update in Kinesis Data Streams.
+	GeneralAuthorizationUpdate *GeneralAuthorizationUpdate
+
 	// The updated OAuth configuration settings for the authentication configuration.
 	OAuthUpdate *OAuthUpdate
+
+	noSmithyDocumentSerde
+}
+
+// The authorization material containing the Secrets Manager arn and version.
+type AuthMaterial struct {
+
+	// The name of the authorization material.
+	//
+	// This member is required.
+	AuthMaterialName *string
+
+	// Configuration for AWS Secrets Manager, used to securely store and manage
+	// sensitive information for connector destinations.
+	//
+	// This member is required.
+	SecretsManager *SecretsManager
 
 	noSmithyDocumentSerde
 }
@@ -504,6 +528,28 @@ type ExponentialRolloutRate struct {
 	noSmithyDocumentSerde
 }
 
+// The General Authorization reference by authorization material name.
+type GeneralAuthorizationName struct {
+
+	// The name of the authorization material.
+	AuthMaterialName *string
+
+	noSmithyDocumentSerde
+}
+
+// The General Authorization update information containing authorization materials
+// to add or update.
+type GeneralAuthorizationUpdate struct {
+
+	// The authorization materials to add.
+	AuthMaterialsToAdd []AuthMaterial
+
+	// The authorization materials to update.
+	AuthMaterialsToUpdate []AuthMaterial
+
+	noSmithyDocumentSerde
+}
+
 // Configuration details for an AWS Lambda function used as an endpoint for a
 // cloud connector.
 type LambdaConfig struct {
@@ -522,6 +568,11 @@ type ManagedThingAssociation struct {
 
 	// The identifier of the account association in the association.
 	AccountAssociationId *string
+
+	// The status of the registration between the managed thing and the account
+	// association. Indicates whether the device is pre-associated or fully associated
+	// with the account association.
+	ManagedThingAssociationStatus ManagedThingAssociationStatus
 
 	// The identifier of the managed thing in the association.
 	ManagedThingId *string

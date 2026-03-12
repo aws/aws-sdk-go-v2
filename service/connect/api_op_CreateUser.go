@@ -17,6 +17,22 @@ import (
 // FirstName and LastName are required if you are using Amazon Connect or SAML for
 // identity management.
 //
+// Fields in PhoneConfig cannot be set simultaneously with their corresponding
+// channel-specific configuration parameters. Specifically:
+//
+//   - PhoneConfig.AutoAccept conflicts with AutoAcceptConfigs
+//
+//   - PhoneConfig.AfterContactWorkTimeLimit conflicts with AfterContactWorkConfigs
+//
+//   - PhoneConfig.PhoneType and PhoneConfig.PhoneNumber conflict with
+//     PhoneNumberConfigs
+//
+//   - PhoneConfig.PersistentConnection conflicts with PersistentConnectionConfigs
+//
+// We recommend using channel-specific parameters such as AutoAcceptConfigs ,
+// AfterContactWorkConfigs , PhoneNumberConfigs , PersistentConnectionConfigs , and
+// VoiceEnhancementConfigs for per-channel configuration.
+//
 // For information about how to create users using the Amazon Connect admin
 // website, see [Add Users]in the Amazon Connect Administrator Guide.
 //
@@ -47,11 +63,6 @@ type CreateUserInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The phone settings for the user.
-	//
-	// This member is required.
-	PhoneConfig *types.UserPhoneConfig
-
 	// The identifier of the routing profile for the user.
 	//
 	// This member is required.
@@ -78,6 +89,13 @@ type CreateUserInput struct {
 	// This member is required.
 	Username *string
 
+	// The list of after contact work (ACW) timeout configuration settings for each
+	// channel.
+	AfterContactWorkConfigs []types.AfterContactWorkConfigPerChannel
+
+	// The list of auto-accept configuration settings for each channel.
+	AutoAcceptConfigs []types.AutoAcceptConfig
+
 	// The identifier of the user account in the directory used for identity
 	// management. If Amazon Connect cannot access the directory, you can specify this
 	// identifier to authenticate users. If you include the identifier, we assume that
@@ -101,9 +119,24 @@ type CreateUserInput struct {
 	// password.
 	Password *string
 
+	// The list of persistent connection configuration settings for each channel.
+	PersistentConnectionConfigs []types.PersistentConnectionConfig
+
+	// The phone settings for the user. This parameter is optional. If not provided,
+	// the user can be configured using channel-specific parameters such as
+	// AutoAcceptConfigs , AfterContactWorkConfigs , PhoneNumberConfigs ,
+	// PersistentConnectionConfigs , and VoiceEnhancementConfigs .
+	PhoneConfig *types.UserPhoneConfig
+
+	// The list of phone number configuration settings for each channel.
+	PhoneNumberConfigs []types.PhoneNumberConfig
+
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	// The list of voice enhancement configuration settings for each channel.
+	VoiceEnhancementConfigs []types.VoiceEnhancementConfig
 
 	noSmithyDocumentSerde
 }

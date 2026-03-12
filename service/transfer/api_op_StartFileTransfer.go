@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +51,11 @@ type StartFileTransferInput struct {
 	//
 	// This member is required.
 	ConnectorId *string
+
+	// An array of key-value pairs that represent custom HTTP headers to include in
+	// AS2 messages. These headers are added to the AS2 message when sending files to
+	// your trading partner.
+	CustomHttpHeaders []types.CustomHttpHeader
 
 	// For an inbound transfer, the LocaDirectoryPath specifies the destination for
 	// one or more files that are transferred from the partner's SFTP server.

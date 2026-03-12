@@ -3079,6 +3079,15 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				sv.Status = types.RecommendationStatus(jtv)
 			}
 
+		case "statusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusReason to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = types.StatusReason(jtv)
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3373,6 +3382,19 @@ func awsRestjson1_deserializeDocumentRecommendationResourcesAggregates(v **types
 					return err
 				}
 				sv.ErrorCount = ptr.Int64(i64)
+			}
+
+		case "excludedCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ExcludedCount = ptr.Int64(i64)
 			}
 
 		case "okCount":
@@ -3685,6 +3707,15 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 					return fmt.Errorf("expected RecommendationStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.RecommendationStatus(jtv)
+			}
+
+		case "statusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusReason to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = types.StatusReason(jtv)
 			}
 
 		case "type":

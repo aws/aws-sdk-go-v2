@@ -27,7 +27,7 @@ public class ClockSkewGenerator implements GoIntegration {
     private static final Symbol TIME_OFFSET_RESOLVER = SymbolUtils.createValueSymbolBuilder(
             "initializeTimeOffsetResolver").build();
 
-    private static final GoWriter.Writable CLOCK_SKEW_INSERT_TEMPLATE = goTemplate("""
+    private static final Writable CLOCK_SKEW_INSERT_TEMPLATE = goTemplate("""
                     $dep:D
                     func $fn:L(stack $stack:P, c *Client) error {
                         mw := $depalias:L.$middleware:L{Offset: c.$off:L}
@@ -46,7 +46,7 @@ public class ClockSkewGenerator implements GoIntegration {
                     "off", TIME_OFFSET,
                     "dep", INTERNAL_MIDDLEWARE
             ));
-    private static final GoWriter.Writable TIME_OFFSET_RESOLVER_TEMPLATE = goTemplate(
+    private static final Writable TIME_OFFSET_RESOLVER_TEMPLATE = goTemplate(
             """
                     $import:D
                     func $fn:L(c *Client) {

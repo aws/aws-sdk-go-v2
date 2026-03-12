@@ -1,5 +1,4 @@
 //go:build integration && ec2env
-// +build integration,ec2env
 
 package imds
 

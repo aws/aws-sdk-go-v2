@@ -4562,10 +4562,10 @@ func TestEndpointCase126(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4620,10 +4620,10 @@ func TestEndpointCase127(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4680,10 +4680,10 @@ func TestEndpointCase128(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4740,10 +4740,10 @@ func TestEndpointCase129(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4800,10 +4800,10 @@ func TestEndpointCase130(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4860,10 +4860,10 @@ func TestEndpointCase131(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4920,10 +4920,10 @@ func TestEndpointCase132(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4976,10 +4976,10 @@ func TestEndpointCase133(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5105,10 +5105,10 @@ func TestEndpointCase137(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5162,10 +5162,10 @@ func TestEndpointCase138(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5219,10 +5219,10 @@ func TestEndpointCase139(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5275,10 +5275,10 @@ func TestEndpointCase140(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5404,10 +5404,10 @@ func TestEndpointCase144(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5463,10 +5463,10 @@ func TestEndpointCase145(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5518,10 +5518,10 @@ func TestEndpointCase146(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5643,10 +5643,10 @@ func TestEndpointCase150(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5701,10 +5701,10 @@ func TestEndpointCase151(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5761,10 +5761,10 @@ func TestEndpointCase152(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5821,10 +5821,10 @@ func TestEndpointCase153(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5881,10 +5881,10 @@ func TestEndpointCase154(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5941,10 +5941,10 @@ func TestEndpointCase155(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6001,10 +6001,10 @@ func TestEndpointCase156(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6057,10 +6057,10 @@ func TestEndpointCase157(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6186,10 +6186,10 @@ func TestEndpointCase161(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6243,10 +6243,10 @@ func TestEndpointCase162(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6300,10 +6300,10 @@ func TestEndpointCase163(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6356,10 +6356,10 @@ func TestEndpointCase164(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6485,10 +6485,10 @@ func TestEndpointCase168(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6544,10 +6544,10 @@ func TestEndpointCase169(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6599,10 +6599,10 @@ func TestEndpointCase170(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6724,10 +6724,10 @@ func TestEndpointCase174(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6782,10 +6782,10 @@ func TestEndpointCase175(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6842,10 +6842,10 @@ func TestEndpointCase176(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6902,10 +6902,10 @@ func TestEndpointCase177(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6962,10 +6962,10 @@ func TestEndpointCase178(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7022,10 +7022,10 @@ func TestEndpointCase179(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7082,10 +7082,10 @@ func TestEndpointCase180(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7138,10 +7138,10 @@ func TestEndpointCase181(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7267,10 +7267,10 @@ func TestEndpointCase185(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7324,10 +7324,10 @@ func TestEndpointCase186(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7381,10 +7381,10 @@ func TestEndpointCase187(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7437,10 +7437,10 @@ func TestEndpointCase188(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7566,10 +7566,10 @@ func TestEndpointCase192(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7625,10 +7625,10 @@ func TestEndpointCase193(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7680,10 +7680,10 @@ func TestEndpointCase194(t *testing.T) {
 					SchemeID: "aws.auth#sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -14226,68 +14226,11 @@ func TestEndpointCase363(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}
+// {Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws,
+// Region=us-east-1}
 func TestEndpointCase364(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.us-west-2.api.aws"),
-		Region:   ptr.String("us-west-2"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
-// {Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn,
-// Region=cn-north-1}
-func TestEndpointCase365(t *testing.T) {
-	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"),
-		Region:   ptr.String("cn-north-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
-// {Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}
-func TestEndpointCase366(t *testing.T) {
-	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.us-gov-east-1.api.aws"),
-		Region:   ptr.String("us-gov-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
-// {Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}
-func TestEndpointCase367(t *testing.T) {
-	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.us-east-1.api.aws"),
+		Endpoint: ptr.String("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"),
 		Region:   ptr.String("us-east-1"),
 	}
 
@@ -14295,16 +14238,33 @@ func TestEndpointCase367(t *testing.T) {
 	result, err := resolver.ResolveEndpoint(context.Background(), params)
 	_, _ = result, err
 
-	if err == nil {
-		t.Fatalf("expect error, got none")
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
-	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
+
+	uri, _ := url.Parse("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
 // {Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1}
-func TestEndpointCase368(t *testing.T) {
+func TestEndpointCase365(t *testing.T) {
 	var params = EndpointParameters{
 		Endpoint: ptr.String("https://111111111111.ddb.us-east-1.api.aws"),
 		Region:   ptr.String("us-east-1"),
@@ -14339,11 +14299,10 @@ func TestEndpointCase368(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws,
-// Region=us-east-1}
-func TestEndpointCase369(t *testing.T) {
+// {Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}
+func TestEndpointCase366(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"),
+		Endpoint: ptr.String("https://dynamodb.us-east-1.api.aws"),
 		Region:   ptr.String("us-east-1"),
 	}
 
@@ -14351,27 +14310,68 @@ func TestEndpointCase369(t *testing.T) {
 	result, err := resolver.ResolveEndpoint(context.Background(), params)
 	_, _ = result, err
 
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}
+func TestEndpointCase367(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint: ptr.String("https://dynamodb.us-gov-east-1.api.aws"),
+		Region:   ptr.String("us-gov-east-1"),
 	}
 
-	uri, _ := url.Parse("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws")
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
 
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:        *uri,
-		Headers:    http.Header{},
-		Properties: smithy.Properties{},
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn,
+// Region=cn-north-1}
+func TestEndpointCase368(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint: ptr.String("https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"),
+		Region:   ptr.String("cn-north-1"),
 	}
 
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}
+func TestEndpointCase369(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint: ptr.String("https://dynamodb.us-west-2.api.aws"),
+		Region:   ptr.String("us-west-2"),
 	}
 
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
 
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
 	}
 }

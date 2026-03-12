@@ -2885,6 +2885,15 @@ func awsAwsjson10_deserializeDocumentWidget(v **types.Widget, value interface{})
 				sv.HorizontalOffset = int32(i64)
 			}
 
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WidgetId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)

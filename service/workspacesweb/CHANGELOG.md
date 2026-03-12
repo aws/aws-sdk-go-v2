@@ -1,3 +1,20 @@
+# v1.38.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.0 (2026-02-17)
+
+* **Feature**: Adds support for branding customization without requiring a custom wallpaper.
+
+# v1.37.0 (2026-02-04)
+
+* **Feature**: Support for configuring and managing custom domain names for WorkSpaces Secure Browser portals.
+
 # v1.36.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

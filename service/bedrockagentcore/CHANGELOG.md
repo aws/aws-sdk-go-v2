@@ -1,3 +1,20 @@
+# v1.13.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.0 (2026-02-10.2)
+
+* **Feature**: Added AgentCore browser proxy configuration support, allowing routing of browser traffic through HTTP and HTTPS proxy servers with authentication and bypass rules.
+
+# v1.12.0 (2026-02-05)
+
+* **Feature**: Support Browser profile persistence (cookies and local storage) across sessions for AgentCore Browser.
+
 # v1.11.0 (2026-01-21)
 
 * **Feature**: Supports custom browser extensions for AgentCore Browser and increased message payloads up to 100KB per message in an Event for AgentCore Memory

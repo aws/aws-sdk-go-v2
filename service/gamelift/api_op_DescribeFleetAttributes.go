@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: EC2, Anywhere, Container
+//	This API works with the following fleet types: EC2, Anywhere
 //
 // Retrieves core fleet-wide properties for fleets in an Amazon Web Services
 // Region. Properties include the computing hardware and deployment configuration

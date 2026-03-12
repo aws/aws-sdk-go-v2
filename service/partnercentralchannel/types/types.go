@@ -492,21 +492,29 @@ type RelationshipSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for resold business support plans.
-type ResoldBusiness struct {
-
-	// The coverage level for resold business support.
-	//
-	// This member is required.
-	Coverage Coverage
-
-	noSmithyDocumentSerde
-}
-
 // Configuration for resold enterprise support plans.
 type ResoldEnterprise struct {
 
 	// The coverage level for resold enterprise support.
+	//
+	// This member is required.
+	Coverage Coverage
+
+	// The location of the Technical Account Manager (TAM).
+	//
+	// This member is required.
+	TamLocation *string
+
+	// The AWS account ID to charge for the support plan.
+	ChargeAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for resold unified operations support plans.
+type ResoldUnifiedOperations struct {
+
+	// The coverage level for resold unified operations support.
 	//
 	// This member is required.
 	Coverage Coverage
@@ -658,8 +666,8 @@ type StartServicePeriodTypeSort struct {
 // The following types satisfy this interface:
 //
 //	SupportPlanMemberPartnerLedSupport
-//	SupportPlanMemberResoldBusiness
 //	SupportPlanMemberResoldEnterprise
+//	SupportPlanMemberResoldUnifiedOperations
 type SupportPlan interface {
 	isSupportPlan()
 }
@@ -673,15 +681,6 @@ type SupportPlanMemberPartnerLedSupport struct {
 
 func (*SupportPlanMemberPartnerLedSupport) isSupportPlan() {}
 
-// Configuration for resold business support plans.
-type SupportPlanMemberResoldBusiness struct {
-	Value ResoldBusiness
-
-	noSmithyDocumentSerde
-}
-
-func (*SupportPlanMemberResoldBusiness) isSupportPlan() {}
-
 // Configuration for resold enterprise support plans.
 type SupportPlanMemberResoldEnterprise struct {
 	Value ResoldEnterprise
@@ -690,6 +689,15 @@ type SupportPlanMemberResoldEnterprise struct {
 }
 
 func (*SupportPlanMemberResoldEnterprise) isSupportPlan() {}
+
+// Configuration for resold unified operations support plans.
+type SupportPlanMemberResoldUnifiedOperations struct {
+	Value ResoldUnifiedOperations
+
+	noSmithyDocumentSerde
+}
+
+func (*SupportPlanMemberResoldUnifiedOperations) isSupportPlan() {}
 
 // A key-value pair that can be associated with a resource.
 type Tag struct {

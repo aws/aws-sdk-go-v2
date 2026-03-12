@@ -21,7 +21,7 @@ import (
 // To create additional challenge passwords for the connector, call CreateChallenge
 // again. We recommend frequently rotating your challenge passwords.
 //
-// [ListConnectors]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_ListConnectors.html
+// [ListConnectors]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_ListConnectors.html
 func (c *Client) CreateChallenge(ctx context.Context, params *CreateChallengeInput, optFns ...func(*Options)) (*CreateChallengeOutput, error) {
 	if params == nil {
 		params = &CreateChallengeInput{}
@@ -53,7 +53,7 @@ type CreateChallengeInput struct {
 	// each call, Connector for SCEP recognizes that you are requesting multiple
 	// challenge passwords.
 	//
-	// [CreateChallenge]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
+	// [CreateChallenge]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
 	ClientToken *string
 
 	// The key-value pairs to associate with the resource.

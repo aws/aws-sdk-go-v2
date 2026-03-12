@@ -113,19 +113,20 @@ type RecommendationSource string
 
 // Enum values for RecommendationSource
 const (
-	RecommendationSourceAwsConfig        RecommendationSource = "aws_config"
-	RecommendationSourceComputeOptimizer RecommendationSource = "compute_optimizer"
-	RecommendationSourceCostExplorer     RecommendationSource = "cost_explorer"
-	RecommendationSourceLse              RecommendationSource = "lse"
-	RecommendationSourceManual           RecommendationSource = "manual"
-	RecommendationSourcePse              RecommendationSource = "pse"
-	RecommendationSourceRds              RecommendationSource = "rds"
-	RecommendationSourceResilience       RecommendationSource = "resilience"
-	RecommendationSourceResilienceHub    RecommendationSource = "resilience_hub"
-	RecommendationSourceSecurityHub      RecommendationSource = "security_hub"
-	RecommendationSourceStir             RecommendationSource = "stir"
-	RecommendationSourceTaCheck          RecommendationSource = "ta_check"
-	RecommendationSourceWellArchitected  RecommendationSource = "well_architected"
+	RecommendationSourceAwsConfig           RecommendationSource = "aws_config"
+	RecommendationSourceComputeOptimizer    RecommendationSource = "compute_optimizer"
+	RecommendationSourceCostExplorer        RecommendationSource = "cost_explorer"
+	RecommendationSourceLse                 RecommendationSource = "lse"
+	RecommendationSourceManual              RecommendationSource = "manual"
+	RecommendationSourcePse                 RecommendationSource = "pse"
+	RecommendationSourceRds                 RecommendationSource = "rds"
+	RecommendationSourceResilience          RecommendationSource = "resilience"
+	RecommendationSourceResilienceHub       RecommendationSource = "resilience_hub"
+	RecommendationSourceSecurityHub         RecommendationSource = "security_hub"
+	RecommendationSourceStir                RecommendationSource = "stir"
+	RecommendationSourceTaCheck             RecommendationSource = "ta_check"
+	RecommendationSourceWellArchitected     RecommendationSource = "well_architected"
+	RecommendationSourceCostOptimizationHub RecommendationSource = "cost_optimization_hub"
 )
 
 // Values returns all known values for RecommendationSource. Note that this can be
@@ -147,6 +148,7 @@ func (RecommendationSource) Values() []RecommendationSource {
 		"stir",
 		"ta_check",
 		"well_architected",
+		"cost_optimization_hub",
 	}
 }
 
@@ -208,6 +210,23 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"ok",
 		"warning",
 		"error",
+	}
+}
+
+type StatusReason string
+
+// Enum values for StatusReason
+const (
+	StatusReasonNoDataOk StatusReason = "no_data_ok"
+)
+
+// Values returns all known values for StatusReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StatusReason) Values() []StatusReason {
+	return []StatusReason{
+		"no_data_ok",
 	}
 }
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all self-upgrade requests for a Quick Suite account.
+// Lists all self-upgrade requests for a Quick account.
 func (c *Client) ListSelfUpgrades(ctx context.Context, params *ListSelfUpgradesInput, optFns ...func(*Options)) (*ListSelfUpgradesOutput, error) {
 	if params == nil {
 		params = &ListSelfUpgradesInput{}
@@ -35,7 +35,7 @@ type ListSelfUpgradesInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The Quick Suite namespace for the self-upgrade requests.
+	// The Quick namespace for the self-upgrade requests.
 	//
 	// This member is required.
 	Namespace *string

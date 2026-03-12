@@ -13,7 +13,8 @@ import (
 )
 
 // List a filterable set of Recommendations within an Organization. This API only
-// supports prioritized recommendations.
+// supports prioritized recommendations and provides global priority
+// recommendations, eliminating the need to call the API in each AWS Region.
 func (c *Client) ListOrganizationRecommendations(ctx context.Context, params *ListOrganizationRecommendationsInput, optFns ...func(*Options)) (*ListOrganizationRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListOrganizationRecommendationsInput{}

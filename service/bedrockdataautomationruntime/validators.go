@@ -486,6 +486,11 @@ func validateOpInvokeDataAutomationInput(v *InvokeDataAutomationInput) error {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OutputConfiguration != nil {
+		if err := validateOutputConfiguration(v.OutputConfiguration); err != nil {
+			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

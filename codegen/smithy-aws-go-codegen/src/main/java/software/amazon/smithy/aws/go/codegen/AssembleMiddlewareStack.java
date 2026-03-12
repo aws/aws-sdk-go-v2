@@ -29,6 +29,8 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -225,7 +227,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
         });
     }
 
-    private GoWriter.Writable spanRetryLoopMiddleware() {
+    private Writable spanRetryLoopMiddleware() {
         return new FinalizeStepMiddleware() {
             public String getStructName() {
                 return "spanRetryLoop";
@@ -235,7 +237,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 return Map.of("options", buildPackageSymbol("Options"));
             }
 
-            public GoWriter.Writable getFuncBody() {
+            public Writable getFuncBody() {
                 return goTemplate("""
                         tracer := operationTracer(m.options.TracerProvider)
                         ctx, span := tracer.StartSpan(ctx, "RetryLoop")
@@ -247,7 +249,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
         };
     }
 
-    private GoWriter.Writable addMiddleware() {
+    private Writable addMiddleware() {
         return goTemplate("""
                 $D $D $D
                 func addClientRequestID(stack *middleware.Stack) error {
@@ -272,7 +274,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 """, SmithyGoDependency.SMITHY_MIDDLEWARE, AwsGoDependency.AWS_MIDDLEWARE, SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
     }
 
-    private GoWriter.Writable addSigV4XMiddleware() {
+    private Writable addSigV4XMiddleware() {
         return goTemplate("""
                 $D
                 func addStreamingEventsPayload(stack *middleware.Stack) error {

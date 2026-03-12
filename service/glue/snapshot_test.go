@@ -770,6 +770,18 @@ func TestCheckSnapshot_DeleteConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteConnectionType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnectionType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConnectionType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCrawler(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCrawler(context.Background(), nil, func(o *Options) {
@@ -2498,6 +2510,18 @@ func TestCheckSnapshot_QuerySchemaVersionMetadata(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RegisterConnectionType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterConnectionType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterConnectionType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RegisterSchemaVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RegisterSchemaVersion(context.Background(), nil, func(o *Options) {
@@ -3918,6 +3942,18 @@ func TestUpdateSnapshot_DeleteConnection(t *testing.T) {
 	_, err := svc.DeleteConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConnectionType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnectionType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConnectionType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5646,6 +5682,18 @@ func TestUpdateSnapshot_QuerySchemaVersionMetadata(t *testing.T) {
 	_, err := svc.QuerySchemaVersionMetadata(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "QuerySchemaVersionMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RegisterConnectionType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterConnectionType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterConnectionType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

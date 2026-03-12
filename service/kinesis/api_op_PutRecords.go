@@ -108,6 +108,9 @@ type PutRecordsInput struct {
 	// The ARN of the stream.
 	StreamARN *string
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	// The stream name associated with the request.
 	StreamName *string
 
@@ -117,6 +120,7 @@ type PutRecordsInput struct {
 func (in *PutRecordsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("data")
 }
 

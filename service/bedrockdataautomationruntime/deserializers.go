@@ -1665,6 +1665,11 @@ func awsAwsjson11_deserializeOpDocumentInvokeDataAutomationOutput(v **InvokeData
 
 	for key, value := range shape {
 		switch key {
+		case "outputConfiguration":
+			if err := awsAwsjson11_deserializeDocumentOutputConfiguration(&sv.OutputConfiguration, value); err != nil {
+				return err
+			}
+
 		case "outputSegments":
 			if err := awsAwsjson11_deserializeDocumentOutputSegmentList(&sv.OutputSegments, value); err != nil {
 				return err

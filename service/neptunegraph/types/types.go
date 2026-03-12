@@ -36,7 +36,7 @@ type ExportFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies whihc properties of that label should be included in the export.
+// Specifies which properties of that label should be included in the export.
 type ExportFilterElement struct {
 
 	// Each property is defined by a key-value pair, where the key is the desired

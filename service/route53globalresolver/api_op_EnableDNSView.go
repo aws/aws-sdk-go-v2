@@ -13,6 +13,12 @@ import (
 )
 
 // Enables a disabled DNS view, allowing it to serve DNS queries again.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) EnableDNSView(ctx context.Context, params *EnableDNSViewInput, optFns ...func(*Options)) (*EnableDNSViewOutput, error) {
 	if params == nil {
 		params = &EnableDNSViewInput{}

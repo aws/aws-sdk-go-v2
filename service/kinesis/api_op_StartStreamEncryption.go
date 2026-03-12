@@ -79,6 +79,9 @@ type StartStreamEncryptionInput struct {
 	// The ARN of the stream.
 	StreamARN *string
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	// The name of the stream for which to start encrypting records.
 	StreamName *string
 
@@ -88,6 +91,7 @@ type StartStreamEncryptionInput struct {
 func (in *StartStreamEncryptionInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("control")
 }
 

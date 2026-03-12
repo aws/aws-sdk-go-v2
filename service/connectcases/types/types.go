@@ -155,13 +155,25 @@ type BasicLayout struct {
 //
 // The following types satisfy this interface:
 //
+//	BooleanConditionMemberAndAll
 //	BooleanConditionMemberEqualTo
 //	BooleanConditionMemberNotEqualTo
+//	BooleanConditionMemberOrAll
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
 type BooleanCondition interface {
 	isBooleanCondition()
 }
+
+// Combines multiple conditions with AND operator. All conditions must be true for
+// the compound condition to be true.
+type BooleanConditionMemberAndAll struct {
+	Value CompoundCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*BooleanConditionMemberAndAll) isBooleanCondition() {}
 
 // Tests that operandOne is equal to operandTwo.
 type BooleanConditionMemberEqualTo struct {
@@ -180,6 +192,16 @@ type BooleanConditionMemberNotEqualTo struct {
 }
 
 func (*BooleanConditionMemberNotEqualTo) isBooleanCondition() {}
+
+// Combines multiple conditions with OR operator. At least one condition must be
+// true for the compound condition to be true.
+type BooleanConditionMemberOrAll struct {
+	Value CompoundCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*BooleanConditionMemberOrAll) isBooleanCondition() {}
 
 // Boolean operands for a condition. In the Amazon Connect admin website, case
 // rules are known as case field conditions. For more information about case field
@@ -225,6 +247,7 @@ type CaseEventIncludedData struct {
 //	CaseFilterMemberField
 //	CaseFilterMemberNot
 //	CaseFilterMemberOrAll
+//	CaseFilterMemberTag
 type CaseFilter interface {
 	isCaseFilter()
 }
@@ -264,6 +287,15 @@ type CaseFilterMemberOrAll struct {
 }
 
 func (*CaseFilterMemberOrAll) isCaseFilter() {}
+
+// A list of tags to filter on.
+type CaseFilterMemberTag struct {
+	Value TagFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*CaseFilterMemberTag) isCaseFilter() {}
 
 // Represents what rule type should take place, under what conditions. In the
 // Amazon Connect admin website, case rules are known as case field conditions. For
@@ -409,6 +441,21 @@ type CommentContent struct {
 
 // A filter for related items of type Comment .
 type CommentFilter struct {
+	noSmithyDocumentSerde
+}
+
+// A compound condition that combines multiple boolean conditions using logical
+// operators. In the Amazon Connect admin website, case rules are known as case
+// field conditions. For more information about case field conditions, see [Add case field conditions to a case template].
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type CompoundCondition struct {
+
+	// The list of conditions to combine using the logical operator.
+	//
+	// This member is required.
+	Conditions []BooleanCondition
+
 	noSmithyDocumentSerde
 }
 
@@ -636,6 +683,24 @@ type EventIncludedData struct {
 	noSmithyDocumentSerde
 }
 
+// Union of field attributes.
+//
+// The following types satisfy this interface:
+//
+//	FieldAttributesMemberText
+type FieldAttributes interface {
+	isFieldAttributes()
+}
+
+// Field attributes for Text field type.
+type FieldAttributesMemberText struct {
+	Value TextAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldAttributesMemberText) isFieldAttributes() {}
+
 // Object for errors on fields.
 type FieldError struct {
 
@@ -848,6 +913,9 @@ type FieldSummary struct {
 	// This member is required.
 	Type FieldType
 
+	// Union of field attributes.
+	Attributes FieldAttributes
+
 	noSmithyDocumentSerde
 }
 
@@ -869,8 +937,9 @@ type FieldValue struct {
 
 // Object to store union of Field values.
 //
-// The Summary system field accepts 3000 characters while all other fields accept
-// 500 characters.
+// The Summary system field accepts up to 3000 characters, while all other fields
+// accept up to 4100 characters. If you use multi-byte characters, the effective
+// character limit may be lower.
 //
 // The following types satisfy this interface:
 //
@@ -1023,6 +1092,9 @@ type GetFieldResponse struct {
 	//
 	// This member is required.
 	Type FieldType
+
+	// Union of field attributes.
+	Attributes FieldAttributes
 
 	// Timestamp at which the resource was created.
 	CreatedTime *time.Time
@@ -1712,6 +1784,55 @@ type Sort struct {
 	noSmithyDocumentSerde
 }
 
+// A filter for tags. Only one value can be provided.
+//
+// The following types satisfy this interface:
+//
+//	TagFilterMemberEqualTo
+type TagFilter interface {
+	isTagFilter()
+}
+
+// Object containing tag key and value information.
+type TagFilterMemberEqualTo struct {
+	Value TagValue
+
+	noSmithyDocumentSerde
+}
+
+func (*TagFilterMemberEqualTo) isTagFilter() {}
+
+// Defines tag propagation configuration for resources created within a domain.
+// Tags specified here will be automatically applied to resources being created for
+// the specified resource type.
+type TagPropagationConfiguration struct {
+
+	// Supported resource types for tag propagation. Determines which resources will
+	// receive automatically propagated tags.
+	//
+	// This member is required.
+	ResourceType TagPropagationResourceType
+
+	// The tags that will be applied to the created resource.
+	//
+	// This member is required.
+	TagMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Object for case tag filter values.
+type TagValue struct {
+
+	// The tag key in the tag filter value.
+	Key *string
+
+	// The tag value in the tag filter value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // An association representing a case rule acting upon a field. In the Amazon
 // Connect admin website, case rules are known as case field conditions. For more
 // information about case field conditions, see [Add case field conditions to a case template].
@@ -1752,6 +1873,22 @@ type TemplateSummary struct {
 	//
 	// This member is required.
 	TemplateId *string
+
+	// Defines tag propagation configuration for resources created within a domain.
+	// Tags specified here will be automatically applied to resources being created for
+	// the specified resource type.
+	TagPropagationConfigurations []TagPropagationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Field attributes for Text field type.
+type TextAttributes struct {
+
+	// Attribute that defines rendering component and validation.
+	//
+	// This member is required.
+	IsMultiline *bool
 
 	noSmithyDocumentSerde
 }
@@ -1800,6 +1937,7 @@ func (*UnknownUnionMember) isBooleanCondition()          {}
 func (*UnknownUnionMember) isCaseFilter()                {}
 func (*UnknownUnionMember) isCaseRuleDetails()           {}
 func (*UnknownUnionMember) isCustomFieldsFilter()        {}
+func (*UnknownUnionMember) isFieldAttributes()           {}
 func (*UnknownUnionMember) isFieldFilter()               {}
 func (*UnknownUnionMember) isFieldValueUnion()           {}
 func (*UnknownUnionMember) isLayoutContent()             {}
@@ -1810,4 +1948,5 @@ func (*UnknownUnionMember) isRelatedItemInputContent()   {}
 func (*UnknownUnionMember) isRelatedItemTypeFilter()     {}
 func (*UnknownUnionMember) isSection()                   {}
 func (*UnknownUnionMember) isSlaInputContent()           {}
+func (*UnknownUnionMember) isTagFilter()                 {}
 func (*UnknownUnionMember) isUserUnion()                 {}

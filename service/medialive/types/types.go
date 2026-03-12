@@ -597,6 +597,10 @@ type Av1Settings struct {
 	// fixedAfd parameter. NONE: MediaLive won't write AFD into the video
 	AfdSignaling AfdSignaling
 
+	// Specifies the bit depth for the output encode. Choose a value. Or leave the
+	// field empty to use the default, which is 8 bit.
+	BitDepth Av1BitDepth
+
 	// Average bitrate in bits/second. Required when the rate control mode is CBR. Not
 	// used for QVBR.
 	Bitrate *int32
@@ -698,6 +702,14 @@ type Av1Settings struct {
 	// Configures the timecode burn-in feature. If you enable this feature, the
 	// timecode will become part of the video.
 	TimecodeBurninSettings *TimecodeBurninSettings
+
+	// Controls how MediaLive inserts timecodes into the video output encode.
+	// DISABLED: Do not insert timecodes. METADATA_OBU: Include timecodes. MediaLive
+	// inserts timecode metadata based on the timecode from the source specified in the
+	// Timecode Config property. The timecode metadata is a metadata OBU (Open
+	// Bitstream Unit) of type METADATA_TYPE_TIMECODE, in accordance with
+	// https://aomediacodec.github.io/av1-spec/#metadata-timecode-syntax.
+	TimecodeInsertion Av1TimecodeInsertionBehavior
 
 	noSmithyDocumentSerde
 }
@@ -1233,6 +1245,9 @@ type Channel struct {
 	// Requested engine version for this channel.
 	ChannelEngineVersion *ChannelEngineVersionResponse
 
+	// A list of IDs for all the Input Security Groups attached to the channel.
+	ChannelSecurityGroups []string
+
 	// A list of destinations of the channel. For UDP outputs, there is one
 	// destination per output. For other types (HLS, for example), there is one
 	// destination per packager.
@@ -1246,6 +1261,9 @@ type Channel struct {
 
 	// The unique id of the channel.
 	Id *string
+
+	// Include this setting to include Elemental Inference features in this channel.
+	InferenceSettings *DescribeInferenceSettings
 
 	// List of input attachments for channel.
 	InputAttachments []InputAttachment
@@ -1363,6 +1381,9 @@ type ChannelSummary struct {
 	// The engine version that you requested for this channel.
 	ChannelEngineVersion *ChannelEngineVersionResponse
 
+	// A list of IDs for all the Input Security Groups attached to the channel.
+	ChannelSecurityGroups []string
+
 	// A list of destinations of the channel. For UDP outputs, there is one
 	// destination per output. For other types (HLS, for example), there is one
 	// destination per packager.
@@ -1373,6 +1394,9 @@ type ChannelSummary struct {
 
 	// The unique id of the channel.
 	Id *string
+
+	// Include this setting to include Elemental Inference features in this channel.
+	InferenceSettings *DescribeInferenceSettings
 
 	// List of input attachments for channel.
 	InputAttachments []InputAttachment
@@ -1902,6 +1926,16 @@ type DescribeFollowerChannelSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Configures Elemental Inference features in a channel.
+type DescribeInferenceSettings struct {
+
+	// The ARN of the feed resource that is associated with this channel. The feed is
+	// a resource in the Elemental Inference service.
+	FeedArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Linked channel configuration details
 type DescribeLinkedChannelSettings struct {
 
@@ -2004,6 +2038,19 @@ type DescribePrimaryChannelSettings struct {
 
 	// Specifies this as a primary channel
 	LinkedChannelType LinkedChannelType
+
+	noSmithyDocumentSerde
+}
+
+// Disabled Locking Settings
+type DisabledLockingSettings struct {
+
+	// Optional. Only applies to CMAF Ingest Output Group and MediaPackage V2 Output
+	// Group. Enter a value here to use a custom epoch, instead of the standard epoch
+	// (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the custom
+	// epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be 2000-01-01T00:00:00 or
+	// later. Always set the MM:SS portion to 00:00.
+	CustomEpoch *string
 
 	noSmithyDocumentSerde
 }
@@ -3936,6 +3983,16 @@ type ImmediateModeScheduleActionStartSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Configures Elemental Inference features in a channel.
+type InferenceSettings struct {
+
+	// The ARN of the feed resource that is associated with this channel. The feed is
+	// a resource in the Elemental Inference service.
+	FeedArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Placeholder documentation for Input
 type Input struct {
 
@@ -4566,6 +4623,10 @@ type InputSecurityGroup struct {
 
 	// Unique ARN of Input Security Group
 	Arn *string
+
+	// The list of channels currently using this Input Security Group as their channel
+	// security group.
+	Channels []string
 
 	// The Id of the Input Security Group
 	Id *string
@@ -6354,6 +6415,9 @@ type NodeInterfaceMapping struct {
 	// Used in NodeInterfaceMapping and NodeInterfaceMappingCreateRequest
 	NetworkInterfaceMode NetworkInterfaceMode
 
+	// The IP addresses associated with the physical interface on the node hardware.
+	PhysicalInterfaceIpAddresses []string
+
 	// The name of the physical interface on the hardware that will be running
 	// Elemental anywhere.
 	PhysicalInterfaceName *string
@@ -6555,6 +6619,9 @@ type OutputLocationRef struct {
 // Output Locking Settings
 type OutputLockingSettings struct {
 
+	// Disabled Locking Settings
+	DisabledLockingSettings *DisabledLockingSettings
+
 	// Epoch Locking Settings
 	EpochLockingSettings *EpochLockingSettings
 
@@ -6643,6 +6710,13 @@ type PipelineDetail struct {
 
 // Pipeline Locking Settings
 type PipelineLockingSettings struct {
+
+	// Optional. Only applies to CMAF Ingest Output Group and MediaPackage V2 Output
+	// Group Only. Enter a value here to use a custom epoch, instead of the standard
+	// epoch (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the
+	// custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be
+	// 2000-01-01T00:00:00 or later. Always set the MM:SS portion to 00:00.
+	CustomEpoch *string
 
 	// The method to use to lock the video frames in the pipelines. sourceTimecode
 	// (default): Use the timecode in the source. videoAlignment: Lock frames that the
@@ -7657,11 +7731,94 @@ type SrtGroupSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Decryption settings for SRT listener. If present, both algorithm and
+// passphraseSecretArn are required.
+type SrtListenerDecryption struct {
+
+	// The algorithm used to decrypt content.
+	//
+	// This member is required.
+	Algorithm Algorithm
+
+	// The ARN for the secret in Secrets Manager that holds the passphrase for
+	// decryption.
+	//
+	// This member is required.
+	PassphraseSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Decryption settings. If specified, both algorithm and passphraseSecretArn are
+// required.
+type SrtListenerDecryptionRequest struct {
+
+	// Required. The decryption algorithm.
+	//
+	// This member is required.
+	Algorithm Algorithm
+
+	// Required. The ARN for the secret in Secrets Manager that holds the passphrase.
+	//
+	// This member is required.
+	PassphraseSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for SRT Listener input.
+type SrtListenerSettings struct {
+
+	// Decryption settings for SRT listener. If present, both algorithm and
+	// passphraseSecretArn are required.
+	Decryption *SrtListenerDecryption
+
+	// The preferred latency (in milliseconds) for implementing packet loss and
+	// recovery. Range 120-15000.
+	MinimumLatency *int32
+
+	// The stream ID, if the upstream system uses this identifier.
+	StreamId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for SRT Listener input. Encryption is REQUIRED for all SRT
+// Listener inputs for security reasons. You must provide decryption settings
+// including algorithm and passphrase secret ARN.
+type SrtListenerSettingsRequest struct {
+
+	// Decryption settings. If specified, both algorithm and passphraseSecretArn are
+	// required.
+	//
+	// This member is required.
+	Decryption *SrtListenerDecryptionRequest
+
+	// Required. The preferred latency in milliseconds for packet loss and recovery.
+	// Range 120-15000.
+	//
+	// This member is required.
+	MinimumLatency *int32
+
+	// Optional. The stream ID if the upstream system uses this identifier.
+	StreamId *string
+
+	noSmithyDocumentSerde
+}
+
 // Placeholder documentation for SrtOutputDestinationSettings
 type SrtOutputDestinationSettings struct {
 
+	// Specifies the mode the output should use for connection establishment. CALLER
+	// mode requires URL, LISTENER mode requires port.
+	ConnectionMode ConnectionMode
+
 	// Arn used to extract the password from Secrets Manager
 	EncryptionPassphraseSecretArn *string
+
+	// Port number for listener mode connections (required when connectionMode is
+	// LISTENER, must not be provided when connectionMode is CALLER).
+	ListenerPort *int32
 
 	// Stream id for SRT destinations (URLs of type srt://)
 	StreamId *string
@@ -7708,22 +7865,29 @@ type SrtOutputSettings struct {
 	noSmithyDocumentSerde
 }
 
-// The configured sources for this SRT input.
+// The configured settings for SRT inputs (caller and listener).
 type SrtSettings struct {
 
 	// Placeholder documentation for __listOfSrtCallerSource
 	SrtCallerSources []SrtCallerSource
 
+	// Settings for SRT Listener input.
+	SrtListenerSettings *SrtListenerSettings
+
 	noSmithyDocumentSerde
 }
 
-// Configures the sources for this SRT input. For a single-pipeline input, include
-// one srtCallerSource in the array. For a standard-pipeline input, include two
-// srtCallerSource.
+// Configures the settings for SRT inputs. Provide either srtCallerSources (for
+// SRT_CALLER type) OR srtListenerSettings (for SRT_LISTENER type), not both.
 type SrtSettingsRequest struct {
 
 	// Placeholder documentation for __listOfSrtCallerSourceRequest
 	SrtCallerSources []SrtCallerSourceRequest
+
+	// Configuration for SRT Listener input. Encryption is REQUIRED for all SRT
+	// Listener inputs for security reasons. You must provide decryption settings
+	// including algorithm and passphrase secret ARN.
+	SrtListenerSettings *SrtListenerSettingsRequest
 
 	noSmithyDocumentSerde
 }

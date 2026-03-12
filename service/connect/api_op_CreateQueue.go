@@ -70,6 +70,11 @@ type CreateQueueInput struct {
 	// The description of the queue.
 	Description *string
 
+	// Configuration list containing the email addresses to associate with the queue
+	// during creation. Each configuration specifies an email address ID that agents
+	// can select when handling email contacts in this queue.
+	EmailAddressesConfig []types.EmailAddressConfig
+
 	// The maximum number of contacts that can be in the queue before it is considered
 	// full.
 	MaxContacts *int32

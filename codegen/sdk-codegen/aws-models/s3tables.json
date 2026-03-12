@@ -2769,15 +2769,109 @@
                         "smithy.api#required": {}
                     }
                 },
+                "partitionSpec": {
+                    "target": "com.amazonaws.s3tables#IcebergPartitionSpec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partition specification for the Iceberg table. Partitioning organizes data into separate files based on the values of one or more fields, which can improve query performance by reducing the amount of data scanned. Each partition field applies a transform (such as identity, year, month, or bucket) to a single field.</p>"
+                    }
+                },
+                "writeOrder": {
+                    "target": "com.amazonaws.s3tables#IcebergSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for the Iceberg table. Sort order defines how data is sorted within data files, which can improve query performance by enabling more efficient data skipping and filtering.</p>"
+                    }
+                },
                 "properties": {
                     "target": "com.amazonaws.s3tables#TableProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains configuration properties for an Iceberg table.</p>"
+                        "smithy.api#documentation": "<p>A map of custom configuration properties for the Iceberg table.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details about the metadata for an Iceberg table.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#IcebergNullOrder": {
+            "type": "enum",
+            "members": {
+                "NULLS_FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nulls-first"
+                    }
+                },
+                "NULLS_LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nulls-last"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3tables#IcebergPartitionField": {
+            "type": "structure",
+            "members": {
+                "sourceId": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the source schema field to partition by. This must reference a valid field ID from the table schema.</p>",
+                        "smithy.api#jsonName": "source-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "transform": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partition transform to apply to the source field. Supported transforms include <code>identity</code>, <code>year</code>, <code>month</code>, <code>day</code>, <code>hour</code>, <code>bucket</code>, and <code>truncate</code>. For more information, see the <a href=\"https://iceberg.apache.org/spec/#partition-transforms\">Apache Iceberg partition transforms documentation</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for this partition field. This name is used in the partitioned file paths.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldId": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional unique identifier for this partition field. If not specified, S3 Tables automatically assigns a field ID.</p>",
+                        "smithy.api#jsonName": "field-id"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a single partition field in an Iceberg partition specification.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#IcebergPartitionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3tables#IcebergPartitionField"
+            }
+        },
+        "com.amazonaws.s3tables#IcebergPartitionSpec": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.s3tables#IcebergPartitionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of partition fields that define how the table data is partitioned. Each field specifies a source field and a transform to apply. This field is required if <code>partitionSpec</code> is provided.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "specId": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for this partition specification. If not specified, defaults to <code>0</code>.</p>",
+                        "smithy.api#jsonName": "spec-id"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines how data in an Iceberg table is partitioned. Partitioning helps optimize query performance by organizing data into separate files based on field values. Each partition field specifies a transform to apply to a source field.</p>"
             }
         },
         "com.amazonaws.s3tables#IcebergSchema": {
@@ -2813,6 +2907,90 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details about the snapshot management settings for an Iceberg table. The oldest snapshot expires when its age exceeds the <code>maxSnapshotAgeHours</code> and the total number of snapshots exceeds the value for the minimum number of snapshots to keep <code>minSnapshotsToKeep</code>.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#IcebergSortDirection": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "asc"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "desc"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3tables#IcebergSortField": {
+            "type": "structure",
+            "members": {
+                "sourceId": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the source schema field to sort by. This must reference a valid field ID from the table schema.</p>",
+                        "smithy.api#jsonName": "source-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "transform": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transform to apply to the source field before sorting. Use <code>identity</code> to sort by the field value directly, or specify other transforms as needed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "direction": {
+                    "target": "com.amazonaws.s3tables#IcebergSortDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort direction. Valid values are <code>asc</code> for ascending order or <code>desc</code> for descending order.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nullOrder": {
+                    "target": "com.amazonaws.s3tables#IcebergNullOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how null values are ordered. Valid values are <code>nulls-first</code> to place nulls before non-null values, or <code>nulls-last</code> to place nulls after non-null values.</p>",
+                        "smithy.api#jsonName": "null-order",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a single sort field in an Iceberg sort order specification.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#IcebergSortFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3tables#IcebergSortField"
+            }
+        },
+        "com.amazonaws.s3tables#IcebergSortOrder": {
+            "type": "structure",
+            "members": {
+                "orderId": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for this sort order. If not specified, defaults to <code>1</code>. The order ID is used by Apache Iceberg to track sort order evolution.</p>",
+                        "smithy.api#jsonName": "order-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.s3tables#IcebergSortFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of sort fields that define how data is sorted within files. Each field specifies a source field, sort direction, and null ordering. This field is required if <code>writeOrder</code> is provided.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the sort order for data within an Iceberg table. Sorting data can improve query performance by enabling more efficient data skipping.</p>"
             }
         },
         "com.amazonaws.s3tables#IcebergUnreferencedFileRemovalSettings": {
@@ -5189,6 +5367,12 @@
         "com.amazonaws.s3tables#SchemaField": {
             "type": "structure",
             "members": {
+                "id": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional unique identifier for the schema field. Field IDs are used by Apache Iceberg to track schema evolution and maintain compatibility across schema changes. If not specified, S3 Tables automatically assigns field IDs.</p>"
+                    }
+                },
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {

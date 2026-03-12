@@ -1,3 +1,20 @@
+# v1.7.0 (2026-03-05)
+
+* **Feature**: Updates to multi-party approval (MPA) service to add support for approval team baseline operations.
+
+# v1.6.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.0 (2026-02-02)
+
+* **Feature**: Updates to multi-party approval (MPA) service to add support for multi-factor authentication (MFA) for voting operations.
+
 # v1.5.9 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

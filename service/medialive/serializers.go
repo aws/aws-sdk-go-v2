@@ -725,6 +725,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		}
 	}
 
+	if v.ChannelSecurityGroups != nil {
+		ok := object.Key("channelSecurityGroups")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.ChannelSecurityGroups, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Destinations != nil {
 		ok := object.Key("destinations")
 		if err := awsRestjson1_serializeDocument__listOfOutputDestination(v.Destinations, ok); err != nil {
@@ -740,6 +747,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 	if v.EncoderSettings != nil {
 		ok := object.Key("encoderSettings")
 		if err := awsRestjson1_serializeDocumentEncoderSettings(v.EncoderSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InferenceSettings != nil {
+		ok := object.Key("inferenceSettings")
+		if err := awsRestjson1_serializeDocumentInferenceSettings(v.InferenceSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -8977,6 +8991,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		}
 	}
 
+	if v.ChannelSecurityGroups != nil {
+		ok := object.Key("channelSecurityGroups")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.ChannelSecurityGroups, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Destinations != nil {
 		ok := object.Key("destinations")
 		if err := awsRestjson1_serializeDocument__listOfOutputDestination(v.Destinations, ok); err != nil {
@@ -8992,6 +9013,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	if v.EncoderSettings != nil {
 		ok := object.Key("encoderSettings")
 		if err := awsRestjson1_serializeDocumentEncoderSettings(v.EncoderSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InferenceSettings != nil {
+		ok := object.Key("inferenceSettings")
+		if err := awsRestjson1_serializeDocumentInferenceSettings(v.InferenceSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -12422,6 +12450,11 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 		ok.String(string(v.AfdSignaling))
 	}
 
+	if len(v.BitDepth) > 0 {
+		ok := object.Key("bitDepth")
+		ok.String(string(v.BitDepth))
+	}
+
 	if v.Bitrate != nil {
 		ok := object.Key("bitrate")
 		ok.Integer(*v.Bitrate)
@@ -12542,6 +12575,11 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 		if err := awsRestjson1_serializeDocumentTimecodeBurninSettings(v.TimecodeBurninSettings, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.TimecodeInsertion) > 0 {
+		ok := object.Key("timecodeInsertion")
+		ok.String(string(v.TimecodeInsertion))
 	}
 
 	return nil
@@ -13351,6 +13389,18 @@ func awsRestjson1_serializeDocumentColorCorrectionSettings(v *types.ColorCorrect
 func awsRestjson1_serializeDocumentColorSpacePassthroughSettings(v *types.ColorSpacePassthroughSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDisabledLockingSettings(v *types.DisabledLockingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomEpoch != nil {
+		ok := object.Key("customEpoch")
+		ok.String(*v.CustomEpoch)
+	}
 
 	return nil
 }
@@ -15522,6 +15572,18 @@ func awsRestjson1_serializeDocumentId3SegmentTaggingScheduleActionSettings(v *ty
 func awsRestjson1_serializeDocumentImmediateModeScheduleActionStartSettings(v *types.ImmediateModeScheduleActionStartSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInferenceSettings(v *types.InferenceSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FeedArn != nil {
+		ok := object.Key("feedArn")
+		ok.String(*v.FeedArn)
+	}
 
 	return nil
 }
@@ -17741,6 +17803,13 @@ func awsRestjson1_serializeDocumentNodeInterfaceMapping(v *types.NodeInterfaceMa
 		ok.String(string(v.NetworkInterfaceMode))
 	}
 
+	if v.PhysicalInterfaceIpAddresses != nil {
+		ok := object.Key("physicalInterfaceIpAddresses")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.PhysicalInterfaceIpAddresses, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PhysicalInterfaceName != nil {
 		ok := object.Key("physicalInterfaceName")
 		ok.String(*v.PhysicalInterfaceName)
@@ -18002,6 +18071,13 @@ func awsRestjson1_serializeDocumentOutputLockingSettings(v *types.OutputLockingS
 	object := value.Object()
 	defer object.Close()
 
+	if v.DisabledLockingSettings != nil {
+		ok := object.Key("disabledLockingSettings")
+		if err := awsRestjson1_serializeDocumentDisabledLockingSettings(v.DisabledLockingSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EpochLockingSettings != nil {
 		ok := object.Key("epochLockingSettings")
 		if err := awsRestjson1_serializeDocumentEpochLockingSettings(v.EpochLockingSettings, ok); err != nil {
@@ -18120,6 +18196,11 @@ func awsRestjson1_serializeDocumentPauseStateScheduleActionSettings(v *types.Pau
 func awsRestjson1_serializeDocumentPipelineLockingSettings(v *types.PipelineLockingSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomEpoch != nil {
+		ok := object.Key("customEpoch")
+		ok.String(*v.CustomEpoch)
+	}
 
 	if len(v.PipelineLockingMethod) > 0 {
 		ok := object.Key("pipelineLockingMethod")
@@ -18994,13 +19075,64 @@ func awsRestjson1_serializeDocumentSrtGroupSettings(v *types.SrtGroupSettings, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSrtListenerDecryptionRequest(v *types.SrtListenerDecryptionRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Algorithm) > 0 {
+		ok := object.Key("algorithm")
+		ok.String(string(v.Algorithm))
+	}
+
+	if v.PassphraseSecretArn != nil {
+		ok := object.Key("passphraseSecretArn")
+		ok.String(*v.PassphraseSecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSrtListenerSettingsRequest(v *types.SrtListenerSettingsRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Decryption != nil {
+		ok := object.Key("decryption")
+		if err := awsRestjson1_serializeDocumentSrtListenerDecryptionRequest(v.Decryption, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MinimumLatency != nil {
+		ok := object.Key("minimumLatency")
+		ok.Integer(*v.MinimumLatency)
+	}
+
+	if v.StreamId != nil {
+		ok := object.Key("streamId")
+		ok.String(*v.StreamId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSrtOutputDestinationSettings(v *types.SrtOutputDestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ConnectionMode) > 0 {
+		ok := object.Key("connectionMode")
+		ok.String(string(v.ConnectionMode))
+	}
+
 	if v.EncryptionPassphraseSecretArn != nil {
 		ok := object.Key("encryptionPassphraseSecretArn")
 		ok.String(*v.EncryptionPassphraseSecretArn)
+	}
+
+	if v.ListenerPort != nil {
+		ok := object.Key("listenerPort")
+		ok.Integer(*v.ListenerPort)
 	}
 
 	if v.StreamId != nil {
@@ -19059,6 +19191,13 @@ func awsRestjson1_serializeDocumentSrtSettingsRequest(v *types.SrtSettingsReques
 	if v.SrtCallerSources != nil {
 		ok := object.Key("srtCallerSources")
 		if err := awsRestjson1_serializeDocument__listOfSrtCallerSourceRequest(v.SrtCallerSources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SrtListenerSettings != nil {
+		ok := object.Key("srtListenerSettings")
+		if err := awsRestjson1_serializeDocumentSrtListenerSettingsRequest(v.SrtListenerSettings, ok); err != nil {
 			return err
 		}
 	}

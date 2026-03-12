@@ -798,6 +798,21 @@ func inputActiveStateRetryable(ctx context.Context, input *GetRouterInputInput, 
 		}
 	}
 
+	if err == nil {
+		v1 := output.RouterInput
+		var v2 types.RouterInputState
+		if v1 != nil {
+			v3 := v1.State
+			v2 = v3
+		}
+		expectedValue := "MIGRATING"
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
+			return true, nil
+		}
+	}
+
 	if err != nil {
 		var errorType *types.InternalServerErrorException
 		if errors.As(err, &errorType) {

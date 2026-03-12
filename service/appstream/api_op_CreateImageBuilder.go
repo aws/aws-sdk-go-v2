@@ -148,6 +148,14 @@ type CreateImageBuilderInput struct {
 	// The description to display.
 	Description *string
 
+	// Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce
+	// IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+	//
+	// Before disabling IMDSv1, ensure your WorkSpaces Applications images are running
+	// the agent version or managed image update released on or after January 16, 2024
+	// to support IMDSv2 enforcement.
+	DisableIMDSV1 *bool
+
 	// The image builder name to display.
 	DisplayName *string
 

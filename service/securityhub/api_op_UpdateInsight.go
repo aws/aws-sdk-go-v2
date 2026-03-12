@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the Security Hub insight identified by the specified insight ARN.
+// Updates the Security Hub CSPM insight identified by the specified insight ARN.
 func (c *Client) UpdateInsight(ctx context.Context, params *UpdateInsightInput, optFns ...func(*Options)) (*UpdateInsightOutput, error) {
 	if params == nil {
 		params = &UpdateInsightInput{}

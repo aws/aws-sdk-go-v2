@@ -75,8 +75,7 @@ type AdminSetUserMFAPreferenceInput struct {
 
 	// User preferences for time-based one-time password (TOTP) MFA. Activates or
 	// deactivates TOTP MFA and sets it as the preferred MFA method when multiple
-	// methods are available. This operation can set TOTP as a user's preferred MFA
-	// method before they register a TOTP authenticator.
+	// methods are available.
 	SoftwareTokenMfaSettings *types.SoftwareTokenMfaSettingsType
 
 	noSmithyDocumentSerde

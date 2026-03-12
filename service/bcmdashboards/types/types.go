@@ -459,6 +459,9 @@ type Widget struct {
 	// layout. Used to control widget placement.
 	HorizontalOffset int32
 
+	// The unique identifier for the widget.
+	Id *string
+
 	// The width of the widget in column spans. The dashboard layout consists of a
 	// grid system.
 	Width *int32

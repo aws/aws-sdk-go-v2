@@ -11,7 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing flow.
+//	Updates an existing flow.
+//
+// Because UpdateFlowSources and UpdateFlow are separate operations, you can't
+// change both the source type AND the flow size in a single request.
+//
+//   - If you have a MEDIUM flow and you want to change the flow source to NDI®:
+//
+//   - First, use the UpdateFlow operation to upgrade the flow size to LARGE .
+//
+//   - After that, you can then use the UpdateFlowSource operation to configure the
+//     NDI source.
+//
+//   - If you're switching from an NDI source to a transport stream (TS) source
+//     and want to downgrade the flow size:
+//
+//   - First, use the UpdateFlowSource operation to change the flow source type.
+//
+//   - After that, you can then use the UpdateFlow operation to downgrade the flow
+//     size to MEDIUM .
 func (c *Client) UpdateFlow(ctx context.Context, params *UpdateFlowInput, optFns ...func(*Options)) (*UpdateFlowOutput, error) {
 	if params == nil {
 		params = &UpdateFlowInput{}
@@ -34,14 +52,19 @@ type UpdateFlowInput struct {
 	// This member is required.
 	FlowArn *string
 
+	//  The encoding configuration to apply to the NDI® source when transcoding it to
+	// a transport stream for downstream distribution. You can choose between several
+	// predefined encoding profiles based on common use cases.
+	EncodingConfig *types.EncodingConfig
+
 	//  Determines the processing capacity and feature set of the flow.
 	FlowSize types.FlowSize
 
 	//  The maintenance setting of the flow.
 	Maintenance *types.UpdateMaintenance
 
-	//  Specifies the configuration settings for NDI outputs. Required when the flow
-	// includes NDI outputs.
+	//  Specifies the configuration settings for a flow's NDI source or output.
+	// Required when the flow includes an NDI source or output.
 	NdiConfig *types.NdiConfig
 
 	//  The settings for source failover.

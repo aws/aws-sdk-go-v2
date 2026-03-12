@@ -1,3 +1,20 @@
+# v1.87.3 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.87.2 (2026-02-25)
+
+* No change notes available for this release.
+
+# v1.87.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.87.0 (2026-01-28)
+
+* **Feature**: This release adds a follow source mode for audio output channel count, an AES audio frame wrapping option for MXF outputs, and an option to signal DolbyVision compatibility using the SUPPLEMENTAL-CODECS tag in HLS manifests.
+
 # v1.86.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

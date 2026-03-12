@@ -125,6 +125,12 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	case *types.ConnectionPropertiesInputMemberSparkGlueProperties:
 		_ = v.Value // Value is types.SparkGluePropertiesInput
 
+	case *types.ConnectionPropertiesInputMemberWorkflowsMwaaProperties:
+		_ = v.Value // Value is types.WorkflowsMwaaPropertiesInput
+
+	case *types.ConnectionPropertiesInputMemberWorkflowsServerlessProperties:
+		_ = v.Value // Value is types.WorkflowsServerlessPropertiesInput
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -135,6 +141,7 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 }
 
 var _ *types.SparkEmrPropertiesInput
+var _ *types.WorkflowsMwaaPropertiesInput
 var _ *types.AmazonQPropertiesInput
 var _ *types.GluePropertiesInput
 var _ *types.S3PropertiesInput
@@ -143,6 +150,7 @@ var _ *types.IamPropertiesInput
 var _ *types.SparkGluePropertiesInput
 var _ *types.HyperPodPropertiesInput
 var _ *types.RedshiftPropertiesInput
+var _ *types.WorkflowsServerlessPropertiesInput
 var _ *types.MlflowPropertiesInput
 
 func ExampleConnectionPropertiesOutput_outputUsage() {
@@ -179,6 +187,12 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 	case *types.ConnectionPropertiesOutputMemberSparkGlueProperties:
 		_ = v.Value // Value is types.SparkGluePropertiesOutput
 
+	case *types.ConnectionPropertiesOutputMemberWorkflowsMwaaProperties:
+		_ = v.Value // Value is types.WorkflowsMwaaPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberWorkflowsServerlessProperties:
+		_ = v.Value // Value is types.WorkflowsServerlessPropertiesOutput
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -190,9 +204,11 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 
 var _ *types.MlflowPropertiesOutput
 var _ *types.S3PropertiesOutput
+var _ *types.WorkflowsMwaaPropertiesOutput
 var _ *types.AthenaPropertiesOutput
 var _ *types.SparkGluePropertiesOutput
 var _ *types.IamPropertiesOutput
+var _ *types.WorkflowsServerlessPropertiesOutput
 var _ *types.RedshiftPropertiesOutput
 var _ *types.AmazonQPropertiesOutput
 var _ *types.HyperPodPropertiesOutput
@@ -473,6 +489,28 @@ func ExampleListingItem_outputUsage() {
 
 var _ *types.AssetListing
 var _ *types.DataProductListing
+
+func ExampleMatchClause_outputUsage() {
+	var union types.MatchClause
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MatchClauseMemberEntityPattern:
+		_ = v.Value // Value is types.EntityPattern
+
+	case *types.MatchClauseMemberRelationPattern:
+		_ = v.Value // Value is types.RelationPattern
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EntityPattern
+var _ *types.RelationPattern
 
 func ExampleMatchRationaleItem_outputUsage() {
 	var union types.MatchRationaleItem
@@ -853,6 +891,24 @@ func ExampleRegion_outputUsage() {
 
 var _ *string
 var _ *string
+
+func ExampleResultItem_outputUsage() {
+	var union types.ResultItem
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ResultItemMemberLineageNode:
+		_ = v.Value // Value is types.LineageNodeItem
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LineageNodeItem
 
 func ExampleRowFilter_outputUsage() {
 	var union types.RowFilter

@@ -709,6 +709,13 @@ type UploadObjectOutput struct {
 	// confirms the encryption algorithm that Amazon S3 used to encrypt the object.
 	ServerSideEncryption types.ServerSideEncryption
 
+	//  The size of the object in bytes. This value is only be present if you append
+	// to an object.
+	//
+	// This functionality is only supported for objects in the Amazon S3 Express One
+	// Zone storage class in directory buckets.
+	Size *int64
+
 	// The version of the object that was uploaded. Will only be populated if
 	// the S3 Bucket is versioned. If the bucket is not versioned this field
 	// will not be set.
@@ -737,6 +744,7 @@ func (o *UploadObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, buc
 	o.SSEKMSEncryptionContext = out.SSEKMSEncryptionContext
 	o.SSEKMSKeyID = out.SSEKMSKeyId
 	o.ServerSideEncryption = types.ServerSideEncryption(out.ServerSideEncryption)
+	o.Size = out.Size
 	o.VersionID = out.VersionId
 	o.ResultMetadata = out.ResultMetadata
 }
@@ -825,7 +833,7 @@ func (u *uploader) upload(ctx context.Context) (*UploadObjectOutput, error) {
 
 func (u *uploader) init() error {
 	u.progressEmitter = &singleObjectProgressEmitter{
-		Listeners: u.options.ProgressListeners,
+		Listeners: u.options.ObjectProgressListeners,
 	}
 	if err := u.initSize(); err != nil {
 		return err
@@ -836,10 +844,6 @@ func (u *uploader) init() error {
 
 // initSize checks user configured partsize and up-size it if calculated part count exceeds max value
 func (u *uploader) initSize() error {
-	if u.options.PartSizeBytes < minPartSizeBytes {
-		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
-	}
-
 	u.objectSize = -1
 	switch r := u.in.Body.(type) {
 	case io.Seeker:
@@ -1041,7 +1045,7 @@ func (u *multiUploader) shouldContinue(part int32, nextChunkLen int, err error) 
 
 	// This upload exceeded maximum number of supported parts, error now.
 	if part > defaultMaxUploadParts {
-		return false, fmt.Errorf(fmt.Sprintf("exceeded total allowed S3 limit MaxUploadParts (%d). Adjust PartSize to fit in this limit", defaultMaxUploadParts))
+		return false, fmt.Errorf("exceeded total allowed S3 limit MaxUploadParts (%d). Adjust PartSize to fit in this limit", defaultMaxUploadParts)
 	}
 
 	return true, err

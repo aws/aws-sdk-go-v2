@@ -17,19 +17,20 @@ package software.amazon.smithy.aws.go.codegen.customization.auth;
 
 import java.util.List;
 
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.integration.auth.HttpBearerDefinition;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.traits.HttpBearerAuthTrait;
@@ -66,7 +67,7 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
         return service.hasTrait(HttpBearerAuthTrait.class);
     }
 
-    private GoWriter.Writable writeSignerConfigFieldResolver() {
+    private Writable writeSignerConfigFieldResolver() {
         return goTemplate("""
                 func $funcName:L(o *Options) {
                     if o.$signerOption:L != nil {
@@ -82,7 +83,7 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
                 ));
     }
 
-    private GoWriter.Writable writeNewSignerFunc() {
+    private Writable writeNewSignerFunc() {
         return goTemplate("""
                 func $funcName:L(o Options) $signerInterface:T {
                     return $newDefaultSigner:T()
@@ -90,8 +91,8 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
                 """,
                 MapUtils.of(
                         "funcName", NEW_DEFAULT_SIGNER_NAME,
-                        "signerInterface", SmithyGoTypes.Auth.Bearer.Signer,
-                        "newDefaultSigner", SmithyGoTypes.Auth.Bearer.NewSignHTTPSMessage
+                        "signerInterface", SmithyGoDependency.SMITHY_AUTH_BEARER.interfaceSymbol("Signer"),
+                        "newDefaultSigner", SmithyGoDependency.SMITHY_AUTH_BEARER.func("NewSignHTTPSMessage")
                 ));
     }
 
@@ -102,12 +103,12 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
                         .servicePredicate(this::isHttpBearerService)
                         .addConfigField(ConfigField.builder()
                                 .name(TOKEN_PROVIDER_OPTION_NAME)
-                                .type(SmithyGoTypes.Auth.Bearer.TokenProvider)
+                                .type(SmithyGoDependency.SMITHY_AUTH_BEARER.interfaceSymbol("TokenProvider"))
                                 .documentation("Bearer token value provider")
                                 .build())
                         .addConfigField(ConfigField.builder()
                                 .name(SIGNER_OPTION_NAME)
-                                .type(SmithyGoTypes.Auth.Bearer.Signer)
+                                .type(SmithyGoDependency.SMITHY_AUTH_BEARER.interfaceSymbol("Signer"))
                                 .documentation("Signer for authenticating requests with bearer auth")
                                 .build())
                         .addConfigFieldResolver(ConfigFieldResolver.builder()
@@ -122,17 +123,17 @@ public class AwsHttpBearerAuthScheme implements GoIntegration {
 
     public static class AwsHttpBearer extends HttpBearerDefinition {
         @Override
-        public GoWriter.Writable generateDefaultAuthScheme() {
+        public Writable generateDefaultAuthScheme() {
             return goTemplate("$T($S, &$T{Signer: options.BearerAuthSigner})",
-                    SdkGoTypes.Internal.Auth.NewHTTPAuthScheme,
+                    AwsGoDependency.INTERNAL_AUTH.func("NewHTTPAuthScheme"),
                     HttpBearerAuthTrait.ID.toString(),
-                    SdkGoTypes.Internal.Auth.Smithy.BearerTokenSignerAdapter);
+                    AwsGoDependency.INTERNAL_AUTH_SMITHY.struct("BearerTokenSignerAdapter"));
         }
 
         @Override
-        public GoWriter.Writable generateOptionsIdentityResolver() {
+        public Writable generateOptionsIdentityResolver() {
             return goTemplate("&$T{Provider: o.BearerAuthTokenProvider}",
-                    SdkGoTypes.Internal.Auth.Smithy.BearerTokenProviderAdapter);
+                    AwsGoDependency.INTERNAL_AUTH_SMITHY.struct("BearerTokenProviderAdapter"));
         }
     }
 }

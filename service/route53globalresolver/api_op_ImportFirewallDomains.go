@@ -13,6 +13,12 @@ import (
 
 // Imports a list of domains from an Amazon S3 file into a firewall domain list.
 // The file should contain one domain per line.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) ImportFirewallDomains(ctx context.Context, params *ImportFirewallDomainsInput, optFns ...func(*Options)) (*ImportFirewallDomainsOutput, error) {
 	if params == nil {
 		params = &ImportFirewallDomainsInput{}

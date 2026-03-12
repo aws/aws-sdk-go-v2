@@ -2312,7 +2312,7 @@ type SearchFilterExpressionMemberStringFilter struct {
 
 func (*SearchFilterExpressionMemberStringFilter) isSearchFilterExpression() {}
 
-// Filters by a list of string values.
+// Filters by a list of strings.
 type SearchFilterExpressionMemberStringListFilter struct {
 	Value StringListFilterExpression
 
@@ -3156,7 +3156,7 @@ type StringFilterExpression struct {
 	noSmithyDocumentSerde
 }
 
-// Searches for a match within a list of strings.
+// Searches for a particular list of strings.
 type StringListFilterExpression struct {
 
 	// The field name to search.
@@ -3164,8 +3164,7 @@ type StringListFilterExpression struct {
 	// This member is required.
 	Name *string
 
-	// The type of comparison to use for this search. ANY_EQUALS and ALL_NOT_EQUALS
-	// are supported.
+	// The type of comparison to use for this search.
 	//
 	// This member is required.
 	Operator ComparisonOperator

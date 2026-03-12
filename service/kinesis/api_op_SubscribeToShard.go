@@ -73,12 +73,16 @@ type SubscribeToShardInput struct {
 	// This member is required.
 	StartingPosition *types.StartingPosition
 
+	// Not Implemented. Reserved for future use.
+	StreamId *string
+
 	noSmithyDocumentSerde
 }
 
 func (in *SubscribeToShardInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ConsumerARN = in.ConsumerARN
+	p.StreamId = in.StreamId
 	p.OperationType = ptr.String("data")
 }
 

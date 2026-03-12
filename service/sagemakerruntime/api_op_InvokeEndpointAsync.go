@@ -84,6 +84,10 @@ type InvokeEndpointAsyncInput struct {
 	// [Section 3.3.6. Field Value Components]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
 	CustomAttributes *string
 
+	// The filename for the inference response payload stored in Amazon S3. If not
+	// specified, Amazon SageMaker AI generates a filename based on the inference ID.
+	Filename *string
+
 	// The identifier for the inference request. Amazon SageMaker AI will generate an
 	// identifier for you if none is specified.
 	InferenceId *string
@@ -95,6 +99,10 @@ type InvokeEndpointAsyncInput struct {
 	// Maximum age in seconds a request can be in the queue before it is marked as
 	// expired. The default is 6 hours, or 21,600 seconds.
 	RequestTTLSeconds *int32
+
+	// The path extension that is appended to the Amazon S3 output path where the
+	// inference response payload is stored.
+	S3OutputPathExtension *string
 
 	noSmithyDocumentSerde
 }

@@ -737,6 +737,11 @@ func validateDestinationLogsConfiguration(v *types.DestinationLogsConfiguration)
 			invalidParams.AddNested("BackupConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.LogGroupNameConfiguration != nil {
+		if err := validateLogGroupNameConfiguration(v.LogGroupNameConfiguration); err != nil {
+			invalidParams.AddNested("LogGroupNameConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -768,6 +773,21 @@ func validateFieldSelectors(v []types.AdvancedFieldSelector) error {
 		if err := validateAdvancedFieldSelector(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogGroupNameConfiguration(v *types.LogGroupNameConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogGroupNameConfiguration"}
+	if v.LogGroupNamePattern == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupNamePattern"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

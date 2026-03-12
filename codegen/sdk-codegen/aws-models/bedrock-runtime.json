@@ -1968,6 +1968,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the processing tier configuration used for serving the request.</p>"
                     }
+                },
+                "outputConfig": {
+                    "target": "com.amazonaws.bedrockruntime#OutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Output configuration for a model response.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2288,6 +2294,12 @@
                     "target": "com.amazonaws.bedrockruntime#ServiceTier",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the processing tier configuration used for serving the request.</p>"
+                    }
+                },
+                "outputConfig": {
+                    "target": "com.amazonaws.bedrockruntime#OutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Output configuration for a model response.</p>"
                     }
                 }
             },
@@ -5710,6 +5722,33 @@
                 "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):inference-profile/[a-zA-Z0-9-:.]+)$"
             }
         },
+        "com.amazonaws.bedrockruntime#JsonSchemaDefinition": {
+            "type": "structure",
+            "members": {
+                "schema": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The JSON schema to constrain the model's output. For more information, see <a href=\"https://json-schema.org/understanding-json-schema/reference\">JSON Schema Reference</a>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the JSON schema. </p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A description of the JSON schema. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> JSON schema structured output format options. </p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#KmsKeyId": {
             "type": "string",
             "traits": {
@@ -6028,6 +6067,71 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.bedrockruntime#OutputConfig": {
+            "type": "structure",
+            "members": {
+                "textFormat": {
+                    "target": "com.amazonaws.bedrockruntime#OutputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Structured output parameters to control the model's text response. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output configuration for a model response in a call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#OutputFormat": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockruntime#OutputFormatType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of structured output format. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "structure": {
+                    "target": "com.amazonaws.bedrockruntime#OutputFormatStructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The structure that the model's output must adhere to. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Structured output parameters to control the model's response. </p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#OutputFormatStructure": {
+            "type": "union",
+            "members": {
+                "jsonSchema": {
+                    "target": "com.amazonaws.bedrockruntime#JsonSchemaDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A JSON schema structure that the model's output must adhere to. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The structure that the model's output must adhere to. </p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#OutputFormatType": {
+            "type": "enum",
+            "members": {
+                "JSON_SCHEMA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "json_schema"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The type of structured output format. Available options are: json_schema. </p>"
             }
         },
         "com.amazonaws.bedrockruntime#PaginationToken": {
@@ -7175,6 +7279,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The input schema for the tool in JSON format.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "strict": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Flag to enable structured output enforcement on a tool usage response.</p>"
                     }
                 }
             },

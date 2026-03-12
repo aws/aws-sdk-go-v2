@@ -955,6 +955,15 @@ func awsRestjson1_deserializeOpHttpBindingsStartStreamTranscriptionOutput(v *Sta
 		v.SessionId = ptr.String(headerValues[0])
 	}
 
+	if headerValues := response.Header.Values("x-amzn-transcribe-session-resume-window"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		vv, err := strconv.ParseInt(headerValues[0], 0, 32)
+		if err != nil {
+			return err
+		}
+		v.SessionResumeWindow = ptr.Int32(int32(vv))
+	}
+
 	if headerValues := response.Header.Values("x-amzn-transcribe-show-speaker-label"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		vv, err := strconv.ParseBool(headerValues[0])

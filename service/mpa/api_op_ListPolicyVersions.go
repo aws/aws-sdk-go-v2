@@ -13,11 +13,6 @@ import (
 
 // Returns a list of the versions for policies. Policies define the permissions
 // for team resources.
-//
-// The protected operation for a service integration might require specific
-// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-//
-// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 func (c *Client) ListPolicyVersions(ctx context.Context, params *ListPolicyVersionsInput, optFns ...func(*Options)) (*ListPolicyVersionsOutput, error) {
 	if params == nil {
 		params = &ListPolicyVersionsInput{}
@@ -64,11 +59,6 @@ type ListPolicyVersionsOutput struct {
 
 	// An array of PolicyVersionSummary objects. Contains details for the version of
 	// the policies that define the permissions for team resources.
-	//
-	// The protected operation for a service integration might require specific
-	// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-	//
-	// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 	PolicyVersions []types.PolicyVersionSummary
 
 	// Metadata pertaining to the operation's result.

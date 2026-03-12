@@ -680,6 +680,7 @@ const (
 	IndicatorTypeCryptominingIp       IndicatorType = "CRYPTOMINING_IP"
 	IndicatorTypeCryptominingDomain   IndicatorType = "CRYPTOMINING_DOMAIN"
 	IndicatorTypeCryptominingProcess  IndicatorType = "CRYPTOMINING_PROCESS"
+	IndicatorTypeMaliciousFile        IndicatorType = "MALICIOUS_FILE"
 )
 
 // Values returns all known values for IndicatorType. Note that this can be
@@ -704,6 +705,7 @@ func (IndicatorType) Values() []IndicatorType {
 		"CRYPTOMINING_IP",
 		"CRYPTOMINING_DOMAIN",
 		"CRYPTOMINING_PROCESS",
+		"MALICIOUS_FILE",
 	}
 }
 

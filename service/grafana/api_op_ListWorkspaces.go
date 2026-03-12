@@ -15,7 +15,7 @@ import (
 // information about each workspace. For more complete information about one
 // workspace, use [DescribeWorkspace].
 //
-// [DescribeWorkspace]: https://docs.aws.amazon.com/AAMG/latest/APIReference/API_DescribeWorkspace.html
+// [DescribeWorkspace]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_DescribeWorkspace.html
 func (c *Client) ListWorkspaces(ctx context.Context, params *ListWorkspacesInput, optFns ...func(*Options)) (*ListWorkspacesOutput, error) {
 	if params == nil {
 		params = &ListWorkspacesInput{}

@@ -26660,6 +26660,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.Analysis))
 	}
 
+	if len(v.ApproveFlowShareRequests) > 0 {
+		ok := object.Key("ApproveFlowShareRequests")
+		ok.String(string(v.ApproveFlowShareRequests))
+	}
+
 	if len(v.AsanaAction) > 0 {
 		ok := object.Key("AsanaAction")
 		ok.String(string(v.AsanaAction))
@@ -26678,6 +26683,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.BoxAgentAction) > 0 {
 		ok := object.Key("BoxAgentAction")
 		ok.String(string(v.BoxAgentAction))
+	}
+
+	if len(v.BuildCalculatedFieldWithQ) > 0 {
+		ok := object.Key("BuildCalculatedFieldWithQ")
+		ok.String(string(v.BuildCalculatedFieldWithQ))
 	}
 
 	if len(v.CanvaAgentAction) > 0 {
@@ -26950,6 +26960,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.CreateChatAgents))
 	}
 
+	if len(v.CreateDashboardExecutiveSummaryWithQ) > 0 {
+		ok := object.Key("CreateDashboardExecutiveSummaryWithQ")
+		ok.String(string(v.CreateDashboardExecutiveSummaryWithQ))
+	}
+
 	if len(v.CreateSharedFolders) > 0 {
 		ok := object.Key("CreateSharedFolders")
 		ok.String(string(v.CreateSharedFolders))
@@ -26963,6 +26978,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.Dashboard) > 0 {
 		ok := object.Key("Dashboard")
 		ok.String(string(v.Dashboard))
+	}
+
+	if len(v.EditVisualWithQ) > 0 {
+		ok := object.Key("EditVisualWithQ")
+		ok.String(string(v.EditVisualWithQ))
 	}
 
 	if len(v.ExportToCsv) > 0 {
@@ -26993,6 +27013,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.ExportToPdfInScheduledReports) > 0 {
 		ok := object.Key("ExportToPdfInScheduledReports")
 		ok.String(string(v.ExportToPdfInScheduledReports))
+	}
+
+	if len(v.Extension) > 0 {
+		ok := object.Key("Extension")
+		ok.String(string(v.Extension))
 	}
 
 	if len(v.FactSetAction) > 0 {
@@ -27438,6 +27463,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.TextractAction) > 0 {
 		ok := object.Key("TextractAction")
 		ok.String(string(v.TextractAction))
+	}
+
+	if len(v.Topic) > 0 {
+		ok := object.Key("Topic")
+		ok.String(string(v.Topic))
 	}
 
 	if len(v.UseAgentWebSearch) > 0 {

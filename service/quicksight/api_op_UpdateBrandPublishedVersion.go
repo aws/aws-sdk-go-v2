@@ -33,7 +33,7 @@ type UpdateBrandPublishedVersionInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID of the Quick Suite brand.
+	// The ID of the Quick brand.
 	//
 	// This member is required.
 	BrandId *string

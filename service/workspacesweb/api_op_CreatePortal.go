@@ -69,6 +69,10 @@ type CreatePortalInput struct {
 	// The maximum number of concurrent sessions for the portal.
 	MaxConcurrentSessions *int32
 
+	// The custom domain of the web portal that users access in order to start
+	// streaming sessions.
+	PortalCustomDomain *string
+
 	// The tags to add to the web portal. A tag is a key-value pair.
 	Tags []types.Tag
 

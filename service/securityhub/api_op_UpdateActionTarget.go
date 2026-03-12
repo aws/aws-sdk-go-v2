@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the name and description of a custom action target in Security Hub.
+// Updates the name and description of a custom action target in Security Hub CSPM.
 func (c *Client) UpdateActionTarget(ctx context.Context, params *UpdateActionTargetInput, optFns ...func(*Options)) (*UpdateActionTargetOutput, error) {
 	if params == nil {
 		params = &UpdateActionTargetInput{}

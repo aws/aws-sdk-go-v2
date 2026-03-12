@@ -66,10 +66,10 @@ type UpdateBrowserStreamOutput struct {
 	// This member is required.
 	SessionId *string
 
-	// The collection of streams associated with a browser session in Amazon Bedrock.
-	// These streams provide different ways to interact with and observe the browser
-	// session, including programmatic control and visual representation of the browser
-	// content.
+	// The collection of streams associated with a browser session in Amazon Bedrock
+	// AgentCore. These streams provide different ways to interact with and observe the
+	// browser session, including programmatic control and visual representation of the
+	// browser content.
 	//
 	// This member is required.
 	Streams *types.BrowserSessionStream

@@ -143,6 +143,9 @@ type ConverseInput struct {
 	// The messages that you want to send to the model.
 	Messages []types.Message
 
+	// Output configuration for a model response.
+	OutputConfig *types.OutputConfig
+
 	// Model performance settings for the request.
 	PerformanceConfig *types.PerformanceConfiguration
 

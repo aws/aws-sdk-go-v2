@@ -12275,7 +12275,7 @@
                 "DeferMaintenanceDuration": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>An integer indicating the duration of the maintenance window in days. If you specify a\n            duration, you can't specify an end time. The duration must be 45 days or less.</p>"
+                        "smithy.api#documentation": "<p>An integer indicating the duration of the maintenance window in days. If you specify a\n            duration, you can't specify an end time. The duration must be 60 days or less.</p>"
                     }
                 }
             },

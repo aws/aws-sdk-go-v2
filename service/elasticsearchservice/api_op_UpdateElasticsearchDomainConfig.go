@@ -59,6 +59,9 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// [Amazon Cognito Authentication for Kibana]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
 	CognitoOptions *types.CognitoOptions
 
+	// Specifies the deployment strategy options.
+	DeploymentStrategyOptions *types.DeploymentStrategyOptions
+
 	// Options to specify configuration that will be applied to the domain endpoint.
 	DomainEndpointOptions *types.DomainEndpointOptions
 

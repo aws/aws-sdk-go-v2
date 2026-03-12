@@ -4358,9 +4358,46 @@ func awsAwsjson11_serializeDocumentAddressAllocationIds(v []string, value smithy
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAs2AsyncMdnConnectorConfig(v *types.As2AsyncMdnConnectorConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ServerIds != nil {
+		ok := object.Key("ServerIds")
+		if err := awsAwsjson11_serializeDocumentAs2AsyncMdnServerIds(v.ServerIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Url != nil {
+		ok := object.Key("Url")
+		ok.String(*v.Url)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAs2AsyncMdnServerIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAs2ConnectorConfig(v *types.As2ConnectorConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AsyncMdnConfig != nil {
+		ok := object.Key("AsyncMdnConfig")
+		if err := awsAwsjson11_serializeDocumentAs2AsyncMdnConnectorConfig(v.AsyncMdnConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.BasicAuthSecretId != nil {
 		ok := object.Key("BasicAuthSecretId")
@@ -4530,6 +4567,36 @@ func awsAwsjson11_serializeDocumentCustomDirectoriesType(v *types.CustomDirector
 		ok.String(*v.TemporaryFilesDirectory)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomHttpHeader(v *types.CustomHttpHeader, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomHttpHeaders(v []types.CustomHttpHeader, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCustomHttpHeader(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -6604,6 +6671,13 @@ func awsAwsjson11_serializeOpDocumentStartFileTransferInput(v *StartFileTransfer
 	if v.ConnectorId != nil {
 		ok := object.Key("ConnectorId")
 		ok.String(*v.ConnectorId)
+	}
+
+	if v.CustomHttpHeaders != nil {
+		ok := object.Key("CustomHttpHeaders")
+		if err := awsAwsjson11_serializeDocumentCustomHttpHeaders(v.CustomHttpHeaders, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.LocalDirectoryPath != nil {

@@ -725,6 +725,23 @@ func (ImageFormat) Values() []ImageFormat {
 	}
 }
 
+type OutputFormatType string
+
+// Enum values for OutputFormatType
+const (
+	OutputFormatTypeJsonSchema OutputFormatType = "json_schema"
+)
+
+// Values returns all known values for OutputFormatType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutputFormatType) Values() []OutputFormatType {
+	return []OutputFormatType{
+		"json_schema",
+	}
+}
+
 type PerformanceConfigLatency string
 
 // Enum values for PerformanceConfigLatency

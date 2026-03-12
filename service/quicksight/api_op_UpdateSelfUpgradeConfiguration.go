@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the self-upgrade configuration for a Quick Suite account.
+// Updates the self-upgrade configuration for a Quick account.
 func (c *Client) UpdateSelfUpgradeConfiguration(ctx context.Context, params *UpdateSelfUpgradeConfigurationInput, optFns ...func(*Options)) (*UpdateSelfUpgradeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateSelfUpgradeConfigurationInput{}
@@ -29,19 +29,19 @@ func (c *Client) UpdateSelfUpgradeConfiguration(ctx context.Context, params *Upd
 
 type UpdateSelfUpgradeConfigurationInput struct {
 
-	// The ID of the Amazon Web Services account that contains the Quick Suite
-	// self-upgrade configuration that you want to update.
+	// The ID of the Amazon Web Services account that contains the Quick self-upgrade
+	// configuration that you want to update.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The Quick Suite namespace that you want to update the Quick Suite self-upgrade
+	// The Quick namespace that you want to update the Quick self-upgrade
 	// configuration for.
 	//
 	// This member is required.
 	Namespace *string
 
-	// The self-upgrade status that you want to set for the Quick Suite account.
+	// The self-upgrade status that you want to set for the Quick account.
 	//
 	// This member is required.
 	SelfUpgradeStatus types.SelfUpgradeStatus

@@ -268,6 +268,11 @@ func awsRestjson1_serializeOpDocumentAddDirectQueryDataSourceInput(v *AddDirectQ
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataSourceAccessPolicy != nil {
+		ok := object.Key("DataSourceAccessPolicy")
+		ok.String(*v.DataSourceAccessPolicy)
+	}
+
 	if v.DataSourceName != nil {
 		ok := object.Key("DataSourceName")
 		ok.String(*v.DataSourceName)
@@ -1099,6 +1104,13 @@ func awsRestjson1_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 	if v.CognitoOptions != nil {
 		ok := object.Key("CognitoOptions")
 		if err := awsRestjson1_serializeDocumentCognitoOptions(v.CognitoOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeploymentStrategyOptions != nil {
+		ok := object.Key("DeploymentStrategyOptions")
+		if err := awsRestjson1_serializeDocumentDeploymentStrategyOptions(v.DeploymentStrategyOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -2396,17 +2408,6 @@ func (m *awsRestjson1_serializeOpDescribeDomainAutoTunes) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDescribeDomainAutoTunesInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2430,21 +2431,12 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDomainAutoTunesInput(v *Describ
 		}
 	}
 
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDescribeDomainAutoTunesInput(v *DescribeDomainAutoTunesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
 	if v.MaxResults != 0 {
-		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -6367,6 +6359,11 @@ func awsRestjson1_serializeOpDocumentUpdateDirectQueryDataSourceInput(v *UpdateD
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataSourceAccessPolicy != nil {
+		ok := object.Key("DataSourceAccessPolicy")
+		ok.String(*v.DataSourceAccessPolicy)
+	}
+
 	if v.DataSourceType != nil {
 		ok := object.Key("DataSourceType")
 		if err := awsRestjson1_serializeDocumentDirectQueryDataSourceType(v.DataSourceType, ok); err != nil {
@@ -6518,6 +6515,13 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigInput(v *UpdateDomainConf
 	if v.CognitoOptions != nil {
 		ok := object.Key("CognitoOptions")
 		if err := awsRestjson1_serializeDocumentCognitoOptions(v.CognitoOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeploymentStrategyOptions != nil {
+		ok := object.Key("DeploymentStrategyOptions")
+		if err := awsRestjson1_serializeDocumentDeploymentStrategyOptions(v.DeploymentStrategyOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -7620,6 +7624,11 @@ func awsRestjson1_serializeDocumentDataSource(v *types.DataSource, value smithyj
 		ok.String(*v.DataSourceDescription)
 	}
 
+	if v.IamRoleForDataSourceArn != nil {
+		ok := object.Key("iamRoleForDataSourceArn")
+		ok.String(*v.IamRoleForDataSourceArn)
+	}
+
 	return nil
 }
 
@@ -7651,6 +7660,18 @@ func awsRestjson1_serializeDocumentDataSourceType(v types.DataSourceType, value 
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeploymentStrategyOptions(v *types.DeploymentStrategyOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DeploymentStrategy) > 0 {
+		ok := object.Key("DeploymentStrategy")
+		ok.String(string(v.DeploymentStrategy))
+	}
+
 	return nil
 }
 

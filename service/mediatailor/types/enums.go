@@ -145,6 +145,7 @@ type AdsInteractionPublishOptInEventType string
 // Enum values for AdsInteractionPublishOptInEventType
 const (
 	AdsInteractionPublishOptInEventTypeRawAdsResponse AdsInteractionPublishOptInEventType = "RAW_ADS_RESPONSE"
+	AdsInteractionPublishOptInEventTypeRawAdsRequest  AdsInteractionPublishOptInEventType = "RAW_ADS_REQUEST"
 )
 
 // Values returns all known values for AdsInteractionPublishOptInEventType. Note
@@ -155,6 +156,7 @@ const (
 func (AdsInteractionPublishOptInEventType) Values() []AdsInteractionPublishOptInEventType {
 	return []AdsInteractionPublishOptInEventType{
 		"RAW_ADS_RESPONSE",
+		"RAW_ADS_REQUEST",
 	}
 }
 

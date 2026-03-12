@@ -87,6 +87,9 @@ type CreateDomainInput struct {
 	// [Configuring Amazon Cognito authentication for OpenSearch Dashboards]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
 	CognitoOptions *types.CognitoOptions
 
+	// Specifies the deployment strategy options for the domain.
+	DeploymentStrategyOptions *types.DeploymentStrategyOptions
+
 	// Additional options for the domain endpoint, such as whether to require HTTPS
 	// for all traffic.
 	DomainEndpointOptions *types.DomainEndpointOptions

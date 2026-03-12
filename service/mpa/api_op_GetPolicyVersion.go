@@ -13,11 +13,6 @@ import (
 
 // Returns details for the version of a policy. Policies define the permissions
 // for team resources.
-//
-// The protected operation for a service integration might require specific
-// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-//
-// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionInput, optFns ...func(*Options)) (*GetPolicyVersionOutput, error) {
 	if params == nil {
 		params = &GetPolicyVersionInput{}
@@ -47,11 +42,6 @@ type GetPolicyVersionOutput struct {
 
 	// A PolicyVersion object. Contains details for the version of the policy.
 	// Policies define the permissions for team resources.
-	//
-	// The protected operation for a service integration might require specific
-	// permissions. For more information, see [How other services work with Multi-party approval]in the Multi-party approval User Guide.
-	//
-	// [How other services work with Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
 	//
 	// This member is required.
 	PolicyVersion *types.PolicyVersion

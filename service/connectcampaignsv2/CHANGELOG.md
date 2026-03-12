@@ -1,3 +1,16 @@
+# v1.11.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.0 (2026-02-10)
+
+* **Feature**: Add the missing event type for WhatsApp
+
 # v1.10.3 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,5 +1,4 @@
 //go:build integration
-// +build integration
 
 package transfermanager
 
@@ -122,7 +121,7 @@ func TestMain(m *testing.M) {
 	s3Client = s3.NewFromConfig(s3cfg)
 
 	// build s3 transfermanager client from config
-	s3TransferManagerClient = NewFromConfig(s3Client, s3cfg)
+	s3TransferManagerClient = New(s3Client)
 
 	// build sts client from config
 	stsClient = sts.NewFromConfig(cfg)

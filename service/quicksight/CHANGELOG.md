@@ -1,3 +1,25 @@
+# v1.104.1 (2026-03-11)
+
+* No change notes available for this release.
+
+# v1.104.0 (2026-03-04)
+
+* **Feature**: Added several new values for Capabilities, increased visual limit per sheet from previous limit to 75, renamed Quick Suite to Quick in several places.
+
+# v1.103.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.103.0 (2026-02-23)
+
+* **Feature**: Adds support for SEMISTRUCT to InputColumn Type
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.102.0 (2026-01-30)
+
+* **Feature**: Improve SessionTag usage guidelines in the GenerateEmbedURLForAnonymousUser API documentation. Update the GetIdentityContext document with the region support context.
+
 # v1.101.0 (2026-01-21)
 
 * **Feature**: Added documentation and model for sheet layout groups - allows sheet elements to be grouped, Added documentation and the feature enables admins to have granular control over connectors under actions, Updated API documentation for PDF Export in Snapshot Export APIs

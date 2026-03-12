@@ -47,7 +47,7 @@ type ListStandardsControlAssociationsInput struct {
 	// a NextToken parameter that you can use in a subsequent API call to get the next
 	// 25 associations. This repeats until all associations for the specified control
 	// are returned. The number of results is limited by the number of supported
-	// Security Hub standards that you've enabled in the calling account.
+	// Security Hub CSPM standards that you've enabled in the calling account.
 	MaxResults *int32
 
 	//  Optional pagination parameter.
@@ -183,7 +183,7 @@ type ListStandardsControlAssociationsPaginatorOptions struct {
 	// a NextToken parameter that you can use in a subsequent API call to get the next
 	// 25 associations. This repeats until all associations for the specified control
 	// are returned. The number of results is limited by the number of supported
-	// Security Hub standards that you've enabled in the calling account.
+	// Security Hub CSPM standards that you've enabled in the calling account.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

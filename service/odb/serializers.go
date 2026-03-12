@@ -2823,6 +2823,17 @@ func awsAwsjson10_serializeDocumentPeeredCidrList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentPeerNetworkRouteTableIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentRequestTagMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3343,6 +3354,13 @@ func awsAwsjson10_serializeOpDocumentCreateOdbPeeringConnectionInput(v *CreateOd
 	if v.PeerNetworkId != nil {
 		ok := object.Key("peerNetworkId")
 		ok.String(*v.PeerNetworkId)
+	}
+
+	if v.PeerNetworkRouteTableIds != nil {
+		ok := object.Key("peerNetworkRouteTableIds")
+		if err := awsAwsjson10_serializeDocumentPeerNetworkRouteTableIdList(v.PeerNetworkRouteTableIds, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {

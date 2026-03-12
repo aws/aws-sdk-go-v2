@@ -12,7 +12,12 @@ import (
 )
 
 // The DescribeConnectionType API provides full details of the supported options
-// for a given connection type in Glue.
+// for a given connection type in Glue. The response includes authentication
+// configuration details that show supported authentication types and properties,
+// and RestConfiguration for custom REST-based connection types registered via
+// RegisterConnectionType .
+//
+// See also: ListConnectionTypes , RegisterConnectionType , DeleteConnectionType
 func (c *Client) DescribeConnectionType(ctx context.Context, params *DescribeConnectionTypeInput, optFns ...func(*Options)) (*DescribeConnectionTypeOutput, error) {
 	if params == nil {
 		params = &DescribeConnectionTypeInput{}
@@ -74,6 +79,10 @@ type DescribeConnectionTypeOutput struct {
 
 	// Connection properties specific to the Python compute environment.
 	PythonConnectionProperties map[string]types.Property
+
+	// HTTP request and response configuration, validation endpoint, and entity
+	// configurations for REST based data source.
+	RestConfiguration *types.RestConfiguration
 
 	// Connection properties specific to the Spark compute environment.
 	SparkConnectionProperties map[string]types.Property

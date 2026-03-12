@@ -143,6 +143,7 @@ const (
 	ConfigCapabilityTypeAntennaUplink              ConfigCapabilityType = "antenna-uplink"
 	ConfigCapabilityTypeUplinkEcho                 ConfigCapabilityType = "uplink-echo"
 	ConfigCapabilityTypeS3Recording                ConfigCapabilityType = "s3-recording"
+	ConfigCapabilityTypeTelemetrySink              ConfigCapabilityType = "telemetry-sink"
 )
 
 // Values returns all known values for ConfigCapabilityType. Note that this can be
@@ -158,6 +159,7 @@ func (ConfigCapabilityType) Values() []ConfigCapabilityType {
 		"antenna-uplink",
 		"uplink-echo",
 		"s3-recording",
+		"telemetry-sink",
 	}
 }
 
@@ -494,5 +496,22 @@ func (Polarization) Values() []Polarization {
 		"RIGHT_HAND",
 		"LEFT_HAND",
 		"NONE",
+	}
+}
+
+type TelemetrySinkType string
+
+// Enum values for TelemetrySinkType
+const (
+	TelemetrySinkTypeKinesisDataStream TelemetrySinkType = "KINESIS_DATA_STREAM"
+)
+
+// Values returns all known values for TelemetrySinkType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TelemetrySinkType) Values() []TelemetrySinkType {
+	return []TelemetrySinkType{
+		"KINESIS_DATA_STREAM",
 	}
 }

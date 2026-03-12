@@ -876,6 +876,31 @@ func (ReadinessStatus) Values() []ReadinessStatus {
 	}
 }
 
+type RecommenderFilterStatus string
+
+// Enum values for RecommenderFilterStatus
+const (
+	RecommenderFilterStatusActive     RecommenderFilterStatus = "ACTIVE"
+	RecommenderFilterStatusPending    RecommenderFilterStatus = "PENDING"
+	RecommenderFilterStatusInProgress RecommenderFilterStatus = "IN_PROGRESS"
+	RecommenderFilterStatusFailed     RecommenderFilterStatus = "FAILED"
+	RecommenderFilterStatusDeleting   RecommenderFilterStatus = "DELETING"
+)
+
+// Values returns all known values for RecommenderFilterStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommenderFilterStatus) Values() []RecommenderFilterStatus {
+	return []RecommenderFilterStatus{
+		"ACTIVE",
+		"PENDING",
+		"IN_PROGRESS",
+		"FAILED",
+		"DELETING",
+	}
+}
+
 type RecommenderRecipeName string
 
 // Enum values for RecommenderRecipeName
@@ -885,6 +910,7 @@ const (
 	RecommenderRecipeNameFrequentlyPairedItems RecommenderRecipeName = "frequently-paired-items"
 	RecommenderRecipeNamePopularItems          RecommenderRecipeName = "popular-items"
 	RecommenderRecipeNameTrendingNow           RecommenderRecipeName = "trending-now"
+	RecommenderRecipeNamePersonalizedRanking   RecommenderRecipeName = "personalized-ranking"
 )
 
 // Values returns all known values for RecommenderRecipeName. Note that this can
@@ -898,6 +924,7 @@ func (RecommenderRecipeName) Values() []RecommenderRecipeName {
 		"frequently-paired-items",
 		"popular-items",
 		"trending-now",
+		"personalized-ranking",
 	}
 }
 
@@ -1213,6 +1240,8 @@ const (
 	StandardIdentifierProfile             StandardIdentifier = "PROFILE"
 	StandardIdentifierAsset               StandardIdentifier = "ASSET"
 	StandardIdentifierCase                StandardIdentifier = "CASE"
+	StandardIdentifierDevice              StandardIdentifier = "DEVICE"
+	StandardIdentifierWebAnalytics        StandardIdentifier = "WEB_ANALYTICS"
 	StandardIdentifierOrder               StandardIdentifier = "ORDER"
 	StandardIdentifierCommunicationRecord StandardIdentifier = "COMMUNICATION_RECORD"
 	StandardIdentifierAirPreference       StandardIdentifier = "AIR_PREFERENCE"
@@ -1239,6 +1268,8 @@ func (StandardIdentifier) Values() []StandardIdentifier {
 		"PROFILE",
 		"ASSET",
 		"CASE",
+		"DEVICE",
+		"WEB_ANALYTICS",
 		"ORDER",
 		"COMMUNICATION_RECORD",
 		"AIR_PREFERENCE",

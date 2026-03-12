@@ -13,8 +13,8 @@ import (
 )
 
 // Retrieves detailed information about a specific code interpreter session in
-// Amazon Bedrock. This operation returns the session's configuration, current
-// status, and metadata.
+// Amazon Bedrock AgentCore. This operation returns the session's configuration,
+// current status, and metadata.
 //
 // To get a code interpreter session, you must specify both the code interpreter
 // identifier and the session ID. The response includes information about the

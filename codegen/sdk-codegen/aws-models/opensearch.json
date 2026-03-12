@@ -497,6 +497,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "DataSourceAccessPolicy": {
+                    "target": "com.amazonaws.opensearch#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An optional IAM access policy document that defines the permissions for accessing the data source.\n            The policy document must be in valid JSON format and follow IAM policy syntax.</p>"
+                    }
+                },
                 "TagList": {
                     "target": "com.amazonaws.opensearch#TagList"
                 }
@@ -3938,6 +3944,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Options for all machine learning features for the specified domain.</p>"
                     }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment strategy options for the domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4392,6 +4404,12 @@
                     "target": "com.amazonaws.opensearch#DataSourceDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>Detailed description of a data source.</p>"
+                    }
+                },
+                "iamRoleForDataSourceArn": {
+                    "target": "com.amazonaws.opensearch#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to be used for cross account/region data source association.</p>"
                     }
                 }
             },
@@ -5124,6 +5142,63 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#DeploymentStrategy": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Default"
+                    }
+                },
+                "CAPACITY_OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CapacityOptimized"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the deployment strategy for the domain. Valid values are <code>Default</code> and <code>CapacityOptimized</code>.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#DeploymentStrategyOptions": {
+            "type": "structure",
+            "members": {
+                "DeploymentStrategy": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment strategy for the domain. Valid values are <code>Default</code> and <code>CapacityOptimized</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the deployment strategy options for the domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#DeploymentStrategyOptionsStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Deployment strategy options for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#OptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the deployment strategy options for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of deployment strategy options for the domain.</p>"
+            }
+        },
         "com.amazonaws.opensearch#DeploymentType": {
             "type": "string",
             "traits": {
@@ -5215,13 +5290,15 @@
                     "target": "com.amazonaws.opensearch#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can\n            use <code>nextToken</code> to get the next page of results.</p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can\n            use <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>DescribeDomainAutoTunes</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>DescribeDomainAutoTunes</code> operations, which returns results in the\n            next page.</p>"
+                        "smithy.api#documentation": "<p>If your initial <code>DescribeDomainAutoTunes</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>DescribeDomainAutoTunes</code> operations, which returns results in the\n            next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
                     }
                 }
             },
@@ -6851,6 +6928,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Container for parameters required to enable all machine learning features.</p>"
                     }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategyOptionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies <code>DeploymentStrategyOptions</code> for the domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7550,6 +7633,12 @@
                     "target": "com.amazonaws.opensearch#AIMLOptionsOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>Container for parameters required to enable all machine learning features.</p>"
+                    }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the domain's deployment strategy options.</p>"
                     }
                 }
             },
@@ -8317,6 +8406,12 @@
                     "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
                     "traits": {
                         "smithy.api#documentation": "<p> A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are associated\n   with the direct query data source. </p>"
+                    }
+                },
+                "DataSourceAccessPolicy": {
+                    "target": "com.amazonaws.opensearch#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The IAM access policy document that defines the permissions for accessing the direct query data source. Returns the current policy configuration in JSON format, or null if no custom policy is configured. </p>"
                     }
                 },
                 "DataSourceArn": {
@@ -14775,6 +14870,9 @@
                     "target": "com.amazonaws.opensearch#InternalException"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.opensearch#ResourceNotFoundException"
                 },
                 {
@@ -14819,6 +14917,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are\n            associated with the direct query data source. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DataSourceAccessPolicy": {
+                    "target": "com.amazonaws.opensearch#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An optional IAM access policy document that defines the updated permissions for accessing the direct query data source.\n            The policy document must be in valid JSON format and follow IAM policy syntax. If not specified, the existing access policy if present remains unchanged. </p>"
                     }
                 }
             },
@@ -15003,6 +15107,12 @@
                     "target": "com.amazonaws.opensearch#AIMLOptionsInput",
                     "traits": {
                         "smithy.api#documentation": "<p>Options for all machine learning features for the specified domain.</p>"
+                    }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment strategy options for the domain.</p>"
                     }
                 }
             },

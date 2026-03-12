@@ -130,6 +130,26 @@ func (m *validateOpInvokeModel) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeModelWithBidirectionalStream struct {
+}
+
+func (*validateOpInvokeModelWithBidirectionalStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeModelWithBidirectionalStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeModelWithBidirectionalStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeModelWithBidirectionalStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInvokeModelWithResponseStream struct {
 }
 
@@ -192,6 +212,10 @@ func addOpGetAsyncInvokeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpInvokeModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeModel{}, middleware.After)
+}
+
+func addOpInvokeModelWithBidirectionalStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeModelWithBidirectionalStream{}, middleware.After)
 }
 
 func addOpInvokeModelWithResponseStreamValidationMiddleware(stack *middleware.Stack) error {
@@ -672,6 +696,21 @@ func validateInvokeModelTokensRequest(v *types.InvokeModelTokensRequest) error {
 	}
 }
 
+func validateJsonSchemaDefinition(v *types.JsonSchemaDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JsonSchemaDefinition"}
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMessage(v *types.Message) error {
 	if v == nil {
 		return nil
@@ -703,6 +742,64 @@ func validateMessages(v []types.Message) error {
 		if err := validateMessage(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputConfig(v *types.OutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputConfig"}
+	if v.TextFormat != nil {
+		if err := validateOutputFormat(v.TextFormat); err != nil {
+			invalidParams.AddNested("TextFormat", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputFormat(v *types.OutputFormat) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputFormat"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Structure == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Structure"))
+	} else if v.Structure != nil {
+		if err := validateOutputFormatStructure(v.Structure); err != nil {
+			invalidParams.AddNested("Structure", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputFormatStructure(v types.OutputFormatStructure) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputFormatStructure"}
+	switch uv := v.(type) {
+	case *types.OutputFormatStructureMemberJsonSchema:
+		if err := validateJsonSchemaDefinition(&uv.Value); err != nil {
+			invalidParams.AddNested("[jsonSchema]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1241,6 +1338,11 @@ func validateOpConverseInput(v *ConverseInput) error {
 			invalidParams.AddNested("ServiceTier", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1274,6 +1376,11 @@ func validateOpConverseStreamInput(v *ConverseStreamInput) error {
 	if v.ServiceTier != nil {
 		if err := validateServiceTier(v.ServiceTier); err != nil {
 			invalidParams.AddNested("ServiceTier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1325,6 +1432,21 @@ func validateOpInvokeModelInput(v *InvokeModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeModelInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeModelWithBidirectionalStreamInput(v *InvokeModelWithBidirectionalStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeModelWithBidirectionalStreamInput"}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}

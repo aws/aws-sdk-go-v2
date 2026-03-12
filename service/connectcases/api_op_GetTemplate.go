@@ -102,6 +102,11 @@ type GetTemplateOutput struct {
 	// [case field conditions]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
 	Rules []types.TemplateRule
 
+	// Defines tag propagation configuration for resources created within a domain.
+	// Tags specified here will be automatically applied to resources being created for
+	// the specified resource type.
+	TagPropagationConfigurations []types.TagPropagationConfiguration
+
 	// A map of of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string

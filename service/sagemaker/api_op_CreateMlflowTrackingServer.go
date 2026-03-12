@@ -66,6 +66,14 @@ type CreateMlflowTrackingServerInput struct {
 	// [How it works]: https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow.html#mlflow-create-tracking-server-how-it-works
 	MlflowVersion *string
 
+	// Expected Amazon Web Services account ID that owns the Amazon S3 bucket for
+	// artifact storage. Defaults to caller's account ID if not provided.
+	S3BucketOwnerAccountId *string
+
+	// Enable Amazon S3 Ownership checks when interacting with Amazon S3 buckets from
+	// a SageMaker Managed MLflow Tracking Server. Defaults to True if not provided.
+	S3BucketOwnerVerification *bool
+
 	// Tags consisting of key-value pairs used to manage metadata for the tracking
 	// server.
 	Tags []types.Tag

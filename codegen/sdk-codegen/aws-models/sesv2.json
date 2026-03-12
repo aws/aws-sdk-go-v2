@@ -5985,6 +5985,42 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Provides validation insights about a specific email address, including syntax validation, DNS record checks, mailbox existence, and other deliverability factors.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get Email Address Insights",
+                        "documentation": "Performs email validation against an email address.",
+                        "input": {
+                            "EmailAddress": "hello@example.com"
+                        },
+                        "output": {
+                            "MailboxValidation": {
+                                "IsValid": {
+                                    "ConfidenceVerdict": "HIGH"
+                                },
+                                "Evaluations": {
+                                    "HasValidSyntax": {
+                                        "ConfidenceVerdict": "HIGH"
+                                    },
+                                    "HasValidDnsRecords": {
+                                        "ConfidenceVerdict": "MEDIUM"
+                                    },
+                                    "MailboxExists": {
+                                        "ConfidenceVerdict": "MEDIUM"
+                                    },
+                                    "IsRoleAddress": {
+                                        "ConfidenceVerdict": "LOW"
+                                    },
+                                    "IsDisposable": {
+                                        "ConfidenceVerdict": "LOW"
+                                    },
+                                    "IsRandomInput": {
+                                        "ConfidenceVerdict": "LOW"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/email-address-insights",
@@ -9213,7 +9249,7 @@
                 "Value": {
                     "target": "com.amazonaws.sesv2#MessageHeaderValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the message header. The message header value has to meet the following\n            criteria:</p>\n         <ul>\n            <li>\n               <p>Can contain any printable ASCII character.</p>\n            </li>\n            <li>\n               <p>Can contain no more than 870 characters.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The value of the message header. The message header value has to meet the following\n            criteria:</p>\n         <ul>\n            <li>\n               <p>Can contain any printable ASCII character.</p>\n            </li>\n            <li>\n               <p>Can contain no more than 995 characters.</p>\n            </li>\n            <li>\n               <p>The combined length of the header name and value must not exceed 996 characters.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9252,7 +9288,7 @@
                 "smithy.api#documentation": "<p>The value of the message header. The message header value has to meet the following\n            criteria:</p>\n         <ul>\n            <li>\n               <p>Can contain any printable ASCII character.</p>\n            </li>\n         </ul>",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 870
+                    "max": 995
                 },
                 "smithy.api#pattern": "^[ -~]*$"
             }

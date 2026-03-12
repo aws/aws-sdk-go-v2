@@ -1126,6 +1126,11 @@ func validateConfigTypeData(v types.ConfigTypeData) error {
 			invalidParams.AddNested("[s3RecordingConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ConfigTypeDataMemberTelemetrySinkConfig:
+		if err := validateTelemetrySinkConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[telemetrySinkConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ConfigTypeDataMemberTrackingConfig:
 		if err := validateTrackingConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[trackingConfig]", err.(smithy.InvalidParamsError))
@@ -1563,6 +1568,24 @@ func validateISO8601TimeRange(v *types.ISO8601TimeRange) error {
 	}
 }
 
+func validateKinesisDataStreamData(v *types.KinesisDataStreamData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KinesisDataStreamData"}
+	if v.KinesisRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KinesisRoleArn"))
+	}
+	if v.KinesisDataStreamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KinesisDataStreamArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProgramTrackSettings(v types.ProgramTrackSettings) error {
 	if v == nil {
 		return nil
@@ -1698,6 +1721,47 @@ func validateSpectrumConfig(v *types.SpectrumConfig) error {
 		if err := validateFrequencyBandwidth(v.Bandwidth); err != nil {
 			invalidParams.AddNested("Bandwidth", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTelemetrySinkConfig(v *types.TelemetrySinkConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TelemetrySinkConfig"}
+	if len(v.TelemetrySinkType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TelemetrySinkType"))
+	}
+	if v.TelemetrySinkData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TelemetrySinkData"))
+	} else if v.TelemetrySinkData != nil {
+		if err := validateTelemetrySinkData(v.TelemetrySinkData); err != nil {
+			invalidParams.AddNested("TelemetrySinkData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTelemetrySinkData(v types.TelemetrySinkData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TelemetrySinkData"}
+	switch uv := v.(type) {
+	case *types.TelemetrySinkDataMemberKinesisDataStreamData:
+		if err := validateKinesisDataStreamData(&uv.Value); err != nil {
+			invalidParams.AddNested("[kinesisDataStreamData]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

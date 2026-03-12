@@ -16,19 +16,21 @@
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
 import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4aUtils;
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.aws.traits.auth.SigV4ATrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.integration.auth.SigV4ADefinition;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
@@ -91,32 +93,32 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
 
     public static class AwsSigV4A extends SigV4ADefinition {
         @Override
-        public GoWriter.Writable generateDefaultAuthScheme() {
+        public Writable generateDefaultAuthScheme() {
             return goTemplate("""
                     $T($S, &$T{
                         Signer: options.httpSignerV4a,
                         Logger: options.Logger,
                         LogSigning: options.ClientLogMode.IsSigning(),
                     })""",
-                    SdkGoTypes.Internal.Auth.NewHTTPAuthScheme,
+                    AwsGoDependency.INTERNAL_AUTH.func("NewHTTPAuthScheme"),
                     SigV4ATrait.ID.toString(),
-                    SdkGoTypes.Internal.V4A.SignerAdapter);
+                    AwsGoDependency.INTERNAL_SIGV4A.struct("SignerAdapter"));
         }
 
         @Override
-        public GoWriter.Writable generateOptionsIdentityResolver() {
+        public Writable generateOptionsIdentityResolver() {
             return goTemplate("getSigV4AIdentityResolver(o)");
         }
     }
 
-    private GoWriter.Writable generateAdditionalSource() {
-        return GoWriter.ChainWritable.of(
+    private Writable generateAdditionalSource() {
+        return ChainWritable.of(
                 generateGetIdentityResolver(),
                 generateHelpers()
         ).compose();
     }
 
-    private GoWriter.Writable generateGetIdentityResolver() {
+    private Writable generateGetIdentityResolver() {
         return goTemplate("""
                 func getSigV4AIdentityResolver(o Options) $T {
                     if o.Credentials != nil {
@@ -129,12 +131,12 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
                     return nil
                 }
                 """,
-                SmithyGoTypes.Auth.IdentityResolver,
-                SdkGoTypes.Internal.V4A.CredentialsProviderAdapter,
-                SdkGoTypes.Internal.V4A.SymmetricCredentialAdaptor);
+                SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("IdentityResolver"),
+                AwsGoDependency.INTERNAL_SIGV4A.struct("CredentialsProviderAdapter"),
+                AwsGoDependency.INTERNAL_SIGV4A.struct("SymmetricCredentialAdaptor"));
     }
 
-    private GoWriter.Writable generateHelpers() {
+    private Writable generateHelpers() {
         return goTemplate("""
                 // WithSigV4ASigningRegions applies an override to the authentication workflow to
                 // use the given signing region set for SigV4A-authenticated operations.
@@ -156,8 +158,8 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
                 }
                 """,
                 MapUtils.of(
-                        "stack", SmithyGoTypes.Middleware.Stack,
-                        "before", SmithyGoTypes.Middleware.Before,
+                        "stack", SmithyGoDependency.SMITHY_MIDDLEWARE.struct("Stack"),
+                        "before", SmithyGoDependency.SMITHY_MIDDLEWARE.func("Before"),
                         "mw", generateFinalizeMiddlewareFunc(goTemplate("""
                                 rscheme := getResolvedAuthScheme(ctx)
                                 if rscheme == nil {
@@ -168,7 +170,7 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
                                 return next.HandleFinalize(ctx, in)
                                 """,
                                 GoStdlibTypes.Fmt.Errorf,
-                                SmithyGoTypes.Transport.Http.SetSigV4ASigningRegions))
+                                SmithyGoDependency.SMITHY_HTTP_TRANSPORT.func("SetSigV4ASigningRegions")))
                 ));
     }
 }

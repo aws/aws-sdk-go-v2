@@ -181,8 +181,9 @@ type ExecutionAction string
 
 // Enum values for ExecutionAction
 const (
-	ExecutionActionActivate   ExecutionAction = "activate"
-	ExecutionActionDeactivate ExecutionAction = "deactivate"
+	ExecutionActionActivate     ExecutionAction = "activate"
+	ExecutionActionDeactivate   ExecutionAction = "deactivate"
+	ExecutionActionPostRecovery ExecutionAction = "postRecovery"
 )
 
 // Values returns all known values for ExecutionAction. Note that this can be
@@ -193,6 +194,7 @@ func (ExecutionAction) Values() []ExecutionAction {
 	return []ExecutionAction{
 		"activate",
 		"deactivate",
+		"postRecovery",
 	}
 }
 
@@ -200,17 +202,19 @@ type ExecutionBlockType string
 
 // Enum values for ExecutionBlockType
 const (
-	ExecutionBlockTypeCustomActionLambda ExecutionBlockType = "CustomActionLambda"
-	ExecutionBlockTypeExecutionApproval  ExecutionBlockType = "ManualApproval"
-	ExecutionBlockTypeAurora             ExecutionBlockType = "AuroraGlobalDatabase"
-	ExecutionBlockTypeEc2Asg             ExecutionBlockType = "EC2AutoScaling"
-	ExecutionBlockTypeRoutingControl     ExecutionBlockType = "ARCRoutingControl"
-	ExecutionBlockTypeRegionSwitch       ExecutionBlockType = "ARCRegionSwitchPlan"
-	ExecutionBlockTypeParallel           ExecutionBlockType = "Parallel"
-	ExecutionBlockTypeEcs                ExecutionBlockType = "ECSServiceScaling"
-	ExecutionBlockTypeEksResourceScaling ExecutionBlockType = "EKSResourceScaling"
-	ExecutionBlockTypeRoute53HealthCheck ExecutionBlockType = "Route53HealthCheck"
-	ExecutionBlockTypeDocumentdb         ExecutionBlockType = "DocumentDb"
+	ExecutionBlockTypeCustomActionLambda          ExecutionBlockType = "CustomActionLambda"
+	ExecutionBlockTypeExecutionApproval           ExecutionBlockType = "ManualApproval"
+	ExecutionBlockTypeAurora                      ExecutionBlockType = "AuroraGlobalDatabase"
+	ExecutionBlockTypeEc2Asg                      ExecutionBlockType = "EC2AutoScaling"
+	ExecutionBlockTypeRoutingControl              ExecutionBlockType = "ARCRoutingControl"
+	ExecutionBlockTypeRegionSwitch                ExecutionBlockType = "ARCRegionSwitchPlan"
+	ExecutionBlockTypeParallel                    ExecutionBlockType = "Parallel"
+	ExecutionBlockTypeEcs                         ExecutionBlockType = "ECSServiceScaling"
+	ExecutionBlockTypeEksResourceScaling          ExecutionBlockType = "EKSResourceScaling"
+	ExecutionBlockTypeRoute53HealthCheck          ExecutionBlockType = "Route53HealthCheck"
+	ExecutionBlockTypeDocumentdb                  ExecutionBlockType = "DocumentDb"
+	ExecutionBlockTypeRdsPromoteReadReplica       ExecutionBlockType = "RdsPromoteReadReplica"
+	ExecutionBlockTypeRdsCreateCrossRegionReplica ExecutionBlockType = "RdsCreateCrossRegionReplica"
 )
 
 // Values returns all known values for ExecutionBlockType. Note that this can be
@@ -230,6 +234,8 @@ func (ExecutionBlockType) Values() []ExecutionBlockType {
 		"EKSResourceScaling",
 		"Route53HealthCheck",
 		"DocumentDb",
+		"RdsPromoteReadReplica",
+		"RdsCreateCrossRegionReplica",
 	}
 }
 
@@ -456,6 +462,8 @@ type RegionToRunIn string
 const (
 	RegionToRunInActivatingRegion   RegionToRunIn = "activatingRegion"
 	RegionToRunInDeactivatingRegion RegionToRunIn = "deactivatingRegion"
+	RegionToRunInActiveRegion       RegionToRunIn = "activeRegion"
+	RegionToRunInInactiveRegion     RegionToRunIn = "inactiveRegion"
 )
 
 // Values returns all known values for RegionToRunIn. Note that this can be
@@ -466,6 +474,8 @@ func (RegionToRunIn) Values() []RegionToRunIn {
 	return []RegionToRunIn{
 		"activatingRegion",
 		"deactivatingRegion",
+		"activeRegion",
+		"inactiveRegion",
 	}
 }
 
@@ -604,8 +614,9 @@ type WorkflowTargetAction string
 
 // Enum values for WorkflowTargetAction
 const (
-	WorkflowTargetActionActivate   WorkflowTargetAction = "activate"
-	WorkflowTargetActionDeactivate WorkflowTargetAction = "deactivate"
+	WorkflowTargetActionActivate     WorkflowTargetAction = "activate"
+	WorkflowTargetActionDeactivate   WorkflowTargetAction = "deactivate"
+	WorkflowTargetActionPostRecovery WorkflowTargetAction = "postRecovery"
 )
 
 // Values returns all known values for WorkflowTargetAction. Note that this can be
@@ -616,5 +627,6 @@ func (WorkflowTargetAction) Values() []WorkflowTargetAction {
 	return []WorkflowTargetAction{
 		"activate",
 		"deactivate",
+		"postRecovery",
 	}
 }

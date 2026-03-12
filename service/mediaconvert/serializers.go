@@ -5670,6 +5670,11 @@ func awsRestjson1_serializeDocumentDolbyVision(v *types.DolbyVision, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.Compatibility) > 0 {
+		ok := object.Key("compatibility")
+		ok.String(string(v.Compatibility))
+	}
+
 	if v.L6Metadata != nil {
 		ok := object.Key("l6Metadata")
 		if err := awsRestjson1_serializeDocumentDolbyVisionLevel6Metadata(v.L6Metadata, ok); err != nil {
@@ -9572,6 +9577,11 @@ func awsRestjson1_serializeDocumentMxfSettings(v *types.MxfSettings, value smith
 	if len(v.Profile) > 0 {
 		ok := object.Key("profile")
 		ok.String(string(v.Profile))
+	}
+
+	if len(v.UncompressedAudioWrapping) > 0 {
+		ok := object.Key("uncompressedAudioWrapping")
+		ok.String(string(v.UncompressedAudioWrapping))
 	}
 
 	if v.XavcProfileSettings != nil {

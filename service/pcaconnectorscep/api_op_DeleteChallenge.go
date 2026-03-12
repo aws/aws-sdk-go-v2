@@ -12,7 +12,7 @@ import (
 
 // Deletes the specified [Challenge].
 //
-// [Challenge]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Challenge.html
+// [Challenge]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Challenge.html
 func (c *Client) DeleteChallenge(ctx context.Context, params *DeleteChallengeInput, optFns ...func(*Options)) (*DeleteChallengeOutput, error) {
 	if params == nil {
 		params = &DeleteChallengeInput{}

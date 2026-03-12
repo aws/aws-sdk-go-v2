@@ -12,8 +12,8 @@ import (
 
 // Lists the tags associated with the specified resource.
 //
-// This feature is currently available only for AgentCore Runtime, Browser, Code
-// Interpreter tool, and Gateway.
+// This feature is currently available only for AgentCore Runtime, Browser,
+// Browser Profile, Code Interpreter tool, and Gateway.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

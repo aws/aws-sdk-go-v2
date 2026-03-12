@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a specific Recommendation
+// Get a specific Recommendation. This API provides global recommendations,
+// eliminating the need to call the API in each AWS Region.
 func (c *Client) GetRecommendation(ctx context.Context, params *GetRecommendationInput, optFns ...func(*Options)) (*GetRecommendationOutput, error) {
 	if params == nil {
 		params = &GetRecommendationInput{}
@@ -33,6 +34,10 @@ type GetRecommendationInput struct {
 	//
 	// This member is required.
 	RecommendationIdentifier *string
+
+	// The ISO 639-1 code for the language that you want your recommendations to
+	// appear in.
+	Language types.RecommendationLanguage
 
 	noSmithyDocumentSerde
 }

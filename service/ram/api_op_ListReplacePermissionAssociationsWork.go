@@ -13,6 +13,11 @@ import (
 
 // Retrieves the current status of the asynchronous tasks performed by RAM when
 // you perform the ReplacePermissionAssociationsWorkoperation.
+//
+// Always check the NextToken response parameter for a null value when calling a
+// paginated operation. These operations can occasionally return an empty set of
+// results even when there are more results available. The NextToken response
+// parameter value is null only when there are no more results to display.
 func (c *Client) ListReplacePermissionAssociationsWork(ctx context.Context, params *ListReplacePermissionAssociationsWorkInput, optFns ...func(*Options)) (*ListReplacePermissionAssociationsWorkOutput, error) {
 	if params == nil {
 		params = &ListReplacePermissionAssociationsWorkInput{}

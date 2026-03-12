@@ -38,6 +38,15 @@ type GetStyleDescriptorInput struct {
 	// This member is required.
 	Style types.MapStyle
 
+	// Adjusts how building details are rendered on the map.
+	//
+	// The following building styles are currently supported:
+	//
+	//   - Buildings3D : Displays buildings as three-dimensional extrusions on the map.
+	//
+	// Buildings3D is valid only for the Standard and Monochrome map styles.
+	Buildings types.Buildings
+
 	// Sets color tone for map such as dark and light for specific map styles. It
 	// applies to only vector map styles such as Standard and Monochrome.
 	//
@@ -52,7 +61,8 @@ type GetStyleDescriptorInput struct {
 	// density value controls how densely the available contour line information is
 	// rendered on the map.
 	//
-	// This parameter is valid only for the Standard map style.
+	// This parameter is valid only for the Standard , Monochrome , and Hybrid map
+	// styles.
 	ContourDensity types.ContourDensity
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
@@ -100,7 +110,10 @@ type GetStyleDescriptorInput struct {
 	//   - Hillshade : Displays the physical terrain details through shading and
 	//   highlighting of elevation change and geographic features.
 	//
-	// This parameter is valid only for the Standard map style.
+	//   - Terrain3D : Displays physical terrain details and elevations as a
+	//   three-dimensional model.
+	//
+	// Hillshade is valid only for the Standard and Monochrome map styles.
 	Terrain types.Terrain
 
 	// Displays real-time traffic information overlay on map, such as incident events

@@ -11,8 +11,8 @@ import (
 // information about an execution without all the detailed step data.
 type AbbreviatedExecution struct {
 
-	// The plan execution action. Valid values are Activate , to activate an Amazon Web
-	// Services Region, or Deactivate , to deactivate a Region.
+	// The plan execution action. Valid values are activate , to activate an Amazon Web
+	// Services Region, or deactivate , to deactivate a Region.
 	//
 	// This member is required.
 	ExecutionAction ExecutionAction
@@ -33,9 +33,8 @@ type AbbreviatedExecution struct {
 	// This member is required.
 	ExecutionState ExecutionState
 
-	// The plan execution mode. Valid values are Practice , for testing without making
-	// actual changes, or Recovery , for actual traffic shifting and application
-	// recovery.
+	// The plan execution mode. Valid values are graceful , for graceful executions, or
+	// ungraceful , for ungraceful executions.
 	//
 	// This member is required.
 	Mode ExecutionMode
@@ -61,6 +60,10 @@ type AbbreviatedExecution struct {
 
 	// The timestamp when the plan execution was ended.
 	EndTime *time.Time
+
+	// The unique identifier of the most recent recovery execution. Required when
+	// starting a post-recovery execution.
+	RecoveryExecutionId *string
 
 	// The timestamp when the plan execution was last updated.
 	UpdatedAt *time.Time
@@ -211,7 +214,10 @@ type CustomActionLambdaConfiguration struct {
 	// This member is required.
 	Lambdas []Lambdas
 
-	// The Amazon Web Services Region for the function to run in.
+	// The Amazon Web Services Region for the function to run in. For recovery
+	// workflows use activatingRegion or deactivatingRegion . For post-recovery
+	// workflows, use activeRegion (the Region with customer traffic) or inactiveRegion
+	// (the Region with no customer traffic).
 	//
 	// This member is required.
 	RegionToRun RegionToRunIn
@@ -435,6 +441,8 @@ type ExecutionApprovalConfiguration struct {
 //	ExecutionBlockConfigurationMemberExecutionApprovalConfig
 //	ExecutionBlockConfigurationMemberGlobalAuroraConfig
 //	ExecutionBlockConfigurationMemberParallelConfig
+//	ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig
+//	ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig
 //	ExecutionBlockConfigurationMemberRegionSwitchPlanConfig
 //	ExecutionBlockConfigurationMemberRoute53HealthCheckConfig
 type ExecutionBlockConfiguration interface {
@@ -523,6 +531,26 @@ type ExecutionBlockConfigurationMemberParallelConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberParallelConfig) isExecutionBlockConfiguration() {}
+
+// An Amazon RDS create cross-Region replica execution block.
+type ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig struct {
+	Value RdsCreateCrossRegionReplicaConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig) isExecutionBlockConfiguration() {
+}
+
+// An Amazon RDS promote read replica execution block.
+type ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig struct {
+	Value RdsPromoteReadReplicaConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig) isExecutionBlockConfiguration() {
+}
 
 // A Region switch plan execution block.
 type ExecutionBlockConfigurationMemberRegionSwitchPlanConfig struct {
@@ -797,6 +825,48 @@ type Plan struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for creating an Amazon RDS cross-Region read replica during
+// post-recovery in a Region switch.
+type RdsCreateCrossRegionReplicaConfiguration struct {
+
+	// A map of database instance ARNs for each Region in the plan.
+	//
+	// This member is required.
+	DbInstanceArnMap map[string]string
+
+	// The cross-account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for promoting an Amazon RDS read replica to a standalone database
+// instance during a Region switch.
+type RdsPromoteReadReplicaConfiguration struct {
+
+	// A map of database instance ARNs for each Region in the plan.
+	//
+	// This member is required.
+	DbInstanceArnMap map[string]string
+
+	// The cross-account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for nested Region switch plans. This allows one Region switch
 // plan to trigger another plan as part of its execution.
 type RegionSwitchPlanConfiguration struct {
@@ -1067,8 +1137,8 @@ type StepState struct {
 // switch plan.
 type Trigger struct {
 
-	// The action to perform when the trigger fires. Valid values include ACTIVATE and
-	// DEACTIVATE.
+	// The action to perform when the trigger fires. Valid values include activate and
+	// deactivate .
 	//
 	// This member is required.
 	Action WorkflowTargetAction
@@ -1103,7 +1173,7 @@ type TriggerCondition struct {
 	// This member is required.
 	AssociatedAlarmName *string
 
-	// The condition that must be met. Valid values include ALARM and OK.
+	// The condition that must be met. Valid values include green and red .
 	//
 	// This member is required.
 	Condition AlarmCondition
@@ -1115,8 +1185,8 @@ type TriggerCondition struct {
 // steps to execute during a Region switch.
 type Workflow struct {
 
-	// The action that the workflow performs. Valid values include ACTIVATE and
-	// DEACTIVATE.
+	// The action that the workflow performs. Valid values include activate and
+	// deactivate .
 	//
 	// This member is required.
 	WorkflowTargetAction WorkflowTargetAction

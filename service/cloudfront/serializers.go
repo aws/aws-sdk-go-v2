@@ -15886,6 +15886,19 @@ func awsRestxml_serializeDocumentCustomOriginConfig(v *types.CustomOriginConfig,
 		el := value.MemberElement(root)
 		el.Integer(*v.OriginKeepaliveTimeout)
 	}
+	if v.OriginMtlsConfig != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginMtlsConfig",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentOriginMtlsConfig(v.OriginMtlsConfig, el); err != nil {
+			return err
+		}
+	}
 	if len(v.OriginProtocolPolicy) > 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -18134,6 +18147,22 @@ func awsRestxml_serializeDocumentOriginList(v []types.Origin, value smithyxml.Va
 		if err := awsRestxml_serializeDocumentOrigin(&v[i], am); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentOriginMtlsConfig(v *types.OriginMtlsConfig, value smithyxml.Value) error {
+	defer value.Close()
+	if v.ClientCertificateArn != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ClientCertificateArn",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ClientCertificateArn)
 	}
 	return nil
 }

@@ -3248,13 +3248,14 @@ type InputColumnDataType string
 
 // Enum values for InputColumnDataType
 const (
-	InputColumnDataTypeString   InputColumnDataType = "STRING"
-	InputColumnDataTypeInteger  InputColumnDataType = "INTEGER"
-	InputColumnDataTypeDecimal  InputColumnDataType = "DECIMAL"
-	InputColumnDataTypeDatetime InputColumnDataType = "DATETIME"
-	InputColumnDataTypeBit      InputColumnDataType = "BIT"
-	InputColumnDataTypeBoolean  InputColumnDataType = "BOOLEAN"
-	InputColumnDataTypeJson     InputColumnDataType = "JSON"
+	InputColumnDataTypeString     InputColumnDataType = "STRING"
+	InputColumnDataTypeInteger    InputColumnDataType = "INTEGER"
+	InputColumnDataTypeDecimal    InputColumnDataType = "DECIMAL"
+	InputColumnDataTypeDatetime   InputColumnDataType = "DATETIME"
+	InputColumnDataTypeBit        InputColumnDataType = "BIT"
+	InputColumnDataTypeBoolean    InputColumnDataType = "BOOLEAN"
+	InputColumnDataTypeJson       InputColumnDataType = "JSON"
+	InputColumnDataTypeSemistruct InputColumnDataType = "SEMISTRUCT"
 )
 
 // Values returns all known values for InputColumnDataType. Note that this can be
@@ -3270,6 +3271,7 @@ func (InputColumnDataType) Values() []InputColumnDataType {
 		"BIT",
 		"BOOLEAN",
 		"JSON",
+		"SEMISTRUCT",
 	}
 }
 

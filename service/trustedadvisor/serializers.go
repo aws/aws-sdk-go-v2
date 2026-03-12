@@ -229,6 +229,10 @@ func awsRestjson1_serializeOpHttpBindingsGetRecommendationInput(v *GetRecommenda
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.Language) > 0 {
+		encoder.SetQuery("language").String(string(v.Language))
+	}
+
 	if v.RecommendationIdentifier == nil || len(*v.RecommendationIdentifier) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member recommendationIdentifier must not be empty")}
 	}
@@ -670,6 +674,10 @@ func awsRestjson1_serializeOpHttpBindingsListRecommendationResourcesInput(v *Lis
 		encoder.SetQuery("exclusionStatus").String(string(v.ExclusionStatus))
 	}
 
+	if len(v.Language) > 0 {
+		encoder.SetQuery("language").String(string(v.Language))
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
@@ -771,6 +779,10 @@ func awsRestjson1_serializeOpHttpBindingsListRecommendationsInput(v *ListRecomme
 
 	if v.CheckIdentifier != nil {
 		encoder.SetQuery("checkIdentifier").String(*v.CheckIdentifier)
+	}
+
+	if len(v.Language) > 0 {
+		encoder.SetQuery("language").String(string(v.Language))
 	}
 
 	if v.MaxResults != nil {

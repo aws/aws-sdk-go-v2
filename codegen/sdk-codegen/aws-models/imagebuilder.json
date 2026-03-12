@@ -8580,7 +8580,7 @@
                     }
                 },
                 "semanticVersion": {
-                    "target": "com.amazonaws.imagebuilder#VersionNumber",
+                    "target": "com.amazonaws.imagebuilder#WildcardVersionNumber",
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the Image Builder recipe specified by the <code>name</code> field.</p>",
                         "smithy.api#required": {}
@@ -12663,7 +12663,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z0-9\\s_.:/=+\\-@]*$"
             }
         },
         "com.amazonaws.imagebuilder#TagKeyList": {

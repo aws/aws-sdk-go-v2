@@ -543,13 +543,16 @@ func validateProgramManagementAccountTypeSort(v *types.ProgramManagementAccountT
 	}
 }
 
-func validateResoldBusiness(v *types.ResoldBusiness) error {
+func validateResoldEnterprise(v *types.ResoldEnterprise) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ResoldBusiness"}
+	invalidParams := smithy.InvalidParamsError{Context: "ResoldEnterprise"}
 	if len(v.Coverage) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Coverage"))
+	}
+	if v.TamLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TamLocation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -558,11 +561,11 @@ func validateResoldBusiness(v *types.ResoldBusiness) error {
 	}
 }
 
-func validateResoldEnterprise(v *types.ResoldEnterprise) error {
+func validateResoldUnifiedOperations(v *types.ResoldUnifiedOperations) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ResoldEnterprise"}
+	invalidParams := smithy.InvalidParamsError{Context: "ResoldUnifiedOperations"}
 	if len(v.Coverage) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Coverage"))
 	}
@@ -656,14 +659,14 @@ func validateSupportPlan(v types.SupportPlan) error {
 			invalidParams.AddNested("[partnerLedSupport]", err.(smithy.InvalidParamsError))
 		}
 
-	case *types.SupportPlanMemberResoldBusiness:
-		if err := validateResoldBusiness(&uv.Value); err != nil {
-			invalidParams.AddNested("[resoldBusiness]", err.(smithy.InvalidParamsError))
-		}
-
 	case *types.SupportPlanMemberResoldEnterprise:
 		if err := validateResoldEnterprise(&uv.Value); err != nil {
 			invalidParams.AddNested("[resoldEnterprise]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.SupportPlanMemberResoldUnifiedOperations:
+		if err := validateResoldUnifiedOperations(&uv.Value); err != nil {
+			invalidParams.AddNested("[resoldUnifiedOperations]", err.(smithy.InvalidParamsError))
 		}
 
 	}

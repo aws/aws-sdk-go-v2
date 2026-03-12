@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List a filterable set of Checks
+// List a filterable set of Checks. This API provides global recommendations,
+// eliminating the need to call the API in each AWS Region.
 func (c *Client) ListChecks(ctx context.Context, params *ListChecksInput, optFns ...func(*Options)) (*ListChecksOutput, error) {
 	if params == nil {
 		params = &ListChecksInput{}

@@ -16330,6 +16330,15 @@ func awsRestjson1_deserializeDocumentAthenaTableReference(v **types.AthenaTableR
 
 	for key, value := range shape {
 		switch key {
+		case "catalogName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AthenaCatalogName to be of type string, got %T instead", value)
+				}
+				sv.CatalogName = ptr.String(jtv)
+			}
+
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)

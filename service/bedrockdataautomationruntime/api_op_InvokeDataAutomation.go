@@ -49,21 +49,25 @@ type InvokeDataAutomationInput struct {
 	// Encryption configuration.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
+	// Output configuration.
+	OutputConfiguration *types.OutputConfiguration
+
 	noSmithyDocumentSerde
 }
 
 // Invoke Data Automation Response
 type InvokeDataAutomationOutput struct {
 
-	// List of outputs for each logical sub-doc
-	//
-	// This member is required.
-	OutputSegments []types.OutputSegment
-
 	// Detected semantic modality
 	//
 	// This member is required.
 	SemanticModality types.SemanticModality
+
+	// Output configuration
+	OutputConfiguration *types.OutputConfiguration
+
+	// List of outputs for each logical sub-doc
+	OutputSegments []types.OutputSegment
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

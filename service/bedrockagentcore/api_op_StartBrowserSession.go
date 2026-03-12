@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Creates and initializes a browser session in Amazon Bedrock. The session
-// enables agents to navigate and interact with web content, extract information
-// from websites, and perform web-based tasks as part of their response generation.
+// Creates and initializes a browser session in Amazon Bedrock AgentCore. The
+// session enables agents to navigate and interact with web content, extract
+// information from websites, and perform web-based tasks as part of their response
+// generation.
 //
 // To create a session, you must specify a browser identifier and a name. You can
 // also configure the viewport dimensions to control the visible area of web
@@ -27,8 +28,11 @@ import (
 //
 // [UpdateBrowserStream]
 //
+// [SaveBrowserSessionProfile]
+//
 // [StopBrowserSession]
 //
+// [SaveBrowserSessionProfile]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_SaveBrowserSessionProfile.html
 // [UpdateBrowserStream]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_UpdateBrowserStream.html
 // [GetBrowserSession]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
 // [StopBrowserSession]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html
@@ -57,8 +61,9 @@ type StartBrowserSessionInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. This parameter helps prevent
-	// the creation of duplicate sessions if there are temporary network issues.
+	// AgentCore ignores the request, but does not return an error. This parameter
+	// helps prevent the creation of duplicate sessions if there are temporary network
+	// issues.
 	ClientToken *string
 
 	// A list of browser extensions to load into the browser session.
@@ -67,6 +72,20 @@ type StartBrowserSessionInput struct {
 	// The name of the browser session. This name helps you identify and manage the
 	// session. The name does not need to be unique.
 	Name *string
+
+	// The browser profile configuration to use for this session. A browser profile
+	// contains persistent data such as cookies and local storage that can be reused
+	// across multiple browser sessions. If specified, the session initializes with the
+	// profile's stored data, enabling continuity for tasks that require authentication
+	// or personalized settings.
+	ProfileConfiguration *types.BrowserProfileConfiguration
+
+	// Optional proxy configuration for routing browser traffic through
+	// customer-specified proxy servers. When provided, enables HTTP Basic
+	// authentication via Amazon Web Services Secrets Manager and domain-based routing
+	// rules. Requires secretsmanager:GetSecretValue IAM permission for the specified
+	// secret ARNs.
+	ProxyConfiguration *types.ProxyConfiguration
 
 	// The time in seconds after which the session automatically terminates if there
 	// is no activity. The default value is 3600 seconds (1 hour). The minimum allowed
@@ -81,7 +100,7 @@ type StartBrowserSessionInput struct {
 
 	// The dimensions of the browser viewport for this session. This determines the
 	// visible area of the web content and affects how web pages are rendered. If not
-	// specified, Amazon Bedrock uses a default viewport size.
+	// specified, Amazon Bedrock AgentCore uses a default viewport size.
 	ViewPort *types.ViewPort
 
 	noSmithyDocumentSerde

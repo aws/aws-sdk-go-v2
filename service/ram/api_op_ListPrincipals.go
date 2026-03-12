@@ -13,6 +13,11 @@ import (
 
 // Lists the principals that you are sharing resources with or that are sharing
 // resources with you.
+//
+// Always check the NextToken response parameter for a null value when calling a
+// paginated operation. These operations can occasionally return an empty set of
+// results even when there are more results available. The NextToken response
+// parameter value is null only when there are no more results to display.
 func (c *Client) ListPrincipals(ctx context.Context, params *ListPrincipalsInput, optFns ...func(*Options)) (*ListPrincipalsOutput, error) {
 	if params == nil {
 		params = &ListPrincipalsInput{}
@@ -72,6 +77,8 @@ type ListPrincipalsInput struct {
 	//   - An ARN of an IAM role, for example: iam::123456789012:role/rolename
 	//
 	//   - An ARN of an IAM user, for example: iam::123456789012user/username
+	//
+	//   - A service principal name, for example: service-id.amazonaws.com
 	//
 	// Not all resource types can be shared with IAM roles and users. For more
 	// information, see [Sharing with IAM roles and users]in the Resource Access Manager User Guide.

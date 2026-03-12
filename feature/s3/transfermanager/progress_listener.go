@@ -5,14 +5,14 @@ import (
 	"sync/atomic"
 )
 
-// ProgressListeners holds various "transfer progress" hooks that a caller can
+// ObjectProgressListeners holds various "transfer progress" hooks that a caller can
 // supply to receive progress updates for potentially long-running transfer
 // manager operations.
 //
 // Progress listeners are invoked synchronously within the outer transfer
 // operation. Callers SHOULD NOT perform long-lived operations in these hooks,
 // such as submitting the progress snapshot to some other network agent.
-type ProgressListeners struct {
+type ObjectProgressListeners struct {
 	ObjectTransferStart    []ObjectTransferStartListener
 	ObjectBytesTransferred []ObjectBytesTransferredListener
 	ObjectTransferComplete []ObjectTransferCompleteListener
@@ -24,7 +24,7 @@ type ProgressListeners struct {
 // If the input does not implement a specific listener, it is a no-op for one
 // instance. Callers should generally use compile-time type assertions to
 // verify that their implementations satisfy the desired listener interfaces.
-func (p *ProgressListeners) Register(v any) {
+func (p *ObjectProgressListeners) Register(v any) {
 	if l, ok := v.(ObjectTransferStartListener); ok {
 		p.ObjectTransferStart = append(p.ObjectTransferStart, l)
 	}
@@ -40,7 +40,7 @@ func (p *ProgressListeners) Register(v any) {
 }
 
 // Copy creates a clone where all hook lists are deep-copied.
-func (p *ProgressListeners) Copy() ProgressListeners {
+func (p *ObjectProgressListeners) Copy() ObjectProgressListeners {
 	objectTransferStart := make([]ObjectTransferStartListener, len(p.ObjectTransferStart))
 	objectBytesTransferred := make([]ObjectBytesTransferredListener, len(p.ObjectBytesTransferred))
 	objectTransferComplete := make([]ObjectTransferCompleteListener, len(p.ObjectTransferComplete))
@@ -49,7 +49,7 @@ func (p *ProgressListeners) Copy() ProgressListeners {
 	copy(objectBytesTransferred, p.ObjectBytesTransferred)
 	copy(objectTransferComplete, p.ObjectTransferComplete)
 	copy(objectTransferFailed, p.ObjectTransferFailed)
-	return ProgressListeners{
+	return ObjectProgressListeners{
 		ObjectTransferStart:    objectTransferStart,
 		ObjectBytesTransferred: objectBytesTransferred,
 		ObjectTransferComplete: objectTransferComplete,
@@ -116,25 +116,25 @@ type ObjectTransferFailedEvent struct {
 	TotalBytes       int64
 }
 
-func (p *ProgressListeners) emitObjectTransferStart(ctx context.Context, event *ObjectTransferStartEvent) {
+func (p *ObjectProgressListeners) emitObjectTransferStart(ctx context.Context, event *ObjectTransferStartEvent) {
 	for _, l := range p.ObjectTransferStart {
 		l.OnObjectTransferStart(ctx, event)
 	}
 }
 
-func (p *ProgressListeners) emitObjectBytesTransferred(ctx context.Context, event *ObjectBytesTransferredEvent) {
+func (p *ObjectProgressListeners) emitObjectBytesTransferred(ctx context.Context, event *ObjectBytesTransferredEvent) {
 	for _, l := range p.ObjectBytesTransferred {
 		l.OnObjectBytesTransferred(ctx, event)
 	}
 }
 
-func (p *ProgressListeners) emitObjectTransferComplete(ctx context.Context, event *ObjectTransferCompleteEvent) {
+func (p *ObjectProgressListeners) emitObjectTransferComplete(ctx context.Context, event *ObjectTransferCompleteEvent) {
 	for _, l := range p.ObjectTransferComplete {
 		l.OnObjectTransferComplete(ctx, event)
 	}
 }
 
-func (p *ProgressListeners) emitObjectTransferFailed(ctx context.Context, event *ObjectTransferFailedEvent) {
+func (p *ObjectProgressListeners) emitObjectTransferFailed(ctx context.Context, event *ObjectTransferFailedEvent) {
 	for _, l := range p.ObjectTransferFailed {
 		l.OnObjectTransferFailed(ctx, event)
 	}
@@ -146,7 +146,7 @@ func (p *ProgressListeners) emitObjectTransferFailed(ctx context.Context, event 
 //   - PutObject
 //   - DownloadObject
 type singleObjectProgressEmitter struct {
-	Listeners ProgressListeners
+	Listeners ObjectProgressListeners
 
 	input            any
 	totalBytes       int64

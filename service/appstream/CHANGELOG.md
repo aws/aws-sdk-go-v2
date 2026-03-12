@@ -1,3 +1,20 @@
+# v1.54.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.54.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.54.0 (2026-02-20)
+
+* **Feature**: Adding new attribute to disable IMDS v1 APIs for fleet, Image Builder and AppBlockBuilder instances.
+
+# v1.53.2 (2026-02-02)
+
+* No change notes available for this release.
+
 # v1.53.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

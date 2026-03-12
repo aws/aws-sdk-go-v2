@@ -226,7 +226,16 @@ type AssetType struct {
 // The name and value of a user attribute.
 type AttributeType struct {
 
-	// The name of the attribute.
+	// The name of the attribute, for example email or custom:department .
+	//
+	// In some older user pools, the regex pattern for acceptable values of this
+	// parameter is [\p{L}\p{M}\p{S}\p{N}\p{P}]+ . Older pools will eventually be
+	// updated to use the new pattern. Affected user pools are those created before May
+	// 2024 in US East (N. Virginia), US East (Ohio), US West (N. California), US West
+	// (Oregon), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Seoul),
+	// Asia Pacific (Singapore), Asia Pacific (Sydney), Canada (Central), Europe
+	// (Frankfurt), Europe (Ireland), Europe (London), Europe (Paris), Europe
+	// (Stockholm), Middle East (Bahrain), and South America (São Paulo).
 	//
 	// This member is required.
 	Name *string
@@ -422,6 +431,25 @@ type ChallengeResponseType struct {
 
 	// The set of key-value pairs that provides a response to the requested challenge.
 	ChallengeResponse ChallengeResponse
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a client secret, including its unique identifier,
+// value, and creation timestamp.
+type ClientSecretDescriptorType struct {
+
+	// The date and time when the client secret was created.
+	ClientSecretCreateDate *time.Time
+
+	// The unique identifier for the client secret. This identifier follows the format
+	// --.
+	ClientSecretId *string
+
+	// The actual secret value. This is only returned when creating a new secret and
+	// only if Amazon Cognito generated the secret. For custom secrets that you
+	// provide, this field is not included in the response.
+	ClientSecretValue *string
 
 	noSmithyDocumentSerde
 }
@@ -1108,6 +1136,26 @@ type IdentityProviderType struct {
 	noSmithyDocumentSerde
 }
 
+// The properties of an inbound federation Lambda trigger.
+type InboundFederationLambdaType struct {
+
+	// The Amazon Resource Name (ARN) of the function that you want to assign to your
+	// Lambda trigger.
+	//
+	// This member is required.
+	LambdaArn *string
+
+	// The user pool trigger version of the request that Amazon Cognito sends to your
+	// Lambda function. Higher-numbered versions add fields that support new features.
+	//
+	// You must use a LambdaVersion of V1_0 with an inbound federation function.
+	//
+	// This member is required.
+	LambdaVersion InboundFederationLambdaVersionType
+
+	noSmithyDocumentSerde
+}
+
 // A collection of user pool Lambda triggers. Amazon Cognito invokes triggers at
 // several possible stages of user pool operations. Triggers can modify the outcome
 // of the operations that invoked them.
@@ -1141,6 +1189,11 @@ type LambdaConfigType struct {
 	//
 	// [custom authentication challenge triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html
 	DefineAuthChallenge *string
+
+	// The configuration of an inbound federation Lambda trigger. This trigger can
+	// transform federated user attributes during the authentication with external
+	// identity providers.
+	InboundFederation *InboundFederationLambdaType
 
 	// The ARN of an [KMS key]. Amazon Cognito uses the key to encrypt codes and temporary
 	// passwords sent to custom sender Lambda triggers.
@@ -1402,7 +1455,8 @@ type NotifyConfigurationType struct {
 	// taken in response to a detected risk.
 	NoActionEmail *NotifyEmailType
 
-	// The reply-to email address of an email template.
+	// The reply-to email address of an email template. Can be an email address in the
+	// format admin@example.com or Administrator .
 	ReplyTo *string
 
 	noSmithyDocumentSerde
@@ -2330,8 +2384,9 @@ type UserPoolClientType struct {
 	//
 	// See [OAuth 2.0 - Redirection Endpoint].
 	//
-	// Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing
-	// purposes only.
+	// Amazon Cognito requires HTTPS over HTTP for callback URLs to http://localhost ,
+	// http://127.0.0.1 and http://[::1] . These callback URLs are for testing purposes
+	// only. You can specify custom TCP ports for your callback URLs.
 	//
 	// App callback URLs such as myapp://example are also supported.
 	//
@@ -2364,8 +2419,9 @@ type UserPoolClientType struct {
 	//
 	// See [OAuth 2.0 - Redirection Endpoint].
 	//
-	// Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing
-	// purposes only.
+	// Amazon Cognito requires HTTPS over HTTP for callback URLs to http://localhost ,
+	// http://127.0.0.1 and http://[::1] . These callback URLs are for testing purposes
+	// only. You can specify custom TCP ports for your callback URLs.
 	//
 	// App callback URLs such as myapp://example are also supported.
 	//

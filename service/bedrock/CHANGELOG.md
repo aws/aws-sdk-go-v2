@@ -1,3 +1,25 @@
+# v1.56.0 (2026-03-06)
+
+* **Feature**: Amazon Bedrock Guardrails account-level enforcement APIs now support lists for model inclusion and exclusion from guardrail enforcement.
+
+# v1.55.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.0 (2026-02-27)
+
+* **Feature**: Added four new model lifecycle date fields, startOfLifeTime, endOfLifeTime, legacyTime, and publicExtendedAccessTime. Adds support for using the Converse API with Bedrock Batch inference jobs.
+
+# v1.54.0 (2026-02-23)
+
+* **Feature**: Automated Reasoning checks in Amazon Bedrock Guardrails now support fidelity report generation. The new workflow type assesses policy coverage and accuracy against customer documents. The GetAutomatedReasoningPolicyBuildWorkflowResultAssets API adds support for the three new asset types.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.2 (2026-01-27)
+
+* No change notes available for this release.
+
 # v1.53.1 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

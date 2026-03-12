@@ -14,7 +14,7 @@ import (
 
 // Returns a list of contacts.
 //
-// If statusList contains AVAILABLE, the request must include groundStation ,
+// If statusList contains AVAILABLE, the request must include  groundStation ,
 // missionprofileArn , and satelliteArn .
 func (c *Client) ListContacts(ctx context.Context, params *ListContactsInput, optFns ...func(*Options)) (*ListContactsOutput, error) {
 	if params == nil {

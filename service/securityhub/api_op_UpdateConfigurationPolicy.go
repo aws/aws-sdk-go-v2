@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-//	Updates a configuration policy. Only the Security Hub delegated administrator
+//	Updates a configuration policy. Only the Security Hub CSPM delegated
 //
-// can invoke this operation from the home Region.
+// administrator can invoke this operation from the home Region.
 func (c *Client) UpdateConfigurationPolicy(ctx context.Context, params *UpdateConfigurationPolicyInput, optFns ...func(*Options)) (*UpdateConfigurationPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationPolicyInput{}
@@ -38,14 +38,15 @@ type UpdateConfigurationPolicyInput struct {
 	// This member is required.
 	Identifier *string
 
-	//  An object that defines how Security Hub is configured. It includes whether
-	// Security Hub is enabled or disabled, a list of enabled security standards, a
-	// list of enabled or disabled security controls, and a list of custom parameter
-	// values for specified controls. If you provide a list of security controls that
-	// are enabled in the configuration policy, Security Hub disables all other
-	// controls (including newly released controls). If you provide a list of security
-	// controls that are disabled in the configuration policy, Security Hub enables all
-	// other controls (including newly released controls).
+	//  An object that defines how Security Hub CSPM is configured. It includes
+	// whether Security Hub CSPM is enabled or disabled, a list of enabled security
+	// standards, a list of enabled or disabled security controls, and a list of custom
+	// parameter values for specified controls. If you provide a list of security
+	// controls that are enabled in the configuration policy, Security Hub CSPM
+	// disables all other controls (including newly released controls). If you provide
+	// a list of security controls that are disabled in the configuration policy,
+	// Security Hub CSPM enables all other controls (including newly released
+	// controls).
 	//
 	// When updating a configuration policy, provide a complete list of standards that
 	// you want to enable and a complete list of controls that you want to enable or
@@ -70,14 +71,15 @@ type UpdateConfigurationPolicyOutput struct {
 	//  The ARN of the configuration policy.
 	Arn *string
 
-	//  An object that defines how Security Hub is configured. It includes whether
-	// Security Hub is enabled or disabled, a list of enabled security standards, a
-	// list of enabled or disabled security controls, and a list of custom parameter
-	// values for specified controls. If the request included a list of security
-	// controls that are enabled in the configuration policy, Security Hub disables all
-	// other controls (including newly released controls). If the request included a
-	// list of security controls that are disabled in the configuration policy,
-	// Security Hub enables all other controls (including newly released controls).
+	//  An object that defines how Security Hub CSPM is configured. It includes
+	// whether Security Hub CSPM is enabled or disabled, a list of enabled security
+	// standards, a list of enabled or disabled security controls, and a list of custom
+	// parameter values for specified controls. If the request included a list of
+	// security controls that are enabled in the configuration policy, Security Hub
+	// CSPM disables all other controls (including newly released controls). If the
+	// request included a list of security controls that are disabled in the
+	// configuration policy, Security Hub CSPM enables all other controls (including
+	// newly released controls).
 	ConfigurationPolicy types.Policy
 
 	//  The date and time, in UTC and ISO 8601 format, that the configuration policy

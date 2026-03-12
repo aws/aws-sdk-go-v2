@@ -5,10 +5,8 @@ package jsonrpc
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -20,7 +18,7 @@ import (
 	"testing"
 )
 
-func TestClient_SimpleScalarProperties_awsAwsjson11Serialize(t *testing.T) {
+func TestClient_SimpleScalarProperties_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *SimpleScalarPropertiesInput
 		ExpectMethod  string
@@ -121,17 +119,17 @@ func TestClient_SimpleScalarProperties_awsAwsjson11Serialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient: protocoltesthttp.NewClient(),
-				Region:     "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
 			})
 			result, err := client.SimpleScalarProperties(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -162,7 +160,114 @@ func TestClient_SimpleScalarProperties_awsAwsjson11Serialize(t *testing.T) {
 	}
 }
 
-func TestClient_SimpleScalarProperties_awsAwsjson11Deserialize(t *testing.T) {
+func BenchmarkClient_SimpleScalarProperties_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *SimpleScalarPropertiesInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"AwsJson11SupportsNaNFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.NaN())),
+				DoubleValue: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.SimpleScalarProperties"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "floatValue": "NaN",
+			    "doubleValue": "NaN"
+			}`))
+			},
+		},
+		"AwsJson11SupportsInfinityFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+				DoubleValue: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.SimpleScalarProperties"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "floatValue": "Infinity",
+			    "doubleValue": "Infinity"
+			}`))
+			},
+		},
+		"AwsJson11SupportsNegativeInfinityFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+				DoubleValue: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.SimpleScalarProperties"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "floatValue": "-Infinity",
+			    "doubleValue": "-Infinity"
+			}`))
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				HTTPClient:         &protocolTestHTTPClient{},
+			})
+			for i := 0; i < b.N; i++ {
+				client.SimpleScalarProperties(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
+func TestClient_SimpleScalarProperties_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -254,12 +359,7 @@ func TestClient_SimpleScalarProperties_awsAwsjson11Deserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				Region: "us-west-2",
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
 			})
 			var params SimpleScalarPropertiesInput
 			result, err := client.SimpleScalarProperties(context.Background(), &params)
@@ -271,6 +371,105 @@ func TestClient_SimpleScalarProperties_awsAwsjson11Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_SimpleScalarProperties_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *SimpleScalarPropertiesOutput
+	}{
+		"AwsJson11SupportsNaNFloatInputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "floatValue": "NaN",
+			    "doubleValue": "NaN"
+			}`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.NaN())),
+				DoubleValue: ptr.Float64(math.NaN()),
+			},
+		},
+		"AwsJson11SupportsInfinityFloatInputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "floatValue": "Infinity",
+			    "doubleValue": "Infinity"
+			}`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+				DoubleValue: ptr.Float64(math.Inf(1)),
+			},
+		},
+		"AwsJson11SupportsNegativeInfinityFloatInputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "floatValue": "-Infinity",
+			    "doubleValue": "-Infinity"
+			}`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+				DoubleValue: ptr.Float64(math.Inf(-1)),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params SimpleScalarPropertiesInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+			})
+			for i := 0; i < b.N; i++ {
+				client.SimpleScalarProperties(context.Background(), &params)
 			}
 		})
 	}

@@ -30,6 +30,22 @@ import (
 // Directory users. For Quick Sight users authenticated by Amazon Web Services
 // Identity Center, see [Identity Center documentation on identity-enhanced IAM role sessions].
 //
+// # Supported Regions
+//
+// The GetIdentityContext API works only in regions that support at least one of
+// these identity types:
+//
+//   - Amazon Quick Sight native identity
+//
+//   - IAM federated identity
+//
+//   - Active Directory
+//
+// To use this API successfully, call it in the same region where your user's
+// identity resides. For example, if your user's identity is in us-east-1, make the
+// API call in us-east-1. For more information about managing identities in Amazon
+// Quick Sight, see [Identity and access management in Amazon Quick Sight]in the Amazon Quick Sight User Guide.
+//
 // # Getting Identity-Enhanced Credentials
 //
 // To obtain identity-enhanced credentials, follow these steps:
@@ -56,6 +72,7 @@ import (
 // [Identity Center documentation on identity-enhanced IAM role sessions]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html
 // [DescribeDashboardSnapshotJob]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJob.html
 // [STS AssumeRole API]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
+// [Identity and access management in Amazon Quick Sight]: https://docs.aws.amazon.com/quicksight/latest/userguide/identity.html
 // [StartDashboardSnapshotJob]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_StartDashboardSnapshotJob.html
 func (c *Client) GetIdentityContext(ctx context.Context, params *GetIdentityContextInput, optFns ...func(*Options)) (*GetIdentityContextOutput, error) {
 	if params == nil {

@@ -3724,6 +3724,11 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				sv.Status = types.TemplateStatus(jtv)
 			}
 
+		case "tagPropagationConfigurations":
+			if err := awsRestjson1_deserializeDocumentTagPropagationConfigurationList(&sv.TagPropagationConfigurations, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -5568,6 +5573,19 @@ func awsRestjson1_deserializeOpDocumentSearchCasesOutput(v **SearchCasesOutput, 
 				sv.NextToken = ptr.String(jtv)
 			}
 
+		case "totalCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TotalCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalCount = i64
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7381,6 +7399,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "andAll":
+			var mv types.CompoundCondition
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCompoundCondition(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.BooleanConditionMemberAndAll{Value: mv}
+			break loop
+
 		case "equalTo":
 			var mv types.BooleanOperands
 			destAddr := &mv
@@ -7399,6 +7427,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.BooleanConditionMemberNotEqualTo{Value: mv}
+			break loop
+
+		case "orAll":
+			var mv types.CompoundCondition
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCompoundCondition(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.BooleanConditionMemberOrAll{Value: mv}
 			break loop
 
 		default:
@@ -7889,6 +7927,42 @@ func awsRestjson1_deserializeDocumentCommentContent(v **types.CommentContent, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCompoundCondition(v **types.CompoundCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CompoundCondition
+	if *v == nil {
+		sv = &types.CompoundCondition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "conditions":
+			if err := awsRestjson1_deserializeDocumentBooleanConditionList(&sv.Conditions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8304,6 +8378,46 @@ func awsRestjson1_deserializeDocumentEventIncludedData(v **types.EventIncludedDa
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFieldAttributes(v *types.FieldAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.FieldAttributes
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "text":
+			var mv types.TextAttributes
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentTextAttributes(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FieldAttributesMemberText{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -8818,6 +8932,11 @@ func awsRestjson1_deserializeDocumentFieldSummary(v **types.FieldSummary, value 
 
 	for key, value := range shape {
 		switch key {
+		case "attributes":
+			if err := awsRestjson1_deserializeDocumentFieldAttributes(&sv.Attributes, value); err != nil {
+				return err
+			}
+
 		case "fieldArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9272,6 +9391,11 @@ func awsRestjson1_deserializeDocumentGetFieldResponse(v **types.GetFieldResponse
 
 	for key, value := range shape {
 		switch key {
+		case "attributes":
+			if err := awsRestjson1_deserializeDocumentFieldAttributes(&sv.Attributes, value); err != nil {
+				return err
+			}
+
 		case "createdTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9678,6 +9802,42 @@ func awsRestjson1_deserializeDocumentLayoutSummaryList(v *[]types.LayoutSummary,
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMutableTags(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TagValueString to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -10842,6 +11002,85 @@ func awsRestjson1_deserializeDocumentSlaFieldValueUnionList(v *[]types.FieldValu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTagPropagationConfiguration(v **types.TagPropagationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TagPropagationConfiguration
+	if *v == nil {
+		sv = &types.TagPropagationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagPropagationResourceType to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = types.TagPropagationResourceType(jtv)
+			}
+
+		case "tagMap":
+			if err := awsRestjson1_deserializeDocumentMutableTags(&sv.TagMap, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTagPropagationConfigurationList(v *[]types.TagPropagationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TagPropagationConfiguration
+	if *v == nil {
+		cv = []types.TagPropagationConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TagPropagationConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTagPropagationConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTags(v *map[string]*string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11001,6 +11240,11 @@ func awsRestjson1_deserializeDocumentTemplateSummary(v **types.TemplateSummary, 
 				sv.Status = types.TemplateStatus(jtv)
 			}
 
+		case "tagPropagationConfigurations":
+			if err := awsRestjson1_deserializeDocumentTagPropagationConfigurationList(&sv.TagPropagationConfigurations, value); err != nil {
+				return err
+			}
+
 		case "templateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11059,6 +11303,46 @@ func awsRestjson1_deserializeDocumentTemplateSummaryList(v *[]types.TemplateSumm
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTextAttributes(v **types.TextAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TextAttributes
+	if *v == nil {
+		sv = &types.TextAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "isMultiline":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsMultiline = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

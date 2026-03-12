@@ -57,7 +57,9 @@ type ListUsersInGroupInput struct {
 	UserPoolId *string
 
 	// The maximum number of groups that you want Amazon Cognito to return in the
-	// response.
+	// response. In some SDK contexts, this operation might return fewer items than you
+	// specify in the Limit parameter without having reached the end of the full list.
+	// If the response contains a PaginationToken , then there are more results.
 	Limit *int32
 
 	// This API operation returns a limited number of results. The pagination token is
@@ -191,7 +193,9 @@ func (c *Client) addOperationListUsersInGroupMiddlewares(stack *middleware.Stack
 // ListUsersInGroupPaginatorOptions is the paginator options for ListUsersInGroup
 type ListUsersInGroupPaginatorOptions struct {
 	// The maximum number of groups that you want Amazon Cognito to return in the
-	// response.
+	// response. In some SDK contexts, this operation might return fewer items than you
+	// specify in the Limit parameter without having reached the end of the full list.
+	// If the response contains a PaginationToken , then there are more results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

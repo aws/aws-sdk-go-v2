@@ -1165,6 +1165,73 @@ func validateIcebergMetadata(v *types.IcebergMetadata) error {
 			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.PartitionSpec != nil {
+		if err := validateIcebergPartitionSpec(v.PartitionSpec); err != nil {
+			invalidParams.AddNested("PartitionSpec", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WriteOrder != nil {
+		if err := validateIcebergSortOrder(v.WriteOrder); err != nil {
+			invalidParams.AddNested("WriteOrder", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergPartitionField(v *types.IcebergPartitionField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergPartitionField"}
+	if v.SourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceId"))
+	}
+	if v.Transform == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Transform"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergPartitionFieldList(v []types.IcebergPartitionField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergPartitionFieldList"}
+	for i := range v {
+		if err := validateIcebergPartitionField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergPartitionSpec(v *types.IcebergPartitionSpec) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergPartitionSpec"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateIcebergPartitionFieldList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1181,6 +1248,69 @@ func validateIcebergSchema(v *types.IcebergSchema) error {
 		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
 	} else if v.Fields != nil {
 		if err := validateSchemaFieldList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergSortField(v *types.IcebergSortField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergSortField"}
+	if v.SourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceId"))
+	}
+	if v.Transform == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Transform"))
+	}
+	if len(v.Direction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Direction"))
+	}
+	if len(v.NullOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NullOrder"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergSortFieldList(v []types.IcebergSortField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergSortFieldList"}
+	for i := range v {
+		if err := validateIcebergSortField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergSortOrder(v *types.IcebergSortOrder) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergSortOrder"}
+	if v.OrderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrderId"))
+	}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateIcebergSortFieldList(v.Fields); err != nil {
 			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
 		}
 	}

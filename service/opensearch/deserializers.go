@@ -7815,6 +7815,15 @@ func awsRestjson1_deserializeOpDocumentGetDirectQueryDataSourceOutput(v **GetDir
 
 	for key, value := range shape {
 		switch key {
+		case "DataSourceAccessPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyDocument to be of type string, got %T instead", value)
+				}
+				sv.DataSourceAccessPolicy = ptr.String(jtv)
+			}
+
 		case "DataSourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12721,6 +12730,9 @@ func awsRestjson1_deserializeOpErrorUpdateDirectQueryDataSource(response *smithy
 	case strings.EqualFold("InternalException", errorCode):
 		return awsRestjson1_deserializeErrorInternalException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -17067,6 +17079,15 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 				sv.DataSourceDescription = ptr.String(jtv)
 			}
 
+		case "iamRoleForDataSourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.IamRoleForDataSourceArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -17276,6 +17297,87 @@ func awsRestjson1_deserializeDocumentDependencyFailureException(v **types.Depend
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDeploymentStrategyOptions(v **types.DeploymentStrategyOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeploymentStrategyOptions
+	if *v == nil {
+		sv = &types.DeploymentStrategyOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeploymentStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentStrategy to be of type string, got %T instead", value)
+				}
+				sv.DeploymentStrategy = types.DeploymentStrategy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDeploymentStrategyOptionsStatus(v **types.DeploymentStrategyOptionsStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeploymentStrategyOptionsStatus
+	if *v == nil {
+		sv = &types.DeploymentStrategyOptionsStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Options":
+			if err := awsRestjson1_deserializeDocumentDeploymentStrategyOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
+		case "Status":
+			if err := awsRestjson1_deserializeDocumentOptionStatus(&sv.Status, value); err != nil {
+				return err
 			}
 
 		default:
@@ -17579,6 +17681,11 @@ func awsRestjson1_deserializeDocumentDomainConfig(v **types.DomainConfig, value 
 
 		case "CognitoOptions":
 			if err := awsRestjson1_deserializeDocumentCognitoOptionsStatus(&sv.CognitoOptions, value); err != nil {
+				return err
+			}
+
+		case "DeploymentStrategyOptions":
+			if err := awsRestjson1_deserializeDocumentDeploymentStrategyOptionsStatus(&sv.DeploymentStrategyOptions, value); err != nil {
 				return err
 			}
 
@@ -18430,6 +18537,11 @@ func awsRestjson1_deserializeDocumentDomainStatus(v **types.DomainStatus, value 
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.Deleted = ptr.Bool(jtv)
+			}
+
+		case "DeploymentStrategyOptions":
+			if err := awsRestjson1_deserializeDocumentDeploymentStrategyOptions(&sv.DeploymentStrategyOptions, value); err != nil {
+				return err
 			}
 
 		case "DomainEndpointOptions":

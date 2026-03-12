@@ -42,7 +42,7 @@ func TestValidDataFiles(t *testing.T) {
 			}
 
 			expectedPath := path + "_expected"
-			e := map[string]interface{}{}
+			e := map[string]any{}
 
 			b, err := os.ReadFile(expectedPath)
 			if err != nil {
@@ -61,7 +61,7 @@ func TestValidDataFiles(t *testing.T) {
 					t.Fatal("could not find profile " + profile)
 				}
 
-				table := tableIface.(map[string]interface{})
+				table := tableIface.(map[string]any)
 				for k, v := range table {
 					switch e := v.(type) {
 					case string:

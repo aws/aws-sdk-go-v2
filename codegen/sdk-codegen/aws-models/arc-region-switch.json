@@ -54,7 +54,7 @@
                 "mode": {
                     "target": "com.amazonaws.arcregionswitch#ExecutionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The plan execution mode. Valid values are <code>Practice</code>, for testing without making actual changes, or <code>Recovery</code>, for actual traffic shifting and application recovery.</p>",
+                        "smithy.api#documentation": "<p>The plan execution mode. Valid values are <code>graceful</code>, for graceful executions, or <code>ungraceful</code>, for ungraceful executions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -68,7 +68,7 @@
                 "executionAction": {
                     "target": "com.amazonaws.arcregionswitch#ExecutionAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The plan execution action. Valid values are <code>Activate</code>, to activate an Amazon Web Services Region, or <code>Deactivate</code>, to deactivate a Region.</p>",
+                        "smithy.api#documentation": "<p>The plan execution action. Valid values are <code>activate</code>, to activate an Amazon Web Services Region, or <code>deactivate</code>, to deactivate a Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -77,6 +77,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services Region for a plan execution.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "recoveryExecutionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the most recent recovery execution. Required when starting a post-recovery execution.</p>"
                     }
                 },
                 "actualRecoveryTime": {
@@ -423,7 +429,7 @@
                     "FederatedUser"
                 ],
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Application Recovery Controller (ARC) Region switch helps you to quickly and reliably shift traffic away from an impaired Amazon Web Services Region to a healthy Region. With Region switch, you can create plans that define the steps to shift traffic for your application from one Amazon Web Services Region to another. You can test your plans in practice mode before using them in a real recovery scenario.</p> <p>Region switch provides a structured approach to multi-Region failover, helping you to meet your recovery time objectives (RTOs) and maintain business continuity during regional disruptions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/region-switch.html\">Region switch in ARC</a> in the <i>Amazon Application Recovery Controller User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Amazon Application Recovery Controller (ARC) Region switch helps you to quickly and reliably shift traffic away from an impaired Amazon Web Services Region to a healthy Region. With Region switch, you can create plans that define the steps to shift traffic for your application from one Amazon Web Services Region to another.</p> <p>Region switch provides a structured approach to multi-Region failover, helping you to meet your recovery time objectives (RTOs) and maintain business continuity during regional disruptions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/region-switch.html\">Region switch in ARC</a> in the <i>Amazon Application Recovery Controller User Guide</i>.</p>",
                 "smithy.api#title": "ARC - Region switch",
                 "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointRuleSet": {
@@ -1351,7 +1357,10 @@
             }
         },
         "com.amazonaws.arcregionswitch#AuroraClusterArn": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:cluster:[A-Za-z][0-9A-Za-z-:._]*$"
+            }
         },
         "com.amazonaws.arcregionswitch#AuroraClusterArns": {
             "type": "list",
@@ -1584,7 +1593,7 @@
                 "regionToRun": {
                     "target": "com.amazonaws.arcregionswitch#RegionToRunIn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Region for the function to run in.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region for the function to run in. For recovery workflows use <code>activatingRegion</code> or <code>deactivatingRegion</code>. For post-recovery workflows, use <code>activeRegion</code> (the Region with customer traffic) or <code>inactiveRegion</code> (the Region with no customer traffic).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2125,6 +2134,12 @@
                     "traits": {
                         "smithy.api#enumValue": "deactivate"
                     }
+                },
+                "POST_RECOVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "postRecovery"
+                    }
                 }
             }
         },
@@ -2218,6 +2233,18 @@
                 },
                 "documentDbConfig": {
                     "target": "com.amazonaws.arcregionswitch#DocumentDbConfiguration"
+                },
+                "rdsPromoteReadReplicaConfig": {
+                    "target": "com.amazonaws.arcregionswitch#RdsPromoteReadReplicaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon RDS promote read replica execution block.</p>"
+                    }
+                },
+                "rdsCreateCrossRegionReadReplicaConfig": {
+                    "target": "com.amazonaws.arcregionswitch#RdsCreateCrossRegionReplicaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon RDS create cross-Region replica execution block.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2291,6 +2318,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DocumentDb"
+                    }
+                },
+                "RDS_PROMOTE_READ_REPLICA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RdsPromoteReadReplica"
+                    }
+                },
+                "RDS_CREATE_CROSS_REGION_REPLICA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RdsCreateCrossRegionReplica"
                     }
                 }
             }
@@ -3045,7 +3084,7 @@
                 "mode": {
                     "target": "com.amazonaws.arcregionswitch#ExecutionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The plan execution mode. Valid values are <code>Practice</code>, for testing without making actual changes, or <code>Recovery</code>, for actual traffic shifting and application recovery.</p>",
+                        "smithy.api#documentation": "<p>The plan execution mode. Valid values are <code>graceful</code>, for graceful executions, or <code>ungraceful</code>, for ungraceful executions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3059,7 +3098,7 @@
                 "executionAction": {
                     "target": "com.amazonaws.arcregionswitch#ExecutionAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The plan execution action. Valid values are <code>Activate</code>, to activate an Amazon Web Services Region, or <code>Deactivate</code>, to deactivate a Region.</p>",
+                        "smithy.api#documentation": "<p>The plan execution action. Valid values are <code>activate</code>, to activate an Amazon Web Services Region, or <code>deactivate</code>, to deactivate a Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3068,6 +3107,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services Region for a plan execution.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "recoveryExecutionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the most recent recovery execution. Required when starting a post-recovery execution.</p>"
                     }
                 },
                 "stepStates": {
@@ -3298,7 +3343,14 @@
             }
         },
         "com.amazonaws.arcregionswitch#GlobalClusterIdentifier": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z][0-9A-Za-z-:._]*$"
+            }
         },
         "com.amazonaws.arcregionswitch#IamRoleArn": {
             "type": "string",
@@ -4332,6 +4384,95 @@
                 "target": "com.amazonaws.arcregionswitch#ResourceWarning"
             }
         },
+        "com.amazonaws.arcregionswitch#RdsCreateCrossRegionReplicaConfiguration": {
+            "type": "structure",
+            "members": {
+                "timeoutMinutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The timeout value specified for the configuration.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "crossAccountRole": {
+                    "target": "com.amazonaws.arcregionswitch#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross-account role for the configuration.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external ID (secret key) for the configuration.</p>"
+                    }
+                },
+                "dbInstanceArnMap": {
+                    "target": "com.amazonaws.arcregionswitch#RdsDbInstanceArnMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of database instance ARNs for each Region in the plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for creating an Amazon RDS cross-Region read replica during post-recovery in a Region switch.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#RdsDbInstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:db:[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+            }
+        },
+        "com.amazonaws.arcregionswitch#RdsDbInstanceArnMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.arcregionswitch#Region"
+            },
+            "value": {
+                "target": "com.amazonaws.arcregionswitch#RdsDbInstanceArn"
+            }
+        },
+        "com.amazonaws.arcregionswitch#RdsPromoteReadReplicaConfiguration": {
+            "type": "structure",
+            "members": {
+                "timeoutMinutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The timeout value specified for the configuration.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "crossAccountRole": {
+                    "target": "com.amazonaws.arcregionswitch#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross-account role for the configuration.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external ID (secret key) for the configuration.</p>"
+                    }
+                },
+                "dbInstanceArnMap": {
+                    "target": "com.amazonaws.arcregionswitch#RdsDbInstanceArnMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of database instance ARNs for each Region in the plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for promoting an Amazon RDS read replica to a standalone database instance during a Region switch.</p>"
+            }
+        },
         "com.amazonaws.arcregionswitch#RecoveryApproach": {
             "type": "enum",
             "members": {
@@ -4347,6 +4488,12 @@
                         "smithy.api#enumValue": "activePassive"
                     }
                 }
+            }
+        },
+        "com.amazonaws.arcregionswitch#RecoveryExecutionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-z]{2}(-[a-z]+)+-[0-9]+/[0-9a-fA-F]{16}$"
             }
         },
         "com.amazonaws.arcregionswitch#Region": {
@@ -4469,6 +4616,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "deactivatingRegion"
+                    }
+                },
+                "ACTIVE_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "activeRegion"
+                    }
+                },
+                "INACTIVE_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inactiveRegion"
                     }
                 }
             }
@@ -4952,7 +5111,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to start a plan execution"
                 },
-                "smithy.api#documentation": "<p>Starts the execution of a Region switch plan. You can execute a plan in either PRACTICE or RECOVERY mode.</p> <p>In PRACTICE mode, the execution simulates the steps without making actual changes to your application's traffic routing. In RECOVERY mode, the execution performs actual changes to shift traffic between Regions.</p>"
+                "smithy.api#documentation": "<p>Starts the execution of a Region switch plan. You can execute a plan in either <code>graceful</code> or <code>ungraceful</code> mode.</p> <p>Specifing <code>ungraceful</code> mode either changes the behavior of the execution blocks in a workflow or skips specific execution blocks.</p>"
             }
         },
         "com.amazonaws.arcregionswitch#StartPlanExecutionRequest": {
@@ -4975,7 +5134,7 @@
                 "action": {
                     "target": "com.amazonaws.arcregionswitch#ExecutionAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to perform. Valid values are ACTIVATE (to shift traffic to the target Region) or DEACTIVATE (to shift traffic away from the target Region).</p>",
+                        "smithy.api#documentation": "<p>The action to perform. Valid values are <code>activate</code> (to shift traffic to the target Region) or <code>deactivate</code> (to shift traffic away from the target Region).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4983,7 +5142,7 @@
                     "target": "com.amazonaws.arcregionswitch#ExecutionMode",
                     "traits": {
                         "smithy.api#default": "graceful",
-                        "smithy.api#documentation": "<p>The plan execution mode. Valid values are <code>Practice</code>, for testing without making actual changes, or <code>Recovery</code>, for actual traffic shifting and application recovery.</p>"
+                        "smithy.api#documentation": "<p>The plan execution mode. Valid values are <code>graceful</code>, for starting the execution in graceful mode, or <code>ungraceful</code>, for starting the execution in ungraceful mode.</p>"
                     }
                 },
                 "comment": {
@@ -4996,6 +5155,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A boolean value indicating whether to use the latest version of the plan. If set to false, you must specify a specific version.</p>"
+                    }
+                },
+                "recoveryExecutionId": {
+                    "target": "com.amazonaws.arcregionswitch#RecoveryExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution identifier of the recovery execution that ran in the opposite region post-recovery is ran in. Required when starting a post-recovery execution.</p>"
                     }
                 }
             },
@@ -5303,7 +5468,7 @@
                 "action": {
                     "target": "com.amazonaws.arcregionswitch#WorkflowTargetAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to perform when the trigger fires. Valid values include ACTIVATE and DEACTIVATE.</p>",
+                        "smithy.api#documentation": "<p>The action to perform when the trigger fires. Valid values include <code>activate</code> and <code>deactivate</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5339,7 +5504,7 @@
                 "condition": {
                     "target": "com.amazonaws.arcregionswitch#AlarmCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition that must be met. Valid values include ALARM and OK.</p>",
+                        "smithy.api#documentation": "<p>The condition that must be met. Valid values include <code>green</code> and <code>red</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5736,7 +5901,7 @@
                 "workflowTargetAction": {
                     "target": "com.amazonaws.arcregionswitch#WorkflowTargetAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action that the workflow performs. Valid values include ACTIVATE and DEACTIVATE.</p>",
+                        "smithy.api#documentation": "<p>The action that the workflow performs. Valid values include <code>activate</code> and <code>deactivate</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5776,6 +5941,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "deactivate"
+                    }
+                },
+                "POST_RECOVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "postRecovery"
                     }
                 }
             }

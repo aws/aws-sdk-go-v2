@@ -1,3 +1,16 @@
+# v1.57.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.0 (2026-02-05)
+
+* **Feature**: Reduces the minimum TargetDpus to create or update capacity reservations from 24 to 4.
+
 # v1.56.6 (2026-01-12)
 
 * No change notes available for this release.

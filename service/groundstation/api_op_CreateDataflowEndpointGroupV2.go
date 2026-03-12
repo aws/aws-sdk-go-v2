@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a DataflowEndpointGroupV2 containing the specified list of
-// DataflowEndpoint objects.
+// Creates a DataflowEndpoint group containing the specified list of Ground
+// Station Agent based endpoints.
 //
 // The name field in each endpoint is used in your mission profile
 // DataflowEndpointConfig to specify which endpoints to use during a contact.
 //
-// When a contact uses multiple DataflowEndpointConfig objects, each Config must
+// When a contact uses multiple DataflowEndpointConfig objects, each  Config must
 // match a DataflowEndpoint in the same group.
 func (c *Client) CreateDataflowEndpointGroupV2(ctx context.Context, params *CreateDataflowEndpointGroupV2Input, optFns ...func(*Options)) (*CreateDataflowEndpointGroupV2Output, error) {
 	if params == nil {
@@ -41,16 +41,18 @@ type CreateDataflowEndpointGroupV2Input struct {
 	// This member is required.
 	Endpoints []types.CreateEndpointDetails
 
-	// Amount of time, in seconds, after a contact ends that the Ground Station
-	// Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow
-	// Endpoint Group State Change event will be emitted when the Dataflow Endpoint
-	// Group enters and exits the POSTPASS state.
+	//  Amount of time, in seconds, after a contact ends that the Ground Station
+	// Dataflow Endpoint Group will be in a POSTPASS state. A [Ground Station Dataflow Endpoint Group State Change event] will be emitted when
+	// the Dataflow Endpoint Group enters and exits the POSTPASS state.
+	//
+	// [Ground Station Dataflow Endpoint Group State Change event]: https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html
 	ContactPostPassDurationSeconds *int32
 
-	// Amount of time, in seconds, before a contact starts that the Ground Station
-	// Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow
-	// Endpoint Group State Change event will be emitted when the Dataflow Endpoint
-	// Group enters and exits the PREPASS state.
+	//  Amount of time, in seconds, before a contact starts that the Ground Station
+	// Dataflow Endpoint Group will be in a PREPASS state. A [Ground Station Dataflow Endpoint Group State Change event] will be emitted when the
+	// Dataflow Endpoint Group enters and exits the PREPASS state.
+	//
+	// [Ground Station Dataflow Endpoint Group State Change event]: https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html
 	ContactPrePassDurationSeconds *int32
 
 	// Tags of a V2 dataflow endpoint group.

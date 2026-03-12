@@ -630,6 +630,13 @@ func awsRestjson1_serializeOpDocumentCreateElasticsearchDomainInput(v *CreateEla
 		}
 	}
 
+	if v.DeploymentStrategyOptions != nil {
+		ok := object.Key("DeploymentStrategyOptions")
+		if err := awsRestjson1_serializeDocumentDeploymentStrategyOptions(v.DeploymentStrategyOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DomainEndpointOptions != nil {
 		ok := object.Key("DomainEndpointOptions")
 		if err := awsRestjson1_serializeDocumentDomainEndpointOptions(v.DomainEndpointOptions, ok); err != nil {
@@ -1450,17 +1457,6 @@ func (m *awsRestjson1_serializeOpDescribeDomainAutoTunes) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDescribeDomainAutoTunesInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1484,21 +1480,12 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDomainAutoTunesInput(v *Describ
 		}
 	}
 
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDescribeDomainAutoTunesInput(v *DescribeDomainAutoTunesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
 	if v.MaxResults != 0 {
-		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -3976,6 +3963,13 @@ func awsRestjson1_serializeOpDocumentUpdateElasticsearchDomainConfigInput(v *Upd
 		}
 	}
 
+	if v.DeploymentStrategyOptions != nil {
+		ok := object.Key("DeploymentStrategyOptions")
+		if err := awsRestjson1_serializeDocumentDeploymentStrategyOptions(v.DeploymentStrategyOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DomainEndpointOptions != nil {
 		ok := object.Key("DomainEndpointOptions")
 		if err := awsRestjson1_serializeDocumentDomainEndpointOptions(v.DomainEndpointOptions, ok); err != nil {
@@ -4478,6 +4472,18 @@ func awsRestjson1_serializeDocumentColdStorageOptions(v *types.ColdStorageOption
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")
 		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeploymentStrategyOptions(v *types.DeploymentStrategyOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DeploymentStrategy) > 0 {
+		ok := object.Key("DeploymentStrategy")
+		ok.String(string(v.DeploymentStrategy))
 	}
 
 	return nil

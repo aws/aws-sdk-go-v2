@@ -9,6 +9,7 @@ const (
 	GetEntitlementFilterNameCustomerIdentifier   GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"
 	GetEntitlementFilterNameDimension            GetEntitlementFilterName = "DIMENSION"
 	GetEntitlementFilterNameCustomerAwsAccountId GetEntitlementFilterName = "CUSTOMER_AWS_ACCOUNT_ID"
+	GetEntitlementFilterNameLicenseArn           GetEntitlementFilterName = "LICENSE_ARN"
 )
 
 // Values returns all known values for GetEntitlementFilterName. Note that this
@@ -20,5 +21,6 @@ func (GetEntitlementFilterName) Values() []GetEntitlementFilterName {
 		"CUSTOMER_IDENTIFIER",
 		"DIMENSION",
 		"CUSTOMER_AWS_ACCOUNT_ID",
+		"LICENSE_ARN",
 	}
 }

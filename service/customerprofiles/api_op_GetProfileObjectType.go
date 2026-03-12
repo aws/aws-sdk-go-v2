@@ -90,6 +90,11 @@ type GetProfileObjectTypeOutput struct {
 	// The format of your sourceLastUpdatedTimestamp that was previously set up.
 	SourceLastUpdatedTimestampFormat *string
 
+	// An integer that determines the priority of this object type when data from
+	// multiple sources is ingested. Lower values take priority. Object types without a
+	// specified source priority default to the lowest priority.
+	SourcePriority *int32
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 

@@ -58,6 +58,9 @@ type ListOpportunitiesInput struct {
 	// This member is required.
 	Catalog *string
 
+	// Filter opportunities by creation date criteria.
+	CreatedDate *types.CreatedDateFilter
+
 	// Filters the opportunities based on the customer's company name. This allows
 	// partners to search for opportunities associated with a specific customer by
 	// matching the provided company name string.
@@ -98,6 +101,11 @@ type ListOpportunitiesInput struct {
 	// An object that specifies how the response is sorted. The default Sort.SortBy
 	// value is LastModifiedDate .
 	Sort *types.OpportunitySort
+
+	// Filters opportunities based on their target close date. This filter helps
+	// retrieve opportunities with an expected close date before or after a specified
+	// date.
+	TargetCloseDate *types.TargetCloseDateFilter
 
 	noSmithyDocumentSerde
 }

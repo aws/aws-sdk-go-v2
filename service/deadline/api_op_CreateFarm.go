@@ -43,6 +43,9 @@ type CreateFarmInput struct {
 	// The unique token which the server uses to recognize retries of the same request.
 	ClientToken *string
 
+	// The cost scale factor to apply on the farm.
+	CostScaleFactor *float32
+
 	// The description of the farm.
 	//
 	// This field can store any content. Escape or encode this content before

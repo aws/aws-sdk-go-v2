@@ -1556,6 +1556,67 @@ func validateAuthConfig(v *types.AuthConfig) error {
 			invalidParams.AddNested("OAuth", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.GeneralAuthorization != nil {
+		if err := validateAuthMaterials(v.GeneralAuthorization); err != nil {
+			invalidParams.AddNested("GeneralAuthorization", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthConfigUpdate(v *types.AuthConfigUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthConfigUpdate"}
+	if v.GeneralAuthorizationUpdate != nil {
+		if err := validateGeneralAuthorizationUpdate(v.GeneralAuthorizationUpdate); err != nil {
+			invalidParams.AddNested("GeneralAuthorizationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthMaterial(v *types.AuthMaterial) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthMaterial"}
+	if v.SecretsManager == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretsManager"))
+	} else if v.SecretsManager != nil {
+		if err := validateSecretsManager(v.SecretsManager); err != nil {
+			invalidParams.AddNested("SecretsManager", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AuthMaterialName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthMaterialName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthMaterials(v []types.AuthMaterial) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthMaterials"}
+	for i := range v {
+		if err := validateAuthMaterial(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1895,6 +1956,28 @@ func validateEndpointConfig(v *types.EndpointConfig) error {
 	}
 }
 
+func validateGeneralAuthorizationUpdate(v *types.GeneralAuthorizationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeneralAuthorizationUpdate"}
+	if v.AuthMaterialsToAdd != nil {
+		if err := validateAuthMaterials(v.AuthMaterialsToAdd); err != nil {
+			invalidParams.AddNested("AuthMaterialsToAdd", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AuthMaterialsToUpdate != nil {
+		if err := validateAuthMaterials(v.AuthMaterialsToUpdate); err != nil {
+			invalidParams.AddNested("AuthMaterialsToUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLambdaConfig(v *types.LambdaConfig) error {
 	if v == nil {
 		return nil
@@ -2093,9 +2176,6 @@ func validateOpCreateConnectorDestinationInput(v *CreateConnectorDestinationInpu
 	if v.CloudConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CloudConnectorId"))
 	}
-	if len(v.AuthType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
-	}
 	if v.AuthConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthConfig"))
 	} else if v.AuthConfig != nil {
@@ -2103,9 +2183,7 @@ func validateOpCreateConnectorDestinationInput(v *CreateConnectorDestinationInpu
 			invalidParams.AddNested("AuthConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SecretsManager == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecretsManager"))
-	} else if v.SecretsManager != nil {
+	if v.SecretsManager != nil {
 		if err := validateSecretsManager(v.SecretsManager); err != nil {
 			invalidParams.AddNested("SecretsManager", err.(smithy.InvalidParamsError))
 		}
@@ -3019,6 +3097,11 @@ func validateOpUpdateConnectorDestinationInput(v *UpdateConnectorDestinationInpu
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorDestinationInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.AuthConfig != nil {
+		if err := validateAuthConfigUpdate(v.AuthConfig); err != nil {
+			invalidParams.AddNested("AuthConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.SecretsManager != nil {
 		if err := validateSecretsManager(v.SecretsManager); err != nil {

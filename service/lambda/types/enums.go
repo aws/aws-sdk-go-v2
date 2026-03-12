@@ -148,7 +148,9 @@ type EventSourceMappingMetric string
 
 // Enum values for EventSourceMappingMetric
 const (
-	EventSourceMappingMetricEventCount EventSourceMappingMetric = "EventCount"
+	EventSourceMappingMetricEventCount   EventSourceMappingMetric = "EventCount"
+	EventSourceMappingMetricErrorCount   EventSourceMappingMetric = "ErrorCount"
+	EventSourceMappingMetricKafkaMetrics EventSourceMappingMetric = "KafkaMetrics"
 )
 
 // Values returns all known values for EventSourceMappingMetric. Note that this
@@ -158,6 +160,30 @@ const (
 func (EventSourceMappingMetric) Values() []EventSourceMappingMetric {
 	return []EventSourceMappingMetric{
 		"EventCount",
+		"ErrorCount",
+		"KafkaMetrics",
+	}
+}
+
+type EventSourceMappingSystemLogLevel string
+
+// Enum values for EventSourceMappingSystemLogLevel
+const (
+	EventSourceMappingSystemLogLevelDebug EventSourceMappingSystemLogLevel = "DEBUG"
+	EventSourceMappingSystemLogLevelInfo  EventSourceMappingSystemLogLevel = "INFO"
+	EventSourceMappingSystemLogLevelWarn  EventSourceMappingSystemLogLevel = "WARN"
+)
+
+// Values returns all known values for EventSourceMappingSystemLogLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventSourceMappingSystemLogLevel) Values() []EventSourceMappingSystemLogLevel {
+	return []EventSourceMappingSystemLogLevel{
+		"DEBUG",
+		"INFO",
+		"WARN",
 	}
 }
 

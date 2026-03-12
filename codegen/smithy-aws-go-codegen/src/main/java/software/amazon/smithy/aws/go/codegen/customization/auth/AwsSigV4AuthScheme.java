@@ -15,16 +15,18 @@
 
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
-import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
-import software.amazon.smithy.go.codegen.SmithyGoTypes;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.integration.auth.SigV4Definition;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
@@ -59,32 +61,32 @@ public class AwsSigV4AuthScheme implements GoIntegration {
 
     public static class AwsSigV4 extends SigV4Definition {
         @Override
-        public GoWriter.Writable generateDefaultAuthScheme() {
+        public Writable generateDefaultAuthScheme() {
             return goTemplate("""
                     $T($S, &$T{
                         Signer: options.HTTPSignerV4,
                         Logger: options.Logger,
                         LogSigning: options.ClientLogMode.IsSigning(),
                     })""",
-                    SdkGoTypes.Internal.Auth.NewHTTPAuthScheme,
+                    AwsGoDependency.INTERNAL_AUTH.func("NewHTTPAuthScheme"),
                     SigV4Trait.ID.toString(),
-                    SdkGoTypes.Internal.Auth.Smithy.V4SignerAdapter);
+                    AwsGoDependency.INTERNAL_AUTH_SMITHY.struct("V4SignerAdapter"));
         }
 
         @Override
-        public GoWriter.Writable generateOptionsIdentityResolver() {
+        public Writable generateOptionsIdentityResolver() {
             return goTemplate("getSigV4IdentityResolver(o)");
         }
     }
 
-    private GoWriter.Writable generateAdditionalSource() {
-        return GoWriter.ChainWritable.of(
+    private Writable generateAdditionalSource() {
+        return ChainWritable.of(
                 generateGetIdentityResolver(),
                 generateHelpers()
         ).compose();
     }
 
-    private GoWriter.Writable generateGetIdentityResolver() {
+    private Writable generateGetIdentityResolver() {
         return goTemplate("""
                 func getSigV4IdentityResolver(o Options) $T {
                     if o.Credentials != nil {
@@ -93,11 +95,11 @@ public class AwsSigV4AuthScheme implements GoIntegration {
                     return nil
                 }
                 """,
-                SmithyGoTypes.Auth.IdentityResolver,
-                SdkGoTypes.Internal.Auth.Smithy.CredentialsProviderAdapter);
+                SmithyGoDependency.SMITHY_AUTH.interfaceSymbol("IdentityResolver"),
+                AwsGoDependency.INTERNAL_AUTH_SMITHY.struct("CredentialsProviderAdapter"));
     }
 
-    private GoWriter.Writable generateHelpers() {
+    private Writable generateHelpers() {
         return goTemplate("""
                 // WithSigV4SigningName applies an override to the authentication workflow to
                 // use the given signing name for SigV4-authenticated operations.
@@ -136,14 +138,14 @@ public class AwsSigV4AuthScheme implements GoIntegration {
                 }
                 """,
                 MapUtils.of(
-                        "stack", SmithyGoTypes.Middleware.Stack,
-                        "before", SmithyGoTypes.Middleware.Before,
+                        "stack", SmithyGoDependency.SMITHY_MIDDLEWARE.struct("Stack"),
+                        "before", SmithyGoDependency.SMITHY_MIDDLEWARE.func("Before"),
                         "nameMW", generateInitializeMiddlewareFunc(goTemplate("""
                                 return next.HandleInitialize($T(ctx, name), in)
-                                """, SdkGoTypes.Aws.Middleware.SetSigningName)),
+                                """, AwsGoDependency.AWS_MIDDLEWARE.func("SetSigningName"))),
                         "regionMW", generateInitializeMiddlewareFunc(goTemplate("""
                                 return next.HandleInitialize($T(ctx, region), in)
-                                """, SdkGoTypes.Aws.Middleware.SetSigningRegion))
+                                """, AwsGoDependency.AWS_MIDDLEWARE.func("SetSigningRegion")))
                 ));
     }
 }

@@ -1,3 +1,12 @@
+# v1.64.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.64.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.0 (2026-01-22)
 
 * **Feature**: This release adds support for Amazon EC2 Auto Scaling group deletion protection

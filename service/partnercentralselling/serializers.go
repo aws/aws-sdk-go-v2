@@ -2834,6 +2834,23 @@ func awsAwsjson10_serializeDocumentContextIdentifiers(v []string, value smithyjs
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCreatedDateFilter(v *types.CreatedDateFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AfterCreatedDate != nil {
+		ok := object.Key("AfterCreatedDate")
+		ok.String(smithytime.FormatDateTime(*v.AfterCreatedDate))
+	}
+
+	if v.BeforeCreatedDate != nil {
+		ok := object.Key("BeforeCreatedDate")
+		ok.String(smithytime.FormatDateTime(*v.BeforeCreatedDate))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentCustomer(v *types.Customer, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4060,6 +4077,23 @@ func awsAwsjson10_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentTargetCloseDateFilter(v *types.TargetCloseDateFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AfterTargetCloseDate != nil {
+		ok := object.Key("AfterTargetCloseDate")
+		ok.String(*v.AfterTargetCloseDate)
+	}
+
+	if v.BeforeTargetCloseDate != nil {
+		ok := object.Key("BeforeTargetCloseDate")
+		ok.String(*v.BeforeTargetCloseDate)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentTaskIdentifiers(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4978,6 +5012,13 @@ func awsAwsjson10_serializeOpDocumentListOpportunitiesInput(v *ListOpportunities
 		ok.String(*v.Catalog)
 	}
 
+	if v.CreatedDate != nil {
+		ok := object.Key("CreatedDate")
+		if err := awsAwsjson10_serializeDocumentCreatedDateFilter(v.CreatedDate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CustomerCompanyName != nil {
 		ok := object.Key("CustomerCompanyName")
 		if err := awsAwsjson10_serializeDocumentStringList(v.CustomerCompanyName, ok); err != nil {
@@ -5026,6 +5067,13 @@ func awsAwsjson10_serializeOpDocumentListOpportunitiesInput(v *ListOpportunities
 	if v.Sort != nil {
 		ok := object.Key("Sort")
 		if err := awsAwsjson10_serializeDocumentOpportunitySort(v.Sort, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetCloseDate != nil {
+		ok := object.Key("TargetCloseDate")
+		if err := awsAwsjson10_serializeDocumentTargetCloseDateFilter(v.TargetCloseDate, ok); err != nil {
 			return err
 		}
 	}

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a private graph endpoint to allow private access from to the graph from
+// Create a private graph endpoint to allow private access to the graph from
 // within a VPC. You can attach security groups to the private graph endpoint.
 //
 // VPC endpoint charges apply.
@@ -44,7 +44,7 @@ type CreatePrivateGraphEndpointInput struct {
 	//  The VPC in which the private graph endpoint needs to be created.
 	VpcId *string
 
-	// Security groups to be attached to the private graph endpoint..
+	// Security groups to be attached to the private graph endpoint.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde
@@ -72,7 +72,7 @@ type CreatePrivateGraphEndpointOutput struct {
 	// This member is required.
 	VpcId *string
 
-	// Endpoint ID of the prviate grpah endpoint.
+	// Endpoint ID of the private graph endpoint.
 	VpcEndpointId *string
 
 	// Metadata pertaining to the operation's result.

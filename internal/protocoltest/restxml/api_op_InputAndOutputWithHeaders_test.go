@@ -5,11 +5,9 @@ package restxml
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"errors"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -24,7 +22,7 @@ import (
 	"time"
 )
 
-func TestClient_InputAndOutputWithHeaders_awsRestxmlSerialize(t *testing.T) {
+func TestClient_InputAndOutputWithHeaders_Serialize(t *testing.T) {
 	cases := map[string]struct {
 		Params        *InputAndOutputWithHeadersInput
 		ExpectMethod  string
@@ -233,18 +231,18 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlSerialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				HTTPClient:               protocoltesthttp.NewClient(),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			result, err := client.InputAndOutputWithHeaders(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
+					return errors.Join(
+						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
+						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
+						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
+					)
+
 				})
 			})
 			if err != nil {
@@ -275,7 +273,218 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlSerialize(t *testing.T) {
 	}
 }
 
-func TestClient_InputAndOutputWithHeaders_awsRestxmlDeserialize(t *testing.T) {
+func BenchmarkClient_InputAndOutputWithHeaders_Serialize(b *testing.B) {
+	cases := map[string]struct {
+		Params        *InputAndOutputWithHeadersInput
+		ExpectMethod  string
+		ExpectURIPath string
+		ExpectQuery   []smithytesting.QueryItem
+		RequireQuery  []string
+		ForbidQuery   []string
+		ExpectHeader  http.Header
+		RequireHeader []string
+		ForbidHeader  []string
+		Host          *url.URL
+		BodyMediaType string
+		BodyAssert    func(io.Reader) error
+	}{
+		"InputAndOutputWithStringHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderString: ptr.String("Hello"),
+				HeaderStringList: []string{
+					"a",
+					"b",
+					"c",
+				},
+				HeaderStringSet: []string{
+					"a",
+					"b",
+					"c",
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-String":     []string{"Hello"},
+				"X-StringList": []string{"a, b, c"},
+				"X-StringSet":  []string{"a, b, c"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"InputAndOutputWithNumericHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderByte:    ptr.Int8(1),
+				HeaderShort:   ptr.Int16(123),
+				HeaderInteger: ptr.Int32(123),
+				HeaderLong:    ptr.Int64(123),
+				HeaderFloat:   ptr.Float32(1.1),
+				HeaderDouble:  ptr.Float64(1.1),
+				HeaderIntegerList: []int32{
+					1,
+					2,
+					3,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Byte":        []string{"1"},
+				"X-Double":      []string{"1.1"},
+				"X-Float":       []string{"1.1"},
+				"X-Integer":     []string{"123"},
+				"X-IntegerList": []string{"1, 2, 3"},
+				"X-Long":        []string{"123"},
+				"X-Short":       []string{"123"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"InputAndOutputWithBooleanHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderTrueBool:  ptr.Bool(true),
+				HeaderFalseBool: ptr.Bool(false),
+				HeaderBooleanList: []bool{
+					true,
+					false,
+					true,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Boolean1":    []string{"true"},
+				"X-Boolean2":    []string{"false"},
+				"X-BooleanList": []string{"true, false, true"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"InputAndOutputWithTimestampHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderTimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1576540098),
+					smithytime.ParseEpochSeconds(1576540098),
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-TimestampList": []string{"Mon, 16 Dec 2019 23:48:18 GMT, Mon, 16 Dec 2019 23:48:18 GMT"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"InputAndOutputWithEnumHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderEnum: types.FooEnum("Foo"),
+				HeaderEnumList: []types.FooEnum{
+					types.FooEnum("Foo"),
+					types.FooEnum("Bar"),
+					types.FooEnum("Baz"),
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Enum":     []string{"Foo"},
+				"X-EnumList": []string{"Foo, Bar, Baz"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlSupportsNaNFloatHeaderInputs": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderFloat:  ptr.Float32(float32(math.NaN())),
+				HeaderDouble: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Double": []string{"NaN"},
+				"X-Float":  []string{"NaN"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlSupportsInfinityFloatHeaderInputs": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(1))),
+				HeaderDouble: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Double": []string{"Infinity"},
+				"X-Float":  []string{"Infinity"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		"RestXmlSupportsNegativeInfinityFloatHeaderInputs": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(-1))),
+				HeaderDouble: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Double": []string{"-Infinity"},
+				"X-Float":  []string{"-Infinity"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			serverURL := "http://localhost:8888/"
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					panic(err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
+			client := New(Options{
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				HTTPClient:               &protocolTestHTTPClient{},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.InputAndOutputWithHeaders(context.Background(), c.Params)
+			}
+		})
+	}
+}
+
+func TestClient_InputAndOutputWithHeaders_Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -458,13 +667,8 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-				Region:                   "us-west-2",
 			})
 			var params InputAndOutputWithHeadersInput
 			result, err := client.InputAndOutputWithHeaders(context.Background(), &params)
@@ -476,6 +680,192 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlDeserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func BenchmarkClient_InputAndOutputWithHeaders_Deserialize(b *testing.B) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectResult  *InputAndOutputWithHeadersOutput
+	}{
+		"InputAndOutputWithStringHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-String":     []string{"Hello"},
+				"X-StringList": []string{"a, b, c"},
+				"X-StringSet":  []string{"a, b, c"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderString: ptr.String("Hello"),
+				HeaderStringList: []string{
+					"a",
+					"b",
+					"c",
+				},
+				HeaderStringSet: []string{
+					"a",
+					"b",
+					"c",
+				},
+			},
+		},
+		"InputAndOutputWithNumericHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Byte":        []string{"1"},
+				"X-Double":      []string{"1.1"},
+				"X-Float":       []string{"1.1"},
+				"X-Integer":     []string{"123"},
+				"X-IntegerList": []string{"1, 2, 3"},
+				"X-Long":        []string{"123"},
+				"X-Short":       []string{"123"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderByte:    ptr.Int8(1),
+				HeaderShort:   ptr.Int16(123),
+				HeaderInteger: ptr.Int32(123),
+				HeaderLong:    ptr.Int64(123),
+				HeaderFloat:   ptr.Float32(1.1),
+				HeaderDouble:  ptr.Float64(1.1),
+				HeaderIntegerList: []int32{
+					1,
+					2,
+					3,
+				},
+			},
+		},
+		"InputAndOutputWithBooleanHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Boolean1":    []string{"true"},
+				"X-Boolean2":    []string{"false"},
+				"X-BooleanList": []string{"true, false, true"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderTrueBool:  ptr.Bool(true),
+				HeaderFalseBool: ptr.Bool(false),
+				HeaderBooleanList: []bool{
+					true,
+					false,
+					true,
+				},
+			},
+		},
+		"InputAndOutputWithTimestampHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-TimestampList": []string{"Mon, 16 Dec 2019 23:48:18 GMT, Mon, 16 Dec 2019 23:48:18 GMT"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderTimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1576540098),
+					smithytime.ParseEpochSeconds(1576540098),
+				},
+			},
+		},
+		"InputAndOutputWithEnumHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Enum":     []string{"Foo"},
+				"X-EnumList": []string{"Foo, Bar, Baz"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderEnum: types.FooEnum("Foo"),
+				HeaderEnumList: []types.FooEnum{
+					types.FooEnum("Foo"),
+					types.FooEnum("Bar"),
+					types.FooEnum("Baz"),
+				},
+			},
+		},
+		"RestXmlSupportsNaNFloatHeaderOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Double": []string{"NaN"},
+				"X-Float":  []string{"NaN"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderFloat:  ptr.Float32(float32(math.NaN())),
+				HeaderDouble: ptr.Float64(math.NaN()),
+			},
+		},
+		"RestXmlSupportsInfinityFloatHeaderOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Double": []string{"Infinity"},
+				"X-Float":  []string{"Infinity"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(1))),
+				HeaderDouble: ptr.Float64(math.Inf(1)),
+			},
+		},
+		"RestXmlSupportsNegativeInfinityFloatHeaderOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Double": []string{"-Infinity"},
+				"X-Float":  []string{"-Infinity"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(-1))),
+				HeaderDouble: ptr.Float64(math.Inf(-1)),
+			},
+		},
+	}
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			var params InputAndOutputWithHeadersInput
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
+				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
+			})
+			for i := 0; i < b.N; i++ {
+				client.InputAndOutputWithHeaders(context.Background(), &params)
 			}
 		})
 	}

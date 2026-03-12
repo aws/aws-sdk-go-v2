@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddRegion struct {
+}
+
+func (*validateOpAddRegion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddRegion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddRegionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddRegionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAttachCustomerManagedPolicyReferenceToPermissionSet struct {
 }
 
@@ -610,6 +630,26 @@ func (m *validateOpDescribePermissionSetProvisioningStatus) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeRegion struct {
+}
+
+func (*validateOpDescribeRegion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRegion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRegionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRegionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTrustedTokenIssuer struct {
 }
 
@@ -1130,6 +1170,26 @@ func (m *validateOpListPermissionSetsProvisionedToAccount) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRegions struct {
+}
+
+func (*validateOpListRegions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRegions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRegionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRegionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -1330,6 +1390,26 @@ func (m *validateOpPutPermissionsBoundaryToPermissionSet) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveRegion struct {
+}
+
+func (*validateOpRemoveRegion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveRegion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveRegionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveRegionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1470,6 +1550,10 @@ func (m *validateOpUpdateTrustedTokenIssuer) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAddRegionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddRegion{}, middleware.After)
+}
+
 func addOpAttachCustomerManagedPolicyReferenceToPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAttachCustomerManagedPolicyReferenceToPermissionSet{}, middleware.After)
 }
@@ -1590,6 +1674,10 @@ func addOpDescribePermissionSetProvisioningStatusValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpDescribePermissionSetProvisioningStatus{}, middleware.After)
 }
 
+func addOpDescribeRegionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRegion{}, middleware.After)
+}
+
 func addOpDescribeTrustedTokenIssuerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTrustedTokenIssuer{}, middleware.After)
 }
@@ -1694,6 +1782,10 @@ func addOpListPermissionSetsProvisionedToAccountValidationMiddleware(stack *midd
 	return stack.Initialize.Add(&validateOpListPermissionSetsProvisionedToAccount{}, middleware.After)
 }
 
+func addOpListRegionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRegions{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -1732,6 +1824,10 @@ func addOpPutInlinePolicyToPermissionSetValidationMiddleware(stack *middleware.S
 
 func addOpPutPermissionsBoundaryToPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutPermissionsBoundaryToPermissionSet{}, middleware.After)
+}
+
+func addOpRemoveRegionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveRegion{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2035,6 +2131,24 @@ func validateUpdateApplicationPortalOptions(v *types.UpdateApplicationPortalOpti
 		if err := validateSignInOptions(v.SignInOptions); err != nil {
 			invalidParams.AddNested("SignInOptions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddRegionInput(v *AddRegionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddRegionInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2638,6 +2752,24 @@ func validateOpDescribePermissionSetProvisioningStatusInput(v *DescribePermissio
 	}
 }
 
+func validateOpDescribeRegionInput(v *DescribeRegionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRegionInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeTrustedTokenIssuerInput(v *DescribeTrustedTokenIssuerInput) error {
 	if v == nil {
 		return nil
@@ -3089,6 +3221,21 @@ func validateOpListPermissionSetsProvisionedToAccountInput(v *ListPermissionSets
 	}
 }
 
+func validateOpListRegionsInput(v *ListRegionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRegionsInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -3275,6 +3422,24 @@ func validateOpPutPermissionsBoundaryToPermissionSetInput(v *PutPermissionsBound
 		if err := validatePermissionsBoundary(v.PermissionsBoundary); err != nil {
 			invalidParams.AddNested("PermissionsBoundary", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveRegionInput(v *RemoveRegionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveRegionInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

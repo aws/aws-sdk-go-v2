@@ -4827,6 +4827,46 @@ func validateScte35TimeSignalScheduleActionSettings(v *types.Scte35TimeSignalSch
 	}
 }
 
+func validateSrtListenerDecryptionRequest(v *types.SrtListenerDecryptionRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SrtListenerDecryptionRequest"}
+	if len(v.Algorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Algorithm"))
+	}
+	if v.PassphraseSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PassphraseSecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSrtListenerSettingsRequest(v *types.SrtListenerSettingsRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SrtListenerSettingsRequest"}
+	if v.Decryption == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Decryption"))
+	} else if v.Decryption != nil {
+		if err := validateSrtListenerDecryptionRequest(v.Decryption); err != nil {
+			invalidParams.AddNested("Decryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MinimumLatency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumLatency"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSrtOutputSettings(v *types.SrtOutputSettings) error {
 	if v == nil {
 		return nil
@@ -4841,6 +4881,23 @@ func validateSrtOutputSettings(v *types.SrtOutputSettings) error {
 	}
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSrtSettingsRequest(v *types.SrtSettingsRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SrtSettingsRequest"}
+	if v.SrtListenerSettings != nil {
+		if err := validateSrtListenerSettingsRequest(v.SrtListenerSettings); err != nil {
+			invalidParams.AddNested("SrtListenerSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5334,6 +5391,11 @@ func validateOpCreateInputInput(v *CreateInputInput) error {
 	if v.Vpc != nil {
 		if err := validateInputVpcRequest(v.Vpc); err != nil {
 			invalidParams.AddNested("Vpc", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SrtSettings != nil {
+		if err := validateSrtSettingsRequest(v.SrtSettings); err != nil {
+			invalidParams.AddNested("SrtSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.MulticastSettings != nil {
@@ -6613,6 +6675,11 @@ func validateOpUpdateInputInput(v *UpdateInputInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateInputInput"}
 	if v.InputId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputId"))
+	}
+	if v.SrtSettings != nil {
+		if err := validateSrtSettingsRequest(v.SrtSettings); err != nil {
+			invalidParams.AddNested("SrtSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.MulticastSettings != nil {
 		if err := validateMulticastSettingsUpdateRequest(v.MulticastSettings); err != nil {

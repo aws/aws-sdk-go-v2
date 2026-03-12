@@ -536,6 +536,25 @@ func (AuthenticationScheme) Values() []AuthenticationScheme {
 	}
 }
 
+type Av1BitDepth string
+
+// Enum values for Av1BitDepth
+const (
+	Av1BitDepthDepth10 Av1BitDepth = "DEPTH_10"
+	Av1BitDepthDepth8  Av1BitDepth = "DEPTH_8"
+)
+
+// Values returns all known values for Av1BitDepth. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1BitDepth) Values() []Av1BitDepth {
+	return []Av1BitDepth{
+		"DEPTH_10",
+		"DEPTH_8",
+	}
+}
+
 type Av1GopSizeUnits string
 
 // Enum values for Av1GopSizeUnits
@@ -694,6 +713,26 @@ func (Av1TemporalAq) Values() []Av1TemporalAq {
 	return []Av1TemporalAq{
 		"DISABLED",
 		"ENABLED",
+	}
+}
+
+type Av1TimecodeInsertionBehavior string
+
+// Enum values for Av1TimecodeInsertionBehavior
+const (
+	Av1TimecodeInsertionBehaviorDisabled    Av1TimecodeInsertionBehavior = "DISABLED"
+	Av1TimecodeInsertionBehaviorMetadataObu Av1TimecodeInsertionBehavior = "METADATA_OBU"
+)
+
+// Values returns all known values for Av1TimecodeInsertionBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1TimecodeInsertionBehavior) Values() []Av1TimecodeInsertionBehavior {
+	return []Av1TimecodeInsertionBehavior{
+		"DISABLED",
+		"METADATA_OBU",
 	}
 }
 
@@ -1418,6 +1457,25 @@ func (ColorSpace) Values() []ColorSpace {
 		"HLG_2020",
 		"REC_601",
 		"REC_709",
+	}
+}
+
+type ConnectionMode string
+
+// Enum values for ConnectionMode
+const (
+	ConnectionModeCaller   ConnectionMode = "CALLER"
+	ConnectionModeListener ConnectionMode = "LISTENER"
+)
+
+// Values returns all known values for ConnectionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionMode) Values() []ConnectionMode {
+	return []ConnectionMode{
+		"CALLER",
+		"LISTENER",
 	}
 }
 
@@ -4707,6 +4765,7 @@ const (
 	InputTypeSmpte2110ReceiverGroup InputType = "SMPTE_2110_RECEIVER_GROUP"
 	InputTypeSdi                    InputType = "SDI"
 	InputTypeMediaconnectRouter     InputType = "MEDIACONNECT_ROUTER"
+	InputTypeSrtListener            InputType = "SRT_LISTENER"
 )
 
 // Values returns all known values for InputType. Note that this can be expanded
@@ -4730,6 +4789,7 @@ func (InputType) Values() []InputType {
 		"SMPTE_2110_RECEIVER_GROUP",
 		"SDI",
 		"MEDIACONNECT_ROUTER",
+		"SRT_LISTENER",
 	}
 }
 
@@ -7118,6 +7178,7 @@ type VideoDescriptionScalingBehavior string
 const (
 	VideoDescriptionScalingBehaviorDefault         VideoDescriptionScalingBehavior = "DEFAULT"
 	VideoDescriptionScalingBehaviorStretchToOutput VideoDescriptionScalingBehavior = "STRETCH_TO_OUTPUT"
+	VideoDescriptionScalingBehaviorSmartCrop       VideoDescriptionScalingBehavior = "SMART_CROP"
 )
 
 // Values returns all known values for VideoDescriptionScalingBehavior. Note that
@@ -7129,6 +7190,7 @@ func (VideoDescriptionScalingBehavior) Values() []VideoDescriptionScalingBehavio
 	return []VideoDescriptionScalingBehavior{
 		"DEFAULT",
 		"STRETCH_TO_OUTPUT",
+		"SMART_CROP",
 	}
 }
 

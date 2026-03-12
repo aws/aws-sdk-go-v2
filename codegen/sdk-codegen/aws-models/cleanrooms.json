@@ -1719,9 +1719,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
+                    "min": 0,
                     "max": 200
                 },
-                "smithy.api#pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+$"
+                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+$"
             }
         },
         "com.amazonaws.cleanrooms#AnalysisTemplateArnList": {
@@ -2142,6 +2143,16 @@
                 }
             }
         },
+        "com.amazonaws.cleanrooms#AthenaCatalogName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
         "com.amazonaws.cleanrooms#AthenaDatabaseName": {
             "type": "string",
             "traits": {
@@ -2204,6 +2215,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The table reference.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "catalogName": {
+                    "target": "com.amazonaws.cleanrooms#AthenaCatalogName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The catalog name.</p>"
                     }
                 }
             },
@@ -15696,18 +15713,23 @@
             }
         },
         "com.amazonaws.cleanrooms#ResultFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "CSV",
-                        "value": "CSV"
-                    },
-                    {
-                        "name": "PARQUET",
-                        "value": "PARQUET"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
                     }
-                ]
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "File format of the returned data.\n"
             }
         },
         "com.amazonaws.cleanrooms#RoleArn": {
@@ -18617,12 +18639,18 @@
                 "type": {
                     "target": "com.amazonaws.cleanrooms#WorkerComputeType",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#default": "CR.1X",
                         "smithy.api#documentation": "<p> The worker compute configuration type.</p>"
                     }
                 },
                 "number": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#default": 16,
                         "smithy.api#documentation": "<p> The number of workers.</p> <p>SQL queries support a minimum value of 2 and a maximum value of 400. </p> <p>PySpark jobs support a minimum value of 4 and a maximum value of 128.</p>",
                         "smithy.api#range": {
                             "min": 2,

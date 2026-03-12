@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates an embed URL that you can use to embed an Amazon Quick Suite
-// experience in your website. This action can be used for any type of user
-// registered in an Amazon Quick Suite account. Before you use this action, make
-// sure that you have configured the relevant Amazon Quick Suite resource and
-// permissions.
+// Generates an embed URL that you can use to embed an Amazon Quick experience in
+// your website. This action can be used for any type of user registered in an
+// Amazon Quick account. Before you use this action, make sure that you have
+// configured the relevant Amazon Quick resource and permissions.
 //
 // The following rules apply to the generated URL:
 //
@@ -30,15 +29,15 @@ import (
 //	(maximum). The default session duration is 10 hours.
 //
 //	- You are charged only when the URL is used or there is interaction with
-//	Amazon Quick Suite.
+//	Amazon Quick.
 //
-// For more information, see [Embedded Analytics] in the Amazon Quick Suite User Guide.
+// For more information, see [Embedded Analytics] in the Amazon Quick User Guide.
 //
 // For more information about the high-level steps for embedding and for an
-// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Suite Developer Portal].
+// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Developer Portal].
 //
 // [Embedded Analytics]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html
-// [Amazon Quick Suite Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+// [Amazon Quick Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
 // [SessionLifetimeInMinutes]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes
 func (c *Client) GenerateEmbedUrlForRegisteredUser(ctx context.Context, params *GenerateEmbedUrlForRegisteredUserInput, optFns ...func(*Options)) (*GenerateEmbedUrlForRegisteredUserOutput, error) {
 	if params == nil {
@@ -64,9 +63,9 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 	AwsAccountId *string
 
 	// The experience that you want to embed. For registered users, you can embed
-	// Quick Suite dashboards, Amazon Quick Sight visuals, the Amazon Quick Sight Q
-	// search bar, the Amazon Quick Sight Generative Q&A experience, or the entire
-	// Amazon Quick Sight console.
+	// Quick dashboards, Amazon Quick Sight visuals, the Amazon Quick Sight Q search
+	// bar, the Amazon Quick Sight Generative Q&A experience, or the entire Amazon
+	// Quick Sight console.
 	//
 	// This member is required.
 	ExperienceConfiguration *types.RegisteredUserEmbeddingExperienceConfiguration

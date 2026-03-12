@@ -9,6 +9,7 @@ DuplexStreamWithInitialMessages
 		ResolveEndpoint
 		OperationSerializer
 	Build stack step
+		EventStreamBuildMiddleware
 		ClientRequestID
 		SetCredentialSourceMiddleware
 		UserAgent

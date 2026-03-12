@@ -10,6 +10,8 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.MapUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ChainWritable;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 
@@ -48,7 +50,7 @@ public class AwsEndpointConfigTestGenerator implements GoIntegration {
 
     }
 
-    private GoWriter.Writable generate() {
+    private Writable generate() {
         return (GoWriter w) -> {
             w.write(
                 """
@@ -62,7 +64,7 @@ public class AwsEndpointConfigTestGenerator implements GoIntegration {
         };
     }
 
-    private GoWriter.Writable generateMockProviders() {
+    private Writable generateMockProviders() {
         return goTemplate(
             """
                 type mockConfigSource struct {
@@ -92,7 +94,7 @@ public class AwsEndpointConfigTestGenerator implements GoIntegration {
     }
 
 
-    private GoWriter.Writable generateTestFunction() {
+    private Writable generateTestFunction() {
         return (GoWriter w) -> {
             w.write(
                 """
@@ -109,7 +111,7 @@ public class AwsEndpointConfigTestGenerator implements GoIntegration {
         };
     }
 
-    private GoWriter.Writable generateCases() {
+    private Writable generateCases() {
         return goTemplate(
             """
                 cases := map[string]struct {
@@ -174,7 +176,7 @@ public class AwsEndpointConfigTestGenerator implements GoIntegration {
         );
     }
 
-    private GoWriter.Writable generateTests() {
+    private Writable generateTests() {
         return goTemplate(
             """
                 for name, c := range cases {

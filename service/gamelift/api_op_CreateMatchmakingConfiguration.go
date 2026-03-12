@@ -133,9 +133,14 @@ type CreateMatchmakingConfigurationInput struct {
 	// the new GameSession object that is created for a successful match. This
 	// parameter is not used if FlexMatchMode is set to STANDALONE .
 	//
-	// Avoid using periods (".") in property keys if you plan to search for game
-	// sessions by properties. Property keys containing periods cannot be searched and
-	// will be filtered out from search results due to search index limitations.
+	//   - Avoid using periods (".") in property keys if you plan to search for game
+	//   sessions by properties. Property keys containing periods cannot be searched and
+	//   will be filtered out from search results due to search index limitations.
+	//
+	//   - If you use SearchGameSessions API, there is a limit of 500 game property
+	//   keys across all game sessions and all fleets per region. If the limit is
+	//   exceeded, there will potentially be game session entries missing from
+	//   SearchGameSessions API results.
 	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.

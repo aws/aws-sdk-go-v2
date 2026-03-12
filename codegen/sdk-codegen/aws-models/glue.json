@@ -211,6 +211,9 @@
                     "target": "com.amazonaws.glue#DeleteConnection"
                 },
                 {
+                    "target": "com.amazonaws.glue#DeleteConnectionType"
+                },
+                {
                     "target": "com.amazonaws.glue#DeleteCrawler"
                 },
                 {
@@ -641,6 +644,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#QuerySchemaVersionMetadata"
+                },
+                {
+                    "target": "com.amazonaws.glue#RegisterConnectionType"
                 },
                 {
                     "target": "com.amazonaws.glue#RegisterSchemaVersion"
@@ -2885,6 +2891,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>For supplying basic auth credentials when not providing a <code>SecretArn</code> value.</p>"
+            }
+        },
+        "com.amazonaws.glue#BasicAuthenticationProperties": {
+            "type": "structure",
+            "members": {
+                "Username": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username property name to use for Basic authentication credentials.</p>"
+                    }
+                },
+                "Password": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password property name to use for Basic authentication credentials.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Basic authentication configuration that defines the username and password properties for HTTP Basic authentication.</p>"
             }
         },
         "com.amazonaws.glue#BasicCatalogTarget": {
@@ -5908,6 +5934,56 @@
                 "target": "com.amazonaws.glue#NameString"
             }
         },
+        "com.amazonaws.glue#ClientCredentialsProperties": {
+            "type": "structure",
+            "members": {
+                "TokenUrl": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token endpoint URL where the client will request access tokens using client credentials.</p>"
+                    }
+                },
+                "RequestMethod": {
+                    "target": "com.amazonaws.glue#HTTPMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP method to use when making token requests, typically POST.</p>"
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.glue#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type to use for token requests, such as application/x-www-form-urlencoded or application/json.</p>"
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 client identifier provided by the authorization server.</p>"
+                    }
+                },
+                "ClientSecret": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 client secret provided by the authorization server.</p>"
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 scope that defines the level of access requested for the client credentials flow.</p>"
+                    }
+                },
+                "TokenUrlParameters": {
+                    "target": "com.amazonaws.glue#ConnectorPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional parameters to include in token URL requests as key-value pairs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>OAuth2 client credentials configuration that defines the properties needed for the Client Credentials grant type flow.</p>"
+            }
+        },
         "com.amazonaws.glue#CloudWatchEncryption": {
             "type": "structure",
             "members": {
@@ -8019,6 +8095,26 @@
                 }
             }
         },
+        "com.amazonaws.glue#ConnectionPropertiesConfiguration": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base instance URL for the endpoint that this connection type will connect to.</p>"
+                    }
+                },
+                "AdditionalRequestParameters": {
+                    "target": "com.amazonaws.glue#ConnectorPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs of additional request parameters that may be needed during connection creation, such as API versions or service-specific configuration options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines the base URL and additional request parameters needed during connection creation.</p>"
+            }
+        },
         "com.amazonaws.glue#ConnectionPropertyKey": {
             "type": "enum",
             "members": {
@@ -8958,7 +9054,7 @@
                 "Categories": {
                     "target": "com.amazonaws.glue#ListOfString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of categories that this connection type belongs to. Categories help users filter and find appropriate connection types based on their \n      use cases.</p>"
+                        "smithy.api#documentation": "<p>A list of categories that this connection type belongs to. Categories help users filter and find appropriate connection types based on their\n      use cases.</p>"
                     }
                 },
                 "Capabilities": {
@@ -8976,7 +9072,7 @@
                 "ConnectionTypeVariants": {
                     "target": "com.amazonaws.glue#ConnectionTypeVariantList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of variants available for this connection type. Different variants may provide specialized configurations for specific use cases or \n      implementations of the same general connection type.</p>"
+                        "smithy.api#documentation": "<p>A list of variants available for this connection type. Different variants may provide specialized configurations for specific use cases or\n      implementations of the same general connection type.</p>"
                     }
                 }
             },
@@ -9019,7 +9115,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a variant of a connection type in Glue Data Catalog. Connection type variants provide specific configurations and behaviors \n      for different implementations of the same general connection type.</p>"
+                "smithy.api#documentation": "<p>Represents a variant of a connection type in Glue. Connection type variants provide specific configurations and behaviors\n      for different implementations of the same general connection type.</p>"
             }
         },
         "com.amazonaws.glue#ConnectionTypeVariantList": {
@@ -9040,6 +9136,104 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the connections used by a job.</p>"
+            }
+        },
+        "com.amazonaws.glue#ConnectorAuthenticationConfiguration": {
+            "type": "structure",
+            "members": {
+                "AuthenticationTypes": {
+                    "target": "com.amazonaws.glue#AuthenticationTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of authentication types supported by this connection type, such as Basic, OAuth2, or Custom authentication methods.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OAuth2Properties": {
+                    "target": "com.amazonaws.glue#ConnectorOAuth2Properties"
+                },
+                "BasicAuthenticationProperties": {
+                    "target": "com.amazonaws.glue#BasicAuthenticationProperties"
+                },
+                "CustomAuthenticationProperties": {
+                    "target": "com.amazonaws.glue#CustomAuthenticationProperties"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines the supported authentication types and required properties for the connection type.</p>"
+            }
+        },
+        "com.amazonaws.glue#ConnectorAuthorizationCodeProperties": {
+            "type": "structure",
+            "members": {
+                "AuthorizationCodeUrl": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization endpoint URL where users will be redirected to grant authorization.</p>"
+                    }
+                },
+                "AuthorizationCode": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization code received from the authorization server after user consent.</p>"
+                    }
+                },
+                "RedirectUri": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redirect URI that must match the URI registered with the authorization server.</p>"
+                    }
+                },
+                "TokenUrl": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token endpoint URL where the authorization code will be exchanged for an access token.</p>"
+                    }
+                },
+                "RequestMethod": {
+                    "target": "com.amazonaws.glue#HTTPMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP method to use when making token exchange requests, typically POST.</p>"
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.glue#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type to use for token exchange requests, such as application/x-www-form-urlencoded or application/json.</p>"
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 client identifier provided by the authorization server.</p>"
+                    }
+                },
+                "ClientSecret": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 client secret provided by the authorization server.</p>"
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 scope that defines the level of access requested for the authorization code flow.</p>"
+                    }
+                },
+                "Prompt": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 prompt parameter that controls the authorization server's behavior during user authentication.</p>"
+                    }
+                },
+                "TokenUrlParameters": {
+                    "target": "com.amazonaws.glue#ConnectorPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional parameters to include in token URL requests as key-value pairs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>OAuth2 authorization code configuration that defines the properties needed for the Authorization Code grant type flow.</p>"
             }
         },
         "com.amazonaws.glue#ConnectorDataSource": {
@@ -9112,6 +9306,62 @@
                 "smithy.api#documentation": "<p>Specifies a target generated with standard connection options.</p>"
             }
         },
+        "com.amazonaws.glue#ConnectorOAuth2GrantType": {
+            "type": "enum",
+            "members": {
+                "CLIENT_CREDENTIALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIENT_CREDENTIALS"
+                    }
+                },
+                "JWT_BEARER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JWT_BEARER"
+                    }
+                },
+                "AUTHORIZATION_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHORIZATION_CODE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#ConnectorOAuth2Properties": {
+            "type": "structure",
+            "members": {
+                "OAuth2GrantType": {
+                    "target": "com.amazonaws.glue#ConnectorOAuth2GrantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 grant type to use for authentication, such as CLIENT_CREDENTIALS, JWT_BEARER, or AUTHORIZATION_CODE.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientCredentialsProperties": {
+                    "target": "com.amazonaws.glue#ClientCredentialsProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration properties specific to the OAuth2 Client Credentials grant type flow.</p>"
+                    }
+                },
+                "JWTBearerProperties": {
+                    "target": "com.amazonaws.glue#JWTBearerProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration properties specific to the OAuth2 JWT Bearer grant type flow.</p>"
+                    }
+                },
+                "AuthorizationCodeProperties": {
+                    "target": "com.amazonaws.glue#ConnectorAuthorizationCodeProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration properties specific to the OAuth2 Authorization Code grant type flow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>OAuth2 configuration container that defines the authentication properties and flow-specific configurations for OAuth2-based connections.</p>"
+            }
+        },
         "com.amazonaws.glue#ConnectorOptions": {
             "type": "map",
             "key": {
@@ -9119,6 +9369,92 @@
             },
             "value": {
                 "target": "com.amazonaws.glue#GenericString"
+            }
+        },
+        "com.amazonaws.glue#ConnectorProperty": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#PropertyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the property.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyOverride": {
+                    "target": "com.amazonaws.glue#ConnectorPropertyKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key name to use when sending this property in API requests, if different from the display name.</p>"
+                    }
+                },
+                "Required": {
+                    "target": "com.amazonaws.glue#Bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the property is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value for the property.</p>"
+                    }
+                },
+                "AllowedValues": {
+                    "target": "com.amazonaws.glue#ListOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>AllowedValue</code> objects representing the values allowed for the property.</p>"
+                    }
+                },
+                "PropertyLocation": {
+                    "target": "com.amazonaws.glue#PropertyLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies where this property should be included in REST requests, such as in headers, query parameters, or request body.</p>"
+                    }
+                },
+                "PropertyType": {
+                    "target": "com.amazonaws.glue#PropertyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of this property</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a property configuration for connection types, default values, and where the property should be used in requests.</p>"
+            }
+        },
+        "com.amazonaws.glue#ConnectorPropertyKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.glue#ConnectorPropertyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#ConnectorProperty"
+            }
+        },
+        "com.amazonaws.glue#ContentType": {
+            "type": "enum",
+            "members": {
+                "APPLICATION_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION_JSON"
+                    }
+                },
+                "URL_ENCODED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL_ENCODED"
+                    }
+                }
             }
         },
         "com.amazonaws.glue#ContextKey": {
@@ -13295,6 +13631,42 @@
                 }
             }
         },
+        "com.amazonaws.glue#CursorConfiguration": {
+            "type": "structure",
+            "members": {
+                "NextPage": {
+                    "target": "com.amazonaws.glue#ExtractedParameter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter name or JSON path that contains the cursor or token for retrieving the next page of results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LimitParameter": {
+                    "target": "com.amazonaws.glue#ExtractedParameter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter name used to specify the maximum number of results to return per page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Cursor-based pagination configuration that defines how to handle pagination using cursor tokens or next page identifiers.</p>"
+            }
+        },
+        "com.amazonaws.glue#CustomAuthenticationProperties": {
+            "type": "structure",
+            "members": {
+                "AuthenticationParameters": {
+                    "target": "com.amazonaws.glue#ConnectorPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of custom authentication parameters that define the specific authentication mechanism and required properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Custom authentication configuration that allows for flexible authentication mechanisms beyond standard Basic and OAuth2 flows.</p>"
+            }
+        },
         "com.amazonaws.glue#CustomCode": {
             "type": "structure",
             "members": {
@@ -15057,6 +15429,16 @@
                 "smithy.api#documentation": "<p>Contains a numeric value in decimal format.</p>"
             }
         },
+        "com.amazonaws.glue#DefaultValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "[^<>&'\"]"
+            }
+        },
         "com.amazonaws.glue#DeleteBehavior": {
             "type": "enum",
             "members": {
@@ -15489,6 +15871,60 @@
             }
         },
         "com.amazonaws.glue#DeleteConnectionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteConnectionType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteConnectionTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteConnectionTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a custom connection type in Glue.</p>\n         <p>The connection type must exist and be registered before it can be deleted. This operation supports cleanup of connection type resources and helps maintain proper lifecycle management of custom connection types.</p>"
+            }
+        },
+        "com.amazonaws.glue#DeleteConnectionTypeRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectionType": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection type to delete. Must reference an existing registered connection type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteConnectionTypeResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -17209,7 +17645,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>DescribeConnectionType</code> API provides full details of the supported options for a given connection type in Glue.</p>"
+                "smithy.api#documentation": "<p>The <code>DescribeConnectionType</code> API provides full details of the supported options for a given connection type in Glue. The response includes authentication configuration details that show supported authentication types and properties, and RestConfiguration for custom REST-based connection types registered via <code>RegisterConnectionType</code>.</p>\n         <p>See also: <code>ListConnectionTypes</code>, <code>RegisterConnectionType</code>, <code>DeleteConnectionType</code>\n         </p>"
             }
         },
         "com.amazonaws.glue#DescribeConnectionTypeRequest": {
@@ -17294,6 +17730,12 @@
                     "target": "com.amazonaws.glue#PropertiesMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Connection properties specific to the Spark compute environment.</p>"
+                    }
+                },
+                "RestConfiguration": {
+                    "target": "com.amazonaws.glue#RestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>HTTP request and response configuration, validation endpoint, and entity configurations for REST based data source.</p>"
                     }
                 }
             },
@@ -18486,6 +18928,48 @@
                 "smithy.api#documentation": "<p>An entity supported by a given <code>ConnectionType</code>.</p>"
             }
         },
+        "com.amazonaws.glue#EntityConfiguration": {
+            "type": "structure",
+            "members": {
+                "SourceConfiguration": {
+                    "target": "com.amazonaws.glue#SourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration that defines how to make requests to access this entity's data through the REST API.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.glue#FieldDefinitionMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema definition for this entity, including field names, types, and other metadata that describes the structure of the data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines how to interact with a specific data entity through the REST API, including its access patterns and schema definition.</p>"
+            }
+        },
+        "com.amazonaws.glue#EntityConfigurationMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#EntityConfigurationMapKeyString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#EntityConfiguration"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of entity configurations that associates entity names with their corresponding configuration settings for REST API interactions.</p>"
+            }
+        },
+        "com.amazonaws.glue#EntityConfigurationMapKeyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_ -]+$"
+            }
+        },
         "com.amazonaws.glue#EntityDescription": {
             "type": "string"
         },
@@ -18874,6 +19358,38 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.glue#ExtractedParameter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.glue#ConnectorPropertyKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter key name that will be used in subsequent requests.</p>"
+                    }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.glue#DefaultValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value to use if the parameter cannot be extracted from the response.</p>"
+                    }
+                },
+                "PropertyLocation": {
+                    "target": "com.amazonaws.glue#PropertyLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies where this extracted parameter should be placed in subsequent requests, such as in headers, query parameters, or request body.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.glue#ResponseExtractionMapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON path or extraction mapping that defines how to extract the parameter value from API responses.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter extraction configuration that defines how to extract and map values from API responses to request parameters.</p>"
             }
         },
         "com.amazonaws.glue#FederatedCatalog": {
@@ -19306,6 +19822,60 @@
                     "traits": {
                         "smithy.api#enumValue": "STRUCT"
                     }
+                },
+                "BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BINARY"
+                    }
+                },
+                "UNION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#FieldDefinition": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in the entity schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FieldDataType": {
+                    "target": "com.amazonaws.glue#FieldDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a field in an entity schema for REST connector data sources, specifying the field name and data type.</p>"
+            }
+        },
+        "com.amazonaws.glue#FieldDefinitionMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#FieldDefinitionMapKeyString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#FieldDefinition"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of field definitions that define the schema structure for an entity in a REST connector data source.</p>"
+            }
+        },
+        "com.amazonaws.glue#FieldDefinitionMapKeyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
                 }
             }
         },
@@ -27008,6 +27578,23 @@
                 "target": "com.amazonaws.glue#GroupFilters"
             }
         },
+        "com.amazonaws.glue#HTTPMethod": {
+            "type": "enum",
+            "members": {
+                "GET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GET"
+                    }
+                },
+                "POST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#HashString": {
             "type": "string",
             "traits": {
@@ -28623,6 +29210,17 @@
         "com.amazonaws.glue#IntegrationTimestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.glue#IntegrationType": {
+            "type": "enum",
+            "members": {
+                "REST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REST"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#IntegrationsList": {
             "type": "list",
             "member": {
@@ -29186,6 +29784,44 @@
             },
             "value": {
                 "target": "com.amazonaws.glue#GlueRecordType"
+            }
+        },
+        "com.amazonaws.glue#JWTBearerProperties": {
+            "type": "structure",
+            "members": {
+                "TokenUrl": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token endpoint URL where the JWT bearer token will be exchanged for an access token.</p>"
+                    }
+                },
+                "RequestMethod": {
+                    "target": "com.amazonaws.glue#HTTPMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP method to use when making JWT bearer token requests, typically POST.</p>"
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.glue#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type to use for JWT bearer token requests, such as application/x-www-form-urlencoded or application/json.</p>"
+                    }
+                },
+                "JwtToken": {
+                    "target": "com.amazonaws.glue#ConnectorProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JWT token to be used in the bearer token grant flow for authentication.</p>"
+                    }
+                },
+                "TokenUrlParameters": {
+                    "target": "com.amazonaws.glue#ConnectorPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional parameters to include in token URL requests as key-value pairs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>JWT bearer token configuration that defines the properties needed for the JWT Bearer grant type flow.</p>"
             }
         },
         "com.amazonaws.glue#JdbcMetadataEntry": {
@@ -30163,6 +30799,16 @@
         "com.amazonaws.glue#JsonPath": {
             "type": "string"
         },
+        "com.amazonaws.glue#JsonPathString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^\\$(\\.[a-zA-Z0-9_.@\\[\\]\\(\\)-]+)*$"
+            }
+        },
         "com.amazonaws.glue#JsonValue": {
             "type": "string"
         },
@@ -30898,7 +31544,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListConnectionTypes</code> API provides a discovery mechanism to learn available connection types in Glue. The response contains a list of connection types with high-level details of what is supported for each connection type. The connection types listed are the set of supported options for the <code>ConnectionType</code> value in the <code>CreateConnection</code> API.</p>",
+                "smithy.api#documentation": "<p>The <code>ListConnectionTypes</code> API provides a discovery mechanism to learn available connection types in Glue. The response contains a list of connection types with high-level details of what is supported for each connection type, including both built-in connection types and custom connection types registered via <code>RegisterConnectionType</code>. The connection types listed are the set of supported options for the <code>ConnectionType</code> value in the <code>CreateConnection</code> API.</p>\n         <p>See also: <code>DescribeConnectionType</code>, <code>RegisterConnectionType</code>, <code>DeleteConnectionType</code>\n         </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -34553,6 +35199,28 @@
                 "smithy.api#documentation": "<p>A structure containing properties for OAuth2 in the CreateConnection request.</p>"
             }
         },
+        "com.amazonaws.glue#OffsetConfiguration": {
+            "type": "structure",
+            "members": {
+                "OffsetParameter": {
+                    "target": "com.amazonaws.glue#ExtractedParameter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter name used to specify the starting position or offset for retrieving results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LimitParameter": {
+                    "target": "com.amazonaws.glue#ExtractedParameter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter name used to specify the maximum number of results to return per page.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Offset-based pagination configuration that defines how to handle pagination using numeric offsets and limits.</p>"
+            }
+        },
         "com.amazonaws.glue#OneInput": {
             "type": "list",
             "member": {
@@ -35055,6 +35723,26 @@
                 }
             }
         },
+        "com.amazonaws.glue#PaginationConfiguration": {
+            "type": "structure",
+            "members": {
+                "CursorConfiguration": {
+                    "target": "com.amazonaws.glue#CursorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for cursor-based pagination, where the API provides a cursor or token to retrieve the next page of results.</p>"
+                    }
+                },
+                "OffsetConfiguration": {
+                    "target": "com.amazonaws.glue#OffsetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for offset-based pagination, where the API uses numeric offsets and limits to control which results are returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines how to handle paginated responses from REST APIs, supporting different pagination strategies used by various services.</p>"
+            }
+        },
         "com.amazonaws.glue#PaginationToken": {
             "type": "string"
         },
@@ -35479,6 +36167,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#Path"
+            }
+        },
+        "com.amazonaws.glue#PathString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^/[a-zA-Z0-9._~:/?#\\[\\]@!$&'()*+,;={}-]*$"
             }
         },
         "com.amazonaws.glue#Permission": {
@@ -35982,6 +36680,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates which data operations are applicable to the property.</p>"
                     }
+                },
+                "KeyOverride": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key name to use when sending this property in API requests, if different from the display name.</p>"
+                    }
+                },
+                "PropertyLocation": {
+                    "target": "com.amazonaws.glue#PropertyLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies where this property should be included in REST requests, such as in headers, query parameters, or request body.</p>"
+                    }
                 }
             },
             "traits": {
@@ -36003,6 +36713,35 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
+                }
+            }
+        },
+        "com.amazonaws.glue#PropertyLocation": {
+            "type": "enum",
+            "members": {
+                "HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEADER"
+                    }
+                },
+                "BODY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BODY"
+                    }
+                },
+                "QUERY_PARAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_PARAM"
+                    }
+                },
+                "PATH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PATH"
+                    }
                 }
             }
         },
@@ -36968,6 +37707,108 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.glue#RegisterConnectionType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#RegisterConnectionTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#RegisterConnectionTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers a custom connection type in Glue based on the configuration provided. This operation enables customers to configure custom connectors for any data source with REST-based APIs, eliminating the need for building custom Lambda connectors.</p>\n         <p>The registered connection type stores details about how requests and responses are interpreted by REST sources, including connection properties, authentication configuration, and REST configuration with entity definitions. Once registered, customers can create connections using this connection type and work with them the same way as natively supported Glue connectors.</p>\n         <p>Supports multiple authentication types including Basic, OAuth2 (Client Credentials, JWT Bearer, Authorization Code), and Custom Auth configurations.</p>"
+            }
+        },
+        "com.amazonaws.glue#RegisterConnectionTypeRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectionType": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection type. Must be between 1 and 255 characters and must be prefixed with \"REST-\" to indicate it is a REST-based connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IntegrationType": {
+                    "target": "com.amazonaws.glue#IntegrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The integration type for the connection. Currently only \"REST\" protocol is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the connection type. Can be up to 2048 characters and provides details about the purpose and functionality of the connection type.</p>"
+                    }
+                },
+                "ConnectionProperties": {
+                    "target": "com.amazonaws.glue#ConnectionPropertiesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the base URL and additional request parameters needed during connection creation for this connection type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectorAuthenticationConfiguration": {
+                    "target": "com.amazonaws.glue#ConnectorAuthenticationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the supported authentication types and required properties for this connection type, including Basic, OAuth2, and Custom authentication methods.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestConfiguration": {
+                    "target": "com.amazonaws.glue#RestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the HTTP request and response configuration, validation endpoint, and entity configurations for REST API interactions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.glue#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags you assign to the connection type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#RegisterConnectionTypeResponse": {
+            "type": "structure",
+            "members": {
+                "ConnectionTypeArn": {
+                    "target": "com.amazonaws.glue#GlueResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the registered connection type. This unique identifier can be used to reference the connection type in other Glue operations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the Amazon Resource Name (ARN) of the newly registered connection type.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#RegisterSchemaVersion": {
             "type": "operation",
             "input": {
@@ -37557,6 +38398,73 @@
                     "min": 0,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.glue#ResponseConfiguration": {
+            "type": "structure",
+            "members": {
+                "ResultPath": {
+                    "target": "com.amazonaws.glue#JsonPathString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON path expression that identifies where the actual result data is located within the API response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorPath": {
+                    "target": "com.amazonaws.glue#JsonPathString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON path expression that identifies where error information is located within API responses when requests fail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines how to parse JSON responses from REST API calls, including paths to result data and error information.</p>"
+            }
+        },
+        "com.amazonaws.glue#ResponseExtractionMapping": {
+            "type": "structure",
+            "members": {
+                "ContentPath": {
+                    "target": "com.amazonaws.glue#JsonPathString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON path expression that specifies how to extract a value from the response body content.</p>"
+                    }
+                },
+                "HeaderKey": {
+                    "target": "com.amazonaws.glue#ConnectorPropertyKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an HTTP response header from which to extract the value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines how to extract values from HTTP response content or headers for use in subsequent requests or parameter mapping.</p>"
+            }
+        },
+        "com.amazonaws.glue#RestConfiguration": {
+            "type": "structure",
+            "members": {
+                "GlobalSourceConfiguration": {
+                    "target": "com.amazonaws.glue#SourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Global configuration settings that apply to all REST API requests for this connection type, including common request methods, paths, and parameters.</p>"
+                    }
+                },
+                "ValidationEndpointConfiguration": {
+                    "target": "com.amazonaws.glue#SourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for the endpoint used to validate connection credentials and test connectivity during connection creation.</p>"
+                    }
+                },
+                "EntityConfigurations": {
+                    "target": "com.amazonaws.glue#EntityConfigurationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of entity configurations that define how to interact with different data entities available through the REST API, including their schemas and access patterns.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines HTTP request and response handling, validation endpoints, and entity configurations for REST API interactions.</p>"
             }
         },
         "com.amazonaws.glue#ResumeWorkflowRun": {
@@ -40631,6 +41539,44 @@
                         "smithy.api#enumValue": "ASCENDING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.glue#SourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "RequestMethod": {
+                    "target": "com.amazonaws.glue#HTTPMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP method to use for requests to this endpoint, such as GET, POST.</p>"
+                    }
+                },
+                "RequestPath": {
+                    "target": "com.amazonaws.glue#PathString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL path for the REST endpoint, which may include parameter placeholders that will be replaced with actual values during requests.</p>"
+                    }
+                },
+                "RequestParameters": {
+                    "target": "com.amazonaws.glue#ConnectorPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for request parameters that should be included in API calls, such as query parameters, headers, or body content.</p>"
+                    }
+                },
+                "ResponseConfiguration": {
+                    "target": "com.amazonaws.glue#ResponseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration that defines how to parse and extract data from API responses, including success and error handling.</p>"
+                    }
+                },
+                "PaginationConfiguration": {
+                    "target": "com.amazonaws.glue#PaginationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for handling paginated responses from the REST API, supporting both cursor-based and offset-based pagination strategies.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines how to make requests to endpoints, including request methods, paths, parameters, and response handling.</p>"
             }
         },
         "com.amazonaws.glue#SourceControlAuthStrategy": {

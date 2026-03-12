@@ -2355,6 +2355,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CloudWatch alarm that was invoked during the association.</p>"
                     }
+                },
+                "AssociationDispatchAssumeRole": {
+                    "target": "com.amazonaws.ssm#AssociationDispatchAssumeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A role used by association to take actions on your behalf.\n   State Manager will assume this role and call required APIs when dispatching\n   configurations to nodes. If not specified, <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html\">\n   service-linked role for Systems Manager</a> will be used by default.\n  </p>"
+                    }
                 }
             },
             "traits": {
@@ -2368,6 +2374,16 @@
                 "traits": {
                     "smithy.api#xmlName": "AssociationDescription"
                 }
+            }
+        },
+        "com.amazonaws.ssm#AssociationDispatchAssumeRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"
             }
         },
         "com.amazonaws.ssm#AssociationDoesNotExist": {
@@ -3115,6 +3131,12 @@
                     "target": "com.amazonaws.ssm#TargetMaps",
                     "traits": {
                         "smithy.api#documentation": "<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps\n   can't be specified together.</p>"
+                    }
+                },
+                "AssociationDispatchAssumeRole": {
+                    "target": "com.amazonaws.ssm#AssociationDispatchAssumeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A role used by association to take actions on your behalf.\n   State Manager will assume this role and call required APIs when dispatching\n   configurations to nodes. If not specified, <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html\">\n   service-linked role for Systems Manager</a> will be used by default.\n  </p>"
                     }
                 }
             },
@@ -6002,6 +6024,12 @@
                         "smithy.api#documentation": "<p>One or more associations.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AssociationDispatchAssumeRole": {
+                    "target": "com.amazonaws.ssm#AssociationDispatchAssumeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A role used by association to take actions on your behalf.\n   State Manager will assume this role and call required APIs when dispatching\n   configurations to nodes. If not specified, <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html\">\n   service-linked role for Systems Manager</a> will be used by default.\n  </p>\n         <note>\n            <p>It is recommended that you define a custom IAM role so that you have full control of\n    the permissions that State Manager has when taking actions on your behalf.</p>\n            <p>Service-linked role support in State Manager is being phased out. Associations\n    relying on service-linked role may require updates in the future to continue\n    functioning properly.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -6296,6 +6324,12 @@
                 },
                 "AlarmConfiguration": {
                     "target": "com.amazonaws.ssm#AlarmConfiguration"
+                },
+                "AssociationDispatchAssumeRole": {
+                    "target": "com.amazonaws.ssm#AssociationDispatchAssumeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A role used by association to take actions on your behalf.\n   State Manager will assume this role and call required APIs when dispatching\n   configurations to nodes. If not specified, <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html\">\n   service-linked role for Systems Manager</a> will be used by default.\n  </p>\n         <note>\n            <p>It is recommended that you define a custom IAM role so that you have full control of\n    the permissions that State Manager has when taking actions on your behalf.</p>\n            <p>Service-linked role support in State Manager is being phased out. Associations\n    relying on service-linked role may require updates in the future to continue\n    functioning properly.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -6605,7 +6639,7 @@
                 "OpsItemType": {
                     "target": "com.amazonaws.ssm#OpsItemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of OpsItem to create. Systems Manager supports the following types of OpsItems:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/aws/issue</code>\n               </p>\n               <p>This type of OpsItem is used for default OpsItems created by OpsCenter. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/insight</code>\n               </p>\n               <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate\n     OpsItems. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/changerequest</code>\n               </p>\n               <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change\n     requests. </p>\n               <important>\n                  <p>Amazon Web Services Systems Manager Change Manager will no longer be open to new \n  customers starting November 7, 2025. If you would like to use Change Manager, sign up prior to that date. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n               </important>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of OpsItem to create. Systems Manager supports the following types of OpsItems:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/aws/issue</code>\n               </p>\n               <p>This type of OpsItem is used for default OpsItems created by OpsCenter. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/insight</code>\n               </p>\n               <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate\n     OpsItems. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/changerequest</code>\n               </p>\n               <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change\n     requests. </p>\n               <important>\n                  <p>Amazon Web Services Systems Manager Change Manager is no longer open to new customers. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n               </important>\n            </li>\n         </ul>"
                     }
                 },
                 "OperationalData": {
@@ -18552,7 +18586,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Systems Manager Change Manager will no longer be open to new \n  customers starting November 7, 2025. If you would like to use Change Manager, sign up prior to that date. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n         </important>\n         <p>Information about approval reviews for a version of a change template in Change Manager.</p>"
+                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Systems Manager Change Manager is no longer open to new customers. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n         </important>\n         <p>Information about approval reviews for a version of a change template in Change Manager.</p>"
             }
         },
         "com.amazonaws.ssm#ListDocumentMetadataHistoryRequest": {
@@ -29185,7 +29219,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Systems Manager Change Manager will no longer be open to new \n  customers starting November 7, 2025. If you would like to use Change Manager, sign up prior to that date. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n         </important>\n         <p>Creates a change request for Change Manager. The Automation runbooks specified in the\n   change request run only after all required approvals for the change request have been\n   received.</p>"
+                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Systems Manager Change Manager is no longer open to new customers. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n         </important>\n         <p>Creates a change request for Change Manager. The Automation runbooks specified in the\n   change request run only after all required approvals for the change request have been\n   received.</p>"
             }
         },
         "com.amazonaws.ssm#StartChangeRequestExecutionRequest": {
@@ -30751,6 +30785,12 @@
                 },
                 "AlarmConfiguration": {
                     "target": "com.amazonaws.ssm#AlarmConfiguration"
+                },
+                "AssociationDispatchAssumeRole": {
+                    "target": "com.amazonaws.ssm#AssociationDispatchAssumeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A role used by association to take actions on your behalf.\n   State Manager will assume this role and call required APIs when dispatching\n   configurations to nodes. If not specified, <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html\">\n   service-linked role for Systems Manager</a> will be used by default.\n  </p>\n         <note>\n            <p>It is recommended that you define a custom IAM role so that you have full control of\n    the permissions that State Manager has when taking actions on your behalf.</p>\n            <p>Service-linked role support in State Manager is being phased out. Associations\n    relying on service-linked role may require updates in the future to continue\n    functioning properly.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -30978,7 +31018,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Systems Manager Change Manager will no longer be open to new \n  customers starting November 7, 2025. If you would like to use Change Manager, sign up prior to that date. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n         </important>\n         <p>Updates information related to approval reviews for a specific version of a change template\n   in Change Manager.</p>"
+                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Systems Manager Change Manager is no longer open to new customers. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n         </important>\n         <p>Updates information related to approval reviews for a specific version of a change template\n   in Change Manager.</p>"
             }
         },
         "com.amazonaws.ssm#UpdateDocumentMetadataRequest": {

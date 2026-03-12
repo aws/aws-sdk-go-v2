@@ -54,7 +54,7 @@ func (c *Client) InvokeAgentRuntime(ctx context.Context, params *InvokeAgentRunt
 type InvokeAgentRuntimeInput struct {
 
 	// The Amazon Web Services Resource Name (ARN) of the agent runtime to invoke. The
-	// ARN uniquely identifies the agent runtime resource in Amazon Bedrock.
+	// ARN uniquely identifies the agent runtime resource in Amazon Bedrock AgentCore.
 	//
 	// This member is required.
 	AgentRuntimeArn *string
@@ -91,7 +91,7 @@ type InvokeAgentRuntimeInput struct {
 
 	// The qualifier to use for the agent runtime. This can be a version number or an
 	// endpoint name that points to a specific version. If not specified, Amazon
-	// Bedrock uses the default version of the agent runtime.
+	// Bedrock AgentCore uses the default version of the agent runtime.
 	Qualifier *string
 
 	// The identifier of the runtime session.

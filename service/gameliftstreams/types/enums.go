@@ -31,8 +31,9 @@ type ApplicationStatusReason string
 
 // Enum values for ApplicationStatusReason
 const (
-	ApplicationStatusReasonInternalError ApplicationStatusReason = "internalError"
-	ApplicationStatusReasonAccessDenied  ApplicationStatusReason = "accessDenied"
+	ApplicationStatusReasonInternalError  ApplicationStatusReason = "internalError"
+	ApplicationStatusReasonAccessDenied   ApplicationStatusReason = "accessDenied"
+	ApplicationStatusReasonSourceModified ApplicationStatusReason = "sourceModified"
 )
 
 // Values returns all known values for ApplicationStatusReason. Note that this can
@@ -43,6 +44,7 @@ func (ApplicationStatusReason) Values() []ApplicationStatusReason {
 	return []ApplicationStatusReason{
 		"internalError",
 		"accessDenied",
+		"sourceModified",
 	}
 }
 
@@ -128,19 +130,23 @@ type StreamClass string
 
 // Enum values for StreamClass
 const (
-	StreamClassGen4nHigh         StreamClass = "gen4n_high"
-	StreamClassGen4nUltra        StreamClass = "gen4n_ultra"
-	StreamClassGen4nWin2022      StreamClass = "gen4n_win2022"
-	StreamClassGen5nHigh         StreamClass = "gen5n_high"
-	StreamClassGen5nUltra        StreamClass = "gen5n_ultra"
-	StreamClassGen5nWin2022      StreamClass = "gen5n_win2022"
-	StreamClassGen6nSmall        StreamClass = "gen6n_small"
-	StreamClassGen6nMedium       StreamClass = "gen6n_medium"
-	StreamClassGen6nHigh         StreamClass = "gen6n_high"
-	StreamClassGen6nUltra        StreamClass = "gen6n_ultra"
-	StreamClassGen6nUltraWin2022 StreamClass = "gen6n_ultra_win2022"
-	StreamClassGen6nPro          StreamClass = "gen6n_pro"
-	StreamClassGen6nProWin2022   StreamClass = "gen6n_pro_win2022"
+	StreamClassGen4nHigh          StreamClass = "gen4n_high"
+	StreamClassGen4nUltra         StreamClass = "gen4n_ultra"
+	StreamClassGen4nWin2022       StreamClass = "gen4n_win2022"
+	StreamClassGen5nHigh          StreamClass = "gen5n_high"
+	StreamClassGen5nUltra         StreamClass = "gen5n_ultra"
+	StreamClassGen5nWin2022       StreamClass = "gen5n_win2022"
+	StreamClassGen6nSmall         StreamClass = "gen6n_small"
+	StreamClassGen6nMedium        StreamClass = "gen6n_medium"
+	StreamClassGen6nHigh          StreamClass = "gen6n_high"
+	StreamClassGen6nUltra         StreamClass = "gen6n_ultra"
+	StreamClassGen6nUltraWin2022  StreamClass = "gen6n_ultra_win2022"
+	StreamClassGen6nPro           StreamClass = "gen6n_pro"
+	StreamClassGen6nProWin2022    StreamClass = "gen6n_pro_win2022"
+	StreamClassGen6nSmallWin2022  StreamClass = "gen6n_small_win2022"
+	StreamClassGen6nMediumWin2022 StreamClass = "gen6n_medium_win2022"
+	StreamClassGen6ePro           StreamClass = "gen6e_pro"
+	StreamClassGen6eProWin2022    StreamClass = "gen6e_pro_win2022"
 )
 
 // Values returns all known values for StreamClass. Note that this can be expanded
@@ -162,6 +168,10 @@ func (StreamClass) Values() []StreamClass {
 		"gen6n_ultra_win2022",
 		"gen6n_pro",
 		"gen6n_pro_win2022",
+		"gen6n_small_win2022",
+		"gen6n_medium_win2022",
+		"gen6e_pro",
+		"gen6e_pro_win2022",
 	}
 }
 

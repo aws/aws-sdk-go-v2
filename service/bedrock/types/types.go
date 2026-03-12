@@ -26,6 +26,10 @@ type AccountEnforcedGuardrailInferenceInputConfiguration struct {
 	// This member is required.
 	InputTags InputTags
 
+	// Model-specific information for the enforced guardrail configuration. If not
+	// present, the configuration is enforced on all models
+	ModelEnforcement *ModelEnforcement
+
 	noSmithyDocumentSerde
 }
 
@@ -52,6 +56,9 @@ type AccountEnforcedGuardrailOutputConfiguration struct {
 
 	// Whether to honor or ignore input tags at runtime.
 	InputTags InputTags
+
+	// Model-specific information for the enforced guardrail configuration.
+	ModelEnforcement *ModelEnforcement
 
 	// Configuration owner type.
 	Owner ConfigurationOwner
@@ -581,6 +588,57 @@ type AutomatedReasoningPolicyAddVariableMutation struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a portion of a source document with line number annotations. Chunks
+// help organize document content for easier navigation and reference.
+type AutomatedReasoningPolicyAnnotatedChunk struct {
+
+	// The lines of text contained within this chunk, each annotated with its line
+	// number.
+	//
+	// This member is required.
+	Content []AutomatedReasoningPolicyAnnotatedContent
+
+	// The page number where this chunk begins, if the document is divided into pages.
+	PageNumber *int32
+
+	noSmithyDocumentSerde
+}
+
+// Represents a content element within an annotated chunk. This union type allows
+// for different types of content elements to be included in document chunks, such
+// as individual lines of text with their line numbers.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedReasoningPolicyAnnotatedContentMemberLine
+type AutomatedReasoningPolicyAnnotatedContent interface {
+	isAutomatedReasoningPolicyAnnotatedContent()
+}
+
+// An annotated line of text from the source document, including both the line
+// number and the text content.
+type AutomatedReasoningPolicyAnnotatedContentMemberLine struct {
+	Value AutomatedReasoningPolicyAnnotatedLine
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotatedContentMemberLine) isAutomatedReasoningPolicyAnnotatedContent() {
+}
+
+// Represents a single line of text from a source document, annotated with its
+// line number for precise referencing.
+type AutomatedReasoningPolicyAnnotatedLine struct {
+
+	// The line number of this text within the source document.
+	LineNumber *int32
+
+	// The actual text content of this line from the source document.
+	LineText *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the various operations that can be performed on an Automated Reasoning
 // policy, including adding, updating, and deleting rules, variables, and types.
 //
@@ -738,6 +796,31 @@ type AutomatedReasoningPolicyAnnotationMemberUpdateVariable struct {
 func (*AutomatedReasoningPolicyAnnotationMemberUpdateVariable) isAutomatedReasoningPolicyAnnotation() {
 }
 
+// Represents a single, indivisible statement extracted from a source document.
+// Atomic statements are the fundamental units used to ground policy rules and
+// variables to their source material.
+type AutomatedReasoningPolicyAtomicStatement struct {
+
+	// A unique identifier for this atomic statement within the fidelity report.
+	//
+	// This member is required.
+	Id *string
+
+	// Information about where this statement appears in the source document,
+	// including line numbers.
+	//
+	// This member is required.
+	Location *AutomatedReasoningPolicyStatementLocation
+
+	// The actual text content of the atomic statement as extracted from the source
+	// document.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains detailed logging information about the policy build process, including
 // steps taken, decisions made, and any issues encountered.
 type AutomatedReasoningPolicyBuildLog struct {
@@ -775,18 +858,68 @@ type AutomatedReasoningPolicyBuildLogEntry struct {
 	noSmithyDocumentSerde
 }
 
+// A catalog of all artifacts produced by a build workflow, providing a
+// comprehensive list of available assets including their types and identifiers.
+type AutomatedReasoningPolicyBuildResultAssetManifest struct {
+
+	// The list of asset entries in the manifest, each describing an available
+	// artifact that can be retrieved.
+	//
+	// This member is required.
+	Entries []AutomatedReasoningPolicyBuildResultAssetManifestEntry
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single entry in the asset manifest, describing one artifact
+// produced by the build workflow.
+type AutomatedReasoningPolicyBuildResultAssetManifestEntry struct {
+
+	// The type of asset (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION,
+	// GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT, ASSET_MANIFEST,
+	// SOURCE_DOCUMENT).
+	//
+	// This member is required.
+	AssetType AutomatedReasoningPolicyBuildResultAssetType
+
+	// A unique identifier for the asset, if applicable. Use this ID when requesting
+	// specific assets through the API.
+	AssetId *string
+
+	// A human-readable name for the asset, if applicable. This helps identify
+	// specific documents or reports within the workflow results.
+	AssetName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the various assets generated during a policy build workflow, including
 // logs, quality reports, test cases, and the final policy definition.
 //
 // The following types satisfy this interface:
 //
+//	AutomatedReasoningPolicyBuildResultAssetsMemberAssetManifest
 //	AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog
+//	AutomatedReasoningPolicyBuildResultAssetsMemberDocument
+//	AutomatedReasoningPolicyBuildResultAssetsMemberFidelityReport
 //	AutomatedReasoningPolicyBuildResultAssetsMemberGeneratedTestCases
 //	AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition
 //	AutomatedReasoningPolicyBuildResultAssetsMemberPolicyScenarios
 //	AutomatedReasoningPolicyBuildResultAssetsMemberQualityReport
 type AutomatedReasoningPolicyBuildResultAssets interface {
 	isAutomatedReasoningPolicyBuildResultAssets()
+}
+
+// A manifest listing all available artifacts produced by the build workflow. This
+// provides a catalog of all assets that can be retrieved, including their types,
+// names, and identifiers.
+type AutomatedReasoningPolicyBuildResultAssetsMemberAssetManifest struct {
+	Value AutomatedReasoningPolicyBuildResultAssetManifest
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyBuildResultAssetsMemberAssetManifest) isAutomatedReasoningPolicyBuildResultAssets() {
 }
 
 // The complete build log containing detailed information about each step in the
@@ -798,6 +931,31 @@ type AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog struct {
 }
 
 func (*AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog) isAutomatedReasoningPolicyBuildResultAssets() {
+}
+
+// A source document that was used as input during the build workflow. This allows
+// you to retrieve the original documents that were processed to generate the
+// policy.
+type AutomatedReasoningPolicyBuildResultAssetsMemberDocument struct {
+	Value AutomatedReasoningPolicySourceDocument
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyBuildResultAssetsMemberDocument) isAutomatedReasoningPolicyBuildResultAssets() {
+}
+
+// A comprehensive fidelity report that measures how accurately the generated
+// policy represents the source documents. The report includes coverage and
+// accuracy scores, along with detailed grounding information for rules and
+// variables.
+type AutomatedReasoningPolicyBuildResultAssetsMemberFidelityReport struct {
+	Value AutomatedReasoningPolicyFidelityReport
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyBuildResultAssetsMemberFidelityReport) isAutomatedReasoningPolicyBuildResultAssets() {
 }
 
 // A comprehensive test suite generated by the build workflow, providing
@@ -1339,6 +1497,47 @@ type AutomatedReasoningPolicyDisjointRuleSet struct {
 	noSmithyDocumentSerde
 }
 
+// A comprehensive analysis report that measures how accurately a generated policy
+// represents the source documents. The report includes coverage and accuracy
+// scores, detailed grounding information linking policy elements to source
+// statements, and annotated document content.
+type AutomatedReasoningPolicyFidelityReport struct {
+
+	// A score from 0.0 to 1.0 indicating how accurate the policy rules are relative
+	// to the source documents. A higher score means the policy rules more faithfully
+	// represent the source material.
+	//
+	// This member is required.
+	AccuracyScore *float64
+
+	// A score from 0.0 to 1.0 indicating how well the policy covers the statements in
+	// the source documents. A higher score means more of the source content is
+	// represented in the policy.
+	//
+	// This member is required.
+	CoverageScore *float64
+
+	// A list of source documents with their content broken down into atomic
+	// statements and annotated with line numbers for precise referencing.
+	//
+	// This member is required.
+	DocumentSources []AutomatedReasoningPolicyReportSourceDocument
+
+	// A mapping from rule identifiers to detailed fidelity reports for each rule,
+	// showing which source statements ground each rule and how accurate it is.
+	//
+	// This member is required.
+	RuleReports map[string]AutomatedReasoningPolicyRuleReport
+
+	// A mapping from variable names to detailed fidelity reports for each variable,
+	// showing which source statements ground each variable and how accurate it is.
+	//
+	// This member is required.
+	VariableReports map[string]AutomatedReasoningPolicyVariableReport
+
+	noSmithyDocumentSerde
+}
+
 // Represents a generated test case, consisting of query content, guard content,
 // and expected results.
 type AutomatedReasoningPolicyGeneratedTestCase struct {
@@ -1391,6 +1590,27 @@ type AutomatedReasoningPolicyGeneratedTestCases struct {
 	GeneratedTestCases []AutomatedReasoningPolicyGeneratedTestCase
 
 	noSmithyDocumentSerde
+}
+
+// Configuration for generating a fidelity report, which can either analyze new
+// documents or update an existing fidelity report with a new policy definition.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedReasoningPolicyGenerateFidelityReportContentMemberDocuments
+type AutomatedReasoningPolicyGenerateFidelityReportContent interface {
+	isAutomatedReasoningPolicyGenerateFidelityReportContent()
+}
+
+// Source documents to analyze for generating a new fidelity report. The documents
+// will be processed to create atomic statements and grounding information.
+type AutomatedReasoningPolicyGenerateFidelityReportContentMemberDocuments struct {
+	Value []AutomatedReasoningPolicyBuildWorkflowDocument
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyGenerateFidelityReportContentMemberDocuments) isAutomatedReasoningPolicyGenerateFidelityReportContent() {
 }
 
 // An annotation for processing and incorporating new content into an Automated
@@ -1511,6 +1731,70 @@ type AutomatedReasoningPolicyPlanning struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a source document that was analyzed during fidelity report
+// generation, including the document's metadata and its content broken down into
+// atomic statements.
+type AutomatedReasoningPolicyReportSourceDocument struct {
+
+	// The list of atomic statements extracted from this document, representing the
+	// fundamental units of meaning used for grounding.
+	//
+	// This member is required.
+	AtomicStatements []AutomatedReasoningPolicyAtomicStatement
+
+	// The document's content organized into annotated chunks with line number
+	// information for precise referencing.
+	//
+	// This member is required.
+	DocumentContent []AutomatedReasoningPolicyAnnotatedChunk
+
+	// A SHA-256 hash of the document content, used for verification and ensuring the
+	// document hasn't changed since analysis.
+	//
+	// This member is required.
+	DocumentHash *string
+
+	// A unique identifier for this document within the fidelity report.
+	//
+	// This member is required.
+	DocumentId *string
+
+	// The name of the source document that was analyzed.
+	//
+	// This member is required.
+	DocumentName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides detailed fidelity analysis for a specific policy rule, including which
+// source document statements support it and how accurate the rule is.
+type AutomatedReasoningPolicyRuleReport struct {
+
+	// The identifier of the policy rule being analyzed in this report.
+	//
+	// This member is required.
+	Rule *string
+
+	// A textual explanation of the accuracy score, describing why the rule received
+	// this particular accuracy rating.
+	AccuracyJustification *string
+
+	// A score from 0.0 to 1.0 indicating how accurately this rule represents the
+	// source material.
+	AccuracyScore *float64
+
+	// Explanations describing how the source statements support and justify this
+	// specific rule.
+	GroundingJustifications []string
+
+	// References to statements from the source documents that provide the basis or
+	// justification for this rule.
+	GroundingStatements []AutomatedReasoningPolicyStatementReference
+
+	noSmithyDocumentSerde
+}
+
 // Represents a test scenario used to validate an Automated Reasoning policy,
 // including the test conditions and expected outcomes.
 type AutomatedReasoningPolicyScenario struct {
@@ -1549,6 +1833,67 @@ type AutomatedReasoningPolicyScenarios struct {
 	//
 	// This member is required.
 	PolicyScenarios []AutomatedReasoningPolicyScenario
+
+	noSmithyDocumentSerde
+}
+
+// Represents a source document that was processed during a build workflow.
+// Contains the document content, metadata, and a hash for verification.
+type AutomatedReasoningPolicySourceDocument struct {
+
+	// The raw content of the source document as a binary blob.
+	//
+	// This member is required.
+	Document []byte
+
+	// The MIME type of the document (e.g., application/pdf, text/plain).
+	//
+	// This member is required.
+	DocumentContentType AutomatedReasoningPolicyBuildDocumentContentType
+
+	// A SHA-256 hash of the document content, used for verification and integrity
+	// checking.
+	//
+	// This member is required.
+	DocumentHash *string
+
+	// The name of the source document for identification purposes.
+	//
+	// This member is required.
+	DocumentName *string
+
+	// An optional description providing context about the document's content and
+	// purpose.
+	DocumentDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the location of a statement within a source document using line
+// numbers.
+type AutomatedReasoningPolicyStatementLocation struct {
+
+	// The line numbers in the source document where this statement appears.
+	//
+	// This member is required.
+	Lines []int32
+
+	noSmithyDocumentSerde
+}
+
+// References a specific atomic statement within a source document, used to link
+// policy elements back to their source material.
+type AutomatedReasoningPolicyStatementReference struct {
+
+	// The unique identifier of the document containing the referenced statement.
+	//
+	// This member is required.
+	DocumentId *string
+
+	// The unique identifier of the specific atomic statement being referenced.
+	//
+	// This member is required.
+	StatementId *string
 
 	noSmithyDocumentSerde
 }
@@ -1868,12 +2213,42 @@ type AutomatedReasoningPolicyUpdateVariableMutation struct {
 	noSmithyDocumentSerde
 }
 
+// Provides detailed fidelity analysis for a specific policy variable, including
+// which source document statements support it and how accurate the variable
+// definition is.
+type AutomatedReasoningPolicyVariableReport struct {
+
+	// The name of the policy variable being analyzed in this report.
+	//
+	// This member is required.
+	PolicyVariable *string
+
+	// A textual explanation of the accuracy score, describing why the variable
+	// received this particular accuracy rating.
+	AccuracyJustification *string
+
+	// A score from 0.0 to 1.0 indicating how accurately this variable represents
+	// concepts from the source material.
+	AccuracyScore *float64
+
+	// Explanations describing how the source statements support and justify this
+	// specific variable definition.
+	GroundingJustifications []string
+
+	// References to statements from the source documents that provide the basis or
+	// justification for this variable.
+	GroundingStatements []AutomatedReasoningPolicyStatementReference
+
+	noSmithyDocumentSerde
+}
+
 // Defines the content and configuration for different types of policy build
 // workflows.
 //
 // The following types satisfy this interface:
 //
 //	AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments
+//	AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent
 //	AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets
 type AutomatedReasoningPolicyWorkflowTypeContent interface {
 	isAutomatedReasoningPolicyWorkflowTypeContent()
@@ -1887,6 +2262,18 @@ type AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments struct {
 }
 
 func (*AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments) isAutomatedReasoningPolicyWorkflowTypeContent() {
+}
+
+// The content configuration for generating a fidelity report workflow. This can
+// include source documents to analyze or an existing fidelity report to update
+// with a new policy definition.
+type AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent struct {
+	Value AutomatedReasoningPolicyGenerateFidelityReportContent
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent) isAutomatedReasoningPolicyWorkflowTypeContent() {
 }
 
 // The assets and instructions needed for a policy repair workflow, including
@@ -2846,6 +3233,21 @@ type FoundationModelLifecycle struct {
 	//
 	// This member is required.
 	Status FoundationModelLifecycleStatus
+
+	// Time when the model is no longer available for use
+	EndOfLifeTime *time.Time
+
+	// Time when the model enters legacy state. Models in legacy state can still be
+	// used, but users should plan to transition to an Active model before the end of
+	// life time
+	LegacyTime *time.Time
+
+	// Public extended access portion of the legacy period, when users should expect
+	// higher pricing
+	PublicExtendedAccessTime *time.Time
+
+	// Launch time when the model first becomes available
+	StartOfLifeTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -4862,6 +5264,22 @@ type ModelDataSourceMemberS3DataSource struct {
 
 func (*ModelDataSourceMemberS3DataSource) isModelDataSource() {}
 
+// Model-specific information for the enforced guardrail configuration.
+type ModelEnforcement struct {
+
+	// Models to exclude from enforcement of the guardrail.
+	//
+	// This member is required.
+	ExcludedModels []string
+
+	// Models to enforce the guardrail on.
+	//
+	// This member is required.
+	IncludedModels []string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the import job.
 type ModelImportJobSummary struct {
 
@@ -5036,6 +5454,9 @@ type ModelInvocationJobSummary struct {
 	// If the batch inference job failed, this field contains a message describing why
 	// the job failed.
 	Message *string
+
+	// The invocation endpoint for ModelInvocationJob
+	ModelInvocationType ModelInvocationType
 
 	// The status of the batch inference job.
 	//
@@ -6186,32 +6607,34 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAutomatedEvaluationCustomMetricSource()       {}
-func (*UnknownUnionMember) isAutomatedReasoningCheckFinding()              {}
-func (*UnknownUnionMember) isAutomatedReasoningPolicyAnnotation()          {}
-func (*UnknownUnionMember) isAutomatedReasoningPolicyBuildResultAssets()   {}
-func (*UnknownUnionMember) isAutomatedReasoningPolicyBuildStepContext()    {}
-func (*UnknownUnionMember) isAutomatedReasoningPolicyDefinitionElement()   {}
-func (*UnknownUnionMember) isAutomatedReasoningPolicyMutation()            {}
-func (*UnknownUnionMember) isAutomatedReasoningPolicyTypeValueAnnotation() {}
-func (*UnknownUnionMember) isAutomatedReasoningPolicyWorkflowTypeContent() {}
-func (*UnknownUnionMember) isCustomizationConfig()                         {}
-func (*UnknownUnionMember) isEndpointConfig()                              {}
-func (*UnknownUnionMember) isEvaluationConfig()                            {}
-func (*UnknownUnionMember) isEvaluationDatasetLocation()                   {}
-func (*UnknownUnionMember) isEvaluationInferenceConfig()                   {}
-func (*UnknownUnionMember) isEvaluationModelConfig()                       {}
-func (*UnknownUnionMember) isEvaluationPrecomputedRagSourceConfig()        {}
-func (*UnknownUnionMember) isEvaluatorModelConfig()                        {}
-func (*UnknownUnionMember) isGraderConfig()                                {}
-func (*UnknownUnionMember) isInferenceProfileModelSource()                 {}
-func (*UnknownUnionMember) isInvocationLogSource()                         {}
-func (*UnknownUnionMember) isKnowledgeBaseConfig()                         {}
-func (*UnknownUnionMember) isModelDataSource()                             {}
-func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()           {}
-func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig()          {}
-func (*UnknownUnionMember) isRAGConfig()                                   {}
-func (*UnknownUnionMember) isRatingScaleItemValue()                        {}
-func (*UnknownUnionMember) isRequestMetadataFilters()                      {}
-func (*UnknownUnionMember) isRerankingMetadataSelectiveModeConfiguration() {}
-func (*UnknownUnionMember) isRetrievalFilter()                             {}
+func (*UnknownUnionMember) isAutomatedEvaluationCustomMetricSource()                 {}
+func (*UnknownUnionMember) isAutomatedReasoningCheckFinding()                        {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyAnnotatedContent()              {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyAnnotation()                    {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyBuildResultAssets()             {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyBuildStepContext()              {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyDefinitionElement()             {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyGenerateFidelityReportContent() {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyMutation()                      {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyTypeValueAnnotation()           {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyWorkflowTypeContent()           {}
+func (*UnknownUnionMember) isCustomizationConfig()                                   {}
+func (*UnknownUnionMember) isEndpointConfig()                                        {}
+func (*UnknownUnionMember) isEvaluationConfig()                                      {}
+func (*UnknownUnionMember) isEvaluationDatasetLocation()                             {}
+func (*UnknownUnionMember) isEvaluationInferenceConfig()                             {}
+func (*UnknownUnionMember) isEvaluationModelConfig()                                 {}
+func (*UnknownUnionMember) isEvaluationPrecomputedRagSourceConfig()                  {}
+func (*UnknownUnionMember) isEvaluatorModelConfig()                                  {}
+func (*UnknownUnionMember) isGraderConfig()                                          {}
+func (*UnknownUnionMember) isInferenceProfileModelSource()                           {}
+func (*UnknownUnionMember) isInvocationLogSource()                                   {}
+func (*UnknownUnionMember) isKnowledgeBaseConfig()                                   {}
+func (*UnknownUnionMember) isModelDataSource()                                       {}
+func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()                     {}
+func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig()                    {}
+func (*UnknownUnionMember) isRAGConfig()                                             {}
+func (*UnknownUnionMember) isRatingScaleItemValue()                                  {}
+func (*UnknownUnionMember) isRequestMetadataFilters()                                {}
+func (*UnknownUnionMember) isRerankingMetadataSelectiveModeConfiguration()           {}
+func (*UnknownUnionMember) isRetrievalFilter()                                       {}

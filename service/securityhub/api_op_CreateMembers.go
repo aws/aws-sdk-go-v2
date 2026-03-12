@@ -11,41 +11,41 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a member association in Security Hub between the specified accounts and
-// the account used to make the request, which is the administrator account. If you
-// are integrated with Organizations, then the administrator account is designated
-// by the organization management account.
+// Creates a member association in Security Hub CSPM between the specified
+// accounts and the account used to make the request, which is the administrator
+// account. If you are integrated with Organizations, then the administrator
+// account is designated by the organization management account.
 //
 // CreateMembers is always used to add accounts that are not organization members.
 //
 // For accounts that are managed using Organizations, CreateMembers is only used
 // in the following cases:
 //
-//   - Security Hub is not configured to automatically add new organization
+//   - Security Hub CSPM is not configured to automatically add new organization
 //     accounts.
 //
-//   - The account was disassociated or deleted in Security Hub.
+//   - The account was disassociated or deleted in Security Hub CSPM.
 //
-// This action can only be used by an account that has Security Hub enabled. To
-// enable Security Hub, you can use the EnableSecurityHub operation.
+// This action can only be used by an account that has Security Hub CSPM enabled.
+// To enable Security Hub CSPM, you can use the EnableSecurityHub operation.
 //
 // For accounts that are not organization members, you create the account
 // association and then send an invitation to the member account. To send the
 // invitation, you use the InviteMembers operation. If the account owner accepts
-// the invitation, the account becomes a member account in Security Hub.
+// the invitation, the account becomes a member account in Security Hub CSPM.
 //
 // Accounts that are managed using Organizations don't receive an invitation. They
-// automatically become a member account in Security Hub.
+// automatically become a member account in Security Hub CSPM.
 //
-//   - If the organization account does not have Security Hub enabled, then
-//     Security Hub and the default standards are automatically enabled. Note that
-//     Security Hub cannot be enabled automatically for the organization management
-//     account. The organization management account must enable Security Hub before the
-//     administrator account enables it as a member account.
+//   - If the organization account does not have Security Hub CSPM enabled, then
+//     Security Hub CSPM and the default standards are automatically enabled. Note that
+//     Security Hub CSPM cannot be enabled automatically for the organization
+//     management account. The organization management account must enable Security Hub
+//     CSPM before the administrator account enables it as a member account.
 //
-//   - For organization accounts that already have Security Hub enabled, Security
-//     Hub does not make any other changes to those accounts. It does not change their
-//     enabled standards or controls.
+//   - For organization accounts that already have Security Hub CSPM enabled,
+//     Security Hub CSPM does not make any other changes to those accounts. It does not
+//     change their enabled standards or controls.
 //
 // A permissions policy is added that permits the administrator account to view
 // the findings generated in the member account.
@@ -69,9 +69,9 @@ func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, 
 
 type CreateMembersInput struct {
 
-	// The list of accounts to associate with the Security Hub administrator account.
-	// For each account, the list includes the account ID and optionally the email
-	// address.
+	// The list of accounts to associate with the Security Hub CSPM administrator
+	// account. For each account, the list includes the account ID and optionally the
+	// email address.
 	//
 	// This member is required.
 	AccountDetails []types.AccountDetails

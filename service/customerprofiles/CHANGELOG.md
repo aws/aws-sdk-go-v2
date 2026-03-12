@@ -1,3 +1,20 @@
+# v1.57.0 (2026-03-11)
+
+* **Feature**: Today, Amazon Connect is announcing the ability to filter (include or exclude) recommendations based on properties of items and interactions.
+
+# v1.56.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.56.0 (2026-02-27)
+
+* **Feature**: This release introduces an optional SourcePriority parameter to the ProfileObjectType APIs, allowing you to control the precedence of object types when ingesting data from multiple sources. Additionally, WebAnalytics and Device have been added as new StandardIdentifier values.
+
+# v1.55.4 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.3 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

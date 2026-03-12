@@ -1027,7 +1027,7 @@ func (m *awsRestjson1_deserializeOpDuplexStream) HandleDeserialize(ctx context.C
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorDuplexStream(response, &metadata)
 	}
-	output := &DuplexStreamOutput{}
+	output := &DuplexStreamInitialReply{}
 	out.Result = output
 
 	span.End()
@@ -1261,7 +1261,7 @@ func (m *awsRestjson1_deserializeOpDuplexStreamWithInitialMessages) HandleDeseri
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorDuplexStreamWithInitialMessages(response, &metadata)
 	}
-	output := &DuplexStreamWithInitialMessagesOutput{}
+	output := &DuplexStreamWithInitialMessagesInitialReply{}
 	out.Result = output
 
 	err = awsRestjson1_deserializeOpHttpBindingsDuplexStreamWithInitialMessagesOutput(output, response)
@@ -1327,7 +1327,7 @@ func awsRestjson1_deserializeOpErrorDuplexStreamWithInitialMessages(response *sm
 	}
 }
 
-func awsRestjson1_deserializeOpHttpBindingsDuplexStreamWithInitialMessagesOutput(v *DuplexStreamWithInitialMessagesOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsDuplexStreamWithInitialMessagesOutput(v *DuplexStreamWithInitialMessagesInitialReply, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -10349,7 +10349,7 @@ func (m *awsRestjson1_deserializeOpOutputStream) HandleDeserialize(ctx context.C
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorOutputStream(response, &metadata)
 	}
-	output := &OutputStreamOutput{}
+	output := &OutputStreamInitialReply{}
 	out.Result = output
 
 	span.End()
@@ -10437,7 +10437,7 @@ func (m *awsRestjson1_deserializeOpOutputStreamWithInitialResponse) HandleDeseri
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorOutputStreamWithInitialResponse(response, &metadata)
 	}
-	output := &OutputStreamWithInitialResponseOutput{}
+	output := &OutputStreamWithInitialResponseInitialReply{}
 	out.Result = output
 
 	err = awsRestjson1_deserializeOpHttpBindingsOutputStreamWithInitialResponseOutput(output, response)
@@ -10500,7 +10500,7 @@ func awsRestjson1_deserializeOpErrorOutputStreamWithInitialResponse(response *sm
 	}
 }
 
-func awsRestjson1_deserializeOpHttpBindingsOutputStreamWithInitialResponseOutput(v *OutputStreamWithInitialResponseOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsOutputStreamWithInitialResponseOutput(v *OutputStreamWithInitialResponseInitialReply, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -13741,19 +13741,6 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	}
 
 	{
-		headerValue := msg.Headers.Get("shortHeader")
-		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.Int16Value)
-			if !ok {
-				return fmt.Errorf("unexpected event header %s with type %T:", "shortHeader", headerValue)
-			}
-
-			ihv := hv.Get().(int16)
-			v.ShortHeader = ptr.Int16(ihv)
-		}
-	}
-
-	{
 		headerValue := msg.Headers.Get("booleanHeader")
 		if headerValue != nil {
 			hv, ok := headerValue.(*eventstream.BoolValue)
@@ -13776,6 +13763,19 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 
 			ihv := hv.Get().(int8)
 			v.ByteHeader = ptr.Int8(ihv)
+		}
+	}
+
+	{
+		headerValue := msg.Headers.Get("shortHeader")
+		if headerValue != nil {
+			hv, ok := headerValue.(*eventstream.Int16Value)
+			if !ok {
+				return fmt.Errorf("unexpected event header %s with type %T:", "shortHeader", headerValue)
+			}
+
+			ihv := hv.Get().(int16)
+			v.ShortHeader = ptr.Int16(ihv)
 		}
 	}
 

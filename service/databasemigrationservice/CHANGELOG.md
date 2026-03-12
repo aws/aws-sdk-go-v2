@@ -1,3 +1,16 @@
+# v1.61.8 (2026-03-10)
+
+* **Documentation**: Not need to include to any release notes. The only change is to correct LoadTimeout unit from milliseconds to seconds in RedshiftSettings
+
+# v1.61.7 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.61.6 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.5 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

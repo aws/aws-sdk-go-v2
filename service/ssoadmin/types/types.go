@@ -162,6 +162,10 @@ type Application struct {
 	// The date and time when the application was originally created.
 	CreatedDate *time.Time
 
+	// The Amazon Web Services Region where the application was created in IAM
+	// Identity Center.
+	CreatedFrom *string
+
 	// The description of the application.
 	Description *string
 
@@ -750,6 +754,30 @@ type PortalOptions struct {
 //
 // [RFC 6749]: https://datatracker.ietf.org/doc/html/rfc6749#section-1.5
 type RefreshTokenGrant struct {
+	noSmithyDocumentSerde
+}
+
+// Contains information about an enabled Region of an IAM Identity Center
+// instance, including the Region name, status, date added, and whether it is the
+// primary Region.
+type RegionMetadata struct {
+
+	// The timestamp when the Region was added to the IAM Identity Center instance.
+	// For the primary Region, this is the instance creation time.
+	AddedDate *time.Time
+
+	// Indicates whether this is the primary Region where the IAM Identity Center
+	// instance was originally enabled. The primary Region cannot be removed.
+	IsPrimaryRegion bool
+
+	// The Amazon Web Services Region name.
+	RegionName *string
+
+	// The current status of the Region. Valid values are ACTIVE (Region is
+	// operational), ADDING (Region extension workflow is in progress), or REMOVING
+	// (Region removal workflow is in progress).
+	Status RegionStatus
+
 	noSmithyDocumentSerde
 }
 

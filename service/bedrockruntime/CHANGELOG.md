@@ -1,3 +1,17 @@
+# v1.50.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.50.0 (2026-02-23)
+
+* **Feature**: Support bedrockruntime#InvokeModelWithBidirectionalStream by changing event stream code generation
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.0 (2026-02-04)
+
+* **Feature**: Added support for structured outputs to Converse and ConverseStream APIs.
+
 # v1.48.0 (2026-01-20)
 
 * **Feature**: Added support for extended prompt caching with one hour TTL.

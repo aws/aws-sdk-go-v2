@@ -13,7 +13,13 @@ import (
 )
 
 // Updates the configuration of a Route 53 Global Resolver instance. You can
-// modify the name, description, and observability region.
+// modify the name, description, and observability Region.
+//
+// Route 53 Global Resolver is a global service that supports resolvers in
+// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+// Region to create, update, or otherwise work with Route 53 Global Resolver
+// resources. That is, for example, specify --region us-east-2 on Amazon Web
+// Services CLI commands.
 func (c *Client) UpdateGlobalResolver(ctx context.Context, params *UpdateGlobalResolverInput, optFns ...func(*Options)) (*UpdateGlobalResolverOutput, error) {
 	if params == nil {
 		params = &UpdateGlobalResolverInput{}
@@ -39,11 +45,15 @@ type UpdateGlobalResolverInput struct {
 	// The description of the Global Resolver.
 	Description *string
 
+	// The IP address type for the Global Resolver. Valid values are IPV4 or
+	// DUAL_STACK for both IPv4 and IPv6 support.
+	IpAddressType types.GlobalResolverIpAddressType
+
 	// The name of the Global Resolver.
 	Name *string
 
-	// The AWS Regions in which the users' Global Resolver query resolution logs will
-	// be propagated.
+	// The Amazon Web Services Regions in which the users' Global Resolver query
+	// resolution logs will be propagated.
 	ObservabilityRegion *string
 
 	noSmithyDocumentSerde
@@ -89,7 +99,7 @@ type UpdateGlobalResolverOutput struct {
 	// This member is required.
 	Name *string
 
-	// The AWS Regions in which the Global Resolver will operate.
+	// The Amazon Web Services Regions in which the Global Resolver will operate.
 	//
 	// This member is required.
 	Regions []string
@@ -107,8 +117,15 @@ type UpdateGlobalResolverOutput struct {
 	// Description of the Global Resolver.
 	Description *string
 
-	// The AWS Regions in which the users' Global Resolver query resolution logs will
-	// be propagated.
+	// The IP address type configured for the updated Global Resolver.
+	IpAddressType types.GlobalResolverIpAddressType
+
+	// List of anycast IPv6 addresses associated with the updated Global Resolver
+	// instance. This field is only populated when ipAddressType is DUAL_STACK.
+	Ipv6Addresses []string
+
+	// The Amazon Web Services Regions in which the users' Global Resolver query
+	// resolution logs will be propagated.
 	ObservabilityRegion *string
 
 	// Metadata pertaining to the operation's result.

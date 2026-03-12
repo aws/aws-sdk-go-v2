@@ -1,3 +1,16 @@
+# v1.10.2 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.0 (2026-02-06)
+
+* **Feature**: Add OutputConfiguration to InvokeDataAutomation input and output to support S3 output
+
 # v1.9.4 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

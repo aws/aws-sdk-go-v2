@@ -47,6 +47,9 @@ type CreateFieldInput struct {
 	// This member is required.
 	Type types.FieldType
 
+	// Union of field attributes.
+	Attributes types.FieldAttributes
+
 	// The description of the field.
 	Description *string
 

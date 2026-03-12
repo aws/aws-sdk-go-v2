@@ -176,6 +176,9 @@ const (
 	ResourceShareAssociationStatusFailed         ResourceShareAssociationStatus = "FAILED"
 	ResourceShareAssociationStatusDisassociating ResourceShareAssociationStatus = "DISASSOCIATING"
 	ResourceShareAssociationStatusDisassociated  ResourceShareAssociationStatus = "DISASSOCIATED"
+	ResourceShareAssociationStatusSuspended      ResourceShareAssociationStatus = "SUSPENDED"
+	ResourceShareAssociationStatusSuspending     ResourceShareAssociationStatus = "SUSPENDING"
+	ResourceShareAssociationStatusRestoring      ResourceShareAssociationStatus = "RESTORING"
 )
 
 // Values returns all known values for ResourceShareAssociationStatus. Note that
@@ -190,6 +193,9 @@ func (ResourceShareAssociationStatus) Values() []ResourceShareAssociationStatus 
 		"FAILED",
 		"DISASSOCIATING",
 		"DISASSOCIATED",
+		"SUSPENDED",
+		"SUSPENDING",
+		"RESTORING",
 	}
 }
 
@@ -199,6 +205,7 @@ type ResourceShareAssociationType string
 const (
 	ResourceShareAssociationTypePrincipal ResourceShareAssociationType = "PRINCIPAL"
 	ResourceShareAssociationTypeResource  ResourceShareAssociationType = "RESOURCE"
+	ResourceShareAssociationTypeSource    ResourceShareAssociationType = "SOURCE"
 )
 
 // Values returns all known values for ResourceShareAssociationType. Note that
@@ -210,6 +217,7 @@ func (ResourceShareAssociationType) Values() []ResourceShareAssociationType {
 	return []ResourceShareAssociationType{
 		"PRINCIPAL",
 		"RESOURCE",
+		"SOURCE",
 	}
 }
 

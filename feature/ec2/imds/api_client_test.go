@@ -3,6 +3,7 @@ package imds
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -182,32 +183,32 @@ func (w WithEndpoint) GetEC2IMDSEndpoint() (string, bool, error) {
 
 func TestNewFromConfig(t *testing.T) {
 	cases := map[string]struct {
-		Sources []interface{}
+		Sources []any
 		Expect  string
 	}{
 		"default": {
 			Expect: defaultIPv4Endpoint,
 		},
 		"non-implementing sources": {
-			Sources: []interface{}{
+			Sources: []any{
 				struct{}{},
 			},
 			Expect: defaultIPv4Endpoint,
 		},
 		"endpoint mode IPv6": {
-			Sources: []interface{}{
+			Sources: []any{
 				WithEndpointModeSource(EndpointModeStateIPv6),
 			},
 			Expect: defaultIPv6Endpoint,
 		},
 		"endpoint mode IPv4": {
-			Sources: []interface{}{
+			Sources: []any{
 				WithEndpointModeSource(EndpointModeStateIPv4),
 			},
 			Expect: defaultIPv4Endpoint,
 		},
 		"endpoint mode unknown": {
-			Sources: []interface{}{
+			Sources: []any{
 				WithEndpointModeSource(func() (v EndpointModeState) {
 					v.SetFromString("foobar")
 					return v
@@ -216,13 +217,13 @@ func TestNewFromConfig(t *testing.T) {
 			Expect: defaultIPv4Endpoint,
 		},
 		"endpoint": {
-			Sources: []interface{}{
+			Sources: []any{
 				WithEndpoint("http://endpoint.localhost"),
 			},
 			Expect: "http://endpoint.localhost",
 		},
 		"endpoint mode && endpoint": {
-			Sources: []interface{}{
+			Sources: []any{
 				WithEndpointModeSource(EndpointModeStateIPv6),
 				WithEndpoint("http://endpoint.localhost"),
 			},
@@ -327,7 +328,7 @@ type mockDelayer struct {
 // BackoffDelay implements retry.BackoffDelayer.BackoffDelay()
 func (d *mockDelayer) BackoffDelay(attempt int, err error) (time.Duration, error) {
 	if d.err != "" {
-		return 0, fmt.Errorf(d.err)
+		return 0, errors.New(d.err)
 	}
 	return d.delay, nil
 }

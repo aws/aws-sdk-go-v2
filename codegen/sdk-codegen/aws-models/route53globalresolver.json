@@ -362,7 +362,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to associate a resource to a hosted zone"
                 },
-                "smithy.api#documentation": "<p>Associates a Route 53 private hosted zone with a Route 53 Global Resolver resource. This allows the resolver to resolve DNS queries for the private hosted zone from anywhere globally.</p>",
+                "smithy.api#documentation": "<p>Associates a Route 53 private hosted zone with a Route 53 Global Resolver resource. This allows the resolver to resolve DNS queries for the private hosted zone from anywhere globally.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/hosted-zone-associations/{hostedZoneId}",
@@ -456,7 +456,7 @@
                 "status": {
                     "target": "com.amazonaws.route53globalresolver#HostedZoneAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Aggregate status for all the AWS Regions in which the Route 53 Global Resolver exists.</p>",
+                        "smithy.api#documentation": "<p>Aggregate status for all the Amazon Web Services Regions in which the Route 53 Global Resolver exists.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -492,7 +492,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create multiple firewall rules"
                 },
-                "smithy.api#documentation": "<p>Creates multiple DNS firewall rules in a single operation. This is more efficient than creating rules individually when you need to set up multiple rules at once.</p>",
+                "smithy.api#documentation": "<p>Creates multiple DNS firewall rules in a single operation. This is more efficient than creating rules individually when you need to set up multiple rules at once.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/firewall-rules/batch-create",
@@ -852,7 +852,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete multiple firewall rules"
                 },
-                "smithy.api#documentation": "<p>Deletes multiple DNS firewall rules in a single operation. This is more efficient than deleting rules individually.</p>",
+                "smithy.api#documentation": "<p>Deletes multiple DNS firewall rules in a single operation. This is more efficient than deleting rules individually.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/firewall-rules/batch-delete",
@@ -1014,7 +1014,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update multiple firewall rules"
                 },
-                "smithy.api#documentation": "<p>Updates multiple DNS firewall rules in a single operation. This is more efficient than updating rules individually.</p>",
+                "smithy.api#documentation": "<p>Updates multiple DNS firewall rules in a single operation. This is more efficient than updating rules individually.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/firewall-rules/batch-update",
@@ -1361,7 +1361,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 42
+                    "max": 43
                 }
             }
         },
@@ -1466,7 +1466,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create an access source"
                 },
-                "smithy.api#documentation": "<p>Creates an access source for a DNS view. Access sources define IP addresses or CIDR ranges that are allowed to send DNS queries to the Route 53 Global Resolver, along with the permitted DNS protocols.</p>",
+                "smithy.api#documentation": "<p>Creates an access source for a DNS view. Access sources define IP addresses or CIDR ranges that are allowed to send DNS queries to the Route 53 Global Resolver, along with the permitted DNS protocols.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#examples": [
                     {
                         "title": "CreateAccessSource example",
@@ -1692,7 +1692,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create an access token"
                 },
-                "smithy.api#documentation": "<p>Creates an access token for a DNS view. Access tokens provide token-based authentication for DNS-over-HTTPS (DoH) and DNS-over-TLS (DoT) connections to the Route 53 Global Resolver.</p>",
+                "smithy.api#documentation": "<p>Creates an access token for a DNS view. Access tokens provide token-based authentication for DNS-over-HTTPS (DoH) and DNS-over-TLS (DoT) connections to the Route 53 Global Resolver.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tokens/{dnsViewId}",
@@ -1852,7 +1852,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a dns view"
                 },
-                "smithy.api#documentation": "<p>Creates a DNS view within a Route 53 Global Resolver. A DNS view models end users, user groups, networks, and devices, and serves as a parent resource that holds configurations controlling access, authorization, DNS firewall rules, and forwarding rules.</p>",
+                "smithy.api#documentation": "<p>Creates a DNS view within a Route 53 Global Resolver. A DNS view models end users, user groups, networks, and devices, and serves as a parent resource that holds configurations controlling access, authorization, DNS firewall rules, and forwarding rules.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/dns-views/{globalResolverId}",
@@ -2055,7 +2055,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a firewall domain list"
                 },
-                "smithy.api#documentation": "<p>Creates a firewall domain list. Domain lists are reusable sets of domain specifications that you use in DNS firewall rules to allow, block, or alert on DNS queries to specific domains.</p>",
+                "smithy.api#documentation": "<p>Creates a firewall domain list. Domain lists are reusable sets of domain specifications that you use in DNS firewall rules to allow, block, or alert on DNS queries to specific domains.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/firewall-domain-lists/{globalResolverId}",
@@ -2214,7 +2214,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a firewall rule"
                 },
-                "smithy.api#documentation": "<p>Creates a DNS firewall rule. Firewall rules define actions (ALLOW, BLOCK, or ALERT) to take on DNS queries that match specified domain lists, managed domain lists, or advanced threat protections.</p>",
+                "smithy.api#documentation": "<p>Creates a DNS firewall rule. Firewall rules define actions (ALLOW, BLOCK, or ALERT) to take on DNS queries that match specified domain lists, managed domain lists, or advanced threat protections.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/firewall-rules",
@@ -2505,7 +2505,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a global resolver"
                 },
-                "smithy.api#documentation": "<p>Creates a new Route 53 Global Resolver instance. A Route 53 Global Resolver is a global, internet-accessible DNS resolver that provides secure DNS resolution for both public and private domains through global anycast IP addresses.</p>",
+                "smithy.api#documentation": "<p>Creates a new Route 53 Global Resolver instance. A Route 53 Global Resolver is a global, internet-accessible DNS resolver that provides secure DNS resolution for both public and private domains through global anycast IP addresses.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/global-resolver",
@@ -2530,6 +2530,12 @@
                         "smithy.api#documentation": "<p>An optional description for the Route 53 Global Resolver instance. Maximum length of 1024 characters.</p>"
                     }
                 },
+                "ipAddressType": {
+                    "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the Route 53 Global Resolver. Valid values are IPV4 (default) or DUAL_STACK for both IPv4 and IPv6 support.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.route53globalresolver#ResourceName",
                     "traits": {
@@ -2540,13 +2546,13 @@
                 "observabilityRegion": {
                     "target": "com.amazonaws.route53globalresolver#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS region where query resolution logs and metrics will be aggregated and delivered. If not specified, logging is not enabled.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where query resolution logs and metrics will be aggregated and delivered. If not specified, logging is not enabled.</p>"
                     }
                 },
                 "regions": {
                     "target": "com.amazonaws.route53globalresolver#Regions",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of AWS regions where the Route 53 Global Resolver will operate. The resolver will be distributed across these regions to provide global availability and low-latency DNS resolution.</p>",
+                        "smithy.api#documentation": "<p>List of Amazon Web Services Regions where the Route 53 Global Resolver will operate. The resolver will be distributed across these Regions to provide global availability and low-latency DNS resolution.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2606,11 +2612,23 @@
                         "smithy.api#required": {}
                     }
                 },
+                "ipAddressType": {
+                    "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type configured for the Route 53 Global Resolver (IPV4 or DUAL_STACK).</p>"
+                    }
+                },
                 "ipv4Addresses": {
                     "target": "com.amazonaws.route53globalresolver#IPv4Addresses",
                     "traits": {
                         "smithy.api#documentation": "<p>The global anycast IPv4 addresses associated with the Route 53 Global Resolver. DNS clients can send queries to these addresses from anywhere on the internet.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ipv6Addresses": {
+                    "target": "com.amazonaws.route53globalresolver#IPv6Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global anycast IPv6 addresses associated with the Route 53 Global Resolver. This field is only populated when ipAddressType is DUAL_STACK. DNS clients can send queries to these addresses from anywhere on the internet.</p>"
                     }
                 },
                 "name": {
@@ -2623,13 +2641,13 @@
                 "observabilityRegion": {
                     "target": "com.amazonaws.route53globalresolver#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where observability data for the Route 53 Global Resolver is stored.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where observability data for the Route 53 Global Resolver is stored.</p>"
                     }
                 },
                 "regions": {
                     "target": "com.amazonaws.route53globalresolver#Regions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions where the Route 53 Global Resolver is deployed and operational.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions where the Route 53 Global Resolver is deployed and operational.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2863,7 +2881,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete an access source"
                 },
-                "smithy.api#documentation": "<p>Deletes an access source. This operation cannot be undone.</p>",
+                "smithy.api#documentation": "<p>Deletes an access source. This operation cannot be undone.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/access-sources/{accessSourceId}",
@@ -3004,7 +3022,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete an access token"
                 },
-                "smithy.api#documentation": "<p>Deletes an access token. This operation cannot be undone.</p>",
+                "smithy.api#documentation": "<p>Deletes an access token. This operation cannot be undone.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tokens/{accessTokenId}",
@@ -3093,7 +3111,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete a dns view"
                 },
-                "smithy.api#documentation": "<p>Deletes a DNS view. This operation cannot be undone.</p>",
+                "smithy.api#documentation": "<p>Deletes a DNS view. This operation cannot be undone.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/dns-views/{dnsViewId}",
@@ -3242,7 +3260,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete a firewall domain list"
                 },
-                "smithy.api#documentation": "<p>Deletes a firewall domain list. This operation cannot be undone.</p>",
+                "smithy.api#documentation": "<p>Deletes a firewall domain list. This operation cannot be undone.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/firewall-domain-lists/{firewallDomainListId}",
@@ -3337,7 +3355,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete a firewall rule"
                 },
-                "smithy.api#documentation": "<p>Deletes a DNS firewall rule. This operation cannot be undone.</p>",
+                "smithy.api#documentation": "<p>Deletes a DNS firewall rule. This operation cannot be undone.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/firewall-rules/{firewallRuleId}",
@@ -3514,7 +3532,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete a global resolver"
                 },
-                "smithy.api#documentation": "<p>Deletes a Route 53 Global Resolver instance. This operation cannot be undone. All associated DNS views, access sources, tokens, and firewall rules are also deleted.</p>",
+                "smithy.api#documentation": "<p>Deletes a Route 53 Global Resolver instance. This operation cannot be undone. All associated DNS views, access sources, tokens, and firewall rules are also deleted.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/global-resolver/{globalResolverId}",
@@ -3574,7 +3592,7 @@
                 "observabilityRegion": {
                     "target": "com.amazonaws.route53globalresolver#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where observability data for the deleted Route 53 Global Resolver was stored.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where observability data for the deleted Route 53 Global Resolver was stored.</p>"
                     }
                 },
                 "name": {
@@ -3593,7 +3611,7 @@
                 "regions": {
                     "target": "com.amazonaws.route53globalresolver#Regions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions where the deleted Route 53 Global Resolver was deployed and operational.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions where the deleted Route 53 Global Resolver was deployed and operational.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3624,6 +3642,18 @@
                         "smithy.api#documentation": "<p>The global anycast IPv4 addresses that were associated with the deleted Route 53 Global Resolver.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ipv6Addresses": {
+                    "target": "com.amazonaws.route53globalresolver#IPv6Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global anycast IPv6 addresses that were associated with the deleted Route 53 Global Resolver.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type that was configured for the deleted Route 53 Global Resolver.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3652,6 +3682,9 @@
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
@@ -3663,7 +3696,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to disable a dns view"
                 },
-                "smithy.api#documentation": "<p>Disables a DNS view, preventing it from serving DNS queries.</p>",
+                "smithy.api#documentation": "<p>Disables a DNS view, preventing it from serving DNS queries.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/dns-views/{dnsViewId}/disable",
@@ -3812,7 +3845,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to disassociate a hosted zone from a resource"
                 },
-                "smithy.api#documentation": "<p>Disassociates a Route 53 private hosted zone from a Route 53 Global Resolver resource.</p>",
+                "smithy.api#documentation": "<p>Disassociates a Route 53 private hosted zone from a Route 53 Global Resolver resource.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/hosted-zone-associations/hosted-zone/{hostedZoneId}/resource-arn/{resourceArn+}",
@@ -3923,6 +3956,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DNS_TUNNELING"
                     }
+                },
+                "DICTIONARY_DGA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DICTIONARY_DGA"
+                    }
                 }
             }
         },
@@ -3982,7 +4021,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^\\*?[-a-zA-Z0-9.]+$"
+                "smithy.api#pattern": "^\\*?[a-zA-Z0-9!\"#$%&'()*+,./:;<=>?@\\[\\\\\\]^_`{|}~-]+$"
             }
         },
         "com.amazonaws.route53globalresolver#Domains": {
@@ -4068,7 +4107,7 @@
                     "FederatedUser"
                 ],
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p> Amazon Route 53 Global Resolver is a global, internet-accessible DNS resolver that enables customers to resolve and forward traffic for both public and private domains while ensuring security and authenticity of queries over the internet. Route 53 Global Resolver supports DNS-over-port 53 (Do53), DNS-over-TLS (DoT), and DNS-over-HTTPS (DoH) protocols through global anycast IP addresses. </p>",
+                "smithy.api#documentation": "<p>Amazon Route 53 Global Resolver is a global, internet-accessible DNS resolver that enables customers to resolve and forward traffic for both public and private domains while ensuring security and authenticity of queries over the internet. Route 53 Global Resolver supports DNS-over-port 53 (Do53), DNS-over-TLS (DoT), and DNS-over-HTTPS (DoH) protocols through global anycast IP addresses.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#title": "Amazon Route 53 Global Resolver",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -4353,6 +4392,9 @@
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
@@ -4364,7 +4406,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to enable a dns view"
                 },
-                "smithy.api#documentation": "<p>Enables a disabled DNS view, allowing it to serve DNS queries again.</p>",
+                "smithy.api#documentation": "<p>Enables a disabled DNS view, allowing it to serve DNS queries again.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/dns-views/{dnsViewId}/enable",
@@ -4971,7 +5013,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get an access source"
                 },
-                "smithy.api#documentation": "<p>Retrieves information about an access source.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about an access source.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/access-sources/{accessSourceId}",
@@ -5130,7 +5172,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get an access token"
                 },
-                "smithy.api#documentation": "<p>Retrieves information about an access token.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about an access token.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tokens/{accessTokenId}",
@@ -5287,7 +5329,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get a dns view"
                 },
-                "smithy.api#documentation": "<p>Retrieves information about a DNS view.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a DNS view.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/dns-views/{dnsViewId}",
@@ -5451,7 +5493,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get a firewall domain list"
                 },
-                "smithy.api#documentation": "<p>Retrieves information about a firewall domain list.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a firewall domain list.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/firewall-domain-lists/{firewallDomainListId}",
@@ -5608,7 +5650,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get a firewall rule"
                 },
-                "smithy.api#documentation": "<p>Retrieves information about a DNS firewall rule.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a DNS firewall rule.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/firewall-rules/{firewallRuleId}",
@@ -5708,7 +5750,7 @@
                 "dnsAdvancedProtection": {
                     "target": "com.amazonaws.route53globalresolver#DnsAdvancedProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the DNS Firewall Advanced rule. Valid values are DGA and DNS_TUNNELING.</p>"
+                        "smithy.api#documentation": "<p>The type of the DNS Firewall Advanced rule. Valid values are DGA, DNS_TUNNELING, and DICTIONARY_DGA.</p>"
                     }
                 },
                 "firewallDomainListId": {
@@ -5814,7 +5856,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get a global resolver"
                 },
-                "smithy.api#documentation": "<p>Retrieves information about a Route 53 Global Resolver instance.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a Route 53 Global Resolver instance.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/global-resolver/{globalResolverId}",
@@ -5892,7 +5934,7 @@
                 "observabilityRegion": {
                     "target": "com.amazonaws.route53globalresolver#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions in which the users' Global Resolver query resolution logs will be propagated.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the users' Global Resolver query resolution logs will be propagated.</p>"
                     }
                 },
                 "name": {
@@ -5911,7 +5953,7 @@
                 "regions": {
                     "target": "com.amazonaws.route53globalresolver#Regions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions in which the Global Resolver operate.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the Global Resolver operate.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5941,6 +5983,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of anycast IPv4 addresses associated with the Global Resolver instance.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ipv6Addresses": {
+                    "target": "com.amazonaws.route53globalresolver#IPv6Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of anycast IPv6 addresses associated with the Global Resolver instance. This field is only populated when ipAddressType is DUAL_STACK.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type configured for the Global Resolver.</p>"
                     }
                 }
             },
@@ -5978,7 +6032,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get a hosted zone association"
                 },
-                "smithy.api#documentation": "<p>Retrieves information about a hosted zone association.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a hosted zone association.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/hosted-zone-associations/{hostedZoneAssociationId}",
@@ -6116,7 +6170,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get a managed firewall domain list"
                 },
-                "smithy.api#documentation": "<p>Retrieves information about an AWS-managed firewall domain list. Managed domain lists contain domains associated with malicious activity, content categories, or specific threats.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about an Amazon Web Services-managed firewall domain list. Managed domain lists contain domains associated with malicious activity, content categories, or specific threats.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/managed-firewall-domain-lists/{managedFirewallDomainListId}",
@@ -6218,8 +6272,14 @@
                 "dnsName": {
                     "target": "com.amazonaws.route53globalresolver#Sni"
                 },
+                "ipAddressType": {
+                    "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType"
+                },
                 "ipv4Addresses": {
                     "target": "com.amazonaws.route53globalresolver#IPv4Addresses"
+                },
+                "ipv6Addresses": {
+                    "target": "com.amazonaws.route53globalresolver#IPv6Addresses"
                 },
                 "name": {
                     "target": "com.amazonaws.route53globalresolver#ResourceName"
@@ -6268,6 +6328,23 @@
                 "smithy.api#documentation": "Represents a Route 53 Global Resolver that provides DNS resolution and filtering for all clients regardless of their location"
             }
         },
+        "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "DUAL_STACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUAL_STACK"
+                    }
+                }
+            }
+        },
         "com.amazonaws.route53globalresolver#GlobalResolvers": {
             "type": "list",
             "member": {
@@ -6308,7 +6385,7 @@
                 "observabilityRegion": {
                     "target": "com.amazonaws.route53globalresolver#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where observability data is collected for the global resolver.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where observability data is collected for the global resolver.</p>"
                     }
                 },
                 "name": {
@@ -6327,7 +6404,7 @@
                 "regions": {
                     "target": "com.amazonaws.route53globalresolver#Regions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions where the global resolver is deployed.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions where the global resolver is deployed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6357,6 +6434,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IPv4 addresses assigned to the global resolver.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ipv6Addresses": {
+                    "target": "com.amazonaws.route53globalresolver#IPv6Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 addresses assigned to the global resolver. This field is only populated when ipAddressType is DUAL_STACK.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type configured for the global resolver.</p>"
                     }
                 }
             },
@@ -6542,6 +6631,22 @@
                 "target": "com.amazonaws.route53globalresolver#IPv4Address"
             }
         },
+        "com.amazonaws.route53globalresolver#IPv6Address": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 39
+                },
+                "smithy.api#pattern": "^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$"
+            }
+        },
+        "com.amazonaws.route53globalresolver#IPv6Addresses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53globalresolver#IPv6Address"
+            }
+        },
         "com.amazonaws.route53globalresolver#ISO8601TimeString": {
             "type": "timestamp",
             "traits": {
@@ -6570,6 +6675,9 @@
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
@@ -6584,7 +6692,7 @@
                         "s3:ListBucket"
                     ]
                 },
-                "smithy.api#documentation": "<p>Imports a list of domains from an Amazon S3 file into a firewall domain list. The file should contain one domain per line.</p>",
+                "smithy.api#documentation": "<p>Imports a list of domains from an Amazon S3 file into a firewall domain list. The file should contain one domain per line.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/firewall-domain-lists/{firewallDomainListId}/domains/s3_file_url",
@@ -6722,7 +6830,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list access sources"
                 },
-                "smithy.api#documentation": "<p>Lists all access sources with pagination support.</p>",
+                "smithy.api#documentation": "<p>Lists all access sources with pagination support.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/access-sources",
@@ -6817,7 +6925,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list access tokens"
                 },
-                "smithy.api#documentation": "<p>Lists all access tokens for a DNS view with pagination support.</p>",
+                "smithy.api#documentation": "<p>Lists all access tokens for a DNS view with pagination support.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tokens/dns-view/{dnsViewId}",
@@ -6919,7 +7027,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list dns views"
                 },
-                "smithy.api#documentation": "<p>Lists all DNS views for a Route 53 Global Resolver with pagination support.</p>",
+                "smithy.api#documentation": "<p>Lists all DNS views for a Route 53 Global Resolver with pagination support.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/dns-views/resolver/{globalResolverId}",
@@ -7015,7 +7123,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list firewall domain lists"
                 },
-                "smithy.api#documentation": "<p>Lists all firewall domain lists for a Route 53 Global Resolver with pagination support.</p>",
+                "smithy.api#documentation": "<p>Lists all firewall domain lists for a Route 53 Global Resolver with pagination support.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/firewall-domain-lists",
@@ -7110,7 +7218,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list firewall domains"
                 },
-                "smithy.api#documentation": "<p>Lists all the domains in DNS Firewall domain list you have created.</p>",
+                "smithy.api#documentation": "<p>Lists all the domains in DNS Firewall domain list you have created.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/firewall-domain-lists/{firewallDomainListId}/domains",
@@ -7210,7 +7318,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list firewall rules"
                 },
-                "smithy.api#documentation": "<p>Lists all DNS firewall rules for a DNS view with pagination support.</p>",
+                "smithy.api#documentation": "<p>Lists all DNS firewall rules for a DNS view with pagination support.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/firewall-rules",
@@ -7318,7 +7426,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list global resolvers"
                 },
-                "smithy.api#documentation": "<p>Lists all Route 53 Global Resolver instances in your account with pagination support.</p>",
+                "smithy.api#documentation": "<p>Lists all Route 53 Global Resolver instances in your account with pagination support.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/global-resolver",
@@ -7406,7 +7514,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list hosted zone associations"
                 },
-                "smithy.api#documentation": "<p>Lists all hosted zone associations for a Route 53 Global Resolver resource with pagination support.</p>",
+                "smithy.api#documentation": "<p>Lists all hosted zone associations for a Route 53 Global Resolver resource with pagination support.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/hosted-zone-associations/resource-arn/{resourceArn+}",
@@ -7499,7 +7607,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list managed firewall domain lists"
                 },
-                "smithy.api#documentation": "<p>Returns a paginated list of the AWS Managed DNS Lists and the categories for DNS Firewall. The categories are either <code>THREAT</code> or <code>CONTENT</code>.</p>",
+                "smithy.api#documentation": "<p>Returns a paginated list of the Amazon Web Services Managed DNS Lists and the categories for DNS Firewall. The categories are either <code>THREAT</code> or <code>CONTENT</code>.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/list-managed-firewall-domain-lists/{managedFirewallDomainListType}",
@@ -7582,7 +7690,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list tags for a resource"
                 },
-                "smithy.api#documentation": "<p>Lists the tags associated with a Route 53 Global Resolver resource.</p>",
+                "smithy.api#documentation": "<p>Lists the tags associated with a Route 53 Global Resolver resource.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/get-all-tags",
@@ -7890,13 +7998,13 @@
                 "serviceCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The code for the AWS service that owns the quota.</p>"
+                        "smithy.api#documentation": "<p>The code for the Amazon Web Services service that owns the quota.</p>"
                     }
                 },
                 "quotaCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota code recognized by the AWS Service Quotas service.</p>"
+                        "smithy.api#documentation": "<p>The quota code recognized by the Amazon Web Services Service Quotas service.</p>"
                     }
                 }
             },
@@ -7964,7 +8072,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to tag a resource"
                 },
-                "smithy.api#documentation": "<p>Adds or updates tags for a Route 53 Global Resolver resource. Tags are key-value pairs that help you organize and identify your resources.</p>",
+                "smithy.api#documentation": "<p>Adds or updates tags for a Route 53 Global Resolver resource. Tags are key-value pairs that help you organize and identify your resources.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tag-resource",
@@ -8069,13 +8177,13 @@
                 "serviceCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The code for the AWS service that owns the quota.</p>"
+                        "smithy.api#documentation": "<p>The code for the Amazon Web Services service that owns the quota.</p>"
                     }
                 },
                 "quotaCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota code recognized by the AWS Service Quotas service.</p>"
+                        "smithy.api#documentation": "<p>The quota code recognized by the Amazon Web Services Service Quotas service.</p>"
                     }
                 },
                 "retryAfterSeconds": {
@@ -8141,7 +8249,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to untag a resource"
                 },
-                "smithy.api#documentation": "<p>Removes tags from a Route 53 Global Resolver resource.</p>",
+                "smithy.api#documentation": "<p>Removes tags from a Route 53 Global Resolver resource.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/untag-resource",
@@ -8247,7 +8355,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update an access source"
                 },
-                "smithy.api#documentation": "<p>Updates the configuration of an access source.</p>",
+                "smithy.api#documentation": "<p>Updates the configuration of an access source.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/access-sources/{accessSourceId}",
@@ -8404,6 +8512,9 @@
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
@@ -8415,7 +8526,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update an access token"
                 },
-                "smithy.api#documentation": "<p>Updates the configuration of an access token.</p>",
+                "smithy.api#documentation": "<p>Updates the configuration of an access token.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/tokens/{accessTokenId}",
@@ -8492,6 +8603,9 @@
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
@@ -8503,7 +8617,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update a dns view"
                 },
-                "smithy.api#documentation": "<p>Updates the configuration of a DNS view.</p>",
+                "smithy.api#documentation": "<p>Updates the configuration of a DNS view.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/dns-views/{dnsViewId}",
@@ -8671,6 +8785,9 @@
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
@@ -8682,7 +8799,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update firewall domains"
                 },
-                "smithy.api#documentation": "<p>Updates a DNS Firewall domain list from an array of specified domains.</p>",
+                "smithy.api#documentation": "<p>Updates a DNS Firewall domain list from an array of specified domains.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/firewall-domain-lists/{firewallDomainListId}/domains",
@@ -8774,6 +8891,9 @@
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
@@ -8785,7 +8905,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update an firewall rule"
                 },
-                "smithy.api#documentation": "<p>Updates the configuration of a DNS firewall rule.</p>",
+                "smithy.api#documentation": "<p>Updates the configuration of a DNS firewall rule.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/firewall-rules/{firewallRuleId}",
@@ -8850,7 +8970,7 @@
                 "dnsAdvancedProtection": {
                     "target": "com.amazonaws.route53globalresolver#DnsAdvancedProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the DNS Firewall Advanced rule. Valid values are DGA and DNS_TUNNELING.</p>"
+                        "smithy.api#documentation": "<p>The type of the DNS Firewall Advanced rule. Valid values are DGA, DNS_TUNNELING, and DICTIONARY_DGA.</p>"
                     }
                 },
                 "firewallRuleId": {
@@ -8935,7 +9055,7 @@
                 "dnsAdvancedProtection": {
                     "target": "com.amazonaws.route53globalresolver#DnsAdvancedProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the DNS Firewall Advanced rule. Valid values are DGA and DNS_TUNNELING.</p>"
+                        "smithy.api#documentation": "<p>The type of the DNS Firewall Advanced rule. Valid values are DGA, DNS_TUNNELING, and DICTIONARY_DGA.</p>"
                     }
                 },
                 "firewallDomainListId": {
@@ -9033,6 +9153,9 @@
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
@@ -9044,7 +9167,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update a global resolver"
                 },
-                "smithy.api#documentation": "<p>Updates the configuration of a Route 53 Global Resolver instance. You can modify the name, description, and observability region.</p>",
+                "smithy.api#documentation": "<p>Updates the configuration of a Route 53 Global Resolver instance. You can modify the name, description, and observability Region.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/global-resolver/{globalResolverId}",
@@ -9074,13 +9197,19 @@
                 "observabilityRegion": {
                     "target": "com.amazonaws.route53globalresolver#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions in which the users' Global Resolver query resolution logs will be propagated.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the users' Global Resolver query resolution logs will be propagated.</p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.route53globalresolver#ResourceDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the Global Resolver.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the Global Resolver. Valid values are IPV4 or DUAL_STACK for both IPv4 and IPv6 support.</p>"
                     }
                 }
             },
@@ -9122,7 +9251,7 @@
                 "observabilityRegion": {
                     "target": "com.amazonaws.route53globalresolver#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions in which the users' Global Resolver query resolution logs will be propagated.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the users' Global Resolver query resolution logs will be propagated.</p>"
                     }
                 },
                 "name": {
@@ -9141,7 +9270,7 @@
                 "regions": {
                     "target": "com.amazonaws.route53globalresolver#Regions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions in which the Global Resolver will operate.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the Global Resolver will operate.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9172,6 +9301,18 @@
                         "smithy.api#documentation": "<p>List of anycast IPv4 addresses associated with the Global Resolver instance.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ipv6Addresses": {
+                    "target": "com.amazonaws.route53globalresolver#IPv6Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of anycast IPv6 addresses associated with the updated Global Resolver instance. This field is only populated when ipAddressType is DUAL_STACK.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type configured for the updated Global Resolver.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9200,6 +9341,9 @@
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
@@ -9211,7 +9355,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update a hosted zone association"
                 },
-                "smithy.api#documentation": "<p>Updates the configuration of a hosted zone association.</p>",
+                "smithy.api#documentation": "<p>Updates the configuration of a hosted zone association.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/hosted-zone-associations/{hostedZoneAssociationId}",

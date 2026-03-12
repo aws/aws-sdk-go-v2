@@ -1,3 +1,16 @@
+# v1.36.1 (2026-03-03)
+
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.36.0 (2026-02-26)
+
+* **Feature**: Added License Arn as a new optional filter for GetEntitlements and LicenseArn field in each entitlement in the response.
+
+# v1.35.6 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.5 (2026-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

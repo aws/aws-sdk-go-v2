@@ -30,6 +30,38 @@ type AdditionalEmailRecipients struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for after contact work (ACW) timeout.
+type AfterContactWorkConfig struct {
+
+	// The ACW timeout duration in seconds. Minimum: 1 second. Maximum: 2,000,000
+	// seconds (24 days). Enter 0 for indefinite ACW time.
+	AfterContactWorkTimeLimit int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for after contact work (ACW) timeout for a specific
+// channel.
+type AfterContactWorkConfigPerChannel struct {
+
+	// The ACW timeout settings for this channel.
+	//
+	// This member is required.
+	AfterContactWorkConfig *AfterContactWorkConfig
+
+	// The channel for this ACW timeout configuration. Valid values: VOICE, CHAT,
+	// TASK, EMAIL.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The ACW timeout settings for agent-first callbacks. This setting only applies
+	// to the VOICE channel.
+	AgentFirstCallbackAfterContactWorkConfig *AfterContactWorkConfig
+
+	noSmithyDocumentSerde
+}
+
 // The distribution of agents between the instance and its replica(s).
 type AgentConfig struct {
 
@@ -775,6 +807,28 @@ type AuthenticationProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for auto-accept for a specific channel.
+type AutoAcceptConfig struct {
+
+	// Indicates whether auto-accept is enabled for this channel. When enabled,
+	// available agents are automatically connected to contacts from this channel.
+	//
+	// This member is required.
+	AutoAccept bool
+
+	// The channel for this auto-accept configuration. Valid values: VOICE, CHAT,
+	// TASK, EMAIL.
+	//
+	// This member is required.
+	Channel Channel
+
+	// Indicates whether auto-accept is enabled for agent-first callbacks. This
+	// setting only applies to the VOICE channel.
+	AgentFirstCallbackAutoAccept *bool
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information about automated evaluations.
 type AutoEvaluationConfiguration struct {
 
@@ -1096,6 +1150,15 @@ type ChatContactMetrics struct {
 
 	// The number of chat messages on the contact.
 	TotalMessages *int32
+
+	noSmithyDocumentSerde
+}
+
+// Parameters for initiating a chat test.
+type ChatEntryPointParameters struct {
+
+	// The flow identifier for the test.
+	FlowId *string
 
 	noSmithyDocumentSerde
 }
@@ -1976,10 +2039,14 @@ type ContactFlowVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The object that contains information about metric being requested.
+// Contains the details of a metric to be retrieved for a contact. Use this object
+// to specify which contact level metrics you want to include in your
+// GetContactMetrics request.
 type ContactMetricInfo struct {
 
-	// The name of the metric being retrieved in type String.
+	// The name of the metric to retrieve. Supported values are POSITION_IN_QUEUE
+	// (returns the contact's current position in the queue) and ESTIMATED_WAIT_TIME
+	// (returns the predicted wait time in seconds).
 	//
 	// This member is required.
 	Name ContactMetricName
@@ -1987,15 +2054,19 @@ type ContactMetricInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Object containing information about metric requested for the contact.
+// Contains the result of a requested metric for the contact. This object is
+// returned as part of the GetContactMetrics response and includes both the metric
+// name and its calculated value.
 type ContactMetricResult struct {
 
-	// The name of the metric being retrieved in type String.
+	// The name of the metric that was retrieved. This corresponds to the metric name
+	// specified in the request, such as POSITION_IN_QUEUE or ESTIMATED_WAIT_TIME.
 	//
 	// This member is required.
 	Name ContactMetricName
 
-	// Object result associated with the metric received.
+	// The calculated value for the requested metric. This object contains the numeric
+	// result based on the contact's current state in the queue.
 	//
 	// This member is required.
 	Value ContactMetricValue
@@ -2003,7 +2074,7 @@ type ContactMetricResult struct {
 	noSmithyDocumentSerde
 }
 
-// Object which contains the number.
+// Contains the numeric value of a contact metric result.
 //
 // The following types satisfy this interface:
 //
@@ -2012,7 +2083,10 @@ type ContactMetricValue interface {
 	isContactMetricValue()
 }
 
-// The number of type Double. This number is the contact's position in queue.
+// The numeric value of the metric result. For POSITION_IN_QUEUE, this represents
+// the contact's current position in the queue (e.g., 3.00 means third in line).
+// For ESTIMATED_WAIT_TIME, this represents the predicted wait time in seconds
+// (e.g., 120.00 means approximately 2 minutes).
 type ContactMetricValueMemberNumber struct {
 	Value float64
 
@@ -2077,6 +2151,10 @@ type ContactSearchSummary struct {
 
 	// Set of segment attributes for a contact.
 	SegmentAttributes map[string]ContactSearchSummarySegmentAttributeValue
+
+	// Tags associated with the contact. This contains both Amazon Web Services
+	// generated and user-defined tags.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -2962,6 +3040,21 @@ type EffectiveOverrideHours struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration object that specifies an email address to be associated with a
+// queue. This configuration contains the identifier of the email address that
+// should be linked to the queue for routing email contacts.
+type EmailAddressConfig struct {
+
+	// The identifier of the email address that should be associated with the queue.
+	// This email address must already exist in the Amazon Connect instance and will be
+	// used to route incoming email contacts to the specified queue.
+	//
+	// This member is required.
+	EmailAddressId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a source or destination email address.
 type EmailAddressInfo struct {
 
@@ -3027,6 +3120,25 @@ type EmailAddressSearchFilter struct {
 	//
 	//   - Inner list specifies conditions that need to be applied with AND operator.
 	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an email address associated with a queue. Contains
+// the essential details needed to identify and manage the email address routing
+// configuration.
+type EmailAddressSummary struct {
+
+	// The Amazon Resource Name (ARN) of the email address associated with the queue.
+	Arn *string
+
+	// The unique identifier of the email address associated with the queue.
+	Id *string
+
+	// Indicates whether this email address is configured as the default outbound
+	// email address for the queue. When set to true, this email address is used as the
+	// default sender for outbound email contacts from this queue.
+	IsDefaultOutboundEmail bool
 
 	noSmithyDocumentSerde
 }
@@ -4417,20 +4529,26 @@ type EvaluationReviewConfiguration struct {
 // Metadata information about an evaluation review.
 type EvaluationReviewMetadata struct {
 
-	// The user who created the evaluation review.
-	//
-	// This member is required.
-	CreatedBy *string
-
-	// The timestamp when the evaluation review was created.
-	//
-	// This member is required.
-	CreatedTime *time.Time
-
 	// Comments provided when requesting the evaluation review.
 	//
 	// This member is required.
 	ReviewRequestComments []EvaluationReviewRequestComment
+
+	// The user who created the evaluation review.
+	//
+	// Deprecated: CreatedBy is deprecated.
+	CreatedBy *string
+
+	// The timestamp when the evaluation review was created.
+	//
+	// Deprecated: CreatedTime is deprecated.
+	CreatedTime *time.Time
+
+	// The user who requested the evaluation review.
+	RequestedBy *string
+
+	// The timestamp when the evaluation review was requested.
+	RequestedTime *time.Time
 
 	// The unique identifier for the evaluation review.
 	ReviewId *string
@@ -4470,10 +4588,10 @@ type EvaluationReviewRequestComment struct {
 	// The text content of the review request comment.
 	Comment *string
 
-	// The user who created the review request comment.
+	// The user who created the evaluation review request comment.
 	CreatedBy *string
 
-	// The timestamp when the review request comment was created.
+	// The timestamp when the evaluation review request comment was created.
 	CreatedTime *time.Time
 
 	noSmithyDocumentSerde
@@ -4797,6 +4915,24 @@ type EventBridgeActionDefinition struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a test case execution record.
+type ExecutionRecord struct {
+
+	// The identifier of the execution record.
+	ObservationId *string
+
+	// The details of the executed record.
+	Record *string
+
+	// The status of the action execution.
+	Status ExecutionRecordStatus
+
+	// The timestamp when the action was executed.
+	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -6476,6 +6612,52 @@ type NextContactMetadataMemberQuickConnectContactData struct {
 
 func (*NextContactMetadataMemberQuickConnectContactData) isNextContactMetadata() {}
 
+// Contains information about a notification, including its content, priority,
+// recipients, and metadata.
+type Notification struct {
+
+	// The Amazon Resource Name (ARN) of the notification.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier for the notification.
+	//
+	// This member is required.
+	Id *string
+
+	// The timestamp when the notification was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The localized content of the notification. A map where keys are locale codes
+	// and values are the notification text in that locale.
+	Content map[string]string
+
+	// The timestamp when the notification was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the notification expires and is no longer displayed to users.
+	ExpiresAt *time.Time
+
+	// The AWS Region where the notification was last modified.
+	LastModifiedRegion *string
+
+	// The priority level of the notification. Valid values are URGENT, HIGH, and LOW.
+	Priority NotificationPriority
+
+	// A list of Amazon Resource Names (ARNs) identifying the recipients of the
+	// notification. Maximum of 200 recipients.
+	Recipients []string
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} } .
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The type of notification recipient.
 type NotificationRecipientType struct {
 
@@ -6488,6 +6670,69 @@ type NotificationRecipientType struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users
 	// with the specified tags will be notified.
 	UserTags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return notifications.
+type NotificationSearchCriteria struct {
+
+	// A list of conditions that must all be satisfied.
+	AndConditions []NotificationSearchCriteria
+
+	// A list of conditions to be met, where at least one condition must be satisfied.
+	OrConditions []NotificationSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to apply when searching for notifications.
+type NotificationSearchFilter struct {
+
+	// Attribute-based filters to apply to the search results.
+	AttributeFilter *ControlPlaneAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a notification returned from a search operation.
+type NotificationSearchSummary struct {
+
+	// The Amazon Resource Name (ARN) of the notification.
+	Arn *string
+
+	// The localized content of the notification.
+	Content map[string]string
+
+	// The timestamp when the notification was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the notification expires.
+	ExpiresAt *time.Time
+
+	// The unique identifier for the notification.
+	Id *string
+
+	// The identifier of the Amazon Connect instance.
+	InstanceId *string
+
+	// The AWS Region where the notification was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the notification was last modified.
+	LastModifiedTime *time.Time
+
+	// The priority level of the notification.
+	Priority NotificationPriority
+
+	// A list of recipient Amazon Resource Names (ARNs).
+	Recipients []string
+
+	// The tags associated with the notification.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -6543,6 +6788,21 @@ type NumericQuestionPropertyValueAutomation struct {
 	//
 	// This member is required.
 	Label NumericQuestionPropertyAutomationLabel
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary statistics about a test case execution.
+type ObservationSummary struct {
+
+	// The number of observations that failed during execution.
+	ObservationsFailed *int32
+
+	// The number of observations that passed during execution.
+	ObservationsPassed *int32
+
+	// The total number of observations in the test case.
+	TotalObservations *int32
 
 	noSmithyDocumentSerde
 }
@@ -6974,6 +7234,45 @@ type PersistentChat struct {
 
 	// The contactId from which a persistent chat session must be started.
 	SourceContactId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for persistent connection for a specific channel.
+type PersistentConnectionConfig struct {
+
+	// Configuration settings for persistent connection. Only VOICE is supported for
+	// this data type.
+	//
+	// This member is required.
+	Channel Channel
+
+	// Indicates whether persistent connection is enabled. When enabled, the agent's
+	// connection is maintained after a call ends, enabling subsequent calls to connect
+	// faster.
+	//
+	// This member is required.
+	PersistentConnection *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for phone type and phone number.
+type PhoneNumberConfig struct {
+
+	// The channel for this phone number configuration. Only VOICE is supported for
+	// this data type.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The phone type. Valid values: SOFT_PHONE, DESK_PHONE.
+	//
+	// This member is required.
+	PhoneType PhoneType
+
+	// The phone number for the user's desk phone.
+	PhoneNumber *string
 
 	noSmithyDocumentSerde
 }
@@ -9095,6 +9394,14 @@ type SearchCriteria struct {
 	// Search criteria based on analysis outputs from Amazon Connect Contact Lens.
 	ContactAnalysis *ContactAnalysis
 
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR of AND (List of List) input where:
+	//
+	//   - Top level list specifies conditions that need to be applied with OR operator
+	//
+	//   - Inner list specifies conditions that need to be applied with AND operator.
+	ContactTags *ControlPlaneTagFilter
+
 	// The list of initiation methods associated with contacts.
 	InitiationMethods []ContactInitiationMethod
 
@@ -9607,6 +9914,22 @@ type TaskActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the task attachment files.
+type TaskAttachment struct {
+
+	// A case-sensitive name of the attached file being uploaded.
+	//
+	// This member is required.
+	FileName *string
+
+	// The pre-signed URLs for the S3 bucket where the task attachment is stored.
+	//
+	// This member is required.
+	S3Url *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes constraints that apply to the template fields.
 type TaskTemplateConstraints struct {
 
@@ -9760,6 +10083,141 @@ type TemplatedMessageConfig struct {
 	//
 	// This member is required.
 	TemplateAttributes *TemplateAttributes
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a test case.
+type TestCase struct {
+
+	// The Amazon Resource Name (ARN) of the test case.
+	Arn *string
+
+	// The JSON string that represents the content of the test.
+	Content *string
+
+	// The description of the test case.
+	Description *string
+
+	// Defines the starting point for the test, including channel type and parameters.
+	EntryPoint *TestCaseEntryPoint
+
+	// The identifier of the test case.
+	Id *string
+
+	// Defines the test attributes for precise data representation.
+	InitializationData *string
+
+	// The region in which the test case was last modified.
+	LastModifiedRegion *string
+
+	// The time at which the test case was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the test case.
+	Name *string
+
+	// Indicates the test status as either SAVED or PUBLISHED.
+	Status TestCaseStatus
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	// The SHA256 hash of the test case content.
+	TestCaseSha256 *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the starting point for a test case.
+type TestCaseEntryPoint struct {
+
+	// Parameters for chat entry point.
+	ChatEntryPointParameters *ChatEntryPointParameters
+
+	// The type of entry point.
+	Type TestCaseEntryPointType
+
+	// Parameters for voice call entry point.
+	VoiceCallEntryPointParameters *VoiceCallEntryPointParameters
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a test case execution.
+type TestCaseExecution struct {
+
+	// The timestamp when the test case execution ended.
+	EndTime *time.Time
+
+	// The timestamp when the test case execution started.
+	StartTime *time.Time
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	// The identifier of the test case execution.
+	TestCaseExecutionId *string
+
+	// The status of the test case execution.
+	TestCaseExecutionStatus TestCaseExecutionStatus
+
+	// The identifier of the test case.
+	TestCaseId *string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return test cases.
+type TestCaseSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []TestCaseSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []TestCaseSearchCriteria
+
+	// The status of the test case.
+	StatusCondition TestCaseStatus
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type TestCaseSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter.
+	// This accepts an OR of AND (List of List) input where: Top level list specifies
+	// conditions that need to be applied with OR operator. Inner list specifies
+	// conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a test case.
+type TestCaseSummary struct {
+
+	// The Amazon Resource Name (ARN) of the test case.
+	Arn *string
+
+	// The identifier of the test case.
+	Id *string
+
+	// The region in which the test case was last modified.
+	LastModifiedRegion *string
+
+	// The time at which the test case was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the test case.
+	Name *string
+
+	// The status of the test case.
+	Status TestCaseStatus
 
 	noSmithyDocumentSerde
 }
@@ -10024,8 +10482,15 @@ type UseCase struct {
 // Contains information about a user account for an Amazon Connect instance.
 type User struct {
 
+	// The list of after contact work (ACW) timeout configuration settings for each
+	// channel.
+	AfterContactWorkConfigs []AfterContactWorkConfigPerChannel
+
 	// The Amazon Resource Name (ARN) of the user account.
 	Arn *string
+
+	// The list of auto-accept configuration settings for each channel.
+	AutoAcceptConfigs []AutoAcceptConfig
 
 	// The identifier of the user account in the directory used for identity
 	// management.
@@ -10046,8 +10511,14 @@ type User struct {
 	// The timestamp when this resource was last modified.
 	LastModifiedTime *time.Time
 
+	// The list of persistent connection configuration settings for each channel.
+	PersistentConnectionConfigs []PersistentConnectionConfig
+
 	// Information about the phone configuration for the user.
 	PhoneConfig *UserPhoneConfig
+
+	// The list of phone number configuration settings for each channel.
+	PhoneNumberConfigs []PhoneNumberConfig
 
 	// The identifier of the routing profile for the user.
 	RoutingProfileId *string
@@ -10060,6 +10531,9 @@ type User struct {
 
 	// The user name assigned to the user account.
 	Username *string
+
+	// The list of voice enhancement configuration settings for each channel.
+	VoiceEnhancementConfigs []VoiceEnhancementConfig
 
 	noSmithyDocumentSerde
 }
@@ -10223,13 +10697,44 @@ type UserInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information about a notification for a specific user, including the
+// user's read status.
+type UserNotificationSummary struct {
+
+	// The localized content of the notification.
+	Content map[string]string
+
+	// The timestamp when the notification was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the notification expires.
+	ExpiresAt *time.Time
+
+	// The identifier of the Amazon Connect instance.
+	InstanceId *string
+
+	// The unique identifier for the notification.
+	NotificationId *string
+
+	// The status of the notification for this user. Valid values are READ, UNREAD,
+	// and HIDDEN.
+	NotificationStatus NotificationStatus
+
+	// The priority level of the notification.
+	Priority NotificationPriority
+
+	// The identifier of the recipient user.
+	RecipientId *string
+
+	// The source that created the notification. Valid values are CUSTOMER, RULES, and
+	// SYSTEM.
+	Source NotificationSource
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the phone configuration settings for a user.
 type UserPhoneConfig struct {
-
-	// The phone type.
-	//
-	// This member is required.
-	PhoneType PhoneType
 
 	// The After Call Work (ACW) timeout setting, in seconds. This parameter has a
 	// minimum value of 0 and a maximum value of 2,000,000 seconds (24 days). Enter 0
@@ -10249,6 +10754,9 @@ type UserPhoneConfig struct {
 
 	// The persistent connection setting for the user.
 	PersistentConnection *bool
+
+	// The phone type.
+	PhoneType PhoneType
 
 	noSmithyDocumentSerde
 }
@@ -10384,8 +10892,15 @@ type UserSearchFilter struct {
 // Information about the returned users.
 type UserSearchSummary struct {
 
+	// The list of after contact work (ACW) timeout configuration settings for each
+	// channel.
+	AfterContactWorkConfigs []AfterContactWorkConfigPerChannel
+
 	// The Amazon Resource Name (ARN) of the user.
 	Arn *string
+
+	// The list of auto-accept configuration settings for each channel.
+	AutoAcceptConfigs []AutoAcceptConfig
 
 	// The directory identifier of the user.
 	DirectoryUserId *string
@@ -10399,8 +10914,14 @@ type UserSearchSummary struct {
 	// The user's first name and last name.
 	IdentityInfo *UserIdentityInfoLite
 
+	// The list of persistent connection configuration settings for each channel.
+	PersistentConnectionConfigs []PersistentConnectionConfig
+
 	// Contains information about the phone configuration settings for a user.
 	PhoneConfig *UserPhoneConfig
+
+	// The list of phone number configuration settings for each channel.
+	PhoneNumberConfigs []PhoneNumberConfig
 
 	// The identifier of the user's routing profile.
 	RoutingProfileId *string
@@ -10414,6 +10935,9 @@ type UserSearchSummary struct {
 
 	// The name of the user.
 	Username *string
+
+	// The list of voice enhancement configuration settings for each channel.
+	VoiceEnhancementConfigs []VoiceEnhancementConfig
 
 	noSmithyDocumentSerde
 }
@@ -10777,6 +11301,38 @@ type VocabularySummary struct {
 
 	// The reason why the custom vocabulary was not created.
 	FailureReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Parameters for initiating a voice call test.
+type VoiceCallEntryPointParameters struct {
+
+	// The destination phone number for the test.
+	DestinationPhoneNumber *string
+
+	// The flow identifier for the test.
+	FlowId *string
+
+	// The source phone number for the test.
+	SourcePhoneNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for voice enhancement.
+type VoiceEnhancementConfig struct {
+
+	// The channel for this voice enhancement configuration. Only VOICE is supported
+	// for this data type.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The voice enhancement mode.
+	//
+	// This member is required.
+	VoiceEnhancementMode VoiceEnhancementMode
 
 	noSmithyDocumentSerde
 }

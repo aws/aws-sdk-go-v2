@@ -1920,6 +1920,11 @@ func validateAccountEnforcedGuardrailInferenceInputConfiguration(v *types.Accoun
 	if len(v.InputTags) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InputTags"))
 	}
+	if v.ModelEnforcement != nil {
+		if err := validateModelEnforcement(v.ModelEnforcement); err != nil {
+			invalidParams.AddNested("ModelEnforcement", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2515,6 +2520,42 @@ func validateAutomatedReasoningPolicyDeleteVariableAnnotation(v *types.Automated
 	}
 }
 
+func validateAutomatedReasoningPolicyGenerateFidelityReportContent(v types.AutomatedReasoningPolicyGenerateFidelityReportContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyGenerateFidelityReportContent"}
+	switch uv := v.(type) {
+	case *types.AutomatedReasoningPolicyGenerateFidelityReportContentMemberDocuments:
+		if err := validateAutomatedReasoningPolicyGenerateFidelityReportDocumentList(uv.Value); err != nil {
+			invalidParams.AddNested("[documents]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyGenerateFidelityReportDocumentList(v []types.AutomatedReasoningPolicyBuildWorkflowDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyGenerateFidelityReportDocumentList"}
+	for i := range v {
+		if err := validateAutomatedReasoningPolicyBuildWorkflowDocument(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutomatedReasoningPolicyIngestContentAnnotation(v *types.AutomatedReasoningPolicyIngestContentAnnotation) error {
 	if v == nil {
 		return nil
@@ -2685,6 +2726,11 @@ func validateAutomatedReasoningPolicyWorkflowTypeContent(v types.AutomatedReason
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments:
 		if err := validateAutomatedReasoningPolicyBuildWorkflowDocumentList(uv.Value); err != nil {
 			invalidParams.AddNested("[documents]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent:
+		if err := validateAutomatedReasoningPolicyGenerateFidelityReportContent(uv.Value); err != nil {
+			invalidParams.AddNested("[generateFidelityReportContent]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets:
@@ -4110,6 +4156,24 @@ func validateModelDataSource(v types.ModelDataSource) error {
 			invalidParams.AddNested("[s3DataSource]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelEnforcement(v *types.ModelEnforcement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelEnforcement"}
+	if v.IncludedModels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncludedModels"))
+	}
+	if v.ExcludedModels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExcludedModels"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

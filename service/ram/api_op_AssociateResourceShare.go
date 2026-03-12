@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified list of principals and list of resources to a resource
-// share. Principals that already have access to this resource share immediately
-// receive access to the added resources. Newly added principals immediately
-// receive access to the resources shared in this resource share.
+// Adds the specified list of principals, resources, and source constraints to a
+// resource share. Principals that already have access to this resource share
+// immediately receive access to the added resources. Newly added principals
+// immediately receive access to the resources shared in this resource share.
 func (c *Client) AssociateResourceShare(ctx context.Context, params *AssociateResourceShareInput, optFns ...func(*Options)) (*AssociateResourceShareOutput, error) {
 	if params == nil {
 		params = &AssociateResourceShareInput{}
@@ -75,6 +75,8 @@ type AssociateResourceShareInput struct {
 	//
 	//   - An ARN of an IAM user, for example: iam::123456789012user/username
 	//
+	//   - A service principal name, for example: service-id.amazonaws.com
+	//
 	// Not all resource types can be shared with IAM roles and users. For more
 	// information, see [Sharing with IAM roles and users]in the Resource Access Manager User Guide.
 	//
@@ -88,8 +90,12 @@ type AssociateResourceShareInput struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceArns []string
 
-	// Specifies from which source accounts the service principal has access to the
-	// resources in this resource share.
+	// Specifies source constraints (accounts, ARNs, organization IDs, or organization
+	// paths) that limit when service principals can access resources in this resource
+	// share. When a service principal attempts to access a shared resource, validation
+	// is performed to ensure the request originates from one of the specified sources.
+	// This helps prevent confused deputy attacks by applying constraints on where
+	// service principals can access resources from.
 	Sources []string
 
 	noSmithyDocumentSerde

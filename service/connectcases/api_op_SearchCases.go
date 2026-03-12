@@ -75,6 +75,9 @@ type SearchCasesOutput struct {
 	// results to return.
 	NextToken *string
 
+	// The total number of cases that matched the search criteria.
+	TotalCount int64
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

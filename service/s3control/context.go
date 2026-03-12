@@ -11,7 +11,7 @@ import (
 // it after that phase (at the start of build) such that auth and endpoint
 // resolution can flow as normal
 type stashOperationInput struct {
-	origInput interface{}
+	origInput any
 }
 
 func (*stashOperationInput) ID() string {
@@ -19,7 +19,7 @@ func (*stashOperationInput) ID() string {
 }
 
 type copyable interface {
-	copy() interface{}
+	copy() any
 }
 
 func (m *stashOperationInput) HandleSerialize(

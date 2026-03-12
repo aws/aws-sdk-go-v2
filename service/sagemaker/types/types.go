@@ -3973,6 +3973,43 @@ type ClusterEventSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the configuration for attaching an Amazon FSx for Lustre file system to
+// instances in a SageMaker HyperPod cluster instance group.
+type ClusterFsxLustreConfig struct {
+
+	// The DNS name of the Amazon FSx for Lustre file system.
+	//
+	// This member is required.
+	DnsName *string
+
+	// The mount name of the Amazon FSx for Lustre file system.
+	//
+	// This member is required.
+	MountName *string
+
+	// The local path where the Amazon FSx for Lustre file system is mounted on
+	// instances.
+	MountPath *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the configuration for attaching an Amazon FSx for OpenZFS file system
+// to instances in a SageMaker HyperPod cluster instance group.
+type ClusterFsxOpenZfsConfig struct {
+
+	// The DNS name of the Amazon FSx for OpenZFS file system.
+	//
+	// This member is required.
+	DnsName *string
+
+	// The local path where the Amazon FSx for OpenZFS file system is mounted on
+	// instances.
+	MountPath *string
+
+	noSmithyDocumentSerde
+}
+
 // Details of an instance group in a SageMaker HyperPod cluster.
 type ClusterInstanceGroupDetails struct {
 
@@ -4033,6 +4070,9 @@ type ClusterInstanceGroupDetails struct {
 	// The configuration object of the schedule that SageMaker follows when updating
 	// the AMI.
 	ScheduledUpdateConfig *ScheduledUpdateConfig
+
+	// The Slurm configuration for the instance group.
+	SlurmConfig *ClusterSlurmConfigDetails
 
 	// Status of the last software udpate request.
 	//
@@ -4221,6 +4261,9 @@ type ClusterInstanceGroupSpecification struct {
 	// The configuration object of the schedule that SageMaker uses to update the AMI.
 	ScheduledUpdateConfig *ScheduledUpdateConfig
 
+	// Specifies the Slurm configuration for the instance group.
+	SlurmConfig *ClusterSlurmConfig
+
 	// Specifies the value for Threads per core. For instance types that support
 	// multithreading, you can specify 1 for disabling multithreading and 2 for
 	// enabling multithreading. For instance types that doesn't support multithreading,
@@ -4278,6 +4321,8 @@ type ClusterInstanceStatusDetails struct {
 // The following types satisfy this interface:
 //
 //	ClusterInstanceStorageConfigMemberEbsVolumeConfig
+//	ClusterInstanceStorageConfigMemberFsxLustreConfig
+//	ClusterInstanceStorageConfigMemberFsxOpenZfsConfig
 //
 // [SageMaker HyperPod release notes: June 20, 2024]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620
 type ClusterInstanceStorageConfig interface {
@@ -4295,6 +4340,26 @@ type ClusterInstanceStorageConfigMemberEbsVolumeConfig struct {
 }
 
 func (*ClusterInstanceStorageConfigMemberEbsVolumeConfig) isClusterInstanceStorageConfig() {}
+
+// Defines the configuration for attaching an Amazon FSx for Lustre file system to
+// the instances in the SageMaker HyperPod cluster instance group.
+type ClusterInstanceStorageConfigMemberFsxLustreConfig struct {
+	Value ClusterFsxLustreConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ClusterInstanceStorageConfigMemberFsxLustreConfig) isClusterInstanceStorageConfig() {}
+
+// Defines the configuration for attaching an Amazon FSx for OpenZFS file system
+// to the instances in the SageMaker HyperPod cluster instance group.
+type ClusterInstanceStorageConfigMemberFsxOpenZfsConfig struct {
+	Value ClusterFsxOpenZfsConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ClusterInstanceStorageConfigMemberFsxOpenZfsConfig) isClusterInstanceStorageConfig() {}
 
 // Kubernetes configuration that specifies labels and taints to be applied to
 // cluster nodes in an instance group.
@@ -4549,6 +4614,9 @@ type ClusterOrchestrator struct {
 	// cluster.
 	Eks *ClusterOrchestratorEksConfig
 
+	// The Slurm orchestrator configuration for the SageMaker HyperPod cluster.
+	Slurm *ClusterOrchestratorSlurmConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -4561,6 +4629,17 @@ type ClusterOrchestratorEksConfig struct {
 	//
 	// This member is required.
 	ClusterArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration settings for the Slurm orchestrator used with the SageMaker
+// HyperPod cluster.
+type ClusterOrchestratorSlurmConfig struct {
+
+	// The strategy for managing partitions for the Slurm configuration. Valid values
+	// are Managed , Overwrite , and Merge .
+	SlurmConfigStrategy ClusterSlurmConfigStrategy
 
 	noSmithyDocumentSerde
 }
@@ -4751,6 +4830,37 @@ type ClusterSchedulerConfigSummary struct {
 
 	// Last modified time of the cluster policy.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The Slurm configuration for an instance group in a SageMaker HyperPod cluster.
+type ClusterSlurmConfig struct {
+
+	// The type of Slurm node for the instance group. Valid values are Controller ,
+	// Worker , and Login .
+	//
+	// This member is required.
+	NodeType ClusterSlurmNodeType
+
+	// The list of Slurm partition names that the instance group belongs to.
+	PartitionNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The Slurm configuration details for an instance group in a SageMaker HyperPod
+// cluster.
+type ClusterSlurmConfigDetails struct {
+
+	// The type of Slurm node for the instance group. Valid values are Controller ,
+	// Worker , and Login .
+	//
+	// This member is required.
+	NodeType ClusterSlurmNodeType
+
+	// The list of Slurm partition names that the instance group belongs to.
+	PartitionNames []string
 
 	noSmithyDocumentSerde
 }
@@ -16701,6 +16811,15 @@ type ProductionVariant struct {
 	//
 	//   - NVIDIA Container Toolkit with disabled CUDA-compat mounting
 	//
+	// al2023-ami-sagemaker-inference-gpu-4-1
+	//   - Accelerator: GPU
+	//
+	//   - NVIDIA driver version: 580
+	//
+	//   - CUDA version: 13.0
+	//
+	//   - NVIDIA Container Toolkit with disabled CUDA-compat mounting
+	//
 	// al2-ami-sagemaker-inference-neuron-2
 	//   - Accelerator: Inferentia2 and Trainium
 	//
@@ -18060,6 +18179,12 @@ type ReservedCapacityOffering struct {
 	// The end time of the reserved capacity offering.
 	EndTime *time.Time
 
+	// The end time of the extension for the reserved capacity offering.
+	ExtensionEndTime *time.Time
+
+	// The start time of the extension for the reserved capacity offering.
+	ExtensionStartTime *time.Time
+
 	// The type of reserved capacity offering.
 	ReservedCapacityType ReservedCapacityType
 
@@ -18316,6 +18441,12 @@ type ResourceSharingConfig struct {
 	//
 	// This member is required.
 	Strategy ResourceSharingStrategy
+
+	// The absolute limits on compute resources that can be borrowed from idle
+	// compute. When specified, these limits define the maximum amount of specific
+	// resource types (such as accelerators, vCPU, or memory) that an entity can
+	// borrow, regardless of the percentage-based BorrowLimit .
+	AbsoluteBorrowLimits []ComputeQuotaResourceConfig
 
 	// The limit on how much idle compute can be borrowed.The values can be 1 - 500
 	// percent of idle compute that the team is allowed to borrow.
@@ -18997,6 +19128,11 @@ type SchedulerConfig struct {
 	//
 	// Default is Enabled .
 	FairShare FairShare
+
+	// Configuration for sharing idle compute resources across entities in the
+	// cluster. When enabled, unallocated resources are automatically calculated and
+	// made available for entities to borrow.
+	IdleResourceSharing IdleResourceSharing
 
 	// List of the priority classes, PriorityClass , of the cluster policy. When
 	// specified, these class configurations define how tasks are queued.
@@ -21044,6 +21180,82 @@ type TrainingJobSummary struct {
 
 	// The status of the warm pool associated with the training job.
 	WarmPoolStatus *WarmPoolStatus
+
+	noSmithyDocumentSerde
+}
+
+// Details about an extension to a training plan, including the offering ID,
+// dates, status, and cost information.
+type TrainingPlanExtension struct {
+
+	// The unique identifier of the extension offering that was used to create this
+	// extension.
+	//
+	// This member is required.
+	TrainingPlanExtensionOfferingId *string
+
+	// The Availability Zone of the extension.
+	AvailabilityZone *string
+
+	// The Availability Zone ID of the extension.
+	AvailabilityZoneId *string
+
+	// The currency code for the upfront fee (e.g., USD).
+	CurrencyCode *string
+
+	// The duration of the extension in hours.
+	DurationHours *int32
+
+	// The end date of the extension period.
+	EndDate *time.Time
+
+	// The timestamp when the extension was created.
+	ExtendedAt *time.Time
+
+	// The payment processing status of the extension.
+	PaymentStatus *string
+
+	// The start date of the extension period.
+	StartDate *time.Time
+
+	// The current status of the extension (e.g., Pending, Active, Scheduled, Failed,
+	// Expired).
+	Status *string
+
+	// The upfront fee for the extension.
+	UpfrontFee *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an available extension offering for a training plan. Use the
+// offering ID with the [ExtendTrainingPlan]API to extend a training plan.
+//
+// [ExtendTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ExtendTrainingPlan.html
+type TrainingPlanExtensionOffering struct {
+
+	// The unique identifier for this extension offering.
+	//
+	// This member is required.
+	TrainingPlanExtensionOfferingId *string
+
+	// The Availability Zone for this extension offering.
+	AvailabilityZone *string
+
+	// The currency code for the upfront fee (e.g., USD).
+	CurrencyCode *string
+
+	// The duration of this extension offering in hours.
+	DurationHours *int32
+
+	// The end date of this extension offering.
+	EndDate *time.Time
+
+	// The start date of this extension offering.
+	StartDate *time.Time
+
+	// The upfront fee for this extension offering.
+	UpfrontFee *string
 
 	noSmithyDocumentSerde
 }

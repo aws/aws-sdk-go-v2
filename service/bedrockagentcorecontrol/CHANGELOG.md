@@ -1,3 +1,29 @@
+# v1.22.0 (2026-03-10)
+
+* **Feature**: Adding first class support for AG-UI protocol in AgentCore Runtime.
+
+# v1.21.0 (2026-03-06)
+
+* **Feature**: Adds support for streaming memory records in AgentCore Memory
+
+# v1.20.0 (2026-03-03)
+
+* **Feature**: Support for AgentCore Policy GA
+* **Dependency Update**: Bump minimum Go version to 1.24
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.1 (2026-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.0 (2026-02-05)
+
+* **Feature**: Support Browser profile persistence (cookies and local storage) across sessions for AgentCore Browser.
+
+# v1.18.0 (2026-02-02)
+
+* **Feature**: Adds tagging support for AgentCore Evaluations (evaluator and online evaluation config)
+
 # v1.17.0 (2026-01-09)
 
 * **Feature**: Adds optional field "view" to GetMemory API input to give customers control over whether CMK encrypted data such as strategy decryption or override prompts is returned or not.

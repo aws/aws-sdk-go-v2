@@ -51,6 +51,7 @@
         "api_op_DeleteAssetFilter.go",
         "api_op_DeleteAssetType.go",
         "api_op_DeleteConnection.go",
+        "api_op_DeleteDataExportConfiguration.go",
         "api_op_DeleteDataProduct.go",
         "api_op_DeleteDataSource.go",
         "api_op_DeleteDomain.go",
@@ -147,6 +148,7 @@
         "api_op_PostTimeSeriesDataPoints.go",
         "api_op_PutDataExportConfiguration.go",
         "api_op_PutEnvironmentBlueprintConfiguration.go",
+        "api_op_QueryGraph.go",
         "api_op_RejectPredictions.go",
         "api_op_RejectSubscriptionRequest.go",
         "api_op_RemoveEntityOwner.go",
@@ -192,7 +194,6 @@
         "internal/endpoints/endpoints.go",
         "internal/endpoints/endpoints_test.go",
         "options.go",
-        "protocol_test.go",
         "serializers.go",
         "snapshot_test.go",
         "sra_operation_order_test.go",
@@ -202,7 +203,7 @@
         "types/types_exported_test.go",
         "validators.go"
     ],
-    "go": "1.23",
+    "go": "1.24",
     "module": "github.com/aws/aws-sdk-go-v2/service/datazone",
     "unstable": false
 }

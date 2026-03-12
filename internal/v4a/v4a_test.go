@@ -315,11 +315,11 @@ func validateAuthorization(t *testing.T, authorization, expectedAlg, expectedCre
 	seen := make(map[string]string)
 
 	for _, kv := range keyValues {
-		idx := strings.Index(kv, "=")
-		if idx == -1 {
+		before, after, ok := strings.Cut(kv, "=")
+		if !ok {
 			continue
 		}
-		key, value := kv[:idx], kv[idx+1:]
+		key, value := before, after
 		seen[key] = value
 	}
 
@@ -391,7 +391,7 @@ func buildSigner(t *testing.T, withToken bool) (*Signer, CredentialsProvider) {
 	}
 
 	return NewSigner(func(options *SignerOptions) {
-			options.Logger = loggerFunc(func(format string, v ...interface{}) {
+			options.Logger = loggerFunc(func(format string, v ...any) {
 				t.Logf(format, v...)
 			})
 		}), &SymmetricCredentialAdaptor{
@@ -401,9 +401,9 @@ func buildSigner(t *testing.T, withToken bool) (*Signer, CredentialsProvider) {
 		}
 }
 
-type loggerFunc func(format string, v ...interface{})
+type loggerFunc func(format string, v ...any)
 
-func (l loggerFunc) Logf(_ logging.Classification, format string, v ...interface{}) {
+func (l loggerFunc) Logf(_ logging.Classification, format string, v ...any) {
 	l(format, v...)
 }
 
@@ -426,7 +426,7 @@ func (s staticCredentialsProvider) Retrieve(_ context.Context) (aws.Credentials,
 	return v, nil
 }
 
-func cmpDiff(e, a interface{}) string {
+func cmpDiff(e, a any) string {
 	if !reflect.DeepEqual(e, a) {
 		return fmt.Sprintf("%v != %v", e, a)
 	}

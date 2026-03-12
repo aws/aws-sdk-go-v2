@@ -898,6 +898,23 @@ func (GovernedEntityType) Values() []GovernedEntityType {
 	}
 }
 
+type GraphEntityType string
+
+// Enum values for GraphEntityType
+const (
+	GraphEntityTypeLineageNode GraphEntityType = "LINEAGE_NODE"
+)
+
+// Values returns all known values for GraphEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GraphEntityType) Values() []GraphEntityType {
+	return []GraphEntityType{
+		"LINEAGE_NODE",
+	}
+}
+
 type GroupProfileStatus string
 
 // Enum values for GroupProfileStatus
@@ -1449,6 +1466,42 @@ func (RejectRuleBehavior) Values() []RejectRuleBehavior {
 	return []RejectRuleBehavior{
 		"ALL",
 		"NONE",
+	}
+}
+
+type RelationDirection string
+
+// Enum values for RelationDirection
+const (
+	RelationDirectionIn  RelationDirection = "IN"
+	RelationDirectionOut RelationDirection = "OUT"
+)
+
+// Values returns all known values for RelationDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RelationDirection) Values() []RelationDirection {
+	return []RelationDirection{
+		"IN",
+		"OUT",
+	}
+}
+
+type RelationType string
+
+// Enum values for RelationType
+const (
+	RelationTypeLineage RelationType = "LINEAGE"
+)
+
+// Values returns all known values for RelationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RelationType) Values() []RelationType {
+	return []RelationType{
+		"LINEAGE",
 	}
 }
 

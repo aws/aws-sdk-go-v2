@@ -57604,6 +57604,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.Analysis = types.CapabilityState(jtv)
 			}
 
+		case "ApproveFlowShareRequests":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ApproveFlowShareRequests = types.CapabilityState(jtv)
+			}
+
 		case "AsanaAction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57638,6 +57647,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.BoxAgentAction = types.CapabilityState(jtv)
+			}
+
+		case "BuildCalculatedFieldWithQ":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.BuildCalculatedFieldWithQ = types.CapabilityState(jtv)
 			}
 
 		case "CanvaAgentAction":
@@ -58126,6 +58144,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.CreateChatAgents = types.CapabilityState(jtv)
 			}
 
+		case "CreateDashboardExecutiveSummaryWithQ":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateDashboardExecutiveSummaryWithQ = types.CapabilityState(jtv)
+			}
+
 		case "CreateSharedFolders":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -58151,6 +58178,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.Dashboard = types.CapabilityState(jtv)
+			}
+
+		case "EditVisualWithQ":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.EditVisualWithQ = types.CapabilityState(jtv)
 			}
 
 		case "ExportToCsv":
@@ -58205,6 +58241,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.ExportToPdfInScheduledReports = types.CapabilityState(jtv)
+			}
+
+		case "Extension":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.Extension = types.CapabilityState(jtv)
 			}
 
 		case "FactSetAction":
@@ -59006,6 +59051,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.TextractAction = types.CapabilityState(jtv)
+			}
+
+		case "Topic":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.Topic = types.CapabilityState(jtv)
 			}
 
 		case "UseAgentWebSearch":
