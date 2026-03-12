@@ -3426,9 +3426,30 @@ func awsAwsjson11_serializeDocumentFsxProtocolSmb(v *types.FsxProtocolSmb, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Domain != nil {
 		ok := object.Key("Domain")
 		ok.String(*v.Domain)
+	}
+
+	if v.ManagedSecretConfig != nil {
+		ok := object.Key("ManagedSecretConfig")
+		if err := awsAwsjson11_serializeDocumentManagedSecretConfig(v.ManagedSecretConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MountOptions != nil {
@@ -3475,6 +3496,20 @@ func awsAwsjson11_serializeDocumentFsxUpdateProtocol(v *types.FsxUpdateProtocol,
 func awsAwsjson11_serializeDocumentFsxUpdateProtocolSmb(v *types.FsxUpdateProtocolSmb, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Domain != nil {
 		ok := object.Key("Domain")
@@ -3578,6 +3613,18 @@ func awsAwsjson11_serializeDocumentLocationFilters(v []types.LocationFilter, val
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentManagedSecretConfig(v *types.ManagedSecretConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
 	return nil
 }
 
@@ -4297,6 +4344,20 @@ func awsAwsjson11_serializeOpDocumentCreateLocationFsxWindowsInput(v *CreateLoca
 	object := value.Object()
 	defer object.Close()
 
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Domain != nil {
 		ok := object.Key("Domain")
 		ok.String(*v.Domain)
@@ -4358,6 +4419,20 @@ func awsAwsjson11_serializeOpDocumentCreateLocationHdfsInput(v *CreateLocationHd
 	if v.BlockSize != nil {
 		ok := object.Key("BlockSize")
 		ok.Integer(*v.BlockSize)
+	}
+
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KerberosKeytab != nil {
@@ -5333,6 +5408,20 @@ func awsAwsjson11_serializeOpDocumentUpdateLocationFsxWindowsInput(v *UpdateLoca
 	object := value.Object()
 	defer object.Close()
 
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Domain != nil {
 		ok := object.Key("Domain")
 		ok.String(*v.Domain)
@@ -5380,6 +5469,20 @@ func awsAwsjson11_serializeOpDocumentUpdateLocationHdfsInput(v *UpdateLocationHd
 	if v.BlockSize != nil {
 		ok := object.Key("BlockSize")
 		ok.Integer(*v.BlockSize)
+	}
+
+	if v.CmkSecretConfig != nil {
+		ok := object.Key("CmkSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCmkSecretConfig(v.CmkSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomSecretConfig != nil {
+		ok := object.Key("CustomSecretConfig")
+		if err := awsAwsjson11_serializeDocumentCustomSecretConfig(v.CustomSecretConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KerberosKeytab != nil {

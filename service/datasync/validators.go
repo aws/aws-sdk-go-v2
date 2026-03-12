@@ -1289,9 +1289,6 @@ func validateFsxProtocolSmb(v *types.FsxProtocolSmb) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FsxProtocolSmb"}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
 	if v.User == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("User"))
 	}
@@ -1790,9 +1787,6 @@ func validateOpCreateLocationFsxWindowsInput(v *CreateLocationFsxWindowsInput) e
 	}
 	if v.User == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("User"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

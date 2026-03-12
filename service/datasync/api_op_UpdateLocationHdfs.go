@@ -49,6 +49,17 @@ type UpdateLocationHdfsInput struct {
 	// The size of the data blocks to write into the HDFS cluster.
 	BlockSize *int32
 
+	// Specifies configuration information for a DataSync-managed secret, such as a
+	// KerberosKeytab or set of credentials that DataSync uses to access a specific
+	// transfer location, and a customer-managed KMS key.
+	CmkSecretConfig *types.CmkSecretConfig
+
+	// Specifies configuration information for a customer-managed secret, such as a
+	// KerberosKeytab or set of credentials that DataSync uses to access a specific
+	// transfer location, and a customer-managed Identity and Access Management (IAM)
+	// role that provides access to the secret.
+	CustomSecretConfig *types.CustomSecretConfig
+
 	// The Kerberos key table (keytab) that contains mappings between the defined
 	// Kerberos principal and the encrypted keys. You can load the keytab from a file
 	// by providing the file's address.

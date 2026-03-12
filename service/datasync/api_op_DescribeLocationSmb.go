@@ -61,7 +61,8 @@ type DescribeLocationSmbOutput struct {
 
 	// Describes configuration information for a customer-managed secret, such as a
 	// Password or KerberosKeytab that DataSync uses to access a specific storage
-	// location, with a customer-managed KMS key.
+	// location, with a customer-managed Identity and Access Management (IAM) role that
+	// provides access to the secret.
 	CustomSecretConfig *types.CustomSecretConfig
 
 	// The IPv4 or IPv6 addresses for the DNS servers that your SMB file server

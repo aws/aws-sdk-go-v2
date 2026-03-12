@@ -74,7 +74,8 @@ type DescribeLocationAzureBlobOutput struct {
 
 	// Describes configuration information for a customer-managed secret, such as an
 	// authentication token that DataSync uses to access a specific storage location,
-	// with a customer-managed KMS key.
+	// with a customer-managed Identity and Access Management (IAM) role that provides
+	// access to the secret.
 	CustomSecretConfig *types.CustomSecretConfig
 
 	// The ARN of your Azure Blob Storage transfer location.

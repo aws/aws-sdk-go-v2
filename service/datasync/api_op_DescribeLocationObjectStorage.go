@@ -61,7 +61,8 @@ type DescribeLocationObjectStorageOutput struct {
 
 	// Describes configuration information for a customer-managed secret, such as an
 	// authentication token or set of credentials that DataSync uses to access a
-	// specific transfer location, and a customer-managed KMS key.
+	// specific transfer location, and a customer-managed Identity and Access
+	// Management (IAM) role that provides access to the secret.
 	CustomSecretConfig *types.CustomSecretConfig
 
 	// The ARN of the object storage system location.

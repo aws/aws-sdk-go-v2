@@ -6699,6 +6699,16 @@ func awsAwsjson11_deserializeDocumentFsxProtocolSmb(v **types.FsxProtocolSmb, va
 
 	for key, value := range shape {
 		switch key {
+		case "CmkSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCmkSecretConfig(&sv.CmkSecretConfig, value); err != nil {
+				return err
+			}
+
+		case "CustomSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCustomSecretConfig(&sv.CustomSecretConfig, value); err != nil {
+				return err
+			}
+
 		case "Domain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6706,6 +6716,11 @@ func awsAwsjson11_deserializeDocumentFsxProtocolSmb(v **types.FsxProtocolSmb, va
 					return fmt.Errorf("expected SmbDomain to be of type string, got %T instead", value)
 				}
 				sv.Domain = ptr.String(jtv)
+			}
+
+		case "ManagedSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentManagedSecretConfig(&sv.ManagedSecretConfig, value); err != nil {
+				return err
 			}
 
 		case "MountOptions":
@@ -10140,6 +10155,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationFsxWindowsOutput(v **Desc
 
 	for key, value := range shape {
 		switch key {
+		case "CmkSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCmkSecretConfig(&sv.CmkSecretConfig, value); err != nil {
+				return err
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10154,6 +10174,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationFsxWindowsOutput(v **Desc
 					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "CustomSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCustomSecretConfig(&sv.CustomSecretConfig, value); err != nil {
+				return err
 			}
 
 		case "Domain":
@@ -10181,6 +10206,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationFsxWindowsOutput(v **Desc
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
 				sv.LocationUri = ptr.String(jtv)
+			}
+
+		case "ManagedSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentManagedSecretConfig(&sv.ManagedSecretConfig, value); err != nil {
+				return err
 			}
 
 		case "SecurityGroupArns":
@@ -10255,6 +10285,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationHdfsOutput(v **DescribeLo
 				sv.BlockSize = ptr.Int32(int32(i64))
 			}
 
+		case "CmkSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCmkSecretConfig(&sv.CmkSecretConfig, value); err != nil {
+				return err
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10269,6 +10304,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationHdfsOutput(v **DescribeLo
 					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "CustomSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentCustomSecretConfig(&sv.CustomSecretConfig, value); err != nil {
+				return err
 			}
 
 		case "KerberosPrincipal":
@@ -10305,6 +10345,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationHdfsOutput(v **DescribeLo
 					return fmt.Errorf("expected LocationUri to be of type string, got %T instead", value)
 				}
 				sv.LocationUri = ptr.String(jtv)
+			}
+
+		case "ManagedSecretConfig":
+			if err := awsAwsjson11_deserializeDocumentManagedSecretConfig(&sv.ManagedSecretConfig, value); err != nil {
+				return err
 			}
 
 		case "NameNodes":

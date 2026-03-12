@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,8 +42,19 @@ type DescribeLocationFsxWindowsInput struct {
 
 type DescribeLocationFsxWindowsOutput struct {
 
+	// Describes configuration information for a DataSync-managed secret, such as a
+	// Password that DataSync uses to access a specific storage location, with a
+	// customer-managed KMS key.
+	CmkSecretConfig *types.CmkSecretConfig
+
 	// The time that the FSx for Windows File Server location was created.
 	CreationTime *time.Time
+
+	// Describes configuration information for a customer-managed secret, such as a
+	// Password that DataSync uses to access a specific storage location, with a
+	// customer-managed Identity and Access Management (IAM) role that provides access
+	// to the secret.
+	CustomSecretConfig *types.CustomSecretConfig
 
 	// The name of the Microsoft Active Directory domain that the FSx for Windows File
 	// Server file system belongs to.
@@ -54,6 +66,12 @@ type DescribeLocationFsxWindowsOutput struct {
 	// The uniform resource identifier (URI) of the FSx for Windows File Server
 	// location.
 	LocationUri *string
+
+	// Describes configuration information for a DataSync-managed secret, such as a
+	// Password that DataSync uses to access a specific storage location. DataSync uses
+	// the default Amazon Web Services-managed KMS key to encrypt this secret in
+	// Secrets Manager.
+	ManagedSecretConfig *types.ManagedSecretConfig
 
 	// The ARNs of the Amazon EC2 security groups that provide access to your file
 	// system's preferred subnet.

@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +39,17 @@ type UpdateLocationFsxWindowsInput struct {
 	//
 	// This member is required.
 	LocationArn *string
+
+	// Specifies configuration information for a DataSync-managed secret, such as a
+	// Password or set of credentials that DataSync uses to access a specific transfer
+	// location, and a customer-managed KMS key.
+	CmkSecretConfig *types.CmkSecretConfig
+
+	// Specifies configuration information for a customer-managed secret, such as a
+	// Password or set of credentials that DataSync uses to access a specific transfer
+	// location, and a customer-managed Identity and Access Management (IAM) role that
+	// provides access to the secret.
+	CustomSecretConfig *types.CustomSecretConfig
 
 	// Specifies the name of the Windows domain that your FSx for Windows File Server
 	// file system belongs to.

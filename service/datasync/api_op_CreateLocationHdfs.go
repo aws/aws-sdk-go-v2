@@ -57,6 +57,39 @@ type CreateLocationHdfsInput struct {
 	// a multiple of 512 bytes. The default block size is 128 mebibytes (MiB).
 	BlockSize *int32
 
+	// Specifies configuration information for a DataSync-managed secret, which
+	// includes the Kerberos keytab that DataSync uses to access a specific Hadoop
+	// Distributed File System (HDFS) storage location, with a customer-managed KMS
+	// key.
+	//
+	// When you include this parameter as part of a CreateLocationHdfs request, you
+	// provide only the KMS key ARN. DataSync uses this KMS key together with the
+	// KerberosKeytab you specify for to create a DataSync-managed secret to store the
+	// location access credentials.
+	//
+	// Make sure that DataSync has permission to access the KMS key that you specify.
+	// For more information, see [Using a service-managed secret encrypted with a custom KMS key].
+	//
+	// You can use either CmkSecretConfig (with KerberosKeytab ) or CustomSecretConfig
+	// (without KerberosKeytab ) to provide credentials for a CreateLocationHdfs
+	// request. Do not provide both parameters for the same request.
+	//
+	// [Using a service-managed secret encrypted with a custom KMS key]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
+	CmkSecretConfig *types.CmkSecretConfig
+
+	// Specifies configuration information for a customer-managed Secrets Manager
+	// secret where the Kerberos keytab for the HDFS storage location is stored in
+	// binary, in Secrets Manager. This configuration includes the secret ARN, and the
+	// ARN for an IAM role that provides access to the secret. For more information,
+	// see [Using a secret that you manage].
+	//
+	// You can use either CmkSecretConfig (with KerberosKeytab ) or CustomSecretConfig
+	// (without KerberosKeytab ) to provide credentials for a CreateLocationHdfs
+	// request. Do not provide both parameters for the same request.
+	//
+	// [Using a secret that you manage]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
+	CustomSecretConfig *types.CustomSecretConfig
+
 	// The Kerberos key table (keytab) that contains mappings between the defined
 	// Kerberos principal and the encrypted keys. You can load the keytab from a file
 	// by providing the file's address.

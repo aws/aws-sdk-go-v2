@@ -41,13 +41,6 @@ type CreateLocationFsxWindowsInput struct {
 	// This member is required.
 	FsxFilesystemArn *string
 
-	// Specifies the password of the user with the permissions to mount and access the
-	// files, folders, and file metadata in your FSx for Windows File Server file
-	// system.
-	//
-	// This member is required.
-	Password *string
-
 	// Specifies the ARNs of the Amazon EC2 security groups that provide access to
 	// your file system's preferred subnet.
 	//
@@ -79,12 +72,49 @@ type CreateLocationFsxWindowsInput struct {
 	// This member is required.
 	User *string
 
+	// Specifies configuration information for a DataSync-managed secret, which
+	// includes the password that DataSync uses to access a specific FSx Windows
+	// storage location, with a customer-managed KMS key.
+	//
+	// When you include this parameter as part of a CreateLocationFsxWindows request,
+	// you provide only the KMS key ARN. DataSync uses this KMS key together with the
+	// Password you specify for to create a DataSync-managed secret to store the
+	// location access credentials.
+	//
+	// Make sure that DataSync has permission to access the KMS key that you specify.
+	// For more information, see [Using a service-managed secret encrypted with a custom KMS key].
+	//
+	// You can use either CmkSecretConfig (with Password ) or CustomSecretConfig
+	// (without Password ) to provide credentials for a CreateLocationFsxWindows
+	// request. Do not provide both parameters for the same request.
+	//
+	// [Using a service-managed secret encrypted with a custom KMS key]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
+	CmkSecretConfig *types.CmkSecretConfig
+
+	// Specifies configuration information for a customer-managed Secrets Manager
+	// secret where the password for an FSx for Windows File Server storage location is
+	// stored in plain text, in Secrets Manager. This configuration includes the secret
+	// ARN, and the ARN for an IAM role that provides access to the secret. For more
+	// information, see [Using a secret that you manage].
+	//
+	// You can use either CmkSecretConfig (with Password ) or CustomSecretConfig
+	// (without Password ) to provide credentials for a CreateLocationFsxWindows
+	// request. Do not provide both parameters for the same request.
+	//
+	// [Using a secret that you manage]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
+	CustomSecretConfig *types.CustomSecretConfig
+
 	// Specifies the name of the Windows domain that the FSx for Windows File Server
 	// file system belongs to.
 	//
 	// If you have multiple Active Directory domains in your environment, configuring
 	// this parameter makes sure that DataSync connects to the right file system.
 	Domain *string
+
+	// Specifies the password of the user with the permissions to mount and access the
+	// files, folders, and file metadata in your FSx for Windows File Server file
+	// system.
+	Password *string
 
 	// Specifies a mount path for your file system using forward slashes. This is
 	// where DataSync reads or writes data (depending on if this is a source or

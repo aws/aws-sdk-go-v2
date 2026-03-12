@@ -73,20 +73,26 @@ type CreateLocationObjectStorageInput struct {
 	// DataSync-managed secret to store the location access credentials.
 	//
 	// Make sure that DataSync has permission to access the KMS key that you specify.
+	// For more information, see [Using a service-managed secret encrypted with a custom KMS key].
 	//
 	// You can use either CmkSecretConfig (with SecretKey ) or CustomSecretConfig
 	// (without SecretKey ) to provide credentials for a CreateLocationObjectStorage
 	// request. Do not provide both parameters for the same request.
+	//
+	// [Using a service-managed secret encrypted with a custom KMS key]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
 	CmkSecretConfig *types.CmkSecretConfig
 
 	// Specifies configuration information for a customer-managed Secrets Manager
 	// secret where the secret key for a specific object storage location is stored in
 	// plain text, in Secrets Manager. This configuration includes the secret ARN, and
-	// the ARN for an IAM role that provides access to the secret.
+	// the ARN for an IAM role that provides access to the secret. For more
+	// information, see [Using a secret that you manage].
 	//
 	// You can use either CmkSecretConfig (with SecretKey ) or CustomSecretConfig
 	// (without SecretKey ) to provide credentials for a CreateLocationObjectStorage
 	// request. Do not provide both parameters for the same request.
+	//
+	// [Using a secret that you manage]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
 	CustomSecretConfig *types.CustomSecretConfig
 
 	// Specifies the secret key (for example, a password) if credentials are required

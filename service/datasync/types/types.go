@@ -183,11 +183,6 @@ type FsxProtocolNfs struct {
 // [Providing DataSync access to FSx for ONTAP file systems]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access
 type FsxProtocolSmb struct {
 
-	// Specifies the password of a user who has permission to access your SVM.
-	//
-	// This member is required.
-	Password *string
-
 	// Specifies a user that can mount and access the files, folders, and metadata in
 	// your SVM.
 	//
@@ -199,6 +194,38 @@ type FsxProtocolSmb struct {
 	// This member is required.
 	User *string
 
+	// Specifies configuration information for a DataSync-managed secret, which
+	// includes the password that DataSync uses to access a specific FSx for ONTAP
+	// storage location (using SMB), with a customer-managed KMS key.
+	//
+	// When you include this parameter as part of a CreateLocationFsxOntap request,
+	// you provide only the KMS key ARN. DataSync uses this KMS key together with the
+	// Password you specify for to create a DataSync-managed secret to store the
+	// location access credentials.
+	//
+	// Make sure that DataSync has permission to access the KMS key that you specify.
+	// For more information, see [Using a service-managed secret encrypted with a custom KMS key].
+	//
+	// You can use either CmkSecretConfig (with Password ) or CustomSecretConfig
+	// (without Password ) to provide credentials for a CreateLocationFsxOntap
+	// request. Do not provide both parameters for the same request.
+	//
+	// [Using a service-managed secret encrypted with a custom KMS key]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
+	CmkSecretConfig *CmkSecretConfig
+
+	// Specifies configuration information for a customer-managed Secrets Manager
+	// secret where the password for an FSx for ONTAP storage location (using SMB) is
+	// stored in plain text, in Secrets Manager. This configuration includes the secret
+	// ARN, and the ARN for an IAM role that provides access to the secret. For more
+	// information, see [Using a secret that you manage].
+	//
+	// You can use either CmkSecretConfig (with Password ) or CustomSecretConfig
+	// (without Password ) to provide credentials for a CreateLocationFsxOntap
+	// request. Do not provide both parameters for the same request.
+	//
+	// [Using a secret that you manage]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
+	CustomSecretConfig *CustomSecretConfig
+
 	// Specifies the name of the Windows domain that your storage virtual machine
 	// (SVM) belongs to.
 	//
@@ -209,9 +236,21 @@ type FsxProtocolSmb struct {
 	// this parameter makes sure that DataSync connects to the right SVM.
 	Domain *string
 
+	// Describes configuration information for a DataSync-managed secret, such as a
+	// Password that DataSync uses to access a specific storage location. DataSync uses
+	// the default Amazon Web Services-managed KMS key to encrypt this secret in
+	// Secrets Manager.
+	//
+	// Do not provide this for a CreateLocation request. ManagedSecretConfig is a
+	// ReadOnly property and is only be populated in the DescribeLocation response.
+	ManagedSecretConfig *ManagedSecretConfig
+
 	// Specifies the version of the Server Message Block (SMB) protocol that DataSync
 	// uses to access an SMB file server.
 	MountOptions *SmbMountOptions
+
+	// Specifies the password of a user who has permission to access your SVM.
+	Password *string
 
 	noSmithyDocumentSerde
 }
@@ -242,6 +281,17 @@ type FsxUpdateProtocol struct {
 //
 // [Providing DataSync access to FSx for ONTAP file systems]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access
 type FsxUpdateProtocolSmb struct {
+
+	// Specifies configuration information for a DataSync-managed secret, such as a
+	// Password or set of credentials that DataSync uses to access a specific transfer
+	// location, and a customer-managed KMS key.
+	CmkSecretConfig *CmkSecretConfig
+
+	// Specifies configuration information for a customer-managed secret, such as a
+	// Password or set of credentials that DataSync uses to access a specific transfer
+	// location. This configuration includes the secret ARN, and the ARN for an IAM
+	// role that provides access to the secret.
+	CustomSecretConfig *CustomSecretConfig
 
 	// Specifies the name of the Windows domain that your storage virtual machine
 	// (SVM) belongs to.

@@ -50,8 +50,19 @@ type DescribeLocationHdfsOutput struct {
 	// The size of the data blocks to write into the HDFS cluster.
 	BlockSize *int32
 
+	// Describes configuration information for a DataSync-managed secret, such as a
+	// KerberosKeytab that DataSync uses to access a specific storage location, with a
+	// customer-managed KMS key.
+	CmkSecretConfig *types.CmkSecretConfig
+
 	// The time that the HDFS location was created.
 	CreationTime *time.Time
+
+	// Describes configuration information for a customer-managed secret, such as a
+	// KerberosKeytab that DataSync uses to access a specific storage location, with a
+	// customer-managed Identity and Access Management (IAM) role that provides access
+	// to the secret.
+	CustomSecretConfig *types.CustomSecretConfig
 
 	// The Kerberos principal with access to the files and folders on the HDFS
 	// cluster. This parameter is used if the AuthenticationType is defined as KERBEROS
@@ -66,6 +77,12 @@ type DescribeLocationHdfsOutput struct {
 
 	// The URI of the HDFS location.
 	LocationUri *string
+
+	// Describes configuration information for a DataSync-managed secret, such as a
+	// KerberosKeytab that DataSync uses to access a specific storage location.
+	// DataSync uses the default Amazon Web Services-managed KMS key to encrypt this
+	// secret in Secrets Manager.
+	ManagedSecretConfig *types.ManagedSecretConfig
 
 	// The NameNode that manages the HDFS namespace.
 	NameNodes []types.HdfsNameNode

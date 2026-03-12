@@ -82,23 +82,28 @@ type CreateLocationSmbInput struct {
 	// secret to store the location access credentials.
 	//
 	// Make sure that DataSync has permission to access the KMS key that you specify.
+	// For more information, see [Using a service-managed secret encrypted with a custom KMS key].
 	//
 	// You can use either CmkSecretConfig (with either Password or KerberosKeytab ) or
 	// CustomSecretConfig (without any Password and KerberosKeytab ) to provide
 	// credentials for a CreateLocationSmbRequest request. Do not provide both
 	// CmkSecretConfig and CustomSecretConfig parameters for the same request.
+	//
+	// [Using a service-managed secret encrypted with a custom KMS key]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
 	CmkSecretConfig *types.CmkSecretConfig
 
 	// Specifies configuration information for a customer-managed Secrets Manager
 	// secret where the SMB storage location credentials is stored in Secrets Manager
 	// as plain text (for Password ) or binary (for KerberosKeytab ). This
 	// configuration includes the secret ARN, and the ARN for an IAM role that provides
-	// access to the secret.
+	// access to the secret. For more information, see [Using a secret that you manage].
 	//
 	// You can use either CmkSecretConfig (with SasConfiguration ) or
 	// CustomSecretConfig (without SasConfiguration ) to provide credentials for a
 	// CreateLocationSmbRequest request. Do not provide both parameters for the same
 	// request.
+	//
+	// [Using a secret that you manage]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
 	CustomSecretConfig *types.CustomSecretConfig
 
 	// Specifies the IPv4 or IPv6 addresses for the DNS servers that your SMB file
