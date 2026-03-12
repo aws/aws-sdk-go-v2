@@ -1,0 +1,8 @@
+{
+    "id": "accb2d06-b532-49de-b056-aa66fe7d137c",
+    "type": "bugfix",
+    "description": "Add missing fields serd of polly SynthesizeSpeech presign",
+    "modules": [
+        "service/polly"
+    ]
+}
