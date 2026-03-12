@@ -5,7 +5,7 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -72,7 +72,7 @@ func TestWriteGetObjectResponse(t *testing.T) {
 						t.Error(diff)
 					}
 
-					all, err := ioutil.ReadAll(request.Body)
+					all, err := io.ReadAll(request.Body)
 					if err != nil {
 						t.Errorf("expect no error, got %v", err)
 					}
@@ -105,7 +105,7 @@ func TestWriteGetObjectResponse(t *testing.T) {
 						t.Error(diff)
 					}
 
-					all, err := ioutil.ReadAll(request.Body)
+					all, err := io.ReadAll(request.Body)
 					if err != nil {
 						t.Errorf("expect no error, got %v", err)
 					}
@@ -138,7 +138,7 @@ func TestWriteGetObjectResponse(t *testing.T) {
 						t.Error(diff)
 					}
 
-					all, err := ioutil.ReadAll(request.Body)
+					all, err := io.ReadAll(request.Body)
 					if err != nil {
 						t.Errorf("expect no error, got %v", err)
 					}
@@ -172,7 +172,7 @@ func TestWriteGetObjectResponse(t *testing.T) {
 						t.Error(diff)
 					}
 
-					all, err := ioutil.ReadAll(request.Body)
+					all, err := io.ReadAll(request.Body)
 					if err != nil {
 						t.Errorf("expect no error, got %v", err)
 					}

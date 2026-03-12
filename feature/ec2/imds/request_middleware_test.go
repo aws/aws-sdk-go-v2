@@ -6,7 +6,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"reflect"
@@ -297,7 +296,7 @@ func TestDeserailizeResponse_cacheBody(t *testing.T) {
 		t.Fatalf("expect result to be Output, got %T, %v", result, result)
 	}
 
-	actualBody, err := ioutil.ReadAll(result.Content)
+	actualBody, err := io.ReadAll(result.Content)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -658,7 +657,7 @@ func TestRequestGetToken(t *testing.T) {
 				t.Fatalf("expect output result, got %T", result)
 			}
 
-			content, err := ioutil.ReadAll(out.Content)
+			content, err := io.ReadAll(out.Content)
 			if err != nil {
 				t.Fatalf("expect to read result, got %v", err)
 			}

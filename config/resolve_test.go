@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -57,7 +56,7 @@ func TestResolveCustomCABundle_ValidCA(t *testing.T) {
 		t.Fatalf("failed to start TLS server, %v", err)
 	}
 
-	caPEM, err := ioutil.ReadFile(caFile)
+	caPEM, err := os.ReadFile(caFile)
 	if err != nil {
 		t.Fatalf("failed to read CA file, %v", err)
 	}

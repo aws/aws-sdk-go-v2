@@ -5,7 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"strings"
@@ -337,6 +337,6 @@ func newMockResponse() *http.Response {
 	return &http.Response{
 		StatusCode: 200,
 		Header:     http.Header{},
-		Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+		Body:       io.NopCloser(bytes.NewReader([]byte{})),
 	}
 }

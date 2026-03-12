@@ -10,7 +10,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -280,7 +279,7 @@ func testPutObject(t *testing.T, bucket string, testData putObjectTestData, opts
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	b, _ := ioutil.ReadAll(resp.Body)
+	b, _ := io.ReadAll(resp.Body)
 	if e, a := testData.ExpectBody, b; !bytes.EqualFold(e, a) {
 		t.Errorf("expect %s, got %s", e, a)
 	}
@@ -463,7 +462,7 @@ func testUploadDirectory(t *testing.T, bucket string, testData uploadDirectoryTe
 			t.Fatalf("error when getting object %s", key)
 		}
 
-		b, _ := ioutil.ReadAll(resp.Body)
+		b, _ := io.ReadAll(resp.Body)
 		expectData, ok := expectObjects[key]
 		if !ok {
 			t.Errorf("no data recorded for object %s", key)

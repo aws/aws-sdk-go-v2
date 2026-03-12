@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -170,7 +169,7 @@ func setupCredentialsEndpoints() (aws.EndpointResolverWithOptions, func()) {
 }
 
 func ssoTestSetup() (fn func(), err error) {
-	dir, err := ioutil.TempDir(os.TempDir(), "sso-test")
+	dir, err := os.MkdirTemp(os.TempDir(), "sso-test")
 	if err != nil {
 		return nil, err
 	}

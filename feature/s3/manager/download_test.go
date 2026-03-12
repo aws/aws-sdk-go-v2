@@ -5,7 +5,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"reflect"
 	"regexp"
 	"strconv"
@@ -72,7 +71,7 @@ func newDownloadRangeClient(data []byte) (*downloadCaptureClient, *int, *[]strin
 		bodyBytes := data[start:fin]
 
 		return &s3.GetObjectOutput{
-			Body:          ioutil.NopCloser(bytes.NewReader(bodyBytes)),
+			Body:          io.NopCloser(bytes.NewReader(bodyBytes)),
 			ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, fin-1, len(data))),
 			ContentLength: aws.Int64(int64(len(bodyBytes))),
 		}, nil
@@ -86,7 +85,7 @@ func newDownloadNonRangeClient(data []byte) (*downloadCaptureClient, *int) {
 
 	capture.GetObjectFn = func(_ context.Context, params *s3.GetObjectInput, _ ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
 		return &s3.GetObjectOutput{
-			Body:          ioutil.NopCloser(bytes.NewReader(data[:])),
+			Body:          io.NopCloser(bytes.NewReader(data[:])),
 			ContentLength: aws.Int64(int64(len(data))),
 		}, nil
 	}
@@ -108,7 +107,7 @@ func newDownloadBadRangeClient(data []byte) (*downloadCaptureClient, *int, *[]st
 		bodyBytes := data[start:fin]
 
 		return &s3.GetObjectOutput{
-			Body: ioutil.NopCloser(bytes.NewReader(bodyBytes)),
+			Body: io.NopCloser(bytes.NewReader(bodyBytes)),
 			// offset start by 1 to make it wrong
 			ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start+1, fin-1, len(data))),
 			ContentLength: aws.Int64(int64(len(bodyBytes))),
@@ -132,7 +131,7 @@ func newDownloadVersionClient(data []byte) (*downloadCaptureClient, *int, *[]str
 		bodyBytes := data[start:fin]
 
 		return &s3.GetObjectOutput{
-			Body:          ioutil.NopCloser(bytes.NewReader(bodyBytes)),
+			Body:          io.NopCloser(bytes.NewReader(bodyBytes)),
 			ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, fin-1, len(data))),
 			ContentLength: aws.Int64(int64(len(bodyBytes))),
 			ETag:          aws.String(etag),
@@ -174,7 +173,7 @@ func newDownloadContentRangeTotalAnyClient(data []byte) (*downloadCaptureClient,
 		bodyBytes := data[start:fin]
 
 		return &s3.GetObjectOutput{
-			Body:         ioutil.NopCloser(bytes.NewReader(bodyBytes)),
+			Body:         io.NopCloser(bytes.NewReader(bodyBytes)),
 			ContentRange: aws.String(fmt.Sprintf("bytes %d-%d/*", start, fin-1)),
 		}, nil
 	}
@@ -189,7 +188,7 @@ func newDownloadWithErrReaderClient(cases []testErrReader) (*downloadCaptureClie
 	c.GetObjectFn = func(_ context.Context, params *s3.GetObjectInput, _ ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
 		c := cases[index]
 		out := &s3.GetObjectOutput{
-			Body:          ioutil.NopCloser(&c),
+			Body:          io.NopCloser(&c),
 			ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", 0, c.Len-1, c.Len)),
 			ContentLength: aws.Int64(c.Len),
 		}
@@ -660,7 +659,7 @@ func TestDownload_WithFailure(t *testing.T) {
 		default:
 			body := bytes.NewReader(make([]byte, manager.DefaultDownloadPartSize))
 			out = &s3.GetObjectOutput{
-				Body:          ioutil.NopCloser(body),
+				Body:          io.NopCloser(body),
 				ContentLength: aws.Int64(int64(body.Len())),
 				ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", startingByte, body.Len()-1, body.Len()*10)),
 			}
@@ -708,7 +707,7 @@ func TestDownload_WithMismatch(t *testing.T) {
 				err = fmt.Errorf("invalid input error")
 			} else {
 				out = &s3.GetObjectOutput{
-					Body:          ioutil.NopCloser(body),
+					Body:          io.NopCloser(body),
 					ContentLength: aws.Int64(int64(body.Len())),
 					ContentRange:  aws.String(fmt.Sprintf("bytes 0-%d/%d", body.Len()-1, body.Len()*10)),
 					ETag:          aws.String(etag),
@@ -725,7 +724,7 @@ func TestDownload_WithMismatch(t *testing.T) {
 				err = fmt.Errorf("invalid input error")
 			} else {
 				out = &s3.GetObjectOutput{
-					Body:          ioutil.NopCloser(body),
+					Body:          io.NopCloser(body),
 					ContentLength: aws.Int64(int64(body.Len())),
 					ContentRange:  aws.String(fmt.Sprintf("bytes 0-%d/%d", body.Len()-1, body.Len()*10)),
 				}
@@ -860,9 +859,9 @@ func TestDownloadBufferStrategy_Errors(t *testing.T) {
 		}
 		seenOps[fingerPrint] = struct{}{}
 
-		_, _ = io.Copy(ioutil.Discard, out.Body)
+		_, _ = io.Copy(io.Discard, out.Body)
 
-		out.Body = ioutil.NopCloser(&badReader{err: io.ErrUnexpectedEOF})
+		out.Body = io.NopCloser(&badReader{err: io.ErrUnexpectedEOF})
 
 		return out, err
 	}
