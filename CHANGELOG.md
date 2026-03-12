@@ -1,3 +1,16 @@
+# Release (2026-03-12)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.58.0](service/datasync/CHANGELOG.md#v1580-2026-03-12)
+  * **Feature**: DataSync's 3 location types, Hadoop Distributed File System (HDFS), FSx for Windows File Server (FSx Windows), and FSx for NetApp ONTAP (FSx ONTAP) now have credentials managed via Secrets Manager, which may be encrypted with service keys or be configured to use customer-managed keys or secret.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.56.0](service/ecr/CHANGELOG.md#v1560-2026-03-12)
+  * **Feature**: Add Chainguard to PTC upstreamRegistry enum
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.97.0](service/s3/CHANGELOG.md#v1970-2026-03-12)
+  * **Feature**: Adds support for account regional namespaces for general purpose buckets. The account regional namespace is a reserved subdivision of the global bucket namespace where only your account can create general purpose buckets.
+
 # Release (2026-03-11)
 
 ## Module Highlights

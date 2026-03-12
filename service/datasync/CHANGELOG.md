@@ -1,3 +1,7 @@
+# v1.58.0 (2026-03-12)
+
+* **Feature**: DataSync's 3 location types, Hadoop Distributed File System (HDFS), FSx for Windows File Server (FSx Windows), and FSx for NetApp ONTAP (FSx ONTAP) now have credentials managed via Secrets Manager, which may be encrypted with service keys or be configured to use customer-managed keys or secret.
+
 # v1.57.3 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

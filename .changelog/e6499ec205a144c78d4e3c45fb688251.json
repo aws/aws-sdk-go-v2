@@ -1,8 +1,0 @@
-{
-    "id": "e6499ec2-05a1-44c7-8d4e-3c45fb688251",
-    "type": "feature",
-    "description": "Add Chainguard to PTC upstreamRegistry enum",
-    "modules": [
-        "service/ecr"
-    ]
-}
