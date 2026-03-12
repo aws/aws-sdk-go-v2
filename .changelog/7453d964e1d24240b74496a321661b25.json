@@ -1,0 +1,8 @@
+{
+    "id": "7453d964-e1d2-4240-b744-96a321661b25",
+    "type": "bugfix",
+    "description": "Remove X-Amz-Security-Token header on redirect.",
+    "modules": [
+        "."
+    ]
+}
